@@ -11,7 +11,7 @@ Workflow {
 		// or define search scope explicitly
 		modelPath = modelPath
 		targetDir = targetDir
-		pdfLatex = "/usr/texbin/pdflatex"
+//		pdfLatex = "/usr/texbin/pdflatex"
 	}
 
 }

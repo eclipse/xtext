@@ -47,7 +47,44 @@ could look like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">events</span><br />&nbsp;&nbsp;doorClosed&nbsp;&nbsp;D1CL<br />&nbsp;&nbsp;drawOpened&nbsp;&nbsp;D2OP<br />&nbsp;&nbsp;lightOn&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L1ON<br />&nbsp;&nbsp;doorOpened&nbsp;&nbsp;D1OP<br />&nbsp;&nbsp;panelClosed&nbsp;PNCL<br />&nbsp;&nbsp;<span class="keyword">resetting</span>&nbsp;doorOpened&nbsp;D1OP<br /><span class="keyword">end</span><br />&nbsp;<br /><span class="keyword">commands</span><br />&nbsp;&nbsp;unlockPanel&nbsp;PNUL<br />&nbsp;&nbsp;lockPanel&nbsp;&nbsp;&nbsp;PNLK<br />&nbsp;&nbsp;lockDoor&nbsp;&nbsp;&nbsp;&nbsp;D1LK<br />&nbsp;&nbsp;unlockDoor&nbsp;&nbsp;D1UL<br /><span class="keyword">end</span><br />&nbsp;<br /><span class="keyword">state</span>&nbsp;idle<br />&nbsp;&nbsp;<span class="keyword">actions</span>&nbsp;{unlockDoor&nbsp;lockPanel}<br />&nbsp;&nbsp;doorClosed&nbsp;=&gt;&nbsp;active<br /><span class="keyword">end</span><br />&nbsp;<br /><span class="keyword">state</span>&nbsp;active<br />&nbsp;&nbsp;drawOpened&nbsp;=&gt;&nbsp;waitingForLight<br />&nbsp;&nbsp;lightOn&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;waitingForDraw<br /><span class="keyword">end</span><br />&nbsp;<br /><span class="keyword">state</span>&nbsp;waitingForLight<br />&nbsp;&nbsp;lightOn&nbsp;=&gt;&nbsp;unlockedPanel<br /><span class="keyword">end</span><br />&nbsp;<br /><span class="keyword">state</span>&nbsp;waitingForDraw<br />&nbsp;&nbsp;drawOpened&nbsp;=&gt;&nbsp;unlockedPanel<br /><span class="keyword">end</span><br />&nbsp;<br /><span class="keyword">state</span>&nbsp;unlockedPanel<br />&nbsp;&nbsp;<span class="keyword">actions</span>&nbsp;{unlockPanel&nbsp;lockDoor}<br />&nbsp;&nbsp;panelClosed&nbsp;=&gt;&nbsp;idle<br /><span class="keyword">end</span><br />
+<span class="keyword">events</span><br />
+&nbsp;&nbsp;doorClosed&nbsp;&nbsp;D1CL<br />
+&nbsp;&nbsp;drawOpened&nbsp;&nbsp;D2OP<br />
+&nbsp;&nbsp;lightOn&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L1ON<br />
+&nbsp;&nbsp;doorOpened&nbsp;&nbsp;D1OP<br />
+&nbsp;&nbsp;panelClosed&nbsp;PNCL<br />
+&nbsp;&nbsp;<span class="keyword">resetting</span>&nbsp;doorOpened&nbsp;D1OP<br />
+<span class="keyword">end</span><br />
+&nbsp;<br />
+<span class="keyword">commands</span><br />
+&nbsp;&nbsp;unlockPanel&nbsp;PNUL<br />
+&nbsp;&nbsp;lockPanel&nbsp;&nbsp;&nbsp;PNLK<br />
+&nbsp;&nbsp;lockDoor&nbsp;&nbsp;&nbsp;&nbsp;D1LK<br />
+&nbsp;&nbsp;unlockDoor&nbsp;&nbsp;D1UL<br />
+<span class="keyword">end</span><br />
+&nbsp;<br />
+<span class="keyword">state</span>&nbsp;idle<br />
+&nbsp;&nbsp;<span class="keyword">actions</span>&nbsp;{unlockDoor&nbsp;lockPanel}<br />
+&nbsp;&nbsp;doorClosed&nbsp;=&gt;&nbsp;active<br />
+<span class="keyword">end</span><br />
+&nbsp;<br />
+<span class="keyword">state</span>&nbsp;active<br />
+&nbsp;&nbsp;drawOpened&nbsp;=&gt;&nbsp;waitingForLight<br />
+&nbsp;&nbsp;lightOn&nbsp;&nbsp;&nbsp;&nbsp;=&gt;&nbsp;waitingForDraw<br />
+<span class="keyword">end</span><br />
+&nbsp;<br />
+<span class="keyword">state</span>&nbsp;waitingForLight<br />
+&nbsp;&nbsp;lightOn&nbsp;=&gt;&nbsp;unlockedPanel<br />
+<span class="keyword">end</span><br />
+&nbsp;<br />
+<span class="keyword">state</span>&nbsp;waitingForDraw<br />
+&nbsp;&nbsp;drawOpened&nbsp;=&gt;&nbsp;unlockedPanel<br />
+<span class="keyword">end</span><br />
+&nbsp;<br />
+<span class="keyword">state</span>&nbsp;unlockedPanel<br />
+&nbsp;&nbsp;<span class="keyword">actions</span>&nbsp;{unlockPanel&nbsp;lockDoor}<br />
+&nbsp;&nbsp;panelClosed&nbsp;=&gt;&nbsp;idle<br />
+<span class="keyword">end</span>
 </p>
 </div>
 </div>
@@ -70,7 +107,36 @@ In order to implment this little language with Xtext, you need to write the foll
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-&nbsp;<span class="keyword">grammar</span>&nbsp;my.pack.SecretCompartments&nbsp;<br />&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals<br /><span class="keyword">generate</span>&nbsp;secretcompartment&nbsp;"http://www.eclipse.org/secretcompartment"<br /><br />Statemachine&nbsp;:<br />&nbsp;&apos;events&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;(events+=Event)+<br />&nbsp;&apos;end&apos;<br />&nbsp;(&apos;resetEvents&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;(resetEvents+=[Event])+<br />&nbsp;&apos;end&apos;)?<br />&nbsp;&apos;commands&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;(commands+=Command)+<br />&nbsp;&apos;end&apos;<br />&nbsp;(states+=State)+;<br /><br />Event&nbsp;:<br />&nbsp;name=ID&nbsp;code=ID;<br /><br />Command&nbsp;:<br />&nbsp;name=ID&nbsp;code=ID;<br /><br />State&nbsp;:<br />&nbsp;&apos;state&apos;&nbsp;name=ID<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;actions&apos;&nbsp;&apos;{&apos;&nbsp;(actions+=[Command])+&nbsp;&apos;}&apos;)?<br />&nbsp;&nbsp;&nbsp;&nbsp;(transitions+=Transition)*<br />&nbsp;&apos;end&apos;;<br /><br />Transition&nbsp;:<br />&nbsp;event=[Event]&nbsp;&apos;=&gt;&apos;&nbsp;state=[State];<br />&nbsp;
+<span class="keyword">grammar</span>&nbsp;my.pack.SecretCompartments&nbsp;<br />
+&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals<br />
+<span class="keyword">generate</span>&nbsp;secretcompartment&nbsp;<span class="string" >"http://www.eclipse.org/secretcompartment"</span><br />
+<br />
+Statemachine&nbsp;:<br />
+&nbsp;<span class="string" >&apos;events&apos;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;(events+=Event)+<br />
+&nbsp;<span class="string" >&apos;end&apos;</span><br />
+&nbsp;(<span class="string" >&apos;resetEvents&apos;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;(resetEvents+=[Event])+<br />
+&nbsp;<span class="string" >&apos;end&apos;</span>)?<br />
+&nbsp;<span class="string" >&apos;commands&apos;</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;(commands+=Command)+<br />
+&nbsp;<span class="string" >&apos;end&apos;</span><br />
+&nbsp;(states+=State)+;<br />
+<br />
+Event&nbsp;:<br />
+&nbsp;name=ID&nbsp;code=ID;<br />
+<br />
+Command&nbsp;:<br />
+&nbsp;name=ID&nbsp;code=ID;<br />
+<br />
+State&nbsp;:<br />
+&nbsp;<span class="string" >&apos;state&apos;</span>&nbsp;name=ID<br />
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string" >&apos;actions&apos;</span>&nbsp;<span class="string" >&apos;{&apos;</span>&nbsp;(actions+=[Command])+&nbsp;<span class="string" >&apos;}&apos;</span>)?<br />
+&nbsp;&nbsp;&nbsp;&nbsp;(transitions+=Transition)*<br />
+&nbsp;<span class="string" >&apos;end&apos;</span>;<br />
+<br />
+Transition&nbsp;:<br />
+&nbsp;event=[Event]&nbsp;<span class="string" >&apos;=&gt;&apos;</span>&nbsp;state=[State];
 </p>
 </div>
 </div>
@@ -199,7 +265,7 @@ secret compartment example. To do so just state:
 </p>
 
 <p>
-<span class="inlinecode"><span class="keyword">generate</span>&nbsp;secretcompartment&nbsp;&apos;http://www.eclipse.org/secretcompartment&apos;</span>
+<span class="inlinecode"><span class="keyword">generate</span>&nbsp;secretcompartment&nbsp;<span class="string" >&apos;http://www.eclipse.org/secretcompartment&apos;</span></span>
 
 </p>
 
@@ -266,7 +332,7 @@ An import statement referring to an Ecore file by a <em>platform:/resource/</em>
 </p>
 
 <p>
-<span class="inlinecode"><span class="keyword">import</span>&nbsp;&apos;platform:/resource/my.project/src/my/pack/SecretCompartments.ecore&apos;</span>
+<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="string" >&apos;platform:/resource/my.project/src/my/pack/SecretCompartments.ecore&apos;</span></span>
 
 </p>
 
@@ -295,7 +361,10 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&nbsp;{<br />&nbsp;&nbsp;genModels&nbsp;=<br />&nbsp;&nbsp;&nbsp;&nbsp;"platform:/resource/my.project/src/my/pack/SecretCompartments.genmodel"<br />}<br />
+fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&nbsp;{<br />
+&nbsp;&nbsp;genModels&nbsp;=<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >"platform:/resource/my.project/src/my/pack/SecretCompartments.genmodel"</span><br />
+}
 </p>
 </div>
 </div>
@@ -332,7 +401,7 @@ Example:
 </p>
 
 <p>
-<span class="inlinecode"><span class="keyword">import</span>&nbsp;&apos;classpath:/model/JvmTypes.ecore&apos;&nbsp;<span class="keyword">as</span>&nbsp;types</span>
+<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="string" >&apos;classpath:/model/JvmTypes.ecore&apos;</span>&nbsp;<span class="keyword">as</span>&nbsp;types</span>
 
 </p>
 
@@ -345,7 +414,10 @@ As with platform resource URIs you&apos;ll also have to tell the generator where
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&nbsp;{<br />&nbsp;&nbsp;genModels&nbsp;=<br />&nbsp;&nbsp;&nbsp;&nbsp;"classpath:/model/JvmTypes.genmodel"<br />}<br />
+fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&nbsp;{<br />
+&nbsp;&nbsp;genModels&nbsp;=<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >"classpath:/model/JvmTypes.genmodel"</span><br />
+}
 </p>
 </div>
 </div>
@@ -383,7 +455,7 @@ to use its nsURI :
 </p>
 
 <p>
-<span class="inlinecode"><span class="keyword">import</span>&nbsp;"http://www.eclipse.org/emf/2002/Ecore"&nbsp;<span class="keyword">as</span>&nbsp;ecore</span>
+<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="string" >"http://www.eclipse.org/emf/2002/Ecore"</span>&nbsp;<span class="keyword">as</span>&nbsp;ecore</span>
 
 </p>
 
@@ -415,7 +487,8 @@ If you want to use multiple <em>EPackages</em> you need to specify aliases in th
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">generate</span>&nbsp;secretcompartment&nbsp;&apos;http://www.eclipse.org/secretcompartment&apos;<br /><span class="keyword">import</span>&nbsp;&apos;http://www.eclipse.org/anotherPackage&apos;&nbsp;<span class="keyword">as</span>&nbsp;another<br />
+<span class="keyword">generate</span>&nbsp;secretcompartment&nbsp;<span class="string" >&apos;http://www.eclipse.org/secretcompartment&apos;</span><br />
+<span class="keyword">import</span>&nbsp;<span class="string" >&apos;http://www.eclipse.org/anotherPackage&apos;</span>&nbsp;<span class="keyword">as</span>&nbsp;another
 </p>
 </div>
 </div>
@@ -542,7 +615,8 @@ Therein the <em>ID</em> rule is defined as follows:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">terminal</span>&nbsp;ID&nbsp;:&nbsp;<br />&nbsp;&nbsp;(&apos;^&apos;)?(&apos;a&apos;..&apos;z&apos;|&apos;A&apos;..&apos;Z&apos;|&apos;_&apos;)&nbsp;(&apos;a&apos;..&apos;z&apos;|&apos;A&apos;..&apos;Z&apos;|&apos;_&apos;|&apos;0&apos;..&apos;9&apos;)*;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;
+<span class="keyword">terminal</span>&nbsp;ID&nbsp;:&nbsp;<br />
+&nbsp;&nbsp;(<span class="string" >&apos;^&apos;</span>)?(<span class="string" >&apos;a&apos;</span>..<span class="string" >&apos;z&apos;</span>|<span class="string" >&apos;A&apos;</span>..<span class="string" >&apos;Z&apos;</span>|<span class="string" >&apos;_&apos;</span>)&nbsp;(<span class="string" >&apos;a&apos;</span>..<span class="string" >&apos;z&apos;</span>|<span class="string" >&apos;A&apos;</span>..<span class="string" >&apos;Z&apos;</span>|<span class="string" >&apos;_&apos;</span>|<span class="string" >&apos;0&apos;</span>..<span class="string" >&apos;9&apos;</span>)*;
 </p>
 </div>
 </div>
@@ -570,7 +644,10 @@ This is the formal definition of terminal rules:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-TerminalRule&nbsp;:<br />&nbsp;&nbsp;&apos;<span class="keyword">terminal</span>&apos;&nbsp;name=ID&nbsp;(&apos;<span class="keyword">returns</span>&apos;&nbsp;type=TypeRef)?&nbsp;&apos;:&apos;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;alternatives=TerminalAlternatives&nbsp;&apos;;&apos;<br />;<br />
+TerminalRule&nbsp;:<br />
+&nbsp;&nbsp;<span class="string" >&apos;terminal&apos;</span>&nbsp;name=ID&nbsp;(<span class="string" >&apos;returns&apos;</span>&nbsp;type=TypeRef)?&nbsp;<span class="string" >&apos;:&apos;</span>&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;alternatives=TerminalAlternatives&nbsp;<span class="string" >&apos;;&apos;</span><br />
+;
 </p>
 </div>
 </div>
@@ -616,7 +693,8 @@ However, if you want to have a different type you can specify it. For instance, 
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">terminal</span>&nbsp;INT&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EInt&nbsp;:&nbsp;<br />&nbsp;&nbsp;(&apos;0&apos;..&apos;9&apos;)+;<br />
+<span class="keyword">terminal</span>&nbsp;INT&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EInt&nbsp;:&nbsp;<br />
+&nbsp;&nbsp;(<span class="string" >&apos;0&apos;</span>..<span class="string" >&apos;9&apos;</span>)+;
 </p>
 </div>
 </div>
@@ -724,7 +802,7 @@ The <em>ID</em> rule in <em>org.eclipse.xtext.common.Terminals</em> for instance
 </p>
 
 <p>
-<span class="inlinecode"><span class="keyword">terminal</span>&nbsp;ID&nbsp;:&nbsp;&apos;^&apos;?&nbsp;....&nbsp;;</span>
+<span class="inlinecode"><span class="keyword">terminal</span>&nbsp;ID&nbsp;:&nbsp;<span class="string" >&apos;^&apos;</span>?&nbsp;....&nbsp;;</span>
 
 </p>
 
@@ -767,7 +845,7 @@ Example:
 </p>
 
 <p>
-<span class="inlinecode"><span class="keyword">terminal</span>&nbsp;INT&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EInt:&nbsp;(&apos;0&apos;..&apos;9&apos;)+;</span>
+<span class="inlinecode"><span class="keyword">terminal</span>&nbsp;INT&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EInt:&nbsp;(<span class="string" >&apos;0&apos;</span>..<span class="string" >&apos;9&apos;</span>)+;</span>
 
 </p>
 
@@ -799,7 +877,7 @@ Example:
 </p>
 
 <p>
-<span class="inlinecode">FOO&nbsp;:&nbsp;&apos;f&apos;&nbsp;.&nbsp;&apos;o&apos;;</span>
+<span class="inlinecode">FOO&nbsp;:&nbsp;<span class="string" >&apos;f&apos;</span>&nbsp;.&nbsp;<span class="string" >&apos;o&apos;</span>;</span>
 
 </p>
 
@@ -830,7 +908,7 @@ The multi-line comment is implemented this way:
 </p>
 
 <p>
-<span class="inlinecode"><span class="keyword">terminal</span>&nbsp;ML_COMMENT&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&apos;/*&apos;&nbsp;-&gt;&nbsp;&apos;*/&apos;;</span>
+<span class="inlinecode"><span class="keyword">terminal</span>&nbsp;ML_COMMENT&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<span class="string" >&apos;/*&apos;</span>&nbsp;-&gt;&nbsp;<span class="string" >&apos;*/&apos;</span>;</span>
 
 </p>
 
@@ -860,7 +938,7 @@ All the tokens explained above can be inverted using a preceding exclamation mar
 </p>
 
 <p>
-<span class="inlinecode"><span class="keyword">terminal</span>&nbsp;BETWEEN_HASHES&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&apos;#&apos;&nbsp;(!&apos;#&apos;)*&nbsp;&apos;#&apos;;</span>
+<span class="inlinecode"><span class="keyword">terminal</span>&nbsp;BETWEEN_HASHES&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<span class="string" >&apos;#&apos;</span>&nbsp;(!<span class="string" >&apos;#&apos;</span>)*&nbsp;<span class="string" >&apos;#&apos;</span>;</span>
 
 </p>
 
@@ -891,7 +969,7 @@ Example:
 </p>
 
 <p>
-<span class="inlinecode"><span class="keyword">terminal</span>&nbsp;DOUBLE&nbsp;:&nbsp;INT&nbsp;&apos;.&apos;&nbsp;INT;</span>
+<span class="inlinecode"><span class="keyword">terminal</span>&nbsp;DOUBLE&nbsp;:&nbsp;INT&nbsp;<span class="string" >&apos;.&apos;</span>&nbsp;INT;</span>
 
 </p>
 
@@ -918,7 +996,7 @@ For instance, the whitespace rule uses alternatives like this:
 </p>
 
 <p>
-<span class="inlinecode"><span class="keyword">terminal</span>&nbsp;WS&nbsp;:&nbsp;(&apos;&nbsp;&apos;|&apos;\t&apos;|&apos;\r&apos;|&apos;\n&apos;)+;</span>
+<span class="inlinecode"><span class="keyword">terminal</span>&nbsp;WS&nbsp;:&nbsp;(<span class="string" >&apos;&nbsp;&apos;</span>|<span class="string" >&apos;\t&apos;</span>|<span class="string" >&apos;\r&apos;</span>|<span class="string" >&apos;\n&apos;</span>)+;</span>
 
 </p>
 
@@ -949,7 +1027,7 @@ Example:
 </p>
 
 <p>
-<span class="inlinecode"><span class="keyword">terminal</span>&nbsp;ASCII&nbsp;:&nbsp;&apos;0x&apos;&nbsp;(&apos;0&apos;..&apos;7&apos;)&nbsp;(&apos;0&apos;..&apos;9&apos;|&apos;A&apos;..&apos;F&apos;);</span>
+<span class="inlinecode"><span class="keyword">terminal</span>&nbsp;ASCII&nbsp;:&nbsp;<span class="string" >&apos;0x&apos;</span>&nbsp;(<span class="string" >&apos;0&apos;</span>..<span class="string" >&apos;7&apos;</span>)&nbsp;(<span class="string" >&apos;0&apos;</span>..<span class="string" >&apos;9&apos;</span>|<span class="string" >&apos;A&apos;</span>..<span class="string" >&apos;F&apos;</span>);</span>
 
 </p>
 
@@ -1093,7 +1171,12 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-State&nbsp;:<br />&nbsp;&nbsp;&apos;state&apos;&nbsp;name=ID<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;actions&apos;&nbsp;&apos;{&apos;&nbsp;(actions+=[Command])+&nbsp;&apos;}&apos;)?<br />&nbsp;&nbsp;&nbsp;&nbsp;(transitions+=Transition)*<br />&nbsp;&nbsp;&apos;end&apos;<br />;<br />
+State&nbsp;:<br />
+&nbsp;&nbsp;<span class="string" >&apos;state&apos;</span>&nbsp;name=ID<br />
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string" >&apos;actions&apos;</span>&nbsp;<span class="string" >&apos;{&apos;</span>&nbsp;(actions+=[Command])+&nbsp;<span class="string" >&apos;}&apos;</span>)?<br />
+&nbsp;&nbsp;&nbsp;&nbsp;(transitions+=Transition)*<br />
+&nbsp;&nbsp;<span class="string" >&apos;end&apos;</span><br />
+;
 </p>
 </div>
 </div>
@@ -1192,7 +1275,9 @@ The syntax for crosslinks is:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-CrossReference&nbsp;:<br />&nbsp;&nbsp;&apos;[&apos;&nbsp;type=TypeRef&nbsp;(&apos;|&apos;&nbsp;^<span class="keyword">terminal</span>=CrossReferenceableTerminal&nbsp;)?&nbsp;&apos;]&apos;<br />;<br />
+CrossReference&nbsp;:<br />
+&nbsp;&nbsp;<span class="string" >&apos;[&apos;</span>&nbsp;type=TypeRef&nbsp;(<span class="string" >&apos;|&apos;</span>&nbsp;^<span class="keyword">terminal</span>=CrossReferenceableTerminal&nbsp;)?&nbsp;<span class="string" >&apos;]&apos;</span><br />
+;
 </p>
 </div>
 </div>
@@ -1209,7 +1294,9 @@ For example, the transition is made up of two cross-references, pointing to an e
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Transition&nbsp;:<br />&nbsp;&nbsp;event=[Event]&nbsp;&apos;=&gt;&apos;&nbsp;state=[State]<br />;<br />
+Transition&nbsp;:<br />
+&nbsp;&nbsp;event=[Event]&nbsp;<span class="string" >&apos;=&gt;&apos;</span>&nbsp;state=[State]<br />
+;
 </p>
 </div>
 </div>
@@ -1229,7 +1316,11 @@ to be adapted as well:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Transition&nbsp;:<br />&nbsp;&nbsp;event=[MyEvent]&nbsp;&apos;=&gt;&apos;&nbsp;state=[State]<br />;<br />&nbsp;<br />Event&nbsp;<span class="keyword">returns</span>&nbsp;MyEvent&nbsp;:&nbsp;....;<br />
+Transition&nbsp;:<br />
+&nbsp;&nbsp;event=[MyEvent]&nbsp;<span class="string" >&apos;=&gt;&apos;</span>&nbsp;state=[State]<br />
+;<br />
+&nbsp;<br />
+Event&nbsp;<span class="keyword">returns</span>&nbsp;MyEvent&nbsp;:&nbsp;....;
 </p>
 </div>
 </div>
@@ -1285,7 +1376,11 @@ groups are separated with &apos;_&amp;_&apos;, e.g.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Modifier:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;static?=&apos;static&apos;?&nbsp;&amp;&nbsp;final?=&apos;final&apos;?&nbsp;&amp;&nbsp;visibility=Visibility;<br /><br /><span class="keyword">enum</span>&nbsp;Visibility:<br />&nbsp;&nbsp;&nbsp;&nbsp;PUBLIC=&apos;public&apos;&nbsp;|&nbsp;PRIVATE=&apos;private&apos;&nbsp;|&nbsp;PROTECTED=&apos;protected&apos;;<br />&nbsp;&nbsp;&nbsp;&nbsp;
+Modifier:&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;static?=<span class="string" >&apos;static&apos;</span>?&nbsp;&amp;&nbsp;final?=<span class="string" >&apos;final&apos;</span>?&nbsp;&amp;&nbsp;visibility=Visibility;<br />
+<br />
+<span class="keyword">enum</span>&nbsp;Visibility:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;PUBLIC=<span class="string" >&apos;public&apos;</span>&nbsp;|&nbsp;PRIVATE=<span class="string" >&apos;private&apos;</span>&nbsp;|&nbsp;PROTECTED=<span class="string" >&apos;protected&apos;</span>;
 </p>
 </div>
 </div>
@@ -1302,7 +1397,10 @@ allows
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span><br /><span class="keyword">static</span>&nbsp;<span class="keyword">protected</span>&nbsp;<br /><span class="keyword">final</span>&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">static</span><br /><span class="keyword">public</span><br />
+<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span><br />
+<span class="keyword">static</span>&nbsp;<span class="keyword">protected</span>&nbsp;<br />
+<span class="keyword">final</span>&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">static</span><br />
+<span class="keyword">public</span>
 </p>
 </div>
 </div>
@@ -1319,7 +1417,9 @@ but not
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;<span class="keyword">static</span>&nbsp;//&nbsp;ERROR:&nbsp;<span class="keyword">static</span>&nbsp;appears&nbsp;twice<br /><span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;<span class="keyword">private</span>&nbsp;//&nbsp;ERROR:&nbsp;visibility&nbsp;appears&nbsp;twice<br /><span class="keyword">final</span>&nbsp;//&nbsp;ERROR:&nbsp;visibility&nbsp;is&nbsp;missing<br />
+<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="comment" >//&nbsp;ERROR:&nbsp;static&nbsp;appears&nbsp;twice<br />
+</span><span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;<span class="keyword">private</span>&nbsp;<span class="comment" >//&nbsp;ERROR:&nbsp;visibility&nbsp;appears&nbsp;twice<br />
+</span><span class="keyword">final</span>&nbsp;<span class="comment" >//&nbsp;ERROR:&nbsp;visibility&nbsp;is&nbsp;missing</span>
 </p>
 </div>
 </div>
@@ -1339,7 +1439,8 @@ have to appear continuously without interruption, i.e.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Rule:<br />&nbsp;&nbsp;&nbsp;&nbsp;values+=INT*&nbsp;&amp;&nbsp;name=ID;<br />
+Rule:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;values+=INT*&nbsp;&amp;&nbsp;name=ID;
 </p>
 </div>
 </div>
@@ -1356,7 +1457,8 @@ will parse
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-0&nbsp;8&nbsp;15&nbsp;x<br />x&nbsp;0&nbsp;8&nbsp;15&nbsp;<br />
+0&nbsp;8&nbsp;15&nbsp;x<br />
+x&nbsp;0&nbsp;8&nbsp;15
 </p>
 </div>
 </div>
@@ -1373,7 +1475,7 @@ but not
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-0&nbsp;x&nbsp;8&nbsp;15&nbsp;//&nbsp;wrong,&nbsp;as&nbsp;values&nbsp;cannot&nbsp;be&nbsp;interrupted.<br />
+0&nbsp;x&nbsp;8&nbsp;15&nbsp;<span class="comment" >//&nbsp;wrong,&nbsp;as&nbsp;values&nbsp;cannot&nbsp;be&nbsp;interrupted.</span>
 </p>
 </div>
 </div>
@@ -1440,7 +1542,14 @@ Example with alternatives:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-MyRule&nbsp;<span class="keyword">returns</span>&nbsp;TypeA&nbsp;:<br />&nbsp;&nbsp;"A"&nbsp;name=ID&nbsp;|<br />&nbsp;&nbsp;MyOtherRule<br />;&nbsp;<br />&nbsp;<br />MyOtherRule&nbsp;<span class="keyword">returns</span>&nbsp;TypeB&nbsp;:<br />&nbsp;&nbsp;"B"&nbsp;name&nbsp;=&nbsp;ID<br />;<br />
+MyRule&nbsp;<span class="keyword">returns</span>&nbsp;TypeA&nbsp;:<br />
+&nbsp;&nbsp;<span class="string" >"A"</span>&nbsp;name=ID&nbsp;|<br />
+&nbsp;&nbsp;MyOtherRule<br />
+;&nbsp;<br />
+&nbsp;<br />
+MyOtherRule&nbsp;<span class="keyword">returns</span>&nbsp;TypeB&nbsp;:<br />
+&nbsp;&nbsp;<span class="string" >"B"</span>&nbsp;name&nbsp;=&nbsp;ID<br />
+;
 </p>
 </div>
 </div>
@@ -1457,7 +1566,10 @@ Example with simple actions:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-MyRule&nbsp;<span class="keyword">returns</span>&nbsp;TypeA&nbsp;:<br />&nbsp;&nbsp;"A"&nbsp;name=ID&nbsp;|<br />&nbsp;&nbsp;"B"&nbsp;{TypeB}&nbsp;name=ID<br />;&nbsp;<br />
+MyRule&nbsp;<span class="keyword">returns</span>&nbsp;TypeA&nbsp;:<br />
+&nbsp;&nbsp;<span class="string" >"A"</span>&nbsp;name=ID&nbsp;|<br />
+&nbsp;&nbsp;<span class="string" >"B"</span>&nbsp;{TypeB}&nbsp;name=ID<br />
+;
 </p>
 </div>
 </div>
@@ -1510,7 +1622,11 @@ With unassigned rule calls one can, for instance, create rules which just dispat
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-AbstractToken&nbsp;:<br />&nbsp;&nbsp;TokenA&nbsp;|<br />&nbsp;&nbsp;TokenB&nbsp;|<br />&nbsp;&nbsp;TokenC<br />;<br />
+AbstractToken&nbsp;:<br />
+&nbsp;&nbsp;TokenA&nbsp;|<br />
+&nbsp;&nbsp;TokenB&nbsp;|<br />
+&nbsp;&nbsp;TokenC<br />
+;
 </p>
 </div>
 </div>
@@ -1533,7 +1649,11 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-AbstractToken&nbsp;:<br />&nbsp;&nbsp;(&nbsp;TokenA&nbsp;|<br />&nbsp;&nbsp;&nbsp;&nbsp;TokenB&nbsp;|<br />&nbsp;&nbsp;&nbsp;&nbsp;TokenC&nbsp;)&nbsp;(cardinality=(&apos;?&apos;|&apos;+&apos;|&apos;*&apos;))?<br />;<br />
+AbstractToken&nbsp;:<br />
+&nbsp;&nbsp;(&nbsp;TokenA&nbsp;|<br />
+&nbsp;&nbsp;&nbsp;&nbsp;TokenB&nbsp;|<br />
+&nbsp;&nbsp;&nbsp;&nbsp;TokenC&nbsp;)&nbsp;(cardinality=(<span class="string" >&apos;?&apos;</span>|<span class="string" >&apos;+&apos;</span>|<span class="string" >&apos;*&apos;</span>))?<br />
+;
 </p>
 </div>
 </div>
@@ -1580,7 +1700,11 @@ For instance, the following is not allowed in LL-based grammars, because <em>Exp
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Expression&nbsp;:<br />&nbsp;&nbsp;Expression&nbsp;&apos;+&apos;&nbsp;Expression&nbsp;|<br />&nbsp;&nbsp;&apos;(&apos;&nbsp;Expression&nbsp;&apos;)&apos;&nbsp;|<br />&nbsp;&nbsp;INT<br />;<br />
+Expression&nbsp;:<br />
+&nbsp;&nbsp;Expression&nbsp;<span class="string" >&apos;+&apos;</span>&nbsp;Expression&nbsp;|<br />
+&nbsp;&nbsp;<span class="string" >&apos;(&apos;</span>&nbsp;Expression&nbsp;<span class="string" >&apos;)&apos;</span>&nbsp;|<br />
+&nbsp;&nbsp;INT<br />
+;
 </p>
 </div>
 </div>
@@ -1597,7 +1721,14 @@ Instead one has to rewrite such things by "left-factoring" it:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Expression&nbsp;:<br />&nbsp;&nbsp;TerminalExpression&nbsp;(&apos;+&apos;&nbsp;TerminalExpression)?<br />;<br />&nbsp;<br />TerminalExpression&nbsp;:<br />&nbsp;&nbsp;&apos;(&apos;&nbsp;Expression&nbsp;&apos;)&apos;&nbsp;|<br />&nbsp;&nbsp;INT<br />;<br />
+Expression&nbsp;:<br />
+&nbsp;&nbsp;TerminalExpression&nbsp;(<span class="string" >&apos;+&apos;</span>&nbsp;TerminalExpression)?<br />
+;<br />
+&nbsp;<br />
+TerminalExpression&nbsp;:<br />
+&nbsp;&nbsp;<span class="string" >&apos;(&apos;</span>&nbsp;Expression&nbsp;<span class="string" >&apos;)&apos;</span>&nbsp;|<br />
+&nbsp;&nbsp;INT<br />
+;
 </p>
 </div>
 </div>
@@ -1615,7 +1746,14 @@ However, by simply applying the Xtext AST construction features we&apos;ve cover
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Expression&nbsp;:<br />&nbsp;&nbsp;{Operation}&nbsp;left=TerminalExpression&nbsp;(op=&apos;+&apos;&nbsp;right=TerminalExpression)?<br />;<br />&nbsp;<br />TerminalExpression&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br />&nbsp;&nbsp;&apos;(&apos;&nbsp;Expression&nbsp;&apos;)&apos;&nbsp;|<br />&nbsp;&nbsp;{IntLiteral}&nbsp;value=INT<br />;<br />
+Expression&nbsp;:<br />
+&nbsp;&nbsp;{Operation}&nbsp;left=TerminalExpression&nbsp;(op=<span class="string" >&apos;+&apos;</span>&nbsp;right=TerminalExpression)?<br />
+;<br />
+&nbsp;<br />
+TerminalExpression&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br />
+&nbsp;&nbsp;<span class="string" >&apos;(&apos;</span>&nbsp;Expression&nbsp;<span class="string" >&apos;)&apos;</span>&nbsp;|<br />
+&nbsp;&nbsp;{IntLiteral}&nbsp;value=INT<br />
+;
 </p>
 </div>
 </div>
@@ -1633,7 +1771,13 @@ For instance the expression <em>(42)</em> would result in a tree like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Operation&nbsp;{<br />&nbsp;&nbsp;left=Operation&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;left=IntLiteral&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value=42<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;}<br />}<br />
+Operation&nbsp;{<br />
+&nbsp;&nbsp;left=Operation&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;left=IntLiteral&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value=42<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;}<br />
+}
 </p>
 </div>
 </div>
@@ -1654,7 +1798,15 @@ One can solve this problem using a combination of unassigned rule calls and assi
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Expression&nbsp;:<br />&nbsp;&nbsp;TerminalExpression&nbsp;({Operation.left=current}&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;op=&apos;+&apos;&nbsp;right=Expression)?<br />;<br />&nbsp;<br />TerminalExpression&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br />&nbsp;&nbsp;&apos;(&apos;&nbsp;Expression&nbsp;&apos;)&apos;&nbsp;|<br />&nbsp;&nbsp;{IntLiteral}&nbsp;value=INT<br />;<br />
+Expression&nbsp;:<br />
+&nbsp;&nbsp;TerminalExpression&nbsp;({Operation.left=current}&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;op=<span class="string" >&apos;+&apos;</span>&nbsp;right=Expression)?<br />
+;<br />
+&nbsp;<br />
+TerminalExpression&nbsp;<span class="keyword">returns</span>&nbsp;Expression:<br />
+&nbsp;&nbsp;<span class="string" >&apos;(&apos;</span>&nbsp;Expression&nbsp;<span class="string" >&apos;)&apos;</span>&nbsp;|<br />
+&nbsp;&nbsp;{IntLiteral}&nbsp;value=INT<br />
+;
 </p>
 </div>
 </div>
@@ -1672,7 +1824,9 @@ In Java these semantics could be expressed as:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Operation&nbsp;temp&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Operation();<br />temp.setLeft(current);<br />current&nbsp;=&nbsp;temp;<br />
+Operation&nbsp;temp&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Operation();<br />
+temp.setLeft(current);<br />
+current&nbsp;=&nbsp;temp;
 </p>
 </div>
 </div>
@@ -1719,7 +1873,13 @@ If a rule defines hidden symbols, you can think of a kind of scope that is autom
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Person&nbsp;<span class="keyword">hidden</span>(WS,&nbsp;ML_COMMENT,&nbsp;SL_COMMENT):&nbsp;<br />&nbsp;&nbsp;name=Fullname&nbsp;age=INT&nbsp;&apos;;&apos;<br />;<br /><br />Fullname:&nbsp;<br />&nbsp;&nbsp;(firstname=ID)?&nbsp;lastname=ID<br />;<br />
+Person&nbsp;<span class="keyword">hidden</span>(WS,&nbsp;ML_COMMENT,&nbsp;SL_COMMENT):&nbsp;<br />
+&nbsp;&nbsp;name=Fullname&nbsp;age=INT&nbsp;<span class="string" >&apos;;&apos;</span><br />
+;<br />
+<br />
+Fullname:&nbsp;<br />
+&nbsp;&nbsp;(firstname=ID)?&nbsp;lastname=ID<br />
+;
 </p>
 </div>
 </div>
@@ -1736,7 +1896,9 @@ The sample rule "Person" defines multiline comments (<em>ML_COMMENT</em>), singl
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-John&nbsp;/*&nbsp;comment&nbsp;*/&nbsp;Smith&nbsp;//&nbsp;line&nbsp;comment<br />/*&nbsp;comment&nbsp;*/<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;42&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;//&nbsp;line&nbsp;comment<br />
+John&nbsp;<span class="comment" >/*&nbsp;comment&nbsp;*/</span>&nbsp;Smith&nbsp;<span class="comment" >//&nbsp;line&nbsp;comment<br />
+</span><span class="comment" >/*&nbsp;comment&nbsp;*/</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;42&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;<span class="comment" >//&nbsp;line&nbsp;comment</span>
 </p>
 </div>
 </div>
@@ -1808,7 +1970,9 @@ you could write:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-QualifiedName&nbsp;:<br />&nbsp;&nbsp;ID&nbsp;(&apos;.&apos;&nbsp;ID)*<br />;<br />
+QualifiedName&nbsp;:<br />
+&nbsp;&nbsp;ID&nbsp;(<span class="string" >&apos;.&apos;</span>&nbsp;ID)*<br />
+;
 </p>
 </div>
 </div>
@@ -1834,7 +1998,9 @@ Return types can be specified in the same way as in terminal rules:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-QualifiedName&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EString&nbsp;:&nbsp;<br />&nbsp;&nbsp;ID&nbsp;(&apos;.&apos;&nbsp;ID)*<br />;<br />
+QualifiedName&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EString&nbsp;:&nbsp;<br />
+&nbsp;&nbsp;ID&nbsp;(<span class="string" >&apos;.&apos;</span>&nbsp;ID)*<br />
+;
 </p>
 </div>
 </div>
@@ -1885,7 +2051,9 @@ If you want to define a <em>ChangeKind</em> <a href="http://help.eclipse.org/sta
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">enum</span>&nbsp;ChangeKind&nbsp;:<br />&nbsp;&nbsp;ADD&nbsp;|&nbsp;MOVE&nbsp;|&nbsp;REMOVE<br />;<br />
+<span class="keyword">enum</span>&nbsp;ChangeKind&nbsp;:<br />
+&nbsp;&nbsp;ADD&nbsp;|&nbsp;MOVE&nbsp;|&nbsp;REMOVE<br />
+;
 </p>
 </div>
 </div>
@@ -1902,7 +2070,11 @@ It is even possible to use alternative literals for your enums or reference an e
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">enum</span>&nbsp;ChangeKind&nbsp;:<br />&nbsp;&nbsp;ADD&nbsp;=&nbsp;&apos;add&apos;&nbsp;|&nbsp;ADD&nbsp;=&nbsp;&apos;+&apos;&nbsp;|&nbsp;<br />&nbsp;&nbsp;MOVE&nbsp;=&nbsp;&apos;move&apos;&nbsp;|&nbsp;MOVE&nbsp;=&nbsp;&apos;-&gt;&apos;&nbsp;|&nbsp;<br />&nbsp;&nbsp;REMOVE&nbsp;=&nbsp;&apos;remove&apos;&nbsp;|&nbsp;REMOVE&nbsp;=&nbsp;&apos;-&apos;<br />;<br />
+<span class="keyword">enum</span>&nbsp;ChangeKind&nbsp;:<br />
+&nbsp;&nbsp;ADD&nbsp;=&nbsp;<span class="string" >&apos;add&apos;</span>&nbsp;|&nbsp;ADD&nbsp;=&nbsp;<span class="string" >&apos;+&apos;</span>&nbsp;|&nbsp;<br />
+&nbsp;&nbsp;MOVE&nbsp;=&nbsp;<span class="string" >&apos;move&apos;</span>&nbsp;|&nbsp;MOVE&nbsp;=&nbsp;<span class="string" >&apos;-&gt;&apos;</span>&nbsp;|&nbsp;<br />
+&nbsp;&nbsp;REMOVE&nbsp;=&nbsp;<span class="string" >&apos;remove&apos;</span>&nbsp;|&nbsp;REMOVE&nbsp;=&nbsp;<span class="string" >&apos;-&apos;</span><br />
+;
 </p>
 </div>
 </div>
@@ -1915,7 +2087,7 @@ Please note, that Ecore does not support unset values for enums. If you formulat
 </p>
 
 <p>
-<span class="inlinecode">Element:&nbsp;"element"&nbsp;name=ID&nbsp;(value=SomeEnum)?;</span>
+<span class="inlinecode">Element:&nbsp;<span class="string" >"element"</span>&nbsp;name=ID&nbsp;(value=SomeEnum)?;</span>
 
 </p>
 
@@ -1937,7 +2109,9 @@ the resulting value of the element <em>Foo</em> will hold the enum value with th
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">enum</span>&nbsp;Visibility:&nbsp;<br />&nbsp;&nbsp;package&nbsp;|&nbsp;private&nbsp;|&nbsp;protected&nbsp;|&nbsp;public<br />;<br />&nbsp;
+<span class="keyword">enum</span>&nbsp;Visibility:&nbsp;<br />
+&nbsp;&nbsp;package&nbsp;|&nbsp;private&nbsp;|&nbsp;protected&nbsp;|&nbsp;public<br />
+;
 </p>
 </div>
 </div>
@@ -2242,7 +2416,8 @@ Furthermore, each type that is added to the currently possible return types auto
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-CommonSuperType:<br />&nbsp;&nbsp;SubTypeA&nbsp;|&nbsp;SubTypeB&nbsp;|&nbsp;SubTypeC;<br />
+CommonSuperType:<br />
+&nbsp;&nbsp;SubTypeA&nbsp;|&nbsp;SubTypeB&nbsp;|&nbsp;SubTypeC;
 </p>
 </div>
 </div>
@@ -2278,7 +2453,8 @@ For each alternative defined in an enum rule, the transformer creates an enum li
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">enum</span>&nbsp;MyGeneratedEnum:<br />&nbsp;&nbsp;NAME&nbsp;=&nbsp;&apos;literal&apos;&nbsp;|&nbsp;EQUAL_NAME_AND_LITERAL;<br />
+<span class="keyword">enum</span>&nbsp;MyGeneratedEnum:<br />
+&nbsp;&nbsp;NAME&nbsp;=&nbsp;<span class="string" >&apos;literal&apos;</span>&nbsp;|&nbsp;EQUAL_NAME_AND_LITERAL;
 </p>
 </div>
 </div>
@@ -2337,7 +2513,13 @@ As a last step, the generator invokes the post processor for every generated Eco
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-process(xtext::GeneratedMetamodel&nbsp;<span class="keyword">this</span>)&nbsp;:<br />&nbsp;&nbsp;process(ePackage)<br />;<br />&nbsp;<br />process(ecore::EPackage&nbsp;<span class="keyword">this</span>)&nbsp;:<br />&nbsp;&nbsp;...&nbsp;do&nbsp;something<br />;<br />
+process(xtext::GeneratedMetamodel&nbsp;<span class="keyword">this</span>)&nbsp;:<br />
+&nbsp;&nbsp;process(ePackage)<br />
+;<br />
+&nbsp;<br />
+process(ecore::EPackage&nbsp;<span class="keyword">this</span>)&nbsp;:<br />
+&nbsp;&nbsp;...&nbsp;do&nbsp;something<br />
+;
 </p>
 </div>
 </div>
@@ -2498,7 +2680,11 @@ Xtext supports the reuse of existing grammars. Grammars that are created via the
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;org.xtext.example.MyDsl&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals<br />&nbsp;<br /><span class="keyword">generate</span>&nbsp;myDsl&nbsp;&apos;http://www.xtext.org/example/MyDsl&apos;<br />&nbsp;<br />...&nbsp;some&nbsp;rules<br />
+<span class="keyword">grammar</span>&nbsp;org.xtext.example.MyDsl&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals<br />
+&nbsp;<br />
+<span class="keyword">generate</span>&nbsp;myDsl&nbsp;<span class="string" >&apos;http://www.xtext.org/example/MyDsl&apos;</span><br />
+&nbsp;<br />
+...&nbsp;some&nbsp;rules
 </p>
 </div>
 </div>
@@ -2519,7 +2705,17 @@ Example :
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;my.SuperGrammar<br />...<br />RuleA&nbsp;:&nbsp;"a"&nbsp;stuff=RuleB;<br />RuleB&nbsp;:&nbsp;"{"&nbsp;name=ID&nbsp;"}";<br /><br /><span class="keyword">grammar</span>&nbsp;my.SubGrammar&nbsp;<span class="keyword">with</span>&nbsp;my.SuperGrammar<br /><br />Model&nbsp;:&nbsp;(ruleAs+=RuleA)*;<br /><br />//&nbsp;overrides&nbsp;my.SuperGrammar.RuleB<br />RuleB&nbsp;:&nbsp;&apos;[&apos;&nbsp;name=ID&nbsp;&apos;]&apos;;<br />
+<span class="keyword">grammar</span>&nbsp;my.SuperGrammar<br />
+...<br />
+RuleA&nbsp;:&nbsp;<span class="string" >"a"</span>&nbsp;stuff=RuleB;<br />
+RuleB&nbsp;:&nbsp;<span class="string" >"{"</span>&nbsp;name=ID&nbsp;<span class="string" >"}"</span>;<br />
+<br />
+<span class="keyword">grammar</span>&nbsp;my.SubGrammar&nbsp;<span class="keyword">with</span>&nbsp;my.SuperGrammar<br />
+<br />
+Model&nbsp;:&nbsp;(ruleAs+=RuleA)*;<br />
+<br />
+<span class="comment" >//&nbsp;overrides&nbsp;my.SuperGrammar.RuleB<br />
+</span>RuleB&nbsp;:&nbsp;<span class="string" >&apos;[&apos;</span>&nbsp;name=ID&nbsp;<span class="string" >&apos;]&apos;</span>;
 </p>
 </div>
 </div>
@@ -2559,7 +2755,19 @@ Xtext ships with a default set of predefined, reasonable and often required term
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-&nbsp;<span class="keyword">grammar</span>&nbsp;org.eclipse.xtext.common.Terminals&nbsp;<br />&nbsp;<span class="keyword">hidden</span>(WS,&nbsp;ML_COMMENT,&nbsp;SL_COMMENT)<br /><span class="keyword">import</span>&nbsp;"http://www.eclipse.org/emf/2002/Ecore"&nbsp;<span class="keyword">as</span>&nbsp;ecore<br /><span class="keyword">terminal</span>&nbsp;ID&nbsp;:&nbsp;<br />&nbsp;&apos;^&apos;?(&apos;a&apos;..&apos;z&apos;|&apos;A&apos;..&apos;Z&apos;|&apos;_&apos;)&nbsp;(&apos;a&apos;..&apos;z&apos;|&apos;A&apos;..&apos;Z&apos;|&apos;_&apos;|&apos;0&apos;..&apos;9&apos;)*&nbsp;;<br /><span class="keyword">terminal</span>&nbsp;INT&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EInt:&nbsp;(&apos;0&apos;..&apos;9&apos;)+&nbsp;;<br /><span class="keyword">terminal</span>&nbsp;STRING&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<br />&nbsp;&apos;"&apos;&nbsp;(&nbsp;&apos;\\&apos;&nbsp;(&apos;b&apos;|&apos;t&apos;|&apos;n&apos;|&apos;f&apos;|&apos;r&apos;|&apos;"&apos;|"&apos;"|&apos;\\&apos;)&nbsp;|&nbsp;!(&apos;\\&apos;|&apos;"&apos;)&nbsp;)*&nbsp;&apos;"&apos;&nbsp;|<br />&nbsp;"&apos;"&nbsp;(&nbsp;&apos;\\&apos;&nbsp;(&apos;b&apos;|&apos;t&apos;|&apos;n&apos;|&apos;f&apos;|&apos;r&apos;|&apos;"&apos;|"&apos;"|&apos;\\&apos;)&nbsp;|&nbsp;!(&apos;\\&apos;|"&apos;")&nbsp;)*&nbsp;"&apos;";&nbsp;<br />terminal&nbsp;ML_COMMENT&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&apos;/*&apos;&nbsp;-&gt;&nbsp;&apos;*/&apos;&nbsp;;<br />terminal&nbsp;SL_COMMENT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&apos;//&apos;&nbsp;!(&apos;\n&apos;|&apos;\r&apos;)*&nbsp;(&apos;\r&apos;?&nbsp;&apos;\n&apos;)?&nbsp;;<br />terminal&nbsp;WS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;(&apos;&nbsp;&apos;|&apos;\t&apos;|&apos;\r&apos;|&apos;\n&apos;)+&nbsp;;<br />terminal&nbsp;ANY_OTHER:&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;;
+<span class="keyword">grammar</span>&nbsp;org.eclipse.xtext.common.Terminals&nbsp;<br />
+&nbsp;<span class="keyword">hidden</span>(WS,&nbsp;ML_COMMENT,&nbsp;SL_COMMENT)<br />
+<span class="keyword">import</span>&nbsp;<span class="string" >"http://www.eclipse.org/emf/2002/Ecore"</span>&nbsp;<span class="keyword">as</span>&nbsp;ecore<br />
+<span class="keyword">terminal</span>&nbsp;ID&nbsp;:&nbsp;<br />
+&nbsp;<span class="string" >&apos;^&apos;</span>?(<span class="string" >&apos;a&apos;</span>..<span class="string" >&apos;z&apos;</span>|<span class="string" >&apos;A&apos;</span>..<span class="string" >&apos;Z&apos;</span>|<span class="string" >&apos;_&apos;</span>)&nbsp;(<span class="string" >&apos;a&apos;</span>..<span class="string" >&apos;z&apos;</span>|<span class="string" >&apos;A&apos;</span>..<span class="string" >&apos;Z&apos;</span>|<span class="string" >&apos;_&apos;</span>|<span class="string" >&apos;0&apos;</span>..<span class="string" >&apos;9&apos;</span>)*&nbsp;;<br />
+<span class="keyword">terminal</span>&nbsp;INT&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EInt:&nbsp;(<span class="string" >&apos;0&apos;</span>..<span class="string" >&apos;9&apos;</span>)+&nbsp;;<br />
+<span class="keyword">terminal</span>&nbsp;STRING&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<br />
+&nbsp;<span class="string" >&apos;"&apos;</span>&nbsp;(&nbsp;<span class="string" >&apos;\\&apos;</span>&nbsp;(<span class="string" >&apos;b&apos;</span>|<span class="string" >&apos;t&apos;</span>|<span class="string" >&apos;n&apos;</span>|<span class="string" >&apos;f&apos;</span>|<span class="string" >&apos;r&apos;</span>|<span class="string" >&apos;"&apos;</span>|<span class="string" >"&apos;"</span>|<span class="string" >&apos;\\&apos;</span>)&nbsp;|&nbsp;!(<span class="string" >&apos;\\&apos;</span>|<span class="string" >&apos;"&apos;</span>)&nbsp;)*&nbsp;<span class="string" >&apos;"&apos;</span>&nbsp;|<br />
+&nbsp;<span class="string" >"&apos;"</span>&nbsp;(&nbsp;<span class="string" >&apos;\\&apos;</span>&nbsp;(<span class="string" >&apos;b&apos;</span>|<span class="string" >&apos;t&apos;</span>|<span class="string" >&apos;n&apos;</span>|<span class="string" >&apos;f&apos;</span>|<span class="string" >&apos;r&apos;</span>|<span class="string" >&apos;"&apos;</span>|<span class="string" >"&apos;"</span>|<span class="string" >&apos;\\&apos;</span>)&nbsp;|&nbsp;!(<span class="string" >&apos;\\&apos;</span>|<span class="string" >"&apos;"</span>)&nbsp;)*&nbsp;<span class="string" >"&apos;"</span>;&nbsp;<br />
+<span class="keyword">terminal</span>&nbsp;ML_COMMENT&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<span class="string" >&apos;/*&apos;</span>&nbsp;-&gt;&nbsp;<span class="string" >&apos;*/&apos;</span>&nbsp;;<br />
+<span class="keyword">terminal</span>&nbsp;SL_COMMENT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<span class="string" >&apos;//&apos;</span>&nbsp;!(<span class="string" >&apos;\n&apos;</span>|<span class="string" >&apos;\r&apos;</span>)*&nbsp;(<span class="string" >&apos;\r&apos;</span>?&nbsp;<span class="string" >&apos;\n&apos;</span>)?&nbsp;;<br />
+<span class="keyword">terminal</span>&nbsp;WS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;(<span class="string" >&apos;&nbsp;&apos;</span>|<span class="string" >&apos;\t&apos;</span>|<span class="string" >&apos;\r&apos;</span>|<span class="string" >&apos;\n&apos;</span>)+&nbsp;;<br />
+<span class="keyword">terminal</span>&nbsp;ANY_OTHER:&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;;
 </p>
 </div>
 </div>

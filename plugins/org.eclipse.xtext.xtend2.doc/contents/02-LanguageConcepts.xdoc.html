@@ -19,7 +19,15 @@ Here is an example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-package&nbsp;com.acme<br /><br />import&nbsp;java.util.List<br /><br />class&nbsp;MyClass&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />
+package&nbsp;com.acme<br />
+<br />
+import&nbsp;java.util.List<br />
+<br />
+class&nbsp;MyClass&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}
 </p>
 </div>
 </div>
@@ -46,7 +54,7 @@ Package Declaration
 
 <p>
 Package declarations are like in Java, with the small difference, that an identifier can be escaped with a  <em>^</em> in case it conflicts with a keyword.
-Also you don&apos;t terminate a package decalaration with a semicolon.
+Also you don&apos;t terminate a package declaration with a semicolon.
 </p>
 
 
@@ -71,7 +79,8 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-PackageDeclaration&nbsp;:&nbsp;&apos;package&apos;&nbsp;QualifiedName;<br />QualifiedName&nbsp;:&nbsp;ID&nbsp;(&apos;.&apos;&nbsp;ID);<br />
+PackageDeclaration&nbsp;:&nbsp;&apos;package&apos;&nbsp;QualifiedName;<br />
+QualifiedName&nbsp;:&nbsp;ID&nbsp;(&apos;.&apos;&nbsp;ID);
 </p>
 </div>
 </div>
@@ -103,7 +112,7 @@ Examples
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-package&nbsp;org.eclipse.xtext<br />
+package&nbsp;org.eclipse.xtext
 </p>
 </div>
 </div>
@@ -113,7 +122,7 @@ package&nbsp;org.eclipse.xtext<br />
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-package&nbsp;my.^public.^package<br />
+package&nbsp;my.^public.^package
 </p>
 </div>
 </div>
@@ -185,7 +194,7 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-import&nbsp;extension&nbsp;java.util.Collections.(sort,&nbsp;shuffle);<br />
+import&nbsp;extension&nbsp;java.util.Collections.(sort,&nbsp;shuffle);
 </p>
 </div>
 </div>
@@ -226,7 +235,11 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-ImportSection&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(Import|Injection)*;<br />Import&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;import&apos;&nbsp;&apos;extension&apos;?&nbsp;QualifiedName&nbsp;((&apos;.&apos;&apos;*&apos;)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&apos;(&apos;ID&nbsp;(&apos;,&apos;&nbsp;ID)&apos;)&apos;)?;<br />
+ImportSection&nbsp;:&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;(Import|Injection)*;<br />
+Import&nbsp;:&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;import&apos;&nbsp;&apos;extension&apos;?&nbsp;QualifiedName&nbsp;((&apos;.&apos;&apos;*&apos;)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&apos;(&apos;ID&nbsp;(&apos;,&apos;&nbsp;ID)&apos;)&apos;)?;
 </p>
 </div>
 </div>
@@ -265,7 +278,7 @@ It is done as part of the import section and looks like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-inject&nbsp;MyService&nbsp;myService;<br />
+inject&nbsp;MyService&nbsp;myService;
 </p>
 </div>
 </div>
@@ -282,7 +295,12 @@ This will translate to Java as a field as well a setter method annotated with @I
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">private</span>&nbsp;MyService&nbsp;myService;<br /><br />@Inject<br /><span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setMyService(MyService&nbsp;myService)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.myService&nbsp;=&nbsp;myService;<br />}<br />
+<span class="keyword">private</span>&nbsp;MyService&nbsp;myService;<br />
+<br />
+@Inject<br />
+<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setMyService(MyService&nbsp;myService)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.myService&nbsp;=&nbsp;myService;<br />
+}
 </p>
 </div>
 </div>
@@ -317,7 +335,7 @@ That is the following inject declaration would be equvalent with the former.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-inject&nbsp;MyService;<br />
+inject&nbsp;MyService;
 </p>
 </div>
 </div>
@@ -354,7 +372,7 @@ is why you can write the following in Xtend2.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-inject&nbsp;HashMap&lt;String,MyType&gt;&nbsp;myCache;<br />
+inject&nbsp;HashMap&lt;String,MyType&gt;&nbsp;myCache;
 </p>
 </div>
 </div>
@@ -378,7 +396,8 @@ Xtend supports these two variants:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-inject&nbsp;@CustomAnnotation&nbsp;my.Service&nbsp;customService;&nbsp;<br />inject&nbsp;@"NamedThingy"&nbsp;my.Service&nbsp;namedService;<br />
+inject&nbsp;@CustomAnnotation&nbsp;my.Service&nbsp;customService;&nbsp;<br />
+inject&nbsp;@"NamedThingy"&nbsp;my.Service&nbsp;namedService;
 </p>
 </div>
 </div>
@@ -397,7 +416,7 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-inject&nbsp;@CustomAnnotation&nbsp;Provider&lt;Service&gt;&nbsp;customServiceProvider;&nbsp;<br />
+inject&nbsp;@CustomAnnotation&nbsp;Provider&lt;Service&gt;&nbsp;customServiceProvider;
 </p>
 </div>
 </div>
@@ -445,7 +464,11 @@ to the java.util collection library (we will likely ship a library based on goog
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-class&nbsp;IterableExtensions&nbsp;{<br />&nbsp;&nbsp;&nbsp;public&nbsp;&lt;T&gt;&nbsp;T&nbsp;find(Iterable&lt;T&gt;&nbsp;elements,&nbsp;Function&lt;T,Boolean&gt;&nbsp;func)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br />&nbsp;&nbsp;&nbsp;}<br />}<br />
+class&nbsp;IterableExtensions&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;public&nbsp;&lt;T&gt;&nbsp;T&nbsp;find(Iterable&lt;T&gt;&nbsp;elements,&nbsp;Function&lt;T,Boolean&gt;&nbsp;func)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br />
+&nbsp;&nbsp;&nbsp;}<br />
+}
 </p>
 </div>
 </div>
@@ -462,7 +485,7 @@ You declare the dependency like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-inject&nbsp;extension&nbsp;my.common.IterableExtensions;<br />
+inject&nbsp;extension&nbsp;my.common.IterableExtensions;
 </p>
 </div>
 </div>
@@ -480,7 +503,7 @@ and can then use it as if those functions were members of any <span class="inlin
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myIterable.find(e|e.name=="Foo")<br />
+myIterable.find(e|e.name=="Foo")
 </p>
 </div>
 </div>
@@ -500,7 +523,14 @@ or allows you to write against an SPI, where the concrete implementation can be 
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-ImportSection&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(Import|Injection)*;<br />Import&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;...<br />Injection&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;inject&apos;&nbsp;&apos;extension&apos;?&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;@&apos;STRING&nbsp;|&nbsp;&apos;@&apos;TypeReference)?&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;TypeReference&nbsp;(&apos;(&apos;ID&nbsp;(&apos;,&apos;&nbsp;ID)*&apos;)&apos;)?;<br />
+ImportSection&nbsp;:&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;(Import|Injection)*;<br />
+Import&nbsp;:&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;...<br />
+Injection&nbsp;:&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;inject&apos;&nbsp;&apos;extension&apos;?&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;(&apos;@&apos;STRING&nbsp;|&nbsp;&apos;@&apos;TypeReference)?&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;TypeReference&nbsp;(&apos;(&apos;ID&nbsp;(&apos;,&apos;&nbsp;ID)*&apos;)&apos;)?;
 </p>
 </div>
 </div>
@@ -635,7 +665,16 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-ClassDeclaration&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(Visibility|&apos;abstract&apos;|&apos;final&apos;)*&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;class&apos;&nbsp;TypeParameters?&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;extends&apos;&nbsp;QualifiedName)?&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;implements&apos;&nbsp;QualifiedName&nbsp;(&apos;,&apos;&nbsp;QualifiedName)*)?&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;{&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Members*<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;}&apos;<br />;<br />Visibility&nbsp;:&nbsp;&apos;public&apos;|&apos;protected&apos;|&apos;private&apos;;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />
+ClassDeclaration&nbsp;:&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;(Visibility|&apos;abstract&apos;|&apos;final&apos;)*&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;class&apos;&nbsp;TypeParameters?&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;(&apos;extends&apos;&nbsp;QualifiedName)?&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;(&apos;implements&apos;&nbsp;QualifiedName&nbsp;(&apos;,&apos;&nbsp;QualifiedName)*)?&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;{&apos;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Members*<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;}&apos;<br />
+;<br />
+Visibility&nbsp;:&nbsp;&apos;public&apos;|&apos;protected&apos;|&apos;private&apos;;
 </p>
 </div>
 </div>
@@ -666,7 +705,7 @@ Functions
 
 <p>
 Xtend2 functions are declared within a class and are usually translated to a corresponding Java method with the exact same signature. 
-The only exception is case methods, which compile to a single method. This is explained in the section about 
+The only exceptions are dispatch methods, which compile to a single method. This is explained in the section about 
 <a href="02-LanguageConcepts.xdoc.html#polymorphicDispatch">section polymorphicDispatch</a>. 
 </p>
 
@@ -676,7 +715,8 @@ An example of a function declaration
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Boolean&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();<br />
+Boolean&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();
 </p>
 </div>
 </div>
@@ -744,7 +784,8 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-final&nbsp;override&nbsp;Boolean&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();<br />
+final&nbsp;override&nbsp;Boolean&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();
 </p>
 </div>
 </div>
@@ -782,7 +823,7 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Boolean&nbsp;myAbstractFunction(String&nbsp;s1,String&nbsp;s2);<br />
+Boolean&nbsp;myAbstractFunction(String&nbsp;s1,String&nbsp;s2);
 </p>
 </div>
 </div>
@@ -824,7 +865,8 @@ That is the function
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Boolean&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();<br />
+Boolean&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();
 </p>
 </div>
 </div>
@@ -841,7 +883,8 @@ could be declared like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();<br />
+equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();
 </p>
 </div>
 </div>
@@ -892,12 +935,12 @@ That is <span class="inlinecode">List</span>
 <a name="polymorphicDispatch"></a>
 
 <a name="polymorphicDispatch"></a>
-<div class="section" title="Polymorphic Method Overloading">
+<div class="section" title="Dispatch Functions">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-Polymorphic Method Overloading
+Dispatch Functions
 </h3>
 </div>
 </div>
@@ -906,25 +949,23 @@ Polymorphic Method Overloading
 
 
 <p>
-It is possible to overload methods like in Java, and the resolution is also like in Java based on the
+It is possible to overload functions like in Java, and the resolution is also like in Java based on the
 static type of the arguments and only dynamic polymorphic on the receiver.
-However Xtend2 supports the special notion of case methods, which makes such overloaded methods polymorphic
+However Xtend2 supports the special notion of dispatch functions, which makes such overloaded functions polymorphicly
 dispatched.
 </p>
 
 <p>
-Such methods get the keyword <span class="inlinecode">case</span>
- and all methods with the same name and the same number of arguments
-need either be marked with <span class="inlinecode">case</span>
- or not.
+Such methods have the keyword <span class="inlinecode">dispatch</span>
+ preceding the declaration.
 </p>
 
 <p>
-If they are marked as case methods, the compiler will infer one method with the most common argument
-types which contains an if else cascade dispatching between the different case methods based on the actual
+If they are marked as dispatch functions, the compiler will use or infer the function with the most common argument
+types and generates Java method made up of if-else cascaded dispatching between the different dispatch functions based on the actual
 runtime types of the arguments. This has a lot of advantages and is a very convenient way 
-to add functionality to heterogenous data structures especially with deeper type hierarchies (i.e. EMF models and other typed domain models).
-It essentially eleminates the problem the visitor pattern is trying to solve.
+to add functionality to heterogeneous data structures especially with deeper type hierarchies (i.e. EMF models and other typed domain models).
+It essentially eliminates the problem the visitor pattern is trying to solve.
 </p>
 
 <p>
@@ -936,7 +977,17 @@ This allows you to write a code generator by defining a function for all kinds o
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-class&nbsp;MyCompiler&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;compile(CompilationUnit&nbsp;cu)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;cu.types.compile()&nbsp;...;<br />&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;compile(Interface&nbsp;interface)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;cu.members.compile()&nbsp;...;<br />&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;compile(Class&nbsp;cu)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;cu.members.compile()&nbsp;...;<br />&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;compile(Field&nbsp;cu)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...;<br />&nbsp;&nbsp;&nbsp;&nbsp;...<br />}<br />
+class&nbsp;MyCompiler&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;dispatch&nbsp;compile(CompilationUnit&nbsp;cu)&nbsp;:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;cu.types.compile()&nbsp;...;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;dispatch&nbsp;compile(Interface&nbsp;interface)&nbsp;:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;cu.members.compile()&nbsp;...;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;dispatch&nbsp;compile(Class&nbsp;cu)&nbsp;:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;cu.members.compile()&nbsp;...;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;dispatch&nbsp;compile(Field&nbsp;cu)&nbsp;:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;...<br />
+}
 </p>
 </div>
 </div>
@@ -962,11 +1013,11 @@ How case methods are translated to Java
 
 
 <p>
-The polymorphic behavior of case methods shall be transparently work no matter you call such a function from Java, Xtend2 or any other JVM language.
+The polymorphic behavior of dispatch functions shall be transparently work no matter you call such a function from Java, Xtend2 or any other JVM language.
 Therefore the runtime dispatch is not done on the caller&apos;s side but on the declaration side. 
 For each set of case methods where the name is equal and the number of arguments is equal, the most common denominator signature is taken 
 or computed if there is no most common denominator. Only for that signature a Java method with the given
-name is generated, all the case methods are generated to protected methods where the name is prefixed with an
+name is generated, all the dispatch functions are generated to protected methods where the name is prefixed with an
 underscore. 
 </p>
 
@@ -981,7 +1032,8 @@ Example: The following functions
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-foo(Number&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;a&nbsp;number&apos;;<br />foo(Integer&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;an&nbsp;int&apos;;<br />
+dispatch&nbsp;foo(Number&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;a&nbsp;number&apos;;<br />
+dispatch&nbsp;foo(Integer&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;an&nbsp;int&apos;;
 </p>
 </div>
 </div>
@@ -998,7 +1050,23 @@ compile to the following Java method:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Integer)x);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Number)x);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Couldn&apos;t&nbsp;dispatch.&nbsp;Argument&nbsp;was&nbsp;Number&nbsp;x&nbsp;:"+x);<br />}&nbsp;<br /><br /><span class="keyword">protected</span>&nbsp;String&nbsp;_foo(Integer&nbsp;x)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;"It&apos;s&nbsp;an&nbsp;int";<br />}<br /><br /><span class="keyword">protected</span>&nbsp;String&nbsp;_foo(Number&nbsp;x)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;"It&apos;s&nbsp;a&nbsp;number";<br />}<br />
+<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Integer)x);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Number)x);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >"Couldn&apos;t&nbsp;dispatch.&nbsp;Argument&nbsp;was&nbsp;Number&nbsp;x&nbsp;:"</span>+x);<br />
+}&nbsp;<br />
+<br />
+<span class="keyword">protected</span>&nbsp;String&nbsp;_foo(Integer&nbsp;x)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string" >"It&apos;s&nbsp;an&nbsp;int"</span>;<br />
+}<br />
+<br />
+<span class="keyword">protected</span>&nbsp;String&nbsp;_foo(Number&nbsp;x)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string" >"It&apos;s&nbsp;a&nbsp;number"</span>;<br />
+}
 </p>
 </div>
 </div>
@@ -1017,7 +1085,8 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-foo(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;:&nbsp;"it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;int";<br />foo(Integer&nbsp;x,&nbsp;Number&nbsp;x)&nbsp;:&nbsp;"it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number";<br />
+dispatch&nbsp;foo(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;:&nbsp;"it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;int";<br />
+dispatch&nbsp;foo(Integer&nbsp;x,&nbsp;Number&nbsp;x)&nbsp;:&nbsp;"it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number";
 </p>
 </div>
 </div>
@@ -1030,7 +1099,18 @@ foo(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;:&nbsp;"it&apos;s&nbsp;some&nbsp;nu
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x,&nbsp;Number&nbsp;y)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;((x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp;&nbsp;(y&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer))&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Number)x,(Integer)y);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;((x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp;&nbsp;(y&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Integer)x,(Number)y);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Couldn&apos;t&nbsp;handle&nbsp;Number&nbsp;x:"+x+",&nbsp;Number&nbsp;y:"+y);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}&nbsp;<br />
+<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x,&nbsp;Number&nbsp;y)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;((x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp;&nbsp;(y&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer))&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Number)x,(Integer)y);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;((x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp;&nbsp;(y&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Integer)x,(Number)y);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >"Couldn&apos;t&nbsp;handle&nbsp;Number&nbsp;x:"</span>+x+<span class="string" >",&nbsp;Number&nbsp;y:"</span>+y);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}
 </p>
 </div>
 </div>
@@ -1048,7 +1128,9 @@ As you can see a null reference is never a match. If you want to fetch null you 
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-foo(Number&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;some&nbsp;number&apos;;<br />foo(Integer&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;an&nbsp;int&apos;;<br />foo(Void&nbsp;x)&nbsp;:&nbsp;throw&nbsp;new&nbsp;NullPointerException("x");<br />
+dispatch&nbsp;foo(Number&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;some&nbsp;number&apos;;<br />
+dispatch&nbsp;foo(Integer&nbsp;x)&nbsp;:&nbsp;&apos;it&apos;s&nbsp;an&nbsp;int&apos;;<br />
+dispatch&nbsp;foo(Void&nbsp;x)&nbsp;:&nbsp;throw&nbsp;new&nbsp;NullPointerException("x");
 </p>
 </div>
 </div>
@@ -1065,7 +1147,18 @@ Which compiles to the following Java code:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Integer)x);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Number)x);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;==&nbsp;null)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Void)null);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Couldn&apos;t&nbsp;handle&nbsp;Number&nbsp;x:"+x+",&nbsp;Number&nbsp;y:"+y);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}&nbsp;<br />
+<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Integer)x);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Number)x);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;==&nbsp;null)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Void)null);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >"Couldn&apos;t&nbsp;handle&nbsp;Number&nbsp;x:"</span>+x+<span class="string" >",&nbsp;Number&nbsp;y:"</span>+y);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}
 </p>
 </div>
 </div>
@@ -1093,7 +1186,7 @@ Overloading Functions from Super Types
 
 
 <p>
-Any methods from super types conforming to the compiled form of a case method are also included in the
+Any Java methods from super types conforming to the compiled form of a dispatch method are also included in the
 dispatch. Conforming means they have the right number of arguments and start with an underscore.
 </p>
 
@@ -1107,7 +1200,11 @@ Consider the following Java class :
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-public&nbsp;abstract&nbsp;class&nbsp;AbstractLabelProvider&nbsp;{<br />&nbsp;&nbsp;&nbsp;protected&nbsp;String&nbsp;_label(Object&nbsp;o)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;some&nbsp;generic&nbsp;implementation<br />&nbsp;&nbsp;&nbsp;}<br />}<br />
+public&nbsp;abstract&nbsp;class&nbsp;AbstractLabelProvider&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;protected&nbsp;String&nbsp;_label(Object&nbsp;o)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;some&nbsp;generic&nbsp;implementation<br />
+&nbsp;&nbsp;&nbsp;}<br />
+}
 </p>
 </div>
 </div>
@@ -1124,7 +1221,16 @@ and the following xtend class extends it like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-class&nbsp;MyLabelProvider&nbsp;extends&nbsp;AbstractLabelProvider&nbsp;{<br />&nbsp;&nbsp;&nbsp;case&nbsp;label(Entity&nbsp;this)&nbsp;name<br />&nbsp;&nbsp;&nbsp;case&nbsp;label(Method&nbsp;this)&nbsp;name+"("+params.toString(",")+"):"+type<br />&nbsp;&nbsp;&nbsp;case&nbsp;label(Field&nbsp;this)&nbsp;name+type<br />}<br />
+class&nbsp;MyLabelProvider&nbsp;extends&nbsp;AbstractLabelProvider&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;dispatch&nbsp;label(Entity&nbsp;this)&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;dispatch&nbsp;label(Method&nbsp;this)&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name+"("+params.toString(",")+"):"+type<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;dispatch&nbsp;label(Field&nbsp;this)&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name+type<br />
+}
 </p>
 </div>
 </div>
@@ -1141,7 +1247,20 @@ The resulting dispatch method in the generated Java class &apos;MyLabelProvider&
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-public&nbsp;String&nbsp;label(Object&nbsp;o)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(o&nbsp;instanceof&nbsp;Field)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;_label((Field)o);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;if&nbsp;(o&nbsp;instanceof&nbsp;Method){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;_foo((Method)o);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;if&nbsp;(o&nbsp;instanceof&nbsp;Entity){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;_foo((Entity)o);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;if&nbsp;(o&nbsp;instanceof&nbsp;Object){<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;_foo((Object)o);<br />&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;IllegalArgumentException(<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Couldn&apos;t&nbsp;handle&nbsp;Object&nbsp;o:"+o);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />
+public&nbsp;String&nbsp;label(Object&nbsp;o)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(o&nbsp;instanceof&nbsp;Field)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;_label((Field)o);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;if&nbsp;(o&nbsp;instanceof&nbsp;Method){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;_foo((Method)o);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;if&nbsp;(o&nbsp;instanceof&nbsp;Entity){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;_foo((Entity)o);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;if&nbsp;(o&nbsp;instanceof&nbsp;Object){<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;_foo((Object)o);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;else&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;IllegalArgumentException(<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Couldn&apos;t&nbsp;handle&nbsp;Object&nbsp;o:"+o);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}
 </p>
 </div>
 </div>
@@ -1180,7 +1299,13 @@ of course the function body consists of one expression instead of a sequence of 
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-FunctionDef&nbsp;:&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;public&apos;|&apos;protected&apos;|&apos;private&apos;|&apos;final&apos;|&apos;case&apos;|&apos;override&apos;)*&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;TypeParameters?&nbsp;TypeRef?&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;ID&apos;(&apos;(ParameterDeclaration&nbsp;(&apos;,&apos;&nbsp;ParameterDeclaration)*)?&apos;)&apos;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;(&apos;throws&apos;&nbsp;TypeRef&nbsp;(&apos;,&apos;&nbsp;TypeRef)*)?<br />&nbsp;&nbsp;&nbsp;&nbsp;Expression<br />;<br />
+FunctionDef&nbsp;:&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;(&apos;public&apos;|&apos;protected&apos;|&apos;private&apos;|&apos;final&apos;|&apos;case&apos;|&apos;override&apos;)*&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;TypeParameters?&nbsp;TypeRef?&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ID&apos;(&apos;(ParameterDeclaration&nbsp;(&apos;,&apos;&nbsp;ParameterDeclaration)*)?&apos;)&apos;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;(&apos;throws&apos;&nbsp;TypeRef&nbsp;(&apos;,&apos;&nbsp;TypeRef)*)?<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Expression<br />
+;
 </p>
 </div>
 </div>
@@ -1242,7 +1367,17 @@ Xtend). Let&apos;s have a look at an example of how a typical function with temp
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-toClass(Entity&nbsp;this)&nbsp;:&apos;&apos;&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;«packageName»;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;«placeImports»<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;«name»&nbsp;«IF&nbsp;extendedType!=null»extends&nbsp;«extendedType»«ENDIF»{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«FOREACH&nbsp;members»<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«member.toMember»<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«ENDFOREACH»<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;;<br />
+toClass(Entity&nbsp;this)&nbsp;:&apos;&apos;&apos;<br />
+&nbsp;&nbsp;package&nbsp;«packageName»;<br />
+<br />
+&nbsp;&nbsp;«placeImports»<br />
+<br />
+&nbsp;&nbsp;public&nbsp;class&nbsp;«name»&nbsp;«IF&nbsp;extendedType!=null»extends&nbsp;«extendedType»«ENDIF»&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;«FOREACH&nbsp;members»<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«member.toMember»<br />
+&nbsp;&nbsp;&nbsp;&nbsp;«ENDFOREACH»<br />
+&nbsp;&nbsp;}<br />
+&apos;&apos;&apos;;
 </p>
 </div>
 </div>
@@ -1261,7 +1396,12 @@ expected. For instance in conjunction the powerful switch expression from Xbase:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-toMember(Member&nbsp;this)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;switch(this)&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Field&nbsp;:&apos;&apos;&apos;private&nbsp;«type»&nbsp;«name»&nbsp;;&apos;&apos;&apos;;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;case&nbsp;isAbstract&nbsp;:&apos;&apos;&apos;&nbsp;abstract&nbsp;«...&apos;&apos;&apos;;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Method:&apos;&apos;&apos;&nbsp;.....&nbsp;&apos;&apos;&apos;;<br />&nbsp;&nbsp;&nbsp;&nbsp;};<br />
+toMember(Member&nbsp;this)&nbsp;:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;switch(this)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Field&nbsp;:&apos;&apos;&apos;private&nbsp;«type»&nbsp;«name»&nbsp;;&apos;&apos;&apos;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;case&nbsp;isAbstract&nbsp;:&apos;&apos;&apos;&nbsp;abstract&nbsp;«...&apos;&apos;&apos;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Method:&apos;&apos;&apos;&nbsp;.....&nbsp;&apos;&apos;&apos;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;};
 </p>
 </div>
 </div>
@@ -1436,7 +1576,11 @@ nested nodes.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-class&nbsp;Template&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;print(Node&nbsp;this)&nbsp;&apos;&apos;&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;«name»&nbsp;{}<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;<br />}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+class&nbsp;Template&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;print(Node&nbsp;this)&nbsp;&apos;&apos;&apos;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;«name»&nbsp;{}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;<br />
+}
 </p>
 </div>
 </div>
@@ -1446,15 +1590,7 @@ class&nbsp;Template&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;print(Node&nbsp;this)&nb
 </td>
 <td>
 
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-node&nbsp;NodeName{}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</p>
-</div>
-</div>
-
+<span class="inlinecode">node&nbsp;NodeName{}</span>
 
 
 </td>
@@ -1480,7 +1616,15 @@ for readability of the template itself.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-class&nbsp;Template&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;print(Node&nbsp;this)&nbsp;&apos;&apos;&apos;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;«name»&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«IF&nbsp;hasChildren»<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«children*.print»<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«ENDIF»<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;<br />}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+class&nbsp;Template&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;print(Node&nbsp;this)&nbsp;&apos;&apos;&apos;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;«name»&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«IF&nbsp;hasChildren»<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«children*.print»<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«ENDIF»<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;<br />
+}
 </p>
 </div>
 </div>
@@ -1494,7 +1638,14 @@ class&nbsp;Template&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;print(Node&nbsp;this)&nb
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-node&nbsp;Parent{<br />&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;FirstChild&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;SecondChild&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;Leaf&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+node&nbsp;Parent{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;FirstChild&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;SecondChild&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;Leaf&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}
 </p>
 </div>
 </div>
@@ -1562,7 +1713,7 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-"Foo".singleton<br />
+"Foo".singleton
 </p>
 </div>
 </div>
@@ -1579,7 +1730,7 @@ is the same as
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-singleton("Foo")<br />
+singleton("Foo")
 </p>
 </div>
 </div>
@@ -1617,7 +1768,9 @@ Imagine the following Java interface
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-interface&nbsp;MyExtensions&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;getComputedProperty(SomeType&nbsp;type);<br />}<br />
+interface&nbsp;MyExtensions&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;getComputedProperty(SomeType&nbsp;type);<br />
+}
 </p>
 </div>
 </div>
@@ -1634,7 +1787,7 @@ With Java you would have to call this method on an instance of MyExtensions like
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myExtensions.getComputedProperty(someType)<br />
+myExtensions.getComputedProperty(someType)
 </p>
 </div>
 </div>
@@ -1651,7 +1804,7 @@ In Xtend2 you can have the instance injected like in Java:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-inject&nbsp;extension&nbsp;MyExtensions;<br />
+inject&nbsp;extension&nbsp;MyExtensions;
 </p>
 </div>
 </div>
@@ -1668,7 +1821,7 @@ But instead of using the long expression known from Java (which would also work)
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-someType.computedProperty<br />
+someType.computedProperty
 </p>
 </div>
 </div>
@@ -1715,7 +1868,9 @@ Consider you want to transform the AST of the following Java interface to Java C
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-interface&nbsp;Foo&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;Foo&nbsp;newFoo();<br />}<br />
+interface&nbsp;Foo&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Foo&nbsp;newFoo();<br />
+}
 </p>
 </div>
 </div>
@@ -1740,7 +1895,20 @@ implemented like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-toAbstractClass(Interface&nbsp;intf)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;create&nbsp;new&nbsp;Class()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;intf.name;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;abstract&nbsp;=&nbsp;true;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;methods.addAll(intf.methods.toAbstractMethod);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />;<br />toAbstractMethod(Method&nbsp;m)&nbsp;:<br />&nbsp;&nbsp;&nbsp;&nbsp;create&nbsp;new&nbsp;Method()&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;m.name;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;abstract&nbsp;=&nbsp;true;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returnType&nbsp;=&nbsp;m.returnType.toAbstractClass;&nbsp;//&nbsp;recursive<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />;<br />
+toAbstractClass(Interface&nbsp;intf)&nbsp;:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;create&nbsp;new&nbsp;Class()&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;intf.name;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;abstract&nbsp;=&nbsp;true;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;methods.addAll(intf.methods.toAbstractMethod);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+;<br />
+toAbstractMethod(Method&nbsp;m)&nbsp;:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;create&nbsp;new&nbsp;Method()&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;m.name;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;abstract&nbsp;=&nbsp;true;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returnType&nbsp;=&nbsp;m.returnType.toAbstractClass;&nbsp;//&nbsp;recursive<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+;
 </p>
 </div>
 </div>

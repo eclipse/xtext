@@ -346,7 +346,8 @@ section2[Syntax]
 
 code[
 XClosure:
-	'\[' (JvmFormalParameter (',' JvmFormalParameter)*)? '|' XExpression '\]';
+	'\[' (JvmFormalParameter (',' JvmFormalParameter)*)? 
+		'|' XExpression '\]';
 	
 JvmFormalParameter:
 	JvmTypeReference? ID;

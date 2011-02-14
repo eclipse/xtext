@@ -69,7 +69,9 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-QualifiedName:<br />&nbsp;&nbsp;ID&nbsp;(&apos;.&apos;&nbsp;ID)*<br />;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+QualifiedName:<br />
+&nbsp;&nbsp;ID&nbsp;(&apos;.&apos;&nbsp;ID)*<br />
+;
 </p>
 </div>
 </div>
@@ -185,7 +187,9 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XFunctionTypeRef:<br />&nbsp;&nbsp;(&apos;(&apos;JvmTypeReference&nbsp;(&apos;,&apos;&nbsp;JvmTypeReference)*&apos;)&apos;)?&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&apos;=&gt;&apos;&nbsp;JvmTypeReference;<br />
+XFunctionTypeRef:<br />
+&nbsp;&nbsp;(&apos;(&apos;JvmTypeReference&nbsp;(&apos;,&apos;&nbsp;JvmTypeReference)*&apos;)&apos;)?&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&apos;=&gt;&apos;&nbsp;JvmTypeReference;
 </p>
 </div>
 </div>
@@ -309,7 +313,32 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-JvmTypeReference:<br />&nbsp;&nbsp;JvmParameterizedTypeReference&nbsp;|&nbsp;<br />&nbsp;&nbsp;XFunctionTypeRef;<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />XFunctionTypeRef:<br />&nbsp;&nbsp;(&apos;(&apos;&nbsp;JvmTypeReference&nbsp;(&apos;,&apos;&nbsp;JvmTypeReference)*&nbsp;&apos;)&apos;)?&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&apos;=&gt;&apos;&nbsp;JvmTypeReference;<br /><br />JvmParameterizedTypeReference:<br />&nbsp;&nbsp;type=QualifiedName&nbsp;(&apos;&lt;&apos;&nbsp;JvmTypeArgument&nbsp;(&apos;,&apos;&nbsp;JvmTypeArgument)*&nbsp;&apos;&gt;&apos;)?;<br /><br />JvmTypeArgument:<br />&nbsp;&nbsp;JvmReferenceTypeArgument&nbsp;|&nbsp;<br />&nbsp;&nbsp;JvmWildcardTypeArgument;<br />&nbsp;&nbsp;<br />JvmReferenceTypeArgument&nbsp;:<br />&nbsp;&nbsp;JvmTypeReference;<br /><br />JvmWildcardTypeArgument:<br />&nbsp;&nbsp;&apos;?&apos;&nbsp;(JvmUpperBound&nbsp;|&nbsp;JvmLowerBound)?;<br /><br />JvmLowerBound&nbsp;:<br />&nbsp;&apos;super&apos;&nbsp;JvmTypeReference;<br /><br />JvmUpperBound&nbsp;:&nbsp;<br />&nbsp;&apos;extends&apos;&nbsp;JvmTypeReference;<br /><br />
+JvmTypeReference:<br />
+&nbsp;&nbsp;JvmParameterizedTypeReference&nbsp;|&nbsp;<br />
+&nbsp;&nbsp;XFunctionTypeRef;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+XFunctionTypeRef:<br />
+&nbsp;&nbsp;(&apos;(&apos;&nbsp;JvmTypeReference&nbsp;(&apos;,&apos;&nbsp;JvmTypeReference)*&nbsp;&apos;)&apos;)?&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&apos;=&gt;&apos;&nbsp;JvmTypeReference;<br />
+<br />
+JvmParameterizedTypeReference:<br />
+&nbsp;&nbsp;type=QualifiedName&nbsp;(&apos;&lt;&apos;&nbsp;JvmTypeArgument&nbsp;(&apos;,&apos;&nbsp;JvmTypeArgument)*&nbsp;&apos;&gt;&apos;)?;<br />
+<br />
+JvmTypeArgument:<br />
+&nbsp;&nbsp;JvmReferenceTypeArgument&nbsp;|&nbsp;<br />
+&nbsp;&nbsp;JvmWildcardTypeArgument;<br />
+&nbsp;&nbsp;<br />
+JvmReferenceTypeArgument&nbsp;:<br />
+&nbsp;&nbsp;JvmTypeReference;<br />
+<br />
+JvmWildcardTypeArgument:<br />
+&nbsp;&nbsp;&apos;?&apos;&nbsp;(JvmUpperBound&nbsp;|&nbsp;JvmLowerBound)?;<br />
+<br />
+JvmLowerBound&nbsp;:<br />
+&nbsp;&apos;super&apos;&nbsp;JvmTypeReference;<br />
+<br />
+JvmUpperBound&nbsp;:&nbsp;<br />
+&nbsp;&apos;extends&apos;&nbsp;JvmTypeReference;
 </p>
 </div>
 </div>

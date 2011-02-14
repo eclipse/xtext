@@ -43,7 +43,7 @@
 </topic>
 <topic href="contents/02-LanguageConcepts.xdoc.html#Functions-7" label="Generics" >
 </topic>
-<topic href="contents/02-LanguageConcepts.xdoc.html#polymorphicDispatch" label="Polymorphic Method Overloading" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#polymorphicDispatch" label="Dispatch Functions" >
 <topic href="contents/02-LanguageConcepts.xdoc.html#polymorphicDispatch-6" label="How case methods are translated to Java" >
 </topic>
 <topic href="contents/02-LanguageConcepts.xdoc.html#polymorphicDispatch-7" label="Overloading Functions from Super Types" >
