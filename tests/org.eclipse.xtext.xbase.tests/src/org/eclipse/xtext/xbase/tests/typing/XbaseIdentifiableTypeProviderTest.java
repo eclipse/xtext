@@ -17,7 +17,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class IdentifiableTypeProviderTest extends AbstractXbaseTestCase {
+public class XbaseIdentifiableTypeProviderTest extends AbstractXbaseTestCase {
 	
 	@Inject
 	private ITypeProvider typeProvider;

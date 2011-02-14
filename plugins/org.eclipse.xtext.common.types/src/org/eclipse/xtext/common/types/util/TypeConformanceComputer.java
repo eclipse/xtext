@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
@@ -484,7 +485,11 @@ public class TypeConformanceComputer {
 			if (conformsToAll(type, types))
 				return type;
 		}
-		
+		// TODO handle all primitives
+		if (containsPrimitive(types)) {
+			List<JvmTypeReference> withoutPrimitives = replacePrimitives(types);
+			return getCommonSuperType(withoutPrimitives);
+		}
 		JvmTypeReference firstType = types.get(0);
 		final List<JvmTypeReference> tail = types.subList(1, types.size());
 		// mapping from rawtype to resolved parameterized types
@@ -510,6 +515,22 @@ public class TypeConformanceComputer {
 				return result;
 		}
 		throw new IllegalStateException("java.lang.Object does not have type parameters and should be contained in list");
+	}
+
+	protected List<JvmTypeReference> replacePrimitives(List<JvmTypeReference> types) {
+		List<JvmTypeReference> result = Lists.newArrayList();
+		for(JvmTypeReference type: types) {
+			result.add(primitives.asWrapperTypeIfPrimitive(type));
+		}
+		return result;
+	}
+
+	protected boolean containsPrimitive(List<JvmTypeReference> types) {
+		for(JvmTypeReference type: types) {
+			if (type.getType() instanceof JvmPrimitiveType)
+				return true;
+		}
+		return false;
 	}
 
 	protected boolean isNullOrProxy(JvmTypeReference type) {
@@ -590,8 +611,20 @@ public class TypeConformanceComputer {
 	protected void inplaceSortByDistanceAndName(List<Entry<JvmType>> candidates) {
 		Collections.sort(candidates,new Comparator<Entry<JvmType>>() {
 			public int compare(Entry<JvmType> o1, Entry<JvmType> o2) {
-				if (o1.getCount() == o2.getCount())
+				if (o1.getCount() == o2.getCount()) {
+					if (o1.getElement() instanceof JvmGenericType && o2.getElement() instanceof JvmGenericType) {
+						if (((JvmGenericType) o1.getElement()).isInterface()) {
+							if (!((JvmGenericType) o2.getElement()).isInterface()) {
+								return 1;
+							}
+						} else {
+							if (((JvmGenericType) o2.getElement()).isInterface()) {
+								return -1;
+							}
+						}
+					}
 					return o1.getElement().getCanonicalName().compareTo(o2.getElement().getCanonicalName());
+				}
 				if (o1.getCount() < o2.getCount())
 					return -1;
 				return 1;

@@ -22,7 +22,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge
  */
-public class TypeProviderTest extends AbstractXbaseTestCase {
+public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	
 	public void testFeatureCallWithArrayToIterableConversion() throws Exception {
 		assertResolvedReturnType("java.util.Iterator<? extends java.lang.Character>", "'foo'.toCharArray.iterator");
@@ -102,13 +102,31 @@ public class TypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedReturnType(Functions.class.getCanonicalName()+"$Function1<java.lang.String,java.lang.Boolean>", "[java.lang.String x| true]");
 	}
 
-	public void testFeatureCall() throws Exception {
+	public void testFeatureCall_01() throws Exception {
 		assertResolvedReturnType("int", "'foo'.length");
 	}
 
-	public void testFeatureCall_1() throws Exception {
+	public void testFeatureCall_02() throws Exception {
 		assertResolvedReturnType("byte[]", "'foo'.getBytes()");
 		assertResolvedReturnType("java.lang.String", "new java.util.ArrayList<java.lang.String>().get(23)");
+	}
+	
+	public void testFeatureCall_03() throws Exception {
+		assertResolvedReturnType("java.util.List<java.lang.Object>", "new testdata.ClassWithVarArgs().toList()");
+		assertResolvedReturnType("java.util.List<java.lang.String>", "new testdata.ClassWithVarArgs().toList('')");
+		assertResolvedReturnType("java.util.List<java.lang.String>", "new testdata.ClassWithVarArgs().toList('', '')");
+	}
+	
+	public void testFeatureCall_04() throws Exception {
+		// TODO: to be discussed: jdt expects java.util.List<? extends Object> 
+		assertResolvedReturnType("java.util.List<java.lang.Comparable<? extends java.lang.Object>>", "new testdata.ClassWithVarArgs().toList('', 1)");
+	}
+	
+	public void testFeatureCall_05() throws Exception {
+		assertResolvedReturnType("java.util.List<java.lang.Number>", "new testdata.ClassWithVarArgs().toNumberList()");
+		assertResolvedReturnType("java.util.List<java.lang.Integer>", "new testdata.ClassWithVarArgs().toNumberList(0)");
+		assertResolvedReturnType("java.util.List<java.lang.Integer>", "new testdata.ClassWithVarArgs().toNumberList(0, 1)");
+		assertResolvedReturnType("java.util.List<java.lang.Number>", "new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)");
 	}
 
 	public void testFeatureCallWithOperatorOverloading2() throws Exception {
