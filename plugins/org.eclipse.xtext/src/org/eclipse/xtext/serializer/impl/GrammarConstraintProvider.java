@@ -50,11 +50,13 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.inject.Singleton;
 import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Singleton
 public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 	protected abstract static class AbstractConstraintContext implements IConstraintContext {
@@ -1331,21 +1333,26 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		return result;
 	}
 
+	protected Map<Grammar, List<IConstraintContext>> cache = Maps.newHashMap();
+
 	public List<IConstraintContext> getConstraints(Grammar context) {
-		//		Map<Object, Constraint> constraints = Maps.newHashMap();
-		List<IConstraintContext> result = Lists.newArrayList();
-		for (ParserRule parserRule : GrammarUtil.allParserRules(context))
-			if (parserRule.getType().getClassifier() instanceof EClass) {
-				result.add(getConstraints(parserRule /*, constraints*/));
-				for (Action action : GrammarUtil.containedActions(parserRule))
-					if (action.getFeature() != null)
-						result.add(getConstraints(action /*, constraints*/));
-			}
-		filterDuplicateConstraintsAndSetNames(result);
+		List<IConstraintContext> result = cache.get(context);
+		if (result == null) {
+			result = Lists.newArrayList();
+			for (ParserRule parserRule : GrammarUtil.allParserRules(context))
+				if (parserRule.getType().getClassifier() instanceof EClass) {
+					result.add(getConstraints(parserRule));
+					for (Action action : GrammarUtil.containedActions(parserRule))
+						if (action.getFeature() != null)
+							result.add(getConstraints(action));
+				}
+			filterDuplicateConstraintsAndSetNames(result);
+			cache.put(context, result);
+		}
 		return result;
 	}
 
-	protected IConstraintContext getConstraints(ParserRule context /*, Map<Object, Constraint> constraints*/) {
+	protected IConstraintContext getConstraints(ParserRule context) {
 		ParserRuleConstraintContext result = new ParserRuleConstraintContext(context);
 		Set<EClass> types = Sets.newHashSet();
 		collectTypesForContext(context, types, Sets.newHashSet());
@@ -1356,7 +1363,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				result.addConstraint(constraint);
 			} else if (ce != null && ce != INVALID) {
 				Constraint constraint = new RuleConstraint(context, type, ce);
-				result.addConstraint(constraint /*, constraints*/);
+				result.addConstraint(constraint);
 			}
 		}
 		return result;

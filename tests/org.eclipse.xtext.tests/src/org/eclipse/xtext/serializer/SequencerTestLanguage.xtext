@@ -16,7 +16,7 @@ Model:
 	x10=SingleKeywords | x11=SingleKeywordsOrID | x12=SingleTerminals |
 	x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals |
 	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference |
-	x19=DependentAlternative1 | x20=DependentAlternative2;
+	x19=DependentAlternative1 | x20=DependentAlternative2 | x21=Optional;
 
 SimpleGroup:
 	"#1" val1=ID val2=ID;
@@ -106,3 +106,5 @@ DependentAlternative1:
 DependentAlternative2:
 	"#20" (val+=ID val+=ID+| val+=ID+ flag?="kw1");
 	
+Optional:
+	"#21" int0=INT (int1=INT int2=INT)?;

@@ -8,9 +8,12 @@
 package org.eclipse.xtext.serializer;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.serializer.impl.DebugSequenceAcceptor;
 import org.eclipse.xtext.serializer.impl.NodeModelSemanticSequencer;
+import org.eclipse.xtext.util.EmfFormatter;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -39,100 +42,20 @@ public class SemanticSequencerTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual.toString());
 	}
 
-	//	public void testXtext() throws Exception {
-	//		with(XtextStandaloneSetup.class);
-	//		EObject model = getGrammarAccess().getGrammar().getRules().get(0).getAlternatives().eContents().get(2);
-	//		System.out.println(EmfFormatter.objToStr(model));
-	//		EObject ctx = GrammarUtil.findRuleForName(getGrammarAccess().getGrammar(), "AbstractToken");
-	//		ISemanticSequencer semSequencer = get(ISemanticSequencer.class);
-	//		//		EObject ctx = semSequencer.findContexts(model, null).iterator().next();
-	//		IRecursiveSemanitcSequencer recSequencer = get(IRecursiveSemanitcSequencer.class);
-	//		DebugSequenceAcceptor actual = new DebugSequenceAcceptor();
-	//		recSequencer.createSequence(semSequencer, ctx, model, actual, ISerializationDiagnostic.EXCEPTION_ACCEPTOR);
-	//		//		String actual = sequenceRecursively(semSequencer, ctx, model, true);
-	//		System.out.println(actual);
-	//		assertNotNull(actual);
-	//	}
-
-	//	private EObject getContext(IGrammarValuePair pair) {
-	//		if (pair.getGrammarElement() instanceof Action)
-	//			return pair.getGrammarElement();
-	//		if (pair.getGrammarElement() instanceof RuleCall) {
-	//			RuleCall rc = (RuleCall) pair.getGrammarElement();
-	//			if (rc.getRule() instanceof ParserRule && rc.getRule().getType().getClassifier() instanceof EClass)
-	//				return rc.getRule();
-	//		}
-	//		return null;
-	//	}
-
-	//	private String sequenceRecursively(ISemanticSequencer sequencer, EObject context, EObject model, boolean recursive) {
-	//		StringBuilder result = new StringBuilder();
-	//		result.append(new GrammarElementTitleSwitch().doSwitch(context));
-	//		result.append(" {\n");
-	//		sequenceRecursively(sequencer, context, model, "  ", result, recursive);
-	//		result.append("}");
-	//		return result.toString();
-	//	}
-	//
-	//	private void sequenceRecursively(ISemanticSequencer sequencer, EObject context, EObject model, String prefix,
-	//			StringBuilder result, boolean recursive) {
-	//		Iterable<IGrammarValuePair> seq = sequencer.createSequence(context, model, null);
-	//		for (IGrammarValuePair p : seq) {
-	//			EObject ctx = getContext(p);
-	//			if (ctx != null) {
-	//				result.append(prefix);
-	//				result.append(PairFormatter.toStr(p.getGrammarElement()));
-	//				result.append(" => ");
-	//				result.append(((EObject) p.getValue()).eClass().getName());
-	//				if (recursive) {
-	//					result.append(" {\n");
-	//					sequenceRecursively(sequencer, ctx, (EObject) p.getValue(), prefix + "  ", result, recursive);
-	//					result.append(prefix);
-	//				} else {
-	//					result.append(" {");
-	//					result.append("...");
-	//				}
-	//				result.append("}\n");
-	//			} else {
-	//				String pre = prefix + PairFormatter.toStr(p.getGrammarElement());
-	//				pre += PREF.substring(Math.min(pre.length(), PREF.length()));
-	//				result.append(pre);
-	//				result.append(PairFormatter.toStr(p.getValue()));
-	//				result.append("\n");
-	//			}
-	//		}
-	//	}
-
-	//	private void sequenceRecursively(ISemanticSequencer sequencer, EObject context, EObject model, String prefix,
-	//			StringBuilder result, boolean recursive) {
-	//		Iterable<IGrammarValuePair> seq = sequencer.createSequence(context, model, null);
-	//		for (IGrammarValuePair p : seq) {
-	//			EObject ctx = getContext(p);
-	//			if (ctx != null) {
-	//				result.append(prefix);
-	//				result.append(PairFormatter.toStr(p.getGrammarElement()));
-	//				result.append(" => ");
-	//				result.append(((EObject) p.getValue()).eClass().getName());
-	//				if (recursive) {
-	//					result.append(" {\n");
-	//					sequenceRecursively(sequencer, ctx, (EObject) p.getValue(), prefix + "  ", result, recursive);
-	//					result.append(prefix);
-	//				} else {
-	//					result.append(" {");
-	//					result.append("...");
-	//				}
-	//				result.append("}\n");
-	//			} else {
-	//				String pre = prefix + PairFormatter.toStr(p.getGrammarElement());
-	//				pre += PREF.substring(Math.min(pre.length(), PREF.length()));
-	//				result.append(pre);
-	//				result.append(PairFormatter.toStr(p.getValue()));
-	//				result.append("\n");
-	//			}
-	//		}
-	//	}
-	//
-	//	private final static String PREF = "                                                                 ";
+	public void testXtext() throws Exception {
+		with(XtextStandaloneSetup.class);
+		EObject model = getGrammarAccess().getGrammar();
+		System.out.println(EmfFormatter.objToStr(model));
+		EObject ctx = GrammarUtil.findRuleForName(getGrammarAccess().getGrammar(), "AbstractToken");
+		ISemanticSequencer semSequencer = get(ISemanticSequencer.class);
+		//		EObject ctx = semSequencer.findContexts(model, null).iterator().next();
+		IRecursiveSemanitcSequencer recSequencer = get(IRecursiveSemanitcSequencer.class);
+		DebugSequenceAcceptor actual = new DebugSequenceAcceptor();
+		recSequencer.createSequence(semSequencer, ctx, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
+		//		String actual = sequenceRecursively(semSequencer, ctx, model, true);
+		System.out.println(actual);
+		assertNotNull(actual);
+	}
 
 	public void testSimpleGroup() throws Exception {
 		testSequence("#1 a b");
@@ -322,6 +245,26 @@ public class SemanticSequencerTest extends AbstractXtextTests {
 
 	public void testDependentAlternative2_d() throws Exception {
 		testSequence("#20 foo kw1");
+	}
+
+	public void testOptional1_a() throws Exception {
+		testSequence("#21 1 2 3");
+	}
+
+	public void testOptional1_b() throws Exception {
+		testSequence("#21 0 0 1");
+	}
+
+	public void testOptional1_c() throws Exception {
+		testSequence("#21 0 0 0");
+	}
+
+	public void testOptional1_d() throws Exception {
+		testSequence("#21 0");
+	}
+
+	public void testOptional1_e() throws Exception {
+		testSequence("#21 1");
 	}
 
 }

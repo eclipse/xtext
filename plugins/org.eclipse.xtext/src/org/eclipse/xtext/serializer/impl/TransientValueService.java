@@ -10,19 +10,17 @@ package org.eclipse.xtext.serializer.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
-
-import com.google.inject.Inject;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.serializer.ITransientValueService;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class TransientValueService implements org.eclipse.xtext.serializer.ITransientValueService {
-
-	@Inject
-	protected ITransientValueService legacy;
+public class TransientValueService implements ITransientValueService {
 
 	protected boolean defaultValueIsSerializeable(EStructuralFeature feature) {
 		// TODO: this needs a generic implementation
@@ -32,28 +30,35 @@ public class TransientValueService implements org.eclipse.xtext.serializer.ITran
 		return false;
 	}
 
+	protected boolean isContainerReferenceInSameResource(EObject owner, EStructuralFeature feature) {
+		if (feature instanceof EReference && ((EReference) feature).isContainer()) {
+			Resource ownerResource = ((InternalEObject) owner).eDirectResource();
+			// if eDirectResource is set, owner is a root element, so its container 
+			// must be in another resource 
+			return (ownerResource == null);
+		}
+		return false;
+	}
+
 	public ListTransient isListTransient(EObject semanitcObject, EStructuralFeature feature) {
-		if (legacy.isCheckElementsIndividually(semanitcObject, feature))
-			return ListTransient.SOME;
-		if (legacy.isTransient(semanitcObject, feature, -1))
+		if (feature.isTransient() || isContainerReferenceInSameResource(semanitcObject, feature))
 			return ListTransient.YES;
 		else
 			return ListTransient.NO;
 	}
 
 	public boolean isValueInListTransient(EObject semanitcObject, int index, EStructuralFeature feature) {
-		return legacy.isTransient(semanitcObject, feature, index);
+		return false;
 	}
 
 	public ValueTransient isValueTransient(EObject semanitcObject, EStructuralFeature feature) {
-		if (feature.isTransient())
-			return ValueTransient.YES;
-		boolean isSet = semanitcObject.eIsSet(feature);
-		if (defaultValueIsSerializeable(feature) && !isSet)
-			return ValueTransient.PREFERABLY;
-		if (legacy.isTransient(semanitcObject, feature, 0))
-			return ValueTransient.YES;
-		return isSet ? ValueTransient.NO : ValueTransient.YES;
+		if (feature.isTransient() || !semanitcObject.eIsSet(feature)
+				|| isContainerReferenceInSameResource(semanitcObject, feature)) {
+			if (defaultValueIsSerializeable(feature))
+				return ValueTransient.PREFERABLY;
+			else
+				return ValueTransient.YES;
+		} else
+			return ValueTransient.NO;
 	}
-
 }
