@@ -26,7 +26,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
-import org.eclipse.xtext.serializer.impl.DebugSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.DebugSequenceAcceptor;
 import org.eclipse.xtext.serializer.impl.EmitterNodeIterator;
 import org.eclipse.xtext.serializer.impl.NodeModelSyntacticSequencer;
 
