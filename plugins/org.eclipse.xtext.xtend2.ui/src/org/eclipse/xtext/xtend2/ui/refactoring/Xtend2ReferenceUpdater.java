@@ -39,4 +39,5 @@ public class Xtend2ReferenceUpdater extends DefaultReferenceUpdater {
 		EObject rootContainer = EcoreUtil.getRootContainer(element);
 		return !isEmpty(xtend2jvmAssociations.getXtendElements(rootContainer));
 	}
+	
 }

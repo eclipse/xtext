@@ -17,7 +17,6 @@ import org.eclipse.search.ui.SearchResultEvent;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.util.IAcceptor;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 /**
@@ -31,13 +30,10 @@ public class ReferenceSearchResult implements ISearchResult, IAcceptor<IReferenc
 
 	private List<ISearchResultListener> listeners;
 
-	private Predicate<IReferenceDescription> filter;
-
-	protected ReferenceSearchResult(ReferenceQuery query, Predicate<IReferenceDescription> filter) {
+	protected ReferenceSearchResult(ReferenceQuery query) {
 		this.query = query;
 		matchingReferences = Lists.newArrayList();
 		listeners = Lists.newArrayList();
-		this.filter = filter;
 	}
 
 	public void addListener(ISearchResultListener l) {
@@ -77,10 +73,8 @@ public class ReferenceSearchResult implements ISearchResult, IAcceptor<IReferenc
 	}
 
 	public void accept(IReferenceDescription referenceDescription) {
-		if (filter == null || filter.apply(referenceDescription)) {
-			matchingReferences.add(referenceDescription);
-			fireEvent(new ReferenceSearchResultEvents.Added(this, referenceDescription));
-		}
+		matchingReferences.add(referenceDescription);
+		fireEvent(new ReferenceSearchResultEvents.Added(this, referenceDescription));
 	}
 
 	public List<IReferenceDescription> getMatchingReferences() {

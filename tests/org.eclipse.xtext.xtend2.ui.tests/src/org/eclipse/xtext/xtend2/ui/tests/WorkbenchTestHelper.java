@@ -23,6 +23,7 @@ import junit.framework.TestSuite;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
@@ -49,7 +50,7 @@ import com.google.inject.name.Named;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class Xtend2WorkbenchTestHelper extends Assert {
+public class WorkbenchTestHelper extends Assert {
 
 	public static final String TESTPROJECT_NAME = "test.project";
 
@@ -64,11 +65,21 @@ public class Xtend2WorkbenchTestHelper extends Assert {
 	@Inject
 	private IWorkbench workbench;
 
-	public void tearDown() {
+	@Inject
+	private IWorkspace workspace;
+	
+	public void tearDown() throws Exception {
 		workbench.getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
 		for (IFile file : getFiles()) {
 			try {
 				file.delete(true, null);
+			} catch (Exception exc) {
+				exc.printStackTrace();
+			}
+		}
+		for(IResource binMember: getProject().getFolder("bin").members()) {
+			try {
+				binMember.delete(IResource.DEPTH_INFINITE, null);
 			} catch (Exception exc) {
 				exc.printStackTrace();
 			}
@@ -78,6 +89,11 @@ public class Xtend2WorkbenchTestHelper extends Assert {
 	public Set<IFile> getFiles() {
 		return files;
 	}
+	
+	public IProject getProject() {
+		return workspace.getRoot().getProject(TESTPROJECT_NAME);
+	}
+	
 
 	public XtextEditor openEditor(String fileName, String content) throws Exception {
 		int cursor = content.indexOf('|');
@@ -92,7 +108,6 @@ public class Xtend2WorkbenchTestHelper extends Assert {
 		IFile file = IResourcesSetupUtil.createFile(TESTPROJECT_NAME + "/src/" + fileName + "." + getFileExtension(),
 				content);
 		getFiles().add(file);
-		file.refreshLocal(IResource.DEPTH_ZERO, null);
 		return file;
 	}
 

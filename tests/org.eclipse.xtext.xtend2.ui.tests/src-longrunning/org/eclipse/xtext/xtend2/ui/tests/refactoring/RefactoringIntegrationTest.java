@@ -29,7 +29,7 @@ import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
-import org.eclipse.xtext.xtend2.ui.tests.Xtend2WorkbenchTestHelper;
+import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -40,11 +40,11 @@ import com.google.inject.Provider;
 public class RefactoringIntegrationTest extends AbstractXtend2UITestCase {
 
 	public static Test suite() {
-		return Xtend2WorkbenchTestHelper.suite(RefactoringIntegrationTest.class);
+		return WorkbenchTestHelper.suite(RefactoringIntegrationTest.class);
 	}
 
 	@Inject
-	private Xtend2WorkbenchTestHelper testHelper;
+	private WorkbenchTestHelper testHelper;
 
 	@Inject
 	private Provider<RenameElementProcessor> processorProvider;

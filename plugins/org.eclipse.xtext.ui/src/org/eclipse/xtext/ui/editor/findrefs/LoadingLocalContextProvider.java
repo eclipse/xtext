@@ -13,7 +13,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
@@ -33,7 +32,7 @@ public class LoadingLocalContextProvider implements IReferenceFinder.ILocalConte
 	@Inject
 	private IStorage2UriMapper storage2UriMapper;
 	
-	public <R> R readOnly(URI targetURI, IUnitOfWork<R, EObject> work) {
+	public <R> R readOnly(URI targetURI, IUnitOfWork<R, ResourceSet> work) {
 		Iterable<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(targetURI.trimFragment());
 		Iterator<Pair<IStorage, IProject>> iterator = storages.iterator();
 		while(iterator.hasNext()) {
@@ -41,10 +40,9 @@ public class LoadingLocalContextProvider implements IReferenceFinder.ILocalConte
 			IProject project = pair.getSecond();
 			if (project != null) {
 				ResourceSet resourceSet = resourceSetProvider.get(project);
-				EObject target = resourceSet.getEObject(targetURI, true);
-				if(target != null)
+				if(resourceSet != null)
 					try {
-						return work.exec(target);
+						return work.exec(resourceSet);
 					} catch (Exception e) {
 						throw new WrappedException(e);
 					}

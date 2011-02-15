@@ -9,7 +9,6 @@ package org.eclipse.xtext.ui.editor.findrefs;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.ILocalContextProvider;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -20,19 +19,16 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 public class ResourceSetLocalContextProvider implements ILocalContextProvider {
 
 	private ResourceSet resourceSet;
-	
+
 	public ResourceSetLocalContextProvider(ResourceSet resourceSet) {
 		this.resourceSet = resourceSet;
 	}
-	
-	public <R> R readOnly(URI targetURI, IUnitOfWork<R, EObject> work) {
-		EObject eObject = resourceSet.getEObject(targetURI, true);
+
+	public <R> R readOnly(URI targetURI, IUnitOfWork<R, ResourceSet> work) {
 		try {
-			if(eObject != null)
-				return work.exec(eObject);			
-			return null;
-		} catch(Exception e) {
-			throw new WrappedException(e);
+			return work.exec(resourceSet);
+		} catch(Exception exc) {
+			throw new WrappedException(exc);
 		}
 	}
 
