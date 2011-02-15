@@ -45,7 +45,7 @@ public class SemanticSequencerTest extends AbstractXtextTests {
 	public void testXtext() throws Exception {
 		with(XtextStandaloneSetup.class);
 		EObject model = getGrammarAccess().getGrammar();
-		System.out.println(EmfFormatter.objToStr(model));
+		//		System.out.println(EmfFormatter.objToStr(model));
 		EObject ctx = GrammarUtil.findRuleForName(getGrammarAccess().getGrammar(), "AbstractToken");
 		ISemanticSequencer semSequencer = get(ISemanticSequencer.class);
 		//		EObject ctx = semSequencer.findContexts(model, null).iterator().next();
@@ -53,7 +53,7 @@ public class SemanticSequencerTest extends AbstractXtextTests {
 		DebugSequenceAcceptor actual = new DebugSequenceAcceptor();
 		recSequencer.createSequence(semSequencer, ctx, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
 		//		String actual = sequenceRecursively(semSequencer, ctx, model, true);
-		System.out.println(actual);
+		//		System.out.println(actual);
 		assertNotNull(actual);
 	}
 
