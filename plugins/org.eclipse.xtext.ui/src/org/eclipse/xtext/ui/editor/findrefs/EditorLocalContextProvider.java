@@ -14,7 +14,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
@@ -53,18 +53,18 @@ public class EditorLocalContextProvider implements ILocalContextProvider {
 	@Inject
 	private LoadingLocalContextProvider delegate;
 
-	public <R> R readOnly(final URI targetURI, final IUnitOfWork<R, EObject> work) {
+	public <R> R readOnly(final URI targetURI, final IUnitOfWork<R, ResourceSet> work) {
 		try {
 			R result = new DisplayRunnableWithResult<R>() {
 				@Override
 				protected R run() throws Exception {
-					IXtextDocument document = getOpenDocument(targetURI);
+					IXtextDocument document = getOpenDocument(targetURI.trimFragment());
 					if (document != null) {
 						return document.readOnly(new IUnitOfWork<R, XtextResource>() {
 							public R exec(XtextResource state) throws Exception {
-								EObject target = state.getResourceSet().getEObject(targetURI, true);
-								if (target != null)
-									return work.exec(target);
+								ResourceSet localContext = state.getResourceSet();
+								if (localContext != null)
+									return work.exec(localContext);
 								return null;
 							}
 						});

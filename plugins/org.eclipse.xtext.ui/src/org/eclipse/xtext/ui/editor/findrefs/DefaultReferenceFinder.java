@@ -20,13 +20,13 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.CrossReferencer;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -38,6 +38,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
@@ -55,67 +56,74 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 	}
 
 	public void findAllReferences(Iterable<URI> targetURIs, ILocalContextProvider localContextProvider,
-			final IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
-		final IProgressMonitor realMonitor = (monitor == null) ? new NullProgressMonitor() : monitor;
+			final IAcceptor<IReferenceDescription> acceptor, Predicate<IReferenceDescription> filter,
+			IProgressMonitor monitor) {
+		final SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
 		Iterator<URI> iterator = targetURIs.iterator();
 		if (iterator.hasNext()) {
-			findLocalReferences(null, targetURIs, localContextProvider, acceptor, realMonitor);
-			findIndexedReferences(targetURIs, acceptor, new SubProgressMonitor(realMonitor, 1));
+			findLocalReferences(targetURIs.iterator().next().trimFragment(), targetURIs, localContextProvider,
+					acceptor, filter, subMonitor.newChild(1));
+			findIndexedReferences(targetURIs, acceptor, filter, subMonitor.newChild(1));
 		}
 	}
 
-	public void findLocalReferences(final Resource resource, Iterable<URI> targetURIs,
+	public void findLocalReferences(final URI resourceURI, final Iterable<URI> targetURIs,
 			ILocalContextProvider localContextProvider, final IAcceptor<IReferenceDescription> acceptor,
-			IProgressMonitor monitor) {
-		final IProgressMonitor realMonitor = (monitor == null) ? new NullProgressMonitor() : monitor;
-		realMonitor.beginTask("Find references", 2);
-		for (URI targetURI : targetURIs) {
-			localContextProvider.readOnly(targetURI, new IUnitOfWork<Boolean, EObject>() {
-				public Boolean exec(EObject state) throws Exception {
-						findLocalReferences(resource!=null?resource:state.eResource(), state, acceptor, new SubProgressMonitor(realMonitor, 1));
-					return true;
+			final Predicate<IReferenceDescription> filter, IProgressMonitor monitor) {
+		final SubMonitor subMonitor = SubMonitor.convert(monitor, "Find references", 1);
+		localContextProvider.readOnly(resourceURI, new IUnitOfWork<Boolean, ResourceSet>() {
+			public Boolean exec(ResourceSet localContext) throws Exception {
+				Resource resource = localContext.getResource(resourceURI.trimFragment(), true);
+				List<EObject> targets = newArrayList();
+				for (URI targetURI : targetURIs) {
+					EObject target = localContext.getEObject(targetURI, true);
+					if (target != null)
+						targets.add(target);
 				}
-			});
-		}
-		realMonitor.done();
+				findLocalReferences(resource, targets, acceptor, filter, subMonitor);
+				return true;
+			}
+		});
 	}
 
-	public void findLocalReferences(Resource resource, EObject target,
-			IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
+	public void findLocalReferences(Resource resource, Iterable<EObject> targets,
+			IAcceptor<IReferenceDescription> acceptor, Predicate<IReferenceDescription> filter, IProgressMonitor monitor) {
 		if (monitor.isCanceled())
 			return;
-		if (target != null) {
+		if (targets != null && !isEmpty(targets)) {
 			Map<EObject, Collection<Setting>> targetResourceInternalCrossRefs = CrossReferencer.find(Collections
 					.singletonList(resource));
-			Collection<Setting> crossRefSettings = targetResourceInternalCrossRefs.get(target);
-			if (crossRefSettings != null) {
-				monitor.beginTask(Messages.ReferenceQuery_monitor, crossRefSettings.size());
-				for (Setting crossRefSetting : crossRefSettings) {
-					if (monitor.isCanceled())
-						return;
-					EObject source = crossRefSetting.getEObject();
-					if (crossRefSetting.getEStructuralFeature() instanceof EReference) {
-						EReference reference = (EReference) crossRefSetting.getEStructuralFeature();
-						int index = 0;
-						if (reference.isMany()) {
-							List<?> values = (List<?>) source.eGet(reference);
-							for (int i = 0; i < values.size(); ++i) {
-								if (target == values.get(i)) {
-									index = i;
-									break;
+			SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.ReferenceQuery_monitor, size(targets));
+			for (EObject target : targets) {
+				Collection<Setting> crossRefSettings = targetResourceInternalCrossRefs.get(target);
+				if (crossRefSettings != null) {
+					SubMonitor subSubMonitor = subMonitor.newChild(crossRefSettings.size());
+					for (Setting crossRefSetting : crossRefSettings) {
+						if (subSubMonitor.isCanceled())
+							return;
+						EObject source = crossRefSetting.getEObject();
+						if (crossRefSetting.getEStructuralFeature() instanceof EReference) {
+							EReference reference = (EReference) crossRefSetting.getEStructuralFeature();
+							int index = 0;
+							if (reference.isMany()) {
+								List<?> values = (List<?>) source.eGet(reference);
+								for (int i = 0; i < values.size(); ++i) {
+									if (target == values.get(i)) {
+										index = i;
+										break;
+									}
 								}
 							}
+							IReferenceDescription localReferenceDescription = new DefaultReferenceDescription(source,
+									target, reference, index, findClosestExportedParentURI(source));
+							if (filter == null || filter.apply(localReferenceDescription))
+								acceptor.accept(localReferenceDescription);
 						}
-						IReferenceDescription localReferenceDescription = new DefaultReferenceDescription(source,
-								target, reference, index, findClosestExportedParentURI(source));
-						acceptor.accept(localReferenceDescription);
+						subSubMonitor.worked(1);
 					}
-					monitor.worked(1);
 				}
 			}
 		}
-		monitor.done();
-
 	}
 
 	protected URI findClosestExportedParentURI(EObject element) {
@@ -140,28 +148,26 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 	}
 
 	public void findIndexedReferences(Iterable<URI> targetURIs, IAcceptor<IReferenceDescription> acceptor,
-			IProgressMonitor monitor) {
+			Predicate<IReferenceDescription> filter, IProgressMonitor monitor) {
 		Set<URI> targetResourceURIs = newHashSet(transform(targetURIs, new Function<URI, URI>() {
 			public URI apply(URI from) {
 				return from.trimFragment();
 			}
 		}));
-		if (monitor.isCanceled())
-			return;
 		int numResources = Iterables.size(index.getAllResourceDescriptions());
-		monitor.beginTask(Messages.ReferenceQuery_monitor, numResources);
+		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.ReferenceQuery_monitor, numResources);
 		for (IResourceDescription resourceDescription : index.getAllResourceDescriptions()) {
-			if (monitor.isCanceled())
+			if (subMonitor.isCanceled())
 				return;
 			if (!targetResourceURIs.contains(resourceDescription.getURI())) {
 				for (IReferenceDescription referenceDescription : resourceDescription.getReferenceDescriptions()) {
-					if (contains(targetURIs, referenceDescription.getTargetEObjectUri())) {
+					if (contains(targetURIs, referenceDescription.getTargetEObjectUri())
+							&& (filter == null || filter.apply(referenceDescription))) {
 						acceptor.accept(referenceDescription);
 					}
 				}
 			}
-			monitor.worked(1);
+			subMonitor.worked(1);
 		}
-		monitor.done();
 	}
 }

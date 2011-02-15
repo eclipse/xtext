@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.findrefs;
 
-import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -34,7 +34,7 @@ public class ReferenceQuery implements ISearchQuery {
 
 	private String label;
 
-	private URI targetURI;
+	private List<URI> targetURIs;
 
 	private ILocalContextProvider localContextProvider;
 
@@ -43,8 +43,8 @@ public class ReferenceQuery implements ISearchQuery {
 	public ReferenceQuery() {
 	}
 
-	public void init(URI targetURI, IReferenceFinder.ILocalContextProvider localContextProvider, Predicate<IReferenceDescription> filter, String label) {
-		this.targetURI = targetURI;
+	public void init(List<URI> targetURIs, IReferenceFinder.ILocalContextProvider localContextProvider, Predicate<IReferenceDescription> filter, String label) {
+		this.targetURIs = targetURIs;
 		this.localContextProvider = localContextProvider;
 		this.label = label;
 		this.filter = filter;
@@ -69,12 +69,12 @@ public class ReferenceQuery implements ISearchQuery {
 
 	public IStatus run(IProgressMonitor monitor) throws OperationCanceledException {
 		searchResult.reset();
-		finder.findAllReferences(Collections.singleton(targetURI), localContextProvider, searchResult, monitor);
+		finder.findAllReferences(targetURIs, localContextProvider, searchResult, filter, monitor);
 		return (monitor.isCanceled()) ? Status.CANCEL_STATUS : Status.OK_STATUS;
 	}
 
 	protected ReferenceSearchResult createSearchResult() {
-		return new ReferenceSearchResult(this, filter);
+		return new ReferenceSearchResult(this);
 	}
 	
 }

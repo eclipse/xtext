@@ -48,6 +48,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.collect.Iterables;
@@ -72,7 +73,9 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 	@Inject
 	private IReferenceUpdater referenceUpdater;
 	@Inject
-	private IRenameStrategy.Provider strategyProvider;
+	private IRenameStrategy.Provider strategyProvider;	
+	@Inject
+	IReferenceUpdater.IFilterProvider referenceDescriptionFilterProvider;
 
 	private ElementRenameArguments renameArguments;
 	private IRenameStrategy renameStrategy;
@@ -174,12 +177,14 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 		if (contextResourceURI.equals(targetElementURI.trimFragment())) {
 			renameStrategy.createDeclarationUpdates(originalName, updateAcceptor);
 		}
-		ResourceSetLocalContextProvider localContextProvider = new ResourceSetLocalContextProvider(resourceSet);
 		ReferenceDescriptionAcceptor referenceDescriptionAcceptor = new ReferenceDescriptionAcceptor();
-		referenceFinder.findLocalReferences(contextResource, renameArguments.getRenamedElementURIs(),
-				localContextProvider, referenceDescriptionAcceptor, progress);
+		ResourceSetLocalContextProvider localContextProvider = new ResourceSetLocalContextProvider(resourceSet);
+		Predicate<IReferenceDescription> referenceDescriptionFilter = referenceDescriptionFilterProvider.get(renameArguments, resourceSet);
+		referenceFinder.findLocalReferences(contextResource.getURI(), renameArguments.getRenamedElementURIs(),
+				localContextProvider, referenceDescriptionAcceptor, referenceDescriptionFilter, progress);
+		Iterable<IReferenceDescription> localRedefernceDescriptions = referenceDescriptionAcceptor.getReferenceDescriptions();
 		referenceUpdater.createReferenceUpdates(renameArguments,
-				referenceDescriptionAcceptor.getReferenceDescriptions(), updateAcceptor, progress);
+				localRedefernceDescriptions, updateAcceptor, progress);
 		return updateAcceptor.getTextEdits();
 	}
 

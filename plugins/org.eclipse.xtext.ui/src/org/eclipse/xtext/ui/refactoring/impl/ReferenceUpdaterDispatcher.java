@@ -28,6 +28,7 @@ import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 import org.eclipse.xtext.util.IAcceptor;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -43,13 +44,18 @@ public class ReferenceUpdaterDispatcher {
 	@Inject
 	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
 
+	@Inject
+	private IReferenceUpdater.IFilterProvider referenceDescriptionFilterProvider;
+
 	public void createReferenceUpdates(ElementRenameArguments elementRenameArguments, ResourceSet resourceSet,
 			IRefactoringUpdateAcceptor updateAcceptor, IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, "Updating references", 100);
 		ResourceSetLocalContextProvider localContextProvider = createResourceSetLocalContextProvider(resourceSet);
 		ReferenceDescriptionAcceptor referenceDescriptionAcceptor = createFindReferenceAcceptor(updateAcceptor);
+		Predicate<IReferenceDescription> referenceDescriptionFilter = referenceDescriptionFilterProvider.get(
+				elementRenameArguments, resourceSet);
 		referenceFinder.findAllReferences(elementRenameArguments.getRenamedElementURIs(), localContextProvider,
-				referenceDescriptionAcceptor, progress.newChild(2));
+				referenceDescriptionAcceptor, referenceDescriptionFilter, progress.newChild(2));
 		Multimap<IReferenceUpdater, IReferenceDescription> updater2descriptions = referenceDescriptionAcceptor
 				.getReferenceUpdater2ReferenceDescriptions();
 		SubMonitor updaterProgress = progress.newChild(98).setWorkRemaining(updater2descriptions.keySet().size());
@@ -66,8 +72,7 @@ public class ReferenceUpdaterDispatcher {
 	}
 
 	protected ReferenceDescriptionAcceptor createFindReferenceAcceptor(IRefactoringUpdateAcceptor updateAcceptor) {
-		return new ReferenceDescriptionAcceptor(
-				resourceServiceProviderRegistry, updateAcceptor.getRefactoringStatus());
+		return new ReferenceDescriptionAcceptor(resourceServiceProviderRegistry, updateAcceptor.getRefactoringStatus());
 	}
 
 	public static class ReferenceDescriptionAcceptor implements IAcceptor<IReferenceDescription> {

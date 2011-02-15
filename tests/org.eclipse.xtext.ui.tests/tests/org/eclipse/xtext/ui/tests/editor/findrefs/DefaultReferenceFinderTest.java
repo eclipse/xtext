@@ -31,6 +31,8 @@ import org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.StringInputStream;
 
+import com.google.common.base.Predicate;
+
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @author Holger Schill
@@ -56,6 +58,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 		elementA = resource.getContents().get(0).eContents().get(0);
 		elementB = elementA.eContents().get(0);
 		elementC = resource.getContents().get(0).eContents().get(1);
+		resourceSet.getResources().add(resource);
 
 		ResourceSetBasedResourceDescriptions resourceDescriptions = get(ResourceSetBasedResourceDescriptions.class);
 		resourceDescriptions.setContext(resourceSet);
@@ -74,14 +77,14 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 	public void testLocalRefs() throws Exception {
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
-		referenceFinder.findLocalReferences(elementA.eResource(), elementA, acceptor, new NullProgressMonitor());
+		referenceFinder.findLocalReferences(elementA.eResource(), singleton(elementA), acceptor, null, new NullProgressMonitor());
 		acceptor.assertFinished();
-		referenceFinder.findIndexedReferences(singleton(EcoreUtil.getURI(elementA)), acceptor, new NullProgressMonitor());
+		referenceFinder.findIndexedReferences(singleton(EcoreUtil.getURI(elementA)), acceptor, null, new NullProgressMonitor());
 		acceptor.assertFinished();
 
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
-		referenceFinder.findAllReferences(singleton(EcoreUtil.getURI(elementA)), localContextProvider, acceptor,
+		referenceFinder.findAllReferences(singleton(EcoreUtil.getURI(elementA)), localContextProvider, acceptor, null,
 				new NullProgressMonitor());
 		acceptor.assertFinished();
 	}
@@ -90,43 +93,59 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 		Resource refResource = loadResource("ref.refactoringtestlanguage", "D { ref C }");
 		EObject elementD = refResource.getContents().get(0).eContents().get(0);
 		
-		referenceFinder.findLocalReferences(elementC.eResource(), elementC, acceptor, new NullProgressMonitor());
+		referenceFinder.findLocalReferences(elementC.eResource(), singleton(elementC), acceptor, null, new NullProgressMonitor());
 		acceptor.assertFinished();
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementC,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
-		referenceFinder.findIndexedReferences(singleton(EcoreUtil.getURI(elementC)), acceptor, new NullProgressMonitor());
+		referenceFinder.findIndexedReferences(singleton(EcoreUtil.getURI(elementC)), acceptor, null, new NullProgressMonitor());
 		acceptor.assertFinished();
 
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementC,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
-		referenceFinder.findAllReferences(singleton(EcoreUtil.getURI(elementC)), localContextProvider, acceptor,
+		referenceFinder.findAllReferences(singleton(EcoreUtil.getURI(elementC)), localContextProvider, acceptor, null,
 				new NullProgressMonitor());
 		acceptor.assertFinished();
 	}
 
 	public void testLocalAndIndexed()  throws Exception {
+		loadResource("ref.refactoringtestlanguage", "D { ref A }");
+		Predicate<IReferenceDescription> filter = new Predicate<IReferenceDescription>() {
+			public boolean apply(IReferenceDescription input) {
+				return !input.getTargetEObjectUri().equals(EcoreUtil.getURI(elementA));
+			}
+		};
+		referenceFinder.findLocalReferences(elementA.eResource(), singleton(elementA), acceptor, filter, new NullProgressMonitor());
+		acceptor.assertFinished();
+		referenceFinder.findIndexedReferences(singleton(EcoreUtil.getURI(elementA)), acceptor, filter, new NullProgressMonitor());
+		acceptor.assertFinished();
+		referenceFinder.findAllReferences(singleton(EcoreUtil.getURI(elementA)), localContextProvider, acceptor, filter,
+				new NullProgressMonitor());
+		acceptor.assertFinished();
+	}
+	
+	public void testLocalAndIndexedFiltered()  throws Exception {
 		Resource refResource = loadResource("ref.refactoringtestlanguage", "D { ref A }");
 		EObject elementD = refResource.getContents().get(0).eContents().get(0);
 		
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
-		referenceFinder.findLocalReferences(elementA.eResource(), elementA, acceptor, new NullProgressMonitor());
+		referenceFinder.findLocalReferences(elementA.eResource(), singleton(elementA), acceptor, null, new NullProgressMonitor());
 		acceptor.assertFinished();
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
-		referenceFinder.findIndexedReferences(singleton(EcoreUtil.getURI(elementA)), acceptor, new NullProgressMonitor());
+		referenceFinder.findIndexedReferences(singleton(EcoreUtil.getURI(elementA)), acceptor, null, new NullProgressMonitor());
 		acceptor.assertFinished();
 
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
-		referenceFinder.findAllReferences(singleton(EcoreUtil.getURI(elementA)), localContextProvider, acceptor,
+		referenceFinder.findAllReferences(singleton(EcoreUtil.getURI(elementA)), localContextProvider, acceptor, null,
 				new NullProgressMonitor());
 		acceptor.assertFinished();
 		
 	}
-	
+
 	public static class MockAcceptor implements IAcceptor<IReferenceDescription> {
 
 		private Queue<IReferenceDescription> expectationQueue = newLinkedList();

@@ -9,12 +9,12 @@ package org.eclipse.xtext.ui.editor.findrefs;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.common.base.Predicate;
 import com.google.inject.ImplementedBy;
 
 /**
@@ -30,20 +30,28 @@ public interface IReferenceFinder {
 	 */
 	@ImplementedBy(EditorLocalContextProvider.class)
 	interface ILocalContextProvider {
-		<R> R readOnly(URI targetURI, IUnitOfWork<R, EObject> work);
+		<R> R readOnly(URI resourceURI, IUnitOfWork<R, ResourceSet> work);
 	}
 
 	/**
 	 * Finds all References for given URIs.
+	 * 
+	 * @param filter
+	 *            can be null
 	 */
 	void findAllReferences(Iterable<URI> targetURIs, ILocalContextProvider localContextProvider,
-			IAcceptor<IReferenceDescription> acceptor, IProgressMonitor progressMonitor);
+			IAcceptor<IReferenceDescription> acceptor, Predicate<IReferenceDescription> filter,
+			IProgressMonitor progressMonitor);
 
 	/**
 	 * Finds all local references for the given URIs in a given Resource. If the Resource is null the Resource
 	 * corresponding to given URIs is used.
+	 * 
+	 * @param filter
+	 *            can be null
 	 */
-	void findLocalReferences(Resource resource, Iterable<URI> targetURIs, ILocalContextProvider localContextProvider,
-			IAcceptor<IReferenceDescription> acceptor, IProgressMonitor progressMonitor);
+	void findLocalReferences(URI resourceURI, Iterable<URI> targetURIs, ILocalContextProvider localContextProvider,
+			IAcceptor<IReferenceDescription> acceptor, Predicate<IReferenceDescription> filter,
+			IProgressMonitor progressMonitor);
 
 }
