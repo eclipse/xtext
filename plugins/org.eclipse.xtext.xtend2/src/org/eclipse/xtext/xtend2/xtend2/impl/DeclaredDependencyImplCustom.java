@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.xtend2.impl;
 
-import static com.google.common.collect.Lists.*;
-
 import java.util.List;
 
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -35,25 +33,15 @@ public class DeclaredDependencyImplCustom extends DeclaredDependencyImpl {
 		}
 		StringBuilder result = new StringBuilder();
 		for(INode node: list) {
-			for (INode node2 : getIterable(node)) {
-				if (node2 instanceof ILeafNode) {
-					ILeafNode leafNode = (ILeafNode) node2;
-					if (!leafNode.isHidden())
-						result.append(leafNode.getText());
-				}
+			for (ILeafNode leaf : node.getLeafNodes()) {
+				if (!leaf.isHidden())
+					result.append(leaf.getText());
 			}
 		}
 		final String qualifiedName = result.toString();
 		int indexOf = qualifiedName.lastIndexOf('.');
 		final String simpleName = indexOf==-1?qualifiedName: qualifiedName.substring(indexOf+1);
 		return Strings.toFirstLower(simpleName);
-	}
-
-	protected Iterable<INode> getIterable(INode node) {
-//TODO fix me		return node.getAsTreeIterable();
-		List<INode> result = newArrayList();
-		internalAppend(node, result);
-		return result;
 	}
 
 	protected void internalAppend(INode node, List<INode> result) {
@@ -77,8 +65,8 @@ public class DeclaredDependencyImplCustom extends DeclaredDependencyImpl {
 	}
 	
 	@Override
-	public String getQualifiedName() {
-		return eContainer != null ? ((XtendClass) eContainer()).getQualifiedName() + "." + getSimpleName()
+	public String getQualifiedName(char innerClassDelimiter) {
+		return eContainer != null ? ((XtendClass) eContainer()).getQualifiedName(innerClassDelimiter) + "." + getSimpleName()
 				: getSimpleName();
 	}
 }

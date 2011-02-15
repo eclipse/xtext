@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import org.eclipse.xtext.common.types.impl.JvmIdentifiableElementImpl;
+import org.eclipse.xtext.common.types.impl.JvmIdentifiableElementImplCustom;
 
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -35,7 +35,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendMember;
  *
  * @generated
  */
-public abstract class XtendMemberImpl extends JvmIdentifiableElementImpl implements XtendMember
+public abstract class XtendMemberImpl extends JvmIdentifiableElementImplCustom implements XtendMember
 {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.

@@ -28,8 +28,8 @@ public class XtendFunctionImplCustom extends XtendFunctionImpl {
 	}
 	
 	@Override
-	public String getQualifiedName() {
-		String typeName = getDeclaringType().getQualifiedName();
+	public String getQualifiedName(char innerClassDelimiter) {
+		String typeName = getDeclaringType().getQualifiedName(innerClassDelimiter);
 		if (typeName!=null)
 			return typeName+"."+getSimpleName();
 		return getSimpleName();

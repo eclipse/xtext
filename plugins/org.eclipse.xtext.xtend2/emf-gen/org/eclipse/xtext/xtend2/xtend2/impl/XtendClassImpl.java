@@ -27,7 +27,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 
-import org.eclipse.xtext.common.types.impl.JvmIdentifiableElementImpl;
+import org.eclipse.xtext.common.types.impl.JvmIdentifiableElementImplCustom;
 
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -51,7 +51,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendMember;
  *
  * @generated
  */
-public class XtendClassImpl extends JvmIdentifiableElementImpl implements XtendClass
+public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements XtendClass
 {
 	/**
 	 * The cached value of the '{@link #getTypeParameters() <em>Type Parameters</em>}' containment reference list.
