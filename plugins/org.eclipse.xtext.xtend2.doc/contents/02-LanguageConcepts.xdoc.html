@@ -14,6 +14,9 @@
 <p>
 On a first glance an Xtend2 file pretty much looks like a Java file. it starts with a package declaration followed by an import section, and after that comes the class definition.
 That class in fact is directly translated to a Java class in the corresponding Java package.
+</p>
+
+<p>
 Here is an example:
 
 <div class="literallayout">
@@ -158,65 +161,9 @@ terminated with a semicolon.
 </p>
 
 
-<a name="importExtension"></a>
-
-<a name="importExtension"></a>
-<div class="section" title="Importing Extension Methods">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Importing Extension Methods
-</h3>
-</div>
-</div>
-</div>
 
 
-
-<p>
-In addition one can add the keyword <span class="inlinecode">extension</span>
- after the import (where the keyword <span class="inlinecode">static</span>
- occurs in Java), which makes any static methods 
-from a certain type available as an 
-<a href="02-LanguageConcepts.xdoc.html#extensionMethods">extension method</a>. The <span class="inlinecode">extension</span>
- keyword only works with qualified imports (i.e. non-wildcard imports).
-If you only want to make some methods from the imported type available using the extension syntax, you can provide a list of function names.
-You cannot further specify type arguments.
-</p>
-
-<p>
-Example:
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-import&nbsp;extension&nbsp;java.util.Collections.(sort,&nbsp;shuffle);
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-This will import four methods (<span class="inlinecode">sort(List&lt;T&gt;)</span>
-, <span class="inlinecode">sort(List&lt;T&gt;,&nbsp;Comparator&lt;?&nbsp;super&nbsp;T&gt;)</span>
-, <span class="inlinecode">shuffle(List&lt;?&gt;)</span>
-, <span class="inlinecode">shuffle(List&lt;?&gt;,&nbsp;Random)</span>
-) available as 
-<a href="02-LanguageConcepts.xdoc.html#extensionMethods">extension methods</a>.
-</p>
-
-
-</div>
-
-
-
-<a name="imports-3"></a>
+<a name="imports-2"></a>
 <div class="section" title="Syntax">
 <div class="titlepage">
 <div>
@@ -235,302 +182,8 @@ Syntax
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-ImportSection&nbsp;:&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;(Import|Injection)*;<br />
 Import&nbsp;:&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&apos;import&apos;&nbsp;&apos;extension&apos;?&nbsp;QualifiedName&nbsp;((&apos;.&apos;&apos;*&apos;)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&apos;(&apos;ID&nbsp;(&apos;,&apos;&nbsp;ID)&apos;)&apos;)?;
-</p>
-</div>
-</div>
-
-
-</p>
-
-
-</div>
-
-</div>
-
-<a name="inject"></a>
-
-<a name="inject"></a>
-<div class="section" title="Dependency Injection">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title">
-Dependency Injection
-</h2>
-</div>
-</div>
-</div>
-
-
-
-<p>
-Xtend2 has built-in support for dependency injection, which means that declaring dependencies is a first class feature of Xtend2.
-It is done as part of the import section and looks like this:
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-inject&nbsp;MyService&nbsp;myService;
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-This will translate to Java as a field as well a setter method annotated with @Inject: 
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">private</span>&nbsp;MyService&nbsp;myService;<br />
-<br />
-@Inject<br />
-<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setMyService(MyService&nbsp;myService)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.myService&nbsp;=&nbsp;myService;<br />
-}
-</p>
-</div>
-</div>
-
-
-</p>
-
-
-
-
-<a name="inject-5"></a>
-<div class="section" title="Name can be inferred">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Name can be inferred
-</h3>
-</div>
-</div>
-</div>
-
-
-
-<p>
-You could even leave the name out as by default it will be the lower case version of the simple name of the class.
-That is the following inject declaration would be equvalent with the former.
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-inject&nbsp;MyService;
-</p>
-</div>
-</div>
-
-
-</p>
-
-
-</div>
-
-
-
-<a name="inject-6"></a>
-<div class="section" title="Guice Keys">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Guice Keys
-</h3>
-</div>
-</div>
-</div>
-
-
-
-<p>
-Xtend2 uses Guice as the dependency injection container, which in turn uses types as keys. Those types can be generified, which
-is why you can write the following in Xtend2.
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-inject&nbsp;HashMap&lt;String,MyType&gt;&nbsp;myCache;
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-Also Guice allows to use annotations to further distinct between different implementations of the same type. This is usually done by using
-the <span class="inlinecode">com.google.inject.name.Named</span>
- annotation or a custom annotation which is itself annotated with <span class="inlinecode">com.google.inject.BindingAnnotation</span>
-.
-</p>
-
-<p>
-Xtend supports these two variants:
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-inject&nbsp;@CustomAnnotation&nbsp;my.Service&nbsp;customService;&nbsp;<br />
-inject&nbsp;@"NamedThingy"&nbsp;my.Service&nbsp;namedService;
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-Providers are declared like in plain Guice. That is you wrap your type into <span class="inlinecode">com.google.inject.Provider</span>
-.
-Example:
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-inject&nbsp;@CustomAnnotation&nbsp;Provider&lt;Service&gt;&nbsp;customServiceProvider;
-</p>
-</div>
-</div>
-
-
-</p>
-
-
-</div>
-
-
-
-<a name="inject-7"></a>
-<div class="section" title="Injected Extension Methods">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Injected Extension Methods
-</h3>
-</div>
-</div>
-</div>
-
-
-
-<p>
-The <span class="inlinecode">extension</span>
- keyword is also available for <span class="inlinecode">inject</span>
- which is much nicer than importing static methods, because you don&apos;t bind your code to 
-actual implementation, since the implementation can be easily changed through the global dependency injection configuration (i.e. Guice modules).
-</p>
-
-<p>
-Example:
-</p>
-
-<p>
-Imagine you had something like IterableExtensions which adds some higher-order functions
-to the java.util collection library (we will likely ship a library based on google guava).
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-class&nbsp;IterableExtensions&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;public&nbsp;&lt;T&gt;&nbsp;T&nbsp;find(Iterable&lt;T&gt;&nbsp;elements,&nbsp;Function&lt;T,Boolean&gt;&nbsp;func)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br />
-&nbsp;&nbsp;&nbsp;}<br />
-}
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-You declare the dependency like this:
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-inject&nbsp;extension&nbsp;my.common.IterableExtensions;
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-and can then use it as if those functions were members of any <span class="inlinecode">java.lang.Iterable</span>
-:
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-myIterable.find(e|e.name=="Foo")
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-The nice thing with using injection as opposed to static methods is, that in case there is a bug in the extension or it is implemented inefficiently or you 
-just need a different strategy, you can simply exchange the component with another implementation. You do this without modifying the library nor the client code. 
-You&apos;ll only have to change the binding in your guice module. Also this gives you a general hook for any AOP-like thing you would want to do, 
-or allows you to write against an SPI, where the concrete implementation can be provided by a third party.
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-ImportSection&nbsp;:&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;(Import|Injection)*;<br />
-Import&nbsp;:&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;...<br />
-Injection&nbsp;:&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&apos;inject&apos;&nbsp;&apos;extension&apos;?&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;(&apos;@&apos;STRING&nbsp;|&nbsp;&apos;@&apos;TypeReference)?&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;TypeReference&nbsp;(&apos;(&apos;ID&nbsp;(&apos;,&apos;&nbsp;ID)*&apos;)&apos;)?;
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;import&apos;&nbsp;QualifiedName&nbsp;((&apos;.&apos;&apos;*&apos;);
 </p>
 </div>
 </div>
@@ -675,6 +328,420 @@ ClassDeclaration&nbsp;:&nbsp;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&apos;}&apos;<br />
 ;<br />
 Visibility&nbsp;:&nbsp;&apos;public&apos;|&apos;protected&apos;|&apos;private&apos;;
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+</div>
+
+</div>
+
+<a name="inject"></a>
+
+<a name="inject"></a>
+<div class="section" title="Dependency Injection">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+Dependency Injection
+</h2>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Xtend2 has built-in support for dependency injection, which means that declaring dependencies is a first class feature of Xtend2.
+A dependency declaration is done as part of the class body and looks like this:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Inject&nbsp;MyService&nbsp;as&nbsp;myService;
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+This will translate to the following Java field: 
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Inject&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span class="keyword">private</span>&nbsp;MyService&nbsp;myService;
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+Note that the visibiloty is always <span class="inlinecode">private</span>
+, is you want to provide access to an injected object
+you need to write an accessor function. 
+</p>
+
+
+
+
+<a name="inject-6"></a>
+<div class="section" title="Name can be inferred">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Name can be inferred
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+You could leave the name out as by default it will be the lower case version of the simple name of the class.
+That is the following inject declaration would be equvalent with the former.
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Inject&nbsp;MyService;
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+</div>
+
+
+
+<a name="inject-7"></a>
+<div class="section" title="Guice Keys">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Guice Keys
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Xtend2 uses Guice as the dependency injection container, which in turn uses types as keys. Those types can be generified, which
+is why you can write the following in Xtend2.
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Inject&nbsp;HashMap&lt;String,MyType&gt;&nbsp;myCache;
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+Also Guice allows to use annotations to further distinct between different implementations of the same type. This is usually done by using
+the <span class="inlinecode">com.google.inject.name.Named</span>
+ annotation or a custom annotation which is itself annotated with <span class="inlinecode">com.google.inject.BindingAnnotation</span>
+.
+</p>
+
+<p>
+Xtend supports these two variants:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Inject&nbsp;@CustomAnnotation&nbsp;my.Service&nbsp;customService;&nbsp;<br />
+@Inject&nbsp;@"NamedThingy"&nbsp;my.Service&nbsp;namedService;
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+Providers are declared like in plain Guice. That is you wrap your type into <span class="inlinecode">com.google.inject.Provider</span>
+.
+Example:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Inject&nbsp;@CustomAnnotation&nbsp;Provider&lt;Service&gt;&nbsp;customServiceProvider;
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+</div>
+
+
+
+<a name="inject-8"></a>
+<div class="section" title="Injected Extension Methods">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Injected Extension Methods
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+You can make the instance methods provided by the declared dependency available as 
+<a href="02-LanguageConcepts.xdoc.html#extensionMethods">extension
+methods</a>, by adding the keyword <span class="inlinecode">extension</span>
+ after the <span class="inlinecode">@Inject</span>
+ keyword.
+</p>
+
+<p>
+Example:
+</p>
+
+<p>
+Imagine you had something like IterableExtensions which adds some higher-order functions
+to the java.util collection library (we will likely ship a library based on google guava).
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+class&nbsp;IterableExtensions&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;public&nbsp;&lt;T&gt;&nbsp;T&nbsp;find(Iterable&lt;T&gt;&nbsp;elements,&nbsp;Function&lt;T,Boolean&gt;&nbsp;func)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br />
+&nbsp;&nbsp;&nbsp;}<br />
+}
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+You declare the dependency like this:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Inject&nbsp;extension&nbsp;IterableExtensions;
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+and can then use it as if those functions were members of any <span class="inlinecode">java.lang.Iterable</span>
+:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+newArrayList("Foo","Bar","Baz").find(e|e.name=="Foo")
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+The nice thing with using injection as opposed to 
+<a href="02-LanguageConcepts.xdoc.html#staticExtension">static extensions</a> is, that in case there is a bug in the extension or it is implemented inefficiently or you 
+just need a different strategy, you can simply exchange the component with another implementation. You do this without modifying the library nor the client code. 
+You&apos;ll only have to change the binding in your guice module. Also this gives you a general hook for any AOP-like thing you would want to do, 
+or allows you to write against an SPI, where the concrete implementation can be provided by a third party.
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+DeclaredDependency&nbsp;:&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;@Inject&apos;&nbsp;&apos;extension&apos;?&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;(&apos;@&apos;STRING&nbsp;|&nbsp;&apos;@&apos;TypeReference)?&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;TypeReference&nbsp;(&apos;as&apos;&nbsp;ID)?;
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+</div>
+
+</div>
+
+<a name="staticExtension"></a>
+
+<a name="staticExtension"></a>
+<div class="section" title="Static Extensions">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+Static Extensions
+</h2>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Extensions are a concept which allow you to add new members to a closed type hierarchy, for the current
+lexical scope. Imagine you want to add some nice convenience methods to the type 
+<em>java.lang.String</em>
+,
+you wouldn&apos;t be able to do so with Java since the type is final and so on. In Xtend you can have extension
+methods for any type and invoke them using the common member syntax. Static and non static Java methods
+and any Xtend function can be invoked as extensions.
+</p>
+
+<p>
+Static Java methods can be made available as extension methods be adding the following declaration somewhere
+in the class body:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+static&nbsp;extension&nbsp;TypeName
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+So given you have so following Java class :
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;StringUtilities&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;String&nbsp;fistUpperCase(String&nbsp;s)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;....;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+You could use it like this in your Xtend2 class file:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+class&nbsp;MyXtendClass&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;extension&nbsp;StringUtilities<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;mySimpleFunction(String&nbsp;someString)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;someString.firstUpperCase()<br />
+}
+</p>
+</div>
+</div>
+
+
+</p>
+
+
+
+
+<a name="staticExtension-8"></a>
+<div class="section" title="Syntax">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Syntax
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+StaticExtension&nbsp;:&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;static&apos;&nbsp;&apos;extension&apos;&nbsp;QualifiedName;
 </p>
 </div>
 </div>
@@ -1590,7 +1657,15 @@ class&nbsp;Template&nbsp;{<br />
 </td>
 <td>
 
-<span class="inlinecode">node&nbsp;NodeName{}</span>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+node&nbsp;NodeName{}
+</p>
+</div>
+</div>
+
 
 
 </td>
@@ -1696,16 +1771,10 @@ Extension Method Syntax
 
 
 <p>
-Static methods from imports and methods from injected objects where the declaration
-is preceded with 
-<a href="02-LanguageConcepts.xdoc.html#importExtension">the keyword <span class="inlinecode">extension</span>
-</a> can be called using the member syntax.
+Static extensions as well as dependency declarartions marked as <span class="inlinecode">extension</span>
+ can be called using the member syntax.
 This means that a method imported through a static import, like e.g. java.util.Collections.singleton(T) can be invoked using 
-the member syntax.
-</p>
-
-<p>
-Example:
+the member syntax:
 </p>
 
 <p>
@@ -1714,23 +1783,6 @@ Example:
 <div class="incode">
 <p class="code">
 "Foo".singleton
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-is the same as
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-singleton("Foo")
 </p>
 </div>
 </div>
@@ -1748,90 +1800,10 @@ Note that extension methods never shadow a member of the current reference. That
 </p>
 
 <p>
-Static functions as well as extensions in the previous version of Xtend make clients not only depend on a certain signature but on the implementation as 
-it is not possible to exchange the implementation of a static function. That&apos;s where the <span class="inlinecode">extension</span>
- keyword in conjunction with dependency injection 
-comes in. If you have annotated a dependency with the <span class="inlinecode">extension</span>
- keyword, its members become available for extension method syntax.
-</p>
-
-<p>
-Example:
-</p>
-
-<p>
-Imagine the following Java interface
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-interface&nbsp;MyExtensions&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;getComputedProperty(SomeType&nbsp;type);<br />
-}
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-With Java you would have to call this method on an instance of MyExtensions like so:
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-myExtensions.getComputedProperty(someType)
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-In Xtend2 you can have the instance injected like in Java:
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-inject&nbsp;extension&nbsp;MyExtensions;
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-But instead of using the long expression known from Java (which would also work) you are able to use the extension method syntax:
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-someType.computedProperty
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-It will statically bind to the right method and even more important it doesn&apos;t bind to a specific implementation but just to the signature.
-The implementation can be provided through dependency injection.
+For a given receiver type X all extension methods on the scope where the first argument is compatible
+with X will be put into the scope. If of all these methods two or more have the same signature (the type
+of the first argument, i.e. the receiver type, is ignored) they will
+be excluded.
 </p>
 
 
