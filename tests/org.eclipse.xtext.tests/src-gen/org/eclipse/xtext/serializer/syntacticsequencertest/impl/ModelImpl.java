@@ -19,6 +19,7 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.Exp1;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp2;
 import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryKeywords;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Model;
+import org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference;
 import org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage;
 
 /**
@@ -32,6 +33,7 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.Syntacticsequencertes
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.ModelImpl#getX2 <em>X2</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.ModelImpl#getX3 <em>X3</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.ModelImpl#getX4 <em>X4</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.ModelImpl#getX5 <em>X5</em>}</li>
  * </ul>
  * </p>
  *
@@ -78,6 +80,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected Exp2 x4;
+
+  /**
+   * The cached value of the '{@link #getX5() <em>X5</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX5()
+   * @generated
+   * @ordered
+   */
+  protected SingleCrossReference x5;
 
   /**
    * <!-- begin-user-doc -->
@@ -297,6 +309,54 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public SingleCrossReference getX5()
+  {
+    return x5;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX5(SingleCrossReference newX5, NotificationChain msgs)
+  {
+    SingleCrossReference oldX5 = x5;
+    x5 = newX5;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SyntacticsequencertestPackage.MODEL__X5, oldX5, newX5);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX5(SingleCrossReference newX5)
+  {
+    if (newX5 != x5)
+    {
+      NotificationChain msgs = null;
+      if (x5 != null)
+        msgs = ((InternalEObject)x5).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SyntacticsequencertestPackage.MODEL__X5, null, msgs);
+      if (newX5 != null)
+        msgs = ((InternalEObject)newX5).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SyntacticsequencertestPackage.MODEL__X5, null, msgs);
+      msgs = basicSetX5(newX5, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SyntacticsequencertestPackage.MODEL__X5, newX5, newX5));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -310,6 +370,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return basicSetX3(null, msgs);
       case SyntacticsequencertestPackage.MODEL__X4:
         return basicSetX4(null, msgs);
+      case SyntacticsequencertestPackage.MODEL__X5:
+        return basicSetX5(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -332,6 +394,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getX3();
       case SyntacticsequencertestPackage.MODEL__X4:
         return getX4();
+      case SyntacticsequencertestPackage.MODEL__X5:
+        return getX5();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -357,6 +421,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return;
       case SyntacticsequencertestPackage.MODEL__X4:
         setX4((Exp2)newValue);
+        return;
+      case SyntacticsequencertestPackage.MODEL__X5:
+        setX5((SingleCrossReference)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -384,6 +451,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case SyntacticsequencertestPackage.MODEL__X4:
         setX4((Exp2)null);
         return;
+      case SyntacticsequencertestPackage.MODEL__X5:
+        setX5((SingleCrossReference)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -406,6 +476,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return x3 != null;
       case SyntacticsequencertestPackage.MODEL__X4:
         return x4 != null;
+      case SyntacticsequencertestPackage.MODEL__X5:
+        return x5 != null;
     }
     return super.eIsSet(featureID);
   }

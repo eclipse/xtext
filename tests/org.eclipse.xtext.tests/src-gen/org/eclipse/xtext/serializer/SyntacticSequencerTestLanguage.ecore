@@ -12,6 +12,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="x4" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp2"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x5" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//SingleCrossReference"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MandatoryKeywords">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -21,6 +23,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="Exp0"/>
   <eClassifiers xsi:type="ecore:EClass" name="Exp1"/>
   <eClassifiers xsi:type="ecore:EClass" name="Exp2"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleCrossReference">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//SingleCrossReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref2" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//SingleCrossReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref3" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//SingleCrossReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref4" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//SingleCrossReference"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Add0" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp0">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp0"
         containment="true"/>

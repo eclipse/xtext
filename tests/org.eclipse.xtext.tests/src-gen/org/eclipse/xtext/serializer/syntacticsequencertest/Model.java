@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX2 <em>X2</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX3 <em>X3</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX4 <em>X4</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX5 <em>X5</em>}</li>
  * </ul>
  * </p>
  *
@@ -131,5 +132,31 @@ public interface Model extends EObject
    * @generated
    */
   void setX4(Exp2 value);
+
+  /**
+   * Returns the value of the '<em><b>X5</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X5</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X5</em>' containment reference.
+   * @see #setX5(SingleCrossReference)
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getModel_X5()
+   * @model containment="true"
+   * @generated
+   */
+  SingleCrossReference getX5();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX5 <em>X5</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X5</em>' containment reference.
+   * @see #getX5()
+   * @generated
+   */
+  void setX5(SingleCrossReference value);
 
 } // Model

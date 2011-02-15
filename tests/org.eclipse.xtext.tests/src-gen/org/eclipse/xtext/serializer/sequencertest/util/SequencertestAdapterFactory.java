@@ -198,6 +198,11 @@ public class SequencertestAdapterFactory extends AdapterFactoryImpl
         return createDependentAlternative2Adapter();
       }
       @Override
+      public Adapter caseOptional(Optional object)
+      {
+        return createOptionalAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -575,6 +580,21 @@ public class SequencertestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createDependentAlternative2Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.Optional <em>Optional</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.Optional
+   * @generated
+   */
+  public Adapter createOptionalAdapter()
   {
     return null;
   }

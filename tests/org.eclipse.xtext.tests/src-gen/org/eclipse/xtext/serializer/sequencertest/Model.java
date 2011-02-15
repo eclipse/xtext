@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX15 <em>X15</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX19 <em>X19</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX20 <em>X20</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.Model#getX21 <em>X21</em>}</li>
  * </ul>
  * </p>
  *
@@ -482,5 +483,31 @@ public interface Model extends EObject
    * @generated
    */
   void setX20(DependentAlternative2 value);
+
+  /**
+   * Returns the value of the '<em><b>X21</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X21</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X21</em>' containment reference.
+   * @see #setX21(Optional)
+   * @see org.eclipse.xtext.serializer.sequencertest.SequencertestPackage#getModel_X21()
+   * @model containment="true"
+   * @generated
+   */
+  Optional getX21();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX21 <em>X21</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X21</em>' containment reference.
+   * @see #getX21()
+   * @generated
+   */
+  void setX21(Optional value);
 
 } // Model

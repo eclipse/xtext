@@ -60,19 +60,21 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cX19DependentAlternative1ParserRuleCall_18_0 = (RuleCall)cX19Assignment_18.eContents().get(0);
 		private final Assignment cX20Assignment_19 = (Assignment)cAlternatives.eContents().get(19);
 		private final RuleCall cX20DependentAlternative2ParserRuleCall_19_0 = (RuleCall)cX20Assignment_19.eContents().get(0);
+		private final Assignment cX21Assignment_20 = (Assignment)cAlternatives.eContents().get(20);
+		private final RuleCall cX21OptionalParserRuleCall_20_0 = (RuleCall)cX21Assignment_20.eContents().get(0);
 		
 		//Model:
 		//	x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities |
 		//	x5=AlternativeMultiplicities | x6=List1 | x7=List2 | x8=AltList1 | x9=AltList2 | x10=SingleKeywords |
 		//	x11=SingleKeywordsOrID | x12=SingleTerminals | x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals |
 		//	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference | x19=DependentAlternative1 |
-		//	x20=DependentAlternative2;
+		//	x20=DependentAlternative2 | x21=Optional;
 		public ParserRule getRule() { return rule; }
 
 		//x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities | x5=AlternativeMultiplicities
 		//| x6=List1 | x7=List2 | x8=AltList1 | x9=AltList2 | x10=SingleKeywords | x11=SingleKeywordsOrID | x12=SingleTerminals |
 		//x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals | x13=SingleEnum | x14=SingleCrossReference |
-		//x15=SingleContainmentReference | x19=DependentAlternative1 | x20=DependentAlternative2
+		//x15=SingleContainmentReference | x19=DependentAlternative1 | x20=DependentAlternative2 | x21=Optional
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//x1=SimpleGroup
@@ -194,6 +196,12 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 		//DependentAlternative2
 		public RuleCall getX20DependentAlternative2ParserRuleCall_19_0() { return cX20DependentAlternative2ParserRuleCall_19_0; }
+
+		//x21=Optional
+		public Assignment getX21Assignment_20() { return cX21Assignment_20; }
+
+		//Optional
+		public RuleCall getX21OptionalParserRuleCall_20_0() { return cX21OptionalParserRuleCall_20_0; }
 	}
 
 	public class SimpleGroupElements extends AbstractParserRuleElementFinder {
@@ -1321,6 +1329,50 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"kw1"
 		public Keyword getFlagKw1Keyword_1_1_1_0() { return cFlagKw1Keyword_1_1_1_0; }
 	}
+
+	public class OptionalElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Optional");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitTwoDigitOneKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cInt0Assignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cInt0INTTerminalRuleCall_1_0 = (RuleCall)cInt0Assignment_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Assignment cInt1Assignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final RuleCall cInt1INTTerminalRuleCall_2_0_0 = (RuleCall)cInt1Assignment_2_0.eContents().get(0);
+		private final Assignment cInt2Assignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cInt2INTTerminalRuleCall_2_1_0 = (RuleCall)cInt2Assignment_2_1.eContents().get(0);
+		
+		//Optional:
+		//	"#21" int0=INT (int1=INT int2=INT)?;
+		public ParserRule getRule() { return rule; }
+
+		//"#21" int0=INT (int1=INT int2=INT)?
+		public Group getGroup() { return cGroup; }
+
+		//"#21"
+		public Keyword getNumberSignDigitTwoDigitOneKeyword_0() { return cNumberSignDigitTwoDigitOneKeyword_0; }
+
+		//int0=INT
+		public Assignment getInt0Assignment_1() { return cInt0Assignment_1; }
+
+		//INT
+		public RuleCall getInt0INTTerminalRuleCall_1_0() { return cInt0INTTerminalRuleCall_1_0; }
+
+		//(int1=INT int2=INT)?
+		public Group getGroup_2() { return cGroup_2; }
+
+		//int1=INT
+		public Assignment getInt1Assignment_2_0() { return cInt1Assignment_2_0; }
+
+		//INT
+		public RuleCall getInt1INTTerminalRuleCall_2_0_0() { return cInt1INTTerminalRuleCall_2_0_0; }
+
+		//int2=INT
+		public Assignment getInt2Assignment_2_1() { return cInt2Assignment_2_1; }
+
+		//INT
+		public RuleCall getInt2INTTerminalRuleCall_2_1_0() { return cInt2INTTerminalRuleCall_2_1_0; }
+	}
 	
 	
 	public class DefEnum1Elements extends AbstractEnumRuleElementFinder {
@@ -1401,6 +1453,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private MultiTerminalsElements pMultiTerminals;
 	private DependentAlternative1Elements pDependentAlternative1;
 	private DependentAlternative2Elements pDependentAlternative2;
+	private OptionalElements pOptional;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -1428,7 +1481,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	x5=AlternativeMultiplicities | x6=List1 | x7=List2 | x8=AltList1 | x9=AltList2 | x10=SingleKeywords |
 	//	x11=SingleKeywordsOrID | x12=SingleTerminals | x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals |
 	//	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference | x19=DependentAlternative1 |
-	//	x20=DependentAlternative2;
+	//	x20=DependentAlternative2 | x21=Optional;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -1714,6 +1767,16 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	public ParserRule getDependentAlternative2Rule() {
 		return getDependentAlternative2Access().getRule();
+	}
+
+	//Optional:
+	//	"#21" int0=INT (int1=INT int2=INT)?;
+	public OptionalElements getOptionalAccess() {
+		return (pOptional != null) ? pOptional : (pOptional = new OptionalElements());
+	}
+	
+	public ParserRule getOptionalRule() {
+		return getOptionalAccess().getRule();
 	}
 
 	//terminal ID:

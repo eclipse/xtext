@@ -21,6 +21,7 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.Exp2;
 import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryKeywords;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Model;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Mult2;
+import org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference;
 import org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestFactory;
 import org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Val0;
@@ -69,6 +70,13 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * @generated
    */
   private EClass exp2EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass singleCrossReferenceEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -237,6 +245,16 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getModel_X5()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getMandatoryKeywords()
   {
     return mandatoryKeywordsEClass;
@@ -300,6 +318,66 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
   public EClass getExp2()
   {
     return exp2EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getSingleCrossReference()
+  {
+    return singleCrossReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getSingleCrossReference_Name()
+  {
+    return (EAttribute)singleCrossReferenceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSingleCrossReference_Ref1()
+  {
+    return (EReference)singleCrossReferenceEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSingleCrossReference_Ref2()
+  {
+    return (EReference)singleCrossReferenceEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSingleCrossReference_Ref3()
+  {
+    return (EReference)singleCrossReferenceEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSingleCrossReference_Ref4()
+  {
+    return (EReference)singleCrossReferenceEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -517,6 +595,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     createEReference(modelEClass, MODEL__X2);
     createEReference(modelEClass, MODEL__X3);
     createEReference(modelEClass, MODEL__X4);
+    createEReference(modelEClass, MODEL__X5);
 
     mandatoryKeywordsEClass = createEClass(MANDATORY_KEYWORDS);
     createEAttribute(mandatoryKeywordsEClass, MANDATORY_KEYWORDS__VAL1);
@@ -528,6 +607,13 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     exp1EClass = createEClass(EXP1);
 
     exp2EClass = createEClass(EXP2);
+
+    singleCrossReferenceEClass = createEClass(SINGLE_CROSS_REFERENCE);
+    createEAttribute(singleCrossReferenceEClass, SINGLE_CROSS_REFERENCE__NAME);
+    createEReference(singleCrossReferenceEClass, SINGLE_CROSS_REFERENCE__REF1);
+    createEReference(singleCrossReferenceEClass, SINGLE_CROSS_REFERENCE__REF2);
+    createEReference(singleCrossReferenceEClass, SINGLE_CROSS_REFERENCE__REF3);
+    createEReference(singleCrossReferenceEClass, SINGLE_CROSS_REFERENCE__REF4);
 
     add0EClass = createEClass(ADD0);
     createEReference(add0EClass, ADD0__LEFT);
@@ -598,6 +684,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     initEReference(getModel_X2(), this.getExp0(), null, "x2", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X3(), this.getExp1(), null, "x3", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X4(), this.getExp2(), null, "x4", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X5(), this.getSingleCrossReference(), null, "x5", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(mandatoryKeywordsEClass, MandatoryKeywords.class, "MandatoryKeywords", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMandatoryKeywords_Val1(), ecorePackage.getEString(), "val1", null, 0, 1, MandatoryKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -609,6 +696,13 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     initEClass(exp1EClass, Exp1.class, "Exp1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(exp2EClass, Exp2.class, "Exp2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(singleCrossReferenceEClass, SingleCrossReference.class, "SingleCrossReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSingleCrossReference_Name(), ecorePackage.getEString(), "name", null, 0, 1, SingleCrossReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSingleCrossReference_Ref1(), this.getSingleCrossReference(), null, "ref1", null, 0, 1, SingleCrossReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSingleCrossReference_Ref2(), this.getSingleCrossReference(), null, "ref2", null, 0, 1, SingleCrossReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSingleCrossReference_Ref3(), this.getSingleCrossReference(), null, "ref3", null, 0, 1, SingleCrossReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSingleCrossReference_Ref4(), this.getSingleCrossReference(), null, "ref4", null, 0, 1, SingleCrossReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(add0EClass, Add0.class, "Add0", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAdd0_Left(), this.getExp0(), null, "left", null, 0, 1, Add0.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -38,6 +38,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="x20" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SequencerTestLanguage.ecore#//DependentAlternative2"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x21" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SequencerTestLanguage.ecore#//Optional"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SimpleGroup">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -154,5 +156,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="flag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Optional">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="int0" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="int1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="int2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
 </ecore:EPackage>

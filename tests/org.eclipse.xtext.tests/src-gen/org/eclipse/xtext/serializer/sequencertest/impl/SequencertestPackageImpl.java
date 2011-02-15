@@ -26,6 +26,7 @@ import org.eclipse.xtext.serializer.sequencertest.Model;
 import org.eclipse.xtext.serializer.sequencertest.MultiKeywords;
 import org.eclipse.xtext.serializer.sequencertest.MultiKeywordsOrID;
 import org.eclipse.xtext.serializer.sequencertest.MultiTerminals;
+import org.eclipse.xtext.serializer.sequencertest.Optional;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestFactory;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
 import org.eclipse.xtext.serializer.sequencertest.SimpleAlternative;
@@ -216,6 +217,13 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * @generated
    */
   private EClass dependentAlternative2EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass optionalEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -465,6 +473,16 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
   public EReference getModel_X20()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(16);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X21()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(17);
   }
 
   /**
@@ -1172,6 +1190,46 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getOptional()
+  {
+    return optionalEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getOptional_Int0()
+  {
+    return (EAttribute)optionalEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getOptional_Int1()
+  {
+    return (EAttribute)optionalEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getOptional_Int2()
+  {
+    return (EAttribute)optionalEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getDefEnum()
   {
     return defEnumEEnum;
@@ -1225,6 +1283,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     createEReference(modelEClass, MODEL__X15);
     createEReference(modelEClass, MODEL__X19);
     createEReference(modelEClass, MODEL__X20);
+    createEReference(modelEClass, MODEL__X21);
 
     simpleGroupEClass = createEClass(SIMPLE_GROUP);
     createEAttribute(simpleGroupEClass, SIMPLE_GROUP__VAL1);
@@ -1319,6 +1378,11 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     createEAttribute(dependentAlternative2EClass, DEPENDENT_ALTERNATIVE2__VAL);
     createEAttribute(dependentAlternative2EClass, DEPENDENT_ALTERNATIVE2__FLAG);
 
+    optionalEClass = createEClass(OPTIONAL);
+    createEAttribute(optionalEClass, OPTIONAL__INT0);
+    createEAttribute(optionalEClass, OPTIONAL__INT1);
+    createEAttribute(optionalEClass, OPTIONAL__INT2);
+
     // Create enums
     defEnumEEnum = createEEnum(DEF_ENUM);
   }
@@ -1372,6 +1436,7 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     initEReference(getModel_X15(), this.getSingleContainmentReference(), null, "x15", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X19(), this.getDependentAlternative1(), null, "x19", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X20(), this.getDependentAlternative2(), null, "x20", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X21(), this.getOptional(), null, "x21", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(simpleGroupEClass, SimpleGroup.class, "SimpleGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSimpleGroup_Val1(), ecorePackage.getEString(), "val1", null, 0, 1, SimpleGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1465,6 +1530,11 @@ public class SequencertestPackageImpl extends EPackageImpl implements Sequencert
     initEClass(dependentAlternative2EClass, DependentAlternative2.class, "DependentAlternative2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getDependentAlternative2_Val(), ecorePackage.getEString(), "val", null, 0, -1, DependentAlternative2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getDependentAlternative2_Flag(), ecorePackage.getEBoolean(), "flag", null, 0, 1, DependentAlternative2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(optionalEClass, Optional.class, "Optional", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getOptional_Int0(), ecorePackage.getEInt(), "int0", null, 0, 1, Optional.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getOptional_Int1(), ecorePackage.getEInt(), "int1", null, 0, 1, Optional.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getOptional_Int2(), ecorePackage.getEInt(), "int2", null, 0, 1, Optional.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(defEnumEEnum, DefEnum.class, "DefEnum");

@@ -72,6 +72,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
       case SyntacticsequencertestPackage.EXP0: return createExp0();
       case SyntacticsequencertestPackage.EXP1: return createExp1();
       case SyntacticsequencertestPackage.EXP2: return createExp2();
+      case SyntacticsequencertestPackage.SINGLE_CROSS_REFERENCE: return createSingleCrossReference();
       case SyntacticsequencertestPackage.ADD0: return createAdd0();
       case SyntacticsequencertestPackage.VAL0: return createVal0();
       case SyntacticsequencertestPackage.ADD1: return createAdd1();
@@ -137,6 +138,17 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
   {
     Exp2Impl exp2 = new Exp2Impl();
     return exp2;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SingleCrossReference createSingleCrossReference()
+  {
+    SingleCrossReferenceImpl singleCrossReference = new SingleCrossReferenceImpl();
+    return singleCrossReference;
   }
 
   /**

@@ -263,6 +263,13 @@ public class SequencertestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case SequencertestPackage.OPTIONAL:
+      {
+        Optional optional = (Optional)theEObject;
+        T result = caseOptional(optional);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -647,6 +654,22 @@ public class SequencertestSwitch<T>
    * @generated
    */
   public T caseDependentAlternative2(DependentAlternative2 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Optional</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Optional</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseOptional(Optional object)
   {
     return null;
   }

@@ -55,6 +55,7 @@ protected class ThisRootNode extends RootToken {
 			case 21: return new MultiTerminals_Group(this, this, 21, inst);
 			case 22: return new DependentAlternative1_Group(this, this, 22, inst);
 			case 23: return new DependentAlternative2_Group(this, this, 23, inst);
+			case 24: return new Optional_Group(this, this, 24, inst);
 			default: return null;
 		}	
 	}	
@@ -68,14 +69,14 @@ protected class ThisRootNode extends RootToken {
  * 	x5=AlternativeMultiplicities | x6=List1 | x7=List2 | x8=AltList1 | x9=AltList2 | x10=SingleKeywords |
  * 	x11=SingleKeywordsOrID | x12=SingleTerminals | x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals |
  * 	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference | x19=DependentAlternative1 |
- * 	x20=DependentAlternative2;
+ * 	x20=DependentAlternative2 | x21=Optional;
  *
  **/
 
 // x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities | x5=AlternativeMultiplicities
 // | x6=List1 | x7=List2 | x8=AltList1 | x9=AltList2 | x10=SingleKeywords | x11=SingleKeywordsOrID | x12=SingleTerminals |
 // x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals | x13=SingleEnum | x14=SingleCrossReference |
-// x15=SingleContainmentReference | x19=DependentAlternative1 | x20=DependentAlternative2
+// x15=SingleContainmentReference | x19=DependentAlternative1 | x20=DependentAlternative2 | x21=Optional
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -110,6 +111,7 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 17: return new Model_X15Assignment_17(lastRuleCallOrigin, this, 17, inst);
 			case 18: return new Model_X19Assignment_18(lastRuleCallOrigin, this, 18, inst);
 			case 19: return new Model_X20Assignment_19(lastRuleCallOrigin, this, 19, inst);
+			case 20: return new Model_X21Assignment_20(lastRuleCallOrigin, this, 20, inst);
 			default: return null;
 		}	
 	}
@@ -1007,6 +1009,51 @@ protected class Model_X20Assignment_19 extends AssignmentToken  {
 			if(param.isInstanceOf(grammarAccess.getDependentAlternative2Rule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getModelAccess().getX20DependentAlternative2ParserRuleCall_19_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x21=Optional
+protected class Model_X21Assignment_20 extends AssignmentToken  {
+	
+	public Model_X21Assignment_20(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX21Assignment_20();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Optional_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("x21",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x21");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getOptionalRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getModelAccess().getX21OptionalParserRuleCall_20_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -5520,5 +5567,192 @@ protected class DependentAlternative2_FlagAssignment_1_1_1 extends AssignmentTok
 
 
 /************ end Rule DependentAlternative2 ****************/
+
+
+/************ begin Rule Optional ****************
+ *
+ * Optional:
+ * 	"#21" int0=INT (int1=INT int2=INT)?;
+ *
+ **/
+
+// "#21" int0=INT (int1=INT int2=INT)?
+protected class Optional_Group extends GroupToken {
+	
+	public Optional_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getOptionalAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Optional_Group_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Optional_Int0Assignment_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getOptionalRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "#21"
+protected class Optional_NumberSignDigitTwoDigitOneKeyword_0 extends KeywordToken  {
+	
+	public Optional_NumberSignDigitTwoDigitOneKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getOptionalAccess().getNumberSignDigitTwoDigitOneKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// int0=INT
+protected class Optional_Int0Assignment_1 extends AssignmentToken  {
+	
+	public Optional_Int0Assignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getOptionalAccess().getInt0Assignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Optional_NumberSignDigitTwoDigitOneKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("int0",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("int0");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getOptionalAccess().getInt0INTTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getOptionalAccess().getInt0INTTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// (int1=INT int2=INT)?
+protected class Optional_Group_2 extends GroupToken {
+	
+	public Optional_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getOptionalAccess().getGroup_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Optional_Int2Assignment_2_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// int1=INT
+protected class Optional_Int1Assignment_2_0 extends AssignmentToken  {
+	
+	public Optional_Int1Assignment_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getOptionalAccess().getInt1Assignment_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Optional_Int0Assignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("int1",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("int1");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getOptionalAccess().getInt1INTTerminalRuleCall_2_0_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getOptionalAccess().getInt1INTTerminalRuleCall_2_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// int2=INT
+protected class Optional_Int2Assignment_2_1 extends AssignmentToken  {
+	
+	public Optional_Int2Assignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getOptionalAccess().getInt2Assignment_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Optional_Int1Assignment_2_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("int2",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("int2");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getOptionalAccess().getInt2INTTerminalRuleCall_2_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getOptionalAccess().getInt2INTTerminalRuleCall_2_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+
+/************ end Rule Optional ****************/
 
 }

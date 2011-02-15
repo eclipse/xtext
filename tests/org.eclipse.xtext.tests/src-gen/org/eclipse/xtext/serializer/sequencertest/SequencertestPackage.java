@@ -224,13 +224,22 @@ public interface SequencertestPackage extends EPackage
   int MODEL__X20 = 16;
 
   /**
+   * The feature id for the '<em><b>X21</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X21 = 17;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 17;
+  int MODEL_FEATURE_COUNT = 18;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -1093,6 +1102,52 @@ public interface SequencertestPackage extends EPackage
   int DEPENDENT_ALTERNATIVE2_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.OptionalImpl <em>Optional</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.OptionalImpl
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getOptional()
+   * @generated
+   */
+  int OPTIONAL = 24;
+
+  /**
+   * The feature id for the '<em><b>Int0</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPTIONAL__INT0 = 0;
+
+  /**
+   * The feature id for the '<em><b>Int1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPTIONAL__INT1 = 1;
+
+  /**
+   * The feature id for the '<em><b>Int2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPTIONAL__INT2 = 2;
+
+  /**
+   * The number of structural features of the '<em>Optional</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPTIONAL_FEATURE_COUNT = 3;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1100,7 +1155,7 @@ public interface SequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getDefEnum()
    * @generated
    */
-  int DEF_ENUM = 24;
+  int DEF_ENUM = 25;
 
 
   /**
@@ -1299,6 +1354,17 @@ public interface SequencertestPackage extends EPackage
    * @generated
    */
   EReference getModel_X20();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX21 <em>X21</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X21</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Model#getX21()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X21();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.SimpleGroup <em>Simple Group</em>}'.
@@ -2048,6 +2114,49 @@ public interface SequencertestPackage extends EPackage
   EAttribute getDependentAlternative2_Flag();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.Optional <em>Optional</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Optional</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Optional
+   * @generated
+   */
+  EClass getOptional();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.Optional#getInt0 <em>Int0</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Int0</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Optional#getInt0()
+   * @see #getOptional()
+   * @generated
+   */
+  EAttribute getOptional_Int0();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.Optional#getInt1 <em>Int1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Int1</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Optional#getInt1()
+   * @see #getOptional()
+   * @generated
+   */
+  EAttribute getOptional_Int1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.sequencertest.Optional#getInt2 <em>Int2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Int2</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Optional#getInt2()
+   * @see #getOptional()
+   * @generated
+   */
+  EAttribute getOptional_Int2();
+
+  /**
    * Returns the meta object for enum '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2225,6 +2334,14 @@ public interface SequencertestPackage extends EPackage
      * @generated
      */
     EReference MODEL__X20 = eINSTANCE.getModel_X20();
+
+    /**
+     * The meta object literal for the '<em><b>X21</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X21 = eINSTANCE.getModel_X21();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -2831,6 +2948,40 @@ public interface SequencertestPackage extends EPackage
      * @generated
      */
     EAttribute DEPENDENT_ALTERNATIVE2__FLAG = eINSTANCE.getDependentAlternative2_Flag();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.OptionalImpl <em>Optional</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.OptionalImpl
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getOptional()
+     * @generated
+     */
+    EClass OPTIONAL = eINSTANCE.getOptional();
+
+    /**
+     * The meta object literal for the '<em><b>Int0</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute OPTIONAL__INT0 = eINSTANCE.getOptional_Int0();
+
+    /**
+     * The meta object literal for the '<em><b>Int1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute OPTIONAL__INT1 = eINSTANCE.getOptional_Int1();
+
+    /**
+     * The meta object literal for the '<em><b>Int2</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute OPTIONAL__INT2 = eINSTANCE.getOptional_Int2();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}' enum.

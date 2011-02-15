@@ -457,6 +457,25 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX21OptionalParserRuleCall_20_0()); 
+	    }
+		lv_x21_20_0=ruleOptional		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x21",
+        		lv_x21_20_0, 
+        		"Optional");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 ))
 ;
 
@@ -2389,6 +2408,85 @@ ruleDependentAlternative2 returns [EObject current=null]
 
 )
 ))))
+;
+
+
+
+
+
+// Entry rule entryRuleOptional
+entryRuleOptional returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getOptionalRule()); }
+	 iv_ruleOptional=ruleOptional 
+	 { $current=$iv_ruleOptional.current; } 
+	 EOF 
+;
+
+// Rule Optional
+ruleOptional returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#21' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getOptionalAccess().getNumberSignDigitTwoDigitOneKeyword_0());
+    }
+(
+(
+		lv_int0_1_0=RULE_INT
+		{
+			newLeafNode(lv_int0_1_0, grammarAccess.getOptionalAccess().getInt0INTTerminalRuleCall_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getOptionalRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"int0",
+        		lv_int0_1_0, 
+        		"INT");
+	    }
+
+)
+)((
+(
+		lv_int1_2_0=RULE_INT
+		{
+			newLeafNode(lv_int1_2_0, grammarAccess.getOptionalAccess().getInt1INTTerminalRuleCall_2_0_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getOptionalRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"int1",
+        		lv_int1_2_0, 
+        		"INT");
+	    }
+
+)
+)(
+(
+		lv_int2_3_0=RULE_INT
+		{
+			newLeafNode(lv_int2_3_0, grammarAccess.getOptionalAccess().getInt2INTTerminalRuleCall_2_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getOptionalRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"int2",
+        		lv_int2_3_0, 
+        		"INT");
+	    }
+
+)
+))?)
 ;
 
 

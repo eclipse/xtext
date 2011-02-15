@@ -106,13 +106,22 @@ public interface SyntacticsequencertestPackage extends EPackage
   int MODEL__X4 = 3;
 
   /**
+   * The feature id for the '<em><b>X5</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X5 = 4;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 4;
+  int MODEL_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryKeywordsImpl <em>Mandatory Keywords</em>}' class.
@@ -218,6 +227,70 @@ public interface SyntacticsequencertestPackage extends EPackage
   int EXP2_FEATURE_COUNT = 0;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.SingleCrossReferenceImpl <em>Single Cross Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SingleCrossReferenceImpl
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getSingleCrossReference()
+   * @generated
+   */
+  int SINGLE_CROSS_REFERENCE = 5;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SINGLE_CROSS_REFERENCE__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Ref1</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SINGLE_CROSS_REFERENCE__REF1 = 1;
+
+  /**
+   * The feature id for the '<em><b>Ref2</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SINGLE_CROSS_REFERENCE__REF2 = 2;
+
+  /**
+   * The feature id for the '<em><b>Ref3</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SINGLE_CROSS_REFERENCE__REF3 = 3;
+
+  /**
+   * The feature id for the '<em><b>Ref4</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SINGLE_CROSS_REFERENCE__REF4 = 4;
+
+  /**
+   * The number of structural features of the '<em>Single Cross Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SINGLE_CROSS_REFERENCE_FEATURE_COUNT = 5;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.Add0Impl <em>Add0</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -225,7 +298,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd0()
    * @generated
    */
-  int ADD0 = 5;
+  int ADD0 = 6;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -262,7 +335,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal0()
    * @generated
    */
-  int VAL0 = 6;
+  int VAL0 = 7;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -290,7 +363,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd1()
    * @generated
    */
-  int ADD1 = 7;
+  int ADD1 = 8;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -327,7 +400,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal1()
    * @generated
    */
-  int VAL1 = 8;
+  int VAL1 = 9;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -355,7 +428,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd2()
    * @generated
    */
-  int ADD2 = 9;
+  int ADD2 = 10;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -392,7 +465,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getMult2()
    * @generated
    */
-  int MULT2 = 10;
+  int MULT2 = 11;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -429,7 +502,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal2()
    * @generated
    */
-  int VAL2 = 11;
+  int VAL2 = 12;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -505,6 +578,17 @@ public interface SyntacticsequencertestPackage extends EPackage
   EReference getModel_X4();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX5 <em>X5</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X5</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX5()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X5();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryKeywords <em>Mandatory Keywords</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -576,6 +660,71 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @generated
    */
   EClass getExp2();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference <em>Single Cross Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Single Cross Reference</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference
+   * @generated
+   */
+  EClass getSingleCrossReference();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference#getName()
+   * @see #getSingleCrossReference()
+   * @generated
+   */
+  EAttribute getSingleCrossReference_Name();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference#getRef1 <em>Ref1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Ref1</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference#getRef1()
+   * @see #getSingleCrossReference()
+   * @generated
+   */
+  EReference getSingleCrossReference_Ref1();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference#getRef2 <em>Ref2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Ref2</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference#getRef2()
+   * @see #getSingleCrossReference()
+   * @generated
+   */
+  EReference getSingleCrossReference_Ref2();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference#getRef3 <em>Ref3</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Ref3</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference#getRef3()
+   * @see #getSingleCrossReference()
+   * @generated
+   */
+  EReference getSingleCrossReference_Ref3();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference#getRef4 <em>Ref4</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Ref4</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference#getRef4()
+   * @see #getSingleCrossReference()
+   * @generated
+   */
+  EReference getSingleCrossReference_Ref4();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Add0 <em>Add0</em>}'.
@@ -834,6 +983,14 @@ public interface SyntacticsequencertestPackage extends EPackage
     EReference MODEL__X4 = eINSTANCE.getModel_X4();
 
     /**
+     * The meta object literal for the '<em><b>X5</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X5 = eINSTANCE.getModel_X5();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryKeywordsImpl <em>Mandatory Keywords</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -896,6 +1053,56 @@ public interface SyntacticsequencertestPackage extends EPackage
      * @generated
      */
     EClass EXP2 = eINSTANCE.getExp2();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.SingleCrossReferenceImpl <em>Single Cross Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SingleCrossReferenceImpl
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getSingleCrossReference()
+     * @generated
+     */
+    EClass SINGLE_CROSS_REFERENCE = eINSTANCE.getSingleCrossReference();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SINGLE_CROSS_REFERENCE__NAME = eINSTANCE.getSingleCrossReference_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Ref1</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SINGLE_CROSS_REFERENCE__REF1 = eINSTANCE.getSingleCrossReference_Ref1();
+
+    /**
+     * The meta object literal for the '<em><b>Ref2</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SINGLE_CROSS_REFERENCE__REF2 = eINSTANCE.getSingleCrossReference_Ref2();
+
+    /**
+     * The meta object literal for the '<em><b>Ref3</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SINGLE_CROSS_REFERENCE__REF3 = eINSTANCE.getSingleCrossReference_Ref3();
+
+    /**
+     * The meta object literal for the '<em><b>Ref4</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SINGLE_CROSS_REFERENCE__REF4 = eINSTANCE.getSingleCrossReference_Ref4();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.Add0Impl <em>Add0</em>}' class.

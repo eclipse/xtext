@@ -152,6 +152,25 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX5SingleCrossReferenceParserRuleCall_4_0()); 
+	    }
+		lv_x5_4_0=ruleSingleCrossReference		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x5",
+        		lv_x5_4_0, 
+        		"SingleCrossReference");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 ))
 ;
 
@@ -758,6 +777,167 @@ rulePrim2 returns [EObject current=null]
 
 
 
+
+// Entry rule entryRuleDatatypeID
+entryRuleDatatypeID returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getDatatypeIDRule()); } 
+	 iv_ruleDatatypeID=ruleDatatypeID 
+	 { $current=$iv_ruleDatatypeID.current.getText(); }  
+	 EOF 
+;
+
+// Rule DatatypeID
+ruleDatatypeID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+    this_ID_0=RULE_ID    {
+		$current.merge(this_ID_0);
+    }
+
+    { 
+    newLeafNode(this_ID_0, grammarAccess.getDatatypeIDAccess().getIDTerminalRuleCall()); 
+    }
+
+    ;
+
+
+
+
+
+// Entry rule entryRuleSingleCrossReference
+entryRuleSingleCrossReference returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getSingleCrossReferenceRule()); }
+	 iv_ruleSingleCrossReference=ruleSingleCrossReference 
+	 { $current=$iv_ruleSingleCrossReference.current; } 
+	 EOF 
+;
+
+// Rule SingleCrossReference
+ruleSingleCrossReference returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#5' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getSingleCrossReferenceAccess().getNumberSignDigitFiveKeyword_0());
+    }
+(
+(
+(
+		lv_name_1_1=RULE_TERMINALID
+		{
+			newLeafNode(lv_name_1_1, grammarAccess.getSingleCrossReferenceAccess().getNameTerminalIDTerminalRuleCall_1_0_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getSingleCrossReferenceRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_1_1, 
+        		"TerminalID");
+	    }
+
+    |		lv_name_1_2=RULE_ID
+		{
+			newLeafNode(lv_name_1_2, grammarAccess.getSingleCrossReferenceAccess().getNameIDTerminalRuleCall_1_0_1()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getSingleCrossReferenceRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_1_2, 
+        		"ID");
+	    }
+
+)
+
+)
+)(	otherlv_2='kw1' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getSingleCrossReferenceAccess().getKw1Keyword_2_0());
+    }
+(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getSingleCrossReferenceRule());
+	        }
+        }
+	otherlv_3=RULE_TERMINALID
+	{
+		newLeafNode(otherlv_3, grammarAccess.getSingleCrossReferenceAccess().getRef1SingleCrossReferenceCrossReference_2_1_0()); 
+	}
+
+)
+))?(	otherlv_4='kw2' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getSingleCrossReferenceAccess().getKw2Keyword_3_0());
+    }
+(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getSingleCrossReferenceRule());
+	        }
+        }
+		{ 
+	        newCompositeNode(grammarAccess.getSingleCrossReferenceAccess().getRef2SingleCrossReferenceCrossReference_3_1_0()); 
+	    }
+		ruleDatatypeID		{ 
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?(	otherlv_6='kw3' 
+    {
+    	newLeafNode(otherlv_6, grammarAccess.getSingleCrossReferenceAccess().getKw3Keyword_4_0());
+    }
+(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getSingleCrossReferenceRule());
+	        }
+        }
+	otherlv_7=RULE_ID
+	{
+		newLeafNode(otherlv_7, grammarAccess.getSingleCrossReferenceAccess().getRef3SingleCrossReferenceCrossReference_4_1_0()); 
+	}
+
+)
+))?(	otherlv_8='kw4' 
+    {
+    	newLeafNode(otherlv_8, grammarAccess.getSingleCrossReferenceAccess().getKw4Keyword_5_0());
+    }
+(
+(
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getSingleCrossReferenceRule());
+	        }
+        }
+	otherlv_9=RULE_ID
+	{
+		newLeafNode(otherlv_9, grammarAccess.getSingleCrossReferenceAccess().getRef4SingleCrossReferenceCrossReference_5_1_0()); 
+	}
+
+)
+))?)
+;
+
+
+
+
+
+RULE_TERMINALID : '$1' RULE_ID;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

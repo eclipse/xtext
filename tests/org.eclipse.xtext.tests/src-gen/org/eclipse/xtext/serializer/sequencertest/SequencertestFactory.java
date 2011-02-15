@@ -242,6 +242,15 @@ public interface SequencertestFactory extends EFactory
   DependentAlternative2 createDependentAlternative2();
 
   /**
+   * Returns a new object of class '<em>Optional</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Optional</em>'.
+   * @generated
+   */
+  Optional createOptional();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -71,6 +71,15 @@ public interface SyntacticsequencertestFactory extends EFactory
   Exp2 createExp2();
 
   /**
+   * Returns a new object of class '<em>Single Cross Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Single Cross Reference</em>'.
+   * @generated
+   */
+  SingleCrossReference createSingleCrossReference();
+
+  /**
    * Returns a new object of class '<em>Add0</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

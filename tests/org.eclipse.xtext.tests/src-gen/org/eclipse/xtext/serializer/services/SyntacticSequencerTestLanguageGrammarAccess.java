@@ -28,12 +28,14 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cX3Exp1ParserRuleCall_2_0 = (RuleCall)cX3Assignment_2.eContents().get(0);
 		private final Assignment cX4Assignment_3 = (Assignment)cAlternatives.eContents().get(3);
 		private final RuleCall cX4Exp2ParserRuleCall_3_0 = (RuleCall)cX4Assignment_3.eContents().get(0);
+		private final Assignment cX5Assignment_4 = (Assignment)cAlternatives.eContents().get(4);
+		private final RuleCall cX5SingleCrossReferenceParserRuleCall_4_0 = (RuleCall)cX5Assignment_4.eContents().get(0);
 		
 		//Model:
-		//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2;
+		//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference;
 		public ParserRule getRule() { return rule; }
 
-		//x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2
+		//x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//x1=MandatoryKeywords
@@ -59,6 +61,12 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 
 		//Exp2
 		public RuleCall getX4Exp2ParserRuleCall_3_0() { return cX4Exp2ParserRuleCall_3_0; }
+
+		//x5=SingleCrossReference
+		public Assignment getX5Assignment_4() { return cX5Assignment_4; }
+
+		//SingleCrossReference
+		public RuleCall getX5SingleCrossReferenceParserRuleCall_4_0() { return cX5SingleCrossReferenceParserRuleCall_4_0; }
 	}
 
 	public class MandatoryKeywordsElements extends AbstractParserRuleElementFinder {
@@ -432,6 +440,132 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//")"
 		public Keyword getRightParenthesisKeyword_1_2() { return cRightParenthesisKeyword_1_2; }
 	}
+
+	public class DatatypeIDElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DatatypeID");
+		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//DatatypeID:
+		//	ID;
+		public ParserRule getRule() { return rule; }
+
+		//ID
+		public RuleCall getIDTerminalRuleCall() { return cIDTerminalRuleCall; }
+	}
+
+	public class SingleCrossReferenceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SingleCrossReference");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitFiveKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Alternatives cNameAlternatives_1_0 = (Alternatives)cNameAssignment_1.eContents().get(0);
+		private final RuleCall cNameTerminalIDTerminalRuleCall_1_0_0 = (RuleCall)cNameAlternatives_1_0.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_1_0_1 = (RuleCall)cNameAlternatives_1_0.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cKw1Keyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cRef1Assignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final CrossReference cRef1SingleCrossReferenceCrossReference_2_1_0 = (CrossReference)cRef1Assignment_2_1.eContents().get(0);
+		private final RuleCall cRef1SingleCrossReferenceTerminalIDTerminalRuleCall_2_1_0_1 = (RuleCall)cRef1SingleCrossReferenceCrossReference_2_1_0.eContents().get(1);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cKw2Keyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cRef2Assignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final CrossReference cRef2SingleCrossReferenceCrossReference_3_1_0 = (CrossReference)cRef2Assignment_3_1.eContents().get(0);
+		private final RuleCall cRef2SingleCrossReferenceDatatypeIDParserRuleCall_3_1_0_1 = (RuleCall)cRef2SingleCrossReferenceCrossReference_3_1_0.eContents().get(1);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cKw3Keyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cRef3Assignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final CrossReference cRef3SingleCrossReferenceCrossReference_4_1_0 = (CrossReference)cRef3Assignment_4_1.eContents().get(0);
+		private final RuleCall cRef3SingleCrossReferenceIDTerminalRuleCall_4_1_0_1 = (RuleCall)cRef3SingleCrossReferenceCrossReference_4_1_0.eContents().get(1);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cKw4Keyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cRef4Assignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final CrossReference cRef4SingleCrossReferenceCrossReference_5_1_0 = (CrossReference)cRef4Assignment_5_1.eContents().get(0);
+		private final RuleCall cRef4SingleCrossReferenceIDTerminalRuleCall_5_1_0_1 = (RuleCall)cRef4SingleCrossReferenceCrossReference_5_1_0.eContents().get(1);
+		
+		//SingleCrossReference:
+		//	"#5" name=(TerminalID | ID) ("kw1" ref1=[SingleCrossReference|TerminalID])? ("kw2"
+		//	ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])?;
+		public ParserRule getRule() { return rule; }
+
+		//"#5" name=(TerminalID | ID) ("kw1" ref1=[SingleCrossReference|TerminalID])? ("kw2"
+		//ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])?
+		public Group getGroup() { return cGroup; }
+
+		//"#5"
+		public Keyword getNumberSignDigitFiveKeyword_0() { return cNumberSignDigitFiveKeyword_0; }
+
+		//name=(TerminalID | ID)
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//TerminalID | ID
+		public Alternatives getNameAlternatives_1_0() { return cNameAlternatives_1_0; }
+
+		//TerminalID
+		public RuleCall getNameTerminalIDTerminalRuleCall_1_0_0() { return cNameTerminalIDTerminalRuleCall_1_0_0; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0_1() { return cNameIDTerminalRuleCall_1_0_1; }
+
+		//("kw1" ref1=[SingleCrossReference|TerminalID])?
+		public Group getGroup_2() { return cGroup_2; }
+
+		//"kw1"
+		public Keyword getKw1Keyword_2_0() { return cKw1Keyword_2_0; }
+
+		//ref1=[SingleCrossReference|TerminalID]
+		public Assignment getRef1Assignment_2_1() { return cRef1Assignment_2_1; }
+
+		//[SingleCrossReference|TerminalID]
+		public CrossReference getRef1SingleCrossReferenceCrossReference_2_1_0() { return cRef1SingleCrossReferenceCrossReference_2_1_0; }
+
+		//TerminalID
+		public RuleCall getRef1SingleCrossReferenceTerminalIDTerminalRuleCall_2_1_0_1() { return cRef1SingleCrossReferenceTerminalIDTerminalRuleCall_2_1_0_1; }
+
+		//("kw2" ref2=[SingleCrossReference|DatatypeID])?
+		public Group getGroup_3() { return cGroup_3; }
+
+		//"kw2"
+		public Keyword getKw2Keyword_3_0() { return cKw2Keyword_3_0; }
+
+		//ref2=[SingleCrossReference|DatatypeID]
+		public Assignment getRef2Assignment_3_1() { return cRef2Assignment_3_1; }
+
+		//[SingleCrossReference|DatatypeID]
+		public CrossReference getRef2SingleCrossReferenceCrossReference_3_1_0() { return cRef2SingleCrossReferenceCrossReference_3_1_0; }
+
+		//DatatypeID
+		public RuleCall getRef2SingleCrossReferenceDatatypeIDParserRuleCall_3_1_0_1() { return cRef2SingleCrossReferenceDatatypeIDParserRuleCall_3_1_0_1; }
+
+		//("kw3" ref3=[SingleCrossReference])?
+		public Group getGroup_4() { return cGroup_4; }
+
+		//"kw3"
+		public Keyword getKw3Keyword_4_0() { return cKw3Keyword_4_0; }
+
+		//ref3=[SingleCrossReference]
+		public Assignment getRef3Assignment_4_1() { return cRef3Assignment_4_1; }
+
+		//[SingleCrossReference]
+		public CrossReference getRef3SingleCrossReferenceCrossReference_4_1_0() { return cRef3SingleCrossReferenceCrossReference_4_1_0; }
+
+		//ID
+		public RuleCall getRef3SingleCrossReferenceIDTerminalRuleCall_4_1_0_1() { return cRef3SingleCrossReferenceIDTerminalRuleCall_4_1_0_1; }
+
+		//("kw4" ref4=[SingleCrossReference])?
+		public Group getGroup_5() { return cGroup_5; }
+
+		//"kw4"
+		public Keyword getKw4Keyword_5_0() { return cKw4Keyword_5_0; }
+
+		//ref4=[SingleCrossReference]
+		public Assignment getRef4Assignment_5_1() { return cRef4Assignment_5_1; }
+
+		//[SingleCrossReference]
+		public CrossReference getRef4SingleCrossReferenceCrossReference_5_1_0() { return cRef4SingleCrossReferenceCrossReference_5_1_0; }
+
+		//ID
+		public RuleCall getRef4SingleCrossReferenceIDTerminalRuleCall_5_1_0_1() { return cRef4SingleCrossReferenceIDTerminalRuleCall_5_1_0_1; }
+	}
 	
 	
 	private ModelElements pModel;
@@ -446,6 +580,9 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	private Addition2Elements pAddition2;
 	private Multiplication2Elements pMultiplication2;
 	private Prim2Elements pPrim2;
+	private TerminalRule tTerminalID;
+	private DatatypeIDElements pDatatypeID;
+	private SingleCrossReferenceElements pSingleCrossReference;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -469,7 +606,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 
 	
 	//Model:
-	//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2;
+	//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -586,6 +723,33 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	
 	public ParserRule getPrim2Rule() {
 		return getPrim2Access().getRule();
+	}
+
+	//terminal TerminalID:
+	//	"$1" ID;
+	public TerminalRule getTerminalIDRule() {
+		return (tTerminalID != null) ? tTerminalID : (tTerminalID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "TerminalID"));
+	} 
+
+	//DatatypeID:
+	//	ID;
+	public DatatypeIDElements getDatatypeIDAccess() {
+		return (pDatatypeID != null) ? pDatatypeID : (pDatatypeID = new DatatypeIDElements());
+	}
+	
+	public ParserRule getDatatypeIDRule() {
+		return getDatatypeIDAccess().getRule();
+	}
+
+	//SingleCrossReference:
+	//	"#5" name=(TerminalID | ID) ("kw1" ref1=[SingleCrossReference|TerminalID])? ("kw2"
+	//	ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])?;
+	public SingleCrossReferenceElements getSingleCrossReferenceAccess() {
+		return (pSingleCrossReference != null) ? pSingleCrossReference : (pSingleCrossReference = new SingleCrossReferenceElements());
+	}
+	
+	public ParserRule getSingleCrossReferenceRule() {
+		return getSingleCrossReferenceAccess().getRule();
 	}
 
 	//terminal ID:

@@ -92,6 +92,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
       case SequencertestPackage.MULTI_TERMINALS: return createMultiTerminals();
       case SequencertestPackage.DEPENDENT_ALTERNATIVE1: return createDependentAlternative1();
       case SequencertestPackage.DEPENDENT_ALTERNATIVE2: return createDependentAlternative2();
+      case SequencertestPackage.OPTIONAL: return createOptional();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -393,6 +394,17 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
   {
     DependentAlternative2Impl dependentAlternative2 = new DependentAlternative2Impl();
     return dependentAlternative2;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Optional createOptional()
+  {
+    OptionalImpl optional = new OptionalImpl();
+    return optional;
   }
 
   /**

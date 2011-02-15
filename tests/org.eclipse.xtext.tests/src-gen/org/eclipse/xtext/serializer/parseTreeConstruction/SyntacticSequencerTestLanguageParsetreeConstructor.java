@@ -43,6 +43,7 @@ protected class ThisRootNode extends RootToken {
 			case 9: return new Addition2_Group(this, this, 9, inst);
 			case 10: return new Multiplication2_Group(this, this, 10, inst);
 			case 11: return new Prim2_Alternatives(this, this, 11, inst);
+			case 12: return new SingleCrossReference_Group(this, this, 12, inst);
 			default: return null;
 		}	
 	}	
@@ -52,11 +53,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2;
+ * 	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference;
  *
  **/
 
-// x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2
+// x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -75,6 +76,7 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 1: return new Model_X2Assignment_1(lastRuleCallOrigin, this, 1, inst);
 			case 2: return new Model_X3Assignment_2(lastRuleCallOrigin, this, 2, inst);
 			case 3: return new Model_X4Assignment_3(lastRuleCallOrigin, this, 3, inst);
+			case 4: return new Model_X5Assignment_4(lastRuleCallOrigin, this, 4, inst);
 			default: return null;
 		}	
 	}
@@ -252,6 +254,51 @@ protected class Model_X4Assignment_3 extends AssignmentToken  {
 			if(param.isInstanceOf(grammarAccess.getExp2Rule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getModelAccess().getX4Exp2ParserRuleCall_3_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x5=SingleCrossReference
+protected class Model_X5Assignment_4 extends AssignmentToken  {
+	
+	public Model_X5Assignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX5Assignment_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new SingleCrossReference_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("x5",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x5");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getSingleCrossReferenceRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getModelAccess().getX5SingleCrossReferenceParserRuleCall_4_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2200,5 +2247,446 @@ protected class Prim2_RightParenthesisKeyword_1_2 extends KeywordToken  {
 
 
 /************ end Rule Prim2 ****************/
+
+
+
+/************ begin Rule SingleCrossReference ****************
+ *
+ * SingleCrossReference:
+ * 	"#5" name=(TerminalID | ID) ("kw1" ref1=[SingleCrossReference|TerminalID])? ("kw2"
+ * 	ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])?;
+ *
+ **/
+
+// "#5" name=(TerminalID | ID) ("kw1" ref1=[SingleCrossReference|TerminalID])? ("kw2"
+// ref2=[SingleCrossReference|DatatypeID])? ("kw3" ref3=[SingleCrossReference])? ("kw4" ref4=[SingleCrossReference])?
+protected class SingleCrossReference_Group extends GroupToken {
+	
+	public SingleCrossReference_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getSingleCrossReferenceAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new SingleCrossReference_Group_5(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new SingleCrossReference_Group_4(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new SingleCrossReference_Group_3(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new SingleCrossReference_Group_2(lastRuleCallOrigin, this, 3, inst);
+			case 4: return new SingleCrossReference_NameAssignment_1(lastRuleCallOrigin, this, 4, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getSingleCrossReferenceRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "#5"
+protected class SingleCrossReference_NumberSignDigitFiveKeyword_0 extends KeywordToken  {
+	
+	public SingleCrossReference_NumberSignDigitFiveKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getSingleCrossReferenceAccess().getNumberSignDigitFiveKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// name=(TerminalID | ID)
+protected class SingleCrossReference_NameAssignment_1 extends AssignmentToken  {
+	
+	public SingleCrossReference_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getSingleCrossReferenceAccess().getNameAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new SingleCrossReference_NumberSignDigitFiveKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getSingleCrossReferenceAccess().getNameTerminalIDTerminalRuleCall_1_0_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getSingleCrossReferenceAccess().getNameTerminalIDTerminalRuleCall_1_0_0();
+			return obj;
+		}
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getSingleCrossReferenceAccess().getNameIDTerminalRuleCall_1_0_1(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getSingleCrossReferenceAccess().getNameIDTerminalRuleCall_1_0_1();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// ("kw1" ref1=[SingleCrossReference|TerminalID])?
+protected class SingleCrossReference_Group_2 extends GroupToken {
+	
+	public SingleCrossReference_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getSingleCrossReferenceAccess().getGroup_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new SingleCrossReference_Ref1Assignment_2_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "kw1"
+protected class SingleCrossReference_Kw1Keyword_2_0 extends KeywordToken  {
+	
+	public SingleCrossReference_Kw1Keyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getSingleCrossReferenceAccess().getKw1Keyword_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new SingleCrossReference_NameAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// ref1=[SingleCrossReference|TerminalID]
+protected class SingleCrossReference_Ref1Assignment_2_1 extends AssignmentToken  {
+	
+	public SingleCrossReference_Ref1Assignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getSingleCrossReferenceAccess().getRef1Assignment_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new SingleCrossReference_Kw1Keyword_2_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("ref1",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ref1");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getSingleCrossReferenceAccess().getRef1SingleCrossReferenceCrossReference_2_1_0().getType().getClassifier())) {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.getSingleCrossReferenceAccess().getRef1SingleCrossReferenceCrossReference_2_1_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
+
+// ("kw2" ref2=[SingleCrossReference|DatatypeID])?
+protected class SingleCrossReference_Group_3 extends GroupToken {
+	
+	public SingleCrossReference_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getSingleCrossReferenceAccess().getGroup_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new SingleCrossReference_Ref2Assignment_3_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "kw2"
+protected class SingleCrossReference_Kw2Keyword_3_0 extends KeywordToken  {
+	
+	public SingleCrossReference_Kw2Keyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getSingleCrossReferenceAccess().getKw2Keyword_3_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new SingleCrossReference_Group_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new SingleCrossReference_NameAssignment_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// ref2=[SingleCrossReference|DatatypeID]
+protected class SingleCrossReference_Ref2Assignment_3_1 extends AssignmentToken  {
+	
+	public SingleCrossReference_Ref2Assignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getSingleCrossReferenceAccess().getRef2Assignment_3_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new SingleCrossReference_Kw2Keyword_3_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("ref2",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ref2");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getSingleCrossReferenceAccess().getRef2SingleCrossReferenceCrossReference_3_1_0().getType().getClassifier())) {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.getSingleCrossReferenceAccess().getRef2SingleCrossReferenceCrossReference_3_1_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
+
+// ("kw3" ref3=[SingleCrossReference])?
+protected class SingleCrossReference_Group_4 extends GroupToken {
+	
+	public SingleCrossReference_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getSingleCrossReferenceAccess().getGroup_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new SingleCrossReference_Ref3Assignment_4_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "kw3"
+protected class SingleCrossReference_Kw3Keyword_4_0 extends KeywordToken  {
+	
+	public SingleCrossReference_Kw3Keyword_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getSingleCrossReferenceAccess().getKw3Keyword_4_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new SingleCrossReference_Group_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new SingleCrossReference_Group_2(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new SingleCrossReference_NameAssignment_1(lastRuleCallOrigin, this, 2, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// ref3=[SingleCrossReference]
+protected class SingleCrossReference_Ref3Assignment_4_1 extends AssignmentToken  {
+	
+	public SingleCrossReference_Ref3Assignment_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getSingleCrossReferenceAccess().getRef3Assignment_4_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new SingleCrossReference_Kw3Keyword_4_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("ref3",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ref3");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getSingleCrossReferenceAccess().getRef3SingleCrossReferenceCrossReference_4_1_0().getType().getClassifier())) {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.getSingleCrossReferenceAccess().getRef3SingleCrossReferenceCrossReference_4_1_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
+
+// ("kw4" ref4=[SingleCrossReference])?
+protected class SingleCrossReference_Group_5 extends GroupToken {
+	
+	public SingleCrossReference_Group_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getSingleCrossReferenceAccess().getGroup_5();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new SingleCrossReference_Ref4Assignment_5_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "kw4"
+protected class SingleCrossReference_Kw4Keyword_5_0 extends KeywordToken  {
+	
+	public SingleCrossReference_Kw4Keyword_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getSingleCrossReferenceAccess().getKw4Keyword_5_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new SingleCrossReference_Group_4(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new SingleCrossReference_Group_3(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new SingleCrossReference_Group_2(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new SingleCrossReference_NameAssignment_1(lastRuleCallOrigin, this, 3, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// ref4=[SingleCrossReference]
+protected class SingleCrossReference_Ref4Assignment_5_1 extends AssignmentToken  {
+	
+	public SingleCrossReference_Ref4Assignment_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getSingleCrossReferenceAccess().getRef4Assignment_5_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new SingleCrossReference_Kw4Keyword_5_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("ref4",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("ref4");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getSingleCrossReferenceAccess().getRef4SingleCrossReferenceCrossReference_5_1_0().getType().getClassifier())) {
+				type = AssignmentType.CROSS_REFERENCE;
+				element = grammarAccess.getSingleCrossReferenceAccess().getRef4SingleCrossReferenceCrossReference_5_1_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
+
+
+/************ end Rule SingleCrossReference ****************/
 
 }
