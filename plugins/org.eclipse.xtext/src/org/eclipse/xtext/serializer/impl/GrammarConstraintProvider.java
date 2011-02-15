@@ -284,9 +284,6 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 					for (IConstraintElement e : ele.getChildren())
 						collectElements((ConstraintElement) e, elements, assignments, assignmentsByFeature);
 					return;
-				case UNASSIGNED_DATATYPE_RULE_CALL:
-				case UNASSIGNED_TERMINAL_RULE_CALL:
-					return;
 			}
 		}
 
@@ -691,9 +688,6 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				case ASSIGNED_BOOLEAN_KEYWORD:
 					return getFeatureName() + getAssignmentOperator() + "'" + getKeyword().getValue() + "'"
 							+ getCardinality();
-				case UNASSIGNED_DATATYPE_RULE_CALL:
-				case UNASSIGNED_TERMINAL_RULE_CALL:
-					return getRuleCall().getRule().getName() + getCardinality();
 			}
 			return "error";
 		}
@@ -737,9 +731,9 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return containedAssignments;
 		}
 
-		protected List<Pair<IConstraintElement, AssignmentDependencyKind>> dependingAssignments;
+		protected List<Pair<IConstraintElement, RelationalDependencyType>> dependingAssignments;
 
-		public List<Pair<IConstraintElement, AssignmentDependencyKind>> getDependingAssignment() {
+		public List<Pair<IConstraintElement, RelationalDependencyType>> getDependingAssignment() {
 			if (assignmentId < 0)
 				return null;
 			if (dependingAssignments == null) {
@@ -750,7 +744,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		}
 
 		protected void collectDependingAssignmentsByContainer(IConstraintElement child,
-				List<Pair<IConstraintElement, AssignmentDependencyKind>> result, boolean childMany,
+				List<Pair<IConstraintElement, RelationalDependencyType>> result, boolean childMany,
 				boolean childOptional) {
 			IConstraintElement container = child.getContainer();
 			if (container == null)
@@ -763,7 +757,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 						for (IConstraintElement choice : container.getChildren())
 							if (choice != child)
 								for (IConstraintElement ass : choice.getContainedAssignments())
-									result.add(Tuples.create(ass, AssignmentDependencyKind.EXCLUDE_IF_SET));
+									result.add(Tuples.create(ass, RelationalDependencyType.EXCLUDE_IF_SET));
 					break;
 				case GROUP:
 					if (!cntOptional && !cntMany)
@@ -788,15 +782,15 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 										same_or_more = true;
 								}
 								if (exclude_if_unset && !same_or_less && !same)
-									result.add(Tuples.create(ass, AssignmentDependencyKind.EXCLUDE_IF_UNSET));
+									result.add(Tuples.create(ass, RelationalDependencyType.EXCLUDE_IF_UNSET));
 								if (mandatory_if_set && !same_or_more && !same)
-									result.add(Tuples.create(ass, AssignmentDependencyKind.MANDATORY_IF_SET));
+									result.add(Tuples.create(ass, RelationalDependencyType.MANDATORY_IF_SET));
 								if (same)
-									result.add(Tuples.create(ass, AssignmentDependencyKind.SAME));
+									result.add(Tuples.create(ass, RelationalDependencyType.SAME));
 								if (same_or_less)
-									result.add(Tuples.create(ass, AssignmentDependencyKind.SAME_OR_LESS));
+									result.add(Tuples.create(ass, RelationalDependencyType.SAME_OR_LESS));
 								if (same_or_more)
-									result.add(Tuples.create(ass, AssignmentDependencyKind.SAME_OR_MORE));
+									result.add(Tuples.create(ass, RelationalDependencyType.SAME_OR_MORE));
 							}
 					break;
 				default:
@@ -1016,8 +1010,10 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 						return result;
 				}
 				return isOptional ? null : INVALID;
-			} else
+			} else if (GrammarUtil.containingAssignment(ele) != null)
 				return new ConstraintElement(context, getConstraintElementType(ele), ele);
+			else
+				return null;
 		} else if (ele instanceof Keyword) {
 			if (GrammarUtil.containingAssignment(ele) != null)
 				return new ConstraintElement(context, getConstraintElementType(ele), ele);
@@ -1301,14 +1297,6 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 					return ConstraintElementType.ASSIGNED_BOOLEAN_KEYWORD;
 				else
 					return ConstraintElementType.ASSIGNED_KEYWORD;
-			}
-		} else {
-			if (ele instanceof RuleCall) {
-				RuleCall rc = (RuleCall) ele;
-				if (rc.getRule() instanceof ParserRule)
-					return ConstraintElementType.UNASSIGNED_DATATYPE_RULE_CALL;
-				if (rc.getRule() instanceof TerminalRule)
-					return ConstraintElementType.UNASSIGNED_TERMINAL_RULE_CALL;
 			}
 		}
 		throw new RuntimeException("Unknown Grammar Element: " + EmfFormatter.objPath(ele));

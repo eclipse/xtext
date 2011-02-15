@@ -50,9 +50,7 @@ public interface IGrammarConstraintProvider {
 		ASSIGNED_BOOLEAN_KEYWORD, //
 		ASSIGNED_PARSER_RULE_CALL, //
 		ASSIGNED_TERMINAL_RULE_CALL, //
-		GROUP, //
-		UNASSIGNED_DATATYPE_RULE_CALL, //
-		UNASSIGNED_TERMINAL_RULE_CALL
+		GROUP,
 	}
 
 	/**
@@ -179,7 +177,7 @@ public interface IGrammarConstraintProvider {
 
 		ConstraintElementType getType();
 
-		List<Pair<IConstraintElement, AssignmentDependencyKind>> getDependingAssignment();
+		List<Pair<IConstraintElement, RelationalDependencyType>> getDependingAssignment();
 
 		List<IConstraintElement> getContainedAssignments();
 
@@ -218,7 +216,7 @@ public interface IGrammarConstraintProvider {
 		boolean isContentValidationNeeded();
 	}
 
-	enum AssignmentDependencyKind {
+	enum RelationalDependencyType {
 		/**
 		 * (b >= 1) => (a == 0)
 		 */
