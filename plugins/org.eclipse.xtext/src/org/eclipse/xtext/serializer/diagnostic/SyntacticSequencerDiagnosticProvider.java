@@ -5,14 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.serializer.impl;
+package org.eclipse.xtext.serializer.diagnostic;
 
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.serializer.ISerializationDiagnostic;
-import org.eclipse.xtext.serializer.ISyntacticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
+import org.eclipse.xtext.serializer.impl.RCStack;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

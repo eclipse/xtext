@@ -19,9 +19,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.ISyntacticSequencer;
-import org.eclipse.xtext.serializer.ISyntacticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynFollowerOwner;
@@ -31,6 +29,8 @@ import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynTransitio
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.IUnassignedTokenSequenceAcceptor;
+import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
+import org.eclipse.xtext.serializer.diagnostic.ISyntacticSequencerDiagnosticProvider;
 
 import com.google.inject.Inject;
 

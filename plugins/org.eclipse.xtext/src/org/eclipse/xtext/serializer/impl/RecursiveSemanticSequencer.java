@@ -15,9 +15,9 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.serializer.IRecursiveSemanitcSequencer;
 import org.eclipse.xtext.serializer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.acceptor.IRecursiveSemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
