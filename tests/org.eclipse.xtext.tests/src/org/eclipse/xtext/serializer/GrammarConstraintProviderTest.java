@@ -64,7 +64,7 @@ public class GrammarConstraintProviderTest extends AbstractXtextTests {
 		String actual = getParserRule("Rule: ID a1=ID a2+=ID* a3+=ID+ a4+=ID?;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule: Rule_Rule;\n");
-		expected.append("  Rule_Rule returns Rule: (ID a1=ID a2+=ID* a3+=ID+ a4+=ID?);");
+		expected.append("  Rule_Rule returns Rule: (a1=ID a2+=ID* a3+=ID+ a4+=ID?);");
 		assertEquals(expected.toString(), actual);
 	}
 
@@ -72,7 +72,7 @@ public class GrammarConstraintProviderTest extends AbstractXtextTests {
 		String actual = getParserRule("Rule: DT a1=DT a2+=DT* a3+=DT+ a4+=DT?; DT: ID;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule: Rule_Rule;\n");
-		expected.append("  Rule_Rule returns Rule: (DT a1=DT a2+=DT* a3+=DT+ a4+=DT?);");
+		expected.append("  Rule_Rule returns Rule: (a1=DT a2+=DT* a3+=DT+ a4+=DT?);");
 		assertEquals(expected.toString(), actual);
 	}
 

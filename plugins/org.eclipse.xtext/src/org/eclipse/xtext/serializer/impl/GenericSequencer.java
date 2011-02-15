@@ -30,7 +30,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.AssignmentDependencyKind;
+import org.eclipse.xtext.serializer.IGrammarConstraintProvider.RelationalDependencyType;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintElement;
@@ -659,8 +659,6 @@ public class GenericSequencer implements ISemanticSequencer {
 					//					return r.isEmpty() ? null : r;
 				} else
 					return null;
-			case UNASSIGNED_DATATYPE_RULE_CALL:
-			case UNASSIGNED_TERMINAL_RULE_CALL:
 		}
 		return null;
 	}
@@ -785,8 +783,6 @@ public class GenericSequencer implements ISemanticSequencer {
 				return true;
 			case ALTERNATIVE:
 			case GROUP:
-			case UNASSIGNED_DATATYPE_RULE_CALL:
-			case UNASSIGNED_TERMINAL_RULE_CALL:
 				return false;
 		}
 		return false;
@@ -855,10 +851,10 @@ public class GenericSequencer implements ISemanticSequencer {
 	}
 
 	protected boolean isExcludedByDependees(IConstraintElement assignments, Feature2Assignment[] target) {
-		List<Pair<IConstraintElement, AssignmentDependencyKind>> dependees = assignments.getDependingAssignment();
+		List<Pair<IConstraintElement, RelationalDependencyType>> dependees = assignments.getDependingAssignment();
 		if (dependees == null || dependees.isEmpty())
 			return false;
-		for (Pair<IConstraintElement, AssignmentDependencyKind> e : dependees)
+		for (Pair<IConstraintElement, RelationalDependencyType> e : dependees)
 			switch (e.getSecond()) {
 				case EXCLUDE_IF_SET:
 					if (target[e.getFirst().getAssignmentID()] != null)
@@ -1122,9 +1118,6 @@ public class GenericSequencer implements ISemanticSequencer {
 				if (f2a.getValuesFor(element).isEmpty())
 					return true;
 				return false;
-			case UNASSIGNED_DATATYPE_RULE_CALL:
-			case UNASSIGNED_TERMINAL_RULE_CALL:
-				return false;
 		}
 		return false;
 	}
@@ -1215,9 +1208,6 @@ public class GenericSequencer implements ISemanticSequencer {
 			case ASSIGNED_BOOLEAN_KEYWORD:
 				Feature2Assignment f2a = values[child.getAssignmentID()];
 				return f2a == null ? 0 : f2a.getQuantity(child);
-			case UNASSIGNED_DATATYPE_RULE_CALL:
-			case UNASSIGNED_TERMINAL_RULE_CALL:
-				return UNDEF;
 		}
 		return UNDEF;
 	}
@@ -1297,9 +1287,6 @@ public class GenericSequencer implements ISemanticSequencer {
 			case ASSIGNED_BOOLEAN_KEYWORD:
 				Feature2Assignment f2a = values[child.getAssignmentID()];
 				return f2a == null ? 0 : f2a.getQuantity(child);
-			case UNASSIGNED_DATATYPE_RULE_CALL:
-			case UNASSIGNED_TERMINAL_RULE_CALL:
-				return UNDEF;
 		}
 		if (child.isMany() && count > 1)
 			count = 1;
