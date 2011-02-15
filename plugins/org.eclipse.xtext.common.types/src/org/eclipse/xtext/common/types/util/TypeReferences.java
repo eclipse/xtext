@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -61,7 +60,7 @@ public class TypeReferences {
 			}
 		}
 		if (type instanceof JvmGenericType) {
-			EList<JvmTypeParameter> list = ((JvmGenericType) type).getTypeParameters();
+			List<JvmTypeParameter> list = ((JvmGenericType) type).getTypeParameters();
 			if (!typeReferences.isEmpty() && list.size() != typeReferences.size()) {
 				throw new IllegalArgumentException("The type " + type.getIdentifier() + " expects " + list.size()
 						+ " type arguments, but was " + typeReferences.size()
@@ -83,13 +82,13 @@ public class TypeReferences {
 
 	public JvmTypeReference getArgument(JvmTypeReference left, int index) {
 		if (left.getType() instanceof JvmGenericType) {
-			EList<JvmTypeParameter> typeParameters = ((JvmGenericType) left.getType()).getTypeParameters();
+			List<JvmTypeParameter> typeParameters = ((JvmGenericType) left.getType()).getTypeParameters();
 			if (typeParameters.size() <= index) {
 				throw new IllegalArgumentException("The type " + left.getType().getIdentifier()
 						+ " cannot be parameterized with more than " + typeParameters.size() + " type arguments.");
 			}
 			if (left instanceof JvmParameterizedTypeReference) {
-				EList<JvmTypeReference> arguments = ((JvmParameterizedTypeReference) left).getArguments();
+				List<JvmTypeReference> arguments = ((JvmParameterizedTypeReference) left).getArguments();
 				if (arguments.size() == typeParameters.size()) {
 					return arguments.get(index);
 				}

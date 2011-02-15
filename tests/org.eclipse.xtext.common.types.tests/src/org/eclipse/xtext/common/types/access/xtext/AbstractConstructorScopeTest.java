@@ -14,6 +14,7 @@ import junit.framework.TestCase;
 
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -62,11 +63,15 @@ public abstract class AbstractConstructorScopeTest extends TestCase {
 	
 	public void testGetElementByInstance_01() {
 		JvmConstructor constructor = TypesFactory.eINSTANCE.createJvmConstructor();
-		constructor.internalSetIdentifier("java.lang.Object.Object()");
+		JvmGenericType type = TypesFactory.eINSTANCE.createJvmGenericType();
+		type.setPackageName("java.lang");
+		type.setSimpleName("Object");
+		constructor.setSimpleName("Object");
+		type.getMembers().add(constructor);
 		IEObjectDescription element = getConstructorScope().getSingleElement(constructor);
 		assertNotNull(element);
-		assertEquals(new IQualifiedNameConverter.DefaultImpl().toQualifiedName("java.lang.Object.Object()"), element.getName());
-		assertEquals(new IQualifiedNameConverter.DefaultImpl().toQualifiedName("java.lang.Object.Object()"), element.getQualifiedName());
+		assertEquals(new IQualifiedNameConverter.DefaultImpl().toQualifiedName("java.lang.Object.Object"), element.getName());
+		assertEquals(new IQualifiedNameConverter.DefaultImpl().toQualifiedName("java.lang.Object.Object"), element.getQualifiedName());
 	}
 	
 	public void testGetElementByInstance_02() {

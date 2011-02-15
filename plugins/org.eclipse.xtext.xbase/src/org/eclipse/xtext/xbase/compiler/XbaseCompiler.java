@@ -147,7 +147,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	public void _toJavaExpression(XInstanceOfExpression expr, IAppendable b) {
 		b.append("(");
 		internalToJavaExpression(expr.getExpression(), b);
-		b.append(" instanceof ").append(expr.getType().getIdentifier()).append(")");
+		b.append(" instanceof ").append(expr.getType().getQualifiedName('.')).append(")");
 	}
 
 	public void _toJavaStatement(XInstanceOfExpression expr, IAppendable b, boolean isReferenced) {
@@ -252,12 +252,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	public void _toJavaExpression(XConstructorCall expr, IAppendable b) {
 		b.append("new ");
-		b.append(expr.getConstructor().getDeclaringType().getIdentifier());
+		b.append(expr.getConstructor().getDeclaringType().getQualifiedName('.'));
 		if (!expr.getTypeArguments().isEmpty()) {
 			b.append("<");
 			for (int i = 0; i < expr.getTypeArguments().size(); i++) {
 				JvmTypeReference arg = expr.getTypeArguments().get(i);
-				b.append(arg.getIdentifier());
+				b.append(arg.getQualifiedName('.'));
 				if (i + 1 < expr.getTypeArguments().size())
 					b.append(", ");
 			}
