@@ -16,12 +16,12 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.serializer.IRecursiveSyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.IRecursiveSyntacticSequencer;
-import org.eclipse.xtext.serializer.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.ISerializationDiagnostic.Acceptor;
-import org.eclipse.xtext.serializer.ISyntacticSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.IRecursiveSyntacticSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.ISyntacticSequencer;
 
 /**

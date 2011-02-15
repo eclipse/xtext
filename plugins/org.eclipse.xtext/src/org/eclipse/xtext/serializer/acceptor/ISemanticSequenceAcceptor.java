@@ -5,17 +5,22 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.serializer;
+package org.eclipse.xtext.serializer.acceptor;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IRecursiveSyntacticSequenceAcceptor extends IRecursiveSemanticSequenceAcceptor,
-		IUnassignedTokenSequenceAcceptor {
+public interface ISemanticSequenceAcceptor extends IAssignedTokenSequenceAcceptor {
 
-	void enterUnassignedParserRuleCall(RuleCall rc);
+	void acceptAssignedAction(Action action, EObject semanticChild, ICompositeNode node);
 
-	void leaveUnssignedParserRuleCall(RuleCall rc);
+	void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild, ICompositeNode node);
+
+	void finish();
+
 }

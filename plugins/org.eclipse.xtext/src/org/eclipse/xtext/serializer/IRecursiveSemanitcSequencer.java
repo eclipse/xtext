@@ -8,6 +8,7 @@
 package org.eclipse.xtext.serializer;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.serializer.acceptor.IRecursiveSemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.impl.RecursiveSemanticSequencer;
 
 import com.google.inject.ImplementedBy;

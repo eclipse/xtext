@@ -24,7 +24,7 @@ import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynEmitterState;
-import org.eclipse.xtext.serializer.IUnassignedTokenSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.IUnassignedTokenSequenceAcceptor;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

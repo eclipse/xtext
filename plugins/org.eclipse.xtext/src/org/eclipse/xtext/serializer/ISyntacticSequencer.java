@@ -2,6 +2,8 @@ package org.eclipse.xtext.serializer;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.impl.SyntacticSequencer;
 
 import com.google.inject.ImplementedBy;

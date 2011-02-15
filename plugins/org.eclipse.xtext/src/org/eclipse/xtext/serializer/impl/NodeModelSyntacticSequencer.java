@@ -16,8 +16,8 @@ import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.serializer.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.ISerializationDiagnostic.Acceptor;
+import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 
 public class NodeModelSyntacticSequencer extends AbstractNodeModelSequencer {
 
