@@ -9,6 +9,7 @@ package org.eclipse.xtext.serializer;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.serializer.acceptor.IRecursiveSyntacticSequenceAcceptor;
+import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.impl.RecursiveSyntacticSequencer;
 
 import com.google.inject.ImplementedBy;

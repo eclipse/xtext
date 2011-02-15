@@ -5,14 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.serializer;
+package org.eclipse.xtext.serializer.diagnostic;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.serializer.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
-import org.eclipse.xtext.serializer.impl.SequencerDiagnosticProvider;
 
 import com.google.inject.ImplementedBy;
 
