@@ -12,6 +12,7 @@ import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -38,7 +39,7 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 		this.featuresForTypeProvider = featuresForTypeProvider;
 	}
 	
-	public Iterable<? extends JvmFeature> getFeaturesForType(JvmDeclaredType declType) {
+	public Iterable<? extends JvmFeature> getFeaturesForType(JvmTypeReference declType) {
 		return featuresForTypeProvider.getFeaturesForType(declType);
 	}
 	

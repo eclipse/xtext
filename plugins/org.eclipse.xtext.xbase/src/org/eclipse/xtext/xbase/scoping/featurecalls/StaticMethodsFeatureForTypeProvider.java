@@ -18,9 +18,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Booleans;
 import org.eclipse.xtext.xbase.lib.Collections;
@@ -42,9 +40,6 @@ import com.google.inject.Inject;
 public class StaticMethodsFeatureForTypeProvider implements IFeaturesForTypeProvider {
 
 	@Inject
-	private TypesFactory typesFactory;
-
-	@Inject
 	private XbaseTypeConformanceComputer conformanceComputer;
 	
 	@Inject
@@ -52,12 +47,8 @@ public class StaticMethodsFeatureForTypeProvider implements IFeaturesForTypeProv
 
 	private EObject context;
 
-	public Iterable<? extends JvmFeature> getFeaturesForType(final JvmDeclaredType declType) {
-		final JvmParameterizedTypeReference reference = typesFactory
-		.createJvmParameterizedTypeReference();
-		reference.setType(declType);
-		final Iterable<Class<?>> operators = getClassesContainingStaticMethods(declType
-				.getIdentifier());
+	public Iterable<? extends JvmFeature> getFeaturesForType(final JvmTypeReference reference) {
+		final Iterable<Class<?>> operators = getClassesContainingStaticMethods(reference.getType().getQualifiedName());
 		Iterable<JvmOperation> staticMethods = emptySet();
 		for (Class<?> clazz : operators) {
 			JvmTypeReference typeReference = typeRefs.getTypeForName(clazz, context);
@@ -70,7 +61,7 @@ public class StaticMethodsFeatureForTypeProvider implements IFeaturesForTypeProv
 							if (input.getParameters().size() > 0) {
 								JvmFormalParameter firstParam = input.getParameters().get(0);
 								return conformanceComputer.isConformant(firstParam.getParameterType(),
-										reference);
+										reference, true);
 							}
 						}
 						return false;

@@ -62,6 +62,9 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 	
 	@Inject
 	private TypeReferences typeRefs;
+	
+	@Inject
+	private IFeaturesForTypeProvider featuresProvider;
 
 	public void setTypeArgumentContextProvider(TypeArgumentContextProvider typeArgumentContextProvider) {
 		this.typeArgumentContextProvider = typeArgumentContextProvider;
@@ -158,8 +161,7 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 	protected JvmFeatureDescriptions createFeatureScope(final JvmTypeReference type,final TypeArgumentContext context, final IJvmFeatureDescriptionProvider jvmFeatureDescriptionProvider) {
 		if (!(type.getType() instanceof JvmDeclaredType))
 			return null;
-		JvmDeclaredType declType = (JvmDeclaredType) type.getType();
-		Iterable<? extends JvmFeature> features = getFeaturesForType(declType,jvmFeatureDescriptionProvider);
+		Iterable<? extends JvmFeature> features = getFeaturesForType(type,jvmFeatureDescriptionProvider);
 		if (!features.iterator().hasNext())
 			return null;
 		final List<JvmFeatureDescription> descriptions = Lists.newArrayList();
@@ -174,17 +176,16 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 		return new JvmFeatureDescriptions(jvmFeatureDescriptionProvider.getText()+" " + type.getIdentifier(), descriptions);
 	}
 
-	protected Iterable<? extends JvmFeature> getFeaturesForType(JvmDeclaredType declType, IJvmFeatureDescriptionProvider descriptionProvider) {
+	protected Iterable<? extends JvmFeature> getFeaturesForType(JvmTypeReference type, IJvmFeatureDescriptionProvider descriptionProvider) {
 		final Predicate<JvmFeature> predicate = new Predicate<JvmFeature>() {
 			public boolean apply(JvmFeature input) {
 				return isValidFeature(input);
 			}
 		};
 		if (descriptionProvider instanceof IFeaturesForTypeProvider) {
-			return filter(((IFeaturesForTypeProvider)descriptionProvider).getFeaturesForType(declType),predicate);
+			return filter(((IFeaturesForTypeProvider)descriptionProvider).getFeaturesForType(type),predicate);
 		}
-		return filter(filter(declType.getMembers(), JvmFeature.class),
-				predicate);
+		return featuresProvider.getFeaturesForType(type);
 	}
 	
 	protected boolean isValidFeature(JvmFeature input) {
