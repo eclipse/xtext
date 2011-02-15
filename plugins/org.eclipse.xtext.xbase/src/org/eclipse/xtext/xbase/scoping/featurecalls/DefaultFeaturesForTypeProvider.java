@@ -8,10 +8,12 @@
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
 import static com.google.common.collect.Iterables.*;
+import static java.util.Collections.*;
 
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import com.google.common.base.Predicate;
 
@@ -20,13 +22,15 @@ import com.google.common.base.Predicate;
  */
 public class DefaultFeaturesForTypeProvider implements IFeaturesForTypeProvider {
 
-	public Iterable<? extends JvmFeature> getFeaturesForType(JvmDeclaredType declType) {
-		return filter(filter(declType.getMembers(), JvmFeature.class),
-				new Predicate<JvmFeature>() {
-					public boolean apply(JvmFeature input) {
-						return !(input instanceof JvmConstructor);
-					}
-				});
+	public Iterable<? extends JvmFeature> getFeaturesForType(JvmTypeReference declType) {
+		if (declType.getType() instanceof JvmDeclaredType) {
+			return filter(filter(((JvmDeclaredType)declType.getType()).getMembers(), JvmFeature.class), new Predicate<JvmFeature>() {
+				public boolean apply(JvmFeature input) {
+					return !(input instanceof JvmConstructor);
+				}
+			});
+		}
+		return emptySet();
 	}
 
 }
