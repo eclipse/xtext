@@ -33,7 +33,7 @@ public abstract class AbstractNodeModelSequencer implements ISemanticSequencer {
 		Assignment ass;
 		if (ele instanceof Action) {
 			if (((Action) ele).getFeature() != null) {
-				acceptor.acceptAssignedAction(((Action) ele), (EObject) value);
+				acceptor.acceptAssignedAction(((Action) ele), (EObject) value, (ICompositeNode) node);
 				return true;
 			}
 		} else if (GrammarUtil.containingCrossReference(ele) != null) {
@@ -60,7 +60,7 @@ public abstract class AbstractNodeModelSequencer implements ISemanticSequencer {
 				RuleCall rc = (RuleCall) ele;
 				if (rc.getRule() instanceof ParserRule) {
 					if (rc.getRule().getType().getClassifier() instanceof EClass)
-						acceptor.acceptAssignedParserRuleCall(rc, (EObject) value);
+						acceptor.acceptAssignedParserRuleCall(rc, (EObject) value, (ICompositeNode) node);
 					else
 						acceptor.acceptAssignedDatatype(rc, value, (ICompositeNode) node);
 					return true;

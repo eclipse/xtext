@@ -42,7 +42,7 @@ public class SyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected void ambiguousTransition(ISynTransition transition, INode fromNode, INode toNode, RCStack stack,
 			IUnassignedTokenSequenceAcceptor tokenAcceptor, Acceptor errorAcceptor) {
-		acceptNodes(transition, fromNode, stack.clone(), tokenAcceptor);
+		acceptNodes(transition, fromNode, toNode, stack.clone(), tokenAcceptor);
 	}
 
 	protected void acceptNode(INode node, IUnassignedTokenSequenceAcceptor tokenAcceptor) {
@@ -63,9 +63,9 @@ public class SyntacticSequencer extends AbstractSyntacticSequencer {
 			throw new RuntimeException("Unexpected grammar element: " + node.getGrammarElement());
 	}
 
-	protected void acceptNodes(ISynNavigable fromState, INode fromNode, RCStack stack,
+	protected void acceptNodes(ISynNavigable fromState, INode fromNode, INode toNode, RCStack stack,
 			IUnassignedTokenSequenceAcceptor tokenAcceptor) {
-		EmitterNodeIterator ni = new EmitterNodeIterator(fromNode, false);
+		EmitterNodeIterator ni = new EmitterNodeIterator(fromNode, toNode, false);
 		while (ni.hasNext()) {
 			INode next = ni.next();
 			List<ISynState> path = fromState.getShortestPathTo((AbstractElement) next.getGrammarElement(), stack, true);

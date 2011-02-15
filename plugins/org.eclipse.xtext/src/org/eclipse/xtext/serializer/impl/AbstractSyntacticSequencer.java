@@ -63,11 +63,18 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer 
 			this.stack = new RCStack();
 		}
 
-		public void acceptAssignedAction(Action action, EObject semanticChild) {
-			lastState = transitionBegin(lastState, lastNode, action, null, stack, delegate, errorAcceptor);
-			transition(lastState, lastNode, null, stack, this, errorAcceptor);
-			lastState = transitionFinish(lastState, lastNode, null, stack, delegate, errorAcceptor);
-			lastNode = delegate.acceptAssignedAction2(action, semanticChild);
+		public void acceptAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
+			lastState = transitionBegin(lastState, lastNode, action, node, stack, delegate, errorAcceptor);
+			transition(lastState, lastNode, node, stack, this, errorAcceptor);
+			lastState = transitionFinish(lastState, lastNode, node, stack, delegate, errorAcceptor);
+			lastNode = getLastLeaf(node);
+			delegate.acceptAssignedAction(action, semanticChild, node);
+		}
+
+		protected INode getLastLeaf(INode node) {
+			while (node instanceof ICompositeNode)
+				node = ((ICompositeNode) node).getLastChild();
+			return node;
 		}
 
 		public void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, EObject value, ICompositeNode node) {
@@ -134,11 +141,12 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer 
 			delegate.acceptAssignedKeyword(keyword, value, node);
 		}
 
-		public void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild) {
-			lastState = transitionBegin(lastState, null, ruleCall, null, stack, delegate, errorAcceptor);
-			transition(lastState, lastNode, null, stack, this, errorAcceptor);
-			lastState = transitionFinish(lastState, lastNode, null, stack, delegate, errorAcceptor);
-			lastNode = delegate.acceptAssignedParserRuleCall2(ruleCall, semanticChild);
+		public void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild, ICompositeNode node) {
+			lastState = transitionBegin(lastState, lastNode, ruleCall, node, stack, delegate, errorAcceptor);
+			transition(lastState, lastNode, node, stack, this, errorAcceptor);
+			lastState = transitionFinish(lastState, lastNode, node, stack, delegate, errorAcceptor);
+			lastNode = getLastLeaf(node);
+			delegate.acceptAssignedParserRuleCall(ruleCall, semanticChild, node);
 		}
 
 		public void acceptAssignedTerminal(RuleCall terminalRC, Object value, ILeafNode node) {
@@ -200,7 +208,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer 
 		if (path.isEmpty())
 			return;
 		EmitterNodeFinder nodes = new EmitterNodeFinder(fromNode);
-		RCStack bak = stack.clone();
+		//		RCStack bak = stack.clone();
 		for (ISynState emitter : path)
 			accept(emitter, nodes.next(emitter.getGrammarElement()), stack, delegate, errorAcceptor);
 	}
@@ -319,7 +327,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer 
 			return (ISynAbsorberState) fromState;
 		if (fromState instanceof ISynNavigable) {
 			ISynNavigable fromEmitter = (ISynNavigable) fromState;
-			RCStack back = stack.clone();
+			//			RCStack back = stack.clone();
 			if (fromEmitter.hasEmitters())
 				accept(fromNode, fromEmitter.getShortestPathToAbsorber(stack), stack, delegate, errorAcceptor);
 			return fromEmitter.getTarget();

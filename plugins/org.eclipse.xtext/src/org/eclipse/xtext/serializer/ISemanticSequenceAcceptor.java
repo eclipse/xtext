@@ -10,15 +10,16 @@ package org.eclipse.xtext.serializer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public interface ISemanticSequenceAcceptor extends IAssignedTokenSequenceAcceptor {
 
-	void acceptAssignedAction(Action action, EObject semanticChild);
+	void acceptAssignedAction(Action action, EObject semanticChild, ICompositeNode node);
 
-	void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild);
+	void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild, ICompositeNode node);
 
 	void finish();
 
