@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import com.google.inject.ImplementedBy;
 
@@ -21,5 +21,5 @@ public interface IFeaturesForTypeProvider {
 	/**
 	 * provides the features for a given type
 	 */
-	Iterable<? extends JvmFeature> getFeaturesForType(JvmDeclaredType declType);
+	Iterable<? extends JvmFeature> getFeaturesForType(JvmTypeReference type);
 }
