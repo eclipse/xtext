@@ -7,14 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
-import org.eclipse.xtext.common.types.impl.JvmFieldImpl;
-
-import junit.framework.TestCase;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JvmFieldTest extends TestCase {
+public class JvmFieldTest extends JvmFeatureTest {
 
 	private JvmField field;
 
@@ -24,21 +20,31 @@ public class JvmFieldTest extends TestCase {
 		field = TypesFactory.eINSTANCE.createJvmField();
 	}
 	
-	public void testCanonicalName_01() {
-		assertNull(field.getIdentifier(), field.getIdentifier());
+	@Override
+	protected JvmFeature getObjectUnderTest() {
+		return field;
 	}
 	
-	public void testCanonicalName_02() {
-		field.internalSetIdentifier("java.lang.String.name");
-		assertEquals("java.lang.String.name", field.getIdentifier());
+	public void testGetIdentifier_02() {
+		field.internalSetIdentifier("java.lang.DoesNotExist.fieldName");
+		assertEquals("java.lang.DoesNotExist.fieldName", field.getIdentifier());
 	}
 	
-//	public void testGetSimpleName_01() {
-//		assertNull(field.getSimpleName());
-//	}
-//	
-//	public void testGetSimpleName_02() {
-//		field.setCanonicalName("java.lang.String.name");
-//		assertEquals("name", field.getSimpleName());
-//	}
+	public void testGetIdentifier_03() {
+		JvmGenericType type = TypesFactory.eINSTANCE.createJvmGenericType();
+		type.internalSetIdentifier("java.lang.DoesNotExist");
+		type.getMembers().add(field);
+		field.setSimpleName("fieldName");
+		assertEquals("java.lang.DoesNotExist.fieldName", field.getIdentifier());
+	}
+	
+	public void testGetIdentifier_04() {
+		JvmGenericType type = TypesFactory.eINSTANCE.createJvmGenericType();
+		type.setSimpleName("SimpleName");
+		type.setPackageName("java.lang");
+		type.getMembers().add(field);
+		field.setSimpleName("fieldName");
+		assertEquals("java.lang.SimpleName.fieldName", field.getIdentifier());
+	}
+	
 }

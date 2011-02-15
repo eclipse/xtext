@@ -18,7 +18,7 @@ public class JvmTypeParameterImplCustom extends JvmTypeParameterImpl {
 	}
 	
 	@Override
-	public String getQualifiedName() {
+	public String getQualifiedName(char innerClassDelimiter) {
 		return name;
 	}
 	

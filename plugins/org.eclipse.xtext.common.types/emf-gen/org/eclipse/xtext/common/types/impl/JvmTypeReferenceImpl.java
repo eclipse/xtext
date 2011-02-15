@@ -93,4 +93,16 @@ public abstract class JvmTypeReferenceImpl extends MinimalEObjectImpl.Container 
 		throw new UnsupportedOperationException();
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getQualifiedName(char innerClassDelimiter)
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
 } //JvmTypeReferenceImpl

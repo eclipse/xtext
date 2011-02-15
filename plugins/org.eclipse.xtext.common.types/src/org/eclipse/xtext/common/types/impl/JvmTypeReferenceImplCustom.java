@@ -31,10 +31,15 @@ public class JvmTypeReferenceImplCustom extends JvmTypeReferenceImpl {
 	}
 	
 	@Override
-	public String getQualifiedName() {
+	public final String getQualifiedName() {
+		return getQualifiedName('$');
+	}
+	
+	@Override
+	public String getQualifiedName(char innerClassDelimiter) {
 		JvmType type = getType();
 		if (type != null)
-			return type.getQualifiedName();
+			return type.getQualifiedName(innerClassDelimiter);
 		return null;
 	}
 	

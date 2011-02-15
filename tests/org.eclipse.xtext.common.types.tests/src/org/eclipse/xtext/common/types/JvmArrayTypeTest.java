@@ -22,11 +22,11 @@ public class JvmArrayTypeTest extends TestCase {
 		arrayType = TypesFactory.eINSTANCE.createJvmArrayType();
 	}	
 	
-	public void testCanonicalName_01() {
+	public void testGetIdentifier_01() {
 		assertNull(arrayType.getIdentifier());
 	}
 	
-	public void testCanonicalName_02() {
+	public void testGetIdentifier_02() {
 		JvmPrimitiveType primitiveType = TypesFactory.eINSTANCE.createJvmPrimitiveType();
 		primitiveType.setSimpleName("int");
 		JvmParameterizedTypeReference componentType = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
@@ -35,7 +35,7 @@ public class JvmArrayTypeTest extends TestCase {
 		assertEquals("int[]", arrayType.getIdentifier());
 	}
 	
-	public void testCanonicalName_03() {
+	public void testGetIdentifier_03() {
 		JvmPrimitiveType primitiveType = TypesFactory.eINSTANCE.createJvmPrimitiveType();
 		primitiveType.setSimpleName("int");
 		JvmParameterizedTypeReference componentType = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();

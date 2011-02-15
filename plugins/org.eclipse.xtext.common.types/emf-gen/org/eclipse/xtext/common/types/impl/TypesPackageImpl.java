@@ -1691,6 +1691,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 
 		addEOperation(jvmIdentifiableElementEClass, ecorePackage.getEString(), "getQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		EOperation op = addEOperation(jvmIdentifiableElementEClass, ecorePackage.getEString(), "getQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEChar(), "innerClassDelimiter", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(jvmTypeEClass, JvmType.class, "JvmType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(jvmVoidEClass, JvmVoid.class, "JvmVoid", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1714,7 +1717,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		initEAttribute(getJvmDeclaredType_Final(), ecorePackage.getEBoolean(), "final", null, 0, 1, JvmDeclaredType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJvmDeclaredType_PackageName(), ecorePackage.getEString(), "packageName", null, 0, 1, JvmDeclaredType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = addEOperation(jvmDeclaredTypeEClass, null, "getDeclaredOperations", 1, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(jvmDeclaredTypeEClass, null, "getDeclaredOperations", 1, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(this.getIterable());
 		EGenericType g2 = createEGenericType(this.getJvmOperation());
 		g1.getETypeArguments().add(g2);
@@ -1745,6 +1748,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		addEOperation(jvmTypeConstraintEClass, ecorePackage.getEString(), "getSimpleName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(jvmTypeConstraintEClass, ecorePackage.getEString(), "getQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(jvmTypeConstraintEClass, ecorePackage.getEString(), "getQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEChar(), "innerClassDelimiter", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(jvmUpperBoundEClass, JvmUpperBound.class, "JvmUpperBound", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1787,6 +1793,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		addEOperation(jvmTypeReferenceEClass, ecorePackage.getEString(), "getSimpleName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(jvmTypeReferenceEClass, ecorePackage.getEString(), "getQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(jvmTypeReferenceEClass, ecorePackage.getEString(), "getQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEChar(), "innerClassDelimiter", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(jvmParameterizedTypeReferenceEClass, JvmParameterizedTypeReference.class, "JvmParameterizedTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJvmParameterizedTypeReference_Arguments(), this.getJvmTypeReference(), null, "arguments", null, 0, -1, JvmParameterizedTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1895,6 +1904,63 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// http://www.eclipse.org/emf/2002/GenModel
+		createGenModelAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/GenModel</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createGenModelAnnotations()
+	{
+		String source = "http://www.eclipse.org/emf/2002/GenModel";		
+		addAnnotation
+		  (jvmIdentifiableElementEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] 
+		   {
+			 "documentation", "<p>The identifier of a JvmIdentifiableElement is a canonical representation of the element.</p>\n<p>A type will return its fully qualified name as its identifier with a \'$\' delimiter for inner classes. \nThe identifier of an executables contains the identifiers of their respective parameter types. They do\nnot contain any information about type parameters.</p>\n<p>Examples for identifiers are:</p>\n<ul>\n<li>java.lang.String for a class</li>\n<li>java.util.Map$Entry for an inner class</li>\n<li>java.lang.String.String() for a constructor</li>\n<li>java.lang.String.charAt(int) for a method</li>\n<li>java.lang.Object[][] for an array type</li>\n</ul>"
+		   });		
+		addAnnotation
+		  (jvmIdentifiableElementEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] 
+		   {
+			 "documentation", "<p>The simple name of a JvmIdentifiableElement is short representation of the element.</p>\n<p>The simple name does not contain any information about type parameters.</p>\n<p>Examples for simple names are:</p>\n<ul>\n<li>String for class java.lang.String</li>\n<li>Entry for class java.util.Map$Entry</li>\n<li>charAt for method java.lang.String.charAt(int)</li>\n<li>String for constructor java.lang.String.String(java.lang.String)</li>\n</ul>"
+		   });		
+		addAnnotation
+		  (jvmIdentifiableElementEClass.getEOperations().get(2), 
+		   source, 
+		   new String[] 
+		   {
+			 "documentation", "<p>The qualified name of a JvmIdentifiableElement is a textual representation of the element.</p>\n<p>The default delimiter character is the \'$\'.</p>\n@see #getQualifiedName(char)"
+		   });		
+		addAnnotation
+		  (jvmIdentifiableElementEClass.getEOperations().get(3), 
+		   source, 
+		   new String[] 
+		   {
+			 "documentation", "<p>The qualified name of a JvmIdentifiableElement is a textual representation of the element.</p>\n<p>The name does not contain any information about type parameters. Inner classes are delimited by means of \nthe given \'innerClassDelimiter\'</p>\n<p>Examples for qualified names with a \'$\' delimiter are:</p>\n<ul>\n<li>java.lang.String for class java.lang.String</li>\n<li>java.util.Map$Entry for class java.util.Map$Entry</li>\n<li>java.lang.String.charAt for method java.lang.String.charAt(int)</li>\n<li>java.lang.String.String for constructor java.lang.String.String(java.lang.String)</li>\n</ul>"
+		   });		
+		addAnnotation
+		  (jvmTypeConstraintEClass.getEOperations().get(0), 
+		   source, 
+		   new String[] 
+		   {
+			 "documentation", "<p>The identifier of a JvmTypeConstraint is a canonical representation of the constraint information.</p>\n<p>Examples for constraint identifiers are:</p>\n<ul>\n<li>extends java.util.List<java.lang.Map$Entry<java.lang.Object,java.lang.Object>></li>\n<li>super java.lang.Object</li>\n</ul>"
+		   });		
+		addAnnotation
+		  (jvmTypeReferenceEClass.getEOperations().get(1), 
+		   source, 
+		   new String[] 
+		   {
+			 "documentation", "<p>The identifier of a JvmTypeReference is a canonical representation of the referenced type \nincluding its type arguments.</p>\n<p>The types fully qualified name is used (\'$\' is the delimiter for inner types).</p>\n<p>Examples for reference identifiers are:</p>\n<ul>\n<li>java.lang.String for a reference to an object type</li>\n<li>java.util.Map$Entry<java.lang.Object,java.lang.Integer> for a parameterized type</li>\n<li>java.util.List<? extends java.lang.String>[] for a generic array type</li>\n</ul>"
+		   });
 	}
 
 } //TypesPackageImpl

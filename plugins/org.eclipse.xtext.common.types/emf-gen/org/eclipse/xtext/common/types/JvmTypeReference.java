@@ -30,6 +30,17 @@ public interface JvmTypeReference extends EObject
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>The identifier of a JvmTypeReference is a canonical representation of the referenced type 
+	 * including its type arguments.</p>
+	 * <p>The types fully qualified name is used ('$' is the delimiter for inner types).</p>
+	 * <p>Examples for reference identifiers are:</p>
+	 * <ul>
+	 * <li>java.lang.String for a reference to an object type</li>
+	 * <li>java.util.Map$Entry<java.lang.Object,java.lang.Integer> for a parameterized type</li>
+	 * <li>java.util.List<? extends java.lang.String>[] for a generic array type</li>
+	 * </ul>
+	 * <!-- end-model-doc -->
 	 * @model kind="operation"
 	 * @generated
 	 */
@@ -50,5 +61,13 @@ public interface JvmTypeReference extends EObject
 	 * @generated
 	 */
 	String getQualifiedName();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	String getQualifiedName(char innerClassDelimiter);
 
 } // JvmTypeReference

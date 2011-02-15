@@ -25,7 +25,7 @@ public class JvmVoidImplCustom extends JvmVoidImpl {
 	}
 	
 	@Override
-	public String getQualifiedName() {
+	public String getQualifiedName(char innerClassDelimiter) {
 		return VOID;
 	}
 

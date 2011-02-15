@@ -18,7 +18,7 @@ public class JvmPrimitiveTypeImplCustom extends JvmPrimitiveTypeImpl {
 	}
 	
 	@Override
-	public String getQualifiedName() {
+	public String getQualifiedName(char innerClassDelimiter) {
 		return simpleName;
 	}
 	

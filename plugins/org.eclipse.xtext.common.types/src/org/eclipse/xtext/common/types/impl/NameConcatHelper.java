@@ -25,7 +25,7 @@ class NameConcatHelper {
 		ID, QUALIFIED, SIMPLE
 	}
 	
-	static void appendConstraintsName(StringBuilder result, List<JvmTypeConstraint> constraints, NameType nameType) {
+	static void appendConstraintsName(StringBuilder result, List<JvmTypeConstraint> constraints, char innerClassDelimiter, NameType nameType) {
 		if (constraints == null || constraints.isEmpty())
 			return;
 		int wasLength = result.length();
@@ -34,34 +34,34 @@ class NameConcatHelper {
 				result.append(" & ");
 			switch(nameType) {
 				case ID: result.append(constraint.getIdentifier()); break;
-				case QUALIFIED: result.append(constraint.getQualifiedName()); break;
+				case QUALIFIED: result.append(constraint.getQualifiedName(innerClassDelimiter)); break;
 				case SIMPLE: result.append(constraint.getSimpleName()); break;
 			}
 		}
 	}
 
-	static String computeFor(JvmWildcardTypeReference typeReference, NameType nameType) {
+	static String computeFor(JvmWildcardTypeReference typeReference, char innerClassDelimiter, NameType nameType) {
 		if (typeReference.eIsSet(TypesPackage.Literals.JVM_CONSTRAINT_OWNER__CONSTRAINTS)) {
 			StringBuilder mutableResult = new StringBuilder(64);
 			mutableResult.append("? ");
-			appendConstraintsName(mutableResult, typeReference.getConstraints(), nameType);
+			appendConstraintsName(mutableResult, typeReference.getConstraints(), innerClassDelimiter, nameType);
 			return mutableResult.toString();
 		}
 		return "?";
 	}
 	
-	static String computeFor(JvmParameterizedTypeReference typeReference, NameType nameType) {
+	static String computeFor(JvmParameterizedTypeReference typeReference, char innerClassDelimiter, NameType nameType) {
 		if (typeReference.eIsSet(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE)) {
 			StringBuilder mutableResult = new StringBuilder(64);
 			JvmType type = typeReference.getType();
 			switch(nameType) {
 				case ID: mutableResult.append(type.getIdentifier()); break;
-				case QUALIFIED: mutableResult.append(type.getQualifiedName()); break;
+				case QUALIFIED: mutableResult.append(type.getQualifiedName(innerClassDelimiter)); break;
 				case SIMPLE: mutableResult.append(type.getSimpleName()); break;
 			}
 			if (typeReference.eIsSet(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS)) {
 				mutableResult.append("<");
-				appendArguments(mutableResult, typeReference.getArguments(), nameType);
+				appendArguments(mutableResult, typeReference.getArguments(), innerClassDelimiter, nameType);
 				mutableResult.append(">");
 				return mutableResult.toString();
 			}
@@ -70,7 +70,7 @@ class NameConcatHelper {
 		return null;
 	}
 
-	static void appendArguments(StringBuilder result, List<JvmTypeReference> arguments, NameType nameType) {
+	static void appendArguments(StringBuilder result, List<JvmTypeReference> arguments, char innerClassDelimiter, NameType nameType) {
 		if (arguments == null || arguments.isEmpty())
 			return;
 		int wasLength = result.length();
@@ -79,7 +79,7 @@ class NameConcatHelper {
 				result.append(",");
 			switch(nameType) {
 				case ID: result.append(argument.getIdentifier()); break;
-				case QUALIFIED: result.append(argument.getQualifiedName()); break;
+				case QUALIFIED: result.append(argument.getQualifiedName(innerClassDelimiter)); break;
 				case SIMPLE: result.append(argument.getSimpleName()); break;
 			}
 		}

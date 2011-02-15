@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -36,8 +37,13 @@ public abstract class AbstractClassMirror implements IClassMirror {
 			return getFragment(obj.eContainer(), fallback) + "/" + ((JvmTypeParameter) obj).getName();
 		if (obj instanceof JvmTypeReference || obj instanceof JvmFormalParameter)
 			return fallback.getFragment(obj);
-		if (obj instanceof JvmIdentifiableElement)
+		if (obj instanceof JvmIdentifiableElement) {
+			if (obj instanceof JvmArrayType) {
+				if (obj.eContainer() instanceof JvmGenericArrayTypeReference)
+					return fallback.getFragment(obj);
+			}
 			return ((JvmIdentifiableElement) obj).getIdentifier();
+		}
 		return fallback.getFragment(obj);
 	}
 	
@@ -47,6 +53,8 @@ public abstract class AbstractClassMirror implements IClassMirror {
 		}
 		int slash = fragment.indexOf('/'); 
 		if (slash != -1) {
+			if (slash == 0)
+				return fallback.getEObject(fragment);
 			String containerFragment = fragment.substring(0, slash);
 			EObject container = getEObject(resource, containerFragment, fallback);
 			if (container != null) {

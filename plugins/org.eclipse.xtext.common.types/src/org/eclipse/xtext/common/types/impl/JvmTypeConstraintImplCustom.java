@@ -21,9 +21,14 @@ public abstract class JvmTypeConstraintImplCustom extends JvmTypeConstraintImpl 
 	}
 	
 	@Override
-	public String getQualifiedName() {
+	public final String getQualifiedName() {
+		return getQualifiedName('$');
+	}
+	
+	@Override
+	public String getQualifiedName(char innerClassDelimiter) {
 		if (typeReference != null) {
-			return getTypeReference().getQualifiedName();
+			return getTypeReference().getQualifiedName(innerClassDelimiter);
 		}
 		return null;
 	}

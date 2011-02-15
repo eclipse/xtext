@@ -22,12 +22,18 @@ public class JvmPrimitiveTypeTest extends TestCase {
 		primitiveType = TypesFactory.eINSTANCE.createJvmPrimitiveType();
 	}
 	
-	public void testCanonicalName_01() {
+	public void testGetIdentifier_01() {
 		assertNull(primitiveType.getIdentifier());
 	}
 	
-	public void testCanonicalName_02() {
+	public void testGetIdentifier_02() {
 		primitiveType.setSimpleName("int");
 		assertEquals("int", primitiveType.getIdentifier());
+	}
+	
+	public void testQualifiedName() {
+		primitiveType.setSimpleName("int");
+		assertEquals("int", primitiveType.getQualifiedName());
+		assertEquals("int", primitiveType.getQualifiedName('$'));
 	}
 }

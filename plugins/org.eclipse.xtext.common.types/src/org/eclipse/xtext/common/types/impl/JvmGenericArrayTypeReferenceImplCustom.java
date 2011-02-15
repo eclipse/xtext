@@ -31,4 +31,29 @@ public class JvmGenericArrayTypeReferenceImplCustom extends JvmGenericArrayTypeR
 		return -1;
 	}
 	
+	@Override
+	public String getIdentifier() {
+		JvmTypeReference componentType = getComponentType();
+		if (componentType != null)
+			return componentType.getIdentifier() + "[]";
+		return null;
+	}
+	
+	@Override
+	public String getSimpleName() {
+		JvmTypeReference componentType = getComponentType();
+		if (componentType != null)
+			return componentType.getSimpleName() + "[]";
+		return null;
+	}
+	
+	@Override
+	public String getQualifiedName(char innerClassDelimiter) {
+		JvmTypeReference componentType = getComponentType();
+		if (componentType != null)
+			return componentType.getQualifiedName(innerClassDelimiter) + "[]";
+		return null;
+	}
+
+	
 }

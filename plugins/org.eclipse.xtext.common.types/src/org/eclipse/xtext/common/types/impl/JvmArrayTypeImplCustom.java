@@ -32,22 +32,22 @@ public class JvmArrayTypeImplCustom extends JvmArrayTypeImpl {
 
 	@Override
 	public String getIdentifier() {
-		if (componentType != null)
-			return getComponentType().getIdentifier() + "[]";
+		if (componentType != null && componentType.getType() != null)
+			return componentType.getType().getIdentifier() + "[]";
 		return null;
 	}
 	
 	@Override
 	public String getSimpleName() {
-		if (componentType != null)
-			return getComponentType().getSimpleName() + "[]";
+		if (componentType != null && componentType.getType() != null)
+			return componentType.getType().getSimpleName() + "[]";
 		return null;
 	}
 	
 	@Override
-	public String getQualifiedName() {
-		if (componentType != null)
-			return getComponentType().getQualifiedName() + "[]";
+	public String getQualifiedName(char innerClassDelimiter) {
+		if (componentType != null && componentType.getType() != null)
+			return componentType.getType().getQualifiedName(innerClassDelimiter) + "[]";
 		return null;
 	}
 

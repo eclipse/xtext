@@ -7,14 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
-import org.eclipse.xtext.common.types.impl.JvmConstructorImpl;
-
-import junit.framework.TestCase;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JvmConstructorTest extends TestCase {
+public class JvmConstructorTest extends JvmExecutableTest {
 
 	private JvmConstructor constructor;
 
@@ -24,13 +20,14 @@ public class JvmConstructorTest extends TestCase {
 		constructor = TypesFactory.eINSTANCE.createJvmConstructor();
 	}
 	
-	public void testCanonicalName_01() {
-		assertNull(constructor.getIdentifier(), constructor.getIdentifier());
+	@Override
+	protected JvmConstructor getObjectUnderTest() {
+		return constructor;
 	}
 	
-	public void testCanonicalName_02() {
-		constructor.internalSetIdentifier("java.lang.String.String()");
-		assertEquals("java.lang.String.String()", constructor.getIdentifier());
+	@Override
+	protected String getSimpleName() {
+		return "DoesNotExist";
 	}
 	
 }

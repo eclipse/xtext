@@ -9,12 +9,10 @@ package org.eclipse.xtext.common.types;
 
 import org.eclipse.xtext.common.types.impl.JvmEnumerationTypeImpl;
 
-import junit.framework.TestCase;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JvmEnumerationTypeTest extends TestCase {
+public class JvmEnumerationTypeTest extends JvmDeclaredTypeTest {
 
 	private JvmEnumerationTypeImpl enumerationType;
 
@@ -24,20 +22,9 @@ public class JvmEnumerationTypeTest extends TestCase {
 		enumerationType = (JvmEnumerationTypeImpl) TypesFactory.eINSTANCE.createJvmEnumerationType();
 	}
 	
-	public void testCanonicalName_01() {
-		assertNull(enumerationType.getIdentifier());
-	}
-	
-	public void testCanonicalName_02() {
-		enumerationType.internalSetIdentifier("java.lang.annotation.RetentionPolicy");
-		assertEquals("java.lang.annotation.RetentionPolicy", enumerationType.getIdentifier());
-	}
-	
-	public void testCanonicalName_03() {
-		JvmGenericType outerType = TypesFactory.eINSTANCE.createJvmGenericType();
-		outerType.getMembers().add(enumerationType);
-		enumerationType.internalSetIdentifier("java.lang.annotation.RetentionPolicy.Something");
-		assertEquals("java.lang.annotation.RetentionPolicy.Something", enumerationType.getIdentifier());
+	@Override
+	protected JvmEnumerationTypeImpl getObjectUnderTest() {
+		return enumerationType;
 	}
 	
 }

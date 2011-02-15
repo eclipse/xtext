@@ -83,6 +83,14 @@ public interface JvmTypeConstraint extends EObject
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * <p>The identifier of a JvmTypeConstraint is a canonical representation of the constraint information.</p>
+	 * <p>Examples for constraint identifiers are:</p>
+	 * <ul>
+	 * <li>extends java.util.List<java.lang.Map$Entry<java.lang.Object,java.lang.Object>></li>
+	 * <li>super java.lang.Object</li>
+	 * </ul>
+	 * <!-- end-model-doc -->
 	 * @model kind="operation"
 	 * @generated
 	 */
@@ -103,5 +111,13 @@ public interface JvmTypeConstraint extends EObject
 	 * @generated
 	 */
 	String getQualifiedName();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	String getQualifiedName(char innerClassDelimiter);
 
 } // JvmTypeConstraint
