@@ -10,16 +10,20 @@ package org.eclipse.xtext.serializer;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementFullTitleSwitch;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
 import org.eclipse.xtext.serializer.impl.DebugSequenceAcceptor;
@@ -77,25 +81,21 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 		assertEquals(Join.join("\n", getNodeSequence(model)), Join.join("\n", actual.getNodesColumn()));
 	}
 
-	//	public void testXtext() throws Exception {
-	//		with(XtextStandaloneSetup.class);
-	//		Grammar model = (Grammar) new XtextResourceSet()
-	//				.getResource(URI.createURI("classpath:/org/eclipse/xtext/Xtext.xtext"), true).getContents().get(0);
-	//		//		System.out.println(EmfFormatter.objToStr(model));
-	//		ISemanticSequencer semSequencer = get(ISemanticSequencer.class);
-	//		//		EObject ctx = semSequencer.findContexts(model, null).iterator().next();
-	//		IRecursiveSyntacticSequencer recSequencer = get(IRecursiveSyntacticSequencer.class);
-	//		DebugSequenceAcceptor actual = new NoEnterNodesDebugSequenceAcceptor(true);
-	//		//		IRecursiveSyntacticSequenceAcceptor synac = get(ISyntacticSequencer.class).createAcceptor(ctx, model, actual,
-	//		//				ISerializationDiagnostic.EXCEPTION_ACCEPTOR);
-	//		ISyntacticSequencer syn = get(ISyntacticSequencer.class);
-	//		recSequencer.createSequence(syn, semSequencer, getGrammarAccess().getGrammar().getRules().get(0), model,
-	//				actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
-	//		//		String actual = sequenceRecursively(semSequencer, ctx, model, true);
-	//		System.out.println(actual);
-	//		//		System.out.println(NodeModelUtils.compactDump(NodeModelUtils.getNode(model), false));
-	//		assertEquals(Join.join("\n", getNodeSequence(model)), Join.join("\n", actual.getNodesColumn()));
-	//	}
+	public void testXtext() throws Exception {
+		with(XtextStandaloneSetup.class);
+		Grammar model = (Grammar) new XtextResourceSet()
+				.getResource(URI.createURI("classpath:/org/eclipse/xtext/Xtext.xtext"), true).getContents().get(0);
+		ISemanticSequencer semSequencer = get(ISemanticSequencer.class);
+		IRecursiveSyntacticSequencer recSequencer = get(IRecursiveSyntacticSequencer.class);
+		DebugSequenceAcceptor actual = new NoEnterNodesDebugSequenceAcceptor(false);
+		ISyntacticSequencer syn = get(ISyntacticSequencer.class);
+		recSequencer.createSequence(syn, semSequencer, getGrammarAccess().getGrammar().getRules().get(0), model,
+				actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
+		//		String actual = sequenceRecursively(semSequencer, ctx, model, true);
+		//		System.out.println(actual);
+		//		System.out.println(NodeModelUtils.compactDump(NodeModelUtils.getNode(model), false));
+		assertEquals(Join.join("\n", getNodeSequence(model)), Join.join("\n", actual.getNodesColumn()));
+	}
 
 	public void testMandatoryKeywords() throws Exception {
 		List<IConstraintContext> ctxts = get(IGrammarConstraintProvider.class).getConstraints(
@@ -166,5 +166,21 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 
 	public void testExp2_e() throws Exception {
 		testSequence("#4 ((a * (((b + c)) * d) + e)) + f");
+	}
+
+	public void testCrossRef1_a() throws Exception {
+		testSequence("#5 $1terminal kw1 $1terminal");
+	}
+
+	public void testCrossRef1_b() throws Exception {
+		testSequence("#5 datatype kw2 datatype");
+	}
+
+	public void testCrossRef1_c() throws Exception {
+		testSequence("#5 someid kw3 someid");
+	}
+
+	public void testCrossRef1_d() throws Exception {
+		testSequence("#5 someid kw4 someid");
 	}
 }

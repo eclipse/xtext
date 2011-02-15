@@ -297,7 +297,6 @@ public class SyntacticSequencerPDAProviderAllAbsorberTest extends AbstractSyntac
 		expected.append("  'kw2' e=MyEnum\n");
 		expected.append("  'kw3' k='kw4'\n");
 		expected.append("  'kw5' b='kw6'\n");
-		expected.append("  'kw5' b='kw6' c1=[Model|MyTerminal]\n");
 		expected.append("  'kw5' c1=[Model|MyTerminal]\n");
 		expected.append("  'kw7' c2=[Model|MyDatatype]\n");
 		expected.append("  'kw8' c3=[Model|'kw9']\n");
@@ -313,7 +312,7 @@ public class SyntacticSequencerPDAProviderAllAbsorberTest extends AbstractSyntac
 		expected.append("  e=MyEnum 'kw3' k='kw4'\n");
 		expected.append("  k='kw4' 'kw5'\n");
 		expected.append("  k='kw4' 'kw5' b='kw6'\n");
-		expected.append("  k='kw4' 'kw5' b='kw6' c1=[Model|MyTerminal] !c1=[Model|MyTerminal]\n");
+		expected.append("  k='kw4' 'kw5' c1=[Model|MyTerminal]\n");
 		expected.append("  start t=MyTerminal\n");
 		expected.append("  t=MyTerminal 'kw1'\n");
 		expected.append("  t=MyTerminal 'kw1' d=MyDatatype");

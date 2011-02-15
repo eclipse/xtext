@@ -287,4 +287,22 @@ public class SyntacticSequencerPDAProviderMinimalAbsorberTest extends AbstractSy
 		assertEquals(expected.toString(), actual);
 	}
 
+	public void testMultiOptional() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Optional: val1=ID? val2=ID? val3=ID?;");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Optional:\n");
+		expected.append("  start val1=ID\n");
+		expected.append("  start val2=ID\n");
+		expected.append("  start val3=ID\n");
+		expected.append("  val1=ID stop\n");
+		expected.append("  val1=ID val2=ID\n");
+		expected.append("  val1=ID val3=ID\n");
+		expected.append("  val2=ID stop\n");
+		expected.append("  val2=ID val3=ID\n");
+		expected.append("  val3=ID stop");
+		assertEquals(expected.toString(), actual);
+	}
+
 }
