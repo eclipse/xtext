@@ -22,8 +22,17 @@ public class JvmVoidTest extends TestCase {
 		_void = TypesFactory.eINSTANCE.createJvmVoid();
 	}
 	
-	public void testCanonicalName_01() {
+	public void testGetIdentifier_01() {
 		assertEquals("void", _void.getIdentifier());
+	}
+	
+	public void testGetQualifiedName() {
+		assertEquals("void", _void.getQualifiedName());
+		assertEquals("void", _void.getQualifiedName('$'));
+	}
+	
+	public void testGetSimpleName() {
+		assertEquals("void", _void.getSimpleName());
 	}
 	
 }

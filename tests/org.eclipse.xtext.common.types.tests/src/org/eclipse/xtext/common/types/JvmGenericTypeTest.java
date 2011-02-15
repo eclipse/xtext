@@ -7,111 +7,27 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
-import java.util.Map;
-
-import org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl;
-
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import junit.framework.TestCase;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JvmGenericTypeTest extends TestCase {
+public class JvmGenericTypeTest extends JvmDeclaredTypeTest {
 
-	private JvmGenericTypeImpl genericType;
+	private JvmGenericType genericType;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		genericType = (JvmGenericTypeImpl) TypesFactory.eINSTANCE.createJvmGenericType();
+		genericType = TypesFactory.eINSTANCE.createJvmGenericType();
 	}
 	
-//	public void testCanonicalName_01() {
-//		assertNull(genericType.getCanonicalName(), genericType.getCanonicalName());
-//	}
-//	
-//	public void testCanonicalName_02() {
-//		genericType.setCanonicalName("java.util.List");
-//		assertEquals("java.util.List", genericType.getCanonicalName());
-//	}
-//	
-//	public void testCanonicalName_03() {
-//		JvmGenericType outerType = TypesFactory.eINSTANCE.createJvmGenericType();
-//		outerType.getMembers().add(genericType);
-//		genericType.setCanonicalName("java.util.List.ListElement");
-//		assertEquals("java.util.List.ListElement", genericType.getCanonicalName());
-//	}
-//	
-//	public void testCanonicalName_04() {
-//		JvmTypeParameter typeParameter = TypesFactory.eINSTANCE.createJvmTypeParameter();
-//		typeParameter.setName("T");
-//		genericType.setCanonicalName("java.util.List");
-//		genericType.getTypeParameters().add(typeParameter);
-//		assertEquals("java.util.List", genericType.getCanonicalName());
-//	}
-//	
-//	public void testCanonicalName_05() {
-//		JvmTypeParameter typeParameter1 = TypesFactory.eINSTANCE.createJvmTypeParameter();
-//		typeParameter1.setName("T1");
-//		JvmTypeParameter typeParameter2 = TypesFactory.eINSTANCE.createJvmTypeParameter();
-//		typeParameter2.setName("T2");
-//		genericType.setCanonicalName("java.util.List");
-//		genericType.getTypeParameters().add(typeParameter1);
-//		genericType.getTypeParameters().add(typeParameter2);
-//		assertEquals("java.util.List", genericType.getCanonicalName());
-//	}
-//	
-//	public void testGetSimpleName_01() {
-//		genericType.setCanonicalName(Map.Entry.class.getName());
-//		assertEquals("Entry", genericType.getSimpleName());
-//	}
-//	
-//	public void testGetSimpleName_02() {
-//		assertNull(genericType.getSimpleName());
-//	}
-//	
-//	public void testGetSimpleName_03() {
-//		genericType.setCanonicalName(Map.class.getName());
-//		assertEquals("Map", genericType.getSimpleName());
-//	}
-//	
-//	public void testGetSimpleName_04() {
-//		genericType.setCanonicalName("Something$Entry");
-//		assertEquals("Entry", genericType.getSimpleName());
-//	}
-//	
-//	public void testGetSimpleName_05() {
-//		genericType.setCanonicalName("Something");
-//		assertEquals("Something", genericType.getSimpleName());
-//	}
-//	
-//	public void testGetPackageName_01() {
-//		genericType.setCanonicalName(Map.Entry.class.getName());
-//		assertEquals("java.util", genericType.getPackageName());
-//	}
-//	
-//	public void testGetPackageName_02() {
-//		assertNull(genericType.getPackageName());
-//	}
-//	
-//	public void testGetPackageName_03() {
-//		genericType.setCanonicalName(Map.class.getName());
-//		assertEquals("java.util", genericType.getPackageName());
-//	}
-//	
-//	public void testGetPackageName_04() {
-//		genericType.setCanonicalName("Something$Entry");
-//		assertEquals("", genericType.getPackageName());
-//	}
-//	
-//	public void testGetPackageName_05() {
-//		genericType.setCanonicalName("Something");
-//		assertEquals("", genericType.getPackageName());
-//	}
+	@Override
+	protected JvmGenericType getObjectUnderTest() {
+		return genericType;
+	}
 	
 	public void testIsInstantiateable_01() {
 		assertTrue(genericType.isInstantiateable());

@@ -22,7 +22,7 @@ public class JvmLowerBoundTest extends TestCase {
 		lowerBound = TypesFactory.eINSTANCE.createJvmLowerBound();
 	}
 	
-	public void testCanonicalName_01() {
+	public void testGetIdentifier_01() {
 		assertNull(lowerBound.getIdentifier());
 	}
 }

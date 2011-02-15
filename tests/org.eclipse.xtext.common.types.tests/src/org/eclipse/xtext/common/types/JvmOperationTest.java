@@ -9,12 +9,10 @@ package org.eclipse.xtext.common.types;
 
 import org.eclipse.xtext.common.types.impl.JvmOperationImpl;
 
-import junit.framework.TestCase;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JvmOperationTest extends TestCase {
+public class JvmOperationTest extends JvmExecutableTest {
 
 	private JvmOperationImpl operation;
 
@@ -24,21 +22,14 @@ public class JvmOperationTest extends TestCase {
 		operation = (JvmOperationImpl) TypesFactory.eINSTANCE.createJvmOperation();
 	}
 	
-	public void testCanonicalName_01() {
-		assertNull(operation.getIdentifier(), operation.getIdentifier());
+	@Override
+	protected JvmExecutable getObjectUnderTest() {
+		return operation;
 	}
-
-//	public void testCanonicalName_02() {
-//		operation.setCanonicalName("java.lang.String.charAt(int)");
-//		assertEquals("java.lang.String.charAt(int)", operation.getCanonicalName());
-//	}
-//	
-//	public void testGetSimpleName_01() {
-//		assertNull(operation.getSimpleName());
-//	}
-//	
-//	public void testGetSimpleName_02() {
-//		operation.setCanonicalName("java.lang.String.charAt(int)");
-//		assertEquals("charAt", operation.getSimpleName());
-//	}
+	
+	@Override
+	protected String getSimpleName() {
+		return "methodName";
+	}
+	
 }
