@@ -63,8 +63,8 @@ public class DispatchingSupportTest extends AbstractXtend2TestCase {
 		Collection<JvmOperation> collection = multimap.values();
 		List<JvmOperation> list = dispatchingSupport.sort(collection);
 		Iterator<JvmOperation> i = list.iterator();
-		assertEquals(Boolean.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
 		assertEquals(Integer.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
+		assertEquals(Boolean.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
 		assertEquals(String.class.getName(), i.next().getParameters().get(0).getParameterType().getCanonicalName());
 	}
 	
