@@ -24,13 +24,18 @@ public abstract class JvmMemberImplCustom extends JvmMemberImpl {
 	}
 	
 	@Override
-	public String getQualifiedName() {
+	public final String getQualifiedName() {
+		return getQualifiedName('$');
+	}
+	
+	@Override
+	public String getQualifiedName(char innerClassDelimiter) {
 		if (simpleName == null)
 			return null;
 		JvmDeclaredType declaringType = getDeclaringType();
 		if (declaringType == null)
 			return simpleName;
-		return declaringType.getQualifiedName() + "." + simpleName;
+		return declaringType.getQualifiedName(innerClassDelimiter) + '.' + simpleName;
 	}
 	
 	@Override
@@ -43,7 +48,7 @@ public abstract class JvmMemberImplCustom extends JvmMemberImpl {
 			return null;
 		JvmDeclaredType declaringType = getDeclaringType();
 		if (declaringType == null)
-			return null;
+			return simpleName;
 		return declaringType.getIdentifier() + "." + simpleName;
 	}
 

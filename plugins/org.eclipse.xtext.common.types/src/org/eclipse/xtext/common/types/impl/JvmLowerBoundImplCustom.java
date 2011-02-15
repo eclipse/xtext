@@ -29,9 +29,9 @@ public class JvmLowerBoundImplCustom extends JvmLowerBoundImpl {
 	}
 	
 	@Override
-	public String getQualifiedName() {
+	public String getQualifiedName(char innerClassDelimiter) {
 		if (typeReference != null)
-			return SUPER + super.getQualifiedName();
+			return SUPER + super.getQualifiedName(innerClassDelimiter);
 		return null;
 	}
 }

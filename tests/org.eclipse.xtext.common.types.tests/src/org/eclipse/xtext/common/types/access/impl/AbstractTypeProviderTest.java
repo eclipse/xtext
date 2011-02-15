@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -24,6 +25,7 @@ import org.eclipse.emf.ecore.impl.EValidatorRegistryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EObjectValidator;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
@@ -84,6 +86,7 @@ import org.eclipse.xtext.common.types.testSetups.TypeWithInnerEnum;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
@@ -111,6 +114,28 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 			assertTrue(diagnostic.toString(), diagnostic.getSeverity() == Diagnostic.OK);
 		}
 	}
+	
+	protected void recomputeAndCheckIdentifiers(Resource resource) {
+		Iterator<JvmMember> iter = Iterators.filter(EcoreUtil.getAllContents(resource, false), JvmMember.class);
+		while(iter.hasNext()) {
+			JvmMember member = iter.next();
+			String identifier = member.getIdentifier();
+			member.internalSetIdentifier(null);
+			String computed = member.getIdentifier();
+			assertNotNull(computed);
+			assertEquals(identifier, computed);
+		}
+	}
+
+	protected void getAndResolveAllFragments(Resource resource) {
+		Iterator<EObject> iter = EcoreUtil.getAllContents(resource, false);
+		while(iter.hasNext()) {
+			EObject next = iter.next();
+			String fragment = resource.getURIFragment(next);
+			EObject resolved = resource.getEObject(fragment);
+			assertSame(fragment + " / " + next.eClass().getName(), next, resolved);
+		}
+	}
 
 	public void testFindTypeByName_int() {
 		String typeName = "int";
@@ -119,6 +144,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertTrue(type instanceof JvmPrimitiveType);
 		assertEquals(typeName, type.getIdentifier());
 		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
 	}
 
 	public void testFindTypeByName_int_twice() {
@@ -135,6 +163,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertTrue(type instanceof JvmArrayType);
 		assertEquals(typeName, type.getIdentifier());
 		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
 	}
 
 	public void testFindTypeByName_int_array_02() {
@@ -152,6 +183,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertTrue(type instanceof JvmArrayType);
 		assertEquals("int[][][]", type.getIdentifier());
 		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
 	}
 
 	public void testFindTypeByName_int_array_04() {
@@ -169,6 +203,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertTrue(type instanceof JvmGenericType);
 		assertEquals(typeName, type.getIdentifier());
 		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
 	}
 
 	public void testFindTypeByName_javaLangCharSequence_02() {
@@ -219,6 +256,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertFalse("isProxy: " + serializableType, serializableType.eIsProxy());
 		assertEquals(Serializable.class.getName(), serializableType.getIdentifier());
 		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
 	}
 
 	public void testFindTypeByName_javaLangNumber_02() {
@@ -231,6 +271,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(type, number.getArrayType().getArrayType());
 		assertNull(type.getArrayType());
 		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
 	}
 
 	public void testFindTypeByName_javaUtilList_01() {
@@ -250,6 +293,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertFalse(upperBound.getTypeReference().getType().eIsProxy());
 		assertEquals(Object.class.getName(), upperBound.getTypeReference().getIdentifier());
 		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
 	}
 
 	public void testFindTypeByName_javaUtilList_02() {
@@ -338,6 +384,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(1, constructorCount);
 		assertEquals(methodCount + constructorCount, type.getMembers().size());
 		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
 	}
 
 	public void testMemberCount_02() {
@@ -349,6 +398,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(1, constructorCount);
 		assertEquals(methodCount + constructorCount, type.getMembers().size());
 		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
 	}
 
 	public void testMemberCount_03() {
@@ -360,6 +412,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(1, constructorCount); // default constructor
 		assertEquals(methodCount + constructorCount, type.getMembers().size());
 		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
 	}
 
 	public void testMemberCount_04() {
@@ -373,6 +428,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(1, nestedTypesCount);
 		assertEquals(methodCount + constructorCount + nestedTypesCount, type.getMembers().size());
 		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
 	}
 
 	public void testMemberCount_05() {
@@ -408,6 +466,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(1, nestedTypesCount);
 		assertEquals(methodCount + constructorCount + nestedTypesCount, type.getMembers().size());
 		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
 	}
 
 	public void testMemberCount_08() {
@@ -443,6 +504,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(1, nestedTypesCount);
 		assertEquals(methodCount + constructorCount + nestedTypesCount, type.getMembers().size());
 		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
 	}
 
 	public void testMemberCount_11() {
@@ -466,6 +530,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(1, nestedCount);
 		assertEquals(nestedCount + constructorCount + fieldCount, type.getMembers().size());
 		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
 	}
 
 	public void testMemberCount_13() {
@@ -1309,6 +1376,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		JvmType type = getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
 		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
 	}
 
 	public void testInnerEnumType() throws Exception {
@@ -1358,6 +1428,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertNotNull(type);
 		assertTrue(type instanceof JvmAnnotationType);
 		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
 	}
 	
 	public void testAnnotationType_02() throws Exception {
@@ -1373,6 +1446,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertNotNull(type);
 		assertTrue(type instanceof JvmEnumerationType);
 		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
 	}
 	
 	public void testEnum_02() throws Exception {
@@ -1987,6 +2063,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		JvmType type = getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
 		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
 	}
 	
 	public void testVarArgs_02() {

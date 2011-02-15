@@ -23,7 +23,7 @@ public class JvmFormalParameterImplCustom extends JvmFormalParameterImpl {
 	}
 	
 	@Override
-	public String getQualifiedName() {
+	public String getQualifiedName(char innerClassDelimiter) {
 		return name;
 	}
 

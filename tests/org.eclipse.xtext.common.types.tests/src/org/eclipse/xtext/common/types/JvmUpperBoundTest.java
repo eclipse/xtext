@@ -22,7 +22,7 @@ public class JvmUpperBoundTest extends TestCase {
 		upperBound = TypesFactory.eINSTANCE.createJvmUpperBound();
 	}
 	
-	public void testCanonicalName_01() {
+	public void testGetIdentifier_01() {
 		assertNull(upperBound.getIdentifier());
 	}
 }

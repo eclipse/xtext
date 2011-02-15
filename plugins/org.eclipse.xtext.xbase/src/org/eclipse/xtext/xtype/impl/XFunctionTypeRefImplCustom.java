@@ -53,28 +53,28 @@ public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 		StringBuilder result = new StringBuilder("(");
 		for (int i = 0;i< getParamTypes().size();i++) {
 			JvmTypeReference reference = getParamTypes().get(i);
-			result.append(reference.getType().getIdentifier());
+			result.append(reference.getIdentifier());
 			if (i<getParamTypes().size()-1)
 				result.append(", ");
 		}
 		result.append(") => ");
 		if (getReturnType()!=null)
-			result.append(getReturnType().getType().getIdentifier());
+			result.append(getReturnType().getIdentifier());
 		return result.toString();
 	}
 	
 	@Override
-	public String getQualifiedName() {
+	public String getQualifiedName(char innerClassDelimiter) {
 		StringBuilder result = new StringBuilder("(");
 		for (int i = 0;i< getParamTypes().size();i++) {
 			JvmTypeReference reference = getParamTypes().get(i);
-			result.append(reference.getType().getQualifiedName());
+			result.append(reference.getQualifiedName(innerClassDelimiter));
 			if (i<getParamTypes().size()-1)
 				result.append(", ");
 		}
 		result.append(") => ");
 		if (getReturnType()!=null)
-			result.append(getReturnType().getType().getQualifiedName());
+			result.append(getReturnType().getQualifiedName(innerClassDelimiter));
 		return result.toString();
 	}
 	
@@ -83,13 +83,13 @@ public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 		StringBuilder result = new StringBuilder("(");
 		for (int i = 0;i< getParamTypes().size();i++) {
 			JvmTypeReference reference = getParamTypes().get(i);
-			result.append(reference.getType().getSimpleName());
+			result.append(reference.getSimpleName());
 			if (i<getParamTypes().size()-1)
 				result.append(", ");
 		}
 		result.append(") => ");
 		if (getReturnType()!=null)
-			result.append(getReturnType().getType().getSimpleName());
+			result.append(getReturnType().getSimpleName());
 		return result.toString();
 	}
 }

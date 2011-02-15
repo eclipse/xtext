@@ -23,6 +23,11 @@ public class XSwitchExpressionImplCustom extends XSwitchExpressionImpl {
 	}
 	
 	@Override
+	public String getQualifiedName(char innerClassDelimiter) {
+		return getLocalVarName();
+	}
+	
+	@Override
 	public String getQualifiedName() {
 		return getLocalVarName();
 	}

@@ -16,17 +16,17 @@ public class JvmParameterizedTypeReferenceImplCustom extends JvmParameterizedTyp
 
 	@Override
 	public String getIdentifier() {
-		return NameConcatHelper.computeFor(this, NameType.ID);
+		return NameConcatHelper.computeFor(this, '$', NameType.ID);
 	}
 	
 	@Override
 	public String getSimpleName() {
-		return NameConcatHelper.computeFor(this, NameType.SIMPLE);
+		return NameConcatHelper.computeFor(this, '$', NameType.SIMPLE);
 	}
 	
 	@Override
-	public String getQualifiedName() {
-		return NameConcatHelper.computeFor(this, NameType.QUALIFIED);
+	public String getQualifiedName(char innerClassDelimiter) {
+		return NameConcatHelper.computeFor(this, innerClassDelimiter, NameType.QUALIFIED);
 	}
 
 	

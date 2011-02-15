@@ -22,11 +22,11 @@ public class JvmTypeParameterTest extends TestCase {
 		typeParameter = TypesFactory.eINSTANCE.createJvmTypeParameter();
 	}
 	
-	public void testCanonicalName_01() {
+	public void testGetIdentifier_01() {
 		assertNull(typeParameter.getIdentifier());
 	}
 	
-	public void testCanonicalName_02() {
+	public void testGetIdentifier_02() {
 		String name = "T";
 		typeParameter.setName(name);
 		assertEquals("T", typeParameter.getIdentifier());

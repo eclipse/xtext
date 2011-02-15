@@ -22,7 +22,7 @@ public class JvmWildcardTypeReferenceTest extends TestCase {
 		typeArgument = TypesFactory.eINSTANCE.createJvmWildcardTypeReference();
 	}
 	
-	public void testCanonicalName_01() {
+	public void testGetIdentifier_01() {
 		assertEquals("?", typeArgument.getIdentifier());
 	}
 	

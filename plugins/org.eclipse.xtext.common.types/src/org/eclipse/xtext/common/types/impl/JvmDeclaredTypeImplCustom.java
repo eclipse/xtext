@@ -21,8 +21,9 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 
 	@Override
 	public String getPackageName() {
-		if (getDeclaringType() != null)
-			return getDeclaringType().getPackageName();
+		JvmDeclaredType declaringType = getDeclaringType();
+		if (declaringType != null)
+			return declaringType.getPackageName();
 		return packageName;
 	}
 
@@ -39,7 +40,23 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 		String parentName = declaringType.getIdentifier();
 		if (parentName == null)
 			return null;
-		return parentName + "$" + simpleName;
+		return parentName + '$' + simpleName;
+	}
+	
+	@Override
+	public String getQualifiedName(char innerClassDelimiter) {
+		if (simpleName == null)
+			return null;
+		JvmDeclaredType declaringType = getDeclaringType();
+		if (declaringType == null) {
+			if (Strings.isEmpty(packageName))
+				return simpleName;
+			return packageName + "." + simpleName;
+		}
+		String parentName = declaringType.getQualifiedName(innerClassDelimiter);
+		if (parentName == null)
+			return null;
+		return parentName + innerClassDelimiter + simpleName;
 	}
 	
 	@Override

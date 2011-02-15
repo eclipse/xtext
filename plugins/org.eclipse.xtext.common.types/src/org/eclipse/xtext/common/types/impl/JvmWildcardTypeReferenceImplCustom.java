@@ -16,17 +16,17 @@ public class JvmWildcardTypeReferenceImplCustom extends JvmWildcardTypeReference
 	
 	@Override
 	public String getIdentifier() {
-		return NameConcatHelper.computeFor(this, NameConcatHelper.NameType.ID);
+		return NameConcatHelper.computeFor(this, '$', NameConcatHelper.NameType.ID);
 	}
 	
 	@Override
-	public String getQualifiedName() {
-		return NameConcatHelper.computeFor(this, NameConcatHelper.NameType.QUALIFIED);
+	public String getQualifiedName(char innerClassDelimiter) {
+		return NameConcatHelper.computeFor(this, innerClassDelimiter, NameConcatHelper.NameType.QUALIFIED);
 	}
 	
 	@Override
 	public String getSimpleName() {
-		return NameConcatHelper.computeFor(this, NameConcatHelper.NameType.SIMPLE);
+		return NameConcatHelper.computeFor(this, '$', NameConcatHelper.NameType.SIMPLE);
 	}
 	
 	@Override

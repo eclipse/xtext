@@ -13,6 +13,11 @@ package org.eclipse.xtext.common.types.impl;
 public abstract class JvmIdentifiableElementImplCustom extends JvmIdentifiableElementImpl {
 	
 	@Override
+	public final String getQualifiedName() {
+		return getQualifiedName('$');
+	}
+	
+	@Override
 	public String toString() {
 		StringBuilder result = new StringBuilder(eClass().getName());
 		result.append(": ");

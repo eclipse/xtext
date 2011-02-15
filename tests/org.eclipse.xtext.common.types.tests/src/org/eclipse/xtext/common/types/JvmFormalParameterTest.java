@@ -22,16 +22,16 @@ public class JvmFormalParameterTest extends TestCase {
 		formalParameter = TypesFactory.eINSTANCE.createJvmFormalParameter();
 	}
 	
-	public void testCanonicalName_01() {
+	public void testGetIdentifier_01() {
 		assertNull(formalParameter.getIdentifier());
 	}
 	
-//	public void testCanonicalName_02() {
+//	public void testGetIdentifier_02() {
 //		formalParameter.setName("param");
 //		assertNull(formalParameter.getCanonicalName());
 //	}
 	
-//	public void testCanonicalName_03() {
+//	public void testGetIdentifier_03() {
 //		JvmTypeParameter typeParameter = TypesFactory.eINSTANCE.createJvmTypeParameter();
 //		typeParameter.setName("T");
 //		formalParameter.setName("param");
