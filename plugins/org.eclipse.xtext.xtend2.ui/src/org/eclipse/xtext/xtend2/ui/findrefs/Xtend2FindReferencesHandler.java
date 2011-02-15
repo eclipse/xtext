@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.findrefs;
 
+import static com.google.common.collect.Lists.*;
+
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -14,20 +18,16 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.ITextSelection;
-import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler;
 import org.eclipse.xtext.ui.editor.findrefs.Messages;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
-import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
 /**
@@ -39,38 +39,25 @@ public class Xtend2FindReferencesHandler extends FindReferencesHandler {
 
 	@Inject
 	private IXtend2JvmAssociations xtend2jvmAssociations;
-	
+
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
 			XtextEditor editor = EditorUtils.getActiveXtextEditor(event);
 			if (editor != null) {
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
-				Pair<URI, Filter> queryData = editor.getDocument().readOnly(
-						new IUnitOfWork<Pair<URI, Filter>, XtextResource>() {
-							public Pair<URI, Filter> exec(XtextResource state)
-									throws Exception {
-								EObject element = eObjectAtOffsetHelper.resolveElementAt(state, selection.getOffset());
-								if (element != null) {
-									Filter filter = new Filter();
-									if (element instanceof XtendClass) {
-										filter.setFilteredXtendSource(element);
-										element = xtend2jvmAssociations.getInferredType((XtendClass) element);
-									} else if (element instanceof XtendFunction) {
-										filter.setFilteredXtendSource(element);
-										element = xtend2jvmAssociations.getDirectlyInferredOperation((XtendFunction) element);
-									}
-									return Tuples.create(EcoreUtil.getURI(element), filter);
-								}
-								return null;
-							}
-
-						});
+				QueryData queryData = editor.getDocument().readOnly(new IUnitOfWork<QueryData, XtextResource>() {
+					public QueryData exec(XtextResource state) throws Exception {
+						EObject element = eObjectAtOffsetHelper.resolveElementAt(state, selection.getOffset());
+						return createQueryData(element);
+					}
+				});
 				if (queryData != null) {
-					QueryExecutor queryExecutor = globalServiceProvider.findService(
-							queryData.getFirst().trimFragment(), QueryExecutor.class);
+					QueryExecutor queryExecutor = globalServiceProvider.findService(queryData.getTargetElementURIs().get(0),
+							QueryExecutor.class);
 					if (queryExecutor != null) {
-						queryExecutor.execute(queryData.getFirst(), localContextProvider, queryData.getSecond());
+						queryExecutor.execute(queryData.getTargetElementURIs(), localContextProvider,
+								createFilter(queryData));
 					}
 				}
 			}
@@ -80,19 +67,40 @@ public class Xtend2FindReferencesHandler extends FindReferencesHandler {
 		return null;
 	}
 
-	protected static class Filter implements Predicate<IReferenceDescription> {
-		private URI xtendSourceURI;
+	public Xtend2ReferenceFilter createFilter(QueryData queryData) {
+		return new Xtend2ReferenceFilter(queryData.getExcludedSourceURI());
+	}
 
-		public void setFilteredXtendSource(EObject xtendSource) {
-			xtendSourceURI = EcoreUtil.getURI(xtendSource);
+	public QueryData createQueryData(EObject element) {
+		if (element != null) {
+			if (element instanceof XtendClass)
+				return new QueryData(element, xtend2jvmAssociations.getInferredType((XtendClass) element), xtend2jvmAssociations.getInferredConstructor((XtendClass) element));
+			else if (element instanceof XtendFunction)
+				return new QueryData(element, xtend2jvmAssociations.getDirectlyInferredOperation((XtendFunction) element));
+			else
+				return new QueryData(null, element);
+		}
+		return null;
+	}
+
+	public static class QueryData {
+		protected List<URI> targetElementURIs = null;
+		protected URI excludedSourceURI;
+
+		public QueryData(EObject excludedSourceElement, EObject... targetElements) {
+			this.targetElementURIs = newArrayList();
+			for (EObject element : targetElements)
+				targetElementURIs.add(EcoreUtil.getURI(element));
+			this.excludedSourceURI = EcoreUtil.getURI(excludedSourceElement);
 		}
 
-		public boolean apply(IReferenceDescription input) {
-			return !isInferredJvmElement(input.getSourceEObjectUri()) && (xtendSourceURI == null || !xtendSourceURI.equals(input.getSourceEObjectUri()));
+		public List<URI> getTargetElementURIs() {
+			return targetElementURIs;
 		}
 
-		protected boolean isInferredJvmElement(URI elementURI) {
-			return elementURI.fragment().startsWith("/1/");
+		public URI getExcludedSourceURI() {
+			return excludedSourceURI;
 		}
 	}
+
 }

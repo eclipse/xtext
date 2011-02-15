@@ -31,6 +31,12 @@ public class CompilationFileProviderTest extends AbstractXtend2UITestCase {
 	@Inject
 	protected CompilationFileProvider compilationFileProvider;
 
+	@Override
+	protected void tearDown() throws Exception {
+		super.tearDown();
+		IResourcesSetupUtil.cleanWorkspace();
+	}
+	
 	public void testTargetFolderName() {
 		assertEquals("xtend2-gen", compilationFileProvider.getTargetFolderName());
 	}
@@ -56,7 +62,7 @@ public class CompilationFileProviderTest extends AbstractXtend2UITestCase {
 		IJavaProject javaProject = createJavaProject("test");
 		IProject project = javaProject.getProject();
 		String sourceFileName = "Test";
-		String sourceFilePath = "/" + project.getName() + "/src/" + sourceFileName + "." + fileExtension;
+		String sourceFilePath = "/" + project.getName() + "/src/" + sourceFileName + "." + getFileExtension();
 		URI sourceURI = URI.createPlatformResourceURI(sourceFilePath, true);
 		IFile sourceFile = compilationFileProvider.getFile(sourceURI, project);
 		assertEquals(sourceFilePath, sourceFile.getFullPath().toString());

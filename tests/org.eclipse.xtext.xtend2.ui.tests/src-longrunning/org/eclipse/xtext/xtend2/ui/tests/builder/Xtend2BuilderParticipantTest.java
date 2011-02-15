@@ -16,21 +16,34 @@ import java.io.InputStream;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
+
+import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class Xtend2BuilderParticipantTest extends AbstractXtend2UITestCase {
 
+	@Inject
+	private IWorkspace workspace;
+	
+	@Override
+	protected void tearDown() throws Exception {
+		super.tearDown();
+		IResourcesSetupUtil.cleanWorkspace();
+	}
+	
 	public void testBuild() throws Exception {
 		IJavaProject javaProject = createJavaProject("test");
 		IProject project = javaProject.getProject();
 		addNature(project, XtextProjectHelper.NATURE_ID);
-		IFile sourceFile = createFile("/test/src/test/Test." + fileExtension, "package test\nclass Test {}");
+		IFile sourceFile = createFile("/test/src/test/Test." + getFileExtension(), "package test\nclass Test {}");
 		sourceFile.setCharset(getNonDefaultEncoding(), null);
 		waitForAutoBuild();
 

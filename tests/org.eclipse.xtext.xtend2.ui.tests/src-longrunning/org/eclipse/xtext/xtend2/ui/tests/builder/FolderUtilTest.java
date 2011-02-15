@@ -12,6 +12,7 @@ import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.xtend2.ui.builder.FolderUtil;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 
@@ -25,6 +26,12 @@ public class FolderUtilTest extends AbstractXtend2UITestCase {
 
 	@Inject
 	protected FolderUtil folderUtil;
+	
+	@Override
+	protected void tearDown() throws Exception {
+		super.tearDown();
+		IResourcesSetupUtil.cleanWorkspace();
+	}
 	
 	public void testClearFolder() throws Exception {
 		createProject("test");

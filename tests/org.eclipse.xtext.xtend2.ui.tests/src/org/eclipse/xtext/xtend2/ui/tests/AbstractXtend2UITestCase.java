@@ -9,12 +9,10 @@ package org.eclipse.xtext.xtend2.ui.tests;
 
 import junit.framework.TestCase;
 
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xtend2.ui.internal.Xtend2Activator;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -23,19 +21,16 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.name.Named;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public abstract class AbstractXtend2UITestCase extends TestCase {
 
+	private static Injector injector = Xtend2Activator.getInstance().getInjector("org.eclipse.xtext.xtend2.Xtend2");
+	
 	@Inject
-	protected IWorkspace workspace;
-
-	protected String fileExtension;
-
-	static Injector injector = Xtend2Activator.getInstance().getInjector("org.eclipse.xtext.xtend2.Xtend2");
+	private FileExtensionProvider fileExtensionProvider; 
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -43,12 +38,6 @@ public abstract class AbstractXtend2UITestCase extends TestCase {
 		getInjector().injectMembers(this);
 	}
 
-	@Override
-	protected void tearDown() throws Exception {
-		IResourcesSetupUtil.cleanWorkspace();
-		super.tearDown();
-	}
-	
 	public Injector getInjector() {
 		return injector;
 	}
@@ -63,7 +52,7 @@ public abstract class AbstractXtend2UITestCase extends TestCase {
 	
 	protected XtendFile file(String string) throws Exception {
 		XtextResourceSet set = get(XtextResourceSet.class);
-		Resource resource = set.createResource(URI.createURI("Test." + fileExtension));
+		Resource resource = set.createResource(URI.createURI("Test." + getFileExtension()));
 		resource.load(new StringInputStream(string), null);
 		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
 		XtendFile file = (XtendFile) resource.getContents().get(0);
@@ -75,8 +64,7 @@ public abstract class AbstractXtend2UITestCase extends TestCase {
 		return (XtendFunction) clazz.getMembers().get(0);
 	}
 	
-	@Inject
-	protected void setExtensions(@Named(Constants.FILE_EXTENSIONS) String extensions) {
-		this.fileExtension = extensions.split(",")[0];
+	protected String getFileExtension() {
+		return fileExtensionProvider.getFileExtensions().iterator().next();
 	}
 }

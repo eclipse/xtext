@@ -28,6 +28,7 @@ import org.eclipse.xtext.xtend2.ui.highlighting.RichStringHighlightingCalculator
 import org.eclipse.xtext.xtend2.ui.highlighting.ShowWhitespaceCharactersActionContributor;
 import org.eclipse.xtext.xtend2.ui.highlighting.TokenToAttributeIdMapper;
 import org.eclipse.xtext.xtend2.ui.refactoring.Xtend2DependentElementsCalculator;
+import org.eclipse.xtext.xtend2.ui.refactoring.Xtend2ReferenceFilterProvider;
 import org.eclipse.xtext.xtend2.ui.refactoring.Xtend2ReferenceUpdater;
 import org.eclipse.xtext.xtend2.ui.refactoring.Xtend2RenameStrategy;
 
@@ -83,6 +84,10 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 	
 	public Class<? extends IReferenceUpdater> bindIReferenceUpdater() {
 		return Xtend2ReferenceUpdater.class;
+	}
+	
+	public Class<? extends IReferenceUpdater.IFilterProvider> bindIReferenceUpdater$IFilterProvider() {
+		return Xtend2ReferenceFilterProvider.class;
 	}
 	
 	public Class<? extends FindReferencesHandler> bindFindReferencesHandler() {
