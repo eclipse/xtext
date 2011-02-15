@@ -48,7 +48,7 @@ public class Xtend2LazyLinker extends LazyLinker {
 	protected void afterModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
 		super.afterModelLinked(model, diagnosticsConsumer);
 		XtendClass xtendClass = getXtendClass(model);
-		if (xtendClass != null) {
+		if (xtendClass != null && xtendClass.getName() != null) {
 			jvmModelInferrer.inferJvmGenericType(xtendClass);
 		}
 	}
