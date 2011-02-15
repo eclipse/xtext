@@ -50,12 +50,11 @@ public class RecursiveSyntacticSequencer implements IRecursiveSyntacticSequencer
 			this.lastNode = lastNode;
 		}
 
-		public INode acceptAssignedAction2(Action action, EObject eobject) {
-			delegate.enterAssignedAction(action, eobject);
-			ISemanticSequenceAcceptor acc = syntacticSeq.createAcceptor(action, eobject, lastNode, this, errorAcceptor);
+		public void acceptAssignedAction(Action action, EObject eobject, ICompositeNode node) {
+			delegate.enterAssignedAction(action, eobject, node);
+			ISemanticSequenceAcceptor acc = syntacticSeq.createAcceptor(action, eobject, node, this, errorAcceptor);
 			semanticSeq.createSequence(action, eobject, acc, errorAcceptor);
 			delegate.leaveAssignedAction(action, eobject);
-			return lastNode;
 		}
 
 		public void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, EObject value, ICompositeNode node) {
@@ -98,14 +97,12 @@ public class RecursiveSyntacticSequencer implements IRecursiveSyntacticSequencer
 			lastNode = node;
 		}
 
-		public INode acceptAssignedParserRuleCall2(RuleCall ruleCall, EObject semanticChild) {
+		public void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild, ICompositeNode node) {
 			ParserRule pr = (ParserRule) ruleCall.getRule();
-			delegate.enterAssignedParserRuleCall(ruleCall, semanticChild);
-			ISemanticSequenceAcceptor acc = syntacticSeq.createAcceptor(pr, semanticChild, lastNode, this,
-					errorAcceptor);
+			delegate.enterAssignedParserRuleCall(ruleCall, semanticChild, node);
+			ISemanticSequenceAcceptor acc = syntacticSeq.createAcceptor(pr, semanticChild, node, this, errorAcceptor);
 			semanticSeq.createSequence(pr, semanticChild, acc, errorAcceptor);
 			delegate.leaveAssignedParserRuleCall(ruleCall);
-			return lastNode;
 		}
 
 		public void acceptAssignedTerminal(RuleCall terminalRC, Object value, ILeafNode node) {

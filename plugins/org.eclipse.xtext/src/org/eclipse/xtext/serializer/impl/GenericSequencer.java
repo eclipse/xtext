@@ -42,7 +42,6 @@ import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.ITransientValueService;
-import org.eclipse.xtext.serializer.ITransientValueService.ListTransient;
 import org.eclipse.xtext.serializer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Pair;
@@ -750,10 +749,10 @@ public class GenericSequencer implements ISemanticSequencer {
 	protected boolean acceptSemantic(ISemanticSequenceAcceptor out, IConstraintElement constr, Object value, INode node) {
 		switch (constr.getType()) {
 			case ASSIGNED_ACTION_CALL:
-				out.acceptAssignedAction(constr.getAction(), (EObject) value);
+				out.acceptAssignedAction(constr.getAction(), (EObject) value, (ICompositeNode) node);
 				return true;
 			case ASSIGNED_PARSER_RULE_CALL:
-				out.acceptAssignedParserRuleCall(constr.getRuleCall(), (EObject) value);
+				out.acceptAssignedParserRuleCall(constr.getRuleCall(), (EObject) value, (ICompositeNode) node);
 				return true;
 			case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
 				out.acceptAssignedCrossRefDatatype(constr.getRuleCall(), (EObject) value, (ICompositeNode) node);

@@ -15,20 +15,20 @@ import org.eclipse.xtext.nodemodel.INode;
  */
 public class EmitterNodeFinder {
 
-	protected INode node;
+	protected INode toNode;
 
 	public EmitterNodeFinder(INode node) {
-		this.node = node;
+		this.toNode = node;
 	}
 
 	public INode next(AbstractElement grammarElement) {
-		if (node == null)
+		if (toNode == null)
 			return null;
-		EmitterNodeIterator ni = new EmitterNodeIterator(node, false);
+		EmitterNodeIterator ni = new EmitterNodeIterator(toNode, null, false);
 		while (ni.hasNext()) {
 			INode next = ni.next();
 			if (next.getGrammarElement() == grammarElement)
-				return node = next;
+				return toNode = next;
 		}
 		return null;
 	}
