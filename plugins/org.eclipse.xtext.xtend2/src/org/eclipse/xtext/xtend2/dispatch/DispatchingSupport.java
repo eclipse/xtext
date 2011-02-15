@@ -89,7 +89,11 @@ public class DispatchingSupport {
 				return distance2 - distance1;
 			}
 		}
-		return o1.getParameters().toString().compareTo(o2.getParameters().toString());
+		String identifier1 = o1.getIdentifier();
+		String parameterTypes1 = identifier1.substring(identifier1.indexOf('('));
+		String identifier2 = o2.getIdentifier();
+		String parameterTypes2 = identifier2.substring(identifier2.indexOf('('));
+		return parameterTypes1.compareTo(parameterTypes2);
 	}
 	
 	protected int getMaxDistanceToObject(JvmTypeReference type) {
