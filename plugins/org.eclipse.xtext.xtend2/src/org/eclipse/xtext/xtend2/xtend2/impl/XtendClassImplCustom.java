@@ -28,7 +28,7 @@ public class XtendClassImplCustom extends XtendClassImpl {
 	}
 	
 	@Override
-	public String getQualifiedName() {
+	public String getQualifiedName(char innerClassDelimiter) {
 		String packageName = getPackageName();
 		if (packageName!=null)
 			return packageName+"."+getSimpleName();
