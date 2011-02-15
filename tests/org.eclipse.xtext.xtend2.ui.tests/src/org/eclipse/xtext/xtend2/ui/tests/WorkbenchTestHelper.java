@@ -21,6 +21,7 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
@@ -56,18 +57,19 @@ public class WorkbenchTestHelper extends Assert {
 
 	private Set<IFile> files = newHashSet();
 
-	@Inject@Named(Constants.LANGUAGE_NAME)
+	@Inject
+	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
-	
+
 	@Inject
 	private FileExtensionProvider fileExtensionProvider;
-	
+
 	@Inject
 	private IWorkbench workbench;
 
 	@Inject
 	private IWorkspace workspace;
-	
+
 	public void tearDown() throws Exception {
 		workbench.getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
 		for (IFile file : getFiles()) {
@@ -77,23 +79,25 @@ public class WorkbenchTestHelper extends Assert {
 				exc.printStackTrace();
 			}
 		}
-		for(IResource binMember: getProject().getFolder("bin").members()) {
-			try {
-				binMember.delete(IResource.DEPTH_INFINITE, null);
-			} catch (Exception exc) {
-				exc.printStackTrace();
+		IFolder binFolder = getProject().getFolder("bin");
+		if (binFolder.exists()) {
+			for (IResource binMember : binFolder.members()) {
+				try {
+					binMember.delete(IResource.DEPTH_INFINITE, null);
+				} catch (Exception exc) {
+					exc.printStackTrace();
+				}
 			}
 		}
 	}
-	
+
 	public Set<IFile> getFiles() {
 		return files;
 	}
-	
+
 	public IProject getProject() {
 		return workspace.getRoot().getProject(TESTPROJECT_NAME);
 	}
-	
 
 	public XtextEditor openEditor(String fileName, String content) throws Exception {
 		int cursor = content.indexOf('|');
@@ -114,11 +118,11 @@ public class WorkbenchTestHelper extends Assert {
 	public String getFileExtension() {
 		return fileExtensionProvider.getFileExtensions().iterator().next();
 	}
-	
+
 	public String getEditorID() {
 		return languageName;
 	}
-	
+
 	public String getContents(IFile file) throws Exception {
 		InputStream inputStream = file.getContents();
 		try {
