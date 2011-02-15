@@ -5,15 +5,19 @@ package org.eclipse.xtext.xtend2.scoping;
 
 import static java.util.Collections.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -22,6 +26,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
+import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
@@ -85,5 +90,12 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 
 	protected IEObjectDescription createIEObjectDescription(JvmFormalParameter jvmFormalParameter) {
 		return EObjectDescription.create(QualifiedName.create(jvmFormalParameter.getName()), jvmFormalParameter, null);
+	}
+	
+	@Override
+	protected ArrayList<? extends IJvmFeatureDescriptionProvider> getFeatureDescriptionProviders(JvmTypeReference type,
+			EObject expression, JvmDeclaredType currentContext, JvmIdentifiableElement implicitReceiver) {
+		// TODO Auto-generated method stub
+		return super.getFeatureDescriptionProviders(type, expression, currentContext, implicitReceiver);
 	}
 }
