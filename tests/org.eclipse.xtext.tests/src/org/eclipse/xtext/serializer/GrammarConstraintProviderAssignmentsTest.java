@@ -12,7 +12,7 @@ import java.util.List;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.AssignmentDependencyKind;
+import org.eclipse.xtext.serializer.IGrammarConstraintProvider.RelationalDependencyType;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintElement;
 import org.eclipse.xtext.serializer.impl.GrammarConstraintProvider;
@@ -44,7 +44,7 @@ public class GrammarConstraintProviderAssignmentsTest extends AbstractXtextTests
 		List<String> result = Lists.newArrayList();
 		for (IConstraintElement ass : ctxts.getBody().getContainedAssignments()) {
 			result.add(ass.toString());
-			for (Pair<IConstraintElement, AssignmentDependencyKind> c : ass.getDependingAssignment())
+			for (Pair<IConstraintElement, RelationalDependencyType> c : ass.getDependingAssignment())
 				result.add("  " + c.getSecond() + " " + c.getFirst());
 		}
 		return Join.join("\n", result);
