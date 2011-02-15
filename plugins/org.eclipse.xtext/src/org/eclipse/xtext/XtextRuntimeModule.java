@@ -34,6 +34,7 @@ import org.eclipse.xtext.xtext.XtextReferableElementsUnloader;
 import org.eclipse.xtext.xtext.XtextResourceDescriptionStrategy;
 import org.eclipse.xtext.xtext.XtextScopeProvider;
 import org.eclipse.xtext.xtext.XtextTransientValueService;
+import org.eclipse.xtext.xtext.XtextTransientValueService2;
 import org.eclipse.xtext.xtext.XtextValidator;
 import org.eclipse.xtext.xtext.XtextValueConverters;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
@@ -74,6 +75,10 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	@Override
 	public Class<? extends ITransientValueService> bindITransientValueService() {
 		return XtextTransientValueService.class;
+	}
+	
+	public Class<? extends org.eclipse.xtext.serializer.ITransientValueService> bindITransientValueService2() {
+		return XtextTransientValueService2.class;
 	}
 
 	@Override
