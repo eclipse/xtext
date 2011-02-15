@@ -8,7 +8,9 @@
 package org.eclipse.xtext.xbase.scoping;
 
 import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Lists.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -47,6 +49,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
+import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScopeProvider;
@@ -381,33 +384,48 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	protected JvmFeatureScope createFeatureScopeForTypeRef(JvmTypeReference type, EObject expression,
 			JvmDeclaredType currentContext, JvmIdentifiableElement implicitReceiver) {
 		if (expression instanceof XAssignment) {
-			XAssignmentDescriptionProvider provider1 = assignmentFeatureDescProvider.get();
-			XAssignmentSugarDescriptionProvider provider2 = assignmentSugarFeatureDescProvider.get();
-			provider1.setContextType(currentContext);
-			provider1.setImplicitReceiver(implicitReceiver);
-			provider2.setContextType(currentContext);
-			provider2.setImplicitReceiver(implicitReceiver);
-			return jvmFeatureScopeProvider.createFeatureScopeForTypeRef(type, provider1, provider2);
+			ArrayList<? extends IJvmFeatureDescriptionProvider> providers = getFeatureDescriptionProvidersForAssignment(type, (XAssignment) expression, 
+					currentContext, implicitReceiver);
+			return jvmFeatureScopeProvider.createFeatureScopeForTypeRef(type, providers);
 		} else {
-			final DefaultJvmFeatureDescriptionProvider provider1 = defaultFeatureDescProvider.get();
-			final XFeatureCallSugarDescriptionProvider provider2 = sugarFeatureDescProvider.get();
-			final DefaultJvmFeatureDescriptionProvider provider3 = defaultFeatureDescProvider.get();
-			final StaticMethodsFeatureForTypeProvider featuresForTypeProvider = staticExtensionMethodsFeaturesForTypeProvider.get();
-			featuresForTypeProvider.setContext(expression);
-			provider3.setFeaturesForTypeProvider(featuresForTypeProvider);
-			final XFeatureCallSugarDescriptionProvider provider4 = sugarFeatureDescProvider.get();
-			provider4.setFeaturesForTypeProvider(featuresForTypeProvider);
-			provider1.setContextType(currentContext);
-			provider1.setImplicitReceiver(implicitReceiver);
-			provider2.setContextType(currentContext);
-			provider2.setImplicitReceiver(implicitReceiver);
-			provider3.setContextType(currentContext);
-			provider3.setImplicitReceiver(implicitReceiver);
-			provider4.setContextType(currentContext);
-			provider4.setImplicitReceiver(implicitReceiver);
-			return jvmFeatureScopeProvider.createFeatureScopeForTypeRef(type, provider1, provider2, provider3,
-					provider4);
+			ArrayList<? extends IJvmFeatureDescriptionProvider> providers = getFeatureDescriptionProviders(type, expression,
+					currentContext, implicitReceiver);
+			return jvmFeatureScopeProvider.createFeatureScopeForTypeRef(type, providers);
 		}
+	}
+
+	protected ArrayList<? extends IJvmFeatureDescriptionProvider> getFeatureDescriptionProviders(JvmTypeReference type,
+			EObject expression, JvmDeclaredType currentContext, JvmIdentifiableElement implicitReceiver) {
+		final DefaultJvmFeatureDescriptionProvider provider1 = defaultFeatureDescProvider.get();
+		final XFeatureCallSugarDescriptionProvider provider2 = sugarFeatureDescProvider.get();
+		final DefaultJvmFeatureDescriptionProvider provider3 = defaultFeatureDescProvider.get();
+		final StaticMethodsFeatureForTypeProvider featuresForTypeProvider = staticExtensionMethodsFeaturesForTypeProvider.get();
+		featuresForTypeProvider.setContext(expression);
+		provider3.setFeaturesForTypeProvider(featuresForTypeProvider);
+		final XFeatureCallSugarDescriptionProvider provider4 = sugarFeatureDescProvider.get();
+		provider4.setFeaturesForTypeProvider(featuresForTypeProvider);
+		provider1.setContextType(currentContext);
+		provider1.setImplicitReceiver(implicitReceiver);
+		provider2.setContextType(currentContext);
+		provider2.setImplicitReceiver(implicitReceiver);
+		provider3.setContextType(currentContext);
+		provider3.setImplicitReceiver(implicitReceiver);
+		provider4.setContextType(currentContext);
+		provider4.setImplicitReceiver(implicitReceiver);
+		ArrayList<? extends IJvmFeatureDescriptionProvider> providers = newArrayList(provider1,provider2,provider3,provider4);
+		return providers;
+	}
+
+	protected ArrayList<? extends IJvmFeatureDescriptionProvider> getFeatureDescriptionProvidersForAssignment(
+			JvmTypeReference type, XAssignment expression, JvmDeclaredType currentContext, JvmIdentifiableElement implicitReceiver) {
+		XAssignmentDescriptionProvider provider1 = assignmentFeatureDescProvider.get();
+		XAssignmentSugarDescriptionProvider provider2 = assignmentSugarFeatureDescProvider.get();
+		provider1.setContextType(currentContext);
+		provider1.setImplicitReceiver(implicitReceiver);
+		provider2.setContextType(currentContext);
+		provider2.setImplicitReceiver(implicitReceiver);
+		ArrayList<? extends IJvmFeatureDescriptionProvider> providers = newArrayList(provider1,provider2);
+		return providers;
 	}
 
 	protected IScope createLocalScopeForParameter(JvmFormalParameter p, IScope parentScope) {

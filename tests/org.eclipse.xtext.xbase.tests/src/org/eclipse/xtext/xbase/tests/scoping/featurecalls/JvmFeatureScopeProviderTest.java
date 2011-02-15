@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.scoping.featurecalls;
 
+import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
 
 import java.util.Iterator;
@@ -35,12 +36,12 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 	public void testNoSugarNoFilterNoInvalids() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,
-				new DefaultJvmFeatureDescriptionProvider() {
+				newArrayList(new DefaultJvmFeatureDescriptionProvider() {
 					@Override
 					protected boolean isValid(JvmFeature feature) {
 						return true;
 					}
-				});
+				}));
 		assertEquals(3, numberOfScopes(scope));
 
 		assertSetsEqual(newHashSet("privateField", "privateField()", "stringField", "stringField()"),
@@ -58,12 +59,12 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 	public void testNoSugarNoFilterWithInvalids() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,
-				new DefaultJvmFeatureDescriptionProvider() {
+				newArrayList(new DefaultJvmFeatureDescriptionProvider() {
 					@Override
 					protected boolean isValid(JvmFeature feature) {
 						return ((JvmMember) feature).getVisibility() != JvmVisibility.PRIVATE;
 					}
-				});
+				}));
 		assertSetsEqual(newHashSet("privateField()", "stringField", "stringField()"), getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
 		assertSetsEqual(newHashSet("finalField", "stringField", "staticField"), getSignatures(scope));
@@ -82,7 +83,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 	public void testNoSugarwithFilterwithInvalids() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,
-				new DefaultJvmFeatureDescriptionProvider() {
+				newArrayList(new DefaultJvmFeatureDescriptionProvider() {
 					@Override
 					public void addFeatureDescriptions(JvmFeature feature, TypeArgumentContext context,
 							IAcceptor<JvmFeatureDescription> acceptor) {
@@ -95,7 +96,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 					protected boolean isValid(JvmFeature feature) {
 						return ((JvmMember) feature).getVisibility() != JvmVisibility.PRIVATE;
 					}
-				});
+				}));
 		assertEquals(3, numberOfScopes(scope));
 
 		assertSetsEqual(newHashSet("privateField()", "stringField", "stringField()"), getSignatures(scope));
@@ -111,7 +112,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 		final XFeatureCallSugarDescriptionProvider sugarProvider = new XFeatureCallSugarDescriptionProvider();
 		sugarProvider.setOperatorMapping(new OperatorMapping());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,
-				new DefaultJvmFeatureDescriptionProvider() {
+				newArrayList(new DefaultJvmFeatureDescriptionProvider() {
 					@Override
 					public void addFeatureDescriptions(JvmFeature feature, TypeArgumentContext context,
 							IAcceptor<JvmFeatureDescription> acceptor) {
@@ -138,7 +139,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 					protected boolean isValid(JvmFeature feature) {
 						return ((JvmMember) feature).getVisibility() != JvmVisibility.PRIVATE;
 					}
-				});
+				}));
 		assertEquals(6, numberOfScopes(scope));
 
 		assertSetsEqual(newHashSet("privateField()", "stringField", "stringField()"), getSignatures(scope));
