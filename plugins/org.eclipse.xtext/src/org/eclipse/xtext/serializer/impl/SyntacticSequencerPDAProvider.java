@@ -397,6 +397,8 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 							result.add(next);
 						return result;
 					}
+					if (bounds.apply(next))
+						return null;
 				} else {
 					next = null;
 					int minDist = UNREACHABLE;
@@ -406,7 +408,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 								result.add(follower);
 							return result;
 						}
-						if (follower instanceof ISynEmitterState) {
+						if (!bounds.apply(follower) && follower instanceof ISynEmitterState) {
 							ISynEmitterState navFolower = (ISynEmitterState) follower;
 							int dist = navFolower.getDistanceTo(matches, bounds, stack);
 							if (dist < minDist) {
@@ -452,7 +454,10 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 						break;
 				}
 			}
-			result.addAll(current.getShortestPathTo(matches, SynPredicates.ruleCallExitsOrAbsorber(), stack, false));
+			List<ISynState> r = current.getShortestPathTo(matches, SynPredicates.ruleCallExitsOrAbsorber(), stack,
+					false);
+			if (r != null)
+				result.addAll(r);
 			return result;
 		}
 

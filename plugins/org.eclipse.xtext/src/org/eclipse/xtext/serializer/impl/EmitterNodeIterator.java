@@ -23,12 +23,18 @@ public class EmitterNodeIterator implements Iterator<INode> {
 
 	protected NodeIterator iterator;
 	protected INode next;
+	protected INode end;
 	protected boolean passAbsorber;
 
-	public EmitterNodeIterator(INode node, boolean passAbsorber) {
-		if (node != null) {
-			this.iterator = new NodeIterator(node);
+	public EmitterNodeIterator(INode fromNode) {
+		this(fromNode, null, true);
+	}
+
+	public EmitterNodeIterator(INode fromNode, INode toNode, boolean passAbsorber) {
+		if (fromNode != null) {
+			this.iterator = new NodeIterator(fromNode);
 			this.passAbsorber = passAbsorber;
+			this.end = toNode;
 			next();
 		}
 	}
@@ -52,13 +58,15 @@ public class EmitterNodeIterator implements Iterator<INode> {
 
 	protected boolean isAbsorber(INode node) {
 		return GrammarUtil.isAssigned(node.getGrammarElement())
-				|| GrammarUtil.isAssignedAction(node.getGrammarElement());
+		/*|| GrammarUtil.isAssignedAction(node.getGrammarElement())*/;
 	}
 
 	public INode next() {
 		INode result = this.next;
 		while (iterator.hasNext()) {
 			INode next = iterator.next();
+			if (end == next)
+				break;
 			if (include(next)) {
 				if (!passAbsorber && isAbsorber(next))
 					break;

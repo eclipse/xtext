@@ -18,7 +18,7 @@ public interface ISerializationDiagnostic {
 		void accept(ISerializationDiagnostic diagnostic);
 	}
 
-	public class ExceptionThrowingAcceptor implements Acceptor {
+	public class StdErrAcceptor implements Acceptor {
 		public void accept(ISerializationDiagnostic diagnostic) {
 			if (diagnostic == null || diagnostic.getMessage() == null)
 				System.err.println("error");
@@ -27,7 +27,7 @@ public interface ISerializationDiagnostic {
 		}
 	}
 
-	public Acceptor EXCEPTION_ACCEPTOR = new ExceptionThrowingAcceptor();
+	public Acceptor STDERR_ACCEPTOR = new StdErrAcceptor();
 
 	boolean breaksSyntax();
 

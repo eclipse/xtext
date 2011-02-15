@@ -51,12 +51,12 @@ public class DebugSequenceAcceptor implements ISyntacticSequenceAcceptor, IRecur
 		this.printInstantly = printInstantly;
 	}
 
-	public void acceptAssignedAction(Action action, EObject semanticChild) {
-		add(titleSwitch.doSwitch(action), EmfFormatter.objPath(semanticChild));
+	public void acceptAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
+		add(titleSwitch.doSwitch(action), EmfFormatter.objPath(semanticChild), node2text(node));
 	}
 
-	public INode acceptAssignedAction2(Action action, EObject semanticChild) {
-		add(titleSwitch.doSwitch(action), EmfFormatter.objPath(semanticChild));
+	public INode acceptAssignedAction2(Action action, EObject semanticChild, ICompositeNode node) {
+		add(titleSwitch.doSwitch(action), EmfFormatter.objPath(semanticChild), node2text(node));
 		return null;
 	}
 
@@ -80,9 +80,6 @@ public class DebugSequenceAcceptor implements ISyntacticSequenceAcceptor, IRecur
 		add(titleSwitch.doSwitch(datatypeRC), "'" + value + "'", node2text(node));
 	}
 
-	public void acceptAssignedEnum(RuleCall enumRC, Object value) {
-	}
-
 	public void acceptAssignedEnum(RuleCall enumRC, Object value, ICompositeNode node) {
 		add(titleSwitch.doSwitch(enumRC), "'" + value + "'", node2text(node));
 	}
@@ -95,12 +92,12 @@ public class DebugSequenceAcceptor implements ISyntacticSequenceAcceptor, IRecur
 		add(titleSwitch.doSwitch(keyword), "'" + value + "'", node2text(node));
 	}
 
-	public void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild) {
-		add(titleSwitch.doSwitch(ruleCall), EmfFormatter.objPath(semanticChild));
+	public void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild, ICompositeNode node) {
+		add(titleSwitch.doSwitch(ruleCall), EmfFormatter.objPath(semanticChild), node2text(node));
 	}
 
-	public INode acceptAssignedParserRuleCall2(RuleCall ruleCall, EObject semanticChild) {
-		add(titleSwitch.doSwitch(ruleCall), EmfFormatter.objPath(semanticChild));
+	public INode acceptAssignedParserRuleCall2(RuleCall ruleCall, EObject semanticChild, ICompositeNode node) {
+		add(titleSwitch.doSwitch(ruleCall), EmfFormatter.objPath(semanticChild), node2text(node));
 		return null;
 	}
 
@@ -142,13 +139,13 @@ public class DebugSequenceAcceptor implements ISyntacticSequenceAcceptor, IRecur
 			System.out.println(buf.toString() + "\t" + col2 + "\t" + col3);
 	}
 
-	public void enterAssignedAction(Action action, EObject semanticChild) {
-		add(titleSwitch.doSwitch(action) + " {", semanticChild.eClass().getName());
+	public void enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
+		add(titleSwitch.doSwitch(action) + " {", semanticChild.eClass().getName(), node2text(node));
 		indentation++;
 	}
 
-	public void enterAssignedParserRuleCall(RuleCall rc, EObject newCurrent) {
-		add(titleSwitch.doSwitch(rc) + " {", newCurrent.eClass().getName());
+	public void enterAssignedParserRuleCall(RuleCall rc, EObject newCurrent, ICompositeNode node) {
+		add(titleSwitch.doSwitch(rc) + " {", newCurrent.eClass().getName(), node2text(node));
 		indentation++;
 	}
 

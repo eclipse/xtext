@@ -3,6 +3,7 @@ package org.eclipse.xtext.serializer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 
 /**
@@ -15,9 +16,9 @@ import org.eclipse.xtext.nodemodel.INode;
  */
 public interface ISyntacticSequenceAcceptor extends IAssignedTokenSequenceAcceptor, IUnassignedTokenSequenceAcceptor {
 
-	INode acceptAssignedAction2(Action action, EObject semanticChild);
+	void acceptAssignedAction(Action action, EObject semanticChild, ICompositeNode node);
 
-	INode acceptAssignedParserRuleCall2(RuleCall ruleCall, EObject semanticChild);
+	void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild, ICompositeNode node);
 
 	void enterUnassignedParserRuleCall(RuleCall rc);
 
