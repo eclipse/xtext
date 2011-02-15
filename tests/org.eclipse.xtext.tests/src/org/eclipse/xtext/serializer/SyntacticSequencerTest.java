@@ -70,14 +70,14 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 		EObject context = nmSequencer.findContexts(model, null).iterator().next();
 		ISemanticSequencer semSequencer = get(ISemanticSequencer.class);
 		IRecursiveSyntacticSequencer recSequencer = get(IRecursiveSyntacticSequencer.class);
-		DebugSequenceAcceptor actual = new NoEnterNodesDebugSequenceAcceptor(true);
+		DebugSequenceAcceptor actual = new NoEnterNodesDebugSequenceAcceptor(false);
 		DebugSequenceAcceptor expected = new DebugSequenceAcceptor();
 		ISyntacticSequencer syn = get(ISyntacticSequencer.class);
 		nmSequencer.createSequence(context, model, expected, ISerializationDiagnostic.STDERR_ACCEPTOR);
 		recSequencer
 				.createSequence(syn, semSequencer, context, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
-		System.out.println(actual);
-		System.out.println(NodeModelUtils.compactDump(NodeModelUtils.findActualNodeFor(model), false));
+		//		System.out.println(actual);
+		//		System.out.println(NodeModelUtils.compactDump(NodeModelUtils.findActualNodeFor(model), false));
 		assertEquals(Join.join("\n", getNodeSequence(model)), Join.join("\n", actual.getNodesColumn()));
 	}
 
