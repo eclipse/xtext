@@ -205,7 +205,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			throw new EvaluationException(new ClassNotFoundException(nodesForFeature.get(0).getText()));
 		}
 		try {
-			Class<?> result = classFinder.forName(literal.getType().getIdentifier());
+			Class<?> result = classFinder.forName(literal.getType().getQualifiedName());
 			return result;
 		} catch (ClassNotFoundException cnfe) {
 			throw new EvaluationException(cnfe);
@@ -276,7 +276,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		for (XCasePart casePart : switchExpression.getCases()) {
 			Class<?> expectedType = null;
 			if (casePart.getTypeGuard() != null) {
-				String typeName = casePart.getTypeGuard().getType().getIdentifier();
+				String typeName = casePart.getTypeGuard().getType().getQualifiedName();
 				try {
 					expectedType = classFinder.forName(typeName);
 				} catch (ClassNotFoundException e) {
@@ -306,7 +306,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	public Object _evaluateCastedExpression(XCastedExpression castedExpression, IEvaluationContext context) {
 		Object result = internalEvaluate(castedExpression.getTarget(), context);
 		result = wrapArray(result, castedExpression.getType());
-		String typeName = castedExpression.getType().getType().getIdentifier();
+		String typeName = castedExpression.getType().getType().getQualifiedName();
 		Class<?> expectedType = null;
 		try {
 			expectedType = classFinder.forName(typeName);
@@ -341,7 +341,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			Throwable cause = evaluationException.getCause();
 			for (XCatchClause catchClause : tryCatchFinally.getCatchClauses()) {
 				JvmFormalParameter exception = catchClause.getDeclaredParam();
-				String exceptionTypeName = exception.getParameterType().getType().getIdentifier();
+				String exceptionTypeName = exception.getParameterType().getType().getQualifiedName();
 				try {
 					Class<?> exceptionType = classFinder.forName(exceptionTypeName);
 					if (!exceptionType.isInstance(cause))
@@ -476,7 +476,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			return Boolean.FALSE;
 
 		Class<?> expectedType = null;
-		String className = instanceOf.getType().getIdentifier();
+		String className = instanceOf.getType().getQualifiedName();
 		try {
 			expectedType = classFinder.forName(className);
 		} catch (ClassNotFoundException cnfe) {

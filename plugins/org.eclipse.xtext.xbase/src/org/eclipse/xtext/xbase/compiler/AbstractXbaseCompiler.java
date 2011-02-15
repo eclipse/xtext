@@ -103,10 +103,10 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	protected String getSerializedForm(final JvmTypeReference type) {
-		return type.getIdentifier().replace('$', '.');
+		return type.getQualifiedName('.');
 	}
 	protected String getSerializedForm(final JvmType type) {
-		return type.getIdentifier().replace('$', '.');
+		return type.getQualifiedName('.');
 	}
 
 	protected String getJavaVarName(Object ex, IAppendable appendable) {

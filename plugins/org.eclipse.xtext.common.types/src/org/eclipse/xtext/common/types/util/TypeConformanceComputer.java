@@ -396,9 +396,9 @@ public class TypeConformanceComputer {
 		}
 	}
 
-	protected boolean is(JvmType typeA, Class<?> ...class1) {
-		for (Class<?> class2 : class1) {
-			boolean result = typeA.getIdentifier().equals(class2.getCanonicalName());
+	protected boolean is(JvmType typeA, Class<?> ...classes) {
+		for (Class<?> clazz : classes) {
+			boolean result = typeA.getIdentifier().equals(clazz.getCanonicalName());
 			if (result)
 				return true;
 		}

@@ -10,26 +10,16 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
-import org.eclipse.jface.viewers.StyledString.Styler;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeConstraint;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.conversion.ValueConverterException;
@@ -390,9 +380,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 				result.append(')');
 			}
 			result.append(" : ");
-			appendType(result, null, ((JvmOperation) feature).getReturnType());
+			result.append(((JvmOperation) feature).getReturnType().getSimpleName());
 			result.append(" - ", StyledString.QUALIFIER_STYLER);
-			appendType(result, StyledString.QUALIFIER_STYLER, feature.getDeclaringType());
+			result.append(feature.getDeclaringType().getSimpleName(), StyledString.QUALIFIER_STYLER);
 			if (!withParenths) {
 				result.append(".", StyledString.QUALIFIER_STYLER);
 				result.append(feature.getSimpleName(), StyledString.QUALIFIER_STYLER);
@@ -400,9 +390,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 			}
 		} else if (feature instanceof JvmField) {
 			result.append(" : ");
-			appendType(result, null, ((JvmField) feature).getType());
+			result.append(((JvmField) feature).getType().getSimpleName());
 			result.append(" - ", StyledString.QUALIFIER_STYLER);
-			appendType(result, StyledString.QUALIFIER_STYLER, feature.getDeclaringType());
+			result.append(feature.getDeclaringType().getSimpleName(), StyledString.QUALIFIER_STYLER);
 		} else if (feature instanceof JvmConstructor) {
 			if (withParenths) {
 				result.append('(');
@@ -419,65 +409,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 			if (!first)
 				result.append(", ");
 			first = false;
-			appendType(result, null, parameter.getParameterType());
+			result.append(parameter.getParameterType().getSimpleName());
 			result.append(' ');
 			result.append(parameter.getName());
-		}
-	}
-
-	protected void appendType(StyledString result, Styler styler, JvmTypeReference parameterType) {
-		JvmType type = parameterType.getType();
-		appendType(result, styler, type);
-		if (parameterType instanceof JvmParameterizedTypeReference) {
-			if (!((JvmParameterizedTypeReference) parameterType).getArguments().isEmpty()) {
-				result.append('<', styler);
-				boolean first = true;
-				for(JvmTypeReference argument: ((JvmParameterizedTypeReference) parameterType).getArguments()) {
-					if (!first)
-						result.append(", ", styler);
-					appendType(result, styler, argument);
-				}
-				result.append('>', styler);
-			}
-			if (type instanceof JvmArrayType) {
-				result.append("[]", styler);
-			}
-		} else if (parameterType instanceof JvmWildcardTypeReference) {
-			JvmWildcardTypeReference wildcard = (JvmWildcardTypeReference) parameterType;
-			result.append("?", styler);
-			boolean first = true;
-			for(JvmTypeConstraint typeConstraint: wildcard.getConstraints()) {
-				if (typeConstraint instanceof JvmUpperBound) {
-					if (first) {
-						result.append(" extends ", styler);
-					} else {
-						result.append(" & ");
-					}
-				} else {
-					if (first) {
-						result.append(" super ", styler);
-					} else {
-						result.append(" & ");
-					}
-				}
-				first = false;
-				appendType(result, styler, typeConstraint.getTypeReference());
-			}
-		}
-		if (parameterType instanceof JvmGenericArrayTypeReference) {
-			result.append("[]", styler);
-		}
-	}
-
-	protected void appendType(StyledString result, Styler styler, JvmType type) {
-		if (type != null) {
-			if (type instanceof JvmDeclaredType) {
-				result.append(((JvmDeclaredType) type).getSimpleName(), styler);
-			} else if (type instanceof JvmArrayType) {
-				appendType(result, styler, ((JvmArrayType) type).getComponentType());
-			} else {
-				result.append(type.getIdentifier(), styler);
-			}
 		}
 	}
 	

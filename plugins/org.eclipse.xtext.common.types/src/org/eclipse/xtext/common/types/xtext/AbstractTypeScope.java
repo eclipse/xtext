@@ -76,7 +76,7 @@ public abstract class AbstractTypeScope extends AbstractScope {
 	public Iterable<IEObjectDescription> getElements(EObject object) {
 		if (object instanceof JvmIdentifiableElement) {
 			final Set<IEObjectDescription> result = singleton(EObjectDescription.create(
-					qualifiedNameConverter.toQualifiedName(((JvmIdentifiableElement) object).getIdentifier()),
+					qualifiedNameConverter.toQualifiedName(((JvmIdentifiableElement) object).getQualifiedName()),
 					object));
 			return filterResult(result);
 		}

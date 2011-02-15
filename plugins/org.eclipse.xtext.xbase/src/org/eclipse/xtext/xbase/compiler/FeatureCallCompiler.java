@@ -130,7 +130,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 
 	protected boolean appendReceiver(XAbstractFeatureCall call, IAppendable b) {
 		if (isStatic(call.getFeature())) {
-			b.append(((JvmFeature) call.getFeature()).getDeclaringType().getIdentifier());
+			b.append(((JvmFeature) call.getFeature()).getDeclaringType().getQualifiedName('.'));
 			return true;
 		}
 		XExpression receiver = featureCallToJavaMapping.getActualReceiver(call);
