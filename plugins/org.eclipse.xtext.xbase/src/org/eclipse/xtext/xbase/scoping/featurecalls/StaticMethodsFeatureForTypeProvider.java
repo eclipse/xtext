@@ -48,7 +48,7 @@ public class StaticMethodsFeatureForTypeProvider implements IFeaturesForTypeProv
 	private EObject context;
 
 	public Iterable<? extends JvmFeature> getFeaturesForType(final JvmTypeReference reference) {
-		final Iterable<Class<?>> operators = getClassesContainingStaticMethods(reference.getType().getQualifiedName());
+		final Iterable<Class<?>> operators = getClassesContainingStaticMethods(reference.getType().getIdentifier());
 		Iterable<JvmOperation> staticMethods = emptySet();
 		for (Class<?> clazz : operators) {
 			JvmTypeReference typeReference = typeRefs.getTypeForName(clazz, context);
