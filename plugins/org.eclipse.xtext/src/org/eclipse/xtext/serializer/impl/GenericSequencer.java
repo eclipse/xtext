@@ -721,10 +721,12 @@ public class GenericSequencer implements ISemanticSequencer {
 				if (trans != ValueTransient.YES) {
 					Object value = semanticObject.eGet(feature.getFeature());
 					INode node = nodes.getNodeForSingelValue(feature.getFeature(), value);
-					IConstraintElement ass = feature.getAssignments()[0];
-					AllocationValue alloc = new AllocationValue(value, node);
-					result[ass.getAssignmentID()] = new SVFeature2AssignmentUnambiguous(ass,
-							trans == ValueTransient.PREFERABLY, alloc);
+					if (trans != ValueTransient.PREFERABLY || node != null) {
+						IConstraintElement ass = feature.getAssignments()[0];
+						AllocationValue alloc = new AllocationValue(value, node);
+						result[ass.getAssignmentID()] = new SVFeature2AssignmentUnambiguous(ass,
+								trans == ValueTransient.PREFERABLY, alloc);
+					}
 				}
 			}
 		}

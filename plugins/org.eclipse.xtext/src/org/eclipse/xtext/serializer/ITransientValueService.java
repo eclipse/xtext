@@ -2,7 +2,7 @@ package org.eclipse.xtext.serializer;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.serializer.impl.TransientValueService;
+import org.eclipse.xtext.serializer.impl.LegacyTransientValueService;
 
 import com.google.inject.ImplementedBy;
 
@@ -23,7 +23,7 @@ import com.google.inject.ImplementedBy;
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@ImplementedBy(TransientValueService.class)
+@ImplementedBy(LegacyTransientValueService.class)
 public interface ITransientValueService {
 
 	enum ListTransient {

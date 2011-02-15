@@ -650,12 +650,12 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 	protected SequencerPDAProvider pdaProvider = createSequencerPDAProvider();
 
 	protected boolean canReachAbsorber(IPDAState from, IPDAState to, Set<IPDAState> visited) {
-		if (!visited.add(from))
+		if (isMandatoryAbsorber(from.getGrammarElement()) || !visited.add(from))
 			return false;
 		for (IPDAState follower : from.getFollowers())
 			if (follower == to)
 				return true;
-			else if (!isMandatoryAbsorber(follower.getGrammarElement()) && canReachAbsorber(follower, to, visited))
+			else if (canReachAbsorber(follower, to, visited))
 				return true;
 		return false;
 	}
