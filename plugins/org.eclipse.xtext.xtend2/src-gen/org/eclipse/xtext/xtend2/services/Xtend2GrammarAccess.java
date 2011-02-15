@@ -266,40 +266,48 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DeclaredDependency");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cInjectKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cAsKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cNameAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_2_1_0 = (RuleCall)cNameAssignment_2_1.eContents().get(0);
+		private final Assignment cExtensionAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Keyword cExtensionExtensionKeyword_1_0 = (Keyword)cExtensionAssignment_1.eContents().get(0);
+		private final Assignment cTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cTypeJvmTypeReferenceParserRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cAsKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cNameAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_3_1_0 = (RuleCall)cNameAssignment_3_1.eContents().get(0);
 		
 		//DeclaredDependency:
-		//	"@Inject" type=JvmTypeReference ("as" name=ID)?;
+		//	"@Inject" extension?="extension"? type=JvmTypeReference ("as" name=ID)?;
 		public ParserRule getRule() { return rule; }
 
-		//"@Inject" type=JvmTypeReference ("as" name=ID)?
+		//"@Inject" extension?="extension"? type=JvmTypeReference ("as" name=ID)?
 		public Group getGroup() { return cGroup; }
 
 		//"@Inject"
 		public Keyword getInjectKeyword_0() { return cInjectKeyword_0; }
 
+		//extension?="extension"?
+		public Assignment getExtensionAssignment_1() { return cExtensionAssignment_1; }
+
+		//"extension"
+		public Keyword getExtensionExtensionKeyword_1_0() { return cExtensionExtensionKeyword_1_0; }
+
 		//type=JvmTypeReference
-		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
+		public Assignment getTypeAssignment_2() { return cTypeAssignment_2; }
 
 		//JvmTypeReference
-		public RuleCall getTypeJvmTypeReferenceParserRuleCall_1_0() { return cTypeJvmTypeReferenceParserRuleCall_1_0; }
+		public RuleCall getTypeJvmTypeReferenceParserRuleCall_2_0() { return cTypeJvmTypeReferenceParserRuleCall_2_0; }
 
 		//("as" name=ID)?
-		public Group getGroup_2() { return cGroup_2; }
+		public Group getGroup_3() { return cGroup_3; }
 
 		//"as"
-		public Keyword getAsKeyword_2_0() { return cAsKeyword_2_0; }
+		public Keyword getAsKeyword_3_0() { return cAsKeyword_3_0; }
 
 		//name=ID
-		public Assignment getNameAssignment_2_1() { return cNameAssignment_2_1; }
+		public Assignment getNameAssignment_3_1() { return cNameAssignment_3_1; }
 
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_2_1_0() { return cNameIDTerminalRuleCall_2_1_0; }
+		public RuleCall getNameIDTerminalRuleCall_3_1_0() { return cNameIDTerminalRuleCall_3_1_0; }
 	}
 
 	public class FunctionElements extends AbstractParserRuleElementFinder {
@@ -1013,7 +1021,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DeclaredDependency:
-	//	"@Inject" type=JvmTypeReference ("as" name=ID)?;
+	//	"@Inject" extension?="extension"? type=JvmTypeReference ("as" name=ID)?;
 	public DeclaredDependencyElements getDeclaredDependencyAccess() {
 		return (pDeclaredDependency != null) ? pDeclaredDependency : (pDeclaredDependency = new DeclaredDependencyElements());
 	}

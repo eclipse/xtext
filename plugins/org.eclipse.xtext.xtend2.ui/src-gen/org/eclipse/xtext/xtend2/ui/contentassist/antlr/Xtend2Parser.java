@@ -80,7 +80,7 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getClassAccess().getGroup_4(), "rule__Class__Group_4__0");
 					put(grammarAccess.getClassAccess().getGroup_4_2(), "rule__Class__Group_4_2__0");
 					put(grammarAccess.getDeclaredDependencyAccess().getGroup(), "rule__DeclaredDependency__Group__0");
-					put(grammarAccess.getDeclaredDependencyAccess().getGroup_2(), "rule__DeclaredDependency__Group_2__0");
+					put(grammarAccess.getDeclaredDependencyAccess().getGroup_3(), "rule__DeclaredDependency__Group_3__0");
 					put(grammarAccess.getFunctionAccess().getGroup(), "rule__Function__Group__0");
 					put(grammarAccess.getFunctionAccess().getGroup_1(), "rule__Function__Group_1__0");
 					put(grammarAccess.getFunctionAccess().getGroup_1_2(), "rule__Function__Group_1_2__0");
@@ -228,8 +228,9 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getClassAccess().getImplementsAssignment_4_1(), "rule__Class__ImplementsAssignment_4_1");
 					put(grammarAccess.getClassAccess().getImplementsAssignment_4_2_1(), "rule__Class__ImplementsAssignment_4_2_1");
 					put(grammarAccess.getClassAccess().getMembersAssignment_6(), "rule__Class__MembersAssignment_6");
-					put(grammarAccess.getDeclaredDependencyAccess().getTypeAssignment_1(), "rule__DeclaredDependency__TypeAssignment_1");
-					put(grammarAccess.getDeclaredDependencyAccess().getNameAssignment_2_1(), "rule__DeclaredDependency__NameAssignment_2_1");
+					put(grammarAccess.getDeclaredDependencyAccess().getExtensionAssignment_1(), "rule__DeclaredDependency__ExtensionAssignment_1");
+					put(grammarAccess.getDeclaredDependencyAccess().getTypeAssignment_2(), "rule__DeclaredDependency__TypeAssignment_2");
+					put(grammarAccess.getDeclaredDependencyAccess().getNameAssignment_3_1(), "rule__DeclaredDependency__NameAssignment_3_1");
 					put(grammarAccess.getFunctionAccess().getOverrideAssignment_0_0(), "rule__Function__OverrideAssignment_0_0");
 					put(grammarAccess.getFunctionAccess().getDispatchAssignment_0_1(), "rule__Function__DispatchAssignment_0_1");
 					put(grammarAccess.getFunctionAccess().getTypeParametersAssignment_1_1(), "rule__Function__TypeParametersAssignment_1_1");

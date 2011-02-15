@@ -19,8 +19,6 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -32,7 +30,6 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.compiler.IAppendable.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
-import org.eclipse.xtext.xtend2.ui.internal.Xtend2Activator;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
@@ -78,11 +75,12 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 				workspaceUtil.removeEmptySubFolders(targetFolder, progress.newChild(1));
 				context.needRebuild();
 			}
-		} catch (CoreException ce) {
-			throw ce;
+//		} catch (CoreException ce) {
+//			throw ce;
 		} catch (Exception e) {
-			throw new CoreException(new Status(IStatus.ERROR, Xtend2Activator.getInstance().getBundle()
-					.getSymbolicName(), "Error during compilation of Xtend2 resources", e));
+			LOG.error(e.getMessage(), e);
+//			throw new CoreException(new Status(IStatus.ERROR, Xtend2Activator.getInstance().getBundle()
+//					.getSymbolicName(), "Error during compilation of Xtend2 resources", e));
 		}
 	}
 

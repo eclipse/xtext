@@ -1206,11 +1206,11 @@ protected class Member_DeclaredDependencyParserRuleCall_1 extends RuleCallToken 
 /************ begin Rule DeclaredDependency ****************
  *
  * DeclaredDependency:
- * 	"@Inject" type=JvmTypeReference ("as" name=ID)?;
+ * 	"@Inject" extension?="extension"? type=JvmTypeReference ("as" name=ID)?;
  *
  **/
 
-// "@Inject" type=JvmTypeReference ("as" name=ID)?
+// "@Inject" extension?="extension"? type=JvmTypeReference ("as" name=ID)?
 protected class DeclaredDependency_Group extends GroupToken {
 	
 	public DeclaredDependency_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1225,8 +1225,8 @@ protected class DeclaredDependency_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new DeclaredDependency_Group_2(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new DeclaredDependency_TypeAssignment_1(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new DeclaredDependency_Group_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new DeclaredDependency_TypeAssignment_2(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -1261,16 +1261,50 @@ protected class DeclaredDependency_InjectKeyword_0 extends KeywordToken  {
 
 }
 
-// type=JvmTypeReference
-protected class DeclaredDependency_TypeAssignment_1 extends AssignmentToken  {
+// extension?="extension"?
+protected class DeclaredDependency_ExtensionAssignment_1 extends AssignmentToken  {
 	
-	public DeclaredDependency_TypeAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public DeclaredDependency_ExtensionAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getDeclaredDependencyAccess().getTypeAssignment_1();
+		return grammarAccess.getDeclaredDependencyAccess().getExtensionAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new DeclaredDependency_InjectKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("extension",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("extension");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getDeclaredDependencyAccess().getExtensionExtensionKeyword_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// type=JvmTypeReference
+protected class DeclaredDependency_TypeAssignment_2 extends AssignmentToken  {
+	
+	public DeclaredDependency_TypeAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getDeclaredDependencyAccess().getTypeAssignment_2();
 	}
 
     @Override
@@ -1289,7 +1323,7 @@ protected class DeclaredDependency_TypeAssignment_1 extends AssignmentToken  {
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getJvmTypeReferenceRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getDeclaredDependencyAccess().getTypeJvmTypeReferenceParserRuleCall_1_0(); 
+				element = grammarAccess.getDeclaredDependencyAccess().getTypeJvmTypeReferenceParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -1301,28 +1335,29 @@ protected class DeclaredDependency_TypeAssignment_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new DeclaredDependency_InjectKeyword_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new DeclaredDependency_ExtensionAssignment_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new DeclaredDependency_InjectKeyword_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // ("as" name=ID)?
-protected class DeclaredDependency_Group_2 extends GroupToken {
+protected class DeclaredDependency_Group_3 extends GroupToken {
 	
-	public DeclaredDependency_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public DeclaredDependency_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Group getGrammarElement() {
-		return grammarAccess.getDeclaredDependencyAccess().getGroup_2();
+		return grammarAccess.getDeclaredDependencyAccess().getGroup_3();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new DeclaredDependency_NameAssignment_2_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new DeclaredDependency_NameAssignment_3_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1330,21 +1365,21 @@ protected class DeclaredDependency_Group_2 extends GroupToken {
 }
 
 // "as"
-protected class DeclaredDependency_AsKeyword_2_0 extends KeywordToken  {
+protected class DeclaredDependency_AsKeyword_3_0 extends KeywordToken  {
 	
-	public DeclaredDependency_AsKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public DeclaredDependency_AsKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getDeclaredDependencyAccess().getAsKeyword_2_0();
+		return grammarAccess.getDeclaredDependencyAccess().getAsKeyword_3_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new DeclaredDependency_TypeAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new DeclaredDependency_TypeAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1352,21 +1387,21 @@ protected class DeclaredDependency_AsKeyword_2_0 extends KeywordToken  {
 }
 
 // name=ID
-protected class DeclaredDependency_NameAssignment_2_1 extends AssignmentToken  {
+protected class DeclaredDependency_NameAssignment_3_1 extends AssignmentToken  {
 	
-	public DeclaredDependency_NameAssignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public DeclaredDependency_NameAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getDeclaredDependencyAccess().getNameAssignment_2_1();
+		return grammarAccess.getDeclaredDependencyAccess().getNameAssignment_3_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new DeclaredDependency_AsKeyword_2_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new DeclaredDependency_AsKeyword_3_0(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1375,9 +1410,9 @@ protected class DeclaredDependency_NameAssignment_2_1 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("name",false)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getDeclaredDependencyAccess().getNameIDTerminalRuleCall_2_1_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getDeclaredDependencyAccess().getNameIDTerminalRuleCall_3_1_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getDeclaredDependencyAccess().getNameIDTerminalRuleCall_2_1_0();
+			element = grammarAccess.getDeclaredDependencyAccess().getNameIDTerminalRuleCall_3_1_0();
 			return obj;
 		}
 		return null;

@@ -472,31 +472,46 @@ ruleDeclaredDependency returns [EObject current=null]
     }
 (
 (
-		{ 
-	        newCompositeNode(grammarAccess.getDeclaredDependencyAccess().getTypeJvmTypeReferenceParserRuleCall_1_0()); 
+		lv_extension_1_0=	'extension' 
+    {
+        newLeafNode(lv_extension_1_0, grammarAccess.getDeclaredDependencyAccess().getExtensionExtensionKeyword_1_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getDeclaredDependencyRule());
+	        }
+       		setWithLastConsumed($current, "extension", true, "extension");
 	    }
-		lv_type_1_0=ruleJvmTypeReference		{
+
+)
+)?(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getDeclaredDependencyAccess().getTypeJvmTypeReferenceParserRuleCall_2_0()); 
+	    }
+		lv_type_2_0=ruleJvmTypeReference		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getDeclaredDependencyRule());
 	        }
        		set(
        			$current, 
        			"type",
-        		lv_type_1_0, 
+        		lv_type_2_0, 
         		"JvmTypeReference");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)(	otherlv_2='as' 
+)(	otherlv_3='as' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getDeclaredDependencyAccess().getAsKeyword_2_0());
+    	newLeafNode(otherlv_3, grammarAccess.getDeclaredDependencyAccess().getAsKeyword_3_0());
     }
 (
 (
-		lv_name_3_0=RULE_ID
+		lv_name_4_0=RULE_ID
 		{
-			newLeafNode(lv_name_3_0, grammarAccess.getDeclaredDependencyAccess().getNameIDTerminalRuleCall_2_1_0()); 
+			newLeafNode(lv_name_4_0, grammarAccess.getDeclaredDependencyAccess().getNameIDTerminalRuleCall_3_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -505,7 +520,7 @@ ruleDeclaredDependency returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"name",
-        		lv_name_3_0, 
+        		lv_name_4_0, 
         		"ID");
 	    }
 

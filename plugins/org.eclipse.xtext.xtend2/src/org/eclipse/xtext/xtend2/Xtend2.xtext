@@ -35,7 +35,7 @@ Member returns XtendMember:
 	Function | DeclaredDependency;
 	
 DeclaredDependency returns DeclaredDependency :
-	'@Inject' type=JvmTypeReference ('as' name=ID)?
+	'@Inject' (extension?='extension')? type=JvmTypeReference ('as' name=ID)?
 ;
 
 Function returns XtendFunction :

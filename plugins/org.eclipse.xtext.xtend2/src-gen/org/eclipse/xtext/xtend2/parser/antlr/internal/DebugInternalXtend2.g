@@ -45,7 +45,7 @@ ruleMember :
 
 // Rule DeclaredDependency
 ruleDeclaredDependency :
-	'@Inject' ruleJvmTypeReference (
+	'@Inject' 'extension'? ruleJvmTypeReference (
 		'as' RULE_ID
 	)?
 ;
