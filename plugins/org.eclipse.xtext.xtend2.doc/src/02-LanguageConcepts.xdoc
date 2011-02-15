@@ -2,6 +2,7 @@ chapter:LanguageConcepts[Language Concepts]
 
 On a first glance an Xtend2 file pretty much looks like a Java file. it starts with a package declaration followed by an import section, and after that comes the class definition.
 That class in fact is directly translated to a Java class in the corresponding Java package.
+
 Here is an example:
 code[
 package com.acme
@@ -42,130 +43,11 @@ The ordinary imports of type names are equivalent to the imports known from Java
 Again one can escape any names conflicting with keywords using the e[^] and the import statemet is never
 terminated with a semicolon.
 
-section2:importExtension[Importing Extension Methods]
-
-In addition one can add the keyword code[extension] after the import (where the keyword code[static] occurs in Java), which makes any static methods 
-from a certain type available as an ref:extensionMethods[extension method]. The code[extension] keyword only works with qualified imports (i.e. non-wildcard imports).
-If you only want to make some methods from the imported type available using the extension syntax, you can provide a list of function names.
-You cannot further specify type arguments.
-
-Example:
-
-code[
-	import extension java.util.Collections.(sort, shuffle);
-]
-
-This will import four methods (code[sort(List<T>)], code[sort(List<T>, Comparator<? super T>)], code[shuffle(List<?>)], code[shuffle(List<?>, Random)]) available as ref:extensionMethods[extension methods].
-
 section2[Syntax]
 
 code[
-	ImportSection : 
-		(Import|Injection)*;
 	Import : 
-		'import' 'extension'? QualifiedName (('.''*')
-											|'('ID (',' ID)')')?;
-]
-
-section:inject[Dependency Injection]
-
-Xtend2 has built-in support for dependency injection, which means that declaring dependencies is a first class feature of Xtend2.
-It is done as part of the import section and looks like this:
-
-code[
-	inject MyService myService;
-]
-
-This will translate to Java as a field as well a setter method annotated with @Inject: 
-
-code[Java][
-	private MyService myService;
-	
-	@Inject
-	public void setMyService(MyService myService) {
-		this.myService = myService;
-	}
-]
-
-section2[Name can be inferred]
-
-You could even leave the name out as by default it will be the lower case version of the simple name of the class.
-That is the following inject declaration would be equvalent with the former.
-
-code[
-	inject MyService;
-]
-
-section2[Guice Keys]
-
-Xtend2 uses Guice as the dependency injection container, which in turn uses types as keys. Those types can be generified, which
-is why you can write the following in Xtend2.
-
-code[
-	inject HashMap<String,MyType> myCache;
-]
-
-Also Guice allows to use annotations to further distinct between different implementations of the same type. This is usually done by using
-the code[com.google.inject.name.Named] annotation or a custom annotation which is itself annotated with code[com.google.inject.BindingAnnotation].
-
-Xtend supports these two variants:
-
-code[
-	inject @CustomAnnotation my.Service customService; 
-	inject @"NamedThingy" my.Service namedService;
-]
-
-Providers are declared like in plain Guice. That is you wrap your type into code[com.google.inject.Provider].
-Example:
-
-code[
-	inject @CustomAnnotation Provider<Service> customServiceProvider; 
-]
-
-section2[Injected Extension Methods]
-
-The code[extension] keyword is also available for code[inject] which is much nicer than importing static methods, because you don't bind your code to 
-actual implementation, since the implementation can be easily changed through the global dependency injection configuration (i.e. Guice modules).
-
-Example:
-
-Imagine you had something like IterableExtensions which adds some higher-order functions
-to the java.util collection library (we will likely ship a library based on google guava).
-
-code[
-class IterableExtensions {
-   public <T> T find(Iterable<T> elements, Function<T,Boolean> func) {
-     ...
-   }
-}
-]
-
-You declare the dependency like this:
-
-code[
-	inject extension my.common.IterableExtensions;
-]  
-
-and can then use it as if those functions were members of any code[java.lang.Iterable]:
-
-code[
-	myIterable.find(e|e.name=="Foo")
-]
-
-The nice thing with using injection as opposed to static methods is, that in case there is a bug in the extension or it is implemented inefficiently or you 
-just need a different strategy, you can simply exchange the component with another implementation. You do this without modifying the library nor the client code. 
-You'll only have to change the binding in your guice module. Also this gives you a general hook for any AOP-like thing you would want to do, 
-or allows you to write against an SPI, where the concrete implementation can be provided by a third party.
-
-code[
-ImportSection : 
-	(Import|Injection)*;
-Import : 
-	...
-Injection : 
-	'inject' 'extension'? 
-	('@'STRING | '@'TypeReference)? 
-	TypeReference ('('ID (',' ID)*')')?;
+		'import' QualifiedName (('.''*');
 ]
 
 section:classDeclaration[Class Declaration]
@@ -203,6 +85,145 @@ ClassDeclaration :
 ;
 Visibility : 'public'|'protected'|'private';
 	
+]
+
+section:inject[Dependency Injection]
+
+Xtend2 has built-in support for dependency injection, which means that declaring dependencies is a first class feature of Xtend2.
+A dependency declaration is done as part of the class body and looks like this:
+
+code[
+	@Inject MyService as myService;
+]
+
+This will translate to the following Java field: 
+
+code[Java][
+	@Inject	
+	private MyService myService;
+]
+
+Note that the visibiloty is always code[private], is you want to provide access to an injected object
+you need to write an accessor function. 
+
+section2[Name can be inferred]
+
+You could leave the name out as by default it will be the lower case version of the simple name of the class.
+That is the following inject declaration would be equvalent with the former.
+
+code[
+	@Inject MyService;
+]
+
+section2[Guice Keys]
+
+Xtend2 uses Guice as the dependency injection container, which in turn uses types as keys. Those types can be generified, which
+is why you can write the following in Xtend2.
+
+code[
+	@Inject HashMap<String,MyType> myCache;
+]
+
+Also Guice allows to use annotations to further distinct between different implementations of the same type. This is usually done by using
+the code[com.google.inject.name.Named] annotation or a custom annotation which is itself annotated with code[com.google.inject.BindingAnnotation].
+
+Xtend supports these two variants:
+
+code[
+	@Inject @CustomAnnotation my.Service customService; 
+	@Inject @"NamedThingy" my.Service namedService;
+]
+
+Providers are declared like in plain Guice. That is you wrap your type into code[com.google.inject.Provider].
+Example:
+
+code[
+	@Inject @CustomAnnotation Provider<Service> customServiceProvider; 
+]
+
+section2[Injected Extension Methods]
+
+You can make the instance methods provided by the declared dependency available as ref:extensionMethods[extension
+methods], by adding the keyword code[extension] after the code[@Inject] keyword.
+
+Example:
+
+Imagine you had something like IterableExtensions which adds some higher-order functions
+to the java.util collection library (we will likely ship a library based on google guava).
+
+code[
+class IterableExtensions {
+   public <T> T find(Iterable<T> elements, Function<T,Boolean> func) {
+     ...
+   }
+}
+]
+
+You declare the dependency like this:
+
+code[
+	@Inject extension IterableExtensions;
+]  
+
+and can then use it as if those functions were members of any code[java.lang.Iterable]:
+
+code[
+	newArrayList("Foo","Bar","Baz").find(e|e.name=="Foo")
+]
+
+The nice thing with using injection as opposed to ref:staticExtension[static extensions] is, that in case there is a bug in the extension or it is implemented inefficiently or you 
+just need a different strategy, you can simply exchange the component with another implementation. You do this without modifying the library nor the client code. 
+You'll only have to change the binding in your guice module. Also this gives you a general hook for any AOP-like thing you would want to do, 
+or allows you to write against an SPI, where the concrete implementation can be provided by a third party.
+
+code[
+DeclaredDependency : 
+	'@Inject' 'extension'? 
+	('@'STRING | '@'TypeReference)? 
+	TypeReference ('as' ID)?;
+]
+
+section:staticExtension[Static Extensions]
+
+Extensions are a concept which allow you to add new members to a closed type hierarchy, for the current
+lexical scope. Imagine you want to add some nice convenience methods to the type codeRef[java.lang.String],
+you wouldn't be able to do so with Java since the type is final and so on. In Xtend you can have extension
+methods for any type and invoke them using the common member syntax. Static and non static Java methods
+and any Xtend function can be invoked as extensions.
+
+Static Java methods can be made available as extension methods be adding the following declaration somewhere
+in the class body:
+
+code[
+	static extension TypeName
+]
+
+So given you have so following Java class :
+
+code[Java][
+	public class StringUtilities {
+		public static String fistUpperCase(String s) {
+			return ....;
+		}
+	}	
+]
+
+You could use it like this in your Xtend2 class file:
+
+code[
+	class MyXtendClass {
+		static extension StringUtilities
+		
+		mySimpleFunction(String someString)
+			someString.firstUpperCase()
+	}
+]
+
+section2[Syntax]
+
+code[
+	StaticExtension : 
+		'static' 'extension' QualifiedName;
 ]
 
 section:Functions[Functions]
@@ -466,60 +487,21 @@ section2-ref[RichStrings]
 
 section2:extensionMethods[Extension Method Syntax]
 
-Static methods from imports and methods from injected objects where the declaration
-is preceded with ref:importExtension[the keyword code[extension]] can be called using the member syntax.
+Static extensions as well as dependency declarartions marked as code[extension] can be called using the member syntax.
 This means that a method imported through a static import, like e.g. java.util.Collections.singleton(T) can be invoked using 
-the member syntax.
-
-Example:
+the member syntax:
 
 code[
 	"Foo".singleton
 ]
 
-is the same as
-
-code[
-	singleton("Foo")
-]
-
 Note that extension methods never shadow a member of the current reference. That is if code[java.lang.String] has a field code[singleton], a method code[singleton()] or a method
 code[getSingleton()], those members would be referenced. That is done at compile time, so the tooling is able to tell you what you actually reference.
 
-Static functions as well as extensions in the previous version of Xtend make clients not only depend on a certain signature but on the implementation as 
-it is not possible to exchange the implementation of a static function. That's where the code[extension] keyword in conjunction with dependency injection 
-comes in. If you have annotated a dependency with the code[extension] keyword, its members become available for extension method syntax.
-
-Example:
-
-Imagine the following Java interface
-
-code[
-	interface MyExtensions {
-		String getComputedProperty(SomeType type);
-	}
-]
-
-With Java you would have to call this method on an instance of MyExtensions like so:
-
-code[
-	myExtensions.getComputedProperty(someType)
-]
-
-In Xtend2 you can have the instance injected like in Java:
-
-code[
-	inject extension MyExtensions;
-]
-
-But instead of using the long expression known from Java (which would also work) you are able to use the extension method syntax:
-
-code[
-	someType.computedProperty
-]
-
-It will statically bind to the right method and even more important it doesn't bind to a specific implementation but just to the signature.
-The implementation can be provided through dependency injection.
+For a given receiver type X all extension methods on the scope where the first argument is compatible
+with X will be put into the scope. If of all these methods two or more have the same signature (the type
+of the first argument, i.e. the receiver type, is ignored) they will
+be excluded.
 
 section2:CreateExpression[Create Expression]
 

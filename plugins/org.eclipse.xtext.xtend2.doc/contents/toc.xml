@@ -9,17 +9,7 @@
 </topic>
 </topic>
 <topic href="contents/02-LanguageConcepts.xdoc.html#imports" label="Imports" >
-<topic href="contents/02-LanguageConcepts.xdoc.html#importExtension" label="Importing Extension Methods" >
-</topic>
-<topic href="contents/02-LanguageConcepts.xdoc.html#imports-3" label="Syntax" >
-</topic>
-</topic>
-<topic href="contents/02-LanguageConcepts.xdoc.html#inject" label="Dependency Injection" >
-<topic href="contents/02-LanguageConcepts.xdoc.html#inject-5" label="Name can be inferred" >
-</topic>
-<topic href="contents/02-LanguageConcepts.xdoc.html#inject-6" label="Guice Keys" >
-</topic>
-<topic href="contents/02-LanguageConcepts.xdoc.html#inject-7" label="Injected Extension Methods" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#imports-2" label="Syntax" >
 </topic>
 </topic>
 <topic href="contents/02-LanguageConcepts.xdoc.html#classDeclaration" label="Class Declaration" >
@@ -30,6 +20,18 @@
 <topic href="contents/02-LanguageConcepts.xdoc.html#classDeclaration-5" label="Abstract Classes" >
 </topic>
 <topic href="contents/02-LanguageConcepts.xdoc.html#classDeclaration-6" label="Syntax" >
+</topic>
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#inject" label="Dependency Injection" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#inject-6" label="Name can be inferred" >
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#inject-7" label="Guice Keys" >
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#inject-8" label="Injected Extension Methods" >
+</topic>
+</topic>
+<topic href="contents/02-LanguageConcepts.xdoc.html#staticExtension" label="Static Extensions" >
+<topic href="contents/02-LanguageConcepts.xdoc.html#staticExtension-7" label="Syntax" >
 </topic>
 </topic>
 <topic href="contents/02-LanguageConcepts.xdoc.html#Functions" label="Functions" >
