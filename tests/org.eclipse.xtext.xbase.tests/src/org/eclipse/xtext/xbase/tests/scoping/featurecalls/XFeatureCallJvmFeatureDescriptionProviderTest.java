@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.scoping.featurecalls;
 
+import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -32,7 +33,7 @@ public class XFeatureCallJvmFeatureDescriptionProviderTest extends AbstractJvmFe
 		defaultProvider.setContextType(null); // NO Context!
 		descProvider.setContextType(null); // NO Context!
 		
-		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,defaultProvider, descProvider);
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference, newArrayList(defaultProvider, descProvider));
 		assertEquals(8, numberOfScopes(scope));
 
 		assertSetsEqual(newHashSet("publicField", "publicMethod()", "getPublicProperty()","setPublicProperty(java.lang.String)"),	getSignatures(scope));
@@ -61,7 +62,7 @@ public class XFeatureCallJvmFeatureDescriptionProviderTest extends AbstractJvmFe
 		defaultProvider.setContextType((JvmDeclaredType) reference.getType());
 		descProvider.setContextType((JvmDeclaredType) reference.getType());
 		
-		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,defaultProvider, descProvider);
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference, newArrayList(defaultProvider, descProvider));
 		assertEquals(8, numberOfScopes(scope));
 		
 		assertSetsEqual(newHashSet("publicField", "publicMethod()", "getPublicProperty()","protectedField","protectedMethod()","getProtectedProperty()","setPublicProperty(java.lang.String)","setProtectedProperty(java.lang.String)"),	getSignatures(scope));
@@ -91,7 +92,7 @@ public class XFeatureCallJvmFeatureDescriptionProviderTest extends AbstractJvmFe
 		defaultProvider.setContextType((JvmDeclaredType) superType.getType());
 		descProvider.setContextType((JvmDeclaredType) superType.getType());
 		
-		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,defaultProvider, descProvider);
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference, newArrayList(defaultProvider, descProvider));
 		
 		assertEquals(6, numberOfScopes(scope));
 		

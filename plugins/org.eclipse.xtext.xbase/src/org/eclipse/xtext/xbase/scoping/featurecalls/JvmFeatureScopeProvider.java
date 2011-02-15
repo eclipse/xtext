@@ -90,7 +90,7 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 	 * it is shadowed by valid elements and can be filtered out if not needed.
 	 * </p>
 	 */
-	public JvmFeatureScope createFeatureScopeForTypeRef(JvmTypeReference jvmTypeRef, IJvmFeatureDescriptionProvider... jvmFeatureDescriptionProviders) {
+	public JvmFeatureScope createFeatureScopeForTypeRef(JvmTypeReference jvmTypeRef, List<? extends IJvmFeatureDescriptionProvider> jvmFeatureDescriptionProviders) {
 		TypeArgumentContext context = typeArgumentContextProvider.getReceiverContext(jvmTypeRef);
 		Iterable<JvmTypeReference> hierarchy = linearizeTypeHierarchy(jvmTypeRef);
 

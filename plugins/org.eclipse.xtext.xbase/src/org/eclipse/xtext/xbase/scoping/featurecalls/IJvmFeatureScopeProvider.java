@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
+import java.util.List;
+
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
@@ -34,5 +36,5 @@ public interface IJvmFeatureScopeProvider {
 	 * it is shadowed by valid elements and can be filtered out if not needed.
 	 * </p>
 	 */
-	public JvmFeatureScope createFeatureScopeForTypeRef(JvmTypeReference jvmTypeRef, IJvmFeatureDescriptionProvider... jvmFeatureDescriptionProvider);
+	public JvmFeatureScope createFeatureScopeForTypeRef(JvmTypeReference jvmTypeRef, List<? extends IJvmFeatureDescriptionProvider> jvmFeatureDescriptionProvider);
 }

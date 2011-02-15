@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.scoping.featurecalls;
 
+import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -30,7 +31,7 @@ public class XAssignmentDescriptionProviderTest extends AbstractJvmFeatureScopeP
 	public void testFinalFields() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,
-				newXAssignmentDescriptionProvider(),newXAssignmentSugarDescriptionProvider());
+				newArrayList(newXAssignmentDescriptionProvider(),newXAssignmentSugarDescriptionProvider()));
 		
 		assertEquals(3, numberOfScopes(scope));
 		
@@ -45,7 +46,7 @@ public class XAssignmentDescriptionProviderTest extends AbstractJvmFeatureScopeP
 	public void testAssignments() throws Exception {
 		JvmTypeReference reference = getTypeRef(VisibilitySubClass.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,
-				newXAssignmentDescriptionProvider(),newXAssignmentSugarDescriptionProvider());
+				newArrayList(newXAssignmentDescriptionProvider(),newXAssignmentSugarDescriptionProvider()));
 		
 		assertEquals(4, numberOfScopes(scope));
 		
@@ -68,7 +69,7 @@ public class XAssignmentDescriptionProviderTest extends AbstractJvmFeatureScopeP
 		newXAssignmentSugarDescriptionProvider.setContextType((JvmDeclaredType) reference.getType());
 		
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,
-				newXAssignmentDescriptionProvider,newXAssignmentSugarDescriptionProvider);
+				newArrayList(newXAssignmentDescriptionProvider,newXAssignmentSugarDescriptionProvider));
 		
 		assertEquals(4, numberOfScopes(scope));
 		
