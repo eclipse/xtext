@@ -37,12 +37,12 @@ import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintElemen
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IFeatureInfo;
 import org.eclipse.xtext.serializer.ISemanticNodeProvider;
 import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.ITransientValueService;
 import org.eclipse.xtext.serializer.ITransientValueService.ValueTransient;
+import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;

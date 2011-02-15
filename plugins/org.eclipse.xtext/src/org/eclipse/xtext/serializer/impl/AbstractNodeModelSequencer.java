@@ -21,8 +21,8 @@ import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.serializer.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.ISemanticSequencer;
+import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

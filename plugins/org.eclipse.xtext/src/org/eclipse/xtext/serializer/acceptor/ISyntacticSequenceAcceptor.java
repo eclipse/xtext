@@ -1,4 +1,4 @@
-package org.eclipse.xtext.serializer;
+package org.eclipse.xtext.serializer.acceptor;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Action;

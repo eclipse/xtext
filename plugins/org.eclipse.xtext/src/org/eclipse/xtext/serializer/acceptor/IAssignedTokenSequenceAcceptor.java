@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.serializer;
+package org.eclipse.xtext.serializer.acceptor;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Keyword;
