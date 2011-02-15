@@ -10,24 +10,20 @@ package org.eclipse.xtext.serializer;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementFullTitleSwitch;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
 import org.eclipse.xtext.serializer.impl.DebugSequenceAcceptor;
+import org.eclipse.xtext.serializer.impl.EmitterNodeIterator;
 import org.eclipse.xtext.serializer.impl.NodeModelSyntacticSequencer;
 
 import com.google.common.collect.Lists;
@@ -45,24 +41,39 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 		with(SyntacticSequencerTestLanguageStandaloneSetup.class);
 	}
 
+	private static class NoEnterNodesDebugSequenceAcceptor extends DebugSequenceAcceptor {
+
+		public NoEnterNodesDebugSequenceAcceptor(boolean printInstantly) {
+			super(printInstantly);
+		}
+
+		@Override
+		public void enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
+			add(titleSwitch.doSwitch(action) + " {", semanticChild.eClass().getName());
+			indentation++;
+		}
+
+		@Override
+		public void enterAssignedParserRuleCall(RuleCall rc, EObject newCurrent, ICompositeNode node) {
+			add(titleSwitch.doSwitch(rc) + " {", newCurrent.eClass().getName());
+			indentation++;
+		}
+	}
+
 	private void testSequence(String stringModel) throws Exception {
 		EObject model = getModel(stringModel);
 		NodeModelSyntacticSequencer nmSequencer = new NodeModelSyntacticSequencer();
 		EObject context = nmSequencer.findContexts(model, null).iterator().next();
 		ISemanticSequencer semSequencer = get(ISemanticSequencer.class);
 		IRecursiveSyntacticSequencer recSequencer = get(IRecursiveSyntacticSequencer.class);
-		DebugSequenceAcceptor actual = new DebugSequenceAcceptor(false);
+		DebugSequenceAcceptor actual = new NoEnterNodesDebugSequenceAcceptor(true);
 		DebugSequenceAcceptor expected = new DebugSequenceAcceptor();
 		ISyntacticSequencer syn = get(ISyntacticSequencer.class);
-		//		ISemanticSequenceAcceptor synac = syn.createAcceptor(context, model, actual,
-		//				ISerializationDiagnostic.EXCEPTION_ACCEPTOR);
-		nmSequencer.createSequence(context, model, expected, ISerializationDiagnostic.EXCEPTION_ACCEPTOR);
-		recSequencer.createSequence(syn, semSequencer, context, model, actual,
-				ISerializationDiagnostic.EXCEPTION_ACCEPTOR);
-		//		recSequencer.createSequence(nmSequencer, context, model, expected, ISerializationDiagnostic.EXCEPTION_ACCEPTOR);
-		//		System.out.println(NodeModelUtils.compactDump(NodeModelUtils.getNode(model), false));
-		//		System.out.println(actual.toString());
-		//		assertEquals(expected.toString(), actual.toString());
+		nmSequencer.createSequence(context, model, expected, ISerializationDiagnostic.STDERR_ACCEPTOR);
+		recSequencer
+				.createSequence(syn, semSequencer, context, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
+		System.out.println(actual);
+		System.out.println(NodeModelUtils.compactDump(NodeModelUtils.findActualNodeFor(model), false));
 		assertEquals(Join.join("\n", getNodeSequence(model)), Join.join("\n", actual.getNodesColumn()));
 	}
 
@@ -74,12 +85,12 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 	//		ISemanticSequencer semSequencer = get(ISemanticSequencer.class);
 	//		//		EObject ctx = semSequencer.findContexts(model, null).iterator().next();
 	//		IRecursiveSyntacticSequencer recSequencer = get(IRecursiveSyntacticSequencer.class);
-	//		DebugSequenceAcceptor actual = new DebugSequenceAcceptor(true);
+	//		DebugSequenceAcceptor actual = new NoEnterNodesDebugSequenceAcceptor(true);
 	//		//		IRecursiveSyntacticSequenceAcceptor synac = get(ISyntacticSequencer.class).createAcceptor(ctx, model, actual,
 	//		//				ISerializationDiagnostic.EXCEPTION_ACCEPTOR);
 	//		ISyntacticSequencer syn = get(ISyntacticSequencer.class);
 	//		recSequencer.createSequence(syn, semSequencer, getGrammarAccess().getGrammar().getRules().get(0), model,
-	//				actual, ISerializationDiagnostic.EXCEPTION_ACCEPTOR);
+	//				actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
 	//		//		String actual = sequenceRecursively(semSequencer, ctx, model, true);
 	//		System.out.println(actual);
 	//		//		System.out.println(NodeModelUtils.compactDump(NodeModelUtils.getNode(model), false));
@@ -110,34 +121,15 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 	private List<String> getNodeSequence(EObject model) {
 		List<String> result = Lists.newArrayList();
 		GrammarElementFullTitleSwitch titleSwitch = new GrammarElementFullTitleSwitch();
-		NodeIterator ni = new NodeIterator(NodeModelUtils.findActualNodeFor(model));
+		EmitterNodeIterator ni = new EmitterNodeIterator(NodeModelUtils.findActualNodeFor(model));
 		while (ni.hasNext()) {
 			INode next = ni.next();
-			if (include(next)) {
-				ni.prune();
-				if (next instanceof ILeafNode)
-					result.add(titleSwitch.doSwitch(next.getGrammarElement()) + " -> " + next.getText());
-				if (next instanceof ICompositeNode)
-					result.add(titleSwitch.doSwitch(next.getGrammarElement()));
-			} else if (next.getGrammarElement() instanceof CrossReference) {
-				ni.prune();
-				result.add(titleSwitch.doSwitch(((CrossReference) next.getGrammarElement()).getTerminal()));
-			}
+			if (next instanceof ILeafNode)
+				result.add(titleSwitch.doSwitch(next.getGrammarElement()) + " -> " + next.getText());
+			if (next instanceof ICompositeNode)
+				result.add(titleSwitch.doSwitch(next.getGrammarElement()));
 		}
 		return result;
-	}
-
-	private boolean include(INode node) {
-		if (node instanceof ILeafNode) {
-			ILeafNode leaf = (ILeafNode) node;
-			if (leaf.isHidden())
-				return false;
-			return true;
-		} else if (node instanceof ICompositeNode) {
-			return GrammarUtil.isDatatypeRuleCall(node.getGrammarElement())
-					|| node.getGrammarElement() instanceof CrossReference;
-		}
-		return false;
 	}
 
 	public void testExp0_a() throws Exception {
@@ -166,5 +158,13 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 
 	public void testExp2_c() throws Exception {
 		testSequence("#4 (a * (((b + c))))");
+	}
+
+	public void testExp2_d() throws Exception {
+		testSequence("#4 (b + c) * d");
+	}
+
+	public void testExp2_e() throws Exception {
+		testSequence("#4 ((a * (((b + c)) * d) + e)) + f");
 	}
 }
