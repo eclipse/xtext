@@ -113,7 +113,6 @@ public class PolymorphicDispatcherTest extends TestCase {
 		PolymorphicDispatcher<String> target = PolymorphicDispatcher.createForSingleTarget("label", o1);
 		assertEquals("s",target.invoke("Foo"));
 		assertEquals("i",target.invoke(42));
-		assertEquals("n",target.invoke(new BigDecimal(0)));
 	}
 
 	public void testMixedTypes() throws Exception {
