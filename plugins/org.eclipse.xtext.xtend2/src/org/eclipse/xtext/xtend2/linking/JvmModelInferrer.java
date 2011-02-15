@@ -87,7 +87,8 @@ public class JvmModelInferrer {
 		for (JvmTypeParameter typeParameter : source.getTypeParameters())
 			target.getTypeParameters().add(cloneWithProxies(typeParameter));
 		for (XtendMember member : source.getMembers())
-			target.getMembers().add(transform(member));
+			if (member.getName() != null)
+				target.getMembers().add(transform(member));
 		appendSyntheticDispatchMethods(source, target);
 		computeInferredReturnTypes(target);
 		return target;
