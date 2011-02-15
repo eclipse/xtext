@@ -546,6 +546,16 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDeclaredDependency_Extension()
+	{
+		return (EAttribute)declaredDependencyEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Xtend2Factory getXtend2Factory()
 	{
 		return (Xtend2Factory)getEFactoryInstance();
@@ -617,6 +627,7 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 
 		declaredDependencyEClass = createEClass(DECLARED_DEPENDENCY);
 		createEReference(declaredDependencyEClass, DECLARED_DEPENDENCY__TYPE);
+		createEAttribute(declaredDependencyEClass, DECLARED_DEPENDENCY__EXTENSION);
 	}
 
 	/**
@@ -716,6 +727,7 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 
 		initEClass(declaredDependencyEClass, DeclaredDependency.class, "DeclaredDependency", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDeclaredDependency_Type(), theTypesPackage.getJvmTypeReference(), null, "type", null, 0, 1, DeclaredDependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDeclaredDependency_Extension(), ecorePackage.getEBoolean(), "extension", null, 0, 1, DeclaredDependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

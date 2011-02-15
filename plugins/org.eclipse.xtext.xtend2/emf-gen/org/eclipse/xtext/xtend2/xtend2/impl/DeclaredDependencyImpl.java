@@ -26,6 +26,7 @@ import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.DeclaredDependencyImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.DeclaredDependencyImpl#isExtension <em>Extension</em>}</li>
  * </ul>
  * </p>
  *
@@ -42,6 +43,26 @@ public class DeclaredDependencyImpl extends XtendMemberImpl implements DeclaredD
 	 * @ordered
 	 */
 	protected JvmTypeReference type;
+
+	/**
+	 * The default value of the '{@link #isExtension() <em>Extension</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExtension()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean EXTENSION_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isExtension() <em>Extension</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExtension()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean extension = EXTENSION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -117,6 +138,29 @@ public class DeclaredDependencyImpl extends XtendMemberImpl implements DeclaredD
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isExtension()
+	{
+		return extension;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExtension(boolean newExtension)
+	{
+		boolean oldExtension = extension;
+		extension = newExtension;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.DECLARED_DEPENDENCY__EXTENSION, oldExtension, extension));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -140,6 +184,8 @@ public class DeclaredDependencyImpl extends XtendMemberImpl implements DeclaredD
 		{
 			case Xtend2Package.DECLARED_DEPENDENCY__TYPE:
 				return getType();
+			case Xtend2Package.DECLARED_DEPENDENCY__EXTENSION:
+				return isExtension();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -156,6 +202,9 @@ public class DeclaredDependencyImpl extends XtendMemberImpl implements DeclaredD
 		{
 			case Xtend2Package.DECLARED_DEPENDENCY__TYPE:
 				setType((JvmTypeReference)newValue);
+				return;
+			case Xtend2Package.DECLARED_DEPENDENCY__EXTENSION:
+				setExtension((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -174,6 +223,9 @@ public class DeclaredDependencyImpl extends XtendMemberImpl implements DeclaredD
 			case Xtend2Package.DECLARED_DEPENDENCY__TYPE:
 				setType((JvmTypeReference)null);
 				return;
+			case Xtend2Package.DECLARED_DEPENDENCY__EXTENSION:
+				setExtension(EXTENSION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -190,8 +242,27 @@ public class DeclaredDependencyImpl extends XtendMemberImpl implements DeclaredD
 		{
 			case Xtend2Package.DECLARED_DEPENDENCY__TYPE:
 				return type != null;
+			case Xtend2Package.DECLARED_DEPENDENCY__EXTENSION:
+				return extension != EXTENSION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (extension: ");
+		result.append(extension);
+		result.append(')');
+		return result.toString();
 	}
 
 } //DeclaredDependencyImpl

@@ -117,6 +117,9 @@
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="@Inject"/>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="extension" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="extension"/>
+        </elements>
         <elements xsi:type="xtext:Assignment" feature="type" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
         </elements>

@@ -579,13 +579,22 @@ public interface Xtend2Package extends EPackage
 	int DECLARED_DEPENDENCY__TYPE = XTEND_MEMBER_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Extension</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARED_DEPENDENCY__EXTENSION = XTEND_MEMBER_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Declared Dependency</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARED_DEPENDENCY_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 1;
+	int DECLARED_DEPENDENCY_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 2;
 
 
 	/**
@@ -974,6 +983,17 @@ public interface Xtend2Package extends EPackage
 	EReference getDeclaredDependency_Type();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtend2.xtend2.DeclaredDependency#isExtension <em>Extension</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Extension</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.DeclaredDependency#isExtension()
+	 * @see #getDeclaredDependency()
+	 * @generated
+	 */
+	EAttribute getDeclaredDependency_Extension();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1305,6 +1325,14 @@ public interface Xtend2Package extends EPackage
 		 * @generated
 		 */
 		EReference DECLARED_DEPENDENCY__TYPE = eINSTANCE.getDeclaredDependency_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Extension</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DECLARED_DEPENDENCY__EXTENSION = eINSTANCE.getDeclaredDependency_Extension();
 
 	}
 
