@@ -33,8 +33,8 @@ public class SemanticSequencerTest extends AbstractXtextTests {
 		//		String expected = sequenceRecursively(nmsequencer, context, model, true);
 		DebugSequenceAcceptor actual = new DebugSequenceAcceptor();
 		DebugSequenceAcceptor expected = new DebugSequenceAcceptor();
-		recSequencer.createSequence(semSequencer, context, model, actual, ISerializationDiagnostic.EXCEPTION_ACCEPTOR);
-		recSequencer.createSequence(nmSequencer, context, model, expected, ISerializationDiagnostic.EXCEPTION_ACCEPTOR);
+		recSequencer.createSequence(semSequencer, context, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
+		recSequencer.createSequence(nmSequencer, context, model, expected, ISerializationDiagnostic.STDERR_ACCEPTOR);
 		//		String expected = sequenceRecursively(nmsequencer, context, model, true);
 		assertEquals(expected.toString(), actual.toString());
 	}
