@@ -17,21 +17,19 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public interface IAssignedTokenSequenceAcceptor {
-	void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, EObject value, ICompositeNode node);
+	void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, String token, EObject value, int index, ICompositeNode node);
 
-	void acceptAssignedCrossRefKeyword(Keyword keyword, EObject value, ILeafNode node);
+	void acceptAssignedCrossRefTerminal(RuleCall terminalRC, String token, EObject value, int index, ILeafNode node);
 
-	void acceptAssignedCrossRefTerminal(RuleCall terminalRC, EObject value, ILeafNode node);
+	void acceptAssignedCrossRefEnum(RuleCall enumRC, String token, EObject value, int index, ICompositeNode node);
 
-	void acceptAssignedCrossRefEnum(RuleCall enumRC, EObject value, ICompositeNode node);
+	void acceptAssignedDatatype(RuleCall datatypeRC, String token, Object value, int index, ICompositeNode node);
 
-	void acceptAssignedDatatype(RuleCall datatypeRC, Object value, ICompositeNode node);
+	void acceptAssignedEnum(RuleCall enumRC, String token, Object value, int index, ICompositeNode node);
 
-	void acceptAssignedEnum(RuleCall enumRC, Object value, ICompositeNode node);
+	void acceptAssignedKeyword(Keyword keyword, String token, String value, int index, ILeafNode node);
 
-	void acceptAssignedKeyword(Keyword keyword, String value, ILeafNode node);
+	void acceptAssignedKeyword(Keyword keyword, String token, Boolean value, int index, ILeafNode node);
 
-	void acceptAssignedKeyword(Keyword keyword, Boolean value, ILeafNode node);
-
-	void acceptAssignedTerminal(RuleCall terminalRC, Object value, ILeafNode node);
+	void acceptAssignedTerminal(RuleCall terminalRC, String token, Object value, int index, ILeafNode node);
 }

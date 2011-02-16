@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.impl;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
@@ -29,8 +32,20 @@ import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
  */
 public abstract class AbstractNodeModelSequencer implements ISemanticSequencer {
 
-	protected boolean acceptSemantic(ISemanticSequenceAcceptor acceptor, AbstractElement ele, Object value, INode node) {
-		Assignment ass;
+	protected boolean acceptSemantic(ISemanticSequenceAcceptor acceptor, EObject semanticObject, AbstractElement ele,
+			Object value, INode node) {
+		Assignment ass = GrammarUtil.containingAssignment(ele);
+		int index = -2;
+		if (ass != null) {
+			EStructuralFeature feat = semanticObject.eClass().getEStructuralFeature(ass.getFeature());
+			if (feat != null) {
+				if (feat.isMany())
+					index = ((List<?>) semanticObject.eGet(feat)).indexOf(value);
+				else
+					index = -1;
+			}
+		}
+		String token = node.getText().trim();
 		if (ele instanceof Action) {
 			if (((Action) ele).getFeature() != null) {
 				acceptor.acceptAssignedAction(((Action) ele), (EObject) value, (ICompositeNode) node);
@@ -40,44 +55,44 @@ public abstract class AbstractNodeModelSequencer implements ISemanticSequencer {
 			if (ele instanceof RuleCall) {
 				RuleCall rc = (RuleCall) ele;
 				if (rc.getRule() instanceof ParserRule) {
-					acceptor.acceptAssignedCrossRefDatatype(rc, (EObject) value, (ICompositeNode) node);
+					acceptor.acceptAssignedCrossRefDatatype(rc, token, (EObject) value, index, (ICompositeNode) node);
 					return true;
 				}
 				if (rc.getRule() instanceof TerminalRule) {
-					acceptor.acceptAssignedCrossRefTerminal(rc, (EObject) value, (ILeafNode) node);
+					acceptor.acceptAssignedCrossRefTerminal(rc, token, (EObject) value, index, (ILeafNode) node);
 					return true;
 				}
 				if (rc.getRule() instanceof EnumRule) {
-					acceptor.acceptAssignedCrossRefEnum(rc, (EObject) value, (ICompositeNode) node);
+					acceptor.acceptAssignedCrossRefEnum(rc, token, (EObject) value, index, (ICompositeNode) node);
 					return true;
 				}
-			} else if (ele instanceof Keyword) {
-				acceptor.acceptAssignedCrossRefKeyword((Keyword) ele, (EObject) value, (ILeafNode) node);
-				return true;
+				//			} else if (ele instanceof Keyword) {
+				//				acceptor.acceptAssignedCrossRefKeyword((Keyword) ele, token, (EObject) value, index,(ILeafNode) node);
+				//				return true;
 			}
-		} else if ((ass = GrammarUtil.containingAssignment(ele)) != null) {
+		} else if (ass != null) {
 			if (ele instanceof RuleCall) {
 				RuleCall rc = (RuleCall) ele;
 				if (rc.getRule() instanceof ParserRule) {
 					if (rc.getRule().getType().getClassifier() instanceof EClass)
 						acceptor.acceptAssignedParserRuleCall(rc, (EObject) value, (ICompositeNode) node);
 					else
-						acceptor.acceptAssignedDatatype(rc, value, (ICompositeNode) node);
+						acceptor.acceptAssignedDatatype(rc, token, value, index, (ICompositeNode) node);
 					return true;
 				}
 				if (rc.getRule() instanceof TerminalRule) {
-					acceptor.acceptAssignedTerminal(rc, value, (ILeafNode) node);
+					acceptor.acceptAssignedTerminal(rc, token, value, index, (ILeafNode) node);
 					return true;
 				}
 				if (rc.getRule() instanceof EnumRule) {
-					acceptor.acceptAssignedEnum(rc, value, (ICompositeNode) node);
+					acceptor.acceptAssignedEnum(rc, token, value, index, (ICompositeNode) node);
 					return true;
 				}
 			} else if (ele instanceof Keyword) {
 				if (GrammarUtil.isBooleanAssignment(ass))
-					acceptor.acceptAssignedKeyword((Keyword) ele, true, (ILeafNode) node);
+					acceptor.acceptAssignedKeyword((Keyword) ele, token, true, index, (ILeafNode) node);
 				else
-					acceptor.acceptAssignedKeyword((Keyword) ele, (String) value, (ILeafNode) node);
+					acceptor.acceptAssignedKeyword((Keyword) ele, token, (String) value, index, (ILeafNode) node);
 				return true;
 			}
 		}

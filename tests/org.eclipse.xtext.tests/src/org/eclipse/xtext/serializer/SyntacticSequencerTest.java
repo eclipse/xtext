@@ -54,13 +54,13 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 
 		@Override
 		public void enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
-			add(titleSwitch.doSwitch(action) + " {", semanticChild.eClass().getName());
+			add(titles.doSwitch(action) + " {", semanticChild.eClass().getName(), "", -1, NO_NODE);
 			indentation++;
 		}
 
 		@Override
 		public void enterAssignedParserRuleCall(RuleCall rc, EObject newCurrent, ICompositeNode node) {
-			add(titleSwitch.doSwitch(rc) + " {", newCurrent.eClass().getName());
+			add(titles.doSwitch(rc) + " {", newCurrent.eClass().getName(), "", -1, NO_NODE);
 			indentation++;
 		}
 	}
@@ -79,7 +79,7 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 				.createSequence(syn, semSequencer, context, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
 		//		System.out.println(actual);
 		//		System.out.println(NodeModelUtils.compactDump(NodeModelUtils.findActualNodeFor(model), false));
-		assertEquals(Join.join("\n", getNodeSequence(model)), Join.join("\n", actual.getNodesColumn()));
+		assertEquals(Join.join("\n", getNodeSequence(model)), Join.join("\n", actual.getColumn(4)));
 	}
 
 	public void testXtext() throws Exception {
@@ -95,7 +95,7 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 		//		String actual = sequenceRecursively(semSequencer, ctx, model, true);
 		//		System.out.println(actual);
 		//		System.out.println(NodeModelUtils.compactDump(NodeModelUtils.getNode(model), false));
-		assertEquals(Join.join("\n", getNodeSequence(model)), Join.join("\n", actual.getNodesColumn()));
+		assertEquals(Join.join("\n", getNodeSequence(model)), Join.join("\n", actual.getColumn(4)));
 	}
 
 	public void testMandatoryKeywords() throws Exception {

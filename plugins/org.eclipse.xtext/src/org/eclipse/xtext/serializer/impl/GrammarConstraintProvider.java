@@ -261,7 +261,6 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				case ASSIGNED_ACTION_CALL:
 				case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
 				case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
-				case ASSIGNED_CROSSREF_KEYWORD:
 				case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
 				case ASSIGNED_DATATYPE_RULE_CALL:
 				case ASSIGNED_ENUM_RULE_CALL:
@@ -683,7 +682,6 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				case ASSIGNED_ENUM_RULE_CALL:
 					return getFeatureName() + getAssignmentOperator() + getRuleCall().getRule().getName()
 							+ getCardinality();
-				case ASSIGNED_CROSSREF_KEYWORD:
 				case ASSIGNED_KEYWORD:
 				case ASSIGNED_BOOLEAN_KEYWORD:
 					return getFeatureName() + getAssignmentOperator() + "'" + getKeyword().getValue() + "'"
@@ -1277,8 +1275,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 					return ConstraintElementType.ASSIGNED_CROSSREF_TERMINAL_RULE_CALL;
 				if (rc.getRule() instanceof EnumRule)
 					return ConstraintElementType.ASSIGNED_CROSSREF_ENUM_RULE_CALL;
-			} else if (ele instanceof Keyword)
-				return ConstraintElementType.ASSIGNED_CROSSREF_KEYWORD;
+			}
 		} else if ((ass = GrammarUtil.containingAssignment(ele)) != null) {
 			if (ele instanceof RuleCall) {
 				RuleCall rc = (RuleCall) ele;

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.acceptor;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
@@ -17,10 +18,8 @@ import org.eclipse.xtext.grammaranalysis.impl.GrammarElementFullTitleSwitch;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.LeafNode;
 import org.eclipse.xtext.util.EmfFormatter;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Triple;
-import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.collect.Lists;
 import com.google.inject.internal.Join;
@@ -35,9 +34,9 @@ public class DebugSequenceAcceptor implements ISyntacticSequenceAcceptor, IRecur
 
 	protected boolean printInstantly;
 
-	protected List<Triple<String, String, String>> table = Lists.newArrayList();
+	protected List<List<String>> table = Lists.newArrayList();
 
-	protected GrammarElementFullTitleSwitch titleSwitch = new GrammarElementFullTitleSwitch();
+	protected GrammarElementFullTitleSwitch titles = new GrammarElementFullTitleSwitch();
 
 	public DebugSequenceAcceptor() {
 		this(false);
@@ -49,105 +48,97 @@ public class DebugSequenceAcceptor implements ISyntacticSequenceAcceptor, IRecur
 	}
 
 	public void acceptAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
-		add(titleSwitch.doSwitch(action), EmfFormatter.objPath(semanticChild), node2text(node));
+		add(titles.doSwitch(action), EmfFormatter.objPath(semanticChild), "", -1, node);
 	}
 
-	public INode acceptAssignedAction2(Action action, EObject semanticChild, ICompositeNode node) {
-		add(titleSwitch.doSwitch(action), EmfFormatter.objPath(semanticChild), node2text(node));
-		return null;
+	public void acceptAssignedCrossRefDatatype(RuleCall rc, String token, EObject value, int index, ICompositeNode node) {
+		add(titles.doSwitch(rc), token, EmfFormatter.objPath(value), index, node);
 	}
 
-	public void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, EObject value, ICompositeNode node) {
-		add(titleSwitch.doSwitch(datatypeRC), EmfFormatter.objPath(value), node2text(node));
+	public void acceptAssignedCrossRefEnum(RuleCall enumRC, String token, EObject value, int index, ICompositeNode node) {
+		add(titles.doSwitch(enumRC), token, EmfFormatter.objPath(value), index, node);
 	}
 
-	public void acceptAssignedCrossRefEnum(RuleCall enumRC, EObject value, ICompositeNode node) {
-		add(titleSwitch.doSwitch(enumRC), EmfFormatter.objPath(value), node2text(node));
+	public void acceptAssignedCrossRefTerminal(RuleCall rc, String token, EObject value, int index, ILeafNode node) {
+		add(titles.doSwitch(rc), token, EmfFormatter.objPath(value), index, node);
 	}
 
-	public void acceptAssignedCrossRefKeyword(Keyword keyword, EObject value, ILeafNode node) {
-		add(titleSwitch.doSwitch(keyword), EmfFormatter.objPath(value), node2text(node));
+	public void acceptAssignedDatatype(RuleCall datatypeRC, String token, Object value, int index, ICompositeNode node) {
+		add(titles.doSwitch(datatypeRC), token, "'" + value + "'", index, node);
 	}
 
-	public void acceptAssignedCrossRefTerminal(RuleCall terminalRC, EObject value, ILeafNode node) {
-		add(titleSwitch.doSwitch(terminalRC), EmfFormatter.objPath(value), node2text(node));
+	public void acceptAssignedEnum(RuleCall enumRC, String token, Object value, int index, ICompositeNode node) {
+		add(titles.doSwitch(enumRC), token, "'" + value + "'", index, node);
 	}
 
-	public void acceptAssignedDatatype(RuleCall datatypeRC, Object value, ICompositeNode node) {
-		add(titleSwitch.doSwitch(datatypeRC), "'" + value + "'", node2text(node));
+	public void acceptAssignedKeyword(Keyword keyword, String token, Boolean value, int index, ILeafNode node) {
+		add(titles.doSwitch(keyword), token, String.valueOf(value), index, node);
 	}
 
-	public void acceptAssignedEnum(RuleCall enumRC, Object value, ICompositeNode node) {
-		add(titleSwitch.doSwitch(enumRC), "'" + value + "'", node2text(node));
-	}
-
-	public void acceptAssignedKeyword(Keyword keyword, Boolean value, ILeafNode node) {
-		add(titleSwitch.doSwitch(keyword), value == null ? "null" : value.toString(), node2text(node));
-	}
-
-	public void acceptAssignedKeyword(Keyword keyword, String value, ILeafNode node) {
-		add(titleSwitch.doSwitch(keyword), "'" + value + "'", node2text(node));
+	public void acceptAssignedKeyword(Keyword keyword, String token, String value, int index, ILeafNode node) {
+		add(titles.doSwitch(keyword), token, "'" + value + "'", index, node);
 	}
 
 	public void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild, ICompositeNode node) {
-		add(titleSwitch.doSwitch(ruleCall), EmfFormatter.objPath(semanticChild), node2text(node));
+		add(titles.doSwitch(ruleCall), EmfFormatter.objPath(semanticChild), null, -1, node);
 	}
 
-	public INode acceptAssignedParserRuleCall2(RuleCall ruleCall, EObject semanticChild, ICompositeNode node) {
-		add(titleSwitch.doSwitch(ruleCall), EmfFormatter.objPath(semanticChild), node2text(node));
-		return null;
-	}
-
-	public void acceptAssignedTerminal(RuleCall terminalRC, Object value, ILeafNode node) {
-		add(titleSwitch.doSwitch(terminalRC), "'" + value + "'", node2text(node));
+	public void acceptAssignedTerminal(RuleCall terminalRC, String token, Object value, int index, ILeafNode node) {
+		add(titles.doSwitch(terminalRC), token, "'" + value + "'", index, node);
 	}
 
 	public void acceptUnassignedAction(Action action) {
-		add(titleSwitch.doSwitch(action), "");
+		add(titles.doSwitch(action), "", "", -1, NO_NODE);
 	}
 
 	public void acceptUnassignedDatatype(RuleCall datatypeRC, String value, ICompositeNode node) {
-		add(titleSwitch.doSwitch(datatypeRC), "'" + value + "'", node2text(node));
+		add(titles.doSwitch(datatypeRC), "'" + value + "'", "", -1, node);
 	}
 
 	public void acceptUnassignedEnum(RuleCall enumRC, String value, ICompositeNode node) {
-		add(titleSwitch.doSwitch(enumRC), "'" + value + "'", node2text(node));
+		add(titles.doSwitch(enumRC), "'" + value + "'", "", -1, node);
 	}
 
 	public void acceptUnassignedKeyword(Keyword keyword, ILeafNode node) {
-		add(titleSwitch.doSwitch(keyword), "'" + keyword.getValue() + "'", node2text(node));
+		add(titles.doSwitch(keyword), "'" + keyword.getValue() + "'", "", -1, node);
 	}
 
 	public void acceptUnassignedTerminal(RuleCall terminalRC, String value, ILeafNode node) {
-		add(titleSwitch.doSwitch(terminalRC), "'" + value + "'", node2text(node));
+		add(titles.doSwitch(terminalRC), "'" + value + "'", "", -1, node);
 	}
 
-	protected void add(String col1, String col2) {
-		add(col1, col2, "");
-	}
+	protected final static int COLS = 5;
 
-	protected void add(String col1, String col2, String col3) {
+	protected void add(String grammar, String token, String value, int index, INode node) {
 		StringBuilder buf = new StringBuilder();
 		for (int i = 0; i < indentation; i++)
 			buf.append("  ");
-		buf.append(col1);
-		table.add(Tuples.create(buf.toString(), col2, col3));
+		buf.append(grammar);
+		List<String> row = Lists.newArrayList();
+		row.add(buf.toString());
+		row.add(token);
+		row.add(value);
+		row.add(index < 0 ? "" : String.valueOf(index));
+		row.add(node == NO_NODE ? "" : node2text(node));
+		table.add(row);
 		if (printInstantly)
-			System.out.println(buf.toString() + "\t" + col2 + "\t" + col3);
+			System.out.println(Join.join("\t", row));
 	}
 
+	protected static final INode NO_NODE = new LeafNode();
+
 	public void enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
-		add(titleSwitch.doSwitch(action) + " {", semanticChild.eClass().getName(), node2text(node));
+		add(titles.doSwitch(action) + " {", semanticChild.eClass().getName(), "", -1, node);
 		indentation++;
 	}
 
 	public void enterAssignedParserRuleCall(RuleCall rc, EObject newCurrent, ICompositeNode node) {
-		add(titleSwitch.doSwitch(rc) + " {", newCurrent.eClass().getName(), node2text(node));
+		add(titles.doSwitch(rc) + " {", newCurrent.eClass().getName(), "", -1, node);
 		indentation++;
 	}
 
 	public void enterUnassignedParserRuleCall(RuleCall rc) {
-		add(titleSwitch.doSwitch(rc) + " {", "");
+		add(titles.doSwitch(rc) + " {", "", "", -1, NO_NODE);
 		indentation++;
 	}
 
@@ -158,53 +149,56 @@ public class DebugSequenceAcceptor implements ISyntacticSequenceAcceptor, IRecur
 
 	}
 
-	public List<String> getList() {
-		int col1Width = 0, col2Width = 0;
-		for (Pair<String, String> line : table) {
-			col1Width = Math.max(col1Width, line.getFirst().length());
-			col2Width = Math.max(col2Width, line.getSecond().length());
-		}
-		String format = "%-" + col1Width + "s %-" + col2Width + "s %s";
-		List<String> lines = Lists.newArrayList();
-		for (Triple<String, String, String> line : table)
-			lines.add(String.format(format, line.getFirst(), line.getSecond(), line.getThird()));
-		return lines;
-	}
-
-	public List<String> getNodesColumn() {
+	public List<String> getColumn(int i) {
 		List<String> result = Lists.newArrayList();
-		for (Triple<String, String, String> line : table)
-			if (line.getThird() != null && line.getThird().length() > 0)
-				result.add(line.getThird());
+		for (List<String> line : table)
+			if (line.size() > i && line.get(i) != null && line.get(i).length() > 0)
+				result.add(line.get(i));
 		return result;
 	}
 
-	public List<Triple<String, String, String>> getTable() {
+	public List<String> getList() {
+		int columns = 5;
+
+		Integer width[] = new Integer[columns - 1];
+		Arrays.fill(width, Integer.valueOf(1));
+		for (List<String> line : table)
+			for (int i = 0; i < line.size() && i < width.length; i++)
+				width[i] = Math.max(width[i], line.get(i).length());
+
+		String format = "%-" + Join.join("s %-", width) + "s %s";
+		List<String> lines = Lists.newArrayList();
+		for (List<String> line : table)
+			lines.add(String.format(format, line.toArray()));
+		return lines;
+	}
+
+	public List<List<String>> getTable() {
 		return table;
 	}
 
 	public void leaveAssignedAction(Action action, EObject semanticChild) {
 		indentation--;
-		add("}", "");
+		add("}", "", "", -1, NO_NODE);
 	}
 
 	public void leaveAssignedParserRuleCall(RuleCall rc) {
 		indentation--;
-		add("}", "");
+		add("}", "", "", -1, NO_NODE);
 	}
 
 	public void leaveUnssignedParserRuleCall(RuleCall rc) {
 		indentation--;
-		add("}", "");
+		add("}", "", "", -1, NO_NODE);
 	}
 
 	protected String node2text(INode node) {
 		if (node == null)
 			return "(node is null)";
 		if (node instanceof ILeafNode)
-			return titleSwitch.doSwitch(node.getGrammarElement()) + " -> " + node.getText();
+			return titles.doSwitch(node.getGrammarElement()) + " -> " + node.getText();
 		if (node instanceof ICompositeNode)
-			return titleSwitch.doSwitch(node.getGrammarElement());
+			return titles.doSwitch(node.getGrammarElement());
 		return "(unknown node)";
 	}
 
