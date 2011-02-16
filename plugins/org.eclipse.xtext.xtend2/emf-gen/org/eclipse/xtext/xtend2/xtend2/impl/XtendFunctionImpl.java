@@ -50,7 +50,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
  *
  * @generated
  */
-public class XtendFunctionImpl extends XtendMemberImpl implements XtendFunction
+public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFunction
 {
 	/**
 	 * The cached value of the '{@link #getTypeParameters() <em>Type Parameters</em>}' containment reference list.
