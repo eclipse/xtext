@@ -106,7 +106,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		setVisibility(result, typeBinding.getModifiers());
 		result.internalSetIdentifier(getQualifiedName(typeBinding));
 		result.setSimpleName(typeBinding.getName());
-		if (typeBinding.getDeclaringClass() == null)
+		if (typeBinding.getDeclaringClass() == null && typeBinding.getPackage() != null)
 			result.setPackageName(typeBinding.getPackage().getName());
 		createNestedTypes(typeBinding, result);
 		createMethods(typeBinding, result);
