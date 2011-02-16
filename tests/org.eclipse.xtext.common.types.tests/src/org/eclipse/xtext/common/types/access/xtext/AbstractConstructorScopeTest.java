@@ -70,8 +70,8 @@ public abstract class AbstractConstructorScopeTest extends TestCase {
 		type.getMembers().add(constructor);
 		IEObjectDescription element = getConstructorScope().getSingleElement(constructor);
 		assertNotNull(element);
-		assertEquals(new IQualifiedNameConverter.DefaultImpl().toQualifiedName("java.lang.Object.Object"), element.getName());
-		assertEquals(new IQualifiedNameConverter.DefaultImpl().toQualifiedName("java.lang.Object.Object"), element.getQualifiedName());
+		assertEquals(new IQualifiedNameConverter.DefaultImpl().toQualifiedName("java.lang.Object"), element.getName());
+		assertEquals(new IQualifiedNameConverter.DefaultImpl().toQualifiedName("java.lang.Object"), element.getQualifiedName());
 	}
 	
 	public void testGetElementByInstance_02() {
