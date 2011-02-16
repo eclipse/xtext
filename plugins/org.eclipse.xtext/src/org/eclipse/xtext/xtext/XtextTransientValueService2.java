@@ -74,11 +74,12 @@ public class XtextTransientValueService2 extends TransientValueService {
 			return YES;
 		} else if (feature == XtextPackage.eINSTANCE.getEnumLiteralDeclaration_Literal()) {
 			final EnumLiteralDeclaration decl = (EnumLiteralDeclaration) owner;
-			if (decl.getEnumLiteral() != null && decl.getLiteral() != null)
-				return YES;
-			if (Strings.equal(decl.getLiteral().getValue(), decl.getEnumLiteral().getName()))
-				return PREFERABLY;
-			return NO;
+			if (decl.getEnumLiteral() != null && decl.getLiteral() != null) {
+				if (Strings.equal(decl.getLiteral().getValue(), decl.getEnumLiteral().getName()))
+					return PREFERABLY;
+				return NO;
+			}
+			return YES;
 		}
 		return super.isValueTransient(owner, feature);
 	}
