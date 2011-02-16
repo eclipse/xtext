@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests;
 
+import java.util.List;
+
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
@@ -22,11 +25,10 @@ public class ModelExtensionsTest extends AbstractXtend2TestCase {
 		assertEquals("foo.Bar", xtendClass.getIdentifier());
 		assertEquals("foo", xtendClass.getPackageName());
 		assertEquals("Bar", xtendClass.getSimpleName());
-		// TODO: enable supertypes
-//		EList<JvmTypeReference> superTypes = xtendClass.getSuperTypes();
-//		assertEquals(2, superTypes.size());
-//		assertEquals("java.lang.Object", superTypes.get(0).getCanonicalName());
-//		assertEquals("java.io.Serializable", superTypes.get(1).getCanonicalName());
+		List<JvmTypeReference> superTypes = xtendClass.getSuperTypes();
+		assertEquals(2, superTypes.size());
+		assertEquals("java.lang.Object", superTypes.get(0).getQualifiedName());
+		assertEquals("java.io.Serializable", superTypes.get(1).getQualifiedName());
 	}
 	
 	
@@ -34,6 +36,6 @@ public class ModelExtensionsTest extends AbstractXtend2TestCase {
 		XtendFile file = file("package foo class Bar { int foo() 1}");
 		XtendFunction xtendFunction = (XtendFunction) file.getXtendClass().getMembers().get(0);
 		assertEquals("foo", xtendFunction.getSimpleName());
-		assertEquals("foo.Bar.foo", xtendFunction.getIdentifier());
+		assertEquals("foo.Bar.foo()", xtendFunction.getIdentifier());
 	}
 }

@@ -1,3 +1,4 @@
+package test;
 /*******************************************************************************
  * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
@@ -5,14 +6,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtend2.tests.linking;
-
-import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 
 /**
+ * Used in the {@link org.eclipse.xtext.xtend2.tests.linking.InferredJvmModelLinkingTests}
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class CrossResourceLinkingTests extends AbstractXtend2TestCase {
-
+public class Foo {
+	public Foo() {}
 	
+	void foo() {}
 }

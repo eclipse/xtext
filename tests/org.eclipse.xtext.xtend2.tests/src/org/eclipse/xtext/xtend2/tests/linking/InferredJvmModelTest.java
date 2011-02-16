@@ -242,7 +242,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		JvmMember jvmMember = jvmMembers.get(1);
 		assertTrue(jvmMember instanceof JvmOperation);
 		XtendFunction xtendFunction = (XtendFunction) xtendClass.getMembers().get(0);
-		assertEquals(xtendFunction.getIdentifier() + "()", jvmMember.getIdentifier());
+		assertEquals(xtendFunction.getIdentifier(), jvmMember.getIdentifier());
 		assertEquals(jvmMember, associations.getDirectlyInferredOperation(xtendFunction));
 		assertEquals(xtendFunction, associations.getXtendFunction((JvmOperation) inferredType.getMembers().get(1)));
 	}
