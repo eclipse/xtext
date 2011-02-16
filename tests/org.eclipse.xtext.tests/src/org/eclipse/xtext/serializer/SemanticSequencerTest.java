@@ -14,7 +14,6 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.serializer.acceptor.DebugSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.impl.NodeModelSemanticSequencer;
-import org.eclipse.xtext.util.EmfFormatter;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

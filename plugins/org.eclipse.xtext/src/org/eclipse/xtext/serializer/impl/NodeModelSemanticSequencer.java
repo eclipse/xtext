@@ -33,9 +33,9 @@ public class NodeModelSemanticSequencer extends AbstractNodeModelSequencer {
 				if (rc.getRule() == context)
 					continue;
 				if (rc.getRule().getType().getClassifier() instanceof EClass)
-					acceptSemantic(acceptor, rc, node.getSemanticElement(), node);
+					acceptSemantic(acceptor, semanticObject, rc, node.getSemanticElement(), node);
 				else
-					acceptSemantic(acceptor, rc, NodeModelUtils.getTextWithoutHidden(node), node);
+					acceptSemantic(acceptor, semanticObject, rc, NodeModelUtils.getTextWithoutHidden(node), node);
 				if (node.getSemanticElement() != semanticObject) {
 					ti.prune();
 					continue;
@@ -43,11 +43,11 @@ public class NodeModelSemanticSequencer extends AbstractNodeModelSequencer {
 			} else if (ge instanceof Keyword) {
 				Keyword kw = (Keyword) ge;
 				if (GrammarUtil.containingAssignment(kw) != null)
-					acceptSemantic(acceptor, kw, node.getText(), node);
+					acceptSemantic(acceptor, semanticObject, kw, node.getText(), node);
 			} else if (ge instanceof Action) {
 				Action a = (Action) ge;
 				if (a.getFeature() != null)
-					acceptSemantic(acceptor, a, node.getSemanticElement(), node);
+					acceptSemantic(acceptor, semanticObject, a, node.getSemanticElement(), node);
 				if (node.getSemanticElement() != semanticObject) {
 					ti.prune();
 					continue;
@@ -56,7 +56,7 @@ public class NodeModelSemanticSequencer extends AbstractNodeModelSequencer {
 				CrossReference cr = (CrossReference) ge;
 				RuleCall rc = (RuleCall) cr.getTerminal();
 				EReference ref = GrammarUtil.getReference(cr);
-				acceptSemantic(acceptor, rc, node.getSemanticElement().eGet(ref), node);
+				acceptSemantic(acceptor, semanticObject, rc, node.getSemanticElement().eGet(ref), node);
 			}
 		}
 	}

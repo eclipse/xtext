@@ -19,12 +19,12 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 public interface IUnassignedTokenSequenceAcceptor {
 	void acceptUnassignedAction(Action action);
 
-	void acceptUnassignedDatatype(RuleCall datatypeRC, String value, ICompositeNode node);
+	void acceptUnassignedDatatype(RuleCall datatypeRC, String token, ICompositeNode node);
 
-	void acceptUnassignedEnum(RuleCall enumRC, String value, ICompositeNode node);
+	void acceptUnassignedEnum(RuleCall enumRC, String token, ICompositeNode node);
 
 	void acceptUnassignedKeyword(Keyword keyword, ILeafNode node);
 
-	void acceptUnassignedTerminal(RuleCall terminalRC, String value, ILeafNode node);
+	void acceptUnassignedTerminal(RuleCall terminalRC, String token, ILeafNode node);
 
 }
