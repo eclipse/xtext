@@ -196,6 +196,7 @@
 	component = Generator {
 		pathRtProject = runtimeProject
 		pathUiProject = "${runtimeProject}.ui"
+		pathTestProject = "${runtimeProject}.test"
 		projectNameRt = projectName
 		projectNameUi = "${projectName}.ui"
 		language = {
@@ -259,6 +260,9 @@
 
 			// generates a more lightweight Antlr parser and lexer tailored for content assist  
 			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {}
+
+			// generates junit test support classes into Generator#pathTestProject
+			fragment = junit.Junit4Fragment {}
 
 			// project wizard (optional) 
 			// fragment = projectWizard.SimpleProjectWizardFragment {
