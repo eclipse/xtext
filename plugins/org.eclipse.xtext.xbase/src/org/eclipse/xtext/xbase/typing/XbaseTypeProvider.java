@@ -592,18 +592,18 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		if (parameter.getParameterType() == null) {
 			if (parameter.eContainer() instanceof XClosure) {
 				final XClosure closure = (XClosure)parameter.eContainer();
-					JvmTypeReference type = getExpectedType(closure);
-					int indexOf = closure.getFormalParameters().indexOf(parameter);
-					if (type==null) {
-						return null;
-					}
-					JvmOperation operation = functionConversion.findSingleMethod(type);
-					if (indexOf < operation.getParameters().size()) {
-						JvmFormalParameter declaredParam = operation.getParameters().get(indexOf);
-						TypeArgumentContext context = typeArgCtxProvider.getReceiverContext(type);
-						return context.resolve(declaredParam.getParameterType());
-					}
+				JvmTypeReference type = getExpectedType(closure);
+				int indexOf = closure.getFormalParameters().indexOf(parameter);
+				if (type==null) {
 					return null;
+				}
+				JvmOperation operation = functionConversion.findSingleMethod(type);
+				if (indexOf < operation.getParameters().size()) {
+					JvmFormalParameter declaredParam = operation.getParameters().get(indexOf);
+					TypeArgumentContext context = typeArgCtxProvider.getReceiverContext(type);
+					return context.resolve(declaredParam.getParameterType());
+				}
+				return null;
 			} else if (parameter.eContainer() instanceof XForLoopExpression) {
 				XForLoopExpression forLoop = (XForLoopExpression) parameter.eContainer();
 				JvmTypeReference reference = getType(forLoop

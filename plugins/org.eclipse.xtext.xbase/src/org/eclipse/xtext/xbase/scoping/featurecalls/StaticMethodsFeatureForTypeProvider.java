@@ -13,7 +13,7 @@ import static java.util.Collections.*;
 
 import java.util.Collection;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -45,19 +45,24 @@ public class StaticMethodsFeatureForTypeProvider implements IFeaturesForTypeProv
 	@Inject
 	private TypeReferences typeRefs;
 
-	private EObject context;
+	private Notifier context;
 
 	public Iterable<? extends JvmFeature> getFeaturesForType(final JvmTypeReference reference) {
-		final Iterable<Class<?>> operators = getClassesContainingStaticMethods(reference.getType().getIdentifier());
+		String referenceTypeName = null;
+		if (reference != null)
+			referenceTypeName = reference.getType().getIdentifier();
+		final Iterable<String> staticTypes = getVisibleTypesContainingStaticMethods(referenceTypeName);
 		Iterable<JvmOperation> staticMethods = emptySet();
-		for (Class<?> clazz : operators) {
-			JvmTypeReference typeReference = typeRefs.getTypeForName(clazz, context);
+		for (String typeName : staticTypes) {
+			JvmTypeReference typeReference = typeRefs.getTypeForName(typeName, context);
 			if (typeReference != null) {
 				final JvmDeclaredType type = (JvmDeclaredType) typeReference.getType();
 				Iterable<JvmOperation> operations = type.getDeclaredOperations();
 				staticMethods = concat(staticMethods, filter(operations, new Predicate<JvmOperation>() {
 					public boolean apply(JvmOperation input) {
 						if (input.isStatic()) {
+							if (reference == null)
+								return true;
 							if (input.getParameters().size() > 0) {
 								JvmFormalParameter firstParam = input.getParameters().get(0);
 								return conformanceComputer.isConformant(firstParam.getParameterType(),
@@ -72,25 +77,25 @@ public class StaticMethodsFeatureForTypeProvider implements IFeaturesForTypeProv
 		return newArrayList(staticMethods);
 	}
 
-	private static Multimap<String, Class<?>> classes = HashMultimap.create();
+	private static final Multimap<String, String> classes = HashMultimap.create();
 	{
-		classes.put(Boolean.class.getCanonicalName(), Booleans.class);
-		classes.put(String.class.getCanonicalName(), Strings.class);
-		classes.put(Integer.class.getCanonicalName(), Integers.class);
-		classes.put(Comparable.class.getCanonicalName(), Comparables.class);
-		classes.put(Object.class.getCanonicalName(), Objects.class);
-		classes.put(Collection.class.getCanonicalName(), Collections.class);
-		classes.put(Iterable.class.getCanonicalName(), Iterables.class);
+		classes.put(Boolean.class.getCanonicalName(), Booleans.class.getCanonicalName());
+		classes.put(String.class.getCanonicalName(), Strings.class.getCanonicalName());
+		classes.put(Integer.class.getCanonicalName(), Integers.class.getCanonicalName());
+		classes.put(Comparable.class.getCanonicalName(), Comparables.class.getCanonicalName());
+		classes.put(Object.class.getCanonicalName(), Objects.class.getCanonicalName());
+		classes.put(Collection.class.getCanonicalName(), Collections.class.getCanonicalName());
+		classes.put(Iterable.class.getCanonicalName(), Iterables.class.getCanonicalName());
 	}
 
-	protected Iterable<Class<?>> getClassesContainingStaticMethods(String canonicalTypeName) {
-		final Collection<Class<?>> o = classes.get(canonicalTypeName);
-		if (o != null)
-			return o;
-		return emptyList();
+	protected Iterable<String> getVisibleTypesContainingStaticMethods(String typeName) {
+		if (typeName == null)
+			return classes.values();
+		final Collection<String> types = classes.get(typeName);
+		return types;
 	}
 
-	public void setContext(EObject context) {
+	public void setContext(Notifier context) {
 		this.context = context;
 	}
 

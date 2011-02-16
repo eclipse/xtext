@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -121,7 +122,18 @@ public class TypeReferences {
 		JvmParameterizedTypeReference result = createTypeRef(declaredType, params);
 		return result;
 	}
+	
+	public JvmTypeReference getTypeForName(String typeName, Notifier context, JvmTypeReference... params) {
+		if (typeName == null)
+			throw new NullPointerException("typeName");
+		JvmType declaredType = findDeclaredType(typeName, context);
+		if (declaredType == null)
+			return null;
+		JvmParameterizedTypeReference result = createTypeRef(declaredType, params);
+		return result;
+	}
 
+	
 	public JvmType findDeclaredType(Class<?> clazz, EObject context) {
 		if (context == null)
 			throw new NullPointerException("context");
@@ -136,6 +148,23 @@ public class TypeReferences {
 		try {
 			JvmType declaredType = (JvmType) resourceSet.getEObject(uri, true);
 			return declaredType;
+		} catch (TypeNotFoundException e) {
+			log.error(e.getMessage(), e);
+			return null;
+		}
+	}
+	
+	public JvmType findDeclaredType(String typeName, Notifier context) {
+		if (context == null)
+			throw new NullPointerException("context");
+		ResourceSet resourceSet = EcoreUtil2.getResourceSet(context);
+		if (resourceSet == null)
+			throw new NullPointerException("context must be contained in a resource");
+		// make sure a type provider is configured in the resource set. 
+		IJvmTypeProvider typeProvider = typeProviderFactory.findOrCreateTypeProvider(resourceSet);
+		try {
+			JvmType result = typeProvider.findTypeByName(typeName);
+			return result;
 		} catch (TypeNotFoundException e) {
 			log.error(e.getMessage(), e);
 			return null;

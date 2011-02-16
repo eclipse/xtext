@@ -7,44 +7,51 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.impl.AbstractScope;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DelegatingScope implements IScope {
+public class DelegatingScope extends AbstractScope {
 	
 	private IScope delegate = IScope.NULLSCOPE;
+
+	protected DelegatingScope(IScope parent) {
+		super(parent, false);
+	}
 	
 	public void setDelegate(IScope delegate) {
 		this.delegate = delegate;
 	}
-
-	public IEObjectDescription getSingleElement(QualifiedName name) {
-		return delegate.getSingleElement(name);
-	}
-
-	public Iterable<IEObjectDescription> getElements(QualifiedName name) {
-		return delegate.getElements(name);
-	}
-
-	public IEObjectDescription getSingleElement(EObject object) {
-		return delegate.getSingleElement(object);
-	}
-
-	public Iterable<IEObjectDescription> getElements(EObject object) {
+	
+	@Override
+	protected Iterable<IEObjectDescription> getLocalElementsByEObject(EObject object, URI uri) {
 		return delegate.getElements(object);
 	}
-
-	public Iterable<IEObjectDescription> getAllElements() {
+	
+	@Override
+	protected Iterable<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
+		return delegate.getElements(name);
+	}
+	
+	@Override
+	protected IEObjectDescription getSingleLocalElementByName(QualifiedName name) {
+		return delegate.getSingleElement(name);
+	}
+	
+	@Override
+	protected Iterable<IEObjectDescription> getAllLocalElements() {
 		return delegate.getAllElements();
 	}
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName()+" -> "+delegate;
+		return super.toString()+" -> "+delegate;
 	}
+
 }
