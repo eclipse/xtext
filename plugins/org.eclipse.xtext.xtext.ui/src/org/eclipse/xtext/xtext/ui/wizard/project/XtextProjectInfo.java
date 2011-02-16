@@ -28,6 +28,7 @@ public class XtextProjectInfo implements IProjectInfo {
 	private String fileExtension;
 	private String encoding;
 	private boolean createGeneratorProject = false;
+	private boolean createTestProject = false;
 	private IWorkingSet[] workingSets;
 	private IWorkbench workbench;
 	private IPath projectLocation;
@@ -57,6 +58,14 @@ public class XtextProjectInfo implements IProjectInfo {
 		this.createGeneratorProject = createGeneratorProject;
 	}
 
+	public boolean isCreateTestProject() {
+		return createTestProject;
+	}
+
+	public void setCreateTestProject(boolean createTestProject) {
+		this.createTestProject = createTestProject;
+	}
+
 	public String getFileExtension() {
 		return fileExtension;
 	}
@@ -83,6 +92,10 @@ public class XtextProjectInfo implements IProjectInfo {
 
 	public String getGeneratorProjectName() {
 		return getProjectName() + ".generator"; //$NON-NLS-1$
+	}
+
+	public String getTestProjectName() {
+		return getProjectName() + ".test"; //$NON-NLS-1$
 	}
 
 	public String getUiProjectName() {
@@ -158,6 +171,10 @@ public class XtextProjectInfo implements IProjectInfo {
 
 	public IPath getGeneratorProjectLocation() {
 		return projectLocation.removeLastSegments(1).append(getGeneratorProjectName());
+	}
+
+	public IPath getTestProjectLocation() {
+		return projectLocation.removeLastSegments(1).append(getTestProjectName());
 	}
 	
 }

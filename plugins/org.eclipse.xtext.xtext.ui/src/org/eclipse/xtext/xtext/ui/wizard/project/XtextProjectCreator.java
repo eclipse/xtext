@@ -67,6 +67,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	};
 
 	protected static final String[] GENERATOR_PROJECT_NATURES = DSL_UI_PROJECT_NATURES;
+	protected static final String[] TEST_PROJECT_NATURES = DSL_UI_PROJECT_NATURES;
 
 	protected static final String SRC_GEN_ROOT = "src-gen"; //$NON-NLS-1$
 	protected static final String SRC_ROOT = "src"; //$NON-NLS-1$
@@ -85,7 +86,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		SubMonitor subMonitor = SubMonitor.convert(
 				monitor, 
 				getCreateModelProjectMessage(), 
-				getXtextProjectInfo().isCreateGeneratorProject() ? 3 : 2);
+				getMonitorTicks());
 
 		IProject project = createDslProject(subMonitor.newChild(1));
 		createDslUiProject(subMonitor.newChild(1));
@@ -94,11 +95,22 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 			createGeneratorProject(subMonitor.newChild(1));
 		}
 
+		if (getXtextProjectInfo().isCreateTestProject()) {
+			createTestProject(subMonitor.newChild(1));
+		}
+
 		IFile dslGrammarFile = project.getFile(new Path(getModelFolderName()
 				+ "/" + getXtextProjectInfo().getLanguageName().replace('.', '/') //$NON-NLS-1$
 				+ ".xtext")); //$NON-NLS-1$
 		BasicNewResourceWizard.selectAndReveal(dslGrammarFile, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
 		setResult(dslGrammarFile);
+	}
+
+	protected int getMonitorTicks() {
+		int ticks = 2;
+		ticks = getXtextProjectInfo().isCreateGeneratorProject() ? ticks+1 : ticks;
+		ticks = getXtextProjectInfo().isCreateTestProject() ? ticks+1 : ticks;
+		return ticks;
 	}
 	
 	@Override
@@ -221,6 +233,37 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		return GENERATOR_PROJECT_NATURES;
 	}
 
+	protected String[] getTestProjectNatures() {
+		return TEST_PROJECT_NATURES;
+	}
+
+	protected IProject createTestProject(final IProgressMonitor monitor) throws CoreException {
+		PluginProjectFactory factory = createProjectFactory();
+		configureTestProjectBuilder(factory);
+		return createProject(factory, getTestProjectTemplateName(), monitor);
+	}
+
+	protected void configureTestProjectBuilder(PluginProjectFactory factory) {
+		configureProjectFactory(factory);
+		List<String> requiredBundles = getTestProjectRequiredBundles();
+		factory.setProjectName(getXtextProjectInfo().getTestProjectName());
+		factory.addProjectNatures(getTestProjectNatures());
+		factory.addRequiredBundles(requiredBundles);
+		factory.setLocation(getXtextProjectInfo().getGeneratorProjectLocation());
+	}
+
+	protected List<String> getTestProjectRequiredBundles() {
+		List<String> requiredBundles = Lists.newArrayList(
+				getXtextProjectInfo().getProjectName(),
+				getXtextProjectInfo().getUiProjectName(),
+				"org.eclipse.core.runtime", //$NON-NLS-1$
+				"org.eclipse.xtext", //$NON-NLS-1$
+				"org.eclipse.xtext.junit", //$NON-NLS-1$
+				"org.eclipse.xtext.ui.junit" //$NON-NLS-1$
+				); //$NON-NLS-1$
+		return requiredBundles;
+	}
+
 	protected IProject createProject(ProjectFactory factory, String templateName,
 			final IProgressMonitor monitor) throws CoreException {
 		IProject result = factory.createProject(monitor, null);
@@ -263,6 +306,10 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		return pathToTemplates() + "GeneratorProject::main";
 	}
 	
+	protected String getTestProjectTemplateName() {
+		return pathToTemplates() + "TestProject::main";
+	}
+
 	protected List<String> getImportedPackages() {
 		return Lists.newArrayList("org.apache.log4j", "org.apache.commons.logging");
 	}

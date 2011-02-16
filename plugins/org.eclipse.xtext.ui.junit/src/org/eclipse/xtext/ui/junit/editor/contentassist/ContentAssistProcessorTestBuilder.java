@@ -39,6 +39,7 @@ import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Strings;
 
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
@@ -54,6 +55,19 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 	private int cursorPosition;
 	private Injector injector;
 	private final ResourceLoadHelper loadHelper;
+
+	public static class Factory {
+		private Injector injector;
+
+		@Inject
+	    public Factory(Injector injector) {
+	    	this.injector = injector;
+	    }
+
+	    public ContentAssistProcessorTestBuilder create(ResourceLoadHelper resourceLoadHelper) throws Exception {
+	    	return new ContentAssistProcessorTestBuilder(this.injector,resourceLoadHelper);
+	    }
+	}
 
 	public ContentAssistProcessorTestBuilder(ISetup setupClazz, AbstractXtextTests tests) throws Exception {
 		tests.with(setupClazz);
