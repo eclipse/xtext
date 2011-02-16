@@ -10,8 +10,12 @@ package org.eclipse.xtext.common.types.access.impl;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.common.types.access.TypeResource;
@@ -134,6 +138,21 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 		} catch (TypeNotFoundException ex) {
 			// OK
 		}
+	}
+	
+	public void testBug337307() {
+		String typeName = "ClassWithDefaultPackage";
+		JvmType type = getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
+		assertTrue(type instanceof JvmGenericType);
+		assertEquals(typeName, type.getIdentifier());
+		assertEquals(typeName, type.getQualifiedName());
+		assertEquals(typeName, type.getSimpleName());
+		assertNull(((JvmDeclaredType) type).getPackageName());
+		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
 	}
 
 	@Override
