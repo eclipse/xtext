@@ -36,10 +36,10 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	}
 	
 	public void testEmptyInput() throws Exception {
-		newBuilder().assertText(KEYWORDS);
+		newBuilder().assertText(KEYWORDS_AND_STATICS);
 	}
 	
-	protected static String[] KEYWORDS = {
+	protected static String[] KEYWORDS_AND_STATICS = {
 		"if", 
 		"while", "for", "do",
 		"true", "false",
@@ -49,7 +49,8 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 		"new",
 		"throw",
 		"return",
-		"null"
+		"null",
+		"find()" // Iterables.find()
 	};
 	
 	protected static String[] STRING_OPERATORS = {
@@ -109,7 +110,7 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	}
 	
 	public void testOnStringLiteral_05() throws Exception {
-		newBuilder().append("''+''").assertTextAtCursorPosition("+''", 1, expect(new String[]{"+"}, KEYWORDS));
+		newBuilder().append("''+''").assertTextAtCursorPosition("+''", 1, expect(new String[]{"+"}, KEYWORDS_AND_STATICS));
 	}
 	
 	public void testOnStringLiteral_06() throws Exception {
@@ -117,15 +118,15 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	}
 	
 	public void testOnStringLiteral_07() throws Exception {
-		newBuilder().append("''==''").assertTextAtCursorPosition("==", 2, expect(new String[]{"=="}, KEYWORDS));
+		newBuilder().append("''==''").assertTextAtCursorPosition("==", 2, expect(new String[]{"=="}, KEYWORDS_AND_STATICS));
 	}
 	
 	public void testOnStringLiteral_08() throws Exception {
-		newBuilder().append("''<=''").assertTextAtCursorPosition("<=", 1, expect(new String[]{"<", "<="}, KEYWORDS));
+		newBuilder().append("''<=''").assertTextAtCursorPosition("<=", 1, expect(new String[]{"<", "<="}, KEYWORDS_AND_STATICS));
 	}
 	
 	public void testOnStringLiteral_09() throws Exception {
-		newBuilder().append("''<=''").assertTextAtCursorPosition("<=", 2, expect(new String[]{"<="}, KEYWORDS));
+		newBuilder().append("''<=''").assertTextAtCursorPosition("<=", 2, expect(new String[]{"<="}, KEYWORDS_AND_STATICS));
 	}
 	
 	public void testOnStringLiteral_10() throws Exception {
@@ -145,8 +146,8 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	}
 	
 	public void testOnStringLiteral_14() throws Exception {
-		newBuilder().append("'' + ''").assertTextAtCursorPosition("+ ''", 2, KEYWORDS);
-		newBuilder().append("'' + ''").assertTextAtCursorPosition("+ ''", 1, expect(new String[]{"+"}, KEYWORDS));
+		newBuilder().append("'' + ''").assertTextAtCursorPosition("+ ''", 2, KEYWORDS_AND_STATICS);
+		newBuilder().append("'' + ''").assertTextAtCursorPosition("+ ''", 1, expect(new String[]{"+"}, KEYWORDS_AND_STATICS));
 	}
 	
 	public void testOnStringLiteral_15() throws Exception {
@@ -154,17 +155,17 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	}
 	
 	public void testOnStringLiteral_16() throws Exception {
-		newBuilder().append("'' == ''").assertTextAtCursorPosition("==", 2, expect(new String[]{"=="}, KEYWORDS));
-		newBuilder().append("'' == ''").assertTextAtCursorPosition("==", 3, KEYWORDS);
+		newBuilder().append("'' == ''").assertTextAtCursorPosition("==", 2, expect(new String[]{"=="}, KEYWORDS_AND_STATICS));
+		newBuilder().append("'' == ''").assertTextAtCursorPosition("==", 3, KEYWORDS_AND_STATICS);
 	}
 	
 	public void testOnStringLiteral_17() throws Exception {
-		newBuilder().append("'' <= ''").assertTextAtCursorPosition("<=", 1, expect(new String[]{"<", "<="}, KEYWORDS));
+		newBuilder().append("'' <= ''").assertTextAtCursorPosition("<=", 1, expect(new String[]{"<", "<="}, KEYWORDS_AND_STATICS));
 	}
 	
 	public void testOnStringLiteral_18() throws Exception {
-		newBuilder().append("'' <= ''").assertTextAtCursorPosition("<=", 2, expect(new String[]{"<="}, KEYWORDS));
-		newBuilder().append("'' <= ''").assertTextAtCursorPosition("<=", 3, KEYWORDS);
+		newBuilder().append("'' <= ''").assertTextAtCursorPosition("<=", 2, expect(new String[]{"<="}, KEYWORDS_AND_STATICS));
+		newBuilder().append("'' <= ''").assertTextAtCursorPosition("<=", 3, KEYWORDS_AND_STATICS);
 	}
 	
 	public void testOnStringLiteral_19() throws Exception {
@@ -184,23 +185,23 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	}
 	
 	public void testOnStringLiteral_23() throws Exception {
-		newBuilder().append("''.toString+''").assertTextAtCursorPosition("+''", 1, expect(new String[]{"+"}, KEYWORDS));
+		newBuilder().append("''.toString+''").assertTextAtCursorPosition("+''", 1, expect(new String[]{"+"}, KEYWORDS_AND_STATICS));
 	}
 	
 	public void testOnStringLiteral_24() throws Exception {
-		newBuilder().append("''.toString==''").assertTextAtCursorPosition("==", 1, expect(new String[] {"=="}, KEYWORDS));
+		newBuilder().append("''.toString==''").assertTextAtCursorPosition("==", 1, expect(new String[] {"=="}, KEYWORDS_AND_STATICS));
 	}
 	
 	public void testOnStringLiteral_25() throws Exception {
-		newBuilder().append("''.toString==''").assertTextAtCursorPosition("==", 2, expect(new String[]{"=="}, KEYWORDS));
+		newBuilder().append("''.toString==''").assertTextAtCursorPosition("==", 2, expect(new String[]{"=="}, KEYWORDS_AND_STATICS));
 	}
 	
 	public void testOnStringLiteral_26() throws Exception {
-		newBuilder().append("''.toString<=''").assertTextAtCursorPosition("<=", 1, expect(new String[]{"<", "<="}, KEYWORDS));
+		newBuilder().append("''.toString<=''").assertTextAtCursorPosition("<=", 1, expect(new String[]{"<", "<="}, KEYWORDS_AND_STATICS));
 	}
 	
 	public void testOnStringLiteral_27() throws Exception {
-		newBuilder().append("''.toString<=''").assertTextAtCursorPosition("<=", 2, expect(new String[]{"<="}, KEYWORDS));
+		newBuilder().append("''.toString<=''").assertTextAtCursorPosition("<=", 2, expect(new String[]{"<="}, KEYWORDS_AND_STATICS));
 	}
 	
 	public void testOnStringLiteral_28() throws Exception {
@@ -240,7 +241,7 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	}
 	
 	public void testOnStringLiteral_37() throws Exception {
-		newBuilder().append("''.toString ==''").assertTextAtCursorPosition("==", 1, expect(new String[] {"=="}, KEYWORDS));
+		newBuilder().append("''.toString ==''").assertTextAtCursorPosition("==", 1, expect(new String[] {"=="}, KEYWORDS_AND_STATICS));
 	}
 	
 	public void testOnStringLiteral_38() throws Exception {
@@ -292,7 +293,7 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	}
 	
 	public void testForLoop_01() throws Exception {
-		newBuilder().append("for (String s: null) ").assertText(expect(new String[]{"s"}, KEYWORDS));
+		newBuilder().append("for (String s: null) ").assertText(expect(new String[]{"s"}, KEYWORDS_AND_STATICS));
 	}
 	
 	public void testForLoop_02() throws Exception {
@@ -300,28 +301,28 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	}
 	
 	public void testForLoop_03() throws Exception {
-		newBuilder().append("for (String string: null) ''+").assertText(expect(new String[] {"string", "+"}, KEYWORDS));
+		newBuilder().append("for (String string: null) ''+").assertText(expect(new String[] {"string", "+"}, KEYWORDS_AND_STATICS));
 	}
 	
 	// ContentAssistInBlockTest defines testForLoop_0[45]
 	public void testForLoop_06() throws Exception {
-		newBuilder().append("for (String string: ").assertText(KEYWORDS);
+		newBuilder().append("for (String string: ").assertText(KEYWORDS_AND_STATICS);
 	}
 	
 	public void testForLoop_07() throws Exception {
-		newBuilder().append("for (String string: )").assertTextAtCursorPosition(")", KEYWORDS);
+		newBuilder().append("for (String string: )").assertTextAtCursorPosition(")", KEYWORDS_AND_STATICS);
 	}
 	
 	public void testClosure_01() throws Exception {
-		newBuilder().append("[String a, String b|").assertText(expect(new String[]{"a", "b"}, KEYWORDS));
+		newBuilder().append("[String a, String b|").assertText(expect(new String[]{"a", "b"}, KEYWORDS_AND_STATICS));
 	}
 	
 	public void testCatchParameter_01() throws Exception {
-		newBuilder().append("try {} catch(NullPointerException e) e").assertTextAtCursorPosition(") e", 2, expect(new String[]{"e"}, KEYWORDS));
+		newBuilder().append("try {} catch(NullPointerException e) e").assertTextAtCursorPosition(") e", 2, expect(new String[]{"e"}, KEYWORDS_AND_STATICS));
 	}
 	
 	public void testCatchParameter_02() throws Exception {
-		newBuilder().append("try {} catch(NullPointerException e) ").assertText(expect(new String[]{"e"}, KEYWORDS));
+		newBuilder().append("try {} catch(NullPointerException e) ").assertText(expect(new String[]{"e"}, KEYWORDS_AND_STATICS));
 	}
 	
 	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {

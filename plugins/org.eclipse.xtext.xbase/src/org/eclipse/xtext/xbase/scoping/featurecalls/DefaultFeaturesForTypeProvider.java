@@ -23,7 +23,7 @@ import com.google.common.base.Predicate;
 public class DefaultFeaturesForTypeProvider implements IFeaturesForTypeProvider {
 
 	public Iterable<? extends JvmFeature> getFeaturesForType(JvmTypeReference declType) {
-		if (declType.getType() instanceof JvmDeclaredType) {
+		if (declType != null && declType.getType() instanceof JvmDeclaredType) {
 			return filter(filter(((JvmDeclaredType)declType.getType()).getMembers(), JvmFeature.class), new Predicate<JvmFeature>() {
 				public boolean apply(JvmFeature input) {
 					return !(input instanceof JvmConstructor);

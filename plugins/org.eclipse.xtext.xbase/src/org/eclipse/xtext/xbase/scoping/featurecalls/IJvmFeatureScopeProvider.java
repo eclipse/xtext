@@ -29,12 +29,13 @@ public interface IJvmFeatureScopeProvider {
 	 * It traverses the type hierarchy of the given {@link JvmTypeReference} for each
 	 * {@link IJvmFeatureDescriptionProvider} passed to this method subsequent in the order they are provided.
 	 * 
-	 * For a sugared scope, you'ld typical pass in two {@link IJvmFeatureDescriptionProvider}s the first one will create the primary features,
+	 * For a sugared scope, you'd typical pass in two {@link IJvmFeatureDescriptionProvider}s the first one will create the primary features,
 	 * the second will create sugared elements. 
 	 * </p><p>
 	 * {@link JvmFeatureDescription}s marked as invalid {@link JvmFeatureDescription#isValid()}, will be sorted last (even after sugar). This ensures that
 	 * it is shadowed by valid elements and can be filtered out if not needed.
 	 * </p>
+	 * @param typeReference the type whose features should be provided.
 	 */
-	public JvmFeatureScope createFeatureScopeForTypeRef(JvmTypeReference jvmTypeRef, List<? extends IJvmFeatureDescriptionProvider> jvmFeatureDescriptionProvider);
+	public JvmFeatureScope createFeatureScopeForTypeRef(JvmTypeReference typeReference, List<IJvmFeatureDescriptionProvider> descriptionProvider);
 }

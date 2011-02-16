@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.scoping.featurecalls;
 
-import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
 
 import java.util.Iterator;
@@ -20,10 +19,13 @@ import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
+import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
+
+import com.google.common.collect.Lists;
 
 import testdata.FieldAccess;
 import testdata.FieldAccessSub;
@@ -36,7 +38,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 	public void testNoSugarNoFilterNoInvalids() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,
-				newArrayList(new DefaultJvmFeatureDescriptionProvider() {
+				Lists.<IJvmFeatureDescriptionProvider>newArrayList(new DefaultJvmFeatureDescriptionProvider() {
 					@Override
 					protected boolean isValid(JvmFeature feature) {
 						return true;
@@ -59,7 +61,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 	public void testNoSugarNoFilterWithInvalids() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,
-				newArrayList(new DefaultJvmFeatureDescriptionProvider() {
+				Lists.<IJvmFeatureDescriptionProvider>newArrayList(new DefaultJvmFeatureDescriptionProvider() {
 					@Override
 					protected boolean isValid(JvmFeature feature) {
 						return ((JvmMember) feature).getVisibility() != JvmVisibility.PRIVATE;
@@ -83,7 +85,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 	public void testNoSugarwithFilterwithInvalids() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,
-				newArrayList(new DefaultJvmFeatureDescriptionProvider() {
+				Lists.<IJvmFeatureDescriptionProvider>newArrayList(new DefaultJvmFeatureDescriptionProvider() {
 					@Override
 					public void addFeatureDescriptions(JvmFeature feature, TypeArgumentContext context,
 							IAcceptor<JvmFeatureDescription> acceptor) {
@@ -112,7 +114,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 		final XFeatureCallSugarDescriptionProvider sugarProvider = new XFeatureCallSugarDescriptionProvider();
 		sugarProvider.setOperatorMapping(new OperatorMapping());
 		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,
-				newArrayList(new DefaultJvmFeatureDescriptionProvider() {
+				Lists.<IJvmFeatureDescriptionProvider>newArrayList(new DefaultJvmFeatureDescriptionProvider() {
 					@Override
 					public void addFeatureDescriptions(JvmFeature feature, TypeArgumentContext context,
 							IAcceptor<JvmFeatureDescription> acceptor) {

@@ -84,6 +84,6 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 	}
 
 	public String getText() {
-		return "";
+		return getClass().getSimpleName();
 	}
 }

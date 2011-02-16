@@ -8,15 +8,16 @@
 package org.eclipse.xtext.xbase.scoping;
 
 import static com.google.common.collect.Iterables.*;
-import static com.google.common.collect.Lists.*;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -60,9 +61,9 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescription
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.internal.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -200,7 +201,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	protected IScope createFeatureCallScope(final XAbstractFeatureCall call, EReference reference) {
 		if (call instanceof XFeatureCall
 				|| ((call instanceof XAssignment) && ((XAssignment) call).getAssignable() == null)) {
-			IScope result = createSimpleFeatureCallScope(call, reference, false, -1);
+			IScope result = createSimpleFeatureCallScope(call, reference, call.eResource(), false, -1);
 			return result;
 		}
 		final XExpression syntacticalReceiver = getSyntacticalReceiver(call);
@@ -217,13 +218,20 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	 *   declared variables to be exposed in the scope.
 	 * @param idx the index in an expression list of a block. Otherwise to be ignored.
 	 */
-	public IScope createSimpleFeatureCallScope(final EObject context, EReference reference, boolean includeCurrentBlock, int idx) {
-		DelegatingScope implicitThis = new DelegatingScope();
+	public IScope createSimpleFeatureCallScope(final EObject context, EReference reference, Resource resource, boolean includeCurrentBlock, int idx) {
+		IScope staticScope = createStaticScope(context, resource, IScope.NULLSCOPE);
+		DelegatingScope implicitThis = new DelegatingScope(staticScope);
 		IScope localVariableScope = createLocalVarScope(context, reference, implicitThis, includeCurrentBlock, idx);
 		IScope featureScopeForThis = createImplicitFeatureCallScope(context, localVariableScope);
 		if (featureScopeForThis != null)
 			implicitThis.setDelegate(featureScopeForThis);
 		return localVariableScope;
+	}
+
+	protected IScope createStaticScope(EObject context, Resource resource, IScope parent) {
+		JvmDeclaredType contextType = getContextType(context);
+		List<IJvmFeatureDescriptionProvider> descriptionProviders = getStaticFeatureDescriptionProviders(resource, contextType);
+		return jvmFeatureScopeProvider.createFeatureScopeForTypeRef(null, descriptionProviders);
 	}
 
 	/**
@@ -243,6 +251,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		}
 		return IScope.NULLSCOPE;
 	}
+	
 
 	protected XExpression getSyntacticalReceiver(final XAbstractFeatureCall call) {
 		if (call instanceof XMemberFeatureCall) {
@@ -267,17 +276,22 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		JvmFeatureScope featureScopeForThis = null;
 		IEObjectDescription thisVariable = localVariableScope.getSingleElement(THIS);
 		if (thisVariable != null) {
-			EObject thisVal = thisVariable.getEObjectOrProxy();
-			JvmTypeReference type = typeProvider.getTypeForIdentifiable((JvmIdentifiableElement) thisVal);
-			if (type != null) {
-				featureScopeForThis = createFeatureScopeForTypeRef(type, call, getContextType(call),
-						(JvmIdentifiableElement) thisVariable.getEObjectOrProxy());
+			EObject implicitReceiver = thisVariable.getEObjectOrProxy();
+			JvmTypeReference implicitReceiverType = typeProvider.getTypeForIdentifiable((JvmIdentifiableElement) implicitReceiver);
+			if (implicitReceiverType != null && implicitReceiver instanceof JvmIdentifiableElement) {
+				featureScopeForThis = createFeatureScopeForTypeRef(
+						implicitReceiverType, 
+						call, 
+						getContextType(call),
+						(JvmIdentifiableElement) implicitReceiver);
 			}
 		}
 		return featureScopeForThis;
 	}
-
+	
 	protected JvmDeclaredType getContextType(EObject call) {
+		if (call == null)
+			return null;
 		return EcoreUtil2.getContainerOfType(call, JvmDeclaredType.class);
 	}
 
@@ -381,20 +395,29 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return MapBasedScope.createScope(parentScope, descriptions);
 	}
 
-	protected JvmFeatureScope createFeatureScopeForTypeRef(JvmTypeReference type, EObject expression,
+	protected JvmFeatureScope createFeatureScopeForTypeRef(JvmTypeReference receiverType, EObject expression,
 			JvmDeclaredType currentContext, JvmIdentifiableElement implicitReceiver) {
 		if (expression instanceof XAssignment) {
-			ArrayList<? extends IJvmFeatureDescriptionProvider> providers = getFeatureDescriptionProvidersForAssignment(type, (XAssignment) expression, 
+			List<IJvmFeatureDescriptionProvider> providers = getFeatureDescriptionProvidersForAssignment(receiverType, (XAssignment) expression, 
 					currentContext, implicitReceiver);
-			return jvmFeatureScopeProvider.createFeatureScopeForTypeRef(type, providers);
+			return jvmFeatureScopeProvider.createFeatureScopeForTypeRef(receiverType, providers);
 		} else {
-			ArrayList<? extends IJvmFeatureDescriptionProvider> providers = getFeatureDescriptionProviders(type, expression,
+			List<IJvmFeatureDescriptionProvider> providers = getFeatureDescriptionProviders(receiverType, expression,
 					currentContext, implicitReceiver);
-			return jvmFeatureScopeProvider.createFeatureScopeForTypeRef(type, providers);
+			return jvmFeatureScopeProvider.createFeatureScopeForTypeRef(receiverType, providers);
 		}
 	}
+	
+	protected List<IJvmFeatureDescriptionProvider> getStaticFeatureDescriptionProviders(Notifier context, JvmDeclaredType contextType) {
+		final DefaultJvmFeatureDescriptionProvider result = defaultFeatureDescProvider.get();
+		final StaticMethodsFeatureForTypeProvider staticProvider = staticExtensionMethodsFeaturesForTypeProvider.get();
+		staticProvider.setContext(context);
+		result.setContextType(contextType);
+		result.setFeaturesForTypeProvider(staticProvider);
+		return Collections.<IJvmFeatureDescriptionProvider>singletonList(result);
+	}
 
-	protected ArrayList<? extends IJvmFeatureDescriptionProvider> getFeatureDescriptionProviders(JvmTypeReference type,
+	protected List<IJvmFeatureDescriptionProvider> getFeatureDescriptionProviders(JvmTypeReference type,
 			EObject expression, JvmDeclaredType currentContext, JvmIdentifiableElement implicitReceiver) {
 		final DefaultJvmFeatureDescriptionProvider provider1 = defaultFeatureDescProvider.get();
 		final XFeatureCallSugarDescriptionProvider provider2 = sugarFeatureDescProvider.get();
@@ -412,11 +435,11 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		provider3.setImplicitReceiver(implicitReceiver);
 		provider4.setContextType(currentContext);
 		provider4.setImplicitReceiver(implicitReceiver);
-		ArrayList<? extends IJvmFeatureDescriptionProvider> providers = newArrayList(provider1,provider2,provider3,provider4);
-		return providers;
+		List<IJvmFeatureDescriptionProvider> result = Lists.<IJvmFeatureDescriptionProvider>newArrayList(provider1,provider2,provider3,provider4);
+		return result;
 	}
 
-	protected ArrayList<? extends IJvmFeatureDescriptionProvider> getFeatureDescriptionProvidersForAssignment(
+	protected List<IJvmFeatureDescriptionProvider> getFeatureDescriptionProvidersForAssignment(
 			JvmTypeReference type, XAssignment expression, JvmDeclaredType currentContext, JvmIdentifiableElement implicitReceiver) {
 		XAssignmentDescriptionProvider provider1 = assignmentFeatureDescProvider.get();
 		XAssignmentSugarDescriptionProvider provider2 = assignmentSugarFeatureDescProvider.get();
@@ -424,8 +447,8 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		provider1.setImplicitReceiver(implicitReceiver);
 		provider2.setContextType(currentContext);
 		provider2.setImplicitReceiver(implicitReceiver);
-		ArrayList<? extends IJvmFeatureDescriptionProvider> providers = newArrayList(provider1,provider2);
-		return providers;
+		List<IJvmFeatureDescriptionProvider> result = Lists.<IJvmFeatureDescriptionProvider>newArrayList(provider1, provider2);
+		return result;
 	}
 
 	protected IScope createLocalScopeForParameter(JvmFormalParameter p, IScope parentScope) {

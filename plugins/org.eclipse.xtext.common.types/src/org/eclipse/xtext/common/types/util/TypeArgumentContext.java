@@ -8,6 +8,7 @@
 package org.eclipse.xtext.common.types.util;
 
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
@@ -24,8 +25,8 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory;
-import org.eclipse.xtext.util.Wrapper;
 
+import com.google.common.collect.Sets;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -59,7 +60,7 @@ public class TypeArgumentContext {
 	 * @return the lower bound of a reference or <code>null</code> if there is no lower bound.
 	 */
 	public JvmTypeReference getLowerBound(JvmTypeReference element) {
-		JvmTypeReference copy = doGetResolvedCopy(element, Wrapper.wrap(Boolean.FALSE));
+		JvmTypeReference copy = doGetResolvedCopy(element);
 		if (copy instanceof JvmWildcardTypeReference) {
 			for(JvmTypeConstraint constraint: ((JvmWildcardTypeReference) copy).getConstraints()) {
 				if (constraint instanceof JvmLowerBound) {
@@ -78,7 +79,7 @@ public class TypeArgumentContext {
 	 * @return the upper bound of a reference.
 	 */
 	public JvmTypeReference getUpperBound(JvmTypeReference element, Notifier context) {
-		JvmTypeReference copy = doGetResolvedCopy(element, Wrapper.wrap(Boolean.FALSE));
+		JvmTypeReference copy = doGetResolvedCopy(element);
 		if (copy instanceof JvmWildcardTypeReference) {
 			for(JvmTypeConstraint constraint: ((JvmWildcardTypeReference) copy).getConstraints()) {
 				if (constraint instanceof JvmUpperBound)
@@ -106,28 +107,19 @@ public class TypeArgumentContext {
 	 * @return the resolved reference.
 	 */
 	public JvmTypeReference resolve(JvmTypeReference element) {
-		Wrapper<Boolean> foundRawType = Wrapper.wrap(Boolean.FALSE);
-		JvmTypeReference copy = doGetResolvedCopy(element, foundRawType);
-		if (foundRawType.get()) {
-			if (element instanceof JvmParameterizedTypeReference) {
-				return typeReferences.createTypeRef(element.getType());
-			} else if (element instanceof JvmWildcardTypeReference) {
-				for(JvmTypeConstraint constraint: ((JvmWildcardTypeReference) copy).getConstraints()) {
-					if (constraint instanceof JvmUpperBound) {
-						return typeReferences.createTypeRef(constraint.getTypeReference().getType());
-					}
-				}
-			}
-		}
+		JvmTypeReference copy = doGetResolvedCopy(element);
 		return copy;
 	}
 
-	protected JvmTypeReference doGetResolvedCopy(JvmTypeReference element, final Wrapper<Boolean> foundRawType) {
+	protected JvmTypeReference doGetResolvedCopy(JvmTypeReference element) {
 		@SuppressWarnings("serial")
 		EcoreUtil.Copier copier = new EcoreUtil.Copier(false,true) {
+
+			private Set<JvmType> allResolved = Sets.newHashSet();
+			
 			@Override
 			public EObject copy(EObject object) {
-				EObject resolvedObject = resolveTypeParameters(object); 
+				EObject resolvedObject = resolveTypeParameters(object);
 				EObject result = super.copy(resolvedObject);
 				return result;
 			}
@@ -136,7 +128,7 @@ public class TypeArgumentContext {
 				if (object instanceof JvmParameterizedTypeReference) {
 					JvmParameterizedTypeReference parameterizedTypeRef = (JvmParameterizedTypeReference) object;
 					JvmType type = parameterizedTypeRef.getType();
-					if (type instanceof JvmTypeParameter) {
+					if (allResolved.add(type) && type instanceof JvmTypeParameter) {
 						JvmTypeReference resolved = TypeArgumentContext.this.getBoundArgument((JvmTypeParameter) type);
 						if (resolved!=null) {
 							if (resolved.getType() == type) {
@@ -144,8 +136,6 @@ public class TypeArgumentContext {
 							}
 							return resolveTypeParameters(resolved);
 						} else {
-							// raw type - return object reference
-							foundRawType.set(Boolean.TRUE);
 							return typeReferences.createTypeRef(type);
 						}
 					}
