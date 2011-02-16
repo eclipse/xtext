@@ -183,7 +183,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 				return;
 			}
 		}
-		if (model instanceof XExpression || model instanceof XCatchClause)
+		if (model == null || model instanceof XExpression || model instanceof XCatchClause)
 			createLocalVariableAndImplicitProposals(model, context, acceptor);
 	}
 	
@@ -275,7 +275,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 	
 	protected void createLocalVariableAndImplicitProposals(EObject context, boolean includeCurrentObject, int idx, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
 		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory("ID", contentAssistContext);
-		IScope scope = getScopeProvider().createSimpleFeatureCallScope(context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, includeCurrentObject, idx);
+		IScope scope = getScopeProvider().createSimpleFeatureCallScope(context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, contentAssistContext.getResource(), includeCurrentObject, idx);
 		getCrossReferenceProposalCreator().lookupCrossReference(scope, context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, acceptor, featureDescriptionPredicate, proposalFactory);
 	}
 	
