@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xtend2.naming;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
@@ -28,10 +27,6 @@ public class Xtend2QualifiedNameProvider extends IQualifiedNameProvider.Abstract
 	private IQualifiedNameConverter qualifiedNameConverter;
 	
 	public QualifiedName getFullyQualifiedName(EObject obj) {
-		// TODO: remove as soon as JvmTypes are fixed
-		if(obj instanceof JvmConstructor)
-			return getFullyQualifiedName(((JvmConstructor) obj).getDeclaringType());
-		
 		if (obj instanceof JvmType || obj instanceof JvmMember || obj instanceof XtendClass || obj instanceof XtendMember) {
 			final String qualifiedName = ((JvmIdentifiableElement) obj).getQualifiedName();
 			return qualifiedNameConverter.toQualifiedName(qualifiedName);

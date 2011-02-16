@@ -1924,7 +1924,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		   source, 
 		   new String[] 
 		   {
-			 "documentation", "<p>The identifier of a JvmIdentifiableElement is a canonical representation of the element.</p>\n<p>A type will return its fully qualified name as its identifier with a \'$\' delimiter for inner classes. \nThe identifier of an executables contains the identifiers of their respective parameter types. They do\nnot contain any information about type parameters.</p>\n<p>Examples for identifiers are:</p>\n<ul>\n<li>java.lang.String for a class</li>\n<li>java.util.Map$Entry for an inner class</li>\n<li>java.lang.String.String() for a constructor</li>\n<li>java.lang.String.charAt(int) for a method</li>\n<li>java.lang.Object[][] for an array type</li>\n</ul>"
+			 "documentation", "<p>The identifier of a JvmIdentifiableElement is a canonical representation of the element.</p>\n<p>A type will return its fully qualified name as its identifier with a \'$\' delimiter for inner classes. \nThe identifier of an executables contains the identifiers of their respective parameter types. They do\nnot contain any information about type parameters.</p>\n<p>Examples for identifiers are:</p>\n<ul>\n<li>java.lang.String for a class</li>\n<li>java.util.Map$Entry for an inner class</li>\n<li>java.lang.String.String() for a constructor (note the repeated simple name)</li>\n<li>java.lang.String.charAt(int) for a method</li>\n<li>java.lang.String.offset for a field</li>\n<li>java.lang.Object[][] for an array type</li>\n</ul>"
 		   });		
 		addAnnotation
 		  (jvmIdentifiableElementEClass.getEOperations().get(1), 
@@ -1945,7 +1945,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		   source, 
 		   new String[] 
 		   {
-			 "documentation", "<p>The qualified name of a JvmIdentifiableElement is a textual representation of the element.</p>\n<p>The name does not contain any information about type parameters. Inner classes are delimited by means of \nthe given \'innerClassDelimiter\'</p>\n<p>Examples for qualified names with a \'$\' delimiter are:</p>\n<ul>\n<li>java.lang.String for class java.lang.String</li>\n<li>java.util.Map$Entry for class java.util.Map$Entry</li>\n<li>java.lang.String.charAt for method java.lang.String.charAt(int)</li>\n<li>java.lang.String.String for constructor java.lang.String.String(java.lang.String)</li>\n</ul>"
+			 "documentation", "<p>The qualified name of a JvmIdentifiableElement is a textual representation of the element.</p>\n<p>The name does not contain any information about type parameters. Inner classes are delimited by means of \nthe given \'innerClassDelimiter\'</p>\n<p>Examples for qualified names with a \'$\' delimiter are:</p>\n<ul>\n<li>java.lang.String for class java.lang.String</li>\n<li>java.util.Map$Entry for class java.util.Map$Entry</li>\n<li>java.lang.String.charAt for method java.lang.String.charAt(int)</li>\n<li>java.lang.String.offset for field java.lang.String.offset</li>\n<li>java.lang.String for a constructor that is identified by java.lang.String.String(java.lang.String)</li>\n</ul>"
 		   });		
 		addAnnotation
 		  (jvmTypeConstraintEClass.getEOperations().get(0), 

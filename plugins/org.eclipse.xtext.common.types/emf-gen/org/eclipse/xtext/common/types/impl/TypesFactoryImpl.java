@@ -304,7 +304,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	 */
 	public JvmConstructor createJvmConstructor()
 	{
-		JvmConstructorImpl jvmConstructor = new JvmConstructorImpl();
+		JvmConstructorImplCustom jvmConstructor = new JvmConstructorImplCustom();
 		return jvmConstructor;
 	}
 

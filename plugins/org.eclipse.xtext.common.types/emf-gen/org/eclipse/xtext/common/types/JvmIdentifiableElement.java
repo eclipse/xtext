@@ -31,8 +31,9 @@ public interface JvmIdentifiableElement extends EObject
 	 * <ul>
 	 * <li>java.lang.String for a class</li>
 	 * <li>java.util.Map$Entry for an inner class</li>
-	 * <li>java.lang.String.String() for a constructor</li>
+	 * <li>java.lang.String.String() for a constructor (note the repeated simple name)</li>
 	 * <li>java.lang.String.charAt(int) for a method</li>
+	 * <li>java.lang.String.offset for a field</li>
 	 * <li>java.lang.Object[][] for an array type</li>
 	 * </ul>
 	 * <!-- end-model-doc -->
@@ -85,7 +86,8 @@ public interface JvmIdentifiableElement extends EObject
 	 * <li>java.lang.String for class java.lang.String</li>
 	 * <li>java.util.Map$Entry for class java.util.Map$Entry</li>
 	 * <li>java.lang.String.charAt for method java.lang.String.charAt(int)</li>
-	 * <li>java.lang.String.String for constructor java.lang.String.String(java.lang.String)</li>
+	 * <li>java.lang.String.offset for field java.lang.String.offset</li>
+	 * <li>java.lang.String for a constructor that is identified by java.lang.String.String(java.lang.String)</li>
 	 * </ul>
 	 * <!-- end-model-doc -->
 	 * @model
