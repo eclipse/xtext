@@ -80,7 +80,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		setVisibility(clazz, result);
 		result.internalSetIdentifier(clazz.getName());
 		result.setSimpleName(clazz.getSimpleName());
-		if (clazz.getDeclaringClass() == null)
+		if (clazz.getDeclaringClass() == null && clazz.getPackage() != null)
 			result.setPackageName(clazz.getPackage().getName());
 		createNestedTypes(clazz, result);
 		createMethods(clazz, result);
