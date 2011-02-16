@@ -9,6 +9,9 @@
 import org::eclipse::xtext;
 import org::eclipse::xtext::generator;
 
+String activatorName() :
+	getNaming().activatorName();
+
 String guiceModuleRtGenerated(Grammar g) : 
 	getNaming().guiceModuleRtGenerated(g);
 	

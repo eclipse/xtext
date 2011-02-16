@@ -11,6 +11,8 @@ package org.eclipse.xtext.generator;
 import static org.eclipse.xtext.GrammarUtil.*;
 
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -23,9 +25,19 @@ public class Naming {
 	
 	public final static String GLOBAL_VAR_NAME = "__Naming__";
 	private String uiBasePackage;
+	private String pathTestProject;
+	private String activatorName;
 	
 	public void setUiBasePackage(String uiBasePackage) {
 		this.uiBasePackage = uiBasePackage;
+	}
+
+	public void setPathTestProject(String pathTestProject) {
+		this.pathTestProject = pathTestProject;
+	}
+
+	public void setActivatorName(String activator) {
+		this.activatorName = activator;
 	}
 
 	public String guiceModuleRtGenerated(Grammar g) {
@@ -52,8 +64,28 @@ public class Naming {
 		return basePackageRuntime(g)+"."+getName(g) + "StandaloneSetupGenerated";
 	}
 
+	/**
+	 * @deprecated use {@link #getActivatorName()} instead
+	 */
+	@Deprecated
 	public String activator() {
 		return uiBasePackage+ ".Activator";
+	}
+
+	public String activatorName() {
+		return activatorName;
+	}
+
+	public String activatorPackageName() {
+		return packageName(activatorName());
+	}
+
+	public String getPathTestProject() {
+		return pathTestProject;
+	}
+
+	public String packageName(String className) {
+		return Strings.skipLastToken(className, ".");
 	}
 
 	public String executableExtensionFactory(Grammar g) {

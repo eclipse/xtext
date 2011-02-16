@@ -41,6 +41,7 @@ import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -57,6 +58,9 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 	private final Logger log = Logger.getLogger(getClass());
 
+	public static final String SRC_GEN_TEST = "SRC_GEN_TEST";
+	public static final String SRC_TEST = "SRC_TEST";
+	public static final String PLUGIN_TEST = "PLUGIN_TEST";
 	public static final String SRC_GEN_UI = "SRC_GEN_UI";
 	public static final String SRC_UI = "SRC_UI";
 	public static final String PLUGIN_UI = "PLUGIN_UI";
@@ -79,6 +83,8 @@ public class Generator extends AbstractWorkflowComponent2 {
 	@Override
 	protected void checkConfigurationInternal(Issues issues) {
 		naming.setUiBasePackage(getProjectNameUi());
+		naming.setActivatorName(getActivator());
+		naming.setPathTestProject(getPathTestProject());
 		Map<String,Grammar> uris = new HashMap<String,Grammar>();
 		for (LanguageConfig config : languageConfigs) {
 			config.registerNaming(naming);
@@ -129,6 +135,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 	private String pathRtProject = ".";
 	private String pathUiProject = null;
+	private String pathTestProject = null;
 	private String srcPath = "/src";
 	private String srcGenPath = "/src-gen";
 	private List<PostProcessor> postProcessors = Lists.newArrayList();
@@ -155,6 +162,14 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 	public void setPathUiProject(String pathUiProject) {
 		this.pathUiProject = pathUiProject;
+	}
+
+	public String getPathTestProject() {
+		return pathTestProject;
+	}
+
+	public void setPathTestProject(String pathTestProject) {
+		this.pathTestProject = pathTestProject;
 	}
 
 	public String getSrcPath() {
@@ -188,6 +203,15 @@ public class Generator extends AbstractWorkflowComponent2 {
 			output.addOutlet(createOutlet(false, getEncoding(), PLUGIN_UI, false, getPathRtProject()));
 			output.addOutlet(createOutlet(false, getEncoding(), SRC_UI, false, getPathRtProject() + getSrcPath()));
 			output.addOutlet(createOutlet(false, getEncoding(), SRC_GEN_UI, true, getPathRtProject() + getSrcGenPath()));
+		}
+		if (!Strings.isEmpty(getPathTestProject())) {
+			output.addOutlet(createOutlet(false, getEncoding(), PLUGIN_TEST, false, getPathTestProject()));
+			output.addOutlet(createOutlet(false, getEncoding(), SRC_TEST, false, getPathTestProject() + getSrcPath()));
+			output.addOutlet(createOutlet(false, getEncoding(), SRC_GEN_TEST, true, getPathTestProject() + getSrcGenPath()));
+		} else {
+			output.addOutlet(createOutlet(false, getEncoding(), PLUGIN_TEST, false, getPathRtProject()));
+			output.addOutlet(createOutlet(false, getEncoding(), SRC_TEST, false, getPathRtProject() + getSrcPath()));
+			output.addOutlet(createOutlet(false, getEncoding(), SRC_GEN_TEST, true, getPathRtProject() + getSrcGenPath()));
 		}
 		// initialize global vars
 		Map<String,Variable> globalVars = Maps.newHashMap();
@@ -468,6 +492,18 @@ public class Generator extends AbstractWorkflowComponent2 {
 		if (projectNameUi == null)
 			return getProjectNameRt() + ".ui";
 		return projectNameUi;
+	}
+
+	private String projectNameTest;
+
+	public void setProjectNameTest(String projectNameTest) {
+		this.projectNameTest = projectNameTest;
+	}
+
+	private String getProjectNameTest() {
+		if (projectNameTest == null)
+			return getProjectNameRt() + ".test";
+		return projectNameTest;
 	}
 
 	private void generateManifest(XpandFacade facade, String name, String symbolicName, String version, Set<String> exported,

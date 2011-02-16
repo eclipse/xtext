@@ -58,8 +58,9 @@ public class JavaValidatorFragment extends AbstractValidatorFragment {
 
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
-		if (log.isInfoEnabled())
-			log.info("executing generate for " + getClass().getName());
+		if (log.isInfoEnabled()) {
+			log.info("generating Java-based EValidator API");
+		}
 		XpandFacade.create(ctx).evaluate2(getTemplate() + "::generate", grammar, getParameters(grammar));
 	}
 
