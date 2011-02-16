@@ -48,8 +48,7 @@ public class NamingTest extends AbstractXtend2TestCase {
 		XtendFile file = file("package foo class Bar {}");
 		assertEquals("foo.Bar", file.getXtendClass().getQualifiedName());
 		assertEquals("foo.Bar", associations.getInferredType(file.getXtendClass()).getQualifiedName());
-		// TODO: fix this, should be foo.Bar 
-		assertEquals("foo.Bar.Bar", associations.getInferredConstructor(file.getXtendClass()).getQualifiedName());
+		assertEquals("foo.Bar", associations.getInferredConstructor(file.getXtendClass()).getQualifiedName());
 	}
 
 	public void testQualifiedNames_1() throws Exception {
@@ -63,7 +62,6 @@ public class NamingTest extends AbstractXtend2TestCase {
 		XtendFile file = file("package foo class Bar {}");
 		assertEquals("foo.Bar", file.getXtendClass().getIdentifier());
 		assertEquals("foo.Bar", associations.getInferredType(file.getXtendClass()).getIdentifier());
-		// TODO: fix this, should be foo.Bar() 
 		assertEquals("foo.Bar.Bar()", associations.getInferredConstructor(file.getXtendClass()).getIdentifier());
 	}
 
