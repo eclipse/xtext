@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.xtend2.impl;
 
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 
@@ -21,18 +22,12 @@ public class XtendFunctionImplCustom extends XtendFunctionImpl {
 	
 	@Override
 	public String getIdentifier() {
-		String typeName = getDeclaringType().getIdentifier();
-		if (typeName!=null)
-			return typeName+"."+getSimpleName();
-		return getSimpleName();
+		return computeIdentifier();
 	}
 	
 	@Override
 	public String getQualifiedName(char innerClassDelimiter) {
-		String typeName = getDeclaringType().getQualifiedName(innerClassDelimiter);
-		if (typeName!=null)
-			return typeName+"."+getSimpleName();
-		return getSimpleName();
+		return super.computeIdentifier();
 	}
 
 	@Override
@@ -40,4 +35,27 @@ public class XtendFunctionImplCustom extends XtendFunctionImpl {
 		return EmfFormatter.objToStr(this, Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION);
 	}
 	
+	@Override
+	protected String computeIdentifier() {
+		String result = super.computeIdentifier();
+		if (result != null) {
+			StringBuilder builder = new StringBuilder(result);
+			builder.append('(');
+			boolean first = true;
+			for(JvmFormalParameter parameter: getParameters()) {
+				if (!first) {
+					builder.append(',');
+				} else {
+					first = false;
+				}
+				if (parameter.getParameterType() != null && parameter.getParameterType().getType() != null)
+					builder.append(parameter.getParameterType().getType().getIdentifier());
+				else
+					builder.append("null");
+			}
+			builder.append(')');
+			return builder.toString();
+		}
+		return null;
+	}
 }

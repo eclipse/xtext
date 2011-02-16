@@ -32,7 +32,7 @@ import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
  *
  * @generated
  */
-public class DeclaredDependencyImpl extends XtendMemberImpl implements DeclaredDependency
+public class DeclaredDependencyImpl extends XtendMemberImplCustom implements DeclaredDependency
 {
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
