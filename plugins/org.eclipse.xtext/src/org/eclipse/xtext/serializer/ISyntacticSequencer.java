@@ -2,7 +2,6 @@ package org.eclipse.xtext.serializer;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.impl.SyntacticSequencer;
@@ -23,6 +22,10 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(SyntacticSequencer.class)
 public interface ISyntacticSequencer {
 
+	public interface ISyntacticSequencerOwner {
+		void setSyntacticSequencer(ISyntacticSequencer sequencer);
+	}
+
 	/**
 	 * Serializes the semanticRoot.
 	 * 
@@ -34,6 +37,6 @@ public interface ISyntacticSequencer {
 	 *            A handler that accepts a sequence of parse-events and does something useful with it. For example: Mix
 	 *            in white-spaces and comments and compose all the tokens to a document.
 	 */
-	ISemanticSequenceAcceptor createAcceptor(EObject context, EObject semanticRoot, INode previousNode,
-			ISyntacticSequenceAcceptor constructor, ISerializationDiagnostic.Acceptor errorAcceptor);
+	void createSequence(EObject context, EObject semanticObject, INode previousNode,
+			ISyntacticSequenceAcceptor sequenceAcceptor, ISerializationDiagnostic.Acceptor errorAcceptor);
 }

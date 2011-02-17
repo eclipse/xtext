@@ -19,10 +19,10 @@ import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynEmitterState;
+import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynTransition;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynNavigable;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynEmitterState;
 import org.eclipse.xtext.serializer.acceptor.IUnassignedTokenSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 
@@ -78,4 +78,5 @@ public class SyntacticSequencer extends AbstractSyntacticSequencer {
 			}
 		}
 	}
+
 }

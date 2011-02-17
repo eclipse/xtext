@@ -69,14 +69,13 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 		EObject model = getModel(stringModel);
 		NodeModelSyntacticSequencer nmSequencer = new NodeModelSyntacticSequencer();
 		EObject context = nmSequencer.findContexts(model, null).iterator().next();
-		ISemanticSequencer semSequencer = get(ISemanticSequencer.class);
+		//		ISemanticSequencer semSequencer = get(ISemanticSequencer.class);
 		IRecursiveSyntacticSequencer recSequencer = get(IRecursiveSyntacticSequencer.class);
 		DebugSequenceAcceptor actual = new NoEnterNodesDebugSequenceAcceptor(false);
-		DebugSequenceAcceptor expected = new DebugSequenceAcceptor();
-		ISyntacticSequencer syn = get(ISyntacticSequencer.class);
-		nmSequencer.createSequence(context, model, expected, ISerializationDiagnostic.STDERR_ACCEPTOR);
-		recSequencer
-				.createSequence(syn, semSequencer, context, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
+		//		DebugSequenceAcceptor expected = new DebugSequenceAcceptor();
+		//		ISyntacticSequencer syn = get(ISyntacticSequencer.class);
+		//		nmSequencer.createSequence(context, model, expected, ISerializationDiagnostic.STDERR_ACCEPTOR);
+		recSequencer.createSequence(context, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
 		//		System.out.println(actual);
 		//		System.out.println(NodeModelUtils.compactDump(NodeModelUtils.findActualNodeFor(model), false));
 		assertEquals(Join.join("\n", getNodeSequence(model)), Join.join("\n", actual.getColumn(4)));
@@ -86,11 +85,11 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 		with(XtextStandaloneSetup.class);
 		Grammar model = (Grammar) new XtextResourceSet()
 				.getResource(URI.createURI("classpath:/org/eclipse/xtext/Xtext.xtext"), true).getContents().get(0);
-		ISemanticSequencer semSequencer = get(ISemanticSequencer.class);
+		//		ISemanticSequencer semSequencer = get(ISemanticSequencer.class);
 		IRecursiveSyntacticSequencer recSequencer = get(IRecursiveSyntacticSequencer.class);
 		DebugSequenceAcceptor actual = new NoEnterNodesDebugSequenceAcceptor(false);
-		ISyntacticSequencer syn = get(ISyntacticSequencer.class);
-		recSequencer.createSequence(syn, semSequencer, getGrammarAccess().getGrammar().getRules().get(0), model,
+		//		ISyntacticSequencer syn = get(ISyntacticSequencer.class);
+		recSequencer.createSequence(/*syn, semSequencer,*/getGrammarAccess().getGrammar().getRules().get(0), model,
 				actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
 		//		String actual = sequenceRecursively(semSequencer, ctx, model, true);
 		//		System.out.println(actual);
