@@ -14,6 +14,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
@@ -21,6 +22,7 @@ import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil;
 import org.eclipse.xtext.serializer.IHiddenTokenSequencer;
@@ -173,6 +175,9 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 	@Inject
 	protected TokenUtil tokenUtil;
 
+	@Inject
+	protected IHiddenTokenHelper hiddenTokenHelper;
+
 	protected boolean canPass(INode node) {
 		EObject ge = node.getGrammarElement();
 		return GrammarUtil.isParserParserRuleCall(ge) || GrammarUtil.isUnassignedAction(ge);
@@ -186,12 +191,22 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 	}
 
 	protected void emitHiddenTokens(List<INode> hiddens, Set<INode> comments, IHiddenTokensAcceptor acc) {
+		if (hiddens == null)
+			return;
+		boolean lastNonWhitespace = true;
 		for (INode node : hiddens)
 			if (tokenUtil.isCommentNode(node)) {
+				if (lastNonWhitespace)
+					acc.acceptWhitespace(hiddenTokenHelper.getWhitespaceRuleFor(null, ""), "", null);
+				lastNonWhitespace = true;
 				comments.remove(node);
 				acc.acceptComment((AbstractRule) node.getGrammarElement(), node.getText(), (ILeafNode) node);
-			} else
+			} else {
 				acc.acceptWhitespace((AbstractRule) node.getGrammarElement(), node.getText(), (ILeafNode) node);
+				lastNonWhitespace = false;
+			}
+		if (lastNonWhitespace)// FIXME: determine the whitespace rule correctly 
+			acc.acceptWhitespace(hiddenTokenHelper.getWhitespaceRuleFor(null, ""), "", null);
 	}
 
 	protected Set<INode> getCommentsForEObject(EObject semanticObject, INode node) {
@@ -211,7 +226,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 
 	protected List<INode> getHiddenNodesBetween(INode from, INode to) {
 		if (from == null || to == null)
-			return Collections.emptyList();
+			return null;
 		List<INode> out = Lists.newArrayList();
 		NodeIterator ni = new NodeIterator(from);
 		while (ni.hasNext()) {
@@ -219,8 +234,9 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 			if (tokenUtil.isWhitespaceOrCommentNode(next)) {
 				out.add(next);
 			} else if (next == to) {
-				if (GrammarUtil.isDatatypeRuleCall(next.getGrammarElement())
-						|| GrammarUtil.isEnumRuleCall(next.getGrammarElement()))
+				if (next instanceof ICompositeNode
+						&& (GrammarUtil.isDatatypeRuleCall(next.getGrammarElement())
+								|| GrammarUtil.isEnumRuleCall(next.getGrammarElement()) || next.getGrammarElement() instanceof CrossReference))
 					while (ni.hasNext()) {
 						INode next2 = ni.next();
 						if (tokenUtil.isWhitespaceOrCommentNode(next2)) {
@@ -231,7 +247,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 				else
 					return out;
 			} else if (!canPass(next))
-				return Collections.emptyList();
+				return null;
 		}
 		return out;
 	}

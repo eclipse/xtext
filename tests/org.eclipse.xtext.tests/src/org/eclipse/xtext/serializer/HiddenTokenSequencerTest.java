@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.RuleCall;
@@ -57,6 +58,12 @@ public class HiddenTokenSequencerTest extends AbstractXtextTests {
 		public void enterAssignedParserRuleCall(RuleCall rc, EObject newCurrent, ICompositeNode node) {
 			add(titles.doSwitch(rc) + " {", newCurrent.eClass().getName(), "", -1, NO_NODE);
 			indentation++;
+		}
+
+		@Override
+		public void acceptWhitespace(AbstractRule rule, String token, ILeafNode node) {
+			if (token != null && token.length() > 0)
+				super.acceptWhitespace(rule, token, node);
 		}
 	}
 
