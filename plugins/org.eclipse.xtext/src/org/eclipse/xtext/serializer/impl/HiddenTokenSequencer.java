@@ -27,7 +27,7 @@ import org.eclipse.xtext.serializer.IHiddenTokenSequencer;
 import org.eclipse.xtext.serializer.ISyntacticSequencer;
 import org.eclipse.xtext.serializer.ISyntacticSequencer.ISyntacticSequencerOwner;
 import org.eclipse.xtext.serializer.acceptor.IHiddenTokensAcceptor;
-import org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.IEObjectSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 
@@ -44,13 +44,13 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 
 		protected Set<INode> comments;
 
-		protected ISequenceAcceptor delegate;
+		protected IEObjectSequenceAcceptor delegate;
 
 		protected INode lastNode;
 
 		protected INode rootNode;
 
-		public SynAcceptor(ISequenceAcceptor delegate, INode lastNode, Set<INode> comments) {
+		public SynAcceptor(IEObjectSequenceAcceptor delegate, INode lastNode, Set<INode> comments) {
 			super();
 			this.delegate = delegate;
 			this.lastNode = lastNode;
@@ -179,7 +179,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 	}
 
 	public void createSequence(EObject context, EObject semanticObject, INode previousNode,
-			ISequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+			IEObjectSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		Set<INode> comments = getCommentsForEObject(semanticObject, previousNode);
 		SynAcceptor acc = new SynAcceptor(sequenceAcceptor, previousNode, comments);
 		sequencer.createSequence(context, semanticObject, previousNode, acc, errorAcceptor);

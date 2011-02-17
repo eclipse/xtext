@@ -28,7 +28,7 @@ import com.google.inject.internal.Join;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class DebugSequenceAcceptor implements ISequenceAcceptor, IRecursiveSequenceAcceptor, ISemanticSequenceAcceptor {
+public class DebugSequenceAcceptor implements IEObjectSequenceAcceptor, IRecursiveSequenceAcceptor {
 
 	protected final static int COLS = 5;
 

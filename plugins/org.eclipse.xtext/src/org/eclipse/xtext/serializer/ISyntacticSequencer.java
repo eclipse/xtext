@@ -2,11 +2,14 @@ package org.eclipse.xtext.serializer;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.serializer.ISemanticSequencer.ISemanticSequencerOwner;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
+import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.impl.SyntacticSequencer;
 
 import com.google.inject.ImplementedBy;
+import com.google.inject.Inject;
 
 /**
  * The ISequenceParser (1) recursively traverses the semanticRoot, (2) creates a token sequence for each EObject using
@@ -24,6 +27,21 @@ public interface ISyntacticSequencer {
 
 	public interface ISyntacticSequencerOwner {
 		void setSyntacticSequencer(ISyntacticSequencer sequencer);
+	}
+
+	public class PassThroughSyntacticSequencer implements ISyntacticSequencer, ISemanticSequencerOwner {
+
+		protected ISemanticSequencer sequencer;
+
+		@Inject
+		public void setSemanticSequencer(ISemanticSequencer sequencer) {
+			this.sequencer = sequencer;
+		}
+
+		public void createSequence(EObject context, EObject semanticObject, INode previousNode,
+				ISyntacticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+			sequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+		}
 	}
 
 	/**
