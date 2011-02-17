@@ -181,7 +181,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		public void finish() {
 			lastState = transitionBegin(lastState, null, null, null, stack, delegate, errorAcceptor);
 			lastState = transitionFinish(lastState, lastNode, null, stack, delegate, errorAcceptor);
-			delegate.finish(lastNode);
+			delegate.finish();
 		}
 
 		protected INode getLastLeaf(INode node) {

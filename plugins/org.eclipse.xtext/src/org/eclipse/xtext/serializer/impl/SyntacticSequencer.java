@@ -65,7 +65,7 @@ public class SyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected void acceptNodes(ISynNavigable fromState, INode fromNode, INode toNode, RCStack stack,
 			IUnassignedTokenSequenceAcceptor tokenAcceptor) {
-		EmitterNodeIterator ni = new EmitterNodeIterator(fromNode, toNode, false);
+		EmitterNodeIterator ni = new EmitterNodeIterator(fromNode, toNode, false, false);
 		while (ni.hasNext()) {
 			INode next = ni.next();
 			List<ISynState> path = fromState.getShortestPathTo((AbstractElement) next.getGrammarElement(), stack, true);

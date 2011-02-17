@@ -8,17 +8,17 @@
 package org.eclipse.xtext.serializer;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.IRecursiveSyntacticSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.IRecursiveSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
-import org.eclipse.xtext.serializer.impl.RecursiveSyntacticSequencer;
+import org.eclipse.xtext.serializer.impl.RecursiveSequencer;
 
 import com.google.inject.ImplementedBy;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@ImplementedBy(RecursiveSyntacticSequencer.class)
-public interface IRecursiveSyntacticSequencer {
-	void createSequence(EObject context, EObject semanticObject, IRecursiveSyntacticSequenceAcceptor sequenceAcceptor,
+@ImplementedBy(RecursiveSequencer.class)
+public interface IRecursiveSequencer {
+	void createSequence(EObject context, EObject semanticObject, IRecursiveSequenceAcceptor sequenceAcceptor,
 			ISerializationDiagnostic.Acceptor errorAcceptor);
 }

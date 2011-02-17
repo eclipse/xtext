@@ -8,6 +8,7 @@
 package org.eclipse.xtext.serializer.impl;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
@@ -16,37 +17,41 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 
+import com.google.common.collect.Lists;
+
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class EmitterNodeIterator implements Iterator<INode> {
 
 	protected NodeIterator iterator;
-	protected INode next;
+	protected List<INode> next = Lists.newArrayList();
 	protected INode end;
 	protected boolean passAbsorber;
+	protected boolean allowHidden;
 
 	public EmitterNodeIterator(INode fromNode) {
-		this(fromNode, null, true);
+		this(fromNode, null, true, false);
 	}
 
-	public EmitterNodeIterator(INode fromNode, INode toNode, boolean passAbsorber) {
+	public EmitterNodeIterator(INode fromNode, INode toNode, boolean passAbsorber, boolean allowHidden) {
 		if (fromNode != null) {
 			this.iterator = new NodeIterator(fromNode);
 			this.passAbsorber = passAbsorber;
 			this.end = toNode;
+			this.allowHidden = allowHidden;
 			next();
 		}
 	}
 
 	public boolean hasNext() {
-		return next != null;
+		return !next.isEmpty();
 	}
 
 	protected boolean include(INode node) {
 		if (node instanceof ILeafNode) {
 			ILeafNode leaf = (ILeafNode) node;
-			if (leaf.isHidden())
+			if (!allowHidden && leaf.isHidden())
 				return false;
 			return true;
 		} else if (node instanceof ICompositeNode) {
@@ -62,20 +67,37 @@ public class EmitterNodeIterator implements Iterator<INode> {
 	}
 
 	public INode next() {
-		INode result = this.next;
-		while (iterator.hasNext()) {
-			INode next = iterator.next();
-			if (end == next)
-				break;
-			if (include(next)) {
-				if (!passAbsorber && isAbsorber(next))
+		INode result;
+		if (!next.isEmpty()) {
+			result = next.get(0);
+			next.remove(0);
+		} else
+			result = null;
+		if (next.isEmpty())
+			while (iterator.hasNext()) {
+				INode next = iterator.next();
+				if (end == next)
 					break;
-				iterator.prune();
-				this.next = next;
-				return result;
+				if (include(next)) {
+					if (!passAbsorber && isAbsorber(next))
+						break;
+					if (allowHidden
+							&& (GrammarUtil.isDatatypeRuleCall(next.getGrammarElement()) || GrammarUtil
+									.isEnumRuleCall(next.getGrammarElement()))) {
+						NodeIterator ni = new NodeIterator(next);
+						while (ni.hasNext()) {
+							INode next2 = ni.next();
+							if (next2 instanceof ILeafNode && ((ILeafNode) next2).isHidden())
+								this.next.add(next2);
+							else
+								break;
+						}
+					}
+					iterator.prune();
+					this.next.add(next);
+					return result;
+				}
 			}
-		}
-		this.next = null;
 		return result;
 	}
 
