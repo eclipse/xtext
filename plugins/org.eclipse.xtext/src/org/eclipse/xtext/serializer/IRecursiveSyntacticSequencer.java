@@ -19,7 +19,6 @@ import com.google.inject.ImplementedBy;
  */
 @ImplementedBy(RecursiveSyntacticSequencer.class)
 public interface IRecursiveSyntacticSequencer {
-	void createSequence(ISyntacticSequencer syndelegate, ISemanticSequencer semdelegate, EObject context,
-			EObject semanticObject, IRecursiveSyntacticSequenceAcceptor sequenceAcceptor,
+	void createSequence(EObject context, EObject semanticObject, IRecursiveSyntacticSequenceAcceptor sequenceAcceptor,
 			ISerializationDiagnostic.Acceptor errorAcceptor);
 }

@@ -10,6 +10,10 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(GenericSequencer.class)
 public interface ISemanticSequencer {
 
+	public interface ISemanticSequencerOwner {
+		public void setSemanticSequencer(ISemanticSequencer sequencer);
+	}
+
 	/**
 	 * An implementation of this interface converts all direct children of a semantic object into a sequence of
 	 * (grammarElement, Value)-pairs. Direct children are all values from the EObject's EStructuralFeatures that are not

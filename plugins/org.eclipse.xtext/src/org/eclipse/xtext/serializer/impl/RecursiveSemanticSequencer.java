@@ -15,6 +15,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.serializer.IRecursiveSemanitcSequencer;
 import org.eclipse.xtext.serializer.ISemanticSequencer;
+import org.eclipse.xtext.serializer.ISemanticSequencer.ISemanticSequencerOwner;
 import org.eclipse.xtext.serializer.acceptor.IRecursiveSemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
@@ -24,7 +25,7 @@ import com.google.inject.Inject;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class RecursiveSemanticSequencer implements IRecursiveSemanitcSequencer {
+public class RecursiveSemanticSequencer implements IRecursiveSemanitcSequencer, ISemanticSequencerOwner {
 
 	protected static class SemanitcAcceptor implements ISemanticSequenceAcceptor {
 

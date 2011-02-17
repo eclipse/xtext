@@ -19,6 +19,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.ISemanticSequencer;
+import org.eclipse.xtext.serializer.ISemanticSequencer.ISemanticSequencerOwner;
 import org.eclipse.xtext.serializer.ISyntacticSequencer;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynAbsorberState;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.IUnassignedTokenSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
+import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISyntacticSequencerDiagnosticProvider;
 
 import com.google.inject.Inject;
@@ -37,7 +39,7 @@ import com.google.inject.Inject;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer {
+public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer, ISemanticSequencerOwner {
 
 	protected class SemAcceptor implements ISemanticSequenceAcceptor, IUnassignedTokenSequenceAcceptor {
 
@@ -196,8 +198,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer 
 	@Inject
 	protected ISyntacticSequencerPDAProvider pdaProvider;
 
-	@Inject
-	protected ISemanticSequencer semanitcSequencer;
+	protected ISemanticSequencer semanticSequencer;
 
 	protected void accept(INode fromNode, List<ISynState> path, RCStack stack, ISyntacticSequenceAcceptor delegate,
 			ISerializationDiagnostic.Acceptor errorAcceptor) {
@@ -259,11 +260,25 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer 
 		throw new RuntimeException("invalid state for emitting: " + emitter + " (" + emitter.getType() + ")");
 	}
 
-	public ISemanticSequenceAcceptor createAcceptor(EObject ctx, EObject semanticRoot, INode previousNode,
-			ISyntacticSequenceAcceptor constructor, ISerializationDiagnostic.Acceptor errorAcceptor) {
-		ISynAbsorberState startState = ctx instanceof ParserRule ? pdaProvider.getPDA((ParserRule) ctx) : pdaProvider
-				.getPDA((Action) ctx);
-		return new SemAcceptor(ctx, startState, previousNode, constructor, errorAcceptor);
+	//	public ISemanticSequenceAcceptor createAcceptor(EObject ctx, EObject semanticRoot, INode previousNode,
+	//			ISyntacticSequenceAcceptor constructor, ISerializationDiagnostic.Acceptor errorAcceptor) {
+	//		ISynAbsorberState startState = getStartState(ctx);
+	//		return new SemAcceptor(ctx, startState, previousNode, constructor, errorAcceptor);
+	//	}
+
+	public void createSequence(EObject ctx, EObject semanticObject, INode previousNode,
+			ISyntacticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+		SemAcceptor acceptor = new SemAcceptor(ctx, getStartState(ctx), previousNode, sequenceAcceptor, errorAcceptor);
+		semanticSequencer.createSequence(ctx, semanticObject, acceptor, errorAcceptor);
+	}
+
+	protected ISynAbsorberState getStartState(EObject ctx) {
+		return ctx instanceof ParserRule ? pdaProvider.getPDA((ParserRule) ctx) : pdaProvider.getPDA((Action) ctx);
+	}
+
+	@Inject
+	public void setSemanticSequencer(ISemanticSequencer sequencer) {
+		this.semanticSequencer = sequencer;
 	}
 
 	protected ISynFollowerOwner transition(ISynFollowerOwner fromState, INode fromNode, AbstractElement toEle,

@@ -10,24 +10,24 @@ package org.eclipse.xtext.serializer.impl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.serializer.IRecursiveSyntacticSequencer;
-import org.eclipse.xtext.serializer.ISemanticSequencer;
+import org.eclipse.xtext.serializer.ISyntacticSequencer;
+import org.eclipse.xtext.serializer.ISyntacticSequencer.ISyntacticSequencerOwner;
 import org.eclipse.xtext.serializer.acceptor.IRecursiveSyntacticSequenceAcceptor;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
-import org.eclipse.xtext.serializer.ISyntacticSequencer;
+
+import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class RecursiveSyntacticSequencer implements IRecursiveSyntacticSequencer {
+public class RecursiveSyntacticSequencer implements IRecursiveSyntacticSequencer, ISyntacticSequencerOwner {
 
 	protected static class SemanitcAcceptor implements ISyntacticSequenceAcceptor {
 
@@ -37,23 +37,21 @@ public class RecursiveSyntacticSequencer implements IRecursiveSyntacticSequencer
 
 		protected INode lastNode;
 
-		protected ISemanticSequencer semanticSeq;
-
 		protected ISyntacticSequencer syntacticSeq;
 
-		public SemanitcAcceptor(ISyntacticSequencer syndelegate, ISemanticSequencer semdelegate, INode lastNode,
+		public SemanitcAcceptor(ISyntacticSequencer syndelegate, INode lastNode,
 				IRecursiveSyntacticSequenceAcceptor acceptor, Acceptor errors) {
 			this.delegate = acceptor;
 			this.syntacticSeq = syndelegate;
-			this.semanticSeq = semdelegate;
 			this.errorAcceptor = errors;
 			this.lastNode = lastNode;
 		}
 
 		public void acceptAssignedAction(Action action, EObject eobject, ICompositeNode node) {
 			delegate.enterAssignedAction(action, eobject, node);
-			ISemanticSequenceAcceptor acc = syntacticSeq.createAcceptor(action, eobject, node, this, errorAcceptor);
-			semanticSeq.createSequence(action, eobject, acc, errorAcceptor);
+			//			ISemanticSequenceAcceptor acc = syntacticSeq.createAcceptor(action, eobject, node, this, errorAcceptor);
+			//			semanticSeq.createSequence(action, eobject, acc, errorAcceptor);
+			syntacticSeq.createSequence(action, eobject, node, this, errorAcceptor);
 			delegate.leaveAssignedAction(action, eobject);
 		}
 
@@ -97,10 +95,10 @@ public class RecursiveSyntacticSequencer implements IRecursiveSyntacticSequencer
 		}
 
 		public void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild, ICompositeNode node) {
-			ParserRule pr = (ParserRule) ruleCall.getRule();
 			delegate.enterAssignedParserRuleCall(ruleCall, semanticChild, node);
-			ISemanticSequenceAcceptor acc = syntacticSeq.createAcceptor(pr, semanticChild, node, this, errorAcceptor);
-			semanticSeq.createSequence(pr, semanticChild, acc, errorAcceptor);
+			//			ISemanticSequenceAcceptor acc = syntacticSeq.createAcceptor(pr, semanticChild, node, this, errorAcceptor);
+			//			semanticSeq.createSequence(pr, semanticChild, acc, errorAcceptor);
+			syntacticSeq.createSequence(ruleCall.getRule(), semanticChild, node, this, errorAcceptor);
 			delegate.leaveAssignedParserRuleCall(ruleCall);
 		}
 
@@ -147,14 +145,18 @@ public class RecursiveSyntacticSequencer implements IRecursiveSyntacticSequencer
 
 	}
 
-	public void createSequence(ISyntacticSequencer syndelegate, ISemanticSequencer semdelegate, EObject context,
-			EObject semanticObject, IRecursiveSyntacticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+	protected ISyntacticSequencer syndelegate;
+
+	public void createSequence(EObject context, EObject semanticObject,
+			IRecursiveSyntacticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		INode node = NodeModelUtils.findActualNodeFor(semanticObject);
-		SemanitcAcceptor acceptor = new SemanitcAcceptor(syndelegate, semdelegate, node, sequenceAcceptor,
-				errorAcceptor);
-		ISemanticSequenceAcceptor acc = syndelegate.createAcceptor(context, semanticObject, node, acceptor,
-				errorAcceptor);
-		semdelegate.createSequence(context, semanticObject, acc, errorAcceptor);
+		SemanitcAcceptor acceptor = new SemanitcAcceptor(syndelegate, node, sequenceAcceptor, errorAcceptor);
+		syndelegate.createSequence(context, semanticObject, node, acceptor, errorAcceptor);
+	}
+
+	@Inject
+	public void setSyntacticSequencer(ISyntacticSequencer sequencer) {
+		this.syndelegate = sequencer;
 	}
 
 }
