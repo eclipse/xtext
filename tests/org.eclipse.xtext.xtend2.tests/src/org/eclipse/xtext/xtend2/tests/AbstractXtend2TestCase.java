@@ -17,6 +17,7 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xtend2.Xtend2RuntimeModule;
 import org.eclipse.xtext.xtend2.Xtend2StandaloneSetup;
 import org.eclipse.xtext.xtend2.validation.ClasspathBasedChecks;
+import org.eclipse.xtext.xtend2.xtend2.Xtend2Factory;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
@@ -36,6 +37,11 @@ public abstract class AbstractXtend2TestCase extends TestCase {
 				@Override
 				public ClassLoader bindClassLoaderToInstance() {
 					return AbstractXtend2TestCase.class.getClassLoader();
+				}
+				
+				@SuppressWarnings("unused")
+				public Xtend2Factory bindFactory() {
+					return Xtend2Factory.eINSTANCE;
 				}
 
 				@SuppressWarnings("unused")

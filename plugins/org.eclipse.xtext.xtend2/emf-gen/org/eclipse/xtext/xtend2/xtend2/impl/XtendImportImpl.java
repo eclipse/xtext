@@ -23,7 +23,8 @@ import org.eclipse.xtext.xtend2.xtend2.XtendImport;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendImportImpl#getImportedNamespace <em>Imported Namespace</em>}</li>
- *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendImportImpl#isWildcard <em>Wildcard</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendImportImpl#isStatic <em>Static</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendImportImpl#isExtension <em>Extension</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,24 +53,44 @@ public class XtendImportImpl extends MinimalEObjectImpl.Container implements Xte
 	protected String importedNamespace = IMPORTED_NAMESPACE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isWildcard() <em>Wildcard</em>}' attribute.
+	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isWildcard()
+	 * @see #isStatic()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean WILDCARD_EDEFAULT = false;
+	protected static final boolean STATIC_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isWildcard() <em>Wildcard</em>}' attribute.
+	 * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isWildcard()
+	 * @see #isStatic()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean wildcard = WILDCARD_EDEFAULT;
+	protected boolean static_ = STATIC_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isExtension() <em>Extension</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExtension()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean EXTENSION_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isExtension() <em>Extension</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExtension()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean extension = EXTENSION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -120,9 +141,9 @@ public class XtendImportImpl extends MinimalEObjectImpl.Container implements Xte
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isWildcard()
+	public boolean isStatic()
 	{
-		return wildcard;
+		return static_;
 	}
 
 	/**
@@ -130,12 +151,59 @@ public class XtendImportImpl extends MinimalEObjectImpl.Container implements Xte
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setWildcard(boolean newWildcard)
+	public void setStatic(boolean newStatic)
 	{
-		boolean oldWildcard = wildcard;
-		wildcard = newWildcard;
+		boolean oldStatic = static_;
+		static_ = newStatic;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_IMPORT__WILDCARD, oldWildcard, wildcard));
+			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_IMPORT__STATIC, oldStatic, static_));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isExtension()
+	{
+		return extension;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExtension(boolean newExtension)
+	{
+		boolean oldExtension = extension;
+		extension = newExtension;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_IMPORT__EXTENSION, oldExtension, extension));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isWildcard()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getImportedTypeName()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -150,8 +218,10 @@ public class XtendImportImpl extends MinimalEObjectImpl.Container implements Xte
 		{
 			case Xtend2Package.XTEND_IMPORT__IMPORTED_NAMESPACE:
 				return getImportedNamespace();
-			case Xtend2Package.XTEND_IMPORT__WILDCARD:
-				return isWildcard();
+			case Xtend2Package.XTEND_IMPORT__STATIC:
+				return isStatic();
+			case Xtend2Package.XTEND_IMPORT__EXTENSION:
+				return isExtension();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -169,8 +239,11 @@ public class XtendImportImpl extends MinimalEObjectImpl.Container implements Xte
 			case Xtend2Package.XTEND_IMPORT__IMPORTED_NAMESPACE:
 				setImportedNamespace((String)newValue);
 				return;
-			case Xtend2Package.XTEND_IMPORT__WILDCARD:
-				setWildcard((Boolean)newValue);
+			case Xtend2Package.XTEND_IMPORT__STATIC:
+				setStatic((Boolean)newValue);
+				return;
+			case Xtend2Package.XTEND_IMPORT__EXTENSION:
+				setExtension((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -189,8 +262,11 @@ public class XtendImportImpl extends MinimalEObjectImpl.Container implements Xte
 			case Xtend2Package.XTEND_IMPORT__IMPORTED_NAMESPACE:
 				setImportedNamespace(IMPORTED_NAMESPACE_EDEFAULT);
 				return;
-			case Xtend2Package.XTEND_IMPORT__WILDCARD:
-				setWildcard(WILDCARD_EDEFAULT);
+			case Xtend2Package.XTEND_IMPORT__STATIC:
+				setStatic(STATIC_EDEFAULT);
+				return;
+			case Xtend2Package.XTEND_IMPORT__EXTENSION:
+				setExtension(EXTENSION_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -208,8 +284,10 @@ public class XtendImportImpl extends MinimalEObjectImpl.Container implements Xte
 		{
 			case Xtend2Package.XTEND_IMPORT__IMPORTED_NAMESPACE:
 				return IMPORTED_NAMESPACE_EDEFAULT == null ? importedNamespace != null : !IMPORTED_NAMESPACE_EDEFAULT.equals(importedNamespace);
-			case Xtend2Package.XTEND_IMPORT__WILDCARD:
-				return wildcard != WILDCARD_EDEFAULT;
+			case Xtend2Package.XTEND_IMPORT__STATIC:
+				return static_ != STATIC_EDEFAULT;
+			case Xtend2Package.XTEND_IMPORT__EXTENSION:
+				return extension != EXTENSION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -227,8 +305,10 @@ public class XtendImportImpl extends MinimalEObjectImpl.Container implements Xte
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (importedNamespace: ");
 		result.append(importedNamespace);
-		result.append(", wildcard: ");
-		result.append(wildcard);
+		result.append(", static: ");
+		result.append(static_);
+		result.append(", extension: ");
+		result.append(extension);
 		result.append(')');
 		return result.toString();
 	}

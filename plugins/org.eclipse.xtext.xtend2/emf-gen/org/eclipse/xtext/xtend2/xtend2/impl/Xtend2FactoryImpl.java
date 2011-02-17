@@ -100,7 +100,7 @@ public class Xtend2FactoryImpl extends EFactoryImpl implements Xtend2Factory
 	 */
 	public XtendImport createXtendImport()
 	{
-		XtendImportImpl xtendImport = new XtendImportImpl();
+		XtendImportImplCustom xtendImport = new XtendImportImplCustom();
 		return xtendImport;
 	}
 

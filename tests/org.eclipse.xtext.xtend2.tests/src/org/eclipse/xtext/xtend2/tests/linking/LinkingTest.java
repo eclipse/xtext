@@ -9,11 +9,14 @@ package org.eclipse.xtext.xtend2.tests.linking;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -165,5 +168,110 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		JvmType implementedInterface = implementedInterfaces.get(0).getType();
 		assertNotNull(implementedInterface);
 		assertEquals("java.io.Serializable", implementedInterface.getIdentifier());
+	}
+	
+	public void testStaticImports_01() throws Exception {
+		String fileAsText= "import java.util.Collections.* class Clazz { void method() { ''.singletonList() } }";
+		XtendFile file = file(fileAsText, false);
+		EcoreUtil.resolveAll(file);
+		List<Diagnostic> errors = file.eResource().getErrors();
+		assertEquals(1, errors.size());
+		assertTrue(errors.get(0) instanceof XtextLinkingDiagnostic);
+		XtextLinkingDiagnostic diagnostic = (XtextLinkingDiagnostic) errors.get(0);
+		assertEquals(fileAsText.indexOf("singletonList"),  diagnostic.getOffset());
+	}
+	
+	public void testStaticImports_02() throws Exception {
+		String fileAsText= "import static java.util.Collections.* class Clazz { void method() { ''.singletonList() } }";
+		XtendFile file = file(fileAsText, false);
+		EcoreUtil.resolveAll(file);
+		List<Diagnostic> errors = file.eResource().getErrors();
+		assertEquals(1, errors.size());
+		assertTrue(errors.get(0) instanceof XtextLinkingDiagnostic);
+		XtextLinkingDiagnostic diagnostic = (XtextLinkingDiagnostic) errors.get(0);
+		assertEquals(fileAsText.indexOf("singletonList"),  diagnostic.getOffset());
+	}
+	
+	public void testStaticImports_03() throws Exception {
+		String fileAsText= "import static extension java.util.Collections.* class Clazz { void method() ''.singletonList() }";
+		XtendFile file = file(fileAsText, true);
+		XtendFunction function = (XtendFunction) file.getXtendClass().getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) function.getExpression();
+		String identifier = featureCall.getFeature().getIdentifier();
+		assertEquals("java.util.Collections.singletonList(T)", identifier);
+	}
+	
+	public void testStaticImports_04() throws Exception {
+		// TODO: Fix me - method invocation should not require parenthesis
+//		String fileAsText= "import static extension java.util.Collections.* class Clazz { void method() ''.singletonList }";
+		String fileAsText= "import static extension java.util.Collections.* class Clazz { void method() ''.singletonList() }";
+		XtendFile file = file(fileAsText, true);
+		XtendFunction function = (XtendFunction) file.getXtendClass().getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) function.getExpression();
+		String identifier = featureCall.getFeature().getIdentifier();
+		assertEquals("java.util.Collections.singletonList(T)", identifier);
+	}
+	
+	public void testStaticImports_05() throws Exception {
+		String fileAsText= "import static java.util.Collections.* class Clazz { void method() singletonList('') }";
+		XtendFile file = file(fileAsText, true);
+		XtendFunction function = (XtendFunction) file.getXtendClass().getMembers().get(0);
+		XFeatureCall featureCall = (XFeatureCall) function.getExpression();
+		String identifier = featureCall.getFeature().getIdentifier();
+		assertEquals("java.util.Collections.singletonList(T)", identifier);
+	}
+	
+	public void testStaticImports_06() throws Exception {
+		String fileAsText= 
+				"import static com.google.common.collect.Iterables.*\n" +
+				"import static java.util.Collections.*\n" +
+				"class Clazz { void method() find(singletonList(''), [e|e!=null]) }";
+		XtendFile file = file(fileAsText, true);
+		XtendFunction function = (XtendFunction) file.getXtendClass().getMembers().get(0);
+		XFeatureCall featureCall = (XFeatureCall) function.getExpression();
+		String identifier = featureCall.getFeature().getIdentifier();
+		assertEquals("com.google.common.collect.Iterables.find(java.lang.Iterable,com.google.common.base.Predicate)", identifier);
+	}
+	
+	public void testStaticImports_07() throws Exception {
+		String fileAsText= 
+				"import static com.google.common.collect.Iterables.*\n" +
+				"import static java.util.Collections.*\n" +
+				"class Clazz { void method() find(singletonList(''), [e|e!=null]) }";
+		XtendFile file = file(fileAsText, true);
+		XtendFunction function = (XtendFunction) file.getXtendClass().getMembers().get(0);
+		XFeatureCall featureCall = (XFeatureCall) function.getExpression();
+		String identifier = featureCall.getFeature().getIdentifier();
+		assertEquals("com.google.common.collect.Iterables.find(java.lang.Iterable,com.google.common.base.Predicate)", identifier);
+	}
+	
+	public void testStaticImports_08() throws Exception {
+		String fileAsText= 
+				"import static com.google.common.collect.Iterables.*\n" +
+				"import static java.util.Collections.*\n" +
+				"class Clazz { void method() singletonList('').find(e|e!=null) }";
+		XtendFile file = file(fileAsText, true);
+		XtendFunction function = (XtendFunction) file.getXtendClass().getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) function.getExpression();
+		String identifier = featureCall.getFeature().getIdentifier();
+		assertEquals("org.eclipse.xtext.xbase.lib.Iterables.find(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)", identifier);
+	}
+	
+	public void testStaticImports_09() throws Exception {
+		String fileAsText= "import static java.util.Collections.* class Clazz { void method() singletonList('').find(String e|e!=null) }";
+		XtendFile file = file(fileAsText, true);
+		XtendFunction function = (XtendFunction) file.getXtendClass().getMembers().get(0);
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) function.getExpression();
+		String identifier = featureCall.getFeature().getIdentifier();
+		assertEquals("org.eclipse.xtext.xbase.lib.Iterables.find(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)", identifier);
+	}
+	
+	public void testStaticImports_10() throws Exception {
+		String fileAsText= "import static extension java.util.Collections.* class Clazz { void method() singletonList('') }";
+		XtendFile file = file(fileAsText, true);
+		XtendFunction function = (XtendFunction) file.getXtendClass().getMembers().get(0);
+		XFeatureCall featureCall = (XFeatureCall) function.getExpression();
+		String identifier = featureCall.getFeature().getIdentifier();
+		assertEquals("java.util.Collections.singletonList(T)", identifier);
 	}
 }

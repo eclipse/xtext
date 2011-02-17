@@ -10,10 +10,14 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -22,11 +26,15 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
+import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
+import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
+import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
 import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.internal.Lists;
 
 /**
@@ -36,6 +44,9 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 
 	@Inject
 	private IXtend2JvmAssociations xtend2jvmAssociations;
+	
+	@Inject
+	private Provider<StaticallyImportedFeaturesProvider> staticallyImportedFeaturesProvider; 
 	
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
@@ -82,7 +93,43 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 		}
 		return super.createLocalVarScope(context, reference, parent, includeCurrentBlock, idx);
 	}
-
+	
+	@Override
+	protected List<IJvmFeatureDescriptionProvider> getStaticFeatureDescriptionProviders(Resource context, JvmDeclaredType contextType) {
+		List<IJvmFeatureDescriptionProvider> result = super.getStaticFeatureDescriptionProviders(context, contextType);
+		final DefaultJvmFeatureDescriptionProvider defaultProvider = newDefaultFeatureDescProvider();
+		StaticallyImportedFeaturesProvider staticProvider = staticallyImportedFeaturesProvider.get();
+		staticProvider.setContext(context);
+		defaultProvider.setContextType(contextType);
+		defaultProvider.setFeaturesForTypeProvider(staticProvider);
+		result.add(0, defaultProvider);
+		return result;
+	}
+	
+	@Override
+	protected List<IJvmFeatureDescriptionProvider> getFeatureDescriptionProviders(JvmTypeReference type,
+			EObject expression, JvmDeclaredType currentContext, JvmIdentifiableElement implicitReceiver) {
+		List<IJvmFeatureDescriptionProvider> result = super.getFeatureDescriptionProviders(type, expression, currentContext, implicitReceiver);
+		
+		final StaticallyImportedFeaturesProvider staticProvider = staticallyImportedFeaturesProvider.get();
+		staticProvider.setContext(expression.eResource());
+		
+		final DefaultJvmFeatureDescriptionProvider defaultProvider = newDefaultFeatureDescProvider();
+		defaultProvider.setFeaturesForTypeProvider(staticProvider);
+		
+		final XFeatureCallSugarDescriptionProvider sugaredProvider = newSugarDescriptionProvider();
+		sugaredProvider.setFeaturesForTypeProvider(staticProvider);
+		
+		defaultProvider.setContextType(currentContext);
+		defaultProvider.setImplicitReceiver(implicitReceiver);
+		sugaredProvider.setContextType(currentContext);
+		sugaredProvider.setImplicitReceiver(implicitReceiver);
+		
+		result.add(2, defaultProvider);
+		result.add(3, sugaredProvider);
+		return result;
+	}
+	
 	protected IEObjectDescription createIEObjectDescription(JvmFormalParameter jvmFormalParameter) {
 		return EObjectDescription.create(QualifiedName.create(jvmFormalParameter.getName()), jvmFormalParameter, null);
 	}

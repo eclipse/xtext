@@ -129,13 +129,22 @@ public interface Xtend2Package extends EPackage
 	int XTEND_IMPORT__IMPORTED_NAMESPACE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Wildcard</b></em>' attribute.
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_IMPORT__WILDCARD = 1;
+	int XTEND_IMPORT__STATIC = 1;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_IMPORT__EXTENSION = 2;
 
 	/**
 	 * The number of structural features of the '<em>Xtend Import</em>' class.
@@ -144,7 +153,7 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_IMPORT_FEATURE_COUNT = 2;
+	int XTEND_IMPORT_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl <em>Xtend Class</em>}' class.
@@ -662,15 +671,26 @@ public interface Xtend2Package extends EPackage
 	EAttribute getXtendImport_ImportedNamespace();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtend2.xtend2.XtendImport#isWildcard <em>Wildcard</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtend2.xtend2.XtendImport#isStatic <em>Static</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Wildcard</em>'.
-	 * @see org.eclipse.xtext.xtend2.xtend2.XtendImport#isWildcard()
+	 * @return the meta object for the attribute '<em>Static</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendImport#isStatic()
 	 * @see #getXtendImport()
 	 * @generated
 	 */
-	EAttribute getXtendImport_Wildcard();
+	EAttribute getXtendImport_Static();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtend2.xtend2.XtendImport#isExtension <em>Extension</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Extension</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendImport#isExtension()
+	 * @see #getXtendImport()
+	 * @generated
+	 */
+	EAttribute getXtendImport_Extension();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.XtendClass <em>Xtend Class</em>}'.
@@ -1069,12 +1089,20 @@ public interface Xtend2Package extends EPackage
 		EAttribute XTEND_IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getXtendImport_ImportedNamespace();
 
 		/**
-		 * The meta object literal for the '<em><b>Wildcard</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute XTEND_IMPORT__WILDCARD = eINSTANCE.getXtendImport_Wildcard();
+		EAttribute XTEND_IMPORT__STATIC = eINSTANCE.getXtendImport_Static();
+
+		/**
+		 * The meta object literal for the '<em><b>Extension</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XTEND_IMPORT__EXTENSION = eINSTANCE.getXtendImport_Extension();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl <em>Xtend Class</em>}' class.

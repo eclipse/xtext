@@ -15,7 +15,9 @@ import org.eclipse.xtext.xtend2.xtend2.RichStringElseIf;
 import org.eclipse.xtext.xtend2.xtend2.RichStringIf;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.eclipse.xtext.xtend2.xtend2.XtendImport;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 public class ParserTest extends AbstractXtend2TestCase {
@@ -298,5 +300,47 @@ public class ParserTest extends AbstractXtend2TestCase {
 		assertTrue(rsIf.getElse()==null);
 		
 		assertTrue(richString.getElements().get(2) instanceof RichStringLiteral); 
+	}
+	
+	public void testImport_01() throws Exception {
+		XtendImport importDeclaration = importDeclaration("");
+		assertNull(importDeclaration);
+	}
+	
+	public void testImport_02() throws Exception {
+		XtendImport importDeclaration = importDeclaration("import java . util . /*comment*/ List");
+		assertNotNull(importDeclaration);
+		assertEquals("java.util.List", importDeclaration.getImportedNamespace());
+		assertEquals("java.util.List", importDeclaration.getImportedTypeName());
+		assertFalse(importDeclaration.isWildcard());
+		assertFalse(importDeclaration.isStatic());
+		assertFalse(importDeclaration.isExtension());
+	}
+	
+	public void testImport_03() throws Exception {
+		XtendImport importDeclaration = importDeclaration("import static java.util.Collections. * // foobar");
+		assertNotNull(importDeclaration);
+		assertEquals("java.util.Collections.*", importDeclaration.getImportedNamespace());
+		assertEquals("java.util.Collections", importDeclaration.getImportedTypeName());
+		assertTrue(importDeclaration.isWildcard());
+		assertTrue(importDeclaration.isStatic());
+		assertFalse(importDeclaration.isExtension());
+	}
+	
+	public void testImport_04() throws Exception {
+		XtendImport importDeclaration = importDeclaration("import static extension java.lang.reflect.\nArrays");
+		assertNotNull(importDeclaration);
+		assertEquals("java.lang.reflect.Arrays", importDeclaration.getImportedNamespace());
+		assertEquals("java.lang.reflect.Arrays", importDeclaration.getImportedTypeName());
+		assertFalse(importDeclaration.isWildcard());
+		assertTrue(importDeclaration.isStatic());
+		assertTrue(importDeclaration.isExtension());
+	}
+	
+	protected XtendImport importDeclaration(String importAsString) throws Exception {
+		XtendFile file = file(importAsString + "\nclass Foo{}");
+		if (file.getImports().isEmpty())
+			return null;
+		return file.getImports().get(0);
 	}
 }

@@ -29,34 +29,36 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	public void testSpreadOperator_02() {
 	}
 	
-	
 	//TODO FIX US
 	
 	@Override
 	public void testIfExpression_withThrowExpression_00() {
 	}
+	
 	@Override
 	public void testThrowInBlock() {
 	}
+	
 	@Override
 	public void testThrowInBlock_01() {
 	}
+	
 	@Override
 	public void testTryCatch_WithThrows() {
 	}
+	
 	@Override
 	public void testThrowExpression_02() {
 	}
+	
 	@Override
 	public void testThrowExpression_03() {
 	}
+	
 	@Override
 	public void testThrowExpression_04() {
 	}
-	@Override
-	public void testUpToOperator() throws Exception {
-	}
-	
+
 	@Override
 	public void testOverriddenLocalVariables() throws Exception {
 	}
@@ -64,77 +66,13 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	@Override
 	public void testOverriddenLocalVariables_0() throws Exception {
 	}
-	
-	@Override
-	public void testFeatureCall_02() {
-	}
-	
+
 	@Override
 	public void testFeatureCall_04() {
 	}
 	
 	@Override
-	public void testAssignment_07() {
-	}
-	
-	@Override
-	public void testAssignment_08() {
-	}
-	
-	@Override
-	public void testAssignment_11() {
-	}
-	
-	@Override
 	public void testAssignment_12() {
-	}
-	
-	@Override
-	public void testForLoop_01() {
-	}
-	
-	@Override
-	public void testForLoop_02() {
-	}
-	
-	@Override
-	public void testSwitchExpression_07() {
-	}
-	
-	@Override
-	public void testSwitchExpression_08() {
-	}
-	
-	@Override
-	public void testTryCatch_05() {
-	}
-	
-	@Override
-	public void testTryCatch_WithThrows_01() {
-	}
-	
-	@Override
-	public void testClosure_11() {
-	}
-	
-	@Override
-	public void testArrayConversion_01() {
-	}
-	
-	@Override
-	public void testArrayConversion_02() {
-	}
-	
-	@Override
-	public void testArrayConversion_03() {
-	}
-	
-	@Override
-	public void testArrayConversion_04() {
-	}
-	
-	@Override
-	public void testArrayConversion_05() {
 	}
 	
 	@Inject

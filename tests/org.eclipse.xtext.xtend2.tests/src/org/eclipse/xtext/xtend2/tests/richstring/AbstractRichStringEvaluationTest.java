@@ -355,168 +355,167 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 				"'''");
 	}
 
-//TODO FIX US
-//	public void testForLoop_01() throws Exception {
-//		assertOutput(
-//				"",
-//				"'''«FOR a: ''.toCharArray»foobar«ENDFOR»'''");
-//	}
-//	
-//	public void testForLoop_02() throws Exception {
-//		assertOutput(
-//				"",
-//				"'''\n" +
-//				"  «FOR a:''.toCharArray»\n" +
-//				"    foobar\n" +
-//				"  «ENDFOR»\n" +
-//				"'''");
-//	}
-//	
-//	public void testForLoop_03() throws Exception {
-//		assertOutput(
-//				"",
-//				"'''«FOR a:'1'.toCharArray»«FOR a:''.toCharArray»foobar«ENDFOR»«ENDFOR»'''");
-//	}
-//	
-//	public void testForLoop_04() throws Exception {
-//		assertOutput(
-//				"",
-//				"'''\n" +
-//				"  «FOR a:'1'.toCharArray»\n" +
-//				"    «FOR a:''.toCharArray»\n" +
-//				"      foobar\n" +
-//				"    «ENDFOR»\n" +
-//				"  «ENDFOR»\n" +
-//				"'''");
-//	}
-//	
-//	public void testForLoop_05() throws Exception {
-//		assertOutput(
-//				"foobar",
-//				"'''«FOR a:'1'.toCharArray»foobar«ENDFOR»'''");
-//	}
-//	
-//	public void testForLoop_06() throws Exception {
-//		assertOutput(
-//				"foobar\n",
-//				"'''\n" +
-//				"  «FOR a:'1'.toCharArray»\n" +
-//				"    foobar\n" +
-//				"  «ENDFOR»\n" +
-//				"'''");
-//	}
-//	
-//	public void testForLoop_07() throws Exception {
-//		assertOutput(
-//				"  foobar",
-//				"'''  «FOR a:'1'.toCharArray»«FOR a:'1'.toCharArray»foobar«ENDFOR»«ENDFOR»'''");
-//	}
-//	
-//	public void testForLoop_08() throws Exception {
-//		assertOutput(
-//				"foobar\n",
-//				"'''\n" +
-//				"  «FOR a:'1'.toCharArray»\n" +
-//				"    «FOR a:'1'.toCharArray»\n" +
-//				"      foobar\n" +
-//				"    «ENDFOR»\n" +
-//				"  «ENDFOR»\n" +
-//				"'''");
-//	}
-//	
-//	public void testForLoop_10() throws Exception {
-//		assertOutput(
-//				"foobar\n",
-//				"'''\n" +
-//				"  «FOR a:'1'.toCharArray»\n" +
-//				"    «FOR a:'1'.toCharArray»foobar«ENDFOR»\n" +
-//				"  «ENDFOR»\n" +
-//				"'''");
-//	}
-//	
-//	public void testForLoop_11() throws Exception {
-//		assertOutput(
-//				"foobarfoobar\n",
-//				"'''\n" +
-//				"  «FOR a:'1'.toCharArray»\n" +
-//				"    «FOR a:'12'.toCharArray»foobar«ENDFOR»\n" +
-//				"  «ENDFOR»\n" +
-//				"'''");
-//	}
-//	
-//	public void testForLoop_12() throws Exception {
-//		assertOutput(
-//				"foobar\n" +
-//				"foobar\n",
-//				"'''\n" +
-//				"  «FOR a:'12'.toCharArray»\n" +
-//				"    «FOR a:'1'.toCharArray»foobar«ENDFOR»\n" +
-//				"  «ENDFOR»\n" +
-//				"'''");
-//	}
-//	
-//	public void testForLoop_13() throws Exception {
-//		assertOutput(
-//				"foobar\n" +
-//				"foobar\n" +
-//				"foobar\n" +
-//				"foobar\n",
-//				"'''\n" +
-//				"  «FOR a:'12'.toCharArray»\n" +
-//				"    «FOR a:'12'.toCharArray»\n" +
-//				"      foobar\n" +
-//				"    «ENDFOR»\n" +
-//				"  «ENDFOR»\n" +
-//				"'''");
-//	}
-//	
-//	public void testForLoop_14() throws Exception {
-//		assertOutput(
-//				"foobar\n" +
-//				"foobar\n" +
-//				"foobar\n" +
-//				"foobar\n",
-//				"'''\n" +
-//				"  «FOR a:'1'.toCharArray»\n" +
-//				"    «FOR a:'12'.toCharArray»\n" +
-//				"      «'foobar\nfoobar'»\n" +
-//				"    «ENDFOR»\n" +
-//				"  «ENDFOR»\n" +
-//				"'''");
-//	}
-//	
-//	public void testForLoop_15() throws Exception {
-//		assertOutput(
-//				"  foobar\n" +
-//				"foobar\n" +
-//				"  foobar\n" +
-//				"foobar\n",
-//				"'''\n" +
-//				"  «FOR a:'12'.toCharArray»\n" +
-//				"    «FOR a:'1'.toCharArray»\n" +
-//				"      «'  foobar\nfoobar'»\n" +
-//				"    «ENDFOR»\n" +
-//				"  «ENDFOR»\n" +
-//				"'''");
-//	}
-//	
-//	public void testForLoop_16() throws Exception {
-//		assertOutput(
-//				"foobar\n" +
-//				"  foobar\n" +
-//				"foobar\n" +
-//				"  foobar\n" +
-//				"foobar\n" +
-//				"  foobar\n" +
-//				"foobar\n" +
-//				"  foobar\n",
-//				"'''\n" +
-//				"  «FOR a:'12'.toCharArray»\n" +
-//				"    «FOR a:'12'.toCharArray»\n" +
-//				"      «'foobar\n  foobar'»\n" +
-//				"    «ENDFOR»\n" +
-//				"  «ENDFOR»\n" +
-//				"'''");
-//	}
+	public void testForLoop_01() throws Exception {
+		assertOutput(
+				"",
+				"'''«FOR a: ''.toCharArray»foobar«ENDFOR»'''");
+	}
+	
+	public void testForLoop_02() throws Exception {
+		assertOutput(
+				"",
+				"'''\n" +
+				"  «FOR a:''.toCharArray»\n" +
+				"    foobar\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
+	
+	public void testForLoop_03() throws Exception {
+		assertOutput(
+				"",
+				"'''«FOR a:'1'.toCharArray»«FOR a:''.toCharArray»foobar«ENDFOR»«ENDFOR»'''");
+	}
+	
+	public void testForLoop_04() throws Exception {
+		assertOutput(
+				"",
+				"'''\n" +
+				"  «FOR a:'1'.toCharArray»\n" +
+				"    «FOR a:''.toCharArray»\n" +
+				"      foobar\n" +
+				"    «ENDFOR»\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
+	
+	public void testForLoop_05() throws Exception {
+		assertOutput(
+				"foobar",
+				"'''«FOR a:'1'.toCharArray»foobar«ENDFOR»'''");
+	}
+	
+	public void testForLoop_06() throws Exception {
+		assertOutput(
+				"foobar\n",
+				"'''\n" +
+				"  «FOR a:'1'.toCharArray»\n" +
+				"    foobar\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
+	
+	public void testForLoop_07() throws Exception {
+		assertOutput(
+				"  foobar",
+				"'''  «FOR a:'1'.toCharArray»«FOR a:'1'.toCharArray»foobar«ENDFOR»«ENDFOR»'''");
+	}
+	
+	public void testForLoop_08() throws Exception {
+		assertOutput(
+				"foobar\n",
+				"'''\n" +
+				"  «FOR a:'1'.toCharArray»\n" +
+				"    «FOR a:'1'.toCharArray»\n" +
+				"      foobar\n" +
+				"    «ENDFOR»\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
+	
+	public void testForLoop_10() throws Exception {
+		assertOutput(
+				"foobar\n",
+				"'''\n" +
+				"  «FOR a:'1'.toCharArray»\n" +
+				"    «FOR a:'1'.toCharArray»foobar«ENDFOR»\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
+	
+	public void testForLoop_11() throws Exception {
+		assertOutput(
+				"foobarfoobar\n",
+				"'''\n" +
+				"  «FOR a:'1'.toCharArray»\n" +
+				"    «FOR a:'12'.toCharArray»foobar«ENDFOR»\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
+	
+	public void testForLoop_12() throws Exception {
+		assertOutput(
+				"foobar\n" +
+				"foobar\n",
+				"'''\n" +
+				"  «FOR a:'12'.toCharArray»\n" +
+				"    «FOR a:'1'.toCharArray»foobar«ENDFOR»\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
+	
+	public void testForLoop_13() throws Exception {
+		assertOutput(
+				"foobar\n" +
+				"foobar\n" +
+				"foobar\n" +
+				"foobar\n",
+				"'''\n" +
+				"  «FOR a:'12'.toCharArray»\n" +
+				"    «FOR a:'12'.toCharArray»\n" +
+				"      foobar\n" +
+				"    «ENDFOR»\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
+	
+	public void testForLoop_14() throws Exception {
+		assertOutput(
+				"foobar\n" +
+				"foobar\n" +
+				"foobar\n" +
+				"foobar\n",
+				"'''\n" +
+				"  «FOR a:'1'.toCharArray»\n" +
+				"    «FOR a:'12'.toCharArray»\n" +
+				"      «'foobar\nfoobar'»\n" +
+				"    «ENDFOR»\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
+	
+	public void testForLoop_15() throws Exception {
+		assertOutput(
+				"  foobar\n" +
+				"foobar\n" +
+				"  foobar\n" +
+				"foobar\n",
+				"'''\n" +
+				"  «FOR a:'12'.toCharArray»\n" +
+				"    «FOR a:'1'.toCharArray»\n" +
+				"      «'  foobar\nfoobar'»\n" +
+				"    «ENDFOR»\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
+	
+	public void testForLoop_16() throws Exception {
+		assertOutput(
+				"foobar\n" +
+				"  foobar\n" +
+				"foobar\n" +
+				"  foobar\n" +
+				"foobar\n" +
+				"  foobar\n" +
+				"foobar\n" +
+				"  foobar\n",
+				"'''\n" +
+				"  «FOR a:'12'.toCharArray»\n" +
+				"    «FOR a:'12'.toCharArray»\n" +
+				"      «'foobar\n  foobar'»\n" +
+				"    «ENDFOR»\n" +
+				"  «ENDFOR»\n" +
+				"'''");
+	}
 	
 }

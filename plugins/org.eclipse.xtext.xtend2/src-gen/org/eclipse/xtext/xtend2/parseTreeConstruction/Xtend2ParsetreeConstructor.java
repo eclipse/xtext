@@ -318,11 +318,11 @@ protected class File_XtendClassAssignment_2 extends AssignmentToken  {
 /************ begin Rule Import ****************
  *
  * Import returns XtendImport:
- * 	"import" importedNamespace=QualifiedNameWithWildCard;
+ * 	"import" (static?="static" extension?="extension"?)? importedNamespace=QualifiedNameWithWildCard;
  *
  **/
 
-// "import" importedNamespace=QualifiedNameWithWildCard
+// "import" (static?="static" extension?="extension"?)? importedNamespace=QualifiedNameWithWildCard
 protected class Import_Group extends GroupToken {
 	
 	public Import_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -337,7 +337,7 @@ protected class Import_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Import_ImportedNamespaceAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Import_ImportedNamespaceAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -372,16 +372,39 @@ protected class Import_ImportKeyword_0 extends KeywordToken  {
 
 }
 
-// importedNamespace=QualifiedNameWithWildCard
-protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
+// (static?="static" extension?="extension"?)?
+protected class Import_Group_1 extends GroupToken {
 	
-	public Import_ImportedNamespaceAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Import_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getImportAccess().getGroup_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Import_ExtensionAssignment_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Import_StaticAssignment_1_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// static?="static"
+protected class Import_StaticAssignment_1_0 extends AssignmentToken  {
+	
+	public Import_StaticAssignment_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getImportAccess().getImportedNamespaceAssignment_1();
+		return grammarAccess.getImportAccess().getStaticAssignment_1_0();
 	}
 
     @Override
@@ -394,11 +417,81 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("static",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("static");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getImportAccess().getStaticStaticKeyword_1_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// extension?="extension"?
+protected class Import_ExtensionAssignment_1_1 extends AssignmentToken  {
+	
+	public Import_ExtensionAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getImportAccess().getExtensionAssignment_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Import_StaticAssignment_1_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("extension",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("extension");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getImportAccess().getExtensionExtensionKeyword_1_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// importedNamespace=QualifiedNameWithWildCard
+protected class Import_ImportedNamespaceAssignment_2 extends AssignmentToken  {
+	
+	public Import_ImportedNamespaceAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getImportAccess().getImportedNamespaceAssignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Import_Group_1(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Import_ImportKeyword_0(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("importedNamespace",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("importedNamespace");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_2_0(), value, null)) {
 			type = AssignmentType.DATATYPE_RULE_CALL;
-			element = grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0();
+			element = grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_2_0();
 			return obj;
 		}
 		return null;
