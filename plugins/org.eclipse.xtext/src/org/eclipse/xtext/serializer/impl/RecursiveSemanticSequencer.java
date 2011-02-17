@@ -19,6 +19,8 @@ import org.eclipse.xtext.serializer.acceptor.IRecursiveSemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 
+import com.google.inject.Inject;
+
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
@@ -93,10 +95,15 @@ public class RecursiveSemanticSequencer implements IRecursiveSemanitcSequencer {
 
 	protected ISemanticSequencer delegate;
 
-	public void createSequence(ISemanticSequencer delegate, EObject context, EObject semanticObject,
+	public void createSequence(EObject context, EObject semanticObject,
 			IRecursiveSemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		SemanitcAcceptor acceptor = new SemanitcAcceptor(delegate, sequenceAcceptor, errorAcceptor);
 		delegate.createSequence(context, semanticObject, acceptor, errorAcceptor);
+	}
+
+	@Inject
+	public void setSemanticSequencer(ISemanticSequencer delegate) {
+		this.delegate = delegate;
 	}
 
 }
