@@ -7,11 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer;
 
-import java.io.IOException;
-
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider;
 
 /**
