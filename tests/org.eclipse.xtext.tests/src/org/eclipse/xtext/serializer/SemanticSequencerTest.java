@@ -11,10 +11,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.serializer.IHiddenTokenSequencer.IHiddenTokenSequencerOwner;
+import org.eclipse.xtext.serializer.IHiddenTokenSequencer.PassThroughHiddenTokenSequencer;
+import org.eclipse.xtext.serializer.ISemanticSequencer.ISemanticSequencerOwner;
+import org.eclipse.xtext.serializer.ISyntacticSequencer.ISyntacticSequencerOwner;
+import org.eclipse.xtext.serializer.ISyntacticSequencer.PassThroughSyntacticSequencer;
 import org.eclipse.xtext.serializer.acceptor.DebugSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.impl.NodeModelSemanticSequencer;
-import org.eclipse.xtext.serializer.impl.RecursiveSemanticSequencer;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -32,14 +36,18 @@ public class SemanticSequencerTest extends AbstractXtextTests {
 		NodeModelSemanticSequencer nmSequencer = new NodeModelSemanticSequencer();
 		EObject context = nmSequencer.findContexts(model, null).iterator().next();
 		//		ISemanticSequencer semSequencer = get(ISemanticSequencer.class);
-		IRecursiveSemanitcSequencer recSequencer = get(IRecursiveSemanitcSequencer.class);
+		ISyntacticSequencer synSeq = get(PassThroughSyntacticSequencer.class);
+		IHiddenTokenSequencer hiddenSeq = get(PassThroughHiddenTokenSequencer.class);
+		IRecursiveSequencer recSequencer = get(IRecursiveSequencer.class);
+		((IHiddenTokenSequencerOwner) recSequencer).setHiddenTokenSequencer(hiddenSeq);
+		((ISyntacticSequencerOwner) hiddenSeq).setSyntacticSequencer(synSeq);
 		//		String actual = sequenceRecursively(sequencer, context, model, true);
 		//		String expected = sequenceRecursively(nmsequencer, context, model, true);
 		DebugSequenceAcceptor actual = new DebugSequenceAcceptor();
 		DebugSequenceAcceptor expected = new DebugSequenceAcceptor();
 		recSequencer
 				.createSequence( /*semSequencer,*/context, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
-		((RecursiveSemanticSequencer) recSequencer).setSemanticSequencer(nmSequencer);
+		((ISemanticSequencerOwner) synSeq).setSemanticSequencer(nmSequencer);
 		recSequencer.createSequence( /*nmSequencer,*/context, model, expected,
 				ISerializationDiagnostic.STDERR_ACCEPTOR);
 		//		String expected = sequenceRecursively(nmsequencer, context, model, true);
@@ -53,7 +61,11 @@ public class SemanticSequencerTest extends AbstractXtextTests {
 		EObject ctx = GrammarUtil.findRuleForName(getGrammarAccess().getGrammar(), "AbstractToken");
 		//		ISemanticSequencer semSequencer = get(ISemanticSequencer.class);
 		//		EObject ctx = semSequencer.findContexts(model, null).iterator().next();
-		IRecursiveSemanitcSequencer recSequencer = get(IRecursiveSemanitcSequencer.class);
+		ISyntacticSequencer synSeq = get(PassThroughSyntacticSequencer.class);
+		IHiddenTokenSequencer hiddenSeq = get(PassThroughHiddenTokenSequencer.class);
+		IRecursiveSequencer recSequencer = get(IRecursiveSequencer.class);
+		((IHiddenTokenSequencerOwner) recSequencer).setHiddenTokenSequencer(hiddenSeq);
+		((ISyntacticSequencerOwner) hiddenSeq).setSyntacticSequencer(synSeq);
 		DebugSequenceAcceptor actual = new DebugSequenceAcceptor();
 		recSequencer.createSequence( /* semSequencer, */ctx, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
 		//		String actual = sequenceRecursively(semSequencer, ctx, model, true);

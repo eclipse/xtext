@@ -18,7 +18,7 @@ import org.eclipse.xtext.serializer.IHiddenTokenSequencer.IHiddenTokenSequencerO
 import org.eclipse.xtext.serializer.IRecursiveSequencer;
 import org.eclipse.xtext.serializer.acceptor.IHiddenTokensAcceptor.HiddenTokensDelegator;
 import org.eclipse.xtext.serializer.acceptor.IRecursiveSequenceAcceptor;
-import org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.IEObjectSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 
 import com.google.inject.Inject;
@@ -28,7 +28,7 @@ import com.google.inject.Inject;
  */
 public class RecursiveSequencer implements IRecursiveSequencer, IHiddenTokenSequencerOwner {
 
-	protected static class SemanitcAcceptor extends HiddenTokensDelegator implements ISequenceAcceptor {
+	protected static class SemanitcAcceptor extends HiddenTokensDelegator implements IEObjectSequenceAcceptor {
 
 		protected IRecursiveSequenceAcceptor delegate;
 
