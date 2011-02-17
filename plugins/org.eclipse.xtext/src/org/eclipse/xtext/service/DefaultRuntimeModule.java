@@ -50,6 +50,7 @@ import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleLocalScopeProvider;
+import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.validation.CancelableDiagnostician;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxValidator;
@@ -107,7 +108,7 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 		return DefaultNodeModelFormatter.class;
 	}
 
-	public Class<? extends Serializer> bindSerializer() {
+	public Class<? extends ISerializer> bindISerializer() {
 		return Serializer.class;
 	}
 

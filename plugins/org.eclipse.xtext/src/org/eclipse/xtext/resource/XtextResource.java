@@ -31,8 +31,8 @@ import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
-import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
+import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.StringInputStream;
@@ -98,7 +98,7 @@ public class XtextResource extends ResourceImpl {
 	};
 
 	@Inject
-	private Serializer serializer;
+	private ISerializer serializer;
 
 	@Inject
 	private IReferableElementsUnloader unloader;
@@ -343,11 +343,11 @@ public class XtextResource extends ResourceImpl {
 		this.fragmentProvider = fragmentProvider;
 	}
 
-	public Serializer getSerializer() {
+	public ISerializer getSerializer() {
 		return serializer;
 	}
 
-	public void setSerializer(Serializer serializer) {
+	public void setSerializer(ISerializer serializer) {
 		this.serializer = serializer;
 	}
 

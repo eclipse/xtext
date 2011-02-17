@@ -21,6 +21,7 @@ import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
 import org.eclipse.xtext.parsetree.reconstr.impl.WriterTokenStream;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.resource.SaveOptions;
+import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 
 import com.google.inject.Inject;
@@ -29,7 +30,7 @@ import com.google.inject.Inject;
  * @author Moritz Eysholdt - Initial contribution and API
  * @author Jan Koehnlein
  */
-public class Serializer {
+public class Serializer implements ISerializer {
 	private IParseTreeConstructor parseTreeReconstructor;
 	private IFormatter formatter;
 	private IConcreteSyntaxValidator validator;
@@ -56,9 +57,9 @@ public class Serializer {
 		formatterTokenStream.flush();
 		return report;
 	}
-	
-	public TreeConstructionReport serialize(EObject obj, Writer writer, SaveOptions options) throws IOException {
-		return serialize(obj, new WriterTokenStream(writer), options);
+
+	public void serialize(EObject obj, Writer writer, SaveOptions options) throws IOException {
+		serialize(obj, new WriterTokenStream(writer), options);
 	}
 
 	public String serialize(EObject obj) {
@@ -74,17 +75,18 @@ public class Serializer {
 		}
 		return tokenStringBuffer.toString();
 	}
-	
+
 	@Deprecated
-	public TreeConstructionReport serialize(EObject obj, ITokenStream tokenStream, SerializerOptions options) throws IOException {
+	public TreeConstructionReport serialize(EObject obj, ITokenStream tokenStream, SerializerOptions options)
+			throws IOException {
 		return serialize(obj, tokenStream, options.toSaveOptions());
 	}
-	
+
 	@Deprecated
 	public TreeConstructionReport serialize(EObject obj, Writer writer, SerializerOptions options) throws IOException {
 		return serialize(obj, new WriterTokenStream(writer), options.toSaveOptions());
 	}
-	
+
 	@Deprecated
 	public String serialize(EObject obj, SerializerOptions options) {
 		return serialize(obj, options.toSaveOptions());
@@ -103,11 +105,11 @@ public class Serializer {
 	protected IParseTreeConstructor getParseTreeReconstructor() {
 		return parseTreeReconstructor;
 	}
-	
+
 	protected IFormatter getFormatter() {
 		return formatter;
 	}
-	
+
 	protected IConcreteSyntaxValidator getValidator() {
 		return validator;
 	}
