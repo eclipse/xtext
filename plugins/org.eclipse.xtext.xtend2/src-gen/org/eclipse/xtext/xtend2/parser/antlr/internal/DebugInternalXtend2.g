@@ -12,7 +12,9 @@ ruleFile :
 
 // Rule Import
 ruleImport :
-	'import' ruleQualifiedNameWithWildCard
+	'import' (
+		'static' 'extension'?
+	)? ruleQualifiedNameWithWildCard
 ;
 
 // Rule QualifiedNameWithWildCard

@@ -16,7 +16,7 @@ import com.google.inject.Singleton;
 
 /**
  * Registers the value converters for Xtend2, in particular the
- * converters for rich strings. 
+ * converters for rich strings and qualified names with wildcards.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @Singleton
@@ -52,6 +52,11 @@ public class Xtend2ValueConverterService extends XbaseValueConverterService {
 	@ValueConverter(rule = "RICH_TEXT")
 	public IValueConverter<String> getRichTextValueConverter() {
 		return richTextValueConverter;
+	}
+	
+	@ValueConverter(rule = "QualifiedNameWithWildCard")
+	public IValueConverter<String> getQualifiedNameWithWildCardConverter() {
+		return getQualifiedNameValueConverter();
 	}
 
 }

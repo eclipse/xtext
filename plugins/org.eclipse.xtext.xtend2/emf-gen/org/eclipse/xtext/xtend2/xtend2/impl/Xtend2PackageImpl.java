@@ -246,9 +246,19 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getXtendImport_Wildcard()
+	public EAttribute getXtendImport_Static()
 	{
 		return (EAttribute)xtendImportEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getXtendImport_Extension()
+	{
+		return (EAttribute)xtendImportEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -588,7 +598,8 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 
 		xtendImportEClass = createEClass(XTEND_IMPORT);
 		createEAttribute(xtendImportEClass, XTEND_IMPORT__IMPORTED_NAMESPACE);
-		createEAttribute(xtendImportEClass, XTEND_IMPORT__WILDCARD);
+		createEAttribute(xtendImportEClass, XTEND_IMPORT__STATIC);
+		createEAttribute(xtendImportEClass, XTEND_IMPORT__EXTENSION);
 
 		xtendClassEClass = createEClass(XTEND_CLASS);
 		createEAttribute(xtendClassEClass, XTEND_CLASS__NAME);
@@ -682,7 +693,12 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 
 		initEClass(xtendImportEClass, XtendImport.class, "XtendImport", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXtendImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, XtendImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getXtendImport_Wildcard(), ecorePackage.getEBoolean(), "wildcard", null, 0, 1, XtendImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXtendImport_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, XtendImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXtendImport_Extension(), ecorePackage.getEBoolean(), "extension", null, 0, 1, XtendImport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(xtendImportEClass, ecorePackage.getEBoolean(), "isWildcard", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(xtendImportEClass, ecorePackage.getEString(), "getImportedTypeName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(xtendClassEClass, XtendClass.class, "XtendClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXtendClass_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

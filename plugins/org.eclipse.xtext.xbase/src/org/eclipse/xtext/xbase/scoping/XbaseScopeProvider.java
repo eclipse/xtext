@@ -9,11 +9,9 @@ package org.eclipse.xtext.xbase.scoping;
 
 import static com.google.common.collect.Iterables.*;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -86,7 +84,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	private Provider<XFeatureCallSugarDescriptionProvider> sugarFeatureDescProvider;
 
 	@Inject
-	private Provider<StaticMethodsFeatureForTypeProvider> staticExtensionMethodsFeaturesForTypeProvider;
+	private Provider<StaticMethodsFeatureForTypeProvider> implicitStaticFeatures;
 
 	@Inject
 	private Provider<XAssignmentDescriptionProvider> assignmentFeatureDescProvider;
@@ -408,25 +406,30 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		}
 	}
 	
-	protected List<IJvmFeatureDescriptionProvider> getStaticFeatureDescriptionProviders(Notifier context, JvmDeclaredType contextType) {
-		final DefaultJvmFeatureDescriptionProvider result = defaultFeatureDescProvider.get();
-		final StaticMethodsFeatureForTypeProvider staticProvider = staticExtensionMethodsFeaturesForTypeProvider.get();
+	protected List<IJvmFeatureDescriptionProvider> getStaticFeatureDescriptionProviders(Resource context, JvmDeclaredType contextType) {
+		final StaticMethodsFeatureForTypeProvider staticProvider = newImplicitStaticFeaturesProvider();
 		staticProvider.setContext(context);
+
+		final DefaultJvmFeatureDescriptionProvider result = newDefaultFeatureDescProvider();
 		result.setContextType(contextType);
 		result.setFeaturesForTypeProvider(staticProvider);
-		return Collections.<IJvmFeatureDescriptionProvider>singletonList(result);
+		return Lists.<IJvmFeatureDescriptionProvider>newArrayList(result);
 	}
 
 	protected List<IJvmFeatureDescriptionProvider> getFeatureDescriptionProviders(JvmTypeReference type,
 			EObject expression, JvmDeclaredType currentContext, JvmIdentifiableElement implicitReceiver) {
-		final DefaultJvmFeatureDescriptionProvider provider1 = defaultFeatureDescProvider.get();
-		final XFeatureCallSugarDescriptionProvider provider2 = sugarFeatureDescProvider.get();
-		final DefaultJvmFeatureDescriptionProvider provider3 = defaultFeatureDescProvider.get();
-		final StaticMethodsFeatureForTypeProvider featuresForTypeProvider = staticExtensionMethodsFeaturesForTypeProvider.get();
-		featuresForTypeProvider.setContext(expression);
-		provider3.setFeaturesForTypeProvider(featuresForTypeProvider);
-		final XFeatureCallSugarDescriptionProvider provider4 = sugarFeatureDescProvider.get();
-		provider4.setFeaturesForTypeProvider(featuresForTypeProvider);
+		final DefaultJvmFeatureDescriptionProvider provider1 = newDefaultFeatureDescProvider();
+		final XFeatureCallSugarDescriptionProvider provider2 = newSugarDescriptionProvider();
+		
+		final StaticMethodsFeatureForTypeProvider staticExtensionsProvider = newImplicitStaticFeaturesProvider();
+		staticExtensionsProvider.setContext(expression.eResource());
+		
+		final DefaultJvmFeatureDescriptionProvider provider3 = newDefaultFeatureDescProvider();
+		provider3.setFeaturesForTypeProvider(staticExtensionsProvider);
+		
+		final XFeatureCallSugarDescriptionProvider provider4 = newSugarDescriptionProvider();
+		provider4.setFeaturesForTypeProvider(staticExtensionsProvider);
+		
 		provider1.setContextType(currentContext);
 		provider1.setImplicitReceiver(implicitReceiver);
 		provider2.setContextType(currentContext);
@@ -435,8 +438,14 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		provider3.setImplicitReceiver(implicitReceiver);
 		provider4.setContextType(currentContext);
 		provider4.setImplicitReceiver(implicitReceiver);
-		List<IJvmFeatureDescriptionProvider> result = Lists.<IJvmFeatureDescriptionProvider>newArrayList(provider1,provider2,provider3,provider4);
+		
+		List<IJvmFeatureDescriptionProvider> result = Lists.<IJvmFeatureDescriptionProvider> newArrayList(
+				provider1, provider2, provider3, provider4);
 		return result;
+	}
+
+	protected StaticMethodsFeatureForTypeProvider newImplicitStaticFeaturesProvider() {
+		return implicitStaticFeatures.get();
 	}
 
 	protected List<IJvmFeatureDescriptionProvider> getFeatureDescriptionProvidersForAssignment(
@@ -462,5 +471,13 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	protected IEObjectDescription createEObjectDescription(XVariableDeclaration varDecl) {
 		return EObjectDescription.create(QualifiedName.create(varDecl.getName()), varDecl);
 	}
-
+	
+	protected DefaultJvmFeatureDescriptionProvider newDefaultFeatureDescProvider() {
+		return defaultFeatureDescProvider.get();
+	}
+	
+	protected XFeatureCallSugarDescriptionProvider newSugarDescriptionProvider() {
+		return sugarFeatureDescProvider.get();
+	}
+	
 }

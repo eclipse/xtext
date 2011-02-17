@@ -66,24 +66,44 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Import");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cImportedNamespaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Assignment cStaticAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final Keyword cStaticStaticKeyword_1_0_0 = (Keyword)cStaticAssignment_1_0.eContents().get(0);
+		private final Assignment cExtensionAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final Keyword cExtensionExtensionKeyword_1_1_0 = (Keyword)cExtensionAssignment_1_1.eContents().get(0);
+		private final Assignment cImportedNamespaceAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cImportedNamespaceQualifiedNameWithWildCardParserRuleCall_2_0 = (RuleCall)cImportedNamespaceAssignment_2.eContents().get(0);
 		
 		//Import returns XtendImport:
-		//	"import" importedNamespace=QualifiedNameWithWildCard;
+		//	"import" (static?="static" extension?="extension"?)? importedNamespace=QualifiedNameWithWildCard;
 		public ParserRule getRule() { return rule; }
 
-		//"import" importedNamespace=QualifiedNameWithWildCard
+		//"import" (static?="static" extension?="extension"?)? importedNamespace=QualifiedNameWithWildCard
 		public Group getGroup() { return cGroup; }
 
 		//"import"
 		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
 
+		//(static?="static" extension?="extension"?)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//static?="static"
+		public Assignment getStaticAssignment_1_0() { return cStaticAssignment_1_0; }
+
+		//"static"
+		public Keyword getStaticStaticKeyword_1_0_0() { return cStaticStaticKeyword_1_0_0; }
+
+		//extension?="extension"?
+		public Assignment getExtensionAssignment_1_1() { return cExtensionAssignment_1_1; }
+
+		//"extension"
+		public Keyword getExtensionExtensionKeyword_1_1_0() { return cExtensionExtensionKeyword_1_1_0; }
+
 		//importedNamespace=QualifiedNameWithWildCard
-		public Assignment getImportedNamespaceAssignment_1() { return cImportedNamespaceAssignment_1; }
+		public Assignment getImportedNamespaceAssignment_2() { return cImportedNamespaceAssignment_2; }
 
 		//QualifiedNameWithWildCard
-		public RuleCall getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0() { return cImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0; }
+		public RuleCall getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_2_0() { return cImportedNamespaceQualifiedNameWithWildCardParserRuleCall_2_0; }
 	}
 
 	public class QualifiedNameWithWildCardElements extends AbstractParserRuleElementFinder {
@@ -979,7 +999,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Import returns XtendImport:
-	//	"import" importedNamespace=QualifiedNameWithWildCard;
+	//	"import" (static?="static" extension?="extension"?)? importedNamespace=QualifiedNameWithWildCard;
 	public ImportElements getImportAccess() {
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
 	}
