@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.junit;
+package org.eclipse.xtext.junit4;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -19,7 +19,7 @@ import java.lang.annotation.Target;
  * Class level annotation to configure an {@link IInjectorProvider} to resolve dependencies via Guice.
  * 
  * @author Michael Clay - Initial contribution and API
- * @see org.eclipse.xtext.junit.model.IInjectorProvider
+ * @see org.eclipse.xtext.junit4.model.IInjectorProvider
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE})

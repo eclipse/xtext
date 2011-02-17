@@ -5,13 +5,26 @@ Bundle-SymbolicName: org.eclipse.xtext.junit4
 Bundle-Version: 2.0.0.qualifier
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.xtend;bundle-version="1.1.0";resolution:=optional,
- org.eclipse.xtext;bundle-version="2.0.0";resolution:=optional,
- org.eclipse.xtend.typesystem.emf;bundle-version="1.0.1";resolution:=optional
-Export-Package: org.eclipse.xtext.junit,
- org.eclipse.xtext.junit.util,
- org.eclipse.xtext.junit.validation
-Import-Package: org.apache.log4j;version="1.2.15",
+Export-Package: org.eclipse.xtext.junit4,
+ org.eclipse.xtext.junit4.util,
+ org.eclipse.xtext.junit4.validation
+Import-Package: com.google.common.base,
+ com.google.common.collect,
+ com.google.inject,
+ com.google.inject.name,
+ org.eclipse.emf.common.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.impl,
+ org.eclipse.emf.ecore.resource,
+ org.eclipse.emf.ecore.util,
+ org.eclipse.emf.ecore.xmi.impl,
+ org.eclipse.xtext,
+ org.eclipse.xtext.diagnostics,
+ org.eclipse.xtext.naming,
+ org.eclipse.xtext.resource,
+ org.eclipse.xtext.resource.impl,
+ org.eclipse.xtext.util,
+ org.eclipse.xtext.validation,
  org.junit;version="4.5.0",
  org.junit.runners;version="4.5.0",
  org.junit.runners.model;version="4.5.0"
