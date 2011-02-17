@@ -82,8 +82,9 @@ public class EmitterNodeIterator implements Iterator<INode> {
 					if (!passAbsorber && isAbsorber(next))
 						break;
 					if (allowHidden
-							&& (GrammarUtil.isDatatypeRuleCall(next.getGrammarElement()) || GrammarUtil
-									.isEnumRuleCall(next.getGrammarElement()))) {
+							&& next instanceof ICompositeNode
+							&& (GrammarUtil.isDatatypeRuleCall(next.getGrammarElement())
+									|| GrammarUtil.isEnumRuleCall(next.getGrammarElement()) || next.getGrammarElement() instanceof CrossReference)) {
 						NodeIterator ni = new NodeIterator(next);
 						while (ni.hasNext()) {
 							INode next2 = ni.next();

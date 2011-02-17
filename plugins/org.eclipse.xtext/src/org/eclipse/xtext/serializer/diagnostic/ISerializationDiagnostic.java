@@ -18,6 +18,44 @@ public interface ISerializationDiagnostic {
 		void accept(ISerializationDiagnostic diagnostic);
 	}
 
+	public class ExceptionDiagnostic implements ISerializationDiagnostic {
+
+		protected Throwable exception;
+
+		public ExceptionDiagnostic(Throwable exception) {
+			super();
+			this.exception = exception;
+		}
+
+		public boolean breaksSyntax() {
+			return false;
+		}
+
+		public Throwable getException() {
+			return exception;
+		}
+
+		public String getMessage() {
+			return exception.getMessage();
+		}
+
+		public EObject getSemanitcObject() {
+			return null;
+		}
+
+	}
+
+	public class ExceptionThrowingAcceptor implements Acceptor {
+		public void accept(ISerializationDiagnostic diagnostic) {
+			if (diagnostic == null || diagnostic.getMessage() == null)
+				throw new RuntimeException("Something went wrong during serialization");
+			else if (diagnostic.getException() != null)
+				throw new RuntimeException(diagnostic.getException());
+			else
+				throw new RuntimeException(diagnostic.getMessage());
+		}
+	}
+
 	public class StdErrAcceptor implements Acceptor {
 		public void accept(ISerializationDiagnostic diagnostic) {
 			if (diagnostic == null || diagnostic.getMessage() == null)
@@ -27,9 +65,13 @@ public interface ISerializationDiagnostic {
 		}
 	}
 
+	public Acceptor EXCEPTION_THROWING_ACCEPTOR = new ExceptionThrowingAcceptor();
+
 	public Acceptor STDERR_ACCEPTOR = new StdErrAcceptor();
 
 	boolean breaksSyntax();
+
+	Throwable getException();
 
 	String getMessage();
 

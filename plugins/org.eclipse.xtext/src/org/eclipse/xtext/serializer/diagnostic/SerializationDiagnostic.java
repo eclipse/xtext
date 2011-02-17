@@ -52,6 +52,10 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 		return true;
 	}
 
+	public Throwable getException() {
+		return null;
+	}
+
 	public String getMessage() {
 		return "foo bar";
 	}
