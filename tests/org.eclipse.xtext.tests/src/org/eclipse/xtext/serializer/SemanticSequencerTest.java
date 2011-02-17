@@ -14,6 +14,7 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.serializer.acceptor.DebugSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.impl.NodeModelSemanticSequencer;
+import org.eclipse.xtext.serializer.impl.RecursiveSemanticSequencer;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -36,8 +37,11 @@ public class SemanticSequencerTest extends AbstractXtextTests {
 		//		String expected = sequenceRecursively(nmsequencer, context, model, true);
 		DebugSequenceAcceptor actual = new DebugSequenceAcceptor();
 		DebugSequenceAcceptor expected = new DebugSequenceAcceptor();
-		recSequencer.createSequence(semSequencer, context, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
-		recSequencer.createSequence(nmSequencer, context, model, expected, ISerializationDiagnostic.STDERR_ACCEPTOR);
+		recSequencer
+				.createSequence( /*semSequencer,*/context, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
+		((RecursiveSemanticSequencer) recSequencer).setSemanticSequencer(nmSequencer);
+		recSequencer.createSequence( /*nmSequencer,*/context, model, expected,
+				ISerializationDiagnostic.STDERR_ACCEPTOR);
 		//		String expected = sequenceRecursively(nmsequencer, context, model, true);
 		assertEquals(expected.toString(), actual.toString());
 	}
@@ -51,7 +55,7 @@ public class SemanticSequencerTest extends AbstractXtextTests {
 		//		EObject ctx = semSequencer.findContexts(model, null).iterator().next();
 		IRecursiveSemanitcSequencer recSequencer = get(IRecursiveSemanitcSequencer.class);
 		DebugSequenceAcceptor actual = new DebugSequenceAcceptor();
-		recSequencer.createSequence(semSequencer, ctx, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
+		recSequencer.createSequence( /* semSequencer, */ctx, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
 		//		String actual = sequenceRecursively(semSequencer, ctx, model, true);
 		//		System.out.println(actual);
 		assertNotNull(actual);
