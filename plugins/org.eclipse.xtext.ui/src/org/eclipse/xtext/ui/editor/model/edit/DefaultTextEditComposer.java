@@ -22,6 +22,7 @@ import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.resource.SaveOptions;
+import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.util.ReplaceRegion;
 
 import com.google.common.base.Predicate;
@@ -36,7 +37,7 @@ import com.google.inject.Inject;
 public class DefaultTextEditComposer extends EContentAdapter implements ITextEditComposer {
 
 	@Inject
-	private Serializer serializer;
+	private ISerializer serializer;
 
 	private Resource resource;
 	private int resourceSize;
@@ -173,7 +174,7 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 	/**
 	 * If used in a non-Guice environment, we need to be able to set this.
 	 */
-	public void setSerializerUtil(Serializer serializerUtil) {
+	public void setSerializerUtil(ISerializer serializerUtil) {
 		this.serializer = serializerUtil;
 	}
 }

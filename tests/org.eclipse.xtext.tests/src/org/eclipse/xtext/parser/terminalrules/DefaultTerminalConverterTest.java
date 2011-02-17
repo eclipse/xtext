@@ -12,7 +12,7 @@ import java.util.Date;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.EcoreTerminalsTestLanguageFactory;
 import org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.Model;
-import org.eclipse.xtext.parsetree.reconstr.Serializer;
+import org.eclipse.xtext.serializer.ISerializer;
 
 import com.ibm.icu.text.SimpleDateFormat;
 
@@ -35,7 +35,7 @@ public class DefaultTerminalConverterTest extends AbstractXtextTests {
 		model.getIntValues().add(intValue);
 		model.getDoubleValues().add(doubleValue);
 		model.getDateValues().add(dateValue);
-		Serializer serializer = get(Serializer.class);
+		ISerializer serializer = get(ISerializer.class);
 		String modelAsString = serializer.serialize(model);
 		
 		Model reparsedModel = (Model) getModel(modelAsString);

@@ -39,11 +39,11 @@ import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
-import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -160,8 +160,8 @@ public abstract class AbstractXtextTests extends TestCase implements ResourceLoa
 		return getInjector().getInstance(IValueConverterService.class);
 	}
 
-	protected Serializer getSerializer() {
-		return getInjector().getInstance(Serializer.class);
+	protected ISerializer getSerializer() {
+		return getInjector().getInstance(ISerializer.class);
 	}
 	
 	protected INodeModelFormatter getNodeModelFormatter() {
