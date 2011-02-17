@@ -32,7 +32,7 @@ public class SerializationErrorTest extends AbstractXtextTests {
 		TokenStringBuffer b = new TokenStringBuffer();
 		TreeConstructionReport r;
 		try {
-			r = getSerializer().serialize(obj, b, SaveOptions.newBuilder().format().noValidation().getOptions());
+			r = get(Serializer.class).serialize(obj, b, SaveOptions.newBuilder().format().noValidation().getOptions());
 		} catch (XtextSerializationException e) {
 			r = e.getReport();
 		}
