@@ -144,15 +144,33 @@ public class GrammarUtil {
 	public static boolean isParserRuleCall(EObject grammarElement) {
 		if (grammarElement instanceof RuleCall) {
 			AbstractRule calledRule = ((RuleCall) grammarElement).getRule();
-			return calledRule != null && (calledRule instanceof ParserRule);
+			return calledRule != null && calledRule instanceof ParserRule;
+		}
+		return false;
+	}
+
+	public static boolean isParserParserRuleCall(EObject grammarElement) {
+		if (grammarElement instanceof RuleCall) {
+			AbstractRule calledRule = ((RuleCall) grammarElement).getRule();
+			return calledRule != null && calledRule instanceof ParserRule
+					&& calledRule.getType().getClassifier() instanceof EClass;
+		}
+		return false;
+	}
+
+	public static boolean isDatatypeRuleCall(EObject grammarElement) {
+		if (grammarElement instanceof RuleCall) {
+			AbstractRule calledRule = ((RuleCall) grammarElement).getRule();
+			return calledRule != null && calledRule instanceof ParserRule
+					&& calledRule.getType().getClassifier() instanceof EDataType;
 		}
 		return false;
 	}
 	
-	public static boolean isDatatypeRuleCall(EObject grammarElement) {
+	public static boolean isEnumRuleCall(EObject grammarElement) {
 		if (grammarElement instanceof RuleCall) {
 			AbstractRule calledRule = ((RuleCall) grammarElement).getRule();
-			return calledRule != null && calledRule.getType().getClassifier() instanceof EDataType;
+			return calledRule != null && calledRule instanceof EnumRule;
 		}
 		return false;
 	}
@@ -266,6 +284,10 @@ public class GrammarUtil {
 	
 	public static boolean isAssignedAction(EObject e) {
 		return e instanceof Action && ((Action) e).getFeature() != null;
+	}
+	
+	public static boolean isUnassignedAction(EObject e) {
+		return e instanceof Action && ((Action) e).getFeature() == null;
 	}
 
 	public static Set<String> getAllKeywords(Grammar g) {
