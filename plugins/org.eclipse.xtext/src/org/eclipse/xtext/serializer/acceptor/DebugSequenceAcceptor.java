@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
@@ -27,8 +28,11 @@ import com.google.inject.internal.Join;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class DebugSequenceAcceptor implements ISyntacticSequenceAcceptor, IRecursiveSyntacticSequenceAcceptor,
-		ISemanticSequenceAcceptor {
+public class DebugSequenceAcceptor implements ISequenceAcceptor, IRecursiveSequenceAcceptor, ISemanticSequenceAcceptor {
+
+	protected final static int COLS = 5;
+
+	protected static final INode NO_NODE = new LeafNode();
 
 	protected int indentation = 0;
 
@@ -87,6 +91,10 @@ public class DebugSequenceAcceptor implements ISyntacticSequenceAcceptor, IRecur
 		add(titles.doSwitch(terminalRC), token, "'" + value + "'", index, node);
 	}
 
+	public void acceptComment(AbstractRule rule, String token, ILeafNode node) {
+		add(titles.doSwitch(rule), token, "", -1, node);
+	}
+
 	public void acceptUnassignedAction(Action action) {
 		add(titles.doSwitch(action), "", "", -1, NO_NODE);
 	}
@@ -107,7 +115,9 @@ public class DebugSequenceAcceptor implements ISyntacticSequenceAcceptor, IRecur
 		add(titles.doSwitch(terminalRC), "'" + value + "'", "", -1, node);
 	}
 
-	protected final static int COLS = 5;
+	public void acceptWhitespace(AbstractRule rule, String token, ILeafNode node) {
+		add(titles.doSwitch(rule), token, "", -1, node);
+	}
 
 	protected void add(String grammar, String token, String value, int index, INode node) {
 		StringBuilder buf = new StringBuilder();
@@ -124,8 +134,6 @@ public class DebugSequenceAcceptor implements ISyntacticSequenceAcceptor, IRecur
 		if (printInstantly)
 			System.out.println(Join.join("\t", row));
 	}
-
-	protected static final INode NO_NODE = new LeafNode();
 
 	public void enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
 		add(titles.doSwitch(action) + " {", semanticChild.eClass().getName(), "", -1, node);

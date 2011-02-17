@@ -4,7 +4,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * This interface is a call-back that is being invoked when the ISequenceParser walks through a sequence of tokens.
@@ -14,7 +13,7 @@ import org.eclipse.xtext.nodemodel.INode;
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface ISyntacticSequenceAcceptor extends IAssignedTokenSequenceAcceptor, IUnassignedTokenSequenceAcceptor {
+public interface ISyntacticSequenceAcceptor extends IUnassignedTokenSequenceAcceptor {
 
 	void acceptAssignedAction(Action action, EObject semanticChild, ICompositeNode node);
 
@@ -22,7 +21,7 @@ public interface ISyntacticSequenceAcceptor extends IAssignedTokenSequenceAccept
 
 	void enterUnassignedParserRuleCall(RuleCall rc);
 
-	void finish(INode node);
+	void finish();
 
 	void leaveUnssignedParserRuleCall(RuleCall rc);
 

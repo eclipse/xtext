@@ -16,7 +16,35 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IUnassignedTokenSequenceAcceptor {
+public interface IUnassignedTokenSequenceAcceptor extends IAssignedTokenSequenceAcceptor {
+
+	public abstract class UnassignedTokenDelegator extends AssignedTokenDelegator implements
+			IUnassignedTokenSequenceAcceptor {
+
+		public void acceptUnassignedAction(Action action) {
+			delegate().acceptUnassignedAction(action);
+		}
+
+		public void acceptUnassignedDatatype(RuleCall datatypeRC, String token, ICompositeNode node) {
+			delegate().acceptUnassignedDatatype(datatypeRC, token, node);
+		}
+
+		public void acceptUnassignedEnum(RuleCall enumRC, String token, ICompositeNode node) {
+			delegate().acceptUnassignedEnum(enumRC, token, node);
+		}
+
+		public void acceptUnassignedKeyword(Keyword keyword, ILeafNode node) {
+			delegate().acceptUnassignedKeyword(keyword, node);
+		}
+
+		public void acceptUnassignedTerminal(RuleCall terminalRC, String token, ILeafNode node) {
+			delegate().acceptUnassignedTerminal(terminalRC, token, node);
+		}
+
+		@Override
+		protected abstract IUnassignedTokenSequenceAcceptor delegate();
+	}
+
 	void acceptUnassignedAction(Action action);
 
 	void acceptUnassignedDatatype(RuleCall datatypeRC, String token, ICompositeNode node);
