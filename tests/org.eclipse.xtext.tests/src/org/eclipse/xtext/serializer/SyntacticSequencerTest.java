@@ -27,7 +27,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
 import org.eclipse.xtext.serializer.IHiddenTokenSequencer.IHiddenTokenSequencerOwner;
-import org.eclipse.xtext.serializer.IHiddenTokenSequencer.NullHiddenTokenSequencer;
+import org.eclipse.xtext.serializer.IHiddenTokenSequencer.PassThroughHiddenTokenSequencer;
 import org.eclipse.xtext.serializer.acceptor.DebugSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.impl.EmitterNodeIterator;
@@ -73,7 +73,7 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 		EObject context = nmSequencer.findContexts(model, null).iterator().next();
 		IRecursiveSequencer recSequencer = get(IRecursiveSequencer.class);
 		DebugSequenceAcceptor actual = new NoEnterNodesDebugSequenceAcceptor(false);
-		((IHiddenTokenSequencerOwner) recSequencer).setHiddenTokenSequencer(get(NullHiddenTokenSequencer.class));
+		((IHiddenTokenSequencerOwner) recSequencer).setHiddenTokenSequencer(get(PassThroughHiddenTokenSequencer.class));
 		recSequencer.createSequence(context, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
 		//		System.out.println(actual);
 		//		System.out.println(NodeModelUtils.compactDump(NodeModelUtils.findActualNodeFor(model), false));
@@ -86,7 +86,7 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 				.getResource(URI.createURI("classpath:/org/eclipse/xtext/Xtext.xtext"), true).getContents().get(0);
 		IRecursiveSequencer recSequencer = get(IRecursiveSequencer.class);
 		DebugSequenceAcceptor actual = new NoEnterNodesDebugSequenceAcceptor(false);
-		((IHiddenTokenSequencerOwner) recSequencer).setHiddenTokenSequencer(get(NullHiddenTokenSequencer.class));
+		((IHiddenTokenSequencerOwner) recSequencer).setHiddenTokenSequencer(get(PassThroughHiddenTokenSequencer.class));
 		recSequencer.createSequence(/*syn, semSequencer,*/getGrammarAccess().getGrammar().getRules().get(0), model,
 				actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
 		//		System.out.println(actual);
