@@ -10,7 +10,7 @@ package org.eclipse.xtext.xbase.tests.serializer;
 import java.io.IOException;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.parsetree.reconstr.Serializer;
+import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XIfExpression;
@@ -38,7 +38,7 @@ public class SerializerTest extends AbstractXbaseTestCase {
 		instanceOfExpression.setType(casted.getType().getType());
 		resource.getContents().clear();
 		resource.getContents().add(instanceOfExpression);
-		Serializer serializer = get(Serializer.class);
+		ISerializer serializer = get(ISerializer.class);
 		String string = serializer.serialize(instanceOfExpression);
 		assertEquals("[ | \"value\" ] instanceof String", string);
 	}
@@ -58,7 +58,7 @@ public class SerializerTest extends AbstractXbaseTestCase {
 		instanceOfExpression.setType(casted.getType().getType());
 		resource.getContents().clear();
 		resource.getContents().add(instanceOfExpression);
-		Serializer serializer = get(Serializer.class);
+		ISerializer serializer = get(ISerializer.class);
 		String string = serializer.serialize(instanceOfExpression);
 		// TODO expectation is wrong
 		assertEquals("if ( false ) \"value\" instanceof String", string);
