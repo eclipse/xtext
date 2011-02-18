@@ -8,20 +8,18 @@
 package org.eclipse.xtext.xtend2.ui.tests.builder;
 
 import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
-import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.io.IOException;
 import java.io.InputStream;
 
+import junit.framework.Test;
+
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
+import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
 
 import com.google.inject.Inject;
 
@@ -33,26 +31,30 @@ public class Xtend2BuilderParticipantTest extends AbstractXtend2UITestCase {
 	@Inject
 	private IWorkspace workspace;
 	
+	@Inject
+	private WorkbenchTestHelper testHelper;
+	
+	public static Test suite() {
+		return WorkbenchTestHelper.suite(Xtend2BuilderParticipantTest.class);
+	}
+	
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
-		IResourcesSetupUtil.cleanWorkspace();
+		testHelper.tearDown();
 	}
 	
 	public void testBuild() throws Exception {
-		IJavaProject javaProject = createJavaProject("test");
-		IProject project = javaProject.getProject();
-		addNature(project, XtextProjectHelper.NATURE_ID);
-		IFile sourceFile = createFile("/test/src/test/Test." + getFileExtension(), "package test\nclass Test {}");
+		IFile sourceFile = testHelper.createFile("test/Test", "package test\nclass Test {}");
 		sourceFile.setCharset(getNonDefaultEncoding(), null);
 		waitForAutoBuild();
 
-		IFile targetFile = project.getFile("/xtend2-gen/test/Test.java");
+		IFile targetFile = testHelper.getProject().getFile("/xtend2-gen/test/Test.java");
 		assertTrue(targetFile.exists());
 		assertFalse(isEmpty(targetFile));
 		assertEquals(getNonDefaultEncoding(), targetFile.getCharset());
 		
-		IFile classFile = project.getFile("/bin/test/Test.class");
+		IFile classFile = testHelper.getProject().getFile("/bin/test/Test.class");
 		assertTrue(classFile.exists());
 		assertFalse(isEmpty(classFile));
 		

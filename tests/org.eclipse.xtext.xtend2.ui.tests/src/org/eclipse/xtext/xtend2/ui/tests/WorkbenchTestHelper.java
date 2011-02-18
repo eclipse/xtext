@@ -28,6 +28,9 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
@@ -40,17 +43,22 @@ import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
+import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xtend2.ui.internal.Xtend2Activator;
+import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
+@Singleton
 public class WorkbenchTestHelper extends Assert {
 
 	public static final String TESTPROJECT_NAME = "test.project";
@@ -69,6 +77,9 @@ public class WorkbenchTestHelper extends Assert {
 
 	@Inject
 	private IWorkspace workspace;
+
+	@Inject
+	private IResourceSetProvider resourceSetProvider;
 
 	public void tearDown() throws Exception {
 		workbench.getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
@@ -114,11 +125,29 @@ public class WorkbenchTestHelper extends Assert {
 		getFiles().add(file);
 		return file;
 	}
-
+	
 	public String getFileExtension() {
 		return fileExtensionProvider.getFileExtensions().iterator().next();
 	}
+	
+	public URI uri(IFile file) {
+		return URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+	}
+	
+	public XtendFile xtendFile(String fileName, String content) throws Exception {
+		IFile file = createFile(fileName, content);
+		Resource resource = getResourceSet().createResource(uri(file));
+		resource.load(new StringInputStream(content), null);
+		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
+		XtendFile xtendFile = (XtendFile) resource.getContents().get(0);
+		return xtendFile;
+	}
 
+	public ResourceSet getResourceSet() {
+		ResourceSet resourceSet = resourceSetProvider.get(getProject());
+		return resourceSet;
+	}
+	
 	public String getEditorID() {
 		return languageName;
 	}
