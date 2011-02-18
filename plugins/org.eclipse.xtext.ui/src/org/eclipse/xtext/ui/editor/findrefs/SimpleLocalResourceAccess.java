@@ -10,17 +10,17 @@ package org.eclipse.xtext.ui.editor.findrefs;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.ILocalContextProvider;
+import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.ILocalResourceAccess;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class ResourceSetLocalContextProvider implements ILocalContextProvider {
+public class SimpleLocalResourceAccess implements ILocalResourceAccess {
 
 	private ResourceSet resourceSet;
 
-	public ResourceSetLocalContextProvider(ResourceSet resourceSet) {
+	public SimpleLocalResourceAccess(ResourceSet resourceSet) {
 		this.resourceSet = resourceSet;
 	}
 

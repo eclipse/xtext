@@ -8,11 +8,9 @@
 package org.eclipse.xtext.ui.refactoring;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultReferenceUpdater;
 
-import com.google.common.base.Predicate;
 import com.google.inject.ImplementedBy;
 
 /**
@@ -27,8 +25,4 @@ public interface IReferenceUpdater {
 			Iterable<IReferenceDescription> referenceDescriptions, IRefactoringUpdateAcceptor updateAcceptor,
 			IProgressMonitor monitor);
 
-	@ImplementedBy(DefaultReferenceUpdater.NullFilterProvider.class)
-	interface IFilterProvider {
-		Predicate<IReferenceDescription> get(ElementRenameArguments elementRenameArguments, ResourceSet resourceSet);
-	}
 }

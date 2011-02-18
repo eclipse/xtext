@@ -13,7 +13,6 @@ import static java.util.Collections.*;
 import java.io.IOException;
 import java.util.Queue;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -25,7 +24,9 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.DefaultReferenceDescription;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.ui.editor.findrefs.DefaultReferenceFinder;
-import org.eclipse.xtext.ui.editor.findrefs.ResourceSetLocalContextProvider;
+import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
+import org.eclipse.xtext.ui.editor.findrefs.ReferenceQueryData;
+import org.eclipse.xtext.ui.editor.findrefs.SimpleLocalResourceAccess;
 import org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage;
 import org.eclipse.xtext.util.IAcceptor;
@@ -47,7 +48,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 
 	private DefaultReferenceFinder referenceFinder;
 	private MockAcceptor acceptor;
-	private ResourceSetLocalContextProvider localContextProvider;
+	private IReferenceFinder.ILocalResourceAccess localResourceAccess;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -63,7 +64,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 		ResourceSetBasedResourceDescriptions resourceDescriptions = get(ResourceSetBasedResourceDescriptions.class);
 		resourceDescriptions.setContext(resourceSet);
 		referenceFinder = new DefaultReferenceFinder(resourceDescriptions);
-		localContextProvider = new ResourceSetLocalContextProvider(resourceSet);
+		localResourceAccess = new SimpleLocalResourceAccess(resourceSet);
 		acceptor = new MockAcceptor();
 	}
 
@@ -75,75 +76,86 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 	}
 
 	public void testLocalRefs() throws Exception {
+		IReferenceFinder.IQueryData queryData = new ReferenceQueryData(EcoreUtil.getURI(elementA));
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
-		referenceFinder.findLocalReferences(elementA.eResource(), singleton(elementA), acceptor, null, new NullProgressMonitor());
+		findLocalRefs(queryData);
 		acceptor.assertFinished();
-		referenceFinder.findIndexedReferences(singleton(EcoreUtil.getURI(elementA)), acceptor, null, new NullProgressMonitor());
+		findIndexedRefs(queryData);
 		acceptor.assertFinished();
-
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
-		referenceFinder.findAllReferences(singleton(EcoreUtil.getURI(elementA)), localContextProvider, acceptor, null,
-				new NullProgressMonitor());
+		findAllRefs(queryData);
 		acceptor.assertFinished();
 	}
 
 	public void testIndexedRefs() throws Exception {
+		IReferenceFinder.IQueryData queryData = new ReferenceQueryData(EcoreUtil.getURI(elementC));
 		Resource refResource = loadResource("ref.refactoringtestlanguage", "D { ref C }");
 		EObject elementD = refResource.getContents().get(0).eContents().get(0);
-		
-		referenceFinder.findLocalReferences(elementC.eResource(), singleton(elementC), acceptor, null, new NullProgressMonitor());
+
+		findLocalRefs(queryData);
 		acceptor.assertFinished();
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementC,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
-		referenceFinder.findIndexedReferences(singleton(EcoreUtil.getURI(elementC)), acceptor, null, new NullProgressMonitor());
+		findIndexedRefs(queryData);
 		acceptor.assertFinished();
 
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementC,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
-		referenceFinder.findAllReferences(singleton(EcoreUtil.getURI(elementC)), localContextProvider, acceptor, null,
-				new NullProgressMonitor());
+		findAllRefs(queryData);
 		acceptor.assertFinished();
 	}
 
-	public void testLocalAndIndexed()  throws Exception {
-		loadResource("ref.refactoringtestlanguage", "D { ref A }");
+	public void testLocalAndIndexedFiltered() throws Exception {
+		final URI uriA = EcoreUtil.getURI(elementA);
 		Predicate<IReferenceDescription> filter = new Predicate<IReferenceDescription>() {
 			public boolean apply(IReferenceDescription input) {
-				return !input.getTargetEObjectUri().equals(EcoreUtil.getURI(elementA));
+				return !input.getTargetEObjectUri().equals(uriA);
 			}
 		};
-		referenceFinder.findLocalReferences(elementA.eResource(), singleton(elementA), acceptor, filter, new NullProgressMonitor());
+		IReferenceFinder.IQueryData queryData = new ReferenceQueryData(uriA, singletonList(uriA), uriA.trimFragment(),
+				filter, "");
+		loadResource("ref.refactoringtestlanguage", "D { ref A }");
+		findLocalRefs(queryData);
 		acceptor.assertFinished();
-		referenceFinder.findIndexedReferences(singleton(EcoreUtil.getURI(elementA)), acceptor, filter, new NullProgressMonitor());
+		findIndexedRefs(queryData);
 		acceptor.assertFinished();
-		referenceFinder.findAllReferences(singleton(EcoreUtil.getURI(elementA)), localContextProvider, acceptor, filter,
-				new NullProgressMonitor());
+		findAllRefs(queryData);
 		acceptor.assertFinished();
 	}
-	
-	public void testLocalAndIndexedFiltered()  throws Exception {
+
+	public void testLocalAndIndexed() throws Exception {
+		IReferenceFinder.IQueryData queryData = new ReferenceQueryData(EcoreUtil.getURI(elementA));
 		Resource refResource = loadResource("ref.refactoringtestlanguage", "D { ref A }");
 		EObject elementD = refResource.getContents().get(0).eContents().get(0);
-		
-		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
-				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
-		referenceFinder.findLocalReferences(elementA.eResource(), singleton(elementA), acceptor, null, new NullProgressMonitor());
-		acceptor.assertFinished();
-		acceptor.expect(new DefaultReferenceDescription(elementD, elementA,
-				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
-		referenceFinder.findIndexedReferences(singleton(EcoreUtil.getURI(elementA)), acceptor, null, new NullProgressMonitor());
-		acceptor.assertFinished();
 
 		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
+		findLocalRefs(queryData);
+		acceptor.assertFinished();
 		acceptor.expect(new DefaultReferenceDescription(elementD, elementA,
 				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
-		referenceFinder.findAllReferences(singleton(EcoreUtil.getURI(elementA)), localContextProvider, acceptor, null,
-				new NullProgressMonitor());
+		findIndexedRefs(queryData);
 		acceptor.assertFinished();
-		
+		acceptor.expect(new DefaultReferenceDescription(elementB, elementA,
+				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementB)));
+		acceptor.expect(new DefaultReferenceDescription(elementD, elementA,
+				RefactoringPackage.Literals.ELEMENT__REFERENCED, 0, EcoreUtil.getURI(elementD)));
+		findAllRefs(queryData);
+		acceptor.assertFinished();
+	}
+
+	protected void findIndexedRefs(IReferenceFinder.IQueryData queryData) {
+		referenceFinder.findIndexedReferences(queryData, acceptor, null);
+	}
+
+	protected void findAllRefs(IReferenceFinder.IQueryData queryData) {
+		referenceFinder.findAllReferences(queryData, localResourceAccess, acceptor, null);
+	}
+
+	protected void findLocalRefs(IReferenceFinder.IQueryData queryData) {
+		referenceFinder.findLocalReferences(queryData, localResourceAccess, acceptor, null);
 	}
 
 	public static class MockAcceptor implements IAcceptor<IReferenceDescription> {
@@ -157,7 +169,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 		public void assertFinished() {
 			assertTrue(expectationQueue.isEmpty());
 		}
-		
+
 		public void accept(IReferenceDescription description) {
 			IReferenceDescription nextExpected = expectationQueue.poll();
 			assertNotNull(nextExpected);

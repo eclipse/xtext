@@ -31,10 +31,8 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
-import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.util.ITextRegion;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
@@ -42,13 +40,6 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
-
-	public static class NullFilterProvider implements IReferenceUpdater.IFilterProvider {
-		public Predicate<IReferenceDescription> get(ElementRenameArguments elementRenameArguments,
-				ResourceSet resourceSet) {
-			return null;
-		}
-	}
 
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;

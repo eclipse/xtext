@@ -13,7 +13,6 @@ import static com.google.common.collect.Sets.*;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -55,38 +54,42 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 		this.index = index;
 	}
 
-	public void findAllReferences(Iterable<URI> targetURIs, ILocalContextProvider localContextProvider,
-			final IAcceptor<IReferenceDescription> acceptor, Predicate<IReferenceDescription> filter,
-			IProgressMonitor monitor) {
+	public void findAllReferences(IQueryData queryData, ILocalResourceAccess localResourceAccess,
+			final IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
 		final SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
-		Iterator<URI> iterator = targetURIs.iterator();
-		if (iterator.hasNext()) {
-			findLocalReferences(targetURIs.iterator().next().trimFragment(), targetURIs, localContextProvider,
-					acceptor, filter, subMonitor.newChild(1));
-			findIndexedReferences(targetURIs, acceptor, filter, subMonitor.newChild(1));
+		if (!isEmpty(queryData.getTargetURIs())) {
+			findLocalReferences(queryData, localResourceAccess, acceptor,
+					subMonitor.newChild(1));
+			findIndexedReferences(queryData, acceptor, subMonitor.newChild(1));
 		}
 	}
+	
+	public void findIndexedReferences(final IQueryData queryData,
+			final IAcceptor<IReferenceDescription> acceptor,
+			IProgressMonitor monitor) {
+		findIndexedReferences(queryData.getTargetURIs(), acceptor, queryData.getResultFilter(), monitor);
+	}
 
-	public void findLocalReferences(final URI resourceURI, final Iterable<URI> targetURIs,
-			ILocalContextProvider localContextProvider, final IAcceptor<IReferenceDescription> acceptor,
-			final Predicate<IReferenceDescription> filter, IProgressMonitor monitor) {
+	public void findLocalReferences(final IQueryData queryData,
+			ILocalResourceAccess localResourceAccess, final IAcceptor<IReferenceDescription> acceptor,
+			IProgressMonitor monitor) {
 		final SubMonitor subMonitor = SubMonitor.convert(monitor, "Find references", 1);
-		localContextProvider.readOnly(resourceURI, new IUnitOfWork<Boolean, ResourceSet>() {
+		localResourceAccess.readOnly(queryData.getLocalContextResourceURI(), new IUnitOfWork<Boolean, ResourceSet>() {
 			public Boolean exec(ResourceSet localContext) throws Exception {
-				Resource resource = localContext.getResource(resourceURI.trimFragment(), true);
+				Resource localResource = localContext.getResource(queryData.getLocalContextResourceURI(), true);
 				List<EObject> targets = newArrayList();
-				for (URI targetURI : targetURIs) {
+				for (URI targetURI : queryData.getTargetURIs()) {
 					EObject target = localContext.getEObject(targetURI, true);
 					if (target != null)
 						targets.add(target);
 				}
-				findLocalReferences(resource, targets, acceptor, filter, subMonitor);
+				findLocalReferences(localResource, targets, acceptor, queryData.getResultFilter(), subMonitor);
 				return true;
 			}
 		});
 	}
 
-	public void findLocalReferences(Resource resource, Iterable<EObject> targets,
+	protected void findLocalReferences(Resource resource, Iterable<EObject> targets,
 			IAcceptor<IReferenceDescription> acceptor, Predicate<IReferenceDescription> filter, IProgressMonitor monitor) {
 		if (monitor.isCanceled())
 			return;
@@ -147,7 +150,7 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 			return parentURIs.get(currentBestIndex);
 	}
 
-	public void findIndexedReferences(Iterable<URI> targetURIs, IAcceptor<IReferenceDescription> acceptor,
+	protected void findIndexedReferences(Iterable<URI> targetURIs, IAcceptor<IReferenceDescription> acceptor,
 			Predicate<IReferenceDescription> filter, IProgressMonitor monitor) {
 		Set<URI> targetResourceURIs = newHashSet(transform(targetURIs, new Function<URI, URI>() {
 			public URI apply(URI from) {

@@ -7,19 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.findrefs;
 
-import java.util.List;
-
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.search.ui.ISearchQuery;
 import org.eclipse.search.ui.ISearchResult;
-import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.ILocalContextProvider;
+import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.IQueryData;
 
-import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
 /**
@@ -30,24 +25,18 @@ public class ReferenceQuery implements ISearchQuery {
 	@Inject
 	private IReferenceFinder finder;
 
+	@Inject
+	protected EditorResourceAccess localContextProvider;
+
 	private ReferenceSearchResult searchResult;
 
-	private String label;
-
-	private List<URI> targetURIs;
-
-	private ILocalContextProvider localContextProvider;
-
-	private Predicate<IReferenceDescription> filter;
+	private IQueryData queryData;
 
 	public ReferenceQuery() {
 	}
 
-	public void init(List<URI> targetURIs, IReferenceFinder.ILocalContextProvider localContextProvider, Predicate<IReferenceDescription> filter, String label) {
-		this.targetURIs = targetURIs;
-		this.localContextProvider = localContextProvider;
-		this.label = label;
-		this.filter = filter;
+	public void init(IQueryData queryData) {
+		this.queryData = queryData;
 		this.searchResult = createSearchResult();
 	}
 
@@ -60,7 +49,7 @@ public class ReferenceQuery implements ISearchQuery {
 	}
 
 	public String getLabel() {
-		return label;
+		return queryData.getLabel();
 	}
 
 	public ISearchResult getSearchResult() {
@@ -69,7 +58,7 @@ public class ReferenceQuery implements ISearchQuery {
 
 	public IStatus run(IProgressMonitor monitor) throws OperationCanceledException {
 		searchResult.reset();
-		finder.findAllReferences(targetURIs, localContextProvider, searchResult, filter, monitor);
+		finder.findAllReferences(queryData, localContextProvider, searchResult, monitor);
 		return (monitor.isCanceled()) ? Status.CANCEL_STATUS : Status.OK_STATUS;
 	}
 
