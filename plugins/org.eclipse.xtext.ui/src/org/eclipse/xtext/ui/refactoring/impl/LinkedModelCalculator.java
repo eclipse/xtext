@@ -21,7 +21,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
@@ -35,7 +34,7 @@ import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
-import org.eclipse.xtext.ui.editor.findrefs.ResourceSetLocalContextProvider;
+import org.eclipse.xtext.ui.editor.findrefs.SimpleLocalResourceAccess;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.ui.refactoring.ILinkedModelCalculator;
@@ -48,7 +47,6 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.collect.Iterables;
@@ -73,9 +71,9 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 	@Inject
 	private IReferenceUpdater referenceUpdater;
 	@Inject
-	private IRenameStrategy.Provider strategyProvider;	
+	private IRenameStrategy.Provider strategyProvider;
 	@Inject
-	IReferenceUpdater.IFilterProvider referenceDescriptionFilterProvider;
+	private RefactoringReferenceQueryDataFactory queryDataFactory;
 
 	private ElementRenameArguments renameArguments;
 	private IRenameStrategy renameStrategy;
@@ -83,7 +81,6 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 	private EObject targetElement;
 	private ResourceSet resourceSet;
 	private URI contextResourceURI;
-	private Resource contextResource;
 	private IDocument document;
 	private ISourceViewer viewer;
 
@@ -94,7 +91,6 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 		this.contextResourceURI = renameElementContext.getContextResourceURI();
 		resourceSet = resourceSetProvider.get(getProject(targetElementURI));
 		targetElement = resourceSet.getEObject(targetElementURI, true);
-		contextResource = resourceSet.getResource(contextResourceURI, true);
 		XtextEditor xtextEditor = (XtextEditor) renameElementContext.getTriggeringEditor();
 		document = xtextEditor.getDocument();
 		viewer = xtextEditor.getInternalSourceViewer();
@@ -111,21 +107,22 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 	public LinkedPositionGroup getLinkedPositionGroup() {
 		Iterable<TextEdit> edits = computeTextEdits();
 		LinkedPositionGroup group = new LinkedPositionGroup();
-		Iterable<LinkedPosition> linkedPositions = filter(Iterables.transform(edits, new Function<TextEdit, LinkedPosition>() {
-			public LinkedPosition apply(TextEdit textEdit) {
-				if (textEdit instanceof ReplaceEdit) {
-					String originalName = getOriginalName();
-					ReplaceEdit edit = (ReplaceEdit) textEdit;
-					String textToReplace = edit.getText();
-					int indexOf = textToReplace.indexOf(originalName);
-					if (indexOf != -1) {
-						int calculatedOffset = edit.getOffset() + indexOf;
-						return new LinkedPosition(getDocument(), calculatedOffset, originalName.length());
+		Iterable<LinkedPosition> linkedPositions = filter(
+				Iterables.transform(edits, new Function<TextEdit, LinkedPosition>() {
+					public LinkedPosition apply(TextEdit textEdit) {
+						if (textEdit instanceof ReplaceEdit) {
+							String originalName = getOriginalName();
+							ReplaceEdit edit = (ReplaceEdit) textEdit;
+							String textToReplace = edit.getText();
+							int indexOf = textToReplace.indexOf(originalName);
+							if (indexOf != -1) {
+								int calculatedOffset = edit.getOffset() + indexOf;
+								return new LinkedPosition(getDocument(), calculatedOffset, originalName.length());
+							}
+						}
+						return null;
 					}
-				}
-				return null;
-			}
-		}), Predicates.notNull());
+				}), Predicates.notNull());
 		final int invocationOffset = getInvocationOffset();
 		int i = 0;
 		for (LinkedPosition position : sortPositions(linkedPositions, invocationOffset)) {
@@ -178,13 +175,12 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 			renameStrategy.createDeclarationUpdates(originalName, updateAcceptor);
 		}
 		ReferenceDescriptionAcceptor referenceDescriptionAcceptor = new ReferenceDescriptionAcceptor();
-		ResourceSetLocalContextProvider localContextProvider = new ResourceSetLocalContextProvider(resourceSet);
-		Predicate<IReferenceDescription> referenceDescriptionFilter = referenceDescriptionFilterProvider.get(renameArguments, resourceSet);
-		referenceFinder.findLocalReferences(contextResource.getURI(), renameArguments.getRenamedElementURIs(),
-				localContextProvider, referenceDescriptionAcceptor, referenceDescriptionFilter, progress);
-		Iterable<IReferenceDescription> localRedefernceDescriptions = referenceDescriptionAcceptor.getReferenceDescriptions();
-		referenceUpdater.createReferenceUpdates(renameArguments,
-				localRedefernceDescriptions, updateAcceptor, progress);
+		IReferenceFinder.IQueryData referenceQueryData = queryDataFactory.create(renameArguments);
+		referenceFinder.findLocalReferences(referenceQueryData, new SimpleLocalResourceAccess(resourceSet),
+				referenceDescriptionAcceptor, progress);
+		Iterable<IReferenceDescription> localRedefernceDescriptions = referenceDescriptionAcceptor
+				.getReferenceDescriptions();
+		referenceUpdater.createReferenceUpdates(renameArguments, localRedefernceDescriptions, updateAcceptor, progress);
 		return updateAcceptor.getTextEdits();
 	}
 

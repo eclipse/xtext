@@ -24,7 +24,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class LoadingLocalContextProvider implements IReferenceFinder.ILocalContextProvider {
+public class LoadingResourceAccess implements IReferenceFinder.ILocalResourceAccess {
 
 	@Inject
 	private IResourceSetProvider resourceSetProvider;

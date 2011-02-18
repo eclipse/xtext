@@ -7,17 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.refactoring;
 
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
-import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
+import org.eclipse.xtext.ui.refactoring.impl.RefactoringReferenceQueryDataFactory;
 import org.eclipse.xtext.xtend2.ui.findrefs.Xtend2ReferenceFilter;
 
 import com.google.common.base.Predicate;
 
-public class Xtend2ReferenceFilterProvider implements IReferenceUpdater.IFilterProvider {
-	public Predicate<IReferenceDescription> get(ElementRenameArguments elementRenameArguments,
-			ResourceSet resourceSet) {
-		return new Xtend2ReferenceFilter(elementRenameArguments.getTargetElementURI());
+public class Xtend2FindRefsQueryDataFactory extends RefactoringReferenceQueryDataFactory {
+	
+	@Override
+	protected Predicate<IReferenceDescription> createFilter(ElementRenameArguments args) {
+		return new Xtend2ReferenceFilter(args.getTargetElementURI());
 	}
 }

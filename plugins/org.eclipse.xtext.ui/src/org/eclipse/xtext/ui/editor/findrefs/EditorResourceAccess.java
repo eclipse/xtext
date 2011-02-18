@@ -24,7 +24,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.ILocalContextProvider;
+import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.ILocalResourceAccess;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
@@ -39,9 +39,9 @@ import com.google.inject.internal.Nullable;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class EditorLocalContextProvider implements ILocalContextProvider {
+public class EditorResourceAccess implements ILocalResourceAccess {
 
-	private static final Logger LOG = Logger.getLogger(EditorLocalContextProvider.class);
+	private static final Logger LOG = Logger.getLogger(EditorResourceAccess.class);
 
 	@Inject(optional=true)
 	@Nullable
@@ -51,7 +51,7 @@ public class EditorLocalContextProvider implements ILocalContextProvider {
 	private IStorage2UriMapper storage2UriMapper;
 
 	@Inject
-	private LoadingLocalContextProvider delegate;
+	private LoadingResourceAccess delegate;
 
 	public <R> R readOnly(final URI targetURI, final IUnitOfWork<R, ResourceSet> work) {
 		try {

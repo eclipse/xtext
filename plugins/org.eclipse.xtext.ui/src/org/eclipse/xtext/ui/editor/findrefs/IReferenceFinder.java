@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.findrefs;
 
+import java.util.List;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -28,30 +30,38 @@ public interface IReferenceFinder {
 	 * Executes <code>work</code> on the element referred to by the <code>targetURI</code>. That involves reloading the
 	 * element if it is proxified or the editor it belonged to has been closed.
 	 */
-	@ImplementedBy(EditorLocalContextProvider.class)
-	interface ILocalContextProvider {
+	interface ILocalResourceAccess {
 		<R> R readOnly(URI resourceURI, IUnitOfWork<R, ResourceSet> work);
+	}
+
+	interface IQueryData {
+		URI getLeadElementURI();
+
+		List<URI> getTargetURIs();
+
+		Predicate<IReferenceDescription> getResultFilter();
+
+		URI getLocalContextResourceURI();
+
+		String getLabel();
 	}
 
 	/**
 	 * Finds all References for given URIs.
-	 * 
-	 * @param filter
-	 *            can be null
 	 */
-	void findAllReferences(Iterable<URI> targetURIs, ILocalContextProvider localContextProvider,
-			IAcceptor<IReferenceDescription> acceptor, Predicate<IReferenceDescription> filter,
+	void findAllReferences(IQueryData queryData, ILocalResourceAccess localContextProvider,
+			IAcceptor<IReferenceDescription> acceptor, IProgressMonitor progressMonitor);
+
+	/**
+	 * Finds all References for given URIs.
+	 */
+	void findIndexedReferences(IQueryData queryData, IAcceptor<IReferenceDescription> acceptor,
 			IProgressMonitor progressMonitor);
 
 	/**
-	 * Finds all local references for the given URIs in a given Resource. If the Resource is null the Resource
-	 * corresponding to given URIs is used.
-	 * 
-	 * @param filter
-	 *            can be null
+	 * Finds all local references for the given URIs.
 	 */
-	void findLocalReferences(URI resourceURI, Iterable<URI> targetURIs, ILocalContextProvider localContextProvider,
-			IAcceptor<IReferenceDescription> acceptor, Predicate<IReferenceDescription> filter,
-			IProgressMonitor progressMonitor);
+	void findLocalReferences(IQueryData queryData, ILocalResourceAccess localContextProvider,
+			IAcceptor<IReferenceDescription> acceptor, IProgressMonitor progressMonitor);
 
 }

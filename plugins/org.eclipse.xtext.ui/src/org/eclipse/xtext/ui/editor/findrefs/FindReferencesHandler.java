@@ -7,36 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.findrefs;
 
-import static java.util.Collections.*;
-
-import java.util.Iterator;
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.search.ui.NewSearchUI;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
-import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.IQueryData;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
-import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
-import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
-import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -51,9 +37,9 @@ public class FindReferencesHandler extends AbstractHandler {
 
 	@Inject
 	protected IGlobalServiceProvider globalServiceProvider;
-
+	
 	@Inject
-	protected IReferenceFinder.ILocalContextProvider localContextProvider;
+	protected FindReferenceQueryDataFactory queryDataFactory;
 
 	private static final Logger LOG = Logger.getLogger(FindReferencesHandler.class);
 
@@ -62,20 +48,16 @@ public class FindReferencesHandler extends AbstractHandler {
 			XtextEditor editor = EditorUtils.getActiveXtextEditor(event);
 			if (editor != null) {
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
-				URI targetURI = editor.getDocument().readOnly(new IUnitOfWork<URI, XtextResource>() {
-					public URI exec(XtextResource state) throws Exception {
-						EObject element = eObjectAtOffsetHelper.resolveElementAt(state, selection.getOffset());
-						if (element != null) {
-							return EcoreUtil.getURI(element);
-						}
-						return null;
+				IQueryData context = editor.getDocument().readOnly(new IUnitOfWork<IQueryData, XtextResource>() {
+					public IQueryData exec(XtextResource localResource) throws Exception {
+						return createQueryData(localResource, selection);
 					}
 				});
-				if (targetURI != null) {
-					QueryExecutor queryExecutor = globalServiceProvider.findService(targetURI.trimFragment(),
-							QueryExecutor.class);
+				if (context != null) {
+					QueryExecutor queryExecutor = globalServiceProvider.findService(context.getLeadElementURI()
+							.trimFragment(), QueryExecutor.class);
 					if (queryExecutor != null) {
-						queryExecutor.execute(singletonList(targetURI), localContextProvider, null);
+						queryExecutor.execute(context);
 					}
 				}
 			}
@@ -85,40 +67,24 @@ public class FindReferencesHandler extends AbstractHandler {
 		return null;
 	}
 
-	public static class QueryExecutor {
-		@Inject
-		private IStorage2UriMapper storage2UriMapper;
+	protected IQueryData createQueryData(XtextResource localResource, ITextSelection selection) {
+		EObject element = eObjectAtOffsetHelper.resolveElementAt(localResource, selection.getOffset());
+		if (element != null) {
+			URI localResourceURI = localResource.getURI();
+			IQueryData queryData = queryDataFactory.createQueryData(element, localResourceURI);
+			return queryData;
+		}
+		return null;
+	}
 
+	public static class QueryExecutor {
 		@Inject
 		private Provider<ReferenceQuery> queryProvider;
 
-		@Inject
-		private IQualifiedNameProvider qualifiedNameProvider;
-
-		@Inject
-		private IQualifiedNameConverter qualifiedNameConverter;
-
-		public void execute(final List<URI> targetElementURIs,
-				IReferenceFinder.ILocalContextProvider localContextProvider, Predicate<IReferenceDescription> filter) {
-			if (targetElementURIs != null && !targetElementURIs.isEmpty()) {
+		public void execute(final IQueryData queryData) {
+			if (!queryData.getTargetURIs().isEmpty()) {
 				ReferenceQuery referenceQuery = queryProvider.get();
-				final URI leadElementURI = targetElementURIs.get(0);
-				String qualifiedName = localContextProvider.readOnly(leadElementURI,
-						new IUnitOfWork<String, ResourceSet>() {
-							public String exec(ResourceSet localContext) throws Exception {
-								EObject target = localContext.getEObject(leadElementURI, true);
-								return qualifiedNameConverter.toString(qualifiedNameProvider
-										.getFullyQualifiedName(target));
-							}
-						});
-				String label = Messages.FindReferencesHandler_labelPrefix + qualifiedName;
-				Iterator<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(leadElementURI)
-						.iterator();
-				if (storages.hasNext()) {
-					label += Messages.FindReferencesHandler_1 + storages.next().getFirst().getFullPath().toString()
-							+ Messages.FindReferencesHandler_2;
-				}
-				referenceQuery.init(targetElementURIs, localContextProvider, filter, label);
+				referenceQuery.init(queryData);
 				NewSearchUI.activateSearchResultView();
 				NewSearchUI.runQueryInBackground(referenceQuery);
 			}

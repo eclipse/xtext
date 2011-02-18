@@ -21,14 +21,13 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider.Registry;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
-import org.eclipse.xtext.ui.editor.findrefs.ResourceSetLocalContextProvider;
+import org.eclipse.xtext.ui.editor.findrefs.SimpleLocalResourceAccess;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 import org.eclipse.xtext.util.IAcceptor;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -45,17 +44,15 @@ public class ReferenceUpdaterDispatcher {
 	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
 
 	@Inject
-	private IReferenceUpdater.IFilterProvider referenceDescriptionFilterProvider;
+	private RefactoringReferenceQueryDataFactory queryDataFactory;
 
 	public void createReferenceUpdates(ElementRenameArguments elementRenameArguments, ResourceSet resourceSet,
 			IRefactoringUpdateAcceptor updateAcceptor, IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, "Updating references", 100);
-		ResourceSetLocalContextProvider localContextProvider = createResourceSetLocalContextProvider(resourceSet);
 		ReferenceDescriptionAcceptor referenceDescriptionAcceptor = createFindReferenceAcceptor(updateAcceptor);
-		Predicate<IReferenceDescription> referenceDescriptionFilter = referenceDescriptionFilterProvider.get(
-				elementRenameArguments, resourceSet);
-		referenceFinder.findAllReferences(elementRenameArguments.getRenamedElementURIs(), localContextProvider,
-				referenceDescriptionAcceptor, referenceDescriptionFilter, progress.newChild(2));
+		IReferenceFinder.IQueryData referenceQueryData = queryDataFactory.create(elementRenameArguments);
+		referenceFinder.findAllReferences(referenceQueryData, new SimpleLocalResourceAccess(resourceSet),
+				referenceDescriptionAcceptor, progress.newChild(2));
 		Multimap<IReferenceUpdater, IReferenceDescription> updater2descriptions = referenceDescriptionAcceptor
 				.getReferenceUpdater2ReferenceDescriptions();
 		SubMonitor updaterProgress = progress.newChild(98).setWorkRemaining(updater2descriptions.keySet().size());
@@ -65,10 +62,6 @@ public class ReferenceUpdaterDispatcher {
 			referenceUpdater.createReferenceUpdates(elementRenameArguments, updater2descriptions.get(referenceUpdater),
 					updateAcceptor, updaterProgress.newChild(1));
 		}
-	}
-
-	protected ResourceSetLocalContextProvider createResourceSetLocalContextProvider(ResourceSet resourceSet) {
-		return new ResourceSetLocalContextProvider(resourceSet);
 	}
 
 	protected ReferenceDescriptionAcceptor createFindReferenceAcceptor(IRefactoringUpdateAcceptor updateAcceptor) {
