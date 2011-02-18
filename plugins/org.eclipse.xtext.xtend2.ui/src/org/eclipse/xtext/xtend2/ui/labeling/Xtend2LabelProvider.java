@@ -5,6 +5,7 @@ package org.eclipse.xtext.xtend2.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
@@ -35,7 +36,10 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 
 	@Inject
 	private IXtend2JvmAssociations xtend2jvmAssociations;
-	
+
+	@Inject
+	private DispatchUtil dispatchUtil;
+
 	@Inject
 	public Xtend2LabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
@@ -54,7 +58,11 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	public Image image(XtendFunction element) {
-		return images.forFunction(0);
+		return dispatchUtil.isDispatcherFunction(element) ? images.forDispatcherFunction(0) : images.forFunction(0);
+	}
+
+	public Image image(JvmOperation element) {
+		return images.forDispatcherFunction(0);
 	}
 
 	public String text(XtendFile element) {
@@ -70,9 +78,13 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	public String text(XtendFunction element) {
+		return text(xtend2jvmAssociations.getDirectlyInferredOperation(element));
+	}
+
+	public String text(JvmOperation element) {
 		JvmTypeReference returnType = typeProvider.getTypeForIdentifiable(element);
-		return element.getName() + uiStrings.parameters(xtend2jvmAssociations.getDirectlyInferredOperation(element)) + " : "
+		return element.getSimpleName() + uiStrings.parameters(element) + " : "
 				+ ((returnType != null) ? returnType.getSimpleName() : "void");
 	}
-	
+
 }

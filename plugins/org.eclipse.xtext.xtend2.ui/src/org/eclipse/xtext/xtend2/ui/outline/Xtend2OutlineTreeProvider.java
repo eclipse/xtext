@@ -3,9 +3,18 @@
 */
 package org.eclipse.xtext.xtend2.ui.outline;
 
+import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Sets.*;
+
+import java.util.Set;
+
+import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
+import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
+import org.eclipse.xtext.xtend2.ui.labeling.DispatchUtil;
 import org.eclipse.xtext.xtend2.ui.labeling.Xtend2Images;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -20,25 +29,59 @@ import com.google.inject.Inject;
  * 
  */
 public class Xtend2OutlineTreeProvider extends DefaultOutlineTreeProvider {
-	
+
 	@Inject
 	private Xtend2Images images;
+
+	@Inject
+	private IXtend2JvmAssociations associations;
 	
+	@Inject
+	private DispatchUtil dispatchUtil;
+
 	protected void _createChildren(DocumentRootNode parentNode, XtendFile xtendFile) {
-		if(xtendFile.getPackage() != null) 
-			createEStructuralFeatureNode(parentNode, xtendFile, Xtend2Package.Literals.XTEND_FILE__PACKAGE, images.forPackage(), xtendFile.getPackage(), true);
-		createEStructuralFeatureNode(parentNode, xtendFile, Xtend2Package.Literals.XTEND_FILE__IMPORTS, images.forImportContainer(), "import declarations", false);
-		if(xtendFile.getXtendClass() != null) 
+		if (xtendFile.getPackage() != null)
+			createEStructuralFeatureNode(parentNode, xtendFile, Xtend2Package.Literals.XTEND_FILE__PACKAGE,
+					images.forPackage(), xtendFile.getPackage(), true);
+		createEStructuralFeatureNode(parentNode, xtendFile, Xtend2Package.Literals.XTEND_FILE__IMPORTS,
+				images.forImportContainer(), "import declarations", false);
+		if (xtendFile.getXtendClass() != null)
 			createEObjectNode(parentNode, xtendFile.getXtendClass());
 	}
-	
+
 	protected void _createChildren(IOutlineNode parentNode, XtendClass xtendClass) {
-		for(XtendMember member: xtendClass.getMembers())
-			createEObjectNode(parentNode, member);
-			
+		JvmGenericType inferredType = associations.getInferredType(xtendClass);
+		if (inferredType != null) {
+			Set<XtendFunction> dispatchFunctions = newHashSet();
+			for (JvmOperation inferredOperation : inferredType.getDeclaredOperations()) {
+				if (dispatchUtil.isDispatcherFunction(inferredOperation)) {
+					createEObjectNode(parentNode, inferredOperation);
+					dispatchFunctions.addAll(newArrayList(associations.getAssociatedElements(inferredOperation,
+							XtendFunction.class)));
+				}
+			}
+			for (XtendMember member : xtendClass.getMembers()) {
+				if (!dispatchFunctions.contains(member))
+					createEObjectNode(parentNode, member);
+			}
+		} else {
+			for (XtendMember member : xtendClass.getMembers())
+				createEObjectNode(parentNode, member);
+		}
 	}
-	
+
+	protected void _createChildren(IOutlineNode parentNode, JvmOperation inferredOperation) {
+		Iterable<XtendFunction> xtendFunctions = associations.getAssociatedElements(inferredOperation,
+				XtendFunction.class);
+		for (XtendFunction xtendFunction : xtendFunctions) {
+			if (dispatchUtil.isDispatchFunction(xtendFunction))
+				createEObjectNode(parentNode, xtendFunction);
+		}
+	}
+
 	protected boolean _isLeaf(XtendFunction function) {
 		return true;
 	}
+
+	
 }
