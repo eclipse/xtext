@@ -16,6 +16,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
+import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
 import org.eclipse.xtext.xtend2.ui.builder.CompilationFileProvider;
@@ -31,16 +32,19 @@ public class CompilationFileProviderTest extends AbstractXtend2UITestCase {
 	@Inject
 	protected CompilationFileProvider compilationFileProvider;
 
+	@Inject
+	protected FileExtensionProvider fileExtensionProvider;
+
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
 		IResourcesSetupUtil.cleanWorkspace();
 	}
-	
+
 	public void testTargetFolderName() {
 		assertEquals("xtend2-gen", compilationFileProvider.getTargetFolderName());
 	}
-	
+
 	public void testGetTargetFolder() throws Exception {
 		IProject project = IResourcesSetupUtil.createProject("test");
 		try {
@@ -62,7 +66,8 @@ public class CompilationFileProviderTest extends AbstractXtend2UITestCase {
 		IJavaProject javaProject = createJavaProject("test");
 		IProject project = javaProject.getProject();
 		String sourceFileName = "Test";
-		String sourceFilePath = "/" + project.getName() + "/src/" + sourceFileName + "." + getFileExtension();
+		String sourceFilePath = "/" + project.getName() + "/src/" + sourceFileName + "."
+				+ fileExtensionProvider.getFileExtensions().iterator().next();
 		URI sourceURI = URI.createPlatformResourceURI(sourceFilePath, true);
 		IFile sourceFile = compilationFileProvider.getFile(sourceURI, project);
 		assertEquals(sourceFilePath, sourceFile.getFullPath().toString());

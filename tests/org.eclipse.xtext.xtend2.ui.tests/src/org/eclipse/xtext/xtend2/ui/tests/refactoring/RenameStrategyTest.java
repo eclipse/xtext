@@ -7,12 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.tests.refactoring;
 
+import junit.framework.Test;
+
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
+import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
@@ -23,14 +26,21 @@ import com.google.inject.Inject;
  */
 public class RenameStrategyTest extends AbstractXtend2UITestCase {
 
+	public static Test suite() {
+		return WorkbenchTestHelper.suite(RenameStrategyTest.class);
+	}
+
 	@Inject
 	private IRenameStrategy.Provider renameStrategyProvider;
 
 	@Inject
 	private IXtend2JvmAssociations associations;
 
+	@Inject
+	private WorkbenchTestHelper testHelper;
+
 	public void testInferredClassRenamed() throws Exception {
-		XtendClass fooClass = file("class Foo { }").getXtendClass();
+		XtendClass fooClass = testHelper.xtendFile("Foo", "class Foo { }").getXtendClass();
 		JvmGenericType inferredType = associations.getInferredType(fooClass);
 		JvmConstructor inferredConstructor = associations.getInferredConstructor(fooClass);
 		IRenameStrategy renameStrategy = renameStrategyProvider.get(fooClass, null);
@@ -45,8 +55,8 @@ public class RenameStrategyTest extends AbstractXtend2UITestCase {
 	}
 
 	public void testInferredMethodRenamed() throws Exception {
-		XtendFunction fooMethod = (XtendFunction) file("class Foo { Foo foo() this }").getXtendClass().getMembers()
-				.get(0);
+		XtendFunction fooMethod = (XtendFunction) testHelper.xtendFile("Foo", "class Foo { Foo foo() this }")
+				.getXtendClass().getMembers().get(0);
 		JvmOperation inferredOperation = associations.getDirectlyInferredOperation(fooMethod);
 		IRenameStrategy renameStrategy = renameStrategyProvider.get(fooMethod, null);
 		renameStrategy.applyDeclarationChange("bar", fooMethod.eResource().getResourceSet());

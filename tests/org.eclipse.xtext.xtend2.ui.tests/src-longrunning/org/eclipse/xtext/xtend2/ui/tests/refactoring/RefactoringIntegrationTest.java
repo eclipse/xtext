@@ -102,7 +102,7 @@ public class RefactoringIntegrationTest extends AbstractXtend2UITestCase {
 		IResourcesSetupUtil.waitForAutoBuild();
 		ResourceSet resourceSet = resourceSetProvider.get(file.getProject());
 		XtextResource resource = (XtextResource) resourceSet.getResource(
-				URI.createPlatformResourceURI(file.getFullPath().toString(), true), true);
+				testHelper.uri(file), true);
 		EObject target = eObjectAtOffsetHelper.resolveElementAt(resource, originalContents.indexOf(oldName));
 		doRename(target, newName);
 		String contentsAfterRename = testHelper.getContents(file);
