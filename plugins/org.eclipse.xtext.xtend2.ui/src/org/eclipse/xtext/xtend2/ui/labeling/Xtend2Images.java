@@ -45,6 +45,10 @@ public class Xtend2Images {
 	public Image forFunction(int flags) {
 		return getJdtImage(JavaElementImageProvider.getMethodImageDescriptor(false, Flags.AccPublic));
 	}
+	
+	public Image forDispatcherFunction(int flags) {
+		return getJdtImage(JavaElementImageProvider.getFieldImageDescriptor(false, Flags.AccPublic));
+	}
 
 	public Image forFile() {
 		return imageHelper.getImage("xtend2.gif");
