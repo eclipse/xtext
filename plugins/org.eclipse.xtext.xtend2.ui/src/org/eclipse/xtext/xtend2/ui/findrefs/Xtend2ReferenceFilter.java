@@ -15,8 +15,8 @@ import com.google.common.base.Predicate;
 public class Xtend2ReferenceFilter implements Predicate<IReferenceDescription> {
 	private URI excludedSourceURI;
 
-	public Xtend2ReferenceFilter(URI xtendSourceURI) {
-		this.excludedSourceURI = xtendSourceURI;
+	public Xtend2ReferenceFilter(URI excludedSourceURI) {
+		this.excludedSourceURI = excludedSourceURI;
 	}
 
 	public URI getExcludedSourceURI() {
@@ -30,4 +30,5 @@ public class Xtend2ReferenceFilter implements Predicate<IReferenceDescription> {
 	protected boolean isInferredJvmElement(URI elementURI) {
 		return elementURI.fragment().startsWith("/1/");
 	}
+	
 }
