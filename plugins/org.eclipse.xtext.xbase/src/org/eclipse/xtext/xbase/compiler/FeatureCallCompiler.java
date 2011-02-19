@@ -141,7 +141,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				b.append("==null?");
 				b.append("(");
 				JvmTypeReference type = getTypeProvider().getType(expr);
-				b.append(getSerializedForm(type));
+				b.append(getSerializedForm(type, false));
 				b.append(")null:");
 				internalToJavaExpression(receiver, b);
 				return true;

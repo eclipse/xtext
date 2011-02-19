@@ -66,12 +66,12 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	protected void doConversion(final JvmTypeReference left, final JvmTypeReference right,
 			final IAppendable appendable, final Later expression) {
 		if (right.getType() instanceof JvmPrimitiveType && !(left.getType() instanceof JvmPrimitiveType)) {
-			appendable.append("((").append(getSerializedForm(left)).append(")");
+			appendable.append("((").append(getSerializedForm(left, false)).append(")");
 			expression.exec();
 			appendable.append(")");
 		} else if (right.getType() instanceof JvmArrayType && typeRefs.is(left, Iterable.class)) {
 			appendable.append("((");
-			appendable.append(getSerializedForm(left));
+			appendable.append(getSerializedForm(left, false));
 			appendable.append(")");
 			appendable.append(Conversions.class.getCanonicalName()).append(".doWrapArray(");
 			expression.exec();
@@ -88,15 +88,15 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 				throw new IllegalStateException("expected type " + resolvedLeft + " not mappable from " + right);
 			}
 			TypeArgumentContext context = contextProvider.getReceiverContext(resolvedLeft);
-			appendable.append("new ").append(getSerializedForm(resolvedLeft)).append("() {");
+			appendable.append("new ").append(getSerializedForm(resolvedLeft, true)).append("() {");
 			appendable.increaseIndentation().increaseIndentation();
-			appendable.append("\npublic ").append(getSerializedForm(context.resolve(operation.getReturnType())));
+			appendable.append("\npublic ").append(getSerializedForm(context.resolve(operation.getReturnType()), true));
 			appendable.append(" ").append(operation.getSimpleName()).append("(");
 			EList<JvmFormalParameter> params = operation.getParameters();
 			for (Iterator<JvmFormalParameter> iterator = params.iterator(); iterator.hasNext();) {
 				JvmFormalParameter p = iterator.next();
 				final String name = p.getName();
-				appendable.append(getSerializedForm(context.resolve(p.getParameterType()))).append(" ").append(name);
+				appendable.append(getSerializedForm(context.resolve(p.getParameterType()), true)).append(" ").append(name);
 				if (iterator.hasNext())
 					appendable.append(",");
 			}

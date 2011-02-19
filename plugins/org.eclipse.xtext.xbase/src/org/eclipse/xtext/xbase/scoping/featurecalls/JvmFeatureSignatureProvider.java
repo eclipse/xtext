@@ -17,14 +17,12 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypesSwitch;
 
-import com.google.common.base.Function;
-
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class JvmFeatureSignatureProvider implements Function<JvmFeature, String> {
+public class JvmFeatureSignatureProvider {
 	
-	static class Switch extends TypesSwitch<String> {
+	protected static class Switch extends TypesSwitch<String> {
 		
 		private TypeArgumentContext context;
 		
@@ -56,14 +54,13 @@ public class JvmFeatureSignatureProvider implements Function<JvmFeature, String>
 			return builder.toString();
 		}
 	}
-	private Switch theSwitch = null;
 	
-	public JvmFeatureSignatureProvider(TypeArgumentContext context) {
-		theSwitch = new Switch(context);
+	public String getSignature(JvmFeature from, TypeArgumentContext context) {
+		return createSwitch(context).doSwitch(from);
 	}
-
-	public String apply(JvmFeature from) {
-		return theSwitch.doSwitch(from);
+	
+	protected Switch createSwitch(TypeArgumentContext context) {
+		return new Switch(context);
 	}
 
 }

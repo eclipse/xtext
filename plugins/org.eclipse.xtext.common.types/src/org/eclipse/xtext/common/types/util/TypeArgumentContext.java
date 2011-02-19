@@ -148,5 +148,9 @@ public class TypeArgumentContext {
 		return copy;
 	}
 
+	@Override
+	public String toString() {
+		return context.toString();
+	}
 
 }

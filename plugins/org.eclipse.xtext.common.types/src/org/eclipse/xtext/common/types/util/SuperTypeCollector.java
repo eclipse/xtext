@@ -11,10 +11,13 @@ import static com.google.common.collect.Iterables.*;
 
 import java.util.Set;
 
+import org.eclipse.xtext.common.types.JvmConstraintOwner;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.TypesFactory;
 
 import com.google.common.collect.Sets;
@@ -125,7 +128,7 @@ public class SuperTypeCollector {
 		}
 	}
 
-	public static class Implementation extends TypesSwitch<Void> {
+	public static class Implementation extends TypesSwitch<Boolean> {
 
 		private boolean collecting = false;
 		private final SuperTypeAcceptor acceptor;
@@ -137,7 +140,7 @@ public class SuperTypeCollector {
 		}
 
 		@Override
-		public Void caseJvmTypeReference(JvmTypeReference object) {
+		public Boolean caseJvmTypeReference(JvmTypeReference object) {
 			if (!object.eIsProxy()) {
 				if (!collecting || acceptor.accept(object, level)) {
 					collecting = true;
@@ -149,7 +152,7 @@ public class SuperTypeCollector {
 		}
 		
 		@Override
-		public Void caseJvmDeclaredType(JvmDeclaredType object) {
+		public Boolean caseJvmDeclaredType(JvmDeclaredType object) {
 			if (!object.eIsProxy()) {
 				level++;
 				for (JvmTypeReference superType : reverse(object.getSuperTypes())) {
@@ -159,6 +162,24 @@ public class SuperTypeCollector {
 			}
 			return null;
 		}
+		
+		@Override
+		public Boolean caseJvmUpperBound(JvmUpperBound object) {
+			if (object.getTypeReference() != null)
+				return doSwitch(object.getTypeReference());
+			return Boolean.TRUE;
+		}
+		
+		@Override
+		public Boolean caseJvmConstraintOwner(JvmConstraintOwner object) {
+			if (!object.eIsProxy()) {
+				for(JvmTypeConstraint constraint: object.getConstraints()) {
+					doSwitch(constraint);
+				}
+			}
+			return Boolean.TRUE;
+		}
+		
 	}
 
 	public boolean isSuperType(JvmDeclaredType subType, JvmDeclaredType superType) {
