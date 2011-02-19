@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.util;
 
 import java.io.Serializable;
 import java.nio.CharBuffer;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -174,10 +175,6 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 	 * List<? super CharSequence> <= List
 	 */
 	public void testRawTypes_super() throws Exception {
-//		List<? super String> foo = null;
-//		List zonk = null;
-//		foo = zonk; // ok
-//		zonk = foo; // ok
 		JvmTypeReference rawList = ref(List.class);
 		JvmTypeReference List_of_super_String = ref(List.class, wc_super(ref(String.class)));
 		assertTrue(getComputer().isConformant(rawList, List_of_super_String));
@@ -190,10 +187,6 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 	 * List <= List<String>
 	 */
 	public void testRawtype_generics() throws Exception {
-//		List<String> foo = null;
-//		List zonk = null;
-//		foo = zonk; // ok
-//		zonk = foo; // ok
 		JvmTypeReference List_String = ref(List.class, ref(String.class));
 		JvmTypeReference List_rawtype = ref(List.class);
 		assertTrue(getComputer().isConformant(List_String, List_rawtype));
@@ -206,16 +199,11 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 	 * List <= List<String>
 	 */
 	public void testRawType_extends() throws Exception {
-//		List<? extends String> foo = null;
-//		List zonk = null;
-//		foo = zonk; // ok
-//		zonk = foo; // ok
 		JvmTypeReference List_String = ref(List.class, wc_extends(ref(String.class)));
 		JvmTypeReference List_rawtype = ref(List.class);
 		assertTrue(getComputer().isConformant(List_String, List_rawtype));
 		assertTrue(getComputer().isConformant(List_rawtype, List_String));
 	}
-	
 	
 	public void testInterfacesConformToObject() throws Exception {
 		JvmTypeReference interfaceType = ref(CharSequence.class);
@@ -239,7 +227,43 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 		assertTrue(getComputer().isConformant(List_of_super_String, List_of_super_CharSequence));
 		assertFalse(getComputer().isConformant(List_of_super_CharSequence, List_of_super_String));
 	}
+	
+	/**
+	 * Iterable<? super String> <= Iterable<Object> (but not vice versa) 
+	 */
+	public void testGenerics_super_2() throws Exception {
+		JvmTypeReference iterable_of_super_string = ref(Iterable.class, wc_super(ref(String.class)));
+		JvmTypeReference iterable_of_object = ref(Iterable.class, ref(Object.class));
+		assertTrue(getComputer().isConformant(iterable_of_super_string, iterable_of_object));
+		assertFalse(getComputer().isConformant(iterable_of_object, iterable_of_super_string));
+		assertTrue(getComputer().isConformant(iterable_of_super_string, iterable_of_object, true));
+		assertTrue(getComputer().isConformant(iterable_of_object, iterable_of_super_string, true));
+	}
+	
+	/**
+	 * Iterable<? super String> <= List<Object> (but not vice versa) 
+	 */
+	public void testGenerics_super_3() throws Exception {
+		JvmTypeReference iterable_of_super_string = ref(Iterable.class, wc_super(ref(String.class)));
+		JvmTypeReference list_of_object = ref(List.class, ref(Object.class));
+		assertTrue(getComputer().isConformant(iterable_of_super_string, list_of_object));
+		assertFalse(getComputer().isConformant(list_of_object, iterable_of_super_string));
+		assertTrue(getComputer().isConformant(iterable_of_super_string, list_of_object, true));
+		assertFalse(getComputer().isConformant(list_of_object, iterable_of_super_string, true));
+	}
 
+	/**
+	 * List<? super List> <= List<? extends ArrayList> (but not vice versa) 
+	 */
+	public void testGenerics_super_4() throws Exception {
+		JvmTypeReference list_super_list = ref(List.class, wc_super(ref(List.class)));
+		JvmTypeReference list_extends_arraylist = ref(List.class, wc_extends(ref(ArrayList.class)));
+		assertFalse(getComputer().isConformant(list_super_list, list_extends_arraylist));
+		assertFalse(getComputer().isConformant(list_extends_arraylist, list_super_list));
+		assertTrue(getComputer().isConformant(list_super_list, list_extends_arraylist, true));
+		assertTrue(getComputer().isConformant(list_extends_arraylist, list_super_list, true));
+	}
+	
 	/**
 	 * List<?> <= List<CharSequence>
 	 */
@@ -259,6 +283,7 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 		assertTrue(getComputer().isConformant(List_of_wildcard, List_of_super_CharSequence));
 		assertFalse(getComputer().isConformant(List_of_super_CharSequence, List_of_wildcard));
 	}
+	
 	/**
 	 * List<?> <= List<? extends CharSequence> 
 	 */
@@ -267,6 +292,36 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 		JvmTypeReference List_of_wildcard = ref(List.class, wc());
 		assertTrue(getComputer().isConformant(List_of_wildcard, List_of_extends_CharSequence));
 		assertFalse(getComputer().isConformant(List_of_extends_CharSequence, List_of_wildcard));
+	}
+	
+	/**
+	 * List<? extends Object> <= List<CharSequence>
+	 */
+	public void testGenerics_UnconstraintWildcard_4() throws Exception {
+		JvmTypeReference List_CharSequence = ref(List.class, ref(CharSequence.class));
+		JvmTypeReference List_extends_Object = ref(List.class, wc_extends(ref(Object.class)));
+		assertTrue(getComputer().isConformant(List_extends_Object, List_CharSequence));
+		assertFalse(getComputer().isConformant(List_CharSequence, List_extends_Object));
+	}
+	
+	/**
+	 * List<? extends Object> <= List<? super CharSequence> 
+	 */
+	public void testGenerics_UnconstraintWildcard_5() throws Exception {
+		JvmTypeReference List_of_super_CharSequence = ref(List.class, wc_super(ref(CharSequence.class)));
+		JvmTypeReference List_extends_Object = ref(List.class, wc_extends(ref(Object.class)));
+		assertTrue(getComputer().isConformant(List_extends_Object, List_of_super_CharSequence));
+		assertFalse(getComputer().isConformant(List_of_super_CharSequence, List_extends_Object));
+	}
+	
+	/**
+	 * List<? extends Object> <= List<? extends CharSequence> 
+	 */
+	public void testGenerics_UnconstraintWildcard_6() throws Exception {
+		JvmTypeReference List_of_extends_CharSequence = ref(List.class, wc_extends(ref(CharSequence.class)));
+		JvmTypeReference List_extends_Object = ref(List.class, wc_extends(ref(Object.class)));
+		assertTrue(getComputer().isConformant(List_extends_Object, List_of_extends_CharSequence));
+		assertFalse(getComputer().isConformant(List_of_extends_CharSequence, List_extends_Object));
 	}
 
 	public void testGenerics_1() throws Exception {

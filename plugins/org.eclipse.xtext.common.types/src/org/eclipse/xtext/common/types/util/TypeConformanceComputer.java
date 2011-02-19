@@ -143,6 +143,10 @@ public class TypeConformanceComputer {
 	protected Boolean _isConformant(JvmWildcardTypeReference left, JvmWildcardTypeReference right, boolean ignoreGenerics) {
 		List<JvmTypeConstraint> leftConstraints = left.getConstraints();
 		List<JvmTypeConstraint> rightConstraints = right.getConstraints();
+		return areConstraintsConformant(leftConstraints, rightConstraints);
+	}
+
+	protected Boolean areConstraintsConformant(List<JvmTypeConstraint> leftConstraints,	List<JvmTypeConstraint> rightConstraints) {
 		if (leftConstraints.size() != rightConstraints.size())
 			return Boolean.FALSE;
 		int constraintCount = leftConstraints.size();
@@ -232,7 +236,9 @@ public class TypeConformanceComputer {
 	}
 	
 	protected Boolean _isConformant(JvmTypeParameter leftType, JvmTypeParameter rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right, boolean ignoreGenerics) {
-		return leftType == rightType;
+		if (leftType == rightType)
+			return Boolean.TRUE;
+		return areConstraintsConformant(leftType.getConstraints(), rightType.getConstraints());
 	}
 	
 	protected Boolean _isConformant(JvmTypeParameter leftType, JvmType rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right, boolean ignoreGenerics) {
@@ -255,6 +261,14 @@ public class TypeConformanceComputer {
 	
 	protected Boolean _isConformant(JvmArrayType leftType, JvmType rightType, JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
 		return Boolean.FALSE;
+	}
+	
+	protected Boolean _isConformant(JvmType leftType, JvmArrayType rightType, JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
+		return Boolean.FALSE;
+	}
+	
+	protected Boolean _isConformant(JvmDeclaredType leftType, JvmArrayType rightType, JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
+		return Object.class.equals(leftType.getIdentifier());
 	}
 
 	protected boolean areArgumentsAssignableFrom(JvmParameterizedTypeReference left, JvmParameterizedTypeReference right) {
@@ -291,11 +305,24 @@ public class TypeConformanceComputer {
 			}
 		} else if (!(refA instanceof JvmWildcardTypeReference)) {
 			if (!(refB instanceof JvmWildcardTypeReference)) {
-				if (refA.getType() == refB.getType())
-					return areArgumentsAssignableFrom((JvmParameterizedTypeReference)refA, (JvmParameterizedTypeReference)refB);
+				JvmType typeA = refA.getType();
+				JvmType typeB = refB.getType();
+				if (typeA == typeB)
+					return areArgumentsAssignableFrom((JvmParameterizedTypeReference)refA, (JvmParameterizedTypeReference)refB); 
+				if (typeA.eClass() == typeB.eClass() && typeA instanceof JvmTypeParameter) {
+					if (_isConformant((JvmTypeParameter) typeA, (JvmTypeParameter) typeB, (JvmParameterizedTypeReference)refA, (JvmParameterizedTypeReference)refB, false)) {
+						return areArgumentsAssignableFrom((JvmParameterizedTypeReference)refA, (JvmParameterizedTypeReference)refB);
+					}
+				}
 			}
 		} else if (lowerA != null) {
-			if (lowerB != null && isConformant(lowerB, lowerA)) {
+			if (isUnconstrainedWildcard(refB))
+				return false;
+			if (upperB != null) {
+				if (!isConformant(upperB, lowerA))
+					return false;
+			}
+			if (lowerB == null || isConformant(lowerB, lowerA)) {
 				return true;
 			}
 		}

@@ -9,9 +9,15 @@ package org.eclipse.xtext.xbase.compiler;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmLowerBound;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Strings;
@@ -99,12 +105,69 @@ public abstract class AbstractXbaseCompiler {
 
 	protected String getReturnTypeName(XExpression expr) {
 		final JvmTypeReference type = typeProvider.getType(expr);
-		return getSerializedForm(type);
+		return getSerializedForm(type, false);
 	}
 
-	protected String getSerializedForm(final JvmTypeReference type) {
-		return type.getQualifiedName('.');
+	protected String getSerializedForm(final JvmTypeReference type, boolean withoutConstraints) {
+		StringBuilder result = new StringBuilder();
+		getSerializedForm(type, result, withoutConstraints);
+		return result.toString();
 	}
+	
+	protected void getSerializedForm(final JvmTypeReference type, StringBuilder result, boolean withoutConstraints) {
+		if (type instanceof JvmWildcardTypeReference) {
+			JvmWildcardTypeReference wildcard = (JvmWildcardTypeReference) type;
+			if (!withoutConstraints) {
+				result.append("?");
+			}
+			if (!wildcard.getConstraints().isEmpty()) {
+				for(JvmTypeConstraint constraint: wildcard.getConstraints()) {
+					if (constraint instanceof JvmLowerBound) {
+						if (!withoutConstraints)
+							result.append(" super ");
+						getSerializedForm(constraint.getTypeReference(), result, withoutConstraints);
+						return;
+					}
+				}
+				boolean first = true;
+				for(JvmTypeConstraint constraint: wildcard.getConstraints()) {
+					if (constraint instanceof JvmUpperBound) {
+						if (first) {
+							if (!withoutConstraints)
+								result.append(" extends ");
+							first = false;
+						} else {
+							if (withoutConstraints)
+								throw new IllegalStateException("cannot have two upperbounds if type should be printed without constraints");
+							result.append(" & ");
+						}
+						getSerializedForm(constraint.getTypeReference(), result, withoutConstraints);
+					}
+				}
+			} else if (withoutConstraints) {
+				result.append("java.lang.Object");
+			}
+		} else if (type instanceof JvmGenericArrayTypeReference) {
+			getSerializedForm(((JvmGenericArrayTypeReference) type).getComponentType(), result, withoutConstraints);
+			result.append("[]");
+		} else if (type instanceof JvmParameterizedTypeReference) {
+			JvmParameterizedTypeReference parameterized = (JvmParameterizedTypeReference) type;		
+			result.append(getSerializedForm(type.getType()));
+			if (!parameterized.getArguments().isEmpty()) {
+				result.append("<");
+				for(int i = 0; i < parameterized.getArguments().size(); i++) {
+					if (i != 0) {
+						result.append(", ");
+					}
+					getSerializedForm(parameterized.getArguments().get(i), result, withoutConstraints);
+				}
+				result.append(">");
+			}
+		} else {
+			throw new IllegalArgumentException(type.toString());
+		}
+	}
+	
 	protected String getSerializedForm(final JvmType type) {
 		return type.getQualifiedName('.');
 	}
@@ -199,7 +262,7 @@ public abstract class AbstractXbaseCompiler {
 	protected void declareLocalVariable(XExpression expr, IAppendable b, Later expression) {
 		JvmTypeReference type = getTypeProvider().getType(expr);
 		String varName = declareNameInVariableScope(expr, b);
-		b.append("\n").append(getSerializedForm(type)).append(" ").append(varName).append(" = ");
+		b.append("\n").append(getSerializedForm(type, false)).append(" ").append(varName).append(" = ");
 		expression.exec();
 		b.append(";");
 	}

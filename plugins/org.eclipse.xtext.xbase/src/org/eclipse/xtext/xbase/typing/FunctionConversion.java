@@ -107,7 +107,8 @@ public class FunctionConversion {
 		}
 		TypeArgumentContext leftCtx = contextProvider.getReceiverContext(left);
 		TypeArgumentContext rightCtx = contextProvider.getReceiverContext(right);
-		return isConformant(leftDesc, leftCtx, rightDesc, rightCtx);
+		boolean result = isConformant(leftDesc, leftCtx, rightDesc, rightCtx);
+		return result;
 	}
 
 	protected FuncDesc toFuncDesc(JvmTypeReference left) {

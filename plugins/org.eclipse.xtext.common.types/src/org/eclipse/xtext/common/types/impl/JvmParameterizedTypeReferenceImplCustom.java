@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.common.types.impl.NameConcatHelper.NameType;
 
 /**
@@ -29,6 +30,20 @@ public class JvmParameterizedTypeReferenceImplCustom extends JvmParameterizedTyp
 		return NameConcatHelper.computeFor(this, innerClassDelimiter, NameType.QUALIFIED);
 	}
 
-	
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder(eClass().getName());
+		result.append(": ");
+		if (type == null) {
+			result.append(" type is null");
+		} else if (type.eIsProxy()) {
+			result.append(" (type uri: ");
+			result.append(((InternalEObject) type).eProxyURI());
+			result.append(')');
+		} else {
+			result.append(getIdentifier());
+		}
+		return result.toString();
+	}
 
 }

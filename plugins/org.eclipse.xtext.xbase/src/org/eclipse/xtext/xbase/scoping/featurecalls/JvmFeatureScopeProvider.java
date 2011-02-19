@@ -227,7 +227,7 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 		}
 		return result;
 	}
-
+	
 	protected JvmType getRealComponentType(JvmArrayType arrayType) {
 		final JvmType type = arrayType.getComponentType().getType();
 		if (type instanceof JvmArrayType) {

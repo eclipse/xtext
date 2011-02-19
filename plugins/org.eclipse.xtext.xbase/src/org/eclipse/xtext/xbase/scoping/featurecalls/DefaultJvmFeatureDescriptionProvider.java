@@ -35,6 +35,9 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 	@Inject
 	protected IFeaturesForTypeProvider featuresForTypeProvider = new DefaultFeaturesForTypeProvider();
 	
+	@Inject
+	protected JvmFeatureSignatureProvider signatureProvider = new JvmFeatureSignatureProvider();
+	
 	public void setFeaturesForTypeProvider(IFeaturesForTypeProvider featuresForTypeProvider) {
 		this.featuresForTypeProvider = featuresForTypeProvider;
 	}
@@ -75,7 +78,7 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 	}
 
 	protected String getSignature(JvmFeature feature, TypeArgumentContext context) {
-		return new JvmFeatureSignatureProvider(context).apply(feature);
+		return signatureProvider.getSignature(feature, context);
 	}
 
 	protected boolean isValid(JvmFeature feature) {

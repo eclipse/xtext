@@ -118,7 +118,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 	
 	protected void compile(DeclaredDependency dependency, IAppendable appendable) {
 		appendable.append("\n@com.google.inject.Inject private ");
-		appendable.append(getSerializedForm(dependency.getType())).append(" ");
+		appendable.append(getSerializedForm(dependency.getType(), false)).append(" ");
 		appendable.append(appendable.declareVariable(dependency, dependency.getSimpleName())).append(";");
 	}
 
@@ -141,7 +141,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 			IAppendable a) {
 		a.openScope();
 		a.append("\n\npublic ");
-		a.append(getSerializedForm(dispatchOperation.getReturnType())).append(" ");
+		a.append(getSerializedForm(dispatchOperation.getReturnType(), false)).append(" ");
 		a.append(dispatchOperation.getSimpleName()).append("(");
 		declareParameters(dispatchOperation.getParameters(), a);
 		a.append(") {");
@@ -176,7 +176,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 			for (Iterator<JvmFormalParameter> iter2 = operation.getParameters().iterator(); iter2.hasNext();) {
 				JvmFormalParameter p1 = iter1.next();
 				JvmFormalParameter p2 = iter2.next();
-				a.append("(").append(getSerializedForm(primitives.asWrapperTypeIfPrimitive(p2.getParameterType()))).append(")");
+				a.append("(").append(getSerializedForm(primitives.asWrapperTypeIfPrimitive(p2.getParameterType()), false)).append(")");
 				if (typeRefs.is(p2.getParameterType(), Void.class)) {
 					a.append("null");
 				} else {
@@ -204,7 +204,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		if (obj.isDispatch()) {
 			name = "_" + name;
 		}
-		appendable.append("\n\n").append("public ").append(getSerializedForm(returnType)).append(" ").append(name)
+		appendable.append("\n\n").append("public ").append(getSerializedForm(returnType, false)).append(" ").append(name)
 				.append("(");
 		final EList<JvmFormalParameter> parameters = obj.getParameters();
 		declareParameters(parameters, appendable);
@@ -225,7 +225,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		for (int i = 0; i < numParams; i++) {
 			JvmFormalParameter p = parameters.get(i);
 			String varName = declareNameInVariableScope(p, appendable);
-			appendable.append(getSerializedForm(p.getParameterType())).append(" ").append(varName);
+			appendable.append(getSerializedForm(p.getParameterType(), false)).append(" ").append(varName);
 			if (i != numParams - 1)
 				appendable.append(", ");
 		}
@@ -361,7 +361,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		// declare variable
 		JvmTypeReference type = getTypeProvider().getType(richString);
 		String variableName = makeJavaIdentifier(b.declareVariable(Tuples.pair(richString, "result"), "builder"));
-		String typeName = getSerializedForm(type);
+		String typeName = getSerializedForm(type, false);
 		b.append("\n");
 		b.append(typeName);
 		b.append(" ");

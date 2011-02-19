@@ -110,7 +110,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		for (XCatchClause catchClause : expr.getCatchClauses()) {
 			JvmTypeReference type = catchClause.getDeclaredParam().getParameterType();
 			final String name = declareNameInVariableScope(catchClause.getDeclaredParam(), b);
-			b.append(" catch (").append(getSerializedForm(type)).append(" ").append(name).append(") { ");
+			b.append(" catch (").append(getSerializedForm(type, false)).append(" ").append(name).append(") { ");
 			b.increaseIndentation();
 			internalToJavaStatement(catchClause.getExpression(), b, true);
 			if (isReferenced && ! isPrimitiveVoid(catchClause.getExpression())) {
@@ -321,7 +321,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		JvmTypeReference type = getTypeProvider().getType(expr);
 		String switchResultName = makeJavaIdentifier(b.declareVariable(Tuples.pair(expr,"result"), "switchResult"));
 		if (isReferenced) {
-			b.append("\n").append(getSerializedForm(type)).append(" ").append(switchResultName).append(" = null;");
+			b.append("\n").append(getSerializedForm(type, false)).append(" ").append(switchResultName).append(" = null;");
 		}
 		
 		internalToJavaStatement(expr.getSwitch(), b, true);
@@ -348,7 +348,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.append("\nif (!").append(matchedVariable).append(") {");
 			b.increaseIndentation();
 			if (casePart.getTypeGuard() != null) {
-				final String guardType = getSerializedForm(casePart.getTypeGuard());
+				final String guardType = getSerializedForm(casePart.getTypeGuard(), false);
 				b.append("\nif (");
 				b.append(variableName);
 				b.append(" instanceof ");
@@ -428,23 +428,24 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			throw new IllegalArgumentException("a closure definition does not cause any sideffeccts");
 		JvmTypeReference type = getTypeProvider().getType(call);
 		TypeArgumentContext context = ctxProvider.getReceiverContext(type);
-		final String serializedForm = getSerializedForm(type);
-		b.append("\n").append("final ").append(serializedForm);
+		final String serializedFormWithConstraints = getSerializedForm(type, false);
+		final String serializedFormWithoutConstraints = getSerializedForm(type, true);
+		b.append("\n").append("final ").append(serializedFormWithConstraints);
 		b.append(" ");
 		String variableName = makeJavaIdentifier(b.declareVariable(call, "function"));
 		b.append(variableName).append(" = ");
-		b.append("new ").append(serializedForm).append("() {");
+		b.append("new ").append(serializedFormWithoutConstraints).append("() {");
 		b.increaseIndentation().increaseIndentation();
 		JvmOperation operation = functionConversion.findSingleMethod(type);
 		final JvmTypeReference returnType = context.resolve(operation.getReturnType());
-		b.append("\npublic ").append(getSerializedForm(returnType)).append(" ").append(operation.getSimpleName());
+		b.append("\npublic ").append(getSerializedForm(returnType, true)).append(" ").append(operation.getSimpleName());
 		b.append("(");
 		EList<JvmFormalParameter> closureParams = call.getFormalParameters();
 		for (Iterator<JvmFormalParameter> iter = closureParams.iterator(); iter.hasNext();) {
 			JvmFormalParameter param = iter.next();
 			final JvmTypeReference parameterType2 = getTypeProvider().getTypeForIdentifiable(param);
 			final JvmTypeReference parameterType = context.resolve(parameterType2);
-			b.append(getSerializedForm(parameterType)).append(" ");
+			b.append(getSerializedForm(parameterType, true)).append(" ");
 			String name = makeJavaIdentifier(b.declareVariable(param, param.getName()));
 			b.append(name);
 			if (iter.hasNext())

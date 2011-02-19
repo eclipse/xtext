@@ -235,7 +235,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 	
 	public void testStaticImports_07() throws Exception {
 		String fileAsText= 
-				"import static com.google.common.collect.Iterables.*\n" +
+				"import static extension com.google.common.collect.Iterables.*\n" +
 				"import static java.util.Collections.*\n" +
 				"class Clazz { void method() find(singletonList(''), [e|e!=null]) }";
 		XtendFile file = file(fileAsText, true);
@@ -273,5 +273,29 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		XFeatureCall featureCall = (XFeatureCall) function.getExpression();
 		String identifier = featureCall.getFeature().getIdentifier();
 		assertEquals("java.util.Collections.singletonList(T)", identifier);
+	}
+	
+	public void testStaticImports_11() throws Exception {
+		String fileAsText= 
+				"import static com.google.common.collect.Iterables.*\n" +
+				"import static java.util.Collections.*\n" +
+				"class Clazz { void method() find(singletonList(''), [e|e.length!=0]) }";
+		XtendFile file = file(fileAsText, true);
+		XtendFunction function = (XtendFunction) file.getXtendClass().getMembers().get(0);
+		XFeatureCall featureCall = (XFeatureCall) function.getExpression();
+		String identifier = featureCall.getFeature().getIdentifier();
+		assertEquals("com.google.common.collect.Iterables.find(java.lang.Iterable,com.google.common.base.Predicate)", identifier);
+	}
+	
+	public void testStaticImports_12() throws Exception {
+		String fileAsText= 
+				"import static extension com.google.common.collect.Iterables.*\n" +
+				"import static java.util.Collections.*\n" +
+				"class Clazz { void method() find(singletonList(''), [e|e.length!=0]) }";
+		XtendFile file = file(fileAsText, true);
+		XtendFunction function = (XtendFunction) file.getXtendClass().getMembers().get(0);
+		XFeatureCall featureCall = (XFeatureCall) function.getExpression();
+		String identifier = featureCall.getFeature().getIdentifier();
+		assertEquals("com.google.common.collect.Iterables.find(java.lang.Iterable,com.google.common.base.Predicate)", identifier);
 	}
 }

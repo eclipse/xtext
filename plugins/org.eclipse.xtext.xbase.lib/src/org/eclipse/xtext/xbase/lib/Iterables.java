@@ -16,12 +16,7 @@ public class Iterables {
 	 * @return the first element from the iterable for which the given predicate returns <code>true</code>, returns null
 	 *         if no element matches the predicate or the iterable is empty.
 	 */
-	// TODO in order to allow the following use case, the extension should look like
-//	public static <T> T find(Iterable<T> iterable, Functions.Function1<? super T, Boolean> predicate) {
-	// Predicate<Object> notNull = Predicates.notNull();
-	// Iterable<String> strings = ..
-	// String s = find(strings, notNull);
-	public static <T> T find(Iterable<? extends T> iterable, Functions.Function1<T, Boolean> predicate) {
+	public static <T> T find(Iterable<T> iterable, Functions.Function1<? super T, Boolean> predicate) {
 		for (T t : iterable) {
 			if (predicate.apply(t))
 				return t;

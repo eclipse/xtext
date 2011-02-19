@@ -289,6 +289,8 @@ public class TypeArgumentContextProvider {
 	}
 
 	protected JvmTypeParameter getReferenceTypeParameter(JvmTypeReference ref) {
+		if (ref == null)
+			return null;
 		if (ref.getType() instanceof JvmTypeParameter) {
 			return (JvmTypeParameter) ref.getType();
 		}

@@ -186,6 +186,19 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		}
 		return null;
 	}
+	
+	@Override
+	protected JvmTypeReference handleCyclicGetType(XExpression expression) {
+		if (expression instanceof XAbstractFeatureCall) {
+			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) expression;
+			JvmIdentifiableElement feature = featureCall.getFeature();
+			if (feature != null && !feature.eIsProxy()) {
+				JvmTypeReference result = getFeatureCallType(featureCall, true);
+				return result;
+			}
+		}		
+		return super.handleCyclicGetType(expression);
+	}
 
 	protected TypeArgumentContext getFeatureCallTypeArgContext(XAbstractFeatureCall expr, EReference reference, int index) {
 		JvmTypeReference receiverType = getReceiverType(expr);
@@ -527,6 +540,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XAbstractFeatureCall featureCall) {
+		return getFeatureCallType(featureCall, false);
+	}
+
+	protected JvmTypeReference getFeatureCallType(XAbstractFeatureCall featureCall, boolean ignoreExpectedType) {
 		JvmIdentifiableElement feature = featureCall.getFeature();
 		if (feature == null || feature.eIsProxy())
 			return null;
@@ -535,7 +552,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		if (feature instanceof JvmOperation) {
 			JvmOperation operation = (JvmOperation) feature;
 			if (featureCall.getTypeArguments().isEmpty()) {
-				JvmTypeReference expectedType = getExpectedType(featureCall);
+				JvmTypeReference expectedType = ignoreExpectedType ? null : getExpectedType(featureCall);
 				JvmTypeReference[] argumentTypes = getArgumentTypes(featureCall);
 				TypeArgumentContext methodTypeArgContext = typeArgCtxProvider.getInferredMethodInvocationContext(
 						operation, receiverType, expectedType, argumentTypes);
@@ -601,7 +618,11 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				if (indexOf < operation.getParameters().size()) {
 					JvmFormalParameter declaredParam = operation.getParameters().get(indexOf);
 					TypeArgumentContext context = typeArgCtxProvider.getReceiverContext(type);
-					return context.resolve(declaredParam.getParameterType());
+					JvmTypeReference result = context.getLowerBound(declaredParam.getParameterType());
+					if (result != null)
+						return result;
+					result = context.resolve(declaredParam.getParameterType());
+					return result;
 				}
 				return null;
 			} else if (parameter.eContainer() instanceof XForLoopExpression) {
