@@ -71,8 +71,6 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	private final static Logger log = Logger.getLogger(XbaseScopeProvider.class);
 
 	public static final QualifiedName THIS = QualifiedName.create("this");
-	public static final QualifiedName ASSIGN = QualifiedName.create("=");
-	public static final QualifiedName ADD = QualifiedName.create("+=");
 
 	@Inject
 	private JvmFeatureScopeProvider jvmFeatureScopeProvider;
@@ -291,10 +289,6 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		if (call == null)
 			return null;
 		return EcoreUtil2.getContainerOfType(call, JvmDeclaredType.class);
-	}
-
-	protected QualifiedName getAssignmentOperator(XAssignment assignment) {
-		return ASSIGN;
 	}
 
 	protected IScope createLocalVarScope(EObject context, EReference reference, IScope parentScope, boolean includeCurrentBlock, int idx) {
