@@ -11,7 +11,6 @@ package org.eclipse.xtext.generator;
 import static org.eclipse.xtext.GrammarUtil.*;
 
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.Strings;
 
 /**

@@ -494,18 +494,6 @@ public class Generator extends AbstractWorkflowComponent2 {
 		return projectNameUi;
 	}
 
-	private String projectNameTest;
-
-	public void setProjectNameTest(String projectNameTest) {
-		this.projectNameTest = projectNameTest;
-	}
-
-	private String getProjectNameTest() {
-		if (projectNameTest == null)
-			return getProjectNameRt() + ".test";
-		return projectNameTest;
-	}
-
 	private void generateManifest(XpandFacade facade, String name, String symbolicName, String version, Set<String> exported,
 			Set<String> requiredBundles, Set<String> imported, String activator) {
 		facade.evaluate("org::eclipse::xtext::generator::Manifest::file", 
