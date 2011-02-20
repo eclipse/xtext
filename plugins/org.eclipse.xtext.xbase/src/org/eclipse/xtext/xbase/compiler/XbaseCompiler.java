@@ -36,7 +36,7 @@ import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
-import org.eclipse.xtext.xbase.lib.Objects;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.typing.FunctionConversion;
 
 import com.google.inject.Inject;
@@ -372,7 +372,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				if (typeRefs.is(convertedType, Boolean.TYPE) || typeRefs.is(convertedType, Boolean.class)) {
 					internalToJavaExpression(casePart.getCase(), b);
 				} else {
-					b.append(Objects.class.getCanonicalName()).append("._operator_equals(").append(variableName).append(",");
+					b.append(ObjectExtensions.class.getCanonicalName()).append("._operator_equals(").append(variableName).append(",");
 					internalToJavaExpression(casePart.getCase(), b);
 					b.append(")");
 				}

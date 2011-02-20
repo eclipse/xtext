@@ -15,6 +15,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
@@ -103,6 +104,17 @@ public class JavaReflectAccess {
 		if (type.eIsProxy()) {
 			throw new IllegalStateException("Cannot resolve proxy: " + EcoreUtil.getURI(type));
 		}
+		if (type instanceof JvmArrayType) {
+			JvmType componentType = ((JvmArrayType) type).getComponentType().getType();
+			Class<?> componentClass = getRawType(componentType);
+			try {
+				return getClassFinder().forName(componentClass.getName() + "[]");
+			} catch (ClassNotFoundException e) {
+				if (log.isDebugEnabled())
+					log.debug(e.getMessage(), e);
+				return null;
+			}
+		}
 		if (type instanceof JvmTypeParameter) {
 			JvmTypeParameter tp = (JvmTypeParameter) type;
 			EList<JvmTypeConstraint> constraints = tp.getConstraints();
@@ -123,7 +135,7 @@ public class JavaReflectAccess {
 	}
 
 	protected Class<?>[] getParamTypes(JvmExecutable exe) {
-		EList<JvmFormalParameter> parameters = exe.getParameters();
+		List<JvmFormalParameter> parameters = exe.getParameters();
 		List<Class<?>> result = Lists.newArrayList();
 		for (JvmFormalParameter p : parameters) {
 			result.add(getRawType(p.getParameterType()));
