@@ -258,7 +258,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 				getXtextProjectInfo().getUiProjectName(),
 				"org.eclipse.core.runtime", //$NON-NLS-1$
 				"org.eclipse.xtext", //$NON-NLS-1$
-				"org.eclipse.xtext.junit", //$NON-NLS-1$
+				"org.eclipse.xtext.junit4", //$NON-NLS-1$
 				"org.eclipse.xtext.ui.junit" //$NON-NLS-1$
 				); //$NON-NLS-1$
 		return requiredBundles;
