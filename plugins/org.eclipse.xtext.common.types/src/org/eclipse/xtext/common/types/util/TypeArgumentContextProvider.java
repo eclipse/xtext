@@ -140,8 +140,8 @@ public class TypeArgumentContextProvider {
 			}
 			for (int i = 0; i < paramCount && i < argumentTypes.length; i++) {
 				JvmTypeReference actualArgumentType = argumentTypes[i];
-				final JvmTypeReference declaredParameterType = op.getParameters().get(i).getParameterType();
 				if (actualArgumentType != null) {
+					final JvmTypeReference declaredParameterType = op.getParameters().get(i).getParameterType();
 					resolve(declaredParameterType, actualArgumentType, map);
 				}
 			}
@@ -205,7 +205,7 @@ public class TypeArgumentContextProvider {
 
 	protected boolean isBetterMatch(JvmTypeReference current, JvmTypeReference isBetter) {
 		if (!isResolved(current)) {
-			return true;
+			return isResolved(isBetter);
 		}
 		if (typeReferences.is(current, Void.class)) {
 			if (typeReferences.is(isBetter, Void.class))
@@ -222,6 +222,16 @@ public class TypeArgumentContextProvider {
 	protected boolean isResolved(JvmTypeReference type) {
 		if (type.getType() instanceof JvmTypeParameter) {
 			return false;
+		}
+		if (type instanceof JvmWildcardTypeReference) {
+			JvmWildcardTypeReference wildcard = (JvmWildcardTypeReference) type;
+			if (wildcard.getConstraints().isEmpty())
+				return false;
+			for(JvmTypeConstraint constraint: wildcard.getConstraints()) {
+				if (!isResolved(constraint.getTypeReference()))
+					return false;
+			}
+			return true;
 		}
 		return true;
 	}

@@ -35,7 +35,12 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	
 	public void testAssignment_1() throws Exception {
 		XBinaryOperation assignment = (XBinaryOperation) expression("new java.util.ArrayList<String>() += 'foo'", true);
-		assertEquals("org.eclipse.xtext.xbase.lib.Collections._operator_add(A,B)",assignment.getFeature().getIdentifier());
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions._operator_add(A,B)", assignment.getFeature().getIdentifier());
+	}
+	
+	public void testAssignment_2() throws Exception {
+		XBinaryOperation assignment = (XBinaryOperation) expression("new java.util.ArrayList<CharSequence>() += new java.util.ArrayList<String>()", true);
+		assertEquals("org.eclipse.xtext.xbase.lib.CollectionExtensions._operator_add(java.util.Collection,java.util.Collection)",assignment.getFeature().getIdentifier());
 	}
 	
 	public void testAssignmentToInvisibleElements() throws Exception {

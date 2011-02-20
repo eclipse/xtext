@@ -14,6 +14,7 @@ import junit.framework.TestCase;
 import testdata.ExceptionSubclass;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -882,18 +883,36 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	}
 	
 	public void testIterableExtension_01() {
-		assertEvaluatesTo(null, "new java.util.ArrayList<String>().find(String e|e.length==0)");
+		assertEvaluatesTo(null, "new java.util.ArrayList<String>().findFirst(String e|e.length==0)");
 	}
 	
 	public void testIterableExtension_02() {
-		assertEvaluatesTo(null, "new java.util.ArrayList<String>().find(e|e.length==0)");
+		assertEvaluatesTo(null, "new java.util.ArrayList<String>().findFirst(e|e.length==0)");
 	}
 	
+	// TODO this test is green but takes 12 secs
+//	public void testIterableExtension_03() {
+//		assertEvaluatesTo(Integer.valueOf(12), "newArrayList(1, 2, 3, 4, 5, 6).filter(i|i%2==0).reduce(a,b|a+b)");
+//	}
+	
+	public void testIterableExtension_04() {
+		assertEvaluatesTo(Lists.newArrayList(2, 3, 2, 3, 4), "newArrayList('a','aa','b','aa','abc').select(s|s.length+1).toList()");
+	}
+	
+	// TODO fix us
+//	public void testIterableExtension_05() {
+//		assertEvaluatesTo(Integer.valueOf(2 + 3 + 2 + 3 + 4), "newArrayList('a','aa','b','aa','abc').select(s|s.length).reduce(a,b|a+b)");
+//	}
+//	
+//	public void testIterableExtension_06() {
+//		assertEvaluatesTo(Integer.valueOf(5), "newArrayList('a','aa','b','aa','abc').select(s|s.length + 1).head(4).toSet().reduce(a,b|a+b)");
+//	}
+	
 	public void testStaticMethod_01() {
-		assertEvaluatesTo(null, "find(new java.util.ArrayList<String>(), [String e|e.length==0])");
+		assertEvaluatesTo(Sets.newTreeSet(), "newTreeSet(String left, String right|left.compareTo(right))");
 	}
 	
 	public void testStaticMethod_02() {
-		assertEvaluatesTo(null, "find(new java.util.ArrayList<String>(), [e|e.length==0])");
+		assertEvaluatesTo(Sets.newHashSet("a"), "newTreeSet([left, right|left.compareTo(right)], 'a')");
 	}
 }

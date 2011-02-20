@@ -10,16 +10,21 @@ package org.eclipse.xtext.xbase.lib;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class Booleans {
-	public static boolean _operator_and(boolean a, boolean b) {
-		return a&&b;
+public class ComparableExtensions {
+	
+	public static <A extends Comparable<B>, B> boolean _operator_lessThan(A a, B b) {
+		return a.compareTo(b)<0;
 	}
 
-	public static boolean _operator_or(boolean a, boolean b) {
-		return a||b;
+	public static <A extends Comparable<B>, B> boolean _operator_greaterThan(A a, B b) {
+		return a.compareTo(b)>0;
 	}
 
-	public static boolean _operator_not(boolean b) {
-		return !b;
+	public static <A extends Comparable<B>, B> boolean _operator_lessEqualsThan(A a, B b) {
+		return a.compareTo(b)<=0;
+	}
+
+	public static <A extends Comparable<B>, B> boolean _operator_greaterEqualsThan(A a, B b) {
+		return a.compareTo(b)>=0;
 	}
 }

@@ -18,7 +18,6 @@ import java.lang.reflect.Proxy;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
@@ -126,7 +125,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	
 	@Inject
 	private TypeReferences typeRefs;
-
+	
 	private ClassFinder classFinder;
 
 	private ClassLoader classLoader;
@@ -576,14 +575,13 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			result.add(argumentValue);
 		}
 		if (executable.isVarArgs()) {
-			JvmTypeReference lastParameterType = executable.getParameters().get(paramCount).getParameterType();
-			JvmTypeReference componentTypeReference = ((JvmArrayType) lastParameterType.getType()).getComponentType();
-			String typeName = componentTypeReference.getType().getIdentifier();
 			Class<?> componentType = null;
-			try {
-				componentType = classFinder.forName(typeName);
-			} catch (ClassNotFoundException e) {
-				throw new EvaluationException(new NoClassDefFoundError(typeName));
+			if (executable instanceof JvmOperation) {
+				Method method = javaReflectAccess.getMethod((JvmOperation) executable);
+				componentType = method.getParameterTypes()[paramCount].getComponentType();
+			} else {
+				Constructor<?> constructor = javaReflectAccess.getConstructor((JvmConstructor) executable);
+				componentType = constructor.getParameterTypes()[paramCount].getComponentType();
 			}
 			if (expressions.size() == executable.getParameters().size()) {
 				XExpression arg = expressions.get(paramCount);

@@ -17,7 +17,7 @@ import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
-import org.eclipse.xtext.xbase.lib.Strings;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
@@ -130,7 +130,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		javaCompiler.addClassPathOfClass(getClass());
-		javaCompiler.addClassPathOfClass(Strings.class);
+		javaCompiler.addClassPathOfClass(StringExtensions.class);
 		javaCompiler.addClassPathOfClass(Notifier.class);
 		javaCompiler.addClassPathOfClass(EcorePackage.class);
 		javaCompiler.addClassPathOfClass(XbasePackage.class);

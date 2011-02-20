@@ -169,11 +169,11 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testMethodTypeParamInference_00() throws Exception {
-		assertResolvedReturnType("java.lang.String", "new java.util.ArrayList<? extends String>().find(e|true)");
+		assertResolvedReturnType("java.lang.String", "new java.util.ArrayList<? extends String>().findFirst(e|true)");
 	}
 	
 	public void testMethodTypeParamInference_01() throws Exception {
-		assertResolvedReturnType("java.lang.String", "new java.util.ArrayList<String>().find(e|e == 'foo')");
+		assertResolvedReturnType("java.lang.String", "new java.util.ArrayList<String>().findFirst(e|e == 'foo')");
 	}
 
 	@Inject

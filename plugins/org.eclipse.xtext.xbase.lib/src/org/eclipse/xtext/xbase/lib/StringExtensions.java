@@ -10,7 +10,7 @@ package org.eclipse.xtext.xbase.lib;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class Strings {
+public class StringExtensions {
 	
 	/**
 	 * concatenation operator

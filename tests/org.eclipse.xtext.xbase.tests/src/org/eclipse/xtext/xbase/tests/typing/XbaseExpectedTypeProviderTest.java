@@ -47,9 +47,14 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 		assertExpected("java.lang.String", fc.getMemberCallTarget());
 	}
 
-	public void testBinaryOperationCall() throws Exception {
-		XBinaryOperation fc = (XBinaryOperation) expression("new java.util.ArrayList<String>() += null");
+	public void testBinaryOperationCall_01() throws Exception {
+		XBinaryOperation fc = (XBinaryOperation) expression("new java.util.ArrayList<String>() += ''");
 		assertExpected("java.lang.String", fc.getRightOperand());
+	}
+	
+	public void testBinaryOperationCall_02() throws Exception {
+		XBinaryOperation fc = (XBinaryOperation) expression("new java.util.ArrayList<CharSequence>() += emptyList()");
+		assertExpected("java.util.Collection<? extends java.lang.CharSequence>", fc.getRightOperand());
 	}
 	
 	public void testTypeParamInference_01() throws Exception {

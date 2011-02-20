@@ -249,21 +249,21 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		String fileAsText= 
 				"import static com.google.common.collect.Iterables.*\n" +
 				"import static java.util.Collections.*\n" +
-				"class Clazz { void method() singletonList('').find(e|e!=null) }";
+				"class Clazz { void method() singletonList('').findFirst(e|e!=null) }";
 		XtendFile file = file(fileAsText, true);
 		XtendFunction function = (XtendFunction) file.getXtendClass().getMembers().get(0);
 		XMemberFeatureCall featureCall = (XMemberFeatureCall) function.getExpression();
 		String identifier = featureCall.getFeature().getIdentifier();
-		assertEquals("org.eclipse.xtext.xbase.lib.Iterables.find(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)", identifier);
+		assertEquals("org.eclipse.xtext.xbase.lib.IterableExtensions.findFirst(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)", identifier);
 	}
 	
 	public void testStaticImports_09() throws Exception {
-		String fileAsText= "import static java.util.Collections.* class Clazz { void method() singletonList('').find(String e|e!=null) }";
+		String fileAsText= "import static java.util.Collections.* class Clazz { void method() singletonList('').findFirst(String e|e!=null) }";
 		XtendFile file = file(fileAsText, true);
 		XtendFunction function = (XtendFunction) file.getXtendClass().getMembers().get(0);
 		XMemberFeatureCall featureCall = (XMemberFeatureCall) function.getExpression();
 		String identifier = featureCall.getFeature().getIdentifier();
-		assertEquals("org.eclipse.xtext.xbase.lib.Iterables.find(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)", identifier);
+		assertEquals("org.eclipse.xtext.xbase.lib.IterableExtensions.findFirst(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)", identifier);
 	}
 	
 	public void testStaticImports_10() throws Exception {

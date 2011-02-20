@@ -115,7 +115,7 @@ public class TypeArgumentContext {
 		@SuppressWarnings("serial")
 		EcoreUtil.Copier copier = new EcoreUtil.Copier(false,true) {
 
-			private Set<JvmType> allResolved = Sets.newHashSet();
+			private Set<JvmType> resolving = Sets.newHashSet();
 			
 			@Override
 			public EObject copy(EObject object) {
@@ -123,20 +123,37 @@ public class TypeArgumentContext {
 				EObject result = super.copy(resolvedObject);
 				return result;
 			}
+			
+//			@Override
+//			protected EObject createCopy(EObject object) {
+//				EObject resolvedObject = resolveTypeParameters(object);
+//				EObject result = super.createCopy(resolvedObject);
+//				return result;
+//			}
 
 			protected EObject resolveTypeParameters(EObject object) {
 				if (object instanceof JvmParameterizedTypeReference) {
 					JvmParameterizedTypeReference parameterizedTypeRef = (JvmParameterizedTypeReference) object;
 					JvmType type = parameterizedTypeRef.getType();
-					if (allResolved.add(type) && type instanceof JvmTypeParameter) {
-						JvmTypeReference resolved = TypeArgumentContext.this.getBoundArgument((JvmTypeParameter) type);
-						if (resolved!=null) {
-							if (resolved.getType() == type) {
-								return resolved;
+					if (resolving.add(type)) {
+						if (type instanceof JvmTypeParameter) {
+							try {
+								JvmTypeReference resolved = TypeArgumentContext.this.getBoundArgument((JvmTypeParameter) type);
+								if (resolved!=null && resolved != object) {
+									if (resolved.getType() == type) {
+										return doGetResolvedCopy(resolved);
+									}
+									// wildcard
+									if (resolved.getType() == null) {
+										return doGetResolvedCopy(resolved);
+									}
+									return resolveTypeParameters(doGetResolvedCopy(resolved));
+								} else {
+									return typeReferences.createTypeRef(type);
+								}
+							} finally {
+								resolving.remove(type);
 							}
-							return resolveTypeParameters(resolved);
-						} else {
-							return typeReferences.createTypeRef(type);
 						}
 					}
 				}
