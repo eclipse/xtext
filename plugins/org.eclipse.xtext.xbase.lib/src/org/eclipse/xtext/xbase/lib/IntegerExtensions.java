@@ -12,7 +12,7 @@ import java.util.Iterator;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class Integers {
+public class IntegerExtensions {
 
 	public static int _operator_minus(Integer a) {
 		return -a;
@@ -55,34 +55,34 @@ public class Integers {
 	}
 	
 	protected static class IntIterator implements Iterator<Integer> {
-			private int current;
-			private int upTo;
-			private boolean increases;
-			
-			public IntIterator(int start, int upTo) {
-				super();
-				this.current = start;
-				this.upTo = upTo;
-				this.increases = start<upTo;
-			}
+		private int current;
+		private int upTo;
+		private boolean increases;
 
-			public boolean hasNext() {
-				if (increases)
-					return current<upTo;
-				else
-					return current>upTo;
-			}
+		public IntIterator(int start, int upTo) {
+			super();
+			this.current = start;
+			this.upTo = upTo;
+			this.increases = start < upTo;
+		}
 
-			public Integer next() {
-				if (increases)
-					return current++;
-				else
-					return current--;
-			}
+		public boolean hasNext() {
+			if (increases)
+				return current < upTo;
+			else
+				return current > upTo;
+		}
 
-			public void remove() {
-				throw new UnsupportedOperationException();
-			}
+		public Integer next() {
+			if (increases)
+				return current++;
+			else
+				return current--;
+		}
+
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
 	}
 	
 }
