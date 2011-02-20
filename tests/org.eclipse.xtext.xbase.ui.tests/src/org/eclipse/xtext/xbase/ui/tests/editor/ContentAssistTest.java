@@ -50,7 +50,21 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 		"throw",
 		"return",
 		"null",
-		"find()" // Iterables.find()
+		// Collection Literals
+		"emptyList()",
+		"emptySet()",
+		"emptyMap()",
+		"newImmutableList()",
+		"newImmutableSet()",
+		"newImmutableMap()",
+		"newArrayList()",
+		"newLinkedList()",
+		"newHashSet()",
+		"newLinkedHashSet()",
+		"newTreeSet()",
+		"newHashMap()",
+		"newLinkedHashMap()",
+		"newTreeMap()"
 	};
 	
 	protected static String[] STRING_OPERATORS = {
@@ -82,6 +96,10 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 			if (featuresAsSet.add(field.getName()))
 				features.add(field.getName());
 		}
+		// ObjectExtensions
+		features.add("asSingletonSet()");
+		features.add("asSingletonList()");
+		features.add("asSingletonMap()");
 		STRING_FEATURES = features.toArray(new String[features.size()]);
 	}
 
