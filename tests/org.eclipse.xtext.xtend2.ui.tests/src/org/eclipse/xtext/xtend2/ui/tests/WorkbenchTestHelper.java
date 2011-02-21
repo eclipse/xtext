@@ -43,6 +43,7 @@ import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.StringInputStream;
@@ -198,6 +199,7 @@ public class WorkbenchTestHelper extends Assert {
 				XtextProjectHelper.NATURE_ID);
 		projectFactory.addRequiredBundles(newArrayList("org.eclipse.xtext.xbase.lib", "org.eclipse.xtext.xtend2.lib"));
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
+		JavaProjectSetupUtil.addJre15ClasspathEntry(JavaCore.create(result));
 		return result;
 	}
 
