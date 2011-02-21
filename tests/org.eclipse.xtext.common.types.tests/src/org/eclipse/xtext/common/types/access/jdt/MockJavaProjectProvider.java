@@ -176,7 +176,7 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 		return javaProject ;
 	}
 
-	protected static void makeJava5Compliant(IJavaProject javaProject) {
+	public static void makeJava5Compliant(IJavaProject javaProject) {
 		@SuppressWarnings("unchecked")
 		Map<String, String> options= javaProject.getOptions(false);
 		options.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_1_5);
