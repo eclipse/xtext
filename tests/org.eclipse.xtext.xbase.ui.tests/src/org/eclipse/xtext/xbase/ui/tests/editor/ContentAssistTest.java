@@ -97,9 +97,6 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 				features.add(field.getName());
 		}
 		// ObjectExtensions
-		features.add("asSingletonSet()");
-		features.add("asSingletonList()");
-		features.add("asSingletonMap()");
 		features.add("toFirstLower()");
 		features.add("toFirstUpper()");
 		features.add("isNullOrEmpty()");
