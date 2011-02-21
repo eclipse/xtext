@@ -890,32 +890,29 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(null, "new java.util.ArrayList<String>().findFirst(e|e.length==0)");
 	}
 	
-	// TODO this test is green but takes 12 secs
-//	public void testIterableExtension_03() {
-//		assertEvaluatesTo(Integer.valueOf(12), "newArrayList(1, 2, 3, 4, 5, 6).filter(i|i%2==0).reduce(a,b|a+b)");
-//	}
-	
-	public void testIterableExtension_04() {
-		assertEvaluatesTo(Lists.newArrayList(2, 3, 2, 3, 4), "newArrayList('a','aa','b','aa','abc').select(s|s.length+1).toList()");
+	public void testIterableExtension_03() {
+		assertEvaluatesTo(Integer.valueOf(12), "newArrayList(1, 2, 3, 4, 5, 6).filter(i|i%2==0).reduce(a,b|a+b)");
 	}
 	
-	// TODO fix us
-//	public void testIterableExtension_05() {
-//		assertEvaluatesTo(Integer.valueOf(2 + 3 + 2 + 3 + 4), "newArrayList('a','aa','b','aa','abc').select(s|s.length).reduce(a,b|a+b)");
-//	}
-//	
-//	public void testIterableExtension_06() {
-//		assertEvaluatesTo(Integer.valueOf(5), "newArrayList('a','aa','b','aa','abc').select(s|s.length + 1).head(4).toSet().reduce(a,b|a+b)");
-//	}
+	public void testIterableExtension_04() {
+		assertEvaluatesTo(Lists.newArrayList(2, 3, 2, 3, 4), "newArrayList('a','aa','b','aa','abc').map(s|s.length+1).toList()");
+	}
+	
+	public void testIterableExtension_05() {
+		assertEvaluatesTo(Integer.valueOf(2 + 3 + 2 + 3 + 4), "newArrayList('a','aa','b','aa','abc').map(s|s.length + 1).reduce(a,b|a+b)");
+	}
+	
+	public void testIterableExtension_06() {
+		assertEvaluatesTo(Integer.valueOf(5), "newArrayList('a','aa','b','aa','abc').map(s|s.length + 1).take(4).toSet().reduce(a,b|a+b)");
+	}
 	
 	public void testMapConstruction_00() throws Exception {
 		assertEvaluatesTo("vier", "newHashMap(3->'drei',4->'vier').get(4)");
 	}
 	
-//TODO kehrt nie (oder lange nicht) zurueck	
-//	public void testMapConstruction_01() throws Exception {
-//		assertEvaluatesTo("vier", "newHashMap(3->'drei',4->'vier').entrySet.findFirst(e|e.key==4).value");
-//	}
+	public void testMapConstruction_01() throws Exception {
+		assertEvaluatesTo("vier", "newHashMap(3->'drei',4->'vier').entrySet.findFirst(e|e.key==4).value");
+	}
 	
 	public void testStaticMethod_01() {
 		assertEvaluatesTo(Sets.newTreeSet(), "newTreeSet(String left, String right|left.compareTo(right))");
