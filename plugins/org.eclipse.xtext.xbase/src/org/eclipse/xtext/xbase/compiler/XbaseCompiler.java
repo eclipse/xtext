@@ -372,7 +372,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				if (typeRefs.is(convertedType, Boolean.TYPE) || typeRefs.is(convertedType, Boolean.class)) {
 					internalToJavaExpression(casePart.getCase(), b);
 				} else {
-					b.append(ObjectExtensions.class.getCanonicalName()).append("._operator_equals(").append(variableName).append(",");
+					b.append(ObjectExtensions.class.getCanonicalName()).append(".operator_equals(").append(variableName).append(",");
 					internalToJavaExpression(casePart.getCase(), b);
 					b.append(")");
 				}
