@@ -50,13 +50,19 @@ public class FeatureCallToJavaMapping {
 	}
 	
 	public List<XExpression> getActualArguments(XAbstractFeatureCall featureCall, JvmIdentifiableElement feature, XExpression implicitReceiver) {
-		final List<? extends XExpression> allArguments = featureCall.getExplicitArguments();
-		if (isStaticJavaFeature(feature) || implicitReceiver!=null) {
-			return newArrayList(allArguments);
+		final List<? extends XExpression> explicitArguments = featureCall.getExplicitArguments();
+		if (isStaticJavaFeature(feature)) {
+			if (implicitReceiver == null || explicitArguments.contains(implicitReceiver))
+				return newArrayList(explicitArguments);
+			List<XExpression> result = newArrayList(implicitReceiver);
+			result.addAll(explicitArguments);
+			return result;
+		} else if (implicitReceiver != null) {
+			return newArrayList(explicitArguments);
 		}
-		if (allArguments.size()<=1)
+		if (explicitArguments.size()<=1)
 			return emptyList();
-		return newArrayList(allArguments.subList(1, allArguments.size()));
+		return newArrayList(explicitArguments.subList(1, explicitArguments.size()));
 	}
 	
 	public boolean isTargetsMemberSyntaxCall(XAbstractFeatureCall featureCall) {
