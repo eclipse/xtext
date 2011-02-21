@@ -148,7 +148,7 @@ public class OutlineTests extends AbstractXtend2UITestCase {
 		AssertBuilder foo = assertBuilder.child(2, "Foo").numChildren(3);
 		foo.child(0, "bar(Object) : String").numChildren(2).child(0, "bar(Object) : String");
 		foo.child(1, "foo(Object) : String").numChildren(2).child(0, "foo(Object) : String");
-		foo.child(2, "baz() : Void").numChildren(2);
+		foo.child(2, "baz() : Void").numChildren(0);
 	}
 	
 	protected void setSorting(boolean isSorting) {
