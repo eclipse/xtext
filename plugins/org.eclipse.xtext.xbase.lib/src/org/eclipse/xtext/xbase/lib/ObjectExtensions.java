@@ -7,10 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class ObjectExtensions {
 	
@@ -28,18 +24,6 @@ public class ObjectExtensions {
 	
 	public static <A,B> Pair<A,B> operator_mappedTo(A a, B b) {
 		return new Pair<A,B>(a,b);
-	}
-	
-	public static <T> Set<T> asSingletonSet(T value) {
-		return Collections.singleton(value);
-	}
-	
-	public static <T> List<T> asSingletonList(T value) {
-		return Collections.singletonList(value);
-	}
-	
-	public static <K, V> Map<K, V> asSingletonMap(K key, Functions.Function1<? super K, V> computation) {
-		return Collections.singletonMap(key, computation.apply(key));
 	}
 	
 }
