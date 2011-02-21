@@ -108,14 +108,6 @@ public class Primitives {
 		return provider.findTypeByName(class1.getCanonicalName());
 	}
 	
-	public JvmTypeReference toObjectReference(JvmTypeReference xTypeRef) {
-		if (isPrimitive(xTypeRef)) {
-			JvmType wrapperType = getWrapperType((JvmPrimitiveType) xTypeRef.getType());
-			xTypeRef = typeReferences.createTypeRef(wrapperType);
-		}
-		return xTypeRef;
-	}
-
 	public boolean isPrimitive(JvmTypeReference componentType) {
 		return componentType.getType() instanceof JvmPrimitiveType;
 	}

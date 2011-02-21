@@ -285,12 +285,12 @@ public class FunctionConversion {
 				reference.setType(typeParameter);
 				ref.getArguments().add(reference);
 			} else {
-				xTypeRef = primitives.toObjectReference(xTypeRef);
+				xTypeRef = primitives.asWrapperTypeIfPrimitive(xTypeRef);
 				ref.getArguments().add(EcoreUtil2.clone(xTypeRef));
 			}
 		}
 		if (returnType != null) {
-			returnType = primitives.toObjectReference(returnType);
+			returnType = primitives.asWrapperTypeIfPrimitive(returnType);
 			ref.getArguments().add(EcoreUtil2.clone(returnType));
 		} else {
 			JvmParameterizedTypeReference reference = factory.createJvmParameterizedTypeReference();

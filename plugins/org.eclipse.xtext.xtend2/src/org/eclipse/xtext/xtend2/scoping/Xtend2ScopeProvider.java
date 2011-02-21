@@ -27,12 +27,17 @@ import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
+import org.eclipse.xtext.xbase.scoping.featurecalls.IFeaturesForTypeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
 import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
+import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.internal.Lists;
@@ -46,7 +51,10 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 	private IXtend2JvmAssociations xtend2jvmAssociations;
 	
 	@Inject
-	private Provider<StaticallyImportedFeaturesProvider> staticallyImportedFeaturesProvider; 
+	private Provider<StaticallyImportedFeaturesProvider> staticallyImportedFeaturesProvider;
+	
+	@Inject
+	private Provider<InjectedExtensionMethodsFeaturesProvider> injectedExtensionMethodsFeaturesProvider; 
 	
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
@@ -113,7 +121,37 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 		
 		final StaticallyImportedFeaturesProvider staticProvider = staticallyImportedFeaturesProvider.get();
 		staticProvider.setContext(expression.eResource());
+		insertDescriptionProviders(staticProvider, currentContext, implicitReceiver, result);
 		
+		if (implicitReceiver==null) {
+			final XtendClass xtendClass = ((XtendFile) expression.eResource().getContents().get(0)).getXtendClass();
+			Iterable<DeclaredDependency> iterable = getExtensionDependencies(xtendClass);
+			for (DeclaredDependency declaredDependency : iterable) {
+				InjectedExtensionMethodsFeaturesProvider extensionMethodsFeaturesProvider = injectedExtensionMethodsFeaturesProvider.get();
+				extensionMethodsFeaturesProvider.setContext(declaredDependency);
+				insertDescriptionProviders(extensionMethodsFeaturesProvider, currentContext, createImplicitReceiver(declaredDependency), result);
+			}
+		}
+		
+		return result;
+	}
+	
+	protected JvmIdentifiableElement createImplicitReceiver(DeclaredDependency declaredDependency) {
+		final JvmIdentifiableElement field = (JvmIdentifiableElement) xtend2jvmAssociations.getInferredJvmElements(declaredDependency).iterator().next();
+		return field;
+	}
+
+	protected Iterable<DeclaredDependency> getExtensionDependencies(XtendClass context) {
+		return Iterables.filter(EcoreUtil2.typeSelect(context.getMembers(),DeclaredDependency.class), new Predicate<DeclaredDependency>() {
+			public boolean apply(DeclaredDependency input) {
+				return input.isExtension();
+			}
+		});
+	}
+
+	protected void insertDescriptionProviders(final IFeaturesForTypeProvider staticProvider,
+			JvmDeclaredType currentContext, JvmIdentifiableElement implicitReceiver,
+			List<IJvmFeatureDescriptionProvider> result) {
 		final DefaultJvmFeatureDescriptionProvider defaultProvider = newDefaultFeatureDescProvider();
 		defaultProvider.setFeaturesForTypeProvider(staticProvider);
 		
@@ -127,7 +165,6 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 		
 		result.add(2, defaultProvider);
 		result.add(3, sugaredProvider);
-		return result;
 	}
 	
 	protected IEObjectDescription createIEObjectDescription(JvmFormalParameter jvmFormalParameter) {

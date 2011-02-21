@@ -49,6 +49,20 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertSame(field, ((XFeatureCall)func.getExpression()).getFeature());
 	}
 	
+	
+	public void testInjectedExtensionMethodCall() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class Foo {" +
+				"  @Inject extension String" +
+				"  foo() " +
+				"    (1 as int).indexOf()" +
+				"}");
+		XtendFunction func = (XtendFunction) clazz.getMembers().get(1);
+		final XMemberFeatureCall call = (XMemberFeatureCall)func.getExpression();
+		assertEquals("java.lang.String.indexOf(int)", call.getFeature().getIdentifier());
+		assertEquals("Foo.string", call.getImplicitReceiver().getFeature().getIdentifier());
+	}
+	
 	public void testCaseFunction_00() throws Exception {
 		XtendFunction function = function("dispatch String foo(String s) _foo(s)");
 		final JvmOperation feature = (JvmOperation) ((XFeatureCall)function.getExpression()).getFeature();
