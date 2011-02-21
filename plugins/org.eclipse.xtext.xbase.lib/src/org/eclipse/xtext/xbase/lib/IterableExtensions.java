@@ -30,11 +30,6 @@ import com.google.common.collect.Sets;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
- * 
- * To be discussed:
- * #foldLeft / #foldRight vs #fold
- * #reduceLeft / #reduceRight vs #reduce
- * #min / #max as convenience variant for #reduce((T,T)=>Boolean)
  */
 public class IterableExtensions {
 
@@ -74,11 +69,15 @@ public class IterableExtensions {
 		}
 	}
 	
-	public static <T> T first(Iterable<T> iterable) {
+	public static <T> T head(Iterable<T> iterable) {
 		Iterator<T> iterator = iterable.iterator();
 		if (iterator.hasNext())
 			return iterator.next();
 		return null;
+	}
+	
+	public static <T> Iterable<T> tail(final Iterable<T> iterable) {
+		return drop(iterable, 1);
 	}
 	
 	public static <T> T last(Iterable<T> iterable) {
@@ -97,126 +96,42 @@ public class IterableExtensions {
 		}
 	}
 	
-	/**
-	 * Returns an iterable with the first <code>count</code> entries of the given iterable.
-	 * If <code>count</code> is negative, the last <code>count</code> entries will be skipped.
-	 * E.g. a head that is obtained for an <code>iterable</code> with 10 entries by means of
-	 * <code>head(iterable, -3)</code> with yield a view on the first 7 entries of the original
-	 * iterable.
-	 * @param iterable the original iterable. May not be <code>null</code>.
-	 */
-	public static <T> Iterable<T> head(final Iterable<T> iterable, final int count) {
+	public static <T> Iterable<T> take(final Iterable<T> iterable, final int count) {
 		if (iterable == null)
 			throw new NullPointerException("iterable");
+		if (count < 0)
+			throw new IllegalArgumentException("Cannot take a negative number of elements. Argument 'count' was: " + count);
 		if (count == 0)
 			return Collections.emptyList();
-		if (count > 0) {
-			return new Iterable<T>() {
-				public Iterator<T> iterator() {
-					return new AbstractIterator<T>() {
-
-						private int remaining = count;
-						
-						private Iterator<T> delegate = iterable.iterator();
-						
-						@Override
-						protected T computeNext() {
-							if (remaining <= 0)
-								return endOfData();
-							if (!delegate.hasNext())
-								return endOfData();
-							remaining--;
-							return delegate.next();
-						}
-					};
-				}
-			};
-		}
-		// count < 0
 		return new Iterable<T>() {
 			public Iterator<T> iterator() {
 				return new AbstractIterator<T>() {
 
-					private Object[] buffer = new Object[-count];
-					
-					private int bufferIdx = 0;
+					private int remaining = count;
 					
 					private Iterator<T> delegate = iterable.iterator();
 					
-					{
-						int i = 0;
-						while(i < buffer.length && delegate.hasNext()) {
-							T t = delegate.next();
-							buffer[i] = t;
-							i++;
-						}
-					}
-					
 					@Override
 					protected T computeNext() {
+						if (remaining <= 0)
+							return endOfData();
 						if (!delegate.hasNext())
 							return endOfData();
-						T newBufferEntry = delegate.next();
-						@SuppressWarnings("unchecked")
-						T result = (T) buffer[bufferIdx];
-						buffer[bufferIdx] = newBufferEntry;
-						bufferIdx++;
-						if (bufferIdx >= buffer.length)
-							bufferIdx = 0;
-						return result;
+						remaining--;
+						return delegate.next();
 					}
 				};
 			}
 		};
 	}
 	
-	public static <T> Iterable<T> tail(final Iterable<T> iterable, final int count) {
+	public static <T> Iterable<T> drop(final Iterable<T> iterable, final int count) {
 		if (iterable == null)
 			throw new NullPointerException("iterable");
 		if (count == 0)
-			return Collections.emptyList();
-		if (count > 0) {
-			return new Iterable<T>() {
-				public Iterator<T> iterator() {
-					return new AbstractIterator<T>() {
-
-						private Object[] buffer = new Object[count];
-						
-						private int bufferIdx = 0;
-						
-						private int remaining = 0;
-						
-						private Iterator<T> delegate = iterable.iterator();
-						
-						{
-							while(delegate.hasNext()) {
-								T t = delegate.next();
-								buffer[bufferIdx] = t;
-								bufferIdx++;
-								if (bufferIdx >= buffer.length)
-									bufferIdx = 0;
-								if (remaining < count)
-									remaining++;
-							}
-						}
-						
-						@Override
-						protected T computeNext() {
-							if (remaining <= 0)
-								return endOfData();
-							@SuppressWarnings("unchecked")
-							T result = (T) buffer[bufferIdx];
-							bufferIdx++;
-							if (bufferIdx >= buffer.length)
-								bufferIdx = 0;
-							remaining--;
-							return result;
-						}
-					};
-				}
-			};
-		}
-		// count < 0
+			return iterable;
+		if (count < 0)
+			throw new IllegalArgumentException("Cannot drop a negative number of elements. Argument 'count' was: " + count);
 		return new Iterable<T>() {
 			public Iterator<T> iterator() {
 				return new AbstractIterator<T>() {
@@ -224,8 +139,8 @@ public class IterableExtensions {
 					private Iterator<T> delegate = iterable.iterator();
 					
 					{
-						int i = 0;
-						while(i < -count && delegate.hasNext()) {
+						int i = count;
+						while(i > 0 && delegate.hasNext()) {
 							delegate.next();
 							i++;
 						}
@@ -242,7 +157,7 @@ public class IterableExtensions {
 		};
 	}
 	
-	public static <T> boolean contains(Iterable<T> iterable, Function1<? super T, Boolean> predicate) {
+	public static <T> boolean exists(Iterable<T> iterable, Function1<? super T, Boolean> predicate) {
 		for (T t : iterable) {
 			if (predicate.apply(t))
 				return true;
@@ -250,7 +165,7 @@ public class IterableExtensions {
 		return false;
 	}
 	
-	public static <T> boolean containsOnly(Iterable<T> iterable, Function1<? super T, Boolean> predicate) {
+	public static <T> boolean forall(Iterable<T> iterable, Function1<? super T, Boolean> predicate) {
 		for (T t : iterable) {
 			if (!predicate.apply(t))
 				return false;
@@ -262,7 +177,7 @@ public class IterableExtensions {
 		return Iterables.filter(iterable, new BooleanFunctionDelegate<T>(predicate));
 	}
 	
-	public static final <T, R> Iterable<R> select(Iterable<T> iterable, Function1<? super T, R> transformation) {
+	public static final <T, R> Iterable<R> map(Iterable<T> iterable, Function1<? super T, R> transformation) {
 		return Iterables.transform(iterable, new FunctionDelegate<T, R>(transformation));
 	}
 	
@@ -270,7 +185,7 @@ public class IterableExtensions {
 		return Iterables.concat(iterables);
 	}
 	
-	public static final <T> void each(Iterable<T> iterable, Function1<? super T, ?> function) {
+	public static final <T> void forEach(Iterable<T> iterable, Function1<? super T, ?> function) {
 		for(T t: iterable) {
 			function.apply(t);
 		}
@@ -336,7 +251,7 @@ public class IterableExtensions {
 		return Sets.newHashSet(iterable);
 	}
 	
-	public static <K, V> Map<K, V> toKeys(Iterable<K> iterable, Function1<? super K, V> computeValues) {
+	public static <K, V> Map<K, V> toInvertedMap(Iterable<K> iterable, Function1<? super K, V> computeValues) {
 		Map<K, V> result = Maps.newHashMap();
 		for(K k: iterable) {
 			result.put(k, computeValues.apply(k));
@@ -344,7 +259,7 @@ public class IterableExtensions {
 		return result;
 	}
 	
-	public static <K, V> Map<K, V> toValues(Iterable<V> iterable, Function1<? super V, K> computeKeys) {
+	public static <K, V> Map<K, V> toMap(Iterable<V> iterable, Function1<? super V, K> computeKeys) {
 		Map<K, V> result = Maps.newHashMap();
 		for(V v: iterable) {
 			result.put(computeKeys.apply(v), v);
