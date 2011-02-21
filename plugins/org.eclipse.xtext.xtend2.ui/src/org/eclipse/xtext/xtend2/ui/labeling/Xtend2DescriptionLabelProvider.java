@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
+import org.eclipse.xtext.xtend2.resource.DescriptionFlags;
 
 import com.google.inject.Inject;
 
@@ -21,7 +22,10 @@ public class Xtend2DescriptionLabelProvider extends DefaultDescriptionLabelProvi
 
 	@Inject
 	private Xtend2Images images;
-	
+
+	@Inject
+	private DescriptionFlags descriptionFlags;
+
 	@Override
 	public Object image(IEObjectDescription element) {
 		EClass eClass = element.getEClass();
@@ -31,8 +35,11 @@ public class Xtend2DescriptionLabelProvider extends DefaultDescriptionLabelProvi
 			return images.forImport();
 		else if (eClass == XTEND_CLASS || eClass == TypesPackage.Literals.JVM_GENERIC_TYPE)
 			return images.forClass(0);
-		else if (eClass == XTEND_FUNCTION || eClass == TypesPackage.Literals.JVM_OPERATION)
+		else if (eClass == XTEND_FUNCTION)
 			return images.forFunction(0);
+		else if (eClass == TypesPackage.Literals.JVM_OPERATION)
+			return (descriptionFlags.isDispatcherOperation(element)) ? images.forDispatcherFunction(0) : images
+					.forFunction(0);
 		else
 			return super.image(element);
 	}

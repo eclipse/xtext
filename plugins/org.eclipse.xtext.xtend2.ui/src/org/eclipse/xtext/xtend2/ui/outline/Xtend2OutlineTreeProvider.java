@@ -5,7 +5,10 @@ package org.eclipse.xtext.xtend2.ui.outline;
 
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
+import static java.util.Collections.*;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -13,8 +16,8 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
+import org.eclipse.xtext.xtend2.linking.DispatchUtil;
 import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
-import org.eclipse.xtext.xtend2.ui.labeling.DispatchUtil;
 import org.eclipse.xtext.xtend2.ui.labeling.Xtend2Images;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -25,8 +28,9 @@ import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 import com.google.inject.Inject;
 
 /**
- * customization of the default outline structure
+ * Customization of the default outline structure.
  * 
+ * @author Jan Koehnlein
  */
 public class Xtend2OutlineTreeProvider extends DefaultOutlineTreeProvider {
 
@@ -35,7 +39,7 @@ public class Xtend2OutlineTreeProvider extends DefaultOutlineTreeProvider {
 
 	@Inject
 	private IXtend2JvmAssociations associations;
-	
+
 	@Inject
 	private DispatchUtil dispatchUtil;
 
@@ -43,8 +47,9 @@ public class Xtend2OutlineTreeProvider extends DefaultOutlineTreeProvider {
 		if (xtendFile.getPackage() != null)
 			createEStructuralFeatureNode(parentNode, xtendFile, Xtend2Package.Literals.XTEND_FILE__PACKAGE,
 					images.forPackage(), xtendFile.getPackage(), true);
-		createEStructuralFeatureNode(parentNode, xtendFile, Xtend2Package.Literals.XTEND_FILE__IMPORTS,
-				images.forImportContainer(), "import declarations", false);
+		if (!xtendFile.getImports().isEmpty())
+			createEStructuralFeatureNode(parentNode, xtendFile, Xtend2Package.Literals.XTEND_FILE__IMPORTS,
+					images.forImportContainer(), "import declarations", false);
 		if (xtendFile.getXtendClass() != null)
 			createEObjectNode(parentNode, xtendFile.getXtendClass());
 	}
@@ -53,11 +58,17 @@ public class Xtend2OutlineTreeProvider extends DefaultOutlineTreeProvider {
 		JvmGenericType inferredType = associations.getInferredType(xtendClass);
 		if (inferredType != null) {
 			Set<XtendFunction> dispatchFunctions = newHashSet();
-			for (JvmOperation inferredOperation : inferredType.getDeclaredOperations()) {
-				if (dispatchUtil.isDispatcherFunction(inferredOperation)) {
-					createEObjectNode(parentNode, inferredOperation);
-					dispatchFunctions.addAll(newArrayList(associations.getAssociatedElements(inferredOperation,
-							XtendFunction.class)));
+			for (XtendMember member : xtendClass.getMembers()) {
+				if (!dispatchFunctions.contains(member) && member instanceof XtendFunction
+						&& ((XtendFunction) member).isDispatch()) {
+					for (JvmOperation inferredOperation : associations
+							.getAssociatedElements(member, JvmOperation.class)) {
+						if (dispatchUtil.isDispatcherFunction(inferredOperation)) {
+							createEObjectNode(parentNode, inferredOperation);
+							dispatchFunctions.addAll(newArrayList(associations.getAssociatedElements(inferredOperation,
+									XtendFunction.class)));
+						}
+					}
 				}
 			}
 			for (XtendMember member : xtendClass.getMembers()) {
@@ -71,10 +82,15 @@ public class Xtend2OutlineTreeProvider extends DefaultOutlineTreeProvider {
 	}
 
 	protected void _createChildren(IOutlineNode parentNode, JvmOperation inferredOperation) {
-		Iterable<XtendFunction> xtendFunctions = associations.getAssociatedElements(inferredOperation,
-				XtendFunction.class);
+		List<XtendFunction> xtendFunctions = newArrayList(associations.getAssociatedElements(inferredOperation,
+				XtendFunction.class));
+		sort(xtendFunctions, new Comparator<XtendFunction>() {
+			public int compare(XtendFunction arg0, XtendFunction arg1) {
+				return index(arg0) - index(arg1);
+			}
+		});
 		for (XtendFunction xtendFunction : xtendFunctions) {
-			if (dispatchUtil.isDispatchFunction(xtendFunction))
+			if (xtendFunction.isDispatch())
 				createEObjectNode(parentNode, xtendFunction);
 		}
 	}
@@ -83,5 +99,8 @@ public class Xtend2OutlineTreeProvider extends DefaultOutlineTreeProvider {
 		return true;
 	}
 
-	
+	protected int index(XtendFunction f) {
+		return f.getDeclaringType().getMembers().indexOf(f);
+	}
+
 }

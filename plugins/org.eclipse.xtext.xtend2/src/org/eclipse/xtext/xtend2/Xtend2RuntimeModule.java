@@ -8,6 +8,7 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
@@ -23,6 +24,7 @@ import org.eclipse.xtext.xtend2.linking.Xtend2EObjectAtOffsetHelper;
 import org.eclipse.xtext.xtend2.linking.Xtend2LazyLinker;
 import org.eclipse.xtext.xtend2.linking.Xtend2LocationInFileProvider;
 import org.eclipse.xtext.xtend2.naming.Xtend2QualifiedNameProvider;
+import org.eclipse.xtext.xtend2.resource.Xtend2ResourceDescriptionStrategy;
 import org.eclipse.xtext.xtend2.scoping.Xtend2GlobalScopeProvider;
 import org.eclipse.xtext.xtend2.scoping.Xtend2ImportedNamespaceScopeProvider;
 import org.eclipse.xtext.xtend2.typing.Xtend2TypeProvider;
@@ -74,6 +76,10 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 	@Override
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return Xtend2QualifiedNameProvider.class;
+	}
+	
+	public Class <? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
+		return Xtend2ResourceDescriptionStrategy.class;
 	}
 
 	@Override
