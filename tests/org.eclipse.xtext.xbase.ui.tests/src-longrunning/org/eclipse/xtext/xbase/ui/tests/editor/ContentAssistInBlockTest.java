@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.ui.tests.editor;
 import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
 
 import java.util.Collections;
+import java.util.Map;
 
 import junit.extensions.TestSetup;
 import junit.framework.Test;
@@ -28,6 +29,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
 
@@ -250,7 +252,8 @@ public class ContentAssistInBlockTest extends ContentAssistTest implements IJava
 		projectFactory.addProjectNatures(JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature", XtextProjectHelper.NATURE_ID);
 		projectFactory.addRequiredBundles(Collections.singletonList("org.eclipse.xtext.xbase.lib"));
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
+		JavaProjectSetupUtil.makeJava5Compliant(JavaCore.create(result));
 		return result;
 	}
-
+	
 }

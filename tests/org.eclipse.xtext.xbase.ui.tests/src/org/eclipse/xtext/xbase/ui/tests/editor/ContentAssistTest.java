@@ -306,11 +306,11 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 //	}
 	
 	public void testAfterBinaryOperation_10() throws Exception {
-		newBuilder().append("((''+null))").assertTextAtCursorPosition(")", "null", "!=", "==");
+		newBuilder().append("((''+null))").assertTextAtCursorPosition(")", "null", "!=", "==", "->");
 	}
 	
 	public void testNull() throws Exception {
-		newBuilder().append("null").assertText("null", "!=", "==");
+		newBuilder().append("null").assertText("null", "!=", "==", "->");
 	}
 	
 	public void testForLoop_01() throws Exception {

@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarOutputStream;
 
@@ -165,7 +166,7 @@ public class JavaProjectSetupUtil {
 		javaProject.save(null, true);
 		addNature(project, JavaCore.NATURE_ID);
 		addSourceFolder(javaProject, "src");
-		addJreClasspathEntry(javaProject);
+		addJre15ClasspathEntry(javaProject);
 		return javaProject;
 	}
 
@@ -221,11 +222,27 @@ public class JavaProjectSetupUtil {
 		return folder;
 	}
 
-	private static void addJreClasspathEntry(IJavaProject javaProject) throws JavaModelException {
+	public static void addJre15ClasspathEntry(IJavaProject javaProject) throws JavaModelException {
 		IClasspathEntry existingJreContainerClasspathEntry = getJreContainerClasspathEntry(javaProject);
 		if (existingJreContainerClasspathEntry == null) {
 			addToClasspath(javaProject, JavaCore.newContainerEntry(new Path(JRE_CONTAINER_1_5)));
 		}
+	}
+	
+	public static void makeJava5Compliant(IJavaProject javaProject) {
+		@SuppressWarnings("unchecked")
+		Map<String, String> options= javaProject.getOptions(false);
+		options.put(JavaCore.COMPILER_COMPLIANCE, JavaCore.VERSION_1_5);
+		options.put(JavaCore.COMPILER_SOURCE, JavaCore.VERSION_1_5);
+		options.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, JavaCore.VERSION_1_5);
+		options.put(JavaCore.COMPILER_PB_ASSERT_IDENTIFIER, JavaCore.ERROR);
+		options.put(JavaCore.COMPILER_PB_ENUM_IDENTIFIER, JavaCore.ERROR);
+		options.put(JavaCore.COMPILER_CODEGEN_INLINE_JSR_BYTECODE, JavaCore.ENABLED);
+		options.put(JavaCore.COMPILER_LOCAL_VARIABLE_ATTR, JavaCore.GENERATE);
+		options.put(JavaCore.COMPILER_LINE_NUMBER_ATTR, JavaCore.GENERATE);
+		options.put(JavaCore.COMPILER_SOURCE_FILE_ATTR, JavaCore.GENERATE);
+		options.put(JavaCore.COMPILER_CODEGEN_UNUSED_LOCAL, JavaCore.PRESERVE);
+		javaProject.setOptions(options);
 	}
 
 	public static IClasspathEntry getJreContainerClasspathEntry(IJavaProject javaProject) throws JavaModelException {
