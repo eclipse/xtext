@@ -10,6 +10,7 @@ package org.eclipse.xtext.common.types.util;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -33,6 +34,8 @@ import com.google.common.collect.Sets;
  * @author Sebastian Zarnekow
  */
 public class TypeArgumentContext {
+	
+	private static final Logger logger = Logger.getLogger(TypeArgumentContext.class);
 
 	private Map<JvmTypeParameter, JvmTypeReference> context;
 	private Factory typeProviderFactory;
@@ -112,11 +115,16 @@ public class TypeArgumentContext {
 	}
 
 	protected JvmTypeReference doGetResolvedCopy(JvmTypeReference element) {
+		return doGetResolvedCopy(element, Sets.<JvmType>newHashSet(), Sets.<JvmType>newHashSet());
+	}
+	
+	protected JvmTypeReference doGetResolvedCopy(JvmTypeReference element, final Set<JvmType> resolving, final Set<JvmType> unresolved) {
+		if (logger.isDebugEnabled())
+			logger.debug("doGetResolvedCopy: " + element + " in context " + this + " resolving: " + resolving + " unresolved: " + unresolved);
+		
 		@SuppressWarnings("serial")
 		EcoreUtil.Copier copier = new EcoreUtil.Copier(false,true) {
 
-			private Set<JvmType> resolving = Sets.newHashSet();
-			
 			@Override
 			public EObject copy(EObject object) {
 				EObject resolvedObject = resolveTypeParameters(object);
@@ -135,19 +143,28 @@ public class TypeArgumentContext {
 				if (object instanceof JvmParameterizedTypeReference) {
 					JvmParameterizedTypeReference parameterizedTypeRef = (JvmParameterizedTypeReference) object;
 					JvmType type = parameterizedTypeRef.getType();
-					if (resolving.add(type)) {
-						if (type instanceof JvmTypeParameter) {
+					if (type instanceof JvmTypeParameter) {
+						if (resolving.add(type)) {
 							try {
 								JvmTypeReference resolved = TypeArgumentContext.this.getBoundArgument((JvmTypeParameter) type);
 								if (resolved!=null && resolved != object) {
 									if (resolved.getType() == type) {
-										return doGetResolvedCopy(resolved);
+										return parameterizedTypeRef;
 									}
 									// wildcard
 									if (resolved.getType() == null) {
-										return doGetResolvedCopy(resolved);
+										if (object.eContainer() instanceof JvmTypeConstraint) {
+											return object;
+										}
+										if (unresolved.add(type)) {
+											return doGetResolvedCopy(resolved, resolving, unresolved);
+										} else {
+											return copy(resolved);
+										}
+										
+//										return resolved;
 									}
-									return resolveTypeParameters(doGetResolvedCopy(resolved));
+									return resolveTypeParameters(doGetResolvedCopy(resolved, resolving, unresolved));
 								} else {
 									return typeReferences.createTypeRef(type);
 								}
@@ -162,6 +179,9 @@ public class TypeArgumentContext {
 		};
 		JvmTypeReference copy = (JvmTypeReference) copier.copy(element);
 		copier.copyReferences();
+		
+		if (logger.isDebugEnabled())
+			logger.debug("doGetResolvedCopy: " + element + " resolved to: " + copy);
 		return copy;
 	}
 

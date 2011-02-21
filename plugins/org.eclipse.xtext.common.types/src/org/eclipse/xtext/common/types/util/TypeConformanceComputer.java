@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -115,6 +116,36 @@ public class TypeConformanceComputer {
 	protected Boolean _isConformant(JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
 		Boolean result = isConformantDispatcher.invoke(left.getType(), right.getType(), left, right, ignoreGenerics);
 		return result;
+	}
+	
+	protected Boolean _isConformant(JvmGenericArrayTypeReference left, JvmWildcardTypeReference right, boolean ignoreGenerics) {
+		List<JvmTypeConstraint> constraints = right.getConstraints();
+		for(JvmTypeConstraint constraint: constraints) {
+			if (constraint instanceof JvmUpperBound) {
+				if (!isConformant(left, constraint.getTypeReference(), ignoreGenerics))
+					return false;
+			}
+			if (constraint instanceof JvmLowerBound) {
+				if (!isConformant(constraint.getTypeReference(), left, ignoreGenerics))
+					return false;
+			}
+		}
+		return Boolean.TRUE;
+	}
+	
+	protected Boolean _isConformant(JvmWildcardTypeReference left, JvmGenericArrayTypeReference right, boolean ignoreGenerics) {
+		List<JvmTypeConstraint> constraints = left.getConstraints();
+		for(JvmTypeConstraint constraint: constraints) {
+			if (constraint instanceof JvmUpperBound) {
+				if (!isConformant(constraint.getTypeReference(), right, ignoreGenerics))
+					return false;
+			}
+			if (constraint instanceof JvmLowerBound) {
+				if (!isConformant(right, constraint.getTypeReference(), ignoreGenerics))
+					return false;
+			}
+		}
+		return Boolean.TRUE;
 	}
 	
 	protected Boolean _isConformant(JvmWildcardTypeReference left, JvmParameterizedTypeReference right, boolean ignoreGenerics) {
