@@ -10,6 +10,7 @@ package org.eclipse.xtext.linking.impl;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -35,6 +36,8 @@ import com.google.inject.Provider;
  */
 public class DefaultLinkingService extends AbstractLinkingService {
 
+	private static final Logger logger = Logger.getLogger(DefaultLinkingService.class);
+	
 	@Inject
 	@LinkingScopeProviderBinding
 	private IScopeProvider scopeProvider;
@@ -107,12 +110,19 @@ public class DefaultLinkingService extends AbstractLinkingService {
 		if (requiredType == null)
 			return Collections.<EObject> emptyList();
 
-		final IScope scope = getScope(context, ref);
 		final String crossRefString = getCrossRefNodeAsString(node);
 		if (crossRefString != null && !crossRefString.equals("")) {
+			if (logger.isDebugEnabled()) {
+				logger.debug("before getLinkedObjects: node: '" + crossRefString + "'");
+			}
+				
+			final IScope scope = getScope(context, ref);
 			QualifiedName qualifiedLinkName =  qualifiedNameConverter.toQualifiedName(crossRefString);
 			IEObjectDescription eObjectDescription = scope.getSingleElement(qualifiedLinkName);
-			if (eObjectDescription != null)
+			if (logger.isDebugEnabled()) {
+				logger.debug("after getLinkedObjects: node: '" + crossRefString + "' result: " + eObjectDescription);
+			}
+			if (eObjectDescription != null) 
 				return Collections.singletonList(eObjectDescription.getEObjectOrProxy());
 		}
 		return Collections.emptyList();
