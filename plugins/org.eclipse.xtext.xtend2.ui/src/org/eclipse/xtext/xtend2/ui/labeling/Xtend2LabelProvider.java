@@ -5,6 +5,7 @@ package org.eclipse.xtext.xtend2.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
@@ -38,9 +39,6 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 	private IXtend2JvmAssociations xtend2jvmAssociations;
 
 	@Inject
-	private DispatchUtil dispatchUtil;
-
-	@Inject
 	public Xtend2LabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
@@ -58,7 +56,7 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	public Image image(XtendFunction element) {
-		return dispatchUtil.isDispatcherFunction(element) ? images.forDispatcherFunction(0) : images.forFunction(0);
+		return images.forFunction(0);
 	}
 
 	public Image image(JvmOperation element) {
@@ -78,12 +76,16 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	public String text(XtendFunction element) {
-		return text(xtend2jvmAssociations.getDirectlyInferredOperation(element));
+		return signature(element.getSimpleName(), xtend2jvmAssociations.getDirectlyInferredOperation(element));
 	}
 
 	public String text(JvmOperation element) {
+		return signature(element.getSimpleName(), element);
+	}
+
+	protected String signature(String simpleName, JvmIdentifiableElement element) {
 		JvmTypeReference returnType = typeProvider.getTypeForIdentifiable(element);
-		return element.getSimpleName() + uiStrings.parameters(element) + " : "
+		return simpleName + uiStrings.parameters(element) + " : "
 				+ ((returnType != null) ? returnType.getSimpleName() : "void");
 	}
 

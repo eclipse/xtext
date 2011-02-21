@@ -26,11 +26,11 @@ public interface IXtend2JvmAssociations {
 
 	Set<EObject> getAssociatedElements(EObject inferredJvmOrXtendElement);
 
-	<T> Iterable<T> getAssociatedElements(EObject inferredJvmOrXtendElement, Class<T> type);
+	<T> Set<T> getAssociatedElements(EObject inferredJvmOrXtendElement, Class<T> type);
 	
-	Iterable<EObject> getInferredJvmElements(EObject xtendElement);
+	Set<EObject> getInferredJvmElements(EObject xtendElement);
 	
-	Iterable<EObject> getXtendElements(EObject inferredJvmElement);
+	Set<EObject> getXtendElements(EObject inferredJvmElement);
 
 	XtendFunction getXtendFunction(JvmOperation inferredOperation);
 

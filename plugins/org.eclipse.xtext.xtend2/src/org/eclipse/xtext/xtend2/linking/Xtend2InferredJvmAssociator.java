@@ -28,6 +28,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Sets;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -53,11 +54,12 @@ public class Xtend2InferredJvmAssociator implements IXtend2JvmAssociations {
 		return (adapter == null) ? Collections.<EObject> emptySet() : adapter.getAssociatedElements();
 	}
 
-	public <T> Iterable<T> getAssociatedElements(EObject inferredJvmOrXtendElement, Class<T> type) {
-		return filter(getAssociatedElements(inferredJvmOrXtendElement), type);
+	@SuppressWarnings("unchecked")
+	public <T> Set<T> getAssociatedElements(EObject inferredJvmOrXtendElement, Class<T> type) {
+		return (Set<T>) Sets.filter(getAssociatedElements(inferredJvmOrXtendElement), Predicates.instanceOf(type));
 	}
 
-	public Iterable<EObject> getXtendElements(EObject inferredJvmElement) {
+	public Set<EObject> getXtendElements(EObject inferredJvmElement) {
 		return filter(getAssociatedElements(inferredJvmElement), new Predicate<EObject>() {
 			public boolean apply(EObject input) {
 				return input.eClass().getEPackage() == Xtend2Package.eINSTANCE;
@@ -65,7 +67,7 @@ public class Xtend2InferredJvmAssociator implements IXtend2JvmAssociations {
 		});
 	}
 
-	public Iterable<EObject> getInferredJvmElements(EObject xtendElement) {
+	public Set<EObject> getInferredJvmElements(EObject xtendElement) {
 		return filter(getAssociatedElements(xtendElement), new Predicate<EObject>() {
 			public boolean apply(EObject input) {
 				return input.eClass().getEPackage() == TypesPackage.eINSTANCE;
@@ -82,23 +84,14 @@ public class Xtend2InferredJvmAssociator implements IXtend2JvmAssociations {
 	}
 
 	public JvmOperation getDirectlyInferredOperation(final XtendFunction xtendFunction) {
-		final String xtendName = xtendFunction.getSimpleName();
-		return (JvmOperation) find(getAssociatedElements(xtendFunction), new Predicate<EObject>() {
-			public boolean apply(EObject input) {
-				return input instanceof JvmOperation
-						&& !(xtendName.startsWith("_") ^ ((JvmOperation) input).getSimpleName().startsWith("_"));
-			}
-		});
-	}
-	
-	protected <T> T find(Iterable<? extends T> iterable, Predicate<T> predicate) {
-		for (T t : iterable) {
-			if (predicate.apply(t))
-				return t;
+		for(EObject element: getAssociatedElements(xtendFunction)) {
+			if(element instanceof JvmOperation
+						&& getAssociatedElements(element).size() == 1) 
+				return (JvmOperation) element;
 		}
 		return null;
 	}
-
+	
 	public XtendClass getXtendClass(JvmGenericType inferredType) {
 		return getFirstAssociatedElement(inferredType, XtendClass.class);
 	}

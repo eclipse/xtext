@@ -27,7 +27,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
-import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
@@ -46,7 +46,7 @@ public class DispatchingSupport {
 	private Primitives primitives;
 
 	public Multimap<Pair<String, Integer>, JvmOperation> getDispatchMethods(JvmGenericType type) {
-		Multimap<Pair<String, Integer>, JvmOperation> result = HashMultimap.create();
+		Multimap<Pair<String, Integer>, JvmOperation> result = LinkedHashMultimap.create();
 		collectDispatchMethods(type, result);
 		return result;
 	}

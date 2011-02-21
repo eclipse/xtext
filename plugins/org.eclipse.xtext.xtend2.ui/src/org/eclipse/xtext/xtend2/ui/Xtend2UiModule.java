@@ -11,6 +11,7 @@ import org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposa
 import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
 import org.eclipse.xtext.ui.editor.findrefs.FindReferenceQueryDataFactory;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
+import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IComparator;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
@@ -28,6 +29,7 @@ import org.eclipse.xtext.xtend2.ui.highlighting.RichStringAwareTokenScanner;
 import org.eclipse.xtext.xtend2.ui.highlighting.RichStringHighlightingCalculator;
 import org.eclipse.xtext.xtend2.ui.highlighting.ShowWhitespaceCharactersActionContributor;
 import org.eclipse.xtext.xtend2.ui.highlighting.TokenToAttributeIdMapper;
+import org.eclipse.xtext.xtend2.ui.outline.Xtend2OutlineNodeComparator;
 import org.eclipse.xtext.xtend2.ui.refactoring.Xtend2DependentElementsCalculator;
 import org.eclipse.xtext.xtend2.ui.refactoring.Xtend2FindRefsQueryDataFactory;
 import org.eclipse.xtext.xtend2.ui.refactoring.Xtend2ReferenceUpdater;
@@ -102,5 +104,10 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 	@Override
 	public Class<? extends ReferenceProposalCreator> bindAbstractJavaBasedContentProposalProvider$ReferenceProposalCreator() {
 		return XbaseReferenceProposalCreator.class;
+	}
+	
+	@Override
+	public Class<? extends IComparator> bindOutlineFilterAndSorter$IComparator() {
+		return Xtend2OutlineNodeComparator.class;
 	}
 }

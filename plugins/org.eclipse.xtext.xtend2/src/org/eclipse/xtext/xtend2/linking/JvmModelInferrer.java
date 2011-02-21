@@ -132,8 +132,8 @@ public class JvmModelInferrer {
 			}
 		}
 		for (JvmOperation jvmOperation : operations) {
-			Iterable<XtendFunction> xtendFunction = associator.getAssociatedElements(jvmOperation, XtendFunction.class);
-			for (XtendFunction func : xtendFunction) {
+			Iterable<XtendFunction> xtendFunctions = associator.getAssociatedElements(jvmOperation, XtendFunction.class);
+			for (XtendFunction func : xtendFunctions) {
 				associator.associate(func, result);
 			}
 		}
