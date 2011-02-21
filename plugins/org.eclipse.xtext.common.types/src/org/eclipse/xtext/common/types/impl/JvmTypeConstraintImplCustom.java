@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -39,6 +42,13 @@ public abstract class JvmTypeConstraintImplCustom extends JvmTypeConstraintImpl 
 			return getTypeReference().getSimpleName();
 		}
 		return null;
+	}
+	
+	@Override
+	public void setTypeReference(JvmTypeReference newTypeReference) {
+		if (newTypeReference instanceof JvmWildcardTypeReference)
+			throw new IllegalArgumentException("wildcard type references are not supported as constraint bounds");
+		super.setTypeReference(newTypeReference);
 	}
 
 } 
