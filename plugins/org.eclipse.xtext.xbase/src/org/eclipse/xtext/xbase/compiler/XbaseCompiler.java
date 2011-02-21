@@ -241,7 +241,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (!typeRefs.isArray(arrayType))
 			throw new IllegalArgumentException(arrayType + " not an array.");
 		final JvmTypeReference componentType = ((JvmArrayType) arrayType.getType()).getComponentType();
-		return typeRefs.getTypeForName(Iterable.class, context, primitives.toObjectReference(componentType));
+		return typeRefs.getTypeForName(Iterable.class, context, primitives.asWrapperTypeIfPrimitive(componentType));
 	}
 
 	public void _toJavaStatement(XConstructorCall expr, IAppendable b, boolean isReferenced) {

@@ -17,7 +17,6 @@ import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
@@ -167,8 +166,6 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 	}
 
 	protected JvmFeatureDescriptions createFeatureScope(final JvmTypeReference type, final TypeArgumentContext context, final IJvmFeatureDescriptionProvider jvmFeatureDescriptionProvider) {
-		if (type != null && !(type.getType() instanceof JvmDeclaredType))
-			return null;
 		Iterable<? extends JvmFeature> features = getFeaturesForType(type, jvmFeatureDescriptionProvider);
 		if (!features.iterator().hasNext())
 			return null;
