@@ -137,11 +137,11 @@ public class FeatureCallChecker {
 		if (input.getParameters().size() != (1 + callTypeDelta))
 			return INVALID_NUMBER_OF_ARGUMENTS;
 		if (context.getRightOperand() != null && context.getLeftOperand() != null) {
-			JvmTypeReference type = getTypeProvider().getType(context.getRightOperand());
-			if (type == null)
+			JvmTypeReference rightOperandType = getTypeProvider().getType(context.getRightOperand(), true);
+			if (rightOperandType == null)
 				return INVALID_ARGUMENT_TYPES;
 			final JvmFormalParameter rightParam = input.getParameters().get(0 + callTypeDelta);
-			if (!conformance.isConformant(rightParam.getParameterType(), type))
+			if (!conformance.isConformant(rightParam.getParameterType(), rightOperandType, true))
 				return INVALID_ARGUMENT_TYPES;
 		}
 		return null;
@@ -153,7 +153,7 @@ public class FeatureCallChecker {
 		if (input.getParameters().size() != (1 + callTypeDelta))
 			return INVALID_NUMBER_OF_ARGUMENTS;
 		if (context.getValue() != null) {
-			JvmTypeReference type = getTypeProvider().getType(context.getValue());
+			JvmTypeReference type = getTypeProvider().getType(context.getValue(), true);
 			final JvmFormalParameter valueParam = input.getParameters().get(0 + callTypeDelta);
 			if (!isCompatibleArgument(valueParam.getParameterType(), type))
 				return INVALID_ARGUMENT_TYPES;
@@ -212,9 +212,9 @@ public class FeatureCallChecker {
 		if (input.getParameters().size() != 1)
 			return INVALID_NUMBER_OF_ARGUMENTS;
 		if (context.getOperand() != null) {
-			JvmTypeReference operandType = getTypeProvider().getType(context.getOperand());
+			JvmTypeReference operandType = getTypeProvider().getType(context.getOperand(), true);
 			final JvmFormalParameter param = input.getParameters().get(0);
-			if (!conformance.isConformant(param.getParameterType(), operandType))
+			if (!conformance.isConformant(param.getParameterType(), operandType, true))
 				return INVALID_ARGUMENT_TYPES;
 		}
 		return null;
@@ -243,7 +243,7 @@ public class FeatureCallChecker {
 		for (int i = 0; i < parametersToCheck; i++) {
 			JvmTypeReference parameterType = exectuable.getParameters().get(i).getParameterType();
 			XExpression argument = arguments.get(i);
-			JvmTypeReference argumentType = getTypeProvider().getType(argument);
+			JvmTypeReference argumentType = getTypeProvider().getType(argument, true);
 			if (parameterType == null)
 				return true;
 			if (!isCompatibleArgument(parameterType, argumentType))
@@ -257,7 +257,7 @@ public class FeatureCallChecker {
 			JvmTypeReference varArgType = ((JvmArrayType) lastParameterType.getType()).getComponentType();
 			if (arguments.size() == numberOfParameters) {
 				XExpression lastArgument = arguments.get(lastParamIndex);
-				JvmTypeReference lastArgumentType = getTypeProvider().getType(lastArgument);
+				JvmTypeReference lastArgumentType = getTypeProvider().getType(lastArgument, true);
 				if (isCompatibleArgument(lastParameterType, lastArgumentType))
 					return true;
 				if (!isCompatibleArgument(varArgType, lastArgumentType))
@@ -265,7 +265,7 @@ public class FeatureCallChecker {
 			} else {
 				for (int i = lastParamIndex; i < arguments.size(); i++) {
 					XExpression argumentExpression = arguments.get(i);
-					JvmTypeReference argumentType = getTypeProvider().getType(argumentExpression);
+					JvmTypeReference argumentType = getTypeProvider().getType(argumentExpression, true);
 					if (!isCompatibleArgument(varArgType, argumentType))
 						return false;
 				}

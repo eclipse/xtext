@@ -12,6 +12,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -367,6 +368,18 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		XFeatureCall eachFeatureCall = (XFeatureCall) forLoop.getEachExpression();
 		assertFalse(eachFeatureCall.getFeature().eIsProxy());
 		assertSame(forLoop.getDeclaredParam(), eachFeatureCall.getFeature());
+	}
+	
+	public void testExtensionMethodOnThis_01() throws Exception {
+		final XBlockExpression block = (XBlockExpression) expression("{ var this = newArrayList('').map(s|1).toList() map(i|i+1) }");
+		XAbstractFeatureCall featureCall = (XAbstractFeatureCall) block.getExpressions().get(1);
+		assertEquals("org.eclipse.xtext.xbase.lib.IterableExtensions.map(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)", featureCall.getFeature().getIdentifier());
+	}
+	
+	public void testExtensionMethodOnThis_02() throws Exception {
+		final XBlockExpression block = (XBlockExpression) expression("{ var this = newArrayList('').map(s|1).toList() this.map(i|i+1) }");
+		XAbstractFeatureCall featureCall = (XAbstractFeatureCall) block.getExpressions().get(1);
+		assertEquals("org.eclipse.xtext.xbase.lib.IterableExtensions.map(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)", featureCall.getFeature().getIdentifier());
 	}
 	
 }

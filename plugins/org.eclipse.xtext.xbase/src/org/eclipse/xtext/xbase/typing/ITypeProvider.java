@@ -20,22 +20,55 @@ import com.google.inject.ImplementedBy;
 public interface ITypeProvider {
 
 	/**
+	 * Return the resolved expected type of the given expression. 
+	 * Same as {@link #getExpectedType(XExpression, boolean) getExpectedType(expression, false}.
+	 * @param expression the expression. May not be <code>null</code>.
 	 * @return the fully-resolved expected type of the given expression, if a correct, fully-linkable model is given.
 	 *         Returns <code>null</code> if no special type is expected
 	 * 
 	 */
 	public JvmTypeReference getExpectedType(XExpression expression);
+	
+	/**
+	 * @param expression the expression. May not be <code>null</code>.
+	 * @param rawType <code>true</code> if the raw type is sufficient.
+	 * @return the fully-resolved expected type of the given expression, if a correct, fully-linkable model is given.
+	 *         Returns <code>null</code> if no special type is expected
+	 * 
+	 */
+	public JvmTypeReference getExpectedType(XExpression expression, boolean rawType);
 
 	/**
+	 * Return the resolved type of the given expression. Same as {@link #getType(XExpression, boolean) getType(expression, false}.
+	 * @param expression the expression. May not be <code>null</code>.
 	 * @return the fully-resolved type of the {@link XExpression}, if a correct, fully-linkable model is given.
 	 *         <code>null</code> indicates a problem during resolution.
 	 */
 	public JvmTypeReference getType(XExpression expression);
+	
+	/**
+	 * @param expression the expression. May not be <code>null</code>.
+	 * @param rawType <code>true</code> if the raw type is sufficient.
+	 * @return the fully-resolved type of the {@link XExpression}, if a correct, fully-linkable model is given.
+	 *         <code>null</code> indicates a problem during resolution.
+	 */
+	public JvmTypeReference getType(XExpression expression, boolean rawType);
 
 	/**
+	 * Return the resolved type of the element. Same as 
+	 * {@link #getTypeForIdentifiable(JvmIdentifiableElement, boolean) getTypeForIdentifiable(identifiableElement, false}.
+	 * @param identifiableElement the identifiable element. May not be <code>null</code>.
 	 * @return the fully-resolved type of the {@link JvmIdentifiableElement}, if a correct, fully-linkable model is
 	 *         given. <code>null</code> indicates a problem during resolution. given.
 	 */
 	public JvmTypeReference getTypeForIdentifiable(JvmIdentifiableElement identifiableElement);
+	
+	/**
+	 * @param identifiableElement the identifiable element. May not be <code>null</code>.
+	 * @param rawType <code>true</code> if the raw type is sufficient.
+	 * @return the fully-resolved type of the {@link JvmIdentifiableElement}, if a correct, fully-linkable model is
+	 *         given. <code>null</code> indicates a problem during resolution. given.
+	 */
+	public JvmTypeReference getTypeForIdentifiable(JvmIdentifiableElement identifiableElement, boolean rawType);
 
 }
