@@ -11,15 +11,15 @@ package org.eclipse.xtext.xbase.lib;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class BooleanExtensions {
-	public static boolean _operator_and(boolean a, boolean b) {
+	public static boolean operator_and(boolean a, boolean b) {
 		return a&&b;
 	}
 
-	public static boolean _operator_or(boolean a, boolean b) {
+	public static boolean operator_or(boolean a, boolean b) {
 		return a||b;
 	}
 
-	public static boolean _operator_not(boolean b) {
+	public static boolean operator_not(boolean b) {
 		return !b;
 	}
 }

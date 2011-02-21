@@ -38,7 +38,7 @@ import com.google.common.collect.Sets;
  */
 public class IterableExtensions {
 
-	public static <T> Iterable<T> _operator_plus(Iterable<? extends T> a, Iterable<? extends T> b) {
+	public static <T> Iterable<T> operator_plus(Iterable<? extends T> a, Iterable<? extends T> b) {
 		return Iterables.concat(a, b);
 	}
 	
