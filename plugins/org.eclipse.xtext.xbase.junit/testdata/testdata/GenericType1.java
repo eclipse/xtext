@@ -11,8 +11,10 @@ package testdata;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class GenericType1<T> {
+	
 	private T t;
-	public boolean _operator_add(T t) {
+	
+	public boolean operator_add(T t) {
 		boolean result = this.t == null;
 		this.t = t;
 		return result;
