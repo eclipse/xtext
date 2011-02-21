@@ -19,7 +19,7 @@ public class Xtend2SearchFilter implements IXtextSearchFilter {
 	public boolean reject(IEObjectDescription element) {
 		if (fileExtensionProvider.isValid(element.getEObjectURI().fileExtension())) {
 			return element.getEClass() == TypesPackage.Literals.JVM_GENERIC_TYPE
-				|| (TypesPackage.Literals.JVM_MEMBER.isSuperTypeOf(element.getEClass()) && ! !descriptionFlags.isDispatcherOperation(element));
+				|| (TypesPackage.Literals.JVM_MEMBER.isSuperTypeOf(element.getEClass()) && !descriptionFlags.isDispatcherOperation(element));
 		}
 		return false;
 	}
