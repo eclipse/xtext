@@ -15,7 +15,27 @@ public class StringExtensions {
 	/**
 	 * concatenation operator
 	 */
-	public static String _operator_plus(String a, Object b) {
+	public static String operator_plus(String a, Object b) {
 		return a+b;
+	}
+	
+	public static String toFirstUpper(String s) {
+		if (s == null || s.length() == 0)
+			return s;
+		if (s.length() == 1)
+			return s.toUpperCase();
+		return s.substring(0, 1).toUpperCase() + s.substring(1);
+	}
+
+	public static boolean isNullOrEmpty(String s) {
+		return s == null || s.equals("");
+	}
+
+	public static String toFirstLower(String s) {
+		if (s == null || s.length() == 0)
+			return s;
+		if (s.length() == 1)
+			return s.toLowerCase();
+		return s.substring(0, 1).toLowerCase() + s.substring(1);
 	}
 }

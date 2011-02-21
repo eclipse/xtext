@@ -14,16 +14,20 @@ import java.util.Set;
 
 public class ObjectExtensions {
 	
-	public static boolean _operator_notEquals(Object a, Object b) {
-		return !_operator_equals(a, b);
+	public static boolean operator_notEquals(Object a, Object b) {
+		return !operator_equals(a, b);
 	}
 	
-	public static boolean _operator_equals(Object a, Object b) {
+	public static boolean operator_equals(Object a, Object b) {
 		if (a==b)
 			return true;
 		if (a==null)
 			return false;
 		return a.equals(b);
+	}
+	
+	public static <A,B> Pair<A,B> operator_mappedTo(A a, B b) {
+		return new Pair<A,B>(a,b);
 	}
 	
 	public static <T> Set<T> asSingletonSet(T value) {

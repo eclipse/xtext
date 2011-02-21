@@ -24,7 +24,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 
 	protected abstract void assertEvaluatesTo(Object object, String string);
 	protected abstract void assertEvaluatesWithException(Class<? extends Throwable> class1, String string);
-	
+
 	public void testUnaryOperator_00() throws Exception {
 		assertEvaluatesTo(new Integer(-19),"-19");
 	}
@@ -906,6 +906,15 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 //	
 //	public void testIterableExtension_06() {
 //		assertEvaluatesTo(Integer.valueOf(5), "newArrayList('a','aa','b','aa','abc').select(s|s.length + 1).head(4).toSet().reduce(a,b|a+b)");
+//	}
+	
+	public void testMapConstruction_00() throws Exception {
+		assertEvaluatesTo("vier", "newHashMap(3->'drei',4->'vier').get(4)");
+	}
+	
+//TODO kehrt nie (oder lange nicht) zurueck	
+//	public void testMapConstruction_01() throws Exception {
+//		assertEvaluatesTo("vier", "newHashMap(3->'drei',4->'vier').entrySet.findFirst(e|e.key==4).value");
 //	}
 	
 	public void testStaticMethod_01() {

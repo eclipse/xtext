@@ -70,7 +70,7 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	protected static String[] STRING_OPERATORS = {
 		"==", "!=",
 		"+",
-		"<=", ">=", "<", ">"
+		"<=", ">=", "<", ">","->"
 	};
 	
 	protected static String[] CAST_INSTANCEOF = {
@@ -100,6 +100,9 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 		features.add("asSingletonSet()");
 		features.add("asSingletonList()");
 		features.add("asSingletonMap()");
+		features.add("toFirstLower()");
+		features.add("toFirstUpper()");
+		features.add("isNullOrEmpty()");
 		STRING_FEATURES = features.toArray(new String[features.size()]);
 	}
 

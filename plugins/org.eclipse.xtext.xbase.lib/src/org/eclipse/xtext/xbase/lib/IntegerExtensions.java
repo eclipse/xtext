@@ -14,38 +14,38 @@ import java.util.Iterator;
  */
 public class IntegerExtensions {
 
-	public static int _operator_minus(Integer a) {
+	public static int operator_minus(Integer a) {
 		return -a;
 	}
 	
-	public static int _operator_plus(Integer a, Number b) {
+	public static int operator_plus(Integer a, Number b) {
 		return a+b.intValue();
 	}
 	
-	public static int _operator_minus(Integer a, Number b) {
+	public static int operator_minus(Integer a, Number b) {
 		return a-b.intValue();
 	}
 	
-	public static int _operator_multiply(Integer a, Number b) {
+	public static int operator_multiply(Integer a, Number b) {
 		return a*b.intValue();
 	}
 	
-	public static int _operator_divide(Integer a, Number b) {
+	public static int operator_divide(Integer a, Number b) {
 		return a/b.intValue();
 	}
 	
-	public static int _operator_modulo(Integer a, Number b) {
+	public static int operator_modulo(Integer a, Number b) {
 		return a%b.intValue();
 	}
 	
-	public static int _operator_power(Integer a, Number b) {
+	public static int operator_power(Integer a, Number b) {
 		return (int) Math.pow(a, b.intValue());
 	}
 
 	/**
 	 * implementation for the upTo operator on {@link Integer} 
 	 */
-	public static Iterable<Integer> _operator_upTo(final Integer a, Number b) {
+	public static Iterable<Integer> operator_upTo(final Integer a, Number b) {
 		final int upTo = b.intValue();
 		return new Iterable<Integer>() {
 			public Iterator<Integer> iterator() {

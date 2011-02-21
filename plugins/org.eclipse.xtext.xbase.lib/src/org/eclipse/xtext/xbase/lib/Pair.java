@@ -35,7 +35,7 @@ public final class Pair<K, V> {
 	    if (!(o instanceof Pair))
 	    	return false;
 	    Pair<?, ?> e = (Pair<?, ?>)o;
-	    return ObjectExtensions._operator_equals(k, e.getKey()) && ObjectExtensions._operator_equals(v, e.getValue());
+	    return ObjectExtensions.operator_equals(k, e.getKey()) && ObjectExtensions.operator_equals(v, e.getValue());
 	}
 
 	@Override
