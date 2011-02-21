@@ -121,6 +121,9 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
+		if (log.isDebugEnabled()) {
+			log.debug("enter getScope(" + context + ", " + reference.getEContainingClass().getName() + "#" + reference.getName() + ")");
+		}
 		try {
 			if (isFeatureCallScope(reference)) {
 				if (!(context instanceof XAbstractFeatureCall)) {
@@ -135,6 +138,10 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		} catch (RuntimeException e) {
 			log.error("error during scoping", e);
 			throw e;
+		} finally {
+			if (log.isDebugEnabled()) {
+				log.debug("leave getScope(" + context + ", " + reference.getEContainingClass().getName() + "#" + reference.getName() + ")");
+			}
 		}
 	}
 
