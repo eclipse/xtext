@@ -27,6 +27,7 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory;
 
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 /**
@@ -115,10 +116,10 @@ public class TypeArgumentContext {
 	}
 
 	protected JvmTypeReference doGetResolvedCopy(JvmTypeReference element) {
-		return doGetResolvedCopy(element, Sets.<JvmType>newHashSet(), Sets.<JvmType>newHashSet());
+		return doGetResolvedCopy(element, Sets.<JvmType>newHashSet(), Maps.<JvmType, JvmTypeReference>newHashMap());
 	}
 	
-	protected JvmTypeReference doGetResolvedCopy(JvmTypeReference element, final Set<JvmType> resolving, final Set<JvmType> unresolved) {
+	protected JvmTypeReference doGetResolvedCopy(JvmTypeReference element, final Set<JvmType> resolving, final Map<JvmType, JvmTypeReference> unresolved) {
 		if (logger.isDebugEnabled())
 			logger.debug("doGetResolvedCopy: " + element + " in context " + this + " resolving: " + resolving + " unresolved: " + unresolved);
 		
@@ -132,13 +133,6 @@ public class TypeArgumentContext {
 				return result;
 			}
 			
-//			@Override
-//			protected EObject createCopy(EObject object) {
-//				EObject resolvedObject = resolveTypeParameters(object);
-//				EObject result = super.createCopy(resolvedObject);
-//				return result;
-//			}
-
 			protected EObject resolveTypeParameters(EObject object) {
 				if (object instanceof JvmParameterizedTypeReference) {
 					JvmParameterizedTypeReference parameterizedTypeRef = (JvmParameterizedTypeReference) object;
@@ -156,13 +150,14 @@ public class TypeArgumentContext {
 										if (object.eContainer() instanceof JvmTypeConstraint) {
 											return object;
 										}
-										if (unresolved.add(type)) {
-											return doGetResolvedCopy(resolved, resolving, unresolved);
+										if (!unresolved.containsKey(type)) {
+											JvmTypeReference resolvedCopy = doGetResolvedCopy(resolved, resolving, unresolved);
+											unresolved.put(type, resolvedCopy);
+											return resolvedCopy;
 										} else {
-											return copy(resolved);
+											JvmTypeReference resolvedCopy = unresolved.get(type);
+											return EcoreUtil2.clone(resolvedCopy);
 										}
-										
-//										return resolved;
 									}
 									return resolveTypeParameters(doGetResolvedCopy(resolved, resolving, unresolved));
 								} else {

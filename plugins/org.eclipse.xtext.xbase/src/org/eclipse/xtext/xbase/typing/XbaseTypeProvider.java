@@ -610,11 +610,13 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				}
 				return result;
 			} else {
+				
 				TypeArgumentContext context = typeArgCtxProvider.getExplicitMethodInvocationContext(operation, receiverType, featureCall.getTypeArguments());
 				return context.getUpperBound(featureType, featureCall);
 			}
 		} else {
-			TypeArgumentContext context = typeArgCtxProvider.getReceiverContext(receiverType);
+			JvmTypeReference expectedType = rawType ? null : getExpectedType(featureCall, rawType);
+			TypeArgumentContext context = typeArgCtxProvider.getReceiverContext(receiverType, featureType, expectedType);
 			return context.getUpperBound(featureType, featureCall);
 		}
 	}
