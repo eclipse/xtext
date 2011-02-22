@@ -164,7 +164,7 @@ public abstract class AbstractXbaseCompiler {
 				result.append(">");
 			}
 		} else {
-			throw new IllegalArgumentException(type.toString());
+			throw new IllegalArgumentException(type==null?null:type.toString());
 		}
 	}
 	
