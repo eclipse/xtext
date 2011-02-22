@@ -189,14 +189,14 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	public void testOnStringLiteral_19() throws Exception {
 		newBuilder().append("''.toString").assertText(expect(STRING_OPERATORS, new String[]{"toString", "toString()"}));
 	}
-//TODO	
-//	public void testOnStringLiteral_20() throws Exception {
-//		newBuilder().append("''.toString.").assertText(STRING_FEATURES);
-//	}
-//	
-//	public void testOnStringLiteral_21() throws Exception {
-//		newBuilder().append("''.toString.").assertTextAtCursorPosition("g.", 1, expect(STRING_OPERATORS, new String[]{"toString"}));
-//	}
+	
+	public void testOnStringLiteral_20() throws Exception {
+		newBuilder().append("''.toString.").assertText(STRING_FEATURES);
+	}
+	
+	public void testOnStringLiteral_21() throws Exception {
+		newBuilder().append("''.toString.").assertTextAtCursorPosition("g.", 1, expect(STRING_OPERATORS, new String[]{"toString", "toString()"}));
+	}
 	
 	public void testOnStringLiteral_22() throws Exception {
 		newBuilder().append("''.toString+''").assertTextAtCursorPosition("+", expect(STRING_OPERATORS, new String[]{"toString", "toString()"}));
@@ -249,10 +249,10 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	public void testOnStringLiteral_34() throws Exception {
 		newBuilder().append("''.toString ").assertText(expect(STRING_OPERATORS, CAST_INSTANCEOF));
 	}
-//TODO	
-//	public void testOnStringLiteral_35() throws Exception {
-//		newBuilder().append("''.toString .").assertTextAtCursorPosition("g .", 2, expect(STRING_OPERATORS, CAST_INSTANCEOF));
-//	}
+
+	public void testOnStringLiteral_35() throws Exception {
+		newBuilder().append("''.toString .").assertTextAtCursorPosition("g .", 2, expect(STRING_OPERATORS, CAST_INSTANCEOF));
+	}
 	
 	public void testOnStringLiteral_36() throws Exception {
 		newBuilder().append("''.toString +''").assertTextAtCursorPosition("+", expect(STRING_OPERATORS, CAST_INSTANCEOF));
@@ -277,10 +277,10 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	public void testAfterBinaryOperation_03() throws Exception {
 		newBuilder().append("(''+'')").assertText(expect(STRING_OPERATORS, CAST_INSTANCEOF));
 	}
-//TODO	
-//	public void testAfterBinaryOperation_04() throws Exception {
-//		newBuilder().append("(''+'').").assertText(STRING_FEATURES);
-//	}
+
+	public void testAfterBinaryOperation_04() throws Exception {
+		newBuilder().append("(''+'').").assertText(STRING_FEATURES);
+	}
 	
 	public void testAfterBinaryOperation_05() throws Exception {
 		newBuilder().append("((''+''))").assertText(expect(STRING_OPERATORS, CAST_INSTANCEOF));
@@ -293,14 +293,17 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	public void testAfterBinaryOperation_07() throws Exception {
 		newBuilder().append("((''+''))").assertTextAtCursorPosition("))", expect(STRING_OPERATORS, CAST_INSTANCEOF));
 	}
-//TODO	
-//	public void testAfterBinaryOperation_08() throws Exception {
+
+	// TODO Rework expectation as soon as arrays are synonym to lists 
+	public void testAfterBinaryOperation_08() throws Exception {
+		newBuilder().append("((''+(''.bytes)))").assertTextAtCursorPosition(")", "bytes");
 //		newBuilder().append("((''+(''.bytes)))").assertTextAtCursorPosition(")", "==", "!=", "+=", "+", "bytes");
-//	}
-//	
-//	public void testAfterBinaryOperation_09() throws Exception {
+	}
+	
+	public void testAfterBinaryOperation_09() throws Exception {
+		newBuilder().append("((''+''.bytes))").assertTextAtCursorPosition(")", "bytes");
 //		newBuilder().append("((''+''.bytes))").assertTextAtCursorPosition(")", "==", "!=", "+=", "+", "bytes");
-//	}
+	}
 	
 	public void testAfterBinaryOperation_10() throws Exception {
 		newBuilder().append("((''+null))").assertTextAtCursorPosition(")", "null", "!=", "==", "->");

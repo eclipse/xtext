@@ -138,8 +138,8 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 				current = createJvmFeatureScope(current, featureDescs);
 			}
 		}
-		if (current == null || IScope.NULLSCOPE == current)
-			return new JvmFeatureScope(IScope.NULLSCOPE, "No features for type "+typeReference, Collections.<JvmFeatureDescription>emptyList());
+		if (current == null || parent == current)
+			return new JvmFeatureScope(parent, "No features for type "+typeReference, Collections.<JvmFeatureDescription>emptyList());
 		return (JvmFeatureScope) current;
 	}
 
