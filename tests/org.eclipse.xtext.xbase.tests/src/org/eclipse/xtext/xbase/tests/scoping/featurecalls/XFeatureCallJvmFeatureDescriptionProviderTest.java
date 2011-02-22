@@ -35,7 +35,7 @@ public class XFeatureCallJvmFeatureDescriptionProviderTest extends AbstractJvmFe
 		defaultProvider.setContextType(null); // NO Context!
 		descProvider.setContextType(null); // NO Context!
 		
-		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference, 
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(IScope.NULLSCOPE, reference, 
 				Lists.<IJvmFeatureDescriptionProvider>newArrayList(defaultProvider, descProvider));
 		assertEquals(8, numberOfScopes(scope));
 
@@ -65,7 +65,7 @@ public class XFeatureCallJvmFeatureDescriptionProviderTest extends AbstractJvmFe
 		defaultProvider.setContextType((JvmDeclaredType) reference.getType());
 		descProvider.setContextType((JvmDeclaredType) reference.getType());
 		
-		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference, Lists.<IJvmFeatureDescriptionProvider>newArrayList(defaultProvider, descProvider));
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(IScope.NULLSCOPE, reference, Lists.<IJvmFeatureDescriptionProvider>newArrayList(defaultProvider, descProvider));
 		assertEquals(8, numberOfScopes(scope));
 		
 		assertSetsEqual(newHashSet("publicField", "publicMethod()", "getPublicProperty()","protectedField","protectedMethod()","getProtectedProperty()","setPublicProperty(java.lang.String)","setProtectedProperty(java.lang.String)"),	getSignatures(scope));
@@ -95,7 +95,7 @@ public class XFeatureCallJvmFeatureDescriptionProviderTest extends AbstractJvmFe
 		defaultProvider.setContextType((JvmDeclaredType) superType.getType());
 		descProvider.setContextType((JvmDeclaredType) superType.getType());
 		
-		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference, Lists.<IJvmFeatureDescriptionProvider>newArrayList(defaultProvider, descProvider));
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(IScope.NULLSCOPE, reference, Lists.<IJvmFeatureDescriptionProvider>newArrayList(defaultProvider, descProvider));
 		
 		assertEquals(6, numberOfScopes(scope));
 		
