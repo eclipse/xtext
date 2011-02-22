@@ -264,7 +264,11 @@ public class TypeArgumentContextProvider {
 					for (int i = 0; i < typeArguments.size(); i++) {
 						JvmTypeReference argument = typeArguments.get(i);
 						JvmTypeParameter param = typeParameters.get(i);
-						context.put(param, argument);
+						if (context.containsKey(argument.getType())) {
+							context.putAll(param, context.get((JvmTypeParameter) argument.getType()));
+						} else {
+							context.put(param, argument);
+						}
 					}
 				}
 			}

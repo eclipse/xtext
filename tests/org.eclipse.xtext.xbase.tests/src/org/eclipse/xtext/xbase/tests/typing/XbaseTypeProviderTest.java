@@ -272,10 +272,9 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertNull(typeProvider.getType(proxy));
 	}
 	
-	// TODO: Fix Me
-//	public void testMethodTypeParamInference_00() throws Exception {
-//		assertResolvedReturnType("java.lang.String", "new java.util.ArrayList<? extends String>().findFirst(e|true)");
-//	}
+	public void testMethodTypeParamInference_00() throws Exception {
+		assertResolvedReturnType("java.lang.String", "new java.util.ArrayList<? extends String>().findFirst(e|true)");
+	}
 	
 	public void testMethodTypeParamInference_01() throws Exception {
 		assertResolvedReturnType("java.lang.String", "new java.util.ArrayList<String>().findFirst(e|e == 'foo')");
