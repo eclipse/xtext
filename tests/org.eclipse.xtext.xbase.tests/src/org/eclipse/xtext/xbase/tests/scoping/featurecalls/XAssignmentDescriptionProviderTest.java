@@ -31,7 +31,7 @@ public class XAssignmentDescriptionProviderTest extends AbstractJvmFeatureScopeP
 	
 	public void testFinalFields() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
-		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(IScope.NULLSCOPE, reference,
 				Lists.<IJvmFeatureDescriptionProvider>newArrayList(
 						newXAssignmentDescriptionProvider(),
 						newXAssignmentSugarDescriptionProvider()));
@@ -48,7 +48,7 @@ public class XAssignmentDescriptionProviderTest extends AbstractJvmFeatureScopeP
 	
 	public void testAssignments() throws Exception {
 		JvmTypeReference reference = getTypeRef(VisibilitySubClass.class.getCanonicalName());
-		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(IScope.NULLSCOPE, reference,
 				Lists.<IJvmFeatureDescriptionProvider>newArrayList(
 						newXAssignmentDescriptionProvider(),
 						newXAssignmentSugarDescriptionProvider()));
@@ -73,7 +73,7 @@ public class XAssignmentDescriptionProviderTest extends AbstractJvmFeatureScopeP
 		newXAssignmentDescriptionProvider.setContextType((JvmDeclaredType) reference.getType());
 		newXAssignmentSugarDescriptionProvider.setContextType((JvmDeclaredType) reference.getType());
 		
-		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(IScope.NULLSCOPE, reference,
 				Lists.<IJvmFeatureDescriptionProvider>newArrayList(
 						newXAssignmentDescriptionProvider,
 						newXAssignmentSugarDescriptionProvider));

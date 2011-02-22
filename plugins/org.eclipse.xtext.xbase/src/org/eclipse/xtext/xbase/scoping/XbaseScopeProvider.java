@@ -222,9 +222,9 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	 * @param idx the index in an expression list of a block. Otherwise to be ignored.
 	 */
 	public IScope createSimpleFeatureCallScope(final EObject context, EReference reference, Resource resource, boolean includeCurrentBlock, int idx) {
-		IScope staticScope = createStaticScope(context, resource, IScope.NULLSCOPE);
-		DelegatingScope implicitThis = new DelegatingScope(staticScope);
-		IScope localVariableScope = createLocalVarScope(context, reference, implicitThis, includeCurrentBlock, idx);
+		DelegatingScope implicitThis = new DelegatingScope(IScope.NULLSCOPE);
+		IScope staticScope = createStaticScope(context, resource, implicitThis);
+		IScope localVariableScope = createLocalVarScope(context, reference, staticScope, includeCurrentBlock, idx);
 		IScope featureScopeForThis = createImplicitFeatureCallScope(context, localVariableScope);
 		if (featureScopeForThis != null)
 			implicitThis.setDelegate(featureScopeForThis);
@@ -234,7 +234,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	protected IScope createStaticScope(EObject context, Resource resource, IScope parent) {
 		JvmDeclaredType contextType = getContextType(context);
 		List<IJvmFeatureDescriptionProvider> descriptionProviders = getStaticFeatureDescriptionProviders(resource, contextType);
-		return jvmFeatureScopeProvider.createFeatureScopeForTypeRef(null, descriptionProviders);
+		return jvmFeatureScopeProvider.createFeatureScopeForTypeRef(parent, null, descriptionProviders);
 	}
 
 	/**
@@ -250,7 +250,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			return IScope.NULLSCOPE;
 		JvmTypeReference receiverType = typeProvider.getType(receiver);
 		if (receiverType != null) {
-			return createFeatureScopeForTypeRef(receiverType, context, getContextType(context), null);
+			return createFeatureScopeForTypeRef(receiverType, context, getContextType(context), null, IScope.NULLSCOPE);
 		}
 		return IScope.NULLSCOPE;
 	}
@@ -286,7 +286,8 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 						implicitReceiverType, 
 						call, 
 						getContextType(call),
-						(JvmIdentifiableElement) implicitReceiver);
+						(JvmIdentifiableElement) implicitReceiver,
+						IScope.NULLSCOPE);
 			}
 		}
 		return featureScopeForThis;
@@ -395,15 +396,15 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	}
 
 	protected JvmFeatureScope createFeatureScopeForTypeRef(JvmTypeReference receiverType, EObject expression,
-			JvmDeclaredType currentContext, JvmIdentifiableElement implicitReceiver) {
+			JvmDeclaredType currentContext, JvmIdentifiableElement implicitReceiver, IScope parent) {
 		if (expression instanceof XAssignment) {
 			List<IJvmFeatureDescriptionProvider> providers = getFeatureDescriptionProvidersForAssignment(receiverType, (XAssignment) expression, 
 					currentContext, implicitReceiver);
-			return jvmFeatureScopeProvider.createFeatureScopeForTypeRef(receiverType, providers);
+			return jvmFeatureScopeProvider.createFeatureScopeForTypeRef(parent, receiverType, providers);
 		} else {
 			List<IJvmFeatureDescriptionProvider> providers = getFeatureDescriptionProviders(receiverType, expression,
 					currentContext, implicitReceiver);
-			return jvmFeatureScopeProvider.createFeatureScopeForTypeRef(receiverType, providers);
+			return jvmFeatureScopeProvider.createFeatureScopeForTypeRef(parent, receiverType, providers);
 		}
 	}
 	

@@ -37,7 +37,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 
 	public void testNoSugarNoFilterNoInvalids() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
-		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(IScope.NULLSCOPE, reference,
 				Lists.<IJvmFeatureDescriptionProvider>newArrayList(new DefaultJvmFeatureDescriptionProvider() {
 					@Override
 					protected boolean isValid(JvmFeature feature) {
@@ -60,7 +60,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 
 	public void testNoSugarNoFilterWithInvalids() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
-		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(IScope.NULLSCOPE, reference,
 				Lists.<IJvmFeatureDescriptionProvider>newArrayList(new DefaultJvmFeatureDescriptionProvider() {
 					@Override
 					protected boolean isValid(JvmFeature feature) {
@@ -84,7 +84,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 
 	public void testNoSugarwithFilterwithInvalids() throws Exception {
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
-		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(IScope.NULLSCOPE, reference,
 				Lists.<IJvmFeatureDescriptionProvider>newArrayList(new DefaultJvmFeatureDescriptionProvider() {
 					@Override
 					public void addFeatureDescriptions(JvmFeature feature, TypeArgumentContext context,
@@ -113,7 +113,7 @@ public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProvider
 		JvmTypeReference reference = getTypeRef(FieldAccessSub.class.getCanonicalName());
 		final XFeatureCallSugarDescriptionProvider sugarProvider = new XFeatureCallSugarDescriptionProvider();
 		sugarProvider.setOperatorMapping(new OperatorMapping());
-		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(reference,
+		JvmFeatureScope scope = getFeatureProvider().createFeatureScopeForTypeRef(IScope.NULLSCOPE, reference,
 				Lists.<IJvmFeatureDescriptionProvider>newArrayList(new DefaultJvmFeatureDescriptionProvider() {
 					@Override
 					public void addFeatureDescriptions(JvmFeature feature, TypeArgumentContext context,

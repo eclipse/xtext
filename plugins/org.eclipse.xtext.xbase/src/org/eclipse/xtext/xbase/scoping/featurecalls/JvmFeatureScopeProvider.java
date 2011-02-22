@@ -92,7 +92,7 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 	 * it is shadowed by valid elements and can be filtered out if not needed.
 	 * </p>
 	 */
-	public JvmFeatureScope createFeatureScopeForTypeRef(JvmTypeReference typeReference, List<IJvmFeatureDescriptionProvider> jvmFeatureDescriptionProviders) {
+	public JvmFeatureScope createFeatureScopeForTypeRef(IScope parent, JvmTypeReference typeReference, List<IJvmFeatureDescriptionProvider> jvmFeatureDescriptionProviders) {
 		TypeArgumentContext context = typeArgumentContextProvider.getReceiverContext(typeReference);
 		Iterable<JvmTypeReference> hierarchy = linearizeTypeHierarchy(typeReference);
 
@@ -130,7 +130,7 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 		final ArrayList<JvmFeatureDescriptions> newArrayList = newArrayList(concat(visibleElements, invisibleElements));
 
 		// transform iterables to scope hierarchy in reverse order
-		IScope current = null;
+		IScope current = parent;
 		for (JvmFeatureDescriptions featureDescs : reverse(newArrayList)) {
 			if (featureDescs != null && !isEmpty(featureDescs.getDescriptions())) {
 				if (current == null) 
@@ -138,7 +138,7 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 				current = createJvmFeatureScope(current, featureDescs);
 			}
 		}
-		if (current == null)
+		if (current == null || IScope.NULLSCOPE == current)
 			return new JvmFeatureScope(IScope.NULLSCOPE, "No features for type "+typeReference, Collections.<JvmFeatureDescription>emptyList());
 		return (JvmFeatureScope) current;
 	}
