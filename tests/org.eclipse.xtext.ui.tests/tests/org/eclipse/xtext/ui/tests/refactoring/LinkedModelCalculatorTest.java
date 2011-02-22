@@ -11,6 +11,7 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.text.link.LinkedPosition;
 import org.eclipse.jface.text.link.LinkedPositionGroup;
 import org.eclipse.text.edits.ReplaceEdit;
@@ -36,7 +37,7 @@ public class LinkedModelCalculatorTest extends TestCase {
 		fillTextEdits();
 		l = new LinkedModelCalculator() {
 			@Override
-			public java.lang.Iterable<org.eclipse.text.edits.TextEdit> computeTextEdits() {
+			public java.lang.Iterable<org.eclipse.text.edits.TextEdit> computeTextEdits(IProgressMonitor monitor) {
 				return textEdits;
 			}
 			
