@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -25,6 +28,28 @@ public class JvmTypeParameterImplCustom extends JvmTypeParameterImpl {
 	@Override
 	public String getSimpleName() {
 		return name;
+	}
+	
+	@Override
+	public String toString() {
+		EObject container = eContainer();
+		if (container instanceof JvmIdentifiableElement) {
+			StringBuilder result = new StringBuilder(eClass().getName());
+			result.append(" <");
+			result.append(name);
+			result.append("> ");
+			result.append(((JvmIdentifiableElement) container).getQualifiedName());
+			return result.toString();
+		} else {
+			StringBuilder result = new StringBuilder(eClass().getName());
+			result.append(" <");
+			result.append(name);
+			result.append(">");
+			if (constraints != null) {
+				result.append(constraints);
+			}
+			return result.toString();
+		}
 	}
 
 }

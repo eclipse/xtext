@@ -50,5 +50,13 @@ public abstract class JvmTypeConstraintImplCustom extends JvmTypeConstraintImpl 
 			throw new IllegalArgumentException("wildcard type references are not supported as constraint bounds");
 		super.setTypeReference(newTypeReference);
 	}
+	
+	@Override
+	public String toString() {
+		String result = getIdentifier();
+		if (result != null)
+			return result;
+		return super.toString();
+	}
 
 } 

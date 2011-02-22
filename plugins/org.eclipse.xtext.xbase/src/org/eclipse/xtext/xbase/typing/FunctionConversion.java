@@ -90,6 +90,14 @@ public class FunctionConversion {
 				return argumentSize;
 			return getParameterTypes().size();
 		}
+		
+		@Override
+		public String toString() {
+			if (argumentSize != -1) {
+				return "FunctionRef: [" + argumentSize + "]"; 
+			}
+			return "FunctionRef: " + arguments;
+		}
 	}
 
 	private static class JvmOperationFuncDef implements FuncDesc {
@@ -109,6 +117,11 @@ public class FunctionConversion {
 		
 		public int getArgumentSize() {
 			return delegate.getParameters().size();
+		}
+		
+		@Override
+		public String toString() {
+			return "OperationRef: " + delegate.getIdentifier();
 		}
 	}
 
@@ -156,15 +169,16 @@ public class FunctionConversion {
 		while (leftIter.hasNext() && rightIter.hasNext()) {
 			JvmTypeReference leftType = leftIter.next();
 			JvmTypeReference rightType = rightIter.next();
-			final JvmTypeReference convertedLeftParam = leftCtx.resolve(leftType);
-			final JvmTypeReference convertedRightParam = rightCtx.resolve(rightType);
+			JvmTypeReference convertedLeftParam = leftCtx.resolve(leftType);
+			JvmTypeReference convertedRightParam = rightCtx.resolve(rightType);
 			if (!conformanceComputer.isConformant(convertedLeftParam, convertedRightParam))
 				return false;
 		}
 		if (leftIter.hasNext() || rightIter.hasNext()) // params left?
 			return false;
-		return conformanceComputer.isConformant(leftCtx.resolve(left.getReturnType()),
-				rightCtx.resolve(right.getReturnType()));
+		JvmTypeReference leftResult = leftCtx.resolve(left.getReturnType());
+		JvmTypeReference rightResult = rightCtx.resolve(right.getReturnType());
+		return conformanceComputer.isConformant(leftResult, rightResult);
 	}
 
 	@Inject
