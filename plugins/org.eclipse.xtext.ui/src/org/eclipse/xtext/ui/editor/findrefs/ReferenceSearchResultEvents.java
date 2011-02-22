@@ -23,6 +23,15 @@ public interface ReferenceSearchResultEvents {
 		}
 	}
 
+	public static class Finish extends SearchResultEvent {
+
+		private static final long serialVersionUID = 114654633086769996L;
+
+		public Finish(ISearchResult result) {
+			super(result);
+		}
+	}
+
 	public static class Reset extends SearchResultEvent {
 		private static final long serialVersionUID = 1244392086001617021L;
 

@@ -56,21 +56,18 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 			final IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
 		final SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
 		if (!queryData.getTargetURIs().isEmpty()) {
-			findLocalReferences(queryData, localResourceAccess, acceptor,
-					subMonitor.newChild(1));
+			findLocalReferences(queryData, localResourceAccess, acceptor, subMonitor.newChild(1));
 			findIndexedReferences(queryData, acceptor, subMonitor.newChild(1));
 		}
 	}
-	
-	public void findIndexedReferences(final IQueryData queryData,
-			final IAcceptor<IReferenceDescription> acceptor,
+
+	public void findIndexedReferences(final IQueryData queryData, final IAcceptor<IReferenceDescription> acceptor,
 			IProgressMonitor monitor) {
 		findIndexedReferences(queryData.getTargetURIs(), acceptor, queryData.getResultFilter(), monitor);
 	}
 
-	public void findLocalReferences(final IQueryData queryData,
-			ILocalResourceAccess localResourceAccess, final IAcceptor<IReferenceDescription> acceptor,
-			IProgressMonitor monitor) {
+	public void findLocalReferences(final IQueryData queryData, ILocalResourceAccess localResourceAccess,
+			final IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
 		final SubMonitor subMonitor = SubMonitor.convert(monitor, "Find references", 1);
 		localResourceAccess.readOnly(queryData.getLocalContextResourceURI(), new IUnitOfWork<Boolean, ResourceSet>() {
 			public Boolean exec(ResourceSet localContext) throws Exception {
@@ -116,10 +113,11 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 									}
 								}
 							}
-							if(exportedElementsMap == null)
+							if (exportedElementsMap == null)
 								exportedElementsMap = createExportedElementsMap(resource);
 							IReferenceDescription localReferenceDescription = new DefaultReferenceDescription(source,
-									target, reference, index, findClosestExportedContainerURI(source, exportedElementsMap));
+									target, reference, index, findClosestExportedContainerURI(source,
+											exportedElementsMap));
 							if (filter == null || filter.apply(localReferenceDescription))
 								acceptor.accept(localReferenceDescription);
 						}
@@ -133,19 +131,21 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 	protected Map<EObject, URI> createExportedElementsMap(Resource resource) {
 		IResourceDescription resourceDescription = index.getResourceDescription(resource.getURI());
 		Map<EObject, URI> exportedElementMap = newHashMap();
-		for (IEObjectDescription exportedEObjectDescription : resourceDescription.getExportedObjects()) {
-			EObject eObject = resource.getEObject(exportedEObjectDescription.getEObjectURI().fragment());
-			if(eObject != null)
-				exportedElementMap.put(eObject, exportedEObjectDescription.getEObjectURI());
+		if (resourceDescription != null) {
+			for (IEObjectDescription exportedEObjectDescription : resourceDescription.getExportedObjects()) {
+				EObject eObject = resource.getEObject(exportedEObjectDescription.getEObjectURI().fragment());
+				if (eObject != null)
+					exportedElementMap.put(eObject, exportedEObjectDescription.getEObjectURI());
+			}
 		}
 		return exportedElementMap;
 	}
 
 	protected URI findClosestExportedContainerURI(EObject element, Map<EObject, URI> exportedElementsMap) {
 		EObject current = element;
-		while(current != null) {
+		while (current != null) {
 			URI uri = exportedElementsMap.get(current);
-			if(uri != null) 
+			if (uri != null)
 				return uri;
 			current = current.eContainer();
 		}
