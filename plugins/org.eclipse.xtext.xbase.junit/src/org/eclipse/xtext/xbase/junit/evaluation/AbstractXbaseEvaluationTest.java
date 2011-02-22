@@ -273,12 +273,19 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(new Character('a'), "'a'.toCharArray.iterator.next");
 	}
 	
-//TODO invalid	
-//	public void testFeatureCall_03() {
+	public void testFeatureCall_03() {
+		assertEvaluatesTo(Lists.newArrayList(
+				new Character('a'), 
+				new Character('b'),
+				new Character('c')), "{ var java.util.List<Character> this = ('abc'.toCharArray as Iterable<Character>).toList() this }");
+	}
+	
+	// TODO Fix me as soon as arrays are synonym to lists
+//	public void testFeatureCall_03_2() {
 //		assertEvaluatesTo(Lists.newArrayList(
 //				new Character('a'), 
 //				new Character('b'),
-//				new Character('c')), "'abc'.toCharArray");
+//				new Character('c')), "{ var java.util.List<Character> this = 'abc'.toCharArray this }");
 //	}
 	
 	public void testFeatureCall_04() {
@@ -714,12 +721,11 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"[Void p1, String s|s.toUpperCase], null, 'literal')");
 	}
 	
-//	
-//	public void testClosure_06_1() {
-//		assertEvaluatesTo("LITERAL", 
-//				"new testdata.ClosureClient().invoke2(" +
-//		"[p1, s|s.toUpperCase], null, 'literal')");
-//	}
+	public void testClosure_06_1() {
+		assertEvaluatesTo("LITERAL", 
+				"new testdata.ClosureClient().invoke2(" +
+		"[p1, s|s.toUpperCase], null, 'literal')");
+	}
 	
 	public void testClosure_07() {
 		assertEvaluatesTo("literal", 
@@ -744,34 +750,68 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		"new testdata.ClosureClient().useGoogleCollectFunction([String s|s.toUpperCase], 'literal')");
 	}
 	
-//	public void testClosure_10() {
-//		assertEvaluatesTo("LITERAL", 
-//		"new testdata.ClosureClient().useGoogleCollectFunction([s|s.toUpperCase], 'literal')");
-//	}
+	public void testClosure_09_2() {
+		assertEvaluatesTo("LITERAL", 
+		"new testdata.ClosureClient().useGoogleCollectFunction2([String s|s.toUpperCase], 'literal')");
+	}
+	
+	public void testClosure_10() {
+		assertEvaluatesTo("LITERAL", 
+		"new testdata.ClosureClient().useGoogleCollectFunction([s|s.toUpperCase], 'literal')");
+	}
+	
+	public void testClosure_10_2() {
+		assertEvaluatesTo("LITERAL", 
+		"new testdata.ClosureClient().useGoogleCollectFunction2([s|s.toUpperCase], 'literal')");
+	}
 	
 	public void testClosure_11() {
 		assertEvaluatesTo(Boolean.TRUE, 
 		"new testdata.ClosureClient().useGoogleCollectPredicate([String s|'literal'.equals(s)], 'literal')");
 	}
 	
-//	public void testClosure_12() {
-//		assertEvaluatesTo(Boolean.TRUE, 
-//		"new testdata.ClosureClient().useGoogleCollectPredicate([s|'literal'.equals(s)], 'literal')");
-//	}
-//	
-//	public void testClosure_13() {
-//		assertEvaluatesTo(Boolean.FALSE, 
-//				"new testdata.ClosureClient().useGoogleCollectPredicate([s|'literal'.equals(s)], 'false')");
-//	}
-//	
-//	public void testClosure_14() {
-//		assertEvaluatesTo("literal", 
-//				"{" +
-//				"  var client = new testdata.ClosureClient()" +
-//				"  var fun = client.getIdentityFunction" +
-//				"  client.useGoogleCollectFunction(fun, 'literal')" +
-//				"}");
-//	}
+	public void testClosure_11_2() {
+		assertEvaluatesTo(Boolean.TRUE, 
+		"new testdata.ClosureClient().useGoogleCollectPredicate2([String s|'literal'.equals(s)], 'literal')");
+	}
+	
+	public void testClosure_12() {
+		assertEvaluatesTo(Boolean.TRUE, 
+		"new testdata.ClosureClient().useGoogleCollectPredicate([s|'literal'.equals(s)], 'literal')");
+	}
+	
+	public void testClosure_12_2() {
+		assertEvaluatesTo(Boolean.TRUE, 
+		"new testdata.ClosureClient().useGoogleCollectPredicate2([s|'literal'.equals(s)], 'literal')");
+	}
+	
+	public void testClosure_13() {
+		assertEvaluatesTo(Boolean.FALSE, 
+				"new testdata.ClosureClient().useGoogleCollectPredicate([s|'literal'.equals(s)], 'false')");
+	}
+	
+	public void testClosure_13_2() {
+		assertEvaluatesTo(Boolean.FALSE, 
+		"new testdata.ClosureClient().useGoogleCollectPredicate2([s|'literal'.equals(s)], 'false')");
+	}
+	
+	public void testClosure_14() {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var client = new testdata.ClosureClient()" +
+				"  var fun = client.getIdentityFunction" +
+				"  client.useGoogleCollectFunction(fun, 'literal')" +
+				"}");
+	}
+	
+	public void testClosure_14_2() {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var client = new testdata.ClosureClient()" +
+				"  var fun = client.getIdentityFunction" +
+				"  client.useGoogleCollectFunction2(fun, 'literal')" +
+				"}");
+	}
 	
 	public void testArrayConversion_01() {
 		assertEvaluatesTo("LITERAL", 
@@ -902,10 +942,9 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(Integer.valueOf(2 + 3 + 2 + 3 + 4), "newArrayList('a','aa','b','aa','abc').map(s|s.length + 1).reduce(a,b|a+b)");
 	}
 	
-	// TODO fix me - this test is green but takes 30secs
-//	public void testIterableExtension_06() {
-//		assertEvaluatesTo(Integer.valueOf(5), "newArrayList('a','aa','b','aa','abc').map(s|s.length + 1).take(4).toSet().reduce(a,b|a+b)");
-//	}
+	public void testIterableExtension_06() {
+		assertEvaluatesTo(Integer.valueOf(5), "newArrayList('a','aa','b','aa','abc').map(s|s.length + 1).take(4).toSet().reduce(a,b|a+b)");
+	}
 	
 	public void testMapConstruction_00() throws Exception {
 		assertEvaluatesTo("vier", "newHashMap(3->'drei',4->'vier').get(4)");

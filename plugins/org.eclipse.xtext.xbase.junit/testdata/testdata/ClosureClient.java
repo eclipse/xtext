@@ -40,17 +40,25 @@ public class ClosureClient {
 		return supplier.get();
 	}
 	
-	public <P,T> T useGoogleCollectFunction(Function<P, T> fun, P param) {
+	public <In,Out> Out useGoogleCollectFunction(Function<In, Out> fun, In param) {
 		return fun.apply(param);
 	}
 	
-	public <T> boolean useGoogleCollectPredicate(Predicate<T> predicate, T value) {
+	public <In,Out> Out useGoogleCollectFunction2(Function<? super In, Out> fun, In param) {
+		return fun.apply(param);
+	}
+	
+	public <In> boolean useGoogleCollectPredicate(Predicate<In> predicate, In value) {
 		return predicate.apply(value);
 	}
 	
-	public <T> Functions.Function1<T, T> getIdentityFunction() {
-		return new Functions.Function1<T, T>() {
-			public T apply(T p) {
+	public <In> boolean useGoogleCollectPredicate2(Predicate<? super In> predicate, In value) {
+		return predicate.apply(value);
+	}
+	
+	public <Obj> Functions.Function1<Obj, Obj> getIdentityFunction() {
+		return new Functions.Function1<Obj, Obj>() {
+			public Obj apply(Obj p) {
 				return p;
 			}
 			
