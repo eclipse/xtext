@@ -114,7 +114,7 @@ public class DefaultReferenceFinderTest extends AbstractXtextTests {
 				return !input.getTargetEObjectUri().equals(uriA);
 			}
 		};
-		IReferenceFinder.IQueryData queryData = new ReferenceQueryData(uriA, singletonList(uriA), uriA.trimFragment(),
+		IReferenceFinder.IQueryData queryData = new ReferenceQueryData(uriA, singleton(uriA), uriA.trimFragment(),
 				filter, "");
 		loadResource("ref.refactoringtestlanguage", "D { ref A }");
 		findLocalRefs(queryData);

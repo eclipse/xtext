@@ -8,12 +8,11 @@
 package org.eclipse.xtext.ui.editor.findrefs;
 
 import static com.google.common.collect.Iterables.*;
-import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -26,7 +25,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.CrossReferencer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -57,7 +55,7 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 	public void findAllReferences(IQueryData queryData, ILocalResourceAccess localResourceAccess,
 			final IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
 		final SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
-		if (!isEmpty(queryData.getTargetURIs())) {
+		if (!queryData.getTargetURIs().isEmpty()) {
 			findLocalReferences(queryData, localResourceAccess, acceptor,
 					subMonitor.newChild(1));
 			findIndexedReferences(queryData, acceptor, subMonitor.newChild(1));
@@ -77,7 +75,7 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 		localResourceAccess.readOnly(queryData.getLocalContextResourceURI(), new IUnitOfWork<Boolean, ResourceSet>() {
 			public Boolean exec(ResourceSet localContext) throws Exception {
 				Resource localResource = localContext.getResource(queryData.getLocalContextResourceURI(), true);
-				List<EObject> targets = newArrayList();
+				Set<EObject> targets = newHashSet();
 				for (URI targetURI : queryData.getTargetURIs()) {
 					EObject target = localContext.getEObject(targetURI, true);
 					if (target != null)
@@ -89,14 +87,15 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 		});
 	}
 
-	protected void findLocalReferences(Resource resource, Iterable<EObject> targets,
+	protected void findLocalReferences(Resource resource, Set<EObject> targets,
 			IAcceptor<IReferenceDescription> acceptor, Predicate<IReferenceDescription> filter, IProgressMonitor monitor) {
 		if (monitor.isCanceled())
 			return;
-		if (targets != null && !isEmpty(targets)) {
+		if (targets != null && !targets.isEmpty()) {
 			Map<EObject, Collection<Setting>> targetResourceInternalCrossRefs = CrossReferencer.find(Collections
 					.singletonList(resource));
-			SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.ReferenceQuery_monitor, size(targets));
+			Map<EObject, URI> exportedElementsMap = null;
+			SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.ReferenceQuery_monitor, targets.size());
 			for (EObject target : targets) {
 				Collection<Setting> crossRefSettings = targetResourceInternalCrossRefs.get(target);
 				if (crossRefSettings != null) {
@@ -117,8 +116,10 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 									}
 								}
 							}
+							if(exportedElementsMap == null)
+								exportedElementsMap = createExportedElementsMap(resource);
 							IReferenceDescription localReferenceDescription = new DefaultReferenceDescription(source,
-									target, reference, index, findClosestExportedParentURI(source));
+									target, reference, index, findClosestExportedContainerURI(source, exportedElementsMap));
 							if (filter == null || filter.apply(localReferenceDescription))
 								acceptor.accept(localReferenceDescription);
 						}
@@ -129,28 +130,29 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 		}
 	}
 
-	protected URI findClosestExportedParentURI(EObject element) {
-		URI resourceURI = element.eResource().getURI();
-		LinkedList<URI> parentURIs = newLinkedList();
-		EObject currentParent = element;
-		while (currentParent != null) {
-			parentURIs.addFirst(EcoreUtil.getURI(currentParent));
-			currentParent = currentParent.eContainer();
+	protected Map<EObject, URI> createExportedElementsMap(Resource resource) {
+		IResourceDescription resourceDescription = index.getResourceDescription(resource.getURI());
+		Map<EObject, URI> exportedElementMap = newHashMap();
+		for (IEObjectDescription exportedEObjectDescription : resourceDescription.getExportedObjects()) {
+			EObject eObject = resource.getEObject(exportedEObjectDescription.getEObjectURI().fragment());
+			if(eObject != null)
+				exportedElementMap.put(eObject, exportedEObjectDescription.getEObjectURI());
 		}
-		int currentBestIndex = -1;
-		IResourceDescription resourceDescription = index.getResourceDescription(resourceURI);
-		if (resourceDescription != null) {
-			for (IEObjectDescription exportedEObject : resourceDescription.getExportedObjects()) {
-				currentBestIndex = Math.max(currentBestIndex, parentURIs.indexOf(exportedEObject.getEObjectURI()));
-			}
-		}
-		if (currentBestIndex == -1)
-			return null;
-		else
-			return parentURIs.get(currentBestIndex);
+		return exportedElementMap;
 	}
 
-	protected void findIndexedReferences(Iterable<URI> targetURIs, IAcceptor<IReferenceDescription> acceptor,
+	protected URI findClosestExportedContainerURI(EObject element, Map<EObject, URI> exportedElementsMap) {
+		EObject current = element;
+		while(current != null) {
+			URI uri = exportedElementsMap.get(current);
+			if(uri != null) 
+				return uri;
+			current = current.eContainer();
+		}
+		return null;
+	}
+
+	protected void findIndexedReferences(Set<URI> targetURIs, IAcceptor<IReferenceDescription> acceptor,
 			Predicate<IReferenceDescription> filter, IProgressMonitor monitor) {
 		Set<URI> targetResourceURIs = newHashSet(transform(targetURIs, new Function<URI, URI>() {
 			public URI apply(URI from) {
@@ -164,7 +166,7 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 				return;
 			if (!targetResourceURIs.contains(resourceDescription.getURI())) {
 				for (IReferenceDescription referenceDescription : resourceDescription.getReferenceDescriptions()) {
-					if (contains(targetURIs, referenceDescription.getTargetEObjectUri())
+					if (targetURIs.contains(referenceDescription.getTargetEObjectUri())
 							&& (filter == null || filter.apply(referenceDescription))) {
 						acceptor.accept(referenceDescription);
 					}

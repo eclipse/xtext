@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.findrefs;
 
-import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -37,7 +37,7 @@ public interface IReferenceFinder {
 	interface IQueryData {
 		URI getLeadElementURI();
 
-		List<URI> getTargetURIs();
+		Set<URI> getTargetURIs();
 
 		Predicate<IReferenceDescription> getResultFilter();
 

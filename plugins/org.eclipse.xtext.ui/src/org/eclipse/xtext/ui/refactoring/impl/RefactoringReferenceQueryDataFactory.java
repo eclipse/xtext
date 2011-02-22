@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
-import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Sets.*;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -27,7 +27,7 @@ public class RefactoringReferenceQueryDataFactory {
 		if(contextResourceURI == null) 
 			contextResourceURI = args.getTargetElementURI().trimFragment();
 		return new ReferenceQueryData(args.getTargetElementURI(),
-				newArrayList(args.getRenamedElementURIs()), contextResourceURI, createFilter(args), "");
+				newLinkedHashSet(args.getRenamedElementURIs()), contextResourceURI, createFilter(args), "");
 	}
 
 	protected Predicate<IReferenceDescription> createFilter(ElementRenameArguments args) {

@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -125,11 +126,6 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 			if (referenceNode == null)
 				referenceNode = new ReferenceSearchViewTreeNode(resourceNode, referenceDescription,
 						referenceDescription);
-			if (isUpdateViewer) {
-				viewer.add(resourceNode, referenceNode);
-				viewer.expandToLevel(resourceNode, 1);
-			}
-
 		}
 	}
 
@@ -159,6 +155,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 			batchedSearchResultEvents.add(e);
 		}
 		if (!isUIUpdateScheduled) {
+			isUIUpdateScheduled = true;
 			new UIUpdater().schedule();
 		}
 	}
@@ -178,6 +175,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 				events = Lists.newArrayList(batchedSearchResultEvents);
 				batchedSearchResultEvents.clear();
 			}
+			SubMonitor progress = SubMonitor.convert(monitor, events.size());
 			for (SearchResultEvent event : events) {
 				if (event instanceof Added) {
 					addReference(((Added) event).getReferenceDescription(), true);
@@ -190,7 +188,10 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 						}
 					}
 				}
+				progress.worked(1);
 			}
+			viewer.refresh();
+			viewer.expandToLevel(1);
 			return Status.OK_STATUS;
 		}
 	}

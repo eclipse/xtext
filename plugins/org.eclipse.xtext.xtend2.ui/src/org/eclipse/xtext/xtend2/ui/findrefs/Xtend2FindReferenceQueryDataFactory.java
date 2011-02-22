@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.findrefs;
 
-import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Sets.*;
 import static java.util.Collections.*;
 import static org.eclipse.emf.ecore.util.EcoreUtil.*;
 
-import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -31,20 +31,27 @@ public class Xtend2FindReferenceQueryDataFactory extends FindReferenceQueryDataF
 
 	@Inject
 	private IXtend2JvmAssociations xtend2jvmAssociations;
-	
+
 	@Override
 	protected Predicate<IReferenceDescription> createResultFilter(EObject target) {
 		return new Xtend2ReferenceFilter(getURI(target));
 	}
 
 	@Override
-	protected List<URI> createTargetURIs(EObject target) {
-		if (target instanceof XtendClass)
-			return newArrayList(getURI(target), getURI(xtend2jvmAssociations.getInferredType((XtendClass) target)), getURI(xtend2jvmAssociations.getInferredConstructor((XtendClass) target)));
-		else if (target instanceof XtendFunction)
-			return newArrayList(getURI(target), getURI(xtend2jvmAssociations.getDirectlyInferredOperation((XtendFunction) target)));
-		else
-			return singletonList(getURI(target));
+	protected Set<URI> createTargetURIs(EObject target) {
+		if (target instanceof XtendClass) {
+			Set<URI> targetURIs = newLinkedHashSet();
+			targetURIs.add(getURI(target));
+			targetURIs.add(getURI(xtend2jvmAssociations.getInferredType((XtendClass) target)));
+			targetURIs.add(getURI(xtend2jvmAssociations.getInferredConstructor((XtendClass) target)));
+			return targetURIs;
+		} else if (target instanceof XtendFunction) {
+			Set<URI> targetURIs = newLinkedHashSet();
+			targetURIs.add(getURI(target));
+			targetURIs.add(getURI(xtend2jvmAssociations.getDirectlyInferredOperation((XtendFunction) target)));
+			return targetURIs;
+		} else {
+			return singleton(getURI(target));
+		}
 	}
-	
 }

@@ -9,7 +9,7 @@ package org.eclipse.xtext.ui.editor.findrefs;
 
 import static java.util.Collections.*;
 
-import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -21,15 +21,15 @@ public class ReferenceQueryData implements IQueryData {
 	
 	private URI localContextResourceURI;
 	private URI leadElementURI;
-	private List<URI> targetURIs;
+	private Set<URI> targetURIs;
 	private Predicate<IReferenceDescription> resultFilter;
 	private String label;
 
 	public ReferenceQueryData(URI targetURI) {
-		this(targetURI, singletonList(targetURI), targetURI.trimFragment(), null, "");
+		this(targetURI, singleton(targetURI), targetURI.trimFragment(), null, "");
 	}
 	
-	public ReferenceQueryData(URI leadElementURI, List<URI> targetURIs, URI localContextResourceURI,
+	public ReferenceQueryData(URI leadElementURI, Set<URI> targetURIs, URI localContextResourceURI,
 			Predicate<IReferenceDescription> resultFilter, String label) {
 		this.leadElementURI = leadElementURI;
 		this.targetURIs = targetURIs;
@@ -42,7 +42,7 @@ public class ReferenceQueryData implements IQueryData {
 		return leadElementURI;
 	}
 
-	public List<URI> getTargetURIs() {
+	public Set<URI> getTargetURIs() {
 		return targetURIs;
 	}
 

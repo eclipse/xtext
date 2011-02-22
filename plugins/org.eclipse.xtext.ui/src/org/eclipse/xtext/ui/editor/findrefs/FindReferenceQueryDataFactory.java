@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.editor.findrefs;
 import static java.util.Collections.*;
 
 import java.util.Iterator;
-import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
@@ -43,8 +43,8 @@ public class FindReferenceQueryDataFactory {
 		return queryData;
 	}
 
-	protected List<URI> createTargetURIs(EObject target) {
-		return singletonList(EcoreUtil.getURI(target));
+	protected Set<URI> createTargetURIs(EObject target) {
+		return singleton(EcoreUtil.getURI(target));
 	}
 
 	protected Predicate<IReferenceDescription> createResultFilter(EObject target) {
