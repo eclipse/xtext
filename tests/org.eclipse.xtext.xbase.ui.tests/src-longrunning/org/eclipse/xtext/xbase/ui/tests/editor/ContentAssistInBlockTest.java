@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.ui.tests.editor;
 import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
 
 import java.util.Collections;
-import java.util.Map;
 
 import junit.extensions.TestSetup;
 import junit.framework.Test;
@@ -121,11 +120,10 @@ public class ContentAssistInBlockTest extends ContentAssistTest implements IJava
 		newBuilder().append("''.toString ").assertText(expect(STRING_OPERATORS, CAST_INSTANCEOF, KEYWORDS_AND_STATICS, VARIABLE_DECL));
 	}
 	
-//TODO
-//	@Override
-//	public void testOnStringLiteral_35() throws Exception {
-//		newBuilder().append("''.toString .").assertTextAtCursorPosition("g .", 2, expect(STRING_OPERATORS, CAST_INSTANCEOF, KEYWORDS, VARIABLE_DECL));
-//	}
+	@Override
+	public void testOnStringLiteral_35() throws Exception {
+		newBuilder().append("''.toString .").assertTextAtCursorPosition("g .", 2, expect(STRING_OPERATORS, CAST_INSTANCEOF, KEYWORDS_AND_STATICS, VARIABLE_DECL));
+	}
 	
 	@Override
 	public void testOnStringLiteral_36() throws Exception {
