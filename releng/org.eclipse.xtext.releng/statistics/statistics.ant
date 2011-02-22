@@ -1,0 +1,11 @@
+<project name="P2 Download Statistics" default="addStatistic">
+
+	<target name="addStatistic">
+		<copy  file="artifacts.jar" tofile="artifacts.jar.backup"/>
+		<unjar src="artifacts.jar" dest="."/>
+		<move file="artifacts.xml" tofile="artifacts.xml.original"/>
+		<xslt style="addDownloadStats.xsl" in="artifacts.xml.original" out="artifacts.xml"/>
+		<zip destfile="artifacts.jar" filesonly="true" basedir="." includes="artifacts.xml"/>
+	</target>
+
+</project>
