@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.refactoring.impl;
 
 import static com.google.common.collect.Iterables.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
@@ -18,10 +19,12 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.link.LinkedPosition;
@@ -31,6 +34,7 @@ import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
@@ -64,6 +68,8 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 	private RefactoringResourceSetProvider resourceSetProvider;
 	@Inject
 	private IWorkspace workspace;
+	@Inject
+	private IWorkbench workbench;
 	@Inject
 	private IRenamedElementTracker renameElementTracker;
 	@Inject
@@ -105,7 +111,28 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 	}
 
 	public LinkedPositionGroup getLinkedPositionGroup() {
-		Iterable<TextEdit> edits = computeTextEdits();
+		try {
+			final LinkedPositionGroup[] result = new LinkedPositionGroup[1];
+			workbench.getActiveWorkbenchWindow().run(false, true, new IRunnableWithProgress() {
+				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+					result[0] = internalGetLinkedPositionGroup(monitor);
+					if(monitor.isCanceled()) 
+						result[0] = null;
+					else
+						monitor.done();
+				}
+			});
+			return result[0];
+		} catch (Exception exc) {
+			throw new WrappedException(exc);
+		}
+	}
+
+	protected LinkedPositionGroup internalGetLinkedPositionGroup(IProgressMonitor monitor) {
+		SubMonitor progress = SubMonitor.convert(monitor, 100);
+		Iterable<TextEdit> edits = computeTextEdits(progress.newChild(80));
+		if(edits == null) 
+			return null;
 		LinkedPositionGroup group = new LinkedPositionGroup();
 		Iterable<LinkedPosition> linkedPositions = filter(
 				Iterables.transform(edits, new Function<TextEdit, LinkedPosition>() {
@@ -123,6 +150,7 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 						return null;
 					}
 				}), Predicates.notNull());
+		progress.worked(10);
 		final int invocationOffset = getInvocationOffset();
 		int i = 0;
 		for (LinkedPosition position : sortPositions(linkedPositions, invocationOffset)) {
@@ -157,15 +185,15 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 		return ImmutableSortedSet.copyOf(comparator, linkedPositions);
 	}
 
-	public Iterable<TextEdit> computeTextEdits() {
-		IProgressMonitor progress = new NullProgressMonitor();
+	public Iterable<TextEdit> computeTextEdits(IProgressMonitor monitor) {
+		SubMonitor progress = SubMonitor.convert(monitor, 100);
 		LinkedModelUpdateAcceptor updateAcceptor = new LinkedModelUpdateAcceptor();
 		String originalName = getOriginalName();
 		Iterable<URI> dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(targetElement,
-				progress);
+				progress.newChild(1));
 		Map<URI, URI> original2newElementURIs = renameElementTracker.renameAndTrack(
 				concat(Collections.singleton(targetElementURI), dependentElementURIs), originalName, resourceSet,
-				renameStrategy, progress);
+				renameStrategy, progress.newChild(1));
 		// Handle in contextResourceURI to define that references should looked up only in resource that builds the context
 		renameArguments = new ElementRenameArguments(targetElementURI, originalName, renameStrategy,
 				original2newElementURIs, true, contextResourceURI);
@@ -177,10 +205,14 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 		ReferenceDescriptionAcceptor referenceDescriptionAcceptor = new ReferenceDescriptionAcceptor();
 		IReferenceFinder.IQueryData referenceQueryData = queryDataFactory.create(renameArguments);
 		referenceFinder.findLocalReferences(referenceQueryData, new SimpleLocalResourceAccess(resourceSet),
-				referenceDescriptionAcceptor, progress);
+				referenceDescriptionAcceptor, progress.newChild(40));
+		if(progress.isCanceled()) 
+			return null;
 		Iterable<IReferenceDescription> localRedefernceDescriptions = referenceDescriptionAcceptor
 				.getReferenceDescriptions();
-		referenceUpdater.createReferenceUpdates(renameArguments, localRedefernceDescriptions, updateAcceptor, progress);
+		referenceUpdater.createReferenceUpdates(renameArguments, localRedefernceDescriptions, updateAcceptor, progress.newChild(48));
+		if(progress.isCanceled()) 
+			return null;
 		return updateAcceptor.getTextEdits();
 	}
 
