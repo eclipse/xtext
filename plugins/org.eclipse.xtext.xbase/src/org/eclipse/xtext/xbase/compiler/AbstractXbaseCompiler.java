@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.compiler;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmLowerBound;
@@ -15,6 +16,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
@@ -105,16 +107,20 @@ public abstract class AbstractXbaseCompiler {
 
 	protected String getReturnTypeName(XExpression expr) {
 		final JvmTypeReference type = typeProvider.getType(expr);
-		return getSerializedForm(type, false);
+		return getSerializedForm(type);
 	}
 
-	protected String getSerializedForm(final JvmTypeReference type, boolean withoutConstraints) {
+	protected String getSerializedForm(final JvmTypeReference type) {
+		return getSerializedForm(type, null, false, false);
+	}
+	
+	protected String getSerializedForm(final JvmTypeReference type, XExpression context, boolean withoutConstraints, boolean paramsToWildcard) {
 		StringBuilder result = new StringBuilder();
-		getSerializedForm(type, result, withoutConstraints);
+		getSerializedForm(type, context, result, withoutConstraints, paramsToWildcard);
 		return result.toString();
 	}
 	
-	protected void getSerializedForm(final JvmTypeReference type, StringBuilder result, boolean withoutConstraints) {
+	protected void getSerializedForm(final JvmTypeReference type, XExpression context, StringBuilder result, boolean withoutConstraints, boolean paramsToWildcard) {
 		if (type instanceof JvmWildcardTypeReference) {
 			JvmWildcardTypeReference wildcard = (JvmWildcardTypeReference) type;
 			if (!withoutConstraints) {
@@ -125,7 +131,7 @@ public abstract class AbstractXbaseCompiler {
 					if (constraint instanceof JvmLowerBound) {
 						if (!withoutConstraints)
 							result.append(" super ");
-						getSerializedForm(constraint.getTypeReference(), result, withoutConstraints);
+						getSerializedForm(constraint.getTypeReference(), context, result, withoutConstraints, paramsToWildcard);
 						return;
 					}
 				}
@@ -141,17 +147,26 @@ public abstract class AbstractXbaseCompiler {
 								throw new IllegalStateException("cannot have two upperbounds if type should be printed without constraints");
 							result.append(" & ");
 						}
-						getSerializedForm(constraint.getTypeReference(), result, withoutConstraints);
+						getSerializedForm(constraint.getTypeReference(), context, result, withoutConstraints, paramsToWildcard);
 					}
 				}
 			} else if (withoutConstraints) {
 				result.append("java.lang.Object");
 			}
 		} else if (type instanceof JvmGenericArrayTypeReference) {
-			getSerializedForm(((JvmGenericArrayTypeReference) type).getComponentType(), result, withoutConstraints);
+			getSerializedForm(((JvmGenericArrayTypeReference) type).getComponentType(), context, result, withoutConstraints, paramsToWildcard);
 			result.append("[]");
 		} else if (type instanceof JvmParameterizedTypeReference) {
-			JvmParameterizedTypeReference parameterized = (JvmParameterizedTypeReference) type;		
+			JvmParameterizedTypeReference parameterized = (JvmParameterizedTypeReference) type;
+			if (paramsToWildcard && parameterized.getType() instanceof JvmTypeParameter) {
+				JvmTypeParameter parameter = (JvmTypeParameter) parameterized.getType();
+				if (context == null)
+					throw new IllegalArgumentException("argument may not be null if parameters have to be replaced by wildcards");
+				if (!EcoreUtil.isAncestor(parameter.getDeclarator(), context)) {
+					result.append("?");
+					return;
+				}
+			}
 			result.append(getSerializedForm(type.getType()));
 			if (!parameterized.getArguments().isEmpty()) {
 				result.append("<");
@@ -159,7 +174,7 @@ public abstract class AbstractXbaseCompiler {
 					if (i != 0) {
 						result.append(", ");
 					}
-					getSerializedForm(parameterized.getArguments().get(i), result, withoutConstraints);
+					getSerializedForm(parameterized.getArguments().get(i), context, result, withoutConstraints, paramsToWildcard);
 				}
 				result.append(">");
 			}
@@ -262,7 +277,7 @@ public abstract class AbstractXbaseCompiler {
 	protected void declareLocalVariable(XExpression expr, IAppendable b, Later expression) {
 		JvmTypeReference type = getTypeProvider().getType(expr);
 		String varName = declareNameInVariableScope(expr, b);
-		b.append("\n").append(getSerializedForm(type, false)).append(" ").append(varName).append(" = ");
+		b.append("\n").append(getSerializedForm(type, expr, false, true)).append(" ").append(varName).append(" = ");
 		expression.exec();
 		b.append(";");
 	}

@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
@@ -54,7 +55,11 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 				doConversion(toBeConvertedTo, actualType, appendable, new Later() {
 					@Override
 					public void exec() {
-						TypeConvertingCompiler.super.internalToJavaExpression(obj, appendable);
+						String finalVariable = appendable.getName(Tuples.create("Convertable", obj));
+						if (finalVariable != null)
+							appendable.append(finalVariable);
+						else
+							TypeConvertingCompiler.super.internalToJavaExpression(obj, appendable);
 					}
 				});
 				return;
@@ -66,12 +71,12 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	protected void doConversion(final JvmTypeReference left, final JvmTypeReference right,
 			final IAppendable appendable, final Later expression) {
 		if (right.getType() instanceof JvmPrimitiveType && !(left.getType() instanceof JvmPrimitiveType)) {
-			appendable.append("((").append(getSerializedForm(left, false)).append(")");
+			appendable.append("((").append(getSerializedForm(left)).append(")");
 			expression.exec();
 			appendable.append(")");
 		} else if (right.getType() instanceof JvmArrayType && typeRefs.is(left, Iterable.class)) {
 			appendable.append("((");
-			appendable.append(getSerializedForm(left, false));
+			appendable.append(getSerializedForm(left));
 			appendable.append(")");
 			appendable.append(Conversions.class.getCanonicalName()).append(".doWrapArray(");
 			expression.exec();
@@ -88,15 +93,15 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 				throw new IllegalStateException("expected type " + resolvedLeft + " not mappable from " + right);
 			}
 			TypeArgumentContext context = contextProvider.getReceiverContext(resolvedLeft);
-			appendable.append("new ").append(getSerializedForm(resolvedLeft, true)).append("() {");
+			appendable.append("new ").append(getSerializedForm(resolvedLeft, null, true, false)).append("() {");
 			appendable.increaseIndentation().increaseIndentation();
-			appendable.append("\npublic ").append(getSerializedForm(context.resolve(operation.getReturnType()), true));
+			appendable.append("\npublic ").append(getSerializedForm(context.resolve(operation.getReturnType()), null, true, false));
 			appendable.append(" ").append(operation.getSimpleName()).append("(");
 			EList<JvmFormalParameter> params = operation.getParameters();
 			for (Iterator<JvmFormalParameter> iterator = params.iterator(); iterator.hasNext();) {
 				JvmFormalParameter p = iterator.next();
 				final String name = p.getName();
-				appendable.append(getSerializedForm(context.resolve(p.getParameterType()), true)).append(" ").append(name);
+				appendable.append(getSerializedForm(context.resolve(p.getParameterType()), null, true, false)).append(" ").append(name);
 				if (iterator.hasNext())
 					appendable.append(",");
 			}

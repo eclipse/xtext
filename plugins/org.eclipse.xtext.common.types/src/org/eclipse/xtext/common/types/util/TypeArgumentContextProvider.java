@@ -81,6 +81,24 @@ public class TypeArgumentContextProvider {
 		return get(map);
 	}
 	
+	public TypeArgumentContext getReceiverContext(JvmTypeReference receiverType, JvmTypeReference featureType, JvmTypeReference expectedType) {
+		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
+		if (receiverType!=null) {
+			map.putAll(Multimaps.forMap(resolveReceiver(receiverType)));
+		}
+		map.putAll(Multimaps.forMap(resolveInferredTypeArgContext(featureType, expectedType)));
+		Map<JvmTypeParameter, JvmTypeReference> result = findBestMatches(map);
+		return get(result);
+	}
+	
+	protected Map<JvmTypeParameter,JvmTypeReference> resolveInferredTypeArgContext(JvmTypeReference featureType, JvmTypeReference expectation) {
+		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
+		if (expectation != null) {
+			resolve(featureType, expectation, map);
+		}
+		return findBestMatches(map);
+	}
+	
 	public TypeArgumentContext getExplicitMethodInvocationContext(JvmOperation operation, JvmTypeReference receiverType,
 			List<JvmTypeReference> typeArguments) {
 		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
@@ -107,7 +125,6 @@ public class TypeArgumentContextProvider {
 		Map<JvmTypeParameter, JvmTypeReference> result = findBestMatches(map);
 		return get(result);
 	}
-	
 	
 	public Map<JvmTypeParameter, JvmTypeReference> resolveTypeParametersReferencedInTypeParameters(Map<JvmTypeParameter, JvmTypeReference> context) {
 		Multimap<JvmTypeParameter, JvmTypeReference> result = LinkedHashMultimap.create(Multimaps.forMap(context));
@@ -269,6 +286,19 @@ public class TypeArgumentContextProvider {
 		if (typeParameter != null) {
 			if (!containsEntry(existing, typeParameter, information)) {
 				existing.put(typeParameter, information);
+				Collection<JvmTypeReference> resolveData = existing.get(typeParameter);
+				List<JvmTypeParameter> transitiveParameters = Lists.newArrayListWithExpectedSize(2);
+				for(JvmTypeReference resolveDataItem: resolveData) {
+					if (resolveDataItem.getType() instanceof JvmTypeParameter) {
+						if (resolveDataItem != information)
+							transitiveParameters.add((JvmTypeParameter) resolveDataItem.getType());
+					}
+				}
+				for(JvmTypeParameter transitiveParameter: transitiveParameters) {
+					if (!containsEntry(existing, transitiveParameter, information)) {
+						existing.put(transitiveParameter, information);
+					}
+				}
 				resolve(typeParameter, information, existing);
 			}
 		}

@@ -9,12 +9,14 @@ package org.eclipse.xtext.xbase.compiler;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -44,7 +46,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			prepareSpreadingMemberFeatureCall((XMemberFeatureCall) expr, b);
 		} else {
 			if (isLocalVarReference(expr)) {
-				//do nothing
+				// nothing to do
 			} else {
 				prepareAllArguments(expr, b);
 				if (isReferenced && !isPrimitiveVoid(expr)) {
@@ -94,7 +96,26 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			internalToJavaStatement(expr.getImplicitReceiver(), b, true);
 		}
 		for (XExpression arg : expr.getExplicitArguments()) {
-			internalToJavaStatement(arg, b, true);
+			if (arg instanceof XAbstractFeatureCall && isLocalVarReference((XAbstractFeatureCall) arg)) {
+				JvmTypeReference expectedType = getTypeProvider().getExpectedType(arg);
+				JvmTypeReference type = getTypeProvider().getType(arg);
+				if (!EcoreUtil.equals(expectedType, type)) {
+					String varName = getVarName(((XAbstractFeatureCall) arg).getFeature(), b);
+					String finalVariable = b.declareVariable(Tuples.create("Convertable", arg), "final_" + varName);
+					String serializedForm = getSerializedForm(type, arg, true, true);
+					b.append("\n")
+						.append("final ")
+						.append(serializedForm)
+						.append(" ")
+						.append(finalVariable)
+						.append(" = ")
+						.append("(").append(serializedForm).append(")")
+						.append(makeJavaIdentifier(varName))
+						.append(";");
+				}	
+			} else {
+				internalToJavaStatement(arg, b, true);
+			}
 		}
 	}
 
@@ -141,7 +162,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				b.append("==null?");
 				b.append("(");
 				JvmTypeReference type = getTypeProvider().getType(expr);
-				b.append(getSerializedForm(type, false));
+				b.append(getSerializedForm(type));
 				b.append(")null:");
 				internalToJavaExpression(receiver, b);
 				return true;
