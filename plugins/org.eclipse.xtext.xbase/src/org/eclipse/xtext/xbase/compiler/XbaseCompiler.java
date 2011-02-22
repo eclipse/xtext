@@ -237,6 +237,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		closeBlock(expr.getEachExpression(), b);
 	}
 	
+	//TODO replace me
 	protected JvmTypeReference getIterableForArrayType(JvmTypeReference arrayType, EObject context) {
 		if (!typeRefs.isArray(arrayType))
 			throw new IllegalArgumentException(arrayType + " not an array.");

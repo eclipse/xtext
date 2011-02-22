@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -130,6 +131,14 @@ public class TypeReferences {
 		if (declaredType == null)
 			return null;
 		JvmParameterizedTypeReference result = createTypeRef(declaredType, params);
+		return result;
+	}
+	
+	public JvmGenericArrayTypeReference createArrayType(JvmTypeReference componentType) {
+		JvmGenericArrayTypeReference result = factory.createJvmGenericArrayTypeReference();
+		JvmArrayType arrayType = factory.createJvmArrayType();
+		result.setType(arrayType);
+		arrayType.setComponentType(EcoreUtil2.cloneIfContained(componentType));
 		return result;
 	}
 

@@ -80,21 +80,21 @@ public class Primitives {
 			case Byte :
 				return getType(Byte.class, primitive);
 			case Short :
-				return getType( Short.class, primitive);
+				return getType(Short.class, primitive);
 			case Char :
-				return getType( Character.class, primitive);
+				return getType(Character.class, primitive);
 			case Int :
-				return getType( Integer.class, primitive);
+				return getType(Integer.class, primitive);
 			case Long :
-				return getType( Long.class, primitive);
+				return getType(Long.class, primitive);
 			case Float :
-				return getType( Float.class, primitive);
+				return getType(Float.class, primitive);
 			case Double :
-				return getType( Double.class, primitive);
+				return getType(Double.class, primitive);
 			case Boolean :
-				return getType( Boolean.class, primitive);
+				return getType(Boolean.class, primitive);
 			case Void :
-				return getType( Void.class, primitive);
+				return getType(Void.class, primitive);
 			default :
 				throw new IllegalArgumentException("Not a primitive : "+primitive);
 		}
@@ -110,5 +110,33 @@ public class Primitives {
 	
 	public boolean isPrimitive(JvmTypeReference componentType) {
 		return componentType.getType() instanceof JvmPrimitiveType;
+	}
+
+	public boolean isWrapperType(JvmTypeReference type) {
+		JvmTypeReference result = asPrimitiveIfWrapperType(type);
+		return result != type;
+	}
+
+	public JvmTypeReference asPrimitiveIfWrapperType(JvmTypeReference type) {
+		if (typeReferences.is(type, Byte.class)) {
+			return typeReferences.getTypeForName(Byte.TYPE, type.getType());
+		} else if (typeReferences.is(type, Short.class)) {
+			return typeReferences.getTypeForName(Short.TYPE, type.getType());
+		} else if (typeReferences.is(type, Character.class)) {
+			return typeReferences.getTypeForName(Character.TYPE, type.getType());
+		} else if (typeReferences.is(type, Integer.class)) {
+			return typeReferences.getTypeForName(Integer.TYPE, type.getType());
+		} else if (typeReferences.is(type, Long.class)) {
+			return typeReferences.getTypeForName(Long.TYPE, type.getType());
+		} else if (typeReferences.is(type, Float.class)) {
+			return typeReferences.getTypeForName(Float.TYPE, type.getType());
+		} else if (typeReferences.is(type, Double.class)) {
+			return typeReferences.getTypeForName(Double.TYPE, type.getType());
+		} else if (typeReferences.is(type, Boolean.class)) {
+			return typeReferences.getTypeForName(Boolean.TYPE, type.getType());
+		} else if (typeReferences.is(type, Void.class)) {
+			return typeReferences.getTypeForName(Void.TYPE, type.getType());
+		}
+		return type;
 	}
 }
