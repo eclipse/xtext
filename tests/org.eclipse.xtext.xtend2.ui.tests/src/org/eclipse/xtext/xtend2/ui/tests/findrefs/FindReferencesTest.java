@@ -12,10 +12,12 @@ import static org.eclipse.xtext.common.types.TypesPackage.Literals.*;
 import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 
+import java.util.Iterator;
 import java.util.Queue;
 
 import junit.framework.Test;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -93,9 +95,10 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 
 		IQueryData queryData = createQueryData(classFoo);
 		assertEquals(3, queryData.getTargetURIs().size());
-		assertEquals(queryData.getTargetURIs().get(0), EcoreUtil.getURI(classFoo));
-		assertEquals(queryData.getTargetURIs().get(1), EcoreUtil.getURI(inferredTypeFoo));
-		assertEquals(queryData.getTargetURIs().get(2), EcoreUtil.getURI(inferredConstructor));
+		Iterator<URI> targetURIs = queryData.getTargetURIs().iterator();
+		assertEquals(targetURIs.next(), EcoreUtil.getURI(classFoo));
+		assertEquals(targetURIs.next(), EcoreUtil.getURI(inferredTypeFoo));
+		assertEquals(targetURIs.next(), EcoreUtil.getURI(inferredConstructor));
 		assertTrue(queryData.getResultFilter() instanceof Xtend2ReferenceFilter);
 		assertEquals(((Xtend2ReferenceFilter) queryData.getResultFilter()).getExcludedSourceURI(),
 				EcoreUtil.getURI(classFoo));
@@ -109,8 +112,9 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 
 		IQueryData queryData = createQueryData(functionFoo);
 		assertEquals(2, queryData.getTargetURIs().size());
-		assertEquals(queryData.getTargetURIs().get(0), EcoreUtil.getURI(functionFoo));
-		assertEquals(queryData.getTargetURIs().get(1), EcoreUtil.getURI(inferredOperation));
+		Iterator<URI> targetURIs = queryData.getTargetURIs().iterator();
+		assertEquals(targetURIs.next(), EcoreUtil.getURI(functionFoo));
+		assertEquals(targetURIs.next(), EcoreUtil.getURI(inferredOperation));
 		assertTrue(queryData.getResultFilter() instanceof Xtend2ReferenceFilter);
 		assertEquals(((Xtend2ReferenceFilter) queryData.getResultFilter()).getExcludedSourceURI(),
 				EcoreUtil.getURI(functionFoo));
