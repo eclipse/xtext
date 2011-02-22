@@ -59,6 +59,7 @@ public class ReferenceQuery implements ISearchQuery {
 	public IStatus run(IProgressMonitor monitor) throws OperationCanceledException {
 		searchResult.reset();
 		finder.findAllReferences(queryData, localContextProvider, searchResult, monitor);
+		searchResult.finish();
 		return (monitor.isCanceled()) ? Status.CANCEL_STATUS : Status.OK_STATUS;
 	}
 

@@ -21,6 +21,7 @@ public class Messages extends NLS {
 	public static String ReferenceQuery_monitor;
 	public static String ReferenceSearchResultContentProvider_label;
 	public static String ReferenceSearchResultLabelProvider_invalid;
+	public static String ReferenceSearchViewPage_busyLabel;
 	public static String ReferenceSearchViewPageActions_collapseAll;
 	public static String ReferenceSearchViewPageActions_collapseAll_tooltip;
 	public static String ReferenceSearchViewPageActions_expandAll;

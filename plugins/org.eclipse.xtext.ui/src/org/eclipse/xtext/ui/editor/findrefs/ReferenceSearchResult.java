@@ -86,4 +86,8 @@ public class ReferenceSearchResult implements ISearchResult, IAcceptor<IReferenc
 		fireEvent(new ReferenceSearchResultEvents.Reset(this));
 	}
 
+	public void finish() {
+		fireEvent(new ReferenceSearchResultEvents.Finish(this));
+	}
+	
 }

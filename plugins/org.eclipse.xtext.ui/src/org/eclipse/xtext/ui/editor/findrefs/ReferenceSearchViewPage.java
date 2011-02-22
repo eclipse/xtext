@@ -17,20 +17,27 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.OpenEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.search.ui.IContextMenuConstants;
+import org.eclipse.search.ui.IQueryListener;
+import org.eclipse.search.ui.ISearchQuery;
 import org.eclipse.search.ui.ISearchResult;
 import org.eclipse.search.ui.ISearchResultPage;
 import org.eclipse.search.ui.ISearchResultViewPart;
+import org.eclipse.search.ui.NewSearchUI;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.OpenAndLinkWithEditorHelper;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.IPageSite;
 import org.eclipse.ui.part.Page;
+import org.eclipse.ui.part.PageBook;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
@@ -42,6 +49,10 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 	private String id;
 
 	private ISearchResult searchResult;
+
+	private PageBook pagebook;
+
+	private Table busyLabel;
 
 	private Composite control;
 
@@ -56,7 +67,7 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 	private IAction expandAllAction;
 
 	private IAction collapseAllAction;
-	
+
 	@Inject
 	private ReferenceSearchResultContentProvider contentProvider;
 
@@ -66,6 +77,9 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 	@Inject
 	private IURIEditorOpener uriEditorOpener;
 
+	private boolean isBusyShowing;
+
+	private IQueryListener queryListener;
 
 	public ReferenceSearchViewPage() {
 		showPreviousAction = new ReferenceSearchViewPageActions.ShowPrevious(this);
@@ -120,15 +134,31 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 
 	@Override
 	public void createControl(Composite parent) {
-		control = new Composite(parent, SWT.NULL);
+		pagebook = new PageBook(parent, SWT.NULL);
+		pagebook.setLayoutData(new GridData(GridData.FILL_BOTH));
+		busyLabel = new Table(pagebook, SWT.NONE);
+		TableItem item = new TableItem(busyLabel, SWT.NONE);
+		item.setText(Messages.ReferenceSearchViewPage_busyLabel);
+		busyLabel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		control = new Composite(pagebook, SWT.NULL);
 		control.setLayoutData(new GridData(GridData.FILL_BOTH));
 		control.setSize(100, 100);
 		control.setLayout(new FillLayout());
 		viewer = new TreeViewer(control, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 		viewer.setContentProvider(contentProvider);
 		viewer.setLabelProvider(labelProvider);
+		createOpenAndLinkWithEditorHandler();
+		IToolBarManager tbm = getSite().getActionBars().getToolBarManager();
+		fillToolbar(tbm);
+		tbm.update(true);
+		pagebook.showPage(control);
+		isBusyShowing = false;
+		queryListener = createQueryListener();
+		NewSearchUI.addQueryListener(queryListener);
+	}
 
-		new OpenAndLinkWithEditorHelper(viewer) {
+	protected OpenAndLinkWithEditorHelper createOpenAndLinkWithEditorHandler() {
+		return new OpenAndLinkWithEditorHelper(viewer) {
 			@Override
 			protected void activate(ISelection selection) {
 				final int currentMode = OpenStrategy.getOpenMethod();
@@ -150,9 +180,47 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 				handleOpen(new OpenEvent(viewer, selection));
 			}
 		};
-		IToolBarManager tbm = getSite().getActionBars().getToolBarManager();
-		fillToolbar(tbm);
-		tbm.update(true);
+	}
+
+	protected IQueryListener createQueryListener() {
+		return new IQueryListener() {
+
+			public void queryStarting(ISearchQuery query) {
+				showBusyLabel(true);
+			}
+
+			public void queryRemoved(ISearchQuery query) {
+				showBusyLabel(false);
+			}
+
+			public void queryFinished(ISearchQuery query) {
+				showBusyLabel(false);
+			}
+
+			public void queryAdded(ISearchQuery query) {
+				showBusyLabel(false);
+			}
+		};
+	}
+
+	@Override
+	public void dispose() {
+		NewSearchUI.removeQueryListener(queryListener);
+		super.dispose();
+	}
+
+	protected void showBusyLabel(final boolean shouldShowBusy) {
+		if (shouldShowBusy != isBusyShowing) {
+			Display.getDefault().asyncExec(new Runnable() {
+				public void run() {
+					if (shouldShowBusy)
+						pagebook.showPage(busyLabel);
+					else
+						pagebook.showPage(control);
+				}
+			});
+			isBusyShowing = shouldShowBusy;
+		}
 	}
 
 	protected void fillToolbar(IToolBarManager tbm) {
@@ -176,10 +244,11 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 				if (selectedObject instanceof ReferenceSearchViewTreeNode) {
 					ReferenceSearchViewTreeNode treeNode = (ReferenceSearchViewTreeNode) selectedObject;
 					Object description = treeNode.getDescription();
-					if(description instanceof IReferenceDescription) {
+					if (description instanceof IReferenceDescription) {
 						IReferenceDescription referenceDescription = (IReferenceDescription) description;
-						uriEditorOpener.open(referenceDescription.getSourceEObjectUri(), referenceDescription.getEReference(), referenceDescription.getIndexInList(), true);
-					} else if(description instanceof IResourceDescription) {
+						uriEditorOpener.open(referenceDescription.getSourceEObjectUri(),
+								referenceDescription.getEReference(), referenceDescription.getIndexInList(), true);
+					} else if (description instanceof IResourceDescription) {
 						uriEditorOpener.open(((IResourceDescription) description).getURI(), true);
 					}
 				}
@@ -189,7 +258,7 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 
 	@Override
 	public Control getControl() {
-		return control;
+		return pagebook;
 	}
 
 	@Override
@@ -202,5 +271,5 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 	public TreeViewer getViewer() {
 		return viewer;
 	}
-	
+
 }
