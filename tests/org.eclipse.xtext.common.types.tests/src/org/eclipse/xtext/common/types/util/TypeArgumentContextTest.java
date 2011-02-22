@@ -11,7 +11,6 @@ import static com.google.common.collect.Iterables.*;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 import junit.framework.TestCase;
@@ -142,16 +141,37 @@ public class TypeArgumentContextTest extends TestCase {
 		assertNull(argument);
 	}
 	
-	public void testNotRecursive() throws Exception {
-		JvmTypeReference reference = typeRefs.typeReference("java.util.List").wildCardExtends("java.lang.CharSequence").create();
+	// TODO Recent changes in the type arg context contradict this expectation. Why was it meant to not work recursive? 
+//	public void testNotRecursive() throws Exception {
+//		JvmTypeReference listReference = typeRefs.typeReference("java.util.List").wildCardExtends("java.lang.CharSequence").create();
+//		
+//		JvmGenericType collType = (JvmGenericType) typeProvider.findTypeByName(Collection.class.getCanonicalName());
+//		JvmTypeReference collArgument = typeArgCtxProvider.getReceiverContext(listReference).getBoundArgument(collType.getTypeParameters().get(0));
+//		
+//		JvmGenericType listType = (JvmGenericType) typeProvider.findTypeByName(List.class.getCanonicalName());
+//		JvmTypeReference listArgument = ((JvmParameterizedTypeReference)listType.getSuperTypes().get(0)).getArguments().get(0);
+//		
+//		assertTrue(EcoreUtil.equals(listArgument, collArgument));
+//	}
+	
+	public void testTransitive() throws Exception {
+		JvmTypeReference stringList = typeRefs.typeReference("java.util.List").wildCardExtends("java.lang.String").create();
+		TypeArgumentContext stringListContext = typeArgCtxProvider.getReceiverContext(stringList);
 		
-		JvmGenericType collType = (JvmGenericType) typeProvider.findTypeByName(Collection.class.getCanonicalName());
-		JvmTypeReference collArgument = typeArgCtxProvider.getReceiverContext(reference).getBoundArgument(collType.getTypeParameters().get(0));
+		JvmGenericType collection = (JvmGenericType) typeProvider.findTypeByName(Collection.class.getCanonicalName());
+		JvmTypeParameter collectionTypeParam = collection.getTypeParameters().get(0);
+		JvmTypeReference boundCollectionTypeArgument = stringListContext.getBoundArgument(collectionTypeParam);
+		assertEquals("JvmWildcardTypeReference: ? extends java.lang.String", boundCollectionTypeArgument.toString());
 		
-		JvmGenericType listType = (JvmGenericType) typeProvider.findTypeByName(List.class.getCanonicalName());
-		JvmTypeReference listArgument = ((JvmParameterizedTypeReference)listType.getSuperTypes().get(0)).getArguments().get(0);
+		JvmGenericType iterable = (JvmGenericType) typeProvider.findTypeByName(Iterable.class.getCanonicalName());
+		JvmTypeParameter iterableTypeParam = iterable.getTypeParameters().get(0);
+		JvmTypeReference boundIterableTypeArgument = stringListContext.getBoundArgument(iterableTypeParam);
+		assertEquals("JvmWildcardTypeReference: ? extends java.lang.String", boundIterableTypeArgument.toString());
 		
-		assertTrue(EcoreUtil.equals(listArgument, collArgument));
+		JvmOperation iterator = (JvmOperation) iterable.getMembers().get(0);
+		JvmTypeReference iteratorReturnType = iterator.getReturnType();
+		JvmTypeReference boundIteratorTypeArgument = stringListContext.resolve(iteratorReturnType);
+		assertEquals("JvmParameterizedTypeReference: java.util.Iterator<? extends java.lang.String>", boundIteratorTypeArgument.toString());
 	}
 	
 	public void testResolve_0() throws Exception {
