@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.util;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
@@ -56,7 +58,7 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 			String path = classpathUri.trimSegments(1).path();
 			String fullPath = classpathUri.path();
 			final String name = classpathUri.lastSegment();
-			String packageName = path.substring(1).replace('/', '.');	
+			String packageName = isEmpty(path) ? "" : path.substring(1).replace('/', '.');	
 			for(IPackageFragmentRoot packageFragmentRoot: javaProject.getAllPackageFragmentRoots()) {
 				IJavaElement foundElement = packageFragmentRoot.getPackageFragment(packageName);
 				if (foundElement instanceof IPackageFragment && foundElement.exists()) {
