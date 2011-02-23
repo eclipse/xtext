@@ -42,28 +42,28 @@ public class XbaseTypeConformanceTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testArrayConformsToIterable_01() throws Exception {
-		assertTrue(isConformantReturnTypes("null as "+Iterable.class.getName()+"<"+Iterable.class.getName()+"<Integer>>", "new testdata.ArrayClient().getMultiArray"));
+		assertTrue(isConformantReturnTypes("null as "+Iterable.class.getName()+"<? extends "+Iterable.class.getName()+"<Integer>>", "new testdata.ArrayClient().getMultiArray"));
 	}
 	public void testArrayConformsToIterable_02() throws Exception {
-		assertTrue(isConformantReturnTypes("null as "+Iterable.class.getName()+"<"+Iterable.class.getName()+"<int>>", "new testdata.ArrayClient().getMultiArray"));
+		assertTrue(isConformantReturnTypes("null as "+Iterable.class.getName()+"<? extends "+List.class.getName()+"<Integer>>", "new testdata.ArrayClient().getMultiArray"));
 	}
 	public void testArrayConformsToIterable_03() throws Exception {
-		assertTrue(isConformantReturnTypes("null as "+Iterable.class.getName()+"<"+Iterable.class.getName()+"<?>>", "new testdata.ArrayClient().getMultiArray"));
+		assertTrue(isConformantReturnTypes("null as "+Iterable.class.getName()+"<? extends "+List.class.getName()+"<?>>", "new testdata.ArrayClient().getMultiArray"));
 	}
 	public void testArrayConformsToIterable_04() throws Exception {
-		assertFalse(isConformantReturnTypes("null as "+Iterable.class.getName()+"<"+Iterable.class.getName()+"<String>>", "new testdata.ArrayClient().getMultiArray"));
+		assertFalse(isConformantReturnTypes("null as "+Iterable.class.getName()+"<"+List.class.getName()+"<String>>", "new testdata.ArrayClient().getMultiArray"));
 	}
 	public void testArrayConformsToIterable_05() throws Exception {
 		assertTrue(isConformantReturnTypes("null as "+Iterable.class.getName()+"<?>", "new testdata.ArrayClient().getArray"));
 	}
 	public void testArrayConformsToIterable_06() throws Exception {
-		assertFalse(isConformantReturnTypes("null as "+List.class.getName()+"<?>", "new testdata.ArrayClient().getArray"));
+		assertTrue(isConformantReturnTypes("null as "+List.class.getName()+"<?>", "new testdata.ArrayClient().getArray"));
 	}
 	public void testArrayConformsToIterable_07() throws Exception {
-		assertFalse(isConformantReturnTypes("null as "+List.class.getName()+"<String>", "new testdata.ArrayClient().getArray"));
+		assertFalse(isConformantReturnTypes("null as "+List.class.getName()+"<? extends String>", "new testdata.ArrayClient().getArray"));
 	}
 	public void testArrayConformsToIterable_08() throws Exception {
-		assertTrue(isConformantReturnTypes("null as "+Iterable.class.getName()+"<Object>", "new testdata.ArrayClient().getArray"));
+		assertTrue(isConformantReturnTypes("null as "+Iterable.class.getName()+"<? extends Object>", "new testdata.ArrayClient().getArray"));
 	}
 	public void testArrayConformsToIterable_09() throws Exception {
 		assertTrue(isConformantReturnTypes("null as "+Iterable.class.getName(), "new testdata.ArrayClient().getArray"));

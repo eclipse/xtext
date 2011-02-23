@@ -25,7 +25,7 @@ import com.google.inject.Inject;
 public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	
 	public void testFeatureCallWithArrayToIterableConversion() throws Exception {
-		assertResolvedReturnType("java.util.Iterator<? extends java.lang.Character>", "'foo'.toCharArray.iterator");
+		assertResolvedReturnType("java.util.Iterator<java.lang.Character>", "'foo'.toCharArray.iterator");
 	}
 	
 	public void testReturnType() throws Exception {
