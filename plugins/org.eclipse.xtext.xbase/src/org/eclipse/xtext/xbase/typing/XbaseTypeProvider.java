@@ -561,35 +561,58 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		if (feature == null || feature.eIsProxy())
 			return null;
 		JvmTypeReference featureType = getTypeForIdentifiable(feature, rawType);
-		if (rawType) {
-			if (!(featureType.getType() instanceof JvmTypeParameter))
-				return featureType;
+		if (isResolved(featureType, rawType)) {
+			return featureType;
 		}
 		JvmTypeReference receiverType = convertIfNeccessary(featureCall, getReceiverType(featureCall, rawType), feature, rawType);
 		if (feature instanceof JvmOperation) {
 			JvmOperation operation = (JvmOperation) feature;
 			if (featureCall.getTypeArguments().isEmpty()) {
-				JvmTypeReference expectedType = rawType ? null : getExpectedType(featureCall, rawType);
-				JvmTypeReference[] argumentTypes = getArgumentTypes(featureCall, rawType);
-				TypeArgumentContext methodTypeArgContext = typeArgCtxProvider.getInferredMethodInvocationContext(
-						operation, receiverType, expectedType, argumentTypes);
-				JvmTypeReference result = methodTypeArgContext.getUpperBound(featureType, featureCall);
-				if (rawType && result != null && result.getType() instanceof JvmTypeParameter) {
-					JvmTypeParameter type = (JvmTypeParameter) result.getType();
-					JvmTypeReference upperBound = null;
-					for(JvmTypeConstraint constraint: type.getConstraints()) {
-						if (constraint instanceof JvmUpperBound) {
-							if (upperBound != null) {
-								return _type(featureCall, false);			
-							}
-							JvmTypeReference reference = constraint.getTypeReference();
-							upperBound = methodTypeArgContext.getUpperBound(reference, featureCall);
-						}
+				TypeArgumentContext context = typeArgCtxProvider.getNullContext();
+				JvmTypeReference result = featureType;
+				if (receiverType != null) {
+					context = typeArgCtxProvider.injectReceiverContext(context, receiverType);
+					result = context.getUpperBound(featureType, featureCall);
+					if (isResolved(result, rawType)) {
+						return result;
 					}
-					if (upperBound != null && !(upperBound.getType() instanceof JvmTypeParameter))
-						return upperBound;
-					return _type(featureCall, false);
 				}
+				JvmTypeReference[] argumentTypes = getArgumentTypes(featureCall, rawType);
+				if (argumentTypes.length != 0 || operation.isVarArgs()) {
+					context = typeArgCtxProvider.injectArgumentTypeContext(context, operation, argumentTypes);
+					result = context.getUpperBound(featureType, featureCall);
+					if (isResolved(result, rawType)) {
+						return result;
+					}
+				}
+				JvmTypeReference expectedType = getExpectedType(featureCall, rawType);
+				if (expectedType != null) {
+					context = typeArgCtxProvider.injectExpectedTypeContext(context, operation, expectedType);
+					result = context.getUpperBound(featureType, featureCall);
+					if (isResolved(result, rawType)) {
+						return result;
+					}
+				}
+				
+				if (!isResolved(result, rawType)) {
+					if (result instanceof JvmTypeParameter) {
+						JvmTypeParameter type = (JvmTypeParameter) result.getType();
+						JvmTypeReference upperBound = null;
+						for(JvmTypeConstraint constraint: type.getConstraints()) {
+							if (constraint instanceof JvmUpperBound) {
+								if (upperBound != null) {
+									return getType(featureCall, false);			
+								}
+								JvmTypeReference reference = constraint.getTypeReference();
+								upperBound = context.getUpperBound(reference, featureCall);
+							}
+						}
+						if (upperBound != null && !(upperBound.getType() instanceof JvmTypeParameter))
+							return upperBound;
+						return getType(featureCall, false);
+					}
+				}
+				result = context.getUpperBound(featureType, operation);
 				return result;
 			} else {
 				TypeArgumentContext context = typeArgCtxProvider.getExplicitMethodInvocationContext(operation, receiverType, featureCall.getTypeArguments());

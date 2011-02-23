@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
+import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -72,12 +74,37 @@ public class TypeArgumentContext {
 					return lowerBound;
 				}
 			}
-			// only upper bounds set - no valid contravariant value 
+			// only upper bounds set - no valid contravariant value
 			return null;
 		}
+		removeObjectLowerBound(copy);
 		return copy;
 	}
 	
+	// TODO: transitive?
+	protected void removeObjectLowerBound(JvmTypeReference copy) {
+		if (copy instanceof JvmParameterizedTypeReference) {
+			ListIterator<JvmTypeReference> argumentIter = ((JvmParameterizedTypeReference) copy).getArguments().listIterator();
+			while(argumentIter.hasNext()) {
+				JvmTypeReference argument = argumentIter.next();
+				if (argument instanceof JvmWildcardTypeReference) {
+					Iterator<JvmTypeConstraint> constraintIter = ((JvmWildcardTypeReference) argument).getConstraints().iterator();
+					while(constraintIter.hasNext()) {
+						JvmTypeConstraint constraint = constraintIter.next();
+						if (constraint instanceof JvmLowerBound) {
+							if (typeReferences.isInstanceOf(constraint.getTypeReference(), Object.class)) {
+								constraintIter.remove();
+								argumentIter.set(constraint.getTypeReference());
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+	}
+
 	/**
 	 * Resolve the reference for a covariant location, i.e. returns the upper bound.
 	 * @return the upper bound of a reference.
@@ -183,6 +210,10 @@ public class TypeArgumentContext {
 	@Override
 	public String toString() {
 		return context.toString();
+	}
+	
+	protected Map<JvmTypeParameter, JvmTypeReference> getContextMap() {
+		return context;
 	}
 
 }
