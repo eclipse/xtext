@@ -99,10 +99,16 @@ public class TypeConformanceComputer {
 			return left != null;
 		if (isObject(left))
 			return true;
-		if (isPrimitiveVoid(left) || left!=null && left.getType()!=null && left.getType().eIsProxy())
+		if (isPrimitiveVoid(left)) 
+			return isPrimitiveVoid(right);
+		if(isUnresolvedType(left) || isUnresolvedType(right)) 
 			return false;
 		Boolean result = isConformantDispatcher.invoke(left, right, ignoreGenerics);
 		return result.booleanValue();
+	}
+
+	protected boolean isUnresolvedType(JvmTypeReference ref) {
+		return ref != null && ref.getType() != null && ref.getType().eIsProxy();
 	}
 
 	protected boolean isPrimitiveVoid(JvmTypeReference left) {
