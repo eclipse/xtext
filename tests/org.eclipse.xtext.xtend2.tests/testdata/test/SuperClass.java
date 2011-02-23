@@ -26,5 +26,5 @@ public abstract class SuperClass {
 	public abstract List<String> returnsListString();
 	public abstract List<? extends Object> returnsListExtendsObject();
 	
-	
+	public abstract void voidFunction();
 }

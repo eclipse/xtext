@@ -90,13 +90,23 @@ public class OverrideValidationTest extends AbstractXtend2TestCase {
 	}
 
 	public void testIncompatibleGenericReturnType_1() throws Exception {
-		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { override List<Object> returnsListString() '' }");
+		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { override java.util.List<Object> returnsListString() '' }");
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE);
 	}
 
 	public void testIncompatibleGenericReturnType_2() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { override java.util.ArrayList<String> returnsListExtendsObject() '' }");
 		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_RETURN_TYPE);
+	}
+	
+	public void testOverrideVoidFunction() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { override voidFunction() '' }");
+		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_RETURN_TYPE);
+	}
+
+	public void testOverrideVoidFunction_1() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { override String voidFunction() '' }");
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE);
 	}
 
 }
