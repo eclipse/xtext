@@ -17,55 +17,6 @@ import com.google.inject.Inject;
 public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 
 	//TODO reactivate temporarily disabled tests
-	@Override
-	public void testUpToOperator() throws Exception {
-	}
-
-	@Override
-	public void testFeatureCall_02() {
-	}
-
-	@Override
-	public void testAssignment_11() {
-	}
-
-	@Override
-	public void testArrayConversion_01() {
-	}
-
-	@Override
-	public void testArrayConversion_02() {
-	}
-
-	@Override
-	public void testArrayConversion_03() {
-	}
-
-	@Override
-	public void testArrayConversion_04() {
-	}
-
-	@Override
-	public void testArrayConversion_05() {
-	}
-
-	@Override
-	public void testIterableExtension_03() {
-	}
-
-	@Override
-	public void testIterableExtension_05() {
-	}
-
-	@Override
-	public void testIterableExtension_06() {
-	}
-
-	@Override
-	public void testStaticMethod_01() {
-	}
-	
-	////
 	
 	@Override
 	public void testThrowExpression_01() {
