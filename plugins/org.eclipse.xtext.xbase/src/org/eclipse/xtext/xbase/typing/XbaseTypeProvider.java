@@ -206,24 +206,6 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return super.handleCycleGetExpectedType(expression, rawType);
 	}
 	
-	@Override
-	protected JvmTypeReference handleCyclicGetType(XExpression expression, boolean rawType) {
-//		if (expression instanceof XAbstractFeatureCall) {
-//			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) expression;
-//			JvmIdentifiableElement feature = featureCall.getFeature();
-//			if (feature != null && !feature.eIsProxy()) {
-////				System.out.println("handleCyclicGetType: " + expression);
-//				JvmTypeReference result = getFeatureCallType(featureCall, true);
-//				return result;
-//			}
-//		}
-////		if (expression instanceof XClosure) {
-////			JvmTypeReference result = _type((XClosure)expression);
-////			return result;
-////		}
-		return super.handleCyclicGetType(expression, rawType);
-	}
-
 	protected TypeArgumentContext getFeatureCallTypeArgContext(XAbstractFeatureCall expr, EReference reference, int index, boolean rawType) {
 		JvmTypeReference receiverType = getReceiverType(expr, rawType);
 		if (expr.getFeature() instanceof JvmOperation) {
@@ -610,7 +592,6 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				}
 				return result;
 			} else {
-				
 				TypeArgumentContext context = typeArgCtxProvider.getExplicitMethodInvocationContext(operation, receiverType, featureCall.getTypeArguments());
 				return context.getUpperBound(featureType, featureCall);
 			}

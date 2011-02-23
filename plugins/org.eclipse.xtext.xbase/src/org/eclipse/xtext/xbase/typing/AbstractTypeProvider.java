@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typing;
 
-import static com.google.common.collect.Sets.*;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -16,12 +14,21 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XExpression;
+
+import com.google.common.collect.Sets;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -29,6 +36,96 @@ import org.eclipse.xtext.xbase.XExpression;
 public abstract class AbstractTypeProvider implements ITypeProvider {
 
 	private static final Logger logger = Logger.getLogger(AbstractTypeProvider.class);
+	
+	// this class if final because of the assumptions that are made in
+	// equals and hashcode
+	protected static final class ImmutableLinkedItem {
+		
+		protected final EObject object;
+		protected final ImmutableLinkedItem prev;
+		protected final int hashCode;
+		protected final int size;
+		
+		public ImmutableLinkedItem(EObject object, ImmutableLinkedItem immutableStack) {
+			this.object = object;
+			prev = immutableStack;
+			size = immutableStack == null ? 1 : immutableStack.size + 1;
+			if (prev != null) {
+				hashCode = 31 * size * prev.hashCode() + object.hashCode();
+			} else {
+				hashCode = object.hashCode();
+			}
+		}
+		
+		@Override
+		public boolean equals(Object obj) {
+			if (obj == null)
+				return false;
+			if (obj == this)
+				return true;
+			if (obj.hashCode() != hashCode() || obj.getClass() != ImmutableLinkedItem.class)
+				return false;
+			ImmutableLinkedItem other = (ImmutableLinkedItem) obj;
+			return other.object == object && other.size == size && (other.prev == prev || prev != null && prev.equals(other.prev));
+		}
+		
+		@Override
+		public int hashCode() {
+			return hashCode;
+		}
+
+	}
+	
+	private OnChangeEvictingCache typeReferenceAwareCache = new OnChangeEvictingCache() {
+		
+		@Override
+		public <T> T get(Object key, Resource resource, Provider<T> provider) {
+			if(resource == null) {
+				return provider.get();
+			}
+			CacheAdapter adapter = getOrCreate(resource);
+			T element = adapter.<T>get(key);
+			if (element==null) {
+				element = provider.get();
+				if (element instanceof JvmTypeReference) {
+					if (!isResolved((JvmTypeReference) element)) {
+						if (logger.isDebugEnabled()) {
+							boolean rawType = (Boolean) ((Triple<?, ?, ?>) key).getThird();
+							logger.debug(getDebugIndentation(rawType) + "cache skip: " + element);
+						}
+						return element;
+					}
+				}
+				if (logger.isDebugEnabled()) {
+					boolean rawType = (Boolean) ((Triple<?, ?, ?>) key).getThird();
+					logger.debug(getDebugIndentation(rawType) + "cache: " + element);
+				}
+				adapter.set(key, element);
+			}
+			return element;
+		}
+	};
+	
+	// TODO improve / extract to a utility method if other clients are doing similar things
+	protected boolean isResolved(JvmTypeReference reference) {
+		if (reference == null)
+			return false;
+		if (reference.getType() instanceof JvmTypeParameter)
+			return false;
+		if (reference instanceof JvmParameterizedTypeReference) {
+			for(JvmTypeReference argument: ((JvmParameterizedTypeReference) reference).getArguments()) {
+				if (!isResolved(argument))
+					return false;
+			}
+		}
+		if (reference instanceof JvmWildcardTypeReference) {
+			for(JvmTypeConstraint constraint: ((JvmWildcardTypeReference) reference).getConstraints()) {
+				if (!isResolved(constraint.getTypeReference()))
+					return false;
+			}
+		}
+		return true;
+	}
 	
 	private final PolymorphicDispatcher<JvmTypeReference> typeDispatcher = PolymorphicDispatcher.createForSingleTarget(
 			"_type", 2, 2, this);
@@ -173,35 +270,102 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		return null;
 	}
 
-	abstract static class CyclicHandlingSupport<T extends EObject> {
-
-		private final ThreadLocal<Set<T>> ongoingComputations = new ThreadLocal<Set<T>>();
-		private final ThreadLocal<Set<T>> ongoingRawTypeComputations = new ThreadLocal<Set<T>>();
-
-		protected Set<T> getTypeComputations(boolean rawType) {
-			ThreadLocal<Set<T>> computations = rawType ? ongoingRawTypeComputations : ongoingComputations;
-			Set<T> set = computations.get();
-			if (set == null) {
-				set = newHashSet();
-				computations.set(set);
+	protected static class ComputationData<T extends EObject> {
+		protected final Set<T> computations = Sets.newHashSet();
+		protected ImmutableLinkedItem queryState = null;
+		protected Resource resource;
+		protected boolean resourceLeftOrCyclic;
+		
+		protected boolean add(T t) {
+			boolean result = computations.add(t);
+			if (result) {
+				if (queryState == null) {
+					resource = t.eResource();
+				}
+				queryState = new ImmutableLinkedItem(t, queryState);
 			}
-			return set;
+			return result;
+		}
+		
+		protected void remove(T t) {
+			computations.remove(t);
+			queryState = queryState.prev;
+			if (queryState == null)
+				resource = null;
 		}
 
-		public JvmTypeReference getType(final T t, boolean rawType) {
+		protected int size() {
+			return computations.size();
+		}
+
+	}
+	
+	abstract class CyclicHandlingSupport<T extends EObject> {
+
+		private final ThreadLocal<ComputationData<T>> ongoingComputations = new ThreadLocal<ComputationData<T>>() {
+			@Override
+			protected ComputationData<T> initialValue() {
+				return new ComputationData<T>();
+			}
+		};
+		private final ThreadLocal<ComputationData<T>> ongoingRawTypeComputations = new ThreadLocal<ComputationData<T>>() {
+			@Override
+			protected ComputationData<T> initialValue() {
+				return new ComputationData<T>();
+			}
+		};
+
+		protected ComputationData<T> getTypeComputations(boolean rawType) {
+			ThreadLocal<ComputationData<T>> computations = rawType ? ongoingRawTypeComputations : ongoingComputations;
+			ComputationData<T> result = computations.get();
+			return result;
+		}
+
+		public JvmTypeReference getType(final T t, final boolean rawType) {
 			if (t == null)
 				return null;
 			if (t.eIsProxy())
 				return null;
-			Set<T> computations = getTypeComputations(rawType);
-			if (computations.add(t)) {
+			ComputationData<T> computationData = getTypeComputations(rawType);
+			if (computationData.add(t)) {
 				try {
-					return doComputation(t, rawType);
+					if (computationData.resource == t.eResource() && !computationData.resourceLeftOrCyclic) {
+						Triple<CyclicHandlingSupport<T>, ImmutableLinkedItem, Boolean> cacheKey = Tuples.create(this, computationData.queryState, rawType);
+						final boolean[] hit = new boolean[] { true };
+						JvmTypeReference result = typeReferenceAwareCache.get(cacheKey, computationData.resource, new Provider<JvmTypeReference>(){
+							public JvmTypeReference get() {
+								hit[0] = false;
+								JvmTypeReference result = doComputation(t, rawType);
+								return result;
+							}
+						});
+						if (logger.isDebugEnabled()) {
+							logger.debug(getDebugIndentation(rawType) + "cache hit: " + hit[0] + " for: " + t);
+						}
+						return result;
+					} else {
+						if (computationData.resourceLeftOrCyclic)
+							return doComputation(t, rawType);
+						try {
+							computationData.resourceLeftOrCyclic = true;
+							return doComputation(t, rawType);
+						} finally {
+							computationData.resourceLeftOrCyclic = false;
+						}
+					}
+					
 				} finally {
-					computations.remove(t);
+					computationData.remove(t);
 				}
 			} else {
-				return doHandleCyclicCall(t, rawType);
+				if (computationData.resourceLeftOrCyclic)
+					return doHandleCyclicCall(t, rawType);
+				try {
+					computationData.resourceLeftOrCyclic = true;
+					return doHandleCyclicCall(t, rawType);
+				} finally {
+					computationData.resourceLeftOrCyclic = false;
+				}
 			}
 		}
 		

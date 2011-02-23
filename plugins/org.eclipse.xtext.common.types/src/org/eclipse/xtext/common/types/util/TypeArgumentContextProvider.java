@@ -23,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstraintOwner;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
@@ -72,7 +73,7 @@ public class TypeArgumentContextProvider {
 	}
 	
 	public TypeArgumentContext get(Map<JvmTypeParameter,JvmTypeReference> context) {
-		final Map<JvmTypeParameter, JvmTypeReference> resolved = resolveTypeParametersReferencedInTypeParameters(context);
+		final Map<JvmTypeParameter, JvmTypeReference> resolved = resolveTypeParametersReferencedInTypeParameters(context, false);
 		return new TypeArgumentContext(resolved, typeProviderFactory, typeReferences);
 	}
 	
@@ -86,15 +87,16 @@ public class TypeArgumentContextProvider {
 		if (receiverType!=null) {
 			map.putAll(Multimaps.forMap(resolveReceiver(receiverType)));
 		}
-		map.putAll(Multimaps.forMap(resolveInferredTypeArgContext(featureType, expectedType)));
+		map.putAll(Multimaps.forMap(resolveInferredTypeArgContext(featureType, expectedType, false)));
 		Map<JvmTypeParameter, JvmTypeReference> result = findBestMatches(map);
 		return get(result);
 	}
 	
-	protected Map<JvmTypeParameter,JvmTypeReference> resolveInferredTypeArgContext(JvmTypeReference featureType, JvmTypeReference expectation) {
+	protected Map<JvmTypeParameter,JvmTypeReference> resolveInferredTypeArgContext(JvmTypeReference featureType, JvmTypeReference expectation, 
+			boolean ignoreOperationTypeParameters) {
 		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
 		if (expectation != null) {
-			resolve(featureType, expectation, map);
+			resolve(featureType, expectation, map, ignoreOperationTypeParameters);
 		}
 		return findBestMatches(map);
 	}
@@ -111,7 +113,7 @@ public class TypeArgumentContextProvider {
 		for(int i = 0; i < max; i++) {
 			explicitArguments.put(typeParameters.get(i), typeArguments.get(i));
 		}
-		map.putAll(Multimaps.forMap(resolveTypeParametersReferencedInTypeParameters(explicitArguments)));
+		map.putAll(Multimaps.forMap(resolveTypeParametersReferencedInTypeParameters(explicitArguments, false)));
 		Map<JvmTypeParameter, JvmTypeReference> result = findBestMatches(map);
 		return get(result);
 	}
@@ -126,12 +128,12 @@ public class TypeArgumentContextProvider {
 		return get(result);
 	}
 	
-	public Map<JvmTypeParameter, JvmTypeReference> resolveTypeParametersReferencedInTypeParameters(Map<JvmTypeParameter, JvmTypeReference> context) {
+	protected Map<JvmTypeParameter, JvmTypeReference> resolveTypeParametersReferencedInTypeParameters(Map<JvmTypeParameter, JvmTypeReference> context, boolean ignoreOperationArguments) {
 		Multimap<JvmTypeParameter, JvmTypeReference> result = LinkedHashMultimap.create(Multimaps.forMap(context));
 		for (Entry<JvmTypeParameter, JvmTypeReference> entry : context.entrySet()) {
 			EList<JvmTypeConstraint> constraints = entry.getKey().getConstraints();
 			if (!constraints.isEmpty()) {
-				resolve(entry.getKey(),entry.getValue(),result);
+				resolve(entry.getKey(),entry.getValue(),result, ignoreOperationArguments);
 			}
 		}
 		return findBestMatches(result);
@@ -159,7 +161,7 @@ public class TypeArgumentContextProvider {
 				JvmTypeReference actualArgumentType = argumentTypes[i];
 				if (actualArgumentType != null) {
 					final JvmTypeReference declaredParameterType = op.getParameters().get(i).getParameterType();
-					resolve(declaredParameterType, actualArgumentType, map);
+					resolve(declaredParameterType, actualArgumentType, map, false);
 				}
 			}
 			if (op.isVarArgs()) {
@@ -172,7 +174,7 @@ public class TypeArgumentContextProvider {
 						Arrays.asList(argumentTypes).subList(paramCount, argumentTypes.length), Predicates.notNull()));
 				if (!varArgTypes.isEmpty()) {
 					JvmTypeReference commonVarArgType = conformanceComputer.getCommonSuperType(varArgTypes);
-					resolve(componentType, commonVarArgType, map);
+					resolve(componentType, commonVarArgType, map, false);
 				} else {
 					if (componentType.getType() instanceof JvmConstraintOwner) {
 						List<JvmTypeReference> allUpperBounds = Lists.newArrayList();
@@ -183,20 +185,20 @@ public class TypeArgumentContextProvider {
 						}
 						if (allUpperBounds.isEmpty()) {
 							JvmTypeReference objectType = typeReferences.getTypeForName(Object.class, feature);
-							resolve(componentType, objectType, map);
+							resolve(componentType, objectType, map, false);
 						} else {
 							JvmTypeReference upperBound = conformanceComputer.getCommonSuperType(allUpperBounds);
-							resolve(componentType, upperBound, map);
+							resolve(componentType, upperBound, map, false);
 						}
 					} else {
 						JvmTypeReference objectType = typeReferences.getTypeForName(Object.class, feature);
-						resolve(componentType, objectType, map);
+						resolve(componentType, objectType, map, false);
 					}
 				}
 			}
 			//try infer from the context type
 			if (expectation != null) {
-				resolve(op.getReturnType(), expectation, map);
+				resolve(op.getReturnType(), expectation, map, true);
 			}
 		}
 		return findBestMatches(map);
@@ -234,7 +236,7 @@ public class TypeArgumentContextProvider {
 		}
 		return false;
 	}
-
+	
 	//TODO improve
 	protected boolean isResolved(JvmTypeReference type) {
 		if (type.getType() instanceof JvmTypeParameter) {
@@ -285,25 +287,27 @@ public class TypeArgumentContextProvider {
 		}
 	}
 	
-	protected void resolve(JvmTypeReference declaration, JvmTypeReference information, Multimap<JvmTypeParameter, JvmTypeReference> existing) {
+	protected void resolve(JvmTypeReference declaration, JvmTypeReference information, Multimap<JvmTypeParameter, JvmTypeReference> existing, boolean returnTypeContext) {
 		JvmTypeParameter typeParameter = getReferenceTypeParameter(declaration);
 		if (typeParameter != null) {
-			if (!containsEntry(existing, typeParameter, information)) {
-				existing.put(typeParameter, information);
-				Collection<JvmTypeReference> resolveData = existing.get(typeParameter);
-				List<JvmTypeParameter> transitiveParameters = Lists.newArrayListWithExpectedSize(2);
-				for(JvmTypeReference resolveDataItem: resolveData) {
-					if (resolveDataItem.getType() instanceof JvmTypeParameter) {
-						if (resolveDataItem != information)
-							transitiveParameters.add((JvmTypeParameter) resolveDataItem.getType());
+			if (isValidParameter(typeParameter, information, returnTypeContext)) {
+				if (!containsEntry(existing, typeParameter, information)) {
+					existing.put(typeParameter, information);
+					Collection<JvmTypeReference> resolveData = existing.get(typeParameter);
+					List<JvmTypeParameter> transitiveParameters = Lists.newArrayListWithExpectedSize(2);
+					for(JvmTypeReference resolveDataItem: resolveData) {
+						if (resolveDataItem.getType() instanceof JvmTypeParameter) {
+							if (resolveDataItem != information)
+								transitiveParameters.add((JvmTypeParameter) resolveDataItem.getType());
+						}
 					}
-				}
-				for(JvmTypeParameter transitiveParameter: transitiveParameters) {
-					if (!containsEntry(existing, transitiveParameter, information)) {
-						existing.put(transitiveParameter, information);
+					for(JvmTypeParameter transitiveParameter: transitiveParameters) {
+						if (!containsEntry(existing, transitiveParameter, information)) {
+							existing.put(transitiveParameter, information);
+						}
 					}
+					resolve(typeParameter, information, existing, returnTypeContext);
 				}
-				resolve(typeParameter, information, existing);
 			}
 		}
 		if (declaration instanceof JvmParameterizedTypeReference
@@ -313,9 +317,35 @@ public class TypeArgumentContextProvider {
 			EList<JvmTypeReference> declArgs = declaration2.getArguments();
 			EList<JvmTypeReference> infoArgs = information2.getArguments();
 			for (int i = 0; i < declArgs.size() && i < infoArgs.size(); i++) {
-				resolve(declArgs.get(i), infoArgs.get(i), existing);
+				resolve(declArgs.get(i), infoArgs.get(i), existing, returnTypeContext);
 			}
 		}
+	}
+
+	private boolean isValidParameter(JvmTypeParameter typeParameter, JvmTypeReference information, boolean ignoreOperationArguments) {
+		if (!ignoreOperationArguments || !(typeParameter.getDeclarator() instanceof JvmOperation))
+			return true;
+		if (information instanceof JvmParameterizedTypeReference) {
+			JvmParameterizedTypeReference reference = (JvmParameterizedTypeReference) information;
+			if (reference.getType() instanceof JvmTypeParameter) {
+				if (typeParameter.getDeclarator() == ((JvmTypeParameter) reference.getType()).getDeclarator()) {
+					return false;
+				}
+			}
+			for(JvmTypeReference argument: reference.getArguments()) {
+				if (!isValidParameter(typeParameter, argument, ignoreOperationArguments))
+					return false;
+			}
+		} else if (information instanceof JvmWildcardTypeReference) {
+			List<JvmTypeConstraint> constraints = ((JvmWildcardTypeReference) information).getConstraints();
+			for(JvmTypeConstraint constraint: constraints) {
+				if (!isValidParameter(typeParameter, constraint.getTypeReference(), ignoreOperationArguments))
+					return false;
+			}
+		} else if (information instanceof JvmGenericArrayTypeReference) {
+			return isValidParameter(typeParameter, ((JvmGenericArrayTypeReference) information).getComponentType(), ignoreOperationArguments);
+		}
+		return true;
 	}
 
 	protected boolean containsEntry(Multimap<JvmTypeParameter, JvmTypeReference> existing,
@@ -348,10 +378,10 @@ public class TypeArgumentContextProvider {
 		return null;
 	}
 	
-	protected void resolve(JvmTypeParameter key, JvmTypeReference value, Multimap<JvmTypeParameter, JvmTypeReference> existing) {
+	protected void resolve(JvmTypeParameter key, JvmTypeReference value, Multimap<JvmTypeParameter, JvmTypeReference> existing, boolean ignoreOperationArguments) {
 		for (JvmTypeConstraint constrain : key.getConstraints()) {
 			JvmTypeReference reference = constrain.getTypeReference();
-			resolve(reference,value,existing);
+			resolve(reference,value,existing, ignoreOperationArguments);
 		}
 	}
 
