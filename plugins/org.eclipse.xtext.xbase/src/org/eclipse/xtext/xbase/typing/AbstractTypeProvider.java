@@ -87,17 +87,16 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			T element = adapter.<T>get(key);
 			if (element==null) {
 				element = provider.get();
+				boolean rawType = (Boolean) ((Triple<?, ?, ?>) key).getThird();
 				if (element instanceof JvmTypeReference) {
-					if (!isResolved((JvmTypeReference) element)) {
+					if (!isResolved((JvmTypeReference) element, rawType)) {
 						if (logger.isDebugEnabled()) {
-							boolean rawType = (Boolean) ((Triple<?, ?, ?>) key).getThird();
 							logger.debug(getDebugIndentation(rawType) + "cache skip: " + element);
 						}
 						return element;
 					}
 				}
 				if (logger.isDebugEnabled()) {
-					boolean rawType = (Boolean) ((Triple<?, ?, ?>) key).getThird();
 					logger.debug(getDebugIndentation(rawType) + "cache: " + element);
 				}
 				adapter.set(key, element);
@@ -107,20 +106,22 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	};
 	
 	// TODO improve / extract to a utility method if other clients are doing similar things
-	protected boolean isResolved(JvmTypeReference reference) {
+	protected boolean isResolved(JvmTypeReference reference, boolean rawType) {
 		if (reference == null)
 			return false;
 		if (reference.getType() instanceof JvmTypeParameter)
 			return false;
 		if (reference instanceof JvmParameterizedTypeReference) {
+			if (rawType)
+				return true;
 			for(JvmTypeReference argument: ((JvmParameterizedTypeReference) reference).getArguments()) {
-				if (!isResolved(argument))
+				if (!isResolved(argument, rawType))
 					return false;
 			}
 		}
 		if (reference instanceof JvmWildcardTypeReference) {
 			for(JvmTypeConstraint constraint: ((JvmWildcardTypeReference) reference).getConstraints()) {
-				if (!isResolved(constraint.getTypeReference()))
+				if (!isResolved(constraint.getTypeReference(), rawType))
 					return false;
 			}
 		}
