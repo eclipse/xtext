@@ -170,7 +170,7 @@ public class JvmModelInferrer {
 			target.setSimpleName(sourceName);
 			for (JvmFormalParameter parameter : source.getParameters())
 				target.getParameters().add(cloneWithProxies(parameter));
-			target.setReturnType(cloneWithProxies(source.getReturnType()));
+			inferReturnType(target);
 			for (JvmTypeParameter typeParameter : source.getTypeParameters())
 				target.getTypeParameters().add(cloneWithProxies(typeParameter));
 			associator.associate(target, source);
@@ -207,13 +207,13 @@ public class JvmModelInferrer {
 			return jvmOperation.getReturnType();
 		List<JvmTypeReference> associatedReturnTypes = newArrayList();
 		for (XtendFunction func : associator.getAssociatedElements(jvmOperation, XtendFunction.class)) {
-			JvmTypeReference type = typeProvider.getType(func.getExpression());
+			JvmTypeReference type = typeProvider.getTypeForIdentifiable(func);
 			if (type != null)
 				associatedReturnTypes.add(type);
 		}
 		if (!associatedReturnTypes.isEmpty()) {
 			JvmTypeReference commonSuperType = typeConformanceComputer.getCommonSuperType(associatedReturnTypes);
-			return commonSuperType;
+			return cloneWithProxies(commonSuperType);
 		}
 		return null;
 	}
