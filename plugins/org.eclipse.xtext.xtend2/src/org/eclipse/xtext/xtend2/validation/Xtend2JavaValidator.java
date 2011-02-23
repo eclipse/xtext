@@ -13,7 +13,6 @@ import static org.eclipse.xtext.util.Strings.*;
 import static org.eclipse.xtext.xtend2.validation.IssueCodes.*;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -25,7 +24,6 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
@@ -34,6 +32,7 @@ import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
@@ -73,6 +72,9 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 
 	@Inject
 	private TypesFactory typesFactory;
+
+	@Inject
+	private TypeReferences typeRefs;
 
 	@Inject
 	private ITypeProvider typeProvider;
@@ -148,8 +150,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 			checked.add(operation);
 			for (JvmOperation operation2 : inferredType.getDeclaredOperations()) {
 				if (!checked.contains(operation2)) {
-					if (featureOverridesService.isOverridden(operation,
-								operation2, typeArgumentContext, false)) {
+					if (featureOverridesService.isOverridden(operation, operation2, typeArgumentContext, false)) {
 						XtendFunction func1 = xtend2jvmAssociations.getXtendFunction(operation);
 						XtendFunction func2 = xtend2jvmAssociations.getXtendFunction(operation2);
 						error("Duplicate method " + canonicalName(func1), func1,
@@ -164,7 +165,8 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 
 	@Check
 	protected void checkFunctionOverride(XtendFunction function) {
-		TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.get(new HashMap<JvmTypeParameter, JvmTypeReference>());
+		TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(typeRefs
+				.createTypeRef(associations.getDirectlyInferredOperation(function).getDeclaringType()));
 		JvmOperation inferredJvmOperation = xtend2jvmAssociations.getDirectlyInferredOperation(function);
 		boolean overriddenOperationFound = false;
 		if (function.getDeclaringType().getExtends() != null) {
@@ -193,8 +195,8 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 			}
 		}
 		if (!overriddenOperationFound && function.isOverride()) {
-			error("Function does not override any function", function,
-					Xtend2Package.Literals.XTEND_FUNCTION__OVERRIDE, OBSOLETE_OVERRIDE);
+			error("Function does not override any function", function, Xtend2Package.Literals.XTEND_FUNCTION__OVERRIDE,
+					OBSOLETE_OVERRIDE);
 		}
 	}
 
@@ -224,10 +226,10 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 
 	@Inject
 	private DispatchingSupport dispatchingSupport;
-	
+
 	@Inject
 	private IXtend2JvmAssociations associations;
-	
+
 	@Inject
 	private Primitives primitives;
 
@@ -243,13 +245,13 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 				warning("Single dispatch function.", function, Xtend2Package.Literals.XTEND_FUNCTION__DISPATCH,
 						IssueCodes.SINGLE_CASE_FUNCTION);
 			} else {
-				Multimap<List<JvmType>,JvmOperation> signatures = HashMultimap.create();
+				Multimap<List<JvmType>, JvmOperation> signatures = HashMultimap.create();
 				for (JvmOperation jvmOperation : collection) {
 					signatures.put(getParamTypes(jvmOperation, true), jvmOperation);
 				}
 				for (final List<JvmType> paramTypes : signatures.keySet()) {
 					Collection<JvmOperation> ops = signatures.get(paramTypes);
-					if (ops.size()>1) {
+					if (ops.size() > 1) {
 						if (Iterables.any(ops, new Predicate<JvmOperation>() {
 							public boolean apply(JvmOperation input) {
 								return !getParamTypes(input, false).equals(paramTypes);
@@ -257,25 +259,24 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 						})) {
 							for (JvmOperation jvmOperation : ops) {
 								XtendFunction function = associations.getXtendFunction(jvmOperation);
-								error("Duplicate dispatch function. Primitives cannot overload their wrapper types in dispatch functions.", 
+								error("Duplicate dispatch function. Primitives cannot overload their wrapper types in dispatch functions.",
 										function, null, DUPLICATE_METHOD);
 							}
 						}
 					}
 				}
 			}
-		}	
+		}
 	}
 
 	protected List<JvmType> getParamTypes(JvmOperation jvmOperation, boolean wrapPrimitives) {
 		List<JvmType> types = newArrayList();
 		for (JvmFormalParameter p : jvmOperation.getParameters()) {
-			JvmTypeReference reference = wrapPrimitives 
-					? primitives.asWrapperTypeIfPrimitive(p.getParameterType()) 
-					: p.getParameterType();
+			JvmTypeReference reference = wrapPrimitives ? primitives.asWrapperTypeIfPrimitive(p.getParameterType()) : p
+					.getParameterType();
 			types.add(reference.getType());
 		}
 		return types;
 	}
-	
+
 }
