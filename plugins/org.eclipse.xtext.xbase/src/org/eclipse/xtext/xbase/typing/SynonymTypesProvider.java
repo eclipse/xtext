@@ -7,16 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typing;
 
+import static com.google.common.collect.Iterables.*;
 import static java.util.Collections.*;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
+import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 
 import com.google.inject.Inject;
@@ -31,6 +36,9 @@ public class SynonymTypesProvider {
 	
 	@Inject
 	private TypeReferences typeRefs;
+	
+	@Inject
+	private SuperTypeCollector superTypeCollector;
 
 	public Iterable<JvmTypeReference> getSynonymTypes(JvmTypeReference type) {
 		if (typeRefs.is(type, Void.class) || typeRefs.is(type,Void.TYPE)) {
@@ -60,8 +68,41 @@ public class SynonymTypesProvider {
 		return emptySet();
 	}
 
-
-	protected EObject findContext(JvmArrayType arrayType) {
-		return arrayType.getComponentType().getType();
+	protected EObject findContext(JvmType type) {
+		if (type instanceof JvmArrayType) {
+			return findContext(((JvmArrayType)type).getComponentType().getType());
+		}
+		return type;
 	}
+
+	public boolean hasSynonymTypes(JvmTypeReference toBeConverted) {
+		final Iterable<JvmTypeReference> synonymTypes = getSynonymTypes(toBeConverted);
+		if (synonymTypes instanceof Collection)
+			return !((Collection<?>) synonymTypes).isEmpty();
+		return !isEmpty(synonymTypes);
+	}
+
+	public JvmTypeReference findCompatibleSynonymType(JvmTypeReference toBeConverted, JvmType toBeCompatible) {
+		if (isAssignable(toBeConverted, toBeCompatible)) 
+			return toBeConverted;
+		
+		Iterable<JvmTypeReference> types = getSynonymTypes(toBeConverted);
+		for (JvmTypeReference synonym : types) {
+			if (isAssignable(synonym, toBeCompatible))
+				return synonym;
+		}
+		return null;
+	}
+
+	protected boolean isAssignable(JvmTypeReference toBeConverted, JvmType toBeCompatible) {
+		if (toBeConverted.getType() == toBeCompatible)
+			return true;
+		Set<JvmType> rawTypes = superTypeCollector.collectSuperTypesAsRawTypes(toBeConverted);
+		for (JvmType jvmType : rawTypes) {
+			if (jvmType == toBeCompatible)
+				return true;
+		}
+		return false;
+	}
+	
 }

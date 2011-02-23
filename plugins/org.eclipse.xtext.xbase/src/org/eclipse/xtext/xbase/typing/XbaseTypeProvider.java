@@ -28,7 +28,6 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -36,7 +35,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
@@ -84,10 +82,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 
 	@Inject
 	private TypeReferences typeReferences;
-	
-	@Inject
-	private Primitives primitives;
-	
+
 	@Inject
 	private TypesFactory factory;
 
@@ -99,16 +94,16 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 
 	@Inject
 	private FunctionConversion functionConverter;
-	
+
 	@Inject
 	private FeatureCallToJavaMapping featureCall2javaMapping;
-	
+
 	@Inject
 	private FunctionConversion functionConversion;
-	
+
 	@Inject
 	private SuperTypeCollector collector;
-	
+
 	protected JvmTypeReference _expectedType(XAssignment assignment, EReference reference, int index, boolean rawType) {
 		if (reference == XbasePackage.Literals.XASSIGNMENT__VALUE) {
 			JvmIdentifiableElement feature = assignment.getFeature();
@@ -118,7 +113,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				XExpression expression = getExpression(assignment, reference, index);
 				List<XExpression> actualArguments = featureCall2javaMapping.getActualArguments(assignment);
 				int actualIndex = actualArguments.indexOf(expression);
-				JvmTypeReference declaredType = operation.getParameters().get(actualIndex).getParameterType();
+				JvmTypeReference declaredType = getParam(operation, actualIndex).getParameterType();
 				TypeArgumentContext context = getFeatureCallTypeArgContext(assignment, reference, index, rawType);
 				return context.getLowerBound(declaredType);
 			} else {
@@ -134,7 +129,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 
 	protected XExpression getExpression(EObject object, EReference reference, int index) {
 		if (index == -1) {
-			return (XExpression)object.eGet(reference, true);
+			return (XExpression) object.eGet(reference, true);
 		} else {
 			List<?> expressions = (List<?>) object.eGet(reference, true);
 			XExpression result = (XExpression) expressions.get(index);
@@ -142,15 +137,12 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		}
 	}
 
-	protected JvmTypeReference _expectedType(XAbstractFeatureCall featureCall, EReference reference, int index, boolean rawType) {
-		if (featureCall.getFeature() ==null || featureCall.getFeature().eIsProxy())
+	protected JvmTypeReference _expectedType(XAbstractFeatureCall featureCall, EReference reference, int index,
+			boolean rawType) {
+		if (featureCall.getFeature() == null || featureCall.getFeature().eIsProxy())
 			return null;
-		if ((featureCall instanceof XMemberFeatureCall && (
-				reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS ||
-				reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET)) ||
-			(featureCall instanceof XFeatureCall &&
-				reference == XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS)
-			) {
+		if ((featureCall instanceof XMemberFeatureCall && (reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS || reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET))
+				|| (featureCall instanceof XFeatureCall && reference == XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS)) {
 			if (featureCall.getFeature() instanceof JvmOperation) {
 				JvmOperation operation = (JvmOperation) featureCall.getFeature();
 				XExpression argumentExpression = getExpression(featureCall, reference, index);
@@ -164,9 +156,9 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 							return result;
 						}
 					}
-					if (argumentIndex>=operation.getParameters().size())
+					if (argumentIndex >= operation.getParameters().size())
 						return null;
-					JvmFormalParameter parameter = operation.getParameters().get(argumentIndex);
+					JvmFormalParameter parameter = getParam(operation, argumentIndex);
 					final JvmTypeReference parameterType = parameter.getParameterType();
 					final JvmTypeReference result = context.getLowerBound(parameterType);
 					return result;
@@ -184,7 +176,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		}
 		return null;
 	}
-	
+
 	protected JvmTypeReference _expectedType(XClosure closure, EReference reference, int index, boolean rawType) {
 		if (reference == XbasePackage.Literals.XCLOSURE__EXPRESSION) {
 			JvmTypeReference functionType = getExpectedType(closure, rawType);
@@ -195,28 +187,33 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		}
 		return null;
 	}
-	
+
 	@Override
 	protected JvmTypeReference handleCycleGetExpectedType(XExpression expression, boolean rawType) {
-		Triple<EObject,EReference,Integer> info = getContainingInfo(expression);
+		Triple<EObject, EReference, Integer> info = getContainingInfo(expression);
 		if (info.getFirst() instanceof XAbstractFeatureCall) {
-			JvmTypeReference result = _expectedType((XAbstractFeatureCall)info.getFirst(), info.getSecond(), info.getThird(), rawType);
+			JvmTypeReference result = _expectedType((XAbstractFeatureCall) info.getFirst(), info.getSecond(),
+					info.getThird(), rawType);
 			return result;
 		}
 		return super.handleCycleGetExpectedType(expression, rawType);
 	}
-	
-	protected TypeArgumentContext getFeatureCallTypeArgContext(XAbstractFeatureCall expr, EReference reference, int index, boolean rawType) {
+
+	protected TypeArgumentContext getFeatureCallTypeArgContext(XAbstractFeatureCall expr, EReference reference,
+			int index, boolean rawType) {
 		JvmTypeReference receiverType = getReceiverType(expr, rawType);
 		if (expr.getFeature() instanceof JvmOperation) {
 			JvmOperation operation = (JvmOperation) expr.getFeature();
 			if (expr.getTypeArguments().isEmpty()) {
+				receiverType = convertIfNeccessary(expr, receiverType, operation, rawType);
 				JvmTypeReference expectedType = getExpectedType(expr, rawType);
 				JvmTypeReference[] argTypes = getArgumentTypes(expr, rawType);
-				TypeArgumentContext context = typeArgCtxProvider.getInferredMethodInvocationContext(operation, receiverType, expectedType, argTypes);
+				TypeArgumentContext context = typeArgCtxProvider.getInferredMethodInvocationContext(operation,
+						receiverType, expectedType, argTypes);
 				return context;
 			} else {
-				TypeArgumentContext result = typeArgCtxProvider.getExplicitMethodInvocationContext(operation, receiverType, expr.getTypeArguments());
+				TypeArgumentContext result = typeArgCtxProvider.getExplicitMethodInvocationContext(operation,
+						receiverType, expr.getTypeArguments());
 				return result;
 			}
 		} else {
@@ -227,17 +224,37 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	protected JvmTypeReference[] getArgumentTypes(XAbstractFeatureCall expr, boolean rawType) {
 		List<XExpression> arguments = featureCall2javaMapping.getActualArguments(expr);
 		JvmTypeReference[] argTypes = new JvmTypeReference[arguments.size()];
+		if (arguments.isEmpty())
+			return argTypes;
+		JvmOperation op = (JvmOperation) expr.getFeature();
 		for (int i = 0; i < argTypes.length; i++) {
 			XExpression arg = arguments.get(i);
-			argTypes[i] = getType(arg, rawType);
+			JvmFormalParameter parameter = getParam(op, i);
+			if (parameter != null) {
+				final JvmTypeReference type = getType(arg, rawType);
+				if (type != null) {
+					JvmTypeReference synonymType = this.synonymTypesProvider.findCompatibleSynonymType(type, parameter
+							.getParameterType().getType());
+					argTypes[i] = synonymType != null ? synonymType : type;
+				}
+			}
 		}
 		return argTypes;
+	}
+
+	protected JvmFormalParameter getParam(JvmOperation op, int i) {
+		if (op.getParameters().size() <= i) {
+			if (op.isVarArgs())
+				return op.getParameters().get(op.getParameters().size() - 1);
+			return null;
+		}
+		return op.getParameters().get(i);
 	}
 
 	protected JvmTypeReference getReceiverType(XAbstractFeatureCall expr, boolean rawType) {
 		XExpression receiver = featureCall2javaMapping.getActualReceiver(expr);
 		JvmTypeReference receiverType = null;
-		if (receiver!=null)
+		if (receiver != null)
 			receiverType = getType(receiver, rawType);
 		return receiverType;
 	}
@@ -268,7 +285,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	protected JvmTypeReference _expectedType(XConstructorCall expr, EReference reference, int index, boolean rawType) {
 		if (reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS) {
 			JvmExecutable feature = expr.getConstructor();
-			 TypeArgumentContext typeArgumentContext = typeArgCtxProvider.getReceiverContext(null);
+			TypeArgumentContext typeArgumentContext = typeArgCtxProvider.getReceiverContext(null);
 			if (index >= feature.getParameters().size()) {
 				if (feature.isVarArgs()) {
 					return getExpectedVarArgType(feature, typeArgumentContext, rawType);
@@ -285,7 +302,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return getExpectedType(expr, rawType);
 	}
 
-	protected JvmTypeReference getExpectedVarArgType(JvmExecutable feature, TypeArgumentContext typeArgumentContext, boolean rawType) {
+	protected JvmTypeReference getExpectedVarArgType(JvmExecutable feature, TypeArgumentContext typeArgumentContext,
+			boolean rawType) {
 		JvmFormalParameter lastParameter = feature.getParameters().get(feature.getParameters().size() - 1);
 		JvmType parameterType = lastParameter.getParameterType().getType();
 		if (parameterType instanceof JvmArrayType) {
@@ -317,7 +335,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 
 	protected JvmTypeReference _expectedType(XForLoopExpression expr, EReference reference, int index, boolean rawType) {
 		if (reference == XbasePackage.Literals.XFOR_LOOP_EXPRESSION__FOR_EXPRESSION) {
-			final JvmParameterizedTypeReference iterableType = (JvmParameterizedTypeReference) typeReferences.getTypeForName(Iterable.class, expr);
+			final JvmParameterizedTypeReference iterableType = (JvmParameterizedTypeReference) typeReferences
+					.getTypeForName(Iterable.class, expr);
 			if (rawType)
 				return iterableType;
 			iterableType.getArguments().clear();
@@ -330,7 +349,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				JvmTypeReference paramType = EcoreUtil2.clone(expr.getDeclaredParam().getParameterType());
 				upperBound.setTypeReference(paramType);
 			} else {
-				JvmTypeReference objectType = typeReferences.getTypeForName(Object.class,expr);
+				JvmTypeReference objectType = typeReferences.getTypeForName(Object.class, expr);
 				upperBound.setTypeReference(objectType);
 			}
 			return iterableType;
@@ -338,7 +357,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return null; // no other expectations
 	}
 
-	protected JvmTypeReference _expectedType(XAbstractWhileExpression expr, EReference reference, int index, boolean rawType) {
+	protected JvmTypeReference _expectedType(XAbstractWhileExpression expr, EReference reference, int index,
+			boolean rawType) {
 		if (reference == XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__PREDICATE) {
 			final JvmTypeReference typeForName = typeReferences.getTypeForName(Boolean.class, expr);
 			return typeForName;
@@ -346,7 +366,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return null; // no other expectations
 	}
 
-	protected JvmTypeReference _expectedType(XTryCatchFinallyExpression expr, EReference reference, int index, boolean rawType) {
+	protected JvmTypeReference _expectedType(XTryCatchFinallyExpression expr, EReference reference, int index,
+			boolean rawType) {
 		if (reference == XbasePackage.Literals.XTRY_CATCH_FINALLY_EXPRESSION__EXPRESSION) {
 			return getExpectedType(expr, rawType);
 		}
@@ -359,7 +380,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		}
 		return null; // no other expectations
 	}
-	
+
 	protected JvmTypeReference _expectedType(XCastedExpression expr, EReference reference, int index, boolean rawType) {
 		return null; // no expectations!
 	}
@@ -367,7 +388,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	protected JvmTypeReference _expectedType(XThrowExpression expr, EReference reference, int index, boolean rawType) {
 		return typeReferences.getTypeForName(Throwable.class, expr);
 	}
-	
+
 	protected JvmTypeReference _expectedType(XReturnExpression expr, EReference reference, int index, boolean rawType) {
 		return null; // no expectations!
 	}
@@ -402,10 +423,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		}
 		List<JvmTypeReference> returnTypes = newArrayList();
 		JvmTypeReference thenType = getType(object.getThen(), rawType);
-		if (thenType!=null)
+		if (thenType != null)
 			returnTypes.add(thenType);
 		JvmTypeReference elseType = getType(object.getElse(), rawType);
-		if (elseType!=null)
+		if (elseType != null)
 			returnTypes.add(elseType);
 		return getCommonType(returnTypes);
 	}
@@ -413,7 +434,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	protected JvmTypeReference getCommonType(List<JvmTypeReference> returnTypes) {
 		if (returnTypes.isEmpty())
 			return null;
-		if (returnTypes.size()==1) {
+		if (returnTypes.size() == 1) {
 			return returnTypes.get(0);
 		}
 		return typeConformanceComputer.getCommonSuperType(returnTypes);
@@ -449,7 +470,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		JvmConstructor constructor = object.getConstructor();
 		if (constructor.eIsProxy())
 			return null;
-		JvmParameterizedTypeReference type = (JvmParameterizedTypeReference) getTypeForIdentifiable(object.getConstructor(), rawType);
+		JvmParameterizedTypeReference type = (JvmParameterizedTypeReference) getTypeForIdentifiable(
+				object.getConstructor(), rawType);
 		if (rawType)
 			return type;
 		if (!object.getTypeArguments().isEmpty()) {
@@ -480,7 +502,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 
 	protected JvmTypeReference _type(XClosure object, boolean rawType) {
 		if (rawType) {
-			JvmParameterizedTypeReference result = functionConversion.createRawFunctionTypeRef(object, object.getFormalParameters().size());
+			JvmParameterizedTypeReference result = functionConversion.createRawFunctionTypeRef(object, object
+					.getFormalParameters().size());
 			return result;
 		}
 		final JvmTypeReference returnType = getType(object.getExpression(), rawType);
@@ -492,13 +515,13 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		// inferred argument types?
 		if (!params.isEmpty()) {
 			JvmTypeReference expectedType = getExpectedType(object, rawType);
-			if (expectedType!=null) {
+			if (expectedType != null) {
 				JvmOperation singleMethod = functionConverter.findSingleMethod(expectedType);
 				TypeArgumentContext context = typeArgCtxProvider.getReceiverContext(expectedType);
-				for (int i = 0;i< params.size();i++) {
+				for (int i = 0; i < params.size(); i++) {
 					JvmTypeReference resultParam = parameterTypes.get(i);
-					if (resultParam==null) {
-						JvmFormalParameter p = singleMethod.getParameters().get(i);
+					if (resultParam == null) {
+						JvmFormalParameter p = getParam(singleMethod, i);
 						final JvmTypeReference resolved = context.resolve(p.getParameterType());
 						parameterTypes.set(i, resolved);
 					}
@@ -534,7 +557,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		final JvmTypeReference typeForName = getPrimitiveVoid(object);
 		return typeForName;
 	}
-	
+
 	protected JvmTypeReference _type(XReturnExpression object, boolean rawType) {
 		final JvmTypeReference typeForName = getPrimitiveVoid(object);
 		return typeForName;
@@ -564,7 +587,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		if (isResolved(featureType, rawType)) {
 			return featureType;
 		}
-		JvmTypeReference receiverType = convertIfNeccessary(featureCall, getReceiverType(featureCall, rawType), feature, rawType);
+		final JvmTypeReference receiverType2 = getReceiverType(featureCall, rawType);
+		JvmTypeReference receiverType = convertIfNeccessary(featureCall, receiverType2, feature, rawType);
 		if (feature instanceof JvmOperation) {
 			JvmOperation operation = (JvmOperation) feature;
 			if (featureCall.getTypeArguments().isEmpty()) {
@@ -593,15 +617,15 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 						return result;
 					}
 				}
-				
+
 				if (!isResolved(result, rawType)) {
 					if (result instanceof JvmTypeParameter) {
 						JvmTypeParameter type = (JvmTypeParameter) result.getType();
 						JvmTypeReference upperBound = null;
-						for(JvmTypeConstraint constraint: type.getConstraints()) {
+						for (JvmTypeConstraint constraint : type.getConstraints()) {
 							if (constraint instanceof JvmUpperBound) {
 								if (upperBound != null) {
-									return getType(featureCall, false);			
+									return getType(featureCall, false);
 								}
 								JvmTypeReference reference = constraint.getTypeReference();
 								upperBound = context.getUpperBound(reference, featureCall);
@@ -615,28 +639,29 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				result = context.getUpperBound(featureType, operation);
 				return result;
 			} else {
-				TypeArgumentContext context = typeArgCtxProvider.getExplicitMethodInvocationContext(operation, receiverType, featureCall.getTypeArguments());
+				TypeArgumentContext context = typeArgCtxProvider.getExplicitMethodInvocationContext(operation,
+						receiverType, featureCall.getTypeArguments());
 				return context.getUpperBound(featureType, featureCall);
 			}
 		} else {
 			JvmTypeReference expectedType = rawType ? null : getExpectedType(featureCall, rawType);
-			TypeArgumentContext context = typeArgCtxProvider.getReceiverContext(receiverType, featureType, expectedType);
+			TypeArgumentContext context = typeArgCtxProvider
+					.getReceiverContext(receiverType, featureType, expectedType);
 			return context.getUpperBound(featureType, featureCall);
 		}
 	}
 
-	protected JvmTypeReference convertIfNeccessary(XAbstractFeatureCall context, JvmTypeReference toBeConverted, JvmIdentifiableElement feature, boolean rawType) {
+	@Inject
+	private SynonymTypesProvider synonymTypesProvider;
+
+	protected JvmTypeReference convertIfNeccessary(XAbstractFeatureCall context, JvmTypeReference toBeConverted,
+			JvmIdentifiableElement feature, boolean rawType) {
 		if (toBeConverted != null && feature instanceof JvmMember) {
 			JvmDeclaredType declaringType = ((JvmMember) feature).getDeclaringType();
-			if (declaringType.getIdentifier().equals(Iterable.class.getName()) && toBeConverted.getType() instanceof JvmArrayType) {
-				final JvmArrayType type2 = (JvmArrayType)toBeConverted.getType();
-				JvmTypeReference type = type2.getComponentType();
-				if (primitives.isPrimitive(type)) {
-					type = typeReferences.createTypeRef(primitives.getWrapperType((JvmPrimitiveType) type.getType()));
-				}
-				JvmTypeReference clone = EcoreUtil2.clone(type);
-				final JvmTypeReference wildCardExtends = typeReferences.wildCardExtends(clone);
-				return typeReferences.createTypeRef(declaringType, wildCardExtends);
+			if (synonymTypesProvider.hasSynonymTypes(toBeConverted)) {
+				final JvmTypeReference findCompatibleSynonymType = synonymTypesProvider.findCompatibleSynonymType(
+						toBeConverted, declaringType);
+				return findCompatibleSynonymType != null ? findCompatibleSynonymType : toBeConverted;
 			}
 		}
 		return toBeConverted;
@@ -666,15 +691,15 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	protected JvmTypeReference _typeForIdentifiable(JvmFormalParameter parameter, boolean rawType) {
 		if (parameter.getParameterType() == null) {
 			if (parameter.eContainer() instanceof XClosure) {
-				final XClosure closure = (XClosure)parameter.eContainer();
+				final XClosure closure = (XClosure) parameter.eContainer();
 				JvmTypeReference type = getExpectedType(closure, rawType);
 				int indexOf = closure.getFormalParameters().indexOf(parameter);
-				if (type==null) {
+				if (type == null) {
 					return null;
 				}
 				JvmOperation operation = functionConversion.findSingleMethod(type);
 				if (indexOf < operation.getParameters().size()) {
-					JvmFormalParameter declaredParam = operation.getParameters().get(indexOf);
+					JvmFormalParameter declaredParam = getParam(operation, indexOf);
 					if (rawType) {
 						if (declaredParam.getParameterType().getType() instanceof JvmTypeParameter) {
 							JvmTypeReference result = _typeForIdentifiable(parameter, false);
@@ -693,29 +718,29 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			} else if (parameter.eContainer() instanceof XForLoopExpression) {
 				XForLoopExpression forLoop = (XForLoopExpression) parameter.eContainer();
 				JvmTypeReference reference = getType(forLoop.getForExpression(), rawType);
-				if (reference==null)
+				if (reference == null)
 					return null;
 				TypeArgumentContext context = typeArgCtxProvider.getReceiverContext(reference);
 				final String iterableName = Iterable.class.getName();
 				// TODO remove the special array treatment and put into some generic facility
 				if (reference.getType() instanceof JvmArrayType) {
-					JvmTypeReference type = ((JvmArrayType)reference.getType()).getComponentType();
+					JvmTypeReference type = ((JvmArrayType) reference.getType()).getComponentType();
 					return type;
 				}
 				if (!reference.getType().getIdentifier().equals(iterableName)) {
 					try {
 						final Set<JvmTypeReference> collectSuperTypes = collector.collectSuperTypes(reference);
-						reference = find(collectSuperTypes,
-								new Predicate<JvmTypeReference>() {
-									public boolean apply(JvmTypeReference input) {
-										return input.getType().getIdentifier().equals(iterableName);
-									}
-								});
+						reference = find(collectSuperTypes, new Predicate<JvmTypeReference>() {
+							public boolean apply(JvmTypeReference input) {
+								return input.getType().getIdentifier().equals(iterableName);
+							}
+						});
 					} catch (NoSuchElementException e) {
 						return null;
 					}
 				}
-				final JvmTypeReference resolveContravariant = context.getUpperBound(((JvmParameterizedTypeReference)reference).getArguments().get(0), parameter);
+				final JvmTypeReference resolveContravariant = context.getUpperBound(
+						((JvmParameterizedTypeReference) reference).getArguments().get(0), parameter);
 				return resolveContravariant;
 			}
 		}
