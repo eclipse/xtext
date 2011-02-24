@@ -586,6 +586,9 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		JvmTypeReference featureType = getTypeForIdentifiable(feature, rawType);
 		if (isResolved(featureType, rawType)) {
 			return featureType;
+		} else {
+			// method was either already called with rawType==false or the featureType points directly to a JvmTypeParameter
+			rawType = false;
 		}
 		final JvmTypeReference receiverType2 = getReceiverType(featureCall, rawType);
 		JvmTypeReference receiverType = convertIfNeccessary(featureCall, receiverType2, feature, rawType);
