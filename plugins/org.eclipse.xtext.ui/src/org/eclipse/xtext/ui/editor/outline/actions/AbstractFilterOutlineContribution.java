@@ -18,7 +18,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public abstract class AbstractFilterOutlineContribution extends AbstractToggleActionContribution {
+public abstract class AbstractFilterOutlineContribution extends AbstractToggleOutlineContribution {
 
 	@Inject
 	private OutlineFilterAndSorter outlineFilterAndSorter;

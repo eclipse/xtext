@@ -21,7 +21,7 @@ import com.google.inject.Provider;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class LinkWithEditorOutlineContribution extends AbstractToggleActionContribution {
+public class LinkWithEditorOutlineContribution extends AbstractToggleOutlineContribution {
 
 	public static final String PREFERENCE_KEY = "ui.outline.linkWithEditor";
 

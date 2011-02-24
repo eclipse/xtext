@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.actions;
 
+import static com.google.common.collect.Lists.*;
+
 import java.util.List;
 
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -14,7 +16,6 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import com.google.inject.Binding;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
 
 /**
@@ -26,21 +27,30 @@ public interface IActionContributor {
 	 */
 	public void contributeActions(XtextEditor editor);
 	
+	public void editorDisposed(XtextEditor editor);
 	
 	/**
 	 * composite action contributor delegating call to all registered {@link IActionContributor}
 	 */
-	@Singleton
 	public class CompositeImpl implements IActionContributor {
 		
 		@Inject
 		private Injector injector;
+
+		private List<IActionContributor> children = newArrayList();
 
 		public void contributeActions(XtextEditor editor) {
 			List<Binding<IActionContributor>> bindingsByType = injector.findBindingsByType(TypeLiteral.get(IActionContributor.class));
 			for (Binding<IActionContributor> binding : bindingsByType) {
 				IActionContributor actionContributor = injector.getInstance(binding.getKey());
 				actionContributor.contributeActions(editor);
+				children.add(actionContributor);
+			}
+		}
+		
+		public void editorDisposed(XtextEditor editor) {
+			for (IActionContributor actionContributor: children) {
+				actionContributor.editorDisposed(editor);
 			}
 		}
 

@@ -22,7 +22,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class SortOutlineContribution extends AbstractToggleActionContribution {
+public class SortOutlineContribution extends AbstractToggleOutlineContribution {
 	public static final String PREFERENCE_KEY = "ui.outline.sort2";
 
 	private TreeViewer treeViewer;

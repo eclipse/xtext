@@ -410,6 +410,7 @@ public class XtextEditor extends TextEditor {
 	@Override
 	public void dispose() {
 		callback.beforeDispose(this);
+		actioncontributor.editorDisposed(this);
 		super.dispose();
 		if (projectionSupport != null) {
 			projectionSupport.dispose();
