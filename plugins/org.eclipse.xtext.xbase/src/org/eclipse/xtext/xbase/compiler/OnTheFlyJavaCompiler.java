@@ -299,7 +299,7 @@ public class OnTheFlyJavaCompiler {
 			if (i + 1 < params.length)
 				sb.append(",");
 		}
-		sb.append(") throws Exception {\n");
+		sb.append(") {\n");
 		sb.append(statementCode);
 		sb.append("\n}}");
 		return Tuples.pair(className, sb.toString());
