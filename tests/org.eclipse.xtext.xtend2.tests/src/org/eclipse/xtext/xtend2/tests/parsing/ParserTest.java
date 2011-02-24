@@ -265,7 +265,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testRichStringIF_00() throws Exception {
-		XtendFunction function = function("foo() ''' foo «IF true» wurst «ELSEIF f==3» brot «ELSE» machine «ENDIF» bar '''");
+		XtendFunction function = function("foo() ''' foo «IF true» wurst «ELSEIF null==3» brot «ELSE» machine «ENDIF» bar '''");
 		final RichString richString = (RichString) function.getExpression();
 		assertTrue(richString.getElements().get(0) instanceof RichStringLiteral);
 		

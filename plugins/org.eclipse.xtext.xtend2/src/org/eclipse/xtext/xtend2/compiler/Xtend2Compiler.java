@@ -73,7 +73,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		} else if (obj instanceof XtendFile) {
 			compile((XtendFile) obj, appendable);
 		} else if (obj instanceof XExpression) {
-			super.compile((XExpression) obj, appendable);
+			super.compile((XExpression) obj, appendable, true);
 		}
 	}
 
@@ -225,9 +225,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		}
 		appendable.append("{");
 		appendable.increaseIndentation();
-		JvmTypeReference type = getTypeProvider().getType(obj.getExpression(), true);
-		boolean generateImplicitReturn = !typeRefs.is(returnType, Void.TYPE) && !typeRefs.is(type, Void.TYPE);
-		compile(obj.getExpression(), appendable, generateImplicitReturn);
+		compile(obj.getExpression(), appendable, true);
 		appendable.decreaseIndentation();
 		appendable.append("\n}").closeScope();
 	}
