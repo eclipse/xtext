@@ -31,7 +31,7 @@ import com.google.inject.Provider;
  */
 public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 	
-	//TODO the on-the-fly compiler cannot declare checked exceptions.
+	// checked exceptions not supported by this implementation
 	@Override
 	public void testThrowExpression_01() {
 	}

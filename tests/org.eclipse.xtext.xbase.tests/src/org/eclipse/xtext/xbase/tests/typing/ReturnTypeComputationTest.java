@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.tests.typing;
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -140,6 +141,11 @@ public class ReturnTypeComputationTest extends AbstractXbaseTestCase {
 	public void testThrownTypes_07() throws Exception {
 		assertThrownTypes("{ if (true) throw new RuntimeException() else throw new RuntimeException() }", 
 				RuntimeException.class.getName());
+	}
+	
+	public void testThrownTypes_08() throws Exception {
+		assertThrownTypes("(null as java.io.InputStream).read()", 
+				IOException.class.getName());
 	}
 	
 	protected void assertThrownTypes(String expression, String...thrownTypes) throws Exception {
