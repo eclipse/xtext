@@ -46,7 +46,7 @@ public class InitialIndentationTest extends AbstractRichStringTest {
 	
 	public void testSingleLineTemplate() throws Exception {
 		assertInitialIndentation("", "'''name'''");
-		assertInitialIndentation("", "'''«name»'''");
+		assertInitialIndentation("", "'''«null»'''");
 	}
 	
 	public void testTextInFirstLine_01() throws Exception {
@@ -66,10 +66,10 @@ public class InitialIndentationTest extends AbstractRichStringTest {
 	}
 	
 	public void testExpressionInFirstLine() throws Exception {
-		assertInitialIndentation("", "'''  «name»'''");
-		assertInitialIndentation("", "'''  «name»\n" +
+		assertInitialIndentation("", "'''  «null»'''");
+		assertInitialIndentation("", "'''  «null»\n" +
 				"  '''");
-		assertInitialIndentation("", "'''  «name»\r\n" +
+		assertInitialIndentation("", "'''  «null»\r\n" +
 		"  '''");
 	}
 	
@@ -89,9 +89,9 @@ public class InitialIndentationTest extends AbstractRichStringTest {
 	
 	public void testExpressionInLastLine() throws Exception {
 		assertInitialIndentation("  ", "'''\n" +
-				"  «name»'''");
+				"  «null»'''");
 		assertInitialIndentation("  ", "'''\r\n" +
-				"  «name»'''");
+				"  «null»'''");
 	}
 	
 	public void testWSInLastLine() throws Exception {

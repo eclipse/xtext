@@ -49,7 +49,8 @@ public class CompilerTest extends AbstractXbaseTestCase {
 		assertCompilesTo(
 				"\nfor (java.lang.String s : new java.util.ArrayList<java.lang.String>()) {\n" +
 				"  s.length();\n" +
-				"}"
+				"}\n" +
+				"return null;"
 				, "for (String s : new java.util.ArrayList<String>()) " +
 						"s.length");
 	}
@@ -58,7 +59,7 @@ public class CompilerTest extends AbstractXbaseTestCase {
 		XExpression model = expression(xbaseCode,true);
 		XbaseCompiler compiler = get(XbaseCompiler.class);
 		IAppendable appandable = new IAppendable.StringBuilderBasedAppendable();
-		compiler.compile(model,appandable);
+		compiler.compile(model,appandable, true);
 		assertEquals(expectedJavaCode,appandable.toString());
 	}
 }

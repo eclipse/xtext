@@ -28,6 +28,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
+import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
@@ -45,6 +46,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	
 	@Inject 
 	private TypeReferences typeRefs;
+	
 	
 	protected void openBlock(XExpression xExpression, IAppendable b) {
 		if (xExpression instanceof XBlockExpression) {
@@ -136,6 +138,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	public void _toJavaExpression(XThrowExpression expr, IAppendable b) {
+		b.append("null");
 	}
 
 	public void _toJavaExpression(XInstanceOfExpression expr, IAppendable b) {
@@ -149,6 +152,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	public void _toJavaExpression(XVariableDeclaration expr, IAppendable b) {
+		b.append("null");
 	}
 
 	public void _toJavaStatement(XVariableDeclaration varDeclaration, IAppendable b, boolean isReferenced) {
@@ -172,6 +176,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	public void _toJavaExpression(XWhileExpression expr, IAppendable b) {
+		b.append("null");
 	}
 
 	public void _toJavaStatement(XWhileExpression expr, IAppendable b, boolean isReferenced) {
@@ -196,6 +201,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	public void _toJavaExpression(XDoWhileExpression expr, IAppendable b) {
+		b.append("null");
 	}
 
 	public void _toJavaStatement(XDoWhileExpression expr, IAppendable b, boolean isReferenced) {
@@ -212,6 +218,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	public void _toJavaExpression(XForLoopExpression expr, IAppendable b) {
+		b.append("null");
 	}
 
 	public void _toJavaStatement(XForLoopExpression expr, IAppendable b, boolean isReferenced) {
@@ -252,6 +259,21 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append("(");
 		appendArguments(expr.getArguments(), b);
 		b.append(")");
+	}
+	
+	public void _toJavaStatement(XReturnExpression expr, IAppendable b, boolean isReferenced) {
+		if (expr.getExpression()!=null) {
+			internalToJavaStatement(expr.getExpression(), b, true);
+			b.append("\nreturn ");
+			internalToJavaExpression(expr.getExpression(), b);
+			b.append(";");
+		} else {
+			b.append("\nreturn;");
+		}
+	}
+	
+	public void _toJavaExpression(XReturnExpression expr, IAppendable b) {
+		b.append("null");
 	}
 
 	public void _toJavaExpression(XCastedExpression expr, IAppendable b) {
@@ -409,16 +431,16 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	@Inject
 	private TypeArgumentContextProvider ctxProvider;
 	
-	protected void _toJavaStatement(final XClosure call, final IAppendable b, boolean isReferenced) {
+	protected void _toJavaStatement(final XClosure closure, final IAppendable b, boolean isReferenced) {
 		if (!isReferenced)
 			throw new IllegalArgumentException("a closure definition does not cause any sideffeccts");
-		JvmTypeReference type = getTypeProvider().getType(call);
+		JvmTypeReference type = getTypeProvider().getType(closure);
 		TypeArgumentContext context = ctxProvider.getReceiverContext(type);
 		final String serializedFormWithConstraints = getSerializedForm(type);
 		final String serializedFormWithoutConstraints = getSerializedForm(type, null, true, false);
 		b.append("\n").append("final ").append(serializedFormWithConstraints);
 		b.append(" ");
-		String variableName = makeJavaIdentifier(b.declareVariable(call, "function"));
+		String variableName = makeJavaIdentifier(b.declareVariable(closure, "function"));
 		b.append(variableName).append(" = ");
 		b.append("new ").append(serializedFormWithoutConstraints).append("() {");
 		b.increaseIndentation().increaseIndentation();
@@ -426,7 +448,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		final JvmTypeReference returnType = context.resolve(operation.getReturnType());
 		b.append("\npublic ").append(getSerializedForm(returnType, null, true, false)).append(" ").append(operation.getSimpleName());
 		b.append("(");
-		EList<JvmFormalParameter> closureParams = call.getFormalParameters();
+		EList<JvmFormalParameter> closureParams = closure.getFormalParameters();
 		for (Iterator<JvmFormalParameter> iter = closureParams.iterator(); iter.hasNext();) {
 			JvmFormalParameter param = iter.next();
 			final JvmTypeReference parameterType2 = getTypeProvider().getTypeForIdentifiable(param);
@@ -439,10 +461,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		b.append(") {");
 		b.increaseIndentation();
-		internalToJavaStatement(call.getExpression(), b, true);
-		b.append("\nreturn ");
-		internalToJavaExpression(call.getExpression(), b);
-		b.append(";");
+		compile(closure.getExpression(), b, true);
 		b.decreaseIndentation();
 		b.append("\n}");
 		b.decreaseIndentation().append("\n};").decreaseIndentation();

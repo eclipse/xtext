@@ -93,4 +93,5 @@ public class XbaseInterpreterTest extends AbstractXbaseEvaluationTest {
 		}
 		return result;
 	}
+	
 }

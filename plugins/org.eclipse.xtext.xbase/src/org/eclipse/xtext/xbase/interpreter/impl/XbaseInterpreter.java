@@ -52,6 +52,7 @@ import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XIntLiteral;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
+import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
@@ -78,9 +79,19 @@ import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge
  */
 public class XbaseInterpreter implements IExpressionInterpreter {
-
+	
+	@SuppressWarnings("serial")
+	static class ReturnValue extends RuntimeException {
+		public Object returnValue;
+		public ReturnValue(Object value) {
+			super();
+			this.returnValue = value;
+		}
+	}
+	
 	protected static class PrefixMethodFilter extends PolymorphicDispatcher.MethodNameFilter {
 
 		public PrefixMethodFilter(String prefix, int minParams, int maxParams) {
@@ -166,6 +177,8 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			// TODO: should we unwrap the array?
 			//			result = unwrapArray(result);
 			return new DefaultEvaluationResult(result, null);
+		} catch (ReturnValue e) {
+			return new DefaultEvaluationResult(e.returnValue, null);
 		} catch (EvaluationException e) {
 			return new DefaultEvaluationResult(null, e.getCause());
 		}
@@ -180,6 +193,11 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 
 	public Object _evaluateNullLiteral(XNullLiteral literal, IEvaluationContext context) {
 		return null;
+	}
+	
+	public Object _evaluateReturnExpression(XReturnExpression returnExpr, IEvaluationContext context) {
+		Object returnValue = internalEvaluate(returnExpr.getExpression(), context);
+		throw new ReturnValue(returnValue);
 	}
 
 	public Object _evaluateStringLiteral(XStringLiteral literal, IEvaluationContext context) {

@@ -24,6 +24,37 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 
 	protected abstract void assertEvaluatesTo(Object object, String string);
 	protected abstract void assertEvaluatesWithException(Class<? extends Throwable> class1, String string);
+	
+	
+	public void testReturnExpression_01() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "return true");
+	}
+	
+	public void testReturnExpression_02() throws Exception {
+		assertEvaluatesTo("xx", "return if ('x'=='x') 'xx'");
+	}
+	
+	public void testReturnExpression_03() throws Exception {
+		assertEvaluatesTo(null, "return if ('x'!='x') 'xx'");
+	}
+	
+	public void testReturnExpression_04() throws Exception {
+		assertEvaluatesTo(null, "return null");
+	}
+	
+	public void testReturnExpression_05() throws Exception {
+		assertEvaluatesTo("yy", "if ('x'!='x') return 'xx' else return 'yy'");
+		assertEvaluatesTo("xx", "if ('x'=='x') return 'xx' else return 'yy'");
+	}
+	
+	public void testReturnExpression_06() throws Exception {
+		assertEvaluatesTo(null, 
+				"{" +
+				" val closure = [Integer i| return i]" +
+				" for (x : 1..10000) " +
+				"    closure.apply(x)" +
+		"}");
+	}
 
 	public void testUnaryOperator_00() throws Exception {
 		assertEvaluatesTo(new Integer(-19),"-19");
