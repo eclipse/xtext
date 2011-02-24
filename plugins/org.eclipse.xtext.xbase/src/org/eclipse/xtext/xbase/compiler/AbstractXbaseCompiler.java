@@ -64,14 +64,15 @@ public abstract class AbstractXbaseCompiler {
 	private PolymorphicDispatcher<Void> toJavaStatementDispatcher = PolymorphicDispatcher.createForSingleTarget(
 			"_toJavaStatement", 3, 3, this);
 
-	public void compile(XExpression obj, IAppendable appendable, boolean generateImplicitReturn) {
-		final boolean primitiveVoid = isPrimitiveVoid(obj);
+	public void compile(XExpression obj, IAppendable appendable, JvmTypeReference expectedType) {
+		final boolean isPrimitiveVoidExpected = typeReferences.is(expectedType, Void.TYPE); 
+		final boolean isPrimitiveVoid = isPrimitiveVoid(obj);
 		final boolean earlyExit = exitComputer.isEarlyExit(obj);
-		internalToJavaStatement(obj, appendable, generateImplicitReturn && !primitiveVoid && !earlyExit);
-		if (generateImplicitReturn && !earlyExit) {
+		internalToJavaStatement(obj, appendable, !isPrimitiveVoidExpected && !isPrimitiveVoid && !earlyExit);
+		if (!isPrimitiveVoidExpected && !earlyExit) {
 				appendable.append("\nreturn ");
-				if (primitiveVoid) {
-					appendable.append(null);
+				if (isPrimitiveVoid && !isPrimitiveVoidExpected) {
+					appendable.append("null");
 				} else {
 					internalToJavaExpression(obj, appendable);
 				}

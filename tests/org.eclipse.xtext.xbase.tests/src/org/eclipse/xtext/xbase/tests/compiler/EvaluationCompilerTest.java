@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.tests.compiler;
 
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
@@ -65,6 +66,9 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
+	
+	@Inject
+	private TypeReferences typeReferences;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -124,7 +128,7 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 		try {
 			model = expression(xtendCode, true);
 			XbaseCompiler compiler = injector.getInstance(XbaseCompiler.class);
-			compiler.compile(model, appandable, true);
+			compiler.compile(model, appandable, typeReferences.getTypeForName(Object.class, model));
 		} catch (Exception e) {
 			throw new RuntimeException("Xtend compilation failed", e);
 		}

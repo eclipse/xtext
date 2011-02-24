@@ -461,7 +461,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		b.append(") {");
 		b.increaseIndentation();
-		compile(closure.getExpression(), b, true);
+		compile(closure.getExpression(), b, operation.getReturnType());
 		b.decreaseIndentation();
 		b.append("\n}");
 		b.decreaseIndentation().append("\n};").decreaseIndentation();
