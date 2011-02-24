@@ -29,14 +29,14 @@ public class CollectionExtensions {
 	/**
 	 * operator mapping for {@link Collection#add(Object)} to +=
 	 */
-	public static <A extends Collection<? super B>,B> boolean operator_add(A a, B b) {
+	public static <E> boolean operator_add(Collection<? super E> a, E b) {
 		return a.add(b);
 	}
 	
 	/**
 	 * operator mapping for {@link Collection#addAll(Collection)} to +=
 	 */
-	public static <E> boolean operator_add(Collection<E> a, Collection<? extends E> b) {
+	public static <E> boolean operator_add(Collection<? super E> a, Collection<? extends E> b) {
 		return a.addAll(b);
 	}
 	

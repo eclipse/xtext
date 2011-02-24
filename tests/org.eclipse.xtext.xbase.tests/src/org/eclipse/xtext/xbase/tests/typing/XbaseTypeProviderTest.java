@@ -209,20 +209,22 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedReturnType("java.lang.Iterable<java.lang.Boolean>", "newArrayList('').map(s|s.length + 1 == 5).map(b| { !b } )");
 	}
 
-	// TODO: Fix Me!
-//	public void testFeatureCallWithOperatorOverloading_2() throws Exception {
-//		assertResolvedReturnType("boolean", "new java.util.ArrayList<Byte>() += 'x'.getBytes().iterator.next");
-//	}
+	public void testFeatureCallWithOperatorOverloading_2() throws Exception {
+		assertResolvedReturnType("boolean", "new java.util.ArrayList<Byte>() += 'x'.getBytes().iterator.next");
+	}
 	
 	public void testFeatureCallWithOperatorOverloading_3() throws Exception {
 		assertResolvedReturnType("boolean", "new java.util.ArrayList<Byte>() += null");
 	}
 	
-	// TODO: Fix Me!
-//	public void testFeatureCallWithOperatorOverloading_4() throws Exception {
-//		assertResolvedReturnType("boolean", "new java.util.ArrayList<Byte>() += newArrayList('x'.getBytes().iterator.next)");
-//	}
-
+	public void testFeatureCallWithOperatorOverloading_4() throws Exception {
+		assertResolvedReturnType("boolean", "new java.util.ArrayList<Byte>() += newArrayList('x'.getBytes().iterator.next)");
+	}
+	
+	public void testFeatureCallWithOperatorOverloading_5() throws Exception {
+		assertResolvedReturnType("boolean", "new java.util.ArrayList<Byte>() += 'x'.getBytes()");
+	}
+	
 	public void testFeatureCallOnThis() throws Exception {
 		assertResolvedReturnType("boolean", "{ val this = 'foo'; length == 3;}");
 	}
