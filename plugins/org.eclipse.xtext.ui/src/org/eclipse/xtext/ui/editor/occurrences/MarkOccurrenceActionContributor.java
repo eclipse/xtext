@@ -35,7 +35,7 @@ public class MarkOccurrenceActionContributor extends AbstractToggleActionContrib
 	@Inject
 	private Provider<OccurrenceMarker> occurrenceMarkerProvider;
 
-	@Inject
+	@Inject(optional=true)
 	private IWorkbench workbench;
 
 	private Map<XtextEditor, OccurrenceMarker> editor2marker = newHashMap();
@@ -75,6 +75,8 @@ public class MarkOccurrenceActionContributor extends AbstractToggleActionContrib
 
 	@Override
 	protected void stateChanged(boolean newState) {
+		if (workbench==null)
+			throw new IllegalStateException("no workbench");
 		if(newState) {
 			IEditorPart activeEditor = workbench.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 			if(activeEditor instanceof XtextEditor) {

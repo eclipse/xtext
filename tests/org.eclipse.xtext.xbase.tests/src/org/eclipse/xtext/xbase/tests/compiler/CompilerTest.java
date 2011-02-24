@@ -7,15 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler;
 
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class CompilerTest extends AbstractXbaseTestCase {
+	
+	@Inject
+	private ITypeProvider typeProvider;
 	
 	public void testSimple() throws Exception {
 		assertCompilesTo("\nint _length = \"foo\".length();\n" + 
@@ -49,8 +56,7 @@ public class CompilerTest extends AbstractXbaseTestCase {
 		assertCompilesTo(
 				"\nfor (java.lang.String s : new java.util.ArrayList<java.lang.String>()) {\n" +
 				"  s.length();\n" +
-				"}\n" +
-				"return null;"
+				"}"
 				, "for (String s : new java.util.ArrayList<String>()) " +
 						"s.length");
 	}
@@ -59,7 +65,8 @@ public class CompilerTest extends AbstractXbaseTestCase {
 		XExpression model = expression(xbaseCode,true);
 		XbaseCompiler compiler = get(XbaseCompiler.class);
 		IAppendable appandable = new IAppendable.StringBuilderBasedAppendable();
-		compiler.compile(model,appandable, true);
+		JvmTypeReference returnType = typeProvider.getCommonReturnType(model, true);
+		compiler.compile(model,appandable, returnType);
 		assertEquals(expectedJavaCode,appandable.toString());
 	}
 }
