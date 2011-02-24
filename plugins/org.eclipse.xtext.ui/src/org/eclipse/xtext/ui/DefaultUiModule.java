@@ -64,6 +64,7 @@ import org.eclipse.xtext.ui.editor.model.DocumentPartitioner;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.PartitionTokenScanner;
+import org.eclipse.xtext.ui.editor.occurrences.MarkOccurrenceActionContributor;
 import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
 import org.eclipse.xtext.ui.editor.outline.actions.LinkWithEditorOutlineContribution;
 import org.eclipse.xtext.ui.editor.outline.actions.SortOutlineContribution;
@@ -308,5 +309,12 @@ public class DefaultUiModule extends AbstractGenericModule {
 	public Class<? extends IEObjectHover> bindIEObjectHover() {
 		return DispatchingEObjectTextHover.class;
 	}
-	
+
+	public void configureMarkOccurrencesAction(Binder binder) {
+		binder.bind(IActionContributor.class).annotatedWith(Names.named("markOccurrences"))
+			.to(MarkOccurrenceActionContributor.class);
+	}
+
 }
+
+

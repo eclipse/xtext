@@ -41,7 +41,7 @@ public class DisplaySafeSyncer {
 		throw new TimeoutException("Timeout in Syncer");
 	}
 
-	protected void signal() {
+	public void signal() {
 		if (latch != null)
 			latch.countDown();
 	}

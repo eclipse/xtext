@@ -268,5 +268,61 @@
 			description="%RenameElementCommand_description">
 		</command>
 	</extension>
-    
+	
+	<!-- mark occurences -->
+	<extension
+         point="org.eclipse.ui.editors.annotationTypes">
+      <type
+         name="org.eclipse.xtext.ui.editor.defaultOccurrenceAnnotation">
+      </type>
+      <type
+            name="org.eclipse.xtext.ui.editor.declarationAnnotation"
+            super="org.eclipse.xtext.ui.editor.defaultOccurrenceAnnotation">
+      </type>
+    </extension>
+    <extension
+         point="org.eclipse.ui.editors.markerAnnotationSpecification">
+    	  <specification
+            annotationType="org.eclipse.xtext.ui.editor.defaultOccurrenceAnnotation"
+            label="%OccurrenceAnnotation_label"
+            icon="/icons/obj16/searchm_obj.gif"
+            textPreferenceKey="occurrenceIndication"
+            textPreferenceValue="false"
+            highlightPreferenceKey="occurrenceHighlighting"
+            highlightPreferenceValue="true"
+            contributesToHeader="false"
+            overviewRulerPreferenceKey="occurrenceIndicationInOverviewRuler"
+            overviewRulerPreferenceValue="true"
+            verticalRulerPreferenceKey="occurrenceIndicationInVerticalRuler"
+            verticalRulerPreferenceValue="false"
+            colorPreferenceKey="occurrenceIndicationColor"
+            colorPreferenceValue="212,212,212"
+            presentationLayer="4"
+            showInNextPrevDropdownToolbarActionKey="showOccurrenceInNextPrevDropdownToolbarAction"
+            showInNextPrevDropdownToolbarAction="true"
+            isGoToNextNavigationTargetKey="isOccurrenceGoToNextNavigationTarget"
+	        isGoToNextNavigationTarget="false"
+            isGoToPreviousNavigationTargetKey="isOccurrenceGoToPreviousNavigationTarget"
+	        isGoToPreviousNavigationTarget="false"
+            textStylePreferenceKey="occurrenceTextStyle"
+            textStylePreferenceValue="NONE">
+	    </specification>
+       <specification
+        	annotationType="org.eclipse.xtext.ui.editor.declarationAnnotation"
+            label="%DeclarationAnnotation_label"
+            textPreferenceKey="writeOccurrenceIndication"
+            textPreferenceValue="false"
+            highlightPreferenceKey="writeOccurrenceHighlighting"
+            highlightPreferenceValue="true"
+            overviewRulerPreferenceKey="writeOccurrenceIndicationInOverviewRuler"
+            overviewRulerPreferenceValue="true"
+            verticalRulerPreferenceKey="writeOccurrenceIndicationInVerticalRuler"
+            verticalRulerPreferenceValue="false"
+            colorPreferenceKey="writeOccurrenceIndicationColor"
+            colorPreferenceValue="240,216,168"
+            presentationLayer="4"
+            textStylePreferenceKey="writeOccurrenceTextStyle"
+            textStylePreferenceValue="NONE">
+       </specification>
+	</extension>
 </plugin>
