@@ -8,9 +8,11 @@
 package org.eclipse.xtext.xbase.typing;
 
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Maps.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -20,6 +22,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -308,8 +311,11 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	public Iterable<JvmTypeReference> getThrownExceptionTypes(XExpression expression) {
 		EarlyExitAcceptor acceptor = new EarlyExitAcceptor();
 		internalCollectEarlyExits(expression, acceptor);
-		//TODO remove duplicates
-		return acceptor.thrown;
+		Map<JvmType, JvmTypeReference> result = newHashMap();
+		for (JvmTypeReference thrownType : acceptor.thrown) {
+			result.put(thrownType.getType(), thrownType);
+		}
+		return result.values();
 	}
 	
 	protected void internalCollectEarlyExits(EObject expr, EarlyExitAcceptor a) {
