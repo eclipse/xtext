@@ -1,10 +1,14 @@
 package org.eclipse.xtext.xtend2.compiler;
 
 import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Lists.*;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -208,16 +212,40 @@ public class Xtend2Compiler extends XbaseCompiler {
 				.append("(");
 		final EList<JvmFormalParameter> parameters = obj.getParameters();
 		declareParameters(parameters, appendable);
-		appendable.append(") {");
-		appendable.increaseIndentation();
-		boolean isReferenced = !typeRefs.is(obj.getReturnType(), Void.TYPE);
-		if (obj.getReturnType() == null) {
-			final JvmTypeReference type = getTypeProvider().getType(obj.getExpression());
-			isReferenced = !typeRefs.is(type, Void.TYPE);
+		appendable.append(") ");
+		List<JvmTypeReference> checkedExceptions = getCheckedExceptions(obj);
+		if (!checkedExceptions.isEmpty()) {
+			appendable.append("throws ");
+			for (Iterator<JvmTypeReference> iterator = checkedExceptions.iterator(); iterator.hasNext();) {
+				JvmTypeReference jvmTypeReference = iterator.next();
+				appendable.append(getSerializedForm(jvmTypeReference));
+				if (iterator.hasNext())
+					appendable.append(", ");
+			}
 		}
-		compile(obj.getExpression(), appendable, isReferenced);
+		appendable.append("{");
+		appendable.increaseIndentation();
+		JvmTypeReference type = getTypeProvider().getType(obj.getExpression(), true);
+		boolean generateImplicitReturn = !typeRefs.is(returnType, Void.TYPE) && !typeRefs.is(type, Void.TYPE);
+		compile(obj.getExpression(), appendable, generateImplicitReturn);
 		appendable.decreaseIndentation();
 		appendable.append("\n}").closeScope();
+	}
+
+	protected List<JvmTypeReference> getCheckedExceptions(XtendFunction obj) {
+		Iterable<JvmTypeReference> types = getTypeProvider().getThrownExceptionTypes(obj.getExpression());
+		List<JvmTypeReference> checkedExceptions = newArrayList();
+		for (JvmTypeReference jvmTypeReference : types) {
+			if (typeRefs.isInstanceOf(jvmTypeReference, Exception.class)) {
+				checkedExceptions.add(jvmTypeReference);
+			}
+		}
+		Collections.sort(checkedExceptions, new Comparator<JvmTypeReference>() {
+			public int compare(JvmTypeReference o1, JvmTypeReference o2) {
+				return o1.getIdentifier().compareTo(o2.getIdentifier());
+			}
+		});
+		return checkedExceptions;
 	}
 
 	protected void declareParameters(final EList<JvmFormalParameter> parameters, IAppendable appendable) {
