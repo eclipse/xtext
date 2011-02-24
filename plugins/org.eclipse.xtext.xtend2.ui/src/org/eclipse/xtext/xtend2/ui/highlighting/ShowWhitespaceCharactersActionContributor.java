@@ -34,5 +34,8 @@ public class ShowWhitespaceCharactersActionContributor implements IActionContrib
 		IToolBarManager toolBarManager = editor.getEditorSite().getActionBars().getToolBarManager();
 		toolBarManager.add(action);
 	}
+	
+	public void editorDisposed(XtextEditor editor) {
+	}
 
 }
