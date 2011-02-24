@@ -72,8 +72,8 @@ public class Xtend2Compiler extends XbaseCompiler {
 			compile((XtendFunction) obj, appendable);
 		} else if (obj instanceof XtendFile) {
 			compile((XtendFile) obj, appendable);
-		} else if (obj instanceof XExpression) {
-			super.compile((XExpression) obj, appendable, true);
+		} else {
+			throw new IllegalArgumentException();
 		}
 	}
 
@@ -225,7 +225,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		}
 		appendable.append("{");
 		appendable.increaseIndentation();
-		compile(obj.getExpression(), appendable, true);
+		compile(obj.getExpression(), appendable, returnType);
 		appendable.decreaseIndentation();
 		appendable.append("\n}").closeScope();
 	}
