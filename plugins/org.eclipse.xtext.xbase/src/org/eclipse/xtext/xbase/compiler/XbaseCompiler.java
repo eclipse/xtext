@@ -73,7 +73,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				internalToJavaStatement(ex, b, isReferenced);
 				if (isReferenced) {
 					b.append("\n").append(getJavaVarName(expr, b)).append(" = (");
-					internalToJavaExpression(ex, b);
+					internalToConvertedExpression(ex, b, null);
 					b.append(");");
 				}
 			}
@@ -93,7 +93,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		internalToJavaStatement(expr.getExpression(), b, true);
 		if (isReferenced && !isPrimitiveVoid(expr.getExpression())) {
 			b.append("\n").append(getJavaVarName(expr, b)).append(" = ");
-			internalToJavaExpression(expr.getExpression(), b);
+			internalToConvertedExpression(expr.getExpression(), b, null);
 			b.append(";");
 		}
 		b.decreaseIndentation().append("\n}");
@@ -109,7 +109,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			internalToJavaStatement(catchClause.getExpression(), b, true);
 			if (isReferenced && ! isPrimitiveVoid(catchClause.getExpression())) {
 				b.append("\n").append(getJavaVarName(expr, b)).append(" = ");
-				internalToJavaExpression(catchClause.getExpression(), b);
+				internalToConvertedExpression(catchClause.getExpression(), b, null);
 				b.append(";");
 			}
 			b.decreaseIndentation();
@@ -279,7 +279,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.append("\n");
 			b.append(getJavaVarName(expr, b));
 			b.append(" = ");
-			internalToJavaExpression(expr.getThen(), b);
+			internalToConvertedExpression(expr.getThen(), b, null);
 			b.append(";");
 		}
 		closeBlock(expr.getThen(), b);
@@ -291,7 +291,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				b.append("\n");
 				b.append(getJavaVarName(expr, b));
 				b.append(" = ");
-				internalToJavaExpression(expr.getElse(), b);
+				internalToConvertedExpression(expr.getElse(), b, null);
 				b.append(";");
 			}
 			closeBlock(expr.getElse(), b);
@@ -372,7 +372,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			internalToJavaStatement(casePart.getThen(), b, isReferenced);
 			if (isReferenced) {
 				b.append("\n").append(switchResultName).append(" = ");
-				internalToJavaExpression(casePart.getThen(), b);
+				internalToConvertedExpression(casePart.getThen(), b, null);
 				b.append(";");
 			}
 
@@ -392,7 +392,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			internalToJavaStatement(expr.getDefault(), b, isReferenced);
 			if (isReferenced) {
 				b.append("\n").append(switchResultName).append(" = ");
-				internalToJavaExpression(expr.getDefault(), b);
+				internalToConvertedExpression(expr.getDefault(), b, null);
 				b.append(";");
 			}
 			b.decreaseIndentation();
