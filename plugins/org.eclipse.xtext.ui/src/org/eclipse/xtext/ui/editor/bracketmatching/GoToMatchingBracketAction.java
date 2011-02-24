@@ -57,4 +57,7 @@ public class GoToMatchingBracketAction extends Action implements IActionContribu
 		setEnabled(true);
 		editor.setAction(getId(), this);
 	}
+	
+	public void editorDisposed(XtextEditor editor) {
+	}
 }

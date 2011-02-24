@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.xtext.ui.editor.outline.actions.AbstractToggleActionContribution;
+import org.eclipse.xtext.ui.editor.outline.actions.AbstractToggleOutlineContribution;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlinePage;
 import org.eclipse.xtext.xtext.ui.Activator;
 
@@ -24,7 +24,7 @@ import com.google.inject.BindingAnnotation;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class HideReturnTypesContribution extends AbstractToggleActionContribution {
+public class HideReturnTypesContribution extends AbstractToggleOutlineContribution {
 
 	@Retention(RUNTIME)
 	@Target( { ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD })
