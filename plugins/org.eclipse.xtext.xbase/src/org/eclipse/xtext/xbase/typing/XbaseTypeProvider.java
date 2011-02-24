@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typing;
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -487,7 +488,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 					.getFormalParameters().size());
 			return result;
 		}
-		final JvmTypeReference returnType = getType(object.getExpression(), rawType);
+		JvmTypeReference returnType = getCommonReturnType(object.getExpression(), true);
+		if (typeReferences.is(returnType, Void.TYPE)) {
+			returnType = typeReferences.getTypeForName(Void.class,object);
+		}
 		List<JvmTypeReference> parameterTypes = Lists.newArrayList();
 		List<JvmFormalParameter> params = object.getFormalParameters();
 		for (JvmFormalParameter param : params) {
@@ -743,5 +747,42 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 
 	protected JvmTypeReference _typeForIdentifiable(JvmOperation operation, boolean rawType) {
 		return operation.getReturnType();
+	}
+	
+	protected void _earlyExits(XClosure expr, EarlyExitAcceptor a) {
+		// Don't go into closures
+	}
+	
+	protected void _earlyExits(XReturnExpression expr, EarlyExitAcceptor a) {
+		if (expr.getExpression()!=null) {
+			JvmTypeReference type = getType(expr.getExpression());
+			a.returns.add(type);
+		}
+	}
+	
+	protected void _earlyExits(XThrowExpression expr, EarlyExitAcceptor a) {
+		if (expr.getExpression()!=null) {
+			JvmTypeReference type = getType(expr.getExpression());
+			a.thrown.add(type);
+		}
+	}
+	
+	protected void _earlyExits(XTryCatchFinallyExpression expr, EarlyExitAcceptor a) {
+		EarlyExitAcceptor acceptor = new EarlyExitAcceptor();
+		internalCollectEarlyExits(expr.getExpression(), acceptor);
+		a.returns.addAll(acceptor.returns);
+		for (XCatchClause catchClause : expr.getCatchClauses()) {
+			Iterator<JvmTypeReference> iterator = acceptor.thrown.iterator();
+			while (iterator.hasNext()) {
+				JvmTypeReference thrown = iterator.next();
+				if (typeConformanceComputer.isConformant(catchClause.getDeclaredParam().getParameterType(), thrown)) {
+					iterator.remove();
+				}
+			}
+			internalCollectEarlyExits(catchClause.getExpression(), a);
+		}
+		a.thrown.addAll(acceptor.thrown);
+		if (expr.getFinallyExpression()!=null)
+			internalCollectEarlyExits(expr.getFinallyExpression(), a);
 	}
 }

@@ -7,11 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typing;
 
+import static com.google.common.collect.Lists.*;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -21,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Triple;
@@ -28,6 +32,7 @@ import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XExpression;
 
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
@@ -36,6 +41,12 @@ import com.google.inject.Provider;
 public abstract class AbstractTypeProvider implements ITypeProvider {
 
 	private static final Logger logger = Logger.getLogger(AbstractTypeProvider.class);
+	
+	@Inject 
+	private XbaseTypeConformanceComputer typeConformanceComputer;
+	
+	@Inject 
+	private TypeReferences typeReferences;
 	
 	// this class if final because of the assumptions that are made in
 	// equals and hashcode
@@ -270,6 +281,51 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	protected JvmTypeReference handleCycleGetTypeForIdentifiable(JvmIdentifiableElement identifiableElement, boolean rawType) {
 		return null;
 	}
+	
+	protected static class EarlyExitAcceptor {
+		protected List<JvmTypeReference> returns = newArrayList();
+		protected List<JvmTypeReference> thrown = newArrayList();
+	}
+	
+	private PolymorphicDispatcher<Void> earlyExits = PolymorphicDispatcher.createForSingleTarget("_earlyExits", 2, 2, this);
+	
+	public JvmTypeReference getCommonReturnType(XExpression expression, boolean assumeImplicitReturnExpression) {
+		EarlyExitAcceptor acceptor = new EarlyExitAcceptor();
+		internalCollectEarlyExits(expression, acceptor);
+		final List<JvmTypeReference> returns = acceptor.returns;
+		if (assumeImplicitReturnExpression) {
+			JvmTypeReference implicitReturnType = getType(expression);
+			if (!typeReferences.is(implicitReturnType, Void.TYPE))
+				acceptor.returns.add(implicitReturnType);
+		}
+		if (returns.isEmpty()) {
+			return typeReferences.getTypeForName(Void.TYPE, expression);
+		}
+		JvmTypeReference superType = typeConformanceComputer.getCommonSuperType(returns);
+		return superType;
+	}
+	
+	public Iterable<JvmTypeReference> getThrownExceptionTypes(XExpression expression) {
+		EarlyExitAcceptor acceptor = new EarlyExitAcceptor();
+		internalCollectEarlyExits(expression, acceptor);
+		//TODO remove duplicates
+		return acceptor.thrown;
+	}
+	
+	protected void internalCollectEarlyExits(EObject expr, EarlyExitAcceptor a) {
+		earlyExits.invoke(expr,a);
+	}
+	
+	protected void _earlyExits(Void expr, EarlyExitAcceptor a) {
+	}
+	protected void _earlyExits(JvmTypeReference ref, EarlyExitAcceptor a) {
+	}
+	protected void _earlyExits(EObject expr, EarlyExitAcceptor a) {
+		EList<EObject> list = expr.eContents();
+		for (EObject eObject : list) {
+			internalCollectEarlyExits(eObject, a);
+		}
+	}
 
 	protected static class ComputationData<T extends EObject> {
 		protected final Set<T> computations = Sets.newHashSet();
@@ -298,7 +354,6 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		protected int size() {
 			return computations.size();
 		}
-
 	}
 	
 	abstract class CyclicHandlingSupport<T extends EObject> {

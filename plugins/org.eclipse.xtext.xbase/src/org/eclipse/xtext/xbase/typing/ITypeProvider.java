@@ -70,5 +70,24 @@ public interface ITypeProvider {
 	 *         given. <code>null</code> indicates a problem during resolution. given.
 	 */
 	public JvmTypeReference getTypeForIdentifiable(JvmIdentifiableElement identifiableElement, boolean rawType);
+	
+	/**
+	 * The return type of an expression is the common super type of all types used within a return expression.
+	 * 
+	 * @param expression. May not be <code>null</code>.
+	 * @param boolean, indicating whether an implicit return expression should be assumed
+	 * @return the fully-resolved common return type of the {@link XExpression}, if a correct, fully-linkable model is
+	 *         given. <code>null</code> indicates a problem during computation, the primitive void indicates that no return expression was found.
+	 */
+	public JvmTypeReference getCommonReturnType(XExpression expression, boolean assumeImplicitReturn);
+	
+	/**
+	 * returns all exception types, thrown within the given expression.
+	 * 
+	 * @param expression. May not be <code>null</code>.
+	 * @return the iterable of fully-resolved exception types, if a correct, fully-linkable model is
+	 *         given. <code>null</code> indicates a problem during computation, an empty iterable means no thrown exceptions were found.
+	 */
+	public Iterable<JvmTypeReference> getThrownExceptionTypes(XExpression expression);
 
 }
