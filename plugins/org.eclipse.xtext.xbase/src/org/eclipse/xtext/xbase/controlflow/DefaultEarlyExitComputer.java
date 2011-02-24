@@ -78,14 +78,14 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
 		Collection<ExitPoint> exitPoints = getExitPoints(expression.getForExpression());
 		if (isNotEmpty(exitPoints))
 			return exitPoints;
-		return getExitPoints(expression.getEachExpression());
+		return Collections.emptyList();
 	}
 	
 	protected Collection<ExitPoint> _exitPoints(XWhileExpression expression) {
 		Collection<ExitPoint> exitPoints = getExitPoints(expression.getPredicate());
 		if (isNotEmpty(exitPoints))
 			return exitPoints;
-		return getExitPoints(expression.getBody());
+		return Collections.emptyList();
 	}
 	
 	protected Collection<ExitPoint> _exitPoints(XDoWhileExpression expression) {
