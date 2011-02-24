@@ -956,6 +956,24 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(Integer.valueOf(5), "newArrayList('a','aa','b','aa','abc').map(s|s.length + 1).take(4).toSet().reduce(a,b|a+b)");
 	}
 	
+	public void testIterableExtension_07() {
+		assertEvaluatesTo(Lists.newArrayList("a", "b", "c"), "newArrayList('a','b', 'c', 'd', 'e').take(3).toList()");
+	}
+	
+	public void testIterableExtension_08() {
+		assertEvaluatesTo(Lists.newArrayList("d", "e"), "newArrayList('a', 'b', 'c', 'd', 'e').drop(3).toList()");
+	}
+	
+	public void testIterableExtension_09() {
+		assertEvaluatesTo(Boolean.TRUE, "(null as Iterable<String>).isNullOrEmpty()");
+		assertEvaluatesTo(Boolean.TRUE, "newArrayList().isNullOrEmpty()");
+		assertEvaluatesTo(Boolean.FALSE, "newHashSet('a').isNullOrEmpty()");
+	}
+	
+	public void testIterableExtension_10() {
+		assertEvaluatesTo("seed 12345", "newArrayList(1, 2, 3, 4, 5).fold('seed ', [i, s|s+i.toString])");
+	}
+	
 	public void testMapConstruction_00() throws Exception {
 		assertEvaluatesTo("vier", "newHashMap(3->'drei',4->'vier').get(4)");
 	}
@@ -970,5 +988,66 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	
 	public void testStaticMethod_02() {
 		assertEvaluatesTo(Sets.newHashSet("a"), "newTreeSet([left, right|left.compareTo(right)], 'a')");
+	}
+	
+	public void testCollectionExtensions_01() {
+		assertEvaluatesTo(Boolean.TRUE, "{ var this = newArrayList('') var result = unmodifiableView() clear() result.empty }");
+//		assertEvaluatesWithException(UnsupportedOperationException.class, "newArrayList('').unmodifiableView().clear()");
+		assertEvaluatesWithException(UnsupportedOperationException.class, "{ newArrayList('').unmodifiableView().clear() null }");
+	}
+	
+	public void testCollectionExtensions_02() {
+		assertEvaluatesTo(Boolean.TRUE, "{ var this = newHashSet('') var result = unmodifiableView() clear() result.empty }");
+//		assertEvaluatesWithException(UnsupportedOperationException.class, "newHashSet('').unmodifiableView().clear()");
+		assertEvaluatesWithException(UnsupportedOperationException.class, "{ newHashSet('').unmodifiableView().clear null }");
+	}
+	
+	public void testCollectionExtensions_03() {
+		assertEvaluatesTo(Boolean.TRUE, "newArrayList().unmodifiableView() instanceof java.util.List");
+		assertEvaluatesTo(Boolean.TRUE, "newHashSet().unmodifiableView() instanceof java.util.Set");
+		assertEvaluatesTo(Boolean.TRUE, "newLinkedHashSet().unmodifiableView() instanceof java.util.Set");
+		assertEvaluatesTo(Boolean.TRUE, "newTreeSet(String a, String b|a.compareTo(b)).unmodifiableView() instanceof java.util.SortedSet");
+		assertEvaluatesTo(Boolean.TRUE, "newHashMap().unmodifiableView() instanceof java.util.Map");
+		assertEvaluatesTo(Boolean.TRUE, "newLinkedHashMap().unmodifiableView() instanceof java.util.Map");
+		assertEvaluatesTo(Boolean.TRUE, "newTreeMap(String a, String b|a.compareTo(b)).unmodifiableView() instanceof java.util.SortedMap");
+	}
+	
+	public void testCollectionExtensions_04() {
+		assertEvaluatesTo(Boolean.FALSE, "(newArrayList() as java.util.Collection<Object>).unmodifiableView() instanceof java.util.List");
+		assertEvaluatesTo(Boolean.TRUE, "(newArrayList() as java.util.Collection<Object>).unmodifiableView() instanceof java.util.Collection");
+		assertEvaluatesTo(Boolean.FALSE, "(newHashSet() as java.util.Collection<Object>).unmodifiableView() instanceof java.util.Set");
+		assertEvaluatesTo(Boolean.TRUE, "(newHashSet() as java.util.Collection<Object>).unmodifiableView() instanceof java.util.Collection");
+	}
+	
+	public void testCollectionExtensions_05() {
+		assertEvaluatesTo(Collections.singletonList("foo"), "{ var this = newArrayList('foo') var result = immutableCopy() clear() result  }");
+		assertEvaluatesWithException(UnsupportedOperationException.class, "{ newArrayList('').immutableCopy().clear() null }");
+	}
+	
+	public void testCollectionExtensions_06() {
+		assertEvaluatesTo(Collections.singleton("foo"), "{ var this = newHashSet('foo') var result = immutableCopy() clear() result }");
+		assertEvaluatesWithException(UnsupportedOperationException.class, "{ newHashSet('').immutableCopy().clear null }");
+	}
+	
+	public void testCollectionExtensions_07() {
+		assertEvaluatesTo(Lists.newArrayList("a", "b", "c"), "{ var this = newArrayList() addAll('a', 'b', 'c') this }");
+		assertEvaluatesTo(Boolean.FALSE, "newHashSet('a', 'b', 'c').addAll('a', 'b', 'c')");
+	}
+	
+	public void testListExtensions_01() {
+		assertEvaluatesTo(Lists.newArrayList("a", "b", "c"), "newArrayList('c', 'a', 'b').sort()");
+		assertEvaluatesTo("b", "{ var this = newArrayList('c', 'a', 'b', 'd') sort() get(1) }");
+	}
+	
+	public void testListExtensions_02() {
+		assertEvaluatesTo(Lists.newArrayList("a", "b", "c"), "newArrayList('c', 'a', 'b').sort(a,b|a.compareTo(b))");
+		assertEvaluatesTo(Lists.newArrayList("c", "b", "a"), "newArrayList('c', 'a', 'b').sort(a,b|b.compareTo(a))");
+		assertEvaluatesTo("b", "{ var this = newArrayList('c', 'a', 'b', 'd') sort(a,b|a.compareTo(b)) get(1) }");
+	}
+	
+	public void testListExtensions_03() {
+		assertEvaluatesTo(Lists.newArrayList("aaa", "bb", "c"), "newArrayList('c', 'aaa', 'bb').sortBy(s|-s.length)");
+		assertEvaluatesTo(Lists.newArrayList("c", "bb", "aaa"), "newArrayList('c', 'aaa', 'bb').sortBy(s|s.length)");
+		assertEvaluatesTo("b", "{ var this = newArrayList('c', 'a', 'b', 'd') sortBy(a|a) get(1) }");
 	}
 }
