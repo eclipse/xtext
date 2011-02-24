@@ -99,6 +99,49 @@ public class ReturnTypeComputationTest extends AbstractXbaseTestCase {
 				RuntimeException.class.getName());
 	}
 	
+	public void testThrownTypes_02() throws Exception {
+		assertThrownTypes("{ if (true) throw new RuntimeException() else [|throw new IllegalArgumentException()] }", 
+				RuntimeException.class.getName());
+	}
+	
+	public void testThrownTypes_03() throws Exception {
+		assertThrownTypes("try { if (true) throw new RuntimeException() else throw new IllegalArgumentException() } catch (IllegalArgumentException e) {}", 
+				RuntimeException.class.getName());
+	}
+	
+	public void testThrownTypes_04() throws Exception {
+		assertThrownTypes("try { if (true) throw new RuntimeException() else throw new IllegalArgumentException() } catch (IllegalArgumentException e) {" +
+				" throw new NullPointerException()" +
+				"}", 
+				NullPointerException.class.getName(),
+				RuntimeException.class.getName());
+	}
+	
+	public void testThrownTypes_05() throws Exception {
+		assertThrownTypes("try { if (true) throw new RuntimeException() else throw new IllegalArgumentException() } catch (IllegalArgumentException e) {" +
+				" throw new NullPointerException()" +
+				"} catch (NullPointerException e) {" + 
+				"} catch (RuntimeException e) {}", 
+				NullPointerException.class.getName());
+	}
+	
+	public void testThrownTypes_06() throws Exception {
+		assertThrownTypes("try { if (true) throw new RuntimeException() else throw new IllegalArgumentException() } catch (IllegalArgumentException e) {" +
+				" throw new NullPointerException()" +
+				"} catch (NullPointerException e) {" + 
+				"} catch (RuntimeException e) {" +
+				"} finally {" +
+				"  throw new UnsupportedOperationException()" +
+				"}", 
+				NullPointerException.class.getName(),
+				UnsupportedOperationException.class.getName());
+	}
+	
+	public void testThrownTypes_07() throws Exception {
+		assertThrownTypes("{ if (true) throw new RuntimeException() else throw new RuntimeException() }", 
+				RuntimeException.class.getName());
+	}
+	
 	protected void assertThrownTypes(String expression, String...thrownTypes) throws Exception {
 		final XExpression expr = expression(expression);
 		final Iterable<JvmTypeReference> thrown = typeProvider.getThrownExceptionTypes(expr);
