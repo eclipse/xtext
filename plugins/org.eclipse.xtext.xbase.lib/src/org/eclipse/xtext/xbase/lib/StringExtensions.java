@@ -19,20 +19,24 @@ public class StringExtensions {
 		return a+b;
 	}
 	
+	public static boolean isNullOrEmpty(String s) {
+		return s == null || s.equals("");
+	}
+	
 	public static String toFirstUpper(String s) {
 		if (s == null || s.length() == 0)
+			return s;
+		if (Character.isUpperCase(s.charAt(0)))
 			return s;
 		if (s.length() == 1)
 			return s.toUpperCase();
 		return s.substring(0, 1).toUpperCase() + s.substring(1);
 	}
 
-	public static boolean isNullOrEmpty(String s) {
-		return s == null || s.equals("");
-	}
-
 	public static String toFirstLower(String s) {
 		if (s == null || s.length() == 0)
+			return s;
+		if (Character.isLowerCase(s.charAt(0)))
 			return s;
 		if (s.length() == 1)
 			return s.toLowerCase();

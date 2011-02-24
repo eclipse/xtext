@@ -371,15 +371,26 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testExtensionMethodOnThis_01() throws Exception {
-		final XBlockExpression block = (XBlockExpression) expression("{ var this = newArrayList('').map(s|1).toList() map(i|i+1) }");
+		final XBlockExpression block = (XBlockExpression) expression("{ var Iterable<String> this = newArrayList('').map(s|1).toList() map(i|i+1) }");
 		XAbstractFeatureCall featureCall = (XAbstractFeatureCall) block.getExpressions().get(1);
 		assertEquals("org.eclipse.xtext.xbase.lib.IterableExtensions.map(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)", featureCall.getFeature().getIdentifier());
 	}
 	
 	public void testExtensionMethodOnThis_02() throws Exception {
-		final XBlockExpression block = (XBlockExpression) expression("{ var this = newArrayList('').map(s|1).toList() this.map(i|i+1) }");
+		final XBlockExpression block = (XBlockExpression) expression("{ var Iterable<String> this = newArrayList('').map(s|1).toList() this.map(i|i+1) }");
 		XAbstractFeatureCall featureCall = (XAbstractFeatureCall) block.getExpressions().get(1);
 		assertEquals("org.eclipse.xtext.xbase.lib.IterableExtensions.map(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)", featureCall.getFeature().getIdentifier());
 	}
 	
+	public void testExtensionMethodOnThis_03() throws Exception {
+		final XBlockExpression block = (XBlockExpression) expression("{ var this = newArrayList('').map(s|1).toList() map(i|i+1) }");
+		XAbstractFeatureCall featureCall = (XAbstractFeatureCall) block.getExpressions().get(1);
+		assertEquals("org.eclipse.xtext.xbase.lib.ListExtensions.map(java.util.List,org.eclipse.xtext.xbase.lib.Functions$Function1)", featureCall.getFeature().getIdentifier());
+	}
+	
+	public void testExtensionMethodOnThis_04() throws Exception {
+		final XBlockExpression block = (XBlockExpression) expression("{ var this = newArrayList('').map(s|1).toList() this.map(i|i+1) }");
+		XAbstractFeatureCall featureCall = (XAbstractFeatureCall) block.getExpressions().get(1);
+		assertEquals("org.eclipse.xtext.xbase.lib.ListExtensions.map(java.util.List,org.eclipse.xtext.xbase.lib.Functions$Function1)", featureCall.getFeature().getIdentifier());
+	}
 }

@@ -207,24 +207,8 @@ public class TypeArgumentContextProvider {
 						JvmTypeReference commonVarArgType = conformanceComputer.getCommonSuperType(varArgTypes);
 						resolve(componentType, commonVarArgType, map, false);
 					} else {
-						if (componentType.getType() instanceof JvmConstraintOwner) {
-							List<JvmTypeReference> allUpperBounds = Lists.newArrayList();
-							for(JvmTypeConstraint constraint: ((JvmConstraintOwner) componentType.getType()).getConstraints()) {
-								if (constraint instanceof JvmUpperBound) {
-									allUpperBounds.add(constraint.getTypeReference());
-								}
-							}
-							if (allUpperBounds.isEmpty()) {
-								JvmTypeReference objectType = typeReferences.getTypeForName(Object.class, feature);
-								resolve(componentType, objectType, map, false);
-							} else {
-								JvmTypeReference upperBound = conformanceComputer.getCommonSuperType(allUpperBounds);
-								resolve(componentType, upperBound, map, false);
-							}
-						} else {
-							JvmTypeReference objectType = typeReferences.getTypeForName(Object.class, feature);
-							resolve(componentType, objectType, map, false);
-						}
+						JvmTypeReference information = computeVarArgTypeInformation(feature, componentType.getType());
+						resolve(componentType, information, map, false);
 					}
 				}
 			}
@@ -234,6 +218,34 @@ public class TypeArgumentContextProvider {
 			}
 		}
 		return findBestMatches(map);
+	}
+
+	protected JvmTypeReference computeVarArgTypeInformation(JvmFeature feature, JvmType type) {
+		if (type instanceof JvmConstraintOwner) {
+			List<JvmTypeReference> allUpperBounds = Lists.newArrayList();
+			for(JvmTypeConstraint constraint: ((JvmConstraintOwner) type).getConstraints()) {
+				if (constraint instanceof JvmUpperBound) {
+					allUpperBounds.add(constraint.getTypeReference());
+				}
+			}
+			if (allUpperBounds.isEmpty()) {
+				JvmTypeReference objectType = typeReferences.getTypeForName(Object.class, feature);
+				return objectType;
+			} else {
+				JvmTypeReference upperBound = conformanceComputer.getCommonSuperType(allUpperBounds);
+				return upperBound;
+			}
+		} else if (type instanceof JvmTypeParameterDeclarator && !((JvmTypeParameterDeclarator) type).getTypeParameters().isEmpty()) {
+			List<JvmTypeReference> arguments = Lists.newArrayList();
+			List<JvmTypeParameter> parameters = ((JvmTypeParameterDeclarator) type).getTypeParameters();
+			for(JvmTypeParameter parameter: parameters) {
+				arguments.add(computeVarArgTypeInformation(feature, parameter));
+			}
+			return typeReferences.createTypeRef(type, arguments.toArray(new JvmTypeReference[arguments.size()]));
+		} else {
+			JvmTypeReference objectType = typeReferences.getTypeForName(Object.class, feature);
+			return objectType;
+		}
 	}
 
 	protected Map<JvmTypeParameter, JvmTypeReference> findBestMatches(Multimap<JvmTypeParameter, JvmTypeReference> map) {

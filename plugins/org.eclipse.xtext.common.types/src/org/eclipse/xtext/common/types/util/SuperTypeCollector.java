@@ -29,7 +29,7 @@ import com.google.inject.Inject;
  */
 public class SuperTypeCollector {
 
-	interface SuperTypeAcceptor {
+	public interface SuperTypeAcceptor {
 		/**
 		 * @param superType a found super type
 		 * @param the distance to the starting type. StringBuilder has a distance 1 to 

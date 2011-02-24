@@ -7,20 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
-import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
-import static java.util.Collections.*;
+
+import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
-import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
 /**
@@ -38,30 +41,52 @@ public abstract class AbstractStaticMethodsFeatureForTypeProvider implements IFe
 	private Resource context;
 
 	public Iterable<? extends JvmFeature> getFeaturesForType(final JvmTypeReference reference) {
-		final Iterable<String> staticTypes = getVisibleTypesContainingStaticMethods(reference);
-		Iterable<JvmOperation> staticMethods = emptySet();
-		for (String typeName : staticTypes) {
-			JvmTypeReference typeReference = typeRefs.getTypeForName(typeName, context);
-			if (typeReference != null) {
-				final JvmDeclaredType type = (JvmDeclaredType) typeReference.getType();
+		final Iterable<String> staticTypeNames = getVisibleTypesContainingStaticMethods(reference);
+		List<JvmOperation> result = newArrayList();
+		for (String staticTypeName : staticTypeNames) {
+			JvmTypeReference staticType = typeRefs.getTypeForName(staticTypeName, context);
+			if (staticType != null) {
+				final JvmDeclaredType type = (JvmDeclaredType) staticType.getType();
 				Iterable<JvmOperation> operations = type.getDeclaredOperations();
-				staticMethods = concat(staticMethods, filter(operations, new Predicate<JvmOperation>() {
-					public boolean apply(JvmOperation input) {
-						if (input.isStatic()) {
-							if (reference == null)
-								return true;
-							if (input.getParameters().size() > 0) {
-								JvmFormalParameter firstParam = input.getParameters().get(0);
-								return conformanceComputer.isConformant(firstParam.getParameterType(),
-										reference, true);
-							}
-						}
-						return false;
+				for(JvmOperation operation: operations) {
+					if (isMatchingExtension(reference, operation)) {
+						result.add(operation);
 					}
-				}));
+				}
 			}
 		}
-		return newArrayList(staticMethods);
+		return result;
+	}
+	
+	protected boolean isMatchingExtension(JvmTypeReference expectedParameterTypeReference, JvmOperation operation) {
+		if (operation.isStatic()) {
+			if (expectedParameterTypeReference == null)
+				return true;
+			JvmType expectedParameterType = expectedParameterTypeReference.getType();
+			if (operation.getParameters().size() > 0) {
+				JvmFormalParameter firstParam = operation.getParameters().get(0);
+				JvmType actualParameterType = firstParam.getParameterType().getType();
+				if (actualParameterType == expectedParameterType)
+					return true;
+				if (actualParameterType instanceof JvmTypeParameter) {
+					boolean upperBoundSeen = false;
+					for(JvmTypeConstraint constraint: ((JvmTypeParameter) actualParameterType).getConstraints()) {
+						if (constraint instanceof JvmUpperBound) {
+							upperBoundSeen = true;
+							if (constraint.getTypeReference().getType() == expectedParameterType)
+								return true;
+						}
+					}
+					if (!upperBoundSeen) {
+						if (typeRefs.is(expectedParameterTypeReference, Object.class)) {
+							return true;
+						}
+					}
+				}
+				return false;
+			}
+		}
+		return false;
 	}
 
 	protected abstract Iterable<String> getVisibleTypesContainingStaticMethods(JvmTypeReference reference);
@@ -81,4 +106,5 @@ public abstract class AbstractStaticMethodsFeatureForTypeProvider implements IFe
 	protected TypeReferences getTypeRefs() {
 		return typeRefs;
 	}
+
 }

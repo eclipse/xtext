@@ -14,26 +14,23 @@ import static java.util.Collections.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
-import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -54,16 +51,10 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 	private SuperTypeCollector superTypeCollector;
 	
 	@Inject
-	private Primitives primitives;
-	
-	@Inject
-	private TypesFactory typesFactory = TypesFactory.eINSTANCE;
-	
-	@Inject
-	private TypeReferences typeRefs;
-	
-	@Inject
 	private IFeaturesForTypeProvider featuresProvider;
+	
+	@Inject
+	private SynonymTypesProvider synonymTypeProvider;
 
 	public void setTypeArgumentContextProvider(TypeArgumentContextProvider typeArgumentContextProvider) {
 		this.typeArgumentContextProvider = typeArgumentContextProvider;
@@ -73,11 +64,6 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 		this.superTypeCollector = superTypeCollector;
 	}
 	
-	public void setPrimitives(Primitives primitives) {
-		this.primitives = primitives;
-	}
-	
-
 	/**
 	 * <p>
 	 * Provides the feature scope for a given {@link JvmTypeReference}, using the given {@link IJvmFeatureDescriptionProvider}.
@@ -97,17 +83,17 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 		Iterable<JvmTypeReference> hierarchy = linearizeTypeHierarchy(typeReference);
 
 		// standard features
-		final List<JvmFeatureDescriptions> descriptions = newArrayList();
+		final List<JvmFeatureDescriptionList> descriptions = newArrayList();
 		for (IJvmFeatureDescriptionProvider provider : jvmFeatureDescriptionProviders) {
-			final List<JvmFeatureDescriptions> descriptionss = createFeatureScopes(hierarchy, context, provider);
+			final List<JvmFeatureDescriptionList> descriptionss = createFeatureScopes(hierarchy, context, provider);
 			descriptions.addAll(descriptionss);
 		}
 
 		// create a view for the visible elements
-		Iterable<JvmFeatureDescriptions> visibleElements = transform(descriptions,
-				new Function<JvmFeatureDescriptions, JvmFeatureDescriptions>() {
-					public JvmFeatureDescriptions apply(JvmFeatureDescriptions from) {
-						return new JvmFeatureDescriptions(from.getText(), filter(from.getDescriptions(),new Predicate<JvmFeatureDescription>() {
+		Iterable<JvmFeatureDescriptionList> visibleElements = transform(descriptions,
+				new Function<JvmFeatureDescriptionList, JvmFeatureDescriptionList>() {
+					public JvmFeatureDescriptionList apply(JvmFeatureDescriptionList from) {
+						return new JvmFeatureDescriptionList(from.getText(), filter(from.getDescriptions(),new Predicate<JvmFeatureDescription>() {
 							public boolean apply(JvmFeatureDescription input) {
 								return input.isValid();
 							}
@@ -115,10 +101,10 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 					}
 				});
 		// create a view for the invisible elements
-		Iterable<JvmFeatureDescriptions> invisibleElements = transform(descriptions,
-				new Function<JvmFeatureDescriptions, JvmFeatureDescriptions>() {
-					public JvmFeatureDescriptions apply(JvmFeatureDescriptions from) {
-						return new JvmFeatureDescriptions("[invalid] "+from.getText(), filter(from.getDescriptions(),new Predicate<JvmFeatureDescription>() {
+		Iterable<JvmFeatureDescriptionList> invisibleElements = transform(descriptions,
+				new Function<JvmFeatureDescriptionList, JvmFeatureDescriptionList>() {
+					public JvmFeatureDescriptionList apply(JvmFeatureDescriptionList from) {
+						return new JvmFeatureDescriptionList("[invalid] "+from.getText(), filter(from.getDescriptions(),new Predicate<JvmFeatureDescription>() {
 							public boolean apply(JvmFeatureDescription input) {
 								return !input.isValid();
 							}
@@ -127,11 +113,11 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 				});
 
 		// concat valid and invalid scopes
-		final ArrayList<JvmFeatureDescriptions> newArrayList = newArrayList(concat(visibleElements, invisibleElements));
+		final ArrayList<JvmFeatureDescriptionList> newArrayList = newArrayList(concat(visibleElements, invisibleElements));
 
 		// transform iterables to scope hierarchy in reverse order
 		IScope current = parent;
-		for (JvmFeatureDescriptions featureDescs : reverse(newArrayList)) {
+		for (JvmFeatureDescriptionList featureDescs : reverse(newArrayList)) {
 			if (featureDescs != null && !isEmpty(featureDescs.getDescriptions())) {
 				if (current == null) 
 					current = IScope.NULLSCOPE;
@@ -143,29 +129,29 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 		return (JvmFeatureScope) current;
 	}
 
-	protected JvmFeatureScope createJvmFeatureScope(IScope current, JvmFeatureDescriptions featureDescs) {
+	protected JvmFeatureScope createJvmFeatureScope(IScope current, JvmFeatureDescriptionList featureDescs) {
 		return new JvmFeatureScope(current, featureDescs.getText(), featureDescs.getDescriptions());
 	}
 
-	protected List<JvmFeatureDescriptions> createFeatureScopes(Iterable<JvmTypeReference> hierarchy, TypeArgumentContext context, IJvmFeatureDescriptionProvider jvmFeatureDescriptionProvider) {
-		List<JvmFeatureDescriptions> result = newArrayList();
+	protected List<JvmFeatureDescriptionList> createFeatureScopes(Iterable<JvmTypeReference> hierarchy, TypeArgumentContext context, IJvmFeatureDescriptionProvider jvmFeatureDescriptionProvider) {
+		List<JvmFeatureDescriptionList> result = newArrayList();
 		boolean wasEmpty = true;
 		for (JvmTypeReference type : hierarchy) {
 			wasEmpty = false;
-			final JvmFeatureDescriptions featureDescriptions = createFeatureScope(type, context, jvmFeatureDescriptionProvider);
+			final JvmFeatureDescriptionList featureDescriptions = createFeatureScope(type, context, jvmFeatureDescriptionProvider);
 			if (featureDescriptions!=null)
 				result.add(featureDescriptions);
 		}
 		// try again without a typeReference
 		if (wasEmpty) {
-			final JvmFeatureDescriptions featureDescriptions = createFeatureScope(null, context, jvmFeatureDescriptionProvider);
+			final JvmFeatureDescriptionList featureDescriptions = createFeatureScope(null, context, jvmFeatureDescriptionProvider);
 			if (featureDescriptions!=null)
 				result.add(featureDescriptions);
 		}
 		return result;
 	}
 
-	protected JvmFeatureDescriptions createFeatureScope(final JvmTypeReference type, final TypeArgumentContext context, final IJvmFeatureDescriptionProvider jvmFeatureDescriptionProvider) {
+	protected JvmFeatureDescriptionList createFeatureScope(final JvmTypeReference type, final TypeArgumentContext context, final IJvmFeatureDescriptionProvider jvmFeatureDescriptionProvider) {
 		Iterable<? extends JvmFeature> features = getFeaturesForType(type, jvmFeatureDescriptionProvider);
 		if (!features.iterator().hasNext())
 			return null;
@@ -179,7 +165,7 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 			jvmFeatureDescriptionProvider.addFeatureDescriptions(jvmFeature, context, acceptor);
 		}
 		String identifier = type != null ? type.getIdentifier() : "[static features]";
-		return new JvmFeatureDescriptions(jvmFeatureDescriptionProvider.getText()+" " + identifier, descriptions);
+		return new JvmFeatureDescriptionList(jvmFeatureDescriptionProvider.getText()+" " + identifier, descriptions);
 	}
 
 	protected Iterable<? extends JvmFeature> getFeaturesForType(JvmTypeReference type, IJvmFeatureDescriptionProvider descriptionProvider) {
@@ -205,40 +191,35 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 	public Iterable<JvmTypeReference> linearizeTypeHierarchy(JvmTypeReference typeRef) {
 		if (typeRef == null)
 			return Collections.emptyList();
-		final Iterable<JvmTypeReference> result = concat(singleton(typeRef), superTypeCollector.collectSuperTypes(typeRef));
-		if (typeRef.getType() instanceof JvmPrimitiveType) {
-			JvmType jvmType = primitives.getWrapperType((JvmPrimitiveType) typeRef.getType());
-			JvmParameterizedTypeReference wrapperReference = typesFactory.createJvmParameterizedTypeReference();
-			wrapperReference.setType(jvmType);
-			return concat(result,concat(singleton(wrapperReference), superTypeCollector.collectSuperTypes(wrapperReference)));
-		}
-		if (typeRef.getType() instanceof JvmArrayType) {
-			JvmArrayType arrayType = (JvmArrayType) typeRef.getType();
-			JvmTypeReference componentType = arrayType.getComponentType();
-			if (primitives.isPrimitive(componentType)) {
-				JvmType wrapperType = primitives.getWrapperType((JvmPrimitiveType) componentType.getType());
-				componentType = typeRefs.createTypeRef(wrapperType);
+		final List<JvmTypeReference> result = Lists.newArrayList(typeRef);
+		final Set<JvmType> visited = Sets.newHashSet(typeRef.getType());
+		SuperTypeCollector.SuperTypeAcceptor acceptor = new SuperTypeCollector.SuperTypeAcceptor() {
+			
+			
+			public boolean accept(JvmTypeReference superType, int distance) {
+				if (visited.add(superType.getType())) {
+					result.add(superType);
+					return true;
+				}
+				return false;
 			}
-			JvmTypeReference iterable = typeRefs.getTypeForName(Iterable.class, getRealComponentType(arrayType), componentType);
-			return concat(result,linearizeTypeHierarchy(iterable));
+			
+		};
+		superTypeCollector.collectSuperTypes(typeRef, acceptor);
+		for(JvmTypeReference synonym: synonymTypeProvider.getSynonymTypes(typeRef)) {
+			if (visited.add(synonym.getType())) {
+				result.add(synonym);
+				superTypeCollector.collectSuperTypes(synonym, acceptor);
+			}
 		}
 		return result;
 	}
 	
-	protected JvmType getRealComponentType(JvmArrayType arrayType) {
-		final JvmType type = arrayType.getComponentType().getType();
-		if (type instanceof JvmArrayType) {
-			return getRealComponentType((JvmArrayType) type);
-		}
-		return type;
-	}
-
-
-	protected static class JvmFeatureDescriptions {
+	protected static class JvmFeatureDescriptionList {
 		private String text;
 		private Iterable<JvmFeatureDescription> descriptions;
 
-		public JvmFeatureDescriptions(String text, Iterable<JvmFeatureDescription> descriptions) {
+		public JvmFeatureDescriptionList(String text, Iterable<JvmFeatureDescription> descriptions) {
 			super();
 			this.text = text;
 			this.descriptions = descriptions;
