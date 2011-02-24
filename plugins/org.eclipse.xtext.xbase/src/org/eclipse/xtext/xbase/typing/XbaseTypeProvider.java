@@ -33,7 +33,6 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
@@ -103,7 +102,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 
 	@Inject
 	private SuperTypeCollector collector;
-
+	
 	protected JvmTypeReference _expectedType(XAssignment assignment, EReference reference, int index, boolean rawType) {
 		if (reference == XbasePackage.Literals.XASSIGNMENT__VALUE) {
 			JvmIdentifiableElement feature = assignment.getFeature();
@@ -334,27 +333,9 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	}
 
 	protected JvmTypeReference _expectedType(XForLoopExpression expr, EReference reference, int index, boolean rawType) {
-		if (reference == XbasePackage.Literals.XFOR_LOOP_EXPRESSION__FOR_EXPRESSION) {
-			final JvmParameterizedTypeReference iterableType = (JvmParameterizedTypeReference) typeReferences
-					.getTypeForName(Iterable.class, expr);
-			if (rawType)
-				return iterableType;
-			iterableType.getArguments().clear();
-			JvmWildcardTypeReference wildCard = factory.createJvmWildcardTypeReference();
-			JvmUpperBound upperBound = factory.createJvmUpperBound();
-			wildCard.getConstraints().add(upperBound);
-			iterableType.getArguments().add(wildCard);
-			// infer the type argument for the iterable if a type has been specified
-			if (expr.getDeclaredParam().getParameterType() != null) {
-				JvmTypeReference paramType = EcoreUtil2.clone(expr.getDeclaredParam().getParameterType());
-				upperBound.setTypeReference(paramType);
-			} else {
-				JvmTypeReference objectType = typeReferences.getTypeForName(Object.class, expr);
-				upperBound.setTypeReference(objectType);
-			}
-			return iterableType;
-		}
-		return null; // no other expectations
+		// Unless we can have multiple possible expected types (i.e. array and iterable), we shouldn't expect anything here
+		// The conformance test is done explicitly in the validator.
+		return null; // no expectations
 	}
 
 	protected JvmTypeReference _expectedType(XAbstractWhileExpression expr, EReference reference, int index,

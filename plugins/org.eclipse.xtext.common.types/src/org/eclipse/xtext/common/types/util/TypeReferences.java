@@ -101,6 +101,11 @@ public class TypeReferences {
 		throw new IllegalArgumentException(left.getType().getIdentifier() + " is not generic.");
 	}
 
+	public JvmTypeReference wildCard() {
+		JvmWildcardTypeReference result = factory.createJvmWildcardTypeReference();
+		return result;
+	}
+	
 	public JvmTypeReference wildCardExtends(JvmTypeReference clone) {
 		JvmWildcardTypeReference result = factory.createJvmWildcardTypeReference();
 		JvmUpperBound upperBound = factory.createJvmUpperBound();

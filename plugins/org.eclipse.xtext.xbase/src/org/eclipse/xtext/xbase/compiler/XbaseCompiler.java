@@ -10,12 +10,9 @@ package org.eclipse.xtext.xbase.compiler;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -49,9 +46,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	@Inject 
 	private TypeReferences typeRefs;
 	
-	@Inject 
-	private Primitives primitives;
-
 	protected void openBlock(XExpression xExpression, IAppendable b) {
 		if (xExpression instanceof XBlockExpression) {
 			return;
@@ -229,22 +223,11 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		String varName = declareNameInVariableScope(expr.getDeclaredParam(), b);
 		b.append(varName);
 		b.append(" : ");
-		JvmTypeReference type = getTypeProvider().getType(expr.getForExpression());
-		if (typeRefs.isArray(type))
-			type = getIterableForArrayType(type, expr);
-		internalToConvertedExpression(expr.getForExpression(), b, type);
+		internalToJavaExpression(expr.getForExpression(), b);
 		b.append(") ");
 		openBlock(expr.getEachExpression(), b);
 		internalToJavaStatement(expr.getEachExpression(), b, false);
 		closeBlock(expr.getEachExpression(), b);
-	}
-	
-	//TODO replace me
-	protected JvmTypeReference getIterableForArrayType(JvmTypeReference arrayType, EObject context) {
-		if (!typeRefs.isArray(arrayType))
-			throw new IllegalArgumentException(arrayType + " not an array.");
-		final JvmTypeReference componentType = ((JvmArrayType) arrayType.getType()).getComponentType();
-		return typeRefs.getTypeForName(Iterable.class, context, primitives.asWrapperTypeIfPrimitive(componentType));
 	}
 
 	public void _toJavaStatement(XConstructorCall expr, IAppendable b, boolean isReferenced) {

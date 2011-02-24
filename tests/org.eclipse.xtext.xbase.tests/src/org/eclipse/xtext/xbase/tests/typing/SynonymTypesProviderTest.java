@@ -59,6 +59,10 @@ public class SynonymTypesProviderTest extends AbstractXbaseTestCase {
 		assertSynonymTypes("null as java.util.List<java.lang.String>", "java.lang.String[]");
 	}
 	
+	public void testListToArray_01() throws Exception {
+		assertSynonymTypes("null as Iterable<? extends Integer>", "java.lang.Integer[]");
+	}
+	
 	public void testFindCompatibleSynonymType_00() throws Exception {
 		assertCompatibleSynonym("null as int", Integer.class, "java.lang.Integer");
 	}
