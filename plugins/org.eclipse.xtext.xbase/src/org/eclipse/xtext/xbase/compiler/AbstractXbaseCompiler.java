@@ -61,13 +61,13 @@ public abstract class AbstractXbaseCompiler {
 			"_toJavaStatement", 3, 3, this);
 
 	public void compile(XExpression obj, IAppendable appendable) {
-		boolean isReferenced = !isPrimitiveVoid(obj);
-		compile(obj, appendable, isReferenced);
+		boolean generateImplicitReturn = !isPrimitiveVoid(obj);
+		compile(obj, appendable, generateImplicitReturn);
 	}
 	
-	public void compile(XExpression obj, IAppendable appendable, boolean isReferenced) {
-		internalToJavaStatement(obj, appendable, isReferenced);
-		if (isReferenced) {
+	public void compile(XExpression obj, IAppendable appendable, boolean generateImplicitReturn) {
+		internalToJavaStatement(obj, appendable, generateImplicitReturn);
+		if (generateImplicitReturn) {
 			appendable.append("\nreturn ");
 			internalToJavaExpression(obj, appendable);
 			appendable.append(";");

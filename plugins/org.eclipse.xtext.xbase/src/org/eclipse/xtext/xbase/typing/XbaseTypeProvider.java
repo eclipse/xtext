@@ -767,6 +767,15 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		}
 	}
 	
+	protected void _earlyExits(XAbstractFeatureCall expr, EarlyExitAcceptor a) {
+		if (expr.getFeature() instanceof JvmOperation) {
+			JvmOperation op  =(JvmOperation) expr.getFeature();
+			EList<JvmTypeReference> exceptions = op.getExceptions();
+			a.thrown.addAll(exceptions);
+		}
+		_earlyExits((EObject)expr, a);
+	}
+	
 	protected void _earlyExits(XTryCatchFinallyExpression expr, EarlyExitAcceptor a) {
 		EarlyExitAcceptor acceptor = new EarlyExitAcceptor();
 		internalCollectEarlyExits(expr.getExpression(), acceptor);

@@ -1,9 +1,5 @@
 package org.eclipse.xtext.xtend2.typing;
 
-import static com.google.common.collect.Sets.*;
-
-import java.util.Set;
-
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -52,7 +48,7 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 
 	protected JvmTypeReference _expectedType(XtendFunction function, EReference reference, int index, boolean rawType) {
 		if (reference == Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION) {
-			JvmTypeReference declaredOrInferredReturnType = getDeclaredOrInferredReturnType(function);
+			JvmTypeReference declaredOrInferredReturnType = getDeclaredOrOverriddenReturnType(function);
 			if (declaredOrInferredReturnType == null || typeRefs.is(declaredOrInferredReturnType, Void.TYPE))
 				return null;
 			return function.getReturnType();
@@ -74,25 +70,17 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 		return typeReference;
 	}
 
-	private ThreadLocal<Set<XtendFunction>> currentComputation = new ThreadLocal<Set<XtendFunction>>();
-
 	protected JvmTypeReference _typeForIdentifiable(XtendFunction func, boolean rawType) {
-		JvmTypeReference declaredOrInferredReturnType = getDeclaredOrInferredReturnType(func);
+		JvmTypeReference declaredOrInferredReturnType = getDeclaredOrOverriddenReturnType(func);
 		if (declaredOrInferredReturnType != null)
 			return declaredOrInferredReturnType;
-		Set<XtendFunction> computations = getCurrentComputation();
-		if (computations.add(func)) {
-			try {
-				return typeProvider.getType(func.getExpression(), rawType);
-			} finally {
-				computations.remove(func);
-			}
-		} else {
-			return typeRefs.getTypeForName(Object.class, func);
-		}
+		JvmTypeReference returnType = typeProvider.getCommonReturnType(func.getExpression(), true);
+		if (returnType!=null)
+			return returnType;
+		return typeRefs.getTypeForName(Object.class, func);
 	}
 
-	protected JvmTypeReference getDeclaredOrInferredReturnType(XtendFunction func) {
+	protected JvmTypeReference getDeclaredOrOverriddenReturnType(XtendFunction func) {
 		if (func.getReturnType() != null)
 			return func.getReturnType();
 		if (func.isOverride()) {
@@ -113,15 +101,6 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 			}
 		}
 		return null;
-	}
-
-	protected Set<XtendFunction> getCurrentComputation() {
-		Set<XtendFunction> set = currentComputation.get();
-		if (set == null) {
-			set = newHashSet();
-			currentComputation.set(set);
-		}
-		return set;
 	}
 
 	protected JvmTypeReference _typeForIdentifiable(JvmGenericType type, boolean rawType) {
