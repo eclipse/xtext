@@ -19,7 +19,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -52,12 +55,22 @@ public class SynonymTypesProvider {
 			JvmTypeReference typeArg = primitives.asWrapperTypeIfPrimitive(array.getComponentType());
 			JvmTypeReference iterable = typeRefs.getTypeForName(List.class, findContext(array), typeArg);
 			return singleton(iterable);
-		} else if (typeRefs.isInstanceOf(type, List.class)) {
+		} else if (isList(type)) {
 			JvmTypeReference componentType = null;
 			if (type instanceof JvmParameterizedTypeReference) {
 				EList<JvmTypeReference> arguments = ((JvmParameterizedTypeReference) type).getArguments();
 				if (arguments.size()==1) {
-					componentType = arguments.get(0);
+					final JvmTypeReference jvmTypeReference = arguments.get(0);
+					componentType = jvmTypeReference;
+					if (componentType instanceof JvmWildcardTypeReference) {
+						EList<JvmTypeConstraint> list = ((JvmWildcardTypeReference) componentType).getConstraints();
+						componentType = typeRefs.getTypeForName(Object.class, findContext(type.getType()));
+						for (JvmTypeConstraint constraint : list) {
+							if (constraint instanceof JvmUpperBound) {
+								componentType = constraint.getTypeReference();
+							}
+						}
+					}
 				}
 			}
 			if (componentType == null)
@@ -66,6 +79,10 @@ public class SynonymTypesProvider {
 			return singleton(result);
 		}
 		return emptySet();
+	}
+
+	protected boolean isList(JvmTypeReference type) {
+		return typeRefs.is(type, List.class) || typeRefs.is(type, Iterable.class) || typeRefs.is(type, Collection.class);
 	}
 
 	protected EObject findContext(JvmType type) {

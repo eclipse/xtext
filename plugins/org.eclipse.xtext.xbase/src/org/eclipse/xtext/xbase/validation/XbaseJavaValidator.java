@@ -29,11 +29,13 @@ import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
@@ -56,6 +58,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Inject
 	private TypesFactory factory;
+	
+	@Inject
+	private SynonymTypesProvider synonymTypeProvider;
 
 	@Check
 	public void checkTypes(XExpression obj) {
@@ -67,8 +72,41 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			if (actualType == null || actualType.getType() == null)
 				return;
 			if (!conformanceComputer.isConformant(expectedType, actualType))
-				error("Incompatible types. Expected " + canonicalName(expectedType) + " but was "
+				error("Incompatible types. Expected " + getNameOfTypes(expectedType) + " but was "
 						+ canonicalName(actualType), obj, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+						INCOMPATIBLE_TYPES);
+		} catch (WrappedException e) {
+			throw new WrappedException("XbaseJavaValidator#checkTypes for " + obj + " caused: "
+					+ e.getCause().getMessage(), e);
+		}
+	}
+	
+	protected String getNameOfTypes(JvmTypeReference expectedType) {
+		StringBuilder result = new StringBuilder(canonicalName(expectedType));
+		Iterable<JvmTypeReference> types = synonymTypeProvider.getSynonymTypes(expectedType);
+		for (JvmTypeReference jvmTypeReference : types) {
+			result.append(" or ").append(canonicalName(jvmTypeReference));
+		}
+		return result.toString();
+	}
+	
+	@Check
+	public void checkTypes(XForLoopExpression obj) {
+		try {
+			JvmTypeReference actualType = typeProvider.getType(obj.getForExpression());
+			if (actualType == null || actualType.getType() == null)
+				return;
+			
+			JvmType iterable = typeRefs.findDeclaredType(Iterable.class, obj);
+			JvmTypeReference argument = typeRefs.wildCard();
+			JvmTypeReference expected = obj.getDeclaredParam().getParameterType();
+			if (expected!=null) {
+				argument = typeRefs.wildCardExtends(expected);
+			}
+			JvmParameterizedTypeReference expectedType = typeRefs.createTypeRef(iterable, argument);
+			if (!conformanceComputer.isConformant(expectedType, actualType))
+				error("Incompatible types. Expected " + getNameOfTypes(expectedType) + " but was "
+						+ canonicalName(actualType), obj.getForExpression(), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
 						INCOMPATIBLE_TYPES);
 		} catch (WrappedException e) {
 			throw new WrappedException("XbaseJavaValidator#checkTypes for " + obj + " caused: "
@@ -133,7 +171,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			JvmDeclaredType targetType = (JvmDeclaredType) targetTypeRef.getType();
 			if (targetType.isFinal()) {
 				if (!conformanceComputer.isConformant(cast.getType(), targetTypeRef)) {
-					error("Cannot cast element of sealed type " + canonicalName(targetTypeRef) + " to "
+					error("Cannot cast element of sealed type " + getNameOfTypes(targetTypeRef) + " to "
 							+ canonicalName(cast.getType()), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
 							INVALID_CAST);
 				} else if (conformanceComputer.isConformant(cast.getType(), targetTypeRef)) {
@@ -146,7 +184,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 					JvmType type = cast.getType().getType();
 					if (type instanceof JvmGenericType && !((JvmGenericType) type).isInterface()) {
 						if (!conformanceComputer.isConformant(targetTypeRef, cast.getType())) {
-							error("type mismatch: cannot convert from " + canonicalName(targetTypeRef) + " to "
+							error("type mismatch: cannot convert from " + getNameOfTypes(targetTypeRef) + " to "
 									+ canonicalName(cast.getType()), null,
 									ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_CAST);
 						}
@@ -162,12 +200,12 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if (expressionTypeRef.getType() instanceof JvmDeclaredType) {
 			boolean isConformant = isConformant(instanceOfExpression.getType(), expressionTypeRef);
 			if (isConformant) {
-				warning("The expression of type " + canonicalName(expressionTypeRef) + " is already of type "
+				warning("The expression of type " + getNameOfTypes(expressionTypeRef) + " is already of type "
 						+ canonicalName(instanceOfExpression.getType()), null,
 						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, OBSOLETE_INSTANCEOF);
 			} else {
 				if (isFinal(expressionTypeRef)) {
-					error("Incompatible conditional operand types " + canonicalName(expressionTypeRef) + " and "
+					error("Incompatible conditional operand types " + getNameOfTypes(expressionTypeRef) + " and "
 							+ canonicalName(instanceOfExpression.getType()), null,
 							ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_INSTANCEOF);
 				}

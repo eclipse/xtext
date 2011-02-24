@@ -119,19 +119,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		JvmTypeReference paramType = func.getParameters().get(0).getParameterType();
 		assertNotSame(typeParamDecl,paramType.getType());
 	}
-//TODO	
-//	public void testFeatureScope_0() throws Exception {
-//		XtendFile file = file ("import java.lang.String class X { String foo() : 'hello world'; String bar(String param) : foo()+param;}");
-//		XtendClass xClass = file.getClasses().get(0);
-//		XtendFunction func  = (XtendFunction) xClass.getMembers().get(1);
-//		XBinaryOperation expression = (XBinaryOperation) func.getExpression();
-//		EList<XExpression> list = expression.getParams();
-//		XAbstractFeatureCall featureCall1 = (XAbstractFeatureCall) list.get(0);
-//		XAbstractFeatureCall featureCall2 = (XAbstractFeatureCall) list.get(1);
-//		assertEquals(featureCall1.getFeatureName(), xClass.getMembers().get(0), featureCall1.getFeature());
-//		assertEquals(func.getParameters().get(0), featureCall2.getFeature());
-//	}
-	
+
 	public void testFeatureScope_1() throws Exception {
 		XtendFile file = file ("class X { String foo() 'hello world' String bar(String foo) foo}");
 		XtendClass xClass = file.getXtendClass();
@@ -139,15 +127,6 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		XAbstractFeatureCall featureCall1 = (XAbstractFeatureCall) func.getExpression();
 		assertEquals(func.getParameters().get(0), featureCall1.getFeature());
 	}
-//TODO	
-//	public void testFeatureScope_2() throws Exception {
-//		XtendFile file = file ("import java.lang.String class X { String foo() : 'hello world'; String bar(String foo) { String foo = 'holla'; foo;}}");
-//		XtendClass xClass = file.getClasses().get(0);
-//		XtendFunction func  = (XtendFunction) xClass.getMembers().get(1);
-//		XBlockExpression block = (XBlockExpression) func.getExpression();
-//		XAbstractFeatureCall featureCall1 = (XAbstractFeatureCall) block.getExpressions().get(1);
-//		assertEquals(block.getExpressions().get(0), featureCall1.getFeature());
-//	}
 	
 	public void testFeatureScope_3() throws Exception {
 		XtendFile file = file ("import java.lang.String class X { String foo(String foo) [String foo|foo]}");
@@ -165,15 +144,6 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		XMemberFeatureCall call = (XMemberFeatureCall) func.getExpression();
 		assertEquals("length", ((JvmOperation)call.getFeature()).getSimpleName());
 	}
-	
-//TODO should be tested in Xbase
-//	public void testOperatorOverloading_1() throws Exception {
-//		XtendFile file = file ("import java.util.List class X { foo(List<String> foo) : foo += 'bar';}");
-//		XtendClass xClass = file.getClasses().get(0);
-//		XtendFunction func  = (XtendFunction) xClass.getMembers().get(0);
-//		XBinaryOperation call = (XBinaryOperation) func.getExpression();
-//		assertEquals("add", ((JvmOperation)call.getFeature()).getSimpleName());
-//	}
 	
 	public void testImplicitPackageImport() throws Exception {
 		XtendFile file = file("package java.io class Foo implements Serializable {}");

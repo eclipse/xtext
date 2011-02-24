@@ -379,7 +379,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	protected Object wrapArray(Object result, JvmTypeReference jvmTypeReference) {
-		if (typeRefs.isInstanceOf(jvmTypeReference, Iterable.class)) {
+		if (typeRefs.is(jvmTypeReference, List.class) || typeRefs.is(jvmTypeReference, Iterable.class)) {
 			return Conversions.doWrapArray(result);
 		}
 		return result;
@@ -392,6 +392,8 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		Iterator<?> iter = null;
 		if (iterableOrIterator instanceof Iterable<?>) {
 			iter = ((Iterable<?>) iterableOrIterator).iterator();
+		} else if (iterableOrIterator.getClass().isArray()) {
+			iter = ((Iterable<?>) Conversions.doWrapArray(iterableOrIterator)).iterator();
 		} else {
 			return throwClassCastException(forLoop.getForExpression(), iterableOrIterator, java.lang.Iterable.class);
 		}

@@ -280,13 +280,12 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				new Character('c')), "{ var java.util.List<Character> this = ('abc'.toCharArray as Iterable<Character>).toList() this }");
 	}
 	
-	// TODO Fix me as soon as arrays are synonym to lists
-//	public void testFeatureCall_03_2() {
-//		assertEvaluatesTo(Lists.newArrayList(
-//				new Character('a'), 
-//				new Character('b'),
-//				new Character('c')), "{ var java.util.List<Character> this = 'abc'.toCharArray this }");
-//	}
+	public void testFeatureCall_03_2() {
+		assertEvaluatesTo(Lists.newArrayList(
+				new Character('a'), 
+				new Character('b'),
+				new Character('c')), "{ var java.util.List<Character> this = 'abc'.toCharArray this }");
+	}
 	
 	public void testFeatureCall_04() {
 		assertEvaluatesTo(new Integer("literal".length()), "{ var this = 'literal' length }");
@@ -432,6 +431,17 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 
 	public void testForLoop_03() {
 		assertEvaluatesWithException(ClassCastException.class, "{for(x: 'abc' as Object as java.util.List<Character>) null null}");
+	}
+	
+	public void testForLoop_04() {
+		assertEvaluatesTo("foobar", 
+				"{ " +
+				" val list = new java.util.ArrayList<String>()" +
+				" list += 'bar'" +
+				" var result = 'foo'" +
+				" for( e : list) result = result + e" +
+				" result" +
+				"}");
 	}
 	
 	public void testWhileLoop_01() {
@@ -841,7 +851,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"  var client = new testdata.ArrayClient()" +
 				"  var intArray = client.toIntArray(32, 7)" +
 				"  client.inplaceAdd10(intArray)" +
-				"  var iter = (intArray as Iterable<Integer>).iterator" +
+				"  var iter = (intArray as java.util.List<Integer>).iterator" +
 				"  iter.next" +
 				"}");
 	}
@@ -864,7 +874,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"  var client = new testdata.ArrayClient()" +
 				"  var stringArray = client.toStringArray('literal', 'other')" +
 				"  client.inplaceSwap(stringArray)" +
-				"  var iter = (stringArray as Iterable<String>).iterator" +
+				"  var iter = (stringArray as java.util.List<String>).iterator" +
 				"  iter.next" +
 				"  iter.next" +
 				"}");
