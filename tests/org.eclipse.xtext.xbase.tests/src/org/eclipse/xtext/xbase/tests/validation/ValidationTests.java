@@ -12,6 +12,7 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
+import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -104,6 +105,37 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	public void testInvalidEarlyExit_05() throws Exception {
 		XExpression expression = expression("if (true) return 1 else throw new Exception()");
 		helper.assertNoErrors(expression);
+	}
+	
+	public void testUnreachableCode_00() throws Exception {
+		XExpression expression = expression(
+				"{" +
+				"	for (e : new java.util.ArrayList<String>()) " +
+				"      throw new Exception() " +
+				"   null" +
+				"}");
+		helper.assertNoErrors(expression);
+	}
+	
+	public void testUnreachableCode_01() throws Exception {
+		XExpression expression = expression(
+				"{" +
+				"	while (false) " +
+				"      throw new Exception() " +
+				"   null" +
+		"}");
+		helper.assertNoErrors(expression);
+	}
+	
+	public void testUnreachableCode_02() throws Exception {
+		XExpression expression = expression(
+				"{" +
+				"	do " +
+				"      throw new Exception() " +
+				"   while (false)" +
+				"   null" +
+		"}");
+		helper.assertError(((XBlockExpression)expression).getExpressions().get(1), XbasePackage.Literals.XNULL_LITERAL, UNREACHABLE_CODE);
 	}
 
 	public void testFeatureCallOnVoid() throws Exception {
