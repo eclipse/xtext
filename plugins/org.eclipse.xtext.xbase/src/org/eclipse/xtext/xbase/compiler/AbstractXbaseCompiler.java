@@ -26,6 +26,7 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
@@ -53,6 +54,9 @@ public abstract class AbstractXbaseCompiler {
 	protected ITypeProvider getTypeProvider() {
 		return typeProvider;
 	}
+	
+	@Inject
+	private IEarlyExitComputer exitComputer;
 
 	private PolymorphicDispatcher<Void> toJavaExprDispatcher = PolymorphicDispatcher.createForSingleTarget(
 			"_toJavaExpression", 2, 2, this);
@@ -60,17 +64,18 @@ public abstract class AbstractXbaseCompiler {
 	private PolymorphicDispatcher<Void> toJavaStatementDispatcher = PolymorphicDispatcher.createForSingleTarget(
 			"_toJavaStatement", 3, 3, this);
 
-	public void compile(XExpression obj, IAppendable appendable) {
-		boolean generateImplicitReturn = !isPrimitiveVoid(obj);
-		compile(obj, appendable, generateImplicitReturn);
-	}
-	
 	public void compile(XExpression obj, IAppendable appendable, boolean generateImplicitReturn) {
-		internalToJavaStatement(obj, appendable, generateImplicitReturn);
-		if (generateImplicitReturn) {
-			appendable.append("\nreturn ");
-			internalToJavaExpression(obj, appendable);
-			appendable.append(";");
+		final boolean primitiveVoid = isPrimitiveVoid(obj);
+		final boolean earlyExit = exitComputer.isEarlyExit(obj);
+		internalToJavaStatement(obj, appendable, generateImplicitReturn && !primitiveVoid && !earlyExit);
+		if (generateImplicitReturn && !earlyExit) {
+				appendable.append("\nreturn ");
+				if (primitiveVoid) {
+					appendable.append(null);
+				} else {
+					internalToJavaExpression(obj, appendable);
+				}
+				appendable.append(";");
 		}
 	}
 	

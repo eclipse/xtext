@@ -124,7 +124,7 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 		try {
 			model = expression(xtendCode, true);
 			XbaseCompiler compiler = injector.getInstance(XbaseCompiler.class);
-			compiler.compile(model, appandable);
+			compiler.compile(model, appandable, true);
 		} catch (Exception e) {
 			throw new RuntimeException("Xtend compilation failed", e);
 		}
