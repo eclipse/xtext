@@ -103,6 +103,9 @@ public class XtextPluginImages {
 	public static final ImageDescriptor DESC_OPEN_DECLARATION = create(PATH_LCL, "goto_input.gif");
 	public static final ImageDescriptor DESC_OPEN_DECLARATION_DISABLED = create(PATH_LCL_DISABLED, "goto_input.gif");
 	
+	public static final ImageDescriptor DESC_MARK_OCCURRENCES = create(PATH_LCL, "mark_occurrences.gif");
+	public static final ImageDescriptor DESC_MARK_OCCURRENCES_DISABLED = create(PATH_LCL_DISABLED, "mark_occurrences.gif");
+	
 	/**
 	 * WIZ
 	 */
