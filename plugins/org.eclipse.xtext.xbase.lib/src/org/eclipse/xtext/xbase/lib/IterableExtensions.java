@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedSet;
 
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
@@ -83,10 +84,12 @@ public class IterableExtensions {
 	public static <T> T last(Iterable<T> iterable) {
 		if (iterable instanceof List<?>) {
 			List<T> list = (List<T>) iterable;
-			ListIterator<T> iterator = list.listIterator(list.size());
-			if(iterator.hasPrevious())
-				return iterator.previous();
-			return null;
+			if (list.isEmpty())
+				return null;
+			return list.get(list.size() - 1);
+		} else if (iterable instanceof SortedSet) {
+			SortedSet<T> sortedSet = (SortedSet<T>) iterable;
+			return sortedSet.last();
 		} else {
 			T result = null;
 			for (T t : iterable) {
@@ -142,7 +145,7 @@ public class IterableExtensions {
 						int i = count;
 						while(i > 0 && delegate.hasNext()) {
 							delegate.next();
-							i++;
+							i--;
 						}
 					}
 					
@@ -248,11 +251,11 @@ public class IterableExtensions {
 			Set<T> result = (Set<T>) iterable;
 			return result;
 		}
-		return Sets.newHashSet(iterable);
+		return Sets.newLinkedHashSet(iterable);
 	}
 	
 	public static <K, V> Map<K, V> toInvertedMap(Iterable<K> iterable, Function1<? super K, V> computeValues) {
-		Map<K, V> result = Maps.newHashMap();
+		Map<K, V> result = Maps.newLinkedHashMap();
 		for(K k: iterable) {
 			result.put(k, computeValues.apply(k));
 		}
@@ -260,7 +263,7 @@ public class IterableExtensions {
 	}
 	
 	public static <K, V> Map<K, V> toMap(Iterable<V> iterable, Function1<? super V, K> computeKeys) {
-		Map<K, V> result = Maps.newHashMap();
+		Map<K, V> result = Maps.newLinkedHashMap();
 		for(V v: iterable) {
 			result.put(computeKeys.apply(v), v);
 		}

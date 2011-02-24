@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -23,6 +24,7 @@ import com.google.common.collect.ImmutableSortedSet;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
 public class CollectionExtensions {
 
@@ -83,4 +85,9 @@ public class CollectionExtensions {
 	public static <K, V> SortedMap<K, V> immutableCopy(SortedMap<K, ? extends V> map) {
 		return ImmutableSortedMap.copyOfSorted(map);
 	}
+	
+	public static <T> boolean addAll(Collection<T> collection, T... elements) {
+		return collection.addAll(Arrays.asList(elements));
+	}
+	
 }
