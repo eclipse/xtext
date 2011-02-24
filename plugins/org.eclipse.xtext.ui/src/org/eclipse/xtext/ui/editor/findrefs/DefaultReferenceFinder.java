@@ -84,9 +84,9 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 		});
 	}
 
-	protected void findLocalReferences(Resource resource, Set<EObject> targets,
+	public void findLocalReferences(Resource resource, Set<EObject> targets,
 			IAcceptor<IReferenceDescription> acceptor, Predicate<IReferenceDescription> filter, IProgressMonitor monitor) {
-		if (monitor.isCanceled())
+		if (monitor != null && monitor.isCanceled())
 			return;
 		if (targets != null && !targets.isEmpty()) {
 			Map<EObject, Collection<Setting>> targetResourceInternalCrossRefs = CrossReferencer.find(Collections
