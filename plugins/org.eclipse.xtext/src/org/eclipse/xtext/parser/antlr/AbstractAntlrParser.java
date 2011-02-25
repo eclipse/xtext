@@ -81,12 +81,13 @@ public abstract class AbstractAntlrParser extends AbstractParser {
 	protected abstract String getDefaultRuleName();
 
 	protected IParseResult parse(String ruleName, CharStream in) {
-		return doParse(ruleName, in, nodeModelBuilder.get());
+		return doParse(ruleName, in, nodeModelBuilder.get(), 0);
 	}
 
-	protected IParseResult doParse(String ruleName, CharStream in, NodeModelBuilder nodeModelBuilder) {
+	protected IParseResult doParse(String ruleName, CharStream in, NodeModelBuilder nodeModelBuilder, int initialLookAhead) {
 		TokenSource tokenSource = createLexer(in);
 		XtextTokenStream tokenStream = createTokenStream(tokenSource);
+		tokenStream.initCurrentLookAhead(initialLookAhead);
 		setInitialHiddenTokens(tokenStream);
 		AbstractInternalAntlrParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
@@ -119,11 +120,11 @@ public abstract class AbstractAntlrParser extends AbstractParser {
 		}
 	}
 	
-	public IParseResult parse(RuleCall ruleCall, Reader reader) {
+	public IParseResult parse(RuleCall ruleCall, Reader reader, int initialLookAhead) {
 		try {
 			NodeModelBuilder builder = nodeModelBuilder.get();
 			builder.setForcedFirstGrammarElement(ruleCall);
-			IParseResult parseResult = doParse(ruleCall.getRule().getName(), new ANTLRReaderStream(reader), builder);
+			IParseResult parseResult = doParse(ruleCall.getRule().getName(), new ANTLRReaderStream(reader), builder, initialLookAhead);
 			return parseResult;
 		} catch (IOException e) {
 			throw new WrappedException(e);

@@ -25,7 +25,7 @@ public class FileExtensionProvider {
 	@Inject
 	protected void setExtensions(@Named(Constants.FILE_EXTENSIONS)String extensions) {
 		String[] split = extensions.split(",");
-		this.fileExtensions = Sets.newHashSet();
+		this.fileExtensions = Sets.newLinkedHashSet();
 		for (String string : split) {
 			this.fileExtensions.add(string);
 		}
@@ -33,6 +33,10 @@ public class FileExtensionProvider {
 	
 	public Set<String> getFileExtensions() {
 		return fileExtensions;
+	}
+	
+	public String getPrimaryFileExtension() {
+		return fileExtensions.iterator().next();
 	}
 
 	public boolean isValid(String fileExtension) {

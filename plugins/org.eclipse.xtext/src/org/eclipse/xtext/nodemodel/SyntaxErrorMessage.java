@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel;
 
+import java.util.Arrays;
+
 /**
  * A syntax error message represents a parsing problem. May be produced due to
  * parser or lexer errors. 
@@ -57,6 +59,46 @@ public class SyntaxErrorMessage {
 	 */
 	public String[] getIssueData() {
 		return issueData;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((issueCode == null) ? 0 : issueCode.hashCode());
+		result = prime * result + Arrays.hashCode(issueData);
+		result = prime * result + ((message == null) ? 0 : message.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SyntaxErrorMessage other = (SyntaxErrorMessage) obj;
+		if (issueCode == null) {
+			if (other.issueCode != null)
+				return false;
+		} else if (!issueCode.equals(other.issueCode))
+			return false;
+		if (!Arrays.equals(issueData, other.issueData))
+			return false;
+		if (message == null) {
+			if (other.message != null)
+				return false;
+		} else if (!message.equals(other.message))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "SyntaxErrorMessage [message=" + message + ", issueCode=" + issueCode + ", issueData="
+				+ Arrays.toString(issueData) + "]";
 	}
 
 }
