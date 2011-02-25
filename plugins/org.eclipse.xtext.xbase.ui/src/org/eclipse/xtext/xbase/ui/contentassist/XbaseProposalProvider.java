@@ -83,6 +83,10 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 	@Override
 	public void completeJvmParameterizedTypeReference_Type(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		completeJavaTypes(context, acceptor);
+	}
+
+	protected void completeJavaTypes(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		if (context.getPrefix().length() > 0) {
 			if (Character.isJavaIdentifierStart(context.getPrefix().charAt(0))) {
 				typeProposalProvider.createTypeProposals(this, context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor);
@@ -213,6 +217,10 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 	protected void lookupCrossReference(CrossReference crossReference, EReference reference,
 			ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor,
 			Predicate<IEObjectDescription> filter) {
+		if (reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR) {
+			completeJavaTypes(contentAssistContext, acceptor);
+			return;
+		}
 		// guard for feature call scopes
 		if (!getScopeProvider().isFeatureCallScope(reference)) {
 			super.lookupCrossReference(crossReference, reference, contentAssistContext, acceptor, filter);
