@@ -74,11 +74,11 @@ public class RefactoringIntegrationTest extends AbstractXtend2UITestCase {
 
 	public void testRenameMethod() throws Exception {
 		performRenameTest("Foo", "class Foo { Integer foo() { foo(); 1 }}", "Bar",
-				"class Baz { baz(Foo arg) arg.foo() }", "foo", "bar");
+				"class Baz { baz(Foo arg) {arg.foo()} }", "foo", "bar");
 	}
 
 	public void testRenameClass() throws Exception {
-		performRenameTest("Foo", "class Foo { Foo foo() this }", "Baz", "class Baz { Foo foo() new Foo() }", "Foo",
+		performRenameTest("Foo", "class Foo { Foo foo() {this} }", "Baz", "class Baz { Foo foo() {new Foo()} }", "Foo",
 				"Bar");
 	}
 

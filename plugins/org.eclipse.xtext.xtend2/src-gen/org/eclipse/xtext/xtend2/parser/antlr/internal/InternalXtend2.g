@@ -781,9 +781,9 @@ ruleFunction returns [EObject current=null]
 ((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getFunctionAccess().getExpressionXExpressionParserRuleCall_7_0_0()); 
+	        newCompositeNode(grammarAccess.getFunctionAccess().getExpressionXBlockExpressionParserRuleCall_7_0_0()); 
 	    }
-		lv_expression_15_0=ruleXExpression		{
+		lv_expression_15_0=ruleXBlockExpression		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getFunctionRule());
 	        }
@@ -791,17 +791,31 @@ ruleFunction returns [EObject current=null]
        			$current, 
        			"expression",
         		lv_expression_15_0, 
-        		"XExpression");
+        		"XBlockExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
 )
-    |	otherlv_16=';' 
-    {
-    	newLeafNode(otherlv_16, grammarAccess.getFunctionAccess().getSemicolonKeyword_7_1());
-    }
-))
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getFunctionAccess().getExpressionRichStringParserRuleCall_7_1_0()); 
+	    }
+		lv_expression_16_0=ruleRichString		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getFunctionRule());
+	        }
+       		set(
+       			$current, 
+       			"expression",
+        		lv_expression_16_0, 
+        		"RichString");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?)
 ;
 
 

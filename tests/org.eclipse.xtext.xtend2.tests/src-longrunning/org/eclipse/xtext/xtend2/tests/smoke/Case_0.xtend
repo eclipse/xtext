@@ -14,11 +14,13 @@ class LinkingErrornessModelTestData {
 		}
 	}
 	
-	private isUpper(String s) 
+	private isUpper(String s) {
 		s.toUpperCase == s
+	}
 		
-	private another(String x, String y) 
+	private another(String x, String y) { 
 		y+x
+	}
 	
 
 }

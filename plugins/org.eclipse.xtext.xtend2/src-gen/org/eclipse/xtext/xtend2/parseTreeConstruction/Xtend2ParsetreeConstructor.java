@@ -1523,13 +1523,13 @@ protected class DeclaredDependency_NameAssignment_3_1 extends AssignmentToken  {
  * Function returns XtendFunction:
  * 	(override?="override"? & dispatch?="dispatch"?) ("<" typeParameters+=JvmTypeParameter (","
  * 	typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference? name=ID "(" (parameters+=JvmFormalParameter (","
- * 	parameters+=JvmFormalParameter)*)? ")" (expression=XExpression | ";");
+ * 	parameters+=JvmFormalParameter)*)? ")" (expression=XBlockExpression | expression=RichString)?;
  *
  **/
 
 // (override?="override"? & dispatch?="dispatch"?) ("<" typeParameters+=JvmTypeParameter (","
 // typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference? name=ID "(" (parameters+=JvmFormalParameter (","
-// parameters+=JvmFormalParameter)*)? ")" (expression=XExpression | ";")
+// parameters+=JvmFormalParameter)*)? ")" (expression=XBlockExpression | expression=RichString)?
 protected class Function_Group extends GroupToken {
 	
 	public Function_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1545,6 +1545,7 @@ protected class Function_Group extends GroupToken {
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Function_Alternatives_7(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new Function_RightParenthesisKeyword_6(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
@@ -2145,7 +2146,7 @@ protected class Function_RightParenthesisKeyword_6 extends KeywordToken  {
 
 }
 
-// expression=XExpression | ";"
+// (expression=XBlockExpression | expression=RichString)?
 protected class Function_Alternatives_7 extends AlternativesToken {
 
 	public Function_Alternatives_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2161,14 +2162,14 @@ protected class Function_Alternatives_7 extends AlternativesToken {
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Function_ExpressionAssignment_7_0(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new Function_SemicolonKeyword_7_1(lastRuleCallOrigin, this, 1, inst);
+			case 1: return new Function_ExpressionAssignment_7_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// expression=XExpression
+// expression=XBlockExpression
 protected class Function_ExpressionAssignment_7_0 extends AssignmentToken  {
 	
 	public Function_ExpressionAssignment_7_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2183,7 +2184,7 @@ protected class Function_ExpressionAssignment_7_0 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XExpression_XAssignmentParserRuleCall(this, this, 0, inst);
+			case 0: return new XBlockExpression_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -2194,9 +2195,9 @@ protected class Function_ExpressionAssignment_7_0 extends AssignmentToken  {
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("expression");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXExpressionRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getXBlockExpressionRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getFunctionAccess().getExpressionXExpressionParserRuleCall_7_0_0(); 
+				element = grammarAccess.getFunctionAccess().getExpressionXBlockExpressionParserRuleCall_7_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2214,26 +2215,50 @@ protected class Function_ExpressionAssignment_7_0 extends AssignmentToken  {
 	}	
 }
 
-// ";"
-protected class Function_SemicolonKeyword_7_1 extends KeywordToken  {
+// expression=RichString
+protected class Function_ExpressionAssignment_7_1 extends AssignmentToken  {
 	
-	public Function_SemicolonKeyword_7_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Function_ExpressionAssignment_7_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getFunctionAccess().getSemicolonKeyword_7_1();
+	public Assignment getGrammarElement() {
+		return grammarAccess.getFunctionAccess().getExpressionAssignment_7_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Function_RightParenthesisKeyword_6(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new RichString_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("expression",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("expression");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getRichStringRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getFunctionAccess().getExpressionRichStringParserRuleCall_7_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Function_RightParenthesisKeyword_6(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
 }
 
 

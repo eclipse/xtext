@@ -41,7 +41,7 @@ DeclaredDependency returns DeclaredDependency :
 Function returns XtendFunction :
 	(override?='override'? & dispatch?='dispatch'?) ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
 	(returnType=JvmTypeReference)? name=ID '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
-		(expression=XExpression | ';');
+		(expression=XBlockExpression | expression=RichString )?;
 		
 XStringLiteral returns xbase::XExpression:
 	{xbase::XStringLiteral} value=STRING |

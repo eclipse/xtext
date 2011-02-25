@@ -62,7 +62,7 @@ public class EObjectLocationTests extends AbstractXtend2TestCase {
 	}
 	
 	public void testFullLocationInFile() throws Exception {
-		String model = "class Foo extends Object { Foo foo() this }";
+		String model = "class Foo extends Object { Foo foo() {this }}";
 		XtendClass clazz = clazz(model);
 		JvmGenericType inferredType = xtend2jvmAssociations.getInferredType(clazz);
 		assertEquals(locationInFileProvider.getFullTextRegion(clazz), locationInFileProvider.getFullTextRegion(inferredType));
@@ -74,7 +74,7 @@ public class EObjectLocationTests extends AbstractXtend2TestCase {
 	}
 
 	public void testSignificantLocationInFile() throws Exception {
-		String model = "class Foo extends Object { Foo foo() this }";
+		String model = "class Foo extends Object { Foo foo() {this} }";
 		XtendClass clazz = clazz(model);
 		JvmGenericType inferredType = xtend2jvmAssociations.getInferredType(clazz);
 		assertEquals(locationInFileProvider.getSignificantTextRegion(clazz), locationInFileProvider.getSignificantTextRegion(inferredType));

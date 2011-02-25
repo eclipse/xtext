@@ -11,7 +11,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 	public void testSimple() throws Exception {
 		final String input = "package foo\n" +
 				"class Bar {\n" +
-				"  Integer doStuff(String x) x.length\n" +
+				"  Integer doStuff(String x) {x.length}\n" +
 				"}\n";
 		final String expected = "package foo;\n" + 
 				"\n" +
@@ -31,7 +31,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		final String input = 
 		"package foo\n" +
 		"class Bar {\n" +
-		"  foo() new String()\n" +
+		"  foo() {new String()}\n" +
 		"}\n";
 		final String expected =  
 		"package foo;\n" +
@@ -82,7 +82,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		final String input = 
 			"package foo\n" +
 			"class Bar {\n" +
-			"  foo() new java.util.HashMap<String,java.io.Serializable>()" +
+			"  foo() {new java.util.HashMap<String,java.io.Serializable>()}" +
 			"}\n";
 		final String expected =  
 			"package foo;\n" +
