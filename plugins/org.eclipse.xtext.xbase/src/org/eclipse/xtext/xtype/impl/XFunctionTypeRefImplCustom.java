@@ -29,7 +29,8 @@ public class XFunctionTypeRefImplCustom extends XFunctionTypeRefImpl {
 	public JvmType getType() {
 		if (this.type == null) {
 			// make sure scoping has taken place and installed an IJvmTypeProvider
-			getReturnType().getType();
+			if (returnType != null)
+				returnType.getType();
 			type = TypesFactory.eINSTANCE.createJvmVoid();
 			((InternalEObject)type).eSetProxyURI(computeTypeUri());
 		}

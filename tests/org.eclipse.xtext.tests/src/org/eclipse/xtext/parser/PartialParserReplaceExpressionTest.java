@@ -24,7 +24,7 @@ public class PartialParserReplaceExpressionTest extends AbstractPartialParserRep
 	
 	public void testExpression_2_2() throws Exception {
 		String model = "(a+b+c)*(c/d)";
-		replaceAndReparse(model, 2, 2, "+hugo+egon", "a+hugo+egon+c");
+		replaceAndReparse(model, 2, 2, "+hugo+egon", "(a+hugo+egon+c)");
 	}
 	
 	public void testExpression_8_5() throws Exception {
@@ -34,7 +34,7 @@ public class PartialParserReplaceExpressionTest extends AbstractPartialParserRep
 	
 	public void testExpression_1_2() throws Exception {
 		String model = "(a+b+c)*(c/d)";
-		replaceAndReparse(model, 1, 2, "", "b+c");
+		replaceAndReparse(model, 1, 2, "", "(b+c)");
 	}
 
 	public void testExpression_6_3() throws Exception {
@@ -44,7 +44,7 @@ public class PartialParserReplaceExpressionTest extends AbstractPartialParserRep
 	
 	public void testExpression_3_1_1() throws Exception {
 		String model = "(a+b+c)*(c/d)";
-		replaceAndReparse(model, 3, 1, "(x+y+z)", "a+(x+y+z)+c");
+		replaceAndReparse(model, 3, 1, "(x+y+z)", "(a+(x+y+z)+c)");
 	}
 	
 	public void testExpression_a_b() throws Exception {
@@ -54,6 +54,6 @@ public class PartialParserReplaceExpressionTest extends AbstractPartialParserRep
 	
 	public void testExpression_3_1_2() throws Exception {
 		String model = "(a+b+c)*(c/d)";
-		replaceAndReparse(model, 3, 1, "x)+(b", "a+x)+(b+c");
+		replaceAndReparse(model, 3, 1, "x)+(b", "(a+x)+(b+c)");
 	}
 }
