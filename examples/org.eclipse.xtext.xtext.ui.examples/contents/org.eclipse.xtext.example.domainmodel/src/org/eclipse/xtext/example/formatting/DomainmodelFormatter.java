@@ -29,7 +29,6 @@ public class DomainmodelFormatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap(1, 2, 3).around(f.getAbstractElementRule());
 		c.setLinewrap(1, 2, 3).around(f.getPackageDeclarationRule());
 		c.setLinewrap(1, 1, 2).around(f.getFeatureRule());
-		c.setNoSpace().before(f.getTypeRefAccess().getMultiAsteriskKeyword_1_0());
 		
 		List<Pair<Keyword,Keyword>> pairs = f.findKeywordPairs("{", "}");
 		for (Pair<Keyword, Keyword> pair : pairs) {

@@ -173,62 +173,6 @@ public interface DomainmodelPackage extends EPackage
   int PACKAGE_DECLARATION_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.TypeImpl <em>Type</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.domainmodel.impl.TypeImpl
-   * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getType()
-   * @generated
-   */
-  int TYPE = 4;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE__NAME = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Type</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.DataTypeImpl <em>Data Type</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.domainmodel.impl.DataTypeImpl
-   * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getDataType()
-   * @generated
-   */
-  int DATA_TYPE = 5;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DATA_TYPE__NAME = TYPE__NAME;
-
-  /**
-   * The number of structural features of the '<em>Data Type</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DATA_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
-
-  /**
    * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.EntityImpl <em>Entity</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -236,7 +180,7 @@ public interface DomainmodelPackage extends EPackage
    * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getEntity()
    * @generated
    */
-  int ENTITY = 6;
+  int ENTITY = 4;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -245,16 +189,16 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ENTITY__NAME = TYPE__NAME;
+  int ENTITY__NAME = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Super Type</b></em>' reference.
+   * The feature id for the '<em><b>Super Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENTITY__SUPER_TYPE = TYPE_FEATURE_COUNT + 0;
+  int ENTITY__SUPER_TYPE = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Features</b></em>' containment reference list.
@@ -263,7 +207,7 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ENTITY__FEATURES = TYPE_FEATURE_COUNT + 1;
+  int ENTITY__FEATURES = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Entity</em>' class.
@@ -272,44 +216,7 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ENTITY_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.TypedElementImpl <em>Typed Element</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.domainmodel.impl.TypedElementImpl
-   * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getTypedElement()
-   * @generated
-   */
-  int TYPED_ELEMENT = 13;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPED_ELEMENT__NAME = 0;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPED_ELEMENT__TYPE = 1;
-
-  /**
-   * The number of structural features of the '<em>Typed Element</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPED_ELEMENT_FEATURE_COUNT = 2;
+  int ENTITY_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.FeatureImpl <em>Feature</em>}' class.
@@ -319,7 +226,7 @@ public interface DomainmodelPackage extends EPackage
    * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getFeature()
    * @generated
    */
-  int FEATURE = 7;
+  int FEATURE = 5;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -328,7 +235,7 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FEATURE__NAME = TYPED_ELEMENT__NAME;
+  int FEATURE__NAME = 0;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -337,7 +244,7 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FEATURE__TYPE = TYPED_ELEMENT__TYPE;
+  int FEATURE__TYPE = 1;
 
   /**
    * The number of structural features of the '<em>Feature</em>' class.
@@ -346,54 +253,17 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FEATURE_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 0;
+  int FEATURE_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.StructuralFeatureImpl <em>Structural Feature</em>}' class.
+   * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.PropertyImpl <em>Property</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.domainmodel.impl.StructuralFeatureImpl
-   * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getStructuralFeature()
+   * @see org.eclipse.xtext.example.domainmodel.impl.PropertyImpl
+   * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getProperty()
    * @generated
    */
-  int STRUCTURAL_FEATURE = 8;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STRUCTURAL_FEATURE__NAME = FEATURE__NAME;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STRUCTURAL_FEATURE__TYPE = FEATURE__TYPE;
-
-  /**
-   * The number of structural features of the '<em>Structural Feature</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STRUCTURAL_FEATURE_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.AttributeImpl <em>Attribute</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.domainmodel.impl.AttributeImpl
-   * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getAttribute()
-   * @generated
-   */
-  int ATTRIBUTE = 9;
+  int PROPERTY = 6;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -402,7 +272,7 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTRIBUTE__NAME = STRUCTURAL_FEATURE__NAME;
+  int PROPERTY__NAME = FEATURE__NAME;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -411,62 +281,16 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTRIBUTE__TYPE = STRUCTURAL_FEATURE__TYPE;
+  int PROPERTY__TYPE = FEATURE__TYPE;
 
   /**
-   * The number of structural features of the '<em>Attribute</em>' class.
+   * The number of structural features of the '<em>Property</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ATTRIBUTE_FEATURE_COUNT = STRUCTURAL_FEATURE_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.ReferenceImpl <em>Reference</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.domainmodel.impl.ReferenceImpl
-   * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getReference()
-   * @generated
-   */
-  int REFERENCE = 10;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFERENCE__NAME = STRUCTURAL_FEATURE__NAME;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFERENCE__TYPE = STRUCTURAL_FEATURE__TYPE;
-
-  /**
-   * The feature id for the '<em><b>Opposite</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFERENCE__OPPOSITE = STRUCTURAL_FEATURE_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Reference</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int REFERENCE_FEATURE_COUNT = STRUCTURAL_FEATURE_FEATURE_COUNT + 1;
+  int PROPERTY_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.OperationImpl <em>Operation</em>}' class.
@@ -476,7 +300,7 @@ public interface DomainmodelPackage extends EPackage
    * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getOperation()
    * @generated
    */
-  int OPERATION = 11;
+  int OPERATION = 7;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -515,87 +339,22 @@ public interface DomainmodelPackage extends EPackage
   int OPERATION__PARAMS = FEATURE_FEATURE_COUNT + 1;
 
   /**
+   * The feature id for the '<em><b>Body</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPERATION__BODY = FEATURE_FEATURE_COUNT + 2;
+
+  /**
    * The number of structural features of the '<em>Operation</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int OPERATION_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.ParameterImpl <em>Parameter</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.domainmodel.impl.ParameterImpl
-   * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getParameter()
-   * @generated
-   */
-  int PARAMETER = 12;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PARAMETER__NAME = TYPED_ELEMENT__NAME;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PARAMETER__TYPE = TYPED_ELEMENT__TYPE;
-
-  /**
-   * The number of structural features of the '<em>Parameter</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PARAMETER_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.impl.TypeRefImpl <em>Type Ref</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.domainmodel.impl.TypeRefImpl
-   * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getTypeRef()
-   * @generated
-   */
-  int TYPE_REF = 14;
-
-  /**
-   * The feature id for the '<em><b>Referenced</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE_REF__REFERENCED = 0;
-
-  /**
-   * The feature id for the '<em><b>Multi</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE_REF__MULTI = 1;
-
-  /**
-   * The number of structural features of the '<em>Type Ref</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE_REF_FEATURE_COUNT = 2;
+  int OPERATION_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.example.domainmodel.Visibility <em>Visibility</em>}' enum.
@@ -605,7 +364,7 @@ public interface DomainmodelPackage extends EPackage
    * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getVisibility()
    * @generated
    */
-  int VISIBILITY = 15;
+  int VISIBILITY = 8;
 
 
   /**
@@ -693,37 +452,6 @@ public interface DomainmodelPackage extends EPackage
   EReference getPackageDeclaration_Elements();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.Type <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Type</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.Type
-   * @generated
-   */
-  EClass getType();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.domainmodel.Type#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.Type#getName()
-   * @see #getType()
-   * @generated
-   */
-  EAttribute getType_Name();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.DataType <em>Data Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Data Type</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.DataType
-   * @generated
-   */
-  EClass getDataType();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.Entity <em>Entity</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -734,10 +462,21 @@ public interface DomainmodelPackage extends EPackage
   EClass getEntity();
 
   /**
-   * Returns the meta object for the reference '{@link org.eclipse.xtext.example.domainmodel.Entity#getSuperType <em>Super Type</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.domainmodel.Entity#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Super Type</em>'.
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.example.domainmodel.Entity#getName()
+   * @see #getEntity()
+   * @generated
+   */
+  EAttribute getEntity_Name();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.example.domainmodel.Entity#getSuperType <em>Super Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Super Type</em>'.
    * @see org.eclipse.xtext.example.domainmodel.Entity#getSuperType()
    * @see #getEntity()
    * @generated
@@ -766,45 +505,36 @@ public interface DomainmodelPackage extends EPackage
   EClass getFeature();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.StructuralFeature <em>Structural Feature</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.domainmodel.Feature#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Structural Feature</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.StructuralFeature
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.example.domainmodel.Feature#getName()
+   * @see #getFeature()
    * @generated
    */
-  EClass getStructuralFeature();
+  EAttribute getFeature_Name();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.Attribute <em>Attribute</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.example.domainmodel.Feature#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Attribute</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.Attribute
+   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @see org.eclipse.xtext.example.domainmodel.Feature#getType()
+   * @see #getFeature()
    * @generated
    */
-  EClass getAttribute();
+  EReference getFeature_Type();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.Reference <em>Reference</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.Property <em>Property</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Reference</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.Reference
+   * @return the meta object for class '<em>Property</em>'.
+   * @see org.eclipse.xtext.example.domainmodel.Property
    * @generated
    */
-  EClass getReference();
-
-  /**
-   * Returns the meta object for the reference '{@link org.eclipse.xtext.example.domainmodel.Reference#getOpposite <em>Opposite</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Opposite</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.Reference#getOpposite()
-   * @see #getReference()
-   * @generated
-   */
-  EReference getReference_Opposite();
+  EClass getProperty();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.Operation <em>Operation</em>}'.
@@ -839,78 +569,15 @@ public interface DomainmodelPackage extends EPackage
   EReference getOperation_Params();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.Parameter <em>Parameter</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.example.domainmodel.Operation#getBody <em>Body</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Parameter</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.Parameter
+   * @return the meta object for the containment reference '<em>Body</em>'.
+   * @see org.eclipse.xtext.example.domainmodel.Operation#getBody()
+   * @see #getOperation()
    * @generated
    */
-  EClass getParameter();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.TypedElement <em>Typed Element</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Typed Element</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.TypedElement
-   * @generated
-   */
-  EClass getTypedElement();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.domainmodel.TypedElement#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.TypedElement#getName()
-   * @see #getTypedElement()
-   * @generated
-   */
-  EAttribute getTypedElement_Name();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.example.domainmodel.TypedElement#getType <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Type</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.TypedElement#getType()
-   * @see #getTypedElement()
-   * @generated
-   */
-  EReference getTypedElement_Type();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.domainmodel.TypeRef <em>Type Ref</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Type Ref</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.TypeRef
-   * @generated
-   */
-  EClass getTypeRef();
-
-  /**
-   * Returns the meta object for the reference '{@link org.eclipse.xtext.example.domainmodel.TypeRef#getReferenced <em>Referenced</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Referenced</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.TypeRef#getReferenced()
-   * @see #getTypeRef()
-   * @generated
-   */
-  EReference getTypeRef_Referenced();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.example.domainmodel.TypeRef#isMulti <em>Multi</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Multi</em>'.
-   * @see org.eclipse.xtext.example.domainmodel.TypeRef#isMulti()
-   * @see #getTypeRef()
-   * @generated
-   */
-  EAttribute getTypeRef_Multi();
+  EReference getOperation_Body();
 
   /**
    * Returns the meta object for enum '{@link org.eclipse.xtext.example.domainmodel.Visibility <em>Visibility</em>}'.
@@ -1018,34 +685,6 @@ public interface DomainmodelPackage extends EPackage
     EReference PACKAGE_DECLARATION__ELEMENTS = eINSTANCE.getPackageDeclaration_Elements();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.TypeImpl <em>Type</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.domainmodel.impl.TypeImpl
-     * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getType()
-     * @generated
-     */
-    EClass TYPE = eINSTANCE.getType();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute TYPE__NAME = eINSTANCE.getType_Name();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.DataTypeImpl <em>Data Type</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.domainmodel.impl.DataTypeImpl
-     * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getDataType()
-     * @generated
-     */
-    EClass DATA_TYPE = eINSTANCE.getDataType();
-
-    /**
      * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.EntityImpl <em>Entity</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1056,7 +695,15 @@ public interface DomainmodelPackage extends EPackage
     EClass ENTITY = eINSTANCE.getEntity();
 
     /**
-     * The meta object literal for the '<em><b>Super Type</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ENTITY__NAME = eINSTANCE.getEntity_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Super Type</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
@@ -1082,42 +729,30 @@ public interface DomainmodelPackage extends EPackage
     EClass FEATURE = eINSTANCE.getFeature();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.StructuralFeatureImpl <em>Structural Feature</em>}' class.
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.domainmodel.impl.StructuralFeatureImpl
-     * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getStructuralFeature()
      * @generated
      */
-    EClass STRUCTURAL_FEATURE = eINSTANCE.getStructuralFeature();
+    EAttribute FEATURE__NAME = eINSTANCE.getFeature_Name();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.AttributeImpl <em>Attribute</em>}' class.
+     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.domainmodel.impl.AttributeImpl
-     * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getAttribute()
      * @generated
      */
-    EClass ATTRIBUTE = eINSTANCE.getAttribute();
+    EReference FEATURE__TYPE = eINSTANCE.getFeature_Type();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.ReferenceImpl <em>Reference</em>}' class.
+     * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.PropertyImpl <em>Property</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.domainmodel.impl.ReferenceImpl
-     * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getReference()
+     * @see org.eclipse.xtext.example.domainmodel.impl.PropertyImpl
+     * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getProperty()
      * @generated
      */
-    EClass REFERENCE = eINSTANCE.getReference();
-
-    /**
-     * The meta object literal for the '<em><b>Opposite</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference REFERENCE__OPPOSITE = eINSTANCE.getReference_Opposite();
+    EClass PROPERTY = eINSTANCE.getProperty();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.OperationImpl <em>Operation</em>}' class.
@@ -1146,66 +781,12 @@ public interface DomainmodelPackage extends EPackage
     EReference OPERATION__PARAMS = eINSTANCE.getOperation_Params();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.ParameterImpl <em>Parameter</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.domainmodel.impl.ParameterImpl
-     * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getParameter()
-     * @generated
-     */
-    EClass PARAMETER = eINSTANCE.getParameter();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.TypedElementImpl <em>Typed Element</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.domainmodel.impl.TypedElementImpl
-     * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getTypedElement()
-     * @generated
-     */
-    EClass TYPED_ELEMENT = eINSTANCE.getTypedElement();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute TYPED_ELEMENT__NAME = eINSTANCE.getTypedElement_Name();
-
-    /**
-     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TYPED_ELEMENT__TYPE = eINSTANCE.getTypedElement_Type();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.impl.TypeRefImpl <em>Type Ref</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.domainmodel.impl.TypeRefImpl
-     * @see org.eclipse.xtext.example.domainmodel.impl.DomainmodelPackageImpl#getTypeRef()
-     * @generated
-     */
-    EClass TYPE_REF = eINSTANCE.getTypeRef();
-
-    /**
-     * The meta object literal for the '<em><b>Referenced</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TYPE_REF__REFERENCED = eINSTANCE.getTypeRef_Referenced();
-
-    /**
-     * The meta object literal for the '<em><b>Multi</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute TYPE_REF__MULTI = eINSTANCE.getTypeRef_Multi();
+    EReference OPERATION__BODY = eINSTANCE.getOperation_Body();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.example.domainmodel.Visibility <em>Visibility</em>}' enum.

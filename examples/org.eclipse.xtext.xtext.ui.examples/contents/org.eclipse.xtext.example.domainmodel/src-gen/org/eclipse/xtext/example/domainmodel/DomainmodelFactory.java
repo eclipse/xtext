@@ -62,24 +62,6 @@ public interface DomainmodelFactory extends EFactory
   PackageDeclaration createPackageDeclaration();
 
   /**
-   * Returns a new object of class '<em>Type</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Type</em>'.
-   * @generated
-   */
-  Type createType();
-
-  /**
-   * Returns a new object of class '<em>Data Type</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Data Type</em>'.
-   * @generated
-   */
-  DataType createDataType();
-
-  /**
    * Returns a new object of class '<em>Entity</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -98,31 +80,13 @@ public interface DomainmodelFactory extends EFactory
   Feature createFeature();
 
   /**
-   * Returns a new object of class '<em>Structural Feature</em>'.
+   * Returns a new object of class '<em>Property</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Structural Feature</em>'.
+   * @return a new object of class '<em>Property</em>'.
    * @generated
    */
-  StructuralFeature createStructuralFeature();
-
-  /**
-   * Returns a new object of class '<em>Attribute</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Attribute</em>'.
-   * @generated
-   */
-  Attribute createAttribute();
-
-  /**
-   * Returns a new object of class '<em>Reference</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Reference</em>'.
-   * @generated
-   */
-  Reference createReference();
+  Property createProperty();
 
   /**
    * Returns a new object of class '<em>Operation</em>'.
@@ -132,33 +96,6 @@ public interface DomainmodelFactory extends EFactory
    * @generated
    */
   Operation createOperation();
-
-  /**
-   * Returns a new object of class '<em>Parameter</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Parameter</em>'.
-   * @generated
-   */
-  Parameter createParameter();
-
-  /**
-   * Returns a new object of class '<em>Typed Element</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Typed Element</em>'.
-   * @generated
-   */
-  TypedElement createTypedElement();
-
-  /**
-   * Returns a new object of class '<em>Type Ref</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Type Ref</em>'.
-   * @generated
-   */
-  TypeRef createTypeRef();
 
   /**
    * Returns the package supported by this factory.

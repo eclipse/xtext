@@ -125,28 +125,10 @@ public class DomainmodelSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case DomainmodelPackage.TYPE:
-      {
-        Type type = (Type)theEObject;
-        T result = caseType(type);
-        if (result == null) result = caseAbstractElement(type);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case DomainmodelPackage.DATA_TYPE:
-      {
-        DataType dataType = (DataType)theEObject;
-        T result = caseDataType(dataType);
-        if (result == null) result = caseType(dataType);
-        if (result == null) result = caseAbstractElement(dataType);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case DomainmodelPackage.ENTITY:
       {
         Entity entity = (Entity)theEObject;
         T result = caseEntity(entity);
-        if (result == null) result = caseType(entity);
         if (result == null) result = caseAbstractElement(entity);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -155,36 +137,14 @@ public class DomainmodelSwitch<T>
       {
         Feature feature = (Feature)theEObject;
         T result = caseFeature(feature);
-        if (result == null) result = caseTypedElement(feature);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case DomainmodelPackage.STRUCTURAL_FEATURE:
+      case DomainmodelPackage.PROPERTY:
       {
-        StructuralFeature structuralFeature = (StructuralFeature)theEObject;
-        T result = caseStructuralFeature(structuralFeature);
-        if (result == null) result = caseFeature(structuralFeature);
-        if (result == null) result = caseTypedElement(structuralFeature);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case DomainmodelPackage.ATTRIBUTE:
-      {
-        Attribute attribute = (Attribute)theEObject;
-        T result = caseAttribute(attribute);
-        if (result == null) result = caseStructuralFeature(attribute);
-        if (result == null) result = caseFeature(attribute);
-        if (result == null) result = caseTypedElement(attribute);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case DomainmodelPackage.REFERENCE:
-      {
-        Reference reference = (Reference)theEObject;
-        T result = caseReference(reference);
-        if (result == null) result = caseStructuralFeature(reference);
-        if (result == null) result = caseFeature(reference);
-        if (result == null) result = caseTypedElement(reference);
+        Property property = (Property)theEObject;
+        T result = caseProperty(property);
+        if (result == null) result = caseFeature(property);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -193,29 +153,6 @@ public class DomainmodelSwitch<T>
         Operation operation = (Operation)theEObject;
         T result = caseOperation(operation);
         if (result == null) result = caseFeature(operation);
-        if (result == null) result = caseTypedElement(operation);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case DomainmodelPackage.PARAMETER:
-      {
-        Parameter parameter = (Parameter)theEObject;
-        T result = caseParameter(parameter);
-        if (result == null) result = caseTypedElement(parameter);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case DomainmodelPackage.TYPED_ELEMENT:
-      {
-        TypedElement typedElement = (TypedElement)theEObject;
-        T result = caseTypedElement(typedElement);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case DomainmodelPackage.TYPE_REF:
-      {
-        TypeRef typeRef = (TypeRef)theEObject;
-        T result = caseTypeRef(typeRef);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -288,38 +225,6 @@ public class DomainmodelSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Type</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseType(Type object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Data Type</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Data Type</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseDataType(DataType object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Entity</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -352,49 +257,17 @@ public class DomainmodelSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Structural Feature</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Property</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Structural Feature</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Property</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseStructuralFeature(StructuralFeature object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Attribute</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Attribute</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseAttribute(Attribute object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Reference</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Reference</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseReference(Reference object)
+  public T caseProperty(Property object)
   {
     return null;
   }
@@ -411,54 +284,6 @@ public class DomainmodelSwitch<T>
    * @generated
    */
   public T caseOperation(Operation object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Parameter</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Parameter</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseParameter(Parameter object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Typed Element</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Typed Element</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTypedElement(TypedElement object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Type Ref</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Type Ref</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTypeRef(TypeRef object)
   {
     return null;
   }

@@ -98,16 +98,6 @@ public class DomainmodelAdapterFactory extends AdapterFactoryImpl
         return createPackageDeclarationAdapter();
       }
       @Override
-      public Adapter caseType(Type object)
-      {
-        return createTypeAdapter();
-      }
-      @Override
-      public Adapter caseDataType(DataType object)
-      {
-        return createDataTypeAdapter();
-      }
-      @Override
       public Adapter caseEntity(Entity object)
       {
         return createEntityAdapter();
@@ -118,39 +108,14 @@ public class DomainmodelAdapterFactory extends AdapterFactoryImpl
         return createFeatureAdapter();
       }
       @Override
-      public Adapter caseStructuralFeature(StructuralFeature object)
+      public Adapter caseProperty(Property object)
       {
-        return createStructuralFeatureAdapter();
-      }
-      @Override
-      public Adapter caseAttribute(Attribute object)
-      {
-        return createAttributeAdapter();
-      }
-      @Override
-      public Adapter caseReference(Reference object)
-      {
-        return createReferenceAdapter();
+        return createPropertyAdapter();
       }
       @Override
       public Adapter caseOperation(Operation object)
       {
         return createOperationAdapter();
-      }
-      @Override
-      public Adapter caseParameter(Parameter object)
-      {
-        return createParameterAdapter();
-      }
-      @Override
-      public Adapter caseTypedElement(TypedElement object)
-      {
-        return createTypedElementAdapter();
-      }
-      @Override
-      public Adapter caseTypeRef(TypeRef object)
-      {
-        return createTypeRefAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -235,36 +200,6 @@ public class DomainmodelAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.domainmodel.Type <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.example.domainmodel.Type
-   * @generated
-   */
-  public Adapter createTypeAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.domainmodel.DataType <em>Data Type</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.example.domainmodel.DataType
-   * @generated
-   */
-  public Adapter createDataTypeAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.domainmodel.Entity <em>Entity</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -295,46 +230,16 @@ public class DomainmodelAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.domainmodel.StructuralFeature <em>Structural Feature</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.domainmodel.Property <em>Property</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.example.domainmodel.StructuralFeature
+   * @see org.eclipse.xtext.example.domainmodel.Property
    * @generated
    */
-  public Adapter createStructuralFeatureAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.domainmodel.Attribute <em>Attribute</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.example.domainmodel.Attribute
-   * @generated
-   */
-  public Adapter createAttributeAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.domainmodel.Reference <em>Reference</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.example.domainmodel.Reference
-   * @generated
-   */
-  public Adapter createReferenceAdapter()
+  public Adapter createPropertyAdapter()
   {
     return null;
   }
@@ -350,51 +255,6 @@ public class DomainmodelAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createOperationAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.domainmodel.Parameter <em>Parameter</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.example.domainmodel.Parameter
-   * @generated
-   */
-  public Adapter createParameterAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.domainmodel.TypedElement <em>Typed Element</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.example.domainmodel.TypedElement
-   * @generated
-   */
-  public Adapter createTypedElementAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.domainmodel.TypeRef <em>Type Ref</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.example.domainmodel.TypeRef
-   * @generated
-   */
-  public Adapter createTypeRefAdapter()
   {
     return null;
   }

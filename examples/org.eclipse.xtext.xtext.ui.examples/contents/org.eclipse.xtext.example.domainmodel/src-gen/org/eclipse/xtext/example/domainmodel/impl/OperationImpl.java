@@ -20,10 +20,13 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.xtext.common.types.JvmFormalParameter;
+
 import org.eclipse.xtext.example.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.Operation;
-import org.eclipse.xtext.example.domainmodel.Parameter;
 import org.eclipse.xtext.example.domainmodel.Visibility;
+
+import xbase.XExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,6 +37,7 @@ import org.eclipse.xtext.example.domainmodel.Visibility;
  * <ul>
  *   <li>{@link org.eclipse.xtext.example.domainmodel.impl.OperationImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.xtext.example.domainmodel.impl.OperationImpl#getParams <em>Params</em>}</li>
+ *   <li>{@link org.eclipse.xtext.example.domainmodel.impl.OperationImpl#getBody <em>Body</em>}</li>
  * </ul>
  * </p>
  *
@@ -69,7 +73,17 @@ public class OperationImpl extends FeatureImpl implements Operation
    * @generated
    * @ordered
    */
-  protected EList<Parameter> params;
+  protected EList<JvmFormalParameter> params;
+
+  /**
+   * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getBody()
+   * @generated
+   * @ordered
+   */
+  protected XExpression body;
 
   /**
    * <!-- begin-user-doc -->
@@ -120,13 +134,61 @@ public class OperationImpl extends FeatureImpl implements Operation
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Parameter> getParams()
+  public EList<JvmFormalParameter> getParams()
   {
     if (params == null)
     {
-      params = new EObjectContainmentEList<Parameter>(Parameter.class, this, DomainmodelPackage.OPERATION__PARAMS);
+      params = new EObjectContainmentEList<JvmFormalParameter>(JvmFormalParameter.class, this, DomainmodelPackage.OPERATION__PARAMS);
     }
     return params;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public XExpression getBody()
+  {
+    return body;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetBody(XExpression newBody, NotificationChain msgs)
+  {
+    XExpression oldBody = body;
+    body = newBody;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DomainmodelPackage.OPERATION__BODY, oldBody, newBody);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setBody(XExpression newBody)
+  {
+    if (newBody != body)
+    {
+      NotificationChain msgs = null;
+      if (body != null)
+        msgs = ((InternalEObject)body).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DomainmodelPackage.OPERATION__BODY, null, msgs);
+      if (newBody != null)
+        msgs = ((InternalEObject)newBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DomainmodelPackage.OPERATION__BODY, null, msgs);
+      msgs = basicSetBody(newBody, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, DomainmodelPackage.OPERATION__BODY, newBody, newBody));
   }
 
   /**
@@ -141,6 +203,8 @@ public class OperationImpl extends FeatureImpl implements Operation
     {
       case DomainmodelPackage.OPERATION__PARAMS:
         return ((InternalEList<?>)getParams()).basicRemove(otherEnd, msgs);
+      case DomainmodelPackage.OPERATION__BODY:
+        return basicSetBody(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -159,6 +223,8 @@ public class OperationImpl extends FeatureImpl implements Operation
         return getVisibility();
       case DomainmodelPackage.OPERATION__PARAMS:
         return getParams();
+      case DomainmodelPackage.OPERATION__BODY:
+        return getBody();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -179,7 +245,10 @@ public class OperationImpl extends FeatureImpl implements Operation
         return;
       case DomainmodelPackage.OPERATION__PARAMS:
         getParams().clear();
-        getParams().addAll((Collection<? extends Parameter>)newValue);
+        getParams().addAll((Collection<? extends JvmFormalParameter>)newValue);
+        return;
+      case DomainmodelPackage.OPERATION__BODY:
+        setBody((XExpression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -201,6 +270,9 @@ public class OperationImpl extends FeatureImpl implements Operation
       case DomainmodelPackage.OPERATION__PARAMS:
         getParams().clear();
         return;
+      case DomainmodelPackage.OPERATION__BODY:
+        setBody((XExpression)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -219,6 +291,8 @@ public class OperationImpl extends FeatureImpl implements Operation
         return visibility != VISIBILITY_EDEFAULT;
       case DomainmodelPackage.OPERATION__PARAMS:
         return params != null && !params.isEmpty();
+      case DomainmodelPackage.OPERATION__BODY:
+        return body != null;
     }
     return super.eIsSet(featureID);
   }

@@ -72,17 +72,10 @@ public class DomainmodelFactoryImpl extends EFactoryImpl implements DomainmodelF
       case DomainmodelPackage.ABSTRACT_ELEMENT: return createAbstractElement();
       case DomainmodelPackage.IMPORT: return createImport();
       case DomainmodelPackage.PACKAGE_DECLARATION: return createPackageDeclaration();
-      case DomainmodelPackage.TYPE: return createType();
-      case DomainmodelPackage.DATA_TYPE: return createDataType();
       case DomainmodelPackage.ENTITY: return createEntity();
       case DomainmodelPackage.FEATURE: return createFeature();
-      case DomainmodelPackage.STRUCTURAL_FEATURE: return createStructuralFeature();
-      case DomainmodelPackage.ATTRIBUTE: return createAttribute();
-      case DomainmodelPackage.REFERENCE: return createReference();
+      case DomainmodelPackage.PROPERTY: return createProperty();
       case DomainmodelPackage.OPERATION: return createOperation();
-      case DomainmodelPackage.PARAMETER: return createParameter();
-      case DomainmodelPackage.TYPED_ELEMENT: return createTypedElement();
-      case DomainmodelPackage.TYPE_REF: return createTypeRef();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -171,28 +164,6 @@ public class DomainmodelFactoryImpl extends EFactoryImpl implements DomainmodelF
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type createType()
-  {
-    TypeImpl type = new TypeImpl();
-    return type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DataType createDataType()
-  {
-    DataTypeImpl dataType = new DataTypeImpl();
-    return dataType;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public Entity createEntity()
   {
     EntityImpl entity = new EntityImpl();
@@ -215,32 +186,10 @@ public class DomainmodelFactoryImpl extends EFactoryImpl implements DomainmodelF
    * <!-- end-user-doc -->
    * @generated
    */
-  public StructuralFeature createStructuralFeature()
+  public Property createProperty()
   {
-    StructuralFeatureImpl structuralFeature = new StructuralFeatureImpl();
-    return structuralFeature;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Attribute createAttribute()
-  {
-    AttributeImpl attribute = new AttributeImpl();
-    return attribute;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Reference createReference()
-  {
-    ReferenceImpl reference = new ReferenceImpl();
-    return reference;
+    PropertyImpl property = new PropertyImpl();
+    return property;
   }
 
   /**
@@ -252,39 +201,6 @@ public class DomainmodelFactoryImpl extends EFactoryImpl implements DomainmodelF
   {
     OperationImpl operation = new OperationImpl();
     return operation;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Parameter createParameter()
-  {
-    ParameterImpl parameter = new ParameterImpl();
-    return parameter;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TypedElement createTypedElement()
-  {
-    TypedElementImpl typedElement = new TypedElementImpl();
-    return typedElement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TypeRef createTypeRef()
-  {
-    TypeRefImpl typeRef = new TypeRefImpl();
-    return typeRef;
   }
 
   /**

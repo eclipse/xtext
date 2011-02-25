@@ -6,51 +6,39 @@
     modelPluginID="org.eclipse.xtext.example.domainmodel" forceOverwrite="true" modelName="Domainmodel"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.example.domainmodel.edit"
-    editorPluginID="org.eclipse.xtext.example.domainmodel.editor">
+    editorPluginID="org.eclipse.xtext.example.domainmodel.editor" usedGenPackages="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types">
   <genPackages prefix="Domainmodel" basePackage="org.eclipse.xtext.example" disposableProviderFactory="true"
-      ecorePackage="Domainmodel.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Domainmodel.ecore#//Visibility">
-      <genEnumLiterals ecoreEnumLiteral="Domainmodel.ecore#//Visibility/public"/>
-      <genEnumLiterals ecoreEnumLiteral="Domainmodel.ecore#//Visibility/private"/>
-      <genEnumLiterals ecoreEnumLiteral="Domainmodel.ecore#//Visibility/protected"/>
+      ecorePackage="platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Visibility">
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Visibility/public"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Visibility/private"/>
+      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Visibility/protected"/>
     </genEnums>
-    <genClasses ecoreClass="Domainmodel.ecore#//DomainModel">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//DomainModel/elements"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//DomainModel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//DomainModel/elements"/>
     </genClasses>
-    <genClasses ecoreClass="Domainmodel.ecore#//AbstractElement"/>
-    <genClasses ecoreClass="Domainmodel.ecore#//Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Domainmodel.ecore#//Import/importedNamespace"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//AbstractElement"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Import/importedNamespace"/>
     </genClasses>
-    <genClasses ecoreClass="Domainmodel.ecore#//PackageDeclaration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Domainmodel.ecore#//PackageDeclaration/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//PackageDeclaration/elements"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//PackageDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//PackageDeclaration/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//PackageDeclaration/elements"/>
     </genClasses>
-    <genClasses ecoreClass="Domainmodel.ecore#//Type">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Domainmodel.ecore#//Type/name"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Entity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Entity/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Entity/superType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Entity/features"/>
     </genClasses>
-    <genClasses ecoreClass="Domainmodel.ecore#//DataType"/>
-    <genClasses ecoreClass="Domainmodel.ecore#//Entity">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//Entity/superType"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//Entity/features"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Feature">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Feature/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Feature/type"/>
     </genClasses>
-    <genClasses ecoreClass="Domainmodel.ecore#//Feature"/>
-    <genClasses ecoreClass="Domainmodel.ecore#//StructuralFeature"/>
-    <genClasses ecoreClass="Domainmodel.ecore#//Attribute"/>
-    <genClasses ecoreClass="Domainmodel.ecore#//Reference">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//Reference/opposite"/>
-    </genClasses>
-    <genClasses ecoreClass="Domainmodel.ecore#//Operation">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Domainmodel.ecore#//Operation/visibility"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//Operation/params"/>
-    </genClasses>
-    <genClasses ecoreClass="Domainmodel.ecore#//Parameter"/>
-    <genClasses ecoreClass="Domainmodel.ecore#//TypedElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Domainmodel.ecore#//TypedElement/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//TypedElement/type"/>
-    </genClasses>
-    <genClasses ecoreClass="Domainmodel.ecore#//TypeRef">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//TypeRef/referenced"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Domainmodel.ecore#//TypeRef/multi"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Property"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Operation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Operation/visibility"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Operation/params"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/Domainmodel.ecore#//Operation/body"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
