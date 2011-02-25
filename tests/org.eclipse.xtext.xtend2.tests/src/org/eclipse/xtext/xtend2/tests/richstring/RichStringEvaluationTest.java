@@ -28,14 +28,12 @@ import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xtend2.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtext.xtend2.richstring.DefaultIndentationHandler;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
-import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase.TestSetup;
+import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
-
-import com.google.inject.Injector;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -191,8 +189,6 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 		}
 	}
 	
-	static Injector injector = new TestSetup().createInjectorAndDoEMFRegistration();
-	
 	@Override
 	public void assertOutput(String expectedOutput, String richString) throws Exception {
 		RichString parsedString = richString(richString);
@@ -219,7 +215,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 	}
 
 	protected XtendFile file(String string, boolean validate) throws Exception {
-		XtextResourceSet set = injector.getInstance(XtextResourceSet.class);
+		XtextResourceSet set = AbstractXtend2TestCase.getInjector().getInstance(XtextResourceSet.class);
 		String fileName = getFileName(string);
 		Resource resource = set.createResource(URI.createURI(fileName + ".xtend"));
 		resource.load(new StringInputStream(string), null);
