@@ -9,7 +9,7 @@ package org.eclipse.xtext.example.domainmodel;
 
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.example.DomainmodelStandaloneSetup;
-import org.eclipse.xtext.example.ui.internal.DomainmodelActivator;
+import org.eclipse.xtext.example.domainmodel.ui.internal.DomainmodelActivator;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 
 import com.google.inject.Injector;

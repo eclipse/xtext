@@ -1,0 +1,25 @@
+«IMPORT org::eclipse::xtext::example::domainmodel::domainmodel»
+
+«EXTENSION org::eclipse::xtext::example::domainmodel::ui::generator::JavaBeans»
+«EXTENSION org::eclipse::xtext::example::domainmodel::ui::generator::JavaImports»
+
+«DEFINE javaBean FOR Entity-»
+«FILE qualifiedName()-»
+package «packageName()»;
+
+«addImportsHere()-»
+
+public class «name» «IF superType!=null»extends «superType.toString()» «ENDIF»{
+	«FOREACH features AS f»
+	private «f.type.toString()» «f.name»;
+	
+	public void set«f.name.toFirstUpper()»(«f.type.toString()» «f.name») {
+	  this.«f.name» = «f.name»;
+	} 
+	public «f.type.toString()» get«f.name.toFirstUpper()»() {
+	  return «f.name»;
+	} 
+	«ENDFOREACH-»
+}
+«ENDFILE»
+«ENDDEFINE»

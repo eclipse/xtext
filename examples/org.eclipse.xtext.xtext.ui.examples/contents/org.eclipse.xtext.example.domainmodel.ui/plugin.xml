@@ -6,37 +6,37 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="dmodel"
-            id="org.eclipse.xtext.example.Domainmodel"
+            id="org.eclipse.xtext.example.domainmodel.Domainmodel"
             name="Domainmodel Editor">
         </editor>
     </extension>
     <extension
         point="org.eclipse.ui.handlers">
         <handler
-            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
             commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
             <activeWhen>
                 <reference
-                    definitionId="org.eclipse.xtext.example.Domainmodel.Editor.opened">
+                    definitionId="org.eclipse.xtext.example.domainmodel.Domainmodel.Editor.opened">
                 </reference>
             </activeWhen>
         </handler>
         <handler
-            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
-            commandId="org.eclipse.xtext.example.Domainmodel.validate">
+            class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.example.domainmodel.Domainmodel.validate">
          <activeWhen>
             <reference
-                    definitionId="org.eclipse.xtext.example.Domainmodel.Editor.opened">
+                    definitionId="org.eclipse.xtext.example.domainmodel.Domainmodel.Editor.opened">
             </reference>
          </activeWhen>
       </handler>
     </extension>
     <extension point="org.eclipse.core.expressions.definitions">
-        <definition id="org.eclipse.xtext.example.Domainmodel.Editor.opened">
+        <definition id="org.eclipse.xtext.example.domainmodel.Domainmodel.Editor.opened">
             <and>
                 <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
                 <with variable="activeEditor">
@@ -50,37 +50,37 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
-            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-            id="org.eclipse.xtext.example.Domainmodel"
+            class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.example.domainmodel.Domainmodel"
             name="Domainmodel">
-            <keywordReference id="org.eclipse.xtext.example.ui.keyword_Domainmodel"/>
+            <keywordReference id="org.eclipse.xtext.example.domainmodel.ui.keyword_Domainmodel"/>
         </page>
         <page
-            category="org.eclipse.xtext.example.Domainmodel"
-            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-            id="org.eclipse.xtext.example.Domainmodel.coloring"
+            category="org.eclipse.xtext.example.domainmodel.Domainmodel"
+            class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtext.example.domainmodel.Domainmodel.coloring"
             name="Syntax Coloring">
-            <keywordReference id="org.eclipse.xtext.example.ui.keyword_Domainmodel"/>
+            <keywordReference id="org.eclipse.xtext.example.domainmodel.ui.keyword_Domainmodel"/>
         </page>
         <page
-            category="org.eclipse.xtext.example.Domainmodel"
-            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
-            id="org.eclipse.xtext.example.Domainmodel.templates"
+            category="org.eclipse.xtext.example.domainmodel.Domainmodel"
+            class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.xtext.example.domainmodel.Domainmodel.templates"
             name="Templates">
-            <keywordReference id="org.eclipse.xtext.example.ui.keyword_Domainmodel"/>
+            <keywordReference id="org.eclipse.xtext.example.domainmodel.ui.keyword_Domainmodel"/>
         </page>
     </extension>
     <extension
         point="org.eclipse.ui.keywords">
         <keyword
-            id="org.eclipse.xtext.example.ui.keyword_Domainmodel"
+            id="org.eclipse.xtext.example.domainmodel.ui.keyword_Domainmodel"
             label="Domainmodel"/>
     </extension>
     <extension
          point="org.eclipse.ui.commands">
       <command
             description="Trigger expensive validation"
-            id="org.eclipse.xtext.example.Domainmodel.validate"
+            id="org.eclipse.xtext.example.domainmodel.Domainmodel.validate"
             name="Validate">
       </command>
     </extension>
@@ -88,12 +88,12 @@
         <menuContribution
             locationURI="popup:#TextEditorContext?after=group.edit">
              <command
-                 commandId="org.eclipse.xtext.example.Domainmodel.validate"
+                 commandId="org.eclipse.xtext.example.domainmodel.Domainmodel.validate"
                  style="push"
                  tooltip="Trigger expensive validation">
             <visibleWhen checkEnabled="false">
                 <reference
-                    definitionId="org.eclipse.xtext.example.Domainmodel.Editor.opened">
+                    definitionId="org.eclipse.xtext.example.domainmodel.Domainmodel.Editor.opened">
                 </reference>
             </visibleWhen>
          </command>  
@@ -103,7 +103,7 @@
 		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
 			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
 				<visibleWhen checkEnabled="false">
-                	<reference definitionId="org.eclipse.xtext.example.Domainmodel.Editor.opened">
+                	<reference definitionId="org.eclipse.xtext.example.domainmodel.Domainmodel.Editor.opened">
                 	</reference>
             	</visibleWhen>
 			</command>
@@ -111,11 +111,11 @@
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 	    <handler
-            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
             commandId="org.eclipse.xtext.ui.editor.FindReferences">
             <activeWhen>
                 <reference
-                    definitionId="org.eclipse.xtext.example.Domainmodel.Editor.opened">
+                    definitionId="org.eclipse.xtext.example.domainmodel.Domainmodel.Editor.opened">
                 </reference>
             </activeWhen>
         </handler>
@@ -126,13 +126,13 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="dmodel">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
             uriExtension="dmodel">
         </resourceServiceProvider>
     </extension>
@@ -143,11 +143,11 @@
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler 
-			class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
 			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
 			<activeWhen>
 				<reference
-					definitionId="org.eclipse.xtext.example.Domainmodel.Editor.opened">
+					definitionId="org.eclipse.xtext.example.domainmodel.Domainmodel.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -167,7 +167,7 @@
 				style="push"
 				tooltip="Open Quick Outline">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="org.eclipse.xtext.example.Domainmodel.Editor.opened"/>
+					<reference definitionId="org.eclipse.xtext.example.domainmodel.Domainmodel.Editor.opened"/>
 				</visibleWhen>
 			</command>
 		</menuContribution>
@@ -176,17 +176,17 @@
    <extension
          point="org.eclipse.ui.ide.markerResolution">
       <markerResolutionGenerator
-            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
+            class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
       </markerResolutionGenerator>
    </extension>
    	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
-			class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RenameElementHandler"
+			class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RenameElementHandler"
 			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
 			<activeWhen>
 				<reference
-					definitionId="org.eclipse.xtext.example.Domainmodel.Editor.opened">
+					definitionId="org.eclipse.xtext.example.domainmodel.Domainmodel.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -214,7 +214,7 @@
    <extension
        point="org.eclipse.xtext.ui.searchFilter">
     <filter
-          class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.example.ui.search.DomainmodelSearchFilter">
+          class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.example.domainmodel.ui.search.DomainmodelSearchFilter">
     </filter>
  </extension>
  
