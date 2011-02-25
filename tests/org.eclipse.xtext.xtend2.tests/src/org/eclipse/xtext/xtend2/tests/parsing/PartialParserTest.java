@@ -11,11 +11,13 @@ import java.io.IOException;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 
@@ -208,20 +210,86 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		doTestUpdateAtOffset(model, 279, 1, " ", "EqualNodeModels.xtend");
 	}
 	
+	public void testEqualNodeModels_05() throws Exception {
+		String model = "package org.eclipse.xtext.xtend2.tests.smoke\n" + 
+				"\n" + 
+				"class EqualNodeModels {\n" + 
+				"	testReturnExpression_06() {\n" + 
+				"	    val closure = [Integer i| return i]\n" + 
+				"	    for (x : 1..100) closure.(x)\n" + 
+				"	}\n" + 
+				"	testOverriddenLocalVariable() {\n" + 
+				"	  val x = 3\n" + 
+				"	  var y = 2\n" + 
+				"	  {\n" + 
+				"	    var x = y\n" + 
+				"	    val y = 1\n" + 
+				"	    x+y\n" + 
+				"	  }\n" + 
+				"	}\n" + 
+				"	testFeatureCall_03() {\n" + 
+				"		{ \n" + 
+				"			var java.util.List<Character> this = ('abc'.toCharArray as Iterable<Character>).toList() \n" + 
+				"			this \n" + 
+				"		}\n" + 
+				"	}\n" + 
+				"}";
+		doTestUpdateAtOffset(model, 170, 1, "apply", "EqualNodeModels.xtend");
+	}
+	
+	public void testInferredModelRemoved() throws Exception {
+		String model =
+				"package org.eclipse.xtext.xtend2.tests.smoke\n" + 
+				"\n" + 
+				"classCase_1 {\n" + 
+				"\n" + 
+				"	testFunction1() {\n" + 
+				"		42\n" + 
+				"	}\n" + 
+				"	\n" + 
+				"	testFunction2() \n" + 
+				"		42\n" + 
+				"		\n" + 
+				"	Integer testFunction3() \n" + 
+				"		42\n" + 
+				"		\n" + 
+				"}";
+		doTestUpdateAtOffset(model, 51, 6, " ", "InferredModelRemoved.xtend");
+	}
+	
 	protected XtextResource doTestUpdateAtEnd(String model, char character, String fileName) throws IOException {
 		return doTestUpdateAtOffset(model, model.length(), 0, String.valueOf(character), fileName);
 	}
 
 	protected XtextResource doTestUpdateAtOffset(String model, int offset, int length, String newText, String fileName) throws IOException {
+		XtextResource resource = createResource(model, fileName);
+		compareWithNewResource(resource, model, offset, length, newText, fileName);
+		return resource;
+	}
+
+	protected XtextResource createResource(String model, String fileName) throws IOException {
 		XtextResourceSet resourceSet = get(XtextResourceSet.class);
 		XtextResource resource = (XtextResource) resourceSet.createResource(URI.createURI(fileName));
 		resource.load(new StringInputStream(model), null);
+		return resource;
+	}
+
+	protected void compareWithNewResource(XtextResource resource, String model, int offset, int length, String newText,
+			String fileName) throws IOException {
 		resource.update(offset, length, newText);
 		XtextResourceSet secondResourceSet = get(XtextResourceSet.class);
 		XtextResource newResource = (XtextResource) secondResourceSet.createResource(URI.createURI(fileName));
-		newResource.load(new StringInputStream(new StringBuilder(model).replace(offset, offset + length, newText).toString()), null);
+		String newModel = new StringBuilder(model).replace(offset, offset + length, newText).toString();
+		assertEquals(newModel, resource.getParseResult().getRootNode().getText());
+		newResource.load(new StringInputStream(newModel), null);
+		assertEquals(newResource.getContents().size(), resource.getContents().size());
+		for(int i = 0; i < resource.getContents().size(); i++) {
+			if (!EcoreUtil.equals(resource.getContents().get(i), newResource.getContents().get(i))) {
+				assertEquals(EmfFormatter.objToStr(newResource.getContents().get(i)), EmfFormatter.objToStr(resource.getContents().get(i)));
+				fail();
+			}
+		}
 		assertEqualNodes(newResource, resource);
-		return resource;
 	}
 	
 	protected void assertEqualNodes(XtextResource expected, XtextResource actual) throws IOException {

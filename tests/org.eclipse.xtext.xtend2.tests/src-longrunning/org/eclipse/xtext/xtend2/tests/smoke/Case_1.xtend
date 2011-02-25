@@ -1,6 +1,6 @@
-package org.eclipse.xtext.xtend2.tests.compiler
+package org.eclipse.xtext.xtend2.tests.smoke
 
-class TestClass1 {
+class Case_1 {
 
 	testFunction1() {
 		42
