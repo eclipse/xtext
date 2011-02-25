@@ -51,7 +51,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(null, 
 				"{" +
 				" val closure = [Integer i| return i]" +
-				" for (x : 1..10000) " +
+				" for (x : 1..100) " +
 				"    closure.apply(x)" +
 		"}");
 	}
@@ -620,6 +620,10 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	
 	public void testSwitchExpression_10() {
 		assertEvaluatesTo(Integer.valueOf(3), "switch 'foo' as Object { Boolean case 'foo': 4 String: 3 }");
+	}
+	
+	public void testSwitchExpression_11() {
+		assertEvaluatesTo(Integer.valueOf(3), "switch new java.util.ArrayList<String>() { java.util.Set<String> : 5 java.util.List<Object>: 3 }");
 	}
 	
 	public void testCastedExpression_01() {
