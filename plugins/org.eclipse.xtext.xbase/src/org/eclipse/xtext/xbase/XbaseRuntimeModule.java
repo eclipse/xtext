@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.XtextResource;
@@ -18,6 +19,7 @@ import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
+import org.eclipse.xtext.xbase.linking.XbaseLazyLinker;
 import org.eclipse.xtext.xbase.linking.XbaseLinkingScopeProvider;
 import org.eclipse.xtext.xbase.resource.XbaseResource;
 import org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider;
@@ -66,6 +68,11 @@ public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 	@Override
 	public void configureLinkingIScopeProvider(Binder binder) {
 		binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class).to(XbaseLinkingScopeProvider.class);
+	}
+	
+	@Override
+	public Class<? extends ILinker> bindILinker() {
+		return XbaseLazyLinker.class;
 	}
 	
 }

@@ -185,6 +185,8 @@ public class FunctionConversion {
 	private FeatureOverridesService overridesService;
 
 	public JvmOperation findSingleMethod(JvmTypeReference type) {
+		if (primitives.isPrimitive(type))
+			return null;
 		Iterable<JvmOperation> features = filter(overridesService.getAllJvmFeatures(type), JvmOperation.class);
 		JvmOperation operation = null;
 		for (JvmOperation op : features) {

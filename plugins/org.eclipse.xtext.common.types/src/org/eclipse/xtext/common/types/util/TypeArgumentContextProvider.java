@@ -309,11 +309,13 @@ public class TypeArgumentContextProvider {
 					// parameterized type reference
 					for (int i = 0; i < typeArguments.size(); i++) {
 						JvmTypeReference argument = typeArguments.get(i);
-						JvmTypeParameter param = typeParameters.get(i);
-						if (context.containsKey(argument.getType())) {
-							context.putAll(param, context.get((JvmTypeParameter) argument.getType()));
-						} else {
-							context.put(param, argument);
+						if (argument != null) {
+							JvmTypeParameter param = typeParameters.get(i);
+							if (context.containsKey(argument.getType())) {
+								context.putAll(param, context.get((JvmTypeParameter) argument.getType()));
+							} else {
+								context.put(param, argument);
+							}
 						}
 					}
 				}

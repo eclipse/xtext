@@ -506,13 +506,15 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			JvmTypeReference expectedType = getExpectedType(object, rawType);
 			if (expectedType != null) {
 				JvmOperation singleMethod = functionConverter.findSingleMethod(expectedType);
-				TypeArgumentContext context = typeArgCtxProvider.getReceiverContext(expectedType);
-				for (int i = 0; i < params.size(); i++) {
-					JvmTypeReference resultParam = parameterTypes.get(i);
-					if (resultParam == null) {
-						JvmFormalParameter p = getParam(singleMethod, i);
-						final JvmTypeReference resolved = context.resolve(p.getParameterType());
-						parameterTypes.set(i, resolved);
+				if (singleMethod != null) {
+					TypeArgumentContext context = typeArgCtxProvider.getReceiverContext(expectedType);
+					for (int i = 0; i < params.size(); i++) {
+						JvmTypeReference resultParam = parameterTypes.get(i);
+						if (resultParam == null) {
+							JvmFormalParameter p = getParam(singleMethod, i);
+							final JvmTypeReference resolved = context.resolve(p.getParameterType());
+							parameterTypes.set(i, resolved);
+						}
 					}
 				}
 			}
@@ -690,7 +692,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 					return null;
 				}
 				JvmOperation operation = functionConversion.findSingleMethod(type);
-				if (indexOf < operation.getParameters().size()) {
+				if (operation != null && indexOf < operation.getParameters().size()) {
 					JvmFormalParameter declaredParam = getParam(operation, indexOf);
 					if (rawType) {
 						if (declaredParam.getParameterType().getType() instanceof JvmTypeParameter) {
