@@ -75,19 +75,19 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	protected void doConversion(final JvmTypeReference left, final JvmTypeReference right,
 			final IAppendable appendable, final Later expression) {
 		if (primitives.isPrimitive(right) && !primitives.isPrimitive(left)) {
-			appendable.append("((").append(getSerializedForm(left)).append(")");
+			appendable.append("((").append(left).append(")");
 			expression.exec();
 			appendable.append(")");
 		} else if (typeRefs.isArray(right) && isList(left)) {
 			appendable.append("((");
-			appendable.append(getSerializedForm(left));
+			appendable.append(left);
 			appendable.append(")");
 			appendable.append(Conversions.class.getCanonicalName()).append(".doWrapArray(");
 			expression.exec();
 			appendable.append("))");
 		} else if (isList(right) && typeRefs.isArray(left)) {
 			appendable.append("((");
-			appendable.append(getSerializedForm(left));
+			appendable.append(left);
 			appendable.append(")");
 			appendable.append(Conversions.class.getCanonicalName()).append(".unwrapArray(");
 			expression.exec();
@@ -104,15 +104,19 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 				throw new IllegalStateException("expected type " + resolvedLeft + " not mappable from " + right);
 			}
 			TypeArgumentContext context = contextProvider.getReceiverContext(resolvedLeft);
-			appendable.append("new ").append(getSerializedForm(resolvedLeft, null, true, false)).append("() {");
+			appendable.append("new ");
+			serialize(resolvedLeft,null,appendable,true,false);
+			appendable.append("() {");
 			appendable.increaseIndentation().increaseIndentation();
-			appendable.append("\npublic ").append(getSerializedForm(context.resolve(operation.getReturnType()), null, true, false));
+			appendable.append("\npublic ");
+			serialize(context.resolve(operation.getReturnType()),null,appendable,true,false);
 			appendable.append(" ").append(operation.getSimpleName()).append("(");
 			EList<JvmFormalParameter> params = operation.getParameters();
 			for (Iterator<JvmFormalParameter> iterator = params.iterator(); iterator.hasNext();) {
 				JvmFormalParameter p = iterator.next();
 				final String name = p.getName();
-				appendable.append(getSerializedForm(context.resolve(p.getParameterType()), null, true, false)).append(" ").append(name);
+				serialize(context.resolve(p.getParameterType()), null, appendable, true, false);
+				appendable.append(" ").append(name);
 				if (iterator.hasNext())
 					appendable.append(",");
 			}
