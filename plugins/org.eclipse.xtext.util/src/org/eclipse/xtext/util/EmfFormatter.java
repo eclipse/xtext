@@ -190,7 +190,7 @@ public class EmfFormatter {
 		} else if (parent.eResource() == r)
 			buf.append(r.getURIFragment(target));
 		else
-			buf.append(r.getURI().toString()).append(r.getURIFragment(target));
+			buf.append(r.getURI().toString()).append("#").append(r.getURIFragment(target));
 	}
 
 	/**
