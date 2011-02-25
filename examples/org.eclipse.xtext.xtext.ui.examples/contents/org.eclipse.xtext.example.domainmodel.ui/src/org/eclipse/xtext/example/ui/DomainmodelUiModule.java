@@ -24,6 +24,7 @@ public class DomainmodelUiModule extends org.eclipse.xtext.example.ui.AbstractDo
 		return DomainmodelLinkingDiagnosticMessageProvider.class;
 	}
 
+	@Override
 	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
 		return DomainmodelHyperlinkHelper.class;
 	}

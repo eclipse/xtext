@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-grammar org.eclipse.xtext.example.Domainmodel with org.eclipse.xtext.common.Terminals
+grammar org.eclipse.xtext.example.Domainmodel with org.eclipse.xtext.xbase.Xbase
 
 generate domainmodel "http://www.example.xtext/Domainmodel"
 
@@ -13,7 +13,7 @@ DomainModel:
 	elements+=AbstractElement*;
 
 AbstractElement:
-	PackageDeclaration | Type | Import;
+	PackageDeclaration | Entity | Import;
 
 Import:
 	'import' importedNamespace=QualifiedNameWithWildCard;
@@ -23,46 +23,22 @@ PackageDeclaration:
 		elements+=AbstractElement*
 	'}';
 
-Type:
-	Entity | DataType;
-
-DataType:
-	'datatype' name=ID;
-
 Entity:
-	'entity' name=ID ('extends' superType=[Entity|QualifiedName])? '{'
+	'entity' name=ID ('extends' superType=JvmTypeReference)? '{'
 		features+=Feature*
 	'}';
 
 Feature:
-	StructuralFeature | Operation;
+	Property | Operation;
 
-StructuralFeature:
-	Attribute | Reference;
-
-Attribute:
-	name=ID ':' type=TypeRef;
-
-Reference:
-	'ref' name=ID ':' type=TypeRef ('opposite' opposite=[Reference])?;
+Property:
+	name=ID ':' type=JvmTypeReference;
 
 Operation:
-	visibility=Visibility? 'op' name=ID '(' (params+=Parameter (',' params+=Parameter)*)? ')' ':' type=TypeRef;
-
-Parameter:
-	name=ID type=TypeRef;
-
-TypedElement:
-	Feature | Parameter;
-
-TypeRef:
-	referenced=[Type|QualifiedName] multi?='*'?;
+	visibility=Visibility? 'op' name=ID '(' (params+=JvmFormalParameter (',' params+=JvmFormalParameter)*)? ')' ':' type=JvmTypeReference '{' body=XExpression '}';
 
 enum Visibility:
 	public | private | protected;
 
-QualifiedNameWithWildCard:
-	QualifiedName '.*'?;
-
-QualifiedName:
-	ID ('.' ID)*;
+QualifiedNameWithWildCard :
+	QualifiedName  ('.' '*')?;

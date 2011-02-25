@@ -19,9 +19,9 @@ var runtimeProject = "../${projectName}"
 Workflow {
 
 	bean = StandaloneSetup {
-		platformUri = "${runtimeProject}/../.."
+		platformUri = "${runtimeProject}/../../../.."
 	}
-
+	
 	component = DirectoryCleaner {
 		directory = "${runtimeProject}/src-gen"
 	}
@@ -35,7 +35,6 @@ Workflow {
 		pathUiProject = "${runtimeProject}.ui"
 		projectNameRt = projectName
 		projectNameUi = "${projectName}.ui"
-		activator = "org.eclipse.xtext.example.ui.internal.DomainmodelActivator"
 		language = {
 			uri = grammarURI
 			fileExtensions = file.extensions
@@ -44,7 +43,10 @@ Workflow {
 			fragment = grammarAccess.GrammarAccessFragment {}
 
 			// Generate java classes for Ecore models
-			fragment = ecore.EcoreGeneratorFragment {}
+			fragment = ecore.EcoreGeneratorFragment {
+				referencedGenModels = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+				referencedGenModels = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel" 
+			}
 
 			// the serialization component
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
@@ -54,13 +56,8 @@ Workflow {
 				fileExtensions = file.extensions
 			}
 
-			// the following fragment generates an Antlr parser -->
-			fragment = parser.antlr.XtextAntlrGeneratorFragment {
-//				options = {
-//					backtrack = true
-//					classSplitting = true
-//				}
-			}
+			// the following fragment generates an Antlr parser 
+			fragment = parser.antlr.XtextAntlrGeneratorFragment {}
 
 			// java-based API for validation 
 			fragment = validation.JavaValidatorFragment {}
@@ -81,12 +78,7 @@ Workflow {
 
 			// java-based API for content assistance 
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
-			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {
-//				options = {
-//					backtrack = true
-//					classSplitting = true
-//				}
-			}
+			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {}
 
 			fragment = builder.BuilderIntegrationFragment {}
 
@@ -95,6 +87,10 @@ Workflow {
 			
 			// rename refactoring
 			fragment = refactoring.RefactorElementNameFragment {}
+			
+			// Xbase support
+			fragment = types.TypesGeneratorFragment {}
+			fragment = xbase.XbaseGeneratorFragment {}
 		}
 	}
 }

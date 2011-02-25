@@ -9,14 +9,14 @@ package «packageName()»;
 
 «addImportsHere()-»
 
-public class «name» «IF superType!=null»extends «superType.simpleName()» «ENDIF»{
+public class «name» «IF superType!=null»extends «superType.toString()» «ENDIF»{
 	«FOREACH features AS f»
-	private «f.type.referenced.simpleName()» «f.name»;
+	private «f.type.toString()» «f.name»;
 	
-	public void set«f.name.toFirstUpper()»(«f.type.referenced.simpleName()» «f.name») {
+	public void set«f.name.toFirstUpper()»(«f.type.toString()» «f.name») {
 	  this.«f.name» = «f.name»;
 	} 
-	public «f.type.referenced.simpleName()» get«f.name.toFirstUpper()»() {
+	public «f.type.toString()» get«f.name.toFirstUpper()»() {
 	  return «f.name»;
 	} 
 	«ENDFOREACH-»

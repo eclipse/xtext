@@ -7,57 +7,49 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.ui.linking;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.example.domainmodel.Attribute;
-import org.eclipse.xtext.example.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.Entity;
-import org.eclipse.xtext.example.domainmodel.Reference;
-import org.eclipse.xtext.example.domainmodel.TypeRef;
+import org.eclipse.xtext.example.domainmodel.Operation;
+import org.eclipse.xtext.example.domainmodel.Property;
 import org.eclipse.xtext.example.domainmodel.util.DomainmodelSwitch;
+import org.eclipse.xtext.example.validation.IssueCodes;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
 
 /**
- * @author Jan Koehnleinnitial contribution and API
+ * @author Jan Koehnlein initial contribution and API
  */
 public class DomainmodelLinkingDiagnosticMessageProvider extends LinkingDiagnosticMessageProvider {
 
-	public static final String MISSING_SUPERTYPE = "org.eclipse.xtext.example.domainmodel.MISSING_SUPERTYPE";
-	public static final String MISSING_ATTRIBUTE_TYPE = "org.eclipse.xtext.example.domainmodel.MISSING_ATTRIBUTE_TYPE";
-	public static final String MISSING_REFERENCE_TYPE = "org.eclipse.xtext.example.domainmodel.MISSING_REFERENCE_TYPE";
-
 	@Override
 	public DiagnosticMessage getUnresolvedProxyMessage(final ILinkingDiagnosticContext context) {
-		DiagnosticMessage diagnosticMessage = new DomainmodelSwitch<DiagnosticMessage>() {
-			@Override
-			public DiagnosticMessage caseEntity(Entity entity) {
-				return new DiagnosticMessage("Missing supertype " + context.getLinkText(), Severity.ERROR,
-						MISSING_SUPERTYPE, context.getLinkText());
-			}
-
-			@Override
-			public DiagnosticMessage caseTypeRef(TypeRef typeRef) {
-				return doSwitch(typeRef.eContainer());
-			}
-
-			@Override
-			public DiagnosticMessage caseAttribute(Attribute object) {
-				if (context.getReference() == DomainmodelPackage.Literals.TYPE_REF__REFERENCED) {
-					return new DiagnosticMessage("Missing attribute type " + context.getLinkText(),
-							Severity.ERROR, MISSING_ATTRIBUTE_TYPE, context.getLinkText());
+		EObject element = context.getContext();
+		if (element instanceof JvmTypeReference) {
+			JvmTypeReference jvmTypeReference = (JvmTypeReference) element;
+			DiagnosticMessage diagnosticMessage = new DomainmodelSwitch<DiagnosticMessage>() {
+				@Override
+				public DiagnosticMessage caseEntity(Entity entity) {
+					return new DiagnosticMessage("Missing supertype " + context.getLinkText(), Severity.ERROR,
+							IssueCodes.MISSING_TYPE, context.getLinkText());
 				}
-				return null;
-			}
 
-			@Override
-			public DiagnosticMessage caseReference(Reference object) {
-				if (context.getReference() == DomainmodelPackage.Literals.TYPE_REF__REFERENCED) {
-					return new DiagnosticMessage("Missing reference type " + context.getLinkText(),
-							Severity.ERROR, MISSING_REFERENCE_TYPE, context.getLinkText());
+				@Override
+				public DiagnosticMessage caseProperty(Property property) {
+					return new DiagnosticMessage("Missing property type " + context.getLinkText(), Severity.ERROR,
+							IssueCodes.MISSING_TYPE, context.getLinkText());
 				}
-				return null;
-			}
-		}.doSwitch(context.getContext());
-		return diagnosticMessage != null ? diagnosticMessage : super.getUnresolvedProxyMessage(context);
+
+				@Override
+				public DiagnosticMessage caseOperation(Operation operation) {
+					return new DiagnosticMessage("Missing return type " + context.getLinkText(), Severity.ERROR,
+							IssueCodes.MISSING_TYPE, context.getLinkText());
+				}
+			}.doSwitch(jvmTypeReference.eContainer());
+			if (diagnosticMessage != null)
+				return diagnosticMessage;
+		}
+		return super.getUnresolvedProxyMessage(context);
 	}
 }

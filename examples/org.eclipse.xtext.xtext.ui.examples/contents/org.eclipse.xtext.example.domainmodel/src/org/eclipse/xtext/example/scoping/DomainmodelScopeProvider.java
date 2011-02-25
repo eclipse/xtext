@@ -3,18 +3,7 @@
  */
 package org.eclipse.xtext.example.scoping;
 
-import static org.eclipse.xtext.scoping.Scopes.*;
-
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.example.domainmodel.Entity;
-import org.eclipse.xtext.example.domainmodel.Feature;
-import org.eclipse.xtext.example.domainmodel.Reference;
-import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 
 /**
  * This class contains custom scoping description.
@@ -25,14 +14,6 @@ import com.google.common.collect.Iterables;
  */
 public class DomainmodelScopeProvider extends AbstractDeclarativeScopeProvider {
 	
-	public IScope scope_Reference_opposite(final Reference ref, EReference eRef) {
-		EList<Feature> features = ((Entity) ref.getType().getReferenced()).getFeatures();
-		Iterable<Reference> references = Iterables.filter(features, Reference.class);
-		references = Iterables.filter(references, new Predicate<Reference>(){
-			public boolean apply(Reference input) {
-				return ref.eContainer().equals(input.getType().getReferenced());
-			}});
-		return scopeFor(references);
-	}
+	
 
 }
