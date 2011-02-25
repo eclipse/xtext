@@ -113,7 +113,7 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 	public LinkedPositionGroup getLinkedPositionGroup() {
 		try {
 			final LinkedPositionGroup[] result = new LinkedPositionGroup[1];
-			workbench.getActiveWorkbenchWindow().run(false, true, new IRunnableWithProgress() {
+			getWorkbench().getActiveWorkbenchWindow().run(false, true, new IRunnableWithProgress() {
 				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 					result[0] = internalGetLinkedPositionGroup(monitor);
 					if(monitor.isCanceled()) 
@@ -240,6 +240,10 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 		return document;
 	}
 
+	protected IWorkbench getWorkbench() {
+		return workbench;
+	}
+	
 	public static class LinkedModelUpdateAcceptor implements IRefactoringUpdateAcceptor {
 
 		private Set<TextEdit> edits = Sets.newHashSet();

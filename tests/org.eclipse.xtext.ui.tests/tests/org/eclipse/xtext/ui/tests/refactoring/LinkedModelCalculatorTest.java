@@ -16,6 +16,8 @@ import org.eclipse.jface.text.link.LinkedPosition;
 import org.eclipse.jface.text.link.LinkedPositionGroup;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.ui.refactoring.impl.LinkedModelCalculator;
 
 import com.google.common.collect.Lists;
@@ -61,6 +63,11 @@ public class LinkedModelCalculatorTest extends TestCase {
 					return super.sortPositions(linkedPositions, invocationOffset);
 					// Do not sort
 				return linkedPositions;
+			}
+			
+			@Override
+			protected IWorkbench getWorkbench() { 
+				return PlatformUI.getWorkbench();
 			}
 		};
 	}
