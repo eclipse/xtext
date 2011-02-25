@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests.compiler;
 
+import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -15,7 +16,6 @@ import junit.framework.Assert;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.lib.Functions;
@@ -101,7 +101,7 @@ public class CompilerTestHelper {
 	}
 
 	protected String compileToJavaCode(String xtendCode) {
-		IAppendable appandable = new IAppendable.StringBuilderBasedAppendable();
+		StringWriter appandable = new StringWriter();
 		try {
 			final String text = "package foo class Test { Object foo() " + xtendCode + " }";
 			final XtendFile file = parseHelper.parse(text);

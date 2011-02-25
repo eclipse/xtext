@@ -6,10 +6,9 @@ import java.io.IOException;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
-import org.eclipse.xtext.xbase.compiler.IAppendable.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xtend2.Xtend2StandaloneSetup;
 import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
+import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
 import com.google.inject.Injector;
 
@@ -41,13 +40,11 @@ public class TestCaseCompiler {
 
 		Resource res = set.getResource(org.eclipse.emf.common.util.URI.createFileURI(from), true);
 
-		StringBuilderBasedAppendable appendable = new IAppendable.StringBuilderBasedAppendable();
-		Xtend2Compiler compiler = injector.getInstance(Xtend2Compiler.class);
-		compiler.compile(res.getContents().get(0), appendable);
 		final File file = new File(to);
 		createFolders(file);
 		FileWriter writer = new FileWriter(file);
-		writer.append(appendable.toString());
+		Xtend2Compiler compiler = injector.getInstance(Xtend2Compiler.class);
+		compiler.compile((XtendFile)res.getContents().get(0), writer);
 		writer.close();
 		System.out.println("compiled " + from + " to " + to);
 	}

@@ -106,7 +106,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		for (XCatchClause catchClause : expr.getCatchClauses()) {
 			JvmTypeReference type = catchClause.getDeclaredParam().getParameterType();
 			final String name = declareNameInVariableScope(catchClause.getDeclaredParam(), b);
-			b.append(" catch (").append(getSerializedForm(type)).append(" ").append(name).append(") { ");
+			b.append(" catch (").append(type).append(" ").append(name).append(") { ");
 			b.increaseIndentation();
 			internalToJavaStatement(catchClause.getExpression(), b, true);
 			if (isReferenced && ! isPrimitiveVoid(catchClause.getExpression())) {
@@ -163,10 +163,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		if (varDeclaration.getType() != null) {
 			final JvmTypeReference type = varDeclaration.getType();
-			b.append(getSerializedForm(type, varDeclaration, false, true));
+			serialize(type, varDeclaration, b, false, true);
 		} else {
 			final JvmTypeReference type = getTypeProvider().getType(varDeclaration.getRight());
-			b.append(getSerializedForm(type, varDeclaration, false, true));
+			serialize(type, varDeclaration, b, false, true);
 		}
 		b.append(" ");
 		b.append(declareNameInVariableScope(varDeclaration, b));
@@ -225,7 +225,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		internalToJavaStatement(expr.getForExpression(), b, true);
 		b.append("\nfor (");
 		JvmTypeReference paramType = getTypeProvider().getTypeForIdentifiable(expr.getDeclaredParam());
-		b.append(paramType.getIdentifier());
+		b.append(paramType);
 		b.append(" ");
 		String varName = declareNameInVariableScope(expr.getDeclaredParam(), b);
 		b.append(varName);
@@ -245,14 +245,14 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	public void _toJavaExpression(XConstructorCall expr, IAppendable b) {
 		b.append("new ");
-		b.append(expr.getConstructor().getDeclaringType().getQualifiedName('.'));
+		b.append(expr.getConstructor().getDeclaringType());
 		if (!expr.getTypeArguments().isEmpty()) {
 			b.append("<");
 			for (int i = 0; i < expr.getTypeArguments().size(); i++) {
 				JvmTypeReference arg = expr.getTypeArguments().get(i);
-				b.append(arg.getQualifiedName('.'));
+				b.append(arg);
 				if (i + 1 < expr.getTypeArguments().size())
-					b.append(", ");
+					b.append(",");
 			}
 			b.append(">");
 		}
@@ -329,7 +329,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		JvmTypeReference type = getTypeProvider().getType(expr);
 		String switchResultName = makeJavaIdentifier(b.declareVariable(Tuples.pair(expr,"result"), "switchResult"));
 		if (isReferenced) {
-			b.append("\n").append(getSerializedForm(type)).append(" ").append(switchResultName).append(" = null;");
+			b.append("\n").append(type).append(" ").append(switchResultName).append(" = null;");
 		}
 		
 		internalToJavaStatement(expr.getSwitch(), b, true);
@@ -340,7 +340,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			// define synthetic name
 			name = "__valOfSwitchOver";
 		}
-		b.append("\nfinal ").append(getReturnTypeName(expr.getSwitch())).append(" ");
+		JvmTypeReference typeReference = getTypeProvider().getType(expr.getSwitch());
+		b.append("\nfinal ").append(typeReference).append(" ");
 		String variableName = b.declareVariable(expr, name);
 		b.append(variableName);
 		b.append(" = ");
@@ -356,21 +357,20 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.append("\nif (!").append(matchedVariable).append(") {");
 			b.increaseIndentation();
 			if (casePart.getTypeGuard() != null) {
-				final String guardType = getSerializedForm(casePart.getTypeGuard());
 				b.append("\nif (");
 				b.append(variableName);
 				b.append(" instanceof ");
-				b.append(guardType);
+				b.append(casePart.getTypeGuard().getType());
 				b.append(") {");
 				b.increaseIndentation();
 
 				// declare local var for case
 				String simpleName = getNameProvider().getSimpleName(casePart);
 				if (simpleName != null) {
-					b.append("\nfinal ").append(guardType).append(" ");
+					b.append("\nfinal ").append(casePart.getTypeGuard()).append(" ");
 					String typeGuardName = b.declareVariable(casePart, simpleName);
 					b.append(typeGuardName);
-					b.append(" = (").append(guardType).append(") ").append(variableName).append(";");
+					b.append(" = (").append(casePart.getTypeGuard()).append(") ").append(variableName).append(";");
 				}
 			}
 			if (casePart.getCase() != null) {
@@ -436,24 +436,28 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			throw new IllegalArgumentException("a closure definition does not cause any sideffeccts");
 		JvmTypeReference type = getTypeProvider().getType(closure);
 		TypeArgumentContext context = ctxProvider.getReceiverContext(type);
-		final String serializedFormWithConstraints = getSerializedForm(type);
-		final String serializedFormWithoutConstraints = getSerializedForm(type, null, true, false);
-		b.append("\n").append("final ").append(serializedFormWithConstraints);
+		b.append("\n").append("final ");
+		b.append(type);
 		b.append(" ");
 		String variableName = makeJavaIdentifier(b.declareVariable(closure, "function"));
 		b.append(variableName).append(" = ");
-		b.append("new ").append(serializedFormWithoutConstraints).append("() {");
+		b.append("new ");
+		serialize(type, closure, b, true, false);
+		b.append("() {");
 		b.increaseIndentation().increaseIndentation();
 		JvmOperation operation = functionConversion.findSingleMethod(type);
 		final JvmTypeReference returnType = context.resolve(operation.getReturnType());
-		b.append("\npublic ").append(getSerializedForm(returnType, null, true, false)).append(" ").append(operation.getSimpleName());
+		b.append("\npublic ");
+		serialize(returnType, closure, b, true, false);
+		b.append(" ").append(operation.getSimpleName());
 		b.append("(");
 		EList<JvmFormalParameter> closureParams = closure.getFormalParameters();
 		for (Iterator<JvmFormalParameter> iter = closureParams.iterator(); iter.hasNext();) {
 			JvmFormalParameter param = iter.next();
 			final JvmTypeReference parameterType2 = getTypeProvider().getTypeForIdentifiable(param);
 			final JvmTypeReference parameterType = context.resolve(parameterType2);
-			b.append(getSerializedForm(parameterType, null, true, false)).append(" ");
+			serialize(parameterType, closure, b, true, false);
+			b.append(" ");
 			String name = makeJavaIdentifier(b.declareVariable(param, param.getName()));
 			b.append(name);
 			if (iter.hasNext())

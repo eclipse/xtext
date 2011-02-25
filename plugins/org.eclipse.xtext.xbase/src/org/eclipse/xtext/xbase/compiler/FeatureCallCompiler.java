@@ -102,14 +102,15 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				if (!EcoreUtil.equals(expectedType, type)) {
 					String varName = getVarName(((XAbstractFeatureCall) arg).getFeature(), b);
 					String finalVariable = b.declareVariable(Tuples.create("Convertable", arg), "final_" + varName);
-					String serializedForm = getSerializedForm(type, arg, true, true);
 					b.append("\n")
-						.append("final ")
-						.append(serializedForm)
-						.append(" ")
+						.append("final ");
+					serialize(type,expr,b,true,true);
+					b.append(" ")
 						.append(finalVariable)
 						.append(" = ")
-						.append("(").append(serializedForm).append(")")
+						.append("(");
+					serialize(type,expr,b,true,true);
+					b.append(")")
 						.append(makeJavaIdentifier(varName))
 						.append(";");
 				}	
@@ -151,7 +152,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 
 	protected boolean appendReceiver(XAbstractFeatureCall call, IAppendable b) {
 		if (isStatic(call.getFeature())) {
-			b.append(((JvmFeature) call.getFeature()).getDeclaringType().getQualifiedName('.'));
+			b.append(((JvmFeature) call.getFeature()).getDeclaringType());
 			return true;
 		}
 		XExpression receiver = featureCallToJavaMapping.getActualReceiver(call);
@@ -162,7 +163,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				b.append("==null?");
 				b.append("(");
 				JvmTypeReference type = getTypeProvider().getType(expr);
-				b.append(getSerializedForm(type));
+				b.append(type);
 				b.append(")null:");
 				internalToJavaExpression(receiver, b);
 				return true;

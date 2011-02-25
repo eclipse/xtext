@@ -7,10 +7,30 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Maps.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmVoid;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -22,6 +42,8 @@ public interface IAppendable {
 	IAppendable increaseIndentation();
 
 	IAppendable decreaseIndentation();
+	
+	List<String> getImports();
 
 	void openScope();
 
@@ -41,9 +63,15 @@ public interface IAppendable {
 			if (obj instanceof Later) {
 				throw new IllegalArgumentException("Later cannot be appended. Call exec on it.");
 			}
-			String string = String.valueOf(obj);
-			String replaced = string.replace("\n", getIndentationString());
-			builder.append(replaced);
+			if (obj instanceof JvmTypeReference) {
+				appendTypeRef((JvmTypeReference)obj);
+			} else if (obj instanceof JvmType) {
+				appendType((JvmType)obj);
+			} else {
+				String string = String.valueOf(obj);
+				String replaced = string.replace("\n", getIndentationString());
+				builder.append(replaced);
+			}
 			return this;
 		}
 
@@ -74,9 +102,15 @@ public interface IAppendable {
 		}
 
 		private Stack<Map<Object, String>> localVars = new Stack<Map<Object, String>>();
+		private boolean organizeImports;
+		
+		public StringBuilderBasedAppendable(boolean organizeImports){
+			this.organizeImports = organizeImports;
+			openScope();
+		}
 		
 		public StringBuilderBasedAppendable(){
-			openScope();
+			this(false);
 		}
 
 		public void openScope() {
@@ -121,6 +155,77 @@ public interface IAppendable {
 			if (localVars.isEmpty())
 				throw new IllegalStateException("No local scope has been opened.");
 			localVars.pop();
+		}
+		
+		private Map<String,String> imports = newHashMap();
+
+		protected void appendTypeRef(JvmTypeReference typeRef) {
+			if (typeRef instanceof JvmParameterizedTypeReference) {
+				final JvmType type = typeRef.getType();
+				appendType(type);
+				EList<JvmTypeReference> arguments = ((JvmParameterizedTypeReference) typeRef).getArguments();
+				if (!arguments.isEmpty()) {
+					append("<");
+					Iterator<JvmTypeReference> iterator = arguments.iterator();
+					while (iterator.hasNext()) {
+						JvmTypeReference jvmTypeReference = iterator.next();
+						appendTypeRef(jvmTypeReference);
+						if (iterator.hasNext())
+							append(",");
+					}
+					append(">");
+				}
+			} else if (typeRef instanceof JvmWildcardTypeReference) {
+				append("?");
+				Iterator<JvmTypeConstraint> iterator = ((JvmWildcardTypeReference) typeRef).getConstraints().iterator();
+				while (iterator.hasNext()) {
+					JvmTypeConstraint constraint = iterator.next();
+					if (constraint instanceof JvmUpperBound) {
+						append(" extends ");
+					} else {
+						append(" super ");
+					}
+					appendTypeRef(constraint.getTypeReference());
+					if (iterator.hasNext())
+						append(" & ");
+				}
+			} else if (typeRef instanceof JvmGenericArrayTypeReference) {
+				append(typeRef.getType());
+			}
+		}
+
+		protected void appendType(final JvmType type) {
+			if (type instanceof JvmPrimitiveType || type instanceof JvmVoid || type instanceof JvmTypeParameter) {
+				append(type.getQualifiedName('.'));
+			} else if (type instanceof JvmArrayType) {
+				appendTypeRef(((JvmArrayType) type).getComponentType());
+				append("[]");
+			} else {
+				final String qn = type.getQualifiedName('.');
+				final String simpleName = type.getSimpleName();
+				if (qn.startsWith("java.lang.")) {
+					append(simpleName);
+				} else if (!organizeImports) {
+					append(qn);
+				} else {
+					if (imports.containsKey(simpleName)) {
+						if (qn.equals(imports.get(simpleName))) {
+							append(simpleName);
+						} else {
+							append(qn);
+						}
+					} else {
+						imports.put(simpleName, qn);
+						append(simpleName);
+					}
+				}
+			}
+		}
+
+		public List<String> getImports() {
+			ArrayList<String> result = newArrayList(imports.values());
+			Collections.sort(result);
+			return result;
 		}
 
 	}

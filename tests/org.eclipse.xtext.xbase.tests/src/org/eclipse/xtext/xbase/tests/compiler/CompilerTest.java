@@ -33,7 +33,7 @@ public class CompilerTest extends AbstractXbaseTestCase {
 		assertCompilesTo(
 				"\nint _xblockexpression = (int)-1;\n" +
 				"{\n" +
-				"  final java.util.ArrayList<java.lang.String> _this = new java.util.ArrayList<java.lang.String>();\n" +
+				"  final java.util.ArrayList<String> _this = new java.util.ArrayList<String>();\n" +
 				"  int _size = _this.size();\n" + 
 				"  _xblockexpression = (_size);\n" +
 				"}\n" +
@@ -43,7 +43,7 @@ public class CompilerTest extends AbstractXbaseTestCase {
 	
 	public void testIf() throws Exception {
 		assertCompilesTo(
-				"\njava.lang.Integer _xifexpression = null;\n" +
+				"\nInteger _xifexpression = null;\n" +
 				"if (true) {\n" +
 				"  _xifexpression = new Integer(42);\n" +
 				"} else {\n" +
@@ -54,7 +54,7 @@ public class CompilerTest extends AbstractXbaseTestCase {
 
 	public void testForEach() throws Exception {
 		assertCompilesTo(
-				"\nfor (java.lang.String s : new java.util.ArrayList<java.lang.String>()) {\n" +
+				"\nfor (String s : new java.util.ArrayList<String>()) {\n" +
 				"  s.length();\n" +
 				"}"
 				, "for (String s : new java.util.ArrayList<String>()) " +

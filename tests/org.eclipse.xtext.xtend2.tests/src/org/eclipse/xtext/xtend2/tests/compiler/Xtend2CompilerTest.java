@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xtend2.tests.compiler;
 
-import org.eclipse.xtext.xbase.compiler.IAppendable;
+import java.io.StringWriter;
+
 import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
@@ -13,13 +14,14 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 				"  Integer doStuff(String x) x.length\n" +
 				"}\n";
 		final String expected = "package foo;\n" + 
+				"\n" +
 				"\n" + 
 				"public class Bar {\n" +
 				"  private final Bar _this = this;\n" + 
 				"  \n" +
-				"  public java.lang.Integer doStuff(java.lang.String x) {\n" + 
+				"  public Integer doStuff(String x) {\n" + 
 				"    int _length = x.length();\n" + 
-				"    return ((java.lang.Integer)_length);\n" + 
+				"    return ((Integer)_length);\n" + 
 				"  }\n" + 
 				"}";
 		assertCompilesTo(expected, input);
@@ -34,11 +36,12 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		final String expected =  
 		"package foo;\n" +
 		"\n" + 
+		"\n" + 
 		"public class Bar {\n" +
 		"  private final Bar _this = this;\n" + 
 		"  \n" + 
-		"  public java.lang.String foo() {\n" + 
-		"    return new java.lang.String();\n" + 
+		"  public String foo() {\n" + 
+		"    return new String();\n" + 
 		"  }\n" + 
 		"}";
 		assertCompilesTo(expected, input);
@@ -52,7 +55,8 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		final String expected =  
 		"package foo;\n" +
 		"\n" + 
-		"public class Bar extends java.lang.Object {\n" +
+		"\n" + 
+		"public class Bar extends Object {\n" +
 		"  private final Bar _this = this;\n" + 
 		"}";
 		assertCompilesTo(expected, input);
@@ -66,9 +70,33 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		final String expected =  
 		"package foo;\n" +
 		"\n" + 
-		"public class Bar implements java.lang.Cloneable, java.io.Serializable {\n" +
+		"import java.io.Serializable;\n" + 
+		"\n" + 
+		"public class Bar implements Cloneable, Serializable {\n" +
 		"  private final Bar _this = this;\n" + 
 		"}";
+		assertCompilesTo(expected, input);
+	}
+	
+	public void testConstructor_2() throws Exception {
+		final String input = 
+			"package foo\n" +
+			"class Bar {\n" +
+			"  foo() new java.util.HashMap<String,java.io.Serializable>()" +
+			"}\n";
+		final String expected =  
+			"package foo;\n" +
+			"\n" + 
+			"import java.io.Serializable;\n" + 
+			"import java.util.HashMap;\n" + 
+			"\n" + 
+			"public class Bar {\n" +
+			"  private final Bar _this = this;\n" +
+			"  \n" +
+			"  public HashMap<String,Serializable> foo() {\n" +
+			"    return new HashMap<String,Serializable>();\n" +
+			"  }\n" + 
+			"}";
 		assertCompilesTo(expected, input);
 	}
 
@@ -78,7 +106,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 	protected void assertCompilesTo(final String expected, final String input) throws Exception {
 		XtendFile file = file(input,true);
 		Xtend2Compiler compiler = get(Xtend2Compiler.class);
-		final IAppendable.StringBuilderBasedAppendable appendable = new IAppendable.StringBuilderBasedAppendable();
+		StringWriter appendable = new StringWriter();
 		compiler.compile(file, appendable);
 		assertEquals(expected,appendable.toString());
 	}
