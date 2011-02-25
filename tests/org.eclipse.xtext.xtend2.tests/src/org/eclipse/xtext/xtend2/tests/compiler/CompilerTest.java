@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests.compiler;
 
+import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -15,7 +16,6 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
@@ -184,7 +184,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	}
 
 	protected String compileToJavaCode(String xtendCode) {
-		IAppendable appandable = new IAppendable.StringBuilderBasedAppendable();
+		StringWriter appandable = new StringWriter();
 		try {
 			final XtendFile file = parseHelper.parse(xtendCode);
 			assertNotNull(file);

@@ -3,6 +3,8 @@ package org.eclipse.xtext.xtend2.compiler;
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 
+import java.io.IOException;
+import java.io.Writer;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -24,6 +26,7 @@ import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
+import org.eclipse.xtext.xbase.compiler.IAppendable.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
@@ -58,20 +61,41 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 	@Inject
 	private DispatchingSupport dispatchingSupport;
-	
+
 	@Inject
 	private Primitives primitives;
 
 	@Inject
 	private IXtend2JvmAssociations associations;
 
-	public void compile(EObject obj, IAppendable appendable) {
+	public void compile(XtendFile obj, Writer writer) {
+		try {
+			if (obj.getPackage() != null) {
+				writer.append("package ");
+				writer.append(obj.getPackage());
+				writer.append(";\n");
+			}
+			StringBuilderBasedAppendable appendable = new IAppendable.StringBuilderBasedAppendable(true);
+			if (obj.getXtendClass() != null) {
+				compile(obj.getXtendClass(), appendable);
+			}
+			for (String imprt : appendable.getImports()) {
+				writer.append("\nimport ").append(imprt).append(";");
+			}
+			writer.append("\n");
+			writer.append(appendable.toString());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	protected void compile(EObject obj, IAppendable appendable) {
 		if (obj instanceof XtendClass) {
 			compile((XtendClass) obj, appendable);
 		} else if (obj instanceof XtendFunction) {
 			compile((XtendFunction) obj, appendable);
 		} else if (obj instanceof XtendFile) {
-			compile((XtendFile) obj, appendable);
+			compile(obj, appendable);
 		} else {
 			throw new IllegalArgumentException();
 		}
@@ -85,25 +109,15 @@ public class Xtend2Compiler extends XbaseCompiler {
 		return super.isLocalVarReference(expr);
 	}
 
-	protected void compile(XtendFile obj, IAppendable appendable) {
-		if(obj.getPackage() != null) {
-			appendable.append("package ").append(obj.getPackage()).append(";\n");
-			appendable.append("\n");
-		}
-		if (obj.getXtendClass() != null) {
-			compile(obj.getXtendClass(), appendable);
-		}
-	}
-
 	protected void compile(XtendClass obj, IAppendable appendable) {
 		//TODO typeparams, abstract, final
-		appendable.append("public class ").append(obj.getName());
+		appendable.append("\npublic class ").append(obj.getName());
 		if (obj.getExtends() != null)
-			appendable.append(" extends ").append(obj.getExtends().getIdentifier());
+			appendable.append(" extends ").append(obj.getExtends());
 		if (!obj.getImplements().isEmpty()) {
-			appendable.append(" implements ").append(obj.getImplements().get(0).getIdentifier());
+			appendable.append(" implements ").append(obj.getImplements().get(0));
 			for (int i = 1; i < obj.getImplements().size(); ++i)
-				appendable.append(", ").append(obj.getImplements().get(i).getIdentifier());
+				appendable.append(", ").append(obj.getImplements().get(i));
 		}
 		appendable.append(" {");
 		appendable.increaseIndentation();
@@ -112,17 +126,17 @@ public class Xtend2Compiler extends XbaseCompiler {
 			if (member instanceof XtendFunction) {
 				compile((XtendFunction) member, appendable);
 			} else if (member instanceof DeclaredDependency) {
-				compile((DeclaredDependency)member, appendable);
+				compile((DeclaredDependency) member, appendable);
 			}
 		}
 		generateDispatchMethods(obj, appendable);
 		appendable.decreaseIndentation();
 		appendable.append("\n}");
 	}
-	
+
 	protected void compile(DeclaredDependency dependency, IAppendable appendable) {
 		appendable.append("\n@com.google.inject.Inject private ");
-		appendable.append(getSerializedForm(dependency.getType())).append(" ");
+		appendable.append(dependency.getType()).append(" ");
 		appendable.append(appendable.declareVariable(dependency, dependency.getSimpleName())).append(";");
 	}
 
@@ -145,7 +159,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 			IAppendable a) {
 		a.openScope();
 		a.append("\n\npublic ");
-		a.append(getSerializedForm(dispatchOperation.getReturnType())).append(" ");
+		a.append(dispatchOperation.getReturnType()).append(" ");
 		a.append(dispatchOperation.getSimpleName()).append("(");
 		declareParameters(dispatchOperation.getParameters(), a);
 		a.append(") {");
@@ -163,7 +177,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 					a.append("(").append(p1.getName()).append(" == null)");
 				} else {
 					a.append("(").append(p1.getName()).append(" instanceof ");
-					a.append(getSerializedForm(primitives.asWrapperTypeIfPrimitive(type).getType())).append(")");
+					a.append(primitives.asWrapperTypeIfPrimitive(type).getType()).append(")");
 				}
 				if (iter2.hasNext()) {
 					a.append("\n && ");
@@ -172,7 +186,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 			a.decreaseIndentation().decreaseIndentation();
 			a.append(") {").increaseIndentation();
 			a.append("\n");
-			if (!typeRefs.is(dispatchOperation.getReturnType(), Void.TYPE)){
+			if (!typeRefs.is(dispatchOperation.getReturnType(), Void.TYPE)) {
 				a.append("return ");
 			}
 			a.append(operation.getSimpleName()).append("(");
@@ -180,7 +194,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 			for (Iterator<JvmFormalParameter> iter2 = operation.getParameters().iterator(); iter2.hasNext();) {
 				JvmFormalParameter p1 = iter1.next();
 				JvmFormalParameter p2 = iter2.next();
-				a.append("(").append(getSerializedForm(primitives.asWrapperTypeIfPrimitive(p2.getParameterType()))).append(")");
+				a.append("(").append(primitives.asWrapperTypeIfPrimitive(p2.getParameterType())).append(")");
 				if (typeRefs.is(p2.getParameterType(), Void.class)) {
 					a.append("null");
 				} else {
@@ -208,8 +222,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		if (obj.isDispatch()) {
 			name = "_" + name;
 		}
-		appendable.append("\n\n").append("public ").append(getSerializedForm(returnType)).append(" ").append(name)
-				.append("(");
+		appendable.append("\n\n").append("public ").append(returnType).append(" ").append(name).append("(");
 		final EList<JvmFormalParameter> parameters = obj.getParameters();
 		declareParameters(parameters, appendable);
 		appendable.append(") ");
@@ -218,7 +231,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 			appendable.append("throws ");
 			for (Iterator<JvmTypeReference> iterator = checkedExceptions.iterator(); iterator.hasNext();) {
 				JvmTypeReference jvmTypeReference = iterator.next();
-				appendable.append(getSerializedForm(jvmTypeReference));
+				appendable.append(jvmTypeReference);
 				if (iterator.hasNext())
 					appendable.append(", ");
 			}
@@ -251,7 +264,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		for (int i = 0; i < numParams; i++) {
 			JvmFormalParameter p = parameters.get(i);
 			String varName = declareNameInVariableScope(p, appendable);
-			appendable.append(getSerializedForm(p.getParameterType())).append(" ").append(varName);
+			appendable.append(p.getParameterType()).append(" ").append(varName);
 			if (i != numParams - 1)
 				appendable.append(", ");
 		}
@@ -387,13 +400,12 @@ public class Xtend2Compiler extends XbaseCompiler {
 		// declare variable
 		JvmTypeReference type = getTypeProvider().getType(richString);
 		String variableName = makeJavaIdentifier(b.declareVariable(Tuples.pair(richString, "result"), "builder"));
-		String typeName = getSerializedForm(type);
 		b.append("\n");
-		b.append(typeName);
+		b.append(type);
 		b.append(" ");
 		b.append(variableName);
 		b.append(" = new ");
-		b.append(typeName);
+		b.append(type);
 		b.append("();\n");
 		RichStringPrepareCompiler compiler = new RichStringPrepareCompiler(b, variableName);
 		richStringProcessor.process(richString, compiler, indentationHandler.get());

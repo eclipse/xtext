@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtend2.ui.builder;
 import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.util.Strings.*;
 
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 
 import org.apache.log4j.Logger;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.compiler.IAppendable.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
+import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
@@ -132,8 +134,8 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 	protected void compile(Resource sourceResource, IFile targetFile, final SubMonitor progress) throws CoreException,
 			UnsupportedEncodingException {
 		progress.setWorkRemaining(100);
-		StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable();
-		compiler.compile(sourceResource.getContents().get(0), appendable);
+		StringWriter appendable = new StringWriter();
+		compiler.compile((XtendFile)sourceResource.getContents().get(0), appendable);
 		progress.worked(50);
 		String encoding = encodingProvider.getEncoding(sourceResource.getURI());
 		workspaceUtil.createParentFolders(targetFile, progress.newChild(10));
