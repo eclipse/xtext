@@ -36,7 +36,7 @@ public class TerminalsPackratParser extends AbstractPackratParser {
 		throw new UnsupportedOperationException();
 	}
 	
-	public IParseResult parse(RuleCall ruleCall, Reader reader) {
+	public IParseResult parse(RuleCall ruleCall, Reader reader, int initialLookAhead) {
 		throw new UnsupportedOperationException();
 	}
 

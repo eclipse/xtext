@@ -27,7 +27,7 @@ public interface IParser {
 	
 	IParseResult parse(ParserRule rule, Reader reader);
 	
-	IParseResult parse(RuleCall ruleCall, Reader reader);
+	IParseResult parse(RuleCall ruleCall, Reader reader, int initialLookAhead);
 	
 	IParseResult reparse(IParseResult previousParseResult, ReplaceRegion replaceRegion);
 	
@@ -41,7 +41,7 @@ public interface IParser {
 			return null;
 		}
 		
-		public IParseResult parse(RuleCall ruleCall, Reader reader) {
+		public IParseResult parse(RuleCall ruleCall, Reader reader, int initialLookAhead) {
 			return null;
 		}
 

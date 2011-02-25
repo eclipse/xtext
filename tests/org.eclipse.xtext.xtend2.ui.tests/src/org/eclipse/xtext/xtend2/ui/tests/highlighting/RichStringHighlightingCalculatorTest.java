@@ -5,29 +5,48 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtend2.tests.editor.highlighting;
+package org.eclipse.xtext.xtend2.ui.tests.highlighting;
 
 import static com.google.common.collect.Maps.*;
 
 import java.util.Map;
 
+import junit.framework.Test;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
+import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.TextRegion;
-import org.eclipse.xtext.xtend2.tests.richstring.AbstractRichStringTest;
 import org.eclipse.xtext.xtend2.ui.highlighting.HighlightingConfiguration;
 import org.eclipse.xtext.xtend2.ui.highlighting.RichStringHighlightingCalculator;
+import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
+import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
+import org.eclipse.xtext.xtend2.ui.tests.search.SearchFilterTest;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
+import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendFile;
+import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class RichStringHighlightingCalculatorTest extends AbstractRichStringTest implements IHighlightedPositionAcceptor {
+public class RichStringHighlightingCalculatorTest extends AbstractXtend2UITestCase implements IHighlightedPositionAcceptor {
 
+	public static Test suite() {
+		return WorkbenchTestHelper.suite(RichStringHighlightingCalculatorTest.class);
+	}
+	
 	@Inject
 	private RichStringHighlightingCalculator calculator;
+	
+	@Inject
+	private WorkbenchTestHelper testHelper;
 	
 	private Map<TextRegion, String> expectedRegions;
 	
@@ -35,6 +54,33 @@ public class RichStringHighlightingCalculatorTest extends AbstractRichStringTest
 	protected void setUp() throws Exception {
 		super.setUp();
 		expectedRegions = newHashMap();
+	}
+	
+	protected String getPrefix() {
+		return "class Foo { foo() ";
+	}
+	
+	protected int getPrefixLength() {
+		return getPrefix().length();
+	}
+	
+	protected RichString richString(String string) throws Exception {
+		XtendClass clazz = clazz(getPrefix()+string+"}");
+		XtendFunction function = (XtendFunction) clazz.getMembers().get(0);
+		return (RichString) function.getExpression();
+	}
+	
+	protected XtendClass clazz(String string) throws Exception {
+		return file(string).getXtendClass();
+	}
+
+	protected XtendFile file(String string) throws Exception {
+		ResourceSet set = testHelper.getResourceSet();
+		Resource resource = set.createResource(URI.createURI("Foo.xtend"));
+		resource.load(new StringInputStream(string), null);
+		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
+		XtendFile file = (XtendFile) resource.getContents().get(0);
+		return file;
 	}
 	
 	public void testEmptyString() {

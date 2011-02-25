@@ -35,6 +35,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
+import org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ParseException;
@@ -72,6 +73,9 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			log.error("Invalid " + replaceRegion + " originalLength=" + oldRootNode.getTotalLength());
 			return fullyReparse(parser, previousParseResult, replaceRegion);
 		}
+		if (replaceRegion.getOffset() >= oldRootNode.getTotalLength() && replaceRegion.getText().trim().length() == 0) {
+			return fullyReparse(parser, previousParseResult, replaceRegion);
+		}
 		
 		PartialParsingPointers parsingPointers = calculatePartialParsingPointers(previousParseResult, replaceRegion.getOffset(), replaceRegion.getLength());
 		List<ICompositeNode> validReplaceRootNodes = parsingPointers.getValidReplaceRootNodes();
@@ -79,9 +83,17 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		String reparseRegion = "";
 		for (int i = validReplaceRootNodes.size() - 1; i >= 0; --i) {
 			oldCompositeNode = validReplaceRootNodes.get(i);
-			reparseRegion = insertChangeIntoReplaceRegion(oldCompositeNode, replaceRegion);
-			if (!"".equals(reparseRegion)) {
-				break;
+			if (!(oldCompositeNode instanceof SyntheticCompositeNode)) {
+				boolean replaceAtEnd = oldCompositeNode.getTotalEndOffset() == replaceRegion.getEndOffset();
+				reparseRegion = insertChangeIntoReplaceRegion(oldCompositeNode, replaceRegion);
+				if (!"".equals(reparseRegion)) {
+					if (!replaceAtEnd || !Character.isWhitespace(reparseRegion.charAt(reparseRegion.length() - 1))) {
+						if (log.isDebugEnabled()) {
+							log.debug("replace region: [" + oldCompositeNode.getTotalOffset() + " / length: " + oldCompositeNode.getTotalLength() + " of [" + oldRootNode.getTotalOffset() + " / lenght: " + oldRootNode.getTotalLength()+ "]");
+						}
+						break;	
+					}
+				}
 			}
 		}
 		if (oldCompositeNode == null || reparseRegion.equals("") || oldCompositeNode == oldRootNode) {
@@ -91,7 +103,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		IParseResult newParseResult = null;
 		try {
 			if (entryRuleOrRuleCall instanceof RuleCall)
-				newParseResult = parser.parse((RuleCall)entryRuleOrRuleCall, new StringReader(reparseRegion));
+				newParseResult = parser.parse((RuleCall)entryRuleOrRuleCall, new StringReader(reparseRegion), oldCompositeNode.getLookAhead());
 			else
 				newParseResult = parser.parse((ParserRule)entryRuleOrRuleCall, new StringReader(reparseRegion));
 		} catch (ParseException exc) {
@@ -122,25 +134,6 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			if (oldSemanticElement == null)
 				return fullyReparse(parser, previousParseResult, replaceRegion);
 		}
-//		if (oldSemanticElement == null) { // we are a delegating rule, traverse the children
-//			if (!oldCompositeNode.hasChildren()) {
-//				return fullyReparse(parser, previousParseResult, replaceRegion);
-//			}
-//			ICompositeNode composite = oldCompositeNode;
-//			while(composite != null && composite.hasChildren()) {
-//				INode node = composite.getFirstChild();
-//				oldSemanticElement = ((AbstractNode) node).basicGetSemanticElement();
-//				if (oldSemanticElement != null)
-//					break;
-//				if (node instanceof ICompositeNode) {
-//					composite = (ICompositeNode) node;
-//				} else {
-//					composite = null;
-//				}
-//			}
-//			if (oldSemanticElement == null)
-//				return fullyReparse(parser, previousParseResult, replaceRegion);
-//		}
 		if (oldSemanticElement == oldSemanticParentElement) {
 			throw new IllegalStateException("oldParent == oldElement");
 		}
@@ -161,15 +154,12 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		} else {
 			unloadSemanticObject(oldSemanticElement);
 		}
-		// TODO should be merged by the node model builder - offsets have to be adjusted, too!
-//		parseResult.getRootNode().setGrammarElement(replaceNode.getGrammarElement());
 		if (oldCompositeNode != oldRootNode) {
 			nodeModelBuilder.replaceAndTransferLookAhead(oldCompositeNode, newParseResult.getRootNode());
 			((ParseResult) newParseResult).setRootNode(oldRootNode);
 			StringBuilder builder = new StringBuilder(oldRootNode.getText());
 			replaceRegion.applyTo(builder);
 			nodeModelBuilder.setCompleteContent(oldRootNode, builder.toString());
-//			new InvariantChecker().checkInvariant(oldRootNode);
 		} 
 		return newParseResult;
 	}
@@ -237,24 +227,48 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 
 	protected boolean isInvalidRootNode(ICompositeNode rootNode, ICompositeNode candidate) {
 		int endOffset = candidate.getTotalEndOffset();
+		if (candidate instanceof SyntheticCompositeNode)
+			return true;
 		if (candidate.getGrammarElement() instanceof RuleCall) {
 			AbstractRule rule = ((RuleCall) candidate.getGrammarElement()).getRule();
 			if (!(rule instanceof ParserRule) || GrammarUtil.isDatatypeRule((ParserRule) rule))
 				return true;
 		}
+		if (candidate.getGrammarElement() instanceof Action) {
+			return true;
+		}
 		if (endOffset == rootNode.getTotalEndOffset()) {
-			INode lastLeaf = getLastChild(candidate);
-			if (lastLeaf != null && lastLeaf.getSyntaxErrorMessage() != null) {
-				EObject lastChildGrammarElement = lastLeaf.getGrammarElement();
-				if (lastChildGrammarElement == null)
-					return true;
-				AbstractElement candidateElement = getCandidateElement(candidate.getGrammarElement());
-				if (candidateElement != null) {
-					if (isCalledBy(lastChildGrammarElement, candidateElement)) {
-						return hasMandatoryFollowElements(candidateElement);
-					}
+			INode lastChild = getLastChild(candidate);
+			if (lastChild instanceof ICompositeNode) {
+				INode lastLeaf = getLastLeaf(candidate);
+				if (isInvalidLastChildNode(candidate, lastLeaf)) {
 					return true;
 				}
+			}
+			if (isInvalidLastChildNode(candidate, lastChild)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	protected boolean isInvalidLastChildNode(ICompositeNode candidate, INode lastChild) {
+		if (lastChild != null && lastChild.getSyntaxErrorMessage() != null) {
+			EObject lastChildGrammarElement = lastChild.getGrammarElement();
+			if (lastChildGrammarElement == null)
+				return true;
+			AbstractElement candidateElement = getCandidateElement(candidate.getGrammarElement());
+			if (candidateElement != null) {
+				if (isCalledBy(lastChildGrammarElement, candidateElement)) {
+					while(candidate != null) {
+						if (candidateElement != null && hasMandatoryFollowElements(candidateElement))
+							return true;
+						candidate = candidate.getParent();
+						if (candidate != null)
+							candidateElement = getCandidateElement(candidate.getGrammarElement());
+					}
+				}
+				return true;
 			}
 		}
 		return false;
@@ -385,6 +399,17 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 		}
 		return parent;
 	}
+	
+	private INode getLastLeaf(ICompositeNode parent) {
+		BidiTreeIterator<? extends INode> iterator = parent.getAsTreeIterable().iterator();
+		while(iterator.hasPrevious()) {
+			INode previous = iterator.previous();
+			if (previous instanceof ILeafNode) {
+				return previous;
+			} 
+		}
+		return null;
+	}
 
 	/**
 	 * Collects a list of all nodes containing the change region
@@ -441,15 +466,15 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 						if (remainingLookAhead != 0) {
 							Iterator<ILeafNode> iterator = node.getLeafNodes().iterator();
 							while(iterator.hasNext() && remainingLookAhead > 0) {
-								ILeafNode next = iterator.next();
-								if (!next.isHidden()) {
+								ILeafNode leaf = iterator.next();
+								if (!leaf.isHidden()) {
 									if (remainingLookAhead > 0)
 										remainingLookAhead--;
 									if (remainingLookAhead == 0) {
-										if (next.getTotalEndOffset() <= range.getOffset()) {
+										if (leaf.getTotalEndOffset() <= range.getOffset()) {
 											result.add(node);
 											previous = node;
-											if (node.getGrammarElement() != null && node.getGrammarElement().eClass() == XtextPackage.Literals.ACTION) {
+											if (isActionNode(node)) {
 												mustSkipNext = true;
 											}
 											break;
@@ -460,17 +485,21 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 						} else {
 							result.add(node);
 							previous = node;
-							if (node.getGrammarElement() != null && node.getGrammarElement().eClass() == XtextPackage.Literals.ACTION) {
+							if (isActionNode(node)) {
 								mustSkipNext = true;
 							}
 						}
 					}
-				} else {
-					mustSkipNext = node.getGrammarElement() != null && node.getGrammarElement().eClass() == XtextPackage.Literals.ACTION;
+				} else { // !mustSkipNext
+					mustSkipNext = isActionNode(node);
 				}
 			}
 		}
 		return result;
+	}
+
+	protected boolean isActionNode(ICompositeNode node) {
+		return node.getGrammarElement() != null && node.getGrammarElement().eClass() == XtextPackage.Literals.ACTION;
 	}
 	
 	public void setUnloader(IReferableElementsUnloader unloader) {

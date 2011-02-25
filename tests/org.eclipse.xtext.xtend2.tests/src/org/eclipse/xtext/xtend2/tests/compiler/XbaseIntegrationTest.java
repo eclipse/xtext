@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtend2.tests.compiler;
 
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
+import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 
 import com.google.inject.Inject;
 
@@ -50,7 +51,7 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		CompilerTestHelper.INJECTOR.injectMembers(this);
+		AbstractXtend2TestCase.getInjector().injectMembers(this);
 		testHelper.setUp();
 	}
 

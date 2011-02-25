@@ -213,6 +213,10 @@ public class XtextTokenStream extends CommonTokenStream {
 	public int getCurrentLookAhead() {
 		return currentLookAhead;  
 	}
+	
+	public void initCurrentLookAhead(int currentLookAhead) {
+		this.currentLookAhead = currentLookAhead;
+	}
 
 	public String getLexerErrorMessage(Token invalidToken) {
 		if (tokenSource instanceof org.eclipse.xtext.parser.antlr.Lexer) {

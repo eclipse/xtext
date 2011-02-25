@@ -21,12 +21,10 @@ import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase.TestSetup;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
 import com.google.common.base.Supplier;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import com.google.inject.Provider;
 
 /**
@@ -34,8 +32,6 @@ import com.google.inject.Provider;
  */
 public class CompilerTestHelper {
 
-	public static final Injector INJECTOR = new TestSetup().createInjectorAndDoEMFRegistration();
-	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
 
@@ -44,6 +40,9 @@ public class CompilerTestHelper {
 
 	@Inject
 	private ValidationTestHelper validationHelper;
+	
+	@Inject
+	private Xtend2Compiler xtend2Compiler;
 	
 	public void setUp() {
 		javaCompiler.addClassPathOfClass(getClass());
@@ -106,8 +105,7 @@ public class CompilerTestHelper {
 			final String text = "package foo class Test { Object foo() " + xtendCode + " }";
 			final XtendFile file = parseHelper.parse(text);
 			validationHelper.assertNoErrors(file);
-			Xtend2Compiler compiler = INJECTOR.getInstance(Xtend2Compiler.class);
-			compiler.compile(file, appandable);
+			xtend2Compiler.compile(file, appandable);
 		} catch (Exception e) {
 			throw new RuntimeException("Xtend compilation failed for: " + xtendCode, e);
 		}

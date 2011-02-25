@@ -233,9 +233,13 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			if (parameter != null) {
 				final JvmTypeReference type = getType(arg, rawType);
 				if (type != null) {
-					JvmTypeReference synonymType = this.synonymTypesProvider.findCompatibleSynonymType(type, parameter
-							.getParameterType().getType());
-					argTypes[i] = synonymType != null ? synonymType : type;
+					JvmTypeReference parameterType = parameter.getParameterType();
+					if (parameterType != null) {
+						JvmTypeReference synonymType = this.synonymTypesProvider.findCompatibleSynonymType(type, parameterType.getType());
+						argTypes[i] = synonymType != null ? synonymType : type;
+					} else {
+						argTypes[i] = type;
+					}
 				}
 			}
 		}

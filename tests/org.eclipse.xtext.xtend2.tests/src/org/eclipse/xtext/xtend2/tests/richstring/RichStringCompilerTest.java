@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests.richstring;
 
-import org.eclipse.xtext.xtend2.tests.compiler.CompilerTestHelper;
+import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 
 import com.google.inject.Inject;
 
@@ -22,7 +22,7 @@ public class RichStringCompilerTest extends AbstractRichStringEvaluationTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		CompilerTestHelper.INJECTOR.injectMembers(this);
+		AbstractXtend2TestCase.getInjector().injectMembers(this);
 		testHelper.setUp();
 	}
 
