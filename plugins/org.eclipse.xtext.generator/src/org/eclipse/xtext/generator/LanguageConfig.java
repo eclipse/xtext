@@ -127,6 +127,7 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 			throw new IllegalArgumentException("Couldn't load grammar for '" + uri + "'.");
 		}
 		if (!resource.getErrors().isEmpty()) {
+			LOG.error(resource.getErrors());
 			throw new IllegalStateException("Problem parsing '"+uri+"':"+resource.getErrors().toString());
 		}
 
