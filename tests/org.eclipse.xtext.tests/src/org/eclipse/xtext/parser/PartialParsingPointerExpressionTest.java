@@ -26,13 +26,13 @@ public class PartialParsingPointerExpressionTest extends AbstractPartialParsingP
 	public void testExpression_1_1() throws Exception {
 		String model = "(a+b+c)*(c/d)";
 		PartialParsingPointers parsingPointers = calculatePartialParsingPointers(model, 1, 1);
-		checkParseRegionPointers(parsingPointers, "a+b+c", "Action", "Addition");
+		checkParseRegionPointers(parsingPointers, "(a+b+c)", "RuleCall", "Parens");
 	}
 		
 	public void testExpression_3_1() throws Exception {
 		String model = "(a+b+c)*(c/d)";
 		PartialParsingPointers parsingPointers = calculatePartialParsingPointers(model, 3, 1);
-		checkParseRegionPointers(parsingPointers, "a+b+c", "Action", "Addition");
+		checkParseRegionPointers(parsingPointers, "(a+b+c)", "RuleCall", "Parens");
 	}
 	
 	public void testExpression_5_2() throws Exception {
