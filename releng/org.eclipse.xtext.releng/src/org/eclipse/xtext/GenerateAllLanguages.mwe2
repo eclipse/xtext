@@ -18,6 +18,6 @@ Workflow {
 	// examples
 	component = @example.arithmetics.Arithmetics {}
 	component = @example.GenerateEcoreDsl {}
-	component = @example.GenerateDomainmodelLanguage {}
+	component = @example.domainmodel.GenerateDomainmodelLanguage {}
 	component = @example.GenerateFowlerDsl {}
 }
