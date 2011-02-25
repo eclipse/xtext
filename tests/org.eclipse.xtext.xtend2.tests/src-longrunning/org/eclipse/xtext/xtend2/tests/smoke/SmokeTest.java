@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.StringInputStream;
@@ -59,6 +61,9 @@ public class SmokeTest extends AbstractXtend2TestCase {
 	
 	@Inject
 	private InvariantChecker invariantChecker;
+	
+	@Inject
+	private IJvmTypeProvider.Factory typeProviderFactory;
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -221,8 +226,10 @@ public class SmokeTest extends AbstractXtend2TestCase {
 			time = System.currentTimeMillis();
 		}
 		assertEquals(text, resource.getContents().size(), newResource.getContents().size());
+		EcoreUtil.resolveAll(resource);
+		EcoreUtil.resolveAll(newResource);
 		for(int i = 0; i < resource.getContents().size(); i++) {
-			assertTrue(text, EcoreUtil.equals(resource.getContents().get(i), newResource.getContents().get(i)));
+			assertEquals(text, EmfFormatter.objToStr(newResource.getContents().get(i)), EmfFormatter.objToStr(resource.getContents().get(i)));
 		}
 		if (logger.isDebugEnabled()) {
 			logger.debug("... took " + (System.currentTimeMillis() - time));
@@ -249,7 +256,6 @@ public class SmokeTest extends AbstractXtend2TestCase {
 		assertEquals(text, node.getTotalLength(), other.getTotalLength());
 		assertEquals(text, node.getGrammarElement(), other.getGrammarElement());
 		assertEquals(text, node.hasDirectSemanticElement(), other.hasDirectSemanticElement());
-//		assertTrue(text, EcoreUtil.equals(node.getSemanticElement(), other.getSemanticElement()));
 		assertEquals(text, node.getSyntaxErrorMessage(), other.getSyntaxErrorMessage());
 	}
 
@@ -298,6 +304,7 @@ public class SmokeTest extends AbstractXtend2TestCase {
 			logger.trace("createResource: " + model);
 		}
 		XtextResourceSet set = get(XtextResourceSet.class);
+		typeProviderFactory.findOrCreateTypeProvider(set);
 		LazyLinkingResource resource = (LazyLinkingResource) set.createResource(URI.createURI("Test.xtend"));
 		resource.load(new StringInputStream(model), null);
 		resource.resolveLazyCrossReferences(CancelIndicator.NullImpl);

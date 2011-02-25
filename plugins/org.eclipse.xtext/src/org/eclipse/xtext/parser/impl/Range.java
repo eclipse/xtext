@@ -8,6 +8,7 @@
 package org.eclipse.xtext.parser.impl;
 
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 
 /**
@@ -90,6 +91,13 @@ public class Range {
 					if (prev.getSyntaxErrorMessage() != null) {
 						merge(prev);
 						errorSeen = true;
+					} else if (prev instanceof ILeafNode) {
+						// Syntax errors are sometimes followed by leaf nodes that
+						// do not have a grammar element assigned
+						if (prev.getGrammarElement() == null) {
+							merge(prev);
+							errorSeen = true;
+						}
 					}
 				}
 			}

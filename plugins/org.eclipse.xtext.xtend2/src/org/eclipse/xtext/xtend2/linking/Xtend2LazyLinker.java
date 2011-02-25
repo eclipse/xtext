@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
-import org.eclipse.xtext.linking.lazy.LazyLinker;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
+import org.eclipse.xtext.xbase.linking.XbaseLazyLinker;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
@@ -28,7 +28,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class Xtend2LazyLinker extends LazyLinker implements Adapter {
+public class Xtend2LazyLinker extends XbaseLazyLinker implements Adapter {
 
 	@Inject
 	private JvmModelInferrer jvmModelInferrer;

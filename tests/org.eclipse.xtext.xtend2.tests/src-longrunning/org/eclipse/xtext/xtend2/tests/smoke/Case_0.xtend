@@ -1,6 +1,6 @@
-package org.eclipse.xtext.xtend2.tests.linking
+package org.eclipse.xtext.xtend2.tests.smoke
 
-class LinkingErrornessModelTestData {
+class Case_0 {
 
 	String foo(String a, String b) {
 		if (isUpper(a)) {

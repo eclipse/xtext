@@ -101,8 +101,9 @@ public abstract class AbstractXtend2TestCase extends TestCase {
 		if (packMatcher.find()) {
 			pathName = packMatcher.group(1).replace('.', '/') + "/";
 		}
-		classMatcher.find();
-		return pathName + classMatcher.group(1);
+		if (classMatcher.find())
+			return pathName + classMatcher.group(1);
+		return "Sample";
 	}
 
 	protected XtendFunction function(String string) throws Exception {
