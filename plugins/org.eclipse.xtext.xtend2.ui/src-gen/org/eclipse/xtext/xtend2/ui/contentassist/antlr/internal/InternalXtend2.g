@@ -2229,11 +2229,9 @@ rule__Function__Alternatives_7
 )
 
     |(
-{ before(grammarAccess.getFunctionAccess().getSemicolonKeyword_7_1()); }
-
-	';' 
-
-{ after(grammarAccess.getFunctionAccess().getSemicolonKeyword_7_1()); }
+{ before(grammarAccess.getFunctionAccess().getExpressionAssignment_7_1()); }
+(rule__Function__ExpressionAssignment_7_1)
+{ after(grammarAccess.getFunctionAccess().getExpressionAssignment_7_1()); }
 )
 
 ;
@@ -4565,7 +4563,7 @@ rule__Function__Group__7__Impl
 :
 (
 { before(grammarAccess.getFunctionAccess().getAlternatives_7()); }
-(rule__Function__Alternatives_7)
+(rule__Function__Alternatives_7)?
 { after(grammarAccess.getFunctionAccess().getAlternatives_7()); }
 )
 
@@ -16034,8 +16032,23 @@ rule__Function__ExpressionAssignment_7_0
     }
 :
 (
-{ before(grammarAccess.getFunctionAccess().getExpressionXExpressionParserRuleCall_7_0_0()); }
-	ruleXExpression{ after(grammarAccess.getFunctionAccess().getExpressionXExpressionParserRuleCall_7_0_0()); }
+{ before(grammarAccess.getFunctionAccess().getExpressionXBlockExpressionParserRuleCall_7_0_0()); }
+	ruleXBlockExpression{ after(grammarAccess.getFunctionAccess().getExpressionXBlockExpressionParserRuleCall_7_0_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__Function__ExpressionAssignment_7_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getFunctionAccess().getExpressionRichStringParserRuleCall_7_1_0()); }
+	ruleRichString{ after(grammarAccess.getFunctionAccess().getExpressionRichStringParserRuleCall_7_1_0()); }
 )
 
 ;

@@ -52,7 +52,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testCaseFunction_00() throws Exception {
-		XtendFile xtendFile = file("class Foo { dispatch foo(Object x) null dispatch foo(String x) null}");
+		XtendFile xtendFile = file("class Foo { dispatch foo(Object x) {null} dispatch foo(String x) {null}}");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 
 		// one main dispatch
@@ -84,7 +84,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testCaseFunction_01() throws Exception {
-		XtendFile xtendFile = file("class Foo { dispatch foo(Object x, String y) null dispatch foo(String x) null}");
+		XtendFile xtendFile = file("class Foo { dispatch foo(Object x, String y) {null} dispatch foo(String x) {null}}");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		
 		// two dispatch methods
@@ -130,7 +130,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testCaseFunction_02() throws Exception {
-		XtendFile xtendFile = file("class Foo { dispatch foo(Object x) 'foo' dispatch foo(String x) 'bar'}");
+		XtendFile xtendFile = file("class Foo { dispatch foo(Object x) {'foo'} dispatch foo(String x) {'bar'}}");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		
 		// one main dispatch
@@ -234,7 +234,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 	}
 
 	public void testInferredFunction() throws Exception {
-		XtendFile xtendFile = file("class Foo { bar() true }");
+		XtendFile xtendFile = file("class Foo { bar() { true } }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		XtendClass xtendClass = xtendFile.getXtendClass();
 		EList<JvmMember> jvmMembers = inferredType.getMembers();
@@ -248,7 +248,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 	}
 
 	public void testInferredFunctionWithReturnType() throws Exception {
-		XtendFile xtendFile = file("class Foo { Boolean bar() true }");
+		XtendFile xtendFile = file("class Foo { Boolean bar() { true } }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		assertTrue(inferredType.getMembers().get(0) instanceof JvmConstructor);
 		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
@@ -258,7 +258,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 	}
 
 	public void testInferredFunctionWithParameter() throws Exception {
-		XtendFile xtendFile = file("class Foo { bar(Boolean baz) true }");
+		XtendFile xtendFile = file("class Foo { bar(Boolean baz) { true } }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
 		XtendFunction xtendFunction = (XtendFunction) xtendFile.getXtendClass().getMembers().get(0);
@@ -270,7 +270,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 	}
 
 	public void testInferredFunctionWithSelfTypeReference() throws Exception {
-		XtendFile xtendFile = file("package foo class Foo { Foo bar() this }");
+		XtendFile xtendFile = file("package foo class Foo { Foo bar() { this } }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
 		assertEquals(inferredType, jvmOperation.getReturnType().getType());

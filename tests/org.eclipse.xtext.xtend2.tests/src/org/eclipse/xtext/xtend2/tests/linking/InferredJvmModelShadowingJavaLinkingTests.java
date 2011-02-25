@@ -13,7 +13,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
@@ -52,28 +54,32 @@ public class InferredJvmModelShadowingJavaLinkingTests extends AbstractXtend2Tes
 	}
 	
 	public void testLinkJavaConstructor() throws Exception {
-		XtendClass bar = classFile("test/Bar", "package test class Bar { bar() new Foo() }");
-		XConstructorCall constructorCall = (XConstructorCall) ((XtendFunction)bar.getMembers().get(0)).getExpression();
+		XtendClass bar = classFile("test/Bar", "package test class Bar { bar() {new Foo()} }");
+		final XExpression block = ((XtendFunction)bar.getMembers().get(0)).getExpression();
+		XConstructorCall constructorCall = (XConstructorCall) ((XBlockExpression)block).getExpressions().get(0);
 		assertTrue(isJavaElement(constructorCall.getConstructor()));
 	}
 	
 	public void testLinkInferredJvmConstructor() throws Exception {
 		XtendClass foo = classFile("test/Foo", "package test class Foo {}");
-		XtendClass bar = classFile("test/Bar", "package test class Bar { bar() new Foo() }");
-		XConstructorCall constructorCall = (XConstructorCall) ((XtendFunction)bar.getMembers().get(0)).getExpression();
+		XtendClass bar = classFile("test/Bar", "package test class Bar { bar() {new Foo()} }");
+		final XExpression block = ((XtendFunction)bar.getMembers().get(0)).getExpression();
+		XConstructorCall constructorCall = (XConstructorCall) ((XBlockExpression)block).getExpressions().get(0);
 		assertEquals(associations.getInferredConstructor(foo), constructorCall.getConstructor());
 	}
 	
 	public void testLinkJavaMethod() throws Exception {
-		XtendClass bar = classFile("test/Bar", "package test class Bar { bar(Foo foo) foo.foo() }");
-		XMemberFeatureCall methodCall = (XMemberFeatureCall) ((XtendFunction)bar.getMembers().get(0)).getExpression();
+		XtendClass bar = classFile("test/Bar", "package test class Bar { bar(Foo foo) {foo.foo()} }");
+		final XExpression block = ((XtendFunction)bar.getMembers().get(0)).getExpression();
+		XMemberFeatureCall methodCall = (XMemberFeatureCall) ((XBlockExpression)block).getExpressions().get(0);
 		assertTrue(isJavaElement(methodCall.getFeature()));
 	}
 	
 	public void testLinkInferredJvmOperation() throws Exception {
-		XtendClass foo = classFile("test/Foo", "package test class Foo { foo() this }");
-		XtendClass bar = classFile("test/Bar", "package test class Bar { bar(Foo foo) foo.foo() }");
-		XMemberFeatureCall methodCall = (XMemberFeatureCall) ((XtendFunction)bar.getMembers().get(0)).getExpression();
+		XtendClass foo = classFile("test/Foo", "package test class Foo { foo() :this; }");
+		XtendClass bar = classFile("test/Bar", "package test class Bar { bar(Foo foo) {foo.foo()} }");
+		final XBlockExpression block = (XBlockExpression) ((XtendFunction)bar.getMembers().get(0)).getExpression();
+		XMemberFeatureCall methodCall = (XMemberFeatureCall) block.getExpressions().get(0);
 		assertEquals(associations.getDirectlyInferredOperation((XtendFunction)foo.getMembers().get(0)), methodCall.getFeature());
 	}
 	

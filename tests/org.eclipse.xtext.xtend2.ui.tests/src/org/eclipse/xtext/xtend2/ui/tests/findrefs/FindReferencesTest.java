@@ -33,6 +33,7 @@ import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.IQueryData;
 import org.eclipse.xtext.ui.editor.findrefs.SimpleLocalResourceAccess;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.ui.findrefs.Xtend2FindReferenceQueryDataFactory;
 import org.eclipse.xtext.xtend2.ui.findrefs.Xtend2ReferenceFilter;
@@ -105,7 +106,7 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 	}
 
 	public void testFunctionQueryData() throws Exception {
-		XtendFile fileFoo = testHelper.xtendFile("Foo", "class Foo { foo() null }");
+		XtendFile fileFoo = testHelper.xtendFile("Foo", "class Foo { foo() {null} }");
 		waitForAutoBuild();
 		XtendFunction functionFoo = (XtendFunction) fileFoo.getXtendClass().getMembers().get(0);
 		JvmOperation inferredOperation = associations.getDirectlyInferredOperation(functionFoo);
@@ -132,30 +133,30 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 	}
 
 	public void testFindReferencesThis() throws Exception {
-		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo { foo() this }").getXtendClass();
+		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo { foo() {this} }").getXtendClass();
 		waitForAutoBuild();
 		XtendFunction functionFoo = (XtendFunction) classFoo.getMembers().get(0);
 
 		final MockAcceptor mockAcceptor = new MockAcceptor();
-		mockAcceptor.expect(functionFoo.getExpression(), classFoo, XABSTRACT_FEATURE_CALL__FEATURE);
+		mockAcceptor.expect(((XBlockExpression)functionFoo.getExpression()).getExpressions().get(0), classFoo, XABSTRACT_FEATURE_CALL__FEATURE);
 		checkFindReferences(classFoo, mockAcceptor);
 	}
 
 	public void testFindReferencesToConstructor() throws Exception {
 		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo {}").getXtendClass();
-		XtendClass classBar = testHelper.xtendFile("Bar", "class Bar { bar() new Foo() }").getXtendClass();
+		XtendClass classBar = testHelper.xtendFile("Bar", "class Bar { bar() {new Foo()} }").getXtendClass();
 		waitForAutoBuild();
 		JvmConstructor inferredConstructor = associations.getInferredConstructor(classFoo);
 		XtendFunction functionBar = (XtendFunction) classBar.getMembers().get(0);
 
 		final MockAcceptor mockAcceptor = new MockAcceptor();
-		mockAcceptor.expect(functionBar.getExpression(), inferredConstructor, XCONSTRUCTOR_CALL__CONSTRUCTOR);
+		mockAcceptor.expect(((XBlockExpression)functionBar.getExpression()).getExpressions().get(0), inferredConstructor, XCONSTRUCTOR_CALL__CONSTRUCTOR);
 		checkFindReferences(classFoo, mockAcceptor);
 	}
 
 	public void testFindReferencesFromReturnType() throws Exception {
 		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo {}").getXtendClass();
-		XtendClass classBar = testHelper.xtendFile("Bar", "class Bar { Foo bar() null }").getXtendClass();
+		XtendClass classBar = testHelper.xtendFile("Bar", "class Bar { Foo bar() {null} }").getXtendClass();
 		waitForAutoBuild();
 		JvmGenericType inferredTypeFoo = associations.getInferredType(classFoo);
 		XtendFunction functionBar = (XtendFunction) classBar.getMembers().get(0);
@@ -167,7 +168,7 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 
 	public void testFindReferencesFromParameter() throws Exception {
 		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo {}").getXtendClass();
-		XtendClass classBar = testHelper.xtendFile("Bar", "class Bar { bar(Foo x) null }").getXtendClass();
+		XtendClass classBar = testHelper.xtendFile("Bar", "class Bar { bar(Foo x) {null} }").getXtendClass();
 		waitForAutoBuild();
 		JvmGenericType inferredTypeFoo = associations.getInferredType(classFoo);
 		XtendFunction functionBar = (XtendFunction) classBar.getMembers().get(0);
@@ -179,8 +180,8 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 	}
 
 	public void testFindReferencesToFunction() throws Exception {
-		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo { foo() this bar() foo() }").getXtendClass();
-		XtendClass classBar = testHelper.xtendFile("Bar", "class Bar { baz(Foo this) foo() }").getXtendClass();
+		XtendClass classFoo = testHelper.xtendFile("Foo", "class Foo { foo() {this} bar() {foo()} }").getXtendClass();
+		XtendClass classBar = testHelper.xtendFile("Bar", "class Bar { baz(Foo this) {foo()} }").getXtendClass();
 		waitForAutoBuild();
 		XtendFunction functionFoo = (XtendFunction) classFoo.getMembers().get(0);
 		XtendFunction functionBar = (XtendFunction) classFoo.getMembers().get(1);
@@ -188,8 +189,8 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 		XtendFunction functionBaz = (XtendFunction) classBar.getMembers().get(0);
 
 		final MockAcceptor mockAcceptor = new MockAcceptor();
-		mockAcceptor.expect(functionBar.getExpression(), inferredOperation, XABSTRACT_FEATURE_CALL__FEATURE);
-		mockAcceptor.expect(functionBaz.getExpression(), inferredOperation, XABSTRACT_FEATURE_CALL__FEATURE);
+		mockAcceptor.expect(((XBlockExpression)functionBar.getExpression()).getExpressions().get(0), inferredOperation, XABSTRACT_FEATURE_CALL__FEATURE);
+		mockAcceptor.expect(((XBlockExpression)functionBaz.getExpression()).getExpressions().get(0), inferredOperation, XABSTRACT_FEATURE_CALL__FEATURE);
 		checkFindReferences(functionFoo, mockAcceptor);
 	}
 

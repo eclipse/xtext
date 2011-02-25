@@ -55,7 +55,7 @@ public class RenameStrategyTest extends AbstractXtend2UITestCase {
 	}
 
 	public void testInferredMethodRenamed() throws Exception {
-		XtendFunction fooMethod = (XtendFunction) testHelper.xtendFile("Foo", "class Foo { Foo foo() this }")
+		XtendFunction fooMethod = (XtendFunction) testHelper.xtendFile("Foo", "class Foo { Foo foo() {this} }")
 				.getXtendClass().getMembers().get(0);
 		JvmOperation inferredOperation = associations.getDirectlyInferredOperation(fooMethod);
 		IRenameStrategy renameStrategy = renameStrategyProvider.get(fooMethod, null);

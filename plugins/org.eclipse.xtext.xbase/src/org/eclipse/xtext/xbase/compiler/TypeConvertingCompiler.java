@@ -50,7 +50,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		JvmTypeReference expectedType = getTypeProvider().getExpectedType(obj);
 		internalToConvertedExpression(obj, appendable, expectedType);
 	}
-
+	
 	protected void internalToConvertedExpression(final XExpression obj, final IAppendable appendable,
 			JvmTypeReference toBeConvertedTo) {
 		if (toBeConvertedTo != null) {

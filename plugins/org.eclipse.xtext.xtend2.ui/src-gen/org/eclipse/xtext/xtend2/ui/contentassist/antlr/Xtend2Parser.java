@@ -243,6 +243,7 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getFunctionAccess().getParametersAssignment_5_0(), "rule__Function__ParametersAssignment_5_0");
 					put(grammarAccess.getFunctionAccess().getParametersAssignment_5_1_1(), "rule__Function__ParametersAssignment_5_1_1");
 					put(grammarAccess.getFunctionAccess().getExpressionAssignment_7_0(), "rule__Function__ExpressionAssignment_7_0");
+					put(grammarAccess.getFunctionAccess().getExpressionAssignment_7_1(), "rule__Function__ExpressionAssignment_7_1");
 					put(grammarAccess.getXStringLiteralAccess().getValueAssignment_0_1(), "rule__XStringLiteral__ValueAssignment_0_1");
 					put(grammarAccess.getRichStringAccess().getElementsAssignment_1_0(), "rule__RichString__ElementsAssignment_1_0");
 					put(grammarAccess.getRichStringAccess().getElementsAssignment_1_1_0(), "rule__RichString__ElementsAssignment_1_1_0");

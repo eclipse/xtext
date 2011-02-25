@@ -66,9 +66,9 @@ ruleFunction :
 			',' ruleJvmFormalParameter
 		)*
 	)? ')' (
-		ruleXExpression |
-		';'
-	)
+		ruleXBlockExpression |
+		ruleRichString
+	)?
 ;
 
 // Rule XStringLiteral

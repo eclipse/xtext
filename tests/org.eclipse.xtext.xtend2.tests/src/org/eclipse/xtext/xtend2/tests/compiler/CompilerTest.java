@@ -31,7 +31,7 @@ import com.google.inject.Inject;
 public class CompilerTest extends AbstractXtend2TestCase {
 	
 	public void testDependencyDeclaration() throws Exception {
-		invokeAndExpect(null, "list @Inject java.util.List");
+		invokeAndExpect(null, "list} @Inject java.util.List dummy() { null");
 	}
 	
 	public void testNoArgFunction() throws Exception {
@@ -49,17 +49,17 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testCaseFunction_00() throws Exception {
-		final String definition = "x(p1) dispatch x(String s) 'string' dispatch x(Object o) 'object'";
+		final String definition = "x(p1)} dispatch x(String s) {'string'} dispatch x(Object o) {'object'";
 		invokeAndExpect("string", definition,"bar");
 		invokeAndExpect("object", definition,42);
 	}
 	
 	public void testCaseFunction_01() throws Exception {
-		final String definition = "x(p1) " +
-				" dispatch x(Comparable<Boolean> s) 'comparable'" +
-				" dispatch x(String s) 'string'" +
-				" dispatch x(CharSequence o) 'charSeq'" +
-				" dispatch x(Integer o) 'integer'";
+		final String definition = "x(p1)} " +
+				" dispatch x(Comparable<Boolean> s) {'comparable'}" +
+				" dispatch x(String s) {'string'}" +
+				" dispatch x(CharSequence o) {'charSeq'}" +
+				" dispatch x(Integer o) {'integer'";
 		invokeAndExpect("string", definition,"bar");
 		invokeAndExpect("integer", definition,42);
 		invokeAndExpect("charSeq", definition,new StringBuilder());
@@ -73,9 +73,9 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testCaseFunction_02() throws Exception {
-		final String definition = "x(p1 as String)" +
-				" dispatch x(Void s) 'null'" +
-				" dispatch x(String s) 'string'";
+		final String definition = "x(p1 as String)}" +
+				" dispatch x(Void s) {'null'}" +
+				" dispatch x(String s) {'string'";
 		invokeAndExpect("string", definition,"bar");
 		invokeAndExpect("null", definition,new Object[]{null});
 	}
@@ -94,10 +94,10 @@ public class CompilerTest extends AbstractXtend2TestCase {
 //	}
 	
 	public void testCaseFunction_04() throws Exception {
-		final String definition = "x(p1)" +
-		" dispatch x(int s) 'int'" +
-		" dispatch x(boolean s) 'boolean'" +
-		" dispatch x(double s) 'double'";
+		final String definition = "x(p1)}" +
+		" dispatch x(int s) {'int'}" +
+		" dispatch x(boolean s) {'boolean'}" +
+		" dispatch x(double s) {'double'";
 		invokeAndExpect("int", definition,42);
 		invokeAndExpect("double", definition,42d);
 		invokeAndExpect("boolean", definition,true);
@@ -111,7 +111,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	}
 
 	public void testFunctionCall_00() throws Exception {
-		invokeAndExpect("foobar", "bar(p1) bar(String x) 'foo'+x","bar");
+		invokeAndExpect("foobar", "bar(p1)} bar(String x) {'foo'+x","bar");
 	}
 	
 	@Inject
@@ -151,7 +151,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 			if (i+1<args.length)
 				fullClass+=",";
 		}
-		fullClass += ")"+functionDef+" }";
+		fullClass += ") {"+functionDef+"} }";
 		Class<?> compiledClass = compileJavaCode("x.Y",fullClass);
 		assertEquals(expectation, apply(compiledClass,"testEntry",args));
 	}

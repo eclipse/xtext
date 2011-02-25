@@ -5,6 +5,7 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XStringLiteral;
@@ -51,7 +52,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	public void testDeclaredDependency_02() throws Exception {
 		XtendClass clazz = clazz(
 				"class Foo { " +
-				"  @Inject java.util.Map<String,String> map() null as String" +
+				"  @Inject java.util.Map<String,String> map() {null as String}" +
 		"}");
 		assertEquals(2, clazz.getMembers().size());
 		DeclaredDependency dependency = (DeclaredDependency) clazz.getMembers().get(0);
@@ -82,27 +83,27 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testFunction_0() throws Exception {
-		XtendFunction func = function("foo() foo");
+		XtendFunction func = function("foo() {foo}");
 		assertEquals("foo", func.getName());
-		assertTrue(func.getExpression() instanceof XFeatureCall);
+		assertTrue(((XBlockExpression)func.getExpression()).getExpressions().get(0) instanceof XFeatureCall);
 		assertEquals(0, func.getParameters().size());
 		assertNull(func.getReturnType());
 		assertEquals(0, func.getTypeParameters().size());
 	}
 
 	public void testFunction_1() throws Exception {
-		XtendFunction func = function("String foo() foo");
+		XtendFunction func = function("String foo() {foo}");
 		assertEquals("foo", func.getName());
-		assertTrue(func.getExpression() instanceof XFeatureCall);
+		assertTrue(((XBlockExpression)func.getExpression()).getExpressions().get(0) instanceof XFeatureCall);
 		assertEquals(0, func.getParameters().size());
 		assertNotNull(func.getReturnType());
 		assertEquals(0, func.getTypeParameters().size());
 	}
 
 	public void testFunction_2() throws Exception {
-		XtendFunction func = function("foo(String s) s");
+		XtendFunction func = function("foo(String s) {s}");
 		assertEquals("foo", func.getName());
-		assertTrue(func.getExpression() instanceof XFeatureCall);
+		assertTrue(((XBlockExpression)func.getExpression()).getExpressions().get(0) instanceof XFeatureCall);
 		assertEquals(1, func.getParameters().size());
 		assertEquals("s", func.getParameters().get(0).getName());
 		assertNotNull(func.getParameters().get(0).getParameterType());
@@ -111,9 +112,9 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testFunction_3() throws Exception {
-		XtendFunction func = function("foo(String s, Integer i) s");
+		XtendFunction func = function("foo(String s, Integer i) {s}");
 		assertEquals("foo", func.getName());
-		assertTrue(func.getExpression() instanceof XFeatureCall);
+		assertTrue(((XBlockExpression)func.getExpression()).getExpressions().get(0) instanceof XFeatureCall);
 		assertEquals(2, func.getParameters().size());
 		assertEquals("s", func.getParameters().get(0).getName());
 		assertNotNull(func.getParameters().get(0).getParameterType());
@@ -124,9 +125,9 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testFunction_4() throws Exception {
-		XtendFunction func = function("foo() foo");
+		XtendFunction func = function("foo() {foo}");
 		assertEquals("foo", func.getName());
-		assertTrue(func.getExpression() instanceof XFeatureCall);
+		assertTrue(((XBlockExpression)func.getExpression()).getExpressions().get(0) instanceof XFeatureCall);
 		assertEquals(0, func.getParameters().size());
 		assertNull(func.getReturnType());
 		assertFalse(func.isDispatch());
@@ -134,9 +135,9 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testFunction_5() throws Exception {
-		XtendFunction func = function("dispatch foo(String s) foo('x')");
+		XtendFunction func = function("dispatch foo(String s) {foo('x')}");
 		assertEquals("foo", func.getName());
-		assertTrue(func.getExpression() instanceof XFeatureCall);
+		assertTrue(((XBlockExpression)func.getExpression()).getExpressions().get(0) instanceof XFeatureCall);
 		assertEquals(1, func.getParameters().size());
 		assertNull(func.getReturnType());
 		assertTrue(func.isDispatch());
@@ -144,9 +145,9 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testFunction_6() throws Exception {
-		XtendFunction func = function("override dispatch foo(String s) foo('x')");
+		XtendFunction func = function("override dispatch foo(String s) { foo('x')}");
 		assertEquals("foo", func.getName());
-		assertTrue(func.getExpression() instanceof XFeatureCall);
+		assertTrue(((XBlockExpression)func.getExpression()).getExpressions().get(0) instanceof XFeatureCall);
 		assertEquals(1, func.getParameters().size());
 		assertNull(func.getReturnType());
 		assertTrue(func.isOverride());
@@ -155,9 +156,9 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testFunction_7() throws Exception {
-		XtendFunction func = function("override foo() foo");
+		XtendFunction func = function("override foo() { foo}");
 		assertEquals("foo", func.getName());
-		assertTrue(func.getExpression() instanceof XFeatureCall);
+		assertTrue(((XBlockExpression)func.getExpression()).getExpressions().get(0) instanceof XFeatureCall);
 		assertEquals(0, func.getParameters().size());
 		assertNull(func.getReturnType());
 		assertTrue(func.isOverride());
@@ -167,7 +168,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 
 
 	public void testTypeParams_1() throws Exception {
-		XtendFunction func = function("<T> foo(T t) t");
+		XtendFunction func = function("<T> foo(T t) {t}");
 		assertEquals(1, func.getTypeParameters().size());
 		JvmTypeParameter tp = func.getTypeParameters().get(0);
 		assertEquals("T", tp.getName());
@@ -175,7 +176,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testTypeParams_2() throws Exception {
-		XtendFunction func = function("<T extends Bar> foo(T t) t");
+		XtendFunction func = function("<T extends Bar> foo(T t) { t}");
 		assertEquals(1, func.getTypeParameters().size());
 		JvmTypeParameter tp = func.getTypeParameters().get(0);
 		assertEquals("T", tp.getName());
@@ -184,7 +185,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testTypeParams_3() throws Exception {
-		XtendFunction func = function("<T extends Foo & Bar> foo(T t) t");
+		XtendFunction func = function("<T extends Foo & Bar> foo(T t) { t}");
 		assertEquals(1, func.getTypeParameters().size());
 		JvmTypeParameter tp = func.getTypeParameters().get(0);
 		assertEquals("T", tp.getName());
@@ -195,7 +196,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testTypeParams_4() throws Exception {
-		XtendFunction func = function("<T super Foo> foo(T t) t");
+		XtendFunction func = function("<T super Foo> foo(T t) { t}");
 		assertEquals(1, func.getTypeParameters().size());
 		JvmTypeParameter tp = func.getTypeParameters().get(0);
 		assertEquals("T", tp.getName());
@@ -204,14 +205,14 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testFunctionTypeRef_0() throws Exception {
-		XtendFunction func = function("=>Boolean foo() [|true]");
+		XtendFunction func = function("=>Boolean foo() { [|true]}");
 		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
 		assertNotNull(type.getReturnType());
 		assertEquals(0,type.getParamTypes().size());
 	}
 	
 	public void testFunctionTypeRef_1() throws Exception {
-		XtendFunction func = function("(String)=>Boolean foo() [String s|s==null]");
+		XtendFunction func = function("(String)=>Boolean foo() { [String s|s==null]}");
 		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
 		assertNotNull(type.getReturnType());
 		assertEquals(1,type.getParamTypes().size());
@@ -221,24 +222,24 @@ public class ParserTest extends AbstractXtend2TestCase {
 	public void testUnambiguity_00() throws Exception {
 		XtendClass clazz = clazz("package x\n" +
 			"class Foo {\n" +
-			"  String x(String bar) String\n" +
-			"  String(String x) x\n" +
+			"  String x(String bar) {String}\n" +
+			"  String(String x) {x}\n" +
 			"}");
 		XtendFunction f1 = (XtendFunction) clazz.getMembers().get(0);
 		XtendFunction f2 = (XtendFunction) clazz.getMembers().get(1);
-		assertEquals("String",((XFeatureCall)f1.getExpression()).getConcreteSyntaxFeatureName());
+		assertEquals("String",((XFeatureCall)((XBlockExpression)f1.getExpression()).getExpressions().get(0)).getConcreteSyntaxFeatureName());
 		assertNull(f2.getReturnType());
 	}
 	
 	public void testUnambiguity_01() throws Exception {
 		XtendClass clazz = clazz("package x\n" +
 				"class Foo {\n" +
-				"  String x(Foo bar) String\n" +
-				"  String x(Baz x) baz\n" +
+				"  String x(Foo bar) {String}\n" +
+				"  String x(Baz x) {baz}\n" +
 		"}");
 		XtendFunction f1 = (XtendFunction) clazz.getMembers().get(0);
 		XtendFunction f2 = (XtendFunction) clazz.getMembers().get(1);
-		assertEquals("String",((XFeatureCall)f1.getExpression()).getConcreteSyntaxFeatureName());
+		assertEquals("String",((XFeatureCall)((XBlockExpression)f1.getExpression()).getExpressions().get(0)).getConcreteSyntaxFeatureName());
 		assertNotNull(f2.getReturnType());
 	}
 

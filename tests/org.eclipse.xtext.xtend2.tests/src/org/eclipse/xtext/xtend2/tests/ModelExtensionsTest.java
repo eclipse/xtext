@@ -39,7 +39,7 @@ public class ModelExtensionsTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testXtendFunction() throws Exception {
-		XtendFile file = file("package foo class Bar { int foo() 1}");
+		XtendFile file = file("package foo class Bar { int foo() {1}}");
 		XtendFunction xtendFunction = (XtendFunction) file.getXtendClass().getMembers().get(0);
 		assertEquals("foo", xtendFunction.getSimpleName());
 		assertEquals("foo.Bar.foo()", xtendFunction.getIdentifier());

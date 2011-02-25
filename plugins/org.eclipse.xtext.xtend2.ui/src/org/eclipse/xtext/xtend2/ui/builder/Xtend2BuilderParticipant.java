@@ -29,7 +29,6 @@ import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.util.StringInputStream;
-import org.eclipse.xtext.xbase.compiler.IAppendable.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
