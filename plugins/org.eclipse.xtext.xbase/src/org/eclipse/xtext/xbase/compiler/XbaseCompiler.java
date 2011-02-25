@@ -63,7 +63,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	public void _toJavaStatement(XBlockExpression expr, IAppendable b, boolean isReferenced) {
-		if (expr.getExpressions().size()==1) {
+		if (expr.eContainer() instanceof XClosure && expr.getExpressions().size()==1) {
 			internalToJavaStatement(expr.getExpressions().get(0), b, isReferenced);
 			return;
 		}
@@ -88,7 +88,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	public void _toJavaExpression(XBlockExpression expr, IAppendable b) {
-		if (expr.getExpressions().size()==1) {
+		if (expr.eContainer() instanceof XClosure && expr.getExpressions().size()==1) {
 			internalToConvertedExpression(expr.getExpressions().get(0), b, null);
 			return;
 		}

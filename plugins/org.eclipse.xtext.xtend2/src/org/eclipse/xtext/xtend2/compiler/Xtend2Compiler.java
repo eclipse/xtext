@@ -24,6 +24,7 @@ import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.IAppendable.StringBuilderBasedAppendable;
@@ -275,6 +276,25 @@ public class Xtend2Compiler extends XbaseCompiler {
 		String variable = appendable.declareVariable(clazz, "_this");
 		appendable.append(clazz.getName()).append(" ").append(variable).append(" = this;");
 	}
+	
+	@Override
+	public void _toJavaStatement(XBlockExpression expr, IAppendable b, boolean isReferenced) {
+		if (expr.eContainer() instanceof XtendFunction && expr.getExpressions().size()==1) {
+			internalToJavaStatement(expr.getExpressions().get(0), b, isReferenced);
+			return;
+		}
+		super._toJavaStatement(expr, b, isReferenced);
+	}
+	
+	@Override
+	public void _toJavaExpression(XBlockExpression expr, IAppendable b) {
+		if (expr.eContainer() instanceof XtendFunction && expr.getExpressions().size()==1) {
+			internalToConvertedExpression(expr.getExpressions().get(0), b, null);
+			return;
+		}
+		super._toJavaExpression(expr, b);
+	}
+	
 
 	public class RichStringPrepareCompiler extends AbstractRichStringPartAcceptor.ForLoopOnce {
 
