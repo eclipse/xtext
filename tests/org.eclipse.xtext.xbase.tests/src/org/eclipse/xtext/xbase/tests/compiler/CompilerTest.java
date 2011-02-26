@@ -57,7 +57,7 @@ public class CompilerTest extends AbstractXbaseTestCase {
 				"\nfor (String s : new java.util.ArrayList<String>()) {\n" +
 				"  s.length();\n" +
 				"}"
-				, "for (String s : new java.util.ArrayList<String>()) " +
+				, "for (String s : new java.util.ArrayList<String>())" +
 						"s.length");
 	}
 	
