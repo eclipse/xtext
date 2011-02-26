@@ -237,6 +237,37 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		doTestUpdateAtOffset(model, 170, 1, "apply", "EqualNodeModels.xtend");
 	}
 	
+	public void testEqualModels_01() throws Exception {
+		String model = "package org.eclipse.xtext.xtend2.tests.smoke\n" + 
+				"\n" + 
+				"import java.util.ArrayList\n" + 
+				"import static java.util.Arrays.*\n" + 
+				"import static extension java.util.Collections.*\n" + 
+				"\n" + 
+				"class Case_5 {\n" + 
+				"\n" + 
+				"	@Inject\n" + 
+				"	ArrayList as myList\n" + 
+				"//	ArrayList as list\n" + 
+				"	\n" + 
+				"	@Inject extension\n" + 
+				"	String\n" + 
+				"\n" + 
+				"	boolean something(int i) {\n" + 
+				"	  if (i.indexO() == 0) {\n" + 
+				"//	    return list.contains(i)\n" + 
+				"	    return myList.contains(i)\n" + 
+				"	  } \n" + 
+				"	  asList(i)\n" + 
+				"	  i.singletonList()\n" + 
+				"	  false\n" + 
+				"	}\n" + 
+				"	\n" + 
+				"\n" + 
+				"}";
+		doTestUpdateAtOffset(model, 295, 1, "f", "Case_5.xtend");
+	}
+	
 	public void testInferredModelRemoved() throws Exception {
 		String model =
 				"package org.eclipse.xtext.xtend2.tests.smoke\n" + 

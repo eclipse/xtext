@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.xtend2.Xtend2StandaloneSetup;
 import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
@@ -39,7 +40,9 @@ public class TestCaseCompiler {
 		final String to = "src-gen/" + qualifiedName.replace('.', '/') + ".java";
 
 		Resource res = set.getResource(org.eclipse.emf.common.util.URI.createFileURI(from), true);
-
+		EcoreUtil.resolveAll(res);
+		if (!res.getErrors().isEmpty())
+			throw new RuntimeException(res.getErrors().toString());
 		final File file = new File(to);
 		createFolders(file);
 		FileWriter writer = new FileWriter(file);

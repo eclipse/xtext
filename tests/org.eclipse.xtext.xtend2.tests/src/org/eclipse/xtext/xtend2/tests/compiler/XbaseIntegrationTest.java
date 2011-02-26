@@ -27,24 +27,6 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	public void testSpreadOperator_02() {
 	}
 	
-	//TODO FIX US
-	
-	@Override
-	public void testOverriddenLocalVariables() throws Exception {
-	}
-	
-	@Override
-	public void testOverriddenLocalVariables_0() throws Exception {
-	}
-
-	@Override
-	public void testFeatureCall_04() {
-	}
-	
-	@Override
-	public void testAssignment_12() {
-	}
-	
 	@Inject
 	private CompilerTestHelper testHelper;
 	

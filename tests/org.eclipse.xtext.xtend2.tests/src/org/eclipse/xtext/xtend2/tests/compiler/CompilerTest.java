@@ -80,6 +80,14 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		invokeAndExpect("null", definition,new Object[]{null});
 	}
 	
+	public void testImportsAndExtensions_01() throws Exception {
+		final String definition = "x(p1 as String)}" +
+				" dispatch x(Void s) {'null'}" +
+				" dispatch x(String s) {'string'";
+		invokeAndExpect("string", definition,"bar");
+		invokeAndExpect("null", definition,new Object[]{null});
+	}
+	
 //TODO test fails, when run as plug-in test. The EMF jars cannot be resolved.
 //
 //	public void testCaseFunction_03() throws Exception {
@@ -109,7 +117,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 			assertTrue(e.getCause() instanceof IllegalArgumentException);
 		}
 	}
-
+	
 	public void testFunctionCall_00() throws Exception {
 		invokeAndExpect("foobar", "bar(p1)} bar(String x) {'foo'+x","bar");
 	}
@@ -137,7 +145,6 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		javaCompiler.addClassPathOfClass(Xtend2Package.class);
 		javaCompiler.addClassPathOfClass(Inject.class);
 	}
-	
 	
 	protected void invokeAndExpect(Object expectation, String functionDef, Object...args) throws Exception {
 		String fullClass = "package x class Y { Object testEntry(";
