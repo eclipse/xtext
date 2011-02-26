@@ -25,6 +25,9 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	protected abstract void assertEvaluatesTo(Object object, String string);
 	protected abstract void assertEvaluatesWithException(Class<? extends Throwable> class1, String string);
 	
+	public void testPrimitiveConversion() throws Exception {
+		assertEvaluatesTo("2","'ab'.length.toString");
+	}
 	
 	public void testReturnExpression_01() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "return true");
@@ -491,6 +494,16 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"  var value = 'oldValue'\n" +
 				"  var condition = false\n" +
 				"  while(condition) { value = 'newValue' condition=false }" +
+				"  value" +
+				"}");
+	}
+	
+	public void testWhileLoop_03() {
+		assertEvaluatesTo("startfoo", 
+				"{\n" +
+				"  var value = 'start'\n" +
+				"  while(value.length<6) " +
+				"     value = value + 'foo'" +
 				"  value" +
 				"}");
 	}
