@@ -100,9 +100,6 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		assertCompilesTo(expected, input);
 	}
 
-	protected void assertFunctionCompilesTo(final String expected, final String input) throws Exception {
-//		assertCompilesTo("public class X {\n"+expected+"", input)
-	}
 	protected void assertCompilesTo(final String expected, final String input) throws Exception {
 		XtendFile file = file(input,true);
 		Xtend2Compiler compiler = get(Xtend2Compiler.class);
@@ -110,6 +107,5 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		compiler.compile(file, appendable);
 		assertEquals(expected,appendable.toString());
 	}
-	
 	
 }

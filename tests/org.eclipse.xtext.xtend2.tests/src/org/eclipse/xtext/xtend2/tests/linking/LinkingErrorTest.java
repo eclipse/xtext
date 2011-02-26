@@ -70,7 +70,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 	
 	public void testNoException_03() throws Exception {
 		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.smoke\n" + 
-				"\n" + 
+				// error condition is empty class name
 				"class  {\n" + 
 				"\n" + 
 				"	aOrB(String a, String b) {\n" + 
@@ -87,7 +87,45 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 				"}");
 		assertNoExceptions(file);
 	}
-
+	
+	public void testNoException_04() throws Exception {
+		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.smoke\n" + 
+				"import java.util.ArrayList\n" + 
+				"import static java.util.Arrays.*\n" + 
+				"import static extension java.util.Collections.*\n" + 
+				"class NoException {\n" + 
+				// error condition is tring
+				"	@Inject extension tring\n" + 
+				"	boolean something(int i) {\n" + 
+				"	  i.indexOf() == 0" +
+				"	}\n" + 
+				"}");
+		assertNoExceptions(file);
+	}
+	
+	public void testNoException_05() throws Exception {
+		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.smoke\n" + 
+				"import java.util.ArrayList\n" + 
+				"import static java.util.Arrays.*\n" + 
+				"import static extension java.util.Collections.*\n" + 
+				// error condition is empty class name
+				"class  {\n" + 
+				"	@Inject\n" + 
+				"	ArrayList as myList\n" + 
+				"	@Inject extension\n" + 
+				"	String\n" + 
+				"	boolean something(int i) {\n" + 
+				"	  if (i.indexOf() == 0) {\n" + 
+				"	    return myList.contains(i)\n" + 
+				"	  } \n" + 
+				"	  asList(i)\n" + 
+				"	  i.singletonList()\n" + 
+				"	  false\n" + 
+				"	}\n" + 
+				"}");
+		assertNoExceptions(file);
+	}
+	
 	protected void assertNoExceptions(EObject object) {
 		Resource resource = object.eResource();
 		if (resource instanceof LazyLinkingResource)

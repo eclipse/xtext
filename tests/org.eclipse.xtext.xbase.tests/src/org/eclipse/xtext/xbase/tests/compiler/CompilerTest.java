@@ -45,9 +45,9 @@ public class CompilerTest extends AbstractXbaseTestCase {
 		assertCompilesTo(
 				"\nInteger _xifexpression = null;\n" +
 				"if (true) {\n" +
-				"  _xifexpression = new Integer(42);\n" +
+				"  _xifexpression = 42;\n" +
 				"} else {\n" +
-				"  _xifexpression = new Integer(21);\n}\n" +
+				"  _xifexpression = 21;\n}\n" +
 				"return _xifexpression;"
 				, "if (true) 42 else 21");
 	}

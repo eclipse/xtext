@@ -180,7 +180,7 @@ public class TypeReferences {
 			JvmType result = typeProvider.findTypeByName(typeName);
 			return result;
 		} catch (TypeNotFoundException e) {
-			log.error(e.getMessage(), e);
+			log.debug(e.getMessage(), e);
 			return null;
 		}
 	}

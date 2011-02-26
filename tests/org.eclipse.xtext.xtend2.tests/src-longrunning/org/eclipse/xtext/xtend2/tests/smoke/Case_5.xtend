@@ -1,0 +1,27 @@
+package org.eclipse.xtext.xtend2.tests.smoke
+
+import java.util.ArrayList
+import static java.util.Arrays.*
+import static extension java.util.Collections.*
+
+class Case_5 {
+
+	@Inject
+	ArrayList as myList
+//	ArrayList as list
+	
+	@Inject extension
+	String
+
+	boolean something(int i) {
+	  if (i.indexOf() == 0) {
+//	    return list.contains(i)
+	    return myList.contains(i)
+	  } 
+	  asList(i)
+	  i.singletonList()
+	  false
+	}
+	
+
+}

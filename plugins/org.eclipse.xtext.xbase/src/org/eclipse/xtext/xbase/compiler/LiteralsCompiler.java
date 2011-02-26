@@ -38,7 +38,7 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	}
 
 	public void _toJavaExpression(XIntLiteral expr, IAppendable b) {
-		b.append("new Integer(").append(expr.getValue()).append(")");
+		b.append(expr.getValue());
 	}
 	
 	public void _toJavaStatement(XIntLiteral expr, IAppendable b, boolean isReferenced) {

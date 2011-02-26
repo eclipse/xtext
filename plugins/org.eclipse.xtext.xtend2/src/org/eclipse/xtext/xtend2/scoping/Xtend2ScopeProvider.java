@@ -6,6 +6,7 @@ package org.eclipse.xtext.xtend2.scoping;
 import static java.util.Collections.*;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -76,10 +77,12 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 				if(descriptions == null)  
 					descriptions = Lists.newArrayList();
 				JvmGenericType inferredType = xtend2jvmAssociations.getInferredType(clazz);
-				QualifiedName inferredDeclaringTypeName = QualifiedName.create(inferredType.getSimpleName());
-				descriptions.add(EObjectDescription.create(inferredDeclaringTypeName, inferredType));
+				if (inferredType != null) {
+					QualifiedName inferredDeclaringTypeName = QualifiedName.create(inferredType.getSimpleName());
+					descriptions.add(EObjectDescription.create(inferredDeclaringTypeName, inferredType));
+				}
 			}
-			if(descriptions != null)
+			if(descriptions != null && !descriptions.isEmpty())
 				return MapBasedScope.createScope(parent, descriptions);
 		}
 		return parent;
@@ -127,18 +130,25 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 			final XtendClass xtendClass = ((XtendFile) expression.eResource().getContents().get(0)).getXtendClass();
 			Iterable<DeclaredDependency> iterable = getExtensionDependencies(xtendClass);
 			for (DeclaredDependency declaredDependency : iterable) {
-				InjectedExtensionMethodsFeaturesProvider extensionMethodsFeaturesProvider = injectedExtensionMethodsFeaturesProvider.get();
-				extensionMethodsFeaturesProvider.setContext(declaredDependency);
-				insertDescriptionProviders(extensionMethodsFeaturesProvider, currentContext, createImplicitReceiver(declaredDependency), result);
+				JvmIdentifiableElement dependencyImplicitReceiver = findImplicitReceiverFor(declaredDependency);
+				if (dependencyImplicitReceiver != null) {
+					InjectedExtensionMethodsFeaturesProvider extensionMethodsFeaturesProvider = injectedExtensionMethodsFeaturesProvider.get();
+					extensionMethodsFeaturesProvider.setContext(declaredDependency);
+					insertDescriptionProviders(extensionMethodsFeaturesProvider, currentContext, dependencyImplicitReceiver, result);
+				}
 			}
 		}
 		
 		return result;
 	}
 	
-	protected JvmIdentifiableElement createImplicitReceiver(DeclaredDependency declaredDependency) {
-		final JvmIdentifiableElement field = (JvmIdentifiableElement) xtend2jvmAssociations.getInferredJvmElements(declaredDependency).iterator().next();
-		return field;
+	protected JvmIdentifiableElement findImplicitReceiverFor(DeclaredDependency declaredDependency) {
+		Set<EObject> elements = xtend2jvmAssociations.getInferredJvmElements(declaredDependency);
+		if (!elements.isEmpty()) {
+			final JvmIdentifiableElement field = (JvmIdentifiableElement)elements.iterator().next();
+			return field;
+		}
+		return null;
 	}
 
 	protected Iterable<DeclaredDependency> getExtensionDependencies(XtendClass context) {

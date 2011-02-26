@@ -11,6 +11,7 @@ import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Sets.*;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -104,9 +105,11 @@ public class Xtend2InferredJvmAssociator implements IXtend2JvmAssociations {
 		});
 	}
 
-	@SuppressWarnings("unchecked")
 	private <T> T getFirstAssociatedElement(EObject element, Class<T> type) {
-		return (T) find(getAssociatedElements(element), Predicates.instanceOf(type));
+		Iterator<T> filteredByType = filter(getAssociatedElements(element), type).iterator();
+		if (filteredByType.hasNext())
+			return filteredByType.next();
+		return null;
 	}
 
 	protected void setAdapter(EObject targetElement, EObject associatedElement) {
