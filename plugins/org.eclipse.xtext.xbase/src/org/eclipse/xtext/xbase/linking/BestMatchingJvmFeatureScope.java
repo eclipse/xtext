@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.linking;
 
+import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -99,13 +101,22 @@ public class BestMatchingJvmFeatureScope implements IScope {
 
 	protected IEObjectDescription getBestMatch(IEObjectDescription a, IEObjectDescription b) {
 		if (a instanceof JvmFeatureDescription && b instanceof JvmFeatureDescription) {
-			if(((JvmFeatureDescription) a).isValid()) { 
-				if(!((JvmFeatureDescription)b).isValid())
-					return a;
-			} else if(((JvmFeatureDescription) b).isValid())
-				return b;
 			JvmFeatureDescription descA = (JvmFeatureDescription) a;
 			JvmFeatureDescription descB = (JvmFeatureDescription) b;
+			if(descA.isValid()) { 
+				if(!descB.isValid())
+					return a;
+			} else if(descB.isValid()) {
+				return b;
+			} else if (!descA.isValid() && !descB.isValid()) {
+				if (descA.getIssueCode() != null && descB.getIssueCode() != null) {
+					int issueCodeComparison = compareIssueCodes(descA.getIssueCode(), descB.getIssueCode());
+					if (issueCodeComparison < 0)
+						return descA;
+					if (issueCodeComparison > 0)
+						return descB;
+				}
+			}
 			TypeArgumentContext contextA = descA.getContext();
 			TypeArgumentContext contextB = descB.getContext();
 			if (descA.getJvmFeature() instanceof JvmExecutable) {

@@ -47,7 +47,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	@Inject 
 	private TypeReferences typeRefs;
 	
-	
 	protected void openBlock(XExpression xExpression, IAppendable b) {
 		if (xExpression instanceof XBlockExpression) {
 			return;
@@ -436,6 +435,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	@Inject
 	private FunctionConversion functionConversion;
+	
 	@Inject
 	private TypeArgumentContextProvider ctxProvider;
 	

@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.validation;
 
+import java.util.List;
+
+import com.google.common.collect.ImmutableList;
+
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
@@ -14,7 +18,7 @@ public class IssueCodes {
 
 	private IssueCodes() {
 	}
-
+	
 	protected static final String ISSUE_CODE_PREFIX = "org.eclipse.xtext.xbase.validation.IssueCodes.";
 	
 	public static final String UNRESOLVABLE_PROXY = ISSUE_CODE_PREFIX + "unresolvable_proxy";
@@ -42,5 +46,44 @@ public class IssueCodes {
 	public static final String ABSTRACT_CLASS_INSTANTIATION = ISSUE_CODE_PREFIX + "abstract_class_instantiation";
 	public static final String INVALID_EARLY_EXIT = ISSUE_CODE_PREFIX + "invalid_early_exit";
 	public static final String UNREACHABLE_CODE = ISSUE_CODE_PREFIX + "unreachable_code";
+	
+	// list is not necessarily complete
+	// list is sorted from least important issue to worst issue
+	private static final List<String> sortedIssueCodes = ImmutableList.of(
+			FIELD_ACCESS_WITH_PARENTHESES,
+			METHOD_ACCESS_WITHOUT_PARENTHESES,
+			ASSIGNMENT_TARGET_IS_NOT_WRITEABLE,
+			INSTANCE_ACCESS_TO_STATIC_MEMBER,
+			INVALID_NUMBER_OF_TYPE_ARGUMENTS,
+			INVALID_ARGUMENT_TYPES,
+			INVALID_NUMBER_OF_ARGUMENTS
+	);
+	
+	
+	public static int compareIssueCodes(String left, String right) {
+		if (left == right || left.equals(right))
+			return 0;
+		for(int i = 0; i < sortedIssueCodes.size(); i++) {
+			String candidate = sortedIssueCodes.get(i);
+			if (candidate.equals(left)) {
+				for( int j = i + 1; j < sortedIssueCodes.size(); j++) {
+					String followedBy = sortedIssueCodes.get(j);
+					if (followedBy.equals(right)) {
+						return -1;
+					}
+				}
+				return 0;
+			} else if (candidate.equals(right)) {
+				for( int j = i + 1; j < sortedIssueCodes.size(); j++) {
+					String followedBy = sortedIssueCodes.get(j);
+					if (followedBy.equals(left)) {
+						return 1;
+					}
+				}
+				return 0;
+			}
+		}
+		return 0;
+	}
 
 }

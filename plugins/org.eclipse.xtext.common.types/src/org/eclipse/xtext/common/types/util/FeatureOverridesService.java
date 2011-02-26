@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.util;
 
 import static com.google.common.collect.Iterables.*;
 
+import java.util.Collections;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
@@ -45,7 +46,10 @@ public class FeatureOverridesService {
     
     public Iterable<JvmFeature> getAllJvmFeatures(JvmTypeReference type) {
         TypeArgumentContext context = contextProvider.getReceiverContext(type);
-        return getAllJvmFeatures((JvmDeclaredType)type.getType(), context);
+        JvmType rawType = type.getType();
+        if (rawType == null || rawType.eIsProxy() || !(rawType instanceof JvmDeclaredType))
+        	return Collections.emptyList();
+        return getAllJvmFeatures((JvmDeclaredType) rawType, context);
     }
     
     public Iterable<JvmFeature> getAllJvmFeatures(JvmDeclaredType type, TypeArgumentContext ctx) {
