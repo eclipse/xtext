@@ -27,6 +27,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -51,7 +52,7 @@ public class DispatchingSupport {
 		return result;
 	}
 
-	protected void collectDispatchMethods(JvmGenericType type, Multimap<Pair<String, Integer>, JvmOperation> result) {
+	protected void collectDispatchMethods(final JvmGenericType type, Multimap<Pair<String, Integer>, JvmOperation> result) {
 		Iterable<JvmOperation> features = filter(overridesService.getAllJvmFeatures(typeRefs.createTypeRef(type)),
 				JvmOperation.class);
 		for (JvmOperation operation : features) {
@@ -60,6 +61,24 @@ public class DispatchingSupport {
 						operation.getParameters().size());
 				result.put(signatureTuple, operation);
 			}
+		}
+		removeNonLocalMethods(type, result);
+	}
+
+	protected void removeNonLocalMethods(final JvmGenericType type, Multimap<Pair<String, Integer>, JvmOperation> result) {
+		List<Pair<String, Integer>> removeKeys = newArrayList(); 
+		for(Pair<String, Integer> signatureTuple : result.keySet()) {
+			Collection<JvmOperation> collection = result.get(signatureTuple);
+			if(!any(collection, new Predicate<JvmOperation>() {
+				public boolean apply(JvmOperation input) {
+					return input.getDeclaringType() == type;
+				}
+			})) {
+				removeKeys.add(signatureTuple);
+			}
+		}
+		for(Pair<String, Integer> signatureTuple: removeKeys) {
+			result.removeAll(signatureTuple);
 		}
 	}
 
