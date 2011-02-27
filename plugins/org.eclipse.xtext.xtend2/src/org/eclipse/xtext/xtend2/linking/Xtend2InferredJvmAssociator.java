@@ -85,24 +85,22 @@ public class Xtend2InferredJvmAssociator implements IXtend2JvmAssociations {
 	}
 
 	public JvmOperation getDirectlyInferredOperation(final XtendFunction xtendFunction) {
-		for(EObject element: getAssociatedElements(xtendFunction)) {
-			if(element instanceof JvmOperation
-						&& getAssociatedElements(element).size() == 1) 
+		for (EObject element : getAssociatedElements(xtendFunction)) {
+			if (element instanceof JvmOperation && getAssociatedElements(element).size() == 1)
 				return (JvmOperation) element;
 		}
 		return null;
 	}
-	
+
 	public XtendClass getXtendClass(JvmGenericType inferredType) {
 		return getFirstAssociatedElement(inferredType, XtendClass.class);
 	}
 
 	public XtendFunction getXtendFunction(final JvmOperation inferredOperation) {
-		return (XtendFunction) find(getAssociatedElements(inferredOperation), new Predicate<EObject>() {
-			public boolean apply(EObject input) {
-				return input instanceof XtendFunction;
-			}
-		});
+		for (EObject element : getAssociatedElements(inferredOperation))
+			if (element instanceof XtendFunction)
+				return (XtendFunction) element;
+		return null;
 	}
 
 	private <T> T getFirstAssociatedElement(EObject element, Class<T> type) {

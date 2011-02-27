@@ -47,6 +47,13 @@ public class RichStringProcessor {
 		}
 
 		@Override
+		public Boolean doSwitch(EObject theEObject) {
+			if(theEObject == null)
+				return Boolean.TRUE;
+			return super.doSwitch(theEObject);
+		}
+		
+		@Override
 		public Boolean caseRichString(RichString object) {
 			if (rootObject == null)
 				rootObject = object;
