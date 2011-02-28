@@ -443,7 +443,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	protected JvmTypeReference _type(XBlockExpression object, boolean rawType) {
 		List<XExpression> expressions = object.getExpressions();
 		if (expressions.isEmpty())
-			return typeReferences.getTypeForName(Void.class, object);
+			return typeReferences.getTypeForName(Void.TYPE, object);
 		final JvmTypeReference result = getType(expressions.get(expressions.size() - 1), rawType);
 		return result;
 	}

@@ -99,7 +99,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			if (arg instanceof XAbstractFeatureCall && isLocalVarReference((XAbstractFeatureCall) arg)) {
 				JvmTypeReference expectedType = getTypeProvider().getExpectedType(arg);
 				JvmTypeReference type = getTypeProvider().getType(arg);
-				if (!EcoreUtil.equals(expectedType, type)) {
+				if (expectedType!=null && !EcoreUtil.equals(expectedType, type)) {
 					String varName = getVarName(((XAbstractFeatureCall) arg).getFeature(), b);
 					String finalVariable = b.declareVariable(Tuples.create("Convertable", arg), "final_" + varName);
 					b.append("\n")
