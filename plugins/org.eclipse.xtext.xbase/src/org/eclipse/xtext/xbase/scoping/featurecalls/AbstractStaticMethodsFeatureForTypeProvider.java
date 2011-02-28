@@ -16,11 +16,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeConstraint;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
@@ -30,7 +26,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-public abstract class AbstractStaticMethodsFeatureForTypeProvider implements IFeaturesForTypeProvider {
+public abstract class AbstractStaticMethodsFeatureForTypeProvider extends AbstractFeaturesForTypeProvider {
 
 	@Inject
 	private XbaseTypeConformanceComputer conformanceComputer;
@@ -62,28 +58,9 @@ public abstract class AbstractStaticMethodsFeatureForTypeProvider implements IFe
 		if (operation.isStatic()) {
 			if (expectedParameterTypeReference == null)
 				return true;
-			JvmType expectedParameterType = expectedParameterTypeReference.getType();
 			if (operation.getParameters().size() > 0) {
 				JvmFormalParameter firstParam = operation.getParameters().get(0);
-				JvmType actualParameterType = firstParam.getParameterType().getType();
-				if (actualParameterType == expectedParameterType)
-					return true;
-				if (actualParameterType instanceof JvmTypeParameter) {
-					boolean upperBoundSeen = false;
-					for(JvmTypeConstraint constraint: ((JvmTypeParameter) actualParameterType).getConstraints()) {
-						if (constraint instanceof JvmUpperBound) {
-							upperBoundSeen = true;
-							if (conformanceComputer.isConformant(constraint.getTypeReference(), expectedParameterTypeReference, true))
-								return true;
-						}
-					}
-					if (!upperBoundSeen) {
-						if (typeRefs.is(expectedParameterTypeReference, Object.class)) {
-							return true;
-						}
-					}
-				}
-				return false;
+				return super.isSameTypeOrAssignableToUpperBound(expectedParameterTypeReference, firstParam.getParameterType());
 			}
 		}
 		return false;
