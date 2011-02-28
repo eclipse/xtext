@@ -15,8 +15,13 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
+import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IFeaturesForTypeProvider;
 import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
 
@@ -29,6 +34,12 @@ public class InjectedExtensionMethodsFeaturesProvider implements IFeaturesForTyp
 	
 	@Inject
 	private FeatureOverridesService overridesService;
+	
+	@Inject
+	private TypeReferences typeRefs;
+	
+	@Inject
+	private TypeConformanceComputer typeConformanceComputer;
 	
 	private DeclaredDependency declaredDependency;
 	
@@ -45,12 +56,34 @@ public class InjectedExtensionMethodsFeaturesProvider implements IFeaturesForTyp
 				final JvmOperation jvmOperation = (JvmOperation) jvmFeature;
 				EList<JvmFormalParameter> parameters = jvmOperation.getParameters();
 				if (!jvmOperation.isStatic() && parameters.size()>0) {
-					if (parameters.get(0).getParameterType().getType()==type.getType())
+					if (isCompatibleType(type, parameters.get(0).getParameterType()))
 						result.add(jvmFeature);
 				}
 			}
 		}
 		return result;
+	}
+
+	protected boolean isCompatibleType(JvmTypeReference type, JvmTypeReference declaration) {
+		if (declaration.getType()==type.getType()) {
+			return true;
+		}
+		if (declaration.getType() instanceof JvmTypeParameter) {
+			boolean upperBoundSeen = false;
+			for(JvmTypeConstraint constraint: ((JvmTypeParameter) declaration.getType()).getConstraints()) {
+				if (constraint instanceof JvmUpperBound) {
+					upperBoundSeen = true;
+					if (typeConformanceComputer.isConformant(constraint.getTypeReference(), type, true))
+						return true;
+				}
+			}
+			if (!upperBoundSeen) {
+				if (typeRefs.is(type, Object.class)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 }

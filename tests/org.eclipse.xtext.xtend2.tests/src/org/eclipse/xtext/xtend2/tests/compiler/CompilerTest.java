@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests.compiler;
 
+import static java.util.Collections.*;
+
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -23,15 +26,104 @@ import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
+import test.ExtensionMethods;
+
+import com.google.inject.Guice;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class CompilerTest extends AbstractXtend2TestCase {
 	
+	public void testStaticExtensionMethod_01() throws Exception {
+		Class<?> class1 = compileJavaCode("x.Y","package x import static extension java.util.Collections.* class Y { foo() {'foo'.singleton()}}");
+		assertEquals(singleton("foo"),apply(class1,"foo"));
+	}
+	
+//	TODO Fix me
+//	public void testStaticExtensionMethod_02() throws Exception {
+//		Class<?> class1 = compileJavaCode("x.Y","package x import static extension java.util.Collections.* class Y { foo() {'foo'.singleton}}");
+//		assertEquals(singleton("foo"),apply(class1,"foo"));
+//	}
+	
+//	public void testInjectedExtensionMethod_01() throws Exception {
+//		Class<?> class1 = compileJavaCode("x.Y",
+//				"package x " +
+//				"class Y { " +
+//				"  @Inject extension java.util.HashMap<String,String> as map " +
+//				"  " +
+//				"  foo(String arg) { " +
+//				"    arg.put('bar') " +
+//				"    map" +
+//				"  }" +
+//				"}");
+//		assertEquals(singleton(singletonMap("foo", "bar")),apply(class1,"foo"));
+//	}
+	public void testInjectedExtensionMethod_02() throws Exception {
+		Class<?> class1 = compileJavaCode("x.Y",
+				"package x " +
+				"class Y { " +
+				"  @Inject extension test.ExtensionMethods " +
+				"  " +
+				"  foo(String arg) { " +
+				"    (arg as CharSequence).generic()" +
+				"  }" +
+		"}");
+		assertEquals(ExtensionMethods.GENERIC_T,apply(class1,"foo","x"));
+	}
+	
+	public void testInjectedExtensionMethod_03() throws Exception {
+		Class<?> class1 = compileJavaCode("x.Y",
+				"package x " +
+				"class Y { " +
+				"  @Inject extension test.ExtensionMethods " +
+				"  " +
+				"  foo(String arg) { " +
+				"    arg.generic()" +
+				"  }" +
+		"}");
+		assertEquals(ExtensionMethods.GENERIC_STRING,apply(class1,"foo","x"));
+	}
+	
+//	TODO Fix me (operator overloading in extensions) 
+//	public void testInjectedExtensionMethod_02() throws Exception {
+//		Class<?> class1 = compileJavaCode("x.Y","package x class Y { @Inject extension test.ExtensionMethods foo(String arg) { return arg - 'bar' } }");
+//		assertEquals("foo",apply(class1,"foobar"));
+//	}
+	
+	public void testInjectedExtensionMethod_05() throws Exception {
+		Class<?> class1 = compileJavaCode("x.Y","package x class Y { @Inject extension test.ExtensionMethods foo(String arg) { return arg.operator_minus('bar') } }");
+		assertEquals(ExtensionMethods.OPERATOR_MINUS_STRING_STRING,apply(class1,"foo", "foobar"));
+	}
+	
+	public void testInjectedExtensionMethod_06() throws Exception {
+		Class<?> class1 = compileJavaCode("x.Y",
+				"package x " +
+				"class Y { " +
+				"  @Inject extension test.ExtensionMethods " +
+				"  a(String arg) { " +
+				"    return arg.operator_minus('bar') " +
+				"  } " +
+				"  b(String arg) { " +
+				"    return (arg as Object).operator_minus('bar') " +
+				"  } " +
+				"  c(String arg) { " +
+				"    return arg.operator_minus('bar' as Object) " +
+				"  } " +
+				"  d(String arg) { " +
+				"    return arg.operator_minus('bar' as CharSequence) " +
+				"  } " +
+				"}");
+		assertEquals(ExtensionMethods.OPERATOR_MINUS_STRING_STRING,apply(class1,"a", "foo"));
+		assertEquals(ExtensionMethods.OPERATOR_MINUS_OBJECT_STRING,apply(class1,"b", "foo"));
+		assertEquals(ExtensionMethods.OPERATOR_MINUS_STRING_OBJECT,apply(class1,"c", "foo"));
+		assertEquals(ExtensionMethods.OPERATOR_MINUS_STRING_CHARSEQUENCE,apply(class1,"d", "foo"));
+	}
+	
 	public void testDependencyDeclaration() throws Exception {
-		invokeAndExpect(null, "list} @Inject java.util.List dummy() { null");
+		invokeAndExpect2(Boolean.TRUE, "check() {obj!=null} @Inject test.ExtensionMethods as obj", "check");
 	}
 	
 	public void testNoArgFunction() throws Exception {
@@ -146,6 +238,10 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		javaCompiler.addClassPathOfClass(Inject.class);
 	}
 	
+	protected void invokeAndExpect2(Object expectation, String xtendclassBody, String methodToInvoke, Object...args) throws Exception {
+		Class<?> class1 = compileJavaCode( "x.Y", "package x class Y {"+xtendclassBody+"}");
+		assertEquals(expectation,apply(class1,methodToInvoke,args));
+	}
 	protected void invokeAndExpect(Object expectation, String functionDef, Object...args) throws Exception {
 		String fullClass = "package x class Y { Object testEntry(";
 		for (int i = 0; i < args.length; i++) {
@@ -163,10 +259,11 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		assertEquals(expectation, apply(compiledClass,"testEntry",args));
 	}
 	
-	protected Object apply(Class<?> compile,String methodName,Object...args) throws Exception {
-		Object instance = compile.newInstance();
+	protected Object apply(Class<?> type,String methodName,Object...args) throws Exception {
+		final Injector inj = Guice.createInjector();
+		Object instance = inj.getInstance(type);
 		if (args==null) {
-			return compile.getDeclaredMethod(methodName).invoke(instance);
+			return type.getDeclaredMethod(methodName).invoke(instance);
 		}
 		Class<?>[] argTypes = new Class[args.length];
 		for (int i = 0; i < argTypes.length; i++) {
@@ -176,7 +273,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				argTypes[i] = args[i].getClass();
 			}
 		}
-		Method method = compile.getDeclaredMethod(methodName, argTypes);
+		Method method = type.getDeclaredMethod(methodName, argTypes);
 		return method.invoke(instance,args);
 	}
 

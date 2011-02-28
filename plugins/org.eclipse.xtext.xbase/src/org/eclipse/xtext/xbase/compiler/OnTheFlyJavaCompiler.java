@@ -248,6 +248,8 @@ public class OnTheFlyJavaCompiler {
 		final File srcFile = new File(tempDir + classNameAsPath + ".java");
 		createFolderStructure(srcFile.getParentFile());
 		final File targetFile = new File(tempDir + classNameAsPath + ".class");
+		if (targetFile.exists())
+			targetFile.delete();
 		try {
 			Files.writeStringIntoFile(srcFile.getCanonicalPath(), code);
 			errorStream.setDelegate(new ByteArrayOutputStream());
@@ -270,8 +272,6 @@ public class OnTheFlyJavaCompiler {
 		} finally {
 			if (srcFile.exists())
 				srcFile.delete();
-			if (targetFile.exists())
-				targetFile.delete();
 		}
 	}
 

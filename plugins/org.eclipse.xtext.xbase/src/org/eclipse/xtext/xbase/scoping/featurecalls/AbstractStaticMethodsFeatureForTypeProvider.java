@@ -37,7 +37,7 @@ public abstract class AbstractStaticMethodsFeatureForTypeProvider implements IFe
 	
 	@Inject
 	private TypeReferences typeRefs;
-
+	
 	private Resource context;
 
 	public Iterable<? extends JvmFeature> getFeaturesForType(final JvmTypeReference reference) {
@@ -73,7 +73,7 @@ public abstract class AbstractStaticMethodsFeatureForTypeProvider implements IFe
 					for(JvmTypeConstraint constraint: ((JvmTypeParameter) actualParameterType).getConstraints()) {
 						if (constraint instanceof JvmUpperBound) {
 							upperBoundSeen = true;
-							if (constraint.getTypeReference().getType() == expectedParameterType)
+							if (conformanceComputer.isConformant(constraint.getTypeReference(), expectedParameterTypeReference, true))
 								return true;
 						}
 					}

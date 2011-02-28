@@ -25,6 +25,11 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	protected abstract void assertEvaluatesTo(Object object, String string);
 	protected abstract void assertEvaluatesWithException(Class<? extends Throwable> class1, String string);
 	
+	public void testGenerics_00() throws Exception {
+		assertEvaluatesTo("", "try {typeof(String).newInstance} catch(Exception e) {}");
+	}
+	
+	
 	public void testPrimitiveConversion() throws Exception {
 		assertEvaluatesTo("2","'ab'.length.toString");
 	}
