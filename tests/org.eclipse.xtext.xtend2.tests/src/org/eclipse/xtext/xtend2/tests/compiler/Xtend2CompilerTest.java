@@ -15,7 +15,8 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 				"}\n";
 		final String expected = "package foo;\n" + 
 				"\n" +
-				"\n" + 
+				"\n" +
+				"@SuppressWarnings(\"all\")\n" + 
 				"public class Bar {\n" +
 				"  private final Bar _this = this;\n" + 
 				"  \n" +
@@ -36,7 +37,8 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		final String expected =  
 		"package foo;\n" +
 		"\n" + 
-		"\n" + 
+		"\n" +
+		"@SuppressWarnings(\"all\")\n" +
 		"public class Bar {\n" +
 		"  private final Bar _this = this;\n" + 
 		"  \n" + 
@@ -55,7 +57,8 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		final String expected =  
 		"package foo;\n" +
 		"\n" + 
-		"\n" + 
+		"\n" +
+		"@SuppressWarnings(\"all\")\n" +
 		"public class Bar extends Object {\n" +
 		"  private final Bar _this = this;\n" + 
 		"}";
@@ -71,7 +74,8 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		"package foo;\n" +
 		"\n" + 
 		"import java.io.Serializable;\n" + 
-		"\n" + 
+		"\n" +
+		"@SuppressWarnings(\"all\")\n" +
 		"public class Bar implements Cloneable, Serializable {\n" +
 		"  private final Bar _this = this;\n" + 
 		"}";
@@ -89,7 +93,8 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			"\n" + 
 			"import java.io.Serializable;\n" + 
 			"import java.util.HashMap;\n" + 
-			"\n" + 
+			"\n" +
+			"@SuppressWarnings(\"all\")\n" +
 			"public class Bar {\n" +
 			"  private final Bar _this = this;\n" +
 			"  \n" +

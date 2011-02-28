@@ -113,6 +113,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 	protected void compile(XtendClass obj, IAppendable appendable) {
 		//TODO abstract, final
+		appendable.append("\n@SuppressWarnings(\"all\")");
 		appendable.append("\npublic class ").append(obj.getName());
 		appendTypeParameterDeclaration(obj.getTypeParameters(), appendable);
 		if (obj.getExtends() != null)

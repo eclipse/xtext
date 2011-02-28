@@ -139,6 +139,24 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		invokeAndExpect2(Boolean.TRUE, "check() {obj!=null} @Inject test.ExtensionMethods as obj", "check");
 	}
 	
+	public void testReturnTypeAndReturnExpression_00() throws Exception {
+		String decl = 
+			"String test() {" +
+			"  return 'foo'" +
+			"}";
+		invokeAndExpect2("foo", decl, "test");
+	}
+	
+	public void testReturnTypeAndReturnExpression_01() throws Exception {
+		String decl = 
+			"CharSequence test() {" +
+			"  if ('foo' == 'foo') {" +
+			"    return 'foo'" +
+			"  }" +
+			"}";
+		invokeAndExpect2("foo", decl, "test");
+	}
+	
 	public void testNoArgFunction() throws Exception {
 		invokeAndExpect("foo", "'foo'");
 	}
