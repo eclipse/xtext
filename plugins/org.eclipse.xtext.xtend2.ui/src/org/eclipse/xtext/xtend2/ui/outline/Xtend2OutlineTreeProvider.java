@@ -95,7 +95,7 @@ public class Xtend2OutlineTreeProvider extends DefaultOutlineTreeProvider {
 		}
 	}
 
-	protected boolean _isLeaf(XtendFunction function) {
+	protected boolean _isLeaf(XtendMember function) {
 		return true;
 	}
 
