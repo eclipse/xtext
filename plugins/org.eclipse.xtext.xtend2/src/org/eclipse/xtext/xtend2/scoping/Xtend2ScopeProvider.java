@@ -17,9 +17,11 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -55,7 +57,10 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 	private Provider<StaticallyImportedFeaturesProvider> staticallyImportedFeaturesProvider;
 	
 	@Inject
-	private Provider<InjectedExtensionMethodsFeaturesProvider> injectedExtensionMethodsFeaturesProvider; 
+	private Provider<ExtensionMethodsFeaturesProvider> extensionMethodsFeaturesProvider; 
+	
+	@Inject
+	private TypeReferences typeReferences;
 	
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
@@ -128,17 +133,25 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 		
 		if (implicitReceiver==null) {
 			final XtendClass xtendClass = ((XtendFile) expression.eResource().getContents().get(0)).getXtendClass();
+			// extensions for this
+			JvmGenericType type2 = xtend2jvmAssociations.getInferredType(xtendClass);
+			JvmParameterizedTypeReference typeRef = typeReferences.createTypeRef(type2);
+			ExtensionMethodsFeaturesProvider featureProvider = extensionMethodsFeaturesProvider.get();
+			featureProvider.setContext(typeRef);
+			insertDescriptionProviders(featureProvider, currentContext, xtendClass, result);
+
+			// injected extensions
 			Iterable<DeclaredDependency> iterable = getExtensionDependencies(xtendClass);
 			for (DeclaredDependency declaredDependency : iterable) {
 				JvmIdentifiableElement dependencyImplicitReceiver = findImplicitReceiverFor(declaredDependency);
 				if (dependencyImplicitReceiver != null) {
-					InjectedExtensionMethodsFeaturesProvider extensionMethodsFeaturesProvider = injectedExtensionMethodsFeaturesProvider.get();
-					extensionMethodsFeaturesProvider.setContext(declaredDependency);
-					insertDescriptionProviders(extensionMethodsFeaturesProvider, currentContext, dependencyImplicitReceiver, result);
+					featureProvider = extensionMethodsFeaturesProvider.get();
+					featureProvider.setContext(declaredDependency.getType());
+					insertDescriptionProviders(featureProvider, currentContext, dependencyImplicitReceiver, result);
 				}
 			}
+			
 		}
-		
 		return result;
 	}
 	

@@ -12,7 +12,6 @@ import static java.util.Collections.*;
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -120,6 +119,10 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		assertEquals(ExtensionMethods.OPERATOR_MINUS_OBJECT_STRING,apply(class1,"b", "foo"));
 		assertEquals(ExtensionMethods.OPERATOR_MINUS_STRING_OBJECT,apply(class1,"c", "foo"));
 		assertEquals(ExtensionMethods.OPERATOR_MINUS_STRING_CHARSEQUENCE,apply(class1,"d", "foo"));
+	}
+	
+	public void testExtensionMethodForLocalFunctions_00() throws Exception {
+		invokeAndExpect2("foobar", " with(String x, String y) { x+y} main(String x) { x.with('bar')}", "main", "foo"); 
 	}
 	
 	public void testDependencyDeclaration() throws Exception {
