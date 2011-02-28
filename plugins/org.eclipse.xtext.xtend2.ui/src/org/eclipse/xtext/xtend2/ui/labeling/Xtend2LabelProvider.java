@@ -12,6 +12,7 @@ import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
+import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
@@ -62,6 +63,10 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 	public Image image(JvmOperation element) {
 		return images.forDispatcherFunction(0);
 	}
+	
+	public Image image(DeclaredDependency element) {
+		return images.forDependency(element.isExtension());
+	}
 
 	public String text(XtendFile element) {
 		return element.eResource().getURI().trimFileExtension().lastSegment();
@@ -77,6 +82,10 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 
 	public String text(XtendFunction element) {
 		return signature(element.getSimpleName(), xtend2jvmAssociations.getDirectlyInferredOperation(element));
+	}
+	
+	public String text(DeclaredDependency element) {
+		return element.getSimpleName() +" : " +element.getType().getSimpleName();
 	}
 
 	public String text(JvmOperation element) {
