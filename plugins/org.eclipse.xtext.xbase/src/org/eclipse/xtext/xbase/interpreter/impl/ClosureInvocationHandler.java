@@ -11,6 +11,7 @@ import java.lang.reflect.Method;
 
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
@@ -27,11 +28,14 @@ public class ClosureInvocationHandler extends AbstractClosureInvocationHandler {
 	private final IEvaluationContext context;
 	
 	private final XClosure closure;
+
+	private CancelIndicator indicator;
 	
-	public ClosureInvocationHandler(XClosure closure, IEvaluationContext context, IExpressionInterpreter interpreter) {
+	public ClosureInvocationHandler(XClosure closure, IEvaluationContext context, IExpressionInterpreter interpreter, CancelIndicator indicator) {
 		this.closure = closure;
 		this.context = context;
 		this.interpreter = interpreter;
+		this.indicator = indicator;
 	}
 	
 	@Override
@@ -44,7 +48,7 @@ public class ClosureInvocationHandler extends AbstractClosureInvocationHandler {
 				initializeClosureParameters(forkedContext, (Object[])args[0]);
 			}
 		}
-		IEvaluationResult result = interpreter.evaluate(closure.getExpression(), forkedContext);
+		IEvaluationResult result = interpreter.evaluate(closure.getExpression(), forkedContext, indicator);
 		return result.getResult();
 	}
 

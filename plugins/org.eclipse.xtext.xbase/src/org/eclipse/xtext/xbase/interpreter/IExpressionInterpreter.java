@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.interpreter;
 
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XExpression;
 
 /**
@@ -16,6 +17,6 @@ public interface IExpressionInterpreter {
 
 	IEvaluationResult evaluate(XExpression expression);
 	
-	IEvaluationResult evaluate(XExpression expression, IEvaluationContext context);
+	IEvaluationResult evaluate(XExpression expression, IEvaluationContext context, CancelIndicator cancelIndicator);
 	
 }
