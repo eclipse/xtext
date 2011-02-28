@@ -94,6 +94,18 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	}
 
 	@Check
+	public void checkClassPath(XtendClass clazz) {
+		if (typeRefs.findDeclaredType("org.eclipse.xtext.xtend2.lib.StringConcatenation", clazz) == null) {
+			error("Mandatory library bundle 'org.eclipse.xtext.xtend2.lib' not found on the classpath.", clazz,
+					Xtend2Package.Literals.XTEND_CLASS__NAME, IssueCodes.XTEND_LIB_NOT_ON_CLASSPATH);
+		}
+		if (typeRefs.findDeclaredType("org.eclipse.xtext.xbase.lib.ObjectExtensions", clazz) == null) {
+			error("Mandatory library bundle 'org.eclipse.xtext.xbase.lib' not found on the classpath.", clazz,
+					Xtend2Package.Literals.XTEND_CLASS__NAME, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
+		}
+	}
+
+	@Check
 	public void checkWhitespaceInRichStrings(RichString richString) {
 		// don't check the indentation of nested rich strings in 
 		// IF and FOR individually
