@@ -19,7 +19,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 				"public class Bar {\n" +
 				"  private final Bar _this = this;\n" + 
 				"  \n" +
-				"  public Integer doStuff(String x) {\n" + 
+				"  public Integer doStuff(final String x) {\n" + 
 				"    int _length = x.length();\n" + 
 				"    return ((Integer)_length);\n" + 
 				"  }\n" + 
