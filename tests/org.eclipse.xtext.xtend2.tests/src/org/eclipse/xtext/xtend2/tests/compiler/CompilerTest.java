@@ -125,6 +125,13 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		invokeAndExpect2("foobar", " with(String x, String y) { x+y} main(String x) { x.with('bar')}", "main", "foo"); 
 	}
 	
+	public void testClosureReturnsVoid() throws Exception {
+		invokeAndExpect2(null, 
+				"foo() { " +
+				"  [|{}].apply" +
+				"}", "foo"); 
+	}
+	
 	public void testDependencyDeclaration() throws Exception {
 		invokeAndExpect2(Boolean.TRUE, "check() {obj!=null} @Inject test.ExtensionMethods as obj", "check");
 	}
