@@ -28,6 +28,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IFeaturesForTypeProvider;
@@ -102,8 +103,10 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 			EList<JvmFormalParameter> list = func.getParameters();
 			List<IEObjectDescription> descriptions = Lists.newArrayList();
 			for (JvmFormalParameter jvmFormalParameter : list) {
-				IEObjectDescription desc = createIEObjectDescription(jvmFormalParameter);
-				descriptions.add(desc);
+				if (!Strings.isEmpty(jvmFormalParameter.getName())) {
+					IEObjectDescription desc = createIEObjectDescription(jvmFormalParameter);
+					descriptions.add(desc);
+				}
 			}
 			return MapBasedScope.createScope(super.createLocalVarScope(context, reference, parent, includeCurrentBlock, idx), descriptions);
 		}

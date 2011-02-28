@@ -30,6 +30,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.collect.Lists;
@@ -130,22 +131,33 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		EList<EObject> eContents = context.eContents();
 		for (EObject child : eContents) {
 			String value = importResolver.getValue(child);
-			if (value != null) {
-				importedNamespaceResolvers.add(createImportedNamespaceResolver(value, ignoreCase));
-			}
+			ImportNormalizer resolver = createImportedNamespaceResolver(value, ignoreCase);
+			if (resolver != null)
+				importedNamespaceResolvers.add(resolver);
 		}
 		return importedNamespaceResolvers;
 	}
 
+	/**
+	 * Create a new {@link ImportNormalizer} for the given namespace.
+	 * @param namespace the namespace.
+	 * @param ignoreCase <code>true</code> if the resolver should be case insensitive.
+	 * @return a new {@link ImportNormalizer} or <code>null</code> if the namespace cannot be converted to a valid
+	 * qualified name.
+	 */
 	protected ImportNormalizer createImportedNamespaceResolver(final String namespace, boolean ignoreCase) {
+		if (Strings.isEmpty(namespace))
+			return null;
 		QualifiedName importedNamespace = qualifiedNameConverter.toQualifiedName(namespace);
 		if (importedNamespace == null || importedNamespace.getSegmentCount() < 1) {
-			throw new IllegalArgumentException("Imported namespace must not be null / empty");
+			return null;
 		}
 		boolean hasWildCard = ignoreCase ? 
 				importedNamespace.getLastSegment().equalsIgnoreCase(getWildCard()) :
 				importedNamespace.getLastSegment().equals(getWildCard());
 		if (hasWildCard) {
+			if (importedNamespace.getSegmentCount() <= 1)
+				return null;
 			return new ImportNormalizer(importedNamespace.skipLast(1), true, ignoreCase);
 		} else {
 			return new ImportNormalizer(importedNamespace, false, ignoreCase);

@@ -324,13 +324,23 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	
 	protected void _earlyExits(Void expr, EarlyExitAcceptor a) {
 	}
+	
 	protected void _earlyExits(JvmTypeReference ref, EarlyExitAcceptor a) {
 	}
+	
 	protected void _earlyExits(EObject expr, EarlyExitAcceptor a) {
 		EList<EObject> list = expr.eContents();
 		for (EObject eObject : list) {
 			internalCollectEarlyExits(eObject, a);
 		}
+	}
+	
+	protected XbaseTypeConformanceComputer getTypeConformanceComputer() {
+		return typeConformanceComputer;
+	}
+	
+	protected TypeReferences getTypeReferences() {
+		return typeReferences;
 	}
 
 	protected static class ComputationData<T extends EObject> {

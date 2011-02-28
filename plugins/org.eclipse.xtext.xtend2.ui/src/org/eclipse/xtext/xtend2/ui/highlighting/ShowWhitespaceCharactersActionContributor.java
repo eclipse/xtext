@@ -16,10 +16,12 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Singleton
 public class ShowWhitespaceCharactersActionContributor implements IActionContributor {
 
 	@Inject
@@ -32,7 +34,8 @@ public class ShowWhitespaceCharactersActionContributor implements IActionContrib
 		action.setDisabledImageDescriptor(ImageDescriptor.createFromImage(imageHelper
 				.getImage("full/dtool16/show_whitespace_chars.gif")));
 		IToolBarManager toolBarManager = editor.getEditorSite().getActionBars().getToolBarManager();
-		toolBarManager.add(action);
+		if (toolBarManager.find(ITextEditorActionConstants.SHOW_WHITESPACE_CHARACTERS) == null)
+			toolBarManager.add(action);
 	}
 	
 	public void editorDisposed(XtextEditor editor) {

@@ -69,7 +69,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testNoException_03() throws Exception {
-		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.smoke\n" + 
+		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.linking\n" + 
 				// error condition is empty class name
 				"class  {\n" + 
 				"\n" + 
@@ -89,7 +89,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testNoException_04() throws Exception {
-		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.smoke\n" + 
+		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.linking\n" + 
 				"import java.util.ArrayList\n" + 
 				"import static java.util.Arrays.*\n" + 
 				"import static extension java.util.Collections.*\n" + 
@@ -104,7 +104,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testNoException_05() throws Exception {
-		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.smoke\n" + 
+		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.linking\n" + 
 				"import java.util.ArrayList\n" + 
 				"import static java.util.Arrays.*\n" + 
 				"import static extension java.util.Collections.*\n" + 
@@ -114,6 +114,60 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 				"	ArrayList as myList\n" + 
 				"	@Inject extension\n" + 
 				"	String\n" + 
+				"	boolean something(int i) {\n" + 
+				"	  if (i.indexOf() == 0) {\n" + 
+				"	    return myList.contains(i)\n" + 
+				"	  } \n" + 
+				"	  asList(i)\n" + 
+				"	  i.singletonList()\n" + 
+				"	  false\n" + 
+				"	}\n" + 
+				"}");
+		assertNoExceptions(file);
+	}
+	
+	public void testNoException_06() throws Exception {
+		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.linking\n" + 
+				"class NoException {\n" + 
+				"	String foo(String a,) {\n" + 
+				"		if (isUpper(a)) {\n" + 
+				"			another(a,b+'holla')\n" + 
+				"		}\n" + 
+				"	}\n" + 
+				"}");
+		assertNoExceptions(file);
+	}
+	
+	public void testNoException_07() throws Exception {
+		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.linking\n" + 
+				"import\n" +
+				"import static java.util.Arrays.*\n" + 
+				"import static extension java.util.Collections.*\n" + 
+				"class NoException {\n" + 
+				"	@Inject\n" + 
+				"	ArrayList as myList\n" + 
+				"	@Inject extension String\n" + 
+				"	boolean something(int i) {\n" + 
+				"	  if (i.indexOf() == 0) {\n" + 
+				"	    return myList.contains(i)\n" + 
+				"	  } \n" + 
+				"	  asList(i)\n" + 
+				"	  i.singletonList()\n" + 
+				"	  false\n" + 
+				"	}\n" + 
+				"}");
+		assertNoExceptions(file);
+	}
+	
+	public void testNoException_08() throws Exception {
+		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.smoke\n" + 
+				"import java.util.ArrayList\n" + 
+				"import static.*\n" + 
+				"import static extension java.util.Collections.*\n" + 
+				"class Case_5 {\n" + 
+				"	@Inject\n" + 
+				"	ArrayList as myList\n" + 
+				"	@Inject extension String\n" + 
 				"	boolean something(int i) {\n" + 
 				"	  if (i.indexOf() == 0) {\n" + 
 				"	    return myList.contains(i)\n" + 

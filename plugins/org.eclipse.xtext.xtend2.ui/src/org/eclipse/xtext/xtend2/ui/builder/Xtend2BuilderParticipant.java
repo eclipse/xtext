@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.parser.IEncodingProvider;
@@ -101,6 +102,7 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 				if (sourceResource == null)
 					throw new IllegalStateException("Cannot load source Xtend2 resource "
 							+ notNull(sourceURI));
+				EcoreUtil.resolveAll(sourceResource);
 				if (!sourceResource.getErrors().isEmpty())
 					return;
 			} else if (delta.getOld() != null)

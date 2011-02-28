@@ -307,11 +307,12 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 		@Override
 		public void acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen) {
+			appendable.append("\n");
 			appendable.append(variableName);
 			if (!controlStructureSeen) {
-				appendable.append(".newLine();\n");
+				appendable.append(".newLine();");
 			} else {
-				appendable.append(".newLineIfNotEmpty();\n");
+				appendable.append(".newLineIfNotEmpty();");
 			}
 		}
 
@@ -323,16 +324,18 @@ public class Xtend2Compiler extends XbaseCompiler {
 		public void acceptSemanticText(CharSequence text, RichStringLiteral origin) {
 			if (text.length() == 0)
 				return;
+			appendable.append("\n");
 			appendable.append(variableName);
 			appendable.append(".append(\"");
 			appendable.append(Strings.convertToJavaString(text.toString()));
-			appendable.append("\");\n");
+			appendable.append("\");");
 		}
 
 		@Override
 		public void acceptIfCondition(XExpression condition) {
 			ifStack.add((RichStringIf) condition.eContainer());
-			appendable.append("{").increaseIndentation().append("\n");
+			appendable.append("\n");
+			appendable.append("{").increaseIndentation();
 			writeIf(condition);
 		}
 
@@ -344,16 +347,16 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 		protected void writeIf(XExpression condition) {
 			internalToJavaStatement(condition, appendable, true);
+			appendable.append("\n");
 			appendable.append("if (");
 			internalToJavaExpression(condition, appendable);
-			appendable.append(") {").increaseIndentation().append("\n");
+			appendable.append(") {").increaseIndentation();
 		}
 
 		protected void writeElse() {
 			appendable.decreaseIndentation();
 			appendable.append("} else {");
 			appendable.increaseIndentation();
-			appendable.append("\n");
 		}
 
 		@Override
@@ -369,14 +372,14 @@ public class Xtend2Compiler extends XbaseCompiler {
 				appendable.append("\n");
 				appendable.append("}");
 			}
-			appendable.append("\n");
 		}
 
 		@Override
 		public void acceptForLoop(JvmFormalParameter parameter, XExpression expression) {
 			super.acceptForLoop(parameter, expression);
-			appendable.append("{").increaseIndentation().append("\n");
+			appendable.append("\n").append("{").increaseIndentation();
 			internalToJavaStatement(expression, appendable, true);
+			appendable.append("\n");
 			appendable.append("for(");
 			JvmTypeReference paramType = getTypeProvider().getTypeForIdentifiable(parameter);
 			appendable.append(paramType.getIdentifier());
@@ -385,7 +388,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 			appendable.append(loopParam);
 			appendable.append(" : ");
 			internalToJavaExpression(expression, appendable);
-			appendable.append(") {").increaseIndentation().append("\n");
+			appendable.append(") {").increaseIndentation();
 		}
 
 		@Override
@@ -397,18 +400,18 @@ public class Xtend2Compiler extends XbaseCompiler {
 			appendable.decreaseIndentation();
 			appendable.append("\n");
 			appendable.append("}");
-			appendable.append("\n");
 		}
 
 		@Override
 		public void acceptExpression(XExpression expression, CharSequence indentation) {
 			internalToJavaStatement(expression, appendable, true);
+			appendable.append("\n");
 			appendable.append(variableName);
 			appendable.append(".append(");
 			internalToJavaExpression(expression, appendable);
 			appendable.append(", \"");
 			appendable.append(indentation.toString());
-			appendable.append("\");\n");
+			appendable.append("\");");
 		}
 
 	}
@@ -423,7 +426,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		b.append(variableName);
 		b.append(" = new ");
 		b.append(type);
-		b.append("();\n");
+		b.append("();");
 		RichStringPrepareCompiler compiler = new RichStringPrepareCompiler(b, variableName);
 		richStringProcessor.process(richString, compiler, indentationHandler.get());
 	}
