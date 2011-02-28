@@ -85,6 +85,18 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeJavaTypes(context, acceptor);
 	}
+	
+	@Override
+	public void completeXRelationalExpression_Type(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		if (context.getPrefix().length() > 0) {
+			if (Character.isJavaIdentifierStart(context.getPrefix().charAt(0))) {
+				typeProposalProvider.createTypeProposals(this, context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, acceptor);
+			}
+		} else {
+			typeProposalProvider.createTypeProposals(this, context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, acceptor);
+		}
+	}
 
 	protected void completeJavaTypes(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		if (context.getPrefix().length() > 0) {
