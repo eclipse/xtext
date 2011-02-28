@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtend2.typing;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -17,6 +18,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
@@ -50,6 +52,15 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 			return function.getReturnType();
 		}
 		return null;
+	}
+	
+	@Override
+	protected JvmTypeReference _type(XAbstractFeatureCall featureCall, boolean rawType) {
+		// This is to prevent resolution of local TypeParameters, because they should be treated as resolved.
+		if (featureCall.getFeature() instanceof JvmFormalParameter) {
+			return getTypeForIdentifiable(featureCall.getFeature(), rawType);
+		}
+		return super._type(featureCall, rawType);
 	}
 
 	protected JvmTypeReference _type(RichString richString, boolean rawType) {

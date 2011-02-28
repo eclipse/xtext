@@ -95,7 +95,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		} else if (right.getType().getIdentifier().startsWith(Functions.class.getCanonicalName())) {
 			JvmTypeReference resolvedLeft = funcConversion.getResolvedExpectedType(left, right);
 			if (resolvedLeft == null || resolvedLeft.getIdentifier().equals(Object.class.getName())
-					|| EcoreUtil.equals(resolvedLeft, right)) {
+					|| EcoreUtil.equals(resolvedLeft.getType(), right.getType())) {
 				expression.exec();
 				return;
 			}

@@ -17,7 +17,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
@@ -110,8 +112,9 @@ public class Xtend2Compiler extends XbaseCompiler {
 	}
 
 	protected void compile(XtendClass obj, IAppendable appendable) {
-		//TODO typeparams, abstract, final
+		//TODO abstract, final
 		appendable.append("\npublic class ").append(obj.getName());
+		appendTypeParameterDeclaration(obj.getTypeParameters(), appendable);
 		if (obj.getExtends() != null)
 			appendable.append(" extends ").append(obj.getExtends());
 		if (!obj.getImplements().isEmpty()) {
@@ -133,6 +136,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		appendable.decreaseIndentation();
 		appendable.append("\n}");
 	}
+
 
 	protected void compile(DeclaredDependency dependency, IAppendable appendable) {
 		appendable.append("\n@com.google.inject.Inject private ");
@@ -233,13 +237,14 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 	protected void compile(XtendFunction obj, IAppendable appendable) {
 		appendable.openScope();
-		//TODO typeparams, exceptions
 		JvmTypeReference returnType = getTypeProvider().getTypeForIdentifiable(obj);
 		String name = obj.getName();
 		if (obj.isDispatch()) {
 			name = "_" + name;
 		}
-		appendable.append("\n\n").append("public ").append(returnType).append(" ").append(name).append("(");
+		appendable.append("\n\n").append("public ");
+		appendTypeParameterDeclaration(obj.getTypeParameters(), appendable);
+		appendable.append(returnType).append(" ").append(name).append("(");
 		final EList<JvmFormalParameter> parameters = obj.getParameters();
 		declareParameters(parameters, appendable);
 		appendable.append(") ");
@@ -260,6 +265,30 @@ public class Xtend2Compiler extends XbaseCompiler {
 		appendable.append("\n}").closeScope();
 	}
 
+	protected void appendTypeParameterDeclaration(EList<JvmTypeParameter> typeParameters, IAppendable appendable) {
+		if (!typeParameters.isEmpty()) {
+			appendable.append("<");
+			for (Iterator<JvmTypeParameter> iterator = typeParameters.iterator(); iterator.hasNext();) {
+				JvmTypeParameter tp = iterator.next();
+				appendable.append(tp);
+				final Iterable<JvmUpperBound> constraints = filter(tp.getConstraints(), JvmUpperBound.class);
+				Iterator<JvmUpperBound> iter2 = constraints.iterator();
+				if (iter2.hasNext()) {
+					appendable.append(" extends ");
+					while (iter2.hasNext()) {
+						JvmUpperBound constraint = iter2.next();
+						appendable.append(constraint.getTypeReference());
+						if (iter2.hasNext())
+							appendable.append(",");
+					}
+				}
+				if (iterator.hasNext())
+					appendable.append(",");
+			}
+			appendable.append("> ");
+		}
+	}
+	
 	protected List<JvmTypeReference> getCheckedExceptions(XtendFunction obj) {
 		Iterable<JvmTypeReference> types = getTypeProvider().getThrownExceptionTypes(obj.getExpression());
 		List<JvmTypeReference> checkedExceptions = newArrayList();
@@ -281,7 +310,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		for (int i = 0; i < numParams; i++) {
 			JvmFormalParameter p = parameters.get(i);
 			String varName = declareNameInVariableScope(p, appendable);
-			appendable.append(p.getParameterType()).append(" ").append(varName);
+			appendable.append("final ").append(p.getParameterType()).append(" ").append(varName);
 			if (i != numParams - 1)
 				appendable.append(", ");
 		}
