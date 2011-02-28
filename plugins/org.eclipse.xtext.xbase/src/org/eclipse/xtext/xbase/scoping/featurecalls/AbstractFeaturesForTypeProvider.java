@@ -32,6 +32,8 @@ public abstract class AbstractFeaturesForTypeProvider implements IFeaturesForTyp
 	 * the its upperBound is the same or a supertype of the first argument's raw type.
 	 */
 	protected boolean isSameTypeOrAssignableToUpperBound(JvmTypeReference first, JvmTypeReference second) {
+		if (second == null)
+			return false;
 		if (second.getType() == first.getType()) {
 			return true;
 		}

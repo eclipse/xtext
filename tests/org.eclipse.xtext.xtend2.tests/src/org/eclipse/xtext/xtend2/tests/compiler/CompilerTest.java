@@ -150,13 +150,13 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		invokeAndExpect("bar", "if (p2) 'foo' else p1 ","bar",false);
 	}
 	
-	public void testCaseFunction_00() throws Exception {
+	public void testDispatchFunction_00() throws Exception {
 		final String definition = "x(p1)} dispatch x(String s) {'string'} dispatch x(Object o) {'object'";
 		invokeAndExpect("string", definition,"bar");
 		invokeAndExpect("object", definition,42);
 	}
 	
-	public void testCaseFunction_01() throws Exception {
+	public void testDispatchFunction_01() throws Exception {
 		final String definition = "x(p1)} " +
 				" dispatch x(Comparable<Boolean> s) {'comparable'}" +
 				" dispatch x(String s) {'string'}" +
@@ -174,7 +174,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		}
 	}
 	
-	public void testCaseFunction_02() throws Exception {
+	public void testDispatchFunction_02() throws Exception {
 		final String definition = "x(p1 as String)}" +
 				" dispatch x(Void s) {'null'}" +
 				" dispatch x(String s) {'string'";
@@ -190,9 +190,10 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		invokeAndExpect("null", definition,new Object[]{null});
 	}
 	
+	
 //TODO test fails, when run as plug-in test. The EMF jars cannot be resolved.
 //
-//	public void testCaseFunction_03() throws Exception {
+//	public void testDispatchFunction_03() throws Exception {
 //		final String definition = "doIt(p1) " +
 //				"   case doIt(org.eclipse.emf.ecore.EStructuralFeature x) typeof(org.eclipse.emf.ecore.EStructuralFeature)\n" + 
 //				"	case doIt(org.eclipse.emf.ecore.EReference x) typeof(org.eclipse.emf.ecore.EReference)\n" + 
@@ -203,7 +204,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 //		invokeAndExpect(ETypedElement.class, definition,EcoreFactory.eINSTANCE.createEOperation());
 //	}
 	
-	public void testCaseFunction_04() throws Exception {
+	public void testDispatchFunction_04() throws Exception {
 		final String definition = "x(p1)}" +
 		" dispatch x(int s) {'int'}" +
 		" dispatch x(boolean s) {'boolean'}" +
@@ -218,6 +219,13 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		} catch (InvocationTargetException e) {
 			assertTrue(e.getCause() instanceof IllegalArgumentException);
 		}
+	}
+	
+	public void testDispatchFunction_05() throws Exception {
+		final String definition = 
+			"dispatch void a(String x) {}" +
+			"dispatch a(Object x) {return null}";
+		invokeAndExpect2(null, definition, "a", new Object());
 	}
 	
 	public void testFunctionCall_00() throws Exception {
