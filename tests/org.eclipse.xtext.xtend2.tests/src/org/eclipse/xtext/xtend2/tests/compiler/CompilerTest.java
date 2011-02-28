@@ -19,14 +19,18 @@ import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
+import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
+import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
 import test.ExtensionMethods;
+import testdata.Properties1;
 
+import com.google.common.base.Function;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -254,6 +258,9 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		javaCompiler.addClassPathOfClass(XbasePackage.class);
 		javaCompiler.addClassPathOfClass(Xtend2Package.class);
 		javaCompiler.addClassPathOfClass(Inject.class);
+		javaCompiler.addClassPathOfClass(Properties1.class);
+		javaCompiler.addClassPathOfClass(Function.class);
+		javaCompiler.addClassPathOfClass(StringConcatenation.class);
 	}
 	
 	protected void invokeAndExpect2(Object expectation, String xtendclassBody, String methodToInvoke, Object...args) throws Exception {
