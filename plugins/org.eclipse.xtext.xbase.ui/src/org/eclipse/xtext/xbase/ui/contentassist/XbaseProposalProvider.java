@@ -149,7 +149,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 	@Override
 	protected void lookupCrossReference(CrossReference crossReference, ContentAssistContext contentAssistContext,
 			ICompletionProposalAcceptor acceptor) {
-		lookupCrossReference(crossReference, contentAssistContext, acceptor, featureDescriptionPredicate);
+		lookupCrossReference(crossReference, contentAssistContext, acceptor, getFeatureDescriptionPredicate(contentAssistContext));
 	}
 	
 	@Override
@@ -296,7 +296,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 	protected void createLocalVariableAndImplicitProposals(EObject context, boolean includeCurrentObject, int idx, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
 		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory("ID", contentAssistContext);
 		IScope scope = getScopeProvider().createSimpleFeatureCallScope(context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, contentAssistContext.getResource(), includeCurrentObject, idx);
-		getCrossReferenceProposalCreator().lookupCrossReference(scope, context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, acceptor, featureDescriptionPredicate, proposalFactory);
+		getCrossReferenceProposalCreator().lookupCrossReference(scope, context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, acceptor, getFeatureDescriptionPredicate(contentAssistContext), proposalFactory);
 	}
 	
 	/**
@@ -435,4 +435,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 		}
 	}
 	
+	protected Predicate<IEObjectDescription> getFeatureDescriptionPredicate(ContentAssistContext contentAssistContext) {
+		return featureDescriptionPredicate;
+	}
 }
