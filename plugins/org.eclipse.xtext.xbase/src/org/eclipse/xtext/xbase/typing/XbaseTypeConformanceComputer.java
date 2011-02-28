@@ -40,9 +40,7 @@ public class XbaseTypeConformanceComputer extends TypeConformanceComputer {
 			return true;
 		if (right == null)
 			return false;
-		if (typeReferences.is(left, Void.class) && typeReferences.is(right, Void.TYPE))
-			return true;
-		if (typeReferences.is(right, Void.class))
+		if (typeReferences.is(right, Void.class) || typeReferences.is(right, Void.TYPE))
 			return true;
 		if (functionConversion.isFunction(left) || functionConversion.isFunction(right))
 			return functionConversion.isConformant(left, right, ignoreGenerics);

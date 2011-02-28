@@ -27,7 +27,33 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 
 	@Inject
 	private ValidationTestHelper helper;
+	
+	public void testReturnTypeCompatibility_00() throws Exception {
+		XtendFunction function = function("void foo(int bar) { }");
+		helper.assertNoErrors(function);
+	}
 
+	public void testReturnTypeCompatibility_01() throws Exception {
+		XtendFunction function = function("String foo(int bar) { return 42 }");
+		helper.assertError(function, XbasePackage.Literals.XINT_LITERAL, INCOMPATIBLE_TYPES,
+				"String", "int");
+	}
+	
+	public void testReturnTypeCompatibility_02() throws Exception {
+		XtendFunction function = function("Object foo(int bar) { return 42 }");
+		helper.assertNoErrors(function);
+	}
+	
+	public void testReturnTypeCompatibility_03() throws Exception {
+		XtendFunction function = function("String foo(int bar) { " +
+				" if (true) {" +
+				"  return if (false) 42 else new Object()" +
+				" }" +
+				"}");
+		helper.assertError(function, XbasePackage.Literals.XIF_EXPRESSION, INCOMPATIBLE_TYPES,
+				"String", "Object");
+	}
+	
 	public void testAssignmentToFunctionParameter() throws Exception {
 		XtendFunction function = function("void foo(int bar) { bar=7 }");
 		helper.assertError(function, XbasePackage.Literals.XASSIGNMENT, ASSIGNMENT_TO_FINAL,

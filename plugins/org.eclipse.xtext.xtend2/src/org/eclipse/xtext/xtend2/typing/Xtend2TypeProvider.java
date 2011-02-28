@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtend2.typing;
 
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -19,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
@@ -52,6 +54,14 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 			return function.getReturnType();
 		}
 		return null;
+	}
+	
+	@Override
+	protected JvmTypeReference _expectedType(XReturnExpression expr, EReference reference, int index, boolean rawType) {
+		XtendFunction function = EcoreUtil2.getContainerOfType(expr, XtendFunction.class);
+		if (function==null)
+			return null;
+		return _expectedType(function, Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION,0,rawType);
 	}
 	
 	@Override
