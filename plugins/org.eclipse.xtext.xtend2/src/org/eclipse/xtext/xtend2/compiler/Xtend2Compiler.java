@@ -186,25 +186,21 @@ public class Xtend2Compiler extends XbaseCompiler {
 			a.decreaseIndentation().decreaseIndentation();
 			a.append(") {").increaseIndentation();
 			a.append("\n");
-			if (!typeRefs.is(dispatchOperation.getReturnType(), Void.TYPE)) {
-				a.append("return ");
-			}
-			a.append(operation.getSimpleName()).append("(");
-			iter1 = dispatchOperation.getParameters().iterator();
-			for (Iterator<JvmFormalParameter> iter2 = operation.getParameters().iterator(); iter2.hasNext();) {
-				JvmFormalParameter p1 = iter1.next();
-				JvmFormalParameter p2 = iter2.next();
-				a.append("(").append(primitives.asWrapperTypeIfPrimitive(p2.getParameterType())).append(")");
-				if (typeRefs.is(p2.getParameterType(), Void.class)) {
-					a.append("null");
+			final boolean isCurrentVoid = typeRefs.is(operation.getReturnType(), Void.TYPE);
+			final boolean isDispatchVoid = typeRefs.is(dispatchOperation.getReturnType(), Void.TYPE);
+			if (isDispatchVoid) {
+				generateActualDispatchCall(dispatchOperation, operation, a);
+				a.append(";");
+			} else {
+				if (isCurrentVoid) {
+					generateActualDispatchCall(dispatchOperation, operation, a);
+					a.append(";\nreturn null");
 				} else {
-					a.append(p1.getName());
+					a.append("return ");
+					generateActualDispatchCall(dispatchOperation, operation, a);
 				}
-				if (iter2.hasNext()) {
-					a.append(", ");
-				}
+				a.append(";");
 			}
-			a.append(");");
 			a.decreaseIndentation().append("\n} else ");
 		}
 		a.append("{").increaseIndentation();
@@ -212,6 +208,27 @@ public class Xtend2Compiler extends XbaseCompiler {
 		a.decreaseIndentation().append("\n}");
 		a.decreaseIndentation().append("\n}");
 		a.closeScope();
+	}
+
+	protected void generateActualDispatchCall(JvmOperation dispatchOperation, JvmOperation actualOperationToCall,
+			IAppendable a) {
+		Iterator<JvmFormalParameter> iter1;
+		a.append(actualOperationToCall.getSimpleName()).append("(");
+		iter1 = dispatchOperation.getParameters().iterator();
+		for (Iterator<JvmFormalParameter> iter2 = actualOperationToCall.getParameters().iterator(); iter2.hasNext();) {
+			JvmFormalParameter p1 = iter1.next();
+			JvmFormalParameter p2 = iter2.next();
+			a.append("(").append(primitives.asWrapperTypeIfPrimitive(p2.getParameterType())).append(")");
+			if (typeRefs.is(p2.getParameterType(), Void.class)) {
+				a.append("null");
+			} else {
+				a.append(p1.getName());
+			}
+			if (iter2.hasNext()) {
+				a.append(", ");
+			}
+		}
+		a.append(")");
 	}
 
 	protected void compile(XtendFunction obj, IAppendable appendable) {
