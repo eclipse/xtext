@@ -329,6 +329,8 @@ public class FunctionConversion {
 			JvmTypeReference returnType) {
 		JvmParameterizedTypeReference result = createRawFunctionTypeRef(context, parameterTypes.size());
 		JvmGenericType functionType = (JvmGenericType) result.getType();
+		if (functionType==null)
+			return result;
 		for (int i = 0; i < parameterTypes.size(); i++) {
 			JvmTypeReference paramterType = parameterTypes.get(i);
 			if (paramterType == null) {

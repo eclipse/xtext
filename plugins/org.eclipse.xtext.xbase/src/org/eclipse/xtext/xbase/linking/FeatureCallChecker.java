@@ -23,8 +23,12 @@ import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
@@ -290,9 +294,18 @@ public class FeatureCallChecker {
 	}
 
 	protected boolean isCompatibleArgument(JvmTypeReference declaredType, JvmTypeReference actualType) {
-		//TODO is actualType is reference to TypeParam, it's ok let the validation figure that out.
 		if (actualType == null || typeRefs.is(actualType, Void.class))
 			return true;
+		if (actualType.getType() instanceof JvmTypeParameter) {
+			JvmTypeParameter type = (JvmTypeParameter) actualType.getType();
+			if (type.getConstraints().isEmpty())
+				return true;
+			for (JvmTypeConstraint constraint : type.getConstraints()) {
+				if (isCompatibleArgument(declaredType, constraint.getTypeReference()))
+					return true;
+			}
+			return false;
+		}
 		return conformance.isConformant(declaredType, actualType, true);
 	}
 
