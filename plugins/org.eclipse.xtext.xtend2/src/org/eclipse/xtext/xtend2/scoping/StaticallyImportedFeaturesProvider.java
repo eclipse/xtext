@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.scoping.featurecalls.AbstractStaticMethodsFeatureForTypeProvider;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendImport;
@@ -29,8 +30,10 @@ public class StaticallyImportedFeaturesProvider extends AbstractStaticMethodsFea
 		boolean extension = reference != null && reference.getType() != null;
 		List<String> result = Lists.newArrayList();
 		for(XtendImport imported: imports) {
-			if (imported.isStatic() && (!extension || imported.isExtension()) &&  imported.isWildcard()) {
-				result.add(imported.getImportedTypeName());
+			if (imported.isStatic() && (!extension || imported.isExtension()) && imported.isWildcard()) {
+				String typeName = imported.getImportedTypeName();
+				if (!Strings.isEmpty(typeName))
+					result.add(typeName);
 			}
 		}
 		return result;

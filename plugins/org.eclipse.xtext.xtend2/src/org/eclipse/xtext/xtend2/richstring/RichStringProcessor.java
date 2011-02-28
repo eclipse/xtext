@@ -71,9 +71,11 @@ public class RichStringProcessor {
 		public Boolean caseRichStringForLoop(RichStringForLoop object) {
 			acceptor.acceptForLoop(object.getDeclaredParam(), object.getForExpression());
 			controlStructureSeen = true;
-			while (acceptor.forLoopHasNext()) {
-				controlStructureSeen = true;
-				doSwitch(object.getEachExpression());
+			if (object.getEachExpression() != null) {
+				while (acceptor.forLoopHasNext()) {
+					controlStructureSeen = true;
+					doSwitch(object.getEachExpression());
+				}
 			}
 			acceptor.acceptEndFor();
 			controlStructureSeen = true;
@@ -84,11 +86,13 @@ public class RichStringProcessor {
 		public Boolean caseRichStringIf(RichStringIf object) {
 			acceptor.acceptIfCondition(object.getIf());
 			controlStructureSeen = true;
-			doSwitch(object.getThen());
+			if (object.getThen() != null)
+				doSwitch(object.getThen());
 			for (RichStringElseIf elseIf : object.getElseIfs()) {
 				acceptor.acceptElseIfCondition(elseIf.getIf());
 				controlStructureSeen = true;
-				doSwitch(elseIf.getThen());
+				if (elseIf.getThen() != null)
+					doSwitch(elseIf.getThen());
 			}
 			if (object.getElse() != null) {
 				acceptor.acceptElse();

@@ -23,7 +23,9 @@ public class XtendImportImplCustom extends XtendImportImpl {
 	public String getImportedTypeName() {
 		String result = getImportedNamespace();
 		if (isWildcard()) {
-			return result.substring(0, result.length() - 2);
+			if (result.length() > 2)
+				return result.substring(0, result.length() - 2);
+			return null;
 		}
 		return result;
 	}

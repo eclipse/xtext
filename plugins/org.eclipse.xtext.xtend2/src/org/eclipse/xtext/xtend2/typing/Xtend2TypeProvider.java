@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.xtend2.typing;
 
 import org.eclipse.emf.ecore.EReference;
@@ -6,17 +13,18 @@ import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
-import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
-import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
+import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
+import org.eclipse.xtext.xtend2.xtend2.RichStringElseIf;
+import org.eclipse.xtext.xtend2.xtend2.RichStringForLoop;
+import org.eclipse.xtext.xtend2.xtend2.RichStringIf;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -29,27 +37,15 @@ import com.google.inject.Singleton;
 public class Xtend2TypeProvider extends XbaseTypeProvider {
 
 	@Inject
-	private TypeReferences typeRefs;
-
-	@Inject
-	private TypesFactory factory;
-
-	@Inject
-	private ITypeProvider typeProvider;
-
-	@Inject
 	private IXtend2JvmAssociations xtend2jvmAssociations;
 
 	@Inject
 	private FeatureOverridesService featureOverridesService;
 
-	@Inject
-	private TypeArgumentContextProvider typeArgumentContextProvider;
-
 	protected JvmTypeReference _expectedType(XtendFunction function, EReference reference, int index, boolean rawType) {
 		if (reference == Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION) {
 			JvmTypeReference declaredOrInferredReturnType = getDeclaredOrOverriddenReturnType(function);
-			if (declaredOrInferredReturnType == null || typeRefs.is(declaredOrInferredReturnType, Void.TYPE))
+			if (declaredOrInferredReturnType == null || getTypeReferences().is(declaredOrInferredReturnType, Void.TYPE))
 				return null;
 			return function.getReturnType();
 		}
@@ -57,15 +53,44 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 	}
 
 	protected JvmTypeReference _type(RichString richString, boolean rawType) {
-		return typeRefs.getTypeForName(StringConcatenation.class, richString);
+		return getTypeReferences().getTypeForName(StringConcatenation.class, richString);
 	}
 
 	protected JvmTypeReference _type(RichStringLiteral stringLiteral, boolean rawType) {
-		return typeRefs.getTypeForName(String.class, stringLiteral);
+		return getTypeReferences().getTypeForName(String.class, stringLiteral);
+	}
+	
+	protected JvmTypeReference _type(RichStringIf richStringIf, boolean rawType) {
+		return getTypeReferences().getTypeForName(String.class, richStringIf);
+	}
+	
+	protected JvmTypeReference _type(RichStringForLoop richStringFor, boolean rawType) {
+		return getTypeReferences().getTypeForName(String.class, richStringFor);
+	}
+	
+	protected JvmTypeReference _expectedType(RichStringIf container, EReference reference, int index, boolean rawType) {
+		if (reference == Xtend2Package.Literals.RICH_STRING_IF__IF) {
+			return getTypeReferences().getTypeForName(Boolean.class, container);
+		}
+		return getTypeReferences().getTypeForName(StringConcatenation.class, container);
+	}
+	
+	protected JvmTypeReference _expectedType(RichStringElseIf container, EReference reference, int index, boolean rawType) {
+		if (reference == Xtend2Package.Literals.RICH_STRING_ELSE_IF__IF) {
+			return getTypeReferences().getTypeForName(Boolean.class, container);
+		}
+		return getTypeReferences().getTypeForName(StringConcatenation.class, container);
+	}
+
+	protected JvmTypeReference _expectedType(RichStringForLoop expr, EReference reference, int index, boolean rawType) {
+		// see also _expectedType(XForLoop..)
+		// Unless we can have multiple possible expected types (i.e. array and iterable), we shouldn't expect anything here
+		// The conformance test is done explicitly in the validator.
+		return null; // no expectations
 	}
 
 	protected JvmTypeReference _typeForIdentifiable(XtendClass clazz, boolean rawType) {
-		JvmParameterizedTypeReference typeReference = factory.createJvmParameterizedTypeReference();
+		JvmParameterizedTypeReference typeReference = getTypesFactory().createJvmParameterizedTypeReference();
 		typeReference.setType(xtend2jvmAssociations.getInferredType(clazz));
 		return typeReference;
 	}
@@ -74,10 +99,14 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 		JvmTypeReference declaredOrInferredReturnType = getDeclaredOrOverriddenReturnType(func);
 		if (declaredOrInferredReturnType != null)
 			return declaredOrInferredReturnType;
-		JvmTypeReference returnType = typeProvider.getCommonReturnType(func.getExpression(), true);
+		JvmTypeReference returnType = getCommonReturnType(func.getExpression(), true);
 		if (returnType!=null)
 			return returnType;
-		return typeRefs.getTypeForName(Object.class, func);
+		return getTypeReferences().getTypeForName(Object.class, func);
+	}
+	
+	protected JvmTypeReference _typeForIdentifiable(DeclaredDependency dependency, boolean rawType) {
+		return dependency.getType();
 	}
 
 	protected JvmTypeReference getDeclaredOrOverriddenReturnType(XtendFunction func) {
@@ -86,7 +115,7 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 		if (func.isOverride()) {
 			JvmOperation inferredOperation = xtend2jvmAssociations.getDirectlyInferredOperation(func);
 			JvmDeclaredType inferredType = inferredOperation.getDeclaringType();
-			TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(typeRefs
+			TypeArgumentContext typeArgumentContext = getTypeArgumentContextProvider().getReceiverContext(getTypeReferences()
 					.createTypeRef(inferredType));
 			JvmTypeReference superType = func.getDeclaringType().getExtends();
 			if (superType != null) {
@@ -106,6 +135,10 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 	protected JvmTypeReference _typeForIdentifiable(JvmGenericType type, boolean rawType) {
 		XtendClass xtendClass = xtend2jvmAssociations.getXtendClass(type);
 		return (xtendClass != null) ? _typeForIdentifiable(xtendClass, rawType) : null;
+	}
+	
+	protected JvmTypeReference _typeForIdentifiable(JvmType type, boolean rawType) {
+		return getTypeReferences().createTypeRef(type);
 	}
 
 }

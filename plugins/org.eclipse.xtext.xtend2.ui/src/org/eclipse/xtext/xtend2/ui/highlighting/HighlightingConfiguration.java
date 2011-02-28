@@ -45,7 +45,7 @@ public class HighlightingConfiguration extends DefaultHighlightingConfiguration 
 	}
 	
 	public TextStyle insignificantTemplateTextStyle() {
-		TextStyle textStyle = defaultTextStyle().copy();
+		TextStyle textStyle = stringTextStyle().copy();
 		return textStyle;
 	}
 }

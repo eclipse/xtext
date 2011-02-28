@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -34,11 +35,15 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.IResourceScopeCache;
+import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ResourceValidatorImpl;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 
 import com.google.common.collect.Lists;
@@ -64,6 +69,12 @@ public class SmokeTest extends AbstractXtend2TestCase {
 	
 	@Inject
 	private IJvmTypeProvider.Factory typeProviderFactory;
+	
+	@Inject
+	private IResourceScopeCache cache;
+	
+	@Inject
+	private ITypeProvider typeProvider;
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -136,6 +147,24 @@ public class SmokeTest extends AbstractXtend2TestCase {
 		}
 	}
 	
+	public void testSkipNodesInBetween() throws Exception {
+		for(String string: smokeTestModels) {
+			LazyLinkingResource resource = createResource(string);
+			ICompositeNode rootNode = resource.getParseResult().getRootNode();
+			ReplaceRegion replaceRegion = null;
+			for(INode node: rootNode.getAsTreeIterable()) {
+				int offset = node.getTotalOffset();
+				int length = node.getTotalLength();
+				if (replaceRegion == null || replaceRegion.getOffset() != offset || replaceRegion.getLength() != length) {
+					replaceRegion = new ReplaceRegion(offset, length, "");
+					StringBuilder builder = new StringBuilder(string);
+					replaceRegion.applyTo(builder);
+					doParseLinkAndValidate(builder.toString());
+				}
+			}
+		}
+	}
+	
 	public void testResourceUpdateSkipLastCharacters() throws Exception {
 		for(String string: smokeTestModels) {
 			LazyLinkingResource resource = createResource("");
@@ -203,50 +232,64 @@ public class SmokeTest extends AbstractXtend2TestCase {
 	}
 	
 	protected void compareWithNewResource(LazyLinkingResource resource, int offset, int length, String newText) throws IOException {
-		long start = System.currentTimeMillis();
-		long time = System.currentTimeMillis();
-		if (logger.isDebugEnabled()) {
-			logger.debug("Partial parsing ...");
-			logger.trace("Input is >>>" + resource.getParseResult().getRootNode().getText() + "<<<");
-			logger.trace("Offset: " + offset);
-			logger.trace("Length: " + length);
-			logger.trace("New Text: >>>" + newText + "<<<");
-		}
-		resource.update(offset, length, newText);
-		String text = resource.getParseResult().getRootNode().getText();
-		if (logger.isDebugEnabled()) {
-			logger.debug("... took " + (System.currentTimeMillis() - time));
-			logger.debug("Loading second resource ...");
-			time = System.currentTimeMillis();
-		}
-		LazyLinkingResource newResource = createResource(text);
-		if (logger.isDebugEnabled()) {
-			logger.debug("... took " + (System.currentTimeMillis() - time));
-			logger.debug("Semantic equality check ...");
-			time = System.currentTimeMillis();
-		}
-		assertEquals(text, resource.getContents().size(), newResource.getContents().size());
-		EcoreUtil.resolveAll(resource);
-		EcoreUtil.resolveAll(newResource);
-		for(int i = 0; i < resource.getContents().size(); i++) {
-			assertEquals(text, EmfFormatter.objToStr(newResource.getContents().get(i)), EmfFormatter.objToStr(resource.getContents().get(i)));
-		}
-		if (logger.isDebugEnabled()) {
-			logger.debug("... took " + (System.currentTimeMillis() - time));
-			logger.debug("Node equality check ...");
-			time = System.currentTimeMillis();
-		}
-		ICompositeNode rootNode = resource.getParseResult().getRootNode();
-		ICompositeNode newRootNode = newResource.getParseResult().getRootNode();
-		Iterator<INode> iterator = rootNode.getAsTreeIterable().iterator();
-		Iterator<INode> newIterator = newRootNode.getAsTreeIterable().iterator();
-		while(iterator.hasNext()) {
-			assertTrue(newIterator.hasNext());
-			assertEqualNodes(text, iterator.next(), newIterator.next());
-		}
-		if (logger.isDebugEnabled()) {
-			logger.debug("... took " + (System.currentTimeMillis() - time));
-			logger.debug("... done - total time: " + (System.currentTimeMillis() - start));
+		String model = resource.getParseResult().getRootNode().getText();
+		try {
+			long start = System.currentTimeMillis();
+			long time = System.currentTimeMillis();
+			if (logger.isDebugEnabled()) {
+				logger.debug("Partial parsing ...");
+				logger.trace("Input is >>>" + resource.getParseResult().getRootNode().getText() + "<<<");
+				logger.trace("Offset: " + offset);
+				logger.trace("Length: " + length);
+				logger.trace("New Text: >>>" + newText + "<<<");
+			}
+			resource.update(offset, length, newText);
+			String text = resource.getParseResult().getRootNode().getText();
+			if (logger.isDebugEnabled()) {
+				logger.debug("... took " + (System.currentTimeMillis() - time));
+				logger.debug("Loading second resource ...");
+				time = System.currentTimeMillis();
+			}
+			LazyLinkingResource newResource = createResource(text);
+			if (logger.isDebugEnabled()) {
+				logger.debug("... took " + (System.currentTimeMillis() - time));
+				logger.debug("Semantic equality check ...");
+				time = System.currentTimeMillis();
+			}
+			assertEquals(text, resource.getContents().size(), newResource.getContents().size());
+			EcoreUtil.resolveAll(resource);
+			EcoreUtil.resolveAll(newResource);
+			for(int i = 0; i < resource.getContents().size(); i++) {
+				assertEquals(text, EmfFormatter.objToStr(newResource.getContents().get(i)), EmfFormatter.objToStr(resource.getContents().get(i)));
+			}
+			if (logger.isDebugEnabled()) {
+				logger.debug("... took " + (System.currentTimeMillis() - time));
+				logger.debug("Node equality check ...");
+				time = System.currentTimeMillis();
+			}
+			ICompositeNode rootNode = resource.getParseResult().getRootNode();
+			ICompositeNode newRootNode = newResource.getParseResult().getRootNode();
+			Iterator<INode> iterator = rootNode.getAsTreeIterable().iterator();
+			Iterator<INode> newIterator = newRootNode.getAsTreeIterable().iterator();
+			while(iterator.hasNext()) {
+				assertTrue(newIterator.hasNext());
+				assertEqualNodes(text, iterator.next(), newIterator.next());
+			}
+			if (logger.isDebugEnabled()) {
+				logger.debug("... took " + (System.currentTimeMillis() - time));
+				logger.debug("... done - total time: " + (System.currentTimeMillis() - start));
+			}
+		} catch(Throwable e) {
+			e.printStackTrace();
+			String failureMessage = e.getMessage()+" : Model was >>>\n"	+ 
+			model + 
+			"\n<<<\n" +
+			"offset: " + offset + "\n" +
+			"length:" + length + "\n" +
+			"newText: >>>" + newText + "<<<";
+			assertEquals(failureMessage, model, "");
+			// just to make sure we fail for empty model, too
+			fail(failureMessage);
 		}
 	}
 
@@ -265,12 +308,37 @@ public class SmokeTest extends AbstractXtend2TestCase {
 			checkResource(model, resource);
 		} catch (Throwable e) {
 			e.printStackTrace();
+			assertEquals(e.getMessage()+" : Model was : \n\n"+model, model, "");
+			// just to make sure we fail for empty model, too
 			fail(e.getMessage()+" : Model was : \n\n"+model);
 		}
 	}
 
 	protected void checkResource(final String model, LazyLinkingResource resource) {
-		invariantChecker.checkInvariant(resource.getParseResult().getRootNode());
+		checkNodeModelInvariant(resource);
+		cache.clear(resource);
+		checkNoErrorsInTypeProvider(resource);
+		cache.clear(resource);
+		checkNoErrorsInValidator(model, resource);
+	}
+
+	protected void checkNoErrorsInTypeProvider(LazyLinkingResource resource) {
+		Iterator<Object> contents = EcoreUtil.getAllContents(resource, true);
+		while(contents.hasNext()) {
+			Object object = contents.next();
+			if (object instanceof XExpression) {
+				XExpression expression = (XExpression) object;
+				typeProvider.getExpectedType(expression);
+				typeProvider.getType(expression);
+				typeProvider.getCommonReturnType(expression, true);
+			}
+			if (object instanceof JvmIdentifiableElement) {
+				typeProvider.getTypeForIdentifiable((JvmIdentifiableElement) object);
+			}
+		}
+	}
+
+	protected void checkNoErrorsInValidator(final String model, LazyLinkingResource resource) {
 		ResourceValidatorImpl validator = new ResourceValidatorImpl();
 		assertNotSame(validator, resource.getResourceServiceProvider().getResourceValidator());
 		getInjector().injectMembers(validator);
@@ -297,6 +365,10 @@ public class SmokeTest extends AbstractXtend2TestCase {
 			}
 		});
 		validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
+	}
+
+	protected void checkNodeModelInvariant(LazyLinkingResource resource) {
+		invariantChecker.checkInvariant(resource.getParseResult().getRootNode());
 	}
 
 	protected LazyLinkingResource createResource(final String model) throws IOException {
