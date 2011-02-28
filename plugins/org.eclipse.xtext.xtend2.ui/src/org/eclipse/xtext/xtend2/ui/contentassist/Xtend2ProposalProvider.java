@@ -3,10 +3,28 @@
 */
 package org.eclipse.xtext.xtend2.ui.contentassist;
 
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.xtend2.ui.contentassist.AbstractXtend2ProposalProvider;
+
+import com.google.common.base.Predicate;
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */
 public class Xtend2ProposalProvider extends AbstractXtend2ProposalProvider {
 
+	@Override
+	protected Predicate<IEObjectDescription> getFeatureDescriptionPredicate(ContentAssistContext contentAssistContext) {
+		if (contentAssistContext.getPrefix().startsWith("_"))
+			return super.getFeatureDescriptionPredicate(contentAssistContext);
+		final Predicate<IEObjectDescription> delegate = super.getFeatureDescriptionPredicate(contentAssistContext);
+		return new Predicate<IEObjectDescription>() {
+
+			public boolean apply(IEObjectDescription input) {
+				return !input.getName().getFirstSegment().startsWith("_") && delegate.apply(input);
+			}
+			
+		};
+	}
+	
 }
