@@ -100,6 +100,7 @@ public class JvmModelInferrer {
 			Collection<JvmOperation> operations = methods.get(key);
 			JvmOperation operation = deriveGenericDispatchOperationSignature(operations);
 			operation.setSimpleName(key.getFirst());
+			operation.setVisibility(JvmVisibility.PUBLIC);
 			target.getMembers().add(operation);
 		}
 	}
@@ -157,6 +158,7 @@ public class JvmModelInferrer {
 		target.getMembers().add(constructor);
 		associator.associate(source, constructor);
 		constructor.setSimpleName(source.getName());
+		constructor.setVisibility(JvmVisibility.PUBLIC);
 	}
 
 	protected JvmMember transform(XtendMember sourceMember) {
@@ -168,6 +170,7 @@ public class JvmModelInferrer {
 				sourceName = "_" + sourceName;
 			}
 			target.setSimpleName(sourceName);
+			target.setVisibility(JvmVisibility.PUBLIC);
 			for (JvmFormalParameter parameter : source.getParameters())
 				target.getParameters().add(cloneWithProxies(parameter));
 			inferReturnType(target);

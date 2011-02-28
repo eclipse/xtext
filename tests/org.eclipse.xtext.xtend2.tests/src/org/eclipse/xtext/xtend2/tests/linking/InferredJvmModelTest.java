@@ -12,6 +12,7 @@ import static com.google.common.collect.Iterables.*;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -49,6 +50,13 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		assertEquals("string",next.getSimpleName());
 		assertEquals(JvmVisibility.PRIVATE, next.getVisibility());
 		assertEquals("java.lang.String", next.getType().getIdentifier());
+		for(JvmMember member: type.getMembers()) {
+			if (member instanceof JvmExecutable) {
+				assertEquals(JvmVisibility.PUBLIC, member.getVisibility());
+			} else {
+				assertEquals(JvmVisibility.PRIVATE, member.getVisibility());
+			}
+		}
 	}
 	
 	public void testCaseFunction_00() throws Exception {
@@ -81,6 +89,13 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 				.equals(String.class.getName());
 			}
 		});
+		for(JvmMember member: inferredType.getMembers()) {
+			if (member instanceof JvmExecutable) {
+				assertEquals(JvmVisibility.PUBLIC, member.getVisibility());
+			} else {
+				assertEquals(JvmVisibility.PRIVATE, member.getVisibility());
+			}
+		}
 	}
 	
 	public void testCaseFunction_01() throws Exception {
