@@ -74,8 +74,8 @@ public interface ITypeProvider {
 	/**
 	 * The return type of an expression is the common super type of all types used within a return expression.
 	 * 
-	 * @param expression. May not be <code>null</code>.
-	 * @param boolean, indicating whether an implicit return expression should be assumed
+	 * @param expression May not be <code>null</code>.
+	 * @param assumeImplicitReturn indicating whether an implicit return expression should be assumed
 	 * @return the fully-resolved common return type of the {@link XExpression}, if a correct, fully-linkable model is
 	 *         given. <code>null</code> indicates a problem during computation, the primitive void indicates that no return expression was found.
 	 */
@@ -84,7 +84,7 @@ public interface ITypeProvider {
 	/**
 	 * returns all exception types, thrown within the given expression.
 	 * 
-	 * @param expression. May not be <code>null</code>.
+	 * @param expression May not be <code>null</code>.
 	 * @return the iterable of fully-resolved exception types, if a correct, fully-linkable model is
 	 *         given. <code>null</code> indicates a problem during computation, an empty iterable means no thrown exceptions were found.
 	 */
