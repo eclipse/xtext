@@ -243,6 +243,18 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		invokeAndExpect2("foofoo", definition, "test", "foo");
 	}
 	
+	public void testGenericFunction_02() throws Exception {
+		String def = 
+			    "test(String x) {" +
+			    "  x.init(e|{})" +
+			    "}" +
+			    "<T> T init(T obj, (T)=>Void function) {\n" + 
+				"  function.apply(obj)\n" + 
+				"  return obj\n" + 
+				"}";
+		invokeAndExpect2("foo", def, "test", "foo");
+	}
+	
 	public void testFunctionCall_00() throws Exception {
 		invokeAndExpect("foobar", "bar(p1)} bar(String x) {'foo'+x","bar");
 	}
