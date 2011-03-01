@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor.contentassist;
 
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
+import org.eclipse.jface.text.contentassist.ICompletionListener;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.ISourceViewer;
@@ -86,8 +87,14 @@ public class DefaultContentAssistantFactory implements IContentAssistantFactory 
 	
 	protected void setContentAssistProcessor(ContentAssistant assistant, SourceViewerConfiguration configuration, ISourceViewer sourceViewer) {
 		if (contentAssistProcessor != null) {
-			for(String contentType: configuration.getConfiguredContentTypes(sourceViewer))
+			for(String contentType: configuration.getConfiguredContentTypes(sourceViewer)) {
 				assistant.setContentAssistProcessor(contentAssistProcessor, contentType);
+			}
+			if (contentAssistProcessor instanceof ICompletionListener) {
+				assistant.setRepeatedInvocationMode(true);
+				assistant.setStatusLineVisible(true);
+				assistant.addCompletionListener((ICompletionListener) contentAssistProcessor);
+			}
 		}
 	}
 

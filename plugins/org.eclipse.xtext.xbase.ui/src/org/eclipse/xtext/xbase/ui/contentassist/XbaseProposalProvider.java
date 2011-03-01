@@ -31,6 +31,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -50,7 +51,7 @@ import com.google.inject.Inject;
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */
-public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
+public class XbaseProposalProvider extends AbstractXbaseProposalProvider implements RepeatedContentAssistProcessor.ModeAware {
 	
 	private final static Logger log = Logger.getLogger(XbaseProposalProvider.class);
 	
@@ -62,6 +63,22 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 	
 	@Inject
 	private XbaseGrammarAccess grammarAccess;
+	
+	public String getNextCategory() {
+		return getXbaseCrossReferenceProposalCreator().getNextCategory();
+	}
+	
+	public void nextMode() {
+		getXbaseCrossReferenceProposalCreator().nextMode();
+	}
+	
+	public void reset() {
+		getXbaseCrossReferenceProposalCreator().reset();
+	}
+	
+	public XbaseReferenceProposalCreator getXbaseCrossReferenceProposalCreator() {
+		return (XbaseReferenceProposalCreator) super.getCrossReferenceProposalCreator();
+	}
 	
 	public static class ValidFeatureDescription implements Predicate<IEObjectDescription> {
 
@@ -83,39 +100,31 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 	@Override
 	public void completeJvmParameterizedTypeReference_Type(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		completeJavaTypes(context, acceptor);
+		if (getXbaseCrossReferenceProposalCreator().isShowTypeProposals()) {
+			completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor);
+		}
 	}
 	
 	@Override
 	public void completeXRelationalExpression_Type(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		if (context.getPrefix().length() > 0) {
-			if (Character.isJavaIdentifierStart(context.getPrefix().charAt(0))) {
-				typeProposalProvider.createTypeProposals(this, context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, acceptor);
-			}
-		} else {
-			typeProposalProvider.createTypeProposals(this, context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, acceptor);
-		}
+		completeJavaTypes(context, XbasePackage.Literals.XINSTANCE_OF_EXPRESSION__TYPE, acceptor);
 	}
 
-	protected void completeJavaTypes(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	protected void completeJavaTypes(ContentAssistContext context, EReference reference, ICompletionProposalAcceptor acceptor) {
 		if (context.getPrefix().length() > 0) {
 			if (Character.isJavaIdentifierStart(context.getPrefix().charAt(0))) {
-				typeProposalProvider.createTypeProposals(this, context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor);
+				typeProposalProvider.createTypeProposals(this, context, reference, acceptor);
 			}
+		} else {
+			typeProposalProvider.createTypeProposals(this, context, reference, acceptor);
 		}
 	}
 	
 	@Override
 	public void completeXTypeLiteral_Type(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		if (context.getPrefix().length() > 0) {
-			if (Character.isJavaIdentifierStart(context.getPrefix().charAt(0))) {
-				typeProposalProvider.createTypeProposals(this, context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, acceptor);
-			}
-		} else {
-			typeProposalProvider.createTypeProposals(this, context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, acceptor);
-		}
+		completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, acceptor);
 	}
 	
 	@Override
@@ -230,7 +239,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider {
 			ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor,
 			Predicate<IEObjectDescription> filter) {
 		if (reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR) {
-			completeJavaTypes(contentAssistContext, acceptor);
+			completeJavaTypes(contentAssistContext, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor);
 			return;
 		}
 		// guard for feature call scopes

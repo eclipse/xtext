@@ -34,6 +34,8 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 
@@ -48,10 +50,69 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCreator {
+public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCreator implements RepeatedContentAssistProcessor.ModeAware {
 
+	private int mode;
+	
+	public void reset() {
+		mode = 0;
+	}
+	
+	public void nextMode() {
+		switch(mode) {
+			case 0:
+			case 7: mode = 1; return;
+			case 1: mode = 2; return;
+			case 2: mode = 4; return;
+			case 4: mode = 7; return;
+			default: throw new IllegalStateException("mode:" + mode);
+		}
+	}
+	
+	public String getNextCategory() {
+		switch(mode) {
+			case 0:
+			case 7: return "shortest proposals";
+			case 1: return "java-like proposals";
+			case 2: return "type proposals";
+			case 4: return "all proposals";
+			default: throw new IllegalStateException("mode:" + mode);
+		}
+	}
+	
+	protected boolean isShowTypeProposals() {
+		return (mode & 4) != 0;
+	}
+	
+	protected boolean isShowShortestSugar() {
+		return (mode & 1) != 0;
+	}
+	
+	protected boolean isShowJavaLikeProposals() {
+		return (mode & 2) != 0;
+	}
+	
+	protected boolean isShowAllProposals() {
+		return mode == 7;
+	}
+	
 	@Inject
 	private IQualifiedNameConverter nameConverter;
+	
+	@Override
+	public void lookupCrossReference(IScope scope, EObject model, EReference reference,
+			ICompletionProposalAcceptor acceptor, Predicate<IEObjectDescription> filter,
+			Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
+		if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(getEReferenceType(model, reference))) {
+			if (!isShowTypeProposals())
+				return;
+		}
+		if (reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE) {
+			if (!isShowShortestSugar() && !isShowJavaLikeProposals())
+				return;
+		}
+		super.lookupCrossReference(scope, model, reference, acceptor, filter, proposalFactory);
+	}
 	
 	@Override
 	protected Function<IEObjectDescription, ICompletionProposal> getWrappedFactory(EObject model, EReference reference,
@@ -92,26 +153,32 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 	public Iterable<IEObjectDescription> queryScope(IScope scope, EObject model, EReference reference,
 			Predicate<IEObjectDescription> filter) {
 		if (reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE) {
-			Map<EObject, JvmFeatureDescription> shortestNames = Maps.newLinkedHashMap();
+			Map<EObject, JvmFeatureDescription> filteredDescriptions = Maps.newLinkedHashMap();
 			List<IEObjectDescription> others = Lists.newArrayList();
 			Iterable<IEObjectDescription> allDescriptions =	super.queryScope(scope, model, reference, filter);
 			for(IEObjectDescription description: allDescriptions) {
 				if (filter.apply(description)) {
 					if (description instanceof JvmFeatureDescription) {
 						JvmFeatureDescription featureDescription = (JvmFeatureDescription) description;
-						if (shortestNames.containsKey(featureDescription.getEObjectOrProxy())) {
-							JvmFeatureDescription previous = shortestNames.get(featureDescription.getEObjectOrProxy());
-							String previousName = nameConverter.toString(previous.getName());
-							String candidateName = nameConverter.toString(featureDescription.getName());
-							if (previousName.length() > candidateName.length()) {
-								shortestNames.put(featureDescription.getEObjectOrProxy(), featureDescription);
-							} else if (previousName.length() == candidateName.length()) {
-								if (previous.getKey().endsWith(")")) {
-									shortestNames.put(featureDescription.getEObjectOrProxy(), featureDescription);
+						if (filteredDescriptions.containsKey(featureDescription.getEObjectOrProxy())) {
+							if (isShowShortestSugar()) {
+								JvmFeatureDescription previous = filteredDescriptions.get(featureDescription.getEObjectOrProxy());
+								String previousName = nameConverter.toString(previous.getName());
+								String candidateName = nameConverter.toString(featureDescription.getName());
+								if (previousName.length() > candidateName.length()) {
+									filteredDescriptions.put(featureDescription.getEObjectOrProxy(), featureDescription);
+									if (isShowAllProposals() && previous.getKey().endsWith(")"))
+										others.add(previous);
+								} else if (previousName.length() == candidateName.length()) {
+									if (previous.getKey().endsWith(")")) {
+										if (!isShowAllProposals()) {
+											filteredDescriptions.put(featureDescription.getEObjectOrProxy(), featureDescription);
+										}
+									}
 								}
 							}
 						} else {
-							shortestNames.put(featureDescription.getEObjectOrProxy(), featureDescription);
+							filteredDescriptions.put(featureDescription.getEObjectOrProxy(), featureDescription);
 						}
 					} else {
 						others.add(description);
@@ -119,8 +186,8 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 				}
 			}
 			if (!others.isEmpty())
-				return Iterables.concat(others, shortestNames.values()); 
-			return Collections.<IEObjectDescription>unmodifiableCollection(shortestNames.values());
+				return Iterables.concat(others, filteredDescriptions.values()); 
+			return Collections.<IEObjectDescription>unmodifiableCollection(filteredDescriptions.values());
 		}
 		return super.queryScope(scope, model, reference, filter);
 	}

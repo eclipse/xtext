@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.contentassist.antlr;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -375,6 +374,8 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			return context;
 		}
 
+		// TODO: match the node string with the widget string to compute the correct
+		// replace region length
 		public String getPrefix(INode prefixNode) {
 			if (prefixNode instanceof ILeafNode) {
 				if (((ILeafNode) prefixNode).isHidden() && prefixNode.getGrammarElement() != null)
@@ -388,14 +389,18 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 
 		public String getNodeTextUpToCompletionOffset(INode currentNode) {
 			int startOffset = currentNode.getOffset();
-			String text = ((ILeafNode) currentNode).getText();
 			int length = completionOffset - startOffset;
+			if (viewer.getTextWidget() != null /* testing */ && length >= 0) {
+				String text = viewer.getTextWidget().getTextRange(startOffset, length);
+				return text;
+			}
+			String text = ((ILeafNode) currentNode).getText();
 			String result = length > text.length() ? text : text.substring(0, length);
 			return result;
 		}
 
 		public boolean doComputePrefix(ICompositeNode node, StringBuilder result) {
-			List<ILeafNode> hiddens = new ArrayList<ILeafNode>(2);
+			List<ILeafNode> hiddens = Lists.newArrayListWithCapacity(2);
 			for (INode child : node.getChildren()) {
 				if (child instanceof ICompositeNode) {
 					if (!doComputePrefix((ICompositeNode) child, result))

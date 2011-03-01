@@ -23,6 +23,7 @@ import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
@@ -310,6 +311,11 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 						return TextSelection.emptySelection();
 					}
 				};
+			}
+			
+			@Override
+			public StyledText getTextWidget() {
+				return null;
 			}
 		};
 		return result;
