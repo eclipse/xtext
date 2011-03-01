@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
+import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.lib.Functions;
@@ -124,7 +125,7 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 	
 	protected String compileToJavaCode(String xtendCode) {
 		XExpression model;
-		IAppendable appandable = new IAppendable.StringBuilderBasedAppendable();
+		IAppendable appandable = new StringBuilderBasedAppendable();
 		try {
 			model = expression(xtendCode, true);
 			XbaseCompiler compiler = injector.getInstance(XbaseCompiler.class);

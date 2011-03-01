@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.tests.compiler;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
+import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
@@ -64,7 +65,7 @@ public class CompilerTest extends AbstractXbaseTestCase {
 	protected void assertCompilesTo(final String expectedJavaCode, final String xbaseCode) throws Exception {
 		XExpression model = expression(xbaseCode,true);
 		XbaseCompiler compiler = get(XbaseCompiler.class);
-		IAppendable appandable = new IAppendable.StringBuilderBasedAppendable();
+		IAppendable appandable = new StringBuilderBasedAppendable();
 		JvmTypeReference returnType = typeProvider.getCommonReturnType(model, true);
 		compiler.compile(model,appandable, returnType);
 		assertEquals(expectedJavaCode,appandable.toString());
