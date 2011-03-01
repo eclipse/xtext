@@ -6,6 +6,7 @@ package org.eclipse.xtext.xtend2.ui;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor;
@@ -25,6 +26,7 @@ import org.eclipse.xtext.ui.refactoring.impl.RefactoringReferenceQueryDataFactor
 import org.eclipse.xtext.xbase.ui.contentassist.XbaseReferenceProposalCreator;
 import org.eclipse.xtext.xtend2.ui.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtext.xtend2.ui.autoedit.TokenTypeToPartitionMapper;
+import org.eclipse.xtext.xtend2.ui.contentassist.ImportingTypesProposalProvider;
 import org.eclipse.xtext.xtend2.ui.editor.Xtend2DoubleClickStrategyProvider;
 import org.eclipse.xtext.xtend2.ui.editor.Xtend2FoldingRegionProvider;
 import org.eclipse.xtext.xtend2.ui.findrefs.Xtend2FindReferenceQueryDataFactory;
@@ -122,5 +124,10 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 	@Override
 	public Class<? extends IContentAssistProcessor> bindIContentAssistProcessor() {
 		return RepeatedContentAssistProcessor.class;
+	}
+	
+	@Override
+	public Class<? extends ITypesProposalProvider> bindITypesProposalProvider() {
+		return ImportingTypesProposalProvider.class;
 	}
 }
