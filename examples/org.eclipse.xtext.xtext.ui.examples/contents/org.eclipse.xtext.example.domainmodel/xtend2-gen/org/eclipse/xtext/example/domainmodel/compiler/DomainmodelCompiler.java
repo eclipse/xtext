@@ -19,12 +19,13 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
+@SuppressWarnings("all")
 public class DomainmodelCompiler {
   private final DomainmodelCompiler _this = this;
   @com.google.inject.Inject private CompilerExtensions compilerExtensions;
   @com.google.inject.Inject private XbaseCompiler xbaseCompiler;
   
-  public StringConcatenation compile(Entity e) {
+  public StringConcatenation compile(final Entity e) {
     StringConcatenation _xblockexpression = null;
     {
       final ImportManager importManager = new ImportManager(true);
@@ -58,7 +59,7 @@ public class DomainmodelCompiler {
     return _xblockexpression;
   }
   
-  public StringConcatenation body(Entity e, ImportManager importManager) {
+  public StringConcatenation body(final Entity e, final ImportManager importManager) {
     StringConcatenation builder = new StringConcatenation();
     builder.append("public class ");
     String _name = e.getName();
@@ -88,7 +89,7 @@ public class DomainmodelCompiler {
     return builder;
   }
   
-  public String superTypeClause(Entity e, ImportManager importManager) {
+  public String superTypeClause(final Entity e, final ImportManager importManager) {
     String _xifexpression = null;
     JvmParameterizedTypeReference _superType = e.getSuperType();
     boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_superType, null);
@@ -114,7 +115,7 @@ public class DomainmodelCompiler {
     return _xifexpression;
   }
   
-  public StringConcatenation _feature(Property p, ImportManager importManager) {
+  public StringConcatenation _feature(final Property p, final ImportManager importManager) {
     StringConcatenation builder = new StringConcatenation();
     builder.append("private ");
     CompilerExtensions _compilerExtensions = compilerExtensions;
@@ -186,7 +187,7 @@ public class DomainmodelCompiler {
     return builder;
   }
   
-  public StringConcatenation _feature(Operation o, ImportManager importManager) {
+  public StringConcatenation _feature(final Operation o, final ImportManager importManager) {
     StringConcatenation builder = new StringConcatenation();
     builder.append("public ");
     CompilerExtensions _compilerExtensions = compilerExtensions;
@@ -227,7 +228,7 @@ public class DomainmodelCompiler {
     return builder;
   }
   
-  public String body(Operation o, ImportManager importManager) {
+  public String body(final Operation o, final ImportManager importManager) {
     String _xblockexpression = null;
     {
       final StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable(importManager);
@@ -243,13 +244,13 @@ public class DomainmodelCompiler {
     return _xblockexpression;
   }
   
-  public StringConcatenation feature(Feature o, ImportManager importManager) {
-    if ((o instanceof Operation)
+  public StringConcatenation feature(final Feature p, final ImportManager importManager) {
+    if ((p instanceof Operation)
          && (importManager instanceof ImportManager)) {
-      return _feature((Operation)o, (ImportManager)importManager);
-    } else if ((o instanceof Property)
+      return _feature((Operation)p, (ImportManager)importManager);
+    } else if ((p instanceof Property)
          && (importManager instanceof ImportManager)) {
-      return _feature((Property)o, (ImportManager)importManager);
+      return _feature((Property)p, (ImportManager)importManager);
     } else {
       throw new IllegalArgumentException();
     }
