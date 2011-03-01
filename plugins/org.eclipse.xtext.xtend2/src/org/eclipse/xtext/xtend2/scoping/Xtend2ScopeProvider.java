@@ -53,16 +53,16 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 
 	@Inject
 	private IXtend2JvmAssociations xtend2jvmAssociations;
-	
+
 	@Inject
 	private Provider<StaticallyImportedFeaturesProvider> staticallyImportedFeaturesProvider;
-	
+
 	@Inject
-	private Provider<ExtensionMethodsFeaturesProvider> extensionMethodsFeaturesProvider; 
-	
+	private Provider<ExtensionMethodsFeaturesProvider> extensionMethodsFeaturesProvider;
+
 	@Inject
 	private TypeReferences typeReferences;
-	
+
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		IScope parent = super.getScope(context, reference);
@@ -80,7 +80,7 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 			}
 			XtendClass clazz = EcoreUtil2.getContainerOfType(context, XtendClass.class);
 			if (clazz != null) {
-				if(descriptions == null)  
+				if (descriptions == null)
 					descriptions = Lists.newArrayList();
 				JvmGenericType inferredType = xtend2jvmAssociations.getInferredType(clazz);
 				if (inferredType != null) {
@@ -88,14 +88,15 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 					descriptions.add(EObjectDescription.create(inferredDeclaringTypeName, inferredType));
 				}
 			}
-			if(descriptions != null && !descriptions.isEmpty())
+			if (descriptions != null && !descriptions.isEmpty())
 				return MapBasedScope.createScope(parent, descriptions);
 		}
 		return parent;
 	}
 
 	@Override
-	protected IScope createLocalVarScope(EObject context, EReference reference, IScope parent, boolean includeCurrentBlock, int idx) {
+	protected IScope createLocalVarScope(EObject context, EReference reference, IScope parent,
+			boolean includeCurrentBlock, int idx) {
 		if (context instanceof XtendClass) {
 			return new SimpleScope(parent, singleton(EObjectDescription.create(THIS, context)));
 		} else if (context instanceof XtendFunction) {
@@ -108,13 +109,15 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 					descriptions.add(desc);
 				}
 			}
-			return MapBasedScope.createScope(super.createLocalVarScope(context, reference, parent, includeCurrentBlock, idx), descriptions);
+			return MapBasedScope.createScope(
+					super.createLocalVarScope(context, reference, parent, includeCurrentBlock, idx), descriptions);
 		}
 		return super.createLocalVarScope(context, reference, parent, includeCurrentBlock, idx);
 	}
-	
+
 	@Override
-	protected List<IJvmFeatureDescriptionProvider> getStaticFeatureDescriptionProviders(Resource context, JvmDeclaredType contextType) {
+	protected List<IJvmFeatureDescriptionProvider> getStaticFeatureDescriptionProviders(Resource context,
+			JvmDeclaredType contextType) {
 		List<IJvmFeatureDescriptionProvider> result = super.getStaticFeatureDescriptionProviders(context, contextType);
 		final DefaultJvmFeatureDescriptionProvider defaultProvider = newDefaultFeatureDescProvider();
 		StaticallyImportedFeaturesProvider staticProvider = staticallyImportedFeaturesProvider.get();
@@ -124,17 +127,18 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 		result.add(0, defaultProvider);
 		return result;
 	}
-	
+
 	@Override
 	protected List<IJvmFeatureDescriptionProvider> getFeatureDescriptionProviders(JvmTypeReference type,
 			EObject expression, JvmDeclaredType currentContext, JvmIdentifiableElement implicitReceiver) {
-		List<IJvmFeatureDescriptionProvider> result = super.getFeatureDescriptionProviders(type, expression, currentContext, implicitReceiver);
-		
+		List<IJvmFeatureDescriptionProvider> result = super.getFeatureDescriptionProviders(type, expression,
+				currentContext, implicitReceiver);
+
 		final StaticallyImportedFeaturesProvider staticProvider = staticallyImportedFeaturesProvider.get();
 		staticProvider.setContext(expression.eResource());
 		insertDescriptionProviders(staticProvider, currentContext, implicitReceiver, result);
-		
-		if (implicitReceiver==null) {
+
+		if (implicitReceiver == null) {
 			final XtendClass xtendClass = ((XtendFile) expression.eResource().getContents().get(0)).getXtendClass();
 			// extensions for this
 			JvmGenericType type2 = xtend2jvmAssociations.getInferredType(xtendClass);
@@ -153,26 +157,27 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 					insertDescriptionProviders(featureProvider, currentContext, dependencyImplicitReceiver, result);
 				}
 			}
-			
+
 		}
 		return result;
 	}
-	
+
 	protected JvmIdentifiableElement findImplicitReceiverFor(DeclaredDependency declaredDependency) {
 		Set<EObject> elements = xtend2jvmAssociations.getInferredJvmElements(declaredDependency);
 		if (!elements.isEmpty()) {
-			final JvmIdentifiableElement field = (JvmIdentifiableElement)elements.iterator().next();
+			final JvmIdentifiableElement field = (JvmIdentifiableElement) elements.iterator().next();
 			return field;
 		}
 		return null;
 	}
 
 	protected Iterable<DeclaredDependency> getExtensionDependencies(XtendClass context) {
-		return Iterables.filter(EcoreUtil2.typeSelect(context.getMembers(),DeclaredDependency.class), new Predicate<DeclaredDependency>() {
-			public boolean apply(DeclaredDependency input) {
-				return input.isExtension();
-			}
-		});
+		return Iterables.filter(EcoreUtil2.typeSelect(context.getMembers(), DeclaredDependency.class),
+				new Predicate<DeclaredDependency>() {
+					public boolean apply(DeclaredDependency input) {
+						return input.isExtension();
+					}
+				});
 	}
 
 	protected void insertDescriptionProviders(final IFeaturesForTypeProvider staticProvider,
@@ -180,21 +185,32 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 			List<IJvmFeatureDescriptionProvider> result) {
 		final DefaultJvmFeatureDescriptionProvider defaultProvider = newDefaultFeatureDescProvider();
 		defaultProvider.setFeaturesForTypeProvider(staticProvider);
-		
+
 		final XFeatureCallSugarDescriptionProvider sugaredProvider = newSugarDescriptionProvider();
 		sugaredProvider.setFeaturesForTypeProvider(staticProvider);
-		
+
 		defaultProvider.setContextType(currentContext);
 		defaultProvider.setImplicitReceiver(implicitReceiver);
 		sugaredProvider.setContextType(currentContext);
 		sugaredProvider.setImplicitReceiver(implicitReceiver);
-		
+
 		result.add(2, defaultProvider);
 		result.add(3, sugaredProvider);
 	}
-	
+
 	protected IEObjectDescription createIEObjectDescription(JvmFormalParameter jvmFormalParameter) {
 		return EObjectDescription.create(QualifiedName.create(jvmFormalParameter.getName()), jvmFormalParameter, null);
 	}
-	
+
+	@Override
+	protected JvmDeclaredType getContextType(EObject call) {
+		if (call == null)
+			return null;
+		XtendClass containerClass = EcoreUtil2.getContainerOfType(call, XtendClass.class);
+		if (containerClass != null)
+			return xtend2jvmAssociations.getInferredType(containerClass);
+		else
+			return super.getContextType(call);
+	}
+
 }
