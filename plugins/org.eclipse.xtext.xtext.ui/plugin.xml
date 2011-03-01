@@ -225,6 +225,9 @@
 			//		backtrack = true
 			//	}
 			}
+			
+			// generates the needed binding only if the grammar inherits from Xbase
+			fragment = xbase.XbaseGeneratorFragment {}
 
 			// java-based API for validation 
 			fragment = validation.JavaValidatorFragment {
