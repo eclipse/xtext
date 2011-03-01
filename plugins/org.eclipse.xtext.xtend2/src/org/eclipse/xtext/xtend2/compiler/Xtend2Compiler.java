@@ -28,7 +28,7 @@ import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
-import org.eclipse.xtext.xbase.compiler.ImportAwareTypeSerializer;
+import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
@@ -78,7 +78,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 				writer.append(obj.getPackage());
 				writer.append(";\n");
 			}
-			StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable(new ImportAwareTypeSerializer(true));
+			StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable(new ImportManager(true));
 			if (obj.getXtendClass() != null) {
 				compile(obj.getXtendClass(), appendable);
 			}
