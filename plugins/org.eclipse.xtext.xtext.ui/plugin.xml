@@ -245,6 +245,9 @@
 			fragment = exporting.QualifiedNamesFragment {}
 			fragment = builder.BuilderIntegrationFragment {}
 
+			// generator API
+			fragment = generator.GeneratorFragment {}
+			
 			// formatter API 
 			fragment = formatting.FormatterFragment {}
 
