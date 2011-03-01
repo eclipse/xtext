@@ -100,6 +100,40 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 				XbasePackage.Literals.XCONSTRUCTOR_CALL, "java.lang.Iterable<? extends java.lang.Integer>",
 				"java.util.ArrayList<java.lang.String>");
 	}
+	
+	public void testForLoop_02() throws Exception {
+		assertNoConformanceError("for(String s : newHashSet('s')) s");
+	}
+	
+	public void testForLoop_03() throws Exception {
+		assertNoConformanceError("{ val java.util.Set set = newHashSet() for(Object o : set) o }");
+	}
+	
+	public void testForLoop_04() throws Exception {
+		assertNoConformanceError("{ val java.util.Set<String> set = newHashSet() for(String s : set) s }");
+	}
+	
+	public void testForLoop_05() throws Exception {
+		assertConformanceError("{ val java.util.Set<Object> set = newHashSet() for(String s : set) s }", 
+				XbasePackage.Literals.XFEATURE_CALL, 
+				"java.lang.Iterable<? extends java.lang.String>", "java.lang.String[]", "java.util.Set<java.lang.Object>");
+	}
+	
+	public void testForLoop_06() throws Exception {
+		assertConformanceError("{ val java.util.Set set = newHashSet() for(String s : set) s }", 
+				XbasePackage.Literals.XFEATURE_CALL, 
+				"java.lang.Iterable<? extends java.lang.String>", "java.lang.String[]", "java.util.Set");
+	}
+	
+	public void testForLoop_07() throws Exception {
+		assertConformanceError("{ val java.util.Set set = <String>newHashSet() for(String s : set) s }", 
+				XbasePackage.Literals.XFEATURE_CALL, 
+				"java.lang.Iterable<? extends java.lang.String>", "java.lang.String[]", "java.util.Set");
+	}
+	
+	public void testForLoop_08() throws Exception {
+		assertNoConformanceError("{ val java.util.Set set = newHashSet() for(Object o : set) o }");
+	}
 
 	protected void assertConformanceError(String expression, EClass objectType, String... messageParts)
 			throws Exception {

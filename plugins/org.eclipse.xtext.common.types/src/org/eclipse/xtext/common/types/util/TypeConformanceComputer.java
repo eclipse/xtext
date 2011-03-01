@@ -310,10 +310,17 @@ public class TypeConformanceComputer {
 
 	protected boolean areArgumentsAssignableFrom(JvmParameterizedTypeReference left, JvmParameterizedTypeReference right) {
 		// raw type
-		if (left.getArguments().size() == 0 || right.getArguments().size() == 0) {
+		if (left.getArguments().size() == 0) {
 			return true;
 		}
 		if (left.getArguments().size() != right.getArguments().size()) {
+			if (right.getArguments().size() == 0) {
+				for(JvmTypeReference argument: left.getArguments()) {
+					if (!isUnconstrainedWildcard(argument))
+						return false;
+				}
+				return true;
+			}
 			return false;
 		}
 

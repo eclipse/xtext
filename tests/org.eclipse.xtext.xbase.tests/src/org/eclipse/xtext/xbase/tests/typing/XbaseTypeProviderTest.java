@@ -266,7 +266,9 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	public void testForExpression() throws Exception {
-		assertResolvedReturnType("void", "for(java.lang.String x : new java.util.ArrayList()) 'foo'");
+		assertResolvedReturnType("void", "for(java.lang.String x : new java.util.ArrayList<String>()) 'foo'");
+		assertResolvedReturnType("void", "for(java.lang.String x : newArrayList('foo')) x");
+		assertResolvedReturnType("void", "for(java.lang.String x : <String>newArrayList()) x");
 	}
 
 	public void testNull() throws Exception {
