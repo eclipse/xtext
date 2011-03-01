@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -101,13 +102,26 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			JvmTypeReference argument = typeRefs.wildCard();
 			JvmTypeReference expected = obj.getDeclaredParam().getParameterType();
 			if (expected!=null) {
-				argument = typeRefs.wildCardExtends(expected);
+				argument = typeRefs.wildCardExtends(EcoreUtil2.cloneIfContained(expected));
 			}
 			JvmParameterizedTypeReference expectedType = typeRefs.createTypeRef(iterable, argument);
 			if (!conformanceComputer.isConformant(expectedType, actualType))
 				error("Incompatible types. Expected " + getNameOfTypes(expectedType) + " but was "
 						+ canonicalName(actualType), obj.getForExpression(), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
 						INCOMPATIBLE_TYPES);
+			else if (actualType instanceof JvmParameterizedTypeReference) {
+				// TODO create type argument context and check bound value of iterable's type parameter
+				// rawType - check expectation for Object
+				if (((JvmParameterizedTypeReference) actualType).getArguments().isEmpty()) {
+					if (obj.getDeclaredParam().getParameterType() != null) {
+						if (!typeRefs.is(obj.getDeclaredParam().getParameterType(), Object.class)) {
+							error("Incompatible types. Expected " + getNameOfTypes(expectedType) + " but was "
+									+ canonicalName(actualType), obj.getForExpression(), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+									INCOMPATIBLE_TYPES);
+						}
+					}
+				}
+			}
 		} catch (WrappedException e) {
 			throw new WrappedException("XbaseJavaValidator#checkTypes for " + obj + " caused: "
 					+ e.getCause().getMessage(), e);
