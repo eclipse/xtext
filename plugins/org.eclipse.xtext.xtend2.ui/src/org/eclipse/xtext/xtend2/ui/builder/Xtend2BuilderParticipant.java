@@ -56,7 +56,7 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 	private IEncodingProvider encodingProvider;
 
 	@Inject
-	private FolderUtil workspaceUtil;
+	private FolderUtil folderUtil;
 
 	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		try {
@@ -74,7 +74,7 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 				for (Delta delta : xtendDeltas) {
 					processDelta(delta, context, progress.newChild(1));
 				}
-				workspaceUtil.removeEmptySubFolders(targetFolder, progress.newChild(1));
+				folderUtil.removeEmptySubFolders(targetFolder, progress.newChild(1));
 				context.needRebuild();
 			}
 //		} catch (CoreException ce) {
@@ -92,7 +92,7 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 		IFile sourceFile = null;
 		try {
 			sourceFile = compilationFileProvider.getFile(sourceURI, context.getBuiltProject());
-			if (sourceFile.exists() && hasErrors(sourceFile))
+			if (!sourceFile.exists() || hasErrors(sourceFile))
 				return;
 			IFile targetFile = compilationFileProvider.getTargetFile(sourceURI, context.getBuiltProject(),
 					progress.newChild(10));
@@ -124,7 +124,7 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 		switch (context.getBuildType()) {
 			case CLEAN:
 			case RECOVERY:
-				workspaceUtil.clearFolder(targetFolder, progress);
+				folderUtil.clearFolder(targetFolder, progress);
 				break;
 			case INCREMENTAL:
 			case FULL:
@@ -139,7 +139,7 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 		compiler.compile((XtendFile)sourceResource.getContents().get(0), appendable);
 		progress.worked(50);
 		String encoding = encodingProvider.getEncoding(sourceResource.getURI());
-		workspaceUtil.createParentFolders(targetFile, progress.newChild(10));
+		folderUtil.createParentFolders(targetFile, progress.newChild(10));
 		if (targetFile.exists())
 			targetFile.setContents(new StringInputStream(appendable.toString(), encoding), true, false, progress.newChild(40));
 		else
