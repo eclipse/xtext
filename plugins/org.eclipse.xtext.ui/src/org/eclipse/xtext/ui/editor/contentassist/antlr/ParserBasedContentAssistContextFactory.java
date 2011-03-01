@@ -390,13 +390,15 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		public String getNodeTextUpToCompletionOffset(INode currentNode) {
 			int startOffset = currentNode.getOffset();
 			int length = completionOffset - startOffset;
+			String nodeText = ((ILeafNode) currentNode).getText();
+			String trimmedNodeText = length > nodeText.length() ? nodeText : nodeText.substring(0, length);
 			if (viewer.getTextWidget() != null /* testing */ && length >= 0) {
-				String text = viewer.getTextWidget().getTextRange(startOffset, length);
-				return text;
+				String text = viewer.getTextWidget().getTextRange(startOffset, trimmedNodeText.length());
+				if (trimmedNodeText.equals(text))
+					return text;
+				return viewer.getTextWidget().getTextRange(startOffset, length);
 			}
-			String text = ((ILeafNode) currentNode).getText();
-			String result = length > text.length() ? text : text.substring(0, length);
-			return result;
+			return trimmedNodeText;
 		}
 
 		public boolean doComputePrefix(ICompositeNode node, StringBuilder result) {
