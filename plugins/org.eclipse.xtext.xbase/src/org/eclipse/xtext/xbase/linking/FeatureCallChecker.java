@@ -104,8 +104,13 @@ public class FeatureCallChecker {
 			JvmFeature jvmFeature = jvmFeatureDescription.getJvmFeature();
 			if (jvmFeature.eIsProxy())
 				jvmFeature = (JvmFeature) EcoreUtil.resolve(jvmFeature, context);
-			String issueCode = jvmFeature.eIsProxy() ? UNRESOLVABLE_PROXY : dispatcher.invoke(jvmFeature, context,
-					reference, jvmFeatureDescription);
+			String issueCode;
+			if (jvmFeature.eIsProxy())
+				issueCode = UNRESOLVABLE_PROXY;
+			else if (!jvmFeatureDescription.isValid())
+				issueCode = FEATURE_NOT_VISIBLE;
+			else
+				issueCode = dispatcher.invoke(jvmFeature, context, reference, jvmFeatureDescription);
 			jvmFeatureDescription.setIssueCode(issueCode);
 			return issueCode;
 		}

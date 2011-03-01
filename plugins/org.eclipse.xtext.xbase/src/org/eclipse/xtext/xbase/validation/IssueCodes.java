@@ -22,6 +22,7 @@ public class IssueCodes {
 	protected static final String ISSUE_CODE_PREFIX = "org.eclipse.xtext.xbase.validation.IssueCodes.";
 	
 	public static final String UNRESOLVABLE_PROXY = ISSUE_CODE_PREFIX + "unresolvable_proxy";
+	public static final String FEATURE_NOT_VISIBLE = ISSUE_CODE_PREFIX + "invisible_feature";
 	public static final String INVALID_NUMBER_OF_ARGUMENTS = ISSUE_CODE_PREFIX + "invalid_number_of_arguments";
 	public static final String INVALID_NUMBER_OF_TYPE_ARGUMENTS = ISSUE_CODE_PREFIX
 			+ "invalid_number_of_type_arguments";
