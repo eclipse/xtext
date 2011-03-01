@@ -264,6 +264,20 @@
             sequence="M4+&gt;"
             commandId="org.eclipse.xtext.xtend2.ui.insertRightGuillemet">
       </key>
+<!--
+      <key
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            sequence="M1+M2+T"
+            commandId="org.eclipse.jdt.ui.navigate.open.type"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+      <key
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            sequence="M1+M2+H"
+            commandId="org.eclipse.jdt.ui.navigate.open.type.in.hierarchy"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+-->
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -286,4 +300,13 @@
 			</activeWhen>
       </handler>
    </extension>
+    <!-- make CTRL-SHIFT-T etc. work -->
+	<extension 
+		point="org.eclipse.ui.actionSetPartAssociations">
+		<actionSetPartAssociation
+			targetID="org.eclipse.jdt.ui.JavaActionSet">
+			<part id="org.eclipse.xtext.xtend2.Xtend2">
+       		</part>
+		</actionSetPartAssociation>
+	</extension>
 </plugin>
