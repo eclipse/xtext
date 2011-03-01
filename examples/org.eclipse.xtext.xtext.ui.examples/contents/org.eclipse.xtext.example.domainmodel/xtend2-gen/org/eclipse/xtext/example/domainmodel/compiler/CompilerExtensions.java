@@ -9,10 +9,11 @@ import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
+@SuppressWarnings("all")
 public class CompilerExtensions {
   private final CompilerExtensions _this = this;
   
-  public String packageName(Object o) {
+  public String packageName(final Object o) {
     String switchResult = null;
     final Object o_1 = o;
     boolean matched = false;
@@ -51,7 +52,7 @@ public class CompilerExtensions {
     return switchResult;
   }
   
-  public String concatPath(String prefix, String suffix) {
+  public String concatPath(final String prefix, final String suffix) {
     String _xifexpression = null;
     boolean _operator_equals = ObjectExtensions.operator_equals(prefix, null);
     boolean _operator_equals_1 = ObjectExtensions.operator_equals(prefix, "");
@@ -67,7 +68,7 @@ public class CompilerExtensions {
     return _xifexpression;
   }
   
-  public String shortName(JvmTypeReference r, ImportManager importManager) {
+  public String shortName(final JvmTypeReference r, final ImportManager importManager) {
     String _xblockexpression = null;
     {
       final StringBuilder builder = new StringBuilder();
