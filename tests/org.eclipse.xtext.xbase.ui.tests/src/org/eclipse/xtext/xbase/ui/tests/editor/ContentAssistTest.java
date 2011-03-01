@@ -82,11 +82,14 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	static {
 		List<String> features = Lists.newArrayList();
 		for(Method method: String.class.getMethods()) {
-			features.add(method.getName() + "()");
-			if (method.getParameterTypes().length == 0)
-				features.add(method.getName());
-			if (method.getName().startsWith("get") && method.getParameterTypes().length == 0) {
-				features.add(Strings.toFirstLower(method.getName().substring(3)));
+			if (method.getParameterTypes().length == 0) {
+				if (method.getName().startsWith("get") && method.getParameterTypes().length == 0) {
+					features.add(Strings.toFirstLower(method.getName().substring(3)));
+				} else {
+					features.add(method.getName());
+				}
+			} else {
+				features.add(method.getName() + "()");				
 			}
 		}
 		// compareTo(T) is actually overridden by compareTo(String) but contained twice in String.class#getMethods
@@ -96,7 +99,7 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 			if (featuresAsSet.add(field.getName()))
 				features.add(field.getName());
 		}
-		// ObjectExtensions
+		// StringExtensions
 		features.add("toFirstLower()");
 		features.add("toFirstUpper()");
 		features.add("isNullOrEmpty()");
@@ -187,7 +190,7 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	}
 	
 	public void testOnStringLiteral_19() throws Exception {
-		newBuilder().append("''.toString").assertText(expect(STRING_OPERATORS, new String[]{"toString", "toString()"}));
+		newBuilder().append("''.toString").assertText(expect(STRING_OPERATORS, new String[]{"toString"}));
 	}
 	
 	public void testOnStringLiteral_20() throws Exception {
@@ -195,11 +198,11 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	}
 	
 	public void testOnStringLiteral_21() throws Exception {
-		newBuilder().append("''.toString.").assertTextAtCursorPosition("g.", 1, expect(STRING_OPERATORS, new String[]{"toString", "toString()"}));
+		newBuilder().append("''.toString.").assertTextAtCursorPosition("g.", 1, expect(STRING_OPERATORS, new String[]{"toString"}));
 	}
 	
 	public void testOnStringLiteral_22() throws Exception {
-		newBuilder().append("''.toString+''").assertTextAtCursorPosition("+", expect(STRING_OPERATORS, new String[]{"toString", "toString()"}));
+		newBuilder().append("''.toString+''").assertTextAtCursorPosition("+", expect(STRING_OPERATORS, new String[]{"toString"}));
 	}
 	
 	public void testOnStringLiteral_23() throws Exception {
@@ -227,7 +230,7 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	}
 	
 	public void testOnStringLiteral_29() throws Exception {
-		newBuilder().append("''.toString.toString.toString").assertTextAtCursorPosition("g.", 1, expect(STRING_OPERATORS, new String[]{"toString", "toString()"}));
+		newBuilder().append("''.toString.toString.toString").assertTextAtCursorPosition("g.", 1, expect(STRING_OPERATORS, new String[]{"toString"}));
 	}
 	
 	public void testOnStringLiteral_30() throws Exception {
@@ -263,7 +266,7 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 	}
 	
 	public void testOnStringLiteral_38() throws Exception {
-		newBuilder().append("''.toString.toString").assertTextAtCursorPosition("g.", 1, expect(STRING_OPERATORS, new String[]{"toString", "toString()"}));
+		newBuilder().append("''.toString.toString").assertTextAtCursorPosition("g.", 1, expect(STRING_OPERATORS, new String[]{"toString"}));
 	}
 	
 	public void testAfterBinaryOperation_01() throws Exception {

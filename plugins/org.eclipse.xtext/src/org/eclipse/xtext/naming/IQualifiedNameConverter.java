@@ -39,6 +39,8 @@ public interface IQualifiedNameConverter {
 		public String toString(QualifiedName qualifiedName) {
 			if (qualifiedName == null)
 				throw new IllegalArgumentException("Qualified name cannot be null");
+			if (qualifiedName.getSegmentCount() == 1)
+				return qualifiedName.getFirstSegment();
 			StringBuilder builder = new StringBuilder();
 			boolean isFirst = true;
 			for (String segment : qualifiedName.getSegments()) {

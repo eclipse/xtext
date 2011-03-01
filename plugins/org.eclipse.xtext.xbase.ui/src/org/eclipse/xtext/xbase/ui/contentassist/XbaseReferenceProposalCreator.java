@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.contentassist;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.core.Flags;
@@ -26,10 +30,19 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.xtext.ui.TypeAwareReferenceProposalCreator;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
+import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -37,6 +50,9 @@ import com.google.common.base.Function;
 @SuppressWarnings("restriction")
 public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCreator {
 
+	@Inject
+	private IQualifiedNameConverter nameConverter;
+	
 	@Override
 	protected Function<IEObjectDescription, ICompletionProposal> getWrappedFactory(EObject model, EReference reference,
 			final Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
@@ -70,6 +86,43 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 			};
 		}
 		return super.getWrappedFactory(model, reference, proposalFactory);
+	}
+	
+	@Override
+	public Iterable<IEObjectDescription> queryScope(IScope scope, EObject model, EReference reference,
+			Predicate<IEObjectDescription> filter) {
+		if (reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE) {
+			Map<EObject, JvmFeatureDescription> shortestNames = Maps.newLinkedHashMap();
+			List<IEObjectDescription> others = Lists.newArrayList();
+			Iterable<IEObjectDescription> allDescriptions =	super.queryScope(scope, model, reference, filter);
+			for(IEObjectDescription description: allDescriptions) {
+				if (filter.apply(description)) {
+					if (description instanceof JvmFeatureDescription) {
+						JvmFeatureDescription featureDescription = (JvmFeatureDescription) description;
+						if (shortestNames.containsKey(featureDescription.getEObjectOrProxy())) {
+							JvmFeatureDescription previous = shortestNames.get(featureDescription.getEObjectOrProxy());
+							String previousName = nameConverter.toString(previous.getName());
+							String candidateName = nameConverter.toString(featureDescription.getName());
+							if (previousName.length() > candidateName.length()) {
+								shortestNames.put(featureDescription.getEObjectOrProxy(), featureDescription);
+							} else if (previousName.length() == candidateName.length()) {
+								if (previous.getKey().endsWith(")")) {
+									shortestNames.put(featureDescription.getEObjectOrProxy(), featureDescription);
+								}
+							}
+						} else {
+							shortestNames.put(featureDescription.getEObjectOrProxy(), featureDescription);
+						}
+					} else {
+						others.add(description);
+					}
+				}
+			}
+			if (!others.isEmpty())
+				return Iterables.concat(others, shortestNames.values()); 
+			return Collections.<IEObjectDescription>unmodifiableCollection(shortestNames.values());
+		}
+		return super.queryScope(scope, model, reference, filter);
 	}
 	
 	protected Image computeImage(JvmFeature feature) {
