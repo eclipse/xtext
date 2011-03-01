@@ -23,6 +23,8 @@ public class OverrideValidationTest extends AbstractXtend2TestCase {
 
 	@Inject
 	private ValidationTestHelper helper;
+	
+	//TODO override declarations in interfaces
 
 	public void testDuplicateMethod_0() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { bar(int x) {true} bar(int x) {false} }");
