@@ -33,7 +33,8 @@ import com.google.common.collect.Sets;
 /**
  * @author Jan Koehnlein - introduced QualifiedName
  */
-public class SlotEntry {
+public class SlotEntry implements ISlotEntry {
+	
 	private String slot = "model";
 	private String name;
 	private String namespaceDelimiter = ".";
@@ -153,5 +154,10 @@ public class SlotEntry {
 
 	protected EObject getEObject(IEObjectDescription description, ResourceSet resourceSet) {
 		return resourceSet.getEObject(description.getEObjectURI(), true);
+	}
+
+	public void preInvoke() {
+		// TODO Auto-generated method stub
+		
 	}
 }

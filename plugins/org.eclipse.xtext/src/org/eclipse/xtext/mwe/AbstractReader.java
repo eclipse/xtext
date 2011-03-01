@@ -29,13 +29,21 @@ import com.google.inject.Provider;
  */
 public abstract class AbstractReader extends AbstractWorkflowComponent2 {
 
-	private Set<SlotEntry> slotEntries = Sets.newHashSet();
+	private Set<ISlotEntry> slotEntries = Sets.newHashSet();
 
 	public void addLoad(SlotEntry outputSlot) {
 		slotEntries.add(outputSlot);
 	}
+	
+	public void addLoadFromResourceSet(ResourceSetBasedSlotEntry outputSlot) {
+		slotEntries.add(outputSlot);
+	}
+	
+	public void addLoadResource(ResourceLoadingSlotEntry outputSlot) {
+		slotEntries.add(outputSlot);
+	}
 
-	protected Set<SlotEntry> getSlotEntries() {
+	protected Set<ISlotEntry> getSlotEntries() {
 		return slotEntries;
 	}
 
@@ -83,7 +91,7 @@ public abstract class AbstractReader extends AbstractWorkflowComponent2 {
 
 	protected void addModelElementsToContext(WorkflowContext ctx, ResourceSet resourceSet) {
 		IResourceDescriptions descriptions = resourceDescriptionsProvider.get(resourceSet);
-		for (SlotEntry entries : this.slotEntries) {
+		for (ISlotEntry entries : this.slotEntries) {
 			entries.put(ctx, descriptions, resourceSet);
 		}
 	}
