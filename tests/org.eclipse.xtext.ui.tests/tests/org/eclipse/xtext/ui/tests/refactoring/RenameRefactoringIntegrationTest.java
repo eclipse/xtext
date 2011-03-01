@@ -131,6 +131,8 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		new ReplaceEdit(0,0," ").apply(editor1.getDocument());
 		assertTrue(editor0.isDirty());
 		assertTrue(editor1.isDirty());
+		waitForReconciler(editor0);
+		waitForReconciler(editor1);
 		doRename();
 		assertTrue(editor0.isDirty());
 		assertTrue(editor1.isDirty());
@@ -160,12 +162,7 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		XtextEditor editor = openEditor(testFile0);
 		String dirtyModel = "Y B A { ref B }";
 		editor.getDocument().set(dirtyModel);
-		editor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
-			@Override
-			public void process(XtextResource state) throws Exception {
-				// just wait for the reconciler to announce the dirty state
-			}
-		});
+		waitForReconciler(editor);
 		assertTrue(editor.isDirty());
 		doRename();
 		assertTrue(editor.isDirty());
@@ -248,6 +245,15 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		} finally {
 			inputStream.close();
 		}
+	}
+	
+	protected void waitForReconciler(XtextEditor editor) {
+		editor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+			@Override
+			public void process(XtextResource state) throws Exception {
+				// just wait for the reconciler to announce the dirty state
+			}
+		});
 	}
 
 }
