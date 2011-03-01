@@ -66,6 +66,7 @@ Workflow {
 			fragment = quickfix.QuickfixProviderFragment {}
 			fragment = labeling.LabelProviderFragment {}
 			fragment = outline.OutlineTreeProviderFragment {}
+			fragment = outline.QuickOutlineFragment {}
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
 			fragment = XtextAntlrUiGeneratorFragment {
 				options = auto-inject {}

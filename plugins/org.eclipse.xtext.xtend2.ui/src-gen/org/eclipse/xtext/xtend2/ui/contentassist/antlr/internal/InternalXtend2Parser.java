@@ -26,93 +26,93 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_RICH_TEXT", "RULE_RICH_TEXT_START", "RULE_RICH_TEXT_INBETWEEN", "RULE_RICH_TEXT_END", "RULE_INT", "RULE_IN_DOUBLE_QUOTE_RICH_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'='", "'+='", "'||'", "'&&'", "'=='", "'!='", "'>='", "'<='", "'>'", "'<'", "'->'", "'..'", "'+'", "'-'", "'*'", "'**'", "'/'", "'%'", "'!'", "'.'", "'val'", "'false'", "'package'", "'import'", "'class'", "'{'", "'}'", "','", "'extends'", "'implements'", "'@Inject'", "'as'", "'('", "')'", "'FOR'", "':'", "'ENDFOR'", "'IF'", "'ENDIF'", "'ELSE'", "'ELSEIF'", "'instanceof'", "'['", "'|'", "']'", "'if'", "'else'", "'switch'", "'default'", "'case'", "'for'", "'while'", "'do'", "';'", "'new'", "'null'", "'typeof'", "'throw'", "'return'", "'try'", "'finally'", "'catch'", "'=>'", "'?'", "'&'", "'super'", "'static'", "'extension'", "'override'", "'dispatch'", "'?.'", "'*.'", "'var'", "'true'"
     };
-    public static final int T__42=42;
-    public static final int T__86=86;
-    public static final int T__28=28;
-    public static final int T__57=57;
-    public static final int T__23=23;
-    public static final int T__80=80;
-    public static final int T__51=51;
-    public static final int RULE_STRING=5;
-    public static final int T__69=69;
-    public static final int T__47=47;
-    public static final int T__73=73;
-    public static final int T__50=50;
-    public static final int T__21=21;
-    public static final int T__65=65;
-    public static final int T__19=19;
-    public static final int T__72=72;
-    public static final int T__70=70;
-    public static final int T__67=67;
-    public static final int T__87=87;
-    public static final int T__74=74;
-    public static final int T__39=39;
-    public static final int RULE_RICH_TEXT_START=7;
-    public static final int RULE_RICH_TEXT=6;
-    public static final int T__30=30;
-    public static final int RULE_RICH_TEXT_INBETWEEN=8;
-    public static final int T__46=46;
-    public static final int T__52=52;
     public static final int T__68=68;
-    public static final int T__17=17;
-    public static final int T__62=62;
-    public static final int RULE_INT=10;
-    public static final int T__27=27;
-    public static final int T__24=24;
-    public static final int T__49=49;
-    public static final int T__61=61;
-    public static final int T__59=59;
-    public static final int T__48=48;
-    public static final int T__54=54;
-    public static final int T__34=34;
-    public static final int T__56=56;
-    public static final int RULE_ML_COMMENT=12;
-    public static final int RULE_IN_DOUBLE_QUOTE_RICH_STRING=11;
-    public static final int T__35=35;
+    public static final int T__69=69;
     public static final int RULE_ID=4;
-    public static final int T__78=78;
-    public static final int T__89=89;
-    public static final int T__36=36;
-    public static final int T__20=20;
-    public static final int T__58=58;
-    public static final int T__79=79;
-    public static final int T__64=64;
-    public static final int T__44=44;
     public static final int T__66=66;
-    public static final int T__88=88;
-    public static final int T__33=33;
-    public static final int T__22=22;
-    public static final int T__77=77;
+    public static final int T__67=67;
+    public static final int T__64=64;
     public static final int T__29=29;
-    public static final int T__45=45;
-    public static final int T__55=55;
-    public static final int T__84=84;
-    public static final int RULE_WS=14;
+    public static final int T__65=65;
+    public static final int T__28=28;
+    public static final int T__62=62;
+    public static final int T__27=27;
+    public static final int RULE_RICH_TEXT=6;
     public static final int T__63=63;
-    public static final int T__75=75;
-    public static final int T__43=43;
-    public static final int T__31=31;
-    public static final int T__40=40;
-    public static final int RULE_RICH_TEXT_END=9;
-    public static final int EOF=-1;
-    public static final int T__53=53;
-    public static final int T__85=85;
-    public static final int T__16=16;
-    public static final int T__32=32;
-    public static final int T__38=38;
-    public static final int T__76=76;
-    public static final int T__37=37;
-    public static final int RULE_ANY_OTHER=15;
-    public static final int T__82=82;
     public static final int T__26=26;
-    public static final int T__81=81;
     public static final int T__25=25;
-    public static final int RULE_SL_COMMENT=13;
-    public static final int T__83=83;
+    public static final int T__24=24;
+    public static final int T__23=23;
+    public static final int T__22=22;
+    public static final int RULE_ANY_OTHER=15;
+    public static final int T__21=21;
+    public static final int T__20=20;
+    public static final int T__61=61;
     public static final int T__60=60;
-    public static final int T__41=41;
-    public static final int T__71=71;
+    public static final int EOF=-1;
+    public static final int T__55=55;
+    public static final int T__56=56;
+    public static final int T__19=19;
+    public static final int T__57=57;
+    public static final int T__58=58;
+    public static final int T__16=16;
+    public static final int T__51=51;
+    public static final int T__52=52;
     public static final int T__18=18;
+    public static final int T__53=53;
+    public static final int T__17=17;
+    public static final int T__54=54;
+    public static final int T__59=59;
+    public static final int RULE_RICH_TEXT_END=9;
+    public static final int RULE_INT=10;
+    public static final int T__50=50;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__80=80;
+    public static final int T__46=46;
+    public static final int T__81=81;
+    public static final int T__47=47;
+    public static final int T__82=82;
+    public static final int T__44=44;
+    public static final int T__83=83;
+    public static final int T__45=45;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int T__85=85;
+    public static final int RULE_SL_COMMENT=13;
+    public static final int T__84=84;
+    public static final int T__87=87;
+    public static final int T__86=86;
+    public static final int T__89=89;
+    public static final int T__88=88;
+    public static final int RULE_ML_COMMENT=12;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int RULE_STRING=5;
+    public static final int T__32=32;
+    public static final int T__71=71;
+    public static final int T__33=33;
+    public static final int RULE_IN_DOUBLE_QUOTE_RICH_STRING=11;
+    public static final int T__72=72;
+    public static final int T__34=34;
+    public static final int T__35=35;
+    public static final int T__70=70;
+    public static final int T__36=36;
+    public static final int T__37=37;
+    public static final int T__38=38;
+    public static final int T__39=39;
+    public static final int RULE_RICH_TEXT_INBETWEEN=8;
+    public static final int RULE_WS=14;
+    public static final int T__76=76;
+    public static final int T__75=75;
+    public static final int T__74=74;
+    public static final int T__73=73;
+    public static final int RULE_RICH_TEXT_START=7;
+    public static final int T__79=79;
+    public static final int T__78=78;
+    public static final int T__77=77;
 
     // delegates
     // delegators
@@ -6961,11 +6961,11 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             if ( (LA5_0==RULE_RICH_TEXT_INBETWEEN) ) {
                 int LA5_1 = input.LA(2);
 
-                if ( ((LA5_1>=RULE_ID && LA5_1<=RULE_RICH_TEXT_START)||LA5_1==RULE_INT||LA5_1==25||(LA5_1>=28 && LA5_1<=29)||LA5_1==34||LA5_1==37||LA5_1==41||LA5_1==48||LA5_1==50||LA5_1==53||LA5_1==58||LA5_1==61||LA5_1==63||(LA5_1>=66 && LA5_1<=68)||(LA5_1>=70 && LA5_1<=75)||LA5_1==89) ) {
-                    alt5=2;
-                }
-                else if ( (LA5_1==EOF||LA5_1==52||(LA5_1>=54 && LA5_1<=56)) ) {
+                if ( (LA5_1==EOF||LA5_1==52||(LA5_1>=54 && LA5_1<=56)) ) {
                     alt5=1;
+                }
+                else if ( ((LA5_1>=RULE_ID && LA5_1<=RULE_RICH_TEXT_START)||LA5_1==RULE_INT||LA5_1==25||(LA5_1>=28 && LA5_1<=29)||LA5_1==34||LA5_1==37||LA5_1==41||LA5_1==48||LA5_1==50||LA5_1==53||LA5_1==58||LA5_1==61||LA5_1==63||(LA5_1>=66 && LA5_1<=68)||(LA5_1>=70 && LA5_1<=75)||LA5_1==89) ) {
+                    alt5=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -7216,11 +7216,11 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
             if ( (LA7_0==RULE_ID) ) {
                 int LA7_1 = input.LA(2);
 
-                if ( (LA7_1==EOF||(LA7_1>=RULE_ID && LA7_1<=RULE_INT)||(LA7_1>=17 && LA7_1<=37)||(LA7_1>=41 && LA7_1<=43)||(LA7_1>=47 && LA7_1<=49)||LA7_1==51||(LA7_1>=57 && LA7_1<=58)||(LA7_1>=60 && LA7_1<=78)||(LA7_1>=86 && LA7_1<=89)) ) {
-                    alt7=2;
-                }
-                else if ( (LA7_1==16) ) {
+                if ( (LA7_1==16) ) {
                     alt7=1;
+                }
+                else if ( (LA7_1==EOF||(LA7_1>=RULE_ID && LA7_1<=RULE_INT)||(LA7_1>=17 && LA7_1<=37)||(LA7_1>=41 && LA7_1<=43)||(LA7_1>=47 && LA7_1<=49)||LA7_1==51||(LA7_1>=57 && LA7_1<=58)||(LA7_1>=60 && LA7_1<=78)||(LA7_1>=86 && LA7_1<=89)) ) {
+                    alt7=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -8142,11 +8142,11 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
                 else if ( (LA16_1==RULE_ID) ) {
                     int LA16_3 = input.LA(3);
 
-                    if ( (LA16_3==EOF||(LA16_3>=RULE_ID && LA16_3<=RULE_INT)||(LA16_3>=17 && LA16_3<=37)||(LA16_3>=41 && LA16_3<=43)||(LA16_3>=47 && LA16_3<=49)||LA16_3==51||(LA16_3>=57 && LA16_3<=58)||(LA16_3>=60 && LA16_3<=78)||(LA16_3>=86 && LA16_3<=89)) ) {
-                        alt16=2;
-                    }
-                    else if ( (LA16_3==16) ) {
+                    if ( (LA16_3==16) ) {
                         alt16=1;
+                    }
+                    else if ( (LA16_3==EOF||(LA16_3>=RULE_ID && LA16_3<=RULE_INT)||(LA16_3>=17 && LA16_3<=37)||(LA16_3>=41 && LA16_3<=43)||(LA16_3>=47 && LA16_3<=49)||LA16_3==51||(LA16_3>=57 && LA16_3<=58)||(LA16_3>=60 && LA16_3<=78)||(LA16_3>=86 && LA16_3<=89)) ) {
+                        alt16=2;
                     }
                     else {
                         if (state.backtracking>0) {state.failed=true; return ;}
@@ -52370,39 +52370,11 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
 
     // Delegated rules
 
-    public final boolean synpred25_InternalXtend2() {
+    public final boolean synpred129_InternalXtend2() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred25_InternalXtend2_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred127_InternalXtend2() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred127_InternalXtend2_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred79_InternalXtend2() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred79_InternalXtend2_fragment(); // can never throw exception
+            synpred129_InternalXtend2_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -52426,11 +52398,11 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred80_InternalXtend2() {
+    public final boolean synpred119_InternalXtend2() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred80_InternalXtend2_fragment(); // can never throw exception
+            synpred119_InternalXtend2_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -52454,137 +52426,11 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred97_InternalXtend2() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred97_InternalXtend2_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred117_InternalXtend2() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred117_InternalXtend2_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred108_InternalXtend2() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred108_InternalXtend2_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred82_InternalXtend2() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred82_InternalXtend2_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
     public final boolean synpred128_InternalXtend2() {
         state.backtracking++;
         int start = input.mark();
         try {
             synpred128_InternalXtend2_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred47_InternalXtend2() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred47_InternalXtend2_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred87_InternalXtend2() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred87_InternalXtend2_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred129_InternalXtend2() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred129_InternalXtend2_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred89_InternalXtend2() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred89_InternalXtend2_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred78_InternalXtend2() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred78_InternalXtend2_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -52608,6 +52454,90 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
         state.failed=false;
         return success;
     }
+    public final boolean synpred83_InternalXtend2() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred83_InternalXtend2_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred117_InternalXtend2() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred117_InternalXtend2_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred82_InternalXtend2() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred82_InternalXtend2_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred97_InternalXtend2() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred97_InternalXtend2_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred87_InternalXtend2() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred87_InternalXtend2_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred78_InternalXtend2() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred78_InternalXtend2_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
     public final boolean synpred45_InternalXtend2() {
         state.backtracking++;
         int start = input.mark();
@@ -52622,11 +52552,11 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred119_InternalXtend2() {
+    public final boolean synpred79_InternalXtend2() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred119_InternalXtend2_fragment(); // can never throw exception
+            synpred79_InternalXtend2_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -52636,25 +52566,11 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred84_InternalXtend2() {
+    public final boolean synpred89_InternalXtend2() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred84_InternalXtend2_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred122_InternalXtend2() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred122_InternalXtend2_fragment(); // can never throw exception
+            synpred89_InternalXtend2_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -52692,6 +52608,76 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
         state.failed=false;
         return success;
     }
+    public final boolean synpred122_InternalXtend2() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred122_InternalXtend2_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred127_InternalXtend2() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred127_InternalXtend2_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred80_InternalXtend2() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred80_InternalXtend2_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred84_InternalXtend2() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred84_InternalXtend2_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred25_InternalXtend2() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred25_InternalXtend2_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
     public final boolean synpred85_InternalXtend2() {
         state.backtracking++;
         int start = input.mark();
@@ -52706,11 +52692,25 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred83_InternalXtend2() {
+    public final boolean synpred47_InternalXtend2() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred83_InternalXtend2_fragment(); // can never throw exception
+            synpred47_InternalXtend2_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred108_InternalXtend2() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred108_InternalXtend2_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
