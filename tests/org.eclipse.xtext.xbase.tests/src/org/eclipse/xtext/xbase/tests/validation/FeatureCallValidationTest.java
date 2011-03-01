@@ -149,7 +149,7 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	
 	public void testOperationFeatureCall_5() throws Exception {
 		XExpression expression = expression("{ var o = new Object() o.clone() }");
-		helper.assertNoError(((XBlockExpression) expression).getExpressions().get(1), FEATURE_NOT_VISIBLE);
+		helper.assertError(((XBlockExpression) expression).getExpressions().get(1), XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE);
 	}
 	
 }
