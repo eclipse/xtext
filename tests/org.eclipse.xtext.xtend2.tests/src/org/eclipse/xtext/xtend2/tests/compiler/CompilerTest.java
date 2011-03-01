@@ -50,6 +50,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 //		assertEquals(singleton("foo"),apply(class1,"foo"));
 //	}
 	
+	// TODO Fix me: This one throws a NoClassDefFoundError on #apply for inject..FastClass
 //	public void testInjectedExtensionMethod_01() throws Exception {
 //		Class<?> class1 = compileJavaCode("x.Y",
 //				"package x " +
@@ -61,8 +62,9 @@ public class CompilerTest extends AbstractXtend2TestCase {
 //				"    map" +
 //				"  }" +
 //				"}");
-//		assertEquals(singleton(singletonMap("foo", "bar")),apply(class1,"foo"));
+//		assertEquals(singletonMap("foo", "bar"), apply(class1,"foo"));
 //	}
+	
 	public void testInjectedExtensionMethod_02() throws Exception {
 		Class<?> class1 = compileJavaCode("x.Y",
 				"package x " +

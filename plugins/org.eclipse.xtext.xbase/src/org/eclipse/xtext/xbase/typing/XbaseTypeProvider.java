@@ -587,7 +587,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				}
 				JvmTypeReference[] argumentTypes = getArgumentTypes(featureCall, rawType);
 				if (argumentTypes.length != 0 || operation.isVarArgs()) {
-					context = typeArgumentContextProvider.injectArgumentTypeContext(context, operation, argumentTypes);
+					context = typeArgumentContextProvider.injectArgumentTypeContext(context, operation, true, argumentTypes);
 					result = context.getUpperBound(featureType, featureCall);
 					if (isResolved(result, rawType)) {
 						return result;
@@ -601,7 +601,14 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 						return result;
 					}
 				}
-
+				// try again to resolve the type parameters, this time with emtpy var args
+				if (operation.isVarArgs() && operation.getParameters().size() > argumentTypes.length) {
+					context = typeArgumentContextProvider.injectArgumentTypeContext(context, operation, false, argumentTypes);
+					result = context.getUpperBound(featureType, featureCall);
+					if (isResolved(result, rawType)) {
+						return result;
+					}
+				}
 				if (!isResolved(result, rawType)) {
 					if (result instanceof JvmTypeParameter) {
 						JvmTypeParameter type = (JvmTypeParameter) result.getType();

@@ -128,12 +128,12 @@ public class TypeArgumentContextProvider {
 		return get(result);
 	}
 	
-	public TypeArgumentContext injectArgumentTypeContext(TypeArgumentContext context, JvmOperation operation, JvmTypeReference ... actualArgumentTypes) {
-		if (actualArgumentTypes.length == 0 && !operation.isVarArgs())
+	public TypeArgumentContext injectArgumentTypeContext(TypeArgumentContext context, JvmOperation operation, boolean ignoreEmptyVarArgs, JvmTypeReference ... actualArgumentTypes) {
+		if (actualArgumentTypes.length == 0 && (!operation.isVarArgs() || ignoreEmptyVarArgs))
 			return context;
 		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
 		map.putAll(Multimaps.forMap(context.getContextMap()));
-		map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(operation, null, actualArgumentTypes)));
+		map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(operation, null, ignoreEmptyVarArgs, actualArgumentTypes)));
 		Map<JvmTypeParameter, JvmTypeReference> result = findBestMatches(map);
 		return get(result);
 	}
@@ -179,6 +179,10 @@ public class TypeArgumentContextProvider {
 	}
 	
 	public Map<JvmTypeParameter,JvmTypeReference> resolveInferredMethodTypeArgContext(JvmFeature feature, JvmTypeReference expectation, JvmTypeReference... argumentTypes) {
+		return resolveInferredMethodTypeArgContext(feature, expectation, false, argumentTypes);
+	}
+	
+	public Map<JvmTypeParameter,JvmTypeReference> resolveInferredMethodTypeArgContext(JvmFeature feature, JvmTypeReference expectation, boolean ignoreEmptyVarArgs, JvmTypeReference... argumentTypes) {
 		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
 		if (feature instanceof JvmOperation) {
 			JvmOperation op = (JvmOperation) feature;
@@ -206,7 +210,7 @@ public class TypeArgumentContextProvider {
 					if (!varArgTypes.isEmpty()) {
 						JvmTypeReference commonVarArgType = conformanceComputer.getCommonSuperType(varArgTypes);
 						resolve(componentType, commonVarArgType, map, false);
-					} else {
+					} else if (!ignoreEmptyVarArgs) {
 						JvmTypeReference information = computeVarArgTypeInformation(feature, componentType.getType());
 						resolve(componentType, information, map, false);
 					}
