@@ -79,9 +79,9 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 	private JdtTypeProviderFactory jdtTypeProviderFatory;
 	
 	public static class FQNShortener extends ReplacementTextApplier {
-		private final IScope scope;
-		private final Resource context;
-		private final IQualifiedNameConverter qualifiedNameConverter;
+		protected final IScope scope;
+		protected final Resource context;
+		protected final IQualifiedNameConverter qualifiedNameConverter;
 		
 		public FQNShortener(Resource context, IScope scope, IQualifiedNameConverter qualifiedNameConverter) {
 			this.context = context;
@@ -180,7 +180,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		if (context.getCurrentModel() != null) {
 			typeScope = scopeProvider.getScope(context.getCurrentModel(), typeReference);
 		}
-		final IReplacementTextApplier textApplier = new FQNShortener(context.getResource(), typeScope, qualifiedNameConverter);
+		final IReplacementTextApplier textApplier = createTextApplier(context, typeScope, qualifiedNameConverter);
 		final ICompletionProposalAcceptor scopeAware = new ICompletionProposalAcceptor.Delegate(acceptor) {
 			@Override
 			public void accept(ICompletionProposal proposal) {
@@ -201,9 +201,11 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 				int delimiter = sub.indexOf('.');
 				while(delimiter != -1) {
 					sub = sub.substring(delimiter + 1);
-					if (original.isCandidateMatchingPrefix(sub, prefix))
-						return true;
 					delimiter = sub.indexOf('.');
+					if (delimiter == -1 || prefix.length() > 0 && Character.isLowerCase(prefix.charAt(0))) {
+						if (original.isCandidateMatchingPrefix(sub, prefix))
+							return true;
+					}
 				}
 				return false;
 			}
@@ -243,6 +245,10 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 						return !acceptor.canAcceptMoreProposals();
 					}
 				});
+	}
+
+	protected ConfigurableCompletionProposal.IReplacementTextApplier createTextApplier(ContentAssistContext context, IScope typeScope, IQualifiedNameConverter qualifiedNameConverter) {
+		return new FQNShortener(context.getResource(), typeScope, qualifiedNameConverter);
 	}
 
 	public void createTypeProposals(ICompletionProposalFactory proposalFactory, ContentAssistContext context, 
