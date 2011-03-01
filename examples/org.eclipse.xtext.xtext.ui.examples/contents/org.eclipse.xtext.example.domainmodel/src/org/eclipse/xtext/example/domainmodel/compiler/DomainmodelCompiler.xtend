@@ -10,7 +10,7 @@ class DomainmodelCompiler {
 	
 	@Inject extension CompilerExtensions 
 	
-	@Inject XbaseCompiler as xbaseCompiler
+	@Inject XbaseCompiler
 	
 	compile(Entity e) { 
 		val importManager = new ImportManager(true);
@@ -72,8 +72,8 @@ class DomainmodelCompiler {
 	
 	body(Operation o, ImportManager importManager) {
 		val appendable = new StringBuilderBasedAppendable(importManager)
-		xbaseCompiler.compile(o.body, appendable, o.type) 
-		appendable.toString() 
+		xbaseCompiler.compile(o.body, appendable, o.type)
+		appendable.toString()
 	}
 	
 }  
