@@ -146,5 +146,10 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 		XExpression expression = expression("{ var this = new testdata.Methods() sugarMethod }");
 		helper.assertNoError(((XBlockExpression) expression).getExpressions().get(1), METHOD_ACCESS_WITHOUT_PARENTHESES);
 	}
-
+	
+	public void testOperationFeatureCall_5() throws Exception {
+		XExpression expression = expression("{ var o = new Object() o.clone() }");
+		helper.assertNoError(((XBlockExpression) expression).getExpressions().get(1), FEATURE_NOT_VISIBLE);
+	}
+	
 }

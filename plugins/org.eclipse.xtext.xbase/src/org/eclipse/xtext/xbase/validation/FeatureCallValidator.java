@@ -26,10 +26,10 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 
 	@Inject
 	protected UIStrings uiStrings;
-	
+
 	@Inject
 	private IdentifiableSimpleNameProvider nameProvider;
-	
+
 	@Check
 	public void checkInvalidFeatureLinked(XAbstractFeatureCall featureCall) {
 		if (!featureCall.isValidFeature()) {
@@ -46,7 +46,9 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 
 	protected void error(XAbstractFeatureCall featureCall, String issueCode) {
 		String message = null;
-		if (INVALID_NUMBER_OF_ARGUMENTS.equals(issueCode)) {
+		if (FEATURE_NOT_VISIBLE.equals(issueCode))
+			message = "Feature " + nameProvider.getSimpleName(featureCall.getFeature()) + " is not visible";
+		else if (INVALID_NUMBER_OF_ARGUMENTS.equals(issueCode)) {
 			message = "Invalid number of arguments. Expected " + uiStrings.parameters(featureCall.getFeature());
 		} else if (INVALID_NUMBER_OF_TYPE_ARGUMENTS.equals(issueCode)) {
 			message = "Invalid number of type arguments. Expected "
@@ -60,7 +62,8 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 		} else if (INSTANCE_ACCESS_TO_STATIC_MEMBER.equals(issueCode)) {
 			message = "Instance access to static member " + nameProvider.getSimpleName(featureCall.getFeature());
 		} else if (FIELD_ACCESS_WITH_PARENTHESES.equals(issueCode)) {
-			message = "Cannot access field " + nameProvider.getSimpleName(featureCall.getFeature()) + " with parentheses";
+			message = "Cannot access field " + nameProvider.getSimpleName(featureCall.getFeature())
+					+ " with parentheses";
 		} else if (METHOD_ACCESS_WITHOUT_PARENTHESES.equals(issueCode)) {
 			message = "Missing parentheses for calling method " + featureCall.getFeature().getIdentifier();
 		} else {
@@ -68,7 +71,7 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 		}
 		error(message, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, issueCode);
 	}
-	
+
 	protected void error(XConstructorCall constructorCall, String issueCode) {
 		String message = null;
 		if (INVALID_NUMBER_OF_ARGUMENTS.equals(issueCode)) {
@@ -80,7 +83,7 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 		} else if (INVALID_ARGUMENT_TYPES.equals(issueCode)) {
 			message = "Invalid argument types. Expected " + uiStrings.parameters(constructorCall.getConstructor())
 					+ " but got " + uiStrings.arguments(constructorCall);
-		} 
+		}
 		error(message, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, issueCode);
 	}
 
