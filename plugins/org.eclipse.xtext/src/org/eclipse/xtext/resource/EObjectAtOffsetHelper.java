@@ -64,6 +64,8 @@ public class EObjectAtOffsetHelper {
 			for (TreeIterator<INode> childrenIterator = ownerNode.getAsTreeIterable().iterator(); childrenIterator.hasNext();) {
 				INode ownerChildNode = childrenIterator.next();
 				if (ownerChildNode == node) {
+					if (currentIndex >= listValue.size())
+						return null;
 					return (EObject) listValue.get(currentIndex);
 				}
 				EObject grammarElement = ownerChildNode.getGrammarElement();
