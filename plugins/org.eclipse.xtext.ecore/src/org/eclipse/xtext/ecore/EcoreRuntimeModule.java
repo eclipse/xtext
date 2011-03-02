@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ecore;
 
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.generic.AbstractGenericResourceRuntimeModule;
 
 /**
@@ -24,6 +25,10 @@ public class EcoreRuntimeModule extends AbstractGenericResourceRuntimeModule {
 	@Override
 	protected String getFileExtensions() {
 		return "ecore";
+	}
+	
+	public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
+		return EcoreResourceDescriptionStrategy.class;
 	}
 	
 }
