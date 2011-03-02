@@ -6,16 +6,18 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.internal.ui.JavaPlugin;
-import org.eclipse.jdt.internal.ui.JavaPluginImages;
 import org.eclipse.jdt.internal.ui.wizards.NewElementWizard;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.texteditor.ITextEditor;
+import org.eclipse.xtext.ui.PluginImageHelper;
 
 import com.google.inject.Inject;
 
@@ -26,12 +28,13 @@ import com.google.inject.Inject;
 public class NewXtend2ClassWizard extends NewElementWizard {
 
 	public static final String TITLE = "Xtend Class"; //$NON-NLS-1$
-
-	@Inject
 	private NewXtend2ClassWizardPage fPage;
 
-	public NewXtend2ClassWizard() {
-		setDefaultPageImageDescriptor(JavaPluginImages.DESC_WIZBAN_NEWCLASS);
+	@Inject
+	public NewXtend2ClassWizard(PluginImageHelper imgHelper, NewXtend2ClassWizardPage fPage) {
+		this.fPage= fPage;
+		Image image = imgHelper.getImage("xtend_wizard_big.png");
+		setDefaultPageImageDescriptor(ImageDescriptor.createFromImage(image));
 		setDialogSettings(JavaPlugin.getDefault().getDialogSettings());
 		setWindowTitle(TITLE);
 	}
