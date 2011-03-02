@@ -9,9 +9,11 @@ package org.eclipse.xtext.xtext;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnum;
@@ -19,7 +21,9 @@ import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.EnumRule;
@@ -170,7 +174,9 @@ public class XtextScopeProvider extends AbstractScopeProvider {
 		final List<Grammar> allGrammars = getAllGrammars(grammar);
 		IScope current = new SimpleScope(IScope.NULLSCOPE, Iterables.transform(EPackage.Registry.INSTANCE.keySet(), new Function<String, IEObjectDescription>() {
 			public IEObjectDescription apply(String from) {
-				return EObjectDescription.create(QualifiedName.create(from), null);
+				InternalEObject proxyPackage = (InternalEObject) EcoreFactory.eINSTANCE.createEPackage();
+				proxyPackage.eSetProxyURI(URI.createURI(from));
+				return EObjectDescription.create(QualifiedName.create(from), proxyPackage, Collections.singletonMap("nsURI", "true"));
 			}
 		}));
 		for (int i = allGrammars.size() - 1; i >= 0; i--) {
