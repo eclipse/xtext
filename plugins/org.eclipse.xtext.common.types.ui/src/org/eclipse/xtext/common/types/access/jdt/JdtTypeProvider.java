@@ -18,6 +18,7 @@ import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -59,9 +60,32 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 			throw new TypeNotFoundException(name);
 		}
 		URI resourceURI = typeUriHelper.createResourceURI(signature);
-		TypeResource resource = (TypeResource) getResourceSet().getResource(resourceURI, true);
-		JvmType result = findTypeBySignature(signature, resource);
-		return result;
+		String resourcePath = resourceURI.path();
+		if (resourcePath.startsWith(URIHelperConstants.PRIMITIVES)) {
+			TypeResource resource = (TypeResource) getResourceSet().getResource(resourceURI, true);
+			JvmType result = findTypeBySignature(signature, resource);
+			return result;
+		} else {
+			String topLevelType = resourceURI.segment(resourceURI.segmentCount() - 1);
+			try {
+				int lastDot = topLevelType.lastIndexOf('.');
+				String packageName = null;
+				String typeName = topLevelType;
+				if (lastDot != -1) {
+					typeName = typeName.substring(lastDot + 1);
+					packageName = topLevelType.substring(0, lastDot);
+				} 
+				if (javaProject.findType(packageName, typeName) != null) {
+					TypeResource resource = (TypeResource) getResourceSet().getResource(resourceURI, true);
+					JvmType result = findTypeBySignature(signature, resource);
+					return result;
+				} else {
+					throw new TypeNotFoundException(name);
+				}
+			} catch (JavaModelException e) {
+				throw new TypeNotFoundException(name);
+			}
+		}
 	}
 
 	public JvmType findTypeBySignature(String signature, TypeResource resource) throws TypeNotFoundException {
