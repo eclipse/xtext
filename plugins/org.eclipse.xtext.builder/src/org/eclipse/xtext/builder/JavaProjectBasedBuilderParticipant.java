@@ -45,11 +45,11 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 		if (!srcGenFolder.exists())
 			return;
 		IPackageFragmentRoot root = javaProject.getPackageFragmentRoot(srcGenFolder);
-		IFileSystemAccess fileSystemAccess = getConfiguredFileSystemAccess(srcGenFolder);
 		if (!root.exists())
 			return;
 		for (IResourceDescription.Delta delta : context.getDeltas()) {
 			// handle deletion
+			IFileSystemAccess fileSystemAccess = getConfiguredFileSystemAccess(srcGenFolder);
 			if (delta.getNew() == null) {
 				handleDeletion(delta, context, fileSystemAccess);
 			} else {

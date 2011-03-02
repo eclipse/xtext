@@ -34,7 +34,7 @@ public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess {
 		String outletPath = getPathes().get(slot);
 		IFile file = root.getFile(new Path(outletPath + "/" + fileName));
 		try {
-			final String defaultCharset = file.getProject().getDefaultCharset();
+			final String defaultCharset = file.getCharset();
 			if (file.exists())
 				file.setContents(new StringInputStream(contents.toString(), defaultCharset), true, true, null);
 			else
