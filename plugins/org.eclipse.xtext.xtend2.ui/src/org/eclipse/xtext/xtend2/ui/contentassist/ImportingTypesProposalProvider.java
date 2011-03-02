@@ -90,6 +90,7 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 					// compute import statement's offset
 					int offset = 0;
 					boolean startWithLineBreak = true;
+					boolean endWithLineBreak = false;
 					if (file.getImports().isEmpty()) {
 						startWithLineBreak = false;
 						if (clazz == null) {
@@ -97,6 +98,7 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 						} else {
 							ICompositeNode node = NodeModelUtils.getNode(clazz);
 							offset = node.getOffset();
+							endWithLineBreak = true;
 						}
 					} else {
 						ICompositeNode node = NodeModelUtils.getNode(file.getImports().get(file.getImports().size() - 1));
@@ -109,13 +111,21 @@ public class ImportingTypesProposalProvider extends JdtTypesProposalProvider {
 					document.replace(proposal.getReplacementOffset(), proposal.getReplacementLength(), shortName);
 				
 					// add import statement
-					String importStatement = (startWithLineBreak ? "\nimport " : "import ") + proposalReplacementString; 
+					String importStatement = (startWithLineBreak ? "\nimport " : "import ") + proposalReplacementString;
+					if (endWithLineBreak)
+						importStatement += "\n\n";
 					document.replace(offset, 0, importStatement.toString());
 					proposal.setCursorPosition(proposal.getCursorPosition() + importStatement.length());
 					
 					// set the pixel coordinates
-					if (widget != null)
-						widget.setTopPixel(topPixel + widget.getLineHeight());
+					if (widget != null) {
+						int additionalTopPixel = 0;
+						if (startWithLineBreak)
+							additionalTopPixel += widget.getLineHeight();
+						if (endWithLineBreak)
+							additionalTopPixel += 2 * widget.getLineHeight();
+						widget.setTopPixel(topPixel + additionalTopPixel);
+					}
 				} finally {
 					if (viewerExtension != null)
 						viewerExtension.setRedraw(true);
