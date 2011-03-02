@@ -46,7 +46,7 @@ public class IntegerExtensions {
 	 * implementation for the upTo operator on {@link Integer} 
 	 */
 	public static Iterable<Integer> operator_upTo(final Integer a, Number b) {
-		final int upTo = b.intValue();
+		final int upTo = b.intValue()+1;
 		return new Iterable<Integer>() {
 			public Iterator<Integer> iterator() {
 				return new IntIterator(a, upTo);
