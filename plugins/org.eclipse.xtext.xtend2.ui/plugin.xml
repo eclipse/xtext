@@ -319,6 +319,8 @@
       </category>
       <wizard
             category="org.eclipse.xtext.xtend2.ui.wizards"
+            descriptionImage="icons/xtend_wizard_big.png"
+            icon="icons/Xtend-Icon-16.png"
             id="org.eclipse.xtext.xtend2.ui.wizards.NewXtend2ClassWizard"
             name="Xtend Class">
             <class class="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory">
