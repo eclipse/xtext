@@ -128,7 +128,8 @@ public class JvmModelInferrer {
 				});
 				JvmFormalParameter parameter = typesFactory.createJvmFormalParameter();
 				parameter.setName(parameter2.getName());
-				parameter.setParameterType(EcoreUtil2.cloneIfContained(commonType));
+				if (commonType != null)
+					parameter.setParameterType(EcoreUtil2.cloneIfContained(commonType));
 				result.getParameters().add(parameter);
 			}
 		}
