@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ComparableExtensions;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -52,7 +53,8 @@ public class StaticMethodsFeatureForTypeProvider extends AbstractStaticMethodsFe
 	}
 
 	private static final Collection<String> literalClasses = ImmutableList.of(
-			CollectionLiterals.class.getName()
+			CollectionLiterals.class.getName(),
+			InputOutput.class.getName()
 	);
 	
 	@Inject
