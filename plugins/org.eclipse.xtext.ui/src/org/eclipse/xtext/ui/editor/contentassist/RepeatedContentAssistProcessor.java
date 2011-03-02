@@ -40,6 +40,12 @@ public class RepeatedContentAssistProcessor extends XtextContentAssistProcessor 
 		void nextMode();
 		
 		/**
+		 * @return <code>true</code> if a subsequent call to {@link #nextMode()} will
+		 * show the proposals for the first mode.
+		 */
+		boolean isLastMode();
+		
+		/**
 		 * @return a description of the proposal category that will be
 		 *   retrieved after a subsequent invocation of {@link #nextMode()}.
 		 */
@@ -60,10 +66,19 @@ public class RepeatedContentAssistProcessor extends XtextContentAssistProcessor 
 	@Override
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 		ModeAware proposalProvider = getModeAwareProposalProvider();
-		proposalProvider.nextMode();
-		if (currentAssistant != null)
-			currentAssistant.setStatusMessage(getStatusMessage());
-		return super.computeCompletionProposals(viewer, offset);
+		int i = 0;
+		while(i++ < 1000) { // just to prevent endless loop in case #isLastMode has an error
+			proposalProvider.nextMode();
+			if (currentAssistant != null)
+				currentAssistant.setStatusMessage(getStatusMessage());
+			ICompletionProposal[] result = super.computeCompletionProposals(viewer, offset);
+			if (result != null && result.length > 0)
+				return result;
+			if (proposalProvider.isLastMode()) {
+				return new ICompletionProposal[0];	
+			}
+		}
+		throw new IllegalStateException("#isLastMode did not return true for 1000 times");
 	}
 	
 	protected String getStatusMessage() {
