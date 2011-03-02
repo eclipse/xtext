@@ -19,6 +19,7 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.XtextSwitch;
 
 import com.google.inject.Inject;
@@ -182,6 +183,12 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 		return new StyledString(keyword.getValue());
 	}
 
+	protected StyledString getStyledDisplayString(IEObjectDescription description) {
+		return getStyledDisplayString(description.getEObjectOrProxy(),
+			qualifiedNameConverter.toString(description.getQualifiedName()),
+			qualifiedNameConverter.toString(description.getName()));
+	}
+	
 	protected StyledString getStyledDisplayString(EObject element, String qualifiedName, String shortName) {
 		return new StyledString(getDisplayString(element, qualifiedName, shortName));
 	}

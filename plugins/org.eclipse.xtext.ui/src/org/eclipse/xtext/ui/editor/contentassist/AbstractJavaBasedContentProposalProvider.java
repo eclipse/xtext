@@ -84,9 +84,7 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 				}
 			}
 			EObject objectOrProxy = candidate.getEObjectOrProxy();
-			StyledString displayString = getStyledDisplayString(objectOrProxy,
-					qualifiedNameConverter.toString(candidate.getQualifiedName()),
-					qualifiedNameConverter.toString(candidate.getName()));
+			StyledString displayString = getStyledDisplayString(candidate);
 			Image image = getImage(objectOrProxy);
 			result = createCompletionProposal(proposal, displayString, image, contentAssistContext);
 			if (result instanceof ConfigurableCompletionProposal) {
