@@ -76,6 +76,10 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		getXbaseCrossReferenceProposalCreator().reset();
 	}
 	
+	public boolean isLastMode() {
+		return getXbaseCrossReferenceProposalCreator().isLastMode();
+	}
+	
 	public XbaseReferenceProposalCreator getXbaseCrossReferenceProposalCreator() {
 		return (XbaseReferenceProposalCreator) super.getCrossReferenceProposalCreator();
 	}

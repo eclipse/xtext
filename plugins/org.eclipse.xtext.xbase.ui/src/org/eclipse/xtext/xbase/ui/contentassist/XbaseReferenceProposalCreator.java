@@ -80,6 +80,10 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 		}
 	}
 	
+	public boolean isLastMode() {
+		return isShowAllProposals();
+	}
+	
 	protected boolean isShowTypeProposals() {
 		return (mode & 4) != 0;
 	}
