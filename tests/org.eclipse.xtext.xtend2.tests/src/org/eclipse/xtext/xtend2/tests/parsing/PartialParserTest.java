@@ -268,6 +268,24 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		doTestUpdateAtOffset(model, 295, 1, "f", "Case_5.xtend");
 	}
 	
+	public void testEqualModels_02() throws Exception {
+		String model = "package org.eclipse.xtext.xtend2.tests.smoke\n" + 
+				"\n" + 
+				"import org.eclipse.emf.ecore.EClass\n" + 
+				"import org.eclipse.emf.ecore.EPackage\n" + 
+				"import org.eclipse.emf.ecore.EStructuralFeature\n" + 
+				"import org.eclipse.emf.ecore.EObject\n" + 
+				"\n" + 
+				"class Case_6 {\n" + 
+				"\n" + 
+				"	dispatch transform(EClass model) {\n" + 
+				"		model.ETypeParameters.map(e|transform(e))\n" + 
+				"	}\n" + 
+				"	 \n" + 
+				"	dispatch transform(E";
+		doTestUpdateAtOffset(model, 329, 0, "P", "Case_6.xtend");
+	}
+	
 	public void testInferredModelRemoved() throws Exception {
 		String model =
 				"package org.eclipse.xtext.xtend2.tests.smoke\n" + 

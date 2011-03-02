@@ -193,7 +193,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		}
 	}
 	
-	public void testNoExceptionInValidator_03() throws Exception {
+	public void testNoExceptionInValidator_01() throws Exception {
 		XtendClass clazz = clazz("package pack class Case_2 {\n" + 
 				"\n" + 
 				"	aOrB(String a, String b) {\n" + 

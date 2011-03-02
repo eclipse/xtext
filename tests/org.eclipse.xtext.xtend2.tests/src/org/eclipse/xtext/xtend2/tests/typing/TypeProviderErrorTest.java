@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
@@ -46,7 +47,22 @@ public class TypeProviderErrorTest extends AbstractXtend2TestCase {
 		}
 		
 	}
-		
+	
+	public void testNoException_02() throws Exception {
+		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.typing\n" + 
+				"import org.eclipse.emf.ecore.EClass\n" + 
+				"class NoException {\n" + 
+				"	dispatch transform(EClass model) {\n" + 
+				"		model.ETypeParameters.map(e|transform");
+		Iterator<Object> contents = EcoreUtil.getAllContents(file.eResource(), true);
+		while(contents.hasNext()) {
+			EObject object = (EObject) contents.next();
+			if (object instanceof XExpression) {
+				XExpression expression = (XExpression) object;
+				typeProvider.getExpectedType(expression);
+			}
+		}
+	}
 	
 	@Override
 	protected XtendFile file(String string, boolean validate) throws Exception {
