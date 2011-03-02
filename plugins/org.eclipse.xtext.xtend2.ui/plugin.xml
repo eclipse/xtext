@@ -309,4 +309,46 @@
        		</part>
 		</actionSetPartAssociation>
 	</extension>
+   <extension
+         id="org.eclipse.xtext.xtend2.ui.wizard"
+         name="newXtend2Class"
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.xtext.xtend2.ui.wizards"
+            name="Xtend">
+      </category>
+      <wizard
+            category="org.eclipse.xtext.xtend2.ui.wizards"
+            id="org.eclipse.xtext.xtend2.ui.wizards.NewXtend2ClassWizard"
+            name="Xtend Class">
+            <class class="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory">
+				<parameter name="javatype" value="true" />
+				<parameter name="guicekey" value="org.eclipse.xtext.xtend2.ui.wizards.NewXtend2ClassWizard" />
+			</class>
+      </wizard>
+      <primaryWizard
+            id="org.eclipse.xtext.xtend2.ui.wizards.NewXtend2ClassWizard">
+      </primaryWizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.jdt.ui.JavaPerspective">
+         <newWizardShortcut
+               id="org.eclipse.xtext.xtend2.ui.wizards.NewXtend2ClassWizard">
+         </newWizardShortcut>
+      </perspectiveExtension>
+      <perspectiveExtension
+            targetID="org.eclipse.jdt.ui.JavaBrowsingPerspective">
+         <newWizardShortcut
+               id="org.eclipse.xtext.xtend2.ui.wizards.NewXtend2ClassWizard">
+         </newWizardShortcut>
+      </perspectiveExtension>
+      <perspectiveExtension
+            targetID="org.eclipse.pde.ui.PDEPerspective">
+         <newWizardShortcut
+               id="org.eclipse.xtext.xtend2.ui.wizards.NewXtend2ClassWizard">
+         </newWizardShortcut>
+      </perspectiveExtension>
+   </extension>
 </plugin>
