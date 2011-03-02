@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtend2.scoping;
 
 import static com.google.common.collect.Lists.*;
+import static java.util.Collections.*;
 
 import java.util.List;
 
@@ -36,6 +37,8 @@ public class ExtensionMethodsFeaturesProvider extends AbstractFeaturesForTypePro
 	}
 	
 	public Iterable<? extends JvmFeature> getFeaturesForType(JvmTypeReference type) {
+		if(extensionProvidingType == null)
+			return emptyList();
 		List<JvmFeature> result = newArrayList();
 		Iterable<JvmFeature> iterable = overridesService.getAllJvmFeatures(extensionProvidingType);
 		for (JvmFeature jvmFeature : iterable) {
