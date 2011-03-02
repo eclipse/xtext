@@ -155,6 +155,17 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 
 			@Override
 			public boolean isCandidateMatchingPrefix(String name, String prefix) {
+				if (prefix.startsWith("\"")) {
+					if (prefix.length() == 1)
+						prefix = "";
+					else {
+						prefix = prefix.substring(1);
+						if (prefix.endsWith("\"")) {
+							prefix = prefix.substring(0, prefix.length() - 1);
+						}
+					}
+				}
+				name = getValueConverter().toValue(name, "STRING", null).toString();
 				if (context.getMatcher().isCandidateMatchingPrefix(name, prefix))
 					return true;
 				try {
@@ -169,7 +180,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 			
 		}).toContext(), acceptor);
 	}
-
+	
 	@Override
 	public void completeGeneratedMetamodel_Alias(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
@@ -220,6 +231,21 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 					semanticHighlightingConfiguration.dataTypeRule());
 		}
 		return styledDisplayString;
+	}
+	
+	@Override
+	protected StyledString getStyledDisplayString(IEObjectDescription description) {
+		if (EcorePackage.Literals.EPACKAGE == description.getEClass()) {
+			if ("true".equals(description.getUserData("nsURI"))) {
+				String name = description.getUserData("name");
+				if (name == null) {
+					return new StyledString(description.getName().toString());
+				}
+				String string = name + " - " + description.getName();
+				return new StyledString(string);
+			}
+		}
+		return super.getStyledDisplayString(description);
 	}
 
 	@Override

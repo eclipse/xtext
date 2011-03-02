@@ -20,7 +20,9 @@ import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.xtext.XtextCrossReferenceSerializer;
 import org.eclipse.xtext.xtext.XtextDiagnosticConverter;
@@ -123,6 +125,11 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	@Override
 	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
 		return XtextLocationInFileProvider.class;
+	}
+	
+	@Override
+	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
+		return DefaultGlobalScopeProvider.class;
 	}
 	
 }
