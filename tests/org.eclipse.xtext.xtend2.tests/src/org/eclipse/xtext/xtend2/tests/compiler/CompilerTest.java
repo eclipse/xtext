@@ -279,6 +279,16 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		invokeAndExpect("foobar", "bar(p1)} bar(String x) {'foo'+x","bar");
 	}
 	
+	// TODO: fix type inferrence in this scenario
+//	public void testTypeInferrence_00() throws Exception {
+//		compileJavaCode("Foo", "import org.eclipse.emf.ecore.EObject " +
+//				"class Foo { " +
+//				"	Iterable<? extends EObject> test(EObject e) {" +
+//				"		e.eContents().map(o|test(o)).flatten()" +
+//				"	}" +
+//				"}");
+//	}
+	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
 
