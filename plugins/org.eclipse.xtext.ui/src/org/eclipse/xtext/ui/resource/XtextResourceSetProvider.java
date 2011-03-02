@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.resource;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
@@ -27,6 +28,7 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 
 	public ResourceSet get(IProject project) {
 		XtextResourceSet set = resourceSetProvider.get();
+		set.getURIConverter().getURIMap().putAll(EcorePlugin.computePlatformURIMap());
 		IJavaProject javaProject = JavaCore.create(project);
 		if (javaProject!=null && javaProject.exists()) {
 			set.setClasspathURIContext(javaProject);
