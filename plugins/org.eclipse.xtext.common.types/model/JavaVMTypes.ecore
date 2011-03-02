@@ -69,8 +69,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameters" upperBound="-1"
         eType="#//JvmTypeParameter" containment="true" eOpposite="#//JvmTypeParameter/declarator"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JvmConstraintOwner" abstract="true"
-      eSuperTypes="#//JvmIdentifiableElement">
+  <eClassifiers xsi:type="ecore:EClass" name="JvmConstraintOwner" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
         eType="#//JvmTypeConstraint" containment="true" eOpposite="#//JvmTypeConstraint/owner"/>
   </eClassifiers>

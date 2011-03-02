@@ -67,6 +67,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.common.types.testSetups.AnnotatedClassWithStringDefault;
 import org.eclipse.xtext.common.types.testSetups.AnnotatedInterfaceWithStringDefault;
 import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs;
@@ -2085,6 +2086,19 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(2, constructor.getParameters().size());
 		assertTrue(constructor.getParameters().get(0).getParameterType() instanceof JvmParameterizedTypeReference);
 		assertTrue(constructor.getParameters().get(1).getParameterType() instanceof JvmGenericArrayTypeReference);
+	}
+	
+	public void testArraysArraylist_01() {
+		try {
+			getTypeProvider().findTypeByName("java.util.Arrays.ArrayList");
+			fail("java.util.Arrays.ArrayList");
+		} catch(TypeNotFoundException e) {
+			// expected
+		}
+	}
+	
+	public void testArraysArraylist_02() {
+		assertNotNull(getTypeProvider().findTypeByName("java.util.Arrays$ArrayList"));
 	}
 	
 	protected abstract String getCollectionParamName();
