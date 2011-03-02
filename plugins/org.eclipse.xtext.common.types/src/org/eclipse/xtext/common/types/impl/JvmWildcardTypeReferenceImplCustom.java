@@ -20,6 +20,11 @@ public class JvmWildcardTypeReferenceImplCustom extends JvmWildcardTypeReference
 	}
 	
 	@Override
+	public String getQualifiedName() {
+		return getQualifiedName('$');
+	}
+	
+	@Override
 	public String getQualifiedName(char innerClassDelimiter) {
 		return NameConcatHelper.computeFor(this, innerClassDelimiter, NameConcatHelper.NameType.QUALIFIED);
 	}
@@ -32,6 +37,14 @@ public class JvmWildcardTypeReferenceImplCustom extends JvmWildcardTypeReference
 	@Override
 	public JvmType getType() {
 		return null;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder(eClass().getName());
+		result.append(": ");
+		result.append(getIdentifier());
+		return result.toString();
 	}
 
 }

@@ -1646,7 +1646,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		jvmDeclaredTypeEClass.getESuperTypes().add(this.getJvmComponentType());
 		jvmTypeParameterEClass.getESuperTypes().add(this.getJvmComponentType());
 		jvmTypeParameterEClass.getESuperTypes().add(this.getJvmConstraintOwner());
-		jvmConstraintOwnerEClass.getESuperTypes().add(this.getJvmIdentifiableElement());
 		jvmUpperBoundEClass.getESuperTypes().add(this.getJvmTypeConstraint());
 		jvmLowerBoundEClass.getESuperTypes().add(this.getJvmTypeConstraint());
 		jvmAnnotationTypeEClass.getESuperTypes().add(this.getJvmDeclaredType());

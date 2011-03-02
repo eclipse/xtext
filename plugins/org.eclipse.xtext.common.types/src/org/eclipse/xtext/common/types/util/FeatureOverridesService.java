@@ -66,7 +66,7 @@ public class FeatureOverridesService {
     }
 
     protected Iterable<JvmFeature> removeOverridden(Iterable<JvmFeature> result, TypeArgumentContext ctx) {
-        Set<JvmFeature> operation = Sets.newHashSet(result);
+        Set<JvmFeature> operation = Sets.newLinkedHashSet(result);
         for (JvmFeature op1 : result) {
             for (JvmFeature op2 : result) {
                 if (isOverridden(op1, op2, ctx, true))
@@ -77,7 +77,7 @@ public class FeatureOverridesService {
     }
 
     protected Set<JvmOperation> collectOperations(JvmType type) {
-        Set<JvmOperation> allOps = Sets.newHashSet();
+        Set<JvmOperation> allOps = Sets.newLinkedHashSet();
         if (type instanceof JvmDeclaredType) {
             EList<JvmMember> members = ((JvmDeclaredType) type).getMembers();
             for (JvmMember jvmMember : members) {

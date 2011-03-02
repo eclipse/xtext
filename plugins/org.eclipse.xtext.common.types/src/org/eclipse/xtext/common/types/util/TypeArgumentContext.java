@@ -29,8 +29,10 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory;
 
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.common.collect.UnmodifiableIterator;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -186,7 +188,15 @@ public class TypeArgumentContext {
 											return EcoreUtil2.clone(resolvedCopy);
 										}
 									}
-									return resolveTypeParameters(doGetResolvedCopy(resolved, resolving, unresolved));
+									Iterator<JvmParameterizedTypeReference> iterator = Iterators.filter(EcoreUtil2.eAll(resolved), JvmParameterizedTypeReference.class);
+									while(iterator.hasNext()) {
+										JvmParameterizedTypeReference containedReference = iterator.next();
+										if (resolving.contains(containedReference.getType())) {
+											return object;
+										}
+									}
+									JvmTypeReference resolvedCopy = doGetResolvedCopy(resolved, resolving, unresolved);
+									return resolveTypeParameters(resolvedCopy);
 								} else {
 									return typeReferences.createTypeRef(type);
 								}

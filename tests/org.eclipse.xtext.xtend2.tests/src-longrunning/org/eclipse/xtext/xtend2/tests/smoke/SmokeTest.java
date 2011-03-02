@@ -22,6 +22,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -334,6 +336,9 @@ public class SmokeTest extends AbstractXtend2TestCase {
 			}
 			if (object instanceof JvmIdentifiableElement) {
 				typeProvider.getTypeForIdentifiable((JvmIdentifiableElement) object);
+			}
+			if (object instanceof JvmWildcardTypeReference) {
+				assertTrue(((JvmWildcardTypeReference) object).eContainer() instanceof JvmTypeReference);
 			}
 		}
 	}

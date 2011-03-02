@@ -182,7 +182,6 @@ public class TypesSwitch<T>
 			{
 				JvmConstraintOwner jvmConstraintOwner = (JvmConstraintOwner)theEObject;
 				T result = caseJvmConstraintOwner(jvmConstraintOwner);
-				if (result == null) result = caseJvmIdentifiableElement(jvmConstraintOwner);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -290,7 +289,6 @@ public class TypesSwitch<T>
 				T result = caseJvmWildcardTypeReference(jvmWildcardTypeReference);
 				if (result == null) result = caseJvmConstraintOwner(jvmWildcardTypeReference);
 				if (result == null) result = caseJvmTypeReference(jvmWildcardTypeReference);
-				if (result == null) result = caseJvmIdentifiableElement(jvmWildcardTypeReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

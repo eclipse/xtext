@@ -539,7 +539,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_CONSTRAINT_OWNER__CONSTRAINTS = JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
+	int JVM_CONSTRAINT_OWNER__CONSTRAINTS = 0;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Constraint Owner</em>' class.
@@ -548,7 +548,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_CONSTRAINT_OWNER_FEATURE_COUNT = JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 1;
+	int JVM_CONSTRAINT_OWNER_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeConstraintImpl <em>Jvm Type Constraint</em>}' class.
