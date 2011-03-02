@@ -180,6 +180,10 @@ public class IterableExtensions {
 		return Iterables.filter(iterable, new BooleanFunctionDelegate<T>(predicate));
 	}
 	
+	public static final <T> Iterable<T> filter(Iterable<?> iterable, Class<T> type) {
+		return Iterables.filter(iterable, type);
+	}
+	
 	public static final <T, R> Iterable<R> map(Iterable<T> iterable, Function1<? super T, R> transformation) {
 		return Iterables.transform(iterable, new FunctionDelegate<T, R>(transformation));
 	}
@@ -269,7 +273,7 @@ public class IterableExtensions {
 		}
 		return result;
 	}
-	
+
 	protected static class BooleanFunctionDelegate<T> implements Predicate<T> {
 
 		private final Function1<? super T, Boolean> delegate;
