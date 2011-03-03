@@ -29,8 +29,8 @@ public class GeneratorExtensions {
       if (o_1 instanceof PackageDeclaration) {
         final PackageDeclaration o_2 = (PackageDeclaration) o_1;
         matched=true;
-        final PackageDeclaration final_o_2 = (PackageDeclaration)o_2;
-        EObject _eContainer = final_o_2.eContainer();
+        final PackageDeclaration typeConverted_o_2 = (PackageDeclaration)o_2;
+        EObject _eContainer = typeConverted_o_2.eContainer();
         String _packageName = _this.packageName(_eContainer);
         String _name = o_2.getName();
         String _concatPath = _this.concatPath(_packageName, _name);
@@ -69,8 +69,8 @@ public class GeneratorExtensions {
       _xifexpression = suffix;
     } else {
       String _operator_plus = StringExtensions.operator_plus(prefix, ".");
-      final String final_suffix = (String)suffix;
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, final_suffix);
+      final String typeConverted_suffix = (String)suffix;
+      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, typeConverted_suffix);
       _xifexpression = _operator_plus_1;
     }
     return _xifexpression;
@@ -88,8 +88,8 @@ public class GeneratorExtensions {
   }
   
   public String fileName(final Entity e) {
-    final Entity final_e = (Entity)e;
-    String _packageName = _this.packageName(final_e);
+    final Entity typeConverted_e = (Entity)e;
+    String _packageName = _this.packageName(typeConverted_e);
     String _replace = _packageName.replace(".", "/");
     String _operator_plus = StringExtensions.operator_plus(_replace, "/");
     String _name = e.getName();

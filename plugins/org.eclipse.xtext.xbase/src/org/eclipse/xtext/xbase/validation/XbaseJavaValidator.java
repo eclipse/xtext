@@ -211,7 +211,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	@Check
 	public void checkInstanceOf(XInstanceOfExpression instanceOfExpression) {
 		JvmTypeReference expressionTypeRef = typeProvider.getType(instanceOfExpression.getExpression());
-		if (expressionTypeRef.getType() instanceof JvmDeclaredType) {
+		if(expressionTypeRef != null && expressionTypeRef.getType() instanceof JvmDeclaredType) {
 			boolean isConformant = isConformant(instanceOfExpression.getType(), expressionTypeRef);
 			if (isConformant) {
 				warning("The expression of type " + getNameOfTypes(expressionTypeRef) + " is already of type "

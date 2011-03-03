@@ -10,8 +10,8 @@ import org.eclipse.xtext.xbase.compiler.*
 class GeneratorExtensions {
 	String packageName(Object o) {
 		switch(o) {
-			PackageDeclaration : concatPath(packageName(o.eContainer()), o.name)
-			EObject : packageName(o.eContainer())
+			PackageDeclaration : concatPath(packageName(o.eContainer), o.name)
+			EObject : packageName(o.eContainer)
 			JvmDeclaredType : o.packageName
 			default: null
 		}
@@ -28,7 +28,7 @@ class GeneratorExtensions {
 	}
 	
 	fileName(Entity e) {
-		e.packageName().replace('.', '/') + "/" + e.name + '.java'
+		e.packageName.replace('.', '/') + "/" + e.name + '.java'
 	}
 	
 	parameterList(Operation o, ImportManager importManager) {
