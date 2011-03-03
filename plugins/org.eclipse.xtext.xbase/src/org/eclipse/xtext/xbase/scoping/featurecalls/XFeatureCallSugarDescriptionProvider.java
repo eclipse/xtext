@@ -73,11 +73,16 @@ public class XFeatureCallSugarDescriptionProvider extends DefaultJvmFeatureDescr
 		if (isExtensionProvider()) {
 			numberOfArgs--;
 		}
+		if (numberOfArgs == 1 && op.isVarArgs()) {
+			numberOfArgs--;
+		}
 		return numberOfArgs;
 	}
 
 	protected boolean isGetterMethod(JvmOperation op) {
 		if (getSyntacticalNumberOfArguments(op)!=0)
+			return false;
+		if (op.isVarArgs())
 			return false;
 		if (getPropertyNameForGetterMethod(op.getSimpleName()) == null)
 			return false;
