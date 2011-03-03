@@ -41,7 +41,7 @@
                 <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
                 <with variable="activeEditor">
                     <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-                        value="org.eclipse.xtext.example.Domainmodel" 
+                        value="org.eclipse.xtext.example.domainmodel.Domainmodel" 
                         forcePluginActivation="true"/>
                 </with>        
             </and>
@@ -210,18 +210,20 @@
       		contextId="org.eclipse.xtext.ui.XtextEditorScope"
       		platform="carbon"/>
     </extension>
-   
+
+   <extension
+         point="org.eclipse.xtext.builder.participant">
+      <participant
+            class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+      </participant>
+   </extension>
+
+   <!-- manual additions start here -->
    <extension
        point="org.eclipse.xtext.ui.searchFilter">
     <filter
           class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.example.domainmodel.ui.search.DomainmodelSearchFilter">
     </filter>
  </extension>
-   <extension
-         point="org.eclipse.xtext.builder.participant">
-      <participant
-            class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.example.domainmodel.ui.generator.Generator">
-      </participant>
-   </extension>
  
 </plugin>
