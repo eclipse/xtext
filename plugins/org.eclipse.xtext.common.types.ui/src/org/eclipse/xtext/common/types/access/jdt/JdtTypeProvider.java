@@ -66,6 +66,11 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 			JvmType result = findTypeBySignature(signature, resource);
 			return result;
 		} else {
+			TypeResource resource = (TypeResource) getResourceSet().getResource(resourceURI, false);
+			if (resource != null) {
+				JvmType result = findTypeBySignature(signature, resource);
+				return result;
+			}
 			String topLevelType = resourceURI.segment(resourceURI.segmentCount() - 1);
 			try {
 				int lastDot = topLevelType.lastIndexOf('.');
@@ -76,7 +81,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 					packageName = topLevelType.substring(0, lastDot);
 				} 
 				if (javaProject.findType(packageName, typeName) != null) {
-					TypeResource resource = (TypeResource) getResourceSet().getResource(resourceURI, true);
+					resource = (TypeResource) getResourceSet().getResource(resourceURI, true);
 					JvmType result = findTypeBySignature(signature, resource);
 					return result;
 				} else {
