@@ -13,11 +13,14 @@ import static java.util.Collections.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
@@ -25,12 +28,13 @@ import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -85,8 +89,8 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 		// standard features
 		final List<JvmFeatureDescriptionList> descriptions = newArrayList();
 		for (IJvmFeatureDescriptionProvider provider : jvmFeatureDescriptionProviders) {
-			final List<JvmFeatureDescriptionList> descriptionss = createFeatureScopes(hierarchy, context, provider);
-			descriptions.addAll(descriptionss);
+			final List<JvmFeatureDescriptionList> descriptionList = createFeatureScopes(hierarchy, context, provider);
+			descriptions.addAll(descriptionList);
 		}
 
 		// create a view for the visible elements
@@ -191,15 +195,27 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 	public Iterable<JvmTypeReference> linearizeTypeHierarchy(JvmTypeReference typeRef) {
 		if (typeRef == null)
 			return Collections.emptyList();
-		final List<JvmTypeReference> result = Lists.newArrayList(typeRef);
-		final Set<JvmType> visited = Sets.newHashSet(typeRef.getType());
+		final Map<JvmTypeReference, Integer> result = Maps.newLinkedHashMap();
+		result.put(typeRef, -1);
+		final Wrapper<Integer> addOn = Wrapper.wrap(Integer.valueOf(0));
+		final Map<JvmType, JvmTypeReference> visited = Maps.newHashMap();
+		visited.put(typeRef.getType(), typeRef);
 		SuperTypeCollector.SuperTypeAcceptor acceptor = new SuperTypeCollector.SuperTypeAcceptor() {
 			
-			
 			public boolean accept(JvmTypeReference superType, int distance) {
-				if (visited.add(superType.getType())) {
-					result.add(superType);
+				JvmTypeReference existing = visited.get(superType.getType());
+				if (existing == null) {
+					visited.put(superType.getType(), superType);
+					result.put(superType, distance + addOn.get().intValue());
 					return true;
+				} else {
+					Integer previousDistance = result.get(existing);
+					if (previousDistance > addOn.get().intValue() && distance > previousDistance) {
+						visited.put(superType.getType(), superType);
+						result.remove(existing);
+						result.put(superType, distance + addOn.get().intValue());
+						return true;
+					}
 				}
 				return false;
 			}
@@ -207,12 +223,41 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 		};
 		superTypeCollector.collectSuperTypes(typeRef, acceptor);
 		for(JvmTypeReference synonym: synonymTypeProvider.getSynonymTypes(typeRef)) {
-			if (visited.add(synonym.getType())) {
-				result.add(synonym);
+			if (!visited.containsKey(synonym.getType())) {
+				result.put(synonym, result.size());
+				visited.put(synonym.getType(), synonym);
+				addOn.set(result.size());
 				superTypeCollector.collectSuperTypes(synonym, acceptor);
 			}
 		}
-		return result;
+		List<Entry<JvmTypeReference,Integer>> sortable = Lists.newArrayList(result.entrySet());
+		Collections.sort(sortable, new Comparator<Entry<JvmTypeReference,Integer>>() {
+
+			public int compare(Entry<JvmTypeReference, Integer> o1, Entry<JvmTypeReference, Integer> o2) {
+				if (o1.getValue().equals(o2.getValue())) {
+					JvmTypeReference ref1 = o1.getKey();
+					JvmTypeReference ref2 = o2.getKey();
+					if (ref1.getType() instanceof JvmGenericType && ref2.getType() instanceof JvmGenericType) {
+						if (((JvmGenericType) ref1.getType()).isInterface()) {
+							if (!((JvmGenericType) ref2.getType()).isInterface()) {
+								return 1;
+							}
+						} else if (((JvmGenericType) ref2.getType()).isInterface()) {
+							return -1;
+						}
+					}
+					return o1.getKey().getQualifiedName().compareTo(o2.getKey().getQualifiedName());
+				}
+				return o1.getValue().compareTo(o2.getValue());
+			}
+			
+		});
+		
+		return Lists.newArrayList(Lists.transform(sortable, new Function<Entry<JvmTypeReference,Integer>, JvmTypeReference>() {
+			public JvmTypeReference apply(Entry<JvmTypeReference, Integer> from) {
+				return from.getKey();
+			}
+		}));
 	}
 	
 	protected static class JvmFeatureDescriptionList {
