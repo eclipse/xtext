@@ -26,10 +26,12 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge  Initial contribution and API
  */
+@Singleton
 public class FeatureOverridesService {
 
     @Inject
