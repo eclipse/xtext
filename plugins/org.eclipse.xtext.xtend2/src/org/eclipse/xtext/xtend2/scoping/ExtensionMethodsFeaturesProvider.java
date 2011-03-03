@@ -54,4 +54,8 @@ public class ExtensionMethodsFeaturesProvider extends AbstractFeaturesForTypePro
 		return result;
 	}
 
+	public boolean isExtensionProvider() {
+		return true;
+	}
+
 }

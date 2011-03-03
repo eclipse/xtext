@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests.compiler;
 
+import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 
 import java.io.StringWriter;
@@ -39,31 +40,67 @@ import com.google.inject.Injector;
  */
 public class CompilerTest extends AbstractXtend2TestCase {
 	
+	public void testSugarForLocalExtensions_01() throws Exception {
+		Class<?> class1 = compileJavaCode("x.Y",
+				"package x " +
+				"class Y { " +
+				" operator_plus(int x, String s) {" +
+				"   x.toString + s" +
+				" }" +
+				"" +
+				" test() {" +
+				"    return 42 + 'foo'" +
+				" }" +
+				"}");
+		assertEquals("42foo",apply(class1,"test"));
+	}
+	
+	public void testSugarForLocalExtensions_02() throws Exception {
+		Class<?> class1 = compileJavaCode("x.Y",
+				"package x " +
+				"class Y { " +
+				" getSize(String s) {" +
+				"   s.length" +
+				" }" +
+				"" +
+				" test() {" +
+				"    return 'foo'.size" +
+				" }" +
+		"}");
+		assertEquals(3,apply(class1,"test"));
+	}
+	
 	public void testStaticExtensionMethod_01() throws Exception {
 		Class<?> class1 = compileJavaCode("x.Y","package x import static extension java.util.Collections.* class Y { foo() {'foo'.singleton()}}");
 		assertEquals(singleton("foo"),apply(class1,"foo"));
 	}
 	
-//	TODO Fix me
-//	public void testStaticExtensionMethod_02() throws Exception {
-//		Class<?> class1 = compileJavaCode("x.Y","package x import static extension java.util.Collections.* class Y { foo() {'foo'.singleton}}");
-//		assertEquals(singleton("foo"),apply(class1,"foo"));
-//	}
+	public void testStaticExtensionMethod_02() throws Exception {
+		Class<?> class1 = compileJavaCode("x.Y",
+				"package x " +
+				"import static extension java.util.Collections.* " +
+				"class Y { " +
+				" foo() {" +
+				"   'foo'.singleton" +
+				" }" +
+				"}");
+		assertEquals(singleton("foo"),apply(class1,"foo"));
+	}
 	
-	// TODO Fix me: This one throws a NoClassDefFoundError on #apply for inject..FastClass
-//	public void testInjectedExtensionMethod_01() throws Exception {
-//		Class<?> class1 = compileJavaCode("x.Y",
-//				"package x " +
-//				"class Y { " +
-//				"  @Inject extension java.util.HashMap<String,String> as map " +
-//				"  " +
-//				"  foo(String arg) { " +
-//				"    arg.put('bar') " +
-//				"    map" +
-//				"  }" +
-//				"}");
-//		assertEquals(singletonMap("foo", "bar"), apply(class1,"foo"));
-//	}
+	public void testInjectedExtensionMethod_01() throws Exception {
+		Class<?> class1 = compileJavaCode("x.Y",
+				"package x " +
+				"class Y { " +
+				"  @Inject extension test.GenericExtensionMethods<String,Integer> as x" +
+				"  " +
+				"  foo(String arg) { " +
+				"    arg.method " +
+				"    42.method" +
+				"    return x.result" +
+				"  }" +
+				"}");
+		assertEquals(newArrayList("method(A)","method(B)"), apply(class1,"foo","foo"));
+	}
 	
 	public void testInjectedExtensionMethod_02() throws Exception {
 		Class<?> class1 = compileJavaCode("x.Y",
@@ -91,11 +128,17 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		assertEquals(ExtensionMethods.GENERIC_STRING,apply(class1,"foo","x"));
 	}
 	
-//	TODO Fix me (operator overloading in extensions) 
-//	public void testInjectedExtensionMethod_02() throws Exception {
-//		Class<?> class1 = compileJavaCode("x.Y","package x class Y { @Inject extension test.ExtensionMethods foo(String arg) { return arg - 'bar' } }");
-//		assertEquals("foo",apply(class1,"foobar"));
-//	}
+	public void testInjectedExtensionMethod_04() throws Exception {
+		Class<?> class1 = compileJavaCode("x.Y",
+				"package x " +
+				"class Y { " +
+				"  @Inject extension test.ExtensionMethods " +
+				"  foo(String arg) { " +
+				"    return arg - 'bar' " +
+				"  } " +
+				"}");
+		assertEquals("operator_minus(String,String)",apply(class1,"foo","foobar"));
+	}
 	
 	public void testInjectedExtensionMethod_05() throws Exception {
 		Class<?> class1 = compileJavaCode("x.Y","package x class Y { @Inject extension test.ExtensionMethods foo(String arg) { return arg.operator_minus('bar') } }");
@@ -212,16 +255,13 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		invokeAndExpect("string", definition,"bar");
 		invokeAndExpect("null", definition,new Object[]{null});
 	}
-	
-	
-//TODO test fails, when run as plug-in test. The EMF jars cannot be resolved.
-//
+//	TODO fails because Ecore is not always on the classpath (because of the static classpath stuff in OntheFlyCompiler)
 //	public void testDispatchFunction_03() throws Exception {
-//		final String definition = "doIt(p1) " +
-//				"   case doIt(org.eclipse.emf.ecore.EStructuralFeature x) typeof(org.eclipse.emf.ecore.EStructuralFeature)\n" + 
-//				"	case doIt(org.eclipse.emf.ecore.EReference x) typeof(org.eclipse.emf.ecore.EReference)\n" + 
-//				"	case doIt(org.eclipse.emf.ecore.EAttribute x) typeof(org.eclipse.emf.ecore.EAttribute)\n" + 
-//				"	case doIt(org.eclipse.emf.ecore.ETypedElement x) typeof(org.eclipse.emf.ecore.ETypedElement)";
+//		final String definition = "doIt(p1) }" +
+//				"   dispatch doIt(org.eclipse.emf.ecore.EStructuralFeature x) { typeof(org.eclipse.emf.ecore.EStructuralFeature) }\n" + 
+//				"	dispatch doIt(org.eclipse.emf.ecore.EReference x) { typeof(org.eclipse.emf.ecore.EReference) }\n" + 
+//				"	dispatch doIt(org.eclipse.emf.ecore.EAttribute x) { typeof(org.eclipse.emf.ecore.EAttribute) }\n" + 
+//				"	dispatch doIt(org.eclipse.emf.ecore.ETypedElement x) { typeof(org.eclipse.emf.ecore.ETypedElement) ";
 //		invokeAndExpect(EReference.class, definition,Xtend2Package.Literals.RICH_STRING_ELSE_IF__IF);
 //		invokeAndExpect(EAttribute.class, definition,Xtend2Package.Literals.XTEND_FILE__PACKAGE);
 //		invokeAndExpect(ETypedElement.class, definition,EcoreFactory.eINSTANCE.createEOperation());

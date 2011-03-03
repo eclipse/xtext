@@ -86,4 +86,8 @@ public class InjectedExtensionMethodsFeaturesProvider implements IFeaturesForTyp
 		return false;
 	}
 
+	public boolean isExtensionProvider() {
+		return true;
+	}
+
 }

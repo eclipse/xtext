@@ -136,6 +136,7 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 
 		final StaticallyImportedFeaturesProvider staticProvider = staticallyImportedFeaturesProvider.get();
 		staticProvider.setContext(expression.eResource());
+		staticProvider.setExtensionProvider(true);
 		insertDescriptionProviders(staticProvider, currentContext, implicitReceiver, result);
 
 		if (implicitReceiver == null) {
