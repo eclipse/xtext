@@ -393,7 +393,10 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 						casted.setAdditionalProposalInfo(objectOrProxy);
 						casted.setHover(getHover());
 						if (withParenths) {
-							casted.setCursorPosition(proposal.length() - 1);
+							casted.setSelectionStart(casted.getReplacementOffset() + proposal.length() - 1);
+							casted.setSelectionLength(0);
+							casted.setAutoInsertable(false);
+							casted.setSimpleLinkedMode(contentAssistContext.getViewer(), '\t', '\n');
 						}
 					}
 					getPriorityHelper().adjustCrossReferencePriority(result, contentAssistContext.getPrefix());

@@ -13,10 +13,12 @@ import org.eclipse.xtext.naming.QualifiedName;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge
  */
+@Singleton
 public class OperatorMapping {
 	
 	public static final QualifiedName PLUS = create("+");

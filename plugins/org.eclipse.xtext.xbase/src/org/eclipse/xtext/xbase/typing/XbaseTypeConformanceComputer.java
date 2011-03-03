@@ -18,11 +18,13 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
  */
+@Singleton
 public class XbaseTypeConformanceComputer extends TypeConformanceComputer {
 	
 	@Inject 

@@ -505,7 +505,8 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		String[] parameterNames = null;
 		if (javaMethod != null) {
 			try {
-				parameterNames = javaMethod.getParameterNames();
+				parameterNames = javaMethod.getRawParameterNames();
+//				parameterNames = javaMethod.getParameterNames();
 			} catch (JavaModelException ex) {
 				if (!ex.isDoesNotExist())
 					log.warn("IMethod.getParameterNames failed", ex);

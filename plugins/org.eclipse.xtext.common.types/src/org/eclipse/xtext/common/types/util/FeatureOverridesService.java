@@ -7,14 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
-import static com.google.common.collect.Iterables.*;
-
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -22,14 +22,20 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.util.Triple;
+import org.eclipse.xtext.util.Tuples;
 
-import com.google.common.collect.Iterables;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge  Initial contribution and API
  */
+@Singleton
 public class FeatureOverridesService {
 
     @Inject
@@ -55,48 +61,49 @@ public class FeatureOverridesService {
     }
     
     public Iterable<JvmFeature> getAllJvmFeatures(JvmDeclaredType type, TypeArgumentContext ctx) {
-        Iterable<JvmFeature> result = filter(type.getMembers(),JvmFeature.class);
+    	ListMultimap<Triple<EClass,String,Integer>, JvmFeature> featureIndex = ArrayListMultimap.create();
+    	indexFeatures(type, featureIndex);
         Set<JvmTypeReference> types = superTypeCollector.collectSuperTypes(type);
         for (JvmTypeReference jvmTypeReference : types) {
             JvmType jvmType = jvmTypeReference.getType();
             if (jvmType instanceof JvmDeclaredType) {
-                Iterable<JvmFeature> declaredMembers = filter(((JvmDeclaredType) jvmType).getMembers(),JvmFeature.class);
-                result = Iterables.concat(result, declaredMembers);
+            	indexFeatures((JvmDeclaredType) jvmType, featureIndex);
             }
         }
-        return removeOverridden(result, ctx);
+        return removeOverridden(featureIndex, ctx);
     }
 
-    protected Iterable<JvmFeature> removeOverridden(Iterable<JvmFeature> result, TypeArgumentContext ctx) {
-        Set<JvmFeature> operation = Sets.newLinkedHashSet(result);
-        for (JvmFeature op1 : result) {
-            for (JvmFeature op2 : result) {
-                if (isOverridden(op1, op2, ctx, true))
-                    operation.remove(op2);
-            }
-        }
-        return operation;
-    }
+	protected void indexFeatures(JvmDeclaredType type, ListMultimap<Triple<EClass, String, Integer>, JvmFeature> index) {
+		for(JvmMember member: type.getMembers()) {
+    		if (member instanceof JvmExecutable) {
+				Triple<EClass, String, Integer> key = Tuples.create(member.eClass(), member.getSimpleName(), ((JvmExecutable) member).getParameters().size());
+				index.put(key, (JvmFeature) member);
+			} else if (member instanceof JvmField) {
+				Triple<EClass, String, Integer> key = Tuples.create(member.eClass(), member.getSimpleName(), -1);
+				index.put(key, (JvmFeature) member);
+			}
+    	}
+	}
 
-    protected Set<JvmOperation> collectOperations(JvmType type) {
-        Set<JvmOperation> allOps = Sets.newLinkedHashSet();
-        if (type instanceof JvmDeclaredType) {
-            EList<JvmMember> members = ((JvmDeclaredType) type).getMembers();
-            for (JvmMember jvmMember : members) {
-                if (jvmMember instanceof JvmOperation) {
-                    allOps.add((JvmOperation) jvmMember);
-                }
-            }
-        }
-        return allOps;
+    protected Iterable<JvmFeature> removeOverridden(Multimap<Triple<EClass,String,Integer>,JvmFeature> featureIndex, TypeArgumentContext ctx) {
+    	Set<JvmFeature> result = Sets.newLinkedHashSet(featureIndex.values()); 
+    	for(Collection<JvmFeature> featuresWithSameName: featureIndex.asMap().values()) {
+			if (featuresWithSameName.size() > 1) {
+				for (JvmFeature op1 : featuresWithSameName) {
+					for (JvmFeature op2 : featuresWithSameName) {
+						if (op1.getDeclaringType() != op2.getDeclaringType() && internalIsOverridden(op1, op2, ctx, true))
+							result.remove(op2);
+					}
+				}
+			}
+    	}
+        return result;
     }
-
-    public boolean isOverridden(JvmFeature overriding, JvmFeature overridden, TypeArgumentContext context, boolean isCheckInheritance) {
-        if (overridden.getClass() != overriding.getClass())
-            return false;
+    
+    protected boolean internalIsOverridden(JvmFeature overriding, JvmFeature overridden, TypeArgumentContext context, boolean isCheckInheritance) {
+    	if (overriding == overridden)
+    		return false;
         if (!isNameEqual(overriding, overridden))
-            return false;
-        if (isCheckInheritance && !isInheritanceRelation(overriding, overridden))
             return false;
         if (overriding instanceof JvmOperation && overridden instanceof JvmOperation) {
             JvmOperation overridingOp = (JvmOperation) overriding;
@@ -113,6 +120,18 @@ public class FeatureOverridesService {
                 return false;
         }
         return true;
+    }
+
+    public boolean isOverridden(JvmFeature overriding, JvmFeature overridden, TypeArgumentContext context, boolean isCheckInheritance) {
+    	if (overriding == overridden)
+    		return false;
+        if (overridden.getClass() != overriding.getClass())
+            return false;
+        if (!isNameEqual(overriding, overridden))
+            return false;
+        if (isCheckInheritance && !isInheritanceRelation(overriding, overridden))
+            return false;
+       return internalIsOverridden(overriding, overridden, context, isCheckInheritance);
     }
     
     protected boolean isNameEqual(JvmFeature overriding, JvmFeature overridden) {
