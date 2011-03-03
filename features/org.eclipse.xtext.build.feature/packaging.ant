@@ -37,7 +37,7 @@
 	</target>
 
 	<!-- Appends p2 download statistic data to the artifacts.xml-->
-	<target name="statistic.add">
+	<target name="-statistic.add">
 		<ant antfile="statistics/statistics.ant" target="addStatistic">
 			<property name="repository.root" value="${sp:repository}"/>
 		</ant>
