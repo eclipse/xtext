@@ -180,7 +180,7 @@
 		<delete verbose="true">
 			<fileset dir="${downloads.area}/downloads/drops/${version}/">
 				<type type="dir" />
-				<include name="N*"/>
+				<include name="N*" />
 			</fileset>
 		</delete>
 
@@ -204,12 +204,12 @@
 		</copy>
 
 		<!-- copy javadoc -->
-		<mkdir dir="${build.drop.directory}/javadoc" />
-		<copy todir="${build.drop.directory}/javadoc">
-			<fileset dir="${testresults.directory}">
-				<filename name="**/*" />
+		<echo>Unzipping javadoc</echo>
+		<unzip dest="${javadoc.directory}">
+			<fileset dir="${javadoc.directory}">
+				<filename name="javadoc.zip" />
 			</fileset>
-		</copy>
+		</unzip>
 
 		<fileset id="drop.resources" dir="${build.drop.directory}">
 			<or>

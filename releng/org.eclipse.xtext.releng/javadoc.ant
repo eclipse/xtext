@@ -26,11 +26,19 @@
 		<delete dir="${output}" />
 		<mkdir dir="${output}" />
 
-		<javadoc destdir="${output}" Encoding="ISO-8859-1" classpathref="javadoc-classpath" maxmemory="1024m" source="1.5" useexternalfile="true" author="true" version="true" use="true" windowtitle="${projectName} Documentation">
+		<javadoc destdir="${output}" Encoding="ISO-8859-1" classpathref="javadoc-classpath" maxmemory="1024m" source="1.5" useexternalfile="true" author="true" version="true" use="true" Verbose="no" windowtitle="${projectName} Documentation">
 			<fileset dir="${sourcesLocation}" defaultexcludes="true">
 				<include name="**/*.java" />
 				<exclude name="**/test/**" />
 			</fileset>
+
+			<tag name="generated" description="Generated" />
+			<tag name="model" description="Model" />
+			<tag name="ordered" description="Ordered" />
 		</javadoc>
+		<!-- Compress the output javadoc in a zip file -->
+		<zip destfile="${output}/javadoc.zip" basedir="${output}">
+			<exclude name="*.zip" />
+		</zip>
 	</target>
 </project>
