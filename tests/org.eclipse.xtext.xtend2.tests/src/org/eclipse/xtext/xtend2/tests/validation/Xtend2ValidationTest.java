@@ -100,4 +100,8 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 				"not", "visible");
 	}
 
+	public void testDuplicateParameter() throws Exception {
+		XtendFunction function = function("foo(int x, int x) {null}");
+		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, DUPLICATE_PARAMETER_NAME, "duplicate", "name");
+	}
 }
