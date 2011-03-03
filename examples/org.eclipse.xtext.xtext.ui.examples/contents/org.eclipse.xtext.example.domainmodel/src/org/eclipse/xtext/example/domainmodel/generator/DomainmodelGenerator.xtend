@@ -21,10 +21,10 @@ class DomainmodelGenerator implements IGenerator {
 	
 	void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		// TODO: use filter
-		for(element: resource.allContentsIterable())
+		for(element: resource.allContentsIterable)
 			if(element instanceof Entity) {
 				val entity = element as Entity				
-				fsa.generateFile(entity.fileName(), entity.compile())
+				fsa.generateFile(entity.fileName, entity.compile)
 			}
 	}
 	
@@ -32,7 +32,7 @@ class DomainmodelGenerator implements IGenerator {
 		val importManager = new ImportManager(true);
 		val body = body(e, importManager);
 		'''
-		package «e.packageName()»;
+		package «e.packageName»;
 		
 		«FOR i:importManager.imports»
 		import «i»;
@@ -66,11 +66,11 @@ class DomainmodelGenerator implements IGenerator {
 		'''
 		private «p.type.shortName(importManager)» «p.name»;
 			
-		public «p.type.shortName(importManager)» get«p.name.toFirstUpper()»() {
+		public «p.type.shortName(importManager)» get«p.name.toFirstUpper»() {
 			return «p.name»;
 		}
 		
-		public void set«p.name.toFirstUpper()»(«p.type.shortName(importManager)» «p.name») {
+		public void set«p.name.toFirstUpper»(«p.type.shortName(importManager)» «p.name») {
 			this.«p.name» = «p.name»;
 		}
 		'''
