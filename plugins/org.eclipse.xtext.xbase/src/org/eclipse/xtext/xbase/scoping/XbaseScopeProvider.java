@@ -280,6 +280,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		IEObjectDescription thisVariable = localVariableScope.getSingleElement(THIS);
 		if (thisVariable != null) {
 			EObject implicitReceiver = thisVariable.getEObjectOrProxy();
+			// TODO 'this' should not have to inherit from JvmIdentifiable
 			JvmTypeReference implicitReceiverType = typeProvider.getTypeForIdentifiable((JvmIdentifiableElement) implicitReceiver);
 			if (implicitReceiverType != null && implicitReceiver instanceof JvmIdentifiableElement) {
 				featureScopeForThis = createFeatureScopeForTypeRef(
@@ -412,10 +413,15 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		final StaticMethodsFeatureForTypeProvider staticProvider = newImplicitStaticFeaturesProvider();
 		staticProvider.setContext(context);
 
-		final DefaultJvmFeatureDescriptionProvider result = newDefaultFeatureDescProvider();
-		result.setContextType(contextType);
-		result.setFeaturesForTypeProvider(staticProvider);
-		return Lists.<IJvmFeatureDescriptionProvider>newArrayList(result);
+		final DefaultJvmFeatureDescriptionProvider provider1 = newDefaultFeatureDescProvider();
+		final XFeatureCallSugarDescriptionProvider provider2 = newSugarDescriptionProvider();
+		
+		provider1.setContextType(contextType);
+		provider1.setFeaturesForTypeProvider(staticProvider);
+		provider2.setContextType(contextType);
+		provider2.setFeaturesForTypeProvider(staticProvider);
+		
+		return Lists.<IJvmFeatureDescriptionProvider>newArrayList(provider1, provider2);
 	}
 
 	protected List<IJvmFeatureDescriptionProvider> getFeatureDescriptionProviders(JvmTypeReference type,

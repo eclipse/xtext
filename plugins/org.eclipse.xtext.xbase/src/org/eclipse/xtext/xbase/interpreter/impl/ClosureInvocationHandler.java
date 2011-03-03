@@ -16,7 +16,6 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
-import org.eclipse.xtext.xbase.lib.Functions.FunctionX;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -42,11 +41,7 @@ public class ClosureInvocationHandler extends AbstractClosureInvocationHandler {
 	protected Object doInvoke(Method method, Object[] args) throws Throwable {
 		IEvaluationContext forkedContext = context.fork();
 		if (args != null) {
-			if (!FunctionX.class.equals(method.getDeclaringClass())) {
-				initializeClosureParameters(forkedContext, args);
-			} else {
-				initializeClosureParameters(forkedContext, (Object[])args[0]);
-			}
+			initializeClosureParameters(forkedContext, args);
 		}
 		IEvaluationResult result = interpreter.evaluate(closure.getExpression(), forkedContext, indicator);
 		return result.getResult();

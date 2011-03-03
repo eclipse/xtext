@@ -11,8 +11,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.UndeclaredThrowableException;
 
-import org.eclipse.xtext.xbase.lib.Functions;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -38,9 +36,7 @@ public class DelegatingInvocationHandler extends AbstractClosureInvocationHandle
 	@Override
 	protected Object doInvoke(Method method, Object[] args) throws Throwable {
 		try {
-			if (!Functions.FunctionX.class.equals(method.getDeclaringClass()))
-				return this.method.invoke(receiver, args);
-			return this.method.invoke(receiver, new Object[] { args });
+			return this.method.invoke(receiver, args);
 		} catch (InvocationTargetException e) {
 			throw e.getTargetException();
 		} catch (Exception e) {

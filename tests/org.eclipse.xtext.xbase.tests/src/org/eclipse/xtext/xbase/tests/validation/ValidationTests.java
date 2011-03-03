@@ -149,11 +149,11 @@ public class ValidationTests extends AbstractXbaseTestCase {
 				"class");
 	}
 
-	public void testCast_0() throws Exception {
-		XExpression expression = expression("'foo' as String");
-		helper.assertWarning(expression, XCASTED_EXPRESSION, OBSOLETE_CAST, "cast", "obsolete");
-		helper.assertNoError(expression, INVALID_CAST);
-	}
+//	public void testCast_0() throws Exception {
+//		XExpression expression = expression("'foo' as String");
+//		helper.assertWarning(expression, XCASTED_EXPRESSION, OBSOLETE_CAST, "cast", "obsolete");
+//		helper.assertNoError(expression, INVALID_CAST);
+//	}
 
 	public void testCast_1() throws Exception {
 		XExpression expression = expression("'foo' as Cloneable");

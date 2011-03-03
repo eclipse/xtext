@@ -27,6 +27,7 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
@@ -50,6 +51,9 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	
 	@Inject 
 	private TypeReferences typeReferences;
+	
+	@Inject
+	private TypeArgumentContextProvider typeArgumentContextProvider;
 	
 	// this class if final because of the assumptions that are made in
 	// equals and hashcode
@@ -341,6 +345,10 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	
 	protected TypeReferences getTypeReferences() {
 		return typeReferences;
+	}
+	
+	protected TypeArgumentContextProvider getTypeArgumentContextProvider() {
+		return typeArgumentContextProvider;
 	}
 
 	protected static class ComputationData<T extends EObject> {
