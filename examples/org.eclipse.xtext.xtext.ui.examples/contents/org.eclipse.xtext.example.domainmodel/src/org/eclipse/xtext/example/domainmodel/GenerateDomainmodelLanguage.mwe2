@@ -90,6 +90,9 @@ Workflow {
 			// Xbase support
 			fragment = types.TypesGeneratorFragment {}
 			fragment = xbase.XbaseGeneratorFragment {}
+			
+			// Code generator
+			fragment = generator.GeneratorFragment {}
 		}
 	}
 }
