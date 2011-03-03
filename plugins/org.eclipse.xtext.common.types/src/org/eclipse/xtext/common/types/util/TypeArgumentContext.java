@@ -202,12 +202,23 @@ public class TypeArgumentContext {
 										return resolveTypeParameters(resolvedCopy);
 									} else {
 										for(JvmParameterizedTypeReference replaceMe: referencesToBeReplaced) {
-											JvmConstraintOwner constraintOwner = (JvmConstraintOwner) replaceMe.getType();
-											JvmWildcardTypeReference wildCard = typeReferences.wildCard();
-											for(JvmTypeConstraint constraint: constraintOwner.getConstraints()) {
-												wildCard.getConstraints().add(EcoreUtil2.clone(constraint));
+											if (replaceMe.eContainer() instanceof JvmTypeConstraint) {
+												JvmTypeConstraint containerConstraint = (JvmTypeConstraint) replaceMe.eContainer();
+												JvmConstraintOwner constraintOwner = (JvmConstraintOwner) replaceMe.getType();
+												for(JvmTypeConstraint constraint: constraintOwner.getConstraints()) {
+													if (constraint.eClass() == containerConstraint.eClass()) {
+														containerConstraint.setTypeReference(EcoreUtil2.clone(constraint.getTypeReference()));
+														break;
+													}
+												}
+											} else {
+												JvmConstraintOwner constraintOwner = (JvmConstraintOwner) replaceMe.getType();
+												JvmWildcardTypeReference wildCard = typeReferences.wildCard();
+												for(JvmTypeConstraint constraint: constraintOwner.getConstraints()) {
+													wildCard.getConstraints().add(EcoreUtil2.clone(constraint));
+												}
+												EcoreUtil.replace(replaceMe, wildCard);
 											}
-											EcoreUtil.replace(replaceMe, wildCard);
 										}
 										JvmTypeReference resolvedCopy = doGetResolvedCopy(resolved, resolving, unresolved);
 										return resolveTypeParameters(resolvedCopy);

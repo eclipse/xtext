@@ -350,6 +350,10 @@ public class TypeConformanceComputer {
 					if (_isConformant((JvmTypeParameter) typeA, (JvmTypeParameter) typeB, (JvmParameterizedTypeReference)refA, (JvmParameterizedTypeReference)refB, false)) {
 						return areArgumentsAssignableFrom((JvmParameterizedTypeReference)refA, (JvmParameterizedTypeReference)refB);
 					}
+				} else if (typeA instanceof JvmTypeParameter) {
+					if (_isConformant((JvmTypeParameter)typeA, typeB, (JvmParameterizedTypeReference)refA, (JvmParameterizedTypeReference)refB, false)) {
+						return areArgumentsAssignableFrom((JvmParameterizedTypeReference)refA, (JvmParameterizedTypeReference)refB);
+					}
 				}
 			}
 		} else if (lowerA != null) {
