@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtend2.validation;
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
+import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
 import static org.eclipse.xtext.xtend2.validation.IssueCodes.*;
 
@@ -51,6 +52,7 @@ import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
@@ -176,16 +178,15 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 					}
 				}
 			} else {
-				if(operation.isAbstract() && !inferredType.isAbstract()) {
-					error("The class " + canonicalName(inferredType) +
-							" must be defined abstract because it does not implement " + 
-							canonicalName(operation), xtendClass, 
-							Xtend2Package.Literals.XTEND_CLASS__NAME, CLASS_MUST_BE_ABSTRACT);
+				if (operation.isAbstract() && !inferredType.isAbstract()) {
+					error("The class " + canonicalName(inferredType)
+							+ " must be defined abstract because it does not implement " + canonicalName(operation),
+							xtendClass, Xtend2Package.Literals.XTEND_CLASS__NAME, CLASS_MUST_BE_ABSTRACT);
 				}
 			}
 		}
 	}
-	
+
 	@Check
 	protected void checkFunctionOverride(XtendFunction function) {
 		TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(typeRefs
@@ -195,10 +196,8 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 		if (function.getDeclaringType().getExtends() != null) {
 			JvmTypeReference returnType = typeProvider.getTypeForIdentifiable(inferredJvmOperation);
 			JvmTypeReference returnTypeUpperBound = typeArgumentContext.getUpperBound(returnType, function);
-			for (JvmFeature superFeature : featureOverridesService.getAllJvmFeatures(function.getDeclaringType()
-					.getExtends())) {
-				if (superFeature.getVisibility() != JvmVisibility.PRIVATE && superFeature instanceof JvmOperation) {
-					JvmOperation superOperation = (JvmOperation) superFeature;
+			for (JvmOperation superOperation : allSuperOperations(function.getDeclaringType())) {
+				if (superOperation.getVisibility() != JvmVisibility.PRIVATE ) {
 					if (featureOverridesService.isOverridden(inferredJvmOperation, superOperation, typeArgumentContext,
 							false)) {
 						overriddenOperationFound = true;
@@ -221,6 +220,17 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 			error("Function does not override any function", function, Xtend2Package.Literals.XTEND_FUNCTION__OVERRIDE,
 					OBSOLETE_OVERRIDE);
 		}
+	}
+
+	protected Iterable<JvmOperation> allSuperOperations(final XtendClass xtendClass) {
+		// I love Google collections
+		Iterable<JvmOperation> result = filter(concat(transform(concat(singleton(xtendClass.getExtends()), 
+				xtendClass.getImplements()), new Function<JvmTypeReference, Iterable<JvmFeature>>() {
+			public Iterable<JvmFeature> apply(JvmTypeReference from) {
+				return featureOverridesService.getAllJvmFeatures(from);
+			}
+		})), JvmOperation.class);
+		return result;
 	}
 
 	protected String canonicalName(JvmIdentifiableElement element) {

@@ -7,42 +7,9 @@
  *******************************************************************************/
 package test;
 
-import java.util.List;
-
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class SuperClass {
-
-	public String string() {
-		return null;
-	}
-
-	public String string(String s) {
-		return null;
-	}
-
-	public Object object() {
-		return null;
-	}
-
-	public Object object(Object o) {
-		return null;
-	}
-
-	@SuppressWarnings("unused")
-	private String privateMethod() {
-		return null;
-	}
-
-	public List<String> returnsListString() {
-		return null;
-	}
-
-	public List<? extends Object> returnsListExtendsObject() {
-		return null;
-	}
-
-	public void voidFunction() {
-	}
+public interface SomeInterface {
+	boolean foo();
 }
