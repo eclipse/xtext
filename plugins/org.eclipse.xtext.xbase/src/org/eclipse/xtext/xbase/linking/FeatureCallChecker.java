@@ -140,14 +140,14 @@ public class FeatureCallChecker {
 
 	protected String _case(JvmOperation input, XBinaryOperation context, EReference ref,
 			JvmFeatureDescription jvmFeatureDescription) {
-		final int callTypeDelta = getCallTypeDelta(jvmFeatureDescription);
-		if (input.getParameters().size() != (1 + callTypeDelta))
+		final int irrelevantArguments = jvmFeatureDescription.getNumberOfIrrelevantArguments();
+		if (input.getParameters().size()-irrelevantArguments != 1)
 			return INVALID_NUMBER_OF_ARGUMENTS;
 		if (context.getRightOperand() != null && context.getLeftOperand() != null) {
 			JvmTypeReference rightOperandType = getTypeProvider().getType(context.getRightOperand(), true);
 			if (rightOperandType == null)
 				return INVALID_ARGUMENT_TYPES;
-			final JvmFormalParameter rightParam = input.getParameters().get(0 + callTypeDelta);
+			final JvmFormalParameter rightParam = input.getParameters().get(0 + irrelevantArguments);
 			if (!conformance.isConformant(rightParam.getParameterType(), rightOperandType, true))
 				return INVALID_ARGUMENT_TYPES;
 		}
@@ -156,12 +156,12 @@ public class FeatureCallChecker {
 
 	protected String _case(JvmOperation input, XAssignment context, EReference ref,
 			JvmFeatureDescription jvmFeatureDescription) {
-		final int callTypeDelta = getCallTypeDelta(jvmFeatureDescription);
-		if (input.getParameters().size() != (1 + callTypeDelta))
+		final int irrelevantArguments = jvmFeatureDescription.getNumberOfIrrelevantArguments();
+		if (input.getParameters().size() != (1 + irrelevantArguments))
 			return INVALID_NUMBER_OF_ARGUMENTS;
 		if (context.getValue() != null) {
 			JvmTypeReference type = getTypeProvider().getType(context.getValue(), true);
-			final JvmFormalParameter valueParam = input.getParameters().get(0 + callTypeDelta);
+			final JvmFormalParameter valueParam = input.getParameters().get(0 + irrelevantArguments);
 			if (!isCompatibleArgument(valueParam.getParameterType(), type))
 				return INVALID_ARGUMENT_TYPES;
 		}
@@ -199,7 +199,7 @@ public class FeatureCallChecker {
 
 	protected String _case(JvmOperation input, XMemberFeatureCall context, EReference ref,
 			JvmFeatureDescription jvmFeatureDescription) {
-		if (input.isStatic() && !jvmFeatureDescription.isMemberSyntaxContext()
+		if (input.isStatic()
 				&& input.getParameters().size() == context.getMemberCallArguments().size()) {
 			return INSTANCE_ACCESS_TO_STATIC_MEMBER;
 		} else {
@@ -310,10 +310,6 @@ public class FeatureCallChecker {
 			return false;
 		}
 		return conformance.isConformant(declaredType, actualType, true);
-	}
-
-	protected int getCallTypeDelta(JvmFeatureDescription jvmFeatureDescription) {
-		return jvmFeatureDescription.isMemberSyntaxContext() ? 0 : 1;
 	}
 
 }

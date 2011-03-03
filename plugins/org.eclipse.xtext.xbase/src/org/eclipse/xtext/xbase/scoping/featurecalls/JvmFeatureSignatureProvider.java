@@ -24,10 +24,12 @@ public class JvmFeatureSignatureProvider {
 	
 	protected static class Switch extends TypesSwitch<String> {
 		
-		private TypeArgumentContext context;
+		private int numberOfIrrelevantArguments;
+		private TypeArgumentContext ctx;
 		
-		public Switch(TypeArgumentContext context) {
-			this.context = context;
+		public Switch(TypeArgumentContext ctx, int numberOfIrrelevantArguments) {
+			this.numberOfIrrelevantArguments = numberOfIrrelevantArguments;
+			this.ctx = ctx; 
 		}
 		
 		@Override
@@ -41,8 +43,10 @@ public class JvmFeatureSignatureProvider {
 			builder.append(object.getSimpleName());
 			builder.append("(");
 			Iterator<JvmFormalParameter> params = object.getParameters().iterator();
+			for (int i=0;i<numberOfIrrelevantArguments && params.hasNext();i++)
+				params.next(); // skip irrelevantArguments
 			while (params.hasNext()){
-				JvmTypeReference resolvedParameterType = context.getLowerBound(params.next().getParameterType());
+				JvmTypeReference resolvedParameterType = ctx.getLowerBound(params.next().getParameterType());
 				if (resolvedParameterType != null)
 					builder.append(resolvedParameterType.getIdentifier());
 				else
@@ -55,12 +59,12 @@ public class JvmFeatureSignatureProvider {
 		}
 	}
 	
-	public String getSignature(JvmFeature from, TypeArgumentContext context) {
-		return createSwitch(context).doSwitch(from);
+	public String getSignature(JvmFeature from, TypeArgumentContext ctx, int numberOfIrrelevantArguments) {
+		return createSwitch(ctx, numberOfIrrelevantArguments).doSwitch(from);
 	}
 	
-	protected Switch createSwitch(TypeArgumentContext context) {
-		return new Switch(context);
+	protected Switch createSwitch(TypeArgumentContext context, int numberOfIrrelevantArguments) {
+		return new Switch(context, numberOfIrrelevantArguments);
 	}
 
 }

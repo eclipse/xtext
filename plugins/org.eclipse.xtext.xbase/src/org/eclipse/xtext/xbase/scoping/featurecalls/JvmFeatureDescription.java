@@ -28,18 +28,18 @@ public class JvmFeatureDescription extends EObjectDescription {
 	private final String shadowingString;
 	private final boolean isValid;
 	private XFeatureCall implicitReceiver;
-	private boolean isMemberSyntaxContext = true;
+	private int numberOfIrrelevantArguments = 0;
 	private String issueCode;
 
 	public JvmFeatureDescription(QualifiedName qualifiedName, JvmFeature element, TypeArgumentContext context,
 			String shadowingString, boolean isValid, JvmIdentifiableElement implicitReceiver,
-			boolean isMemberSyntaxContext) {
+			int numberOfIrrelevantArguments) {
 		super(qualifiedName, element, Collections.<String, String> emptyMap());
 		this.context = context;
 		this.shadowingString = shadowingString;
 		this.isValid = isValid;
 		this.setImplicitReceiver(implicitReceiver);
-		this.isMemberSyntaxContext = isMemberSyntaxContext;
+		this.numberOfIrrelevantArguments = numberOfIrrelevantArguments;
 	}
 
 	public JvmFeature getJvmFeature() {
@@ -77,8 +77,8 @@ public class JvmFeatureDescription extends EObjectDescription {
 		return implicitReceiver;
 	}
 
-	public boolean isMemberSyntaxContext() {
-		return isMemberSyntaxContext;
+	public int getNumberOfIrrelevantArguments() {
+		return numberOfIrrelevantArguments;
 	}
 
 	public void setIssueCode(String issueCode) {

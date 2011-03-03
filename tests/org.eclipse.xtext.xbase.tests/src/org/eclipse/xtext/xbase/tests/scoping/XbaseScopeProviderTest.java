@@ -13,6 +13,7 @@ import static com.google.common.collect.Lists.*;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XExpression;
@@ -49,5 +50,13 @@ public class XbaseScopeProviderTest extends AbstractXbaseTestCase {
 		} catch (NoSuchElementException e) {
 			//expected
 		}
+	}
+	
+	public void testOverriddenExtensionMethods() throws Exception {
+		XbaseScopeProvider provider = get(XbaseScopeProvider.class);
+		XExpression expression = expression("(null as java.util.List<String>).map(null)", true);
+		IScope scope = provider.getScope(expression, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+		Iterable<IEObjectDescription> elements = scope.getElements(QualifiedName.create("map"));
+		assertEquals(elements.toString(), 1, size(elements));
 	}
 }

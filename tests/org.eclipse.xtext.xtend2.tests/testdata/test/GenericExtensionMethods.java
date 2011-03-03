@@ -5,23 +5,29 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.scoping.featurecalls;
+package test;
 
-import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmTypeReference;
+import static com.google.common.collect.Lists.*;
 
-import com.google.inject.ImplementedBy;
+import java.util.List;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@ImplementedBy(DefaultFeaturesForTypeProvider.class)
-public interface IFeaturesForTypeProvider {
+public class GenericExtensionMethods<A extends CharSequence,B> {
 	
-	/**
-	 * provides the features for a given type
-	 */
-	Iterable<? extends JvmFeature> getFeaturesForType(JvmTypeReference type);
+	private List<String> result = newArrayList();
 	
-	boolean isExtensionProvider();
+	public void method(A b) {
+		result.add("method(A)");
+	}
+	
+	public void method(B b) {
+		result.add("method(B)");
+	}
+	
+	public List<String> getResult() {
+		return result;
+	}
+	
 }
