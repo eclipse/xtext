@@ -17,8 +17,11 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.DefaultGeneratorFragment;
+import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 
@@ -57,10 +60,22 @@ public class XbaseGeneratorFragment extends DefaultGeneratorFragment {
 								+ ".class).annotatedWith(Names.named("
 								+ AbstractDeclarativeScopeProvider.class.getName()
 								+ ".NAMED_DELEGATE)).to(org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider.class)")
+		
+				.addTypeToType(ILocationInFileProvider.class.getName(),
+						"org.eclipse.xtext.xbase.linking.jvm.JvmLocationInFileProvider")
+				.addTypeToType(EObjectAtOffsetHelper.class.getName(),
+						"org.eclipse.xtext.xbase.linking.jvm.JvmEObjectAtOffsetHelper")
+				.addTypeToType(ILinker.class.getName(),
+						"org.eclipse.xtext.xbase.linking.jvm.JvmModelXbaseLazyLinker")
+				.addTypeToType("org.eclipse.xtext.xbase.linking.jvm.IJvmModelAssociations",
+						"org.eclipse.xtext.xbase.linking.jvm.JvmModelAssociator")
+				.addTypeToType("org.eclipse.xtext.xbase.linking.jvm.IJvmModelAssociator",
+						"org.eclipse.xtext.xbase.linking.jvm.JvmModelAssociator")
 								
 				// obsolete convenience bindings
 				.addTypeToType("org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider",
-						"org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider").getBindings();
+						"org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider")
+				.getBindings();
 	}
 
 	protected boolean usesXbaseGrammar(Grammar grammar) {
