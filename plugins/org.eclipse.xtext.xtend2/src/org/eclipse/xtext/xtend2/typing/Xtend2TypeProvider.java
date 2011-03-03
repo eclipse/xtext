@@ -7,16 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.typing;
 
+import java.util.Set;
+
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmConstraintOwner;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -34,6 +40,8 @@ import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -121,8 +129,44 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 		if (declaredOrInferredReturnType != null)
 			return declaredOrInferredReturnType;
 		JvmTypeReference returnType = getCommonReturnType(func.getExpression(), true);
-		if (returnType!=null)
+		if (returnType!=null) {
+			JvmOperation operation = xtend2jvmAssociations.getDirectlyInferredOperation(func);
+			JvmDeclaredType type = operation.getDeclaringType();
+			for(JvmTypeReference reference: Iterables.filter(EcoreUtil2.eAllContents(returnType), JvmTypeReference.class)) {
+				if (reference.getType() instanceof JvmTypeParameter) {
+					JvmTypeParameter parameter = (JvmTypeParameter) reference.getType();
+					if (!EcoreUtil.isAncestor(type, parameter)) {
+						returnType = EcoreUtil2.cloneIfContained(returnType);
+						Set<JvmTypeReference> replaceUs = Sets.newHashSet();
+						for(JvmTypeReference containerOfReplaced: Iterables.filter(EcoreUtil2.eAllContents(returnType), JvmTypeReference.class)) {
+							if (containerOfReplaced.getType() instanceof JvmTypeParameter)
+								replaceUs.add(containerOfReplaced);
+						}
+						for(JvmTypeReference replaceMe: replaceUs) {
+							if (replaceMe.eContainer() instanceof JvmTypeConstraint) {
+								JvmTypeConstraint containerConstraint = (JvmTypeConstraint) replaceMe.eContainer();
+								JvmConstraintOwner constraintOwner = (JvmConstraintOwner) replaceMe.getType();
+								for(JvmTypeConstraint constraint: constraintOwner.getConstraints()) {
+									if (constraint.eClass() == containerConstraint.eClass()) {
+										containerConstraint.setTypeReference(EcoreUtil2.clone(constraint.getTypeReference()));
+										break;
+									}
+								}
+							} else {
+								JvmConstraintOwner constraintOwner = (JvmConstraintOwner) replaceMe.getType();
+								JvmWildcardTypeReference wildCard = getTypeReferences().wildCard();
+								for(JvmTypeConstraint constraint: constraintOwner.getConstraints()) {
+									wildCard.getConstraints().add(EcoreUtil2.clone(constraint));
+								}
+								EcoreUtil.replace(replaceMe, wildCard);
+							}
+						}
+						return returnType;
+					}
+				}
+			}
 			return returnType;
+		}
 		return getTypeReferences().getTypeForName(Object.class, func);
 	}
 	
@@ -158,8 +202,4 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 		return (xtendClass != null) ? _typeForIdentifiable(xtendClass, rawType) : null;
 	}
 	
-	protected JvmTypeReference _typeForIdentifiable(JvmType type, boolean rawType) {
-		return getTypeReferences().createTypeRef(type);
-	}
-
 }

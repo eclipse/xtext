@@ -69,7 +69,7 @@ public class Primitives {
 	}
 	
 	public JvmTypeReference asWrapperTypeIfPrimitive(JvmTypeReference primitive) {
-		if (!isPrimitive(primitive)) {
+		if (primitive == null || !isPrimitive(primitive)) {
 			return primitive;
 		}
 		return typeReferences.createTypeRef(getWrapperType((JvmPrimitiveType) primitive.getType()));

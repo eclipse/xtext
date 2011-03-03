@@ -257,7 +257,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 				functionIntf = Functions.Function6.class;
 				break;
 			default:
-				functionIntf = Functions.FunctionX.class;
+				throw new IllegalStateException("Closures with more then 6 parameters are not supported.");
 		}
 		ClosureInvocationHandler invocationHandler = new ClosureInvocationHandler(closure, context, this, indicator);
 		Object proxy = Proxy.newProxyInstance(classLoader, new Class<?>[] { functionIntf }, invocationHandler);
@@ -326,6 +326,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	protected Object _evaluateCastedExpression(XCastedExpression castedExpression, IEvaluationContext context, CancelIndicator indicator) {
 		Object result = internalEvaluate(castedExpression.getTarget(), context, indicator);
 		result = wrapArray(result, castedExpression.getType());
+		result = coerceArgumentType(result, castedExpression.getType());
 		String typeName = castedExpression.getType().getType().getQualifiedName();
 		Class<?> expectedType = null;
 		try {
@@ -654,8 +655,8 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 						invocationHandler = new DelegatingInvocationHandler(value, Functions.Function5.class);
 					} else if (Functions.Function6.class.isInstance(value)) {
 						invocationHandler = new DelegatingInvocationHandler(value, Functions.Function6.class);
-					} else if (Functions.FunctionX.class.isInstance(value)) {
-						invocationHandler = new DelegatingInvocationHandler(value, Functions.FunctionX.class);
+					} else {
+						return value;
 					}
 					Object proxy = Proxy.newProxyInstance(classLoader, new Class<?>[] { functionIntf },
 							invocationHandler);

@@ -55,10 +55,4 @@ public interface Functions {
 
 	}
 
-	interface FunctionX<Result> {
-
-		Result apply(Object... arguments);
-
-	}
-
 }

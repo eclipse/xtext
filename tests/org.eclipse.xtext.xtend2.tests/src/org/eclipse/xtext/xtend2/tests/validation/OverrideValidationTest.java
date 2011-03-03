@@ -113,9 +113,9 @@ public class OverrideValidationTest extends AbstractXtend2TestCase {
 	
 	public void testOverrideWithTypeParameter() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends test.GenericClass { override java.util.List<String> foo() {newArrayList} }");
-		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE);
+		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_RETURN_TYPE);
 	}
-
+	
 	public void testOverrideWithTypeParameter_1() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends test.GenericClass<String> { override java.util.List<String> foo() {newArrayList} }");
 		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_RETURN_TYPE);
@@ -126,4 +126,8 @@ public class OverrideValidationTest extends AbstractXtend2TestCase {
 		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_RETURN_TYPE);
 	}
 
+	public void testClassMustBeAbstract() throws Exception {
+		XtendClass xtendClass = clazz("class Foo<S> implements Comparable<S> { }");
+		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT, "abstract", "not", "implement");
+	}
 }

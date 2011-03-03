@@ -36,4 +36,5 @@ public final class IssueCodes {
 
 	public static final String XBASE_LIB_NOT_ON_CLASSPATH = ISSUE_CODE_PREFIX+"xbase_lib_not_on_classpath";
 
+	public static final String CLASS_MUST_BE_ABSTRACT = ISSUE_CODE_PREFIX + "class_must_be_defined_abstract";
 }

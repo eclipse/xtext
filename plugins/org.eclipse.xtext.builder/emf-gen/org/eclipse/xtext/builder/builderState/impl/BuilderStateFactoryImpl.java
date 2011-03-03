@@ -23,8 +23,6 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.util.Strings;
 
-import com.google.common.collect.Iterables;
-
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Factory</b>.
@@ -208,7 +206,12 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	 * @generated NOT
 	 */
 	public String convertQualifiedNameToString(EDataType eDataType, Object instanceValue) {
-		return Strings.pack(Iterables.toArray(((QualifiedName) instanceValue).getSegments(), String.class)); 
+		QualifiedName qn = (QualifiedName) instanceValue;
+		String[] array = qn.getSegments().toArray(new String[qn.getSegmentCount()]);
+		String packed = Strings.pack(array);
+		if (packed == null)
+			return "";
+		return packed; 
 	}
 
 	/**

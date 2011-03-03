@@ -9,12 +9,14 @@ package org.eclipse.xtext.xbase.compiler;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -99,17 +101,18 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			if (arg instanceof XAbstractFeatureCall && isLocalVarReference((XAbstractFeatureCall) arg)) {
 				JvmTypeReference expectedType = getTypeProvider().getExpectedType(arg);
 				JvmTypeReference type = getTypeProvider().getType(arg);
+				//TODO use JvmConformanceComputer (i.e. without Xbase conformance)
 				if (expectedType!=null && !EcoreUtil.equals(expectedType, type)) {
 					String varName = getVarName(((XAbstractFeatureCall) arg).getFeature(), b);
-					String finalVariable = b.declareVariable(Tuples.create("Convertable", arg), "final_" + varName);
+					String finalVariable = b.declareVariable(Tuples.create("Convertable", arg), "typeConverted_" + varName);
 					b.append("\n")
 						.append("final ");
-					serialize(type,expr,b,true,true);
+					serialize(type,expr,b,false,true);
 					b.append(" ")
 						.append(finalVariable)
 						.append(" = ")
 						.append("(");
-					serialize(type,expr,b,true,true);
+					serialize(type,expr,b,false,true);
 					b.append(")")
 						.append(makeJavaIdentifier(varName))
 						.append(";");
@@ -223,6 +226,16 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			appendArguments(arguments, b);
 			b.append(")");
 		}
+	}
+
+	protected JvmTypeReference getUpperBound(XAbstractFeatureCall call, final EList<JvmTypeConstraint> constraints) {
+		JvmTypeReference typeArg;
+		if (constraints.isEmpty()) {
+			typeArg = getTypeReferences().getTypeForName(Object.class, call);
+		} else {
+			typeArg = constraints.get(0).getTypeReference();
+		}
+		return typeArg;
 	}
 
 	protected void appendArguments(List<? extends XExpression> eList, IAppendable b) {

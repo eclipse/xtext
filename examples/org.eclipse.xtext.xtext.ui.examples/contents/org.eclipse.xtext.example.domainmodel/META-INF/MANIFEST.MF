@@ -22,7 +22,6 @@ Require-Bundle: org.apache.log4j;bundle-version="1.2.15",
  org.eclipse.xtext.xtend2.lib;bundle-version="2.0.0"
 Export-Package: org.eclipse.xtext.example.domainmodel,
  org.eclipse.xtext.example.domainmodel.domainmodel,
- org.eclipse.xtext.example.domainmodel.compiler,
  org.eclipse.xtext.example.domainmodel.domainmodel.impl,
  org.eclipse.xtext.example.domainmodel.domainmodel.util,
  org.eclipse.xtext.example.domainmodel.formatting,
@@ -34,4 +33,7 @@ Export-Package: org.eclipse.xtext.example.domainmodel,
  org.eclipse.xtext.example.domainmodel.validation,
  org.eclipse.xtext.example.domainmodel.valueconverter
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Import-Package: org.apache.log4j
+Import-Package: org.apache.commons.logging;version="1.0.4",
+ org.apache.log4j,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtext.xtend2.lib
