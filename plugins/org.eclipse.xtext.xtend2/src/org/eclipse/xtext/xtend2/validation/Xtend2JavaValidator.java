@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.validation;
 
+import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
 import static org.eclipse.xtext.util.Strings.*;
@@ -158,23 +159,33 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 		typeReference.setType(inferredType);
 		TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(typeReference);
 		Set<JvmOperation> checked = newHashSet();
-		for (JvmOperation operation : inferredType.getDeclaredOperations()) {
-			checked.add(operation);
-			for (JvmOperation operation2 : inferredType.getDeclaredOperations()) {
-				if (!checked.contains(operation2)) {
-					if (featureOverridesService.isOverridden(operation, operation2, typeArgumentContext, false)) {
-						XtendFunction func1 = xtend2jvmAssociations.getXtendFunction(operation);
-						XtendFunction func2 = xtend2jvmAssociations.getXtendFunction(operation2);
-						error("Duplicate method " + canonicalName(func1), func1,
-								Xtend2Package.Literals.XTEND_MEMBER__NAME, DUPLICATE_METHOD);
-						error("Duplicate method " + canonicalName(func2), func2,
-								Xtend2Package.Literals.XTEND_MEMBER__NAME, DUPLICATE_METHOD);
+		for (JvmOperation operation : filter(
+				featureOverridesService.getAllJvmFeatures(inferredType, typeArgumentContext), JvmOperation.class)) {
+			if (operation.getDeclaringType() == inferredType) {
+				checked.add(operation);
+				for (JvmOperation operation2 : inferredType.getDeclaredOperations()) {
+					if (!checked.contains(operation2)) {
+						if (featureOverridesService.isOverridden(operation, operation2, typeArgumentContext, false)) {
+							XtendFunction func1 = xtend2jvmAssociations.getXtendFunction(operation);
+							XtendFunction func2 = xtend2jvmAssociations.getXtendFunction(operation2);
+							error("Duplicate method " + canonicalName(func1), func1,
+									Xtend2Package.Literals.XTEND_MEMBER__NAME, DUPLICATE_METHOD);
+							error("Duplicate method " + canonicalName(func2), func2,
+									Xtend2Package.Literals.XTEND_MEMBER__NAME, DUPLICATE_METHOD);
+						}
 					}
+				}
+			} else {
+				if(operation.isAbstract() && !inferredType.isAbstract()) {
+					error("The class " + canonicalName(inferredType) +
+							" must be defined abstract because it does not implement " + 
+							canonicalName(operation), xtendClass, 
+							Xtend2Package.Literals.XTEND_CLASS__NAME, CLASS_MUST_BE_ABSTRACT);
 				}
 			}
 		}
 	}
-
+	
 	@Check
 	protected void checkFunctionOverride(XtendFunction function) {
 		TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(typeRefs
