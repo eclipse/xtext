@@ -126,4 +126,8 @@ public class OverrideValidationTest extends AbstractXtend2TestCase {
 		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_RETURN_TYPE);
 	}
 
+	public void testClassMustBeAbstract() throws Exception {
+		XtendClass xtendClass = clazz("class Foo<S> implements Comparable<S> { }");
+		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT, "abstract", "not", "implement");
+	}
 }
