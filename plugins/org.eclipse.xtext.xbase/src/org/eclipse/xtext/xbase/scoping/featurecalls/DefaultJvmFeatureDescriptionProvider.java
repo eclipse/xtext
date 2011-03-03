@@ -11,10 +11,9 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.IAcceptor;
 
@@ -59,11 +58,17 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 	
 	protected JvmFeatureDescription createJvmFeatureDescription(QualifiedName name, JvmFeature jvmFeature,
 			TypeArgumentContext ctx, String shadowingString, boolean isValid) {
-		return new JvmFeatureDescription(name, jvmFeature, ctx, shadowingString, isValid, implicitReceiver, isMemberFeatureContext(jvmFeature));
+		return new JvmFeatureDescription(name, jvmFeature, ctx, shadowingString, isValid, implicitReceiver, getNumberOfIrrelevantArguments());
+	}
+	
+	private int getNumberOfIrrelevantArguments() {
+		if (isExtensionProvider())
+			return 1;
+		return 0;
 	}
 
-	protected boolean isMemberFeatureContext(JvmFeature jvmFeature) {
-		return !(jvmFeature instanceof JvmOperation && ((JvmOperation)jvmFeature).isStatic());
+	public boolean isExtensionProvider() {
+		return featuresForTypeProvider!=null?featuresForTypeProvider.isExtensionProvider():false;
 	}
 
 	protected JvmFeatureDescription createJvmFeatureDescription(JvmFeature jvmFeature, TypeArgumentContext ctx,
@@ -78,7 +83,7 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 	}
 
 	protected String getSignature(JvmFeature feature, TypeArgumentContext context) {
-		return signatureProvider.getSignature(feature, context);
+		return signatureProvider.getSignature(feature, context, getNumberOfIrrelevantArguments());
 	}
 
 	protected boolean isValid(JvmFeature feature) {

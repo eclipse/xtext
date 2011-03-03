@@ -83,5 +83,14 @@ public abstract class AbstractStaticMethodsFeatureForTypeProvider extends Abstra
 	protected TypeReferences getTypeRefs() {
 		return typeRefs;
 	}
+	
+	private boolean isExtensionProvider = false;
+	
+	public boolean isExtensionProvider() {
+		return isExtensionProvider;
+	}
+	public void setExtensionProvider(boolean isExtensionProvider) {
+		this.isExtensionProvider = isExtensionProvider;
+	}
 
 }

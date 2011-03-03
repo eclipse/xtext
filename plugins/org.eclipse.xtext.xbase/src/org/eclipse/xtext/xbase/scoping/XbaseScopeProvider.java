@@ -161,7 +161,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 								TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(null);
 								final JvmConstructor constructor = (JvmConstructor) from.getEObjectOrProxy();
 								return new JvmFeatureDescription(from.getQualifiedName(), constructor, typeArgumentContext,
-										constructor.getIdentifier(), true, null, false);
+										constructor.getIdentifier(), true, null, 0);
 							}
 						});
 				return result;
@@ -425,6 +425,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		
 		final StaticMethodsFeatureForTypeProvider staticExtensionsProvider = newImplicitStaticFeaturesProvider();
 		staticExtensionsProvider.setContext(expression.eResource());
+		staticExtensionsProvider.setExtensionProvider(true);
 		
 		final DefaultJvmFeatureDescriptionProvider provider3 = newDefaultFeatureDescProvider();
 		provider3.setFeaturesForTypeProvider(staticExtensionsProvider);

@@ -22,4 +22,6 @@ public interface IFeaturesForTypeProvider {
 	 * provides the features for a given type
 	 */
 	Iterable<? extends JvmFeature> getFeaturesForType(JvmTypeReference type);
+	
+	boolean isExtensionProvider();
 }

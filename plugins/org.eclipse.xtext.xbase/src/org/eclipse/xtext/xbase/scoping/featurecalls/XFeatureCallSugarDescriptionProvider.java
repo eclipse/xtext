@@ -43,7 +43,8 @@ public class XFeatureCallSugarDescriptionProvider extends DefaultJvmFeatureDescr
 		if (feature instanceof JvmOperation) {
 			JvmOperation op = (JvmOperation) feature;
 			// handle operator mapping
-			if (op.getParameters().size() <= 1 + (isMemberFeatureContext(op)?0:1)) {
+			final int syntacticalNumberOfArguments = getSyntacticalNumberOfArguments(op);
+			if (syntacticalNumberOfArguments<=1) {
 				QualifiedName operator = operatorMapping.getOperator(QualifiedName.create(op.getSimpleName()));
 				if (operator != null) {
 					final String shadowingString = getSignature(op, context).replace(op.getSimpleName(),
@@ -52,7 +53,7 @@ public class XFeatureCallSugarDescriptionProvider extends DefaultJvmFeatureDescr
 							isValid(feature)));
 				}
 			}
-			if (op.getParameters().isEmpty()) {
+			if (syntacticalNumberOfArguments==0) {
 				// allow invocation without parenthesis
 				acceptor.accept(createJvmFeatureDescription(op, context, op.getSimpleName(), isValid(feature)));
 				// handle property access for getter
@@ -67,8 +68,16 @@ public class XFeatureCallSugarDescriptionProvider extends DefaultJvmFeatureDescr
 		}
 	}
 
+	protected int getSyntacticalNumberOfArguments(JvmOperation op) {
+		int numberOfArgs = op.getParameters().size();
+		if (isExtensionProvider()) {
+			numberOfArgs--;
+		}
+		return numberOfArgs;
+	}
+
 	protected boolean isGetterMethod(JvmOperation op) {
-		if (!op.getParameters().isEmpty())
+		if (getSyntacticalNumberOfArguments(op)!=0)
 			return false;
 		if (getPropertyNameForGetterMethod(op.getSimpleName()) == null)
 			return false;

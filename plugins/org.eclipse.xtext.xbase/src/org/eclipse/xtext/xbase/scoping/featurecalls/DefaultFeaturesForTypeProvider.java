@@ -33,4 +33,8 @@ public class DefaultFeaturesForTypeProvider implements IFeaturesForTypeProvider 
 		return emptySet();
 	}
 
+	public boolean isExtensionProvider() {
+		return false;
+	}
+
 }
