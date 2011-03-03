@@ -286,6 +286,33 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		doTestUpdateAtOffset(model, 329, 0, "P", "Case_6.xtend");
 	}
 	
+	public void testEqualModels_03() throws Exception {
+		String model = "package org.eclipse.xtext.xtend2.tests.smoke\n" + 
+				"\n" + 
+				"import org.eclipse.emf.ecore.EClass\n" + 
+				"import org.eclipse.emf.ecore.EPackage\n" + 
+				"import org.eclipse.emf.ecore.EStructuralFeature\n" + 
+				"import org.eclipse.emf.ecore.EObject\n" + 
+				"\n" + 
+				"class Case_6 {\n" + 
+				"\n" + 
+				"	dispatch transform(EClass model) {\n" + 
+				"		model.ETypeParameters.map(|transform(e))\n" + 
+				"	}\n" + 
+				"	 \n" + 
+				"	dispatch transform(EPackage packageDecl) {\n" + 
+				"		packageDecl.eContents.map(e|transform(e))\n" + 
+				"	}\n" + 
+				"	\n" + 
+				"	dispatch transform(EStructuralFeature entity) {\n" + 
+				"		val inferredType = null\n" + 
+				"		newArrayList(inferredType as EObject) 	 \n" + 
+				"	}\n" + 
+				"\n" + 
+				"}";
+		doTestUpdateAtOffset(model, 286, 1, "e", "Case_6.xtend");
+	}
+	
 	public void testInferredModelRemoved() throws Exception {
 		String model =
 				"package org.eclipse.xtext.xtend2.tests.smoke\n" + 
@@ -334,7 +361,9 @@ public class PartialParserTest extends AbstractXtend2TestCase {
 		assertEquals(newResource.getContents().size(), resource.getContents().size());
 		for(int i = 0; i < resource.getContents().size(); i++) {
 			if (!EcoreUtil.equals(resource.getContents().get(i), newResource.getContents().get(i))) {
-				assertEquals(EmfFormatter.objToStr(newResource.getContents().get(i)), EmfFormatter.objToStr(resource.getContents().get(i)));
+				for(int j = 0; j < resource.getContents().size(); j++) {
+					assertEquals(EmfFormatter.objToStr(newResource.getContents().get(j)), EmfFormatter.objToStr(resource.getContents().get(j)));
+				}
 				fail();
 			}
 		}

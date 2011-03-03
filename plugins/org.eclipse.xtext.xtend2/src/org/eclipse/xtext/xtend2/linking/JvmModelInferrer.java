@@ -14,8 +14,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
@@ -83,9 +81,9 @@ public class JvmModelInferrer {
 		associator.associate(target, source);
 		addConstructor(source, target);
 		for (JvmTypeReference superType : source.getSuperTypes())
-			target.getSuperTypes().add(cloneWithProxies(superType));
+			target.getSuperTypes().add(EcoreUtil2.cloneWithProxies(superType));
 		for (JvmTypeParameter typeParameter : source.getTypeParameters())
-			target.getTypeParameters().add(cloneWithProxies(typeParameter));
+			target.getTypeParameters().add(EcoreUtil2.cloneWithProxies(typeParameter));
 		for (XtendMember member : source.getMembers())
 			if (member.getName() != null)
 				target.getMembers().add(transform(member));
@@ -173,10 +171,10 @@ public class JvmModelInferrer {
 			target.setSimpleName(sourceName);
 			target.setVisibility(JvmVisibility.PUBLIC);
 			for (JvmFormalParameter parameter : source.getParameters())
-				target.getParameters().add(cloneWithProxies(parameter));
+				target.getParameters().add(EcoreUtil2.cloneWithProxies(parameter));
 			inferReturnType(target);
 			for (JvmTypeParameter typeParameter : source.getTypeParameters())
-				target.getTypeParameters().add(cloneWithProxies(typeParameter));
+				target.getTypeParameters().add(EcoreUtil2.cloneWithProxies(typeParameter));
 			associator.associate(target, source);
 			return target;
 		} else if (sourceMember instanceof DeclaredDependency) {
@@ -184,19 +182,11 @@ public class JvmModelInferrer {
 			JvmField field = typesFactory.createJvmField();
 			field.setVisibility(JvmVisibility.PRIVATE);
 			field.setSimpleName(dep.getName());
-			field.setType(cloneWithProxies(dep.getType()));
+			field.setType(EcoreUtil2.cloneWithProxies(dep.getType()));
 			associator.associate(field, dep);
 			return field;
 		}
 		throw new IllegalArgumentException("Cannot transform " + notNull(sourceMember) + " to a JvmMember");
-	}
-
-	@SuppressWarnings("unchecked")
-	protected <T extends EObject> T cloneWithProxies(T original) {
-		EcoreUtil.Copier copier = new EcoreUtil.Copier(false);
-		T copy = (T) copier.copy(original);
-		copier.copyReferences();
-		return copy;
 	}
 
 	protected void computeInferredReturnTypes(JvmGenericType inferredJvmType) {
@@ -217,7 +207,7 @@ public class JvmModelInferrer {
 		}
 		if (!associatedReturnTypes.isEmpty()) {
 			JvmTypeReference commonSuperType = typeConformanceComputer.getCommonSuperType(associatedReturnTypes);
-			return cloneWithProxies(commonSuperType);
+			return EcoreUtil2.cloneWithProxies(commonSuperType);
 		}
 		return null;
 	}
