@@ -29,6 +29,13 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo("", "try {typeof(String).newInstance} catch(Exception e) {}");
 	}
 	
+//	public void testGenerics_01() throws Exception {
+//		assertEvaluatesTo("y",
+//				"{" +
+//				" val x = newArrayList('y',23,true)" +
+//				" return x.head" +
+//				"}");
+//	}
 	
 	public void testPrimitiveConversion() throws Exception {
 		assertEvaluatesTo("2","'ab'.length.toString");
@@ -481,6 +488,11 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				" for( e : list) result = result + e" +
 				" result" +
 				"}");
+	}
+	
+	public void testFunctionConversion_00() throws Exception {
+		assertEvaluatesTo("foo",
+				"([|newArrayList('foo').iterator] as Iterable<String>).iterator.next");
 	}
 	
 	public void testWhileLoop_01() {
