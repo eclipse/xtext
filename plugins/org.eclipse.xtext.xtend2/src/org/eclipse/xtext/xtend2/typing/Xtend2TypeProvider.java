@@ -15,7 +15,6 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
@@ -158,8 +157,4 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 		return (xtendClass != null) ? _typeForIdentifiable(xtendClass, rawType) : null;
 	}
 	
-	protected JvmTypeReference _typeForIdentifiable(JvmType type, boolean rawType) {
-		return getTypeReferences().createTypeRef(type);
-	}
-
 }
