@@ -532,6 +532,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
 		enhanceGenericDeclaration(result, method.getTypeParameters());
 		enhanceExecutable(result, method);
+		result.setAbstract(Modifier.isAbstract(method.getModifiers()));
 		result.setFinal(Modifier.isFinal(method.getModifiers()));
 		result.setStatic(Modifier.isStatic(method.getModifiers()));
 		result.setReturnType(createTypeReference(method.getReturnType()));

@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
+import static com.google.common.collect.Iterables.*;
+
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.util.Arrays;
@@ -68,6 +70,7 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
+import org.eclipse.xtext.common.types.testSetups.AbstractMethods;
 import org.eclipse.xtext.common.types.testSetups.AnnotatedClassWithStringDefault;
 import org.eclipse.xtext.common.types.testSetups.AnnotatedInterfaceWithStringDefault;
 import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs;
@@ -2039,6 +2042,17 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		checkDefaultAnnotationValuesAnnotatedExternalClass(annotationReference);
 	}
 
+	public void testAbstractMethod() throws Exception {
+		String typeName = AbstractMethods.class.getName();
+		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
+		assertEquals(2, size(type.getDeclaredOperations()));
+		Iterator<JvmOperation> declaredOperations = type.getDeclaredOperations().iterator();
+		JvmOperation abstractMethod = declaredOperations.next();
+		assertTrue(abstractMethod.isAbstract());
+		JvmOperation concreteMethod = declaredOperations.next();
+		assertFalse(concreteMethod.isAbstract());
+	}
+	
 	protected void checkDefaultAnnotationValuesAnnotatedExternalClass(JvmAnnotationReference annotationReference) {
 		checkDefaultAnnotationValues(annotationReference);
 	}
