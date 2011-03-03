@@ -2,11 +2,11 @@
 	<target name="addStatistic">
 		<property name="repository.root" value="." />
 		<echo>${repository.root}</echo>
-		<copy file="artifacts.jar" tofile="artifacts.jar.backup" />
-		<unjar src="artifacts.jar" dest="." />
+		<copy file="${repository.root}/artifacts.jar" tofile="artifacts.jar.backup" />
+		<unjar src="${repository.root}/artifacts.jar" dest="." />
 		<move file="artifacts.xml" tofile="artifacts.xml.original" />
-		<xslt style="addDownloadStats.xsl" in="artifacts.xml.original" out="artifacts.xml" />
-		<zip destfile="artifacts.jar" filesonly="true" basedir="." includes="artifacts.xml" />
+		<xslt style="statistics/addDownloadStats.xsl" in="artifacts.xml.original" out="artifacts.xml" />
+		<zip destfile="${repository.root}/artifacts.jar" filesonly="true" basedir="." includes="artifacts.xml" />
 	</target>
 
 </project>
