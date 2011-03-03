@@ -1,7 +1,7 @@
 package org.eclipse.xtext.example.domainmodel.jvmmodel
 
 import org.eclipse.xtext.example.domainmodel.domainmodel.*
-import org.eclipse.xtext.xbase.linking.jvm.*
+import org.eclipse.xtext.xbase.jvmmodel.*
 import org.eclipse.emf.ecore.*
 import org.eclipse.xtext.common.types.*
 import org.eclipse.xtext.common.types.util.*
