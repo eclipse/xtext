@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmConstraintOwner;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -32,7 +33,6 @@ import org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.google.common.collect.UnmodifiableIterator;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -188,15 +188,30 @@ public class TypeArgumentContext {
 											return EcoreUtil2.clone(resolvedCopy);
 										}
 									}
+									Set<JvmParameterizedTypeReference> referencesToBeReplaced = Sets.newHashSet();
+									resolved = EcoreUtil2.cloneIfContained(resolved);
 									Iterator<JvmParameterizedTypeReference> iterator = Iterators.filter(EcoreUtil2.eAll(resolved), JvmParameterizedTypeReference.class);
 									while(iterator.hasNext()) {
 										JvmParameterizedTypeReference containedReference = iterator.next();
 										if (resolving.contains(containedReference.getType())) {
-											return object;
+											referencesToBeReplaced.add(containedReference);
 										}
 									}
-									JvmTypeReference resolvedCopy = doGetResolvedCopy(resolved, resolving, unresolved);
-									return resolveTypeParameters(resolvedCopy);
+									if (referencesToBeReplaced.isEmpty()) {
+										JvmTypeReference resolvedCopy = doGetResolvedCopy(resolved, resolving, unresolved);
+										return resolveTypeParameters(resolvedCopy);
+									} else {
+										for(JvmParameterizedTypeReference replaceMe: referencesToBeReplaced) {
+											JvmConstraintOwner constraintOwner = (JvmConstraintOwner) replaceMe.getType();
+											JvmWildcardTypeReference wildCard = typeReferences.wildCard();
+											for(JvmTypeConstraint constraint: constraintOwner.getConstraints()) {
+												wildCard.getConstraints().add(EcoreUtil2.clone(constraint));
+											}
+											EcoreUtil.replace(replaceMe, wildCard);
+										}
+										JvmTypeReference resolvedCopy = doGetResolvedCopy(resolved, resolving, unresolved);
+										return resolveTypeParameters(resolvedCopy);
+									}
 								} else {
 									return typeReferences.createTypeRef(type);
 								}
