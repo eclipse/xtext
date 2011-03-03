@@ -36,9 +36,9 @@ import org.eclipse.xtext.common.types.util.SuperTypeCollector.SuperTypeAcceptor;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 import com.google.common.base.Function;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.LinkedHashMultiset;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
@@ -558,9 +558,9 @@ public class TypeConformanceComputer {
 		final List<JvmTypeReference> tail = types.subList(1, types.size());
 		// mapping from rawtype to resolved parameterized types
 		// used to determine the correct type arguments
-		Multimap<JvmType, JvmTypeReference> all = HashMultimap.create();
+		Multimap<JvmType, JvmTypeReference> all = LinkedHashMultimap.create();
 		// cumulated rawtype to max distance (used for sorting)
-		Multiset<JvmType> cumulatedDistance = HashMultiset.create();
+		Multiset<JvmType> cumulatedDistance = LinkedHashMultiset.create();
 		
 		initializeDistance(firstType, all, cumulatedDistance);
 		cumulateDistance(tail, all, cumulatedDistance);
@@ -662,7 +662,7 @@ public class TypeConformanceComputer {
 	protected void cumulateDistance(final List<JvmTypeReference> references, Multimap<JvmType, JvmTypeReference> all,
 			Multiset<JvmType> cumulatedDistance) {
 		for(JvmTypeReference other: references) {
-			Multiset<JvmType> otherDistance = HashMultiset.create();
+			Multiset<JvmType> otherDistance = LinkedHashMultiset.create();
 			initializeDistance(other, all, otherDistance);
 			cumulatedDistance.retainAll(otherDistance);
 			for(Multiset.Entry<JvmType> typeToDistance: otherDistance.entrySet()) {
