@@ -24,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -176,7 +177,14 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 								} else if (previousName.length() == candidateName.length()) {
 									if (previous.getKey().endsWith(")")) {
 										if (!isShowAllProposals()) {
-											filteredDescriptions.put(featureDescription.getEObjectOrProxy(), featureDescription);
+											if (!previous.getEObjectOrProxy().eIsProxy() && previous.getEObjectOrProxy() instanceof JvmExecutable) {
+												JvmExecutable exectuable = (JvmExecutable) previous.getEObjectOrProxy();
+												if (!exectuable.isVarArgs()) {
+													filteredDescriptions.put(featureDescription.getEObjectOrProxy(), featureDescription);
+												}
+											} else {
+												filteredDescriptions.put(featureDescription.getEObjectOrProxy(), featureDescription);
+											}
 										}
 									}
 								}
