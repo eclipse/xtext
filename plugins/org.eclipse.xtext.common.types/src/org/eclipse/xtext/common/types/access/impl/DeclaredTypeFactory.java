@@ -487,6 +487,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 				method.getParameterAnnotations());
 		result.setVarArgs(method.isVarArgs());
 		enhanceGenericDeclaration(result, method);
+		result.setAbstract(Modifier.isAbstract(method.getModifiers()));
 		result.setFinal(Modifier.isFinal(method.getModifiers()));
 		result.setStatic(Modifier.isStatic(method.getModifiers()));
 		result.setReturnType(createTypeReference(method.getGenericReturnType()));
