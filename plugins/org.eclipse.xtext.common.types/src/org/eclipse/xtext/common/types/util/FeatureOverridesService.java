@@ -25,8 +25,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ListMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -61,7 +60,7 @@ public class FeatureOverridesService {
     }
     
     public Iterable<JvmFeature> getAllJvmFeatures(JvmDeclaredType type, TypeArgumentContext ctx) {
-    	ListMultimap<Triple<EClass,String,Integer>, JvmFeature> featureIndex = ArrayListMultimap.create();
+    	Multimap<Triple<EClass,String,Integer>, JvmFeature> featureIndex = LinkedHashMultimap.create();
     	indexFeatures(type, featureIndex);
         Set<JvmTypeReference> types = superTypeCollector.collectSuperTypes(type);
         for (JvmTypeReference jvmTypeReference : types) {
@@ -73,7 +72,7 @@ public class FeatureOverridesService {
         return removeOverridden(featureIndex, ctx);
     }
 
-	protected void indexFeatures(JvmDeclaredType type, ListMultimap<Triple<EClass, String, Integer>, JvmFeature> index) {
+	protected void indexFeatures(JvmDeclaredType type, Multimap<Triple<EClass, String, Integer>, JvmFeature> index) {
 		for(JvmMember member: type.getMembers()) {
     		if (member instanceof JvmExecutable) {
 				Triple<EClass, String, Integer> key = Tuples.create(member.eClass(), member.getSimpleName(), ((JvmExecutable) member).getParameters().size());
@@ -91,7 +90,7 @@ public class FeatureOverridesService {
 			if (featuresWithSameName.size() > 1) {
 				for (JvmFeature op1 : featuresWithSameName) {
 					for (JvmFeature op2 : featuresWithSameName) {
-						if (op1.getDeclaringType() != op2.getDeclaringType() && internalIsOverridden(op1, op2, ctx, true))
+						if (result.contains(op1) && op1.getDeclaringType() != op2.getDeclaringType() && internalIsOverridden(op1, op2, ctx, true))
 							result.remove(op2);
 					}
 				}

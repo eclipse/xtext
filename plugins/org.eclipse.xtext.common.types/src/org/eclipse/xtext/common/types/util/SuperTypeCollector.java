@@ -155,7 +155,7 @@ public class SuperTypeCollector {
 		public Boolean caseJvmDeclaredType(JvmDeclaredType object) {
 			if (!object.eIsProxy()) {
 				level++;
-				for (JvmTypeReference superType : reverse(object.getSuperTypes())) {
+				for (JvmTypeReference superType : object.getSuperTypes()) {
 					doSwitch(superType);
 				}
 				level--;
