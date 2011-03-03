@@ -189,11 +189,11 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 							+ canonicalName(cast.getType()), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
 							INVALID_CAST);
 				} else if (conformanceComputer.isConformant(cast.getType(), targetTypeRef)) {
-					warning("Cast is obsolete", null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, OBSOLETE_CAST);
+//					warning("Cast is obsolete", null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, OBSOLETE_CAST);
 				}
 			} else {
 				if (conformanceComputer.isConformant(cast.getType(), targetTypeRef)) {
-					warning("Cast is obsolete", null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, OBSOLETE_CAST);
+//					warning("Cast is obsolete", null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, OBSOLETE_CAST);
 				} else {
 					JvmType type = cast.getType().getType();
 					if (type instanceof JvmGenericType && !((JvmGenericType) type).isInterface()) {
