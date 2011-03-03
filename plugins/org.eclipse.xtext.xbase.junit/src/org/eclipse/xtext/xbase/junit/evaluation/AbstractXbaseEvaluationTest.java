@@ -107,7 +107,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(Boolean.TRUE,
 				"{" +
 				" var x = 1 " +
-				" val y = 4 " +
+				" val y = 7 " +
 				" for (y : 1..3) {" +
 				"  x = x+y" +
 				" }" +
