@@ -85,6 +85,11 @@ public class OverrideValidationTest extends AbstractXtend2TestCase {
 		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { override String object() {''} }");
 		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_RETURN_TYPE);
 	}
+	
+	public void testIncompatibleReturnType_2() throws Exception {
+		XtendClass xtendClass = clazz("class Foo implements test.SomeInterface { foo() {} }");
+		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_RETURN_TYPE);
+	}
 
 	public void testIncompatibleGenericReturnType_0() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { override java.util.ArrayList<String> returnsListString() {''} }");
@@ -130,4 +135,5 @@ public class OverrideValidationTest extends AbstractXtend2TestCase {
 		XtendClass xtendClass = clazz("class Foo<S> implements Comparable<S> { }");
 		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT, "abstract", "not", "implement");
 	}
+	
 }
