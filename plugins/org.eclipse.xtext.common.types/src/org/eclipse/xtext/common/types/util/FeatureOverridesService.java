@@ -37,8 +37,10 @@ public class FeatureOverridesService {
     
     @Inject
     private TypeArgumentContextProvider contextProvider;
-    
+
+    @Inject
     protected FeatureOverridesService() {}
+    
     public FeatureOverridesService(SuperTypeCollector superTypeCollector, TypeArgumentContextProvider contextProvider) {
         this.superTypeCollector = superTypeCollector;
         this.contextProvider = contextProvider;
