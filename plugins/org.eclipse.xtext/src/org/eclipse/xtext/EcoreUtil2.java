@@ -74,6 +74,17 @@ public class EcoreUtil2 extends EcoreUtil {
 	}
 	
 	/**
+	 * Clones the given EObject without resolving any proxies.
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T extends EObject> T cloneWithProxies(T original) {
+		EcoreUtil.Copier copier = new EcoreUtil.Copier(false);
+		T copy = (T) copier.copy(original);
+		copier.copyReferences();
+		return copy;
+	}
+
+	/**
 	 * only clones the element if it is contained in another {@link EObject} or another {@link Resource}
 	 */
 	public static <T extends EObject> T cloneIfContained(T eObject) {

@@ -752,6 +752,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return operation.getReturnType();
 	}
 	
+	protected JvmTypeReference _typeForIdentifiable(JvmType type, boolean rawType) {
+		return getTypeReferences().createTypeRef(type);
+	}
+
 	protected void _earlyExits(XClosure expr, EarlyExitAcceptor a) {
 		// Don't go into closures
 	}
