@@ -7,15 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.Primitives;
+import org.eclipse.xtext.common.types.util.TypeArgumentContext;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
@@ -40,6 +46,13 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 
 	@Inject
 	private IdentifiableSimpleNameProvider featureNameProvider;
+	
+	@Inject
+	private TypeArgumentContextProvider ctxProvider;
+	
+	@Inject
+	private Primitives primitives;
+	
 	
 	protected void _toJavaStatement(final XAbstractFeatureCall expr, final IAppendable b, boolean isReferenced) {
 		if (isSpreadingMemberFeatureCall(expr)) {
@@ -99,17 +112,18 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			if (arg instanceof XAbstractFeatureCall && isLocalVarReference((XAbstractFeatureCall) arg)) {
 				JvmTypeReference expectedType = getTypeProvider().getExpectedType(arg);
 				JvmTypeReference type = getTypeProvider().getType(arg);
+				//TODO use JvmConformanceComputer (i.e. without Xbase conformance)
 				if (expectedType!=null && !EcoreUtil.equals(expectedType, type)) {
 					String varName = getVarName(((XAbstractFeatureCall) arg).getFeature(), b);
-					String finalVariable = b.declareVariable(Tuples.create("Convertable", arg), "final_" + varName);
+					String finalVariable = b.declareVariable(Tuples.create("Convertable", arg), "typeConverted_" + varName);
 					b.append("\n")
 						.append("final ");
-					serialize(type,expr,b,true,true);
+					serialize(type,expr,b,false,true);
 					b.append(" ")
 						.append(finalVariable)
 						.append(" = ")
 						.append("(");
-					serialize(type,expr,b,true,true);
+					serialize(type,expr,b,false,true);
 					b.append(")")
 						.append(makeJavaIdentifier(varName))
 						.append(";");
@@ -216,6 +230,34 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 
 	protected void appendFeatureCall(XAbstractFeatureCall call, IAppendable b) {
 		String name = featureNameProvider.getSimpleName(call.getFeature());
+		if (call.getFeature() instanceof JvmOperation) {
+			JvmOperation op = (JvmOperation) call.getFeature();
+			final XExpression actualReceiver = featureCallToJavaMapping.getActualReceiver(call);
+			JvmTypeReference receiverType = null;
+			if (actualReceiver!=null)
+				receiverType = getTypeProvider().getType(actualReceiver);
+			JvmTypeReference expectedType = getTypeProvider().getExpectedType(call);
+			List<XExpression> actualArguments = featureCallToJavaMapping.getActualArguments(call);
+			JvmTypeReference[] argumentTypes = new JvmTypeReference[actualArguments.size()];
+			for (int i = 0; i < argumentTypes.length; i++) {
+				XExpression expression = actualArguments.get(i);
+				argumentTypes[i] = getTypeProvider().getType(expression);
+			}
+			TypeArgumentContext context = ctxProvider.getInferredMethodInvocationContext(op, receiverType, expectedType, argumentTypes);
+			EList<JvmTypeParameter> list = op.getTypeParameters();
+			if (!list.isEmpty()) {
+				b.append("<");
+				for (Iterator<JvmTypeParameter> iterator = list.iterator(); iterator.hasNext();) {
+					JvmTypeParameter jvmTypeParameter = iterator.next();
+					JvmTypeReference typeArg = context.getBoundArgument(jvmTypeParameter);
+					typeArg = primitives.asWrapperTypeIfPrimitive(typeArg);
+					b.append(typeArg);
+					if (iterator.hasNext())
+						b.append(",");
+				}
+				b.append(">");
+			}
+		}
 		b.append(makeJavaIdentifier(name));
 		if (call.getFeature() instanceof JvmOperation) {
 			b.append("(");
