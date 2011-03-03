@@ -15,6 +15,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.ETypedElement;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
@@ -255,17 +259,17 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		invokeAndExpect("string", definition,"bar");
 		invokeAndExpect("null", definition,new Object[]{null});
 	}
-//	TODO fails because Ecore is not always on the classpath (because of the static classpath stuff in OntheFlyCompiler)
-//	public void testDispatchFunction_03() throws Exception {
-//		final String definition = "doIt(p1) }" +
-//				"   dispatch doIt(org.eclipse.emf.ecore.EStructuralFeature x) { typeof(org.eclipse.emf.ecore.EStructuralFeature) }\n" + 
-//				"	dispatch doIt(org.eclipse.emf.ecore.EReference x) { typeof(org.eclipse.emf.ecore.EReference) }\n" + 
-//				"	dispatch doIt(org.eclipse.emf.ecore.EAttribute x) { typeof(org.eclipse.emf.ecore.EAttribute) }\n" + 
-//				"	dispatch doIt(org.eclipse.emf.ecore.ETypedElement x) { typeof(org.eclipse.emf.ecore.ETypedElement) ";
-//		invokeAndExpect(EReference.class, definition,Xtend2Package.Literals.RICH_STRING_ELSE_IF__IF);
-//		invokeAndExpect(EAttribute.class, definition,Xtend2Package.Literals.XTEND_FILE__PACKAGE);
-//		invokeAndExpect(ETypedElement.class, definition,EcoreFactory.eINSTANCE.createEOperation());
-//	}
+
+	public void testDispatchFunction_03() throws Exception {
+		final String definition = "doIt(p1) }" +
+				"   dispatch doIt(org.eclipse.emf.ecore.EStructuralFeature x) { typeof(org.eclipse.emf.ecore.EStructuralFeature) }\n" + 
+				"	dispatch doIt(org.eclipse.emf.ecore.EReference x) { typeof(org.eclipse.emf.ecore.EReference) }\n" + 
+				"	dispatch doIt(org.eclipse.emf.ecore.EAttribute x) { typeof(org.eclipse.emf.ecore.EAttribute) }\n" + 
+				"	dispatch doIt(org.eclipse.emf.ecore.ETypedElement x) { typeof(org.eclipse.emf.ecore.ETypedElement) ";
+		invokeAndExpect(EReference.class, definition,Xtend2Package.Literals.RICH_STRING_ELSE_IF__IF);
+		invokeAndExpect(EAttribute.class, definition,Xtend2Package.Literals.XTEND_FILE__PACKAGE);
+		invokeAndExpect(ETypedElement.class, definition,EcoreFactory.eINSTANCE.createEOperation());
+	}
 	
 	public void testDispatchFunction_04() throws Exception {
 		final String definition = "x(p1)}" +
@@ -319,15 +323,14 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		invokeAndExpect("foobar", "bar(p1)} bar(String x) {'foo'+x","bar");
 	}
 	
-	// TODO: fix type inferrence in this scenario
-//	public void testTypeInferrence_00() throws Exception {
-//		compileJavaCode("Foo", "import org.eclipse.emf.ecore.EObject " +
-//				"class Foo { " +
-//				"	Iterable<? extends EObject> test(EObject e) {" +
-//				"		e.eContents().map(o|test(o)).flatten()" +
-//				"	}" +
-//				"}");
-//	}
+	public void testTypeInferrence_00() throws Exception {
+		compileJavaCode("Foo", "import org.eclipse.emf.ecore.EObject " +
+				"class Foo { " +
+				"	Iterable<? extends EObject> test(EObject e) {" +
+				"		e.eContents().map(o|test(o)).flatten()" +
+				"	}" +
+				"}");
+	}
 	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
