@@ -10,7 +10,11 @@ package org.eclipse.xtext.xtend2.tests.linking;
 import static com.google.common.collect.Iterables.*;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
@@ -175,6 +179,58 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 			}
 		});
 	}
+	
+	public void testCaseFunction_03() throws Exception {
+		XtendFile xtendFile = file("class Dispatcher {\n" + 
+				"	dispatch doStuff(org.eclipse.emf.ecore.EClass model) {\n" + 
+				"		model.ETypeParameters.map(e|doStuff(e))\n" + 
+				"	}\n" + 
+				"	dispatch doStuff(org.eclipse.emf.ecore.EPackage packageDecl) {\n" + 
+				"		packageDecl.EClassifiers.map(e|doStuff(e))\n" + 
+				"	}\n" + 
+				"	dispatch doStuff(org.eclipse.emf.ecore.EStructuralFeature feature) {\n" + 
+				"		newArrayList(feature)\n" + 
+				"	}\n" + 
+				"}");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		
+		// one main dispatch
+		Iterable<JvmOperation> operations = inferredType.getDeclaredOperations();
+		JvmOperation dispatch = find(operations, new Predicate<JvmOperation>() {
+			public boolean apply(JvmOperation input) {
+				return input.getSimpleName().equals("doStuff")
+					&& input.getParameters().get(0).getParameterType().getIdentifier()
+					.equals(ENamedElement.class.getName());
+			}
+		});
+		assertEquals("java.util.List<? extends java.lang.Object>", dispatch.getReturnType().getIdentifier());
+
+		// three internal case methods
+		JvmOperation eClassParam = find(operations, new Predicate<JvmOperation>() {
+			public boolean apply(JvmOperation input) {
+				return input.getSimpleName().equals("_doStuff")
+					&& input.getParameters().get(0).getParameterType().getIdentifier()
+					.equals(EClass.class.getName());
+			}
+		});
+		assertEquals("java.util.List<? extends java.lang.Object>", eClassParam.getReturnType().getIdentifier());
+		JvmOperation ePackageParam = find(operations, new Predicate<JvmOperation>() {
+			public boolean apply(JvmOperation input) {
+				return input.getSimpleName().equals("_doStuff")
+					&& input.getParameters().get(0).getParameterType().getIdentifier()
+					.equals(EPackage.class.getName());
+			}
+		});
+		assertEquals("java.util.List<? extends java.lang.Object>", ePackageParam.getReturnType().getIdentifier());
+		JvmOperation eStructuralFeatureParam = find(operations, new Predicate<JvmOperation>() {
+			public boolean apply(JvmOperation input) {
+				return input.getSimpleName().equals("_doStuff")
+				&& input.getParameters().get(0).getParameterType().getIdentifier()
+				.equals(EStructuralFeature.class.getName());
+			}
+		});
+		assertEquals("java.util.ArrayList<org.eclipse.emf.ecore.EStructuralFeature>", eStructuralFeatureParam.getReturnType().getIdentifier());
+	}
 
 	public void testInferredJvmType() throws Exception {
 		XtendFile xtendFile = file("class Foo { }");
@@ -291,6 +347,17 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		assertEquals(inferredType, jvmOperation.getReturnType().getType());
 		XtendFunction xtendFunction = (XtendFunction) xtendFile.getXtendClass().getMembers().get(0);
 		assertEquals(inferredType, xtendFunction.getReturnType().getType());
+	}
+	
+	public void testInferredFunctionWithTypeParameter() throws Exception {
+		XtendFile xtendFile = file("class Foo<S> { java.util.List<S> foo() {null} }");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
+		assertEquals("java.util.List<S>", jvmOperation.getReturnType().getIdentifier());
+		JvmTypeReference argument = ((JvmParameterizedTypeReference)jvmOperation.getReturnType()).getArguments().get(0);
+		assertSame(inferredType, ((JvmTypeParameter)argument.getType()).getDeclarator());
+		XtendFunction xtendFunction = (XtendFunction) xtendFile.getXtendClass().getMembers().get(0);
+		assertEquals("java.util.List<S>", xtendFunction.getReturnType().getIdentifier());
 	}
 
 	protected JvmGenericType getInferredType(XtendFile xtendFile) {

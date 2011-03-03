@@ -176,7 +176,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testTypeParams_2() throws Exception {
-		XtendFunction func = function("<T extends Bar> foo(T t) { t}");
+		XtendFunction func = function("<T extends CharSequence> foo(T t) { t}");
 		assertEquals(1, func.getTypeParameters().size());
 		JvmTypeParameter tp = func.getTypeParameters().get(0);
 		assertEquals("T", tp.getName());
@@ -185,7 +185,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testTypeParams_3() throws Exception {
-		XtendFunction func = function("<T extends Foo & Bar> foo(T t) { t}");
+		XtendFunction func = function("<T extends CharSequence & java.io.Serializable> foo(T t) { t}");
 		assertEquals(1, func.getTypeParameters().size());
 		JvmTypeParameter tp = func.getTypeParameters().get(0);
 		assertEquals("T", tp.getName());
