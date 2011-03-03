@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase;
 
+import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
@@ -24,6 +25,7 @@ import org.eclipse.xtext.xbase.linking.XbaseLinkingScopeProvider;
 import org.eclipse.xtext.xbase.resource.XbaseResource;
 import org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 
 import com.google.inject.Binder;
@@ -75,4 +77,7 @@ public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 		return XbaseLazyLinker.class;
 	}
 	
+	public Class<? extends TypeConformanceComputer> bindTypeConformanceComputer() {
+		return XbaseTypeConformanceComputer.class;
+	}
 }
