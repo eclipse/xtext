@@ -50,8 +50,8 @@ public class DomainmodelGenerator implements IGenerator {
       StringConcatenation builder = new StringConcatenation();
       builder.append("package ");
       GeneratorExtensions _generatorExtensions = generatorExtensions;
-      final Entity final_e = (Entity)e;
-      String _packageName = _generatorExtensions.packageName(final_e);
+      final Entity typeConverted_e = (Entity)e;
+      String _packageName = _generatorExtensions.packageName(typeConverted_e);
       builder.append(_packageName, "");
       builder.append(";");
       builder.newLineIfNotEmpty();
@@ -135,13 +135,13 @@ public class DomainmodelGenerator implements IGenerator {
     StringConcatenation builder = new StringConcatenation();
     builder.append("private ");
     GeneratorExtensions _generatorExtensions = generatorExtensions;
-    final Property final_p = (Property)p;
-    JvmParameterizedTypeReference _type = final_p.getType();
+    final Property typeConverted_p = (Property)p;
+    JvmParameterizedTypeReference _type = typeConverted_p.getType();
     String _shortName = _generatorExtensions.shortName(_type, importManager);
     builder.append(_shortName, "");
     builder.append(" ");
-    final Property final_p_1 = (Property)p;
-    String _name = final_p_1.getName();
+    final Property typeConverted_p_1 = (Property)p;
+    String _name = typeConverted_p_1.getName();
     builder.append(_name, "");
     builder.append(";");
     builder.newLineIfNotEmpty();
@@ -149,21 +149,21 @@ public class DomainmodelGenerator implements IGenerator {
     builder.newLine();
     builder.append("public ");
     GeneratorExtensions _generatorExtensions_1 = generatorExtensions;
-    final Property final_p_2 = (Property)p;
-    JvmParameterizedTypeReference _type_1 = final_p_2.getType();
+    final Property typeConverted_p_2 = (Property)p;
+    JvmParameterizedTypeReference _type_1 = typeConverted_p_2.getType();
     String _shortName_1 = _generatorExtensions_1.shortName(_type_1, importManager);
     builder.append(_shortName_1, "");
     builder.append(" get");
-    final Property final_p_3 = (Property)p;
-    String _name_1 = final_p_3.getName();
+    final Property typeConverted_p_3 = (Property)p;
+    String _name_1 = typeConverted_p_3.getName();
     String _firstUpper = StringExtensions.toFirstUpper(_name_1);
     builder.append(_firstUpper, "");
     builder.append("() {");
     builder.newLineIfNotEmpty();
     builder.append("\t");
     builder.append("return ");
-    final Property final_p_4 = (Property)p;
-    String _name_2 = final_p_4.getName();
+    final Property typeConverted_p_4 = (Property)p;
+    String _name_2 = typeConverted_p_4.getName();
     builder.append(_name_2, "	");
     builder.append(";");
     builder.newLineIfNotEmpty();
@@ -171,30 +171,30 @@ public class DomainmodelGenerator implements IGenerator {
     builder.newLine();
     builder.newLine();
     builder.append("public void set");
-    final Property final_p_5 = (Property)p;
-    String _name_3 = final_p_5.getName();
+    final Property typeConverted_p_5 = (Property)p;
+    String _name_3 = typeConverted_p_5.getName();
     String _firstUpper_1 = StringExtensions.toFirstUpper(_name_3);
     builder.append(_firstUpper_1, "");
     builder.append("(");
     GeneratorExtensions _generatorExtensions_2 = generatorExtensions;
-    final Property final_p_6 = (Property)p;
-    JvmParameterizedTypeReference _type_2 = final_p_6.getType();
+    final Property typeConverted_p_6 = (Property)p;
+    JvmParameterizedTypeReference _type_2 = typeConverted_p_6.getType();
     String _shortName_2 = _generatorExtensions_2.shortName(_type_2, importManager);
     builder.append(_shortName_2, "");
     builder.append(" ");
-    final Property final_p_7 = (Property)p;
-    String _name_4 = final_p_7.getName();
+    final Property typeConverted_p_7 = (Property)p;
+    String _name_4 = typeConverted_p_7.getName();
     builder.append(_name_4, "");
     builder.append(") {");
     builder.newLineIfNotEmpty();
     builder.append("\t");
     builder.append("this.");
-    final Property final_p_8 = (Property)p;
-    String _name_5 = final_p_8.getName();
+    final Property typeConverted_p_8 = (Property)p;
+    String _name_5 = typeConverted_p_8.getName();
     builder.append(_name_5, "	");
     builder.append(" = ");
-    final Property final_p_9 = (Property)p;
-    String _name_6 = final_p_9.getName();
+    final Property typeConverted_p_9 = (Property)p;
+    String _name_6 = typeConverted_p_9.getName();
     builder.append(_name_6, "	");
     builder.append(";");
     builder.newLineIfNotEmpty();
@@ -207,13 +207,13 @@ public class DomainmodelGenerator implements IGenerator {
     StringConcatenation builder = new StringConcatenation();
     builder.append("public ");
     GeneratorExtensions _generatorExtensions = generatorExtensions;
-    final Operation final_o = (Operation)o;
-    JvmParameterizedTypeReference _type = final_o.getType();
+    final Operation typeConverted_o = (Operation)o;
+    JvmParameterizedTypeReference _type = typeConverted_o.getType();
     String _shortName = _generatorExtensions.shortName(_type, importManager);
     builder.append(_shortName, "");
     builder.append(" ");
-    final Operation final_o_1 = (Operation)o;
-    String _name = final_o_1.getName();
+    final Operation typeConverted_o_1 = (Operation)o;
+    String _name = typeConverted_o_1.getName();
     builder.append(_name, "");
     builder.append("(");
     GeneratorExtensions _generatorExtensions_1 = generatorExtensions;
@@ -231,13 +231,13 @@ public class DomainmodelGenerator implements IGenerator {
     return builder;
   }
   
-  public StringConcatenation feature(final Feature o, final ImportManager importManager) {
-    if ((o instanceof Operation)
+  public StringConcatenation feature(final Feature p, final ImportManager importManager) {
+    if ((p instanceof Operation)
          && (importManager instanceof ImportManager)) {
-      return _feature((Operation)o, (ImportManager)importManager);
-    } else if ((o instanceof Property)
+      return _feature((Operation)p, (ImportManager)importManager);
+    } else if ((p instanceof Property)
          && (importManager instanceof ImportManager)) {
-      return _feature((Property)o, (ImportManager)importManager);
+      return _feature((Property)p, (ImportManager)importManager);
     } else {
       throw new IllegalArgumentException();
     }
