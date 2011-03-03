@@ -13,14 +13,18 @@ import java.lang.reflect.Method;
 
 import junit.framework.Assert;
 
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
 import com.google.common.base.Supplier;
@@ -51,6 +55,10 @@ public class CompilerTestHelper {
 		javaCompiler.addClassPathOfClass(StringConcatenation.class);
 		javaCompiler.addClassPathOfClass(Provider.class);
 		javaCompiler.addClassPathOfClass(Supplier.class);
+		javaCompiler.addClassPathOfClass(Notifier.class);
+		javaCompiler.addClassPathOfClass(EcorePackage.class);
+		javaCompiler.addClassPathOfClass(XbasePackage.class);
+		javaCompiler.addClassPathOfClass(Xtend2Package.class);
 	}
 	
 	public void assertEvaluatesTo(Object object, String string) {
