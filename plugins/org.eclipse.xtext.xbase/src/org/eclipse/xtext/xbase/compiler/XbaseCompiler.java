@@ -434,13 +434,13 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		String variableName = makeJavaIdentifier(b.declareVariable(closure, "function"));
 		b.append(variableName).append(" = ");
 		b.append("new ");
-		serialize(type, closure, b, true, false);
+		b.append(type);
 		b.append("() {");
 		b.increaseIndentation().increaseIndentation();
 		JvmOperation operation = functionConversion.findSingleMethod(type);
 		final JvmTypeReference returnType = context.resolve(operation.getReturnType());
 		b.append("\npublic ");
-		serialize(returnType, closure, b, true, false);
+		b.append(returnType);
 		b.append(" ").append(operation.getSimpleName());
 		b.append("(");
 		EList<JvmFormalParameter> closureParams = closure.getFormalParameters();
