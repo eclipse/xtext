@@ -114,15 +114,15 @@ public abstract class AbstractSuperTypeCollectorTest extends TestCase {
 	
 	public void testSortedResultForArrayList() {
 		Iterator<String> collected = getCollector().collectSuperTypeNames(getType(ArrayList.class)).iterator();
-		assertEquals(Serializable.class.getName(),collected.next());
-		assertEquals(Object.class.getName(),collected.next());
-		assertEquals(Cloneable.class.getName(),collected.next());
-		assertEquals(RandomAccess.class.getName(),collected.next());
-		assertEquals(List.class.getName(),collected.next());
-		assertEquals(Collection.class.getName(),collected.next());
-		assertEquals(Iterable.class.getName(),collected.next());
 		assertEquals(AbstractList.class.getName(),collected.next());
 		assertEquals(AbstractCollection.class.getName(),collected.next());
+		assertEquals(Object.class.getName(),collected.next());
+		assertEquals(Collection.class.getName(),collected.next());
+		assertEquals(Iterable.class.getName(),collected.next());
+		assertEquals(List.class.getName(),collected.next());
+		assertEquals(RandomAccess.class.getName(),collected.next());
+		assertEquals(Cloneable.class.getName(),collected.next());
+		assertEquals(Serializable.class.getName(),collected.next());
 		assertFalse(collected.hasNext());
 	}
 	
