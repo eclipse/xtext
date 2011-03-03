@@ -51,9 +51,9 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 		"return",
 		"null",
 		// Collection Literals
-		"emptyList()",
-		"emptySet()",
-		"emptyMap()",
+		"emptyList",
+		"emptySet",
+		"emptyMap",
 		"newImmutableList()",
 		"newImmutableSet()",
 		"newImmutableMap()",
@@ -64,7 +64,10 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 		"newTreeSet()",
 		"newHashMap()",
 		"newLinkedHashMap()",
-		"newTreeMap()"
+		"newTreeMap()",
+		// InputOutput,
+		"print()",
+		"println()"
 	};
 	
 	protected static String[] STRING_OPERATORS = {
@@ -100,9 +103,9 @@ public class ContentAssistTest extends AbstractXbaseUITestCase {
 				features.add(field.getName());
 		}
 		// StringExtensions
-		features.add("toFirstLower()");
-		features.add("toFirstUpper()");
-		features.add("isNullOrEmpty()");
+		features.add("toFirstLower");
+		features.add("toFirstUpper");
+		features.add("nullOrEmpty");
 		STRING_FEATURES = features.toArray(new String[features.size()]);
 	}
 
