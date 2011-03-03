@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.diagnostics.Severity;
 
@@ -43,6 +44,8 @@ public interface Issue {
 	String[] getData();
 	
 	static class IssueImpl implements Issue {
+		
+		private static Logger LOG = Logger.getLogger(IssueImpl.class);
 
 		private Integer length, lineNumber, offset;
 		private String code, message;
@@ -57,7 +60,12 @@ public interface Issue {
 		}
 
 		public void setLength(Integer length) {
-			this.length = length;
+			if(length <0) {
+				LOG.error("Issue length < 0");
+				this.length = 0;
+			} else {
+				this.length = length;
+			}
 		}
 
 		public Integer getLineNumber() {
