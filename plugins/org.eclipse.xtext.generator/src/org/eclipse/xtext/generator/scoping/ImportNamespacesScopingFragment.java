@@ -21,7 +21,7 @@ public class ImportNamespacesScopingFragment extends AbstractScopingFragment {
 	protected Class<? extends IScopeProvider> getLocalScopeProvider() {
 		return ImportedNamespaceAwareLocalScopeProvider.class;
 	}
-	
+
 	@Override
 	protected Class<? extends IGlobalScopeProvider> getGlobalScopeProvider() {
 		return DefaultGlobalScopeProvider.class;

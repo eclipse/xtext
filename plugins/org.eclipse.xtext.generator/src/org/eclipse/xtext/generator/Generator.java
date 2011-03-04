@@ -49,7 +49,7 @@ import com.google.common.collect.Maps;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
- * 
+ *
  *         The main xtext generator. Can be configured with
  *         {@link IGeneratorFragment} instances as well as with some properties
  *         declared via setter or adder methods.
@@ -67,11 +67,11 @@ public class Generator extends AbstractWorkflowComponent2 {
 	public static final String SRC = "SRC";
 	public static final String SRC_GEN = "SRC_GEN";
 	public static final String PLUGIN_RT = "PLUGIN";
-	
+
 	private Naming naming = new Naming();
-	
+
 	private String encoding;
-	
+
 	public void setNaming(Naming naming) {
 		this.naming = naming;
 	}
@@ -139,11 +139,11 @@ public class Generator extends AbstractWorkflowComponent2 {
 	private String srcPath = "/src";
 	private String srcGenPath = "/src-gen";
 	private List<PostProcessor> postProcessors = Lists.newArrayList();
-	
+
 	public void addPostProcessor(PostProcessor postProcessor) {
 		this.postProcessors.add(postProcessor);
 	}
-	
+
 	public List<PostProcessor> getPostProcessors() {
 		return postProcessors;
 	}
@@ -151,7 +151,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 	public String getPathRtProject() {
 		return pathRtProject;
 	}
-	
+
 	public void setPathRtProject(String pathRtProject) {
 		this.pathRtProject = pathRtProject;
 	}
@@ -216,19 +216,19 @@ public class Generator extends AbstractWorkflowComponent2 {
 		// initialize global vars
 		Map<String,Variable> globalVars = Maps.newHashMap();
 		globalVars.put(Naming.GLOBAL_VAR_NAME, new Variable(Naming.GLOBAL_VAR_NAME,naming));
-		
+
 		// create execution context
 		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null,globalVars,null,null);
 		//since our templates are all encoded in ISO-8859-1, we have to fix it here.
 		execCtx.getResourceManager().setFileEncoding("ISO-8859-1");
-		
+
 		execCtx.registerMetaModel(new JavaBeansMetaModel());
 		// add default value for 'modelPluginID' for generated GenModel required
 		// for further .edit/.editor generation
 		execCtx = (XpandExecutionContextImpl) execCtx.cloneWithVariable(new Variable("modelPluginID", getProjectNameRt()));
 		return execCtx;
 	}
-	
+
 	protected Outlet createOutlet(boolean append, String encoding, String name, boolean overwrite, String path) {
 		Outlet outlet = new Outlet(append,encoding,name,overwrite,path);
 		for (PostProcessor pp : getPostProcessors()) {
@@ -496,7 +496,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 	private void generateManifest(XpandFacade facade, String name, String symbolicName, String version, Set<String> exported,
 			Set<String> requiredBundles, Set<String> imported, String activator) {
-		facade.evaluate("org::eclipse::xtext::generator::Manifest::file", 
+		facade.evaluate("org::eclipse::xtext::generator::Manifest::file",
 				name, symbolicName, version, exported, requiredBundles, imported, activator);
 	}
 
@@ -511,7 +511,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 		}
 		return activator;
 	}
-	
+
 	/**
 	 * Sets the encoding of the generated files
 	 */

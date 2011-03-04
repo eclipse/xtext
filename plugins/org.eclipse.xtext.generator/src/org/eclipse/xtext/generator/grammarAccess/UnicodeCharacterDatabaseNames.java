@@ -19,12 +19,12 @@ public class UnicodeCharacterDatabaseNames {
 
 	/**
 	 * Returns the Unicode string name for a character.
-	 * 
+	 *
 	 */
 	public static String getCharacterName(char character) {
 		String transliterated = transliterator.transliterate(String.valueOf(character));
 		// returns strings in the for of SEMICOLON}
 		return transliterated.substring("\\N{".length(),transliterated.length()-"}".length());
 	}
-	
+
 }

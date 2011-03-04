@@ -18,7 +18,7 @@ public class AntlrOptions {
 	private int k = -1;
 	private boolean ignoreCase = false;
 	private boolean classSplitting = false;
-	
+
 	public boolean isBacktrack() {
 		return backtrack;
 	}
@@ -55,5 +55,5 @@ public class AntlrOptions {
 	public void setClassSplitting(boolean value) {
 		this.classSplitting = value;
 	}
-	
+
 }

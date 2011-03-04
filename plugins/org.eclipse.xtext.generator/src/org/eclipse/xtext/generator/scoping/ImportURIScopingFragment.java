@@ -21,7 +21,7 @@ public class ImportURIScopingFragment extends AbstractScopingFragment {
 	protected Class<? extends IScopeProvider> getLocalScopeProvider() {
 		return SimpleLocalScopeProvider.class;
 	}
-	
+
 	@Override
 	protected Class<? extends IGlobalScopeProvider> getGlobalScopeProvider() {
 		return ImportUriGlobalScopeProvider.class;

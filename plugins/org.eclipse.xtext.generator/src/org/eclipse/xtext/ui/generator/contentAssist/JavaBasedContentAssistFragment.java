@@ -17,16 +17,17 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.generator.IGeneratorFragment;
 
 /**
  * A {@link IGeneratorFragment} to generate a java-based content assist for an Xtext language.
- * 
+ *
  * @author Jan Koehnlein
  */
 public class JavaBasedContentAssistFragment extends AbstractGeneratorFragment {
-	
+
 	private boolean inherit = true;
-	
+
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
@@ -38,7 +39,7 @@ public class JavaBasedContentAssistFragment extends AbstractGeneratorFragment {
 	private String getProposalProviderClassName(Grammar grammar) {
 		return getNaming().basePackageUi(grammar)+ ".contentassist." + GrammarUtil.getName(grammar) + "ProposalProvider";
 	}
-	
+
 	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
 		return new String[]{
@@ -50,15 +51,15 @@ public class JavaBasedContentAssistFragment extends AbstractGeneratorFragment {
 	public String[] getImportedPackagesUi(Grammar grammar) {
 		return new String[] { "org.apache.log4j" };
 	}
-	
+
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
 		return Collections.<Object>singletonList(inherit);
 	}
 
 	/**
-	 * Decide whether to inherit content assist from the super language. 
-	 * 
+	 * Decide whether to inherit content assist from the super language.
+	 *
 	 * @param inherit
 	 */
 	public void setInherit(boolean inherit) {
@@ -68,7 +69,7 @@ public class JavaBasedContentAssistFragment extends AbstractGeneratorFragment {
 	public boolean isInherit() {
 		return inherit;
 	}
-	
+
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		super.generate(grammar, ctx);

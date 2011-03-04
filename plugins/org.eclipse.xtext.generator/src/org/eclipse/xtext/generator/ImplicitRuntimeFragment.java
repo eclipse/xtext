@@ -17,12 +17,12 @@ public class ImplicitRuntimeFragment extends DefaultGeneratorFragment {
 	public String[] getRequiredBundlesRt(Grammar grammar) {
 		return new String[]{"org.eclipse.xtext", "org.eclipse.xtext.util"};
 	}
-	
+
 	@Override
 	public String[] getImportedPackagesRt(Grammar grammar) {
 		return new String[] {"org.apache.log4j"};
 	}
-	
+
 	@Override
 	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
 		super.addToPluginXmlRt(grammar, ctx);

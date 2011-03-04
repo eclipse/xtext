@@ -1,5 +1,5 @@
 package org.eclipse.xtext.generator.parser.antlr.debug.validation;
- 
+
 
 public class SimpleAntlrJavaValidator extends AbstractSimpleAntlrJavaValidator {
 

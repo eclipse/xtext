@@ -13,7 +13,7 @@ package org.eclipse.xtext.generator.parser.antlr.postProcessing;
 public class SuppressWarningsProcessor {
 
 	public String process(String content) {
-		String result = content.replaceFirst("public class ", "@SuppressWarnings(\"all\")\n" + 
+		String result = content.replaceFirst("public class ", "@SuppressWarnings(\"all\")\n" +
 				"public class ");
 		return result;
 	}

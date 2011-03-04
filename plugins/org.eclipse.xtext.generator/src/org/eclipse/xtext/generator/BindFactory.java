@@ -20,11 +20,11 @@ public class BindFactory {
 	public BindFactory(String contributedBy) {
 		this.contributedBy = contributedBy;
 	}
-	
+
 	public String getContributedBy() {
 		return contributedBy;
 	}
-	
+
 	private final Set<Binding> bindings = new LinkedHashSet<Binding>();
 
 	public BindFactory addTypeToInstance(String s1, String s2) {
@@ -47,7 +47,7 @@ public class BindFactory {
 	private Binding binding(BindKey type, BindValue expr) {
 		return binding(type, expr, false);
 	}
-	
+
 	private Binding binding(BindKey type, BindValue expr, boolean isFinal) {
 		return new Binding(type, expr, isFinal, getContributedBy());
 	}

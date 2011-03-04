@@ -35,7 +35,7 @@ public class DebugAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 		super.checkConfiguration(issues);
 		issues.addInfo("Generate debugging grammar file");
 	}
-	
+
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		super.generate(grammar, ctx);
@@ -43,7 +43,7 @@ public class DebugAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 		String absoluteGrammarFileName = srcGenPath+"/"+getGrammarFileName(grammar, getNaming()).replace('.', '/')+".g";
 		prettyPrint(absoluteGrammarFileName);
 	}
-	
+
 	protected void prettyPrint(String absoluteGrammarFileName) {
 		try {
 			String content = readFileIntoString(absoluteGrammarFileName);

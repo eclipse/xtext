@@ -33,34 +33,34 @@ import com.google.common.collect.Lists;
 public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment {
 
 	private String lexerGrammar;
-	
+
 	private boolean highlighting;
-	
+
 	private boolean runtime;
-	
+
 	private boolean contentAssist;
-	
+
 	private List<String> antlrParams = Lists.newArrayList();
-	
+
 	public void addAntlrParam(String param) {
 		antlrParams.add(param);
 	}
-	
+
 	public String[] getAntlrParams() {
 		String[] result = antlrParams.toArray(new String[antlrParams.size()]);
 		return result;
 	}
-	
+
 	private AntlrToolFacade antlrTool = new AntlrToolFacade();
-	
+
 	public void setAntlrTool(AntlrToolFacade facade) {
 		this.antlrTool = facade;
 	}
-	
+
 	public AntlrToolFacade getAntlrTool() {
 		return antlrTool;
 	}
-	
+
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		super.generate(grammar, ctx);
@@ -81,11 +81,11 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment {
 		addAntlrParam("-fo");
 		addAntlrParam(generateTo);
 		getAntlrTool().runWithParams(grammarFile, getAntlrParams());
-		
+
 		String javaFile = srcGenPath+"/"+getLexerGrammar().replace('.', '/')+".java";
 		suppressWarningsImpl(javaFile);
 	}
-	
+
 	protected void suppressWarningsImpl(String javaFile) {
 		String content = readFileIntoString(javaFile);
 		content = new SuppressWarningsProcessor().process(content);
@@ -98,12 +98,12 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment {
 			issues.addError("Only one of those flags is allowed: contentAssist, runtime, highlighting flag");
 		}
 	}
-	
+
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		if (runtime)
 			return new BindFactory()
-				.addConfiguredBinding("RuntimeLexer", 
+				.addConfiguredBinding("RuntimeLexer",
 						"binder.bind(" + Lexer.class.getName() + ".class)"+
 						".annotatedWith(com.google.inject.name.Names.named(" +
 						"org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME" +
@@ -111,12 +111,12 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment {
 				.getBindings();
 		return Collections.emptySet();
 	}
-	
+
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		if (highlighting)
 			return new BindFactory()
-				.addConfiguredBinding("HighlightingLexer", 
+				.addConfiguredBinding("HighlightingLexer",
 						"binder.bind(" + Lexer.class.getName() + ".class)"+
 						".annotatedWith(com.google.inject.name.Names.named(" +
 						"org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING" +
@@ -124,16 +124,16 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment {
 				.getBindings();
 		if (contentAssist)
 			return new BindFactory()
-				.addConfiguredBinding("ContentAssistLexer", 
+				.addConfiguredBinding("ContentAssistLexer",
 						"binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class)"+
 						".annotatedWith(com.google.inject.name.Names.named(" +
 						"org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST" +
 						")).to(" + lexerGrammar +".class)")
 				.getBindings();
 		return Collections.emptySet();
-		
+
 	}
-	
+
 	public void setLexerGrammar(String lexerGrammar) {
 		this.lexerGrammar = lexerGrammar;
 	}
@@ -165,5 +165,5 @@ public class ExternalAntlrLexerFragment extends DefaultGeneratorFragment {
 	public boolean isContentAssist() {
 		return contentAssist;
 	}
-	
+
 }

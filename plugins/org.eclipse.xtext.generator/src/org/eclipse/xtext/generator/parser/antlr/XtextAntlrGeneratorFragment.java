@@ -28,14 +28,14 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.UnorderedGroupHelper;
 
 /**
- * Converts the Xtext grammar to an AntLR grammar runs the AntLR generator. 
+ * Converts the Xtext grammar to an AntLR grammar runs the AntLR generator.
  * Additionally generates some parser/lexer related services
- *  
+ *
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  */
 public class XtextAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment {
-	
+
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		super.generate(grammar, ctx);
@@ -48,7 +48,7 @@ public class XtextAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 		splitParserAndLexerIfEnabled(absoluteGrammarFileName);
 		suppressWarnings(absoluteGrammarFileName);
 	}
-	
+
 	@Override
 	public void checkConfiguration(Issues issues) {
 		super.checkConfiguration(issues);
@@ -59,7 +59,7 @@ public class XtextAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 			issues.addError("This fragment does not support the option 'ignorecase'. Use 'org.eclipse.xtext.generator.parser.antlr.ex.rt.AntlrGeneratorFragment' instead");
 		}
 	}
-	
+
 	@Override
 	public String[] getExportedPackagesRt(Grammar grammar) {
 		return new String[]{
@@ -67,14 +67,14 @@ public class XtextAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 				getNaming().basePackageRuntime(grammar) + ".parser.antlr.internal"
 		};
 	}
-	
+
 	@Override
 	public String[] getRequiredBundlesRt(Grammar grammar) {
 		return new String[]{
 				"org.antlr.runtime"
 		};
 	}
-	
+
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		BindFactory factory = new BindFactory()
@@ -83,7 +83,7 @@ public class XtextAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 			.addTypeToType(IAntlrTokenFileProvider.class.getName(),getAntlrTokenFileProviderClassName(grammar, getNaming()))
 			.addTypeToType(Lexer.class.getName(), getLexerClassName(grammar, getNaming()))
 			.addTypeToProviderInstance(getLexerClassName(grammar, getNaming()), "org.eclipse.xtext.parser.antlr.LexerProvider.create(" + getLexerClassName(grammar, getNaming()) + ".class)")
-			.addConfiguredBinding("RuntimeLexer", 
+			.addConfiguredBinding("RuntimeLexer",
 					"binder.bind(" + Lexer.class.getName() + ".class)"+
 					".annotatedWith(com.google.inject.name.Names.named(" +
 					"org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME" +
@@ -98,23 +98,23 @@ public class XtextAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
 			.addTypeToType("org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper", "org.eclipse.xtext.ui.editor.contentassist.antlr.AntlrProposalConflictHelper")
-			.addConfiguredBinding("HighlightingLexer", 
+			.addConfiguredBinding("HighlightingLexer",
 					"binder.bind(" + Lexer.class.getName() + ".class)"+
 					".annotatedWith(com.google.inject.name.Names.named(" +
 					"org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING" +
 					")).to(" + getLexerClassName(grammar, getNaming()) +".class)")
-			.addConfiguredBinding("HighlightingTokenDefProvider", 
+			.addConfiguredBinding("HighlightingTokenDefProvider",
 					"binder.bind(" + ITokenDefProvider.class.getName() + ".class)"+
 					".annotatedWith(com.google.inject.name.Names.named(" +
 					"org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING" +
 					")).to(" + AntlrTokenDefProvider.class.getName() +".class)")
 			.getBindings();
 	}
-	
+
 	public static String getAntlrTokenFileProviderClassName(Grammar grammar, Naming naming) {
 		return naming.basePackageRuntime(grammar) + ".parser.antlr." + GrammarUtil.getName(grammar)	+ "AntlrTokenFileProvider";
 	}
-	
+
 	public static String getLexerClassName(Grammar g, Naming naming) {
 		return naming.basePackageRuntime(g) + ".parser.antlr.internal.Internal" + GrammarUtil.getName(g)	+ "Lexer";
 	}

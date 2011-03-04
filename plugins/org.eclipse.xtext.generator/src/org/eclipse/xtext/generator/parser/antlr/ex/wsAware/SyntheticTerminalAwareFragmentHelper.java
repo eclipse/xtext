@@ -15,11 +15,11 @@ import org.eclipse.xtext.generator.parser.antlr.ex.common.AntlrFragmentHelper;
 
 /**
  * This fragment helper could be used to implement whitespace aware grammars.
- * 
+ *
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class SyntheticTerminalAwareFragmentHelper extends AntlrFragmentHelper {
-	
+
 	public SyntheticTerminalAwareFragmentHelper(Naming naming) {
 		super(naming);
 	}

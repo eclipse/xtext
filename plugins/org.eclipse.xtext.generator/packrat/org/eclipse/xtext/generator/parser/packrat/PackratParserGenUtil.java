@@ -42,6 +42,7 @@ import com.google.common.collect.Sets;
 
 /**
  * Various utilities for the parser generator.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public final class PackratParserGenUtil {
@@ -70,18 +71,20 @@ public final class PackratParserGenUtil {
 	}
 
 	/**
-	 * @param rule - the rule
+	 * @param rule
+	 *            - the rule
 	 * @return <code>firstLetterToUpper(rule.name) + "Consumer"</code>
 	 */
 	public static String getConsumerClassName(AbstractRule rule) {
 		Grammar grammar = GrammarUtil.getGrammar(rule);
-		return (grammar != null ? GrammarUtil.getName(grammar) : "") +
-			(rule.getName() == null ? "Consumer" : Strings.toFirstUpper(rule.getName()) + "Consumer");
+		return (grammar != null ? GrammarUtil.getName(grammar) : "")
+				+ (rule.getName() == null ? "Consumer" : Strings.toFirstUpper(rule.getName()) + "Consumer");
 	}
 
 	/**
 	 * @param g
-	 * @return
+	 *            {@link Grammar}
+	 * @return Parser name
 	 */
 	public static String getGeneratedParser(Grammar g, Naming naming) {
 		return naming.basePackageRuntime(g) + ".parser.packrat." + getName(g) + "PackratParser";
@@ -120,8 +123,9 @@ public final class PackratParserGenUtil {
 	 * <li><code><> = consumer</code></li>
 	 * <li><code>Root = rootConsumer</code></li>
 	 * </ul>
+	 * 
 	 * @param rule
-	 * @return
+	 * @return {@link String}
 	 */
 	public static String getConsumerFieldName(AbstractRule rule) {
 		return getFieldName(rule.getName(), "consumer");
@@ -143,7 +147,7 @@ public final class PackratParserGenUtil {
 		boolean wasUnderscore = false;
 		boolean wasUppercase = true;
 		boolean wasDigit = false;
-		for(int i=0; i<myName.length(); i++) {
+		for (int i = 0; i < myName.length(); i++) {
 			char c = myName.charAt(i);
 			if (c == '_') {
 				if (wasUnderscore) { // we may not strip more then one underscore in the middle
@@ -165,7 +169,7 @@ public final class PackratParserGenUtil {
 						result.append(Character.toUpperCase(c));
 					} else if (Character.isUpperCase(c)) {
 						if (wasUppercase) {
-							if (i!=0 && i != myName.length() - 1) {
+							if (i != 0 && i != myName.length() - 1) {
 								char next = myName.charAt(i + 1);
 								if (Character.isLetter(next) && Character.isLowerCase(next)) {
 									result.append(c);
@@ -195,7 +199,7 @@ public final class PackratParserGenUtil {
 	}
 
 	public static String getConsumeMethodName(AbstractElement element) {
-		return "consume" + element.eClass().getName()+ getElementIndex(element);
+		return "consume" + element.eClass().getName() + getElementIndex(element);
 	}
 
 	private static String getElementIndex(AbstractElement element) {
@@ -218,7 +222,8 @@ public final class PackratParserGenUtil {
 
 	public static String getGlobalDelimiterFieldName(AbstractElement element) {
 		// TODO make upperCase -> UPPER_CASE$1$DELIMITER
-		return getFieldName(element.eClass().getName(), getElementIndex(element, GrammarUtil.getGrammar(element)) + "$Delimiter");
+		return getFieldName(element.eClass().getName(), getElementIndex(element, GrammarUtil.getGrammar(element))
+				+ "$Delimiter");
 	}
 
 	public static Iterator<Keyword> getConflictingKeywords(final TerminalRule rule, final Iterator<Keyword> allKeywords) {
@@ -256,8 +261,8 @@ public final class PackratParserGenUtil {
 	}
 
 	private static List<String> getConflictingKeywordsImpl(final Grammar grammar, TerminalRule rule) {
-		final Iterator<Keyword> conflictingKeywords = getConflictingKeywords(rule, Iterators.filter(
-				EcoreUtil.getAllContents(grammar, true), Keyword.class));
+		final Iterator<Keyword> conflictingKeywords = getConflictingKeywords(rule,
+				Iterators.filter(EcoreUtil.getAllContents(grammar, true), Keyword.class));
 		Set<String> res = Sets.newLinkedHashSet();
 		Iterators.addAll(res, Iterators.transform(conflictingKeywords, new Function<Keyword, String>() {
 			public String apply(Keyword param) {
@@ -271,12 +276,13 @@ public final class PackratParserGenUtil {
 	public static AbstractElement findFirstWithSameConflicts(final AbstractElement element, final Grammar grammar) {
 		final List<String> conflicting = getConflictingKeywords(element, grammar);
 		AbstractElement result = element;
-		Iterator<AbstractElement> iterator = Iterators.filter(Iterators.filter(EcoreUtil.getAllContents(grammar, true), AbstractElement.class),
-			new Predicate<AbstractElement>() {
-				public boolean apply(AbstractElement param) {
-					final List<String> otherConflicting = getConflictingKeywords(param, grammar);
-					return otherConflicting != null && otherConflicting.equals(conflicting);
-				}
+		Iterator<AbstractElement> iterator = Iterators.filter(
+				Iterators.filter(EcoreUtil.getAllContents(grammar, true), AbstractElement.class),
+				new Predicate<AbstractElement>() {
+					public boolean apply(AbstractElement param) {
+						final List<String> otherConflicting = getConflictingKeywords(param, grammar);
+						return otherConflicting != null && otherConflicting.equals(conflicting);
+					}
 				});
 		if (iterator.hasNext())
 			result = iterator.next();
@@ -288,14 +294,15 @@ public final class PackratParserGenUtil {
 	public static Keyword findFirstKeywordWithSameConflicts(final Keyword element, final Grammar grammar) {
 		final List<AbstractRule> conflicting = getConflictingLexerRules(element, grammar);
 		Keyword result = element;
-		Iterator<Keyword> iterator = Iterators.filter(Iterators.filter(EcoreUtil.getAllContents(grammar, true), Keyword.class), new Predicate<Keyword>() {
-				public boolean apply(Keyword param) {
-					if (GrammarUtil.containingParserRule(param) == null)
-						return false;
-					final List<AbstractRule> otherConflicting = getConflictingLexerRules(param, grammar);
-					return otherConflicting != null && otherConflicting.equals(conflicting);
-				}
-			});
+		Iterator<Keyword> iterator = Iterators.filter(
+				Iterators.filter(EcoreUtil.getAllContents(grammar, true), Keyword.class), new Predicate<Keyword>() {
+					public boolean apply(Keyword param) {
+						if (GrammarUtil.containingParserRule(param) == null)
+							return false;
+						final List<AbstractRule> otherConflicting = getConflictingLexerRules(param, grammar);
+						return otherConflicting != null && otherConflicting.equals(conflicting);
+					}
+				});
 		if (iterator.hasNext())
 			result = iterator.next();
 

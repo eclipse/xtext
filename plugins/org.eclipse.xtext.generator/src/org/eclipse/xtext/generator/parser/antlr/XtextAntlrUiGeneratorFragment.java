@@ -27,6 +27,7 @@ import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
+import org.eclipse.xtext.generator.IGeneratorFragment;
 import org.eclipse.xtext.generator.Naming;
 
 import com.google.common.base.Predicate;
@@ -34,7 +35,7 @@ import com.google.common.collect.Collections2;
 
 /**
  * A {@link IGeneratorFragment} to generate a lightweight AntLR based parser used in content assist.
- * 
+ *
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragment {
@@ -62,7 +63,7 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 			issues.addError("This fragment does not support the option 'ignoreCase'. Use 'org.eclipse.xtext.generator.parser.antlr.ex.ca.ContentAssistParserGeneratorFragment' instead");
 		}
 	}
-	
+
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
@@ -72,10 +73,10 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 			.addTypeToType(
 					"org.eclipse.xtext.ui.editor.contentassist.antlr.IContentAssistParser",
 					getParserClassName(grammar, getNaming()))
-			.addConfiguredBinding("ContentAssistLexerProvider", 
+			.addConfiguredBinding("ContentAssistLexerProvider",
 					"binder.bind(" + getInternalLexerClassName(grammar, getNaming()) +".class)"+
 					".toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(" + getInternalLexerClassName(grammar, getNaming()) + ".class))")
-			.addConfiguredBinding("ContentAssistLexer", 
+			.addConfiguredBinding("ContentAssistLexer",
 					"binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class)"+
 					".annotatedWith(com.google.inject.name.Names.named(" +
 					"org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST" +
@@ -114,7 +115,7 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 	public static Collection<Alternatives> getAllAlternatives(Grammar g) {
 		return getAllElementsByType(g, Alternatives.class);
 	}
-	
+
 	public static Collection<UnorderedGroup> getAllUnorderedGroups(Grammar g) {
 		return getAllElementsByType(g, UnorderedGroup.class);
 	}
@@ -122,7 +123,7 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 	public static Collection<Group> getAllGroups(Grammar g) {
 		return getAllElementsByType(g, Group.class);
 	}
-	
+
 	public static Collection<Assignment> getAllAssignments(Grammar g) {
 		return getAllElementsByType(g, Assignment.class);
 	}
@@ -136,7 +137,7 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 		});
 		return result;
 	}
-	
+
 	private static <T extends AbstractElement> Collection<T> getAllElementsByType(Grammar g, Class<T> type) {
 		Collection<ParserRule> allParserRules = GrammarUtil.allParserRules(g);
 		List<T> result = new ArrayList<T>(30);

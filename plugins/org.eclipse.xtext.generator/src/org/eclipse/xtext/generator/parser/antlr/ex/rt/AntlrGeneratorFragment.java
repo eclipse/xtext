@@ -44,13 +44,13 @@ import org.eclipse.xtext.parsetree.reconstr.impl.IgnoreCaseKeywordSerializer;
 
 
 /**
- * Converts the Xtext grammar to an AntLR grammar runs the AntLR generator. 
+ * Converts the Xtext grammar to an AntLR grammar runs the AntLR generator.
  * Additionally generates some parser/lexer related services
- *  
+ *
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
-	
+
 	@Override
 	public void generate(final Grammar grammar, XpandExecutionContext ctx) {
 		KeywordHelper helper = new KeywordHelper(grammar, getOptions().isIgnoreCase());
@@ -73,7 +73,7 @@ public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 		simplifyUnorderedGroupPredicatesIfRequired(grammar, absoluteParserFileName);
 		splitParserAndLexerIfEnabled(absoluteLexerFileName, absoluteParserFileName);
 		suppressWarnings(absoluteLexerFileName, absoluteParserFileName);
-		
+
 		MutableTokenDefProvider provider = createLexerTokensProvider(lexerBaseFileName);
 		for(Map.Entry<Integer, String> entry: provider.getTokenDefMap().entrySet()) {
 			String value = entry.getValue();
@@ -108,7 +108,7 @@ public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 		});
 		return provider;
 	}
-	
+
 	protected void cleanupLexerTokensFile(String lexerBaseFileName) {
 		if (getOptions().isBacktrackLexer()) {
 			MutableTokenDefProvider provider = createLexerTokensProvider(lexerBaseFileName);
@@ -135,14 +135,14 @@ public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 				getNaming().basePackageRuntime(grammar) + ".parser.antlr.lexer"
 		};
 	}
-	
+
 	@Override
 	public String[] getRequiredBundlesRt(Grammar grammar) {
 		return new String[]{
 				"org.antlr.runtime"
 		};
 	}
-	
+
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		BindFactory factory = new BindFactory()
@@ -151,7 +151,7 @@ public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 			.addTypeToType(IAntlrTokenFileProvider.class.getName(),getFragmentHelper().getAntlrTokenFileProviderClassName(grammar))
 			.addTypeToType(Lexer.class.getName(), getFragmentHelper().getLexerClassName(grammar))
 			.addTypeToProviderInstance(getFragmentHelper().getLexerClassName(grammar), "org.eclipse.xtext.parser.antlr.LexerProvider.create(" + getFragmentHelper().getLexerClassName(grammar) + ".class)")
-			.addConfiguredBinding("RuntimeLexer", 
+			.addConfiguredBinding("RuntimeLexer",
 					"binder.bind(" + Lexer.class.getName() + ".class)"+
 					".annotatedWith(com.google.inject.name.Names.named(" +
 					"org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME" +
@@ -171,24 +171,24 @@ public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
 			.addTypeToType("org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper", "org.eclipse.xtext.ui.editor.contentassist.antlr.AntlrProposalConflictHelper")
-			.addConfiguredBinding("HighlightingLexer", 
+			.addConfiguredBinding("HighlightingLexer",
 					"binder.bind(" + Lexer.class.getName() + ".class)"+
 					".annotatedWith(com.google.inject.name.Names.named(" +
 					"org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING" +
 					")).to(" + getFragmentHelper().getLexerClassName(grammar) +".class)")
-			.addConfiguredBinding("HighlightingTokenDefProvider", 
+			.addConfiguredBinding("HighlightingTokenDefProvider",
 					"binder.bind(" + ITokenDefProvider.class.getName() + ".class)"+
 					".annotatedWith(com.google.inject.name.Names.named(" +
 					"org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING" +
 					")).to(" + AntlrTokenDefProvider.class.getName() +".class)")
 			.getBindings();
 	}
-	
+
 	@Override
 	public void checkConfiguration(Issues issues) {
 		super.checkConfiguration(issues);
 		if(getOptions().isBacktrackLexer() && getOptions().isIgnoreCase())
 			issues.addError("Backtracking lexer and ignorecase cannot be combined for now.");
 	}
-	
+
 }

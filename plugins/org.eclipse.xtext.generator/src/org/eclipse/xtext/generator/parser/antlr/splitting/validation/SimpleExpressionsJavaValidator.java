@@ -1,7 +1,6 @@
 package org.eclipse.xtext.generator.parser.antlr.splitting.validation;
 
-import org.eclipse.xtext.generator.parser.antlr.splitting.validation.AbstractSimpleExpressionsJavaValidator;
- 
+
 
 public class SimpleExpressionsJavaValidator extends AbstractSimpleExpressionsJavaValidator {
 

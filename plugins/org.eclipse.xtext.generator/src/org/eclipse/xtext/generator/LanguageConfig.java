@@ -33,7 +33,7 @@ import com.google.common.base.Function;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
+ *
  */
 public class LanguageConfig extends CompositeGeneratorFragment {
 
@@ -90,7 +90,7 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 			issues.addError("property 'uri' is mandatory for element 'language'.", this);
 		}
 	}
-	
+
 	protected boolean isCheckFileExtension() {
 		return true;
 	}
@@ -162,7 +162,7 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 	}
 
 	/**
-	 * @return
+	 * @return {@link Grammar}
 	 */
 	public Grammar getGrammar() {
 		return grammar;

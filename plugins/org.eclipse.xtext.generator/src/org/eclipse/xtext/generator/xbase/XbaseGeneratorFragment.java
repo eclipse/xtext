@@ -30,7 +30,7 @@ import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 
 /**
  * Prepares a host language to embed Xbase. Use with {@link org.eclipse.xtext.generator.types.TypesGeneratorFragment}.
- * 
+ *
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
  */

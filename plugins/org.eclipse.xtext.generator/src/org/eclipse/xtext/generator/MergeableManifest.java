@@ -255,7 +255,7 @@ public class MergeableManifest extends Manifest {
 		this.modified = modified.get();
 		getMainAttributes().put(EXPORT_PACKAGE, result);
 	}
-	
+
 	public void addImportedPackages(Set<String> packages) {
 		String s = (String) getMainAttributes().get(IMPORT_PACKAGE);
 		Wrapper<Boolean> modified = Wrapper.wrap(this.modified);

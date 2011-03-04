@@ -9,14 +9,14 @@ import org.eclipse.xtext.generator.parser.antlr.debug.services.SimpleAntlrGramma
 
 /**
  * This class contains custom formatting description.
- * 
+ *
  * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#formatting
- * on how and when to use it 
- * 
- * Also see {@link org.eclipse.xtext.xtext.XtextFormattingTokenSerializer} as an example
+ * on how and when to use it
+ *
+ * Also see {@link org.eclipse.xtext.xtext.XtextFormatter} as an example
  */
 public class SimpleAntlrFormatter extends AbstractDeclarativeFormatter {
-	
+
 	@Override
 	protected void configureFormatting(FormattingConfig c) {
 		c.setLinewrap(2, 2, 2).before(getGrammarAccess().getSL_COMMENTRule());
@@ -32,7 +32,7 @@ public class SimpleAntlrFormatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap().before(getGrammarAccess().getRuleAccess().getSemicolonKeyword_4());
 		c.setLinewrap(2).after(getGrammarAccess().getRuleAccess().getSemicolonKeyword_4());
 	}
-	
+
 	@Override
 	protected SimpleAntlrGrammarAccess getGrammarAccess() {
 		return (SimpleAntlrGrammarAccess) super.getGrammarAccess();

@@ -29,6 +29,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
+import org.eclipse.emf.codegen.ecore.genmodel.impl.GenModelImpl;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
@@ -57,6 +58,7 @@ import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
+import org.eclipse.xtext.generator.IGeneratorFragment;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.Strings;
 
@@ -104,11 +106,11 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	private boolean skipGenerate = false;
 
 	private String xmiModelDirectory = null;
-	
+
 	private String fileExtensions = null;
 
 	private BiMap<URI, URI> saveMappings = HashBiMap.create();
-	
+
 	{
 		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("genmodel"))
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("genmodel",
@@ -154,8 +156,10 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		try {
 			// create a defensive clone
-			ResourceSet copiedResourceSet = EcoreUtil2.clone(new XtextResourceSet(), grammar.eResource().getResourceSet());
-			Grammar copiedGrammar = (Grammar) copiedResourceSet.getResource(grammar.eResource().getURI(), true).getContents().get(0);
+			ResourceSet copiedResourceSet = EcoreUtil2.clone(new XtextResourceSet(), grammar.eResource()
+					.getResourceSet());
+			Grammar copiedGrammar = (Grammar) copiedResourceSet.getResource(grammar.eResource().getURI(), true)
+					.getContents().get(0);
 
 			List<EPackage> packs = getGeneratedEPackages(copiedGrammar);
 			if (!packs.isEmpty()) {
@@ -174,13 +178,14 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 					super.generate(copiedGrammar, ctx);
 				}
 				resolveAll(resourceSet);
-				ePackages.save(singletonMap(XMLResource.OPTION_URI_HANDLER, new ToPlatformResourceDeresolvingURIHandler()));
+				ePackages.save(singletonMap(XMLResource.OPTION_URI_HANDLER,
+						new ToPlatformResourceDeresolvingURIHandler()));
 			}
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static class ToPlatformResourceDeresolvingURIHandler extends URIHandlerImpl {
 		@Override
 		public URI deresolve(URI uri) {
@@ -188,14 +193,14 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 				return uri;
 			Map<String, URI> map = EcorePlugin.getPlatformResourceMap();
 			for (Entry<String, URI> entries : map.entrySet()) {
-				final URI newPrefix = URI.createURI("platform:/resource/"+entries.getKey()+"/");
+				final URI newPrefix = URI.createURI("platform:/resource/" + entries.getKey() + "/");
 				URI uri2 = uri.replacePrefix(entries.getValue(), newPrefix);
-				if (uri2!=null)
+				if (uri2 != null)
 					return uri2;
 			}
 			return super.deresolve(uri);
 		}
-		
+
 	}
 
 	protected List<GenPackage> loadReferencedGenModels(ResourceSet rs) {
@@ -339,12 +344,12 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 
 	@Override
 	public String[] getExportedPackagesRt(Grammar grammar) {
-		List<GeneratedMetamodel> typeSelect = org.eclipse.xtext.EcoreUtil2.typeSelect(grammar
-				.getMetamodelDeclarations(), GeneratedMetamodel.class);
+		List<GeneratedMetamodel> typeSelect = org.eclipse.xtext.EcoreUtil2.typeSelect(
+				grammar.getMetamodelDeclarations(), GeneratedMetamodel.class);
 		Set<String> exportedPackages = new LinkedHashSet<String>();
 		for (GeneratedMetamodel generatedMetamodel : typeSelect) {
-			final String modelPackage = Strings.skipLastToken(getGeneratedEPackageName(grammar, generatedMetamodel
-					.getEPackage()), ".");
+			final String modelPackage = Strings.skipLastToken(
+					getGeneratedEPackageName(grammar, generatedMetamodel.getEPackage()), ".");
 			exportedPackages.add(modelPackage);
 			exportedPackages.add(modelPackage + ".impl");
 			exportedPackages.add(modelPackage + ".util");
@@ -481,19 +486,20 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		for (GenPackage genPackage : genModel.getGenPackages()) {
 			genPackage.setBasePackage(getBasePackage(grammar));
 			if (getFileExtensions() != null && packs.contains(genPackage.getEcorePackage())) {
-                genPackage.setFileExtensions(getFileExtensions());
-            }
+				genPackage.setFileExtensions(getFileExtensions());
+			}
 		}
 		genModel.getUsedGenPackages().addAll(usedGenPackages);
 		resolveAll(rs);
 		try {
-			genModel.eResource().save(singletonMap(XMLResource.OPTION_URI_HANDLER, new ToPlatformResourceDeresolvingURIHandler()));
+			genModel.eResource().save(
+					singletonMap(XMLResource.OPTION_URI_HANDLER, new ToPlatformResourceDeresolvingURIHandler()));
 		} catch (IOException e) {
 			throw new WrappedException(e);
 		}
 		return genModel;
 	}
-	
+
 	public String getXmiModelDirectory() {
 		return xmiModelDirectory;
 	}
@@ -555,7 +561,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	 * Sets the target directory for the generated EMF-editor code. Only needed if you want to generate an EMF editor
 	 * plug_in.
 	 * 
-	 * @param editDirectory
+	 * @param editorDirectory
 	 */
 	public void setEditorDirectory(String editorDirectory) {
 		this.editorDirectory = editorDirectory;
@@ -565,7 +571,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	 * Sets the plug-in ID of the generated EMF editor plug-in. Only needed if you want to generate an EMF editor
 	 * plug_in.
 	 * 
-	 * @param editPluginId
+	 * @param editorPluginId
 	 */
 	public void setEditorPluginID(String editorPluginId) {
 		editorPluginID = editorPluginId;
@@ -654,12 +660,12 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	}
 
 	public void addSaveMapping(Mapping mapping) {
-		saveMappings.put(
-				URI.createURI(mapping.getFrom()), URI.createURI(mapping.getTo()));
+		saveMappings.put(URI.createURI(mapping.getFrom()), URI.createURI(mapping.getTo()));
 	}
 
 	/**
-	 * @param fileExtensions a comma-separated list of fileExtensions for the generated packages.
+	 * @param fileExtensions
+	 *            a comma-separated list of fileExtensions for the generated packages.
 	 */
 	public void setFileExtensions(String fileExtensions) {
 		this.fileExtensions = fileExtensions;

@@ -26,7 +26,7 @@ public class ConditionSimplifier extends SimpleExpressionsSwitch<Expression>{
 		Expression expression = simplifyRecursive(condition.getCondition());
 		condition.setCondition(expression);
 	}
-	
+
 	public Expression simplifyRecursive(Expression expression) {
 		return doSwitch(expression);
 	}
@@ -45,7 +45,7 @@ public class ConditionSimplifier extends SimpleExpressionsSwitch<Expression>{
 		object.setRight(right);
 		return object;
 	}
-		
+
 	@Override
 	public Expression caseOrExpression(OrExpression object) {
 		if (object.getRight() == null)
@@ -82,7 +82,7 @@ public class ConditionSimplifier extends SimpleExpressionsSwitch<Expression>{
 		object.setRight(right);
 		return object;
 	}
-	
+
 	@Override
 	public Expression caseNotExpression(NotExpression object) {
 		if (object.getExpression() instanceof NotExpression)
@@ -90,12 +90,12 @@ public class ConditionSimplifier extends SimpleExpressionsSwitch<Expression>{
 		object.setExpression(doSwitch(object.getExpression()));
 		return object;
 	}
-	
+
 	@Override
 	public Expression caseExpression(Expression object) {
 		return object;
 	}
-	
+
 	public boolean areSemanticallyEqual(Expression left, Expression right) {
 		if (left.eClass() != right.eClass())
 			return false;
@@ -116,7 +116,7 @@ public class ConditionSimplifier extends SimpleExpressionsSwitch<Expression>{
 				&& areSemanticallyEqual(leftAndExpression.getLeft(), rightAndExpression.getRight()));
 		}
 		if (left instanceof NotExpression) {
-			return areSemanticallyEqual(((NotExpression) left).getExpression(), ((NotExpression) right).getExpression()); 
+			return areSemanticallyEqual(((NotExpression) left).getExpression(), ((NotExpression) right).getExpression());
 		}
 		if (left instanceof Comparison) {
 			Comparison leftComparison = (Comparison) left;

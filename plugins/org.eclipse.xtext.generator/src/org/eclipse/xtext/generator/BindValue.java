@@ -13,7 +13,7 @@ public class BindValue {
 	private String typeName;
 	private boolean provider;
 	private String[] statements;
-	
+
 	public String getExpression() {
 		return expression;
 	}
@@ -21,13 +21,13 @@ public class BindValue {
 	public String getTypeName() {
 		return typeName;
 	}
-	
+
 	public String[] getStatements() {
 		if (statements == null)
 			statements = new String[0];
 		return statements;
 	}
-	
+
 	public boolean isProvider() {
 		return provider;
 	}
@@ -43,23 +43,23 @@ public class BindValue {
 	public static BindValue type(String name) {
 		return new BindValue(null, name, false, null);
 	}
-	
+
 	public static BindValue expr(String expr) {
 		return new BindValue(expr, null, false, null);
 	}
-	
+
 	public static BindValue provider(String name) {
 		return new BindValue(null, name, true, null);
 	}
-	
+
 	public static BindValue providerExpr(String expr) {
 		return new BindValue(expr, null, true, null);
 	}
-	
+
 	public static BindValue statements(String[] statements) {
 		return new BindValue(null, null, false, statements);
 	}
-	
+
 	@Override
 	public String toString() {
 		if (expression!=null)

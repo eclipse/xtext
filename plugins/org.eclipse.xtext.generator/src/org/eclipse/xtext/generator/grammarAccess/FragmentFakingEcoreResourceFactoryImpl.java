@@ -15,11 +15,11 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public final class FragmentFakingEcoreResourceFactoryImpl extends EcoreResourceFactoryImpl {
-	
+
 	private final ResourceSaveIndicator isSaving;
-	
+
 	public static final String ECORE_SUFFIX = "ecore";
-	
+
 	public FragmentFakingEcoreResourceFactoryImpl(ResourceSaveIndicator isSaving) {
 		this.isSaving = isSaving;
 	}

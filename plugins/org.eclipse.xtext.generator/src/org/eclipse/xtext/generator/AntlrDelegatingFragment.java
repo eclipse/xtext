@@ -18,7 +18,7 @@ import org.eclipse.xtext.Grammar;
 
 /**
  * Delegates to an AntLR generator fragment on the classpath. Issues a warning if it cannot be located.
- * 
+ *
  * @author Sven Efftinge - Initial contribution and API
  */
 public class AntlrDelegatingFragment extends DefaultGeneratorFragment implements NamingAware{
@@ -26,8 +26,8 @@ public class AntlrDelegatingFragment extends DefaultGeneratorFragment implements
 	private String fragment = "de.itemis.xtext.antlr.XtextAntlrGeneratorFragment";
 
 	/**
-	 * Set the class name of the generator fragment. 
-	 *  
+	 * Set the class name of the generator fragment.
+	 *
 	 * @param fragment
 	 */
 	public void setFragment(String fragment) {

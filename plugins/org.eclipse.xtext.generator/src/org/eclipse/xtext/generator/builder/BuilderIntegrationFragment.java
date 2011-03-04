@@ -29,7 +29,7 @@ public class BuilderIntegrationFragment extends DefaultGeneratorFragment {
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory()
 		.addTypeToType(IContainer.Manager.class.getName(), StateBasedContainerManager.class.getName())
-		.addTypeToType(IAllContainersState.Provider.class.getName(), 
+		.addTypeToType(IAllContainersState.Provider.class.getName(),
 				org.eclipse.xtext.resource.containers.ResourceSetBasedAllContainersStateProvider.class.getName())
 		.addConfiguredBinding(
 					IResourceDescriptions.class.getName(),
@@ -67,7 +67,7 @@ public class BuilderIntegrationFragment extends DefaultGeneratorFragment {
 
 	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
-		return new String[] { 
+		return new String[] {
 			"org.eclipse.xtext.builder",
 			"org.eclipse.xtext.ui"
 		};

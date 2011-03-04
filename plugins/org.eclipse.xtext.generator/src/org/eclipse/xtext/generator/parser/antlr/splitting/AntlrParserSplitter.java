@@ -36,11 +36,11 @@ public class AntlrParserSplitter {
 	public AntlrParserSplitter(String content) {
 		this.content = content;
 	}
-	
+
 	public String transform() {
 		fields.clear();
 		extractedClasses.clear();
-		
+
 		Matcher m = REFERENCE_PATTERN.matcher(content);
 		StringBuffer result = new StringBuffer();
 		int lastMatch = 0;
@@ -50,11 +50,11 @@ public class AntlrParserSplitter {
 			m.appendReplacement(result, getTransformedReference(field));
 			lastMatch = m.end();
 		}
-		
+
 		m = DECLARATION_PATTERN.matcher(content);
 		if(m.find(lastMatch)) {
 			result.append(content.subSequence(lastMatch, m.start()));
-			
+
 			ExtractedClass ec = new ExtractedClass(extractedClasses.size());
 			do {
 				ec.addDeclaration(m.group());
@@ -63,30 +63,30 @@ public class AntlrParserSplitter {
 					ec = new ExtractedClass(extractedClasses.size());
 				}
 			} while (m.find());
-			
+
 			if(ec.hasContent())
 				extractedClasses.add(ec.finalized());
 		}
-		
+
 		result.append("\n");
 		for(ExtractedClass ec : getExtractedClasses()) {
 			result.append(ec.getContent());
 			result.append("\n");
 		}
-		
+
 		result.append("\n}");
 		return result.toString();
 	}
-	
+
 	public List<ExtractedClass> getExtractedClasses() {
 		return Collections.unmodifiableList(extractedClasses);
 	}
-	
+
 	private String getTransformedReference(String field) {
 		int idx = fields.get(field);
 		return getExtractedClassName(idx / FIELDS_PER_CLASS) + "." + field;
 	}
-	
+
 	private String getExtractedClassName(int i) {
 		return String.format("FollowSets%03d", i);
 	}
@@ -95,7 +95,7 @@ public class AntlrParserSplitter {
 		if(!fields.containsKey(field))
 			fields.put(field, fields.size());
 	}
-	
+
 	public class ExtractedClass {
 		private static final String INDENT = "    ";
 		private static final String INDENT2 = INDENT + INDENT;
@@ -108,7 +108,7 @@ public class AntlrParserSplitter {
 			this.index = index;
 			content = createContent();
 		}
-		
+
 		public boolean isFull() {
 			return declarationCount >= FIELDS_PER_CLASS;
 		}
@@ -120,11 +120,11 @@ public class AntlrParserSplitter {
 			content.append("\n");
 			declarationCount++;
 		}
-		
+
 		private StringBuilder createContent() {
 			StringBuilder result = new StringBuilder();
 			result.append(INDENT);
-			result.append("private static class "); 
+			result.append("private static class ");
 			result.append(getName());
 			result.append(" {\n");
 			return result ;
@@ -133,7 +133,7 @@ public class AntlrParserSplitter {
 		public boolean hasContent() {
 			return declarationCount > 0;
 		}
-		
+
 		public ExtractedClass finalized() {
 			Preconditions.checkState(!finalized);
 			content.append(INDENT);
@@ -149,7 +149,7 @@ public class AntlrParserSplitter {
 		public String getContent() {
 			return content.toString();
 		}
-		
+
 	}
 
 }

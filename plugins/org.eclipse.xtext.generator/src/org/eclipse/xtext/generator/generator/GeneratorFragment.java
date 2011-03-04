@@ -16,11 +16,12 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.generator.IGeneratorFragment;
 import org.eclipse.xtext.generator.Naming;
 
 /**
  * An {@link IGeneratorFragment} to create a formatter for an Xtext language.
- * 
+ *
  * @author Sven Efftinge - Initial contribution and API
  */
 public class GeneratorFragment extends AbstractGeneratorFragment {
@@ -28,7 +29,7 @@ public class GeneratorFragment extends AbstractGeneratorFragment {
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory().addTypeToType(IGenerator.class.getName(), getGeneratorName(grammar, getNaming())).getBindings();
 	}
-	
+
 	@Override
 	public String[] getImportedPackagesRt(Grammar grammar) {
 		return new String[] {

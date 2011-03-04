@@ -17,7 +17,7 @@ import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class MutableTokenDefProvider extends AntlrTokenDefProvider {
-	
+
 	public void writeTokenFile(PrintWriter out) throws IOException {
 		for(Map.Entry<Integer, String> entry: getTokenDefMap().entrySet()) {
 			out.print(entry.getValue());
@@ -26,10 +26,10 @@ public class MutableTokenDefProvider extends AntlrTokenDefProvider {
 		}
 		out.close();
 	}
-	
+
 	@Override
 	protected void setTokenDefMap(Map<Integer, String> tokenDefMap) {
 		this.tokenDefMap = tokenDefMap;
 	}
-	
+
 }

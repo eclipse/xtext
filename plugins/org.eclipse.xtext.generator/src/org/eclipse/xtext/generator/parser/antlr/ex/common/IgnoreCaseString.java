@@ -15,7 +15,7 @@ import com.google.common.base.Preconditions;
 public class IgnoreCaseString implements CharSequence {
 
 	private final String value;
-	
+
 	IgnoreCaseString(String value) {
 		Preconditions.checkNotNull(value);
 		this.value = value;
@@ -32,7 +32,7 @@ public class IgnoreCaseString implements CharSequence {
 	public CharSequence subSequence(int start, int end) {
 		return value.subSequence(start, end);
 	}
-	
+
 	@Override
 	public String toString() {
 		return value;
@@ -59,5 +59,5 @@ public class IgnoreCaseString implements CharSequence {
 			return false;
 		return true;
 	}
-	
+
 }

@@ -33,7 +33,7 @@ import org.eclipse.xtext.generator.Generator;
 /**
  * A grammar access fragment that handles subpackages of EPackages gracefully. In general, we recommend to avoid
  * nested EPackages if possible.
- * 
+ *
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -42,7 +42,7 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 	private static final Logger log = Logger.getLogger(GrammarAccessFragment.class);
 
 	private String xmlVersion = "1.0";
-	
+
 	@Override
 	protected String getTemplate() {
 		return GrammarAccessFragment.class.getName().replaceAll("\\.", "::");

@@ -14,12 +14,12 @@ package org.eclipse.xtext.generator;
  *
  */
 public class Binding {
-	
+
 	private BindKey key;
 	private BindValue val;
 	private String contributedBy;
 	private boolean isFinal;
-	
+
 	public Binding(BindKey key, BindValue val, boolean isFinal, String contributedBy) {
 		super();
 		this.key = key;
@@ -27,23 +27,23 @@ public class Binding {
 		this.contributedBy = contributedBy;
 		this.isFinal = isFinal;
 	}
-	
+
 	public String getContributedBy() {
 		return contributedBy;
 	}
-	
+
 	public BindKey getKey() {
 		return key;
 	}
-	
+
 	public BindValue getValue() {
 		return val;
 	}
-	
+
 	public boolean isFinal() {
 		return isFinal;
 	}
-	
+
 	@Override
 	public String toString() {
 		return (isFinal?"final ":"")+key+" -> "+val+" (contributed by "+contributedBy+")";
@@ -73,6 +73,6 @@ public class Binding {
 			return false;
 		return true;
 	}
-	
-	
+
+
 }

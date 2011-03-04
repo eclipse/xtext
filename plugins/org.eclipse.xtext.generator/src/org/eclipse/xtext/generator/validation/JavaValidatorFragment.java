@@ -23,8 +23,10 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractInheritingGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.generator.IGeneratorFragment;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 
 import com.google.common.collect.Lists;
 
@@ -37,7 +39,7 @@ public class JavaValidatorFragment extends AbstractInheritingGeneratorFragment {
 	private static final Logger log = Logger.getLogger(JavaValidatorFragment.class);
 	private final List<String> composedChecks = new ArrayList<String>();
 	private String basePackage;
-	
+
 	public String getGeneratedEPackageName(Grammar g, Naming n, EPackage pack) {
 		return getBasePackage(g, n) + "." + pack.getName() + "." + Strings.toFirstUpper(pack.getName()) + "Package";
 	}
@@ -54,7 +56,7 @@ public class JavaValidatorFragment extends AbstractInheritingGeneratorFragment {
 	public void setBasePackage(String basePackage) {
 		this.basePackage = basePackage;
 	}
-	
+
 	public String getBasePackage(Grammar g, Naming n) {
 		if (basePackage != null) {
 			return basePackage;
@@ -66,7 +68,7 @@ public class JavaValidatorFragment extends AbstractInheritingGeneratorFragment {
 	 * Adds a validator that is to be executed additionally.
 	 * 
 	 * @param composedCheckValidator
-	 *            name of a class extending {@link org.eclipse.emf.validation.internal.service.AbstractValidator<T>}.
+	 *            name of a class extending {@link AbstractDeclarativeValidator}.
 	 */
 	public void addComposedCheck(String composedCheckValidator) {
 		this.composedChecks.add(composedCheckValidator);
@@ -89,15 +91,16 @@ public class JavaValidatorFragment extends AbstractInheritingGeneratorFragment {
 	public static String getValidatorName(Grammar g, String prefix, Naming n) {
 		return n.basePackageRuntime(g) + ".validation." + prefix + GrammarUtil.getName(g) + "JavaValidator";
 	}
-	
+
 	protected String getValidatorSuperClassName(Grammar grammar) {
 		Grammar superGrammar = getSuperGrammar(grammar);
-		if(superGrammar != null) {
-			return getSuperClassName(getValidatorName(superGrammar, "", getNaming()), getDefaultValidatorSuperClassName());
+		if (superGrammar != null) {
+			return getSuperClassName(getValidatorName(superGrammar, "", getNaming()),
+					getDefaultValidatorSuperClassName());
 		}
 		return getDefaultValidatorSuperClassName();
 	}
-	
+
 	protected String getDefaultValidatorSuperClassName() {
 		return "org.eclipse.xtext.validation.AbstractDeclarativeValidator";
 	}

@@ -12,7 +12,7 @@ import org.eclipse.xtext.Grammar;
 /**
  * A generator fragment that generates code which inherits form the generated code
  * of the super language.
- * 
+ *
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class AbstractInheritingGeneratorFragment extends AbstractGeneratorFragment {

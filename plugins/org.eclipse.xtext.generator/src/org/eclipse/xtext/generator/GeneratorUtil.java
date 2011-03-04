@@ -18,10 +18,10 @@ import org.apache.log4j.Logger;
 import org.eclipse.xtext.util.Files;
 
 public class GeneratorUtil {
-	
+
 	private static Logger log = Logger.getLogger(GeneratorUtil.class);
 	private static String[] defaultExcludes = new String[] { "CVS", ".cvsignore", ".svn" };
-	
+
 	public static void cleanFolder(String srcGenPath) throws FileNotFoundException {
 		File f = new File(srcGenPath);
 		if (!f.exists())
