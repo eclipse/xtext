@@ -9,9 +9,7 @@ package org.eclipse.xtext.xbase.jvmmodel;
 
 import static com.google.common.collect.Sets.*;
 
-import static java.util.Collections.*;
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -33,105 +31,120 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		associate(sourceElement, jvmElement, true);
 	}
 
-	protected void associate(EObject sourceElement, EObject jvmElement, boolean onlyPrimary) {
-		setAdapter(sourceElement, jvmElement, onlyPrimary, false);
-		setAdapter(jvmElement, sourceElement, onlyPrimary, true);
-	}
-
 	public void disassociate(EObject rootElement) {
 		for (TreeIterator<EObject> content = EcoreUtil2.eAll(rootElement); content.hasNext();) {
 			EObject element = content.next();
-			AssociationAdapter associationAdapter = getAssociationAdapter(element);
+			AbstractAssociationAdapter associationAdapter = getAssociationAdapter(element);
 			if (associationAdapter != null)
 				element.eAdapters().remove(associationAdapter);
 		}
 	}
 
-	public Set<EObject> getJvmElements(EObject sourceElement, boolean onlyPrimary) {
-		AssociationAdapter adapter = getAssociationAdapter(sourceElement);
-		if(adapter == null) 
-			return emptySet();
-		return (adapter.isJvmModel()) ? Collections.<EObject>emptySet() : getAssociatedElements(adapter, onlyPrimary);
+	protected void associate(EObject sourceElement, EObject jvmElement, boolean isPrimary) {
+		setSourceAdapter(sourceElement, jvmElement);
+		setJvmAdapter(jvmElement, sourceElement, isPrimary);
 	}
 
-	public Set<EObject> getSourceElements(EObject jvmElement, boolean onlyPrimary) {
-		AssociationAdapter adapter = getAssociationAdapter(jvmElement);
-		if(adapter == null) 
-			return emptySet();
-		return (!adapter.isJvmModel()) ? Collections.<EObject>emptySet() : getAssociatedElements(adapter, onlyPrimary);
-	}
-
-	public Set<EObject> getAssociatedElements(EObject jvmOrSourceElement, boolean onlyPrimary) {
-		AssociationAdapter adapter = getAssociationAdapter(jvmOrSourceElement);
-		return getAssociatedElements(adapter, onlyPrimary);
-	}
-
-	protected Set<EObject> getAssociatedElements(AssociationAdapter adapter, boolean onlyPrimary) {
-		return (adapter == null) ? Collections.<EObject> emptySet() : adapter.getAssociatedElements(onlyPrimary);
-	}
-
-	protected void setAdapter(EObject targetElement, EObject associatedElement, boolean isPrimary,
-			boolean isTargetJvmModel) {
-		AssociationAdapter adapter = getAssociationAdapter(targetElement);
+	protected void setSourceAdapter(EObject targetElement, EObject associatedElement) {
+		AbstractAssociationAdapter adapter = getAssociationAdapter(targetElement);
 		if (adapter == null) {
-			adapter = new AssociationAdapter(isTargetJvmModel);
+			adapter = new SourceAssociationAdapter();
 			targetElement.eAdapters().add(adapter);
-		} else if (adapter.isJvmModel() != isTargetJvmModel) {
-			throw new IllegalArgumentException("Element cannot be source and JvmModel at the same time.");
-		}
-		adapter.addAssociation(associatedElement, isPrimary);
+		} else
+			checkAdapter(adapter, false);
+		adapter.addAssociation(associatedElement);
 	}
 
-	protected AssociationAdapter getAssociationAdapter(EObject targetElement) {
-		return (AssociationAdapter) EcoreUtil.getAdapter(targetElement.eAdapters(), AssociationAdapter.class);
+	protected void setJvmAdapter(EObject targetElement, EObject associatedElement, boolean isPrimary) {
+		AbstractAssociationAdapter adapter = getAssociationAdapter(targetElement);
+		if (adapter == null) {
+			adapter = new JvmAssociationAdapter();
+			targetElement.eAdapters().add(adapter);
+		} else
+			checkAdapter(adapter, true);
+		if (isPrimary)
+			((JvmAssociationAdapter) adapter).setPrimaryAssociatedElement(associatedElement);
+		else
+			adapter.addAssociation(associatedElement);
 	}
 
-	protected static class AssociationAdapter extends AdapterImpl {
+	public Set<EObject> getJvmElements(EObject sourceElement) {
+		return getAssociatedElements(getSourceAdapter(sourceElement));
+	}
+
+	public Set<EObject> getSourceElements(EObject jvmElement) {
+		return getAssociatedElements(getJvmAdapter(jvmElement));
+	}
+
+	public EObject getPrimarySourceElement(EObject jvmElement) {
+		return getJvmAdapter(jvmElement).getPrimaryAssociatedElement();
+	}
+
+	public Set<EObject> getAssociatedElements(EObject jvmOrSourceElement) {
+		return getAssociatedElements(getAssociationAdapter(jvmOrSourceElement));
+	}
+
+	protected Set<EObject> getAssociatedElements(AbstractAssociationAdapter adapter) {
+		return (adapter == null) ? Collections.<EObject> emptySet() : adapter.getAssociatedElements();
+	}
+
+	protected SourceAssociationAdapter getSourceAdapter(EObject sourceElement) {
+		AbstractAssociationAdapter adapter = getAssociationAdapter(sourceElement);
+		return (adapter instanceof SourceAssociationAdapter) ? (SourceAssociationAdapter) adapter : null;
+	}
+
+	protected JvmAssociationAdapter getJvmAdapter(EObject jvmElement) {
+		AbstractAssociationAdapter adapter = getAssociationAdapter(jvmElement);
+		return (adapter instanceof JvmAssociationAdapter) ? (JvmAssociationAdapter) adapter : null;
+	}
+
+	protected void checkAdapter(AbstractAssociationAdapter adapter, boolean isJvm) {
+		if (adapter != null && (adapter instanceof JvmAssociationAdapter ^ isJvm))
+			throw new IllegalArgumentException(
+					"Wrong association adapter type. It's likely you confused source and jvm element");
+	}
+
+	protected AbstractAssociationAdapter getAssociationAdapter(EObject jvmOrSourceElement) {
+		return (AbstractAssociationAdapter) EcoreUtil.getAdapter(jvmOrSourceElement.eAdapters(),
+				AbstractAssociationAdapter.class);
+	}
+
+	protected static abstract class AbstractAssociationAdapter extends AdapterImpl {
 		private Set<EObject> associatedElements;
-		private Set<EObject> primaryAssociatedElements;
-		private boolean isJvmModel;
 
-		public AssociationAdapter(boolean isJvmModel) {
+		public AbstractAssociationAdapter() {
 			super();
-			this.isJvmModel = isJvmModel;
 		}
 
-		public boolean isJvmModel() {
-			return isJvmModel;
-		}
-
-		protected boolean addAssociation(EObject associatedElement, boolean isPrimary) {
-			if (isPrimary) {
-				if (primaryAssociatedElements == null)
-					primaryAssociatedElements = newLinkedHashSet();
-				return primaryAssociatedElements.add(associatedElement);
-			} else {
-				if (associatedElements == null)
-					associatedElements = newLinkedHashSet();
-			}
+		protected boolean addAssociation(EObject associatedElement) {
+			if (associatedElements == null)
+				associatedElements = newLinkedHashSet();
 			return associatedElements.add(associatedElement);
 		}
 
-		public Set<EObject> getAssociatedElements(boolean onlyPrimary) {
-			if (onlyPrimary)
-				return (primaryAssociatedElements == null) ? Collections.<EObject> emptySet()
-						: primaryAssociatedElements;
-			else {
-				if(primaryAssociatedElements != null) {
-					if(associatedElements != null) {
-						LinkedHashSet<EObject> allAssociatedElements = newLinkedHashSet(primaryAssociatedElements);
-						allAssociatedElements.addAll(associatedElements);
-						return allAssociatedElements;
-					}
-					return primaryAssociatedElements;
-				} 
-				return (associatedElements == null) ? Collections.<EObject> emptySet() : associatedElements;
-			}
+		public Set<EObject> getAssociatedElements() {
+			return (associatedElements == null) ? Collections.<EObject> emptySet() : associatedElements;
 		}
 
 		@Override
 		public boolean isAdapterForType(Object type) {
-			return AssociationAdapter.class.equals(type);
+			return AbstractAssociationAdapter.class.equals(type);
+		}
+	}
+
+	protected static class SourceAssociationAdapter extends AbstractAssociationAdapter {
+	}
+
+	protected static class JvmAssociationAdapter extends AbstractAssociationAdapter {
+		private EObject primaryAssociatedElement;
+
+		public EObject getPrimaryAssociatedElement() {
+			return primaryAssociatedElement;
+		}
+
+		public void setPrimaryAssociatedElement(EObject primaryAssociatedElement) {
+			this.primaryAssociatedElement = primaryAssociatedElement;
+			addAssociation(primaryAssociatedElement);
 		}
 	}
 
