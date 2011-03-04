@@ -25,6 +25,6 @@ public class Ecore2XtextValueConverterServiceFragment extends DefaultGeneratorFr
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory().addTypeToType(IValueConverterService.class.getName(), Ecore2XtextTerminalConverters.class.getName()).getBindings();
 	}
-	
+
 
 }

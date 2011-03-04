@@ -17,9 +17,9 @@ public class ResourceSaveIndicator extends Wrapper<Boolean> {
 	public ResourceSaveIndicator() {
 		super(Boolean.FALSE);
 	}
-	
+
 	public boolean isSaving() {
 		return get().booleanValue();
 	}
-	
+
 }

@@ -15,18 +15,18 @@ import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
+ *
  *         Utility class providing names and the like for general artifacts used in all Xtext projects There's a
  *         corresponding Xtend file (Naming.ext) mapping the methods defined inhere to Xtend signatures.
- * 
+ *
  */
 public class Naming {
-	
+
 	public final static String GLOBAL_VAR_NAME = "__Naming__";
 	private String uiBasePackage;
 	private String pathTestProject;
 	private String activatorName;
-	
+
 	public void setUiBasePackage(String uiBasePackage) {
 		this.uiBasePackage = uiBasePackage;
 	}
@@ -58,13 +58,13 @@ public class Naming {
 	public String setup(Grammar g) {
 		return basePackageRuntime(g)+"."+getName(g) + "StandaloneSetup";
 	}
-	
+
 	public String setupImpl(Grammar g) {
 		return basePackageRuntime(g)+"."+getName(g) + "StandaloneSetupGenerated";
 	}
 
 	/**
-	 * @deprecated use {@link #getActivatorName()} instead
+	 * @deprecated use {@link #activatorName()} instead
 	 */
 	@Deprecated
 	public String activator() {

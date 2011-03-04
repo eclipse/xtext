@@ -6,12 +6,9 @@
 package org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.OptionValue;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPackage;
 

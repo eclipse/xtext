@@ -14,7 +14,7 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
  * @author Peter Friese - Initial contribution and API
  */
 public class QuickOutlineFragment extends AbstractGeneratorFragment {
-	
+
 	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
 		return new String[]{

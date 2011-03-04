@@ -28,7 +28,7 @@ public class AntlrGrammarGenUtil {
 
 	public static String toAntlrStringIgnoreCase(String string) {
 		StringBuilder sb = new StringBuilder();
-		
+
 		for(int i = 0; i < string.length() ; i++) {
 			final char upperCase = Character.toUpperCase(string.charAt(i));
 			final char lowerCase = Character.toLowerCase(string.charAt(i));

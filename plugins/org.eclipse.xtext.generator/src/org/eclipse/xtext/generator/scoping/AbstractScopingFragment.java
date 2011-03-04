@@ -68,11 +68,11 @@ public abstract class AbstractScopingFragment extends AbstractInheritingGenerato
 		}
 		return getDefaultScopeProviderSuperClassName();
 	}
-	
+
 	protected String getDefaultScopeProviderSuperClassName() {
 		return "org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider";
 	}
-	
+
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
 		return Collections.<Object>singletonList(getScopeProviderSuperClassName(grammar));

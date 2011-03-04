@@ -30,7 +30,7 @@ import com.google.common.collect.Collections2;
 /**
  * The fragment helper will be passed to the extended Antlr grammar template and allows to
  * override certain aspects. This is an attempt to circumvent the limitations of static java
- * extensions. 
+ * extensions.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class AntlrFragmentHelper {
@@ -44,7 +44,7 @@ public class AntlrFragmentHelper {
 	public String getAntlrTokenFileProviderClassName(Grammar grammar) {
 		return naming.basePackageRuntime(grammar) + ".parser.antlr." + GrammarUtil.getName(grammar)	+ "AntlrTokenFileProvider";
 	}
-	
+
 	public String getLexerClassName(Grammar g) {
 		return getLexerGrammarFileName(g);
 	}
@@ -60,7 +60,7 @@ public class AntlrFragmentHelper {
 	public String getLexerGrammarFileName(Grammar g) {
 		return naming.basePackageRuntime(g) + ".parser.antlr.lexer.Internal" + GrammarUtil.getName(g) + "Lexer";
 	}
-	
+
 	public String getParserGrammarFileName(Grammar g) {
 		return naming.basePackageRuntime(g) + ".parser.antlr.internal.Internal" + GrammarUtil.getName(g) + "Parser";
 	}
@@ -72,11 +72,11 @@ public class AntlrFragmentHelper {
 	public String getInternalContentAssistLexerClassName(Grammar g) {
 		return getContentAssistLexerGrammarFileName(g);
 	}
-	
+
 	public String getLexerSuperClass(Grammar g) {
 		return "org.eclipse.xtext.parser.antlr.Lexer";
 	}
-	
+
 	public String getContentAssistLexerSuperClass(Grammar g) {
 		return "org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer";
 	}
@@ -88,7 +88,7 @@ public class AntlrFragmentHelper {
 	public String getContentAssistLexerGrammarFileName(Grammar g) {
 		return naming.basePackageUi(g) + ".contentassist.antlr.lexer.Internal" + GrammarUtil.getName(g) + "Lexer";
 	}
-	
+
 	public String getContentAssistParserGrammarFileName(Grammar g) {
 		return naming.basePackageUi(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getName(g) + "Parser";
 	}
@@ -100,15 +100,15 @@ public class AntlrFragmentHelper {
 	public Collection<? extends AbstractElement> getAllGroups(Grammar g) {
 		return getAllElementsByType(g, Group.class);
 	}
-	
+
 	public Collection<? extends AbstractElement> getAllUnorderedGroups(Grammar g) {
 		return getAllElementsByType(g, UnorderedGroup.class);
 	}
-	
+
 	public Collection<? extends AbstractElement> getAllAssignments(Grammar g) {
 		return getAllElementsByType(g, Assignment.class);
 	}
-	
+
 	public Collection<? extends AbstractElement> getAllPredicatedElements(Grammar g) {
 		Collection<AbstractElement> unfiltered = getAllElementsByType(g, AbstractElement.class);
 		Collection<AbstractElement> result = Collections2.filter(unfiltered, new Predicate<AbstractElement>() {
@@ -118,10 +118,10 @@ public class AntlrFragmentHelper {
 		});
 		return result;
 	}
-	
+
 	/**
-	 * Synthetic terminal rules are rules which will not lead to a real terminal 
-	 * rule in the generated lexer grammar but only provide the respective token types 
+	 * Synthetic terminal rules are rules which will not lead to a real terminal
+	 * rule in the generated lexer grammar but only provide the respective token types
 	 * instead.
 	 * @return <code>true</code> if this rule should not get an own lexer body.
 	 */
@@ -141,5 +141,5 @@ public class AntlrFragmentHelper {
 		}
 		return result;
 	}
-	
+
 }

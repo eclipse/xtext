@@ -98,7 +98,7 @@ public class TerminalRuleToLexerBody extends XtextSwitch<String>{
 		result.append(Strings.emptyIfNull(object.getCardinality()));
 		return "";
 	}
-	
+
 	private String toLexerString(String theString) {
 //		return Strings.convertToJavaString(value);
 		int len = theString.length();

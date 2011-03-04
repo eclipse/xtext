@@ -18,11 +18,11 @@ public class BasicUiGeneratorFragment extends DefaultGeneratorFragment {
 	public void setFileExtensions(String text) {
 		this.fileExtensions = text;
 	}
-	
+
 	@Override
 	public void checkConfiguration(Issues issues) {
 		issues.addWarning("Fragment org.eclipse.xtext.ui.generator.BasicUiGeneratorFragment is deprecated and not needed anymore. Just remove it from the mwe configuration.");
-		if (fileExtensions!=null) 
+		if (fileExtensions!=null)
 			issues.addError("the fileExtensions property has been moved to the main language configuration. \n\tPlease change your *.mwe file to something like \n\n\t"
 						+ "<language uri='${grammarURI}' fileExtensions='" + fileExtensions + "'> \n\t\t <-- fragments go here ... --> \n\t</languageConfig>\n\n",this);
 	}

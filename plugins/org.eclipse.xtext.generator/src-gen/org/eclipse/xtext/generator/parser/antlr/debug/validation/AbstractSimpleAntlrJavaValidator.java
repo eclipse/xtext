@@ -1,5 +1,5 @@
 package org.eclipse.xtext.generator.parser.antlr.debug.validation;
- 
+
 import java.util.ArrayList;
 import java.util.List;
 

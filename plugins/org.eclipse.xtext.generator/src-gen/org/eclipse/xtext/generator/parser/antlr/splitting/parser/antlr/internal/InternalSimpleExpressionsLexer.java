@@ -1,14 +1,17 @@
 package org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.internal;
 
-// Hack: Use our own Lexer superclass by means of import. 
+// Hack: Use our own Lexer superclass by means of import.
 // Currently there is no other way to specify the superclass for the lexer.
+import org.antlr.runtime.BaseRecognizer;
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.DFA;
+import org.antlr.runtime.EarlyExitException;
+import org.antlr.runtime.IntStream;
+import org.antlr.runtime.MismatchedSetException;
+import org.antlr.runtime.NoViableAltException;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.RecognizerSharedState;
 import org.eclipse.xtext.parser.antlr.Lexer;
-
-
-import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalSimpleExpressionsLexer extends Lexer {
@@ -37,7 +40,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
     // delegates
     // delegators
 
-    public InternalSimpleExpressionsLexer() {;} 
+    public InternalSimpleExpressionsLexer() {;}
     public InternalSimpleExpressionsLexer(CharStream input) {
         this(input, new RecognizerSharedState());
     }
@@ -55,7 +58,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:11:7: ( 'else' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:11:9: 'else'
             {
-            match("else"); 
+            match("else");
 
 
             }
@@ -76,7 +79,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:12:7: ( 'if' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:12:9: 'if'
             {
-            match("if"); 
+            match("if");
 
 
             }
@@ -97,7 +100,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:13:7: ( '(' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:13:9: '('
             {
-            match('('); 
+            match('(');
 
             }
 
@@ -117,7 +120,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:14:7: ( ')' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:14:9: ')'
             {
-            match(')'); 
+            match(')');
 
             }
 
@@ -137,7 +140,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:15:7: ( '{' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:15:9: '{'
             {
-            match('{'); 
+            match('{');
 
             }
 
@@ -157,7 +160,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:16:7: ( '||' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:16:9: '||'
             {
-            match("||"); 
+            match("||");
 
 
             }
@@ -178,7 +181,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:17:7: ( '&&' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:17:9: '&&'
             {
-            match("&&"); 
+            match("&&");
 
 
             }
@@ -199,7 +202,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:18:7: ( '==' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:18:9: '=='
             {
-            match("=="); 
+            match("==");
 
 
             }
@@ -220,7 +223,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:19:7: ( '<=' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:19:9: '<='
             {
-            match("<="); 
+            match("<=");
 
 
             }
@@ -241,7 +244,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:20:7: ( '>=' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:20:9: '>='
             {
-            match(">="); 
+            match(">=");
 
 
             }
@@ -262,7 +265,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:21:7: ( '!' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:21:9: '!'
             {
-            match('!'); 
+            match('!');
 
             }
 
@@ -282,7 +285,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:22:7: ( ',' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:22:9: ','
             {
-            match(','); 
+            match(',');
 
             }
 
@@ -302,7 +305,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:23:7: ( '.' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:23:9: '.'
             {
-            match('.'); 
+            match('.');
 
             }
 
@@ -333,7 +336,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
                 case 1 :
                     // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:743:11: '^'
                     {
-                    match('^'); 
+                    match('^');
 
                     }
                     break;
@@ -417,7 +420,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
             	case 1 :
             	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:745:13: '0' .. '9'
             	    {
-            	    matchRange('0','9'); 
+            	    matchRange('0','9');
 
             	    }
             	    break;
@@ -470,7 +473,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
                 case 1 :
                     // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:747:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
-                    match('\"'); 
+                    match('\"');
                     // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:747:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
@@ -489,7 +492,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
                     	case 1 :
                     	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:747:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
                     	    {
-                    	    match('\\'); 
+                    	    match('\\');
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
                     	        input.consume();
 
@@ -523,14 +526,14 @@ public class InternalSimpleExpressionsLexer extends Lexer {
                         }
                     } while (true);
 
-                    match('\"'); 
+                    match('\"');
 
                     }
                     break;
                 case 2 :
                     // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:747:82: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
-                    match('\''); 
+                    match('\'');
                     // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:747:87: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
@@ -549,7 +552,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
                     	case 1 :
                     	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:747:88: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
                     	    {
-                    	    match('\\'); 
+                    	    match('\\');
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
                     	        input.consume();
 
@@ -583,7 +586,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
                         }
                     } while (true);
 
-                    match('\''); 
+                    match('\'');
 
                     }
                     break;
@@ -609,7 +612,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:749:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:749:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
-            match("/*"); 
+            match("/*");
 
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:749:24: ( options {greedy=false; } : . )*
             loop7:
@@ -638,7 +641,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
             	case 1 :
             	    // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:749:52: .
             	    {
-            	    matchAny(); 
+            	    matchAny();
 
             	    }
             	    break;
@@ -648,7 +651,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
                 }
             } while (true);
 
-            match("*/"); 
+            match("*/");
 
 
             }
@@ -669,7 +672,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:751:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:751:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
-            match("//"); 
+            match("//");
 
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:751:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
@@ -726,14 +729,14 @@ public class InternalSimpleExpressionsLexer extends Lexer {
                         case 1 :
                             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:751:41: '\\r'
                             {
-                            match('\r'); 
+                            match('\r');
 
                             }
                             break;
 
                     }
 
-                    match('\n'); 
+                    match('\n');
 
                     }
                     break;
@@ -816,7 +819,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:755:16: ( . )
             // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:755:18: .
             {
-            matchAny(); 
+            matchAny();
 
             }
 
@@ -836,140 +839,140 @@ public class InternalSimpleExpressionsLexer extends Lexer {
             case 1 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:1:10: T__11
                 {
-                mT__11(); 
+                mT__11();
 
                 }
                 break;
             case 2 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:1:16: T__12
                 {
-                mT__12(); 
+                mT__12();
 
                 }
                 break;
             case 3 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:1:22: T__13
                 {
-                mT__13(); 
+                mT__13();
 
                 }
                 break;
             case 4 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:1:28: T__14
                 {
-                mT__14(); 
+                mT__14();
 
                 }
                 break;
             case 5 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:1:34: T__15
                 {
-                mT__15(); 
+                mT__15();
 
                 }
                 break;
             case 6 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:1:40: T__16
                 {
-                mT__16(); 
+                mT__16();
 
                 }
                 break;
             case 7 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:1:46: T__17
                 {
-                mT__17(); 
+                mT__17();
 
                 }
                 break;
             case 8 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:1:52: T__18
                 {
-                mT__18(); 
+                mT__18();
 
                 }
                 break;
             case 9 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:1:58: T__19
                 {
-                mT__19(); 
+                mT__19();
 
                 }
                 break;
             case 10 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:1:64: T__20
                 {
-                mT__20(); 
+                mT__20();
 
                 }
                 break;
             case 11 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:1:70: T__21
                 {
-                mT__21(); 
+                mT__21();
 
                 }
                 break;
             case 12 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:1:76: T__22
                 {
-                mT__22(); 
+                mT__22();
 
                 }
                 break;
             case 13 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:1:82: T__23
                 {
-                mT__23(); 
+                mT__23();
 
                 }
                 break;
             case 14 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:1:88: RULE_ID
                 {
-                mRULE_ID(); 
+                mRULE_ID();
 
                 }
                 break;
             case 15 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:1:96: RULE_INT
                 {
-                mRULE_INT(); 
+                mRULE_INT();
 
                 }
                 break;
             case 16 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:1:105: RULE_STRING
                 {
-                mRULE_STRING(); 
+                mRULE_STRING();
 
                 }
                 break;
             case 17 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:1:117: RULE_ML_COMMENT
                 {
-                mRULE_ML_COMMENT(); 
+                mRULE_ML_COMMENT();
 
                 }
                 break;
             case 18 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:1:133: RULE_SL_COMMENT
                 {
-                mRULE_SL_COMMENT(); 
+                mRULE_SL_COMMENT();
 
                 }
                 break;
             case 19 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:1:149: RULE_WS
                 {
-                mRULE_WS(); 
+                mRULE_WS();
 
                 }
                 break;
             case 20 :
                 // ../org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.g:1:157: RULE_ANY_OTHER
                 {
-                mRULE_ANY_OTHER(); 
+                mRULE_ANY_OTHER();
 
                 }
                 break;
@@ -1087,7 +1090,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
-                    case 0 : 
+                    case 0 :
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -1135,7 +1138,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 1 : 
+                    case 1 :
                         int LA12_17 = input.LA(1);
 
                         s = -1;
@@ -1145,7 +1148,7 @@ public class InternalSimpleExpressionsLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 2 : 
+                    case 2 :
                         int LA12_18 = input.LA(1);
 
                         s = -1;
@@ -1162,6 +1165,6 @@ public class InternalSimpleExpressionsLexer extends Lexer {
             throw nvae;
         }
     }
- 
+
 
 }

@@ -21,7 +21,7 @@ import com.google.common.collect.ImmutableList;
 public abstract class AbstractAntlrGeneratorFragmentEx extends AbstractAntlrGeneratorFragment {
 
 	private AntlrFragmentHelper fragmentHelper;
-	
+
 	public void setFragmentHelper(AntlrFragmentHelper fragmentHelper) {
 		this.fragmentHelper = fragmentHelper;
 	}
@@ -31,17 +31,17 @@ public abstract class AbstractAntlrGeneratorFragmentEx extends AbstractAntlrGene
 			fragmentHelper = new AntlrFragmentHelper(getNaming());
 		return fragmentHelper;
 	}
-	
+
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
 		return ImmutableList.of(getOptions(), getFragmentHelper());
 	}
-	
+
 	@Override
 	protected String getParserFileNameSuffix() {
 		return ".java";
 	}
-	
+
 	@Override
 	protected String getLexerFileNameSuffix() {
 		return ".java";

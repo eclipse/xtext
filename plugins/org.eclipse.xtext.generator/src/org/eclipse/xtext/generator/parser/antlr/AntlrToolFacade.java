@@ -33,7 +33,7 @@ public class AntlrToolFacade {
 	public void setDownloadFrom(String downloadURL) {
 		this.downloadURL = downloadURL;
 	}
-	
+
 	private String downloadTo = "./.antlr-generator-3.2.0.jar";
 
 	public void setDownloadTo(String path) {

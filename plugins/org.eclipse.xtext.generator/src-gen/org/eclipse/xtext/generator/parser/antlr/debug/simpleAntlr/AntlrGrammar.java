@@ -6,7 +6,6 @@
 package org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**

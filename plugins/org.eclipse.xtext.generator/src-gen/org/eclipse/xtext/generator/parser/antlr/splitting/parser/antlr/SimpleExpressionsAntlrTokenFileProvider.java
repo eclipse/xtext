@@ -4,10 +4,11 @@
 package org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr;
 
 import java.io.InputStream;
+
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class SimpleExpressionsAntlrTokenFileProvider implements IAntlrTokenFileProvider {
-	
+
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
     	return classLoader.getResourceAsStream("org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressions.tokens");

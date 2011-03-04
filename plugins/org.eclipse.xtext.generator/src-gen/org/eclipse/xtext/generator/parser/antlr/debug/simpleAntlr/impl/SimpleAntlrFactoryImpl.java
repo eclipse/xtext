@@ -8,12 +8,26 @@ package org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.*;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Alternatives;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.AntlrGrammar;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.ElementWithCardinality;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Group;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Keyword;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.NegatedElement;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.OptionValue;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Options;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Predicated;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Rule;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleCall;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleElement;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleOptions;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrFactory;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPackage;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Skip;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.UntilElement;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Wildcard;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +47,7 @@ public class SimpleAntlrFactoryImpl extends EFactoryImpl implements SimpleAntlrF
   {
     try
     {
-      SimpleAntlrFactory theSimpleAntlrFactory = (SimpleAntlrFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/generator/parser/antlr/simpleAntlr"); 
+      SimpleAntlrFactory theSimpleAntlrFactory = (SimpleAntlrFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/generator/parser/antlr/simpleAntlr");
       if (theSimpleAntlrFactory != null)
       {
         return theSimpleAntlrFactory;

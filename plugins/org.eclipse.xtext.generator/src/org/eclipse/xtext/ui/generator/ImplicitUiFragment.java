@@ -22,12 +22,12 @@ public class ImplicitUiFragment extends AbstractGeneratorFragment {
 	protected List<Object> getParameters(Grammar g) {
 		return Collections.singletonList((Object) fileExtensions);
 	}
-	
+
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
 			.addTypeToProviderInstance(
-					IAllContainersState.class.getName(), 
+					IAllContainersState.class.getName(),
 					"org.eclipse.xtext.ui.shared.Access.getJavaProjectsState()")
 			.getBindings();
 	}
@@ -40,5 +40,5 @@ public class ImplicitUiFragment extends AbstractGeneratorFragment {
 				"org.eclipse.ui.editors",
 				"org.eclipse.ui" };
 	}
-	
+
 }

@@ -16,11 +16,12 @@ import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.generator.IGeneratorFragment;
 import org.eclipse.xtext.generator.Naming;
 
 /**
  * An {@link IGeneratorFragment} to create a formatter for an Xtext language.
- * 
+ *
  * @author Sven Efftinge - Initial contribution and API
  */
 public class FormatterFragment extends AbstractGeneratorFragment {

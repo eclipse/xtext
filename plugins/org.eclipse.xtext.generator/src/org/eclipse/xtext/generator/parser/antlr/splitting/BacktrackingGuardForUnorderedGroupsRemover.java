@@ -28,13 +28,13 @@ public class BacktrackingGuardForUnorderedGroupsRemover {
 //	}
 	public static final Pattern GUARDED_GROUP_PATTERN_02 = Pattern.compile(
 		"if\\s*\\(\\s*state\\.backtracking\\s*==\\s*0\\s*\\)\\s*\\{\\s*(selected\\s*=\\strue;?)\\s*\\}");
-	
+
 	private final String content;
-	
+
 	public BacktrackingGuardForUnorderedGroupsRemover(String content) {
 		this.content = content;
 	}
-	
+
 	public String transform() {
 		Matcher m = GUARDED_GROUP_PATTERN_01.matcher(content);
 		String result = m.replaceAll("$1");
@@ -42,5 +42,5 @@ public class BacktrackingGuardForUnorderedGroupsRemover {
 		result = m.replaceAll("$1");
 		return result;
 	}
-	
+
 }

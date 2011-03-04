@@ -23,13 +23,13 @@ import com.google.common.collect.Sets;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class FragmentFakingEcoreResource extends XMIResourceImpl {
-	
+
 	private final ResourceSaveIndicator isSaving;
-	
+
 	public FragmentFakingEcoreResource(URI uri, ResourceSaveIndicator isSaving) {
 		super(uri);
 		this.isSaving = isSaving;
-		
+
 		setEncoding("UTF-8");
 	    getDefaultSaveOptions().put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
 	    getDefaultSaveOptions().put(XMLResource.OPTION_LINE_WIDTH, 80);
@@ -53,7 +53,7 @@ public class FragmentFakingEcoreResource extends XMIResourceImpl {
 		}
 		return super.getURIFragment(eObject);
 	}
-	
+
 	public String getURIFragment(EClassifier eObject) {
 		// we need to handle empty subpackages in a special way
 		EClassifier classifier = eObject;
@@ -65,7 +65,7 @@ public class FragmentFakingEcoreResource extends XMIResourceImpl {
 		}
 		return null;
 	}
-	
+
 	private void calculateURIFragment(EPackage ePackage, StringBuilder result, Set<EPackage> visited) {
 		if (!visited.add(ePackage)) {
 			throw new IllegalStateException();

@@ -42,15 +42,15 @@ public class DefaultGeneratorFragment implements IGeneratorFragment {
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return null;
 	}
-	
+
 	public String[] getImportedPackagesRt(Grammar grammar) {
 		return null;
 	}
-	
+
 	public String[] getImportedPackagesUi(Grammar grammar) {
 		return null;
 	}
-	
+
 	public String[] getRequiredBundlesRt(Grammar grammar) {
 		return null;
 	}

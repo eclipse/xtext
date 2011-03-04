@@ -8,8 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parseTreeConstructor;
 
-import static org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorUtil.getPackage;
-import static org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorUtil.getParseTreeConstructorName;
+import static org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorUtil.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,8 +27,8 @@ import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.impl.TreeConstNFAToDot;
 
 /**
- * An {@link IGeneratorFragment} to generate model-&gt;text services (aka serializer) for an Xtext language.
- * 
+ * An {@link org.eclipse.xtext.generator.IGeneratorFragment} to generate model-&gt;text services (aka serializer) for an Xtext language.
+ *
  * @author Jan Koehnlein - Javadocs
  */
 public class ParseTreeConstructorFragment extends AbstractGeneratorFragment {
@@ -82,7 +81,7 @@ public class ParseTreeConstructorFragment extends AbstractGeneratorFragment {
 
 	/**
 	 * Decide whether to produce a Graphviz diagram for debugging.
-	 * 
+	 *
 	 * @param enable
 	 */
 	public void setGenerateDotDiagram(boolean enable) {
@@ -91,7 +90,7 @@ public class ParseTreeConstructorFragment extends AbstractGeneratorFragment {
 
 	/**
 	 * Set the Graphviz command that is issued to paint a debugging diagram.
-	 * 
+	 *
 	 * @param cmd
 	 */
 	public void setGraphvizCommand(String cmd) {

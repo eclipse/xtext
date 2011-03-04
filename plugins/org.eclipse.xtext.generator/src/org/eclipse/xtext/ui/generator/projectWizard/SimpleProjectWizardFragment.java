@@ -23,13 +23,14 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
+import org.eclipse.xtext.generator.IGeneratorFragment;
 import org.eclipse.xtext.generator.Naming;
 
 import com.google.common.collect.Lists;
 
 /**
  * An {@link IGeneratorFragment} to generate a simple project wizard.
- *  
+ *
  * @author Sven Efftinge - Initial contribution and API
  * @author Knut Wannheden
  */
@@ -75,7 +76,7 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 						GrammarUtil.getNamespace(grammar)+".ui.wizard." + GrammarUtil.getName(grammar) + "ProjectCreator")
 			.getBindings();
 	}
-	
+
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
 		return Lists.<Object> newArrayList(getGeneratorProjectName(grammar), getModelFileExtension(grammar), isPluginProject());
@@ -100,7 +101,7 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 
 	/**
 	 * Sets the name of the generator project.
-	 * 
+	 *
 	 * @param generatorProjectName
 	 */
 	public void setGeneratorProjectName(String generatorProjectName) {
@@ -112,7 +113,7 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 
 	/**
 	 * Sets the file extension used when creating the initial sample model.
-	 * 
+	 *
 	 * @param modelFileExtension
 	 */
 	public void setModelFileExtension(String modelFileExtension) {

@@ -32,9 +32,9 @@ public class AntlrLexerSplitter {
 	public static final Pattern OUTER_SWITCH_PATTERN = Pattern.compile("^\\s{8}switch", 0);
 	public static final Pattern OUTER_IF_PATTERN = Pattern.compile("^\\s{8}if", 0);
 	public static final Pattern OUTER_BRACE_IN_IF_CASCADE_PATTERN = Pattern.compile("^(\\s{12}[^\\s]+.*)}\\s*$", 0);
-	
+
 	private List<ExtractedMethod> extractedMethods = new ArrayList<ExtractedMethod>();
-	
+
 	public List<ExtractedMethod> getExtractedMethods() {
 		return Collections.unmodifiableList(extractedMethods);
 	}
@@ -45,7 +45,7 @@ public class AntlrLexerSplitter {
 	public AntlrLexerSplitter(String content) {
 		scanner = new Scanner(content);
 	}
-	
+
 	boolean copyUntilMethod() {
 		while(scanner.hasNextLine()) {
 			String line = scanner.nextLine();
@@ -56,11 +56,11 @@ public class AntlrLexerSplitter {
 		}
 		return false;
 	}
-	
+
 	public String transform() {
 		if(stringBuilder != null)
 			return stringBuilder.toString();
-		
+
 		stringBuilder = new StringBuilder();
 		if(copyUntilMethod()) {
 			refacatorAndExtract();
@@ -76,8 +76,8 @@ public class AntlrLexerSplitter {
 			stringBuilder.append("\n");
 		}
 	}
-	
-	
+
+
 	public void refacatorAndExtract() {
 
 //      {0}  // ../org.xtext.example.mydsl.ui/src-gen/org/xtext/example/contentassist/antlr/internal/InternalMyDsl.g:1:8: ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
@@ -86,7 +86,7 @@ public class AntlrLexerSplitter {
 //		{2b}  alt12 = dfa12.predict(input); -> no extraction
 //		{3}
 //      {4}  if ( (LA12_0=='i') ) {
-		
+
 		//{0}
 		stringBuilder.append(scanner.nextLine());
 		stringBuilder.append("\n");
@@ -95,13 +95,13 @@ public class AntlrLexerSplitter {
 		stringBuilder.append(varDecl);
 		stringBuilder.append("\n");
 		String varName = getVarnameFromDecl(varDecl);
-		
+
 		// some lexer mToken methods are just delegating to another method
 		if(varName != null) {
 			// {2}
 			stringBuilder.append(scanner.nextLine());
 			stringBuilder.append("\n");
-	
+
 			// try to identify outer switch/if statement withing the first 4 lines
 			// if this fails - do nothing
 			int lineNo = 2;
@@ -120,7 +120,7 @@ public class AntlrLexerSplitter {
 				}
 			} while (lineNo <= 4);
 		}
-		
+
 		// leave tail of method body unmodified
 		while(scanner.hasNextLine()) {
 			String line = scanner.nextLine();
@@ -151,18 +151,18 @@ public class AntlrLexerSplitter {
 				ExtractedMethod method = new ExtractedMethod(varName, extractedMethods.size() + 1);
 				extractMethod(stringBuilder, scanner, varName, method, line);
 				extractedMethods.add(method);
-			} else { 
+			} else {
 				stringBuilder.append(line);
 				stringBuilder.append("\n");
 			}
-			
+
 			if(endPattern.matcher(line).find()) {
 				break;
 			}
-				
+
 		}
 	}
-	
+
 	static void extractMethod(StringBuilder sb, Scanner scanner, String varName, ExtractedMethod method, String firstLine) {
 		boolean addBrace = method.addLine(firstLine) == ExtractedMethod.ExtractedMethodLineState.ignoredClosingBrace;
 		boolean simplyEndOfMethod = false;
@@ -184,7 +184,7 @@ public class AntlrLexerSplitter {
 				}
 				break;
 			}
-			
+
 			if(scanner.hasNextLine()) {
 				line = scanner.nextLine();
 				if(INDENT_LEVEL_PATTERN.matcher(line).find() || "".equals(line))
@@ -211,36 +211,36 @@ public class AntlrLexerSplitter {
 	}
 
 	static public class ExtractedMethod {
-	
+
 		private final int index;
 		private final List<String> lines = new ArrayList<String>();
 		private final Pattern assignmentPattern;
-	
+
 		public ExtractedMethod(String resultVar, int index) {
 			this.index = index;
 			this.assignmentPattern = Pattern.compile(resultVar+"=(\\d+);", 0);
 		}
-		
+
 		private enum ExtractedMethodLineState {added, ignored, ignoredClosingBrace}
-	
+
 		public ExtractedMethodLineState addLine(String line) {
 			if(BREAK_LINE_PATTERN.matcher(line).find())
 				return ExtractedMethodLineState.ignored;
-			
+
 			Matcher m = OUTER_BRACE_IN_IF_CASCADE_PATTERN.matcher(line);
 			if(m.find()) {
 				lines.add(m.group(1));
 				return ExtractedMethodLineState.ignoredClosingBrace;
 			}
-				
+
 			lines.add(line);
 			return ExtractedMethodLineState.added;
 		}
-	
+
 		public Object getName() {
 			return String.format("mTokensHelper%03d", index);
 		}
-		
+
 		public void writeTo(StringBuilder sb) {
 			// TODO remove breaks of lowest level (no performance hit but kind of ugly)
 			sb.append(INDENT);
@@ -254,7 +254,7 @@ public class AntlrLexerSplitter {
 			sb.append(INDENT);
 			sb.append("}\n");
 		}
-	
+
 		public String getAsExtractedLine(String s) {
 			return assignmentPattern.matcher(s).replaceFirst("return $1;").replaceFirst(INDENT, "");
 		}

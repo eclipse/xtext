@@ -139,7 +139,7 @@ public class DelegatingGeneratorFragment extends DefaultGeneratorFragment implem
 	public void registerNaming(Naming n) {
 		this.naming = n;
 	}
-	
+
 	public Naming getNaming() {
 		return naming;
 	}

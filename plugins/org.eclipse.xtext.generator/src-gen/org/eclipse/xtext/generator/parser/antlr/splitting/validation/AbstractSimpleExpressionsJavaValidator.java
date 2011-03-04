@@ -1,5 +1,5 @@
 package org.eclipse.xtext.generator.parser.antlr.splitting.validation;
- 
+
 import java.util.ArrayList;
 import java.util.List;
 

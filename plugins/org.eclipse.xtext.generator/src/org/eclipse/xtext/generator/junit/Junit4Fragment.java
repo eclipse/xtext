@@ -74,11 +74,11 @@ public class Junit4Fragment extends AbstractGeneratorFragment {
 			issues.addWarning("Missing test project path configuration 'Generator#pathTestProject' required for fragment '"+getClass().getName()+"'.");
 		}
 	}
-	
+
 	@Override
 	public String[] getExportedPackagesUi(Grammar grammar) {
 		return new String[] { getNaming().activatorPackageName()};
 	}
-	
-	
+
+
 }

@@ -7,17 +7,19 @@ import java.util.List;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
+import org.eclipse.xtext.generator.IGeneratorFragment;
 
 /**
  * An {@link IGeneratorFragment} to generate an EMF resource factory and its registration.
- *  
+ * 
  * @author Jan Koehnlein - Javadocs
  */
 public class ResourceFactoryFragment extends AbstractGeneratorFragment {
 	private List<String> fileExtensions = new ArrayList<String>();
 
-	/** 
-	 * Sets the fileExtension the generated {@link Resource.Factory} should be registered to.
+	/**
+	 * Sets the fileExtension the generated {@link org.eclipse.emf.ecore.resource.Resource.Factory} should be registered
+	 * to.
 	 * 
 	 * @param fileExtensions
 	 */

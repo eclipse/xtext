@@ -39,17 +39,17 @@ public class KeywordHelper implements Adapter {
 
 	private BiMap<CharSequence, String> keywordValueToToken;
 	private boolean ignoreCase;
-	
+
 	public KeywordHelper(Grammar grammar, boolean ignoreCase) {
 		this.ignoreCase = ignoreCase;
 		keywordValueToToken = createKeywordMap(grammar);
 		grammar.eResource().getResourceSet().eAdapters().add(this);
 	}
-	
+
 	public void discardHelper(Grammar grammar) {
 		grammar.eResource().getResourceSet().eAdapters().remove(this);
 	}
-	
+
 	public static KeywordHelper getHelper(EObject context) {
 		for(Adapter candidate: context.eResource().getResourceSet().eAdapters()) {
 			if (candidate instanceof KeywordHelper)
@@ -57,19 +57,19 @@ public class KeywordHelper implements Adapter {
 		}
 		return null;
 	}
-	
+
 	public String getRuleName(String keywordValue) {
 		return keywordValueToToken.get(createKey(keywordValue));
 	}
-	
+
 	public String getKeywordValue(String ruleName) {
 		return keywordValueToToken.inverse().get(ruleName).toString();
 	}
-	
+
 	public boolean isKeywordRule(String ruleName) {
 		return keywordValueToToken.containsValue(ruleName);
 	}
-	
+
 	public final static Comparator<String> keywordComparator = new Comparator<String>() {
 
 		public int compare(String s1, String s2) {
@@ -77,16 +77,16 @@ public class KeywordHelper implements Adapter {
 			int result = s2.length() - s1.length();
 			return result != 0 ? result : s1.compareTo(s2);
 		}
-	}; 
-	
+	};
+
 	public Set<String> getAllKeywords() {
 		Set<String> result = new TreeSet<String>(keywordComparator);
 		for(CharSequence cs : keywordValueToToken.keySet())
 			result.add(cs.toString());
-		
+
 		return Collections.unmodifiableSet(result);
 	}
-	
+
 	private BiMap<CharSequence, String> createKeywordMap(Grammar grammar) {
 		List<ParserRule> parserRules = GrammarUtil.allParserRules(grammar);
 		List<EnumRule> enumRules = GrammarUtil.allEnumRules(grammar);
@@ -138,5 +138,5 @@ public class KeywordHelper implements Adapter {
 
 	public void setTarget(Notifier newTarget) {
 	}
-	
+
 }
