@@ -341,7 +341,7 @@ public class TypeArgumentContextProvider {
 		JvmTypeParameter typeParameter = getReferenceTypeParameter(declaration);
 		if (typeParameter != null) {
 			if (isValidParameter(typeParameter, information, returnTypeContext)) {
-				if (!containsEntry(existing, typeParameter, information)) {
+				if (information != null && !containsEntry(existing, typeParameter, information)) {
 					existing.put(typeParameter, information);
 					Collection<JvmTypeReference> resolveData = existing.get(typeParameter);
 					List<JvmTypeParameter> transitiveParameters = Lists.newArrayListWithExpectedSize(2);
