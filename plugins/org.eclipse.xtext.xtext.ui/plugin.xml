@@ -226,9 +226,6 @@
 			//	}
 			}
 			
-			// generates the needed binding only if the grammar inherits from Xbase
-			fragment = xbase.XbaseGeneratorFragment {}
-
 			// java-based API for validation 
 			fragment = validation.JavaValidatorFragment {
 				composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
@@ -275,6 +272,10 @@
 			// 		generatorProjectName = "${projectName}.generator" 
 			//		modelFileExtension = file.extensions
 			// }
+			
+			// generates the needed binding only if the grammar inherits from Xbase
+			fragment = types.TypesGeneratorFragment {}
+			fragment = xbase.XbaseGeneratorFragment {}
 		}
 	}]]>
          </MweSnippet>
