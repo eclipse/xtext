@@ -15,13 +15,13 @@ public interface IFileSystemAccess {
 	public final static String DEFAULT_OUTPUT = "DEFAULT_OUTPUT";
 	
 	/**
-	 * @param fileName
+	 * @param fileName using '/' as file separator
 	 * @param contents
 	 */
 	public void generateFile(String fileName, CharSequence contents);
 	
 	/**
-	 * @param fileName
+	 * @param fileName using '/' as file separator
 	 * @param contents
 	 */
 	public void generateFile(String fileName, String slot, CharSequence contents);
