@@ -47,7 +47,9 @@
 
 	<!-- Appends p2 download statistic data to the artifacts.xml-->
 	<target name="-statistic.add">
+		<echoproperties destfile="ant.properties" failonerror="false" />
 		<property name="repository.root" value="${sp:repository}" />
+		<property name="qualifier" value="${package.qualifier}" />
 		<ant antfile="statistics/statistics.ant" target="addStatistic" inheritall="true" />
 	</target>
 
