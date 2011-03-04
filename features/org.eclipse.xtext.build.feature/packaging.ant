@@ -36,20 +36,20 @@
 		<echo file="category.xml">${modifiedCategoryXml}</echo>
 	</target>
 
-	<!-- Appends p2 download statistic data to the artifacts.xml-->
-	<target name="-statistic.add" >
-		<property name="repository.root" value="${sp:repository}" />
-		<ant antfile="statistics/statistics.ant" target="addStatistic" inheritall="true" />
-	</target>
 
 	<target name="package.site" depends="-define.package.qualifier">
 		<mkdir dir="${sp:output}" />
-
 		<!-- create the desired ZIP file -->
 		<zip basedir="${sp:repository}" destfile="${sp:output}/${package.name}${package.qualifier}.zip" />
+		<antcall target="-statistic.add" inheritall="true" />
 	</target>
 
 
+	<!-- Appends p2 download statistic data to the artifacts.xml-->
+	<target name="-statistic.add">
+		<property name="repository.root" value="${sp:repository}" />
+		<ant antfile="statistics/statistics.ant" target="addStatistic" inheritall="true" />
+	</target>
 
 	<target name="-locate.launcher.jar" unless="launcher.jar">
 		<pathconvert property="launcher.jar">
