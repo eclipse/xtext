@@ -12,6 +12,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class GeneratorExtensions extends DomainmodelExtensions {
@@ -52,7 +53,10 @@ public class GeneratorExtensions extends DomainmodelExtensions {
         }
       };
     List<String> _map = ListExtensions.map(_params, function);
-    String _elementsToString = IterableExtensions.elementsToString(_map, ", ");
+    StringConcatenation builder = new StringConcatenation();
+    builder.append(", ");
+    builder.newLine();
+    String _elementsToString = IterableExtensions.elementsToString(_map, builder);
     return _elementsToString;
   }
 }
