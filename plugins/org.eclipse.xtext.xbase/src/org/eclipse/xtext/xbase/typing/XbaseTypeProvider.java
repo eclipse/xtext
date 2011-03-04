@@ -37,7 +37,6 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
-import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
@@ -727,9 +726,13 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 						return null;
 					}
 				}
-				final JvmTypeReference resolveContravariant = context.getUpperBound(
-						((JvmParameterizedTypeReference) reference).getArguments().get(0), parameter);
-				return resolveContravariant;
+				if (reference instanceof JvmParameterizedTypeReference) {
+					JvmParameterizedTypeReference parameterized = (JvmParameterizedTypeReference) reference;
+					if (parameterized.getArguments().size() > 0) {
+						JvmTypeReference result = context.getUpperBound(parameterized.getArguments().get(0), parameter);
+						return result;
+					}
+				}
 			}
 		}
 		return parameter.getParameterType();
