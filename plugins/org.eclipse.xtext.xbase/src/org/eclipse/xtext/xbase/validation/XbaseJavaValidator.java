@@ -181,7 +181,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	@Check
 	public void checkCasts(XCastedExpression cast) {
 		JvmTypeReference targetTypeRef = typeProvider.getType(cast.getTarget());
-		if (targetTypeRef.getType() instanceof JvmDeclaredType) {
+		if (targetTypeRef != null && targetTypeRef.getType() instanceof JvmDeclaredType) {
 			JvmDeclaredType targetType = (JvmDeclaredType) targetTypeRef.getType();
 			if (targetType.isFinal()) {
 				if (!conformanceComputer.isConformant(cast.getType(), targetTypeRef)) {
