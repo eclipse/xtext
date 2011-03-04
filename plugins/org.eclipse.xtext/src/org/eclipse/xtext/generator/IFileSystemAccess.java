@@ -26,5 +26,8 @@ public interface IFileSystemAccess {
 	 */
 	public void generateFile(String fileName, String slot, CharSequence contents);
 	
-	
+	/**
+	 * @param fileName using '/' as file separator
+	 */
+	public void deleteFile(String fileName);
 }

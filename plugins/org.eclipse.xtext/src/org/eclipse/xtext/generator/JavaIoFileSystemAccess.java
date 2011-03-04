@@ -21,8 +21,7 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess {
 		String outlet = getPathes().get(slot);
 		if (outlet==null)
 			throw new IllegalArgumentException("A slot with name '"+slot+"' has not been configured.");
-		String pathName = outlet+"/"+fileName;
-		pathName = pathName.replace("/", File.separator);
+		String pathName = toSystemFileName(outlet+"/"+fileName);
 		File file = new File(pathName);
 		try {
 			createFolder(file.getParentFile());
@@ -41,4 +40,11 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess {
 		}
 	}
 
+	public void deleteFile(String fileName) {
+		new File(toSystemFileName(fileName)).delete();
+	}
+
+	protected String toSystemFileName(String fileName) {
+		return fileName.replace("/", File.separator);
+	}
 }
