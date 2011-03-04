@@ -92,12 +92,14 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 		IFile sourceFile = null;
 		try {
 			sourceFile = compilationFileProvider.getFile(sourceURI, context.getBuiltProject());
-			if (!sourceFile.exists() || hasErrors(sourceFile))
+			if (sourceFile.exists() && hasErrors(sourceFile))
+				return;
+			if (!sourceFile.exists() && delta.getNew() != null)
 				return;
 			IFile targetFile = compilationFileProvider.getTargetFile(sourceURI, context.getBuiltProject(),
 					progress.newChild(10));
-			Resource sourceResource = null;
 			if (delta.getNew() != null) {
+				Resource sourceResource = null;
 				sourceResource = context.getResourceSet().getResource(sourceURI, true);
 				if (sourceResource == null)
 					throw new IllegalStateException("Cannot load source Xtend2 resource "
@@ -105,10 +107,11 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 				EcoreUtil.resolveAll(sourceResource);
 				if (!sourceResource.getErrors().isEmpty())
 					return;
-			} else if (delta.getOld() != null)
+				if (!sourceResource.getContents().isEmpty()) {
+					compile(sourceResource, targetFile, progress.newChild(80));
+				}
+			} else if (delta.getOld() != null) {
 				targetFile.delete(true, progress.newChild(10));
-			if (sourceResource != null && !sourceResource.getContents().isEmpty()) {
-				compile(sourceResource, targetFile, progress.newChild(80));
 			}
 		} catch (Exception e) {
 			LOG.error("Error compiling " + notNull(sourceURI), e);
