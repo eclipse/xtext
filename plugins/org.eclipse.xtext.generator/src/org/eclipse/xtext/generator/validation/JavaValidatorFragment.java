@@ -13,13 +13,18 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandFacade;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.generator.AbstractInheritingGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Naming;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;
 
@@ -28,22 +33,33 @@ import com.google.common.collect.Lists;
  * 
  * @author Michael Clay - Initial contribution and API
  */
-public class JavaValidatorFragment extends AbstractValidatorFragment {
+public class JavaValidatorFragment extends AbstractInheritingGeneratorFragment {
 	private static final Logger log = Logger.getLogger(JavaValidatorFragment.class);
 	private final List<String> composedChecks = new ArrayList<String>();
 	private String basePackage;
 	
+	public String getGeneratedEPackageName(Grammar g, Naming n, EPackage pack) {
+		return getBasePackage(g, n) + "." + pack.getName() + "." + Strings.toFirstUpper(pack.getName()) + "Package";
+	}
+
+	public static String getValidationPackage(Grammar grammar, Naming n) {
+		return n.basePackageRuntime(grammar) + ".validation";
+	}
+
 	@Override
+	public String[] getExportedPackagesRt(Grammar grammar) {
+		return new String[] { getValidationPackage(grammar, getNaming()) };
+	}
+
 	public void setBasePackage(String basePackage) {
 		this.basePackage = basePackage;
 	}
 	
-	@Override
 	public String getBasePackage(Grammar g, Naming n) {
 		if (basePackage != null) {
 			return basePackage;
 		}
-		return super.getBasePackage(g, n);
+		return n.basePackageRuntime(g);
 	}
 
 	/**
@@ -73,11 +89,30 @@ public class JavaValidatorFragment extends AbstractValidatorFragment {
 	public static String getValidatorName(Grammar g, String prefix, Naming n) {
 		return n.basePackageRuntime(g) + ".validation." + prefix + GrammarUtil.getName(g) + "JavaValidator";
 	}
+	
+	protected String getValidatorSuperClassName(Grammar grammar) {
+		Grammar superGrammar = getSuperGrammar(grammar);
+		if(superGrammar != null) {
+			return getSuperClassName(getValidatorName(superGrammar, "", getNaming()), getDefaultValidatorSuperClassName());
+		}
+		return getDefaultValidatorSuperClassName();
+	}
+	
+	protected String getDefaultValidatorSuperClassName() {
+		return "org.eclipse.xtext.validation.AbstractDeclarativeValidator";
+	}
 
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		List<Object> parameters = Lists.newArrayList(super.getParameters(grammar));
+		List<String> packageQNames = new ArrayList<String>();
+		List<GeneratedMetamodel> list = EcoreUtil2.typeSelect(grammar.getMetamodelDeclarations(),
+				GeneratedMetamodel.class);
+		for (GeneratedMetamodel generatedMetamodel : list) {
+			packageQNames.add(getGeneratedEPackageName(grammar, getNaming(), generatedMetamodel.getEPackage()));
+		}
+		List<Object> parameters = Lists.newArrayList((Object) packageQNames);
 		parameters.add(this.composedChecks);
+		parameters.add(getValidatorSuperClassName(grammar));
 		return parameters;
 	}
 }

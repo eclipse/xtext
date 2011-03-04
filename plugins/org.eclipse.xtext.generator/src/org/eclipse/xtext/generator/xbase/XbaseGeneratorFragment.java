@@ -12,11 +12,14 @@ import static java.util.Collections.*;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
-import org.eclipse.xtext.generator.DefaultGeneratorFragment;
+import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -31,7 +34,11 @@ import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
  */
-public class XbaseGeneratorFragment extends DefaultGeneratorFragment {
+public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
+
+	public static String getJvmModelInferrerName(Grammar grammar, Naming naming) {
+		return naming.basePackageRuntime(grammar) + ".jvmmodel." + GrammarUtil.getName(grammar) + "JvmModelInferrer";
+	}
 
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
@@ -49,7 +56,7 @@ public class XbaseGeneratorFragment extends DefaultGeneratorFragment {
 				.addTypeToType(IValueConverterService.class.getName(),
 						"org.eclipse.xtext.xbase.conversion.XbaseValueConverterService")
 				.addConfiguredBinding(
-						"LinkingIScopeProvider" ,
+						"LinkingIScopeProvider",
 						"binder.bind(" + IScopeProvider.class.getName() + ".class).annotatedWith("
 								+ LinkingScopeProviderBinding.class.getName()
 								+ ".class).to(org.eclipse.xtext.xbase.linking.XbaseLinkingScopeProvider.class)")
@@ -60,22 +67,22 @@ public class XbaseGeneratorFragment extends DefaultGeneratorFragment {
 								+ ".class).annotatedWith(Names.named("
 								+ AbstractDeclarativeScopeProvider.class.getName()
 								+ ".NAMED_DELEGATE)).to(org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider.class)")
-		
+
 				.addTypeToType(ILocationInFileProvider.class.getName(),
-						"org.eclipse.xtext.xbase.linking.jvm.JvmLocationInFileProvider")
+						"org.eclipse.xtext.xbase.jvmmodel.JvmLocationInFileProvider")
 				.addTypeToType(EObjectAtOffsetHelper.class.getName(),
-						"org.eclipse.xtext.xbase.linking.jvm.JvmEObjectAtOffsetHelper")
-				.addTypeToType(ILinker.class.getName(),
-						"org.eclipse.xtext.xbase.linking.jvm.JvmModelXbaseLazyLinker")
-				.addTypeToType("org.eclipse.xtext.xbase.linking.jvm.IJvmModelAssociations",
-						"org.eclipse.xtext.xbase.linking.jvm.JvmModelAssociator")
-				.addTypeToType("org.eclipse.xtext.xbase.linking.jvm.IJvmModelAssociator",
-						"org.eclipse.xtext.xbase.linking.jvm.JvmModelAssociator")
-								
+						"org.eclipse.xtext.xbase.jvmmodel.JvmEObjectAtOffsetHelper")
+				.addTypeToType(ILinker.class.getName(), "org.eclipse.xtext.xbase.jvmmodel.JvmModelXbaseLazyLinker")
+				.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer",
+						getJvmModelInferrerName(grammar, getNaming()))
+				.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations",
+						"org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator")
+				.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator",
+						"org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator")
+
 				// obsolete convenience bindings
 				.addTypeToType("org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider",
-						"org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider")
-				.getBindings();
+						"org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider").getBindings();
 	}
 
 	protected boolean usesXbaseGrammar(Grammar grammar) {
@@ -103,7 +110,7 @@ public class XbaseGeneratorFragment extends DefaultGeneratorFragment {
 	public String[] getRequiredBundlesRt(Grammar grammar) {
 		if (!usesXbaseGrammar(grammar))
 			return new String[0];
-		return new String[] { "org.eclipse.xtext.xbase" };
+		return new String[] { "org.eclipse.xtext.xbase", "org.eclipse.xtext.xtend.lib" };
 	}
 
 	@Override
@@ -111,6 +118,12 @@ public class XbaseGeneratorFragment extends DefaultGeneratorFragment {
 		if (!usesXbaseGrammar(grammar))
 			return new String[0];
 		return new String[] { "org.eclipse.xtext.xbase.ui" };
+	}
+
+	@Override
+	public void generate(Grammar grammar, XpandExecutionContext ctx) {
+		if (usesXbaseGrammar(grammar))
+			super.generate(grammar, ctx);
 	}
 
 }
