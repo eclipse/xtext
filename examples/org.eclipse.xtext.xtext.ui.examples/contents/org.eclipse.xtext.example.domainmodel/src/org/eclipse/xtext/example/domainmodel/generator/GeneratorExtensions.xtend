@@ -20,6 +20,8 @@ class GeneratorExtensions extends DomainmodelExtensions {
 	}
 	
 	parameterList(Operation o, ImportManager importManager) {
-		o.params.map(p| p.parameterType.shortName(importManager) + ' ' + p.name).elementsToString(", ")
+		o.params.map(p| p.parameterType.shortName(importManager) + ' ' + p.name).elementsToString(''', 
+			'''
+		)
 	}
 }
