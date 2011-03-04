@@ -7,9 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder;
 
+import static com.google.common.collect.Maps.*;
+import static com.google.common.collect.Sets.*;
+
+import java.util.Map;
+import java.util.Set;
+
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
@@ -19,6 +26,7 @@ import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.util.IAcceptor;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -37,6 +45,8 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 	@Inject
 	private IResourceServiceProvider resourceServiceProvider;
 	
+	private Map<URI, Set<String>> sourceTargetMap = newHashMap();
+	
 	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
 		IJavaProject javaProject = JavaCore.create(context.getBuiltProject());
 		if (!javaProject.exists())
@@ -48,19 +58,35 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 		if (!root.exists())
 			return;
 		for (IResourceDescription.Delta delta : context.getDeltas()) {
-			// handle deletion
-			IFileSystemAccess fileSystemAccess = getConfiguredFileSystemAccess(srcGenFolder);
+			final Set<String> oldFiles = newHashSet();
+			if(sourceTargetMap.containsKey(delta.getUri())) {
+				oldFiles.addAll(sourceTargetMap.get(delta.getUri()));
+			}
+			final Set<String> newFiles = newHashSet();
+			IFileSystemAccess fileSystemAccess = getConfiguredFileSystemAccess(srcGenFolder, new IAcceptor<String>() {
+				public void accept(String fileName) {
+					oldFiles.remove(fileName);
+					newFiles.add(fileName);
+				}
+			});
 			if (delta.getNew() == null) {
 				handleDeletion(delta, context, fileSystemAccess);
 			} else {
 				handleChangedContents(delta, context, fileSystemAccess);
 			}
+			for(String removeFile: oldFiles) {
+				fileSystemAccess.deleteFile(removeFile);
+			}
+			if(!newFiles.isEmpty()) {
+				sourceTargetMap.put(delta.getUri(), newFiles);
+			}
 		}
 	}
 
-	protected IFileSystemAccess getConfiguredFileSystemAccess(IFolder srcGenFolder) {
+	protected IFileSystemAccess getConfiguredFileSystemAccess(IFolder srcGenFolder, IAcceptor<String> newFileAcceptor) {
 		EclipseResourceFileSystemAccess access = fileAccessProvider.get();
 		access.setOutputPath(srcGenFolder.getFullPath().toString());
+		access.setNewFileAcceptor(newFileAcceptor);
 		return access;
 	}
 
