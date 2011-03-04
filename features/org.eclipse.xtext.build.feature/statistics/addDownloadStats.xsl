@@ -1,8 +1,7 @@
 <xsl:stylesheet xmlns:xsl='http://www.w3.org/1999/XSL/Transform'
 	version="1.0">
-    <xsl:output encoding="UTF-8" method="xml" indent="yes" />
+	<xsl:output encoding="UTF-8" method="xml" indent="yes" />
 	<xsl:strip-space elements="*" />
-	<xsl:param name="qualifier"/>
 
 	<xsl:template match="/">
 		<xsl:processing-instruction name="artifactRepository">version='1.1.0'</xsl:processing-instruction>
@@ -43,7 +42,7 @@
  	<xsl:template name="artifact_properties">
  		<properties size='{@size+1}'>
 			<xsl:copy-of select="property" />
-			<property name='download.stats' value='{../@id}.feature-{$qualifier}' />
+			<property name='download.stats' value='{../@id}.feature-2.0.0' />
 		</properties>
 	</xsl:template>
 
