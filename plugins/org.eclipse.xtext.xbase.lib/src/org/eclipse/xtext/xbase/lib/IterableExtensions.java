@@ -198,8 +198,8 @@ public class IterableExtensions {
 		}
 	}
 	
-	public static final String elementsToString(Iterable<?> iterable, String separator) {
-		return Joiner.on(separator).join(iterable);
+	public static final String elementsToString(Iterable<?> iterable, CharSequence separator) {
+		return Joiner.on(separator.toString()).join(iterable);
 	}
 	
 	public static final boolean elementsEqual(Iterable<?> iterable, Iterable<?> other) {
