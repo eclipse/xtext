@@ -43,7 +43,7 @@
  	<xsl:template name="artifact_properties">
  		<properties size='{@size+1}'>
 			<xsl:copy-of select="property" />
-			<property name='download.stats' value='{../@id}.feature-{$qualifier}' />
+			<property name='download.stats' value='{../@id}.feature{$qualifier}' />
 		</properties>
 	</xsl:template>
 
