@@ -1,0 +1,58 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::GrammarUtil»
+«EXTENSION org::eclipse::xtext::generator::xbase::XbaseGeneratorFragment»
+
+«DEFINE generate FOR Grammar»
+	«EXPAND JvmModelInferrer»
+«ENDDEFINE»
+
+«DEFINE JvmModelInferrer FOR Grammar»
+«FILE getJvmModelInferrerName().asPath()+".xtend" SRC-»
+package «getJvmModelInferrerName().toJavaPackage()»
+ 
+import org.eclipse.xtext.xbase.jvmmodel.*
+import org.eclipse.emf.ecore.EObject
+import java.util.List
+
+/**
+ * Infers a JVM model from the source model. 
+ *
+ * The JVM model should contain all elements in the Java code generated from your source model. 
+ * Other Xtend models link against the JVM model rather than against the source model. The JVM
+ * model elemens should be associated wiht their source element using the IJvmModelAssociator.     
+ */
+class «getJvmModelInferrerName().toSimpleName()» implements IJvmModelInferrer {
+
+	@Inject IJvmModelAssociator 
+
+   	List<? extends EObject> inferJvmModel(EObject sourceObject) {
+   		return newArrayList();
+   	}
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE addToPluginXmlRt FOR Grammar»
+«ENDDEFINE» 
+
+
+«DEFINE addToPluginXmlUi FOR Grammar»
+«ENDDEFINE»
+
+
+«DEFINE addToStandaloneSetup FOR Grammar»
+«ENDDEFINE»
+
