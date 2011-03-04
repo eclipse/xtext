@@ -17,6 +17,8 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 		
 	@Inject extension JvmVisibilityExtension
 	
+	@Inject extension DomainmodelExtensions
+
 	inferJvmModel(EObject sourceObject) {
 		transform(sourceObject).toList		
 	}	
@@ -83,15 +85,4 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 		operation.associatePrimary(jvmOperation)
 	}
 	 
-	String packageName(EObject o) {
-		switch(o) {
-			Entity: o.eContainer.packageName
-			PackageDeclaration: concatPath(o.eContainer.packageName, o.name)
-			default: null
-		}  
-	}
-	 
-	concatPath(String x, String y) {
-		if (x==null) y else x + "." + y
-	}
 }
