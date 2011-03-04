@@ -7,19 +7,7 @@ import java.util.Set
 import org.eclipse.xtext.xbase.compiler.*
 
 
-class GeneratorExtensions {
-	String packageName(Object o) {
-		switch(o) {
-			PackageDeclaration : concatPath(packageName(o.eContainer), o.name)
-			EObject : packageName(o.eContainer)
-			JvmDeclaredType : o.packageName
-			default: null
-		}
-	}
-	
-	concatPath(String prefix, String suffix) {
-		if(prefix == null || prefix == "") suffix else prefix + "." + suffix
-	}
+class GeneratorExtensions extends DomainmodelExtensions {
 	
 	shortName(JvmTypeReference r, ImportManager importManager) {
 		val builder = new StringBuilder()

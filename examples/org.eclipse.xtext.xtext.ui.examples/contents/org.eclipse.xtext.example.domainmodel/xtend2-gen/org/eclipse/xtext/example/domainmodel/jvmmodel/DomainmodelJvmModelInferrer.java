@@ -14,6 +14,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.example.domainmodel.domainmodel.AbstractElement;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel;
+import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelExtensions;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Import;
@@ -28,7 +29,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
@@ -37,6 +37,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
   @com.google.inject.Inject private TypesFactory typesFactory;
   @com.google.inject.Inject private IJvmModelAssociator iJvmModelAssociator;
   @com.google.inject.Inject private JvmVisibilityExtension jvmVisibilityExtension;
+  @com.google.inject.Inject private DomainmodelExtensions domainmodelExtensions;
   
   public List<EObject> inferJvmModel(final EObject sourceObject) {
     Iterable<EObject> _transform = _this.transform(sourceObject);
@@ -80,8 +81,9 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       final JvmGenericType jvmClass = _createJvmGenericType;
       String _name = entity.getName();
       jvmClass.setSimpleName(_name);
+      DomainmodelExtensions _domainmodelExtensions = domainmodelExtensions;
       final Entity typeConverted_entity = (Entity)entity;
-      String _packageName = _this.packageName(typeConverted_entity);
+      String _packageName = _domainmodelExtensions.packageName(typeConverted_entity);
       jvmClass.setPackageName(_packageName);
       IJvmModelAssociator _iJvmModelAssociator = iJvmModelAssociator;
       final Entity typeConverted_entity_1 = (Entity)entity;
@@ -227,52 +229,6 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       final JvmOperation typeConverted_jvmOperation_2 = (JvmOperation)jvmOperation;
       _iJvmModelAssociator.associatePrimary(typeConverted_operation_2, typeConverted_jvmOperation_2);
     }
-  }
-  
-  public String packageName(final EObject o) {
-    String switchResult = null;
-    final EObject o_1 = o;
-    boolean matched = false;
-    if (!matched) {
-      if (o_1 instanceof Entity) {
-        final Entity o_2 = (Entity) o_1;
-        matched=true;
-        final Entity typeConverted_o_2 = (Entity)o_2;
-        EObject _eContainer = typeConverted_o_2.eContainer();
-        String _packageName = _this.packageName(_eContainer);
-        switchResult = _packageName;
-      }
-    }
-    if (!matched) {
-      if (o_1 instanceof PackageDeclaration) {
-        final PackageDeclaration o_3 = (PackageDeclaration) o_1;
-        matched=true;
-        final PackageDeclaration typeConverted_o_3 = (PackageDeclaration)o_3;
-        EObject _eContainer_1 = typeConverted_o_3.eContainer();
-        String _packageName_1 = _this.packageName(_eContainer_1);
-        String _name = o_3.getName();
-        String _concatPath = _this.concatPath(_packageName_1, _name);
-        switchResult = _concatPath;
-      }
-    }
-    if (!matched) {
-      switchResult = null;
-    }
-    return switchResult;
-  }
-  
-  public String concatPath(final String x, final String y) {
-    String _xifexpression = null;
-    boolean _operator_equals = ObjectExtensions.operator_equals(x, null);
-    if (((Boolean)_operator_equals)) {
-      _xifexpression = y;
-    } else {
-      String _operator_plus = StringExtensions.operator_plus(x, ".");
-      final String typeConverted_y = (String)y;
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, typeConverted_y);
-      _xifexpression = _operator_plus_1;
-    }
-    return _xifexpression;
   }
   
   public Iterable<EObject> transform(final EObject model) {
