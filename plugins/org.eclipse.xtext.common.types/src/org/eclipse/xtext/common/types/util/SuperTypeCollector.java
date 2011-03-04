@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
-import static com.google.common.collect.Iterables.*;
-
 import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmConstraintOwner;
