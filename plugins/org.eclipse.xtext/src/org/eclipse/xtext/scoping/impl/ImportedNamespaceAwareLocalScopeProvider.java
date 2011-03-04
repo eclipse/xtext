@@ -200,12 +200,12 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 	protected ISelectable getAllDescriptions(final Resource resource) {
 		return cache.get("internalGetAllDescriptions", resource, new Provider<ISelectable>() {
 			public ISelectable get() {
-				return internalGetImportedNamespaceResolvers(resource);
+				return internalGetAllDescriptions(resource);
 			}
 		});
 	}
 	
-	protected ISelectable internalGetImportedNamespaceResolvers(final Resource resource) {
+	protected ISelectable internalGetAllDescriptions(final Resource resource) {
 		Iterable<EObject> allContents = new Iterable<EObject>(){
 			public Iterator<EObject> iterator() {
 				return resource.getAllContents();
