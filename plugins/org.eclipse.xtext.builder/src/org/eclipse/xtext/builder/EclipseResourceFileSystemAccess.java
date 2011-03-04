@@ -19,6 +19,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.inject.Inject;
@@ -31,11 +32,21 @@ public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess {
 
 	@Inject
 	private IWorkspaceRoot root;
+	private IAcceptor<String> newFileAcceptor;
 
 	public void setRoot(IWorkspaceRoot root) {
 		this.root = root;
 	}
 
+	public void deleteFile(String fileName) {
+		try {
+			IFile file = root.getFile(new Path(fileName));
+			file.delete(true, new NullProgressMonitor());
+		} catch (CoreException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	public void generateFile(String fileName, String slot, CharSequence contents) {
 		String outletPath = getPathes().get(slot);
 		IFile file = root.getFile(new Path(outletPath + "/" + fileName));
@@ -46,6 +57,7 @@ public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess {
 				file.setContents(new StringInputStream(contents.toString(), defaultCharset), true, true, null);
 			else
 				file.create(new StringInputStream(contents.toString(), defaultCharset), true, null);
+			newFileAcceptor.accept(file.getFullPath().toString());
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e);
 		} catch (CoreException e) {
@@ -60,5 +72,9 @@ public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess {
 			createFolder(parent.getParent());
 			((IFolder)parent).create(true, false, new NullProgressMonitor());
 		}
+	}
+
+	public void setNewFileAcceptor(IAcceptor<String> newFileAcceptor) {
+		this.newFileAcceptor = newFileAcceptor;
 	}
 }
