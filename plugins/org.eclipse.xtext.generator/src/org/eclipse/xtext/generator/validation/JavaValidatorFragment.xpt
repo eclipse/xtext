@@ -16,7 +16,7 @@
 «EXTENSION org::eclipse::xtext::generator::validation::JavaValidatorFragment»
 
 
-«DEFINE generate(List[String] packageQNames, List[String] composedChecks) FOR Grammar»
+«DEFINE generate(List[String] packageQNames, List[String] composedChecks, String validatorSuperClassName) FOR Grammar»
 «FILE getValidatorName("Abstract").asPath()+".java" SRC_GEN-»
 package «getValidatorName("Abstract").toJavaPackage()»;
  
@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
+import «validatorSuperClassName»;
 «IF !composedChecks.isEmpty-»
 import org.eclipse.xtext.validation.ComposedChecks;
 «ENDIF-»
@@ -32,7 +32,7 @@ import org.eclipse.xtext.validation.ComposedChecks;
 «IF !composedChecks.isEmpty-»
 @ComposedChecks(validators= {«FOREACH composedChecks AS validator SEPARATOR ", "-»«validator».class«ENDFOREACH-»})
 «ENDIF-»
-public class «getValidatorName("Abstract").toSimpleName()» extends AbstractDeclarativeValidator {
+public class «getValidatorName("Abstract").toSimpleName()» extends «validatorSuperClassName.toSimpleName()» {
 
    	«EXPAND Common::getEPackages(packageQNames)-»
 
@@ -57,14 +57,14 @@ public class «getValidatorName("").toSimpleName()» extends «getValidatorName("Ab
 «ENDDEFINE»
 
 
-«DEFINE addToPluginXmlRt(List[String] packageQNames, List[String] composedChecks) FOR Grammar»
+«DEFINE addToPluginXmlRt(List[String] packageQNames, List[String] composedChecks, String validatorSuperClassName) FOR Grammar»
 «ENDDEFINE»
 
 
-«DEFINE addToPluginXmlUi(List[String] packageQNames, List[String] composedChecks) FOR Grammar»
+«DEFINE addToPluginXmlUi(List[String] packageQNames, List[String] composedChecks, String validatorSuperClassName) FOR Grammar»
 «ENDDEFINE»
 
 
-«DEFINE addToStandaloneSetup(List[String] packageQNames, List[String] composedChecks) FOR Grammar»
+«DEFINE addToStandaloneSetup(List[String] packageQNames, List[String] composedChecks, String validatorSuperClassName) FOR Grammar»
 «ENDDEFINE»
 

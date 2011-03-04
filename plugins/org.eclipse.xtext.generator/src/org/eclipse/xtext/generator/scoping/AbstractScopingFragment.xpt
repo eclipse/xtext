@@ -14,14 +14,14 @@
 «EXTENSION org::eclipse::xtext::generator::scoping::AbstractScopingFragment»
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
-«DEFINE JavaScopeProvider FOR Grammar»
+«DEFINE JavaScopeProvider(String scopeProviderSuperClassName) FOR Grammar»
 «FILE scopeProviderName().asPath()+".java" SRC-»
 /*
  «fileHeader()»
  */
 package «scopeProviderName().toJavaPackage()»;
 
-import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import «scopeProviderSuperClassName»;
 
 /**
  * This class contains custom scoping description.
@@ -30,7 +30,7 @@ import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
  * on how and when to use it 
  *
  */
-public class «scopeProviderName().toSimpleName()» extends AbstractDeclarativeScopeProvider {
+public class «scopeProviderName().toSimpleName()» extends «scopeProviderSuperClassName.toSimpleName()» {
 
 }
 «ENDFILE»

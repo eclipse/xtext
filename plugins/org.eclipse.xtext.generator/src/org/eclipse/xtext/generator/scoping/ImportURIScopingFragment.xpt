@@ -11,12 +11,12 @@
 
 «IMPORT org::eclipse::xtext»
 
-«DEFINE addToPluginXmlRt FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlRt(String scopeProviderSuperClassName) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToPluginXmlUi FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlUi(String scopeProviderSuperClassName) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToStandaloneSetup FOR Grammar»«ENDDEFINE»
+«DEFINE addToStandaloneSetup(String scopeProviderSuperClassName) FOR Grammar»«ENDDEFINE»
 
-«DEFINE generate FOR Grammar»
-	«EXPAND AbstractScopingFragment::JavaScopeProvider»
+«DEFINE generate(String scopeProviderSuperClassName) FOR Grammar»
+	«EXPAND AbstractScopingFragment::JavaScopeProvider(scopeProviderSuperClassName)»
 «ENDDEFINE»

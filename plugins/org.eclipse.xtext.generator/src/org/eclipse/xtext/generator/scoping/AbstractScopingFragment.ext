@@ -16,6 +16,7 @@ extension org::eclipse::xtext::EcoreUtils;
 
 String scopeProviderName(Grammar this):
 	scopeProviderName(this,getNaming());
+
 private String scopeProviderName(Grammar this, Naming n):
 	JAVA org.eclipse.xtext.generator.scoping.AbstractScopingFragment.getScopeProviderName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
- 
+
