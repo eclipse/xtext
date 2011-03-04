@@ -84,7 +84,7 @@ public class DomainmodelScopeProvider extends XbaseScopeProvider {
 	}
 
 	protected JvmType getJvmType(Entity entity) {
-		Iterable<JvmType> jvmElements = filter(associations.getJvmElements(entity, true), JvmType.class);
+		Iterable<JvmType> jvmElements = filter(associations.getJvmElements(entity), JvmType.class);
 		return (isEmpty(jvmElements) ? null : jvmElements.iterator().next());
 	}
 }
