@@ -16,10 +16,12 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface IJvmModelAssociations {
 	
-	Set<EObject> getSourceElements(EObject jvmElement, boolean onlyPrimary);
+	Set<EObject> getSourceElements(EObject jvmElement);
 
-	Set<EObject> getJvmElements(EObject sourceElement, boolean onlyPrimary);
+	Set<EObject> getJvmElements(EObject sourceElement);
 
-	Set<EObject> getAssociatedElements(EObject jvmOrSourceElement, boolean onlyPrimary);
+	EObject getPrimarySourceElement(EObject jvmElement);
+
+	Set<EObject> getAssociatedElements(EObject jvmOrSourceElement);
 
 }

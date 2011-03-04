@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.jvmmodel;
 
-import static com.google.common.collect.Iterables.*;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
@@ -36,8 +34,8 @@ public class JvmEObjectAtOffsetHelper extends EObjectAtOffsetHelper {
 	protected EObject convertToSource(EObject element) {
 		if(element == null)
 			return null;
-		Iterable<EObject> sourceElements = jvmModelAssociations.getSourceElements(element, false);
-		return (isEmpty(sourceElements)) ? element : sourceElements.iterator().next();
+		EObject sourceElements = jvmModelAssociations.getPrimarySourceElement(element);
+		return sourceElements== null ? element : sourceElements;
 	}
 
 }
