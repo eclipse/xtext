@@ -131,6 +131,8 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 		JvmTypeReference returnType = getCommonReturnType(func.getExpression(), true);
 		if (returnType!=null) {
 			JvmOperation operation = xtend2jvmAssociations.getDirectlyInferredOperation(func);
+			if (operation == null)
+				return null;
 			JvmDeclaredType type = operation.getDeclaringType();
 			for(JvmTypeReference reference: Iterables.filter(EcoreUtil2.eAllContents(returnType), JvmTypeReference.class)) {
 				if (reference.getType() instanceof JvmTypeParameter) {
@@ -179,6 +181,8 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 			return func.getReturnType();
 		if (func.isOverride()) {
 			JvmOperation inferredOperation = xtend2jvmAssociations.getDirectlyInferredOperation(func);
+			if (inferredOperation == null)
+				return null;
 			JvmDeclaredType inferredType = inferredOperation.getDeclaringType();
 			TypeArgumentContext typeArgumentContext = getTypeArgumentContextProvider().getReceiverContext(getTypeReferences()
 					.createTypeRef(inferredType));
