@@ -15,6 +15,7 @@
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
 «DEFINE generate(Junit4Fragment junit4Fragment) FOR Grammar-»
+«REM»
 «FILE qualifiedTestName().asPath()+".java" SRC_TEST -»
 /*
 «fileHeader()»
@@ -23,41 +24,31 @@ package «qualifiedTestName().toJavaPackage()»;
 
 import static junit.framework.Assert.assertNotNull;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.Constants;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 @RunWith(XtextRunner.class)
 @InjectWith(«qualifiedInjectorProviderName().toSimpleName()».class)
 public class «qualifiedTestName().toSimpleName()» {
 	
 	@Inject
-	private XtextResourceSet resourceSet;
+	private ParseHelper<EObject> parseHelper;
 	
-	private String fileExtension;
-	
-	@Inject
-	protected void setExtensions(@Named(Constants.FILE_EXTENSIONS) String extensions) {
-		this.fileExtension = extensions.split(",")[0];
-	}
-
 	@Test
 	public void loadModel() throws Exception {
-		Resource resource = resourceSet.createResource(URI.createURI(String.format("«qualifiedTestName().toSimpleName()».%s",fileExtension)));
-		resource.load(new StringInputStream("Hello Xtext!"), null);
-		assertNotNull(resource.getEObject("/"));
+		EObject result = parseHelper.parse("Hello Xtext!");
+		assertNotNull(result);
 	}
+
 }
 «ENDFILE»
+«ENDREM»
 
 «FILE qualifiedInjectorProviderName().asPath()+".java" SRC_GEN_TEST -»
 /*
@@ -117,84 +108,6 @@ public class «qualifiedUiInjectorProviderName().toSimpleName()» implements IInje
 	
 }
 «ENDFILE»
-
-«IF junit4Fragment.genContentAssistTest»
-«FILE qualifiedUiTestName().asPath()+".java" SRC_TEST -»
-/*
-«fileHeader()»
-*/
-package «qualifiedUiTestName().toJavaPackage()»;
-
-import java.io.InputStream;
-
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.junit.util.ResourceLoadHelper;
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
-import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
-
-@RunWith(XtextRunner.class)
-@InjectWith(«qualifiedUiInjectorProviderName().toSimpleName()».class)
-public class «qualifiedUiTestName().toSimpleName()» implements ResourceLoadHelper {
-	
-	String fileExtension;
-
-    @Inject
-    ContentAssistProcessorTestBuilder.Factory caBuilderfactory;
-
-    @Inject
-    private XtextResourceSet resourceSet;
-
-    @Inject
-    protected void setExtensions(
-            @Named(Constants.FILE_EXTENSIONS) String extensions) {
-        this.fileExtension = extensions.split(",")[0];
-    }
-	
-	protected boolean doCleanWorkspace() {
-		return true;
-	}
-
-	@After
-	public void cleanWorkspace() throws Exception {
-		if (doCleanWorkspace()) {
-			IResourcesSetupUtil.cleanWorkspace();
-		}
-	}
-
-	public XtextResource getResourceFor(InputStream stream) {
-        try {
-            XtextResource result = (XtextResource) resourceSet
-                .createResource(URI.createURI(String.format("«qualifiedUiTestName().toSimpleName()».%s",fileExtension)));
-            result.load(stream, null);
-            return result;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Test
-    public void testEmptyInput() throws Exception {
-        newBuilder().assertText("Hello");
-    }
-
-    protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
-        return caBuilderfactory.create(this);
-    }
-
-}
-«ENDFILE»
-«ENDIF»
 
 «ENDDEFINE»
 

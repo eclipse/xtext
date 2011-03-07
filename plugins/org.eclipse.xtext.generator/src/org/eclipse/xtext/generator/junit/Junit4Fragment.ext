@@ -12,18 +12,6 @@ import org::eclipse::xtext::generator;
 extension org::eclipse::xtext::generator::Naming; 
 extension org::eclipse::xtext::GrammarUtil;
 
-String qualifiedTestName(Grammar grammar) :
-	qualifiedTestName(grammar,getNaming());
-	
-String qualifiedTestName(Grammar grammar, Naming n) :
-	JAVA org.eclipse.xtext.generator.junit.Junit4Fragment.getQualifiedTestName(org.eclipse.xtext.Grammar,org.eclipse.xtext.generator.Naming);
-
-String qualifiedUiTestName(Grammar grammar) :
-	qualifiedUiTestName(grammar,getNaming());
-	
-String qualifiedUiTestName(Grammar grammar, Naming n) :
-	JAVA org.eclipse.xtext.generator.junit.Junit4Fragment.getQualifiedUiTestName(org.eclipse.xtext.Grammar,org.eclipse.xtext.generator.Naming);
-
 String qualifiedInjectorProviderName(Grammar grammar) :
 	qualifiedInjectorProviderName(grammar,getNaming());
 	
@@ -35,11 +23,3 @@ String qualifiedUiInjectorProviderName(Grammar grammar) :
 	
 String qualifiedUiInjectorProviderName(Grammar grammar, Naming n) :
 	JAVA org.eclipse.xtext.generator.junit.Junit4Fragment.getQualifiedUiInjectorProviderName(org.eclipse.xtext.Grammar,org.eclipse.xtext.generator.Naming);
-
-	
-	
-
-	
-
-	
-	
