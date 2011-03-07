@@ -57,7 +57,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	}
 
 	public void testReturnTypeCompatibility_05() throws Exception {
-		XtendClass clazz = clazz("class Foo implements test.SomeInterface { foo() { true } }");
+		XtendClass clazz = clazz("class Foo implements test.SomeInterface { override foo() { true } }");
 		helper.assertNoErrors(clazz.getMembers().get(0));
 	}
 
@@ -78,17 +78,17 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	}
 
 	public void testCaseFunctionNoParameters() throws Exception {
-		XtendFunction function = function("dispatch foo() { null}");
+		XtendFunction function = function("dispatch foo() { null }");
 		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.CASE_FUNC_WITHOUT_PARAMS);
 	}
 
 	public void testCaseFunctionWithTypeParams() throws Exception {
-		XtendFunction function = function("dispatch <T> foo(T s) { null}");
+		XtendFunction function = function("dispatch <T> foo(T s) { null }");
 		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.CASE_FUNC_WITH_TYPE_PARAMS);
 	}
 
 	public void testSingleCaseFunction() throws Exception {
-		XtendFunction function = function("dispatch foo(String s) { null}");
+		XtendFunction function = function("dispatch foo(String s) { null }");
 		helper.assertWarning(function, Xtend2Package.Literals.XTEND_FUNCTION, IssueCodes.SINGLE_CASE_FUNCTION);
 	}
 
