@@ -28,10 +28,6 @@ public class DomainmodelRuntimeModule extends AbstractDomainmodelRuntimeModule {
 		return DomainmodelValueConverterService.class;
 	}
 	
-	public Class<? extends IJvmModelInferrer> bindIJvmModelInferrer() {
-		return DomainmodelJvmModelInferrer.class;
-	}
-
 	@Override
 	public Class<? extends IdentifiableSimpleNameProvider> bindIdentifiableSimpleNameProvider() {
 		return DomainmodelIdentifiableSimpleNameProvider.class;
