@@ -203,7 +203,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 					if (featureOverridesService.isOverridden(inferredJvmOperation, superOperation, typeArgumentContext,
 							false)) {
 						overriddenOperationFound = true;
-						if (!function.isOverride() && !isInterface(superOperation.getDeclaringType()))
+						if (!function.isOverride())
 							error("Missing 'override'. Function overrides " + canonicalName(superOperation), function,
 									XTEND_MEMBER__NAME, MISSING_OVERRIDE);
 						JvmTypeReference superReturnTypeUpperBound = typeArgumentContext.getUpperBound(

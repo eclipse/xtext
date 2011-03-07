@@ -76,6 +76,11 @@ public class OverrideValidationTest extends AbstractXtend2TestCase {
 		helper.assertNoError(xtendClass.getMembers().get(0), MISSING_OVERRIDE);
 	}
 
+	public void testMissingOverride_4() throws Exception {
+		XtendClass xtendClass = clazz("class Foo implements test.SomeInterface { foo() { true } }");
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, MISSING_OVERRIDE);
+	}
+
 	public void testIncompatibleReturnType_0() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { override Boolean string() {true} }");
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE);
