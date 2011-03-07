@@ -34,14 +34,6 @@ public class Junit4Fragment extends AbstractGeneratorFragment {
 		this.genContentAssistTest = genUiTest;
 	}
 
-	public static String getQualifiedTestName(Grammar grammar, Naming naming) {
-		return naming.basePackageRuntime(grammar) + "." + GrammarUtil.getName(grammar) + "Test";
-	}
-
-	public static String getQualifiedUiTestName(Grammar grammar, Naming naming) {
-		return naming.basePackageRuntime(grammar) + "." + GrammarUtil.getName(grammar) + "UiTest";
-	}
-
 	public static String getQualifiedInjectorProviderName(Grammar grammar, Naming naming) {
 		return naming.basePackageRuntime(grammar) + "." + GrammarUtil.getName(grammar) + "InjectorProvider";
 	}
