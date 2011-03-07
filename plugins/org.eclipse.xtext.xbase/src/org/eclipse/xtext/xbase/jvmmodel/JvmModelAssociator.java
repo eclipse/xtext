@@ -77,7 +77,8 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	}
 
 	public EObject getPrimarySourceElement(EObject jvmElement) {
-		return getJvmAdapter(jvmElement).getPrimaryAssociatedElement();
+		JvmAssociationAdapter jvmAdapter = getJvmAdapter(jvmElement);
+		return (jvmAdapter) != null ? jvmAdapter.getPrimaryAssociatedElement() : null;
 	}
 
 	public Set<EObject> getAssociatedElements(EObject jvmOrSourceElement) {
