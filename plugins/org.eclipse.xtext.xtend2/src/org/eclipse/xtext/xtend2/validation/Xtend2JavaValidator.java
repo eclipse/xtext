@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -55,6 +56,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
@@ -193,7 +195,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 				.createTypeRef(associations.getDirectlyInferredOperation(function).getDeclaringType()));
 		JvmOperation inferredJvmOperation = associations.getDirectlyInferredOperation(function);
 		boolean overriddenOperationFound = false;
-		if (function.getDeclaringType().getExtends() != null) {
+		if (function.getDeclaringType().getExtends() != null || !function.getDeclaringType().getImplements().isEmpty()) {
 			JvmTypeReference returnType = typeProvider.getTypeForIdentifiable(inferredJvmOperation);
 			JvmTypeReference returnTypeUpperBound = typeArgumentContext.getUpperBound(returnType, function);
 			for (JvmOperation superOperation : allSuperOperations(function.getDeclaringType())) {
@@ -201,7 +203,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 					if (featureOverridesService.isOverridden(inferredJvmOperation, superOperation, typeArgumentContext,
 							false)) {
 						overriddenOperationFound = true;
-						if (!function.isOverride())
+						if (!function.isOverride() && !isInterface(superOperation.getDeclaringType()))
 							error("Missing 'override'. Function overrides " + canonicalName(superOperation), function,
 									XTEND_MEMBER__NAME, MISSING_OVERRIDE);
 						JvmTypeReference superReturnTypeUpperBound = typeArgumentContext.getUpperBound(
@@ -224,8 +226,9 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	protected Iterable<JvmOperation> allSuperOperations(final XtendClass xtendClass) {
 		// I love Google collections
 		Iterable<JvmOperation> result = filter(
-				concat(transform(concat(singleton(xtendClass.getExtends()), xtendClass.getImplements()),
-						new Function<JvmTypeReference, Iterable<JvmFeature>>() {
+				concat(transform(
+						filter(concat(singleton(xtendClass.getExtends()), xtendClass.getImplements()),
+								Predicates.notNull()), new Function<JvmTypeReference, Iterable<JvmFeature>>() {
 							public Iterable<JvmFeature> apply(JvmTypeReference from) {
 								return featureOverridesService.getAllJvmFeatures(from);
 							}
@@ -233,6 +236,10 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 		return result;
 	}
 
+	protected boolean isInterface(JvmDeclaredType type) {
+		return type instanceof JvmGenericType && ((JvmGenericType)type).isInterface();
+	}
+	
 	protected String canonicalName(JvmIdentifiableElement element) {
 		return (element != null) ? notNull(element.getIdentifier()) : null;
 	}
