@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmArrayType;
@@ -76,6 +77,8 @@ public class ImportManager {
 			builder.append(typeRef.getType());
 		}
 	}
+	
+	private Pattern JAVA_LANG_PACK = Pattern.compile("java\\.lang\\.[\\w]+");
 
 	public void appendType(final JvmType type, StringBuilder builder) {
 		if (type instanceof JvmPrimitiveType || type instanceof JvmVoid || type instanceof JvmTypeParameter) {
@@ -86,7 +89,7 @@ public class ImportManager {
 		} else {
 			final String qn = type.getQualifiedName('.');
 			final String simpleName = type.getSimpleName();
-			if (qn.startsWith("java.lang.")) {
+			if (JAVA_LANG_PACK.matcher(qn).matches()) {
 				builder.append(simpleName);
 			} else if (!organizeImports) {
 				builder.append(qn);
