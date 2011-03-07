@@ -4,6 +4,7 @@
 package org.eclipse.xtext.example.domainmodel.ui.outline;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
 
@@ -19,4 +20,9 @@ public class DomainmodelOutlineTreeProvider extends DefaultOutlineTreeProvider {
 			createNode(parentNode, content);
 		}
 	}
+
+	protected boolean _isLeaf(Feature feature) {
+		return true;
+	}
+	
 }
