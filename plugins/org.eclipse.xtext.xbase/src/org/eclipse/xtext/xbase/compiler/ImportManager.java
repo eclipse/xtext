@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.compiler;
 
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -89,7 +90,7 @@ public class ImportManager {
 		} else {
 			final String qn = type.getQualifiedName('.');
 			final String simpleName = type.getSimpleName();
-			if (JAVA_LANG_PACK.matcher(qn).matches()) {
+			if (JAVA_LANG_PACK.matcher(qn).matches() || equal(qn,simpleName)) {
 				builder.append(simpleName);
 			} else if (!organizeImports) {
 				builder.append(qn);
