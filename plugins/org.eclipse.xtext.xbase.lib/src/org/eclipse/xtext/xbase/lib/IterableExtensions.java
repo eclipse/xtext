@@ -202,6 +202,18 @@ public class IterableExtensions {
 		return Joiner.on(separator.toString()).join(iterable);
 	}
 	
+	public static final <T> String elementsToString(Iterable<T> iterable, CharSequence separator, Functions.Function1<T, ? extends CharSequence> func) {
+		StringBuilder sb = new StringBuilder();
+		Iterator<T> iterator = iterable.iterator();
+		while (iterator.hasNext()) {
+			CharSequence result = func.apply(iterator.next());
+			sb.append(result);
+			if (iterator.hasNext())
+				sb.append(separator);
+		}
+		return sb.toString();
+	}
+	
 	public static final boolean elementsEqual(Iterable<?> iterable, Iterable<?> other) {
 		return Iterables.elementsEqual(iterable, other);
 	}
