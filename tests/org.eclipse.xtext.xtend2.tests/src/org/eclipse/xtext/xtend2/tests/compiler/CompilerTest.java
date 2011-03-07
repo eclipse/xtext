@@ -332,6 +332,15 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"}");
 	}
 	
+	
+	// TODO fix this test
+	public void testDispatchTypes() throws Exception {
+//		compileJavaCode("Dispatch", "class Dispatch { " +
+//				 "  dispatch doSomething(int i) { i.toString() } " +
+//				 "  dispatch doSomething(Object o) { null } " +
+//				 "}");
+	}
+	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
 
