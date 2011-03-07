@@ -14,7 +14,6 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
-
 /**
  * used to register components to be used within the IDE.
  */
