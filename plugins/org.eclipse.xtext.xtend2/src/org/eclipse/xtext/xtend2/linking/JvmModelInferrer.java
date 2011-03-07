@@ -164,6 +164,7 @@ public class JvmModelInferrer {
 		if (sourceMember instanceof XtendFunction) {
 			XtendFunction source = (XtendFunction) sourceMember;
 			JvmOperation target = typesFactory.createJvmOperation();
+			associator.associate(target, source);
 			String sourceName = source.getName();
 			if (source.isDispatch()) {
 				sourceName = "_" + sourceName;
@@ -175,15 +176,14 @@ public class JvmModelInferrer {
 			inferReturnType(target);
 			for (JvmTypeParameter typeParameter : source.getTypeParameters())
 				target.getTypeParameters().add(EcoreUtil2.cloneWithProxies(typeParameter));
-			associator.associate(target, source);
 			return target;
 		} else if (sourceMember instanceof DeclaredDependency) {
 			DeclaredDependency dep = (DeclaredDependency) sourceMember;
 			JvmField field = typesFactory.createJvmField();
+			associator.associate(field, dep);
 			field.setVisibility(JvmVisibility.PRIVATE);
 			field.setSimpleName(dep.getName());
 			field.setType(EcoreUtil2.cloneWithProxies(dep.getType()));
-			associator.associate(field, dep);
 			return field;
 		}
 		throw new IllegalArgumentException("Cannot transform " + notNull(sourceMember) + " to a JvmMember");
