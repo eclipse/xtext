@@ -38,11 +38,6 @@ public abstract class AbstractDomainmodelUiModule extends DefaultUiModule {
 		binder.bind(org.eclipse.xtext.parser.antlr.ITokenDefProvider.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING)).to(org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class);
 	}
 
-	// contributed by org.eclipse.xtext.generator.exporting.QualifiedNamesFragment
-	public Class<? extends org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator> bindIDependentElementsCalculator() {
-		return org.eclipse.xtext.ui.refactoring.impl.DefaultDependentElementsCalculator.class;
-	}
-
 	// contributed by org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment
 	public Class<? extends org.eclipse.jface.viewers.ILabelProvider> bindILabelProvider() {
 		return org.eclipse.xtext.example.domainmodel.ui.labeling.DomainmodelLabelProvider.class;
@@ -148,14 +143,44 @@ public abstract class AbstractDomainmodelUiModule extends DefaultUiModule {
 		return org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.types.TypesGeneratorFragment
-	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider.ReferenceProposalCreator> bindAbstractJavaBasedContentProposalProvider$ReferenceProposalCreator() {
-		return org.eclipse.xtext.common.types.xtext.ui.TypeAwareReferenceProposalCreator.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper> bindAbstractAntlrTokenToAttributeIdMapper() {
 		return org.eclipse.xtext.xbase.ui.syntaxcoloring.XbaseTokenToAttributeIdMapper.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider.ReferenceProposalCreator> bindAbstractJavaBasedContentProposalProvider$ReferenceProposalCreator() {
+		return org.eclipse.xtext.xbase.ui.contentassist.XbaseReferenceProposalCreator.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.jface.text.contentassist.IContentAssistProcessor> bindIContentAssistProcessor() {
+		return org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.xbase.XbaseUiFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.findrefs.FindReferenceQueryDataFactory> bindFindReferenceQueryDataFactory() {
+		return org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceQueryDataFactory.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.xbase.XbaseUiFragment
+	public Class<? extends org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator> bindIDependentElementsCalculator() {
+		return org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelDependentElementsCalculator.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.xbase.XbaseUiFragment
+	public Class<? extends org.eclipse.xtext.ui.refactoring.impl.RefactoringReferenceQueryDataFactory> bindRefactoringReferenceQueryDataFactory() {
+		return org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelFindRefsQueryDataFactory.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.xbase.XbaseUiFragment
+	public Class<? extends org.eclipse.xtext.ui.refactoring.IReferenceUpdater> bindIReferenceUpdater() {
+		return org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelReferenceUpdater.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.xbase.XbaseUiFragment
+	public Class<? extends org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider> bindIRenameStrategy$Provider() {
+		return org.eclipse.xtext.example.domainmodel.ui.refactoring.DomainmodelRenameStrategy.Provider.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.generator.GeneratorFragment

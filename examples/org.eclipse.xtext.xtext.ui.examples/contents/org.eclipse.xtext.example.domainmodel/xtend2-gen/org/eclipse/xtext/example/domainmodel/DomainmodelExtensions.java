@@ -1,4 +1,4 @@
-package org.eclipse.xtext.example.domainmodel.domainmodel;
+package org.eclipse.xtext.example.domainmodel;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;

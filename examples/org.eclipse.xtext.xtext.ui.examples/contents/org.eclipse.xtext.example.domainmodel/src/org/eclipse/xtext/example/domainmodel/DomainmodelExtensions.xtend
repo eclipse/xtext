@@ -1,7 +1,8 @@
-package org.eclipse.xtext.example.domainmodel.domainmodel
+package org.eclipse.xtext.example.domainmodel
 
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.example.domainmodel.domainmodel.*
 
 class DomainmodelExtensions {
 	String packageName(Object o) {

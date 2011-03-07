@@ -3,12 +3,14 @@
  */
 package org.eclipse.xtext.example.domainmodel.ui;
 
+import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.example.domainmodel.ui.autoedit.FantasticEditStrategyProvider;
 import org.eclipse.xtext.example.domainmodel.ui.linking.DomainmodelLinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.example.domainmodel.ui.navigation.DomainmodelHyperlinkHelper;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
+import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 
 /**
@@ -33,4 +35,5 @@ public class DomainmodelUiModule extends AbstractDomainmodelUiModule {
 	public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
 		return FantasticEditStrategyProvider.class;
 	}
+
 }

@@ -1,5 +1,6 @@
 package org.eclipse.xtext.example.domainmodel.generator
 
+import org.eclipse.xtext.example.domainmodel.*
 import org.eclipse.xtext.example.domainmodel.domainmodel.*
 import org.eclipse.emf.ecore.*
 import org.eclipse.xtext.common.types.*

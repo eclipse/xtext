@@ -1,6 +1,7 @@
 package org.eclipse.xtext.example.domainmodel.jvmmodel
 
 import org.eclipse.xtext.example.domainmodel.domainmodel.*
+import org.eclipse.xtext.example.domainmodel.*
 import org.eclipse.xtext.xbase.jvmmodel.*
 import org.eclipse.emf.ecore.*
 import org.eclipse.xtext.common.types.*
@@ -19,9 +20,9 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 	
 	@Inject extension DomainmodelExtensions
 
-	List<EObject> inferJvmModel(EObject sourceObject) {
-		transform(sourceObject).toList		
-	}	
+	override List<EObject> inferJvmModel(EObject sourceObject) {
+		transform(sourceObject).toList
+	}
 	
 	dispatch Iterable<EObject> transform(DomainModel model) {
 		model.elements.map(e|transform(e)).flatten

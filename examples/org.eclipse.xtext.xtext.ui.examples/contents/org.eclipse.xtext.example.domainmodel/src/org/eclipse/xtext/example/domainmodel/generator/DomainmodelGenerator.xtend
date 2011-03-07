@@ -19,7 +19,7 @@ class DomainmodelGenerator implements IGenerator {
 	
 	@Inject DomainmodelCompiler
 	
-	void doGenerate(Resource resource, IFileSystemAccess fsa) {
+	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		// TODO: use filter
 		for(element: resource.allContentsIterable)
 			if(element instanceof Entity) {

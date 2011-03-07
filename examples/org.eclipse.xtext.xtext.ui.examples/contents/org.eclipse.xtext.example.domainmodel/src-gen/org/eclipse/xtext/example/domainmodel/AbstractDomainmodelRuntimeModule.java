@@ -144,11 +144,6 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 		return org.eclipse.xtext.common.types.xtext.ClasspathBasedTypeScopeProvider.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.types.TypesGeneratorFragment
-	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		return org.eclipse.xtext.common.types.xtext.TypesAwareDefaultGlobalScopeProvider.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.xbase.interpreter.IEvaluationContext> bindIEvaluationContext() {
 		return org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext.class;
@@ -212,6 +207,11 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator> bindIJvmModelAssociator() {
 		return org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
+		return org.eclipse.xtext.xbase.jvmmodel.JvmGlobalScopeProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment

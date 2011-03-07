@@ -4,7 +4,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelExtensions;
+import org.eclipse.xtext.example.domainmodel.DomainmodelExtensions;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Operation;
 import org.eclipse.xtext.xbase.compiler.ImportManager;

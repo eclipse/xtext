@@ -211,6 +211,7 @@
       		platform="carbon"/>
     </extension>
 
+
    <extension
          point="org.eclipse.xtext.builder.participant">
       <participant

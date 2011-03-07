@@ -60,7 +60,9 @@ Workflow {
 			fragment = parser.antlr.XtextAntlrGeneratorFragment {}
 
 			// java-based API for validation 
-			fragment = validation.JavaValidatorFragment {}
+			fragment = validation.JavaValidatorFragment {
+				composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+			}
 
 			// scoping API 
 			fragment = scoping.ImportNamespacesScopingFragment {}
@@ -91,6 +93,7 @@ Workflow {
 			// Xbase support
 			fragment = types.TypesGeneratorFragment {}
 			fragment = xbase.XbaseGeneratorFragment {}
+			fragment = xbase.XbaseUiFragment {}
 			
 			// Code generator
 			fragment = generator.GeneratorFragment {}
