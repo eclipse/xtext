@@ -91,10 +91,6 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		IProject project = createDslProject(subMonitor.newChild(1));
 		createDslUiProject(subMonitor.newChild(1));
 
-		if (getXtextProjectInfo().isCreateGeneratorProject()) {
-			createGeneratorProject(subMonitor.newChild(1));
-		}
-
 		if (getXtextProjectInfo().isCreateTestProject()) {
 			createTestProject(subMonitor.newChild(1));
 		}
@@ -108,7 +104,6 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 
 	protected int getMonitorTicks() {
 		int ticks = 2;
-		ticks = getXtextProjectInfo().isCreateGeneratorProject() ? ticks+1 : ticks;
 		ticks = getXtextProjectInfo().isCreateTestProject() ? ticks+1 : ticks;
 		return ticks;
 	}
@@ -202,12 +197,6 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		return BUILDERS;
 	}
 
-	protected IProject createGeneratorProject(final IProgressMonitor monitor) throws CoreException {
-		PluginProjectFactory factory = createProjectFactory();
-		configureGeneratorProjectBuilder(factory);
-		return createProject(factory, getGeneratorProjectTemplateName(), monitor);
-	}
-
 	protected void configureGeneratorProjectBuilder(PluginProjectFactory factory) {
 		configureProjectFactory(factory);
 		List<String> requiredBundles = getGeneratorProjectRequiredBundles();
@@ -260,7 +249,8 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 				"org.eclipse.xtext", //$NON-NLS-1$
 				"org.eclipse.xtext.junit4", //$NON-NLS-1$
 				"org.eclipse.xtext.ui.junit", //$NON-NLS-1$
-				"org.junit4" //$NON-NLS-1$
+				"org.junit4", //$NON-NLS-1$
+				"org.eclipse.ui.workbench;resolution:=optional" //$NON-NLS-1$
 				); //$NON-NLS-1$
 		return requiredBundles;
 	}
