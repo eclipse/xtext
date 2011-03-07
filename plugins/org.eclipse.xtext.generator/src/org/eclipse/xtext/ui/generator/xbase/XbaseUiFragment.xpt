@@ -1,0 +1,69 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+
+«EXTENSION org::eclipse::xtext::generator::Naming»
+«EXTENSION org::eclipse::xtext::ui::generator::xbase::XbaseUiFragment»
+
+«DEFINE generate FOR Grammar»
+«FILE getRefactoringStrategyName().asPath() +".java" SRC_UI»
+/*
+«fileHeader()»
+*/
+package «getRefactoringStrategyName().toJavaPackage()»;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.AbstractJvmModelRenameStrategy;
+
+import com.google.inject.Inject;
+
+/**
+ * Encapsulates the model changes of a rename refactoring.  
+ */
+public class «getRefactoringStrategyName().toSimpleName()» extends AbstractJvmModelRenameStrategy {
+
+	public static class Provider extends DefaultRenameStrategy.Provider {
+
+		@Inject
+		private IJvmModelAssociations jvmModelAssociations;
+
+		@Override
+		public IRenameStrategy get(EObject targetElement, IRenameElementContext renameElementContext) {
+			return new «getRefactoringStrategyName().toSimpleName()»(targetElement, getLocationInFileProvider(), jvmModelAssociations);
+		}
+	}
+	
+	protected «getRefactoringStrategyName().toSimpleName()»(EObject targetElement, ILocationInFileProvider locationInFileProvider,
+			IJvmModelAssociations jvmModelAssociations) {
+		super(targetElement, locationInFileProvider, jvmModelAssociations);
+	}
+
+	@Override
+	protected void setInferredJvmElementName(String name, EObject renamedSourceElement) {
+		/*
+		 * TODO: rename inferred elements as you would in IJvmModelInferrer 
+		 */
+	}
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE addToPluginXmlRt FOR Grammar-»«ENDDEFINE»
+
+«DEFINE addToPluginXmlUi FOR Grammar-»«ENDDEFINE»
+
+«DEFINE addToStandaloneSetup FOR Grammar-»«ENDDEFINE»

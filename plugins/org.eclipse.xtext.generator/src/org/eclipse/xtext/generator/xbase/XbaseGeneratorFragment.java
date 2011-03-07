@@ -11,7 +11,6 @@ import static java.util.Collections.*;
 
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -25,6 +24,7 @@ import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 
@@ -42,7 +42,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
-		if (!usesXbaseGrammar(grammar))
+		if (!XbaseUtil.usesXbaseGrammar(grammar))
 			return emptySet();
 		return new BindFactory()
 				.addTypeToType("org.eclipse.xtext.xbase.interpreter.IEvaluationContext",
@@ -79,50 +79,47 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 						"org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator")
 				.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator",
 						"org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator")
+				.addTypeToType(IGlobalScopeProvider.class.getName(),
+						"org.eclipse.xtext.xbase.jvmmodel.JvmGlobalScopeProvider")
 
 				// obsolete convenience bindings
 				.addTypeToType("org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider",
 						"org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider").getBindings();
 	}
 
-	protected boolean usesXbaseGrammar(Grammar grammar) {
-		if (grammar.getName().equals("org.eclipse.xtext.xbase.Xbase"))
-			return true;
-		EList<Grammar> usedGrammars = grammar.getUsedGrammars();
-		for (Grammar grammar2 : usedGrammars) {
-			if (usesXbaseGrammar(grammar2)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
-		if (!usesXbaseGrammar(grammar))
+		if (!XbaseUtil.usesXbaseGrammar(grammar))
 			return emptySet();
-		return new BindFactory().addTypeToType(
-				"org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper",
-				"org.eclipse.xtext.xbase.ui.syntaxcoloring.XbaseTokenToAttributeIdMapper").getBindings();
+		return new BindFactory()
+				.addTypeToType("org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper",
+						"org.eclipse.xtext.xbase.ui.syntaxcoloring.XbaseTokenToAttributeIdMapper")
+				.addTypeToType("org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider.ReferenceProposalCreator",
+						"org.eclipse.xtext.xbase.ui.contentassist.XbaseReferenceProposalCreator")
+				.addTypeToType("org.eclipse.jface.text.contentassist.IContentAssistProcessor", 
+						"org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor")
+				.addTypeToType("org.eclipse.xtext.ui.editor.findrefs.FindReferenceQueryDataFactory", 
+						"org.eclipse.xtext.xtend2.ui.findrefs.Xtend2FindReferenceQueryDataFactory")
+				.getBindings();
 	}
 
 	@Override
 	public String[] getRequiredBundlesRt(Grammar grammar) {
-		if (!usesXbaseGrammar(grammar))
+		if (!XbaseUtil.usesXbaseGrammar(grammar))
 			return new String[0];
-		return new String[] { "org.eclipse.xtext.xbase", "org.eclipse.xtext.xtend.lib" };
+		return new String[] { "org.eclipse.xtext.xbase", "org.eclipse.xtext.xtend2.lib" };
 	}
 
 	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
-		if (!usesXbaseGrammar(grammar))
+		if (!XbaseUtil.usesXbaseGrammar(grammar))
 			return new String[0];
 		return new String[] { "org.eclipse.xtext.xbase.ui" };
 	}
 
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
-		if (usesXbaseGrammar(grammar))
+		if (XbaseUtil.usesXbaseGrammar(grammar))
 			super.generate(grammar, ctx);
 	}
 
