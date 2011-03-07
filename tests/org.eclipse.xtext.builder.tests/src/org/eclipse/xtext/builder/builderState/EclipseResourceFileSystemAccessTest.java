@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.builderState;
 
+import static com.google.common.collect.Lists.*;
+
+import java.util.List;
+
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
@@ -15,6 +19,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess;
 import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
+import org.eclipse.xtext.util.IAcceptor;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -31,10 +36,18 @@ public class EclipseResourceFileSystemAccessTest extends TestCase {
 		EclipseResourceFileSystemAccess fileSystemAccess = new EclipseResourceFileSystemAccess();
 		fileSystemAccess.setRoot(ResourcesPlugin.getWorkspace().getRoot());
 		fileSystemAccess.setOutputPath("test");
+		final List<String> newFiles = newArrayList();
+		fileSystemAccess.setNewFileAcceptor(new IAcceptor<String>() {
+			public void accept(String t) {
+				newFiles.add(t);
+			}
+		});
 		fileSystemAccess.generateFile("tmp/X", "XX");
 		IFolder dir = project.getFolder("tmp");
 		assertTrue(dir.exists());
 		IFile file = dir.getFile("X");
 		assertTrue(file.exists());
+		assertEquals(1, newFiles.size());
+		assertTrue(newFiles.contains("/test/tmp/X"));
 	}
 }
