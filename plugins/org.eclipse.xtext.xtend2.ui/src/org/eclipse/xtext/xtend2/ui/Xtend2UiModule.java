@@ -107,6 +107,7 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 		return Xtend2DoubleClickStrategyProvider.class;
 	}
 	
+	// TODO: moved to XbaseGeneratorFragment. remove after regeneration
 	@Override
 	public Class<? extends ReferenceProposalCreator> bindAbstractJavaBasedContentProposalProvider$ReferenceProposalCreator() {
 		return XbaseReferenceProposalCreator.class;
@@ -121,6 +122,7 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 		return Xtend2FoldingRegionProvider.class;
 	}
 	
+	// TODO: moved to XbaseGeneratorFragment. remove after regeneration
 	@Override
 	public Class<? extends IContentAssistProcessor> bindIContentAssistProcessor() {
 		return RepeatedContentAssistProcessor.class;
