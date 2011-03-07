@@ -182,6 +182,7 @@
          <MweSnippet>
 <![CDATA[
 	bean = StandaloneSetup {
+	    scanClassPath = true
 		platformUri = "${runtimeProject}/.."
 	}
 
@@ -243,7 +244,10 @@
 			fragment = builder.BuilderIntegrationFragment {}
 
 			// generator API
-			fragment = generator.GeneratorFragment {}
+			fragment = generator.GeneratorFragment {
+				generateMwe = true
+				generateJavaMain = true
+			}
 			
 			// formatter API 
 			fragment = formatting.FormatterFragment {}

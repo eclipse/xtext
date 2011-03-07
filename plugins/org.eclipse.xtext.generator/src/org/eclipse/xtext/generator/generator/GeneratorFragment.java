@@ -8,6 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.generator;
 
+import static com.google.common.collect.Lists.*;
+
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.xtext.Grammar;
@@ -25,6 +28,28 @@ import org.eclipse.xtext.generator.Naming;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class GeneratorFragment extends AbstractGeneratorFragment {
+	
+	private boolean generateMwe = false;
+	private boolean generateJavaMain = false;
+	private boolean generatorStub = true;
+	
+	public void setGeneratorStub(boolean generatorStub) {
+		this.generatorStub = generatorStub;
+	}
+	
+	public void setGenerateJavaMain(boolean generateJavaMain) {
+		this.generateJavaMain = generateJavaMain;
+	}
+	
+	public void setGenerateMwe(boolean generateMwe) {
+		this.generateMwe = generateMwe;
+	}
+	
+	@Override
+	protected List<Object> getParameters(Grammar grammar) {
+		return newArrayList((Object)generatorStub, (Object)generateMwe, (Object)generateJavaMain);
+	}
+	
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory().addTypeToType(IGenerator.class.getName(), getGeneratorName(grammar, getNaming())).getBindings();
