@@ -57,7 +57,8 @@ public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess {
 				file.setContents(new StringInputStream(contents.toString(), defaultCharset), true, true, null);
 			else
 				file.create(new StringInputStream(contents.toString(), defaultCharset), true, null);
-			newFileAcceptor.accept(file.getFullPath().toString());
+			if(newFileAcceptor != null)
+				newFileAcceptor.accept(file.getFullPath().toString());
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e);
 		} catch (CoreException e) {
