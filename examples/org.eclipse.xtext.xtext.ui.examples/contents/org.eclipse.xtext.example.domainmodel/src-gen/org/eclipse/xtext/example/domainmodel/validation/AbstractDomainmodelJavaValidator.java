@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
+import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
 
-public class AbstractDomainmodelJavaValidator extends AbstractDeclarativeValidator {
+public class AbstractDomainmodelJavaValidator extends XbaseJavaValidator {
 
 	@Override
 	protected List<EPackage> getEPackages() {

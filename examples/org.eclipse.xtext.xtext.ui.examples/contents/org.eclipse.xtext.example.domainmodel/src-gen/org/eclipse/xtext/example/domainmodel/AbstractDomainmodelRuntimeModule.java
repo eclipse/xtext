@@ -200,6 +200,11 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer> bindIJvmModelInferrer() {
+		return org.eclipse.xtext.example.domainmodel.jvmmodel.DomainmodelJvmModelInferrer.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations> bindIJvmModelAssociations() {
 		return org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator.class;
 	}

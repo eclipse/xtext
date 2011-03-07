@@ -19,7 +19,8 @@ var runtimeProject = "../${projectName}"
 Workflow {
 
 	bean = StandaloneSetup {
-		platformUri = "${runtimeProject}/../../../.."
+		scanClassPath  = true
+		platformUri = "${runtimeProject}/.."
 	}
 	
 	component = DirectoryCleaner {
