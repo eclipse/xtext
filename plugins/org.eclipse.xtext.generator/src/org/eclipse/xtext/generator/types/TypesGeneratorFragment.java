@@ -38,7 +38,7 @@ public class TypesGeneratorFragment extends DefaultGeneratorFragment {
 		     .addTypeToInstance(TypesFactory.class.getName(), "org.eclipse.xtext.common.types.TypesFactory.eINSTANCE")
 			 .addTypeToType(IJvmTypeProvider.Factory.class.getName(), ClasspathTypeProviderFactory.class.getName())
 			 .addTypeToType(AbstractTypeScopeProvider.class.getName(), ClasspathBasedTypeScopeProvider.class.getName())
-			 .addfinalTypeToType(IGlobalScopeProvider.class.getName(), TypesAwareDefaultGlobalScopeProvider.class.getName())
+			 .addTypeToType(IGlobalScopeProvider.class.getName(), TypesAwareDefaultGlobalScopeProvider.class.getName())
 			 .getBindings();
 	}
 
