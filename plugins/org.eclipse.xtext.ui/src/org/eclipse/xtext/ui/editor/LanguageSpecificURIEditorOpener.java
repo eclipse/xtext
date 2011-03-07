@@ -54,11 +54,10 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 	@Inject
 	@Named(Constants.LANGUAGE_NAME)
 	private String editorID;
-	
+
 	@Inject
 	private IWorkbench workbench;
-	
-	
+
 	public void setLocationProvider(ILocationInFileProvider locationProvider) {
 		this.locationProvider = locationProvider;
 	}
@@ -76,7 +75,8 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 		if (storages != null && storages.hasNext()) {
 			try {
 				IStorage storage = storages.next().getFirst();
-				IEditorInput editorInput = (storage instanceof IFile) ? new FileEditorInput((IFile) storage) : new XtextReadonlyEditorInput(storage);
+				IEditorInput editorInput = (storage instanceof IFile) ? new FileEditorInput((IFile) storage)
+						: new XtextReadonlyEditorInput(storage);
 				IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
 				IEditorPart editor = IDE.openEditor(activePage, editorInput, editorID);
 				selectAndReveal(editor, uri, crossReference, indexInList, select);
@@ -100,12 +100,15 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 					public void process(XtextResource resource) throws Exception {
 						if (resource != null) {
 							EObject object = resource.getEObject(uri.fragment());
-							ITextRegion location = (crossReference != null) ? locationProvider.getSignificantTextRegion(object,
-									crossReference, indexInList) : locationProvider.getSignificantTextRegion(object);
-							if (select) {
-								xtextEditor.selectAndReveal(location.getOffset(), location.getLength());
-							} else {
-								xtextEditor.reveal(location.getOffset(), location.getLength());								
+							if (object != null) {
+								ITextRegion location = (crossReference != null) ? locationProvider
+										.getSignificantTextRegion(object, crossReference, indexInList)
+										: locationProvider.getSignificantTextRegion(object);
+								if (select) {
+									xtextEditor.selectAndReveal(location.getOffset(), location.getLength());
+								} else {
+									xtextEditor.reveal(location.getOffset(), location.getLength());
+								}
 							}
 						}
 					}
