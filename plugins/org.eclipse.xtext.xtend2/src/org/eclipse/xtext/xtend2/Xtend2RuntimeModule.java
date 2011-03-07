@@ -93,6 +93,7 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 		return Xtend2EObjectAtOffsetHelper.class;
 	}
 	
+	// TODO: moved to XbaseGeneratorFragment. remove after regeneration
 	@Override
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return Xtend2GlobalScopeProvider.class;
