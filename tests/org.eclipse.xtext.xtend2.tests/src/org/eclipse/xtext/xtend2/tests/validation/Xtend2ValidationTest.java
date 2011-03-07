@@ -50,6 +50,17 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		helper.assertError(function, XbasePackage.Literals.XIF_EXPRESSION, INCOMPATIBLE_TYPES, "String", "Object");
 	}
 
+	public void testReturnTypeCompatibility_04() throws Exception {
+		XtendClass clazz = clazz("class Foo implements test.SomeInterface { foo() { 1 } }");
+		helper.assertError(clazz.getMembers().get(0), Xtend2Package.Literals.XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE, 
+				"return", "type", "incompatible", "SomeInterface");
+	}
+
+	public void testReturnTypeCompatibility_05() throws Exception {
+		XtendClass clazz = clazz("class Foo implements test.SomeInterface { foo() { true } }");
+		helper.assertNoErrors(clazz.getMembers().get(0));
+	}
+
 	public void testAssignmentToFunctionParameter() throws Exception {
 		XtendFunction function = function("void foo(int bar) { bar=7 }");
 		helper.assertError(function, XbasePackage.Literals.XASSIGNMENT, ASSIGNMENT_TO_FINAL, "Assignment", "final",
