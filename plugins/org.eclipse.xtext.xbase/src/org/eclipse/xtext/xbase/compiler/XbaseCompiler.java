@@ -448,7 +448,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			JvmFormalParameter param = iter.next();
 			final JvmTypeReference parameterType2 = getTypeProvider().getTypeForIdentifiable(param);
 			final JvmTypeReference parameterType = context.resolve(parameterType2);
-			serialize(parameterType, closure, b, true, false);
+			b.append(parameterType);
+//			serialize(parameterType, closure, b, true, false);
 			b.append(" ");
 			String name = makeJavaIdentifier(b.declareVariable(param, param.getName()));
 			b.append(name);
