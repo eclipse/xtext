@@ -8,23 +8,42 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
 public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 
-	public void testSimple() throws Exception {
+	public void testJavaLangReflectImport() throws Exception {
 		final String input = "package foo\n" +
 				"class Bar {\n" +
-				"  Integer doStuff(String x) {x.length}\n" +
+				"  void doStuff(java.lang.reflect.Method m) {}\n" +
 				"}\n";
 		final String expected = "package foo;\n" + 
 				"\n" +
+				"import java.lang.reflect.Method;\n" +
 				"\n" +
 				"@SuppressWarnings(\"all\")\n" + 
 				"public class Bar {\n" +
 				"  private final Bar _this = this;\n" + 
 				"  \n" +
-				"  public Integer doStuff(final String x) {\n" + 
-				"    int _length = x.length();\n" + 
-				"    return ((Integer)_length);\n" + 
+				"  public void doStuff(final Method m) {\n" + 
 				"  }\n" + 
 				"}";
+		assertCompilesTo(expected, input);
+	}
+	
+	public void testSimple() throws Exception {
+		final String input = "package foo\n" +
+		"class Bar {\n" +
+		"  Integer doStuff(String x) {x.length}\n" +
+		"}\n";
+		final String expected = "package foo;\n" + 
+		"\n" +
+		"\n" +
+		"@SuppressWarnings(\"all\")\n" + 
+		"public class Bar {\n" +
+		"  private final Bar _this = this;\n" + 
+		"  \n" +
+		"  public Integer doStuff(final String x) {\n" + 
+		"    int _length = x.length();\n" + 
+		"    return ((Integer)_length);\n" + 
+		"  }\n" + 
+		"}";
 		assertCompilesTo(expected, input);
 	}
 	
