@@ -19,7 +19,7 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 	
 	@Inject extension DomainmodelExtensions
 
-	inferJvmModel(EObject sourceObject) {
+	List<EObject> inferJvmModel(EObject sourceObject) {
 		transform(sourceObject).toList		
 	}	
 	
