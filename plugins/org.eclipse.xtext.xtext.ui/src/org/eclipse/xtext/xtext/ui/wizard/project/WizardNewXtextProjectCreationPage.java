@@ -24,7 +24,6 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
@@ -45,7 +44,6 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	private Text languageNameField;
 	private final IStructuredSelection selection;
 	private Text extensionsField;
-	private Button generatorProjectField;
 	private Combo generatorConfigurationField;
 	
 	/**
@@ -205,17 +203,17 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	}
 
 	protected void createProjectLayoutGroup(Composite parent) {
-		Group layoutGroup = new Group(parent, SWT.NONE);
-		layoutGroup.setFont(parent.getFont());
-		layoutGroup.setText(Messages.WizardNewXtextProjectCreationPage_LabelLayout);
-		layoutGroup.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-		layoutGroup.setLayout(new GridLayout(1, false));
-
-		Composite composite = new Composite(layoutGroup, SWT.NONE);
-		composite.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-		composite.setLayout(new GridLayout(2, false));
-
 		if (WizardContribution.getFromRegistry().size() > 1) {
+			Group layoutGroup = new Group(parent, SWT.NONE);
+			layoutGroup.setFont(parent.getFont());
+			layoutGroup.setText(Messages.WizardNewXtextProjectCreationPage_LabelLayout);
+			layoutGroup.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
+			layoutGroup.setLayout(new GridLayout(1, false));
+	
+			Composite composite = new Composite(layoutGroup, SWT.NONE);
+			composite.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
+			composite.setLayout(new GridLayout(2, false));
+
 			Label generatorConfigLabel = new Label(composite, SWT.NONE);
 			generatorConfigLabel.setText(Messages.WizardNewXtextProjectCreationPage_GeneratorConfiguration);
 
@@ -225,20 +223,6 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 			generatorConfigurationField.setLayoutData(data);
 			generatorConfigurationField.setFont(parent.getFont());
 		}
-
-		generatorProjectField = new Button(composite, SWT.CHECK);
-		GridData data = new GridData(GridData.FILL_HORIZONTAL);
-		data.horizontalSpan = 2;
-		generatorProjectField.setLayoutData(data);
-		generatorProjectField.setText(Messages.WizardNewXtextProjectCreationPage_CreateAGeneratorProject);
-		generatorProjectField.setSelection(true);
-	}
-
-	/**
-	 * Returns the (user selection of) create generator package checkbox
-	 */
-	public boolean getCreateGeneratorPackage() {
-		return generatorProjectField.getSelection();
 	}
 
 	/**

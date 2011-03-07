@@ -27,7 +27,6 @@ public class XtextProjectInfo implements IProjectInfo {
 	private String languageName;
 	private String fileExtension;
 	private String encoding;
-	private boolean createGeneratorProject = false;
 	private boolean createTestProject = false;
 	private IWorkingSet[] workingSets;
 	private IWorkbench workbench;
@@ -48,14 +47,6 @@ public class XtextProjectInfo implements IProjectInfo {
 
 	public String getEncoding() {
 		return encoding;
-	}
-
-	public boolean isCreateGeneratorProject() {
-		return createGeneratorProject;
-	}
-
-	public void setCreateGeneratorProject(boolean createGeneratorProject) {
-		this.createGeneratorProject = createGeneratorProject;
 	}
 
 	public boolean isCreateTestProject() {
