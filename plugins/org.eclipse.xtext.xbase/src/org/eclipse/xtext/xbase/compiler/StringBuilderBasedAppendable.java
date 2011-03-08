@@ -8,9 +8,10 @@
 package org.eclipse.xtext.xbase.compiler;
 
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 
 import org.eclipse.xtext.common.types.JvmType;
@@ -66,6 +67,7 @@ public class StringBuilderBasedAppendable implements IAppendable {
 	}
 
 	private Stack<Map<Object, String>> localVars = new Stack<Map<Object, String>>();
+	private Stack<Set<String>> usedNamesInScope = new Stack<Set<String>>();
 	
 	public StringBuilderBasedAppendable(ImportManager typeSerializer){
 		this.importManager = typeSerializer;
@@ -78,18 +80,21 @@ public class StringBuilderBasedAppendable implements IAppendable {
 
 	public void openScope() {
 		localVars.push(new HashMap<Object, String>());
+		usedNamesInScope.push(new LinkedHashSet<String>());
 	}
 
 	public String declareVariable(Object key, String proposedName) {
 		if (localVars.isEmpty())
 			throw new IllegalStateException("No local scope has been opened.");
 		Map<Object, String> currentScope = localVars.peek();
-		String newName = findNewName(new HashSet<String>(currentScope.values()), proposedName);
+		final Set<String> names = usedNamesInScope.peek();
+		String newName = findNewName(names, proposedName);
 		currentScope.put(key, newName);
+		names.add(newName);
 		return newName;
 	}
 
-	protected String findNewName(HashSet<String> names, String proposedName) {
+	protected String findNewName(Set<String> names, String proposedName) {
 		if (names.contains(proposedName)) {
 			for (int i = 1; i < Integer.MAX_VALUE; i++) {
 				String newProposal = proposedName + "_" + i;
@@ -118,6 +123,7 @@ public class StringBuilderBasedAppendable implements IAppendable {
 		if (localVars.isEmpty())
 			throw new IllegalStateException("No local scope has been opened.");
 		localVars.pop();
+		usedNamesInScope.pop();
 	}
 	
 	protected void appendTypeRef(JvmTypeReference typeRef) {
