@@ -40,4 +40,8 @@ public class JvmModelDependentElementsCalculator extends DefaultDependentElement
 				dependentElementURIs.add(elementURI);
 		}
 	}
+	
+	protected IJvmModelAssociations getJvmModelAssociations() {
+		return jvmModelAssociations;
+	}
 }

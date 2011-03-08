@@ -5,12 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtend2.linking;
+package org.eclipse.xtext.xtend2.jvmmodel;
 
-import java.util.Set;
-
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
 import com.google.inject.Inject;
 
@@ -20,11 +19,11 @@ import com.google.inject.Inject;
 public class DispatchUtil {
 	
 	@Inject
-	private IXtend2JvmAssociations associations;
+	private IJvmModelAssociations associations;
 
 	public boolean isDispatcherFunction(JvmOperation inferredOperation) {
-		Set<XtendFunction> xtendFunctions = associations.getAssociatedElements(inferredOperation, XtendFunction.class);
-		return xtendFunctions.size() > 1;
+		EObject xtendFunction = associations.getPrimarySourceElement(inferredOperation);
+		return xtendFunction == null;
 	}
 
 }

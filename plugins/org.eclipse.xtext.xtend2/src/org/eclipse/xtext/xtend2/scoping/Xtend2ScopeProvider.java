@@ -34,7 +34,7 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescription
 import org.eclipse.xtext.xbase.scoping.featurecalls.IFeaturesForTypeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
-import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
+import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
@@ -164,7 +164,7 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 	}
 
 	protected JvmIdentifiableElement findImplicitReceiverFor(DeclaredDependency declaredDependency) {
-		Set<EObject> elements = xtend2jvmAssociations.getInferredJvmElements(declaredDependency);
+		Set<EObject> elements = xtend2jvmAssociations.getJvmElements(declaredDependency);
 		if (!elements.isEmpty()) {
 			final JvmIdentifiableElement field = (JvmIdentifiableElement) elements.iterator().next();
 			return field;

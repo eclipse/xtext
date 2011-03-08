@@ -13,7 +13,7 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
-import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
+import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;

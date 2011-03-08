@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.jvmmodel;
 
+import static com.google.common.collect.Iterables.*;
 import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
 
@@ -32,9 +33,10 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
-import org.eclipse.xtext.xtend2.linking.Xtend2InferredJvmAssociator;
 import org.eclipse.xtext.xtend2.resource.Xtend2Resource;
 import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -54,7 +56,10 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 	protected TypesFactory typesFactory;
 	
 	@Inject
-	private Xtend2InferredJvmAssociator associator;
+	private IJvmModelAssociator associator;
+
+	@Inject
+	private IJvmModelAssociations associations;
 
 	@Inject
 	private DispatchingSupport dispatchingSupport;
@@ -71,7 +76,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 	protected JvmGenericType transform(XtendClass source) {
 		JvmGenericType target = typesFactory.createJvmGenericType();
 		source.eResource().getContents().add(target);
-		associator.associate(target, source);
+		associator.associatePrimary(source, target);
 		target.setPackageName(source.getPackageName());
 		target.setSimpleName(source.getName());
 		target.setVisibility(JvmVisibility.PUBLIC);
@@ -116,7 +121,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			parameter.setName(parameter2.getName());
 		}
 		for (JvmOperation jvmOperation : operations) {
-			Iterable<XtendFunction> xtendFunctions = associator.getAssociatedElements(jvmOperation, XtendFunction.class);
+			Iterable<XtendFunction> xtendFunctions = filter(associations.getSourceElements(jvmOperation), XtendFunction.class);
 			for (XtendFunction func : xtendFunctions) {
 				associator.associate(func, result);
 			}
@@ -127,7 +132,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 	protected void addConstructor(XtendClass source, JvmGenericType target) {
 		JvmConstructor constructor = typesFactory.createJvmConstructor();
 		target.getMembers().add(constructor);
-		associator.associate(source, constructor);
+		associator.associatePrimary(source, constructor);
 		constructor.setSimpleName(source.getName());
 		constructor.setVisibility(JvmVisibility.PUBLIC);
 	}
@@ -137,7 +142,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			XtendFunction source = (XtendFunction) sourceMember;
 			JvmOperation target = typesFactory.createJvmOperation();
 			container.getMembers().add(target);
-			associator.associate(target, source);
+			associator.associatePrimary(source, target);
 			String sourceName = source.getName();
 			if (source.isDispatch()) {
 				sourceName = "_" + sourceName;
@@ -158,7 +163,7 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			DeclaredDependency dep = (DeclaredDependency) sourceMember;
 			JvmField field = typesFactory.createJvmField();
 			container.getMembers().add(field);
-			associator.associate(field, dep);
+			associator.associatePrimary(dep, field);
 			field.setVisibility(JvmVisibility.PRIVATE);
 			field.setSimpleName(dep.getName());
 			field.setType(EcoreUtil2.cloneWithProxies(dep.getType()));

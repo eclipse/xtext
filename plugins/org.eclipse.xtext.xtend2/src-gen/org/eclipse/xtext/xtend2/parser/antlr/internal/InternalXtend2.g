@@ -737,9 +737,9 @@ ruleFunction returns [EObject current=null]
 ((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getFunctionAccess().getParametersJvmFormalParameterParserRuleCall_5_0_0()); 
+	        newCompositeNode(grammarAccess.getFunctionAccess().getParametersParameterParserRuleCall_5_0_0()); 
 	    }
-		lv_parameters_11_0=ruleJvmFormalParameter		{
+		lv_parameters_11_0=ruleParameter		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getFunctionRule());
 	        }
@@ -747,7 +747,7 @@ ruleFunction returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_11_0, 
-        		"JvmFormalParameter");
+        		"Parameter");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -759,9 +759,9 @@ ruleFunction returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getFunctionAccess().getParametersJvmFormalParameterParserRuleCall_5_1_1_0()); 
+	        newCompositeNode(grammarAccess.getFunctionAccess().getParametersParameterParserRuleCall_5_1_1_0()); 
 	    }
-		lv_parameters_13_0=ruleJvmFormalParameter		{
+		lv_parameters_13_0=ruleParameter		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getFunctionRule());
 	        }
@@ -769,7 +769,7 @@ ruleFunction returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_13_0, 
-        		"JvmFormalParameter");
+        		"Parameter");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -816,6 +816,63 @@ ruleFunction returns [EObject current=null]
 
 )
 ))?)
+;
+
+
+
+
+
+// Entry rule entryRuleParameter
+entryRuleParameter returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getParameterRule()); }
+	 iv_ruleParameter=ruleParameter 
+	 { $current=$iv_ruleParameter.current; } 
+	 EOF 
+;
+
+// Rule Parameter
+ruleParameter returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getParameterAccess().getParameterTypeJvmTypeReferenceParserRuleCall_0_0()); 
+	    }
+		lv_parameterType_0_0=ruleJvmTypeReference		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getParameterRule());
+	        }
+       		set(
+       			$current, 
+       			"parameterType",
+        		lv_parameterType_0_0, 
+        		"JvmTypeReference");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
+(
+		lv_name_1_0=RULE_ID
+		{
+			newLeafNode(lv_name_1_0, grammarAccess.getParameterAccess().getNameIDTerminalRuleCall_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getParameterRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_1_0, 
+        		"ID");
+	    }
+
+)
+))
 ;
 
 

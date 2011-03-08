@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.resource;
 
+import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
 
@@ -24,11 +25,11 @@ import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.resource.XbaseResource;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
-import org.eclipse.xtext.xtend2.linking.Xtend2InferredJvmAssociator;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 import com.google.common.base.Function;
@@ -46,7 +47,7 @@ public class Xtend2Resource extends XbaseResource {
 	private ITypeProvider typeProvider;
 	
 	@Inject
-	private Xtend2InferredJvmAssociator associator;
+	private IJvmModelAssociations associations;
 	
 	@Inject
 	private XbaseTypeConformanceComputer typeConformanceComputer;
@@ -105,7 +106,7 @@ public class Xtend2Resource extends XbaseResource {
 	
 	protected JvmTypeReference inferReturnType(JvmOperation jvmOperation) {
 		List<JvmTypeReference> associatedReturnTypes = newArrayList();
-		final Set<XtendFunction> associatedElements = associator.getAssociatedElements(jvmOperation, XtendFunction.class);
+		final Iterable<XtendFunction> associatedElements = filter(associations.getSourceElements(jvmOperation), XtendFunction.class);
 		for (XtendFunction func : associatedElements) {
 			JvmTypeReference type = typeProvider.getTypeForIdentifiable(func);
 			if (type != null)

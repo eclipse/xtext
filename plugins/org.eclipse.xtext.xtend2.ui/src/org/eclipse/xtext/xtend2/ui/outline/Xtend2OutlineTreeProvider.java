@@ -3,6 +3,7 @@
 */
 package org.eclipse.xtext.xtend2.ui.outline;
 
+import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
 import static java.util.Collections.*;
@@ -16,8 +17,8 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
-import org.eclipse.xtext.xtend2.linking.DispatchUtil;
-import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
+import org.eclipse.xtext.xtend2.jvmmodel.DispatchUtil;
+import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.ui.labeling.Xtend2Images;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -61,11 +62,11 @@ public class Xtend2OutlineTreeProvider extends DefaultOutlineTreeProvider {
 			for (XtendMember member : xtendClass.getMembers()) {
 				if (!dispatchFunctions.contains(member) && member instanceof XtendFunction
 						&& ((XtendFunction) member).isDispatch()) {
-					for (JvmOperation inferredOperation : associations
-							.getAssociatedElements(member, JvmOperation.class)) {
+					for (JvmOperation inferredOperation : filter(associations
+							.getJvmElements(member), JvmOperation.class)) {
 						if (dispatchUtil.isDispatcherFunction(inferredOperation)) {
 							createEObjectNode(parentNode, inferredOperation);
-							dispatchFunctions.addAll(newArrayList(associations.getAssociatedElements(inferredOperation,
+							dispatchFunctions.addAll(newArrayList(filter(associations.getSourceElements(inferredOperation),
 									XtendFunction.class)));
 						}
 					}
@@ -82,7 +83,7 @@ public class Xtend2OutlineTreeProvider extends DefaultOutlineTreeProvider {
 	}
 
 	protected void _createChildren(IOutlineNode parentNode, JvmOperation inferredOperation) {
-		List<XtendFunction> xtendFunctions = newArrayList(associations.getAssociatedElements(inferredOperation,
+		List<XtendFunction> xtendFunctions = newArrayList(filter(associations.getSourceElements(inferredOperation),
 				XtendFunction.class));
 		sort(xtendFunctions, new Comparator<XtendFunction>() {
 			public int compare(XtendFunction arg0, XtendFunction arg1) {

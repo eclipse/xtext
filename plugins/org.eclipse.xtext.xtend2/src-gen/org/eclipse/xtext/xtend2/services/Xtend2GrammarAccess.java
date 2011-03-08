@@ -354,11 +354,11 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cLeftParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
 		private final Assignment cParametersAssignment_5_0 = (Assignment)cGroup_5.eContents().get(0);
-		private final RuleCall cParametersJvmFormalParameterParserRuleCall_5_0_0 = (RuleCall)cParametersAssignment_5_0.eContents().get(0);
+		private final RuleCall cParametersParameterParserRuleCall_5_0_0 = (RuleCall)cParametersAssignment_5_0.eContents().get(0);
 		private final Group cGroup_5_1 = (Group)cGroup_5.eContents().get(1);
 		private final Keyword cCommaKeyword_5_1_0 = (Keyword)cGroup_5_1.eContents().get(0);
 		private final Assignment cParametersAssignment_5_1_1 = (Assignment)cGroup_5_1.eContents().get(1);
-		private final RuleCall cParametersJvmFormalParameterParserRuleCall_5_1_1_0 = (RuleCall)cParametersAssignment_5_1_1.eContents().get(0);
+		private final RuleCall cParametersParameterParserRuleCall_5_1_1_0 = (RuleCall)cParametersAssignment_5_1_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		private final Alternatives cAlternatives_7 = (Alternatives)cGroup.eContents().get(7);
 		private final Assignment cExpressionAssignment_7_0 = (Assignment)cAlternatives_7.eContents().get(0);
@@ -368,13 +368,13 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Function returns XtendFunction:
 		//	(override?="override"? & dispatch?="dispatch"?) ("<" typeParameters+=JvmTypeParameter (","
-		//	typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference? name=ID "(" (parameters+=JvmFormalParameter (","
-		//	parameters+=JvmFormalParameter)*)? ")" (expression=XBlockExpression | expression=RichString)?;
+		//	typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference? name=ID "(" (parameters+=Parameter (","
+		//	parameters+=Parameter)*)? ")" (expression=XBlockExpression | expression=RichString)?;
 		public ParserRule getRule() { return rule; }
 
 		//(override?="override"? & dispatch?="dispatch"?) ("<" typeParameters+=JvmTypeParameter (","
-		//typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference? name=ID "(" (parameters+=JvmFormalParameter (","
-		//parameters+=JvmFormalParameter)*)? ")" (expression=XBlockExpression | expression=RichString)?
+		//typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference? name=ID "(" (parameters+=Parameter (","
+		//parameters+=Parameter)*)? ")" (expression=XBlockExpression | expression=RichString)?
 		public Group getGroup() { return cGroup; }
 
 		//override?="override"? & dispatch?="dispatch"?
@@ -434,26 +434,26 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		//"("
 		public Keyword getLeftParenthesisKeyword_4() { return cLeftParenthesisKeyword_4; }
 
-		//(parameters+=JvmFormalParameter ("," parameters+=JvmFormalParameter)*)?
+		//(parameters+=Parameter ("," parameters+=Parameter)*)?
 		public Group getGroup_5() { return cGroup_5; }
 
-		//parameters+=JvmFormalParameter
+		//parameters+=Parameter
 		public Assignment getParametersAssignment_5_0() { return cParametersAssignment_5_0; }
 
-		//JvmFormalParameter
-		public RuleCall getParametersJvmFormalParameterParserRuleCall_5_0_0() { return cParametersJvmFormalParameterParserRuleCall_5_0_0; }
+		//Parameter
+		public RuleCall getParametersParameterParserRuleCall_5_0_0() { return cParametersParameterParserRuleCall_5_0_0; }
 
-		//("," parameters+=JvmFormalParameter)*
+		//("," parameters+=Parameter)*
 		public Group getGroup_5_1() { return cGroup_5_1; }
 
 		//","
 		public Keyword getCommaKeyword_5_1_0() { return cCommaKeyword_5_1_0; }
 
-		//parameters+=JvmFormalParameter
+		//parameters+=Parameter
 		public Assignment getParametersAssignment_5_1_1() { return cParametersAssignment_5_1_1; }
 
-		//JvmFormalParameter
-		public RuleCall getParametersJvmFormalParameterParserRuleCall_5_1_1_0() { return cParametersJvmFormalParameterParserRuleCall_5_1_1_0; }
+		//Parameter
+		public RuleCall getParametersParameterParserRuleCall_5_1_1_0() { return cParametersParameterParserRuleCall_5_1_1_0; }
 
 		//")"
 		public Keyword getRightParenthesisKeyword_6() { return cRightParenthesisKeyword_6; }
@@ -472,6 +472,35 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 
 		//RichString
 		public RuleCall getExpressionRichStringParserRuleCall_7_1_0() { return cExpressionRichStringParserRuleCall_7_1_0; }
+	}
+
+	public class ParameterElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parameter");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cParameterTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cParameterTypeJvmTypeReferenceParserRuleCall_0_0 = (RuleCall)cParameterTypeAssignment_0.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		
+		//// type is mandatory in Xtend
+		//Parameter returns types::JvmFormalParameter:
+		//	parameterType=JvmTypeReference name=ID;
+		public ParserRule getRule() { return rule; }
+
+		//parameterType=JvmTypeReference name=ID
+		public Group getGroup() { return cGroup; }
+
+		//parameterType=JvmTypeReference
+		public Assignment getParameterTypeAssignment_0() { return cParameterTypeAssignment_0; }
+
+		//JvmTypeReference
+		public RuleCall getParameterTypeJvmTypeReferenceParserRuleCall_0_0() { return cParameterTypeJvmTypeReferenceParserRuleCall_0_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
 
 	public class XStringLiteralElements extends AbstractParserRuleElementFinder {
@@ -953,6 +982,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	private MemberElements pMember;
 	private DeclaredDependencyElements pDeclaredDependency;
 	private FunctionElements pFunction;
+	private ParameterElements pParameter;
 	private XStringLiteralElements pXStringLiteral;
 	private RichStringElements pRichString;
 	private RichStringLiteralElements pRichStringLiteral;
@@ -1056,14 +1086,25 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 
 	//Function returns XtendFunction:
 	//	(override?="override"? & dispatch?="dispatch"?) ("<" typeParameters+=JvmTypeParameter (","
-	//	typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference? name=ID "(" (parameters+=JvmFormalParameter (","
-	//	parameters+=JvmFormalParameter)*)? ")" (expression=XBlockExpression | expression=RichString)?;
+	//	typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference? name=ID "(" (parameters+=Parameter (","
+	//	parameters+=Parameter)*)? ")" (expression=XBlockExpression | expression=RichString)?;
 	public FunctionElements getFunctionAccess() {
 		return (pFunction != null) ? pFunction : (pFunction = new FunctionElements());
 	}
 	
 	public ParserRule getFunctionRule() {
 		return getFunctionAccess().getRule();
+	}
+
+	//// type is mandatory in Xtend
+	//Parameter returns types::JvmFormalParameter:
+	//	parameterType=JvmTypeReference name=ID;
+	public ParameterElements getParameterAccess() {
+		return (pParameter != null) ? pParameter : (pParameter = new ParameterElements());
+	}
+	
+	public ParserRule getParameterRule() {
+		return getParameterAccess().getRule();
 	}
 
 	//XStringLiteral returns xbase::XExpression:

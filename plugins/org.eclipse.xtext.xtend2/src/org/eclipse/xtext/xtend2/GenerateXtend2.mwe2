@@ -59,10 +59,6 @@ Workflow {
 			}
 			fragment = validation.JavaValidatorFragment {}
 			fragment = scoping.ImportNamespacesScopingFragment {}
-			fragment = types.TypesGeneratorFragment {}
-			fragment = xbase.XbaseGeneratorFragment {
-				generateInferrer = false
-			}
 			fragment = builder.BuilderIntegrationFragment {}
 			fragment = formatting.FormatterFragment {}
 			fragment = quickfix.QuickfixProviderFragment {}
@@ -74,6 +70,11 @@ Workflow {
 				options = auto-inject {}
 			}
 			fragment = refactoring.RefactorElementNameFragment {}
+			fragment = types.TypesGeneratorFragment {}
+			fragment = xbase.XbaseGeneratorFragment {
+				generateInferrer = false
+			}
+			fragment = xbase.XbaseUiFragment {}
 		}
 	}
 }

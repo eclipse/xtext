@@ -17,7 +17,7 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.xtend2.linking.DispatchUtil;
+import org.eclipse.xtext.xtend2.jvmmodel.DispatchUtil;
 
 import com.google.common.collect.ImmutableSortedMap;
 import com.google.inject.Inject;
