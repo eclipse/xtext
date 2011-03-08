@@ -3,6 +3,8 @@
 */
 package org.eclipse.xtext.xbase.ui.contentassist;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -447,7 +449,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			first = false;
 			result.append(parameter.getParameterType().getSimpleName());
 			result.append(' ');
-			result.append(parameter.getName());
+			result.append(notNull(parameter.getName()));
 		}
 	}
 	
