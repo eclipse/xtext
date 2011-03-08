@@ -75,6 +75,8 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 								+ ".class).annotatedWith(Names.named("
 								+ AbstractDeclarativeScopeProvider.class.getName()
 								+ ".NAMED_DELEGATE)).to(org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider.class)")
+				.addTypeToType("org.eclipse.xtext.common.types.util.TypeConformanceComputer",
+						"org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer")
 
 				.addTypeToType(ILocationInFileProvider.class.getName(),
 						"org.eclipse.xtext.xbase.jvmmodel.JvmLocationInFileProvider")
