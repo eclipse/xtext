@@ -15,11 +15,8 @@
 «EXTENSION org::eclipse::xtext::GrammarUtil»
 «EXTENSION org::eclipse::xtext::generator::xbase::XbaseGeneratorFragment»
 
-«DEFINE generate FOR Grammar»
-	«EXPAND JvmModelInferrer»
-«ENDDEFINE»
-
-«DEFINE JvmModelInferrer FOR Grammar»
+«DEFINE generate(Boolean generateInferrer) FOR Grammar»
+«IF generateInferrer»
 «FILE getJvmModelInferrerName().asPath()+".xtend" SRC-»
 package «getJvmModelInferrerName().toJavaPackage()»
  
@@ -43,16 +40,17 @@ class «getJvmModelInferrerName().toSimpleName()» implements IJvmModelInferrer {
    	}
 }
 «ENDFILE»
+«ENDIF»
 «ENDDEFINE»
 
-«DEFINE addToPluginXmlRt FOR Grammar»
+«DEFINE addToPluginXmlRt(Boolean generateInferrer) FOR Grammar»
 «ENDDEFINE» 
 
 
-«DEFINE addToPluginXmlUi FOR Grammar»
+«DEFINE addToPluginXmlUi(Boolean generateInferrer) FOR Grammar»
 «ENDDEFINE»
 
 
-«DEFINE addToStandaloneSetup FOR Grammar»
+«DEFINE addToStandaloneSetup(Boolean generateInferrer) FOR Grammar»
 «ENDDEFINE»
 

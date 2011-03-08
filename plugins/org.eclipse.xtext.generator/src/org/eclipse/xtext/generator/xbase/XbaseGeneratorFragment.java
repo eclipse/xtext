@@ -7,8 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.xbase;
 
+import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.xpand2.XpandExecutionContext;
@@ -35,6 +37,12 @@ import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
  * @author Sven Efftinge
  */
 public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
+	
+	private boolean generateInferrer = true;
+	
+	public void setGenerateInferrer(boolean generateInferrer) {
+		this.generateInferrer = generateInferrer;
+	}
 
 	public static String getJvmModelInferrerName(Grammar grammar, Naming naming) {
 		return naming.basePackageRuntime(grammar) + ".jvmmodel." + GrammarUtil.getName(grammar) + "JvmModelInferrer";
@@ -44,7 +52,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		if (!XbaseUtil.usesXbaseGrammar(grammar))
 			return emptySet();
-		return new BindFactory()
+		BindFactory config = new BindFactory()
 				.addTypeToType("org.eclipse.xtext.xbase.interpreter.IEvaluationContext",
 						"org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext")
 				.addTypeToType("org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter",
@@ -73,18 +81,21 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType(EObjectAtOffsetHelper.class.getName(),
 						"org.eclipse.xtext.xbase.jvmmodel.JvmEObjectAtOffsetHelper")
 				.addTypeToType(ILinker.class.getName(), "org.eclipse.xtext.xbase.jvmmodel.JvmModelXbaseLazyLinker")
-				.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer",
-						getJvmModelInferrerName(grammar, getNaming()))
 				.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations",
 						"org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator")
 				.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator",
 						"org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator")
 				.addTypeToType(IGlobalScopeProvider.class.getName(),
 						"org.eclipse.xtext.xbase.jvmmodel.JvmGlobalScopeProvider")
-
 				// obsolete convenience bindings
 				.addTypeToType("org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider",
-						"org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider").getBindings();
+						"org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider");
+		if (generateInferrer) {
+			config = config
+			.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer",
+							getJvmModelInferrerName(grammar, getNaming()));
+		}
+		return config.getBindings();
 	}
 
 	@Override
@@ -121,6 +132,11 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		if (XbaseUtil.usesXbaseGrammar(grammar))
 			super.generate(grammar, ctx);
+	}
+	
+	@Override
+	protected List<Object> getParameters(Grammar grammar) {
+		return newArrayList((Object)generateInferrer);
 	}
 
 }
