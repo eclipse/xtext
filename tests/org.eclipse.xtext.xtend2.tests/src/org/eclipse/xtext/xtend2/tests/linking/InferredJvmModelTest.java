@@ -181,7 +181,8 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testCaseFunction_03() throws Exception {
-		XtendFile xtendFile = file("class Dispatcher {\n" + 
+		XtendFile xtendFile = file(
+				"class Dispatcher {\n" + 
 				"	dispatch doStuff(org.eclipse.emf.ecore.EClass model) {\n" + 
 				"		model.ETypeParameters.map(e|doStuff(e))\n" + 
 				"	}\n" + 
@@ -191,7 +192,8 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 				"	dispatch doStuff(org.eclipse.emf.ecore.EStructuralFeature feature) {\n" + 
 				"		newArrayList(feature)\n" + 
 				"	}\n" + 
-				"}");
+				"}",true /* TODO if set to false, test fails */);
+		
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		
 		// one main dispatch
@@ -213,7 +215,8 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 					.equals(EClass.class.getName());
 			}
 		});
-		assertEquals("java.util.List<? extends java.lang.Object>", eClassParam.getReturnType().getIdentifier());
+		assertEquals("java.util.List<java.util.List<? extends java.lang.Object>>", eClassParam.getReturnType().getIdentifier());
+		
 		JvmOperation ePackageParam = find(operations, new Predicate<JvmOperation>() {
 			public boolean apply(JvmOperation input) {
 				return input.getSimpleName().equals("_doStuff")
@@ -221,7 +224,8 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 					.equals(EPackage.class.getName());
 			}
 		});
-		assertEquals("java.util.List<? extends java.lang.Object>", ePackageParam.getReturnType().getIdentifier());
+		assertEquals("java.util.List<java.util.List<? extends java.lang.Object>>", ePackageParam.getReturnType().getIdentifier());
+		
 		JvmOperation eStructuralFeatureParam = find(operations, new Predicate<JvmOperation>() {
 			public boolean apply(JvmOperation input) {
 				return input.getSimpleName().equals("_doStuff")

@@ -36,5 +36,6 @@ public class Xtend2StandaloneSetupGenerated implements ISetup {
 
 
 
+
 	}
 }

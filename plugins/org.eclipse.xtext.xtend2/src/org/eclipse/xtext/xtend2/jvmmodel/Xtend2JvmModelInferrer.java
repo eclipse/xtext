@@ -5,80 +5,76 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtend2.linking;
+package org.eclipse.xtext.xtend2.jvmmodel;
 
-import static com.google.common.collect.Lists.*;
+import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.util.Primitives;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
+import org.eclipse.xtext.xtend2.linking.Xtend2InferredJvmAssociator;
+import org.eclipse.xtext.xtend2.resource.Xtend2Resource;
 import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class JvmModelInferrer {
+public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 
 	@Inject
 	protected TypesFactory typesFactory;
-
+	
 	@Inject
 	private Xtend2InferredJvmAssociator associator;
 
 	@Inject
-	private ITypeProvider typeProvider;
-
-	@Inject
-	private XbaseTypeConformanceComputer typeConformanceComputer;
-
-	@Inject
-	private TypeReferences typeRefs;
-	
-	@Inject
-	private Primitives primitives;
-
-	@Inject
 	private DispatchingSupport dispatchingSupport;
-
-	public JvmGenericType inferJvmGenericType(XtendClass xtendClass) {
-		associator.disassociate(xtendClass);
-		JvmGenericType inferredJvmType = transform(xtendClass);
-		return inferredJvmType;
+	
+	public List<? extends JvmDeclaredType> inferJvmModel(EObject xtendFile) {
+		associator.disassociate(xtendFile);
+		final XtendFile xtendFile2 = (XtendFile)xtendFile;
+		if (xtendFile2.getXtendClass()==null || xtendFile2.getXtendClass().getName()==null)
+			return emptyList();
+		JvmGenericType inferredJvmType = transform(xtendFile2.getXtendClass());
+		return singletonList(inferredJvmType);
 	}
 
 	protected JvmGenericType transform(XtendClass source) {
 		JvmGenericType target = typesFactory.createJvmGenericType();
 		source.eResource().getContents().add(target);
+		associator.associate(target, source);
 		target.setPackageName(source.getPackageName());
 		target.setSimpleName(source.getName());
 		target.setVisibility(JvmVisibility.PUBLIC);
-		associator.associate(target, source);
 		addConstructor(source, target);
 		for (JvmTypeReference superType : source.getSuperTypes())
 			target.getSuperTypes().add(EcoreUtil2.cloneWithProxies(superType));
@@ -86,7 +82,7 @@ public class JvmModelInferrer {
 			target.getTypeParameters().add(EcoreUtil2.cloneWithProxies(typeParameter));
 		for (XtendMember member : source.getMembers())
 			if (member.getName() != null)
-				target.getMembers().add(transform(member));
+				transform(member, target);
 		appendSyntheticDispatchMethods(source, target);
 		computeInferredReturnTypes(target);
 		return target;
@@ -96,40 +92,28 @@ public class JvmModelInferrer {
 		Multimap<Pair<String, Integer>, JvmOperation> methods = dispatchingSupport.getDispatchMethods(target);
 		for (Pair<String, Integer> key : methods.keySet()) {
 			Collection<JvmOperation> operations = methods.get(key);
-			JvmOperation operation = deriveGenericDispatchOperationSignature(operations);
+			JvmOperation operation = deriveGenericDispatchOperationSignature(dispatchingSupport.sort(operations), target);
 			operation.setSimpleName(key.getFirst());
 			operation.setVisibility(JvmVisibility.PUBLIC);
-			target.getMembers().add(operation);
 		}
 	}
 
 	/**
 	 * @return a {@link JvmOperation} with common denominator argument types of all given operations
 	 */
-	protected JvmOperation deriveGenericDispatchOperationSignature(Collection<JvmOperation> operations) {
+	protected JvmOperation deriveGenericDispatchOperationSignature(Collection<JvmOperation> operations, JvmGenericType target) {
 		if (operations.isEmpty())
 			return null;
-		JvmOperation result = null;
 		final Iterator<JvmOperation> iterator = operations.iterator();
 		JvmOperation first = iterator.next();
-		if (operations.size() == 1) {
-			result = EcoreUtil2.clone(first);
-		} else {
-			result = typesFactory.createJvmOperation();
-			for (int i = 0; i < first.getParameters().size(); i++) {
-				JvmFormalParameter parameter2 = first.getParameters().get(i);
-				final int index = i;
-				JvmTypeReference commonType = commonType(operations, new Function<JvmOperation, JvmTypeReference>() {
-					public JvmTypeReference apply(JvmOperation from) {
-						return from.getParameters().get(index).getParameterType();
-					}
-				});
-				JvmFormalParameter parameter = typesFactory.createJvmFormalParameter();
-				parameter.setName(parameter2.getName());
-				if (commonType != null)
-					parameter.setParameterType(EcoreUtil2.cloneIfContained(commonType));
-				result.getParameters().add(parameter);
-			}
+		JvmOperation result = typesFactory.createJvmOperation();
+		target.getMembers().add(result);
+		for (int i = 0; i < first.getParameters().size(); i++) {
+			JvmFormalParameter parameter = typesFactory.createJvmFormalParameter();
+			result.getParameters().add(parameter);
+			parameter.setParameterType(getTypeProxy(parameter));
+			JvmFormalParameter parameter2 = first.getParameters().get(i);
+			parameter.setName(parameter2.getName());
 		}
 		for (JvmOperation jvmOperation : operations) {
 			Iterable<XtendFunction> xtendFunctions = associator.getAssociatedElements(jvmOperation, XtendFunction.class);
@@ -140,18 +124,6 @@ public class JvmModelInferrer {
 		return result;
 	}
 
-	protected <T> JvmTypeReference commonType(Iterable<? extends T> iterable, Function<T, JvmTypeReference> mapping) {
-		List<JvmTypeReference> references = newArrayList();
-		for (T element : iterable) {
-			JvmTypeReference apply = mapping.apply(element);
-			if (!typeRefs.isNullOrProxy(apply)) {
-				apply = primitives.asWrapperTypeIfPrimitive(apply); 
-				references.add(apply);
-			}
-		}
-		return typeConformanceComputer.getCommonSuperType(references);
-	}
-
 	protected void addConstructor(XtendClass source, JvmGenericType target) {
 		JvmConstructor constructor = typesFactory.createJvmConstructor();
 		target.getMembers().add(constructor);
@@ -160,10 +132,11 @@ public class JvmModelInferrer {
 		constructor.setVisibility(JvmVisibility.PUBLIC);
 	}
 
-	protected JvmMember transform(XtendMember sourceMember) {
+	protected JvmMember transform(XtendMember sourceMember, JvmGenericType container) {
 		if (sourceMember instanceof XtendFunction) {
 			XtendFunction source = (XtendFunction) sourceMember;
 			JvmOperation target = typesFactory.createJvmOperation();
+			container.getMembers().add(target);
 			associator.associate(target, source);
 			String sourceName = source.getName();
 			if (source.isDispatch()) {
@@ -173,13 +146,18 @@ public class JvmModelInferrer {
 			target.setVisibility(JvmVisibility.PUBLIC);
 			for (JvmFormalParameter parameter : source.getParameters())
 				target.getParameters().add(EcoreUtil2.cloneWithProxies(parameter));
-			inferReturnType(target);
+			if (source.getReturnType()!=null) {
+				target.setReturnType(EcoreUtil2.cloneWithProxies(source.getReturnType()));
+			} else {
+				target.setReturnType(getTypeProxy(target));
+			}
 			for (JvmTypeParameter typeParameter : source.getTypeParameters())
 				target.getTypeParameters().add(EcoreUtil2.cloneWithProxies(typeParameter));
 			return target;
 		} else if (sourceMember instanceof DeclaredDependency) {
 			DeclaredDependency dep = (DeclaredDependency) sourceMember;
 			JvmField field = typesFactory.createJvmField();
+			container.getMembers().add(field);
 			associator.associate(field, dep);
 			field.setVisibility(JvmVisibility.PRIVATE);
 			field.setSimpleName(dep.getName());
@@ -192,24 +170,18 @@ public class JvmModelInferrer {
 	protected void computeInferredReturnTypes(JvmGenericType inferredJvmType) {
 		Iterable<JvmOperation> operations = inferredJvmType.getDeclaredOperations();
 		for (JvmOperation jvmOperation : operations) {
-			jvmOperation.setReturnType(inferReturnType(jvmOperation));
+			jvmOperation.setReturnType(getTypeProxy(jvmOperation));
 		}
 	}
 
-	protected JvmTypeReference inferReturnType(JvmOperation jvmOperation) {
-		if (jvmOperation.getReturnType() != null)
-			return jvmOperation.getReturnType();
-		List<JvmTypeReference> associatedReturnTypes = newArrayList();
-		for (XtendFunction func : associator.getAssociatedElements(jvmOperation, XtendFunction.class)) {
-			JvmTypeReference type = typeProvider.getTypeForIdentifiable(func);
-			if (type != null)
-				associatedReturnTypes.add(type);
-		}
-		if (!associatedReturnTypes.isEmpty()) {
-			JvmTypeReference commonSuperType = typeConformanceComputer.getCommonSuperType(associatedReturnTypes);
-			return EcoreUtil2.cloneWithProxies(commonSuperType);
-		}
-		return null;
+	protected JvmTypeReference getTypeProxy(EObject pointer) {
+		JvmParameterizedTypeReference typeReference = typesFactory.createJvmParameterizedTypeReference();
+		final Resource eResource = pointer.eResource();
+		String fragment = eResource.getURIFragment(pointer);
+		URI uri = eResource.getURI();
+		uri = uri.appendFragment(Xtend2Resource.FRAGMENT_PREFIX+fragment);
+		((InternalEObject)typeReference).eSetProxyURI(uri);
+		return typeReference;
 	}
 
 }
