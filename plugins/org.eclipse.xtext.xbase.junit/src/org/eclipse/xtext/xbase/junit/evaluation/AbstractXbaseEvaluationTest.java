@@ -29,6 +29,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo("", "try {typeof(String).newInstance} catch(Exception e) {}");
 	}
 	
+//TODO
 //	public void testGenerics_01() throws Exception {
 //		assertEvaluatesTo("y",
 //				"{" +
