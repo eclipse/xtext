@@ -21,11 +21,12 @@ class DomainmodelGenerator implements IGenerator {
 	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		// TODO: use filter
-		for(element: resource.allContentsIterable)
+		for(element: resource.allContentsIterable) {
 			if(element instanceof Entity) {
 				val entity = element as Entity				
 				fsa.generateFile(entity.fileName, entity.compile)
 			}
+		}
 	}
 	
 	compile(Entity e) { 
