@@ -5,7 +5,6 @@ package org.eclipse.xtext.xtend2;
 
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
@@ -17,15 +16,16 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.xbase.XbaseQualifiedNameConverter;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
-import org.eclipse.xtext.xbase.resource.XbaseResource;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 import org.eclipse.xtext.xtend2.conversion.Xtend2ValueConverterService;
 import org.eclipse.xtext.xtend2.featurecalls.Xtend2IdentifiableSimpleNameProvider;
+import org.eclipse.xtext.xtend2.jvmmodel.Xtend2JvmModelInferrer;
 import org.eclipse.xtext.xtend2.linking.Xtend2EObjectAtOffsetHelper;
-import org.eclipse.xtext.xtend2.linking.Xtend2LazyLinker;
 import org.eclipse.xtext.xtend2.linking.Xtend2LocationInFileProvider;
 import org.eclipse.xtext.xtend2.naming.Xtend2QualifiedNameProvider;
+import org.eclipse.xtext.xtend2.resource.Xtend2Resource;
 import org.eclipse.xtext.xtend2.resource.Xtend2ResourceDescriptionStrategy;
 import org.eclipse.xtext.xtend2.scoping.Xtend2GlobalScopeProvider;
 import org.eclipse.xtext.xtend2.scoping.Xtend2ImportedNamespaceScopeProvider;
@@ -38,6 +38,10 @@ import com.google.inject.name.Names;
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2RuntimeModule {
+	
+	public Class<? extends IJvmModelInferrer> bindIJvmModelInferrer() {
+		return Xtend2JvmModelInferrer.class;
+	}
 
 	@Override
 	public Class<? extends ITypeProvider> bindITypeProvider() {
@@ -46,7 +50,7 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 	
 	@Override
 	public Class<? extends XtextResource> bindXtextResource() {
-		return XbaseResource.class;
+		return Xtend2Resource.class;
 	}
 	
 	@Override
@@ -71,11 +75,6 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 	}
 
 	@Override
-	public Class<? extends ILinker> bindILinker() {
-		return Xtend2LazyLinker.class;
-	}
-
-	@Override
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return Xtend2QualifiedNameProvider.class;
 	}
@@ -89,6 +88,7 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 		return Xtend2LocationInFileProvider.class;
 	}
 
+	@Override
 	public Class<? extends EObjectAtOffsetHelper> bindEObjectAtOffsetHelper() {
 		return Xtend2EObjectAtOffsetHelper.class;
 	}
@@ -102,4 +102,5 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 	public Class<? extends TypeConformanceComputer> bindTypeConformanceComputer() {
 		return XbaseTypeConformanceComputer.class;
 	}
+	
 }

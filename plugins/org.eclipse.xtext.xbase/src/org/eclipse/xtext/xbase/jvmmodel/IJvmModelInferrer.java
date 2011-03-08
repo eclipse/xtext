@@ -7,15 +7,27 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.jvmmodel;
 
+import static java.util.Collections.*;
+
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@ImplementedBy(IJvmModelInferrer.NullImpl.class)
 public interface IJvmModelInferrer {
 
 	List<? extends EObject> inferJvmModel(EObject sourceObject);
 	
+	public static class NullImpl implements IJvmModelInferrer {
+
+		public List<? extends EObject> inferJvmModel(EObject sourceObject) {
+			return emptyList();
+		}
+		
+	}
 }

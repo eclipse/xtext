@@ -44,6 +44,25 @@ import com.google.inject.Injector;
  */
 public class CompilerTest extends AbstractXtend2TestCase {
 	
+	public void testInferredReturnType() throws Exception {
+		Class<?> clazz = compileJavaCode("x.Y", 
+				"package x " +
+				"class Y {" +
+				"  int a() {" +
+				"   b()" +
+				"  }" +
+				"  " +
+				"  b() {" +
+				"    c()" +
+				"  }" +
+				"  " +
+				"  c() {" +
+				"    2" +
+				"  }" +
+				"}");
+		assertEquals(2, apply(clazz, "a"));
+	}
+	
 	public void testSugarForLocalExtensions_01() throws Exception {
 		Class<?> class1 = compileJavaCode("x.Y",
 				"package x " +

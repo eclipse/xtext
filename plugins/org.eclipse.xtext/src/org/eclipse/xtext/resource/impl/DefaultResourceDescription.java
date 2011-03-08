@@ -82,7 +82,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 				exportedEObjects.add(eObjectDescription);
 			}
 		};
-		TreeIterator<EObject> allProperContents = EcoreUtil.getAllProperContents(getResource(), true);
+		TreeIterator<EObject> allProperContents = EcoreUtil.getAllProperContents(getResource(), false);
 		while (allProperContents.hasNext()) {
 			EObject content = allProperContents.next();
 			if (!strategy.createEObjectDescriptions(content, acceptor))

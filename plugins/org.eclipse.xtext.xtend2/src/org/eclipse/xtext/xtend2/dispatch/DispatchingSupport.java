@@ -102,8 +102,8 @@ public class DispatchingSupport {
 		for (int i = 0; i < params; i++) {
 			final JvmTypeReference p1 = o1.getParameters().get(i).getParameterType();
 			final JvmTypeReference p2 = o2.getParameters().get(i).getParameterType();
-			int distance1 = getMaxDistanceToObject(p1);
-			int distance2 = getMaxDistanceToObject(p2);
+			int distance1 = p1==null?Integer.MAX_VALUE : getMaxDistanceToObject(p1);
+			int distance2 = p2==null?Integer.MAX_VALUE : getMaxDistanceToObject(p2);
 			if (distance1!=distance2) {
 				return distance2 - distance1;
 			}

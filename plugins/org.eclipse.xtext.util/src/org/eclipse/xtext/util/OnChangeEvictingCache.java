@@ -146,6 +146,11 @@ public class OnChangeEvictingCache implements IResourceScopeCache {
 		public boolean isIgnoreNotifications() {
 			return ignoreNotifications;
 		}
+		
+		@Override
+		protected boolean resolve() {
+			return false;
+		}
 
 	}
 }
