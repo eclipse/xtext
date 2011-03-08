@@ -3,31 +3,23 @@
  */
 package org.eclipse.xtext.xtend2;
 
-import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
-import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipse.xtext.xbase.XbaseQualifiedNameConverter;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
+import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 import org.eclipse.xtext.xtend2.conversion.Xtend2ValueConverterService;
 import org.eclipse.xtext.xtend2.featurecalls.Xtend2IdentifiableSimpleNameProvider;
+import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.jvmmodel.Xtend2JvmModelInferrer;
-import org.eclipse.xtext.xtend2.linking.Xtend2EObjectAtOffsetHelper;
-import org.eclipse.xtext.xtend2.linking.Xtend2LocationInFileProvider;
 import org.eclipse.xtext.xtend2.naming.Xtend2QualifiedNameProvider;
 import org.eclipse.xtext.xtend2.resource.Xtend2Resource;
 import org.eclipse.xtext.xtend2.resource.Xtend2ResourceDescriptionStrategy;
-import org.eclipse.xtext.xtend2.scoping.Xtend2GlobalScopeProvider;
 import org.eclipse.xtext.xtend2.scoping.Xtend2ImportedNamespaceScopeProvider;
 import org.eclipse.xtext.xtend2.typing.Xtend2TypeProvider;
 
@@ -39,10 +31,6 @@ import com.google.inject.name.Names;
  */
 public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2RuntimeModule {
 	
-	public Class<? extends IJvmModelInferrer> bindIJvmModelInferrer() {
-		return Xtend2JvmModelInferrer.class;
-	}
-
 	@Override
 	public Class<? extends ITypeProvider> bindITypeProvider() {
 		return Xtend2TypeProvider.class;
@@ -53,11 +41,6 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 		return Xtend2Resource.class;
 	}
 	
-	@Override
-	public Class<? extends IQualifiedNameConverter> bindIQualifiedNameConverter() {
-		return XbaseQualifiedNameConverter.class;
-	}
-
 	@Override
 	public Class<? extends IValueConverterService> bindIValueConverterService() {
 		return Xtend2ValueConverterService.class;
@@ -74,6 +57,10 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 		return Xtend2IdentifiableSimpleNameProvider.class;
 	}
 
+	public Class<? extends IJvmModelInferrer> bindIJvmModelInferrer() {
+		return Xtend2JvmModelInferrer.class;
+	}
+
 	@Override
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return Xtend2QualifiedNameProvider.class;
@@ -83,24 +70,8 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 		return Xtend2ResourceDescriptionStrategy.class;
 	}
 
-	@Override
-	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
-		return Xtend2LocationInFileProvider.class;
+	public Class<? extends JvmModelAssociator> bindJvmModelAssociator() {
+		return IXtend2JvmAssociations.Impl.class;
 	}
 
-	@Override
-	public Class<? extends EObjectAtOffsetHelper> bindEObjectAtOffsetHelper() {
-		return Xtend2EObjectAtOffsetHelper.class;
-	}
-	
-	// TODO: moved to XbaseGeneratorFragment. remove after regeneration
-	@Override
-	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		return Xtend2GlobalScopeProvider.class;
-	}
-
-	public Class<? extends TypeConformanceComputer> bindTypeConformanceComputer() {
-		return XbaseTypeConformanceComputer.class;
-	}
-	
 }

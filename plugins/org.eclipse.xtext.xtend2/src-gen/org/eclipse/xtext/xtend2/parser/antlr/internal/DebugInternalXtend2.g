@@ -62,13 +62,18 @@ ruleFunction :
 			',' ruleJvmTypeParameter
 		)* '>'
 	)? ruleJvmTypeReference? RULE_ID '(' (
-		ruleJvmFormalParameter (
-			',' ruleJvmFormalParameter
+		ruleParameter (
+			',' ruleParameter
 		)*
 	)? ')' (
 		ruleXBlockExpression |
 		ruleRichString
 	)?
+;
+
+// Rule Parameter
+ruleParameter :
+	ruleJvmTypeReference RULE_ID
 ;
 
 // Rule XStringLiteral

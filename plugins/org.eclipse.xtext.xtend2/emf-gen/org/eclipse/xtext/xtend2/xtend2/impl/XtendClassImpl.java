@@ -153,7 +153,7 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 	{
 		if (typeParameters == null)
 		{
-			typeParameters = new EObjectContainmentWithInverseEList<JvmTypeParameter>(JvmTypeParameter.class, this, Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS, TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR);
+			typeParameters = new EObjectContainmentWithInverseEList.Resolving<JvmTypeParameter>(JvmTypeParameter.class, this, Xtend2Package.XTEND_CLASS__TYPE_PARAMETERS, TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR);
 		}
 		return typeParameters;
 	}

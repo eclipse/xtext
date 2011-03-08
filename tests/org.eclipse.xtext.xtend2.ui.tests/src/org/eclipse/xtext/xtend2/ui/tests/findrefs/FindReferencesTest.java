@@ -34,9 +34,8 @@ import org.eclipse.xtext.ui.editor.findrefs.SimpleLocalResourceAccess;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XBlockExpression;
-import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
-import org.eclipse.xtext.xtend2.ui.findrefs.Xtend2FindReferenceQueryDataFactory;
-import org.eclipse.xtext.xtend2.ui.findrefs.Xtend2ReferenceFilter;
+import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelReferenceFilter;
+import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -83,10 +82,6 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 		super.tearDown();
 	}
 
-	public void testBinding() {
-		assertTrue(queryDataFactory instanceof Xtend2FindReferenceQueryDataFactory);
-	}
-
 	public void testClassQueryData() throws Exception {
 		XtendFile fileFoo = testHelper.xtendFile("Foo", "class Foo { }");
 		waitForAutoBuild();
@@ -100,8 +95,8 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 		assertEquals(targetURIs.next(), EcoreUtil.getURI(classFoo));
 		assertEquals(targetURIs.next(), EcoreUtil.getURI(inferredTypeFoo));
 		assertEquals(targetURIs.next(), EcoreUtil.getURI(inferredConstructor));
-		assertTrue(queryData.getResultFilter() instanceof Xtend2ReferenceFilter);
-		assertEquals(((Xtend2ReferenceFilter) queryData.getResultFilter()).getExcludedSourceURI(),
+		assertTrue(queryData.getResultFilter() instanceof JvmModelReferenceFilter);
+		assertEquals(((JvmModelReferenceFilter) queryData.getResultFilter()).getExcludedSourceURI(),
 				EcoreUtil.getURI(classFoo));
 	}
 
@@ -116,8 +111,8 @@ public class FindReferencesTest extends AbstractXtend2UITestCase {
 		Iterator<URI> targetURIs = queryData.getTargetURIs().iterator();
 		assertEquals(targetURIs.next(), EcoreUtil.getURI(functionFoo));
 		assertEquals(targetURIs.next(), EcoreUtil.getURI(inferredOperation));
-		assertTrue(queryData.getResultFilter() instanceof Xtend2ReferenceFilter);
-		assertEquals(((Xtend2ReferenceFilter) queryData.getResultFilter()).getExcludedSourceURI(),
+		assertTrue(queryData.getResultFilter() instanceof JvmModelReferenceFilter);
+		assertEquals(((JvmModelReferenceFilter) queryData.getResultFilter()).getExcludedSourceURI(),
 				EcoreUtil.getURI(functionFoo));
 	}
 

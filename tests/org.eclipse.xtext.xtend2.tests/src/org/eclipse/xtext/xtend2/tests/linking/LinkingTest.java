@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xtend2.linking.IXtend2JvmAssociations;
+import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
@@ -46,7 +46,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 				"  foo() {arrayList}" +
 				"}");
 		XtendFunction func = (XtendFunction) clazz.getMembers().get(1);
-		JvmField field = (JvmField) associator.getInferredJvmElements(clazz.getMembers().get(0)).iterator().next();
+		JvmField field = (JvmField) associator.getJvmElements(clazz.getMembers().get(0)).iterator().next();
 		assertSame(field, ((XFeatureCall)((XBlockExpression)func.getExpression()).getExpressions().get(0)).getFeature());
 	}
 	
