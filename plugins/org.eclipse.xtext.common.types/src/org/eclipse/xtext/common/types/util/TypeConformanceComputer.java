@@ -554,6 +554,7 @@ public class TypeConformanceComputer {
 				return type;
 		}
 		// TODO handle all primitives
+		// TODO handle arrays
 		if (containsPrimitive(types)) {
 			List<JvmTypeReference> withoutPrimitives = replacePrimitives(types);
 			return getCommonSuperType(withoutPrimitives);
@@ -582,7 +583,15 @@ public class TypeConformanceComputer {
 			if (result != null)
 				return result;
 		}
-		throw new IllegalStateException("java.lang.Object does not have type parameters and should be contained in list");
+		// until above's TODOs are not solved, return Object as catch all 
+		return typeReferences.getTypeForName(Object.class, findContext(firstType));
+	}
+
+	protected JvmType findContext(JvmTypeReference firstType) {
+		if (firstType instanceof JvmGenericArrayTypeReference) {
+			return findContext(((JvmGenericArrayTypeReference) firstType).getComponentType());
+		}
+		return firstType.getType();
 	}
 
 	protected List<JvmTypeReference> replacePrimitives(List<JvmTypeReference> types) {
