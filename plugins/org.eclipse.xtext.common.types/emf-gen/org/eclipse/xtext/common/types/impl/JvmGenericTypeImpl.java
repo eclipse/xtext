@@ -105,7 +105,7 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImplCustom implements Jvm
 	{
 		if (typeParameters == null)
 		{
-			typeParameters = new EObjectContainmentWithInverseEList<JvmTypeParameter>(JvmTypeParameter.class, this, TypesPackage.JVM_GENERIC_TYPE__TYPE_PARAMETERS, TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR);
+			typeParameters = new EObjectContainmentWithInverseEList.Resolving<JvmTypeParameter>(JvmTypeParameter.class, this, TypesPackage.JVM_GENERIC_TYPE__TYPE_PARAMETERS, TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR);
 		}
 		return typeParameters;
 	}

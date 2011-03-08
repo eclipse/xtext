@@ -40,7 +40,7 @@ public interface JvmAnnotationTarget extends EObject
 	 * @return the value of the '<em>Annotations</em>' containment reference list.
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmAnnotationTarget_Annotations()
 	 * @see org.eclipse.xtext.common.types.JvmAnnotationReference#getTarget
-	 * @model opposite="target" containment="true"
+	 * @model opposite="target" containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList<JvmAnnotationReference> getAnnotations();

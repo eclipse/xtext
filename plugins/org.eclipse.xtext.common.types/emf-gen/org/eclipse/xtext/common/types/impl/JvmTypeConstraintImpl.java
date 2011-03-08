@@ -75,6 +75,33 @@ public abstract class JvmTypeConstraintImpl extends MinimalEObjectImpl.Container
 	 */
 	public JvmTypeReference getTypeReference()
 	{
+		if (typeReference != null && typeReference.eIsProxy())
+		{
+			InternalEObject oldTypeReference = (InternalEObject)typeReference;
+			typeReference = (JvmTypeReference)eResolveProxy(oldTypeReference);
+			if (typeReference != oldTypeReference)
+			{
+				InternalEObject newTypeReference = (InternalEObject)typeReference;
+				NotificationChain msgs = oldTypeReference.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE, null, null);
+				if (newTypeReference.eInternalContainer() == null)
+				{
+					msgs = newTypeReference.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE, oldTypeReference, typeReference));
+			}
+		}
+		return typeReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmTypeReference basicGetTypeReference()
+	{
 		return typeReference;
 	}
 
@@ -125,6 +152,17 @@ public abstract class JvmTypeConstraintImpl extends MinimalEObjectImpl.Container
 	{
 		if (eContainerFeatureID() != TypesPackage.JVM_TYPE_CONSTRAINT__OWNER) return null;
 		return (JvmConstraintOwner)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmConstraintOwner basicGetOwner()
+	{
+		if (eContainerFeatureID() != TypesPackage.JVM_TYPE_CONSTRAINT__OWNER) return null;
+		return (JvmConstraintOwner)eInternalContainer();
 	}
 
 	/**
@@ -272,9 +310,11 @@ public abstract class JvmTypeConstraintImpl extends MinimalEObjectImpl.Container
 		switch (featureID)
 		{
 			case TypesPackage.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE:
-				return getTypeReference();
+				if (resolve) return getTypeReference();
+				return basicGetTypeReference();
 			case TypesPackage.JVM_TYPE_CONSTRAINT__OWNER:
-				return getOwner();
+				if (resolve) return getOwner();
+				return basicGetOwner();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -332,7 +372,7 @@ public abstract class JvmTypeConstraintImpl extends MinimalEObjectImpl.Container
 			case TypesPackage.JVM_TYPE_CONSTRAINT__TYPE_REFERENCE:
 				return typeReference != null;
 			case TypesPackage.JVM_TYPE_CONSTRAINT__OWNER:
-				return getOwner() != null;
+				return basicGetOwner() != null;
 		}
 		return super.eIsSet(featureID);
 	}

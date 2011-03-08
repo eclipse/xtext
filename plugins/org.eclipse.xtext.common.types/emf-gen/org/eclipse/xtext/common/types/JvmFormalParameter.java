@@ -62,7 +62,7 @@ public interface JvmFormalParameter extends JvmIdentifiableElement, JvmAnnotatio
 	 * @return the value of the '<em>Parameter Type</em>' containment reference.
 	 * @see #setParameterType(JvmTypeReference)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmFormalParameter_ParameterType()
-	 * @model containment="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	JvmTypeReference getParameterType();

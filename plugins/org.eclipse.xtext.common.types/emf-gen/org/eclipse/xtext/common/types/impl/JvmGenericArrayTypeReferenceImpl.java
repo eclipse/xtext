@@ -71,6 +71,33 @@ public class JvmGenericArrayTypeReferenceImpl extends JvmTypeReferenceImplCustom
 	 */
 	public JvmArrayType getType()
 	{
+		if (type != null && type.eIsProxy())
+		{
+			InternalEObject oldType = (InternalEObject)type;
+			type = (JvmArrayType)eResolveProxy(oldType);
+			if (type != oldType)
+			{
+				InternalEObject newType = (InternalEObject)type;
+				NotificationChain msgs = oldType.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE, null, null);
+				if (newType.eInternalContainer() == null)
+				{
+					msgs = newType.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE, oldType, type));
+			}
+		}
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmArrayType basicGetType()
+	{
 		return type;
 	}
 
@@ -163,7 +190,8 @@ public class JvmGenericArrayTypeReferenceImpl extends JvmTypeReferenceImplCustom
 		switch (featureID)
 		{
 			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE:
-				return getType();
+				if (resolve) return getType();
+				return basicGetType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

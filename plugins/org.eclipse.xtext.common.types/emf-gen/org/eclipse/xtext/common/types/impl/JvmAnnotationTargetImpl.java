@@ -78,7 +78,7 @@ public abstract class JvmAnnotationTargetImpl extends MinimalEObjectImpl.Contain
 	{
 		if (annotations == null)
 		{
-			annotations = new EObjectContainmentWithInverseEList<JvmAnnotationReference>(JvmAnnotationReference.class, this, TypesPackage.JVM_ANNOTATION_TARGET__ANNOTATIONS, TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET);
+			annotations = new EObjectContainmentWithInverseEList.Resolving<JvmAnnotationReference>(JvmAnnotationReference.class, this, TypesPackage.JVM_ANNOTATION_TARGET__ANNOTATIONS, TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET);
 		}
 		return annotations;
 	}

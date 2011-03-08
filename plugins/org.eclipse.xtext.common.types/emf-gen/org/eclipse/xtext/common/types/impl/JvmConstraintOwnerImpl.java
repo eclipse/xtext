@@ -78,7 +78,7 @@ public abstract class JvmConstraintOwnerImpl extends MinimalEObjectImpl.Containe
 	{
 		if (constraints == null)
 		{
-			constraints = new EObjectContainmentWithInverseEList<JvmTypeConstraint>(JvmTypeConstraint.class, this, TypesPackage.JVM_CONSTRAINT_OWNER__CONSTRAINTS, TypesPackage.JVM_TYPE_CONSTRAINT__OWNER);
+			constraints = new EObjectContainmentWithInverseEList.Resolving<JvmTypeConstraint>(JvmTypeConstraint.class, this, TypesPackage.JVM_CONSTRAINT_OWNER__CONSTRAINTS, TypesPackage.JVM_TYPE_CONSTRAINT__OWNER);
 		}
 		return constraints;
 	}

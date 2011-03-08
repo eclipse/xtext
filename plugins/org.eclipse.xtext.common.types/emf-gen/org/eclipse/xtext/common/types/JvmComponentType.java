@@ -35,7 +35,7 @@ public interface JvmComponentType extends JvmType
 	 * @return the value of the '<em>Array Type</em>' containment reference.
 	 * @see #setArrayType(JvmArrayType)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmComponentType_ArrayType()
-	 * @model containment="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	JvmArrayType getArrayType();

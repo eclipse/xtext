@@ -38,7 +38,7 @@ public interface JvmExecutable extends JvmFeature, JvmTypeParameterDeclarator
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmExecutable_Parameters()
-	 * @model containment="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList<JvmFormalParameter> getParameters();
@@ -54,7 +54,7 @@ public interface JvmExecutable extends JvmFeature, JvmTypeParameterDeclarator
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Exceptions</em>' containment reference list.
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmExecutable_Exceptions()
-	 * @model containment="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList<JvmTypeReference> getExceptions();

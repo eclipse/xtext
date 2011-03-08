@@ -145,6 +145,17 @@ public class JvmAnnotationReferenceImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public JvmAnnotationTarget basicGetTarget()
+	{
+		if (eContainerFeatureID() != TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET) return null;
+		return (JvmAnnotationTarget)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public NotificationChain basicSetTarget(JvmAnnotationTarget newTarget, NotificationChain msgs)
 	{
 		msgs = eBasicSetContainer((InternalEObject)newTarget, TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET, msgs);
@@ -183,7 +194,7 @@ public class JvmAnnotationReferenceImpl extends MinimalEObjectImpl.Container imp
 	{
 		if (values == null)
 		{
-			values = new EObjectContainmentEList<JvmAnnotationValue>(JvmAnnotationValue.class, this, TypesPackage.JVM_ANNOTATION_REFERENCE__VALUES);
+			values = new EObjectContainmentEList.Resolving<JvmAnnotationValue>(JvmAnnotationValue.class, this, TypesPackage.JVM_ANNOTATION_REFERENCE__VALUES);
 		}
 		return values;
 	}
@@ -254,7 +265,8 @@ public class JvmAnnotationReferenceImpl extends MinimalEObjectImpl.Container imp
 				if (resolve) return getAnnotation();
 				return basicGetAnnotation();
 			case TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET:
-				return getTarget();
+				if (resolve) return getTarget();
+				return basicGetTarget();
 			case TypesPackage.JVM_ANNOTATION_REFERENCE__VALUES:
 				return getValues();
 		}
@@ -322,7 +334,7 @@ public class JvmAnnotationReferenceImpl extends MinimalEObjectImpl.Container imp
 			case TypesPackage.JVM_ANNOTATION_REFERENCE__ANNOTATION:
 				return annotation != null;
 			case TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET:
-				return getTarget() != null;
+				return basicGetTarget() != null;
 			case TypesPackage.JVM_ANNOTATION_REFERENCE__VALUES:
 				return values != null && !values.isEmpty();
 		}

@@ -202,6 +202,33 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 	 */
 	public JvmTypeReference getReturnType()
 	{
+		if (returnType != null && returnType.eIsProxy())
+		{
+			InternalEObject oldReturnType = (InternalEObject)returnType;
+			returnType = (JvmTypeReference)eResolveProxy(oldReturnType);
+			if (returnType != oldReturnType)
+			{
+				InternalEObject newReturnType = (InternalEObject)returnType;
+				NotificationChain msgs = oldReturnType.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_OPERATION__RETURN_TYPE, null, null);
+				if (newReturnType.eInternalContainer() == null)
+				{
+					msgs = newReturnType.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_OPERATION__RETURN_TYPE, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.JVM_OPERATION__RETURN_TYPE, oldReturnType, returnType));
+			}
+		}
+		return returnType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmTypeReference basicGetReturnType()
+	{
 		return returnType;
 	}
 
@@ -276,7 +303,8 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 			case TypesPackage.JVM_OPERATION__ABSTRACT:
 				return isAbstract();
 			case TypesPackage.JVM_OPERATION__RETURN_TYPE:
-				return getReturnType();
+				if (resolve) return getReturnType();
+				return basicGetReturnType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

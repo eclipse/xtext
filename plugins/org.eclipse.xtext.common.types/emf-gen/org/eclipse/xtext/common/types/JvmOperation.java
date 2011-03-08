@@ -116,7 +116,7 @@ public interface JvmOperation extends JvmExecutable
 	 * @return the value of the '<em>Return Type</em>' containment reference.
 	 * @see #setReturnType(JvmTypeReference)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmOperation_ReturnType()
-	 * @model containment="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	JvmTypeReference getReturnType();
