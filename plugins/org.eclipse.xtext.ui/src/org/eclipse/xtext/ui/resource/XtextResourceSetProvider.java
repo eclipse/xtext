@@ -54,7 +54,6 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 	}
 
 	protected Map<URI, URI> computePlatformURIMap(IJavaProject javaProject) {
-		long now = System.currentTimeMillis();
 		HashMap<URI,URI> hashMap = newHashMap(EcorePlugin.computePlatformURIMap());
 		try {
 			if (!javaProject.exists())
@@ -78,7 +77,6 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 									URI uri = URI.createURI(p);
 									final URI key = URI.createPlatformResourceURI(name + "/", false);
 									hashMap.put(key, uri);
-									System.out.println(key+" -> "+uri);
 								}
 							}
 						}
@@ -90,7 +88,6 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 		} catch (JavaModelException e) {
 			LOG.error(e.getMessage(), e);
 		}
-		System.out.println("computing patform resource map took ms "+((System.currentTimeMillis() - now)));
 		return hashMap;
 	}
 
