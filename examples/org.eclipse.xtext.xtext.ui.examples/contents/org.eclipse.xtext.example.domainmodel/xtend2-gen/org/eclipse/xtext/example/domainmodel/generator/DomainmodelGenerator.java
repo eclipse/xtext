@@ -231,13 +231,13 @@ public class DomainmodelGenerator implements IGenerator {
     return builder;
   }
   
-  public StringConcatenation feature(final Feature o, final ImportManager importManager) {
-    if ((o instanceof Operation)
+  public StringConcatenation feature(final Feature p, final ImportManager importManager) {
+    if ((p instanceof Operation)
          && (importManager instanceof ImportManager)) {
-      return _feature((Operation)o, (ImportManager)importManager);
-    } else if ((o instanceof Property)
+      return _feature((Operation)p, (ImportManager)importManager);
+    } else if ((p instanceof Property)
          && (importManager instanceof ImportManager)) {
-      return _feature((Property)o, (ImportManager)importManager);
+      return _feature((Property)p, (ImportManager)importManager);
     } else {
       throw new IllegalArgumentException();
     }

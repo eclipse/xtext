@@ -15,6 +15,8 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.example.domainmodel.DomainmodelExtensions;
 import org.eclipse.xtext.example.domainmodel.domainmodel.AbstractElement;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel;
+import org.eclipse.xtext.example.domainmodel.domainmodel.AbstractElement;
+import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Import;
