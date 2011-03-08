@@ -14,9 +14,9 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
@@ -38,17 +38,13 @@ public class JvmModelXbaseLazyLinker extends XbaseLazyLinker {
 	@Override
 	protected void beforeModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
 		Resource resource = model.eResource();
-		if (EcoreUtil.getAdapter(resource.eAdapters(), UnloadJvmModelAdapter.class) == null) {
-			resource.eAdapters().add(new UnloadJvmModelAdapter());
+		// remove old unload adapter
+		final Adapter adapter = EcoreUtil.getAdapter(resource.eAdapters(), UnloadJvmModelAdapter.class);
+		if (adapter != null) {
+			resource.eAdapters().remove(adapter);
 		}
-		EList<EObject> rootElements = resource.getContents();
-		for (Iterator<EObject> i = rootElements.iterator(); i.hasNext();) {
-			EObject rootElement = i.next();
-			if (isJvmModel(rootElement)) {
-				unloader.unloadRoot(rootElement);
-				i.remove();
-			}
-		}
+		// make sure any old JvmModels are removed
+		removeInferredJvmModels(resource);
 		super.beforeModelLinked(model, diagnosticsConsumer);
 	}
 
@@ -56,15 +52,32 @@ public class JvmModelXbaseLazyLinker extends XbaseLazyLinker {
 	protected void afterModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
 		super.afterModelLinked(model, diagnosticsConsumer);
 		if (model != null) {
+			Resource resource = model.eResource();
+			// infer jvm model
 			List<? extends EObject> jvmModel = jvmModelInferrer.inferJvmModel(model);
-			for(EObject jvmElement: jvmModel) 
+			for (EObject jvmElement : jvmModel)
 				jvmElement.eAdapters().add(new JvmModelMarker());
 			model.eResource().getContents().addAll(jvmModel);
+			
+			// install fresh unload adapter
+			resource.eAdapters().add(new UnloadJvmModelAdapter());
 		}
 	}
-	
+
 	protected boolean isJvmModel(EObject element) {
 		return EcoreUtil.getAdapter(element.eAdapters(), JvmModelMarker.class) != null;
+	}
+
+	protected void removeInferredJvmModels(Object notifier) {
+		Resource resource = (Resource) notifier;
+		Iterator<EObject> iterator = resource.getContents().iterator();
+		while (iterator.hasNext()) {
+			EObject object = iterator.next();
+			if (isJvmModel(object)) {
+				unloader.unloadRoot(object);
+				iterator.remove();
+			}
+		}
 	}
 
 	protected static class JvmModelMarker extends AdapterImpl {
@@ -73,34 +86,41 @@ public class JvmModelXbaseLazyLinker extends XbaseLazyLinker {
 			return type == JvmModelMarker.class;
 		}
 	}
-	
-	protected class UnloadJvmModelAdapter implements Adapter {
 
+	protected class UnloadJvmModelAdapter extends EContentAdapter {
+
+		@Override
 		public void notifyChanged(Notification notification) {
-			if (!notification.isTouch() && notification.getFeatureID(null) == Resource.RESOURCE__CONTENTS) {
-				if (notification.getEventType() == Notification.REMOVE && notification.getOldValue() instanceof EObject
-						&& !isJvmModel((EObject) notification.getOldValue())) {
-					Resource resource = (Resource) notification.getNotifier();
-					while (!resource.getContents().isEmpty()) {
-						EObject object = resource.getContents().get(0);
-						unloader.unloadRoot(object);
-						resource.getContents().remove(0);
-					}
+			if (!notification.isTouch() && notification.getNotifier() instanceof EObject
+				|| (notification.getNotifier() instanceof Resource && notification.getFeatureID(null) == Resource.RESOURCE__CONTENTS)) {
+				Object notifier = notification.getNotifier();
+				if (notifier instanceof EObject)
+					notifier = ((EObject) notifier).eResource();
+				if (notifier instanceof Resource) {
+					removeInferredJvmModels(notifier);
 				}
 			}
 		}
 
+		@Override
 		public Notifier getTarget() {
 			// ignore
 			return null;
 		}
 
+		@Override
 		public void setTarget(Notifier newTarget) {
 			// ignore
 		}
 
+		@Override
 		public boolean isAdapterForType(Object type) {
 			return type == UnloadJvmModelAdapter.class;
+		}
+		
+		@Override
+		protected boolean resolve() {
+			return false;
 		}
 	}
 

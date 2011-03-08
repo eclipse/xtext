@@ -280,7 +280,6 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		IEObjectDescription thisVariable = localVariableScope.getSingleElement(THIS);
 		if (thisVariable != null) {
 			EObject implicitReceiver = thisVariable.getEObjectOrProxy();
-			// TODO 'this' should not have to inherit from JvmIdentifiable
 			JvmTypeReference implicitReceiverType = typeProvider.getTypeForIdentifiable((JvmIdentifiableElement) implicitReceiver);
 			if (implicitReceiverType != null && implicitReceiver instanceof JvmIdentifiableElement) {
 				featureScopeForThis = createFeatureScopeForTypeRef(
