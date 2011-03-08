@@ -40,8 +40,13 @@ DeclaredDependency returns DeclaredDependency :
 
 Function returns XtendFunction :
 	(override?='override'? & dispatch?='dispatch'?) ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
-	(returnType=JvmTypeReference)? name=ID '(' (parameters+=JvmFormalParameter (',' parameters+=JvmFormalParameter)*)? ')'
+	(returnType=JvmTypeReference)? name=ID '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')'
 		(expression=XBlockExpression | expression=RichString )?;
+
+// type is mandatory in Xtend
+Parameter returns types::JvmFormalParameter:
+	parameterType=JvmTypeReference name=ID;
+
 		
 XStringLiteral returns xbase::XExpression:
 	{xbase::XStringLiteral} value=STRING |
