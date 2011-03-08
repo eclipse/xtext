@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.ITextSelection;
@@ -65,6 +66,8 @@ import com.google.inject.Provider;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ParserBasedContentAssistContextFactory extends AbstractContentAssistContextFactory {
+	
+	private final static Logger log = Logger.getLogger(ParserBasedContentAssistContextFactory.class);
 
 	@Inject
 	private Provider<StatefulFactory> statefulFactoryProvider;
@@ -392,11 +395,15 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			int length = completionOffset - startOffset;
 			String nodeText = ((ILeafNode) currentNode).getText();
 			String trimmedNodeText = length > nodeText.length() ? nodeText : nodeText.substring(0, length);
-			if (viewer.getTextWidget() != null /* testing */ && length >= 0) {
-				String text = viewer.getTextWidget().getTextRange(startOffset, trimmedNodeText.length());
-				if (trimmedNodeText.equals(text))
-					return text;
-				return viewer.getTextWidget().getTextRange(startOffset, length);
+			if (viewer.getDocument() != null /* testing */ && length >= 0) {
+				try {
+					String text = viewer.getDocument().get(startOffset, trimmedNodeText.length());
+					if (trimmedNodeText.equals(text))
+						return text;
+					return viewer.getDocument().get(startOffset, length);
+				} catch (BadLocationException e) {
+					log.error(e.getMessage(), e);
+				}
 			}
 			return trimmedNodeText;
 		}
