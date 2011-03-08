@@ -29,13 +29,19 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo("", "try {typeof(String).newInstance} catch(Exception e) {}");
 	}
 	
-//TODO
+//TODO FIX ME!
 //	public void testGenerics_01() throws Exception {
 //		assertEvaluatesTo("y",
 //				"{" +
 //				" val x = newArrayList('y',23,true)" +
 //				" return x.head" +
 //				"}");
+//	}
+
+//TODO FIX ME!	
+//	public void testGenerics_02() throws Exception {
+//		assertEvaluatesTo(null,
+//				"new java.util.ArrayList<Object>().addAll(typeof(String).declaredFields)");
 //	}
 	
 	public void testPrimitiveConversion() throws Exception {
