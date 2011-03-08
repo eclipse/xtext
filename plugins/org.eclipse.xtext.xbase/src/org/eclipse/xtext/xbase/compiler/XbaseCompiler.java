@@ -160,17 +160,17 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (!varDeclaration.isWriteable()) {
 			b.append("final ");
 		}
+		JvmTypeReference type = null;
 		if (varDeclaration.getType() != null) {
-			final JvmTypeReference type = varDeclaration.getType();
-			serialize(type, varDeclaration, b, false, true);
+			type = varDeclaration.getType();
 		} else {
-			final JvmTypeReference type = getTypeProvider().getType(varDeclaration.getRight());
-			serialize(type, varDeclaration, b, false, true);
+			type = getTypeProvider().getType(varDeclaration.getRight());
 		}
+		serialize(type, varDeclaration, b, false, true);
 		b.append(" ");
 		b.append(declareNameInVariableScope(varDeclaration, b));
 		b.append(" = ");
-		internalToJavaExpression(varDeclaration.getRight(), b);
+		internalToConvertedExpression(varDeclaration.getRight(), b, type);
 		b.append(";");
 	}
 
