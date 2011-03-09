@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Debug Test" default="Debug">
+	<target name="Debug">
+		<property name="build.id" value="S1212121212" />
+		<condition property="build.stable" value="true">
+			<matches string="${build.id}" pattern="[S|R](d)*" />
+		</condition>
+		<antcall target="-statistic.add" inheritall="true" />
+	</target>
+
+	
+	
+	<target name="-statistic.add" if="build.stable">
+		<echo>Stable build ${build.id} - adding statistic data</echo>
+	</target>
+
+	
+	
+</project>

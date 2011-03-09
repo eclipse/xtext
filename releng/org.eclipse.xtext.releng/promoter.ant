@@ -205,7 +205,7 @@
 
 		<!-- copy javadoc -->
 		<echo>Unzipping javadoc</echo>
-		<unzip dest="${javadoc.directory}">
+		<unzip dest="${build.drop.directory}/javadoc">
 			<fileset dir="${javadoc.directory}">
 				<filename name="javadoc.zip" />
 			</fileset>
