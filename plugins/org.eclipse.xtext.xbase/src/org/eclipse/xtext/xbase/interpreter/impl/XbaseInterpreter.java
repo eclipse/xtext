@@ -147,6 +147,14 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		this.classFinder = new ClassFinder(classLoader);
 		this.classLoader = classLoader;
 	}
+	
+	protected Class<?> getClass(Class<?> class1) {
+		try {
+			return classLoader.loadClass(class1.getName());
+		} catch (ClassNotFoundException e) {
+			throw new EvaluationException(e);
+		}
+	}
 
 	private PolymorphicDispatcher<Object> evaluateDispatcher = createEvaluateDispatcher();
 	private PolymorphicDispatcher<Object> assignmentDispatcher = createAssignmentDispatcher();
@@ -236,25 +244,25 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		Class<?> functionIntf = null;
 		switch (closure.getFormalParameters().size()) {
 			case 0:
-				functionIntf = Functions.Function0.class;
+				functionIntf = getClass(Functions.Function0.class);
 				break;
 			case 1:
-				functionIntf = Functions.Function1.class;
+				functionIntf = getClass(Functions.Function1.class);
 				break;
 			case 2:
-				functionIntf = Functions.Function2.class;
+				functionIntf = getClass(Functions.Function2.class);
 				break;
 			case 3:
-				functionIntf = Functions.Function3.class;
+				functionIntf = getClass(Functions.Function3.class);
 				break;
 			case 4:
-				functionIntf = Functions.Function4.class;
+				functionIntf = getClass(Functions.Function4.class);
 				break;
 			case 5:
-				functionIntf = Functions.Function5.class;
+				functionIntf = getClass(Functions.Function5.class);
 				break;
 			case 6:
-				functionIntf = Functions.Function6.class;
+				functionIntf = getClass(Functions.Function6.class);
 				break;
 			default:
 				throw new IllegalStateException("Closures with more then 6 parameters are not supported.");
@@ -641,20 +649,20 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 					InvocationHandler invocationHandler = null;
 					if (Proxy.isProxyClass(value.getClass())) {
 						invocationHandler = Proxy.getInvocationHandler(value);
-					} else if (Functions.Function0.class.isInstance(value)) {
-						invocationHandler = new DelegatingInvocationHandler(value, Functions.Function0.class);
-					} else if (Functions.Function1.class.isInstance(value)) {
-						invocationHandler = new DelegatingInvocationHandler(value, Functions.Function1.class);
-					} else if (Functions.Function2.class.isInstance(value)) {
-						invocationHandler = new DelegatingInvocationHandler(value, Functions.Function2.class);
-					} else if (Functions.Function3.class.isInstance(value)) {
-						invocationHandler = new DelegatingInvocationHandler(value, Functions.Function3.class);
-					} else if (Functions.Function4.class.isInstance(value)) {
-						invocationHandler = new DelegatingInvocationHandler(value, Functions.Function4.class);
-					} else if (Functions.Function5.class.isInstance(value)) {
-						invocationHandler = new DelegatingInvocationHandler(value, Functions.Function5.class);
-					} else if (Functions.Function6.class.isInstance(value)) {
-						invocationHandler = new DelegatingInvocationHandler(value, Functions.Function6.class);
+					} else if (getClass(Functions.Function0.class).isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, getClass(Functions.Function0.class));
+					} else if (getClass(Functions.Function1.class).isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, getClass(Functions.Function1.class));
+					} else if (getClass(Functions.Function2.class).isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, getClass(Functions.Function2.class));
+					} else if (getClass(Functions.Function3.class).isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, getClass(Functions.Function3.class));
+					} else if (getClass(Functions.Function4.class).isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, getClass(Functions.Function4.class));
+					} else if (getClass(Functions.Function5.class).isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, getClass(Functions.Function5.class));
+					} else if (getClass(Functions.Function6.class).isInstance(value)) {
+						invocationHandler = new DelegatingInvocationHandler(value, getClass(Functions.Function6.class));
 					} else {
 						return value;
 					}
