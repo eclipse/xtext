@@ -9,6 +9,10 @@
 
 	<target name="-define.package.qualifier">
 		<property name="incubation.qualifier" value="" />
+		<!-- if the build id starts with S or R build.stable property will be set -->
+		<condition property="build.stable" value="true">
+			<matches string="${build.id}" pattern="[S|R](d)*" />
+		</condition>
 
 		<!-- if the build.alias is non-empty then use it in preference -->
 		<condition property="package.qualifier" value="${incubation.qualifier}-${build.alias}">
@@ -47,7 +51,7 @@
 
 	<!-- Appends p2 download statistic data to the artifacts.xml-->
 	<target name="-statistic.add" if="build.stable">
-		<echoproperties destfile="ant.properties" failonerror="false" />
+		<echo>Stable build ${build.id} - adding statistic data</echo>
 		<property name="repository.root" value="${sp:repository}" />
 		<property name="qualifier" value="${package.qualifier}" />
 		<ant antfile="statistics/statistics.ant" target="addStatistic" inheritall="true" />
