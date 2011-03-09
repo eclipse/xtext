@@ -303,11 +303,9 @@
 				<iterate>
 					<and>
 						<or>
-							<adapt type="org.eclipse.xtext.Grammar" />
 							<adapt type="org.eclipse.core.resources.IResource">
 								<test property="org.eclipse.core.resources.name" value="*.xtext"/>
 							</adapt>							
-							<reference definitionId="org.eclipse.xtext.Xtext.Editor.opened" />
 						</or>
 						<test property="org.eclipse.xtext.xtext.launcher.workflowavailable" />
 					</and>
