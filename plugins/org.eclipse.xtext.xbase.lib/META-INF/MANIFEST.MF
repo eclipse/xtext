@@ -1,8 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xbase Runtime Library
+Bundle-Name: %pluginName
+Bundle-Localization: plugin
 Bundle-SymbolicName: org.eclipse.xtext.xbase.lib
 Bundle-Version: 2.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.xbase.lib
 Require-Bundle: com.google.collect;bundle-version="1.0.0";visibility:=reexport
+Bundle-Vendor: %providerName
