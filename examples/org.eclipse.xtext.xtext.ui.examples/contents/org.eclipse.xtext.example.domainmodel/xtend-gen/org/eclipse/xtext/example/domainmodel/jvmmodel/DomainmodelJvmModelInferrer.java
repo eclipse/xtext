@@ -231,29 +231,29 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
     }
   }
   
-  public Iterable<EObject> transform(final EObject model) {
-    if ((model instanceof Entity)) {
-      return _transform((Entity)model);
-    } else if ((model instanceof Import)) {
-      return _transform((Import)model);
-    } else if ((model instanceof PackageDeclaration)) {
-      return _transform((PackageDeclaration)model);
-    } else if ((model instanceof DomainModel)) {
-      return _transform((DomainModel)model);
-    } else if ((model == null)) {
+  public Iterable<EObject> transform(final EObject entity) {
+    if ((entity instanceof Entity)) {
+      return _transform((Entity)entity);
+    } else if ((entity instanceof Import)) {
+      return _transform((Import)entity);
+    } else if ((entity instanceof PackageDeclaration)) {
+      return _transform((PackageDeclaration)entity);
+    } else if ((entity instanceof DomainModel)) {
+      return _transform((DomainModel)entity);
+    } else if ((entity == null)) {
       return _transform((Void)null);
     } else {
       throw new IllegalArgumentException();
     }
   }
   
-  public void transform(final Feature property, final JvmGenericType type) {
-    if ((property instanceof Operation)
+  public void transform(final Feature operation, final JvmGenericType type) {
+    if ((operation instanceof Operation)
          && (type instanceof JvmGenericType)) {
-      _transform((Operation)property, (JvmGenericType)type);
-    } else if ((property instanceof Property)
+      _transform((Operation)operation, (JvmGenericType)type);
+    } else if ((operation instanceof Property)
          && (type instanceof JvmGenericType)) {
-      _transform((Property)property, (JvmGenericType)type);
+      _transform((Property)operation, (JvmGenericType)type);
     } else {
       throw new IllegalArgumentException();
     }

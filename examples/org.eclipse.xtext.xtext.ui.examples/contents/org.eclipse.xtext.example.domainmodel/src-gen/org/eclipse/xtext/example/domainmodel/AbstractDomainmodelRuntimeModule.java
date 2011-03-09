@@ -180,6 +180,11 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.common.types.util.TypeConformanceComputer> bindTypeConformanceComputer() {
+		return org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.resource.ILocationInFileProvider> bindILocationInFileProvider() {
 		return org.eclipse.xtext.xbase.jvmmodel.JvmLocationInFileProvider.class;
 	}
@@ -192,11 +197,6 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.linking.ILinker> bindILinker() {
 		return org.eclipse.xtext.xbase.jvmmodel.JvmModelXbaseLazyLinker.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer> bindIJvmModelInferrer() {
-		return org.eclipse.xtext.example.domainmodel.jvmmodel.DomainmodelJvmModelInferrer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
@@ -217,6 +217,11 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider> bindIdentifiableSimpleNameProvider() {
 		return org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer> bindIJvmModelInferrer() {
+		return org.eclipse.xtext.example.domainmodel.jvmmodel.DomainmodelJvmModelInferrer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.generator.GeneratorFragment

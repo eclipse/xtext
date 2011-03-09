@@ -205,7 +205,7 @@ public class DomainmodelParser extends AbstractContentAssistParser {
 					put(grammarAccess.getOperationAccess().getParamsAssignment_4_0(), "rule__Operation__ParamsAssignment_4_0");
 					put(grammarAccess.getOperationAccess().getParamsAssignment_4_1_1(), "rule__Operation__ParamsAssignment_4_1_1");
 					put(grammarAccess.getOperationAccess().getTypeAssignment_7(), "rule__Operation__TypeAssignment_7");
-					put(grammarAccess.getOperationAccess().getBodyAssignment_9(), "rule__Operation__BodyAssignment_9");
+					put(grammarAccess.getOperationAccess().getBodyAssignment_8(), "rule__Operation__BodyAssignment_8");
 					put(grammarAccess.getXAssignmentAccess().getFeatureAssignment_0_1(), "rule__XAssignment__FeatureAssignment_0_1");
 					put(grammarAccess.getXAssignmentAccess().getValueAssignment_0_3(), "rule__XAssignment__ValueAssignment_0_3");
 					put(grammarAccess.getXAssignmentAccess().getFeatureAssignment_1_1_0_0_1(), "rule__XAssignment__FeatureAssignment_1_1_0_0_1");
