@@ -25,6 +25,6 @@ Import-Package: com.google.common.base,
  org.eclipse.xtext.resource.impl,
  org.eclipse.xtext.util,
  org.eclipse.xtext.validation,
- org.junit;version="4.5.0",
- org.junit.runners;version="4.5.0",
- org.junit.runners.model;version="4.5.0"
+ org.junit;version="4.5.0";resolution:=optional,
+ org.junit.runners;version="4.5.0";resolution:=optional,
+ org.junit.runners.model;version="4.5.0";resolution:=optional
