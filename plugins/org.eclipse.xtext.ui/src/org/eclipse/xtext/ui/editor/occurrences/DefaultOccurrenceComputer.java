@@ -11,7 +11,6 @@ import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 import static java.util.Collections.*;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +27,10 @@ import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.findrefs.EditorResourceAccess;
+import org.eclipse.xtext.ui.editor.findrefs.FindReferenceQueryDataFactory;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
+import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.IQueryData;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.ITextRegion;
@@ -54,6 +56,12 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 
 	@Inject
 	private IReferenceFinder referenceFinder;
+	
+	@Inject 
+	private FindReferenceQueryDataFactory queryDataFactory;
+	
+	@Inject 
+	private EditorResourceAccess editorResourceAccess;
 
 	protected void addOccurrenceAnnotation(String type, IDocument document, ITextRegion textRegion,
 			Map<Annotation, Position> annotationMap) {
@@ -77,12 +85,13 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 				if (target != null) {
 					monitor.setWorkRemaining(100);
 					final List<IReferenceDescription> references = newArrayList();
-					referenceFinder.findLocalReferences(resource, Collections.singleton(target),
+					IQueryData queryData = queryDataFactory.createQueryData(target, resource.getURI());
+					referenceFinder.findLocalReferences(queryData, editorResourceAccess,
 							new IAcceptor<IReferenceDescription>() {
 								public void accept(IReferenceDescription reference) {
 									references.add(reference);
 								}
-							}, null, monitor.newChild(80));
+							}, monitor.newChild(80));
 					if (monitor.isCanceled())
 						return emptyMap();
 					Map<Annotation, Position> result = newHashMapWithExpectedSize(references.size() + 1);
