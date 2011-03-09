@@ -27,7 +27,7 @@
       <definition
             id="isActiveEditorAnInstanceOfXtextEditor">
          <with
-               variable="activeEditor">
+               variable="activePart">
             <adapt
                   type="org.eclipse.xtext.ui.editor.XtextEditor">
             </adapt>
