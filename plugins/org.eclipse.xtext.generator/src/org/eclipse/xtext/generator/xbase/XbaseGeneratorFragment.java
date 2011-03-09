@@ -112,7 +112,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType("org.eclipse.jface.text.contentassist.IContentAssistProcessor", 
 						"org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor")
 				.addTypeToType("org.eclipse.xtext.ui.editor.findrefs.FindReferenceQueryDataFactory", 
-						"org.eclipse.xtext.xtend2.ui.findrefs.Xtend2FindReferenceQueryDataFactory")
+						"org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceQueryDataFactory")
 				.getBindings();
 	}
 
