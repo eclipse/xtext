@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project;
 
+import static java.util.Collections.*;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Collection;
@@ -71,6 +73,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 
 	protected static final String SRC_GEN_ROOT = "src-gen"; //$NON-NLS-1$
 	protected static final String SRC_ROOT = "src"; //$NON-NLS-1$
+	protected static final String XTEND_GEN_ROOT = "xtend-gen"; //$NON-NLS-1$
 	protected static final List<String> SRC_FOLDER_LIST = ImmutableList.of(SRC_ROOT, SRC_GEN_ROOT);
 
 	@Inject
@@ -154,6 +157,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 
 	protected void configureDslProjectFactory(PluginProjectFactory factory) {
 		configureProjectFactory(factory);
+		factory.addFolders(singletonList(XTEND_GEN_ROOT));
 		List<String> requiredBundles = getDslProjectRequiredBundles();
 		factory.setProjectName(getXtextProjectInfo().getProjectName());
 		factory.addProjectNatures(getDslProjectNatures());
@@ -162,12 +166,14 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 	}
 
 	protected List<String> getDslProjectRequiredBundles() {
-		List<String> requiredBundles = Lists.newArrayList("org.eclipse.xtext", //$NON-NLS-1$
+		List<String> requiredBundles = Lists.newArrayList(
+				"org.eclipse.xtext;bundle-version=\"2.0.0\";visibility:=reexport", //$NON-NLS-1$
+				"org.apache.log4j;bundle-version=\"1.2.15\";visibility:=reexport", //$NON-NLS-1$
+				"org.apache.commons.logging;bundle-version=\"1.0.4\";resolution:=optional;visibility:=reexport", //$NON-NLS-1$
 				"org.eclipse.xtext.generator;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.emf.codegen.ecore;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.emf.mwe.utils;resolution:=optional", //$NON-NLS-1$
-				"org.eclipse.emf.mwe2.launch;resolution:=optional", //$NON-NLS-1$
-				"com.ibm.icu;resolution:=optional"); //$NON-NLS-1$
+				"org.eclipse.emf.mwe2.launch;resolution:=optional"); //$NON-NLS-1$
 
 		String[] bundles = getXtextProjectInfo().getWizardContribution().getRequiredBundles();
 		for (String bundleId : bundles) {
@@ -195,31 +201,6 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 
 	protected String[] getBuilderIDs() {
 		return BUILDERS;
-	}
-
-	protected void configureGeneratorProjectBuilder(PluginProjectFactory factory) {
-		configureProjectFactory(factory);
-		List<String> requiredBundles = getGeneratorProjectRequiredBundles();
-		factory.setProjectName(getXtextProjectInfo().getGeneratorProjectName());
-		factory.addProjectNatures(getGeneratorProjectNatures());
-		factory.addRequiredBundles(requiredBundles);
-		factory.setLocation(getXtextProjectInfo().getGeneratorProjectLocation());
-	}
-
-	protected List<String> getGeneratorProjectRequiredBundles() {
-		List<String> requiredBundles = Lists.newArrayList(
-				getXtextProjectInfo().getProjectName() + ";visibility:=reexport", 
-				"org.eclipse.xpand;visibility:=reexport", //$NON-NLS-1$
-				"org.eclipse.xtend;visibility:=reexport", //$NON-NLS-1$
-				"org.eclipse.xtext;visibility:=reexport", //$NON-NLS-1$
-				"org.eclipse.emf.mwe2.launch;resolution:=optional", //$NON-NLS-1$
-				"org.eclipse.emf.mwe.utils;visibility:=reexport",//$NON-NLS-1$
-				"org.eclipse.xtend.typesystem.emf;visibility:=reexport"); //$NON-NLS-1$
-		return requiredBundles;
-	}
-
-	protected String[] getGeneratorProjectNatures() {
-		return GENERATOR_PROJECT_NATURES;
 	}
 
 	protected String[] getTestProjectNatures() {
