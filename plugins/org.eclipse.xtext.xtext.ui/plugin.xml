@@ -209,7 +209,7 @@
 
 			// generates Java API for the generated EPackages 
 			fragment = ecore.EcoreGeneratorFragment {
-			// referencedGenModels = "uri to genmodel, uri to next genmodel"
+			// referencedGenModels = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel,platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
 			}
 
 			// the serialization component
