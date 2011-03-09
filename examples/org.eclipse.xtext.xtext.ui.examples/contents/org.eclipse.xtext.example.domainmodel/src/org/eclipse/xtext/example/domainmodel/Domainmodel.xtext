@@ -36,7 +36,7 @@ Property:
 	name=ID ':' type=JvmTypeReference;
 
 Operation:
-	visibility=Visibility? 'op' name=ID '(' (params+=JvmFormalParameter (',' params+=JvmFormalParameter)*)? ')' ':' type=JvmTypeReference '{' body=XExpression '}';
+	visibility=Visibility? 'op' name=ID '(' (params+=JvmFormalParameter (',' params+=JvmFormalParameter)*)? ')' ':' type=JvmTypeReference body=XBlockExpression;
 
 enum Visibility:
 	public | private | protected;

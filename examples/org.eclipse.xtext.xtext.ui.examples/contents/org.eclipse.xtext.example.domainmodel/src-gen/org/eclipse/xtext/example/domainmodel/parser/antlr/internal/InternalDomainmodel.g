@@ -581,33 +581,25 @@ ruleOperation returns [EObject current=null]
 	    }
 
 )
-)	otherlv_10='{' 
-    {
-    	newLeafNode(otherlv_10, grammarAccess.getOperationAccess().getLeftCurlyBracketKeyword_8());
-    }
-(
+)(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getOperationAccess().getBodyXExpressionParserRuleCall_9_0()); 
+	        newCompositeNode(grammarAccess.getOperationAccess().getBodyXBlockExpressionParserRuleCall_8_0()); 
 	    }
-		lv_body_11_0=ruleXExpression		{
+		lv_body_10_0=ruleXBlockExpression		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getOperationRule());
 	        }
        		set(
        			$current, 
        			"body",
-        		lv_body_11_0, 
-        		"XExpression");
+        		lv_body_10_0, 
+        		"XBlockExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_12='}' 
-    {
-    	newLeafNode(otherlv_12, grammarAccess.getOperationAccess().getRightCurlyBracketKeyword_10());
-    }
-)
+))
 ;
 
 

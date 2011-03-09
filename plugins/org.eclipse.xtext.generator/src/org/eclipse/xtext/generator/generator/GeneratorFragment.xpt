@@ -43,7 +43,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 
 class «generatorName().toSimpleName()» implements IGenerator {
 	
-	void doGenerate(Resource resource, IFileSystemAccess fsa) {
+	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		//TODO implment me
 	}
 }

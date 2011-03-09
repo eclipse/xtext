@@ -70,7 +70,7 @@ public class CompilationFileProvider {
 	}
 	
 	public String getTargetFolderName() {
-		return "xtend2-gen";
+		return "xtend-gen";
 	}
 
 	protected void makeSrcFolder(IFolder folder, IJavaProject javaProject) throws JavaModelException {
@@ -103,7 +103,7 @@ public class CompilationFileProvider {
 	
 	protected IJavaProject getJavaProject(IProject project) throws CoreException {
 		if(!project.hasNature(JavaCore.NATURE_ID)) {
-			throw new IllegalStateException("Xtend2 files must reside in a Java project");
+			throw new IllegalStateException("Xtend files must reside in a Java project");
 		}
 		IJavaProject javaProject = JavaCore.create(project);
 		return javaProject;
