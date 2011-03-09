@@ -49,7 +49,7 @@ public class Xtend2BuilderParticipantTest extends AbstractXtend2UITestCase {
 		sourceFile.setCharset(getNonDefaultEncoding(), null);
 		waitForAutoBuild();
 
-		IFile targetFile = testHelper.getProject().getFile("/xtend2-gen/test/Test.java");
+		IFile targetFile = testHelper.getProject().getFile("/xtend-gen/test/Test.java");
 		assertTrue(targetFile.exists());
 		assertFalse(isEmpty(targetFile));
 		assertEquals(getNonDefaultEncoding(), targetFile.getCharset());
