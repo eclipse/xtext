@@ -3,13 +3,7 @@
  */
 package org.eclipse.xtext.xbase.ui;
 
-import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor;
-import org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider.ReferenceProposalCreator;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
-import org.eclipse.xtext.xbase.ui.contentassist.XbaseReferenceProposalCreator;
-import org.eclipse.xtext.xbase.ui.syntaxcoloring.XbaseTokenToAttributeIdMapper;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -20,17 +14,4 @@ public class XbaseUiModule extends org.eclipse.xtext.xbase.ui.AbstractXbaseUiMod
 		super(plugin);
 	}
 
-	public Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindTokenToAttributeIdMapper() {
-		return XbaseTokenToAttributeIdMapper.class;
-	}
-	
-	@Override
-	public Class<? extends ReferenceProposalCreator> bindAbstractJavaBasedContentProposalProvider$ReferenceProposalCreator() {
-		return XbaseReferenceProposalCreator.class;
-	}
-	
-	@Override
-	public Class<? extends IContentAssistProcessor> bindIContentAssistProcessor() {
-		return RepeatedContentAssistProcessor.class;
-	}
 }
