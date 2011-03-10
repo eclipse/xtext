@@ -143,11 +143,11 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 		progress.worked(50);
 		String encoding = encodingProvider.getEncoding(sourceResource.getURI());
 		folderUtil.createParentFolders(targetFile, progress.newChild(10));
-		targetFile.setDerived(true);
 		if (targetFile.exists())
 			targetFile.setContents(new StringInputStream(appendable.toString(), encoding), true, false, progress.newChild(40));
 		else
 			targetFile.create(new StringInputStream(appendable.toString(), encoding), true, progress.newChild(40));
+		targetFile.setDerived(true);
 		if(!equal(targetFile.getCharset(), encoding))
 			targetFile.setCharset(encoding, progress);
 	}

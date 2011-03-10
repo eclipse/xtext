@@ -53,11 +53,11 @@ public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess {
 		try {
 			createFolder(file.getParent());
 			final String defaultCharset = file.getCharset();
-			file.setDerived(true);
 			if (file.exists())
 				file.setContents(new StringInputStream(contents.toString(), defaultCharset), true, true, null);
 			else
 				file.create(new StringInputStream(contents.toString(), defaultCharset), true, null);
+			file.setDerived(true);
 			if(newFileAcceptor != null)
 				newFileAcceptor.accept(file.getFullPath().toString());
 		} catch (UnsupportedEncodingException e) {
