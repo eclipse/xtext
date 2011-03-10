@@ -3,8 +3,6 @@ package org.eclipse.xtext.example.domainmodel;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.example.domainmodel.domainmodel.PackageDeclaration;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
@@ -52,10 +50,8 @@ public class DomainmodelExtensions {
   
   public String concatPath(final String prefix, final String suffix) {
     String _xifexpression = null;
-    boolean _operator_equals = ObjectExtensions.operator_equals(prefix, null);
-    boolean _operator_equals_1 = ObjectExtensions.operator_equals(prefix, "");
-    boolean _operator_or = BooleanExtensions.operator_or(_operator_equals, _operator_equals_1);
-    if (((Boolean)_operator_or)) {
+    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(prefix);
+    if (((Boolean)_isNullOrEmpty)) {
       _xifexpression = suffix;
     } else {
       String _operator_plus = StringExtensions.operator_plus(prefix, ".");

@@ -34,8 +34,10 @@ Workflow {
 	component = Generator {
 		pathRtProject = runtimeProject
 		pathUiProject = "${runtimeProject}.ui"
+		pathTestProject = "${runtimeProject}.test"
 		projectNameRt = projectName
 		projectNameUi = "${projectName}.ui"
+		
 		language = {
 			uri = grammarURI
 			fileExtensions = file.extensions
@@ -67,6 +69,9 @@ Workflow {
 			// scoping API 
 			fragment = scoping.ImportNamespacesScopingFragment {}
 			fragment = exporting.QualifiedNamesFragment {}
+			
+			// testing API
+			fragment = junit.Junit4Fragment {}
 
 			// formatter API 
 			fragment = formatting.FormatterFragment {}

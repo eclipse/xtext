@@ -53,6 +53,7 @@ public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess {
 		try {
 			createFolder(file.getParent());
 			final String defaultCharset = file.getCharset();
+			file.setDerived(true);
 			if (file.exists())
 				file.setContents(new StringInputStream(contents.toString(), defaultCharset), true, true, null);
 			else

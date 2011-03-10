@@ -65,7 +65,7 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 		return Xtend2RenameStrategy.Provider.class;
 	}
 	
-	public Class<? extends ITokenTypeToPartitionTypeMapper> bindTokenTypeToPartitionTypeMapper() {
+	public Class<? extends ITokenTypeToPartitionTypeMapper> bindITokenTypeToPartitionTypeMapper() {
 		return TokenTypeToPartitionMapper.class;
 	}
 	

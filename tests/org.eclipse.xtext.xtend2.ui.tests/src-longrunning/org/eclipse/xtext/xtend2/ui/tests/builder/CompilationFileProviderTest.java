@@ -42,7 +42,7 @@ public class CompilationFileProviderTest extends AbstractXtend2UITestCase {
 	}
 
 	public void testTargetFolderName() {
-		assertEquals("xtend2-gen", compilationFileProvider.getTargetFolderName());
+		assertEquals("xtend-gen", compilationFileProvider.getTargetFolderName());
 	}
 
 	public void testGetTargetFolder() throws Exception {

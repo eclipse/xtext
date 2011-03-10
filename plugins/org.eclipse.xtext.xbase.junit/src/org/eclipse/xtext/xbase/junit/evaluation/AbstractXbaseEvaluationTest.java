@@ -1004,6 +1004,16 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(Lists.newArrayList("s1", "s2", "s3"), "{ var this = new testdata.ClassWithVarArgs() stringsToList('s1', 's2', 's3') }");
 	}
 	
+	public void testMethodVarArgs_09() {
+		assertEvaluatesTo(Lists.newArrayList("s1"), "{ var this = new testdata.ClassWithVarArgs() stringsToList2('s1') }");
+	}
+	public void testMethodVarArgs_10() {
+		assertEvaluatesTo(Lists.newArrayList("s1", "s2"), "{ var this = new testdata.ClassWithVarArgs() stringsToList2('s1', 's2') }");
+	}
+	public void testMethodVarArgs_11() {
+		assertEvaluatesTo(Lists.newArrayList("s1", "s2", "s3"), "{ var this = new testdata.ClassWithVarArgs() stringsToList2('s1', 's2', 's3') }");
+	}
+	
 	public void testIterableExtension_01() {
 		assertEvaluatesTo(null, "new java.util.ArrayList<String>().findFirst(String e|e.length==0)");
 	}

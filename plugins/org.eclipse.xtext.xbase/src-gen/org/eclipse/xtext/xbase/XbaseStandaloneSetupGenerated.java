@@ -35,5 +35,6 @@ public class XbaseStandaloneSetupGenerated implements ISetup {
 		
 
 
+
 	}
 }

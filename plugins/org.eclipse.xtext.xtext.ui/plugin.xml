@@ -209,7 +209,7 @@
 
 			// generates Java API for the generated EPackages 
 			fragment = ecore.EcoreGeneratorFragment {
-			// referencedGenModels = "uri to genmodel, uri to next genmodel"
+			// referencedGenModels = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel,platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
 			}
 
 			// the serialization component
@@ -264,6 +264,9 @@
 
 			// content assist API  
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
+			
+			// rename refactoring  
+			fragment = refactoring.RefactorElementNameFragment {}
 
 			// generates a more lightweight Antlr parser and lexer tailored for content assist  
 			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {}
@@ -300,11 +303,9 @@
 				<iterate>
 					<and>
 						<or>
-							<adapt type="org.eclipse.xtext.Grammar" />
 							<adapt type="org.eclipse.core.resources.IResource">
 								<test property="org.eclipse.core.resources.name" value="*.xtext"/>
 							</adapt>							
-							<reference definitionId="org.eclipse.xtext.Xtext.Editor.opened" />
 						</or>
 						<test property="org.eclipse.xtext.xtext.launcher.workflowavailable" />
 					</and>

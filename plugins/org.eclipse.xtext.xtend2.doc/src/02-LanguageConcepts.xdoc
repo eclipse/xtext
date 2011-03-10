@@ -103,7 +103,7 @@ code[Java][
 	private MyService myService;
 ]
 
-Note that the visibiloty is always code[private], is you want to provide access to an injected object
+Note that the visibility is always code[private], is you want to provide access to an injected object
 you need to write an accessor function. 
 
 section2[Name can be inferred]

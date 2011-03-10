@@ -35,7 +35,7 @@ class «getJvmModelInferrerName().toSimpleName()» implements IJvmModelInferrer {
 
 	@Inject IJvmModelAssociator 
 
-   	List<? extends EObject> inferJvmModel(EObject sourceObject) {
+   	override List<? extends EObject> inferJvmModel(EObject sourceObject) {
    		return newArrayList();
    	}
 }
