@@ -47,6 +47,7 @@ public class Xtend2BuilderParticipantTest extends AbstractXtend2UITestCase {
 	public void testBuild() throws Exception {
 		IFile sourceFile = testHelper.createFile("test/Test", "package test\nclass Test {}");
 		sourceFile.setCharset(getNonDefaultEncoding(), null);
+		assertTrue(sourceFile.exists());
 		waitForAutoBuild();
 
 		IFile targetFile = testHelper.getProject().getFile("/xtend-gen/test/Test.java");
