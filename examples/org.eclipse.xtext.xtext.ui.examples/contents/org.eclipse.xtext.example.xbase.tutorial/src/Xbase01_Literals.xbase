@@ -1,0 +1,21 @@
+/*
+ * The primitive expressions are literals.
+ * Xbase only has literals for the most important data types.
+ */ 
+ 
+// Null Literal
+null
+
+// String Literal
+'Hello World'
+
+// Integer Literal
+42
+
+// Boolean Literal
+true
+false
+
+// Class Literal (in java : String.class)
+typeof(String)
+
