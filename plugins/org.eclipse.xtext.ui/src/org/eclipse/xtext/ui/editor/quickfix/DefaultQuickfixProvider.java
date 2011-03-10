@@ -127,7 +127,10 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 	}
 
 	protected EReference getUnresolvedEReference(final Issue issue, EObject target) {
-		ICompositeNode rootNode = NodeModelUtils.getNode(target).getRootNode();
+		final ICompositeNode node = NodeModelUtils.getNode(target);
+		if (node==null)
+			return null;
+		ICompositeNode rootNode = node.getRootNode();
 		ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(rootNode, issue.getOffset() + 1);
 		CrossReference crossReference = findCrossReference(target, leaf);
 		if (crossReference != null) {
