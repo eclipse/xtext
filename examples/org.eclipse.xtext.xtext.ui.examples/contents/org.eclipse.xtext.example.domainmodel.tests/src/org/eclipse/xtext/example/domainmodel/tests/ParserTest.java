@@ -1,5 +1,5 @@
 
-package org.eclipse.xtext.example.domainmodel.test;
+package org.eclipse.xtext.example.domainmodel.tests;
 
 import static junit.framework.Assert.*;
 import org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider;

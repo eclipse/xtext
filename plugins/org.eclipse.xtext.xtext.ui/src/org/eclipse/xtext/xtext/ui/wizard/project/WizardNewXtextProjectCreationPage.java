@@ -138,8 +138,8 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	protected boolean validatePage() {
 		if (!super.validatePage())
 			return false;
-		IStatus status = JavaConventions.validatePackageName(getProjectName(), JavaCore.VERSION_1_3,
-				JavaCore.VERSION_1_3);
+		IStatus status = JavaConventions.validatePackageName(getProjectName(), JavaCore.VERSION_1_5,
+				JavaCore.VERSION_1_5);
 		if (!status.isOK()) {
 			setErrorMessage(Messages.WizardNewXtextProjectCreationPage_ErrorMessageProjectName + status.getMessage());
 			return false;
@@ -149,8 +149,8 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		if (languageNameField.getText().length() == 0)
 			return false;
 
-		status = JavaConventions.validateJavaTypeName(languageNameField.getText(), JavaCore.VERSION_1_3,
-				JavaCore.VERSION_1_3);
+		status = JavaConventions.validateJavaTypeName(languageNameField.getText(), JavaCore.VERSION_1_5,
+				JavaCore.VERSION_1_5);
 		if (!status.isOK()) {
 			setErrorMessage(Messages.WizardNewXtextProjectCreationPage_ErrorMessageLanguageName + status.getMessage());
 			return false;

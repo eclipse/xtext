@@ -15,3 +15,9 @@ String getJvmModelInferrerName(Grammar this) :
     
 private String getJvmModelInferrerName(Grammar this, Naming naming) :
     JAVA org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment.getJvmModelInferrerName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
+
+String getRefactoringStrategyName(Grammar grammar) :
+	getRefactoringStrategyName(grammar,getNaming());
+	
+String getRefactoringStrategyName(Grammar grammar, Naming n) :
+	JAVA org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment.getRenameStrategyName(org.eclipse.xtext.Grammar,org.eclipse.xtext.generator.Naming);

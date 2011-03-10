@@ -47,12 +47,12 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 /**
+ * The main xtext generator. Can be configured with
+ * {@link IGeneratorFragment} instances as well as with some properties
+ * declared via setter or adder methods.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
- *
- *         The main xtext generator. Can be configured with
- *         {@link IGeneratorFragment} instances as well as with some properties
- *         declared via setter or adder methods.
  */
 public class Generator extends AbstractWorkflowComponent2 {
 

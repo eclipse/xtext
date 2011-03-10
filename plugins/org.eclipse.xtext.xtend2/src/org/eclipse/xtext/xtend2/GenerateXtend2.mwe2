@@ -74,7 +74,6 @@ Workflow {
 			fragment = xbase.XbaseGeneratorFragment {
 				generateInferrer = false
 			}
-			fragment = xbase.XbaseUiFragment {}
 		}
 	}
 }

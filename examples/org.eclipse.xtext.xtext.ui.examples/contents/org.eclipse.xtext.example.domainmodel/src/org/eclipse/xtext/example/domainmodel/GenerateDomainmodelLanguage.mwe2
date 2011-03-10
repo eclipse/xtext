@@ -30,11 +30,15 @@ Workflow {
 	component = DirectoryCleaner {
 		directory = "${runtimeProject}.ui/src-gen"
 	}
+	
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}.tests/src-gen"
+	}
 
 	component = Generator {
 		pathRtProject = runtimeProject
 		pathUiProject = "${runtimeProject}.ui"
-		pathTestProject = "${runtimeProject}.test"
+		pathTestProject = "${runtimeProject}.tests"
 		projectNameRt = projectName
 		projectNameUi = "${projectName}.ui"
 		
@@ -47,7 +51,10 @@ Workflow {
 
 			// Generate java classes for Ecore models
 			fragment = ecore.EcoreGeneratorFragment {
-				referencedGenModels = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel,platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel" 
+				referencedGenModels = "
+					platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel,
+					platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel
+				" 
 			}
 
 			// the serialization component
@@ -98,7 +105,6 @@ Workflow {
 			// Xbase support
 			fragment = types.TypesGeneratorFragment {}
 			fragment = xbase.XbaseGeneratorFragment {}
-			fragment = xbase.XbaseUiFragment {}
 			
 			// Code generator
 			fragment = generator.GeneratorFragment {}
