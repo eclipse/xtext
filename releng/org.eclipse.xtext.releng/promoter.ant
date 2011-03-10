@@ -203,13 +203,12 @@
 			</fileset>
 		</copy>
 
-		<!-- copy javadoc -->
-		<echo>Unzipping javadoc</echo>
-		<unzip dest="${build.drop.directory}/javadoc">
-			<fileset dir="${javadoc.directory}">
-				<filename name="javadoc.zip" />
-			</fileset>
-		</unzip>
+		<!-- if the build id starts with S or R build.stable property will be set -->
+		<condition property="build.stable" value="true">
+			<matches string="${saved.build.id}" pattern="[S|R](d)*" />
+		</condition>
+
+		<antcall target="-publish.javadoc" inheritall="true" />
 
 		<fileset id="drop.resources" dir="${build.drop.directory}">
 			<or>
@@ -280,6 +279,16 @@
 		<antcall target="-change.group.owner" inheritall="true">
 			<reference refid="repository.resources" torefid="change.group.owner.resources" />
 		</antcall>
+	</target>
+
+	<target name="-publish.javadoc">
+		<!-- copy javadoc -->
+		<echo>Unzipping javadoc</echo>
+		<unzip dest="${downloads.area}/javadoc/${version}">
+			<fileset dir="${javadoc.directory}">
+				<filename name="javadoc.zip" />
+			</fileset>
+		</unzip>
 	</target>
 
 	<target name="-change.group.owner" if="group.owner">

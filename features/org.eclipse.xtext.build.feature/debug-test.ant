@@ -8,12 +8,14 @@
 		<antcall target="-statistic.add" inheritall="true" />
 	</target>
 
-	
-	
-	<target name="-statistic.add" if="build.stable">
-		<echo>Stable build ${build.id} - adding statistic data</echo>
+	<target name="testStableBuildPattern">
+		<property name="build.id" value="S1212121212" />
+		<antcall target="-statistic.add" inheritall="true" />
 	</target>
 
-	
-	
+	<target name="-statistic.add" if="build.stable">
+		<condition property="build.stable" value="true">
+			<matches string="${build.id}" pattern="[S|R](d)*" />
+		</condition>
+	</target>
 </project>
