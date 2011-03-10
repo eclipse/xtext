@@ -1,8 +1,10 @@
 package org.eclipse.xtext.purexbase.jvmmodel
  
 import org.eclipse.xtext.xbase.jvmmodel.*
-import org.eclipse.emf.ecore.EObject
 import java.util.List
+import org.eclipse.xtext.common.types.JvmIdentifiableElement
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.common.types.JvmDeclaredType
 
 /**
  * Infers a JVM model from the source model. 
@@ -15,7 +17,7 @@ class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
 
 	@Inject IJvmModelAssociator 
 
-   	override List<? extends EObject> inferJvmModel(EObject sourceObject) {
+   	override List<? extends JvmDeclaredType> inferJvmModel(EObject sourceObject) {
    		return newArrayList();
    	}
 }

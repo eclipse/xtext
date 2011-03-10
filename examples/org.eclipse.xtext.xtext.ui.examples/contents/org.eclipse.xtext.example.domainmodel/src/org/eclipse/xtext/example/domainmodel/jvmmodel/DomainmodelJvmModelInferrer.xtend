@@ -27,33 +27,33 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 	
 	@Inject extension DomainmodelExtensions
 
-	override List<EObject> inferJvmModel(EObject sourceObject) {
+	override List<JvmDeclaredType> inferJvmModel(EObject sourceObject) {
 		transform(sourceObject).toList
 	}
 	
-	dispatch Iterable<EObject> transform(DomainModel model) {
+	dispatch Iterable<JvmDeclaredType> transform(DomainModel model) {
 		model.elements.map(e|transform(e)).flatten
 	}
 	 
-	dispatch Iterable<EObject> transform(PackageDeclaration packageDecl) {
+	dispatch Iterable<JvmDeclaredType> transform(PackageDeclaration packageDecl) {
 		packageDecl.elements.map(e|transform(e)).flatten
 	}
 
-	dispatch Iterable<EObject> transform(Entity entity) {
+	dispatch Iterable<JvmDeclaredType> transform(Entity entity) {
 		val jvmClass = typesFactory.createJvmGenericType 
 		jvmClass.simpleName = entity.name
 		jvmClass.packageName = entity.packageName
 		entity.associatePrimary(jvmClass)
 		jvmClass.setPublic
 		entity.features.forEach(feature|transform(feature, jvmClass))
-		newArrayList(jvmClass as EObject) 	 
+		newArrayList(jvmClass as JvmDeclaredType) 	 
 	}
 	
-	dispatch Iterable<EObject> transform(Import importDecl) {
+	dispatch Iterable<JvmDeclaredType> transform(Import importDecl) {
 		return newArrayList
 	}
 	
-	dispatch Iterable<EObject> transform(Void nothing) {
+	dispatch Iterable<JvmDeclaredType> transform(Void nothing) {
 		return newArrayList
 	}
 	

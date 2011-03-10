@@ -15,6 +15,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
@@ -89,6 +91,25 @@ public class DomainmodelScopeProvider extends XbaseScopeProvider {
 
 	protected JvmType getJvmType(Entity entity) {
 		Iterable<JvmType> jvmElements = filter(associations.getJvmElements(entity), JvmType.class);
+		// TODO: Remove this workaround
+		jvmElements = filter(jvmElements, new Predicate<JvmType>() {
+
+			public boolean apply(JvmType type) {
+				return !type.eIsProxy();
+			}
+			
+		});
 		return (isEmpty(jvmElements) ? null : jvmElements.iterator().next());
+	}
+	
+	@Override
+	protected JvmDeclaredType getContextType(EObject call) {
+		if (call == null)
+			return null;
+		Entity containerClass = EcoreUtil2.getContainerOfType(call, Entity.class);
+		if (containerClass != null)
+			return (JvmDeclaredType) getJvmType(containerClass);
+		else
+			return super.getContextType(call);
 	}
 }

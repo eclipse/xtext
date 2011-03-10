@@ -12,7 +12,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public interface IJvmModelAssociations {
 	

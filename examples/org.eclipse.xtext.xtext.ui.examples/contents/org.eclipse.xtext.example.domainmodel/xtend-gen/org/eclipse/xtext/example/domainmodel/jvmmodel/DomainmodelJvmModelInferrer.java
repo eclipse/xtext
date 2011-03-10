@@ -5,6 +5,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -39,42 +40,42 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
   @com.google.inject.Inject private JvmVisibilityExtension jvmVisibilityExtension;
   @com.google.inject.Inject private DomainmodelExtensions domainmodelExtensions;
   
-  public List<EObject> inferJvmModel(final EObject sourceObject) {
-    Iterable<EObject> _transform = _this.transform(sourceObject);
-    List<EObject> _list = IterableExtensions.toList(_transform);
+  public List<JvmDeclaredType> inferJvmModel(final EObject sourceObject) {
+    Iterable<JvmDeclaredType> _transform = _this.transform(sourceObject);
+    List<JvmDeclaredType> _list = IterableExtensions.toList(_transform);
     return _list;
   }
   
-  public Iterable<EObject> _transform(final DomainModel model) {
+  public Iterable<JvmDeclaredType> _transform(final DomainModel model) {
     EList<AbstractElement> _elements = model.getElements();
-    final Function1<AbstractElement,Iterable<EObject>> function = new Function1<AbstractElement,Iterable<EObject>>() {
-        public Iterable<EObject> apply(AbstractElement e) {
+    final Function1<AbstractElement,Iterable<JvmDeclaredType>> function = new Function1<AbstractElement,Iterable<JvmDeclaredType>>() {
+        public Iterable<JvmDeclaredType> apply(AbstractElement e) {
           final AbstractElement typeConverted_e = (AbstractElement)e;
-          Iterable<EObject> _transform = _this.transform(typeConverted_e);
+          Iterable<JvmDeclaredType> _transform = _this.transform(typeConverted_e);
           return _transform;
         }
       };
-    List<Iterable<EObject>> _map = ListExtensions.map(_elements, function);
-    Iterable<EObject> _flatten = IterableExtensions.flatten(_map);
+    List<Iterable<JvmDeclaredType>> _map = ListExtensions.map(_elements, function);
+    Iterable<JvmDeclaredType> _flatten = IterableExtensions.flatten(_map);
     return _flatten;
   }
   
-  public Iterable<EObject> _transform(final PackageDeclaration packageDecl) {
+  public Iterable<JvmDeclaredType> _transform(final PackageDeclaration packageDecl) {
     EList<AbstractElement> _elements = packageDecl.getElements();
-    final Function1<AbstractElement,Iterable<EObject>> function = new Function1<AbstractElement,Iterable<EObject>>() {
-        public Iterable<EObject> apply(AbstractElement e) {
+    final Function1<AbstractElement,Iterable<JvmDeclaredType>> function = new Function1<AbstractElement,Iterable<JvmDeclaredType>>() {
+        public Iterable<JvmDeclaredType> apply(AbstractElement e) {
           final AbstractElement typeConverted_e = (AbstractElement)e;
-          Iterable<EObject> _transform = _this.transform(typeConverted_e);
+          Iterable<JvmDeclaredType> _transform = _this.transform(typeConverted_e);
           return _transform;
         }
       };
-    List<Iterable<EObject>> _map = ListExtensions.map(_elements, function);
-    Iterable<EObject> _flatten = IterableExtensions.flatten(_map);
+    List<Iterable<JvmDeclaredType>> _map = ListExtensions.map(_elements, function);
+    Iterable<JvmDeclaredType> _flatten = IterableExtensions.flatten(_map);
     return _flatten;
   }
   
-  public Iterable<EObject> _transform(final Entity entity) {
-    ArrayList<EObject> _xblockexpression = null;
+  public Iterable<JvmDeclaredType> _transform(final Entity entity) {
+    ArrayList<JvmDeclaredType> _xblockexpression = null;
     {
       TypesFactory _typesFactory = _this.typesFactory;
       JvmGenericType _createJvmGenericType = _typesFactory.createJvmGenericType();
@@ -100,19 +101,19 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
           }
         };
       IterableExtensions.forEach(_features, function);
-      ArrayList<EObject> _newArrayList = CollectionLiterals.newArrayList(((org.eclipse.emf.ecore.EObject) jvmClass));
+      ArrayList<JvmDeclaredType> _newArrayList = CollectionLiterals.newArrayList(((org.eclipse.xtext.common.types.JvmDeclaredType) jvmClass));
       _xblockexpression = (_newArrayList);
     }
     return _xblockexpression;
   }
   
-  public Iterable<EObject> _transform(final Import importDecl) {
-    ArrayList<EObject> _newArrayList = CollectionLiterals.newArrayList();
+  public Iterable<JvmDeclaredType> _transform(final Import importDecl) {
+    ArrayList<JvmDeclaredType> _newArrayList = CollectionLiterals.newArrayList();
     return _newArrayList;
   }
   
-  public Iterable<EObject> _transform(final Void nothing) {
-    ArrayList<EObject> _newArrayList = CollectionLiterals.newArrayList();
+  public Iterable<JvmDeclaredType> _transform(final Void nothing) {
+    ArrayList<JvmDeclaredType> _newArrayList = CollectionLiterals.newArrayList();
     return _newArrayList;
   }
   
@@ -231,7 +232,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
     }
   }
   
-  public Iterable<EObject> transform(final EObject entity) {
+  public Iterable<JvmDeclaredType> transform(final EObject entity) {
     if ((entity instanceof Entity)) {
       return _transform((Entity)entity);
     } else if ((entity instanceof Import)) {
