@@ -86,7 +86,7 @@ public class XtextProjectInfo implements IProjectInfo {
 	}
 
 	public String getTestProjectName() {
-		return getProjectName() + ".test"; //$NON-NLS-1$
+		return getProjectName() + ".tests"; //$NON-NLS-1$
 	}
 
 	public String getUiProjectName() {

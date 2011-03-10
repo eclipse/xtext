@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.example.domainmodel.test
 Bundle-Vendor: My Company
 Bundle-Version: 1.0.0
-Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel.test; singleton:=true
+Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel.tests;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.example.domainmodel,
  org.eclipse.xtext.example.domainmodel.ui,
