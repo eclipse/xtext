@@ -412,13 +412,16 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	protected StyledString getStyledDisplayString(JvmFeature feature, boolean withParenths, String qualifiedNameAsString, String shortName) {
 		StyledString result = new StyledString(shortName);
 		if (feature instanceof JvmOperation) {
+			JvmOperation operation = (JvmOperation) feature;
 			if (withParenths) {
 				result.append('(');
 				appendParameters(result, (JvmExecutable)feature);
 				result.append(')');
 			}
-			result.append(" : ");
-			result.append(((JvmOperation) feature).getReturnType().getSimpleName());
+			if (operation.getReturnType() != null) {
+				result.append(" : ");
+				result.append(operation.getReturnType().getSimpleName());
+			}
 			result.append(" - ", StyledString.QUALIFIER_STYLER);
 			result.append(feature.getDeclaringType().getSimpleName(), StyledString.QUALIFIER_STYLER);
 			if (!withParenths) {
