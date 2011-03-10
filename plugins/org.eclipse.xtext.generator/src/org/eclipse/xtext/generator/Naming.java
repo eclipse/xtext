@@ -14,11 +14,9 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.util.Strings;
 
 /**
+ * Utility class providing names and the like for general artifacts used in all Xtext projects There's a
+ * corresponding Xtend file (Naming.ext) mapping the methods defined inhere to Xtend signatures.
  * @author Sven Efftinge - Initial contribution and API
- *
- *         Utility class providing names and the like for general artifacts used in all Xtext projects There's a
- *         corresponding Xtend file (Naming.ext) mapping the methods defined inhere to Xtend signatures.
- *
  */
 public class Naming {
 

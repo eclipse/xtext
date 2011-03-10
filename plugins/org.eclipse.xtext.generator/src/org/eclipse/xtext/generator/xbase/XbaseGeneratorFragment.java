@@ -7,12 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.xbase;
 
-import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -31,6 +31,8 @@ import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 
+import com.google.common.collect.Lists;
+
 /**
  * Prepares a host language to embed Xbase. Use with {@link org.eclipse.xtext.generator.types.TypesGeneratorFragment}.
  *
@@ -40,6 +42,18 @@ import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	
 	private boolean generateInferrer = true;
+	
+	protected boolean usesXbaseGrammar(Grammar grammar) {
+		if (grammar.getName().equals("org.eclipse.xtext.xbase.Xbase"))
+			return true;
+		EList<Grammar> usedGrammars = grammar.getUsedGrammars();
+		for (Grammar grammar2 : usedGrammars) {
+			if (usesXbaseGrammar(grammar2)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public void setGenerateInferrer(boolean generateInferrer) {
 		this.generateInferrer = generateInferrer;
@@ -51,7 +65,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
-		if (!XbaseUtil.usesXbaseGrammar(grammar))
+		if (!usesXbaseGrammar(grammar))
 			return emptySet();
 		BindFactory config = new BindFactory()
 				.addTypeToType("org.eclipse.xtext.xbase.interpreter.IEvaluationContext",
@@ -105,7 +119,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
-		if (!XbaseUtil.usesXbaseGrammar(grammar))
+		if (!usesXbaseGrammar(grammar))
 			return emptySet();
 		return new BindFactory()
 				.addTypeToType("org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper",
@@ -116,32 +130,44 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 						"org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor")
 				.addTypeToType("org.eclipse.xtext.ui.editor.findrefs.FindReferenceQueryDataFactory", 
 						"org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceQueryDataFactory")
+				// rename refactoring
+				.addTypeToType("org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator",
+						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelDependentElementsCalculator")
+				.addTypeToType("org.eclipse.xtext.ui.refactoring.impl.RefactoringReferenceQueryDataFactory",
+						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelFindRefsQueryDataFactory")
+				.addTypeToType("org.eclipse.xtext.ui.refactoring.IReferenceUpdater",
+						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelReferenceUpdater")
+				.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider",
+						getRenameStrategyName(grammar, getNaming())+".Provider")
 				.getBindings();
 	}
 
 	@Override
 	public String[] getRequiredBundlesRt(Grammar grammar) {
-		if (!XbaseUtil.usesXbaseGrammar(grammar))
+		if (!usesXbaseGrammar(grammar))
 			return new String[0];
 		return new String[] { "org.eclipse.xtext.xbase", "org.eclipse.xtext.xtend2.lib" };
 	}
 
 	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
-		if (!XbaseUtil.usesXbaseGrammar(grammar))
+		if (!usesXbaseGrammar(grammar))
 			return new String[0];
 		return new String[] { "org.eclipse.xtext.xbase.ui" };
 	}
 
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
-		if (XbaseUtil.usesXbaseGrammar(grammar))
+		if (usesXbaseGrammar(grammar))
 			super.generate(grammar, ctx);
 	}
 	
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		return newArrayList((Object)generateInferrer);
+		return Lists.<Object>newArrayList(generateInferrer);
 	}
 
+	public static String getRenameStrategyName(Grammar grammar, Naming naming) {
+		return naming.basePackageUi(grammar) + ".refactoring." + GrammarUtil.getName(grammar) + "RenameStrategy";
+	}
 }
