@@ -146,6 +146,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	public void setClassLoader(ClassLoader classLoader) {
 		this.classFinder = new ClassFinder(classLoader);
 		this.classLoader = classLoader;
+		this.javaReflectAccess.setClassLoader(classLoader);
 	}
 	
 	protected Class<?> getClass(Class<?> class1) {
