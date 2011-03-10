@@ -130,4 +130,31 @@
 		 <projectDescriptor name="org.eclipse.xtext.gmf.glue" contentURI="contents/org.eclipse.xtext.gmf.glue.zip" description="Generic Xtext/GMF glue code"/>
 	  </example>
    </extension>
+   
+   <!-- ========= org.eclipse.xtext.example.xbase.tutorial ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtext.examples.NewXbaseTutorial" 
+			name="%XbaseTutorial_name" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.ui.Examples/org.eclipse.xtext.ui.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>%XbaseTutorial_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtext.examples.NewXbaseTutorial" 
+			name="%XbaseTutorial_name" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.xtext.projectwiz/org.eclipse.xtext.project.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>%XbaseTutorial_description</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	  <example wizardID="org.eclipse.xtext.examples.NewXbaseTutorial" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.xtext.example.xbase.tutorial" contentURI="contents/org.eclipse.xtext.example.xbase.tutorial.zip" description="A hands-on tutorial to learn the Xbase expression language."/>
+	  </example>
+   </extension>
 </plugin>
