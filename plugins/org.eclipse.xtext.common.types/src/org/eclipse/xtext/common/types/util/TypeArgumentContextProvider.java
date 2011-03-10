@@ -205,8 +205,11 @@ public class TypeArgumentContextProvider {
 						throw new IllegalStateException("VarArg methods expect last paramter to be an array type");
 					}
 					JvmTypeReference componentType = ((JvmArrayType) parameterType.getType()).getComponentType();
-					List<JvmTypeReference> varArgTypes = Lists.newArrayList(Iterables.filter(
+					List<JvmTypeReference> varArgTypes = emptyList();
+					if (paramCount<= argumentTypes.length) {
+						varArgTypes = Lists.newArrayList(Iterables.filter(
 							Arrays.asList(argumentTypes).subList(paramCount, argumentTypes.length), Predicates.notNull()));
+					}
 					if (!varArgTypes.isEmpty()) {
 						JvmTypeReference commonVarArgType = conformanceComputer.getCommonSuperType(varArgTypes);
 						resolve(componentType, commonVarArgType, map, false);
