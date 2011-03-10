@@ -7,6 +7,7 @@
  *******************************************************************************/
 package testdata;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -35,6 +36,14 @@ public class ClassWithVarArgs {
 		if (strings == null)
 			return null;
 		return Lists.newArrayList(strings);
+	}
+	
+	public List<String> stringsToList2(String firstArg, String... strings) {
+		if (strings == null)
+			return null;
+		final ArrayList<String> result = Lists.newArrayList(firstArg);
+		result.addAll(Lists.newArrayList(strings));
+		return result;
 	}
 	
 	public <T> List<T> toList(T... args) {
