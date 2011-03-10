@@ -19,6 +19,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IPackageFragment;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.ui.dialogs.StatusInfo;
 import org.eclipse.jdt.ui.wizards.NewTypeWizardPage;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -120,14 +121,14 @@ public class NewXtend2ClassWizardPage extends NewTypeWizardPage {
 		if(monitor == null){
 			monitor = new NullProgressMonitor();
 		}
-		IResource res = getPackageFragment().getResource();
-		if(!res.exists()) {
+		if(!getPackageFragment().exists()) {
 			try {
-				((IFolder)res).create(IResource.NONE, true, monitor);
-			} catch (final CoreException e) {
+				getPackageFragmentRoot().createPackageFragment(getPackageFragment().getElementName(), true, monitor);
+			} catch (JavaModelException e) {
 				displayError(Messages.ERROR_CREATING_PACKAGE, e.getMessage());
 			}
 		}
+		IResource res = getPackageFragment().getResource();
 		IFile xtendClass = null;
 			xtendClass = ((IFolder) res).getFile(getTypeName() + ".xtend"); //$NON-NLS-1$
 		try {
