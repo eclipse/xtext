@@ -3,7 +3,11 @@ package org.eclipse.xtext.purexbase.ui.autoedit;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.List;
+import java.util.Set;
 
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IClasspathEntry;
@@ -25,11 +29,14 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
+import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+
+import static com.google.common.collect.Sets.*;
 
 public class ReplAutoEdit implements IAutoEditStrategy {
 
@@ -98,7 +105,12 @@ public class ReplAutoEdit implements IAutoEditStrategy {
 			return null;
 		XbaseInterpreter xbaseInterpreter = getConfiguredInterpreter(resource);
 		IEvaluationResult result = xbaseInterpreter
-				.evaluate(model.getBlock());
+				.evaluate(model.getBlock(),new DefaultEvaluationContext(),new CancelIndicator() {
+					private long stopAt = System.currentTimeMillis()+2000;
+					public boolean isCanceled() {
+						return System.currentTimeMillis()>stopAt;
+					}
+				});
 		if (result == null)
 			return null;
 
@@ -120,13 +132,33 @@ public class ReplAutoEdit implements IAutoEditStrategy {
 			Object context = ((XtextResourceSet) set).getClasspathURIContext();
 			if (context instanceof IJavaProject) {
 				try {
-					IClasspathEntry[] classpath = ((IJavaProject) context)
+					final IJavaProject jp = (IJavaProject) context;
+//					String[] runtimeClassPath = JavaRuntime.computeDefaultRuntimeClassPath(jp);
+//					URL[] urls = new URL[runtimeClassPath.length];
+//					for (int i = 0; i < urls.length; i++) {
+//						urls[i] = new URL(runtimeClassPath[i]);
+//					}
+//					cl = new URLClassLoader(urls);
+					IClasspathEntry[] classpath = jp
 							.getResolvedClasspath(true);
-					URL[] urls = new URL[classpath.length];
-					for (int i = 0; i < urls.length; i++) {
-						urls[i] = classpath[i].getPath().toFile().toURL();
+					final IWorkspaceRoot root = jp.getProject().getWorkspace().getRoot();
+					Set<URL> urls = newHashSet();
+					for (int i = 0; i < classpath.length; i++) {
+						final IClasspathEntry entry = classpath[i];
+						if (entry.getEntryKind() == IClasspathEntry.CPE_SOURCE) {
+							IPath outputLocation = entry.getOutputLocation();
+							if (outputLocation==null) {
+								outputLocation = jp.getOutputLocation();
+							}
+							IFolder folder = root.getFolder(outputLocation);
+							if (folder.exists()) {
+								urls.add(new URL(folder.getRawLocationURI().toASCIIString()+"/"));
+							}
+						} else {
+							urls.add(entry.getPath().toFile().toURL());
+						}
 					}
-					cl = new URLClassLoader(urls);
+					cl = new URLClassLoader(urls.toArray(new URL[urls.size()]));
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
