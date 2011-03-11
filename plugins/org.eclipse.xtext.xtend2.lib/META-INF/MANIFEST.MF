@@ -11,3 +11,4 @@ Import-Package: org.eclipse.emf.common.notify;resolution:=optional,
  org.eclipse.emf.ecore;resolution:=optional,
  org.eclipse.emf.ecore.resource;resolution:=optional
 Bundle-Vendor: %pluginName
+Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.0.0";visibility:=reexport
