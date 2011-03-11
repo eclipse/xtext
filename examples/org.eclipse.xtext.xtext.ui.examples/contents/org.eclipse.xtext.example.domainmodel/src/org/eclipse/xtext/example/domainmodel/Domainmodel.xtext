@@ -8,7 +8,6 @@
 grammar org.eclipse.xtext.example.domainmodel.Domainmodel with org.eclipse.xtext.xbase.Xbase
 
 generate domainmodel "http://www.xtext.org/example/Domainmodel"
-import "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore" as xbase
 
 DomainModel:
 	elements+=AbstractElement*;
@@ -36,7 +35,8 @@ Property:
 	name=ID ':' type=JvmTypeReference;
 
 Operation:
-	visibility=Visibility? 'op' name=ID '(' (params+=JvmFormalParameter (',' params+=JvmFormalParameter)*)? ')' ':' type=JvmTypeReference body=XBlockExpression;
+	visibility=Visibility? 'op' name=ID '(' (params+=JvmFormalParameter (',' params+=JvmFormalParameter)*)? ')' ':' type=JvmTypeReference 
+		body=XBlockExpression;
 
 enum Visibility:
 	public | private | protected;

@@ -28,6 +28,7 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 	@Inject extension DomainmodelExtensions
 
 	override List<JvmDeclaredType> inferJvmModel(EObject sourceObject) {
+		sourceObject.disassociate
 		transform(sourceObject).toList
 	}
 	
