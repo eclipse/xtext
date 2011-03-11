@@ -41,9 +41,15 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
   @com.google.inject.Inject private DomainmodelExtensions domainmodelExtensions;
   
   public List<JvmDeclaredType> inferJvmModel(final EObject sourceObject) {
-    Iterable<JvmDeclaredType> _transform = _this.transform(sourceObject);
-    List<JvmDeclaredType> _list = IterableExtensions.toList(_transform);
-    return _list;
+    List<JvmDeclaredType> _xblockexpression = null;
+    {
+      IJvmModelAssociator _iJvmModelAssociator = iJvmModelAssociator;
+      _iJvmModelAssociator.disassociate(sourceObject);
+      Iterable<JvmDeclaredType> _transform = _this.transform(sourceObject);
+      List<JvmDeclaredType> _list = IterableExtensions.toList(_transform);
+      _xblockexpression = (_list);
+    }
+    return _xblockexpression;
   }
   
   public Iterable<JvmDeclaredType> _transform(final DomainModel model) {

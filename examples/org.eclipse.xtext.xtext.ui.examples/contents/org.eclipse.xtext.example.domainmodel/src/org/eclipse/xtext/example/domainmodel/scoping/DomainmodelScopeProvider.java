@@ -18,7 +18,6 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Operation;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -31,7 +30,6 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
@@ -46,21 +44,6 @@ public class DomainmodelScopeProvider extends XbaseScopeProvider {
 
 	@Inject
 	private IJvmModelAssociations associations;
-	
-	@Override
-	public IScope getScope(EObject context, EReference reference) {
-		IScope parent = super.getScope(context, reference);
-		if(TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(reference.getEReferenceType())) {
-			Entity entity = EcoreUtil2.getContainerOfType(context, Entity.class);
-			if (entity != null) {
-				JvmType jvmType = getJvmType(entity);
-				if (jvmType != null && !Strings.isEmpty(jvmType.getSimpleName())) {
-					return new SimpleScope(parent, singleton(EObjectDescription.create(QualifiedName.create(jvmType.getSimpleName()), jvmType)));
-				}
-			}
-		}
-		return parent;
-	}
 	
 	@Override
 	protected IScope createLocalVarScope(EObject context, EReference reference, IScope parent,
@@ -91,14 +74,6 @@ public class DomainmodelScopeProvider extends XbaseScopeProvider {
 
 	protected JvmType getJvmType(Entity entity) {
 		Iterable<JvmType> jvmElements = filter(associations.getJvmElements(entity), JvmType.class);
-		// TODO: Remove this workaround
-		jvmElements = filter(jvmElements, new Predicate<JvmType>() {
-
-			public boolean apply(JvmType type) {
-				return !type.eIsProxy();
-			}
-			
-		});
 		return (isEmpty(jvmElements) ? null : jvmElements.iterator().next());
 	}
 	

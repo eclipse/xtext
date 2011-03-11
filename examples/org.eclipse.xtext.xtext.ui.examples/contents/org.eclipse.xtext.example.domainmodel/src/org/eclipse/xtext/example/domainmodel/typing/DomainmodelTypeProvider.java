@@ -18,15 +18,14 @@ import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
  */
 public class DomainmodelTypeProvider extends XbaseTypeProvider {
 
+	/**
+	 * The operation body is expected to return the declared return type of 
+	 * the operation itself.
+	 * @return the operation's return type or null if queried with another reference or for an invalid reference.
+	 */
 	protected JvmTypeReference _expectedType(Operation operation, EReference reference, int index, boolean rawType) {
 		if(reference == DomainmodelPackage.Literals.OPERATION__BODY) {
-			if(operation.getType() != null) {
-				if(!rawType || operation.getType().getArguments().isEmpty()) {
-					return operation.getType();
-				} else {
-					return getTypeReferences().createTypeRef(operation.getType().getType());
-				}
-			}
+			return operation.getType();
 		}				
 		return null; 
 	}
