@@ -30,12 +30,5 @@ list2.map(shape |
 				
 		})
 // [a square : size=5, a circle : diameter=4, a rectangle : width=8 height=6] (List<String>)
-		
-
-
-
-
-
-
 
 
