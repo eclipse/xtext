@@ -10,7 +10,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
-public class Xbase06_Switch {
+public class Xbase10_Switch {
 	public static void main(String[] args) {
 		
 		{

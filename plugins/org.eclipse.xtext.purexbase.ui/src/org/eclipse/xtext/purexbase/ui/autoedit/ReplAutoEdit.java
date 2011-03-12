@@ -116,9 +116,13 @@ public class ReplAutoEdit implements IAutoEditStrategy {
 		if (result == null)
 			return null;
 
+		String value = ""+result.getResult();
+		if (result.getException()!=null)
+			value = "threw "+result.getException().getClass().getSimpleName();
+		
 		String newText = command.text
 				+ "// "
-				+ result.getResult()
+				+ value
 				+ " ("
 				+ typeProvider.getType(expression)
 						.getSimpleName() + ")"

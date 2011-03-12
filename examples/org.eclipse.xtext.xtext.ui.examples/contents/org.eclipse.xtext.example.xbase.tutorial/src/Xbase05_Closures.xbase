@@ -16,7 +16,7 @@ f.apply('World!')
 
 val list = newArrayList('a', 'b', 'c')
 
-list.map(e | e.toUpperCase)
+list.map( e | e.toUpperCase )
 // [A, B, C] (List<String>)
 
 
