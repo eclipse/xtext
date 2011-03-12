@@ -62,7 +62,8 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		"  private final Bar _this = this;\n" + 
 		"  \n" + 
 		"  public String foo() {\n" + 
-		"    return new String();\n" + 
+		"    String _string = new String();\n" + 
+		"    return _string;\n" + 
 		"  }\n" + 
 		"}";
 		assertCompilesTo(expected, input);
@@ -118,7 +119,8 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			"  private final Bar _this = this;\n" +
 			"  \n" +
 			"  public HashMap<String,Serializable> foo() {\n" +
-			"    return new HashMap<String,Serializable>();\n" +
+			"    HashMap<String,Serializable> _hashMap = new HashMap<String,Serializable>();\n" + 
+			"    return _hashMap;\n" +
 			"  }\n" + 
 			"}";
 		assertCompilesTo(expected, input);

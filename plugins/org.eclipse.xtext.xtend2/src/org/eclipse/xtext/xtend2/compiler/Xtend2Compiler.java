@@ -105,11 +105,12 @@ public class Xtend2Compiler extends XbaseCompiler {
 	}
 
 	@Override
-	protected boolean isLocalVarReference(XAbstractFeatureCall expr) {
-		if (expr.getFeature() instanceof XtendClass) {
-			return true;
+	protected boolean isVariableDeclarationRequired(XExpression expr) {
+		if (expr instanceof XAbstractFeatureCall 
+				&& ((XAbstractFeatureCall)expr).getFeature() instanceof XtendClass) {
+			return false;
 		}
-		return super.isLocalVarReference(expr);
+		return super.isVariableDeclarationRequired(expr);
 	}
 
 	protected void compile(XtendClass obj, IAppendable appendable) {
