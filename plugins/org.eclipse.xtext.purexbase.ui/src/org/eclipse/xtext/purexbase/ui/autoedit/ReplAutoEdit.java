@@ -6,12 +6,14 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IAutoEditStrategy;
@@ -149,6 +151,17 @@ public class ReplAutoEdit implements IAutoEditStrategy {
 							IPath outputLocation = entry.getOutputLocation();
 							if (outputLocation==null) {
 								outputLocation = jp.getOutputLocation();
+							}
+							IFolder folder = root.getFolder(outputLocation);
+							if (folder.exists()) {
+								urls.add(new URL(folder.getRawLocationURI().toASCIIString()+"/"));
+							}
+						} else if (entry.getEntryKind() == IClasspathEntry.CPE_PROJECT) {
+							IPath outputLocation = entry.getOutputLocation();
+							if (outputLocation==null) {
+								IProject project = (IProject) jp.getProject().getWorkspace().getRoot().getContainerForLocation(entry.getPath());
+								IJavaProject javaProject = JavaCore.create(project);
+								outputLocation = javaProject.getOutputLocation();
 							}
 							IFolder folder = root.getFolder(outputLocation);
 							if (folder.exists()) {
