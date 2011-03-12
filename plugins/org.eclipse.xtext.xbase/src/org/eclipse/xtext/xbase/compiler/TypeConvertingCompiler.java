@@ -44,6 +44,11 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	
 	@Inject
 	private Primitives primitives;
+	
+	/*
+	 * TODO
+	 * Do the conversion as post processing of toJavaStatement
+	 */
 
 	@Override
 	protected void internalToJavaExpression(final XExpression obj, final IAppendable appendable) {

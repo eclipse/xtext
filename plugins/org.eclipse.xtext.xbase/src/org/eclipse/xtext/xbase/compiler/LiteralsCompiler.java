@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.compiler;
 
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XIntLiteral;
 import org.eclipse.xtext.xbase.XNullLiteral;
@@ -67,5 +68,17 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	
 	public void _toJavaStatement(XTypeLiteral expr, IAppendable b, boolean isReferenced) {
 		generateComment(expr, b, isReferenced);
+	}
+	
+	@Override
+	protected boolean isVariableDeclarationRequired(XExpression expr) {
+		if (expr instanceof XBooleanLiteral
+			|| expr instanceof XStringLiteral
+			|| expr instanceof XIntLiteral
+			|| expr instanceof XTypeLiteral
+			|| expr instanceof XClosure
+			|| expr instanceof XNullLiteral)
+			return false;
+		return super.isVariableDeclarationRequired(expr);
 	}
 }

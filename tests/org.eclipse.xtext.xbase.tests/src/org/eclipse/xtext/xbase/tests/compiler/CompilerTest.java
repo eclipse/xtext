@@ -30,11 +30,28 @@ public class CompilerTest extends AbstractXbaseTestCase {
 				"return _length;", "'foo'.length");
 	}
 	
+	public void testFieldAccessDontGetAVariableDeclaration() throws Exception {
+		assertCompilesTo(
+				"\ntestdata.Properties1 _properties1 = new testdata.Properties1();" + 
+				"\nreturn _properties1.prop1;", 
+				"new testdata.Properties1().prop1");
+	}
+	
+//TODO	
+//	public void testNoUnneccessaryConversionStatement() throws Exception {
+//		assertCompilesTo(
+//				
+//				No unneccessary conversion!
+//				
+//				"{ val x = new testdata.Properties1() x.toString()}");
+//	}
+	
 	public void testBlock() throws Exception {
 		assertCompilesTo(
 				"\nint _xblockexpression = (int)-1;\n" +
 				"{\n" +
-				"  final java.util.ArrayList<String> _this = new java.util.ArrayList<String>();\n" +
+				"  java.util.ArrayList<String> _arrayList = new java.util.ArrayList<String>();\n" + 
+				"  final java.util.ArrayList<String> _this = _arrayList;\n" +
 				"  int _size = _this.size();\n" + 
 				"  _xblockexpression = (_size);\n" +
 				"}\n" +
@@ -55,7 +72,8 @@ public class CompilerTest extends AbstractXbaseTestCase {
 
 	public void testForEach() throws Exception {
 		assertCompilesTo(
-				"\nfor (String s : new java.util.ArrayList<String>()) {\n" +
+				"\njava.util.ArrayList<String> _arrayList = new java.util.ArrayList<String>();\n" + 
+				"for (String s : _arrayList) {\n" +
 				"  s.length();\n" +
 				"}"
 				, "for (String s : new java.util.ArrayList<String>())" +
