@@ -23,6 +23,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
@@ -226,6 +227,10 @@ public abstract class AbstractXbaseCompiler {
 				name = Strings.toFirstLower(name.substring(2));
 			return "_"+name;
 		}
+		if (ex instanceof XConstructorCall) {
+			String name = ((XConstructorCall) ex).getConstructor().getSimpleName();
+			return "_"+Strings.toFirstLower(name);
+		}
 		return "_"+Strings.toFirstLower(ex.eClass().getName().toLowerCase());
 	}
 
@@ -270,4 +275,11 @@ public abstract class AbstractXbaseCompiler {
 		b.append(";");
 	}
 
+	/**
+	 * whether an expression needs to be declared in a statement
+	 * If an expression has side effects this method must return true for it.
+	 */
+	protected boolean isVariableDeclarationRequired(XExpression expr) {
+		return true;
+	}
 }

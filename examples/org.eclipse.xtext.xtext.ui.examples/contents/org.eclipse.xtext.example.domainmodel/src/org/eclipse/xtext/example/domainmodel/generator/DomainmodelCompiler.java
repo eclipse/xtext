@@ -11,6 +11,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Operation;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
@@ -31,11 +32,12 @@ public class DomainmodelCompiler extends XbaseCompiler {
 	}
 	
 	@Override
-	protected boolean isLocalVarReference(XAbstractFeatureCall expr) {
-		if (expr.getFeature() instanceof JvmGenericType) {
-			return true;
+	protected boolean isVariableDeclarationRequired(XExpression expr) {
+		if (expr instanceof XAbstractFeatureCall 
+				&& ((XAbstractFeatureCall)expr).getFeature() instanceof JvmGenericType) {
+			return false;
 		}
-		return super.isLocalVarReference(expr);
+		return super.isVariableDeclarationRequired(expr);
 	}
 
 	@Override

@@ -230,28 +230,41 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.decreaseIndentation().append("\n}");
 	}
 
-	protected void _toJavaStatement(XConstructorCall expr, IAppendable b, boolean isReferenced) {
+	protected void _toJavaStatement(final XConstructorCall expr, final IAppendable b, final boolean isReferenced) {
 		for (XExpression arg : expr.getArguments()) {
 			internalToJavaStatement(arg, b, true);
+		}
+		
+		Later later = new Later() {
+			@Override
+			public void exec() {
+				b.append("new ");
+				b.append(expr.getConstructor().getDeclaringType());
+				if (!expr.getTypeArguments().isEmpty()) {
+					b.append("<");
+					for (int i = 0; i < expr.getTypeArguments().size(); i++) {
+						JvmTypeReference arg = expr.getTypeArguments().get(i);
+						b.append(arg);
+						if (i + 1 < expr.getTypeArguments().size())
+							b.append(",");
+					}
+					b.append(">");
+				}
+				b.append("(");
+				appendArguments(expr.getArguments(), b);
+				b.append(")");
+			}
+		};
+		if (isReferenced) {
+			declareLocalVariable(expr, b, later);
+		} else {
+			later.exec();
 		}
 	}
 
 	protected void _toJavaExpression(XConstructorCall expr, IAppendable b) {
-		b.append("new ");
-		b.append(expr.getConstructor().getDeclaringType());
-		if (!expr.getTypeArguments().isEmpty()) {
-			b.append("<");
-			for (int i = 0; i < expr.getTypeArguments().size(); i++) {
-				JvmTypeReference arg = expr.getTypeArguments().get(i);
-				b.append(arg);
-				if (i + 1 < expr.getTypeArguments().size())
-					b.append(",");
-			}
-			b.append(">");
-		}
-		b.append("(");
-		appendArguments(expr.getArguments(), b);
-		b.append(")");
+		String varName = getJavaVarName(expr, b);
+		b.append(varName);
 	}
 	
 	protected void _toJavaStatement(XReturnExpression expr, IAppendable b, boolean isReferenced) {

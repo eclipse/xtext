@@ -250,6 +250,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	//TODO switch expression not of type boolean
 	//TODO apply cast rules case's type guards
+	//TODO null guard is not allowed with any other primitives but boolean (null -> false)
 
 	@Override
 	protected List<EPackage> getEPackages() {
@@ -273,4 +274,5 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		left.setType(leftType);
 		return conformanceComputer.isConformant(left, right);
 	}
+	
 }

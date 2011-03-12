@@ -75,7 +75,9 @@ public class ImportManager {
 					builder.append(" & ");
 			}
 		} else if (typeRef instanceof JvmGenericArrayTypeReference) {
-			builder.append(typeRef.getType());
+			JvmGenericArrayTypeReference reference = (JvmGenericArrayTypeReference) typeRef;
+			appendTypeRef(reference.getComponentType(), builder);
+			builder.append("[]");
 		}
 	}
 	

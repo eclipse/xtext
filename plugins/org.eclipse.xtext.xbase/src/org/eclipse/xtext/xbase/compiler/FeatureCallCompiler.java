@@ -23,7 +23,6 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -47,10 +46,10 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		if (isSpreadingMemberFeatureCall(expr)) {
 			prepareSpreadingMemberFeatureCall((XMemberFeatureCall) expr, b);
 		} else {
-			if (isLocalVarReference(expr)) {
+			prepareAllArguments(expr, b);
+			if (!isVariableDeclarationRequired(expr)) {
 				// nothing to do
 			} else {
-				prepareAllArguments(expr, b);
 				if (isReferenced && !isPrimitiveVoid(expr)) {
 					Later later = new Later() {
 						@Override
@@ -67,15 +66,21 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			}
 		}
 	}
-
-	protected boolean isLocalVarReference(XAbstractFeatureCall expr) {
-		if (expr instanceof XFeatureCall) {
-			JvmIdentifiableElement feature = expr.getFeature();
-			if (feature instanceof XVariableDeclaration || feature instanceof JvmFormalParameter
-					|| feature instanceof XCasePart || feature instanceof XSwitchExpression)
-				return true;
+	
+	@Override
+	protected boolean isVariableDeclarationRequired(XExpression expr) {
+		if (expr instanceof XAssignment)
+			return true;
+		if (expr instanceof XAbstractFeatureCall) {
+			JvmIdentifiableElement feature = ((XAbstractFeatureCall)expr).getFeature();
+			if (feature instanceof XVariableDeclaration 
+				|| feature instanceof JvmFormalParameter
+				|| feature instanceof XCasePart 
+				|| feature instanceof XSwitchExpression
+				|| feature instanceof JvmField)
+				return false;
 		}
-		return false;
+		return super.isVariableDeclarationRequired(expr);
 	}
 
 	protected void prepareSpreadingMemberFeatureCall(XMemberFeatureCall expr, IAppendable b) {
@@ -92,13 +97,14 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 //		appendFeatureCall(expr, b);
 //		b.append(";");
 	}
-
+	
 	protected void prepareAllArguments(XAbstractFeatureCall expr, IAppendable b) {
 		if (expr.getImplicitReceiver()!=null) {
 			internalToJavaStatement(expr.getImplicitReceiver(), b, true);
 		}
 		for (XExpression arg : expr.getExplicitArguments()) {
-			if (arg instanceof XAbstractFeatureCall && isLocalVarReference((XAbstractFeatureCall) arg)) {
+			//TODO remove me!
+			if (arg instanceof XAbstractFeatureCall && !(((XAbstractFeatureCall)arg).getFeature() instanceof JvmField) && !isVariableDeclarationRequired(arg)) {
 				JvmTypeReference expectedType = getTypeProvider().getExpectedType(arg);
 				JvmTypeReference type = getTypeProvider().getType(arg);
 				//TODO use JvmConformanceComputer (i.e. without Xbase conformance)
@@ -134,8 +140,17 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			throw new UnsupportedOperationException();
 			//			b.append(getVarName(call));
 		} else {
-			if (isLocalVarReference(call)) {
-				b.append(getJavaVarName(call.getFeature(), b));
+			if (!isVariableDeclarationRequired(call)) {
+				if (call.getFeature() instanceof JvmField) {
+					XExpression receiver = featureCallToJavaMapping.getActualReceiver(call);
+					if (receiver!=null) {
+						internalToJavaExpression(receiver, b);
+						b.append(".");
+					}
+					b.append(call.getFeature().getSimpleName());
+				} else {
+					b.append(getJavaVarName(call.getFeature(), b));
+				}
 			} else {
 				b.append(getJavaVarName(call, b));
 			}
