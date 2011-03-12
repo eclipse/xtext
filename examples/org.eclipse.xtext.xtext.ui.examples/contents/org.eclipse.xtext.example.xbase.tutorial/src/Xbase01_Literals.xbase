@@ -1,6 +1,6 @@
 /*
- * The primitive expressions are literals.
- * Xbase only has literals for the most important data types.
+ * Literals are notations for representing fixed values.
+ * Xbase only has literals for the most important data types predefined.
  */ 
  
 // Null Literal
@@ -19,3 +19,7 @@ false
 // Class Literal (in java : String.class)
 typeof(String)
 
+// collection literals are down using a library approach
+newArrayList(3,5,7)
+newHashSet('foo','bar','baz')
+newHashMap( 1->'one', 2->'two', 3->'three' )

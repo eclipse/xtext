@@ -1,14 +1,18 @@
+import helper.*
 /*
  * Xbase comes with sugared accessor syntax for getter and setter methods
  */
  
-val bean = new helper.PropertyAccess()
+val person = new Person()
 
 // setting
-bean.myProperty = 'Hello World!' // equivalent to bean.setMyProperty('Hello World')
+person.forename = 'Jimi'
+person.name = 'Hendrix'
 
 // accessing
-bean.myProperty // equivalent to bean.getMyProperty()
+person.forename +' '+ person.name
+// Jimi Hendrix (String)
+
 
 
 
