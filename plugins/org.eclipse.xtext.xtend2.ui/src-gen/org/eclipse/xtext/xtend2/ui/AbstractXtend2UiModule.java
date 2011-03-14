@@ -158,27 +158,27 @@ public abstract class AbstractXtend2UiModule extends DefaultUiModule {
 		return org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor.class;
 	}
 
-	// contributed by org.eclipse.xtext.ui.generator.xbase.XbaseUiFragment
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.findrefs.FindReferenceQueryDataFactory> bindFindReferenceQueryDataFactory() {
 		return org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceQueryDataFactory.class;
 	}
 
-	// contributed by org.eclipse.xtext.ui.generator.xbase.XbaseUiFragment
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator> bindIDependentElementsCalculator() {
 		return org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelDependentElementsCalculator.class;
 	}
 
-	// contributed by org.eclipse.xtext.ui.generator.xbase.XbaseUiFragment
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.refactoring.impl.RefactoringReferenceQueryDataFactory> bindRefactoringReferenceQueryDataFactory() {
 		return org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelFindRefsQueryDataFactory.class;
 	}
 
-	// contributed by org.eclipse.xtext.ui.generator.xbase.XbaseUiFragment
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.refactoring.IReferenceUpdater> bindIReferenceUpdater() {
 		return org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelReferenceUpdater.class;
 	}
 
-	// contributed by org.eclipse.xtext.ui.generator.xbase.XbaseUiFragment
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider> bindIRenameStrategy$Provider() {
 		return org.eclipse.xtext.xtend2.ui.refactoring.Xtend2RenameStrategy.Provider.class;
 	}

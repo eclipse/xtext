@@ -4,9 +4,6 @@
     <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="domainmodel">
       <ePackage href="http://www.xtext.org/example/Domainmodel#/"/>
     </metamodelDeclarations>
-    <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="xbase">
-      <ePackage href="http://www.eclipse.org/xtext/xbase/Xbase#/"/>
-    </metamodelDeclarations>
     <rules xsi:type="xtext:ParserRule" name="DomainModel">
       <type metamodel="/0/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EClass" href="http://www.xtext.org/example/Domainmodel#//DomainModel"/>
