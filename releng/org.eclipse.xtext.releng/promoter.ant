@@ -281,10 +281,10 @@
 		</antcall>
 	</target>
 
-	<target name="-publish.javadoc">
+	<target name="-publish.javadoc" if="build.stable">
 		<!-- copy javadoc -->
 		<echo>Unzipping javadoc</echo>
-		<unzip dest="${downloads.area}/javadoc/${version}">
+		<unzip dest="${downloads.area}/javadoc/${version}" overwrite="true">
 			<fileset dir="${javadoc.directory}">
 				<filename name="javadoc.zip" />
 			</fileset>
