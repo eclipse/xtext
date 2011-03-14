@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -46,13 +47,15 @@ import com.google.common.collect.Multimap;
  * @author Sebastian Zarnekow
  */
 public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnnotationModelListener {
+	private static final Logger LOG = Logger.getLogger(AnnotationIssueProcessor.class);
 	private final IAnnotationModel annotationModel;
 	private AnnotationTypeLookup lookup = new AnnotationTypeLookup();
 	private final IXtextDocument xtextDocument;
 	private boolean updateMarkersOnModelChange;
 	private final IssueResolutionProvider issueResolutionProvider;
 
-	public AnnotationIssueProcessor(IXtextDocument xtextDocument, IAnnotationModel annotationModel, IssueResolutionProvider issueResolutionProvider) {
+	public AnnotationIssueProcessor(IXtextDocument xtextDocument, IAnnotationModel annotationModel,
+			IssueResolutionProvider issueResolutionProvider) {
 		super();
 		this.annotationModel = annotationModel;
 		if (annotationModel != null)
@@ -131,7 +134,11 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 				String type = lookup.getAnnotationType(EValidator.MARKER, getMarkerSeverity(issue.getSeverity()));
 				boolean isQuickfixable = issueResolutionProvider.hasResolutionFor(issue.getCode());
 				Annotation annotation = new XtextAnnotation(type, false, xtextDocument, issue, isQuickfixable);
-				Position position = new Position(issue.getOffset(), issue.getLength());
+				if (issue.getOffset() < 0 || issue.getLength() < 0) {
+					LOG.error("Invalid annotation position offset=" + issue.getOffset() + " length = "
+							+ issue.getLength());
+				}
+				Position position = new Position(Math.max(0, issue.getOffset()), Math.max(0, issue.getLength()));
 				annotationToPosition.put(annotation, position);
 				positionToAnnotations.put(position, annotation);
 			}
@@ -140,7 +147,7 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 	}
 
 	protected boolean isSet(Integer length) {
-		return length!=null && length!=-1;
+		return length != null && length != -1;
 	}
 
 	protected int getMarkerSeverity(Severity severity) {
@@ -159,7 +166,7 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 		if (monitor.isCanceled()) {
 			return;
 		}
-		
+
 		Iterator<MarkerAnnotation> annotationIterator = Iterators.filter(annotationModel.getAnnotationIterator(),
 				MarkerAnnotation.class);
 
@@ -167,11 +174,11 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 		// If its predicate still holds, the validation annotation will be covered anyway.
 		while (annotationIterator.hasNext() && !monitor.isCanceled()) {
 			final MarkerAnnotation annotation = annotationIterator.next();
-			if(!annotation.isMarkedDeleted())
+			if (!annotation.isMarkedDeleted())
 				try {
 					if (isRelevantAnnotationType(annotation.getType())) {
 						boolean markAsDeleted = annotation.getMarker().isSubtypeOf(MarkerTypes.FAST_VALIDATION);
-						if(markAsDeleted) {
+						if (markAsDeleted) {
 							annotation.markDeleted(true);
 							queueOrFireAnnotationChangedEvent(annotation);
 						}
