@@ -37,8 +37,10 @@ class DomainmodelGenerator implements IGenerator {
 		val importManager = new ImportManager(true);
 		val body = body(e, importManager);
 		'''
-		package «e.packageName»;
-		
+		«IF !(e.packageName.isNullOrEmpty)»
+			package «e.packageName»;
+			
+		«ENDIF»
 		«FOR i:importManager.imports»
 		import «i»;
 		«ENDFOR»

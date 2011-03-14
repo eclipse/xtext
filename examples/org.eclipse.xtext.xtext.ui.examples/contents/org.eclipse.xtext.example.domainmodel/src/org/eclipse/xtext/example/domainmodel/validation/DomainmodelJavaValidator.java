@@ -11,6 +11,7 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
 import org.eclipse.xtext.example.domainmodel.domainmodel.PackageDeclaration;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
@@ -41,6 +42,9 @@ public class DomainmodelJavaValidator extends AbstractDomainmodelJavaValidator {
     
     @Check(CheckType.EXPENSIVE)
     public void checkPackage(PackageDeclaration packages) {
+    	if(Strings.isEmpty(packages.getName())) {
+    		error("Name cannot be empty", DomainmodelPackage.Literals.PACKAGE_DECLARATION__NAME);
+    	}
         if (packages.getName().equals("java")) {
             error("Invalid package name", 
             		DomainmodelPackage.Literals.PACKAGE_DECLARATION__NAME);
