@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.base.Function;
@@ -62,7 +63,7 @@ public class DefaultDeclarativeQualifiedNameProvider extends IQualifiedNameProvi
 				if (qualifiedNameFromDispatcher!=null)
 					return qualifiedNameFromDispatcher;
 				String name = getResolver().apply(temp);
-				if (name == null)
+				if (Strings.isEmpty(name))
 					return null;
 				QualifiedName qualifiedNameFromConverter = converter.toQualifiedName(name);
 				while (temp.eContainer() != null) {

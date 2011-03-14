@@ -15,6 +15,7 @@ import org.eclipse.xtext.example.domainmodel.generator.GeneratorExtensions;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
+import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.ResourceExtensions;
@@ -48,14 +49,25 @@ public class DomainmodelGenerator implements IGenerator {
       StringConcatenation _body = _this.body(e, importManager);
       final StringConcatenation body = _body;
       StringConcatenation builder = new StringConcatenation();
-      builder.append("package ");
-      GeneratorExtensions _generatorExtensions = generatorExtensions;
-      final Entity typeConverted_e = (Entity)e;
-      String _packageName = _generatorExtensions.packageName(typeConverted_e);
-      builder.append(_packageName, "");
-      builder.append(";");
+      {
+        GeneratorExtensions _generatorExtensions = generatorExtensions;
+        final Entity typeConverted_e = (Entity)e;
+        String _packageName = _generatorExtensions.packageName(typeConverted_e);
+        boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_packageName);
+        boolean _operator_not = BooleanExtensions.operator_not(_isNullOrEmpty);
+        if (((Boolean)_operator_not)) {
+          builder.newLineIfNotEmpty();
+          builder.append("package ");
+          GeneratorExtensions _generatorExtensions_1 = generatorExtensions;
+          final Entity typeConverted_e_1 = (Entity)e;
+          String _packageName_1 = _generatorExtensions_1.packageName(typeConverted_e_1);
+          builder.append(_packageName_1, "");
+          builder.append(";");
+          builder.newLineIfNotEmpty();
+          builder.newLine();
+        }
+      }
       builder.newLineIfNotEmpty();
-      builder.newLine();
       {
         List<String> _imports = importManager.getImports();
         for(java.lang.String i : _imports) {

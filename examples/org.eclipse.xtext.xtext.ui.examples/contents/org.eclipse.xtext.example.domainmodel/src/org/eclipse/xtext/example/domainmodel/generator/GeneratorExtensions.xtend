@@ -24,7 +24,11 @@ class GeneratorExtensions extends DomainmodelExtensions {
 	}
 	
 	fileName(Entity e) {
-		e.packageName.replace('.', '/') + "/" + e.name + '.java'
+		e.packageName.folderName + "/" + e.name + '.java'
+	}
+	
+	folderName(String javaPackageName) {
+		if(javaPackageName != null) javaPackageName.replace('.', '/') else "" 
 	}
 	
 	parameterList(Operation o, ImportManager importManager) {

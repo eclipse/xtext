@@ -11,6 +11,7 @@ import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
@@ -32,12 +33,24 @@ public class GeneratorExtensions extends DomainmodelExtensions {
   public String fileName(final Entity e) {
     final Entity typeConverted_e = (Entity)e;
     String _packageName = _this.packageName(typeConverted_e);
-    String _replace = _packageName.replace(".", "/");
-    String _operator_plus = StringExtensions.operator_plus(_replace, "/");
+    String _folderName = _this.folderName(_packageName);
+    String _operator_plus = StringExtensions.operator_plus(_folderName, "/");
     String _name = e.getName();
     String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name);
     String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, ".java");
     return _operator_plus_2;
+  }
+  
+  public String folderName(final String javaPackageName) {
+    String _xifexpression = null;
+    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(javaPackageName, null);
+    if (((Boolean)_operator_notEquals)) {
+      String _replace = javaPackageName.replace(".", "/");
+      _xifexpression = _replace;
+    } else {
+      _xifexpression = "";
+    }
+    return _xifexpression;
   }
   
   public String parameterList(final Operation o, final ImportManager importManager) {
