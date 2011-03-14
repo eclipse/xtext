@@ -54,6 +54,8 @@ public class CompilationFileProvider {
 	public IFile getTargetFile(URI sourceFileURI, IProject project, SubMonitor monitor) throws CoreException {
 		IFile sourceFile = getFile(sourceFileURI, project);
 		IPath sourceClasspathRelativePath = getClasspathRelativePath(sourceFile, getJavaProject(project));
+		if(sourceClasspathRelativePath == null) 
+			sourceClasspathRelativePath = sourceFile.getProjectRelativePath();
 		IPath targetClasspathRelativePath = sourceClasspathRelativePath.removeFileExtension().addFileExtension(TARGET_FILE_EXTENSION);
 		IFile targetFile = getTargetFolder(project, monitor).getFile(targetClasspathRelativePath);
 		return targetFile;
