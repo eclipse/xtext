@@ -325,4 +325,50 @@
             textStylePreferenceValue="NONE">
        </specification>
 	</extension>
+	
+	<!-- Refactoring -->
+	<extension point="org.eclipse.ui.bindings">
+        <key 
+            sequence="M2+M3+R"
+            commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"/>
+        <key
+            sequence="COMMAND+ALT+R"
+            commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            platform="carbon"/>
+        <key
+      	    sequence="M2+M3+R"
+      	    commandId=""
+      	    schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+      	    contextId="org.eclipse.xtext.ui.XtextEditorScope"
+      	    platform="carbon"/>
+      	<key 
+      		sequence="SHIFT+ALT+R"
+      		commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+      		schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+      		contextId="org.eclipse.xtext.ui.XtextEditorScope"
+      		platform="win32"/>
+        <key
+            sequence="M2+M3+R"
+            commandId=""
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            platform="win32"/>
+        <key
+            sequence="SHIFT+ALT+R"
+            commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            platform="gtk"/>
+        <key
+            sequence="M2+M3+R"
+            commandId=""
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.xtext.ui.XtextEditorScope"
+            platform="gtk"/>
+    </extension>
+	
 </plugin>
