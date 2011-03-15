@@ -39,5 +39,10 @@ public class DomainmodelQuickfixProvider extends DefaultQuickfixProvider {
 					}
 				});
 	}
+	
+	@Fix(IssueCodes.MISSING_TYPE)
+	public void createReferenceType(final Issue issue, IssueResolutionAcceptor acceptor) {
+		createLinkingIssueResolutions(issue, acceptor);
+	}
 
 }
