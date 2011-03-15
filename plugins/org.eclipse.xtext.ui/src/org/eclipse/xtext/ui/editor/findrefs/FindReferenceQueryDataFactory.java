@@ -57,7 +57,7 @@ public class FindReferenceQueryDataFactory {
 		QueryLabelProvider queryLabelProvider = globalServiceProvider
 				.findService(target, QueryLabelProvider.class);
 		// TODO remove after fix: NPE in mark occurrences on a JVM element
-		if(queryLabelProvider == null)
+		if(queryLabelProvider == null || target.eIsProxy() || target.eResource() == null)
 			return "";
 		return queryLabelProvider.get(target);
 	}
