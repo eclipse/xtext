@@ -73,7 +73,7 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 								if (indexOf>0) 
 									name = name.substring(0, indexOf);
 								if (!EcorePlugin.getPlatformResourceMap().containsKey(name)) {
-									String p = "archive:file:"+file.getCanonicalPath() + "!/";
+									String p = "archive:" + file.toURI() + "!/";
 									URI uri = URI.createURI(p);
 									final URI key = URI.createPlatformResourceURI(name + "/", false);
 									hashMap.put(key, uri);
