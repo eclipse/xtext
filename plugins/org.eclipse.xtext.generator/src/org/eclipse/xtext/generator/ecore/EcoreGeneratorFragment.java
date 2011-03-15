@@ -303,7 +303,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		String javaPath = getJavaModelDirectory(ctx);
 		String xmiPath = getXmiModelDirectory(grammar, javaPath);
 		try {
-			String prefix = new File(xmiPath).getCanonicalPath() + "/" + getModelName(grammar);
+			String prefix = new File(xmiPath).getCanonicalPath() + File.separator + getModelName(grammar);
 			URI ecoreFileUri = URI.createFileURI(prefix + ".ecore");
 			return ecoreFileUri;
 		} catch (IOException e) {
@@ -410,7 +410,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		} else {
 			String prefix;
 			try {
-				prefix = new File(getXmiModelDirectory(grammar, getJavaModelDirectory(ctx))).getCanonicalPath() + "/"
+				prefix = new File(getXmiModelDirectory(grammar, getJavaModelDirectory(ctx))).getCanonicalPath() + File.separator
 						+ getModelName(grammar);
 			} catch (IOException e) {
 				throw new WrappedException(e);
