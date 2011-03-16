@@ -17,7 +17,7 @@
 		<attribute name="name" default="default" />
 		<sequential>
 			<delete file="${target}/@{name}.zip" />
-			<zip destfile="${target}/@{name}.zip" basedir="${source}/@{name}" excludes="bin, **/CVS" />
+			<zip destfile="${target}/@{name}.zip" basedir="${source}/@{name}" excludes="bin,bin/**"  />
 		</sequential>
 	</macrodef>
 
