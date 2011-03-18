@@ -88,6 +88,14 @@ public abstract class AbstractXbaseCompiler {
 	protected void internalToJavaStatement(XExpression obj, IAppendable builder, boolean isReferenced) {
 		toJavaStatementDispatcher.invoke(obj, builder, isReferenced);
 	}
+	
+	public void toJavaExpression(final XExpression obj, final IAppendable appendable) {
+		internalToJavaExpression(obj, appendable);
+	}
+	
+	public void toJavaStatement(final XExpression obj, final IAppendable appendable, boolean isReferenced) {
+		internalToJavaStatement(obj, appendable, isReferenced);
+	}
 
 	protected void internalToJavaExpression(final XExpression obj, final IAppendable appendable) {
 		toJavaExprDispatcher.invoke(obj, appendable);
