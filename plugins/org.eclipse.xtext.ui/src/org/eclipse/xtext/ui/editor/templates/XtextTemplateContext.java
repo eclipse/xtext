@@ -7,18 +7,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.templates;
 
+import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.templates.DocumentTemplateContext;
+import org.eclipse.jface.text.templates.Template;
+import org.eclipse.jface.text.templates.TemplateBuffer;
 import org.eclipse.jface.text.templates.TemplateContextType;
+import org.eclipse.jface.text.templates.TemplateException;
+import org.eclipse.jface.text.templates.TemplateTranslator;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 
 /**
  * Represents an extended version of class {@link DocumentTemplateContext} to provide additional Xtext related
- * information and services for resolving a <code>Template</code>.
+ * information and services for resolving a <code>Template</code>. Furthermore it fixes the indentation
+ * of the applied template.
  * 
  * @author Michael Clay - Initial contribution and API
+ * @author Sebastian Zarnekow
  */
 public class XtextTemplateContext extends DocumentTemplateContext {
 
@@ -45,6 +53,56 @@ public class XtextTemplateContext extends DocumentTemplateContext {
 	 */
 	public IScopeProvider getScopeProvider() {
 		return scopeProvider;
+	}
+	
+	@Override
+	public TemplateBuffer evaluate(Template template) throws BadLocationException, TemplateException {
+		if (!canEvaluate(template))
+			return null;
+
+		TemplateTranslator translator= createTemplateTranslator();
+		TemplateBuffer buffer= translator.translate(template);
+
+		getContextType().resolve(buffer, this);
+
+		return buffer;
+	}
+
+	protected TemplateTranslator createTemplateTranslator() {
+		try {
+			int offset = getStart();
+			IRegion lineRegion = getDocument().getLineInformationOfOffset(offset);
+			String line = getDocument().get(lineRegion.getOffset(), lineRegion.getLength());
+			int i = 0;
+			while(i < line.length() && Character.isWhitespace(line.charAt(i))) {
+				i++;
+			}
+			if (i != 0)
+				return new IndentationAwareTemplateTranslator(line.substring(0, i));
+			return new TemplateTranslator();
+		} catch(BadLocationException ex) {
+			return new TemplateTranslator();
+		}
+	}
+	
+	public static class IndentationAwareTemplateTranslator extends TemplateTranslator {
+	
+		private final String indentation;
+
+		public IndentationAwareTemplateTranslator(String indentation) {
+			this.indentation = indentation;
+		}
+
+		@Override
+		public TemplateBuffer translate(Template template) throws TemplateException {
+			return translate(template.getPattern());
+		}
+		
+		@Override
+		public TemplateBuffer translate(String string) throws TemplateException {
+			String withIndentation = string.replaceAll("(\r\n?)|(\n)", "$0" + indentation);
+			return super.translate(withIndentation);
+		}
 	}
 
 
