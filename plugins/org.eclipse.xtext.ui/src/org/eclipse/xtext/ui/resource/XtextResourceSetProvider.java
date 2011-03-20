@@ -45,8 +45,8 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 	public ResourceSet get(IProject project) {
 		XtextResourceSet set = resourceSetProvider.get();
 		IJavaProject javaProject = JavaCore.create(project);
-		set.getURIConverter().getURIMap().putAll(computePlatformURIMap(javaProject));
 		if (javaProject!=null && javaProject.exists()) {
+			set.getURIConverter().getURIMap().putAll(computePlatformURIMap(javaProject));
 			set.setClasspathURIContext(javaProject);
 			set.setClasspathUriResolver(new JdtClasspathUriResolver());
 		}
