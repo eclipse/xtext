@@ -286,6 +286,9 @@
 			fragment = types.TypesGeneratorFragment {}
 			// generates the required bindings only if the grammar inherits from Xbase
 			fragment = xbase.XbaseGeneratorFragment {}
+			
+			// provides a preference page for template proposals 
+			fragment = org.eclipse.xtext.ui.codetemplates.generator.CodetemplatesGeneratorFragment {}
 		}
 	}]]>
          </MweSnippet>
@@ -305,11 +308,9 @@
              <with variable="selection">
 				<iterate>
 					<and>
-						<or>
-							<adapt type="org.eclipse.core.resources.IResource">
-								<test property="org.eclipse.core.resources.name" value="*.xtext"/>
-							</adapt>							
-						</or>
+						<adapt type="org.eclipse.core.resources.IResource">
+							<test property="org.eclipse.core.resources.name" value="*.xtext"/>
+						</adapt>							
 						<test property="org.eclipse.xtext.xtext.launcher.workflowavailable" />
 					</and>
 				</iterate>
