@@ -108,6 +108,8 @@ Workflow {
 			
 			// Code generator
 			fragment = generator.GeneratorFragment {}
+			
+			fragment = org.eclipse.xtext.ui.codetemplates.generator.CodetemplatesGeneratorFragment {}
 		}
 	}
 }

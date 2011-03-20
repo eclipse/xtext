@@ -20,7 +20,8 @@ Require-Bundle: org.apache.log4j;bundle-version="1.2.15";visibility:=reexport,
  org.eclipse.xtext.common.types,
  org.eclipse.xtext.xbase.lib;bundle-version="2.0.0";visibility:=reexport,
  org.eclipse.xtext.xtend2.lib;bundle-version="2.0.0";visibility:=reexport,
- org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional;visibility:=reexport
+ org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional;visibility:=reexport,
+ org.eclipse.xtext.ui.codetemplates;bundle-version="2.0.0"
 Export-Package: org.eclipse.xtext.example.domainmodel,
  org.eclipse.xtext.example.domainmodel.domainmodel,
  org.eclipse.xtext.example.domainmodel.domainmodel.impl,
