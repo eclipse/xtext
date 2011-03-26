@@ -20,6 +20,7 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.ui.XtextProjectHelper;
@@ -50,6 +51,9 @@ public class WorkspaceProjectsStateHelper extends AbstractStorage2UriMapperClien
 	
 	public Collection<URI> initContainedURIs(String containerHandle) {
 		try {
+			IPath projectPath = new Path(null, containerHandle).makeAbsolute();
+			if (projectPath.segmentCount()!=1) 
+				return Collections.emptySet();
 			IProject project = getWorkspaceRoot().getProject(containerHandle);
 			if (project != null && isAccessibleXtextProject(project)) {
 				final List<URI> uris = Lists.newArrayList();
