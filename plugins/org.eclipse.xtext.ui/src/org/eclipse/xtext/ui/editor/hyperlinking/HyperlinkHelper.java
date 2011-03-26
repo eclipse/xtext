@@ -18,6 +18,7 @@ import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.LeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
@@ -77,7 +78,11 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 	public void createHyperlinksByOffset(XtextResource resource, int offset, IHyperlinkAcceptor acceptor) {
 		EObject crossLinkedEObject = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, offset);
 		if (crossLinkedEObject != null && !crossLinkedEObject.eIsProxy()) {
-			INode crossRefNode = getParentNodeWithCrossReference(NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset));
+			INode leafNode = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
+			if (leafNode instanceof LeafNode && ((LeafNode) leafNode).isHidden() && leafNode.getOffset() == offset) {
+				leafNode = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset-1);
+			}
+			INode crossRefNode = getParentNodeWithCrossReference(leafNode);
 			if(crossRefNode!=null) {
 				Region region = new Region(crossRefNode.getOffset(), crossRefNode.getLength());
 				createHyperlinksTo(resource, region, crossLinkedEObject, acceptor);
