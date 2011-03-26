@@ -319,7 +319,7 @@ public class FunctionConversion {
 	
 	public JvmParameterizedTypeReference createRawFunctionTypeRef(EObject context, int parameterCount) {
 		JvmParameterizedTypeReference ref = factory.createJvmParameterizedTypeReference();
-		final Class<?> loadFunctionClass = loadFunctionClass("Function" + parameterCount);
+		final Class<?> loadFunctionClass = loadFunctionClass("Function" + (parameterCount>6?6:parameterCount));
 		JvmGenericType declaredType = (JvmGenericType) typeRefs.findDeclaredType(loadFunctionClass, context);
 		ref.setType(declaredType);
 		return ref;
