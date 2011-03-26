@@ -13,7 +13,7 @@ import org.eclipse.xtext.ui.codetemplates.lexer.SingleCodetemplateLexer;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class SingleTemplateProposalConflictHelper extends AbstractProposalConflictHelper {
+public class SingleTemplateProposalConflictHelper extends AbstractTemplateProposalConflictHelper {
 
 	@Override
 	protected void initLexer(Lexer lexer, boolean literal, boolean variable) {

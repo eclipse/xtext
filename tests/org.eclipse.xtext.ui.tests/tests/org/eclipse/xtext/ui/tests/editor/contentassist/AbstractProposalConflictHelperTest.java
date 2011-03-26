@@ -55,90 +55,90 @@ public abstract class AbstractProposalConflictHelperTest extends AbstractXtextTe
 	}
 	
 	public void testID_ID_01() {
-		assertTrue(helper.existsConflict("foo", "bar"));
+		assertTrue(helper.existsConflict("foo", "bar", null));
 	}
 	
 	public void testID_ID_02() {
-		assertTrue(helper.existsConflict("^foo", "bar"));
+		assertTrue(helper.existsConflict("^foo", "bar", null));
 	}
 	
 	public void testID_ID_03() {
-		assertFalse(helper.existsConflict("foo", "^bar"));
+		assertFalse(helper.existsConflict("foo", "^bar", null));
 	}
 	
 	public void testID_ID_04() {
-		assertFalse(helper.existsConflict("^foo", "^bar"));
+		assertFalse(helper.existsConflict("^foo", "^bar", null));
 	}
 	
 	public void testAlphaKeyword_ID_01() {
-		assertTrue(helper.existsConflict("grammar", "foo"));
+		assertTrue(helper.existsConflict("grammar", "foo", null));
 	}
 	
 	public void testAlphaKeyword_ID_02() {
-		assertFalse(helper.existsConflict("grammar", "^foo"));
+		assertFalse(helper.existsConflict("grammar", "^foo", null));
 	}
 	
 	public void testID_AlphaKeyword() {
-		assertTrue(helper.existsConflict("foo", "enum"));
+		assertTrue(helper.existsConflict("foo", "enum", null));
 	}
 	
 	public void testAlphaKeyword_AlphaKeyword() {
-		assertTrue(helper.existsConflict("enum", "terminal"));
+		assertTrue(helper.existsConflict("enum", "terminal", null));
 	}
 	
 	public void testBraceKeyword_ID() {
-		assertFalse(helper.existsConflict("{", "foo"));
+		assertFalse(helper.existsConflict("{", "foo", null));
 	}
 	
 	public void testID_BraceKeyword() {
-		assertFalse(helper.existsConflict("foo", "{"));
+		assertFalse(helper.existsConflict("foo", "{", null));
 	}
 	
 	public void testBraceKeyword_BraceKeyword() {
-		assertFalse(helper.existsConflict("{", "{"));
+		assertFalse(helper.existsConflict("{", "{", null));
 	}
 	
 	public void testSTRING_STRING() {
-		assertFalse(helper.existsConflict("'String'", "'String'"));
+		assertFalse(helper.existsConflict("'String'", "'String'", null));
 	}
 	
 	public void testSTRING_ID() {
-		assertFalse(helper.existsConflict("'String'", "foo"));
+		assertFalse(helper.existsConflict("'String'", "foo", null));
 	}
 	
 	public void testID_STRING() {
-		assertFalse(helper.existsConflict("foo", "'String'"));
+		assertFalse(helper.existsConflict("foo", "'String'", null));
 	}
 
 	public void testID_INT() {
-		assertTrue(helper.existsConflict("foo", "12"));
+		assertTrue(helper.existsConflict("foo", "12", null));
 	}
 
 	public void testINT_ID() {
-		assertFalse(helper.existsConflict("11", "foo"));
+		assertFalse(helper.existsConflict("11", "foo", null));
 	}
 	
 	public void testINT_INT() {
-		assertTrue(helper.existsConflict("11", "13"));
+		assertTrue(helper.existsConflict("11", "13", null));
 	}
 	
 	public void testID_GrammarID() {
-		assertTrue(helper.existsConflict("foo", "bar.zonk"));
+		assertTrue(helper.existsConflict("foo", "bar.zonk", null));
 	}
 	
 	public void testAlphaKeyword_GrammarID() {
-		assertTrue(helper.existsConflict("grammar", "bar.zonk"));
+		assertTrue(helper.existsConflict("grammar", "bar.zonk", null));
 	}
 	
 	public void testBraceKeyword_GrammarID() {
-		assertFalse(helper.existsConflict("{", "bar.zonk"));
+		assertFalse(helper.existsConflict("{", "bar.zonk", null));
 	}
 	
 	public void testGrammarID_ID() {
-		assertTrue(helper.existsConflict("foo.bar", "zonk"));
+		assertTrue(helper.existsConflict("foo.bar", "zonk", null));
 	}
 	
 	public void testGrammarID_GrammarID() {
-		assertTrue(helper.existsConflict("foo.bar", "zonk.stuff"));
+		assertTrue(helper.existsConflict("foo.bar", "zonk.stuff", null));
 	}
 }
