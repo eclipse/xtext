@@ -4,6 +4,7 @@ import java.util.Collections;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IDocumentExtension4;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ISynchronizable;
 import org.eclipse.jface.text.source.AnnotationModel;
@@ -26,7 +27,7 @@ public class PartialModelEditor {
 	
 	public void setModel(XtextDocument document, String prefix, String editablePart, String suffix) {
 		if (insertLineBreaks) {
-			String delimiter = document.getLegalLineDelimiters()[0];
+			String delimiter = document.getDefaultLineDelimiter();
 			prefix = prefix + delimiter;
 			suffix = delimiter + suffix;
 		}
@@ -61,6 +62,9 @@ public class PartialModelEditor {
 		IDocument document= viewer.getDocument();
 		if (insertLineBreaks) {
 			String delimiter = document.getLegalLineDelimiters()[0];
+			if (document instanceof IDocumentExtension4) {
+				delimiter = ((IDocumentExtension4) document).getDefaultLineDelimiter();
+			}
 			prefix = prefix + delimiter;
 			suffix = delimiter + suffix;
 		}
@@ -84,6 +88,9 @@ public class PartialModelEditor {
 				suffix = document.get(suffixOffset, document.getLength() - suffixOffset);	
 				if (insertLineBreaks) {
 					String delimiter = document.getLegalLineDelimiters()[0];
+					if (document instanceof IDocumentExtension4) {
+						delimiter = ((IDocumentExtension4) document).getDefaultLineDelimiter();
+					}
 					suffix = suffix.substring(delimiter.length());
 				}
 			}
