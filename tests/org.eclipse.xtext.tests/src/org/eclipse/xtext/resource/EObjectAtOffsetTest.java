@@ -30,28 +30,28 @@ public class EObjectAtOffsetTest extends AbstractXtextTests {
 		String modelAsString = "foo foo0 bar bar0 foo0 bar bar1 foo0";
 		XtextResource resource = getResourceFromString(modelAsString);
 		Model model = (Model) resource.getContents().get(0);
-		checkContainedElementAt(resource, modelAsString, "foo foo0", model.getFoos().get(0));
-		checkContainedElementAt(resource, modelAsString, "bar bar0", model.getBars().get(0));
-		checkContainedElementAt(resource, modelAsString, "bar bar1", model.getBars().get(1));
+		checkContainedElementAt(resource, modelAsString, "foo foo0 ", model.getFoos().get(0));
+		checkContainedElementAt(resource, modelAsString, "bar bar0 ", model.getBars().get(0));
+		checkContainedElementAt(resource, modelAsString, "bar bar1 ", model.getBars().get(1));
 	}
 
 	public void testCrossRefs() throws Exception {
 		String modelAsString = "bar bar0 foo0 bar bar1 foo1,foo2 foo foo0 foo foo1 foo foo2";
 		XtextResource resource = getResourceFromString(modelAsString);
 		Model model = (Model) resource.getContents().get(0);
-		checkCrossReferencedElementAt(resource, modelAsString, "foo0", model.getFoos().get(0));
+		checkCrossReferencedElementAt(resource, modelAsString, "foo0 ", model.getFoos().get(0));
 		checkCrossReferencedElementAt(resource, modelAsString, "foo1", model.getFoos().get(1));
-		checkCrossReferencedElementAt(resource, modelAsString, "foo2", model.getFoos().get(2));
+		checkCrossReferencedElementAt(resource, modelAsString, "foo2 ", model.getFoos().get(2));
 	}
 
 	public void testAction() throws Exception {
 		String modelAsString = "bar bar0 foo0 foobar foo1 foo foo0 foo foo1";
 		XtextResource resource = getResourceFromString(modelAsString);
 		Model model = (Model) resource.getContents().get(0);
-		checkContainedElementAt(resource, modelAsString, "foobar", model.getBars().get(0));
-		checkCrossReferencedElementAt(resource, modelAsString, "foo0", model.getFoos().get(0));
-		checkCrossReferencedElementAt(resource, modelAsString, "foo1", model.getFoos().get(1));
-		checkContainedElementAt(resource, modelAsString, "bar bar0", ((FooBar) model.getBars().get(0)).getBar());
+		checkContainedElementAt(resource, modelAsString, "foobar ", model.getBars().get(0));
+		checkCrossReferencedElementAt(resource, modelAsString, "foo0 ", model.getFoos().get(0));
+		checkCrossReferencedElementAt(resource, modelAsString, "foo1 ", model.getFoos().get(1));
+		checkContainedElementAt(resource, modelAsString, "bar bar0 ", ((FooBar) model.getBars().get(0)).getBar());
 	}
 
 	private void checkContainedElementAt(XtextResource resource, String model, String substring, EObject expectedElement) {

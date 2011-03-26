@@ -70,6 +70,7 @@ public class DispatchingEObjectTextHoverTest extends AbstractEditorTest {
 		assertEquals(new Region (35,7), hover.getHoverRegion(editor.getInternalSourceViewer(), 35));
 		assertEquals(new Region (35,7), hover.getHoverRegion(editor.getInternalSourceViewer(), 41));
 		assertNull (hover.getHoverRegion(editor.getInternalSourceViewer(), 43));
+		assertEquals(new Region (35,7), hover.getHoverRegion(editor.getInternalSourceViewer(), 42));
 	}
 
 	protected void activate(IWorkbenchPart part) {
