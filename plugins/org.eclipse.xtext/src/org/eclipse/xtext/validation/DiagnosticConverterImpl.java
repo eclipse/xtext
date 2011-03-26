@@ -126,12 +126,15 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 				result.offset = castedDiagnostic.getOffset();
 				result.length = castedDiagnostic.getLength();
 				return result;
+			} else if (diagnostic instanceof FeatureBasedDiagnostic) {
+				 FeatureBasedDiagnostic castedDiagnostic = (FeatureBasedDiagnostic) diagnostic;
+				 return getLocationData(causer, castedDiagnostic.getFeature(), castedDiagnostic.getIndex());
 			} else {
 				// feature is the second element see Diagnostician.getData
 				List<?> data = diagnostic.getData();
 				Object feature = data.size() > 1 ? data.get(1) : null;
 				EStructuralFeature structuralFeature = resolveStructuralFeature(causer, feature);
-				return getLocationData(causer, structuralFeature);
+				return getLocationData(causer, structuralFeature, 0);
 			}
 		}
 		return null;
@@ -140,13 +143,15 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 	/**
 	 * @return the location data for the given diagnostic.
 	 */
-	protected IssueLocation getLocationData(EObject obj, EStructuralFeature structuralFeature) {
+	protected IssueLocation getLocationData(EObject obj, EStructuralFeature structuralFeature, int index) {
 		INode parserNode = NodeModelUtils.getNode(obj);
 		if (parserNode != null) {
 			if (structuralFeature != null) {
 				List<INode> nodes = NodeModelUtils.findNodesForFeature(obj, structuralFeature);
-				if (!nodes.isEmpty())
-					parserNode = nodes.iterator().next();
+				if (index < 0) // insignificant index
+					index = 0;
+				if (nodes.size()>index)
+					parserNode = nodes.get(index);
 			}
 			return getLocationForNode(parserNode);
 		}
