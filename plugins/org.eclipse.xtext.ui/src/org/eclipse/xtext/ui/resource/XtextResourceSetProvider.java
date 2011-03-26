@@ -36,16 +36,16 @@ import com.google.inject.Provider;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XtextResourceSetProvider implements IResourceSetProvider {
-	
+
 	private final static Logger LOG = Logger.getLogger(XtextResourceSetProvider.class);
-	
+
 	@Inject
 	private Provider<XtextResourceSet> resourceSetProvider;
 
 	public ResourceSet get(IProject project) {
 		XtextResourceSet set = resourceSetProvider.get();
 		IJavaProject javaProject = JavaCore.create(project);
-		if (javaProject!=null && javaProject.exists()) {
+		if (javaProject != null && javaProject.exists()) {
 			set.getURIConverter().getURIMap().putAll(computePlatformURIMap(javaProject));
 			set.setClasspathURIContext(javaProject);
 			set.setClasspathUriResolver(new JdtClasspathUriResolver());
@@ -54,29 +54,31 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 	}
 
 	protected Map<URI, URI> computePlatformURIMap(IJavaProject javaProject) {
-		HashMap<URI,URI> hashMap = newHashMap(EcorePlugin.computePlatformURIMap());
+		HashMap<URI, URI> hashMap = newHashMap(EcorePlugin.computePlatformURIMap());
 		try {
 			if (!javaProject.exists())
 				return hashMap;
 			IClasspathEntry[] classpath = javaProject.getResolvedClasspath(true);
 			for (IClasspathEntry classPathEntry : classpath) {
 				IPath path = classPathEntry.getPath();
-				if (path!=null && "jar".equals(path.getFileExtension())) {
+				if (path != null && "jar".equals(path.getFileExtension())) {
 					try {
 						final File file = path.toFile();
-						JarFile jarFile = new JarFile(file);
-						Manifest manifest = jarFile.getManifest();
-						if (manifest!=null) {
-							String name = manifest.getMainAttributes().getValue("Bundle-SymbolicName");
-							if (name != null) {
-								final int indexOf = name.indexOf(';');
-								if (indexOf>0) 
-									name = name.substring(0, indexOf);
-								if (!EcorePlugin.getPlatformResourceMap().containsKey(name)) {
-									String p = "archive:" + file.toURI() + "!/";
-									URI uri = URI.createURI(p);
-									final URI key = URI.createPlatformResourceURI(name + "/", false);
-									hashMap.put(key, uri);
+						if (file != null && file.exists()) {
+							JarFile jarFile = new JarFile(file);
+							Manifest manifest = jarFile.getManifest();
+							if (manifest != null) {
+								String name = manifest.getMainAttributes().getValue("Bundle-SymbolicName");
+								if (name != null) {
+									final int indexOf = name.indexOf(';');
+									if (indexOf > 0)
+										name = name.substring(0, indexOf);
+									if (!EcorePlugin.getPlatformResourceMap().containsKey(name)) {
+										String p = "archive:" + file.toURI() + "!/";
+										URI uri = URI.createURI(p);
+										final URI key = URI.createPlatformResourceURI(name + "/", false);
+										hashMap.put(key, uri);
+									}
 								}
 							}
 						}
