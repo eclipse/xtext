@@ -28,7 +28,7 @@ public class XtextDiagnosticConverter extends DiagnosticConverterImpl{
 	private ILocationInFileProvider locationInFileProvider;
 	
 	@Override
-	protected IssueLocation getLocationData(EObject obj, EStructuralFeature structuralFeature) {
+	protected IssueLocation getLocationData(EObject obj, EStructuralFeature structuralFeature, int index) {
 		if (NodeModelUtils.getNode(obj) == null) {
 			ITextRegion location = locationInFileProvider.getSignificantTextRegion(obj);
 			if (location != null) {
@@ -36,10 +36,10 @@ public class XtextDiagnosticConverter extends DiagnosticConverterImpl{
 				ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(rootNode, location.getOffset());
 				return getLocationForNode(leafNode);
 			} else {
-				return super.getLocationData(obj.eContainer(), null);
+				return super.getLocationData(obj.eContainer(), null, index);
 			}
 		}
-		return super.getLocationData(obj, structuralFeature);
+		return super.getLocationData(obj, structuralFeature, index);
 	}
 	
 }
