@@ -10,7 +10,10 @@ package org.eclipse.xtext.ui.codetemplates.ui.contentassist;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.ui.codetemplates.lexer.CodetemplatesLexer;
 
-public class CodetemplatesProposalConflictHelper extends AbstractProposalConflictHelper {
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+public class CodetemplatesProposalConflictHelper extends AbstractTemplateProposalConflictHelper {
 
 	@Override
 	protected void initLexer(Lexer lexer, boolean literal, boolean variable) {

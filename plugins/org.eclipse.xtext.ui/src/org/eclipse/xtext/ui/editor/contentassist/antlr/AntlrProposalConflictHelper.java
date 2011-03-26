@@ -13,12 +13,30 @@ import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerBindings;
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ProposalConflictHelper;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 /**
+ * <p>An implementation that relies on the lexer to detect proposals that conflict
+ * with the input in the document.</p>
+ * <p>A proposal is considered to be conflicting if the lexer would not produce
+ * two distinct tokens for the previous sibling and the proposal itself but consume
+ * parts of the proposal as part of the first token. 
+ * Example:</p>
+ * <code>
+ * === Grammar:<br/>
+ * 	MyParserRule: name=ID other=[MyParserRule];<br/>
+ * === Input:<br/>
+ *  MyId|<br/>
+ * </code>
+ * <p>where <code>|</code> denotes the cursor position. A valid follow
+ * token for the parser is the ID of the cross reference. However, since
+ * <code>MyIdSomethingElse</code> would be consumed as a single ID by the lexer,
+ * the proposal <code>SomethingElse</code> is invalid.</p> 
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class AntlrProposalConflictHelper extends ProposalConflictHelper {
@@ -36,8 +54,8 @@ public class AntlrProposalConflictHelper extends ProposalConflictHelper {
 	private Lexer combinedLexer;
 
 	@Override
-	public boolean existsConflict(String lastCompleteText, String proposal) {
-		initTokenSources(lastCompleteText, proposal);
+	public boolean existsConflict(String lastCompleteText, String proposal, ContentAssistContext context) {
+		initTokenSources(lastCompleteText, proposal, context);
 		if (!equalTokenSequence(getLastCompleteLexer(), getCombinedLexer()))
 			return true;
 		if (!equalTokenSequence(getProposalLexer(), getCombinedLexer()))
@@ -62,14 +80,14 @@ public class AntlrProposalConflictHelper extends ProposalConflictHelper {
 		return true;
 	}
 	
-	protected void initTokenSources(String lastCompleteText, String proposal) {
+	protected void initTokenSources(String lastCompleteText, String proposal, ContentAssistContext context) {
 		String combinedText = lastCompleteText.concat(proposal);
-		initTokenSource(combinedText, getCombinedLexer());
-		initTokenSource(lastCompleteText, getLastCompleteLexer());
-		initTokenSource(proposal, getProposalLexer());
+		initTokenSource(combinedText, getCombinedLexer(), context);
+		initTokenSource(lastCompleteText, getLastCompleteLexer(), context);
+		initTokenSource(proposal, getProposalLexer(), context);
 	}
 
-	protected void initTokenSource(String text, TokenSource tokenSource) {
+	protected void initTokenSource(String text, TokenSource tokenSource, ContentAssistContext context) {
 		Lexer lexer = (Lexer) tokenSource;
 		CharStream stream = new ANTLRStringStream(text);
 		lexer.setCharStream(stream);

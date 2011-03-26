@@ -12,6 +12,9 @@ import org.eclipse.core.commands.operations.IUndoContext;
 import org.eclipse.core.commands.operations.OperationHistoryEvent;
 import org.eclipse.ui.texteditor.IUpdate;
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 class OperationHistoryListener implements IOperationHistoryListener {
 	private final IUndoContext context;
 	private final IUpdate update;

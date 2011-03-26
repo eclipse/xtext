@@ -42,6 +42,7 @@ import org.eclipse.xtext.ui.codetemplates.ui.resolvers.InspectableTemplateVariab
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Builder;
+import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor.ModeAware;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IFollowElementAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
@@ -53,10 +54,12 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
+
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */
-public class CodetemplatesProposalProvider extends AbstractCodetemplatesProposalProvider {
+public class CodetemplatesProposalProvider extends AbstractCodetemplatesProposalProvider implements ModeAware {
+	
 	@Inject
 	private LanguageRegistry languageRegistry;
 	
@@ -70,6 +73,26 @@ public class CodetemplatesProposalProvider extends AbstractCodetemplatesProposal
 	
 	private static final int NESTED = 2;
 	private static final int NORMAL = 1;
+	
+	public void reset() {
+		mode = 2;
+	}
+	
+	public void nextMode() {
+		mode = (mode % 3) + 1;
+	}
+	
+	public String getNextCategory() {
+		switch(mode) {
+			case 1: return "target language proposals";
+			case 2: return "all proposals";
+			default: return "template infrastructure proposals";
+		}
+	}
+	
+	public boolean isLastMode() {
+		return mode == 2;
+	}
 	
 	private String getAssignedFeature(RuleCall call) {
 		Assignment ass = GrammarUtil.containingAssignment(call);

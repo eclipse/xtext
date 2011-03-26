@@ -12,7 +12,22 @@ import org.eclipse.xtext.ui.codetemplates.ui.preferences.SyntheticResourceProvid
 
 import com.google.inject.ImplementedBy;
 
+/**
+ * The {@link ISyntheticResourceProvider} creates a resource that is not backed
+ * up by an {@link org.eclipse.core.resources.IResource IResource} but may be
+ * used on its own. The created resource will be contained in a newly created
+ * {@link org.eclipse.xtext.resource.XtextResourceSet resource set}.
+ * 
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 @ImplementedBy(SyntheticResourceProvider.class)
 public interface ISyntheticResourceProvider {
+	
+	/**
+	 * Create a new resource. Implementors are free to decide whether the resource
+	 * should be empty or whether its pre-populated with content. The resource has
+	 * to be contained in a new resource set.
+	 * @return a new resource that is contained in a new resource set.
+	 */
 	XtextResource createResource();
 }

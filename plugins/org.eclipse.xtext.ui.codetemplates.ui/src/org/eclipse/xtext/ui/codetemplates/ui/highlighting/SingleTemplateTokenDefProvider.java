@@ -4,7 +4,6 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  *******************************************************************************/
 package org.eclipse.xtext.ui.codetemplates.ui.highlighting;
 
@@ -17,6 +16,9 @@ import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 
 import com.google.common.collect.ImmutableMap;
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 public class SingleTemplateTokenDefProvider implements ITokenDefProvider, IAntlrTokenFileProvider {
 
 	private ImmutableMap<Integer, String> map;

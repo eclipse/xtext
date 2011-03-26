@@ -10,8 +10,6 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.ui.LexerUIBindings;
 import org.eclipse.xtext.ui.codetemplates.ui.contentassist.CodetemplatesProposalConflictHelper;
-import org.eclipse.xtext.ui.codetemplates.ui.contentassist.ContentAssistProcessor;
-import org.eclipse.xtext.ui.codetemplates.ui.contentassist.ContentAssistantFactory;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.SemanticHighlighter;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplatesHighlightingConfiguration;
 import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplatesTokenDefProvider;
@@ -20,8 +18,8 @@ import org.eclipse.xtext.ui.codetemplates.ui.preferences.TemplatesLanguageConfig
 import org.eclipse.xtext.ui.codetemplates.ui.scoping.SyntheticResourceAwareScopeProvider;
 import org.eclipse.xtext.ui.codetemplates.ui.validation.TemplateValidator;
 import org.eclipse.xtext.ui.codetemplates.validation.CodetemplatesJavaValidator;
-import org.eclipse.xtext.ui.editor.contentassist.IContentAssistantFactory;
 import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
+import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
@@ -65,13 +63,8 @@ public class CodetemplatesUiModule extends org.eclipse.xtext.ui.codetemplates.ui
 	}
 	
 	@Override
-	public Class<? extends IContentAssistantFactory> bindIContentAssistantFactory() {
-		return ContentAssistantFactory.class;
-	}
-	
-	@Override
 	public Class<? extends IContentAssistProcessor> bindIContentAssistProcessor() {
-		return ContentAssistProcessor.class;
+		return RepeatedContentAssistProcessor.class;
 	}
 	
 	@Override

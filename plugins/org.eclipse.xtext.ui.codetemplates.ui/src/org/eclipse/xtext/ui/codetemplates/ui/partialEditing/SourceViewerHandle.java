@@ -12,6 +12,9 @@ import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.validation.IValidationIssueProcessor;
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 public class SourceViewerHandle {
 	private IValidationIssueProcessor issueProcessor;
 	private final XtextSourceViewer viewer;

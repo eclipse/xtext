@@ -12,7 +12,14 @@ import org.eclipse.jface.text.ITextOperationTarget;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.ui.texteditor.IUpdate;
 
-class TextViewerAction extends Action implements IUpdate {
+/**
+ * Copied from class
+ * {@link org.eclipse.ui.texteditor.templates.TemplatePreferencePage.EditTemplateDialog.TextViewerAction TextViewerAction}
+ * from <code>org.eclipse.ui.texteditor.templates</code>.
+ * 
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+public class TextViewerAction extends Action implements IUpdate {
 
 		private int fOperationCode= -1;
 		private ITextOperationTarget fOperationTarget;
