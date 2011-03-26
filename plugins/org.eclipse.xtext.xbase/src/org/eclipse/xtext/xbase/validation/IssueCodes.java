@@ -39,6 +39,7 @@ public class IssueCodes {
 	public static final String MISSING_INITIALIZATION = ISSUE_CODE_PREFIX + "missing_initialization";
 	public static final String MISSING_TYPE = ISSUE_CODE_PREFIX + "missing_type";
 	public static final String INVALID_CAST = ISSUE_CODE_PREFIX + "invalid_cast";
+	public static final String TOO_MANY_PARAMS_IN_CLOSURE = ISSUE_CODE_PREFIX + "too_many_params_in_closure";
 	public static final String OBSOLETE_CAST = ISSUE_CODE_PREFIX + "obsolete_cast";
 	public static final String INVALID_INSTANCEOF = ISSUE_CODE_PREFIX + "invalid_instanceof";
 	public static final String OBSOLETE_INSTANCEOF = ISSUE_CODE_PREFIX + "obsolete_instanceof";

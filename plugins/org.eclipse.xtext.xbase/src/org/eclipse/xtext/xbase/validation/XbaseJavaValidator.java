@@ -28,6 +28,7 @@ import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
@@ -245,6 +246,13 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if (constructorCall.getConstructor().getDeclaringType().isAbstract()) {
 			error("Cannot instantiate abstract class", null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
 					ABSTRACT_CLASS_INSTANTIATION);
+		}
+	}
+	
+	@Check
+	public void checkClosureParams(XClosure closure) {
+		if (closure.getFormalParameters().size()>6) {
+			error("The maximum number of parameters for a closure is six.",closure, Literals.XCLOSURE__FORMAL_PARAMETERS, 6, TOO_MANY_PARAMS_IN_CLOSURE);
 		}
 	}
 

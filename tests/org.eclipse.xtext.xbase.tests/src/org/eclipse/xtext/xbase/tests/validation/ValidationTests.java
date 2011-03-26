@@ -33,6 +33,13 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		expression = expression("'foo' as CharSequence");
 		helper.assertNoError(expression, INVALID_CAST);
 	}
+	
+	public void testClosureWithModeThanSixParams() throws Exception {
+		XExpression expression = expression("[int a1,int a2,int a3,int a4,int a5,int a6,int a7|null]");
+		helper.assertError(expression, XCLOSURE, TOO_MANY_PARAMS_IN_CLOSURE);
+		expression = expression("[int a1,int a2,int a3,int a4,int a5,int a6|null]");
+		helper.assertNoError(expression, TOO_MANY_PARAMS_IN_CLOSURE);
+	}
 
 	public void testStringLiteralInBlock() throws Exception {
 		checkInnerExpressionInBlock("'foo'", XSTRING_LITERAL);
