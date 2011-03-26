@@ -343,8 +343,13 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		}
 		for(Resource res: resourceSet.getResources()) {
 			if (res != resource && res != null) {
-				URI normalized = converter.normalize(res.getURI());
-				if (normalizedURIs.contains(normalized))
+				URI uri = res.getURI();
+				try {
+					uri = converter.normalize(uri);
+				} catch (org.eclipse.xtext.resource.ClasspathUriResolutionException e) {
+					// ignore, since the classpath might be broken.
+				}
+				if (normalizedURIs.contains(uri))
 					result.add(res);
 			}
 		}
