@@ -72,6 +72,8 @@ public class PathTraverser {
 	protected Set<URI> traverseDir(File file, final Predicate<URI> isValidPredicate) {
 		Set<URI> result = Sets.newHashSet();
 		File[] files = file.listFiles();
+		if (files==null)
+			return result;
 		for (File f : files) {
 			if (f.isDirectory()) {
 				result.addAll(traverseDir(f, isValidPredicate));
