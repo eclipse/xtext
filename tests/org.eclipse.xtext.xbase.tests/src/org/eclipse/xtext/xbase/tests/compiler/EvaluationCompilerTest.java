@@ -38,15 +38,6 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 	public void testThrowExpression_01() {
 	}
 	
-	//TODO implement spread operator (needs scoping)
-	@Override
-	public void testSpreadOperator_01() {
-	}
-	
-	@Override
-	public void testSpreadOperator_02() {
-	}
-
 	static Injector injector = new XbaseStandaloneSetup() {
 		@Override
 		public Injector createInjector() {

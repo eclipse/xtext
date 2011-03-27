@@ -17,16 +17,6 @@ import com.google.inject.Inject;
  */
 public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 
-	//TODO reactivate temporarily disabled tests
-	
-	@Override
-	public void testSpreadOperator_01() {
-	}
-
-	@Override
-	public void testSpreadOperator_02() {
-	}
-	
 	@Inject
 	private CompilerTestHelper testHelper;
 	
