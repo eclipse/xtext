@@ -259,6 +259,16 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	//TODO switch expression not of type boolean
 	//TODO apply cast rules case's type guards
 	//TODO null guard is not allowed with any other primitives but boolean (null -> false)
+	
+	/*
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341048
+	 */
+	@Check
+	public void checkSpreadOperatorNotUsed(XMemberFeatureCall featureCall) {
+		if (featureCall.isSpreading()) {
+			error("The spreading operator is not yet supported.", featureCall, Literals.XMEMBER_FEATURE_CALL__SPREADING, "unssupported_spread_operator");
+		}
+	}
 
 	@Override
 	protected List<EPackage> getEPackages() {
