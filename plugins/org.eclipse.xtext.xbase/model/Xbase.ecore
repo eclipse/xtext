@@ -71,6 +71,7 @@
         eType="#//XExpression" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="explicitOperationCall"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declaringType" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmDeclaredType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XConstructorCall" eSuperTypes="#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="constructor" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmConstructor"/>
