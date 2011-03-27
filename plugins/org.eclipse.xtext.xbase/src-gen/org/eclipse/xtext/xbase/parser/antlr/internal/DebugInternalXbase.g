@@ -335,6 +335,8 @@ ruleJvmFormalParameter :
 // Rule XFeatureCall
 ruleXFeatureCall :
 	(
+		RULE_ID '::'
+	)? (
 		'<' ruleJvmArgumentTypeReference (
 			',' ruleJvmArgumentTypeReference
 		)* '>'

@@ -697,6 +697,16 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getXFeatureCall_DeclaringType()
+	{
+		return (EReference)xFeatureCallEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getXConstructorCall()
 	{
 		return xConstructorCallEClass;
@@ -1286,6 +1296,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		xFeatureCallEClass = createEClass(XFEATURE_CALL);
 		createEReference(xFeatureCallEClass, XFEATURE_CALL__FEATURE_CALL_ARGUMENTS);
 		createEAttribute(xFeatureCallEClass, XFEATURE_CALL__EXPLICIT_OPERATION_CALL);
+		createEReference(xFeatureCallEClass, XFEATURE_CALL__DECLARING_TYPE);
 
 		xConstructorCallEClass = createEClass(XCONSTRUCTOR_CALL);
 		createEReference(xConstructorCallEClass, XCONSTRUCTOR_CALL__CONSTRUCTOR);
@@ -1471,6 +1482,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		initEClass(xFeatureCallEClass, XFeatureCall.class, "XFeatureCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXFeatureCall_FeatureCallArguments(), this.getXExpression(), null, "featureCallArguments", null, 0, -1, XFeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXFeatureCall_ExplicitOperationCall(), ecorePackage.getEBoolean(), "explicitOperationCall", null, 0, 1, XFeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXFeatureCall_DeclaringType(), theTypesPackage.getJvmDeclaredType(), null, "declaringType", null, 0, 1, XFeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xConstructorCallEClass, XConstructorCall.class, "XConstructorCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXConstructorCall_Constructor(), theTypesPackage.getJvmConstructor(), null, "constructor", null, 0, 1, XConstructorCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

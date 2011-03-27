@@ -557,13 +557,22 @@ public interface XbasePackage extends EPackage
 	int XFEATURE_CALL__EXPLICIT_OPERATION_CALL = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Declaring Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XFEATURE_CALL__DECLARING_TYPE = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>XFeature Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XFEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 2;
+	int XFEATURE_CALL_FEATURE_COUNT = XABSTRACT_FEATURE_CALL_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl <em>XConstructor Call</em>}' class.
@@ -1793,6 +1802,17 @@ public interface XbasePackage extends EPackage
 	EAttribute getXFeatureCall_ExplicitOperationCall();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xbase.XFeatureCall#getDeclaringType <em>Declaring Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Declaring Type</em>'.
+	 * @see org.eclipse.xtext.xbase.XFeatureCall#getDeclaringType()
+	 * @see #getXFeatureCall()
+	 * @generated
+	 */
+	EReference getXFeatureCall_DeclaringType();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XConstructorCall <em>XConstructor Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2672,6 +2692,14 @@ public interface XbasePackage extends EPackage
 		 * @generated
 		 */
 		EAttribute XFEATURE_CALL__EXPLICIT_OPERATION_CALL = eINSTANCE.getXFeatureCall_ExplicitOperationCall();
+
+		/**
+		 * The meta object literal for the '<em><b>Declaring Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XFEATURE_CALL__DECLARING_TYPE = eINSTANCE.getXFeatureCall_DeclaringType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XConstructorCallImpl <em>XConstructor Call</em>}' class.

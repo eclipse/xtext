@@ -15,9 +15,10 @@ XExpression returns XExpression :
 	XAssignment;
 
 XAssignment returns XExpression :
-	{XAssignment} feature=[types::JvmIdentifiableElement|ID] OpSingleAssign value=XAssignment |	
+	{XAssignment} /* (declaringType=[types::JvmDeclaredType] '::')? */ feature=[types::JvmIdentifiableElement|ID] OpSingleAssign value=XAssignment |	
 	XOrExpression (
-		=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment)?;
+		=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment
+	)?;
 
 OpSingleAssign:
 	'='
@@ -182,6 +183,7 @@ JvmFormalParameter returns types::JvmFormalParameter:
 
 XFeatureCall returns XExpression:
 	{XFeatureCall}
+	(declaringType=[types::JvmDeclaredType] '::')?
 	('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')? 
 	feature=[types::JvmIdentifiableElement] 
 	(=>explicitOperationCall?='(' 

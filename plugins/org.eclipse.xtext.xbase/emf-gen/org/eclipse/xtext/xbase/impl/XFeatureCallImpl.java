@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -33,6 +35,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#getFeatureCallArguments <em>Feature Call Arguments</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#isExplicitOperationCall <em>Explicit Operation Call</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XFeatureCallImpl#getDeclaringType <em>Declaring Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -69,6 +72,16 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 	 * @ordered
 	 */
 	protected boolean explicitOperationCall = EXPLICIT_OPERATION_CALL_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getDeclaringType() <em>Declaring Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDeclaringType()
+	 * @generated
+	 * @ordered
+	 */
+	protected JvmDeclaredType declaringType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -133,6 +146,49 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public JvmDeclaredType getDeclaringType()
+	{
+		if (declaringType != null && declaringType.eIsProxy())
+		{
+			InternalEObject oldDeclaringType = (InternalEObject)declaringType;
+			declaringType = (JvmDeclaredType)eResolveProxy(oldDeclaringType);
+			if (declaringType != oldDeclaringType)
+			{
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, XbasePackage.XFEATURE_CALL__DECLARING_TYPE, oldDeclaringType, declaringType));
+			}
+		}
+		return declaringType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmDeclaredType basicGetDeclaringType()
+	{
+		return declaringType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDeclaringType(JvmDeclaredType newDeclaringType)
+	{
+		JvmDeclaredType oldDeclaringType = declaringType;
+		declaringType = newDeclaringType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.XFEATURE_CALL__DECLARING_TYPE, oldDeclaringType, declaringType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -158,6 +214,9 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 				return getFeatureCallArguments();
 			case XbasePackage.XFEATURE_CALL__EXPLICIT_OPERATION_CALL:
 				return isExplicitOperationCall();
+			case XbasePackage.XFEATURE_CALL__DECLARING_TYPE:
+				if (resolve) return getDeclaringType();
+				return basicGetDeclaringType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -180,6 +239,9 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 			case XbasePackage.XFEATURE_CALL__EXPLICIT_OPERATION_CALL:
 				setExplicitOperationCall((Boolean)newValue);
 				return;
+			case XbasePackage.XFEATURE_CALL__DECLARING_TYPE:
+				setDeclaringType((JvmDeclaredType)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -200,6 +262,9 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 			case XbasePackage.XFEATURE_CALL__EXPLICIT_OPERATION_CALL:
 				setExplicitOperationCall(EXPLICIT_OPERATION_CALL_EDEFAULT);
 				return;
+			case XbasePackage.XFEATURE_CALL__DECLARING_TYPE:
+				setDeclaringType((JvmDeclaredType)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -218,6 +283,8 @@ public class XFeatureCallImpl extends XAbstractFeatureCallImplCustom implements 
 				return featureCallArguments != null && !featureCallArguments.isEmpty();
 			case XbasePackage.XFEATURE_CALL__EXPLICIT_OPERATION_CALL:
 				return explicitOperationCall != EXPLICIT_OPERATION_CALL_EDEFAULT;
+			case XbasePackage.XFEATURE_CALL__DECLARING_TYPE:
+				return declaringType != null;
 		}
 		return super.eIsSet(featureID);
 	}
