@@ -609,15 +609,16 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(null, "(null as Object)?.toString()?.toString()");
 	}
 	
-	public void testSpreadOperator_01() {
-		assertEvaluatesWithException(NullPointerException.class, "(null as java.util.List<Object>)*.toString()");
-		assertEvaluatesWithException(ClassCastException.class, "(new Object() as java.util.List<Object>)*.toString()");
-	}
-	
-	public void testSpreadOperator_02() {
-		assertEvaluatesTo(Lists.newArrayList(
-				"A", "B", "C"), "('abc'.toCharArray as Iterable<Character>)*.toString*.toUpperCase");
-	}
+//	see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341048
+//	public void testSpreadOperator_01() {
+//		assertEvaluatesWithException(NullPointerException.class, "(null as java.util.List<Object>)*.toString()");
+//		assertEvaluatesWithException(ClassCastException.class, "(new Object() as java.util.List<Object>)*.toString()");
+//	}
+//	
+//	public void testSpreadOperator_02() {
+//		assertEvaluatesTo(Lists.newArrayList(
+//				"A", "B", "C"), "('abc'.toCharArray as Iterable<Character>)*.toString*.toUpperCase");
+//	}
 	
 	public void testSwitchExpression_01() {
 		assertEvaluatesTo(null, "switch 'x' { case false: 'literal' }");
