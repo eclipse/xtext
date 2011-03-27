@@ -17,8 +17,8 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.impl.LeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
@@ -79,7 +79,7 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 		EObject crossLinkedEObject = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, offset);
 		if (crossLinkedEObject != null && !crossLinkedEObject.eIsProxy()) {
 			INode leafNode = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
-			if (leafNode instanceof LeafNode && ((LeafNode) leafNode).isHidden() && leafNode.getOffset() == offset) {
+			if (leafNode instanceof ILeafNode && ((ILeafNode) leafNode).isHidden() && leafNode.getOffset() == offset) {
 				leafNode = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset-1);
 			}
 			INode crossRefNode = getParentNodeWithCrossReference(leafNode);

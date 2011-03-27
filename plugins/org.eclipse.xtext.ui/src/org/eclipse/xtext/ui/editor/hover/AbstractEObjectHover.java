@@ -16,7 +16,6 @@ import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.xtext.nodemodel.ILeafNode;
-import org.eclipse.xtext.nodemodel.impl.LeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
@@ -92,11 +91,11 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 		EObject crossLinkedEObject = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, offset);
 		if (crossLinkedEObject != null) {
 			if (!crossLinkedEObject.eIsProxy()) {
-				ILeafNode an = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
-				if(an instanceof LeafNode && ((LeafNode) an).isHidden() && an.getOffset() == offset) {
-					an = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset - 1);
+				ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
+				if(leafNode.isHidden() && leafNode.getOffset() == offset) {
+					leafNode = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset - 1);
 				}
-				return Tuples.create(crossLinkedEObject, (IRegion) new Region(an.getOffset(), an.getLength()));
+				return Tuples.create(crossLinkedEObject, (IRegion) new Region(leafNode.getOffset(), leafNode.getLength()));
 			}
 		} else {
 			EObject o = eObjectAtOffsetHelper.resolveElementAt(resource, offset);
