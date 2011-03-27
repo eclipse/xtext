@@ -121,7 +121,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		if (!usesXbaseGrammar(grammar))
 			return emptySet();
-		return new BindFactory()
+		BindFactory bindFactory = new BindFactory()
 				.addTypeToType("org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper",
 						"org.eclipse.xtext.xbase.ui.syntaxcoloring.XbaseTokenToAttributeIdMapper")
 				.addTypeToType("org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider.ReferenceProposalCreator",
@@ -129,17 +129,19 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType("org.eclipse.jface.text.contentassist.IContentAssistProcessor", 
 						"org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor")
 				.addTypeToType("org.eclipse.xtext.ui.editor.findrefs.FindReferenceQueryDataFactory", 
-						"org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceQueryDataFactory")
+						"org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceQueryDataFactory");
+		if (generateInferrer) {
 				// rename refactoring
-				.addTypeToType("org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator",
+				bindFactory = bindFactory.addTypeToType("org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator",
 						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelDependentElementsCalculator")
 				.addTypeToType("org.eclipse.xtext.ui.refactoring.impl.RefactoringReferenceQueryDataFactory",
 						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelFindRefsQueryDataFactory")
 				.addTypeToType("org.eclipse.xtext.ui.refactoring.IReferenceUpdater",
 						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelReferenceUpdater")
 				.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider",
-						getRenameStrategyName(grammar, getNaming())+".Provider")
-				.getBindings();
+						getRenameStrategyName(grammar, getNaming())+".Provider");
+		}
+		return bindFactory.getBindings();
 	}
 
 	@Override
