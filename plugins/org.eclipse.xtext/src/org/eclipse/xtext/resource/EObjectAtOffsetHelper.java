@@ -17,8 +17,8 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.impl.LeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 
@@ -39,7 +39,7 @@ public class EObjectAtOffsetHelper {
 		IParseResult parseResult = resource.getParseResult();
 		if (parseResult != null && parseResult.getRootNode() != null) {
 			INode node = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset);
-			if(node instanceof LeafNode && ((LeafNode) node).isHidden() && node.getOffset() == offset) {
+			if(node instanceof ILeafNode && ((ILeafNode) node).isHidden() && node.getOffset() == offset) {
 				node = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset - 1);
 			}
 			while (node != null) {
