@@ -8,10 +8,8 @@
  *******************************************************************************/
 import org::eclipse::xtext;
 import org::eclipse::xtext::generator;
-import org::eclipse::emf::ecore;
 
 extension org::eclipse::xtext::generator::Naming;
-extension org::eclipse::xtext::EcoreUtils;
 
 String formatterName(Grammar this):
 	formatterName(this, getNaming());
