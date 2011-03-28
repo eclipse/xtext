@@ -147,12 +147,12 @@ public class PureXbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXVariableDeclarationAccess().getGroup_3(), "rule__XVariableDeclaration__Group_3__0");
 					put(grammarAccess.getJvmFormalParameterAccess().getGroup(), "rule__JvmFormalParameter__Group__0");
 					put(grammarAccess.getXFeatureCallAccess().getGroup(), "rule__XFeatureCall__Group__0");
-					put(grammarAccess.getXFeatureCallAccess().getGroup_1(), "rule__XFeatureCall__Group_1__0");
 					put(grammarAccess.getXFeatureCallAccess().getGroup_2(), "rule__XFeatureCall__Group_2__0");
 					put(grammarAccess.getXFeatureCallAccess().getGroup_2_2(), "rule__XFeatureCall__Group_2_2__0");
 					put(grammarAccess.getXFeatureCallAccess().getGroup_4(), "rule__XFeatureCall__Group_4__0");
 					put(grammarAccess.getXFeatureCallAccess().getGroup_4_1_1(), "rule__XFeatureCall__Group_4_1_1__0");
 					put(grammarAccess.getXFeatureCallAccess().getGroup_4_1_1_1(), "rule__XFeatureCall__Group_4_1_1_1__0");
+					put(grammarAccess.getStaticQualifierAccess().getGroup(), "rule__StaticQualifier__Group__0");
 					put(grammarAccess.getXConstructorCallAccess().getGroup(), "rule__XConstructorCall__Group__0");
 					put(grammarAccess.getXConstructorCallAccess().getGroup_3(), "rule__XConstructorCall__Group_3__0");
 					put(grammarAccess.getXConstructorCallAccess().getGroup_3_2(), "rule__XConstructorCall__Group_3_2__0");
@@ -252,7 +252,7 @@ public class PureXbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXVariableDeclarationAccess().getRightAssignment_3_1(), "rule__XVariableDeclaration__RightAssignment_3_1");
 					put(grammarAccess.getJvmFormalParameterAccess().getParameterTypeAssignment_0(), "rule__JvmFormalParameter__ParameterTypeAssignment_0");
 					put(grammarAccess.getJvmFormalParameterAccess().getNameAssignment_1(), "rule__JvmFormalParameter__NameAssignment_1");
-					put(grammarAccess.getXFeatureCallAccess().getDeclaringTypeAssignment_1_0(), "rule__XFeatureCall__DeclaringTypeAssignment_1_0");
+					put(grammarAccess.getXFeatureCallAccess().getDeclaringTypeAssignment_1(), "rule__XFeatureCall__DeclaringTypeAssignment_1");
 					put(grammarAccess.getXFeatureCallAccess().getTypeArgumentsAssignment_2_1(), "rule__XFeatureCall__TypeArgumentsAssignment_2_1");
 					put(grammarAccess.getXFeatureCallAccess().getTypeArgumentsAssignment_2_2_1(), "rule__XFeatureCall__TypeArgumentsAssignment_2_2_1");
 					put(grammarAccess.getXFeatureCallAccess().getFeatureAssignment_3(), "rule__XFeatureCall__FeatureAssignment_3");

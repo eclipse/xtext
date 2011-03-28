@@ -10284,14 +10284,14 @@ protected class JvmFormalParameter_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule XFeatureCall ****************
  *
  * XFeatureCall returns XExpression:
- * 	{XFeatureCall} (declaringType=[types::JvmDeclaredType] "::")? ("<" typeArguments+=JvmArgumentTypeReference (","
- * 	typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement] (=> explicitOperationCall?="("
- * 	(featureCallArguments+=XShortClosure | featureCallArguments+=XExpression ("," featureCallArguments+=XExpression)*)?
- * 	")")?;
+ * 	{XFeatureCall} declaringType=[types::JvmDeclaredType|StaticQualifier]? ("<" typeArguments+=JvmArgumentTypeReference
+ * 	("," typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement] (=>
+ * 	explicitOperationCall?="(" (featureCallArguments+=XShortClosure | featureCallArguments+=XExpression (","
+ * 	featureCallArguments+=XExpression)*)? ")")?;
  *
  **/
 
-// {XFeatureCall} (declaringType=[types::JvmDeclaredType] "::")? ("<" typeArguments+=JvmArgumentTypeReference (","
+// {XFeatureCall} declaringType=[types::JvmDeclaredType|StaticQualifier]? ("<" typeArguments+=JvmArgumentTypeReference (","
 // typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement] (=> explicitOperationCall?="("
 // (featureCallArguments+=XShortClosure | featureCallArguments+=XExpression ("," featureCallArguments+=XExpression)*)?
 // ")")?
@@ -10350,38 +10350,16 @@ protected class XFeatureCall_XFeatureCallAction_0 extends ActionToken  {
 	}
 }
 
-// (declaringType=[types::JvmDeclaredType] "::")?
-protected class XFeatureCall_Group_1 extends GroupToken {
+// declaringType=[types::JvmDeclaredType|StaticQualifier]?
+protected class XFeatureCall_DeclaringTypeAssignment_1 extends AssignmentToken  {
 	
-	public XFeatureCall_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.getXFeatureCallAccess().getGroup_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new XFeatureCall_ColonColonKeyword_1_1(lastRuleCallOrigin, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-}
-
-// declaringType=[types::JvmDeclaredType]
-protected class XFeatureCall_DeclaringTypeAssignment_1_0 extends AssignmentToken  {
-	
-	public XFeatureCall_DeclaringTypeAssignment_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public XFeatureCall_DeclaringTypeAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getXFeatureCallAccess().getDeclaringTypeAssignment_1_0();
+		return grammarAccess.getXFeatureCallAccess().getDeclaringTypeAssignment_1();
 	}
 
     @Override
@@ -10398,9 +10376,9 @@ protected class XFeatureCall_DeclaringTypeAssignment_1_0 extends AssignmentToken
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("declaringType");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXFeatureCallAccess().getDeclaringTypeJvmDeclaredTypeCrossReference_1_0_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getXFeatureCallAccess().getDeclaringTypeJvmDeclaredTypeCrossReference_1_0().getType().getClassifier())) {
 				type = AssignmentType.CROSS_REFERENCE;
-				element = grammarAccess.getXFeatureCallAccess().getDeclaringTypeJvmDeclaredTypeCrossReference_1_0_0(); 
+				element = grammarAccess.getXFeatureCallAccess().getDeclaringTypeJvmDeclaredTypeCrossReference_1_0(); 
 				return obj;
 			}
 		}
@@ -10408,29 +10386,6 @@ protected class XFeatureCall_DeclaringTypeAssignment_1_0 extends AssignmentToken
 	}
 
 }
-
-// "::"
-protected class XFeatureCall_ColonColonKeyword_1_1 extends KeywordToken  {
-	
-	public XFeatureCall_ColonColonKeyword_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getXFeatureCallAccess().getColonColonKeyword_1_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new XFeatureCall_DeclaringTypeAssignment_1_0(lastRuleCallOrigin, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-}
-
 
 // ("<" typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
 protected class XFeatureCall_Group_2 extends GroupToken {
@@ -10469,7 +10424,7 @@ protected class XFeatureCall_LessThanSignKeyword_2_0 extends KeywordToken  {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XFeatureCall_Group_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new XFeatureCall_DeclaringTypeAssignment_1(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new XFeatureCall_XFeatureCallAction_0(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
@@ -10655,7 +10610,7 @@ protected class XFeatureCall_FeatureAssignment_3 extends AssignmentToken  {
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new XFeatureCall_Group_2(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new XFeatureCall_Group_1(lastRuleCallOrigin, this, 1, inst);
+			case 1: return new XFeatureCall_DeclaringTypeAssignment_1(lastRuleCallOrigin, this, 1, inst);
 			case 2: return new XFeatureCall_XFeatureCallAction_0(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
@@ -10993,6 +10948,7 @@ protected class XFeatureCall_RightParenthesisKeyword_4_2 extends KeywordToken  {
 
 
 /************ end Rule XFeatureCall ****************/
+
 
 
 /************ begin Rule XConstructorCall ****************

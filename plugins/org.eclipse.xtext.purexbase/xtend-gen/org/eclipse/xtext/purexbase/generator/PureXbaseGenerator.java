@@ -52,15 +52,15 @@ public class PureXbaseGenerator implements IGenerator {
   public StringConcatenation generateMain(final Model m) {
     StringConcatenation _xblockexpression = null;
     {
-      final ImportManager impMnr = new ImportManager(true);
-      final StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable(impMnr);
-      XbaseCompiler _compiler = _this.compiler;
+      ImportManager _importManager = new ImportManager(true);
+      final ImportManager impMnr = _importManager;
+      StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(impMnr);
+      final StringBuilderBasedAppendable appendable = _stringBuilderBasedAppendable;
       XBlockExpression _block = m.getBlock();
       final StringBuilderBasedAppendable typeConverted_appendable = (StringBuilderBasedAppendable)appendable;
-      TypeReferences _typeReferences = _this.typeReferences;
       final Model typeConverted_m = (Model)m;
-      JvmTypeReference _typeForName = _typeReferences.getTypeForName("void", typeConverted_m);
-      _compiler.compile(_block, typeConverted_appendable, _typeForName);
+      JvmTypeReference _typeForName = _this.typeReferences.getTypeForName("void", typeConverted_m);
+      _this.compiler.compile(_block, typeConverted_appendable, _typeForName);
       StringConcatenation builder = new StringConcatenation();
       List<String> _imports = impMnr.getImports();
       final Function1<String,String> function = new Function1<String,String>() {

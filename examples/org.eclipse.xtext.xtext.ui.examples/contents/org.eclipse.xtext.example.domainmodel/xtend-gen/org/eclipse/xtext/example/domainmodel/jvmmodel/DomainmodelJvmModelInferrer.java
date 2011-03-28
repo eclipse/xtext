@@ -43,8 +43,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
   public List<JvmDeclaredType> inferJvmModel(final EObject sourceObject) {
     List<JvmDeclaredType> _xblockexpression = null;
     {
-      IJvmModelAssociator _iJvmModelAssociator = iJvmModelAssociator;
-      _iJvmModelAssociator.disassociate(sourceObject);
+      iJvmModelAssociator.disassociate(sourceObject);
       Iterable<JvmDeclaredType> _transform = _this.transform(sourceObject);
       List<JvmDeclaredType> _list = IterableExtensions.toList(_transform);
       _xblockexpression = (_list);
@@ -83,22 +82,18 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
   public Iterable<JvmDeclaredType> _transform(final Entity entity) {
     ArrayList<JvmDeclaredType> _xblockexpression = null;
     {
-      TypesFactory _typesFactory = _this.typesFactory;
-      JvmGenericType _createJvmGenericType = _typesFactory.createJvmGenericType();
+      JvmGenericType _createJvmGenericType = _this.typesFactory.createJvmGenericType();
       final JvmGenericType jvmClass = _createJvmGenericType;
       String _name = entity.getName();
       jvmClass.setSimpleName(_name);
-      DomainmodelExtensions _domainmodelExtensions = domainmodelExtensions;
       final Entity typeConverted_entity = (Entity)entity;
-      String _packageName = _domainmodelExtensions.packageName(typeConverted_entity);
+      String _packageName = domainmodelExtensions.packageName(typeConverted_entity);
       jvmClass.setPackageName(_packageName);
-      IJvmModelAssociator _iJvmModelAssociator = iJvmModelAssociator;
       final Entity typeConverted_entity_1 = (Entity)entity;
       final JvmGenericType typeConverted_jvmClass = (JvmGenericType)jvmClass;
-      _iJvmModelAssociator.associatePrimary(typeConverted_entity_1, typeConverted_jvmClass);
-      JvmVisibilityExtension _jvmVisibilityExtension = jvmVisibilityExtension;
+      iJvmModelAssociator.associatePrimary(typeConverted_entity_1, typeConverted_jvmClass);
       final JvmGenericType typeConverted_jvmClass_1 = (JvmGenericType)jvmClass;
-      _jvmVisibilityExtension.setPublic(typeConverted_jvmClass_1);
+      jvmVisibilityExtension.setPublic(typeConverted_jvmClass_1);
       EList<Feature> _features = entity.getFeatures();
       final Function1<Feature,Void> function = new Function1<Feature,Void>() {
           public Void apply(Feature feature) {
@@ -125,8 +120,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
   
   public void _transform(final Property property, final JvmGenericType type) {
     {
-      TypesFactory _typesFactory = _this.typesFactory;
-      JvmField _createJvmField = _typesFactory.createJvmField();
+      JvmField _createJvmField = _this.typesFactory.createJvmField();
       final JvmField jvmField = _createJvmField;
       final Property typeConverted_property = (Property)property;
       String _name = typeConverted_property.getName();
@@ -135,18 +129,15 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       JvmParameterizedTypeReference _type = typeConverted_property_1.getType();
       JvmParameterizedTypeReference _cloneWithProxies = EcoreUtil2.cloneWithProxies(_type);
       jvmField.setType(_cloneWithProxies);
-      JvmVisibilityExtension _jvmVisibilityExtension = jvmVisibilityExtension;
       final JvmField typeConverted_jvmField = (JvmField)jvmField;
-      _jvmVisibilityExtension.setPrivate(typeConverted_jvmField);
+      jvmVisibilityExtension.setPrivate(typeConverted_jvmField);
       final JvmGenericType typeConverted_type = (JvmGenericType)type;
       EList<JvmMember> _members = typeConverted_type.getMembers();
       CollectionExtensions.operator_add(_members, jvmField);
-      IJvmModelAssociator _iJvmModelAssociator = iJvmModelAssociator;
       final Property typeConverted_property_2 = (Property)property;
       final JvmField typeConverted_jvmField_1 = (JvmField)jvmField;
-      _iJvmModelAssociator.associatePrimary(typeConverted_property_2, typeConverted_jvmField_1);
-      TypesFactory _typesFactory_1 = _this.typesFactory;
-      JvmOperation _createJvmOperation = _typesFactory_1.createJvmOperation();
+      iJvmModelAssociator.associatePrimary(typeConverted_property_2, typeConverted_jvmField_1);
+      JvmOperation _createJvmOperation = _this.typesFactory.createJvmOperation();
       final JvmOperation jvmGetter = _createJvmOperation;
       final Property typeConverted_property_3 = (Property)property;
       String _name_1 = typeConverted_property_3.getName();
@@ -157,26 +148,22 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       JvmParameterizedTypeReference _type_1 = typeConverted_property_4.getType();
       JvmParameterizedTypeReference _cloneWithProxies_1 = EcoreUtil2.cloneWithProxies(_type_1);
       jvmGetter.setReturnType(_cloneWithProxies_1);
-      JvmVisibilityExtension _jvmVisibilityExtension_1 = jvmVisibilityExtension;
       final JvmOperation typeConverted_jvmGetter = (JvmOperation)jvmGetter;
-      _jvmVisibilityExtension_1.setPublic(typeConverted_jvmGetter);
+      jvmVisibilityExtension.setPublic(typeConverted_jvmGetter);
       final JvmGenericType typeConverted_type_1 = (JvmGenericType)type;
       EList<JvmMember> _members_1 = typeConverted_type_1.getMembers();
       CollectionExtensions.operator_add(_members_1, jvmGetter);
-      IJvmModelAssociator _iJvmModelAssociator_1 = iJvmModelAssociator;
       final Property typeConverted_property_5 = (Property)property;
       final JvmOperation typeConverted_jvmGetter_1 = (JvmOperation)jvmGetter;
-      _iJvmModelAssociator_1.associatePrimary(typeConverted_property_5, typeConverted_jvmGetter_1);
-      TypesFactory _typesFactory_2 = _this.typesFactory;
-      JvmOperation _createJvmOperation_1 = _typesFactory_2.createJvmOperation();
+      iJvmModelAssociator.associatePrimary(typeConverted_property_5, typeConverted_jvmGetter_1);
+      JvmOperation _createJvmOperation_1 = _this.typesFactory.createJvmOperation();
       final JvmOperation jvmSetter = _createJvmOperation_1;
       final Property typeConverted_property_6 = (Property)property;
       String _name_2 = typeConverted_property_6.getName();
       String _firstUpper_1 = StringExtensions.toFirstUpper(_name_2);
       String _operator_plus_1 = StringExtensions.operator_plus("set", _firstUpper_1);
       jvmSetter.setSimpleName(_operator_plus_1);
-      TypesFactory _typesFactory_3 = _this.typesFactory;
-      JvmFormalParameter _createJvmFormalParameter = _typesFactory_3.createJvmFormalParameter();
+      JvmFormalParameter _createJvmFormalParameter = _this.typesFactory.createJvmFormalParameter();
       final JvmFormalParameter parameter = _createJvmFormalParameter;
       final Property typeConverted_property_7 = (Property)property;
       String _name_3 = typeConverted_property_7.getName();
@@ -186,26 +173,23 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       JvmParameterizedTypeReference _type_2 = typeConverted_property_8.getType();
       JvmParameterizedTypeReference _cloneWithProxies_2 = EcoreUtil2.cloneWithProxies(_type_2);
       parameter.setParameterType(_cloneWithProxies_2);
-      JvmVisibilityExtension _jvmVisibilityExtension_2 = jvmVisibilityExtension;
       final JvmOperation typeConverted_jvmSetter = (JvmOperation)jvmSetter;
-      _jvmVisibilityExtension_2.setPublic(typeConverted_jvmSetter);
+      jvmVisibilityExtension.setPublic(typeConverted_jvmSetter);
       final JvmOperation typeConverted_jvmSetter_1 = (JvmOperation)jvmSetter;
       EList<JvmFormalParameter> _parameters = typeConverted_jvmSetter_1.getParameters();
       CollectionExtensions.operator_add(_parameters, parameter);
       final JvmGenericType typeConverted_type_2 = (JvmGenericType)type;
       EList<JvmMember> _members_2 = typeConverted_type_2.getMembers();
       CollectionExtensions.operator_add(_members_2, jvmSetter);
-      IJvmModelAssociator _iJvmModelAssociator_2 = iJvmModelAssociator;
       final Property typeConverted_property_9 = (Property)property;
       final JvmOperation typeConverted_jvmSetter_2 = (JvmOperation)jvmSetter;
-      _iJvmModelAssociator_2.associatePrimary(typeConverted_property_9, typeConverted_jvmSetter_2);
+      iJvmModelAssociator.associatePrimary(typeConverted_property_9, typeConverted_jvmSetter_2);
     }
   }
   
   public void _transform(final Operation operation, final JvmGenericType type) {
     {
-      TypesFactory _typesFactory = _this.typesFactory;
-      JvmOperation _createJvmOperation = _typesFactory.createJvmOperation();
+      JvmOperation _createJvmOperation = _this.typesFactory.createJvmOperation();
       final JvmOperation jvmOperation = _createJvmOperation;
       final Operation typeConverted_operation = (Operation)operation;
       String _name = typeConverted_operation.getName();
@@ -225,16 +209,14 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
         };
       List<JvmFormalParameter> _map = ListExtensions.map(_params, function);
       _parameters.addAll(_map);
-      JvmVisibilityExtension _jvmVisibilityExtension = jvmVisibilityExtension;
       final JvmOperation typeConverted_jvmOperation_1 = (JvmOperation)jvmOperation;
-      _jvmVisibilityExtension.setPublic(typeConverted_jvmOperation_1);
+      jvmVisibilityExtension.setPublic(typeConverted_jvmOperation_1);
       final JvmGenericType typeConverted_type = (JvmGenericType)type;
       EList<JvmMember> _members = typeConverted_type.getMembers();
       CollectionExtensions.operator_add(_members, jvmOperation);
-      IJvmModelAssociator _iJvmModelAssociator = iJvmModelAssociator;
       final Operation typeConverted_operation_2 = (Operation)operation;
       final JvmOperation typeConverted_jvmOperation_2 = (JvmOperation)jvmOperation;
-      _iJvmModelAssociator.associatePrimary(typeConverted_operation_2, typeConverted_jvmOperation_2);
+      iJvmModelAssociator.associatePrimary(typeConverted_operation_2, typeConverted_jvmOperation_2);
     }
   }
   
