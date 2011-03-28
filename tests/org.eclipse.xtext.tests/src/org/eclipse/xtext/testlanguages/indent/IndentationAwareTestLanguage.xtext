@@ -1,0 +1,26 @@
+/*******************************************************************************
+ * Copyright (c) 2010 Ralf Ebert and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+grammar org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage
+
+import 'http://www.eclipse.org/emf/2002/Ecore' as ecore
+
+generate indentLang 'http://example.xtext.org/IndentationAwareTestLanguage'
+
+NodeList:
+	children += Node (NL children += Node)*;
+
+Node:
+	name = String (NL BEGIN children = NodeList END)?;
+
+String returns ecore::EString:
+	OTHER+;
+
+terminal NL: ('\r'|'\n')+ '\t'*;
+terminal BEGIN : '{';
+terminal END : '}';
+terminal OTHER: .;
