@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.conversion.impl;
 
-import java.io.StringWriter;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.ecore.EObject;
@@ -31,8 +30,28 @@ public class QualifiedNameValueConverter extends AbstractValueConverter<String> 
 	@Inject
 	protected IValueConverterService valueConverterService;
 
+	/**
+	 * @deprecated use {@link #getStringNamespaceDelimiter()} or {@link #getValueNamespaceDelimiter()}.
+	 */
+	@Deprecated
 	protected String getNamespaceDelimiter() {
 		return ".";
+	}
+	
+	/**
+	 * Returns the used delimiter in the concrete syntax.
+	 * @return the delimiter in the concrete syntax.
+	 */
+	protected String getStringNamespaceDelimiter() {
+		return getNamespaceDelimiter();
+	}
+	
+	/**
+	 * Returns the used delimiter in the AST.
+	 * @return the delimiter in the AST.
+	 */
+	protected String getValueNamespaceDelimiter() {
+		return getNamespaceDelimiter();
 	}
 
 	protected String getWildcardLiteral() {
@@ -44,11 +63,11 @@ public class QualifiedNameValueConverter extends AbstractValueConverter<String> 
 	}
 
 	public String toString(String value) {
-		StringWriter buffer = new StringWriter();
+		StringBuilder buffer = new StringBuilder();
 		boolean isFirst = true;
-		for (String segment : value.split(Pattern.quote(getNamespaceDelimiter()))) {
+		for (String segment : value.split(Pattern.quote(getValueNamespaceDelimiter()))) {
 			if (!isFirst)
-				buffer.append(getNamespaceDelimiter());
+				buffer.append(getStringNamespaceDelimiter());
 			isFirst = false;
 			if(getWildcardLiteral().equals(segment)) {
 				buffer.append(getWildcardLiteral());
@@ -60,18 +79,31 @@ public class QualifiedNameValueConverter extends AbstractValueConverter<String> 
 	}
 
 	public String toValue(String string, INode node) throws ValueConverterException {
-		StringWriter buffer = new StringWriter();
+		StringBuilder buffer = new StringBuilder();
 		boolean isFirst = true;
-		for(ILeafNode leafNode: node.getLeafNodes()) {
-			EObject grammarElement = leafNode.getGrammarElement();
-			if (isDelegateRuleCall(grammarElement) || isWildcardLiteral(grammarElement)) {
+		if (node != null) {
+			for(ILeafNode leafNode: node.getLeafNodes()) {
+				EObject grammarElement = leafNode.getGrammarElement();
+				if (isDelegateRuleCall(grammarElement) || isWildcardLiteral(grammarElement)) {
+					if (!isFirst)
+						buffer.append(getValueNamespaceDelimiter());
+					isFirst = false;
+					if (isDelegateRuleCall(grammarElement))
+						buffer.append(delegateToValue(leafNode));
+					else 
+						buffer.append(getWildcardLiteral());
+				}
+			}
+		} else {
+			for (String segment : string.split(Pattern.quote(getStringNamespaceDelimiter()))) {
 				if (!isFirst)
-					buffer.append(getNamespaceDelimiter());
+					buffer.append(getValueNamespaceDelimiter());
 				isFirst = false;
-				if (isDelegateRuleCall(grammarElement))
-					buffer.append(delegateToValue(leafNode));
-				else 
+				if(getWildcardLiteral().equals(segment)) {
 					buffer.append(getWildcardLiteral());
+				} else {
+					buffer.append(delegateToString(segment));
+				}
 			}
 		}
 		return buffer.toString();
@@ -95,7 +127,7 @@ public class QualifiedNameValueConverter extends AbstractValueConverter<String> 
 	
 	protected String getFullWildcardLiteral() {
 		if(fullWildcardLiteral == null) {
-			fullWildcardLiteral = getNamespaceDelimiter() + getWildcardLiteral();
+			fullWildcardLiteral = getStringNamespaceDelimiter() + getWildcardLiteral();
 		}
 		return fullWildcardLiteral;
 	}
