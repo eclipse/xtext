@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.xtext.ui;
 
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalFactory;
@@ -26,12 +27,18 @@ public interface ITypesProposalProvider {
 
 	void createTypeProposals(ICompletionProposalFactory proposalFactory, ContentAssistContext context,
 			EReference typeReference, Filter filter, ICompletionProposalAcceptor acceptor);
+	
+	void createTypeProposals(ICompletionProposalFactory proposalFactory, ContentAssistContext context,
+			EReference typeReference, Filter filter, IValueConverter<String> valueConverter, ICompletionProposalAcceptor acceptor);
 
 	void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory,
 			ContentAssistContext context, EReference typeReference, ICompletionProposalAcceptor acceptor);
 
 	void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory,
 			ContentAssistContext context, EReference typeReference, Filter filter, ICompletionProposalAcceptor acceptor);
+	
+	void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory,
+			ContentAssistContext context, EReference typeReference, Filter filter, IValueConverter<String> valueConverter, ICompletionProposalAcceptor acceptor);
 
 	interface Filter {
 		boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
@@ -54,6 +61,16 @@ public interface ITypesProposalProvider {
 
 		public void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory,
 				ContentAssistContext context, EReference typeReference, Filter filter, ICompletionProposalAcceptor acceptor) {
+		}
+
+		public void createTypeProposals(ICompletionProposalFactory proposalFactory, ContentAssistContext context,
+				EReference typeReference, Filter filter, IValueConverter<String> valueConverter,
+				ICompletionProposalAcceptor acceptor) {
+		}
+
+		public void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory,
+				ContentAssistContext context, EReference typeReference, Filter filter,
+				IValueConverter<String> valueConverter, ICompletionProposalAcceptor acceptor) {
 		}
 		
 	}

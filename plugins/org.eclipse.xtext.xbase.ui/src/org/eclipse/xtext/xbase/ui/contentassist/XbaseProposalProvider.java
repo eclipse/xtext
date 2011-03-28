@@ -24,7 +24,10 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
+import org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters;
+import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -42,6 +45,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.conversion.StaticQualifierValueConverter;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
@@ -66,6 +70,15 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	
 	@Inject
 	private XbaseGrammarAccess grammarAccess;
+	
+	@Inject
+	private QualifiedNameValueConverter qualifiedNameValueConverter;
+	
+	@Inject
+	private StaticQualifierValueConverter staticQualifierValueConverter;
+	
+	@Inject
+	private StaticQualifierPrefixMatcher staticQualifierPrefixMatcher;
 	
 	public String getNextCategory() {
 		return getXbaseCrossReferenceProposalCreator().getNextCategory();
@@ -119,12 +132,16 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	}
 
 	protected void completeJavaTypes(ContentAssistContext context, EReference reference, ICompletionProposalAcceptor acceptor) {
+		completeJavaTypes(context, reference, qualifiedNameValueConverter, acceptor);
+	}
+	
+	protected void completeJavaTypes(ContentAssistContext context, EReference reference, IValueConverter<String> valueConverter, ICompletionProposalAcceptor acceptor) {
 		if (context.getPrefix().length() > 0) {
 			if (Character.isJavaIdentifierStart(context.getPrefix().charAt(0))) {
-				typeProposalProvider.createTypeProposals(this, context, reference, acceptor);
+				typeProposalProvider.createTypeProposals(this, context, reference, TypeMatchFilters.all(), valueConverter, acceptor);
 			}
 		} else {
-			typeProposalProvider.createTypeProposals(this, context, reference, acceptor);
+			typeProposalProvider.createTypeProposals(this, context, reference, TypeMatchFilters.all(), valueConverter, acceptor);
 		}
 	}
 	
@@ -138,7 +155,8 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	public void completeXFeatureCall_DeclaringType(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		if (getXbaseCrossReferenceProposalCreator().isShowTypeProposals()) {
-			completeJavaTypes(context, XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE, acceptor);
+			ContentAssistContext modifiedContext = context.copy().setMatcher(staticQualifierPrefixMatcher).toContext();
+			completeJavaTypes(modifiedContext, XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE, staticQualifierValueConverter, acceptor);
 		}
 	}
 	
@@ -181,6 +199,13 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			ICompletionProposalAcceptor acceptor) {
 		if (assignment == grammarAccess.getXAssignmentAccess().getFeatureAssignment_1_1_0_0_1())
 			super.completeXAssignment_Feature(model, assignment, context, acceptor);
+	}
+	
+	@Override
+	public void completeXMemberFeatureCall_Feature(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		// TODO Auto-generated method stub
+		super.completeXMemberFeatureCall_Feature(model, assignment, context, acceptor);
 	}
 	
 	@Override
@@ -283,7 +308,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 						createReceiverProposals(memberFeatureCall, crossReference, reference, contentAssistContext,	acceptor, filter);
 						return;
 					}
-				}
+				} 
 			}
 			super.lookupCrossReference(crossReference, reference, contentAssistContext, acceptor, filter);
 			return;

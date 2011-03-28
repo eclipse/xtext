@@ -34,6 +34,8 @@ import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
+import org.eclipse.xtext.conversion.IValueConverter;
+import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -82,27 +84,36 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		protected final IScope scope;
 		protected final Resource context;
 		protected final IQualifiedNameConverter qualifiedNameConverter;
+		protected final IValueConverter<String> valueConverter;
 		
-		public FQNShortener(Resource context, IScope scope, IQualifiedNameConverter qualifiedNameConverter) {
+		public FQNShortener(Resource context, IScope scope, IQualifiedNameConverter qualifiedNameConverter, IValueConverter<String> valueConverter) {
 			this.context = context;
 			this.scope = scope;
 			this.qualifiedNameConverter = qualifiedNameConverter;
+			this.valueConverter = valueConverter;
 		}
 		
 		protected String applyValueConverter(QualifiedName qualifiedName) {
-			return qualifiedNameConverter.toString(qualifiedName);
+			String result = qualifiedNameConverter.toString(qualifiedName);
+			if (valueConverter != null)
+				result = valueConverter.toString(result);
+			return result;
 		}
 		
 		@Override
 		public String getActualReplacementString(ConfigurableCompletionProposal proposal) {
 			String replacementString = proposal.getReplacementString();
 			if (scope != null) {
-				IEObjectDescription element = scope.getSingleElement(qualifiedNameConverter.toQualifiedName(replacementString));
+				String qualifiedNameAsString = replacementString;
+				if (valueConverter != null) {
+					qualifiedNameAsString = valueConverter.toValue(qualifiedNameAsString, null);
+				}
+				IEObjectDescription element = scope.getSingleElement(qualifiedNameConverter.toQualifiedName(qualifiedNameAsString));
 				if (element != null) {
 					EObject resolved = EcoreUtil.resolve(element.getEObjectOrProxy(), context);
 					if (!resolved.eIsProxy()) {
-						IEObjectDescription shortedElement = scope.getSingleElement(resolved);
-						replacementString = applyValueConverter(shortedElement.getName());
+						IEObjectDescription shortendElement = scope.getSingleElement(resolved);
+						replacementString = applyValueConverter(shortendElement.getName());
 					}
 				}
 			}
@@ -111,7 +122,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 	}
 	
 	public void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory, 
-			ContentAssistContext context, EReference typeReference, Filter filter, ICompletionProposalAcceptor acceptor) {
+			ContentAssistContext context, EReference typeReference, Filter filter, IValueConverter<String> valueConverter, ICompletionProposalAcceptor acceptor) {
 		if (superType == null || superType.eIsProxy())
 			return;
 		if (superType.eResource() == null || superType.eResource().getResourceSet() == null)
@@ -123,7 +134,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		String fqn = superType.getIdentifier();
 		// java.lang.Object - no need to create hierarchy scope
 		if (Object.class.getName().equals(fqn)) {
-			createTypeProposals(project, proposalFactory, context, typeReference, filter, acceptor);
+			createTypeProposals(project, proposalFactory, context, typeReference, filter, valueConverter, acceptor);
 			return;
 		} 
 		
@@ -152,7 +163,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 					}
 					
 					
-				}), acceptor);
+				}), valueConverter, acceptor);
 			}
 		} catch(JavaModelException ex) {
 			// ignore
@@ -160,7 +171,8 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 	}
 
 	protected void searchAndCreateProposals(IJavaSearchScope scope, final ICompletionProposalFactory proposalFactory,
-			ContentAssistContext context, EReference typeReference, final Filter filter, final ICompletionProposalAcceptor acceptor) throws JavaModelException {
+			ContentAssistContext context, EReference typeReference, final Filter filter, 
+			final IValueConverter<String> valueConverter, final ICompletionProposalAcceptor acceptor) throws JavaModelException {
 		String prefix = context.getPrefix();
 		String[] split = prefix.split("\\.");
 		char[] typeName = null;
@@ -180,7 +192,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		if (context.getCurrentModel() != null) {
 			typeScope = scopeProvider.getScope(context.getCurrentModel(), typeReference);
 		}
-		final IReplacementTextApplier textApplier = createTextApplier(context, typeScope, qualifiedNameConverter);
+		final IReplacementTextApplier textApplier = createTextApplier(context, typeScope, qualifiedNameConverter, valueConverter);
 		final ICompletionProposalAcceptor scopeAware = new ICompletionProposalAcceptor.Delegate(acceptor) {
 			@Override
 			public void accept(ICompletionProposal proposal) {
@@ -234,7 +246,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 							}
 							fqName.append(simpleTypeName);
 							String fqNameAsString = fqName.toString();
-							createTypeProposal(fqNameAsString, modifiers, enclosingTypeNames.length>0, proposalFactory, myContext, scopeAware, jvmTypeProvider);
+							createTypeProposal(fqNameAsString, modifiers, enclosingTypeNames.length>0, proposalFactory, myContext, scopeAware, jvmTypeProvider, valueConverter);
 						}
 					}
 				}, 
@@ -247,24 +259,26 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 				});
 	}
 
-	protected ConfigurableCompletionProposal.IReplacementTextApplier createTextApplier(ContentAssistContext context, IScope typeScope, IQualifiedNameConverter qualifiedNameConverter) {
-		return new FQNShortener(context.getResource(), typeScope, qualifiedNameConverter);
+	protected ConfigurableCompletionProposal.IReplacementTextApplier createTextApplier(
+			ContentAssistContext context, IScope typeScope, 
+			IQualifiedNameConverter qualifiedNameConverter, IValueConverter<String> valueConverter) {
+		return new FQNShortener(context.getResource(), typeScope, qualifiedNameConverter, valueConverter);
 	}
-
+	
 	public void createTypeProposals(ICompletionProposalFactory proposalFactory, ContentAssistContext context, 
-			EReference typeReference, Filter filter, ICompletionProposalAcceptor acceptor) {
+			EReference typeReference, Filter filter, IValueConverter<String> valueConverter, ICompletionProposalAcceptor acceptor) {
 		EObject model = context.getCurrentModel();
 		if (model == null || model.eResource() == null || model.eResource().getResourceSet() == null)
 			return;
 		IJavaProject javaProject = projectProvider.getJavaProject(model.eResource().getResourceSet());
-		createTypeProposals(javaProject, proposalFactory, context, typeReference, filter, acceptor);
+		createTypeProposals(javaProject, proposalFactory, context, typeReference, filter, valueConverter, acceptor);
 	}
 	
 	public void createTypeProposals(IJavaProject project, ICompletionProposalFactory proposalFactory, ContentAssistContext context,
-			EReference typeReference, Filter filter, ICompletionProposalAcceptor acceptor) {
+			EReference typeReference, Filter filter, IValueConverter<String> valueConverter, ICompletionProposalAcceptor acceptor) {
 		try {
 			IJavaSearchScope searchScope = SearchEngine.createJavaSearchScope(new IJavaElement[] { project });
-			searchAndCreateProposals(searchScope, proposalFactory, context, typeReference, filter, acceptor);
+			searchAndCreateProposals(searchScope, proposalFactory, context, typeReference, filter, valueConverter, acceptor);
 		}
 		catch (JavaModelException e) {
 			// ignore
@@ -272,14 +286,22 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 	}
 
 	protected void createTypeProposal(final String typeName, int modifiers, boolean isInnerType, ICompletionProposalFactory proposalFactory, 
-			ContentAssistContext context, ICompletionProposalAcceptor acceptor, final IJvmTypeProvider jvmTypeProvider) {
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor, final IJvmTypeProvider jvmTypeProvider, IValueConverter<String> valueConverter) {
 		if (acceptor.canAcceptMoreProposals()) {
 			int lastDot = typeName.lastIndexOf('.');
 			StyledString displayString = new StyledString(typeName);
 			if (lastDot != -1)
 				displayString = new StyledString(typeName.substring(lastDot + 1)).append(" - " + typeName.substring(0, lastDot), StyledString.QUALIFIER_STYLER);
 			Image img = computeImage(typeName,isInnerType, modifiers);
-			ICompletionProposal proposal = proposalFactory.createCompletionProposal(typeName, displayString, img, context);
+			String proposalAsString = typeName;
+			if (valueConverter != null) {
+				try {
+					proposalAsString = valueConverter.toString(proposalAsString);
+				} catch(ValueConverterException vce) {
+					return;
+				}
+			}
+			ICompletionProposal proposal = proposalFactory.createCompletionProposal(proposalAsString, displayString, img, context);
 			if (proposal instanceof ConfigurableCompletionProposal) {
 				// calculate the type lazy, as this require a lot of time for large completion lists
 				((ConfigurableCompletionProposal) proposal).setAdditionalProposalInfo(new Provider<EObject>(){
