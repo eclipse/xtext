@@ -183,7 +183,7 @@ JvmFormalParameter returns types::JvmFormalParameter:
 
 XFeatureCall returns XExpression:
 	{XFeatureCall}
-	(declaringType=[types::JvmDeclaredType] '::')?
+	(declaringType=[types::JvmDeclaredType|StaticQualifier])?
 	('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')? 
 	feature=[types::JvmIdentifiableElement] 
 	(=>explicitOperationCall?='(' 
@@ -192,6 +192,13 @@ XFeatureCall returns XExpression:
 		  |	featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*
 		)? 
 	')')?;
+	
+// This is a workaround since ANTLR will not be able to resolve
+// StaticQualifier: ID ('::' ID)*; and XFeatureCall: (StaticQualifier '::')? ID
+// Make sure to change the value converter if you change the syntax of the StaticQualifier
+StaticQualifier:
+	(ID '::')+
+;
 
 XConstructorCall returns XExpression:
 	{XConstructorCall}

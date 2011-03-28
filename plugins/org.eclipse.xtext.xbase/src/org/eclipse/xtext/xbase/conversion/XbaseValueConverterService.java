@@ -32,11 +32,19 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 	private QualifiedNameValueConverter qualifiedNameValueConverter;
 	
 	@Inject
+	private StaticQualifierValueConverter staticQualifierConverter;
+	
+	@Inject
 	private Provider<KeywordBasedValueConverter> keywordBasedConverterProvider;
 	
 	@ValueConverter(rule = "QualifiedName")
 	public IValueConverter<String> getQualifiedNameValueConverter() {
 		return qualifiedNameValueConverter;
+	}
+	
+	@ValueConverter(rule = "StaticQualifier")
+	public IValueConverter<String> getStaticQualifierConverter() {
+		return staticQualifierConverter;
 	}
 	
 	@ValueConverter(rule = "OpSingleAssign")
