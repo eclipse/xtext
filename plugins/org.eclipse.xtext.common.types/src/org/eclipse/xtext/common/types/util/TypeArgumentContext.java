@@ -119,7 +119,7 @@ public class TypeArgumentContext {
 					return constraint.getTypeReference();
 			}
 			// no explicit upper bound given - return object
-			IJvmTypeProvider provider = typeProviderFactory.createTypeProvider(getResourceSet(context));
+			IJvmTypeProvider provider = typeProviderFactory.findOrCreateTypeProvider(getResourceSet(context));
 			JvmType objectType = provider.findTypeByName(Object.class.getCanonicalName());
 			return typeReferences.createTypeRef(objectType);
 		}
