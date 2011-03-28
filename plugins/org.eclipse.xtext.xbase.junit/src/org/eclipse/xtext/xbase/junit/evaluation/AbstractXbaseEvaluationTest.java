@@ -44,6 +44,14 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 //				"new java.util.ArrayList<Object>().addAll(typeof(String).declaredFields)");
 //	}
 	
+	public void testStaticFeatureCall_01() throws Exception {
+		assertEvaluatesTo("false", "String::valueOf(false)");
+	}
+	
+	public void testStaticFeatureCall_02() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, "Boolean::FALSE");
+	}
+	
 	public void testPrimitiveConversion() throws Exception {
 		assertEvaluatesTo("2","'ab'.length.toString");
 	}
