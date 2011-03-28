@@ -31,6 +31,8 @@ public class IssueCodes {
 			+ "assignment_target_is_not_writeable";
 	public static final String INSTANCE_ACCESS_TO_STATIC_MEMBER = ISSUE_CODE_PREFIX
 			+ "instance_access_to_static_member";
+	public static final String STATIC_ACCESS_TO_INSTANCE_MEMBER = ISSUE_CODE_PREFIX
+		+ "static_access_to_instance_member";
 	public static final String FIELD_ACCESS_WITH_PARENTHESES = ISSUE_CODE_PREFIX + "field_access_with_parentheses";
 	public static final String METHOD_ACCESS_WITHOUT_PARENTHESES = ISSUE_CODE_PREFIX
 			+ "method_access_without_parentheses";

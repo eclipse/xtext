@@ -152,4 +152,18 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 		helper.assertError(((XBlockExpression) expression).getExpressions().get(1), XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE);
 	}
 	
+	public void testStaticFeatureAccess_0() throws Exception {
+		XExpression expression = expression("String::valueOf('')");
+		helper.assertNoErrors(expression);
+	}
+	
+	public void testStaticFeatureAccess_1() throws Exception {
+		XExpression expression = expression("String::hashCode()");
+		helper.assertError(expression, XABSTRACT_FEATURE_CALL, STATIC_ACCESS_TO_INSTANCE_MEMBER);
+	}
+	
+	public void testStaticFeatureAccess_2() throws Exception {
+		XExpression expression = expression("''.valueOf('')");
+		helper.assertError(expression, XABSTRACT_FEATURE_CALL, INSTANCE_ACCESS_TO_STATIC_MEMBER);
+	}
 }

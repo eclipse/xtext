@@ -30,6 +30,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -107,9 +108,12 @@ public class FeatureCallChecker {
 			String issueCode;
 			if (jvmFeature.eIsProxy())
 				issueCode = UNRESOLVABLE_PROXY;
-			else if (!jvmFeatureDescription.isValid())
-				issueCode = FEATURE_NOT_VISIBLE;
-			else
+			else if (!jvmFeatureDescription.isValid()) {
+				if (Strings.isEmpty(jvmFeatureDescription.getIssueCode()))
+					issueCode = FEATURE_NOT_VISIBLE;
+				else
+					return jvmFeatureDescription.getIssueCode();
+			} else
 				issueCode = dispatcher.invoke(jvmFeature, context, reference, jvmFeatureDescription);
 			jvmFeatureDescription.setIssueCode(issueCode);
 			return issueCode;
@@ -190,10 +194,16 @@ public class FeatureCallChecker {
 
 	protected String _case(JvmField input, XFeatureCall context, EReference reference,
 			JvmFeatureDescription jvmFeatureDescription) {
-		if (input.isStatic())
-			return INSTANCE_ACCESS_TO_STATIC_MEMBER;
+		if (context.getDeclaringType() == null) {
+			if (input.isStatic())
+				return INSTANCE_ACCESS_TO_STATIC_MEMBER;
+		} else {
+			if (!input.isStatic())
+				return STATIC_ACCESS_TO_INSTANCE_MEMBER;
+		}
 		if (context.isExplicitOperationCall())
 			return FIELD_ACCESS_WITH_PARENTHESES;
+			
 		return null;
 	}
 
@@ -210,6 +220,10 @@ public class FeatureCallChecker {
 
 	protected String _case(JvmOperation input, XFeatureCall context, EReference reference,
 			JvmFeatureDescription jvmFeatureDescription) {
+		if (context.getDeclaringType() != null) {
+			if (!input.isStatic())
+				return STATIC_ACCESS_TO_INSTANCE_MEMBER;
+		}
 		return checkJvmOperation(input, context, context.isExplicitOperationCall(), jvmFeatureDescription,
 				context.getFeatureCallArguments());
 	}
