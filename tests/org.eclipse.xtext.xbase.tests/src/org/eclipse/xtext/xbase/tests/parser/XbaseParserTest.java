@@ -266,6 +266,20 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertEquals("java.lang.String", call.getDeclaringType().getQualifiedName());
 		assertEquals("java.lang.String.CASE_INSENSITIVE_ORDER", call.getFeature().getIdentifier());
 	}
+
+	public void testStaticFeatureCall_2() throws Exception {
+		XFeatureCall call = (XFeatureCall) expression("java::lang::String::valueOf('')");
+		assertNotNull(call.getDeclaringType());
+		assertEquals("java.lang.String", call.getDeclaringType().getQualifiedName());
+		assertEquals("java.lang.String.valueOf(java.lang.Object)", call.getFeature().getIdentifier());
+	}
+	
+	public void testStaticFeatureCall_3() throws Exception {
+		XFeatureCall call = (XFeatureCall) expression("java::lang::String::CASE_INSENSITIVE_ORDER");
+		assertNotNull(call.getDeclaringType());
+		assertEquals("java.lang.String", call.getDeclaringType().getQualifiedName());
+		assertEquals("java.lang.String.CASE_INSENSITIVE_ORDER", call.getFeature().getIdentifier());
+	}
 	
 	public void testMemberFeatureCall_00() throws Exception {
 		XMemberFeatureCall call = (XMemberFeatureCall) expression("'holla'?.bar(4)");

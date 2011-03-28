@@ -28,4 +28,14 @@ public abstract class AbstractTypesProposalProvider implements ITypesProposalPro
 		createSubTypeProposals(superType, proposalFactory, context, typeReference, TypeMatchFilters.all(), acceptor);
 	}
 	
+	public void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory,
+			ContentAssistContext context, EReference typeReference, Filter filter, ICompletionProposalAcceptor acceptor) {
+		createSubTypeProposals(superType, proposalFactory, context, typeReference, filter, null, acceptor);
+	}
+	
+	public void createTypeProposals(ICompletionProposalFactory proposalFactory, ContentAssistContext context,
+			EReference typeReference, Filter filter, ICompletionProposalAcceptor acceptor) {
+		createTypeProposals(proposalFactory, context, typeReference, filter, null, acceptor);
+	}
+	
 }

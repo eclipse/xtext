@@ -168,6 +168,10 @@ public class ContentAssistInBlockTest extends ContentAssistTest {
 		newBuilder().appendNl("var this = ''").appendNl("var y = ").assertText(expect(new String[] {"this"}, KEYWORDS_AND_STATICS, STRING_FEATURES));
 	}
 	
+	public void testAfterVariableDeclaration_11() throws Exception {
+		newBuilder().appendNl("var x = ''").appendNl("x.").assertText(expect(STRING_FEATURES));
+	}
+	
 	public static Test suite() {
 		return new TestSetup(new TestSuite(ContentAssistInBlockTest.class)) {
 			private IProject project;

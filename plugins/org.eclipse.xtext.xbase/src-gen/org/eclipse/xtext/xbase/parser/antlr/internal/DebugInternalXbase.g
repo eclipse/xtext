@@ -334,9 +334,7 @@ ruleJvmFormalParameter :
 
 // Rule XFeatureCall
 ruleXFeatureCall :
-	(
-		RULE_ID '::'
-	)? (
+	ruleStaticQualifier? (
 		'<' ruleJvmArgumentTypeReference (
 			',' ruleJvmArgumentTypeReference
 		)* '>'
@@ -356,6 +354,13 @@ ruleXFeatureCall :
 			)*
 		)? ')'
 	)?
+;
+
+// Rule StaticQualifier
+ruleStaticQualifier :
+	(
+		RULE_ID '::'
+	)+
 ;
 
 // Rule XConstructorCall

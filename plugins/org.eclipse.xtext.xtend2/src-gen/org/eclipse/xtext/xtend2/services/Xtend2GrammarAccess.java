@@ -1653,16 +1653,26 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XFeatureCall returns XExpression:
-	//	{XFeatureCall} (declaringType=[types::JvmDeclaredType] "::")? ("<" typeArguments+=JvmArgumentTypeReference (","
-	//	typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement] (=> explicitOperationCall?="("
-	//	(featureCallArguments+=XShortClosure | featureCallArguments+=XExpression ("," featureCallArguments+=XExpression)*)?
-	//	")")?;
+	//	{XFeatureCall} declaringType=[types::JvmDeclaredType|StaticQualifier]? ("<" typeArguments+=JvmArgumentTypeReference
+	//	("," typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement] (=>
+	//	explicitOperationCall?="(" (featureCallArguments+=XShortClosure | featureCallArguments+=XExpression (","
+	//	featureCallArguments+=XExpression)*)? ")")?;
 	public XbaseGrammarAccess.XFeatureCallElements getXFeatureCallAccess() {
 		return gaXbase.getXFeatureCallAccess();
 	}
 	
 	public ParserRule getXFeatureCallRule() {
 		return getXFeatureCallAccess().getRule();
+	}
+
+	//StaticQualifier:
+	//	(ID "::")+;
+	public XbaseGrammarAccess.StaticQualifierElements getStaticQualifierAccess() {
+		return gaXbase.getStaticQualifierAccess();
+	}
+	
+	public ParserRule getStaticQualifierRule() {
+		return getStaticQualifierAccess().getRule();
 	}
 
 	//XConstructorCall returns XExpression:

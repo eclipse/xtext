@@ -1826,11 +1826,9 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XFeatureCall");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cXFeatureCallAction_0 = (Action)cGroup.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Assignment cDeclaringTypeAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
-		private final CrossReference cDeclaringTypeJvmDeclaredTypeCrossReference_1_0_0 = (CrossReference)cDeclaringTypeAssignment_1_0.eContents().get(0);
-		private final RuleCall cDeclaringTypeJvmDeclaredTypeIDTerminalRuleCall_1_0_0_1 = (RuleCall)cDeclaringTypeJvmDeclaredTypeCrossReference_1_0_0.eContents().get(1);
-		private final Keyword cColonColonKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cDeclaringTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cDeclaringTypeJvmDeclaredTypeCrossReference_1_0 = (CrossReference)cDeclaringTypeAssignment_1.eContents().get(0);
+		private final RuleCall cDeclaringTypeJvmDeclaredTypeStaticQualifierParserRuleCall_1_0_1 = (RuleCall)cDeclaringTypeJvmDeclaredTypeCrossReference_1_0.eContents().get(1);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cLessThanSignKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cTypeArgumentsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
@@ -1859,13 +1857,13 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
 		
 		//XFeatureCall returns XExpression:
-		//	{XFeatureCall} (declaringType=[types::JvmDeclaredType] "::")? ("<" typeArguments+=JvmArgumentTypeReference (","
-		//	typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement] (=> explicitOperationCall?="("
-		//	(featureCallArguments+=XShortClosure | featureCallArguments+=XExpression ("," featureCallArguments+=XExpression)*)?
-		//	")")?;
+		//	{XFeatureCall} declaringType=[types::JvmDeclaredType|StaticQualifier]? ("<" typeArguments+=JvmArgumentTypeReference
+		//	("," typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement] (=>
+		//	explicitOperationCall?="(" (featureCallArguments+=XShortClosure | featureCallArguments+=XExpression (","
+		//	featureCallArguments+=XExpression)*)? ")")?;
 		public ParserRule getRule() { return rule; }
 
-		//{XFeatureCall} (declaringType=[types::JvmDeclaredType] "::")? ("<" typeArguments+=JvmArgumentTypeReference (","
+		//{XFeatureCall} declaringType=[types::JvmDeclaredType|StaticQualifier]? ("<" typeArguments+=JvmArgumentTypeReference (","
 		//typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement] (=> explicitOperationCall?="("
 		//(featureCallArguments+=XShortClosure | featureCallArguments+=XExpression ("," featureCallArguments+=XExpression)*)?
 		//")")?
@@ -1874,20 +1872,14 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//{XFeatureCall}
 		public Action getXFeatureCallAction_0() { return cXFeatureCallAction_0; }
 
-		//(declaringType=[types::JvmDeclaredType] "::")?
-		public Group getGroup_1() { return cGroup_1; }
+		//declaringType=[types::JvmDeclaredType|StaticQualifier]?
+		public Assignment getDeclaringTypeAssignment_1() { return cDeclaringTypeAssignment_1; }
 
-		//declaringType=[types::JvmDeclaredType]
-		public Assignment getDeclaringTypeAssignment_1_0() { return cDeclaringTypeAssignment_1_0; }
+		//[types::JvmDeclaredType|StaticQualifier]
+		public CrossReference getDeclaringTypeJvmDeclaredTypeCrossReference_1_0() { return cDeclaringTypeJvmDeclaredTypeCrossReference_1_0; }
 
-		//[types::JvmDeclaredType]
-		public CrossReference getDeclaringTypeJvmDeclaredTypeCrossReference_1_0_0() { return cDeclaringTypeJvmDeclaredTypeCrossReference_1_0_0; }
-
-		//ID
-		public RuleCall getDeclaringTypeJvmDeclaredTypeIDTerminalRuleCall_1_0_0_1() { return cDeclaringTypeJvmDeclaredTypeIDTerminalRuleCall_1_0_0_1; }
-
-		//"::"
-		public Keyword getColonColonKeyword_1_1() { return cColonColonKeyword_1_1; }
+		//StaticQualifier
+		public RuleCall getDeclaringTypeJvmDeclaredTypeStaticQualifierParserRuleCall_1_0_1() { return cDeclaringTypeJvmDeclaredTypeStaticQualifierParserRuleCall_1_0_1; }
 
 		//("<" typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
 		public Group getGroup_2() { return cGroup_2; }
@@ -1967,6 +1959,29 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 
 		//")"
 		public Keyword getRightParenthesisKeyword_4_2() { return cRightParenthesisKeyword_4_2; }
+	}
+
+	public class StaticQualifierElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StaticQualifier");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Keyword cColonColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//// This is a workaround since ANTLR will not be able to resolve
+		//// StaticQualifier: ID ('::' ID)*; and XFeatureCall: (StaticQualifier '::')? ID
+		//// Make sure to change the value converter if you change the syntax of the StaticQualifier
+		//StaticQualifier:
+		//	(ID "::")+;
+		public ParserRule getRule() { return rule; }
+
+		//(ID "::")+
+		public Group getGroup() { return cGroup; }
+
+		//ID
+		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
+
+		//"::"
+		public Keyword getColonColonKeyword_1() { return cColonColonKeyword_1; }
 	}
 
 	public class XConstructorCallElements extends AbstractParserRuleElementFinder {
@@ -2470,6 +2485,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	private XVariableDeclarationElements pXVariableDeclaration;
 	private JvmFormalParameterElements pJvmFormalParameter;
 	private XFeatureCallElements pXFeatureCall;
+	private StaticQualifierElements pStaticQualifier;
 	private XConstructorCallElements pXConstructorCall;
 	private XBooleanLiteralElements pXBooleanLiteral;
 	private XNullLiteralElements pXNullLiteral;
@@ -2895,16 +2911,29 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XFeatureCall returns XExpression:
-	//	{XFeatureCall} (declaringType=[types::JvmDeclaredType] "::")? ("<" typeArguments+=JvmArgumentTypeReference (","
-	//	typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement] (=> explicitOperationCall?="("
-	//	(featureCallArguments+=XShortClosure | featureCallArguments+=XExpression ("," featureCallArguments+=XExpression)*)?
-	//	")")?;
+	//	{XFeatureCall} declaringType=[types::JvmDeclaredType|StaticQualifier]? ("<" typeArguments+=JvmArgumentTypeReference
+	//	("," typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement] (=>
+	//	explicitOperationCall?="(" (featureCallArguments+=XShortClosure | featureCallArguments+=XExpression (","
+	//	featureCallArguments+=XExpression)*)? ")")?;
 	public XFeatureCallElements getXFeatureCallAccess() {
 		return (pXFeatureCall != null) ? pXFeatureCall : (pXFeatureCall = new XFeatureCallElements());
 	}
 	
 	public ParserRule getXFeatureCallRule() {
 		return getXFeatureCallAccess().getRule();
+	}
+
+	//// This is a workaround since ANTLR will not be able to resolve
+	//// StaticQualifier: ID ('::' ID)*; and XFeatureCall: (StaticQualifier '::')? ID
+	//// Make sure to change the value converter if you change the syntax of the StaticQualifier
+	//StaticQualifier:
+	//	(ID "::")+;
+	public StaticQualifierElements getStaticQualifierAccess() {
+		return (pStaticQualifier != null) ? pStaticQualifier : (pStaticQualifier = new StaticQualifierElements());
+	}
+	
+	public ParserRule getStaticQualifierRule() {
+		return getStaticQualifierAccess().getRule();
 	}
 
 	//XConstructorCall returns XExpression:
