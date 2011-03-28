@@ -160,7 +160,39 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEdi
 		pressKey(editor, SWT.BS);
 		assertState("'| ' ' '", editor);
 	}
-	
+
+	public void testSingleQuotedStringLiteral_9() throws Exception {
+		XtextEditor editor = openEditor("foo|{}");
+		selectText(editor, -3,3);
+		pressKey(editor, '\'');
+		assertState("'|'{}", editor);
+		pressKey(editor, SWT.BS);
+		assertState("|{}", editor);
+	}
+
+	public void testSingleQuotedStringLiteral_10() throws Exception {
+		XtextEditor editor = openEditor("foo|{}");
+		selectText(editor, -2,2);
+		pressKey(editor, '\'');
+		assertState("f'|'{}", editor);
+		pressKey(editor, SWT.BS);
+		assertState("f|{}", editor);
+	}
+
+	public void testSingleQuotedStringLiteral_11() throws Exception {
+		XtextEditor editor = openEditor("|foo{}");
+		selectText(editor, 0, 2);
+		pressKey(editor, '\'');
+		assertState("'|o{}", editor);
+	}
+
+	public void testSingleQuotedStringLiteral_12() throws Exception {
+		XtextEditor editor = openEditor("|foo{}");
+		selectText(editor, 0, 1);
+		pressKey(editor, '\'');
+		assertState("'|oo{}", editor);
+	}
+
 	public void testDoubleQuotedStringLiteral_1() throws Exception {
 		XtextEditor editor = openEditor("|");
 		pressKey(editor, '"');
@@ -343,6 +375,53 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEdi
 		XtextEditor editor = openEditor("{{foo}|{bar}}");
 		pressKey(editor, '\n');
 		assertState("{{foo}\n\t|{bar}\n}", editor);
+	}
+
+	public void testCurlyBracesWithSelection_1() throws Exception {
+		XtextEditor editor = openEditor("{|foo}");
+		selectText(editor,0,3);
+		pressKey(editor, '{');
+		assertState("{{|}}", editor);
+		pressKey(editor, SWT.BS);
+		assertState("{|}", editor);
+	}
+
+	public void testCurlyBracesWithSelection_2() throws Exception {
+		XtextEditor editor = openEditor("{|foo}");
+		selectText(editor,0,2);
+		pressKey(editor, '{');
+		assertState("{{|o}", editor);
+		pressKey(editor, SWT.BS);
+		assertState("{|o}", editor);
+	}
+
+	public void testCurlyBracesWithSelection_3() throws Exception {
+		XtextEditor editor = openEditor("{|foo}");
+		selectText(editor,0,1);
+		pressKey(editor, '{');
+		assertState("{{|oo}", editor);
+		pressKey(editor, SWT.BS);
+		assertState("{|oo}", editor);
+	}
+
+	public void testCurlyBracesWithSelection_4() throws Exception {
+		XtextEditor editor = openEditor("{{|foo}}");
+		selectText(editor,0,3);
+		pressKey(editor, '}');
+		assertState("{{}|}", editor);
+		pressKey(editor, SWT.BS);
+		assertState("{{|}", editor);
+	}
+
+	public void testCurlyBracesWithSelection_5() throws Exception {
+		XtextEditor editor = openEditor("{{|foo}}");
+		selectText(editor,0,2);
+		pressKey(editor, '}');
+		assertState("{{}|o}}", editor);
+		pressKey(editor, SWT.BS);
+		assertState("{{|o}}", editor);
+		pressKey(editor, '{');
+		assertState("{{{|o}}", editor);
 	}
 
 	public void testMLComments_01() throws Exception {

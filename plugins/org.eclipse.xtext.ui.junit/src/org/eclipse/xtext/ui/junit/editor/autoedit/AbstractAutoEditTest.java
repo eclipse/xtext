@@ -66,6 +66,11 @@ public abstract class AbstractAutoEditTest extends AbstractEditorTest {
 		assertEquals("unexpected cursor position:",cursor, selection.getOffset());
 	}
 
+	protected void selectText(XtextEditor editor,int relativeToCurrentOffset,int length) throws Exception {
+		ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
+		editor.getInternalSourceViewer().setSelectedRange(selection.getOffset()+relativeToCurrentOffset, length);
+	}
+
 	protected void pressKey(XtextEditor editor, char c) throws Exception {
 		StyledText textWidget = editor.getInternalSourceViewer().getTextWidget();
 		Event e = new Event();
