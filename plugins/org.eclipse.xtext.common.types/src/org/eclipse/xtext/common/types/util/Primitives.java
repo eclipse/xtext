@@ -104,7 +104,7 @@ public class Primitives {
 		ResourceSet resourceSet = EcoreUtil2.getResourceSet(context);
 		if (resourceSet==null)
 			throw new NullPointerException("context not contained in ResourceSet");
-		IJvmTypeProvider provider = typeProviderFactory.createTypeProvider(resourceSet);
+		IJvmTypeProvider provider = typeProviderFactory.findOrCreateTypeProvider(resourceSet);
 		return provider.findTypeByName(class1.getCanonicalName());
 	}
 	
