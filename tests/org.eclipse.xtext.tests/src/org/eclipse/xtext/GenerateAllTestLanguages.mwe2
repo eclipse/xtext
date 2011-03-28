@@ -459,6 +459,10 @@ Workflow {
 			uri = "classpath:/org/eclipse/xtext/parser/encoding/EncodingTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/testlanguages/indent/IndentationAwareTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
 		/*
 		language = { uri = "classpath:/org/eclipse/xtext/generator/GeneratorTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}

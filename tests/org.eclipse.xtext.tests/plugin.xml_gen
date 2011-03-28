@@ -574,6 +574,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.eclipse.org/2009/tmf/xtext/syntacticsequencertestlanguage" 
+       class = "org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage"
+       genModel = "org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://simple/unassignedtext" 
        class = "org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.UnassignedtextPackage"
        genModel = "org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.genmodel" /> 
@@ -748,6 +757,15 @@
        uri = "http://www.eclipse.org/2010/tmf/xtext/parser/EncodingTest" 
        class = "org.eclipse.xtext.parser.encoding.encodingTest.EncodingTestPackage"
        genModel = "org/eclipse/xtext/parser/encoding/EncodingTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://example.xtext.org/IndentationAwareTestLanguage" 
+       class = "org.eclipse.xtext.testlanguages.indent.indentLang.IndentLangPackage"
+       genModel = "org/eclipse/xtext/testlanguages/indent/IndentationAwareTestLanguage.genmodel" /> 
 	
   </extension>
 
