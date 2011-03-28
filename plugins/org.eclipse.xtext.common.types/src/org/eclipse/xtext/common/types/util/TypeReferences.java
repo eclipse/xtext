@@ -173,7 +173,8 @@ public class TypeReferences {
 			throw new NullPointerException("context");
 		ResourceSet resourceSet = EcoreUtil2.getResourceSet(context);
 		if (resourceSet == null)
-			throw new NullPointerException("context must be contained in a resource");
+			return null;
+//			throw new NullPointerException("context must be contained in a resource");
 		// make sure a type provider is configured in the resource set. 
 		IJvmTypeProvider typeProvider = typeProviderFactory.findOrCreateTypeProvider(resourceSet);
 		try {
