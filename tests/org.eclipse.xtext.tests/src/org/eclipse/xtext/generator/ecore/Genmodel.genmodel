@@ -8,9 +8,9 @@
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
     editorPluginID="org.eclipse.xtext.tests.editor">
   <genPackages prefix="First" basePackage="org.eclipse.xtext.generator.ecore" disposableProviderFactory="true"
-      ecorePackage="First.ecore#/">
-    <genClasses ecoreClass="First.ecore#//First">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute First.ecore#//First/name"/>
+      ecorePackage="platform:/resource/org.eclipse.xtext.tests/src/org/eclipse/xtext/generator/ecore/First.ecore#/">
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src/org/eclipse/xtext/generator/ecore/First.ecore#//First">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src/org/eclipse/xtext/generator/ecore/First.ecore#//First/name"/>
     </genClasses>
   </genPackages>
   <genPackages prefix="Second" basePackage="org.eclipse.xtext.generator.ecore" disposableProviderFactory="true"
@@ -623,10 +623,17 @@
     </genClasses>
   </genPackages>
   <genPackages prefix="Second" basePackage="org.eclipse.xtext.generator.ecore" disposableProviderFactory="true"
-      ecorePackage="../../../../../../src-gen/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.ecore#/">
-    <genClasses ecoreClass="../../../../../../src-gen/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.ecore#//Second">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../../../../../src-gen/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.ecore#//Second/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../../../../../src-gen/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.ecore#//Second/first"/>
+      ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.ecore#/">
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.ecore#//Second">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.ecore#//Second/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.ecore#//Second/first"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Second" basePackage="org.eclipse.xtext.generator.ecore" disposableProviderFactory="true"
+      ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.ecore#/">
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.ecore#//Second">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.ecore#//Second/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.ecore#//Second/first"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
