@@ -21,10 +21,12 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -98,6 +100,9 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	
 	@Inject
 	private TypeArgumentContextProvider typeArgumentContextProvider;
+	
+	@Inject
+	private TypeReferences typeReferences;
 
 	public void setFeatureNameProvider(IdentifiableSimpleNameProvider featureNameProvider) {
 		this.featureNameProvider = featureNameProvider;
@@ -222,6 +227,14 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	 * @param idx the index in an expression list of a block. Otherwise to be ignored.
 	 */
 	public IScope createSimpleFeatureCallScope(final EObject context, EReference reference, Resource resource, boolean includeCurrentBlock, int idx) {
+		if (context instanceof XFeatureCall) {
+			XFeatureCall featureCall = (XFeatureCall) context;
+			if (featureCall.getDeclaringType() != null) {
+				JvmParameterizedTypeReference typeReference = typeReferences.createTypeRef(featureCall.getDeclaringType());
+				JvmFeatureScope result = createFeatureScopeForTypeRef(typeReference, context, getContextType(context), null, IScope.NULLSCOPE);
+				return result;
+			}
+		}
 		DelegatingScope implicitThis = new DelegatingScope(IScope.NULLSCOPE);
 		IScope staticScope = createStaticScope(context, resource, implicitThis);
 		IScope localVariableScope = createLocalVarScope(context, reference, staticScope, includeCurrentBlock, idx);

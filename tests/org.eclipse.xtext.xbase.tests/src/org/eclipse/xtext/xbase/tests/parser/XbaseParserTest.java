@@ -253,6 +253,20 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertTrue(call.getExplicitArguments().get(0) instanceof XIntLiteral);
 	}
 	
+	public void testStaticFeatureCall_0() throws Exception {
+		XFeatureCall call = (XFeatureCall) expression("String::valueOf('')");
+		assertNotNull(call.getDeclaringType());
+		assertEquals("java.lang.String", call.getDeclaringType().getQualifiedName());
+		assertEquals("java.lang.String.valueOf(java.lang.Object)", call.getFeature().getIdentifier());
+	}
+	
+	public void testStaticFeatureCall_1() throws Exception {
+		XFeatureCall call = (XFeatureCall) expression("String::CASE_INSENSITIVE_ORDER");
+		assertNotNull(call.getDeclaringType());
+		assertEquals("java.lang.String", call.getDeclaringType().getQualifiedName());
+		assertEquals("java.lang.String.CASE_INSENSITIVE_ORDER", call.getFeature().getIdentifier());
+	}
+	
 	public void testMemberFeatureCall_00() throws Exception {
 		XMemberFeatureCall call = (XMemberFeatureCall) expression("'holla'?.bar(4)");
 		assertTrue(call.isNullSafe());

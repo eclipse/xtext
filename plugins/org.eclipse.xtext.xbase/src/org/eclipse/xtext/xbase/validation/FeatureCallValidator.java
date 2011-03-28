@@ -61,6 +61,8 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 			message = "Feature " + nameProvider.getSimpleName(featureCall.getFeature()) + " is not writeable.";
 		} else if (INSTANCE_ACCESS_TO_STATIC_MEMBER.equals(issueCode)) {
 			message = "Instance access to static member " + nameProvider.getSimpleName(featureCall.getFeature());
+		} else if (STATIC_ACCESS_TO_INSTANCE_MEMBER.equals(issueCode)) {
+			message = "Static access to instance member " + nameProvider.getSimpleName(featureCall.getFeature());
 		} else if (FIELD_ACCESS_WITH_PARENTHESES.equals(issueCode)) {
 			message = "Cannot access field " + nameProvider.getSimpleName(featureCall.getFeature())
 					+ " with parentheses";
