@@ -142,10 +142,15 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		} else {
 			if (!isVariableDeclarationRequired(call)) {
 				if (call.getFeature() instanceof JvmField) {
-					XExpression receiver = featureCallToJavaMapping.getActualReceiver(call);
-					if (receiver!=null) {
-						internalToJavaExpression(receiver, b);
+					if (isStatic(call.getFeature())) {
+						b.append(((JvmFeature) call.getFeature()).getDeclaringType());
 						b.append(".");
+					} else {
+						XExpression receiver = featureCallToJavaMapping.getActualReceiver(call);
+						if (receiver!=null) {
+							internalToJavaExpression(receiver, b);
+							b.append(".");
+						}
 					}
 					b.append(call.getFeature().getSimpleName());
 				} else {
