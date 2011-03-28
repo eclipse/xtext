@@ -39,6 +39,7 @@ import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
@@ -134,6 +135,14 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	}
 	
 	@Override
+	public void completeXFeatureCall_DeclaringType(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		if (getXbaseCrossReferenceProposalCreator().isShowTypeProposals()) {
+			completeJavaTypes(context, XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE, acceptor);
+		}
+	}
+	
+	@Override
 	public void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
 			ICompletionProposalAcceptor acceptor) {
 		if (keyword.getValue().length() > 1 && Character.isLetter(keyword.getValue().charAt(0))) { 
@@ -213,6 +222,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 				createLocalVariableAndImplicitProposals(model, false, -1, context, acceptor);
 				return;
 			}
+		}
+		if (model instanceof XFeatureCall && ((XFeatureCall) model).getDeclaringType() != null) {
+			super.completeXFeatureCall_Feature(model, assignment, context, acceptor);
 		}
 		if (model == null || model instanceof XExpression || model instanceof XCatchClause)
 			createLocalVariableAndImplicitProposals(model, context, acceptor);

@@ -8,47 +8,17 @@
 package org.eclipse.xtext.xbase.ui.tests.editor;
 
 import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
-
-import java.util.Collections;
-
 import junit.extensions.TestSetup;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
-import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
-import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
-import org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil;
-import org.eclipse.xtext.ui.util.PluginProjectFactory;
-import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
-
-import com.google.inject.Injector;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ContentAssistInBlockTest extends ContentAssistTest implements IJavaProjectProvider {
-
-	private static final String PROJECT_NAME = "ContentAssistTestProject";
-
-	private IProject demandCreateProject;
-	
-	@Override
-	protected void tearDown() throws Exception {
-		if (demandCreateProject != null)
-			deleteProject(demandCreateProject);
-		super.tearDown();
-	}
+public class ContentAssistInBlockTest extends ContentAssistTest {
 
 	@Override
 	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
@@ -198,26 +168,6 @@ public class ContentAssistInBlockTest extends ContentAssistTest implements IJava
 		newBuilder().appendNl("var this = ''").appendNl("var y = ").assertText(expect(new String[] {"this"}, KEYWORDS_AND_STATICS, STRING_FEATURES));
 	}
 	
-	@Override
-	protected void initializeTypeProvider(XtextResource result) {
-		XtextResourceSet resourceSet = (XtextResourceSet) result.getResourceSet();
-		IJvmTypeProvider.Factory typeProviderFactory = new JdtTypeProviderFactory(this);
-		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
-	}
-	
-	public IJavaProject getJavaProject(ResourceSet resourceSet) {
-		IJavaProject javaProject = findJavaProject(PROJECT_NAME);
-		if (javaProject == null || !javaProject.exists()) {
-			try {
-				demandCreateProject = createPluginProject(PROJECT_NAME);
-				javaProject = findJavaProject(PROJECT_NAME);
-			} catch (CoreException e) {
-				fail("cannot create java project due to: " + e.getMessage() + " / " + e);
-			}
-		}
-		return javaProject;
-	}
-	
 	public static Test suite() {
 		return new TestSetup(new TestSuite(ContentAssistInBlockTest.class)) {
 			private IProject project;
@@ -236,22 +186,4 @@ public class ContentAssistInBlockTest extends ContentAssistTest implements IJava
 			}
 		};
 	}
-	
-	protected static IProject createPluginProject(String name) throws CoreException {
-		Injector injector = XtypeActivator.getInstance().getInjector("org.eclipse.xtext.xbase.Xbase");
-		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
-		projectFactory.setProjectName(name);
-		projectFactory.addFolders(Collections.singletonList("src"));
-		projectFactory.addBuilderIds(
-			JavaCore.BUILDER_ID, 
-			"org.eclipse.pde.ManifestBuilder",
-			"org.eclipse.pde.SchemaBuilder",
-			XtextProjectHelper.BUILDER_ID);
-		projectFactory.addProjectNatures(JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature", XtextProjectHelper.NATURE_ID);
-		projectFactory.addRequiredBundles(Collections.singletonList("org.eclipse.xtext.xbase.lib"));
-		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
-		JavaProjectSetupUtil.makeJava5Compliant(JavaCore.create(result));
-		return result;
-	}
-	
 }
