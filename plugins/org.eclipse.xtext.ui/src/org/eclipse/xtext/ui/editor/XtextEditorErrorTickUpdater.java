@@ -42,6 +42,7 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 	@Inject
 	private IssueUtil issueUtil;
 	private Image defaultImage;
+	private Severity previousSeverity = null;
 	private XtextEditor editor;
 	private IAnnotationModel annotationModel;
 	private UpdateEditorImageJob updateEditorImageJob;
@@ -50,7 +51,8 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 	public void beforeDispose(XtextEditor xtextEditor) {
 		unregisterListener();
 		if (this.editor != null) {
-			editor.updatedTitleImage(defaultImage); // otherwise we'll leak the defaultImage
+			if (defaultImage != null && !defaultImage.isDisposed())
+				editor.updatedTitleImage(defaultImage); // otherwise we'll leak the defaultImage
 			this.editor = null;
 		}
 	}
@@ -86,6 +88,9 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 
 	protected void updateEditorImage(XtextEditor xtextEditor) {
 		Severity severity = getSeverity(xtextEditor);
+		if (severity == previousSeverity)
+			return;
+		previousSeverity = severity;
 		if (severity != null && severity != Severity.INFO) {
 			ImageDescriptor descriptor = severity == Severity.ERROR ? XtextPluginImages.DESC_OVR_ERROR
 					: XtextPluginImages.DESC_OVR_WARNING;
