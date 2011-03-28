@@ -65,11 +65,8 @@ public class SingleLineTerminalsStrategy extends AbstractTerminalsEditStrategy {
 	@Override
 	protected void internalCustomizeDocumentCommand(IDocument document, DocumentCommand command)
 			throws BadLocationException {
-
-		if (command.length == 0) {
-			handleInsertLeftTerminal(document, command);
-			handleInsertRightTerminal(document, command);
-		}
+		handleInsertLeftTerminal(document, command);
+		handleInsertRightTerminal(document, command);
 		handleDeletion(document, command);
 	}
 
@@ -118,13 +115,13 @@ public class SingleLineTerminalsStrategy extends AbstractTerminalsEditStrategy {
 
 	protected void handleInsertRightTerminal(IDocument document, DocumentCommand command) throws BadLocationException {
 		//closing terminal
-		if (command.text.equals(getRightTerminal()) && command.length == 0) {
-			if (command.offset + getRightTerminal().length() > document.getLength())
+		if (command.text.equals(getRightTerminal())) {
+			if (command.offset + command.length + getRightTerminal().length() > document.getLength())
 				return;
 			String documentContent = getDocumentContent(document, command);
 			int opening = count(getLeftTerminal(), documentContent);
 			int closing = count(getRightTerminal(), documentContent);
-			if (opening <= closing && getRightTerminal().equals(document.get(command.offset, command.text.length()))) {
+			if (opening <= closing && getRightTerminal().equals(document.get(command.offset + command.length, command.text.length()))) {
 				command.length += getRightTerminal().length();
 			}
 		}

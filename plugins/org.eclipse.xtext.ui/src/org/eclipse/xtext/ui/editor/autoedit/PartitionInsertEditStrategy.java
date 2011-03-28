@@ -43,7 +43,7 @@ public class PartitionInsertEditStrategy extends AbstractEditStrategy {
 				if (right.equals(document.get(command.offset, right.length())))
 					return;
 			}
-			if (isIdentifierPart(document, command.offset))
+			if (isIdentifierPart(document, command.offset + command.length))
 				return;
 			if (left.length() > 1) {
 				int minDocumentLength = left.length() - command.text.length();

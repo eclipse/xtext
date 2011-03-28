@@ -40,7 +40,7 @@ public class XtextAutoEditStrategy extends DefaultAutoEditStrategyProvider {
 
 			public boolean isInsertClosingBracket(IDocument doc, int offset) throws Exception {
 				char c = doc.getChar(offset);
-				return Character.isWhitespace(c) || c==';';
+				return Character.isWhitespace(c) || c==':' || c==';';
 			}
 			
 		}), IDocument.DEFAULT_CONTENT_TYPE);
