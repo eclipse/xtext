@@ -56,6 +56,10 @@ public abstract class AbstractSplittingTokenSource implements TokenSource {
 		return result;
 	}
 	
+	public String getSourceName() {
+		return "[SplittingTokenSource] " + delegate.getSourceName();
+	}
+	
 	protected String getRuleName(Token token) {
 		String result = tokenDefs.get(token.getType());
 		result = getLexerRuleName(result);
