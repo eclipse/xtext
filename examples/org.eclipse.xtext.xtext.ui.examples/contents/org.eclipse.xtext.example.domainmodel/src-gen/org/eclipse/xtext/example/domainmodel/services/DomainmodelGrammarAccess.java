@@ -529,9 +529,9 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XAssignment returns XExpression:
-	//	{XAssignment} feature=[types::JvmIdentifiableElement] OpSingleAssign value=XAssignment | XOrExpression (=>
-	//	({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign])
-	//	rightOperand=XAssignment)?;
+	//	{XAssignment} / * (declaringType=[types::JvmDeclaredType] '::')? * / feature=[types::JvmIdentifiableElement]
+	//	OpSingleAssign value=XAssignment | XOrExpression (=> ({XBinaryOperation.leftOperand=current}
+	//	feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment)?;
 	public XbaseGrammarAccess.XAssignmentElements getXAssignmentAccess() {
 		return gaXbase.getXAssignmentAccess();
 	}
@@ -910,9 +910,10 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XFeatureCall returns XExpression:
-	//	{XFeatureCall} ("<" typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
-	//	feature=[types::JvmIdentifiableElement] (=> explicitOperationCall?="(" (featureCallArguments+=XShortClosure |
-	//	featureCallArguments+=XExpression ("," featureCallArguments+=XExpression)*)? ")")?;
+	//	{XFeatureCall} (declaringType=[types::JvmDeclaredType] "::")? ("<" typeArguments+=JvmArgumentTypeReference (","
+	//	typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement] (=> explicitOperationCall?="("
+	//	(featureCallArguments+=XShortClosure | featureCallArguments+=XExpression ("," featureCallArguments+=XExpression)*)?
+	//	")")?;
 	public XbaseGrammarAccess.XFeatureCallElements getXFeatureCallAccess() {
 		return gaXbase.getXFeatureCallAccess();
 	}
