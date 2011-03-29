@@ -185,6 +185,32 @@ public class ImportScopeTest extends TestCase {
 		assertNotNull(scope.getSingleElement(QualifiedName.create("de","Foo")));
 	}
 	
+	public void testDuplicatesNotVisible_05() throws Exception {
+		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com", "Foo"), EcorePackage.Literals.EANNOTATION, null);
+		SimpleScope outer = new SimpleScope(newArrayList(desc1), false);
+		ImportNormalizer n1 = new ImportNormalizer(QualifiedName.create("com"), true, false);
+		ImportNormalizer n2 = new ImportNormalizer(QualifiedName.create("com"), true, false);
+		TestableImportScope scope = new TestableImportScope(newArrayList(n1,n2), outer, new ScopeBasedSelectable(outer), EcorePackage.Literals.EOBJECT, true);
+		
+		Iterator<IEObjectDescription> iterator = scope.getAllElements().iterator();
+		assertEquals(QualifiedName.create("Foo"),iterator.next().getName());
+		assertSame(desc1,iterator.next());
+		assertFalse(iterator.hasNext());
+	}
+	
+	public void testDuplicatesNotVisible_05_IgnoreCase() throws Exception {
+		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com","Foo"), EcorePackage.Literals.EANNOTATION, null);
+		SimpleScope outer = new SimpleScope(newArrayList(desc1), true);
+		ImportNormalizer n1 = new ImportNormalizer(QualifiedName.create("COM"), true, true);
+		ImportNormalizer n2 = new ImportNormalizer(QualifiedName.create("com"), true, true);
+		TestableImportScope scope = new TestableImportScope(newArrayList(n1,n2), outer, new ScopeBasedSelectable(outer), EcorePackage.Literals.EOBJECT, true);
+		
+		Iterator<IEObjectDescription> iterator = scope.getAllElements().iterator();
+		assertEquals(QualifiedName.create("Foo"),iterator.next().getName());
+		assertSame(desc1,iterator.next());
+		assertFalse(iterator.hasNext());
+	}
+	
 	public void testMultipleElementsByName_00() throws Exception {
 		final IEObjectDescription desc1 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
 		final IEObjectDescription desc2 = new EObjectDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EATTRIBUTE, null);
