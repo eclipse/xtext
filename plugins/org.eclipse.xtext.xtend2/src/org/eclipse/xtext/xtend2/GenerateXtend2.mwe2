@@ -72,7 +72,7 @@ Workflow {
 			fragment = refactoring.RefactorElementNameFragment {}
 			fragment = types.TypesGeneratorFragment {}
 			fragment = xbase.XbaseGeneratorFragment {
-				generateInferrer = false
+				generateXtendInferrer = false
 			}
 		}
 	}

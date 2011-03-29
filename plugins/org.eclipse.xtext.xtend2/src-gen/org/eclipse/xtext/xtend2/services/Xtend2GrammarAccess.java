@@ -1665,6 +1665,9 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		return getXFeatureCallAccess().getRule();
 	}
 
+	//// This is a workaround since ANTLR will not be able to resolve
+	//// StaticQualifier: ID ('::' ID)*; and XFeatureCall: (StaticQualifier '::')? ID
+	//// Make sure to change the value converter if you change the syntax of the StaticQualifier
 	//StaticQualifier:
 	//	(ID "::")+;
 	public XbaseGrammarAccess.StaticQualifierElements getStaticQualifierAccess() {
