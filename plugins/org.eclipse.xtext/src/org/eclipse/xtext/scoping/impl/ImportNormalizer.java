@@ -78,6 +78,16 @@ public class ImportNormalizer {
 	}
 	
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (hasWildCard ? 1231 : 1237);
+		result = prime * result + (ignoreCase ? 1231 : 1237);
+		result = prime * result + (ignoreCase ? importedNamespacePrefix.toLowerCase().hashCode() : importedNamespacePrefix.hashCode());
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this==obj)
 			return true;
@@ -85,17 +95,14 @@ public class ImportNormalizer {
 			return false;
 		if (obj instanceof ImportNormalizer) {
 			ImportNormalizer other = (ImportNormalizer)obj;
-			//TODO not ignore case aware
-			return other.hasWildCard==hasWildCard &&
-				other.ignoreCase==ignoreCase &&
-				other.importedNamespacePrefix.equals(importedNamespacePrefix);
+			if (other.hasWildCard!=hasWildCard || other.ignoreCase!=ignoreCase)
+				return false;
+			if (ignoreCase) {
+				return other.importedNamespacePrefix.equalsIgnoreCase(importedNamespacePrefix);
+			}
+			return other.importedNamespacePrefix.equals(importedNamespacePrefix);
 		}
 		return false;
 	}
 	
-	@Override
-	public int hashCode() {
-		return importedNamespacePrefix.hashCode();
-	}
-
 }
