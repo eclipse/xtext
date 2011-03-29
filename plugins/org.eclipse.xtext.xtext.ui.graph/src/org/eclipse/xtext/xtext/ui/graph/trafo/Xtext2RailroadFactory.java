@@ -50,13 +50,13 @@ public class Xtext2RailroadFactory {
 	public ISegmentFigure createNodeSegment(Keyword keyword) {
 		NodeSegment nodeSegment = new NodeSegment(keyword, NodeType.RECTANGLE, keyword.getValue(), primitiveFactory,
 				getTextRegion(keyword));
-		return wrapCardinaltiySegments(keyword, nodeSegment);
+		return wrapCardinalitySegments(keyword, nodeSegment);
 	}
 
 	public ISegmentFigure createNodeSegment(RuleCall ruleCall) {
 		NodeSegment nodeSegment = new NodeSegment(ruleCall, NodeType.ROUNDED, ruleCall.getRule().getName(),
 				primitiveFactory, getTextRegion(ruleCall));
-		return wrapCardinaltiySegments(ruleCall, nodeSegment);
+		return wrapCardinalitySegments(ruleCall, nodeSegment);
 	}
 
 	public ISegmentFigure createNodeSegment(EObject grammarElement, Throwable throwable) {
@@ -73,17 +73,17 @@ public class Xtext2RailroadFactory {
 
 	public ISegmentFigure createSequence(Group group, List<ISegmentFigure> children) {
 		SequenceSegment sequence = new SequenceSegment(group, children, primitiveFactory);
-		return wrapCardinaltiySegments(group, sequence);
+		return wrapCardinalitySegments(group, sequence);
 	}
 
 	public ISegmentFigure createParallel(Alternatives alternatives, List<ISegmentFigure> children) {
 		ParallelSegment multiSwitch = new ParallelSegment(alternatives, children, primitiveFactory);
-		return wrapCardinaltiySegments(alternatives, multiSwitch);
+		return wrapCardinalitySegments(alternatives, multiSwitch);
 	}
 
 	public ISegmentFigure createParallel(UnorderedGroup unorderedGroup, List<ISegmentFigure> children) {
 		ParallelSegment multiSwitch = new ParallelSegment(unorderedGroup, children, primitiveFactory);
-		return wrapCardinaltiySegments(unorderedGroup, multiSwitch);
+		return wrapCardinalitySegments(unorderedGroup, multiSwitch);
 	}
 
 	protected Region getTextRegion(EObject eObject) {
@@ -94,7 +94,7 @@ public class Xtext2RailroadFactory {
 			return null;
 	}
 
-	protected ISegmentFigure wrapCardinaltiySegments(AbstractElement element, ISegmentFigure segment) {
+	protected ISegmentFigure wrapCardinalitySegments(AbstractElement element, ISegmentFigure segment) {
 		ISegmentFigure result = segment;
 		EObject cardinalityElement = getParentWithCardinality(element);
 		if (cardinalityElement instanceof AbstractElement) {
@@ -113,6 +113,8 @@ public class Xtext2RailroadFactory {
 		String cardinality = element.getCardinality();
 		while (cardinality == null && cardinalityElement != null) {
 			cardinalityElement = cardinalityElement.eContainer();
+			if(cardinalityElement instanceof Group && ((Group)cardinalityElement).getElements().size() >1)
+				return element;
 			if (cardinalityElement instanceof AbstractElement)
 				cardinality = ((AbstractElement) cardinalityElement).getCardinality();
 		}
