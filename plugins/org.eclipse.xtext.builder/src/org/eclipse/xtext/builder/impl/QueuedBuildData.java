@@ -58,7 +58,7 @@ public class QueuedBuildData {
 	@Inject
 	IStorage2UriMapper mapper;
 	
-	void queueURI(URI uri) {
+	public void queueURI(URI uri) {
 		if (uri.isPlatformResource()) {
 			String projectName = uri.segment(1);
 			// hidden project for linked bundles from host workspace
