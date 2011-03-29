@@ -14,11 +14,10 @@ import org.eclipse.emf.ecore.impl.EValidatorRegistryImpl;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator.State;
 import org.eclipse.xtext.validation.AbstractInjectableValidator;
 import org.eclipse.xtext.validation.EValidatorRegistrar;
-import org.eclipse.xtext.validation.AbstractDeclarativeValidator.State;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.name.Names;
@@ -47,7 +46,9 @@ public class ValidatorTester<T extends AbstractDeclarativeValidator> extends Abs
 		diagnostician = new Diagnostician(newRegistry) {
 			@Override
 			public java.util.Map<Object,Object> createDefaultContext() {
-				return ImmutableMap.<Object, Object>of(AbstractInjectableValidator.CURRENT_LANGUAGE_NAME, languageName);
+				java.util.Map<Object,Object> map = super.createDefaultContext();
+				map.put(AbstractInjectableValidator.CURRENT_LANGUAGE_NAME, languageName);
+				return map;
 			}
 		};
 		registrar.setRegistry(originalRegistry);
