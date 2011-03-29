@@ -31,7 +31,8 @@ public class CompoundXtextEditorCallback implements IXtextEditorCallback {
 
 	@Inject
 	public CompoundXtextEditorCallback(Injector injector) {
-		List<Binding<IXtextEditorCallback>> bindingsByType = injector.findBindingsByType(TypeLiteral
+		List<Binding<IXtextEditorCallback>> bindingsByType = injector == null ? Lists
+				.<Binding<IXtextEditorCallback>> newArrayList() : injector.findBindingsByType(TypeLiteral
 				.get(IXtextEditorCallback.class));
 		for (Binding<IXtextEditorCallback> binding : bindingsByType) {
 			try {

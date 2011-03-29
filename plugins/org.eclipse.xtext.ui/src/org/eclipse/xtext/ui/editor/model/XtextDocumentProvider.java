@@ -12,6 +12,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Collections;
 
+import org.eclipse.core.resources.IEncodedStorage;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -132,7 +133,9 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 
 	protected void loadResource(XtextResource resource, String document, String encoding) throws CoreException {
 		try {
-			resource.load(new ByteArrayInputStream(document.getBytes(encoding)),
+			// encoding can be null for FileRevisionEditorInput
+			byte[] bytes = encoding != null ? document.getBytes(encoding) : document.getBytes();
+			resource.load(new ByteArrayInputStream(bytes),
 					Collections.singletonMap(XtextResource.OPTION_ENCODING, encoding));
 		} catch (IOException ex) {
 			String message = (ex.getMessage() != null ? ex.getMessage() : ex.toString());
@@ -227,7 +230,9 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 				IStorage storage = ((IStorageEditorInput) element).getStorage();
 				URI uri = storage2UriMapper.getUri(storage);
 				if (uri != null) {
-					return encodingProvider.getEncoding(uri);
+					encoding = encodingProvider.getEncoding(uri);
+				} else if (storage instanceof IEncodedStorage) {
+					encoding = ((IEncodedStorage)storage).getCharset();
 				}
 			} catch (CoreException e) {
 				throw new WrappedException(e);
