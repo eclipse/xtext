@@ -141,7 +141,7 @@ public class JavaElementFinder implements IJavaElementFinder {
 				IType type = (IType) parent;
 				try {
 					for(IMethod method: type.getMethods()) {
-						if (method.isConstructor()) {
+						if (method.isConstructor() && object.getParameters().size() == method.getNumberOfParameters()) {
 							int numberOfParameters = method.getNumberOfParameters();
 							String[] parameterTypes = method.getParameterTypes();
 							boolean match = true;
