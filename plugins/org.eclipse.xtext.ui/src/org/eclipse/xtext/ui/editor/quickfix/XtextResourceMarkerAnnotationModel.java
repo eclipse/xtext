@@ -9,6 +9,8 @@ package org.eclipse.xtext.ui.editor.quickfix;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.ui.texteditor.ResourceMarkerAnnotationModel;
@@ -22,6 +24,7 @@ public class XtextResourceMarkerAnnotationModel extends ResourceMarkerAnnotation
 
 	private final IssueResolutionProvider issueResolutionProvider;
 	private final IssueUtil issueUtil;
+	private boolean connected;
 
 	public XtextResourceMarkerAnnotationModel(IFile file, IssueResolutionProvider issueResolutionProvider, IssueUtil markerUtil) {
 		super(file);
@@ -50,6 +53,20 @@ public class XtextResourceMarkerAnnotationModel extends ResourceMarkerAnnotation
 	
 	public void fireQueuedEvents() {
 		fireModelChanged();
+	}
+
+	@Override
+	protected void connected() {
+		super.connected();
+		this.connected = true;
+	}
+
+	@Override
+	public void updateMarkers(IDocument document) throws CoreException {
+		if (!this.connected) {
+			return;
+		}
+		super.updateMarkers(document);
 	}
 
 }

@@ -17,6 +17,7 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.jface.text.presentation.IPresentationDamager;
 import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.Regions;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 
@@ -34,6 +35,9 @@ public class PresentationDamager implements IPresentationDamager {
 	public void setDocument(IDocument document) {}
 
 	public IRegion getDamageRegion(ITypedRegion partition, DocumentEvent e, boolean documentPartitioningChanged) {
+		if (!(e.getDocument() instanceof IXtextDocument)) {
+			return new Region(0, 0);
+		}
 		XtextDocument document = (XtextDocument) e.getDocument();
 		IRegion lastDamage = document.getLastDamage();
 		// check whether this is just a presentation invalidation not based on a real document change

@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.xtext.resource.IExternalContentSupport;
-import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider;
+import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
@@ -61,12 +61,10 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 	}
 
 	protected Resource createResource(IStorage storage) throws CoreException {
-		if (storage instanceof IFile)
-			return createResourceFor((IFile) storage);
-		return null;
+		return createResourceFor(storage);
 	}
 
-	protected Resource createResourceFor(IFile storage) throws CoreException {
+	protected Resource createResourceFor(IStorage storage) throws CoreException {
 		ResourceSet resourceSet = getResourceSet(storage);
 		URI uri = URI.createPlatformResourceURI(storage.getFullPath().toString(), true);
 		configureResourceSet(resourceSet, uri);
