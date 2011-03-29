@@ -15,8 +15,8 @@
 «EXTENSION org::eclipse::xtext::GrammarUtil»
 «EXTENSION org::eclipse::xtext::generator::xbase::XbaseGeneratorFragment»
 
-«DEFINE generate(Boolean generateInferrer) FOR Grammar»
-«IF generateInferrer»
+«DEFINE generate(Boolean useInferredJvmModel, Boolean generateXtendInferrer) FOR Grammar»
+«IF generateXtendInferrer»
 «FILE getJvmModelInferrerName().asPath()+".xtend" SRC-»
 package «getJvmModelInferrerName().toJavaPackage()»
  
@@ -43,12 +43,14 @@ class «getJvmModelInferrerName().toSimpleName()» implements IJvmModelInferrer {
    	}
 }
 «ENDFILE»
+«ENDIF»
 
-«FILE getRefactoringStrategyName().asPath() +".java" SRC_UI»
+«IF useInferredJvmModel»
+«FILE getJvmRenameStrategyName().asPath() +".java" SRC_UI»
 /*
 «fileHeader()»
 */
-package «getRefactoringStrategyName().toJavaPackage()»;
+package «getJvmRenameStrategyName().toJavaPackage()»;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
@@ -63,7 +65,7 @@ import com.google.inject.Inject;
 /**
  * Encapsulates the model changes of a rename refactoring.  
  */
-public class «getRefactoringStrategyName().toSimpleName()» extends AbstractJvmModelRenameStrategy {
+public class «getJvmRenameStrategyName().toSimpleName()» extends AbstractJvmModelRenameStrategy {
 
 	public static class Provider extends DefaultRenameStrategy.Provider {
 
@@ -72,11 +74,11 @@ public class «getRefactoringStrategyName().toSimpleName()» extends AbstractJvmMo
 
 		@Override
 		public IRenameStrategy get(EObject targetElement, IRenameElementContext renameElementContext) {
-			return new «getRefactoringStrategyName().toSimpleName()»(targetElement, getLocationInFileProvider(), jvmModelAssociations);
+			return new «getJvmRenameStrategyName().toSimpleName()»(targetElement, getLocationInFileProvider(), jvmModelAssociations);
 		}
 	}
 	
-	protected «getRefactoringStrategyName().toSimpleName()»(EObject targetElement, ILocationInFileProvider locationInFileProvider,
+	protected «getJvmRenameStrategyName().toSimpleName()»(EObject targetElement, ILocationInFileProvider locationInFileProvider,
 			IJvmModelAssociations jvmModelAssociations) {
 		super(targetElement, locationInFileProvider, jvmModelAssociations);
 	}
@@ -92,14 +94,14 @@ public class «getRefactoringStrategyName().toSimpleName()» extends AbstractJvmMo
 «ENDIF»
 «ENDDEFINE»
 
-«DEFINE addToPluginXmlRt(Boolean generateInferrer) FOR Grammar»
+«DEFINE addToPluginXmlRt(Boolean useInferredJvmModel, Boolean generateXtendInferrer) FOR Grammar»
 «ENDDEFINE» 
 
 
-«DEFINE addToPluginXmlUi(Boolean generateInferrer) FOR Grammar»
+«DEFINE addToPluginXmlUi(Boolean useInferredJvmModel, Boolean generateXtendInferrer) FOR Grammar»
 «ENDDEFINE»
 
 
-«DEFINE addToStandaloneSetup(Boolean generateInferrer) FOR Grammar»
+«DEFINE addToStandaloneSetup(Boolean useInferredJvmModel, Boolean generateXtendInferrer) FOR Grammar»
 «ENDDEFINE»
 

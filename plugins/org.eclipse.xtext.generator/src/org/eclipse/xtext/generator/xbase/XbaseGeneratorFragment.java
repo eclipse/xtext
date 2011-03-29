@@ -41,7 +41,8 @@ import com.google.common.collect.Lists;
  */
 public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	
-	private boolean generateInferrer = true;
+	private boolean generateXtendInferrer = true;
+	private boolean useInferredJvmModel = true;
 	
 	protected boolean usesXbaseGrammar(Grammar grammar) {
 		if (grammar.getName().equals("org.eclipse.xtext.xbase.Xbase"))
@@ -55,12 +56,20 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 		return false;
 	}
 	
-	public void setGenerateInferrer(boolean generateInferrer) {
-		this.generateInferrer = generateInferrer;
+	public void setGenerateXtendInferrer(boolean generateXtendInferrer) {
+		this.generateXtendInferrer = generateXtendInferrer;
+	}
+	
+	public void setUseInferredJvmModel(boolean useInferredJvmModel) {
+		this.useInferredJvmModel = useInferredJvmModel;
 	}
 
 	public static String getJvmModelInferrerName(Grammar grammar, Naming naming) {
 		return naming.basePackageRuntime(grammar) + ".jvmmodel." + GrammarUtil.getName(grammar) + "JvmModelInferrer";
+	}
+
+	public static String getJvmRenameStrategyName(Grammar grammar, Naming naming) {
+		return naming.basePackageUi(grammar) + ".refactoring." + GrammarUtil.getName(grammar) + "RenameStrategy";
 	}
 
 	@Override
@@ -92,27 +101,30 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 								+ ".NAMED_DELEGATE)).to(org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider.class)")
 				.addTypeToType("org.eclipse.xtext.common.types.util.TypeConformanceComputer",
 						"org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer")
-
+				.addTypeToType(XtextResource.class.getName(),
+				"org.eclipse.xtext.xbase.resource.XbaseResource")
+				// obsolete convenience bindings
+				.addTypeToType("org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider",
+				"org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider");
+		if (useInferredJvmModel) {
+			config = config
 				.addTypeToType(ILocationInFileProvider.class.getName(),
 						"org.eclipse.xtext.xbase.jvmmodel.JvmLocationInFileProvider")
 				.addTypeToType(EObjectAtOffsetHelper.class.getName(),
 						"org.eclipse.xtext.xbase.jvmmodel.JvmEObjectAtOffsetHelper")
-				.addTypeToType(ILinker.class.getName(), "org.eclipse.xtext.xbase.jvmmodel.JvmModelXbaseLazyLinker")
+				.addTypeToType(ILinker.class.getName(), 
+						"org.eclipse.xtext.xbase.jvmmodel.JvmModelXbaseLazyLinker")
 				.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations",
 						"org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator")
 				.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator",
 						"org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator")
 				.addTypeToType(IGlobalScopeProvider.class.getName(),
-						"org.eclipse.xtext.xbase.jvmmodel.JvmGlobalScopeProvider")
-				.addTypeToType(XtextResource.class.getName(),
-						"org.eclipse.xtext.xbase.resource.XbaseResource")
-				// obsolete convenience bindings
-				.addTypeToType("org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider",
-						"org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider");
-		if (generateInferrer) {
-			config = config
-			.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer",
-							getJvmModelInferrerName(grammar, getNaming()));
+						"org.eclipse.xtext.xbase.jvmmodel.JvmGlobalScopeProvider");
+			if(generateXtendInferrer) {
+				config = config
+					.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer",
+						getJvmModelInferrerName(grammar, getNaming()));
+			}
 		}
 		return config.getBindings();
 	}
@@ -127,19 +139,20 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType("org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider.ReferenceProposalCreator",
 						"org.eclipse.xtext.xbase.ui.contentassist.XbaseReferenceProposalCreator")
 				.addTypeToType("org.eclipse.jface.text.contentassist.IContentAssistProcessor", 
-						"org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor")
+						"org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor");
+		if (useInferredJvmModel) {
+			// rename refactoring
+			bindFactory = bindFactory
 				.addTypeToType("org.eclipse.xtext.ui.editor.findrefs.FindReferenceQueryDataFactory", 
-						"org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceQueryDataFactory");
-		if (generateInferrer) {
-				// rename refactoring
-				bindFactory = bindFactory.addTypeToType("org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator",
+						"org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceQueryDataFactory")
+				.addTypeToType("org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator",
 						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelDependentElementsCalculator")
 				.addTypeToType("org.eclipse.xtext.ui.refactoring.impl.RefactoringReferenceQueryDataFactory",
 						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelFindRefsQueryDataFactory")
 				.addTypeToType("org.eclipse.xtext.ui.refactoring.IReferenceUpdater",
 						"org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelReferenceUpdater")
 				.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider",
-						getRenameStrategyName(grammar, getNaming())+".Provider");
+						getJvmRenameStrategyName(grammar, getNaming())+".Provider");
 		}
 		return bindFactory.getBindings();
 	}
@@ -166,10 +179,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		return Lists.<Object>newArrayList(generateInferrer);
+		return Lists.<Object>newArrayList(useInferredJvmModel, generateXtendInferrer);
 	}
 
-	public static String getRenameStrategyName(Grammar grammar, Naming naming) {
-		return naming.basePackageUi(grammar) + ".refactoring." + GrammarUtil.getName(grammar) + "RenameStrategy";
-	}
 }
