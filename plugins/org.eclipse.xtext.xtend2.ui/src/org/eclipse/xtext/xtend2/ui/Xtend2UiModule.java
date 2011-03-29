@@ -15,12 +15,6 @@ import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IComparat
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
-import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
-import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
-import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
-import org.eclipse.xtext.ui.refactoring.impl.RefactoringReferenceQueryDataFactory;
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelFindRefsQueryDataFactory;
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelReferenceUpdater;
 import org.eclipse.xtext.xtend2.ui.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtext.xtend2.ui.autoedit.TokenTypeToPartitionMapper;
 import org.eclipse.xtext.xtend2.ui.contentassist.ImportingTypesProposalProvider;
@@ -32,8 +26,6 @@ import org.eclipse.xtext.xtend2.ui.highlighting.RichStringHighlightingCalculator
 import org.eclipse.xtext.xtend2.ui.highlighting.ShowWhitespaceCharactersActionContributor;
 import org.eclipse.xtext.xtend2.ui.highlighting.TokenToAttributeIdMapper;
 import org.eclipse.xtext.xtend2.ui.outline.Xtend2OutlineNodeComparator;
-import org.eclipse.xtext.xtend2.ui.refactoring.Xtend2DependentElementsCalculator;
-import org.eclipse.xtext.xtend2.ui.refactoring.Xtend2RenameStrategy;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -64,10 +56,6 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 		return RichStringHighlightingCalculator.class;
 	}
 	
-	public Class<? extends IRenameStrategy.Provider> bindIRenameStrategy$Provider() {
-		return Xtend2RenameStrategy.Provider.class;
-	}
-	
 	public Class<? extends ITokenTypeToPartitionTypeMapper> bindITokenTypeToPartitionTypeMapper() {
 		return TokenTypeToPartitionMapper.class;
 	}
@@ -81,18 +69,6 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 		binder.bind(IActionContributor.class).annotatedWith(Names.named("Show Whitespace")).to(ShowWhitespaceCharactersActionContributor.class);
 	}
 	
-	public Class<? extends IDependentElementsCalculator> bindIDependentElementsCalculator() {
-		return Xtend2DependentElementsCalculator.class;
-	}
-	
-	public Class<? extends RefactoringReferenceQueryDataFactory> bindRefactoringReferenceQueryDataFactory() {
-		return JvmModelFindRefsQueryDataFactory.class;
-	}
-
-	public Class<? extends IReferenceUpdater> bindIReferenceUpdater() {
-		return JvmModelReferenceUpdater.class;
-	}
-
 	public Class<? extends DoubleClickStrategyProvider> bindDoubleClickStrategyProvider() {
 		return Xtend2DoubleClickStrategyProvider.class;
 	}
