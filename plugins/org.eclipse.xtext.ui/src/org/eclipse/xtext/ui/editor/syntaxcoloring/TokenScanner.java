@@ -92,15 +92,13 @@ public class TokenScanner extends AbstractTokenScanner {
 			overlapFilter = Regions.overlaps(offset, length);
 			if (current == null) {
 				delegate = getTokens(document).iterator();
+				computedHasNext = false;
+				hasNext = false;
 			} else {
 				if (current.getOffset() <= offset && current.getOffset() + current.getLength() > offset) {
 					// offset is inside of current - return current as next
 					computedHasNext = true;
 					hasNext = true;
-				} else if (current.getOffset() + current.getLength() <= offset) {
-					// keep the delegate but compute hasNext on demand
-					computedHasNext = false;
-					hasNext = false;
 				} else {
 					// restart - use a new delegate
 					computedHasNext = false;
