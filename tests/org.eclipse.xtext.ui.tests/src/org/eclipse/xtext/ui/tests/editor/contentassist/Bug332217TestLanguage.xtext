@@ -1,0 +1,121 @@
+/*******************************************************************************
+ * Initially copied from the ApplauseDSL and stripped down to a smaller
+ * example
+ *******************************************************************************/
+grammar org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage
+ 	with org.eclipse.xtext.common.Terminals
+
+generate bug332217TestLanguage "http://www.eclipse.org/xtext/ui/common/tests/2011/bug332217TestLanguage"
+
+Model:
+	(elements+=TableView)*;
+	
+// -------------------------------------------
+// General
+
+// common supertype to allow variableReferences
+PropertyPathPart:
+	Parameter | CollectionIterator;
+
+TypeDescription:
+	type=ID (many?='[]')?;
+	
+Parameter:
+	description=TypeDescription name=ID;
+
+ObjectReference:
+	object=[PropertyPathPart] tail=NestedObjectReference?;
+	
+//workaround: NestedObjectReference as separate rule to guide the content 
+//   assist parser technically could have been include in ObjectReference like
+//   ObjectReference:
+//     object=[PropertyPathPart] ('.' tail=ObjectReference)?;
+NestedObjectReference returns ObjectReference:
+	'.' object=[PropertyPathPart] tail=NestedObjectReference?;
+
+//TODO: could this be ScalarExpression | CollectionExpression? and simplify rootParameter extension
+Expression:
+	StringLiteral | StringFunction | CollectionLiteral | CollectionFunction | ObjectReference;
+
+ImageExpression returns ScalarExpression:
+	ScalarExpression;
+
+ScalarExpression:
+	StringLiteral | StringFunction | ObjectReference;
+	
+CollectionExpression:
+	CollectionLiteral | CollectionFunction | ObjectReference;
+	
+StringLiteral:
+	value=STRING;
+
+StringFunction:
+	{StringConcat} '(' (values+=ScalarExpression)+ ')' |
+	{StringReplace} 'replace(' value=ScalarExpression ',' match=ScalarExpression ',' replacement=ScalarExpression ')' |
+	{StringUrlConform} 'urlconform(' value=ScalarExpression ')';
+	
+CollectionLiteral:
+	'[' items+=ScalarExpression (',' items+=ScalarExpression)* ']';
+	
+CollectionFunction:
+	{StringSplit} 'split(' value=ScalarExpression ',' delimiter=ScalarExpression ')'
+;
+
+// -------------------------------------------
+// views
+
+
+enum TableViewStyle:
+	Plain | Grouped;
+
+TableView:
+	'tableview' name=ID ('(' content=Parameter ')')? '{'
+		( ('title:' title=ScalarExpression)?
+		& ('titleImage:' titleImage=ImageExpression)?
+		& ('style:' style=TableViewStyle)? )
+		
+		(sections+=Section)*
+	'}';
+	
+ViewContentElement:
+	Section | Cell;
+
+Section:
+	'section' iterator=CollectionIterator? '{'
+		('title:' title=ScalarExpression)?
+		(cells+=Cell)+
+	'}';
+	
+Cell:
+	'cell' type=CellType iterator=CollectionIterator? '{'
+		( ('text:' text=ScalarExpression)?
+		& ('details:' details=ScalarExpression)?
+		& ('image:' image=ScalarExpression)?
+		& ('action:' action=ViewAction)? 
+		& ('accessory:' accessory=CellAccessory)?)
+	'}';
+	
+enum CellType:
+	default = 'Default' |
+	value1 = 'Value1' |
+	value2 = 'Value2' |
+	subtitle = 'Subtitle';
+
+enum CellAccessory:
+	None | Link | Detail | Check;
+
+CollectionIterator:
+	'for' name=ID 'in' collection=CollectionExpression;
+	
+ViewAction:
+	ExternalOpen | Selector;
+
+SelectorName: 
+  ID (':' ID)* ':'?;
+
+Selector:
+	'@selector' '(' name=SelectorName ')';
+
+ExternalOpen:
+	url=ScalarExpression;
+
