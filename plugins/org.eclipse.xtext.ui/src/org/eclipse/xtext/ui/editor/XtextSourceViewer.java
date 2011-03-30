@@ -48,7 +48,6 @@ public class XtextSourceViewer extends ProjectionViewer {
 	 */
 	@SuppressWarnings("unchecked")
 	public void prependTextPresentationListener(ITextPresentationListener listener) {
-
 		Assert.isNotNull(listener);
 
 		if (fTextPresentationListeners == null)
