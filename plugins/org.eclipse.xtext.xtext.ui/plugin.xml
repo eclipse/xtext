@@ -270,6 +270,11 @@
 			
 			// rename refactoring  
 			fragment = refactoring.RefactorElementNameFragment {}
+			
+			// provides a compare view
+			fragment = compare.CompareFragment {
+				fileExtensions = file.extensions
+			}
 
 			// generates a more lightweight Antlr parser and lexer tailored for content assist  
 			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {}
