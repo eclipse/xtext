@@ -18,6 +18,9 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
 public class DefaultRenameRefactoringProvider implements IRenameRefactoringProvider {
 	@Inject
 	private Provider<AbstractRenameProcessor> processorProvider;
@@ -31,7 +34,7 @@ public class DefaultRenameRefactoringProvider implements IRenameRefactoringProvi
 		return null;
 	}
 	
-	static class RenameRefactoring extends ProcessorBasedRefactoring {
+	protected static class RenameRefactoring extends ProcessorBasedRefactoring {
 
 		private RenameProcessor fProcessor;
 
