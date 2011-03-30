@@ -119,6 +119,7 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 		return ProjectAwareXtendXtext2EcorePostProcessor.class;
 	}
 
+	@SuppressWarnings("restriction")
 	public Class<? extends IXtextEditorCallback> bindIXtextEditorCallback() {
 		return org.eclipse.xtext.builder.nature.NatureAddingEditorCallback.class;
 	}
