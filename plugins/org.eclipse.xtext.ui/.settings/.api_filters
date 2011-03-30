@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext.ui" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter id="923795461">
+            <message_arguments>
+                <message_argument value="2.0.0.qualifier"/>
+                <message_argument value="2.0.0.v201103300706"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.ui.compare.XtextTeamHandler">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.compare.XtextTeamHandler"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>
