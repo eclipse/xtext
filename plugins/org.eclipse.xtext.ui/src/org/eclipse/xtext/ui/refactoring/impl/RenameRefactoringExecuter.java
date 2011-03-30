@@ -30,7 +30,7 @@ import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.PerformChangeOperation;
 import org.eclipse.ltk.core.refactoring.RefactoringCore;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.ltk.core.refactoring.participants.RenameRefactoring;
+import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.ltk.ui.refactoring.RefactoringUI;
 import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.widgets.Display;
@@ -42,7 +42,7 @@ import org.eclipse.ui.IWorkbenchPartSite;
  * @author Holger Schill - Initial contribution and API
  */
 public class RenameRefactoringExecuter {
-	private RenameRefactoring refactoring;
+	private ProcessorBasedRefactoring refactoring;
 	private RefactoringStatus preCheckStatus;
 	private Logger log = Logger.getLogger(RenameRefactoringExecuter.class);
 
@@ -64,7 +64,7 @@ public class RenameRefactoringExecuter {
 		}
 	}
 
-	public void configure(RenameRefactoring renameRefactoring) throws CoreException {
+	public void configure(ProcessorBasedRefactoring renameRefactoring) throws CoreException {
 		refactoring = renameRefactoring;
 		RefactoringStatus refactoringStatus = new RefactoringStatus();
 		if (refactoringStatus.hasFatalError()) {

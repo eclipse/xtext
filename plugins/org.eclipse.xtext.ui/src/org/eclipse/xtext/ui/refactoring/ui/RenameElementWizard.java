@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.refactoring.ui;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
-import org.eclipse.ltk.core.refactoring.participants.RenameRefactoring;
 import org.eclipse.ltk.ui.refactoring.RefactoringWizard;
 import org.eclipse.ltk.ui.refactoring.UserInputWizardPage;
 import org.eclipse.swt.SWT;
@@ -29,7 +28,7 @@ import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
  */
 public class RenameElementWizard extends RefactoringWizard {
 
-	public RenameElementWizard(RenameRefactoring refactoring) {
+	public RenameElementWizard(ProcessorBasedRefactoring refactoring) {
 		super(refactoring, DIALOG_BASED_USER_INTERFACE);
 	}
 

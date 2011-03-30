@@ -35,7 +35,7 @@ import org.eclipse.jface.text.link.LinkedPosition;
 import org.eclipse.jface.text.link.LinkedPositionGroup;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-import org.eclipse.ltk.core.refactoring.participants.RenameRefactoring;
+import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.ltk.ui.refactoring.RefactoringWizardOpenOperation;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
@@ -70,7 +70,7 @@ public class RenameLinkedMode {
 	private LinkedPosition currentPosition;
 	private Logger log = Logger.getLogger(RenameLinkedMode.class);
 	private IRenameElementContext renameElementContext;
-	private RenameRefactoring renameRefactoring;
+	private ProcessorBasedRefactoring renameRefactoring;
 
 	private AbstractRenameProcessor renameProcessor;
 	@Inject
