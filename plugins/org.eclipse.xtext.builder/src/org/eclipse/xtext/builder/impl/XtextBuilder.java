@@ -24,7 +24,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant.BuildType;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
@@ -158,7 +157,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		BuildData buildData = new BuildData(getProject().getName(), resourceSet, toBeBuilt, queuedBuildData);
 		ImmutableList<Delta> deltas = builderState.update(buildData, progress.newChild(1));
 		if (participant != null) {
-			participant.build(new IXtextBuilderParticipant.BuildContext(this, resourceSet, deltas, type),
+			participant.build(new BuildContext(this, resourceSet, deltas, type),
 					progress.newChild(1));
 		} else {
 			progress.worked(1);
@@ -218,7 +217,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
 		ImmutableList<Delta> deltas = builderState.clean(toBeBuilt.getToBeDeleted(), progress.newChild(1));
 		if (participant != null) {
-			participant.build(new IXtextBuilderParticipant.BuildContext(this, 
+			participant.build(new BuildContext(this, 
 					getResourceSetProvider().get(getProject()), 
 					deltas,
 					BuildType.CLEAN), 
