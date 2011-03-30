@@ -73,5 +73,10 @@ public abstract class AbstractXtextUiModule extends DefaultUiModule {
 		binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.ui.contentassist.antlr.internal.InternalXtextLexer.class);
 	}
 
+	// contributed by org.eclipse.xtext.ui.generator.compare.CompareFragment
+	public Class<? extends org.eclipse.compare.IViewerCreator> bindIViewerCreator() {
+		return org.eclipse.xtext.ui.compare.DefaultViewerCreator.class;
+	}
+
 
 }

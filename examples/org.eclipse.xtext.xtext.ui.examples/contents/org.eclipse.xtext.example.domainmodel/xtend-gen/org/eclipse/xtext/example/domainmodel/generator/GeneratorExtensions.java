@@ -22,8 +22,7 @@ public class GeneratorExtensions extends DomainmodelExtensions {
   public String shortName(final JvmTypeReference r, final ImportManager importManager) {
     String _xblockexpression = null;
     {
-      StringBuilder _stringBuilder = new StringBuilder();
-      final StringBuilder builder = _stringBuilder;
+      final StringBuilder builder = new StringBuilder();
       importManager.appendTypeRef(r, builder);
       String _string = builder.toString();
       _xblockexpression = (_string);

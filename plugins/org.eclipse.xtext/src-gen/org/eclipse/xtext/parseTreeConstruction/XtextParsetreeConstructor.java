@@ -3243,6 +3243,8 @@ protected class Action_RightCurlyBracketKeyword_3 extends KeywordToken  {
  * 	// the rules for Keyword and RuleCall have been copied
  * 	PredicatedKeyword | PredicatedRuleCall | // We have to make this one explicit since the ParenthesizedElement does not
  * 	// create an object but we have to set the predicated flag
+ * 	// TODO: As soon as we have an own element for parenthesized elements with
+ * 	// cardinality, we should refactor this part of the grammar
  * 	PredicatedGroup;
  *
  **/
@@ -3252,6 +3254,8 @@ protected class Action_RightCurlyBracketKeyword_3 extends KeywordToken  {
 // // the rules for Keyword and RuleCall have been copied
 // PredicatedKeyword | PredicatedRuleCall | // We have to make this one explicit since the ParenthesizedElement does not
 // // create an object but we have to set the predicated flag
+// // TODO: As soon as we have an own element for parenthesized elements with
+// // cardinality, we should refactor this part of the grammar
 // PredicatedGroup
 protected class AbstractTerminal_Alternatives extends AlternativesToken {
 
@@ -3475,6 +3479,8 @@ protected class AbstractTerminal_PredicatedRuleCallParserRuleCall_4 extends Rule
 
 // // We have to make this one explicit since the ParenthesizedElement does not
 // // create an object but we have to set the predicated flag
+// // TODO: As soon as we have an own element for parenthesized elements with
+// // cardinality, we should refactor this part of the grammar
 // PredicatedGroup
 protected class AbstractTerminal_PredicatedGroupParserRuleCall_5 extends RuleCallToken {
 	

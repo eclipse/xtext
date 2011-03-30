@@ -739,6 +739,8 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		//	// the rules for Keyword and RuleCall have been copied
 		//	PredicatedKeyword | PredicatedRuleCall | // We have to make this one explicit since the ParenthesizedElement does not
 		//	// create an object but we have to set the predicated flag
+		//	// TODO: As soon as we have an own element for parenthesized elements with
+		//	// cardinality, we should refactor this part of the grammar
 		//	PredicatedGroup;
 		public ParserRule getRule() { return rule; }
 
@@ -747,6 +749,8 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		//// the rules for Keyword and RuleCall have been copied
 		//PredicatedKeyword | PredicatedRuleCall | // We have to make this one explicit since the ParenthesizedElement does not
 		//// create an object but we have to set the predicated flag
+		//// TODO: As soon as we have an own element for parenthesized elements with
+		//// cardinality, we should refactor this part of the grammar
 		//PredicatedGroup
 		public Alternatives getAlternatives() { return cAlternatives; }
 
@@ -770,6 +774,8 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 
 		//// We have to make this one explicit since the ParenthesizedElement does not
 		//// create an object but we have to set the predicated flag
+		//// TODO: As soon as we have an own element for parenthesized elements with
+		//// cardinality, we should refactor this part of the grammar
 		//PredicatedGroup
 		public RuleCall getPredicatedGroupParserRuleCall_5() { return cPredicatedGroupParserRuleCall_5; }
 	}
@@ -1868,6 +1874,8 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	//	// the rules for Keyword and RuleCall have been copied
 	//	PredicatedKeyword | PredicatedRuleCall | // We have to make this one explicit since the ParenthesizedElement does not
 	//	// create an object but we have to set the predicated flag
+	//	// TODO: As soon as we have an own element for parenthesized elements with
+	//	// cardinality, we should refactor this part of the grammar
 	//	PredicatedGroup;
 	public AbstractTerminalElements getAbstractTerminalAccess() {
 		return (pAbstractTerminal != null) ? pAbstractTerminal : (pAbstractTerminal = new AbstractTerminalElements());

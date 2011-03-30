@@ -33,7 +33,8 @@ public class DomainmodelGenerator implements IGenerator {
       if ((element instanceof org.eclipse.xtext.example.domainmodel.domainmodel.Entity)) {
         {
           final Entity entity = ((org.eclipse.xtext.example.domainmodel.domainmodel.Entity) element);
-          String _fileName = generatorExtensions.fileName(entity);
+          GeneratorExtensions _generatorExtensions = generatorExtensions;
+          String _fileName = _generatorExtensions.fileName(entity);
           StringConcatenation _compile = _this.compile(entity);
           fsa.generateFile(_fileName, _compile);
         }
@@ -44,21 +45,22 @@ public class DomainmodelGenerator implements IGenerator {
   public StringConcatenation compile(final Entity e) {
     StringConcatenation _xblockexpression = null;
     {
-      ImportManager _importManager = new ImportManager(true);
-      final ImportManager importManager = _importManager;
+      final ImportManager importManager = new ImportManager(true);
       StringConcatenation _body = _this.body(e, importManager);
       final StringConcatenation body = _body;
       StringConcatenation builder = new StringConcatenation();
       {
+        GeneratorExtensions _generatorExtensions = generatorExtensions;
         final Entity typeConverted_e = (Entity)e;
-        String _packageName = generatorExtensions.packageName(typeConverted_e);
+        String _packageName = _generatorExtensions.packageName(typeConverted_e);
         boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_packageName);
         boolean _operator_not = BooleanExtensions.operator_not(_isNullOrEmpty);
         if (((Boolean)_operator_not)) {
           builder.newLineIfNotEmpty();
           builder.append("package ");
+          GeneratorExtensions _generatorExtensions_1 = generatorExtensions;
           final Entity typeConverted_e_1 = (Entity)e;
-          String _packageName_1 = generatorExtensions.packageName(typeConverted_e_1);
+          String _packageName_1 = _generatorExtensions_1.packageName(typeConverted_e_1);
           builder.append(_packageName_1, "");
           builder.append(";");
           builder.newLineIfNotEmpty();
@@ -129,8 +131,9 @@ public class DomainmodelGenerator implements IGenerator {
       } else {
         _xifexpression_1 = "extends ";
       }
+      GeneratorExtensions _generatorExtensions = generatorExtensions;
       JvmParameterizedTypeReference _superType_2 = e.getSuperType();
-      String _shortName = generatorExtensions.shortName(_superType_2, importManager);
+      String _shortName = _generatorExtensions.shortName(_superType_2, importManager);
       String _operator_plus = StringExtensions.operator_plus(_xifexpression_1, _shortName);
       String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " ");
       _xifexpression = _operator_plus_1;
@@ -143,9 +146,10 @@ public class DomainmodelGenerator implements IGenerator {
   public StringConcatenation _feature(final Property p, final ImportManager importManager) {
     StringConcatenation builder = new StringConcatenation();
     builder.append("private ");
+    GeneratorExtensions _generatorExtensions = generatorExtensions;
     final Property typeConverted_p = (Property)p;
     JvmParameterizedTypeReference _type = typeConverted_p.getType();
-    String _shortName = generatorExtensions.shortName(_type, importManager);
+    String _shortName = _generatorExtensions.shortName(_type, importManager);
     builder.append(_shortName, "");
     builder.append(" ");
     final Property typeConverted_p_1 = (Property)p;
@@ -156,9 +160,10 @@ public class DomainmodelGenerator implements IGenerator {
     builder.append("\t");
     builder.newLine();
     builder.append("public ");
+    GeneratorExtensions _generatorExtensions_1 = generatorExtensions;
     final Property typeConverted_p_2 = (Property)p;
     JvmParameterizedTypeReference _type_1 = typeConverted_p_2.getType();
-    String _shortName_1 = generatorExtensions.shortName(_type_1, importManager);
+    String _shortName_1 = _generatorExtensions_1.shortName(_type_1, importManager);
     builder.append(_shortName_1, "");
     builder.append(" get");
     final Property typeConverted_p_3 = (Property)p;
@@ -183,9 +188,10 @@ public class DomainmodelGenerator implements IGenerator {
     String _firstUpper_1 = StringExtensions.toFirstUpper(_name_3);
     builder.append(_firstUpper_1, "");
     builder.append("(");
+    GeneratorExtensions _generatorExtensions_2 = generatorExtensions;
     final Property typeConverted_p_6 = (Property)p;
     JvmParameterizedTypeReference _type_2 = typeConverted_p_6.getType();
-    String _shortName_2 = generatorExtensions.shortName(_type_2, importManager);
+    String _shortName_2 = _generatorExtensions_2.shortName(_type_2, importManager);
     builder.append(_shortName_2, "");
     builder.append(" ");
     final Property typeConverted_p_7 = (Property)p;
@@ -212,21 +218,24 @@ public class DomainmodelGenerator implements IGenerator {
   public StringConcatenation _feature(final Operation o, final ImportManager importManager) {
     StringConcatenation builder = new StringConcatenation();
     builder.append("public ");
+    GeneratorExtensions _generatorExtensions = generatorExtensions;
     final Operation typeConverted_o = (Operation)o;
     JvmParameterizedTypeReference _type = typeConverted_o.getType();
-    String _shortName = generatorExtensions.shortName(_type, importManager);
+    String _shortName = _generatorExtensions.shortName(_type, importManager);
     builder.append(_shortName, "");
     builder.append(" ");
     final Operation typeConverted_o_1 = (Operation)o;
     String _name = typeConverted_o_1.getName();
     builder.append(_name, "");
     builder.append("(");
-    String _parameterList = generatorExtensions.parameterList(o, importManager);
+    GeneratorExtensions _generatorExtensions_1 = generatorExtensions;
+    String _parameterList = _generatorExtensions_1.parameterList(o, importManager);
     builder.append(_parameterList, "");
     builder.append(") {");
     builder.newLineIfNotEmpty();
     builder.append("\t");
-    String _compile = _this.domainmodelCompiler.compile(o, importManager);
+    DomainmodelCompiler _domainmodelCompiler = _this.domainmodelCompiler;
+    String _compile = _domainmodelCompiler.compile(o, importManager);
     builder.append(_compile, "	");
     builder.newLineIfNotEmpty();
     builder.append("}");
