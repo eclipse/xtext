@@ -152,4 +152,23 @@
     </extension>
 
 
+  <extension point="org.eclipse.compare.contentViewers">
+    <viewer id="org.eclipse.xtext.Xtext.compare.contentViewers"
+            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="xtext,xtext2">
+    </viewer>
+  </extension>
+  <extension point="org.eclipse.compare.contentMergeViewers">
+    <viewer id="org.eclipse.xtext.Xtext.compare.contentMergeViewers"
+            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="xtext,xtext2" label="Xtext Compare">
+     </viewer>
+  </extension>
+  <extension point="org.eclipse.ui.editors.documentProviders">
+    <provider id="org.eclipse.xtext.Xtext.editors.documentProviders"
+            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+            extensions="xtext,xtext2">
+    </provider>
+  </extension>
+
 </plugin>
