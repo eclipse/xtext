@@ -8,7 +8,6 @@
 package org.eclipse.xtext.serializer.diagnostic;
 
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;

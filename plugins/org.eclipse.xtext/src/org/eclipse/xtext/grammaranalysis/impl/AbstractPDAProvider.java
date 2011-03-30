@@ -16,7 +16,6 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.grammaranalysis.INFAState;
-import org.eclipse.xtext.grammaranalysis.INFATransition;
 import org.eclipse.xtext.grammaranalysis.IPDAProvider;
 import org.eclipse.xtext.grammaranalysis.IPDAState;
 import org.eclipse.xtext.grammaranalysis.IPDAState.PDAStateType;
