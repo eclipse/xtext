@@ -36,14 +36,6 @@
             extensions="«modelFileExtensions.toString(",")»">
     </provider>
   </extension>
-  <extension point="org.eclipse.emf.compare.ui.team.handler">
-    <handler id="«name».team.handler"
-            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.compare.XtextTeamHandler">
-    </handler>
-  </extension>
-  <extension point="org.eclipse.core.contenttype.contentTypes">
-    <file-association content-type="org.eclipse.emf.compare.ui.contenttype.ModelContentType" file-extensions="«modelFileExtensions.toString(",")»"/>
-  </extension>
 «ENDDEFINE»
 
 «DEFINE addToStandaloneSetup(List[String] modelFileExtensions) FOR Grammar»«ENDDEFINE»
