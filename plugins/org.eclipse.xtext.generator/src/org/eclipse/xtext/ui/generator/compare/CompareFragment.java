@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.generator.compare;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.mwe2.runtime.Mandatory;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.BindFactory;
@@ -40,5 +41,11 @@ public class CompareFragment extends ResourceFactoryFragment {
 	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
 		return new String[] { "org.eclipse.compare" };
+	}
+	
+	@Override
+	@Mandatory
+	public void setFileExtensions(String fileExtensions) {
+		super.setFileExtensions(fileExtensions);
 	}
 }
