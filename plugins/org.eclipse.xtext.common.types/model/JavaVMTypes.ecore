@@ -139,6 +139,14 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmWildcardTypeReference" eSuperTypes="#//JvmConstraintOwner #//JvmTypeReference"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmAnyTypeReference" eSuperTypes="#//JvmTypeReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//JvmType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmMultiTypeReference" eSuperTypes="#//JvmTypeReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
+        eType="#//JvmTypeReference" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//JvmType"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmMember" abstract="true" eSuperTypes="#//JvmAnnotationTarget #//JvmIdentifiableElement">
     <eOperations name="internalSetIdentifier">
       <eParameters name="identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
