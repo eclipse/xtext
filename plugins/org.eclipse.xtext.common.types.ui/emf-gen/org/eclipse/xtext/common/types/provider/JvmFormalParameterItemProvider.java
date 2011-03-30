@@ -212,6 +212,16 @@ public class JvmFormalParameterItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.JVM_FORMAL_PARAMETER__PARAMETER_TYPE,
 				 TypesFactory.eINSTANCE.createJvmWildcardTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_FORMAL_PARAMETER__PARAMETER_TYPE,
+				 TypesFactory.eINSTANCE.createJvmAnyTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_FORMAL_PARAMETER__PARAMETER_TYPE,
+				 TypesFactory.eINSTANCE.createJvmMultiTypeReference()));
 	}
 
 }

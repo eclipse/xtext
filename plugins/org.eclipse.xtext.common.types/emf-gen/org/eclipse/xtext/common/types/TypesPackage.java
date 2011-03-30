@@ -228,7 +228,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationTarget()
 	 * @generated
 	 */
-	int JVM_ANNOTATION_TARGET = 28;
+	int JVM_ANNOTATION_TARGET = 30;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -256,7 +256,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmMember()
 	 * @generated
 	 */
-	int JVM_MEMBER = 21;
+	int JVM_MEMBER = 23;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -932,7 +932,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmFeature()
 	 * @generated
 	 */
-	int JVM_FEATURE = 22;
+	int JVM_FEATURE = 24;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -996,7 +996,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmField()
 	 * @generated
 	 */
-	int JVM_FIELD = 23;
+	int JVM_FIELD = 25;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1428,6 +1428,71 @@ public interface TypesPackage extends EPackage
 	int JVM_WILDCARD_TYPE_REFERENCE_FEATURE_COUNT = JVM_CONSTRAINT_OWNER_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmAnyTypeReferenceImpl <em>Jvm Any Type Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmAnyTypeReferenceImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnyTypeReference()
+	 * @generated
+	 */
+	int JVM_ANY_TYPE_REFERENCE = 21;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ANY_TYPE_REFERENCE__TYPE = JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Any Type Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ANY_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmMultiTypeReferenceImpl <em>Jvm Multi Type Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmMultiTypeReferenceImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmMultiTypeReference()
+	 * @generated
+	 */
+	int JVM_MULTI_TYPE_REFERENCE = 22;
+
+	/**
+	 * The feature id for the '<em><b>References</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_MULTI_TYPE_REFERENCE__REFERENCES = JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_MULTI_TYPE_REFERENCE__TYPE = JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Multi Type Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_MULTI_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 2;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmExecutableImpl <em>Jvm Executable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1435,7 +1500,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmExecutable()
 	 * @generated
 	 */
-	int JVM_EXECUTABLE = 24;
+	int JVM_EXECUTABLE = 26;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1535,7 +1600,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmConstructor()
 	 * @generated
 	 */
-	int JVM_CONSTRUCTOR = 25;
+	int JVM_CONSTRUCTOR = 27;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1635,7 +1700,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmOperation()
 	 * @generated
 	 */
-	int JVM_OPERATION = 26;
+	int JVM_OPERATION = 28;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1771,7 +1836,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmFormalParameter()
 	 * @generated
 	 */
-	int JVM_FORMAL_PARAMETER = 27;
+	int JVM_FORMAL_PARAMETER = 29;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1817,7 +1882,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationReference()
 	 * @generated
 	 */
-	int JVM_ANNOTATION_REFERENCE = 29;
+	int JVM_ANNOTATION_REFERENCE = 31;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' reference.
@@ -1863,7 +1928,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationValue()
 	 * @generated
 	 */
-	int JVM_ANNOTATION_VALUE = 30;
+	int JVM_ANNOTATION_VALUE = 32;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -1891,7 +1956,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmIntAnnotationValue()
 	 * @generated
 	 */
-	int JVM_INT_ANNOTATION_VALUE = 31;
+	int JVM_INT_ANNOTATION_VALUE = 33;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -1928,7 +1993,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmBooleanAnnotationValue()
 	 * @generated
 	 */
-	int JVM_BOOLEAN_ANNOTATION_VALUE = 32;
+	int JVM_BOOLEAN_ANNOTATION_VALUE = 34;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -1965,7 +2030,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmByteAnnotationValue()
 	 * @generated
 	 */
-	int JVM_BYTE_ANNOTATION_VALUE = 33;
+	int JVM_BYTE_ANNOTATION_VALUE = 35;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -2002,7 +2067,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmShortAnnotationValue()
 	 * @generated
 	 */
-	int JVM_SHORT_ANNOTATION_VALUE = 34;
+	int JVM_SHORT_ANNOTATION_VALUE = 36;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -2039,7 +2104,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmLongAnnotationValue()
 	 * @generated
 	 */
-	int JVM_LONG_ANNOTATION_VALUE = 35;
+	int JVM_LONG_ANNOTATION_VALUE = 37;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -2076,7 +2141,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmDoubleAnnotationValue()
 	 * @generated
 	 */
-	int JVM_DOUBLE_ANNOTATION_VALUE = 36;
+	int JVM_DOUBLE_ANNOTATION_VALUE = 38;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -2113,7 +2178,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmFloatAnnotationValue()
 	 * @generated
 	 */
-	int JVM_FLOAT_ANNOTATION_VALUE = 37;
+	int JVM_FLOAT_ANNOTATION_VALUE = 39;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -2150,7 +2215,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmCharAnnotationValue()
 	 * @generated
 	 */
-	int JVM_CHAR_ANNOTATION_VALUE = 38;
+	int JVM_CHAR_ANNOTATION_VALUE = 40;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -2187,7 +2252,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmStringAnnotationValue()
 	 * @generated
 	 */
-	int JVM_STRING_ANNOTATION_VALUE = 39;
+	int JVM_STRING_ANNOTATION_VALUE = 41;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -2224,7 +2289,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeAnnotationValue()
 	 * @generated
 	 */
-	int JVM_TYPE_ANNOTATION_VALUE = 40;
+	int JVM_TYPE_ANNOTATION_VALUE = 42;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -2261,7 +2326,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationAnnotationValue()
 	 * @generated
 	 */
-	int JVM_ANNOTATION_ANNOTATION_VALUE = 41;
+	int JVM_ANNOTATION_ANNOTATION_VALUE = 43;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -2307,7 +2372,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmEnumAnnotationValue()
 	 * @generated
 	 */
-	int JVM_ENUM_ANNOTATION_VALUE = 42;
+	int JVM_ENUM_ANNOTATION_VALUE = 44;
 
 	/**
 	 * The feature id for the '<em><b>Operation</b></em>' reference.
@@ -2344,7 +2409,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmVisibility()
 	 * @generated
 	 */
-	int JVM_VISIBILITY = 43;
+	int JVM_VISIBILITY = 45;
 
 	/**
 	 * The meta object id for the '<em>Iterable</em>' data type.
@@ -2354,7 +2419,7 @@ public interface TypesPackage extends EPackage
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getIterable()
 	 * @generated
 	 */
-	int ITERABLE = 44;
+	int ITERABLE = 46;
 
 
 	/**
@@ -2786,6 +2851,59 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 */
 	EClass getJvmWildcardTypeReference();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmAnyTypeReference <em>Jvm Any Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Any Type Reference</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmAnyTypeReference
+	 * @generated
+	 */
+	EClass getJvmAnyTypeReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.common.types.JvmAnyTypeReference#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmAnyTypeReference#getType()
+	 * @see #getJvmAnyTypeReference()
+	 * @generated
+	 */
+	EReference getJvmAnyTypeReference_Type();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmMultiTypeReference <em>Jvm Multi Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Multi Type Reference</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmMultiTypeReference
+	 * @generated
+	 */
+	EClass getJvmMultiTypeReference();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.JvmMultiTypeReference#getReferences <em>References</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>References</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmMultiTypeReference#getReferences()
+	 * @see #getJvmMultiTypeReference()
+	 * @generated
+	 */
+	EReference getJvmMultiTypeReference_References();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.common.types.JvmMultiTypeReference#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmMultiTypeReference#getType()
+	 * @see #getJvmMultiTypeReference()
+	 * @generated
+	 */
+	EReference getJvmMultiTypeReference_Type();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmMember <em>Jvm Member</em>}'.
@@ -3783,6 +3901,50 @@ public interface TypesPackage extends EPackage
 		 * @generated
 		 */
 		EClass JVM_WILDCARD_TYPE_REFERENCE = eINSTANCE.getJvmWildcardTypeReference();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmAnyTypeReferenceImpl <em>Jvm Any Type Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmAnyTypeReferenceImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnyTypeReference()
+		 * @generated
+		 */
+		EClass JVM_ANY_TYPE_REFERENCE = eINSTANCE.getJvmAnyTypeReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JVM_ANY_TYPE_REFERENCE__TYPE = eINSTANCE.getJvmAnyTypeReference_Type();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmMultiTypeReferenceImpl <em>Jvm Multi Type Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmMultiTypeReferenceImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmMultiTypeReference()
+		 * @generated
+		 */
+		EClass JVM_MULTI_TYPE_REFERENCE = eINSTANCE.getJvmMultiTypeReference();
+
+		/**
+		 * The meta object literal for the '<em><b>References</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JVM_MULTI_TYPE_REFERENCE__REFERENCES = eINSTANCE.getJvmMultiTypeReference_References();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JVM_MULTI_TYPE_REFERENCE__TYPE = eINSTANCE.getJvmMultiTypeReference_Type();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl <em>Jvm Member</em>}' class.

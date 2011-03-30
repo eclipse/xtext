@@ -292,6 +292,22 @@ public class TypesSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TypesPackage.JVM_ANY_TYPE_REFERENCE:
+			{
+				JvmAnyTypeReference jvmAnyTypeReference = (JvmAnyTypeReference)theEObject;
+				T result = caseJvmAnyTypeReference(jvmAnyTypeReference);
+				if (result == null) result = caseJvmTypeReference(jvmAnyTypeReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.JVM_MULTI_TYPE_REFERENCE:
+			{
+				JvmMultiTypeReference jvmMultiTypeReference = (JvmMultiTypeReference)theEObject;
+				T result = caseJvmMultiTypeReference(jvmMultiTypeReference);
+				if (result == null) result = caseJvmTypeReference(jvmMultiTypeReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case TypesPackage.JVM_MEMBER:
 			{
 				JvmMember jvmMember = (JvmMember)theEObject;
@@ -823,6 +839,38 @@ public class TypesSwitch<T>
 	 * @generated
 	 */
 	public T caseJvmWildcardTypeReference(JvmWildcardTypeReference object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Any Type Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Any Type Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJvmAnyTypeReference(JvmAnyTypeReference object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Multi Type Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Multi Type Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJvmMultiTypeReference(JvmMultiTypeReference object)
 	{
 		return null;
 	}

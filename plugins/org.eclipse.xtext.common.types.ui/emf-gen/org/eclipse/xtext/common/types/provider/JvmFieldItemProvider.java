@@ -230,6 +230,16 @@ public class JvmFieldItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.JVM_FIELD__TYPE,
 				 TypesFactory.eINSTANCE.createJvmWildcardTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_FIELD__TYPE,
+				 TypesFactory.eINSTANCE.createJvmAnyTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_FIELD__TYPE,
+				 TypesFactory.eINSTANCE.createJvmMultiTypeReference()));
 	}
 
 }

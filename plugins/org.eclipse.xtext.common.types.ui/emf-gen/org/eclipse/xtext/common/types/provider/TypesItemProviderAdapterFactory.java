@@ -402,6 +402,56 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmAnyTypeReference} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected JvmAnyTypeReferenceItemProvider jvmAnyTypeReferenceItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmAnyTypeReference}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createJvmAnyTypeReferenceAdapter()
+	{
+		if (jvmAnyTypeReferenceItemProvider == null)
+		{
+			jvmAnyTypeReferenceItemProvider = new JvmAnyTypeReferenceItemProvider(this);
+		}
+
+		return jvmAnyTypeReferenceItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmMultiTypeReference} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected JvmMultiTypeReferenceItemProvider jvmMultiTypeReferenceItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmMultiTypeReference}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createJvmMultiTypeReferenceAdapter()
+	{
+		if (jvmMultiTypeReferenceItemProvider == null)
+		{
+			jvmMultiTypeReferenceItemProvider = new JvmMultiTypeReferenceItemProvider(this);
+		}
+
+		return jvmMultiTypeReferenceItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmField} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -950,6 +1000,8 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (jvmParameterizedTypeReferenceItemProvider != null) jvmParameterizedTypeReferenceItemProvider.dispose();
 		if (jvmGenericArrayTypeReferenceItemProvider != null) jvmGenericArrayTypeReferenceItemProvider.dispose();
 		if (jvmWildcardTypeReferenceItemProvider != null) jvmWildcardTypeReferenceItemProvider.dispose();
+		if (jvmAnyTypeReferenceItemProvider != null) jvmAnyTypeReferenceItemProvider.dispose();
+		if (jvmMultiTypeReferenceItemProvider != null) jvmMultiTypeReferenceItemProvider.dispose();
 		if (jvmFieldItemProvider != null) jvmFieldItemProvider.dispose();
 		if (jvmConstructorItemProvider != null) jvmConstructorItemProvider.dispose();
 		if (jvmOperationItemProvider != null) jvmOperationItemProvider.dispose();

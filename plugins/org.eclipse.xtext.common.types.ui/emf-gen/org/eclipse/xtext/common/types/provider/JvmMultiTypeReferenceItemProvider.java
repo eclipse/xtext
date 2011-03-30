@@ -14,6 +14,7 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -22,18 +23,18 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
+import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.xtext.common.types.JvmTypeAnnotationValue} object.
+ * This is the item provider adapter for a {@link org.eclipse.xtext.common.types.JvmMultiTypeReference} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmTypeAnnotationValueItemProvider
-	extends JvmAnnotationValueItemProvider
+public class JvmMultiTypeReferenceItemProvider
+	extends JvmTypeReferenceItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -47,7 +48,7 @@ public class JvmTypeAnnotationValueItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmTypeAnnotationValueItemProvider(AdapterFactory adapterFactory)
+	public JvmMultiTypeReferenceItemProvider(AdapterFactory adapterFactory)
 	{
 		super(adapterFactory);
 	}
@@ -65,8 +66,32 @@ public class JvmTypeAnnotationValueItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
+			addTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Type feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTypePropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_JvmMultiTypeReference_type_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JvmMultiTypeReference_type_feature", "_UI_JvmMultiTypeReference_type"),
+				 TypesPackage.Literals.JVM_MULTI_TYPE_REFERENCE__TYPE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -83,7 +108,7 @@ public class JvmTypeAnnotationValueItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES);
+			childrenFeatures.add(TypesPackage.Literals.JVM_MULTI_TYPE_REFERENCE__REFERENCES);
 		}
 		return childrenFeatures;
 	}
@@ -103,7 +128,7 @@ public class JvmTypeAnnotationValueItemProvider
 	}
 
 	/**
-	 * This returns JvmTypeAnnotationValue.gif.
+	 * This returns JvmMultiTypeReference.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -111,7 +136,7 @@ public class JvmTypeAnnotationValueItemProvider
 	@Override
 	public Object getImage(Object object)
 	{
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/JvmTypeAnnotationValue"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/JvmMultiTypeReference"));
 	}
 
 	/**
@@ -123,7 +148,7 @@ public class JvmTypeAnnotationValueItemProvider
 	@Override
 	public String getText(Object object)
 	{
-		return getString("_UI_JvmTypeAnnotationValue_type");
+		return getString("_UI_JvmMultiTypeReference_type");
 	}
 
 	/**
@@ -138,9 +163,9 @@ public class JvmTypeAnnotationValueItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JvmTypeAnnotationValue.class))
+		switch (notification.getFeatureID(JvmMultiTypeReference.class))
 		{
-			case TypesPackage.JVM_TYPE_ANNOTATION_VALUE__VALUES:
+			case TypesPackage.JVM_MULTI_TYPE_REFERENCE__REFERENCES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -161,27 +186,27 @@ public class JvmTypeAnnotationValueItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
+				(TypesPackage.Literals.JVM_MULTI_TYPE_REFERENCE__REFERENCES,
 				 TypesFactory.eINSTANCE.createJvmParameterizedTypeReference()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
+				(TypesPackage.Literals.JVM_MULTI_TYPE_REFERENCE__REFERENCES,
 				 TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
+				(TypesPackage.Literals.JVM_MULTI_TYPE_REFERENCE__REFERENCES,
 				 TypesFactory.eINSTANCE.createJvmWildcardTypeReference()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
+				(TypesPackage.Literals.JVM_MULTI_TYPE_REFERENCE__REFERENCES,
 				 TypesFactory.eINSTANCE.createJvmAnyTypeReference()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_TYPE_ANNOTATION_VALUE__VALUES,
+				(TypesPackage.Literals.JVM_MULTI_TYPE_REFERENCE__REFERENCES,
 				 TypesFactory.eINSTANCE.createJvmMultiTypeReference()));
 	}
 

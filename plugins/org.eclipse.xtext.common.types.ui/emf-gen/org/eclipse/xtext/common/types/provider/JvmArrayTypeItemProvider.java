@@ -173,6 +173,16 @@ public class JvmArrayTypeItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.JVM_ARRAY_TYPE__COMPONENT_TYPE,
 				 TypesFactory.eINSTANCE.createJvmWildcardTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_ARRAY_TYPE__COMPONENT_TYPE,
+				 TypesFactory.eINSTANCE.createJvmAnyTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_ARRAY_TYPE__COMPONENT_TYPE,
+				 TypesFactory.eINSTANCE.createJvmMultiTypeReference()));
 	}
 
 }

@@ -183,6 +183,16 @@ public class TypesAdapterFactory extends AdapterFactoryImpl
 				return createJvmWildcardTypeReferenceAdapter();
 			}
 			@Override
+			public Adapter caseJvmAnyTypeReference(JvmAnyTypeReference object)
+			{
+				return createJvmAnyTypeReferenceAdapter();
+			}
+			@Override
+			public Adapter caseJvmMultiTypeReference(JvmMultiTypeReference object)
+			{
+				return createJvmMultiTypeReferenceAdapter();
+			}
+			@Override
 			public Adapter caseJvmMember(JvmMember object)
 			{
 				return createJvmMemberAdapter();
@@ -625,6 +635,36 @@ public class TypesAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createJvmWildcardTypeReferenceAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmAnyTypeReference <em>Jvm Any Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmAnyTypeReference
+	 * @generated
+	 */
+	public Adapter createJvmAnyTypeReferenceAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmMultiTypeReference <em>Jvm Multi Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmMultiTypeReference
+	 * @generated
+	 */
+	public Adapter createJvmMultiTypeReferenceAdapter()
 	{
 		return null;
 	}

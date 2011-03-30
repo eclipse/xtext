@@ -83,6 +83,8 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 			case TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE: return createJvmParameterizedTypeReference();
 			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE: return createJvmGenericArrayTypeReference();
 			case TypesPackage.JVM_WILDCARD_TYPE_REFERENCE: return createJvmWildcardTypeReference();
+			case TypesPackage.JVM_ANY_TYPE_REFERENCE: return createJvmAnyTypeReference();
+			case TypesPackage.JVM_MULTI_TYPE_REFERENCE: return createJvmMultiTypeReference();
 			case TypesPackage.JVM_FIELD: return createJvmField();
 			case TypesPackage.JVM_CONSTRUCTOR: return createJvmConstructor();
 			case TypesPackage.JVM_OPERATION: return createJvmOperation();
@@ -284,6 +286,28 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	{
 		JvmWildcardTypeReferenceImplCustom jvmWildcardTypeReference = new JvmWildcardTypeReferenceImplCustom();
 		return jvmWildcardTypeReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmAnyTypeReference createJvmAnyTypeReference()
+	{
+		JvmAnyTypeReferenceImplCustom jvmAnyTypeReference = new JvmAnyTypeReferenceImplCustom();
+		return jvmAnyTypeReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmMultiTypeReference createJvmMultiTypeReference()
+	{
+		JvmMultiTypeReferenceImplCustom jvmMultiTypeReference = new JvmMultiTypeReferenceImplCustom();
+		return jvmMultiTypeReference;
 	}
 
 	/**

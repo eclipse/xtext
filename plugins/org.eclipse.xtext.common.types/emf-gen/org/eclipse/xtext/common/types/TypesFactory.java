@@ -143,6 +143,24 @@ public interface TypesFactory extends EFactory
 	JvmWildcardTypeReference createJvmWildcardTypeReference();
 
 	/**
+	 * Returns a new object of class '<em>Jvm Any Type Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Jvm Any Type Reference</em>'.
+	 * @generated
+	 */
+	JvmAnyTypeReference createJvmAnyTypeReference();
+
+	/**
+	 * Returns a new object of class '<em>Jvm Multi Type Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Jvm Multi Type Reference</em>'.
+	 * @generated
+	 */
+	JvmMultiTypeReference createJvmMultiTypeReference();
+
+	/**
 	 * Returns a new object of class '<em>Jvm Field</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
