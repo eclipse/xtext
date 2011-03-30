@@ -70,6 +70,18 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 		assertCastError("('foo' as CharSequence) as Integer", XbasePackage.Literals.XCASTED_EXPRESSION, "cannot",
 				"CharSequence", "Integer");
 	}
+	
+	public void testSwitch_TypeGuard_01() throws Exception {
+		String expression = "switch ('foo') { Integer : null }";
+		final XExpression xExpression = expression(expression, false);
+		helper.assertError(xExpression, XbasePackage.Literals.XCASE_PART, INVALID_CAST);
+	}
+	
+	public void testSwitch_TypeGuard_02() throws Exception {
+		String expression = "switch (new java.util.ArrayList()) { java.util.HashSet : null }";
+		final XExpression xExpression = expression(expression, false);
+		helper.assertError(xExpression, XbasePackage.Literals.XCASE_PART, INVALID_CAST);
+	}
 
 	public void testVariableDeclaration() throws Exception {
 		assertNoConformanceError("{ var s = 'foo' }");
