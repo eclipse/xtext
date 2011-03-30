@@ -200,5 +200,8 @@ Export-Package: org.eclipse.xtext.ui.tests,
  org.eclipse.xtext.ui.tests.refactoring.ui.contentassist.antlr,
  org.eclipse.xtext.ui.tests.refactoring.referring,
  org.eclipse.xtext.ui.tests.refactoring.referring.impl,
- org.eclipse.xtext.ui.tests.refactoring.referring.util
+ org.eclipse.xtext.ui.tests.refactoring.referring.util,
+ org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage,
+ org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.impl,
+ org.eclipse.xtext.ui.tests.editor.contentassist.bug332217TestLanguage.util
 

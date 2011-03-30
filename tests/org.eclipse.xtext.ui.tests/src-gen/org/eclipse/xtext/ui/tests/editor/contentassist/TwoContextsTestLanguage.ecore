@@ -5,10 +5,11 @@
     nsURI="http://www.eclipse.org/xtext/ui/common/tests/2009/twoContexts" nsPrefix="twoContexts">
   <eClassifiers xsi:type="ecore:EClass" name="MainModel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
-        eType="#//AnElement" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/TwoContextsTestLanguage.ecore#//AnElement"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AnElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referred" eType="#//AnElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referred" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/TwoContextsTestLanguage.ecore#//AnElement"/>
   </eClassifiers>
 </ecore:EPackage>

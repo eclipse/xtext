@@ -5,20 +5,22 @@
     nsURI="http://www.eclipse.org/2008/xtext/ui/common/tests/ContentAssist" nsPrefix="contentAssistTestLanguage">
   <eClassifiers xsi:type="ecore:EClass" name="Start">
     <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
-        eType="#//AbstractRule" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ContentAssistTestLanguage.ecore#//AbstractRule"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractRule">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FirstAbstractRuleChild" eSuperTypes="#//AbstractRule">
+  <eClassifiers xsi:type="ecore:EClass" name="FirstAbstractRuleChild" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ContentAssistTestLanguage.ecore#//AbstractRule">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
-        eType="#//AbstractRule" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ContentAssistTestLanguage.ecore#//AbstractRule"
+        containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SecondAbstractRuleChild" eSuperTypes="#//AbstractRule">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rule" eType="#//AbstractRuleCall"
+  <eClassifiers xsi:type="ecore:EClass" name="SecondAbstractRuleChild" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ContentAssistTestLanguage.ecore#//AbstractRule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rule" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ContentAssistTestLanguage.ecore#//AbstractRuleCall"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractRuleCall">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rule" eType="#//AbstractRule"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rule" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/ContentAssistTestLanguage.ecore#//AbstractRule"/>
   </eClassifiers>
 </ecore:EPackage>

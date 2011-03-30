@@ -5,11 +5,13 @@
     nsURI="http://eclipse.org/Xtext/Tests/FoldingTestLanguage" nsPrefix="folding">
   <eClassifiers xsi:type="ecore:EClass" name="FoldingModel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
-        eType="#//Element" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/FoldingTestLanguage.ecore#//Element"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Element">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subelements" upperBound="-1"
-        eType="#//Element" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/FoldingTestLanguage.ecore#//Element"
+        containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

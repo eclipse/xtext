@@ -15,6 +15,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.antlr.runtime.ANTLRStringStream;
+import org.antlr.runtime.Token;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
@@ -44,12 +46,16 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.LexerUIBindings;
 import org.eclipse.xtext.ui.editor.contentassist.AbstractContentAssistContextFactory;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Builder;
 import org.eclipse.xtext.ui.editor.contentassist.IFollowElementAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
 
 import com.google.common.base.Function;
@@ -61,6 +67,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -86,10 +93,17 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		private IContentAssistParser parser;
 		
 		@Inject
+		@Named(LexerUIBindings.CONTENT_ASSIST)
+		private Lexer lexer; 
+		
+		@Inject
 		private Provider<ContentAssistContext.Builder> contentAssistContextProvider;
 		
 		@Inject
 		private PrefixMatcher matcher;
+		
+		@Inject
+		private ITokenDefProvider tokenDefProvider;
 		
 		private ITextViewer viewer;
 
@@ -228,10 +242,35 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		}
 
 		protected void createContextsForLastCompleteNode(EObject previousModel, boolean strict) throws BadLocationException {
+			String currentNodePrefix = getPrefix(currentNode);
+			if (!Strings.isEmpty(currentNodePrefix) && !currentNode.getText().equals(currentNodePrefix)) {
+				lexer.setCharStream(new ANTLRStringStream(currentNodePrefix));
+				Token token = lexer.nextToken();
+				if (token == Token.EOF_TOKEN) { // error case - nothing could be parsed
+					return;
+				}
+				while(token != Token.EOF_TOKEN) {
+					if (isErrorToken(token))
+						return;
+					token = lexer.nextToken();
+				}
+			}
 			String prefix = "";
 			String completeInput = viewer.getDocument().get(0, completionOffset);
 			Collection<FollowElement> followElements = parser.getFollowElements(completeInput, strict);
 			doCreateContexts(lastCompleteNode, currentNode, prefix, previousModel, followElements);
+		}
+		
+		/**
+		 * Return <code>true</code> if the token should be considered to be an error token.
+		 * If the token that is created from the prefix before the cursor position is an error
+		 * token, no proposals shall be computed that don't use a prefix. 
+		 * @return <code>true</true> if the token should be considered to be an error token.
+		 * @since 2.0
+		 */
+		protected boolean isErrorToken(Token token) {
+			String tokenTypeName = tokenDefProvider.getTokenDefMap().get(token.getType());
+			return "RULE_ANY_OTHER".equals(tokenTypeName);			
 		}
 
 		protected void doCreateContexts(
