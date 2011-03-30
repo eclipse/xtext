@@ -122,12 +122,14 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
         for (IResourceDescription.Delta delta : deltas) {
 			if (delta.haveEObjectDescriptionsChanged()) {
 				// not a java resource - delta's resource should be contained in a visible container
-				if (delta.getUri().isPlatform() || delta.getUri().isArchive()) { 
+				// as long as we did not delete the resource
+				URI uri = delta.getUri();
+				if ((uri.isPlatform() || uri.isArchive()) && delta.getNew() != null) { 
 					if (containers == null)
 						containers = containerManager.getVisibleContainers(candidate, context);
 					boolean descriptionIsContained = false;
 					for(int i = 0; i < containers.size() && !descriptionIsContained; i++) {
-						descriptionIsContained = containers.get(i).hasResourceDescription(delta.getUri());
+						descriptionIsContained = containers.get(i).hasResourceDescription(uri);
 					}
 					if (!descriptionIsContained)
 						return false;
