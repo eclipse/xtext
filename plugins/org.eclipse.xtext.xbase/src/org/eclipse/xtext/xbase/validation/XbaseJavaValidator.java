@@ -26,6 +26,7 @@ import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
@@ -34,6 +35,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
@@ -181,32 +183,46 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Check
 	public void checkCasts(XCastedExpression cast) {
-		JvmTypeReference targetTypeRef = typeProvider.getType(cast.getTarget());
-		if (targetTypeRef != null && targetTypeRef.getType() instanceof JvmDeclaredType) {
-			JvmDeclaredType targetType = (JvmDeclaredType) targetTypeRef.getType();
+		JvmTypeReference toType = cast.getType();
+		JvmTypeReference fromType = typeProvider.getType(cast.getTarget());
+		checkCast(toType, fromType);
+	}
+
+	protected void checkCast(JvmTypeReference toType, JvmTypeReference fromType) {
+		if (fromType != null && fromType.getType() instanceof JvmDeclaredType) {
+			JvmDeclaredType targetType = (JvmDeclaredType) fromType.getType();
 			if (targetType.isFinal()) {
-				if (!conformanceComputer.isConformant(cast.getType(), targetTypeRef)) {
-					error("Cannot cast element of sealed type " + getNameOfTypes(targetTypeRef) + " to "
-							+ canonicalName(cast.getType()), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+				if (!conformanceComputer.isConformant(toType, fromType)) {
+					error("Cannot cast element of sealed type " + getNameOfTypes(fromType) + " to "
+							+ canonicalName(toType), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
 							INVALID_CAST);
-				} else if (conformanceComputer.isConformant(cast.getType(), targetTypeRef)) {
+				} else if (conformanceComputer.isConformant(toType, fromType)) {
 //					warning("Cast is obsolete", null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, OBSOLETE_CAST);
 				}
 			} else {
-				if (conformanceComputer.isConformant(cast.getType(), targetTypeRef)) {
+				if (conformanceComputer.isConformant(toType, fromType)) {
 //					warning("Cast is obsolete", null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, OBSOLETE_CAST);
 				} else {
-					JvmType type = cast.getType().getType();
+					JvmType type = toType.getType();
 					if (type instanceof JvmGenericType && !((JvmGenericType) type).isInterface()) {
-						if (!conformanceComputer.isConformant(targetTypeRef, cast.getType())) {
-							error("type mismatch: cannot convert from " + getNameOfTypes(targetTypeRef) + " to "
-									+ canonicalName(cast.getType()), null,
+						if (!conformanceComputer.isConformant(fromType, toType)) {
+							error("type mismatch: cannot convert from " + getNameOfTypes(fromType) + " to "
+									+ canonicalName(toType), null,
 									ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_CAST);
 						}
 					}
 				}
 			}
 		}
+	}
+	
+	@Check
+	public void checkTypeGuards(XCasePart casePart) {
+		if (casePart.getTypeGuard()==null)
+			return;
+		JvmTypeReference targetTypeRef = typeProvider.getType(((XSwitchExpression) casePart.eContainer()).getSwitch());
+		JvmTypeReference typeGuard = casePart.getTypeGuard();
+		checkCast(typeGuard, targetTypeRef);
 	}
 
 	@Check
