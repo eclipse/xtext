@@ -140,6 +140,10 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 		return null;
 	}
 
+	protected IssueLocation getLocationData(EObject obj, EStructuralFeature structuralFeature) {
+		return getLocationData(obj, structuralFeature, 0);
+	}
+	
 	/**
 	 * @return the location data for the given diagnostic.
 	 */
