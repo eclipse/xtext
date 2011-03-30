@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.ltk.core.refactoring.RefactoringTickProvider;
-import org.eclipse.ltk.core.refactoring.participants.RenameRefactoring;
+import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
+import org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor;
+import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
@@ -19,18 +22,34 @@ public class DefaultRenameRefactoringProvider implements IRenameRefactoringProvi
 	@Inject
 	private Provider<AbstractRenameProcessor> processorProvider;
 
-	public RenameRefactoring getRenameRefactoring(IRenameElementContext renameElementContext) {
+	public ProcessorBasedRefactoring getRenameRefactoring(IRenameElementContext renameElementContext) {
 		AbstractRenameProcessor processor = processorProvider.get();
 		if (processor != null) {
 			processor.initialize(renameElementContext);
-			return new RenameRefactoring(processor) {
-				@Override
-				protected RefactoringTickProvider doGetRefactoringTickProvider() {
-					return new RefactoringTickProvider(1, 200, 1, 1);
-				}
-			};
+			return new RenameRefactoring(processor);
 		}
 		return null;
+	}
+	
+	static class RenameRefactoring extends ProcessorBasedRefactoring {
+
+		private RenameProcessor fProcessor;
+
+		public RenameRefactoring(RenameProcessor processor) {
+			super(processor);
+			Assert.isNotNull(processor);
+			fProcessor= processor;
+		}
+
+		@Override
+		public RefactoringProcessor getProcessor() {
+			return fProcessor;
+		}
+		
+		@Override
+		protected RefactoringTickProvider doGetRefactoringTickProvider() {
+			return new RefactoringTickProvider(1, 200, 1, 1);
+		}
 	}
 
 }
