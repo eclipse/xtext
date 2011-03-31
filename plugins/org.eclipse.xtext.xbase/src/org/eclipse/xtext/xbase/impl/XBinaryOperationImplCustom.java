@@ -19,7 +19,7 @@ public class XBinaryOperationImplCustom extends XBinaryOperationImpl {
 	
 	@Override
 	public String toString() {
-		return getExpressionAsString(getLeftOperand())+" "+getConcreteSyntaxFeatureName()+" "+getExpressionAsString(getLeftOperand());
+		return getExpressionAsString(getLeftOperand())+" "+getConcreteSyntaxFeatureName()+" "+getExpressionAsString(getRightOperand());
 	}
 	
 	@Override
