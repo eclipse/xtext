@@ -27,6 +27,7 @@ import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmLowerBound;
+import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -52,7 +53,7 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 	
 	@Inject
 	private DeclaredTypeFactory factory;
-
+	
 	@Inject
 	private ResourceSetImpl resourceSet;
 	
@@ -95,7 +96,17 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 		EcoreUtil.resolveAll(syntheticResource);
 		return result;
 	}
-
+	
+	protected JvmTypeReference multiRef(JvmTypeReference... reference) {
+		JvmMultiTypeReference result = TypesFactory.eINSTANCE.createJvmMultiTypeReference();
+		result.getReferences().addAll(Arrays.asList(reference));
+		return result;
+	}
+	
+	protected JvmTypeReference any() {
+		return TypesFactory.eINSTANCE.createJvmAnyTypeReference();
+	}
+	
 	protected JvmGenericArrayTypeReference array(JvmTypeReference typeRef, int i) {
 		JvmGenericArrayTypeReference result = TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference();
 		JvmArrayType arrayType = TypesFactory.eINSTANCE.createJvmArrayType();
@@ -373,6 +384,62 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 		assertTrue(getComputer().isConformant(ref(String.class), ref(String.class)));
 	}
 
+	public void testAnyTypeReference_01() {
+		assertTrue(getComputer().isConformant(any(), any()));
+	}
+	
+	public void testAnyTypeReference_02() {
+		assertTrue(getComputer().isConformant(ref(Object.class), any()));
+	}
+	
+	public void testAnyTypeReference_03() {
+		assertTrue(getComputer().isConformant(ref(Void.class), any()));
+	}
+	
+	public void testAnyTypeReference_04() {
+		assertFalse(getComputer().isConformant(any(), ref(Object.class)));
+	}
+	
+	public void testAnyTypeReference_05() {
+		assertFalse(getComputer().isConformant(any(), ref(int.class)));
+	}
+	
+	public void testVoidReference_01() {
+		assertTrue(getComputer().isConformant(ref(void.class), ref(void.class)));
+	}
+	
+	public void testVoidReference_02() {
+		assertFalse(getComputer().isConformant(ref(int.class), ref(void.class)));
+	}
+	
+	public void testVoidReference_03() {
+		assertFalse(getComputer().isConformant(ref(Object.class), ref(void.class)));
+	}
+	
+	public void testVoidReference_04() {
+		assertFalse(getComputer().isConformant(any(), ref(void.class)));
+	}
+	
+	public void testVoidReference_05() {
+		assertFalse(getComputer().isConformant(ref(void.class), any()));
+	}
+	
+	public void testVoidReference_06() {
+		assertFalse(getComputer().isConformant(ref(void.class), ref(Object.class)));
+	}
+	
+	public void testVoidReference_07() {
+		assertFalse(getComputer().isConformant(ref(void.class), any()));
+	}
+	
+	public void testVoidReference_08() {
+		assertFalse(getComputer().isConformant(ref(void.class), ref(Void.class)));
+	}
+	
+	public void testVoidReference_09() {
+		assertFalse(getComputer().isConformant(any(), ref(Void.class)));
+	}
+	
 	public void testInheritanceCompatibility() throws Exception {
 		assertTrue(getComputer().isConformant(ref(CharSequence.class), ref(String.class)));
 		assertFalse(getComputer().isConformant(ref(String.class), ref(CharSequence.class)));
@@ -510,9 +577,9 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 	
 	public void testCommonSuperType_7() throws Exception {
 		assertCommonSuperType(
-				Appendable.class,
-				StringBuilder.class,
-				CharBuffer.class);
+				"java.lang.Appendable & java.lang.CharSequence",
+				ref(StringBuilder.class),
+				ref(CharBuffer.class));
 	}
 	
 	public void testCommonSuperType_8() throws Exception {
@@ -545,9 +612,102 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 	
 	public void testCommonSuperType_12() throws Exception {
 		assertCommonSuperType(
-				"java.lang.Number",
+				"java.lang.Number & java.lang.Comparable<? extends java.lang.Object>",
 				ref(Double.class),
 				ref(Integer.class));
+	}
+	
+	public void testCommonSuperType_13() throws Exception {
+		assertCommonSuperType(
+				"java.lang.AbstractStringBuilder & java.io.Serializable",
+				ref(StringBuilder.class),
+				ref(StringBuffer.class));
+	}
+	
+	public void testCommonSuperType_14() throws Exception {
+		assertCommonSuperType(
+				"java.lang.CharSequence & java.io.Serializable",
+				multiRef(ref(CharSequence.class), ref(Serializable.class)),
+				multiRef(ref(CharSequence.class), ref(Serializable.class)));
+	}
+	
+	public void testCommonSuperType_15() throws Exception {
+		assertCommonSuperType(
+				"java.io.Serializable & java.lang.CharSequence",
+				multiRef(ref(Serializable.class), ref(CharSequence.class)),
+				multiRef(ref(CharSequence.class), ref(Serializable.class)));
+	}
+	
+	public void testCommonSuperType_16() throws Exception {
+		assertCommonSuperType(
+				"java.io.Serializable & java.lang.CharSequence",
+				multiRef(ref(Serializable.class), ref(CharSequence.class), ref(Comparable.class)),
+				multiRef(ref(Serializable.class), ref(CharSequence.class)));
+	}
+	
+	public void testCommonSuperType_17() throws Exception {
+		assertCommonSuperType(
+				"java.lang.CharSequence & java.io.Serializable",
+				multiRef(ref(Serializable.class), ref(CharSequence.class), ref(Comparable.class)),
+				multiRef(ref(CharSequence.class), ref(Serializable.class)));
+	}
+	
+	public void testCommonSuperType_18() throws Exception {
+		assertCommonSuperType(
+				"java.io.Serializable & java.lang.CharSequence",
+				multiRef(ref(Serializable.class), ref(CharSequence.class)),
+				multiRef(ref(Serializable.class), ref(CharSequence.class), ref(Comparable.class)));
+	}
+	
+	public void testCommonSuperType_19() throws Exception {
+		assertCommonSuperType(
+				"java.lang.CharSequence & java.io.Serializable",
+				multiRef(ref(CharSequence.class), ref(Serializable.class)),
+				multiRef(ref(Serializable.class), ref(CharSequence.class), ref(Comparable.class)));
+	}
+	
+	public void testCommonSuperType_20() throws Exception {
+		assertCommonSuperType(
+				"java.lang.Object",
+				multiRef(ref(Serializable.class), ref(CharSequence.class)),
+				multiRef(ref(Comparable.class), ref(Appendable.class)));
+	}
+	
+	public void testCommonSuperType_21() throws Exception {
+		assertCommonSuperType(
+				"java.lang.Object",
+				multiRef(ref(Serializable.class), ref(CharSequence.class)),
+				ref(CharSequence.class),
+				ref(Serializable.class));
+	}
+	
+	public void testCommonSuperType_22() throws Exception {
+		assertCommonSuperType(
+				"java.lang.CharSequence",
+				multiRef(ref(Serializable.class), ref(CharSequence.class)),
+				ref(CharSequence.class));
+	}
+	
+	public void testCommonSuperType_23() throws Exception {
+		assertCommonSuperType(
+				"java.io.Serializable & java.lang.CharSequence",
+				multiRef(ref(Serializable.class), ref(CharSequence.class)),
+				any());
+	}
+	
+	public void testCommonSuperType_24() throws Exception {
+		assertCommonSuperType(
+				"null",
+				any(),
+				any());
+	}
+	
+	public void testCommonSuperType_25() throws Exception {
+		assertCommonSuperType(
+				"java.lang.CharSequence",
+				ref(CharSequence.class),
+				ref(String.class),
+				any());
 	}
 	
 //TODO Fix ME!	
