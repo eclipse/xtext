@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.util;
 
 import static com.google.common.collect.Lists.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -18,9 +19,11 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -52,6 +55,18 @@ public class TypeReferences {
 	
 	@Inject
 	private SuperTypeCollector superTypeCollector;
+	
+	public JvmAnyTypeReference createAnyTypeReference() {
+		return factory.createJvmAnyTypeReference();
+	}
+	
+	public JvmMultiTypeReference createMultiTypeReference(JvmTypeReference... references) {
+		 JvmMultiTypeReference result = factory.createJvmMultiTypeReference();
+		 if (references != null && references.length != 0) {
+			 result.getReferences().addAll(Arrays.asList(references));
+		 }
+		 return result;
+	}
 	
 	public JvmParameterizedTypeReference createTypeRef(JvmType type, JvmTypeReference... typeArgs) {
 		List<JvmTypeReference> typeReferences = newArrayList();
@@ -146,7 +161,6 @@ public class TypeReferences {
 		arrayType.setComponentType(EcoreUtil2.cloneIfContained(componentType));
 		return result;
 	}
-
 	
 	public JvmType findDeclaredType(Class<?> clazz, EObject context) {
 		if (context == null)

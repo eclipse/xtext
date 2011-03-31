@@ -461,7 +461,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XNullLiteral object, boolean rawType) {
-		return getTypeReferences().getTypeForName(Void.class, object);
+		return getTypeReferences().createAnyTypeReference();
 	}
 
 	protected JvmTypeReference _type(XIntLiteral object, boolean rawType) {

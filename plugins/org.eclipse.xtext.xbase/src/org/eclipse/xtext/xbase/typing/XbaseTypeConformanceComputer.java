@@ -6,17 +6,9 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typing;
-import static com.google.common.collect.Iterables.*;
-import static com.google.common.collect.Lists.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 
-import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -31,23 +23,14 @@ public class XbaseTypeConformanceComputer extends TypeConformanceComputer {
 	private FunctionConversion functionConversion;
 	
 	@Inject
-	private TypeReferences typeReferences;
-	
-	@Inject
 	private SynonymTypesProvider synonymTypeProvider;
 
 	@Override
 	public boolean isConformant(JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
-		if (left == null || typeReferences.is(left, Object.class))
-			return true;
-		if (right == null)
-			return false;
-		if (typeReferences.is(right, Void.class) || typeReferences.is(right, Void.TYPE))
-			return true;
 		if (functionConversion.isFunction(left) || functionConversion.isFunction(right))
 			return functionConversion.isConformant(left, right, ignoreGenerics);
-		final boolean conformant = super.isConformant(left, right, ignoreGenerics);
-		if (conformant) 
+
+		if (super.isConformant(left, right, ignoreGenerics)) 
 			return true;
 			
 		Iterable<JvmTypeReference> synonymTypes = synonymTypeProvider.getSynonymTypes(right);
@@ -58,38 +41,4 @@ public class XbaseTypeConformanceComputer extends TypeConformanceComputer {
 		return false;
 	}
 
-	@Override
-	public JvmTypeReference getCommonSuperType(List<JvmTypeReference> types) {
-		ArrayList<JvmTypeReference> list = newArrayList(filter(types, new Predicate<JvmTypeReference>() {
-			public boolean apply(JvmTypeReference input) {
-				return input!=null && input.getType()!=null && !input.getType().eIsProxy();
-			}
-		}));
-		// filter out Void.TYPE
-		JvmTypeReference voidType = null;
-		for (JvmTypeReference jvmTypeReference : types) {
-			if (isPrimitiveVoid(jvmTypeReference)) {
-				voidType = jvmTypeReference;
-				list.remove(jvmTypeReference);
-			}
-		}
-		if (list.isEmpty()) {
-			return voidType;
-		}
-		// filter out Void.class
-		for (JvmTypeReference jvmTypeReference : types) {
-			if (isWrapperVoid(jvmTypeReference)) {
-				voidType = jvmTypeReference;
-				list.remove(jvmTypeReference);
-			}
-		}
-		if (list.isEmpty()) {
-			return voidType;
-		}
-		return super.getCommonSuperType(list);
-	}
-
-	protected boolean isWrapperVoid(JvmTypeReference jvmTypeReference) {
-		return jvmTypeReference!=null && Void.class.getName().equals(jvmTypeReference.getType().getIdentifier());
-	}
 }
