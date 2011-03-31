@@ -101,5 +101,22 @@ public class JvmMultiTypeReferenceImplCustom extends JvmMultiTypeReferenceImpl {
 		return super.getIdentifier();
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder(eClass().getName());
+		result.append(": ");
+		if (references != null && !references.isEmpty()) {
+			boolean first = true;
+			for(JvmTypeReference reference: references) {
+				if (!first)
+					result.append(" & ");
+				first = false;
+				result.append(reference.toString());
+			}
+		} else {
+			result.append(" ./. ");
+		}
+		return result.toString();
+	}
 	
 }

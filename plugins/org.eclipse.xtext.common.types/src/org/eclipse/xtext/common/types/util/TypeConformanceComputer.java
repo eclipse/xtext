@@ -15,11 +15,14 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmLowerBound;
+import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
@@ -95,33 +98,73 @@ public class TypeConformanceComputer {
 	}
 	
 	public boolean isConformant(JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
+		if (left == null || right == null)
+			return false;
 		if (left == right)
-			return left != null;
-		if (isObject(left))
 			return true;
-		if (isPrimitiveVoid(left)) 
-			return isPrimitiveVoid(right);
 		if(isUnresolvedType(left) || isUnresolvedType(right)) 
 			return false;
+		if (isAnyTypeReference(left)) {
+			boolean result = isAnyTypeReference(right);
+			return result;
+		}
+		if (isPrimitiveVoid(left)) { 
+			boolean result = isPrimitiveVoid(right);
+			return result;
+		}
+		if (isAnyTypeReference(right)) {
+			boolean result = !isPrimitiveType(left);
+			return result;
+		}
+		if (isObject(left)) {
+			boolean result = !isPrimitiveVoid(right);
+			return result;
+		}
 		Boolean result = isConformantDispatcher.invoke(left, right, ignoreGenerics);
 		return result.booleanValue();
 	}
+	
+	protected boolean isPrimitiveType(JvmTypeReference reference) {
+		return reference.getType() instanceof JvmPrimitiveType;
+	}
+	
+	protected boolean isAnyTypeReference(JvmTypeReference reference) {
+		return reference instanceof JvmAnyTypeReference;
+	}
 
 	protected boolean isUnresolvedType(JvmTypeReference ref) {
-		return ref != null && ref.getType() != null && ref.getType().eIsProxy();
+		if (ref instanceof JvmMultiTypeReference || ref instanceof JvmAnyTypeReference)
+			return false;
+		return ref.getType() == null || ref.getType().eIsProxy();
 	}
 
 	protected boolean isPrimitiveVoid(JvmTypeReference left) {
-		return left!=null && left.getType()!=null && !left.getType().eIsProxy() && left.getType() instanceof JvmVoid;
+		return left.getType() instanceof JvmVoid;
 	}
 
-	protected boolean isObject(JvmTypeReference left) {
-		return left!=null && left.getType()!=null && left.getType().getIdentifier().equals(Object.class.getCanonicalName());
+	protected boolean isObject(JvmTypeReference reference) {
+		return Object.class.getCanonicalName().equals(reference.getIdentifier());
 	}
 	
 	protected Boolean _isConformant(JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
 		Boolean result = isConformantDispatcher.invoke(left.getType(), right.getType(), left, right, ignoreGenerics);
 		return result;
+	}
+	
+	protected Boolean _isConformant(JvmMultiTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
+		for(JvmTypeReference reference: left.getReferences()) {
+			if (!isConformant(reference, right, ignoreGenerics))
+				return false;
+		}
+		return !left.getReferences().isEmpty();
+	}
+	
+	protected Boolean _isConformant(JvmTypeReference left, JvmMultiTypeReference right, boolean ignoreGenerics) {
+		for(JvmTypeReference reference: right.getReferences()) {
+			if (isConformant(left, reference, ignoreGenerics))
+				return true;
+		}
+		return false;
 	}
 	
 	protected Boolean _isConformant(JvmGenericArrayTypeReference left, JvmWildcardTypeReference right, boolean ignoreGenerics) {
@@ -542,16 +585,27 @@ public class TypeConformanceComputer {
 		
 	}
 	
+	/**
+	 * Compute the common super type for the given types.
+	 * 
+	 * May return <code>null</code> in case one of the types is primitive void but not all 
+	 * of them are.
+	 */
 	public JvmTypeReference getCommonSuperType(final List<JvmTypeReference> types) {
 		if (types==null || types.isEmpty())
 			throw new IllegalArgumentException("Types can't be null or empty "+types);
 		if (types.size()==1)
 			return types.get(0);
-
+		
 		// Check the straight forward case - one of the types is a supertype of all the others.
+		// Further more check if any of the types is Void.TYPE -> all have to be Void.TYPE
 		for(JvmTypeReference type: types) {
 			if (conformsToAll(type, types))
 				return type;
+			if (isPrimitiveVoid(type)) {
+				// we saw void but was not conformant to all other
+				return null;
+			}
 		}
 		// TODO handle all primitives
 		// TODO handle arrays
@@ -577,11 +631,30 @@ public class TypeConformanceComputer {
 		}
 		inplaceSortByDistanceAndName(candidates);
 		// try to find a matching parameterized type for the raw types in ascending order
+		List<JvmTypeReference> referencesWithSameDistance = Lists.newArrayListWithExpectedSize(2);
+		int wasDistance = -1;
 		for(Entry<JvmType> rawTypeCandidate: candidates) {
+			if (wasDistance == -1) {
+				wasDistance = rawTypeCandidate.getCount();
+			} else {
+				if (wasDistance != rawTypeCandidate.getCount()) {
+					break;
+				}
+			}
 			JvmType rawType = rawTypeCandidate.getElement();
 			JvmTypeReference result = getTypeParametersForSupertype(all, rawType, types);
-			if (result != null)
-				return result;
+			if (result != null) {
+				referencesWithSameDistance.add(result);
+			}
+		}
+		if (referencesWithSameDistance.size() == 1) {
+			return referencesWithSameDistance.get(0);
+		} else if (referencesWithSameDistance.size() > 1) {
+			JvmMultiTypeReference result = typeReferences.createMultiTypeReference();
+			for(JvmTypeReference reference: referencesWithSameDistance) {
+				result.getReferences().add(EcoreUtil2.cloneIfContained(reference));
+			}
+			return result;
 		}
 		// until above's TODOs are not solved, return Object as catch all 
 		return typeReferences.getTypeForName(Object.class, findContext(firstType));
@@ -604,16 +677,12 @@ public class TypeConformanceComputer {
 
 	protected boolean containsPrimitive(List<JvmTypeReference> types) {
 		for(JvmTypeReference type: types) {
-			if (type.getType() instanceof JvmPrimitiveType)
+			if (isPrimitiveType(type))
 				return true;
 		}
 		return false;
 	}
-
-	protected boolean isNullOrProxy(JvmTypeReference type) {
-		return type==null || type.getType()==null || type.eIsProxy();
-	}
-
+	
 	protected JvmTypeReference getTypeParametersForSupertype(Multimap<JvmType, JvmTypeReference> all, JvmType rawType, List<JvmTypeReference> initiallyRequested) {
 		if (rawType instanceof JvmTypeParameterDeclarator) {
 			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) rawType).getTypeParameters();

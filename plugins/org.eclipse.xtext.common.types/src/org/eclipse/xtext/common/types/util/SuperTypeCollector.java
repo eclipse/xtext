@@ -9,8 +9,10 @@ package org.eclipse.xtext.common.types.util;
 
 import java.util.Set;
 
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstraintOwner;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -147,6 +149,24 @@ public class SuperTypeCollector {
 				}
 			}
 			return null;
+		}
+		
+		@Override
+		public Boolean caseJvmMultiTypeReference(JvmMultiTypeReference object) {
+			if (!object.eIsProxy()) {
+				collecting = true;
+				level++;
+				for(JvmTypeReference reference: object.getReferences()) {
+					doSwitch(reference);
+				}
+				level--;
+			}
+			return Boolean.FALSE;
+		}
+		
+		@Override
+		public Boolean caseJvmAnyTypeReference(JvmAnyTypeReference object) {
+			return Boolean.FALSE;
 		}
 		
 		@Override
