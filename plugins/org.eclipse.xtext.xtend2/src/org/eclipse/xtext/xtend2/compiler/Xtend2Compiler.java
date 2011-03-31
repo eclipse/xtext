@@ -166,7 +166,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 			IAppendable a) {
 		a.openScope();
 		a.append("\n\npublic ");
-		a.append(dispatchOperation.getReturnType()).append(" ");
+		a.append(resolveMultiType(dispatchOperation.getReturnType())).append(" ");
 		a.append(dispatchOperation.getSimpleName()).append("(");
 		declareParameters(dispatchOperation.getParameters(), a);
 		a.append(") {");

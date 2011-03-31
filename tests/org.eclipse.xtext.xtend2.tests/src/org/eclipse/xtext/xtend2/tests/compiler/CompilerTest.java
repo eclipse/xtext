@@ -306,7 +306,8 @@ public class CompilerTest extends AbstractXtend2TestCase {
 			assertTrue(e.getCause() instanceof IllegalArgumentException);
 		}
 	}
-	
+
+	// TODO the return types of dispatch functions should be conformant
 	public void testDispatchFunction_05() throws Exception {
 		final String definition = 
 			"dispatch void a(String x) {}" +

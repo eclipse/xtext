@@ -76,7 +76,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 								.equals(Object.class.getName());
 			}
 		});
-		assertEquals(Void.class.getName(), dispatch.getReturnType().getIdentifier());
+		assertEquals("null", dispatch.getReturnType().getIdentifier());
 		
 		// two internal case methods
 		find(operations, new Predicate<JvmOperation>() {
@@ -115,7 +115,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 				.equals(Object.class.getName());
 			}
 		});
-		assertEquals(Void.class.getName(), dispatch.getReturnType().getIdentifier());
+		assertEquals("null", dispatch.getReturnType().getIdentifier());
 		assertEquals(2, dispatch.getParameters().size());
 		
 		dispatch = find(operations, new Predicate<JvmOperation>() {
@@ -125,7 +125,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 				.equals(String.class.getName());
 			}
 		});
-		assertEquals(Void.class.getName(), dispatch.getReturnType().getIdentifier());
+		assertEquals("null", dispatch.getReturnType().getIdentifier());
 		assertEquals(1, dispatch.getParameters().size());
 		
 		// two internal case methods
