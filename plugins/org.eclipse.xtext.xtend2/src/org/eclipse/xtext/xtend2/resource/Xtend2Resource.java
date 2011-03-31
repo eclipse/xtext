@@ -104,6 +104,7 @@ public class Xtend2Resource extends XbaseResource {
 		}
 	}
 	
+	// TODO typeConformanceComputer.getCommonSuperType may return null - this case needs to be addressed
 	protected JvmTypeReference inferReturnType(JvmOperation jvmOperation) {
 		List<JvmTypeReference> associatedReturnTypes = newArrayList();
 		final Iterable<XtendFunction> associatedElements = filter(associations.getSourceElements(jvmOperation), XtendFunction.class);
@@ -119,6 +120,7 @@ public class Xtend2Resource extends XbaseResource {
 		return null;
 	}
 	
+	// TODO typeConformanceComputer.getCommonSuperType may return null - this case needs to be addressed
 	protected <T> JvmTypeReference commonType(Iterable<? extends T> iterable, Function<T, JvmTypeReference> mapping) {
 		List<JvmTypeReference> references = newArrayList();
 		for (T element : iterable) {
