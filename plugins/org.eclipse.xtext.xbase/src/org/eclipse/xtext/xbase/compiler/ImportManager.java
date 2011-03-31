@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -78,6 +79,10 @@ public class ImportManager {
 			JvmGenericArrayTypeReference reference = (JvmGenericArrayTypeReference) typeRef;
 			appendTypeRef(reference.getComponentType(), builder);
 			builder.append("[]");
+		} else if (typeRef instanceof JvmAnyTypeReference) {
+			appendType(typeRef.getType(), builder);
+		} else {
+			throw new IllegalArgumentException(typeRef==null ? null : typeRef.toString());
 		}
 	}
 	

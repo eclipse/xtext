@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typing;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 
 import com.google.inject.Inject;
@@ -39,6 +40,9 @@ public class XbaseTypeConformanceComputer extends TypeConformanceComputer {
 			if (super.isConformant(left, synonymType, ignoreGenerics))
 				return true;
 		}
+		// TODO remove this hack - void is not compatible to everything but actually to nothing
+		if (right.getType() instanceof JvmVoid && !right.getType().eIsProxy())
+			return true;
 		return false;
 	}
 
