@@ -65,6 +65,9 @@ Workflow {
 			fragment = labeling.LabelProviderFragment {}
 			fragment = outline.OutlineTreeProviderFragment {}
 			fragment = outline.QuickOutlineFragment {}
+			fragment = compare.CompareFragment {
+				fileExtensions = file.extensions
+			}
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
 			fragment = XtextAntlrUiGeneratorFragment {
 				options = auto-inject {}

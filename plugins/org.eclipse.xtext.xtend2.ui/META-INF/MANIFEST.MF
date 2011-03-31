@@ -4,7 +4,7 @@ Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-Version: 2.0.0.qualifier
 Bundle-Localization: plugin
-Bundle-SymbolicName: org.eclipse.xtext.xtend2.ui; singleton:=true
+Bundle-SymbolicName: org.eclipse.xtext.xtend2.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.xtend2;bundle-version="2.0.0";visibility:=reexport,
  org.eclipse.xtext.ui;bundle-version="2.0.0",
@@ -17,7 +17,8 @@ Require-Bundle: org.eclipse.xtext.xtend2;bundle-version="2.0.0";visibility:=reex
  org.eclipse.xtext.xbase.ui;bundle-version="2.0.0",
  org.antlr.runtime,
  org.eclipse.jdt.core;bundle-version="3.5.2",
- org.eclipse.jdt.ui;bundle-version="3.5.2"
+ org.eclipse.jdt.ui;bundle-version="3.5.2",
+ org.eclipse.compare
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Activator: org.eclipse.xtext.xtend2.ui.internal.Xtend2Activator

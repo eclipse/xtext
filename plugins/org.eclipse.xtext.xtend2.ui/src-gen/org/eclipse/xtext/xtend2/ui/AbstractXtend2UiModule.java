@@ -83,6 +83,11 @@ public abstract class AbstractXtend2UiModule extends DefaultUiModule {
 		return org.eclipse.xtext.xtend2.ui.outline.Xtend2OutlineTreeProvider.class;
 	}
 
+	// contributed by org.eclipse.xtext.ui.generator.compare.CompareFragment
+	public Class<? extends org.eclipse.compare.IViewerCreator> bindIViewerCreator() {
+		return org.eclipse.xtext.ui.compare.DefaultViewerCreator.class;
+	}
+
 	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
 		return org.eclipse.xtext.xtend2.ui.contentassist.Xtend2ProposalProvider.class;
