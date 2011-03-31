@@ -11,6 +11,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.internal.text.TableOwnerDrawSupport;
+import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -40,16 +41,21 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ListDialog;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Knut Wannheden
  */
 @SuppressWarnings("restriction")
 public class XtextEObjectSearchDialog extends ListDialog {
 
 	protected Text searchControl;
+
+	private String initialPatternText;
 
 	private Label messageLabel;
 
@@ -59,7 +65,8 @@ public class XtextEObjectSearchDialog extends ListDialog {
 
 	private Label matchingElementsLabel;
 
-	private Text typeSearchControl;
+	/** @since 2.0 */
+	protected Text typeSearchControl;
 
 	private IXtextEObjectSearch searchEngine;
 
@@ -93,6 +100,47 @@ public class XtextEObjectSearchDialog extends ListDialog {
 	public XtextEObjectSearchDialog(Shell parent, IXtextEObjectSearch searchEngine, ILabelProvider labelProvider, boolean enableStyledLabels) {
 		this(parent, searchEngine, labelProvider);
 		this.enableStyledLabels = enableStyledLabels;
+	}
+
+	/**
+	 * @since 2.0
+	 */
+	protected IXtextEObjectSearch getSearchEngine() {
+		return searchEngine;
+	}
+
+	/**
+	 * @since 2.0
+	 */
+	public void setInitialPattern(String text) {
+		this.initialPatternText = text;
+	}
+
+	/**
+	 * @since 2.0
+	 */
+	protected String getInitialPattern() {
+		return initialPatternText;
+	}
+
+	@Override
+	public int open() {
+		if (getInitialPattern() == null) {
+			IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+			if (window != null) {
+				ISelection selection = window.getSelectionService().getSelection();
+				if (selection instanceof ITextSelection) {
+					String text = ((ITextSelection) selection).getText();
+					if (text != null) {
+						text = text.trim();
+						if (text.length() > 0) {
+							setInitialPattern(text);
+						}
+					}
+				}
+			}
+		}
+		return super.open();
 	}
 
 	@Override
@@ -153,6 +201,9 @@ public class XtextEObjectSearchDialog extends ListDialog {
 				messageLabel.setText(""); //$NON-NLS-1$
 			}
 		});
+
+		applyFilter();
+		
 		return parent;
 	}
 	
@@ -182,11 +233,7 @@ public class XtextEObjectSearchDialog extends ListDialog {
 
 		ModifyListener textModifyListener = new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
-				String searchPattern = searchControl.getText();
-				String typeSearchPattern = typeSearchControl.getText();
-				Iterable<IEObjectDescription> matches = searchEngine.findMatches(searchPattern, typeSearchPattern);
-				startSizeCalculation(matches);
-				//getTableViewer().setInput(matches);
+				applyFilter();
 			}
 		};
 		searchControl.addModifyListener(textModifyListener);
@@ -200,6 +247,12 @@ public class XtextEObjectSearchDialog extends ListDialog {
 				}
 			}
 		});
+
+		if (initialPatternText != null) {
+			searchControl.setText(initialPatternText);
+			searchControl.selectAll();
+		}
+
 		typeSearchControl.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -223,6 +276,22 @@ public class XtextEObjectSearchDialog extends ListDialog {
 		control.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL | GridData.GRAB_HORIZONTAL));
 	}
 
+	/**
+	 * Called when the dialog is initially opened and whenever the input text changes. Applies the search filter as 
+	 * specified by {@link #searchControl} and {@link #typeSearchControl} using {@link #getSearchEngine()} and updates
+	 * the result using {@link #startSizeCalculation(Iterable)}.
+	 * 
+	 * @since 2.0
+	 */
+	protected void applyFilter() {
+		String searchPattern = searchControl.getText();
+		String typeSearchPattern = typeSearchControl.getText();
+		if (searchPattern != null || typeSearchPattern != null) {
+			Iterable<IEObjectDescription> matches = getSearchEngine().findMatches(searchPattern, typeSearchPattern);
+			startSizeCalculation(matches);
+		}
+	}
+
 	public void updateMatches(final Collection<IEObjectDescription> matches, final boolean isFinished) {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
@@ -240,7 +309,13 @@ public class XtextEObjectSearchDialog extends ListDialog {
 		});
 	}
 
-	private void startSizeCalculation(Iterable<IEObjectDescription> matches) {
+	/**
+	 * Called by {@link #applyFilter()} and is responsible for calling {@link #updateMatches(Collection, boolean)} with
+	 * an appropriately sorted list of matches.
+	 * 
+	 * @since 2.0
+	 */
+	protected void startSizeCalculation(Iterable<IEObjectDescription> matches) {
 		if (getTableViewer() != null) {
 			if (sizeCalculationJob != null) {
 				sizeCalculationJob.cancel();
