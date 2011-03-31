@@ -31,15 +31,6 @@ public class XbaseTypeConformanceTest extends AbstractXbaseTestCase {
 	
 	@Inject
 	private ParseHelper<XExpression> parseHelper;
-
-	public void testVoidConformsWithEverything() throws Exception {
-		assertIsConformant(Class.class.getName(),Void.class.getName());
-		assertIsConformant(Integer.TYPE.getName(),Void.class.getName());
-		assertIsConformant(Object.class.getName(),Void.class.getName());
-		assertIsConformant(Void.class.getName(),Void.class.getName());
-		assertIsConformant(CharSequence.class.getName(),Void.class.getName());
-		assertIsConformant(XbaseTypeConformanceTest.class.getName(),Void.class.getName());
-	}
 	
 	public void testArrayConformsToIterable_01() throws Exception {
 		assertTrue(isConformantReturnTypes("null as "+Iterable.class.getName()+"<? extends "+Iterable.class.getName()+"<Integer>>", "new testdata.ArrayClient().getMultiArray"));

@@ -250,14 +250,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 
 	@Check
-	public void checkFeatureCallOnVoid(XMemberFeatureCall featureCall) {
-		if (typeRefs.is(typeProvider.getType(featureCall.getMemberCallTarget()), Void.class)) {
-			error("Cannot access features of objects of type 'void'", null,
-					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, FEATURE_CALL_ON_VOID);
-		}
-	}
-
-	@Check
 	public void checkInstantiationOfAbstractClass(XConstructorCall constructorCall) {
 		if (constructorCall.getConstructor().getDeclaringType().isAbstract()) {
 			error("Cannot instantiate abstract class", null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,

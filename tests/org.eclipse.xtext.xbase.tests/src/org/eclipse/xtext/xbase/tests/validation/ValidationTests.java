@@ -146,11 +146,6 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertError(((XBlockExpression)expression).getExpressions().get(1), XbasePackage.Literals.XNULL_LITERAL, UNREACHABLE_CODE);
 	}
 
-	public void testFeatureCallOnVoid() throws Exception {
-		XExpression expression = expression("null.toString()");
-		helper.assertError(expression, XMEMBER_FEATURE_CALL, FEATURE_CALL_ON_VOID, "void", "feature", "access");
-	}
-
 	public void testNewAbstractClass() throws Exception {
 		XExpression expression = expression("new testdata.AbstractClassWithPublicConstructor()");
 		helper.assertError(expression, XCONSTRUCTOR_CALL, ABSTRACT_CLASS_INSTANTIATION, "abstract", "instantiate",

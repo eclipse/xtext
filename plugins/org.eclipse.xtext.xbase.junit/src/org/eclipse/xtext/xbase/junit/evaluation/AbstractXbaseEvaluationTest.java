@@ -47,7 +47,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341246
 	 */
-	public void testUnreferencedConstructorInBlog() throws Exception {
+	public void testUnreferencedConstructorInBlock() throws Exception {
 		assertEvaluatesTo(false, "{ new String() false}");
 	}
 	

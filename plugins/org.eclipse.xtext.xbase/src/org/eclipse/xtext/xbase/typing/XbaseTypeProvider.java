@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -34,6 +36,7 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
@@ -403,13 +406,43 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return getCommonType(returnTypes);
 	}
 
-	protected JvmTypeReference getCommonType(List<JvmTypeReference> returnTypes) {
-		if (returnTypes.isEmpty())
-			return null;
-		if (returnTypes.size() == 1) {
-			return returnTypes.get(0);
+	/**
+	 * Returns the common type of the given types. 
+	 * {@link #isFilteredFromCommonTypesList(JvmTypeReference) Filters} for primitive voids
+	 * and unresolved types prior to asking the 
+	 * {@link org.eclipse.xtext.common.types.util.TypeConformanceComputer TypeConformanceComputer}.
+	 * 
+	 */
+	protected JvmTypeReference getCommonType(List<JvmTypeReference> types) {
+		if (types.size() <= 1) {
+			JvmTypeReference result = getTypeConformanceComputer().getCommonSuperType(types);
+			return result;
 		}
-		return getTypeConformanceComputer().getCommonSuperType(returnTypes);
+		List<JvmTypeReference> filteredTypes = Lists.newArrayListWithExpectedSize(types.size());
+		for(JvmTypeReference reference: types) {
+			if (!isFilteredFromCommonTypesList(reference)) {
+				filteredTypes.add(reference);
+			}
+		}
+		if (filteredTypes.isEmpty()) {
+			JvmTypeReference result = getTypeConformanceComputer().getCommonSuperType(types);
+			return result;
+		}
+		JvmTypeReference result = getTypeConformanceComputer().getCommonSuperType(filteredTypes);
+		return result;
+	}
+
+	protected boolean isFilteredFromCommonTypesList(JvmTypeReference reference) {
+		if (reference == null)
+			return true;
+		if (reference instanceof JvmMultiTypeReference && ((JvmMultiTypeReference) reference).getReferences().isEmpty())
+			return true;
+		if (reference instanceof JvmAnyTypeReference)
+			return false;
+		// TODO use IEarlyExitComputer
+		if (reference.getType() instanceof JvmVoid && !reference.getType().eIsProxy())
+			return true;
+		return false;
 	}
 
 	protected JvmTypeReference _type(XSwitchExpression object, boolean rawType) {
@@ -461,7 +494,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XNullLiteral object, boolean rawType) {
-		return getTypeReferences().createAnyTypeReference();
+		JvmAnyTypeReference result = getTypeReferences().createAnyTypeReference(object);
+		return result;
 	}
 
 	protected JvmTypeReference _type(XIntLiteral object, boolean rawType) {
@@ -552,7 +586,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			JvmTypeReference type = getType(catchClause.getExpression(), rawType);
 			returnTypes.add(type);
 		}
-		JvmTypeReference commonSuperType = getTypeConformanceComputer().getCommonSuperType(returnTypes);
+		JvmTypeReference commonSuperType = getCommonType(returnTypes);
 		return commonSuperType;
 	}
 

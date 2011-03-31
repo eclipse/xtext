@@ -10,9 +10,13 @@ package org.eclipse.xtext.xbase.scoping.featurecalls;
 import static com.google.common.collect.Iterables.*;
 import static java.util.Collections.*;
 
+import java.util.Collections;
+
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import com.google.common.base.Predicate;
@@ -23,6 +27,9 @@ import com.google.common.base.Predicate;
 public class DefaultFeaturesForTypeProvider implements IFeaturesForTypeProvider {
 
 	public Iterable<? extends JvmFeature> getFeaturesForType(JvmTypeReference declType) {
+		if (declType instanceof JvmAnyTypeReference || declType instanceof JvmMultiTypeReference) {
+			return Collections.emptyList();
+		}
 		if (declType != null && declType.getType() instanceof JvmDeclaredType) {
 			return filter(filter(((JvmDeclaredType)declType.getType()).getMembers(), JvmFeature.class), new Predicate<JvmFeature>() {
 				public boolean apply(JvmFeature input) {

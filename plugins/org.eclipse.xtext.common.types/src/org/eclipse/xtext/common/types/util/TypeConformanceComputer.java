@@ -133,7 +133,7 @@ public class TypeConformanceComputer {
 	}
 
 	protected boolean isUnresolvedType(JvmTypeReference ref) {
-		if (ref instanceof JvmMultiTypeReference || ref instanceof JvmAnyTypeReference)
+		if (ref instanceof JvmMultiTypeReference || ref instanceof JvmAnyTypeReference || ref instanceof JvmWildcardTypeReference)
 			return false;
 		return ref.getType() == null || ref.getType().eIsProxy();
 	}
@@ -370,13 +370,16 @@ public class TypeConformanceComputer {
 	}
 
 	protected boolean isArgumentAssignable(JvmTypeReference refA, JvmTypeReference refB) {
+		if (isUnconstrainedWildcard(refA)) {
+			return true;
+		}
+		// TODO remove as soon as the TODO below is fixed
+		if (refA instanceof JvmAnyTypeReference)
+			return true;
 		JvmTypeReference upperA = getUpper(refA);
 		JvmTypeReference upperB = getUpper(refB);
 		JvmTypeReference lowerA = getLower(refA);
 		JvmTypeReference lowerB = getLower(refB);
-		if (isUnconstrainedWildcard(refA)) {
-			return true;
-		}
 		if (upperA != null) {
 			if (upperB != null) {
 				return isConformant(upperA, upperB);
@@ -388,6 +391,7 @@ public class TypeConformanceComputer {
 				JvmType typeA = refA.getType();
 				JvmType typeB = refB.getType();
 				if (typeA == typeB)
+					// TODO unchecked cast
 					return areArgumentsAssignableFrom((JvmParameterizedTypeReference)refA, (JvmParameterizedTypeReference)refB); 
 				if (typeA.eClass() == typeB.eClass() && typeA instanceof JvmTypeParameter) {
 					if (_isConformant((JvmTypeParameter) typeA, (JvmTypeParameter) typeB, (JvmParameterizedTypeReference)refA, (JvmParameterizedTypeReference)refB, false)) {
@@ -440,9 +444,9 @@ public class TypeConformanceComputer {
 		return null;
 	}
 
-	protected JvmTypeReference getUpper(JvmTypeReference argumentA) {
-		if (argumentA instanceof JvmWildcardTypeReference) {
-			EList<JvmTypeConstraint> list = ((JvmWildcardTypeReference) argumentA).getConstraints();
+	protected JvmTypeReference getUpper(JvmTypeReference argument) {
+		if (argument instanceof JvmWildcardTypeReference) {
+			EList<JvmTypeConstraint> list = ((JvmWildcardTypeReference) argument).getConstraints();
 			for (JvmTypeConstraint constraint : list) {
 				if (constraint instanceof JvmUpperBound) {
 					final JvmTypeReference typeReference = constraint.getTypeReference();
@@ -650,7 +654,7 @@ public class TypeConformanceComputer {
 		if (referencesWithSameDistance.size() == 1) {
 			return referencesWithSameDistance.get(0);
 		} else if (referencesWithSameDistance.size() > 1) {
-			JvmMultiTypeReference result = typeReferences.createMultiTypeReference();
+			JvmMultiTypeReference result = typeReferences.createMultiTypeReference(referencesWithSameDistance.get(0).getType());
 			for(JvmTypeReference reference: referencesWithSameDistance) {
 				result.getReferences().add(EcoreUtil2.cloneIfContained(reference));
 			}

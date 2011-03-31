@@ -56,15 +56,18 @@ public class TypeReferences {
 	@Inject
 	private SuperTypeCollector superTypeCollector;
 	
-	public JvmAnyTypeReference createAnyTypeReference() {
-		return factory.createJvmAnyTypeReference();
+	public JvmAnyTypeReference createAnyTypeReference(EObject context) {
+		JvmAnyTypeReference result = factory.createJvmAnyTypeReference();
+		result.setType(findDeclaredType(Object.class, context));
+		return result;
 	}
 	
-	public JvmMultiTypeReference createMultiTypeReference(JvmTypeReference... references) {
+	public JvmMultiTypeReference createMultiTypeReference(EObject context, JvmTypeReference... references) {
 		 JvmMultiTypeReference result = factory.createJvmMultiTypeReference();
 		 if (references != null && references.length != 0) {
 			 result.getReferences().addAll(Arrays.asList(references));
 		 }
+		 result.setType(findDeclaredType(Object.class, context));
 		 return result;
 	}
 	

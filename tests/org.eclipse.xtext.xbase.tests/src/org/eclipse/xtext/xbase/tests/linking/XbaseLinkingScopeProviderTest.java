@@ -393,4 +393,72 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		XAbstractFeatureCall featureCall = (XAbstractFeatureCall) block.getExpressions().get(1);
 		assertEquals("org.eclipse.xtext.xbase.lib.ListExtensions.map(java.util.List,org.eclipse.xtext.xbase.lib.Functions$Function1)", featureCall.getFeature().getIdentifier());
 	}
+	
+	public void testMemberCallOnNull_01() throws Exception {
+		XMemberFeatureCall toString = (XMemberFeatureCall) expression("null.toString");
+		assertTrue(toString.getFeature().eIsProxy());
+	}
+	
+	public void testMemberCallOnNull_02() throws Exception {
+		XMemberFeatureCall nullOrEmpty = (XMemberFeatureCall) expression("null.isNullOrEmpty");
+		assertTrue(nullOrEmpty.getFeature().eIsProxy());
+	}
+	
+	public void testMemberCallOnNull_03() throws Exception {
+		XBinaryOperation equals = (XBinaryOperation) expression("null == 'literal'");
+		assertFalse(equals.getFeature().eIsProxy());
+	}
+	
+	public void testMemberCallOnNull_04() throws Exception {
+		XBinaryOperation equalsNot = (XBinaryOperation) expression("null != 'literal'");
+		assertFalse(equalsNot.getFeature().eIsProxy());
+	}
+	
+	public void testMemberCallOnNull_05() throws Exception {
+		XBinaryOperation mappedTo = (XBinaryOperation) expression("null -> 'literal'");
+		assertFalse(mappedTo.getFeature().eIsProxy());
+	}
+	
+	public void testMemberCallOnNull_06() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var x = null x.toString }");
+		XMemberFeatureCall toString = (XMemberFeatureCall) block.getExpressions().get(1);
+		assertTrue(toString.getFeature().eIsProxy());
+	}
+	
+	public void testMemberCallOnNull_07() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var x = null x.isNullOrEmpty }");
+		XMemberFeatureCall nullOrEmpty = (XMemberFeatureCall) block.getExpressions().get(1);
+		assertTrue(nullOrEmpty.getFeature().eIsProxy());
+	}
+	
+	public void testMemberCallOnNull_08() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var x = null x == 'literal' }");
+		XBinaryOperation equals = (XBinaryOperation) block.getExpressions().get(1);
+		assertFalse(equals.getFeature().eIsProxy());
+	}
+	
+	public void testMemberCallOnNull_09() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var x = null x != 'literal' }");
+		XBinaryOperation equalsNot = (XBinaryOperation) block.getExpressions().get(1);
+		assertFalse(equalsNot.getFeature().eIsProxy());
+	}
+	
+	public void testMemberCallOnNull_10() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var x = null x -> 'literal' }");
+		XBinaryOperation mappedTo = (XBinaryOperation) block.getExpressions().get(1);
+		assertFalse(mappedTo.getFeature().eIsProxy());
+	}
+	
+	public void testMemberCallOnNull_11() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var this = null toString }");
+		XFeatureCall toString = (XFeatureCall) block.getExpressions().get(1);
+		assertTrue(toString.getFeature().eIsProxy());
+	}
+	
+	public void testMemberCallOnNull_12() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var this = null isNullOrEmpty }");
+		XFeatureCall nullOrEmpty = (XFeatureCall) block.getExpressions().get(1);
+		assertTrue(nullOrEmpty.getFeature().eIsProxy());
+	}
+	
 }

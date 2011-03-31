@@ -19,8 +19,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -170,9 +172,12 @@ public class FunctionConversion {
 			JvmTypeReference leftType = leftIter.next();
 			JvmTypeReference rightType = rightIter.next();
 			JvmTypeReference convertedLeftParam = leftCtx.resolve(leftType);
-			JvmTypeReference convertedRightParam = rightCtx.resolve(rightType);
-			if (!conformanceComputer.isConformant(convertedLeftParam, convertedRightParam))
-				return false;
+			// we don't expect something specific - allow anything
+			if (!(convertedLeftParam instanceof JvmAnyTypeReference)) {
+				JvmTypeReference convertedRightParam = rightCtx.resolve(rightType);
+				if (!conformanceComputer.isConformant(convertedLeftParam, convertedRightParam))
+					return false;
+			}
 		}
 		if (leftIter.hasNext() || rightIter.hasNext()) // params left?
 			return false;
@@ -217,6 +222,15 @@ public class FunctionConversion {
 	}
 
 	public boolean isFunction(JvmTypeReference type) {
+		if (type instanceof JvmAnyTypeReference)
+			return false;
+		if (type instanceof JvmMultiTypeReference) {
+			for(JvmTypeReference reference: ((JvmMultiTypeReference) type).getReferences()) {
+				if (!isFunction(reference))
+					return false;
+			}
+			return true;
+		}
 		return type != null && type.getType()!=null && type.getType().getIdentifier().startsWith(Functions.class.getCanonicalName());
 	}
 

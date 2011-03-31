@@ -39,7 +39,7 @@ public class ReturnTypeComputationTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testReturnType_02() throws Exception {
-		assertReturnType("java.lang.Void", "return null");
+		assertReturnType("null", "return null");
 	}
 	
 	public void testReturnType_03() throws Exception {
