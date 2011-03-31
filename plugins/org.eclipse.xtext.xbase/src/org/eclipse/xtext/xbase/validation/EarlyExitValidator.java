@@ -66,18 +66,18 @@ public class EarlyExitValidator extends AbstractDeclarativeValidator {
 					List<?> values = (List<?>) eObject.eGet(reference);
 					for(Object object: values) {
 						if (object instanceof XExpression)
-							checkExpressionExistsNormally((XExpression) object);
+							checkExpressionExitsNormally((XExpression) object);
 					}
 				} else {
 					Object object = eObject.eGet(reference);
 					if (object instanceof XExpression)
-						checkExpressionExistsNormally((XExpression) object);
+						checkExpressionExitsNormally((XExpression) object);
 				}
 			}
 		}
 	}
 
-	protected void checkExpressionExistsNormally(XExpression expression) {
+	protected void checkExpressionExitsNormally(XExpression expression) {
 		Collection<ExitPoint> exitPoints = earlyExitComputer.getExitPoints(expression);
 		if (exitPoints != null && !exitPoints.isEmpty()) {
 			for(ExitPoint exitPoint: exitPoints) {
