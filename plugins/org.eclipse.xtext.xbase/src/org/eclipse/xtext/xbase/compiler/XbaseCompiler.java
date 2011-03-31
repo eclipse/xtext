@@ -258,7 +258,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (isReferenced) {
 			declareLocalVariable(expr, b, later);
 		} else {
+			b.append("\n");
 			later.exec();
+			b.append(";");
 		}
 	}
 
