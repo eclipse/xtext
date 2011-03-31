@@ -9,9 +9,11 @@ package org.eclipse.xtext.xbase.compiler;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmLowerBound;
+import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -19,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Strings;
@@ -57,6 +60,9 @@ public abstract class AbstractXbaseCompiler {
 	
 	@Inject
 	private IEarlyExitComputer exitComputer;
+	
+	@Inject
+	private TypeConformanceComputer typeConformanceComputer;
 
 	private PolymorphicDispatcher<Void> toJavaExprDispatcher = PolymorphicDispatcher.createForSingleTarget(
 			"_toJavaExpression", 2, 2, this);
@@ -177,9 +183,23 @@ public abstract class AbstractXbaseCompiler {
 				}
 				appendable.append(">");
 			}
+		} else if (type instanceof JvmAnyTypeReference) {
+			appendable.append(type.getType());
+		} else if (type instanceof JvmMultiTypeReference) {
+			serialize(resolveMultiType(type), context, appendable, withoutConstraints, paramsToWildcard);
 		} else {
-			throw new IllegalArgumentException(type==null?null:type.toString());
+			throw new IllegalArgumentException(type==null ? null : type.toString());
 		}
+	}
+	
+	protected JvmTypeReference resolveMultiType(JvmTypeReference reference) {
+		if (reference instanceof JvmMultiTypeReference) {
+			JvmTypeReference result = typeConformanceComputer.getCommonSuperType(((JvmMultiTypeReference) reference).getReferences());
+			if (result instanceof JvmMultiTypeReference)
+				return resolveMultiType(result);
+			return result;
+		}
+		return reference;
 	}
 	
 	protected String getJavaVarName(Object ex, IAppendable appendable) {
