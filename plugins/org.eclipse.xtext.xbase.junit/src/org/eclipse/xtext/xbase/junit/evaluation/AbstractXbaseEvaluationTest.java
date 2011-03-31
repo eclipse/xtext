@@ -44,6 +44,13 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 //				"new java.util.ArrayList<Object>().addAll(typeof(String).declaredFields)");
 //	}
 	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341246
+	 */
+	public void testUnreferencedConstructorInBlog() throws Exception {
+		assertEvaluatesTo(false, "{ new String() false}");
+	}
+	
 	public void testStaticFeatureCall_01() throws Exception {
 		assertEvaluatesTo("false", "String::valueOf(false)");
 	}
