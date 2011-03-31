@@ -171,9 +171,18 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 	}
 
 	/**
-	 * If used in a non-Guice environment, we need to be able to set this.
+	 * @Deprecated use {@link #setSerializer(ISerializer)} instead.
 	 */
-	public void setSerializerUtil(ISerializer serializerUtil) {
-		this.serializer = serializerUtil;
+	@Deprecated
+	public void setSerializerUtil(ISerializer serializer) {
+		setSerializer(serializer);
+	}
+	
+	/**
+	 * If used in a non-Guice environment, we need to be able to set this.
+	 * @since 2.0
+	 */
+	public void setSerializer(ISerializer serializer) {
+		this.serializer = serializer;
 	}
 }
