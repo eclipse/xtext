@@ -52,6 +52,10 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedReturnType("java.lang.String", "if (true) 'foo' else 'bar'");
 		assertResolvedReturnType("java.lang.String", "if (true) 'foo'");
 	}
+	
+	public void testIfExpression_02() throws Exception {
+		assertResolvedReturnType("java.lang.AbstractStringBuilder & java.io.Serializable", "if (true) new StringBuilder() else new StringBuffer()");
+	}
 
 	public void testSwitchExpression() throws Exception {
 		assertResolvedReturnType(String.class.getName(),
@@ -63,11 +67,11 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	public void testBlockExpression() throws Exception {
 		assertResolvedReturnType(Integer.class.getName(), "{''.toString;4;}");
 		assertResolvedReturnType(Boolean.class.getName(), "{''.toString;true;}");
-		assertResolvedReturnType(Void.class.getName(), "{null;}");
+		assertResolvedReturnType("null", "{null;}");
 	}
 
 	public void testNullLiteral() throws Exception {
-		assertResolvedReturnType(Void.class.getName(), "null");
+		assertResolvedReturnType("null", "null");
 	}
 
 	public void testBooleanLiteral() throws Exception {
@@ -126,7 +130,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedReturnType("java.util.List<java.lang.Number>", "new testdata.ClassWithVarArgs().toNumberList()");
 		assertResolvedReturnType("java.util.List<java.lang.Integer>", "new testdata.ClassWithVarArgs().toNumberList(0)");
 		assertResolvedReturnType("java.util.List<java.lang.Integer>", "new testdata.ClassWithVarArgs().toNumberList(0, 1)");
-		assertResolvedReturnType("java.util.List<java.lang.Number>", "new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)");
+		assertResolvedReturnType("java.util.List<java.lang.Number & java.lang.Comparable<? extends java.lang.Object>>", "new testdata.ClassWithVarArgs().toNumberList(new Integer(0), new Integer(0).doubleValue)");
 	}
 	
 	public void testFeatureCall_06() throws Exception {

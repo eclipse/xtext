@@ -72,7 +72,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	public void testTypeParamInference_03() throws Exception {
 		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1([e|null],'foo')");
 		final XExpression closure = fc.getMemberCallArguments().get(0);
-		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,java.lang.Void>", closure);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,null>", closure);
 	}
 	
 	public void testTypeParamInference_04() throws Exception {
@@ -107,7 +107,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 		XBlockExpression block = (XBlockExpression) expression("{ var this = new testdata.ClosureClient() invoke1([e|null],'foo') }");
 		XFeatureCall fc = (XFeatureCall) block.getExpressions().get(1);
 		final XExpression closure = fc.getFeatureCallArguments().get(0);
-		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,java.lang.Void>", closure);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String,null>", closure);
 	}
 	
 	public void testTypeParamInference_09() throws Exception {

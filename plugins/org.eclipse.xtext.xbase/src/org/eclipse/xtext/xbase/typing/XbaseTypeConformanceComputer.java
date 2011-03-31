@@ -27,12 +27,13 @@ public class XbaseTypeConformanceComputer extends TypeConformanceComputer {
 
 	@Override
 	public boolean isConformant(JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
-		if (functionConversion.isFunction(left) || functionConversion.isFunction(right))
-			return functionConversion.isConformant(left, right, ignoreGenerics);
-
 		if (super.isConformant(left, right, ignoreGenerics)) 
 			return true;
-			
+		if (functionConversion.isFunction(left) || functionConversion.isFunction(right)) {
+			if (functionConversion.isConformant(left, right, ignoreGenerics)) {
+				return true;
+			}
+		}
 		Iterable<JvmTypeReference> synonymTypes = synonymTypeProvider.getSynonymTypes(right);
 		for (JvmTypeReference synonymType : synonymTypes) {
 			if (super.isConformant(left, synonymType, ignoreGenerics))

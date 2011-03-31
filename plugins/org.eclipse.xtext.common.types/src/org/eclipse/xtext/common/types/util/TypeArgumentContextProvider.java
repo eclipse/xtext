@@ -19,6 +19,7 @@ import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstraintOwner;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -277,8 +278,8 @@ public class TypeArgumentContextProvider {
 		if (!isResolved(current)) {
 			return isResolved(isBetter);
 		}
-		if (typeReferences.is(current, Void.class)) {
-			if (typeReferences.is(isBetter, Void.class))
+		if (current instanceof JvmAnyTypeReference) {
+			if (isBetter instanceof JvmAnyTypeReference)
 				return false;
 			return true;
 		}
