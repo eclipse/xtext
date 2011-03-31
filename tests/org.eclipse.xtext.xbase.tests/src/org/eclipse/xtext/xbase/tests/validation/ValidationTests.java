@@ -11,6 +11,7 @@ import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
@@ -29,7 +30,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 
 	public void testFinalCast() throws Exception {
 		XExpression expression = expression("'foo' as Cloneable");
-		helper.assertError(expression, XCASTED_EXPRESSION, INVALID_CAST, "sealed");
+		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_CAST, "sealed");
 		expression = expression("'foo' as CharSequence");
 		helper.assertNoError(expression, INVALID_CAST);
 	}
@@ -164,13 +165,13 @@ public class ValidationTests extends AbstractXbaseTestCase {
 
 	public void testCast_1() throws Exception {
 		XExpression expression = expression("'foo' as Cloneable");
-		helper.assertError(expression, XCASTED_EXPRESSION, INVALID_CAST, "sealed", "type");
+		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_CAST, "sealed", "type");
 		helper.assertNoError(expression, OBSOLETE_CAST);
 	}
 
 	public void testCast_2() throws Exception {
 		XExpression expression = expression("new String() as Boolean");
-		helper.assertError(expression, XCASTED_EXPRESSION, INVALID_CAST, "Cannot", "cast");
+		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_CAST, "Cannot", "cast");
 		helper.assertNoError(expression, OBSOLETE_CAST);
 	}
 

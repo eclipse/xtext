@@ -47,11 +47,11 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 	}
 
 	public void testCast_01() throws Exception {
-		assertCastError("'foo' as Boolean", XbasePackage.Literals.XCASTED_EXPRESSION, "Cannot", "Boolean");
+		assertCastError("'foo' as Boolean", TypesPackage.Literals.JVM_TYPE_REFERENCE, "Cannot", "Boolean");
 	}
 
 	public void testCast_02() throws Exception {
-		assertCastError("new NullPointerException() as StringBuilder", XbasePackage.Literals.XCASTED_EXPRESSION,
+		assertCastError("new NullPointerException() as StringBuilder", TypesPackage.Literals.JVM_TYPE_REFERENCE,
 				"cannot", "StringBuilder");
 	}
 
@@ -67,20 +67,20 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 	}
 
 	public void testCast_05() throws Exception {
-		assertCastError("('foo' as CharSequence) as Integer", XbasePackage.Literals.XCASTED_EXPRESSION, "cannot",
+		assertCastError("('foo' as CharSequence) as Integer", TypesPackage.Literals.JVM_TYPE_REFERENCE, "cannot",
 				"CharSequence", "Integer");
 	}
 	
 	public void testSwitch_TypeGuard_01() throws Exception {
 		String expression = "switch ('foo') { Integer : null }";
 		final XExpression xExpression = expression(expression, false);
-		helper.assertError(xExpression, XbasePackage.Literals.XCASE_PART, INVALID_CAST);
+		helper.assertError(xExpression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_CAST);
 	}
 	
 	public void testSwitch_TypeGuard_02() throws Exception {
 		String expression = "switch (new java.util.ArrayList()) { java.util.HashSet : null }";
 		final XExpression xExpression = expression(expression, false);
-		helper.assertError(xExpression, XbasePackage.Literals.XCASE_PART, INVALID_CAST);
+		helper.assertError(xExpression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_CAST);
 	}
 
 	public void testVariableDeclaration() throws Exception {

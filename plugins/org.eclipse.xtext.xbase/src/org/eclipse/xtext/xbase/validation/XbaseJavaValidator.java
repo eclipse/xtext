@@ -194,7 +194,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			if (targetType.isFinal()) {
 				if (!conformanceComputer.isConformant(toType, fromType)) {
 					error("Cannot cast element of sealed type " + getNameOfTypes(fromType) + " to "
-							+ canonicalName(toType), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+							+ canonicalName(toType), toType, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
 							INVALID_CAST);
 				} else if (conformanceComputer.isConformant(toType, fromType)) {
 //					warning("Cast is obsolete", null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, OBSOLETE_CAST);
@@ -207,7 +207,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 					if (type instanceof JvmGenericType && !((JvmGenericType) type).isInterface()) {
 						if (!conformanceComputer.isConformant(fromType, toType)) {
 							error("type mismatch: cannot convert from " + getNameOfTypes(fromType) + " to "
-									+ canonicalName(toType), null,
+									+ canonicalName(toType), toType, null,
 									ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_CAST);
 						}
 					}
