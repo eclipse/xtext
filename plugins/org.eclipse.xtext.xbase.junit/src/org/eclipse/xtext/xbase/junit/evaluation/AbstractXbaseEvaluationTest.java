@@ -90,6 +90,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				" val closure = [Integer i| return i]" +
 				" for (x : 1..100) " +
 				"    closure.apply(x)" +
+				" return null" +
 				"}");
 	}
 

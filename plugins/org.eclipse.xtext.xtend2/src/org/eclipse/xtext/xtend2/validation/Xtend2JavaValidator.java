@@ -12,6 +12,7 @@ import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
 import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
+import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import static org.eclipse.xtext.xtend2.validation.IssueCodes.*;
 import static org.eclipse.xtext.xtend2.xtend2.Xtend2Package.Literals.*;
 
@@ -29,7 +30,6 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.Primitives;
@@ -40,12 +40,14 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
+import org.eclipse.xtext.xtend2.typing.XtendOverridesService;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringElseIf;
 import org.eclipse.xtext.xtend2.xtend2.RichStringForLoop;
@@ -83,9 +85,6 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	private TypeReferences typeRefs;
 
 	@Inject
-	private ITypeProvider typeProvider;
-
-	@Inject
 	private RichStringProcessor richStringProcessor;
 
 	@Inject
@@ -93,7 +92,13 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 
 	@Inject
 	private IXtend2JvmAssociations associations;
+	
+	@Inject
+	private XtendOverridesService overridesService;
 
+	@Inject
+	private IEarlyExitComputer earlyExitComputer;
+	
 	@Override
 	protected List<EPackage> getEPackages() {
 		return newArrayList(Xtend2Package.eINSTANCE, XbasePackage.eINSTANCE);
@@ -188,38 +193,33 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 			}
 		}
 	}
+	
+	@Override
+	protected boolean isImplicitReturn(XExpression expr) {
+		return expr.eContainer() instanceof XtendFunction && !earlyExitComputer.isEarlyExit(expr);
+	}
 
 	@Check
 	protected void checkFunctionOverride(XtendFunction function) {
+		JvmOperation overriddenOperation = overridesService.findOverriddenOperation(function);
+		if (overriddenOperation==null) {
+			if (function.isOverride()) {
+				error("Function does not override any function", function, XTEND_FUNCTION__OVERRIDE, OBSOLETE_OVERRIDE);
+			}
+			return;
+		}
+		if (!function.isOverride())
+			error("Missing 'override'. Function overrides " + canonicalName(overriddenOperation), function,
+					XTEND_MEMBER__NAME, MISSING_OVERRIDE);
+		if (function.getReturnType()==null)
+			return;
 		TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(typeRefs
 				.createTypeRef(associations.getDirectlyInferredOperation(function).getDeclaringType()));
-		JvmOperation inferredJvmOperation = associations.getDirectlyInferredOperation(function);
-		boolean overriddenOperationFound = false;
-		if (function.getDeclaringType().getExtends() != null || !function.getDeclaringType().getImplements().isEmpty()) {
-			JvmTypeReference returnType = typeProvider.getTypeForIdentifiable(inferredJvmOperation);
-			JvmTypeReference returnTypeUpperBound = typeArgumentContext.getUpperBound(returnType, function);
-			for (JvmOperation superOperation : allSuperOperations(function.getDeclaringType())) {
-				if (superOperation.getVisibility() != JvmVisibility.PRIVATE) {
-					if (featureOverridesService.isOverridden(inferredJvmOperation, superOperation, typeArgumentContext,
-							false)) {
-						overriddenOperationFound = true;
-						if (!function.isOverride())
-							error("Missing 'override'. Function overrides " + canonicalName(superOperation), function,
-									XTEND_MEMBER__NAME, MISSING_OVERRIDE);
-						JvmTypeReference superReturnTypeUpperBound = typeArgumentContext.getUpperBound(
-								superOperation.getReturnType(), function);
-						if (!conformanceComputer.isConformant(superReturnTypeUpperBound, returnTypeUpperBound)) {
-							error("The return type is incompatible with "
-									+ canonicalName(superOperation.getReturnType()) + " "
-									+ canonicalName(superOperation), function, XTEND_FUNCTION__RETURN_TYPE,
-									INCOMPATIBLE_RETURN_TYPE);
-						}
-					}
-				}
-			}
-		}
-		if (!overriddenOperationFound && function.isOverride()) {
-			error("Function does not override any function", function, XTEND_FUNCTION__OVERRIDE, OBSOLETE_OVERRIDE);
+		JvmTypeReference returnTypeUpperBound = typeArgumentContext.getUpperBound(overriddenOperation.getReturnType(), function);
+		if (!conformanceComputer.isConformant(returnTypeUpperBound, function.getReturnType())) {
+			error("The return type is incompatible with "
+					+ overriddenOperation.getIdentifier(), function, XTEND_FUNCTION__RETURN_TYPE,
+					INCOMPATIBLE_RETURN_TYPE);
 		}
 	}
 

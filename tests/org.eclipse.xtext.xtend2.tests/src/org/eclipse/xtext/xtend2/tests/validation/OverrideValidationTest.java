@@ -8,9 +8,11 @@
 package org.eclipse.xtext.xtend2.tests.validation;
 
 import static org.eclipse.xtext.xtend2.validation.IssueCodes.*;
+import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import static org.eclipse.xtext.xtend2.xtend2.Xtend2Package.Literals.*;
 
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 
@@ -93,21 +95,21 @@ public class OverrideValidationTest extends AbstractXtend2TestCase {
 	
 	public void testIncompatibleReturnType_2() throws Exception {
 		XtendClass xtendClass = clazz("class Foo implements test.SomeInterface { foo() {} }");
-		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_RETURN_TYPE);
+		helper.assertError(xtendClass.getMembers().get(0), XbasePackage.Literals.XBLOCK_EXPRESSION, INCOMPATIBLE_RETURN_TYPE);
 	}
 
 	public void testIncompatibleGenericReturnType_0() throws Exception {
-		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { override java.util.ArrayList<String> returnsListString() {''} }");
+		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { override java.util.ArrayList<String> returnsListString() {} }");
 		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_RETURN_TYPE);
 	}
 
 	public void testIncompatibleGenericReturnType_1() throws Exception {
-		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { override java.util.List<Object> returnsListString() {''} }");
+		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { override java.util.List<Object> returnsListString() {} }");
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE);
 	}
 
 	public void testIncompatibleGenericReturnType_2() throws Exception {
-		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { override java.util.ArrayList<String> returnsListExtendsObject() {''} }");
+		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { override java.util.ArrayList<String> returnsListExtendsObject() {} }");
 		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_RETURN_TYPE);
 	}
 	

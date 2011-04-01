@@ -295,6 +295,12 @@ public abstract class AbstractXbaseCompiler {
 
 	protected void declareLocalVariable(XExpression expr, IAppendable b, Later expression) {
 		JvmTypeReference type = getTypeProvider().getType(expr);
+		//TODO we need to replace any occurrence of JvmAnyTypeReference with a better match from the expected type
+		if (type instanceof JvmAnyTypeReference) {
+			JvmTypeReference expectedType = getTypeProvider().getExpectedType(expr);
+			if (expectedType!=null && !(expectedType.getType() instanceof JvmTypeParameter))
+				type = expectedType;
+		}
 		String varName = declareNameInVariableScope(expr, b);
 		b.append("\n");
 		serialize(type,expr,b,false,true);

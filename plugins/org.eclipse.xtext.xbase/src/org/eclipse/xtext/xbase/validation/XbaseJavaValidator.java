@@ -41,6 +41,7 @@ import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
+import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
@@ -69,6 +70,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Inject
 	private SynonymTypesProvider synonymTypeProvider;
+	
+	@Inject
+	private IEarlyExitComputer earlyExitComputer;
 	
 	private final Collection<EReference> typeConformanceCheckedReferences = ImmutableList.of(
 			XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT,
@@ -108,6 +112,25 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		}
 	}
 	
+	@Check
+	public void checkImplicitReturn(XExpression expr) {
+		if (!isImplicitReturn(expr))
+			return;
+		JvmTypeReference expectedType = typeProvider.getExpectedType(expr);
+		if (typeRefs.is(expectedType, Void.TYPE))
+			return;
+		JvmTypeReference type = typeProvider.getType(expr);
+		if (!conformanceComputer.isConformant(expectedType, type)) {
+			error("Incompatible implicit return type. Expected " + getNameOfTypes(expectedType) + " but was "
+					+ canonicalName(type), expr, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+					INCOMPATIBLE_RETURN_TYPE);
+		}
+	}
+	
+	protected boolean isImplicitReturn(XExpression expr) {
+		return expr.eContainer() instanceof XClosure && !earlyExitComputer.isEarlyExit(expr);
+	}
+
 	protected String getNameOfTypes(JvmTypeReference expectedType) {
 		StringBuilder result = new StringBuilder(canonicalName(expectedType));
 		Iterable<JvmTypeReference> types = synonymTypeProvider.getSynonymTypes(expectedType);
