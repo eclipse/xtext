@@ -31,15 +31,8 @@ import com.google.inject.Inject;
  */
 public class EarlyExitValidator extends AbstractDeclarativeValidator {
 
-	// TODO disallow return in feature call arguments? 
 	private final Collection<EReference> disallowedEarylExitReferences = ImmutableList.of(
-		XbasePackage.Literals.XIF_EXPRESSION__IF,
-		XbasePackage.Literals.XTHROW_EXPRESSION__EXPRESSION,
-		XbasePackage.Literals.XRETURN_EXPRESSION__EXPRESSION,
-		XbasePackage.Literals.XSWITCH_EXPRESSION__SWITCH,
-		XbasePackage.Literals.XCASE_PART__CASE,
-		XbasePackage.Literals.XTRY_CATCH_FINALLY_EXPRESSION__FINALLY_EXPRESSION,
-		XbasePackage.Literals.XASSIGNMENT__ASSIGNABLE
+		XbasePackage.Literals.XTRY_CATCH_FINALLY_EXPRESSION__FINALLY_EXPRESSION
 	);
 	
 	protected Collection<EReference> getDisallowedEarlyExitReferences() {
