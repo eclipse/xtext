@@ -10,6 +10,7 @@ package org.eclipse.xtext.formatting;
 import java.util.Collection;
 
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting.impl.ElementMatcherProvider;
 import org.eclipse.xtext.util.Pair;
@@ -23,19 +24,19 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(ElementMatcherProvider.class)
 public interface IElementMatcherProvider {
 
-	interface IAfterElement extends IElementPattern {
+	public interface IAfterElement extends IElementPattern {
 		AbstractElement matchAfter();
 	}
 
-	interface IBeforeElement extends IElementPattern {
+	public interface IBeforeElement extends IElementPattern {
 		AbstractElement matchBefore();
 	}
 
-	interface IBetweenElements extends IElementPattern {
+	public interface IBetweenElements extends IElementPattern {
 		Pair<AbstractElement, AbstractElement> matchBetween();
 	}
 
-	interface IElementMatcher<T extends IElementPattern> {
+	public interface IElementMatcher<T extends IElementPattern> {
 		Pair<Integer, RuleCall> findTopmostRuleCall(Predicate<RuleCall> predicate);
 
 		Collection<T> finish();
@@ -43,7 +44,11 @@ public interface IElementMatcherProvider {
 		Collection<T> matchNext(AbstractElement nextElement);
 	}
 
-	interface IElementPattern {
+	public interface IElementMatcherEx1<T extends IElementPattern> extends IElementMatcher<T> {
+		void init(ParserRule rule);
+	}
+
+	public interface IElementPattern {
 	}
 
 	<T extends IElementPattern> IElementMatcher<T> createMatcher(Iterable<T> rules);

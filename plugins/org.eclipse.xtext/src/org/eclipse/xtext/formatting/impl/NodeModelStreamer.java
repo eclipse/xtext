@@ -13,6 +13,8 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.formatting.INodeModelStreamer;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -20,6 +22,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
+import org.eclipse.xtext.parsetree.reconstr.ITokenStreamEx1;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Pair;
@@ -33,10 +36,10 @@ import com.google.inject.Inject;
 public class NodeModelStreamer implements INodeModelStreamer {
 
 	@Inject
-	protected TokenUtil tokenUtil;
+	protected IHiddenTokenHelper hiddenTokenHelper;
 
 	@Inject
-	protected IHiddenTokenHelper hiddenTokenHelper;
+	protected TokenUtil tokenUtil;
 
 	@Inject
 	protected IValueConverterService valueConverter;
@@ -45,6 +48,8 @@ public class NodeModelStreamer implements INodeModelStreamer {
 		List<INode> nodes = getLeafs(in, offset, offset + length);
 		if (nodes.isEmpty())
 			return new TextRegion(in.getOffset(), 0);
+		if (out instanceof ITokenStreamEx1)
+			((ITokenStreamEx1) out).init(findRootRuleForRegion(nodes.get(0)));
 		boolean lastIsTokenOrComment = false;
 		for (INode node : nodes) {
 			boolean currentIsTokenOrComment = tokenUtil.isCommentNode(node) || tokenUtil.isToken(node);
@@ -64,6 +69,16 @@ public class NodeModelStreamer implements INodeModelStreamer {
 		int rStart = nodes.get(0).getOffset();
 		int rLength = (nodes.get(nodes.size() - 1).getOffset() + nodes.get(nodes.size() - 1).getLength()) - rStart;
 		return new TextRegion(rStart, rLength);
+	}
+
+	protected ParserRule findRootRuleForRegion(INode node) {
+		if (GrammarUtil.isParserParserRule(node.getGrammarElement()))
+			return (ParserRule) node.getGrammarElement();
+		if (node.hasDirectSemanticElement())
+			return GrammarUtil.containingParserRule(node.getGrammarElement());
+		if (node.getParent() != null)
+			return findRootRuleForRegion(node.getParent());
+		return null;
 	}
 
 	protected List<INode> getLeafs(ICompositeNode root, int fromOffset, int toOffset) {

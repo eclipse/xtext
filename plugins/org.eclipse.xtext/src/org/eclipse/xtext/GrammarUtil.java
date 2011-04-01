@@ -157,6 +157,11 @@ public class GrammarUtil {
 		}
 		return false;
 	}
+	
+	public static boolean isParserParserRule(EObject grammarElement) {
+		return grammarElement instanceof ParserRule
+				&& ((ParserRule) grammarElement).getType().getClassifier() instanceof EClass;
+	}
 
 	public static boolean isDatatypeRuleCall(EObject grammarElement) {
 		if (grammarElement instanceof RuleCall) {

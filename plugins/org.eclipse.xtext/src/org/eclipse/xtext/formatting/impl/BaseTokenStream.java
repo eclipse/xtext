@@ -9,7 +9,9 @@ package org.eclipse.xtext.formatting.impl;
 
 import java.io.IOException;
 
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
+import org.eclipse.xtext.parsetree.reconstr.ITokenStreamEx1;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -25,5 +27,11 @@ public abstract class BaseTokenStream extends AbstractTokenStream {
 	@Override
 	public void flush() throws IOException {
 		out.flush();
+	}
+
+	@Override
+	public void init(ParserRule startRule) {
+		if (out instanceof ITokenStreamEx1)
+			((ITokenStreamEx1) out).init(startRule);
 	}
 }

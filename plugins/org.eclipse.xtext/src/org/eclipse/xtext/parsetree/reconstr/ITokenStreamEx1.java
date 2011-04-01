@@ -5,28 +5,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.formatting.impl;
+package org.eclipse.xtext.parsetree.reconstr;
 
-import java.io.IOException;
-
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.parsetree.reconstr.ITokenStreamEx1;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public abstract class AbstractTokenStream implements ITokenStreamEx1 {
+public interface ITokenStreamEx1 extends ITokenStream {
 
-	public void flush() throws IOException {
-	}
+	void init(ParserRule startRule);
 
-	public void writeHidden(EObject grammarElement, String value) throws IOException {
-	}
-
-	public void writeSemantic(EObject grammarElement, String value) throws IOException {
-	}
-
-	public void init(ParserRule startRule) {
-	}
 }
