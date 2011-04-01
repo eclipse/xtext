@@ -12,19 +12,19 @@ package org.eclipse.xtext.xbase.lib;
  */
 public class ComparableExtensions {
 	
-	public static <A extends Comparable<B>, B> boolean operator_lessThan(A a, B b) {
-		return a.compareTo(b)<0;
+	public static <C> boolean operator_lessThan(Comparable<? super C> left, C right) {
+		return left.compareTo(right)<0;
 	}
 
-	public static <A extends Comparable<B>, B> boolean operator_greaterThan(A a, B b) {
-		return a.compareTo(b)>0;
+	public static <C> boolean operator_greaterThan(Comparable<? super C> left, C right) {
+		return left.compareTo(right)>0;
 	}
 
-	public static <A extends Comparable<B>, B> boolean operator_lessEqualsThan(A a, B b) {
-		return a.compareTo(b)<=0;
+	public static <C> boolean operator_lessEqualsThan(Comparable<? super C> left, C right) {
+		return left.compareTo(right)<=0;
 	}
 
-	public static <A extends Comparable<B>, B> boolean operator_greaterEqualsThan(A a, B b) {
-		return a.compareTo(b)>=0;
+	public static <C> boolean operator_greaterEqualsThan(Comparable<? super C> left, C right) {
+		return left.compareTo(right)>=0;
 	}
 }
