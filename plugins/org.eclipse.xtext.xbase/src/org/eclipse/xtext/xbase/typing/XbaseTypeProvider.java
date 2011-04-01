@@ -171,6 +171,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			JvmTypeReference functionType = getExpectedType(closure, rawType);
 			if (functionType != null) {
 				JvmTypeReference result = functionConversion.getReturnType(functionType);
+				if (result==null || result.getType() instanceof JvmTypeParameter)
+					return null;
 				return result;
 			}
 		}
@@ -321,7 +323,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 
 	protected JvmTypeReference _expectedType(XIfExpression expr, EReference reference, int index, boolean rawType) {
 		if (reference == XbasePackage.Literals.XIF_EXPRESSION__IF) {
-			return getTypeReferences().getTypeForName(Boolean.class, expr);
+			return getTypeReferences().getTypeForName(Boolean.TYPE, expr);
 		}
 		return getExpectedType(expr, rawType);
 	}
@@ -335,7 +337,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	protected JvmTypeReference _expectedType(XAbstractWhileExpression expr, EReference reference, int index,
 			boolean rawType) {
 		if (reference == XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__PREDICATE) {
-			final JvmTypeReference typeForName = getTypeReferences().getTypeForName(Boolean.class, expr);
+			final JvmTypeReference typeForName = getTypeReferences().getTypeForName(Boolean.TYPE, expr);
 			return typeForName;
 		}
 		return null; // no other expectations
@@ -393,14 +395,14 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XIfExpression object, boolean rawType) {
-		if (object.getElse() == null) {
-			return getType(object.getThen(), rawType);
-		}
 		List<JvmTypeReference> returnTypes = newArrayList();
-		JvmTypeReference thenType = getType(object.getThen(), rawType);
+		final JvmTypeReference thenType = getType(object.getThen(), rawType);
 		if (thenType != null)
 			returnTypes.add(thenType);
-		JvmTypeReference elseType = getType(object.getElse(), rawType);
+		JvmTypeReference elseType = getTypeReferences().createAnyTypeReference(object);
+		if (object.getElse()!=null) {
+			elseType = getType(object.getElse(), rawType);
+		}
 		if (elseType != null)
 			returnTypes.add(elseType);
 		return getCommonType(returnTypes);
@@ -462,7 +464,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	protected JvmTypeReference _type(XBlockExpression object, boolean rawType) {
 		List<XExpression> expressions = object.getExpressions();
 		if (expressions.isEmpty())
-			return getTypeReferences().getTypeForName(Void.TYPE, object);
+			return getTypeReferences().createAnyTypeReference(object);
 		final JvmTypeReference result = getType(expressions.get(expressions.size() - 1), rawType);
 		return result;
 	}
@@ -513,8 +515,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			return result;
 		}
 		JvmTypeReference returnType = getCommonReturnType(object.getExpression(), true);
-		if (getTypeReferences().is(returnType, Void.TYPE)) {
-			returnType = getTypeReferences().getTypeForName(Void.class,object);
+		if (!rawType && returnType instanceof JvmAnyTypeReference) {
+			JvmTypeReference type = getExpectedType(object.getExpression());
+			if (type!=null)
+				returnType = type;
 		}
 		List<JvmTypeReference> parameterTypes = Lists.newArrayList();
 		List<JvmFormalParameter> params = object.getFormalParameters();
