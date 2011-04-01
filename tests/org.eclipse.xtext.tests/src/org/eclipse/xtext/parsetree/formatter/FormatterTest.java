@@ -3,6 +3,7 @@ package org.eclipse.xtext.parsetree.formatter;
 import java.io.IOException;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.formatting.INodeModelFormatter.IFormattedRegion;
 import org.eclipse.xtext.formatting.INodeModelStreamer;
 import org.eclipse.xtext.formatting.impl.AbstractTokenStream;
@@ -29,6 +30,11 @@ public class FormatterTest extends AbstractXtextTests {
 		@Override
 		public void writeSemantic(EObject grammarElement, String value) throws IOException {
 			buf.append("Semantic " + grammarElement.eClass().getName() + ": '" + value + "'\n");
+		}
+
+		@Override
+		public void init(ParserRule startRule) {
+			buf.append("Start " + startRule.getName() + "'\n");
 		}
 
 		@Override
