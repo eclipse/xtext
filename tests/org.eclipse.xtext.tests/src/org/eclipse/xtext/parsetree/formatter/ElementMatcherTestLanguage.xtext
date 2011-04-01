@@ -12,7 +12,7 @@ common.Terminals
 generate elementmatchertestlanguage 'http://simple/elementmatchertestlanguage'
 
 Model:
-  Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression | RuleCalls12;
+  Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression | RuleCalls12 | NestedStart;
 
 Simple:
   '#1' name=ID ('kw1' optional=ID)? datatype=FQN;
@@ -79,3 +79,9 @@ Field:
 	
 Parameter:
 	{Parameter} kw2?="kw2"?;
+	
+NestedStart:
+	NestedStartSub name=ID;
+	
+NestedStartSub:
+	"#8" {NestedStartSub};
