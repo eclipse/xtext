@@ -31,8 +31,11 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 		assertNoConformanceError("if (true) 'foo'");
 		assertConformanceError("if (27) 'foo'", XbasePackage.Literals.XINT_LITERAL, "java.lang.Integer",
 				"java.lang.Boolean");
+		assertConformanceError("if (null) 'foo'", XbasePackage.Literals.XNULL_LITERAL, "null", "boolean");
+		assertConformanceError("if ({}) 'foo'", XbasePackage.Literals.XBLOCK_EXPRESSION, "null", "boolean");
+		assertNoConformanceError("if ({'foo'=='bar'}) 'foo'");
 	}
-
+	
 	public void testWhilePredicate() throws Exception {
 		assertNoConformanceError("while (true) 'foo'");
 		assertConformanceError("while (27) 'foo'", XbasePackage.Literals.XINT_LITERAL, "java.lang.Integer",
@@ -40,6 +43,14 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 		assertNoConformanceError("do 'foo' while (true)");
 		assertConformanceError("do 'foo' while ('bar')", XbasePackage.Literals.XSTRING_LITERAL, "java.lang.String",
 				"java.lang.Boolean");
+		
+		assertConformanceError("while (null) 'foo'", XbasePackage.Literals.XNULL_LITERAL, "null", "boolean");
+		assertConformanceError("while ({}) 'foo'", XbasePackage.Literals.XBLOCK_EXPRESSION, "null", "boolean");
+		assertNoConformanceError("while ({'foo'=='bar'}) 'foo'");
+		
+		assertConformanceError("do 'foo' while (null)", XbasePackage.Literals.XNULL_LITERAL, "null", "boolean");
+		assertConformanceError("do 'foo' while ({})", XbasePackage.Literals.XBLOCK_EXPRESSION, "null", "boolean");
+		assertNoConformanceError("do 'foo' while ({'foo'=='bar'})");
 	}
 
 	public void testCast_00() throws Exception {

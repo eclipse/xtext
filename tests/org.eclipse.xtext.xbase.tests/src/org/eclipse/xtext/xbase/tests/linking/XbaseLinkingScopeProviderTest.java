@@ -461,4 +461,59 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 		assertTrue(nullOrEmpty.getFeature().eIsProxy());
 	}
 	
+	public void testMemberCallOnMultiType_01() throws Exception {
+		XMemberFeatureCall compareTo = (XMemberFeatureCall) expression("(if (true) new Double('') else new Integer('')).compareTo(null)");
+		assertEquals("java.lang.Comparable.compareTo(T)", compareTo.getFeature().getIdentifier());
+	}
+	
+	public void testMemberCallOnMultiType_02() throws Exception {
+		XMemberFeatureCall intValue = (XMemberFeatureCall) expression("(if (true) new Double('') else new Integer('')).intValue");
+		assertEquals("java.lang.Number.intValue()", intValue.getFeature().getIdentifier());
+	}
+	
+	public void testMemberCallOnMultiType_03() throws Exception {
+		XMemberFeatureCall intValue = (XMemberFeatureCall) expression(
+				"newArrayList.map(e|if (true) new Double('') else new Integer('')).head.intValue");
+		assertEquals("java.lang.Number.intValue()", intValue.getFeature().getIdentifier());
+	}
+	
+	public void testMemberCallOnMultiType_04() throws Exception {
+		XMemberFeatureCall compareTo = (XMemberFeatureCall) expression(
+				"newArrayList.map(e|if (true) new Double('') else new Integer('')).head.compareTo(null)");
+		assertEquals("java.lang.Comparable.compareTo(T)", compareTo.getFeature().getIdentifier());
+	}
+	
+	public void testMemberCallOnMultiType_05() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var number = if (true) new Double('') else new Integer('') number.compareTo(number) }");
+		XMemberFeatureCall compareTo = (XMemberFeatureCall) block.getExpressions().get(1);
+		assertEquals("java.lang.Comparable.compareTo(T)", compareTo.getFeature().getIdentifier());
+	}
+	
+	public void testMemberCallOnMultiType_06() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var number = if (true) new Double('') else new Integer('') number.intValue }");
+		XMemberFeatureCall intValue = (XMemberFeatureCall) block.getExpressions().get(1);
+		assertEquals("java.lang.Number.intValue()", intValue.getFeature().getIdentifier());
+	}
+	
+	public void testMemberCallOnMultiType_07() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var this = if (true) new Double('') else new Integer('') compareTo(number) }");
+		XFeatureCall compareTo = (XFeatureCall) block.getExpressions().get(1);
+		assertEquals("java.lang.Comparable.compareTo(T)", compareTo.getFeature().getIdentifier());
+	}
+	
+	public void testMemberCallOnMultiType_08() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var this = if (true) new Double('') else new Integer('') intValue }");
+		XFeatureCall intValue = (XFeatureCall) block.getExpressions().get(1);
+		assertEquals("java.lang.Number.intValue()", intValue.getFeature().getIdentifier());
+	}
+	
+	public void testMemberCallOnMultiType_09() throws Exception {
+		XBinaryOperation greaterOrEqualThan = (XBinaryOperation) expression("(if (true) new Double('') else new Integer('')) >= 0");
+		assertEquals("org.eclipse.xtext.xbase.lib.ComparableExtensions.operator_greaterEqualsThan(java.lang.Comparable,C)", greaterOrEqualThan.getFeature().getIdentifier());
+	}
+	
+	public void testMemberCallOnMultiType_10() throws Exception {
+		XBinaryOperation lessThan = (XBinaryOperation) expression("(if (true) new Double('') else new Integer('')) < 0");
+		assertEquals("org.eclipse.xtext.xbase.lib.ComparableExtensions.operator_lessThan(java.lang.Comparable,C)", lessThan.getFeature().getIdentifier());
+	}
 }

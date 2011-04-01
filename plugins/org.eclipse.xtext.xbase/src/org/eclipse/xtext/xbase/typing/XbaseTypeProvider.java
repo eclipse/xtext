@@ -155,7 +155,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 					final JvmTypeReference declaringType = getTypeReferences().createTypeRef(operation.getDeclaringType());
 					if (rawType)
 						return declaringType;
-					return context.getLowerBound(declaringType);
+					JvmTypeReference result = context.getLowerBound(declaringType);
+					return result;
 				}
 			} else if (featureCall.getFeature() instanceof JvmField) {
 				JvmField field = (JvmField) featureCall.getFeature();
@@ -384,7 +385,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		if (reference == XbasePackage.Literals.XCASE_PART__CASE) {
 			final XSwitchExpression switchExpr = (XSwitchExpression) expr.eContainer();
 			if (switchExpr.getSwitch() == null) {
-				return getTypeReferences().getTypeForName(Boolean.class, expr);
+				return getTypeReferences().getTypeForName(Boolean.TYPE, expr);
 			}
 			return null;
 		}

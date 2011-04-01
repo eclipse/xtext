@@ -151,4 +151,12 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	protected boolean isList(JvmTypeReference type) {
 		return typeRefs.is(type, List.class) || typeRefs.is(type, Iterable.class) || typeRefs.is(type, Collection.class);
 	}
+	
+	protected TypeArgumentContextProvider getContextProvider() {
+		return contextProvider;
+	}
+	
+	public Primitives getPrimitives() {
+		return primitives;
+	}
 }

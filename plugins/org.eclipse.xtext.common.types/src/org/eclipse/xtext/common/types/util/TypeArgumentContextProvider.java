@@ -283,6 +283,8 @@ public class TypeArgumentContextProvider {
 				return false;
 			return true;
 		}
+		if (isBetter instanceof JvmAnyTypeReference)
+			return false;
 		if (isResolved(isBetter) && !EcoreUtil.equals(current, isBetter)) {
 			return this.conformanceComputer.isConformant(current, isBetter);
 		}

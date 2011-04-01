@@ -97,7 +97,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	
 	public void testInvalidEarlyExit_02() throws Exception {
 		XExpression expression = expression("if (throw new Exception()) {}");
-		helper.assertError(expression, XbasePackage.Literals.XTHROW_EXPRESSION, INCOMPATIBLE_TYPES, "void");
+		helper.assertError(expression, XbasePackage.Literals.XTHROW_EXPRESSION, INCOMPATIBLE_TYPES, "void", "boolean");
 	}
 	
 	public void testInvalidEarlyExit_03() throws Exception {
@@ -107,7 +107,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	
 	public void testInvalidEarlyExit_04() throws Exception {
 		XExpression expression = expression("if (return 1) {}");
-		helper.assertError(expression, XbasePackage.Literals.XRETURN_EXPRESSION, INCOMPATIBLE_TYPES, "void");
+		helper.assertError(expression, XbasePackage.Literals.XRETURN_EXPRESSION, INCOMPATIBLE_TYPES, "void", "boolean");
 	}
 	
 	public void testInvalidEarlyExit_05() throws Exception {
