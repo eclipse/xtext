@@ -22,6 +22,7 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -37,6 +38,7 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IEnumLiteralSeriali
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IKeywordSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
+import org.eclipse.xtext.parsetree.reconstr.ITokenStreamEx1;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.parsetree.reconstr.XtextSerializationException;
 import org.eclipse.xtext.util.EmfFormatter;
@@ -44,6 +46,7 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.TextRegion;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -421,6 +424,11 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			out.writeSemantic(grammarElement, value);
 		}
 
+		public void init(ParserRule parseRule) {
+			if (out instanceof ITokenStreamEx1)
+				((ITokenStreamEx1) out).init(parseRule);
+		}
+
 		protected void writeWhitespacesSince(INode node) throws IOException {
 			if (node == null) {
 				nodeIterator = null;
@@ -508,8 +516,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		while (contents.hasNext()) {
 			INode containedNode = contents.next();
 			AbstractRule rule = containedNode.getGrammarElement() instanceof AbstractRule ? (AbstractRule) containedNode
-					.getGrammarElement()
-					: null;
+					.getGrammarElement() : null;
 			if (hiddenTokenHelper.isWhitespace(rule))
 				continue;
 			else if (containedNode instanceof ILeafNode && hiddenTokenHelper.isComment(rule))
@@ -594,7 +601,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			return containsNodeOrAnyParent(nodes, node.getParent());
 		return false;
 	}
-	
+
 	protected IEObjectConsumer createEObjectConsumer(EObject obj) {
 		return new EObjectConsumer(tvService, obj);
 	}
@@ -719,10 +726,28 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		//				ParsetreePackage.Literals.ABSTRACT_NODE__TOTAL_OFFSET,
 		//				ParsetreePackage.Literals.ABSTRACT_NODE__TOTAL_LINE, ParsetreePackage.Literals.ABSTRACT_NODE__PARENT));
 		ITextRegion previousLocation = ITextRegion.EMPTY_REGION;
+		initStream(root, wsout);
 		previousLocation = write(root, wsout, previousLocation);
 		wsout.flush();
 		report.setPreviousLocation(previousLocation);
 		return report;
+	}
+
+	protected void initStream(AbstractToken token, WsMergerStream out) {
+		AbstractElement rootMostElement = null;
+		if (!token.getTokensForSemanticChildren().isEmpty()) {
+			for (AbstractToken t : Iterables.reverse(token.getTokensForSemanticChildren()))
+				if (t.getGrammarElement() != null) {
+					rootMostElement = t.getGrammarElement();
+					break;
+				}
+		} else if (token.getGrammarElement() != null) {
+			rootMostElement = token.getGrammarElement();
+		}
+		if (rootMostElement != null) {
+			ParserRule rootRule = GrammarUtil.containingParserRule(rootMostElement);
+			out.init(rootRule);
+		}
 	}
 
 	protected ITextRegion write(AbstractToken token, WsMergerStream out, ITextRegion location) throws IOException {
@@ -731,10 +756,10 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		if (node != null) {
 			currentLocation = currentLocation.merge(new TextRegion(node.getOffset(), node.getLength()));
 		}
-		if (!token.getTokensForSemanticChildren().isEmpty())
+		if (!token.getTokensForSemanticChildren().isEmpty()) {
 			for (AbstractToken t : token.getTokensForSemanticChildren())
 				currentLocation = write(t, out, currentLocation);
-		else {
+		} else {
 			if (token instanceof CommentToken)
 				out.writeComment((ILeafNode) node);
 			else {

@@ -22,6 +22,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting.IElementMatcherProvider;
 import org.eclipse.xtext.util.Pair;
@@ -37,7 +38,7 @@ import com.google.inject.Inject;
  */
 public class ElementMatcherProvider implements IElementMatcherProvider {
 
-	protected static class TransitionMatcher<T extends IElementPattern> implements IElementMatcher<T> {
+	protected static class TransitionMatcher<T extends IElementPattern> implements IElementMatcherEx1<T> {
 
 		protected IGrammarAccess grammar;
 
@@ -81,11 +82,20 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 			return null;
 		}
 
-		protected Pair<List<MatcherTransition>, List<MatcherState>> findTransitionPath(MatcherState from,
+		protected Pair<List<MatcherTransition>, List<MatcherState>> findTransitionPath(MatcherState fromParam,
 				AbstractElement to, boolean returning, boolean canReturn, Set<Pair<Boolean, MatcherState>> visited) {
-			if (!visited.add(Tuples.create(returning, from)))
+			if (!visited.add(Tuples.create(returning, fromParam)))
 				return null;
-			if (from != null) {
+			List<MatcherState> allFrom = Collections.emptyList();
+			if (fromParam != null) {
+				if (!fromParam.isEndState() && fromParam.getAllOutgoing().isEmpty()) {
+					allFrom = Lists.newArrayList();
+					for (MatcherTransition trans : fromParam.collectOutgoingTransitions())
+						allFrom.add(trans.getTarget());
+				} else
+					allFrom = Collections.singletonList(fromParam);
+			}
+			for (MatcherState from : allFrom) {
 				for (MatcherTransition transition : returning ? from.getOutgoingAfterReturn() : from.getOutgoing()) {
 					if (transition.getTarget().getGrammarElement() == to)
 						return Tuples.create(Collections.singletonList(transition), Collections.singletonList(from));
@@ -250,6 +260,10 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 						transition.addPattern(source, pattern);
 				}
 			}
+		}
+
+		public void init(ParserRule rule) {
+			lastState = nfaProvider.getNFA(rule.getAlternatives());
 		}
 
 		public Collection<T> matchNext(AbstractElement nextElement) {

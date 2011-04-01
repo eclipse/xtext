@@ -22,6 +22,7 @@ import org.eclipse.xtext.formatting.IElementMatcherProvider.IBetweenElements;
 import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider.NFABuilder;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractNFAState;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
@@ -41,6 +42,15 @@ public class MatcherState extends AbstractNFAState<MatcherState, MatcherTransiti
 
 	public MatcherState(AbstractElement element, NFABuilder<MatcherState, MatcherTransition> builder) {
 		super(element, builder);
+	}
+
+	public List<MatcherTransition> collectOutgoingTransitions() {
+		outgoing = Lists.newArrayList();
+		outgoingRuleCalls = Lists.newArrayList();
+		collectOutgoing(element, Sets.<AbstractElement> newHashSet(), false, null);
+		removeDuplicates(outgoing);
+		removeDuplicates(outgoingRuleCalls);
+		return outgoingRuleCalls.isEmpty() ? outgoing : outgoingRuleCalls;
 	}
 
 	public Set<IBetweenElements> getAfterBetweenElements() {
