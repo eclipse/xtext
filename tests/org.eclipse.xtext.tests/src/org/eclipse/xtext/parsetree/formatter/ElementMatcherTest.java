@@ -12,11 +12,13 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.formatting.IElementMatcherProvider;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IAfterElement;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IBeforeElement;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IBetweenElements;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementMatcher;
+import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementMatcherEx1;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementPattern;
 import org.eclipse.xtext.formatting.impl.AbstractTokenStream;
 import org.eclipse.xtext.formatting.impl.ElementMatcherToDot;
@@ -95,7 +97,8 @@ public class ElementMatcherTest extends AbstractXtextTests {
 	private String match(String model, Patterns patterns) throws Exception {
 		EObject m = getModel(model);
 		IElementMatcherProvider mp = get(IElementMatcherProvider.class);
-		final IElementMatcher<IElementPattern> matcher = mp.createMatcher(patterns.patterns);
+		final IElementMatcherEx1<IElementPattern> matcher = (IElementMatcherEx1<IElementPattern>) mp
+				.createMatcher(patterns.patterns);
 		final StringBuilder result = new StringBuilder();
 		getParseTreeConstructor().serializeSubtree(m, new AbstractTokenStream() {
 			@Override
@@ -107,6 +110,11 @@ public class ElementMatcherTest extends AbstractXtextTests {
 				}
 				result.append(" ");
 				result.append(value);
+			}
+
+			@Override
+			public void init(ParserRule startRule) {
+				matcher.init(startRule);
 			}
 		});
 		for (IElementPattern m2 : matcher.finish()) {
@@ -450,5 +458,11 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		//		assertEquals("#7 kw1 foo ! ! kw3", match("#7 kw1 foo kw3", p));
 		assertEquals("#7 foo ! kw2 ! kw3", match("#7 foo kw2 kw3", p));
 		//		assertEquals("#7 foo ! ! kw3", match("#7 foo kw3", p));
+	}
+
+	public void testNestedStart() throws Exception {
+		Patterns p = new Patterns();
+		p.after(g.getNestedStartSubAccess().getGroup());
+		assertEquals("#8 ! foo", match("#8 foo", p));
 	}
 }
