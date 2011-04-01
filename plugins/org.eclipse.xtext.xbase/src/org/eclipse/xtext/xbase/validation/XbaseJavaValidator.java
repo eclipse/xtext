@@ -5,10 +5,12 @@ import static org.eclipse.xtext.util.Strings.*;
 import static org.eclipse.xtext.xbase.XbasePackage.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
@@ -37,12 +39,14 @@ import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
+import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 
 @ComposedChecks(validators = { FeatureCallValidator.class, EarlyExitValidator.class })
@@ -65,9 +69,28 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Inject
 	private SynonymTypesProvider synonymTypeProvider;
+	
+	private final Collection<EReference> typeConformanceCheckedReferences = ImmutableList.of(
+			XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT,
+			XbasePackage.Literals.XIF_EXPRESSION__IF,
+			XbasePackage.Literals.XTHROW_EXPRESSION__EXPRESSION,
+			XbasePackage.Literals.XRETURN_EXPRESSION__EXPRESSION,
+			XbasePackage.Literals.XSWITCH_EXPRESSION__SWITCH,
+			XbasePackage.Literals.XCASE_PART__CASE,
+			XbasePackage.Literals.XASSIGNMENT__ASSIGNABLE,
+			XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__PREDICATE,
+			XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS
+		);
+	
+	protected Collection<EReference> getTypeConformanceCheckedReferences() {
+		return typeConformanceCheckedReferences;
+	}
 
 	@Check
 	public void checkTypes(XExpression obj) {
+		if (!getTypeConformanceCheckedReferences().contains(obj.eContainingFeature())) {
+			return;
+		}
 		try {
 			JvmTypeReference expectedType = typeProvider.getExpectedType(obj);
 			if (expectedType == null || expectedType.getType() == null)
