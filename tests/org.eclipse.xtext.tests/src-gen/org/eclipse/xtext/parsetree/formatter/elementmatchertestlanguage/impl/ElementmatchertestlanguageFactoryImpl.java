@@ -85,6 +85,8 @@ public class ElementmatchertestlanguageFactoryImpl extends EFactoryImpl implemen
       case ElementmatchertestlanguagePackage.CONSTRUCTOR: return createConstructor();
       case ElementmatchertestlanguagePackage.FIELD: return createField();
       case ElementmatchertestlanguagePackage.PARAMETER: return createParameter();
+      case ElementmatchertestlanguagePackage.NESTED_START: return createNestedStart();
+      case ElementmatchertestlanguagePackage.NESTED_START_SUB: return createNestedStartSub();
       case ElementmatchertestlanguagePackage.ADD: return createAdd();
       case ElementmatchertestlanguagePackage.MULT: return createMult();
       case ElementmatchertestlanguagePackage.VALUE: return createValue();
@@ -291,6 +293,28 @@ public class ElementmatchertestlanguageFactoryImpl extends EFactoryImpl implemen
   {
     ParameterImpl parameter = new ParameterImpl();
     return parameter;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NestedStart createNestedStart()
+  {
+    NestedStartImpl nestedStart = new NestedStartImpl();
+    return nestedStart;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NestedStartSub createNestedStartSub()
+  {
+    NestedStartSubImpl nestedStartSub = new NestedStartSubImpl();
+    return nestedStartSub;
   }
 
   /**

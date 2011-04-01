@@ -146,6 +146,16 @@ ruleModel returns [EObject current=null]
         $current = $this_RuleCalls12_6.current; 
         afterParserOrEnumRuleCall();
     }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getModelAccess().getNestedStartParserRuleCall_7()); 
+    }
+    this_NestedStart_7=ruleNestedStart
+    { 
+        $current = $this_NestedStart_7.current; 
+        afterParserOrEnumRuleCall();
+    }
 )
 ;
 
@@ -1422,6 +1432,85 @@ ruleParameter returns [EObject current=null]
 
 )
 )?)
+;
+
+
+
+
+
+// Entry rule entryRuleNestedStart
+entryRuleNestedStart returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getNestedStartRule()); }
+	 iv_ruleNestedStart=ruleNestedStart 
+	 { $current=$iv_ruleNestedStart.current; } 
+	 EOF 
+;
+
+// Rule NestedStart
+ruleNestedStart returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+    { 
+        newCompositeNode(grammarAccess.getNestedStartAccess().getNestedStartSubParserRuleCall_0()); 
+    }
+    this_NestedStartSub_0=ruleNestedStartSub
+    { 
+        $current = $this_NestedStartSub_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+(
+(
+		lv_name_1_0=RULE_ID
+		{
+			newLeafNode(lv_name_1_0, grammarAccess.getNestedStartAccess().getNameIDTerminalRuleCall_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getNestedStartRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_1_0, 
+        		"ID");
+	    }
+
+)
+))
+;
+
+
+
+
+
+// Entry rule entryRuleNestedStartSub
+entryRuleNestedStartSub returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getNestedStartSubRule()); }
+	 iv_ruleNestedStartSub=ruleNestedStartSub 
+	 { $current=$iv_ruleNestedStartSub.current; } 
+	 EOF 
+;
+
+// Rule NestedStartSub
+ruleNestedStartSub returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#8' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getNestedStartSubAccess().getNumberSignDigitEightKeyword_0());
+    }
+(
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getNestedStartSubAccess().getNestedStartSubAction_1(),
+            $current);
+    }
+))
 ;
 
 

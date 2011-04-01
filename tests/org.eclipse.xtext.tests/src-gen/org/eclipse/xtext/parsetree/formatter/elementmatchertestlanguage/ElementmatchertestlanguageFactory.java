@@ -188,6 +188,24 @@ public interface ElementmatchertestlanguageFactory extends EFactory
   Parameter createParameter();
 
   /**
+   * Returns a new object of class '<em>Nested Start</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Nested Start</em>'.
+   * @generated
+   */
+  NestedStart createNestedStart();
+
+  /**
+   * Returns a new object of class '<em>Nested Start Sub</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Nested Start Sub</em>'.
+   * @generated
+   */
+  NestedStartSub createNestedStartSub();
+
+  /**
    * Returns a new object of class '<em>Add</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

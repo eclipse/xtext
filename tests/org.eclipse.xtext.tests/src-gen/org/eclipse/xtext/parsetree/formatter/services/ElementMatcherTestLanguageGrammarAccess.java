@@ -27,12 +27,13 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cLoopParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		private final RuleCall cExpressionParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		private final RuleCall cRuleCalls12ParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cNestedStartParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
 		
 		//Model:
-		//	Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression | RuleCalls12;
+		//	Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression | RuleCalls12 | NestedStart;
 		public ParserRule getRule() { return rule; }
 
-		//Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression | RuleCalls12
+		//Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression | RuleCalls12 | NestedStart
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Simple
@@ -55,6 +56,9 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 
 		//RuleCalls12
 		public RuleCall getRuleCalls12ParserRuleCall_6() { return cRuleCalls12ParserRuleCall_6; }
+
+		//NestedStart
+		public RuleCall getNestedStartParserRuleCall_7() { return cNestedStartParserRuleCall_7; }
 	}
 
 	public class SimpleElements extends AbstractParserRuleElementFinder {
@@ -800,6 +804,50 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		//"kw2"
 		public Keyword getKw2Kw2Keyword_1_0() { return cKw2Kw2Keyword_1_0; }
 	}
+
+	public class NestedStartElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NestedStart");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cNestedStartSubParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		
+		//NestedStart:
+		//	NestedStartSub name=ID;
+		public ParserRule getRule() { return rule; }
+
+		//NestedStartSub name=ID
+		public Group getGroup() { return cGroup; }
+
+		//NestedStartSub
+		public RuleCall getNestedStartSubParserRuleCall_0() { return cNestedStartSubParserRuleCall_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+	}
+
+	public class NestedStartSubElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NestedStartSub");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitEightKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Action cNestedStartSubAction_1 = (Action)cGroup.eContents().get(1);
+		
+		//NestedStartSub:
+		//	"#8" {NestedStartSub};
+		public ParserRule getRule() { return rule; }
+
+		//"#8" {NestedStartSub}
+		public Group getGroup() { return cGroup; }
+
+		//"#8"
+		public Keyword getNumberSignDigitEightKeyword_0() { return cNumberSignDigitEightKeyword_0; }
+
+		//{NestedStartSub}
+		public Action getNestedStartSubAction_1() { return cNestedStartSubAction_1; }
+	}
 	
 	
 	private ModelElements pModel;
@@ -824,6 +872,8 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	private ConstructorElements pConstructor;
 	private FieldElements pField;
 	private ParameterElements pParameter;
+	private NestedStartElements pNestedStart;
+	private NestedStartSubElements pNestedStartSub;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -847,7 +897,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 
 	
 	//Model:
-	//	Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression | RuleCalls12;
+	//	Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression | RuleCalls12 | NestedStart;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -1064,6 +1114,26 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	
 	public ParserRule getParameterRule() {
 		return getParameterAccess().getRule();
+	}
+
+	//NestedStart:
+	//	NestedStartSub name=ID;
+	public NestedStartElements getNestedStartAccess() {
+		return (pNestedStart != null) ? pNestedStart : (pNestedStart = new NestedStartElements());
+	}
+	
+	public ParserRule getNestedStartRule() {
+		return getNestedStartAccess().getRule();
+	}
+
+	//NestedStartSub:
+	//	"#8" {NestedStartSub};
+	public NestedStartSubElements getNestedStartSubAccess() {
+		return (pNestedStartSub != null) ? pNestedStartSub : (pNestedStartSub = new NestedStartSubElements());
+	}
+	
+	public ParserRule getNestedStartSubRule() {
+		return getNestedStartSubAccess().getRule();
 	}
 
 	//terminal ID:

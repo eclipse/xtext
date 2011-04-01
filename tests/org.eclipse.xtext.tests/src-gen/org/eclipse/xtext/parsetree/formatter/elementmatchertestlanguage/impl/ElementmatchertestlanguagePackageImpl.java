@@ -22,6 +22,8 @@ import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Function
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Loop;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Model;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Mult;
+import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.NestedStart;
+import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.NestedStartSub;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCalls;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCallsSub1;
 import org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.OptionalCallsSub2;
@@ -171,6 +173,20 @@ public class ElementmatchertestlanguagePackageImpl extends EPackageImpl implemen
    * @generated
    */
   private EClass parameterEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass nestedStartEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass nestedStartSubEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -715,6 +731,36 @@ public class ElementmatchertestlanguagePackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getNestedStart()
+  {
+    return nestedStartEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getNestedStartSub()
+  {
+    return nestedStartSubEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getNestedStartSub_Name()
+  {
+    return (EAttribute)nestedStartSubEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getAdd()
   {
     return addEClass;
@@ -932,6 +978,11 @@ public class ElementmatchertestlanguagePackageImpl extends EPackageImpl implemen
     parameterEClass = createEClass(PARAMETER);
     createEAttribute(parameterEClass, PARAMETER__KW2);
 
+    nestedStartEClass = createEClass(NESTED_START);
+
+    nestedStartSubEClass = createEClass(NESTED_START_SUB);
+    createEAttribute(nestedStartSubEClass, NESTED_START_SUB__NAME);
+
     addEClass = createEClass(ADD);
     createEReference(addEClass, ADD__LEFT);
     createEReference(addEClass, ADD__RIGHT);
@@ -990,6 +1041,8 @@ public class ElementmatchertestlanguagePackageImpl extends EPackageImpl implemen
     expressionEClass.getESuperTypes().add(this.getModel());
     ruleCalls12EClass.getESuperTypes().add(this.getModel());
     parameterEClass.getESuperTypes().add(this.getField());
+    nestedStartEClass.getESuperTypes().add(this.getModel());
+    nestedStartSubEClass.getESuperTypes().add(this.getNestedStart());
     addEClass.getESuperTypes().add(this.getExpression());
     multEClass.getESuperTypes().add(this.getExpression());
     valueEClass.getESuperTypes().add(this.getExpression());
@@ -1058,6 +1111,11 @@ public class ElementmatchertestlanguagePackageImpl extends EPackageImpl implemen
 
     initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getParameter_Kw2(), ecorePackage.getEBoolean(), "kw2", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(nestedStartEClass, NestedStart.class, "NestedStart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(nestedStartSubEClass, NestedStartSub.class, "NestedStartSub", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getNestedStartSub_Name(), ecorePackage.getEString(), "name", null, 0, 1, NestedStartSub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(addEClass, Add.class, "Add", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAdd_Left(), this.getExpression(), null, "left", null, 0, 1, Add.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

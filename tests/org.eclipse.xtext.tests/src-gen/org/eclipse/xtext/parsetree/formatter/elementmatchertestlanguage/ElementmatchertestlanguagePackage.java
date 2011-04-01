@@ -636,6 +636,53 @@ public interface ElementmatchertestlanguagePackage extends EPackage
   int PARAMETER_FEATURE_COUNT = FIELD_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.NestedStartImpl <em>Nested Start</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.NestedStartImpl
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getNestedStart()
+   * @generated
+   */
+  int NESTED_START = 18;
+
+  /**
+   * The number of structural features of the '<em>Nested Start</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NESTED_START_FEATURE_COUNT = MODEL_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.NestedStartSubImpl <em>Nested Start Sub</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.NestedStartSubImpl
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getNestedStartSub()
+   * @generated
+   */
+  int NESTED_START_SUB = 19;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NESTED_START_SUB__NAME = NESTED_START_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Nested Start Sub</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NESTED_START_SUB_FEATURE_COUNT = NESTED_START_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.AddImpl <em>Add</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -643,7 +690,7 @@ public interface ElementmatchertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getAdd()
    * @generated
    */
-  int ADD = 18;
+  int ADD = 20;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -680,7 +727,7 @@ public interface ElementmatchertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getMult()
    * @generated
    */
-  int MULT = 19;
+  int MULT = 21;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -717,7 +764,7 @@ public interface ElementmatchertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getValue()
    * @generated
    */
-  int VALUE = 20;
+  int VALUE = 22;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' attribute.
@@ -745,7 +792,7 @@ public interface ElementmatchertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getFunction()
    * @generated
    */
-  int FUNCTION = 21;
+  int FUNCTION = 23;
 
   /**
    * The feature id for the '<em><b>Func</b></em>' attribute.
@@ -782,7 +829,7 @@ public interface ElementmatchertestlanguagePackage extends EPackage
    * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getPointer()
    * @generated
    */
-  int POINTER = 22;
+  int POINTER = 24;
 
   /**
    * The feature id for the '<em><b>Target</b></em>' containment reference.
@@ -1268,6 +1315,37 @@ public interface ElementmatchertestlanguagePackage extends EPackage
    * @generated
    */
   EAttribute getParameter_Kw2();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.NestedStart <em>Nested Start</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Nested Start</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.NestedStart
+   * @generated
+   */
+  EClass getNestedStart();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.NestedStartSub <em>Nested Start Sub</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Nested Start Sub</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.NestedStartSub
+   * @generated
+   */
+  EClass getNestedStartSub();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.NestedStartSub#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.NestedStartSub#getName()
+   * @see #getNestedStartSub()
+   * @generated
+   */
+  EAttribute getNestedStartSub_Name();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.Add <em>Add</em>}'.
@@ -1817,6 +1895,34 @@ public interface ElementmatchertestlanguagePackage extends EPackage
      * @generated
      */
     EAttribute PARAMETER__KW2 = eINSTANCE.getParameter_Kw2();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.NestedStartImpl <em>Nested Start</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.NestedStartImpl
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getNestedStart()
+     * @generated
+     */
+    EClass NESTED_START = eINSTANCE.getNestedStart();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.NestedStartSubImpl <em>Nested Start Sub</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.NestedStartSubImpl
+     * @see org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.ElementmatchertestlanguagePackageImpl#getNestedStartSub()
+     * @generated
+     */
+    EClass NESTED_START_SUB = eINSTANCE.getNestedStartSub();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute NESTED_START_SUB__NAME = eINSTANCE.getNestedStartSub_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.impl.AddImpl <em>Add</em>}' class.

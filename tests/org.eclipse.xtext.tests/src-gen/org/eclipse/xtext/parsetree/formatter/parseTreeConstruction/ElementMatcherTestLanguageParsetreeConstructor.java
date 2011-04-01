@@ -52,6 +52,8 @@ protected class ThisRootNode extends RootToken {
 			case 18: return new Constructor_Group(this, this, 18, inst);
 			case 19: return new Field_Group(this, this, 19, inst);
 			case 20: return new Parameter_Group(this, this, 20, inst);
+			case 21: return new NestedStart_Group(this, this, 21, inst);
+			case 22: return new NestedStartSub_Group(this, this, 22, inst);
 			default: return null;
 		}	
 	}	
@@ -61,11 +63,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression | RuleCalls12;
+ * 	Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression | RuleCalls12 | NestedStart;
  *
  **/
 
-// Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression | RuleCalls12
+// Simple | RuleCalls | OptionalCalls | Recursion | Loop | Expression | RuleCalls12 | NestedStart
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -87,6 +89,7 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 4: return new Model_LoopParserRuleCall_4(lastRuleCallOrigin, this, 4, inst);
 			case 5: return new Model_ExpressionParserRuleCall_5(lastRuleCallOrigin, this, 5, inst);
 			case 6: return new Model_RuleCalls12ParserRuleCall_6(lastRuleCallOrigin, this, 6, inst);
+			case 7: return new Model_NestedStartParserRuleCall_7(lastRuleCallOrigin, this, 7, inst);
 			default: return null;
 		}	
 	}
@@ -97,6 +100,7 @@ protected class Model_Alternatives extends AlternativesToken {
 		   getEObject().eClass() != grammarAccess.getPrimAccess().getFunctionAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getLoopRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getMultAccess().getMultLeftAction_1_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getNestedStartSubAccess().getNestedStartSubAction_1().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getOptionalCallsAccess().getOptionalCallsAction_1().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getPrimAccess().getPointerAction_2_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getRecursionSubAccess().getRecursionSubAction_0().getType().getClassifier() && 
@@ -355,6 +359,42 @@ protected class Model_RuleCalls12ParserRuleCall_6 extends RuleCallToken {
 		if(getEObject().eClass() != grammarAccess.getRuleCalls12Rule().getType().getClassifier())
 			return null;
 		if(checkForRecursion(RuleCalls12_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// NestedStart
+protected class Model_NestedStartParserRuleCall_7 extends RuleCallToken {
+	
+	public Model_NestedStartParserRuleCall_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getModelAccess().getNestedStartParserRuleCall_7();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new NestedStart_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getNestedStartSubAccess().getNestedStartSubAction_1().getType().getClassifier())
+			return null;
+		if(checkForRecursion(NestedStart_Group.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
 	}
 	
@@ -3823,5 +3863,201 @@ protected class Parameter_Kw2Assignment_1 extends AssignmentToken  {
 
 
 /************ end Rule Parameter ****************/
+
+
+/************ begin Rule NestedStart ****************
+ *
+ * NestedStart:
+ * 	NestedStartSub name=ID;
+ *
+ **/
+
+// NestedStartSub name=ID
+protected class NestedStart_Group extends GroupToken {
+	
+	public NestedStart_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getNestedStartAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new NestedStart_NameAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getNestedStartSubAccess().getNestedStartSubAction_1().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// NestedStartSub
+protected class NestedStart_NestedStartSubParserRuleCall_0 extends RuleCallToken {
+	
+	public NestedStart_NestedStartSubParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getNestedStartAccess().getNestedStartSubParserRuleCall_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new NestedStartSub_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(checkForRecursion(NestedStartSub_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// name=ID
+protected class NestedStart_NameAssignment_1 extends AssignmentToken  {
+	
+	public NestedStart_NameAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getNestedStartAccess().getNameAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new NestedStart_NestedStartSubParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("name",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("name");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getNestedStartAccess().getNameIDTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getNestedStartAccess().getNameIDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule NestedStart ****************/
+
+
+/************ begin Rule NestedStartSub ****************
+ *
+ * NestedStartSub:
+ * 	"#8" {NestedStartSub};
+ *
+ **/
+
+// "#8" {NestedStartSub}
+protected class NestedStartSub_Group extends GroupToken {
+	
+	public NestedStartSub_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getNestedStartSubAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new NestedStartSub_NestedStartSubAction_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getNestedStartSubAccess().getNestedStartSubAction_1().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "#8"
+protected class NestedStartSub_NumberSignDigitEightKeyword_0 extends KeywordToken  {
+	
+	public NestedStartSub_NumberSignDigitEightKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getNestedStartSubAccess().getNumberSignDigitEightKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// {NestedStartSub}
+protected class NestedStartSub_NestedStartSubAction_1 extends ActionToken  {
+
+	public NestedStartSub_NestedStartSubAction_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getNestedStartSubAccess().getNestedStartSubAction_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new NestedStartSub_NumberSignDigitEightKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
+}
+
+
+/************ end Rule NestedStartSub ****************/
 
 }

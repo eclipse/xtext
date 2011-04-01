@@ -74,6 +74,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Field">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kw2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NestedStart" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Model"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NestedStartSub" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//NestedStart">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Add" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Expression"
         containment="true"/>

@@ -66,6 +66,10 @@
     <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Parameter">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Parameter/kw2"/>
     </genClasses>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//NestedStart"/>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//NestedStartSub">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//NestedStartSub/name"/>
+    </genClasses>
     <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Add">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Add/left"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.ecore#//Add/right"/>

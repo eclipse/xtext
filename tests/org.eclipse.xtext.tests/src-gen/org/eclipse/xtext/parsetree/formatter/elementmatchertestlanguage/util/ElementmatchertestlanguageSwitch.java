@@ -233,6 +233,23 @@ public class ElementmatchertestlanguageSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case ElementmatchertestlanguagePackage.NESTED_START:
+      {
+        NestedStart nestedStart = (NestedStart)theEObject;
+        T result = caseNestedStart(nestedStart);
+        if (result == null) result = caseModel(nestedStart);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ElementmatchertestlanguagePackage.NESTED_START_SUB:
+      {
+        NestedStartSub nestedStartSub = (NestedStartSub)theEObject;
+        T result = caseNestedStartSub(nestedStartSub);
+        if (result == null) result = caseNestedStart(nestedStartSub);
+        if (result == null) result = caseModel(nestedStartSub);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case ElementmatchertestlanguagePackage.ADD:
       {
         Add add = (Add)theEObject;
@@ -566,6 +583,38 @@ public class ElementmatchertestlanguageSwitch<T>
    * @generated
    */
   public T caseParameter(Parameter object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Nested Start</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Nested Start</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNestedStart(NestedStart object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Nested Start Sub</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Nested Start Sub</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNestedStartSub(NestedStartSub object)
   {
     return null;
   }
