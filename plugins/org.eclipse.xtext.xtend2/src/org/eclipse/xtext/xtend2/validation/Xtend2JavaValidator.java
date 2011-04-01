@@ -40,6 +40,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
@@ -196,7 +197,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	
 	@Override
 	protected boolean isImplicitReturn(XExpression expr) {
-		return expr.eContainer() instanceof XtendFunction && !earlyExitComputer.isEarlyExit(expr);
+		return (expr.eContainer() instanceof XtendFunction || expr.eContainer() instanceof XClosure) && !earlyExitComputer.isEarlyExit(expr);
 	}
 
 	@Check

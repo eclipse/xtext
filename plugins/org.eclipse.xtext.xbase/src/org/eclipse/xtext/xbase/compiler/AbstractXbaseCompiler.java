@@ -316,4 +316,8 @@ public abstract class AbstractXbaseCompiler {
 	protected boolean isVariableDeclarationRequired(XExpression expr) {
 		return true;
 	}
+	
+	protected TypeConformanceComputer getTypeConformanceComputer() {
+		return typeConformanceComputer;
+	}
 }

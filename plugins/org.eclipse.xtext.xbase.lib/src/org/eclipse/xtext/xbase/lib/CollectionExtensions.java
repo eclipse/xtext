@@ -86,7 +86,7 @@ public class CollectionExtensions {
 		return ImmutableSortedMap.copyOfSorted(map);
 	}
 	
-	public static <T> boolean addAll(Collection<T> collection, T... elements) {
+	public static <T> boolean addAll(Collection<? super T> collection, T... elements) {
 		return collection.addAll(Arrays.asList(elements));
 	}
 	

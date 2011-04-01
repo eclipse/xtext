@@ -152,7 +152,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	public void testIfExpression() throws Exception {
 		XIfExpression target = (XIfExpression) expressionWithExpectedType("if (null) null else null", "String");
 
-		assertExpected("boolean", target.getIf());
+		assertExpected("boolean", target.getIf()); // if (null) is invalid thus we expect the primitive boolean
 		assertExpected("java.lang.String", target.getThen());
 		assertExpected("java.lang.String", target.getElse());
 	}
@@ -173,14 +173,14 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	public void testWhileExpression_0() throws Exception {
 		XWhileExpression exp = (XWhileExpression) expression("while (null) null");
 
-		assertExpected("boolean", exp.getPredicate());
+		assertExpected("boolean", exp.getPredicate()); // while (null) is invalid thus we expect the primitive boolean
 		assertExpected(null, exp.getBody());
 	}
 
 	public void testWhileExpression_1() throws Exception {
 		XDoWhileExpression exp = (XDoWhileExpression) expression("do null while (null)");
 
-		assertExpected("boolean", exp.getPredicate());
+		assertExpected("boolean", exp.getPredicate()); // while (null) is invalid thus we expect the primitive boolean
 		assertExpected(null, exp.getBody());
 	}
 

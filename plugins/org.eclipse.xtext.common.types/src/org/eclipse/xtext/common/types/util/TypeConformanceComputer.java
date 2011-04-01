@@ -390,9 +390,10 @@ public class TypeConformanceComputer {
 			if (!(refB instanceof JvmWildcardTypeReference)) {
 				JvmType typeA = refA.getType();
 				JvmType typeB = refB.getType();
-				if (typeA == typeB)
-					// TODO unchecked cast
-					return areArgumentsAssignableFrom((JvmParameterizedTypeReference)refA, (JvmParameterizedTypeReference)refB); 
+				if (typeA == typeB) {
+					// same raw type - use isConformant
+					return isConformant(refA, refB);
+				}
 				if (typeA.eClass() == typeB.eClass() && typeA instanceof JvmTypeParameter) {
 					if (_isConformant((JvmTypeParameter) typeA, (JvmTypeParameter) typeB, (JvmParameterizedTypeReference)refA, (JvmParameterizedTypeReference)refB, false)) {
 						return areArgumentsAssignableFrom((JvmParameterizedTypeReference)refA, (JvmParameterizedTypeReference)refB);

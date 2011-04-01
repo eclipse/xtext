@@ -311,7 +311,7 @@ public class FeatureCallChecker {
 	}
 
 	protected boolean isCompatibleArgument(JvmTypeReference declaredType, JvmTypeReference actualType) {
-		if (actualType == null || typeRefs.is(actualType, Void.class))
+		if (actualType == null)
 			return true;
 		if (actualType.getType() instanceof JvmTypeParameter) {
 			JvmTypeParameter type = (JvmTypeParameter) actualType.getType();

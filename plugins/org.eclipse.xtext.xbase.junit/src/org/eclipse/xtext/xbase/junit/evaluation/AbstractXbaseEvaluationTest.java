@@ -29,20 +29,26 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo("", "try {typeof(String).newInstance} catch(Exception e) {}");
 	}
 	
-//TODO FIX ME!
-//	public void testGenerics_01() throws Exception {
-//		assertEvaluatesTo("y",
-//				"{" +
-//				" val x = newArrayList('y',23,true)" +
-//				" return x.head" +
-//				"}");
-//	}
+	public void testGenerics_01() throws Exception {
+		assertEvaluatesTo("y",
+				"{" +
+				" val x = newArrayList('y',23,true)" +
+				" return x.head" +
+				"}");
+	}
 
-//TODO FIX ME!	
-//	public void testGenerics_02() throws Exception {
-//		assertEvaluatesTo(null,
-//				"new java.util.ArrayList<Object>().addAll(typeof(String).declaredFields)");
-//	}
+	public void testGenerics_02() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE,
+				"new java.util.ArrayList<Object>().addAll(typeof(String).declaredFields)");
+	}
+	
+	public void testGenerics_03() throws Exception {
+		assertEvaluatesTo("y",
+				"{" +
+				" val x = <Object>newArrayList('y',23,true)" +
+				" return x.head" +
+				"}");
+	}
 	
 	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341246
@@ -625,7 +631,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(null, "(null as Object)?.toString()?.toString()");
 	}
 	
-//	see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341048
+//	TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341048
 //	public void testSpreadOperator_01() {
 //		assertEvaluatesWithException(NullPointerException.class, "(null as java.util.List<Object>)*.toString()");
 //		assertEvaluatesWithException(ClassCastException.class, "(new Object() as java.util.List<Object>)*.toString()");
@@ -1148,5 +1154,41 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(Lists.newArrayList("aaa", "bb", "c"), "newArrayList('c', 'aaa', 'bb').sortBy(s|-s.length)");
 		assertEvaluatesTo(Lists.newArrayList("c", "bb", "aaa"), "newArrayList('c', 'aaa', 'bb').sortBy(s|s.length)");
 		assertEvaluatesTo("b", "{ var this = newArrayList('c', 'a', 'b', 'd') sortBy(a|a) get(1) }");
+	}
+	
+	public void testMemberCallOnMultiType_01() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(0), "(if (false) new Double('-10') else new Integer('1')).compareTo(1)");
+	}
+	
+	public void testMemberCallOnMultiType_02() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(20), "(if (false) new Double('-20') else new Integer('20')).intValue");
+	}
+	
+	public void testMemberCallOnMultiType_03() throws Exception {
+		assertEvaluatesTo(
+				Integer.valueOf(20), 
+				"newArrayList('20').map(s|if (false) new Double(s) else new Integer(s)).head.intValue");
+	}
+	
+	public void testMemberCallOnMultiType_04() throws Exception {
+		assertEvaluatesTo(
+				Integer.valueOf(20), 
+				"newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue).head");
+	}
+	
+	public void testMemberCallOnMultiType_05() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(20), "{ var number = if (false) new Double('-10') else new Integer('20') number.intValue}");
+	}
+	
+	public void testMemberCallOnMultiType_06() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(20), "{ var this = if (false) new Double('-10') else new Integer('20') intValue }");
+	}
+	
+	public void testMemberCallOnMultiType_07() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "(if (false) new Double('-20') else new Integer('10')) >= 0");
+	}
+	
+	public void testMemberCallOnMultiType_08() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, "(if (false) new Double('-20') else new Integer('10')) < 0");
 	}
 }

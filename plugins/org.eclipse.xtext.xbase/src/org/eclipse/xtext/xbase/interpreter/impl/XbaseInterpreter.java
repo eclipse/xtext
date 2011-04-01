@@ -15,6 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Proxy;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -410,7 +411,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	protected Object wrapArray(Object result, JvmTypeReference jvmTypeReference) {
-		if (typeRefs.is(jvmTypeReference, List.class) || typeRefs.is(jvmTypeReference, Iterable.class)) {
+		if (typeRefs.is(jvmTypeReference, List.class) || typeRefs.is(jvmTypeReference, Iterable.class) || typeRefs.is(jvmTypeReference, Collection.class)) {
 			return Conversions.doWrapArray(result);
 		}
 		return result;
