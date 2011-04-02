@@ -71,6 +71,9 @@ public class NodeModelStreamer implements INodeModelStreamer {
 		return new TextRegion(rStart, rLength);
 	}
 
+	/**
+	 * @since 2.0
+	 */
 	protected ParserRule findRootRuleForRegion(INode node) {
 		if (GrammarUtil.isParserParserRule(node.getGrammarElement()))
 			return (ParserRule) node.getGrammarElement();

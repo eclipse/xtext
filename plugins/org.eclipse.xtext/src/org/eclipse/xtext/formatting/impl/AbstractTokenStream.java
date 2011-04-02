@@ -27,6 +27,9 @@ public abstract class AbstractTokenStream implements ITokenStreamEx1 {
 	public void writeSemantic(EObject grammarElement, String value) throws IOException {
 	}
 
+	/**
+	 * @since 2.0
+	 */
 	public void init(ParserRule startRule) {
 	}
 }

@@ -44,6 +44,9 @@ public class MatcherState extends AbstractNFAState<MatcherState, MatcherTransiti
 		super(element, builder);
 	}
 
+	/**
+	 * @since 2.0
+	 */
 	public List<MatcherTransition> collectOutgoingTransitions() {
 		outgoing = Lists.newArrayList();
 		outgoingRuleCalls = Lists.newArrayList();

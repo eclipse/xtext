@@ -44,6 +44,9 @@ public interface IElementMatcherProvider {
 		Collection<T> matchNext(AbstractElement nextElement);
 	}
 
+	/**
+	 * @since 2.0
+	 */
 	public interface IElementMatcherEx1<T extends IElementPattern> extends IElementMatcher<T> {
 		void init(ParserRule rule);
 	}
