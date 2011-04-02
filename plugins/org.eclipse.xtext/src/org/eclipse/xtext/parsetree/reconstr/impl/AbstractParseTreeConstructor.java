@@ -424,6 +424,9 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 			out.writeSemantic(grammarElement, value);
 		}
 
+		/**
+		 * @since 2.0
+		 */
 		public void init(ParserRule parseRule) {
 			if (out instanceof ITokenStreamEx1)
 				((ITokenStreamEx1) out).init(parseRule);
@@ -733,6 +736,9 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		return report;
 	}
 
+	/**
+	 * @since 2.0
+	 */
 	protected void initStream(AbstractToken token, WsMergerStream out) {
 		AbstractElement rootMostElement = null;
 		if (!token.getTokensForSemanticChildren().isEmpty()) {

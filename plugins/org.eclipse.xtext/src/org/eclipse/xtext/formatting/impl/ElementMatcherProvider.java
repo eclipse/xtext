@@ -262,6 +262,9 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 			}
 		}
 
+		/**
+		 * @since 2.0
+		 */
 		public void init(ParserRule rule) {
 			lastState = nfaProvider.getNFA(rule.getAlternatives());
 		}
