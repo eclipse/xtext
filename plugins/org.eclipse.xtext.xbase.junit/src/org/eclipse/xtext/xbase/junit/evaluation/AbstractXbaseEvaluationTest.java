@@ -348,10 +348,6 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo("literal", "{var String x; x = 'literal'}");
 	}
 	
-	public void testVariableDeclaration_05() {
-		assertEvaluatesTo(null, "{var String x = 'literal'}");
-	}
-	
 	public void testVariableDeclaration_06() {
 		assertEvaluatesTo(Short.valueOf((short)0), "{var short s s}");
 	}
