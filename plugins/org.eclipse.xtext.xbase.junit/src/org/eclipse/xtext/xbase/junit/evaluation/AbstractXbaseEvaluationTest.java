@@ -340,6 +340,38 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(true, "{var x = 'literal' { val x = true x}}");
 	}
 	
+	public void testVariableDeclaration_03() {
+		assertEvaluatesTo("literal", "{var String x x = 'literal' x}");
+	}
+	
+	public void testVariableDeclaration_04() {
+		assertEvaluatesTo("literal", "{var String x; x = 'literal'}");
+	}
+	
+	public void testVariableDeclaration_05() {
+		assertEvaluatesTo(null, "{var String x = 'literal'}");
+	}
+	
+	public void testVariableDeclaration_06() {
+		assertEvaluatesTo(Short.valueOf((short)0), "{var short s s}");
+	}
+	
+	public void testVariableDeclaration_07() {
+		assertEvaluatesTo(Character.valueOf((char)0), "{var char c c}");
+	}
+	
+	public void testVariableDeclaration_08() {
+		assertEvaluatesTo(Integer.valueOf(42), "{var int i i = 42 i}");
+	}
+	
+	public void testVariableDeclaration_09() {
+		assertEvaluatesTo(Boolean.FALSE, "{var boolean b b}");
+	}
+	
+	public void testVariableDeclaration_10() {
+		assertEvaluatesTo(Boolean.TRUE, "{var boolean b b = true b}");
+	}
+	
 	public void testFeatureCall_01() {
 		assertEvaluatesTo("literal", "{var x = 'literal' x}");
 	}
