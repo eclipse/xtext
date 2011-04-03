@@ -26,10 +26,12 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.impl.ClassFinder;
 import org.eclipse.xtext.common.types.util.JavaReflectAccess;
+import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
@@ -138,6 +140,9 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	
 	@Inject
 	private TypeReferences typeRefs;
+	
+	@Inject
+	private Primitives primitives;
 	
 	private ClassFinder classFinder;
 
@@ -519,9 +524,35 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	protected Object _evaluateVariableDeclaration(XVariableDeclaration variableDecl, IEvaluationContext context, CancelIndicator indicator) {
-		Object result = internalEvaluate(variableDecl.getRight(), context, indicator);
-		context.newValue(QualifiedName.create(variableDecl.getName()), result);
-		return result;
+		Object initialValue = null;
+		if (variableDecl.getRight()!=null) {
+			initialValue = internalEvaluate(variableDecl.getRight(), context, indicator);
+		} else {
+			if (primitives.isPrimitive(variableDecl.getType())) {
+				switch(primitives.primitiveKind((JvmPrimitiveType) variableDecl.getType().getType())) {
+					case Boolean:
+						initialValue = Boolean.FALSE; break;
+					case Char:
+						initialValue = Character.valueOf((char) 0); break;
+					case Double:
+						initialValue = Double.valueOf(0d); break;
+					case Byte:
+						initialValue = Byte.valueOf((byte) 0); break;
+					case Float:
+						initialValue = Float.valueOf(0f); break;
+					case Int:
+						initialValue = Integer.valueOf(0); break;
+					case Long:
+						initialValue = Long.valueOf(0L); break;
+					case Short:
+						initialValue = Short.valueOf((short) 0); break;
+					case Void:
+						throw new IllegalStateException("Void is not a valid variable type.");
+				}
+			}
+		}
+		context.newValue(QualifiedName.create(variableDecl.getName()), initialValue);
+		return null;
 	}
 
 	protected Object _evaluateAbstractFeatureCall(XAbstractFeatureCall featureCall, IEvaluationContext context, CancelIndicator indicator) {
