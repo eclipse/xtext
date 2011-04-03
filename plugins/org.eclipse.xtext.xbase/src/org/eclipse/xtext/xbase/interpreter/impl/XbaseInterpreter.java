@@ -619,6 +619,8 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		} catch (EvaluationException e) {
 			throw e;
 		} catch (InvocationTargetException targetException) {
+			if (targetException.getCause() instanceof InterpreterCanceledException)
+				throw (InterpreterCanceledException) targetException.getCause();
 			throw new EvaluationException(targetException.getTargetException());
 		} catch (Exception e) {
 			throw new IllegalStateException("Could not invoke method: " + operation.getIdentifier()

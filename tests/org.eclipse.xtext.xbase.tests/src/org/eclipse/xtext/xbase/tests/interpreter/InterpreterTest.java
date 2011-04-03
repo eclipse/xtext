@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.tests.interpreter;
 
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.interpreter.impl.DefaultEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.impl.NullEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -35,5 +36,22 @@ public class InterpreterTest extends AbstractXbaseTestCase {
 				return false;
 			}
 		}).getResult());
+	}
+	
+	public void testInfiniteLoopInJava() throws Exception {
+		XExpression expression = expression(
+				"try " +
+				"  new testdata.ClosureClient().infiniteApply(|{null})" +
+				"catch(Exception e)" +
+				"  'literal' ", true);
+		assertNull(interpreter.evaluate(expression, new DefaultEvaluationContext(), new CancelIndicator() {
+			private int i = 0;
+			public boolean isCanceled() {
+				if (i == 500)
+					return true;
+				i++;
+				return false;
+			}
+		}));
 	}
 }
