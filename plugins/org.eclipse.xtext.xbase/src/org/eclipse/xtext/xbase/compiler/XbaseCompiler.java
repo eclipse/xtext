@@ -12,7 +12,9 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -155,7 +157,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected void _toJavaStatement(XVariableDeclaration varDeclaration, IAppendable b, boolean isReferenced) {
-		internalToJavaStatement(varDeclaration.getRight(), b, true);
+		if (varDeclaration.getRight() != null) {
+			internalToJavaStatement(varDeclaration.getRight(), b, true);
+		}
 		b.append("\n");
 		if (!varDeclaration.isWriteable()) {
 			b.append("final ");
@@ -170,7 +174,23 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(" ");
 		b.append(declareNameInVariableScope(varDeclaration, b));
 		b.append(" = ");
-		internalToConvertedExpression(varDeclaration.getRight(), b, type);
+		if (varDeclaration.getRight() != null) {
+			internalToConvertedExpression(varDeclaration.getRight(), b, type);
+		} else {
+			if (getPrimitives().isPrimitive(type)) {
+				Primitive primitiveKind = getPrimitives().primitiveKind((JvmPrimitiveType) type.getType());
+				switch (primitiveKind) {
+					case Boolean:
+						b.append("false");
+						break;
+					default:
+						b.append("0");
+						break;
+				}
+			} else {
+				b.append("null");
+			}
+		}
 		b.append(";");
 	}
 
