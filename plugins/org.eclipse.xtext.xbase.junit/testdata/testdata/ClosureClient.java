@@ -24,6 +24,12 @@ public class ClosureClient {
 		return fun.apply();
 	}
 	
+	public void infiniteApply(Functions.Function0<Object> fun) {
+		while(true) {
+			fun.apply();
+		}
+	}
+	
 	public <P,T> T invoke1(Functions.Function1<P, T> fun, P p1) {
 		return fun.apply(p1);
 	}
