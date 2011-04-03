@@ -11,14 +11,11 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -238,7 +235,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			return true;
 		}
 		XExpression receiver = featureCallToJavaMapping.getActualReceiver(call);
-		JvmTypeReference receiverType = getTypeProvider().getType(receiver);
 		if (call instanceof XMemberFeatureCall) {
 			XMemberFeatureCall expr = ((XMemberFeatureCall) call);
 			if (expr.isNullSafe()) {
@@ -249,58 +245,20 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				b.append(type);
 				b.append(")");
 				b.append("null:");
-				if (receiverType instanceof JvmMultiTypeReference) {
-					b.append("(");
-					JvmDeclaredType declaringType = ((JvmMember) call.getFeature()).getDeclaringType();
-					appendReceiverTypeCast(receiverType, getTypeReferences().createTypeRef(declaringType), call, b);
-					internalToJavaExpression(receiver, b);
-					b.append(")");
-				} else {
-					internalToJavaExpression(receiver, b);
-				}
+				internalToJavaExpression(receiver, b);
 				return true;
 			} else if (expr.isSpreading()) {
 				throw new UnsupportedOperationException();
 			}
 		}
 		if (receiver != null) {
-			if (receiverType instanceof JvmMultiTypeReference) {
-				b.append("(");
-				JvmDeclaredType declaringType = ((JvmMember) call.getFeature()).getDeclaringType();
-				appendReceiverTypeCast(receiverType, getTypeReferences().createTypeRef(declaringType), call, b);
-				internalToJavaExpression(receiver, b);
-				b.append(")");
-			} else {
-				internalToJavaExpression(receiver, b);
-			}
+			internalToJavaExpression(receiver, b);
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
-	protected void appendReceiverTypeCast(JvmTypeReference type, JvmTypeReference expectation, XExpression context, IAppendable b) {
-		if (!(type instanceof JvmMultiTypeReference)) {
-			b.append("(");
-			serialize(type, context, b, true, false);
-			b.append(type);
-			b.append(")");
-		} else {
-			JvmTypeReference castTo = null;
-			for(JvmTypeReference candidate: ((JvmMultiTypeReference) type).getReferences()) {
-				if (getTypeConformanceComputer().isConformant(expectation, candidate, true)) {
-					castTo = candidate;
-					break;
-				}
-			}
-			if (castTo != null) {
-				b.append("(");
-				serialize(castTo, context, b, true, false);
-				b.append(")");
-			}
-		}
-	}
-
 	protected boolean isMemberCall(XAbstractFeatureCall call) {
 		return featureCallToJavaMapping.isTargetsMemberSyntaxCall(call, call.getFeature(), call.getImplicitReceiver());
 	}
@@ -362,10 +320,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			return;
 		for (int i = 0; i < eList.size(); i++) {
 			XExpression expression = eList.get(i);
-			JvmTypeReference type = getTypeProvider().getType(expression);
-			if (type instanceof JvmMultiTypeReference) {
-				appendReceiverTypeCast(type, executable.getParameters().get(i).getParameterType(), context, b);
-			}
 			internalToJavaExpression(expression, b);
 			if (i + 1 < eList.size())
 				b.append(", ");

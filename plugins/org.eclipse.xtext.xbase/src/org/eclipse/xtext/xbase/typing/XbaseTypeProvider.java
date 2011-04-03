@@ -131,7 +131,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		if (featureCall.getFeature() == null || featureCall.getFeature().eIsProxy())
 			return null;
 		if ((featureCall instanceof XMemberFeatureCall && (reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS || reference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET))
-				|| (featureCall instanceof XFeatureCall && reference == XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS)) {
+				|| (featureCall instanceof XFeatureCall && (reference == XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS || reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER))) {
 			if (featureCall.getFeature() instanceof JvmOperation) {
 				JvmOperation operation = (JvmOperation) featureCall.getFeature();
 				XExpression argumentExpression = getExpression(featureCall, reference, index);
@@ -264,6 +264,25 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			final JvmTypeReference parameterType = parameter.getParameterType();
 			JvmTypeReference result = context.getLowerBound(parameterType);
 			return result;
+//			JvmTypeReference resolved = context.resolve(parameterType);
+//			return resolved;
+		}
+		if (reference == XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND
+				&& expr.getFeature() instanceof JvmOperation) {
+			JvmOperation feature = (JvmOperation) expr.getFeature();
+			if (feature.getParameters().size() > 1) { 
+				JvmFormalParameter parameter = feature.getParameters().get(0);
+				TypeArgumentContext context = getFeatureCallTypeArgContext(expr, reference, index, rawType);
+				final JvmTypeReference parameterType = parameter.getParameterType();
+				// TODO why is the lower bound the expected type? 
+				// It should be to strict in general, e.g. Comparable<? super Integer> 
+				// allows to use Comparable<Object> but the lower bound is
+				// Comparable<Integer> - This applies to other formal parameters, too
+//				JvmTypeReference result = context.getLowerBound(parameterType);
+//				return result;
+				JvmTypeReference resolved = context.resolve(parameterType);
+				return resolved;
+			}
 		}
 		return null;
 	}
