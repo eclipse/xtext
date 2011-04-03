@@ -5,8 +5,8 @@ import static org.eclipse.xtext.util.Strings.*;
 import static org.eclipse.xtext.xbase.XbasePackage.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EPackage;
@@ -47,7 +47,7 @@ import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.inject.Inject;
 
 @ComposedChecks(validators = { FeatureCallValidator.class, EarlyExitValidator.class })
@@ -74,7 +74,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	@Inject
 	private IEarlyExitComputer earlyExitComputer;
 	
-	private final Collection<EReference> typeConformanceCheckedReferences = ImmutableList.of(
+	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.of(
 			XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT,
 			XbasePackage.Literals.XIF_EXPRESSION__IF,
 			XbasePackage.Literals.XTHROW_EXPRESSION__EXPRESSION,
@@ -83,10 +83,14 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			XbasePackage.Literals.XCASE_PART__CASE,
 			XbasePackage.Literals.XASSIGNMENT__ASSIGNABLE,
 			XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__PREDICATE,
-			XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS
+			XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS,
+			XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS,
+			XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND,
+			XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND,
+			XbasePackage.Literals.XUNARY_OPERATION__OPERAND
 		);
 	
-	protected Collection<EReference> getTypeConformanceCheckedReferences() {
+	protected Set<EReference> getTypeConformanceCheckedReferences() {
 		return typeConformanceCheckedReferences;
 	}
 

@@ -240,6 +240,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			public void exec() {
 				b.append("new ");
 				b.append(expr.getConstructor().getDeclaringType());
+				// TODO infered type arguments
 				if (!expr.getTypeArguments().isEmpty()) {
 					b.append("<");
 					for (int i = 0; i < expr.getTypeArguments().size(); i++) {
