@@ -88,17 +88,17 @@ public class OutlineTests extends AbstractXtend2UITestCase {
 
 	public void testSimpleMethod() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo { foo() {null} }");
-		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo() : Void").numChildren(0);
+		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo() : Object").numChildren(0);
 	}
 	
 	public void testMethodWithParameter() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo { foo(int bar) {null} }");
-		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo(int) : Void").numChildren(0);
+		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo(int) : Object").numChildren(0);
 	}
 	
 	public void testMethodWithParameters() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo { foo(int bar, java.lang.Object x) {null} }");
-		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo(int, Object) : Void").numChildren(0);
+		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo(int, Object) : Object").numChildren(0);
 	}
 	
 	public void testMethodWithReturnType() throws Exception {
@@ -108,7 +108,7 @@ public class OutlineTests extends AbstractXtend2UITestCase {
 	
 	public void testMethodWithTypeParameter() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("class Foo { <T> foo() {null} }");
-		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo() : Void").numChildren(0);
+		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo() : Object").numChildren(0);
 	}
 	
 	public void testDispatchMethod() throws Exception {
@@ -137,7 +137,7 @@ public class OutlineTests extends AbstractXtend2UITestCase {
 		AssertBuilder foo = assertBuilder.numChildren(1).child(0, "Foo").numChildren(3);
 		foo.child(0, "foo(Object) : String").numChildren(2);
 		foo.child(1, "bar(Object) : String").numChildren(2);
-		foo.child(2, "baz() : Void").numChildren(0);
+		foo.child(2, "baz() : Object").numChildren(0);
 	}
 	
 	public void testMixmethods_Sorting() throws Exception {
@@ -148,7 +148,7 @@ public class OutlineTests extends AbstractXtend2UITestCase {
 		AssertBuilder foo = assertBuilder.child(2, "Foo").numChildren(3);
 		foo.child(0, "bar(Object) : String").numChildren(2).child(0, "bar(Object) : String");
 		foo.child(1, "foo(Object) : String").numChildren(2).child(0, "foo(Object) : String");
-		foo.child(2, "baz() : Void").numChildren(0);
+		foo.child(2, "baz() : Object").numChildren(0);
 	}
 	
 	protected void setSorting(boolean isSorting) {

@@ -5,6 +5,7 @@ package org.eclipse.xtext.xtend2.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -94,8 +95,15 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 
 	protected String signature(String simpleName, JvmIdentifiableElement element) {
 		JvmTypeReference returnType = typeProvider.getTypeForIdentifiable(element);
-		return simpleName + uiStrings.parameters(element) + " : "
-				+ ((returnType != null) ? returnType.getSimpleName() : "void");
+		String returnTypeString = "void";
+		if (returnType != null) {
+			if (returnType instanceof JvmAnyTypeReference) {
+				returnTypeString = "Object";
+			} else {
+				returnTypeString = returnType.getSimpleName();
+			}
+		}
+		return simpleName + uiStrings.parameters(element) + " : " + returnTypeString;
 	}
 
 }
