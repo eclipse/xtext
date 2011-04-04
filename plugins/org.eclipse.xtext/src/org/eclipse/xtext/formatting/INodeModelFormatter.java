@@ -17,7 +17,10 @@ public interface INodeModelFormatter {
 	interface IFormattedRegion {
 		String getFormattedText();
 
-		int getLenght();
+		/**
+		 * @since 2.0
+		 */
+		int getLength();
 
 		int getOffset();
 	}

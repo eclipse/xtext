@@ -34,7 +34,7 @@ public abstract class AbstractNodeModelFormatter implements INodeModelFormatter 
 			return formattedText;
 		}
 
-		public int getLenght() {
+		public int getLength() {
 			return lengt;
 		}
 
