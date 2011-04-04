@@ -61,7 +61,10 @@ ruleFunction :
 		'<' ruleJvmTypeParameter (
 			',' ruleJvmTypeParameter
 		)* '>'
-	)? ruleJvmTypeReference? RULE_ID '(' (
+	)? (
+		ruleJvmTypeReference |
+		ruleCreateExtensionInfo
+	)? RULE_ID '(' (
 		ruleParameter (
 			',' ruleParameter
 		)*
@@ -69,6 +72,13 @@ ruleFunction :
 		ruleXBlockExpression |
 		ruleRichString
 	)?
+;
+
+// Rule CreateExtensionInfo
+ruleCreateExtensionInfo :
+	'create' (
+		RULE_ID ':'
+	)? ruleXExpression
 ;
 
 // Rule Parameter

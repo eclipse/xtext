@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.XExpression;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#isOverride <em>Override</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#isDispatch <em>Dispatch</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getCreateExtensionInfo <em>Create Extension Info</em>}</li>
  * </ul>
  * </p>
  *
@@ -154,5 +155,31 @@ public interface XtendFunction extends XtendMember, JvmTypeParameterDeclarator
 	 * @generated
 	 */
 	void setDispatch(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Create Extension Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Create Extension Info</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Create Extension Info</em>' containment reference.
+	 * @see #setCreateExtensionInfo(CreateExtensionInfo)
+	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendFunction_CreateExtensionInfo()
+	 * @model containment="true"
+	 * @generated
+	 */
+	CreateExtensionInfo getCreateExtensionInfo();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getCreateExtensionInfo <em>Create Extension Info</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Create Extension Info</em>' containment reference.
+	 * @see #getCreateExtensionInfo()
+	 * @generated
+	 */
+	void setCreateExtensionInfo(CreateExtensionInfo value);
 
 } // XtendFunction

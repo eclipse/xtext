@@ -38,6 +38,7 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 				private static final long serialVersionUID = 1L;
 				{
 					put(grammarAccess.getMemberAccess().getAlternatives(), "rule__Member__Alternatives");
+					put(grammarAccess.getFunctionAccess().getAlternatives_2(), "rule__Function__Alternatives_2");
 					put(grammarAccess.getFunctionAccess().getAlternatives_7(), "rule__Function__Alternatives_7");
 					put(grammarAccess.getXStringLiteralAccess().getAlternatives(), "rule__XStringLiteral__Alternatives");
 					put(grammarAccess.getRichStringAccess().getAlternatives_1(), "rule__RichString__Alternatives_1");
@@ -87,6 +88,8 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getFunctionAccess().getGroup_1_2(), "rule__Function__Group_1_2__0");
 					put(grammarAccess.getFunctionAccess().getGroup_5(), "rule__Function__Group_5__0");
 					put(grammarAccess.getFunctionAccess().getGroup_5_1(), "rule__Function__Group_5_1__0");
+					put(grammarAccess.getCreateExtensionInfoAccess().getGroup(), "rule__CreateExtensionInfo__Group__0");
+					put(grammarAccess.getCreateExtensionInfoAccess().getGroup_1(), "rule__CreateExtensionInfo__Group_1__0");
 					put(grammarAccess.getParameterAccess().getGroup(), "rule__Parameter__Group__0");
 					put(grammarAccess.getXStringLiteralAccess().getGroup_0(), "rule__XStringLiteral__Group_0__0");
 					put(grammarAccess.getRichStringAccess().getGroup(), "rule__RichString__Group__0");
@@ -240,12 +243,15 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getFunctionAccess().getDispatchAssignment_0_1(), "rule__Function__DispatchAssignment_0_1");
 					put(grammarAccess.getFunctionAccess().getTypeParametersAssignment_1_1(), "rule__Function__TypeParametersAssignment_1_1");
 					put(grammarAccess.getFunctionAccess().getTypeParametersAssignment_1_2_1(), "rule__Function__TypeParametersAssignment_1_2_1");
-					put(grammarAccess.getFunctionAccess().getReturnTypeAssignment_2(), "rule__Function__ReturnTypeAssignment_2");
+					put(grammarAccess.getFunctionAccess().getReturnTypeAssignment_2_0(), "rule__Function__ReturnTypeAssignment_2_0");
+					put(grammarAccess.getFunctionAccess().getCreateExtensionInfoAssignment_2_1(), "rule__Function__CreateExtensionInfoAssignment_2_1");
 					put(grammarAccess.getFunctionAccess().getNameAssignment_3(), "rule__Function__NameAssignment_3");
 					put(grammarAccess.getFunctionAccess().getParametersAssignment_5_0(), "rule__Function__ParametersAssignment_5_0");
 					put(grammarAccess.getFunctionAccess().getParametersAssignment_5_1_1(), "rule__Function__ParametersAssignment_5_1_1");
 					put(grammarAccess.getFunctionAccess().getExpressionAssignment_7_0(), "rule__Function__ExpressionAssignment_7_0");
 					put(grammarAccess.getFunctionAccess().getExpressionAssignment_7_1(), "rule__Function__ExpressionAssignment_7_1");
+					put(grammarAccess.getCreateExtensionInfoAccess().getNameAssignment_1_0(), "rule__CreateExtensionInfo__NameAssignment_1_0");
+					put(grammarAccess.getCreateExtensionInfoAccess().getCreateExpressionAssignment_2(), "rule__CreateExtensionInfo__CreateExpressionAssignment_2");
 					put(grammarAccess.getParameterAccess().getParameterTypeAssignment_0(), "rule__Parameter__ParameterTypeAssignment_0");
 					put(grammarAccess.getParameterAccess().getNameAssignment_1(), "rule__Parameter__NameAssignment_1");
 					put(grammarAccess.getXStringLiteralAccess().getValueAssignment_0_1(), "rule__XStringLiteral__ValueAssignment_0_1");

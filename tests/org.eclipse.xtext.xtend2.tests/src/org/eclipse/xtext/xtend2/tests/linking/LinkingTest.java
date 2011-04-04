@@ -39,6 +39,34 @@ public class LinkingTest extends AbstractXtend2TestCase {
 	@Inject
 	private IXtend2JvmAssociations associator;
 	
+	public void testCreateExtension_00() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo { " +
+				"  create newArrayList('foo') getListWithFooAnd(String s) {" +
+				"    this" +
+				"  }" +
+				"}");
+		assertEquals(1, clazz.getMembers().size());
+		
+		XtendFunction func= (XtendFunction) clazz.getMembers().get(0);
+		XFeatureCall featureCall = (XFeatureCall) ((XBlockExpression)func.getExpression()).getExpressions().get(0);
+		assertEquals(func.getCreateExtensionInfo(), featureCall.getFeature());
+	}
+	
+	public void testCreateExtension_01() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo { " +
+				"  create foo : newArrayList('foo') getListWithFooAnd(String s) {" +
+				"    foo" +
+				"  }" +
+		"}");
+		assertEquals(1, clazz.getMembers().size());
+		
+		XtendFunction func= (XtendFunction) clazz.getMembers().get(0);
+		XFeatureCall featureCall = (XFeatureCall) ((XBlockExpression)func.getExpression()).getExpressions().get(0);
+		assertEquals(func.getCreateExtensionInfo(), featureCall.getFeature());
+	}
+	
 	public void testDeclaredDependency_00() throws Exception {
 		XtendClass clazz = clazz(
 				"class Foo {" +

@@ -77,6 +77,7 @@ public class Xtend2FactoryImpl extends EFactoryImpl implements Xtend2Factory
 			case Xtend2Package.RICH_STRING_IF: return createRichStringIf();
 			case Xtend2Package.RICH_STRING_ELSE_IF: return createRichStringElseIf();
 			case Xtend2Package.DECLARED_DEPENDENCY: return createDeclaredDependency();
+			case Xtend2Package.CREATE_EXTENSION_INFO: return createCreateExtensionInfo();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -190,6 +191,17 @@ public class Xtend2FactoryImpl extends EFactoryImpl implements Xtend2Factory
 	{
 		DeclaredDependencyImplCustom declaredDependency = new DeclaredDependencyImplCustom();
 		return declaredDependency;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CreateExtensionInfo createCreateExtensionInfo()
+	{
+		CreateExtensionInfoImplCustom createExtensionInfo = new CreateExtensionInfoImplCustom();
+		return createExtensionInfo;
 	}
 
 	/**
