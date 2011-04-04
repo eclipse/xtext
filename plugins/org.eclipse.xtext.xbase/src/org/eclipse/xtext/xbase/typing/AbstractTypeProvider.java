@@ -300,11 +300,13 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		final List<JvmTypeReference> returns = acceptor.returns;
 		if (assumeImplicitReturnExpression) {
 			JvmTypeReference implicitReturnType = getType(expression);
-			if (!typeReferences.is(implicitReturnType, Void.TYPE))
+			if (implicitReturnType != null && !typeReferences.is(implicitReturnType, Void.TYPE))
 				acceptor.returns.add(implicitReturnType);
 		}
 		if (returns.isEmpty()) {
-			return typeReferences.getTypeForName(Void.TYPE, expression);
+			if (expression != null)
+				return typeReferences.getTypeForName(Void.TYPE, expression);
+			return null;
 		}
 		JvmTypeReference superType = typeConformanceComputer.getCommonSuperType(returns);
 		return superType;
@@ -320,8 +322,8 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		return result.values();
 	}
 	
-	protected void internalCollectEarlyExits(EObject expr, EarlyExitAcceptor a) {
-		earlyExits.invoke(expr,a);
+	protected void internalCollectEarlyExits(EObject expr, EarlyExitAcceptor acceptor) {
+		earlyExits.invoke(expr, acceptor);
 	}
 	
 	protected void _earlyExits(Void expr, EarlyExitAcceptor a) {
@@ -330,10 +332,10 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	protected void _earlyExits(JvmTypeReference ref, EarlyExitAcceptor a) {
 	}
 	
-	protected void _earlyExits(EObject expr, EarlyExitAcceptor a) {
+	protected void _earlyExits(EObject expr, EarlyExitAcceptor acceptor) {
 		EList<EObject> list = expr.eContents();
 		for (EObject eObject : list) {
-			internalCollectEarlyExits(eObject, a);
+			internalCollectEarlyExits(eObject, acceptor);
 		}
 	}
 	

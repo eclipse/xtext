@@ -132,14 +132,14 @@ public class TypeConformanceComputer {
 		return reference instanceof JvmAnyTypeReference;
 	}
 
-	protected boolean isUnresolvedType(JvmTypeReference ref) {
-		if (ref instanceof JvmMultiTypeReference || ref instanceof JvmAnyTypeReference || ref instanceof JvmWildcardTypeReference)
+	protected boolean isUnresolvedType(JvmTypeReference reference) {
+		if (reference instanceof JvmMultiTypeReference || reference instanceof JvmAnyTypeReference || reference instanceof JvmWildcardTypeReference)
 			return false;
-		return ref.getType() == null || ref.getType().eIsProxy();
+		return reference.getType() == null || reference.getType().eIsProxy();
 	}
 
-	protected boolean isPrimitiveVoid(JvmTypeReference left) {
-		return left.getType() instanceof JvmVoid;
+	protected boolean isPrimitiveVoid(JvmTypeReference reference) {
+		return reference.getType() instanceof JvmVoid;
 	}
 
 	protected boolean isObject(JvmTypeReference reference) {
