@@ -276,7 +276,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				" dispatch x(Void s) {'null'}" +
 				" dispatch x(String s) {'string'";
 		invokeAndExpect("string", definition,"bar");
-		invokeAndExpect("null", definition,new Object[]{null});
+		invokeAndExpect("null", definition, new Object[]{null});
 	}
 
 	public void testDispatchFunction_03() throws Exception {
@@ -316,6 +316,23 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"    null\n";
 		invokeAndExpect("zonkzonk", definition, "zonk");
 		invokeAndExpect(null, definition, Integer.valueOf(1));
+	}
+	
+	public void testDispatchFunction_07() throws Exception {
+		final String definition = "foo(p1)} " +
+				"dispatch foo (String string) {\n" + 
+				"    string + string\n" + 
+				"}\n" + 
+				"dispatch foo (Void nullCase) {\n" + 
+				"    'literal'\n";
+		invokeAndExpect("zonkzonk", definition, "zonk");
+		invokeAndExpect("literal", definition, new Object[]{ null });
+		try {
+			invokeAndExpect(null, definition, Integer.valueOf(1));
+			fail();
+		} catch (InvocationTargetException e) {
+			assertTrue(e.getCause() instanceof IllegalArgumentException);
+		}
 	}
 	
 	public void testGenericFunction_01() throws Exception {
