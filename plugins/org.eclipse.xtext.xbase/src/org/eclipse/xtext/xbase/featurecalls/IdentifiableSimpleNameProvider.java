@@ -50,6 +50,6 @@ public class IdentifiableSimpleNameProvider {
 			XCasePart casePart = (XCasePart) element;
 			return getSimpleName((XSwitchExpression)casePart.eContainer());
 		}
-		throw new IllegalArgumentException("No name strategy for elements of type "+element.getClass());
+		return element.getSimpleName();
 	}
 }

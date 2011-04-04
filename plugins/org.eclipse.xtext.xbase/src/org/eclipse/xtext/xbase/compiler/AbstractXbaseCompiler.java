@@ -12,15 +12,18 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
@@ -63,6 +66,9 @@ public abstract class AbstractXbaseCompiler {
 	
 	@Inject
 	private TypeConformanceComputer typeConformanceComputer;
+	
+	@Inject
+	private Primitives primitives;
 
 	private PolymorphicDispatcher<Void> toJavaExprDispatcher = PolymorphicDispatcher.createForSingleTarget(
 			"_toJavaExpression", 2, 2, this);
@@ -126,6 +132,10 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	protected void serialize(final JvmTypeReference type, XExpression context, IAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard) {
+		serialize(type, context, appendable, withoutConstraints, paramsToWildcard, true);
+	}
+	
+	protected void serialize(final JvmTypeReference type, XExpression context, IAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard, boolean allowPrimitives) {
 		if (type instanceof JvmWildcardTypeReference) {
 			JvmWildcardTypeReference wildcard = (JvmWildcardTypeReference) type;
 			if (!withoutConstraints) {
@@ -136,7 +146,7 @@ public abstract class AbstractXbaseCompiler {
 					if (constraint instanceof JvmLowerBound) {
 						if (!withoutConstraints)
 							appendable.append(" super ");
-						serialize(constraint.getTypeReference(), context, appendable, withoutConstraints, paramsToWildcard);
+						serialize(constraint.getTypeReference(), context, appendable, withoutConstraints, paramsToWildcard, false);
 						return;
 					}
 				}
@@ -152,14 +162,14 @@ public abstract class AbstractXbaseCompiler {
 								throw new IllegalStateException("cannot have two upperbounds if type should be printed without constraints");
 							appendable.append(" & ");
 						}
-						serialize(constraint.getTypeReference(), context, appendable, withoutConstraints, paramsToWildcard);
+						serialize(constraint.getTypeReference(), context, appendable, withoutConstraints, paramsToWildcard, false);
 					}
 				}
 			} else if (withoutConstraints) {
 				appendable.append("Object");
 			}
 		} else if (type instanceof JvmGenericArrayTypeReference) {
-			serialize(((JvmGenericArrayTypeReference) type).getComponentType(), context, appendable, withoutConstraints, paramsToWildcard);
+			serialize(((JvmGenericArrayTypeReference) type).getComponentType(), context, appendable, withoutConstraints, paramsToWildcard, true);
 			appendable.append("[]");
 		} else if (type instanceof JvmParameterizedTypeReference) {
 			JvmParameterizedTypeReference parameterized = (JvmParameterizedTypeReference) type;
@@ -172,14 +182,15 @@ public abstract class AbstractXbaseCompiler {
 					return;
 				}
 			}
-			appendable.append(type.getType());
+			JvmType jvmType = allowPrimitives ? type.getType() : primitives.asWrapperTypeIfPrimitive(type).getType();
+			appendable.append(jvmType);
 			if (!parameterized.getArguments().isEmpty()) {
 				appendable.append("<");
 				for(int i = 0; i < parameterized.getArguments().size(); i++) {
 					if (i != 0) {
 						appendable.append(",");
 					}
-					serialize(parameterized.getArguments().get(i), context, appendable, withoutConstraints, paramsToWildcard);
+					serialize(parameterized.getArguments().get(i), context, appendable, withoutConstraints, paramsToWildcard, false);
 				}
 				appendable.append(">");
 			}
@@ -238,6 +249,9 @@ public abstract class AbstractXbaseCompiler {
 		}
 		if (ex instanceof JvmFormalParameter) {
 			return ((JvmFormalParameter) ex).getName();
+		}
+		if (ex instanceof JvmIdentifiableElement) {
+			return ((JvmIdentifiableElement) ex).getSimpleName();
 		}
 		if (ex instanceof XAbstractFeatureCall) {
 			String name = nameProvider.getSimpleName(((XAbstractFeatureCall) ex).getFeature());
@@ -313,7 +327,7 @@ public abstract class AbstractXbaseCompiler {
 	 * whether an expression needs to be declared in a statement
 	 * If an expression has side effects this method must return true for it.
 	 */
-	protected boolean isVariableDeclarationRequired(XExpression expr) {
+	protected boolean isVariableDeclarationRequired(XExpression expr, IAppendable b) {
 		return true;
 	}
 	

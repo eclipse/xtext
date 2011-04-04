@@ -5,9 +5,11 @@ import static com.google.common.collect.Lists.*;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,17 +27,18 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtext.xtend2.richstring.DefaultIndentationHandler;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
+import org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo;
 import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringIf;
@@ -102,15 +105,6 @@ public class Xtend2Compiler extends XbaseCompiler {
 		} else {
 			throw new IllegalArgumentException();
 		}
-	}
-
-	@Override
-	protected boolean isVariableDeclarationRequired(XExpression expr) {
-		if (expr instanceof XAbstractFeatureCall 
-				&& ((XAbstractFeatureCall)expr).getFeature() instanceof XtendClass) {
-			return false;
-		}
-		return super.isVariableDeclarationRequired(expr);
 	}
 
 	protected void compile(XtendClass obj, IAppendable appendable) {
@@ -239,6 +233,10 @@ public class Xtend2Compiler extends XbaseCompiler {
 	}
 
 	protected void compile(XtendFunction obj, IAppendable appendable) {
+		if (obj.getCreateExtensionInfo()!=null) {
+			declareCreateExtensionCache(obj, appendable);
+		}
+		
 		appendable.openScope();
 		JvmTypeReference returnType = associations.getDirectlyInferredOperation(obj).getReturnType();
 		String name = obj.getName();
@@ -263,9 +261,80 @@ public class Xtend2Compiler extends XbaseCompiler {
 		}
 		appendable.append("{");
 		appendable.increaseIndentation();
-		compile(obj.getExpression(), appendable, returnType);
+		if (obj.getCreateExtensionInfo()!=null) {
+			compileCreateExtensionBody(obj, appendable);
+		} else {
+			compile(obj.getExpression(), appendable, returnType);
+		}
 		appendable.decreaseIndentation();
 		appendable.append("\n}").closeScope();
+	}
+
+	protected void compileCreateExtensionBody(XtendFunction obj, IAppendable appendable) {
+		CreateExtensionInfo info = obj.getCreateExtensionInfo();
+		JvmTypeReference listType = getTypeReferences().getTypeForName(ArrayList.class, obj);
+		JvmTypeReference collectonLiterals = getTypeReferences().getTypeForName(CollectionLiterals.class, obj);
+		String cacheVarName = appendable.getName(cacheVarKey(info));
+		String cacheKeyVarName = appendable.declareVariable("CacheKey", "_cacheKey");
+		appendable.append("\nfinal ");
+		serialize(listType, info.getCreateExpression(), appendable, false, true);
+		appendable.append(cacheKeyVarName).append(" = ");
+		serialize(collectonLiterals, info.getCreateExpression(), appendable, false, true);
+		appendable.append(".newArrayList(");
+		EList<JvmFormalParameter> list = obj.getParameters();
+		for (Iterator<JvmFormalParameter> iterator = list.iterator(); iterator.hasNext();) {
+			JvmFormalParameter jvmFormalParameter = iterator.next();
+			appendable.append(appendable.getName(jvmFormalParameter));
+			if (iterator.hasNext()) {
+				appendable.append(", ");
+			}
+		}
+		appendable.append(");");
+		// if the cache contains the key return the previously created object.
+		appendable.append("\nif (").append(cacheVarName).append(".containsKey(").append(cacheKeyVarName).append(")) {");
+		appendable.increaseIndentation();
+		appendable.append("\nreturn ").append(cacheVarName).append(".get(").append(cacheKeyVarName).append(");");
+		appendable.decreaseIndentation().append("\n}");
+		
+		// execute the creation
+		JvmTypeReference returnType = getTypeProvider().getType(info.getCreateExpression());
+		internalToJavaStatement(info.getCreateExpression(), appendable, true);
+		appendable.append("\n");
+		serialize(returnType,info.getCreateExpression(),appendable,false,true);
+		String varName = declareNameInVariableScope(info, appendable);
+		appendable.append(" ").append(varName).append(" = ");
+		internalToJavaExpression(info.getCreateExpression(), appendable);
+		appendable.append(";");
+		
+		// store the newly created object in the cache
+		appendable.append("\n").append(cacheVarName).append(".put(").append(cacheKeyVarName).append(", ").append(varName).append(");");
+		
+		// execute the initialization
+		JvmTypeReference primitiveVoid = getTypeReferences().getTypeForName(Void.TYPE, obj);
+		compile(obj.getExpression(), appendable, primitiveVoid);
+		
+		// return the result
+		appendable.append("\nreturn ");
+		appendable.append(varName).append(";");
+	}
+
+	protected void declareCreateExtensionCache(XtendFunction obj, IAppendable appendable) {
+		final CreateExtensionInfo info = obj.getCreateExtensionInfo();
+		JvmTypeReference returnType = getTypeProvider().getType(info.getCreateExpression());
+		JvmTypeReference list = getTypeReferences().getTypeForName(ArrayList.class, obj);
+		JvmTypeReference map = getTypeReferences().getTypeForName(HashMap.class, obj, list, returnType);
+		appendable.append("\n\nprivate final ");
+		serialize(map, info.getCreateExpression(), appendable, false, true);
+		appendable.append(" ");
+		String cacheName = appendable.declareVariable(cacheVarKey(info), "_createCache_"+obj.getName());
+		appendable.append(cacheName);
+		appendable.append(" = new ");
+		serialize(map, info.getCreateExpression(), appendable, false, true);
+		appendable.append("();");
+	}
+
+	protected Object cacheVarKey(CreateExtensionInfo createExtensionInfo) {
+		return Tuples.pair("cache", createExtensionInfo);
 	}
 
 	protected void appendTypeParameterDeclaration(EList<JvmTypeParameter> typeParameters, IAppendable appendable) {
@@ -466,5 +535,5 @@ public class Xtend2Compiler extends XbaseCompiler {
 	public void _toJavaExpression(RichString richString, IAppendable b) {
 		b.append(getJavaVarName(Tuples.pair(richString, "result"), b));
 	}
-
+	
 }

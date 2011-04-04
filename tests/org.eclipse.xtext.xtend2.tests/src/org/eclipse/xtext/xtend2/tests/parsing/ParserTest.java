@@ -23,6 +23,34 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 public class ParserTest extends AbstractXtend2TestCase {
 	
+	public void testCreateExtension_00() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo { " +
+				"  create newArrayList('foo') getListWithFooAnd(String s) {" +
+				"    this.add(s)" +
+				"  }" +
+				"}");
+		assertEquals(1, clazz.getMembers().size());
+		
+		XtendFunction func= (XtendFunction) clazz.getMembers().get(0);
+		assertNotNull(func.getCreateExtensionInfo().getCreateExpression());
+		assertEquals("this", func.getCreateExtensionInfo().getName());
+	}
+	
+	public void testCreateExtension_01() throws Exception {
+		XtendClass clazz = clazz(
+				"class Foo { " +
+				"  create foo : newArrayList('foo') getListWithFooAnd(String s) {" +
+				"    foo.add(s)" +
+				"  }" +
+		"}");
+		assertEquals(1, clazz.getMembers().size());
+		
+		XtendFunction func= (XtendFunction) clazz.getMembers().get(0);
+		assertNotNull(func.getCreateExtensionInfo().getCreateExpression());
+		assertEquals("foo", func.getCreateExtensionInfo().getName());
+	}
+	
 	public void testDeclaredDependency_00() throws Exception {
 		XtendClass clazz = clazz(
 			"class Foo { " +

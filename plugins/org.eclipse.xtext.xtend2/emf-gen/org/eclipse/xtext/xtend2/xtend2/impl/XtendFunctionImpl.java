@@ -29,6 +29,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 
 import org.eclipse.xtext.xbase.XExpression;
 
+import org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
@@ -45,6 +46,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#isOverride <em>Override</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#isDispatch <em>Dispatch</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getCreateExtensionInfo <em>Create Extension Info</em>}</li>
  * </ul>
  * </p>
  *
@@ -131,6 +133,16 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	 * @ordered
 	 */
 	protected boolean dispatch = DISPATCH_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getCreateExtensionInfo() <em>Create Extension Info</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCreateExtensionInfo()
+	 * @generated
+	 * @ordered
+	 */
+	protected CreateExtensionInfo createExtensionInfo;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -328,6 +340,54 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public CreateExtensionInfo getCreateExtensionInfo()
+	{
+		return createExtensionInfo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetCreateExtensionInfo(CreateExtensionInfo newCreateExtensionInfo, NotificationChain msgs)
+	{
+		CreateExtensionInfo oldCreateExtensionInfo = createExtensionInfo;
+		createExtensionInfo = newCreateExtensionInfo;
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO, oldCreateExtensionInfo, newCreateExtensionInfo);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCreateExtensionInfo(CreateExtensionInfo newCreateExtensionInfo)
+	{
+		if (newCreateExtensionInfo != createExtensionInfo)
+		{
+			NotificationChain msgs = null;
+			if (createExtensionInfo != null)
+				msgs = ((InternalEObject)createExtensionInfo).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO, null, msgs);
+			if (newCreateExtensionInfo != null)
+				msgs = ((InternalEObject)newCreateExtensionInfo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO, null, msgs);
+			msgs = basicSetCreateExtensionInfo(newCreateExtensionInfo, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO, newCreateExtensionInfo, newCreateExtensionInfo));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
@@ -358,6 +418,8 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 				return basicSetReturnType(null, msgs);
 			case Xtend2Package.XTEND_FUNCTION__PARAMETERS:
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+			case Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
+				return basicSetCreateExtensionInfo(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -384,6 +446,8 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 				return isOverride();
 			case Xtend2Package.XTEND_FUNCTION__DISPATCH:
 				return isDispatch();
+			case Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
+				return getCreateExtensionInfo();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -419,6 +483,9 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 			case Xtend2Package.XTEND_FUNCTION__DISPATCH:
 				setDispatch((Boolean)newValue);
 				return;
+			case Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
+				setCreateExtensionInfo((CreateExtensionInfo)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -451,6 +518,9 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 			case Xtend2Package.XTEND_FUNCTION__DISPATCH:
 				setDispatch(DISPATCH_EDEFAULT);
 				return;
+			case Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
+				setCreateExtensionInfo((CreateExtensionInfo)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -477,6 +547,8 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 				return override != OVERRIDE_EDEFAULT;
 			case Xtend2Package.XTEND_FUNCTION__DISPATCH:
 				return dispatch != DISPATCH_EDEFAULT;
+			case Xtend2Package.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
+				return createExtensionInfo != null;
 		}
 		return super.eIsSet(featureID);
 	}

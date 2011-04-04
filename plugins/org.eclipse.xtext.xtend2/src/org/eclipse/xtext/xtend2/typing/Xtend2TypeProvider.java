@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo;
 import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringElseIf;
@@ -53,6 +54,8 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 
 	protected JvmTypeReference _expectedType(XtendFunction function, EReference reference, int index, boolean rawType) {
 		if (reference == Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION) {
+			if (function.getCreateExtensionInfo()!=null)
+				return null;
 			JvmTypeReference declaredOrInferredReturnType = getDeclaredOrOverriddenReturnType(function);
 			if (declaredOrInferredReturnType == null || getTypeReferences().is(declaredOrInferredReturnType, Void.TYPE))
 				return null;
@@ -120,6 +123,10 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 		typeReference.setType(xtend2jvmAssociations.getInferredType(clazz));
 		return typeReference;
 	}
+	
+	protected JvmTypeReference _typeForIdentifiable(CreateExtensionInfo info, boolean rawType) {
+		return getType(info.getCreateExpression(),rawType);
+	}
 
 	protected JvmTypeReference _typeForIdentifiable(XtendFunction func, boolean rawType) {
 		JvmTypeReference declaredOrInferredReturnType = getDeclaredOrOverriddenReturnType(func);
@@ -174,6 +181,9 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 	}
 
 	protected JvmTypeReference getDeclaredOrOverriddenReturnType(XtendFunction func) {
+		if (func.getCreateExtensionInfo()!=null) {
+			return getType(func.getCreateExtensionInfo().getCreateExpression());
+		}
 		if (func.getReturnType() != null)
 			return func.getReturnType();
 		return overridesService.getOverriddenReturnType(func);

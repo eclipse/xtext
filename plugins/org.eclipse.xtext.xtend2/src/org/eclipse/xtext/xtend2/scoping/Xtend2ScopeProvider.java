@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.IFeaturesForTypeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
+import org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo;
 import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
@@ -103,6 +104,11 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 			XtendFunction func = (XtendFunction) context;
 			EList<JvmFormalParameter> list = func.getParameters();
 			List<IEObjectDescription> descriptions = Lists.newArrayList();
+			if (func.getCreateExtensionInfo()!=null) {
+				CreateExtensionInfo info = func.getCreateExtensionInfo();
+				IEObjectDescription description = EObjectDescription.create(QualifiedName.create(info.getName()), info, null);
+				descriptions.add(description);
+			}
 			for (JvmFormalParameter jvmFormalParameter : list) {
 				if (!Strings.isEmpty(jvmFormalParameter.getName())) {
 					IEObjectDescription desc = createIEObjectDescription(jvmFormalParameter);

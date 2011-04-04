@@ -44,6 +44,26 @@ import com.google.inject.Injector;
  */
 public class CompilerTest extends AbstractXtend2TestCase {
 	
+	public void testCreateExtension_00() throws Exception {
+		Class<?> clazz = compileJavaCode("x.Y", 
+				"package x " +
+				"class Y {" +
+				"  create new StringBuilder() aBuilder(String x) {" +
+				"   this.append(x)" +
+				"  }" +
+				"}");
+		Object instance = clazz.newInstance();
+		Method method = clazz.getDeclaredMethod("aBuilder", String.class);
+		StringBuilder sb = (StringBuilder) method.invoke(instance, "Foo");
+		assertSame(sb, method.invoke(instance, "Foo"));
+		assertEquals("Foo", sb.toString());
+		sb.append("Bar");
+		StringBuilder sb2 = (StringBuilder) method.invoke(instance, "Bar");
+		assertEquals("Bar", sb2.toString());
+		sb = (StringBuilder) method.invoke(instance, "Foo");
+		assertEquals("FooBar",sb.toString());
+	}
+	
 	public void testInferredReturnType() throws Exception {
 		Class<?> clazz = compileJavaCode("x.Y", 
 				"package x " +
@@ -59,7 +79,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"  c() {" +
 				"    2" +
 				"  }" +
-				"}");
+		"}");
 		assertEquals(2, apply(clazz, "a"));
 	}
 	
@@ -453,6 +473,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 			Class<?> clazz = javaCompiler.compileToClass(clazzName, javaCode);
 			return clazz;
 		} catch (Exception e) {
+			System.err.println(javaCode);
 			throw new RuntimeException("Java compilation failed. Java code was : \n" + javaCode, e);
 		}
 	}

@@ -348,13 +348,22 @@ public interface Xtend2Package extends EPackage
 	int XTEND_FUNCTION__DISPATCH = XTEND_MEMBER_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Create Extension Info</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FUNCTION__CREATE_EXTENSION_INFO = XTEND_MEMBER_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Xtend Function</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FUNCTION_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 6;
+	int XTEND_FUNCTION_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.RichStringImpl <em>Rich String</em>}' class.
@@ -604,6 +613,43 @@ public interface Xtend2Package extends EPackage
 	 * @ordered
 	 */
 	int DECLARED_DEPENDENCY_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.CreateExtensionInfoImpl <em>Create Extension Info</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.CreateExtensionInfoImpl
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getCreateExtensionInfo()
+	 * @generated
+	 */
+	int CREATE_EXTENSION_INFO = 11;
+
+	/**
+	 * The feature id for the '<em><b>Create Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CREATE_EXTENSION_INFO__CREATE_EXPRESSION = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CREATE_EXTENSION_INFO__NAME = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Create Extension Info</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CREATE_EXTENSION_INFO_FEATURE_COUNT = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 2;
 
 
 	/**
@@ -855,6 +901,17 @@ public interface Xtend2Package extends EPackage
 	EAttribute getXtendFunction_Dispatch();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtend2.xtend2.XtendFunction#getCreateExtensionInfo <em>Create Extension Info</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Create Extension Info</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendFunction#getCreateExtensionInfo()
+	 * @see #getXtendFunction()
+	 * @generated
+	 */
+	EReference getXtendFunction_CreateExtensionInfo();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.RichString <em>Rich String</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1012,6 +1069,38 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 */
 	EAttribute getDeclaredDependency_Extension();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo <em>Create Extension Info</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Create Extension Info</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo
+	 * @generated
+	 */
+	EClass getCreateExtensionInfo();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo#getCreateExpression <em>Create Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Create Expression</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo#getCreateExpression()
+	 * @see #getCreateExtensionInfo()
+	 * @generated
+	 */
+	EReference getCreateExtensionInfo_CreateExpression();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo#getName()
+	 * @see #getCreateExtensionInfo()
+	 * @generated
+	 */
+	EAttribute getCreateExtensionInfo_Name();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1231,6 +1320,14 @@ public interface Xtend2Package extends EPackage
 		EAttribute XTEND_FUNCTION__DISPATCH = eINSTANCE.getXtendFunction_Dispatch();
 
 		/**
+		 * The meta object literal for the '<em><b>Create Extension Info</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTEND_FUNCTION__CREATE_EXTENSION_INFO = eINSTANCE.getXtendFunction_CreateExtensionInfo();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.RichStringImpl <em>Rich String</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1361,6 +1458,32 @@ public interface Xtend2Package extends EPackage
 		 * @generated
 		 */
 		EAttribute DECLARED_DEPENDENCY__EXTENSION = eINSTANCE.getDeclaredDependency_Extension();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.CreateExtensionInfoImpl <em>Create Extension Info</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xtend2.xtend2.impl.CreateExtensionInfoImpl
+		 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getCreateExtensionInfo()
+		 * @generated
+		 */
+		EClass CREATE_EXTENSION_INFO = eINSTANCE.getCreateExtensionInfo();
+
+		/**
+		 * The meta object literal for the '<em><b>Create Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CREATE_EXTENSION_INFO__CREATE_EXPRESSION = eINSTANCE.getCreateExtensionInfo_CreateExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CREATE_EXTENSION_INFO__NAME = eINSTANCE.getCreateExtensionInfo_Name();
 
 	}
 

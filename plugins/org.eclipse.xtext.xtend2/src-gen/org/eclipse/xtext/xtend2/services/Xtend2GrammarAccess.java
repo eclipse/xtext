@@ -347,8 +347,11 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cTypeParametersAssignment_1_2_1 = (Assignment)cGroup_1_2.eContents().get(1);
 		private final RuleCall cTypeParametersJvmTypeParameterParserRuleCall_1_2_1_0 = (RuleCall)cTypeParametersAssignment_1_2_1.eContents().get(0);
 		private final Keyword cGreaterThanSignKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
-		private final Assignment cReturnTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cReturnTypeJvmTypeReferenceParserRuleCall_2_0 = (RuleCall)cReturnTypeAssignment_2.eContents().get(0);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Assignment cReturnTypeAssignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
+		private final RuleCall cReturnTypeJvmTypeReferenceParserRuleCall_2_0_0 = (RuleCall)cReturnTypeAssignment_2_0.eContents().get(0);
+		private final Assignment cCreateExtensionInfoAssignment_2_1 = (Assignment)cAlternatives_2.eContents().get(1);
+		private final RuleCall cCreateExtensionInfoCreateExtensionInfoParserRuleCall_2_1_0 = (RuleCall)cCreateExtensionInfoAssignment_2_1.eContents().get(0);
 		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cNameIDTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
@@ -368,13 +371,15 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Function returns XtendFunction:
 		//	(override?="override"? & dispatch?="dispatch"?) ("<" typeParameters+=JvmTypeParameter (","
-		//	typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference? name=ID "(" (parameters+=Parameter (","
-		//	parameters+=Parameter)*)? ")" (expression=XBlockExpression | expression=RichString)?;
+		//	typeParameters+=JvmTypeParameter)* ">")? (returnType=JvmTypeReference | createExtensionInfo=CreateExtensionInfo)?
+		//	name=ID "(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" (expression=XBlockExpression |
+		//	expression=RichString)?;
 		public ParserRule getRule() { return rule; }
 
 		//(override?="override"? & dispatch?="dispatch"?) ("<" typeParameters+=JvmTypeParameter (","
-		//typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference? name=ID "(" (parameters+=Parameter (","
-		//parameters+=Parameter)*)? ")" (expression=XBlockExpression | expression=RichString)?
+		//typeParameters+=JvmTypeParameter)* ">")? (returnType=JvmTypeReference | createExtensionInfo=CreateExtensionInfo)?
+		//name=ID "(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" (expression=XBlockExpression |
+		//expression=RichString)?
 		public Group getGroup() { return cGroup; }
 
 		//override?="override"? & dispatch?="dispatch"?
@@ -419,11 +424,20 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		//">"
 		public Keyword getGreaterThanSignKeyword_1_3() { return cGreaterThanSignKeyword_1_3; }
 
-		//returnType=JvmTypeReference?
-		public Assignment getReturnTypeAssignment_2() { return cReturnTypeAssignment_2; }
+		//(returnType=JvmTypeReference | createExtensionInfo=CreateExtensionInfo)?
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+
+		//returnType=JvmTypeReference
+		public Assignment getReturnTypeAssignment_2_0() { return cReturnTypeAssignment_2_0; }
 
 		//JvmTypeReference
-		public RuleCall getReturnTypeJvmTypeReferenceParserRuleCall_2_0() { return cReturnTypeJvmTypeReferenceParserRuleCall_2_0; }
+		public RuleCall getReturnTypeJvmTypeReferenceParserRuleCall_2_0_0() { return cReturnTypeJvmTypeReferenceParserRuleCall_2_0_0; }
+
+		//createExtensionInfo=CreateExtensionInfo
+		public Assignment getCreateExtensionInfoAssignment_2_1() { return cCreateExtensionInfoAssignment_2_1; }
+
+		//CreateExtensionInfo
+		public RuleCall getCreateExtensionInfoCreateExtensionInfoParserRuleCall_2_1_0() { return cCreateExtensionInfoCreateExtensionInfoParserRuleCall_2_1_0; }
 
 		//name=ID
 		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
@@ -472,6 +486,46 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 
 		//RichString
 		public RuleCall getExpressionRichStringParserRuleCall_7_1_0() { return cExpressionRichStringParserRuleCall_7_1_0; }
+	}
+
+	public class CreateExtensionInfoElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CreateExtensionInfo");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cCreateKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final RuleCall cNameIDTerminalRuleCall_1_0_0 = (RuleCall)cNameAssignment_1_0.eContents().get(0);
+		private final Keyword cColonKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cCreateExpressionAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cCreateExpressionXExpressionParserRuleCall_2_0 = (RuleCall)cCreateExpressionAssignment_2.eContents().get(0);
+		
+		//CreateExtensionInfo:
+		//	"create" (name=ID ":")? createExpression=XExpression;
+		public ParserRule getRule() { return rule; }
+
+		//"create" (name=ID ":")? createExpression=XExpression
+		public Group getGroup() { return cGroup; }
+
+		//"create"
+		public Keyword getCreateKeyword_0() { return cCreateKeyword_0; }
+
+		//(name=ID ":")?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//name=ID
+		public Assignment getNameAssignment_1_0() { return cNameAssignment_1_0; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0_0() { return cNameIDTerminalRuleCall_1_0_0; }
+
+		//":"
+		public Keyword getColonKeyword_1_1() { return cColonKeyword_1_1; }
+
+		//createExpression=XExpression
+		public Assignment getCreateExpressionAssignment_2() { return cCreateExpressionAssignment_2; }
+
+		//XExpression
+		public RuleCall getCreateExpressionXExpressionParserRuleCall_2_0() { return cCreateExpressionXExpressionParserRuleCall_2_0; }
 	}
 
 	public class ParameterElements extends AbstractParserRuleElementFinder {
@@ -982,6 +1036,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	private MemberElements pMember;
 	private DeclaredDependencyElements pDeclaredDependency;
 	private FunctionElements pFunction;
+	private CreateExtensionInfoElements pCreateExtensionInfo;
 	private ParameterElements pParameter;
 	private XStringLiteralElements pXStringLiteral;
 	private RichStringElements pRichString;
@@ -1086,14 +1141,25 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 
 	//Function returns XtendFunction:
 	//	(override?="override"? & dispatch?="dispatch"?) ("<" typeParameters+=JvmTypeParameter (","
-	//	typeParameters+=JvmTypeParameter)* ">")? returnType=JvmTypeReference? name=ID "(" (parameters+=Parameter (","
-	//	parameters+=Parameter)*)? ")" (expression=XBlockExpression | expression=RichString)?;
+	//	typeParameters+=JvmTypeParameter)* ">")? (returnType=JvmTypeReference | createExtensionInfo=CreateExtensionInfo)?
+	//	name=ID "(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" (expression=XBlockExpression |
+	//	expression=RichString)?;
 	public FunctionElements getFunctionAccess() {
 		return (pFunction != null) ? pFunction : (pFunction = new FunctionElements());
 	}
 	
 	public ParserRule getFunctionRule() {
 		return getFunctionAccess().getRule();
+	}
+
+	//CreateExtensionInfo:
+	//	"create" (name=ID ":")? createExpression=XExpression;
+	public CreateExtensionInfoElements getCreateExtensionInfoAccess() {
+		return (pCreateExtensionInfo != null) ? pCreateExtensionInfo : (pCreateExtensionInfo = new CreateExtensionInfoElements());
+	}
+	
+	public ParserRule getCreateExtensionInfoRule() {
+		return getCreateExtensionInfoAccess().getRule();
 	}
 
 	//// type is mandatory in Xtend

@@ -116,6 +116,15 @@ public interface Xtend2Factory extends EFactory
 	DeclaredDependency createDeclaredDependency();
 
 	/**
+	 * Returns a new object of class '<em>Create Extension Info</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Create Extension Info</em>'.
+	 * @generated
+	 */
+	CreateExtensionInfo createCreateExtensionInfo();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
