@@ -8,4 +8,17 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/formatting/impl/AbstractNodeModelFormatter.java" type="org.eclipse.xtext.formatting.impl.AbstractNodeModelFormatter$FormattedRegion">
+        <filter comment="renamed getLenght() to getLength()" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.formatting.impl.AbstractNodeModelFormatter.FormattedRegion"/>
+                <message_argument value="getLenght()"/>
+            </message_arguments>
+        </filter>
+        <filter comment="renamed getLenght() to getLength()" id="1143996420">
+            <message_arguments>
+                <message_argument value="getLength()"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>
