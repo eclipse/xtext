@@ -181,7 +181,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 						b.append(", ");
 					}
 					JvmTypeReference typeArgument = call.getTypeArguments().get(i);
-					b.append(typeArgument);
+					serialize(typeArgument, call, b, false, true);
 				}
 				b.append(">");
 			} else if (call.getFeature() instanceof JvmOperation) {
@@ -219,8 +219,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 								b.append(", ");
 							}
 							JvmTypeReference typeArgument = resolvedTypeArguments.get(i);
-							b.append(typeArgument);
-							}
+							serialize(typeArgument,call,b,false,true);
+						}
 						b.append(">");
 					}
 				}
@@ -242,7 +242,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				b.append("==null?");
 				b.append("(");
 				JvmTypeReference type = getTypeProvider().getType(call);
-				b.append(type);
+				serialize(type,call,b,false,true);
 				b.append(")");
 				b.append("null:");
 				internalToJavaExpression(receiver, b);
