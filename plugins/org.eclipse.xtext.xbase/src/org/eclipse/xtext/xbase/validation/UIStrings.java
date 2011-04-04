@@ -11,6 +11,7 @@ import static com.google.common.collect.Iterables.*;
 
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -72,13 +73,13 @@ public class UIStrings {
 	protected String toString(Iterable<? extends JvmIdentifiableElement> elements) {
 		StringBuilder buffer = new StringBuilder();
 		boolean needsSeparator = false;
-		for (JvmIdentifiableElement typeRef : elements) {
+		for (JvmIdentifiableElement type : elements) {
 			if (needsSeparator)
 				buffer.append(", ");
 			needsSeparator = true;
-			if(typeRef != null)
-				buffer.append(typeRef.getSimpleName());
-			else 
+			if(type != null) {
+				buffer.append(type.getSimpleName());
+			} else 
 				buffer.append("[null]");
 		}
 		return buffer.toString();
@@ -91,9 +92,12 @@ public class UIStrings {
 			if (needsSeparator)
 				buffer.append(", ");
 			needsSeparator = true;
-			if(typeRef != null)
-				buffer.append(typeRef.getSimpleName());
-			else 
+			if(typeRef != null) {
+				if (typeRef instanceof JvmAnyTypeReference)
+					buffer.append("Object");
+				else
+					buffer.append(typeRef.getSimpleName());
+			} else 
 				buffer.append("[null]");
 		}
 		return buffer.toString();
