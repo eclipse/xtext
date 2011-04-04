@@ -18,6 +18,8 @@ import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ComparableExtensions;
+import org.eclipse.xtext.xbase.lib.FunctionExtensions;
+import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -50,6 +52,13 @@ public class StaticMethodsFeatureForTypeProvider extends AbstractStaticMethodsFe
 		extensionClasses.put(Collection.class.getCanonicalName(), CollectionExtensions.class.getCanonicalName());
 		extensionClasses.put(Map.class.getCanonicalName(), CollectionExtensions.class.getCanonicalName());
 		extensionClasses.put(Iterable.class.getCanonicalName(), IterableExtensions.class.getCanonicalName());
+		extensionClasses.put(Functions.Function0.class.getName(), FunctionExtensions.class.getCanonicalName());
+		extensionClasses.put(Functions.Function1.class.getName(), FunctionExtensions.class.getCanonicalName());
+		extensionClasses.put(Functions.Function2.class.getName(), FunctionExtensions.class.getCanonicalName());
+		extensionClasses.put(Functions.Function3.class.getName(), FunctionExtensions.class.getCanonicalName());
+		extensionClasses.put(Functions.Function4.class.getName(), FunctionExtensions.class.getCanonicalName());
+		extensionClasses.put(Functions.Function5.class.getName(), FunctionExtensions.class.getCanonicalName());
+		extensionClasses.put(Functions.Function6.class.getName(), FunctionExtensions.class.getCanonicalName());
 	}
 
 	private static final Collection<String> literalClasses = ImmutableList.of(
