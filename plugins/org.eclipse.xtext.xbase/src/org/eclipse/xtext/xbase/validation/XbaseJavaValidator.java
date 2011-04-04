@@ -124,7 +124,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if (!isImplicitReturn(expr))
 			return;
 		JvmTypeReference expectedType = typeProvider.getExpectedType(expr);
-		if (typeRefs.is(expectedType, Void.TYPE))
+		if (expectedType == null || typeRefs.is(expectedType, Void.TYPE))
 			return;
 		JvmTypeReference type = typeProvider.getType(expr);
 		if (!conformanceComputer.isConformant(expectedType, type)) {

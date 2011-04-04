@@ -264,22 +264,14 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			final JvmTypeReference parameterType = parameter.getParameterType();
 			JvmTypeReference result = context.getLowerBound(parameterType);
 			return result;
-//			JvmTypeReference resolved = context.resolve(parameterType);
-//			return resolved;
 		}
 		if (reference == XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND
 				&& expr.getFeature() instanceof JvmOperation) {
-			JvmOperation feature = (JvmOperation) expr.getFeature();
-			if (feature.getParameters().size() > 1) { 
-				JvmFormalParameter parameter = feature.getParameters().get(0);
+			JvmOperation operation = (JvmOperation) expr.getFeature();
+			if (operation.getParameters().size() > 1) {
+				JvmFormalParameter parameter = operation.getParameters().get(0);
 				TypeArgumentContext context = getFeatureCallTypeArgContext(expr, reference, index, rawType);
 				final JvmTypeReference parameterType = parameter.getParameterType();
-				// TODO why is the lower bound the expected type? 
-				// It should be to strict in general, e.g. Comparable<? super Integer> 
-				// allows to use Comparable<Object> but the lower bound is
-				// Comparable<Integer> - This applies to other formal parameters, too
-//				JvmTypeReference result = context.getLowerBound(parameterType);
-//				return result;
 				JvmTypeReference resolved = context.resolve(parameterType);
 				return resolved;
 			}
@@ -655,7 +647,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 						return result;
 					}
 				}
-				// try again to resolve the type parameters, this time with emtpy var args
+				// try again to resolve the type parameters, this time with empty var args
 				if (operation.isVarArgs() && operation.getParameters().size() > argumentTypes.length) {
 					context = getTypeArgumentContextProvider().injectArgumentTypeContext(context, operation, false, argumentTypes);
 					result = context.getUpperBound(featureType, featureCall);
