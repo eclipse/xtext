@@ -85,9 +85,12 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__PREDICATE,
 			XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS,
 			XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS,
-			XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND,
-			XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND,
-			XbasePackage.Literals.XUNARY_OPERATION__OPERAND
+//TODO these references might point to the receiver, which is the basis of why a certain feature was picked in scoping.
+// Should be checked in case of extension methods only (i.e. when they are arguments)
+//			XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND,
+//			XbasePackage.Literals.XUNARY_OPERATION__OPERAND
+			XbasePackage.Literals.XASSIGNMENT__VALUE,
+			XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND
 		);
 	
 	protected Set<EReference> getTypeConformanceCheckedReferences() {

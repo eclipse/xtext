@@ -55,8 +55,8 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 					+ uiStrings.typeParameters(featureCall.getFeature()) + " but got "
 					+ uiStrings.typeArguments(featureCall);
 		} else if (INVALID_ARGUMENT_TYPES.equals(issueCode)) {
-			message = "Invalid argument types. Expected " + uiStrings.parameters(featureCall.getFeature())
-					+ " but got " + uiStrings.arguments(featureCall);
+			// Type conformance errors are checked in XbaseJavaValidator.
+			// We cannot rely on the types used during linking because, they might have been incomplete
 		} else if (ASSIGNMENT_TARGET_IS_NOT_WRITEABLE.equals(issueCode)) {
 			message = "Feature " + nameProvider.getSimpleName(featureCall.getFeature()) + " is not writeable.";
 		} else if (INSTANCE_ACCESS_TO_STATIC_MEMBER.equals(issueCode)) {
@@ -71,7 +71,8 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 		} else {
 			message = "Missig error message for " + issueCode;
 		}
-		error(message, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, issueCode);
+		if (message != null)
+			error(message, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, issueCode);
 	}
 
 	protected void error(XConstructorCall constructorCall, String issueCode) {

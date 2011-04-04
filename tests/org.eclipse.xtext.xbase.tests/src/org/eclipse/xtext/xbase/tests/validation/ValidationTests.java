@@ -41,6 +41,11 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		expression = expression("[int a1,int a2,int a3,int a4,int a5,int a6|null]");
 		helper.assertNoError(expression, TOO_MANY_PARAMS_IN_CLOSURE);
 	}
+	
+	public void testInCompatibleRightOperand() throws Exception {
+		XExpression expression = expression("true || 'foo'");
+		helper.assertError(expression, XSTRING_LITERAL, INCOMPATIBLE_TYPES);
+	}
 
 	public void testStringLiteralInBlock() throws Exception {
 		checkInnerExpressionInBlock("'foo'", XSTRING_LITERAL);
