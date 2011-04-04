@@ -354,4 +354,11 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		return conformanceComputer.isConformant(left, right);
 	}
 	
+	protected boolean isConformant(JvmTypeReference left, JvmTypeReference right) {
+		return conformanceComputer.isConformant(left, right);
+	}
+	
+	protected ITypeProvider getTypeProvider() {
+		return typeProvider;
+	}
 }
