@@ -160,11 +160,11 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testNoException_08() throws Exception {
-		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.smoke\n" + 
+		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.linking\n" + 
 				"import java.util.ArrayList\n" + 
 				"import static.*\n" + 
 				"import static extension java.util.Collections.*\n" + 
-				"class Case_5 {\n" + 
+				"class NoException {\n" + 
 				"	@Inject\n" + 
 				"	ArrayList as myList\n" + 
 				"	@Inject extension String\n" + 
@@ -180,6 +180,17 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(file);
 	}
 	
+	public void testNoException_09() throws Exception {
+		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.linking\n" + 
+				"class NoException {\n" + 
+				"	String foo(String a, String b) {\n" + 
+				"		if (isUpper(a)) {\n" + 
+				"			another(a,b+'holla')\n" + 
+				"		} else {\n" + 
+				"			v");
+		assertNoExceptions(file);
+	}
+	
 	protected void assertNoExceptions(EObject object) {
 		Resource resource = object.eResource();
 		if (resource instanceof LazyLinkingResource)
@@ -191,6 +202,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 			}
 			assertFalse(error.toString(), error instanceof ExceptionDiagnostic);
 		}
+		validateWithoutException((XtextResource) resource);
 	}
 	
 	public void testNoExceptionInValidator_01() throws Exception {
@@ -210,6 +222,10 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 				"}");
 		assertNoExceptions(clazz);
 		XtextResource resource = (XtextResource) clazz.eResource();
+		validateWithoutException(resource);
+	}
+
+	protected void validateWithoutException(XtextResource resource) {
 		ResourceValidatorImpl validator = new ResourceValidatorImpl();
 		assertNotSame(validator, resource.getResourceServiceProvider().getResourceValidator());
 		getInjector().injectMembers(validator);
