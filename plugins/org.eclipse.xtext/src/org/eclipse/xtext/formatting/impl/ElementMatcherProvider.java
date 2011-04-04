@@ -82,21 +82,17 @@ public class ElementMatcherProvider implements IElementMatcherProvider {
 			return null;
 		}
 
-		protected Pair<List<MatcherTransition>, List<MatcherState>> findTransitionPath(MatcherState fromParam,
+		protected Pair<List<MatcherTransition>, List<MatcherState>> findTransitionPath(MatcherState from,
 				AbstractElement to, boolean returning, boolean canReturn, Set<Pair<Boolean, MatcherState>> visited) {
-			if (!visited.add(Tuples.create(returning, fromParam)))
+			if (!visited.add(Tuples.create(returning, from)))
 				return null;
-			List<MatcherState> allFrom = Collections.emptyList();
-			if (fromParam != null) {
-				if (!fromParam.isEndState() && fromParam.getAllOutgoing().isEmpty()) {
-					allFrom = Lists.newArrayList();
-					for (MatcherTransition trans : fromParam.collectOutgoingTransitions())
-						allFrom.add(trans.getTarget());
-				} else
-					allFrom = Collections.singletonList(fromParam);
-			}
-			for (MatcherState from : allFrom) {
-				for (MatcherTransition transition : returning ? from.getOutgoingAfterReturn() : from.getOutgoing()) {
+			if (from != null) {
+				List<MatcherTransition> transitions;
+				if (from.getAllOutgoing().isEmpty())
+					transitions = from.collectOutgoingTransitions();
+				else
+					transitions = returning ? from.getOutgoingAfterReturn() : from.getOutgoing();
+				for (MatcherTransition transition : transitions) {
 					if (transition.getTarget().getGrammarElement() == to)
 						return Tuples.create(Collections.singletonList(transition), Collections.singletonList(from));
 					else if (transition.getTarget().isParserRuleCall()) {

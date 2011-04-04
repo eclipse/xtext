@@ -17,11 +17,9 @@ import org.eclipse.xtext.formatting.IElementMatcherProvider;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IAfterElement;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IBeforeElement;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IBetweenElements;
-import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementMatcher;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementMatcherEx1;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementPattern;
 import org.eclipse.xtext.formatting.impl.AbstractTokenStream;
-import org.eclipse.xtext.formatting.impl.ElementMatcherToDot;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.formatter.services.ElementMatcherTestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.formatter.services.ElementMatcherTestLanguageGrammarAccess.LoopElements;
@@ -471,5 +469,12 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		Patterns p = new Patterns();
 		p.after(g.getNestedStartSubAccess().getGroup());
 		assertEquals("#8 ! foo", match("#8 foo", p));
+	}
+
+	public void testNestedStart2() throws Exception {
+		Patterns p = new Patterns();
+		p.after(g.getNestedStartAccess().getGroup());
+		p.before(g.getNestedStartAccess().getGroup());
+		assertEquals("! #8 foo !", match("#8 foo", p));
 	}
 }
