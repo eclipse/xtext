@@ -16,6 +16,8 @@ import testdata.ExceptionSubclass;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
+import static java.util.Collections.*;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
@@ -34,6 +36,13 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	
 	public void testCurrying_01() throws Exception {
 		assertEvaluatesTo("123456", "[String p1, String p2, String p3, String p4, String p5, String p6| p1+p2+p3+p4+p5+p6].curry('1').curry('2').curry('3').curry('4').curry('5').curry('6').apply()");
+	}
+	
+	/*
+	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=341550
+	 */
+	public void testBug341550() throws Exception {
+		assertEvaluatesTo(emptyList(),"switch emptyList() { case emptyList() : emptyList() }");
 	}
 	
 	public void testGenerics_00() throws Exception {

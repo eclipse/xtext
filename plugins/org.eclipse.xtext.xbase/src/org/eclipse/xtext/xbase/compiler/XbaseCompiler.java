@@ -107,7 +107,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		for (XCatchClause catchClause : expr.getCatchClauses()) {
 			JvmTypeReference type = catchClause.getDeclaredParam().getParameterType();
 			final String name = declareNameInVariableScope(catchClause.getDeclaredParam(), b);
-			b.append(" catch (").append(type).append(" ").append(name).append(") { ");
+			b.append(" catch (");
+			serialize(type,expr,b,false,true);
+			b.append(" ").append(name).append(") { ");
 			b.increaseIndentation();
 			internalToJavaStatement(catchClause.getExpression(), b, true);
 			if (isReferenced && ! isPrimitiveVoid(catchClause.getExpression())) {
@@ -239,7 +241,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		internalToJavaStatement(expr.getForExpression(), b, true);
 		b.append("\nfor (");
 		JvmTypeReference paramType = getTypeProvider().getTypeForIdentifiable(expr.getDeclaredParam());
-		b.append(paramType);
+		serialize(paramType,expr,b,false,true);
 		b.append(" ");
 		String varName = declareNameInVariableScope(expr.getDeclaredParam(), b);
 		b.append(varName);
@@ -265,7 +267,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 					b.append("<");
 					for (int i = 0; i < expr.getTypeArguments().size(); i++) {
 						JvmTypeReference arg = expr.getTypeArguments().get(i);
-						b.append(arg);
+						serialize(arg, expr, b, false, true);
 						if (i + 1 < expr.getTypeArguments().size())
 							b.append(",");
 					}
@@ -356,7 +358,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		JvmTypeReference type = getTypeProvider().getType(expr);
 		String switchResultName = makeJavaIdentifier(b.declareVariable(Tuples.pair(expr,"result"), "switchResult"));
 		if (isReferenced) {
-			b.append("\n").append(type).append(" ").append(switchResultName).append(" = null;");
+			b.append("\n");
+			serialize(type, expr, b, false, true);
+			b.append(" ").append(switchResultName).append(" = null;");
 		}
 		
 		internalToJavaStatement(expr.getSwitch(), b, true);
@@ -368,7 +372,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			name = "__valOfSwitchOver";
 		}
 		JvmTypeReference typeReference = getTypeProvider().getType(expr.getSwitch());
-		b.append("\nfinal ").append(typeReference).append(" ");
+		b.append("\nfinal ");
+		serialize(typeReference, expr, b, false, true);
+		b.append(" ");
 		String variableName = b.declareVariable(expr, name);
 		b.append(variableName);
 		b.append(" = ");
