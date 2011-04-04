@@ -32,12 +32,12 @@ public class DomainmodelCompiler extends XbaseCompiler {
 	}
 	
 	@Override
-	protected boolean isVariableDeclarationRequired(XExpression expr) {
+	protected boolean isVariableDeclarationRequired(XExpression expr, IAppendable b) {
 		if (expr instanceof XAbstractFeatureCall 
 				&& ((XAbstractFeatureCall)expr).getFeature() instanceof JvmGenericType) {
 			return false;
 		}
-		return super.isVariableDeclarationRequired(expr);
+		return super.isVariableDeclarationRequired(expr,b);
 	}
 
 	@Override
