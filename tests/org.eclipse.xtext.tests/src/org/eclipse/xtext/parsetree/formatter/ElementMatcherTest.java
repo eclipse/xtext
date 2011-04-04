@@ -262,6 +262,13 @@ public class ElementMatcherTest extends AbstractXtextTests {
 		pattern.after(g.getRuleCallsSubAccess().getSubAssignment());
 		assertEquals("#2 ! sub ! foo", match("#2 sub foo", pattern));
 	}
+	
+	public void testRuleCalls10() throws Exception {
+		Patterns pattern = new Patterns();
+		pattern.before(g.getRuleCallsAccess().getCall1Assignment_3());
+		pattern.after(g.getRuleCallsAccess().getCall1Assignment_3());
+		assertEquals("#2 sub foo ass2 bar", match("#2 sub foo ass2 bar", pattern));
+	}
 
 	public void testOptionalCalls1() throws Exception {
 		OptionalCallsElements oce = g.getOptionalCallsAccess();
