@@ -44,12 +44,12 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 
 	public void testBinaryOperation_0() throws Exception {
 		XExpression expression = expression("1 + 'foo'");
-		helper.assertError(expression, XBINARY_OPERATION, INVALID_ARGUMENT_TYPES);
+		helper.assertError(expression, XSTRING_LITERAL, INCOMPATIBLE_TYPES);
 	}
 
 	public void testAssignment_0() throws Exception {
 		XExpression expression = expression("new testdata.Properties1().prop3 = 'foo'");
-		helper.assertError(expression, XASSIGNMENT, INVALID_ARGUMENT_TYPES);
+		helper.assertError(expression, XSTRING_LITERAL, INCOMPATIBLE_TYPES);
 	}
 
 	public void testAssignmentToFinalField() throws Exception {
@@ -106,7 +106,7 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 
 	public void testOperationMemberFeatureCall_3() throws Exception {
 		XExpression expression = expression("new testdata.Methods().method('foo')");
-		helper.assertError(expression, XMEMBER_FEATURE_CALL, INVALID_ARGUMENT_TYPES);
+		helper.assertError(expression, XSTRING_LITERAL, INCOMPATIBLE_TYPES);
 	}
 
 	public void testOperationMemberFeatureCall_4() throws Exception {
@@ -138,8 +138,8 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 
 	public void testOperationFeatureCall_3() throws Exception {
 		XExpression expression = expression("{ var this = new testdata.Methods() method('foo') }");
-		helper.assertError(((XBlockExpression) expression).getExpressions().get(1), XFEATURE_CALL,
-				INVALID_ARGUMENT_TYPES);
+		helper.assertError(((XBlockExpression) expression).getExpressions().get(1), XSTRING_LITERAL,
+				INCOMPATIBLE_TYPES);
 	}
 
 	public void testOperationFeatureCall_4() throws Exception {

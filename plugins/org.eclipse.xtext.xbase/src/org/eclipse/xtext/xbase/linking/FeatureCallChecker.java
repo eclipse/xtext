@@ -27,7 +27,6 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Strings;
@@ -76,9 +75,6 @@ public class FeatureCallChecker {
 
 	@Inject
 	private ITypeProvider typeProvider;
-
-	@Inject
-	private TypeReferences typeRefs;
 
 	@Inject
 	private FeatureCallToJavaMapping featureCall2JavaMapping;

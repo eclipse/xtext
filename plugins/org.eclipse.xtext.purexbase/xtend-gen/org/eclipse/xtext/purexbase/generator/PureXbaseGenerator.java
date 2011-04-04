@@ -1,5 +1,6 @@
 package org.eclipse.xtext.purexbase.generator;
 
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -13,8 +14,10 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
@@ -49,29 +52,45 @@ public class PureXbaseGenerator implements IGenerator {
   public StringConcatenation generateMain(final Model m) {
     StringConcatenation _xblockexpression = null;
     {
-      final ImportManager impMnr = new ImportManager(true);
-      final StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable(impMnr);
-      XbaseCompiler _compiler = _this.compiler;
+      ImportManager _importManager = new ImportManager(true);
+      final ImportManager impMnr = _importManager;
+      StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(impMnr);
+      final StringBuilderBasedAppendable appendable = _stringBuilderBasedAppendable;
       XBlockExpression _block = m.getBlock();
       final StringBuilderBasedAppendable typeConverted_appendable = (StringBuilderBasedAppendable)appendable;
-      TypeReferences _typeReferences = _this.typeReferences;
       final Model typeConverted_m = (Model)m;
-      JvmTypeReference _typeForName = _typeReferences.getTypeForName("void", typeConverted_m);
-      _compiler.compile(_block, typeConverted_appendable, _typeForName);
+      JvmTypeReference _typeForName = _this.typeReferences.getTypeForName("void", typeConverted_m);
+      _this.compiler.compile(_block, typeConverted_appendable, _typeForName);
       StringConcatenation builder = new StringConcatenation();
-      builder.append("\uFFFDimpMnr.imports.map(e|\'import \'+e+\';\\n\').elementsToString(\"\")\uFFFD");
-      builder.newLine();
+      List<String> _imports = impMnr.getImports();
+      final Function1<String,String> function = new Function1<String,String>() {
+          public String apply(String e) {
+            final String typeConverted_e = (String)e;
+            String _operator_plus = StringExtensions.operator_plus("import ", typeConverted_e);
+            String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ";\n");
+            return _operator_plus_1;
+          }
+        };
+      List<String> _map = ListExtensions.map(_imports, function);
+      String _elementsToString = IterableExtensions.elementsToString(_map, "");
+      builder.append(_elementsToString, "");
+      builder.newLineIfNotEmpty();
       builder.newLine();
       builder.append("@SuppressWarnings(\"all\")");
       builder.newLine();
-      builder.append("public class \uFFFDm.eResource.name\uFFFD {");
-      builder.newLine();
+      builder.append("public class ");
+      final Model typeConverted_m_1 = (Model)m;
+      Resource _eResource = typeConverted_m_1.eResource();
+      String _name = _this.name(_eResource);
+      builder.append(_name, "");
+      builder.append(" {");
+      builder.newLineIfNotEmpty();
       builder.append("\t");
       builder.append("public static void main(String[] args) {");
       builder.newLine();
       builder.append("\t\t");
-      builder.append("\uFFFDappendable\uFFFD");
-      builder.newLine();
+      builder.append(appendable, "		");
+      builder.newLineIfNotEmpty();
       builder.append("\t");
       builder.append("}");
       builder.newLine();

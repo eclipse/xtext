@@ -25,6 +25,13 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	protected abstract void assertEvaluatesTo(Object object, String string);
 	protected abstract void assertEvaluatesWithException(Class<? extends Throwable> class1, String string);
 	
+	/*
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341642
+	 */
+	public void testBug341642() throws Exception {
+		assertEvaluatesTo("a", "newArrayList('a', 'b', 'c').filter(a|a == 'a' || a == 'b').iterator.next");
+	}
+	
 	public void testGenerics_00() throws Exception {
 		assertEvaluatesTo("", "try {typeof(String).newInstance} catch(Exception e) {}");
 	}
