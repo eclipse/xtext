@@ -69,7 +69,7 @@ public class FormatterTest extends AbstractXtextTests {
 		// System.out.println(EmfFormatter.objToStr(node));
 		IFormattedRegion r = getNodeModelFormatter().format(node, offset, lengt);
 		String actual = model.substring(0, r.getOffset()) + r.getFormattedText()
-				+ model.substring(r.getLenght() + r.getOffset());
+				+ model.substring(r.getLength() + r.getOffset());
 		assertEquals(expected, actual);
 	}
 
