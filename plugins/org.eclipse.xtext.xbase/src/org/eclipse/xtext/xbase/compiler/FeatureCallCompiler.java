@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -24,11 +23,8 @@ import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
-import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xbase.XSwitchExpression;
-import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
 
@@ -51,7 +47,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			prepareSpreadingMemberFeatureCall((XMemberFeatureCall) expr, b);
 		} else {
 			prepareAllArguments(expr, b);
-			if (!isVariableDeclarationRequired(expr)) {
+			if (!isVariableDeclarationRequired(expr,b)) {
 				// nothing to do
 			} else {
 				if (isReferenced && !isPrimitiveVoid(expr)) {
@@ -72,19 +68,16 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 	
 	@Override
-	protected boolean isVariableDeclarationRequired(XExpression expr) {
+	protected boolean isVariableDeclarationRequired(XExpression expr, IAppendable b) {
 		if (expr instanceof XAssignment)
 			return true;
 		if (expr instanceof XAbstractFeatureCall) {
 			JvmIdentifiableElement feature = ((XAbstractFeatureCall)expr).getFeature();
-			if (feature instanceof XVariableDeclaration 
-				|| feature instanceof JvmFormalParameter
-				|| feature instanceof XCasePart 
-				|| feature instanceof XSwitchExpression
-				|| feature instanceof JvmField)
+			if (feature instanceof JvmField)
 				return false;
+			return b.getName(feature)==null;
 		}
-		return super.isVariableDeclarationRequired(expr);
+		return super.isVariableDeclarationRequired(expr,b);
 	}
 
 	protected void prepareSpreadingMemberFeatureCall(XMemberFeatureCall expr, IAppendable b) {
@@ -108,7 +101,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 		for (XExpression arg : expr.getExplicitArguments()) {
 			//TODO remove me!
-			if (arg instanceof XAbstractFeatureCall && !(((XAbstractFeatureCall)arg).getFeature() instanceof JvmField) && !isVariableDeclarationRequired(arg)) {
+			if (arg instanceof XAbstractFeatureCall && !(((XAbstractFeatureCall)arg).getFeature() instanceof JvmField) && !isVariableDeclarationRequired(arg,b)) {
 				JvmTypeReference expectedType = getTypeProvider().getExpectedType(arg);
 				JvmTypeReference type = getTypeProvider().getType(arg);
 				//TODO use JvmConformanceComputer (i.e. without Xbase conformance)
@@ -144,7 +137,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			throw new UnsupportedOperationException();
 			//			b.append(getVarName(call));
 		} else {
-			if (!isVariableDeclarationRequired(call)) {
+			if (!isVariableDeclarationRequired(call,b)) {
 				if (call.getFeature() instanceof JvmField) {
 					if (isStatic(call.getFeature())) {
 						b.append(((JvmFeature) call.getFeature()).getDeclaringType());

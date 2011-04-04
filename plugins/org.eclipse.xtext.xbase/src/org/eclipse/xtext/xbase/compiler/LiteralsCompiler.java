@@ -71,7 +71,7 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	}
 	
 	@Override
-	protected boolean isVariableDeclarationRequired(XExpression expr) {
+	protected boolean isVariableDeclarationRequired(XExpression expr, IAppendable b) {
 		if (expr instanceof XBooleanLiteral
 			|| expr instanceof XStringLiteral
 			|| expr instanceof XIntLiteral
@@ -79,6 +79,6 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 			|| expr instanceof XClosure
 			|| expr instanceof XNullLiteral)
 			return false;
-		return super.isVariableDeclarationRequired(expr);
+		return super.isVariableDeclarationRequired(expr,b);
 	}
 }
