@@ -106,7 +106,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			if (element==null) {
 				element = provider.get();
 				boolean rawType = (Boolean) ((Triple<?, ?, ?>) key).getThird();
-				if (element==null || !isResolved((JvmTypeReference) element, rawType)) {
+				if (element==null || (element instanceof JvmTypeReference && !isResolved((JvmTypeReference) element, rawType))) {
 					if (logger.isDebugEnabled()) {
 						logger.debug(getDebugIndentation(rawType) + "cache skip: " + element);
 					}

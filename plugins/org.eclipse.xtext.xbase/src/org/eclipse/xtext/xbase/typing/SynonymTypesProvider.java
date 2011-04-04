@@ -44,7 +44,7 @@ public class SynonymTypesProvider {
 	private SuperTypeCollector superTypeCollector;
 
 	public Iterable<JvmTypeReference> getSynonymTypes(JvmTypeReference type) {
-		if (typeRefs.is(type, Void.class) || typeRefs.is(type,Void.TYPE)) {
+		if (type == null || typeRefs.is(type, Void.class) || typeRefs.is(type,Void.TYPE)) {
 			return emptySet();
 		} else if (primitives.isPrimitive(type)) {
 			return singleton(primitives.asWrapperTypeIfPrimitive(type));
