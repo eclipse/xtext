@@ -240,14 +240,14 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 	protected void compile(XtendFunction obj, IAppendable appendable) {
 		appendable.openScope();
-		JvmTypeReference returnType = getTypeProvider().getTypeForIdentifiable(obj);
+		JvmTypeReference returnType = associations.getDirectlyInferredOperation(obj).getReturnType();
 		String name = obj.getName();
 		if (obj.isDispatch()) {
 			name = "_" + name;
 		}
 		appendable.append("\n\n").append("public ");
 		appendTypeParameterDeclaration(obj.getTypeParameters(), appendable);
-		appendable.append(returnType).append(" ").append(name).append("(");
+		appendable.append(resolveMultiType(returnType)).append(" ").append(name).append("(");
 		final EList<JvmFormalParameter> parameters = obj.getParameters();
 		declareParameters(parameters, appendable);
 		appendable.append(") ");
