@@ -428,7 +428,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	 * 
 	 */
 	protected JvmTypeReference getCommonType(List<JvmTypeReference> types) {
-		if (types.size() <= 1) {
+		if (types.isEmpty()) {
+			return null;
+		}
+		if (types.size() == 1) {
 			JvmTypeReference result = getTypeConformanceComputer().getCommonSuperType(types);
 			return result;
 		}
@@ -810,46 +813,49 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		// Don't go into closures
 	}
 	
-	protected void _earlyExits(XReturnExpression expr, EarlyExitAcceptor a) {
+	protected void _earlyExits(XReturnExpression expr, EarlyExitAcceptor acceptor) {
 		if (expr.getExpression()!=null) {
 			JvmTypeReference type = getType(expr.getExpression());
-			a.returns.add(type);
+			if (type != null)
+				acceptor.returns.add(type);
 		}
 	}
 	
-	protected void _earlyExits(XThrowExpression expr, EarlyExitAcceptor a) {
+	protected void _earlyExits(XThrowExpression expr, EarlyExitAcceptor acceptor) {
 		if (expr.getExpression()!=null) {
 			JvmTypeReference type = getType(expr.getExpression());
-			a.thrown.add(type);
+			if (type != null)
+				acceptor.thrown.add(type);
 		}
 	}
 	
-	protected void _earlyExits(XAbstractFeatureCall expr, EarlyExitAcceptor a) {
+	protected void _earlyExits(XAbstractFeatureCall expr, EarlyExitAcceptor acceptor) {
 		if (expr.getFeature() instanceof JvmOperation) {
-			JvmOperation op  =(JvmOperation) expr.getFeature();
-			EList<JvmTypeReference> exceptions = op.getExceptions();
-			a.thrown.addAll(exceptions);
+			JvmOperation op = (JvmOperation) expr.getFeature();
+			// TODO is a declared exception an early exit?
+			List<JvmTypeReference> exceptions = op.getExceptions();
+			acceptor.thrown.addAll(exceptions);
 		}
-		_earlyExits((EObject)expr, a);
+		_earlyExits((EObject)expr, acceptor);
 	}
 	
-	protected void _earlyExits(XTryCatchFinallyExpression expr, EarlyExitAcceptor a) {
-		EarlyExitAcceptor acceptor = new EarlyExitAcceptor();
-		internalCollectEarlyExits(expr.getExpression(), acceptor);
-		a.returns.addAll(acceptor.returns);
+	protected void _earlyExits(XTryCatchFinallyExpression expr, EarlyExitAcceptor acceptor) {
+		EarlyExitAcceptor innerAcceptor = new EarlyExitAcceptor();
+		internalCollectEarlyExits(expr.getExpression(), innerAcceptor);
+		acceptor.returns.addAll(innerAcceptor.returns);
 		for (XCatchClause catchClause : expr.getCatchClauses()) {
-			Iterator<JvmTypeReference> iterator = acceptor.thrown.iterator();
+			Iterator<JvmTypeReference> iterator = innerAcceptor.thrown.iterator();
 			while (iterator.hasNext()) {
 				JvmTypeReference thrown = iterator.next();
 				if (getTypeConformanceComputer().isConformant(catchClause.getDeclaredParam().getParameterType(), thrown)) {
 					iterator.remove();
 				}
 			}
-			internalCollectEarlyExits(catchClause.getExpression(), a);
+			internalCollectEarlyExits(catchClause.getExpression(), acceptor);
 		}
-		a.thrown.addAll(acceptor.thrown);
+		acceptor.thrown.addAll(innerAcceptor.thrown);
 		if (expr.getFinallyExpression()!=null)
-			internalCollectEarlyExits(expr.getFinallyExpression(), a);
+			internalCollectEarlyExits(expr.getFinallyExpression(), acceptor);
 	}
 	
 	protected TypesFactory getTypesFactory() {

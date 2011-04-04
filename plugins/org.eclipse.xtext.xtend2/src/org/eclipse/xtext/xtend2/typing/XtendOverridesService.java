@@ -45,14 +45,15 @@ public class XtendOverridesService {
 	private TypeReferences typeReferences;
 	
 	public JvmOperation findOverriddenOperation(XtendFunction function) {
-		final JvmParameterizedTypeReference typeRef = typeReferences
-				.createTypeRef(xtend2jvmAssociations.getDirectlyInferredOperation(function).getDeclaringType());
+		JvmOperation inferredOperation = xtend2jvmAssociations.getDirectlyInferredOperation(function);
+		if (inferredOperation == null)
+			return null;
+		final JvmParameterizedTypeReference typeRef = typeReferences.createTypeRef(inferredOperation.getDeclaringType());
 		TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(typeRef);
-		JvmOperation inferredJvmOperation = xtend2jvmAssociations.getDirectlyInferredOperation(function);
 		if (function.getDeclaringType().getExtends() != null || !function.getDeclaringType().getImplements().isEmpty()) {
 			for (JvmOperation superOperation : allSuperOperations(function.getDeclaringType())) {
 				if (superOperation.getVisibility() != JvmVisibility.PRIVATE) {
-					if (featureOverridesService.isOverridden(inferredJvmOperation, superOperation, typeArgumentContext,
+					if (featureOverridesService.isOverridden(inferredOperation, superOperation, typeArgumentContext,
 							false)) {
 						return superOperation;
 					}

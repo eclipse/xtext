@@ -427,7 +427,7 @@ public class TypeArgumentContextProvider {
 		if (ref instanceof JvmWildcardTypeReference) {
 			EList<JvmTypeConstraint> constraints = ((JvmWildcardTypeReference) ref).getConstraints();
 			for (JvmTypeConstraint constraint : constraints) {
-				if(constraint.getTypeReference().getType() instanceof JvmTypeParameter)
+				if(constraint.getTypeReference() != null && constraint.getTypeReference().getType() instanceof JvmTypeParameter)
 					return (JvmTypeParameter) constraint.getTypeReference().getType();
 			}
 		}

@@ -41,7 +41,7 @@ public class TypeProviderErrorTest extends AbstractXtend2TestCase {
 		while(contents.hasNext()) {
 			EObject object = (EObject) contents.next();
 			if (object instanceof JvmIdentifiableElement) {
-				// no ecxeption
+				// no exception
 				typeProvider.getTypeForIdentifiable((JvmIdentifiableElement) object);
 			}
 		}
@@ -54,6 +54,73 @@ public class TypeProviderErrorTest extends AbstractXtend2TestCase {
 				"class NoException {\n" + 
 				"	dispatch transform(EClass model) {\n" + 
 				"		model.ETypeParameters.map(e|transform");
+		Iterator<Object> contents = EcoreUtil.getAllContents(file.eResource(), true);
+		while(contents.hasNext()) {
+			EObject object = (EObject) contents.next();
+			if (object instanceof XExpression) {
+				XExpression expression = (XExpression) object;
+				typeProvider.getExpectedType(expression);
+			}
+		}
+	}
+	
+	public void testNoException_03() throws Exception {
+		XtendFile file = file(" \n" + 
+				"import static java.util.Arrays.*\n" + 
+				"import static extension java.util.Collections.*\n" + 
+				"class NoException {\n" + 
+				"	@Inject\n" + 
+				"	ArrayList as myList\n" + 
+				"	@Inject extension String\n" + 
+				"	boolean something(int i) {\n" + 
+				"	  if (i.indexOf() == 0) {\n" + 
+				"	    return myList.contains(i)\n" + 
+				"	  } \n" + 
+				"	  asList(i)\n" + 
+				"	  i.singletonList()\n" + 
+				"	  false\n" + 
+				"	}\n" + 
+				"}");
+		Iterator<Object> contents = EcoreUtil.getAllContents(file.eResource(), true);
+		while(contents.hasNext()) {
+			EObject object = (EObject) contents.next();
+			if (object instanceof XExpression) {
+				XExpression expression = (XExpression) object;
+				typeProvider.getCommonReturnType(expression, true);
+			}
+		}
+	}
+	
+	public void testNoException_04() throws Exception {
+		XtendFile file = file("class NoException { dispatch");
+		Iterator<Object> contents = EcoreUtil.getAllContents(file.eResource(), true);
+		while(contents.hasNext()) {
+			EObject object = (EObject) contents.next();
+			if (object instanceof JvmIdentifiableElement) {
+				JvmIdentifiableElement element = (JvmIdentifiableElement) object;
+				typeProvider.getTypeForIdentifiable(element);
+			}
+		}
+	}
+	
+	public void testNoException_05() throws Exception {
+		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.typing\n" + 
+				"import org.eclipse.emf.ecore.EClass\n" + 
+				"import org.eclipse.emf.ecore.EPackage\n" + 
+				"import org.eclipse.emf.ecore.EStructuralFeature\n" + 
+				"import org.eclipse.emf.ecore.EObject\n" + 
+				"class NoException {\n" + 
+				"	dispatchtransform(EClass model) {\n" + 
+				"		model.ETypeParameters.map(e|transform(e))\n" + 
+				"	}\n" + 
+				"	dispatch transform(EPackage packageDecl) {\n" + 
+				"		packageDecl.eContents.map(e|transform(e))\n" + 
+				"	}\n" + 
+				"	dispatch transform(EStructuralFeature entity) {\n" + 
+				"		val inferredType = null\n" + 
+				"		newArrayList(inferredType as EObject) 	 \n" + 
+				"	}\n" + 
+				"}");
 		Iterator<Object> contents = EcoreUtil.getAllContents(file.eResource(), true);
 		while(contents.hasNext()) {
 			EObject object = (EObject) contents.next();
