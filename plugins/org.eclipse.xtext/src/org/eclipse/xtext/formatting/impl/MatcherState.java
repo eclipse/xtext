@@ -13,7 +13,9 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IAfterElement;
@@ -85,21 +87,24 @@ public class MatcherState extends AbstractNFAState<MatcherState, MatcherTransiti
 	}
 
 	protected boolean isOptional(AbstractElement ele) {
-		if (GrammarUtil.isOptionalCardinality(ele))
+		if (GrammarUtil.isOptionalCardinality(ele) || ele instanceof Action)
 			return true;
-		List<EObject> children = ele.eContents();
-		if (children.isEmpty() && getBuilder().filter(ele))
-			return true;
-		if (ele instanceof Alternatives) {
-			for (AbstractElement a : ((Alternatives) ele).getElements())
-				if (isOptional(a))
-					return true;
-			return false;
-		}
-		for (EObject e : children)
-			if (e instanceof AbstractElement && !isOptional((AbstractElement) e))
+		if (ele instanceof CompoundElement) {
+			List<EObject> children = ele.eContents();
+			if (children.isEmpty() && getBuilder().filter(ele))
+				return true;
+			if (ele instanceof Alternatives) {
+				for (AbstractElement a : ((Alternatives) ele).getElements())
+					if (isOptional(a))
+						return true;
 				return false;
-		return true;
+			}
+			for (EObject e : children)
+				if (e instanceof AbstractElement && !isOptional((AbstractElement) e))
+					return false;
+			return true;
+		} else
+			return false;
 	}
 
 	public boolean isParserRuleCall() {
