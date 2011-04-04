@@ -60,6 +60,11 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		XtendClass clazz = clazz("class Foo implements test.SomeInterface { override foo() { true } }");
 		helper.assertNoErrors(clazz.getMembers().get(0));
 	}
+	
+	public void testReturnTypeCompatibility_06() throws Exception {
+		XtendClass clazz = clazz("class Foo { dispatch void a(String x) {} dispatch a(Object x) {return null} }");
+		helper.assertError(clazz.getMembers().get(1), Xtend2Package.Literals.XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE);
+	}
 
 	public void testAssignmentToFunctionParameter() throws Exception {
 		XtendFunction function = function("void foo(int bar) { bar=7 }");

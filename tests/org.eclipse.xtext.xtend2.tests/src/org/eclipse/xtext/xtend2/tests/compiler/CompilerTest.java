@@ -307,12 +307,15 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		}
 	}
 
-	// TODO the return types of dispatch functions should be conformant
-	public void testDispatchFunction_05() throws Exception {
-		final String definition = 
-			"dispatch void a(String x) {}" +
-			"dispatch a(Object x) {return null}";
-		invokeAndExpect2(null, definition, "a", new Object());
+	public void testDispatchFunction_06() throws Exception {
+		final String definition = "foo(p1)} " +
+				"dispatch foo (String string) {\n" + 
+				"    string + string\n" + 
+				"}\n" + 
+				"dispatch foo (Object o) {\n" + 
+				"    null\n";
+		invokeAndExpect("zonkzonk", definition, "zonk");
+		invokeAndExpect(null, definition, Integer.valueOf(1));
 	}
 	
 	public void testGenericFunction_01() throws Exception {

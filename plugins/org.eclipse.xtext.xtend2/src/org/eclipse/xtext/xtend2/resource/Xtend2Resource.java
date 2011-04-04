@@ -17,6 +17,7 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -25,11 +26,12 @@ import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.resource.XbaseResource;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
+import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
+import org.eclipse.xtext.xtend2.typing.XtendOverridesService;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 import com.google.common.base.Function;
@@ -47,7 +49,7 @@ public class Xtend2Resource extends XbaseResource {
 	private ITypeProvider typeProvider;
 	
 	@Inject
-	private IJvmModelAssociations associations;
+	private IXtend2JvmAssociations associations;
 	
 	@Inject
 	private XbaseTypeConformanceComputer typeConformanceComputer;
@@ -60,6 +62,9 @@ public class Xtend2Resource extends XbaseResource {
 	
 	@Inject
 	private DispatchingSupport dispatchingSupport;
+	
+	@Inject
+	private XtendOverridesService overridesService;
 	
 	private Set<String> computingFragments = newLinkedHashSet();
 
@@ -92,7 +97,7 @@ public class Xtend2Resource extends XbaseResource {
 						return from.getParameters().get(index).getParameterType();
 					}
 				});
-				if (commonType.eContainer()!=null) {
+				if (commonType != null && commonType.eContainer()!=null) {
 					commonType = EcoreUtil2.cloneWithProxies(commonType);
 				}
 				return commonType;
@@ -104,14 +109,38 @@ public class Xtend2Resource extends XbaseResource {
 		}
 	}
 	
-	// TODO typeConformanceComputer.getCommonSuperType may return null - this case needs to be addressed
 	protected JvmTypeReference inferReturnType(JvmOperation jvmOperation) {
 		List<JvmTypeReference> associatedReturnTypes = newArrayList();
 		final Iterable<XtendFunction> associatedElements = filter(associations.getSourceElements(jvmOperation), XtendFunction.class);
+		boolean wasDispatch = false;
 		for (XtendFunction func : associatedElements) {
 			JvmTypeReference type = typeProvider.getTypeForIdentifiable(func);
-			if (type != null)
+			if (type != null && !(type instanceof JvmAnyTypeReference))
 				associatedReturnTypes.add(type);
+			wasDispatch |= func.isDispatch();
+		}
+		if (wasDispatch) {
+			if (jvmOperation.getSimpleName().startsWith("_")) {
+				for(XtendFunction func: associatedElements) {
+					if (func.getReturnType() != null) {
+						return EcoreUtil2.cloneWithProxies(func.getReturnType());	
+					}
+					JvmOperation overriddenOperation = overridesService.findOverriddenOperation(jvmOperation);
+					if (overriddenOperation != null) {
+						JvmTypeReference result = overriddenOperation.getReturnType();
+						return EcoreUtil2.cloneWithProxies(result);
+					}
+					JvmOperation dispatchOperation = associations.getDispatchOperation(func);
+					JvmTypeReference result = dispatchOperation.getReturnType();
+					return EcoreUtil2.cloneWithProxies(result);
+				}
+			} else {
+				JvmOperation overriddenOperation = overridesService.findOverriddenOperation(jvmOperation);
+				if (overriddenOperation != null) {
+					JvmTypeReference result = overriddenOperation.getReturnType();
+					return EcoreUtil2.cloneWithProxies(result);
+				}
+			}
 		}
 		if (!associatedReturnTypes.isEmpty()) {
 			JvmTypeReference commonSuperType = typeConformanceComputer.getCommonSuperType(associatedReturnTypes);
@@ -120,7 +149,6 @@ public class Xtend2Resource extends XbaseResource {
 		return null;
 	}
 	
-	// TODO typeConformanceComputer.getCommonSuperType may return null - this case needs to be addressed
 	protected <T> JvmTypeReference commonType(Iterable<? extends T> iterable, Function<T, JvmTypeReference> mapping) {
 		List<JvmTypeReference> references = newArrayList();
 		for (T element : iterable) {

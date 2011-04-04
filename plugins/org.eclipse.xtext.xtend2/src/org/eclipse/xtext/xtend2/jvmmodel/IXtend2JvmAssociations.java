@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtend2.jvmmodel;
 import static com.google.common.collect.Iterables.*;
 
 import java.util.Iterator;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -34,6 +35,8 @@ public interface IXtend2JvmAssociations extends IJvmModelAssociations {
 	
 	JvmOperation getDirectlyInferredOperation(XtendFunction xtendFunction);
 	
+	JvmOperation getDispatchOperation(XtendFunction dispatchFunction);
+	
 	XtendClass getXtendClass(JvmGenericType jvmType);
 	
 	XtendFunction getXtendFunction(JvmOperation jvmOperation);
@@ -51,6 +54,21 @@ public interface IXtend2JvmAssociations extends IJvmModelAssociations {
 		public JvmOperation getDirectlyInferredOperation(XtendFunction xtendFunction) {
 			return getFirstOrNull(getJvmElements(xtendFunction), JvmOperation.class);
 		}
+		
+		public JvmOperation getDispatchOperation(XtendFunction dispatchFunction) {
+			if (!dispatchFunction.isDispatch())
+				throw new IllegalArgumentException("Function " + dispatchFunction.getSimpleName() + " is not a dispatch function");
+			Set<EObject> jvmElements = getJvmElements(dispatchFunction);
+			for(EObject candidate: jvmElements) {
+				if (candidate instanceof JvmOperation) {
+					// other operation has '_' prefix
+					if (dispatchFunction.getSimpleName().equals(((JvmOperation) candidate).getSimpleName())) {
+						return (JvmOperation) candidate;
+					}
+				}
+			}
+			return null;
+		}
 
 		public XtendClass getXtendClass(JvmGenericType jvmType) {
 			return (XtendClass) getPrimarySourceElement(jvmType);
@@ -64,7 +82,6 @@ public interface IXtend2JvmAssociations extends IJvmModelAssociations {
 			Iterator<T> iterator = filter(elements, type).iterator();
 			return iterator.hasNext() ? iterator.next() : null;
 		}
-
 
 	}
 	

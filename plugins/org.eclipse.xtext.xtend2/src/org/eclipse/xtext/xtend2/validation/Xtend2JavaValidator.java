@@ -40,6 +40,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
+import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -298,6 +299,21 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 				Multimap<List<JvmType>, JvmOperation> signatures = HashMultimap.create();
 				for (JvmOperation jvmOperation : collection) {
 					signatures.put(getParamTypes(jvmOperation, true), jvmOperation);
+					XtendFunction function = associations.getXtendFunction(jvmOperation);
+					if (function != null) {
+						JvmTypeReference functionReturnType = getTypeProvider().getTypeForIdentifiable(function);
+						if (functionReturnType != null) {
+							if (!isConformant(jvmOperation.getReturnType(), functionReturnType)) {
+								error("Incompatible return type of dispatch method. Expected " + 
+										getNameOfTypes(jvmOperation.getReturnType()) + " but was "
+										+ canonicalName(functionReturnType), 
+										function, 
+										Xtend2Package.Literals.XTEND_FUNCTION__RETURN_TYPE, 
+										ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+										INCOMPATIBLE_RETURN_TYPE);
+							}
+						}
+					}
 				}
 				for (final List<JvmType> paramTypes : signatures.keySet()) {
 					Collection<JvmOperation> ops = signatures.get(paramTypes);
