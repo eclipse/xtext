@@ -55,7 +55,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	@Inject
 	private TypeArgumentContextProvider typeArgumentContextProvider;
 	
-	// this class if final because of the assumptions that are made in
+	// this class is final because of the assumptions that are made in
 	// equals and hashcode
 	protected static final class ImmutableLinkedItem {
 		
@@ -106,13 +106,11 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			if (element==null) {
 				element = provider.get();
 				boolean rawType = (Boolean) ((Triple<?, ?, ?>) key).getThird();
-				if (element instanceof JvmTypeReference) {
-					if (!isResolved((JvmTypeReference) element, rawType)) {
-						if (logger.isDebugEnabled()) {
-							logger.debug(getDebugIndentation(rawType) + "cache skip: " + element);
-						}
-						return element;
+				if (element==null || !isResolved((JvmTypeReference) element, rawType)) {
+					if (logger.isDebugEnabled()) {
+						logger.debug(getDebugIndentation(rawType) + "cache skip: " + element);
 					}
+					return element;
 				}
 				if (logger.isDebugEnabled()) {
 					logger.debug(getDebugIndentation(rawType) + "cache: " + element);
