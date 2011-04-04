@@ -108,12 +108,21 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 
 	@Check
 	public void checkClassPath(XtendClass clazz) {
+		final JvmGenericType listType = (JvmGenericType) typeRefs.findDeclaredType(List.class.getName(), clazz);
+		if (listType == null || listType.getTypeParameters().isEmpty()) {
+			error("Xtend requires Java source level 1.5.", clazz,
+					XTEND_CLASS__NAME, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
+		}
 		if (typeRefs.findDeclaredType("org.eclipse.xtext.xtend2.lib.StringConcatenation", clazz) == null) {
 			error("Mandatory library bundle 'org.eclipse.xtext.xtend2.lib' not found on the classpath.", clazz,
 					XTEND_CLASS__NAME, IssueCodes.XTEND_LIB_NOT_ON_CLASSPATH);
 		}
 		if (typeRefs.findDeclaredType("org.eclipse.xtext.xbase.lib.ObjectExtensions", clazz) == null) {
 			error("Mandatory library bundle 'org.eclipse.xtext.xbase.lib' not found on the classpath.", clazz,
+					XTEND_CLASS__NAME, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
+		}
+		if (typeRefs.findDeclaredType(Inject.class.getName(), clazz) == null) {
+			error("Mandatory library bundle 'com.google.inject' not found on the classpath.", clazz,
 					XTEND_CLASS__NAME, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		}
 	}
