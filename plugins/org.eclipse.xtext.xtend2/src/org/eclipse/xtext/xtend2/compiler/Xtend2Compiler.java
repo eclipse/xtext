@@ -528,7 +528,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 				appendable.append(varName);
 				appendable.append(" = true;");
 				if (before != null) {
-					writeExpression(before, indentation);
+					writeExpression(before, indentation, false);
 				}
 				appendable.decreaseIndentation();
 				appendable.append("\n");
@@ -536,7 +536,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 				if (forLoop.getSeparator() != null) {
 					appendable.append(" else {");
 					appendable.increaseIndentation();
-					writeExpression(separator, indentation);
+					writeExpression(separator, indentation, true);
 					appendable.decreaseIndentation();
 					appendable.append("\n");
 					appendable.append("}");
@@ -560,7 +560,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 				appendable.append(varName);
 				appendable.append(") {");
 				appendable.increaseIndentation();
-				writeExpression(after, indentation);
+				writeExpression(after, indentation, false);
 				appendable.decreaseIndentation();
 				appendable.append("\n");
 				appendable.append("}");
@@ -573,15 +573,18 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 		@Override
 		public void acceptExpression(XExpression expression, CharSequence indentation) {
-			writeExpression(expression, indentation);
+			writeExpression(expression, indentation, false);
 		}
 
-		protected void writeExpression(XExpression expression, CharSequence indentation) {
+		protected void writeExpression(XExpression expression, CharSequence indentation, boolean immediate) {
 			internalToJavaStatement(expression, appendable, true);
 			if (!getTypeReferences().is(getTypeProvider().getType(expression), Void.TYPE)) {
 				appendable.append("\n");
 				appendable.append(variableName);
-				appendable.append(".append(");
+				if (immediate)
+					appendable.append(".appendImmediate(");
+				else
+					appendable.append(".append(");
 				internalToJavaExpression(expression, appendable);
 				appendable.append(", \"");
 				appendable.append(indentation.toString());

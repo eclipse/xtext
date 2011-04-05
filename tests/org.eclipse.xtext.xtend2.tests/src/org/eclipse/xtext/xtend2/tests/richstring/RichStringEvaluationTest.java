@@ -177,7 +177,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 							if (before != null)
 								acceptExpression(before, indentation);
 						} else if (separator != null) {
-							acceptExpression(separator, indentation);
+							acceptExpression(separator, indentation, true);
 						}
 						return true;
 					}
@@ -188,9 +188,23 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 
 		@Override
 		public void acceptExpression(XExpression expression, CharSequence indentation) {
+			acceptExpression(expression, indentation, false);
+		}
+		
+		protected void acceptExpression(XExpression expression, CharSequence indentation, boolean immediate) {
 			XStringLiteral literal = (XStringLiteral) expression;
 			String value = literal.getValue();
 			value = value.replaceAll("\\n", "\n" + indentation);
+			if (immediate) {
+				if (currentLine.toString().matches("^\\s*$")) {
+					for(int at = builder.length() - 1; at >= 0; at++) {
+						if (builder.charAt(at) == '\n') {
+							builder.insert(at, value);
+							return;
+						}
+					}
+				}
+			}
 			for(int i = value.length() - 1; i >= 0; i--) {
 				if (value.charAt(i) == '\n') {
 					builder.append(currentLine);
