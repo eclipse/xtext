@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 
+import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
@@ -158,6 +159,11 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 			public Adapter caseXExpression(XExpression object)
 			{
 				return createXExpressionAdapter();
+			}
+			@Override
+			public Adapter caseXBlockExpression(XBlockExpression object)
+			{
+				return createXBlockExpressionAdapter();
 			}
 			@Override
 			public Adapter caseXStringLiteral(XStringLiteral object)
@@ -412,6 +418,21 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXExpressionAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XBlockExpression <em>XBlock Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xbase.XBlockExpression
+	 * @generated
+	 */
+	public Adapter createXBlockExpressionAdapter()
 	{
 		return null;
 	}

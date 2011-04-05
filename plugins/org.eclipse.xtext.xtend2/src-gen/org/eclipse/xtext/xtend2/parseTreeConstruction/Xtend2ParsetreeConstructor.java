@@ -2530,7 +2530,7 @@ protected class CreateExtensionInfo_CreateExpressionAssignment_2 extends Assignm
 
 /************ begin Rule Parameter ****************
  *
- * // type is mandatory in Xtend
+ * // type is mandatory for Xtend functions
  * Parameter returns types::JvmFormalParameter:
  * 	parameterType=JvmTypeReference name=ID;
  *
@@ -2819,13 +2819,13 @@ protected class XStringLiteral_RichStringParserRuleCall_1 extends RuleCallToken 
 /************ begin Rule RichString ****************
  *
  * RichString returns xbase::XExpression:
- * 	{RichString} (elements+=RichStringLiteral | elements+=RichStringLiteralStart elements+=RichStringPart
- * 	(elements+=RichStringLiteralInbetween elements+=RichStringPart)* elements+=RichStringLiteralEnd);
+ * 	{RichString} (expressions+=RichStringLiteral | expressions+=RichStringLiteralStart expressions+=RichStringPart
+ * 	(expressions+=RichStringLiteralInbetween expressions+=RichStringPart)* expressions+=RichStringLiteralEnd);
  *
  **/
 
-// {RichString} (elements+=RichStringLiteral | elements+=RichStringLiteralStart elements+=RichStringPart
-// (elements+=RichStringLiteralInbetween elements+=RichStringPart)* elements+=RichStringLiteralEnd)
+// {RichString} (expressions+=RichStringLiteral | expressions+=RichStringLiteralStart expressions+=RichStringPart
+// (expressions+=RichStringLiteralInbetween expressions+=RichStringPart)* expressions+=RichStringLiteralEnd)
 protected class RichString_Group extends GroupToken {
 	
 	public RichString_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2880,8 +2880,8 @@ protected class RichString_RichStringAction_0 extends ActionToken  {
 	}
 }
 
-// elements+=RichStringLiteral | elements+=RichStringLiteralStart elements+=RichStringPart
-// (elements+=RichStringLiteralInbetween elements+=RichStringPart)* elements+=RichStringLiteralEnd
+// expressions+=RichStringLiteral | expressions+=RichStringLiteralStart expressions+=RichStringPart
+// (expressions+=RichStringLiteralInbetween expressions+=RichStringPart)* expressions+=RichStringLiteralEnd
 protected class RichString_Alternatives_1 extends AlternativesToken {
 
 	public RichString_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2896,7 +2896,7 @@ protected class RichString_Alternatives_1 extends AlternativesToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new RichString_ElementsAssignment_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new RichString_ExpressionsAssignment_1_0(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new RichString_Group_1_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
@@ -2904,16 +2904,16 @@ protected class RichString_Alternatives_1 extends AlternativesToken {
 
 }
 
-// elements+=RichStringLiteral
-protected class RichString_ElementsAssignment_1_0 extends AssignmentToken  {
+// expressions+=RichStringLiteral
+protected class RichString_ExpressionsAssignment_1_0 extends AssignmentToken  {
 	
-	public RichString_ElementsAssignment_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RichString_ExpressionsAssignment_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getRichStringAccess().getElementsAssignment_1_0();
+		return grammarAccess.getRichStringAccess().getExpressionsAssignment_1_0();
 	}
 
     @Override
@@ -2926,13 +2926,13 @@ protected class RichString_ElementsAssignment_1_0 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("elements",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("elements");
+		if((value = eObjectConsumer.getConsumable("expressions",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("expressions");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getRichStringLiteralRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getRichStringAccess().getElementsRichStringLiteralParserRuleCall_1_0_0(); 
+				element = grammarAccess.getRichStringAccess().getExpressionsRichStringLiteralParserRuleCall_1_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2950,8 +2950,8 @@ protected class RichString_ElementsAssignment_1_0 extends AssignmentToken  {
 	}	
 }
 
-// elements+=RichStringLiteralStart elements+=RichStringPart (elements+=RichStringLiteralInbetween
-// elements+=RichStringPart)* elements+=RichStringLiteralEnd
+// expressions+=RichStringLiteralStart expressions+=RichStringPart (expressions+=RichStringLiteralInbetween
+// expressions+=RichStringPart)* expressions+=RichStringLiteralEnd
 protected class RichString_Group_1_1 extends GroupToken {
 	
 	public RichString_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2966,23 +2966,23 @@ protected class RichString_Group_1_1 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new RichString_ElementsAssignment_1_1_3(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new RichString_ExpressionsAssignment_1_1_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// elements+=RichStringLiteralStart
-protected class RichString_ElementsAssignment_1_1_0 extends AssignmentToken  {
+// expressions+=RichStringLiteralStart
+protected class RichString_ExpressionsAssignment_1_1_0 extends AssignmentToken  {
 	
-	public RichString_ElementsAssignment_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RichString_ExpressionsAssignment_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getRichStringAccess().getElementsAssignment_1_1_0();
+		return grammarAccess.getRichStringAccess().getExpressionsAssignment_1_1_0();
 	}
 
     @Override
@@ -2995,13 +2995,13 @@ protected class RichString_ElementsAssignment_1_1_0 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("elements",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("elements");
+		if((value = eObjectConsumer.getConsumable("expressions",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("expressions");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getRichStringLiteralStartRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getRichStringAccess().getElementsRichStringLiteralStartParserRuleCall_1_1_0_0(); 
+				element = grammarAccess.getRichStringAccess().getExpressionsRichStringLiteralStartParserRuleCall_1_1_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3019,16 +3019,16 @@ protected class RichString_ElementsAssignment_1_1_0 extends AssignmentToken  {
 	}	
 }
 
-// elements+=RichStringPart
-protected class RichString_ElementsAssignment_1_1_1 extends AssignmentToken  {
+// expressions+=RichStringPart
+protected class RichString_ExpressionsAssignment_1_1_1 extends AssignmentToken  {
 	
-	public RichString_ElementsAssignment_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RichString_ExpressionsAssignment_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getRichStringAccess().getElementsAssignment_1_1_1();
+		return grammarAccess.getRichStringAccess().getExpressionsAssignment_1_1_1();
 	}
 
     @Override
@@ -3041,13 +3041,13 @@ protected class RichString_ElementsAssignment_1_1_1 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("elements",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("elements");
+		if((value = eObjectConsumer.getConsumable("expressions",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("expressions");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getRichStringPartRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getRichStringAccess().getElementsRichStringPartParserRuleCall_1_1_1_0(); 
+				element = grammarAccess.getRichStringAccess().getExpressionsRichStringPartParserRuleCall_1_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3059,13 +3059,13 @@ protected class RichString_ElementsAssignment_1_1_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new RichString_ElementsAssignment_1_1_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new RichString_ExpressionsAssignment_1_1_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
-// (elements+=RichStringLiteralInbetween elements+=RichStringPart)*
+// (expressions+=RichStringLiteralInbetween expressions+=RichStringPart)*
 protected class RichString_Group_1_1_2 extends GroupToken {
 	
 	public RichString_Group_1_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3080,23 +3080,23 @@ protected class RichString_Group_1_1_2 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new RichString_ElementsAssignment_1_1_2_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new RichString_ExpressionsAssignment_1_1_2_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// elements+=RichStringLiteralInbetween
-protected class RichString_ElementsAssignment_1_1_2_0 extends AssignmentToken  {
+// expressions+=RichStringLiteralInbetween
+protected class RichString_ExpressionsAssignment_1_1_2_0 extends AssignmentToken  {
 	
-	public RichString_ElementsAssignment_1_1_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RichString_ExpressionsAssignment_1_1_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getRichStringAccess().getElementsAssignment_1_1_2_0();
+		return grammarAccess.getRichStringAccess().getExpressionsAssignment_1_1_2_0();
 	}
 
     @Override
@@ -3109,13 +3109,13 @@ protected class RichString_ElementsAssignment_1_1_2_0 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("elements",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("elements");
+		if((value = eObjectConsumer.getConsumable("expressions",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("expressions");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getRichStringLiteralInbetweenRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getRichStringAccess().getElementsRichStringLiteralInbetweenParserRuleCall_1_1_2_0_0(); 
+				element = grammarAccess.getRichStringAccess().getExpressionsRichStringLiteralInbetweenParserRuleCall_1_1_2_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3128,22 +3128,22 @@ protected class RichString_ElementsAssignment_1_1_2_0 extends AssignmentToken  {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new RichString_Group_1_1_2(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new RichString_ElementsAssignment_1_1_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new RichString_ExpressionsAssignment_1_1_1(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
-// elements+=RichStringPart
-protected class RichString_ElementsAssignment_1_1_2_1 extends AssignmentToken  {
+// expressions+=RichStringPart
+protected class RichString_ExpressionsAssignment_1_1_2_1 extends AssignmentToken  {
 	
-	public RichString_ElementsAssignment_1_1_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RichString_ExpressionsAssignment_1_1_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getRichStringAccess().getElementsAssignment_1_1_2_1();
+		return grammarAccess.getRichStringAccess().getExpressionsAssignment_1_1_2_1();
 	}
 
     @Override
@@ -3156,13 +3156,13 @@ protected class RichString_ElementsAssignment_1_1_2_1 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("elements",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("elements");
+		if((value = eObjectConsumer.getConsumable("expressions",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("expressions");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getRichStringPartRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getRichStringAccess().getElementsRichStringPartParserRuleCall_1_1_2_1_0(); 
+				element = grammarAccess.getRichStringAccess().getExpressionsRichStringPartParserRuleCall_1_1_2_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3174,23 +3174,23 @@ protected class RichString_ElementsAssignment_1_1_2_1 extends AssignmentToken  {
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new RichString_ElementsAssignment_1_1_2_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new RichString_ExpressionsAssignment_1_1_2_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 
-// elements+=RichStringLiteralEnd
-protected class RichString_ElementsAssignment_1_1_3 extends AssignmentToken  {
+// expressions+=RichStringLiteralEnd
+protected class RichString_ExpressionsAssignment_1_1_3 extends AssignmentToken  {
 	
-	public RichString_ElementsAssignment_1_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RichString_ExpressionsAssignment_1_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getRichStringAccess().getElementsAssignment_1_1_3();
+		return grammarAccess.getRichStringAccess().getExpressionsAssignment_1_1_3();
 	}
 
     @Override
@@ -3203,13 +3203,13 @@ protected class RichString_ElementsAssignment_1_1_3 extends AssignmentToken  {
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("elements",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("elements");
+		if((value = eObjectConsumer.getConsumable("expressions",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("expressions");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getRichStringLiteralEndRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getRichStringAccess().getElementsRichStringLiteralEndParserRuleCall_1_1_3_0(); 
+				element = grammarAccess.getRichStringAccess().getExpressionsRichStringLiteralEndParserRuleCall_1_1_3_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3222,7 +3222,7 @@ protected class RichString_ElementsAssignment_1_1_3 extends AssignmentToken  {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new RichString_Group_1_1_2(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new RichString_ElementsAssignment_1_1_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new RichString_ExpressionsAssignment_1_1_1(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -3637,13 +3637,13 @@ protected class RichStringLiteralEnd_ValueAssignment_1 extends AssignmentToken  
 /************ begin Rule InternalRichString ****************
  *
  * InternalRichString returns xbase::XExpression:
- * 	{RichString} (elements+=InternalRichStringLiteral | elements+=RichStringLiteralInbetween (elements+=RichStringPart
- * 	elements+=RichStringLiteralInbetween)+);
+ * 	{RichString} (expressions+=InternalRichStringLiteral | expressions+=RichStringLiteralInbetween
+ * 	(expressions+=RichStringPart expressions+=RichStringLiteralInbetween)+);
  *
  **/
 
-// {RichString} (elements+=InternalRichStringLiteral | elements+=RichStringLiteralInbetween (elements+=RichStringPart
-// elements+=RichStringLiteralInbetween)+)
+// {RichString} (expressions+=InternalRichStringLiteral | expressions+=RichStringLiteralInbetween
+// (expressions+=RichStringPart expressions+=RichStringLiteralInbetween)+)
 protected class InternalRichString_Group extends GroupToken {
 	
 	public InternalRichString_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3698,8 +3698,8 @@ protected class InternalRichString_RichStringAction_0 extends ActionToken  {
 	}
 }
 
-// elements+=InternalRichStringLiteral | elements+=RichStringLiteralInbetween (elements+=RichStringPart
-// elements+=RichStringLiteralInbetween)+
+// expressions+=InternalRichStringLiteral | expressions+=RichStringLiteralInbetween (expressions+=RichStringPart
+// expressions+=RichStringLiteralInbetween)+
 protected class InternalRichString_Alternatives_1 extends AlternativesToken {
 
 	public InternalRichString_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3714,7 +3714,7 @@ protected class InternalRichString_Alternatives_1 extends AlternativesToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new InternalRichString_ElementsAssignment_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new InternalRichString_ExpressionsAssignment_1_0(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new InternalRichString_Group_1_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
@@ -3722,16 +3722,16 @@ protected class InternalRichString_Alternatives_1 extends AlternativesToken {
 
 }
 
-// elements+=InternalRichStringLiteral
-protected class InternalRichString_ElementsAssignment_1_0 extends AssignmentToken  {
+// expressions+=InternalRichStringLiteral
+protected class InternalRichString_ExpressionsAssignment_1_0 extends AssignmentToken  {
 	
-	public InternalRichString_ElementsAssignment_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public InternalRichString_ExpressionsAssignment_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getInternalRichStringAccess().getElementsAssignment_1_0();
+		return grammarAccess.getInternalRichStringAccess().getExpressionsAssignment_1_0();
 	}
 
     @Override
@@ -3744,13 +3744,13 @@ protected class InternalRichString_ElementsAssignment_1_0 extends AssignmentToke
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("elements",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("elements");
+		if((value = eObjectConsumer.getConsumable("expressions",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("expressions");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getInternalRichStringLiteralRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getInternalRichStringAccess().getElementsInternalRichStringLiteralParserRuleCall_1_0_0(); 
+				element = grammarAccess.getInternalRichStringAccess().getExpressionsInternalRichStringLiteralParserRuleCall_1_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3768,7 +3768,7 @@ protected class InternalRichString_ElementsAssignment_1_0 extends AssignmentToke
 	}	
 }
 
-// elements+=RichStringLiteralInbetween (elements+=RichStringPart elements+=RichStringLiteralInbetween)+
+// expressions+=RichStringLiteralInbetween (expressions+=RichStringPart expressions+=RichStringLiteralInbetween)+
 protected class InternalRichString_Group_1_1 extends GroupToken {
 	
 	public InternalRichString_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3790,16 +3790,16 @@ protected class InternalRichString_Group_1_1 extends GroupToken {
 
 }
 
-// elements+=RichStringLiteralInbetween
-protected class InternalRichString_ElementsAssignment_1_1_0 extends AssignmentToken  {
+// expressions+=RichStringLiteralInbetween
+protected class InternalRichString_ExpressionsAssignment_1_1_0 extends AssignmentToken  {
 	
-	public InternalRichString_ElementsAssignment_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public InternalRichString_ExpressionsAssignment_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getInternalRichStringAccess().getElementsAssignment_1_1_0();
+		return grammarAccess.getInternalRichStringAccess().getExpressionsAssignment_1_1_0();
 	}
 
     @Override
@@ -3812,13 +3812,13 @@ protected class InternalRichString_ElementsAssignment_1_1_0 extends AssignmentTo
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("elements",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("elements");
+		if((value = eObjectConsumer.getConsumable("expressions",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("expressions");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getRichStringLiteralInbetweenRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getInternalRichStringAccess().getElementsRichStringLiteralInbetweenParserRuleCall_1_1_0_0(); 
+				element = grammarAccess.getInternalRichStringAccess().getExpressionsRichStringLiteralInbetweenParserRuleCall_1_1_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3836,7 +3836,7 @@ protected class InternalRichString_ElementsAssignment_1_1_0 extends AssignmentTo
 	}	
 }
 
-// (elements+=RichStringPart elements+=RichStringLiteralInbetween)+
+// (expressions+=RichStringPart expressions+=RichStringLiteralInbetween)+
 protected class InternalRichString_Group_1_1_1 extends GroupToken {
 	
 	public InternalRichString_Group_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3851,23 +3851,23 @@ protected class InternalRichString_Group_1_1_1 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new InternalRichString_ElementsAssignment_1_1_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new InternalRichString_ExpressionsAssignment_1_1_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// elements+=RichStringPart
-protected class InternalRichString_ElementsAssignment_1_1_1_0 extends AssignmentToken  {
+// expressions+=RichStringPart
+protected class InternalRichString_ExpressionsAssignment_1_1_1_0 extends AssignmentToken  {
 	
-	public InternalRichString_ElementsAssignment_1_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public InternalRichString_ExpressionsAssignment_1_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getInternalRichStringAccess().getElementsAssignment_1_1_1_0();
+		return grammarAccess.getInternalRichStringAccess().getExpressionsAssignment_1_1_1_0();
 	}
 
     @Override
@@ -3880,13 +3880,13 @@ protected class InternalRichString_ElementsAssignment_1_1_1_0 extends Assignment
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("elements",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("elements");
+		if((value = eObjectConsumer.getConsumable("expressions",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("expressions");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getRichStringPartRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getInternalRichStringAccess().getElementsRichStringPartParserRuleCall_1_1_1_0_0(); 
+				element = grammarAccess.getInternalRichStringAccess().getExpressionsRichStringPartParserRuleCall_1_1_1_0_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3899,22 +3899,22 @@ protected class InternalRichString_ElementsAssignment_1_1_1_0 extends Assignment
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new InternalRichString_Group_1_1_1(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new InternalRichString_ElementsAssignment_1_1_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new InternalRichString_ExpressionsAssignment_1_1_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
-// elements+=RichStringLiteralInbetween
-protected class InternalRichString_ElementsAssignment_1_1_1_1 extends AssignmentToken  {
+// expressions+=RichStringLiteralInbetween
+protected class InternalRichString_ExpressionsAssignment_1_1_1_1 extends AssignmentToken  {
 	
-	public InternalRichString_ElementsAssignment_1_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public InternalRichString_ExpressionsAssignment_1_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getInternalRichStringAccess().getElementsAssignment_1_1_1_1();
+		return grammarAccess.getInternalRichStringAccess().getExpressionsAssignment_1_1_1_1();
 	}
 
     @Override
@@ -3927,13 +3927,13 @@ protected class InternalRichString_ElementsAssignment_1_1_1_1 extends Assignment
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("elements",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("elements");
+		if((value = eObjectConsumer.getConsumable("expressions",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("expressions");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getRichStringLiteralInbetweenRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getInternalRichStringAccess().getElementsRichStringLiteralInbetweenParserRuleCall_1_1_1_1_0(); 
+				element = grammarAccess.getInternalRichStringAccess().getExpressionsRichStringLiteralInbetweenParserRuleCall_1_1_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3945,7 +3945,7 @@ protected class InternalRichString_ElementsAssignment_1_1_1_1 extends Assignment
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new InternalRichString_ElementsAssignment_1_1_1_0(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new InternalRichString_ExpressionsAssignment_1_1_1_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -4061,11 +4061,11 @@ protected class InternalRichStringLiteral_ValueAssignment_1 extends AssignmentTo
 /************ begin Rule RichStringPart ****************
  *
  * RichStringPart returns xbase::XExpression:
- * 	XExpression | RichStringForLoop | RichStringIf;
+ * 	XExpressionInsideBlock | RichStringForLoop | RichStringIf;
  *
  **/
 
-// XExpression | RichStringForLoop | RichStringIf
+// XExpressionInsideBlock | RichStringForLoop | RichStringIf
 protected class RichStringPart_Alternatives extends AlternativesToken {
 
 	public RichStringPart_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4080,7 +4080,7 @@ protected class RichStringPart_Alternatives extends AlternativesToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new RichStringPart_XExpressionParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new RichStringPart_XExpressionInsideBlockParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new RichStringPart_RichStringForLoopParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
 			case 2: return new RichStringPart_RichStringIfParserRuleCall_2(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
@@ -4114,6 +4114,7 @@ protected class RichStringPart_Alternatives extends AlternativesToken {
 		   getEObject().eClass() != grammarAccess.getXTryCatchFinallyExpressionAccess().getXTryCatchFinallyExpressionAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXTypeLiteralAccess().getXTypeLiteralAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXUnaryOperationAccess().getXUnaryOperationAction_0_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXVariableDeclarationAccess().getXVariableDeclarationAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXWhileExpressionAccess().getXWhileExpressionAction_0().getType().getClassifier())
 			return null;
 		return eObjectConsumer;
@@ -4121,22 +4122,22 @@ protected class RichStringPart_Alternatives extends AlternativesToken {
 
 }
 
-// XExpression
-protected class RichStringPart_XExpressionParserRuleCall_0 extends RuleCallToken {
+// XExpressionInsideBlock
+protected class RichStringPart_XExpressionInsideBlockParserRuleCall_0 extends RuleCallToken {
 	
-	public RichStringPart_XExpressionParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RichStringPart_XExpressionInsideBlockParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getRichStringPartAccess().getXExpressionParserRuleCall_0();
+		return grammarAccess.getRichStringPartAccess().getXExpressionInsideBlockParserRuleCall_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new XExpression_XAssignmentParserRuleCall(this, this, 0, inst);
+			case 0: return new XExpressionInsideBlock_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4166,9 +4167,10 @@ protected class RichStringPart_XExpressionParserRuleCall_0 extends RuleCallToken
 		   getEObject().eClass() != grammarAccess.getXTryCatchFinallyExpressionAccess().getXTryCatchFinallyExpressionAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXTypeLiteralAccess().getXTypeLiteralAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXUnaryOperationAccess().getXUnaryOperationAction_0_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getXVariableDeclarationAccess().getXVariableDeclarationAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getXWhileExpressionAccess().getXWhileExpressionAction_0().getType().getClassifier())
 			return null;
-		if(checkForRecursion(XExpression_XAssignmentParserRuleCall.class, eObjectConsumer)) return null;
+		if(checkForRecursion(XExpressionInsideBlock_Alternatives.class, eObjectConsumer)) return null;
 		return eObjectConsumer;
 	}
 	
@@ -4259,13 +4261,14 @@ protected class RichStringPart_RichStringIfParserRuleCall_2 extends RuleCallToke
 /************ begin Rule RichStringForLoop ****************
  *
  * RichStringForLoop returns xbase::XExpression:
- * 	{RichStringForLoop} "FOR" declaredParam=JvmFormalParameter ":" forExpression=XExpression
+ * 	{RichStringForLoop} "FOR" declaredParam=JvmFormalParameter ":" forExpression=XExpression ("BEFORE"
+ * 	before=XExpression)? ("SEPARATOR" separator=XExpression)? ("AFTER" after=XExpression)?
  * 	eachExpression=InternalRichString "ENDFOR";
  *
  **/
 
-// {RichStringForLoop} "FOR" declaredParam=JvmFormalParameter ":" forExpression=XExpression
-// eachExpression=InternalRichString "ENDFOR"
+// {RichStringForLoop} "FOR" declaredParam=JvmFormalParameter ":" forExpression=XExpression ("BEFORE" before=XExpression)?
+// ("SEPARATOR" separator=XExpression)? ("AFTER" after=XExpression)? eachExpression=InternalRichString "ENDFOR"
 protected class RichStringForLoop_Group extends GroupToken {
 	
 	public RichStringForLoop_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4280,7 +4283,7 @@ protected class RichStringForLoop_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new RichStringForLoop_ENDFORKeyword_6(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new RichStringForLoop_ENDFORKeyword_9(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4456,16 +4459,292 @@ protected class RichStringForLoop_ForExpressionAssignment_4 extends AssignmentTo
 	}	
 }
 
-// eachExpression=InternalRichString
-protected class RichStringForLoop_EachExpressionAssignment_5 extends AssignmentToken  {
+// ("BEFORE" before=XExpression)?
+protected class RichStringForLoop_Group_5 extends GroupToken {
 	
-	public RichStringForLoop_EachExpressionAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RichStringForLoop_Group_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getRichStringForLoopAccess().getGroup_5();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new RichStringForLoop_BeforeAssignment_5_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "BEFORE"
+protected class RichStringForLoop_BEFOREKeyword_5_0 extends KeywordToken  {
+	
+	public RichStringForLoop_BEFOREKeyword_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getRichStringForLoopAccess().getBEFOREKeyword_5_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new RichStringForLoop_ForExpressionAssignment_4(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// before=XExpression
+protected class RichStringForLoop_BeforeAssignment_5_1 extends AssignmentToken  {
+	
+	public RichStringForLoop_BeforeAssignment_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getRichStringForLoopAccess().getEachExpressionAssignment_5();
+		return grammarAccess.getRichStringForLoopAccess().getBeforeAssignment_5_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XExpression_XAssignmentParserRuleCall(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("before",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("before");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getXExpressionRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getRichStringForLoopAccess().getBeforeXExpressionParserRuleCall_5_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new RichStringForLoop_BEFOREKeyword_5_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+// ("SEPARATOR" separator=XExpression)?
+protected class RichStringForLoop_Group_6 extends GroupToken {
+	
+	public RichStringForLoop_Group_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getRichStringForLoopAccess().getGroup_6();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new RichStringForLoop_SeparatorAssignment_6_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "SEPARATOR"
+protected class RichStringForLoop_SEPARATORKeyword_6_0 extends KeywordToken  {
+	
+	public RichStringForLoop_SEPARATORKeyword_6_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getRichStringForLoopAccess().getSEPARATORKeyword_6_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new RichStringForLoop_Group_5(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new RichStringForLoop_ForExpressionAssignment_4(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// separator=XExpression
+protected class RichStringForLoop_SeparatorAssignment_6_1 extends AssignmentToken  {
+	
+	public RichStringForLoop_SeparatorAssignment_6_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getRichStringForLoopAccess().getSeparatorAssignment_6_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XExpression_XAssignmentParserRuleCall(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("separator",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("separator");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getXExpressionRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getRichStringForLoopAccess().getSeparatorXExpressionParserRuleCall_6_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new RichStringForLoop_SEPARATORKeyword_6_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+// ("AFTER" after=XExpression)?
+protected class RichStringForLoop_Group_7 extends GroupToken {
+	
+	public RichStringForLoop_Group_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getRichStringForLoopAccess().getGroup_7();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new RichStringForLoop_AfterAssignment_7_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "AFTER"
+protected class RichStringForLoop_AFTERKeyword_7_0 extends KeywordToken  {
+	
+	public RichStringForLoop_AFTERKeyword_7_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getRichStringForLoopAccess().getAFTERKeyword_7_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new RichStringForLoop_Group_6(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new RichStringForLoop_Group_5(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new RichStringForLoop_ForExpressionAssignment_4(lastRuleCallOrigin, this, 2, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// after=XExpression
+protected class RichStringForLoop_AfterAssignment_7_1 extends AssignmentToken  {
+	
+	public RichStringForLoop_AfterAssignment_7_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getRichStringForLoopAccess().getAfterAssignment_7_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new XExpression_XAssignmentParserRuleCall(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("after",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("after");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getXExpressionRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getRichStringForLoopAccess().getAfterXExpressionParserRuleCall_7_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new RichStringForLoop_AFTERKeyword_7_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+// eachExpression=InternalRichString
+protected class RichStringForLoop_EachExpressionAssignment_8 extends AssignmentToken  {
+	
+	public RichStringForLoop_EachExpressionAssignment_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getRichStringForLoopAccess().getEachExpressionAssignment_8();
 	}
 
     @Override
@@ -4484,7 +4763,7 @@ protected class RichStringForLoop_EachExpressionAssignment_5 extends AssignmentT
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getInternalRichStringRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getRichStringForLoopAccess().getEachExpressionInternalRichStringParserRuleCall_5_0(); 
+				element = grammarAccess.getRichStringForLoopAccess().getEachExpressionInternalRichStringParserRuleCall_8_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -4496,28 +4775,31 @@ protected class RichStringForLoop_EachExpressionAssignment_5 extends AssignmentT
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new RichStringForLoop_ForExpressionAssignment_4(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new RichStringForLoop_Group_7(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new RichStringForLoop_Group_6(lastRuleCallOrigin, next, actIndex, consumed);
+			case 2: return new RichStringForLoop_Group_5(lastRuleCallOrigin, next, actIndex, consumed);
+			case 3: return new RichStringForLoop_ForExpressionAssignment_4(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
 // "ENDFOR"
-protected class RichStringForLoop_ENDFORKeyword_6 extends KeywordToken  {
+protected class RichStringForLoop_ENDFORKeyword_9 extends KeywordToken  {
 	
-	public RichStringForLoop_ENDFORKeyword_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public RichStringForLoop_ENDFORKeyword_9(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getRichStringForLoopAccess().getENDFORKeyword_6();
+		return grammarAccess.getRichStringForLoopAccess().getENDFORKeyword_9();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new RichStringForLoop_EachExpressionAssignment_5(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new RichStringForLoop_EachExpressionAssignment_8(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}

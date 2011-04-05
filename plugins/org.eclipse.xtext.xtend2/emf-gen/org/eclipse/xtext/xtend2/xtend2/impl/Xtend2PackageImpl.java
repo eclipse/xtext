@@ -444,16 +444,6 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRichString_Elements()
-	{
-		return (EReference)richStringEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getRichStringLiteral()
 	{
 		return richStringLiteralEClass;
@@ -467,6 +457,36 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	public EClass getRichStringForLoop()
 	{
 		return richStringForLoopEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRichStringForLoop_Separator()
+	{
+		return (EReference)richStringForLoopEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRichStringForLoop_Before()
+	{
+		return (EReference)richStringForLoopEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRichStringForLoop_After()
+	{
+		return (EReference)richStringForLoopEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -669,11 +689,13 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		createEReference(xtendFunctionEClass, XTEND_FUNCTION__CREATE_EXTENSION_INFO);
 
 		richStringEClass = createEClass(RICH_STRING);
-		createEReference(richStringEClass, RICH_STRING__ELEMENTS);
 
 		richStringLiteralEClass = createEClass(RICH_STRING_LITERAL);
 
 		richStringForLoopEClass = createEClass(RICH_STRING_FOR_LOOP);
+		createEReference(richStringForLoopEClass, RICH_STRING_FOR_LOOP__SEPARATOR);
+		createEReference(richStringForLoopEClass, RICH_STRING_FOR_LOOP__BEFORE);
+		createEReference(richStringForLoopEClass, RICH_STRING_FOR_LOOP__AFTER);
 
 		richStringIfEClass = createEClass(RICH_STRING_IF);
 		createEReference(richStringIfEClass, RICH_STRING_IF__IF);
@@ -732,7 +754,7 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		xtendMemberEClass.getESuperTypes().add(theTypesPackage.getJvmIdentifiableElement());
 		xtendFunctionEClass.getESuperTypes().add(this.getXtendMember());
 		xtendFunctionEClass.getESuperTypes().add(theTypesPackage.getJvmTypeParameterDeclarator());
-		richStringEClass.getESuperTypes().add(theXbasePackage.getXExpression());
+		richStringEClass.getESuperTypes().add(theXbasePackage.getXBlockExpression());
 		richStringLiteralEClass.getESuperTypes().add(theXbasePackage.getXStringLiteral());
 		richStringForLoopEClass.getESuperTypes().add(theXbasePackage.getXForLoopExpression());
 		richStringIfEClass.getESuperTypes().add(theXbasePackage.getXExpression());
@@ -780,11 +802,13 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		initEReference(getXtendFunction_CreateExtensionInfo(), this.getCreateExtensionInfo(), null, "createExtensionInfo", null, 0, 1, XtendFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(richStringEClass, RichString.class, "RichString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRichString_Elements(), theXbasePackage.getXExpression(), null, "elements", null, 0, -1, RichString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(richStringLiteralEClass, RichStringLiteral.class, "RichStringLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(richStringForLoopEClass, RichStringForLoop.class, "RichStringForLoop", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRichStringForLoop_Separator(), theXbasePackage.getXExpression(), null, "separator", null, 0, 1, RichStringForLoop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRichStringForLoop_Before(), theXbasePackage.getXExpression(), null, "before", null, 0, 1, RichStringForLoop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRichStringForLoop_After(), theXbasePackage.getXExpression(), null, "after", null, 0, 1, RichStringForLoop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(richStringIfEClass, RichStringIf.class, "RichStringIf", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRichStringIf_If(), theXbasePackage.getXExpression(), null, "if", null, 0, 1, RichStringIf.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -93,15 +93,31 @@ public class StringConcatenation implements CharSequence {
 				}
 			}
 		}
-		
+		segments.clear();
 	}
 	
 	@Override
 	public String toString() {
+		trimTrailingEmptySegments();
 		StringBuilder builder = new StringBuilder(length);
 		for(String segment: segments)
 			builder.append(segment);
 		return builder.toString();
+	}
+
+	protected void trimTrailingEmptySegments() {
+		for(int i = segments.size() - 1; i >= 0; i--) {
+			String segment = segments.get(i);
+			if (lineDelimiter.equals(segment)) {
+				segments.subList(i + 1, segments.size()).clear();
+				return;
+			}
+			for(int j = 0; j < segment.length(); j++) {
+				if (!Character.isWhitespace(segment.charAt(j))) {
+					return;
+				}
+			}
+		}
 	}
 
 	public int length() {

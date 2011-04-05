@@ -38,7 +38,7 @@ public class InitialTemplateIndentationComputer extends Xtend2Switch<String> {
 	@Override
 	public String caseRichString(RichString object) {
 		String result = null;
-		List<XExpression> elements = object.getElements();
+		List<XExpression> elements = object.getExpressions();
 		for(int i= 0; i< elements.size(); i++) {
 			XExpression element = elements.get(i);
 			String elementResult = doSwitch(element);
@@ -87,7 +87,7 @@ public class InitialTemplateIndentationComputer extends Xtend2Switch<String> {
 				// some tools tend to right trim text files by default (e.g. git)
 				// that's why we ignore empty lines
 				RichString completeString = (RichString) object.eContainer();
-				List<XExpression> siblings = completeString.getElements();
+				List<XExpression> siblings = completeString.getExpressions();
 				if (siblings.get(siblings.size() - 1) != object) {
 					result = getBetterString(result, leadingWS.toString());	
 				}

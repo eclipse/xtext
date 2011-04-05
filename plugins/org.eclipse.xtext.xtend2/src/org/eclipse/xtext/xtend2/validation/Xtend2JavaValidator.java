@@ -20,7 +20,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -30,21 +32,19 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
-import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
@@ -62,6 +62,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -81,16 +82,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	private TypeArgumentContextProvider typeArgumentContextProvider;
 
 	@Inject
-	private TypesFactory typesFactory;
-
-	@Inject
-	private TypeReferences typeRefs;
-
-	@Inject
 	private RichStringProcessor richStringProcessor;
-
-	@Inject
-	private TypeConformanceComputer conformanceComputer;
 
 	@Inject
 	private IXtend2JvmAssociations associations;
@@ -99,29 +91,49 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	private XtendOverridesService overridesService;
 
 	@Inject
-	private IEarlyExitComputer earlyExitComputer;
+	private DispatchingSupport dispatchingSupport;
+
+	@Inject
+	private Primitives primitives;
+	
+	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.copyOf(
+			Iterables.concat(
+					super.getTypeConformanceCheckedReferences(),
+					ImmutableSet.of(
+							Xtend2Package.Literals.RICH_STRING_FOR_LOOP__AFTER,
+							Xtend2Package.Literals.RICH_STRING_FOR_LOOP__BEFORE,
+							Xtend2Package.Literals.RICH_STRING_FOR_LOOP__SEPARATOR,
+							Xtend2Package.Literals.RICH_STRING_IF__IF,
+							Xtend2Package.Literals.RICH_STRING_ELSE_IF__IF
+					)
+			));
 	
 	@Override
 	protected List<EPackage> getEPackages() {
 		return newArrayList(Xtend2Package.eINSTANCE, XbasePackage.eINSTANCE);
 	}
+	
+	@Override
+	protected Set<EReference> getTypeConformanceCheckedReferences() {
+		return typeConformanceCheckedReferences;
+	}
 
 	@Check
 	public void checkClassPath(XtendClass clazz) {
-		final JvmGenericType listType = (JvmGenericType) typeRefs.findDeclaredType(List.class.getName(), clazz);
+		final JvmGenericType listType = (JvmGenericType) getTypeRefs().findDeclaredType(List.class.getName(), clazz);
 		if (listType == null || listType.getTypeParameters().isEmpty()) {
 			error("Xtend requires Java source level 1.5.", clazz,
 					XTEND_CLASS__NAME, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		}
-		if (typeRefs.findDeclaredType("org.eclipse.xtext.xtend2.lib.StringConcatenation", clazz) == null) {
+		if (getTypeRefs().findDeclaredType("org.eclipse.xtext.xtend2.lib.StringConcatenation", clazz) == null) {
 			error("Mandatory library bundle 'org.eclipse.xtext.xtend2.lib' not found on the classpath.", clazz,
 					XTEND_CLASS__NAME, IssueCodes.XTEND_LIB_NOT_ON_CLASSPATH);
 		}
-		if (typeRefs.findDeclaredType("org.eclipse.xtext.xbase.lib.ObjectExtensions", clazz) == null) {
+		if (getTypeRefs().findDeclaredType("org.eclipse.xtext.xbase.lib.ObjectExtensions", clazz) == null) {
 			error("Mandatory library bundle 'org.eclipse.xtext.xbase.lib' not found on the classpath.", clazz,
 					XTEND_CLASS__NAME, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		}
-		if (typeRefs.findDeclaredType(Inject.class.getName(), clazz) == null) {
+		if (getTypeRefs().findDeclaredType(Inject.class.getName(), clazz) == null) {
 			error("Mandatory library bundle 'com.google.inject' not found on the classpath.", clazz,
 					XTEND_CLASS__NAME, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		}
@@ -174,7 +186,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 
 	@Check
 	public void checkDuplicateAndOverridenFunctions(XtendClass xtendClass) {
-		JvmParameterizedTypeReference typeReference = typesFactory.createJvmParameterizedTypeReference();
+		JvmParameterizedTypeReference typeReference = getTypesFactory().createJvmParameterizedTypeReference();
 		final JvmGenericType inferredType = associations.getInferredType(xtendClass);
 		typeReference.setType(inferredType);
 		TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(typeReference);
@@ -207,7 +219,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	
 	@Override
 	protected boolean isImplicitReturn(XExpression expr) {
-		return (expr.eContainer() instanceof XtendFunction || expr.eContainer() instanceof XClosure) && !earlyExitComputer.isEarlyExit(expr);
+		return (expr.eContainer() instanceof XtendFunction || expr.eContainer() instanceof XClosure) && !getEarlyExitComputer().isEarlyExit(expr);
 	}
 
 	@Check
@@ -224,10 +236,10 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 					XTEND_MEMBER__NAME, MISSING_OVERRIDE);
 		if (function.getReturnType()==null)
 			return;
-		TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(typeRefs
+		TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(getTypeRefs()
 				.createTypeRef(associations.getDirectlyInferredOperation(function).getDeclaringType()));
 		JvmTypeReference returnTypeUpperBound = typeArgumentContext.getUpperBound(overriddenOperation.getReturnType(), function);
-		if (!conformanceComputer.isConformant(returnTypeUpperBound, function.getReturnType())) {
+		if (!isConformant(returnTypeUpperBound, function.getReturnType())) {
 			error("The return type is incompatible with "
 					+ overriddenOperation.getIdentifier(), function, XTEND_FUNCTION__RETURN_TYPE,
 					INCOMPATIBLE_RETURN_TYPE);
@@ -286,12 +298,6 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 			}
 		}
 	}
-
-	@Inject
-	private DispatchingSupport dispatchingSupport;
-
-	@Inject
-	private Primitives primitives;
 
 	@Check
 	public void checkCaseFunctions(XtendClass clazz) {
@@ -353,5 +359,41 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 		}
 		return types;
 	}
+
+	@Check
+	protected void checkNoReturnsInCreateExtensions(XtendFunction func) {
+		if (func.getCreateExtensionInfo()==null)
+			return;
+		List<XReturnExpression> found = newArrayList();
+		collectReturnExpressions(func.getCreateExtensionInfo().getCreateExpression(), found);
+		for (XReturnExpression xReturnExpression : found) {
+			error("Return is not allowed in creation expression",xReturnExpression, null, INVALID_EARLY_EXIT);
+		}
+		
+		found.clear();
+		collectReturnExpressions(func.getExpression(), found);
+		for (XReturnExpression ret : found) {
+			if (ret.getExpression()!=null) {
+				error("Return with expression is not allowed within an initializer of a create function.",ret, null, INVALID_EARLY_EXIT);
+			}
+		}
+	}
 	
+	@Override
+	public void checkInnerExpressions(XBlockExpression block) {
+		if (block instanceof RichString)
+			return;
+		super.checkInnerExpressions(block);
+	}
+	
+	protected void collectReturnExpressions(EObject expr, List<XReturnExpression> found) {
+		if (expr instanceof XReturnExpression) {
+			found.add((XReturnExpression) expr);
+		} else if (expr instanceof XClosure) {
+			return;
+		}
+		for (EObject child : expr.eContents()) {
+			collectReturnExpressions(child, found);
+		}
+	}
 }

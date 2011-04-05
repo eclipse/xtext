@@ -1041,16 +1041,16 @@ ruleRichString returns [EObject current=null]
 )((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRichStringAccess().getElementsRichStringLiteralParserRuleCall_1_0_0()); 
+	        newCompositeNode(grammarAccess.getRichStringAccess().getExpressionsRichStringLiteralParserRuleCall_1_0_0()); 
 	    }
-		lv_elements_1_0=ruleRichStringLiteral		{
+		lv_expressions_1_0=ruleRichStringLiteral		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRichStringRule());
 	        }
        		add(
        			$current, 
-       			"elements",
-        		lv_elements_1_0, 
+       			"expressions",
+        		lv_expressions_1_0, 
         		"RichStringLiteral");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1060,16 +1060,16 @@ ruleRichString returns [EObject current=null]
     |((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRichStringAccess().getElementsRichStringLiteralStartParserRuleCall_1_1_0_0()); 
+	        newCompositeNode(grammarAccess.getRichStringAccess().getExpressionsRichStringLiteralStartParserRuleCall_1_1_0_0()); 
 	    }
-		lv_elements_2_0=ruleRichStringLiteralStart		{
+		lv_expressions_2_0=ruleRichStringLiteralStart		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRichStringRule());
 	        }
        		add(
        			$current, 
-       			"elements",
-        		lv_elements_2_0, 
+       			"expressions",
+        		lv_expressions_2_0, 
         		"RichStringLiteralStart");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1078,16 +1078,16 @@ ruleRichString returns [EObject current=null]
 )(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRichStringAccess().getElementsRichStringPartParserRuleCall_1_1_1_0()); 
+	        newCompositeNode(grammarAccess.getRichStringAccess().getExpressionsRichStringPartParserRuleCall_1_1_1_0()); 
 	    }
-		lv_elements_3_0=ruleRichStringPart		{
+		lv_expressions_3_0=ruleRichStringPart		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRichStringRule());
 	        }
        		add(
        			$current, 
-       			"elements",
-        		lv_elements_3_0, 
+       			"expressions",
+        		lv_expressions_3_0, 
         		"RichStringPart");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1096,16 +1096,16 @@ ruleRichString returns [EObject current=null]
 )((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRichStringAccess().getElementsRichStringLiteralInbetweenParserRuleCall_1_1_2_0_0()); 
+	        newCompositeNode(grammarAccess.getRichStringAccess().getExpressionsRichStringLiteralInbetweenParserRuleCall_1_1_2_0_0()); 
 	    }
-		lv_elements_4_0=ruleRichStringLiteralInbetween		{
+		lv_expressions_4_0=ruleRichStringLiteralInbetween		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRichStringRule());
 	        }
        		add(
        			$current, 
-       			"elements",
-        		lv_elements_4_0, 
+       			"expressions",
+        		lv_expressions_4_0, 
         		"RichStringLiteralInbetween");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1114,16 +1114,16 @@ ruleRichString returns [EObject current=null]
 )(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRichStringAccess().getElementsRichStringPartParserRuleCall_1_1_2_1_0()); 
+	        newCompositeNode(grammarAccess.getRichStringAccess().getExpressionsRichStringPartParserRuleCall_1_1_2_1_0()); 
 	    }
-		lv_elements_5_0=ruleRichStringPart		{
+		lv_expressions_5_0=ruleRichStringPart		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRichStringRule());
 	        }
        		add(
        			$current, 
-       			"elements",
-        		lv_elements_5_0, 
+       			"expressions",
+        		lv_expressions_5_0, 
         		"RichStringPart");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1132,16 +1132,16 @@ ruleRichString returns [EObject current=null]
 ))*(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRichStringAccess().getElementsRichStringLiteralEndParserRuleCall_1_1_3_0()); 
+	        newCompositeNode(grammarAccess.getRichStringAccess().getExpressionsRichStringLiteralEndParserRuleCall_1_1_3_0()); 
 	    }
-		lv_elements_6_0=ruleRichStringLiteralEnd		{
+		lv_expressions_6_0=ruleRichStringLiteralEnd		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRichStringRule());
 	        }
        		add(
        			$current, 
-       			"elements",
-        		lv_elements_6_0, 
+       			"expressions",
+        		lv_expressions_6_0, 
         		"RichStringLiteralEnd");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1357,16 +1357,16 @@ ruleInternalRichString returns [EObject current=null]
 )((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getInternalRichStringAccess().getElementsInternalRichStringLiteralParserRuleCall_1_0_0()); 
+	        newCompositeNode(grammarAccess.getInternalRichStringAccess().getExpressionsInternalRichStringLiteralParserRuleCall_1_0_0()); 
 	    }
-		lv_elements_1_0=ruleInternalRichStringLiteral		{
+		lv_expressions_1_0=ruleInternalRichStringLiteral		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getInternalRichStringRule());
 	        }
        		add(
        			$current, 
-       			"elements",
-        		lv_elements_1_0, 
+       			"expressions",
+        		lv_expressions_1_0, 
         		"InternalRichStringLiteral");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1376,16 +1376,16 @@ ruleInternalRichString returns [EObject current=null]
     |((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getInternalRichStringAccess().getElementsRichStringLiteralInbetweenParserRuleCall_1_1_0_0()); 
+	        newCompositeNode(grammarAccess.getInternalRichStringAccess().getExpressionsRichStringLiteralInbetweenParserRuleCall_1_1_0_0()); 
 	    }
-		lv_elements_2_0=ruleRichStringLiteralInbetween		{
+		lv_expressions_2_0=ruleRichStringLiteralInbetween		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getInternalRichStringRule());
 	        }
        		add(
        			$current, 
-       			"elements",
-        		lv_elements_2_0, 
+       			"expressions",
+        		lv_expressions_2_0, 
         		"RichStringLiteralInbetween");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1394,16 +1394,16 @@ ruleInternalRichString returns [EObject current=null]
 )((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getInternalRichStringAccess().getElementsRichStringPartParserRuleCall_1_1_1_0_0()); 
+	        newCompositeNode(grammarAccess.getInternalRichStringAccess().getExpressionsRichStringPartParserRuleCall_1_1_1_0_0()); 
 	    }
-		lv_elements_3_0=ruleRichStringPart		{
+		lv_expressions_3_0=ruleRichStringPart		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getInternalRichStringRule());
 	        }
        		add(
        			$current, 
-       			"elements",
-        		lv_elements_3_0, 
+       			"expressions",
+        		lv_expressions_3_0, 
         		"RichStringPart");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1412,16 +1412,16 @@ ruleInternalRichString returns [EObject current=null]
 )(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getInternalRichStringAccess().getElementsRichStringLiteralInbetweenParserRuleCall_1_1_1_1_0()); 
+	        newCompositeNode(grammarAccess.getInternalRichStringAccess().getExpressionsRichStringLiteralInbetweenParserRuleCall_1_1_1_1_0()); 
 	    }
-		lv_elements_4_0=ruleRichStringLiteralInbetween		{
+		lv_expressions_4_0=ruleRichStringLiteralInbetween		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getInternalRichStringRule());
 	        }
        		add(
        			$current, 
-       			"elements",
-        		lv_elements_4_0, 
+       			"expressions",
+        		lv_expressions_4_0, 
         		"RichStringLiteralInbetween");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -1495,11 +1495,11 @@ ruleRichStringPart returns [EObject current=null]
     @after { leaveRule(); }:
 (
     { 
-        newCompositeNode(grammarAccess.getRichStringPartAccess().getXExpressionParserRuleCall_0()); 
+        newCompositeNode(grammarAccess.getRichStringPartAccess().getXExpressionInsideBlockParserRuleCall_0()); 
     }
-    this_XExpression_0=ruleXExpression
+    this_XExpressionInsideBlock_0=ruleXExpressionInsideBlock
     { 
-        $current = $this_XExpression_0.current; 
+        $current = $this_XExpressionInsideBlock_0.current; 
         afterParserOrEnumRuleCall();
     }
 
@@ -1593,27 +1593,93 @@ ruleRichStringForLoop returns [EObject current=null]
 	    }
 
 )
-)(
+)(	otherlv_5='BEFORE' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getRichStringForLoopAccess().getBEFOREKeyword_5_0());
+    }
+(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getRichStringForLoopAccess().getEachExpressionInternalRichStringParserRuleCall_5_0()); 
+	        newCompositeNode(grammarAccess.getRichStringForLoopAccess().getBeforeXExpressionParserRuleCall_5_1_0()); 
 	    }
-		lv_eachExpression_5_0=ruleInternalRichString		{
+		lv_before_6_0=ruleXExpression		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getRichStringForLoopRule());
+	        }
+       		set(
+       			$current, 
+       			"before",
+        		lv_before_6_0, 
+        		"XExpression");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?(	otherlv_7='SEPARATOR' 
+    {
+    	newLeafNode(otherlv_7, grammarAccess.getRichStringForLoopAccess().getSEPARATORKeyword_6_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getRichStringForLoopAccess().getSeparatorXExpressionParserRuleCall_6_1_0()); 
+	    }
+		lv_separator_8_0=ruleXExpression		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getRichStringForLoopRule());
+	        }
+       		set(
+       			$current, 
+       			"separator",
+        		lv_separator_8_0, 
+        		"XExpression");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?(	otherlv_9='AFTER' 
+    {
+    	newLeafNode(otherlv_9, grammarAccess.getRichStringForLoopAccess().getAFTERKeyword_7_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getRichStringForLoopAccess().getAfterXExpressionParserRuleCall_7_1_0()); 
+	    }
+		lv_after_10_0=ruleXExpression		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getRichStringForLoopRule());
+	        }
+       		set(
+       			$current, 
+       			"after",
+        		lv_after_10_0, 
+        		"XExpression");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getRichStringForLoopAccess().getEachExpressionInternalRichStringParserRuleCall_8_0()); 
+	    }
+		lv_eachExpression_11_0=ruleInternalRichString		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getRichStringForLoopRule());
 	        }
        		set(
        			$current, 
        			"eachExpression",
-        		lv_eachExpression_5_0, 
+        		lv_eachExpression_11_0, 
         		"InternalRichString");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_6='ENDFOR' 
+)	otherlv_12='ENDFOR' 
     {
-    	newLeafNode(otherlv_6, grammarAccess.getRichStringForLoopAccess().getENDFORKeyword_6());
+    	newLeafNode(otherlv_12, grammarAccess.getRichStringForLoopAccess().getENDFORKeyword_9());
     }
 )
 ;

@@ -24,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
@@ -97,32 +98,33 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 	}
 	
 	protected JvmTypeReference _type(RichStringIf richStringIf, boolean rawType) {
-		return getTypeReferences().getTypeForName(String.class, richStringIf);
+		return getTypeReferences().getTypeForName(StringConcatenation.class, richStringIf);
 	}
 	
 	protected JvmTypeReference _type(RichStringForLoop richStringFor, boolean rawType) {
-		return getTypeReferences().getTypeForName(String.class, richStringFor);
+		return getTypeReferences().getTypeForName(StringConcatenation.class, richStringFor);
 	}
 	
 	protected JvmTypeReference _expectedType(RichStringIf container, EReference reference, int index, boolean rawType) {
 		if (reference == Xtend2Package.Literals.RICH_STRING_IF__IF) {
-			return getTypeReferences().getTypeForName(Boolean.class, container);
+			return getTypeReferences().getTypeForName(Boolean.TYPE, container);
 		}
 		return getTypeReferences().getTypeForName(StringConcatenation.class, container);
 	}
 	
 	protected JvmTypeReference _expectedType(RichStringElseIf container, EReference reference, int index, boolean rawType) {
 		if (reference == Xtend2Package.Literals.RICH_STRING_ELSE_IF__IF) {
-			return getTypeReferences().getTypeForName(Boolean.class, container);
+			return getTypeReferences().getTypeForName(Boolean.TYPE, container);
 		}
 		return getTypeReferences().getTypeForName(StringConcatenation.class, container);
 	}
 
 	protected JvmTypeReference _expectedType(RichStringForLoop expr, EReference reference, int index, boolean rawType) {
-		// see also _expectedType(XForLoop..)
-		// Unless we can have multiple possible expected types (i.e. array and iterable), we shouldn't expect anything here
-		// The conformance test is done explicitly in the validator.
-		return null; // no expectations
+		if (reference == Xtend2Package.Literals.RICH_STRING_FOR_LOOP__BEFORE
+				|| reference == Xtend2Package.Literals.RICH_STRING_FOR_LOOP__SEPARATOR
+				|| reference == Xtend2Package.Literals.RICH_STRING_FOR_LOOP__AFTER)
+			return getTypeReferences().getTypeForName(Object.class, expr);
+		return _expectedType((XForLoopExpression)expr, reference, index, rawType);
 	}
 
 	protected JvmTypeReference _typeForIdentifiable(XtendClass clazz, boolean rawType) {

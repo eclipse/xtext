@@ -33,12 +33,17 @@ public interface IRichStringPartAcceptor {
 	void acceptTemplateText(CharSequence text, RichStringLiteral origin);
 
 	/**
+	 * Indicates a semantic line break in a rich string literal.
 	 * @param origin the instance holding the complete text value that contains the line break.
+	 * @param charCount the number of characters in the line break.
+	 * @param whether or not the linebreak occurs in a line that contains a control structure.
 	 */
 	void acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen);
 	
 	/**
+	 * Indicates a template line break in a rich string literal.
 	 * @param origin the instance holding the complete text value that contains the line break.
+	 * @param charCount the number of characters in the line break.
 	 */
 	void acceptTemplateLineBreak(int charCount, RichStringLiteral origin);
 	
@@ -73,14 +78,19 @@ public interface IRichStringPartAcceptor {
 	
 	/**
 	 * Queried to determine whether the body of the for-loop should be evaluated (again).
+	 * @param before the expression that should be evaluated prior to the first item of the loop, if any.
+	 * @param separator the expression that should be evaluated prior to the second and all subsequent items of the loop.
+	 * @param indentation the additional indentation for any line besides the first one.
 	 * @return <code>true</code> if the for-loop body should be evaluated.
 	 */
-	boolean forLoopHasNext();
+	boolean forLoopHasNext(XExpression before, XExpression separator, CharSequence indentation);
 	
 	/**
 	 * Announces that an <pre>«ENDFOR»</pre> has been consumed.
+	 * @param after the expression that should be evaluated after the last item of the loop, if any.
+	 * @param indentation the additional indentation for any line besides the first one.
 	 */
-	void acceptEndFor();
+	void acceptEndFor(XExpression after, CharSequence indentation);
 	
 	/**
 	 * Announces that an <pre>«expression»</pre> has been consumed. If the expression's 

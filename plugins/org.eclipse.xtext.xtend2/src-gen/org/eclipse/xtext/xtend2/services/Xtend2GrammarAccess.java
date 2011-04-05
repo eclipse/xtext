@@ -536,7 +536,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//// type is mandatory in Xtend
+		//// type is mandatory for Xtend functions
 		//Parameter returns types::JvmFormalParameter:
 		//	parameterType=JvmTypeReference name=ID;
 		public ParserRule getRule() { return rule; }
@@ -594,79 +594,79 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cRichStringAction_0 = (Action)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
-		private final Assignment cElementsAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
-		private final RuleCall cElementsRichStringLiteralParserRuleCall_1_0_0 = (RuleCall)cElementsAssignment_1_0.eContents().get(0);
+		private final Assignment cExpressionsAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
+		private final RuleCall cExpressionsRichStringLiteralParserRuleCall_1_0_0 = (RuleCall)cExpressionsAssignment_1_0.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
-		private final Assignment cElementsAssignment_1_1_0 = (Assignment)cGroup_1_1.eContents().get(0);
-		private final RuleCall cElementsRichStringLiteralStartParserRuleCall_1_1_0_0 = (RuleCall)cElementsAssignment_1_1_0.eContents().get(0);
-		private final Assignment cElementsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
-		private final RuleCall cElementsRichStringPartParserRuleCall_1_1_1_0 = (RuleCall)cElementsAssignment_1_1_1.eContents().get(0);
+		private final Assignment cExpressionsAssignment_1_1_0 = (Assignment)cGroup_1_1.eContents().get(0);
+		private final RuleCall cExpressionsRichStringLiteralStartParserRuleCall_1_1_0_0 = (RuleCall)cExpressionsAssignment_1_1_0.eContents().get(0);
+		private final Assignment cExpressionsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
+		private final RuleCall cExpressionsRichStringPartParserRuleCall_1_1_1_0 = (RuleCall)cExpressionsAssignment_1_1_1.eContents().get(0);
 		private final Group cGroup_1_1_2 = (Group)cGroup_1_1.eContents().get(2);
-		private final Assignment cElementsAssignment_1_1_2_0 = (Assignment)cGroup_1_1_2.eContents().get(0);
-		private final RuleCall cElementsRichStringLiteralInbetweenParserRuleCall_1_1_2_0_0 = (RuleCall)cElementsAssignment_1_1_2_0.eContents().get(0);
-		private final Assignment cElementsAssignment_1_1_2_1 = (Assignment)cGroup_1_1_2.eContents().get(1);
-		private final RuleCall cElementsRichStringPartParserRuleCall_1_1_2_1_0 = (RuleCall)cElementsAssignment_1_1_2_1.eContents().get(0);
-		private final Assignment cElementsAssignment_1_1_3 = (Assignment)cGroup_1_1.eContents().get(3);
-		private final RuleCall cElementsRichStringLiteralEndParserRuleCall_1_1_3_0 = (RuleCall)cElementsAssignment_1_1_3.eContents().get(0);
+		private final Assignment cExpressionsAssignment_1_1_2_0 = (Assignment)cGroup_1_1_2.eContents().get(0);
+		private final RuleCall cExpressionsRichStringLiteralInbetweenParserRuleCall_1_1_2_0_0 = (RuleCall)cExpressionsAssignment_1_1_2_0.eContents().get(0);
+		private final Assignment cExpressionsAssignment_1_1_2_1 = (Assignment)cGroup_1_1_2.eContents().get(1);
+		private final RuleCall cExpressionsRichStringPartParserRuleCall_1_1_2_1_0 = (RuleCall)cExpressionsAssignment_1_1_2_1.eContents().get(0);
+		private final Assignment cExpressionsAssignment_1_1_3 = (Assignment)cGroup_1_1.eContents().get(3);
+		private final RuleCall cExpressionsRichStringLiteralEndParserRuleCall_1_1_3_0 = (RuleCall)cExpressionsAssignment_1_1_3.eContents().get(0);
 		
 		//RichString returns xbase::XExpression:
-		//	{RichString} (elements+=RichStringLiteral | elements+=RichStringLiteralStart elements+=RichStringPart
-		//	(elements+=RichStringLiteralInbetween elements+=RichStringPart)* elements+=RichStringLiteralEnd);
+		//	{RichString} (expressions+=RichStringLiteral | expressions+=RichStringLiteralStart expressions+=RichStringPart
+		//	(expressions+=RichStringLiteralInbetween expressions+=RichStringPart)* expressions+=RichStringLiteralEnd);
 		public ParserRule getRule() { return rule; }
 
-		//{RichString} (elements+=RichStringLiteral | elements+=RichStringLiteralStart elements+=RichStringPart
-		//(elements+=RichStringLiteralInbetween elements+=RichStringPart)* elements+=RichStringLiteralEnd)
+		//{RichString} (expressions+=RichStringLiteral | expressions+=RichStringLiteralStart expressions+=RichStringPart
+		//(expressions+=RichStringLiteralInbetween expressions+=RichStringPart)* expressions+=RichStringLiteralEnd)
 		public Group getGroup() { return cGroup; }
 
 		//{RichString}
 		public Action getRichStringAction_0() { return cRichStringAction_0; }
 
-		//elements+=RichStringLiteral | elements+=RichStringLiteralStart elements+=RichStringPart
-		//(elements+=RichStringLiteralInbetween elements+=RichStringPart)* elements+=RichStringLiteralEnd
+		//expressions+=RichStringLiteral | expressions+=RichStringLiteralStart expressions+=RichStringPart
+		//(expressions+=RichStringLiteralInbetween expressions+=RichStringPart)* expressions+=RichStringLiteralEnd
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//elements+=RichStringLiteral
-		public Assignment getElementsAssignment_1_0() { return cElementsAssignment_1_0; }
+		//expressions+=RichStringLiteral
+		public Assignment getExpressionsAssignment_1_0() { return cExpressionsAssignment_1_0; }
 
 		//RichStringLiteral
-		public RuleCall getElementsRichStringLiteralParserRuleCall_1_0_0() { return cElementsRichStringLiteralParserRuleCall_1_0_0; }
+		public RuleCall getExpressionsRichStringLiteralParserRuleCall_1_0_0() { return cExpressionsRichStringLiteralParserRuleCall_1_0_0; }
 
-		//elements+=RichStringLiteralStart elements+=RichStringPart (elements+=RichStringLiteralInbetween
-		//elements+=RichStringPart)* elements+=RichStringLiteralEnd
+		//expressions+=RichStringLiteralStart expressions+=RichStringPart (expressions+=RichStringLiteralInbetween
+		//expressions+=RichStringPart)* expressions+=RichStringLiteralEnd
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
-		//elements+=RichStringLiteralStart
-		public Assignment getElementsAssignment_1_1_0() { return cElementsAssignment_1_1_0; }
+		//expressions+=RichStringLiteralStart
+		public Assignment getExpressionsAssignment_1_1_0() { return cExpressionsAssignment_1_1_0; }
 
 		//RichStringLiteralStart
-		public RuleCall getElementsRichStringLiteralStartParserRuleCall_1_1_0_0() { return cElementsRichStringLiteralStartParserRuleCall_1_1_0_0; }
+		public RuleCall getExpressionsRichStringLiteralStartParserRuleCall_1_1_0_0() { return cExpressionsRichStringLiteralStartParserRuleCall_1_1_0_0; }
 
-		//elements+=RichStringPart
-		public Assignment getElementsAssignment_1_1_1() { return cElementsAssignment_1_1_1; }
+		//expressions+=RichStringPart
+		public Assignment getExpressionsAssignment_1_1_1() { return cExpressionsAssignment_1_1_1; }
 
 		//RichStringPart
-		public RuleCall getElementsRichStringPartParserRuleCall_1_1_1_0() { return cElementsRichStringPartParserRuleCall_1_1_1_0; }
+		public RuleCall getExpressionsRichStringPartParserRuleCall_1_1_1_0() { return cExpressionsRichStringPartParserRuleCall_1_1_1_0; }
 
-		//(elements+=RichStringLiteralInbetween elements+=RichStringPart)*
+		//(expressions+=RichStringLiteralInbetween expressions+=RichStringPart)*
 		public Group getGroup_1_1_2() { return cGroup_1_1_2; }
 
-		//elements+=RichStringLiteralInbetween
-		public Assignment getElementsAssignment_1_1_2_0() { return cElementsAssignment_1_1_2_0; }
+		//expressions+=RichStringLiteralInbetween
+		public Assignment getExpressionsAssignment_1_1_2_0() { return cExpressionsAssignment_1_1_2_0; }
 
 		//RichStringLiteralInbetween
-		public RuleCall getElementsRichStringLiteralInbetweenParserRuleCall_1_1_2_0_0() { return cElementsRichStringLiteralInbetweenParserRuleCall_1_1_2_0_0; }
+		public RuleCall getExpressionsRichStringLiteralInbetweenParserRuleCall_1_1_2_0_0() { return cExpressionsRichStringLiteralInbetweenParserRuleCall_1_1_2_0_0; }
 
-		//elements+=RichStringPart
-		public Assignment getElementsAssignment_1_1_2_1() { return cElementsAssignment_1_1_2_1; }
+		//expressions+=RichStringPart
+		public Assignment getExpressionsAssignment_1_1_2_1() { return cExpressionsAssignment_1_1_2_1; }
 
 		//RichStringPart
-		public RuleCall getElementsRichStringPartParserRuleCall_1_1_2_1_0() { return cElementsRichStringPartParserRuleCall_1_1_2_1_0; }
+		public RuleCall getExpressionsRichStringPartParserRuleCall_1_1_2_1_0() { return cExpressionsRichStringPartParserRuleCall_1_1_2_1_0; }
 
-		//elements+=RichStringLiteralEnd
-		public Assignment getElementsAssignment_1_1_3() { return cElementsAssignment_1_1_3; }
+		//expressions+=RichStringLiteralEnd
+		public Assignment getExpressionsAssignment_1_1_3() { return cExpressionsAssignment_1_1_3; }
 
 		//RichStringLiteralEnd
-		public RuleCall getElementsRichStringLiteralEndParserRuleCall_1_1_3_0() { return cElementsRichStringLiteralEndParserRuleCall_1_1_3_0; }
+		public RuleCall getExpressionsRichStringLiteralEndParserRuleCall_1_1_3_0() { return cExpressionsRichStringLiteralEndParserRuleCall_1_1_3_0; }
 	}
 
 	public class RichStringLiteralElements extends AbstractParserRuleElementFinder {
@@ -770,62 +770,62 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cRichStringAction_0 = (Action)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
-		private final Assignment cElementsAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
-		private final RuleCall cElementsInternalRichStringLiteralParserRuleCall_1_0_0 = (RuleCall)cElementsAssignment_1_0.eContents().get(0);
+		private final Assignment cExpressionsAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
+		private final RuleCall cExpressionsInternalRichStringLiteralParserRuleCall_1_0_0 = (RuleCall)cExpressionsAssignment_1_0.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
-		private final Assignment cElementsAssignment_1_1_0 = (Assignment)cGroup_1_1.eContents().get(0);
-		private final RuleCall cElementsRichStringLiteralInbetweenParserRuleCall_1_1_0_0 = (RuleCall)cElementsAssignment_1_1_0.eContents().get(0);
+		private final Assignment cExpressionsAssignment_1_1_0 = (Assignment)cGroup_1_1.eContents().get(0);
+		private final RuleCall cExpressionsRichStringLiteralInbetweenParserRuleCall_1_1_0_0 = (RuleCall)cExpressionsAssignment_1_1_0.eContents().get(0);
 		private final Group cGroup_1_1_1 = (Group)cGroup_1_1.eContents().get(1);
-		private final Assignment cElementsAssignment_1_1_1_0 = (Assignment)cGroup_1_1_1.eContents().get(0);
-		private final RuleCall cElementsRichStringPartParserRuleCall_1_1_1_0_0 = (RuleCall)cElementsAssignment_1_1_1_0.eContents().get(0);
-		private final Assignment cElementsAssignment_1_1_1_1 = (Assignment)cGroup_1_1_1.eContents().get(1);
-		private final RuleCall cElementsRichStringLiteralInbetweenParserRuleCall_1_1_1_1_0 = (RuleCall)cElementsAssignment_1_1_1_1.eContents().get(0);
+		private final Assignment cExpressionsAssignment_1_1_1_0 = (Assignment)cGroup_1_1_1.eContents().get(0);
+		private final RuleCall cExpressionsRichStringPartParserRuleCall_1_1_1_0_0 = (RuleCall)cExpressionsAssignment_1_1_1_0.eContents().get(0);
+		private final Assignment cExpressionsAssignment_1_1_1_1 = (Assignment)cGroup_1_1_1.eContents().get(1);
+		private final RuleCall cExpressionsRichStringLiteralInbetweenParserRuleCall_1_1_1_1_0 = (RuleCall)cExpressionsAssignment_1_1_1_1.eContents().get(0);
 		
 		//InternalRichString returns xbase::XExpression:
-		//	{RichString} (elements+=InternalRichStringLiteral | elements+=RichStringLiteralInbetween (elements+=RichStringPart
-		//	elements+=RichStringLiteralInbetween)+);
+		//	{RichString} (expressions+=InternalRichStringLiteral | expressions+=RichStringLiteralInbetween
+		//	(expressions+=RichStringPart expressions+=RichStringLiteralInbetween)+);
 		public ParserRule getRule() { return rule; }
 
-		//{RichString} (elements+=InternalRichStringLiteral | elements+=RichStringLiteralInbetween (elements+=RichStringPart
-		//elements+=RichStringLiteralInbetween)+)
+		//{RichString} (expressions+=InternalRichStringLiteral | expressions+=RichStringLiteralInbetween
+		//(expressions+=RichStringPart expressions+=RichStringLiteralInbetween)+)
 		public Group getGroup() { return cGroup; }
 
 		//{RichString}
 		public Action getRichStringAction_0() { return cRichStringAction_0; }
 
-		//elements+=InternalRichStringLiteral | elements+=RichStringLiteralInbetween (elements+=RichStringPart
-		//elements+=RichStringLiteralInbetween)+
+		//expressions+=InternalRichStringLiteral | expressions+=RichStringLiteralInbetween (expressions+=RichStringPart
+		//expressions+=RichStringLiteralInbetween)+
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//elements+=InternalRichStringLiteral
-		public Assignment getElementsAssignment_1_0() { return cElementsAssignment_1_0; }
+		//expressions+=InternalRichStringLiteral
+		public Assignment getExpressionsAssignment_1_0() { return cExpressionsAssignment_1_0; }
 
 		//InternalRichStringLiteral
-		public RuleCall getElementsInternalRichStringLiteralParserRuleCall_1_0_0() { return cElementsInternalRichStringLiteralParserRuleCall_1_0_0; }
+		public RuleCall getExpressionsInternalRichStringLiteralParserRuleCall_1_0_0() { return cExpressionsInternalRichStringLiteralParserRuleCall_1_0_0; }
 
-		//elements+=RichStringLiteralInbetween (elements+=RichStringPart elements+=RichStringLiteralInbetween)+
+		//expressions+=RichStringLiteralInbetween (expressions+=RichStringPart expressions+=RichStringLiteralInbetween)+
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
-		//elements+=RichStringLiteralInbetween
-		public Assignment getElementsAssignment_1_1_0() { return cElementsAssignment_1_1_0; }
+		//expressions+=RichStringLiteralInbetween
+		public Assignment getExpressionsAssignment_1_1_0() { return cExpressionsAssignment_1_1_0; }
 
 		//RichStringLiteralInbetween
-		public RuleCall getElementsRichStringLiteralInbetweenParserRuleCall_1_1_0_0() { return cElementsRichStringLiteralInbetweenParserRuleCall_1_1_0_0; }
+		public RuleCall getExpressionsRichStringLiteralInbetweenParserRuleCall_1_1_0_0() { return cExpressionsRichStringLiteralInbetweenParserRuleCall_1_1_0_0; }
 
-		//(elements+=RichStringPart elements+=RichStringLiteralInbetween)+
+		//(expressions+=RichStringPart expressions+=RichStringLiteralInbetween)+
 		public Group getGroup_1_1_1() { return cGroup_1_1_1; }
 
-		//elements+=RichStringPart
-		public Assignment getElementsAssignment_1_1_1_0() { return cElementsAssignment_1_1_1_0; }
+		//expressions+=RichStringPart
+		public Assignment getExpressionsAssignment_1_1_1_0() { return cExpressionsAssignment_1_1_1_0; }
 
 		//RichStringPart
-		public RuleCall getElementsRichStringPartParserRuleCall_1_1_1_0_0() { return cElementsRichStringPartParserRuleCall_1_1_1_0_0; }
+		public RuleCall getExpressionsRichStringPartParserRuleCall_1_1_1_0_0() { return cExpressionsRichStringPartParserRuleCall_1_1_1_0_0; }
 
-		//elements+=RichStringLiteralInbetween
-		public Assignment getElementsAssignment_1_1_1_1() { return cElementsAssignment_1_1_1_1; }
+		//expressions+=RichStringLiteralInbetween
+		public Assignment getExpressionsAssignment_1_1_1_1() { return cExpressionsAssignment_1_1_1_1; }
 
 		//RichStringLiteralInbetween
-		public RuleCall getElementsRichStringLiteralInbetweenParserRuleCall_1_1_1_1_0() { return cElementsRichStringLiteralInbetweenParserRuleCall_1_1_1_1_0; }
+		public RuleCall getExpressionsRichStringLiteralInbetweenParserRuleCall_1_1_1_1_0() { return cExpressionsRichStringLiteralInbetweenParserRuleCall_1_1_1_1_0; }
 	}
 
 	public class InternalRichStringLiteralElements extends AbstractParserRuleElementFinder {
@@ -855,19 +855,19 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	public class RichStringPartElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RichStringPart");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cXExpressionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cXExpressionInsideBlockParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cRichStringForLoopParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cRichStringIfParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//RichStringPart returns xbase::XExpression:
-		//	XExpression | RichStringForLoop | RichStringIf;
+		//	XExpressionInsideBlock | RichStringForLoop | RichStringIf;
 		public ParserRule getRule() { return rule; }
 
-		//XExpression | RichStringForLoop | RichStringIf
+		//XExpressionInsideBlock | RichStringForLoop | RichStringIf
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//XExpression
-		public RuleCall getXExpressionParserRuleCall_0() { return cXExpressionParserRuleCall_0; }
+		//XExpressionInsideBlock
+		public RuleCall getXExpressionInsideBlockParserRuleCall_0() { return cXExpressionInsideBlockParserRuleCall_0; }
 
 		//RichStringForLoop
 		public RuleCall getRichStringForLoopParserRuleCall_1() { return cRichStringForLoopParserRuleCall_1; }
@@ -886,17 +886,30 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cColonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cForExpressionAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cForExpressionXExpressionParserRuleCall_4_0 = (RuleCall)cForExpressionAssignment_4.eContents().get(0);
-		private final Assignment cEachExpressionAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cEachExpressionInternalRichStringParserRuleCall_5_0 = (RuleCall)cEachExpressionAssignment_5.eContents().get(0);
-		private final Keyword cENDFORKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cBEFOREKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cBeforeAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cBeforeXExpressionParserRuleCall_5_1_0 = (RuleCall)cBeforeAssignment_5_1.eContents().get(0);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cSEPARATORKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Assignment cSeparatorAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final RuleCall cSeparatorXExpressionParserRuleCall_6_1_0 = (RuleCall)cSeparatorAssignment_6_1.eContents().get(0);
+		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
+		private final Keyword cAFTERKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
+		private final Assignment cAfterAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
+		private final RuleCall cAfterXExpressionParserRuleCall_7_1_0 = (RuleCall)cAfterAssignment_7_1.eContents().get(0);
+		private final Assignment cEachExpressionAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cEachExpressionInternalRichStringParserRuleCall_8_0 = (RuleCall)cEachExpressionAssignment_8.eContents().get(0);
+		private final Keyword cENDFORKeyword_9 = (Keyword)cGroup.eContents().get(9);
 		
 		//RichStringForLoop returns xbase::XExpression:
-		//	{RichStringForLoop} "FOR" declaredParam=JvmFormalParameter ":" forExpression=XExpression
+		//	{RichStringForLoop} "FOR" declaredParam=JvmFormalParameter ":" forExpression=XExpression ("BEFORE"
+		//	before=XExpression)? ("SEPARATOR" separator=XExpression)? ("AFTER" after=XExpression)?
 		//	eachExpression=InternalRichString "ENDFOR";
 		public ParserRule getRule() { return rule; }
 
-		//{RichStringForLoop} "FOR" declaredParam=JvmFormalParameter ":" forExpression=XExpression
-		//eachExpression=InternalRichString "ENDFOR"
+		//{RichStringForLoop} "FOR" declaredParam=JvmFormalParameter ":" forExpression=XExpression ("BEFORE" before=XExpression)?
+		//("SEPARATOR" separator=XExpression)? ("AFTER" after=XExpression)? eachExpression=InternalRichString "ENDFOR"
 		public Group getGroup() { return cGroup; }
 
 		//{RichStringForLoop}
@@ -920,14 +933,50 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		//XExpression
 		public RuleCall getForExpressionXExpressionParserRuleCall_4_0() { return cForExpressionXExpressionParserRuleCall_4_0; }
 
+		//("BEFORE" before=XExpression)?
+		public Group getGroup_5() { return cGroup_5; }
+
+		//"BEFORE"
+		public Keyword getBEFOREKeyword_5_0() { return cBEFOREKeyword_5_0; }
+
+		//before=XExpression
+		public Assignment getBeforeAssignment_5_1() { return cBeforeAssignment_5_1; }
+
+		//XExpression
+		public RuleCall getBeforeXExpressionParserRuleCall_5_1_0() { return cBeforeXExpressionParserRuleCall_5_1_0; }
+
+		//("SEPARATOR" separator=XExpression)?
+		public Group getGroup_6() { return cGroup_6; }
+
+		//"SEPARATOR"
+		public Keyword getSEPARATORKeyword_6_0() { return cSEPARATORKeyword_6_0; }
+
+		//separator=XExpression
+		public Assignment getSeparatorAssignment_6_1() { return cSeparatorAssignment_6_1; }
+
+		//XExpression
+		public RuleCall getSeparatorXExpressionParserRuleCall_6_1_0() { return cSeparatorXExpressionParserRuleCall_6_1_0; }
+
+		//("AFTER" after=XExpression)?
+		public Group getGroup_7() { return cGroup_7; }
+
+		//"AFTER"
+		public Keyword getAFTERKeyword_7_0() { return cAFTERKeyword_7_0; }
+
+		//after=XExpression
+		public Assignment getAfterAssignment_7_1() { return cAfterAssignment_7_1; }
+
+		//XExpression
+		public RuleCall getAfterXExpressionParserRuleCall_7_1_0() { return cAfterXExpressionParserRuleCall_7_1_0; }
+
 		//eachExpression=InternalRichString
-		public Assignment getEachExpressionAssignment_5() { return cEachExpressionAssignment_5; }
+		public Assignment getEachExpressionAssignment_8() { return cEachExpressionAssignment_8; }
 
 		//InternalRichString
-		public RuleCall getEachExpressionInternalRichStringParserRuleCall_5_0() { return cEachExpressionInternalRichStringParserRuleCall_5_0; }
+		public RuleCall getEachExpressionInternalRichStringParserRuleCall_8_0() { return cEachExpressionInternalRichStringParserRuleCall_8_0; }
 
 		//"ENDFOR"
-		public Keyword getENDFORKeyword_6() { return cENDFORKeyword_6; }
+		public Keyword getENDFORKeyword_9() { return cENDFORKeyword_9; }
 	}
 
 	public class RichStringIfElements extends AbstractParserRuleElementFinder {
@@ -1162,7 +1211,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 		return getCreateExtensionInfoAccess().getRule();
 	}
 
-	//// type is mandatory in Xtend
+	//// type is mandatory for Xtend functions
 	//Parameter returns types::JvmFormalParameter:
 	//	parameterType=JvmTypeReference name=ID;
 	public ParameterElements getParameterAccess() {
@@ -1184,8 +1233,8 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RichString returns xbase::XExpression:
-	//	{RichString} (elements+=RichStringLiteral | elements+=RichStringLiteralStart elements+=RichStringPart
-	//	(elements+=RichStringLiteralInbetween elements+=RichStringPart)* elements+=RichStringLiteralEnd);
+	//	{RichString} (expressions+=RichStringLiteral | expressions+=RichStringLiteralStart expressions+=RichStringPart
+	//	(expressions+=RichStringLiteralInbetween expressions+=RichStringPart)* expressions+=RichStringLiteralEnd);
 	public RichStringElements getRichStringAccess() {
 		return (pRichString != null) ? pRichString : (pRichString = new RichStringElements());
 	}
@@ -1235,8 +1284,8 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//InternalRichString returns xbase::XExpression:
-	//	{RichString} (elements+=InternalRichStringLiteral | elements+=RichStringLiteralInbetween (elements+=RichStringPart
-	//	elements+=RichStringLiteralInbetween)+);
+	//	{RichString} (expressions+=InternalRichStringLiteral | expressions+=RichStringLiteralInbetween
+	//	(expressions+=RichStringPart expressions+=RichStringLiteralInbetween)+);
 	public InternalRichStringElements getInternalRichStringAccess() {
 		return (pInternalRichString != null) ? pInternalRichString : (pInternalRichString = new InternalRichStringElements());
 	}
@@ -1256,7 +1305,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RichStringPart returns xbase::XExpression:
-	//	XExpression | RichStringForLoop | RichStringIf;
+	//	XExpressionInsideBlock | RichStringForLoop | RichStringIf;
 	public RichStringPartElements getRichStringPartAccess() {
 		return (pRichStringPart != null) ? pRichStringPart : (pRichStringPart = new RichStringPartElements());
 	}
@@ -1266,7 +1315,8 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RichStringForLoop returns xbase::XExpression:
-	//	{RichStringForLoop} "FOR" declaredParam=JvmFormalParameter ":" forExpression=XExpression
+	//	{RichStringForLoop} "FOR" declaredParam=JvmFormalParameter ":" forExpression=XExpression ("BEFORE"
+	//	before=XExpression)? ("SEPARATOR" separator=XExpression)? ("AFTER" after=XExpression)?
 	//	eachExpression=InternalRichString "ENDFOR";
 	public RichStringForLoopElements getRichStringForLoopAccess() {
 		return (pRichStringForLoop != null) ? pRichStringForLoop : (pRichStringForLoop = new RichStringForLoopElements());

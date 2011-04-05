@@ -46,8 +46,7 @@ CreateExtensionInfo:
 	'create' (name=ID ':')? createExpression=XExpression
 ;
 
-
-// type is mandatory in Xtend
+// type is mandatory for Xtend functions
 Parameter returns types::JvmFormalParameter:
 	parameterType=JvmTypeReference name=ID;
 
@@ -59,8 +58,10 @@ XStringLiteral returns xbase::XExpression:
 		
 RichString returns xbase::XExpression:
 	{RichString} ( 
-	  elements+=RichStringLiteral |
-	  elements+=RichStringLiteralStart elements+=RichStringPart (elements+=RichStringLiteralInbetween elements+=RichStringPart)* elements+=RichStringLiteralEnd
+	  expressions+=RichStringLiteral |
+	  expressions+=RichStringLiteralStart expressions+=RichStringPart 
+	  	(expressions+=RichStringLiteralInbetween expressions+=RichStringPart)* 
+	  expressions+=RichStringLiteralEnd
 	)
 ;
 
@@ -82,8 +83,8 @@ RichStringLiteralEnd returns xbase::XExpression :
 
 InternalRichString returns xbase::XExpression:
 	{RichString} (
-		elements+=InternalRichStringLiteral |
-		elements+=RichStringLiteralInbetween (elements+=RichStringPart elements+=RichStringLiteralInbetween)+
+		expressions+=InternalRichStringLiteral |
+		expressions+=RichStringLiteralInbetween (expressions+=RichStringPart expressions+=RichStringLiteralInbetween)+
 	)
 ;
 
@@ -92,7 +93,7 @@ InternalRichStringLiteral returns xbase::XExpression :
 ;
 
 RichStringPart returns xbase::XExpression:
-	XExpression |
+	XExpressionInsideBlock |
 	RichStringForLoop |
 	RichStringIf
 ;
@@ -100,6 +101,9 @@ RichStringPart returns xbase::XExpression:
 RichStringForLoop returns xbase::XExpression:
 	{RichStringForLoop}
 	"FOR" declaredParam=JvmFormalParameter ':' forExpression=XExpression
+		("BEFORE" before=XExpression)?
+		("SEPARATOR" separator=XExpression)?
+		("AFTER" after=XExpression)?
 		eachExpression=InternalRichString
 	"ENDFOR"
 ;
