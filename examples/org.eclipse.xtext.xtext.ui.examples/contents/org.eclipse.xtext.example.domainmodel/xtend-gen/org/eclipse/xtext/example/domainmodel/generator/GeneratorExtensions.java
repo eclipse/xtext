@@ -22,7 +22,8 @@ public class GeneratorExtensions extends DomainmodelExtensions {
   public String shortName(final JvmTypeReference r, final ImportManager importManager) {
     String _xblockexpression = null;
     {
-      final StringBuilder builder = new StringBuilder();
+      StringBuilder _stringBuilder = new StringBuilder();
+      final StringBuilder builder = _stringBuilder;
       importManager.appendTypeRef(r, builder);
       String _string = builder.toString();
       _xblockexpression = (_string);
@@ -43,8 +44,9 @@ public class GeneratorExtensions extends DomainmodelExtensions {
   
   public String folderName(final String javaPackageName) {
     String _xifexpression = null;
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(javaPackageName, null);
-    if (((Boolean)_operator_notEquals)) {
+    final String typeConverted_javaPackageName = (String)javaPackageName;
+    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(typeConverted_javaPackageName, null);
+    if (_operator_notEquals) {
       String _replace = javaPackageName.replace(".", "/");
       _xifexpression = _replace;
     } else {
@@ -65,7 +67,7 @@ public class GeneratorExtensions extends DomainmodelExtensions {
           return _operator_plus_1;
         }
       };
-    List<String> _map = ListExtensions.map(_params, function);
+    List<String> _map = ListExtensions.<JvmFormalParameter, String>map(_params, function);
     StringConcatenation builder = new StringConcatenation();
     builder.append(", ");
     builder.newLine();

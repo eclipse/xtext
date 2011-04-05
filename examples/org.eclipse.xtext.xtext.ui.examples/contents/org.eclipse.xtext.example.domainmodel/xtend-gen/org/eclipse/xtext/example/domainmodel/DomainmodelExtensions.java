@@ -51,7 +51,7 @@ public class DomainmodelExtensions {
   public String concatPath(final String prefix, final String suffix) {
     String _xifexpression = null;
     boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(prefix);
-    if (((Boolean)_isNullOrEmpty)) {
+    if (_isNullOrEmpty) {
       _xifexpression = suffix;
     } else {
       String _operator_plus = StringExtensions.operator_plus(prefix, ".");
