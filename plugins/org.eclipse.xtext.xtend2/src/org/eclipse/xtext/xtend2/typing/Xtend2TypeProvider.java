@@ -23,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
@@ -55,7 +56,7 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 	protected JvmTypeReference _expectedType(XtendFunction function, EReference reference, int index, boolean rawType) {
 		if (reference == Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION) {
 			if (function.getCreateExtensionInfo()!=null)
-				return null;
+				return getTypeReferences().getTypeForName(Void.TYPE, function);
 			JvmTypeReference declaredOrInferredReturnType = getDeclaredOrOverriddenReturnType(function);
 			if (declaredOrInferredReturnType == null || getTypeReferences().is(declaredOrInferredReturnType, Void.TYPE))
 				return null;
@@ -66,9 +67,15 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 	
 	@Override
 	protected JvmTypeReference _expectedType(XReturnExpression expr, EReference reference, int index, boolean rawType) {
+		if (EcoreUtil2.getContainerOfType(expr, XClosure.class)!=null)
+			return super._expectedType(expr, reference, index, rawType);
 		XtendFunction function = EcoreUtil2.getContainerOfType(expr, XtendFunction.class);
 		if (function==null)
 			return null;
+		if (function.getCreateExtensionInfo()!=null) {
+			if (EcoreUtil.isAncestor(function.getCreateExtensionInfo().getCreateExpression(), expr))
+				return null;
+		}
 		return _expectedType(function, Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION,0,rawType);
 	}
 	

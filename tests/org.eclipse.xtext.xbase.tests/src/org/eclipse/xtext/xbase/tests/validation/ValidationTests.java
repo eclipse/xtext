@@ -97,7 +97,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	
 	public void testInvalidEarlyExit_01() throws Exception {
 		XExpression expression = expression("try {} finally throw new Exception()");
-		helper.assertError(expression, XbasePackage.Literals.XTHROW_EXPRESSION, INVALID_EARLY_EXIT, "early", "return", "context");
+		helper.assertError(expression, XbasePackage.Literals.XTHROW_EXPRESSION, INVALID_EARLY_EXIT, "throw", "not allowed", "context");
 	}
 	
 	public void testInvalidEarlyExit_02() throws Exception {
@@ -107,7 +107,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	
 	public void testInvalidEarlyExit_03() throws Exception {
 		XExpression expression = expression("try {} finally return null");
-		helper.assertError(expression, XbasePackage.Literals.XRETURN_EXPRESSION, INVALID_EARLY_EXIT, "early", "return", "context");
+		helper.assertError(expression, XbasePackage.Literals.XRETURN_EXPRESSION, INVALID_EARLY_EXIT, "return", "context");
 	}
 	
 	public void testInvalidEarlyExit_04() throws Exception {

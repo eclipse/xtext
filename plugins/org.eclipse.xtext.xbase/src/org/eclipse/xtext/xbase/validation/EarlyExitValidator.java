@@ -7,23 +7,25 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.validation;
 
-import java.util.Collection;
+import static com.google.common.collect.Lists.*;
+
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.EValidatorRegistrar;
 import org.eclipse.xtext.xbase.XBlockExpression;
-import org.eclipse.xtext.xbase.XCasePart;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XReturnExpression;
+import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
-import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer.ExitPoint;
 
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 
 /**
@@ -31,52 +33,53 @@ import com.google.inject.Inject;
  */
 public class EarlyExitValidator extends AbstractDeclarativeValidator {
 
-	private final Collection<EReference> disallowedEarylExitReferences = ImmutableList.of(
-		XbasePackage.Literals.XTRY_CATCH_FINALLY_EXPRESSION__FINALLY_EXPRESSION
+	private final Map<EReference,EarlyExitKind> disallowedEarylExitReferences = ImmutableMap.of(
+		XbasePackage.Literals.XTRY_CATCH_FINALLY_EXPRESSION__FINALLY_EXPRESSION, EarlyExitKind.BOTH
 	);
 	
-	protected Collection<EReference> getDisallowedEarlyExitReferences() {
+	/**
+	 * @return map of references which 
+	 */
+	protected Map<EReference,EarlyExitKind> getDisallowedEarlyExitReferences() {
 		return disallowedEarylExitReferences;
+	}
+	
+	protected enum EarlyExitKind {
+		RETURN, THROW, BOTH
 	}
 	
 	@Inject
 	private IEarlyExitComputer earlyExitComputer;
 	
 	@Check
-	public void checkEarlyExitInvalid(XExpression expression) {
-		doCheckEarlyExitInvalid(expression);
-	}
-	
-	@Check
-	public void checkEarlyExitInvalid(XCasePart casePart) {
-		doCheckEarlyExitInvalid(casePart);
-	}
-
-	protected void doCheckEarlyExitInvalid(EObject eObject) {
-		for(EReference reference: getDisallowedEarlyExitReferences()) {
-			if (EcoreUtil2.isAssignableFrom(reference.getEContainingClass(), eObject.eClass())) {
-				if (reference.isMany()) {
-					List<?> values = (List<?>) eObject.eGet(reference);
-					for(Object object: values) {
-						if (object instanceof XExpression)
-							checkExpressionExitsNormally((XExpression) object);
-					}
-				} else {
-					Object object = eObject.eGet(reference);
-					if (object instanceof XExpression)
-						checkExpressionExitsNormally((XExpression) object);
+	public void checkInvalidReturnExpression(XExpression expression) {
+		final EReference contFeature = (EReference) expression.eContainingFeature();
+		final Map<EReference, EarlyExitKind> map = getDisallowedEarlyExitReferences();
+		if (map.containsKey(contFeature)) {
+			EarlyExitKind exitKind = map.get(contFeature);
+			List<XExpression> returns = newArrayList();
+			collectExits(expression, returns);
+			for (XExpression expr : returns) {
+				if (expr instanceof XReturnExpression && (exitKind == EarlyExitKind.RETURN || exitKind == EarlyExitKind.BOTH)) {
+					error("A return expression is not allowed in this context.", expr, null, IssueCodes.INVALID_EARLY_EXIT);
+				}
+				if (expr instanceof XThrowExpression && (exitKind == EarlyExitKind.THROW || exitKind == EarlyExitKind.BOTH)) {
+					error("A throw expression is not allowed in this context.", expr, null, IssueCodes.INVALID_EARLY_EXIT);
 				}
 			}
 		}
 	}
 
-	protected void checkExpressionExitsNormally(XExpression expression) {
-		Collection<ExitPoint> exitPoints = earlyExitComputer.getExitPoints(expression);
-		if (exitPoints != null && !exitPoints.isEmpty()) {
-			for(ExitPoint exitPoint: exitPoints) {
-				// TODO only mark exitPoints which are not exceptionalExits?
-				error("Expression may not return early in this context.", exitPoint.getExpression(), null, IssueCodes.INVALID_EARLY_EXIT);
-			}
+	protected void collectExits(EObject expr, List<XExpression> found) {
+		if (expr instanceof XReturnExpression) {
+			found.add((XExpression) expr);
+		} else if (expr instanceof XThrowExpression) {
+			found.add((XExpression) expr);
+		} else if (expr instanceof XClosure) {
+			return;
+		}
+		for (EObject child : expr.eContents()) {
+			collectExits(child, found);
 		}
 	}
 	
