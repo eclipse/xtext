@@ -4,15 +4,19 @@ import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XStringLiteral;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringElseIf;
+import org.eclipse.xtext.xtend2.xtend2.RichStringForLoop;
 import org.eclipse.xtext.xtend2.xtend2.RichStringIf;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -275,17 +279,17 @@ public class ParserTest extends AbstractXtend2TestCase {
 		XtendFunction function = function("foo() ''' foo '''");
 		assertTrue(function.getExpression() instanceof RichString);
 		RichString richString = (RichString) function.getExpression();
-		assertEquals(1, richString.getElements().size());
-		RichStringLiteral stringLiteral = (RichStringLiteral) richString.getElements().get(0);
+		assertEquals(1, richString.getExpressions().size());
+		RichStringLiteral stringLiteral = (RichStringLiteral) richString.getExpressions().get(0);
 		assertEquals(" foo ", stringLiteral.getValue());
 	}
 	
 	public void testRichString_01() throws Exception {
 		XtendFunction function = function("foo() ''' foo «'holla'» bar '''");
 		final RichString richString = (RichString) function.getExpression();
-		assertTrue(richString.getElements().get(0) instanceof RichStringLiteral); 
-		assertTrue(richString.getElements().get(1) instanceof XStringLiteral); 
-		assertTrue(richString.getElements().get(2) instanceof RichStringLiteral); 
+		assertTrue(richString.getExpressions().get(0) instanceof RichStringLiteral); 
+		assertTrue(richString.getExpressions().get(1) instanceof XStringLiteral); 
+		assertTrue(richString.getExpressions().get(2) instanceof RichStringLiteral); 
 	}
 	
 	public void testRichString_02() throws Exception {
@@ -296,9 +300,9 @@ public class ParserTest extends AbstractXtend2TestCase {
 	public void testRichStringIF_00() throws Exception {
 		XtendFunction function = function("foo() ''' foo «IF true» wurst «ELSEIF null==3» brot «ELSE» machine «ENDIF» bar '''");
 		final RichString richString = (RichString) function.getExpression();
-		assertTrue(richString.getElements().get(0) instanceof RichStringLiteral);
+		assertTrue(richString.getExpressions().get(0) instanceof RichStringLiteral);
 		
-		final RichStringIf rsIf = (RichStringIf) richString.getElements().get(1);
+		final RichStringIf rsIf = (RichStringIf) richString.getExpressions().get(1);
 		assertTrue(rsIf.getIf() instanceof XBooleanLiteral); 
 		assertTrue(rsIf.getThen() instanceof RichString);
 		assertEquals(1,rsIf.getElseIfs().size());
@@ -309,26 +313,71 @@ public class ParserTest extends AbstractXtend2TestCase {
 		
 		assertTrue(rsIf.getElse() instanceof RichString);
 		
-		assertTrue(richString.getElements().get(2) instanceof RichStringLiteral); 
+		assertTrue(richString.getExpressions().get(2) instanceof RichStringLiteral); 
 	}
 	
 	public void testRichStringIF_01() throws Exception {
 		XtendFunction function = function("foo() ''' foo «IF true» wurst «IF false» brot «ELSE» machine «ENDIF» bar «ENDIF»'''");
 		final RichString richString = (RichString) function.getExpression();
-		assertTrue(richString.getElements().get(0) instanceof RichStringLiteral);
+		assertTrue(richString.getExpressions().get(0) instanceof RichStringLiteral);
 		
-		final RichStringIf rsIf = (RichStringIf) richString.getElements().get(1);
+		final RichStringIf rsIf = (RichStringIf) richString.getExpressions().get(1);
 		assertTrue(rsIf.getIf() instanceof XBooleanLiteral);
 		
 		final RichString then = (RichString) rsIf.getThen();
-		assertEquals(3,then.getElements().size());
-		RichStringIf innerIf = (RichStringIf) then.getElements().get(1);
+		assertEquals(3,then.getExpressions().size());
+		RichStringIf innerIf = (RichStringIf) then.getExpressions().get(1);
 		assertTrue(innerIf.getIf() instanceof XBooleanLiteral);
 		assertTrue(innerIf.getElse() instanceof RichString);
 		
 		assertTrue(rsIf.getElse()==null);
 		
-		assertTrue(richString.getElements().get(2) instanceof RichStringLiteral); 
+		assertTrue(richString.getExpressions().get(2) instanceof RichStringLiteral); 
+	}
+	
+	public void testRichStringFOR_01() throws Exception {
+		XtendFunction function = function("withForLoop() '''«FOR i: 1..10»«i»«ENDFOR»'''");
+		final RichString richString = (RichString) function.getExpression();
+		final RichStringForLoop rsFor = (RichStringForLoop) richString.getExpressions().get(1);
+		assertTrue(rsFor.getForExpression() instanceof XBinaryOperation);
+		assertEquals("i", rsFor.getDeclaredParam().getName());
+		
+		RichString eachRichString = (RichString) rsFor.getEachExpression();
+		assertEquals(3, eachRichString.getExpressions().size());
+		XExpression variableReference = eachRichString.getExpressions().get(1);
+		assertTrue(variableReference instanceof XFeatureCall);
+		assertSame(rsFor.getDeclaredParam(), ((XAbstractFeatureCall) variableReference).getFeature());
+	}
+	
+	public void testRichStringFOR_02() throws Exception {
+		XtendFunction function = function("withForLoop() '''«FOR i: 1..10 BEFORE 'a' SEPARATOR '\t' AFTER i»«ENDFOR»'''");
+		final RichString richString = (RichString) function.getExpression();
+		final RichStringForLoop rsFor = (RichStringForLoop) richString.getExpressions().get(1);
+		assertTrue(rsFor.getForExpression() instanceof XBinaryOperation);
+		assertEquals("i", rsFor.getDeclaredParam().getName());
+		assertTrue(rsFor.getSeparator() instanceof XStringLiteral);
+		assertTrue(rsFor.getBefore() instanceof XStringLiteral);
+		assertTrue(rsFor.getAfter() instanceof XFeatureCall);
+		assertTrue(((XAbstractFeatureCall) rsFor.getAfter()).getFeature().eIsProxy());
+	}
+	
+	public void testRichStringFOR_03() throws Exception {
+		XtendFunction function = function("withForLoop(String it) '''«it»«val it = 1..10»«FOR i: it SEPARATOR it»«ENDFOR»'''");
+		final RichString richString = (RichString) function.getExpression();
+		assertTrue(richString.getExpressions().get(0) instanceof RichStringLiteral);
+		assertTrue(richString.getExpressions().get(1) instanceof XFeatureCall);
+		assertSame(function.getParameters().get(0), ((XAbstractFeatureCall) richString.getExpressions().get(1)).getFeature());
+		assertTrue(richString.getExpressions().get(2) instanceof RichStringLiteral);
+		assertTrue(richString.getExpressions().get(3) instanceof XVariableDeclaration);
+		assertTrue(richString.getExpressions().get(4) instanceof RichStringLiteral);
+		assertTrue(richString.getExpressions().get(5) instanceof RichStringForLoop);
+		
+		final RichStringForLoop rsFor = (RichStringForLoop) richString.getExpressions().get(5);
+		assertTrue(rsFor.getForExpression() instanceof XFeatureCall);
+		assertSame(richString.getExpressions().get(3), ((XAbstractFeatureCall) rsFor.getForExpression()).getFeature()); 
+		assertEquals("i", rsFor.getDeclaredParam().getName());
+		assertTrue(rsFor.getSeparator() instanceof XFeatureCall);
+		assertSame(richString.getExpressions().get(3), ((XAbstractFeatureCall) rsFor.getSeparator()).getFeature());
 	}
 	
 	public void testImport_01() throws Exception {

@@ -518,4 +518,66 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 				"'''");
 	}
 	
+	public void testForLoop_17() throws Exception {
+		assertOutput(
+				"",
+				"'''«FOR a: ''.toCharArray BEFORE '<-' SEPARATOR '-' AFTER '->'»foobar«ENDFOR»'''");
+	}
+	
+	public void testForLoop_18() throws Exception {
+		assertOutput(
+				"<-foobar->",
+				"'''«FOR a: '1'.toCharArray BEFORE '<-' SEPARATOR '-' AFTER '->'»foobar«ENDFOR»'''");
+	}
+	
+	public void testForLoop_19() throws Exception {
+		assertOutput(
+				"<-foobar-foobar->",
+				"'''«FOR a: '12'.toCharArray BEFORE '<-' SEPARATOR '-' AFTER '->'»foobar«ENDFOR»'''");
+	}
+	
+	public void testForLoop_20() throws Exception {
+		assertOutput(
+				"foobar-foobar->",
+				"'''«FOR a: '12'.toCharArray SEPARATOR '-' AFTER '->'»foobar«ENDFOR»'''");
+	}
+	
+	public void testForLoop_21() throws Exception {
+		assertOutput(
+				"<-foobar-foobar",
+				"'''«FOR a: '12'.toCharArray BEFORE '<-' SEPARATOR '-' »foobar«ENDFOR»'''");
+	}
+	
+	public void testForLoop_22() throws Exception {
+		assertOutput(
+				"<-foobarfoobar->",
+				"'''«FOR a: '12'.toCharArray BEFORE '<-' AFTER '->' »foobar«ENDFOR»'''");
+	}
+	
+	public void testForLoop_23() throws Exception {
+		assertOutput(
+				"  a,\n  a,\n  a,\n",
+				"'''  «FOR a: '123'.toCharArray»\n" +
+				"      a,\n" +
+				"  «ENDFOR»'''");
+	}
+	
+	public void testForLoop_24() throws Exception {
+		assertOutput(
+//				"  a,\n  a,\n  a\n",
+				"  a\n  ,\n  a\n  ,\n  a\n",
+				"'''  «FOR a: '123'.toCharArray SEPARATOR ','»\n" +
+				"      a\n" +
+				"  «ENDFOR»'''");
+	}
+	
+	public void testForLoop_25() throws Exception {
+		assertOutput(
+//				"  begin [\n    a,\n    a,\n    a\n  ]",
+				"  begin [\n  a\n  ,\n  a\n  ,\n  a\n  ]",
+				"'''  «FOR a: '123'.toCharArray BEFORE 'begin [\n  ' SEPARATOR ',\n  ' AFTER ']' »\n" +
+				"      a\n" +
+				"  «ENDFOR»'''");
+	}
+	
 }

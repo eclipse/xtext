@@ -59,7 +59,7 @@ public class RichStringProcessor {
 				rootObject = object;
 			String indentation = computeInitialIndentation(object);
 			indentationHandler.pushTemplateIndentation(indentation);
-			List<XExpression> elements = object.getElements();
+			List<XExpression> elements = object.getExpressions();
 			for (XExpression element : elements) {
 				doSwitch(element);
 			}
@@ -72,12 +72,12 @@ public class RichStringProcessor {
 			acceptor.acceptForLoop(object.getDeclaredParam(), object.getForExpression());
 			controlStructureSeen = true;
 			if (object.getEachExpression() != null) {
-				while (acceptor.forLoopHasNext()) {
+				while (acceptor.forLoopHasNext(object.getBefore(), object.getSeparator(), indentationHandler.getTotalSemanticIndentation())) {
 					controlStructureSeen = true;
 					doSwitch(object.getEachExpression());
 				}
 			}
-			acceptor.acceptEndFor();
+			acceptor.acceptEndFor(object.getAfter(), indentationHandler.getTotalSemanticIndentation());
 			controlStructureSeen = true;
 			return Boolean.TRUE;
 		}
@@ -166,7 +166,7 @@ public class RichStringProcessor {
 					announceSemanticLinebreak(line.getDelimiterLength(), object);
 				}
 				RichString container = (RichString) object.eContainer();
-				if (container.getElements().get(0) != object)
+				if (container.getExpressions().get(0) != object)
 					indentationHandler.popIndentation();
 			}
 		}
@@ -197,7 +197,7 @@ public class RichStringProcessor {
 						announceSemanticLinebreak(line.getDelimiterLength(), object);
 					}
 					RichString container = (RichString) object.eContainer();
-					List<XExpression> siblings = container.getElements();
+					List<XExpression> siblings = container.getExpressions();
 					if (siblings.get(siblings.size() - 1) != object)
 						indentationHandler.popIndentation();
 				}
@@ -212,7 +212,7 @@ public class RichStringProcessor {
 			} else {
 				if (line.containsOnlyWhitespace()) {
 					RichString container = (RichString) object.eContainer();
-					List<XExpression> siblings = container.getElements();
+					List<XExpression> siblings = container.getExpressions();
 					if (container != rootObject) {
 						if (siblings.get(siblings.size() - 1) == object)
 							indentationHandler.popIndentation();

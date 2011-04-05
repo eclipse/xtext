@@ -51,13 +51,16 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="createExtensionInfo" eType="#//CreateExtensionInfo"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RichString" eSuperTypes="../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+  <eClassifiers xsi:type="ecore:EClass" name="RichString" eSuperTypes="../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XBlockExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RichStringLiteral" eSuperTypes="../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XStringLiteral"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RichStringForLoop" eSuperTypes="../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XForLoopExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="separator" eType="ecore:EClass ../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="before" eType="ecore:EClass ../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="after" eType="ecore:EClass ../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RichStringLiteral" eSuperTypes="../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XStringLiteral"/>
-  <eClassifiers xsi:type="ecore:EClass" name="RichStringForLoop" eSuperTypes="../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XForLoopExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="RichStringIf" eSuperTypes="../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="if" eType="ecore:EClass ../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
         containment="true"/>

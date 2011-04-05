@@ -376,13 +376,13 @@ public interface Xtend2Package extends EPackage
 	int RICH_STRING = 5;
 
 	/**
-	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RICH_STRING__ELEMENTS = XbasePackage.XEXPRESSION_FEATURE_COUNT + 0;
+	int RICH_STRING__EXPRESSIONS = XbasePackage.XBLOCK_EXPRESSION__EXPRESSIONS;
 
 	/**
 	 * The number of structural features of the '<em>Rich String</em>' class.
@@ -391,7 +391,7 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int RICH_STRING_FEATURE_COUNT = XbasePackage.XEXPRESSION_FEATURE_COUNT + 1;
+	int RICH_STRING_FEATURE_COUNT = XbasePackage.XBLOCK_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.RichStringLiteralImpl <em>Rich String Literal</em>}' class.
@@ -459,13 +459,40 @@ public interface Xtend2Package extends EPackage
 	int RICH_STRING_FOR_LOOP__DECLARED_PARAM = XbasePackage.XFOR_LOOP_EXPRESSION__DECLARED_PARAM;
 
 	/**
+	 * The feature id for the '<em><b>Separator</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RICH_STRING_FOR_LOOP__SEPARATOR = XbasePackage.XFOR_LOOP_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Before</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RICH_STRING_FOR_LOOP__BEFORE = XbasePackage.XFOR_LOOP_EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>After</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RICH_STRING_FOR_LOOP__AFTER = XbasePackage.XFOR_LOOP_EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Rich String For Loop</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RICH_STRING_FOR_LOOP_FEATURE_COUNT = XbasePackage.XFOR_LOOP_EXPRESSION_FEATURE_COUNT + 0;
+	int RICH_STRING_FOR_LOOP_FEATURE_COUNT = XbasePackage.XFOR_LOOP_EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.RichStringIfImpl <em>Rich String If</em>}' class.
@@ -922,17 +949,6 @@ public interface Xtend2Package extends EPackage
 	EClass getRichString();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtend2.xtend2.RichString#getElements <em>Elements</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Elements</em>'.
-	 * @see org.eclipse.xtext.xtend2.xtend2.RichString#getElements()
-	 * @see #getRichString()
-	 * @generated
-	 */
-	EReference getRichString_Elements();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.RichStringLiteral <em>Rich String Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -951,6 +967,39 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 */
 	EClass getRichStringForLoop();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtend2.xtend2.RichStringForLoop#getSeparator <em>Separator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Separator</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.RichStringForLoop#getSeparator()
+	 * @see #getRichStringForLoop()
+	 * @generated
+	 */
+	EReference getRichStringForLoop_Separator();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtend2.xtend2.RichStringForLoop#getBefore <em>Before</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Before</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.RichStringForLoop#getBefore()
+	 * @see #getRichStringForLoop()
+	 * @generated
+	 */
+	EReference getRichStringForLoop_Before();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtend2.xtend2.RichStringForLoop#getAfter <em>After</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>After</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.RichStringForLoop#getAfter()
+	 * @see #getRichStringForLoop()
+	 * @generated
+	 */
+	EReference getRichStringForLoop_After();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.RichStringIf <em>Rich String If</em>}'.
@@ -1338,14 +1387,6 @@ public interface Xtend2Package extends EPackage
 		EClass RICH_STRING = eINSTANCE.getRichString();
 
 		/**
-		 * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference RICH_STRING__ELEMENTS = eINSTANCE.getRichString_Elements();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.RichStringLiteralImpl <em>Rich String Literal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1364,6 +1405,30 @@ public interface Xtend2Package extends EPackage
 		 * @generated
 		 */
 		EClass RICH_STRING_FOR_LOOP = eINSTANCE.getRichStringForLoop();
+
+		/**
+		 * The meta object literal for the '<em><b>Separator</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RICH_STRING_FOR_LOOP__SEPARATOR = eINSTANCE.getRichStringForLoop_Separator();
+
+		/**
+		 * The meta object literal for the '<em><b>Before</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RICH_STRING_FOR_LOOP__BEFORE = eINSTANCE.getRichStringForLoop_Before();
+
+		/**
+		 * The meta object literal for the '<em><b>After</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RICH_STRING_FOR_LOOP__AFTER = eINSTANCE.getRichStringForLoop_After();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.RichStringIfImpl <em>Rich String If</em>}' class.

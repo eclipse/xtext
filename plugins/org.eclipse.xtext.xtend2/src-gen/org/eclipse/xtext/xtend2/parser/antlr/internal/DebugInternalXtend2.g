@@ -135,15 +135,20 @@ ruleInternalRichStringLiteral :
 
 // Rule RichStringPart
 ruleRichStringPart :
-	ruleXExpression |
+	ruleXExpressionInsideBlock |
 	ruleRichStringForLoop |
 	ruleRichStringIf
 ;
 
 // Rule RichStringForLoop
 ruleRichStringForLoop :
-	'FOR' ruleJvmFormalParameter ':' ruleXExpression ruleInternalRichString
-	'ENDFOR'
+	'FOR' ruleJvmFormalParameter ':' ruleXExpression (
+		'BEFORE' ruleXExpression
+	)? (
+		'SEPARATOR' ruleXExpression
+	)? (
+		'AFTER' ruleXExpression
+	)? ruleInternalRichString 'ENDFOR'
 ;
 
 // Rule RichStringIf

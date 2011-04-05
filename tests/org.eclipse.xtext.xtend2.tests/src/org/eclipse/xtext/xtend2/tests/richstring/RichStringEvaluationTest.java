@@ -145,24 +145,42 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 			if (!ignore()) {
 				XMemberFeatureCall featureCall = (XMemberFeatureCall) expression;
 				XStringLiteral receiver = (XStringLiteral) featureCall.getMemberCallTarget();
-				forLoopStack.push(receiver.getValue().length());
+				int length = receiver.getValue().length();
+				if (length != 0)
+					forLoopStack.push(length * -1);
+				else
+					forLoopStack.push(null);
 			}
 		}
 
 		@Override
-		public void acceptEndFor() {
+		public void acceptEndFor(XExpression after, CharSequence indentation) {
 			if (!ignore()) {
-				forLoopStack.pop();
+				if (forLoopStack.pop() != null && after != null) {
+					acceptExpression(after, indentation);
+				}
 			}
 		}
 		
-		@Override
-		public boolean forLoopHasNext() {
+		public boolean forLoopHasNext(XExpression before, XExpression separator, CharSequence indentation) {
 			if (!ignore()) {
-				int remaining = forLoopStack.peek();
-				if (remaining > 0) {
-					forLoopStack.set(forLoopStack.size() - 1, remaining - 1);
-					return true;
+				if (forLoopStack.peek() != null) {
+					int remaining = forLoopStack.peek();
+					boolean first = false;
+					if (remaining < 0) {
+						first = true;
+						remaining = remaining * -1;
+					}
+					if (remaining > 0) {
+						forLoopStack.set(forLoopStack.size() - 1, remaining - 1);
+						if (first) {
+							if (before != null)
+								acceptExpression(before, indentation);
+						} else if (separator != null) {
+							acceptExpression(separator, indentation);
+						}
+						return true;
+					}
 				}
 			}
 			return false;
@@ -173,6 +191,18 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 			XStringLiteral literal = (XStringLiteral) expression;
 			String value = literal.getValue();
 			value = value.replaceAll("\\n", "\n" + indentation);
+			for(int i = value.length() - 1; i >= 0; i--) {
+				if (value.charAt(i) == '\n') {
+					builder.append(currentLine);
+					builder.append(value.substring(0, i + 1));
+					if (i != value.length() - 1) {
+						currentLine = new StringBuilder(value.substring(i + 1));
+					} else {
+						currentLine = new StringBuilder();
+					}
+					return;
+				}
+			}
 			currentLine.append(value);
 		}
 		

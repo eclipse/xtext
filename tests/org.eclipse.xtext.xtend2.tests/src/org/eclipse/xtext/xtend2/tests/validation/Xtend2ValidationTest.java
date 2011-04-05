@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtend2.tests.validation;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import static org.eclipse.xtext.xtend2.validation.IssueCodes.*;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -149,5 +150,47 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	public void testDuplicateParameter() throws Exception {
 		XtendFunction function = function("foo(int x, int x) {null}");
 		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, DUPLICATE_PARAMETER_NAME, "duplicate", "name");
+	}
+	
+	public void testRichStringIfPredicate() throws Exception {
+		assertNoConformanceError("'''«IF Boolean::FALSE»«ENDIF»'''");
+		assertNoConformanceError("'''«IF true»«ENDIF»'''");
+		assertNoConformanceError("'''«IF 1 == 1»«ENDIF»'''");
+		assertConformanceError("'''«IF 1»«ENDIF»'''", XbasePackage.Literals.XINT_LITERAL, "java.lang.Integer",
+				"boolean", "java.lang.Boolean");
+	}
+	
+	public void testRichStringForLoop() throws Exception {
+		assertNoConformanceError("'''«FOR i: 1..10»«ENDFOR»'''");
+		assertNoConformanceError("'''«FOR i: 1..10 BEFORE 'a' SEPARATOR 1 AFTER true»«ENDFOR»'''");
+		assertConformanceError(
+				"'''«FOR i: 1..10 BEFORE while(true) null SEPARATOR 'b' AFTER 'c'»«ENDFOR»'''", 
+				XbasePackage.Literals.XWHILE_EXPRESSION, "void",
+				"java.lang.Object");
+		assertConformanceError(
+				"'''«FOR i: 1..10 BEFORE 'a' SEPARATOR while(true) null AFTER 'c'»«ENDFOR»'''", 
+				XbasePackage.Literals.XWHILE_EXPRESSION, "void",
+				"java.lang.Object");
+		assertConformanceError(
+				"'''«FOR i: 1..10 BEFORE 'a' SEPARATOR null AFTER while(true) null»«ENDFOR»'''", 
+				XbasePackage.Literals.XWHILE_EXPRESSION, "void",
+				"java.lang.Object");
+	}
+	
+
+	protected void assertConformanceError(String body, EClass objectType, String... messageParts)
+			throws Exception {
+		final XtendFunction function = function("foo() " + body);
+		helper.assertError(function, objectType, INCOMPATIBLE_TYPES, messageParts);
+	}
+
+	protected void assertCastError(String body, EClass objectType, String... messageParts) throws Exception {
+		final XtendFunction function = function("foo() " + body);
+		helper.assertError(function, objectType, INVALID_CAST, messageParts);
+	}
+
+	protected void assertNoConformanceError(String body) throws Exception {
+		final XtendFunction function = function("foo() " + body);
+		helper.assertNoError(function, INCOMPATIBLE_TYPES);
 	}
 }

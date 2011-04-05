@@ -47,10 +47,8 @@ public abstract class AbstractRichStringPartAcceptor implements IRichStringPartA
 
 	public void acceptForLoop(JvmFormalParameter parameter, XExpression expression) {
 	}
-
-	public abstract boolean forLoopHasNext();
-
-	public void acceptEndFor() {
+	
+	public void acceptEndFor(XExpression after, CharSequence indentation) {
 	}
 
 	public void acceptExpression(XExpression expression, CharSequence indentation) {
@@ -70,17 +68,16 @@ public abstract class AbstractRichStringPartAcceptor implements IRichStringPartA
 			forLoopStack.set(forLoopStackPointer);
 		}
 
-		@Override
-		public boolean forLoopHasNext() {
+		public boolean forLoopHasNext(XExpression before, XExpression separator, CharSequence indentation) {
 			if (forLoopStack.get(forLoopStackPointer)) {
 				forLoopStack.set(forLoopStackPointer, false);
 				return true;
 			}
 			return false;
 		}
-
+		
 		@Override
-		public void acceptEndFor() {
+		public void acceptEndFor(XExpression after, CharSequence indentation) {
 			forLoopStackPointer--;
 		}
 	}

@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 
+import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
@@ -147,6 +148,7 @@ public class Xtend2Switch<T>
 			{
 				RichString richString = (RichString)theEObject;
 				T result = caseRichString(richString);
+				if (result == null) result = caseXBlockExpression(richString);
 				if (result == null) result = caseXExpression(richString);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -441,6 +443,22 @@ public class Xtend2Switch<T>
 	 * @generated
 	 */
 	public T caseXExpression(XExpression object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XBlock Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XBlock Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXBlockExpression(XBlockExpression object)
 	{
 		return null;
 	}
