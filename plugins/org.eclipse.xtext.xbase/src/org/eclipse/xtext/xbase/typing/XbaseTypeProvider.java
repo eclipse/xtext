@@ -379,6 +379,16 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	}
 
 	protected JvmTypeReference _expectedType(XReturnExpression expr, EReference reference, int index, boolean rawType) {
+		if (reference == XbasePackage.Literals.XRETURN_EXPRESSION__EXPRESSION) {
+			XClosure closure = EcoreUtil2.getContainerOfType(expr, XClosure.class);
+			if (closure!=null) {
+				JvmTypeReference expectedReturnType = getExpectedType(closure.getExpression());
+				if (expectedReturnType != null) {
+					return expectedReturnType;
+				}
+			}
+			return getTypeReferences().getTypeForName(Object.class, expr);
+		}
 		return null; // no expectations!
 	}
 
