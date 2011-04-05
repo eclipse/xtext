@@ -70,20 +70,26 @@ public class StringConcatenation implements CharSequence {
 	protected void appendSegments(String indentation, List<String> otherSegments) {
 		for(String otherSegment: otherSegments) {
 			segments.add(otherSegment);
-			if (lineDelimiter.equals(otherSegment))
+			length += otherSegment.length();
+			if (lineDelimiter.equals(otherSegment)) {
 				segments.add(indentation);
+				length += indentation.length();
+			}
 		}
 	}
 	
 	public void newLine() {
 		segments.add(lineDelimiter);
+		length += lineDelimiter.length();
 	}
 	
 	public void newLineIfNotEmpty() {
+		int trimmedLength = 0;
 		for(int i = segments.size() - 1; i >= 0; i--) {
 			String segment = segments.get(i);
 			if (lineDelimiter.equals(segment)) {
 				segments.subList(i + 1, segments.size()).clear();
+				length -= trimmedLength;
 				return;
 			}
 			for(int j = 0; j < segment.length(); j++) {
@@ -92,8 +98,10 @@ public class StringConcatenation implements CharSequence {
 					return;
 				}
 			}
+			trimmedLength += segment.length();
 		}
 		segments.clear();
+		length = 0;
 	}
 	
 	@Override
@@ -106,10 +114,12 @@ public class StringConcatenation implements CharSequence {
 	}
 
 	protected void trimTrailingEmptySegments() {
+		int trimmedLength = 0;
 		for(int i = segments.size() - 1; i >= 0; i--) {
 			String segment = segments.get(i);
 			if (lineDelimiter.equals(segment)) {
 				segments.subList(i + 1, segments.size()).clear();
+				length -= trimmedLength;
 				return;
 			}
 			for(int j = 0; j < segment.length(); j++) {
@@ -117,6 +127,7 @@ public class StringConcatenation implements CharSequence {
 					return;
 				}
 			}
+			trimmedLength += segment.length();
 		}
 	}
 

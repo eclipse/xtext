@@ -38,4 +38,9 @@ public class RichStringCompilerTest extends AbstractRichStringEvaluationTest {
 				"	  foobar«ENDIF»\n"+
 				"'''");
 	}
+	
+	public void testVariableInString_01() throws Exception {
+		assertOutput("1, 2, 3, 4, 5, 6, 7, 8, 9, 10", "'''«var max = 10»«FOR i: 1..max SEPARATOR ', '»«i»«ENDFOR»'''");
+	}
+	
 }
