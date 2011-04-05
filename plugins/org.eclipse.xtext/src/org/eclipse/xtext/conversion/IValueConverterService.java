@@ -14,7 +14,10 @@ import org.eclipse.xtext.nodemodel.INode;
  *
  */
 public interface IValueConverterService {
-
+	
+	/**
+	 * @see org.eclipse.xtext.nodemodel.util.NodeModelUtils#getTokenText(INode)
+	 */
 	Object toValue(String string, String lexerRule, INode node) throws ValueConverterException;
 
 	String toString(Object value, String lexerRule);

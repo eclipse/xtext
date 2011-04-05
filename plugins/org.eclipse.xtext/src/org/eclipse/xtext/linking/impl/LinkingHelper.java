@@ -14,8 +14,8 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
-import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 import com.google.inject.Inject;
 
@@ -48,28 +48,9 @@ public class LinkingHelper {
 	}
 
 	public String getCrossRefNodeAsString(INode node, boolean convert) {
-		String convertMe = null;
-		if (node instanceof ILeafNode)
-			convertMe = ((ILeafNode) node).getText();
-		else {
-			StringBuilder builder = new StringBuilder(Math.max(node.getTotalLength(), 1));
-			boolean hiddenSeen = false;
-			for(ILeafNode leaf: node.getLeafNodes()) {
-				if (!leaf.isHidden()) {
-					if (hiddenSeen && builder.length() > 0)
-						builder.append(' ');
-					builder.append(leaf.getText());
-					hiddenSeen = false;
-				} else {
-					hiddenSeen = true;
-				}
-			}
-			convertMe = builder.toString();
-		}
-
+		String convertMe = NodeModelUtils.getTokenText(node);
 		if (!convert)
 			return convertMe;
-
 		try {
 			String ruleName = getRuleNameFrom(node.getGrammarElement());
 			if (ruleName == null)

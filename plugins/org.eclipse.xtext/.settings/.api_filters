@@ -8,6 +8,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.serializer.impl.SemanitcNodeProvider">
+        <filter comment="renamed class because of a typo" id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.SemanitcNodeProvider"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/formatting/INodeModelFormatter.java" type="org.eclipse.xtext.formatting.INodeModelFormatter$IFormattedRegion">
         <filter comment="renamed getLenght() to getLength()" id="403804204">
             <message_arguments>
@@ -32,6 +40,38 @@
         <filter comment="renamed getLenght() to getLength()" id="1143996420">
             <message_arguments>
                 <message_argument value="getLength()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/nodemodel/util/NodeModelUtils.java" type="org.eclipse.xtext.nodemodel.util.NodeModelUtils">
+        <filter comment="renamed a method since the old name didn't relect its behavior" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.nodemodel.util.NodeModelUtils"/>
+                <message_argument value="getTextWithoutHidden(INode)"/>
+            </message_arguments>
+        </filter>
+        <filter comment="there is no reason for this method to be public" id="421572723">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.nodemodel.util.NodeModelUtils"/>
+                <message_argument value="compactDump(INode, boolean, String, Appendable)"/>
+            </message_arguments>
+        </filter>
+        <filter comment="this should be private since it relies heavily on the assumption, that the node is the one that is returned by #findActualNodeFor(EObject)" id="421572723">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.nodemodel.util.NodeModelUtils"/>
+                <message_argument value="findNodesForFeature(EObject, INode, EStructuralFeature)"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Renamed the method since it is now returning hidden tokens in some occasions" id="1143996420">
+            <message_arguments>
+                <message_argument value="getTokenText(INode)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/impl/SemanticNodeProvider.java" type="org.eclipse.xtext.serializer.impl.SemanticNodeProvider">
+        <filter comment="Fixed Typo" id="1110441988">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.SemanticNodeProvider"/>
             </message_arguments>
         </filter>
     </resource>
