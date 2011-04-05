@@ -68,10 +68,732 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src/org/eclipse/xtext/serializer/impl/SemanticNodeProvider.java" type="org.eclipse.xtext.serializer.impl.SemanticNodeProvider">
-        <filter comment="Fixed Typo" id="1110441988">
+    <resource path="src/org/eclipse/xtext/parsetree/reconstr/Serializer.java" type="org.eclipse.xtext.parsetree.reconstr.Serializer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="337682486">
             <message_arguments>
-                <message_argument value="org.eclipse.xtext.serializer.impl.SemanticNodeProvider"/>
+                <message_argument value="org.eclipse.xtext.parsetree.reconstr.Serializer"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Exporting the Serializer via x-frinds only" id="576725006">
+            <message_arguments>
+                <message_argument value="ISerializer"/>
+                <message_argument value="Serializer"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/resource/XtextResource.java" type="org.eclipse.xtext.resource.XtextResource">
+        <filter comment="Exporting the Serializer via x-frinds only" id="643842064">
+            <message_arguments>
+                <message_argument value="ISerializer"/>
+                <message_argument value="XtextResource"/>
+                <message_argument value="getSerializer()"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Exporting the Serializer via x-frinds only" id="643846161">
+            <message_arguments>
+                <message_argument value="ISerializer"/>
+                <message_argument value="XtextResource"/>
+                <message_argument value="setSerializer(ISerializer)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/IGrammarConstraintProvider.java" type="org.eclipse.xtext.serializer.IGrammarConstraintProvider">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.IGrammarConstraintProvider"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.IGrammarConstraintProvider"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/IHiddenTokenSequencer.java" type="org.eclipse.xtext.serializer.IHiddenTokenSequencer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.IHiddenTokenSequencer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.IHiddenTokenSequencer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/IRecursiveSequencer.java" type="org.eclipse.xtext.serializer.IRecursiveSequencer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.IRecursiveSequencer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.IRecursiveSequencer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/ISemanticNodeProvider.java" type="org.eclipse.xtext.serializer.ISemanticNodeProvider">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.ISemanticNodeProvider"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.ISemanticNodeProvider"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/ISemanticSequencer.java" type="org.eclipse.xtext.serializer.ISemanticSequencer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.ISemanticSequencer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.ISemanticSequencer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/ISerializer.java" type="org.eclipse.xtext.serializer.ISerializer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.ISerializer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.ISerializer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/ISyntacticSequencer.java" type="org.eclipse.xtext.serializer.ISyntacticSequencer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.ISyntacticSequencer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.ISyntacticSequencer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/ISyntacticSequencerPDAProvider.java" type="org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/ITransientValueService.java" type="org.eclipse.xtext.serializer.ITransientValueService">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.ITransientValueService"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.ITransientValueService"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/acceptor/DebugSequenceAcceptor.java" type="org.eclipse.xtext.serializer.acceptor.DebugSequenceAcceptor">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.acceptor.DebugSequenceAcceptor"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.acceptor.DebugSequenceAcceptor"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/acceptor/IAssignedTokenSequenceAcceptor.java" type="org.eclipse.xtext.serializer.acceptor.IAssignedTokenSequenceAcceptor">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.acceptor.IAssignedTokenSequenceAcceptor"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.acceptor.IAssignedTokenSequenceAcceptor"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/acceptor/IEObjectSequenceAcceptor.java" type="org.eclipse.xtext.serializer.acceptor.IEObjectSequenceAcceptor">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.acceptor.IEObjectSequenceAcceptor"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.acceptor.IEObjectSequenceAcceptor"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/acceptor/IHiddenTokensAcceptor.java" type="org.eclipse.xtext.serializer.acceptor.IHiddenTokensAcceptor">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.acceptor.IHiddenTokensAcceptor"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.acceptor.IHiddenTokensAcceptor"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/acceptor/IRecursiveSequenceAcceptor.java" type="org.eclipse.xtext.serializer.acceptor.IRecursiveSequenceAcceptor">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.acceptor.IRecursiveSequenceAcceptor"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.acceptor.IRecursiveSequenceAcceptor"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/acceptor/ISemanticSequenceAcceptor.java" type="org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/acceptor/ISyntacticSequenceAcceptor.java" type="org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/acceptor/IUnassignedTokenSequenceAcceptor.java" type="org.eclipse.xtext.serializer.acceptor.IUnassignedTokenSequenceAcceptor">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.acceptor.IUnassignedTokenSequenceAcceptor"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.acceptor.IUnassignedTokenSequenceAcceptor"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/acceptor/TokenStreamSequenceAdapter.java" type="org.eclipse.xtext.serializer.acceptor.TokenStreamSequenceAdapter">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.acceptor.TokenStreamSequenceAdapter"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.acceptor.TokenStreamSequenceAdapter"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/diagnostic/ISemanticSequencerDiagnosticProvider.java" type="org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/diagnostic/ISerializationDiagnostic.java" type="org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/diagnostic/ISyntacticSequencerDiagnosticProvider.java" type="org.eclipse.xtext.serializer.diagnostic.ISyntacticSequencerDiagnosticProvider">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.diagnostic.ISyntacticSequencerDiagnosticProvider"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.diagnostic.ISyntacticSequencerDiagnosticProvider"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/diagnostic/ITokenDiagnosticProvider.java" type="org.eclipse.xtext.serializer.diagnostic.ITokenDiagnosticProvider">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.diagnostic.ITokenDiagnosticProvider"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.diagnostic.ITokenDiagnosticProvider"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/diagnostic/SequencerDiagnosticProvider.java" type="org.eclipse.xtext.serializer.diagnostic.SequencerDiagnosticProvider">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.diagnostic.SequencerDiagnosticProvider"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.diagnostic.SequencerDiagnosticProvider"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/diagnostic/SerializationDiagnostic.java" type="org.eclipse.xtext.serializer.diagnostic.SerializationDiagnostic">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.diagnostic.SerializationDiagnostic"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.diagnostic.SerializationDiagnostic"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/diagnostic/SyntacticSequencerDiagnosticProvider.java" type="org.eclipse.xtext.serializer.diagnostic.SyntacticSequencerDiagnosticProvider">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.diagnostic.SyntacticSequencerDiagnosticProvider"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.diagnostic.SyntacticSequencerDiagnosticProvider"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/diagnostic/TokenDiagnosticProvider.java" type="org.eclipse.xtext.serializer.diagnostic.TokenDiagnosticProvider">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.diagnostic.TokenDiagnosticProvider"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.diagnostic.TokenDiagnosticProvider"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/impl/AbstractNodeModelSequencer.java" type="org.eclipse.xtext.serializer.impl.AbstractNodeModelSequencer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.AbstractNodeModelSequencer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.AbstractNodeModelSequencer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/impl/AbstractSyntacticSequencer.java" type="org.eclipse.xtext.serializer.impl.AbstractSyntacticSequencer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.AbstractSyntacticSequencer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.AbstractSyntacticSequencer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/impl/EmitterNodeFinder.java" type="org.eclipse.xtext.serializer.impl.EmitterNodeFinder">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.EmitterNodeFinder"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.EmitterNodeFinder"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/impl/EmitterNodeIterator.java" type="org.eclipse.xtext.serializer.impl.EmitterNodeIterator">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.EmitterNodeIterator"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.EmitterNodeIterator"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/impl/GenericSequencer.java" type="org.eclipse.xtext.serializer.impl.GenericSequencer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.GenericSequencer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.GenericSequencer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/impl/GrammarConstraintProvider.java" type="org.eclipse.xtext.serializer.impl.GrammarConstraintProvider">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.GrammarConstraintProvider"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.GrammarConstraintProvider"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/impl/HiddenTokenSequencer.java" type="org.eclipse.xtext.serializer.impl.HiddenTokenSequencer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.HiddenTokenSequencer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.HiddenTokenSequencer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/impl/LegacyTransientValueService.java" type="org.eclipse.xtext.serializer.impl.LegacyTransientValueService">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.LegacyTransientValueService"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.LegacyTransientValueService"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/impl/NodeModelSemanticSequencer.java" type="org.eclipse.xtext.serializer.impl.NodeModelSemanticSequencer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.NodeModelSemanticSequencer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.NodeModelSemanticSequencer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/impl/NodeModelSyntacticSequencer.java" type="org.eclipse.xtext.serializer.impl.NodeModelSyntacticSequencer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.NodeModelSyntacticSequencer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.NodeModelSyntacticSequencer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/impl/RCStack.java" type="org.eclipse.xtext.serializer.impl.RCStack">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.RCStack"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.RCStack"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/impl/RecursiveSequencer.java" type="org.eclipse.xtext.serializer.impl.RecursiveSequencer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.RecursiveSequencer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.RecursiveSequencer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/impl/Serializer.java" type="org.eclipse.xtext.serializer.impl.Serializer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.Serializer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.Serializer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/impl/SyntacticSequencer.java" type="org.eclipse.xtext.serializer.impl.SyntacticSequencer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.SyntacticSequencer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.SyntacticSequencer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/impl/SyntacticSequencerPDAProvider.java" type="org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/impl/TransientValueService.java" type="org.eclipse.xtext.serializer.impl.TransientValueService">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.TransientValueService"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.impl.TransientValueService"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/tokens/CrossReferenceSerializer.java" type="org.eclipse.xtext.serializer.tokens.CrossReferenceSerializer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.tokens.CrossReferenceSerializer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.tokens.CrossReferenceSerializer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/tokens/EnumLiteralSerializer.java" type="org.eclipse.xtext.serializer.tokens.EnumLiteralSerializer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.tokens.EnumLiteralSerializer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.tokens.EnumLiteralSerializer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/tokens/ICrossReferenceSerializer.java" type="org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/tokens/IEnumLiteralSerializer.java" type="org.eclipse.xtext.serializer.tokens.IEnumLiteralSerializer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.tokens.IEnumLiteralSerializer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.tokens.IEnumLiteralSerializer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/tokens/IKeywordSerializer.java" type="org.eclipse.xtext.serializer.tokens.IKeywordSerializer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.tokens.IKeywordSerializer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.tokens.IKeywordSerializer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/tokens/IValueSerializer.java" type="org.eclipse.xtext.serializer.tokens.IValueSerializer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.tokens.IValueSerializer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.tokens.IValueSerializer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/tokens/KeywordSerializer.java" type="org.eclipse.xtext.serializer.tokens.KeywordSerializer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.tokens.KeywordSerializer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.tokens.KeywordSerializer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/serializer/tokens/ValueSerializer.java" type="org.eclipse.xtext.serializer.tokens.ValueSerializer">
+        <filter comment="Exporting the Serializer via x-frinds only" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.tokens.ValueSerializer"/>
+                <message_argument value="org.eclipse.xtext_2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter id="305426566">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.serializer.tokens.ValueSerializer"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
             </message_arguments>
         </filter>
     </resource>
