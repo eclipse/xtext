@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
@@ -43,6 +44,7 @@ import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
@@ -353,5 +355,34 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 		}
 		return types;
 	}
-
+	
+	@Check
+	protected void checkNoReturnsInCreateExtensions(XtendFunction func) {
+		if (func.getCreateExtensionInfo()==null)
+			return;
+		List<XReturnExpression> found = newArrayList();
+		collectReturnExpressions(func.getCreateExtensionInfo().getCreateExpression(), found);
+		for (XReturnExpression xReturnExpression : found) {
+			error("Return is not allowed in creation expression",xReturnExpression, null, INVALID_EARLY_EXIT);
+		}
+		
+		found.clear();
+		collectReturnExpressions(func.getExpression(), found);
+		for (XReturnExpression ret : found) {
+			if (ret.getExpression()!=null) {
+				error("Return with expression is not allowed within an initializer of a create function.",ret, null, INVALID_EARLY_EXIT);
+			}
+		}
+	}
+	
+	protected void collectReturnExpressions(EObject expr, List<XReturnExpression> found) {
+		if (expr instanceof XReturnExpression) {
+			found.add((XReturnExpression) expr);
+		} else if (expr instanceof XClosure) {
+			return;
+		}
+		for (EObject child : expr.eContents()) {
+			collectReturnExpressions(child, found);
+		}
+	}
 }
