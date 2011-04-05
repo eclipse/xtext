@@ -41,6 +41,7 @@ public class NodeModelUtils {
 	/**
 	 * Find the leaf node at the given offset. May return <code>null</code> if the given offset is not valid for the
 	 * node (sub-)tree.
+	 * @return the leaf node at the given offset or <code>null</code>.
 	 */
 	public static ILeafNode findLeafNodeAtOffset(INode node, int leafNodeOffset) {
 		int offset = node.getTotalOffset();
@@ -87,13 +88,16 @@ public class NodeModelUtils {
 	}
 
 	/**
-	 * @return the node that is directly associated with the given object by means of an EMF-Adapter.
+	 * Returns the node that is directly associated with the given object by means of an EMF-Adapter.
+	 * @return the node that is directly associated with the given object.
 	 * @see NodeModelUtils#findActualNodeFor(EObject)
 	 */
 	public static ICompositeNode getNode(EObject object) {
 		if (object == null)
 			return null;
-		for (Adapter adapter : object.eAdapters()) {
+		List<Adapter> adapters = object.eAdapters();
+		for(int i = 0; i < adapters.size(); i++) {
+			Adapter adapter = adapters.get(i);
 			if (adapter instanceof ICompositeNode)
 				return (ICompositeNode) adapter;
 		}
@@ -101,6 +105,7 @@ public class NodeModelUtils {
 	}
 
 	/**
+	 * Returns the list of nodes that were used to assign values to the given feature for the given object.
 	 * @return the list of nodes that were used to assign values to the given feature for the given object.
 	 */
 	public static List<INode> findNodesForFeature(EObject semanticObject, EStructuralFeature structuralFeature) {
@@ -111,6 +116,8 @@ public class NodeModelUtils {
 		return Collections.emptyList();
 	}
 
+	// TODO this should be private since it relies heavily on the assumption, that
+	// the node is the one that is returned by #findActualNodeFor(EObject)
 	public static List<INode> findNodesForFeature(EObject semanticElement, INode node,
 			EStructuralFeature structuralFeature) {
 		List<INode> result = Lists.newArrayList();
@@ -157,8 +164,10 @@ public class NodeModelUtils {
 	}
 
 	/**
-	 * @return the node that covers all assigned values of the given object. It handles {@link Action Actions} and
-	 *         {@link RuleCall unassigned rule calls}.
+	 * Returns the node that covers all assigned values of the given object.
+	 * It handles the semantics of {@link Action actions} and 
+	 * {@link RuleCall unassigned rule calls}.
+	 * @return the node that covers all assigned values of the given object. 
 	 */
 	public static ICompositeNode findActualNodeFor(EObject semanticObject) {
 		ICompositeNode node = getNode(semanticObject);
@@ -171,8 +180,10 @@ public class NodeModelUtils {
 	}
 
 	/**
-	 * @return the semantic object that is really associated with the actual container node of the given node. It
-	 *         handles {@link Action Actions} and {@link RuleCall unassigned rule calls}.
+	 * Returns the semantic object that is really associated with the actual container node of the given node.
+	 * It handles the structural semantics that results from {@link Action Actions} and 
+	 * {@link RuleCall unassigned rule calls}.
+	 * @return the semantic object that is really associated with the actual container node of the given node.
 	 */
 	public static EObject findActualSemanticObjectFor(INode node) {
 		if (node == null)
@@ -227,6 +238,10 @@ public class NodeModelUtils {
 		return null;
 	}
 
+	/**
+	 * Creates a string representation of the given node. Useful for debugging.
+	 * @return a debug string for the given node.
+	 */
 	public static String compactDump(INode node, boolean showHidden) {
 		StringBuilder result = new StringBuilder();
 		try {
@@ -237,6 +252,7 @@ public class NodeModelUtils {
 		return result.toString();
 	}
 
+	// TODO this method should be private
 	public static void compactDump(INode node, boolean showHidden, String prefix, Appendable result) throws IOException {
 		if (!showHidden && node instanceof ILeafNode && ((ILeafNode) node).isHidden())
 			return;
@@ -271,6 +287,8 @@ public class NodeModelUtils {
 		}
 	}
 
+	// TODO this one should use the same logic as 
+	// LinkingHelper#getCrossRefNodeAsString
 	public static String getTextWithoutHidden(INode node) {
 		if (node instanceof ILeafNode) {
 			ILeafNode ln = (ILeafNode) node;
