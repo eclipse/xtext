@@ -28,6 +28,36 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 
 	@Inject
 	private ValidationTestHelper helper;
+	
+	public void testNoReturnInCreateFunctions() throws Exception {
+		XtendFunction function = function("create if (true) return 'foo' else 'bar' foo() { }");
+		helper.assertError(function, XbasePackage.Literals.XRETURN_EXPRESSION, INVALID_EARLY_EXIT);
+	}
+	
+	public void testNoReturnInCreateFunctions_00() throws Exception {
+		XtendFunction function = function("create [|if (true) return 'foo' else 'bar'] foo() { }");
+		helper.assertNoErrors(function);
+	}
+	
+	public void testNoReturnInCreateFunctions_01() throws Exception {
+		XtendFunction function = function("create 'foo' foo() { return 'bar' }");
+		helper.assertError(function, XbasePackage.Literals.XRETURN_EXPRESSION, INVALID_EARLY_EXIT);
+	}
+	
+	public void testNoReturnInCreateFunctions_02() throws Exception {
+		XtendFunction function = function("create 'foo' foo() { return }");
+		helper.assertNoErrors(function);
+	}
+	
+	public void testNoReturnInCreateFunctions_03() throws Exception {
+		XtendFunction function = function("create 'foo' foo() { [|return 'foo'].apply() }");
+		helper.assertNoErrors(function);
+	}
+	
+	public void testNoReturnInCreateFunctions_04() throws Exception {
+		XtendFunction function = function("create 'foo' foo() { if (true) 'foo'+'bar' else return 'baz' }");
+		helper.assertError(function, XbasePackage.Literals.XRETURN_EXPRESSION, INVALID_EARLY_EXIT);
+	}
 
 	public void testReturnTypeCompatibility_00() throws Exception {
 		XtendFunction function = function("void foo(int bar) { }");
