@@ -13,6 +13,7 @@ import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.validation.EarlyExitValidator;
 import org.eclipse.xtext.xtend2.conversion.Xtend2ValueConverterService;
 import org.eclipse.xtext.xtend2.featurecalls.Xtend2IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.xtend2.resource.Xtend2Resource;
 import org.eclipse.xtext.xtend2.resource.Xtend2ResourceDescriptionStrategy;
 import org.eclipse.xtext.xtend2.scoping.Xtend2ImportedNamespaceScopeProvider;
 import org.eclipse.xtext.xtend2.typing.Xtend2TypeProvider;
+import org.eclipse.xtext.xtend2.validation.XtendEarlyExitValidator;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -74,4 +76,7 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 		return IXtend2JvmAssociations.Impl.class;
 	}
 
+	public Class<? extends EarlyExitValidator> bindEarlyExitValidator() {
+		return XtendEarlyExitValidator.class;
+	}
 }

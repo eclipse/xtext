@@ -41,7 +41,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testNoReturnInCreateFunctions_01() throws Exception {
 		XtendFunction function = function("create 'foo' foo() { return 'bar' }");
-		helper.assertError(function, XbasePackage.Literals.XRETURN_EXPRESSION, INVALID_EARLY_EXIT);
+		helper.assertError(function, XbasePackage.Literals.XSTRING_LITERAL, INCOMPATIBLE_TYPES);
 	}
 	
 	public void testNoReturnInCreateFunctions_02() throws Exception {
@@ -56,7 +56,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	
 	public void testNoReturnInCreateFunctions_04() throws Exception {
 		XtendFunction function = function("create 'foo' foo() { if (true) 'foo'+'bar' else return 'baz' }");
-		helper.assertError(function, XbasePackage.Literals.XRETURN_EXPRESSION, INVALID_EARLY_EXIT);
+		helper.assertError(function, XbasePackage.Literals.XSTRING_LITERAL, INCOMPATIBLE_TYPES);
 	}
 
 	public void testReturnTypeCompatibility_00() throws Exception {
