@@ -22,6 +22,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
@@ -44,7 +45,6 @@ import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
-import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
 import com.google.common.collect.ImmutableSet;
@@ -57,7 +57,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	private ITypeProvider typeProvider;
 
 	@Inject
-	private XbaseTypeConformanceComputer conformanceComputer;
+	private TypeConformanceComputer conformanceComputer;
 
 	@Inject
 	private XExpressionHelper expressionHelper;
@@ -360,5 +360,17 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	protected ITypeProvider getTypeProvider() {
 		return typeProvider;
+	}
+	
+	protected TypeReferences getTypeRefs() {
+		return typeRefs;
+	}
+	
+	protected TypesFactory getTypesFactory() {
+		return factory;
+	}
+	
+	protected IEarlyExitComputer getEarlyExitComputer() {
+		return earlyExitComputer;
 	}
 }
