@@ -19,7 +19,7 @@ import org.eclipse.xtext.serializer.ISemanticNodeProvider;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class SemanitcNodeProvider implements ISemanticNodeProvider {
+public class SemanticNodeProvider implements ISemanticNodeProvider {
 
 	public static class NodesForEObjectProvider implements INodesForEObjectProvider {
 
@@ -37,7 +37,9 @@ public class SemanitcNodeProvider implements ISemanticNodeProvider {
 				Object value) {
 			// TODO: find an implementation with better performance for this
 			// TODO: check the values of EReferences
-			List<INode> nodes = NodeModelUtils.findNodesForFeature(semanticObject, node, feature);
+			// TODO: consider the node that is passed in as parameter
+			// List<INode> nodes = NodeModelUtils.findNodesForFeature(semanticObject, node, feature);
+			List<INode> nodes = NodeModelUtils.findNodesForFeature(semanticObject, feature);
 			if (indexAmongNonTransient >= 0 && indexAmongNonTransient < nodes.size())
 				return nodes.get(indexAmongNonTransient);
 			return null;

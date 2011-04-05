@@ -11,14 +11,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.serializer.impl.SemanitcNodeProvider;
+import org.eclipse.xtext.serializer.impl.SemanticNodeProvider;
 
 import com.google.inject.ImplementedBy;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@ImplementedBy(SemanitcNodeProvider.class)
+@ImplementedBy(SemanticNodeProvider.class)
 public interface ISemanticNodeProvider {
 
 	interface INodesForEObjectProvider {

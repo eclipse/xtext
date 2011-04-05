@@ -36,7 +36,7 @@ public class NodeModelSyntacticSequencer extends AbstractNodeModelSequencer {
 				if (rc.getRule().getType().getClassifier() instanceof EClass)
 					acceptSemantic(acceptor, semanticObject, rc, node.getSemanticElement(), node);
 				else
-					acceptSemantic(acceptor, semanticObject, rc, NodeModelUtils.getTextWithoutHidden(node), node);
+					acceptSemantic(acceptor, semanticObject, rc, NodeModelUtils.getTokenText(node), node);
 				//				if (node.getSemanticElement() != semanticObject) {
 				//					ti.prune();
 				//					continue;

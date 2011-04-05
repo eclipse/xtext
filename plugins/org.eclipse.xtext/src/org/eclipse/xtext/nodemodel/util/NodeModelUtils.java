@@ -41,6 +41,7 @@ public class NodeModelUtils {
 	/**
 	 * Find the leaf node at the given offset. May return <code>null</code> if the given offset is not valid for the
 	 * node (sub-)tree.
+	 * 
 	 * @return the leaf node at the given offset or <code>null</code>.
 	 */
 	public static ILeafNode findLeafNodeAtOffset(INode node, int leafNodeOffset) {
@@ -89,6 +90,7 @@ public class NodeModelUtils {
 
 	/**
 	 * Returns the node that is directly associated with the given object by means of an EMF-Adapter.
+	 * 
 	 * @return the node that is directly associated with the given object.
 	 * @see NodeModelUtils#findActualNodeFor(EObject)
 	 */
@@ -96,7 +98,7 @@ public class NodeModelUtils {
 		if (object == null)
 			return null;
 		List<Adapter> adapters = object.eAdapters();
-		for(int i = 0; i < adapters.size(); i++) {
+		for (int i = 0; i < adapters.size(); i++) {
 			Adapter adapter = adapters.get(i);
 			if (adapter instanceof ICompositeNode)
 				return (ICompositeNode) adapter;
@@ -106,6 +108,7 @@ public class NodeModelUtils {
 
 	/**
 	 * Returns the list of nodes that were used to assign values to the given feature for the given object.
+	 * 
 	 * @return the list of nodes that were used to assign values to the given feature for the given object.
 	 */
 	public static List<INode> findNodesForFeature(EObject semanticObject, EStructuralFeature structuralFeature) {
@@ -116,9 +119,7 @@ public class NodeModelUtils {
 		return Collections.emptyList();
 	}
 
-	// TODO this should be private since it relies heavily on the assumption, that
-	// the node is the one that is returned by #findActualNodeFor(EObject)
-	public static List<INode> findNodesForFeature(EObject semanticElement, INode node,
+	private static List<INode> findNodesForFeature(EObject semanticElement, INode node,
 			EStructuralFeature structuralFeature) {
 		List<INode> result = Lists.newArrayList();
 		String featureName = structuralFeature.getName();
@@ -164,10 +165,10 @@ public class NodeModelUtils {
 	}
 
 	/**
-	 * Returns the node that covers all assigned values of the given object.
-	 * It handles the semantics of {@link Action actions} and 
-	 * {@link RuleCall unassigned rule calls}.
-	 * @return the node that covers all assigned values of the given object. 
+	 * Returns the node that covers all assigned values of the given object. It handles the semantics of {@link Action
+	 * actions} and {@link RuleCall unassigned rule calls}.
+	 * 
+	 * @return the node that covers all assigned values of the given object.
 	 */
 	public static ICompositeNode findActualNodeFor(EObject semanticObject) {
 		ICompositeNode node = getNode(semanticObject);
@@ -180,9 +181,10 @@ public class NodeModelUtils {
 	}
 
 	/**
-	 * Returns the semantic object that is really associated with the actual container node of the given node.
-	 * It handles the structural semantics that results from {@link Action Actions} and 
-	 * {@link RuleCall unassigned rule calls}.
+	 * Returns the semantic object that is really associated with the actual container node of the given node. It
+	 * handles the structural semantics that results from {@link Action Actions} and {@link RuleCall unassigned rule
+	 * calls}.
+	 * 
 	 * @return the semantic object that is really associated with the actual container node of the given node.
 	 */
 	public static EObject findActualSemanticObjectFor(INode node) {
@@ -203,7 +205,7 @@ public class NodeModelUtils {
 		}
 		return findActualSemanticObjectFor(node.getParent());
 	}
-	
+
 	private static EObject findActualSemanticObjectInChildren(INode node, EObject grammarElement) {
 		if (node.hasDirectSemanticElement())
 			return node.getSemanticElement();
@@ -240,6 +242,7 @@ public class NodeModelUtils {
 
 	/**
 	 * Creates a string representation of the given node. Useful for debugging.
+	 * 
 	 * @return a debug string for the given node.
 	 */
 	public static String compactDump(INode node, boolean showHidden) {
@@ -252,8 +255,8 @@ public class NodeModelUtils {
 		return result.toString();
 	}
 
-	// TODO this method should be private
-	public static void compactDump(INode node, boolean showHidden, String prefix, Appendable result) throws IOException {
+	private static void compactDump(INode node, boolean showHidden, String prefix, Appendable result)
+			throws IOException {
 		if (!showHidden && node instanceof ILeafNode && ((ILeafNode) node).isHidden())
 			return;
 		if (prefix.length() != 0) {
@@ -287,21 +290,37 @@ public class NodeModelUtils {
 		}
 	}
 
-	// TODO this one should use the same logic as 
-	// LinkingHelper#getCrossRefNodeAsString
-	public static String getTextWithoutHidden(INode node) {
-		if (node instanceof ILeafNode) {
-			ILeafNode ln = (ILeafNode) node;
-			return ln.isHidden() ? "" : ln.getText();
+	/**
+	 * This method converts a node to text.
+	 * 
+	 * Leading and trailing text from hidden tokens (whitespace/comments) is removed. Text from hidden tokens that is
+	 * surrounded by text from non-hidden tokens is summarized to a single whitespace.
+	 * 
+	 * The preferred use case of this method is to convert the {@link ICompositeNode} that has been created for a data
+	 * type rule to text.
+	 * 
+	 * This is also the recommended way to convert a node to text if you want to invoke
+	 * {@link org.eclipse.xtext.conversion.IValueConverterService#toValue(String, String, INode)}
+	 * 
+	 */
+	public static String getTokenText(INode node) {
+		if (node instanceof ILeafNode)
+			return ((ILeafNode) node).getText();
+		else {
+			StringBuilder builder = new StringBuilder(Math.max(node.getTotalLength(), 1));
+			boolean hiddenSeen = false;
+			for (ILeafNode leaf : node.getLeafNodes()) {
+				if (!leaf.isHidden()) {
+					if (hiddenSeen && builder.length() > 0)
+						builder.append(' ');
+					builder.append(leaf.getText());
+					hiddenSeen = false;
+				} else {
+					hiddenSeen = true;
+				}
+			}
+			return builder.toString();
 		}
-		BidiIterator<INode> it = node.getAsTreeIterable().iterator();
-		StringBuilder result = new StringBuilder();
-		while (it.hasNext()) {
-			INode next = it.next();
-			if (next instanceof ILeafNode && !((ILeafNode) next).isHidden())
-				result.append(((ILeafNode) next).getText());
-		}
-		return result.toString();
 	}
 
 }
