@@ -35,44 +35,68 @@ public class StringConcatenation implements CharSequence {
 	}
 	
 	public void append(Object object) {
+		append(object, segments.size());
+	}
+	
+	protected void append(Object object, int index) {
 		if (object == null)
 			return;
 		if (object instanceof StringConcatenation) {
-			segments.addAll(((StringConcatenation) object).segments);
+			segments.addAll(index, ((StringConcatenation) object).segments);
 			length += ((StringConcatenation) object).length;
 			return;
 		}
 		String value = object.toString();
 		List<String> newSegments = splitLinesAndNewLines(value);
 		for(String newSegment: newSegments) {
-			segments.add(newSegment);
+			segments.add(index, newSegment);
+			index++;
 			length += newSegment.length();
 		}
 	}
 	
 	public void append(Object object, String indentation) {
+		append(object, indentation, segments.size());
+	}
+	
+	protected void append(Object object, String indentation, int index) {
 		if (indentation.length() == 0) {
-			append(object);
+			append(object, index);
 			return;
 		}
 		if (object == null)
 			return;
 		if (object instanceof StringConcatenation) {
 			List<String> otherSegments = ((StringConcatenation) object).segments;
-			appendSegments(indentation, otherSegments);
+			appendSegments(indentation, index, otherSegments);
 			return;
 		}
 		String value = object.toString();
 		List<String> newSegments = splitLinesAndNewLines(value);
-		appendSegments(indentation, newSegments);
+		appendSegments(indentation, index, newSegments);
 	}
-
-	protected void appendSegments(String indentation, List<String> otherSegments) {
+	
+	public void appendImmediate(Object object, String indentation) {
+		for(int i = segments.size() - 1; i >= 0; i--) {
+			String segment = segments.get(i);
+			for(int j = 0; j < segment.length(); j++) {
+				if (!Character.isWhitespace(segment.charAt(j))) {
+					append(object, indentation, i + 1);
+					return;
+				}
+			}
+		}
+		append(object, indentation, 0);
+	}
+	
+	protected void appendSegments(String indentation, int index, List<String> otherSegments) {
 		for(String otherSegment: otherSegments) {
-			segments.add(otherSegment);
+			segments.add(index, otherSegment);
+			index++;
 			length += otherSegment.length();
 			if (lineDelimiter.equals(otherSegment)) {
-				segments.add(indentation);
+				segments.add(index, indentation);
+				index++;
 				length += indentation.length();
 			}
 		}

@@ -564,8 +564,7 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 	
 	public void testForLoop_24() throws Exception {
 		assertOutput(
-//				"  a,\n  a,\n  a\n",
-				"  a\n  ,\n  a\n  ,\n  a\n",
+				"  a,\n  a,\n  a\n",
 				"'''  «FOR a: '123'.toCharArray SEPARATOR ','»\n" +
 				"      a\n" +
 				"  «ENDFOR»'''");
@@ -573,11 +572,19 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 	
 	public void testForLoop_25() throws Exception {
 		assertOutput(
-//				"  begin [\n    a,\n    a,\n    a\n  ]",
-				"  begin [\n  a\n  ,\n  a\n  ,\n  a\n  ]",
-				"'''  «FOR a: '123'.toCharArray BEFORE 'begin [\n  ' SEPARATOR ',\n  ' AFTER ']' »\n" +
+				"  begin [\n  a,\n  a,\n  a\n  ]",
+				"'''  «FOR a: '123'.toCharArray BEFORE 'begin [' SEPARATOR ',' AFTER ']' »\n" +
 				"      a\n" +
 				"  «ENDFOR»'''");
 	}
+	
+//	public void testForLoop_26() throws Exception {
+//		assertOutput(
+////				"  begin [\n    a,\n    a,\n    a\n  ]",
+//				"  begin [\n  a\n  ,\n  a\n  ,\n  a\n  ]",
+//				"''' «FOR a: '123'.toCharArray SEPARATOR ',\n  \t'»\n" +
+//				"      a\n" +
+//				" «ENDFOR»'''");
+//	}
 	
 }
