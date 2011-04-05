@@ -42,6 +42,16 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertNoError(expression, TOO_MANY_PARAMS_IN_CLOSURE);
 	}
 	
+	public void testVoidInReturnExpression() throws Exception {
+		XExpression expression = expression("return while(false) 'foo'+'bar'");
+		helper.assertError(expression, XWHILE_EXPRESSION, INCOMPATIBLE_TYPES);
+	}
+	
+	public void testReturnExpressionInClosure() throws Exception {
+		XExpression expression = expression("{val (String)=>String func = [x | return true] func.apply('foo')}");
+		helper.assertError(expression, XBOOLEAN_LITERAL, INCOMPATIBLE_TYPES);
+	}
+	
 	public void testInCompatibleRightOperand() throws Exception {
 		XExpression expression = expression("true || 'foo'");
 		helper.assertError(expression, XSTRING_LITERAL, INCOMPATIBLE_TYPES);
