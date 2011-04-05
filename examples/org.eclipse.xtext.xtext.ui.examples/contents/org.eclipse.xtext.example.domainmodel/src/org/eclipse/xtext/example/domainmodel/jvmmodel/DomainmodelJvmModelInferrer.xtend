@@ -46,7 +46,10 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 		jvmClass.packageName = entity.packageName
 		entity.associatePrimary(jvmClass)
 		jvmClass.setPublic
-		entity.features.forEach(feature|transform(feature, jvmClass))
+		// TODO we need side-effect only closures
+		// entity.features.forEach(f|transform(f, jvmClass))
+		for(f: entity.features) 
+			transform(f, jvmClass)
 		newArrayList(jvmClass as JvmDeclaredType) 	 
 	}
 	
