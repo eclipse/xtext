@@ -504,7 +504,6 @@ public class CompilerTest extends AbstractXtend2TestCase {
 
 	protected Class<?> compileJavaCode(String clazzName, String code) {
 		String javaCode = compileToJavaCode(code);
-		System.out.println(javaCode);
 		try {
 			Class<?> clazz = javaCompiler.compileToClass(clazzName, javaCode);
 			return clazz;
