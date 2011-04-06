@@ -400,10 +400,14 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				// declare local var for case
 				String simpleName = getNameProvider().getSimpleName(casePart);
 				if (simpleName != null) {
-					b.append("\nfinal ").append(casePart.getTypeGuard()).append(" ");
+					b.append("\nfinal ");
+					serialize(casePart.getTypeGuard(),casePart,b);
+					b.append(" ");
 					String typeGuardName = b.declareVariable(casePart, simpleName);
 					b.append(typeGuardName);
-					b.append(" = (").append(casePart.getTypeGuard()).append(") ").append(variableName).append(";");
+					b.append(" = (");
+					serialize(casePart.getTypeGuard(),casePart,b);
+					b.append(") ").append(variableName).append(";");
 				}
 			}
 			if (casePart.getCase() != null) {
