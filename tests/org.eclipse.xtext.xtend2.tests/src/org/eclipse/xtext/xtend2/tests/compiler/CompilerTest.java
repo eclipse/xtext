@@ -8,11 +8,14 @@
 package org.eclipse.xtext.xtend2.tests.compiler;
 
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Sets.*;
 import static java.util.Collections.*;
 
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EAttribute;
@@ -62,6 +65,38 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		assertEquals("Bar", sb2.toString());
 		sb = (StringBuilder) method.invoke(instance, "Foo");
 		assertEquals("FooBar",sb.toString());
+	}
+	
+	public void testCreateExtension_threadSafety() throws Exception {
+		Class<?> clazz = compileJavaCode("x.Y", 
+				"package x " +
+				"class Y {" +
+				"  create {Thread::sleep(500) new StringBuilder()} aBuilder(String x) {" +
+				"   this.append(x)" +
+				"  }" +
+		"}");
+		final Object instance = clazz.newInstance();
+		final Method method = clazz.getDeclaredMethod("aBuilder", String.class);
+		final Set<Object> elements = newHashSet();
+		Runnable runnable = new Runnable() {
+			public void run() {
+				try {
+					elements.add(method.invoke(instance, "Foo"));
+				} catch (Exception e) {
+					throw new RuntimeException(e);
+				}
+			}
+		};
+		List<Thread> threads = newArrayList(); 
+		for (int i=0;i<10;i++) {
+			Thread t = new Thread(runnable);
+			t.start();
+			threads.add(t);
+		}
+		for (Thread thread : threads) {
+			thread.join();
+		}
+		assertEquals(1,elements.size());
 	}
 	
 	public void testInferredReturnType() throws Exception {
@@ -469,6 +504,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 
 	protected Class<?> compileJavaCode(String clazzName, String code) {
 		String javaCode = compileToJavaCode(code);
+		System.out.println(javaCode);
 		try {
 			Class<?> clazz = javaCompiler.compileToClass(clazzName, javaCode);
 			return clazz;
