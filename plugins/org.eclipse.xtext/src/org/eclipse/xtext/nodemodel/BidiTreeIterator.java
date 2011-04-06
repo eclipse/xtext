@@ -19,18 +19,22 @@ public interface BidiTreeIterator<T> extends TreeIterator<T>, BidiIterator<T> {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * Intermixed calls to {@link #next()} and {@link #previous()} may not lead
+	 * <p>Intermixed calls to {@link #next()} and {@link #previous()} may not lead
 	 * to the very same element since the iterator does not return the parent element
-	 * when its done with its children but the next sibling of the parent.
+	 * when its done with its children but the next sibling of the parent.</p>
+	 * 
+	 * @exception NoSuchElementException iteration has no next element.
 	 */
 	T next();
 	
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * Intermixed calls to {@link #next()} and {@link #previous()} may not lead
+	 * <p>Intermixed calls to {@link #next()} and {@link #previous()} may not lead
 	 * to the very same element since the iterator does not return the parent element
-	 * when its done with its children but the next sibling of the parent.
+	 * when its done with its children but the next sibling of the parent.</p>
+	 * 
+	 * @exception NoSuchElementException iteration has no previous element.
 	 */
 	T previous();
 	
