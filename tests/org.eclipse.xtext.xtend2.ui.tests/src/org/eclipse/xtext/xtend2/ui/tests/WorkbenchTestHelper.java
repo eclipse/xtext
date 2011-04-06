@@ -31,6 +31,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
@@ -197,9 +198,13 @@ public class WorkbenchTestHelper extends Assert {
 				"org.eclipse.pde.SchemaBuilder", XtextProjectHelper.BUILDER_ID);
 		projectFactory.addProjectNatures(JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature",
 				XtextProjectHelper.NATURE_ID);
-		projectFactory.addRequiredBundles(newArrayList("org.eclipse.xtext.xbase.lib", "org.eclipse.xtext.xtend2.lib"));
+		projectFactory.addRequiredBundles(newArrayList(
+				"org.eclipse.xtext.xbase.lib", 
+				"org.eclipse.xtext.xtend2.lib"));
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
-		JavaProjectSetupUtil.addJre15ClasspathEntry(JavaCore.create(result));
+		IJavaProject javaProject = JavaCore.create(result);
+		JavaProjectSetupUtil.makeJava5Compliant(javaProject);
+		JavaProjectSetupUtil.addJre15ClasspathEntry(javaProject);
 		return result;
 	}
 

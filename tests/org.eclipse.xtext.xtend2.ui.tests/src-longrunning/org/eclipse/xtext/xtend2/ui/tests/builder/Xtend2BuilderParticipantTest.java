@@ -40,8 +40,8 @@ public class Xtend2BuilderParticipantTest extends AbstractXtend2UITestCase {
 	
 	@Override
 	protected void tearDown() throws Exception {
-		super.tearDown();
 		testHelper.tearDown();
+		super.tearDown();
 	}
 	
 	public void testBuild() throws Exception {
