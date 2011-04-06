@@ -8,12 +8,12 @@
 package org.eclipse.xtext.xtend2.tests.compiler;
 
 import static com.google.common.collect.Lists.*;
-import static com.google.common.collect.Sets.*;
 import static java.util.Collections.*;
 
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -38,6 +38,7 @@ import test.ExtensionMethods;
 import testdata.Properties1;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Sets;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -68,20 +69,28 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testCreateExtension_threadSafety() throws Exception {
-		Class<?> clazz = compileJavaCode("x.Y", 
-				"package x " +
-				"class Y {" +
-				"  create {Thread::sleep(500) new StringBuilder()} aBuilder(String x) {" +
-				"   this.append(x)" +
-				"  }" +
-		"}");
+		String xtendCode = 
+			"package x " +
+			"class Y {" +
+			"  @Inject java.util.concurrent.atomic.AtomicInteger as production" +
+			"  @Inject java.util.concurrent.atomic.AtomicInteger as initialization" +
+			"  create result: {Thread::sleep(10) production.incrementAndGet new StringBuilder()} aBuilder(String x) {" +
+			"   Thread::sleep(10)" +
+			"   initialization.incrementAndGet" +
+			"   result.append(x)" +
+			"  }" +
+			"}";
+		Class<?> clazz = compileJavaCode("x.Y", xtendCode);
 		final Object instance = clazz.newInstance();
 		final Method method = clazz.getDeclaredMethod("aBuilder", String.class);
-		final Set<Object> elements = newHashSet();
+		final Set<Object> elements = Collections.synchronizedSet(Sets.newHashSet());
 		Runnable runnable = new Runnable() {
 			public void run() {
 				try {
-					elements.add(method.invoke(instance, "Foo"));
+					for (int i = 0; i < 50; i++) {
+						Object stringBuilder = method.invoke(instance, "Foo");
+						elements.add(stringBuilder);
+					}
 				} catch (Exception e) {
 					throw new RuntimeException(e);
 				}
@@ -96,7 +105,8 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		for (Thread thread : threads) {
 			thread.join();
 		}
-		assertEquals(1,elements.size());
+		assertEquals(compileToJavaCode(xtendCode) + " produced: " + elements, 1, elements.size());
+		assertEquals("Foo", elements.iterator().next().toString());
 	}
 	
 	public void testInferredReturnType() throws Exception {
