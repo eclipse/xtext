@@ -9,12 +9,14 @@ package org.eclipse.xtext.ui.junit.editor.autoedit;
 
 import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
@@ -82,6 +84,20 @@ public abstract class AbstractAutoEditTest extends AbstractEditorTest {
 			e.keyCode = 27;
 		}
 		textWidget.notifyListeners(SWT.KeyDown, e);
+	}
+	
+	protected void pasteText(XtextEditor editor, String text) throws Exception {
+		StyledText textWidget = editor.getInternalSourceViewer().getTextWidget();
+		Point selection = textWidget.getSelection();
+		Event event = new Event();
+		event.start = selection.x;
+		event.end = selection.y;
+		event.text = text;
+		event.keyCode = 4194304;
+		textWidget.notifyListeners(SWT.KeyDown, event);
+		Method sendKeyEvent = textWidget.getClass().getDeclaredMethod("sendKeyEvent", Event.class);
+		sendKeyEvent.setAccessible(true);
+		sendKeyEvent.invoke(textWidget, event);
 	}
 
 	protected void pressKeys(XtextEditor editor, String string) throws Exception {

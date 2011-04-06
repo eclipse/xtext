@@ -39,8 +39,12 @@ public class PartitionEndSkippingEditStrategy extends AbstractEditStrategy {
 					return;
 				if (!part.endsWith(end))
 					return;
-				if (part.substring(command.offset - partition.getOffset(), command.offset - partition.getOffset() + command.text.length()).equals(command.text))
-					command.length = command.text.length();
+				String text = command.text;
+				if (part.length() - relativeOffset < text.length()) {
+					text = text.substring(0, part.length() - relativeOffset);
+				}
+				if (part.substring(relativeOffset, relativeOffset + text.length()).equals(text))
+					command.length = text.length();
 			} else {
 				if (part.substring(command.offset - partition.getOffset()).equals(command.text))
 					command.length = command.text.length();
