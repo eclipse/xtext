@@ -166,7 +166,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	protected void convertListToArray(final JvmTypeReference listType, final IAppendable appendable,
 			XExpression context, final Later expression) {
 		appendable.append("((");
-		serialize(listType, context, appendable, false, true);
+		serialize(listType, context, appendable);
 		appendable.append(")");
 		JvmTypeReference conversions = typeRefs.getTypeForName(Conversions.class, context);
 		appendable.append(conversions).append(".unwrapArray(");
@@ -177,10 +177,10 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	protected void convertArrayToList(final JvmTypeReference left, final IAppendable appendable, XExpression context,
 			final Later expression) {
 		appendable.append("((");
-		serialize(left, context, appendable, false, true);
+		serialize(left, context, appendable);
 		appendable.append(")");
 		JvmTypeReference conversions = typeRefs.getTypeForName(Conversions.class, context);
-		serialize(conversions, context, appendable, false, true);
+		serialize(conversions, context, appendable);
 		appendable.append(".doWrapArray(");
 		expression.exec();
 		appendable.append("))");
@@ -189,7 +189,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	protected void convertPrimitiveToWrapper(final JvmTypeReference wrapper, final IAppendable appendable,
 			final Later expression) {
 		appendable.append("((");
-		serialize(wrapper, null, appendable, false, false);
+		serialize(wrapper, null, appendable);
 		appendable.append(")");
 		expression.exec();
 		appendable.append(")");

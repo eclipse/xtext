@@ -131,11 +131,14 @@ public abstract class AbstractXbaseCompiler {
 		throw new NullPointerException();
 	}
 
-	protected void serialize(final JvmTypeReference type, XExpression context, IAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard) {
+	protected void serialize(final JvmTypeReference type, EObject context, IAppendable appendable) {
+		serialize(type,context,appendable,false,true);
+	}
+	protected void serialize(final JvmTypeReference type, EObject context, IAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard) {
 		serialize(type, context, appendable, withoutConstraints, paramsToWildcard, true);
 	}
 	
-	protected void serialize(final JvmTypeReference type, XExpression context, IAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard, boolean allowPrimitives) {
+	protected void serialize(final JvmTypeReference type, EObject context, IAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard, boolean allowPrimitives) {
 		if (type instanceof JvmWildcardTypeReference) {
 			JvmWildcardTypeReference wildcard = (JvmWildcardTypeReference) type;
 			if (!withoutConstraints) {
@@ -197,7 +200,7 @@ public abstract class AbstractXbaseCompiler {
 		} else if (type instanceof JvmAnyTypeReference) {
 			appendable.append(type.getType());
 		} else if (type instanceof JvmMultiTypeReference) {
-			serialize(resolveMultiType(type), context, appendable, withoutConstraints, paramsToWildcard);
+			serialize(resolveMultiType(type), context, appendable, withoutConstraints, paramsToWildcard, allowPrimitives);
 		} else {
 			throw new IllegalArgumentException(type==null ? null : type.toString());
 		}
@@ -317,7 +320,7 @@ public abstract class AbstractXbaseCompiler {
 		}
 		String varName = declareNameInVariableScope(expr, b);
 		b.append("\n");
-		serialize(type,expr,b,false,true);
+		serialize(type,expr,b);
 		b.append(" ").append(varName).append(" = ");
 		expression.exec();
 		b.append(";");

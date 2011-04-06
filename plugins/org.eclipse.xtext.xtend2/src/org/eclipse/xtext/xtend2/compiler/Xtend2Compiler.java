@@ -113,12 +113,17 @@ public class Xtend2Compiler extends XbaseCompiler {
 		appendable.append("\n@SuppressWarnings(\"all\")");
 		appendable.append("\npublic class ").append(obj.getName());
 		appendTypeParameterDeclaration(obj.getTypeParameters(), appendable);
-		if (obj.getExtends() != null)
-			appendable.append(" extends ").append(obj.getExtends());
+		if (obj.getExtends() != null) {
+			appendable.append(" extends ");
+			serialize(obj.getExtends(), obj, appendable);
+		}
 		if (!obj.getImplements().isEmpty()) {
-			appendable.append(" implements ").append(obj.getImplements().get(0));
-			for (int i = 1; i < obj.getImplements().size(); ++i)
-				appendable.append(", ").append(obj.getImplements().get(i));
+			appendable.append(" implements ");
+			serialize(obj.getImplements().get(0), obj, appendable);
+			for (int i = 1; i < obj.getImplements().size(); ++i) {
+				appendable.append(", ");
+				serialize(obj.getImplements().get(i), obj, appendable);
+			}
 		}
 		appendable.append(" {");
 		appendable.increaseIndentation();
@@ -137,8 +142,12 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 
 	protected void compile(DeclaredDependency dependency, IAppendable appendable) {
-		appendable.append("\n@com.google.inject.Inject private ");
-		appendable.append(dependency.getType()).append(" ");
+		JvmTypeReference inject = getTypeReferences().getTypeForName(Inject.class, dependency);
+		appendable.append("\n@");
+		serialize(inject, dependency, appendable);
+		appendable.append(" private ");
+		serialize(dependency.getType(), dependency, appendable);
+		appendable.append(" ");
 		appendable.append(appendable.declareVariable(dependency, dependency.getSimpleName())).append(";");
 	}
 
@@ -161,7 +170,8 @@ public class Xtend2Compiler extends XbaseCompiler {
 			IAppendable a) {
 		a.openScope();
 		a.append("\n\npublic ");
-		a.append(resolveMultiType(dispatchOperation.getReturnType())).append(" ");
+		serialize(dispatchOperation.getReturnType(), dispatchOperation, a);
+		a.append(" ");
 		a.append(dispatchOperation.getSimpleName()).append("(");
 		declareParameters(dispatchOperation.getParameters(), a);
 		a.append(") {");
@@ -220,7 +230,9 @@ public class Xtend2Compiler extends XbaseCompiler {
 		for (Iterator<JvmFormalParameter> iter2 = actualOperationToCall.getParameters().iterator(); iter2.hasNext();) {
 			JvmFormalParameter p1 = iter1.next();
 			JvmFormalParameter p2 = iter2.next();
-			a.append("(").append(primitives.asWrapperTypeIfPrimitive(p2.getParameterType())).append(")");
+			a.append("(");
+			serialize(primitives.asWrapperTypeIfPrimitive(p2.getParameterType()), dispatchOperation, a);
+			a.append(")");
 			if (typeRefs.is(p2.getParameterType(), Void.class)) {
 				a.append("null");
 			} else {
@@ -246,7 +258,8 @@ public class Xtend2Compiler extends XbaseCompiler {
 		}
 		appendable.append("\n\n").append("public ");
 		appendTypeParameterDeclaration(obj.getTypeParameters(), appendable);
-		appendable.append(resolveMultiType(returnType)).append(" ").append(name).append("(");
+		serialize(resolveMultiType(returnType), obj, appendable);
+		appendable.append(" ").append(name).append("(");
 		final EList<JvmFormalParameter> parameters = obj.getParameters();
 		declareParameters(parameters, appendable);
 		appendable.append(") ");
@@ -255,7 +268,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 			appendable.append("throws ");
 			for (Iterator<JvmTypeReference> iterator = checkedExceptions.iterator(); iterator.hasNext();) {
 				JvmTypeReference jvmTypeReference = iterator.next();
-				appendable.append(jvmTypeReference);
+				serialize(jvmTypeReference, obj, appendable);
 				if (iterator.hasNext())
 					appendable.append(", ");
 			}
@@ -278,9 +291,9 @@ public class Xtend2Compiler extends XbaseCompiler {
 		String cacheVarName = appendable.getName(cacheVarKey(info));
 		String cacheKeyVarName = appendable.declareVariable("CacheKey", "_cacheKey");
 		appendable.append("\nfinal ");
-		serialize(listType, info.getCreateExpression(), appendable, false, true);
+		serialize(listType, info.getCreateExpression(), appendable);
 		appendable.append(cacheKeyVarName).append(" = ");
-		serialize(collectonLiterals, info.getCreateExpression(), appendable, false, true);
+		serialize(collectonLiterals, info.getCreateExpression(), appendable);
 		appendable.append(".newArrayList(");
 		EList<JvmFormalParameter> list = obj.getParameters();
 		for (Iterator<JvmFormalParameter> iterator = list.iterator(); iterator.hasNext();) {
@@ -301,7 +314,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		JvmTypeReference returnType = getTypeProvider().getType(info.getCreateExpression());
 		internalToJavaStatement(info.getCreateExpression(), appendable, true);
 		appendable.append("\n");
-		serialize(returnType,info.getCreateExpression(),appendable,false,true);
+		serialize(returnType,info.getCreateExpression(),appendable);
 		String varName = declareNameInVariableScope(info, appendable);
 		appendable.append(" ").append(varName).append(" = ");
 		internalToJavaExpression(info.getCreateExpression(), appendable);
@@ -325,12 +338,12 @@ public class Xtend2Compiler extends XbaseCompiler {
 		JvmTypeReference list = getTypeReferences().getTypeForName(ArrayList.class, obj);
 		JvmTypeReference map = getTypeReferences().getTypeForName(HashMap.class, obj, list, returnType);
 		appendable.append("\n\nprivate final ");
-		serialize(map, info.getCreateExpression(), appendable, false, true);
+		serialize(map, info.getCreateExpression(), appendable);
 		appendable.append(" ");
 		String cacheName = appendable.declareVariable(cacheVarKey(info), "_createCache_"+obj.getName());
 		appendable.append(cacheName);
 		appendable.append(" = new ");
-		serialize(map, info.getCreateExpression(), appendable, false, true);
+		serialize(map, info.getCreateExpression(), appendable);
 		appendable.append("();");
 	}
 
@@ -350,7 +363,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 					appendable.append(" extends ");
 					while (iter2.hasNext()) {
 						JvmUpperBound constraint = iter2.next();
-						appendable.append(constraint.getTypeReference());
+						serialize(constraint.getTypeReference(), tp, appendable);
 						if (iter2.hasNext())
 							appendable.append(",");
 					}
@@ -383,7 +396,9 @@ public class Xtend2Compiler extends XbaseCompiler {
 		for (int i = 0; i < numParams; i++) {
 			JvmFormalParameter p = parameters.get(i);
 			String varName = declareNameInVariableScope(p, appendable);
-			appendable.append("final ").append(p.getParameterType()).append(" ").append(varName);
+			appendable.append("final ");
+			serialize(p.getParameterType(),p,appendable);
+			appendable.append(" ").append(varName);
 			if (i != numParams - 1)
 				appendable.append(", ");
 		}
@@ -599,11 +614,11 @@ public class Xtend2Compiler extends XbaseCompiler {
 		JvmTypeReference type = getTypeProvider().getType(richString);
 		String variableName = makeJavaIdentifier(b.declareVariable(Tuples.pair(richString, "result"), "builder"));
 		b.append("\n");
-		b.append(type);
+		serialize(type, richString, b);
 		b.append(" ");
 		b.append(variableName);
 		b.append(" = new ");
-		b.append(type);
+		serialize(type, richString, b);
 		b.append("();");
 		RichStringPrepareCompiler compiler = new RichStringPrepareCompiler(b, variableName);
 		richStringProcessor.process(richString, compiler, indentationHandler.get());

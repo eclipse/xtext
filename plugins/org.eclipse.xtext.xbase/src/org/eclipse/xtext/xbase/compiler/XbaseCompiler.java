@@ -108,7 +108,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			JvmTypeReference type = catchClause.getDeclaredParam().getParameterType();
 			final String name = declareNameInVariableScope(catchClause.getDeclaredParam(), b);
 			b.append(" catch (");
-			serialize(type,expr,b,false,true);
+			serialize(type,expr,b);
 			b.append(" ").append(name).append(") { ");
 			b.increaseIndentation();
 			internalToJavaStatement(catchClause.getExpression(), b, true);
@@ -172,7 +172,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		} else {
 			type = getTypeProvider().getType(varDeclaration.getRight());
 		}
-		serialize(type, varDeclaration, b, false, true);
+		serialize(type, varDeclaration, b);
 		b.append(" ");
 		b.append(declareNameInVariableScope(varDeclaration, b));
 		b.append(" = ");
@@ -241,7 +241,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		internalToJavaStatement(expr.getForExpression(), b, true);
 		b.append("\nfor (");
 		JvmTypeReference paramType = getTypeProvider().getTypeForIdentifiable(expr.getDeclaredParam());
-		serialize(paramType,expr,b,false,true);
+		serialize(paramType,expr,b);
 		b.append(" ");
 		String varName = declareNameInVariableScope(expr.getDeclaredParam(), b);
 		b.append(varName);
@@ -267,7 +267,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 					b.append("<");
 					for (int i = 0; i < expr.getTypeArguments().size(); i++) {
 						JvmTypeReference arg = expr.getTypeArguments().get(i);
-						serialize(arg, expr, b, false, true);
+						serialize(arg, expr, b);
 						if (i + 1 < expr.getTypeArguments().size())
 							b.append(",");
 					}
@@ -359,7 +359,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		String switchResultName = makeJavaIdentifier(b.declareVariable(Tuples.pair(expr,"result"), "switchResult"));
 		if (isReferenced) {
 			b.append("\n");
-			serialize(type, expr, b, false, true);
+			serialize(type, expr, b);
 			b.append(" ").append(switchResultName).append(" = null;");
 		}
 		
@@ -373,7 +373,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		JvmTypeReference typeReference = getTypeProvider().getType(expr.getSwitch());
 		b.append("\nfinal ");
-		serialize(typeReference, expr, b, false, true);
+		serialize(typeReference, expr, b);
 		b.append(" ");
 		String variableName = b.declareVariable(expr, name);
 		b.append(variableName);
@@ -471,18 +471,18 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		JvmTypeReference type = getTypeProvider().getType(closure);
 		TypeArgumentContext context = ctxProvider.getReceiverContext(type);
 		b.append("\n").append("final ");
-		serialize(type, closure, b, false, false);
+		serialize(type, closure, b);
 		b.append(" ");
 		String variableName = makeJavaIdentifier(b.declareVariable(closure, "function"));
 		b.append(variableName).append(" = ");
 		b.append("new ");
-		serialize(type, closure, b, false, false);
+		serialize(type, closure, b);
 		b.append("() {");
 		b.increaseIndentation().increaseIndentation();
 		JvmOperation operation = functionConversion.findSingleMethod(type);
 		final JvmTypeReference returnType = context.resolve(operation.getReturnType());
 		b.append("\npublic ");
-		serialize(returnType, closure, b, false, false);
+		serialize(returnType, closure, b);
 		b.append(" ").append(operation.getSimpleName());
 		b.append("(");
 		EList<JvmFormalParameter> closureParams = closure.getFormalParameters();
@@ -490,7 +490,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			JvmFormalParameter param = iter.next();
 			final JvmTypeReference parameterType2 = getTypeProvider().getTypeForIdentifiable(param);
 			final JvmTypeReference parameterType = context.resolve(parameterType2);
-			serialize(parameterType, closure, b, false, false);
+			serialize(parameterType, closure, b);
 			b.append(" ");
 			String name = makeJavaIdentifier(b.declareVariable(param, param.getName()));
 			b.append(name);
