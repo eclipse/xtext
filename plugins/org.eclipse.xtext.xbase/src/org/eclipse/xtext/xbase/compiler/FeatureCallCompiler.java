@@ -110,12 +110,12 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					String finalVariable = b.declareVariable(Tuples.create("Convertable", arg), "typeConverted_" + varName);
 					b.append("\n")
 						.append("final ");
-					serialize(type,expr,b,false,true);
+					serialize(type,expr,b);
 					b.append(" ")
 						.append(finalVariable)
 						.append(" = ")
 						.append("(");
-					serialize(type,expr,b,false,true);
+					serialize(type,expr,b);
 					b.append(")")
 						.append(makeJavaIdentifier(varName))
 						.append(";");
@@ -174,7 +174,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 						b.append(", ");
 					}
 					JvmTypeReference typeArgument = call.getTypeArguments().get(i);
-					serialize(typeArgument, call, b, false, true);
+					serialize(typeArgument, call, b);
 				}
 				b.append(">");
 			} else if (call.getFeature() instanceof JvmOperation) {
@@ -212,7 +212,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 								b.append(", ");
 							}
 							JvmTypeReference typeArgument = resolvedTypeArguments.get(i);
-							serialize(typeArgument,call,b,false,true);
+							serialize(typeArgument,call,b);
 						}
 						b.append(">");
 					}
@@ -235,7 +235,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				b.append("==null?");
 				b.append("(");
 				JvmTypeReference type = getTypeProvider().getType(call);
-				serialize(type,call,b,false,true);
+				serialize(type,call,b);
 				b.append(")");
 				b.append("null:");
 				internalToJavaExpression(receiver, b);
