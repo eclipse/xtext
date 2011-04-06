@@ -339,4 +339,43 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 		assertState("'''|'''", editor);
 	}
 	
+	public void testBug342030_01() throws Exception {
+		XtextEditor editor = openEditor(
+				"genPlainText(Object this){\n" + 
+				"    '''|'''\n" + 
+				"}\n" + 
+				"");
+		pasteText(editor, "foo.bar");
+		assertState("genPlainText(Object this){\n" + 
+				"    '''foo.bar|'''\n" + 
+				"}\n" + 
+				"", editor);
+	}
+	
+	public void testBug342030_02() throws Exception {
+		XtextEditor editor = openEditor(
+				"genPlainText(Object this){\n" + 
+				"    '''|'''\n" + 
+				"}\n" + 
+				"");
+		pasteText(editor, "'''");
+		assertState("genPlainText(Object this){\n" + 
+				"    ''''''|'''\n" + 
+				"}\n" + 
+				"", editor);
+	}
+	
+	public void testBug342030_03() throws Exception {
+		XtextEditor editor = openEditor(
+				"genPlainText(Object this){\n" + 
+				"    '''|'''\n" + 
+				"}\n" + 
+				"");
+		pressKeys(editor, "'''");
+		assertState("genPlainText(Object this){\n" + 
+				"    ''''''|\n" + 
+				"}\n" + 
+				"", editor);
+	}
+	
 }
