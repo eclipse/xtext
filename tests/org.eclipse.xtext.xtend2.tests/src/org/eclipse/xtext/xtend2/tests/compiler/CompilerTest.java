@@ -72,11 +72,8 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		String xtendCode = 
 			"package x " +
 			"class Y {" +
-			"  @Inject java.util.concurrent.atomic.AtomicInteger as production" +
-			"  @Inject java.util.concurrent.atomic.AtomicInteger as initialization" +
-			"  create result: {Thread::sleep(10) production.incrementAndGet new StringBuilder()} aBuilder(String x) {" +
+			"  create result: {Thread::sleep(10) new StringBuilder()} aBuilder(String x) {" +
 			"   Thread::sleep(10)" +
-			"   initialization.incrementAndGet" +
 			"   result.append(x)" +
 			"  }" +
 			"}";
