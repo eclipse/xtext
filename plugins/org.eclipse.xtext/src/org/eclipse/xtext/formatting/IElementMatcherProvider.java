@@ -47,7 +47,7 @@ public interface IElementMatcherProvider {
 	/**
 	 * @since 2.0
 	 */
-	public interface IElementMatcherEx1<T extends IElementPattern> extends IElementMatcher<T> {
+	public interface IElementMatcherExtension<T extends IElementPattern> extends IElementMatcher<T> {
 		void init(ParserRule rule);
 	}
 

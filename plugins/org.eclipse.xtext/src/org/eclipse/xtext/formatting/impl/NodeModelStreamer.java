@@ -22,7 +22,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
-import org.eclipse.xtext.parsetree.reconstr.ITokenStreamEx1;
+import org.eclipse.xtext.parsetree.reconstr.ITokenStreamExtension;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Pair;
@@ -48,8 +48,8 @@ public class NodeModelStreamer implements INodeModelStreamer {
 		List<INode> nodes = getLeafs(in, offset, offset + length);
 		if (nodes.isEmpty())
 			return new TextRegion(in.getOffset(), 0);
-		if (out instanceof ITokenStreamEx1)
-			((ITokenStreamEx1) out).init(findRootRuleForRegion(nodes.get(0)));
+		if (out instanceof ITokenStreamExtension)
+			((ITokenStreamExtension) out).init(findRootRuleForRegion(nodes.get(0)));
 		boolean lastIsTokenOrComment = false;
 		for (INode node : nodes) {
 			boolean currentIsTokenOrComment = tokenUtil.isCommentNode(node) || tokenUtil.isToken(node);

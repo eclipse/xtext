@@ -11,12 +11,12 @@ import java.io.IOException;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.parsetree.reconstr.ITokenStreamEx1;
+import org.eclipse.xtext.parsetree.reconstr.ITokenStreamExtension;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public abstract class AbstractTokenStream implements ITokenStreamEx1 {
+public abstract class AbstractTokenStream implements ITokenStreamExtension {
 
 	public void flush() throws IOException {
 	}

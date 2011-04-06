@@ -38,7 +38,7 @@ import com.google.inject.Inject;
  */
 public class ElementMatcherProvider implements IElementMatcherProvider {
 
-	protected static class TransitionMatcher<T extends IElementPattern> implements IElementMatcherEx1<T> {
+	protected static class TransitionMatcher<T extends IElementPattern> implements IElementMatcherExtension<T> {
 
 		protected IGrammarAccess grammar;
 

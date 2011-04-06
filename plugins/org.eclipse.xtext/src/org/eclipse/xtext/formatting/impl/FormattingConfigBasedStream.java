@@ -20,7 +20,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementMatcher;
-import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementMatcherEx1;
+import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementMatcherExtension;
 import org.eclipse.xtext.formatting.impl.AbstractFormattingConfig.ElementLocator;
 import org.eclipse.xtext.formatting.impl.AbstractFormattingConfig.ElementPattern;
 import org.eclipse.xtext.formatting.impl.AbstractFormattingConfig.LocatorType;
@@ -465,8 +465,8 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 
 	@Override
 	public void init(ParserRule startRule) {
-		if (matcher instanceof IElementMatcherEx1)
-			((IElementMatcherEx1<?>) matcher).init(startRule);
+		if (matcher instanceof IElementMatcherExtension)
+			((IElementMatcherExtension<?>) matcher).init(startRule);
 	}
 
 	@Override
