@@ -17,7 +17,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -45,9 +44,6 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XbaseCompiler extends FeatureCallCompiler {
-	
-	@Inject 
-	private TypeReferences typeRefs;
 	
 	protected void _toJavaStatement(XBlockExpression expr, IAppendable b, boolean isReferenced) {
 		if (expr.getExpressions().isEmpty())
@@ -414,7 +410,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				internalToJavaStatement(casePart.getCase(), b, true);
 				b.append("\nif (");
 				JvmTypeReference convertedType = getTypeProvider().getType(casePart.getCase());
-				if (typeRefs.is(convertedType, Boolean.TYPE) || typeRefs.is(convertedType, Boolean.class)) {
+				if (getTypeReferences().is(convertedType, Boolean.TYPE) || getTypeReferences().is(convertedType, Boolean.class)) {
 					internalToJavaExpression(casePart.getCase(), b);
 				} else {
 					b.append(ObjectExtensions.class.getCanonicalName()).append(".operator_equals(").append(variableName).append(",");
@@ -512,5 +508,5 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected void _toJavaExpression(final XClosure call, final IAppendable b) {
 		b.append(getJavaVarName(call, b));
 	}
-	
+
 }

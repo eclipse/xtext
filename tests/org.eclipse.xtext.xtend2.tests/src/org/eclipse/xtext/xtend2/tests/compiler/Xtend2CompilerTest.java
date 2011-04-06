@@ -1,7 +1,19 @@
+/*******************************************************************************
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests.compiler;
 
 import java.io.StringWriter;
 
+import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
@@ -124,6 +136,78 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			"  }\n" + 
 			"}";
 		assertCompilesTo(expected, input);
+	}
+	
+	protected static class JavaxInjectAwareTypeReferences extends TypeReferences {
+		
+		private boolean javaxInjectAvailable = true;
+		
+		@Override
+		public JvmTypeReference getTypeForName(String typeName, Notifier context, JvmTypeReference... params) {
+			if ("javax.inject.Inject".equals(typeName)) {
+				if (javaxInjectAvailable) {
+					JvmAnnotationType inject = TypesFactory.eINSTANCE.createJvmAnnotationType();
+					inject.setPackageName("javax.inject");
+					inject.setSimpleName("Inject");
+					return createTypeRef(inject);
+				} else {
+					return null;
+				}
+			}
+			return super.getTypeForName(typeName, context, params);
+		}
+	}
+	
+	public void testJavaxInject() throws Exception {
+		final String input = 
+			"package foo\n" +
+			"class Bar {\n" +
+			"  @Inject String" +
+			"}\n";
+		final String expected =  
+			"package foo;\n" +
+			"\n" + 
+			"import javax.inject.Inject;\n" + 
+			"\n" +
+			"@SuppressWarnings(\"all\")\n" +
+			"public class Bar {\n" +
+			"  private final Bar _this = this;\n" +
+			"  @Inject private String string;\n" + 
+			"}";
+		XtendFile file = file(input,true);
+		Xtend2Compiler compiler = get(Xtend2Compiler.class);
+		JavaxInjectAwareTypeReferences typeReferences = get(JavaxInjectAwareTypeReferences.class);
+		typeReferences.javaxInjectAvailable = true;
+		compiler.setTypeReferences(typeReferences);
+		StringWriter appendable = new StringWriter();
+		compiler.compile(file, appendable);
+		assertEquals(expected,appendable.toString());
+	}
+	
+	public void testGoogleInject() throws Exception {
+		final String input = 
+			"package foo\n" +
+			"class Bar {\n" +
+			"  @Inject String" +
+			"}\n";
+		final String expected =  
+			"package foo;\n" +
+			"\n" + 
+			"import com.google.inject.Inject;\n" + 
+			"\n" +
+			"@SuppressWarnings(\"all\")\n" +
+			"public class Bar {\n" +
+			"  private final Bar _this = this;\n" +
+			"  @Inject private String string;\n" + 
+			"}";
+		XtendFile file = file(input,true);
+		Xtend2Compiler compiler = get(Xtend2Compiler.class);
+		JavaxInjectAwareTypeReferences typeReferences = get(JavaxInjectAwareTypeReferences.class);
+		typeReferences.javaxInjectAvailable = false;
+		compiler.setTypeReferences(typeReferences);
+		StringWriter appendable = new StringWriter();
+		compiler.compile(file, appendable);
+		assertEquals(expected,appendable.toString());
 	}
 
 	protected void assertCompilesTo(final String expected, final String input) throws Exception {

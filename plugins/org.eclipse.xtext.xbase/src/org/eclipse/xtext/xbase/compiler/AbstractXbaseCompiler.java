@@ -43,15 +43,19 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractXbaseCompiler {
 
-	public static interface LateCode {
-		void execute();
-	}
-
 	@Inject
 	private TypeReferences typeReferences;
 	
 	protected TypeReferences getTypeReferences() {
 		return typeReferences;
+	}
+	
+	/**
+	 * Public for testing purpose.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	public void setTypeReferences(TypeReferences typeReferences) {
+		this.typeReferences = typeReferences;
 	}
 
 	@Inject
@@ -69,6 +73,10 @@ public abstract class AbstractXbaseCompiler {
 	
 	@Inject
 	private Primitives primitives;
+	
+	protected Primitives getPrimitives() {
+		return primitives;
+	}
 
 	private PolymorphicDispatcher<Void> toJavaExprDispatcher = PolymorphicDispatcher.createForSingleTarget(
 			"_toJavaExpression", 2, 2, this);
