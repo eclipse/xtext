@@ -17,7 +17,7 @@ import org.eclipse.xtext.formatting.IElementMatcherProvider;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IAfterElement;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IBeforeElement;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IBetweenElements;
-import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementMatcherEx1;
+import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementMatcherExtension;
 import org.eclipse.xtext.formatting.IElementMatcherProvider.IElementPattern;
 import org.eclipse.xtext.formatting.impl.AbstractTokenStream;
 import org.eclipse.xtext.junit.AbstractXtextTests;
@@ -95,7 +95,7 @@ public class ElementMatcherTest extends AbstractXtextTests {
 	private String match(String model, Patterns patterns) throws Exception {
 		EObject m = getModel(model);
 		IElementMatcherProvider mp = get(IElementMatcherProvider.class);
-		final IElementMatcherEx1<IElementPattern> matcher = (IElementMatcherEx1<IElementPattern>) mp
+		final IElementMatcherExtension<IElementPattern> matcher = (IElementMatcherExtension<IElementPattern>) mp
 				.createMatcher(patterns.patterns);
 		final StringBuilder result = new StringBuilder();
 		getParseTreeConstructor().serializeSubtree(m, new AbstractTokenStream() {

@@ -13,7 +13,7 @@ import org.eclipse.xtext.ParserRule;
  * @author Moritz Eysholdt - Initial contribution and API
  * @since 2.0
  */
-public interface ITokenStreamEx1 extends ITokenStream {
+public interface ITokenStreamExtension extends ITokenStream {
 
 	void init(ParserRule startRule);
 

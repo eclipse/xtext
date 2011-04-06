@@ -38,7 +38,7 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IEnumLiteralSeriali
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IKeywordSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
-import org.eclipse.xtext.parsetree.reconstr.ITokenStreamEx1;
+import org.eclipse.xtext.parsetree.reconstr.ITokenStreamExtension;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.parsetree.reconstr.XtextSerializationException;
 import org.eclipse.xtext.util.EmfFormatter;
@@ -428,8 +428,8 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 		 * @since 2.0
 		 */
 		public void init(ParserRule parseRule) {
-			if (out instanceof ITokenStreamEx1)
-				((ITokenStreamEx1) out).init(parseRule);
+			if (out instanceof ITokenStreamExtension)
+				((ITokenStreamExtension) out).init(parseRule);
 		}
 
 		protected void writeWhitespacesSince(INode node) throws IOException {
