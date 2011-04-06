@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -57,6 +58,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.internal.Iterables;
@@ -290,6 +292,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 				if (iterator.hasNext())
 					appendable.append(", ");
 			}
+			appendable.append(" ");
 		}
 		appendable.append("{");
 		appendable.increaseIndentation();
@@ -408,9 +411,11 @@ public class Xtend2Compiler extends XbaseCompiler {
 			types = Iterables.concat(types, getTypeProvider().getThrownExceptionTypes(obj.getCreateExtensionInfo().getCreateExpression()));
 		}
 		List<JvmTypeReference> checkedExceptions = newArrayList();
+		Set<String> identifiers = Sets.newHashSet();
 		for (JvmTypeReference jvmTypeReference : types) {
 			if (getTypeReferences().isInstanceOf(jvmTypeReference, Exception.class)) {
-				checkedExceptions.add(jvmTypeReference);
+				if (identifiers.add(jvmTypeReference.getIdentifier()))
+					checkedExceptions.add(jvmTypeReference);
 			}
 		}
 		Collections.sort(checkedExceptions, new Comparator<JvmTypeReference>() {
