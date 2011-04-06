@@ -148,6 +148,49 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 		return syntheticResource;
 	}
 	
+	public void testPrimitiveConversion_00() throws Exception {
+		JvmTypeReference left = ref(Long.TYPE);
+		JvmTypeReference right = ref(Integer.TYPE);
+		assertTrue(getComputer().isConformant(left, right, true));
+		assertTrue(getComputer().isConformant(left, right, false));
+	}
+	public void testPrimitiveConversion_01() throws Exception {
+		JvmTypeReference left = ref(Integer.TYPE);
+		JvmTypeReference right = ref(Long.TYPE);
+		assertFalse(getComputer().isConformant(left, right, true));
+		assertFalse(getComputer().isConformant(left, right, false));
+	}
+	public void testPrimitiveConversion_02() throws Exception {
+		JvmTypeReference left = ref(Long.TYPE);
+		JvmTypeReference right = ref(Byte.TYPE);
+		assertTrue(getComputer().isConformant(left, right, true));
+		assertTrue(getComputer().isConformant(left, right, false));
+	}
+	public void testPrimitiveConversion_03() throws Exception {
+		JvmTypeReference left = ref(Character.TYPE);
+		JvmTypeReference right = ref(Byte.TYPE);
+		assertTrue(getComputer().isConformant(left, right, true));
+		assertTrue(getComputer().isConformant(left, right, false));
+	}
+	public void testPrimitiveConversion_04() throws Exception {
+		JvmTypeReference left = ref(Integer.TYPE);
+		JvmTypeReference right = ref(Integer.TYPE);
+		assertTrue(getComputer().isConformant(left, right, true));
+		assertTrue(getComputer().isConformant(left, right, false));
+	}
+	public void testPrimitiveConversion_05() throws Exception {
+		JvmTypeReference left = ref(Long.TYPE);
+		JvmTypeReference right = ref(Float.TYPE);
+		assertFalse(getComputer().isConformant(left, right, true));
+		assertFalse(getComputer().isConformant(left, right, false));
+	}
+	public void testPrimitiveConversion_06() throws Exception {
+		JvmTypeReference left = ref(Double.TYPE);
+		JvmTypeReference right = ref(Float.TYPE);
+		assertTrue(getComputer().isConformant(left, right, true));
+		assertTrue(getComputer().isConformant(left, right, false));
+	}
+	
 	public void testWildCardWithDefaultUpper() throws Exception {
 		JvmTypeReference left = ref(Iterable.class, wc_extends(ref(Object.class)));
 		JvmTypeReference right = ref(List.class, wc());
@@ -176,8 +219,8 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 	public void testIgnoreGenrics_03() throws Exception {
 		JvmTypeReference left = ref(Integer.TYPE);
 		JvmTypeReference right = ref(Long.TYPE);
-		assertTrue(getComputer().isConformant(left, right, false));
-		assertTrue(getComputer().isConformant(left, right, true));
+		assertFalse(getComputer().isConformant(left, right, false));
+		assertFalse(getComputer().isConformant(left, right, true));
 	}
 	
 	/**
