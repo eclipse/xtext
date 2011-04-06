@@ -54,6 +54,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.internal.Iterables;
 
 public class Xtend2Compiler extends XbaseCompiler {
 
@@ -304,24 +305,33 @@ public class Xtend2Compiler extends XbaseCompiler {
 			}
 		}
 		appendable.append(");");
+		// declare result variable
+		JvmTypeReference returnType = getTypeProvider().getType(info.getCreateExpression());
+		appendable.append("\n");
+		serialize(returnType,info.getCreateExpression(),appendable);
+		String varName = declareNameInVariableScope(info, appendable);
+		appendable.append(" ").append(varName).append(";");
+		// open synchronize block
+		appendable.append("\nsynchronized (").append(cacheVarName).append(") {");
+		appendable.increaseIndentation();
 		// if the cache contains the key return the previously created object.
 		appendable.append("\nif (").append(cacheVarName).append(".containsKey(").append(cacheKeyVarName).append(")) {");
 		appendable.increaseIndentation();
 		appendable.append("\nreturn ").append(cacheVarName).append(".get(").append(cacheKeyVarName).append(");");
 		appendable.decreaseIndentation().append("\n}");
-		
 		// execute the creation
-		JvmTypeReference returnType = getTypeProvider().getType(info.getCreateExpression());
 		internalToJavaStatement(info.getCreateExpression(), appendable, true);
 		appendable.append("\n");
-		serialize(returnType,info.getCreateExpression(),appendable);
-		String varName = declareNameInVariableScope(info, appendable);
-		appendable.append(" ").append(varName).append(" = ");
+		appendable.append(varName).append(" = ");
 		internalToJavaExpression(info.getCreateExpression(), appendable);
 		appendable.append(";");
 		
 		// store the newly created object in the cache
 		appendable.append("\n").append(cacheVarName).append(".put(").append(cacheKeyVarName).append(", ").append(varName).append(");");
+		
+		// close synchronize block
+		appendable.decreaseIndentation();
+		appendable.append("\n}");
 		
 		// execute the initialization
 		JvmTypeReference primitiveVoid = getTypeReferences().getTypeForName(Void.TYPE, obj);
@@ -377,6 +387,9 @@ public class Xtend2Compiler extends XbaseCompiler {
 	
 	protected List<JvmTypeReference> getCheckedExceptions(XtendFunction obj) {
 		Iterable<JvmTypeReference> types = getTypeProvider().getThrownExceptionTypes(obj.getExpression());
+		if (obj.getCreateExtensionInfo()!=null) {
+			types = Iterables.concat(types, getTypeProvider().getThrownExceptionTypes(obj.getCreateExtensionInfo().getCreateExpression()));
+		}
 		List<JvmTypeReference> checkedExceptions = newArrayList();
 		for (JvmTypeReference jvmTypeReference : types) {
 			if (typeRefs.isInstanceOf(jvmTypeReference, Exception.class)) {
