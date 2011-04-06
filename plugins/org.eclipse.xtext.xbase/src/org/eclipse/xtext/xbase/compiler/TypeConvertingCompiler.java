@@ -17,7 +17,6 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -39,12 +38,6 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 
 	@Inject
 	private TypeArgumentContextProvider contextProvider;
-	
-	@Inject
-	private TypeReferences typeRefs;
-	
-	@Inject
-	private Primitives primitives;
 	
 	/*
 	 * TODO
@@ -80,13 +73,13 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 
 	protected void doConversion(final JvmTypeReference left, final JvmTypeReference right,
 			final IAppendable appendable, XExpression context, final Later expression) {
-		if (primitives.isPrimitive(right) && !primitives.isPrimitive(left)) {
+		if (getPrimitives().isPrimitive(right) && !getPrimitives().isPrimitive(left)) {
 			convertPrimitiveToWrapper(left, appendable, expression);
 		} else if (right instanceof JvmMultiTypeReference) {
 			convertMultiType(left, (JvmMultiTypeReference) right, context, appendable, expression);
-		} else if (typeRefs.isArray(right) && isList(left)) {
+		} else if (getTypeReferences().isArray(right) && isList(left)) {
 			convertArrayToList(left, appendable, context, expression);
-		} else if (isList(right) && typeRefs.isArray(left)) {
+		} else if (isList(right) && getTypeReferences().isArray(left)) {
 			convertListToArray(left, appendable, context, expression);
 		} else if (right.getType().getIdentifier().startsWith(Functions.class.getCanonicalName())) {
 			convertFunctionType(left, right, appendable, expression);
@@ -168,7 +161,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		appendable.append("((");
 		serialize(listType, context, appendable);
 		appendable.append(")");
-		JvmTypeReference conversions = typeRefs.getTypeForName(Conversions.class, context);
+		JvmTypeReference conversions = getTypeReferences().getTypeForName(Conversions.class, context);
 		appendable.append(conversions).append(".unwrapArray(");
 		expression.exec();
 		appendable.append("))");
@@ -179,7 +172,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		appendable.append("((");
 		serialize(left, context, appendable);
 		appendable.append(")");
-		JvmTypeReference conversions = typeRefs.getTypeForName(Conversions.class, context);
+		JvmTypeReference conversions = getTypeReferences().getTypeForName(Conversions.class, context);
 		serialize(conversions, context, appendable);
 		appendable.append(".doWrapArray(");
 		expression.exec();
@@ -197,6 +190,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 
 	//TODO externalize whole conversion strategy and use org.eclipse.xtext.xbase.typing.SynonymTypesProvider.isList(JvmTypeReference)
 	protected boolean isList(JvmTypeReference type) {
+		TypeReferences typeRefs = getTypeReferences();
 		return typeRefs.is(type, List.class) || typeRefs.is(type, Iterable.class) || typeRefs.is(type, Collection.class);
 	}
 	
@@ -204,7 +198,4 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 		return contextProvider;
 	}
 	
-	public Primitives getPrimitives() {
-		return primitives;
-	}
 }
