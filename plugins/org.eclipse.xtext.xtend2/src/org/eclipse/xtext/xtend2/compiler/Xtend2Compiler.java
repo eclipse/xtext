@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.xtend2.compiler;
 
 import static com.google.common.collect.Iterables.*;
@@ -22,8 +29,6 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
-import org.eclipse.xtext.common.types.util.Primitives;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
@@ -56,6 +61,11 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.internal.Iterables;
 
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ * @author Jan Koehnlein
+ * @author Sebastian Zarnekow
+ */
 public class Xtend2Compiler extends XbaseCompiler {
 
 	@Inject
@@ -65,17 +75,19 @@ public class Xtend2Compiler extends XbaseCompiler {
 	private Provider<DefaultIndentationHandler> indentationHandler;
 
 	@Inject
-	private TypeReferences typeRefs;
-
-	@Inject
 	private DispatchingSupport dispatchingSupport;
-
-	@Inject
-	private Primitives primitives;
 
 	@Inject
 	private IXtend2JvmAssociations associations;
 
+	/**
+	 * Compile the given {@link XtendFile file} to java code and write
+	 * the result into the writer. It is assumed that a single file will
+	 * be compiled to a single artifact.
+	 * @param obj the file to be compiled. May not be <code>null</code>.
+	 * @param writer the output acceptor. May not be <code>null</code>.
+	 * @throws RuntimeException something went wrong (I/O errors or the like)
+	 */
 	public void compile(XtendFile obj, Writer writer) {
 		try {
 			if (obj.getPackage() != null) {
@@ -83,7 +95,8 @@ public class Xtend2Compiler extends XbaseCompiler {
 				writer.append(obj.getPackage());
 				writer.append(";\n");
 			}
-			StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable(new ImportManager(true));
+			ImportManager importManager = new ImportManager(true);
+			StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable(importManager);
 			if (obj.getXtendClass() != null) {
 				compile(obj.getXtendClass(), appendable);
 			}
@@ -143,7 +156,11 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 
 	protected void compile(DeclaredDependency dependency, IAppendable appendable) {
-		JvmTypeReference inject = getTypeReferences().getTypeForName(Inject.class, dependency);
+		String javaxInject = "javax.inject.Inject";
+		JvmTypeReference inject = getTypeReferences().getTypeForName(javaxInject, dependency);
+		if (inject == null) {
+			inject = getTypeReferences().getTypeForName(Inject.class, dependency);
+		}
 		appendable.append("\n@");
 		serialize(inject, dependency, appendable);
 		appendable.append(" private ");
@@ -186,11 +203,11 @@ public class Xtend2Compiler extends XbaseCompiler {
 				JvmFormalParameter p1 = iter1.next();
 				JvmFormalParameter p2 = iter2.next();
 				final JvmTypeReference type = p2.getParameterType();
-				if (this.typeRefs.is(type, Void.class)) {
+				if (getTypeReferences().is(type, Void.class)) {
 					a.append("(").append(p1.getName()).append(" == null)");
 				} else {
 					a.append("(").append(p1.getName()).append(" instanceof ");
-					a.append(primitives.asWrapperTypeIfPrimitive(type).getType()).append(")");
+					a.append(getPrimitives().asWrapperTypeIfPrimitive(type).getType()).append(")");
 				}
 				if (iter2.hasNext()) {
 					a.append("\n && ");
@@ -199,8 +216,8 @@ public class Xtend2Compiler extends XbaseCompiler {
 			a.decreaseIndentation().decreaseIndentation();
 			a.append(") {").increaseIndentation();
 			a.append("\n");
-			final boolean isCurrentVoid = typeRefs.is(operation.getReturnType(), Void.TYPE);
-			final boolean isDispatchVoid = typeRefs.is(dispatchOperation.getReturnType(), Void.TYPE);
+			final boolean isCurrentVoid = getTypeReferences().is(operation.getReturnType(), Void.TYPE);
+			final boolean isDispatchVoid = getTypeReferences().is(dispatchOperation.getReturnType(), Void.TYPE);
 			if (isDispatchVoid) {
 				generateActualDispatchCall(dispatchOperation, operation, a);
 				a.append(";");
@@ -232,9 +249,9 @@ public class Xtend2Compiler extends XbaseCompiler {
 			JvmFormalParameter p1 = iter1.next();
 			JvmFormalParameter p2 = iter2.next();
 			a.append("(");
-			serialize(primitives.asWrapperTypeIfPrimitive(p2.getParameterType()), dispatchOperation, a);
+			serialize(getPrimitives().asWrapperTypeIfPrimitive(p2.getParameterType()), dispatchOperation, a);
 			a.append(")");
-			if (typeRefs.is(p2.getParameterType(), Void.class)) {
+			if (getTypeReferences().is(p2.getParameterType(), Void.class)) {
 				a.append("null");
 			} else {
 				a.append(p1.getName());
@@ -245,7 +262,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		}
 		a.append(")");
 	}
-
+	
 	protected void compile(XtendFunction obj, IAppendable appendable) {
 		if (obj.getCreateExtensionInfo()!=null) {
 			declareCreateExtensionCache(obj, appendable);
@@ -392,7 +409,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		}
 		List<JvmTypeReference> checkedExceptions = newArrayList();
 		for (JvmTypeReference jvmTypeReference : types) {
-			if (typeRefs.isInstanceOf(jvmTypeReference, Exception.class)) {
+			if (getTypeReferences().isInstanceOf(jvmTypeReference, Exception.class)) {
 				checkedExceptions.add(jvmTypeReference);
 			}
 		}
@@ -640,5 +657,5 @@ public class Xtend2Compiler extends XbaseCompiler {
 	public void _toJavaExpression(RichString richString, IAppendable b) {
 		b.append(getJavaVarName(Tuples.pair(richString, "result"), b));
 	}
-	
+
 }
