@@ -57,6 +57,9 @@ public class TypeArgumentContextProvider {
 	@Inject
 	private TypeConformanceComputer conformanceComputer;
 	
+	@Inject
+	private Primitives primitives;
+	
 	public void setTypeProviderFactory(IJvmTypeProvider.Factory typeProviderFactory) {
 		this.typeProviderFactory = typeProviderFactory;
 	}
@@ -212,6 +215,12 @@ public class TypeArgumentContextProvider {
 							Arrays.asList(argumentTypes).subList(paramCount, argumentTypes.length), Predicates.notNull()));
 					}
 					if (!varArgTypes.isEmpty()) {
+						// TODO remove workaround when https://bugs.eclipse.org/bugs/show_bug.cgi?id=342021 is fixed
+						if (!primitives.isPrimitive(componentType)) {
+							for(int i = 0; i < varArgTypes.size(); i++) {
+								varArgTypes.set(i, primitives.asWrapperTypeIfPrimitive(varArgTypes.get(i)));
+							}
+						}
 						JvmTypeReference commonVarArgType = conformanceComputer.getCommonSuperType(varArgTypes);
 						resolve(componentType, commonVarArgType, map, false);
 					} else if (!ignoreEmptyVarArgs) {
