@@ -1,19 +1,15 @@
 package org.eclipse.xtext.xtext.ui.graph.tests;
 
+import static com.google.common.collect.Maps.*;
+import static junit.framework.Assert.*;
+
 import java.io.IOException;
 import java.util.Map;
 
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xtext.ui.graph.figures.BypassSegment;
 import org.eclipse.xtext.xtext.ui.graph.figures.CrossPointSegment;
 import org.eclipse.xtext.xtext.ui.graph.figures.ISegmentFigure;
@@ -29,16 +25,15 @@ import org.junit.runner.RunWith;
 
 import com.google.inject.Inject;
 
-import static com.google.common.collect.Maps.newHashMap;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
-
 @RunWith(XtextRunner.class)
 @InjectWith(RailroadInjectorProvider.class)
 public class TransformationTest {
 
 	@Inject 
 	private Xtext2RailroadTransformer transformer;
+	
+	@Inject 
+	private GrammarParser parser;
 	
 	@Test
 	public void testTransform() throws Exception {
@@ -74,23 +69,10 @@ public class TransformationTest {
 	}
 
 	protected TreeVerificationBuilder getBuilder(String rules) throws IOException {
-		Grammar grammar = parse(rules);
+		Grammar grammar = parser.parse(rules);
 		ISegmentFigure figure = transformer.transform(grammar);
 		assertTrue(figure != null);
 		return new TreeVerificationBuilder(figure).isType(RailroadDiagram.class);
-	}
-	
-	protected Grammar parse(String rules) throws IOException {
-		ResourceSet resourceSet = new XtextResourceSet();
-		Resource grammarResource = resourceSet.createResource(URI.createURI("Test.xtext"));
-		grammarResource.load(new StringInputStream(
-				"grammar Test with org.eclipse.xtext.common.Terminals \n"
-				+ "generate test \"Test\"\n" + rules), null);
-		EList<EObject> contents = grammarResource.getContents();
-		assertEquals(1, contents.size());
-		EObject root = contents.get(0);
-		assertTrue(root instanceof Grammar);
-		return (Grammar) root;
 	}
 	
 	protected class TreeVerificationBuilder {
