@@ -33,7 +33,9 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.compiler.DelegatingAppendable;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
@@ -51,6 +53,7 @@ import org.eclipse.xtext.xtend2.xtend2.RichStringForLoop;
 import org.eclipse.xtext.xtend2.xtend2.RichStringIf;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
@@ -205,7 +208,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 				JvmFormalParameter p1 = iter1.next();
 				JvmFormalParameter p2 = iter2.next();
 				final JvmTypeReference type = p2.getParameterType();
-				final String name = getJavaVarName(p1, a);
+				final String name = getVarName(p1, a);
 				if (getTypeReferences().is(type, Void.class)) {
 					a.append("(").append(name).append(" == null)");
 				} else {
@@ -256,7 +259,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 			if (getTypeReferences().is(p2.getParameterType(), Void.class)) {
 				a.append("null");
 			} else {
-				a.append(getJavaVarName(p1, a));
+				a.append(getVarName(p1, a));
 			}
 			if (iter2.hasNext()) {
 				a.append(", ");
@@ -438,10 +441,31 @@ public class Xtend2Compiler extends XbaseCompiler {
 				appendable.append(", ");
 		}
 	}
+	
 
 	protected void declareThis(XtendClass clazz, IAppendable appendable) {
-		appendable.declareVariable(clazz, clazz.getName()+".this");
-		appendable.declareVariable(clazz.getSuperCallReferable(), clazz.getName()+".super");
+		appendable.declareVariable(clazz, "this");
+		appendable.declareVariable(clazz.getSuperCallReferable(), "super");
+	}
+	
+	@Override
+	protected void _toJavaStatement(XClosure closure, IAppendable b, boolean isReferenced) {
+		super._toJavaStatement(closure, getClosureContextAppendable(b), isReferenced);
+	}
+	
+	protected IAppendable getClosureContextAppendable(final IAppendable appendable) {
+		return new DelegatingAppendable(appendable) {
+			@Override
+			public String getName(Object key) {
+				if (key instanceof XtendClass) {
+					return ((XtendClass) key).getSimpleName()+".this";
+				}
+				if (key instanceof XtendClassSuperCallReferable) {
+					return ((XtendClassSuperCallReferable) key).getXtendClass().getSimpleName()+".super";
+				}
+				return super.getName(key);
+			}
+		};
 	}
 	
 	@Override
@@ -646,7 +670,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 	public void _toJavaStatement(RichString richString, IAppendable b, boolean isReferenced) {
 		// declare variable
 		JvmTypeReference type = getTypeProvider().getType(richString);
-		String variableName = makeJavaIdentifier(b.declareVariable(Tuples.pair(richString, "result"), "builder"));
+		String variableName = b.declareVariable(Tuples.pair(richString, "result"), "_builder");
 		b.append("\n");
 		serialize(type, richString, b);
 		b.append(" ");
@@ -659,7 +683,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 	}
 
 	public void _toJavaExpression(RichString richString, IAppendable b) {
-		b.append(getJavaVarName(Tuples.pair(richString, "result"), b));
+		b.append(getVarName(Tuples.pair(richString, "result"), b));
 	}
 
 }

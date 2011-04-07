@@ -93,7 +93,7 @@ public class StringBuilderBasedAppendable implements IAppendable {
 		names.add(newName);
 		return newName;
 	}
-
+	
 	protected String findNewName(Set<String> names, String proposedName) {
 		if (names.contains(proposedName)) {
 			for (int i = 1; i < Integer.MAX_VALUE; i++) {

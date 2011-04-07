@@ -224,23 +224,15 @@ public abstract class AbstractXbaseCompiler {
 		return reference;
 	}
 	
-	protected String getJavaVarName(Object ex, IAppendable appendable) {
-		final String varName = getVarName(ex, appendable);
-		if (varName == null) {
-			return null;
-		}
-		return makeJavaIdentifier(varName);
-	}
-
 	protected String getVarName(Object ex, IAppendable appendable) {
 		String name = appendable.getName(ex);
 		return name;
 	}
 
 	protected String declareNameInVariableScope(EObject declaration, IAppendable appendable) {
-		final String favoriteVariableName = getFavoriteVariableName(declaration);
+		final String favoriteVariableName = makeJavaIdentifier(getFavoriteVariableName(declaration));
 		final String varName = appendable.declareVariable(declaration, favoriteVariableName);
-		return makeJavaIdentifier(varName);
+		return varName;
 	}
 
 	@Inject
