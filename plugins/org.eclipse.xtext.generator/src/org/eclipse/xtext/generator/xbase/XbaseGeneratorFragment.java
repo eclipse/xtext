@@ -103,6 +103,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 						"org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer")
 				.addTypeToType(XtextResource.class.getName(),
 				"org.eclipse.xtext.xbase.resource.XbaseResource")
+				.addTypeToTypeEagerSingleton("org.eclipse.xtext.xbase.validation.JvmTypeReferencesValidator", "org.eclipse.xtext.xbase.validation.JvmTypeReferencesValidator")
 				// obsolete convenience bindings
 				.addTypeToType("org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider",
 				"org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider");

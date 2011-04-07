@@ -8,7 +8,9 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
@@ -22,11 +24,13 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -74,6 +78,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	@Inject
 	private IEarlyExitComputer earlyExitComputer;
 	
+	@Inject
+	private Primitives primitives;
+	
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.of(
 			XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT,
 			XbasePackage.Literals.XIF_EXPRESSION__IF,
@@ -97,6 +104,44 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		return typeConformanceCheckedReferences;
 	}
 
+	@Check
+	public void checkTypeReferenceIsNotVoid(XExpression expression) {
+		EList<EObject> list = expression.eContents();
+		for (EObject eObject : list) {
+			if (eObject instanceof JvmTypeReference) {
+				JvmTypeReference typeRef = (JvmTypeReference) eObject;
+				if (typeRefs.is(typeRef, Void.TYPE)) {
+					error("Primitive void cannot be used here.", typeRef, null, INVALID_USE_OF_TYPE);
+				}
+			}
+		}
+	}
+	
+	@Check
+	public void checkTypeArguments(XAbstractFeatureCall expression) {
+		for (JvmTypeReference typeRef : expression.getTypeArguments()) {
+			if (primitives.isPrimitive(typeRef)) {
+				error("Primitives cannot be used as type arguments.", typeRef, null, INVALID_USE_OF_TYPE);
+			}
+		}
+	}
+	
+	@Check
+	public void checkTypeArguments(XConstructorCall expression) {
+		for (JvmTypeReference typeRef : expression.getTypeArguments()) {
+			if (primitives.isPrimitive(typeRef)) {
+				error("Primitives cannot be used as type arguments.", typeRef, null, INVALID_USE_OF_TYPE);
+			}
+		}
+	}
+	
+	@Check
+	public void checkTypeReferenceIsNotVoid(XCasePart expression) {
+		if (expression.getTypeGuard()!=null && typeRefs.is(expression.getTypeGuard(), Void.TYPE)) {
+			error("Primitive void cannot be used here.", expression.getTypeGuard(), null, INVALID_USE_OF_TYPE);
+		}
+	}
+	
 	@Check
 	public void checkTypes(XExpression obj) {
 		if (!getTypeConformanceCheckedReferences().contains(obj.eContainingFeature())) {
