@@ -117,7 +117,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 						.append("(");
 					serialize(type,expr,b);
 					b.append(")")
-						.append(makeJavaIdentifier(varName))
+						.append(varName)
 						.append(";");
 				}	
 			} else {
@@ -151,10 +151,10 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					}
 					b.append(call.getFeature().getSimpleName());
 				} else {
-					b.append(getJavaVarName(call.getFeature(), b));
+					b.append(getVarName(call.getFeature(), b));
 				}
 			} else {
-				b.append(getJavaVarName(call, b));
+				b.append(getVarName(call, b));
 			}
 		}
 	}
@@ -279,8 +279,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 					b.append(".");
 				appendFeatureCall(expr, b);
 			} else {
-				String name = featureNameProvider.getSimpleName(expr.getFeature());
-				b.append(makeJavaIdentifier(name));
+				String name = b.getName(expr.getFeature());
+				b.append(name);
 			}
 			b.append(" = ");
 			internalToJavaExpression(expr.getValue(), b);
@@ -289,7 +289,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 
 	protected void appendFeatureCall(XAbstractFeatureCall call, IAppendable b) {
 		String name = featureNameProvider.getSimpleName(call.getFeature());
-		b.append(makeJavaIdentifier(name));
+		b.append(name);
 		if (call.getFeature() instanceof JvmOperation) {
 			b.append("(");
 			List<XExpression> arguments = featureCallToJavaMapping.getActualArguments(call);
