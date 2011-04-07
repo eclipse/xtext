@@ -16,6 +16,7 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
@@ -25,6 +26,7 @@ import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xtext.ui.graph.figures.BypassSegment;
+import org.eclipse.xtext.xtext.ui.graph.figures.CompartmentSegment;
 import org.eclipse.xtext.xtext.ui.graph.figures.ISegmentFigure;
 import org.eclipse.xtext.xtext.ui.graph.figures.LoopSegment;
 import org.eclipse.xtext.xtext.ui.graph.figures.NodeSegment;
@@ -56,7 +58,8 @@ public class Xtext2RailroadFactory {
 	public ISegmentFigure createNodeSegment(RuleCall ruleCall) {
 		NodeSegment nodeSegment = new NodeSegment(ruleCall, NodeType.ROUNDED, ruleCall.getRule().getName(),
 				primitiveFactory, getTextRegion(ruleCall));
-		return wrapCardinalitySegments(ruleCall, nodeSegment);
+		Assignment containingAssignment = GrammarUtil.containingAssignment(ruleCall);
+		return wrapCardinalitySegments(containingAssignment != null ? containingAssignment :ruleCall, nodeSegment);
 	}
 
 	public ISegmentFigure createNodeSegment(EObject grammarElement, Throwable throwable) {
@@ -72,7 +75,7 @@ public class Xtext2RailroadFactory {
 	}
 
 	public ISegmentFigure createSequence(Group group, List<ISegmentFigure> children) {
-		SequenceSegment sequence = new SequenceSegment(group, children, primitiveFactory);
+		ISegmentFigure sequence = children.size() == 1 ? children.get(0) : new SequenceSegment(group, children, primitiveFactory);
 		return wrapCardinalitySegments(group, sequence);
 	}
 
@@ -81,9 +84,10 @@ public class Xtext2RailroadFactory {
 		return wrapCardinalitySegments(alternatives, multiSwitch);
 	}
 
-	public ISegmentFigure createParallel(UnorderedGroup unorderedGroup, List<ISegmentFigure> children) {
+	public ISegmentFigure createCompartment(UnorderedGroup unorderedGroup, List<ISegmentFigure> children) {
 		ParallelSegment multiSwitch = new ParallelSegment(unorderedGroup, children, primitiveFactory);
-		return wrapCardinalitySegments(unorderedGroup, multiSwitch);
+		CompartmentSegment compartmentSegment = new CompartmentSegment(unorderedGroup, multiSwitch, primitiveFactory);
+		return wrapCardinalitySegments(unorderedGroup, compartmentSegment);
 	}
 
 	protected Region getTextRegion(EObject eObject) {
