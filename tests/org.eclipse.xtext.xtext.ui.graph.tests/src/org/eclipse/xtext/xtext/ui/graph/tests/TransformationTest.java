@@ -13,12 +13,15 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xtext.ui.graph.figures.BypassSegment;
 import org.eclipse.xtext.xtext.ui.graph.figures.CrossPointSegment;
 import org.eclipse.xtext.xtext.ui.graph.figures.ISegmentFigure;
+import org.eclipse.xtext.xtext.ui.graph.figures.LoopSegment;
 import org.eclipse.xtext.xtext.ui.graph.figures.NodeSegment;
 import org.eclipse.xtext.xtext.ui.graph.figures.RailroadDiagram;
 import org.eclipse.xtext.xtext.ui.graph.figures.RailroadTrack;
+import org.eclipse.xtext.xtext.ui.graph.figures.SequenceSegment;
 import org.eclipse.xtext.xtext.ui.graph.figures.primitives.Connection;
 import org.eclipse.xtext.xtext.ui.graph.figures.primitives.CrossPoint;
 import org.eclipse.xtext.xtext.ui.graph.figures.primitives.LabelNode;
+import org.eclipse.xtext.xtext.ui.graph.figures.primitives.RectangleNode;
 import org.eclipse.xtext.xtext.ui.graph.trafo.Xtext2RailroadTransformer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,6 +69,53 @@ public class TransformationTest {
 				.child(2).isType(CrossPoint.class).as("exit").parent()
 				.child(3).connects("label", "optional_entry").parent()
 				.child(4).connects("optional_exit", "exit");
+	}
+
+	@Test
+	public void testTransformMulti() throws Exception {
+		getBuilder("Foo: 'foo'+;").hasChildren(1)
+			.child(0).isType(RailroadTrack.class).as("t").hasChildren(5)
+				.child(0).isType(LabelNode.class).as("label").parent()
+				.child(1).isType(LoopSegment.class).hasChildren(8)
+					.child(0).isType(CrossPoint.class).as("loop_entry").parent()
+					.child(1).isType(CrossPointSegment.class).hasChildren(1)
+						.child(0).as("loop").parent().parent()
+					.child(2).isType(NodeSegment.class).hasChildren(1)
+						.child(0).as("node").parent().parent()
+					.child(3).isType(CrossPoint.class).as("loop_exit").parent()
+					.child(4).connects("loop_exit", "loop").parent()
+					.child(5).connects("loop", "loop_entry").parent()
+					.child(6).connects("loop_entry", "node").parent()
+					.child(7).connects("node", "loop_exit").parent().parent()
+				.child(2).isType(CrossPoint.class).as("exit").parent()
+				.child(3).connects("label", "loop_entry").parent()
+				.child(4).connects("loop_exit", "exit");
+	}
+
+	@Test
+	public void testTransformGroup() throws Exception {
+		getBuilder("Foo: 'foo' 'bar';").hasChildren(1)
+			.child(0).isType(RailroadTrack.class).as("t").hasChildren(5)
+				.child(0).isType(LabelNode.class).as("label").parent()
+				.child(1).isType(SequenceSegment.class).as("sequence").hasChildren(3)
+					.child(0).isType(NodeSegment.class).hasChildren(1)
+						.child(0).isType(RectangleNode.class).as("foo").parent().parent()
+					.child(2).isType(NodeSegment.class).hasChildren(1)
+						.child(0).isType(RectangleNode.class).as("bar").parent().parent()
+				    .child(1).connects("foo", "bar").parent().parent()
+				.child(2).isType(CrossPoint.class).as("exit").parent()
+				.child(3).connects("label", "foo").parent()
+				.child(4).connects("bar", "exit");
+	}
+	
+	
+	@Test
+	public void testTransformAction() throws Exception {
+		getBuilder("Foo: {Foo} 'foo';").hasChildren(1)
+		.child(0).isType(RailroadTrack.class).hasChildren(5)
+			.child(0).isType(LabelNode.class).as("label").parent()
+			.child(1).isType(NodeSegment.class).hasChildren(1)
+				.child(0).as("node");
 	}
 
 	protected TreeVerificationBuilder getBuilder(String rules) throws IOException {

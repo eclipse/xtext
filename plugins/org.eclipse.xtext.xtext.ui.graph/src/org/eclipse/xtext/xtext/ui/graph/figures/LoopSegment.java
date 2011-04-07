@@ -35,8 +35,8 @@ public class LoopSegment extends AbstractSegmentFigure {
 		setExit(primitiveFactory.createCrossPoint(this));
 		primitiveFactory.createConnection(getExit(), crossPointSegment.getExit(), this, ILayoutConstants.CONVEX_START);
 		primitiveFactory.createConnection(crossPointSegment.getEntry(), getEntry(), this, ILayoutConstants.CONVEX_END);
-		primitiveFactory.createConnection(getExit(), child.getExit(), this, ILayoutConstants.CONCAVE_START);
-		primitiveFactory.createConnection(child.getEntry(), getEntry(), this, ILayoutConstants.CONCAVE_END);
+		primitiveFactory.createConnection(getEntry(), child.getEntry(),  this, ILayoutConstants.CONCAVE_START);
+		primitiveFactory.createConnection(child.getExit(), getExit(), this, ILayoutConstants.CONCAVE_END);
 	}
 
 	@Override

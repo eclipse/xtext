@@ -35,13 +35,12 @@ public class SequenceSegment extends AbstractSegmentFigure {
 			for (ISegmentFigure child : body) {
 				if (isFirst) {
 					setEntry(child.getEntry());
-					currentEnd = child.getExit();
 					isFirst = false;
 				} else {
 					primitiveFactory.createConnection(currentEnd, child.getEntry(), this);
-					currentEnd = child.getExit();
 				}
 				add(child);
+				currentEnd = child.getExit();
 			}
 			setExit(currentEnd);
 		}
