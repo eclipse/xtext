@@ -54,6 +54,11 @@ public class PartitionInsertEditStrategy extends AbstractEditStrategy {
 				if (!left.equals(existingLeftPart + command.text))
 					return;
 			}
+			if (left.equals(right)) {
+				String partitionContent = document.get(partition.getOffset(), partition.getLength());
+				if (count(left, partitionContent) % 2 == 1)
+					return;
+			}
 			command.caretOffset = command.offset + command.text.length();
 			command.shiftsCaret = false;
 			command.text += right;

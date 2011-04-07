@@ -192,6 +192,12 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEdi
 		pressKey(editor, '\'');
 		assertState("'|oo{}", editor);
 	}
+	
+	public void testSingleQuotedStringLiteral_13() throws Exception {
+		XtextEditor editor = openEditor("'a|");
+		pressKey(editor, '\'');
+		assertState("'a'|", editor);
+	}
 
 	public void testDoubleQuotedStringLiteral_1() throws Exception {
 		XtextEditor editor = openEditor("|");
@@ -263,6 +269,12 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEdi
 		assertState("\"\"| \" \" \"", editor);
 		pressKey(editor, SWT.BS);
 		assertState("\"| \" \" \"", editor);
+	}
+	
+	public void testDoubleQuotedStringLiteral_9() throws Exception {
+		XtextEditor editor = openEditor("\"a|");
+		pressKey(editor, '"');
+		assertState("\"a\"|", editor);
 	}
 	
 	public void testCurlyBracesBlock_1() throws Exception {
