@@ -48,6 +48,21 @@ import com.google.inject.Injector;
  */
 public class CompilerTest extends AbstractXtend2TestCase {
 	
+	public void testDispatchWithThis() throws Exception {
+		Class<?> clazz = compileJavaCode("x.Y",
+				"package x class Y {" +
+				"  dispatch foo(String this){\n" +
+				"    return 'String'" + 
+				"  }\n" + 
+				"  dispatch foo(CharSequence this){\n" +
+				"    return 'CharSequence'" + 
+				"  }" +
+				"}");
+		Method method = clazz.getDeclaredMethod("foo", CharSequence.class);
+		assertEquals("String", method.invoke(clazz.newInstance(),"Foo"));
+		
+	}
+	
 	public void testCreateExtension_00() throws Exception {
 		Class<?> clazz = compileJavaCode("x.Y", 
 				"package x " +

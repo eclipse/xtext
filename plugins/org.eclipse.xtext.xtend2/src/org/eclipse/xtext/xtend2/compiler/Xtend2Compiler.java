@@ -205,10 +205,11 @@ public class Xtend2Compiler extends XbaseCompiler {
 				JvmFormalParameter p1 = iter1.next();
 				JvmFormalParameter p2 = iter2.next();
 				final JvmTypeReference type = p2.getParameterType();
+				final String name = getJavaVarName(p1, a);
 				if (getTypeReferences().is(type, Void.class)) {
-					a.append("(").append(p1.getName()).append(" == null)");
+					a.append("(").append(name).append(" == null)");
 				} else {
-					a.append("(").append(p1.getName()).append(" instanceof ");
+					a.append("(").append(name).append(" instanceof ");
 					a.append(getPrimitives().asWrapperTypeIfPrimitive(type).getType()).append(")");
 				}
 				if (iter2.hasNext()) {
@@ -244,9 +245,8 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 	protected void generateActualDispatchCall(JvmOperation dispatchOperation, JvmOperation actualOperationToCall,
 			IAppendable a) {
-		Iterator<JvmFormalParameter> iter1;
 		a.append(actualOperationToCall.getSimpleName()).append("(");
-		iter1 = dispatchOperation.getParameters().iterator();
+		Iterator<JvmFormalParameter> iter1 = dispatchOperation.getParameters().iterator();
 		for (Iterator<JvmFormalParameter> iter2 = actualOperationToCall.getParameters().iterator(); iter2.hasNext();) {
 			JvmFormalParameter p1 = iter1.next();
 			JvmFormalParameter p2 = iter2.next();
@@ -256,7 +256,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 			if (getTypeReferences().is(p2.getParameterType(), Void.class)) {
 				a.append("null");
 			} else {
-				a.append(p1.getName());
+				a.append(getJavaVarName(p1, a));
 			}
 			if (iter2.hasNext()) {
 				a.append(", ");
