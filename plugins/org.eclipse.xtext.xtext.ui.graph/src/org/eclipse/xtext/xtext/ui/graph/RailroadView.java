@@ -97,17 +97,17 @@ public class RailroadView extends ViewPart {
 	}
 
 	public void setContents(final IFigure newContents) {
-		Display.getDefault().syncExec(new Runnable() {
+		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				if (contents != null)
 					rootFigure.remove(contents);
 				if (newContents != null)
 					rootFigure.add(newContents);
 				rootFigure.revalidate();
+				contents = newContents;
+				exportAction.setEnabled(newContents != null);
 			}
 		});
-		this.contents = newContents;
-		exportAction.setEnabled(newContents != null);
 	}
 
 	public IFigure getContents() {
