@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
+import org.eclipse.xtext.conversion.ValueConverterWithValueException;
 import org.eclipse.xtext.nodemodel.INode;
 
 import com.google.inject.Inject;
@@ -66,6 +67,10 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 			final Object tokenValue = getTokenValue(value, ruleName, node);
 			checkNullForPrimitiveFeatures(structuralFeature, tokenValue, node);
 			object.eSet(structuralFeature, tokenValue);
+		} catch(ValueConverterWithValueException e) {
+			final Object tokenValue = e.getValue();
+			checkNullForPrimitiveFeatures(structuralFeature, tokenValue, node);
+			object.eSet(structuralFeature, tokenValue);
 		} catch(ValueConverterException e) {
 			throw e;
 		} catch(NullPointerException e) {
@@ -107,6 +112,11 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 				checkNullForPrimitiveFeatures(structuralFeature, value, node);
 				((Collection<Object>) object.eGet(structuralFeature)).add(tokenValue);
 			}
+		} catch(ValueConverterWithValueException e) {
+			final Object tokenValue = e.getValue();
+			checkNullForPrimitiveFeatures(structuralFeature, value, node);
+			((Collection<Object>) object.eGet(structuralFeature)).add(tokenValue);
+			throw e;
 		} catch(ValueConverterException e) {
 			throw e;
 		} catch(NullPointerException e) {
