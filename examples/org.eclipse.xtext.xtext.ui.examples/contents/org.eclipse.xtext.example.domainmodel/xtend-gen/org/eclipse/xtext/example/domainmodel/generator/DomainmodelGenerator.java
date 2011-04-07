@@ -1,5 +1,6 @@
 package org.eclipse.xtext.example.domainmodel.generator;
 
+import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -23,9 +24,8 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class DomainmodelGenerator implements IGenerator {
-  private final DomainmodelGenerator _this = this;
-  @com.google.inject.Inject private GeneratorExtensions generatorExtensions;
-  @com.google.inject.Inject private DomainmodelCompiler domainmodelCompiler;
+  @Inject private GeneratorExtensions generatorExtensions;
+  @Inject private DomainmodelCompiler domainmodelCompiler;
   
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
     Iterable<EObject> _allContentsIterable = ResourceExtensions.allContentsIterable(resource);
@@ -34,7 +34,7 @@ public class DomainmodelGenerator implements IGenerator {
         {
           final Entity entity = ((org.eclipse.xtext.example.domainmodel.domainmodel.Entity) element);
           String _fileName = generatorExtensions.fileName(entity);
-          StringConcatenation _compile = _this.compile(entity);
+          StringConcatenation _compile = DomainmodelGenerator.this.compile(entity);
           fsa.generateFile(_fileName, _compile);
         }
       }
@@ -46,7 +46,7 @@ public class DomainmodelGenerator implements IGenerator {
     {
       ImportManager _importManager = new ImportManager(true);
       final ImportManager importManager = _importManager;
-      StringConcatenation _body = _this.body(e, importManager);
+      StringConcatenation _body = DomainmodelGenerator.this.body(e, importManager);
       final StringConcatenation body = _body;
       StringConcatenation builder = new StringConcatenation();
       {
@@ -54,7 +54,7 @@ public class DomainmodelGenerator implements IGenerator {
         String _packageName = generatorExtensions.packageName(typeConverted_e);
         boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_packageName);
         boolean _operator_not = BooleanExtensions.operator_not(_isNullOrEmpty);
-        if (((Boolean)_operator_not)) {
+        if (_operator_not) {
           builder.newLineIfNotEmpty();
           builder.append("package ");
           final Entity typeConverted_e_1 = (Entity)e;
@@ -91,7 +91,7 @@ public class DomainmodelGenerator implements IGenerator {
     String _name = e.getName();
     builder.append(_name, "");
     builder.append(" ");
-    String _superTypeClause = _this.superTypeClause(e, importManager);
+    String _superTypeClause = DomainmodelGenerator.this.superTypeClause(e, importManager);
     builder.append(_superTypeClause, "");
     builder.append("{");
     builder.newLineIfNotEmpty();
@@ -101,7 +101,7 @@ public class DomainmodelGenerator implements IGenerator {
       for(org.eclipse.xtext.example.domainmodel.domainmodel.Feature f : _features) {
         builder.newLineIfNotEmpty();
         builder.append("\t");
-        StringConcatenation _feature = _this.feature(f, importManager);
+        StringConcatenation _feature = DomainmodelGenerator.this.feature(f, importManager);
         builder.append(_feature, "	");
         builder.newLineIfNotEmpty();
         builder.append("\t");
@@ -226,7 +226,7 @@ public class DomainmodelGenerator implements IGenerator {
     builder.append(") {");
     builder.newLineIfNotEmpty();
     builder.append("\t");
-    String _compile = _this.domainmodelCompiler.compile(o, importManager);
+    String _compile = DomainmodelGenerator.this.domainmodelCompiler.compile(o, importManager);
     builder.append(_compile, "	");
     builder.newLineIfNotEmpty();
     builder.append("}");

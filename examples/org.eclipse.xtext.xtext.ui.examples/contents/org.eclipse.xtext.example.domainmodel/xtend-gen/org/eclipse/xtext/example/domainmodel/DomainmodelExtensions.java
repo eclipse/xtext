@@ -7,7 +7,6 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class DomainmodelExtensions {
-  private final DomainmodelExtensions _this = this;
   
   public String packageName(final Object o) {
     String switchResult = null;
@@ -19,9 +18,9 @@ public class DomainmodelExtensions {
         matched=true;
         final PackageDeclaration typeConverted_o_2 = (PackageDeclaration)o_2;
         EObject _eContainer = typeConverted_o_2.eContainer();
-        String _packageName = _this.packageName(_eContainer);
+        String _packageName = DomainmodelExtensions.this.packageName(_eContainer);
         String _name = o_2.getName();
-        String _concatPath = _this.concatPath(_packageName, _name);
+        String _concatPath = DomainmodelExtensions.this.concatPath(_packageName, _name);
         switchResult = _concatPath;
       }
     }
@@ -30,7 +29,7 @@ public class DomainmodelExtensions {
         final EObject o_3 = (EObject) o_1;
         matched=true;
         EObject _eContainer_1 = o_3.eContainer();
-        String _packageName_1 = _this.packageName(_eContainer_1);
+        String _packageName_1 = DomainmodelExtensions.this.packageName(_eContainer_1);
         switchResult = _packageName_1;
       }
     }

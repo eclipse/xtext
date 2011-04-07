@@ -17,7 +17,6 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class GeneratorExtensions extends DomainmodelExtensions {
-  private final GeneratorExtensions _this = this;
   
   public String shortName(final JvmTypeReference r, final ImportManager importManager) {
     String _xblockexpression = null;
@@ -33,8 +32,8 @@ public class GeneratorExtensions extends DomainmodelExtensions {
   
   public String fileName(final Entity e) {
     final Entity typeConverted_e = (Entity)e;
-    String _packageName = _this.packageName(typeConverted_e);
-    String _folderName = _this.folderName(_packageName);
+    String _packageName = GeneratorExtensions.this.packageName(typeConverted_e);
+    String _folderName = GeneratorExtensions.this.folderName(_packageName);
     String _operator_plus = StringExtensions.operator_plus(_folderName, "/");
     String _name = e.getName();
     String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name);
@@ -60,7 +59,7 @@ public class GeneratorExtensions extends DomainmodelExtensions {
     final Function1<JvmFormalParameter,String> function = new Function1<JvmFormalParameter,String>() {
         public String apply(JvmFormalParameter p) {
           JvmTypeReference _parameterType = p.getParameterType();
-          String _shortName = _this.shortName(_parameterType, importManager);
+          String _shortName = GeneratorExtensions.this.shortName(_parameterType, importManager);
           String _operator_plus = StringExtensions.operator_plus(_shortName, " ");
           String _name = p.getName();
           String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name);

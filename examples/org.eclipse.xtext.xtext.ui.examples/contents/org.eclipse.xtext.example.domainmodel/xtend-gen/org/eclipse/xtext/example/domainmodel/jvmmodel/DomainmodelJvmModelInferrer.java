@@ -1,5 +1,6 @@
 package org.eclipse.xtext.example.domainmodel.jvmmodel;
 
+import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -34,18 +35,17 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
-  private final DomainmodelJvmModelInferrer _this = this;
-  @com.google.inject.Inject private TypesFactory typesFactory;
-  @com.google.inject.Inject private IJvmModelAssociator iJvmModelAssociator;
-  @com.google.inject.Inject private JvmVisibilityExtension jvmVisibilityExtension;
-  @com.google.inject.Inject private DomainmodelExtensions domainmodelExtensions;
+  @Inject private TypesFactory typesFactory;
+  @Inject private IJvmModelAssociator iJvmModelAssociator;
+  @Inject private JvmVisibilityExtension jvmVisibilityExtension;
+  @Inject private DomainmodelExtensions domainmodelExtensions;
   
   public List<JvmDeclaredType> inferJvmModel(final EObject sourceObject) {
     List<JvmDeclaredType> _xblockexpression = null;
     {
       iJvmModelAssociator.disassociate(sourceObject);
       final EObject typeConverted_sourceObject = (EObject)sourceObject;
-      Iterable<JvmDeclaredType> _transform = _this.transform(typeConverted_sourceObject);
+      Iterable<JvmDeclaredType> _transform = DomainmodelJvmModelInferrer.this.transform(typeConverted_sourceObject);
       List<JvmDeclaredType> _list = IterableExtensions.<JvmDeclaredType>toList(_transform);
       _xblockexpression = (_list);
     }
@@ -57,7 +57,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
     final Function1<AbstractElement,Iterable<JvmDeclaredType>> function = new Function1<AbstractElement,Iterable<JvmDeclaredType>>() {
         public Iterable<JvmDeclaredType> apply(AbstractElement e) {
           final AbstractElement typeConverted_e = (AbstractElement)e;
-          Iterable<JvmDeclaredType> _transform = _this.transform(typeConverted_e);
+          Iterable<JvmDeclaredType> _transform = DomainmodelJvmModelInferrer.this.transform(typeConverted_e);
           return _transform;
         }
       };
@@ -71,7 +71,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
     final Function1<AbstractElement,Iterable<JvmDeclaredType>> function = new Function1<AbstractElement,Iterable<JvmDeclaredType>>() {
         public Iterable<JvmDeclaredType> apply(AbstractElement e) {
           final AbstractElement typeConverted_e = (AbstractElement)e;
-          Iterable<JvmDeclaredType> _transform = _this.transform(typeConverted_e);
+          Iterable<JvmDeclaredType> _transform = DomainmodelJvmModelInferrer.this.transform(typeConverted_e);
           return _transform;
         }
       };
@@ -83,7 +83,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
   public Iterable<JvmDeclaredType> _transform(final Entity entity) {
     ArrayList<JvmDeclaredType> _xblockexpression = null;
     {
-      JvmGenericType _createJvmGenericType = _this.typesFactory.createJvmGenericType();
+      JvmGenericType _createJvmGenericType = DomainmodelJvmModelInferrer.this.typesFactory.createJvmGenericType();
       final JvmGenericType jvmClass = _createJvmGenericType;
       String _name = entity.getName();
       jvmClass.setSimpleName(_name);
@@ -97,7 +97,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       jvmVisibilityExtension.setPublic(typeConverted_jvmClass_1);
       EList<Feature> _features = entity.getFeatures();
       for (Feature f : _features) {
-        _this.transform(f, jvmClass);
+        DomainmodelJvmModelInferrer.this.transform(f, jvmClass);
       }
       ArrayList<JvmDeclaredType> _newArrayList = CollectionLiterals.<JvmDeclaredType>newArrayList(((org.eclipse.xtext.common.types.JvmDeclaredType) jvmClass));
       _xblockexpression = (_newArrayList);
@@ -117,7 +117,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
   
   public void _transform(final Property property, final JvmGenericType type) {
     {
-      JvmField _createJvmField = _this.typesFactory.createJvmField();
+      JvmField _createJvmField = DomainmodelJvmModelInferrer.this.typesFactory.createJvmField();
       final JvmField jvmField = _createJvmField;
       final Property typeConverted_property = (Property)property;
       String _name = typeConverted_property.getName();
@@ -134,7 +134,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       final Property typeConverted_property_2 = (Property)property;
       final JvmField typeConverted_jvmField_1 = (JvmField)jvmField;
       iJvmModelAssociator.associatePrimary(typeConverted_property_2, typeConverted_jvmField_1);
-      JvmOperation _createJvmOperation = _this.typesFactory.createJvmOperation();
+      JvmOperation _createJvmOperation = DomainmodelJvmModelInferrer.this.typesFactory.createJvmOperation();
       final JvmOperation jvmGetter = _createJvmOperation;
       final Property typeConverted_property_3 = (Property)property;
       String _name_1 = typeConverted_property_3.getName();
@@ -153,14 +153,14 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       final Property typeConverted_property_5 = (Property)property;
       final JvmOperation typeConverted_jvmGetter_1 = (JvmOperation)jvmGetter;
       iJvmModelAssociator.associatePrimary(typeConverted_property_5, typeConverted_jvmGetter_1);
-      JvmOperation _createJvmOperation_1 = _this.typesFactory.createJvmOperation();
+      JvmOperation _createJvmOperation_1 = DomainmodelJvmModelInferrer.this.typesFactory.createJvmOperation();
       final JvmOperation jvmSetter = _createJvmOperation_1;
       final Property typeConverted_property_6 = (Property)property;
       String _name_2 = typeConverted_property_6.getName();
       String _firstUpper_1 = StringExtensions.toFirstUpper(_name_2);
       String _operator_plus_1 = StringExtensions.operator_plus("set", _firstUpper_1);
       jvmSetter.setSimpleName(_operator_plus_1);
-      JvmFormalParameter _createJvmFormalParameter = _this.typesFactory.createJvmFormalParameter();
+      JvmFormalParameter _createJvmFormalParameter = DomainmodelJvmModelInferrer.this.typesFactory.createJvmFormalParameter();
       final JvmFormalParameter parameter = _createJvmFormalParameter;
       final Property typeConverted_property_7 = (Property)property;
       String _name_3 = typeConverted_property_7.getName();
@@ -186,7 +186,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
   
   public void _transform(final Operation operation, final JvmGenericType type) {
     {
-      JvmOperation _createJvmOperation = _this.typesFactory.createJvmOperation();
+      JvmOperation _createJvmOperation = DomainmodelJvmModelInferrer.this.typesFactory.createJvmOperation();
       final JvmOperation jvmOperation = _createJvmOperation;
       final Operation typeConverted_operation = (Operation)operation;
       String _name = typeConverted_operation.getName();

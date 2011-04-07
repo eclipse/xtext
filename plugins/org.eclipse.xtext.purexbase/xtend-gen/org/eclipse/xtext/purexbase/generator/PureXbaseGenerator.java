@@ -1,5 +1,6 @@
 package org.eclipse.xtext.purexbase.generator;
 
+import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -23,16 +24,15 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class PureXbaseGenerator implements IGenerator {
-  private final PureXbaseGenerator _this = this;
-  @com.google.inject.Inject private XbaseCompiler compiler;
-  @com.google.inject.Inject private TypeReferences typeReferences;
+  @Inject private XbaseCompiler compiler;
+  @Inject private TypeReferences typeReferences;
   
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
-    String _name = _this.name(resource);
+    String _name = PureXbaseGenerator.this.name(resource);
     String _operator_plus = StringExtensions.operator_plus(_name, ".java");
     EList<EObject> _contents = resource.getContents();
     EObject _head = IterableExtensions.<EObject>head(_contents);
-    StringConcatenation _generateMain = _this.generateMain(((org.eclipse.xtext.purexbase.pureXbase.Model) _head));
+    StringConcatenation _generateMain = PureXbaseGenerator.this.generateMain(((org.eclipse.xtext.purexbase.pureXbase.Model) _head));
     fsa.generateFile(_operator_plus, _generateMain);
   }
   
@@ -59,8 +59,8 @@ public class PureXbaseGenerator implements IGenerator {
       XBlockExpression _block = m.getBlock();
       final StringBuilderBasedAppendable typeConverted_appendable = (StringBuilderBasedAppendable)appendable;
       final Model typeConverted_m = (Model)m;
-      JvmTypeReference _typeForName = _this.typeReferences.getTypeForName("void", typeConverted_m);
-      _this.compiler.compile(_block, typeConverted_appendable, _typeForName);
+      JvmTypeReference _typeForName = PureXbaseGenerator.this.typeReferences.getTypeForName("void", typeConverted_m);
+      PureXbaseGenerator.this.compiler.compile(_block, typeConverted_appendable, _typeForName);
       StringConcatenation builder = new StringConcatenation();
       List<String> _imports = impMnr.getImports();
       final Function1<String,String> function = new Function1<String,String>() {
@@ -81,7 +81,7 @@ public class PureXbaseGenerator implements IGenerator {
       builder.append("public class ");
       final Model typeConverted_m_1 = (Model)m;
       Resource _eResource = typeConverted_m_1.eResource();
-      String _name = _this.name(_eResource);
+      String _name = PureXbaseGenerator.this.name(_eResource);
       builder.append(_name, "");
       builder.append(" {");
       builder.newLineIfNotEmpty();
