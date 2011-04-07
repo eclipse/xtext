@@ -1337,8 +1337,8 @@ public class InternalXbaseLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4294:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4294:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4294:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4294:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             {
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4294:11: ( '^' )?
             int alt1=2;
@@ -1358,7 +1358,7 @@ public class InternalXbaseLexer extends Lexer {
 
             }
 
-            if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
+            if ( input.LA(1)=='$'||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
 
             }
@@ -1367,13 +1367,13 @@ public class InternalXbaseLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4294:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:4294:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( ((LA2_0>='0' && LA2_0<='9')||(LA2_0>='A' && LA2_0<='Z')||LA2_0=='_'||(LA2_0>='a' && LA2_0<='z')) ) {
+                if ( (LA2_0=='$'||(LA2_0>='0' && LA2_0<='9')||(LA2_0>='A' && LA2_0<='Z')||LA2_0=='_'||(LA2_0>='a' && LA2_0<='z')) ) {
                     alt2=1;
                 }
 
@@ -1382,7 +1382,7 @@ public class InternalXbaseLexer extends Lexer {
             	case 1 :
             	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXbase.g:
             	    {
-            	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
+            	    if ( input.LA(1)=='$'||(input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
 
             	    }
@@ -2344,17 +2344,17 @@ public class InternalXbaseLexer extends Lexer {
     static final String DFA12_minS =
         "\1\0\2\75\1\174\1\46\1\75\1\146\2\75\1\76\1\56\2\52\1\uffff\1\163"+
         "\1\56\5\uffff\1\154\1\165\1\72\1\uffff\1\145\1\uffff\2\141\1\150"+
-        "\1\uffff\1\141\1\145\1\150\1\145\1\101\2\uffff\2\0\15\uffff\1\163"+
-        "\1\60\20\uffff\1\60\7\uffff\1\163\1\164\1\151\1\160\3\uffff\1\146"+
-        "\1\60\1\uffff\1\163\1\162\1\154\1\156\1\151\1\uffff\1\154\1\167"+
+        "\1\uffff\1\141\1\145\1\150\1\145\1\44\2\uffff\2\0\15\uffff\1\163"+
+        "\1\44\20\uffff\1\44\7\uffff\1\163\1\164\1\151\1\160\3\uffff\1\146"+
+        "\1\44\1\uffff\1\163\1\162\1\154\1\156\1\151\1\uffff\1\154\1\167"+
         "\1\154\1\165\1\160\1\162\1\164\3\uffff\1\164\2\uffff\2\145\1\164"+
-        "\1\145\1\141\1\uffff\1\145\1\143\1\60\1\163\1\141\1\154\3\60\1\154"+
-        "\1\145\1\60\1\145\1\157\1\165\1\141\1\60\1\156\1\143\1\162\1\165"+
-        "\1\60\1\150\1\uffff\1\145\1\154\1\145\3\uffff\2\60\1\uffff\1\157"+
-        "\1\167\1\162\1\156\1\uffff\1\144\1\150\1\60\1\154\1\uffff\2\60\1"+
-        "\154\1\60\2\uffff\1\146\1\60\1\156\1\143\1\163\1\60\1\uffff\1\164"+
-        "\2\uffff\1\171\1\uffff\1\60\1\uffff\1\60\1\145\1\60\1\uffff\2\60"+
-        "\2\uffff\1\157\3\uffff\1\146\1\60\1\uffff";
+        "\1\145\1\141\1\uffff\1\145\1\143\1\44\1\163\1\141\1\154\3\44\1\154"+
+        "\1\145\1\44\1\145\1\157\1\165\1\141\1\44\1\156\1\143\1\162\1\165"+
+        "\1\44\1\150\1\uffff\1\145\1\154\1\145\3\uffff\2\44\1\uffff\1\157"+
+        "\1\167\1\162\1\156\1\uffff\1\144\1\150\1\44\1\154\1\uffff\2\44\1"+
+        "\154\1\44\2\uffff\1\146\1\44\1\156\1\143\1\163\1\44\1\uffff\1\164"+
+        "\2\uffff\1\171\1\uffff\1\44\1\uffff\1\44\1\145\1\44\1\uffff\2\44"+
+        "\2\uffff\1\157\3\uffff\1\146\1\44\1\uffff";
     static final String DFA12_maxS =
         "\1\uffff\1\76\1\75\1\174\1\46\1\75\1\156\2\75\1\76\2\56\1\57\1\uffff"+
         "\1\163\1\56\5\uffff\1\170\1\167\1\72\1\uffff\1\157\1\uffff\1\141"+
@@ -2384,11 +2384,11 @@ public class InternalXbaseLexer extends Lexer {
     static final String DFA12_specialS =
         "\1\2\45\uffff\1\0\1\1\u0098\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\51\2\50\2\51\1\50\22\51\1\50\1\5\1\46\2\51\1\15\1\4\1\47"+
-            "\1\21\1\22\1\13\1\2\1\20\1\11\1\12\1\14\12\45\1\27\1\36\1\10"+
-            "\1\1\1\7\1\17\1\51\32\44\1\23\1\51\1\24\1\43\1\44\1\51\1\16"+
-            "\1\44\1\33\1\31\1\25\1\34\2\44\1\6\4\44\1\40\3\44\1\42\1\26"+
-            "\1\41\1\44\1\37\1\35\3\44\1\30\1\3\1\32\uff82\51",
+            "\11\51\2\50\2\51\1\50\22\51\1\50\1\5\1\46\1\51\1\44\1\15\1\4"+
+            "\1\47\1\21\1\22\1\13\1\2\1\20\1\11\1\12\1\14\12\45\1\27\1\36"+
+            "\1\10\1\1\1\7\1\17\1\51\32\44\1\23\1\51\1\24\1\43\1\44\1\51"+
+            "\1\16\1\44\1\33\1\31\1\25\1\34\2\44\1\6\4\44\1\40\3\44\1\42"+
+            "\1\26\1\41\1\44\1\37\1\35\3\44\1\30\1\3\1\32\uff82\51",
             "\1\52\1\53",
             "\1\55",
             "\1\57",
@@ -2423,7 +2423,7 @@ public class InternalXbaseLexer extends Lexer {
             "\1\140\17\uffff\1\141",
             "\1\144\11\uffff\1\142\6\uffff\1\143",
             "\1\145",
-            "\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\67\34\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "",
             "",
             "\0\147",
@@ -2442,7 +2442,8 @@ public class InternalXbaseLexer extends Lexer {
             "",
             "",
             "\1\151",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
             "",
             "",
             "",
@@ -2459,7 +2460,8 @@ public class InternalXbaseLexer extends Lexer {
             "",
             "",
             "",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
             "",
             "",
             "",
@@ -2475,7 +2477,8 @@ public class InternalXbaseLexer extends Lexer {
             "",
             "",
             "\1\160",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
             "",
             "\1\162\1\163",
             "\1\164",
@@ -2504,26 +2507,33 @@ public class InternalXbaseLexer extends Lexer {
             "",
             "\1\u0087",
             "\1\u0088",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
             "\1\u008a",
             "\1\u008b",
             "\1\u008c",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
             "\1\u0090",
             "\1\u0091",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
             "\1\u0093",
             "\1\u0094",
             "\1\u0095",
             "\1\u0096",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
             "\1\u0098",
             "\1\u0099",
             "\1\u009a",
             "\1\u009b",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
             "\1\u009d",
             "",
             "\1\u009e",
@@ -2532,8 +2542,10 @@ public class InternalXbaseLexer extends Lexer {
             "",
             "",
             "",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
             "",
             "\1\u00a3",
             "\1\u00a4",
@@ -2542,35 +2554,46 @@ public class InternalXbaseLexer extends Lexer {
             "",
             "\1\u00a7",
             "\1\u00a8",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
             "\1\u00aa",
             "",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
             "\1\u00ad",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
             "",
             "",
             "\1\u00af",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
             "\1\u00b1",
             "\1\u00b2",
             "\1\u00b3",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
             "",
             "\1\u00b5",
             "",
             "",
             "\1\u00b6",
             "",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
             "",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
             "\1\u00b9",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
             "",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
             "",
             "",
             "\1\u00bd",
@@ -2578,7 +2601,8 @@ public class InternalXbaseLexer extends Lexer {
             "",
             "",
             "\1\u00be",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
+            "\1\67\13\uffff\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32"+
+            "\67",
             ""
     };
 
@@ -2712,7 +2736,7 @@ public class InternalXbaseLexer extends Lexer {
 
                         else if ( (LA12_0=='^') ) {s = 35;}
 
-                        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||LA12_0=='b'||(LA12_0>='g' && LA12_0<='h')||(LA12_0>='j' && LA12_0<='m')||(LA12_0>='o' && LA12_0<='q')||LA12_0=='u'||(LA12_0>='x' && LA12_0<='z')) ) {s = 36;}
+                        else if ( (LA12_0=='$'||(LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||LA12_0=='b'||(LA12_0>='g' && LA12_0<='h')||(LA12_0>='j' && LA12_0<='m')||(LA12_0>='o' && LA12_0<='q')||LA12_0=='u'||(LA12_0>='x' && LA12_0<='z')) ) {s = 36;}
 
                         else if ( ((LA12_0>='0' && LA12_0<='9')) ) {s = 37;}
 
@@ -2722,7 +2746,7 @@ public class InternalXbaseLexer extends Lexer {
 
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 40;}
 
-                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||(LA12_0>='#' && LA12_0<='$')||LA12_0=='@'||LA12_0=='\\'||LA12_0=='`'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 41;}
+                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='#'||LA12_0=='@'||LA12_0=='\\'||LA12_0=='`'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 41;}
 
                         if ( s>=0 ) return s;
                         break;

@@ -12,6 +12,7 @@ import java.util.Stack;
 
 import junit.framework.TestCase;
 import testdata.ExceptionSubclass;
+import testdata.OuterClass;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -26,6 +27,15 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 
 	protected abstract void assertEvaluatesTo(Object object, String string);
 	protected abstract void assertEvaluatesWithException(Class<? extends Throwable> class1, String string);
+	
+	
+	public void testReferenceInternalClasses() throws Exception {
+		assertEvaluatesTo(OuterClass.InnerClass.SINGLETON, "testdata::OuterClass$InnerClass::SINGLETON");
+	}
+	
+	public void testReferenceInternalClasses_00() throws Exception {
+		assertEvaluatesTo("FOO", "[testdata.OuterClass$InnerClass param| param.toUpperCase('foo')].apply(new testdata.OuterClass$InnerClass())");
+	}
 	
 	/*
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341642
