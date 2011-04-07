@@ -138,6 +138,20 @@ public class DocumentTokenSource {
 				}
 			};
 		}
+		
+		@Override
+		public boolean equals(Object obj) {
+			if (obj == this)
+				return true;
+			if (!(obj instanceof IRegionIterable))
+				return false;
+			return tokens == ((IRegionIterable)obj).tokens;
+		}
+		
+		@Override
+		public int hashCode() {
+			return System.identityHashCode(tokens);
+		}
 	}
 
 	private boolean checkInvariant = false;
