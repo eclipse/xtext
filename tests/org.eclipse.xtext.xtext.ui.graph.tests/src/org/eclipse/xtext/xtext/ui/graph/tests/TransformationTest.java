@@ -11,10 +11,12 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xtext.ui.graph.figures.BypassSegment;
+import org.eclipse.xtext.xtext.ui.graph.figures.CompartmentSegment;
 import org.eclipse.xtext.xtext.ui.graph.figures.CrossPointSegment;
 import org.eclipse.xtext.xtext.ui.graph.figures.ISegmentFigure;
 import org.eclipse.xtext.xtext.ui.graph.figures.LoopSegment;
 import org.eclipse.xtext.xtext.ui.graph.figures.NodeSegment;
+import org.eclipse.xtext.xtext.ui.graph.figures.ParallelSegment;
 import org.eclipse.xtext.xtext.ui.graph.figures.RailroadDiagram;
 import org.eclipse.xtext.xtext.ui.graph.figures.RailroadTrack;
 import org.eclipse.xtext.xtext.ui.graph.figures.SequenceSegment;
@@ -39,7 +41,7 @@ public class TransformationTest {
 	private GrammarParser parser;
 	
 	@Test
-	public void testTransform() throws Exception {
+	public void testKeyword() throws Exception {
 		getBuilder("Foo: 'foo';").hasChildren(1)
 			.child(0).isType(RailroadTrack.class).as("t").hasChildren(5)
 				.child(0).isType(LabelNode.class).as("label").parent()
@@ -51,7 +53,7 @@ public class TransformationTest {
 	}
 
 	@Test
-	public void testTransformOptional() throws Exception {
+	public void testOptionalKeyword() throws Exception {
 		getBuilder("Foo: 'foo'?;").hasChildren(1)
 			.child(0).isType(RailroadTrack.class).as("t").hasChildren(5)
 				.child(0).isType(LabelNode.class).as("label").parent()
@@ -72,7 +74,7 @@ public class TransformationTest {
 	}
 
 	@Test
-	public void testTransformMulti() throws Exception {
+	public void testMultipleKeyword() throws Exception {
 		getBuilder("Foo: 'foo'+;").hasChildren(1)
 			.child(0).isType(RailroadTrack.class).as("t").hasChildren(5)
 				.child(0).isType(LabelNode.class).as("label").parent()
@@ -93,7 +95,7 @@ public class TransformationTest {
 	}
 
 	@Test
-	public void testTransformGroup() throws Exception {
+	public void testGroup() throws Exception {
 		getBuilder("Foo: 'foo' 'bar';").hasChildren(1)
 			.child(0).isType(RailroadTrack.class).as("t").hasChildren(5)
 				.child(0).isType(LabelNode.class).as("label").parent()
@@ -110,12 +112,57 @@ public class TransformationTest {
 	
 	
 	@Test
-	public void testTransformAction() throws Exception {
+	public void testAction() throws Exception {
 		getBuilder("Foo: {Foo} 'foo';").hasChildren(1)
 		.child(0).isType(RailroadTrack.class).hasChildren(5)
 			.child(0).isType(LabelNode.class).as("label").parent()
 			.child(1).isType(NodeSegment.class).hasChildren(1)
 				.child(0).as("node");
+	}
+
+	@Test
+	public void testAssignment() throws Exception {
+		getBuilder("Foo: name=ID;").hasChildren(1)
+		.child(0).isType(RailroadTrack.class).hasChildren(5)
+			.child(0).isType(LabelNode.class).as("label").parent()
+			.child(1).isType(NodeSegment.class).hasChildren(1)
+				.child(0).as("node");
+	}
+
+	@Test
+	public void testOptionalAssignment() throws Exception {
+		getBuilder("Foo: name=ID?;").hasChildren(1)
+		.child(0).isType(RailroadTrack.class).hasChildren(5)
+			.child(0).isType(LabelNode.class).as("label").parent()
+			.child(1).isType(BypassSegment.class);
+	}
+
+	@Test
+	public void testRuleCall() throws Exception {
+		getBuilder("Foo: ID;").hasChildren(1)
+		.child(0).isType(RailroadTrack.class).hasChildren(5)
+			.child(0).isType(LabelNode.class).as("label").parent()
+			.child(1).isType(NodeSegment.class).hasChildren(1)
+				.child(0).as("node");
+	}
+
+	@Test
+	public void testOptionalRullCall() throws Exception {
+		getBuilder("Foo: ID?;").hasChildren(1)
+		.child(0).isType(RailroadTrack.class).hasChildren(5)
+			.child(0).isType(LabelNode.class).as("label").parent()
+			.child(1).isType(BypassSegment.class);
+	}
+
+	@Test
+	public void testUnorderedGroup() throws Exception {
+		getBuilder("Foo: 'foo' & 'bar';").hasChildren(1)
+		.child(0).isType(RailroadTrack.class).hasChildren(5)
+			.child(0).isType(LabelNode.class).as("label").parent()
+			.child(1).isType(CompartmentSegment.class).hasChildren(5)
+				.child(0).isType(CrossPoint.class).as("comp_entry").parent()
+				.child(1).isType(CrossPoint.class).as("comp_exit").parent()
+				.child(2).isType(ParallelSegment.class);
 	}
 
 	protected TreeVerificationBuilder getBuilder(String rules) throws IOException {

@@ -80,7 +80,7 @@ public class Xtext2RailroadTransformer {
 
 	protected ISegmentFigure transformInternal(UnorderedGroup unorderedGroup) {
 		List<ISegmentFigure> children = transformChildren(unorderedGroup.getElements());
-		return factory.createParallel(unorderedGroup, children);
+		return factory.createCompartment(unorderedGroup, children);
 	}
 
 	protected ISegmentFigure transformInternal(Keyword keyword) {

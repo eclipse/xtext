@@ -21,8 +21,9 @@ public interface ILayoutConstants {
 
 	// common spacings
 	int HSPACE = 10;
-	int VSPACE = 10;
+	int VSPACE = 9;
 	int VSPACE_BETWEEN_TRACKS = 25;
+	int COMPARTMENT_PADDING = 10;
 	
 	// nodes
 	int ROUNDED_RECTANGLE_RADIUS = 7;
@@ -38,7 +39,7 @@ public interface ILayoutConstants {
 	RailroadConnectionRouter.BendConstraint CONCAVE_START = new RailroadConnectionRouter.BendConstraint(true, false);
 
 	// segments
-	int MIN_SEGMENT_HEIGHT = 20;
+	int MIN_SEGMENT_HEIGHT = 25; 
 	int PARALLEL_SEGMENT_HSPACE = 20;
 
 }
