@@ -96,29 +96,13 @@ public class Xtext2RailroadFactory {
 
 	protected ISegmentFigure wrapCardinalitySegments(AbstractElement element, ISegmentFigure segment) {
 		ISegmentFigure result = segment;
-		EObject cardinalityElement = getParentWithCardinality(element);
-		if (cardinalityElement instanceof AbstractElement) {
-			if (GrammarUtil.isMultipleCardinality((AbstractElement) cardinalityElement)) {
-				result = new LoopSegment(cardinalityElement, result, primitiveFactory);
-			}
-			if (GrammarUtil.isOptionalCardinality((AbstractElement) cardinalityElement)) {
-				result = new BypassSegment(cardinalityElement, result, primitiveFactory);
-			}
+		if (GrammarUtil.isMultipleCardinality(element)) {
+			result = new LoopSegment(element, result, primitiveFactory);
+		}
+		if (GrammarUtil.isOptionalCardinality(element)) {
+			result = new BypassSegment(element, result, primitiveFactory);
 		}
 		return result;
-	}
-
-	protected EObject getParentWithCardinality(AbstractElement element) {
-		EObject cardinalityElement = element;
-		String cardinality = element.getCardinality();
-		while (cardinality == null && cardinalityElement != null) {
-			cardinalityElement = cardinalityElement.eContainer();
-			if(cardinalityElement instanceof Group && ((Group)cardinalityElement).getElements().size() >1)
-				return element;
-			if (cardinalityElement instanceof AbstractElement)
-				cardinality = ((AbstractElement) cardinalityElement).getCardinality();
-		}
-		return cardinalityElement;
 	}
 
 }
