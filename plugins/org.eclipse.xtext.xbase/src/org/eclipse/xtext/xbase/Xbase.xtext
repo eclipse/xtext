@@ -185,13 +185,17 @@ XFeatureCall returns XExpression:
 	{XFeatureCall}
 	(declaringType=[types::JvmDeclaredType|StaticQualifier])?
 	('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')? 
-	feature=[types::JvmIdentifiableElement] 
+	feature=[types::JvmIdentifiableElement|IdOrSuper] 
 	(=>explicitOperationCall?='(' 
 		(
 		    featureCallArguments+=XShortClosure
 		  |	featureCallArguments+=XExpression (',' featureCallArguments+=XExpression)*
 		)? 
 	')')?;
+	
+IdOrSuper :
+	ID | 'super'
+;
 	
 // This is a workaround since ANTLR will not be able to resolve
 // StaticQualifier: ID ('::' ID)*; and XFeatureCall: (StaticQualifier '::')? ID
