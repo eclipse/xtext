@@ -24,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getImplements <em>Implements</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getSuperTypes <em>Super Types</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getMembers <em>Members</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getSuperCallReferable <em>Super Call Referable</em>}</li>
  * </ul>
  * </p>
  *
@@ -134,6 +135,34 @@ public interface XtendClass extends JvmIdentifiableElement, JvmTypeParameterDecl
 	 * @generated
 	 */
 	EList<XtendMember> getMembers();
+
+	/**
+	 * Returns the value of the '<em><b>Super Call Referable</b></em>' containment reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable#getXtendClass <em>Xtend Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Super Call Referable</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Super Call Referable</em>' containment reference.
+	 * @see #setSuperCallReferable(XtendClassSuperCallReferable)
+	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendClass_SuperCallReferable()
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable#getXtendClass
+	 * @model opposite="xtendClass" containment="true" required="true" transient="true"
+	 * @generated
+	 */
+	XtendClassSuperCallReferable getSuperCallReferable();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getSuperCallReferable <em>Super Call Referable</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Super Call Referable</em>' containment reference.
+	 * @see #getSuperCallReferable()
+	 * @generated
+	 */
+	void setSuperCallReferable(XtendClassSuperCallReferable value);
 
 	/**
 	 * <!-- begin-user-doc -->

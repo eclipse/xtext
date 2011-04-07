@@ -498,7 +498,7 @@ ruleXFeatureCall :
 		'<' ruleJvmArgumentTypeReference (
 			',' ruleJvmArgumentTypeReference
 		)* '>'
-	)? RULE_ID (
+	)? ruleIdOrSuper (
 		( (
 		'('
 		) => '(' ) (
@@ -514,6 +514,12 @@ ruleXFeatureCall :
 			)*
 		)? ')'
 	)?
+;
+
+// Rule IdOrSuper
+ruleIdOrSuper :
+	RULE_ID |
+	'super'
 ;
 
 // Rule StaticQualifier

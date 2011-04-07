@@ -101,6 +101,11 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 				return createXtendClassAdapter();
 			}
 			@Override
+			public Adapter caseXtendClassSuperCallReferable(XtendClassSuperCallReferable object)
+			{
+				return createXtendClassSuperCallReferableAdapter();
+			}
+			@Override
 			public Adapter caseXtendMember(XtendMember object)
 			{
 				return createXtendMemberAdapter();
@@ -238,6 +243,21 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXtendClassAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable <em>Xtend Class Super Call Referable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable
+	 * @generated
+	 */
+	public Adapter createXtendClassSuperCallReferableAdapter()
 	{
 		return null;
 	}

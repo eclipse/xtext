@@ -48,6 +48,40 @@ import com.google.inject.Injector;
  */
 public class CompilerTest extends AbstractXtend2TestCase {
 	
+	public void testSuperCall() throws Exception {
+		Class<?> clazz = compileJavaCode("x.Y",
+				"package x class Y extends Object {" +
+				"  override boolean equals(Object p){\n" +
+				"    if ('foo' == p) " +
+				"       return true" +
+				"    else " +
+				"       super.equals(p)" + 
+				"  }\n" + 
+				"}");
+		Object instance = clazz.newInstance();
+		assertFalse(instance.equals(clazz.newInstance()));
+		assertTrue(instance.equals(instance));
+		assertTrue(instance.equals("foo"));
+	}
+	
+	public void testSuperCall_00() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  override boolean equals(Object p){\n" +
+				"    if ('foo' == p) " +
+				"       return true" +
+				"    else " +
+				"       return super.equals(p)" + 
+				"  }\n" + 
+				"}";
+		String javaCode = compileToJavaCode(code);
+		Class<?> clazz = javaCompiler.compileToClass("x.Z", javaCode);
+		Object instance = clazz.newInstance();
+		assertFalse(instance.equals(clazz.newInstance()));
+		assertTrue(instance.equals(instance));
+		assertTrue(instance.equals("foo"));
+	}
+	
 	public void testThisReferenceInClosures() throws Exception {
 		Class<?> clazz = compileJavaCode("x.Y",
 				"package x class Y {" +

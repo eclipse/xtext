@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtend2.xtend2.impl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EObjectEList;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xtend2.xtend2.Xtend2Factory;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
@@ -17,6 +18,11 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFile;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XtendClassImplCustom extends XtendClassImpl {
+	
+	{
+		setSuperCallReferable(Xtend2Factory.eINSTANCE.createXtendClassSuperCallReferable());
+	}
+	
 	@Override
 	public String getSimpleName() {
 		return getName();
@@ -52,5 +58,6 @@ public class XtendClassImplCustom extends XtendClassImpl {
 		result.addAll(getImplements());
 		return result;
 	}
+	
 	
 }

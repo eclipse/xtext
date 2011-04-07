@@ -1840,7 +1840,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cGreaterThanSignKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
 		private final Assignment cFeatureAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final CrossReference cFeatureJvmIdentifiableElementCrossReference_3_0 = (CrossReference)cFeatureAssignment_3.eContents().get(0);
-		private final RuleCall cFeatureJvmIdentifiableElementIDTerminalRuleCall_3_0_1 = (RuleCall)cFeatureJvmIdentifiableElementCrossReference_3_0.eContents().get(1);
+		private final RuleCall cFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_3_0_1 = (RuleCall)cFeatureJvmIdentifiableElementCrossReference_3_0.eContents().get(1);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
 		private final Assignment cExplicitOperationCallAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
 		private final Keyword cExplicitOperationCallLeftParenthesisKeyword_4_0_0 = (Keyword)cExplicitOperationCallAssignment_4_0.eContents().get(0);
@@ -1858,15 +1858,15 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//XFeatureCall returns XExpression:
 		//	{XFeatureCall} declaringType=[types::JvmDeclaredType|StaticQualifier]? ("<" typeArguments+=JvmArgumentTypeReference
-		//	("," typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement] (=>
+		//	("," typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement|IdOrSuper] (=>
 		//	explicitOperationCall?="(" (featureCallArguments+=XShortClosure | featureCallArguments+=XExpression (","
 		//	featureCallArguments+=XExpression)*)? ")")?;
 		public ParserRule getRule() { return rule; }
 
 		//{XFeatureCall} declaringType=[types::JvmDeclaredType|StaticQualifier]? ("<" typeArguments+=JvmArgumentTypeReference (","
-		//typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement] (=> explicitOperationCall?="("
-		//(featureCallArguments+=XShortClosure | featureCallArguments+=XExpression ("," featureCallArguments+=XExpression)*)?
-		//")")?
+		//typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement|IdOrSuper] (=>
+		//explicitOperationCall?="(" (featureCallArguments+=XShortClosure | featureCallArguments+=XExpression (","
+		//featureCallArguments+=XExpression)*)? ")")?
 		public Group getGroup() { return cGroup; }
 
 		//{XFeatureCall}
@@ -1908,14 +1908,14 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		//">"
 		public Keyword getGreaterThanSignKeyword_2_3() { return cGreaterThanSignKeyword_2_3; }
 
-		//feature=[types::JvmIdentifiableElement]
+		//feature=[types::JvmIdentifiableElement|IdOrSuper]
 		public Assignment getFeatureAssignment_3() { return cFeatureAssignment_3; }
 
-		//[types::JvmIdentifiableElement]
+		//[types::JvmIdentifiableElement|IdOrSuper]
 		public CrossReference getFeatureJvmIdentifiableElementCrossReference_3_0() { return cFeatureJvmIdentifiableElementCrossReference_3_0; }
 
-		//ID
-		public RuleCall getFeatureJvmIdentifiableElementIDTerminalRuleCall_3_0_1() { return cFeatureJvmIdentifiableElementIDTerminalRuleCall_3_0_1; }
+		//IdOrSuper
+		public RuleCall getFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_3_0_1() { return cFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_3_0_1; }
 
 		//(=> explicitOperationCall?="(" (featureCallArguments+=XShortClosure | featureCallArguments+=XExpression (","
 		//featureCallArguments+=XExpression)*)? ")")?
@@ -1959,6 +1959,26 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 
 		//")"
 		public Keyword getRightParenthesisKeyword_4_2() { return cRightParenthesisKeyword_4_2; }
+	}
+
+	public class IdOrSuperElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IdOrSuper");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final Keyword cSuperKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		
+		//IdOrSuper:
+		//	ID | "super";
+		public ParserRule getRule() { return rule; }
+
+		//ID | "super"
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//ID
+		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
+
+		//"super"
+		public Keyword getSuperKeyword_1() { return cSuperKeyword_1; }
 	}
 
 	public class StaticQualifierElements extends AbstractParserRuleElementFinder {
@@ -2485,6 +2505,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	private XVariableDeclarationElements pXVariableDeclaration;
 	private JvmFormalParameterElements pJvmFormalParameter;
 	private XFeatureCallElements pXFeatureCall;
+	private IdOrSuperElements pIdOrSuper;
 	private StaticQualifierElements pStaticQualifier;
 	private XConstructorCallElements pXConstructorCall;
 	private XBooleanLiteralElements pXBooleanLiteral;
@@ -2912,7 +2933,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 
 	//XFeatureCall returns XExpression:
 	//	{XFeatureCall} declaringType=[types::JvmDeclaredType|StaticQualifier]? ("<" typeArguments+=JvmArgumentTypeReference
-	//	("," typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement] (=>
+	//	("," typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement|IdOrSuper] (=>
 	//	explicitOperationCall?="(" (featureCallArguments+=XShortClosure | featureCallArguments+=XExpression (","
 	//	featureCallArguments+=XExpression)*)? ")")?;
 	public XFeatureCallElements getXFeatureCallAccess() {
@@ -2921,6 +2942,16 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getXFeatureCallRule() {
 		return getXFeatureCallAccess().getRule();
+	}
+
+	//IdOrSuper:
+	//	ID | "super";
+	public IdOrSuperElements getIdOrSuperAccess() {
+		return (pIdOrSuper != null) ? pIdOrSuper : (pIdOrSuper = new IdOrSuperElements());
+	}
+	
+	public ParserRule getIdOrSuperRule() {
+		return getIdOrSuperAccess().getRule();
 	}
 
 	//// This is a workaround since ANTLR will not be able to resolve

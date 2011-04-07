@@ -31,6 +31,13 @@
         transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
         eType="#//XtendMember" containment="true" eOpposite="#//XtendMember/declaringType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="superCallReferable" lowerBound="1"
+        eType="#//XtendClassSuperCallReferable" transient="true" containment="true"
+        eOpposite="#//XtendClassSuperCallReferable/xtendClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XtendClassSuperCallReferable" eSuperTypes="../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifiableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="xtendClass" eType="#//XtendClass"
+        transient="true" eOpposite="#//XtendClass/superCallReferable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XtendMember" abstract="true" eSuperTypes="../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifiableElement">
     <eOperations name="getSimpleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

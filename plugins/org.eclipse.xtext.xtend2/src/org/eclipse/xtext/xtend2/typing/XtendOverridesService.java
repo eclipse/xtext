@@ -9,6 +9,8 @@ package org.eclipse.xtext.xtend2.typing;
 
 import static com.google.common.collect.Iterables.*;
 
+import java.util.Set;
+
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -16,6 +18,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
+import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -42,6 +45,9 @@ public class XtendOverridesService {
 	@Inject
 	private TypeReferences typeReferences;
 	
+	@Inject
+	private SuperTypeCollector superTypeCollector;
+	
 	public JvmOperation findOverriddenOperation(XtendFunction function) {
 		JvmOperation inferredOperation = xtend2jvmAssociations.getDirectlyInferredOperation(function);
 		if (inferredOperation == null)
@@ -52,13 +58,11 @@ public class XtendOverridesService {
 	public JvmOperation findOverriddenOperation(JvmOperation operation) {
 		final JvmParameterizedTypeReference typeRef = typeReferences.createTypeRef(operation.getDeclaringType());
 		TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(typeRef);
-		if (!operation.getDeclaringType().getSuperTypes().isEmpty()) {
-			for (JvmOperation superOperation : allSuperOperations(operation.getDeclaringType())) {
-				if (superOperation.getVisibility() != JvmVisibility.PRIVATE) {
-					if (featureOverridesService.isOverridden(operation, superOperation, typeArgumentContext,
-							false)) {
-						return superOperation;
-					}
+		for (JvmOperation superOperation : allSuperOperations(operation.getDeclaringType())) {
+			if (superOperation.getVisibility() != JvmVisibility.PRIVATE) {
+				if (featureOverridesService.isOverridden(operation, superOperation, typeArgumentContext,
+						false)) {
+					return superOperation;
 				}
 			}
 		}
@@ -66,8 +70,10 @@ public class XtendOverridesService {
 	}
 	
 	protected Iterable<JvmOperation> allSuperOperations(final JvmDeclaredType type) {
+		Set<JvmTypeReference> superTypes = superTypeCollector.collectSuperTypes(type);
+		superTypes.add(typeReferences.getTypeForName(Object.class, type));
 		Iterable<JvmOperation> result = filter(concat(transform(
-			type.getSuperTypes(), new Function<JvmTypeReference, Iterable<JvmFeature>>() {
+			superTypes, new Function<JvmTypeReference, Iterable<JvmFeature>>() {
 				public Iterable<JvmFeature> apply(JvmTypeReference from) {
 					return featureOverridesService.getAllJvmFeatures(from);
 				}

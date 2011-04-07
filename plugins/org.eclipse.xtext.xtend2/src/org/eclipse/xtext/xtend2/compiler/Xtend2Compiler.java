@@ -441,6 +441,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 	protected void declareThis(XtendClass clazz, IAppendable appendable) {
 		appendable.declareVariable(clazz, clazz.getName()+".this");
+		appendable.declareVariable(clazz.getSuperCallReferable(), clazz.getName()+".super");
 	}
 	
 	@Override

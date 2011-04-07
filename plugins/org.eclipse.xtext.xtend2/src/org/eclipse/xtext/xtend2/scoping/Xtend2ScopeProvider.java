@@ -3,7 +3,7 @@
  */
 package org.eclipse.xtext.xtend2.scoping;
 
-import static java.util.Collections.*;
+import static com.google.common.collect.Lists.*;
 
 import java.util.List;
 import java.util.Set;
@@ -99,7 +99,9 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 	protected IScope createLocalVarScope(EObject context, EReference reference, IScope parent,
 			boolean includeCurrentBlock, int idx) {
 		if (context instanceof XtendClass) {
-			return new SimpleScope(parent, singleton(EObjectDescription.create(THIS, context)));
+			return new SimpleScope(parent, newArrayList(
+					EObjectDescription.create(THIS, context), 
+					EObjectDescription.create("super", ((XtendClass) context).getSuperCallReferable())));
 		} else if (context instanceof XtendFunction) {
 			XtendFunction func = (XtendFunction) context;
 			EList<JvmFormalParameter> list = func.getParameters();

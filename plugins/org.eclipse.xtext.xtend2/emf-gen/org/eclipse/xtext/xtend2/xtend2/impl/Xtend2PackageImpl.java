@@ -26,6 +26,7 @@ import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Factory;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendImport;
@@ -59,6 +60,13 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	 * @generated
 	 */
 	private EClass xtendClassEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass xtendClassSuperCallReferableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -327,6 +335,36 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 	public EReference getXtendClass_Members()
 	{
 		return (EReference)xtendClassEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXtendClass_SuperCallReferable()
+	{
+		return (EReference)xtendClassEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getXtendClassSuperCallReferable()
+	{
+		return xtendClassSuperCallReferableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXtendClassSuperCallReferable_XtendClass()
+	{
+		return (EReference)xtendClassSuperCallReferableEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -675,6 +713,10 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		createEReference(xtendClassEClass, XTEND_CLASS__IMPLEMENTS);
 		createEReference(xtendClassEClass, XTEND_CLASS__SUPER_TYPES);
 		createEReference(xtendClassEClass, XTEND_CLASS__MEMBERS);
+		createEReference(xtendClassEClass, XTEND_CLASS__SUPER_CALL_REFERABLE);
+
+		xtendClassSuperCallReferableEClass = createEClass(XTEND_CLASS_SUPER_CALL_REFERABLE);
+		createEReference(xtendClassSuperCallReferableEClass, XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS);
 
 		xtendMemberEClass = createEClass(XTEND_MEMBER);
 		createEReference(xtendMemberEClass, XTEND_MEMBER__DECLARING_TYPE);
@@ -751,6 +793,7 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		// Add supertypes to classes
 		xtendClassEClass.getESuperTypes().add(theTypesPackage.getJvmIdentifiableElement());
 		xtendClassEClass.getESuperTypes().add(theTypesPackage.getJvmTypeParameterDeclarator());
+		xtendClassSuperCallReferableEClass.getESuperTypes().add(theTypesPackage.getJvmIdentifiableElement());
 		xtendMemberEClass.getESuperTypes().add(theTypesPackage.getJvmIdentifiableElement());
 		xtendFunctionEClass.getESuperTypes().add(this.getXtendMember());
 		xtendFunctionEClass.getESuperTypes().add(theTypesPackage.getJvmTypeParameterDeclarator());
@@ -782,10 +825,14 @@ public class Xtend2PackageImpl extends EPackageImpl implements Xtend2Package
 		initEReference(getXtendClass_Implements(), theTypesPackage.getJvmTypeReference(), null, "implements", null, 0, -1, XtendClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendClass_SuperTypes(), theTypesPackage.getJvmTypeReference(), null, "superTypes", null, 0, -1, XtendClass.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendClass_Members(), this.getXtendMember(), this.getXtendMember_DeclaringType(), "members", null, 0, -1, XtendClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXtendClass_SuperCallReferable(), this.getXtendClassSuperCallReferable(), this.getXtendClassSuperCallReferable_XtendClass(), "superCallReferable", null, 1, 1, XtendClass.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(xtendClassEClass, ecorePackage.getEString(), "getPackageName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(xtendClassEClass, ecorePackage.getEString(), "getSimpleName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(xtendClassSuperCallReferableEClass, XtendClassSuperCallReferable.class, "XtendClassSuperCallReferable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getXtendClassSuperCallReferable_XtendClass(), this.getXtendClass(), this.getXtendClass_SuperCallReferable(), "xtendClass", null, 0, 1, XtendClassSuperCallReferable.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xtendMemberEClass, XtendMember.class, "XtendMember", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXtendMember_DeclaringType(), this.getXtendClass(), this.getXtendClass_Members(), "declaringType", null, 0, 1, XtendMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

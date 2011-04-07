@@ -14043,16 +14043,16 @@ protected class JvmFormalParameter_NameAssignment_1 extends AssignmentToken  {
  *
  * XFeatureCall returns XExpression:
  * 	{XFeatureCall} declaringType=[types::JvmDeclaredType|StaticQualifier]? ("<" typeArguments+=JvmArgumentTypeReference
- * 	("," typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement] (=>
+ * 	("," typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement|IdOrSuper] (=>
  * 	explicitOperationCall?="(" (featureCallArguments+=XShortClosure | featureCallArguments+=XExpression (","
  * 	featureCallArguments+=XExpression)*)? ")")?;
  *
  **/
 
 // {XFeatureCall} declaringType=[types::JvmDeclaredType|StaticQualifier]? ("<" typeArguments+=JvmArgumentTypeReference (","
-// typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement] (=> explicitOperationCall?="("
-// (featureCallArguments+=XShortClosure | featureCallArguments+=XExpression ("," featureCallArguments+=XExpression)*)?
-// ")")?
+// typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement|IdOrSuper] (=>
+// explicitOperationCall?="(" (featureCallArguments+=XShortClosure | featureCallArguments+=XExpression (","
+// featureCallArguments+=XExpression)*)? ")")?
 protected class XFeatureCall_Group extends GroupToken {
 	
 	public XFeatureCall_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -14352,7 +14352,7 @@ protected class XFeatureCall_GreaterThanSignKeyword_2_3 extends KeywordToken  {
 }
 
 
-// feature=[types::JvmIdentifiableElement]
+// feature=[types::JvmIdentifiableElement|IdOrSuper]
 protected class XFeatureCall_FeatureAssignment_3 extends AssignmentToken  {
 	
 	public XFeatureCall_FeatureAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -14706,6 +14706,7 @@ protected class XFeatureCall_RightParenthesisKeyword_4_2 extends KeywordToken  {
 
 
 /************ end Rule XFeatureCall ****************/
+
 
 
 
