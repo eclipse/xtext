@@ -16,7 +16,6 @@ import junit.framework.Test;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
-import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
@@ -48,12 +47,9 @@ public class DependentElementsCalculatorTest extends AbstractXtend2UITestCase {
 		XtendFile file = testHelper.xtendFile("Foo", "class Foo { Foo foo() {new Foo()} }");
 		XtendClass fooClass = file.getXtendClass();
 		List<URI> dependentElementURIs = newArrayList(dependentElementsCalculator.getDependentElementURIs(fooClass, null));
-		assertEquals(6, dependentElementURIs.size());
+		assertEquals(3, dependentElementURIs.size());
 		XtendFunction fooFunction = (XtendFunction) fooClass.getMembers().get(0);
 		assertTrue(dependentElementURIs.contains(EcoreUtil.getURI(fooFunction)));
-		assertTrue(dependentElementURIs.contains(EcoreUtil.getURI(fooFunction.getExpression())));
-		assertTrue(dependentElementURIs.contains(EcoreUtil.getURI(((XBlockExpression)fooFunction.getExpression()).getExpressions().get(0))));
-		assertTrue(dependentElementURIs.contains(EcoreUtil.getURI(fooFunction.getReturnType())));
 		assertTrue(dependentElementURIs.contains(EcoreUtil.getURI(associations.getInferredType(fooClass))));
 		assertTrue(dependentElementURIs.contains(EcoreUtil.getURI(associations.getInferredConstructor(fooClass))));
 	}

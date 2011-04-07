@@ -15,8 +15,10 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 
+import com.google.inject.Inject;
 import com.google.inject.internal.Lists;
 
 /**
@@ -25,6 +27,9 @@ import com.google.inject.internal.Lists;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class DefaultDependentElementsCalculator implements IDependentElementsCalculator {
+	
+	@Inject
+	private IQualifiedNameProvider nameProvider;
 
 	public List<URI> getDependentElementURIs(EObject baseElement, IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, 10);
@@ -33,9 +38,11 @@ public class DefaultDependentElementsCalculator implements IDependentElementsCal
 			if(progress.isCanceled())
 				break;
 			EObject childElement = i.next();
-			URI childURI = EcoreUtil.getURI(childElement);
-			if (childURI != null) {
-				elementURIs.add(childURI);
+			if (nameProvider.getFullyQualifiedName(childElement)!=null) {
+				URI childURI = EcoreUtil.getURI(childElement);
+				if (childURI != null) {
+					elementURIs.add(childURI);
+				}
 			}
 			progress.worked(1);
 			progress.setWorkRemaining(10);
