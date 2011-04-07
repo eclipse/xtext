@@ -328,6 +328,12 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 		assertState("''' «foobar» '''|", editor);
 	}
 	
+	public final void testRichStringLiteral_11() throws Exception {
+		XtextEditor editor = openEditor("''' text ''|");
+		pressKey(editor, '\'');
+		assertState("''' text '''|", editor);
+	}
+	
 	@Override
 	public void testSingleQuotedStringLiteral_3() throws Exception {
 		XtextEditor editor = openEditor("|'");
@@ -378,4 +384,14 @@ public class AutoEditTest extends AbstractCStyleLanguageAutoEditTest {
 				"", editor);
 	}
 	
+	@Override
+	public void testSingleQuotedStringLiteral_14() throws Exception {
+		XtextEditor editor = openEditor("|'test'");
+		pressKey(editor, '\'');
+		assertState("'|''test'", editor);
+//		pressKey(editor, '\'');
+//		assertState("''|'test'", editor);
+//		pressKey(editor, '\'');
+//		assertState("'''|test'", editor);
+	}
 }
