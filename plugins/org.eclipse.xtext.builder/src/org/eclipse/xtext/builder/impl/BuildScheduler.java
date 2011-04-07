@@ -67,7 +67,7 @@ public class BuildScheduler {
 
 		private IProject project;
 
-		private Map<?, ?> builderArguments;
+		private Map<String, String> builderArguments;
 
 		public BuildJob(String name, IProject project, IBuildFlag... buildFlags) {
 			super(name);
