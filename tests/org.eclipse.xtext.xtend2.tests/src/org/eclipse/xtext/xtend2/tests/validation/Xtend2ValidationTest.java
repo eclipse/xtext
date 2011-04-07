@@ -11,6 +11,7 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import static org.eclipse.xtext.xtend2.validation.IssueCodes.*;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -29,6 +30,16 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 
 	@Inject
 	private ValidationTestHelper helper;
+	
+	public void testVoidInDependency() throws Exception {
+		XtendClass clazz = clazz("class X { @Inject void }");
+		helper.assertError(clazz, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE);
+	}
+	
+	public void testVoidInReturn() throws Exception {
+		XtendFunction function = function("void foo() { }");
+		helper.assertNoError(function, INVALID_USE_OF_TYPE);
+	}
 	
 	public void testNoReturnInCreateFunctions() throws Exception {
 		XtendFunction function = function("create if (true) return 'foo' else 'bar' foo() { }");

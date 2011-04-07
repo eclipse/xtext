@@ -36,6 +36,7 @@ import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
@@ -50,6 +51,7 @@ import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
 import org.eclipse.xtext.xtend2.typing.XtendOverridesService;
+import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringElseIf;
 import org.eclipse.xtext.xtend2.xtend2.RichStringForLoop;
@@ -96,6 +98,9 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	@Inject
 	private Primitives primitives;
 	
+	@Inject
+	private TypeReferences typeReferences;
+	
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.copyOf(
 			Iterables.concat(
 					super.getTypeConformanceCheckedReferences(),
@@ -117,7 +122,14 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	protected Set<EReference> getTypeConformanceCheckedReferences() {
 		return typeConformanceCheckedReferences;
 	}
-
+	
+	@Check
+	public void checkNoVoidInDependencyDeclaration(DeclaredDependency dep) {
+		if (typeReferences.is(dep.getType(),Void.TYPE)) {
+			error("Primitives void cannot be a dependency.",dep.getType(), null, INVALID_USE_OF_TYPE);
+		}
+	}
+	
 	@Check
 	public void checkClassPath(XtendClass clazz) {
 		final JvmGenericType listType = (JvmGenericType) getTypeRefs().findDeclaredType(List.class.getName(), clazz);
