@@ -1115,10 +1115,10 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = T__60;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:60:7: ( '::' )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:60:9: '::'
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:60:7: ( 'super' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:60:9: 'super'
             {
-            match("::"); 
+            match("super"); 
 
 
             }
@@ -1136,10 +1136,10 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = T__61;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:61:7: ( 'new' )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:61:9: 'new'
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:61:7: ( '::' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:61:9: '::'
             {
-            match("new"); 
+            match("::"); 
 
 
             }
@@ -1157,10 +1157,10 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = T__62;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:62:7: ( 'false' )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:62:9: 'false'
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:62:7: ( 'new' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:62:9: 'new'
             {
-            match("false"); 
+            match("new"); 
 
 
             }
@@ -1178,10 +1178,10 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = T__63;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:63:7: ( 'true' )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:63:9: 'true'
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:63:7: ( 'false' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:63:9: 'false'
             {
-            match("true"); 
+            match("false"); 
 
 
             }
@@ -1199,10 +1199,10 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = T__64;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:64:7: ( 'null' )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:64:9: 'null'
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:64:7: ( 'true' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:64:9: 'true'
             {
-            match("null"); 
+            match("true"); 
 
 
             }
@@ -1220,10 +1220,10 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = T__65;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:65:7: ( 'typeof' )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:65:9: 'typeof'
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:65:7: ( 'null' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:65:9: 'null'
             {
-            match("typeof"); 
+            match("null"); 
 
 
             }
@@ -1241,10 +1241,10 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = T__66;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:66:7: ( 'throw' )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:66:9: 'throw'
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:66:7: ( 'typeof' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:66:9: 'typeof'
             {
-            match("throw"); 
+            match("typeof"); 
 
 
             }
@@ -1262,10 +1262,10 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = T__67;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:67:7: ( 'return' )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:67:9: 'return'
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:67:7: ( 'throw' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:67:9: 'throw'
             {
-            match("return"); 
+            match("throw"); 
 
 
             }
@@ -1283,10 +1283,10 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = T__68;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:68:7: ( 'try' )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:68:9: 'try'
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:68:7: ( 'return' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:68:9: 'return'
             {
-            match("try"); 
+            match("return"); 
 
 
             }
@@ -1304,10 +1304,10 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = T__69;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:69:7: ( 'finally' )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:69:9: 'finally'
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:69:7: ( 'try' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:69:9: 'try'
             {
-            match("finally"); 
+            match("try"); 
 
 
             }
@@ -1325,10 +1325,10 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = T__70;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:70:7: ( 'catch' )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:70:9: 'catch'
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:70:7: ( 'finally' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:70:9: 'finally'
             {
-            match("catch"); 
+            match("finally"); 
 
 
             }
@@ -1346,10 +1346,10 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = T__71;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:71:7: ( '=>' )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:71:9: '=>'
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:71:7: ( 'catch' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:71:9: 'catch'
             {
-            match("=>"); 
+            match("catch"); 
 
 
             }
@@ -1367,10 +1367,11 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = T__72;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:72:7: ( '?' )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:72:9: '?'
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:72:7: ( '=>' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:72:9: '=>'
             {
-            match('?'); 
+            match("=>"); 
+
 
             }
 
@@ -1387,10 +1388,10 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = T__73;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:73:7: ( '&' )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:73:9: '&'
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:73:7: ( '?' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:73:9: '?'
             {
-            match('&'); 
+            match('?'); 
 
             }
 
@@ -1407,11 +1408,10 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = T__74;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:74:7: ( 'super' )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:74:9: 'super'
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:74:7: ( '&' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:74:9: '&'
             {
-            match("super"); 
-
+            match('&'); 
 
             }
 
@@ -1491,10 +1491,10 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4869:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4869:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4906:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4906:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4869:11: ( '^' )?
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4906:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1503,7 +1503,7 @@ public class InternalDomainmodelLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4869:11: '^'
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4906:11: '^'
                     {
                     match('^'); 
 
@@ -1512,7 +1512,7 @@ public class InternalDomainmodelLexer extends Lexer {
 
             }
 
-            if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
+            if ( input.LA(1)=='$'||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
 
             }
@@ -1521,13 +1521,13 @@ public class InternalDomainmodelLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4869:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4906:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( ((LA2_0>='0' && LA2_0<='9')||(LA2_0>='A' && LA2_0<='Z')||LA2_0=='_'||(LA2_0>='a' && LA2_0<='z')) ) {
+                if ( (LA2_0=='$'||(LA2_0>='0' && LA2_0<='9')||(LA2_0>='A' && LA2_0<='Z')||LA2_0=='_'||(LA2_0>='a' && LA2_0<='z')) ) {
                     alt2=1;
                 }
 
@@ -1536,7 +1536,7 @@ public class InternalDomainmodelLexer extends Lexer {
             	case 1 :
             	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:
             	    {
-            	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
+            	    if ( input.LA(1)=='$'||(input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
 
             	    }
@@ -1570,10 +1570,10 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4871:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4871:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4908:10: ( ( '0' .. '9' )+ )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4908:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4871:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4908:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -1587,7 +1587,7 @@ public class InternalDomainmodelLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4871:13: '0' .. '9'
+            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4908:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1619,10 +1619,10 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4873:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4873:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4910:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4910:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4873:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4910:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1640,10 +1640,10 @@ public class InternalDomainmodelLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4873:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4910:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4873:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4910:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -1659,7 +1659,7 @@ public class InternalDomainmodelLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4873:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4910:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -1675,7 +1675,7 @@ public class InternalDomainmodelLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4873:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4910:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1700,10 +1700,10 @@ public class InternalDomainmodelLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4873:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4910:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4873:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4910:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -1719,7 +1719,7 @@ public class InternalDomainmodelLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4873:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4910:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -1735,7 +1735,7 @@ public class InternalDomainmodelLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4873:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4910:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1778,12 +1778,12 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4875:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4875:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4912:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4912:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4875:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4912:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -1808,7 +1808,7 @@ public class InternalDomainmodelLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4875:52: .
+            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4912:52: .
             	    {
             	    matchAny(); 
 
@@ -1838,12 +1838,12 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4877:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4877:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4914:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4914:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4877:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4914:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -1856,7 +1856,7 @@ public class InternalDomainmodelLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4877:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4914:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1876,7 +1876,7 @@ public class InternalDomainmodelLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4877:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4914:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1885,9 +1885,9 @@ public class InternalDomainmodelLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4877:41: ( '\\r' )? '\\n'
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4914:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4877:41: ( '\\r' )?
+                    // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4914:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1896,7 +1896,7 @@ public class InternalDomainmodelLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4877:41: '\\r'
+                            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4914:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1928,10 +1928,10 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4879:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4879:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4916:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4916:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4879:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4916:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -1985,8 +1985,8 @@ public class InternalDomainmodelLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4881:16: ( . )
-            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4881:18: .
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4918:16: ( . )
+            // ../org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/parser/antlr/internal/InternalDomainmodel.g:4918:18: .
             {
             matchAny(); 
 
@@ -2549,21 +2549,21 @@ public class InternalDomainmodelLexer extends Lexer {
     static final String DFA12_minS =
         "\1\0\1\146\1\141\2\uffff\1\154\1\72\1\160\3\uffff\1\56\1\52\2\75"+
         "\1\174\1\46\3\75\1\76\1\52\1\uffff\1\163\1\56\2\uffff\1\165\1\145"+
-        "\2\141\1\150\1\uffff\1\141\1\145\1\150\1\145\1\101\2\uffff\2\0\2"+
-        "\uffff\1\160\1\163\1\60\1\uffff\1\143\1\142\1\151\2\uffff\2\164"+
-        "\1\163\2\uffff\1\60\35\uffff\1\60\4\uffff\1\151\1\160\1\146\1\60"+
+        "\2\141\1\150\1\uffff\1\141\1\145\1\150\1\145\1\44\2\uffff\2\0\2"+
+        "\uffff\1\160\1\163\1\44\1\uffff\1\143\1\142\1\151\2\uffff\2\164"+
+        "\1\163\2\uffff\1\44\35\uffff\1\44\4\uffff\1\151\1\160\1\146\1\44"+
         "\1\163\1\162\1\154\1\156\1\151\1\uffff\1\154\1\167\1\154\1\165\1"+
         "\160\1\162\1\164\3\uffff\1\157\1\164\1\uffff\1\153\1\154\1\166\1"+
         "\164\1\151\2\145\2\uffff\1\164\1\145\1\141\1\uffff\1\145\1\143\1"+
-        "\60\1\163\1\141\1\154\3\60\1\154\1\145\1\60\1\145\1\157\1\165\1"+
-        "\162\2\141\1\151\1\141\1\145\1\164\1\156\1\60\1\143\1\162\1\165"+
-        "\1\60\1\150\1\uffff\1\145\1\154\1\145\3\uffff\2\60\1\uffff\1\157"+
+        "\44\1\163\1\141\1\154\3\44\1\154\1\145\1\44\1\145\1\157\1\165\1"+
+        "\162\2\141\1\151\1\141\1\145\1\164\1\156\1\44\1\143\1\162\1\165"+
+        "\1\44\1\150\1\uffff\1\145\1\154\1\145\3\uffff\2\44\1\uffff\1\157"+
         "\1\167\1\162\1\164\1\156\1\147\1\143\1\164\1\143\1\171\1\144\1\uffff"+
-        "\1\150\1\60\1\154\1\uffff\2\60\1\154\1\60\2\uffff\1\146\1\60\1\156"+
-        "\1\60\1\143\1\145\1\60\1\145\1\164\1\60\1\163\1\60\1\uffff\1\164"+
-        "\2\uffff\1\171\1\uffff\1\60\1\uffff\1\60\1\uffff\1\145\1\60\1\uffff"+
-        "\1\60\1\145\1\uffff\1\60\1\uffff\2\60\2\uffff\1\157\2\uffff\1\144"+
-        "\3\uffff\1\146\2\60\2\uffff";
+        "\1\150\1\44\1\154\1\uffff\2\44\1\154\1\44\2\uffff\1\146\1\44\1\156"+
+        "\1\44\1\143\1\145\1\44\1\145\1\164\1\44\1\163\1\44\1\uffff\1\164"+
+        "\2\uffff\1\171\1\uffff\1\44\1\uffff\1\44\1\uffff\1\145\1\44\1\uffff"+
+        "\1\44\1\145\1\uffff\1\44\1\uffff\2\44\2\uffff\1\157\2\uffff\1\144"+
+        "\3\uffff\1\146\2\44\2\uffff";
     static final String DFA12_maxS =
         "\1\uffff\1\156\1\165\2\uffff\1\170\1\72\1\160\3\uffff\2\56\1\76"+
         "\1\75\1\174\1\46\3\75\1\76\1\57\1\uffff\1\163\1\56\2\uffff\1\167"+
@@ -2585,24 +2585,25 @@ public class InternalDomainmodelLexer extends Lexer {
     static final String DFA12_acceptS =
         "\3\uffff\1\3\1\4\3\uffff\1\11\1\12\1\13\13\uffff\1\37\2\uffff\1"+
         "\44\1\46\5\uffff\1\57\5\uffff\1\104\1\105\2\uffff\1\111\1\112\3"+
-        "\uffff\1\104\3\uffff\1\3\1\4\3\uffff\1\62\1\7\1\uffff\1\11\1\12"+
-        "\1\13\1\32\1\14\1\35\1\43\1\15\1\22\1\75\1\16\1\17\1\33\1\20\1\45"+
-        "\1\21\1\77\1\23\1\40\1\25\1\27\1\26\1\30\1\31\1\34\1\107\1\110\1"+
-        "\36\1\37\1\uffff\1\42\1\76\1\44\1\46\11\uffff\1\57\7\uffff\1\105"+
+        "\uffff\1\104\3\uffff\1\3\1\4\3\uffff\1\63\1\7\1\uffff\1\11\1\12"+
+        "\1\13\1\32\1\14\1\35\1\43\1\15\1\22\1\76\1\16\1\17\1\33\1\20\1\45"+
+        "\1\21\1\100\1\23\1\40\1\25\1\27\1\26\1\30\1\31\1\34\1\107\1\110"+
+        "\1\36\1\37\1\uffff\1\42\1\77\1\44\1\46\11\uffff\1\57\7\uffff\1\105"+
         "\1\106\1\111\2\uffff\1\47\7\uffff\1\10\1\41\3\uffff\1\56\35\uffff"+
-        "\1\54\3\uffff\1\60\1\61\1\63\2\uffff\1\72\13\uffff\1\50\3\uffff"+
-        "\1\53\4\uffff\1\66\1\65\14\uffff\1\100\1\uffff\1\74\1\64\1\uffff"+
-        "\1\55\1\uffff\1\70\1\uffff\1\1\2\uffff\1\101\2\uffff\1\5\1\uffff"+
-        "\1\51\2\uffff\1\67\1\71\1\uffff\1\2\1\102\1\uffff\1\6\1\52\1\73"+
+        "\1\54\3\uffff\1\60\1\61\1\64\2\uffff\1\73\13\uffff\1\50\3\uffff"+
+        "\1\53\4\uffff\1\67\1\66\14\uffff\1\62\1\uffff\1\75\1\65\1\uffff"+
+        "\1\55\1\uffff\1\71\1\uffff\1\1\2\uffff\1\101\2\uffff\1\5\1\uffff"+
+        "\1\51\2\uffff\1\70\1\72\1\uffff\1\2\1\102\1\uffff\1\6\1\52\1\74"+
         "\3\uffff\1\103\1\24";
     static final String DFA12_specialS =
-        "\1\1\47\uffff\1\2\1\0\u00c2\uffff}>";
+        "\1\2\47\uffff\1\1\1\0\u00c2\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\53\2\52\2\53\1\52\22\53\1\52\1\21\1\50\2\53\1\26\1\20\1"+
-            "\51\1\10\1\12\1\14\1\16\1\11\1\24\1\13\1\25\12\47\1\6\1\40\1"+
-            "\23\1\15\1\22\1\30\1\53\32\46\1\31\1\53\1\32\1\45\1\46\1\53"+
-            "\1\27\1\46\1\35\1\34\1\5\1\36\2\46\1\1\4\46\1\42\1\7\1\2\1\46"+
-            "\1\44\1\33\1\43\1\46\1\41\1\37\3\46\1\3\1\17\1\4\uff82\53",
+            "\11\53\2\52\2\53\1\52\22\53\1\52\1\21\1\50\1\53\1\46\1\26\1"+
+            "\20\1\51\1\10\1\12\1\14\1\16\1\11\1\24\1\13\1\25\12\47\1\6\1"+
+            "\40\1\23\1\15\1\22\1\30\1\53\32\46\1\31\1\53\1\32\1\45\1\46"+
+            "\1\53\1\27\1\46\1\35\1\34\1\5\1\36\2\46\1\1\4\46\1\42\1\7\1"+
+            "\2\1\46\1\44\1\33\1\43\1\46\1\41\1\37\3\46\1\3\1\17\1\4\uff82"+
+            "\53",
             "\1\56\6\uffff\1\54\1\55",
             "\1\60\20\uffff\1\62\2\uffff\1\61",
             "",
@@ -2639,7 +2640,7 @@ public class InternalDomainmodelLexer extends Lexer {
             "\1\150\17\uffff\1\151",
             "\1\154\11\uffff\1\152\6\uffff\1\153",
             "\1\155",
-            "\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\34\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
             "",
             "",
             "\0\157",
@@ -2648,7 +2649,8 @@ public class InternalDomainmodelLexer extends Lexer {
             "",
             "\1\161",
             "\1\162",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "",
             "\1\164",
             "\1\165",
@@ -2660,7 +2662,8 @@ public class InternalDomainmodelLexer extends Lexer {
             "\1\172",
             "",
             "",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "",
             "",
             "",
@@ -2690,7 +2693,8 @@ public class InternalDomainmodelLexer extends Lexer {
             "",
             "",
             "",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "",
             "",
             "",
@@ -2698,7 +2702,8 @@ public class InternalDomainmodelLexer extends Lexer {
             "\1\175",
             "\1\176",
             "\1\177",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "\1\u0081\1\u0082",
             "\1\u0083",
             "\1\u0084",
@@ -2733,16 +2738,21 @@ public class InternalDomainmodelLexer extends Lexer {
             "",
             "\1\u009c",
             "\1\u009d",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "\1\u009f",
             "\1\u00a0",
             "\1\u00a1",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "\1\u00a5",
             "\1\u00a6",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "\1\u00a8",
             "\1\u00a9",
             "\1\u00aa",
@@ -2754,11 +2764,13 @@ public class InternalDomainmodelLexer extends Lexer {
             "\1\u00b0",
             "\1\u00b1",
             "\1\u00b2",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "\1\u00b4",
             "\1\u00b5",
             "\1\u00b6",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "\1\u00b8",
             "",
             "\1\u00b9",
@@ -2767,8 +2779,10 @@ public class InternalDomainmodelLexer extends Lexer {
             "",
             "",
             "",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "",
             "\1\u00be",
             "\1\u00bf",
@@ -2783,47 +2797,63 @@ public class InternalDomainmodelLexer extends Lexer {
             "\1\u00c8",
             "",
             "\1\u00c9",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "\1\u00cb",
             "",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "\1\u00ce",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "",
             "",
             "\1\u00d0",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "\1\u00d2",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "\1\u00d4",
             "\1\u00d5",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "\1\u00d7",
             "\1\u00d8",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "\1\u00da",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "",
             "\1\u00dc",
             "",
             "",
             "\1\u00dd",
             "",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "",
             "\1\u00e0",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "\1\u00e3",
             "",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "",
             "",
             "\1\u00e7",
@@ -2834,8 +2864,10 @@ public class InternalDomainmodelLexer extends Lexer {
             "",
             "",
             "\1\u00e9",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
-            "\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
+            "\1\57\13\uffff\12\57\7\uffff\32\57\4\uffff\1\57\1\uffff\32"+
+            "\57",
             "",
             ""
     };
@@ -2887,6 +2919,16 @@ public class InternalDomainmodelLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
+                        int LA12_40 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_40>='\u0000' && LA12_40<='\uFFFF')) ) {s = 111;}
+
+                        else s = 43;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -2964,7 +3006,7 @@ public class InternalDomainmodelLexer extends Lexer {
 
                         else if ( (LA12_0=='^') ) {s = 37;}
 
-                        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||LA12_0=='b'||(LA12_0>='g' && LA12_0<='h')||(LA12_0>='j' && LA12_0<='m')||LA12_0=='q'||LA12_0=='u'||(LA12_0>='x' && LA12_0<='z')) ) {s = 38;}
+                        else if ( (LA12_0=='$'||(LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||LA12_0=='b'||(LA12_0>='g' && LA12_0<='h')||(LA12_0>='j' && LA12_0<='m')||LA12_0=='q'||LA12_0=='u'||(LA12_0>='x' && LA12_0<='z')) ) {s = 38;}
 
                         else if ( ((LA12_0>='0' && LA12_0<='9')) ) {s = 39;}
 
@@ -2974,17 +3016,7 @@ public class InternalDomainmodelLexer extends Lexer {
 
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 42;}
 
-                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||(LA12_0>='#' && LA12_0<='$')||LA12_0=='@'||LA12_0=='\\'||LA12_0=='`'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 43;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA12_40 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_40>='\u0000' && LA12_40<='\uFFFF')) ) {s = 111;}
-
-                        else s = 43;
+                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='#'||LA12_0=='@'||LA12_0=='\\'||LA12_0=='`'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 43;}
 
                         if ( s>=0 ) return s;
                         break;

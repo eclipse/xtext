@@ -57,6 +57,7 @@ public class DomainmodelParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXVariableDeclarationAccess().getAlternatives_1(), "rule__XVariableDeclaration__Alternatives_1");
 					put(grammarAccess.getXVariableDeclarationAccess().getAlternatives_2(), "rule__XVariableDeclaration__Alternatives_2");
 					put(grammarAccess.getXFeatureCallAccess().getAlternatives_4_1(), "rule__XFeatureCall__Alternatives_4_1");
+					put(grammarAccess.getIdOrSuperAccess().getAlternatives(), "rule__IdOrSuper__Alternatives");
 					put(grammarAccess.getXConstructorCallAccess().getAlternatives_5(), "rule__XConstructorCall__Alternatives_5");
 					put(grammarAccess.getXBooleanLiteralAccess().getAlternatives_1(), "rule__XBooleanLiteral__Alternatives_1");
 					put(grammarAccess.getXTryCatchFinallyExpressionAccess().getAlternatives_3(), "rule__XTryCatchFinallyExpression__Alternatives_3");

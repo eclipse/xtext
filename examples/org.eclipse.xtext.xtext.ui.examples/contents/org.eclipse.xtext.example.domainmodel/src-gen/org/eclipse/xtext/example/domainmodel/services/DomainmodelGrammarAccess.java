@@ -911,7 +911,7 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 
 	//XFeatureCall returns XExpression:
 	//	{XFeatureCall} declaringType=[types::JvmDeclaredType|StaticQualifier]? ("<" typeArguments+=JvmArgumentTypeReference
-	//	("," typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement] (=>
+	//	("," typeArguments+=JvmArgumentTypeReference)* ">")? feature=[types::JvmIdentifiableElement|IdOrSuper] (=>
 	//	explicitOperationCall?="(" (featureCallArguments+=XShortClosure | featureCallArguments+=XExpression (","
 	//	featureCallArguments+=XExpression)*)? ")")?;
 	public XbaseGrammarAccess.XFeatureCallElements getXFeatureCallAccess() {
@@ -920,6 +920,16 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getXFeatureCallRule() {
 		return getXFeatureCallAccess().getRule();
+	}
+
+	//IdOrSuper:
+	//	ID | "super";
+	public XbaseGrammarAccess.IdOrSuperElements getIdOrSuperAccess() {
+		return gaXbase.getIdOrSuperAccess();
+	}
+	
+	public ParserRule getIdOrSuperRule() {
+		return getIdOrSuperAccess().getRule();
 	}
 
 	//// This is a workaround since ANTLR will not be able to resolve
@@ -1140,7 +1150,7 @@ public class DomainmodelGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	"^"? ("a".."z" | "A".."Z" | "$" | "_") ("a".."z" | "A".."Z" | "$" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaXbase.getIDRule();
 	} 
