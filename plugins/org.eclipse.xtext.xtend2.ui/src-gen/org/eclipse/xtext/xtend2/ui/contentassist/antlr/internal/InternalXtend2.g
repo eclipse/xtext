@@ -1718,6 +1718,34 @@ finally {
 
 
 
+// Entry rule entryRuleIdOrSuper
+entryRuleIdOrSuper 
+:
+{ before(grammarAccess.getIdOrSuperRule()); }
+	 ruleIdOrSuper
+{ after(grammarAccess.getIdOrSuperRule()); } 
+	 EOF 
+;
+
+// Rule IdOrSuper
+ruleIdOrSuper
+    @init {
+		int stackSize = keepStackSize();
+    }
+	:
+(
+{ before(grammarAccess.getIdOrSuperAccess().getAlternatives()); }
+(rule__IdOrSuper__Alternatives)
+{ after(grammarAccess.getIdOrSuperAccess().getAlternatives()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
 // Entry rule entryRuleStaticQualifier
 entryRuleStaticQualifier 
 :
@@ -2999,6 +3027,30 @@ rule__XFeatureCall__Alternatives_4_1
 { before(grammarAccess.getXFeatureCallAccess().getGroup_4_1_1()); }
 (rule__XFeatureCall__Group_4_1_1__0)
 { after(grammarAccess.getXFeatureCallAccess().getGroup_4_1_1()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__IdOrSuper__Alternatives
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getIdOrSuperAccess().getIDTerminalRuleCall_0()); }
+	RULE_ID
+{ after(grammarAccess.getIdOrSuperAccess().getIDTerminalRuleCall_0()); }
+)
+
+    |(
+{ before(grammarAccess.getIdOrSuperAccess().getSuperKeyword_1()); }
+
+	'super' 
+
+{ after(grammarAccess.getIdOrSuperAccess().getSuperKeyword_1()); }
 )
 
 ;
@@ -18359,8 +18411,8 @@ rule__XFeatureCall__FeatureAssignment_3
 (
 { before(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_3_0()); }
 (
-{ before(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifiableElementIDTerminalRuleCall_3_0_1()); }
-	RULE_ID{ after(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifiableElementIDTerminalRuleCall_3_0_1()); }
+{ before(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_3_0_1()); }
+	ruleIdOrSuper{ after(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifiableElementIdOrSuperParserRuleCall_3_0_1()); }
 )
 { after(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_3_0()); }
 )

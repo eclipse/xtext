@@ -4731,10 +4731,12 @@ ruleXFeatureCall returns [EObject current=null]
 	            $current = createModelElement(grammarAccess.getXFeatureCallRule());
 	        }
         }
-	otherlv_7=RULE_ID
-	{
-		newLeafNode(otherlv_7, grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_3_0()); 
-	}
+		{ 
+	        newCompositeNode(grammarAccess.getXFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_3_0()); 
+	    }
+		ruleIdOrSuper		{ 
+	        afterParserOrEnumRuleCall();
+	    }
 
 )
 )(((
@@ -4834,6 +4836,41 @@ ruleJvmFormalParameter
     }
 )?)
 ;
+
+
+
+
+
+// Entry rule entryRuleIdOrSuper
+entryRuleIdOrSuper returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getIdOrSuperRule()); } 
+	 iv_ruleIdOrSuper=ruleIdOrSuper 
+	 { $current=$iv_ruleIdOrSuper.current.getText(); }  
+	 EOF 
+;
+
+// Rule IdOrSuper
+ruleIdOrSuper returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(    this_ID_0=RULE_ID    {
+		$current.merge(this_ID_0);
+    }
+
+    { 
+    newLeafNode(this_ID_0, grammarAccess.getIdOrSuperAccess().getIDTerminalRuleCall_0()); 
+    }
+
+    |
+	kw='super' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getIdOrSuperAccess().getSuperKeyword_1()); 
+    }
+)
+    ;
 
 
 

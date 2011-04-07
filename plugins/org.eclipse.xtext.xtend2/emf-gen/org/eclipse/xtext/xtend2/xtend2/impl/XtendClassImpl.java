@@ -31,6 +31,7 @@ import org.eclipse.xtext.common.types.impl.JvmIdentifiableElementImplCustom;
 
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 
 /**
@@ -46,6 +47,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendMember;
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl#getImplements <em>Implements</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl#getSuperTypes <em>Super Types</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl#getMembers <em>Members</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassImpl#getSuperCallReferable <em>Super Call Referable</em>}</li>
  * </ul>
  * </p>
  *
@@ -122,6 +124,16 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 	 * @ordered
 	 */
 	protected EList<XtendMember> members;
+
+	/**
+	 * The cached value of the '{@link #getSuperCallReferable() <em>Super Call Referable</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSuperCallReferable()
+	 * @generated
+	 * @ordered
+	 */
+	protected XtendClassSuperCallReferable superCallReferable;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -276,6 +288,54 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public XtendClassSuperCallReferable getSuperCallReferable()
+	{
+		return superCallReferable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetSuperCallReferable(XtendClassSuperCallReferable newSuperCallReferable, NotificationChain msgs)
+	{
+		XtendClassSuperCallReferable oldSuperCallReferable = superCallReferable;
+		superCallReferable = newSuperCallReferable;
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE, oldSuperCallReferable, newSuperCallReferable);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSuperCallReferable(XtendClassSuperCallReferable newSuperCallReferable)
+	{
+		if (newSuperCallReferable != superCallReferable)
+		{
+			NotificationChain msgs = null;
+			if (superCallReferable != null)
+				msgs = ((InternalEObject)superCallReferable).eInverseRemove(this, Xtend2Package.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS, XtendClassSuperCallReferable.class, msgs);
+			if (newSuperCallReferable != null)
+				msgs = ((InternalEObject)newSuperCallReferable).eInverseAdd(this, Xtend2Package.XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS, XtendClassSuperCallReferable.class, msgs);
+			msgs = basicSetSuperCallReferable(newSuperCallReferable, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE, newSuperCallReferable, newSuperCallReferable));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getPackageName()
 	{
 		// TODO: implement this method
@@ -298,6 +358,10 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTypeParameters()).basicAdd(otherEnd, msgs);
 			case Xtend2Package.XTEND_CLASS__MEMBERS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getMembers()).basicAdd(otherEnd, msgs);
+			case Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE:
+				if (superCallReferable != null)
+					msgs = ((InternalEObject)superCallReferable).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE, null, msgs);
+				return basicSetSuperCallReferable((XtendClassSuperCallReferable)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -320,6 +384,8 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 				return ((InternalEList<?>)getImplements()).basicRemove(otherEnd, msgs);
 			case Xtend2Package.XTEND_CLASS__MEMBERS:
 				return ((InternalEList<?>)getMembers()).basicRemove(otherEnd, msgs);
+			case Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE:
+				return basicSetSuperCallReferable(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -346,6 +412,8 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 				return getSuperTypes();
 			case Xtend2Package.XTEND_CLASS__MEMBERS:
 				return getMembers();
+			case Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE:
+				return getSuperCallReferable();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -383,6 +451,9 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 				getMembers().clear();
 				getMembers().addAll((Collection<? extends XtendMember>)newValue);
 				return;
+			case Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE:
+				setSuperCallReferable((XtendClassSuperCallReferable)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -415,6 +486,9 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 			case Xtend2Package.XTEND_CLASS__MEMBERS:
 				getMembers().clear();
 				return;
+			case Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE:
+				setSuperCallReferable((XtendClassSuperCallReferable)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -441,6 +515,8 @@ public class XtendClassImpl extends JvmIdentifiableElementImplCustom implements 
 				return superTypes != null && !superTypes.isEmpty();
 			case Xtend2Package.XTEND_CLASS__MEMBERS:
 				return members != null && !members.isEmpty();
+			case Xtend2Package.XTEND_CLASS__SUPER_CALL_REFERABLE:
+				return superCallReferable != null;
 		}
 		return super.eIsSet(featureID);
 	}

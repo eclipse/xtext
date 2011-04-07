@@ -5,6 +5,7 @@ package org.eclipse.xtext.xtend2;
 
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -21,6 +22,7 @@ import org.eclipse.xtext.xtend2.jvmmodel.Xtend2JvmModelInferrer;
 import org.eclipse.xtext.xtend2.naming.Xtend2QualifiedNameProvider;
 import org.eclipse.xtext.xtend2.resource.Xtend2Resource;
 import org.eclipse.xtext.xtend2.resource.Xtend2ResourceDescriptionStrategy;
+import org.eclipse.xtext.xtend2.resource.XtendEObjectAtOffsetHelper;
 import org.eclipse.xtext.xtend2.scoping.Xtend2ImportedNamespaceScopeProvider;
 import org.eclipse.xtext.xtend2.typing.Xtend2TypeProvider;
 import org.eclipse.xtext.xtend2.validation.XtendEarlyExitValidator;
@@ -78,5 +80,10 @@ public class Xtend2RuntimeModule extends org.eclipse.xtext.xtend2.AbstractXtend2
 
 	public Class<? extends EarlyExitValidator> bindEarlyExitValidator() {
 		return XtendEarlyExitValidator.class;
+	}
+	
+	@Override
+	public Class<? extends EObjectAtOffsetHelper> bindEObjectAtOffsetHelper() {
+		return XtendEObjectAtOffsetHelper.class;
 	}
 }

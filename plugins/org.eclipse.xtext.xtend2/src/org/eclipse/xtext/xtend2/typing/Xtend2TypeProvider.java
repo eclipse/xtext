@@ -38,6 +38,7 @@ import org.eclipse.xtext.xtend2.xtend2.RichStringIf;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 import com.google.common.collect.Iterables;
@@ -131,6 +132,15 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 		JvmParameterizedTypeReference typeReference = getTypesFactory().createJvmParameterizedTypeReference();
 		typeReference.setType(xtend2jvmAssociations.getInferredType(clazz));
 		return typeReference;
+	}
+	
+	protected JvmTypeReference _typeForIdentifiable(XtendClassSuperCallReferable referable, boolean rawType) {
+		final XtendClass xtendClass = referable.getXtendClass();
+		JvmTypeReference superType = xtendClass.getExtends();
+		if (superType!=null) {
+			return superType;
+		}
+		return getTypeReferences().getTypeForName(Object.class, xtendClass);
 	}
 	
 	protected JvmTypeReference _typeForIdentifiable(CreateExtensionInfo info, boolean rawType) {

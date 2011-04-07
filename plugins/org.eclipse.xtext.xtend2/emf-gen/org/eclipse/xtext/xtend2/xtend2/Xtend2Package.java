@@ -220,13 +220,50 @@ public interface Xtend2Package extends EPackage
 	int XTEND_CLASS__MEMBERS = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Super Call Referable</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__SUPER_CALL_REFERABLE = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Xtend Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CLASS_FEATURE_COUNT = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 6;
+	int XTEND_CLASS_FEATURE_COUNT = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassSuperCallReferableImpl <em>Xtend Class Super Call Referable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.XtendClassSuperCallReferableImpl
+	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getXtendClassSuperCallReferable()
+	 * @generated
+	 */
+	int XTEND_CLASS_SUPER_CALL_REFERABLE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Xtend Class</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Xtend Class Super Call Referable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS_SUPER_CALL_REFERABLE_FEATURE_COUNT = TypesPackage.JVM_IDENTIFIABLE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendMemberImpl <em>Xtend Member</em>}' class.
@@ -236,7 +273,7 @@ public interface Xtend2Package extends EPackage
 	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getXtendMember()
 	 * @generated
 	 */
-	int XTEND_MEMBER = 3;
+	int XTEND_MEMBER = 4;
 
 	/**
 	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
@@ -273,7 +310,7 @@ public interface Xtend2Package extends EPackage
 	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getXtendFunction()
 	 * @generated
 	 */
-	int XTEND_FUNCTION = 4;
+	int XTEND_FUNCTION = 5;
 
 	/**
 	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
@@ -373,7 +410,7 @@ public interface Xtend2Package extends EPackage
 	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getRichString()
 	 * @generated
 	 */
-	int RICH_STRING = 5;
+	int RICH_STRING = 6;
 
 	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
@@ -401,7 +438,7 @@ public interface Xtend2Package extends EPackage
 	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getRichStringLiteral()
 	 * @generated
 	 */
-	int RICH_STRING_LITERAL = 6;
+	int RICH_STRING_LITERAL = 7;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -429,7 +466,7 @@ public interface Xtend2Package extends EPackage
 	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getRichStringForLoop()
 	 * @generated
 	 */
-	int RICH_STRING_FOR_LOOP = 7;
+	int RICH_STRING_FOR_LOOP = 8;
 
 	/**
 	 * The feature id for the '<em><b>For Expression</b></em>' containment reference.
@@ -502,7 +539,7 @@ public interface Xtend2Package extends EPackage
 	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getRichStringIf()
 	 * @generated
 	 */
-	int RICH_STRING_IF = 8;
+	int RICH_STRING_IF = 9;
 
 	/**
 	 * The feature id for the '<em><b>If</b></em>' containment reference.
@@ -557,7 +594,7 @@ public interface Xtend2Package extends EPackage
 	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getRichStringElseIf()
 	 * @generated
 	 */
-	int RICH_STRING_ELSE_IF = 9;
+	int RICH_STRING_ELSE_IF = 10;
 
 	/**
 	 * The feature id for the '<em><b>If</b></em>' containment reference.
@@ -594,7 +631,7 @@ public interface Xtend2Package extends EPackage
 	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getDeclaredDependency()
 	 * @generated
 	 */
-	int DECLARED_DEPENDENCY = 10;
+	int DECLARED_DEPENDENCY = 11;
 
 	/**
 	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
@@ -649,7 +686,7 @@ public interface Xtend2Package extends EPackage
 	 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getCreateExtensionInfo()
 	 * @generated
 	 */
-	int CREATE_EXTENSION_INFO = 11;
+	int CREATE_EXTENSION_INFO = 12;
 
 	/**
 	 * The feature id for the '<em><b>Create Expression</b></em>' containment reference.
@@ -829,6 +866,38 @@ public interface Xtend2Package extends EPackage
 	 * @generated
 	 */
 	EReference getXtendClass_Members();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getSuperCallReferable <em>Super Call Referable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Super Call Referable</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendClass#getSuperCallReferable()
+	 * @see #getXtendClass()
+	 * @generated
+	 */
+	EReference getXtendClass_SuperCallReferable();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable <em>Xtend Class Super Call Referable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Xtend Class Super Call Referable</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable
+	 * @generated
+	 */
+	EClass getXtendClassSuperCallReferable();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable#getXtendClass <em>Xtend Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Xtend Class</em>'.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable#getXtendClass()
+	 * @see #getXtendClassSuperCallReferable()
+	 * @generated
+	 */
+	EReference getXtendClassSuperCallReferable_XtendClass();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xtend2.xtend2.XtendMember <em>Xtend Member</em>}'.
@@ -1291,6 +1360,32 @@ public interface Xtend2Package extends EPackage
 		 * @generated
 		 */
 		EReference XTEND_CLASS__MEMBERS = eINSTANCE.getXtendClass_Members();
+
+		/**
+		 * The meta object literal for the '<em><b>Super Call Referable</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTEND_CLASS__SUPER_CALL_REFERABLE = eINSTANCE.getXtendClass_SuperCallReferable();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendClassSuperCallReferableImpl <em>Xtend Class Super Call Referable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xtend2.xtend2.impl.XtendClassSuperCallReferableImpl
+		 * @see org.eclipse.xtext.xtend2.xtend2.impl.Xtend2PackageImpl#getXtendClassSuperCallReferable()
+		 * @generated
+		 */
+		EClass XTEND_CLASS_SUPER_CALL_REFERABLE = eINSTANCE.getXtendClassSuperCallReferable();
+
+		/**
+		 * The meta object literal for the '<em><b>Xtend Class</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XTEND_CLASS_SUPER_CALL_REFERABLE__XTEND_CLASS = eINSTANCE.getXtendClassSuperCallReferable_XtendClass();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendMemberImpl <em>Xtend Member</em>}' class.
