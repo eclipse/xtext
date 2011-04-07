@@ -16,6 +16,7 @@ import org.eclipse.xtext.ui.editor.autoedit.MultiLineTerminalsEditStrategy;
 
 import com.google.inject.Inject;
 import com.google.inject.MembersInjector;
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -24,6 +25,9 @@ public class AutoEditStrategyProvider extends DefaultAutoEditStrategyProvider {
 
 	@Inject
 	protected MultiLineTerminalsEditStrategyInRichString.Factory multiLineTerminalsInRichString;
+	
+	@Inject
+	protected Provider<RichStringPartitionDelimiterSkippingStrategy> richStringPartitionEndSkippingEditStrategy;
 	
 	@Override
 	protected void configureIndentationEditStrategy(IEditStrategyAcceptor acceptor) {
@@ -40,7 +44,7 @@ public class AutoEditStrategyProvider extends DefaultAutoEditStrategyProvider {
 	@Override
 	protected void configureStringLiteral(IEditStrategyAcceptor acceptor) {
 		acceptor.accept(partitionInsert.newInstance("'''", "'''"), IDocument.DEFAULT_CONTENT_TYPE);
-		acceptor.accept(partitionEndSkippingEditStrategy.get().withRightDelimiter("'''"), TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION);
+		acceptor.accept(richStringPartitionEndSkippingEditStrategy.get(), TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION);
 		acceptor.accept(partitionInsert.newInstance("\"","\""), TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION);
 		acceptor.accept(partitionInsert.newInstance("«","»"), TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION);
 		acceptor.accept(partitionDeletion.newInstance("«","»"), TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION);

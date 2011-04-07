@@ -198,6 +198,16 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEdi
 		pressKey(editor, '\'');
 		assertState("'a'|", editor);
 	}
+	
+	public void testSingleQuotedStringLiteral_14() throws Exception {
+		XtextEditor editor = openEditor("|'test'");
+		pressKey(editor, '\'');
+		assertState("'|''test'", editor);
+		pressKey(editor, '\'');
+		assertState("''|'test'", editor);
+		pressKey(editor, '\'');
+		assertState("'''|''test'", editor);
+	}
 
 	public void testDoubleQuotedStringLiteral_1() throws Exception {
 		XtextEditor editor = openEditor("|");
@@ -275,6 +285,12 @@ public abstract class AbstractCStyleLanguageAutoEditTest extends AbstractAutoEdi
 		XtextEditor editor = openEditor("\"a|");
 		pressKey(editor, '"');
 		assertState("\"a\"|", editor);
+	}
+	
+	public void testDoubleQuotedStringLiteral_10() throws Exception {
+		XtextEditor editor = openEditor("|\"test\"");
+		pressKey(editor, '"');
+		assertState("\"|\"\"test\"", editor);
 	}
 	
 	public void testCurlyBracesBlock_1() throws Exception {
