@@ -46,12 +46,15 @@ public class SingleLineTerminalsStrategy extends AbstractTerminalsEditStrategy {
 		 * @throws any
 		 *             thrown exceptions are catched and interpreted like return <code>true</code>
 		 */
-		boolean isInsertClosingBracket(IDocument doc, int offset) throws Exception;
+		boolean isInsertClosingBracket(IDocument doc, int offset) throws BadLocationException;
 	}
 
 	public static StrategyPredicate DEFAULT = new StrategyPredicate() {
-		public boolean isInsertClosingBracket(IDocument doc, int offset) throws Exception {
-			return !Character.isJavaIdentifierStart(doc.getChar(offset));
+		public boolean isInsertClosingBracket(IDocument doc, int offset) throws BadLocationException {
+			if (doc.getLength() <= offset)
+				return true;
+			boolean result = !Character.isJavaIdentifierStart(doc.getChar(offset));
+			return result;
 		}
 	};
 
@@ -88,7 +91,9 @@ public class SingleLineTerminalsStrategy extends AbstractTerminalsEditStrategy {
 	protected boolean isInsertClosingTerminal(IDocument document, int i) {
 		try {
 			return strategy.isInsertClosingBracket(document, i);
-		} catch (Exception e) {
+		} catch (BadLocationException e) {
+			if (debug)
+				throw new RuntimeException(e);
 			return true;
 		}
 	}

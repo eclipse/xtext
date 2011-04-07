@@ -13,6 +13,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.jface.bindings.keys.KeyLookupFactory;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
@@ -93,7 +94,7 @@ public abstract class AbstractAutoEditTest extends AbstractEditorTest {
 		event.start = selection.x;
 		event.end = selection.y;
 		event.text = text;
-		event.keyCode = 4194304;
+		event.keyCode = KeyLookupFactory.getDefault().getCtrl();
 		textWidget.notifyListeners(SWT.KeyDown, event);
 		Method sendKeyEvent = textWidget.getClass().getDeclaredMethod("sendKeyEvent", Event.class);
 		sendKeyEvent.setAccessible(true);

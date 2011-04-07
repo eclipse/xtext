@@ -7,6 +7,7 @@ import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
+import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategy;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
@@ -36,6 +37,12 @@ import com.google.inject.name.Names;
 public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2UiModule {
 	public Xtend2UiModule(AbstractUIPlugin plugin) {
 		super(plugin);
+	}
+	
+	public void configureDebugMode(Binder binder) {
+		if (Boolean.getBoolean("org.eclipse.xtext.xtend.debug")) {
+			binder.bindConstant().annotatedWith(Names.named(AbstractEditStrategy.DEBUG)).to(true);
+		}
 	}
 	
 	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
