@@ -27,6 +27,31 @@ public class ValidationTests extends AbstractXbaseTestCase {
 
 	@Inject
 	protected ValidationTestHelper helper;
+	
+	public void testNoPrimitivesInTypeArgs_00() throws Exception {
+		XExpression expression = expression("java::util::Collections::<boolean>singletonList");
+		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE, "primitives");
+	}
+	
+	public void testNoPrimitivesInTypeArgs_01() throws Exception {
+		XExpression expression = expression("new java.util.ArrayList<boolean>()");
+		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE, "primitives");
+	}
+	
+	public void testVoidNotAllowed() throws Exception {
+		XExpression expression = expression("null as void");
+		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE, "void");
+	}
+	
+	public void testVoidNotAllowed_00() throws Exception {
+		XExpression expression = expression("switch ('foo') void : 'bar'");
+		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE, "void");
+	}
+	
+	public void testVoidNotAllowed_01() throws Exception {
+		XExpression expression = expression("{val void y = null null}");
+		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE, "void");
+	}
 
 	public void testFinalCast() throws Exception {
 		XExpression expression = expression("'foo' as Cloneable");
