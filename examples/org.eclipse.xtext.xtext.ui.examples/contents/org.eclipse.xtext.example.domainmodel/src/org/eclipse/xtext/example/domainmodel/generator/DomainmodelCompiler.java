@@ -41,10 +41,10 @@ public class DomainmodelCompiler extends XbaseCompiler {
 	}
 
 	@Override
-	protected String getJavaVarName(Object ex, IAppendable appendable) {
+	protected String getVarName(Object ex, IAppendable appendable) {
 		if(ex instanceof JvmGenericType) {
 			return "this";
 		}
-		return super.getJavaVarName(ex, appendable);
+		return super.getVarName(ex, appendable);
 	}
 }
