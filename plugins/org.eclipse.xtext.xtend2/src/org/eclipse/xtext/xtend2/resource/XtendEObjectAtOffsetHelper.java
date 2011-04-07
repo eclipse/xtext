@@ -9,7 +9,6 @@ package org.eclipse.xtext.xtend2.resource;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.jvmmodel.JvmEObjectAtOffsetHelper;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
