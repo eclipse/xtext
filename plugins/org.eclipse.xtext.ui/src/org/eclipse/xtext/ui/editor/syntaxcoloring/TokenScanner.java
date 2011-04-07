@@ -43,6 +43,7 @@ public class TokenScanner extends AbstractTokenScanner {
 	protected class RangedReentrantIterator extends UnmodifiableIterator<ILexerTokenRegion> {
 		
 		private Iterator<ILexerTokenRegion> delegate;
+		private Iterable<ILexerTokenRegion> delegateIterable;
 		private ILexerTokenRegion current = null;
 		private boolean computedHasNext = false;
 		private boolean hasNext = false;
@@ -90,8 +91,15 @@ public class TokenScanner extends AbstractTokenScanner {
 		public void setRange(IDocument document, final int offset, final int length) {
 			this.regionOffset = offset;
 			overlapFilter = Regions.overlaps(offset, length);
+			Iterable<ILexerTokenRegion> newIterable = getTokens(document);
+			if (delegateIterable != null) {
+				if (!delegateIterable.equals(newIterable)) {
+					current = null;
+				}
+			}
 			if (current == null) {
-				delegate = getTokens(document).iterator();
+				delegate = newIterable.iterator();
+				delegateIterable = newIterable;
 				computedHasNext = false;
 				hasNext = false;
 			} else {
@@ -103,7 +111,8 @@ public class TokenScanner extends AbstractTokenScanner {
 					// restart - use a new delegate
 					computedHasNext = false;
 					hasNext = false;
-					delegate = getTokens(document).iterator();
+					delegate = newIterable.iterator();
+					delegateIterable = newIterable;
 				}
 			}
 		}
