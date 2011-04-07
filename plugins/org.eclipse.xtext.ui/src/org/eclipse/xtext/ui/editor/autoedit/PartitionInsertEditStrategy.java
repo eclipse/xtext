@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.editor.autoedit;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITypedRegion;
 
 /**
@@ -37,10 +38,14 @@ public class PartitionInsertEditStrategy extends AbstractEditStrategy {
 	@Override
 	protected void internalCustomizeDocumentCommand(IDocument document, DocumentCommand command)
 			throws BadLocationException {
-		if (command.text.length() > 0 && left.endsWith(command.text)) {
+		if (left.length() >= command.text.length() && command.text.length() > 0 && left.endsWith(command.text)) {
 			ITypedRegion partition = document.getPartition(command.offset);
+			if (command.offset != 0 && partition.getLength() == 0 && document.getLength() != 0) {
+				ITypedRegion precedingPartition = document.getPartition(command.offset - 1);
+				partition = precedingPartition;
+			}
 			if (partition.getOffset() + partition.getLength() >= command.offset + right.length()) {
-				if (right.equals(document.get(command.offset, right.length())))
+				if (!left.equals(right) && right.equals(document.get(command.offset, right.length())))
 					return;
 			}
 			if (isIdentifierPart(document, command.offset + command.length))
@@ -58,6 +63,13 @@ public class PartitionInsertEditStrategy extends AbstractEditStrategy {
 				String partitionContent = document.get(partition.getOffset(), partition.getLength());
 				if (count(left, partitionContent) % 2 == 1)
 					return;
+				IRegion currentLine = document.getLineInformationOfOffset(command.offset);
+				if (partition.getOffset() == command.offset && 
+						partition.getOffset() + partition.getLength() > currentLine.getOffset() + currentLine.getLength()) {
+					String trailingLine = document.get(command.offset, currentLine.getLength() - (command.offset - currentLine.getOffset()));
+					if (count(left, trailingLine) % 2 == 1)
+						return;
+				}
 			}
 			command.caretOffset = command.offset + command.text.length();
 			command.shiftsCaret = false;

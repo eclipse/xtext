@@ -80,6 +80,20 @@ public class XtextAutoEditStrategyTest extends AbstractAutoEditTest {
 		assertState(SAMPLE_HEADER + "Greeting:| 'Hello' name=ID'!';", editor);
 	}
 
+	public void testBug338838() throws Exception {
+		XtextEditor editor = openEditor(SAMPLE_HEADER + 
+				"Statemachine:\n" + 
+				"    {Statemachine}\n" + 
+				"    'events' 'end' 'xyzzy|\n" + 
+				";");
+		pressKey(editor, '\'');
+		assertState(SAMPLE_HEADER + 
+				"Statemachine:\n" + 
+				"    {Statemachine}\n" + 
+				"    'events' 'end' 'xyzzy'|\n" + 
+				";", editor);
+	}
+	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();

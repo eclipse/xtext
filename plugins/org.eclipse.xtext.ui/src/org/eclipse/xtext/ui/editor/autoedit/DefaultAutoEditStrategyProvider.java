@@ -20,9 +20,9 @@ import com.google.inject.Provider;
  */
 public class DefaultAutoEditStrategyProvider extends AbstractEditStrategyProvider {
 	@Inject
-	protected Provider<DefaultIndentLineAutoEditStrategy> defaultIndentLineAutoEditStrategy ;
+	protected Provider<DefaultIndentLineAutoEditStrategy> defaultIndentLineAutoEditStrategy;
 	@Inject
-	protected Provider<PartitionEndSkippingEditStrategy> partitionEndSkippingEditStrategy ;
+	protected Provider<PartitionEndSkippingEditStrategy> partitionEndSkippingEditStrategy;
 	@Inject
 	protected PartitionInsertEditStrategy.Factory partitionInsert;
 	@Inject
