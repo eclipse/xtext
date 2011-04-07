@@ -10,6 +10,8 @@ package org.eclipse.xtext.ui.editor.autoedit;
 import java.util.Arrays;
 
 import org.apache.log4j.Logger;
+import org.eclipse.jface.bindings.keys.IKeyLookup;
+import org.eclipse.jface.bindings.keys.KeyLookupFactory;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IAutoEditStrategy;
@@ -20,19 +22,41 @@ import org.eclipse.swt.events.VerifyEvent;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public abstract class AbstractEditStrategy implements IAutoEditStrategy, VerifyKeyListener {
 	
+	private final static Logger log = Logger.getLogger(AbstractEditStrategy.class);
+
+	/**
+	 * Named binding key to bind boolean constant 'true' the debug / test mode for the
+	 * edit strategies. 
+	 * @since 2.0
+	 */
+	public static final String DEBUG = "org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategy.DEBUG";
+	
+	/**
+	 * Boolean field that can be used to debug edit strategies. BadLocationException will be rethrown if set to <code>true</code>
+	 * @since 2.0
+	 */
+	@Inject(optional = true)
+	@Named(DEBUG)
+	protected boolean debug = false;
+	
 	private boolean skipNext = false;
 	
-	public void verifyKey(VerifyEvent event) {
-		skipNext = event.keyCode == 4194304;
+	private boolean shouldSkipNext(int keyCode) {
+		IKeyLookup lookUp = KeyLookupFactory.getDefault();
+		return lookUp.getCommand() == keyCode || lookUp.getCtrl() == keyCode;
 	}
-
-	private final static Logger log = Logger.getLogger(AbstractEditStrategy.class);
+	
+	public void verifyKey(VerifyEvent event) {
+		skipNext = shouldSkipNext(event.keyCode);
+	}
 
 	public void customizeDocumentCommand(IDocument document, DocumentCommand command) {
 		if (skipNext)
@@ -40,8 +64,18 @@ public abstract class AbstractEditStrategy implements IAutoEditStrategy, VerifyK
 		try {
 			internalCustomizeDocumentCommand(document, command);
 		} catch (BadLocationException e) {
-			log.error(e.getMessage(), e);
+			handleBadLocationException(e);
 		}
+	}
+	
+	/**
+	 * Logs the exception. Will throw a {@link RuntimeException} if {@link #debug} is set to <code>true</code>.
+	 * @since 2.0
+	 */
+	protected void handleBadLocationException(BadLocationException e) {
+		log.error(e.getMessage(), e);
+		if (debug)
+			throw new RuntimeException(e);
 	}
 
 	protected abstract void internalCustomizeDocumentCommand(IDocument document, DocumentCommand command)
@@ -84,7 +118,7 @@ public abstract class AbstractEditStrategy implements IAutoEditStrategy, VerifyK
 			char c = doc.getChar(offset);
 			return Character.isJavaIdentifierPart(c);
 		} catch (BadLocationException e) {
-			log.debug(e.getMessage(), e);
+			handleBadLocationException(e);
 		}
 		return false;
 	}

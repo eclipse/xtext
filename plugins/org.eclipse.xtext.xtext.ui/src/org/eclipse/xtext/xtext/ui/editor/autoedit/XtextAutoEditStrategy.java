@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.autoedit;
 
+import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.xtext.ui.editor.autoedit.DefaultAutoEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.autoedit.MultiLineTerminalsEditStrategy;
@@ -38,7 +39,7 @@ public class XtextAutoEditStrategy extends DefaultAutoEditStrategyProvider {
 	protected void configureParenthesis(IEditStrategyAcceptor acceptor) {
 		acceptor.accept(singleLineTerminals.newInstance("(", ")", new SingleLineTerminalsStrategy.StrategyPredicate(){
 
-			public boolean isInsertClosingBracket(IDocument doc, int offset) throws Exception {
+			public boolean isInsertClosingBracket(IDocument doc, int offset) throws BadLocationException {
 				char c = doc.getChar(offset);
 				return Character.isWhitespace(c) || c==':' || c==';';
 			}

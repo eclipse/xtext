@@ -4,6 +4,10 @@
 package org.eclipse.xtext.testlanguages.backtracking.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategy;
+
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -11,5 +15,11 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 public class SimpleBeeLangTestLanguageUiModule extends org.eclipse.xtext.testlanguages.backtracking.ui.AbstractSimpleBeeLangTestLanguageUiModule {
 	public SimpleBeeLangTestLanguageUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
+	}
+	
+	@Override
+	public void configure(Binder binder) {
+		super.configure(binder);
+		binder.bindConstant().annotatedWith(Names.named(AbstractEditStrategy.DEBUG)).to(true);
 	}
 }

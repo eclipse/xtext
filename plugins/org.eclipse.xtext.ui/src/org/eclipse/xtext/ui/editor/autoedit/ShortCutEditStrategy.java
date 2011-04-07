@@ -17,7 +17,6 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.xtext.ui.editor.ISourceViewerAware;
 
 /**
- * 
  * A simple {@link IAutoEditStrategy} for shortcuts. Replaces the given shortcut by the given replacement.
  * 
  * @author Sven Efftinge - Initial contribution and API
@@ -63,7 +62,9 @@ public class ShortCutEditStrategy extends AbstractEditStrategy implements ISourc
 			try {
 				sourceViewer.getDocument().replace(range.x - longForm.length(), longForm.length(), shortcut);
 				sourceViewer.setSelectedRange(range.x - longForm.length() + shortcut.length(), 0);
+				matched = false;
 			} catch (BadLocationException e) {
+				handleBadLocationException(e);
 			}
 		}
 	}
