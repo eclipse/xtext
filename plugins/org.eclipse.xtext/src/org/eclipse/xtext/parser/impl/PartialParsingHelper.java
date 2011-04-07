@@ -51,7 +51,6 @@ import com.google.inject.Inject;
 /**
  * @author Jan Köhnlein - Initial contribution and API
  * @author Sebastian Zarnekow
- * @since 0.7
  */
 public class PartialParsingHelper implements IPartialParsingHelper {
 
