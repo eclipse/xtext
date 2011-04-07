@@ -36,6 +36,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder;
 import org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ParseException;
@@ -50,6 +51,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Köhnlein - Initial contribution and API
  * @author Sebastian Zarnekow
+ * @since 0.7
  */
 public class PartialParsingHelper implements IPartialParsingHelper {
 
@@ -218,7 +220,8 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 	protected void filterInvalidRootNodes(ICompositeNode oldRootNode, List<ICompositeNode> validReplaceRootNodes) {
 		ListIterator<ICompositeNode> iter = validReplaceRootNodes.listIterator(validReplaceRootNodes.size());
 		while (iter.hasPrevious()) {
-			if (isInvalidRootNode(oldRootNode, iter.previous()))
+			ICompositeNode candidate = iter.previous();
+			if (isInvalidRootNode(oldRootNode, candidate))
 				iter.remove();
 			else
 				return;
@@ -460,6 +463,12 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 						if (previous.getLookAhead() == node.getLookAhead() && previous.getLookAhead() == 0) {
 							process = false;
 						}
+					}
+					EObject semanticElement = NodeModelUtils.findActualSemanticObjectFor(node);
+					if (semanticElement != null) {
+						ICompositeNode actualNode = NodeModelUtils.findActualNodeFor(semanticElement);
+						if (actualNode.getTotalOffset() < node.getTotalOffset() || actualNode.getTotalEndOffset() > node.getTotalEndOffset())
+							process = false;
 					}
 					if (process) {
 						int remainingLookAhead = node.getLookAhead();
