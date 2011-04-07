@@ -31,7 +31,6 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 				"\n" +
 				"@SuppressWarnings(\"all\")\n" + 
 				"public class Bar {\n" +
-				"  private final Bar _this = this;\n" + 
 				"  \n" +
 				"  public void doStuff(final Method m) {\n" + 
 				"  }\n" + 
@@ -49,7 +48,6 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		"\n" +
 		"@SuppressWarnings(\"all\")\n" + 
 		"public class Bar {\n" +
-		"  private final Bar _this = this;\n" + 
 		"  \n" +
 		"  public Integer doStuff(final String x) {\n" + 
 		"    int _length = x.length();\n" + 
@@ -71,7 +69,6 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		"\n" +
 		"@SuppressWarnings(\"all\")\n" +
 		"public class Bar {\n" +
-		"  private final Bar _this = this;\n" + 
 		"  \n" + 
 		"  public String foo() {\n" + 
 		"    String _string = new String();\n" + 
@@ -92,7 +89,6 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		"\n" +
 		"@SuppressWarnings(\"all\")\n" +
 		"public class Bar extends Object {\n" +
-		"  private final Bar _this = this;\n" + 
 		"}";
 		assertCompilesTo(expected, input);
 	}
@@ -109,7 +105,6 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		"\n" +
 		"@SuppressWarnings(\"all\")\n" +
 		"public class Bar implements Cloneable, Serializable {\n" +
-		"  private final Bar _this = this;\n" + 
 		"}";
 		assertCompilesTo(expected, input);
 	}
@@ -128,7 +123,6 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			"\n" +
 			"@SuppressWarnings(\"all\")\n" +
 			"public class Bar {\n" +
-			"  private final Bar _this = this;\n" +
 			"  \n" +
 			"  public HashMap<String,Serializable> foo() {\n" +
 			"    HashMap<String,Serializable> _hashMap = new HashMap<String,Serializable>();\n" + 
@@ -171,7 +165,6 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			"\n" +
 			"@SuppressWarnings(\"all\")\n" +
 			"public class Bar {\n" +
-			"  private final Bar _this = this;\n" +
 			"  @Inject private String string;\n" + 
 			"}";
 		XtendFile file = file(input,true);
@@ -197,7 +190,6 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			"\n" +
 			"@SuppressWarnings(\"all\")\n" +
 			"public class Bar {\n" +
-			"  private final Bar _this = this;\n" +
 			"  @Inject private String string;\n" + 
 			"}";
 		XtendFile file = file(input,true);

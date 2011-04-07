@@ -440,9 +440,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 	}
 
 	protected void declareThis(XtendClass clazz, IAppendable appendable) {
-		appendable.append("\nprivate final ");
-		String variable = appendable.declareVariable(clazz, "_this");
-		appendable.append(clazz.getName()).append(" ").append(variable).append(" = this;");
+		appendable.declareVariable(clazz, clazz.getName()+".this");
 	}
 	
 	@Override
