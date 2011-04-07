@@ -31,7 +31,7 @@ public class PureXbaseGenerator implements IGenerator {
     String _name = _this.name(resource);
     String _operator_plus = StringExtensions.operator_plus(_name, ".java");
     EList<EObject> _contents = resource.getContents();
-    EObject _head = IterableExtensions.head(_contents);
+    EObject _head = IterableExtensions.<EObject>head(_contents);
     StringConcatenation _generateMain = _this.generateMain(((org.eclipse.xtext.purexbase.pureXbase.Model) _head));
     fsa.generateFile(_operator_plus, _generateMain);
   }
@@ -43,7 +43,7 @@ public class PureXbaseGenerator implements IGenerator {
       final String s = _lastSegment;
       int _length = s.length();
       int _length_1 = ".xbase".length();
-      int _operator_minus = IntegerExtensions.operator_minus(_length, ((Number)_length_1));
+      int _operator_minus = IntegerExtensions.operator_minus(((Integer)_length), ((Number)_length_1));
       String _substring = s.substring(0, _operator_minus);
       return _substring;
     }
@@ -71,7 +71,7 @@ public class PureXbaseGenerator implements IGenerator {
             return _operator_plus_1;
           }
         };
-      List<String> _map = ListExtensions.map(_imports, function);
+      List<String> _map = ListExtensions.<String, String>map(_imports, function);
       String _elementsToString = IterableExtensions.elementsToString(_map, "");
       builder.append(_elementsToString, "");
       builder.newLineIfNotEmpty();

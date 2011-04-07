@@ -5,8 +5,10 @@ public class Xbase07_Operators {
 	public static void main(String[] args) {
 		
 		{
-		  final Amount a = new Amount("12.80");
-		  final Amount b = new Amount("0.20");
+		  Amount _amount = new Amount("12.80");
+		  final Amount a = _amount;
+		  Amount _amount_1 = new Amount("0.20");
+		  final Amount b = _amount_1;
 		  Amount _operator_multiply = b.operator_multiply(3);
 		  a.operator_plus(_operator_multiply);
 		}

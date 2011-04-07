@@ -19,7 +19,7 @@ public class Xbase05_Closures {
 		    };
 		  final Function1<String,String> f = function;
 		  f.apply("World!");
-		  ArrayList<String> _newArrayList = CollectionLiterals.newArrayList("a", "b", "c");
+		  ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("a", "b", "c");
 		  final ArrayList<String> list = _newArrayList;
 		  final ArrayList<String> typeConverted_list = (ArrayList<String>)list;
 		  final Function1<String,String> function_1 = new Function1<String,String>() {
@@ -28,7 +28,7 @@ public class Xbase05_Closures {
 		        return _upperCase;
 		      }
 		    };
-		  ListExtensions.map(typeConverted_list, function_1);
+		  ListExtensions.<String, String>map(typeConverted_list, function_1);
 		  final Function1<String,String> function_2 = new Function1<String,String>() {
 		      public String apply(String e_2) {
 		        String _upperCase_1 = e_2.toUpperCase();

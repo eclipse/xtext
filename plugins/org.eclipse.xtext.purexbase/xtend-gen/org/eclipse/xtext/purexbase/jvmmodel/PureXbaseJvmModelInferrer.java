@@ -14,7 +14,7 @@ public class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
   @com.google.inject.Inject private IJvmModelAssociator iJvmModelAssociator;
   
   public List<? extends JvmDeclaredType> inferJvmModel(final EObject sourceObject) {
-    ArrayList<? extends JvmDeclaredType> _newArrayList = CollectionLiterals.newArrayList();
+    ArrayList<? extends JvmDeclaredType> _newArrayList = CollectionLiterals.<JvmDeclaredType>newArrayList();
     return _newArrayList;
   }
 }

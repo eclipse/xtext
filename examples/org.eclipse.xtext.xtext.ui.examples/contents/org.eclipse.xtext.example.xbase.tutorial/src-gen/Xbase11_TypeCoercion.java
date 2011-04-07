@@ -1,5 +1,6 @@
 import java.util.Comparator;
 import java.util.List;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 
 @SuppressWarnings("all")
@@ -14,9 +15,9 @@ public class Xbase11_TypeCoercion {
 		  ((Integer)_length_1).toString();
 		  "string".toCharArray();
 		  char[] _charArray = "string".toCharArray();
-		  final List<Character> l = ((List<Character>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(_charArray));
+		  final List<Character> l = ((List<Character>)Conversions.doWrapArray(_charArray));
 		  char[] _charArray_1 = "string".toCharArray();
-		  ((List<Character>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(_charArray_1)).get(3);
+		  ((List<Character>)Conversions.doWrapArray(_charArray_1)).get(3);
 		  final Function2<String,String,Integer> function = new Function2<String,String,Integer>() {
 		      public Integer apply(String a , String b) {
 		        int _length_2 = a.length();
