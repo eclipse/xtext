@@ -576,7 +576,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 			appendable.append("\n");
 			appendable.append("for(");
 			JvmTypeReference paramType = getTypeProvider().getTypeForIdentifiable(parameter);
-			appendable.append(paramType.getIdentifier());
+			serialize(paramType, parameter, appendable);
 			appendable.append(" ");
 			String loopParam = declareNameInVariableScope(parameter, appendable);
 			appendable.append(loopParam);
