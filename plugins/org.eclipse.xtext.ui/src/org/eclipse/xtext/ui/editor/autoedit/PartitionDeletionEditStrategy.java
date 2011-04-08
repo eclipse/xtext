@@ -11,6 +11,9 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IDocument;
 
+import com.google.inject.Inject;
+import com.google.inject.MembersInjector;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  * 
@@ -20,8 +23,14 @@ import org.eclipse.jface.text.IDocument;
 public class PartitionDeletionEditStrategy extends AbstractEditStrategy {
 	
 	public static class Factory {
+		
+		@Inject
+		private MembersInjector<PartitionDeletionEditStrategy> injector;
+		
 		public PartitionDeletionEditStrategy newInstance(String left, String right) {
-			return new PartitionDeletionEditStrategy(left,right);
+			PartitionDeletionEditStrategy result = new PartitionDeletionEditStrategy(left,right);
+			injector.injectMembers(result);
+			return result;
 		}
 	}
 

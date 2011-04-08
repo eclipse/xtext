@@ -13,6 +13,9 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITypedRegion;
 
+import com.google.inject.Inject;
+import com.google.inject.MembersInjector;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  * 
@@ -22,8 +25,14 @@ import org.eclipse.jface.text.ITypedRegion;
 public class PartitionInsertEditStrategy extends AbstractEditStrategy {
 
 	public static class Factory {
+		
+		@Inject
+		private MembersInjector<PartitionInsertEditStrategy> injector;
+		
 		public PartitionInsertEditStrategy newInstance(String left, String right) {
-			return new PartitionInsertEditStrategy(left,right);
+			PartitionInsertEditStrategy result = new PartitionInsertEditStrategy(left,right);
+			injector.injectMembers(result);
+			return result;
 		}
 	}
 	
@@ -55,6 +64,8 @@ public class PartitionInsertEditStrategy extends AbstractEditStrategy {
 				if (minDocumentLength > document.getLength()) {
 					return;
 				}
+				if (command.offset - minDocumentLength < 0)
+					return;
 				String existingLeftPart = document.get(command.offset - minDocumentLength, minDocumentLength);
 				if (!left.equals(existingLeftPart + command.text))
 					return;

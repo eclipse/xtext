@@ -25,6 +25,7 @@ public class TerminalsEditStrategyTest extends TestCase {
 
 		public TerminalsStrategy(String leftTerminal, String rightTerminal) {
 			super(leftTerminal, rightTerminal);
+			debug = true;
 		}
 
 		@Override
