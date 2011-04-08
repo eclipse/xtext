@@ -578,14 +578,6 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 				"  «ENDFOR»'''");
 	}
 	
-	public void testForLoop_26() throws Exception {
-		assertOutput(
-				"foo\n",
-				"'''«FOR a: newArrayList(new testdata.OuterClass$InnerClass())»\n" +
-				"   foo\n" +
-				"«ENDFOR»'''");
-	}
-	
 //	public void testForLoop_26() throws Exception {
 //		assertOutput(
 ////				"  begin [\n    a,\n    a,\n    a\n  ]",

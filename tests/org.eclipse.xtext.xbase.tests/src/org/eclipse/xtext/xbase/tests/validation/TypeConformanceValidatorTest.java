@@ -7,10 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.validation;
 
-import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
-
-import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.common.types.TypesPackage;

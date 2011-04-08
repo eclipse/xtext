@@ -460,6 +460,16 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		}
 	}
 	
+	public void testDispatchFunction_08() throws Exception {
+		final String definition = "foo(p1)} " +
+		"dispatch String foo(String string) {\n" + 
+		"    string + string\n" + 
+		"}\n" + 
+		"String foo(Object x) {\n" + 
+		"    'literal'\n";
+		invokeAndExpect("zonkzonk", definition, "zonk");
+	}
+	
 	public void testGenericFunction_01() throws Exception {
 		final String definition = 
 			"test(String arg) {\n" + 
@@ -497,13 +507,11 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"}");
 	}
 	
-	
-	// TODO fix this test
 	public void testDispatchTypes() throws Exception {
-//		compileJavaCode("Dispatch", "class Dispatch { " +
-//				 "  dispatch doSomething(int i) { i.toString() } " +
-//				 "  dispatch doSomething(Object o) { null } " +
-//				 "}");
+		compileJavaCode("Dispatch", "class Dispatch { " +
+				 "  dispatch doSomething(int i) { i.toString() } " +
+				 "  dispatch doSomething(Object o) { null } " +
+				 "}");
 	}
 	
 	@Inject
