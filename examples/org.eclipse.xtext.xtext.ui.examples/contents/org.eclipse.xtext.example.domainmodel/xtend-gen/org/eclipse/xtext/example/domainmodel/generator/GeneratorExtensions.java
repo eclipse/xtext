@@ -32,8 +32,8 @@ public class GeneratorExtensions extends DomainmodelExtensions {
   
   public String fileName(final Entity e) {
     final Entity typeConverted_e = (Entity)e;
-    String _packageName = GeneratorExtensions.this.packageName(typeConverted_e);
-    String _folderName = GeneratorExtensions.this.folderName(_packageName);
+    String _packageName = this.packageName(typeConverted_e);
+    String _folderName = this.folderName(_packageName);
     String _operator_plus = StringExtensions.operator_plus(_folderName, "/");
     String _name = e.getName();
     String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name);
@@ -56,7 +56,7 @@ public class GeneratorExtensions extends DomainmodelExtensions {
   
   public String parameterList(final Operation o, final ImportManager importManager) {
     EList<JvmFormalParameter> _params = o.getParams();
-    final Function1<JvmFormalParameter,String> function = new Function1<JvmFormalParameter,String>() {
+    final Function1<JvmFormalParameter,String> _function = new Function1<JvmFormalParameter,String>() {
         public String apply(JvmFormalParameter p) {
           JvmTypeReference _parameterType = p.getParameterType();
           String _shortName = GeneratorExtensions.this.shortName(_parameterType, importManager);
@@ -66,11 +66,11 @@ public class GeneratorExtensions extends DomainmodelExtensions {
           return _operator_plus_1;
         }
       };
-    List<String> _map = ListExtensions.<JvmFormalParameter, String>map(_params, function);
-    StringConcatenation builder = new StringConcatenation();
-    builder.append(", ");
-    builder.newLine();
-    String _elementsToString = IterableExtensions.elementsToString(_map, builder);
+    List<String> _map = ListExtensions.<JvmFormalParameter, String>map(_params, _function);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(", ");
+    _builder.newLine();
+    String _elementsToString = IterableExtensions.elementsToString(_map, _builder);
     return _elementsToString;
   }
 }

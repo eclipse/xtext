@@ -28,11 +28,11 @@ public class PureXbaseGenerator implements IGenerator {
   @Inject private TypeReferences typeReferences;
   
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
-    String _name = PureXbaseGenerator.this.name(resource);
+    String _name = this.name(resource);
     String _operator_plus = StringExtensions.operator_plus(_name, ".java");
     EList<EObject> _contents = resource.getContents();
     EObject _head = IterableExtensions.<EObject>head(_contents);
-    StringConcatenation _generateMain = PureXbaseGenerator.this.generateMain(((org.eclipse.xtext.purexbase.pureXbase.Model) _head));
+    StringConcatenation _generateMain = this.generateMain(((org.eclipse.xtext.purexbase.pureXbase.Model) _head));
     fsa.generateFile(_operator_plus, _generateMain);
   }
   
@@ -59,11 +59,11 @@ public class PureXbaseGenerator implements IGenerator {
       XBlockExpression _block = m.getBlock();
       final StringBuilderBasedAppendable typeConverted_appendable = (StringBuilderBasedAppendable)appendable;
       final Model typeConverted_m = (Model)m;
-      JvmTypeReference _typeForName = PureXbaseGenerator.this.typeReferences.getTypeForName("void", typeConverted_m);
-      PureXbaseGenerator.this.compiler.compile(_block, typeConverted_appendable, _typeForName);
-      StringConcatenation builder = new StringConcatenation();
+      JvmTypeReference _typeForName = this.typeReferences.getTypeForName("void", typeConverted_m);
+      this.compiler.compile(_block, typeConverted_appendable, _typeForName);
+      StringConcatenation _builder = new StringConcatenation();
       List<String> _imports = impMnr.getImports();
-      final Function1<String,String> function = new Function1<String,String>() {
+      final Function1<String,String> _function = new Function1<String,String>() {
           public String apply(String e) {
             final String typeConverted_e = (String)e;
             String _operator_plus = StringExtensions.operator_plus("import ", typeConverted_e);
@@ -71,32 +71,32 @@ public class PureXbaseGenerator implements IGenerator {
             return _operator_plus_1;
           }
         };
-      List<String> _map = ListExtensions.<String, String>map(_imports, function);
+      List<String> _map = ListExtensions.<String, String>map(_imports, _function);
       String _elementsToString = IterableExtensions.elementsToString(_map, "");
-      builder.append(_elementsToString, "");
-      builder.newLineIfNotEmpty();
-      builder.newLine();
-      builder.append("@SuppressWarnings(\"all\")");
-      builder.newLine();
-      builder.append("public class ");
+      _builder.append(_elementsToString, "");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      _builder.append("@SuppressWarnings(\"all\")");
+      _builder.newLine();
+      _builder.append("public class ");
       final Model typeConverted_m_1 = (Model)m;
       Resource _eResource = typeConverted_m_1.eResource();
-      String _name = PureXbaseGenerator.this.name(_eResource);
-      builder.append(_name, "");
-      builder.append(" {");
-      builder.newLineIfNotEmpty();
-      builder.append("\t");
-      builder.append("public static void main(String[] args) {");
-      builder.newLine();
-      builder.append("\t\t");
-      builder.append(appendable, "		");
-      builder.newLineIfNotEmpty();
-      builder.append("\t");
-      builder.append("}");
-      builder.newLine();
-      builder.append("}");
-      builder.newLine();
-      _xblockexpression = (builder);
+      String _name = this.name(_eResource);
+      _builder.append(_name, "");
+      _builder.append(" {");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("public static void main(String[] args) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append(appendable, "		");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _xblockexpression = (_builder);
     }
     return _xblockexpression;
   }

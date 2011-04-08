@@ -18,7 +18,7 @@ public class Xbase11_TypeCoercion {
 		  final List<Character> l = ((List<Character>)Conversions.doWrapArray(_charArray));
 		  char[] _charArray_1 = "string".toCharArray();
 		  ((List<Character>)Conversions.doWrapArray(_charArray_1)).get(3);
-		  final Function2<String,String,Integer> function = new Function2<String,String,Integer>() {
+		  final Function2<String,String,Integer> _function = new Function2<String,String,Integer>() {
 		      public Integer apply(String a , String b) {
 		        int _length_2 = a.length();
 		        int _length_3 = b.length();
@@ -28,7 +28,7 @@ public class Xbase11_TypeCoercion {
 		    };
 		  final Comparator<String> comparator = new Comparator<String>() {
 		      public int compare(String arg0,String arg1) {
-		        return function.apply(arg0,arg1);
+		        return _function.apply(arg0,arg1);
 		      }
 		  };
 		}

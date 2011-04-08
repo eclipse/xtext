@@ -9,7 +9,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 public class DomainmodelExtensions {
   
   public String packageName(final Object o) {
-    String switchResult = null;
+    String _switchResult = null;
     final Object o_1 = o;
     boolean matched = false;
     if (!matched) {
@@ -18,10 +18,10 @@ public class DomainmodelExtensions {
         matched=true;
         final PackageDeclaration typeConverted_o_2 = (PackageDeclaration)o_2;
         EObject _eContainer = typeConverted_o_2.eContainer();
-        String _packageName = DomainmodelExtensions.this.packageName(_eContainer);
+        String _packageName = this.packageName(_eContainer);
         String _name = o_2.getName();
-        String _concatPath = DomainmodelExtensions.this.concatPath(_packageName, _name);
-        switchResult = _concatPath;
+        String _concatPath = this.concatPath(_packageName, _name);
+        _switchResult = _concatPath;
       }
     }
     if (!matched) {
@@ -29,8 +29,8 @@ public class DomainmodelExtensions {
         final EObject o_3 = (EObject) o_1;
         matched=true;
         EObject _eContainer_1 = o_3.eContainer();
-        String _packageName_1 = DomainmodelExtensions.this.packageName(_eContainer_1);
-        switchResult = _packageName_1;
+        String _packageName_1 = this.packageName(_eContainer_1);
+        _switchResult = _packageName_1;
       }
     }
     if (!matched) {
@@ -38,13 +38,13 @@ public class DomainmodelExtensions {
         final JvmDeclaredType o_4 = (JvmDeclaredType) o_1;
         matched=true;
         String _packageName_2 = o_4.getPackageName();
-        switchResult = _packageName_2;
+        _switchResult = _packageName_2;
       }
     }
     if (!matched) {
-      switchResult = null;
+      _switchResult = null;
     }
-    return switchResult;
+    return _switchResult;
   }
   
   public String concatPath(final String prefix, final String suffix) {

@@ -38,9 +38,9 @@ public class Xbase10_Switch {
 		  ArrayList<Shape> _newArrayList_1 = CollectionLiterals.<Shape>newArrayList(_rectangle, _circle, _rectangle_1);
 		  final ArrayList<Shape> list2 = _newArrayList_1;
 		  final ArrayList<Shape> typeConverted_list2 = (ArrayList<Shape>)list2;
-		  final Function1<Shape,String> function = new Function1<Shape,String>() {
+		  final Function1<Shape,String> _function = new Function1<Shape,String>() {
 		      public String apply(Shape shape) {
-		        String switchResult_1 = null;
+		        String _switchResult_1 = null;
 		        final Shape shape_1 = shape;
 		        boolean matched_1 = false;
 		        if (!matched_1) {
@@ -48,7 +48,7 @@ public class Xbase10_Switch {
 		            final Circle shape_2 = (Circle) shape_1;
 		            matched_1=true;
 		            String _operator_plus = StringExtensions.operator_plus("a circle : diameter=", ((Object)shape_2.diameter));
-		            switchResult_1 = _operator_plus;
+		            _switchResult_1 = _operator_plus;
 		          }
 		        }
 		        if (!matched_1) {
@@ -58,7 +58,7 @@ public class Xbase10_Switch {
 		            if (_operator_equals) {
 		              matched_1=true;
 		              String _operator_plus_1 = StringExtensions.operator_plus("a square : size=", ((Object)shape_3.width));
-		              switchResult_1 = _operator_plus_1;
+		              _switchResult_1 = _operator_plus_1;
 		            }
 		          }
 		        }
@@ -69,13 +69,13 @@ public class Xbase10_Switch {
 		            String _operator_plus_2 = StringExtensions.operator_plus("a rectangle : width=", ((Object)shape_4.width));
 		            String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, ", height=");
 		            String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, ((Object)shape_4.height));
-		            switchResult_1 = _operator_plus_4;
+		            _switchResult_1 = _operator_plus_4;
 		          }
 		        }
-		        return switchResult_1;
+		        return _switchResult_1;
 		      }
 		    };
-		  ListExtensions.<Shape, String>map(typeConverted_list2, function);
+		  ListExtensions.<Shape, String>map(typeConverted_list2, _function);
 		}
 	}
 }
