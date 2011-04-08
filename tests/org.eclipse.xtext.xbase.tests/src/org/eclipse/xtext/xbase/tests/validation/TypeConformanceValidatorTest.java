@@ -7,7 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.validation;
 
+import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
+
+import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -81,6 +84,17 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 		assertCastError("('foo' as CharSequence) as Integer", TypesPackage.Literals.JVM_TYPE_REFERENCE, "cannot",
 				"CharSequence", "Integer");
 	}
+	
+//	TODO fix me
+//	public void testCast_06() throws Exception {
+//		assertCastError("newArrayList(new Object()) as java.util.List<String>", TypesPackage.Literals.JVM_TYPE_REFERENCE, "cannot",
+//				"ArrayList<Object>", "List<String>");
+//	}
+
+//	TODO fix me
+//	public void testCast_07() throws Exception {
+//		assertNoConformanceError("42 as byte");
+//	}
 	
 	public void testSwitch_TypeGuard_01() throws Exception {
 		String expression = "switch ('foo') { Integer : null }";
