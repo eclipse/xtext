@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests.validation;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xtend2.tests.richstring.AbstractRichStringTest;
 import org.eclipse.xtext.xtend2.validation.IssueCodes;

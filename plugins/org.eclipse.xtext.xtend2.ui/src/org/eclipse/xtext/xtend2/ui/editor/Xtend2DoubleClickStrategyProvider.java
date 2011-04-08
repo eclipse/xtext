@@ -34,13 +34,17 @@ public class Xtend2DoubleClickStrategyProvider extends DoubleClickStrategyProvid
 				protected IRegion getSelectedRegion(IDocument document, ITypedRegion completePartition)
 						throws BadLocationException {
 					String content = document.get(completePartition.getOffset(), completePartition.getLength());
-					int trimLeft = 1;
-					int trimRight = 1;
+					int trimLeft = 1; // assume « as start character
 					if (content.startsWith("'''")) {
 						trimLeft = 3;
 					}
+					int trimRight = 0;
 					if (content.endsWith("'''")) {
 						trimRight = 3;
+					} else if (content.endsWith("''")) {
+						trimRight = 2;
+					} else if (content.endsWith("'") || content.endsWith("«")) {
+						trimRight = 1;
 					}
 					return new Region(completePartition.getOffset() + trimLeft, completePartition.getLength() - trimLeft - trimRight);
 				}
