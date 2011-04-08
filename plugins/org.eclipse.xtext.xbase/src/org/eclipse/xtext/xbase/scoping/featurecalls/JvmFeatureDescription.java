@@ -12,12 +12,10 @@ import static org.eclipse.xtext.util.Strings.*;
 import java.util.Collections;
 
 import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
-import org.eclipse.xtext.xbase.XFeatureCall;
-import org.eclipse.xtext.xbase.XbaseFactory;
+import org.eclipse.xtext.xbase.XExpression;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -27,18 +25,18 @@ public class JvmFeatureDescription extends EObjectDescription {
 	private final TypeArgumentContext context;
 	private final String shadowingString;
 	private final boolean isValid;
-	private XFeatureCall implicitReceiver;
+	private XExpression implicitReceiver;
 	private int numberOfIrrelevantArguments = 0;
 	private String issueCode;
 
 	public JvmFeatureDescription(QualifiedName qualifiedName, JvmFeature element, TypeArgumentContext context,
-			String shadowingString, boolean isValid, JvmIdentifiableElement implicitReceiver,
+			String shadowingString, boolean isValid, XExpression implicitReceiver,
 			int numberOfIrrelevantArguments) {
 		super(qualifiedName, element, Collections.<String, String> emptyMap());
 		this.context = context;
 		this.shadowingString = shadowingString;
 		this.isValid = isValid;
-		this.setImplicitReceiver(implicitReceiver);
+		this.implicitReceiver = implicitReceiver;
 		this.numberOfIrrelevantArguments = numberOfIrrelevantArguments;
 	}
 
@@ -63,17 +61,7 @@ public class JvmFeatureDescription extends EObjectDescription {
 		return isValid && isEmpty(issueCode);
 	}
 
-	public void setImplicitReceiver(JvmIdentifiableElement implicitReceiver) {
-		if (implicitReceiver == null) {
-			this.implicitReceiver = null;
-		} else {
-			XFeatureCall call = XbaseFactory.eINSTANCE.createXFeatureCall();
-			call.setFeature(implicitReceiver);
-			this.implicitReceiver = call;
-		}
-	}
-
-	public XFeatureCall getImplicitReceiver() {
+	public XExpression getImplicitReceiver() {
 		return implicitReceiver;
 	}
 

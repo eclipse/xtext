@@ -16,7 +16,6 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 
 /**
@@ -62,7 +61,7 @@ public class XAbstractFeatureCallImplCustom extends XAbstractFeatureCallImpl {
 	}
 
 	@Override
-	public XFeatureCall getImplicitReceiver() {
+	public XExpression getImplicitReceiver() {
 		if (!isFeatureLinked())
 			return null;
 		return super.getImplicitReceiver();

@@ -25,7 +25,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 
 /**
@@ -75,7 +74,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * @generated
 	 * @ordered
 	 */
-	protected XFeatureCall implicitReceiver;
+	protected XExpression implicitReceiver;
 
 	/**
 	 * The default value of the '{@link #getInvalidFeatureIssueCode() <em>Invalid Feature Issue Code</em>}' attribute.
@@ -200,7 +199,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public XFeatureCall getImplicitReceiver()
+	public XExpression getImplicitReceiver()
 	{
 		return implicitReceiver;
 	}
@@ -210,9 +209,9 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetImplicitReceiver(XFeatureCall newImplicitReceiver, NotificationChain msgs)
+	public NotificationChain basicSetImplicitReceiver(XExpression newImplicitReceiver, NotificationChain msgs)
 	{
-		XFeatureCall oldImplicitReceiver = implicitReceiver;
+		XExpression oldImplicitReceiver = implicitReceiver;
 		implicitReceiver = newImplicitReceiver;
 		if (eNotificationRequired())
 		{
@@ -227,7 +226,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setImplicitReceiver(XFeatureCall newImplicitReceiver)
+	public void setImplicitReceiver(XExpression newImplicitReceiver)
 	{
 		if (newImplicitReceiver != implicitReceiver)
 		{
@@ -362,7 +361,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 				getTypeArguments().addAll((Collection<? extends JvmTypeReference>)newValue);
 				return;
 			case XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER:
-				setImplicitReceiver((XFeatureCall)newValue);
+				setImplicitReceiver((XExpression)newValue);
 				return;
 			case XbasePackage.XABSTRACT_FEATURE_CALL__INVALID_FEATURE_ISSUE_CODE:
 				setInvalidFeatureIssueCode((String)newValue);
@@ -388,7 +387,7 @@ public abstract class XAbstractFeatureCallImpl extends XExpressionImpl implement
 				getTypeArguments().clear();
 				return;
 			case XbasePackage.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER:
-				setImplicitReceiver((XFeatureCall)null);
+				setImplicitReceiver((XExpression)null);
 				return;
 			case XbasePackage.XABSTRACT_FEATURE_CALL__INVALID_FEATURE_ISSUE_CODE:
 				setInvalidFeatureIssueCode(INVALID_FEATURE_ISSUE_CODE_EDEFAULT);

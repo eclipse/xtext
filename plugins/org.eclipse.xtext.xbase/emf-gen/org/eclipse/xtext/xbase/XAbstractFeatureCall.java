@@ -83,12 +83,12 @@ public interface XAbstractFeatureCall extends XExpression
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Implicit Receiver</em>' containment reference.
-	 * @see #setImplicitReceiver(XFeatureCall)
+	 * @see #setImplicitReceiver(XExpression)
 	 * @see org.eclipse.xtext.xbase.XbasePackage#getXAbstractFeatureCall_ImplicitReceiver()
 	 * @model containment="true" transient="true" derived="true"
 	 * @generated
 	 */
-	XFeatureCall getImplicitReceiver();
+	XExpression getImplicitReceiver();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.xtext.xbase.XAbstractFeatureCall#getImplicitReceiver <em>Implicit Receiver</em>}' containment reference.
@@ -98,7 +98,7 @@ public interface XAbstractFeatureCall extends XExpression
 	 * @see #getImplicitReceiver()
 	 * @generated
 	 */
-	void setImplicitReceiver(XFeatureCall value);
+	void setImplicitReceiver(XExpression value);
 
 	/**
 	 * Returns the value of the '<em><b>Invalid Feature Issue Code</b></em>' attribute.

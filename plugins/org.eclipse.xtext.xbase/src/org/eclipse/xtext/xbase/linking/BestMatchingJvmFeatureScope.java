@@ -19,7 +19,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
-import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
@@ -73,7 +73,7 @@ public class BestMatchingJvmFeatureScope implements IScope {
 			if (this.reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE) {
 				final XAbstractFeatureCall featureCall = (XAbstractFeatureCall) this.context;
 				JvmFeatureDescription featureDesc = (JvmFeatureDescription) bestMatch;
-				final XFeatureCall implicitReceiver = featureDesc.getImplicitReceiver();
+				final XExpression implicitReceiver = featureDesc.getImplicitReceiver();
 				if (implicitReceiver!=null) {
 					featureCall.setImplicitReceiver(implicitReceiver);
 				}

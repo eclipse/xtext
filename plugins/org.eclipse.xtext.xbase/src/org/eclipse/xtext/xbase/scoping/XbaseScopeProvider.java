@@ -47,6 +47,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
@@ -295,11 +296,13 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			EObject implicitReceiver = thisVariable.getEObjectOrProxy();
 			JvmTypeReference implicitReceiverType = typeProvider.getTypeForIdentifiable((JvmIdentifiableElement) implicitReceiver);
 			if (implicitReceiverType != null && implicitReceiver instanceof JvmIdentifiableElement) {
+				XFeatureCall receiver = XbaseFactory.eINSTANCE.createXFeatureCall();
+				receiver.setFeature((JvmIdentifiableElement) implicitReceiver);
 				featureScopeForThis = createFeatureScopeForTypeRef(
 						implicitReceiverType, 
 						call, 
 						getContextType(call),
-						(JvmIdentifiableElement) implicitReceiver,
+						receiver,
 						IScope.NULLSCOPE);
 			}
 		}
@@ -409,7 +412,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	}
 
 	protected JvmFeatureScope createFeatureScopeForTypeRef(JvmTypeReference receiverType, EObject expression,
-			JvmDeclaredType currentContext, JvmIdentifiableElement implicitReceiver, IScope parent) {
+			JvmDeclaredType currentContext, XExpression implicitReceiver, IScope parent) {
 		if (expression instanceof XAssignment) {
 			List<IJvmFeatureDescriptionProvider> providers = getFeatureDescriptionProvidersForAssignment(receiverType, (XAssignment) expression, 
 					currentContext, implicitReceiver);
@@ -437,7 +440,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	}
 
 	protected List<IJvmFeatureDescriptionProvider> getFeatureDescriptionProviders(JvmTypeReference type,
-			EObject expression, JvmDeclaredType currentContext, JvmIdentifiableElement implicitReceiver) {
+			EObject expression, JvmDeclaredType currentContext, XExpression implicitReceiver) {
 		final DefaultJvmFeatureDescriptionProvider provider1 = newDefaultFeatureDescProvider();
 		final XFeatureCallSugarDescriptionProvider provider2 = newSugarDescriptionProvider();
 		
@@ -470,7 +473,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	}
 
 	protected List<IJvmFeatureDescriptionProvider> getFeatureDescriptionProvidersForAssignment(
-			JvmTypeReference type, XAssignment expression, JvmDeclaredType currentContext, JvmIdentifiableElement implicitReceiver) {
+			JvmTypeReference type, XAssignment expression, JvmDeclaredType currentContext, XExpression implicitReceiver) {
 		XAssignmentDescriptionProvider provider1 = assignmentFeatureDescProvider.get();
 		XAssignmentSugarDescriptionProvider provider2 = assignmentSugarFeatureDescProvider.get();
 		provider1.setContextType(currentContext);
