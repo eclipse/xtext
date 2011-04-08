@@ -60,10 +60,11 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 	private Map<URI, Set<String>> sourceTargetMap = newHashMap();
 
 	public void build(IBuildContext context, IProgressMonitor monitor) throws CoreException {
-		IJavaProject javaProject = JavaCore.create(context.getBuiltProject());
+		final IProject builtProject = context.getBuiltProject();
+		IJavaProject javaProject = JavaCore.create(builtProject);
 		if (!javaProject.exists())
 			return;
-		final IFolder srcGenFolder = context.getBuiltProject().getFolder("src-gen");
+		final IFolder srcGenFolder = getSrcGenFolder(builtProject);
 		if (!srcGenFolder.exists())
 			return;
 		IPackageFragmentRoot root = javaProject.getPackageFragmentRoot(srcGenFolder);
@@ -93,6 +94,13 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 				sourceTargetMap.put(delta.getUri(), newFiles);
 			}
 		}
+	}
+
+	/**
+	 * @since 2.0
+	 */
+	protected IFolder getSrcGenFolder(final IProject builtProject) {
+		return builtProject.getFolder("src-gen");
 	}
 
 	protected IFileSystemAccess getConfiguredFileSystemAccess(IFolder srcGenFolder, IAcceptor<String> newFileAcceptor) {
