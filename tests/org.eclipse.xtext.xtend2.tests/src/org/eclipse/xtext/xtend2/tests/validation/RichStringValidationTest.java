@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests.validation;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xtend2.tests.richstring.AbstractRichStringTest;
 import org.eclipse.xtext.xtend2.validation.IssueCodes;
@@ -69,4 +71,65 @@ public class RichStringValidationTest extends AbstractRichStringTest {
 				+ "  last line '''");
 		validationTestHelper.assertNoIssues(richString);
 	}
+	
+	public void testNoException_01() throws Exception {
+		RichString richString = richString(
+				"'''«'start'»\n" + 
+				"		  first line\n'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testNoException_02() throws Exception {
+		RichString richString = richString(
+				"'''«'start'»\n" + 
+				"		  first line\n" +
+				"\n" +
+				"'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testNoException_03() throws Exception {
+		RichString richString = richString(
+				"'''«'start'»\n" + 
+				"		  first line\n" +
+				"  \n" +
+				"'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testNoException_04() throws Exception {
+		RichString richString = richString(
+				"'''«'start'»\n" +
+				"  '''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testNoException_05() throws Exception {
+		RichString richString = richString(
+				"'''«'start'»\n" +
+				"'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testNoException_06() throws Exception {
+		RichString richString = richString(
+				"'''\n" +
+				"'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testNoException_07() throws Exception {
+		RichString richString = richString(
+				"''''''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testNoException_08() throws Exception {
+		RichString richString = richString(
+				"'''«'start'»\n" + 
+				"		  first line\n" +
+				"«'end'»'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+
 }

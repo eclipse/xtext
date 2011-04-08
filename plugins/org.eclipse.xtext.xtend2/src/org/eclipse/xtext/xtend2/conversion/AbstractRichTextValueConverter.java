@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.conversion;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
