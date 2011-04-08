@@ -46,7 +46,7 @@ String importURI(EPackage this) :
 	JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.importURI(org.eclipse.emf.ecore.EPackage);
 	
 fqn(EClassifier this):
-	(EPackage.uniqueName() == null)? name : EPackage.uniqueName() + "::" + name;
+	(EPackage.uniqueName() == null)? name.quoteIfNeccesary() : EPackage.uniqueName() + "::" + name.quoteIfNeccesary();
 
 Void resetUniqueNames(EPackageInfo defaultPackageInfo):
 	 JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.clearUniqueNames(org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageInfo);
@@ -115,7 +115,7 @@ quoteIfNeccesary(String this) :
 isXtextKeyword(String this) :
 	{ 'ML_COMMENT', 'ID', 'WS','INT', 'STRING', 'ANY_OTHER', 'SL_COMMENT', 
 	  'returns', 'generate', 'terminal', 'with', 'hidden', 'enum', 'grammar', 
-	  'import', 'as', 'current', 'fragment'
+	  'import', 'as', 'current', 'fragment', 'EOF'
 	}.contains(this);
 	
 idAttribute(EClass this) :

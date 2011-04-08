@@ -728,7 +728,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     	newBuilder(getXtextSetup())
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	        .appendNl("import 'classpath:/org/eclipse/xtext/Xtext.ecore'")
-	        .append("E")
+	        .append("En")
 	        .assertText("EnumRule: \n;\n", "EnumLiteralDeclaration: \n;\n", 
 	        		"enum", 
 	        		":");
@@ -738,7 +738,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     	newBuilder(getXtextSetup())
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	        .appendNl("import 'classpath:/org/eclipse/xtext/Xtext.ecore' as xtext")
-	        .append("E")
+	        .append("En")
 	        .assertText("EnumRule returns xtext::EnumRule: \n;\n", 
 	        		"EnumLiteralDeclaration returns xtext::EnumLiteralDeclaration: \n;\n", 
 	        		"enum",
@@ -873,7 +873,8 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	    			"ANY_OTHER",
 	    			"STRING",
     				"Terminal",
-    				"Fragment");
+    				"Fragment",
+    				"EOF");
     }
     
 }

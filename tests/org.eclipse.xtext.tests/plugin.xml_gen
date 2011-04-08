@@ -619,15 +619,6 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.eclipse.org/2008/xtext/LexerLang" 
-       class = "org.eclipse.xtext.testlanguages.lexerLang.LexerLangPackage"
-       genModel = "org/eclipse/xtext/testlanguages/LexerTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
        uri = "http://www.eclipse.org/2008/xtext/LookaheadLang" 
        class = "org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage"
        genModel = "org/eclipse/xtext/testlanguages/LookaheadTestLanguage.genmodel" /> 
