@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ecore;
 
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.generic.AbstractGenericResourceRuntimeModule;
 
@@ -29,6 +30,11 @@ public class EcoreRuntimeModule extends AbstractGenericResourceRuntimeModule {
 	
 	public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
 		return EcoreResourceDescriptionStrategy.class;
+	}
+	
+	@Override
+	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
+		return EcoreQualifiedNameProvider.class;
 	}
 	
 }
