@@ -28,9 +28,8 @@ public class IteratorJob extends Job {
 	private Iterator<IEObjectDescription> iterator;
 
 	private List<IEObjectDescription> matches;
-	
-	private final XtextEObjectSearchDialog dialog;
 
+	private final XtextEObjectSearchDialog dialog;
 
 	public IteratorJob(XtextEObjectSearchDialog dialog) {
 		super(Messages.IteratorJob_SearchJobName);
@@ -47,28 +46,36 @@ public class IteratorJob extends Job {
 	protected IStatus run(IProgressMonitor monitor) {
 		long startTime = System.currentTimeMillis();
 		while (iterator.hasNext()) {
-			matches.add(iterator.next());
-			long endTime = System.currentTimeMillis();
-			if (matches.size() == dialog.getHeightInChars() || endTime - startTime > TIME_THRESHOLD) {
-				if (monitor.isCanceled()) {
-					return Status.CANCEL_STATUS;
+			IEObjectDescription next = iterator.next();
+			if (next.getQualifiedName() != null && next.getEObjectURI() != null && next.getEClass() != null) {
+				matches.add(next);
+				long endTime = System.currentTimeMillis();
+				if (matches.size() == dialog.getHeightInChars() || endTime - startTime > TIME_THRESHOLD) {
+					if (monitor.isCanceled()) {
+						return Status.CANCEL_STATUS;
+					}
+					dialog.updateMatches(sortedCopy(matches), false);
+					startTime = endTime;
 				}
-				dialog.updateMatches(sortedCopy(matches), false);
-				startTime = endTime;
 			}
 		}
 		dialog.updateMatches(sortedCopy(matches), true);
 		return Status.OK_STATUS;
 	}
-	
+
 	private Collection<IEObjectDescription> sortedCopy(Iterable<IEObjectDescription> list) {
 		List<IEObjectDescription> result = Lists.newArrayList(matches);
 		Collections.sort(result, new Comparator<IEObjectDescription>() {
 			public int compare(IEObjectDescription o1, IEObjectDescription o2) {
 				int diff = o1.getQualifiedName().compareToIgnoreCase(o2.getQualifiedName());
-				if(diff==0) {
-					diff = o1.getEClass().getName().compareToIgnoreCase(o2.getEClass().getName());
-					if(diff==0) {
+				if (diff == 0) {
+					String className1 = o1.getEClass().getName();
+					String className2 = o2.getEClass().getName();
+					if(className1 == null)
+						diff = className2 == null ? 0 : -1;
+					else
+						diff = className2 == null ? 1 : className1.compareToIgnoreCase(className2);
+					if (diff == 0) {
 						diff = o1.getEObjectURI().toString().compareTo(o2.getEObjectURI().toString());
 					}
 				}
