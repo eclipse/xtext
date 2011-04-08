@@ -106,6 +106,7 @@ public class XtextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNegatedTokenAccess().getGroup(), "rule__NegatedToken__Group__0");
 					put(grammarAccess.getUntilTokenAccess().getGroup(), "rule__UntilToken__Group__0");
 					put(grammarAccess.getWildcardAccess().getGroup(), "rule__Wildcard__Group__0");
+					put(grammarAccess.getEOFAccess().getGroup(), "rule__EOF__Group__0");
 					put(grammarAccess.getCharacterRangeAccess().getGroup(), "rule__CharacterRange__Group__0");
 					put(grammarAccess.getCharacterRangeAccess().getGroup_1(), "rule__CharacterRange__Group_1__0");
 					put(grammarAccess.getEnumRuleAccess().getGroup(), "rule__EnumRule__Group__0");

@@ -16,6 +16,7 @@ import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CharacterRange;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EOF;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
@@ -156,6 +157,10 @@ public class XtextLabelProvider extends DefaultEObjectLabelProvider {
 
 	String text(Wildcard object) {
 		return "*";
+	}
+	
+	String text(EOF object) {
+		return "EOF";
 	}
 
 	String text(Keyword object) {

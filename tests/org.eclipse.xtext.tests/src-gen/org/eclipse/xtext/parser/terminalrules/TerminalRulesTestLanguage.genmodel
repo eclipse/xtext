@@ -13,6 +13,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.ecore#//Model/idValue"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.ecore#//Model/intValue"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.ecore#//Model/stringValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.ecore#//Model/richStringValue"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.ecore#//Model/mlCommentValue"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.ecore#//Model/slCommentValue"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.ecore#//Model/wsValue"/>

@@ -77,6 +77,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="NegatedToken" eSuperTypes="#//AbstractNegatedToken"/>
   <eClassifiers xsi:type="ecore:EClass" name="UntilToken" eSuperTypes="#//AbstractNegatedToken"/>
   <eClassifiers xsi:type="ecore:EClass" name="Wildcard" eSuperTypes="#//AbstractElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EOF" eSuperTypes="#//AbstractElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="EnumRule" eSuperTypes="#//AbstractRule"/>
   <eClassifiers xsi:type="ecore:EClass" name="EnumLiteralDeclaration" eSuperTypes="#//AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="enumLiteral" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EEnumLiteral"/>

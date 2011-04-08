@@ -144,6 +144,10 @@ public class XtextAdapterFactory extends AdapterFactoryImpl {
 				return createWildcardAdapter();
 			}
 			@Override
+			public Adapter caseEOF(EOF object) {
+				return createEOFAdapter();
+			}
+			@Override
 			public Adapter caseEnumRule(EnumRule object) {
 				return createEnumRuleAdapter();
 			}
@@ -440,6 +444,20 @@ public class XtextAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createWildcardAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.EOF <em>EOF</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.EOF
+	 * @generated
+	 */
+	public Adapter createEOFAdapter() {
 		return null;
 	}
 

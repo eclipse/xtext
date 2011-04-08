@@ -210,6 +210,13 @@ public class XtextSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case XtextPackage.EOF: {
+				EOF eof = (EOF)theEObject;
+				T result = caseEOF(eof);
+				if (result == null) result = caseAbstractElement(eof);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case XtextPackage.ENUM_RULE: {
 				EnumRule enumRule = (EnumRule)theEObject;
 				T result = caseEnumRule(enumRule);
@@ -533,6 +540,21 @@ public class XtextSwitch<T> {
 	 * @generated
 	 */
 	public T caseWildcard(Wildcard object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>EOF</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>EOF</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEOF(EOF object) {
 		return null;
 	}
 

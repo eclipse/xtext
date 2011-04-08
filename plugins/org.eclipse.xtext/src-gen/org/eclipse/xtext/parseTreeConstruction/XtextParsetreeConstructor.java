@@ -67,10 +67,11 @@ protected class ThisRootNode extends RootToken {
 			case 33: return new NegatedToken_Group(this, this, 33, inst);
 			case 34: return new UntilToken_Group(this, this, 34, inst);
 			case 35: return new Wildcard_Group(this, this, 35, inst);
-			case 36: return new CharacterRange_Group(this, this, 36, inst);
-			case 37: return new EnumRule_Group(this, this, 37, inst);
-			case 38: return new EnumLiterals_Group(this, this, 38, inst);
-			case 39: return new EnumLiteralDeclaration_Group(this, this, 39, inst);
+			case 36: return new EOF_Group(this, this, 36, inst);
+			case 37: return new CharacterRange_Group(this, this, 37, inst);
+			case 38: return new EnumRule_Group(this, this, 38, inst);
+			case 39: return new EnumLiterals_Group(this, this, 39, inst);
+			case 40: return new EnumLiteralDeclaration_Group(this, this, 40, inst);
 			default: return null;
 		}	
 	}	
@@ -5636,6 +5637,7 @@ protected class TerminalAlternatives_Group extends GroupToken {
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getEOFAccess().getEOFAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getKeywordRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getNegatedTokenRule().getType().getClassifier() && 
@@ -5869,6 +5871,7 @@ protected class TerminalGroup_Group extends GroupToken {
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getEOFAccess().getEOFAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getKeywordRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getNegatedTokenRule().getType().getClassifier() && 
@@ -6057,6 +6060,7 @@ protected class TerminalToken_Group extends GroupToken {
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getEOFAccess().getEOFAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getKeywordRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getNegatedTokenRule().getType().getClassifier() && 
@@ -6154,11 +6158,11 @@ protected class TerminalToken_CardinalityAssignment_1 extends AssignmentToken  {
 /************ begin Rule TerminalTokenElement ****************
  *
  * TerminalTokenElement returns AbstractElement:
- * 	CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard;
+ * 	CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard | ^EOF;
  *
  **/
 
-// CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard
+// CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard | ^EOF
 protected class TerminalTokenElement_Alternatives extends AlternativesToken {
 
 	public TerminalTokenElement_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6178,6 +6182,7 @@ protected class TerminalTokenElement_Alternatives extends AlternativesToken {
 			case 2: return new TerminalTokenElement_ParenthesizedTerminalElementParserRuleCall_2(lastRuleCallOrigin, this, 2, inst);
 			case 3: return new TerminalTokenElement_AbstractNegatedTokenParserRuleCall_3(lastRuleCallOrigin, this, 3, inst);
 			case 4: return new TerminalTokenElement_WildcardParserRuleCall_4(lastRuleCallOrigin, this, 4, inst);
+			case 5: return new TerminalTokenElement_EOFParserRuleCall_5(lastRuleCallOrigin, this, 5, inst);
 			default: return null;
 		}	
 	}
@@ -6186,6 +6191,7 @@ protected class TerminalTokenElement_Alternatives extends AlternativesToken {
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getEOFAccess().getEOFAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getKeywordRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getNegatedTokenRule().getType().getClassifier() && 
@@ -6378,6 +6384,42 @@ protected class TerminalTokenElement_WildcardParserRuleCall_4 extends RuleCallTo
 	}	
 }
 
+// ^EOF
+protected class TerminalTokenElement_EOFParserRuleCall_5 extends RuleCallToken {
+	
+	public TerminalTokenElement_EOFParserRuleCall_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getTerminalTokenElementAccess().getEOFParserRuleCall_5();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EOF_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getEOFAccess().getEOFAction_0().getType().getClassifier())
+			return null;
+		if(checkForRecursion(EOF_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
 
 /************ end Rule TerminalTokenElement ****************/
 
@@ -6413,6 +6455,7 @@ protected class ParenthesizedTerminalElement_Group extends GroupToken {
 	public IEObjectConsumer tryConsume() {
 		if(getEObject().eClass() != grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getEOFAccess().getEOFAction_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getKeywordRule().getType().getClassifier() && 
 		   getEObject().eClass() != grammarAccess.getNegatedTokenRule().getType().getClassifier() && 
@@ -6921,6 +6964,94 @@ protected class Wildcard_FullStopKeyword_1 extends KeywordToken  {
 
 
 /************ end Rule Wildcard ****************/
+
+
+/************ begin Rule EOF ****************
+ *
+ * ^EOF:
+ * 	{^EOF} "EOF";
+ *
+ **/
+
+// {^EOF} "EOF"
+protected class EOF_Group extends GroupToken {
+	
+	public EOF_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getEOFAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EOF_EOFKeyword_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getEOFAccess().getEOFAction_0().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// {^EOF}
+protected class EOF_EOFAction_0 extends ActionToken  {
+
+	public EOF_EOFAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getEOFAccess().getEOFAction_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
+}
+
+// "EOF"
+protected class EOF_EOFKeyword_1 extends KeywordToken  {
+	
+	public EOF_EOFKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getEOFAccess().getEOFKeyword_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EOF_EOFAction_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+
+/************ end Rule EOF ****************/
 
 
 /************ begin Rule CharacterRange ****************

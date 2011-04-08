@@ -179,6 +179,13 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass eofEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass enumRuleEClass = null;
 
 	/**
@@ -721,6 +728,15 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getEOF() {
+		return eofEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEnumRule() {
 		return enumRuleEClass;
 	}
@@ -918,6 +934,8 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 
 		wildcardEClass = createEClass(WILDCARD);
 
+		eofEClass = createEClass(EOF);
+
 		enumRuleEClass = createEClass(ENUM_RULE);
 
 		enumLiteralDeclarationEClass = createEClass(ENUM_LITERAL_DECLARATION);
@@ -979,6 +997,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 		negatedTokenEClass.getESuperTypes().add(this.getAbstractNegatedToken());
 		untilTokenEClass.getESuperTypes().add(this.getAbstractNegatedToken());
 		wildcardEClass.getESuperTypes().add(this.getAbstractElement());
+		eofEClass.getESuperTypes().add(this.getAbstractElement());
 		enumRuleEClass.getESuperTypes().add(this.getAbstractRule());
 		enumLiteralDeclarationEClass.getESuperTypes().add(this.getAbstractElement());
 		alternativesEClass.getESuperTypes().add(this.getCompoundElement());
@@ -1053,6 +1072,8 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 		initEClass(untilTokenEClass, UntilToken.class, "UntilToken", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(wildcardEClass, Wildcard.class, "Wildcard", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(eofEClass, org.eclipse.xtext.EOF.class, "EOF", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(enumRuleEClass, EnumRule.class, "EnumRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

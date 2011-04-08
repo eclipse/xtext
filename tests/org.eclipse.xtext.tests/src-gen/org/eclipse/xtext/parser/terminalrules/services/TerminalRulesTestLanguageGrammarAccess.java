@@ -25,22 +25,24 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final RuleCall cIntValueINTTerminalRuleCall_1_0 = (RuleCall)cIntValueAssignment_1.eContents().get(0);
 		private final Assignment cStringValueAssignment_2 = (Assignment)cAlternatives.eContents().get(2);
 		private final RuleCall cStringValueSTRINGTerminalRuleCall_2_0 = (RuleCall)cStringValueAssignment_2.eContents().get(0);
-		private final Assignment cMlCommentValueAssignment_3 = (Assignment)cAlternatives.eContents().get(3);
-		private final RuleCall cMlCommentValueML_COMMENTTerminalRuleCall_3_0 = (RuleCall)cMlCommentValueAssignment_3.eContents().get(0);
-		private final Assignment cSlCommentValueAssignment_4 = (Assignment)cAlternatives.eContents().get(4);
-		private final RuleCall cSlCommentValueSL_COMMENTTerminalRuleCall_4_0 = (RuleCall)cSlCommentValueAssignment_4.eContents().get(0);
-		private final Assignment cWsValueAssignment_5 = (Assignment)cAlternatives.eContents().get(5);
-		private final RuleCall cWsValueWSTerminalRuleCall_5_0 = (RuleCall)cWsValueAssignment_5.eContents().get(0);
-		private final Assignment cAnyValueAssignment_6 = (Assignment)cAlternatives.eContents().get(6);
-		private final RuleCall cAnyValueANY_OTHERTerminalRuleCall_6_0 = (RuleCall)cAnyValueAssignment_6.eContents().get(0);
+		private final Assignment cRichStringValueAssignment_3 = (Assignment)cAlternatives.eContents().get(3);
+		private final RuleCall cRichStringValueRICH_STRINGTerminalRuleCall_3_0 = (RuleCall)cRichStringValueAssignment_3.eContents().get(0);
+		private final Assignment cMlCommentValueAssignment_4 = (Assignment)cAlternatives.eContents().get(4);
+		private final RuleCall cMlCommentValueML_COMMENTTerminalRuleCall_4_0 = (RuleCall)cMlCommentValueAssignment_4.eContents().get(0);
+		private final Assignment cSlCommentValueAssignment_5 = (Assignment)cAlternatives.eContents().get(5);
+		private final RuleCall cSlCommentValueSL_COMMENTTerminalRuleCall_5_0 = (RuleCall)cSlCommentValueAssignment_5.eContents().get(0);
+		private final Assignment cWsValueAssignment_6 = (Assignment)cAlternatives.eContents().get(6);
+		private final RuleCall cWsValueWSTerminalRuleCall_6_0 = (RuleCall)cWsValueAssignment_6.eContents().get(0);
+		private final Assignment cAnyValueAssignment_7 = (Assignment)cAlternatives.eContents().get(7);
+		private final RuleCall cAnyValueANY_OTHERTerminalRuleCall_7_0 = (RuleCall)cAnyValueAssignment_7.eContents().get(0);
 		
 		//Model:
-		//	idValue=ID | intValue=INT | stringValue=STRING | mlCommentValue=ML_COMMENT | slCommentValue=SL_COMMENT | wsValue=WS |
-		//	anyValue=ANY_OTHER;
+		//	idValue=ID | intValue=INT | stringValue=STRING | richStringValue=RICH_STRING | mlCommentValue=ML_COMMENT |
+		//	slCommentValue=SL_COMMENT | wsValue=WS | anyValue=ANY_OTHER;
 		public ParserRule getRule() { return rule; }
 
-		//idValue=ID | intValue=INT | stringValue=STRING | mlCommentValue=ML_COMMENT | slCommentValue=SL_COMMENT | wsValue=WS |
-		//anyValue=ANY_OTHER
+		//idValue=ID | intValue=INT | stringValue=STRING | richStringValue=RICH_STRING | mlCommentValue=ML_COMMENT |
+		//slCommentValue=SL_COMMENT | wsValue=WS | anyValue=ANY_OTHER
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//idValue=ID
@@ -61,29 +63,35 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//STRING
 		public RuleCall getStringValueSTRINGTerminalRuleCall_2_0() { return cStringValueSTRINGTerminalRuleCall_2_0; }
 
+		//richStringValue=RICH_STRING
+		public Assignment getRichStringValueAssignment_3() { return cRichStringValueAssignment_3; }
+
+		//RICH_STRING
+		public RuleCall getRichStringValueRICH_STRINGTerminalRuleCall_3_0() { return cRichStringValueRICH_STRINGTerminalRuleCall_3_0; }
+
 		//mlCommentValue=ML_COMMENT
-		public Assignment getMlCommentValueAssignment_3() { return cMlCommentValueAssignment_3; }
+		public Assignment getMlCommentValueAssignment_4() { return cMlCommentValueAssignment_4; }
 
 		//ML_COMMENT
-		public RuleCall getMlCommentValueML_COMMENTTerminalRuleCall_3_0() { return cMlCommentValueML_COMMENTTerminalRuleCall_3_0; }
+		public RuleCall getMlCommentValueML_COMMENTTerminalRuleCall_4_0() { return cMlCommentValueML_COMMENTTerminalRuleCall_4_0; }
 
 		//slCommentValue=SL_COMMENT
-		public Assignment getSlCommentValueAssignment_4() { return cSlCommentValueAssignment_4; }
+		public Assignment getSlCommentValueAssignment_5() { return cSlCommentValueAssignment_5; }
 
 		//SL_COMMENT
-		public RuleCall getSlCommentValueSL_COMMENTTerminalRuleCall_4_0() { return cSlCommentValueSL_COMMENTTerminalRuleCall_4_0; }
+		public RuleCall getSlCommentValueSL_COMMENTTerminalRuleCall_5_0() { return cSlCommentValueSL_COMMENTTerminalRuleCall_5_0; }
 
 		//wsValue=WS
-		public Assignment getWsValueAssignment_5() { return cWsValueAssignment_5; }
+		public Assignment getWsValueAssignment_6() { return cWsValueAssignment_6; }
 
 		//WS
-		public RuleCall getWsValueWSTerminalRuleCall_5_0() { return cWsValueWSTerminalRuleCall_5_0; }
+		public RuleCall getWsValueWSTerminalRuleCall_6_0() { return cWsValueWSTerminalRuleCall_6_0; }
 
 		//anyValue=ANY_OTHER
-		public Assignment getAnyValueAssignment_6() { return cAnyValueAssignment_6; }
+		public Assignment getAnyValueAssignment_7() { return cAnyValueAssignment_7; }
 
 		//ANY_OTHER
-		public RuleCall getAnyValueANY_OTHERTerminalRuleCall_6_0() { return cAnyValueANY_OTHERTerminalRuleCall_6_0; }
+		public RuleCall getAnyValueANY_OTHERTerminalRuleCall_7_0() { return cAnyValueANY_OTHERTerminalRuleCall_7_0; }
 	}
 	
 	
@@ -91,6 +99,8 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	private TerminalRule tID;
 	private TerminalRule tINT;
 	private TerminalRule tSTRING;
+	private TerminalRule tRICH_STRING;
+	private TerminalRule tIN_RICH_STRING;
 	private TerminalRule tESCAPED_CHAR;
 	private TerminalRule tML_COMMENT;
 	private TerminalRule tSL_COMMENT;
@@ -111,8 +121,8 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 
 	
 	//Model:
-	//	idValue=ID | intValue=INT | stringValue=STRING | mlCommentValue=ML_COMMENT | slCommentValue=SL_COMMENT | wsValue=WS |
-	//	anyValue=ANY_OTHER;
+	//	idValue=ID | intValue=INT | stringValue=STRING | richStringValue=RICH_STRING | mlCommentValue=ML_COMMENT |
+	//	slCommentValue=SL_COMMENT | wsValue=WS | anyValue=ANY_OTHER;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -137,6 +147,18 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//	"\"" (ESCAPED_CHAR | !("\\" | "\""))* "\"" | "\'" (ESCAPED_CHAR | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return (tSTRING != null) ? tSTRING : (tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING"));
+	} 
+
+	//terminal RICH_STRING:
+	//	"\'\'\'" IN_RICH_STRING* ("\'\'\'" | ("\'" "\'"?)? EOF);
+	public TerminalRule getRICH_STRINGRule() {
+		return (tRICH_STRING != null) ? tRICH_STRING : (tRICH_STRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "RICH_STRING"));
+	} 
+
+	//terminal fragment IN_RICH_STRING:
+	//	"\'\'" !("«" | "\'") | "\'" !("«" | "\'") | !("«" | "\'");
+	public TerminalRule getIN_RICH_STRINGRule() {
+		return (tIN_RICH_STRING != null) ? tIN_RICH_STRING : (tIN_RICH_STRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "IN_RICH_STRING"));
 	} 
 
 	//terminal fragment ESCAPED_CHAR:

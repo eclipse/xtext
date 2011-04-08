@@ -1349,12 +1349,13 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cParenthesizedTerminalElementParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cAbstractNegatedTokenParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		private final RuleCall cWildcardParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cEOFParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		
 		//TerminalTokenElement returns AbstractElement:
-		//	CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard;
+		//	CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard | ^EOF;
 		public ParserRule getRule() { return rule; }
 
-		//CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard
+		//CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard | ^EOF
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//CharacterRange
@@ -1371,6 +1372,9 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 
 		//Wildcard
 		public RuleCall getWildcardParserRuleCall_4() { return cWildcardParserRuleCall_4; }
+
+		//^EOF
+		public RuleCall getEOFParserRuleCall_5() { return cEOFParserRuleCall_5; }
 	}
 
 	public class ParenthesizedTerminalElementElements extends AbstractParserRuleElementFinder {
@@ -1483,6 +1487,26 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"."
 		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
+	}
+
+	public class EOFElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EOF");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cEOFAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cEOFKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//^EOF:
+		//	{^EOF} "EOF";
+		public ParserRule getRule() { return rule; }
+
+		//{^EOF} "EOF"
+		public Group getGroup() { return cGroup; }
+
+		//{^EOF}
+		public Action getEOFAction_0() { return cEOFAction_0; }
+
+		//"EOF"
+		public Keyword getEOFKeyword_1() { return cEOFKeyword_1; }
 	}
 
 	public class CharacterRangeElements extends AbstractParserRuleElementFinder {
@@ -1695,6 +1719,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	private NegatedTokenElements pNegatedToken;
 	private UntilTokenElements pUntilToken;
 	private WildcardElements pWildcard;
+	private EOFElements pEOF;
 	private CharacterRangeElements pCharacterRange;
 	private EnumRuleElements pEnumRule;
 	private EnumLiteralsElements pEnumLiterals;
@@ -2047,7 +2072,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TerminalTokenElement returns AbstractElement:
-	//	CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard;
+	//	CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard | ^EOF;
 	public TerminalTokenElementElements getTerminalTokenElementAccess() {
 		return (pTerminalTokenElement != null) ? pTerminalTokenElement : (pTerminalTokenElement = new TerminalTokenElementElements());
 	}
@@ -2104,6 +2129,16 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getWildcardRule() {
 		return getWildcardAccess().getRule();
+	}
+
+	//^EOF:
+	//	{^EOF} "EOF";
+	public EOFElements getEOFAccess() {
+		return (pEOF != null) ? pEOF : (pEOF = new EOFElements());
+	}
+	
+	public ParserRule getEOFRule() {
+		return getEOFAccess().getRule();
 	}
 
 	//CharacterRange returns AbstractElement:

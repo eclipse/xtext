@@ -942,6 +942,43 @@ public interface XtextPackage extends EPackage {
 	int WILDCARD_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.impl.EOFImpl <em>EOF</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.impl.EOFImpl
+	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getEOF()
+	 * @generated
+	 */
+	int EOF = 18;
+
+	/**
+	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOF__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+	/**
+	 * The feature id for the '<em><b>Predicated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOF__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
+
+	/**
+	 * The number of structural features of the '<em>EOF</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOF_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.EnumRuleImpl <em>Enum Rule</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -949,7 +986,7 @@ public interface XtextPackage extends EPackage {
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getEnumRule()
 	 * @generated
 	 */
-	int ENUM_RULE = 18;
+	int ENUM_RULE = 19;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -995,7 +1032,7 @@ public interface XtextPackage extends EPackage {
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getEnumLiteralDeclaration()
 	 * @generated
 	 */
-	int ENUM_LITERAL_DECLARATION = 19;
+	int ENUM_LITERAL_DECLARATION = 20;
 
 	/**
 	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -1050,7 +1087,7 @@ public interface XtextPackage extends EPackage {
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getCompoundElement()
 	 * @generated
 	 */
-	int COMPOUND_ELEMENT = 24;
+	int COMPOUND_ELEMENT = 25;
 
 	/**
 	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -1096,7 +1133,7 @@ public interface XtextPackage extends EPackage {
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getAlternatives()
 	 * @generated
 	 */
-	int ALTERNATIVES = 20;
+	int ALTERNATIVES = 21;
 
 	/**
 	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -1142,7 +1179,7 @@ public interface XtextPackage extends EPackage {
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getUnorderedGroup()
 	 * @generated
 	 */
-	int UNORDERED_GROUP = 21;
+	int UNORDERED_GROUP = 22;
 
 	/**
 	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -1188,7 +1225,7 @@ public interface XtextPackage extends EPackage {
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getGroup()
 	 * @generated
 	 */
-	int GROUP = 22;
+	int GROUP = 23;
 
 	/**
 	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -1234,7 +1271,7 @@ public interface XtextPackage extends EPackage {
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getCharacterRange()
 	 * @generated
 	 */
-	int CHARACTER_RANGE = 23;
+	int CHARACTER_RANGE = 24;
 
 	/**
 	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -1791,6 +1828,16 @@ public interface XtextPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getWildcard();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.EOF <em>EOF</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>EOF</em>'.
+	 * @see org.eclipse.xtext.EOF
+	 * @generated
+	 */
+	EClass getEOF();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.EnumRule <em>Enum Rule</em>}'.
@@ -2358,6 +2405,16 @@ public interface XtextPackage extends EPackage {
 		 * @generated
 		 */
 		EClass WILDCARD = eINSTANCE.getWildcard();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.impl.EOFImpl <em>EOF</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.impl.EOFImpl
+		 * @see org.eclipse.xtext.impl.XtextPackageImpl#getEOF()
+		 * @generated
+		 */
+		EClass EOF = eINSTANCE.getEOF();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.impl.EnumRuleImpl <em>Enum Rule</em>}' class.

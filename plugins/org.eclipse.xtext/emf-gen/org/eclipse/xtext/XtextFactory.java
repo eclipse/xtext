@@ -188,6 +188,15 @@ public interface XtextFactory extends EFactory {
 	Wildcard createWildcard();
 
 	/**
+	 * Returns a new object of class '<em>EOF</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>EOF</em>'.
+	 * @generated
+	 */
+	EOF createEOF();
+
+	/**
 	 * Returns a new object of class '<em>Enum Rule</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

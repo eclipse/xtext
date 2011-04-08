@@ -41,13 +41,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	idValue=ID | intValue=INT | stringValue=STRING | mlCommentValue=ML_COMMENT | slCommentValue=SL_COMMENT | wsValue=WS |
- * 	anyValue=ANY_OTHER;
+ * 	idValue=ID | intValue=INT | stringValue=STRING | richStringValue=RICH_STRING | mlCommentValue=ML_COMMENT |
+ * 	slCommentValue=SL_COMMENT | wsValue=WS | anyValue=ANY_OTHER;
  *
  **/
 
-// idValue=ID | intValue=INT | stringValue=STRING | mlCommentValue=ML_COMMENT | slCommentValue=SL_COMMENT | wsValue=WS |
-// anyValue=ANY_OTHER
+// idValue=ID | intValue=INT | stringValue=STRING | richStringValue=RICH_STRING | mlCommentValue=ML_COMMENT |
+// slCommentValue=SL_COMMENT | wsValue=WS | anyValue=ANY_OTHER
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -65,10 +65,11 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 0: return new Model_IdValueAssignment_0(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new Model_IntValueAssignment_1(lastRuleCallOrigin, this, 1, inst);
 			case 2: return new Model_StringValueAssignment_2(lastRuleCallOrigin, this, 2, inst);
-			case 3: return new Model_MlCommentValueAssignment_3(lastRuleCallOrigin, this, 3, inst);
-			case 4: return new Model_SlCommentValueAssignment_4(lastRuleCallOrigin, this, 4, inst);
-			case 5: return new Model_WsValueAssignment_5(lastRuleCallOrigin, this, 5, inst);
-			case 6: return new Model_AnyValueAssignment_6(lastRuleCallOrigin, this, 6, inst);
+			case 3: return new Model_RichStringValueAssignment_3(lastRuleCallOrigin, this, 3, inst);
+			case 4: return new Model_MlCommentValueAssignment_4(lastRuleCallOrigin, this, 4, inst);
+			case 5: return new Model_SlCommentValueAssignment_5(lastRuleCallOrigin, this, 5, inst);
+			case 6: return new Model_WsValueAssignment_6(lastRuleCallOrigin, this, 6, inst);
+			case 7: return new Model_AnyValueAssignment_7(lastRuleCallOrigin, this, 7, inst);
 			default: return null;
 		}	
 	}
@@ -181,16 +182,49 @@ protected class Model_StringValueAssignment_2 extends AssignmentToken  {
 
 }
 
-// mlCommentValue=ML_COMMENT
-protected class Model_MlCommentValueAssignment_3 extends AssignmentToken  {
+// richStringValue=RICH_STRING
+protected class Model_RichStringValueAssignment_3 extends AssignmentToken  {
 	
-	public Model_MlCommentValueAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Model_RichStringValueAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getModelAccess().getMlCommentValueAssignment_3();
+		return grammarAccess.getModelAccess().getRichStringValueAssignment_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("richStringValue",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("richStringValue");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getRichStringValueRICH_STRINGTerminalRuleCall_3_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getModelAccess().getRichStringValueRICH_STRINGTerminalRuleCall_3_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// mlCommentValue=ML_COMMENT
+protected class Model_MlCommentValueAssignment_4 extends AssignmentToken  {
+	
+	public Model_MlCommentValueAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getMlCommentValueAssignment_4();
 	}
 
     @Override
@@ -204,9 +238,9 @@ protected class Model_MlCommentValueAssignment_3 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("mlCommentValue",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("mlCommentValue");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getMlCommentValueML_COMMENTTerminalRuleCall_3_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getMlCommentValueML_COMMENTTerminalRuleCall_4_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getModelAccess().getMlCommentValueML_COMMENTTerminalRuleCall_3_0();
+			element = grammarAccess.getModelAccess().getMlCommentValueML_COMMENTTerminalRuleCall_4_0();
 			return obj;
 		}
 		return null;
@@ -215,15 +249,15 @@ protected class Model_MlCommentValueAssignment_3 extends AssignmentToken  {
 }
 
 // slCommentValue=SL_COMMENT
-protected class Model_SlCommentValueAssignment_4 extends AssignmentToken  {
+protected class Model_SlCommentValueAssignment_5 extends AssignmentToken  {
 	
-	public Model_SlCommentValueAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Model_SlCommentValueAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getModelAccess().getSlCommentValueAssignment_4();
+		return grammarAccess.getModelAccess().getSlCommentValueAssignment_5();
 	}
 
     @Override
@@ -237,9 +271,9 @@ protected class Model_SlCommentValueAssignment_4 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("slCommentValue",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("slCommentValue");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getSlCommentValueSL_COMMENTTerminalRuleCall_4_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getSlCommentValueSL_COMMENTTerminalRuleCall_5_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getModelAccess().getSlCommentValueSL_COMMENTTerminalRuleCall_4_0();
+			element = grammarAccess.getModelAccess().getSlCommentValueSL_COMMENTTerminalRuleCall_5_0();
 			return obj;
 		}
 		return null;
@@ -248,15 +282,15 @@ protected class Model_SlCommentValueAssignment_4 extends AssignmentToken  {
 }
 
 // wsValue=WS
-protected class Model_WsValueAssignment_5 extends AssignmentToken  {
+protected class Model_WsValueAssignment_6 extends AssignmentToken  {
 	
-	public Model_WsValueAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Model_WsValueAssignment_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getModelAccess().getWsValueAssignment_5();
+		return grammarAccess.getModelAccess().getWsValueAssignment_6();
 	}
 
     @Override
@@ -270,9 +304,9 @@ protected class Model_WsValueAssignment_5 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("wsValue",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("wsValue");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getWsValueWSTerminalRuleCall_5_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getWsValueWSTerminalRuleCall_6_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getModelAccess().getWsValueWSTerminalRuleCall_5_0();
+			element = grammarAccess.getModelAccess().getWsValueWSTerminalRuleCall_6_0();
 			return obj;
 		}
 		return null;
@@ -281,15 +315,15 @@ protected class Model_WsValueAssignment_5 extends AssignmentToken  {
 }
 
 // anyValue=ANY_OTHER
-protected class Model_AnyValueAssignment_6 extends AssignmentToken  {
+protected class Model_AnyValueAssignment_7 extends AssignmentToken  {
 	
-	public Model_AnyValueAssignment_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public Model_AnyValueAssignment_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getModelAccess().getAnyValueAssignment_6();
+		return grammarAccess.getModelAccess().getAnyValueAssignment_7();
 	}
 
     @Override
@@ -303,9 +337,9 @@ protected class Model_AnyValueAssignment_6 extends AssignmentToken  {
 	public IEObjectConsumer tryConsume() {
 		if((value = eObjectConsumer.getConsumable("anyValue",true)) == null) return null;
 		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("anyValue");
-		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getAnyValueANY_OTHERTerminalRuleCall_6_0(), value, null)) {
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getModelAccess().getAnyValueANY_OTHERTerminalRuleCall_7_0(), value, null)) {
 			type = AssignmentType.TERMINAL_RULE_CALL;
-			element = grammarAccess.getModelAccess().getAnyValueANY_OTHERTerminalRuleCall_6_0();
+			element = grammarAccess.getModelAccess().getAnyValueANY_OTHERTerminalRuleCall_7_0();
 			return obj;
 		}
 		return null;

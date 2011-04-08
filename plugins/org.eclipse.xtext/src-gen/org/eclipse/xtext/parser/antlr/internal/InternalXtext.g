@@ -2195,6 +2195,16 @@ ruleTerminalTokenElement returns [EObject current=null]
         $current = $this_Wildcard_4.current; 
         afterParserOrEnumRuleCall();
     }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getTerminalTokenElementAccess().getEOFParserRuleCall_5()); 
+    }
+    this_EOF_5=ruleEOF
+    { 
+        $current = $this_EOF_5.current; 
+        afterParserOrEnumRuleCall();
+    }
 )
 ;
 
@@ -2389,6 +2399,37 @@ ruleWildcard returns [EObject current=null]
 )	otherlv_1='.' 
     {
     	newLeafNode(otherlv_1, grammarAccess.getWildcardAccess().getFullStopKeyword_1());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleEOF
+entryRuleEOF returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getEOFRule()); }
+	 iv_ruleEOF=ruleEOF 
+	 { $current=$iv_ruleEOF.current; } 
+	 EOF 
+;
+
+// Rule EOF
+ruleEOF returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getEOFAccess().getEOFAction_0(),
+            $current);
+    }
+)	otherlv_1='EOF' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getEOFAccess().getEOFKeyword_1());
     }
 )
 ;

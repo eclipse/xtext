@@ -96,13 +96,22 @@ public interface TerminalRulesTestLanguagePackage extends EPackage
   int MODEL__STRING_VALUE = 2;
 
   /**
+   * The feature id for the '<em><b>Rich String Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__RICH_STRING_VALUE = 3;
+
+  /**
    * The feature id for the '<em><b>Ml Comment Value</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL__ML_COMMENT_VALUE = 3;
+  int MODEL__ML_COMMENT_VALUE = 4;
 
   /**
    * The feature id for the '<em><b>Sl Comment Value</b></em>' attribute.
@@ -111,7 +120,7 @@ public interface TerminalRulesTestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL__SL_COMMENT_VALUE = 4;
+  int MODEL__SL_COMMENT_VALUE = 5;
 
   /**
    * The feature id for the '<em><b>Ws Value</b></em>' attribute.
@@ -120,7 +129,7 @@ public interface TerminalRulesTestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL__WS_VALUE = 5;
+  int MODEL__WS_VALUE = 6;
 
   /**
    * The feature id for the '<em><b>Any Value</b></em>' attribute.
@@ -129,7 +138,7 @@ public interface TerminalRulesTestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL__ANY_VALUE = 6;
+  int MODEL__ANY_VALUE = 7;
 
   /**
    * The number of structural features of the '<em>Model</em>' class.
@@ -138,7 +147,7 @@ public interface TerminalRulesTestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 7;
+  int MODEL_FEATURE_COUNT = 8;
 
 
   /**
@@ -183,6 +192,17 @@ public interface TerminalRulesTestLanguagePackage extends EPackage
    * @generated
    */
   EAttribute getModel_StringValue();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.Model#getRichStringValue <em>Rich String Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Rich String Value</em>'.
+   * @see org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.Model#getRichStringValue()
+   * @see #getModel()
+   * @generated
+   */
+  EAttribute getModel_RichStringValue();
 
   /**
    * Returns the meta object for the attribute '{@link org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.Model#getMlCommentValue <em>Ml Comment Value</em>}'.
@@ -284,6 +304,14 @@ public interface TerminalRulesTestLanguagePackage extends EPackage
      * @generated
      */
     EAttribute MODEL__STRING_VALUE = eINSTANCE.getModel_StringValue();
+
+    /**
+     * The meta object literal for the '<em><b>Rich String Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MODEL__RICH_STRING_VALUE = eINSTANCE.getModel_RichStringValue();
 
     /**
      * The meta object literal for the '<em><b>Ml Comment Value</b></em>' attribute feature.

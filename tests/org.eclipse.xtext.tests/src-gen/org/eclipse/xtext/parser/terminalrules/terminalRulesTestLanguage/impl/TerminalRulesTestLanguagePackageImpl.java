@@ -138,7 +138,7 @@ public class TerminalRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_MlCommentValue()
+  public EAttribute getModel_RichStringValue()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(3);
   }
@@ -148,7 +148,7 @@ public class TerminalRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_SlCommentValue()
+  public EAttribute getModel_MlCommentValue()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(4);
   }
@@ -158,7 +158,7 @@ public class TerminalRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_WsValue()
+  public EAttribute getModel_SlCommentValue()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(5);
   }
@@ -168,9 +168,19 @@ public class TerminalRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_AnyValue()
+  public EAttribute getModel_WsValue()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getModel_AnyValue()
+  {
+    return (EAttribute)modelEClass.getEStructuralFeatures().get(7);
   }
 
   /**
@@ -207,6 +217,7 @@ public class TerminalRulesTestLanguagePackageImpl extends EPackageImpl implement
     createEAttribute(modelEClass, MODEL__ID_VALUE);
     createEAttribute(modelEClass, MODEL__INT_VALUE);
     createEAttribute(modelEClass, MODEL__STRING_VALUE);
+    createEAttribute(modelEClass, MODEL__RICH_STRING_VALUE);
     createEAttribute(modelEClass, MODEL__ML_COMMENT_VALUE);
     createEAttribute(modelEClass, MODEL__SL_COMMENT_VALUE);
     createEAttribute(modelEClass, MODEL__WS_VALUE);
@@ -248,6 +259,7 @@ public class TerminalRulesTestLanguagePackageImpl extends EPackageImpl implement
     initEAttribute(getModel_IdValue(), ecorePackage.getEString(), "idValue", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getModel_IntValue(), ecorePackage.getEString(), "intValue", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getModel_StringValue(), ecorePackage.getEString(), "stringValue", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_RichStringValue(), ecorePackage.getEString(), "richStringValue", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getModel_MlCommentValue(), ecorePackage.getEString(), "mlCommentValue", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getModel_SlCommentValue(), ecorePackage.getEString(), "slCommentValue", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getModel_WsValue(), ecorePackage.getEString(), "wsValue", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

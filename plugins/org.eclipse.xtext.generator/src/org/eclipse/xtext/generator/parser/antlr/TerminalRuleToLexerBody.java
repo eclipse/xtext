@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.CharacterRange;
+import org.eclipse.xtext.EOF;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.NegatedToken;
@@ -174,6 +175,16 @@ public class TerminalRuleToLexerBody extends XtextSwitch<String>{
 	@Override
 	public String caseWildcard(Wildcard object) {
 		result.append('.');
+		result.append(Strings.emptyIfNull(object.getCardinality()));
+		return "";
+	}
+	
+	/**
+	 * @since 2.0
+	 */
+	@Override
+	public String caseEOF(EOF object) {
+		result.append("EOF");
 		result.append(Strings.emptyIfNull(object.getCardinality()));
 		return "";
 	}

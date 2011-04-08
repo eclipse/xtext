@@ -25,6 +25,7 @@ import org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.Terminal
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.impl.ModelImpl#getIdValue <em>Id Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.impl.ModelImpl#getIntValue <em>Int Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.impl.ModelImpl#getStringValue <em>String Value</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.impl.ModelImpl#getRichStringValue <em>Rich String Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.impl.ModelImpl#getMlCommentValue <em>Ml Comment Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.impl.ModelImpl#getSlCommentValue <em>Sl Comment Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.impl.ModelImpl#getWsValue <em>Ws Value</em>}</li>
@@ -95,6 +96,26 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected String stringValue = STRING_VALUE_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getRichStringValue() <em>Rich String Value</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRichStringValue()
+   * @generated
+   * @ordered
+   */
+  protected static final String RICH_STRING_VALUE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getRichStringValue() <em>Rich String Value</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRichStringValue()
+   * @generated
+   * @ordered
+   */
+  protected String richStringValue = RICH_STRING_VALUE_EDEFAULT;
 
   /**
    * The default value of the '{@link #getMlCommentValue() <em>Ml Comment Value</em>}' attribute.
@@ -271,6 +292,29 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getRichStringValue()
+  {
+    return richStringValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setRichStringValue(String newRichStringValue)
+  {
+    String oldRichStringValue = richStringValue;
+    richStringValue = newRichStringValue;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, TerminalRulesTestLanguagePackage.MODEL__RICH_STRING_VALUE, oldRichStringValue, richStringValue));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public String getMlCommentValue()
   {
     return mlCommentValue;
@@ -374,6 +418,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getIntValue();
       case TerminalRulesTestLanguagePackage.MODEL__STRING_VALUE:
         return getStringValue();
+      case TerminalRulesTestLanguagePackage.MODEL__RICH_STRING_VALUE:
+        return getRichStringValue();
       case TerminalRulesTestLanguagePackage.MODEL__ML_COMMENT_VALUE:
         return getMlCommentValue();
       case TerminalRulesTestLanguagePackage.MODEL__SL_COMMENT_VALUE:
@@ -404,6 +450,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return;
       case TerminalRulesTestLanguagePackage.MODEL__STRING_VALUE:
         setStringValue((String)newValue);
+        return;
+      case TerminalRulesTestLanguagePackage.MODEL__RICH_STRING_VALUE:
+        setRichStringValue((String)newValue);
         return;
       case TerminalRulesTestLanguagePackage.MODEL__ML_COMMENT_VALUE:
         setMlCommentValue((String)newValue);
@@ -440,6 +489,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case TerminalRulesTestLanguagePackage.MODEL__STRING_VALUE:
         setStringValue(STRING_VALUE_EDEFAULT);
         return;
+      case TerminalRulesTestLanguagePackage.MODEL__RICH_STRING_VALUE:
+        setRichStringValue(RICH_STRING_VALUE_EDEFAULT);
+        return;
       case TerminalRulesTestLanguagePackage.MODEL__ML_COMMENT_VALUE:
         setMlCommentValue(ML_COMMENT_VALUE_EDEFAULT);
         return;
@@ -472,6 +524,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return INT_VALUE_EDEFAULT == null ? intValue != null : !INT_VALUE_EDEFAULT.equals(intValue);
       case TerminalRulesTestLanguagePackage.MODEL__STRING_VALUE:
         return STRING_VALUE_EDEFAULT == null ? stringValue != null : !STRING_VALUE_EDEFAULT.equals(stringValue);
+      case TerminalRulesTestLanguagePackage.MODEL__RICH_STRING_VALUE:
+        return RICH_STRING_VALUE_EDEFAULT == null ? richStringValue != null : !RICH_STRING_VALUE_EDEFAULT.equals(richStringValue);
       case TerminalRulesTestLanguagePackage.MODEL__ML_COMMENT_VALUE:
         return ML_COMMENT_VALUE_EDEFAULT == null ? mlCommentValue != null : !ML_COMMENT_VALUE_EDEFAULT.equals(mlCommentValue);
       case TerminalRulesTestLanguagePackage.MODEL__SL_COMMENT_VALUE:
@@ -501,6 +555,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     result.append(intValue);
     result.append(", stringValue: ");
     result.append(stringValue);
+    result.append(", richStringValue: ");
+    result.append(richStringValue);
     result.append(", mlCommentValue: ");
     result.append(mlCommentValue);
     result.append(", slCommentValue: ");

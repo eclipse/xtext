@@ -78,6 +78,7 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory {
 			case XtextPackage.NEGATED_TOKEN: return createNegatedToken();
 			case XtextPackage.UNTIL_TOKEN: return createUntilToken();
 			case XtextPackage.WILDCARD: return createWildcard();
+			case XtextPackage.EOF: return createEOF();
 			case XtextPackage.ENUM_RULE: return createEnumRule();
 			case XtextPackage.ENUM_LITERAL_DECLARATION: return createEnumLiteralDeclaration();
 			case XtextPackage.ALTERNATIVES: return createAlternatives();
@@ -268,6 +269,16 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory {
 	public Wildcard createWildcard() {
 		WildcardImpl wildcard = new WildcardImpl();
 		return wildcard;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOF createEOF() {
+		EOFImpl eof = new EOFImpl();
+		return eof;
 	}
 
 	/**

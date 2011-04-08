@@ -136,9 +136,28 @@ ruleModel returns [EObject current=null]
 )
     |(
 (
-		lv_mlCommentValue_3_0=RULE_ML_COMMENT
+		lv_richStringValue_3_0=RULE_RICH_STRING
 		{
-			newLeafNode(lv_mlCommentValue_3_0, grammarAccess.getModelAccess().getMlCommentValueML_COMMENTTerminalRuleCall_3_0()); 
+			newLeafNode(lv_richStringValue_3_0, grammarAccess.getModelAccess().getRichStringValueRICH_STRINGTerminalRuleCall_3_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getModelRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"richStringValue",
+        		lv_richStringValue_3_0, 
+        		"RICH_STRING");
+	    }
+
+)
+)
+    |(
+(
+		lv_mlCommentValue_4_0=RULE_ML_COMMENT
+		{
+			newLeafNode(lv_mlCommentValue_4_0, grammarAccess.getModelAccess().getMlCommentValueML_COMMENTTerminalRuleCall_4_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -147,7 +166,7 @@ ruleModel returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"mlCommentValue",
-        		lv_mlCommentValue_3_0, 
+        		lv_mlCommentValue_4_0, 
         		"ML_COMMENT");
 	    }
 
@@ -155,9 +174,9 @@ ruleModel returns [EObject current=null]
 )
     |(
 (
-		lv_slCommentValue_4_0=RULE_SL_COMMENT
+		lv_slCommentValue_5_0=RULE_SL_COMMENT
 		{
-			newLeafNode(lv_slCommentValue_4_0, grammarAccess.getModelAccess().getSlCommentValueSL_COMMENTTerminalRuleCall_4_0()); 
+			newLeafNode(lv_slCommentValue_5_0, grammarAccess.getModelAccess().getSlCommentValueSL_COMMENTTerminalRuleCall_5_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -166,7 +185,7 @@ ruleModel returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"slCommentValue",
-        		lv_slCommentValue_4_0, 
+        		lv_slCommentValue_5_0, 
         		"SL_COMMENT");
 	    }
 
@@ -174,9 +193,9 @@ ruleModel returns [EObject current=null]
 )
     |(
 (
-		lv_wsValue_5_0=RULE_WS
+		lv_wsValue_6_0=RULE_WS
 		{
-			newLeafNode(lv_wsValue_5_0, grammarAccess.getModelAccess().getWsValueWSTerminalRuleCall_5_0()); 
+			newLeafNode(lv_wsValue_6_0, grammarAccess.getModelAccess().getWsValueWSTerminalRuleCall_6_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -185,7 +204,7 @@ ruleModel returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"wsValue",
-        		lv_wsValue_5_0, 
+        		lv_wsValue_6_0, 
         		"WS");
 	    }
 
@@ -193,9 +212,9 @@ ruleModel returns [EObject current=null]
 )
     |(
 (
-		lv_anyValue_6_0=RULE_ANY_OTHER
+		lv_anyValue_7_0=RULE_ANY_OTHER
 		{
-			newLeafNode(lv_anyValue_6_0, grammarAccess.getModelAccess().getAnyValueANY_OTHERTerminalRuleCall_6_0()); 
+			newLeafNode(lv_anyValue_7_0, grammarAccess.getModelAccess().getAnyValueANY_OTHERTerminalRuleCall_7_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -204,7 +223,7 @@ ruleModel returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"anyValue",
-        		lv_anyValue_6_0, 
+        		lv_anyValue_7_0, 
         		"ANY_OTHER");
 	    }
 
@@ -221,6 +240,10 @@ RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 RULE_INT : ('0'..'9')+;
 
 RULE_STRING : ('"' (RULE_ESCAPED_CHAR|~(('\\'|'"')))* '"'|'\'' (RULE_ESCAPED_CHAR|~(('\\'|'\'')))* '\'');
+
+RULE_RICH_STRING : '\'\'\'' RULE_IN_RICH_STRING* ('\'\'\''|('\'' '\''?)? EOF);
+
+fragment RULE_IN_RICH_STRING : ('\'\'' ~(('\u00AB'|'\''))|'\'' ~(('\u00AB'|'\''))|~(('\u00AB'|'\'')));
 
 fragment RULE_ESCAPED_CHAR : '\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\');
 

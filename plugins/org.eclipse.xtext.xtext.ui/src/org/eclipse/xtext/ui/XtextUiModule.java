@@ -52,7 +52,7 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 		super.configure(binder);
 		binder.bind(String.class)
 				.annotatedWith(Names.named(XtextContentAssistProcessor.COMPLETION_AUTO_ACTIVATION_CHARS))
-				.toInstance("=[{");
+				.toInstance("[{");
 	}
 
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {

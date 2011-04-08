@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.Model#getIdValue <em>Id Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.Model#getIntValue <em>Int Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.Model#getStringValue <em>String Value</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.Model#getRichStringValue <em>Rich String Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.Model#getMlCommentValue <em>Ml Comment Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.Model#getSlCommentValue <em>Sl Comment Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.Model#getWsValue <em>Ws Value</em>}</li>
@@ -108,6 +109,32 @@ public interface Model extends EObject
    * @generated
    */
   void setStringValue(String value);
+
+  /**
+   * Returns the value of the '<em><b>Rich String Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Rich String Value</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Rich String Value</em>' attribute.
+   * @see #setRichStringValue(String)
+   * @see org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.TerminalRulesTestLanguagePackage#getModel_RichStringValue()
+   * @model
+   * @generated
+   */
+  String getRichStringValue();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.Model#getRichStringValue <em>Rich String Value</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Rich String Value</em>' attribute.
+   * @see #getRichStringValue()
+   * @generated
+   */
+  void setRichStringValue(String value);
 
   /**
    * Returns the value of the '<em><b>Ml Comment Value</b></em>' attribute.
