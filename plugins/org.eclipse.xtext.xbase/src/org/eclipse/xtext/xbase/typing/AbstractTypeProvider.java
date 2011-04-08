@@ -287,9 +287,22 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		return null;
 	}
 	
-	protected static class EarlyExitAcceptor {
+	public static class EarlyExitAcceptor {
 		protected List<JvmTypeReference> returns = newArrayList();
 		protected List<JvmTypeReference> thrown = newArrayList();
+		
+		public List<JvmTypeReference> getReturns() {
+			return returns;
+		}
+		
+		public List<JvmTypeReference> getThrown() {
+			return thrown;
+		}
+
+		public void appendThrown(Iterable<JvmTypeReference> exceptions) {
+			thrown.addAll(newArrayList(exceptions));
+		}
+		
 	}
 	
 	private PolymorphicDispatcher<Void> earlyExits = PolymorphicDispatcher.createForSingleTarget("_earlyExits", 2, 2, this);

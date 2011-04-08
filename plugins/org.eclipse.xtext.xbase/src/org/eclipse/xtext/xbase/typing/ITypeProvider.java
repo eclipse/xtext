@@ -83,11 +83,22 @@ public interface ITypeProvider {
 	
 	/**
 	 * returns all exception types, thrown within the given expression.
+	 * This includes explicitly declared {@link RuntimeException}s as well.
 	 * 
 	 * @param expression May not be <code>null</code>.
 	 * @return the iterable of fully-resolved exception types, if a correct, fully-linkable model is
 	 *         given. <code>null</code> indicates a problem during computation, an empty iterable means no thrown exceptions were found.
 	 */
 	public Iterable<JvmTypeReference> getThrownExceptionTypes(XExpression expression);
+	
+	/**
+	 * returns the exception types, declared to be thrown by referencing / executing the passed {@link JvmIdentifiableElement}.
+	 * This includes explicitly declared {@link RuntimeException}s as well.
+	 * 
+	 * @param identifiable May not be <code>null</code>.
+	 * @return the iterable of fully-resolved exception types, if a correct, fully-linkable model is
+	 *         given. <code>null</code> indicates a problem during computation, an empty iterable means no thrown exceptions were found.
+	 */
+	public Iterable<JvmTypeReference> getThrownExceptionForIdentifiable(JvmIdentifiableElement identifiable);
 
 }
