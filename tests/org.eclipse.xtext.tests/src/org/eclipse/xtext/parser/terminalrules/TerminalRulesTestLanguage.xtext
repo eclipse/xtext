@@ -14,7 +14,8 @@ generate terminalRulesTestLanguage "http://www.eclipse.org/2008/tmf/xtext/Termin
 Model:
   idValue=ID | 
   intValue=INT | 
-  stringValue=STRING | 
+  stringValue=STRING |
+  richStringValue=RICH_STRING | 
   mlCommentValue=ML_COMMENT | 
   slCommentValue=SL_COMMENT | 
   wsValue=WS  |
@@ -26,7 +27,15 @@ terminal INT 		: ('0'..'9')+;
 terminal STRING	: 
 			'"' ( ESCAPED_CHAR | !('\\'|'"') )* '"' |
 			"'" ( ESCAPED_CHAR | !('\\'|"'") )* "'"
-		; 
+		;
+		
+terminal RICH_STRING : "'''" IN_RICH_STRING* ("'''"| ("'" "'"?)? EOF);
+
+terminal fragment IN_RICH_STRING : 
+	  "''" !('«'|"'") 
+	| "'" !('«'|"'")
+	| !('«'|"'");
+
 
 terminal fragment ESCAPED_CHAR: '\\' ('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\');		
 

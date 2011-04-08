@@ -22,6 +22,7 @@ public class ParserTest extends AbstractXtextTests {
 	private EStructuralFeature idFeature;
 	private EStructuralFeature intFeature;
 	private EStructuralFeature stringFeature;
+	private EStructuralFeature richStringFeature;
 	private EStructuralFeature mlCommentFeature;
 	private EStructuralFeature slCommentFeature;
 	private EStructuralFeature wsFeature;
@@ -36,12 +37,19 @@ public class ParserTest extends AbstractXtextTests {
 		idFeature = model.getEStructuralFeature("idValue");
 		intFeature = model.getEStructuralFeature("intValue");
 		stringFeature = model.getEStructuralFeature("stringValue");
+		richStringFeature = model.getEStructuralFeature("richStringValue");
 		mlCommentFeature = model.getEStructuralFeature("mlCommentValue");
 		slCommentFeature = model.getEStructuralFeature("slCommentValue");
 		wsFeature = model.getEStructuralFeature("wsValue");
 		anyOtherFeature = model.getEStructuralFeature("anyValue");
 	}
 
+	public void testSetup() {
+		EPackage pack = TerminalRulesTestLanguagePackage.eINSTANCE;
+		EClass model = (EClass) pack.getEClassifier("Model");
+		assertEquals(model.getEStructuralFeatures().size(), getClass().getDeclaredFields().length);
+	}
+	
 	private void doTest(String expected, String model, EStructuralFeature feature) throws Exception {
 		EObject parsedModel = getModel(model);
 		assertNotNull(parsedModel);
@@ -93,6 +101,38 @@ public class ParserTest extends AbstractXtextTests {
 	
 	public void testString_05() throws Exception {
 		doTest("ab\ncd", "'ab\\ncd'", stringFeature);
+	}
+	
+	public void testString_06() throws Exception {
+		doTest("", "''", stringFeature);
+	}
+	
+	public void testRichString_01() throws Exception {
+		doTest("'''abc'''", "'''abc'''", richStringFeature);
+	}
+
+	public void testRichString_02() throws Exception {
+		doTest("'''\n\\'''", "'''\n\\'''", richStringFeature);
+	}
+
+	public void testRichString_03() throws Exception {
+		doTest("'''ab cd'''", "'''ab cd'''", richStringFeature);
+	}
+	
+	public void testRichString_04() throws Exception {
+		doTest("'''test''", "'''test''", richStringFeature);
+	}
+	
+	public void testRichString_05() throws Exception {
+		doTest("'''test'", "'''test'", richStringFeature);
+	}
+	
+	public void testRichString_06() throws Exception {
+		doTest("'''test", "'''test", richStringFeature);
+	}
+	
+	public void testRichString_07() throws Exception {
+		doTest("'''", "'''", richStringFeature);
 	}
 
 	public void testMlComment_01() throws Exception {
