@@ -676,26 +676,36 @@ ruleJvmTypeParameter :
 ;
 
 RULE_RICH_TEXT :
-	'\'\'\'' RULE_IN_DOUBLE_QUOTE_RICH_STRING* '\'\'\''
+	'\'\'\'' RULE_IN_RICH_STRING* (
+		'\'\'\'' |
+		(
+			'\'' '\''?
+		)? EOF
+	)
 ;
 
 RULE_RICH_TEXT_START :
-	'\'\'\'' RULE_IN_DOUBLE_QUOTE_RICH_STRING* (
+	'\'\'\'' RULE_IN_RICH_STRING* (
 		'\'' '\''?
 	)? '\u00AB'
 ;
 
 RULE_RICH_TEXT_END :
-	'\u00BB' RULE_IN_DOUBLE_QUOTE_RICH_STRING* '\'\'\''
+	'\u00BB' RULE_IN_RICH_STRING* (
+		'\'\'\'' |
+		(
+			'\'' '\''?
+		)? EOF
+	)
 ;
 
 RULE_RICH_TEXT_INBETWEEN :
-	'\u00BB' RULE_IN_DOUBLE_QUOTE_RICH_STRING* (
+	'\u00BB' RULE_IN_RICH_STRING* (
 		'\'' '\''?
 	)? '\u00AB'
 ;
 
-fragment RULE_IN_DOUBLE_QUOTE_RICH_STRING :
+fragment RULE_IN_RICH_STRING :
 	'\'\'' ~ (
 		'\u00AB' |
 		'\''

@@ -1103,7 +1103,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	private TerminalRule tRICH_TEXT_START;
 	private TerminalRule tRICH_TEXT_END;
 	private TerminalRule tRICH_TEXT_INBETWEEN;
-	private TerminalRule tIN_DOUBLE_QUOTE_RICH_STRING;
+	private TerminalRule tIN_RICH_STRING;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -1348,33 +1348,33 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal RICH_TEXT:
-	//	"\'\'\'" IN_DOUBLE_QUOTE_RICH_STRING* "\'\'\'";
+	//	"\'\'\'" IN_RICH_STRING* ("\'\'\'" | ("\'" "\'"?)? EOF);
 	public TerminalRule getRICH_TEXTRule() {
 		return (tRICH_TEXT != null) ? tRICH_TEXT : (tRICH_TEXT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "RICH_TEXT"));
 	} 
 
 	//terminal RICH_TEXT_START:
-	//	"\'\'\'" IN_DOUBLE_QUOTE_RICH_STRING* ("\'" "\'"?)? "«";
+	//	"\'\'\'" IN_RICH_STRING* ("\'" "\'"?)? "«";
 	public TerminalRule getRICH_TEXT_STARTRule() {
 		return (tRICH_TEXT_START != null) ? tRICH_TEXT_START : (tRICH_TEXT_START = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "RICH_TEXT_START"));
 	} 
 
 	//terminal RICH_TEXT_END:
-	//	"»" IN_DOUBLE_QUOTE_RICH_STRING* "\'\'\'";
+	//	"»" IN_RICH_STRING* ("\'\'\'" | ("\'" "\'"?)? EOF);
 	public TerminalRule getRICH_TEXT_ENDRule() {
 		return (tRICH_TEXT_END != null) ? tRICH_TEXT_END : (tRICH_TEXT_END = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "RICH_TEXT_END"));
 	} 
 
 	//terminal RICH_TEXT_INBETWEEN:
-	//	"»" IN_DOUBLE_QUOTE_RICH_STRING* ("\'" "\'"?)? "«";
+	//	"»" IN_RICH_STRING* ("\'" "\'"?)? "«";
 	public TerminalRule getRICH_TEXT_INBETWEENRule() {
 		return (tRICH_TEXT_INBETWEEN != null) ? tRICH_TEXT_INBETWEEN : (tRICH_TEXT_INBETWEEN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "RICH_TEXT_INBETWEEN"));
 	} 
 
-	//terminal fragment IN_DOUBLE_QUOTE_RICH_STRING:
+	//terminal fragment IN_RICH_STRING:
 	//	"\'\'" !("«" | "\'") | "\'" !("«" | "\'") | !("«" | "\'");
-	public TerminalRule getIN_DOUBLE_QUOTE_RICH_STRINGRule() {
-		return (tIN_DOUBLE_QUOTE_RICH_STRING != null) ? tIN_DOUBLE_QUOTE_RICH_STRING : (tIN_DOUBLE_QUOTE_RICH_STRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "IN_DOUBLE_QUOTE_RICH_STRING"));
+	public TerminalRule getIN_RICH_STRINGRule() {
+		return (tIN_RICH_STRING != null) ? tIN_RICH_STRING : (tIN_RICH_STRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "IN_RICH_STRING"));
 	} 
 
 	//XExpression:
