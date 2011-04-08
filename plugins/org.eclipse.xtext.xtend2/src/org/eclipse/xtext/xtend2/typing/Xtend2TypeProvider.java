@@ -7,8 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.typing;
 
+import static com.google.common.collect.Iterables.*;
+import static java.util.Collections.*;
+
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
@@ -16,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmConstraintOwner;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -54,7 +59,7 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 
 	@Inject
 	private XtendOverridesService overridesService;
-
+	
 	protected JvmTypeReference _expectedType(XtendFunction function, EReference reference, int index, boolean rawType) {
 		if (reference == Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION) {
 			if (function.getCreateExtensionInfo()!=null)
@@ -211,6 +216,33 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 	protected JvmTypeReference _typeForIdentifiable(JvmGenericType type, boolean rawType) {
 		XtendClass xtendClass = xtend2jvmAssociations.getXtendClass(type);
 		return (xtendClass != null) ? _typeForIdentifiable(xtendClass, rawType) : null;
+	}
+	
+	@Override
+	public Iterable<JvmTypeReference> getThrownExceptionForIdentifiable(JvmIdentifiableElement identifiable) {
+		if (identifiable instanceof JvmOperation) {
+			final Set<EObject> associatedElements = xtend2jvmAssociations.getAssociatedElements(identifiable);
+			if (associatedElements == null || associatedElements.isEmpty()) {
+				return super.getThrownExceptionForIdentifiable(identifiable);
+			}
+			Iterable<JvmTypeReference> result = emptySet();
+			for (EObject assocEle : associatedElements) {
+				final XtendFunction xtendFunction = (XtendFunction) assocEle;
+				final Iterable<JvmTypeReference> thrownExceptions = getThrownExceptions(xtendFunction);
+				result = concat(result,thrownExceptions);
+			}
+			return result;
+		}
+		return super.getThrownExceptionForIdentifiable(identifiable);
+	}
+
+	protected Iterable<JvmTypeReference> getThrownExceptions(final XtendFunction xtendFunction) {
+		Iterable<JvmTypeReference> thrownExceptionTypes = getThrownExceptionTypes(xtendFunction.getExpression());
+		if (xtendFunction.getCreateExtensionInfo()==null) {
+			return thrownExceptionTypes;
+		}
+		Iterable<JvmTypeReference> thrownExceptionTypesInCreateExpression = getThrownExceptionTypes(xtendFunction.getCreateExtensionInfo().getCreateExpression());
+		return concat(thrownExceptionTypes,thrownExceptionTypesInCreateExpression);
 	}
 	
 }

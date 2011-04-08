@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtend2.compiler;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Sets.*;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -27,6 +28,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
@@ -63,7 +65,6 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.internal.Iterables;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -190,7 +191,9 @@ public class Xtend2Compiler extends XbaseCompiler {
 		a.append(" ");
 		a.append(dispatchOperation.getSimpleName()).append("(");
 		declareParameters(dispatchOperation.getParameters(), a);
-		a.append(") {");
+		a.append(") ");
+		declareExceptions(dispatchOperation, a);
+		a.append("{");
 		a.increaseIndentation();
 		a.append("\n");
 		for (JvmOperation operation : dispatchingSupport.sort(collection)) {
@@ -279,17 +282,8 @@ public class Xtend2Compiler extends XbaseCompiler {
 		final EList<JvmFormalParameter> parameters = obj.getParameters();
 		declareParameters(parameters, appendable);
 		appendable.append(") ");
-		List<JvmTypeReference> checkedExceptions = getCheckedExceptions(obj);
-		if (!checkedExceptions.isEmpty()) {
-			appendable.append("throws ");
-			for (Iterator<JvmTypeReference> iterator = checkedExceptions.iterator(); iterator.hasNext();) {
-				JvmTypeReference jvmTypeReference = iterator.next();
-				serialize(jvmTypeReference, obj, appendable);
-				if (iterator.hasNext())
-					appendable.append(", ");
-			}
-			appendable.append(" ");
-		}
+		JvmOperation operation = associations.getDirectlyInferredOperation(obj);
+		declareExceptions(operation, appendable);
 		appendable.append("{");
 		appendable.increaseIndentation();
 		if (obj.getCreateExtensionInfo()!=null) {
@@ -299,6 +293,23 @@ public class Xtend2Compiler extends XbaseCompiler {
 		}
 		appendable.decreaseIndentation();
 		appendable.append("\n}").closeScope();
+	}
+
+	protected void declareExceptions(JvmOperation obj, IAppendable appendable) {
+		List<JvmTypeReference> checkedExceptions = getCheckedExceptions(obj);
+		Set<JvmType> alreadyDeclared = newHashSet();
+		if (!checkedExceptions.isEmpty()) {
+			appendable.append("throws ");
+			for (Iterator<JvmTypeReference> iterator = checkedExceptions.iterator(); iterator.hasNext();) {
+				JvmTypeReference jvmTypeReference = iterator.next();
+				if (alreadyDeclared.add(jvmTypeReference.getType())) {
+					serialize(jvmTypeReference, obj, appendable);
+					if (iterator.hasNext())
+						appendable.append(", ");
+				}
+			}
+			appendable.append(" ");
+		}
 	}
 
 	protected void compileCreateExtensionBody(XtendFunction obj, IAppendable appendable) {
@@ -401,25 +412,23 @@ public class Xtend2Compiler extends XbaseCompiler {
 		}
 	}
 	
-	protected List<JvmTypeReference> getCheckedExceptions(XtendFunction obj) {
-		Iterable<JvmTypeReference> types = getTypeProvider().getThrownExceptionTypes(obj.getExpression());
-		if (obj.getCreateExtensionInfo()!=null) {
-			types = Iterables.concat(types, getTypeProvider().getThrownExceptionTypes(obj.getCreateExtensionInfo().getCreateExpression()));
-		}
-		List<JvmTypeReference> checkedExceptions = newArrayList();
-		Set<String> identifiers = Sets.newHashSet();
+	protected List<JvmTypeReference> getCheckedExceptions(JvmOperation operation) {
+		Iterable<JvmTypeReference> types = getTypeProvider().getThrownExceptionForIdentifiable(operation);
+		List<JvmTypeReference> result = newArrayList();
+		Set<JvmType> alreadyDeclared = Sets.newHashSet();
 		for (JvmTypeReference jvmTypeReference : types) {
-			if (getTypeReferences().isInstanceOf(jvmTypeReference, Exception.class)) {
-				if (identifiers.add(jvmTypeReference.getIdentifier()))
-					checkedExceptions.add(jvmTypeReference);
+			if (alreadyDeclared.add(jvmTypeReference.getType())) {
+				if (getTypeReferences().isInstanceOf(jvmTypeReference, Exception.class)) {
+					result.add(jvmTypeReference);
+				}
 			}
 		}
-		Collections.sort(checkedExceptions, new Comparator<JvmTypeReference>() {
+		Collections.sort(result, new Comparator<JvmTypeReference>() {
 			public int compare(JvmTypeReference o1, JvmTypeReference o2) {
 				return o1.getIdentifier().compareTo(o2.getIdentifier());
 			}
 		});
-		return checkedExceptions;
+		return result;
 	}
 
 	protected void declareParameters(final EList<JvmFormalParameter> parameters, IAppendable appendable) {
