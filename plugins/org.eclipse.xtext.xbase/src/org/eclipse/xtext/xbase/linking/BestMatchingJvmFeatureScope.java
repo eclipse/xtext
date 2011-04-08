@@ -11,6 +11,7 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
@@ -75,7 +76,7 @@ public class BestMatchingJvmFeatureScope implements IScope {
 				JvmFeatureDescription featureDesc = (JvmFeatureDescription) bestMatch;
 				final XExpression implicitReceiver = featureDesc.getImplicitReceiver();
 				if (implicitReceiver!=null) {
-					featureCall.setImplicitReceiver(implicitReceiver);
+					featureCall.setImplicitReceiver(EcoreUtil2.clone(implicitReceiver));
 				}
 				featureCall.setInvalidFeatureIssueCode(featureDesc.getIssueCode());
 			} else if(this.reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR) {
