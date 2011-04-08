@@ -13,6 +13,7 @@ import static com.google.common.collect.Lists.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
@@ -26,6 +27,9 @@ import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
+import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.LinkedHashMultimap;
@@ -45,11 +49,27 @@ public class DispatchingSupport {
 
 	@Inject
 	private Primitives primitives;
+	
+	@Inject
+	private IXtend2JvmAssociations associations;
 
 	public Multimap<Pair<String, Integer>, JvmOperation> getDispatchMethods(JvmGenericType type) {
 		Multimap<Pair<String, Integer>, JvmOperation> result = LinkedHashMultimap.create();
 		collectDispatchMethods(type, result);
 		return result;
+	}
+	
+	public JvmOperation findSyntheticDispatchMethod(XtendClass clazz, final Pair<String,Integer> signature) {
+		Iterable<XtendFunction> filter = filter(filter(clazz.getMembers(),XtendFunction.class), new Predicate<XtendFunction>() {
+			public boolean apply(XtendFunction input) {
+				return input.isDispatch() && input.getParameters().size()==signature.getSecond() && input.getSimpleName().equals(signature.getFirst()); 
+			}
+		});
+		final Iterator<XtendFunction> iterator = filter.iterator();
+		if (iterator.hasNext()) {
+			return associations.getDispatchOperation(iterator.next());
+		}
+		return null;
 	}
 
 	protected void collectDispatchMethods(final JvmGenericType type, Multimap<Pair<String, Integer>, JvmOperation> result) {

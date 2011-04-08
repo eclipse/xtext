@@ -58,7 +58,6 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
@@ -178,14 +177,8 @@ public class Xtend2Compiler extends XbaseCompiler {
 		JvmGenericType type = associations.getInferredType(obj);
 		Multimap<Pair<String, Integer>, JvmOperation> dispatchMethods = dispatchingSupport.getDispatchMethods(type);
 		for (final Pair<String, Integer> dispatchMethod : dispatchMethods.keySet()) {
-			final Collection<JvmOperation> collection = dispatchMethods.get(dispatchMethod);
-			JvmOperation dispatchOperation = find(type.getDeclaredOperations(), new Predicate<JvmOperation>() {
-				public boolean apply(JvmOperation input) {
-					return dispatchMethod.getFirst().equals(input.getSimpleName())
-							&& dispatchMethod.getSecond().equals(input.getParameters().size());
-				}
-			});
-			generateDispatchMethod(dispatchOperation, collection, appendable);
+			JvmOperation jvmOperation = dispatchingSupport.findSyntheticDispatchMethod(obj, dispatchMethod);
+			generateDispatchMethod(jvmOperation, dispatchMethods.get(dispatchMethod), appendable);
 		}
 	}
 
