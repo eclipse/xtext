@@ -29,6 +29,10 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IFeaturesForTypeProvider;
@@ -99,9 +103,7 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 	protected IScope createLocalVarScope(EObject context, EReference reference, IScope parent,
 			boolean includeCurrentBlock, int idx) {
 		if (context instanceof XtendClass) {
-			return new SimpleScope(parent, newArrayList(
-					EObjectDescription.create(THIS, context), 
-					EObjectDescription.create("super", ((XtendClass) context).getSuperCallReferable())));
+			return getScopeForXtendClass(context, parent);
 		} else if (context instanceof XtendFunction) {
 			XtendFunction func = (XtendFunction) context;
 			EList<JvmFormalParameter> list = func.getParameters();
@@ -123,6 +125,12 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 		return super.createLocalVarScope(context, reference, parent, includeCurrentBlock, idx);
 	}
 
+	protected SimpleScope getScopeForXtendClass(EObject context, IScope parent) {
+		return new SimpleScope(parent, newArrayList(
+				EObjectDescription.create(THIS, context), 
+				EObjectDescription.create("super", ((XtendClass) context).getSuperCallReferable())));
+	}
+
 	@Override
 	protected List<IJvmFeatureDescriptionProvider> getStaticFeatureDescriptionProviders(Resource context,
 			JvmDeclaredType contextType) {
@@ -138,7 +146,7 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 
 	@Override
 	protected List<IJvmFeatureDescriptionProvider> getFeatureDescriptionProviders(JvmTypeReference type,
-			EObject expression, JvmDeclaredType currentContext, JvmIdentifiableElement implicitReceiver) {
+			EObject expression, JvmDeclaredType currentContext, XExpression implicitReceiver) {
 		List<IJvmFeatureDescriptionProvider> result = super.getFeatureDescriptionProviders(type, expression,
 				currentContext, implicitReceiver);
 
@@ -149,21 +157,26 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 
 		if (implicitReceiver == null) {
 			final XtendClass xtendClass = ((XtendFile) expression.eResource().getContents().get(0)).getXtendClass();
+			XFeatureCall callToThis = XbaseFactory.eINSTANCE.createXFeatureCall();
+			callToThis.setFeature(xtendClass);
 			// extensions for this
 			JvmGenericType type2 = xtend2jvmAssociations.getInferredType(xtendClass);
 			JvmParameterizedTypeReference typeRef = typeReferences.createTypeRef(type2);
 			ExtensionMethodsFeaturesProvider featureProvider = extensionMethodsFeaturesProvider.get();
 			featureProvider.setContext(typeRef);
-			insertDescriptionProviders(featureProvider, currentContext, xtendClass, result);
+			insertDescriptionProviders(featureProvider, currentContext, callToThis, result);
 
 			// injected extensions
 			Iterable<DeclaredDependency> iterable = getExtensionDependencies(xtendClass);
 			for (DeclaredDependency declaredDependency : iterable) {
 				JvmIdentifiableElement dependencyImplicitReceiver = findImplicitReceiverFor(declaredDependency);
+				XMemberFeatureCall callToDependency = XbaseFactory.eINSTANCE.createXMemberFeatureCall();
+				callToDependency.setMemberCallTarget(EcoreUtil2.clone(callToThis));
+				callToDependency.setFeature(dependencyImplicitReceiver);
 				if (dependencyImplicitReceiver != null) {
 					featureProvider = extensionMethodsFeaturesProvider.get();
 					featureProvider.setContext(declaredDependency.getType());
-					insertDescriptionProviders(featureProvider, currentContext, dependencyImplicitReceiver, result);
+					insertDescriptionProviders(featureProvider, currentContext, callToDependency, result);
 				}
 			}
 
@@ -190,7 +203,7 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 	}
 
 	protected void insertDescriptionProviders(final IFeaturesForTypeProvider staticProvider,
-			JvmDeclaredType currentContext, JvmIdentifiableElement implicitReceiver,
+			JvmDeclaredType currentContext, XExpression implicitReceiver,
 			List<IJvmFeatureDescriptionProvider> result) {
 		final DefaultJvmFeatureDescriptionProvider defaultProvider = newDefaultFeatureDescProvider();
 		defaultProvider.setFeaturesForTypeProvider(staticProvider);

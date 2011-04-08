@@ -89,7 +89,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		XtendFunction func = (XtendFunction) clazz.getMembers().get(1);
 		final XMemberFeatureCall call = (XMemberFeatureCall)((XBlockExpression)func.getExpression()).getExpressions().get(0);
 		assertEquals("java.lang.String.indexOf(int)", call.getFeature().getIdentifier());
-		assertEquals("Foo.string", call.getImplicitReceiver().getFeature().getIdentifier());
+		assertEquals("Foo.string", ((XMemberFeatureCall)call.getImplicitReceiver()).getFeature().getIdentifier());
 	}
 	
 	public void testCaseFunction_00() throws Exception {
