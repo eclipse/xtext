@@ -224,6 +224,34 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		XtextResource resource = (XtextResource) clazz.eResource();
 		validateWithoutException(resource);
 	}
+	
+	public void testNoExceptionInValidator_02() throws Exception {
+		XtendClass clazz = clazz("package pack class Case_4 {\n" + 
+				"	richStrings_01() {\n" + 
+				"		'''foobar'''\n" + 
+				"	}\n" + 
+				"	richStrings_02() {\n" + 
+				"		'''«'start'»\n" + 
+				"		  first line\n" + 
+				"");
+		assertNoExceptions(clazz);
+		XtextResource resource = (XtextResource) clazz.eResource();
+		validateWithoutException(resource);
+	}
+	
+	public void testNoExceptionInValidator_03() throws Exception {
+		XtendClass clazz = clazz("package pack class Case_4 {\n" + 
+				"	richStrings_01() {\n" + 
+				"		'''foobar'''\n" + 
+				"	}\n" + 
+				"	richStrings_02() {\n" + 
+				"		'''«'start'»\n" + 
+				"		  first line\n'''" + 
+				"");
+		assertNoExceptions(clazz);
+		XtextResource resource = (XtextResource) clazz.eResource();
+		validateWithoutException(resource);
+	}
 
 	protected void validateWithoutException(XtextResource resource) {
 		ResourceValidatorImpl validator = new ResourceValidatorImpl();

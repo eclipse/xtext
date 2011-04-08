@@ -102,9 +102,13 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				XExpression expression = getExpression(assignment, reference, index);
 				List<XExpression> actualArguments = featureCall2javaMapping.getActualArguments(assignment);
 				int actualIndex = actualArguments.indexOf(expression);
-				JvmTypeReference declaredType = getParam(operation, actualIndex).getParameterType();
-				TypeArgumentContext context = getFeatureCallTypeArgContext(assignment, reference, index, rawType);
-				return context.getLowerBound(declaredType);
+				JvmFormalParameter parameter = getParam(operation, actualIndex);
+				if (parameter != null) {
+					JvmTypeReference declaredType = parameter.getParameterType();
+					TypeArgumentContext context = getFeatureCallTypeArgContext(assignment, reference, index, rawType);
+					return context.getLowerBound(declaredType);
+				}
+				return null;
 			} else {
 				final JvmTypeReference type = getTypeForIdentifiable(feature, rawType);
 				if (rawType)

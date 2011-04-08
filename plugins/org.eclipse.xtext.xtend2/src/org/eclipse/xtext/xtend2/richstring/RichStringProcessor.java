@@ -122,6 +122,9 @@ public class RichStringProcessor {
 			List<TextLine> lines = TextLines.splitString(value);
 			switch (lines.size()) {
 				case 0:
+					if (firstEventInLine) {
+						indentationHandler.pushSemanticIndentation("");
+					}
 					return Boolean.TRUE;
 				case 1:
 					handleOnlyLine(object, lines.get(0));
