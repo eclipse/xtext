@@ -28,6 +28,17 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	protected abstract void assertEvaluatesTo(Object object, String string);
 	protected abstract void assertEvaluatesWithException(Class<? extends Throwable> class1, String string);
 	
+	public void testForLoop() throws Exception {
+		String expr = 
+			    "{\n" + 
+				"   val list = newArrayList('foo','bar','baz')\n" + 
+				"   for (x : list.reverse) {\n" + 
+				"	  x.toUpperCase\n" + 
+				"   }\nnull" + 
+				"}";
+		assertEvaluatesTo(null, expr);
+	}
+	
 	public void testReferenceInnerClasses() throws Exception {
 		assertEvaluatesTo(OuterClass.InnerClass.SINGLETON, "testdata::OuterClass$InnerClass::SINGLETON");
 	}
