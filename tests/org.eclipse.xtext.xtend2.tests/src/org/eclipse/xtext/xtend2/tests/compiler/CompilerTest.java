@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtend2.tests.compiler;
 import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 
+import java.io.IOException;
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -48,6 +49,47 @@ import com.google.inject.Injector;
  */
 public class CompilerTest extends AbstractXtend2TestCase {
 	
+	public void testRethrownCheckedExceptions_00() throws Exception {
+		Class<?> clazz = compileJavaCode("x.Y",
+				"package x class Y {" +
+				"  foo() {\n" +
+				"    throw new java.io.IOException()" + 
+				"  }\n" +
+				"  bar(){\n" +
+				"    foo()" +
+				"  }\n" + 
+				"}");
+		Object instance = clazz.newInstance();
+		Method method = clazz.getDeclaredMethod("bar");
+		try {
+			method.invoke(instance);
+		} catch (InvocationTargetException e) {
+			assertTrue(e.getCause() instanceof IOException);
+		}
+	}
+	
+	public void testRethrownCheckedExceptions_01() throws Exception {
+		Class<?> clazz = compileJavaCode("x.Y",
+				"package x class Y {" +
+				"  dispatch foo(String x) {\n" +
+				"    throw new java.io.EOFException()" + 
+				"  }\n" +
+				"  dispatch foo(Object x) {\n" +
+				"    throw new java.io.FileNotFoundException()" + 
+				"  }\n" +
+				"  bar(){\n" +
+				"    foo('bar')" +
+				"  }\n" + 
+		"}");
+		Object instance = clazz.newInstance();
+		Method method = clazz.getDeclaredMethod("bar");
+		try {
+			method.invoke(instance);
+		} catch (InvocationTargetException e) {
+			assertTrue(e.getCause() instanceof java.io.EOFException);
+		}
+	}
+	
 	public void testClazzMembersVisibleWithShadowedThis() throws Exception {
 		Class<?> clazz = compileJavaCode("x.Y",
 				"package x class Y {" +
@@ -57,7 +99,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"  bar(String this){\n" +
 				"    this.toUpperCase" +
 				"  }\n" + 
-				"}");
+		"}");
 		Object instance = clazz.newInstance();
 		Method method = clazz.getDeclaredMethod("foo", String.class);
 		assertEquals("FOO", method.invoke(instance, "foo"));

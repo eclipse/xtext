@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typing;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
+import static java.util.Collections.*;
 
 import java.util.Iterator;
 import java.util.List;
@@ -843,12 +844,18 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		}
 	}
 	
+	protected void _earlyExits(XConstructorCall expr, EarlyExitAcceptor acceptor) {
+		Iterable<JvmTypeReference> thrownExceptions = getThrownExceptionForIdentifiable(expr.getConstructor());
+		if (thrownExceptions!=null) {
+			acceptor.appendThrown(thrownExceptions);
+		}
+		_earlyExits((EObject)expr, acceptor);
+	}
+	
 	protected void _earlyExits(XAbstractFeatureCall expr, EarlyExitAcceptor acceptor) {
-		if (expr.getFeature() instanceof JvmOperation) {
-			JvmOperation op = (JvmOperation) expr.getFeature();
-			// TODO is a declared exception an early exit?
-			List<JvmTypeReference> exceptions = op.getExceptions();
-			acceptor.thrown.addAll(exceptions);
+		Iterable<JvmTypeReference> thrownExceptions = getThrownExceptionForIdentifiable(expr.getFeature());
+		if (thrownExceptions!=null) {
+			acceptor.appendThrown(thrownExceptions);
 		}
 		_earlyExits((EObject)expr, acceptor);
 	}
@@ -874,6 +881,16 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	
 	protected TypesFactory getTypesFactory() {
 		return factory;
+	}
+	
+	public Iterable<JvmTypeReference> getThrownExceptionForIdentifiable(JvmIdentifiableElement identifiable) {
+		if (identifiable==null || identifiable.eIsProxy()) {
+			return emptySet();
+		}
+		if (identifiable instanceof JvmExecutable) {
+			return ((JvmExecutable) identifiable).getExceptions();
+		}
+		return emptySet();
 	}
 	
 }
