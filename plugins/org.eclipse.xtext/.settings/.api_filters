@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component id="org.eclipse.xtext" version="2">
+<resource path="META-INF/MANIFEST.MF">
+<filter id="924844039">
+<message_arguments>
+<message_argument value="2.0.0.qualifier"/>
+<message_argument value="2.0.0.v201104060452"/>
+</message_arguments>
+</filter>
+</resource>
+<resource path="src-gen/org/eclipse/xtext/parseTreeConstruction/XtextParsetreeConstructor.java" type="org.eclipse.xtext.parseTreeConstruction.XtextParsetreeConstructor">
+<filter id="305365105">
+<message_arguments>
+<message_argument value="org.eclipse.xtext.parseTreeConstruction.XtextParsetreeConstructor"/>
+<message_argument value="org.eclipse.xtext_2.0.0"/>
+</message_arguments>
+</filter>
+</resource>
+<resource path="src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtextLexer.java" type="org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer">
+<filter id="305365105">
+<message_arguments>
+<message_argument value="org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer"/>
+<message_argument value="org.eclipse.xtext_2.0.0"/>
+</message_arguments>
+</filter>
+</resource>
+<resource path="src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtextParser.java" type="org.eclipse.xtext.parser.antlr.internal.InternalXtextParser">
+<filter id="305365105">
+<message_arguments>
+<message_argument value="org.eclipse.xtext.parser.antlr.internal.InternalXtextParser"/>
+<message_argument value="org.eclipse.xtext_2.0.0"/>
+</message_arguments>
+</filter>
+</resource>
+<resource path="src-gen/org/eclipse/xtext/services/XtextGrammarAccess.java" type="org.eclipse.xtext.services.XtextGrammarAccess">
+<filter id="305365105">
+<message_arguments>
+<message_argument value="org.eclipse.xtext.services.XtextGrammarAccess"/>
+<message_argument value="org.eclipse.xtext_2.0.0"/>
+</message_arguments>
+</filter>
+</resource>
+</component>
