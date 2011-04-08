@@ -136,9 +136,17 @@ public class RichStringHighlightingCalculator implements ISemanticHighlightingCa
 		}
 
 		protected void highlightClosingQuotes(INode node) {
-			if (node.getText().endsWith("'")) {
-				acceptor.addPosition(currentOffset + node.getLength() - 3, 3,
-						HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
+			int length = 0;
+			if (node.getText().endsWith("'''")) {
+				length = 3;
+			} else if (node.getText().endsWith("''")) {
+				length = 2;
+			} else if (node.getText().endsWith("'")) {
+				length = 1;
+			}
+			if (length != 0) {
+				acceptor.addPosition(currentOffset + node.getLength() - length, length,
+							HighlightingConfiguration.INSIGNIFICANT_TEMPLATE_TEXT);
 			}
 		}
 
