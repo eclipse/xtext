@@ -28,13 +28,16 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	protected abstract void assertEvaluatesTo(Object object, String string);
 	protected abstract void assertEvaluatesWithException(Class<? extends Throwable> class1, String string);
 	
-	
-	public void testReferenceInternalClasses() throws Exception {
+	public void testReferenceInnerClasses() throws Exception {
 		assertEvaluatesTo(OuterClass.InnerClass.SINGLETON, "testdata::OuterClass$InnerClass::SINGLETON");
 	}
 	
-	public void testReferenceInternalClasses_00() throws Exception {
+	public void testReferenceInnerClasses_00() throws Exception {
 		assertEvaluatesTo("FOO", "[testdata.OuterClass$InnerClass param| param.toUpperCase('foo')].apply(new testdata.OuterClass$InnerClass())");
+	}
+	
+	public void testReferenceInnerClasses_01() throws Exception {
+		assertEvaluatesTo(null, "{for (x : newArrayList(new testdata.OuterClass$InnerClass())) { x.toString } null}");
 	}
 	
 	/*
