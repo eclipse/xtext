@@ -122,12 +122,12 @@ RichStringElseIf returns RichStringElseIf:
 	"ELSEIF" if=XExpression then=InternalRichString
 ;
 
-terminal RICH_TEXT : "'''" IN_DOUBLE_QUOTE_RICH_STRING* "'''";
-terminal RICH_TEXT_START : "'''" IN_DOUBLE_QUOTE_RICH_STRING* ("'" "'"?)? '«';
-terminal RICH_TEXT_END : '»' IN_DOUBLE_QUOTE_RICH_STRING* "'''" ;
-terminal RICH_TEXT_INBETWEEN : '»' IN_DOUBLE_QUOTE_RICH_STRING* ("'" "'"?)? '«'; 
+terminal RICH_TEXT : "'''" IN_RICH_STRING* ("'''"| ("'" "'"?)? EOF);
+terminal RICH_TEXT_START : "'''" IN_RICH_STRING* ("'" "'"?)? '«';
+terminal RICH_TEXT_END : '»' IN_RICH_STRING* ("'''"| ("'" "'"?)? EOF) ;
+terminal RICH_TEXT_INBETWEEN : '»' IN_RICH_STRING* ("'" "'"?)? '«'; 
 
-terminal fragment IN_DOUBLE_QUOTE_RICH_STRING : 
+terminal fragment IN_RICH_STRING : 
 	  "''" !('«'|"'") 
 	| "'" !('«'|"'")
 	| !('«'|"'");

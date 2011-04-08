@@ -24,7 +24,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_RICH_TEXT", "RULE_RICH_TEXT_START", "RULE_RICH_TEXT_INBETWEEN", "RULE_RICH_TEXT_END", "RULE_INT", "RULE_IN_DOUBLE_QUOTE_RICH_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'='", "'+='", "'||'", "'&&'", "'=='", "'!='", "'>='", "'<='", "'>'", "'<'", "'->'", "'..'", "'+'", "'-'", "'*'", "'**'", "'/'", "'%'", "'!'", "'.'", "'val'", "'super'", "'false'", "'package'", "'import'", "'class'", "'{'", "'}'", "','", "'extends'", "'implements'", "'@Inject'", "'as'", "'('", "')'", "'create'", "':'", "'FOR'", "'ENDFOR'", "'BEFORE'", "'SEPARATOR'", "'AFTER'", "'IF'", "'ENDIF'", "'ELSE'", "'ELSEIF'", "'instanceof'", "'['", "'|'", "']'", "'if'", "'else'", "'switch'", "'default'", "'case'", "'for'", "'while'", "'do'", "';'", "'::'", "'new'", "'null'", "'typeof'", "'throw'", "'return'", "'try'", "'finally'", "'catch'", "'=>'", "'?'", "'&'", "'static'", "'extension'", "'override'", "'dispatch'", "'?.'", "'*.'", "'var'", "'true'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_STRING", "RULE_RICH_TEXT", "RULE_RICH_TEXT_START", "RULE_RICH_TEXT_INBETWEEN", "RULE_RICH_TEXT_END", "RULE_INT", "RULE_IN_RICH_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'='", "'+='", "'||'", "'&&'", "'=='", "'!='", "'>='", "'<='", "'>'", "'<'", "'->'", "'..'", "'+'", "'-'", "'*'", "'**'", "'/'", "'%'", "'!'", "'.'", "'val'", "'super'", "'false'", "'package'", "'import'", "'class'", "'{'", "'}'", "','", "'extends'", "'implements'", "'@Inject'", "'as'", "'('", "')'", "'create'", "':'", "'FOR'", "'ENDFOR'", "'BEFORE'", "'SEPARATOR'", "'AFTER'", "'IF'", "'ENDIF'", "'ELSE'", "'ELSEIF'", "'instanceof'", "'['", "'|'", "']'", "'if'", "'else'", "'switch'", "'default'", "'case'", "'for'", "'while'", "'do'", "';'", "'::'", "'new'", "'null'", "'typeof'", "'throw'", "'return'", "'try'", "'finally'", "'catch'", "'=>'", "'?'", "'&'", "'static'", "'extension'", "'override'", "'dispatch'", "'?.'", "'*.'", "'var'", "'true'"
     };
     public static final int T__42=42;
     public static final int T__47=47;
@@ -42,7 +42,6 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final int T__49=49;
     public static final int T__54=54;
     public static final int T__48=48;
-    public static final int RULE_IN_DOUBLE_QUOTE_RICH_STRING=11;
     public static final int T__89=89;
     public static final int T__20=20;
     public static final int T__79=79;
@@ -88,6 +87,7 @@ public class InternalXtend2Parser extends AbstractInternalContentAssistParser {
     public static final int T__24=24;
     public static final int T__61=61;
     public static final int T__59=59;
+    public static final int RULE_IN_RICH_STRING=11;
     public static final int T__34=34;
     public static final int T__56=56;
     public static final int RULE_ML_COMMENT=12;
