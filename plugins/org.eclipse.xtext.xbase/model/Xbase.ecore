@@ -49,7 +49,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeArguments" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="implicitReceiver" eType="#//XFeatureCall"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="implicitReceiver" eType="#//XExpression"
         transient="true" derived="true" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="invalidFeatureIssueCode"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" transient="true"/>
