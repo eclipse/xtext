@@ -44,10 +44,10 @@ public class DefaultResourceDescriptionStrategy implements IDefaultResourceDescr
 	}
 	
 	public boolean createEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
-		if (qualifiedNameProvider == null)
+		if (getQualifiedNameProvider() == null)
 			return false;
 		try {
-			QualifiedName qualifiedName = qualifiedNameProvider.getFullyQualifiedName(eObject);
+			QualifiedName qualifiedName = getQualifiedNameProvider().getFullyQualifiedName(eObject);
 			if (qualifiedName != null) {
 				acceptor.accept(EObjectDescription.create(qualifiedName, eObject));
 			}
@@ -94,5 +94,5 @@ public class DefaultResourceDescriptionStrategy implements IDefaultResourceDescr
 	protected boolean isResolvedAndExternal(EObject from, EObject to) {
 		return to != null && !((InternalEObject) to).eIsProxy() && from.eResource() != to.eResource();
 	}
-
+	
 }
