@@ -10,6 +10,7 @@ package org.eclipse.xtext;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>EOF</b></em>'.
+ * @since 2.0
  * <!-- end-user-doc -->
  *
  *

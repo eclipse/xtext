@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>each enum,</li>
  *   <li>and each data type</li>
  * </ul>
+ * @noimplement This interface is not intended to be implemented by clients.
  * <!-- end-user-doc -->
  * @see org.eclipse.xtext.XtextFactory
  * @model kind="package"
@@ -944,39 +945,13 @@ public interface XtextPackage extends EPackage {
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.EOFImpl <em>EOF</em>}' class.
 	 * <!-- begin-user-doc -->
+	 * @since 2.0
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.xtext.impl.EOFImpl
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getEOF()
 	 * @generated
 	 */
-	int EOF = 18;
-
-	/**
-	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOF__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
-
-	/**
-	 * The feature id for the '<em><b>Predicated</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOF__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
-
-	/**
-	 * The number of structural features of the '<em>EOF</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOF_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+	int EOF = 25;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.EnumRuleImpl <em>Enum Rule</em>}' class.
@@ -986,7 +961,7 @@ public interface XtextPackage extends EPackage {
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getEnumRule()
 	 * @generated
 	 */
-	int ENUM_RULE = 19;
+	int ENUM_RULE = 18;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1032,7 +1007,7 @@ public interface XtextPackage extends EPackage {
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getEnumLiteralDeclaration()
 	 * @generated
 	 */
-	int ENUM_LITERAL_DECLARATION = 20;
+	int ENUM_LITERAL_DECLARATION = 19;
 
 	/**
 	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -1087,7 +1062,7 @@ public interface XtextPackage extends EPackage {
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getCompoundElement()
 	 * @generated
 	 */
-	int COMPOUND_ELEMENT = 25;
+	int COMPOUND_ELEMENT = 24;
 
 	/**
 	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -1133,7 +1108,7 @@ public interface XtextPackage extends EPackage {
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getAlternatives()
 	 * @generated
 	 */
-	int ALTERNATIVES = 21;
+	int ALTERNATIVES = 20;
 
 	/**
 	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -1179,7 +1154,7 @@ public interface XtextPackage extends EPackage {
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getUnorderedGroup()
 	 * @generated
 	 */
-	int UNORDERED_GROUP = 22;
+	int UNORDERED_GROUP = 21;
 
 	/**
 	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -1225,7 +1200,7 @@ public interface XtextPackage extends EPackage {
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getGroup()
 	 * @generated
 	 */
-	int GROUP = 23;
+	int GROUP = 22;
 
 	/**
 	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -1271,7 +1246,7 @@ public interface XtextPackage extends EPackage {
 	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getCharacterRange()
 	 * @generated
 	 */
-	int CHARACTER_RANGE = 24;
+	int CHARACTER_RANGE = 23;
 
 	/**
 	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -1317,6 +1292,36 @@ public interface XtextPackage extends EPackage {
 	 * @ordered
 	 */
 	int CHARACTER_RANGE_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Cardinality</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * @since 2.0
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOF__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+	/**
+	 * The feature id for the '<em><b>Predicated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * @since 2.0
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOF__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
+
+	/**
+	 * The number of structural features of the '<em>EOF</em>' class.
+	 * <!-- begin-user-doc -->
+	 * @since 2.0
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EOF_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
 
 
 	/**
@@ -1832,6 +1837,7 @@ public interface XtextPackage extends EPackage {
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.EOF <em>EOF</em>}'.
 	 * <!-- begin-user-doc -->
+	 * @since 2.0
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>EOF</em>'.
 	 * @see org.eclipse.xtext.EOF
@@ -1982,6 +1988,7 @@ public interface XtextPackage extends EPackage {
 	 *   <li>each enum,</li>
 	 *   <li>and each data type</li>
 	 * </ul>
+	 * @noimplement This interface is not intended to be implemented by clients.
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -2409,6 +2416,7 @@ public interface XtextPackage extends EPackage {
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.impl.EOFImpl <em>EOF</em>}' class.
 		 * <!-- begin-user-doc -->
+		 * @since 2.0
 		 * <!-- end-user-doc -->
 		 * @see org.eclipse.xtext.impl.EOFImpl
 		 * @see org.eclipse.xtext.impl.XtextPackageImpl#getEOF()

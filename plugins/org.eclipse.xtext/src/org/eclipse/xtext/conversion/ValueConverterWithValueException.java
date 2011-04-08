@@ -10,7 +10,12 @@ package org.eclipse.xtext.conversion;
 import org.eclipse.xtext.nodemodel.INode;
 
 /**
+ * A value converter exception that carries the value around, that was
+ * recoverable from a badly formatted string or erroneous node.
+ * 
+ * @see IValueConverter#toValue(String, INode)
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @since 2.0
  */
 public class ValueConverterWithValueException extends ValueConverterException {
 

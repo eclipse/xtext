@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EFactory;
  * <!-- begin-user-doc -->
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
+ * @noimplement This interface is not intended to be implemented by clients.
  * <!-- end-user-doc -->
  * @see org.eclipse.xtext.XtextPackage
  * @generated
@@ -190,6 +191,7 @@ public interface XtextFactory extends EFactory {
 	/**
 	 * Returns a new object of class '<em>EOF</em>'.
 	 * <!-- begin-user-doc -->
+	 * @since 2.0
 	 * <!-- end-user-doc -->
 	 * @return a new object of class '<em>EOF</em>'.
 	 * @generated

@@ -725,6 +725,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @since 2.0
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -934,8 +935,6 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 
 		wildcardEClass = createEClass(WILDCARD);
 
-		eofEClass = createEClass(EOF);
-
 		enumRuleEClass = createEClass(ENUM_RULE);
 
 		enumLiteralDeclarationEClass = createEClass(ENUM_LITERAL_DECLARATION);
@@ -954,6 +953,8 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 
 		compoundElementEClass = createEClass(COMPOUND_ELEMENT);
 		createEReference(compoundElementEClass, COMPOUND_ELEMENT__ELEMENTS);
+
+		eofEClass = createEClass(EOF);
 	}
 
 	/**
@@ -997,7 +998,6 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 		negatedTokenEClass.getESuperTypes().add(this.getAbstractNegatedToken());
 		untilTokenEClass.getESuperTypes().add(this.getAbstractNegatedToken());
 		wildcardEClass.getESuperTypes().add(this.getAbstractElement());
-		eofEClass.getESuperTypes().add(this.getAbstractElement());
 		enumRuleEClass.getESuperTypes().add(this.getAbstractRule());
 		enumLiteralDeclarationEClass.getESuperTypes().add(this.getAbstractElement());
 		alternativesEClass.getESuperTypes().add(this.getCompoundElement());
@@ -1005,6 +1005,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 		groupEClass.getESuperTypes().add(this.getCompoundElement());
 		characterRangeEClass.getESuperTypes().add(this.getAbstractElement());
 		compoundElementEClass.getESuperTypes().add(this.getAbstractElement());
+		eofEClass.getESuperTypes().add(this.getAbstractElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(grammarEClass, Grammar.class, "Grammar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1073,8 +1074,6 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 
 		initEClass(wildcardEClass, Wildcard.class, "Wildcard", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(eofEClass, org.eclipse.xtext.EOF.class, "EOF", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(enumRuleEClass, EnumRule.class, "EnumRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(enumLiteralDeclarationEClass, EnumLiteralDeclaration.class, "EnumLiteralDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1093,6 +1092,8 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage {
 
 		initEClass(compoundElementEClass, CompoundElement.class, "CompoundElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompoundElement_Elements(), this.getAbstractElement(), null, "elements", null, 0, -1, CompoundElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(eofEClass, org.eclipse.xtext.EOF.class, "EOF", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -78,7 +78,6 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory {
 			case XtextPackage.NEGATED_TOKEN: return createNegatedToken();
 			case XtextPackage.UNTIL_TOKEN: return createUntilToken();
 			case XtextPackage.WILDCARD: return createWildcard();
-			case XtextPackage.EOF: return createEOF();
 			case XtextPackage.ENUM_RULE: return createEnumRule();
 			case XtextPackage.ENUM_LITERAL_DECLARATION: return createEnumLiteralDeclaration();
 			case XtextPackage.ALTERNATIVES: return createAlternatives();
@@ -86,6 +85,7 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory {
 			case XtextPackage.GROUP: return createGroup();
 			case XtextPackage.CHARACTER_RANGE: return createCharacterRange();
 			case XtextPackage.COMPOUND_ELEMENT: return createCompoundElement();
+			case XtextPackage.EOF: return createEOF();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -273,6 +273,7 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @since 2.0
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */

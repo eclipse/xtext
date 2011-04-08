@@ -210,13 +210,6 @@ public class XtextSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XtextPackage.EOF: {
-				EOF eof = (EOF)theEObject;
-				T result = caseEOF(eof);
-				if (result == null) result = caseAbstractElement(eof);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case XtextPackage.ENUM_RULE: {
 				EnumRule enumRule = (EnumRule)theEObject;
 				T result = caseEnumRule(enumRule);
@@ -266,6 +259,13 @@ public class XtextSwitch<T> {
 				CompoundElement compoundElement = (CompoundElement)theEObject;
 				T result = caseCompoundElement(compoundElement);
 				if (result == null) result = caseAbstractElement(compoundElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtextPackage.EOF: {
+				EOF eof = (EOF)theEObject;
+				T result = caseEOF(eof);
+				if (result == null) result = caseAbstractElement(eof);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -548,6 +548,7 @@ public class XtextSwitch<T> {
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
+	 * @since 2.0
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
 	 * @return the result of interpreting the object as an instance of '<em>EOF</em>'.

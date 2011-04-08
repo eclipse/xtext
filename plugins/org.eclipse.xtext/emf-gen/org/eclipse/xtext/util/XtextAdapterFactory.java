@@ -144,10 +144,6 @@ public class XtextAdapterFactory extends AdapterFactoryImpl {
 				return createWildcardAdapter();
 			}
 			@Override
-			public Adapter caseEOF(EOF object) {
-				return createEOFAdapter();
-			}
-			@Override
 			public Adapter caseEnumRule(EnumRule object) {
 				return createEnumRuleAdapter();
 			}
@@ -174,6 +170,10 @@ public class XtextAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCompoundElement(CompoundElement object) {
 				return createCompoundElementAdapter();
+			}
+			@Override
+			public Adapter caseEOF(EOF object) {
+				return createEOFAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -452,6 +452,7 @@ public class XtextAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * @since 2.0
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
 	 * @see org.eclipse.xtext.EOF

@@ -10,6 +10,9 @@ package org.eclipse.xtext.conversion;
 import org.eclipse.xtext.nodemodel.INode;
 
 /**
+ * A {@link ValueConverterException} indicates an input string or node that cannot be
+ * converted to a semantic value.
+ * @see ValueConverterWithValueException
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("serial")
