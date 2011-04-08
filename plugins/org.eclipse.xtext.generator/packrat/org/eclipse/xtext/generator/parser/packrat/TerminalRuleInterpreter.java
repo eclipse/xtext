@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.CharacterRange;
+import org.eclipse.xtext.EOF;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
@@ -146,6 +147,13 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 			continue OUTER;
 		} while(GrammarUtil.isMultipleCardinality(object));
 		return result || GrammarUtil.isOptionalCardinality(object);
+	}
+	
+	@Override
+	public Boolean caseEOF(EOF object) {
+		if (eof())
+			return Boolean.TRUE;
+		return Boolean.FALSE;
 	}
 
 	@Override
