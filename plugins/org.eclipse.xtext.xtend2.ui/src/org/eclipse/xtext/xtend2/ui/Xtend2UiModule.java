@@ -5,6 +5,7 @@ package org.eclipse.xtext.xtend2.ui;
 
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategy;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.xtend2.ui.highlighting.RichStringHighlightingCalculator
 import org.eclipse.xtext.xtend2.ui.highlighting.ShowWhitespaceCharactersActionContributor;
 import org.eclipse.xtext.xtend2.ui.highlighting.TokenToAttributeIdMapper;
 import org.eclipse.xtext.xtend2.ui.outline.Xtend2OutlineNodeComparator;
+import org.eclipse.xtext.xtend2.ui.outline.Xtend2OutlinePage;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -92,5 +94,10 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 	@Override
 	public Class<? extends ITypesProposalProvider> bindITypesProposalProvider() {
 		return ImportingTypesProposalProvider.class;
+	}
+	
+	@Override
+	public Class<? extends IContentOutlinePage> bindIContentOutlinePage() {
+		return Xtend2OutlinePage.class;
 	}
 }
