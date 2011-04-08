@@ -140,11 +140,15 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 						if (textEdit instanceof ReplaceEdit) {
 							String originalName = getOriginalName();
 							ReplaceEdit edit = (ReplaceEdit) textEdit;
-							String textToReplace = edit.getText();
-							int indexOf = textToReplace.indexOf(originalName);
-							if (indexOf != -1) {
-								int calculatedOffset = edit.getOffset() + indexOf;
-								return new LinkedPosition(getDocument(), calculatedOffset, originalName.length());
+							try {
+								String textToReplace = getDocument().get(edit.getOffset(), edit.getLength());
+								int indexOf = textToReplace.indexOf(originalName);
+								if (indexOf != -1) {
+									int calculatedOffset = edit.getOffset() + indexOf;
+									return new LinkedPosition(getDocument(), calculatedOffset, originalName.length());
+								}
+							} catch(BadLocationException exc) {
+								log.error(exc.getMessage(), exc);
 							}
 						}
 						return null;
