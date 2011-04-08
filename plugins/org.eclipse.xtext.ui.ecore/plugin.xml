@@ -9,4 +9,10 @@
 	          uriExtension="ecore">
 	    </resourceServiceProvider>
 	</extension>
+ <extension
+       point="org.eclipse.xtext.ui.searchFilter">
+    <filter
+          class="org.eclipse.xtext.ui.ecore.search.EcoreSearchFilter">
+    </filter>
+ </extension>
 </plugin>
