@@ -29,6 +29,7 @@ import com.google.inject.Provider;
  * @author Knut Wannheden - Initial contribution and API
  * @author Jan Koehnlein
  */
+@SuppressWarnings("restriction")
 public class XtextDocumentModifyTest extends AbstractXtextTests {
 
 	private Resource resource;
