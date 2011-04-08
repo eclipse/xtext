@@ -103,7 +103,7 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 	protected IScope createLocalVarScope(EObject context, EReference reference, IScope parent,
 			boolean includeCurrentBlock, int idx) {
 		if (context instanceof XtendClass) {
-			return getScopeForXtendClass(context, parent);
+			return getScopeForXtendClass((XtendClass) context, parent);
 		} else if (context instanceof XtendFunction) {
 			XtendFunction func = (XtendFunction) context;
 			EList<JvmFormalParameter> list = func.getParameters();
@@ -125,10 +125,16 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 		return super.createLocalVarScope(context, reference, parent, includeCurrentBlock, idx);
 	}
 
-	protected SimpleScope getScopeForXtendClass(EObject context, IScope parent) {
+	protected SimpleScope getScopeForXtendClass(XtendClass context, IScope parent) {
+		XFeatureCall receiver = XbaseFactory.eINSTANCE.createXFeatureCall();
+		receiver.setFeature(context);
+		JvmTypeReference receiverType = getTypeProvider().getType(receiver, true);
+		parent = createFeatureScopeForTypeRef(receiverType,context, getContextType(context),
+				receiver,
+				parent);
 		return new SimpleScope(parent, newArrayList(
 				EObjectDescription.create(THIS, context), 
-				EObjectDescription.create("super", ((XtendClass) context).getSuperCallReferable())));
+				EObjectDescription.create("super", context.getSuperCallReferable())));
 	}
 
 	@Override
