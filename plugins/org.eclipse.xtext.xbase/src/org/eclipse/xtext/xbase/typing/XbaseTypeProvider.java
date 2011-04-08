@@ -767,7 +767,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				return null;
 			} else if (parameter.eContainer() instanceof XForLoopExpression) {
 				XForLoopExpression forLoop = (XForLoopExpression) parameter.eContainer();
-				JvmTypeReference reference = getType(forLoop.getForExpression(), rawType);
+				JvmTypeReference reference = getType(forLoop.getForExpression(), false);
 				if (reference == null)
 					return null;
 				TypeArgumentContext context = getTypeArgumentContextProvider().getReceiverContext(reference);
