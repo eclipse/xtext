@@ -1,4 +1,10 @@
-
+/*******************************************************************************
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.xtend2.ui.quickfix;
 
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
@@ -10,17 +16,6 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xtend2.validation.IssueCodes;
 
 public class Xtend2QuickfixProvider extends DefaultQuickfixProvider {
-
-//	@Fix(MyJavaValidator.INVALID_NAME)
-//	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {
-//		acceptor.accept(issue, "Capitalize name", "Capitalize the name.", "upcase.png", new IModification() {
-//			public void apply(IModificationContext context) throws BadLocationException {
-//				IXtextDocument xtextDocument = context.getXtextDocument();
-//				String firstLetter = xtextDocument.get(issue.getOffset(), 1);
-//				xtextDocument.replace(issue.getOffset(), 1, firstLetter.toUpperCase());
-//			}
-//		});
-//	}
 
 	@Fix(IssueCodes.INCONSISTENT_INDENTATION)
 	public void fixIndentation(final Issue issue, IssueResolutionAcceptor acceptor) {
