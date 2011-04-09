@@ -80,7 +80,7 @@ public class Xtend2Resource extends XbaseResource {
 			if (eObject instanceof JvmOperation) {
 				JvmOperation op  = (JvmOperation) eObject;
 				JvmTypeReference typeReference = inferReturnType(op);
-				if (typeReference==null)
+				if (typeReference==null || typeReference.getType() == null)
 					return typeReferences.getTypeForName(Object.class, getContents().get(0));
 				if (typeReference.eContainer()!=null && typeReference.eContainer()!=op) {
 					typeReference = EcoreUtil2.cloneWithProxies(typeReference);

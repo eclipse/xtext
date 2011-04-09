@@ -131,6 +131,26 @@ public class TypeProviderErrorTest extends AbstractXtend2TestCase {
 		}
 	}
 	
+	public void testNoException_06() throws Exception {
+		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.typing\n" + 
+				"class NoException {\n" + 
+				"	recursive() {\n" + 
+				"		indirection\n" + 
+				"	}\n" +
+				"   indirection() {\n" +
+				"       recursive()\n" +
+				"   }\n" +
+				"}");
+		Iterator<Object> contents = EcoreUtil.getAllContents(file.eResource(), true);
+		while(contents.hasNext()) {
+			EObject object = (EObject) contents.next();
+			if (object instanceof XExpression) {
+				XExpression expression = (XExpression) object;
+				typeProvider.getThrownExceptionTypes(expression);
+			}
+		}
+	}
+	
 	@Override
 	protected XtendFile file(String string, boolean validate) throws Exception {
 		if (validate)
