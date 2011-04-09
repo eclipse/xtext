@@ -8,8 +8,9 @@
 package org.eclipse.xtext.xtend2.typing;
 
 import static com.google.common.collect.Iterables.*;
-import static java.util.Collections.*;
 
+import java.util.Collection;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -47,10 +48,14 @@ import org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+/**
+ * Type provider that is aware of Xtend specific expressions and the inferred JVM model.
+ */
 @Singleton
 public class Xtend2TypeProvider extends XbaseTypeProvider {
 
@@ -218,6 +223,13 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 		return (xtendClass != null) ? _typeForIdentifiable(xtendClass, rawType) : null;
 	}
 	
+	private final ThreadLocal<Map<JvmIdentifiableElement, Collection<JvmTypeReference>>> ongoingExceptionComputations = new ThreadLocal<Map<JvmIdentifiableElement, Collection<JvmTypeReference>>>() {
+		@Override
+		protected Map<JvmIdentifiableElement, Collection<JvmTypeReference>> initialValue() {
+			return Maps.newHashMap();
+		}
+	};
+	
 	@Override
 	public Iterable<JvmTypeReference> getThrownExceptionForIdentifiable(JvmIdentifiableElement identifiable) {
 		if (identifiable instanceof JvmOperation) {
@@ -225,13 +237,22 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 			if (associatedElements == null || associatedElements.isEmpty()) {
 				return super.getThrownExceptionForIdentifiable(identifiable);
 			}
-			Iterable<JvmTypeReference> result = emptySet();
-			for (EObject assocEle : associatedElements) {
-				final XtendFunction xtendFunction = (XtendFunction) assocEle;
-				final Iterable<JvmTypeReference> thrownExceptions = getThrownExceptions(xtendFunction);
-				result = concat(result,thrownExceptions);
+			Map<JvmIdentifiableElement, Collection<JvmTypeReference>> computations = ongoingExceptionComputations.get();
+			Collection<JvmTypeReference> intermediateResult = computations.get(identifiable);
+			if (intermediateResult != null)
+				return intermediateResult;
+			try {
+				intermediateResult = Sets.newLinkedHashSet();
+				computations.put(identifiable, intermediateResult);
+				for (EObject associatedElement : associatedElements) {
+					final XtendFunction xtendFunction = (XtendFunction) associatedElement;
+					final Iterable<JvmTypeReference> thrownExceptions = getThrownExceptions(xtendFunction);
+					Iterables.addAll(intermediateResult, thrownExceptions);
+				}
+				return intermediateResult;
+			} finally {
+				computations.remove(identifiable);
 			}
-			return result;
 		}
 		return super.getThrownExceptionForIdentifiable(identifiable);
 	}
