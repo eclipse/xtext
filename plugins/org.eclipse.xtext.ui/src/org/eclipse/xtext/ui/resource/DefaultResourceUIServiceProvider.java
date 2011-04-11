@@ -81,12 +81,12 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 		return uriEditorOpener;
 	}
 	
-	@Inject
-	@Nullable
-	private IReferenceUpdater referenceUpdater;
-	
+	/**
+	 * @deprecation use <code>get(IReferenceUpdater.class)</code> instead
+	 */
+	@Deprecated
 	public IReferenceUpdater getReferenceUpdater() {
-		return referenceUpdater;
+		return get(IReferenceUpdater.class);
 	}
 	
 	@Inject
