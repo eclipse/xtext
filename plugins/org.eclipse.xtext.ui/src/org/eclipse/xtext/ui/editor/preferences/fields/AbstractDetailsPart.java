@@ -58,7 +58,7 @@ public abstract class AbstractDetailsPart extends FieldEditorPreferencePage {
 		performDefaults();
 		for (FieldEditor fe : internalEditorsList) {
 			if (fe.presentsDefaultValue()) {
-				internalStore.setDefault(fe.getPreferenceName(), masterPreferenceStore.getDefaultString(fe
+				internalStore.setValue(fe.getPreferenceName(), masterPreferenceStore.getDefaultString(fe
 						.getPreferenceName()));
 			}
 		}
