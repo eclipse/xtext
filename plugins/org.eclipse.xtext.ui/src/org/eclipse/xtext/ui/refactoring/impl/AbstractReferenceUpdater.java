@@ -17,7 +17,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
@@ -62,16 +61,19 @@ public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 			Multimap<URI, IReferenceDescription> resource2references, ResourceSet resourceSet,
 			IRefactoringUpdateAcceptor updateAcceptor, IProgressMonitor monitor);
 
-	protected XtextResource loadTargetResource(ResourceSet resourceSet, ElementRenameArguments elementRenameArguments,
+	/**
+	 * @since 2.0
+	 */
+	protected Resource loadTargetResource(ResourceSet resourceSet, ElementRenameArguments elementRenameArguments,
 			IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, "Loading target resource", 1);
 		Resource targetResource = resourceSet.getResource(elementRenameArguments.getTargetElementURI().trimFragment(),
 				true);
-		if (!(targetResource instanceof XtextResource)) {
+		if (targetResource == null) {
 			throw new RefactoringStatusException("Cannot load target resource", true);
 		}
 		progress.worked(1);
-		return (XtextResource) targetResource;
+		return targetResource;
 	}
 
 	protected void loadReferringResources(ResourceSet resourceSet, Iterable<URI> referringResourceURIs,
