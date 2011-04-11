@@ -35,6 +35,7 @@ import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
@@ -59,27 +60,56 @@ import com.google.inject.Inject;
 
 /**
  * @author Holger Schill - Initial contribution and API
+ * @author Jan Koehnlein
  */
 public class LinkedModelCalculator implements ILinkedModelCalculator {
 
-	@Inject
-	private IDependentElementsCalculator dependentElementsCalculator;
-	@Inject
-	private RefactoringResourceSetProvider resourceSetProvider;
 	@Inject
 	private IWorkspace workspace;
 	@Inject
 	private IWorkbench workbench;
 	@Inject
-	private IRenamedElementTracker renameElementTracker;
-	@Inject
 	private IReferenceFinder referenceFinder;
+	@Inject
+	private RefactoringResourceSetProvider resourceSetProvider;
 	@Inject
 	private IReferenceUpdater referenceUpdater;
 	@Inject
-	private IRenameStrategy.Provider strategyProvider;
-	@Inject
-	private RefactoringReferenceQueryDataFactory queryDataFactory;
+	private IGlobalServiceProvider globalServiceProvider;
+
+	/**
+	 * Components from the language holding the declaration of the refactored element.
+	 * 
+	 * @since 2.0
+	 */
+	protected static class DeclaringLanguageComponents {
+		@Inject
+		private IDependentElementsCalculator dependentElementsCalculator;
+		@Inject
+		private IRenamedElementTracker renameElementTracker;
+		@Inject
+		private IRenameStrategy.Provider strategyProvider;
+		@Inject
+		private RefactoringReferenceQueryDataFactory queryDataFactory;
+
+		public IDependentElementsCalculator getDependentElementsCalculator() {
+			return dependentElementsCalculator;
+		}
+
+		public IRenamedElementTracker getRenameElementTracker() {
+			return renameElementTracker;
+		}
+
+		public IRenameStrategy.Provider getStrategyProvider() {
+			return strategyProvider;
+		}
+
+		public RefactoringReferenceQueryDataFactory getQueryDataFactory() {
+			return queryDataFactory;
+		}
+	}
+
+	private DeclaringLanguageComponents declaringLanguage;
 
 	private ElementRenameArguments renameArguments;
 	private IRenameStrategy renameStrategy;
@@ -93,17 +123,22 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 	private Logger log = Logger.getLogger(LinkedModelCalculator.class);
 
 	public void init(IRenameElementContext renameElementContext) {
+		try {
+			declaringLanguage = globalServiceProvider.findService(renameElementContext.getTargetElementURI(), DeclaringLanguageComponents.class);
+		} catch(Throwable t) {
+			throw new RefactoringStatusException("Cannot get refactoring components from declaring language", true);
+		}
 		this.targetElementURI = renameElementContext.getTargetElementURI();
 		this.contextResourceURI = renameElementContext.getContextResourceURI();
 		resourceSet = resourceSetProvider.get(getProject(targetElementURI));
 		targetElement = resourceSet.getEObject(targetElementURI, true);
-		XtextEditor xtextEditor = (XtextEditor) renameElementContext.getTriggeringEditor();
-		document = xtextEditor.getDocument();
-		viewer = xtextEditor.getInternalSourceViewer();
 		if (targetElement == null) {
 			throw new RefactoringStatusException("Rename target element can not be resolved", true);
 		}
-		this.renameStrategy = strategyProvider.get(targetElement, renameElementContext);
+		XtextEditor xtextEditor = (XtextEditor) renameElementContext.getTriggeringEditor();
+		document = xtextEditor.getDocument();
+		viewer = xtextEditor.getInternalSourceViewer();
+		this.renameStrategy = declaringLanguage.getStrategyProvider().get(targetElement, renameElementContext);
 	}
 
 	public IRenameStrategy getRenameStrategy() {
@@ -116,7 +151,7 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 			getWorkbench().getActiveWorkbenchWindow().run(false, true, new IRunnableWithProgress() {
 				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 					result[0] = internalGetLinkedPositionGroup(monitor);
-					if(monitor.isCanceled()) 
+					if (monitor.isCanceled())
 						result[0] = null;
 					else
 						monitor.done();
@@ -131,7 +166,7 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 	protected LinkedPositionGroup internalGetLinkedPositionGroup(IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, 100);
 		Iterable<TextEdit> edits = computeTextEdits(progress.newChild(80));
-		if(edits == null) 
+		if (edits == null)
 			return null;
 		LinkedPositionGroup group = new LinkedPositionGroup();
 		Iterable<LinkedPosition> linkedPositions = filter(
@@ -147,7 +182,7 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 									int calculatedOffset = edit.getOffset() + indexOf;
 									return new LinkedPosition(getDocument(), calculatedOffset, originalName.length());
 								}
-							} catch(BadLocationException exc) {
+							} catch (BadLocationException exc) {
 								log.error(exc.getMessage(), exc);
 							}
 						}
@@ -193,9 +228,9 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 		SubMonitor progress = SubMonitor.convert(monitor, 100);
 		LinkedModelUpdateAcceptor updateAcceptor = new LinkedModelUpdateAcceptor();
 		String originalName = getOriginalName();
-		Iterable<URI> dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(targetElement,
+		Iterable<URI> dependentElementURIs = declaringLanguage.getDependentElementsCalculator().getDependentElementURIs(targetElement,
 				progress.newChild(1));
-		Map<URI, URI> original2newElementURIs = renameElementTracker.renameAndTrack(
+		Map<URI, URI> original2newElementURIs = declaringLanguage.getRenameElementTracker().renameAndTrack(
 				concat(Collections.singleton(targetElementURI), dependentElementURIs), originalName, resourceSet,
 				renameStrategy, progress.newChild(1));
 		// Handle in contextResourceURI to define that references should looked up only in resource that builds the context
@@ -204,31 +239,31 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 
 		// Declaration in in current Resource
 		if (contextResourceURI.equals(targetElementURI.trimFragment())) {
-			renameStrategy.createDeclarationUpdates(originalName, updateAcceptor);
+			renameStrategy.createDeclarationUpdates(originalName, resourceSet, updateAcceptor);
 		}
 		ReferenceDescriptionAcceptor referenceDescriptionAcceptor = new ReferenceDescriptionAcceptor();
-		IReferenceFinder.IQueryData referenceQueryData = queryDataFactory.create(renameArguments);
+		IReferenceFinder.IQueryData referenceQueryData = declaringLanguage.getQueryDataFactory().create(renameArguments);
 		referenceFinder.findLocalReferences(referenceQueryData, new SimpleLocalResourceAccess(resourceSet),
 				referenceDescriptionAcceptor, progress.newChild(40));
-		if(progress.isCanceled()) 
+		if (progress.isCanceled())
 			return null;
 		Iterable<IReferenceDescription> localRedefernceDescriptions = referenceDescriptionAcceptor
 				.getReferenceDescriptions();
-		referenceUpdater.createReferenceUpdates(renameArguments, localRedefernceDescriptions, updateAcceptor, progress.newChild(48));
-		if(progress.isCanceled()) 
+		referenceUpdater.createReferenceUpdates(renameArguments, localRedefernceDescriptions, updateAcceptor,
+				progress.newChild(48));
+		if (progress.isCanceled())
 			return null;
 		return updateAcceptor.getTextEdits();
 	}
 
-	public IProject getProject(URI targetElementURI) {
-		if (!targetElementURI.isPlatformResource())
+	public IProject getProject(URI elementURI) {
+		if (!elementURI.isPlatformResource())
 			throw new IllegalArgumentException("Refactored element URI must be a platform resource URI: "
-					+ Strings.notNull(targetElementURI));
-		String projectName = targetElementURI.segment(1);
+					+ Strings.notNull(elementURI));
+		String projectName = elementURI.segment(1);
 		IProject project = workspace.getRoot().getProject(projectName);
 		if (project == null)
-			throw new IllegalArgumentException("Cannot find containing project for "
-					+ Strings.notNull(targetElementURI));
+			throw new IllegalArgumentException("Cannot find containing project for " + Strings.notNull(elementURI));
 		return project;
 	}
 
@@ -247,7 +282,7 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 	protected IWorkbench getWorkbench() {
 		return workbench;
 	}
-	
+
 	public static class LinkedModelUpdateAcceptor implements IRefactoringUpdateAcceptor {
 
 		private Set<TextEdit> edits = Sets.newHashSet();

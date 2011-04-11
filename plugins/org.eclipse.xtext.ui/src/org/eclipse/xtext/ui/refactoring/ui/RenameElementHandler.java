@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
-import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
@@ -36,8 +35,8 @@ public class RenameElementHandler extends AbstractHandler {
 	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
 
 	@Inject
-	private IGlobalServiceProvider globalServiceProvider;	
-
+	private RenameElementOperation renameElementOperation;
+	
 	protected static final Logger LOG = Logger.getLogger(RenameElementHandler.class);
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -60,15 +59,11 @@ public class RenameElementHandler extends AbstractHandler {
 							}
 						});
 				if (renameElementContext != null) {
-					// refactoring target could be from another language
-					RenameElementOperation renameElementOperation = globalServiceProvider.findService(
-							renameElementContext.getTargetElementURI().trimFragment(), RenameElementOperation.class);
-					if (renameElementOperation != null)
-						renameElementOperation.execute(renameElementContext);
+					renameElementOperation.execute(renameElementContext);
 				}
 			}
 		} catch (Exception exc) {
-			LOG.error(exc);
+			LOG.error(exc.getMessage(), exc);
 		}
 		return null;
 	}
@@ -78,7 +73,6 @@ public class RenameElementHandler extends AbstractHandler {
 		protected Provider<RenameLinkedMode> renameLinkedModeProvider;
 		
 		public void execute(IRenameElementContext renameElementContext) throws InterruptedException {
-			
 			RenameLinkedMode activeLinkedMode = RenameLinkedMode.getActiveLinkedMode();
 			if (activeLinkedMode != null) {
 				if (activeLinkedMode.isCaretInLinkedPosition()) {
@@ -90,7 +84,6 @@ public class RenameElementHandler extends AbstractHandler {
 			} 
 			activeLinkedMode = renameLinkedModeProvider.get();
 			activeLinkedMode.start(renameElementContext);
-						
 		}
 	}
 }
