@@ -1,11 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.ui" version="2">
-<resource path="META-INF/MANIFEST.MF">
-<filter comment="Introduced new constant for SL_COMMENT partition type" id="924844039">
-<message_arguments>
-<message_argument value="2.0.0.qualifier"/>
-<message_argument value="2.0.0.v201104091304"/>
-</message_arguments>
-</filter>
-</resource>
+    <resource path="META-INF/MANIFEST.MF">
+        <filter comment="Introduced new constant for SL_COMMENT partition type" id="924844039">
+            <message_arguments>
+                <message_argument value="2.0.0.qualifier"/>
+                <message_argument value="2.0.0.v201104091304"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/resource/DefaultResourceUIServiceProvider.java" type="org.eclipse.xtext.ui.resource.DefaultResourceUIServiceProvider">
+        <filter comment="Refactoring is no longer public API" id="643842064">
+            <message_arguments>
+                <message_argument value="IReferenceUpdater"/>
+                <message_argument value="DefaultResourceUIServiceProvider"/>
+                <message_argument value="getReferenceUpdater()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/resource/IResourceUIServiceProvider.java" type="org.eclipse.xtext.ui.resource.IResourceUIServiceProvider">
+        <filter comment="Refactoring is no longer public API" id="643842064">
+            <message_arguments>
+                <message_argument value="IReferenceUpdater"/>
+                <message_argument value="IResourceUIServiceProvider"/>
+                <message_argument value="getReferenceUpdater()"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>

@@ -269,7 +269,7 @@
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
 			
 			// rename refactoring  
-			fragment = refactoring.RefactorElementNameFragment {}
+			// fragment = refactoring.RefactorElementNameFragment {}
 			
 			// provides a compare view
 			fragment = compare.CompareFragment {
