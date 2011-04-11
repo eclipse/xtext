@@ -406,4 +406,18 @@ public class AutoEditInCodeBlockTest extends AutoEditTest {
 		pressKey(editor, '\n');
 		assertState("  // test\n\t|\n", editor);
 	}
+	
+	@Override
+	public void testBug338423_01() throws Exception {
+		XtextEditor editor = openEditor("[{|}]");
+		pressKey(editor, '\n');
+		assertState("[{\n\t\t|\n\t}]", editor);
+	}
+	
+	@Override
+	public void testBug338423_02() throws Exception {
+		XtextEditor editor = openEditor("[{}|]");
+		pressKey(editor, '\n');
+		assertState("[{}\n\t\t|\n\t]", editor);
+	}
 }
