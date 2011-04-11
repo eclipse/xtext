@@ -23,7 +23,9 @@ import org.eclipse.xtext.ui.editor.LanguageSpecificURIEditorOpener;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.ui.label.InjectableAdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
+import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.EmfResourceReferenceUpdater;
+import org.eclipse.xtext.ui.refactoring.impl.EmfResourceRenameStrategy;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
 
@@ -86,6 +88,13 @@ public class EmfUiModule extends AbstractGenericModule {
 	
 	public Class<? extends IResourceSetProvider> bindIResourceSetProvider() {
 		return SimpleResourceSetProvider.class;
+	}
+	
+	/**
+	 * @since 2.0
+	 */
+	public Class<? extends IRenameStrategy.Provider> bindIRenameStrategy$Provider() {
+		return EmfResourceRenameStrategy.Provider.class;
 	}
 	
 	public Class<? extends IReferenceUpdater> bindIReferenceUpdater() {

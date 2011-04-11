@@ -7,16 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
-import java.io.ByteArrayOutputStream;
-
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.text.edits.ReplaceEdit;
-import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
@@ -36,7 +32,7 @@ import com.google.inject.Inject;
 public class EmfResourceReferenceUpdater extends AbstractReferenceUpdater {
 
 	@Inject
-	private IEncodingProvider encodingProvider;
+	private EmfResourceChangeUtil changeUtil;
 
 	@Override
 	protected void createReferenceUpdates(ElementRenameArguments elementRenameArguments,
@@ -49,13 +45,7 @@ public class EmfResourceReferenceUpdater extends AbstractReferenceUpdater {
 				if (progress.isCanceled())
 					break;
 				Resource referringResource = resourceSet.getResource(referringResourceURI, false);
-				IRefactoringDocument referringDocument = updateAcceptor.getDocument(referringResourceURI);
-				ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-				referringResource.save(outputStream, null);
-				String newContent = new String(outputStream.toByteArray(),
-						encodingProvider.getEncoding(referringResourceURI));
-				updateAcceptor.accept(referringResourceURI, new ReplaceEdit(0, referringDocument.getOriginalContents()
-						.length(), newContent));
+				changeUtil.addSaveAsUpdate(referringResource, updateAcceptor);
 				progress.worked(1);
 			} catch (Exception exc) {
 				throw new WrappedException(exc);
