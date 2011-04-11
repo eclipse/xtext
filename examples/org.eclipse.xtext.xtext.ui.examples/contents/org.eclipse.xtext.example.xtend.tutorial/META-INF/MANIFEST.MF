@@ -5,3 +5,6 @@ Bundle-SymbolicName: org.eclipse.xtext.example.xtend.tutorial
 Bundle-Version: 2.0.0.qualifier
 Bundle-Vendor: Eclipse Modeling
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.eclipse.xtext.xtend2.lib;bundle-version="2.0.0",
+ org.junit4,
+ org.aopalliance;bundle-version="1.0.0"

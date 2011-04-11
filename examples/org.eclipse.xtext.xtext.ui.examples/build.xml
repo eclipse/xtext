@@ -40,6 +40,7 @@
 		<zip_example name="org.eclipse.xtext.example.gmf.models" />
 		<zip_example name="org.eclipse.xtext.example.gmf.ui" />
 		<zip_example name="org.eclipse.xtext.example.xbase.tutorial" />
+		<zip_example name="org.eclipse.xtext.example.xtend.tutorial" />
 		<zip_example name="org.eclipse.xtext.gmf.glue" />
 	</target>
 
