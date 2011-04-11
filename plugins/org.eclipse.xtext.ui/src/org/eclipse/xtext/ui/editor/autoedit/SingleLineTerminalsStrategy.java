@@ -80,7 +80,7 @@ public class SingleLineTerminalsStrategy extends AbstractTerminalsEditStrategy {
 			int opening = count(getLeftTerminal(), documentContent);
 			int closing = count(getRightTerminal(), documentContent);
 			int occurences = opening + closing;
-			if (occurences % 2 == 0) {
+			if (occurences % 2 == 0 && (command.text.length() - command.length + documentContent.length() >= getLeftTerminal().length())) {
 				command.caretOffset = command.offset + command.text.length();
 				command.text = command.text + getRightTerminal();
 				command.shiftsCaret = false;
