@@ -70,6 +70,19 @@ public class RichStringValidationTest extends AbstractRichStringTest {
 		validationTestHelper.assertNoIssues(richString);
 	}
 	
+	public void testRichStringValidation_07() throws Exception {
+		RichString richString = richString("'''  content  '''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testRichStringValidation_08() throws Exception {
+		RichString richString = richString("'''  \n"
+				+ "\t\tindentedLine\n"
+				+ "\t\tindentedLine\n"
+				+ "'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
 	public void testNoException_01() throws Exception {
 		RichString richString = richString(
 				"'''«'start'»\n" + 
@@ -127,6 +140,101 @@ public class RichStringValidationTest extends AbstractRichStringTest {
 				"'''«'start'»\n" + 
 				"		  first line\n" +
 				"«'end'»'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testNoException_09() throws Exception {
+		RichString richString = richString(
+		"'''«'start'»'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testNoException_10() throws Exception {
+		RichString richString = richString(
+				"'''  «'test'»'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testBug342438_01() throws Exception {
+		RichString richString = richString(
+				"'''\n" + 
+				"  «FOR c : 'test'.bytes»«'test123'»\n" + 
+				"  «ENDFOR»\n" + 
+				"  «FOR c : 'test'.bytes»«'test123'»\n" + 
+				"  «ENDFOR»\n" + 
+				"  «FOR c : 'test'.bytes»«'test123'»\n" + 
+				"  «ENDFOR»\n" + 
+				"'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testBug342438_02() throws Exception {
+		RichString richString = richString(
+				"'''\n" + 
+				"  «FOR c : 'test'.bytes»«'test123'»«ENDFOR»\n" + 
+				"  «FOR c : 'test'.bytes»«'test123'»«ENDFOR»\n" + 
+				"  «FOR c : 'test'.bytes»«'test123'»«ENDFOR»\n" + 
+				"'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testBug342438_03() throws Exception {
+		RichString richString = richString(
+				"'''\n" + 
+				"  «FOR c : 'test'.bytes»\n" +
+				"    «'test123'»«ENDFOR»\n" + 
+				"  «FOR c : 'test'.bytes»\n" +
+				"    «'test123'»«ENDFOR»\n" + 
+				"  «FOR c : 'test'.bytes»\n" +
+				"    «'test123'»«ENDFOR»\n" + 
+				"'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testBug342438_04() throws Exception {
+		RichString richString = richString(
+				"'''\n" + 
+				"  «FOR c : 'test'.bytes»«FOR c : 'test'.bytes»«'test123'»«ENDFOR»\n" + 
+				"  «ENDFOR»\n" + 
+				"  «FOR c : 'test'.bytes»«FOR c : 'test'.bytes»«'test123'»\n" + 
+				"  «ENDFOR»«ENDFOR»\n" + 
+				"  «FOR c : 'test'.bytes»«FOR c : 'test'.bytes»«FOR c : 'test'.bytes»«'test123'»«ENDFOR»\n" + 
+				"  «ENDFOR»«ENDFOR»\n" + 
+				"'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testBug342438_05() throws Exception {
+		RichString richString = richString(
+				"'''«FOR a: 'test'.bytes»\n" +
+				"   foo\n" +
+				"«ENDFOR»'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testBug342438_06() throws Exception {
+		RichString richString = richString(
+				"'''«FOR a: ''.bytes»foobar«ENDFOR»'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testBug342438_07() throws Exception {
+		RichString richString = richString(
+				"'''«FOR a:'1'.bytes»«FOR a:''.bytes»foobar«ENDFOR»«ENDFOR»'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testBug342438_08() throws Exception {
+		RichString richString = richString(
+				"'''  «FOR a:'1'.bytes»«FOR a:'1'.toCharArray»foobar«ENDFOR»«ENDFOR»'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testBug342438_09() throws Exception {
+		RichString richString = richString(
+				"'''  «FOR a: '123'.toCharArray»\n" +
+				"      a,\n" +
+				"  «ENDFOR»'''");
 		validationTestHelper.assertNoIssues(richString);
 	}
 
