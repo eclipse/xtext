@@ -82,7 +82,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	private ElementRenameArguments renameArguments;
 
 	@Override
-	public void initialize(final IRenameElementContext renameElementContext) {
+	public boolean initialize(final IRenameElementContext renameElementContext) {
 		status = new RefactoringStatus();
 		try {
 			this.targetElementURI = renameElementContext.getTargetElementURI();
@@ -92,9 +92,12 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 				throw new RefactoringStatusException("Rename target element can not be resolved", true);
 			}
 			this.renameStrategy = strategyProvider.get(targetElement, renameElementContext);
+			if(this.renameStrategy == null)
+				return false;
 		} catch (Exception e) {
 			handleException(status, e);
 		}
+		return true;
 	}
 
 	public IProject getProject(URI targetElementURI) {

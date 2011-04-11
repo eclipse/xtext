@@ -22,7 +22,7 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(RenameElementProcessor.class)
 public abstract class AbstractRenameProcessor extends RenameProcessor {
 
-	public abstract void initialize(IRenameElementContext renameElementContext);
+	public abstract boolean initialize(IRenameElementContext renameElementContext);
 
 	public abstract IRenameStrategy getRenameElementStrategy();
 
