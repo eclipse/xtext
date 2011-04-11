@@ -38,8 +38,9 @@ public interface IRenameStrategy {
 	
 	/**
 	 * Creates the document updates and reports them to the updateAcceptor
+	 * @since 2.0
 	 */
-	void createDeclarationUpdates(String newName, IRefactoringUpdateAcceptor updateAcceptor);
+	void createDeclarationUpdates(String newName, ResourceSet resourceSet, IRefactoringUpdateAcceptor updateAcceptor);
 
 	@ImplementedBy(DefaultRenameStrategy.Provider.class)
 	interface Provider {

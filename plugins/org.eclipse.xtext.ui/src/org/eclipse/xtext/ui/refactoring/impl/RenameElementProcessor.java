@@ -163,7 +163,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 			Map<URI, URI> original2newElementURIs = renameElementTracker.renameAndTrack(
 					concat(Collections.singleton(targetElementURI), dependentElementURIs), newName, resourceSet,
 					renameStrategy, progress.newChild(1));
-			renameStrategy.createDeclarationUpdates(newName, updateAcceptor);
+			renameStrategy.createDeclarationUpdates(newName, resourceSet, updateAcceptor);
 
 			renameArguments = new ElementRenameArguments(targetElementURI, newName, renameStrategy,
 					original2newElementURIs, true);
