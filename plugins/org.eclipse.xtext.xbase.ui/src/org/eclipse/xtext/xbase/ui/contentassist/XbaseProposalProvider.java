@@ -163,9 +163,13 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	@Override
 	public void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
 			ICompletionProposalAcceptor acceptor) {
-		if (keyword.getValue().length() > 1 && Character.isLetter(keyword.getValue().charAt(0))) { 
+		if (isKeywordWorthyToPropose(keyword)) { 
 			super.completeKeyword(keyword, contentAssistContext, acceptor);
 		}
+	}
+
+	protected boolean isKeywordWorthyToPropose(Keyword keyword) {
+		return keyword.getValue().length() > 1 && Character.isLetter(keyword.getValue().charAt(0));
 	}
 	
 	@Override

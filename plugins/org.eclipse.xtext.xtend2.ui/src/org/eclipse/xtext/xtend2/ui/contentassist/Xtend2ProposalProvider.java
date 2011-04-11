@@ -3,16 +3,22 @@
 */
 package org.eclipse.xtext.xtend2.ui.contentassist;
 
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.xtend2.services.Xtend2GrammarAccess;
 import org.eclipse.xtext.xtend2.ui.contentassist.AbstractXtend2ProposalProvider;
 
 import com.google.common.base.Predicate;
+import com.google.inject.Inject;
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */
 public class Xtend2ProposalProvider extends AbstractXtend2ProposalProvider {
 
+	@Inject
+	private Xtend2GrammarAccess grammarAccess;
+	
 	@Override
 	protected Predicate<IEObjectDescription> getFeatureDescriptionPredicate(ContentAssistContext contentAssistContext) {
 		if (contentAssistContext.getPrefix().startsWith("_"))
@@ -25,6 +31,12 @@ public class Xtend2ProposalProvider extends AbstractXtend2ProposalProvider {
 			}
 			
 		};
+	}
+	
+	@Override
+	protected boolean isKeywordWorthyToPropose(Keyword keyword) {
+		return grammarAccess.getDeclaredDependencyAccess().getInjectKeyword_0() == keyword || 
+			super.isKeywordWorthyToPropose(keyword);
 	}
 	
 }
