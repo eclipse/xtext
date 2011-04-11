@@ -119,7 +119,6 @@ public class RichStringHighlightingCalculatorTest extends AbstractXtend2UITestCa
 			"  '''";
 		expect(0, 3);
 		expect(model.indexOf('\t'), 2);
-		expect(model.indexOf(' '), 1);
 		expect(model.indexOf("  "), 2);
 		expect(model.lastIndexOf("'''"), 3);
 		expect(17,1,HighlightingConfiguration.POTENTIAL_LINE_BREAK);

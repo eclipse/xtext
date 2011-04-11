@@ -17,4 +17,10 @@
             genModel="model/Xtend2.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/xtext/Xtend2/RichString"
+            class="org.eclipse.xtext.xtend2.richstring.ProcessedRichStringPackage"
+            genModel="model/Xtend2.genmodel"/>
+   </extension>
 </plugin>

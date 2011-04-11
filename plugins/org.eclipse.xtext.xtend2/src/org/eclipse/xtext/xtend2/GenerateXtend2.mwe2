@@ -29,6 +29,13 @@ Workflow {
 		srcPath ="platform:/resource/org.eclipse.xtext.common.types/src"
 		srcPath ="platform:/resource/org.eclipse.xtext.xbase/src"
 	}
+	
+	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
+		genModel = "platform:/resource/${projectName}/model/RichStrings.genmodel"
+		srcPath ="platform:/resource/${projectName}/src"
+		srcPath ="platform:/resource/org.eclipse.xtext.common.types/src"
+		srcPath ="platform:/resource/org.eclipse.xtext.xbase/src"
+	}
 
 	component = DirectoryCleaner {
 		directory = "${runtimeProject}/src-gen"

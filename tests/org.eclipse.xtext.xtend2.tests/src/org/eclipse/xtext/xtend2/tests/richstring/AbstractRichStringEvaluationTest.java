@@ -354,6 +354,22 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 				"		  \n" +
 				"'''");
 	}
+	
+	public void testTrailingEmptyLine_08() throws Exception {
+		assertOutput(
+				"\n", 
+				"'''\n" +
+				"\n" +
+				"'''");
+	}
+	
+	public void testTrailingWhitespace_01() throws Exception {
+		assertOutput(
+				"foobar \n", 
+				"'''\n" +
+				"\t\t«'foobar'» \n" +
+				"'''");
+	}
 
 	public void testForLoop_01() throws Exception {
 		assertOutput(
