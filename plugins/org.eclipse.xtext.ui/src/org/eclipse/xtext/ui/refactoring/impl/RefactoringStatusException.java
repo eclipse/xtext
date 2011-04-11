@@ -20,6 +20,14 @@ public class RefactoringStatusException extends RuntimeException {
 	private static final long serialVersionUID = 6796021485044787459L;
 	private final boolean isFatal;
 
+	/**
+	 * @since 2.0
+	 */
+	public RefactoringStatusException(Throwable cause, boolean isFatal) {
+		super(cause);
+		this.isFatal = isFatal;
+	}
+
 	public RefactoringStatusException(String message, boolean isFatal) {
 		super(message);
 		this.isFatal = isFatal;
