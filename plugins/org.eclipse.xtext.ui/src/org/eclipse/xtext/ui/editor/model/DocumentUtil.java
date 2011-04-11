@@ -34,6 +34,10 @@ public class DocumentUtil {
 			} 
 			indexOf=preProcessSearchString(document.get(0, partition2.getOffset())).lastIndexOf(toFind);
 		}
+		String trimmed = toFind.trim();
+		if (trimmed.length() > 0 && trimmed.length() != toFind.length()) {
+			return searchBackwardsInSamePartition(trimmed, document, endOffset);
+		}
 		return null;
 	}
 	
@@ -50,6 +54,10 @@ public class DocumentUtil {
 			return null;
 		ITypedRegion partition = document.getPartition(startOffset);
 		int ignoredPrefix = startOffset;
+		int subtractMe = 0;
+		while(toFind.length() > subtractMe && Character.isWhitespace(toFind.charAt(subtractMe)))
+			subtractMe++;
+		ignoredPrefix = Math.max(ignoredPrefix - subtractMe, 0);
 		int indexOf = preProcessSearchString(document.get().substring(ignoredPrefix)).indexOf(toFind);
 		if (indexOf!=-1)
 			indexOf+=ignoredPrefix;
@@ -62,6 +70,10 @@ public class DocumentUtil {
 			indexOf=preProcessSearchString(document.get().substring(ignoredPrefix)).indexOf(toFind);
 			if (indexOf!=-1)
 				indexOf+=ignoredPrefix;
+		}
+		String trimmed = toFind.trim();
+		if (trimmed.length() > 0 && trimmed.length() != toFind.length()) {
+			return searchInSamePartition(trimmed, document, startOffset);
 		}
 		return null;
 	}
