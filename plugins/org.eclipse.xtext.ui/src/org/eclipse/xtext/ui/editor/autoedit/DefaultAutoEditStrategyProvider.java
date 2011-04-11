@@ -14,7 +14,6 @@ import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -31,7 +30,12 @@ public class DefaultAutoEditStrategyProvider extends AbstractEditStrategyProvide
 	protected SingleLineTerminalsStrategy.Factory singleLineTerminals;
 	@Inject
 	protected MultiLineTerminalsEditStrategy.Factory multiLineTerminals;
-
+	
+	/**
+	 * @since 2.0
+	 */
+	@Inject
+	protected CompoundMultiLineTerminalsEditStrategy.Factory compoundMultiLineTerminals;
 	
 	@Override
 	protected void configure(IEditStrategyAcceptor acceptor) {
@@ -41,6 +45,14 @@ public class DefaultAutoEditStrategyProvider extends AbstractEditStrategyProvide
 		configureSquareBrackets(acceptor);
 		configureCurlyBracesBlock(acceptor);
 		configureMultilineComments(acceptor);
+		configureCompoundBracesBlocks(acceptor);
+	}
+
+	/**
+	 * @since 2.0
+	 */
+	protected void configureCompoundBracesBlocks(IEditStrategyAcceptor acceptor) {
+		acceptor.accept(compoundMultiLineTerminals.newInstanceFor("{", "}").and("[", "]").and("(", ")"), IDocument.DEFAULT_CONTENT_TYPE);
 	}
 
 	protected void configureIndentationEditStrategy(IEditStrategyAcceptor acceptor) {
@@ -57,17 +69,14 @@ public class DefaultAutoEditStrategyProvider extends AbstractEditStrategyProvide
 
 	protected void configureCurlyBracesBlock(IEditStrategyAcceptor acceptor) {
 		acceptor.accept(singleLineTerminals.newInstance("{", "}"),IDocument.DEFAULT_CONTENT_TYPE);
-		acceptor.accept(multiLineTerminals.newInstance("{", null, "}"),IDocument.DEFAULT_CONTENT_TYPE);
 	}
 
 	protected void configureSquareBrackets(IEditStrategyAcceptor acceptor) {
 		acceptor.accept(singleLineTerminals.newInstance("[", "]"),IDocument.DEFAULT_CONTENT_TYPE);
-		acceptor.accept(multiLineTerminals.newInstance("[", null, "]"),IDocument.DEFAULT_CONTENT_TYPE);
 	}
 
 	protected void configureParenthesis(IEditStrategyAcceptor acceptor) {
 		acceptor.accept(singleLineTerminals.newInstance("(", ")"),IDocument.DEFAULT_CONTENT_TYPE);
-		acceptor.accept(multiLineTerminals.newInstance("(", null, ")"),IDocument.DEFAULT_CONTENT_TYPE);
 	}
 	
 	protected void configureStringLiteral(IEditStrategyAcceptor acceptor) {
