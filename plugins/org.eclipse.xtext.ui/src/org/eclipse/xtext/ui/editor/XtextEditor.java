@@ -1156,7 +1156,8 @@ public class XtextEditor extends TextEditor {
 			}
 
 			int index = super.getLineStartPosition(document, line, length, offset);
-			if (type.equals(TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION)) {
+			if (type.equals(TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION)
+					|| type.equals(TerminalsTokenTypeToPartitionMapper.SL_COMMENT_PARTITION)) {
 				if (index < length - 1 && line.charAt(index) == '*' && line.charAt(index + 1) != '/') {
 					do {
 						++index;

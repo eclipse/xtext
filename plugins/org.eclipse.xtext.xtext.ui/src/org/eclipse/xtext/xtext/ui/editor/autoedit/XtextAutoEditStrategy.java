@@ -7,11 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.autoedit;
 
-import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.xtext.ui.editor.autoedit.DefaultAutoEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.autoedit.MultiLineTerminalsEditStrategy;
-import org.eclipse.xtext.ui.editor.autoedit.SingleLineTerminalsStrategy;
 import org.eclipse.xtext.ui.editor.model.DocumentUtil;
 
 /**
@@ -24,7 +22,6 @@ public class XtextAutoEditStrategy extends DefaultAutoEditStrategyProvider {
 		super.configure(acceptor);
 		acceptor.accept(singleLineTerminals.newInstance(":", ";"),IDocument.DEFAULT_CONTENT_TYPE);
 		MultiLineTerminalsEditStrategy configure = multiLineTerminals.newInstance(":", null, ";");
-		
 		// the following is a cheap but working hack, which replaces any double colons '::' by whitespace '  ' temporarily.
 		configure.setDocumentUtil(new DocumentUtil() {
 			@Override
@@ -32,18 +29,7 @@ public class XtextAutoEditStrategy extends DefaultAutoEditStrategyProvider {
 				return string.replace("::", "  ");
 			}
 		});
-		acceptor.accept(configure,IDocument.DEFAULT_CONTENT_TYPE);
+		acceptor.accept(configure, IDocument.DEFAULT_CONTENT_TYPE);
 	}
 	
-	@Override
-	protected void configureParenthesis(IEditStrategyAcceptor acceptor) {
-		acceptor.accept(singleLineTerminals.newInstance("(", ")", new SingleLineTerminalsStrategy.StrategyPredicate(){
-
-			public boolean isInsertClosingBracket(IDocument doc, int offset) throws BadLocationException {
-				char c = doc.getChar(offset);
-				return Character.isWhitespace(c) || c==':' || c==';';
-			}
-			
-		}), IDocument.DEFAULT_CONTENT_TYPE);
-	}
 }

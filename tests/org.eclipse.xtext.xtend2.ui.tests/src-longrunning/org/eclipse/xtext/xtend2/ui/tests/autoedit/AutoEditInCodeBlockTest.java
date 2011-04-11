@@ -371,4 +371,39 @@ public class AutoEditInCodeBlockTest extends AutoEditTest {
 		pressKey(editor, '\n');
 		assertState("  /* foo\n\t * |*/", editor);
 	}
+	
+	@Override
+	public void testBug335634_01() throws Exception {
+		XtextEditor editor = openEditor("// /*|\ntest");
+		pressKey(editor, '\n');
+		assertState("// /*\n\t|\ntest", editor);
+	}
+	
+	@Override
+	public void testSingleLineComment_01() throws Exception {
+		XtextEditor editor = openEditor("  // test|test");
+		pressKey(editor, '\n');
+		assertState("  // test\n\t|test", editor);
+	}
+	
+	@Override
+	public void testSingleLineComment_02() throws Exception {
+		XtextEditor editor = openEditor("  // test|test\n");
+		pressKey(editor, '\n');
+		assertState("  // test\n\t|test\n", editor);
+	}
+	
+	@Override
+	public void testSingleLineComment_03() throws Exception {
+		XtextEditor editor = openEditor("  // test|");
+		pressKey(editor, '\n');
+		assertState("  // test\n\t|", editor);
+	}
+	
+	@Override
+	public void testSingleLineComment_04() throws Exception {
+		XtextEditor editor = openEditor("  // test|\n");
+		pressKey(editor, '\n');
+		assertState("  // test\n\t|\n", editor);
+	}
 }

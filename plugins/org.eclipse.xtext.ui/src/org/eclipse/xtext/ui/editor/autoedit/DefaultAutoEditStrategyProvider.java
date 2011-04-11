@@ -44,8 +44,9 @@ public class DefaultAutoEditStrategyProvider extends AbstractEditStrategyProvide
 	}
 
 	protected void configureIndentationEditStrategy(IEditStrategyAcceptor acceptor) {
-		acceptor.accept(defaultIndentLineAutoEditStrategy.get(),IDocument.DEFAULT_CONTENT_TYPE);
-		acceptor.accept(defaultIndentLineAutoEditStrategy.get(),TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION);
+		acceptor.accept(defaultIndentLineAutoEditStrategy.get(), IDocument.DEFAULT_CONTENT_TYPE);
+		acceptor.accept(defaultIndentLineAutoEditStrategy.get(), TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION);
+		acceptor.accept(defaultIndentLineAutoEditStrategy.get(), TerminalsTokenTypeToPartitionMapper.SL_COMMENT_PARTITION);
 	}
 
 	protected void configureMultilineComments(IEditStrategyAcceptor acceptor) {

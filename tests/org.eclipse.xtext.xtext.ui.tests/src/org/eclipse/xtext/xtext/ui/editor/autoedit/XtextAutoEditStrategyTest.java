@@ -11,6 +11,10 @@ import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
 
 import java.util.Collections;
 
+import junit.extensions.TestSetup;
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -19,7 +23,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.swt.SWT;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.junit.editor.autoedit.AbstractAutoEditTest;
+import org.eclipse.xtext.ui.junit.editor.autoedit.AbstractCStyleLanguageAutoEditTest;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.xtext.ui.internal.Activator;
 
@@ -28,7 +32,7 @@ import com.google.inject.Injector;
 /**
  * @author Michael Clay - Initial contribution and API
  */
-public class XtextAutoEditStrategyTest extends AbstractAutoEditTest {
+public class XtextAutoEditStrategyTest extends AbstractCStyleLanguageAutoEditTest {
 	private static final String SAMPLE_HEADER = "grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals\ngenerate myDsl \"http://www.xtext.org/example/mydsl/MyDsl\"\n";
 	private static final String TESTPROJECT_NAME = "autoedit";
 	private IProject autoEditTestProject;
@@ -56,7 +60,7 @@ public class XtextAutoEditStrategyTest extends AbstractAutoEditTest {
 		return editor;
 	}
 
-	public void testParenthesis_1() throws Exception {
+	public void testParenthesis_9() throws Exception {
 		XtextEditor editor = openEditor(SAMPLE_HEADER + "Greeting|: 'Hello' name=ID'!';");
 		pressKey(editor, '(');
 		assertState(SAMPLE_HEADER + "Greeting(|): 'Hello' name=ID'!';", editor);
@@ -64,7 +68,7 @@ public class XtextAutoEditStrategyTest extends AbstractAutoEditTest {
 		assertState(SAMPLE_HEADER + "Greeting|: 'Hello' name=ID'!';", editor);
 	}
 
-	public void testParenthesis_2() throws Exception {
+	public void testParenthesis_10() throws Exception {
 		XtextEditor editor = openEditor(SAMPLE_HEADER + "Greeting: 'Hello' name=ID'!'|;");
 		pressKey(editor, '(');
 		assertState(SAMPLE_HEADER + "Greeting: 'Hello' name=ID'!'(|);", editor);
@@ -72,7 +76,7 @@ public class XtextAutoEditStrategyTest extends AbstractAutoEditTest {
 		assertState(SAMPLE_HEADER + "Greeting: 'Hello' name=ID'!'|;", editor);
 	}
 
-	public void testParenthesis_3() throws Exception {
+	public void testParenthesis_11() throws Exception {
 		XtextEditor editor = openEditor(SAMPLE_HEADER + "Greeting:| 'Hello' name=ID'!';");
 		pressKey(editor, '(');
 		assertState(SAMPLE_HEADER + "Greeting:(|) 'Hello' name=ID'!';", editor);
@@ -94,22 +98,25 @@ public class XtextAutoEditStrategyTest extends AbstractAutoEditTest {
 				";", editor);
 	}
 	
+	public void testBug335634_04() throws Exception {
+		XtextEditor editor = openEditor(
+				"// ML_COMMENT PATTERN: '/ *' '/'* ( !('*' '/') !'*' '/' '*' !'/')* '*'+ '/'\n" + 
+				"//|");
+		pressKey(editor, '\n');
+		assertState(
+				"// ML_COMMENT PATTERN: '/ *' '/'* ( !('*' '/') !'*' '/' '*' !'/')* '*'+ '/'\n" + 
+				"//\n|", editor);
+	}
+	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		autoEditTestProject = ResourcesPlugin.getWorkspace().getRoot().getProject(TESTPROJECT_NAME);
-		if (!autoEditTestProject.exists()) {
+		if (!autoEditTestProject.exists())
 			createPluginProject(TESTPROJECT_NAME);
-		}
 	}
 
-	@Override
-	protected void tearDown() throws Exception {
-		super.tearDown();
-		deleteProject(autoEditTestProject);
-	}
-
-	public void deleteProject(IProject project) throws CoreException {
+	public static void deleteProject(IProject project) throws CoreException {
 		if (project.exists()) {
 			if (project.isOpen()) {
 				project.close(null);
@@ -127,6 +134,23 @@ public class XtextAutoEditStrategyTest extends AbstractAutoEditTest {
 		projectFactory.addProjectNatures(XtextProjectHelper.NATURE_ID);
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
 		return result;
+	}
+	
+	public static Test suite() {
+		return new TestSetup(new TestSuite(XtextAutoEditStrategyTest.class, XtextAutoEditStrategyTest.class.getCanonicalName())) {
+			private IProject project;
+			
+			@Override
+			protected void setUp() throws Exception {
+				super.setUp();
+				project = createPluginProject(TESTPROJECT_NAME);
+			}
+			@Override
+			protected void tearDown() throws Exception {
+				deleteProject(project);
+				super.tearDown();
+			}
+		};
 	}
 
 }

@@ -21,6 +21,7 @@ public class TokenTypeToPartitionMapper extends TerminalsTokenTypeToPartitionMap
 	public final static String RICH_STRING_LITERAL_PARTITION = "__rich_string";
 	public static final String[] SUPPORTED_TOKEN_TYPES = new String[] { 
 		COMMENT_PARTITION, 
+		SL_COMMENT_PARTITION, 
 		STRING_LITERAL_PARTITION, 
 		RICH_STRING_LITERAL_PARTITION,
 		IDocument.DEFAULT_CONTENT_TYPE 

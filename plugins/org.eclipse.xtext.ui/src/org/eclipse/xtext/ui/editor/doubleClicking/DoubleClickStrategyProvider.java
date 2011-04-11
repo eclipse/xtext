@@ -26,6 +26,8 @@ public class DoubleClickStrategyProvider {
 	public ITextDoubleClickStrategy getStrategy(ISourceViewer sourceViewer, String contentType, String documentPartitioning) {
 		if (TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION.equals(contentType))
 			return new FixedCharCountPartitionDoubleClickSelector(documentPartitioning, 0, 0);
+		if (TerminalsTokenTypeToPartitionMapper.SL_COMMENT_PARTITION.equals(contentType))
+			return new FixedCharCountPartitionDoubleClickSelector(documentPartitioning, 0, 0);
 		if (TerminalsTokenTypeToPartitionMapper.STRING_LITERAL_PARTITION.equals(contentType))
 			return new FixedCharCountPartitionDoubleClickSelector(documentPartitioning, 1, 1);
 		return defaultDoubleClickStrategy;
