@@ -117,12 +117,17 @@ public abstract class AbstractMasterDetailsFieldEditor extends FieldEditor {
 
 	@Override
 	protected void doLoad() {
+		if (masterList.getSelectionIndex() == -1) {
+			return;
+		}
 		fieldEditorPreferencePage.load(calculateClientPreferencePrefix());
 	}
 
 	@Override
 	protected void doLoadDefault() {
-		fieldEditorPreferencePage.loadDefaults(calculateClientPreferencePrefix());
+		for (Object item : items) {
+			fieldEditorPreferencePage.loadDefaults(calculateClientPreferencePrefix(item));
+		}
 	}
 
 	@Override
@@ -147,7 +152,11 @@ public abstract class AbstractMasterDetailsFieldEditor extends FieldEditor {
 	}
 
 	private String calculateClientPreferencePrefix() {
-		return getPreferenceName() + PreferenceConstants.SEPARATOR + identifier(selectedObject());
+		return calculateClientPreferencePrefix(selectedObject());
+	}
+
+	private String calculateClientPreferencePrefix(Object object) {
+		return getPreferenceName() + PreferenceConstants.SEPARATOR + identifier(object);
 	}
 
 	/**
