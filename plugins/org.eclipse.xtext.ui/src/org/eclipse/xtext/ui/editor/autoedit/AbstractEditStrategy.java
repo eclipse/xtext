@@ -40,7 +40,7 @@ public abstract class AbstractEditStrategy implements IAutoEditStrategy, VerifyK
 	public static final String DEBUG = "org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategy.DEBUG";
 	
 	/**
-	 * Boolean field that can be used to debug edit strategies. BadLocationException will be rethrown if set to <code>true</code>
+	 * Boolean field that can be used to debug edit strategies. BadLocationException will be re-thrown if set to <code>true</code>
 	 * @since 2.0
 	 */
 	@Inject(optional = true)

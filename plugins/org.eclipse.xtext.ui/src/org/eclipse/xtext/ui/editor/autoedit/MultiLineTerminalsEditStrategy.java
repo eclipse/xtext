@@ -79,6 +79,8 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 				}
 			}
 			if (util.isSameLine(document, startTerminal.getOffset(), command.offset)) {
+				if (stopTerminal != null && stopTerminal.getLength() < getRightTerminal().length())
+					stopTerminal = null;
 				CommandInfo newC = handleCursorInFirstLine(document, command, startTerminal, stopTerminal);
 				if (newC != null)
 					newC.modifyCommand(command);
@@ -121,7 +123,7 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 		if (stopTerminal == null && atEndOfLineInput(document, command.offset)) {
 			newC.text += command.text + getRightTerminal();
 		}
-		if (stopTerminal != null && util.isSameLine(document, stopTerminal.getOffset(), command.offset)) {
+		if (stopTerminal != null && stopTerminal.getOffset() >= command.offset && util.isSameLine(document, stopTerminal.getOffset(), command.offset)) {
 			string = document.get(command.offset, stopTerminal.getOffset() - command.offset);
 			if (string.trim().length() > 0)
 				newC.text += string.trim();
