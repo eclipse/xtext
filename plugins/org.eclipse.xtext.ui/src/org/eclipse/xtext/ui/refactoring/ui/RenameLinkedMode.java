@@ -44,6 +44,7 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.texteditor.link.EditorLinkedModeUI;
+import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.refactoring.ILinkedModelCalculator;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
@@ -58,6 +59,34 @@ import com.google.inject.Provider;
  * @author Holger Schill - Initial contribution and API
  */
 public class RenameLinkedMode {
+	@Inject
+	private ILinkedModelCalculator linkedModelCalculator;
+
+	@Inject
+	private IGlobalServiceProvider globalServiceProvider;
+
+	/**
+	 * Components from the language holding the declaration of the refactored element. 
+	 * @since 2.0
+	 */
+	protected static class DeclaringLanguageComponents {
+		@Inject
+		private Provider<RenameRefactoringExecuter> renameRefactoringExecuterProvider;
+
+		@Inject
+		private IRenameRefactoringProvider refactoringProvider;		
+		
+		public IRenameRefactoringProvider getRefactoringProvider() {
+			return refactoringProvider;
+		}
+		
+		public Provider<RenameRefactoringExecuter> getRenameRefactoringExecuterProvider() {
+			return renameRefactoringExecuterProvider;
+		}
+	}
+
+	private DeclaringLanguageComponents declaringLanguage;
+
 	private IUndoableOperation startingUndoOperation;
 	private RenameRefactoringPopup popup;
 	private FocusEditingSupport focusEditingSupport;
@@ -71,15 +100,8 @@ public class RenameLinkedMode {
 	private Logger log = Logger.getLogger(RenameLinkedMode.class);
 	private IRenameElementContext renameElementContext;
 	private ProcessorBasedRefactoring renameRefactoring;
-
 	private AbstractRenameProcessor renameProcessor;
-	@Inject
-	private Provider<RenameRefactoringExecuter> renameRefactoringExecuterProvider;
-	@Inject
-	private IRenameRefactoringProvider refactoringProvider;
-	@Inject
-	private ILinkedModelCalculator linkedModelCalculator;
-
+	
 	public static RenameLinkedMode getActiveLinkedMode() {
 		if (INSTANCE != null) {
 			ISourceViewer viewer = INSTANCE.editor.getInternalSourceViewer();
@@ -97,13 +119,21 @@ public class RenameLinkedMode {
 	}
 
 	public void start(IRenameElementContext renameElementContext) {
+		try {
+			declaringLanguage = globalServiceProvider.findService(renameElementContext.getTargetElementURI(), DeclaringLanguageComponents.class);
+		} catch(Throwable t) {
+			log.error("Error getting refactoring components from declaring language", t);
+			return;
+		}
+		this.renameRefactoring = declaringLanguage.getRefactoringProvider().getRenameRefactoring(renameElementContext);
+		if(renameRefactoring == null) 
+			return;
+		this.renameProcessor = (AbstractRenameProcessor) renameRefactoring.getProcessor();
+		this.renameElementContext = renameElementContext;
 		linkedModelCalculator.init(renameElementContext);
 		this.linkedPositionGroup = linkedModelCalculator.getLinkedPositionGroup();
 		if (linkedPositionGroup == null)
 			return;
-		this.renameRefactoring = refactoringProvider.getRenameRefactoring(renameElementContext);
-		this.renameProcessor = (AbstractRenameProcessor) renameRefactoring.getProcessor();
-		this.renameElementContext = renameElementContext;
 		this.editor = getXtextEditor(renameElementContext);
 		this.focusEditingSupport = new FocusEditingSupport();
 		ISourceViewer viewer = editor.getInternalSourceViewer();
@@ -306,7 +336,7 @@ public class RenameLinkedMode {
 		if(renameProcessor.getNewName() == null) {
 			restoreOriginalSelection();
 		} else {
-			RenameRefactoringExecuter renameRefactoringExecuter = renameRefactoringExecuterProvider.get();
+			RenameRefactoringExecuter renameRefactoringExecuter = declaringLanguage.getRenameRefactoringExecuterProvider().get();
 			try {
 				renameRefactoringExecuter.configure(renameRefactoring);
 				renameRefactoringExecuter.perform(editor.getSite());
