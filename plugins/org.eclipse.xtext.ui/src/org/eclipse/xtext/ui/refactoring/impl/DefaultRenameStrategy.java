@@ -66,7 +66,7 @@ public class DefaultRenameStrategy implements IRenameStrategy {
 	}
 
 	public RefactoringStatus validateNewName(String newName) {
-		//TODO: Validate if name ist valid in the meaning of the DataTypeRule / Terminal
+		//TODO: Validate if name is valid in the meaning of the DataTypeRule / Terminal
 		RefactoringStatus newRefactoringStatus = new RefactoringStatus();
 		if (Strings.equal(newName, originalName))
 			newRefactoringStatus.addWarning("Name should be different");
@@ -90,7 +90,10 @@ public class DefaultRenameStrategy implements IRenameStrategy {
 		setName(targetElementNewURI, originalName, resourceSet);
 	}
 	
-	public void createDeclarationUpdates(String newName, IRefactoringUpdateAcceptor updateAcceptor) {
+	/**
+	 * @since 2.0
+	 */
+	public void createDeclarationUpdates(String newName, ResourceSet resourceSet, IRefactoringUpdateAcceptor updateAcceptor) {
 		updateAcceptor.accept(targetElementOriginalURI.trimFragment(), getDeclarationTextEdit(newName));
 	}
 

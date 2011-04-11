@@ -61,7 +61,7 @@ public class DefaultRenameElementStrategyTest extends AbstractXtextTests impleme
 		assertTrue(validateNewNameStatus.isOK());
 		renameElementStrategy.applyDeclarationChange("D", resource.getResourceSet());
 		assertEquals("D", ((Element) targetElement).getName());
-		renameElementStrategy.createDeclarationUpdates("D", this);
+		renameElementStrategy.createDeclarationUpdates("D", resource.getResourceSet(), this);
 		assertEquals(0, changes.size());
 		assertEquals(1, textEdits.size());
 		assertTrue(textEdits.get(0) instanceof ReplaceEdit);
