@@ -65,8 +65,8 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	public void testBlockExpression() throws Exception {
-		assertResolvedReturnType(Integer.class.getName(), "{''.toString;4;}");
-		assertResolvedReturnType(Boolean.class.getName(), "{''.toString;true;}");
+		assertResolvedReturnType(Integer.TYPE.getName(), "{''.toString;4;}");
+		assertResolvedReturnType(Boolean.TYPE.getName(), "{''.toString;true;}");
 		assertResolvedReturnType("null", "{null;}");
 	}
 
@@ -75,8 +75,8 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	public void testBooleanLiteral() throws Exception {
-		assertResolvedReturnType(Boolean.class.getName(), "true");
-		assertResolvedReturnType(Boolean.class.getName(), "false");
+		assertResolvedReturnType(Boolean.TYPE.getName(), "true");
+		assertResolvedReturnType(Boolean.TYPE.getName(), "false");
 	}
 
 	public void testStringLiteral() throws Exception {
@@ -85,7 +85,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	public void testIntLiteral() throws Exception {
-		assertResolvedReturnType(Integer.class.getName(), "3");
+		assertResolvedReturnType(Integer.TYPE.getName(), "3");
 	}
 
 	public void testCastExpression() throws Exception {

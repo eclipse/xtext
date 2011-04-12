@@ -522,7 +522,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XBooleanLiteral object, boolean rawType) {
-		return getTypeReferences().getTypeForName(Boolean.class, object);
+		return getTypeReferences().getTypeForName(Boolean.TYPE, object);
 	}
 
 	protected JvmTypeReference _type(XNullLiteral object, boolean rawType) {
@@ -531,7 +531,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XIntLiteral object, boolean rawType) {
-		return getTypeReferences().getTypeForName(Integer.class, object);
+		return getTypeReferences().getTypeForName(Integer.TYPE, object);
 	}
 
 	protected JvmTypeReference _type(XStringLiteral object, boolean rawType) {

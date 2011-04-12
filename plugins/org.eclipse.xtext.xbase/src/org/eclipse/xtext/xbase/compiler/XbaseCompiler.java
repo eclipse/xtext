@@ -356,7 +356,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (isReferenced) {
 			b.append("\n");
 			serialize(type, expr, b);
-			b.append(" ").append(switchResultName).append(" = null;");
+			b.append(" ").append(switchResultName).append(" = ");
+			b.append(getDefaultValueLiteral(expr));
+			b.append(";");
 		}
 		
 		internalToJavaStatement(expr.getSwitch(), b, true);
