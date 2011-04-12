@@ -20,6 +20,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
@@ -31,9 +33,11 @@ import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
+import org.eclipse.xpand2.output.FileHandle;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.OutputImpl;
 import org.eclipse.xpand2.output.PostProcessor;
+import org.eclipse.xpand2.output.VetoStrategy;
 import org.eclipse.xtend.expression.Variable;
 import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
 import org.eclipse.xtext.EcoreUtil2;
@@ -55,6 +59,13 @@ import com.google.common.collect.Maps;
  * @author Michael Clay
  */
 public class Generator extends AbstractWorkflowComponent2 {
+	private final static class EmptyPluginXmlVeto implements VetoStrategy {
+		static Pattern PLUGIN_ELEMENT = Pattern.compile("<plugin>(.*?)</plugin>", Pattern.DOTALL);
+		public boolean hasVeto(FileHandle handle) {
+			Matcher matcher = PLUGIN_ELEMENT.matcher(handle.getBuffer());
+			return matcher.find() && Strings.isEmpty(matcher.group(1).trim());
+		}
+	}
 
 	private final Logger log = Logger.getLogger(getClass());
 
@@ -260,6 +271,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 		String filePath = fileExists(ctx, "plugin.xml", PLUGIN_RT) ? "plugin.xml_gen" : "plugin.xml";
 		deleteFile(ctx, filePath, PLUGIN_RT);
 		ctx.getOutput().openFile(filePath, PLUGIN_RT);
+		ctx.getOutput().getOutlet(PLUGIN_RT).addVetoStrategy(new EmptyPluginXmlVeto());
 		try {
 			XpandFacade facade = XpandFacade.create(ctx);
 			List<Grammar> grammars = getGrammars(configs);
