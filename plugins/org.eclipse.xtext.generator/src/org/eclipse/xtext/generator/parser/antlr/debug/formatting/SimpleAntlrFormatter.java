@@ -14,6 +14,7 @@ import org.eclipse.xtext.generator.parser.antlr.debug.services.SimpleAntlrGramma
  * on how and when to use it
  *
  * Also see {@link org.eclipse.xtext.xtext.XtextFormatter} as an example
+ * @since 2.0
  */
 public class SimpleAntlrFormatter extends AbstractDeclarativeFormatter {
 
