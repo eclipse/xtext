@@ -167,7 +167,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		assertNoConformanceError("'''«IF Boolean::FALSE»«ENDIF»'''");
 		assertNoConformanceError("'''«IF true»«ENDIF»'''");
 		assertNoConformanceError("'''«IF 1 == 1»«ENDIF»'''");
-		assertConformanceError("'''«IF 1»«ENDIF»'''", XbasePackage.Literals.XINT_LITERAL, "java.lang.Integer",
+		assertConformanceError("'''«IF 1»«ENDIF»'''", XbasePackage.Literals.XINT_LITERAL, "int",
 				"boolean", "java.lang.Boolean");
 	}
 	
