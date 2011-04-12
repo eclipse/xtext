@@ -39,6 +39,7 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 
 	protected IOutlineNodeComparer nodeComparer = new IOutlineNodeComparer.Default();
 
+	protected IFile file;
 	protected XtextEditor editor;
 	protected IXtextDocument document;
 	protected IViewPart outlineView;
@@ -62,7 +63,7 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 		preferenceStore = new ScopedPreferenceStore(new ConfigurationScope(), getEditorId());
 		comparer = new IOutlineNodeComparer.Default();
 		modelAsText = "one { two {} three {} } four {}";
-		IFile file = IResourcesSetupUtil.createFile("test/test.outlinetestlanguage", modelAsText);
+		file = IResourcesSetupUtil.createFile("test/test.outlinetestlanguage", modelAsText);
 		editor = openEditor(file);
 		document = editor.getDocument();
 		outlineView = editor.getEditorSite().getPage().showView("org.eclipse.ui.views.ContentOutline");

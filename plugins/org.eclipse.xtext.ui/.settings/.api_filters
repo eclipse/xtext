@@ -7,5 +7,11 @@
                 <message_argument value="2.0.0.v201104111605"/>
             </message_arguments>
         </filter>
+        <filter comment="Bugfix to synchonize outline after file rename" id="924844039">
+            <message_arguments>
+                <message_argument value="2.0.0.qualifier"/>
+                <message_argument value="2.0.0.v201104111605"/>
+            </message_arguments>
+        </filter>
     </resource>
 </component>
