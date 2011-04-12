@@ -189,7 +189,7 @@ Global scopes based on import URIs are available if you use the
 codeRef[org.eclipse.xtext.generator.scoping.ImportURIScopingFragment] in the 
 workflow of your language. It will bind an 
 codeRef[org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider] 
-(codeRef[org.eclipse.xtext.resource.ignorecase.IgnoreCaseImportUriGlobalScopeProvider] 
+(e[org.eclipse.xtext.resource.ignorecase.IgnoreCaseImportUriGlobalScopeProvider]todo[fixme] 
 if the e[caseInsensitve] flag is set) that handles e[importURI] features.
 
 
@@ -203,7 +203,7 @@ referenceable elements. In the case of Java also the order of such entries is im
 Since version 1.0.0 Xtext provides support for this kind of global scoping. To enable it, a 
 codeRef[org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider] has to be bound to 
 the e[IGlobalScopeProvider] interface. For case insensitive names use the 
-codeRef[org.eclipse.xtext.resource.ignorecase.IgnoreCaseDefaultGlobalScopeProvider].
+e[org.eclipse.xtext.resource.ignorecase.IgnoreCaseDefaultGlobalScopeProvider]todo[fixme].
 
 By default Xtext leverages the classpath mechanism since it is well designed and already understood 
 by most of our users. The available tooling provided by JDT and PDE to configure the classpath adds 
