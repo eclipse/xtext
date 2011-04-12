@@ -1,0 +1,128 @@
+/*******************************************************************************
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.ui.tests.refactoring;
+
+import static org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.ui.junit.util.JavaProjectSetupUtil.*;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jface.text.TextSelection;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
+import org.eclipse.xtext.ui.refactoring.ui.RenameLinkedMode;
+import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.refactoring.referring.Reference;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+
+import com.google.inject.Inject;
+
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
+@SuppressWarnings("restriction")
+public class LinkedEditingRefactoringIntegrationTest extends AbstractEditorTest {
+
+	private static final String TEST_PROJECT = "test";
+	private IProject project;
+
+	@Inject
+	private RenameLinkedMode renameLinkedMode;
+	
+	@Override
+	protected String getEditorId() {
+		return "org.eclipse.xtext.ui.tests.refactoring.ReferringTestLanguage";
+	}
+
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		project = createProject(TEST_PROJECT);
+		IJavaProject javaProject = makeJavaProject(project);
+		addNature(javaProject.getProject(), XtextProjectHelper.NATURE_ID);
+		Activator.getInstance().getInjector(getEditorId()).injectMembers(this);
+	}
+
+	public void testRefactorEcoreCrossLanguage() throws Exception {
+		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
+		ePackage.setName("test");
+		ePackage.setNsPrefix("test");
+		ePackage.setNsURI("http://test");
+		Resource ecoreResource = new ResourceSetImpl().createResource(URI.createPlatformResourceURI(TEST_PROJECT + "/Test.ecore", true));
+		ecoreResource.getContents().add(ePackage);
+		ecoreResource.save(null);
+		ecoreResource.unload();
+		project.refreshLocal(IResource.DEPTH_INFINITE, null);
+		waitForAutoBuild();
+		
+		String model = "ref test";
+		IFile file = createFile(TEST_PROJECT + "/ref.referringtestlanguage", model);
+		final XtextEditor editor = openEditor(file);
+		final TextSelection selection = new TextSelection(5,4);
+		editor.getSelectionProvider().setSelection(selection);
+		IRenameElementContext context = editor.getDocument().readOnly(new IUnitOfWork<IRenameElementContext, XtextResource>() {
+			public IRenameElementContext exec(XtextResource state) throws Exception {
+				Reference ref = (Reference) state.getContents().get(0).eContents().get(0);
+				assertNotNull(ref.getReferenced());
+				return new IRenameElementContext.Impl(EcoreUtil.getURI(ref.getReferenced()), ref.getReferenced().eClass(), editor, selection, state.getURI());
+			}
+		});
+		renameLinkedMode.start(context);
+		waitForDisplay();
+		pressKeys(editor, "new_test\n");
+		editor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+			@Override
+			public void process(XtextResource state) throws Exception {
+				// wait for reconciler
+			}
+		});
+		waitForDisplay();
+		waitForAutoBuild();
+		ecoreResource.load(null);
+		assertEquals("new_test", ((EPackage)ecoreResource.getContents().get(0)).getName());
+	}
+	
+	protected void waitForDisplay() {
+		while(Display.getDefault().readAndDispatch()) {
+		}
+	}
+	
+	protected void pressKeys(XtextEditor editor, String string) throws Exception {
+		for(int i = 0; i < string.length(); i++) {
+			pressKey(editor, string.charAt(i));
+		}
+	}
+
+	protected void pressKey(XtextEditor editor, char c) throws Exception {
+		StyledText textWidget = editor.getInternalSourceViewer().getTextWidget();
+		Event e = new Event();
+		e.character = c;
+		e.type = SWT.KeyDown;
+		e.doit = true;
+		//XXX Hack!
+		if (c == SWT.ESC) {
+			e.keyCode = 27;
+		}
+		textWidget.notifyListeners(SWT.KeyDown, e);
+	}
+}
