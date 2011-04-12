@@ -61,7 +61,7 @@ public class CompilerTest extends AbstractXbaseTestCase {
 	
 	public void testIf() throws Exception {
 		assertCompilesTo(
-				"\nInteger _xifexpression = null;\n" +
+				"\nint _xifexpression = (int)-1;\n" +
 				"if (true) {\n" +
 				"  _xifexpression = 42;\n" +
 				"} else {\n" +

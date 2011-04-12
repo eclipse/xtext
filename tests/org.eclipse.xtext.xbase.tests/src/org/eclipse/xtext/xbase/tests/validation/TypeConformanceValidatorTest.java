@@ -29,8 +29,8 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 
 	public void testIfPredicate() throws Exception {
 		assertNoConformanceError("if (true) 'foo'");
-		assertConformanceError("if (27) 'foo'", XbasePackage.Literals.XINT_LITERAL, "java.lang.Integer",
-				"java.lang.Boolean");
+		assertConformanceError("if (27) 'foo'", XbasePackage.Literals.XINT_LITERAL, "int",
+				"boolean");
 		assertConformanceError("if (null) 'foo'", XbasePackage.Literals.XNULL_LITERAL, "null", "boolean");
 		assertConformanceError("if ({}) 'foo'", XbasePackage.Literals.XBLOCK_EXPRESSION, "null", "boolean");
 		assertNoConformanceError("if ({'foo'=='bar'}) 'foo'");
@@ -38,11 +38,11 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 	
 	public void testWhilePredicate() throws Exception {
 		assertNoConformanceError("while (true) 'foo'");
-		assertConformanceError("while (27) 'foo'", XbasePackage.Literals.XINT_LITERAL, "java.lang.Integer",
-				"java.lang.Boolean");
+		assertConformanceError("while (27) 'foo'", XbasePackage.Literals.XINT_LITERAL, "int",
+				"boolean");
 		assertNoConformanceError("do 'foo' while (true)");
 		assertConformanceError("do 'foo' while ('bar')", XbasePackage.Literals.XSTRING_LITERAL, "java.lang.String",
-				"java.lang.Boolean");
+				"boolean");
 		
 		assertConformanceError("while (null) 'foo'", XbasePackage.Literals.XNULL_LITERAL, "null", "boolean");
 		assertConformanceError("while ({}) 'foo'", XbasePackage.Literals.XBLOCK_EXPRESSION, "null", "boolean");
@@ -122,14 +122,14 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 	public void testThrowsExpression() throws Exception {
 		assertNoConformanceError("throw new java.lang.Exception()");
 		assertNoConformanceError("throw new java.lang.IllegalArgumentException()");
-		assertConformanceError("throw 42", XbasePackage.Literals.XINT_LITERAL, "java.lang.Integer",
+		assertConformanceError("throw 42", XbasePackage.Literals.XINT_LITERAL, "int",
 				"java.lang.Throwable");
 	}
 
 	public void testForLoop() throws Exception {
 		assertNoConformanceError("for(String foo : new java.util.ArrayList<String>()) 'bar'");
 		assertConformanceError("for(Integer foo : true) 'bar'", XbasePackage.Literals.XBOOLEAN_LITERAL,
-				"java.lang.Boolean", "java.lang.Integer");
+				"boolean", "java.lang.Integer");
 		assertConformanceError("for(Integer foo : new java.util.ArrayList<String>()) 'bar'",
 				XbasePackage.Literals.XCONSTRUCTOR_CALL, "java.lang.Iterable<? extends java.lang.Integer>",
 				"java.util.ArrayList<java.lang.String>");
