@@ -5,6 +5,7 @@ import java.util.Set
 import org.eclipse.xtext.xbase.lib.Pair
 import junit.framework.TestCase
 import junit.framework.Assert
+import xtend.tutorial.util.NetNode
 
 /**
  * create functions are used to transform object graphs to nw object graphs in jsut one pass 
@@ -15,17 +16,33 @@ import junit.framework.Assert
 class Xtend10_CreateFunctions extends TestCase {
 	
 	void testCreateFunctions() {
-		val person = newPerson('Joe'->'Developer', newHashSet('Darcy' -> 'Smith'))
-		Assert::assertEquals('Darcy', person.friends.head.forename)
-		Assert::assertEquals('Joe', person.friends.head.friends.head.forename)
-		Assert::assertSame(person, person.friends.head.friends.head)
+		val nodeA = new NetNode()
+		nodeA.name = "A"
+		val nodeB = new NetNode()
+		nodeB.name = "B"
+		val nodeC = new NetNode()
+		nodeC.name = "C"
+		val nodeD = new NetNode()
+		nodeD.name = "D"
+		
+		nodeA.references = newArrayList(nodeD,nodeC)
+		nodeB.references = newArrayList(nodeA,nodeB)
+		nodeC.references = newArrayList(nodeA,nodeB, nodeD)
+		nodeD.references = newArrayList(nodeB,nodeC)
+		
+		val copyOfNodeA = copyNet(nodeA)
+		val copyOfNodeB = copyNet(nodeB)
+		Assert::assertNotSame(nodeA, copyOfNodeA)
+		Assert::assertSame(copyOfNodeB.references.head, copyOfNodeA)		
+		Assert::assertSame(copyOfNodeB.references.tail.head, copyOfNodeB)		
 	}
 	
 	/**
-	 * create a new person for a pair of strings
-	 * return the same person for an equals pair of strings.
+	 * create a copy of the given NetNode
+	 * initializes the fields lazily
 	 */
-	create new Person(name.key, name.value) newPerson(Pair<String,String> name, Set<Pair<String,String>> friends) {
-		this.friends = friends.map(pair | newPerson(pair, newHashSet(name))).toSet
+	create new NetNode() copyNet(NetNode toCopy) {
+		name = toCopy.name
+		references = toCopy.references.map( node | copyNet(node))
 	}
 }
