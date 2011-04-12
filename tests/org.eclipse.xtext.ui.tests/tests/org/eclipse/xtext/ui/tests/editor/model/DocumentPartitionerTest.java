@@ -68,6 +68,7 @@ public class DocumentPartitionerTest extends TestCase {
 		DocumentPartitioner partitioner = new DocumentPartitioner(scanner, mapper);
 		DocumentTokenSource tokenSource = new DocumentTokenSource();
 		tokenSource.setLexer(new Provider<Lexer>() {
+			@SuppressWarnings("restriction")
 			public Lexer get() {
 				return new org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer();
 			}

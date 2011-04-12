@@ -65,6 +65,7 @@ public class DamagerRepairerPerformanceTest extends TestCase implements ITokenSc
 		protected Document createDocument(String before) {
 			DocumentTokenSource source = new DocumentTokenSource();
 			source.setLexer(new Provider<Lexer>() {
+				@SuppressWarnings("restriction")
 				public Lexer get() {
 					return new org.eclipse.xtext.parser.antlr.internal.InternalXtextLexer();
 				}

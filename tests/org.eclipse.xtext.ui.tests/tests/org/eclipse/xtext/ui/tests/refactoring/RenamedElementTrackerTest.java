@@ -24,6 +24,7 @@ import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class RenamedElementTrackerTest extends AbstractXtextTests {
 
 	@Override

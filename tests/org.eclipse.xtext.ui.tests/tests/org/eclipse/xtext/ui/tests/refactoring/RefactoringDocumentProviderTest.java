@@ -37,6 +37,7 @@ import com.google.inject.Injector;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 
 	private static final String TEST_FILE_NAME = "File.refactoringtestlanguage";
