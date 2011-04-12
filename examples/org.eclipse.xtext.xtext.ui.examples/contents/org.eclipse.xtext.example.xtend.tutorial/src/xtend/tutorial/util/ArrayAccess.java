@@ -1,4 +1,4 @@
-package xtext.tutorial.util;
+package xtend.tutorial.util;
 
 public class ArrayAccess<T> {
 	private T[] internal;

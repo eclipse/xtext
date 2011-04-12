@@ -1,9 +1,9 @@
-package xtext.tutorial.basics
+package xtend.tutorial.basics
 
-import xtext.tutorial.util.Rectangle
-import xtext.tutorial.util.Circle
+import xtend.tutorial.util.Rectangle
+import xtend.tutorial.util.Circle
 import junit.framework.TestCase
-import xtext.tutorial.util.Shape
+import xtend.tutorial.util.Shape
 
 class Xtend09_DispatchMethods extends TestCase {
 	

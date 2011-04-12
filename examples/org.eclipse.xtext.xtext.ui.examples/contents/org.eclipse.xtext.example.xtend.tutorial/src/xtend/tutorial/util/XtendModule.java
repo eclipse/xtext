@@ -1,7 +1,7 @@
-package xtext.tutorial.util;
+package xtend.tutorial.util;
 
-import xtext.tutorial.basics.Xtend11_PersonExtensions;
-import xtext.tutorial.basics.Xtend11_PersonExtensionsSubclass;
+import xtend.tutorial.basics.Xtend11_PersonExtensions;
+import xtend.tutorial.basics.Xtend11_PersonExtensionsSubclass;
 
 import com.google.inject.AbstractModule;
 

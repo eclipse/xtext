@@ -1,8 +1,8 @@
-package xtext.tutorial.basics
+package xtend.tutorial.basics
 
 import java.util.Collections
 import java.util.List
-import xtext.tutorial.util.Person
+import xtend.tutorial.util.Person
 
 class Xtend06_Closures {
 	

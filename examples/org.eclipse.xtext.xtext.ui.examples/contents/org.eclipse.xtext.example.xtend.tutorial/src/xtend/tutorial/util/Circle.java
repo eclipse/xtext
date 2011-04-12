@@ -1,4 +1,4 @@
-package xtext.tutorial.util;
+package xtend.tutorial.util;
 
 public class Circle implements Shape {
 	public int diameter;

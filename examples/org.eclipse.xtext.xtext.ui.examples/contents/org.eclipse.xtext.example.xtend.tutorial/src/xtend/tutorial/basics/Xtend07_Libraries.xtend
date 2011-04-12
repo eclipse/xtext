@@ -1,4 +1,4 @@
-package xtext.tutorial.basics
+package xtend.tutorial.basics
 
 /**
  * Xbase and Xtend come with libraies which are implicitly on the scope.

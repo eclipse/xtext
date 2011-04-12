@@ -1,9 +1,9 @@
-package xtext.tutorial.basics
+package xtend.tutorial.basics
 
 import java.util.List
-import xtext.tutorial.util.Shape
-import xtext.tutorial.util.Circle
-import xtext.tutorial.util.Rectangle
+import xtend.tutorial.util.Shape
+import xtend.tutorial.util.Circle
+import xtend.tutorial.util.Rectangle
 
 class Xtend04_ControlStructures {
 	

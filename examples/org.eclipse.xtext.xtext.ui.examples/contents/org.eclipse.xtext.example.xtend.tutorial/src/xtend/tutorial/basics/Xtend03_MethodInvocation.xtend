@@ -1,11 +1,11 @@
-package xtext.tutorial.basics
+package xtend.tutorial.basics
 
 /**
  * Xtend binds directly to Java types, so you can call
  * everything which is compile to Java.
  */
-import xtext.tutorial.util.Person
-import xtext.tutorial.util.Amount
+import xtend.tutorial.util.Person
+import xtend.tutorial.util.Amount
 import static extension java.util.Collections.*
 
 class Xtend03_MethodInvocation {

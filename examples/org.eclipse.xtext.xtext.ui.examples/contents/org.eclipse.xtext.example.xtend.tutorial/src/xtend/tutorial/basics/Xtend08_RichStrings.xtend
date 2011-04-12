@@ -1,6 +1,6 @@
-package xtext.tutorial.basics
+package xtend.tutorial.basics
 
-import xtext.tutorial.util.Person
+import xtend.tutorial.util.Person
 import junit.framework.TestCase
 
 class Xtend08_RichStrings extends TestCase {

@@ -1,4 +1,4 @@
-package xtext.tutorial.basics
+package xtend.tutorial.basics
 
 /**
  * Xtend supports dependency injection as a first clazz language feature.
@@ -6,8 +6,8 @@ package xtext.tutorial.basics
 import junit.framework.TestCase
 import com.google.inject.Guice
 import junit.framework.Assert
-import xtext.tutorial.util.Person
-import xtext.tutorial.util.XtendModule
+import xtend.tutorial.util.Person
+import xtend.tutorial.util.XtendModule
 
 class Xtend11_Modularization extends TestCase {
 	
@@ -18,7 +18,7 @@ class Xtend11_Modularization extends TestCase {
 	 * The nice thing is that you only program against the typoe signatures but can switch the actual implmentation without touching the code.
 	 * 
 	 */
-	@Inject extension xtext.tutorial.basics.Xtend11_PersonExtensions
+	@Inject extension xtend.tutorial.basics.Xtend11_PersonExtensions
 	
 	void testExtensions() {
 		// inject members

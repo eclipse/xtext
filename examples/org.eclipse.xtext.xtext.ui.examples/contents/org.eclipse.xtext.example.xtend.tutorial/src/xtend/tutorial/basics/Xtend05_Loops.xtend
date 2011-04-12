@@ -1,4 +1,4 @@
-package xtext.tutorial.basics
+package xtend.tutorial.basics
 
 import java.util.List
 

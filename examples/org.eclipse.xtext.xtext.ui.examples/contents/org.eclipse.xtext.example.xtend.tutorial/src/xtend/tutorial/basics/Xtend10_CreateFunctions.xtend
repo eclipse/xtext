@@ -1,6 +1,6 @@
-package xtext.tutorial.basics
+package xtend.tutorial.basics
 
-import xtext.tutorial.util.Person
+import xtend.tutorial.util.Person
 import java.util.Set
 import org.eclipse.xtext.xbase.lib.Pair
 import junit.framework.TestCase

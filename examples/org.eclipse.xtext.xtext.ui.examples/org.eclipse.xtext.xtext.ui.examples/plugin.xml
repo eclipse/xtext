@@ -160,7 +160,7 @@
    <!-- ========= org.eclipse.xtext.example.xtend.tutorial ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.xtext.examples.NewXtendTutorial" 
-			name="%XbaseTutorial_name" 
+			name="%XtendTutorial_name" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
 			category="org.eclipse.ui.Examples/org.eclipse.xtext.ui.Examples"
 			icon="icons/genproject.gif" 
