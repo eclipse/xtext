@@ -393,7 +393,7 @@ This will translate to the following Java field:
 </p>
 
 <p>
-Note that the visibiloty is always <span class="inlinecode">private</span>
+Note that the visibility is always <span class="inlinecode">private</span>
 , is you want to provide access to an injected object
 you need to write an accessor function. 
 </p>
@@ -1435,14 +1435,14 @@ Xtend). Let&apos;s have a look at an example of how a typical function with temp
 <div class="incode">
 <p class="code">
 toClass(Entity&nbsp;this)&nbsp;:&apos;&apos;&apos;<br />
-&nbsp;&nbsp;package&nbsp;«packageName»;<br />
+&nbsp;&nbsp;package&nbsp;ÇpackageNameÈ;<br />
 <br />
-&nbsp;&nbsp;«placeImports»<br />
+&nbsp;&nbsp;ÇplaceImportsÈ<br />
 <br />
-&nbsp;&nbsp;public&nbsp;class&nbsp;«name»&nbsp;«IF&nbsp;extendedType!=null»extends&nbsp;«extendedType»«ENDIF»&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;«FOREACH&nbsp;members»<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«member.toMember»<br />
-&nbsp;&nbsp;&nbsp;&nbsp;«ENDFOREACH»<br />
+&nbsp;&nbsp;public&nbsp;class&nbsp;ÇnameÈ&nbsp;ÇIF&nbsp;extendedType!=nullÈextends&nbsp;ÇextendedTypeÈÇENDIFÈ&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ÇFOREACH&nbsp;membersÈ<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Çmember.toMemberÈ<br />
+&nbsp;&nbsp;&nbsp;&nbsp;ÇENDFOREACHÈ<br />
 &nbsp;&nbsp;}<br />
 &apos;&apos;&apos;;
 </p>
@@ -1465,8 +1465,8 @@ expected. For instance in conjunction the powerful switch expression from Xbase:
 <p class="code">
 toMember(Member&nbsp;this)&nbsp;:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;switch(this)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Field&nbsp;:&apos;&apos;&apos;private&nbsp;«type»&nbsp;«name»&nbsp;;&apos;&apos;&apos;;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;case&nbsp;isAbstract&nbsp;:&apos;&apos;&apos;&nbsp;abstract&nbsp;«...&apos;&apos;&apos;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Field&nbsp;:&apos;&apos;&apos;private&nbsp;ÇtypeÈ&nbsp;ÇnameÈ&nbsp;;&apos;&apos;&apos;;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;case&nbsp;isAbstract&nbsp;:&apos;&apos;&apos;&nbsp;abstract&nbsp;Ç...&apos;&apos;&apos;;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Method:&apos;&apos;&apos;&nbsp;.....&nbsp;&apos;&apos;&apos;;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;};
 </p>
@@ -1645,7 +1645,7 @@ nested nodes.
 <p class="code">
 class&nbsp;Template&nbsp;{<br />
 &nbsp;&nbsp;&nbsp;&nbsp;print(Node&nbsp;this)&nbsp;&apos;&apos;&apos;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;«name»&nbsp;{}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;ÇnameÈ&nbsp;{}<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;<br />
 }
 </p>
@@ -1657,15 +1657,7 @@ class&nbsp;Template&nbsp;{<br />
 </td>
 <td>
 
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-node&nbsp;NodeName{}
-</p>
-</div>
-</div>
-
+<span class="inlinecode">node&nbsp;NodeName{}</span>
 
 
 </td>
@@ -1675,7 +1667,7 @@ node&nbsp;NodeName{}
 </p>
 
 <p>
-The indentation before <span class="inlinecode">node&nbsp;«name»</span>
+The indentation before <span class="inlinecode">node&nbsp;ÇnameÈ</span>
  will be skipped as it is relative to the opening
 mark of the rich string and thereby not considered to be relevant for the output but only
 for readability of the template itself.
@@ -1693,10 +1685,10 @@ for readability of the template itself.
 <p class="code">
 class&nbsp;Template&nbsp;{<br />
 &nbsp;&nbsp;&nbsp;&nbsp;print(Node&nbsp;this)&nbsp;&apos;&apos;&apos;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;«name»&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«IF&nbsp;hasChildren»<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«children*.print»<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«ENDIF»<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;ÇnameÈ&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ÇIF&nbsp;hasChildrenÈ<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Çchildren*.printÈ<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ÇENDIFÈ<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;<br />
 }
