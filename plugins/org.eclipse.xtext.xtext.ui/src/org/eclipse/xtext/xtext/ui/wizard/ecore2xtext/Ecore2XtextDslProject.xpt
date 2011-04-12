@@ -87,7 +87,6 @@ Workflow {
 			fragment = validation.JavaValidatorFragment {
 			// composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
 			// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
-				registerForImportedPackages = true
 			}
 
 			// scoping and exporting API
@@ -107,8 +106,8 @@ Workflow {
 			fragment = labeling.LabelProviderFragment {}
 
 			// outline API 
-			fragment = outline.TransformerFragment {}
-			fragment = outline.OutlineNodeAdapterFactoryFragment {}
+            fragment = outline.OutlineTreeProviderFragment {}
+            fragment = outline.QuickOutlineFragment {}
 
 			// java-based API for content assistance 
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
@@ -119,6 +118,11 @@ Workflow {
 					classSplitting = true
 				}
 			}
+
+			// provides a compare view
+            fragment = compare.CompareFragment {
+                fileExtensions = file.extensions
+            }
 
 			fragment = builder.BuilderIntegrationFragment {}
 
