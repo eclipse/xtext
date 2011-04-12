@@ -2,72 +2,83 @@ package xtend.tutorial.basics;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Pair;
-import xtend.tutorial.util.Person;
+import xtend.tutorial.util.NetNode;
 
 @SuppressWarnings("all")
 public class Xtend10_CreateFunctions extends TestCase {
   
   public void testCreateFunctions() {
     {
-      Pair<String,String> _operator_mappedTo = ObjectExtensions.<String, String>operator_mappedTo("Joe", "Developer");
-      Pair<String,String> _operator_mappedTo_1 = ObjectExtensions.<String, String>operator_mappedTo("Darcy", "Smith");
-      HashSet<Pair<String,String>> _newHashSet = CollectionLiterals.<Pair<String,String>>newHashSet(_operator_mappedTo_1);
-      Person _newPerson = this.newPerson(_operator_mappedTo, _newHashSet);
-      final Person person = _newPerson;
-      Set<Person> _friends = person.getFriends();
-      Person _head = IterableExtensions.<Person>head(_friends);
-      String _forename = _head.getForename();
-      Assert.assertEquals("Darcy", _forename);
-      Set<Person> _friends_1 = person.getFriends();
-      Person _head_1 = IterableExtensions.<Person>head(_friends_1);
-      Set<Person> _friends_2 = _head_1.getFriends();
-      Person _head_2 = IterableExtensions.<Person>head(_friends_2);
-      String _forename_1 = _head_2.getForename();
-      Assert.assertEquals("Joe", _forename_1);
-      final Person typeConverted_person = (Person)person;
-      Set<Person> _friends_3 = person.getFriends();
-      Person _head_3 = IterableExtensions.<Person>head(_friends_3);
-      Set<Person> _friends_4 = _head_3.getFriends();
-      Person _head_4 = IterableExtensions.<Person>head(_friends_4);
-      Assert.assertSame(typeConverted_person, _head_4);
+      NetNode _netNode = new NetNode();
+      final NetNode nodeA = _netNode;
+      nodeA.setName("A");
+      NetNode _netNode_1 = new NetNode();
+      final NetNode nodeB = _netNode_1;
+      nodeB.setName("B");
+      NetNode _netNode_2 = new NetNode();
+      final NetNode nodeC = _netNode_2;
+      nodeC.setName("C");
+      NetNode _netNode_3 = new NetNode();
+      final NetNode nodeD = _netNode_3;
+      nodeD.setName("D");
+      ArrayList<NetNode> _newArrayList = CollectionLiterals.<NetNode>newArrayList(nodeD, nodeC);
+      nodeA.setReferences(_newArrayList);
+      ArrayList<NetNode> _newArrayList_1 = CollectionLiterals.<NetNode>newArrayList(nodeA, nodeB);
+      nodeB.setReferences(_newArrayList_1);
+      ArrayList<NetNode> _newArrayList_2 = CollectionLiterals.<NetNode>newArrayList(nodeA, nodeB, nodeD);
+      nodeC.setReferences(_newArrayList_2);
+      ArrayList<NetNode> _newArrayList_3 = CollectionLiterals.<NetNode>newArrayList(nodeB, nodeC);
+      nodeD.setReferences(_newArrayList_3);
+      NetNode _copyNet = this.copyNet(nodeA);
+      final NetNode copyOfNodeA = _copyNet;
+      NetNode _copyNet_1 = this.copyNet(nodeB);
+      final NetNode copyOfNodeB = _copyNet_1;
+      final NetNode typeConverted_nodeA = (NetNode)nodeA;
+      final NetNode typeConverted_copyOfNodeA = (NetNode)copyOfNodeA;
+      Assert.assertNotSame(typeConverted_nodeA, typeConverted_copyOfNodeA);
+      Iterable<NetNode> _references = copyOfNodeB.getReferences();
+      NetNode _head = IterableExtensions.<NetNode>head(_references);
+      final NetNode typeConverted_copyOfNodeA_1 = (NetNode)copyOfNodeA;
+      Assert.assertSame(_head, typeConverted_copyOfNodeA_1);
+      Iterable<NetNode> _references_1 = copyOfNodeB.getReferences();
+      Iterable<NetNode> _tail = IterableExtensions.<NetNode>tail(_references_1);
+      NetNode _head_1 = IterableExtensions.<NetNode>head(_tail);
+      final NetNode typeConverted_copyOfNodeB = (NetNode)copyOfNodeB;
+      Assert.assertSame(_head_1, typeConverted_copyOfNodeB);
     }
   }
   
-  private final HashMap<ArrayList<?>,Person> _createCache_newPerson = new HashMap<ArrayList<?>,Person>();
+  private final HashMap<ArrayList<?>,NetNode> _createCache_copyNet = new HashMap<ArrayList<?>,NetNode>();
   
-  public Person newPerson(final Pair<String,String> name, final Set<Pair<String,String>> friends) {
-    final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(name, friends);
-    Person _this;
-    synchronized (_createCache_newPerson) {
-      if (_createCache_newPerson.containsKey(_cacheKey)) {
-        return _createCache_newPerson.get(_cacheKey);
+  public NetNode copyNet(final NetNode toCopy) {
+    final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(toCopy);
+    NetNode _this;
+    synchronized (_createCache_copyNet) {
+      if (_createCache_copyNet.containsKey(_cacheKey)) {
+        return _createCache_copyNet.get(_cacheKey);
       }
-      String _key = name.getKey();
-      String _value = name.getValue();
-      Person _person = new Person(_key, _value);
-      _this = _person;
-      _createCache_newPerson.put(_cacheKey, _this);
+      NetNode _netNode = new NetNode();
+      _this = _netNode;
+      _createCache_copyNet.put(_cacheKey, _this);
     }
-    final Set<Pair<String,String>> typeConverted_friends = (Set<Pair<String,String>>)friends;
-    final Function1<Pair<String,String>,Person> _function = new Function1<Pair<String,String>,Person>() {
-        public Person apply(Pair<String,String> pair) {
-          HashSet<Pair<String,String>> _newHashSet = CollectionLiterals.<Pair<String,String>>newHashSet(name);
-          Person _newPerson = Xtend10_CreateFunctions.this.newPerson(pair, _newHashSet);
-          return _newPerson;
-        }
-      };
-    Iterable<Person> _map = IterableExtensions.<Pair<String,String>, Person>map(typeConverted_friends, _function);
-    Set<Person> _set = IterableExtensions.<Person>toSet(_map);
-    _this.setFriends(_set);
+    {
+      String _name = toCopy.getName();
+      _this.setName(_name);
+      Iterable<NetNode> _references = toCopy.getReferences();
+      final Function1<NetNode,NetNode> _function = new Function1<NetNode,NetNode>() {
+          public NetNode apply(NetNode node) {
+            NetNode _copyNet = Xtend10_CreateFunctions.this.copyNet(node);
+            return _copyNet;
+          }
+        };
+      Iterable<NetNode> _map = IterableExtensions.<NetNode, NetNode>map(_references, _function);
+      _this.setReferences(_map);
+    }
     return _this;
   }
 }

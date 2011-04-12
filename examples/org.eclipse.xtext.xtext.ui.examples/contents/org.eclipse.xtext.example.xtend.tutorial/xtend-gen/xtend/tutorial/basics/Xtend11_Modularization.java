@@ -1,34 +1,16 @@
 package xtend.tutorial.basics;
 
-import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
-import junit.framework.Assert;
-import junit.framework.TestCase;
-import xtend.tutorial.basics.Xtend11_Modularization;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import xtend.tutorial.basics.Xtend11_PersonExtensions;
 import xtend.tutorial.util.Person;
-import xtend.tutorial.util.XtendModule;
 
 @SuppressWarnings("all")
-public class Xtend11_Modularization extends TestCase {
+public class Xtend11_Modularization {
   @Inject private Xtend11_PersonExtensions xtend11_PersonExtensions;
   
-  public void testExtensions() {
-    {
-      Injector _createInjector = Guice.createInjector();
-      final Xtend11_Modularization typeConverted_this = (Xtend11_Modularization)this;
-      _createInjector.injectMembers(typeConverted_this);
-      Person _person = new Person("Joe", "Developer");
-      String _fullName = this.xtend11_PersonExtensions.fullName(_person);
-      Assert.assertEquals("Joe Developer", _fullName);
-      XtendModule _xtendModule = new XtendModule();
-      Injector _createInjector_1 = Guice.createInjector(_xtendModule);
-      final Xtend11_Modularization typeConverted_this_1 = (Xtend11_Modularization)this;
-      _createInjector_1.injectMembers(typeConverted_this_1);
-      Person _person_1 = new Person("Joe", "Developer");
-      String _fullName_1 = this.xtend11_PersonExtensions.fullName(_person_1);
-      Assert.assertEquals("Developer, Joe", _fullName_1);
-    }
+  public void printTheName(final Person person) {
+    String _fullName = this.xtend11_PersonExtensions.fullName(person);
+    InputOutput.<String>println(_fullName);
   }
 }
