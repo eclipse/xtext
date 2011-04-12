@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.ITextInputListener;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -38,7 +39,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class OutlinePage extends ContentOutlinePage implements ISourceViewerAware {
-
+	
 	private static final Logger LOG = Logger.getLogger(OutlinePage.class);
 
 	@Inject
@@ -54,6 +55,8 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 	private IOutlineContribution.Composite contribution;
 
 	private IXtextModelListener modelListener;
+
+	private ITextInputListener textInputListener;
 
 	private IXtextDocument xtextDocument;
 
@@ -127,6 +130,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 	@Override
 	public void dispose() {
 		contribution.deregister(this);
+		sourceViewer.removeTextInputListener(textInputListener);
 		xtextDocument.removeModelListener(modelListener);
 		contentProvider.dispose();
 		super.dispose();
@@ -136,6 +140,29 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		this.sourceViewer = sourceViewer;
 		IDocument document = sourceViewer.getDocument();
 		xtextDocument = XtextDocumentUtil.get(document);
+		configureTextInputListener();
+	}
+	
+	/**
+	 * @since 2.0
+	 */
+	protected void configureTextInputListener() {
+		textInputListener = new ITextInputListener() {
+			public void inputDocumentChanged(IDocument oldInput, IDocument newInput) {
+				try {
+					xtextDocument.removeModelListener(modelListener);
+					xtextDocument = XtextDocumentUtil.get(newInput);
+					xtextDocument.addModelListener(modelListener);
+					scheduleRefresh();
+				} catch (Throwable t) {
+					LOG.error("Error refreshing outline", t);
+				}
+			}
+			
+			public void inputDocumentAboutToBeChanged(IDocument oldInput, IDocument newInput) {
+			}
+		};
+		sourceViewer.addTextInputListener(textInputListener);
 	}
 
 	public ISourceViewer getSourceViewer() {
