@@ -18,6 +18,7 @@ import org.eclipse.xtext.ui.tests.refactoring.MockRefactoringDocument.MockChange
 /**
  * @author Holger Schill - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class LinkedModelUpdateAcceptorTest extends TestCase {
 	LinkedModelUpdateAcceptor linkedModelUpdateAcceptor = null;
 	

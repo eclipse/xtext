@@ -16,6 +16,7 @@ import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 
+@SuppressWarnings("restriction")
 public class MockRefactoringDocument implements IRefactoringDocument {
 
 	public static class Provider implements IRefactoringDocument.Provider {

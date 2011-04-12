@@ -14,6 +14,7 @@ import org.eclipse.xtext.ui.junit.editor.AbstractDamagerRepairerTest;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
 
 	public void testEmptyDocs() throws Exception {

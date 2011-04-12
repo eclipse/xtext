@@ -25,6 +25,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Holger Schill - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class LinkedModelCalculatorTest extends TestCase {
 	LinkedModelCalculator l;
 	List<TextEdit> textEdits;
