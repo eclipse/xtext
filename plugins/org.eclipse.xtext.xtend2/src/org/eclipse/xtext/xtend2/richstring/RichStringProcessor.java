@@ -342,7 +342,18 @@ public class RichStringProcessor {
 			if (isTemplateLine(line)) {
 				if (line.getParts().get(0) == object) {
 					if (!firstOrLast) {
-						pushSemanticIndentation(ws);
+						boolean followedByOpening = false;
+						if (line.getParts().size() >= 2) {
+							LinePart next = line.getParts().get(1);
+							if (next instanceof ForLoopStart || next instanceof IfConditionStart) {
+								followedByOpening = true;
+							}
+						}
+						if (!followedByOpening) {
+							pushSemanticIndentation(indentationHandler.getTotalIndentation());
+						} else {
+							pushSemanticIndentation(ws);
+						}
 					}
 				}
 				announceTemplateText(textLine, object.getLiteral());

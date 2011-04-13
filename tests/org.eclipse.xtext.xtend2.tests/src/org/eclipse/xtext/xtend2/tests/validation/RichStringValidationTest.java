@@ -238,4 +238,40 @@ public class RichStringValidationTest extends AbstractRichStringTest {
 		validationTestHelper.assertNoIssues(richString);
 	}
 
+	public void testBug342724_01() throws Exception {
+		RichString richString = richString(
+				"'''\n" + 
+				"	«IF true»\n" + 
+				"		test\n" + 
+				"	«ENDIF»\n" + 
+				"	test\n" + 
+				"'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testBug342724_02() throws Exception {
+		RichString richString = richString(
+				"'''\n" + 
+				"	«IF true»\n" + 
+				"	test\n" + 
+				"	«ELSEIF true»\n" + 
+				"	test\n" + 
+				"	«ENDIF»\n" + 
+				"	test\n" + 
+				"'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
+	public void testBug342724_03() throws Exception {
+		RichString richString = richString(
+				"'''\n" + 
+				"	«IF true»\n" + 
+				"			test\n" + 
+				"		«ELSEIF true»\n" + 
+				"			test\n" + 
+				"	«ENDIF»\n" + 
+				"	test\n" + 
+				"'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
 }

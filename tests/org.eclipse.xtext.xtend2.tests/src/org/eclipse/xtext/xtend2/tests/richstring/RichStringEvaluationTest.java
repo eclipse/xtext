@@ -109,14 +109,19 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 		@Override
 		public void acceptElseIfCondition(XExpression condition) {
 			if (!internalIgnore()) {
-				XBooleanLiteral literal = (XBooleanLiteral) condition;
-				boolean conditionResult = literal.isIsTrue();
-				if (conditionResult) {
-					printElse.pop();
-					printElse.push(Boolean.FALSE);
+				if (printElse.peek()) {
+					XBooleanLiteral literal = (XBooleanLiteral) condition;
+					boolean conditionResult = literal.isIsTrue();
+					if (conditionResult) {
+						printElse.pop();
+						printElse.push(Boolean.FALSE);
+					}
+					printNext.pop();
+					printNext.push(conditionResult);
+				} else {
+					printNext.pop();
+					printNext.push(Boolean.FALSE);
 				}
-				printNext.pop();
-				printNext.push(conditionResult);
 			}
 		}
 

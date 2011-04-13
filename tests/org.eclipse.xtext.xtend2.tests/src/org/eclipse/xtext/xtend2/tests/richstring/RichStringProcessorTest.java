@@ -876,4 +876,14 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 			"'''«formatCode(unescapeXdocChars(contents), language)-»\n" + 
 			"«ENDDEFINE»'''");
 	}
+	
+	public void testBug342724() throws Exception {
+		doTestStackIsConsistentWithErroneousModel(
+				"'''\n" + 
+				"	«IF true»\n" + 
+				"		test\n" + 
+				"	«ENDIF»\n" + 
+				"	test\n" + 
+				"'''");
+	}
 }
