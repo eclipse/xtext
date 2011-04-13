@@ -80,6 +80,8 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 					+ jdtType.getFullyQualifiedName() + "'.");
 		ASTParser parser = ASTParser.newParser(AST.JLS3);
 		parser.setProject(jdtType.getJavaProject());
+		parser.setIgnoreMethodBodies(true);
+		
 		IBinding[] bindings = parser.createBindings(new IJavaElement[] { jdtType }, null);
 		if (bindings[0] == null)
 			throw new IllegalStateException("Could not create binding for '" + jdtType.getFullyQualifiedName() + "'.");
