@@ -6,11 +6,15 @@ package org.eclipse.xtext.example.domainmodel.ui.refactoring;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.example.domainmodel.domainmodel.Property;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.AbstractJvmModelRenameStrategy;
 
@@ -41,8 +45,18 @@ public class DomainmodelRenameStrategy extends AbstractJvmModelRenameStrategy {
 	protected void setInferredJvmElementName(String name, EObject renamedSourceElement) {
 		Set<EObject> jvmElements = getJvmModelAssociations().getJvmElements(renamedSourceElement);
 		for (EObject jvmElement : jvmElements) {
-			if (jvmElement instanceof JvmMember) {
-				((JvmMember) jvmElement).setSimpleName(name);
+			if (renamedSourceElement instanceof Property) {
+				if (jvmElement instanceof JvmField) {
+					((JvmField) jvmElement).setSimpleName(name);
+				} else if (jvmElement instanceof JvmOperation) {
+					JvmOperation operation = (JvmOperation) jvmElement;
+					operation.setSimpleName(
+							operation.getSimpleName().substring(0, 3) + Strings.toFirstUpper(name));
+				}
+			} else {
+				if (jvmElement instanceof JvmMember) {
+					((JvmMember) jvmElement).setSimpleName(name);
+				}
 			}
 		}
 	}
