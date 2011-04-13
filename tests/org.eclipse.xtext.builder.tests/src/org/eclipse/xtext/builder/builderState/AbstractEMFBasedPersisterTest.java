@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.builderState;
 
+import static java.util.Collections.*;
+
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
@@ -133,5 +135,13 @@ public class AbstractEMFBasedPersisterTest extends TestCase {
 		Iterable<IResourceDescription> load = persister.load();
 		URI uriAfterSave = load.iterator().next().getURI();
 		assertEquals(uri,uriAfterSave);
+	}
+	
+	public void testReferencesArePersisted() {
+		IResourceDescription resourceDescription = createResourceDescription(0);
+		persister.save(singleton(resourceDescription));
+		IResourceDescription loaded = persister.load().iterator().next();
+		IReferenceDescription next = loaded.getReferenceDescriptions().iterator().next();
+		assertNotNull(next.getEReference());
 	}
 }
