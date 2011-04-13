@@ -656,11 +656,13 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 	@Override
 	protected Region getHoverRegionInternal(final int lineNumber, final int offset) {
 		List<Annotation> annotations = getAnnotations(lineNumber, offset);
-		for (Annotation annotation : annotations) {
-			Position position = sourceViewer.getAnnotationModel().getPosition(annotation);
-			if (position != null) {
-				final int start = position.getOffset();
-				return new Region (start, position.getLength());	
+		if (annotations != null) {
+			for (Annotation annotation : annotations) {
+				Position position = sourceViewer.getAnnotationModel().getPosition(annotation);
+				if (position != null) {
+					final int start = position.getOffset();
+					return new Region (start, position.getLength());	
+				}
 			}
 		}
 		return null;
@@ -672,16 +674,18 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 	@Override
 	protected Object getHoverInfoInternal(ITextViewer textViewer, final int lineNumber, final int offset) {
 		List<Annotation> annotations = getAnnotations(lineNumber, offset);
-		for (Annotation annotation : annotations) {
-			if (annotation.getText() != null) {
-				Position position = getAnnotationModel().getPosition(annotation);
-				final IQuickAssistInvocationContext invocationContext = new TextInvocationContext(sourceViewer, position.getOffset(), position.getLength());
-				CompletionProposalRunnable runnable = new CompletionProposalRunnable(invocationContext);	
-				// Note: the resolutions have to be retrieved from the UI thread, otherwise
-				// workbench.getActiveWorkbenchWindow() will return null in LanguageSpecificURIEditorOpener and
-				// cause an exception
-				Display.getDefault().syncExec(runnable);
-				return new AnnotationInfo (annotation, position, sourceViewer, runnable.proposals);				
+		if (annotations != null) {
+			for (Annotation annotation : annotations) {
+				if (annotation.getText() != null) {
+					Position position = getAnnotationModel().getPosition(annotation);
+					final IQuickAssistInvocationContext invocationContext = new TextInvocationContext(sourceViewer, position.getOffset(), position.getLength());
+					CompletionProposalRunnable runnable = new CompletionProposalRunnable(invocationContext);	
+					// Note: the resolutions have to be retrieved from the UI thread, otherwise
+					// workbench.getActiveWorkbenchWindow() will return null in LanguageSpecificURIEditorOpener and
+					// cause an exception
+					Display.getDefault().syncExec(runnable);
+					return new AnnotationInfo (annotation, position, sourceViewer, runnable.proposals);				
+				}
 			}
 		}
 		return null;
