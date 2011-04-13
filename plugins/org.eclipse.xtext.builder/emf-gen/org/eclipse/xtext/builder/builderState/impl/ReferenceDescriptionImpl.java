@@ -340,7 +340,8 @@ public class ReferenceDescriptionImpl extends Container implements IReferenceDes
 			case BuilderStatePackage.REFERENCE_DESCRIPTION__INDEX_IN_LIST:
 				return indexInList != INDEX_IN_LIST_EDEFAULT;
 			case BuilderStatePackage.REFERENCE_DESCRIPTION__EXTERNAL_FORM_OF_EREFERENCE:
-				return EXTERNAL_FORM_OF_EREFERENCE_EDEFAULT == null ? externalFormOfEReference != null : !EXTERNAL_FORM_OF_EREFERENCE_EDEFAULT.equals(externalFormOfEReference);
+				return (EXTERNAL_FORM_OF_EREFERENCE_EDEFAULT == null ? externalFormOfEReference != null : !EXTERNAL_FORM_OF_EREFERENCE_EDEFAULT.equals(externalFormOfEReference))
+						|| reference != null;
 			case BuilderStatePackage.REFERENCE_DESCRIPTION__CONTAINER_EOBJECT_URI:
 				return CONTAINER_EOBJECT_URI_EDEFAULT == null ? containerEObjectURI != null : !CONTAINER_EOBJECT_URI_EDEFAULT.equals(containerEObjectURI);
 		}
