@@ -8,9 +8,12 @@
 package org.eclipse.xtext.common.types.ui.query;
 
 
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
@@ -30,18 +33,18 @@ import com.google.inject.Provider;
  */
 public class QueryParticipant implements IQueryParticipant {
 
-	private final IResourceDescriptions resourceDescriptions;
-
 	private final TypeURIHelper typeURIHelper;
 
 	private final UIParticipant uiParticipant;
+	
+	private Provider<IResourceDescriptions> resourceDescriptionsProvider;
 	
 	@Inject
 	private Provider<JavaSearchHelper> javaSearchHelperProvider;
 
 	@Inject
-	public QueryParticipant(IResourceDescriptions resourceDescriptions, UIParticipant uiParticipant) {
-		this.resourceDescriptions = resourceDescriptions;
+	public QueryParticipant(Provider<IResourceDescriptions> resourceDescriptionsProvider, UIParticipant uiParticipant) {
+		this.resourceDescriptionsProvider = resourceDescriptionsProvider;
 		this.uiParticipant = uiParticipant;
 		typeURIHelper = new TypeURIHelper();
 	}
@@ -69,8 +72,28 @@ public class QueryParticipant implements IQueryParticipant {
 
 	protected JavaSearchHelper createSearchHelper(ISearchRequestor requestor) {
 		JavaSearchHelper searchHelper = javaSearchHelperProvider.get();
-		searchHelper.init(requestor, resourceDescriptions);
+		IResourceDescriptions descriptionsToSearch = resourceDescriptionsProvider.get();
+		if(descriptionsToSearch.isEmpty()) {
+			waitForBuild();
+			descriptionsToSearch = resourceDescriptionsProvider.get();
+		}
+		searchHelper.init(requestor, descriptionsToSearch);
 		return searchHelper;
+	}
+	
+	protected void waitForBuild() {
+		boolean wasInterrupted = false;
+		do {
+			try {
+				Job.getJobManager().join(ResourcesPlugin.FAMILY_AUTO_BUILD,
+						null);
+				wasInterrupted = false;
+			} catch (OperationCanceledException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				wasInterrupted = true;
+			}
+		} while (wasInterrupted);
 	}
 
 	public int estimateTicks(QuerySpecification query) {
