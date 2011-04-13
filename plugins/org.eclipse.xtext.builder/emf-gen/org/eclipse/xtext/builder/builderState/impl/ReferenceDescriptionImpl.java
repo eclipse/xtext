@@ -328,7 +328,7 @@ public class ReferenceDescriptionImpl extends Container implements IReferenceDes
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
