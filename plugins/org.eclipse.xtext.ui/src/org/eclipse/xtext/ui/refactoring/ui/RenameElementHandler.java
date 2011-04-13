@@ -14,7 +14,9 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.ITextSelection;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -64,7 +66,8 @@ public class RenameElementHandler extends AbstractHandler {
 				}
 			}
 		} catch (Exception exc) {
-			LOG.error(exc.getMessage(), exc);
+			MessageDialog.openError(Display.getCurrent().getActiveShell(), "Error initializing refactoring", exc.getMessage());
+			LOG.error("Error initializing refactoring", exc);
 		}
 		return null;
 	}
