@@ -35,8 +35,8 @@ public class RenameElementHandler extends AbstractHandler {
 	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
 
 	@Inject
-	private RenameElementOperation renameElementOperation;
-	
+	protected Provider<RenameLinkedMode> renameLinkedModeProvider;
+
 	protected static final Logger LOG = Logger.getLogger(RenameElementHandler.class);
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -52,14 +52,15 @@ public class RenameElementHandler extends AbstractHandler {
 								if (targetElement != null) {
 									final URI targetElementURI = EcoreUtil.getURI(targetElement);
 									IRenameElementContext.Impl renameElementContext = new IRenameElementContext.Impl(
-											targetElementURI, targetElement.eClass(), editor, selection, resource.getURI());
+											targetElementURI, targetElement.eClass(), editor, selection, resource
+													.getURI());
 									return renameElementContext;
 								}
 								return null;
 							}
 						});
 				if (renameElementContext != null) {
-					renameElementOperation.execute(renameElementContext);
+					startRenameLinkedMode(renameElementContext);
 				}
 			}
 		} catch (Exception exc) {
@@ -68,22 +69,17 @@ public class RenameElementHandler extends AbstractHandler {
 		return null;
 	}
 
-	public static class RenameElementOperation {
-		@Inject
-		protected Provider<RenameLinkedMode> renameLinkedModeProvider;
-		
-		public void execute(IRenameElementContext renameElementContext) throws InterruptedException {
-			RenameLinkedMode activeLinkedMode = RenameLinkedMode.getActiveLinkedMode();
-			if (activeLinkedMode != null) {
-				if (activeLinkedMode.isCaretInLinkedPosition()) {
-					activeLinkedMode.startRefactoring(RefactoringType.REFACTORING_DIALOG);
-					return;
-				} else {
-					activeLinkedMode.cancel();
-				}
-			} 
-			activeLinkedMode = renameLinkedModeProvider.get();
-			activeLinkedMode.start(renameElementContext);
+	protected void startRenameLinkedMode(IRenameElementContext renameElementContext) throws InterruptedException {
+		RenameLinkedMode activeLinkedMode = RenameLinkedMode.getActiveLinkedMode();
+		if (activeLinkedMode != null) {
+			if (activeLinkedMode.isCaretInLinkedPosition()) {
+				activeLinkedMode.startRefactoring(RefactoringType.REFACTORING_DIALOG);
+				return;
+			} else {
+				activeLinkedMode.cancel();
+			}
 		}
+		activeLinkedMode = renameLinkedModeProvider.get();
+		activeLinkedMode.start(renameElementContext);
 	}
 }
