@@ -174,10 +174,10 @@ public class XtextReconciler extends Job implements IReconciler {
 			}
 			shouldInstallCompletionListener = false;
 		}
-		if (oldInput != null) {
+		if (oldInput instanceof IXtextDocument) {
 			((IXtextDocument)oldInput).removeXtextDocumentContentObserver(documentListener);
 		}
-		if (newInput != null && newInput instanceof IXtextDocument) {
+		if (newInput instanceof IXtextDocument) {
 			((IXtextDocument) newInput).addXtextDocumentContentObserver(documentListener);
 			final IXtextDocument document = XtextDocumentUtil.get(textViewer);
 			strategy.setDocument(document);

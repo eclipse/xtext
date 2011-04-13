@@ -37,7 +37,6 @@ import org.eclipse.ui.actions.PartEventAction;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.xtext.ui.editor.CompoundXtextEditorCallback;
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Provider;
@@ -120,8 +119,6 @@ public class DefaultMergeViewer extends TextMergeViewer {
 	protected SourceViewerConfiguration createSourceViewerConfiguration(SourceViewer sourceViewer,
 			IEditorInput editorInput) {
 		DefaultMergeEditor mergeEditor = getEditor(sourceViewer);
-		SourceViewerConfiguration sourceViewerConfiguration = sourceViewer.getDocument() instanceof IXtextDocument ? mergeEditor
-				.getXtextSourceViewerConfiguration() : new SourceViewerConfiguration();
 		if (editorInput != null) {
 			try {
 				mergeEditor.init((IEditorSite) mergeEditor.getSite(), editorInput);
@@ -130,7 +127,7 @@ public class DefaultMergeViewer extends TextMergeViewer {
 				throw new WrappedException(partInitException);
 			}
 		}
-		return sourceViewerConfiguration;
+		return mergeEditor.getXtextSourceViewerConfiguration();
 	}
 
 	@Override
