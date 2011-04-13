@@ -82,6 +82,7 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 			assertEquals("Java code was " + compileToJavaCode, object, compile(string).apply());
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.err.println(compileToJavaCode);
 			fail("Exception thrown " + e + ".Java code was " + compileToJavaCode);
 		}
 	}

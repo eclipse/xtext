@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.interpreter.impl;
 
+import static com.google.common.collect.Lists.*;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -40,6 +42,7 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -74,6 +77,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -143,6 +147,9 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	
 	@Inject
 	private Primitives primitives;
+	
+	@Inject
+	private XExpressionHelper expressionHelper;
 	
 	private ClassFinder classFinder;
 
@@ -556,6 +563,28 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	protected Object _evaluateAbstractFeatureCall(XAbstractFeatureCall featureCall, IEvaluationContext context, CancelIndicator indicator) {
+		if (expressionHelper.isShortCircuiteBooleanOperation(featureCall)) {
+			XExpression leftOperand = ((XBinaryOperation)featureCall).getLeftOperand();
+			Object result = internalEvaluate(leftOperand, context, indicator);
+			final boolean isAND = featureCall.getConcreteSyntaxFeatureName().equals(expressionHelper.getAndOperator());
+			if (isAND && !(Boolean)result) {
+				return false;
+			} else if (!isAND && (Boolean)result) {
+				return true;
+			}
+			JvmOperation operation = (JvmOperation) featureCall.getFeature();
+			XExpression receiver = callToJavaMapping.getActualReceiver(featureCall, featureCall.getFeature(), featureCall.getImplicitReceiver());
+			List<XExpression> operationArguments = callToJavaMapping.getActualArguments(featureCall, featureCall.getFeature(), featureCall.getImplicitReceiver());
+			List<Object> argumentValues = newArrayList();
+			for (XExpression expr : operationArguments) {
+				if (expr == leftOperand) {
+					argumentValues.add(result);
+				} else {
+					argumentValues.add(internalEvaluate(expr, context, indicator));
+				}
+			}
+			return invokeOperation(operation, receiver, argumentValues);
+		}
 		XExpression receiver = callToJavaMapping.getActualReceiver(featureCall, featureCall.getFeature(), featureCall.getImplicitReceiver());
 		Object receiverObj = receiver==null?null:internalEvaluate(receiver, context, indicator);
 		return internalFeatureCallDispatch(featureCall, receiverObj, context, indicator);

@@ -28,6 +28,34 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	protected abstract void assertEvaluatesTo(Object object, String string);
 	protected abstract void assertEvaluatesWithException(Class<? extends Throwable> class1, String string);
 	
+	public void testShortCircuitBooleanExpression_00() throws Exception {
+		String expr = "true || {if (true) throw new NullPointerException() else false}";
+		assertEvaluatesTo(true, expr);
+	}
+	
+	public void testShortCircuitBooleanExpression_01() throws Exception {
+		String expr = "false && {if (true) throw new NullPointerException() else false}";
+		assertEvaluatesTo(false, expr);
+	}
+	
+	public void testShortCircuitBooleanExpression_03() throws Exception {
+		String expr = "{ val i = newArrayList(false,true).iterator" +
+				"  if (i.next && i.next)" +
+				"    throw new NullPointerException()" +
+				"  else" +
+				"    i.next" +
+				"}";
+		assertEvaluatesTo(true, expr);
+	}
+	
+	public void testShortCircuitBooleanExpression_04() throws Exception {
+		String expr = "{ val i = newArrayList(true,false).iterator" +
+		"  if (i.next || i.next)" +
+		"     i.next" +
+		"}";
+		assertEvaluatesTo(false, expr);
+	}
+	
 	public void testForLoop() throws Exception {
 		String expr = 
 			    "{\n" + 
