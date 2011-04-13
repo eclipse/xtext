@@ -32,6 +32,9 @@ public class XbaseLinkingScopeProvider implements IScopeProvider {
 	private XbaseTypeConformanceComputer conformanceChecker;
 
 	public IScope getScope(EObject context, EReference reference) {
+		if (context == null || context.eResource() == null || context.eResource().getResourceSet() == null) {
+			return IScope.NULLSCOPE;
+		}
 		final IScope scope = delegate.getScope(context, reference);
 		if (isFeatureCallScope(reference)) {
 			return wrapFeatureCallScope(scope, context, reference);
