@@ -39,7 +39,8 @@ import com.google.inject.Inject;
 public abstract class AbstractBuilderState extends AbstractResourceDescriptionChangeEventSource implements
 		IBuilderState {
 
-	private volatile ResourceDescriptionsData resourceDescriptionData = new ResourceDescriptionsData(Collections.<IResourceDescription>emptyList());
+	private volatile ResourceDescriptionsData resourceDescriptionData = new ResourceDescriptionsData(
+			Collections.<IResourceDescription> emptyList());
 
 	@Inject
 	private IMarkerUpdater markerUpdater;
@@ -47,11 +48,13 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 	@Inject
 	private PersistedStateProvider persister;
 
-	private boolean isLoaded = false;
+	private volatile boolean isLoaded = false;
 
 	public synchronized void load() {
-		resourceDescriptionData = new ResourceDescriptionsData(persister.load());
-		isLoaded = true;
+		if (!isLoaded) {
+			resourceDescriptionData = new ResourceDescriptionsData(persister.load());
+			isLoaded = true;
+		}
 	}
 
 	protected void ensureLoaded() {
@@ -112,7 +115,8 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 		return event.getDeltas();
 	}
 
-	protected abstract Collection<IResourceDescription.Delta> doUpdate(BuildData buildData, ResourceDescriptionsData newData, IProgressMonitor monitor);
+	protected abstract Collection<IResourceDescription.Delta> doUpdate(BuildData buildData,
+			ResourceDescriptionsData newData, IProgressMonitor monitor);
 
 	public synchronized ImmutableList<IResourceDescription.Delta> clean(Set<URI> toBeRemoved, IProgressMonitor monitor) {
 		ensureLoaded();
@@ -143,18 +147,18 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 	}
 
 	protected Collection<IResourceDescription.Delta> doClean(Set<URI> toBeRemoved, IProgressMonitor monitor) {
-        SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.AbstractBuilderState_2, toBeRemoved.size());
-        subMonitor.subTask(Messages.AbstractBuilderState_2);
-        Set<URI> toBeDeletedAsSet = Sets.newHashSet(toBeRemoved);
-        Map<URI, IResourceDescription.Delta> result = Maps.newHashMap();
-        for (URI toDelete : toBeDeletedAsSet) {
-            IResourceDescription resourceDescription = getResourceDescription(toDelete);
-            if (resourceDescription != null) {
-                result.put(toDelete, new DefaultResourceDescriptionDelta(resourceDescription, null));
-            }
-            subMonitor.worked(1);
-        }
-        return result.values();
+		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.AbstractBuilderState_2, toBeRemoved.size());
+		subMonitor.subTask(Messages.AbstractBuilderState_2);
+		Set<URI> toBeDeletedAsSet = Sets.newHashSet(toBeRemoved);
+		Map<URI, IResourceDescription.Delta> result = Maps.newHashMap();
+		for (URI toDelete : toBeDeletedAsSet) {
+			IResourceDescription resourceDescription = getResourceDescription(toDelete);
+			if (resourceDescription != null) {
+				result.put(toDelete, new DefaultResourceDescriptionDelta(resourceDescription, null));
+			}
+			subMonitor.worked(1);
+		}
+		return result.values();
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjects() {
@@ -172,7 +176,7 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
 		return resourceDescriptionData.getExportedObjectsByObject(object);
 	}
-	
+
 	public boolean isEmpty() {
 		return resourceDescriptionData.isEmpty();
 	}
