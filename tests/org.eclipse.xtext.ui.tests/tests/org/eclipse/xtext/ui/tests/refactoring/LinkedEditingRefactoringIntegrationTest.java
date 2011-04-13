@@ -14,6 +14,8 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -43,6 +45,7 @@ import com.google.inject.Inject;
 @SuppressWarnings("restriction")
 public class LinkedEditingRefactoringIntegrationTest extends AbstractEditorTest {
 
+	private static final String TEST_CLASS = "TestClass";
 	private static final String TEST_PROJECT = "test";
 	private IProject project;
 
@@ -68,6 +71,9 @@ public class LinkedEditingRefactoringIntegrationTest extends AbstractEditorTest 
 		ePackage.setName("test");
 		ePackage.setNsPrefix("test");
 		ePackage.setNsURI("http://test");
+		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
+		eClass.setName(TEST_CLASS);
+		ePackage.getEClassifiers().add(eClass);
 		Resource ecoreResource = new ResourceSetImpl().createResource(URI.createPlatformResourceURI(TEST_PROJECT + "/Test.ecore", true));
 		ecoreResource.getContents().add(ePackage);
 		ecoreResource.save(null);
@@ -75,31 +81,36 @@ public class LinkedEditingRefactoringIntegrationTest extends AbstractEditorTest 
 		project.refreshLocal(IResource.DEPTH_INFINITE, null);
 		waitForAutoBuild();
 		
-		String model = "ref test";
+		String model = "ref test." + TEST_CLASS;
 		IFile file = createFile(TEST_PROJECT + "/ref.referringtestlanguage", model);
 		final XtextEditor editor = openEditor(file);
-		final TextSelection selection = new TextSelection(5,4);
+		final TextSelection selection = new TextSelection(model.indexOf(TEST_CLASS), TEST_CLASS.length());
 		editor.getSelectionProvider().setSelection(selection);
 		IRenameElementContext context = editor.getDocument().readOnly(new IUnitOfWork<IRenameElementContext, XtextResource>() {
 			public IRenameElementContext exec(XtextResource state) throws Exception {
 				Reference ref = (Reference) state.getContents().get(0).eContents().get(0);
-				assertNotNull(ref.getReferenced());
-				return new IRenameElementContext.Impl(EcoreUtil.getURI(ref.getReferenced()), ref.getReferenced().eClass(), editor, selection, state.getURI());
+				EObject referenced = ref.getReferenced();
+				assertNotNull(referenced);
+				return new IRenameElementContext.Impl(EcoreUtil.getURI(referenced), referenced.eClass(), editor, selection, state.getURI());
 			}
 		});
 		renameLinkedMode.start(context);
 		waitForDisplay();
-		pressKeys(editor, "new_test\n");
-		editor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
-			@Override
-			public void process(XtextResource state) throws Exception {
-				// wait for reconciler
-			}
-		});
+		pressKeys(editor, "NewTestClass\n");
+		waitForReconciler(editor);
 		waitForDisplay();
 		waitForAutoBuild();
 		ecoreResource.load(null);
-		assertEquals("new_test", ((EPackage)ecoreResource.getContents().get(0)).getName());
+		assertEquals("NewTestClass", ((EPackage)ecoreResource.getContents().get(0)).getEClassifiers().get(0).getName());
+	}
+
+	protected void waitForReconciler(final XtextEditor editor) {
+		editor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+			@Override
+			public void process(XtextResource state) throws Exception {
+				// do nothing
+			}
+		});
 	}
 	
 	protected void waitForDisplay() {
