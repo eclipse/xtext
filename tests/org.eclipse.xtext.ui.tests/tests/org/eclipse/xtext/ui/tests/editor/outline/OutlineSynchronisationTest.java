@@ -23,7 +23,7 @@ public class OutlineSynchronisationTest extends AbstractOutlineWorkbenchTest {
 		IPath newPath = file.getFullPath().removeLastSegments(1).append("_new").addFileExtension(file.getFileExtension());
 		outlinePage.resetSyncer();
 		file.move(newPath, true, null);
-		outlinePage.waitForUpdate(1000);
+		outlinePage.waitForUpdate(ERROR_TIMEOUT);
 		assertFirstNodeName("one");
 
 		outlinePage.resetSyncer();
@@ -33,7 +33,7 @@ public class OutlineSynchronisationTest extends AbstractOutlineWorkbenchTest {
 				((Model) state.getContents().get(0)).getElements().get(0).setName("new_one");
 			}
 		});
-		outlinePage.waitForUpdate(1000);
+		outlinePage.waitForUpdate(ERROR_TIMEOUT);
 		assertFirstNodeName("new_one");
 	}
 
