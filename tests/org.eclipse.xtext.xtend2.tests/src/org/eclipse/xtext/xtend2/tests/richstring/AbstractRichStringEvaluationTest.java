@@ -603,4 +603,16 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 //				" «ENDFOR»'''");
 //	}
 	
+	public void testBug342724_01() throws Exception {
+		assertOutput("test1\ntest3\n",
+				"'''\n" + 
+				"	«IF true»\n" + 
+				"			test1\n" + 
+				"		«ELSEIF true»\n" + 
+				"			test2\n" + 
+				"	«ENDIF»\n" + 
+				"	test3\n" + 
+				"'''");
+	}
+	
 }
