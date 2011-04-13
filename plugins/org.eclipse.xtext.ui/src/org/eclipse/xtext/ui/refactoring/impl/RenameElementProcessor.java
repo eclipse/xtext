@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
@@ -20,6 +21,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ltk.core.refactoring.Change;
@@ -36,6 +38,7 @@ import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
+import org.eclipse.xtext.ui.util.ResourceUtil;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
@@ -91,11 +94,18 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 			if (targetElement == null) {
 				throw new RefactoringStatusException("Rename target element can not be resolved", true);
 			}
+			IFile targetFile = ResourceUtil.getFile(targetElement.eResource());
+			if(targetFile == null || !targetFile.isAccessible())
+				throw new RefactoringStatusException("Rename target cannot be accessed", true);
+			if(targetFile.isReadOnly())
+				throw new RefactoringStatusException("Target file is read-only", true);
 			this.renameStrategy = strategyProvider.get(targetElement, renameElementContext);
 			if(this.renameStrategy == null)
 				return false;
 		} catch (Exception e) {
 			handleException(status, e);
+			if(status.getSeverity()==RefactoringStatus.FATAL)
+				throw (e instanceof RuntimeException) ? (RuntimeException) e : new WrappedException(e);
 		}
 		return true;
 	}
