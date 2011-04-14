@@ -477,6 +477,9 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		return new String[] { "org.eclipse.emf.ecore", "org.eclipse.emf.common" };
 	}
 	
+	/**
+	 * @since 2.0
+	 */
 	protected void registerGenmodel(GenModel genModel) {
 		Map<String, URI> registry = EcorePlugin.getEPackageNsURIToGenModelLocationMap();
 		URI uri = genModel.eResource().getURI();

@@ -14,4 +14,11 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="xtend-gen/org/eclipse/xtext/generator/grammarAccess/GrammarAccess.java" type="org.eclipse.xtext.generator.grammarAccess.GrammarAccess">
+        <filter comment="added new class" id="1110441988">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.grammarAccess.GrammarAccess"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>
