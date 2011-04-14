@@ -126,6 +126,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 				referenceDescriptions.add(referenceDescription);
 			}
 		};
+		EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
 		Map<EObject, IEObjectDescription> eObject2exportedEObjects = createEObject2ExportedEObjectsMap(getExportedObjects());
 		TreeIterator<EObject> contents = EcoreUtil.getAllProperContents(this.resource, true);
 		while (contents.hasNext()) {
