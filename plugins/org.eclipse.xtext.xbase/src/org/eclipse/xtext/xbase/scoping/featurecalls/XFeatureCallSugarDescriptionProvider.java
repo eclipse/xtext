@@ -86,8 +86,6 @@ public class XFeatureCallSugarDescriptionProvider extends DefaultJvmFeatureDescr
 			return false;
 		if (getPropertyNameForGetterMethod(op.getSimpleName()) == null)
 			return false;
-		if (op.getReturnType() == null)
-			return false;
 		return true;
 	}
 
