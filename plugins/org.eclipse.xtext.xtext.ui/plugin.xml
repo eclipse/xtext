@@ -416,5 +416,20 @@
          </command>
       </menuContribution>
    </extension>
+    <extension
+          point="org.eclipse.ltk.core.refactoring.renameParticipants">
+       <renameParticipant
+             class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.refactoring.EcoreRefactoringParticipant"
+             id="org.eclipse.xtext.xtext.ui.ecoreRenameParticipant"
+             name="Ecore Rename Participant">
+          <enablement>
+             <with
+                   variable="processorIdentifier">
+                <equals
+                      value="org.eclipse.xtext.Xtext.ui.refactoring.Processor"/>
+             </with>
+          </enablement>
+       </renameParticipant>
+    </extension>
 
 </plugin>
