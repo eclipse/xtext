@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.GeneratedMetamodel;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
@@ -53,21 +54,22 @@ public class XtextRenameStrategyProvider extends DefaultRenameStrategy.Provider 
 					public void createDeclarationUpdates(String newName, ResourceSet resourceSet,
 							IRefactoringUpdateAcceptor updateAcceptor) {
 						super.createDeclarationUpdates(newName, resourceSet, updateAcceptor);
-					//	renameReturnType(targetElementOriginalURI, newName, resourceSet);
 					}
 
 					protected void renameReturnType(URI targetElementURI, String newName, ResourceSet resourceSet) {
 						ParserRule parserRule = (ParserRule) resourceSet.getEObject(targetElementURI, false);
 						TypeRef parserRuleType = parserRule.getType();
-						if(parserRule.getName().equals(parserRuleType.getClassifier().getName())) {
-							if(parserRuleType.getMetamodel() instanceof GeneratedMetamodel) {
+						if(parserRule.getName().equals(parserRuleType.getClassifier().getName())
+								&& parserRuleType.getMetamodel() instanceof GeneratedMetamodel) {
 								parserRuleType.getClassifier().setName(newName);
-							} else {
-								// ja was?
-							}
 						}
 					}
 				};
+			}
+			
+			@Override
+			public IRenameStrategy caseGrammar(Grammar grammar) {
+				return new DefaultRenameStrategy(grammar, getLocationInFileProvider()) {};
 			}
 		}.doSwitch(targetElement);
 	}
