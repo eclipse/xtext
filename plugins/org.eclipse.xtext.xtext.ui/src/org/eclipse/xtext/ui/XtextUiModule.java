@@ -19,6 +19,8 @@ import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IComparat
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeLabelProvider;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
+import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.ProjectAwareXtendXtext2EcorePostProcessor;
@@ -34,6 +36,8 @@ import org.eclipse.xtext.xtext.ui.editor.outline.XtextOutlineTreeProvider;
 import org.eclipse.xtext.xtext.ui.editor.quickfix.XtextGrammarQuickfixProvider;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingCalculator;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
+import org.eclipse.xtext.xtext.ui.refactoring.XtextDependentElementsCalculator;
+import org.eclipse.xtext.xtext.ui.refactoring.XtextRenameStrategyProvider;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
 
 import com.google.inject.Binder;
@@ -131,6 +135,16 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 
 	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
 		return XtextHyperlinkHelper.class;
+	}
+	
+	@SuppressWarnings("restriction")
+	public Class<? extends IDependentElementsCalculator> bindIDependentElementsCalculator() {
+		return XtextDependentElementsCalculator.class;
+	}
+
+	@SuppressWarnings("restriction")
+	public Class<? extends IRenameStrategy.Provider> bindIRenameStrategy$Provider() {
+		return XtextRenameStrategyProvider.class;
 	}
 
 }
