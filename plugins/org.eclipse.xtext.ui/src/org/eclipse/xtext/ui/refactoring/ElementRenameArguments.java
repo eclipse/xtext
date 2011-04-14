@@ -11,7 +11,6 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.ltk.core.refactoring.participants.RenameArguments;
 
 /**
  * Stores information on an element to be renamed and elements whose names change as a consequence.
@@ -19,52 +18,51 @@ import org.eclipse.ltk.core.refactoring.participants.RenameArguments;
  * @author Jan Koehnlein - Initial contribution and API
  * @author Holger Schill
  */
-public class ElementRenameArguments extends RenameArguments {
+public class ElementRenameArguments {
 
 	private URI contextResourceURI = null;
 	private final URI targetElementURI;
-	private final Map<URI,URI> original2newElementURIs;
+	private final Map<URI, URI> original2newElementURIs;
 	private final IRenameStrategy renameStrategy;
+	private final String newName;
 
 	public ElementRenameArguments(URI targetElementURI, String newName, IRenameStrategy renameStrategy,
-			Map<URI,URI> original2newElementURIs,
-			boolean updateReferences, URI contextResourceURI) {
-		super(newName, updateReferences);
+			Map<URI, URI> original2newElementURIs, URI contextResourceURI) {
+		this.newName = newName;
 		this.targetElementURI = targetElementURI;
 		this.renameStrategy = renameStrategy;
 		this.original2newElementURIs = original2newElementURIs;
 		this.contextResourceURI = contextResourceURI;
 	}
-	
+
 	public ElementRenameArguments(URI targetElementURI, String newName, IRenameStrategy renameStrategy,
-			Map<URI,URI> original2newElementURIs,
-			boolean updateReferences) {
-		super(newName, updateReferences);
-		this.targetElementURI = targetElementURI;
-		this.renameStrategy = renameStrategy;
-		this.original2newElementURIs = original2newElementURIs;
+			Map<URI, URI> original2newElementURIs, boolean updateReferences) {
+		this(targetElementURI, newName, renameStrategy, null, null);
 	}
 
 	public Iterable<URI> getRenamedElementURIs() {
 		return original2newElementURIs.keySet();
 	}
-	
+
 	public URI getTargetElementURI() {
 		return targetElementURI;
 	}
-	
-	public URI getContextResourceURI(){
+
+	public URI getContextResourceURI() {
 		return contextResourceURI;
 	}
-	
+
 	public URI getNewElementURI(URI originalElementURI) {
 		URI newElementURI = original2newElementURIs.get(originalElementURI);
-		return (newElementURI != null) ? newElementURI : originalElementURI; 
+		return (newElementURI != null) ? newElementURI : originalElementURI;
 	}
 
 	public void applyDeclarationChange(ResourceSet resourceSet) {
 		renameStrategy.applyDeclarationChange(getNewName(), resourceSet);
 	}
 
-	
+	public String getNewName() {
+		return newName;
+	}
+
 }

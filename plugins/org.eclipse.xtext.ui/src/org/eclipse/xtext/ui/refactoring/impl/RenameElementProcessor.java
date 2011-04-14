@@ -194,7 +194,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	public RefactoringParticipant[] loadParticipants(RefactoringStatus status, SharableParticipants sharedParticipants)
 			throws CoreException {
 		RenameParticipant[] renameParticipants = ParticipantManager.loadRenameParticipants(status, this,
-				targetElementURI, renameArguments, new String[] { XtextProjectHelper.NATURE_ID }, sharedParticipants);
+				renameElementContext, new RenameArguments(newName, true), new String[] { XtextProjectHelper.NATURE_ID }, sharedParticipants);
 		return renameParticipants;
 	}
 

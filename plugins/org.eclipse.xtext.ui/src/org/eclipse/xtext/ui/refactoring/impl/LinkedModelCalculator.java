@@ -235,7 +235,7 @@ public class LinkedModelCalculator implements ILinkedModelCalculator {
 				renameStrategy, progress.newChild(1));
 		// Handle in contextResourceURI to define that references should looked up only in resource that builds the context
 		renameArguments = new ElementRenameArguments(targetElementURI, originalName, renameStrategy,
-				original2newElementURIs, true, contextResourceURI);
+				original2newElementURIs, contextResourceURI);
 
 		// Declaration in in current Resource
 		if (contextResourceURI.equals(targetElementURI.trimFragment())) {
