@@ -14,8 +14,6 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -29,8 +27,10 @@ import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.CheckConditionsContext;
 import org.eclipse.ltk.core.refactoring.participants.ParticipantManager;
 import org.eclipse.ltk.core.refactoring.participants.RefactoringParticipant;
+import org.eclipse.ltk.core.refactoring.participants.RenameArguments;
 import org.eclipse.ltk.core.refactoring.participants.RenameParticipant;
 import org.eclipse.ltk.core.refactoring.participants.SharableParticipants;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.refactoring.ElementRenameArguments;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
@@ -39,9 +39,9 @@ import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.ui.util.ResourceUtil;
-import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * LTK {@link org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor} for an Xtext element rename
@@ -64,7 +64,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	private IRenameStrategy.Provider strategyProvider;
 
 	@Inject
-	private IWorkspace workspace;
+	private ProjectUtil projectUtil;
 
 	@Inject
 	private ReferenceUpdaterDispatcher referenceUpdaterDispatcher;
@@ -72,6 +72,10 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	@Inject
 	private IRenamedElementTracker renameElementTracker;
 
+	@Inject@Named(Constants.LANGUAGE_NAME)
+	private String languageName;
+	
+	private IRenameElementContext renameElementContext;
 	private ResourceSet resourceSet;
 	private RefactoringStatus status;
 	private URI targetElementURI;
@@ -84,12 +88,14 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 
 	private ElementRenameArguments renameArguments;
 
+
 	@Override
 	public boolean initialize(final IRenameElementContext renameElementContext) {
 		status = new RefactoringStatus();
 		try {
+			this.renameElementContext = renameElementContext;
 			this.targetElementURI = renameElementContext.getTargetElementURI();
-			resourceSet = resourceSetProvider.get(getProject(targetElementURI));
+			resourceSet = resourceSetProvider.get(projectUtil.getProject(targetElementURI));
 			targetElement = resourceSet.getEObject(targetElementURI, true);
 			if (targetElement == null) {
 				throw new RefactoringStatusException("Rename target element can not be resolved", true);
@@ -110,18 +116,6 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 		return true;
 	}
 
-	public IProject getProject(URI targetElementURI) {
-		if (!targetElementURI.isPlatformResource())
-			throw new IllegalArgumentException("Refactored element URI must be a platform resource URI: "
-					+ Strings.notNull(targetElementURI));
-		String projectName = targetElementURI.segment(1);
-		IProject project = workspace.getRoot().getProject(projectName);
-		if (project == null)
-			throw new IllegalArgumentException("Cannot find containing project for "
-					+ Strings.notNull(targetElementURI));
-		return project;
-	}
-
 	@Override
 	public IRenameStrategy getRenameElementStrategy() {
 		return renameStrategy;
@@ -131,10 +125,14 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	public Object[] getElements() {
 		return new Object[] { targetElementURI };
 	}
-
+	
+	protected String getLanguageName() {
+		return languageName;
+	}
+	
 	@Override
 	public String getIdentifier() {
-		return getClass().getName();
+		return getLanguageName() + ".ui.refactoring.Processor";
 	}
 
 	@Override
