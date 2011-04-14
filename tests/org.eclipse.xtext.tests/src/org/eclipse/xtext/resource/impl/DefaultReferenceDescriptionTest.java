@@ -15,12 +15,16 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.xtext.EcoreUtil2;
@@ -28,6 +32,7 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.langATestLanguage.LangATestLanguagePackage;
 import org.eclipse.xtext.linking.langATestLanguage.Main;
+import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -37,6 +42,7 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.StringInputStream;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 /**
@@ -158,6 +164,69 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 		assertEquals(EcoreUtil.getURI(object), referenceDescription.getContainerEObjectURI());
 	}
 	
+	/** @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=330812 */
+	public void testLazyLinkingProxyReferences() {
+		URI resourceUri = URI.createFileURI("test.ecore");
+		LazyURIEncoder lazyURIEncoder = new LazyURIEncoder();
+
+		ResourceSet resourceSet = new ResourceSetImpl();
+		Resource testResource = resourceSet.createResource(resourceUri);
+
+		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
+		ePackage.setName("test");
+		ePackage.setNsPrefix("test");
+		ePackage.setNsURI("test");
+		testResource.getContents().add(ePackage);
+
+		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
+		eClass.setName("Test");
+		ePackage.getEClassifiers().add(eClass);
+
+		EClass multiRefType = EcorePackage.Literals.EPACKAGE;
+		((InternalEObject) multiRefType).eSetProxyURI(EcoreUtil.getURI(multiRefType));
+		eClass.getESuperTypes().add(multiRefType);
+
+		EClass multiRefType2 = EcoreFactory.eINSTANCE.createEClass();
+		URI dummyProxyUri = resourceUri.appendFragment(lazyURIEncoder.encode(eClass, EcorePackage.Literals.ECLASS__ESUPER_TYPES, null));
+		((InternalEObject) multiRefType2).eSetProxyURI(dummyProxyUri);
+		eClass.getESuperTypes().add(multiRefType2);
+
+		EAttribute nameAttribute = EcoreFactory.eINSTANCE.createEAttribute();
+		nameAttribute.setName("name");
+		eClass.getEStructuralFeatures().add(nameAttribute);
+		EDataType singleRefType = EcorePackage.Literals.ESTRING;
+		((InternalEObject) singleRefType).eSetProxyURI(EcoreUtil.getURI(singleRefType));
+		nameAttribute.setEType(singleRefType);
+
+		assertTrue(multiRefType.eIsProxy());
+		assertTrue(multiRefType2.eIsProxy());
+		assertTrue(lazyURIEncoder.isCrossLinkFragment(testResource, EcoreUtil.getURI(multiRefType2).fragment()));
+		assertTrue(singleRefType.eIsProxy());
+
+		IResourceDescription resourceDescription = createResourceDescription(testResource);
+		Iterable<IReferenceDescription> referenceDescriptions = resourceDescription.getReferenceDescriptions();
+		assertEquals("Unexpected additional resources were loaded", 1, resourceSet.getResources().size());
+		assertEquals("Unexpected reference was exported", 3, Iterables.size(referenceDescriptions));
+
+		IReferenceDescription referenceDescription = Iterables.get(referenceDescriptions, 0);
+		assertEquals(0, referenceDescription.getIndexInList());
+		assertEquals(EcoreUtil.getURI(eClass), referenceDescription.getSourceEObjectUri());
+		assertEquals(EcorePackage.Literals.ECLASS__ESUPER_TYPES, referenceDescription.getEReference());
+		assertEquals(EcoreUtil.getURI(EcorePackage.Literals.EPACKAGE), referenceDescription.getTargetEObjectUri());
+
+		referenceDescription = Iterables.get(referenceDescriptions, 1);
+		assertEquals(-1, referenceDescription.getIndexInList());
+		assertEquals(EcoreUtil.getURI(nameAttribute.getEGenericType()), referenceDescription.getSourceEObjectUri());
+		assertEquals(EcorePackage.Literals.EGENERIC_TYPE__ECLASSIFIER, referenceDescription.getEReference());
+		assertEquals(EcoreUtil.getURI(EcorePackage.Literals.ESTRING), referenceDescription.getTargetEObjectUri());
+
+		referenceDescription = Iterables.get(referenceDescriptions, 2);
+		assertEquals(-1, referenceDescription.getIndexInList());
+		assertEquals(EcoreUtil.getURI(eClass.getEGenericSuperTypes().get(0)), referenceDescription.getSourceEObjectUri());
+		assertEquals(EcorePackage.Literals.EGENERIC_TYPE__ECLASSIFIER, referenceDescription.getEReference());
+		assertEquals(EcoreUtil.getURI(EcorePackage.Literals.EPACKAGE), referenceDescription.getTargetEObjectUri());
+	}
+
 	protected IResourceDescription createResourceDescription(Resource testResource) {
 		DefaultResourceDescriptionStrategy strategy = new DefaultResourceDescriptionStrategy();
 		strategy.setQualifiedNameProvider(new IQualifiedNameProvider.AbstractImpl() {
@@ -166,6 +235,7 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 				return (name != null) ? QualifiedName.create(name) : null;
 			}
 		});
+		strategy.setLazyURIEncoder(new LazyURIEncoder());
 		IResourceDescription resourceDescription = new DefaultResourceDescription(testResource, strategy);
 		return resourceDescription;
 	}
