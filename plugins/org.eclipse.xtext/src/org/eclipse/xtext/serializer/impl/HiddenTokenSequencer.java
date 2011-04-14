@@ -159,7 +159,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 		}
 
 		public void finish() {
-			if (rootNode == rootNode.getRootNode())
+			if (rootNode != null && rootNode == rootNode.getRootNode())
 				emitHiddenTokens(getRemainingHiddenNodesInContainer(lastNode, rootNode), comments, delegate);
 			delegate.finish();
 		}
@@ -210,6 +210,8 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 	}
 
 	protected Set<INode> getCommentsForEObject(EObject semanticObject, INode node) {
+		if(node == null)
+			return Collections.emptySet();
 		Set<INode> result = Sets.newHashSet();
 		BidiTreeIterator<INode> ti = node.getAsTreeIterable().iterator();
 		while (ti.hasNext()) {

@@ -113,6 +113,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		protected EObject getMostSpecificContext() {
 			return body == null ? actionContext : body.getContext();
 		}
+
 	}
 
 	public static class ActionFilterNFAProvider extends AbstractNFAProvider<ActionFilterState, ActionFilterTransition> {
@@ -284,6 +285,10 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 						collectElements((ConstraintElement) e, elements, assignments, assignmentsByFeature);
 					return;
 			}
+		}
+
+		public int compareTo(IConstraint o) {
+			return getName().compareTo(o.getName());
 		}
 
 		@Override
@@ -848,6 +853,63 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return contentValidationNeeded = true;
 		}
 
+		protected List<Pair<IFeatureInfo, RelationalDependencyType>> dependingFeatures;
+
+		public List<Pair<IFeatureInfo, RelationalDependencyType>> getDependingFeatures() {
+			if (dependingFeatures == null) {
+				dependingFeatures = Lists.newArrayList();
+				for (Pair<IConstraintElement, RelationalDependencyType> p : getRelationalAssignemntConstraintIntersection())
+					dependingFeatures.add(Tuples.create(p.getFirst().getFeatureInfo(), p.getSecond()));
+			}
+			return dependingFeatures;
+		}
+
+		protected List<Pair<IConstraintElement, RelationalDependencyType>> getRelationalAssignemntConstraintIntersection() {
+			List<Pair<IConstraintElement, RelationalDependencyType>> r = getAssignments()[0].getDependingAssignment();
+			if (getAssignmentCount() == 1)
+				return r;
+			r = Lists.newArrayList(r);
+			for (int i = 1; i < getAssignments().length; i++)
+				for (int j = r.size() - 1; j >= 0; j--)
+					if (getAssignments()[i] == r.get(j).getFirst()
+							|| !getAssignments()[i].getDependingAssignment().contains(r.get(j)))
+						r.remove(j);
+			return r;
+		}
+
+		public int getUpperBound() {
+			for (IConstraintElement ass : getAssignments())
+				if (ass.isManyRecursive(null))
+					return -1;
+			return getAssignmentCount(); // TODO: consider assignments excluding each other
+		}
+
+		public int getLowerBound() {
+			int result = 0;
+			for (IConstraintElement ass : getAssignments())
+				if (!ass.isOptionalRecursive(null))
+					result++;
+			return result; // TODO: consider assignments excluding each other
+		}
+
+		@Override
+		public String toString() {
+			StringBuilder b = new StringBuilder();
+			b.append(feature.getName());
+			b.append("[");
+			b.append(getLowerBound());
+			b.append(", ");
+			b.append(getUpperBound() == -1 ? "*" : getUpperBound());
+			b.append("]");
+			for (Pair<IFeatureInfo, RelationalDependencyType> rel : getDependingFeatures()) {
+				b.append("\n    ");
+				b.append(rel.getSecond());
+				b.append(" ");
+				b.append(rel.getFirst().getFeature().getName());
+			}
+			return b.toString();
+		}
+
 	}
 
 	protected static class ParserRuleConstraintContext extends AbstractConstraintContext {
@@ -896,12 +958,12 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 	protected final static ConstraintElement TYPEMATCH = new ConstraintElement();
 
-	protected static String getContextName(Action ctx) {
+	public static String getContextName(Action ctx) {
 		ParserRule rule = EcoreUtil2.getContainerOfType(ctx, ParserRule.class);
 		return rule.getName() + "_" + getUniqueActionName(ctx);
 	}
 
-	protected static String getContextName(ParserRule ctx) {
+	public static String getContextName(ParserRule ctx) {
 		return ctx.getName();
 	}
 

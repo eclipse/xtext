@@ -10,6 +10,7 @@ package org.eclipse.xtext.serializer.diagnostic;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
 
@@ -21,6 +22,7 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(SequencerDiagnosticProvider.class)
 public interface ISemanticSequencerDiagnosticProvider {
 
-	ISerializationDiagnostic createInvalidContextOrTypeDiagnostic(EObject semanticObject, EObject context,
-			List<IConstraintContext> constraints, Grammar grammar);
+	ISerializationDiagnostic createInvalidContextOrTypeDiagnostic(EObject semanticObject, EObject context);
+	
+	ISerializationDiagnostic createFeatureValueMissing(EObject semanticObject, EStructuralFeature feature);
 }

@@ -25,8 +25,6 @@ import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
@@ -36,16 +34,11 @@ import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IFeatureInfo;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.RelationalDependencyType;
 import org.eclipse.xtext.serializer.ISemanticNodeProvider;
 import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.ITransientValueService;
 import org.eclipse.xtext.serializer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
-import org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer;
-import org.eclipse.xtext.serializer.tokens.IEnumLiteralSerializer;
-import org.eclipse.xtext.serializer.tokens.IKeywordSerializer;
-import org.eclipse.xtext.serializer.tokens.IValueSerializer;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -59,7 +52,7 @@ import com.google.inject.internal.Join;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class GenericSequencer implements ISemanticSequencer {
+public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 
 	protected abstract class Allocation {
 
@@ -507,14 +500,12 @@ public class GenericSequencer implements ISemanticSequencer {
 
 	protected Map<Pair<EObject, EClass>, IConstraint> constraints;
 
-	@Inject
-	protected ICrossReferenceSerializer crossRefSerializer;
+	
 
 	@Inject
 	protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
 
-	@Inject
-	protected IEnumLiteralSerializer enumLiteralSerializer;
+	
 
 	@Inject
 	protected IGrammarAccess grammarAccess;
@@ -522,8 +513,7 @@ public class GenericSequencer implements ISemanticSequencer {
 	@Inject
 	protected IGrammarConstraintProvider grammarConstraintProvider;
 
-	@Inject
-	protected IKeywordSerializer keywordSerializer;
+	
 
 	@Inject
 	protected ISemanticNodeProvider nodeProvider;
@@ -531,67 +521,9 @@ public class GenericSequencer implements ISemanticSequencer {
 	@Inject
 	protected ITransientValueService transientValueService;
 
-	@Inject
-	protected IValueSerializer valueSerializer;
 
-	protected boolean acceptSemantic(ISemanticSequenceAcceptor out, EObject context, IConstraintElement constr,
-			Object value, int index, INode node, ISerializationDiagnostic.Acceptor errors) {
-		switch (constr.getType()) {
-			case ASSIGNED_ACTION_CALL:
-				out.acceptAssignedAction(constr.getAction(), (EObject) value, (ICompositeNode) node);
-				return true;
-			case ASSIGNED_PARSER_RULE_CALL:
-				out.acceptAssignedParserRuleCall(constr.getRuleCall(), (EObject) value, (ICompositeNode) node);
-				return true;
-			case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
-				EObject target1 = (EObject) value;
-				String token1 = crossRefSerializer.serializeCrossRef(context, constr.getCrossReference(), target1,
-						node, errors);
-				out.acceptAssignedCrossRefDatatype(constr.getRuleCall(), token1, target1, index, (ICompositeNode) node);
-				return true;
-			case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
-				EObject target2 = (EObject) value;
-				String token2 = crossRefSerializer.serializeCrossRef(context, constr.getCrossReference(), target2,
-						node, errors);
-				out.acceptAssignedCrossRefTerminal(constr.getRuleCall(), token2, target2, index, (ILeafNode) node);
-				return true;
-			case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
-				EObject target3 = (EObject) value;
-				String token3 = crossRefSerializer.serializeCrossRef(context, constr.getCrossReference(), target3,
-						node, errors);
-				out.acceptAssignedCrossRefEnum(constr.getRuleCall(), token3, target3, index, (ICompositeNode) node);
-				return true;
-			case ASSIGNED_DATATYPE_RULE_CALL:
-				String token4 = valueSerializer.serializeAssignedValue(context, constr.getRuleCall(), value, node,
-						errors);
-				out.acceptAssignedDatatype(constr.getRuleCall(), token4, value, index, (ICompositeNode) node);
-				return true;
-			case ASSIGNED_ENUM_RULE_CALL:
-				String token5 = enumLiteralSerializer.serializeAssignedEnumLiteral(context, constr.getRuleCall(),
-						value, node, errors);
-				out.acceptAssignedEnum(constr.getRuleCall(), token5, value, index, (ICompositeNode) node);
-				return true;
-			case ASSIGNED_TERMINAL_RULE_CALL:
-				String token6 = valueSerializer.serializeAssignedValue(context, constr.getRuleCall(), value, node,
-						errors);
-				out.acceptAssignedTerminal(constr.getRuleCall(), token6, value, index, (ILeafNode) node);
-				return true;
-			case ASSIGNED_KEYWORD:
-				String token7 = keywordSerializer.serializeAssignedKeyword(context, constr.getKeyword(), value, node,
-						errors);
-				out.acceptAssignedKeyword(constr.getKeyword(), token7, (String) value, index, (ILeafNode) node);
-				return true;
-			case ASSIGNED_BOOLEAN_KEYWORD:
-				String token8 = keywordSerializer.serializeAssignedKeyword(context, constr.getKeyword(), value, node,
-						errors);
-				out.acceptAssignedKeyword(constr.getKeyword(), token8, (Boolean) value, index, (ILeafNode) node);
-				return true;
-			case ALTERNATIVE:
-			case GROUP:
-				return false;
-		}
-		return false;
-	}
+
+	
 
 	//	protected boolean disableInvalidAlternativeChoices(Quantity quant, Feature2Assignment[] values) {
 	//		if (quant.getConstraintElement().isMany())
@@ -715,9 +647,8 @@ public class GenericSequencer implements ISemanticSequencer {
 		initConstraints();
 		IConstraint constraint = getConstraint(context, semanticObject.eClass());
 		//		System.out.println("Constraint: " + constraint);
-		if (constraint == null) {
-			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context,
-					constraintContexts, grammarAccess.getGrammar()));
+		if (constraint == null && errorAcceptor != null) {
+			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 			return;
 		}
 		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
