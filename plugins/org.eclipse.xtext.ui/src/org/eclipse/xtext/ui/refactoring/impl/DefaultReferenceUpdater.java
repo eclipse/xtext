@@ -76,11 +76,10 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 	protected void createReferenceUpdate(IReferenceDescription referenceDescription, URI referringResourceURI,
 			ElementRenameArguments elementRenameArguments, ResourceSet resourceSet,
 			IRefactoringUpdateAcceptor updateAcceptor) {
-		URI referringElementNewURI = elementRenameArguments.getNewElementURI(referenceDescription
-				.getSourceEObjectUri());
+		URI referringElementNewURI = elementRenameArguments
+				.getNewElementURI(referenceDescription.getSourceEObjectUri());
 		EObject referringElement = resourceSet.getEObject(referringElementNewURI, false);
-		URI targetElementNewURI = elementRenameArguments.getNewElementURI(referenceDescription
-				.getTargetEObjectUri());
+		URI targetElementNewURI = elementRenameArguments.getNewElementURI(referenceDescription.getTargetEObjectUri());
 		EObject newTargetElement = resourceSet.getEObject(targetElementNewURI, false);
 		createReferenceUpdate(referringElement, referringResourceURI, referenceDescription.getEReference(),
 				referenceDescription.getIndexInList(), newTargetElement, updateAcceptor);
@@ -92,22 +91,26 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 			ITextRegion referenceTextRegion = locationInFileProvider.getFullTextRegion(referringElement, reference,
 					indexInList);
 			CrossReference crossReference = getCrossReference(referringElement, referenceTextRegion.getOffset());
-			String newReferenceText = crossReferenceSerializer.serializeCrossRef(referringElement, crossReference,
-					newTargetElement, null);
-			// TODO: add import hook
-			TextEdit referenceEdit = new ReplaceEdit(referenceTextRegion.getOffset(), referenceTextRegion.getLength(),
-					newReferenceText);
-			updateAcceptor.accept(referringResourceURI, referenceEdit);
+			if (crossReference != null) {
+				String newReferenceText = crossReferenceSerializer.serializeCrossRef(referringElement, crossReference,
+						newTargetElement, null);
+				// TODO: add import hook
+				TextEdit referenceEdit = new ReplaceEdit(referenceTextRegion.getOffset(),
+						referenceTextRegion.getLength(), newReferenceText);
+				updateAcceptor.accept(referringResourceURI, referenceEdit);
+			}
 		}
 	}
 
 	protected CrossReference getCrossReference(EObject referringElement, int offset) {
 		ICompositeNode node = NodeModelUtils.getNode(referringElement);
-		Iterator<INode> iter = node.getAsTreeIterable().iterator();
-		while (iter.hasNext()) {
-			INode childNode = iter.next();
-			if (childNode.getOffset() >= offset && childNode.getGrammarElement() instanceof CrossReference)
-				return (CrossReference) childNode.getGrammarElement();
+		if (node != null) {
+			Iterator<INode> iter = node.getAsTreeIterable().iterator();
+			while (iter.hasNext()) {
+				INode childNode = iter.next();
+				if (childNode.getOffset() >= offset && childNode.getGrammarElement() instanceof CrossReference)
+					return (CrossReference) childNode.getGrammarElement();
+			}
 		}
 		return null;
 	}

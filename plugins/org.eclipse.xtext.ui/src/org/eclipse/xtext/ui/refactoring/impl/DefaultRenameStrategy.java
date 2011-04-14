@@ -23,7 +23,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  * @author Holger Schill
  */
-public class DefaultRenameStrategy extends AbstractRenameStrategy{
+public class DefaultRenameStrategy extends AbstractRenameStrategy {
 
 	public static class Provider implements IRenameStrategy.Provider {
 
