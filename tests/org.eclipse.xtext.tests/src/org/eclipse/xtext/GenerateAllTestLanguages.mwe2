@@ -374,6 +374,7 @@ Workflow {
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/serializer/SequencerTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
+			fragment = serializer.SerializerFragment {}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.xtext"
