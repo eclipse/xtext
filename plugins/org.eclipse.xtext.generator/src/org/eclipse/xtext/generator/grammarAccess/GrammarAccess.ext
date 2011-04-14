@@ -163,6 +163,20 @@ String gaTypeAccessor(TypeRef ele):
 		default: "<error: unknown type "+ele.eContainer().metaType+">"
 	};
 	
+/**
+ * Returns the invokation of an element or rule accessor.
+ * Example1: getFooRule()
+ * Example2: getBarRule().getFooAction()
+ */
+String gaAccessor(EObject ele):
+	switch {
+	case AbstractElement.isInstance(ele):
+		((AbstractElement)ele).gaRuleElementAccessor()
+	case AbstractRule.isInstance(ele):
+		((AbstractRule)ele).gaRuleAccessor() 
+		default: "<error: unknown type "+ele.metaType+">"
+	};
+	
 /*
  *
  */
