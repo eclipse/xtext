@@ -132,6 +132,12 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         // Step 6: Iteratively got through the queue. For each resource, create a new resource description and queue all depending
         // resources that are not yet in the delta. Validate resources. Do this in chunks.
         final SubMonitor subProgress = progress.newChild(80);
+        CancelIndicator cancelMonitor = new CancelIndicator() {
+            public boolean isCanceled() {
+                return progress.isCanceled();
+            }
+        };
+
         int index = 1;
         Queue<URI> queue = buildData.getURIQueue();
         while (!queue.isEmpty()) {
@@ -154,11 +160,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                     if (manager != null) {
                         resource = resourceSet.getResource(changedURI, true);
                         // Resolve links here!
-                        EcoreUtil2.resolveAll(resource, new CancelIndicator() {
-                            public boolean isCanceled() {
-                                return progress.isCanceled();
-                            }
-                        });
+						EcoreUtil2.resolveLazyCrossReferences(resource, cancelMonitor);
                         final IResourceDescription description = manager.getResourceDescription(resource);
                         final IResourceDescription copiedDescription = BuilderStateUtil.create(description);
                         newDelta = manager.createDelta(
