@@ -47,13 +47,17 @@ public class EcoreRefactoringParticipant extends AbstractRenameParticipantWrappe
 	protected EObject getRenamedElement(EObject originalTarget) {
 		if (originalTarget instanceof ParserRule) {
 			TypeRef returnType = ((ParserRule) originalTarget).getType();
-			if (returnType != null && returnType.getMetamodel() != null && returnType.getClassifier() != null) {
+			if (returnType != null && returnType.getMetamodel() != null && returnType.getClassifier() != null
+					&& !Strings.isEmpty(returnType.getClassifier().getName())) {
 				URI ePackageFileURI = findEPackageFileURI(returnType.getMetamodel());
 				if (ePackageFileURI != null) {
 					EObject classifierProxy = EcoreFactory.eINSTANCE.create(returnType.getClassifier().eClass());
 					URI eClassFileURI = ePackageFileURI.trimFragment().appendFragment(
 							ePackageFileURI.fragment() + "/" + returnType.getClassifier().getName());
 					((InternalEObject) classifierProxy).eSetProxyURI(eClassFileURI);
+					getStatus().addWarning(
+							"Renaming EClass '" + returnType.getClassifier().getName()
+									+ "' in ecore file. Please rerun the Ecore generator.");
 					return classifierProxy;
 				}
 			}

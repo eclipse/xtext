@@ -122,7 +122,7 @@ public abstract class AbstractRenameParticipantWrapper extends RenameParticipant
 	protected abstract EObject getRenamedElement(EObject originalTarget);
 
 	protected String getNewName() {
-		return ((AbstractRenameProcessor) getProcessor()).getNewName();
+		return getArguments().getNewName();
 	}
 	
 	protected RefactoringStatus getStatus() {

@@ -37,7 +37,7 @@ public class ElementRenameArguments {
 
 	public ElementRenameArguments(URI targetElementURI, String newName, IRenameStrategy renameStrategy,
 			Map<URI, URI> original2newElementURIs, boolean updateReferences) {
-		this(targetElementURI, newName, renameStrategy, null, null);
+		this(targetElementURI, newName, renameStrategy, original2newElementURIs, null);
 	}
 
 	public Iterable<URI> getRenamedElementURIs() {
