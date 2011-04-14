@@ -11,6 +11,7 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.serializer.impl.GrammarConstraintProvider;
 import org.eclipse.xtext.util.Pair;
 
@@ -37,7 +38,7 @@ public interface IGrammarConstraintProvider {
 	 * 
 	 * @see IConstraintElement#getType()
 	 */
-	enum ConstraintElementType {
+	public enum ConstraintElementType {
 		ALTERNATIVE, //
 		ASSIGNED_ACTION_CALL, //
 		ASSIGNED_CROSSREF_DATATYPE_RULE_CALL, //
@@ -59,7 +60,7 @@ public interface IGrammarConstraintProvider {
 	 * The conditions defined by a constraint are represented by a tree of {@link IConstraintElement}. This tree's root
 	 * can be accessed by {@link #getBody()}.
 	 */
-	interface IConstraint {
+	public interface IConstraint extends Comparable<IConstraint> {
 
 		/**
 		 * @return a list of all assignments represented by this constraint.
@@ -114,7 +115,7 @@ public interface IGrammarConstraintProvider {
 	 * by this action. These are all the objects that can be the "current" *before* the action is being executed. This
 	 * is *not* the EObject that is instantiated by the action.
 	 */
-	interface IConstraintContext {
+	public interface IConstraintContext {
 
 		// TODO: make sure this type is right for actions
 		EClass getCommonType();
@@ -130,7 +131,7 @@ public interface IGrammarConstraintProvider {
 	/**
 	 * IConstraintElements form a tree that is in fact a view on the grammar's AbstractElements.
 	 */
-	interface IConstraintElement {
+	public interface IConstraintElement {
 
 		// valid for *_ACTION_CALL
 		Action getAction();
@@ -200,7 +201,7 @@ public interface IGrammarConstraintProvider {
 		boolean isOptionalRecursive(IConstraintElement root);
 	}
 
-	interface IFeatureInfo {
+	public interface IFeatureInfo {
 
 		IConstraintElement[] getAssignments();
 
@@ -213,9 +214,15 @@ public interface IGrammarConstraintProvider {
 		 *         refer to different keywords, rulecalls or cross references.
 		 */
 		boolean isContentValidationNeeded();
+
+		List<Pair<IFeatureInfo, RelationalDependencyType>> getDependingFeatures();
+
+		int getUpperBound();
+
+		int getLowerBound();
 	}
 
-	enum RelationalDependencyType {
+	public enum RelationalDependencyType {
 		/**
 		 * (b >= 1) => (a == 0)
 		 */

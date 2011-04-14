@@ -1,13 +1,14 @@
 package org.eclipse.xtext.serializer;
 
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
-import org.eclipse.xtext.serializer.impl.GenericSequencer;
+import org.eclipse.xtext.serializer.impl.GenericSemanticSequencer;
 
 import com.google.inject.ImplementedBy;
 
-@ImplementedBy(GenericSequencer.class)
+@ImplementedBy(GenericSemanticSequencer.class)
 public interface ISemanticSequencer {
 
 	public interface ISemanticSequencerOwner {

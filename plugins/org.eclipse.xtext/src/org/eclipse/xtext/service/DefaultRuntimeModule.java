@@ -50,7 +50,10 @@ import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleLocalScopeProvider;
+import org.eclipse.xtext.serializer.GenericSequencer;
+import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.serializer.impl.GenericSemanticSequencer;
 import org.eclipse.xtext.validation.CancelableDiagnostician;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxValidator;
@@ -110,6 +113,10 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 
 	public Class<? extends ISerializer> bindISerializer() {
 		return Serializer.class;
+	}
+	
+	public Class<? extends ISemanticSequencer> bindISemanticSequencer() {
+		return GenericSemanticSequencer.class;
 	}
 
 	public Class<? extends IConcreteSyntaxValidator> bindConcreteSyntaxValidator() {
@@ -198,8 +205,11 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 
 	static class IEncodingProviderDispatcher extends DispatchingProvider<IEncodingProvider>{}
 	
-	public void configureIResourceDescriptionsLiveScope(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.resource.IResourceDescriptions.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider.LIVE_SCOPE)).to(org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions.class);
+	public void configureIResourceDescriptionsLiveScope(Binder binder) {
+		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_SCOPE)).to(ResourceSetBasedResourceDescriptions.class);
 	}
-
+	
+	public void configureGenericSemanticSequencer(com.google.inject.Binder binder) {
+		binder.bind(ISemanticSequencer.class).annotatedWith(GenericSequencer.class).to(GenericSemanticSequencer.class);
+	}
 }

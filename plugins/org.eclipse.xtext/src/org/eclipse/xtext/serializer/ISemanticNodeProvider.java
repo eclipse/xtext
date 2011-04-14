@@ -21,13 +21,13 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(SemanticNodeProvider.class)
 public interface ISemanticNodeProvider {
 
-	interface INodesForEObjectProvider {
+	public interface INodesForEObjectProvider {
 		INode getNodeForMultiValue(EStructuralFeature feature, int indexInFeature, int indexInNonTransient, Object value);
 
 		INode getNodeForSingelValue(EStructuralFeature feature, Object value);
 	}
 
-	class NullNodesForEObjectProvider implements INodesForEObjectProvider {
+	public class NullNodesForEObjectProvider implements INodesForEObjectProvider {
 		public INode getNodeForMultiValue(EStructuralFeature feature, int indexInFeature, int indexAmongNonTransient,
 				Object value) {
 			return null;
