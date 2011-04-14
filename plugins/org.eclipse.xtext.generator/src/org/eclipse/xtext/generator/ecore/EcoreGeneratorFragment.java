@@ -476,6 +476,13 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	public String[] getRequiredBundlesRt(Grammar grammar) {
 		return new String[] { "org.eclipse.emf.ecore", "org.eclipse.emf.common" };
 	}
+	
+	protected void registerGenmodel(GenModel genModel) {
+		Map<String, URI> registry = EcorePlugin.getEPackageNsURIToGenModelLocationMap();
+		URI uri = genModel.eResource().getURI();
+		for (GenPackage pkg : genModel.getGenPackages())
+			registry.put(pkg.getEcorePackage().getNsURI(), uri);
+	}
 
 	protected GenModel getSaveAndReconcileGenModel(ResourceSet rs, Grammar grammar, XpandExecutionContext ctx,
 			List<EPackage> packs, List<GenPackage> usedGenPackages) throws ConfigurationException {
@@ -497,6 +504,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		} catch (IOException e) {
 			throw new WrappedException(e);
 		}
+		registerGenmodel(genModel);
 		return genModel;
 	}
 
