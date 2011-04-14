@@ -115,6 +115,9 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 		return Serializer.class;
 	}
 	
+	/**
+	 * @since 2.0
+	 */
 	public Class<? extends ISemanticSequencer> bindISemanticSequencer() {
 		return GenericSemanticSequencer.class;
 	}
@@ -209,6 +212,9 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(ResourceDescriptionsProvider.LIVE_SCOPE)).to(ResourceSetBasedResourceDescriptions.class);
 	}
 	
+	/**
+	 * @since 2.0
+	 */
 	public void configureGenericSemanticSequencer(com.google.inject.Binder binder) {
 		binder.bind(ISemanticSequencer.class).annotatedWith(GenericSequencer.class).to(GenericSemanticSequencer.class);
 	}
