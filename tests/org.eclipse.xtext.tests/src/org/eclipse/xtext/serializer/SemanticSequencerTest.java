@@ -18,7 +18,11 @@ import org.eclipse.xtext.serializer.ISyntacticSequencer.ISyntacticSequencerOwner
 import org.eclipse.xtext.serializer.ISyntacticSequencer.PassThroughSyntacticSequencer;
 import org.eclipse.xtext.serializer.acceptor.DebugSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
+import org.eclipse.xtext.serializer.impl.GenericSemanticSequencer;
 import org.eclipse.xtext.serializer.impl.NodeModelSemanticSequencer;
+import org.eclipse.xtext.serializer.serializer.SequencerTestLanguageSemanticSequencer;
+
+import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -29,29 +33,42 @@ public class SemanticSequencerTest extends AbstractXtextTests {
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(SequencerTestLanguageStandaloneSetup.class);
+		getInjector().injectMembers(this);
 	}
 
+	@Inject
+	private ISemanticSequencer generatedSequencer;
+
+	@Inject
+	@GenericSequencer
+	private ISemanticSequencer genericSequencer;
+
 	private void testSequence(String stringModel) throws Exception {
+		assertTrue(genericSequencer instanceof GenericSemanticSequencer);
+		assertTrue(generatedSequencer instanceof SequencerTestLanguageSemanticSequencer);
 		EObject model = getModel(stringModel).eContents().get(0);
 		NodeModelSemanticSequencer nmSequencer = new NodeModelSemanticSequencer();
 		EObject context = nmSequencer.findContexts(model, null).iterator().next();
-		//		ISemanticSequencer semSequencer = get(ISemanticSequencer.class);
 		ISyntacticSequencer synSeq = get(PassThroughSyntacticSequencer.class);
 		IHiddenTokenSequencer hiddenSeq = get(PassThroughHiddenTokenSequencer.class);
 		IRecursiveSequencer recSequencer = get(IRecursiveSequencer.class);
 		((IHiddenTokenSequencerOwner) recSequencer).setHiddenTokenSequencer(hiddenSeq);
 		((ISyntacticSequencerOwner) hiddenSeq).setSyntacticSequencer(synSeq);
-		//		String actual = sequenceRecursively(sequencer, context, model, true);
-		//		String expected = sequenceRecursively(nmsequencer, context, model, true);
-		DebugSequenceAcceptor actual = new DebugSequenceAcceptor();
-		DebugSequenceAcceptor expected = new DebugSequenceAcceptor();
-		recSequencer
-				.createSequence( /*semSequencer,*/context, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
+
+		((ISemanticSequencerOwner) synSeq).setSemanticSequencer(genericSequencer);
+		DebugSequenceAcceptor genericActual = new DebugSequenceAcceptor();
+		recSequencer.createSequence(context, model, genericActual, ISerializationDiagnostic.STDERR_ACCEPTOR);
+
+		((ISemanticSequencerOwner) synSeq).setSemanticSequencer(generatedSequencer);
+		DebugSequenceAcceptor generatedActual = new DebugSequenceAcceptor();
+		recSequencer.createSequence(context, model, generatedActual, ISerializationDiagnostic.STDERR_ACCEPTOR);
+
 		((ISemanticSequencerOwner) synSeq).setSemanticSequencer(nmSequencer);
-		recSequencer.createSequence( /*nmSequencer,*/context, model, expected,
-				ISerializationDiagnostic.STDERR_ACCEPTOR);
-		//		String expected = sequenceRecursively(nmsequencer, context, model, true);
-		assertEquals(expected.toString(), actual.toString());
+		DebugSequenceAcceptor expected = new DebugSequenceAcceptor();
+		recSequencer.createSequence(context, model, expected, ISerializationDiagnostic.STDERR_ACCEPTOR);
+
+		assertEquals(expected.toString(), genericActual.toString());
+		assertEquals(expected.toString(), generatedActual.toString());
 	}
 
 	public void testXtext() throws Exception {
