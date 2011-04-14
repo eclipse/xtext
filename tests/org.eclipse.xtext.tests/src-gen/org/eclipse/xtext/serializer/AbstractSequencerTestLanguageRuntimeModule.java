@@ -79,4 +79,9 @@ public abstract class AbstractSequencerTestLanguageRuntimeModule extends Default
 		return org.eclipse.xtext.serializer.parseTreeConstruction.SequencerTestLanguageParsetreeConstructor.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	public Class<? extends org.eclipse.xtext.serializer.ISemanticSequencer> bindISemanticSequencer() {
+		return org.eclipse.xtext.serializer.serializer.SequencerTestLanguageSemanticSequencer.class;
+	}
+
 }
