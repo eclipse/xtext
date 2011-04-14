@@ -100,5 +100,19 @@ public class Naming {
 	public String basePackageUi(Grammar g) {
 		return getNamespace(g) + ".ui";
 	}
+	
+	/**
+	 * @since 2.0
+	 */
+	public String toSimpleName(String name) {
+		return Strings.lastToken(name, ".");
+	}
+
+	/**
+	 * @since 2.0
+	 */
+	public String toPackageName(String name) {
+		return Strings.skipLastToken(name, ".");
+	}
 
 }
