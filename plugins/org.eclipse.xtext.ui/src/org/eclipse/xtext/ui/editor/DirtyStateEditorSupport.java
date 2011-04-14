@@ -341,7 +341,9 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 			else if (delta.getOld() != null)
 				normalizedURIs.add(converter.normalize(delta.getOld().getURI()));	
 		}
-		for(Resource res: resourceSet.getResources()) {
+		List<Resource> resources = resourceSet.getResources();
+		for(int i = 0; i< resources.size(); i++) {
+			Resource res = resources.get(i);
 			if (res != resource && res != null) {
 				URI uri = res.getURI();
 				try {
