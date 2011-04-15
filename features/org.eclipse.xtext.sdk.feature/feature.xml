@@ -67,6 +67,14 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
    <includes
          id="org.eclipse.xtext.xbase.source"
          version="0.0.0"/>
+  
+   <includes
+         id="org.eclipse.xtext.xtend2.sdk"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.xtext.xtend2.sdk.source"
+         version="0.0.0"/>
 
    <includes
          id="org.eclipse.xtext.xtext.ui"
