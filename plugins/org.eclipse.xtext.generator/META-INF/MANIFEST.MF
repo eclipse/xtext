@@ -66,7 +66,6 @@ Require-Bundle: org.eclipse.xtext.util;bundle-version="2.0.0";resolution:=option
  org.eclipse.xtext;bundle-version="2.0.0";resolution:=optional,
  org.eclipse.xtext.common.types;bundle-version="2.0.0";resolution:=optional,
  de.itemis.xtext.antlr;bundle-version="2.0.0";resolution:=optional;visibility:=reexport,
- com.ibm.icu,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.eclipse.emf.mwe2.lib;bundle-version="2.0.0";resolution:=optional;visibility:=reexport,
@@ -75,4 +74,5 @@ Require-Bundle: org.eclipse.xtext.util;bundle-version="2.0.0";resolution:=option
  org.eclipse.xtext.xtend2.lib;bundle-version="2.0.0";resolution:=optional
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
-Import-Package: org.apache.log4j;version="1.2.15"
+Import-Package: org.apache.log4j;version="1.2.15",
+ com.ibm.icu.text
