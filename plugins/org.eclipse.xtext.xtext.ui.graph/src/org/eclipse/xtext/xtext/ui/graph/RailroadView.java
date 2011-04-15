@@ -100,7 +100,8 @@ public class RailroadView extends ViewPart {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				if (contents != null)
-					rootFigure.remove(contents);
+					if(contents.getParent() == rootFigure)
+						rootFigure.remove(contents);
 				if (newContents != null)
 					rootFigure.add(newContents);
 				rootFigure.revalidate();
