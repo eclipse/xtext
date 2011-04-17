@@ -18,6 +18,9 @@
    <feature id="org.eclipse.xtext.xtext" version="0.0.0">
       <category name="xtext"/>
    </feature>
+   <feature id="org.eclipse.xtext.xtend2.sdk" version="0.0.0">
+      <category name="xtext"/>
+   </feature>
    <feature id="org.eclipse.xtext.xbase" version="0.0.0">
       <category name="xtext"/>
    </feature>
