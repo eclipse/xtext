@@ -8,7 +8,7 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 
-<a name="LexicalStructure"></a>
+<a name="Xbase_Syntax"></a>
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Lexical Syntax</h1>
 
 <p>
@@ -17,9 +17,9 @@ chosen and it is recommended to stick with the lexical syntax described in the f
 </p>
 
 
-<a name="Identifiers"></a>
+<a name="Xbase_Syntax_Identifiers"></a>
 
-<a name="Identifiers"></a>
+<a name="Xbase_Syntax_Identifiers"></a>
 <div class="section" title="Identifiers">
 <div class="titlepage">
 <div>
@@ -41,9 +41,9 @@ by more of these characters or a digit <em>0</em>-<em>9</em>.
 </p>
 
 
-<a name="EscapedIdentifiers"></a>
+<a name="Xbase_Syntax_EscapedIdentifiers"></a>
 
-<a name="EscapedIdentifiers"></a>
+<a name="Xbase_Syntax_EscapedIdentifiers"></a>
 <div class="section" title="Escaped Identifiers">
 <div class="titlepage">
 <div>
@@ -72,7 +72,7 @@ In such cases you use an escaped identifier <span class="inlinecode">^service</s
 
 
 
-<a name="Identifiers-3"></a>
+<a name="Xbase_Syntax_Identifiers-3"></a>
 <div class="section" title="Syntax">
 <div class="titlepage">
 <div>
@@ -106,7 +106,7 @@ terminal&nbsp;ID:&nbsp;<br />
 
 
 
-<a name="Identifiers-4"></a>
+<a name="Xbase_Syntax_Identifiers-4"></a>
 <div class="section" title="Examples">
 <div class="titlepage">
 <div>
@@ -187,9 +187,9 @@ Examples
 
 </div>
 
-<a name="StringLiterals"></a>
+<a name="Xbase_Syntax_StringLiteral"></a>
 
-<a name="StringLiterals"></a>
+<a name="Xbase_Syntax_StringLiteral"></a>
 <div class="section" title="String Literals">
 <div class="titlepage">
 <div>
@@ -220,7 +220,7 @@ In contrast to Java, equal string literals within the same class do not neccessa
 
 
 
-<a name="StringLiterals-4"></a>
+<a name="Xbase_Syntax_StringLiteral-4"></a>
 <div class="section" title="Syntax">
 <div class="titlepage">
 <div>
@@ -252,7 +252,7 @@ Syntax
 
 
 
-<a name="StringLiterals-5"></a>
+<a name="Xbase_Syntax_StringLiteral-5"></a>
 <div class="section" title="Examples">
 <div class="titlepage">
 <div>
@@ -333,9 +333,9 @@ Examples
 
 </div>
 
-<a name="IntegerLiterals"></a>
+<a name="Xbase_Syntax_IntegerLiteral"></a>
 
-<a name="IntegerLiterals"></a>
+<a name="Xbase_Syntax_IntegerLiteral"></a>
 <div class="section" title="Integer Literals">
 <div class="titlepage">
 <div>
@@ -355,7 +355,7 @@ Only decimal literals are supported and they always result in a value of type <s
  
 (it might result in native type <span class="inlinecode">int</span>
  when translated to Java, see 
-<a href="03-Types.xdoc.html#Types">Types</a>).
+<a href="03-Types.xdoc.html#Xbase_Types">Types</a>).
 The compiler makes sure that only numbers between 0 and <em>Integer.MAX</em> (0x7fffffff) are used.
 </p>
 
@@ -368,7 +368,7 @@ There is no negative integer literal, instead the expression <span class="inline
 
 
 
-<a name="IntegerLiterals-3"></a>
+<a name="Xbase_Syntax_IntegerLiteral-3"></a>
 <div class="section" title="Syntax">
 <div class="titlepage">
 <div>
@@ -402,9 +402,9 @@ terminal&nbsp;INT&nbsp;returns&nbsp;ecore::EInt:&nbsp;<br />
 
 </div>
 
-<a name="Comments"></a>
+<a name="Xbase_Syntax_Comments"></a>
 
-<a name="Comments"></a>
+<a name="Xbase_Syntax_Comments"></a>
 <div class="section" title="Comments">
 <div class="titlepage">
 <div>
@@ -426,7 +426,7 @@ The syntax is the same as the one known from Java (see <a href="http://java.sun.
 
 
 
-<a name="Comments-2"></a>
+<a name="Xbase_Syntax_Comments-2"></a>
 <div class="section" title="Syntax">
 <div class="titlepage">
 <div>
@@ -463,9 +463,9 @@ terminal&nbsp;SL_COMMENT&nbsp;:&nbsp;<br />
 
 </div>
 
-<a name="Whitespace"></a>
+<a name="Xbase_Syntax_Whitespace"></a>
 
-<a name="Whitespace"></a>
+<a name="Xbase_Syntax_Whitespace"></a>
 <div class="section" title="White Space">
 <div class="titlepage">
 <div>
@@ -490,9 +490,9 @@ The white space characters <span class="inlinecode">&apos;&nbsp;&apos;</span>
 
 </div>
 
-<a name="Keywords"></a>
+<a name="Xbase_Syntax_Keywords"></a>
 
-<a name="Keywords"></a>
+<a name="Xbase_Syntax_Keywords"></a>
 <div class="section" title="Reserved Keywords">
 <div class="titlepage">
 <div>
@@ -724,7 +724,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 
 <p>
 However, in case some of the keywords have to be used as identifiers, the escape character for 
-<a href="02-Lexical%20Structure.xdoc.html#EscapedIdentifiers">identifiers</a> comes in handy. 
+<a href="02-Lexical%20Structure.xdoc.html#Xbase_Syntax_EscapedIdentifiers">identifiers</a> comes in handy. 
 
 </p>
 

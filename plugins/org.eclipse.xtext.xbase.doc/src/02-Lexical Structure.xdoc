@@ -1,16 +1,16 @@
-chapter:LexicalStructure[Lexical Syntax]
+chapter:Xbase_Syntax[Lexical Syntax]
 
 Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. However the default implementation is carefully 
 chosen and it is recommended to stick with the lexical syntax described in the following.
 
-section:Identifiers[Identifiers]
+section:Xbase_Syntax_Identifiers[Identifiers]
 
 Identifiers are used to name all constructs, such as types, methods and variables. Xbase uses the default
 Identifier-Syntax from Xtext - compared to Java, they are slightly simplified to match the common cases
 while having less ambiguities. They start with a letter e[a]-e[z], e[A]-e[Z] or an underscore followed
 by more of these characters or a digit e[0]-e[9]. 
 
-section2:EscapedIdentifiers[Escaped Identifiers]
+section2:Xbase_Syntax_EscapedIdentifiers[Escaped Identifiers]
 
 Identifiers may not have the same spelling as any reserved keyword. 
 However, identifiers starting with a code[^] are so called escaped identifiers. Escaped identifiers are used in cases when there is a 
@@ -36,7 +36,7 @@ ul[
 	item[code[^extends]]
 ]
 
-section:StringLiterals[String Literals]
+section:Xbase_Syntax_StringLiteral[String Literals]
 
 String literals can either use single quotes (') or double quotes (") as their terminals. When using double quotes all literals allowed by Java string literals are
 supported. In addition new line characters are allowed, that is in Xbase all string literals can span multiple lines. When using single quotes the only difference
@@ -63,11 +63,11 @@ ul[
 	item[code["Escapes : \" "]]
 ]
 
-section:IntegerLiterals[Integer Literals]
+section:Xbase_Syntax_IntegerLiteral[Integer Literals]
 
 Integer literals consist of one or more digits. 
 Only decimal literals are supported and they always result in a value of type code[java.lang.Integer] 
-(it might result in native type code[int] when translated to Java, see ref:Types[Types]).
+(it might result in native type code[int] when translated to Java, see ref:Xbase_Types[Types]).
 The compiler makes sure that only numbers between 0 and e[Integer.MAX] (0x7fffffff) are used.
 
 There is no negative integer literal, instead the expression code[-23] is parsed as the prefix operator code[-] applied to an integer literal.
@@ -80,7 +80,7 @@ terminal INT returns ecore::EInt:
 ;
 ]
 
-section:Comments[Comments]
+section:Xbase_Syntax_Comments[Comments]
 
 Xbase comes with two different kinds of comments: Single-line comments and multi-line comments.
 The syntax is the same as the one known from Java (see link[http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.7][§ 3.7 Comments]).
@@ -96,11 +96,11 @@ terminal SL_COMMENT :
 ;
 ]
 
-section:Whitespace[White Space]
+section:Xbase_Syntax_Whitespace[White Space]
 
 The white space characters code[' '], code['\t'], code['\n'], and code['\r] are allowed to occur anywhere between the other syntactic elements. 
 
-section:Keywords[Reserved Keywords]
+section:Xbase_Syntax_Keywords[Reserved Keywords]
 
 The following list of words are reserved keywords, thus reducing the set of possible identifiers:
 ol[
@@ -129,4 +129,4 @@ ol[
 	item[code[finally]]
 ]
 
-However, in case some of the keywords have to be used as identifiers, the escape character for ref:EscapedIdentifiers[identifiers] comes in handy. 
+However, in case some of the keywords have to be used as identifiers, the escape character for ref:Xbase_Syntax_EscapedIdentifiers[identifiers] comes in handy. 
