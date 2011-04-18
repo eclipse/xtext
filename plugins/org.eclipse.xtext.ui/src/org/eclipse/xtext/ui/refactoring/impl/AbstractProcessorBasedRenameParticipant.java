@@ -31,9 +31,9 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public abstract class AbstractRenameParticipantWrapper extends RenameParticipant {
+public abstract class AbstractProcessorBasedRenameParticipant extends RenameParticipant {
 
-	private static final Logger LOG = Logger.getLogger(AbstractRenameParticipantWrapper.class);
+	private static final Logger LOG = Logger.getLogger(AbstractProcessorBasedRenameParticipant.class);
 
 	@Inject
 	private IGlobalServiceProvider globalServiceProvider;

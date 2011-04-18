@@ -20,7 +20,7 @@ import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameParticipantWrapper;
+import org.eclipse.xtext.ui.refactoring.impl.AbstractProcessorBasedRenameParticipant;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.util.Strings;
 
@@ -30,7 +30,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class EcoreRefactoringParticipant extends AbstractRenameParticipantWrapper {
+public class EcoreRefactoringParticipant extends AbstractProcessorBasedRenameParticipant {
 
 	@Inject
 	private IResourceDescriptions resourceDescriptions;
