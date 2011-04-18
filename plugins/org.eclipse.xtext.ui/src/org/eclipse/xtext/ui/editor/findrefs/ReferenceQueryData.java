@@ -33,7 +33,7 @@ public class ReferenceQueryData implements IQueryData {
 			Predicate<IReferenceDescription> resultFilter, String label) {
 		this.leadElementURI = leadElementURI;
 		this.targetURIs = targetURIs;
-		this.localContextResourceURI = localContextResourceURI.trimFragment();
+		this.localContextResourceURI = localContextResourceURI;
 		this.resultFilter = resultFilter;
 		this.label = label;
 	}
@@ -51,7 +51,7 @@ public class ReferenceQueryData implements IQueryData {
 	}
 
 	public URI getLocalContextResourceURI() {
-		return localContextResourceURI;
+		return localContextResourceURI.trimFragment();
 	}
 	
 	public String getLabel() {
