@@ -1,0 +1,39 @@
+document[Xtend Language Reference]
+
+authors[Sven Efftinge, Sebastian Zarnekow, et al.]
+
+codelanguage-def[Java][
+	abstract,continue,for,new,switch,assert,default,goto,package,synchronized,
+	boolean,do,if,private,this,break,double,implements,protected,throw,
+	byte,else,import,public,throws,
+	case,enum,instanceof,return,transient,
+	catch,extends,int,short,try,
+	char,final,interface,static,void,
+	class,finally,long,strictfp,volatile,
+	const,float,native,super,while]
+
+codelanguage-def[Xtend][
+	abstract,continue,for,new,switch,assert,default,goto,package,synchronized,
+	boolean,do,if,private,this,break,double,implements,protected,throw,
+	byte,else,import,public,throws,
+	case,enum,instanceof,return,
+	catch,extends,int,short,try,
+	char,final,static,void,
+	class,finally,long,
+	float,super,while,create,dispatch,extension,typeof,as,Inject]
+
+codelanguage-def[Xbase][
+	for,new,switch,default,
+	boolean,do,if,this,double,throw,
+	byte,else,throws,
+	case,instanceof,return,
+	catch,int,short,try,
+	char,final,void,
+	finally,long,
+	float,while,typeof,as]
+
+chapter-ref[Xtend_Preface]
+
+chapter-ref[Xtend_Classes_Functions]
+
+chapter-ref[Xtend_Expressions]

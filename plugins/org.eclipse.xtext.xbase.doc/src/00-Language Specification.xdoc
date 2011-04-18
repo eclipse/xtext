@@ -1,6 +1,6 @@
-document[Xbase Language Specification]
+document[Xbase Language Reference]
 
-authors[Sven Efftinge, et al.]
+authors[Sven Efftinge, Sebastian Zarnekow, et al.]
 
 codelanguage-def[Java][abstract,continue,for,new,switch,assert,default,goto,package,synchronized,
 	boolean,do,if,private,this,break,double,implements,protected,throw,
@@ -39,11 +39,11 @@ codelanguage-def[Xbase][
 
 chapter-ref[Preface]
 
-chapter-ref[LexicalStructure]
+chapter-ref[Xbase_Syntax]
 
-chapter-ref[Types]
+chapter-ref[Xbase_Types]
 
-chapter-ref[Expressions]
+chapter-ref[Xbase_Expressions]
 
 
 

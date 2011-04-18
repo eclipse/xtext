@@ -8,27 +8,48 @@
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 
-<a name="Types"></a>
+<a name="Xbase_Types"></a>
 <h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Types</h1>
 
 <p>
-Xbase binds to the Java Virtual Machine. This means that expressions written in Xbase refer to Java types and Java type members. Xbase itself uses types 
-defined in the Java language, such as classes, interfaces, annotations and enums. It also supports Java generics and shares the known syntax. In addition 
-to Java, Xbase comes with the notion of function types. 
+Basically all kinds of JVM types are available and referable. 
+</p>
+
+
+<a name="Xbase_Types_Arrays"></a>
+
+<a name="Xbase_Types_Arrays"></a>
+<div class="section" title="Arrays">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+Arrays
+</h2>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Only Arrays cannot be declared explicitly,
+but they can be passed around and if needed are transparently converted to a List of the compound type.
 </p>
 
 <p>
-Xbase does not allow to define arrays or references to arrays. Instead, any references to arrays will
-be transparently converted to lists and vice versa. The return type of an external function that calculates
-an array <em>int[]</em> can be directly assigned to a variable of type <em>java.util.List&lt;java.lang.Integer&gt;</em> 
-(in short <em>List&lt;Integer&gt;</em>). Any function, that takes an array as argument can be invoked with a <em>List</em>
-instead. 
+In other words, the return type of a Java method that returns an array of ints (<em>int[]</em>) can be directly assigned to 
+a variable of type <em>java.util.List&lt;java.lang.Integer&gt;</em> (in short <em>List&lt;Integer&gt;</em>). Due to type inference
+you can also defer the conversion. The conversion is bi-directional so any method, that takes an array as argument can be invoked with a <em>List</em>
+instead.
 </p>
 
 
-<a name="TypeReferences"></a>
+</div>
 
-<a name="TypeReferences"></a>
+<a name="Xbase_Types_TypeReferences"></a>
+
+<a name="Xbase_Types_TypeReferences"></a>
 <div class="section" title="Simple Type References">
 <div class="titlepage">
 <div>
@@ -50,7 +71,7 @@ A simple type reference only consists of a <em>qualified name</em>. A qualified 
 
 
 
-<a name="TypeReferences-2"></a>
+<a name="Xbase_Types_TypeReferences-2"></a>
 <div class="section" title="Syntax">
 <div class="titlepage">
 <div>
@@ -88,7 +109,7 @@ There is no parser rule for a simple type reference, as it is expressed as a par
 
 
 
-<a name="TypeReferences-3"></a>
+<a name="Xbase_Types_TypeReferences-3"></a>
 <div class="section" title="Examples">
 <div class="titlepage">
 <div>
@@ -133,9 +154,9 @@ Examples
 
 </div>
 
-<a name="FunctionTypes"></a>
+<a name="Xbase_Types_FunctionTypes"></a>
 
-<a name="FunctionTypes"></a>
+<a name="Xbase_Types_FunctionTypes"></a>
 <div class="section" title="Function Types">
 <div class="titlepage">
 <div>
@@ -161,14 +182,18 @@ So instead of writing <span class="inlinecode">Function1&lt;String,Boolean&gt;</
 </p>
 
 <p>
+Primitives cannot be used in function types.
+</p>
+
+<p>
 For more information on closures see 
-<a href="04-Expressions.xdoc.html#Closures">section Closures</a>.
+<a href="04-Expressions.xdoc.html#Xbase_Expressions_Closures">section Xbase_Expressions_Closures</a>.
 </p>
 
 
 
 
-<a name="FunctionTypes-3"></a>
+<a name="Xbase_Types_FunctionTypes-4"></a>
 <div class="section" title="Syntax">
 <div class="titlepage">
 <div>
@@ -202,7 +227,7 @@ XFunctionTypeRef:<br />
 
 
 
-<a name="FunctionTypes-4"></a>
+<a name="Xbase_Types_FunctionTypes-5"></a>
 <div class="section" title="Examples">
 <div class="titlepage">
 <div>
@@ -250,7 +275,7 @@ Examples
 <li>
 
 <p>
-<span class="inlinecode">(List&lt;String&gt;,&nbsp;int)=&gt;String</span>
+<span class="inlinecode">(List&lt;String&gt;,&nbsp;Integer)=&gt;String</span>
 
 </p>
 
@@ -265,9 +290,9 @@ Examples
 
 </div>
 
-<a name="ParameterizedTypeReference"></a>
+<a name="Xbase_Types_ParameterizedTypeReference"></a>
 
-<a name="ParameterizedTypeReference"></a>
+<a name="Xbase_Types_ParameterizedTypeReference"></a>
 <div class="section" title="Parameterized Type References">
 <div class="titlepage">
 <div>
@@ -294,7 +319,7 @@ type arguments.
 
 
 
-<a name="ParameterizedTypeReference-3"></a>
+<a name="Xbase_Types_ParameterizedTypeReference-3"></a>
 <div class="section" title="Syntax">
 <div class="titlepage">
 <div>
@@ -351,7 +376,7 @@ JvmUpperBound&nbsp;:&nbsp;<br />
 
 
 
-<a name="ParameterizedTypeReference-4"></a>
+<a name="Xbase_Types_ParameterizedTypeReference-4"></a>
 <div class="section" title="Examples">
 <div class="titlepage">
 <div>
@@ -432,15 +457,15 @@ Examples
 
 </div>
 
-<a name="VoidType"></a>
+<a name="Xbase_Types_Primitives"></a>
 
-<a name="VoidType"></a>
-<div class="section" title="The type java.lang.Void">
+<a name="Xbase_Types_Primitives"></a>
+<div class="section" title="Primitives">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-The type java.lang.Void
+Primitives
 </h2>
 </div>
 </div>
@@ -449,31 +474,22 @@ The type java.lang.Void
 
 
 <p>
-The <span class="inlinecode">null</span>
- reference is the only valid value of the type <span class="inlinecode">Void</span>
-, which gets some special treatment in Xbase. Every Java method which is declared 
-<em>void</em> (i.e. without a return value) is translated to a method with return type <em>java.lang.Void</em>. At runtime such method invocations will result in 
-<em>null</em>. The specialty is that while it is allowed to pass <span class="inlinecode">null</span>
- everywhere  instead of any other value, 
-this does not mean that <em>java.lang.Void</em> is a subtype of any other type. The <span class="inlinecode">instanceof</span>
- operator as well as the type matchers in 
-the 
-<a href="04-Expressions.xdoc.html#SwitchExpression">section SwitchExpression</a> do not match <span class="inlinecode">null</span>
-.
+Xbase supports all Java primitives. The conformance rules (e.g. boxing unboxing) are also exactly like defined
+in the Java Language Specification.
 </p>
 
 
 </div>
 
-<a name="ConformanceRules"></a>
+<a name="Xbase_Types_ConformanceRules"></a>
 
-<a name="ConformanceRules"></a>
-<div class="section" title="Conformance Rules">
+<a name="Xbase_Types_ConformanceRules"></a>
+<div class="section" title="Conformance and Conversion">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-Conformance Rules
+Conformance and Conversion
 </h2>
 </div>
 </div>
@@ -487,50 +503,14 @@ the type of the right hand expression needs to conform to the type of the variab
 </p>
 
 <p>
-A type <em>T1</em> conforms to a type <em>T2</em> if 
-
-<ul>
-
-<li>
-
-<p>
-T1==T2
-</p>
-
-</li>
-
-<li>
-
-<p>
-T1==java.lang.Void
-</p>
-
-</li>
-
-<li>
-
-<p>
-T1 is a subtype of T2
-</p>
-
-</li>
-
-</ul>
-
-</p>
-
-<p>
-<em>T1&lt;T1P,..T1Pn&gt;</em> conforms to <em>T2&lt;T2P, ... T2Pn&gt;</em> if <em>T1</em> conforms to <em>T2</em> and each upper bound of a <em>T1Pn</em> conforms to the corresponding upper bound of <em>T2Pn</em>.
-</p>
-
-<p>
-
+As Xbase implements the unchanegd type system of Java it also fully supports the conformance rules defined
+in <a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html">The Java Language Specification</a>.
 </p>
 
 
-<a name="CommonSuperType"></a>
+<a name="Xbase_Types_CommonSuperType"></a>
 
-<a name="CommonSuperType"></a>
+<a name="Xbase_Types_CommonSuperType"></a>
 <div class="section" title="Common Super Type">
 <div class="titlepage">
 <div>
@@ -543,6 +523,11 @@ Common Super Type
 </div>
 
 
+
+<p>
+Because of type inference Xbase sometimes needs to compute the most common super type of a given set
+of types. 
+</p>
 
 <p>
 For a set <em>[T1,T2,...Tn]</em> of types the common super type is computed by using the linear type inheritance sequence of <em>T1</em> and is iterated until one type

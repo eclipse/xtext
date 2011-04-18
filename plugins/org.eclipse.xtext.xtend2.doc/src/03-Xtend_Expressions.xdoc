@@ -1,12 +1,41 @@
-section2:RichStrings[Rich Strings]
+chapter:Xtend_Expressions[Expressions]
 
-Of course there is the template expression, which is used to write readable string concatenation, which
-is the main thing you do when writing a code generator. Xtend2 reuses the syntax known from the well
-known and widely used Xpand template language (in fact Xtend2 is considered the successor to Xpand and
-Xtend). Let's have a look at an example of how a typical function with template expressions looks like:
+The most important part of a function is of course its implementation, which in Xtend is either a single
+ref:Xbase_Expressions_Blocks[block expression] or a ref:Xtend_RichStrings[rich string expression]. 
+
+section-ref[Xbase_Expressions_Blocks]
+
+section-ref[Xbase_Expressions_Literals]
+
+section-ref[Xbase_Expressions_Operators]
+
+section-ref[Xbase_Expressions_FeatureCalls]
+
+section-ref[Xbase_Expressions_ConstructorCall]
+
+section-ref[Xbase_Expressions_IfExpression]
+
+section-ref[Xbase_Expressions_ForLoop]
+
+section-ref[Xbase_Expressions_WhileExpression]
+
+section-ref[Xbase_Expressions_DoWhileExpression]
+
+section-ref[Xbase_Expressions_VariableDeclaration]
+
+section-ref[Xbase_Expressions_Closures]
+
+section-ref[Xbase_Expressions_SwitchExpression]
+
+section-ref[Xbase_Expressions_TypeCasts]
+
+section:Xtend_RichStrings[Rich Strings]
+
+Rich Strings allow for readable string concatenation, which is the main thing you do when writing a code generator. 
+Let's have a look at an example of how a typical function with template expressions looks like:
 
 code[
-toClass(Entity this) :'''
+toClass(Entity this) '''
   package «packageName»;
 
   «placeImports»
@@ -16,7 +45,7 @@ toClass(Entity this) :'''
       «member.toMember»
     «ENDFOREACH»
   }
-''';
+'''
 ]
 
 If you are familiar with Xpand, you'll notice that it is exactly the same syntax. The difference is, that
@@ -24,31 +53,32 @@ the template syntax is actually an expression, which means it can occur everywhe
 expected. For instance in conjunction the powerful switch expression from Xbase:
 
 code[
-toMember(Member this) :
-	switch(this) {
-		Field :'''private «type» «name» ;''';
-		Method case isAbstract :''' abstract «...''';
-		Method:''' ..... ''';
-	};
+toMember(Member this) {
+	switch this {
+		Field : '''private «type» «name» ;'''
+		Method case isAbstract : ''' abstract «...'''
+		Method : ''' ..... '''
+	}
+}
 ]
 
-section3:RichStringIF[Conditions in Rich Strings]
+section2:RichStringIF[Conditions in Rich Strings]
 
 There is a special code[IF] to be used within rich strings which is identical in syntax and meaning to the
 old code[IF] from Xpand. Note that you could also use the if expression, but since it has not an explicit
 terminal token, it is not as readable in that context.
 
-section3:RichStringFOREACH[Loops in Rich Strings]
+section2:RichStringFOREACH[Loops in Rich Strings]
 
 Also the code[FOREACH] statement is available and can only be used in the context of a rich string.
 It also supports the code[SEPARATOR] and code[ITERATOR] declaration from Xpand.
 
-section3:RichStringType[Typing]
+section2:RichStringType[Typing]
 
 The rich string is translated to an efficient string concatenation and the return type of a rich string
 is codeRef[java.lang.CharSequence] which allows room for efficient implementation.
 
-section3:WhitespaceHandling[Whitespace Handling]
+section2:WhitespaceHandling[Whitespace Handling]
 
 One of the key features of rich strings is the smart handling of whitespace in the template output. The
 whitespace is not written into the output data structure as is but preprocessed. This allows for readable
@@ -139,3 +169,10 @@ visible in the output as it is relative the the surrounding control structure. T
 code[IF] and code[ENDIF] contain only control structures thus they are skipped in the output.
 Note the additional indentation of the node e[Leaf] which happens due to the first rule:
 Indentation is propagated to called templates.
+
+section-ref[Xbase_Expressions_Return]
+
+section-ref[Xbase_Expressions_Throw]
+
+section-ref[Xbase_Expressions_TryCatch]
+
