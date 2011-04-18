@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.reconciler;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
@@ -21,9 +22,14 @@ import org.eclipse.xtext.ui.editor.model.XtextDocument;
  */
 public class XtextDocumentReconcileStrategy implements IReconcilingStrategy {
 
+	private static final Logger log = Logger.getLogger(XtextDocumentReconcileStrategy.class);
+	
 	private XtextDocument document;
 
 	public void reconcile(final IRegion region) {
+		if (log.isTraceEnabled()) {
+			log.trace("reconcile region: " + region, new Exception());
+		}
 		document.internalModify(new XtextReconcilerUnitOfWork(region, document));
 	}
 

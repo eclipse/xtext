@@ -185,6 +185,9 @@ public class XtextReconciler extends Job implements IReconciler {
 	}
 
 	private void handleDocumentChanged(DocumentEvent event) {
+		if (log.isTraceEnabled()) {
+			log.trace("Reconciler cancelled");
+		}
 		cancel();
 		ReplaceRegion newReplaceRegion = new ReplaceRegion(event.getOffset(), event.getLength(), event.getText());
 		synchronized (pendingReplaceRegionLock) {
@@ -194,6 +197,9 @@ public class XtextReconciler extends Job implements IReconciler {
 			else {
 				pendingReplaceRegion = newReplaceRegion;
 			}
+		}
+		if (log.isTraceEnabled()) {
+			log.trace("Reconciler scheduled with delay: " + delay, new Exception());
 		}
 		schedule(delay);
 	}
