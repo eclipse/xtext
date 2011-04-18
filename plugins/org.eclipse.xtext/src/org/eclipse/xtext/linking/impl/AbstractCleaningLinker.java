@@ -10,6 +10,7 @@ package org.eclipse.xtext.linking.impl;
 
 import java.util.Iterator;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.AbstractElement;
@@ -23,10 +24,29 @@ import org.eclipse.xtext.nodemodel.INode;
  */
 public abstract class AbstractCleaningLinker extends AbstractLinker {
 
+	private static final Logger log = Logger.getLogger(AbstractCleaningLinker.class);
+	
 	public void linkModel(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
+		boolean debug = log.isDebugEnabled();
+		long time = System.currentTimeMillis();
 		beforeModelLinked(model, diagnosticsConsumer);
+		if (debug) {
+			long now = System.currentTimeMillis();
+			log.debug("beforeModelLinked took: " + (now - time) + "ms");
+			time = now;
+		}
 		doLinkModel(model, diagnosticsConsumer);
+		if (debug) {
+			long now = System.currentTimeMillis();
+			log.debug("doLinkModel took: " + (now - time) + "ms");
+			time = now;
+		}
 		afterModelLinked(model, diagnosticsConsumer);
+		if (debug) {
+			long now = System.currentTimeMillis();
+			log.debug("afterModelLinked took: " + (now - time) + "ms");
+			time = now;
+		}
 	}
 
 	protected void afterModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
