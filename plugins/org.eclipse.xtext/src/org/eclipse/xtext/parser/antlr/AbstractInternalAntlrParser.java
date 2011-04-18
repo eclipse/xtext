@@ -514,6 +514,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	}
 
 	public final IParseResult parse(String entryRuleName) throws RecognitionException {
+		long time = System.currentTimeMillis();
 		IParseResult result = null;
 		EObject current = null;
 		String completeContent = input.toString();
@@ -551,6 +552,10 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			throw new RuntimeException(targetException);
 		} catch (Exception e) {
 			throw new WrappedException(e);
+		} finally {
+			if (logger.isDebugEnabled()) {
+				logger.debug("Parsing took: " + (System.currentTimeMillis() - time) + " ms");
+			}
 		}
 		return result;
 	}
