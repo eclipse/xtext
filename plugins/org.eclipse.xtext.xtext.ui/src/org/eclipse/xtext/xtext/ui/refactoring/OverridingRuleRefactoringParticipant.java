@@ -46,7 +46,7 @@ public class OverridingRuleRefactoringParticipant extends AbstractProcessorBased
 	private IResourceDescriptions resourceDescriptions;
 	
 	@Override
-	protected EObject getRenamedElement(EObject originalTarget) {
+	protected List<EObject> getRenamedElements(EObject originalTarget) {
 		if(originalTarget instanceof AbstractRule) {
 			final String ruleName = ((AbstractRule)originalTarget).getName();
 			Grammar grammar = GrammarUtil.getGrammar(originalTarget);
@@ -66,10 +66,11 @@ public class OverridingRuleRefactoringParticipant extends AbstractProcessorBased
 				}
 			};
 			referenceFinder.findIndexedReferences(queryData, acceptor, new NullProgressMonitor());
+			List<EObject> result = newArrayList();
 			for(IEObjectDescription overridingRule: overridingRules) {
-				// TODO: handle more than one subgrammar
-				return overridingRule.getEObjectOrProxy();
+				result.add(overridingRule.getEObjectOrProxy());
 			}
+			return result;
 		}
 		return null;
 	}

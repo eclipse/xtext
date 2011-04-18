@@ -7,7 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
+import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.util.Strings.*;
+
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
@@ -18,15 +21,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ltk.core.refactoring.Change;
+import org.eclipse.ltk.core.refactoring.CompositeChange;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.CheckConditionsContext;
-import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.ltk.core.refactoring.participants.RenameParticipant;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
-import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -45,15 +48,21 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 	private ProjectUtil projectUtil;
 
 	private RefactoringStatus status;
-	
-	private AbstractRenameProcessor wrappedProcessor;
 
-	public void setWrappedProcessor(AbstractRenameProcessor wrappedProcessor) {
-		this.wrappedProcessor = wrappedProcessor;
-	}
+	private List<AbstractRenameProcessor> wrappedProcessors;
 
-	protected AbstractRenameProcessor getWrappedProcessor() {
-		return wrappedProcessor;
+	protected static class RenameProcessorProvider {
+		@Inject
+		private Provider<AbstractRenameProcessor> processorProvider;
+
+		public AbstractRenameProcessor getRenameRefactoring(IRenameElementContext renameElementContext) {
+			AbstractRenameProcessor processor = processorProvider.get();
+			if (processor != null) {
+				if (processor.initialize(renameElementContext))
+					return processor;
+			}
+			return null;
+		}
 	}
 
 	@Override
@@ -61,15 +70,16 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 		status = new RefactoringStatus();
 		try {
 			if (element instanceof IRenameElementContext) {
-				IRenameElementContext participantContext = createRenameElementContext((IRenameElementContext) element);
-				if (participantContext != null) {
-					IRenameRefactoringProvider renameRefactoringProvider = globalServiceProvider.findService(
-							participantContext.getTargetElementURI(), IRenameRefactoringProvider.class);
-					ProcessorBasedRefactoring renameRefactoring = renameRefactoringProvider
-							.getRenameRefactoring(participantContext);
-					if (renameRefactoring == null)
-						return false;
-					setWrappedProcessor((AbstractRenameProcessor) renameRefactoring.getProcessor());
+				List<IRenameElementContext> participantContexts = createRenameElementContexts((IRenameElementContext) element);
+				if (participantContexts != null) {
+					wrappedProcessors = newArrayList();
+					for (IRenameElementContext participantContext : participantContexts) {
+						RenameProcessorProvider renameProcessorProvider = globalServiceProvider.findService(
+								participantContext.getTargetElementURI(), RenameProcessorProvider.class);
+						AbstractRenameProcessor wrappedProcessor = renameProcessorProvider
+								.getRenameRefactoring(participantContext);
+						wrappedProcessors.add(wrappedProcessor);
+					}
 					return true;
 				}
 			}
@@ -82,7 +92,7 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 
 	@Override
 	public String getName() {
-		return wrappedProcessor.getProcessorName() + ".asParticipant";
+		return getClass().getName();
 	}
 
 	@Override
@@ -90,9 +100,11 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 			throws OperationCanceledException {
 		SubMonitor progress = SubMonitor.convert(pm).setWorkRemaining(100);
 		try {
-			status.merge(wrappedProcessor.checkInitialConditions(progress.newChild(20)));
-			wrappedProcessor.setNewName(getNewName());
-			status.merge(wrappedProcessor.checkFinalConditions(progress.newChild(80), context));
+			for (AbstractRenameProcessor wrappedProcessor : wrappedProcessors) {
+				status.merge(wrappedProcessor.checkInitialConditions(progress.newChild(20)));
+				wrappedProcessor.setNewName(getNewName());
+				status.merge(wrappedProcessor.checkFinalConditions(progress.newChild(80), context));
+			}
 		} catch (CoreException ce) {
 			status.addError("Error checking conditions in refactoring participant: " + notNull(ce.getMessage())
 					+ ". See log for details");
@@ -103,28 +115,33 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 
 	@Override
 	public Change createChange(IProgressMonitor pm) throws CoreException, OperationCanceledException {
-		return wrappedProcessor.createChange(pm);
+		CompositeChange compositeChange = new CompositeChange("Changes form participant: " + getName());
+		for (AbstractRenameProcessor wrappedProcessor : wrappedProcessors)
+			compositeChange.add(wrappedProcessor.createChange(pm));
+		return compositeChange;
 	}
 
-	protected IRenameElementContext createRenameElementContext(IRenameElementContext triggeringContext) {
+	protected List<IRenameElementContext> createRenameElementContexts(IRenameElementContext triggeringContext) {
 		ResourceSet resourceSet = resourceSetProvider.get(projectUtil.getProject(triggeringContext
 				.getTargetElementURI()));
 		EObject originalTarget = resourceSet.getEObject(triggeringContext.getTargetElementURI(), true);
-		EObject renamedElement = getRenamedElement(originalTarget);
-		if (renamedElement != null)
-			return new IRenameElementContext.Impl(EcoreUtil.getURI(renamedElement), renamedElement.eClass(),
-					triggeringContext.getTriggeringEditor(), triggeringContext.getTriggeringEditorSelection(),
-					triggeringContext.getContextResourceURI());
-		else
+		List<EObject> renamedElements = getRenamedElements(originalTarget);
+		if (renamedElements == null || renamedElements.isEmpty())
 			return null;
+		List<IRenameElementContext> contexts = newArrayListWithCapacity(renamedElements.size());
+		for (EObject renamedElement : renamedElements)
+			contexts.add(new IRenameElementContext.Impl(EcoreUtil.getURI(renamedElement), renamedElement.eClass(),
+					triggeringContext.getTriggeringEditor(), triggeringContext.getTriggeringEditorSelection(),
+					triggeringContext.getContextResourceURI()));
+		return contexts;
 	}
 
-	protected abstract EObject getRenamedElement(EObject originalTarget);
+	protected abstract List<EObject> getRenamedElements(EObject originalTarget);
 
 	protected String getNewName() {
 		return getArguments().getNewName();
 	}
-	
+
 	protected RefactoringStatus getStatus() {
 		return status;
 	}
