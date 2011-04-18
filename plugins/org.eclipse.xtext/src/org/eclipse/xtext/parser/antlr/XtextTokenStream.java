@@ -13,7 +13,10 @@ import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.CommonTokenStream;
+import org.antlr.runtime.Lexer;
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
 
@@ -21,6 +24,8 @@ import org.antlr.runtime.TokenSource;
  * A token stream that is aware of the current lookahead.
  * 
  * @author Jan Köhnlein - Initial contribution and API
+ * @author Sebastian Zarnekow - Support for dynamic hidden tokens,
+ *   reworked lookahead algorithm
  */
 public class XtextTokenStream extends CommonTokenStream {
 
@@ -47,6 +52,38 @@ public class XtextTokenStream extends CommonTokenStream {
 		for(Map.Entry<Integer, String> entry: tokenDefProvider.getTokenDefMap().entrySet()) {
 			rulenameToTokenType.put(entry.getValue(), entry.getKey());
 		}
+	}
+	
+	@Override
+	public String toString(int start, int stop) {
+		if ( start<0 || stop<0 ) {
+			return null;
+		}
+		if ( p == -1 ) {
+			fillBuffer();
+		}
+		if ( stop>=tokens.size() ) {
+			stop = tokens.size()-1;
+		}
+		if (tokenSource instanceof Lexer) {
+			Token startToken = (Token) tokens.get(start);
+			Token stopToken = (Token) tokens.get(stop);
+			if (startToken instanceof CommonToken && stopToken instanceof CommonToken) {
+				CommonToken commonStart = (CommonToken) startToken;
+				CommonToken commonStop = (CommonToken) stopToken;
+				CharStream charStream = ((Lexer) tokenSource).getCharStream();
+				String result = charStream.substring(commonStart.getStartIndex(), commonStop.getStopIndex());
+				return result;
+			}
+		}
+		// fall back to super implementation but use StringBuilder instead of StringBuffer
+		// and use reasonable initialization size
+ 		StringBuilder result = new StringBuilder(Math.max(1024, tokens.size() * 6));
+		for (int i = start; i <= stop; i++) {
+			Token t = (Token)tokens.get(i);
+			result.append(t.getText());
+		}
+		return result.toString();
 	}
 	
 	@SuppressWarnings({ "serial" })
