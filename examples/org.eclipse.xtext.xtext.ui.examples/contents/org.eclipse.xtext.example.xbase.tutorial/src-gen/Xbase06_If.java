@@ -14,7 +14,7 @@ public class Xbase06_If {
 		  boolean _operator_greaterThan_1 = ComparableExtensions.<Integer>operator_greaterThan(((Comparable<? super Integer>)_length_1), 3);
 		  if (_operator_greaterThan_1) {/*"never true!"*/;
 		  }
-		  Boolean _xifexpression = null;
+		  boolean _xifexpression = false;
 		  int _length_2 = "foo".length();
 		  boolean _operator_greaterThan_2 = ComparableExtensions.<Integer>operator_greaterThan(((Comparable<? super Integer>)_length_2), 3);
 		  if (_operator_greaterThan_2) {

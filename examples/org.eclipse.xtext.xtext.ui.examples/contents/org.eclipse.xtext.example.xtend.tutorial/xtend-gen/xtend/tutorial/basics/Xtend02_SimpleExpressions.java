@@ -12,12 +12,17 @@ public class Xtend02_SimpleExpressions {
   }
   
   public boolean booleanLiteral() {
-    boolean _operator_or = BooleanExtensions.operator_or(true, false);
+    boolean _operator_or = false;
+    if (true) {
+      _operator_or = true;
+    } else {
+      _operator_or = BooleanExtensions.operator_or(true, false);
+    }
     return _operator_or;
   }
   
   public int intLiteral() {
-    int _operator_plus = IntegerExtensions.operator_plus(42, 21);
+    int _operator_plus = IntegerExtensions.operator_plus(((Integer)42), ((Number)21));
     return _operator_plus;
   }
   

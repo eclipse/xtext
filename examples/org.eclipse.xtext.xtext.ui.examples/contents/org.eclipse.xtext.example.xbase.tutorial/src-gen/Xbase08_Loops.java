@@ -23,24 +23,24 @@ public class Xbase08_Loops {
 		    String _upperCase = x.toUpperCase();
 		    CollectionExtensions.<String>operator_add(typeConverted_result, _upperCase);
 		  }
-		  Integer i = 0;
-		  final Integer typeConverted_i = (Integer)i;
+		  int i = 0;
+		  final int typeConverted_i = (int)i;
 		  int _size = list.size();
-		  boolean _operator_lessThan = ComparableExtensions.<Integer>operator_lessThan(typeConverted_i, _size);
+		  boolean _operator_lessThan = ComparableExtensions.<Integer>operator_lessThan(((Comparable<? super Integer>)typeConverted_i), _size);
 		  Boolean _xwhileexpression = _operator_lessThan;
 		  while (_xwhileexpression) {
 		    {
 		      final ArrayList<String> typeConverted_result_1 = (ArrayList<String>)result;
-		      final Integer typeConverted_i_1 = (Integer)i;
-		      String _get = list.get(typeConverted_i_1);
+		      String _get = list.get(i);
 		      String _operator_plus = StringExtensions.operator_plus("whiled-", _get);
 		      CollectionExtensions.<String>operator_add(typeConverted_result_1, _operator_plus);
-		      int _operator_plus_1 = IntegerExtensions.operator_plus(i, 1);
-		      i = ((Integer)_operator_plus_1);
+		      final int typeConverted_i_1 = (int)i;
+		      int _operator_plus_1 = IntegerExtensions.operator_plus(((Integer)typeConverted_i_1), ((Number)1));
+		      i = _operator_plus_1;
 		    }
-		    final Integer typeConverted_i_2 = (Integer)i;
+		    final int typeConverted_i_2 = (int)i;
 		    int _size_1 = list.size();
-		    boolean _operator_lessThan_1 = ComparableExtensions.<Integer>operator_lessThan(typeConverted_i_2, _size_1);
+		    boolean _operator_lessThan_1 = ComparableExtensions.<Integer>operator_lessThan(((Comparable<? super Integer>)typeConverted_i_2), _size_1);
 		    _xwhileexpression = _operator_lessThan_1;
 		  }
 		}

@@ -26,7 +26,7 @@ public class Xtend07_Libraries extends TestCase {
       Pair<Integer,String> _operator_mappedTo_1 = ObjectExtensions.<Integer, String>operator_mappedTo(42, "fourty two");
       HashMap<Integer,String> _newHashMap = CollectionLiterals.<Integer, String>newHashMap(_operator_mappedTo, _operator_mappedTo_1);
       InputOutput.<HashMap<Integer,String>>println(_newHashMap);
-      HashSet<Integer> _newHashSet = CollectionLiterals.<Integer>newHashSet(1, 2, 3, 3, 3);
+      HashSet<Integer> _newHashSet = CollectionLiterals.<Integer>newHashSet(((Integer)1), ((Integer)2), ((Integer)3), ((Integer)3), ((Integer)3));
       InputOutput.<HashSet<Integer>>println(_newHashSet);
     }
   }
@@ -42,7 +42,7 @@ public class Xtend07_Libraries extends TestCase {
       final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
           public Boolean apply(String e) {
             int _length = e.length();
-            boolean _operator_equals = ObjectExtensions.operator_equals(((Object)_length), 3);
+            boolean _operator_equals = ObjectExtensions.operator_equals(((Object)_length), ((Object)3));
             return ((Boolean)_operator_equals);
           }
         };
@@ -76,12 +76,17 @@ public class Xtend07_Libraries extends TestCase {
       String _operator_plus = StringExtensions.operator_plus("Hello", " ");
       String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "World!");
       InputOutput.<String>println(_operator_plus_1);
-      int _operator_plus_2 = IntegerExtensions.operator_plus(46, 2);
-      int _operator_divide = IntegerExtensions.operator_divide(8, ((Number)_operator_plus_2));
-      int _operator_plus_3 = IntegerExtensions.operator_plus(42, ((Number)_operator_divide));
+      int _operator_plus_2 = IntegerExtensions.operator_plus(((Integer)46), ((Number)2));
+      int _operator_divide = IntegerExtensions.operator_divide(((Integer)8), ((Number)_operator_plus_2));
+      int _operator_plus_3 = IntegerExtensions.operator_plus(((Integer)42), ((Number)_operator_divide));
       InputOutput.<Integer>println(_operator_plus_3);
-      boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(42, 13);
-      boolean _operator_and = BooleanExtensions.operator_and(true, _operator_greaterThan);
+      boolean _operator_and = false;
+      if (!true) {
+        _operator_and = false;
+      } else {
+        boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Comparable<? super Integer>)42), 13);
+        _operator_and = BooleanExtensions.operator_and(true, _operator_greaterThan);
+      }
       boolean _println = InputOutput.<Boolean>println(_operator_and);
       _xblockexpression = (_println);
     }

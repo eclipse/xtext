@@ -55,7 +55,6 @@ public class DomainmodelGenerator implements IGenerator {
         boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_packageName);
         boolean _operator_not = BooleanExtensions.operator_not(_isNullOrEmpty);
         if (_operator_not) {
-          _builder.newLineIfNotEmpty();
           _builder.append("package ");
           final Entity typeConverted_e_1 = (Entity)e;
           String _packageName_1 = this.generatorExtensions.packageName(typeConverted_e_1);
@@ -65,18 +64,15 @@ public class DomainmodelGenerator implements IGenerator {
           _builder.newLine();
         }
       }
-      _builder.newLineIfNotEmpty();
       {
         List<String> _imports = importManager.getImports();
         for(String i : _imports) {
-          _builder.newLineIfNotEmpty();
           _builder.append("import ");
           _builder.append(i, "");
           _builder.append(";");
           _builder.newLineIfNotEmpty();
         }
       }
-      _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append(body, "");
       _builder.newLineIfNotEmpty();
@@ -95,21 +91,17 @@ public class DomainmodelGenerator implements IGenerator {
     _builder.append(_superTypeClause, "");
     _builder.append("{");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
     {
       EList<Feature> _features = e.getFeatures();
       for(Feature f : _features) {
-        _builder.newLineIfNotEmpty();
         _builder.append("\t");
         StringConcatenation _feature = this.feature(f, importManager);
         _builder.append(_feature, "	");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.newLine();
-        _builder.append("\t");
       }
     }
-    _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
     return _builder;
@@ -228,6 +220,7 @@ public class DomainmodelGenerator implements IGenerator {
     _builder.append("\t");
     String _compile = this.domainmodelCompiler.compile(o, importManager);
     _builder.append(_compile, "	");
+    _builder.append(" ");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
