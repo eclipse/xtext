@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.refactoring;
 
+import static java.util.Collections.*;
+
+import java.util.List;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -36,15 +40,15 @@ public class EcoreRefactoringParticipant extends AbstractProcessorBasedRenamePar
 	private IResourceDescriptions resourceDescriptions;
 
 	@Override
-	protected IRenameElementContext createRenameElementContext(IRenameElementContext triggeringContext) {
+	protected List<IRenameElementContext> createRenameElementContexts(IRenameElementContext triggeringContext) {
 		if (triggeringContext.getTargetElementEClass() == XtextPackage.Literals.PARSER_RULE)
-			return super.createRenameElementContext(triggeringContext);
+			return super.createRenameElementContexts(triggeringContext);
 		else
 			return null;
 	}
 
 	@Override
-	protected EObject getRenamedElement(EObject originalTarget) {
+	protected List<EObject> getRenamedElements(EObject originalTarget) {
 		if (originalTarget instanceof ParserRule) {
 			TypeRef returnType = ((ParserRule) originalTarget).getType();
 			if (returnType != null && returnType.getMetamodel() != null && returnType.getClassifier() != null
@@ -58,7 +62,7 @@ public class EcoreRefactoringParticipant extends AbstractProcessorBasedRenamePar
 					getStatus().addWarning(
 							"Renaming EClass '" + returnType.getClassifier().getName()
 									+ "' in ecore file. Please rerun the Ecore generator.");
-					return classifierProxy;
+					return singletonList(classifierProxy);
 				}
 			}
 		}
