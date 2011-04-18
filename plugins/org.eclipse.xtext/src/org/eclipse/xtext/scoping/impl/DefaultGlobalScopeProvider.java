@@ -44,6 +44,8 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 	
 	protected IScope getScope(IScope parent, final Resource context, boolean ignoreCase, EClass type, Predicate<IEObjectDescription> filter) {
 		IScope result = parent;
+		if (context == null || context.getResourceSet() == null)
+			return result;
 		List<IContainer> containers = Lists.newArrayList(getVisibleContainers(context));
 		Collections.reverse(containers);
 		Iterator<IContainer> iter = containers.iterator();
