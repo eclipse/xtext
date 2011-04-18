@@ -8,6 +8,8 @@
 package org.eclipse.xtext.builder.builderState;
 
 /**
+ * Will fail for EMF 2.6 or higher. See {@link BufferedBinaryResourceFactory} for details.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class BinaryResourceBasedPersisterTest extends AbstractEMFBasedPersisterTest {

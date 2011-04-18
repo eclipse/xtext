@@ -20,19 +20,24 @@ import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
 
 /**
+ * Use only with EMF 2.5!
+ * 
+ * Creates a binary resource that is buffered for better performance. Since EMF 2.6 buffering has been integrated into
+ * the BinaryResourceImpl.
+ * This class also contains a bugfix that will only work for 2.5 and break the 2.6 implementation.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class BufferedBinaryResourceFactory extends ResourceFactoryImpl {
 	@Override
 	public Resource createResource(URI uri) {
-		return new BinaryResourceImpl(uri) {
+		BinaryResourceImpl binaryResource = new BinaryResourceImpl(uri) {
 			@Override
 			protected void doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
 				BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(outputStream, 8192 * 2 * 2 * 2);
 				try {
 					super.doSave(bufferedOutputStream, options);
-				}
-				finally {
+				} finally {
 					bufferedOutputStream.close();
 				}
 			}
@@ -41,12 +46,42 @@ public class BufferedBinaryResourceFactory extends ResourceFactoryImpl {
 			protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
 				InputStream bufferedInputStream = new BufferedInputStream(inputStream, 8192 * 2 * 2 * 2);
 				try {
-					super.doLoad(bufferedInputStream, options);
-				}
-				finally {
+					EObjectInputStream eObjectInputStream = new EObjectInputStream(bufferedInputStream, options) {
+						/**
+						 * Bugfix. Will break EMF 2.6 or higher
+						 */
+						@Override
+						public String readString() throws IOException {
+							int length = readCompressedInt();
+							if (length == -1) {
+								return null;
+							} else {
+								if (characters == null || characters.length < length) {
+									characters = new char[length];
+								}
+								LOOP: for (int i = 0; i < length; ++i) {
+									byte value = readByte();
+									if (value == 0) {
+										do {
+											characters[i] = readChar();
+										} while (++i < length);
+										break LOOP;
+									} else {
+										// bugfix for characters > 127
+										characters[i] = (char) (value & 0xFF);
+									}
+								}
+								return new String(characters, 0, length);
+							}
+						}
+					};
+					eObjectInputStream.loadResource(this);
+				} finally {
 					bufferedInputStream.close();
 				}
 			}
 		};
+		return binaryResource;
 	}
+
 }
