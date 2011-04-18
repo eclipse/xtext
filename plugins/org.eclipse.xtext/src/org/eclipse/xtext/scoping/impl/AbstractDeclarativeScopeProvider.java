@@ -110,7 +110,14 @@ public abstract class AbstractDeclarativeScopeProvider extends AbstractScopeProv
 		PolymorphicDispatcher<IScope> dispatcher = new PolymorphicDispatcher<IScope>(
 				Collections.singletonList(this), 
 				getPredicate(context, reference.getEReferenceType()),
-				errorHandler);
+				errorHandler) {
+			@Override
+			protected IScope handleNoSuchMethod(Object... params) {
+				if (PolymorphicDispatcher.NullErrorHandler.class.equals(errorHandler.getClass()))
+					return null;
+				return super.handleNoSuchMethod(params);
+			}
+		};
 		EObject current = context;
 		while (scope == null && current != null) {
 			scope = dispatcher.invoke(current, reference);
@@ -129,7 +136,14 @@ public abstract class AbstractDeclarativeScopeProvider extends AbstractScopeProv
 	protected IScope polymorphicFindScopeForReferenceName(EObject context, EReference reference) {
 		Predicate<Method> predicate = getPredicate(context, reference);
 		PolymorphicDispatcher<IScope> dispatcher = new PolymorphicDispatcher<IScope>(Collections
-				.singletonList(this), predicate, errorHandler);
+				.singletonList(this), predicate, errorHandler) {
+			@Override
+			protected IScope handleNoSuchMethod(Object... params) {
+				if (PolymorphicDispatcher.NullErrorHandler.class.equals(errorHandler.getClass()))
+					return null;
+				return super.handleNoSuchMethod(params);
+			}
+		};
 		EObject current = context;
 		IScope scope = null;
 		while (scope == null && current != null) {
