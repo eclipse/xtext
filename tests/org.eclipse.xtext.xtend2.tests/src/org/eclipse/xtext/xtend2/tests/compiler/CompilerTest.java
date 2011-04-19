@@ -49,6 +49,16 @@ import com.google.inject.Injector;
  */
 public class CompilerTest extends AbstractXtend2TestCase {
 	
+	public void testEscapeCharacterForReservedNames() throws Exception {
+		String code = 
+			"package x class Z {" +
+			"  ^create(Object x){\n" +
+			"    ^create(x)" + 
+			"  }\n" + 
+			"}";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
 	
 	public void testExtensionCallOnThisBoundMember() throws Exception {
 		Class<?> clazz = compileJavaCode("x.Y",
