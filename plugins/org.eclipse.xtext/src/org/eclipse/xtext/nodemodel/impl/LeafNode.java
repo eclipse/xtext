@@ -13,6 +13,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @noextend This class is not intended to be subclassed by clients.
  */
 public class LeafNode extends AbstractNode implements ILeafNode {
 

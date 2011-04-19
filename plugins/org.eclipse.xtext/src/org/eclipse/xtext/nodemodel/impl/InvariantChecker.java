@@ -15,6 +15,7 @@ import org.eclipse.xtext.nodemodel.INode;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @noextend This class is not intended to be subclassed by clients.
  */
 public class InvariantChecker {
 

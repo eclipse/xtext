@@ -27,6 +27,7 @@ import com.google.common.collect.Maps;
  * A statefull (!) builder that provides call back methods for clients who
  * want to create a node model and maintain its invariants. 
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @noextend This class is not intended to be subclassed by clients.
  */
 public class NodeModelBuilder {
 
