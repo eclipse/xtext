@@ -375,16 +375,46 @@ public class TypeArgumentContextProvider {
 				}
 			}
 		}
-		if (declaration instanceof JvmParameterizedTypeReference
-				&& information instanceof JvmParameterizedTypeReference) {
-			JvmParameterizedTypeReference declaration2 = (JvmParameterizedTypeReference) declaration;
-			JvmParameterizedTypeReference information2 = (JvmParameterizedTypeReference) information;
-			EList<JvmTypeReference> declArgs = declaration2.getArguments();
-			EList<JvmTypeReference> infoArgs = information2.getArguments();
-			for (int i = 0; i < declArgs.size() && i < infoArgs.size(); i++) {
-				resolve(declArgs.get(i), infoArgs.get(i), existing, returnTypeContext);
+		if (declaration instanceof JvmParameterizedTypeReference) {
+			JvmParameterizedTypeReference parameterizedDeclaration = (JvmParameterizedTypeReference) declaration;
+			EList<JvmTypeReference> declArgs = parameterizedDeclaration.getArguments();
+			if (information instanceof JvmParameterizedTypeReference) {
+				JvmParameterizedTypeReference parameterizedInformation = (JvmParameterizedTypeReference) information;
+				EList<JvmTypeReference> infoArgs = parameterizedInformation.getArguments();
+				for (int i = 0; i < declArgs.size() && i < infoArgs.size(); i++) {
+					resolve(declArgs.get(i), infoArgs.get(i), existing, returnTypeContext);
+				}
+			} else if (information instanceof JvmWildcardTypeReference) {
+				JvmWildcardTypeReference wildcardInformation = (JvmWildcardTypeReference) information;
+				JvmTypeReference informationUpperBound = getSingleUpperBoundOrNull(wildcardInformation);
+				resolve(parameterizedDeclaration, informationUpperBound, existing, returnTypeContext);
+			}
+		} else if (declaration instanceof JvmWildcardTypeReference) {
+			JvmWildcardTypeReference wildcardDeclaration = (JvmWildcardTypeReference) declaration;
+			JvmTypeReference wildcardUpperBound = getSingleUpperBoundOrNull(wildcardDeclaration);
+			if (information instanceof JvmParameterizedTypeReference) {
+				resolve(wildcardUpperBound, information, existing, returnTypeContext);
+			} else if (information instanceof JvmWildcardTypeReference) {
+				JvmWildcardTypeReference wildcardInformation = (JvmWildcardTypeReference) information;
+				JvmTypeReference informationUpperBound = getSingleUpperBoundOrNull(wildcardInformation);
+				resolve(wildcardUpperBound, informationUpperBound, existing, returnTypeContext);
 			}
 		}
+	}
+	
+	private JvmTypeReference getSingleUpperBoundOrNull(JvmConstraintOwner constraintOwner) {
+		JvmUpperBound result = null;
+		for(JvmTypeConstraint constraint: constraintOwner.getConstraints()) {
+			if (constraint instanceof JvmUpperBound) {
+				if (result == null)
+					result = (JvmUpperBound) constraint;
+				else
+					return null;
+			}
+		}
+		if (result != null)
+			return result.getTypeReference();
+		return null;
 	}
 
 	private boolean isValidParameter(JvmTypeParameter typeParameter, JvmTypeReference information, boolean ignoreOperationArguments) {

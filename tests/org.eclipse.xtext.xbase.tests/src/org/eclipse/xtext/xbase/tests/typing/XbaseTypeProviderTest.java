@@ -212,6 +212,34 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	public void testFeatureCall_22() throws Exception {
 		assertResolvedReturnType("java.util.List<java.lang.Boolean>", "newArrayList('').map(s|s.length + 1 == 5).map(b| { !b } )");
 	}
+	
+	public void testFeatureCall_Bug342134_01() throws Exception {
+		assertResolvedReturnType("java.lang.Iterable<java.lang.String>", "newArrayList('').map(e|newArrayList(e)).flatten");
+	}
+	
+	public void testFeatureCall_Bug342134_02() throws Exception {
+		assertResolvedReturnType("java.util.List<java.util.ArrayList<java.lang.String>>", "newArrayList('').map(e|newArrayList(e))");
+	}
+	
+	public void testFeatureCall_Bug342134_03() throws Exception {
+		assertResolvedReturnType("java.lang.Iterable<java.lang.String>", "<String>newArrayList.map(e|newArrayList(e)).flatten");
+	}
+	
+	public void testFeatureCall_Bug342134_04() throws Exception {
+		assertResolvedReturnType("java.lang.Iterable<java.lang.String>", "newArrayList('').map(e|<String>newArrayList(e)).flatten");
+	}
+	
+	public void testFeatureCall_Bug342134_05() throws Exception {
+		assertResolvedReturnType("java.lang.Iterable<java.lang.String>", "newArrayList.map(String e|<String>newArrayList(e)).flatten");
+	}
+	
+	public void testFeatureCall_Bug342134_06() throws Exception {
+		assertResolvedReturnType("java.lang.Iterable<java.lang.String>", "newArrayList(newArrayList('')).flatten");
+	}
+	
+	public void testFeatureCall_Bug342134_07() throws Exception {
+		assertResolvedReturnType("java.lang.Iterable<java.lang.String>", "<java.util.List<java.lang.String>>newArrayList().flatten");
+	}
 
 	public void testFeatureCallWithOperatorOverloading_2() throws Exception {
 		assertResolvedReturnType("boolean", "new java.util.ArrayList<Byte>() += 'x'.getBytes().iterator.next");
