@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel.impl;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
@@ -25,6 +26,7 @@ import com.google.common.collect.Iterators;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @noextend This class is not intended to be subclassed by clients.
  */
 public abstract class AbstractNode implements INode, BidiTreeIterable<INode> {
 	
@@ -88,20 +90,34 @@ public abstract class AbstractNode implements INode, BidiTreeIterable<INode> {
 		INode rootNode = getRootNode();
 		if (rootNode != null) {
 			int offset = getTotalOffset();
-			String leadingText = rootNode.getText().substring(0, offset);
-			int result = Strings.countLines(leadingText);
-			return result + 1;
+			return basicGetLineOfOffset(rootNode, offset);
 		}
 		return 1;
+	}
+
+	/**
+	 * @since 2.0
+	 */
+	protected int basicGetLineOfOffset(INode rootNode, int offset) {
+		if (rootNode instanceof RootNode) {
+			int[] lineBreakOffsets = ((RootNode) rootNode).basicGetLineBreakOffsets();
+			int insertionPoint = Arrays.binarySearch(lineBreakOffsets, offset);
+			if (insertionPoint >= 0) {
+				return insertionPoint + 1;
+			} else {
+				return -insertionPoint;
+			}
+		}
+		String leadingText = rootNode.getText().substring(0, offset);
+		int result = Strings.countLines(leadingText);
+		return result + 1;
 	}
 	
 	public int getStartLine() {
 		INode rootNode = getRootNode();
 		if (rootNode != null) {
 			int offset = getOffset();
-			String leadingText = rootNode.getText().substring(0, offset);
-			int result = Strings.countLines(leadingText);
-			return result + 1;
+			return basicGetLineOfOffset(rootNode, offset);
 		}
 		return 1;
 	}
@@ -110,15 +126,17 @@ public abstract class AbstractNode implements INode, BidiTreeIterable<INode> {
 		int offset = getOffset();
 		int length = getLength();
 		INode rootNode = getRootNode();
-		String text = rootNode.getText().substring(offset, offset + length);
-		int myLineCount = Strings.countLines(text);
-		return getStartLine() + myLineCount;
+		if (rootNode != null)
+			return basicGetLineOfOffset(rootNode, offset + length);
+		return 1;
 	}
 	
 	public int getTotalEndLine() {
-		String text = getText();
-		int myLineCount = Strings.countLines(text);
-		return getTotalStartLine() + myLineCount;
+		int offset = getTotalEndOffset();
+		INode rootNode = getRootNode();
+		if (rootNode != null)
+			return basicGetLineOfOffset(rootNode, offset);
+		return 1;
 	}
 	
 	public int getOffset() {
