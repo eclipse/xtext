@@ -886,4 +886,12 @@ public class RichStringProcessorTest extends AbstractRichStringTest {
 				"	test\n" + 
 				"'''");
 	}
+	
+	public void testBug343269() throws Exception {
+		doTestStackIsConsistentWithErroneousModel(
+				"'''\n" + 
+				"«FOR\n" + 
+				"\n" + 
+				"'''");
+	}
 }

@@ -460,6 +460,9 @@ public class RichStringProcessor {
 		}
 
 		public String computeInitialIndentation(RichString object) {
+			if (object == null) {
+				return indentationHandler.getTotalIndentation().toString();
+			}
 			InitialTemplateIndentationComputer computer = new InitialTemplateIndentationComputer(
 					indentationHandler.getTotalIndentation());
 			String result = computer.doSwitch(object);
