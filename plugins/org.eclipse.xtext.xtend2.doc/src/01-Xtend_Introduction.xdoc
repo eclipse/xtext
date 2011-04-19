@@ -20,7 +20,6 @@ ul[
 
 It is not aiming at replacing Java all together but meant to be used to write Guice-injected component implementations. Therefore its library is just a 
 thin layer over the Java Development Kit (JDK) and interacts with Java exactly the same as it interacts with Xtend code. Also Java can call Xtend functions 
-complete transparent way. 
-And of course, it provides a modern Eclipse-based IDE closely integrated with the Java Development Tools (JDT).
+complete transparent way. And of course, it provides a modern Eclipse-based IDE closely integrated with the Java Development Tools (JDT).
 
 img[../images/Xtend_and_Java.png][Xtend and Java Vis-a-Vis][][]
