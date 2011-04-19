@@ -49,7 +49,7 @@ public class EcoreQualifiedNameProvider extends IQualifiedNameProvider.AbstractI
 				if (Strings.isEmpty(name))
 					return null;
 				QualifiedName qualifiedName = QualifiedName.create(name);
-				if(obj.eContainer() == null)
+				if(!isRecurseParent(obj))
 					return qualifiedName;
 				QualifiedName parentsQualifiedName = getFullyQualifiedName(obj.eContainer());
 				if (parentsQualifiedName == null)
@@ -57,7 +57,12 @@ public class EcoreQualifiedNameProvider extends IQualifiedNameProvider.AbstractI
 				else 
 					return parentsQualifiedName.append(qualifiedName);
 			}
+
 		});
+	}
+
+	protected boolean isRecurseParent(final EObject obj) {
+		return obj.eContainer() != null;
 	}
 
 	protected String getCacheKey() {
