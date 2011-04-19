@@ -12,15 +12,16 @@ import static java.util.Collections.*;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -51,14 +52,20 @@ public class EcoreRefactoringParticipant extends AbstractProcessorBasedRenamePar
 	protected List<EObject> getRenamedElementsOrProxies(EObject originalTarget) {
 		if (originalTarget instanceof ParserRule) {
 			TypeRef returnType = ((ParserRule) originalTarget).getType();
-			if (returnType != null && returnType.getMetamodel() != null && returnType.getClassifier() != null
-					&& !Strings.isEmpty(returnType.getClassifier().getName())) {
-				URI ePackageFileURI = findEPackageFileURI(returnType.getMetamodel());
-				if (ePackageFileURI != null) {
+			if (returnType != null && returnType.getClassifier() != null
+					&& !Strings.isEmpty(returnType.getClassifier().getName()) 
+					&& returnType.getClassifier().eClass() != null
+					&& returnType.getClassifier().getEPackage() != null
+					&& !Strings.isEmpty(returnType.getClassifier().getEPackage().getNsURI())) {
+				String packageNsURI = returnType.getClassifier().getEPackage().getNsURI();
+				QualifiedName classifierQualifiedName = QualifiedName.create(packageNsURI, returnType.getClassifier().getName());
+				URI platformResourceURI = findPlatformResourceURI(classifierQualifiedName, EcorePackage.Literals.ECLASS);
+				if (platformResourceURI == null) {
+					if(returnType.getMetamodel() instanceof ReferencedMetamodel)
+						getStatus().addError("Return type " + returnType.getClassifier().getName() + " is not indexed");
+				} else {
 					EObject classifierProxy = EcoreFactory.eINSTANCE.create(returnType.getClassifier().eClass());
-					URI eClassFileURI = ePackageFileURI.trimFragment().appendFragment(
-							ePackageFileURI.fragment() + "/" + returnType.getClassifier().getName());
-					((InternalEObject) classifierProxy).eSetProxyURI(eClassFileURI);
+					((InternalEObject) classifierProxy).eSetProxyURI(platformResourceURI);
 					getStatus().addWarning(
 							"Renaming EClass '" + returnType.getClassifier().getName()
 									+ "' in ecore file. Please rerun the Ecore generator.");
@@ -68,21 +75,18 @@ public class EcoreRefactoringParticipant extends AbstractProcessorBasedRenamePar
 		}
 		return null;
 	}
-
-	private URI findEPackageFileURI(AbstractMetamodelDeclaration metamodel) {
+	
+	private URI findPlatformResourceURI(QualifiedName name, EClass type) {
 		for (IResourceDescription resourceDescription : resourceDescriptions.getAllResourceDescriptions()) {
 			if (Strings.equal("ecore", resourceDescription.getURI().fileExtension())) {
 				for (IEObjectDescription eObjectDescription : resourceDescription
-						.getExportedObjectsByType(EcorePackage.Literals.EPACKAGE)) {
-					if (Strings.equal(metamodel.getEPackage().getNsURI(), eObjectDescription.getQualifiedName()
-							.getFirstSegment())) {
+						.getExportedObjectsByType(type)) {
+					if (name.equals(eObjectDescription.getQualifiedName())) {
 						return eObjectDescription.getEObjectURI();
 					}
 				}
 			}
 		}
-		if (metamodel instanceof ReferencedMetamodel)
-			getStatus().addError("Referenced metamodel " + metamodel.getEPackage() + " is not indexed");
 		return null;
 	}
 
