@@ -170,6 +170,7 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
     {
       Iterable<EPackage> _accessedPackages = this.getAccessedPackages();
       for(EPackage e : _accessedPackages) {
+        _builder.newLineIfNotEmpty();
         _builder.append("import ");
         GenPackage _genPackage = GenModelAccess.getGenPackage(e);
         String _qualifiedPackageName = _genPackage.getQualifiedPackageName();
@@ -178,6 +179,7 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
         _builder.newLineIfNotEmpty();
       }
     }
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("import com.google.common.collect.Lists;");
     _builder.newLine();
@@ -239,7 +241,6 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
     _builder.append("\t");
     String _genMethodFindContext = this.genMethodFindContext();
     _builder.append(_genMethodFindContext, "	");
-    _builder.append("\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
@@ -293,17 +294,18 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
     _builder.append("public Iterable<EObject> findContexts(EObject obj, Iterable<EObject> contextCandidates) {");
     _builder.newLine();
     _builder.append("\t");
-    int pkgi = 0;
+    Integer pkgi = 0;
     _builder.newLineIfNotEmpty();
+    _builder.append("\t");
     {
       Iterable<EPackage> _accessedPackages = this.getAccessedPackages();
       for(EPackage pkg : _accessedPackages) {
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
         {
-          final int typeConverted_pkgi = (int)pkgi;
-          int _operator_plus = IntegerExtensions.operator_plus(((Integer)typeConverted_pkgi), ((Number)1));
-          int _pkgi = pkgi = _operator_plus;
-          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Comparable<? super Integer>)_pkgi), 1);
+          int _operator_plus = IntegerExtensions.operator_plus(pkgi, 1);
+          Integer _pkgi = pkgi = ((Integer)_operator_plus);
+          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(_pkgi, 1);
           if (_operator_greaterThan) {
             _builder.append("else ");
           }
@@ -317,7 +319,7 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
         _builder.append("\t");
         _builder.append("\t");
         Iterable<EClass> _accessedClasses = this.getAccessedClasses(pkg);
-        final Function2<EClass,? super Integer,Integer> _function = new Function2<EClass,? super Integer,Integer>() {
+        final Function2<EClass,Integer,Integer> _function = new Function2<EClass,Integer,Integer>() {
             public Integer apply(EClass type , Integer max) {
               final EClass typeConverted_type = (EClass)type;
               String _genIntLiteral = GenModelAccess.getGenIntLiteral(typeConverted_type);
@@ -327,12 +329,15 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
               return ((Integer)_max);
             }
           };
-        Integer _fold = IterableExtensions.<EClass, Integer>fold(_accessedClasses, ((Integer)0), _function);
+        Integer _fold = IterableExtensions.<EClass, Integer>fold(_accessedClasses, 0, _function);
         final Integer width = _fold;
         _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("\t");
         {
           Iterable<EClass> _accessedClasses_1 = this.getAccessedClasses(pkg);
           for(EClass type_1 : _accessedClasses_1) {
+            _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("case ");
@@ -357,7 +362,7 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
             {
               Collection<EObject> _accessedContexts = this.getAccessedContexts(type_1);
               int _size = _accessedContexts.size();
-              boolean _operator_equals = ObjectExtensions.operator_equals(((Object)_size), ((Object)1));
+              boolean _operator_equals = ObjectExtensions.operator_equals(((Object)_size), 1);
               if (_operator_equals) {
                 _builder.append("singleton((EObject)grammarAccess.");
                 Collection<EObject> _accessedContexts_1 = this.getAccessedContexts(type_1);
@@ -375,13 +380,18 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
             }
             _builder.append(";");
             _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\t");
           }
         }
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("}\t\t");
         _builder.newLine();
+        _builder.append("\t");
       }
     }
+    _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("return Collections.emptyList();");
     _builder.newLine();
@@ -400,9 +410,11 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
         };
       Iterable<EClass> _filter = IterableExtensions.<EClass>filter(_accessedClasses_2, _function_2);
       for(EClass type_2 : _filter) {
+        _builder.newLineIfNotEmpty();
         _builder.newLine();
       }
     }
+    _builder.newLineIfNotEmpty();
     String _string = _builder.toString();
     return _string;
   }
@@ -444,18 +456,18 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
     _builder.append("public void createSequence(EObject context, EObject semanticObject, ISemanticSequenceAcceptor sequenceAcceptor,\tAcceptor errorAcceptor) {");
     _builder.newLine();
     _builder.append("\t");
-    int pkgi = 0;
-    _builder.append("\t\t");
+    Integer pkgi = 0;
     _builder.newLineIfNotEmpty();
+    _builder.append("\t");
     {
       Iterable<EPackage> _accessedPackages = this.getAccessedPackages();
       for(EPackage pkg : _accessedPackages) {
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
         {
-          final int typeConverted_pkgi = (int)pkgi;
-          int _operator_plus = IntegerExtensions.operator_plus(((Integer)typeConverted_pkgi), ((Number)1));
-          int _pkgi = pkgi = _operator_plus;
-          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Comparable<? super Integer>)_pkgi), 1);
+          int _operator_plus = IntegerExtensions.operator_plus(pkgi, 1);
+          Integer _pkgi = pkgi = ((Integer)_operator_plus);
+          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(_pkgi, 1);
           if (_operator_greaterThan) {
             _builder.append("else ");
           }
@@ -466,9 +478,12 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
         _builder.append(_packageInterfaceName, "	");
         _builder.append(".eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {");
         _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("\t");
         {
           Iterable<EClass> _accessedClasses = this.getAccessedClasses(pkg);
           for(EClass type : _accessedClasses) {
+            _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("case ");
@@ -480,20 +495,23 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("\t");
-            int ctxi = 0;
+            Integer ctxi = 0;
             _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("\t");
             {
               Map<IConstraint,List<EObject>> _accessedConstraints = this.getAccessedConstraints(type);
               Set<Entry<IConstraint,List<EObject>>> _entrySet = _accessedConstraints.entrySet();
               for(Entry<IConstraint,List<EObject>> ctx : _entrySet) {
+                _builder.newLineIfNotEmpty();
                 _builder.append("\t");
                 _builder.append("\t");
                 _builder.append("\t");
                 {
-                  final int typeConverted_ctxi = (int)ctxi;
-                  int _operator_plus_1 = IntegerExtensions.operator_plus(((Integer)typeConverted_ctxi), ((Number)1));
-                  int _ctxi = ctxi = _operator_plus_1;
-                  boolean _operator_greaterThan_1 = ComparableExtensions.<Integer>operator_greaterThan(((Comparable<? super Integer>)_ctxi), 1);
+                  int _operator_plus_1 = IntegerExtensions.operator_plus(ctxi, 1);
+                  Integer _ctxi = ctxi = ((Integer)_operator_plus_1);
+                  boolean _operator_greaterThan_1 = ComparableExtensions.<Integer>operator_greaterThan(_ctxi, 1);
                   if (_operator_greaterThan_1) {
                     _builder.append("else ");
                   }
@@ -540,10 +558,17 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
                 _builder.append("\t");
                 _builder.append("}");
                 _builder.newLine();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("\t");
               }
             }
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\t");
           }
         }
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("\t");
         _builder.append("}");
@@ -552,8 +577,10 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
         _builder.append("\t");
         _builder.append("if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));");
         _builder.newLine();
+        _builder.append("\t");
       }
     }
+    _builder.newLineIfNotEmpty();
     _builder.append("}");
     String _string = _builder.toString();
     return _string;
@@ -580,6 +607,7 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
     {
       IFeatureInfo[] _features = c.getFeatures();
       for(IFeatureInfo f : _features) {
+        _builder.newLineIfNotEmpty();
         _builder.append(" *    ", "");
         final IFeatureInfo typeConverted_f = (IFeatureInfo)f;
         String _string = typeConverted_f.toString();
@@ -588,6 +616,7 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
         _builder.newLineIfNotEmpty();
       }
     }
+    _builder.newLineIfNotEmpty();
     _builder.append(" ");
     _builder.append("*/");
     _builder.newLine();
@@ -601,15 +630,20 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
     _builder.append(_interfaceName, "");
     _builder.append(" semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {");
     _builder.newLineIfNotEmpty();
+    _builder.append("\t");
     {
       boolean _canGenerate = SemanticSequencerUtil.canGenerate(c);
       if (_canGenerate) {
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("if(errorAcceptor != null) {");
         _builder.newLine();
+        _builder.append("\t");
+        _builder.append("\t");
         {
           IFeatureInfo[] _features_1 = c.getFeatures();
           for(IFeatureInfo f_1 : _features_1) {
+            _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("if(transientValues.isValueTransient(semanticObject, ");
@@ -627,17 +661,22 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
             _builder.append(_genTypeLiteral_1, "			");
             _builder.append("));");
             _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\t");
           }
         }
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);");
         _builder.newLine();
+        _builder.append("\t");
         {
           IFeatureInfo[] _features_2 = c.getFeatures();
           for(IFeatureInfo f_2 : _features_2) {
+            _builder.newLineIfNotEmpty();
             _builder.append("\t");
             IConstraintElement[] _assignments = f_2.getAssignments();
             IConstraintElement _get = ((List<IConstraintElement>)Conversions.doWrapArray(_assignments)).get(0);
@@ -671,13 +710,19 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
             _builder.append(_accessorName_1, "	");
             _builder.append("()));");
             _builder.newLineIfNotEmpty();
+            _builder.append("\t");
           }
-        }} else {
+        }
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");} else {
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);");
         _builder.newLine();
+        _builder.append("\t");
       }
     }
+    _builder.newLineIfNotEmpty();
     _builder.append("}");
     String _string_1 = _builder.toString();
     return _string_1;

@@ -76,7 +76,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	public static final QualifiedName THIS = QualifiedName.create("this");
 
 	@Inject
-	private JvmFeatureScopeProvider jvmFeatureScopeProvider;
+	protected JvmFeatureScopeProvider jvmFeatureScopeProvider;
 
 	@Inject
 	private Provider<DefaultJvmFeatureDescriptionProvider> defaultFeatureDescProvider;

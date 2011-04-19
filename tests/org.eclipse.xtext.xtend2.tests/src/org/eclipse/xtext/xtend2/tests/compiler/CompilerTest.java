@@ -49,6 +49,25 @@ import com.google.inject.Injector;
  */
 public class CompilerTest extends AbstractXtend2TestCase {
 	
+	
+	public void testExtensionCallOnThisBoundMember() throws Exception {
+		Class<?> clazz = compileJavaCode("x.Y",
+				"package x " +
+				"import static extension java.util.Collections.* " +
+				"class Y {" +
+				"  foo(Object this) {\n" +
+				"    singletonList" + 
+				"  }\n" +
+				"}");
+		Object instance = clazz.newInstance();
+		Method method = clazz.getDeclaredMethod("foo", Object.class);
+		try {
+			assertEquals(Collections.singletonList("FOO"), method.invoke(instance, "FOO"));
+		} catch (InvocationTargetException e) {
+			assertTrue(e.getCause() instanceof IOException);
+		}
+	}
+	
 	public void testRethrownCheckedExceptions_00() throws Exception {
 		Class<?> clazz = compileJavaCode("x.Y",
 				"package x class Y {" +
