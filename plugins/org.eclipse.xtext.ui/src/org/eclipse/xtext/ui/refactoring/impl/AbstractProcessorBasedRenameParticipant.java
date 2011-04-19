@@ -125,7 +125,7 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 		ResourceSet resourceSet = resourceSetProvider.get(projectUtil.getProject(triggeringContext
 				.getTargetElementURI()));
 		EObject originalTarget = resourceSet.getEObject(triggeringContext.getTargetElementURI(), true);
-		List<EObject> renamedElements = getRenamedElements(originalTarget);
+		List<EObject> renamedElements = getRenamedElementsOrProxies(originalTarget);
 		if (renamedElements == null || renamedElements.isEmpty())
 			return null;
 		List<IRenameElementContext> contexts = newArrayListWithCapacity(renamedElements.size());
@@ -136,7 +136,7 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 		return contexts;
 	}
 
-	protected abstract List<EObject> getRenamedElements(EObject originalTarget);
+	protected abstract List<EObject> getRenamedElementsOrProxies(EObject originalTarget);
 
 	protected String getNewName() {
 		return getArguments().getNewName();

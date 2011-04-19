@@ -46,7 +46,7 @@ public class OverridingRuleRefactoringParticipant extends AbstractProcessorBased
 	private IResourceDescriptions resourceDescriptions;
 	
 	@Override
-	protected List<EObject> getRenamedElements(EObject originalTarget) {
+	protected List<EObject> getRenamedElementsOrProxies(EObject originalTarget) {
 		if(originalTarget instanceof AbstractRule) {
 			final String ruleName = ((AbstractRule)originalTarget).getName();
 			Grammar grammar = GrammarUtil.getGrammar(originalTarget);
