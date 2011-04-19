@@ -188,6 +188,13 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 				"java.lang.Object");
 	}
 	
+	public void testBug343089_01() throws Exception {
+		XtendFunction function = function(
+				"<T extends Integer> noCastRequired() {\n" + 
+				 "  [T a,T b|a+b]\n" + 
+				 "}");
+		helper.assertNoErrors(function);
+	}
 
 	protected void assertConformanceError(String body, EClass objectType, String... messageParts)
 			throws Exception {
