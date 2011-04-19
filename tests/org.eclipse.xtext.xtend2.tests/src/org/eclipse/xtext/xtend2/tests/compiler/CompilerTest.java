@@ -109,35 +109,6 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		}
 	}
 	
-	public void testClazzMembersVisibleWithShadowedThis() throws Exception {
-		Class<?> clazz = compileJavaCode("x.Y",
-				"package x class Y {" +
-				"  foo(String this){\n" +
-				"    bar(this)" + 
-				"  }\n" +
-				"  bar(String this){\n" +
-				"    this.toUpperCase" +
-				"  }\n" + 
-		"}");
-		Object instance = clazz.newInstance();
-		Method method = clazz.getDeclaredMethod("foo", String.class);
-		assertEquals("FOO", method.invoke(instance, "foo"));
-	}
-	
-	public void testClazzMembersVisibleWithShadowedThis_01() throws Exception {
-		Class<?> clazz = compileJavaCode("x.Y",
-				"package x class Y {" +
-				"  @Inject String as s" +
-				"  foo(String this){\n" +
-				"    this == s" + 
-				"  }\n" +
-		"}");
-		Object instance = clazz.newInstance();
-		Method method = clazz.getDeclaredMethod("foo", String.class);
-		assertEquals(false, method.invoke(instance, "foo"));
-		assertEquals(true, method.invoke(instance, (Object)null));
-	}
-	
 	public void testSuperCall() throws Exception {
 		Class<?> clazz = compileJavaCode("x.Y",
 				"package x class Y extends Object {" +
