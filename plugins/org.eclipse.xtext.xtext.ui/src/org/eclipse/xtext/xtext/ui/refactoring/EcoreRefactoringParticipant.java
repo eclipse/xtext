@@ -48,7 +48,7 @@ public class EcoreRefactoringParticipant extends AbstractProcessorBasedRenamePar
 	}
 
 	@Override
-	protected List<EObject> getRenamedElements(EObject originalTarget) {
+	protected List<EObject> getRenamedElementsOrProxies(EObject originalTarget) {
 		if (originalTarget instanceof ParserRule) {
 			TypeRef returnType = ((ParserRule) originalTarget).getType();
 			if (returnType != null && returnType.getMetamodel() != null && returnType.getClassifier() != null
