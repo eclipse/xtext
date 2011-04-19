@@ -115,7 +115,7 @@ class AbstractSemanticSequencer extends GeneratedJavaClass {
 			«var pkgi = 0»
 			«FOR pkg:accessedPackages  /* ITERATOR i */»
 				«IF (pkgi = pkgi + 1) > 1 /* !i.firstIteration */»else «ENDIF»if(obj.eClass().getEPackage() == «pkg.genPackage.packageInterfaceName».eINSTANCE) switch(obj.eClass().getClassifierID()) {
-					«val width = pkg.accessedClasses.fold(0, [type, max | Math::max(type.genIntLiteral.length, max)])»
+					«val width = pkg.accessedClasses.fold(0 as Integer, [type, max | Math::max(type.genIntLiteral.length, max)])»
 					«FOR type:pkg.accessedClasses»
 						case «type.genIntLiteral»:«{type.genIntLiteral.length..width}.fold("",[i,s|s + " "])»return «IF type.accessedContexts.size == 1»singleton((EObject)grammarAccess.«type.accessedContexts.iterator.next.gaAccessor()»)«ELSE»findContexts((«type.getGenClass().interfaceName»)obj)«ENDIF»;
 					«ENDFOR»
@@ -139,7 +139,7 @@ class AbstractSemanticSequencer extends GeneratedJavaClass {
 	
 	String genMethodCreateSequence() { '''
 		public void createSequence(EObject context, EObject semanticObject, ISemanticSequenceAcceptor sequenceAcceptor,	Acceptor errorAcceptor) {
-			«var pkgi = 0 »		
+			«var pkgi = 0 »
 			«FOR pkg:accessedPackages /* ITERATOR i */»
 			«IF (pkgi = pkgi + 1) > 1 /*!i.firstIteration */»else «ENDIF»if(semanticObject.eClass().getEPackage() == «pkg.getGenPackage().packageInterfaceName».eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 				«FOR type:pkg.accessedClasses»
