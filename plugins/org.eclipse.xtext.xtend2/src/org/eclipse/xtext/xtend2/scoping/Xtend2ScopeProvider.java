@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -22,7 +21,6 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -30,7 +28,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
-import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -40,7 +37,6 @@ import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IFeaturesForTypeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
-import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo;
@@ -49,7 +45,6 @@ import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
@@ -133,46 +128,11 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 	protected SimpleScope getScopeForXtendClass(XtendClass context, IScope parent) {
 		XFeatureCall receiver = XbaseFactory.eINSTANCE.createXFeatureCall();
 		receiver.setFeature(context);
-		JvmTypeReference receiverType = getTypeProvider().getType(receiver, true);
-		List<IJvmFeatureDescriptionProvider> providers = getFeatureDescriptionProviders(receiverType, context, getContextType(context), receiver);
-		providers = newArrayList(transform(providers, new Function<IJvmFeatureDescriptionProvider,IJvmFeatureDescriptionProvider>(){
-			public IJvmFeatureDescriptionProvider apply(IJvmFeatureDescriptionProvider input) {
-				return new ExtensionFilteringFeatureDescriptionProvider(input);
-			}}));
-		parent = jvmFeatureScopeProvider.createFeatureScopeForTypeRef(parent, receiverType, providers);
 		return new SimpleScope(parent, newArrayList(
 				EObjectDescription.create(THIS, context), 
 				EObjectDescription.create("super", context.getSuperCallReferable())));
 	}
 	
-	protected static class ExtensionFilteringFeatureDescriptionProvider implements IJvmFeatureDescriptionProvider {
-		private IJvmFeatureDescriptionProvider descriptionProvider;
-		public ExtensionFilteringFeatureDescriptionProvider(IJvmFeatureDescriptionProvider input) {
-			this.descriptionProvider = input;
-		}
-		public void addFeatureDescriptions(JvmFeature feature, TypeArgumentContext context,
-				IAcceptor<JvmFeatureDescription> acceptor) {
-			descriptionProvider.addFeatureDescriptions(feature, context, new ExtensionFilteringAcceptor(acceptor));
-		}
-		public String getText() {
-			return descriptionProvider.getText();
-		}
-		
-		protected static class ExtensionFilteringAcceptor implements IAcceptor<JvmFeatureDescription> {
-			private IAcceptor<JvmFeatureDescription> delegate;
-			public ExtensionFilteringAcceptor(IAcceptor<JvmFeatureDescription> acceptor) {
-				this.delegate = acceptor;
-			}
-			public void accept(JvmFeatureDescription t) {
-				if (!isFiltered(t))
-					delegate.accept(t);
-			}
-			protected boolean isFiltered(JvmFeatureDescription t) {
-				return t.getNumberOfIrrelevantArguments()>0;
-			}
-		}
-	}
-
 	@Override
 	protected List<IJvmFeatureDescriptionProvider> getStaticFeatureDescriptionProviders(Resource context,
 			JvmDeclaredType contextType) {
