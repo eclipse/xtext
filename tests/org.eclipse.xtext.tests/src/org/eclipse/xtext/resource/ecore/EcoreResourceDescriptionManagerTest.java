@@ -55,6 +55,29 @@ public class EcoreResourceDescriptionManagerTest extends TestCase {
 		checkEcore(index, "ecore", false);
 		checkEcore(index, EcorePackage.eNS_URI, true);
 	}
+	
+	public void testNestedPackage() throws Exception {
+		Resource resource = new XMIResourceImpl();
+		EPackage parent = EcoreFactory.eINSTANCE.createEPackage();
+		parent.setName("parent");
+		parent.setNsURI("http://parent");
+		EPackage child = EcoreFactory.eINSTANCE.createEPackage();
+		child.setName("child");
+		child.setNsURI("http://child");
+		EClass eClass = EcoreFactory.eINSTANCE.createEClass();
+		eClass.setName("Test");
+		child.getEClassifiers().add(eClass);
+		parent.getESubpackages().add(child);
+		resource.getContents().add(parent);
+		Map<QualifiedName, IEObjectDescription> index = createIndex(resource);
+		checkEntry(index, parent, false, "parent");
+		checkEntry(index, child, false, "parent", "child");
+		checkEntry(index, eClass, false, "parent", "child", "Test");
+		checkEntry(index, parent, true, "http://parent");
+		checkEntry(index, child, true, "http://child");
+		checkEntry(index, eClass, true, "http://child", "Test");
+		assertEquals(6,index.size());
+	}
 
 	public void testMissingNsURI() {
 		Resource resource = new XMIResourceImpl();
