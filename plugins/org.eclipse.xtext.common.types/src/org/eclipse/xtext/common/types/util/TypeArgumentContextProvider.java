@@ -326,7 +326,7 @@ public class TypeArgumentContextProvider {
 				List<JvmTypeReference> typeArguments = typeRef.getArguments();
 				if (!typeArguments.isEmpty()) {
 					// parameterized type reference
-					for (int i = 0; i < typeArguments.size(); i++) {
+					for (int i = 0; i < typeArguments.size() && i < typeParameters.size(); i++) {
 						JvmTypeReference argument = typeArguments.get(i);
 						if (argument != null) {
 							JvmTypeParameter param = typeParameters.get(i);
