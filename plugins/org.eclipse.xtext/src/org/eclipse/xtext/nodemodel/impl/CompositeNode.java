@@ -19,6 +19,7 @@ import org.eclipse.xtext.nodemodel.util.SingletonBidiIterable;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @noextend This class is not intended to be subclassed by clients.
  */
 public class CompositeNode extends AbstractNode implements ICompositeNode {
 

@@ -15,6 +15,7 @@ import com.google.common.collect.UnmodifiableIterator;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @noextend This class is not intended to be subclassed by clients.
  */
 public class BasicNodeIterator extends UnmodifiableIterator<AbstractNode> implements BidiIterator<AbstractNode>{
 

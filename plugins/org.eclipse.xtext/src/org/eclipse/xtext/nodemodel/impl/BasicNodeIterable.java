@@ -6,6 +6,7 @@ import org.eclipse.xtext.nodemodel.util.ReversedBidiIterator;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @noextend This class is not intended to be subclassed by clients.
  */
 public class BasicNodeIterable implements BidiIterable<AbstractNode> {
 	private final AbstractNode startWith;
