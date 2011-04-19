@@ -354,6 +354,7 @@ public class TypeArgumentContextProvider {
 	
 	protected void resolve(JvmTypeReference declaration, JvmTypeReference information, Multimap<JvmTypeParameter, JvmTypeReference> existing, boolean returnTypeContext) {
 		JvmTypeParameter typeParameter = getReferenceTypeParameter(declaration);
+		information = primitives.asWrapperTypeIfPrimitive(information);
 		if (typeParameter != null) {
 			if (isValidParameter(typeParameter, information, returnTypeContext)) {
 				if (information != null && !containsEntry(existing, typeParameter, information)) {
