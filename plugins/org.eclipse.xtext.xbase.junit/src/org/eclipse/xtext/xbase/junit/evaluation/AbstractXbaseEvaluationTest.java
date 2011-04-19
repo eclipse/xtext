@@ -1297,4 +1297,34 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	public void testMemberCallOnMultiType_08() throws Exception {
 		assertEvaluatesTo(Boolean.FALSE, "(if (false) new Double('-20') else new Integer('10')) < 0");
 	}
+	
+	public void testBug343144_01() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(3), 
+			"newArrayList('ab', 'abc').fold(0 as Integer, [s, max | Math::max(s.length, max)])");
+	}
+	
+	public void testBug343144_02() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(3), 
+			"newArrayList('ab', 'abc').fold(0, [s, Integer max | Math::max(s.length, max)])");
+	}
+	
+	public void testBug343144_03() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(3), 
+			"newArrayList('ab', 'abc').fold(0, [s, max | Math::max(s.length, max)])");
+	}
+	
+	public void testBug343144_04() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(3), 
+			"{ val Integer i = 0 newArrayList('ab', 'abc').fold(i, [s, max | Math::max(s.length, max)]) }");
+	}
+	
+	public void testBug343144_05() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(3), 
+			"{ val int i = 0 newArrayList('ab', 'abc').fold(i, [s, max | Math::max(s.length, max)]) }");
+	}
+	
+	public void testBug343144_06() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(3), 
+		"{ val i = 0 newArrayList('ab', 'abc').fold(i, [s, max | Math::max(s.length, max)]) }");
+	}
 }
