@@ -37,6 +37,11 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 	@Inject
 	private Provider<KeywordBasedValueConverter> keywordBasedConverterProvider;
 	
+	@ValueConverter(rule = "IdOrSuper")
+	public IValueConverter<String> getIdOrSuperValueConverter() {
+		return ID();
+	}
+	
 	@ValueConverter(rule = "QualifiedName")
 	public IValueConverter<String> getQualifiedNameValueConverter() {
 		return qualifiedNameValueConverter;
