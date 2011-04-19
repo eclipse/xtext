@@ -559,6 +559,15 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		invokeAndExpect("foobar", "bar(p1)} bar(String x) {'foo'+x","bar");
 	}
 	
+	public void testBug342134() throws Exception {
+		List<String> list = newArrayList("a", "b", "c");
+		invokeAndExpect2(
+				list, 
+				"bug342134(java.util.ArrayList<String> strings) {\n" + 
+				"    strings.map(e| newArrayList(e)).flatten.toList\n" + 
+				"}", "bug342134", list);
+	}
+	
 	public void testTypeInferrence_00() throws Exception {
 		compileJavaCode("Foo", "import org.eclipse.emf.ecore.EObject " +
 				"class Foo { " +
