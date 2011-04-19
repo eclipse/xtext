@@ -63,6 +63,14 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedType(Object.class.getName(),
 				"switch true { case true : 's' case false : new java.lang.Object() default: 'bar'}");
 	}
+	
+	public void testSwitchExpression_Bug343100() throws Exception {
+		assertResolvedType("java.lang.Class<? extends java.lang.Object>",
+			"switch 'a' {\n" + 
+			"  case null: typeof(java.lang.String)\n" + 
+			"  case 'a': typeof(java.lang.Void)\n" + 
+			"}");
+	}
 
 	public void testBlockExpression() throws Exception {
 		assertResolvedType(Integer.TYPE.getName(), "{''.toString;4;}");
