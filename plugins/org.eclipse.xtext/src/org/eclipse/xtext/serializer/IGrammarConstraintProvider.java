@@ -11,7 +11,6 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.serializer.impl.GrammarConstraintProvider;
 import org.eclipse.xtext.util.Pair;
 

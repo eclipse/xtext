@@ -7,12 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.diagnostic;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
 
 import com.google.inject.ImplementedBy;
 
