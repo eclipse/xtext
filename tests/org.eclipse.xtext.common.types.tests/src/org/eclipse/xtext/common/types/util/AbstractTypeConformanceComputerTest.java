@@ -753,6 +753,20 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 				any());
 	}
 	
+	public void testBug343100_01() throws Exception {
+		assertCommonSuperType(
+				"java.lang.Class<? extends java.lang.Object>",
+				ref(Class.class, ref(Void.class)),
+				ref(Class.class, ref(String.class)));
+	}
+	
+	public void testBug343100_02() throws Exception {
+		assertCommonSuperType(
+				"java.util.Collection<? extends java.lang.Object>",
+				ref(Collection.class, ref(Void.class)),
+				ref(List.class, ref(String.class)));
+	}
+	
 //TODO Fix ME!	
 //	public void testCommonSuperType_13() throws Exception {
 //		assertCommonSuperType(

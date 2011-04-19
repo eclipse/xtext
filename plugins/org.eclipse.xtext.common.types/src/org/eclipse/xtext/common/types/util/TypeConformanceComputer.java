@@ -564,11 +564,11 @@ public class TypeConformanceComputer {
 			rawTypeToReference.put(type, resolver.apply(superType));
 			if (distances.contains(type)) {
 				int currentCount = distances.count(type);
-				if (currentCount < distance) {
-					distances.setCount(type, distance);
+				if (currentCount < distance + 1) {
+					distances.setCount(type, distance + 1);
 				}
 			} else {
-				distances.add(type, distance);
+				distances.add(type, distance + 1);
 			}
 			return true;
 		}
@@ -737,8 +737,10 @@ public class TypeConformanceComputer {
 	protected void initializeDistance(JvmTypeReference firstType, Multimap<JvmType, JvmTypeReference> all,
 			Multiset<JvmType> cumulatedDistance) {
 		TypeArgumentContext firstContext = typeArgumentContextProvider.getReceiverContext(firstType);
-		superTypeCollector.collectSuperTypes(firstType, new MaxDistanceRawTypeAcceptor(
-				cumulatedDistance, all, new ArgumentResolver(firstContext)));
+		MaxDistanceRawTypeAcceptor acceptor = new MaxDistanceRawTypeAcceptor(
+				cumulatedDistance, all, new ArgumentResolver(firstContext));
+		acceptor.accept(firstType, 0);
+		superTypeCollector.collectSuperTypes(firstType, acceptor);
 	}
 
 	/**
