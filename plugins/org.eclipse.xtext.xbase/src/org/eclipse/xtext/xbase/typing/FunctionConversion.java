@@ -346,15 +346,15 @@ public class FunctionConversion {
 		if (functionType==null)
 			return result;
 		for (int i = 0; i < parameterTypes.size(); i++) {
-			JvmTypeReference paramterType = parameterTypes.get(i);
-			if (paramterType == null) {
+			JvmTypeReference parameterType = parameterTypes.get(i);
+			if (parameterType == null) {
 				JvmParameterizedTypeReference reference = factory.createJvmParameterizedTypeReference();
 				JvmTypeParameter typeParameter = functionType.getTypeParameters().get(i);
 				reference.setType(typeParameter);
 				result.getArguments().add(reference);
 			} else {
-				paramterType = primitives.asWrapperTypeIfPrimitive(paramterType);
-				result.getArguments().add(EcoreUtil2.clone(paramterType));
+				parameterType = primitives.asWrapperTypeIfPrimitive(parameterType);
+				result.getArguments().add(EcoreUtil2.clone(parameterType));
 			}
 		}
 		if (returnType != null) {
