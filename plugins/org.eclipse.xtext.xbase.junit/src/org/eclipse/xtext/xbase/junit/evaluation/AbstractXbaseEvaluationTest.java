@@ -28,6 +28,11 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	protected abstract void assertEvaluatesTo(Object object, String string);
 	protected abstract void assertEvaluatesWithException(Class<? extends Throwable> class1, String string);
 	
+	public void testEscapeCharacter() throws Exception {
+		String expr = "'foo'.^class";
+		assertEvaluatesTo(String.class, expr);
+	}
+	
 	public void testShortCircuitBooleanExpression_00() throws Exception {
 		String expr = "true || {if (true) throw new NullPointerException() else false}";
 		assertEvaluatesTo(true, expr);
