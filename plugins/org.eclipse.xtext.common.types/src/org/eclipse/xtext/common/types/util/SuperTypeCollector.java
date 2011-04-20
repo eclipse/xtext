@@ -10,7 +10,6 @@ package org.eclipse.xtext.common.types.util;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstraintOwner;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
