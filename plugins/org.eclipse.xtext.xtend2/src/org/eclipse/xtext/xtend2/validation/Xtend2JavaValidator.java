@@ -32,6 +32,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
@@ -121,6 +122,13 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	@Override
 	protected Set<EReference> getTypeConformanceCheckedReferences() {
 		return typeConformanceCheckedReferences;
+	}
+	
+	@Check
+	public void checkVariableNameShadowing(XtendFunction func) {
+		for (JvmFormalParameter p : func.getParameters()) {
+			super.checkDeclaredVariableName(func, p, TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME);
+		}
 	}
 	
 	@Check

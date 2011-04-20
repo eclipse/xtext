@@ -31,6 +31,31 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	@Inject
 	private ValidationTestHelper helper;
 	
+	public void testShadowingVariableNames_00() throws Exception {
+		XtendClass clazz = clazz("class X { foo() { val this = 'foo' } }");
+		helper.assertError(clazz, XbasePackage.Literals.XVARIABLE_DECLARATION, VARIABLE_NAME_SHADOWING);
+	}
+	
+	public void testShadowingVariableNames_01() throws Exception {
+		XtendClass clazz = clazz("class X { foo() { val ^super = 'foo' } }");
+		helper.assertError(clazz, XbasePackage.Literals.XVARIABLE_DECLARATION, VARIABLE_NAME_SHADOWING);
+	}
+	
+	public void testShadowingVariableNames_03() throws Exception {
+		XtendClass clazz = clazz("class X { foo(String x, String this) { } }");
+		helper.assertError(clazz, TypesPackage.Literals.JVM_FORMAL_PARAMETER, VARIABLE_NAME_SHADOWING);
+	}
+	
+	public void testShadowingVariableNames_04() throws Exception {
+		XtendClass clazz = clazz("class X { foo(String x) ''' «val x = 'foo'» «x» ''' }");
+		helper.assertError(clazz, XbasePackage.Literals.XVARIABLE_DECLARATION, VARIABLE_NAME_SHADOWING);
+	}
+	
+	public void testShadowingVariableNames_05() throws Exception {
+		XtendClass clazz = clazz("class X { foo() ''' «val x = 'foo'» «val x = 'bar'» ''' }");
+		helper.assertError(clazz, XbasePackage.Literals.XVARIABLE_DECLARATION, VARIABLE_NAME_SHADOWING);
+	}
+	
 	public void testVoidInDependency() throws Exception {
 		XtendClass clazz = clazz("class X { @Inject void }");
 		helper.assertError(clazz, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE);

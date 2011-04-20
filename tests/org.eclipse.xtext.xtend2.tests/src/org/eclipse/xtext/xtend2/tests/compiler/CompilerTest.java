@@ -60,24 +60,6 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		javaCompiler.compileToClass("x.Z", javaCode);
 	}
 	
-	public void testExtensionCallOnThisBoundMember() throws Exception {
-		Class<?> clazz = compileJavaCode("x.Y",
-				"package x " +
-				"import static extension java.util.Collections.* " +
-				"class Y {" +
-				"  foo(Object this) {\n" +
-				"    singletonList" + 
-				"  }\n" +
-				"}");
-		Object instance = clazz.newInstance();
-		Method method = clazz.getDeclaredMethod("foo", Object.class);
-		try {
-			assertEquals(Collections.singletonList("FOO"), method.invoke(instance, "FOO"));
-		} catch (InvocationTargetException e) {
-			assertTrue(e.getCause() instanceof IOException);
-		}
-	}
-	
 	public void testRethrownCheckedExceptions_00() throws Exception {
 		Class<?> clazz = compileJavaCode("x.Y",
 				"package x class Y {" +
@@ -151,35 +133,6 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		assertFalse(instance.equals(clazz.newInstance()));
 		assertTrue(instance.equals(instance));
 		assertTrue(instance.equals("foo"));
-	}
-	
-	public void testThisReferenceInClosures() throws Exception {
-		Class<?> clazz = compileJavaCode("x.Y",
-				"package x class Y {" +
-				"  String foo(String p){\n" +
-				"    [|this.bar(p+'foo')].apply" + 
-				"  }\n" + 
-				"  String bar(String this){\n" +
-				"    [|this+'bar'].apply" + 
-				"  }" +
-		"}");
-		Method method = clazz.getDeclaredMethod("foo", String.class);
-		assertEquals("Hello foobar", method.invoke(clazz.newInstance(),"Hello "));
-	}
-	
-	public void testDispatchWithThis() throws Exception {
-		Class<?> clazz = compileJavaCode("x.Y",
-				"package x class Y {" +
-				"  dispatch foo(String this){\n" +
-				"    return 'String'" + 
-				"  }\n" + 
-				"  dispatch foo(CharSequence this){\n" +
-				"    return 'CharSequence'" + 
-				"  }" +
-				"}");
-		Method method = clazz.getDeclaredMethod("foo", CharSequence.class);
-		assertEquals("String", method.invoke(clazz.newInstance(),"Foo"));
-		
 	}
 	
 	public void testCreateExtension_00() throws Exception {
