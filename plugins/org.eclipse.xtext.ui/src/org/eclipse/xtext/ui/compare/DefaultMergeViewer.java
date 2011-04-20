@@ -74,6 +74,7 @@ public class DefaultMergeViewer extends TextMergeViewer {
 
 	@Override
 	protected void updateContent(Object ancestor, Object left, Object right) {
+		ancestor = updateAsDocument(ancestor);
 		left = updateAsDocument(left);
 		right = updateAsDocument(right);
 		super.updateContent(ancestor, left, right);
