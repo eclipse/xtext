@@ -22,11 +22,47 @@ import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Sven Efftinge
  */
 public class ValidationTests extends AbstractXbaseTestCase {
 
 	@Inject
 	protected ValidationTestHelper helper;
+	
+	public void testVariableShadowing_00() throws Exception {
+		XExpression expression = expression("{ val x = 'foo' { val x= 'bar' return x } }");
+		helper.assertError(expression, XbasePackage.Literals.XVARIABLE_DECLARATION, VARIABLE_NAME_SHADOWING, "x");
+	}
+	
+	public void testVariableShadowing_01() throws Exception {
+		XExpression expression = expression("{ val x = 'foo' for ( x : newArrayList('foo')) x.length }");
+		helper.assertError(expression, TypesPackage.Literals.JVM_FORMAL_PARAMETER, VARIABLE_NAME_SHADOWING, "x");
+	}
+	
+	public void testVariableShadowing_03() throws Exception {
+		XExpression expression = expression("{ val x = 'foo' val x = 'bar' }");
+		helper.assertError(expression, XbasePackage.Literals.XVARIABLE_DECLARATION, VARIABLE_NAME_SHADOWING, "x");
+	}
+	
+	public void testVariableShadowing_04() throws Exception {
+		XExpression expression = expression("{ val x = 'foo' switch x : 'foo' { case 'foo' : 'foo' } }");
+		helper.assertError(expression, XbasePackage.Literals.XSWITCH_EXPRESSION, VARIABLE_NAME_SHADOWING, "x");
+	}
+	
+	public void testVariableShadowing_05() throws Exception {
+		XExpression expression = expression("{ val x = 'foo' [String x | x + x].apply('foo') }");
+		helper.assertError(expression, TypesPackage.Literals.JVM_FORMAL_PARAMETER, VARIABLE_NAME_SHADOWING, "x");
+	}
+	
+	public void testVariableShadowing_06() throws Exception {
+		XExpression expression = expression("{ val x = 'foo' [String y, String x | x + y].apply('foo','bar') }");
+		helper.assertError(expression, TypesPackage.Literals.JVM_FORMAL_PARAMETER, VARIABLE_NAME_SHADOWING, "x");
+	}
+	
+	public void testVariableShadowing_07() throws Exception {
+		XExpression expression = expression("{ val x = 'foo' try { 'foo'.length } catch (Exception x) { 'bar'.length } }");
+		helper.assertError(expression, TypesPackage.Literals.JVM_FORMAL_PARAMETER, VARIABLE_NAME_SHADOWING, "x");
+	}
 	
 	public void testNoPrimitivesInTypeArgs_00() throws Exception {
 		XExpression expression = expression("java::util::Collections::<boolean>singletonList");

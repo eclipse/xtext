@@ -10,11 +10,13 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -27,6 +29,10 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
@@ -43,10 +49,12 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
+import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
@@ -77,6 +85,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Inject
 	private IEarlyExitComputer earlyExitComputer;
+	
+	@Inject
+	private IScopeProvider scopeProvider;
 	
 	@Inject
 	private Primitives primitives;
@@ -142,6 +153,64 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		}
 	}
 	
+	@Check
+	public void checkUniqueVariableName(XVariableDeclaration decl) {
+		checkDeclaredVariableName(decl, XbasePackage.Literals.XVARIABLE_DECLARATION__NAME);
+	}
+	
+	@Check
+	public void checkUniqueVariableName(XSwitchExpression decl) {
+		checkDeclaredVariableName(decl, XbasePackage.Literals.XSWITCH_EXPRESSION__LOCAL_VAR_NAME);
+	}
+	
+	@Check
+	public void checkUniqueVariableName(XForLoopExpression forLoop) {
+		checkDeclaredVariableName(forLoop, forLoop.getDeclaredParam(), TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME);
+	}
+	
+	@Check
+	public void checkUniqueVariableName(XClosure closure) {
+		for (JvmFormalParameter param : closure.getFormalParameters()) {
+			checkDeclaredVariableName(closure, param, TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME);
+		}
+	}
+	
+	@Check
+	public void checkUniqueVariableName(XTryCatchFinallyExpression tryCatch) {
+		for (XCatchClause param : tryCatch.getCatchClauses()) {
+			checkDeclaredVariableName(tryCatch, param.getDeclaredParam(), TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME);
+		}
+	}
+	
+	protected void checkDeclaredVariableName(EObject nameAndAttributeDeclarator, EAttribute attr) {
+		checkDeclaredVariableName(nameAndAttributeDeclarator, nameAndAttributeDeclarator, attr);
+	}
+	
+	protected void checkDeclaredVariableName(EObject nameDeclarator, EObject attributeHolder, EAttribute attr) {
+		if (nameDeclarator.eContainer() == null)
+			return;
+		if (attr.getEContainingClass().isInstance(attributeHolder)) {
+			String name = (String) attributeHolder.eGet(attr);
+			if (name == null)
+				return;
+			int idx = 0;
+			if (nameDeclarator.eContainer() instanceof XBlockExpression) {
+				idx = ((XBlockExpression)nameDeclarator.eContainer()).getExpressions().indexOf(nameDeclarator);
+			}
+			IScope scope = getScopeProvider().createSimpleFeatureCallScope(nameDeclarator.eContainer(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, nameDeclarator.eResource(), true, idx);
+			Iterable<IEObjectDescription> elements = scope.getElements(QualifiedName.create(name));
+			for (IEObjectDescription desc : elements) {
+				if (desc.getEObjectOrProxy()!=nameDeclarator && !(desc.getEObjectOrProxy() instanceof JvmFeature)) {
+					error("Duplicate variable name '"+name+"'", attributeHolder, attr,-1, IssueCodes.VARIABLE_NAME_SHADOWING);
+				}
+			}
+		}
+	}
+	
+	protected XbaseScopeProvider getScopeProvider() {
+		return (XbaseScopeProvider) scopeProvider;
+	}
+
 	@Check
 	public void checkTypes(XExpression obj) {
 		if (!getTypeConformanceCheckedReferences().contains(obj.eContainingFeature())) {

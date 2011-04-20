@@ -209,32 +209,6 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo("footrue", "'foo'+true");
 	}
 	
-	public void testOverriddenLocalVariables() throws Exception {
-		assertEvaluatesTo(new Integer(3),
-				"{" +
-				" val x = 3 " +
-				" var y = 2 " +
-				" {" +
-				"  var x = y " +
-				"  val y = 1 " +
-				"  x+y" +
-				"  }" +
-				"}");
-	}
-	
-	public void testOverriddenLocalVariables_0() throws Exception {
-		assertEvaluatesTo(Boolean.TRUE,
-				"{" +
-				" var x = 1 " +
-				" val y = 7 " +
-				" for (y : 1..3) {" +
-				"  x = x+y" +
-				" }" +
-				" x == y" +
-				"}"
-			);
-	}
-	
 	public void testAddOnIntegers() throws Exception {
 		assertEvaluatesTo(new Integer(3), "1+2");
 	}
@@ -419,10 +393,6 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo("literal", "{var x = 'literal' x = x}");
 	}
 	
-	public void testVariableDeclaration_02() {
-		assertEvaluatesTo(true, "{var x = 'literal' { val x = true x}}");
-	}
-	
 	public void testVariableDeclaration_03() {
 		assertEvaluatesTo("literal", "{var String x x = 'literal' x}");
 	}
@@ -463,18 +433,18 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(Lists.newArrayList(
 				new Character('a'), 
 				new Character('b'),
-				new Character('c')), "{ var java.util.List<Character> this = ('abc'.toCharArray as Iterable<Character>).toList() this }");
+				new Character('c')), "{ var java.util.List<Character> x = ('abc'.toCharArray as Iterable<Character>).toList() x }");
 	}
 	
 	public void testFeatureCall_03_2() {
 		assertEvaluatesTo(Lists.newArrayList(
 				new Character('a'), 
 				new Character('b'),
-				new Character('c')), "{ var java.util.List<Character> this = 'abc'.toCharArray this }");
+				new Character('c')), "{ var java.util.List<Character> x = 'abc'.toCharArray x }");
 	}
 	
 	public void testFeatureCall_04() {
-		assertEvaluatesTo(new Integer("literal".length()), "{ var this = 'literal' length }");
+		assertEvaluatesTo(new Integer("literal".length()), "{ var x = 'literal' x.length }");
 	}
 	
 	public void testConstructorCall_00() throws Exception {
@@ -492,53 +462,53 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	public void testAssignment_02() {
 		assertEvaluatesTo("literal", 
 				"{" +
-				"  var this = new testdata.Properties1()" +
-				"  prop1 = 'literal'" +
-				"  prop1" +
+				"  var x = new testdata.Properties1()" +
+				"  x.prop1 = 'literal'" +
+				"  x.prop1" +
 				"}");
 	}
 	
 	public void testAssignment_03() {
 		assertEvaluatesTo("literal", 
 				"{" +
-				"  var this = new testdata.Properties1()" +
-				"  prop2 = 'literal'" +
-				"  prop2" +
+				"  var x = new testdata.Properties1()" +
+				"  x.prop2 = 'literal'" +
+				"  x.prop2" +
 				"}");
 	}
 	
 	public void testAssignment_04() {
 		assertEvaluatesTo("Integer: 1", 
 				"{" +
-				"  var this = new testdata.Properties1()" +
-				"  prop2 = 1" +
-				"  prop2" +
+				"  var x = new testdata.Properties1()" +
+				"  x.prop2 = 1" +
+				"  x.prop2" +
 				"}");
 	}
 	
 	public void testAssignment_05() {
 		assertEvaluatesTo("literal", 
 				"{" +
-				"  var this = new testdata.Properties1()" +
-				"  this.prop2 = 'literal'" +
-				"  prop2" +
+				"  var x = new testdata.Properties1()" +
+				"  x.prop2 = 'literal'" +
+				"  x.prop2" +
 				"}");
 	}
 	
 	public void testAssignment_06() {
 		assertEvaluatesTo("Integer: 1", 
 				"{" +
-				"  var this = new testdata.Properties1()" +
-				"  this.prop2 = 1" +
-				"  prop2" +
+				"  var x = new testdata.Properties1()" +
+				"  x.prop2 = 1" +
+				"  x.prop2" +
 				"}");
 	}
 	
 	public void testAssignment_07() {
 		assertEvaluatesTo(null, 
 				"{" +
-				"  var this = new testdata.Properties1()" +
-				"  this.prop2 = 'literal'" +
+				"  var x = new testdata.Properties1()" +
+				"  x.prop2 = 'literal'" +
 				"  null" +
 				"}");
 	}
@@ -546,8 +516,8 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	public void testAssignment_08() {
 		assertEvaluatesTo(null, 
 				"{" +
-				"  var this = new testdata.Properties1()" +
-				"  this.prop2 = 1" +
+				"  var x = new testdata.Properties1()" +
+				"  x.prop2 = 1" +
 				"  null" +
 				"}");
 	}
@@ -555,16 +525,16 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	public void testAssignment_09() {
 		assertEvaluatesTo("Integer: 1", 
 				"{" +
-				"  var this = new testdata.Properties1()" +
-				"  this.prop3 = 1" +
+				"  var x = new testdata.Properties1()" +
+				"  x.prop3 = 1" +
 				"}");
 	}
 	
 	public void testAssignment_10() {
 		assertEvaluatesTo("literal", 
 				"{" +
-				"  var this = new testdata.Properties1()" +
-				"  prop1 = 'literal'" +
+				"  var x = new testdata.Properties1()" +
+				"  x.prop1 = 'literal'" +
 				"}");
 	}
 	
@@ -1123,29 +1093,29 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	}
 	
 	public void testMethodVarArgs_05() {
-		assertEvaluatesTo(Collections.emptyList(), "{ var this = new testdata.ClassWithVarArgs() stringsToList() }");
+		assertEvaluatesTo(Collections.emptyList(), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList() }");
 	}
 	
 	public void testMethodVarArgs_06() {
-		assertEvaluatesTo(Collections.singletonList("s1"), "{ var this = new testdata.ClassWithVarArgs() stringsToList('s1') }");
+		assertEvaluatesTo(Collections.singletonList("s1"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList('s1') }");
 	}
 	
 	public void testMethodVarArgs_07() {
-		assertEvaluatesTo(Lists.newArrayList("foo", "s1", "s2"), "{ var this = new testdata.ClassWithVarArgs() stringsToList('s1', 's2') }");
+		assertEvaluatesTo(Lists.newArrayList("foo", "s1", "s2"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList('s1', 's2') }");
 	}
 	
 	public void testMethodVarArgs_08() {
-		assertEvaluatesTo(Lists.newArrayList("s1", "s2", "s3"), "{ var this = new testdata.ClassWithVarArgs() stringsToList('s1', 's2', 's3') }");
+		assertEvaluatesTo(Lists.newArrayList("s1", "s2", "s3"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList('s1', 's2', 's3') }");
 	}
 	
 	public void testMethodVarArgs_09() {
-		assertEvaluatesTo(Lists.newArrayList("s1"), "{ var this = new testdata.ClassWithVarArgs() stringsToList2('s1') }");
+		assertEvaluatesTo(Lists.newArrayList("s1"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList2('s1') }");
 	}
 	public void testMethodVarArgs_10() {
-		assertEvaluatesTo(Lists.newArrayList("s1", "s2"), "{ var this = new testdata.ClassWithVarArgs() stringsToList2('s1', 's2') }");
+		assertEvaluatesTo(Lists.newArrayList("s1", "s2"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList2('s1', 's2') }");
 	}
 	public void testMethodVarArgs_11() {
-		assertEvaluatesTo(Lists.newArrayList("s1", "s2", "s3"), "{ var this = new testdata.ClassWithVarArgs() stringsToList2('s1', 's2', 's3') }");
+		assertEvaluatesTo(Lists.newArrayList("s1", "s2", "s3"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList2('s1', 's2', 's3') }");
 	}
 	
 	public void testIterableExtension_01() {
@@ -1207,13 +1177,13 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	}
 	
 	public void testCollectionExtensions_01() {
-		assertEvaluatesTo(Boolean.TRUE, "{ var this = newArrayList('') var result = unmodifiableView() clear() result.empty }");
+		assertEvaluatesTo(Boolean.TRUE, "{ var x = newArrayList('') var result = x.unmodifiableView() x.clear() result.empty }");
 //		assertEvaluatesWithException(UnsupportedOperationException.class, "newArrayList('').unmodifiableView().clear()");
 		assertEvaluatesWithException(UnsupportedOperationException.class, "{ newArrayList('').unmodifiableView().clear() null }");
 	}
 	
 	public void testCollectionExtensions_02() {
-		assertEvaluatesTo(Boolean.TRUE, "{ var this = newHashSet('') var result = unmodifiableView() clear() result.empty }");
+		assertEvaluatesTo(Boolean.TRUE, "{ var x = newHashSet('') var result = x.unmodifiableView() x.clear() result.empty }");
 //		assertEvaluatesWithException(UnsupportedOperationException.class, "newHashSet('').unmodifiableView().clear()");
 		assertEvaluatesWithException(UnsupportedOperationException.class, "{ newHashSet('').unmodifiableView().clear null }");
 	}
@@ -1236,35 +1206,35 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	}
 	
 	public void testCollectionExtensions_05() {
-		assertEvaluatesTo(Collections.singletonList("foo"), "{ var this = newArrayList('foo') var result = immutableCopy() clear() result  }");
+		assertEvaluatesTo(Collections.singletonList("foo"), "{ var x = newArrayList('foo') var result = x.immutableCopy() x.clear() result  }");
 		assertEvaluatesWithException(UnsupportedOperationException.class, "{ newArrayList('').immutableCopy().clear() null }");
 	}
 	
 	public void testCollectionExtensions_06() {
-		assertEvaluatesTo(Collections.singleton("foo"), "{ var this = newHashSet('foo') var result = immutableCopy() clear() result }");
+		assertEvaluatesTo(Collections.singleton("foo"), "{ var x = newHashSet('foo') var result = x.immutableCopy() x.clear() result }");
 		assertEvaluatesWithException(UnsupportedOperationException.class, "{ newHashSet('').immutableCopy().clear null }");
 	}
 	
 	public void testCollectionExtensions_07() {
-		assertEvaluatesTo(Lists.newArrayList("a", "b", "c"), "{ var this = newArrayList() addAll('a', 'b', 'c') this }");
+		assertEvaluatesTo(Lists.newArrayList("a", "b", "c"), "{ var x = newArrayList() x.addAll('a', 'b', 'c') x }");
 		assertEvaluatesTo(Boolean.FALSE, "newHashSet('a', 'b', 'c').addAll('a', 'b', 'c')");
 	}
 	
 	public void testListExtensions_01() {
 		assertEvaluatesTo(Lists.newArrayList("a", "b", "c"), "newArrayList('c', 'a', 'b').sort()");
-		assertEvaluatesTo("b", "{ var this = newArrayList('c', 'a', 'b', 'd') sort() get(1) }");
+		assertEvaluatesTo("b", "{ var l = newArrayList('c', 'a', 'b', 'd') l.sort() l.get(1) }");
 	}
 	
 	public void testListExtensions_02() {
 		assertEvaluatesTo(Lists.newArrayList("a", "b", "c"), "newArrayList('c', 'a', 'b').sort(a,b|a.compareTo(b))");
 		assertEvaluatesTo(Lists.newArrayList("c", "b", "a"), "newArrayList('c', 'a', 'b').sort(a,b|b.compareTo(a))");
-		assertEvaluatesTo("b", "{ var this = newArrayList('c', 'a', 'b', 'd') sort(a,b|a.compareTo(b)) get(1) }");
+		assertEvaluatesTo("b", "{ var l = newArrayList('c', 'a', 'b', 'd') l.sort(a,b|a.compareTo(b)) l.get(1) }");
 	}
 	
 	public void testListExtensions_03() {
 		assertEvaluatesTo(Lists.newArrayList("aaa", "bb", "c"), "newArrayList('c', 'aaa', 'bb').sortBy(s|-s.length)");
 		assertEvaluatesTo(Lists.newArrayList("c", "bb", "aaa"), "newArrayList('c', 'aaa', 'bb').sortBy(s|s.length)");
-		assertEvaluatesTo("b", "{ var this = newArrayList('c', 'a', 'b', 'd') sortBy(a|a) get(1) }");
+		assertEvaluatesTo("b", "{ var l = newArrayList('c', 'a', 'b', 'd') l.sortBy(a|a) l.get(1) }");
 	}
 	
 	public void testMemberCallOnMultiType_01() throws Exception {
@@ -1292,7 +1262,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	}
 	
 	public void testMemberCallOnMultiType_06() throws Exception {
-		assertEvaluatesTo(Integer.valueOf(20), "{ var this = if (false) new Double('-10') else new Integer('20') intValue }");
+		assertEvaluatesTo(Integer.valueOf(20), "{ var x = if (false) new Double('-10') else new Integer('20') x.intValue }");
 	}
 	
 	public void testMemberCallOnMultiType_07() throws Exception {

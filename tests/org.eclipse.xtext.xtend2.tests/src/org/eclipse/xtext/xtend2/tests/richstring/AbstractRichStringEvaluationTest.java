@@ -390,7 +390,7 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 	public void testForLoop_03() throws Exception {
 		assertOutput(
 				"",
-				"'''«FOR a:'1'.toCharArray»«FOR a:''.toCharArray»foobar«ENDFOR»«ENDFOR»'''");
+				"'''«FOR a:'1'.toCharArray»«FOR a1:''.toCharArray»foobar«ENDFOR»«ENDFOR»'''");
 	}
 	
 	public void testForLoop_04() throws Exception {
@@ -398,7 +398,7 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 				"",
 				"'''\n" +
 				"  «FOR a:'1'.toCharArray»\n" +
-				"    «FOR a:''.toCharArray»\n" +
+				"    «FOR a1:''.toCharArray»\n" +
 				"      foobar\n" +
 				"    «ENDFOR»\n" +
 				"  «ENDFOR»\n" +
@@ -424,7 +424,7 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 	public void testForLoop_07() throws Exception {
 		assertOutput(
 				"  foobar",
-				"'''  «FOR a:'1'.toCharArray»«FOR a:'1'.toCharArray»foobar«ENDFOR»«ENDFOR»'''");
+				"'''  «FOR a:'1'.toCharArray»«FOR a1:'1'.toCharArray»foobar«ENDFOR»«ENDFOR»'''");
 	}
 	
 	public void testForLoop_08() throws Exception {
@@ -432,7 +432,7 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 				"foobar\n",
 				"'''\n" +
 				"  «FOR a:'1'.toCharArray»\n" +
-				"    «FOR a:'1'.toCharArray»\n" +
+				"    «FOR a1:'1'.toCharArray»\n" +
 				"      foobar\n" +
 				"    «ENDFOR»\n" +
 				"  «ENDFOR»\n" +
@@ -444,7 +444,7 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 				"foobar\n",
 				"'''\n" +
 				"  «FOR a:'1'.toCharArray»\n" +
-				"    «FOR a:'1'.toCharArray»foobar«ENDFOR»\n" +
+				"    «FOR a1:'1'.toCharArray»foobar«ENDFOR»\n" +
 				"  «ENDFOR»\n" +
 				"'''");
 	}
@@ -454,7 +454,7 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 				"foobarfoobar\n",
 				"'''\n" +
 				"  «FOR a:'1'.toCharArray»\n" +
-				"    «FOR a:'12'.toCharArray»foobar«ENDFOR»\n" +
+				"    «FOR a1:'12'.toCharArray»foobar«ENDFOR»\n" +
 				"  «ENDFOR»\n" +
 				"'''");
 	}
@@ -465,7 +465,7 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 				"foobar\n",
 				"'''\n" +
 				"  «FOR a:'12'.toCharArray»\n" +
-				"    «FOR a:'1'.toCharArray»foobar«ENDFOR»\n" +
+				"    «FOR a1:'1'.toCharArray»foobar«ENDFOR»\n" +
 				"  «ENDFOR»\n" +
 				"'''");
 	}
@@ -478,7 +478,7 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 				"foobar\n",
 				"'''\n" +
 				"  «FOR a:'12'.toCharArray»\n" +
-				"    «FOR a:'12'.toCharArray»\n" +
+				"    «FOR a1:'12'.toCharArray»\n" +
 				"      foobar\n" +
 				"    «ENDFOR»\n" +
 				"  «ENDFOR»\n" +
@@ -493,7 +493,7 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 				"foobar\n",
 				"'''\n" +
 				"  «FOR a:'1'.toCharArray»\n" +
-				"    «FOR a:'12'.toCharArray»\n" +
+				"    «FOR a1:'12'.toCharArray»\n" +
 				"      «'foobar\nfoobar'»\n" +
 				"    «ENDFOR»\n" +
 				"  «ENDFOR»\n" +
@@ -508,7 +508,7 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 				"foobar\n",
 				"'''\n" +
 				"  «FOR a:'12'.toCharArray»\n" +
-				"    «FOR a:'1'.toCharArray»\n" +
+				"    «FOR a1:'1'.toCharArray»\n" +
 				"      «'  foobar\nfoobar'»\n" +
 				"    «ENDFOR»\n" +
 				"  «ENDFOR»\n" +
@@ -527,7 +527,7 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 				"  foobar\n",
 				"'''\n" +
 				"  «FOR a:'12'.toCharArray»\n" +
-				"    «FOR a:'12'.toCharArray»\n" +
+				"    «FOR a1:'12'.toCharArray»\n" +
 				"      «'foobar\n  foobar'»\n" +
 				"    «ENDFOR»\n" +
 				"  «ENDFOR»\n" +

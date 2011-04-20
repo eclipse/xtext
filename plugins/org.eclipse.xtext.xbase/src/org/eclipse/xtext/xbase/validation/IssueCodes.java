@@ -38,6 +38,11 @@ public class IssueCodes {
 	public static final String MISSING_TYPE = ISSUE_CODE_PREFIX + "missing_type";
 	public static final String OBSOLETE_CAST = ISSUE_CODE_PREFIX + "obsolete_cast";
 	public static final String OBSOLETE_INSTANCEOF = ISSUE_CODE_PREFIX + "obsolete_instanceof";
+	public static final String STATIC_ACCESS_TO_INSTANCE_MEMBER = ISSUE_CODE_PREFIX	+ "static_access_to_instance_member";
+	public static final String TOO_MANY_PARAMS_IN_CLOSURE = ISSUE_CODE_PREFIX + "too_many_params_in_closure";
+	public static final String UNREACHABLE_CODE = ISSUE_CODE_PREFIX + "unreachable_code";
+	public static final String UNRESOLVABLE_PROXY = ISSUE_CODE_PREFIX + "unresolvable_proxy";
+	public static final String VARIABLE_NAME_SHADOWING = ISSUE_CODE_PREFIX + "variable_name_shadowing";
 	
 	// list is not necessarily complete
 	// list is sorted from least important issue to worst issue
@@ -50,11 +55,6 @@ public class IssueCodes {
 			INVALID_ARGUMENT_TYPES,
 			INVALID_NUMBER_OF_ARGUMENTS
 	);
-	public static final String STATIC_ACCESS_TO_INSTANCE_MEMBER = ISSUE_CODE_PREFIX
-		+ "static_access_to_instance_member";
-	public static final String TOO_MANY_PARAMS_IN_CLOSURE = ISSUE_CODE_PREFIX + "too_many_params_in_closure";
-	public static final String UNREACHABLE_CODE = ISSUE_CODE_PREFIX + "unreachable_code";
-	public static final String UNRESOLVABLE_PROXY = ISSUE_CODE_PREFIX + "unresolvable_proxy";
 	
 	public static int compareIssueCodes(String left, String right) {
 		if (left == right || left.equals(right))
