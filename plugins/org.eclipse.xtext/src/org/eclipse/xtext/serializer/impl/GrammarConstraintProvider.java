@@ -77,7 +77,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return constraints;
 		}
 
-		protected abstract String getName();
+		public abstract String getName();
 
 		protected void initConstraints() {
 			Collections.sort(constraints, new Comparator<IConstraint>() {
@@ -208,7 +208,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		}
 
 		@Override
-		protected String getName() {
+		public String getName() {
 			return getContextName(action);
 		}
 
@@ -270,6 +270,9 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				case ASSIGNED_PARSER_RULE_CALL:
 				case ASSIGNED_TERMINAL_RULE_CALL:
 					EClass type = ele.getContainingConstraint().getType();
+					if (type.getEStructuralFeature(ele.getFeatureName()) == null)
+						throw new RuntimeException("Feature " + ele.getFeatureName() + " not found in "
+								+ type.getName());
 					int featureID = type.getEStructuralFeature(ele.getFeatureName()).getFeatureID();
 					List<IConstraintElement> assignmentByFeature = assignmentsByFeature[featureID];
 					if (assignmentByFeature == null)
@@ -437,7 +440,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				typeMatch();
 		}
 
-		protected boolean containsChild(ConstraintElement child) {
+		protected boolean containsChild(IConstraintElement child) {
 			if (children == null)
 				return false;
 			for (IConstraintElement c : children)
@@ -451,7 +454,18 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			if (!(obj instanceof ConstraintElement))
 				return false;
 			ConstraintElement ce = (ConstraintElement) obj;
-			return element == ce.element && ((children == null && ce.children == null) || children.equals(ce.children));
+			if (element == ce.element) {
+				if (children == null && ce.children == null)
+					return true;
+				else if (getType() == ConstraintElementType.ALTERNATIVE && children.size() == ce.children.size()) {
+					for (IConstraintElement child : children)
+						if (!ce.containsChild(child))
+							return false;
+					return true;
+				} else
+					return children.equals(ce.children);
+			}
+			return false;
 		}
 
 		protected IConstraintElement findCommonContainer(List<IConstraintElement> elements) {
@@ -585,15 +599,15 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		@Override
 		public int hashCode() {
 			int result = element != null ? element.hashCode() : 0;
-			if (children != null)
-				result += 7 * children.hashCode();
+			//			if (children != null)
+			//				result += 7 * children.hashCode();
 			return result;
 		}
 
-		protected void insertChild(ConstraintElement child) {
-			child.container = this;
-			this.children.add(0, child);
-		}
+		//		protected void insertChild(ConstraintElement child) {
+		//			child.container = this;
+		//			this.children.add(0, child);
+		//		}
 
 		public boolean isCardinalityOneAmongAssignments(List<IConstraintElement> assignments) {
 			if (assignments.size() < 2)
@@ -930,7 +944,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		}
 
 		@Override
-		protected String getName() {
+		public String getName() {
 			return getContextName(rule);
 		}
 
@@ -1193,7 +1207,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				return INVALID;
 		}
 		if (!visited.add(state))
-			return null;
+			return INVALID;
 		List<ConstraintElement> followers = Lists.newArrayList();
 		boolean allInvalid = true, containsOne = false;
 		for (ActionFilterTransition t : state.getAllOutgoing())
@@ -1218,7 +1232,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			for (int i = 0; i < followers.size(); i++) {
 				ConstraintElement follower = followers.get(i);
 				if (follower.getType() == ConstraintElementType.GROUP && !follower.isMany() && !follower.isOptional())
-					follower.insertChild(local);
+					follower.addChild(local);
 				else {
 					ConstraintElement group = new ConstraintElement(context, ConstraintElementType.GROUP);
 					group.addChild(follower);
@@ -1229,7 +1243,16 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		followers = filterDuplicates(followers);
 		if (followers.size() == 1)
 			return followers.get(0);
-		ConstraintElement alt = new ConstraintElement(context, ConstraintElementType.ALTERNATIVE);
+		ConstraintElement alt = null;
+		for (ConstraintElement f : followers)
+			if (f.getType() == ConstraintElementType.ALTERNATIVE && !f.isMany() && !f.isOptional()) {
+				alt = f;
+				break;
+			}
+		if (alt != null)
+			followers.remove(alt);
+		else
+			alt = new ConstraintElement(context, ConstraintElementType.ALTERNATIVE);
 		for (ConstraintElement f : followers)
 			alt.addChild(f);
 		return alt;
@@ -1416,7 +1439,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		return result;
 	}
 
-	protected boolean isAssignedAction(AbstractElement ele) {
+	protected boolean isAssignedAction(EObject ele) {
 		return ele instanceof Action && ((Action) ele).getFeature() != null;
 	}
 

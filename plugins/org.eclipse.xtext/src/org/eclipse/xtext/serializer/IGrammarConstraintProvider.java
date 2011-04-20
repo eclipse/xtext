@@ -125,6 +125,8 @@ public interface IGrammarConstraintProvider {
 		 * @return an AssignedAction or ParserRule
 		 */
 		EObject getContext();
+		
+		String getName();
 	}
 
 	/**
