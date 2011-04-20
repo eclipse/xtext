@@ -17,14 +17,14 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xtend2.ui.highlighting.HighlightingConfiguration;
-import org.eclipse.xtext.xtend2.ui.highlighting.RichStringHighlightingCalculator;
+import org.eclipse.xtext.xtend2.ui.highlighting.Xtend2HighlightingCalculator;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
-import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
@@ -34,14 +34,14 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class RichStringHighlightingCalculatorTest extends AbstractXtend2UITestCase implements IHighlightedPositionAcceptor {
+public class Xtend2HighlightingCalculatorTest extends AbstractXtend2UITestCase implements IHighlightedPositionAcceptor {
 
 	public static Test suite() {
-		return WorkbenchTestHelper.suite(RichStringHighlightingCalculatorTest.class);
+		return WorkbenchTestHelper.suite(Xtend2HighlightingCalculatorTest.class);
 	}
 	
 	@Inject
-	private RichStringHighlightingCalculator calculator;
+	private Xtend2HighlightingCalculator calculator;
 	
 	@Inject
 	private WorkbenchTestHelper testHelper;
@@ -62,10 +62,10 @@ public class RichStringHighlightingCalculatorTest extends AbstractXtend2UITestCa
 		return getPrefix().length();
 	}
 	
-	protected RichString richString(String string) throws Exception {
+	protected XtendFunction function(String string) throws Exception {
 		XtendClass clazz = clazz(getPrefix()+string+"}");
 		XtendFunction function = (XtendFunction) clazz.getMembers().get(0);
-		return (RichString) function.getExpression();
+		return function;
 	}
 	
 	protected XtendClass clazz(String string) throws Exception {
@@ -132,9 +132,21 @@ public class RichStringHighlightingCalculatorTest extends AbstractXtend2UITestCa
 		highlight(model);
 	}
 	
-	protected void highlight(String richString) {
+	public void testVoid() {
+		String model = "{ var void v = null }";
+		expect(model.indexOf("void"), 4, DefaultHighlightingConfiguration.KEYWORD_ID);
+		highlight(model);
+	}
+	
+	public void testThis() {
+		String model = "{ var f = this }";
+		expect(model.indexOf("this"), 4, DefaultHighlightingConfiguration.KEYWORD_ID);
+		highlight(model);
+	}
+	
+	protected void highlight(String functionBody) {
 		try {
-			RichString model = richString(richString);
+			XtendFunction model = function(functionBody);
 			calculator.provideHighlightingFor((XtextResource) model.eResource(), this);
 			assertTrue(expectedRegions.toString(), expectedRegions.isEmpty());
 		} catch(Exception e) {
