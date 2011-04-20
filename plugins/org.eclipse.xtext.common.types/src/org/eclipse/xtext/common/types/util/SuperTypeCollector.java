@@ -7,8 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
+import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstraintOwner;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -40,6 +42,9 @@ public class SuperTypeCollector {
 	
 	@Inject
 	private TypesFactory factory;
+	
+	@Inject
+	private TypeReferences typeReferences;
 	
 	public SuperTypeCollector() {}
 
@@ -123,7 +128,7 @@ public class SuperTypeCollector {
 
 	public void doCollectSupertypeData(JvmTypeReference type, SuperTypeAcceptor acceptor) {
 		if (type != null) {
-			Implementation implementation = new Implementation(acceptor);
+			Implementation implementation = new Implementation(acceptor, typeReferences);
 			implementation.doSwitch(type);
 		}
 	}
@@ -133,9 +138,11 @@ public class SuperTypeCollector {
 		private boolean collecting = false;
 		private final SuperTypeAcceptor acceptor;
 		private int level;
+		private final TypeReferences references;
 
-		public Implementation(SuperTypeAcceptor acceptor) {
+		public Implementation(SuperTypeAcceptor acceptor, TypeReferences references) {
 			this.acceptor = acceptor;
+			this.references = references;
 			this.level = 0;
 		}
 
@@ -191,8 +198,17 @@ public class SuperTypeCollector {
 		@Override
 		public Boolean caseJvmConstraintOwner(JvmConstraintOwner object) {
 			if (!object.eIsProxy()) {
-				for(JvmTypeConstraint constraint: object.getConstraints()) {
-					doSwitch(constraint);
+				List<JvmTypeConstraint> constraints = object.getConstraints();
+				boolean upperBoundSeen = false; 
+				if (!constraints.isEmpty()) {
+					for(JvmTypeConstraint constraint: constraints) {
+						doSwitch(constraint);
+						upperBoundSeen |= constraint instanceof JvmUpperBound;
+					}
+				}
+				if (!upperBoundSeen) {
+					JvmType objectType = references.findDeclaredType(Object.class, object);
+					doSwitch(references.createTypeRef(objectType));
 				}
 			}
 			return Boolean.TRUE;

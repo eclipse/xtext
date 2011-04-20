@@ -313,4 +313,22 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		String identifier = featureCall.getFeature().getIdentifier();
 		assertEquals("com.google.common.collect.Iterables.find(java.lang.Iterable,com.google.common.base.Predicate)", identifier);
 	}
+	
+	public void testBug343102_01() throws Exception {
+		XtendFunction function = function("<T extends java.lang.Object> test(T t) {\n" + 
+				"  t.getClass\n" + 
+				"}");
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression)function.getExpression()).getExpressions().get(0);
+		String identifier = featureCall.getFeature().getIdentifier();
+		assertEquals("java.lang.Object.getClass()", identifier);
+	}
+	
+	public void testBug343102_02() throws Exception {
+		XtendFunction function = function("<T> test(T t) {\n" + 
+				"  t.getClass\n" + 
+		"}");
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) ((XBlockExpression)function.getExpression()).getExpressions().get(0);
+		String identifier = featureCall.getFeature().getIdentifier();
+		assertEquals("java.lang.Object.getClass()", identifier);
+	}
 }
