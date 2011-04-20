@@ -103,25 +103,25 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		return Join.join("\n", result);
 	}
 
-	//	public void testXtext() {
-	//		IGrammarConstraintProvider gcp = new GrammarConstraintProvider();
-	//		List<IConstraintContext> ctxts = gcp.getConstraints(getGrammarAccess().getGrammar());
-	//		try {
-	//			new ActionFilter2Dot().draw(getGrammarAccess().getGrammar(), getName() + ".pdf", "-T pdf");
-	//		} catch (IOException e) {
-	//			if (log.isDebugEnabled())
-	//				log.debug(e.getMessage(), e);
-	//		}
-	//		List<String> result = Lists.newArrayList();
-	//		Set<IConstraint> visited = Sets.newHashSet();
-	//		for (IConstraintContext ctx : ctxts) {
-	//			result.add(ctx.toString());
-	//			for (IConstraint c : ctx.getConstraints())
-	//				if (visited.add(c))
-	//					result.add("  " + c.toString());
-	//		}
-	//		System.out.println(Join.join("\n", result));
-	//	}
+		public void testXtext() {
+			IGrammarConstraintProvider gcp = new GrammarConstraintProvider();
+			List<IConstraintContext> ctxts = gcp.getConstraints(getGrammarAccess().getGrammar());
+			try {
+				new ActionFilter2Dot().draw(getGrammarAccess().getGrammar(), getName() + ".pdf", "-T pdf");
+			} catch (IOException e) {
+				if (log.isDebugEnabled())
+					log.debug(e.getMessage(), e);
+			}
+			List<String> result = Lists.newArrayList();
+			Set<IConstraint> visited = Sets.newHashSet();
+			for (IConstraintContext ctx : ctxts) {
+				result.add(ctx.toString());
+				for (IConstraint c : ctx.getConstraints())
+					if (visited.add(c))
+						result.add("  " + c.toString());
+			}
+			System.out.println(Join.join("\n", result));
+		}
 
 	public void testAssignedActionMandatory1() throws Exception {
 		String actual = getParserRule("Rule: Foo {Bar.left=current} '+' right=ID; Foo: val=ID;");
@@ -241,6 +241,43 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
+	public void testExpression5() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Addition returns Expr: Multiplication ({Bin.left+=current} op='+' right=Multiplication)*;\n");
+		grammar.append("Multiplication returns Expr: Prim ({Bin.left+=current} op='*' right=Prim)*;\n");
+		grammar.append("Prim returns Expr: {Val} name=ID | '(' Addition ')';\n");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Addition: Addition_Bin | Prim_Val;\n");
+		expected.append("  Addition_Bin returns Bin: ((left+=Addition_Bin_1_0 op='+' right=Multiplication) | (left+=Multiplication_Bin_1_0 op='*' right=Prim));\n");
+		expected.append("  Prim_Val returns Val: name=ID;\n");
+		expected.append("Addition_Bin_1_0: Addition_Bin | Prim_Val;\n");
+		expected.append("Multiplication: Addition_Bin | Prim_Val;\n");
+		expected.append("Multiplication_Bin_1_0: Addition_Bin | Prim_Val;\n");
+		expected.append("Prim: Addition_Bin | Prim_Val;");
+		assertEquals(expected.toString(), actual);
+	}
+
+	public void testExpression6() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Assignment returns Expr: Addition ({Bin.left+=current} op='=' right=Addition)*;\n");
+		grammar.append("Addition returns Expr: Multiplication ({Bin.left+=current} op='+' right=Multiplication)*;\n");
+		grammar.append("Multiplication returns Expr: Prim ({Bin.left+=current} op='*' right=Prim)*;\n");
+		grammar.append("Prim returns Expr: {Val} name=ID | '(' Assignment ')';\n");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Assignment: Addition_Bin | Prim_Val;\n");
+		expected.append("  Addition_Bin returns Bin: ((left+=Addition_Bin_1_0 op='+' right=Multiplication) | (left+=Multiplication_Bin_1_0 op='*' right=Prim) | (left+=Assignment_Bin_1_0 op='=' right=Addition));\n");
+		expected.append("  Prim_Val returns Val: name=ID;\n");
+		expected.append("Assignment_Bin_1_0: Addition_Bin | Prim_Val;\n");
+		expected.append("Addition: Addition_Bin | Prim_Val;\n");
+		expected.append("Addition_Bin_1_0: Addition_Bin | Prim_Val;\n");
+		expected.append("Multiplication: Addition_Bin | Prim_Val;\n");
+		expected.append("Multiplication_Bin_1_0: Addition_Bin | Prim_Val;\n");
+		expected.append("Prim: Addition_Bin | Prim_Val;");
+		assertEquals(expected.toString(), actual);
+	}
+
 	public void testActionSequence1() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Rule: val1=ID {A.a1=current} a2=ID {B.b1=current} b2=ID {C.c1=current} c2=ID;\n");
@@ -303,6 +340,34 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		expected.append("  Rule_A_1_1_0_B_1_2_0_C_1_3_0_Rule returns Rule: root=ID;\n");
 		expected.append("Rule_B_1_2_0: Rule_A_1_1_0_B_1_2_0_C_1_3_0_Rule;\n");
 		expected.append("Rule_C_1_3_0: Rule_A_1_1_0_B_1_2_0_C_1_3_0_Rule;");
+		assertEquals(expected.toString(), actual);
+	}
+
+	/*
+	XMemberFeatureCall returns XExpression:
+	XPrimaryExpression
+	(=>({XAssignment.assignable=current} '.' feature=[types::JvmIdentifiableElement] OpSingleAssign) value=XAssignment
+	|=>({XMemberFeatureCall.memberCallTarget=current} ("."|nullSafe?="?."|spreading?="*.")) 
+		('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?  
+		feature=[types::JvmIdentifiableElement] (
+			=>explicitOperationCall?='(' 
+				(
+				    memberCallArguments+=XShortClosure
+				  |	memberCallArguments+=XExpression (',' memberCallArguments+=XExpression)*
+				)? 
+			')')?
+		)*;
+	 */
+	public void testActionAlternative2() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Model: Bar ({Foo.f1=current} f2=ID f3=ID? f4=ID)*; Bar: bar=ID;\n");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Model: Bar_Bar | Model_Foo;\n");
+		expected.append("  Bar_Bar returns Bar: bar=ID;\n");
+		expected.append("  Model_Foo returns Foo: (f1=Model_Foo_1_0 f2=ID f3=ID? f4=ID);\n");
+		expected.append("Model_Foo_1_0: Bar_Bar | Model_Foo;\n");
+		expected.append("Bar: Bar_Bar;");
 		assertEquals(expected.toString(), actual);
 	}
 }
