@@ -305,7 +305,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected void _toJavaExpression(XCastedExpression expr, IAppendable b) {
 		b.append("((");
-		b.append(expr.getType().getIdentifier());
+		serialize(expr.getType(), expr, b);
 		b.append(") ");
 		internalToConvertedExpression(expr.getTarget(), b, expr.getType());
 		b.append(")");

@@ -105,14 +105,22 @@ public class TypeArgumentContextProvider {
 		return findBestMatches(map);
 	}
 	
-	public TypeArgumentContext getExplicitMethodInvocationContext(JvmOperation operation, JvmTypeReference receiverType,
+	/**
+	 * <p>Creates a type argument context explicitly declared type arguments.</p>
+	 * 
+	 * @param parameterDeclarator the declarator whose parameters should be matched with the arguments
+	 * @param receiverType the resolved type of the message receiver
+	 * @param typeArguments the explicit type arguments of the sent message
+	 * @return the type argument context. Is never <code>null</code>.
+	 */
+	public TypeArgumentContext getExplicitMethodInvocationContext(JvmTypeParameterDeclarator parameterDeclarator, JvmTypeReference receiverType,
 			List<JvmTypeReference> typeArguments) {
 		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
 		if (receiverType!=null) {
 			map.putAll(Multimaps.forMap(resolveReceiver(receiverType)));
 		}
 		Map<JvmTypeParameter, JvmTypeReference> explicitArguments = Maps.newHashMap();
-		List<JvmTypeParameter> typeParameters = operation.getTypeParameters();
+		List<JvmTypeParameter> typeParameters = parameterDeclarator.getTypeParameters();
 		int max = Math.min(typeParameters.size(), typeArguments.size());
 		for(int i = 0; i < max; i++) {
 			explicitArguments.put(typeParameters.get(i), typeArguments.get(i));

@@ -58,7 +58,7 @@ public class JvmTypeReferencesValidator extends AbstractDeclarativeValidator {
 	
 	protected void checkNotPrimitive(JvmTypeReference jvmTypeReference) {
 		if (primitives.isPrimitive(jvmTypeReference)) {
-			error("The primitive '"+jvmTypeReference.getIdentifier()+"' cannot be a type argument", jvmTypeReference, null, IssueCodes.INVALID_USE_OF_TYPE);
+			error("The primitive '"+jvmTypeReference.getQualifiedName('.')+"' cannot be a type argument", jvmTypeReference, null, IssueCodes.INVALID_USE_OF_TYPE);
 		}
 	}
 	
