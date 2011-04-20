@@ -24,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
+import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
@@ -140,7 +141,7 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	protected void serialize(final JvmTypeReference type, EObject context, IAppendable appendable) {
-		serialize(type,context,appendable,false,true);
+		serialize(type, context, appendable, false, true);
 	}
 	protected void serialize(final JvmTypeReference type, EObject context, IAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard) {
 		serialize(type, context, appendable, withoutConstraints, paramsToWildcard, true);
@@ -188,7 +189,7 @@ public abstract class AbstractXbaseCompiler {
 				JvmTypeParameter parameter = (JvmTypeParameter) parameterized.getType();
 				if (context == null)
 					throw new IllegalArgumentException("argument may not be null if parameters have to be replaced by wildcards");
-				if (!EcoreUtil.isAncestor(parameter.getDeclarator(), context)) {
+				if (!isLocalTypeParameter(context, parameter)) {
 					appendable.append("?");
 					return;
 				}
@@ -212,6 +213,10 @@ public abstract class AbstractXbaseCompiler {
 		} else {
 			throw new IllegalArgumentException(type==null ? null : type.toString());
 		}
+	}
+
+	protected boolean isLocalTypeParameter(EObject context, JvmTypeParameter parameter) {
+		return EcoreUtil.isAncestor(parameter.getDeclarator(), context);
 	}
 	
 	protected JvmTypeReference resolveMultiType(JvmTypeReference reference) {
@@ -290,12 +295,11 @@ public abstract class AbstractXbaseCompiler {
 
 	protected String getDefaultValueLiteral(XExpression expr) {
 		JvmTypeReference type = getTypeProvider().getType(expr);
-		if (type.getType() instanceof JvmPrimitiveType) {
-			String name = type.getIdentifier();
-			if ("boolean".equals(name)) {
+		if (primitives.isPrimitive(type)) {
+			if (primitives.primitiveKind((JvmPrimitiveType) type.getType()) == Primitive.Boolean) {
 				return "false";
 			} else {
-				return "(" + name + ")-1";
+				return "(" + type.getQualifiedName() + ") 0";
 			}
 		}
 		return "null";
