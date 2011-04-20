@@ -548,10 +548,6 @@ public class TypeConformanceComputer {
 		return false;
 	}
 
-	public String getName(JvmTypeReference actual) {
-		return actual.getIdentifier();
-	}
-	
 	/**
 	 * Populates a {@link Multiset} with the maximum number of necessary steps
 	 * from a given type to its super types. Sorting the set by the steps creates 
