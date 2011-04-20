@@ -95,10 +95,15 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 				}
 			}
 			Iterator<Annotation> iterator = applicableAnnotations.iterator();
-			if(iterator.hasNext() && !result.isEmpty()){
-				Position pos = annotationModel.getPosition(iterator.next());
-				sourceViewer.setSelectedRange(pos.getOffset(), pos.getLength());
-				sourceViewer.revealRange(pos.getOffset(), pos.getLength());
+			if (!result.isEmpty()) {
+				while(iterator.hasNext()){
+					Position pos = annotationModel.getPosition(iterator.next());
+					if (pos != null) {
+						sourceViewer.setSelectedRange(pos.getOffset(), pos.getLength());
+						sourceViewer.revealRange(pos.getOffset(), pos.getLength());
+						break;
+					}
+				}
 			}
 		} catch (BadLocationException e) {
 			errorMessage = e.getMessage();
@@ -175,7 +180,8 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 		for(Annotation possibleAnnotation : possibleAnnotations){
 			Position possibleAnnotationPosition = annotationModel.getPosition(possibleAnnotation);
 			Position actualAnnotationPosition = annotationModel.getPosition(actualAnnotation);
-			if(possibleAnnotationPosition.equals(actualAnnotationPosition)){
+			// position may be null due to concurrent operation on the annotation model
+			if(possibleAnnotationPosition != null && possibleAnnotationPosition.equals(actualAnnotationPosition)){
 				actualAnnotations.add(possibleAnnotation);
 			}
 		}
