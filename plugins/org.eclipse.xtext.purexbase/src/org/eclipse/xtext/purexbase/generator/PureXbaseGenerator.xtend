@@ -28,7 +28,7 @@ class PureXbaseGenerator implements IGenerator {
 		val appendable = new StringBuilderBasedAppendable(impMnr)
 		compiler.compile(m.block, appendable, typeReferences.getTypeForName("void",m))
 		'''
-			«impMnr.imports.map(e|'import '+e+';\n').elementsToString("")»
+			«impMnr.imports.map(e|'import '+e+';\n').join()»
 			
 			@SuppressWarnings("all")
 			public class «m.eResource.name» {

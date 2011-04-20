@@ -14,7 +14,7 @@ public class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
   @Inject private IJvmModelAssociator iJvmModelAssociator;
   
   public List<? extends JvmDeclaredType> inferJvmModel(final EObject sourceObject) {
-    ArrayList<? extends JvmDeclaredType> _newArrayList = CollectionLiterals.<JvmDeclaredType>newArrayList();
+    ArrayList<JvmDeclaredType> _newArrayList = CollectionLiterals.<JvmDeclaredType>newArrayList();
     return _newArrayList;
   }
 }

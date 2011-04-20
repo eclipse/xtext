@@ -101,11 +101,11 @@ class AbstractSemanticSequencer extends GeneratedJavaClass {
 			
 			«genMethodFindContext»	
 			
-			«accessedClasses.filter(e|e.accessedContexts.size > 1).elementsToString("\n\n", [e|e.genMethodFindContextType()])»
+			«accessedClasses.filter(e|e.accessedContexts.size > 1).join("\n\n", [e|e.genMethodFindContextType()])»
 			
 			«genMethodCreateSequence»
 			
-			«accessedConstraints.elementsToString("\n\n",[e|e.genMethodSequence])»
+			«accessedConstraints.join("\n\n",[e|e.genMethodSequence])»
 		}
 		'''.toString
 	}

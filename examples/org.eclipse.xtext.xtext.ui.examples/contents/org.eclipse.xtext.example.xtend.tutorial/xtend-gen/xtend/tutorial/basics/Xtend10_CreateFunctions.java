@@ -57,18 +57,18 @@ public class Xtend10_CreateFunctions extends TestCase {
   
   public NetNode copyNet(final NetNode toCopy) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(toCopy);
-    NetNode _this;
+    NetNode result;
     synchronized (_createCache_copyNet) {
       if (_createCache_copyNet.containsKey(_cacheKey)) {
         return _createCache_copyNet.get(_cacheKey);
       }
       NetNode _netNode = new NetNode();
-      _this = _netNode;
-      _createCache_copyNet.put(_cacheKey, _this);
+      result = _netNode;
+      _createCache_copyNet.put(_cacheKey, result);
     }
     {
       String _name = toCopy.getName();
-      _this.setName(_name);
+      result.setName(_name);
       Iterable<NetNode> _references = toCopy.getReferences();
       final Function1<NetNode,NetNode> _function = new Function1<NetNode,NetNode>() {
           public NetNode apply(NetNode node) {
@@ -77,8 +77,8 @@ public class Xtend10_CreateFunctions extends TestCase {
           }
         };
       Iterable<NetNode> _map = IterableExtensions.<NetNode, NetNode>map(_references, _function);
-      _this.setReferences(_map);
+      result.setReferences(_map);
     }
-    return _this;
+    return result;
   }
 }

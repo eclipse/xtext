@@ -198,11 +198,15 @@ public class IterableExtensions {
 		}
 	}
 	
-	public static final String elementsToString(Iterable<?> iterable, CharSequence separator) {
+	public static final String join(Iterable<?> iterable) {
+		return join(iterable, "");
+	}
+	
+	public static final String join(Iterable<?> iterable, CharSequence separator) {
 		return Joiner.on(separator.toString()).join(iterable);
 	}
 	
-	public static final <T> String elementsToString(Iterable<T> iterable, CharSequence separator, Functions.Function1<T, ? extends CharSequence> func) {
+	public static final <T> String join(Iterable<T> iterable, CharSequence separator, Functions.Function1<? super T, ? extends CharSequence> func) {
 		StringBuilder sb = new StringBuilder();
 		Iterator<T> iterator = iterable.iterator();
 		while (iterator.hasNext()) {

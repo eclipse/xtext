@@ -41,8 +41,8 @@ class Xtend10_CreateFunctions extends TestCase {
 	 * create a copy of the given NetNode
 	 * initializes the fields lazily
 	 */
-	create new NetNode() copyNet(NetNode toCopy) {
-		name = toCopy.name
-		references = toCopy.references.map( node | copyNet(node))
+	create result: new NetNode() copyNet(NetNode toCopy) {
+		result.name = toCopy.name
+		result.references = toCopy.references.map( node | copyNet(node))
 	}
 }

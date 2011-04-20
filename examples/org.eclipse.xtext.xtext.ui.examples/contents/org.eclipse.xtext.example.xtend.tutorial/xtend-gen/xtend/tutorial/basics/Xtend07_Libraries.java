@@ -22,8 +22,8 @@ public class Xtend07_Libraries extends TestCase {
     {
       ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("foo", "bar", "baz");
       InputOutput.<ArrayList<String>>println(_newArrayList);
-      Pair<Integer,String> _operator_mappedTo = ObjectExtensions.<Integer, String>operator_mappedTo(2, "two");
-      Pair<Integer,String> _operator_mappedTo_1 = ObjectExtensions.<Integer, String>operator_mappedTo(42, "fourty two");
+      Pair<Integer,String> _operator_mappedTo = ObjectExtensions.<Integer, String>operator_mappedTo(((Integer)2), "two");
+      Pair<Integer,String> _operator_mappedTo_1 = ObjectExtensions.<Integer, String>operator_mappedTo(((Integer)42), "fourty two");
       HashMap<Integer,String> _newHashMap = CollectionLiterals.<Integer, String>newHashMap(_operator_mappedTo, _operator_mappedTo_1);
       InputOutput.<HashMap<Integer,String>>println(_newHashMap);
       HashSet<Integer> _newHashSet = CollectionLiterals.<Integer>newHashSet(((Integer)1), ((Integer)2), ((Integer)3), ((Integer)3), ((Integer)3));
@@ -59,7 +59,7 @@ public class Xtend07_Libraries extends TestCase {
       final Function1<String,Boolean> _function_2 = new Function1<String,Boolean>() {
           public Boolean apply(String e_2) {
             int _length_1 = e_2.length();
-            boolean _operator_lessEqualsThan = ComparableExtensions.<Integer>operator_lessEqualsThan(((Comparable<? super Integer>)_length_1), 3);
+            boolean _operator_lessEqualsThan = ComparableExtensions.<Integer>operator_lessEqualsThan(((Comparable<? super Integer>)_length_1), ((Integer)3));
             return ((Boolean)_operator_lessEqualsThan);
           }
         };
@@ -70,8 +70,8 @@ public class Xtend07_Libraries extends TestCase {
     return _xblockexpression;
   }
   
-  public boolean operators() {
-    boolean _xblockexpression = false;
+  public Boolean operators() {
+    Boolean _xblockexpression = null;
     {
       String _operator_plus = StringExtensions.operator_plus("Hello", " ");
       String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "World!");
@@ -79,15 +79,15 @@ public class Xtend07_Libraries extends TestCase {
       int _operator_plus_2 = IntegerExtensions.operator_plus(((Integer)46), ((Number)2));
       int _operator_divide = IntegerExtensions.operator_divide(((Integer)8), ((Number)_operator_plus_2));
       int _operator_plus_3 = IntegerExtensions.operator_plus(((Integer)42), ((Number)_operator_divide));
-      InputOutput.<Integer>println(_operator_plus_3);
+      InputOutput.<Integer>println(((Integer)_operator_plus_3));
       boolean _operator_and = false;
       if (!true) {
         _operator_and = false;
       } else {
-        boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Comparable<? super Integer>)42), 13);
+        boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Comparable<? super Integer>)42), ((Integer)13));
         _operator_and = BooleanExtensions.operator_and(true, _operator_greaterThan);
       }
-      boolean _println = InputOutput.<Boolean>println(_operator_and);
+      Boolean _println = InputOutput.<Boolean>println(((Boolean)_operator_and));
       _xblockexpression = (_println);
     }
     return _xblockexpression;

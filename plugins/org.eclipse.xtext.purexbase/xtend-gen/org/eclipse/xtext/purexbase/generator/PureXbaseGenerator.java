@@ -72,8 +72,8 @@ public class PureXbaseGenerator implements IGenerator {
           }
         };
       List<String> _map = ListExtensions.<String, String>map(_imports, _function);
-      String _elementsToString = IterableExtensions.elementsToString(_map, "");
-      _builder.append(_elementsToString, "");
+      String _join = IterableExtensions.join(_map);
+      _builder.append(_join, "");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       _builder.append("@SuppressWarnings(\"all\")");

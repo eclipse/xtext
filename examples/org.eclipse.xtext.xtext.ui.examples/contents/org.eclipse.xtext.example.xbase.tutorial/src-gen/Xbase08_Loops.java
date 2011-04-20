@@ -26,7 +26,7 @@ public class Xbase08_Loops {
 		  int i = 0;
 		  final int typeConverted_i = (int)i;
 		  int _size = list.size();
-		  boolean _operator_lessThan = ComparableExtensions.<Integer>operator_lessThan(((Comparable<? super Integer>)typeConverted_i), _size);
+		  boolean _operator_lessThan = ComparableExtensions.<Integer>operator_lessThan(((Comparable<? super Integer>)typeConverted_i), ((Integer)_size));
 		  Boolean _xwhileexpression = _operator_lessThan;
 		  while (_xwhileexpression) {
 		    {
@@ -40,7 +40,7 @@ public class Xbase08_Loops {
 		    }
 		    final int typeConverted_i_2 = (int)i;
 		    int _size_1 = list.size();
-		    boolean _operator_lessThan_1 = ComparableExtensions.<Integer>operator_lessThan(((Comparable<? super Integer>)typeConverted_i_2), _size_1);
+		    boolean _operator_lessThan_1 = ComparableExtensions.<Integer>operator_lessThan(((Comparable<? super Integer>)typeConverted_i_2), ((Integer)_size_1));
 		    _xwhileexpression = _operator_lessThan_1;
 		  }
 		}

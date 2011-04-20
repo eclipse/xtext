@@ -70,7 +70,7 @@ public class GeneratorExtensions extends DomainmodelExtensions {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(", ");
     _builder.newLine();
-    String _elementsToString = IterableExtensions.elementsToString(_map, _builder);
-    return _elementsToString;
+    String _join = IterableExtensions.join(_map, _builder);
+    return _join;
   }
 }

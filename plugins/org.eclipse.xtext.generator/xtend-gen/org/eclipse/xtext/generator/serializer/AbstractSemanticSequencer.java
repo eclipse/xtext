@@ -249,7 +249,7 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
         public Boolean apply(EClass e_1) {
           Collection<EObject> _accessedContexts = AbstractSemanticSequencer.this.getAccessedContexts(e_1);
           int _size = _accessedContexts.size();
-          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Comparable<? super Integer>)_size), 1);
+          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Comparable<? super Integer>)_size), ((Integer)1));
           return ((Boolean)_operator_greaterThan);
         }
       };
@@ -260,8 +260,8 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
           return _genMethodFindContextType;
         }
       };
-    String _elementsToString = IterableExtensions.<EClass>elementsToString(_filter, "\n\n", _function_1);
-    _builder.append(_elementsToString, "	");
+    String _join = IterableExtensions.<EClass>join(_filter, "\n\n", _function_1);
+    _builder.append(_join, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
@@ -279,8 +279,8 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
           return _genMethodSequence;
         }
       };
-    String _elementsToString_1 = IterableExtensions.<IConstraint>elementsToString(_accessedConstraints, "\n\n", _function_2);
-    _builder.append(_elementsToString_1, "	");
+    String _join_1 = IterableExtensions.<IConstraint>join(_accessedConstraints, "\n\n", _function_2);
+    _builder.append(_join_1, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
@@ -303,7 +303,7 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
           final int typeConverted_pkgi = (int)pkgi;
           int _operator_plus = IntegerExtensions.operator_plus(((Integer)typeConverted_pkgi), ((Number)1));
           int _pkgi = pkgi = _operator_plus;
-          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Comparable<? super Integer>)_pkgi), 1);
+          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Comparable<? super Integer>)_pkgi), ((Integer)1));
           if (_operator_greaterThan) {
             _builder.append("else ");
           }
@@ -394,7 +394,7 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
           public Boolean apply(EClass e) {
             Collection<EObject> _accessedContexts_2 = AbstractSemanticSequencer.this.getAccessedContexts(e);
             int _size_1 = _accessedContexts_2.size();
-            boolean _operator_greaterThan_1 = ComparableExtensions.<Integer>operator_greaterThan(((Comparable<? super Integer>)_size_1), 1);
+            boolean _operator_greaterThan_1 = ComparableExtensions.<Integer>operator_greaterThan(((Comparable<? super Integer>)_size_1), ((Integer)1));
             return ((Boolean)_operator_greaterThan_1);
           }
         };
@@ -454,7 +454,7 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
           final int typeConverted_pkgi = (int)pkgi;
           int _operator_plus = IntegerExtensions.operator_plus(((Integer)typeConverted_pkgi), ((Number)1));
           int _pkgi = pkgi = _operator_plus;
-          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Comparable<? super Integer>)_pkgi), 1);
+          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Comparable<? super Integer>)_pkgi), ((Integer)1));
           if (_operator_greaterThan) {
             _builder.append("else ");
           }
@@ -492,7 +492,7 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
                   final int typeConverted_ctxi = (int)ctxi;
                   int _operator_plus_1 = IntegerExtensions.operator_plus(((Integer)typeConverted_ctxi), ((Number)1));
                   int _ctxi = ctxi = _operator_plus_1;
-                  boolean _operator_greaterThan_1 = ComparableExtensions.<Integer>operator_greaterThan(((Comparable<? super Integer>)_ctxi), 1);
+                  boolean _operator_greaterThan_1 = ComparableExtensions.<Integer>operator_greaterThan(((Comparable<? super Integer>)_ctxi), ((Integer)1));
                   if (_operator_greaterThan_1) {
                     _builder.append("else ");
                   }
