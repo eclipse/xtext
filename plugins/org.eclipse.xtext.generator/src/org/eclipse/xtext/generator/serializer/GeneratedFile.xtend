@@ -2,16 +2,15 @@ package org.eclipse.xtext.generator.serializer
 
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.generator.Naming
-import static extension org.eclipse.xtext.util.Strings 
 
-class GeneratedJavaClass {
+class GeneratedFile {
 	
 	@Inject Grammar
 	
 	@Inject extension Naming
 	
 	String getName(String prefix, String component) {
-		return grammar.basePackageRuntime + ".serializer." + prefix + grammar.name.toSimpleName + component;
+		grammar.basePackageRuntime + ".serializer." + prefix + grammar.name.toSimpleName + component
 	}
 	
 	String getQualifiedName() {
@@ -27,7 +26,11 @@ class GeneratedJavaClass {
 	}
 	
 	String getFileName() {
-		qualifiedName.asPath + ".java";
+		qualifiedName.asPath + "." + fileExtension;
+	}
+	
+	String getFileExtension() {
+		"java";
 	}
 	
 	String getFileContents() {

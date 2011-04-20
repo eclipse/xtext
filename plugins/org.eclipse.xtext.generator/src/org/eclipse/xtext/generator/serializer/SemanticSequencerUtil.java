@@ -28,7 +28,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 /**
- * @author meysholdt - Initial contribution and API
+ * @author Moritz Eysholdt - Initial contribution and API
  */
 public class SemanticSequencerUtil {
 
@@ -63,6 +63,10 @@ public class SemanticSequencerUtil {
 		return result;
 	}
 
+	public static List<IConstraintContext> getGrammarConstraintContexts(Grammar grammar) {
+		return gcp.getConstraints(grammar);
+	}
+
 	public static Collection<IConstraint> getGrammarConstraints(Grammar grammar) {
 		Set<IConstraint> result = Sets.newTreeSet();
 		for (IConstraintContext ctx : gcp.getConstraints(grammar))
@@ -74,6 +78,8 @@ public class SemanticSequencerUtil {
 		if (constraint.getAssignments().length != constraint.getFeatures().length)
 			return false;
 		IConstraintElement body = constraint.getBody();
+		if (body == null)
+			return false;
 		if (body.getFeatureInfo() != null && !body.isOptional() && !body.isMany())
 			return true;
 		if (body.getType() == ConstraintElementType.GROUP) {

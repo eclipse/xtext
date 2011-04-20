@@ -13,7 +13,7 @@ import com.google.common.collect.Lists
 import java.util.Map
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider
 
-class AbstractSemanticSequencer extends GeneratedJavaClass {
+class AbstractSemanticSequencer extends GeneratedFile {
 	
 	@Inject Grammar
 	
@@ -23,14 +23,12 @@ class AbstractSemanticSequencer extends GeneratedJavaClass {
 		getName("Abstract", "SemanticSequencer");		
 	}
 	
-	foo(Map<String, String> m) { '''«FOR e:m.entrySet»«ENDFOR»''' }
-	
 	Iterable<EPackage> getAccessedPackages() {
 		grammar.grammarConstraints.map(e|e.type.EPackage).toSet
 	}
 	
 	Iterable<EClass> getAccessedClasses(EPackage pkg) {
-		grammar.grammarConstraints.map(e|e.type).filter(e|e.EPackage == pkg)
+		grammar.grammarConstraints.map(e|e.type).filter(e|e.EPackage == pkg).toSet
 	}
 	
 	Iterable<EClass> getAccessedClasses() {
@@ -54,7 +52,7 @@ class AbstractSemanticSequencer extends GeneratedJavaClass {
 	}
 	
 	
-	override String getFileContents() {	'''
+	override getFileContents() { '''
 		package «packageName»;
 		
 		import java.util.Collections;
@@ -81,6 +79,7 @@ class AbstractSemanticSequencer extends GeneratedJavaClass {
 		import com.google.common.collect.Lists;
 		import com.google.inject.Inject;
 		
+		@SuppressWarnings("restriction")
 		public class «simpleName» extends AbstractSemanticSequencer {
 		
 			@Inject
@@ -107,37 +106,36 @@ class AbstractSemanticSequencer extends GeneratedJavaClass {
 			
 			«accessedConstraints.join("\n\n",[e|e.genMethodSequence])»
 		}
-		'''.toString
-	}
+	'''.toString }
 	
-	String genMethodFindContext() { '''
-		public Iterable<EObject> findContexts(EObject obj, Iterable<EObject> contextCandidates) {
+	genMethodFindContext() '''
+		public Iterable<EObject> findContexts(EObject semanitcObject, Iterable<EObject> contextCandidates) {
 			«var pkgi = 0»
 			«FOR pkg:accessedPackages  /* ITERATOR i */»
-				«IF (pkgi = pkgi + 1) > 1 /* !i.firstIteration */»else «ENDIF»if(obj.eClass().getEPackage() == «pkg.genPackage.packageInterfaceName».eINSTANCE) switch(obj.eClass().getClassifierID()) {
-					«val width = pkg.accessedClasses.fold(0 as Integer, [type, max | Math::max(type.genIntLiteral.length, max)])»
-					«FOR type:pkg.accessedClasses»
-						case «type.genIntLiteral»:«{type.genIntLiteral.length..width}.fold("",[i,s|s + " "])»return «IF type.accessedContexts.size == 1»singleton((EObject)grammarAccess.«type.accessedContexts.iterator.next.gaAccessor()»)«ELSE»findContexts((«type.getGenClass().interfaceName»)obj)«ENDIF»;
-					«ENDFOR»
-				}		
+				«IF (pkgi = pkgi + 1) > 1 /* !i.firstIteration */»else «ENDIF»if(semanitcObject.eClass().getEPackage() == «pkg.genPackage.packageInterfaceName».eINSTANCE) 
+					switch(semanitcObject.eClass().getClassifierID()) {
+						«val width = pkg.accessedClasses.fold(0 as Integer, [type, max | Math::max(type.genIntLiteral.length, max)])»
+						«FOR type:pkg.accessedClasses»
+							case «type.genIntLiteral»:«{type.genIntLiteral.length..width}.fold("",[i,s|s + " "])»return «IF type.accessedContexts.size == 1»singleton((EObject)grammarAccess.«type.accessedContexts.iterator.next.gaAccessor()»)«ELSE»findContexts((«type.getGenClass().interfaceName»)semanitcObject, contextCandidates)«ENDIF»;
+						«ENDFOR»
+					}
 			«ENDFOR»	
 			return Collections.emptyList();
 		}
+	'''
 		
-		«FOR type:accessedClasses.filter(e|e.accessedContexts.size > 1)»
-		
-		«ENDFOR»
-		'''.toString
-	}
 	
-	String genMethodFindContextType(EClass type) { '''
-		protected Iterable<EObject> findContexts(«type.genClass().interfaceName» obj) {
-			return Lists.newArrayList(«FOR ctx:type.accessedContexts SEPARATOR ", "»grammarAccess.«ctx.gaAccessor»«ENDFOR»);
+	genMethodFindContextType(EClass type) '''
+		/**
+		 * Potential Result Contexts:
+		 *     «FOR ctx:type.accessedContexts SEPARATOR "\n*     "»«ctx.gaAccessor»«ENDFOR»
+		 */
+		protected Iterable<EObject> findContexts(«type.genClass().interfaceName» semanitcObject, Iterable<EObject> contextCandidates) {
+			return genericSequencer.findContexts(semanitcObject, contextCandidates);
 		}
-		'''.toString
-	}
+	'''
 	
-	String genMethodCreateSequence() { '''
+	genMethodCreateSequence() '''
 		public void createSequence(EObject context, EObject semanticObject, ISemanticSequenceAcceptor sequenceAcceptor,	Acceptor errorAcceptor) {
 			«var pkgi = 0 »
 			«FOR pkg:accessedPackages /* ITERATOR i */»
@@ -153,39 +151,39 @@ class AbstractSemanticSequencer extends GeneratedJavaClass {
 					«ENDFOR»
 				«ENDFOR»
 				}
-				if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 			«ENDFOR»
-		}'''.toString
-	}
+			if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		}
+	'''
 	
-	String genMethodSequence(IGrammarConstraintProvider$IConstraint c) {'''
+	genMethodSequence(IGrammarConstraintProvider$IConstraint c) '''
 		/**
 		 * Constraint:
 		 *     «c.body»
 		 *
 		 * Features:
-		«FOR f:c.features»
+		«FOR f:c.features.filter(e|e != null)»
 			«" *    "»«f.toString().replaceAll("\\n","\n *     ")»
 		«ENDFOR»
 		 */
 		protected void sequence_«c.name»(EObject context, «c.type.getGenClass().interfaceName» semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 			«IF c.canGenerate()»
 				if(errorAcceptor != null) {
-					«FOR f:c.features»
+					«FOR f:c.features.filter(e|e != null)»
 						if(transientValues.isValueTransient(semanticObject, «f.feature.genTypeLiteral») == ValueTransient.YES)
 							errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, «f.feature.genTypeLiteral»));
 					«ENDFOR»
 				}
 				INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-				«FOR f:c.features»
+				«FOR f:c.features.filter(e|e != null)»
 					«val assignment=f.assignments.get(0)»
-					«assignment.type.toAcceptMethod()»(sequenceAcceptor, errorAcceptor, semanticObject, grammarAccess.«assignment.grammarElement.gaAccessor()», semanticObject.get«f.feature.getGenFeature().accessorName»(), -1, («assignment.type.toNodeType»)nodes.getNodeForSingelValue(«f.feature.genTypeLiteral», semanticObject.get«f.feature.getGenFeature().accessorName»()));
+					«assignment.type.toAcceptMethod()»(sequenceAcceptor, errorAcceptor, semanticObject, grammarAccess.«assignment.grammarElement.gaAccessor()», semanticObject.«f.feature.getGenFeature().getAccessor»(), -1, («assignment.type.toNodeType»)nodes.getNodeForSingelValue(«f.feature.genTypeLiteral», semanticObject.«f.feature.getGenFeature().getAccessor»()));
 				«ENDFOR»
 			«ELSE»
 				genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 			«ENDIF»
-		}'''.toString
-	}
+		}
+	'''
 }
 
 
