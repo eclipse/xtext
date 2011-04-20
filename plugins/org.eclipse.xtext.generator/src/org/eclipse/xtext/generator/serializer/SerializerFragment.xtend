@@ -14,6 +14,8 @@ import java.util.Set
 import org.eclipse.xtext.generator.BindFactory
 import org.eclipse.xtext.serializer.ISemanticSequencer
 import org.eclipse.xtext.generator.Binding
+import org.eclipse.xtext.serializer.ISerializer
+import org.eclipse.xtext.serializer.impl.Serializer
 
 class SerializerFragment extends Xtend2GeneratorFragment {
 	
@@ -21,14 +23,25 @@ class SerializerFragment extends Xtend2GeneratorFragment {
 	
 	@Inject SemanticSequencer
 	
+	@Inject GrammarConstraints
+	
+	create new SerializerFragmentState() state() {}
+	
+	setGenerateDebugData(boolean doGenerate) {
+		state.generateDebugData = doGenerate
+	}
+	
 	override Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		val bf = new BindFactory();
 		bf.addTypeToType(typeof(ISemanticSequencer).name, semanticSequencer.qualifiedName);
+		bf.addTypeToType(typeof(ISerializer).name, typeof(Serializer).name);
 		return bf.bindings;
 	}
 	
 	override generate(Xtend2ExecutionContext ctx) {
 		ctx.writeFile(Generator::SRC, semanticSequencer.fileName, semanticSequencer.fileContents);
 		ctx.writeFile(Generator::SRC_GEN, abstractSemanticSequencer.fileName, abstractSemanticSequencer.fileContents);
+		if(state.generateDebugData)
+			ctx.writeFile(Generator::SRC_GEN, grammarConstraints.fileName, grammarConstraints.fileContents);
 	}
 }

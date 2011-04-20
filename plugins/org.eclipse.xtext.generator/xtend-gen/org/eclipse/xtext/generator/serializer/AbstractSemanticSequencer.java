@@ -18,7 +18,7 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.GenModelAccess;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess;
-import org.eclipse.xtext.generator.serializer.GeneratedJavaClass;
+import org.eclipse.xtext.generator.serializer.GeneratedFile;
 import org.eclipse.xtext.generator.serializer.SemanticSequencerUtil;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.ConstraintElementType;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
@@ -35,23 +35,13 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
-public class AbstractSemanticSequencer extends GeneratedJavaClass {
+public class AbstractSemanticSequencer extends GeneratedFile {
   @Inject private Grammar grammar;
   @Inject private GrammarAccess grammarAccess;
   
   public String getQualifiedName() {
     String _name = this.getName("Abstract", "SemanticSequencer");
     return _name;
-  }
-  
-  public StringConcatenation foo(final Map<String,String> m) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      Set<Entry<String,String>> _entrySet = m.entrySet();
-      for(Entry<String,String> e : _entrySet) {
-      }
-    }
-    return _builder;
   }
   
   public Iterable<EPackage> getAccessedPackages() {
@@ -87,7 +77,8 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
         }
       };
     Iterable<EClass> _filter = IterableExtensions.<EClass>filter(_map, _function_1);
-    return _filter;
+    Set<EClass> _set = IterableExtensions.<EClass>toSet(_filter);
+    return _set;
   }
   
   public Iterable<EClass> getAccessedClasses() {
@@ -184,6 +175,8 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
     _builder.append("import com.google.inject.Inject;");
     _builder.newLine();
     _builder.newLine();
+    _builder.append("@SuppressWarnings(\"restriction\")");
+    _builder.newLine();
     _builder.append("public class ");
     String _simpleName = this.getSimpleName();
     _builder.append(_simpleName, "");
@@ -237,7 +230,7 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    String _genMethodFindContext = this.genMethodFindContext();
+    StringConcatenation _genMethodFindContext = this.genMethodFindContext();
     _builder.append(_genMethodFindContext, "	");
     _builder.append("\t");
     _builder.newLineIfNotEmpty();
@@ -254,9 +247,9 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
         }
       };
     Iterable<EClass> _filter = IterableExtensions.<EClass>filter(_accessedClasses, _function);
-    final Function1<EClass,String> _function_1 = new Function1<EClass,String>() {
-        public String apply(EClass e_2) {
-          String _genMethodFindContextType = AbstractSemanticSequencer.this.genMethodFindContextType(e_2);
+    final Function1<EClass,StringConcatenation> _function_1 = new Function1<EClass,StringConcatenation>() {
+        public StringConcatenation apply(EClass e_2) {
+          StringConcatenation _genMethodFindContextType = AbstractSemanticSequencer.this.genMethodFindContextType(e_2);
           return _genMethodFindContextType;
         }
       };
@@ -266,16 +259,16 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    String _genMethodCreateSequence = this.genMethodCreateSequence();
+    StringConcatenation _genMethodCreateSequence = this.genMethodCreateSequence();
     _builder.append(_genMethodCreateSequence, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
     Collection<IConstraint> _accessedConstraints = this.getAccessedConstraints();
-    final Function1<IConstraint,String> _function_2 = new Function1<IConstraint,String>() {
-        public String apply(IConstraint e_3) {
-          String _genMethodSequence = AbstractSemanticSequencer.this.genMethodSequence(e_3);
+    final Function1<IConstraint,StringConcatenation> _function_2 = new Function1<IConstraint,StringConcatenation>() {
+        public StringConcatenation apply(IConstraint e_3) {
+          StringConcatenation _genMethodSequence = AbstractSemanticSequencer.this.genMethodSequence(e_3);
           return _genMethodSequence;
         }
       };
@@ -288,9 +281,9 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
     return _string;
   }
   
-  public String genMethodFindContext() {
+  public StringConcatenation genMethodFindContext() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("public Iterable<EObject> findContexts(EObject obj, Iterable<EObject> contextCandidates) {");
+    _builder.append("public Iterable<EObject> findContexts(EObject semanitcObject, Iterable<EObject> contextCandidates) {");
     _builder.newLine();
     _builder.append("\t");
     int pkgi = 0;
@@ -308,14 +301,18 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
             _builder.append("else ");
           }
         }
-        _builder.append("if(obj.eClass().getEPackage() == ");
+        _builder.append("if(semanitcObject.eClass().getEPackage() == ");
         GenPackage _genPackage = GenModelAccess.getGenPackage(pkg);
         String _packageInterfaceName = _genPackage.getPackageInterfaceName();
         _builder.append(_packageInterfaceName, "	");
-        _builder.append(".eINSTANCE) switch(obj.eClass().getClassifierID()) {");
+        _builder.append(".eINSTANCE) ");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("\t");
+        _builder.append("switch(semanitcObject.eClass().getClassifierID()) {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("\t\t");
         Iterable<EClass> _accessedClasses = this.getAccessedClasses(pkg);
         final Function2<EClass,Integer,Integer> _function = new Function2<EClass,Integer,Integer>() {
             public Integer apply(EClass type , Integer max) {
@@ -334,11 +331,11 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
           Iterable<EClass> _accessedClasses_1 = this.getAccessedClasses(pkg);
           for(EClass type_1 : _accessedClasses_1) {
             _builder.append("\t");
-            _builder.append("\t");
+            _builder.append("\t\t");
             _builder.append("case ");
             final EClass typeConverted_type_1 = (EClass)type_1;
             String _genIntLiteral_1 = GenModelAccess.getGenIntLiteral(typeConverted_type_1);
-            _builder.append(_genIntLiteral_1, "		");
+            _builder.append(_genIntLiteral_1, "			");
             _builder.append(":");
             final EClass typeConverted_type_1_1 = (EClass)type_1;
             String _genIntLiteral_2 = GenModelAccess.getGenIntLiteral(typeConverted_type_1_1);
@@ -352,7 +349,7 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
                 }
               };
             String _fold_1 = IterableExtensions.<Integer, String>fold(_operator_upTo, "", _function_1);
-            _builder.append(_fold_1, "		");
+            _builder.append(_fold_1, "			");
             _builder.append("return ");
             {
               Collection<EObject> _accessedContexts = this.getAccessedContexts(type_1);
@@ -364,13 +361,13 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
                 Iterator<EObject> _iterator = _accessedContexts_1.iterator();
                 EObject _next = _iterator.next();
                 String _gaAccessor = this.grammarAccess.gaAccessor(_next);
-                _builder.append(_gaAccessor, "		");
+                _builder.append(_gaAccessor, "			");
                 _builder.append(")");} else {
                 _builder.append("findContexts((");
                 GenClass _genClass = GenModelAccess.getGenClass(type_1);
                 String _interfaceName = _genClass.getInterfaceName();
-                _builder.append(_interfaceName, "		");
-                _builder.append(")obj)");
+                _builder.append(_interfaceName, "			");
+                _builder.append(")semanitcObject, contextCandidates)");
               }
             }
             _builder.append(";");
@@ -378,7 +375,8 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
           }
         }
         _builder.append("\t");
-        _builder.append("}\t\t");
+        _builder.append("\t");
+        _builder.append("}");
         _builder.newLine();
       }
     }
@@ -387,36 +385,18 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    _builder.newLine();
-    {
-      Iterable<EClass> _accessedClasses_2 = this.getAccessedClasses();
-      final Function1<EClass,Boolean> _function_2 = new Function1<EClass,Boolean>() {
-          public Boolean apply(EClass e) {
-            Collection<EObject> _accessedContexts_2 = AbstractSemanticSequencer.this.getAccessedContexts(e);
-            int _size_1 = _accessedContexts_2.size();
-            boolean _operator_greaterThan_1 = ComparableExtensions.<Integer>operator_greaterThan(((Comparable<? super Integer>)_size_1), ((Integer)1));
-            return ((Boolean)_operator_greaterThan_1);
-          }
-        };
-      Iterable<EClass> _filter = IterableExtensions.<EClass>filter(_accessedClasses_2, _function_2);
-      for(EClass type_2 : _filter) {
-        _builder.newLine();
-      }
-    }
-    String _string = _builder.toString();
-    return _string;
+    return _builder;
   }
   
-  public String genMethodFindContextType(final EClass type) {
+  public StringConcatenation genMethodFindContextType(final EClass type) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("protected Iterable<EObject> findContexts(");
-    GenClass _genClass = GenModelAccess.getGenClass(type);
-    String _interfaceName = _genClass.getInterfaceName();
-    _builder.append(_interfaceName, "");
-    _builder.append(" obj) {");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("return Lists.newArrayList(");
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* Potential Result Contexts:");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*     ");
     {
       Collection<EObject> _accessedContexts = this.getAccessedContexts(type);
       boolean hasAnyElements = false;
@@ -424,22 +404,31 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
         if (!hasAnyElements) {
           hasAnyElements = true;
         } else {
-          _builder.appendImmediate(", ", "	");
+          _builder.appendImmediate("\n*     ", " ");
         }
-        _builder.append("grammarAccess.");
         String _gaAccessor = this.grammarAccess.gaAccessor(ctx);
-        _builder.append(_gaAccessor, "	");
+        _builder.append(_gaAccessor, " ");
       }
     }
-    _builder.append(");");
     _builder.newLineIfNotEmpty();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("protected Iterable<EObject> findContexts(");
+    GenClass _genClass = GenModelAccess.getGenClass(type);
+    String _interfaceName = _genClass.getInterfaceName();
+    _builder.append(_interfaceName, "");
+    _builder.append(" semanitcObject, Iterable<EObject> contextCandidates) {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("return genericSequencer.findContexts(semanitcObject, contextCandidates);");
+    _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    return _string;
+    return _builder;
   }
   
-  public String genMethodCreateSequence() {
+  public StringConcatenation genMethodCreateSequence() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public void createSequence(EObject context, EObject semanticObject, ISemanticSequenceAcceptor sequenceAcceptor,\tAcceptor errorAcceptor) {");
     _builder.newLine();
@@ -547,18 +536,17 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
-        _builder.append("\t");
-        _builder.append("\t");
-        _builder.append("if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));");
-        _builder.newLine();
       }
     }
+    _builder.append("\t");
+    _builder.append("if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));");
+    _builder.newLine();
     _builder.append("}");
-    String _string = _builder.toString();
-    return _string;
+    _builder.newLine();
+    return _builder;
   }
   
-  public String genMethodSequence(final IConstraint c) {
+  public StringConcatenation genMethodSequence(final IConstraint c) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -578,7 +566,15 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
     _builder.newLine();
     {
       IFeatureInfo[] _features = c.getFeatures();
-      for(IFeatureInfo f : _features) {
+      final Function1<IFeatureInfo,Boolean> _function = new Function1<IFeatureInfo,Boolean>() {
+          public Boolean apply(IFeatureInfo e) {
+            final IFeatureInfo typeConverted_e = (IFeatureInfo)e;
+            boolean _operator_notEquals = ObjectExtensions.operator_notEquals(typeConverted_e, null);
+            return ((Boolean)_operator_notEquals);
+          }
+        };
+      Iterable<IFeatureInfo> _filter = IterableExtensions.<IFeatureInfo>filter(((Iterable<IFeatureInfo>)Conversions.doWrapArray(_features)), _function);
+      for(IFeatureInfo f : _filter) {
         _builder.append(" *    ", "");
         final IFeatureInfo typeConverted_f = (IFeatureInfo)f;
         String _string = typeConverted_f.toString();
@@ -608,7 +604,15 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
         _builder.newLine();
         {
           IFeatureInfo[] _features_1 = c.getFeatures();
-          for(IFeatureInfo f_1 : _features_1) {
+          final Function1<IFeatureInfo,Boolean> _function_1 = new Function1<IFeatureInfo,Boolean>() {
+              public Boolean apply(IFeatureInfo e_1) {
+                final IFeatureInfo typeConverted_e_1 = (IFeatureInfo)e_1;
+                boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(typeConverted_e_1, null);
+                return ((Boolean)_operator_notEquals_1);
+              }
+            };
+          Iterable<IFeatureInfo> _filter_1 = IterableExtensions.<IFeatureInfo>filter(((Iterable<IFeatureInfo>)Conversions.doWrapArray(_features_1)), _function_1);
+          for(IFeatureInfo f_1 : _filter_1) {
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("if(transientValues.isValueTransient(semanticObject, ");
@@ -636,7 +640,15 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
         _builder.newLine();
         {
           IFeatureInfo[] _features_2 = c.getFeatures();
-          for(IFeatureInfo f_2 : _features_2) {
+          final Function1<IFeatureInfo,Boolean> _function_2 = new Function1<IFeatureInfo,Boolean>() {
+              public Boolean apply(IFeatureInfo e_2) {
+                final IFeatureInfo typeConverted_e_2 = (IFeatureInfo)e_2;
+                boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(typeConverted_e_2, null);
+                return ((Boolean)_operator_notEquals_2);
+              }
+            };
+          Iterable<IFeatureInfo> _filter_2 = IterableExtensions.<IFeatureInfo>filter(((Iterable<IFeatureInfo>)Conversions.doWrapArray(_features_2)), _function_2);
+          for(IFeatureInfo f_2 : _filter_2) {
             _builder.append("\t");
             IConstraintElement[] _assignments = f_2.getAssignments();
             IConstraintElement _get = ((List<IConstraintElement>)Conversions.doWrapArray(_assignments)).get(0);
@@ -650,11 +662,11 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
             AbstractElement _grammarElement = assignment.getGrammarElement();
             String _gaAccessor = this.grammarAccess.gaAccessor(_grammarElement);
             _builder.append(_gaAccessor, "	");
-            _builder.append(", semanticObject.get");
+            _builder.append(", semanticObject.");
             EStructuralFeature _feature_2 = f_2.getFeature();
             GenFeature _genFeature = GenModelAccess.getGenFeature(_feature_2);
-            String _accessorName = _genFeature.getAccessorName();
-            _builder.append(_accessorName, "	");
+            String _getAccessor = _genFeature.getGetAccessor();
+            _builder.append(_getAccessor, "	");
             _builder.append("(), -1, (");
             ConstraintElementType _type_2 = assignment.getType();
             String _nodeType = SemanticSequencerUtil.toNodeType(_type_2);
@@ -663,11 +675,11 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
             EStructuralFeature _feature_3 = f_2.getFeature();
             String _genTypeLiteral_2 = GenModelAccess.getGenTypeLiteral(_feature_3);
             _builder.append(_genTypeLiteral_2, "	");
-            _builder.append(", semanticObject.get");
+            _builder.append(", semanticObject.");
             EStructuralFeature _feature_4 = f_2.getFeature();
             GenFeature _genFeature_1 = GenModelAccess.getGenFeature(_feature_4);
-            String _accessorName_1 = _genFeature_1.getAccessorName();
-            _builder.append(_accessorName_1, "	");
+            String _getAccessor_1 = _genFeature_1.getGetAccessor();
+            _builder.append(_getAccessor_1, "	");
             _builder.append("()));");
             _builder.newLineIfNotEmpty();
           }
@@ -678,7 +690,7 @@ public class AbstractSemanticSequencer extends GeneratedJavaClass {
       }
     }
     _builder.append("}");
-    String _string_1 = _builder.toString();
-    return _string_1;
+    _builder.newLine();
+    return _builder;
   }
 }

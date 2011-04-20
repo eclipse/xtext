@@ -2,11 +2,11 @@ package org.eclipse.xtext.generator.serializer;
 
 import com.google.inject.Inject;
 import org.eclipse.xtext.generator.serializer.AbstractSemanticSequencer;
-import org.eclipse.xtext.generator.serializer.GeneratedJavaClass;
+import org.eclipse.xtext.generator.serializer.GeneratedFile;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
-public class SemanticSequencer extends GeneratedJavaClass {
+public class SemanticSequencer extends GeneratedFile {
   @Inject private AbstractSemanticSequencer abstractSemanticSequencer;
   
   public String getQualifiedName() {

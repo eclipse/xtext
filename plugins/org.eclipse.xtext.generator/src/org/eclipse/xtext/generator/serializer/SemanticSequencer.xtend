@@ -1,6 +1,6 @@
 package org.eclipse.xtext.generator.serializer
 
-class SemanticSequencer extends GeneratedJavaClass {
+class SemanticSequencer extends GeneratedFile {
 	
 	@Inject AbstractSemanticSequencer
 	

@@ -22,6 +22,7 @@ import org.eclipse.xtext.serializer.sequencertest.*;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
+@SuppressWarnings("restriction")
 public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject
@@ -40,37 +41,37 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	@Inject
 	protected ISemanticNodeProvider nodeProvider;
 	
-	public Iterable<EObject> findContexts(EObject obj, Iterable<EObject> contextCandidates) {
-		if(obj.eClass().getEPackage() == SequencertestPackage.eINSTANCE) switch(obj.eClass().getClassifierID()) {
-			case SequencertestPackage.ALT_LIST1:                           return singleton((EObject)grammarAccess.getAltList1Rule());
-			case SequencertestPackage.ALT_LIST2:                           return singleton((EObject)grammarAccess.getAltList2Rule());
-			case SequencertestPackage.ALTERNATIVE_MULTIPLICITIES:          return singleton((EObject)grammarAccess.getAlternativeMultiplicitiesRule());
-			case SequencertestPackage.DEPENDENT_ALTERNATIVE1:              return singleton((EObject)grammarAccess.getDependentAlternative1Rule());
-			case SequencertestPackage.DEPENDENT_ALTERNATIVE2:              return singleton((EObject)grammarAccess.getDependentAlternative2Rule());
-			case SequencertestPackage.GROUP_MULTIPLICITIES:                return singleton((EObject)grammarAccess.getGroupMultiplicitiesRule());
-			case SequencertestPackage.LIST1:                               return singleton((EObject)grammarAccess.getList1Rule());
-			case SequencertestPackage.LIST2:                               return singleton((EObject)grammarAccess.getList2Rule());
-			case SequencertestPackage.MODEL:                               return singleton((EObject)grammarAccess.getModelRule());
-			case SequencertestPackage.MULTI_KEYWORDS_OR_ID:                return singleton((EObject)grammarAccess.getMultiKeywordsOrIDRule());
-			case SequencertestPackage.MULTI_KEYWORDS:                      return singleton((EObject)grammarAccess.getMultiKeywordsRule());
-			case SequencertestPackage.MULTI_TERMINALS:                     return singleton((EObject)grammarAccess.getMultiTerminalsRule());
-			case SequencertestPackage.OPTIONAL:                            return singleton((EObject)grammarAccess.getOptionalRule());
-			case SequencertestPackage.SIMPLE_ALTERNATIVE:                  return singleton((EObject)grammarAccess.getSimpleAlternativeRule());
-			case SequencertestPackage.SIMPLE_GROUP:                        return singleton((EObject)grammarAccess.getSimpleGroupRule());
-			case SequencertestPackage.SIMPLE_MULTIPLICITIES:               return singleton((EObject)grammarAccess.getSimpleMultiplicitiesRule());
-			case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE_CHILD1: return singleton((EObject)grammarAccess.getSingleContainmentReferenceChild1Rule());
-			case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE_CHILD2: return singleton((EObject)grammarAccess.getSingleContainmentReferenceChild2Rule());
-			case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE_CHILD3: return singleton((EObject)grammarAccess.getSingleContainmentReferenceChild3Rule());
-			case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE:        return singleton((EObject)grammarAccess.getSingleContainmentReferenceRule());
-			case SequencertestPackage.SINGLE_CROSS_REFERENCE:              return singleton((EObject)grammarAccess.getSingleCrossReferenceRule());
-			case SequencertestPackage.SINGLE_ENUM:                         return singleton((EObject)grammarAccess.getSingleEnumRule());
-			case SequencertestPackage.SINGLE_KEYWORDS_OR_ID:               return singleton((EObject)grammarAccess.getSingleKeywordsOrIDRule());
-			case SequencertestPackage.SINGLE_KEYWORDS:                     return singleton((EObject)grammarAccess.getSingleKeywordsRule());
-			case SequencertestPackage.SINGLE_TERMINALS:                    return singleton((EObject)grammarAccess.getSingleTerminalsRule());
-		}		
+	public Iterable<EObject> findContexts(EObject semanitcObject, Iterable<EObject> contextCandidates) {
+		if(semanitcObject.eClass().getEPackage() == SequencertestPackage.eINSTANCE) 
+			switch(semanitcObject.eClass().getClassifierID()) {
+				case SequencertestPackage.ALT_LIST1:                           return singleton((EObject)grammarAccess.getAltList1Rule());
+				case SequencertestPackage.ALT_LIST2:                           return singleton((EObject)grammarAccess.getAltList2Rule());
+				case SequencertestPackage.ALTERNATIVE_MULTIPLICITIES:          return singleton((EObject)grammarAccess.getAlternativeMultiplicitiesRule());
+				case SequencertestPackage.DEPENDENT_ALTERNATIVE1:              return singleton((EObject)grammarAccess.getDependentAlternative1Rule());
+				case SequencertestPackage.DEPENDENT_ALTERNATIVE2:              return singleton((EObject)grammarAccess.getDependentAlternative2Rule());
+				case SequencertestPackage.GROUP_MULTIPLICITIES:                return singleton((EObject)grammarAccess.getGroupMultiplicitiesRule());
+				case SequencertestPackage.LIST1:                               return singleton((EObject)grammarAccess.getList1Rule());
+				case SequencertestPackage.LIST2:                               return singleton((EObject)grammarAccess.getList2Rule());
+				case SequencertestPackage.MODEL:                               return singleton((EObject)grammarAccess.getModelRule());
+				case SequencertestPackage.MULTI_KEYWORDS_OR_ID:                return singleton((EObject)grammarAccess.getMultiKeywordsOrIDRule());
+				case SequencertestPackage.MULTI_KEYWORDS:                      return singleton((EObject)grammarAccess.getMultiKeywordsRule());
+				case SequencertestPackage.MULTI_TERMINALS:                     return singleton((EObject)grammarAccess.getMultiTerminalsRule());
+				case SequencertestPackage.OPTIONAL:                            return singleton((EObject)grammarAccess.getOptionalRule());
+				case SequencertestPackage.SIMPLE_ALTERNATIVE:                  return singleton((EObject)grammarAccess.getSimpleAlternativeRule());
+				case SequencertestPackage.SIMPLE_GROUP:                        return singleton((EObject)grammarAccess.getSimpleGroupRule());
+				case SequencertestPackage.SIMPLE_MULTIPLICITIES:               return singleton((EObject)grammarAccess.getSimpleMultiplicitiesRule());
+				case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE_CHILD1: return singleton((EObject)grammarAccess.getSingleContainmentReferenceChild1Rule());
+				case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE_CHILD2: return singleton((EObject)grammarAccess.getSingleContainmentReferenceChild2Rule());
+				case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE_CHILD3: return singleton((EObject)grammarAccess.getSingleContainmentReferenceChild3Rule());
+				case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE:        return singleton((EObject)grammarAccess.getSingleContainmentReferenceRule());
+				case SequencertestPackage.SINGLE_CROSS_REFERENCE:              return singleton((EObject)grammarAccess.getSingleCrossReferenceRule());
+				case SequencertestPackage.SINGLE_ENUM:                         return singleton((EObject)grammarAccess.getSingleEnumRule());
+				case SequencertestPackage.SINGLE_KEYWORDS_OR_ID:               return singleton((EObject)grammarAccess.getSingleKeywordsOrIDRule());
+				case SequencertestPackage.SINGLE_KEYWORDS:                     return singleton((EObject)grammarAccess.getSingleKeywordsRule());
+				case SequencertestPackage.SINGLE_TERMINALS:                    return singleton((EObject)grammarAccess.getSingleTerminalsRule());
+			}
 		return Collections.emptyList();
 	}
-	
 	
 	
 	public void createSequence(EObject context, EObject semanticObject, ISemanticSequenceAcceptor sequenceAcceptor,	Acceptor errorAcceptor) {
@@ -201,7 +202,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 					return; 
 				}
 			}
-			if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
+		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
 	
 	/**
@@ -235,6 +236,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 	}
 	
+	
 	/**
 	 * Constraint:
 	 *     ((val1+=ID val2=ID) | (val1+=ID val1+=ID* val3=ID))
@@ -258,6 +260,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 	}
 	
+	
 	/**
 	 * Constraint:
 	 *     ((val2=ID | val3=ID)? (val4+=ID | val5+=ID)+ (val6+=ID | val7+=ID)*)
@@ -276,6 +279,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 	}
 	
+	
 	/**
 	 * Constraint:
 	 *     (val=ID | (val=ID flag?='kw1'))
@@ -290,6 +294,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	protected void sequence_DependentAlternative1_DependentAlternative1(EObject context, DependentAlternative1 semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 	}
+	
 	
 	/**
 	 * Constraint:
@@ -306,6 +311,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	protected void sequence_DependentAlternative2_DependentAlternative2(EObject context, DependentAlternative2 semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 	}
+	
 	
 	/**
 	 * Constraint:
@@ -332,6 +338,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 	}
 	
+	
 	/**
 	 * Constraint:
 	 *     (val1+=ID val1+=ID*)
@@ -343,6 +350,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 	}
 	
+	
 	/**
 	 * Constraint:
 	 *     (val1+=ID val1+=ID*)
@@ -353,6 +361,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	protected void sequence_List2_List2(EObject context, List2 semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 	}
+	
 	
 	/**
 	 * Constraint:
@@ -739,6 +748,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 	}
 	
+	
 	/**
 	 * Constraint:
 	 *     (val+='kw1' | val+='kw2' | val+='kw3' | val+=ID)
@@ -749,6 +759,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	protected void sequence_MultiKeywordsOrID_MultiKeywordsOrID(EObject context, MultiKeywordsOrID semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 	}
+	
 	
 	/**
 	 * Constraint:
@@ -761,6 +772,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 	}
 	
+	
 	/**
 	 * Constraint:
 	 *     (val+=ID1 | val+=ID2)
@@ -771,6 +783,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	protected void sequence_MultiTerminals_MultiTerminals(EObject context, MultiTerminals semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 	}
+	
 	
 	/**
 	 * Constraint:
@@ -789,6 +802,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 	}
 	
+	
 	/**
 	 * Constraint:
 	 *     (val1=ID | val2=ID)
@@ -802,6 +816,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	protected void sequence_SimpleAlternative_SimpleAlternative(EObject context, SimpleAlternative semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 	}
+	
 	
 	/**
 	 * Constraint:
@@ -823,6 +838,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 		acceptAssignedTerminal(sequenceAcceptor, errorAcceptor, semanticObject, grammarAccess.getSimpleGroupAccess().getVal2IDTerminalRuleCall_2_0(), semanticObject.getVal2(), -1, (ILeafNode)nodes.getNodeForSingelValue(SequencertestPackage.Literals.SIMPLE_GROUP__VAL2, semanticObject.getVal2()));
 	}
 	
+	
 	/**
 	 * Constraint:
 	 *     (val1=ID val2=ID? val3+=ID+ val4+=ID*)
@@ -836,6 +852,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	protected void sequence_SimpleMultiplicities_SimpleMultiplicities(EObject context, SimpleMultiplicities semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 	}
+	
 	
 	/**
 	 * Constraint:
@@ -853,6 +870,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 		acceptAssignedKeyword(sequenceAcceptor, errorAcceptor, semanticObject, grammarAccess.getSingleContainmentReferenceChild1Access().getValKw1Keyword_0(), semanticObject.getVal(), -1, (ILeafNode)nodes.getNodeForSingelValue(SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD1__VAL, semanticObject.getVal()));
 	}
 	
+	
 	/**
 	 * Constraint:
 	 *     val='kw2'
@@ -868,6 +886,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
 		acceptAssignedKeyword(sequenceAcceptor, errorAcceptor, semanticObject, grammarAccess.getSingleContainmentReferenceChild2Access().getValKw2Keyword_0(), semanticObject.getVal(), -1, (ILeafNode)nodes.getNodeForSingelValue(SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD2__VAL, semanticObject.getVal()));
 	}
+	
 	
 	/**
 	 * Constraint:
@@ -885,6 +904,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 		acceptAssignedKeyword(sequenceAcceptor, errorAcceptor, semanticObject, grammarAccess.getSingleContainmentReferenceChild3Access().getValKw3Keyword_0(), semanticObject.getVal(), -1, (ILeafNode)nodes.getNodeForSingelValue(SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD3__VAL, semanticObject.getVal()));
 	}
 	
+	
 	/**
 	 * Constraint:
 	 *     (child=SingleContainmentReferenceChild1 | child=SingleContainmentReferenceChild2 | child=SingleContainmentReferenceChild3)
@@ -895,6 +915,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	protected void sequence_SingleContainmentReference_SingleContainmentReference(EObject context, SingleContainmentReference semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 	}
+	
 	
 	/**
 	 * Constraint:
@@ -908,6 +929,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 	}
 	
+	
 	/**
 	 * Constraint:
 	 *     (val=DefEnum1 | val=DefEnum2 | val=DefEnum3)
@@ -918,6 +940,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	protected void sequence_SingleEnum_SingleEnum(EObject context, SingleEnum semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 	}
+	
 	
 	/**
 	 * Constraint:
@@ -930,6 +953,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 	}
 	
+	
 	/**
 	 * Constraint:
 	 *     (val='kw1' | val='kw2' | val='kw3')
@@ -940,6 +964,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	protected void sequence_SingleKeywords_SingleKeywords(EObject context, SingleKeywords semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 	}
+	
 	
 	/**
 	 * Constraint:

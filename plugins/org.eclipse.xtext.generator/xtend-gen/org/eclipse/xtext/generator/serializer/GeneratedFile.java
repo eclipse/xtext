@@ -6,7 +6,7 @@ import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
-public class GeneratedJavaClass {
+public class GeneratedFile {
   @Inject private Grammar grammar;
   @Inject private Naming naming;
   
@@ -42,8 +42,14 @@ public class GeneratedJavaClass {
   public String getFileName() {
     String _qualifiedName = this.getQualifiedName();
     String _asPath = this.naming.asPath(_qualifiedName);
-    String _operator_plus = StringExtensions.operator_plus(_asPath, ".java");
-    return _operator_plus;
+    String _operator_plus = StringExtensions.operator_plus(_asPath, ".");
+    String _fileExtension = this.getFileExtension();
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _fileExtension);
+    return _operator_plus_1;
+  }
+  
+  public String getFileExtension() {
+    return "java";
   }
   
   public String getFileContents() {
