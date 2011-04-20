@@ -48,7 +48,7 @@ public class CompilerTest extends AbstractXbaseTestCase {
 	
 	public void testBlock() throws Exception {
 		assertCompilesTo(
-				"\nint _xblockexpression = (int)-1;\n" +
+				"\nint _xblockexpression = (int) 0;\n" +
 				"{\n" +
 				"  java.util.ArrayList<String> _arrayList = new java.util.ArrayList<String>();\n" + 
 				"  final java.util.ArrayList<String> _this = _arrayList;\n" +
@@ -61,7 +61,7 @@ public class CompilerTest extends AbstractXbaseTestCase {
 	
 	public void testIf() throws Exception {
 		assertCompilesTo(
-				"\nint _xifexpression = (int)-1;\n" +
+				"\nint _xifexpression = (int) 0;\n" +
 				"if (true) {\n" +
 				"  _xifexpression = 42;\n" +
 				"} else {\n" +
