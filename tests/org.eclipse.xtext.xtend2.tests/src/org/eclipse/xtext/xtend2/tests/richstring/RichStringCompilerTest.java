@@ -53,6 +53,6 @@ public class RichStringCompilerTest extends AbstractRichStringEvaluationTest {
 	
 	public void testBug343148() throws Exception {
 		assertOutput(" zonk a\n\n zonk b\n\n zonk c",
-				"'''«newArrayList('a','b','c').elementsToString('\n\n',[e|''' zonk «e»'''])»'''");
+				"'''«newArrayList('a','b','c').join('\n\n',[e|''' zonk «e»'''])»'''");
 	}
 }
