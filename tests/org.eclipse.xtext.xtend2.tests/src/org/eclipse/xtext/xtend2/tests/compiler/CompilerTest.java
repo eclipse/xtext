@@ -547,6 +547,39 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				 "}");
 	}
 	
+	public void testBug343090_1() throws Exception {
+		invokeAndExpect2(
+				23, 
+				"bug343090(Integer a, Integer b) {\n" + 
+				"    addFunction.apply(a, b)\n" + 
+				"}\n" +
+				"addFunction() {\n" + 
+				"    [Integer a, Integer b|a+b] as (Integer,Integer)=>Integer\n" + 
+				"}", "bug343090", Integer.valueOf(18), Integer.valueOf(5));
+	}
+	
+	public void testBug343090_2() throws Exception {
+		invokeAndExpect2(
+				23, 
+				"bug343090(Integer a, Integer b) {\n" + 
+				"    <Integer>addFunction.apply(a, b)\n" + 
+				"}\n" +
+				"<T extends Integer> addFunction() {\n" + 
+				"    [T a,T b|a+b] as (T,T)=>T\n" + 
+				"}", "bug343090", Integer.valueOf(18), Integer.valueOf(5));
+	}
+	
+	public void testBug343090_3() throws Exception {
+		invokeAndExpect2(
+				23, 
+				"bug343090(Integer a, Integer b) {\n" + 
+				"    addFunction.apply(a, b)\n" + 
+				"}\n" +
+				"<T extends Integer> addFunction() {\n" + 
+				"    [T a,T b|a+b] as (T,T)=>T\n" + 
+				"}", "bug343090", Integer.valueOf(18), Integer.valueOf(5));
+	}
+	
 	@Inject
 	private EclipseRuntimeDependentJavaCompiler javaCompiler;
 
