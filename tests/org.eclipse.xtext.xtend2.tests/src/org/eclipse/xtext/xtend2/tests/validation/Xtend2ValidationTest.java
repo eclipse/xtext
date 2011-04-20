@@ -220,6 +220,24 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 				 "}");
 		helper.assertNoErrors(function);
 	}
+	
+	// TODO: Fix these cases
+//	public void testBug343088_01() throws Exception {
+//		XtendFunction function = function(
+//				"<T extends Integer> (T,T)=>T addFunction() {\n" + 
+//				"    [T a,T b|a+(b as Integer)]\n" + 
+//				"}");
+//		assertIncompatibleReturnType(..)
+//	}
+//	
+//	public void testBug343088_02() throws Exception {
+//		XtendFunction function = function(
+//				"<T extends Integer> (T,T)=>T addFunction() {\n" + 
+//				"    [T a,T b|a+b] as \n" + 
+//				"}");
+//		assertIncompatibleReturnType(..)
+//	}
+
 
 	protected void assertConformanceError(String body, EClass objectType, String... messageParts)
 			throws Exception {

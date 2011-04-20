@@ -74,7 +74,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	protected void doConversion(final JvmTypeReference left, final JvmTypeReference right,
 			final IAppendable appendable, XExpression context, final Later expression) {
 		if (getPrimitives().isPrimitive(right) && !getPrimitives().isPrimitive(left)) {
-			convertPrimitiveToWrapper(left, appendable, expression);
+			convertPrimitiveToWrapper(getPrimitives().asWrapperTypeIfPrimitive(right), appendable, expression);
 		} else if (right instanceof JvmMultiTypeReference) {
 			convertMultiType(left, (JvmMultiTypeReference) right, context, appendable, expression);
 		} else if (getTypeReferences().isArray(right) && isList(left)) {
