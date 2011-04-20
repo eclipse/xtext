@@ -12,6 +12,7 @@ import org.eclipse.compare.IViewerCreator;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -26,6 +27,11 @@ public class DefaultViewerCreator implements IViewerCreator {
 	protected Provider<DefaultMergeEditor> mergeEditorProvider;
 	@Inject
 	protected StreamContentDocumentProvider documentProvider;
+	/**
+	 * @since 2.0
+	 */
+	@Inject
+	protected Provider<XtextSourceViewerConfiguration> sourceViewerConfigurationProvider;
 
 	public Viewer createViewer(Composite parent, CompareConfiguration compareConfiguration) {
 		if (compareConfiguration == null) {
@@ -36,7 +42,8 @@ public class DefaultViewerCreator implements IViewerCreator {
 
 	protected Viewer createMergeViewer(Composite parent, CompareConfiguration compareConfiguration) {
 		compareConfiguration.setProperty(DefaultMergeEditor.PROVIDER, mergeEditorProvider);
-		return new DefaultMergeViewer(parent, SWT.NULL, compareConfiguration, documentProvider);
+		return new DefaultMergeViewer(parent, SWT.NULL, compareConfiguration, documentProvider,
+				sourceViewerConfigurationProvider);
 	}
 
 	protected Viewer createContentViever(Composite parent, CompareConfiguration compareConfiguration) {

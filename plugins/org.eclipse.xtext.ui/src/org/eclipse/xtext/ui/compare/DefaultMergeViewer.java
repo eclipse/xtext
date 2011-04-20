@@ -12,10 +12,12 @@ import java.util.Map;
 
 import org.eclipse.compare.CompareConfiguration;
 import org.eclipse.compare.IResourceProvider;
+import org.eclipse.compare.ISharedDocumentAdapter;
 import org.eclipse.compare.IStreamContentAccessor;
 import org.eclipse.compare.contentmergeviewer.IMergeViewerContentProvider;
 import org.eclipse.compare.contentmergeviewer.TextMergeViewer;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.text.ITextViewer;
@@ -37,6 +39,7 @@ import org.eclipse.ui.actions.PartEventAction;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.xtext.ui.editor.CompoundXtextEditorCallback;
+import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Provider;
@@ -47,11 +50,26 @@ import com.google.inject.Provider;
 public class DefaultMergeViewer extends TextMergeViewer {
 	protected IDocumentProvider documentProvider;
 	protected Map<ISourceViewer, DefaultMergeEditor> sourceViewerEditorMap;
+	/**
+	 * @since 2.0
+	 */
+	protected Provider<XtextSourceViewerConfiguration> sourceViewerConfigurationProvider;
 
 	public DefaultMergeViewer(Composite parent, int styles, CompareConfiguration compareConfiguration,
 			IDocumentProvider documentProvider) {
 		super(parent, styles | SWT.LEFT_TO_RIGHT, compareConfiguration);
 		this.documentProvider = documentProvider;
+	}
+
+	/**
+	 * @since 2.0
+	 */
+	public DefaultMergeViewer(Composite parent, int styles, CompareConfiguration compareConfiguration,
+			StreamContentDocumentProvider documentProvider,
+			Provider<XtextSourceViewerConfiguration> sourceViewerConfigurationProvider) {
+		super(parent, styles | SWT.LEFT_TO_RIGHT, compareConfiguration);
+		this.documentProvider = documentProvider;
+		this.sourceViewerConfigurationProvider = sourceViewerConfigurationProvider;
 	}
 
 	@Override
@@ -62,7 +80,7 @@ public class DefaultMergeViewer extends TextMergeViewer {
 	}
 
 	protected Object updateAsDocument(Object object) {
-		if (object instanceof IResourceProvider) {
+		if (object instanceof IResourceProvider && supportsSharedDocuments(object)) {
 			return object;
 		}
 		if (object instanceof IStreamContentAccessor) {
@@ -74,6 +92,10 @@ public class DefaultMergeViewer extends TextMergeViewer {
 			}
 		}
 		return object;
+	}
+
+	private boolean supportsSharedDocuments(Object object) {
+		return object instanceof IAdaptable && ((IAdaptable) object).getAdapter(ISharedDocumentAdapter.class) != null;
 	}
 
 	@Override
@@ -118,16 +140,20 @@ public class DefaultMergeViewer extends TextMergeViewer {
 
 	protected SourceViewerConfiguration createSourceViewerConfiguration(SourceViewer sourceViewer,
 			IEditorInput editorInput) {
-		DefaultMergeEditor mergeEditor = getEditor(sourceViewer);
-		if (editorInput != null) {
+		SourceViewerConfiguration sourceViewerConfiguration = null;
+		if (editorInput != null && getEditor(sourceViewer) != null) {
+			DefaultMergeEditor mergeEditor = getEditor(sourceViewer);
+			sourceViewerConfiguration = mergeEditor.getXtextSourceViewerConfiguration();
 			try {
 				mergeEditor.init((IEditorSite) mergeEditor.getSite(), editorInput);
 				mergeEditor.createActions();
 			} catch (PartInitException partInitException) {
 				throw new WrappedException(partInitException);
 			}
+		} else {
+			sourceViewerConfiguration = sourceViewerConfigurationProvider.get();
 		}
-		return mergeEditor.getXtextSourceViewerConfiguration();
+		return sourceViewerConfiguration;
 	}
 
 	@Override
