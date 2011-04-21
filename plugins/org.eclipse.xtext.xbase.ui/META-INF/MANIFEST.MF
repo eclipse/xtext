@@ -51,6 +51,7 @@ Export-Package: org.eclipse.xtext.xbase.ui;
    org.eclipse.xtext.purexbase.ui,
    org.eclipse.xtext.xtend2.ui,
    org.eclipse.xtext.example.domainmodel.ui",
+ org.eclipse.xtext.xbase.ui.highlighting,
  org.eclipse.xtext.xbase.ui.internal;
   x-friends:="org.eclipse.xtext.xbase.tests,
    org.eclipse.xtext.xbase.ui.tests,
