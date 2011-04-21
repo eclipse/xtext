@@ -12,23 +12,17 @@ import java.util.List;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
-import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingCalculator;
 import org.eclipse.xtext.xtend2.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtext.xtend2.richstring.DefaultIndentationHandler;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
-import org.eclipse.xtext.xtend2.services.Xtend2GrammarAccess;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
@@ -42,7 +36,7 @@ import com.google.inject.Provider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class Xtend2HighlightingCalculator implements ISemanticHighlightingCalculator {
+public class RichStringAwareHighlightingCalculator extends XbaseHighlightingCalculator {
 
 	@Inject
 	private RichStringProcessor processor;
@@ -50,13 +44,8 @@ public class Xtend2HighlightingCalculator implements ISemanticHighlightingCalcul
 	@Inject
 	private Provider<DefaultIndentationHandler> indentationHandlerProvider;
 	
-	@Inject
-	private Xtend2GrammarAccess grammarAccess;
-
-	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		if (resource == null || resource.getParseResult() == null
-				|| resource.getParseResult().getRootASTElement() == null)
-			return;
+	@Override
+	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		XtendFile file = (XtendFile) resource.getContents().get(0);
 		if (file.getXtendClass() != null) {
 			for (XtendMember member : file.getXtendClass().getMembers()) {
@@ -67,19 +56,7 @@ public class Xtend2HighlightingCalculator implements ISemanticHighlightingCalcul
 				}
 			}
 		}
-		ICompositeNode node = resource.getParseResult().getRootNode();
-		TerminalRule idRule = grammarAccess.getIDRule();
-		for(ILeafNode leaf: node.getLeafNodes()) {
-			if (leaf.getLength() == 4) {
-				String text = leaf.getText();
-				if ("this".equals(text) || "void".equals(text)) {
-					EObject element = leaf.getGrammarElement();
-					if (element == idRule || (element instanceof RuleCall && ((RuleCall) element).getRule() == idRule)) {
-						acceptor.addPosition(leaf.getOffset(), leaf.getLength(), DefaultHighlightingConfiguration.KEYWORD_ID);
-					}
-				}
-			}
-		}
+		super.doProvideHighlightingFor(resource, acceptor);
 	}
 
 	protected void highlightRichStrings(XExpression expression, IHighlightedPositionAcceptor acceptor) {
@@ -98,20 +75,6 @@ public class Xtend2HighlightingCalculator implements ISemanticHighlightingCalcul
 
 	protected RichStringHighlighter createRichStringHighlighter(IHighlightedPositionAcceptor acceptor) {
 		return new RichStringHighlighter(acceptor);
-	}
-
-	protected void highlightNode(INode node, String id, IHighlightedPositionAcceptor acceptor) {
-		if (node == null)
-			return;
-		if (node instanceof ILeafNode) {
-			acceptor.addPosition(node.getOffset(), node.getLength(), id);
-		} else {
-			for (ILeafNode leaf : node.getLeafNodes()) {
-				if (!leaf.isHidden()) {
-					acceptor.addPosition(leaf.getOffset(), leaf.getLength(), id);
-				}
-			}
-		}
 	}
 
 	protected class RichStringHighlighter extends AbstractRichStringPartAcceptor.ForLoopOnce {

@@ -22,7 +22,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xtend2.ui.highlighting.HighlightingConfiguration;
-import org.eclipse.xtext.xtend2.ui.highlighting.Xtend2HighlightingCalculator;
+import org.eclipse.xtext.xtend2.ui.highlighting.RichStringAwareHighlightingCalculator;
 import org.eclipse.xtext.xtend2.ui.tests.AbstractXtend2UITestCase;
 import org.eclipse.xtext.xtend2.ui.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -41,7 +41,7 @@ public class Xtend2HighlightingCalculatorTest extends AbstractXtend2UITestCase i
 	}
 	
 	@Inject
-	private Xtend2HighlightingCalculator calculator;
+	private RichStringAwareHighlightingCalculator calculator;
 	
 	@Inject
 	private WorkbenchTestHelper testHelper;
@@ -141,6 +141,12 @@ public class Xtend2HighlightingCalculatorTest extends AbstractXtend2UITestCase i
 	public void testThis() {
 		String model = "{ var f = this }";
 		expect(model.indexOf("this"), 4, DefaultHighlightingConfiguration.KEYWORD_ID);
+		highlight(model);
+	}
+	
+	public void testInt() {
+		String model = "{ var int i = 1 }";
+		expect(model.indexOf("int"), 3, DefaultHighlightingConfiguration.KEYWORD_ID);
 		highlight(model);
 	}
 	
