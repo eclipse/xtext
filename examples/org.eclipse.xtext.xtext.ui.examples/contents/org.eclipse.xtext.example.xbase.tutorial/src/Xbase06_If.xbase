@@ -16,13 +16,13 @@ if ('foo'.length>3) {
 // null (String)
 
 /*
- * This also means that control structure expressions like 'if' can occure everywhere an expression is expected
+ * This also means that control structure expressions like 'if' can occur wherever an expression is expected
  */
 if (if ('foo'.length>3) 
 		false 
 	else 
 		true) {
-	"Xbase doesn't need the ternery operator"
+	"Xbase doesn't need the ternary operator"
 }
 
 

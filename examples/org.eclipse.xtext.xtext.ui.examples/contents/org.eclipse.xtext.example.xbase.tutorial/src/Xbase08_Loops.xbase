@@ -1,6 +1,6 @@
 /*
  * Xbase supports Java's while and do .. while as well as the new form of the for loop.
- * The difference i, that in Xbase these constructs are expressions not statements.
+ * The difference is that in Xbase these constructs are expressions not statements.
  * Anyway, they always result in null and are of type 'void' 
  */
 val list = newArrayList('foo','bar','baz')

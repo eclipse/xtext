@@ -21,10 +21,10 @@ val String s = "my String"
 
 /*
  * Generally Variable Declarations are only allowed within a Block, in this language (pure xbase) 
- * the whole script is one block expression, which is why variable declaratuons are allowed without
+ * the whole script is one block expression, which is why variable declarations are allowed without
  * curly braces.
- * A block expression is just a list of expressions which are all executed and the result and the type is computed from the last expression.
- * They can be used in a deeply nested fashion.
+ * A block expression is just a list of expressions which are all executed. The result and the 
+ * type are computed from the last expression. They can be used in a deeply nested fashion.
  */
 
 {
