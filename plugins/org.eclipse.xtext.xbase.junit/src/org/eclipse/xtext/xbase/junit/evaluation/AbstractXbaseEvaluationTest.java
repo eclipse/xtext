@@ -1157,7 +1157,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	}
 	
 	public void testIterableExtension_10() {
-		assertEvaluatesTo("seed 12345", "newArrayList(1, 2, 3, 4, 5).fold('seed ', [i, s|s+i.toString])");
+		assertEvaluatesTo("seed 12345", "newArrayList(1, 2, 3, 4, 5).fold('seed ', [s, i|s+i.toString])");
 	}
 	
 	public void testMapConstruction_00() throws Exception {
@@ -1275,31 +1275,31 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	
 	public void testBug343144_01() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(3), 
-			"newArrayList('ab', 'abc').fold(0 as Integer, [s, max | Math::max(s.length, max)])");
+			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)])");
 	}
 	
 	public void testBug343144_02() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(3), 
-			"newArrayList('ab', 'abc').fold(0, [s, Integer max | Math::max(s.length, max)])");
+			"newArrayList('ab', 'abc').fold(0, [Integer max, s | Math::max(s.length, max)])");
 	}
 	
 	public void testBug343144_03() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(3), 
-			"newArrayList('ab', 'abc').fold(0, [s, max | Math::max(s.length, max)])");
+			"newArrayList('ab', 'abc').fold(0, [max, s | Math::max(s.length, max)])");
 	}
 	
 	public void testBug343144_04() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(3), 
-			"{ val Integer i = 0 newArrayList('ab', 'abc').fold(i, [s, max | Math::max(s.length, max)]) }");
+			"{ val Integer i = 0 newArrayList('ab', 'abc').fold(i, [max, s | Math::max(s.length, max)]) }");
 	}
 	
 	public void testBug343144_05() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(3), 
-			"{ val int i = 0 newArrayList('ab', 'abc').fold(i, [s, max | Math::max(s.length, max)]) }");
+			"{ val int i = 0 newArrayList('ab', 'abc').fold(i, [max, s | Math::max(s.length, max)]) }");
 	}
 	
 	public void testBug343144_06() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(3), 
-		"{ val i = 0 newArrayList('ab', 'abc').fold(i, [s, max | Math::max(s.length, max)]) }");
+		"{ val i = 0 newArrayList('ab', 'abc').fold(i, [max, s | Math::max(s.length, max)]) }");
 	}
 }
