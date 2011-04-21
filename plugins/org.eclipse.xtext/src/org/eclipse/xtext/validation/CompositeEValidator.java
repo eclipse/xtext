@@ -77,6 +77,13 @@ public class CompositeEValidator implements EValidator {
 					// don't check, we have our own implementation, which creates nicer messages
 					return true;
 				}
+				
+				@Override
+				public boolean validate_NoCircularContainment(EObject eObject, DiagnosticChain diagnostics,
+						Map<Object, Object> context) {
+					// don't check
+					return true;
+				}
 			});
 		}
 	}
