@@ -102,12 +102,20 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 
 	public void testConstructorCall() throws Exception {
-		assertResolvedType("java.util.ArrayList", "new java.util.ArrayList()");
+		assertResolvedType("java.util.ArrayList<E>", "new java.util.ArrayList()");
 		assertResolvedType("java.util.ArrayList<java.lang.String>", "new java.util.ArrayList<java.lang.String>()");
 		assertResolvedType("java.util.HashMap<java.lang.String,java.lang.Boolean>",
 				"new java.util.HashMap<java.lang.String, java.lang.Boolean>()");
 		assertResolvedType("java.util.HashMap<? extends java.lang.String,? super java.lang.Boolean>",
 				"new java.util.HashMap<? extends java.lang.String, ? super java.lang.Boolean>()");
+	}
+	
+	public void testConstructorTypeInference_01() throws Exception {
+		assertResolvedType("testdata.GenericType1<java.lang.String>", "new testdata.GenericType1('')");
+	}
+	
+	public void testConstructorTypeInference_02() throws Exception {
+		assertResolvedType("boolean", "<java.util.List<String>>newArrayList().add(new java.util.ArrayList())");
 	}
 
 	public void testClosure() throws Exception {

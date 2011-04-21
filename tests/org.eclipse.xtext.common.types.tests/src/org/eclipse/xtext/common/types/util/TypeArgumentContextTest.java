@@ -85,7 +85,7 @@ public class TypeArgumentContextTest extends TestCase {
 		});
 		JvmTypeReference expected = typeRefs.typeReference("java.lang.Iterable").wildCardExtends("java.lang.String").create();
 		
-		Map<JvmTypeParameter, JvmTypeReference> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, expected);
+		Map<JvmTypeParameter, JvmTypeReference> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, operation.getReturnType(), expected);
 		assertEquals(1,map.size());
 		// TODO discuss changed behavior due to recent modifications in typeArgumentContextProvider
 //		assertEquals("? extends java.lang.String",map.values().iterator().next().getIdentifier());
@@ -104,7 +104,7 @@ public class TypeArgumentContextTest extends TestCase {
 		});
 		JvmTypeReference actualArg = typeRefs.typeReference("java.lang.String").create();
 		
-		Map<JvmTypeParameter, JvmTypeReference> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, null, actualArg);
+		Map<JvmTypeParameter, JvmTypeReference> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, operation.getReturnType(), null, actualArg);
 		assertEquals(1,map.size());
 		assertEquals("java.lang.String",map.values().iterator().next().getIdentifier());
 	}
@@ -123,7 +123,7 @@ public class TypeArgumentContextTest extends TestCase {
 		JvmTypeReference actualArg = typeRefs.typeReference("java.util.List").wildCardExtends("java.lang.String").create();
 		JvmTypeReference expectation = typeRefs.typeReference("java.lang.Object").create();
 		
-		Map<JvmTypeParameter, JvmTypeReference> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, expectation, actualArg);
+		Map<JvmTypeParameter, JvmTypeReference> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, operation.getReturnType(), expectation, actualArg);
 		assertEquals(1,map.size());
 		// TODO discuss changed behavior due to recent modifications in typeArgumentContextProvider
 //		assertEquals("? extends java.lang.String",map.values().iterator().next().getIdentifier());

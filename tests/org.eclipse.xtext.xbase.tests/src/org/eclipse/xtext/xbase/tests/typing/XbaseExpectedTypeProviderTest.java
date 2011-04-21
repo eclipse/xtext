@@ -137,9 +137,16 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 		assertExpected("java.lang.String", decl.getRight());
 	}
 
-	public void testConstructorCall() throws Exception {
+	public void testConstructorCall_00() throws Exception {
 		XConstructorCall decl = (XConstructorCall) expression("new java.lang.String('foo')");
 		assertExpected("java.lang.String", decl.getArguments().get(0));
+	}
+	
+	public void testConstructorCall_01() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var java.util.List<String> list = new java.util.ArrayList() }");
+		XVariableDeclaration variableDeclaration = (XVariableDeclaration) block.getExpressions().get(0);
+		XConstructorCall constructorCall = (XConstructorCall) variableDeclaration.getRight();
+		assertExpected("java.util.List<java.lang.String>", constructorCall);
 	}
 
 	public void testBlockExpression() throws Exception {

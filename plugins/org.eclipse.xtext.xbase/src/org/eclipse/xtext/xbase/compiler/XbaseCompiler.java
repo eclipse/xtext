@@ -257,18 +257,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			@Override
 			public void exec() {
 				b.append("new ");
-				b.append(expr.getConstructor().getDeclaringType());
-				// TODO infered type arguments
-				if (!expr.getTypeArguments().isEmpty()) {
-					b.append("<");
-					for (int i = 0; i < expr.getTypeArguments().size(); i++) {
-						JvmTypeReference arg = expr.getTypeArguments().get(i);
-						serialize(arg, expr, b);
-						if (i + 1 < expr.getTypeArguments().size())
-							b.append(",");
-					}
-					b.append(">");
-				}
+				JvmTypeReference producedType = getTypeProvider().getType(expr);
+				serialize(producedType, expr, b, false, false, true, false);
 				b.append("(");
 				appendArguments(expr.getArguments(), expr.getConstructor(), expr, b);
 				b.append(")");

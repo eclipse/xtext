@@ -144,10 +144,10 @@ public abstract class AbstractXbaseCompiler {
 		serialize(type, context, appendable, false, true);
 	}
 	protected void serialize(final JvmTypeReference type, EObject context, IAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard) {
-		serialize(type, context, appendable, withoutConstraints, paramsToWildcard, true);
+		serialize(type, context, appendable, withoutConstraints, paramsToWildcard, false, true);
 	}
 	
-	protected void serialize(final JvmTypeReference type, EObject context, IAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard, boolean allowPrimitives) {
+	protected void serialize(final JvmTypeReference type, EObject context, IAppendable appendable, boolean withoutConstraints, boolean paramsToWildcard, boolean paramsToObject, boolean allowPrimitives) {
 		if (type instanceof JvmWildcardTypeReference) {
 			JvmWildcardTypeReference wildcard = (JvmWildcardTypeReference) type;
 			if (!withoutConstraints) {
@@ -158,7 +158,7 @@ public abstract class AbstractXbaseCompiler {
 					if (constraint instanceof JvmLowerBound) {
 						if (!withoutConstraints)
 							appendable.append(" super ");
-						serialize(constraint.getTypeReference(), context, appendable, withoutConstraints, paramsToWildcard, false);
+						serialize(constraint.getTypeReference(), context, appendable, withoutConstraints, paramsToWildcard, paramsToObject, false);
 						return;
 					}
 				}
@@ -174,23 +174,26 @@ public abstract class AbstractXbaseCompiler {
 								throw new IllegalStateException("cannot have two upperbounds if type should be printed without constraints");
 							appendable.append(" & ");
 						}
-						serialize(constraint.getTypeReference(), context, appendable, withoutConstraints, paramsToWildcard, false);
+						serialize(constraint.getTypeReference(), context, appendable, withoutConstraints, paramsToWildcard, paramsToObject, false);
 					}
 				}
 			} else if (withoutConstraints) {
 				appendable.append("Object");
 			}
 		} else if (type instanceof JvmGenericArrayTypeReference) {
-			serialize(((JvmGenericArrayTypeReference) type).getComponentType(), context, appendable, withoutConstraints, paramsToWildcard, true);
+			serialize(((JvmGenericArrayTypeReference) type).getComponentType(), context, appendable, withoutConstraints, paramsToWildcard, paramsToObject, true);
 			appendable.append("[]");
 		} else if (type instanceof JvmParameterizedTypeReference) {
 			JvmParameterizedTypeReference parameterized = (JvmParameterizedTypeReference) type;
-			if (paramsToWildcard && parameterized.getType() instanceof JvmTypeParameter) {
+			if ((paramsToWildcard || paramsToObject) && parameterized.getType() instanceof JvmTypeParameter) {
 				JvmTypeParameter parameter = (JvmTypeParameter) parameterized.getType();
 				if (context == null)
 					throw new IllegalArgumentException("argument may not be null if parameters have to be replaced by wildcards");
 				if (!isLocalTypeParameter(context, parameter)) {
-					appendable.append("?");
+					if (paramsToWildcard)
+						appendable.append("?");
+					else
+						appendable.append("Object");
 					return;
 				}
 			}
@@ -202,14 +205,14 @@ public abstract class AbstractXbaseCompiler {
 					if (i != 0) {
 						appendable.append(",");
 					}
-					serialize(parameterized.getArguments().get(i), context, appendable, withoutConstraints, paramsToWildcard, false);
+					serialize(parameterized.getArguments().get(i), context, appendable, withoutConstraints, paramsToWildcard, paramsToObject, false);
 				}
 				appendable.append(">");
 			}
 		} else if (type instanceof JvmAnyTypeReference) {
 			appendable.append(type.getType());
 		} else if (type instanceof JvmMultiTypeReference) {
-			serialize(resolveMultiType(type), context, appendable, withoutConstraints, paramsToWildcard, allowPrimitives);
+			serialize(resolveMultiType(type), context, appendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
 		} else {
 			throw new IllegalArgumentException(type==null ? null : type.toString());
 		}
