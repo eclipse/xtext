@@ -22,7 +22,7 @@ public class Xbase06_If {
 		  } else {
 		    _xifexpression = true;
 		  }
-		  if (_xifexpression) {/*"Xbase doesn\'t need the ternery operator"*/;
+		  if (_xifexpression) {/*"Xbase doesn\'t need the ternary operator"*/;
 		  }
 		}
 	}

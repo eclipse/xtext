@@ -1,6 +1,6 @@
 import helper.*
 /*
- * The switch expression is different and much more powerful than the siwtch statement in Java
+ * The switch expression is different and much more powerful than the switch statement in Java.
  * 
  * First it allows to switch over everything (not only primitives) and it does not have a fall through logic.
  * Also the order of cases is important : first match wins!
