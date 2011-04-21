@@ -182,8 +182,8 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 		eClass.setName("Test");
 		ePackage.getEClassifiers().add(eClass);
 
-		EClass multiRefType = EcorePackage.Literals.EPACKAGE;
-		((InternalEObject) multiRefType).eSetProxyURI(EcoreUtil.getURI(multiRefType));
+		EClass multiRefType = EcoreFactory.eINSTANCE.createEClass();
+		((InternalEObject) multiRefType).eSetProxyURI(EcoreUtil.getURI(EcorePackage.Literals.EPACKAGE));
 		eClass.getESuperTypes().add(multiRefType);
 
 		EClass multiRefType2 = EcoreFactory.eINSTANCE.createEClass();
@@ -194,8 +194,8 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 		EAttribute nameAttribute = EcoreFactory.eINSTANCE.createEAttribute();
 		nameAttribute.setName("name");
 		eClass.getEStructuralFeatures().add(nameAttribute);
-		EDataType singleRefType = EcorePackage.Literals.ESTRING;
-		((InternalEObject) singleRefType).eSetProxyURI(EcoreUtil.getURI(singleRefType));
+		EDataType singleRefType = EcoreFactory.eINSTANCE.createEDataType();
+		((InternalEObject) singleRefType).eSetProxyURI(EcoreUtil.getURI(EcorePackage.Literals.ESTRING));
 		nameAttribute.setEType(singleRefType);
 
 		assertTrue(multiRefType.eIsProxy());
