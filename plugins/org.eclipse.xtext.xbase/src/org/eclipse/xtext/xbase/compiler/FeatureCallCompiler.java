@@ -141,12 +141,11 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 //		b.append(";");
 	}
 	
-	//TODO remove me!
 	protected void prepareExpression(XExpression arg, IAppendable b) {
 		if (arg instanceof XAbstractFeatureCall && !(((XAbstractFeatureCall)arg).getFeature() instanceof JvmField) && !isVariableDeclarationRequired(arg,b)) {
 			JvmTypeReference expectedType = getTypeProvider().getExpectedType(arg);
 			JvmTypeReference type = getTypeProvider().getType(arg);
-			if (! jvmConformance.isConformant( expectedType, type ) ) {
+			if (expectedType != null && !jvmConformance.isConformant( expectedType, type ) ) {
 				String varName = getVarName(((XAbstractFeatureCall) arg).getFeature(), b);
 				String finalVariable = b.declareVariable(Tuples.create("Convertable", arg), "typeConverted_" + varName);
 				b.append("\n")
