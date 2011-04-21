@@ -10,7 +10,7 @@ import xtend.tutorial.util.Shape;
 public class Xtend04_ControlStructures {
   
   public int ifExpression(final String param) {
-    int _xifexpression = (int)-1;
+    int _xifexpression = (int) 0;
     final String typeConverted_param = (String)param;
     boolean _operator_notEquals = ObjectExtensions.operator_notEquals(typeConverted_param, null);
     if (_operator_notEquals) {

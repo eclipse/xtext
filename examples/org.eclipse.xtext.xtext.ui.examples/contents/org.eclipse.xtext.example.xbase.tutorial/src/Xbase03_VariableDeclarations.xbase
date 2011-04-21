@@ -30,8 +30,8 @@ val String s = "my String"
 {
 	{
 		{
-			val s = 'foo'
-			s
+			val s1 = 'foo'
+			s + s1
 		}
 	}
 }

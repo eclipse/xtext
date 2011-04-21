@@ -5,6 +5,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
@@ -32,7 +33,7 @@ public class DomainmodelGenerator implements IGenerator {
     for (EObject element : _allContentsIterable) {
       if ((element instanceof org.eclipse.xtext.example.domainmodel.domainmodel.Entity)) {
         {
-          final Entity entity = ((org.eclipse.xtext.example.domainmodel.domainmodel.Entity) element);
+          final Entity entity = ((Entity) element);
           String _fileName = this.generatorExtensions.fileName(entity);
           StringConcatenation _compile = this.compile(entity);
           fsa.generateFile(_fileName, _compile);
@@ -115,7 +116,7 @@ public class DomainmodelGenerator implements IGenerator {
       String _xifexpression_1 = null;
       JvmParameterizedTypeReference _superType_1 = e.getSuperType();
       JvmType _type = _superType_1.getType();
-      boolean _isInterface = ((org.eclipse.xtext.common.types.JvmGenericType) _type).isInterface();
+      boolean _isInterface = ((JvmGenericType) _type).isInterface();
       if (_isInterface) {
         _xifexpression_1 = "implements ";
       } else {

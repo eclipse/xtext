@@ -99,7 +99,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       for (Feature f : _features) {
         this.transform(f, jvmClass);
       }
-      ArrayList<JvmDeclaredType> _newArrayList = CollectionLiterals.<JvmDeclaredType>newArrayList(((org.eclipse.xtext.common.types.JvmDeclaredType) jvmClass));
+      ArrayList<JvmDeclaredType> _newArrayList = CollectionLiterals.<JvmDeclaredType>newArrayList(((JvmDeclaredType) jvmClass));
       _xblockexpression = (_newArrayList);
     }
     return _xblockexpression;

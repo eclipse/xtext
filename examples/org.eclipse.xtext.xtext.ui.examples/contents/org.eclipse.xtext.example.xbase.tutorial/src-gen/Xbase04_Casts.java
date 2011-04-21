@@ -5,7 +5,7 @@ public class Xbase04_Casts {
 		
 		{
 		  final CharSequence s = "foo";
-		  ((java.lang.String) s).length();
+		  ((String) s).length();
 		}
 	}
 }

@@ -32,7 +32,7 @@ public class PureXbaseGenerator implements IGenerator {
     String _operator_plus = StringExtensions.operator_plus(_name, ".java");
     EList<EObject> _contents = resource.getContents();
     EObject _head = IterableExtensions.<EObject>head(_contents);
-    StringConcatenation _generateMain = this.generateMain(((org.eclipse.xtext.purexbase.pureXbase.Model) _head));
+    StringConcatenation _generateMain = this.generateMain(((Model) _head));
     fsa.generateFile(_operator_plus, _generateMain);
   }
   

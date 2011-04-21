@@ -40,7 +40,7 @@ public class Xtend02_SimpleExpressions {
   }
   
   public String casts() {
-    String _string = ((java.lang.String) null).toString();
+    String _string = ((String) null).toString();
     return _string;
   }
   

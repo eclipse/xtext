@@ -324,7 +324,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
               return ((Integer)_max);
             }
           };
-        Integer _fold = IterableExtensions.<EClass, Integer>fold(_accessedClasses, ((java.lang.Integer) ((Integer)0)), _function);
+        Integer _fold = IterableExtensions.<EClass, Integer>fold(_accessedClasses, ((Integer) ((Integer)0)), _function);
         final Integer width = _fold;
         _builder.newLineIfNotEmpty();
         {
