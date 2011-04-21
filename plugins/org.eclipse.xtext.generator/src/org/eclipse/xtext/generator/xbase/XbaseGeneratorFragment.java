@@ -140,7 +140,9 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType("org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider.ReferenceProposalCreator",
 						"org.eclipse.xtext.xbase.ui.contentassist.XbaseReferenceProposalCreator")
 				.addTypeToType("org.eclipse.jface.text.contentassist.IContentAssistProcessor", 
-						"org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor");
+						"org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor")
+				.addTypeToType("org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator", 
+						"org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingCalculator");
 		if (useInferredJvmModel) {
 			// rename refactoring
 			bindFactory = bindFactory
