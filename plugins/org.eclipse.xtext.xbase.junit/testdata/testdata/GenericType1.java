@@ -14,6 +14,13 @@ public class GenericType1<T> {
 	
 	private T t;
 	
+	public GenericType1(T t) {
+		this.t = t;
+	}
+	
+	public GenericType1() {
+	}
+	
 	public boolean operator_add(T t) {
 		boolean result = this.t == null;
 		this.t = t;
@@ -22,5 +29,9 @@ public class GenericType1<T> {
 	
 	public T get() {
 		return t;
+	}
+	
+	public void set(T t) {
+		this.t = t;
 	}
 }
