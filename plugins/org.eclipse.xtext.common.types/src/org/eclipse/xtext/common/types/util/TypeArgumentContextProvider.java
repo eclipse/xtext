@@ -22,7 +22,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstraintOwner;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -145,7 +147,17 @@ public class TypeArgumentContextProvider {
 			return context;
 		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
 		map.putAll(Multimaps.forMap(context.getContextMap()));
-		map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(operation, null, ignoreEmptyVarArgs, actualArgumentTypes)));
+		map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(operation, operation.getReturnType(), null, ignoreEmptyVarArgs, actualArgumentTypes)));
+		Map<JvmTypeParameter, JvmTypeReference> result = findBestMatches(map);
+		return get(result);
+	}
+	
+	public TypeArgumentContext injectArgumentTypeContext(TypeArgumentContext context, JvmConstructor operation, JvmTypeReference createdResult, boolean ignoreEmptyVarArgs, JvmTypeReference ... actualArgumentTypes) {
+		if (actualArgumentTypes.length == 0 && (!operation.isVarArgs() || ignoreEmptyVarArgs))
+			return context;
+		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
+		map.putAll(Multimaps.forMap(context.getContextMap()));
+		map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(operation, createdResult, null, ignoreEmptyVarArgs, actualArgumentTypes)));
 		Map<JvmTypeParameter, JvmTypeReference> result = findBestMatches(map);
 		return get(result);
 	}
@@ -155,7 +167,17 @@ public class TypeArgumentContextProvider {
 			return context;
 		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
 		map.putAll(Multimaps.forMap(context.getContextMap()));
-		map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(operation, expectedType, (JvmTypeReference[]) null)));
+		map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(operation, operation.getReturnType(), expectedType, (JvmTypeReference[]) null)));
+		Map<JvmTypeParameter, JvmTypeReference> result = findBestMatches(map);
+		return get(result);
+	}
+	
+	public TypeArgumentContext injectExpectedTypeContext(TypeArgumentContext context, JvmConstructor constructor, JvmTypeReference createdResult, JvmTypeReference expectedType) {
+		if (expectedType == null)
+			return context;
+		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
+		map.putAll(Multimaps.forMap(context.getContextMap()));
+		map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(constructor, createdResult, expectedType, (JvmTypeReference[]) null)));
 		Map<JvmTypeParameter, JvmTypeReference> result = findBestMatches(map);
 		return get(result);
 	}
@@ -165,7 +187,7 @@ public class TypeArgumentContextProvider {
 		if (receiverType!=null) {
 			map.putAll(Multimaps.forMap(resolveReceiver(receiverType)));
 		}
-		map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(op, expectedReturnType, actualArgumentTypes)));
+		map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(op, op.getReturnType(), expectedReturnType, actualArgumentTypes)));
 		Map<JvmTypeParameter, JvmTypeReference> result = findBestMatches(map);
 		return get(result);
 	}
@@ -190,14 +212,14 @@ public class TypeArgumentContextProvider {
 		return findBestMatches(context);
 	}
 	
-	public Map<JvmTypeParameter,JvmTypeReference> resolveInferredMethodTypeArgContext(JvmFeature feature, JvmTypeReference expectation, JvmTypeReference... argumentTypes) {
-		return resolveInferredMethodTypeArgContext(feature, expectation, false, argumentTypes);
+	public Map<JvmTypeParameter,JvmTypeReference> resolveInferredMethodTypeArgContext(JvmFeature feature, JvmTypeReference returnType, JvmTypeReference expectation, JvmTypeReference... argumentTypes) {
+		return resolveInferredMethodTypeArgContext(feature, returnType, expectation, false, argumentTypes);
 	}
 	
-	public Map<JvmTypeParameter,JvmTypeReference> resolveInferredMethodTypeArgContext(JvmFeature feature, JvmTypeReference expectation, boolean ignoreEmptyVarArgs, JvmTypeReference... argumentTypes) {
+	public Map<JvmTypeParameter,JvmTypeReference> resolveInferredMethodTypeArgContext(JvmFeature feature, JvmTypeReference returnType, JvmTypeReference expectation, boolean ignoreEmptyVarArgs, JvmTypeReference... argumentTypes) {
 		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
-		if (feature instanceof JvmOperation) {
-			JvmOperation op = (JvmOperation) feature;
+		if (feature instanceof JvmExecutable) {
+			JvmExecutable op = (JvmExecutable) feature;
 			if (argumentTypes != null) {
 				// check arguments
 				int paramCount = op.getParameters().size();
@@ -238,8 +260,8 @@ public class TypeArgumentContextProvider {
 				}
 			}
 			//try infer from the context type
-			if (expectation != null) {
-				resolve(op.getReturnType(), expectation, map, true);
+			if (expectation != null && returnType != null) {
+				resolve(returnType, expectation, map, true);
 			}
 		}
 		return findBestMatches(map);

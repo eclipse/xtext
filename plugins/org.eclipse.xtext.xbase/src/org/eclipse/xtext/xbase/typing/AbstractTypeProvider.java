@@ -130,7 +130,8 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		if (reference instanceof JvmParameterizedTypeReference) {
 			if (rawType)
 				return true;
-			for(JvmTypeReference argument: ((JvmParameterizedTypeReference) reference).getArguments()) {
+			JvmParameterizedTypeReference parameterized = (JvmParameterizedTypeReference) reference;
+			for(JvmTypeReference argument: parameterized.getArguments()) {
 				if (!isResolved(argument, rawType))
 					return false;
 			}

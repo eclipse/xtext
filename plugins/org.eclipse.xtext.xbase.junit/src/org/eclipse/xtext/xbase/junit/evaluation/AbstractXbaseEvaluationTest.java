@@ -1300,6 +1300,45 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	
 	public void testBug343144_06() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(3), 
-		"{ val i = 0 newArrayList('ab', 'abc').fold(i, [max, s | Math::max(s.length, max)]) }");
+			"{ val i = 0 newArrayList('ab', 'abc').fold(i, [max, s | Math::max(s.length, max)]) }");
+	}
+	
+	public void testBug342434_01() throws Exception {
+		assertEvaluatesTo("baz", 
+			"{\n" + 
+			"    val x = newArrayList('foo','bar','baz').toArray\n" + 
+			"    val arrayAccess = new testdata.ArrayClient2<Object>(x)\n" + 
+			"    arrayAccess.set(1,arrayAccess.get(0))\n" + 
+			"    return arrayAccess.get(2)\n" + 
+			"}");
+	}
+	
+	// TODO fix type parameter resolution in array types 
+//	public void testBug342434_02() throws Exception {
+//		assertEvaluatesTo("baz", 
+//				"{\n" + 
+//				"    val x = newArrayList('foo','bar','baz').toArray\n" + 
+//				"    val arrayAccess = new testdata.ArrayClient2(x)\n" + 
+//				"    arrayAccess.set(1,arrayAccess.get(0))\n" + 
+//				"    return arrayAccess.get(2)\n" + 
+//		"}");
+//	}
+	
+	public void testBug342434_03() throws Exception {
+		assertEvaluatesTo("foo", 
+			"{\n" + 
+			"    val x = new testdata.GenericType1('foo')\n" + 
+			"    val testdata.GenericType1<String> y = x\n" + 
+			"    y.get\n" + 
+			"}");
+	}
+	
+	public void testBug342434_04() throws Exception {
+		assertEvaluatesTo("foo", 
+			"{\n" + 
+			"    val testdata.GenericType1<String> x = new testdata.GenericType1()\n" + 
+			"    x.set('foo')\n" + 
+			"    x.get\n" + 
+			"}");
 	}
 }

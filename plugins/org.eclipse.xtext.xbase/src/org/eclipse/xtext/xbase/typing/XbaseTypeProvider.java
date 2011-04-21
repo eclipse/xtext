@@ -27,6 +27,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
@@ -35,6 +36,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVoid;
@@ -220,13 +222,18 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 
 	protected JvmTypeReference[] getArgumentTypes(XAbstractFeatureCall expr, boolean rawType) {
 		List<XExpression> arguments = featureCall2javaMapping.getActualArguments(expr);
-		JvmTypeReference[] argTypes = new JvmTypeReference[arguments.size()];
-		if (arguments.isEmpty())
+		JvmExecutable executable = (JvmExecutable) expr.getFeature();
+		return getArgumentTypes(executable, arguments, rawType);
+	}
+
+	protected JvmTypeReference[] getArgumentTypes(JvmExecutable executable, List<XExpression> actualArguments,
+			boolean rawType) {
+		JvmTypeReference[] argTypes = new JvmTypeReference[actualArguments.size()];
+		if (actualArguments.isEmpty())
 			return argTypes;
-		JvmOperation op = (JvmOperation) expr.getFeature();
 		for (int i = 0; i < argTypes.length; i++) {
-			XExpression arg = arguments.get(i);
-			JvmFormalParameter parameter = getParam(op, i);
+			XExpression arg = actualArguments.get(i);
+			JvmFormalParameter parameter = getParam(executable, i);
 			if (parameter != null) {
 				final JvmTypeReference type = getType(arg, rawType);
 				if (type != null) {
@@ -243,13 +250,13 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return argTypes;
 	}
 
-	protected JvmFormalParameter getParam(JvmOperation op, int i) {
-		if (op.getParameters().size() <= i) {
-			if (op.isVarArgs())
-				return op.getParameters().get(op.getParameters().size() - 1);
+	protected JvmFormalParameter getParam(JvmExecutable executable, int i) {
+		if (executable.getParameters().size() <= i) {
+			if (executable.isVarArgs())
+				return executable.getParameters().get(executable.getParameters().size() - 1);
 			return null;
 		}
-		return op.getParameters().get(i);
+		return executable.getParameters().get(i);
 	}
 
 	protected JvmTypeReference getReceiverType(XAbstractFeatureCall expr, boolean rawType) {
@@ -503,24 +510,71 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return getPrimitiveVoid(object);
 	}
 
-	protected JvmTypeReference _type(XConstructorCall object, boolean rawType) {
-		JvmConstructor constructor = object.getConstructor();
-		if (constructor.eIsProxy())
+	protected JvmTypeReference _type(XConstructorCall constructorCall, boolean rawType) {
+		JvmConstructor constructor = constructorCall.getConstructor();
+		if (constructor == null || constructor.eIsProxy())
 			return null;
-		JvmParameterizedTypeReference type = (JvmParameterizedTypeReference) getTypeForIdentifiable(
-				object.getConstructor(), rawType);
-		if (rawType)
-			return type;
-		if (!object.getTypeArguments().isEmpty()) {
-			type = EcoreUtil2.clone(type);
-			for (JvmTypeReference typeArg : object.getTypeArguments()) {
-				JvmTypeReference copiedArgument = EcoreUtil2.clone(typeArg);
-				type.getArguments().add(copiedArgument);
-			}
+		JvmTypeReference constructorResultType = getTypeForIdentifiable(constructor, rawType);
+		if (isResolved(constructorResultType, rawType)) {
+			return constructorResultType;
 		}
-		return type;
+		rawType = false;
+		JvmTypeParameterDeclarator typeParameterDeclarator = (JvmTypeParameterDeclarator) constructorResultType.getType();
+		if (constructorCall.getTypeArguments().isEmpty() && (!constructor.getTypeParameters().isEmpty() || !typeParameterDeclarator.getTypeParameters().isEmpty())) {
+			TypeArgumentContext context = getTypeArgumentContextProvider().getNullContext();
+			JvmTypeReference result = constructorResultType;
+			JvmTypeReference[] argumentTypes = getArgumentTypes(constructor, constructorCall.getArguments(), rawType);
+			if (argumentTypes.length != 0 || constructor.isVarArgs()) {
+				context = getTypeArgumentContextProvider().injectArgumentTypeContext(context, constructor, constructorResultType, true, argumentTypes);
+				result = context.getUpperBound(constructorResultType, constructorCall);
+				if (isResolved(result, rawType)) {
+					return result;
+				}
+			}
+			JvmTypeReference expectedType = getExpectedType(constructorCall, rawType);
+			if (expectedType != null) {
+				context = getTypeArgumentContextProvider().injectExpectedTypeContext(context, constructor, constructorResultType, expectedType);
+				result = context.getUpperBound(constructorResultType, constructorCall);
+				if (isResolved(result, rawType)) {
+					return result;
+				}
+			}
+			// try again to resolve the type parameters, this time with empty var args
+			if (constructor.isVarArgs() && constructor.getParameters().size() > argumentTypes.length) {
+				context = getTypeArgumentContextProvider().injectArgumentTypeContext(context, constructor, constructorResultType, false, argumentTypes);
+				result = context.getUpperBound(constructorResultType, constructorCall);
+				if (isResolved(result, rawType)) {
+					return result;
+				}
+			}
+			if (!isResolved(result, rawType)) {
+				if (result instanceof JvmTypeParameter) {
+					JvmTypeParameter type = (JvmTypeParameter) result.getType();
+					JvmTypeReference upperBound = null;
+					for (JvmTypeConstraint constraint : type.getConstraints()) {
+						if (constraint instanceof JvmUpperBound) {
+							if (upperBound != null) {
+								return getType(constructorCall, false);
+							}
+							JvmTypeReference reference = constraint.getTypeReference();
+							upperBound = context.getUpperBound(reference, constructorCall);
+						}
+					}
+					if (upperBound != null && !(upperBound.getType() instanceof JvmTypeParameter))
+						return upperBound;
+					return getType(constructorCall, false);
+				}
+			}
+			result = context.getUpperBound(constructorResultType, constructor);
+			return result;
+		} else {
+			TypeArgumentContext context = getTypeArgumentContextProvider().getExplicitMethodInvocationContext(
+					typeParameterDeclarator,
+					null, constructorCall.getTypeArguments());
+			return context.getUpperBound(constructorResultType, constructor);
+		}
 	}
-
+	
 	protected JvmTypeReference _type(XBooleanLiteral object, boolean rawType) {
 		return getTypeReferences().getTypeForName(Boolean.TYPE, object);
 	}
@@ -808,7 +862,13 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 
 	protected JvmTypeReference _typeForIdentifiable(JvmConstructor constructor, boolean rawType) {
 		JvmParameterizedTypeReference reference = factory.createJvmParameterizedTypeReference();
-		reference.setType(constructor.getDeclaringType());
+		JvmDeclaredType declaringType = constructor.getDeclaringType();
+		reference.setType(declaringType);
+		if (declaringType instanceof JvmGenericType) {
+			for(JvmTypeParameter typeParam: ((JvmGenericType)declaringType).getTypeParameters()) {
+				reference.getArguments().add(getTypeReferences().createTypeRef(typeParam));
+			}
+		}
 		return reference;
 	}
 
