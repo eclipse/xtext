@@ -483,10 +483,18 @@ public class IterableExtensions {
 	 * from the previous result together with the third element and so on. In other words, the previous result of each
 	 * step is taken and passed together with the next element to the combinator function.
 	 * </p>
-	 * <p>If the iterable is empty, <code>null</code> is returned.</p>
+	 * <p>
+	 * If the iterable is empty, <code>null</code> is returned.
+	 * </p>
+	 * <p>
+	 * More formally, given an iterable {@code [a, b, c, d]} and a function {@code f}, the result of {@code reduce} is
+	 * <code>f(f(f(a, b), c), d)</code>
+	 * </p>
 	 * 
-	 * @param iterable the to-be-reduced iterable. May not be <code>null</code>.
-	 * @param function the combinator function. May not be <code>null</code>.
+	 * @param iterable
+	 *            the to-be-reduced iterable. May not be <code>null</code>.
+	 * @param function
+	 *            the combinator function. May not be <code>null</code>.
 	 * @return the last result of the applied combinator function or <code>null</code> for the empty input.
 	 */
 	public static <T> T reduce(Iterable<T> iterable, Function2<? super T, ? super T, ? extends T> function) {
@@ -496,7 +504,7 @@ public class IterableExtensions {
 		if (iterator.hasNext()) {
 			T result = iterator.next();
 			while(iterator.hasNext()) {
-				result = function.apply(iterator.next(), result);
+				result = function.apply(result, iterator.next());
 			}
 			return result;
 		} else {
@@ -506,29 +514,41 @@ public class IterableExtensions {
 	
 	/**
 	 * <p>
-	 * Applies the combinator {@code function} to all elements of the iterable in turn and uses {@code seed} as
-	 * the start value.
+	 * Applies the combinator {@code function} to all elements of the iterable in turn and uses {@code seed} as the
+	 * start value.
 	 * </p>
 	 * <p>
 	 * One of the function parameters is an element of the iterable, and the other is the result of previous application
-	 * of the function. The seed of the operation is explicitly passed to {@link #fold(Iterable, Object, Function2) fold}.
-	 * The first computed value is the result of the applied function for {@code seed} and the first element of the iterable.
-     * This intermediate result together with the second element of the iterable produced the next result and so on.
+	 * of the function. The seed of the operation is explicitly passed to {@link #fold(Iterable, Object, Function2)
+	 * fold}. The first computed value is the result of the applied function for {@code seed} and the first element of
+	 * the iterable. This intermediate result together with the second element of the iterable produced the next result
+	 * and so on.
 	 * </p>
-	 * <p>{@link #fold(Iterable, Object, Function2) fold} is similar to {@link #reduce(Iterable, Function2) reduce} but allows
-	 * a {@code seed} value and the combinator {@code function} may be asymmetric. It takes {@code T and R} and returns {@code R}.
-	 * <p>If the iterable is empty, <code>seed</code> is returned.</p>
+	 * <p>
+	 * {@link #fold(Iterable, Object, Function2) fold} is similar to {@link #reduce(Iterable, Function2) reduce} but
+	 * allows a {@code seed} value and the combinator {@code function} may be asymmetric. It takes {@code T and R} and
+	 * returns {@code R}.
+	 * <p>
+	 * If the iterable is empty, <code>seed</code> is returned.
+	 * </p>
+	 * <p>
+	 * More formally, given an iterable {@code [a, b, c, d]}, a seed {@code initial} and a function {@code f}, the
+	 * result of {@code fold} is <code>f(f(f(f(initial, a), b), c), d)</code>
+	 * </p>
 	 * 
-	 * @param iterable the to-be-folded iterable. May not be <code>null</code>.
-	 * @param seed the initial value. May be <code>null</code>.
-	 * @param function the combinator function. May not be <code>null</code>.
+	 * @param iterable
+	 *            the to-be-folded iterable. May not be <code>null</code>.
+	 * @param seed
+	 *            the initial value. May be <code>null</code>.
+	 * @param function
+	 *            the combinator function. May not be <code>null</code>.
 	 * @return the last result of the applied combinator function or <code>seed</code> for the empty input.
 	 */
-	public static <T, R> R fold(Iterable<T> iterable, R seed, Function2<? super T, ? super R, ? extends R> function) {
+	public static <T, R> R fold(Iterable<T> iterable, R seed, Function2<? super R, ? super T, ? extends R> function) {
 		R result = seed;
 		Iterator<T> iterator = iterable.iterator();
 		while(iterator.hasNext()) {
-			result = function.apply(iterator.next(), result);
+			result = function.apply(result, iterator.next());
 		}
 		return result;
 	}

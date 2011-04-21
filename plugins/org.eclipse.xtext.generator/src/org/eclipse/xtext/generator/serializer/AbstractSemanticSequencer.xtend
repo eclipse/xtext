@@ -109,14 +109,14 @@ class AbstractSemanticSequencer extends GeneratedFile {
 	'''.toString }
 	
 	genMethodFindContext() '''
-		public Iterable<EObject> findContexts(EObject semanitcObject, Iterable<EObject> contextCandidates) {
+		public Iterable<EObject> findContexts(EObject semanticObject, Iterable<EObject> contextCandidates) {
 			«var pkgi = 0»
 			«FOR pkg:accessedPackages  /* ITERATOR i */»
-				«IF (pkgi = pkgi + 1) > 1 /* !i.firstIteration */»else «ENDIF»if(semanitcObject.eClass().getEPackage() == «pkg.genPackage.packageInterfaceName».eINSTANCE) 
-					switch(semanitcObject.eClass().getClassifierID()) {
-						«val width = pkg.accessedClasses.fold(0 as Integer, [type, max | Math::max(type.genIntLiteral.length, max)])»
+				«IF (pkgi = pkgi + 1) > 1 /* !i.firstIteration */»else «ENDIF»if(semanticObject.eClass().getEPackage() == «pkg.genPackage.packageInterfaceName».eINSTANCE) 
+					switch(semanticObject.eClass().getClassifierID()) {
+						«val width = pkg.accessedClasses.fold(0, [max, type | Math::max(type.genIntLiteral.length, max)])»
 						«FOR type:pkg.accessedClasses»
-							case «type.genIntLiteral»:«{type.genIntLiteral.length..width}.fold("",[i,s|s + " "])»return «IF type.accessedContexts.size == 1»singleton((EObject)grammarAccess.«type.accessedContexts.iterator.next.gaAccessor()»)«ELSE»findContexts((«type.getGenClass().interfaceName»)semanitcObject, contextCandidates)«ENDIF»;
+							case «type.genIntLiteral»:«(type.genIntLiteral.length..width).fold("",[s, i|s + " "])»return «IF type.accessedContexts.size == 1»singleton((EObject)grammarAccess.«type.accessedContexts.iterator.next.gaAccessor()»)«ELSE»findContexts((«type.getGenClass().interfaceName»)semanticObject, contextCandidates)«ENDIF»;
 						«ENDFOR»
 					}
 			«ENDFOR»	
@@ -130,8 +130,8 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		 * Potential Result Contexts:
 		 *     «FOR ctx:type.accessedContexts SEPARATOR "\n*     "»«ctx.gaAccessor»«ENDFOR»
 		 */
-		protected Iterable<EObject> findContexts(«type.genClass().interfaceName» semanitcObject, Iterable<EObject> contextCandidates) {
-			return genericSequencer.findContexts(semanitcObject, contextCandidates);
+		protected Iterable<EObject> findContexts(«type.genClass().interfaceName» semanticObject, Iterable<EObject> contextCandidates) {
+			return genericSequencer.findContexts(semanticObject, contextCandidates);
 		}
 	'''
 	
