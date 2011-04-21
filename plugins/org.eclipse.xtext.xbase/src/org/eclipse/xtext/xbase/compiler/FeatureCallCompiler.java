@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.compiler;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
@@ -28,6 +27,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
+import org.eclipse.xtext.xbase.typing.JvmOnlyTypeConformanceComputer;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
 import com.google.common.collect.Lists;
@@ -46,6 +46,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	
 	@Inject
 	private XExpressionHelper expressionHelper; 
+	
+	@Inject
+	private JvmOnlyTypeConformanceComputer jvmConformance;
 
 	protected void _toJavaStatement(final XAbstractFeatureCall expr, final IAppendable b, boolean isReferenced) {
 		if (isSpreadingMemberFeatureCall(expr)) {
@@ -143,8 +146,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		if (arg instanceof XAbstractFeatureCall && !(((XAbstractFeatureCall)arg).getFeature() instanceof JvmField) && !isVariableDeclarationRequired(arg,b)) {
 			JvmTypeReference expectedType = getTypeProvider().getExpectedType(arg);
 			JvmTypeReference type = getTypeProvider().getType(arg);
-			//TODO use JvmConformanceComputer (i.e. without Xbase conformance)
-			if (expectedType!=null && !EcoreUtil.equals(expectedType, type)) {
+			if (! jvmConformance.isConformant( expectedType, type ) ) {
 				String varName = getVarName(((XAbstractFeatureCall) arg).getFeature(), b);
 				String finalVariable = b.declareVariable(Tuples.create("Convertable", arg), "typeConverted_" + varName);
 				b.append("\n")
