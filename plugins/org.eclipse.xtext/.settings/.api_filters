@@ -1,58 +1,65 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <component id="org.eclipse.xtext" version="2">
-    <resource path="META-INF/MANIFEST.MF">
-        <filter id="924844039">
-            <message_arguments>
-                <message_argument value="2.0.0.qualifier"/>
-                <message_argument value="2.0.0.v201104111605"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/parser/antlr/XtextParser.java" type="org.eclipse.xtext.parser.antlr.XtextParser">
-        <filter id="643842064">
-            <message_arguments>
-                <message_argument value="InternalXtextParser"/>
-                <message_argument value="XtextParser"/>
-                <message_argument value="createParser(XtextTokenStream)"/>
-            </message_arguments>
-        </filter>
-        <filter id="643842064">
-            <message_arguments>
-                <message_argument value="XtextGrammarAccess"/>
-                <message_argument value="XtextParser"/>
-                <message_argument value="getGrammarAccess()"/>
-            </message_arguments>
-        </filter>
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="XtextGrammarAccess"/>
-                <message_argument value="XtextParser"/>
-                <message_argument value="setGrammarAccess(XtextGrammarAccess)"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/parsetree/reconstr/Serializer.java" type="org.eclipse.xtext.parsetree.reconstr.Serializer">
-        <filter id="576725006">
-            <message_arguments>
-                <message_argument value="ISerializer"/>
-                <message_argument value="Serializer"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/resource/XtextResource.java" type="org.eclipse.xtext.resource.XtextResource">
-        <filter id="643842064">
-            <message_arguments>
-                <message_argument value="ISerializer"/>
-                <message_argument value="XtextResource"/>
-                <message_argument value="getSerializer()"/>
-            </message_arguments>
-        </filter>
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="ISerializer"/>
-                <message_argument value="XtextResource"/>
-                <message_argument value="setSerializer(ISerializer)"/>
-            </message_arguments>
-        </filter>
-    </resource>
+<resource path="META-INF/MANIFEST.MF">
+<filter id="924844039">
+<message_arguments>
+<message_argument value="2.0.0.qualifier"/>
+<message_argument value="2.0.0.v201104111605"/>
+</message_arguments>
+</filter>
+</resource>
+<resource path="src-gen/org/eclipse/xtext/parser/antlr/XtextParser.java" type="org.eclipse.xtext.parser.antlr.XtextParser">
+<filter id="643842064">
+<message_arguments>
+<message_argument value="InternalXtextParser"/>
+<message_argument value="XtextParser"/>
+<message_argument value="createParser(XtextTokenStream)"/>
+</message_arguments>
+</filter>
+<filter id="643842064">
+<message_arguments>
+<message_argument value="XtextGrammarAccess"/>
+<message_argument value="XtextParser"/>
+<message_argument value="getGrammarAccess()"/>
+</message_arguments>
+</filter>
+<filter id="643846161">
+<message_arguments>
+<message_argument value="XtextGrammarAccess"/>
+<message_argument value="XtextParser"/>
+<message_argument value="setGrammarAccess(XtextGrammarAccess)"/>
+</message_arguments>
+</filter>
+</resource>
+<resource path="src/org/eclipse/xtext/parsetree/reconstr/Serializer.java" type="org.eclipse.xtext.parsetree.reconstr.Serializer">
+<filter id="576725006">
+<message_arguments>
+<message_argument value="ISerializer"/>
+<message_argument value="Serializer"/>
+</message_arguments>
+</filter>
+</resource>
+<resource path="src/org/eclipse/xtext/resource/XtextResource.java" type="org.eclipse.xtext.resource.XtextResource">
+<filter id="643842064">
+<message_arguments>
+<message_argument value="ISerializer"/>
+<message_argument value="XtextResource"/>
+<message_argument value="getSerializer()"/>
+</message_arguments>
+</filter>
+<filter id="643846161">
+<message_arguments>
+<message_argument value="ISerializer"/>
+<message_argument value="XtextResource"/>
+<message_argument value="setSerializer(ISerializer)"/>
+</message_arguments>
+</filter>
+</resource>
+<resource path="src/org/eclipse/xtext/resource/impl/ListBasedDiagnosticConsumer.java" type="org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer$Internal">
+<filter id="337686583">
+<message_arguments>
+<message_argument value="org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer.Internal"/>
+</message_arguments>
+</filter>
+</resource>
 </component>

@@ -24,7 +24,7 @@ import org.eclipse.xtext.util.Tuples;
  */
 public class ListBasedDiagnosticConsumer implements IDiagnosticConsumer {
 
-	public class Internal {
+	protected static class Internal {
 	
 		private final List<Diagnostic> diagnostics;
 		
