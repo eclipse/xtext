@@ -191,6 +191,11 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(file);
 	}
 	
+	public void testBug343585() throws Exception {
+		XtendFile file = file("class Test extends Test {}");
+		assertNoExceptions(file);
+	}
+	
 	protected void assertNoExceptions(EObject object) {
 		Resource resource = object.eResource();
 		if (resource instanceof LazyLinkingResource)
