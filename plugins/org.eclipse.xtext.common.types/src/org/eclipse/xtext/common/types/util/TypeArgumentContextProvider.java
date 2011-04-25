@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -46,6 +47,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 public class TypeArgumentContextProvider {
@@ -208,7 +210,7 @@ public class TypeArgumentContextProvider {
 			return emptyMap();
 		}
 		Multimap<JvmTypeParameter, JvmTypeReference> context = LinkedHashMultimap.create();
-		internalComputeContext(contextRef, context);
+		internalComputeContext(contextRef, context, Sets.<JvmType>newHashSet(contextRef.getType()));
 		return findBestMatches(context);
 	}
 	
@@ -348,7 +350,7 @@ public class TypeArgumentContextProvider {
 		return true;
 	}
 
-	protected void internalComputeContext(JvmTypeReference contextRef, Multimap<JvmTypeParameter, JvmTypeReference> context) {
+	protected void internalComputeContext(JvmTypeReference contextRef, Multimap<JvmTypeParameter, JvmTypeReference> context, Set<JvmType> computing) {
 		if (contextRef instanceof JvmParameterizedTypeReference) {
 			JvmParameterizedTypeReference typeRef = (JvmParameterizedTypeReference) contextRef;
 			if (typeRef.getType() instanceof JvmTypeParameterDeclarator) {
@@ -376,8 +378,9 @@ public class TypeArgumentContextProvider {
 			List<JvmTypeReference> superTypes = declaredType.getSuperTypes();
 			if (superTypes.isEmpty())
 				return;
-			for (JvmTypeReference jvmTypeReference : superTypes) {
-				internalComputeContext(jvmTypeReference, context);
+			for (JvmTypeReference superType : superTypes) {
+				if (computing.add(superType.getType()))
+					internalComputeContext(superType, context, computing);
 			}
 		}
 	}
