@@ -83,7 +83,8 @@ public class XtextResource extends ResourceImpl {
 	@Inject
 	private IFragmentProvider fragmentProvider;
 	
-	@Inject@Named(Constants.LANGUAGE_NAME) 
+	@Inject
+	@Named(Constants.LANGUAGE_NAME) 
 	private String languageName;
 	
 	private IFragmentProvider.Fallback fragmentProviderFallback = new IFragmentProvider.Fallback() {
@@ -149,7 +150,6 @@ public class XtextResource extends ResourceImpl {
 		setEncodingFromOptions(options);
 		IParseResult result = parser.parse(new InputStreamReader(inputStream, getEncoding()));
 		updateInternalState(result);
-//		new NodeModelComparator(true).assertEquals((org.eclipse.xtext.nodemodel.impl.CompositeNode) parseResult.getRootNode2().getFirstChild(), parseResult.getRootNode());
 	}
 
 	protected void setEncodingFromOptions(Map<?, ?> options) {
@@ -204,9 +204,6 @@ public class XtextResource extends ResourceImpl {
 			unload(oldParseResult.getRootASTElement());
 			getContents().remove(oldParseResult.getRootASTElement());
 		}
-//		String text = parseResult.getRootNode2().getText();
-//		IParseResult compareWith = parser.parse(new StringReader(text));
-//		new NodeModelComparator(false).assertEquals((org.eclipse.xtext.nodemodel.impl.CompositeNode) parseResult.getRootNode2().getFirstChild(), compareWith.getRootNode());
 		updateInternalState(parseResult);
 	}
 
@@ -245,15 +242,15 @@ public class XtextResource extends ResourceImpl {
 	}
 
 	protected void doLinking() {
-		if (parseResult == null)
-			return;
-		if (parseResult.getRootASTElement() == null && !validationDisabled)
+		if (parseResult == null || parseResult.getRootASTElement() == null)
 			return;
 
 		final ListBasedDiagnosticConsumer consumer = new ListBasedDiagnosticConsumer();
 		linker.linkModel(parseResult.getRootASTElement(), consumer);
-		getErrors().addAll(consumer.getResult(Severity.ERROR));
-		getWarnings().addAll(consumer.getResult(Severity.WARNING));
+		if (!validationDisabled) {
+			getErrors().addAll(consumer.getResult(Severity.ERROR));
+			getWarnings().addAll(consumer.getResult(Severity.WARNING));
+		}
 	}
 
 	@Override
@@ -290,11 +287,12 @@ public class XtextResource extends ResourceImpl {
 	}
 
 	/**
-	 * Creates {@link Diagnostic}s from {@link SyntaxError}s in {@link ParseResult}
+	 * Creates {@link Diagnostic diagnostics} from {@link SyntaxError syntax errors} in {@link ParseResult}.
+	 * No diagnostics will be created if {@link #isValidationDisabled() validation is disabled} for this
+	 * resource.
 	 * 
-	 * @param list
-	 *            of {@link SyntaxError}s
-	 * @return list of {@link Diagnostic}
+	 * @param parseResult the parse result that provides the syntax errors.
+	 * @return list of {@link Diagnostic}. Never <code>null</code>.
 	 */
 	private List<Diagnostic> createDiagnostics(IParseResult parseResult) {
 		if (validationDisabled)

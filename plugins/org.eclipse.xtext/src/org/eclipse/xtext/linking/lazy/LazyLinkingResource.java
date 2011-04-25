@@ -48,7 +48,7 @@ import com.google.inject.Provider;
  */
 public class LazyLinkingResource extends XtextResource {
 
-	private final Logger log = Logger.getLogger(getClass());
+	private static final Logger log = Logger.getLogger(LazyLinkingResource.class);
 
 	@Inject
 	private ILinkingService linkingService;
@@ -250,6 +250,8 @@ public class LazyLinkingResource extends XtextResource {
 	}
 
 	protected void createAndAddDiagnostic(Triple<EObject, EReference, INode> triple) {
+		if (isValidationDisabled())
+			return;
 		DiagnosticMessage message = createDiagnosticMessage(triple);
 		if (message != null) {
 			List<Diagnostic> list = getDiagnosticList(message);
