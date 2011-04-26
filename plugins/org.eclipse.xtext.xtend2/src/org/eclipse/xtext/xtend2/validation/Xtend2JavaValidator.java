@@ -9,7 +9,6 @@ package org.eclipse.xtext.xtend2.validation;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
-import static com.google.common.collect.Sets.*;
 import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
@@ -39,6 +38,7 @@ import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
@@ -67,6 +67,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
@@ -205,33 +206,79 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	}
 
 	@Check
-	public void checkDuplicateAndOverridenFunctions(XtendClass xtendClass) {
+	public void checkDuplicateAndOverriddenFunctions(XtendClass xtendClass) {
 		JvmParameterizedTypeReference typeReference = getTypesFactory().createJvmParameterizedTypeReference();
 		final JvmGenericType inferredType = associations.getInferredType(xtendClass);
 		typeReference.setType(inferredType);
 		TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(typeReference);
-		Set<JvmOperation> checked = newHashSet();
-		for (JvmOperation operation : filter(
-				featureOverridesService.getAllJvmFeatures(inferredType, typeArgumentContext), JvmOperation.class)) {
-			if (operation.getDeclaringType() == inferredType) {
-				checked.add(operation);
-				for (JvmOperation operation2 : inferredType.getDeclaredOperations()) {
-					if (!checked.contains(operation2)) {
-						if (featureOverridesService.isOverridden(operation, operation2, typeArgumentContext, false)) {
-							XtendFunction func1 = associations.getXtendFunction(operation);
-							XtendFunction func2 = associations.getXtendFunction(operation2);
-							error("Duplicate method " + canonicalName(func1), func1, XTEND_MEMBER__NAME,
-									DUPLICATE_METHOD);
-							error("Duplicate method " + canonicalName(func2), func2, XTEND_MEMBER__NAME,
-									DUPLICATE_METHOD);
+		Multimap<Pair<String, List<JvmType>>, JvmOperation> operationsPerSignature = HashMultimap.create();
+		for(JvmOperation operation: inferredType.getDeclaredOperations()) {
+			Pair<String,List<JvmType>> signature = getSignature(operation);
+			operationsPerSignature.put(signature, operation);
+		}
+		for(Collection<JvmOperation> operationsWithSameSignature: operationsPerSignature.asMap().values()) {
+			if (operationsWithSameSignature.size() > 1) {
+				Multimap<String, JvmOperation> operationsPerReadableSignature = HashMultimap.create();
+				for(JvmOperation operation: operationsWithSameSignature) {
+					XtendFunction source = associations.getXtendFunction(operation);
+					String readableSignature = getReadableSignature(source, operation.getParameters());
+					operationsPerReadableSignature.put(readableSignature, operation);
+				}
+				for(Collection<JvmOperation> operationsWithSameReadableSignature: operationsPerReadableSignature.asMap().values()) {
+					if (operationsWithSameReadableSignature.size() > 1) {
+						for(JvmOperation operation: operationsWithSameReadableSignature) {
+							XtendFunction otherSource = associations.getXtendFunction(operation);
+							error("Duplicate method " + getReadableSignature(otherSource, operation.getParameters()) + 
+									" in type " + inferredType.getSimpleName(), 
+									otherSource, XTEND_MEMBER__NAME, DUPLICATE_METHOD);
+						}
+					} else {
+						for(JvmOperation operation: operationsWithSameReadableSignature) {
+							XtendFunction otherSource = associations.getXtendFunction(operation);
+							error("Method  " + getReadableSignature(otherSource, operation.getParameters()) +
+									" has the same erasure " + getReadableErasure(otherSource, operation.getParameters()) +
+									" as another method in type " + inferredType.getSimpleName(), 
+									otherSource, XTEND_MEMBER__NAME, DUPLICATE_METHOD);
 						}
 					}
 				}
-			} else {
+			}
+		}
+		for (JvmOperation operation : filter(
+				featureOverridesService.getAllJvmFeatures(inferredType, typeArgumentContext), JvmOperation.class)) {
+			if (operation.getDeclaringType() != inferredType) {
+				Pair<String,List<JvmType>> signature = getSignature(operation);
+				if (operationsPerSignature.containsKey(signature)) {
+					Collection<JvmOperation> myOperations = operationsPerSignature.get(signature);
+					if (myOperations.size() == 1) {
+						JvmOperation myOperation = Iterables.getOnlyElement(myOperations);
+						if (!featureOverridesService.isOverridden(myOperation, operation, typeArgumentContext, false)) {
+							XtendFunction source = associations.getXtendFunction(myOperation);
+							error("Name clash: The method " + getReadableSignature(source, myOperation.getParameters()) + " of type " +
+									inferredType.getSimpleName() + " has the same erasure as " +
+									// use source with other operations parameters to avoid confusion
+									// due to name transformations in JVM model inference
+									getReadableSignature(source, operation.getParameters()) + " of type " + 
+									operation.getDeclaringType().getSimpleName() +
+									" but does not override it.", source, XTEND_MEMBER__NAME, DUPLICATE_METHOD);
+						}
+					}
+				}
 				if (operation.isAbstract() && !inferredType.isAbstract()) {
-					error("The class " + canonicalName(inferredType)
-							+ " must be defined abstract because it does not implement " + canonicalName(operation),
-							xtendClass, XTEND_CLASS__NAME, CLASS_MUST_BE_ABSTRACT);
+					boolean overridden = false;
+					if (operationsPerSignature.containsKey(signature)) {
+						for(JvmOperation myOperation: operationsPerSignature.get(signature)) {
+							if (featureOverridesService.isOverridden(myOperation, operation, typeArgumentContext, false)) {
+								overridden = true;
+								break;
+							}	
+						}
+					} 
+					if (!overridden) {
+						error("The class " + canonicalName(inferredType)
+							+ " must be defined abstract because it does not implement " + signature,
+							xtendClass, XTEND_CLASS__NAME, CLASS_MUST_BE_ABSTRACT);						
+					}
 				}
 			}
 		}
@@ -285,6 +332,54 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 	
 	protected String canonicalName(JvmIdentifiableElement element) {
 		return (element != null) ? notNull(element.getIdentifier()) : null;
+	}
+	
+	protected Pair<String, List<JvmType>> getSignature(JvmOperation operation) {
+		String name = operation.getSimpleName();
+		List<JvmType> parameterTypes = Lists.newArrayListWithExpectedSize(operation.getParameters().size());
+		for(JvmFormalParameter parameter: operation.getParameters()) {
+			parameterTypes.add(parameter.getParameterType().getType());
+		}
+		return Tuples.create(name, parameterTypes);
+	}
+	
+	protected String getReadableSignature(JvmIdentifiableElement element, List<JvmFormalParameter> parameters) {
+		if (element == null)
+			return "null";
+		StringBuilder result = new StringBuilder(element.getSimpleName());
+		result.append('(');
+		for(int i = 0; i < parameters.size(); i++) {
+			if (i != 0) {
+				result.append(", ");
+			}
+			JvmTypeReference parameterType = parameters.get(i).getParameterType();
+			if (parameterType != null)
+				result.append(parameterType.getSimpleName());
+			else
+				result.append("null");
+		}
+		result.append(')');
+		return result.toString();
+	}
+	
+	protected String getReadableErasure(JvmIdentifiableElement element, List<JvmFormalParameter> parameters) {
+		if (element == null)
+			return "null";
+		StringBuilder result = new StringBuilder(element.getSimpleName());
+		result.append('(');
+		for(int i = 0; i < parameters.size(); i++) {
+			if (i != 0) {
+				result.append(", ");
+			}
+			JvmTypeReference parameterType = parameters.get(i).getParameterType();
+			if (parameterType != null && parameterType.getType() != null)
+				// todo erasure of type parameters with / without upper bound 
+				result.append(parameterType.getType().getSimpleName());
+			else
+				result.append("null");
+		}
+		result.append(')');
+		return result.toString();
 	}
 
 	@Check
