@@ -42,6 +42,12 @@ public class OverrideValidationTest extends AbstractXtend2TestCase {
 		XtendClass xtendClass = clazz("class Foo { bar(String x) {true} bar(String x, int x) {false} }");
 		helper.assertNoError(xtendClass, DUPLICATE_METHOD);
 	}
+	
+	public void testDuplicateMethod_3() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { bar(java.util.List<String> x) {true} bar(java.util.List<Integer> x) {false} }");
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD, "erasure", "List)", "List<String");
+		helper.assertError(xtendClass.getMembers().get(1), XTEND_FUNCTION, DUPLICATE_METHOD, "erasure", "List)", "List<Integer");
+	}
 
 	public void testObsoleteOverride_0() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { override bar() {true} }");
