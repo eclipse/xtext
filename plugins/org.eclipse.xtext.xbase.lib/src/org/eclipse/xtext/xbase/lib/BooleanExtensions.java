@@ -8,17 +8,45 @@
 package org.eclipse.xtext.xbase.lib;
 
 /**
+ * This is an extension library for {@link Boolean booleans}.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
 public class BooleanExtensions {
+	
+	/**
+	 * The logical <code>and</code> (conjunction). This is the equivalent to the java <code>&&</code> operator.
+	 * 
+	 * @param a
+	 *            a boolean value.
+	 * @param b
+	 *            another boolean value.
+	 * @return <code>a && b</code>
+	 */
 	public static boolean operator_and(boolean a, boolean b) {
-		return a&&b;
+		return a && b;
 	}
 
+	/**
+	 * A logical <code>or</code> (disjunction). This is the equivalent to the java <code>||</code> operator.
+	 * 
+	 * @param a
+	 *            a boolean value.
+	 * @param b
+	 *            another boolean value.
+	 * @return <code>a || b</code>
+	 */
 	public static boolean operator_or(boolean a, boolean b) {
-		return a||b;
+		return a || b;
 	}
 
+	/**
+	 * The logical <code>not</code> (negation). This is the equivalent to the java <code>!</code> operator.
+	 * 
+	 * @param b
+	 *            a boolean value.
+	 * @return <code>!b</code>
+	 */
 	public static boolean operator_not(boolean b) {
 		return !b;
 	}
