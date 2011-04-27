@@ -7,9 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.jdt;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
@@ -20,10 +26,13 @@ import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
  */
 public class NullJdtTypeProvider implements IJdtTypeProvider, Resource.Factory {
 
+	private static final Logger log = Logger.getLogger(NullJdtTypeProvider.class);
+	
 	private ResourceSet resourceSet;
 	private TypeURIHelper typeURIHelper;
 
 	public NullJdtTypeProvider(ResourceSet resourceSet) {
+		doLogMessage("Creating NullJdtTypeProvider");
 		this.resourceSet = resourceSet;
 		resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().put(URIHelperConstants.PROTOCOL, this);
 		typeURIHelper = new TypeURIHelper();
@@ -46,7 +55,21 @@ public class NullJdtTypeProvider implements IJdtTypeProvider, Resource.Factory {
 	}
 
 	public Resource createResource(URI uri) {
-		throw new UnsupportedOperationException();
+		doLogMessage("Creating empty resource instead of type resource:" + uri);
+		return new ResourceImpl(uri) {
+			@Override
+			protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
+				// ignore
+			}
+		};
+	}
+
+	protected void doLogMessage(String message) {
+		if (log.isDebugEnabled()) {
+			log.debug(message, new RuntimeException());
+		} else if (log.isInfoEnabled()) {
+			log.info(message);
+		}
 	}
 
 }
