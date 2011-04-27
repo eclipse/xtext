@@ -38,18 +38,14 @@ public class Xtend10_CreateFunctions extends TestCase {
       final NetNode copyOfNodeA = _copyNet;
       NetNode _copyNet_1 = this.copyNet(nodeB);
       final NetNode copyOfNodeB = _copyNet_1;
-      final NetNode typeConverted_nodeA = (NetNode)nodeA;
-      final NetNode typeConverted_copyOfNodeA = (NetNode)copyOfNodeA;
-      Assert.assertNotSame(typeConverted_nodeA, typeConverted_copyOfNodeA);
+      Assert.assertNotSame(nodeA, copyOfNodeA);
       Iterable<NetNode> _references = copyOfNodeB.getReferences();
       NetNode _head = IterableExtensions.<NetNode>head(_references);
-      final NetNode typeConverted_copyOfNodeA_1 = (NetNode)copyOfNodeA;
-      Assert.assertSame(_head, typeConverted_copyOfNodeA_1);
+      Assert.assertSame(_head, copyOfNodeA);
       Iterable<NetNode> _references_1 = copyOfNodeB.getReferences();
       Iterable<NetNode> _tail = IterableExtensions.<NetNode>tail(_references_1);
       NetNode _head_1 = IterableExtensions.<NetNode>head(_tail);
-      final NetNode typeConverted_copyOfNodeB = (NetNode)copyOfNodeB;
-      Assert.assertSame(_head_1, typeConverted_copyOfNodeB);
+      Assert.assertSame(_head_1, copyOfNodeB);
     }
   }
   

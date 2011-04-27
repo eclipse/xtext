@@ -16,8 +16,7 @@ public class DomainmodelExtensions {
       if (o_1 instanceof PackageDeclaration) {
         final PackageDeclaration o_2 = (PackageDeclaration) o_1;
         matched=true;
-        final PackageDeclaration typeConverted_o_2 = (PackageDeclaration)o_2;
-        EObject _eContainer = typeConverted_o_2.eContainer();
+        EObject _eContainer = o_2.eContainer();
         String _packageName = this.packageName(_eContainer);
         String _name = o_2.getName();
         String _concatPath = this.concatPath(_packageName, _name);
@@ -54,8 +53,7 @@ public class DomainmodelExtensions {
       _xifexpression = suffix;
     } else {
       String _operator_plus = StringExtensions.operator_plus(prefix, ".");
-      final String typeConverted_suffix = (String)suffix;
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, typeConverted_suffix);
+      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, suffix);
       _xifexpression = _operator_plus_1;
     }
     return _xifexpression;

@@ -15,7 +15,7 @@ public class Xtend09_DispatchMethods extends TestCase {
   
   public StringConcatenation _toLabel(final Rectangle rectangle) {
     StringConcatenation _xifexpression = null;
-    boolean _operator_equals = ObjectExtensions.operator_equals(((Object)rectangle.height), ((Object)rectangle.width));
+    boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)rectangle.height), ((Integer)rectangle.width));
     if (_operator_equals) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("It\'s a square (x : ");

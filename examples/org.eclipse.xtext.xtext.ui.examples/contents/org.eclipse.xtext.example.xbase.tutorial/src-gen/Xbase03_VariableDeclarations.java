@@ -11,8 +11,7 @@ public class Xbase03_VariableDeclarations {
 		  final String s = "my String";
 		  {
 		    final String s1 = "foo";
-		    final String typeConverted_s1 = (String)s1;
-		    StringExtensions.operator_plus(s, typeConverted_s1);
+		    StringExtensions.operator_plus(s, s1);
 		  }
 		}
 	}

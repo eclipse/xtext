@@ -31,8 +31,7 @@ public class GeneratorExtensions extends DomainmodelExtensions {
   }
   
   public String fileName(final Entity e) {
-    final Entity typeConverted_e = (Entity)e;
-    String _packageName = this.packageName(typeConverted_e);
+    String _packageName = this.packageName(e);
     String _folderName = this.folderName(_packageName);
     String _operator_plus = StringExtensions.operator_plus(_folderName, "/");
     String _name = e.getName();
@@ -43,8 +42,7 @@ public class GeneratorExtensions extends DomainmodelExtensions {
   
   public String folderName(final String javaPackageName) {
     String _xifexpression = null;
-    final String typeConverted_javaPackageName = (String)javaPackageName;
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(typeConverted_javaPackageName, null);
+    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(javaPackageName, null);
     if (_operator_notEquals) {
       String _replace = javaPackageName.replace(".", "/");
       _xifexpression = _replace;

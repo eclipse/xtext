@@ -33,10 +33,8 @@ public class Xtend06_Closures {
       ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
       final ArrayList<Object> result = _newArrayList;
       for (Person p : persons) {
-        final ArrayList<Object> typeConverted_result = (ArrayList<Object>)result;
-        final Function1<Person,String> typeConverted_toString = (Function1<Person,String>)toString;
-        String _apply = typeConverted_toString.apply(p);
-        CollectionExtensions.<String>operator_add(typeConverted_result, _apply);
+        String _apply = toString.apply(p);
+        CollectionExtensions.<String>operator_add(result, _apply);
       }
       return result;
     }
