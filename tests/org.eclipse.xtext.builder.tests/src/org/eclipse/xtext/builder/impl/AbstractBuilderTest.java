@@ -35,9 +35,11 @@ public abstract class AbstractBuilderTest extends TestCase implements IResourceD
 		super.setUp();
 		assertEquals(0, countResourcesInIndex());
 		assertEquals(0, root().getProjects().length);
-		IIntroManager introManager = PlatformUI.getWorkbench().getIntroManager();
-		if (introManager.getIntro() != null) {
-			introManager.closeIntro(introManager.getIntro());
+		if (PlatformUI.isWorkbenchRunning()) {
+			IIntroManager introManager = PlatformUI.getWorkbench().getIntroManager();
+			if (introManager.getIntro() != null) {
+				introManager.closeIntro(introManager.getIntro());
+			}
 		}
 	}
 

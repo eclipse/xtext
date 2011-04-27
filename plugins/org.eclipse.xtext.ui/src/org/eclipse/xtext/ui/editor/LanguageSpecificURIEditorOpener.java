@@ -55,7 +55,7 @@ public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 	@Named(Constants.LANGUAGE_NAME)
 	private String editorID;
 
-	@Inject
+	@Inject(optional = true)
 	private IWorkbench workbench;
 
 	public void setLocationProvider(ILocationInFileProvider locationProvider) {
