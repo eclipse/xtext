@@ -20,7 +20,6 @@ import org.eclipse.xtext.validation.IResourceValidator;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.internal.Nullable;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
