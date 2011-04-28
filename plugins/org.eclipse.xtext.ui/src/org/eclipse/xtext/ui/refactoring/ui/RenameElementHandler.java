@@ -13,19 +13,17 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
-import org.eclipse.xtext.ui.refactoring.RefactoringType;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -37,8 +35,8 @@ public class RenameElementHandler extends AbstractHandler {
 	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
 
 	@Inject
-	protected Provider<RenameLinkedMode> renameLinkedModeProvider;
-
+	protected RenameRefactoringController renameRefactoringController;
+	
 	protected static final Logger LOG = Logger.getLogger(RenameElementHandler.class);
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -52,11 +50,8 @@ public class RenameElementHandler extends AbstractHandler {
 								EObject targetElement = eObjectAtOffsetHelper.resolveElementAt(resource,
 										selection.getOffset());
 								if (targetElement != null) {
-									final URI targetElementURI = EcoreUtil.getURI(targetElement);
-									IRenameElementContext.Impl renameElementContext = new IRenameElementContext.Impl(
-											targetElementURI, targetElement.eClass(), editor, selection, resource
-													.getURI());
-									return renameElementContext;
+									return createRenameElementContext(
+											targetElement, editor, selection, resource);
 								}
 								return null;
 							}
@@ -72,17 +67,17 @@ public class RenameElementHandler extends AbstractHandler {
 		return null;
 	}
 
-	protected void startRenameLinkedMode(IRenameElementContext renameElementContext) throws InterruptedException {
-		RenameLinkedMode activeLinkedMode = RenameLinkedMode.getActiveLinkedMode();
-		if (activeLinkedMode != null) {
-			if (activeLinkedMode.isCaretInLinkedPosition()) {
-				activeLinkedMode.startRefactoring(RefactoringType.REFACTORING_DIALOG);
-				return;
-			} else {
-				activeLinkedMode.cancel();
-			}
-		}
-		activeLinkedMode = renameLinkedModeProvider.get();
-		activeLinkedMode.start(renameElementContext);
+	protected IRenameElementContext createRenameElementContext(EObject targetElement, final XtextEditor editor,
+			final ITextSelection selection, XtextResource resource) {
+		final URI targetElementURI = EcoreUtil2.getNormalizedURI(targetElement);
+		IRenameElementContext.Impl renameElementContext = new IRenameElementContext.Impl(
+				targetElementURI, targetElement.eClass(), editor, selection, resource
+				.getURI());
+		return renameElementContext;
 	}
+
+	protected void startRenameLinkedMode(IRenameElementContext renameElementContext) throws InterruptedException {
+		renameRefactoringController.startLinkedEditing(renameElementContext);
+	}
+
 }

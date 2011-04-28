@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.refactoring;
+package org.eclipse.xtext.ui.refactoring.ui;
 
 /**
  * @author Holger Schill - Initial contribution and API
