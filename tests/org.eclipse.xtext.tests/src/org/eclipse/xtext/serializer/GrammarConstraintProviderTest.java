@@ -16,9 +16,9 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -48,7 +48,7 @@ public class GrammarConstraintProviderTest extends AbstractXtextTests {
 				if (visited.add(c))
 					result.add("  " + c.toString());
 		}
-		return Join.join("\n", result);
+		return Joiner.on("\n").join(result);
 	}
 
 	public void testKeywords() throws Exception {

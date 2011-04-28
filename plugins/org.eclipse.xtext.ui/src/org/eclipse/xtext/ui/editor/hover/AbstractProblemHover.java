@@ -21,7 +21,7 @@ import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.ILineDiffInfo;
 
-import com.google.inject.internal.Lists;
+import com.google.common.collect.Lists;
 
 /**
  * Base class for all hovers showing annotations and problems. 

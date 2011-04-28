@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
-import com.google.inject.internal.Lists;
 
 /**
  * Delivers all contained elements of an element to be renamed in order to updated references to them.

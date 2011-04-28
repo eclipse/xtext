@@ -20,8 +20,8 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.ILexerTokenRegion;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Provider;
-import com.google.inject.internal.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
