@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.refactoring.impl;
+package org.eclipse.xtext.ui.refactoring.ui;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -36,6 +36,7 @@ import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPartSite;
+import org.eclipse.xtext.ui.refactoring.impl.Messages;
 
 /**
  * 
@@ -54,7 +55,7 @@ public class RenameRefactoringExecuter {
 			return Status.OK_STATUS;
 	}
 
-	private void ensureChecked() throws CoreException {
+	protected void ensureChecked() throws CoreException {
 		if (preCheckStatus == null) {
 			if (!refactoring.isApplicable()) {
 				preCheckStatus = RefactoringStatus.createFatalErrorStatus("Refactoring ist not applicable"); //$NON-NLS-1$
@@ -66,14 +67,7 @@ public class RenameRefactoringExecuter {
 
 	public void configure(ProcessorBasedRefactoring renameRefactoring) throws CoreException {
 		refactoring = renameRefactoring;
-		RefactoringStatus refactoringStatus = new RefactoringStatus();
-		if (refactoringStatus.hasFatalError()) {
-			preCheckStatus = refactoringStatus;
-		} else {
-			preCheck();
-			refactoringStatus.merge(preCheckStatus);
-			preCheckStatus = refactoringStatus;
-		}
+		preCheck();
 	}
 
 	public void perform(IWorkbenchPartSite iWorkbenchPartSite) throws InterruptedException {

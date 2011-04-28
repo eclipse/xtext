@@ -32,7 +32,7 @@ import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.ui.refactoring.ui.RenameLinkedMode;
+import org.eclipse.xtext.ui.refactoring.ui.RenameRefactoringController;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.refactoring.referring.Reference;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -50,7 +50,7 @@ public class LinkedEditingRefactoringIntegrationTest extends AbstractEditorTest 
 	private IProject project;
 
 	@Inject
-	private RenameLinkedMode renameLinkedMode;
+	private RenameRefactoringController renameRefactoringController;
 	
 	@Override
 	protected String getEditorId() {
@@ -94,7 +94,7 @@ public class LinkedEditingRefactoringIntegrationTest extends AbstractEditorTest 
 				return new IRenameElementContext.Impl(EcoreUtil.getURI(referenced), referenced.eClass(), editor, selection, state.getURI());
 			}
 		});
-		renameLinkedMode.start(context);
+		renameRefactoringController.startLinkedEditing(context);
 		waitForDisplay();
 		pressKeys(editor, "NewTestClass\n");
 		waitForReconciler(editor);

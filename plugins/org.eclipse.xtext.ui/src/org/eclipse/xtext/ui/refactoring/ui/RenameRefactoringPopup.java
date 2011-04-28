@@ -68,7 +68,6 @@ import org.eclipse.ui.keys.IBindingService;
 import org.eclipse.ui.progress.UIJob;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.internal.Activator;
-import org.eclipse.xtext.ui.refactoring.RefactoringType;
 import org.eclipse.xtext.ui.refactoring.impl.Messages;
 
 /**
@@ -98,6 +97,9 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 
 	private XtextEditor editor;
 	private RenameLinkedMode renameLinkedMode;
+	private RenameRefactoringController controller;
+	private boolean isValid;
+
 	private Region region;
 	private static final int WIDGET_PRIORITY = 1000;
 	private static boolean MAC = Util.isMac();
@@ -111,9 +113,13 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 	private MenuManager menuManager;
 	private boolean iSMenuUp = false;
 
-	public RenameRefactoringPopup(XtextEditor editor, RenameLinkedMode renameLinkedMode) {
+
+
+	public RenameRefactoringPopup(XtextEditor editor, RenameLinkedMode renameLinkedMode, RenameRefactoringController controller, boolean isValid) {
 		this.editor = editor;
 		this.renameLinkedMode = renameLinkedMode;
+		this.controller = controller;
+		this.isValid = isValid;
 	}
 
 	private void updateVisibility() {
@@ -280,35 +286,33 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 			}
 
 			public void menuAboutToShow(IMenuManager manager) {
-				boolean canRefactor = renameLinkedMode.isValid();
-
 				IAction refactorAction = new Action("Rename...") {
 					@Override
 					public void run() {
 						activateEditor();
-						renameLinkedMode.startRefactoring(RefactoringType.REFACTORING_DIRECT);
+						controller.startRefactoring(RefactoringType.REFACTORING_DIRECT);
 					}
 				};
 				refactorAction.setAccelerator(SWT.CR);
-				refactorAction.setEnabled(canRefactor);
+				refactorAction.setEnabled(isValid);
 				manager.add(refactorAction);
 
 				IAction previewAction = new Action("Preview...") {
 					@Override
 					public void run() {
 						activateEditor();
-						renameLinkedMode.startRefactoring(RefactoringType.REFACTORING_PREVIEW);
+						controller.startRefactoring(RefactoringType.REFACTORING_PREVIEW);
 					}
 				};
 				previewAction.setAccelerator(SWT.CTRL | SWT.CR);
-				previewAction.setEnabled(canRefactor);
+				previewAction.setEnabled(isValid);
 				manager.add(previewAction);
 
 				IAction openDialogAction = new Action("Open Rename Dialog..." + '\t' + openDialogBinding) {
 					@Override
 					public void run() {
 						activateEditor();
-						renameLinkedMode.startRefactoring(RefactoringType.REFACTORING_DIALOG);
+						controller.startRefactoring(RefactoringType.REFACTORING_DIALOG);
 					}
 				};
 				manager.add(openDialogAction);

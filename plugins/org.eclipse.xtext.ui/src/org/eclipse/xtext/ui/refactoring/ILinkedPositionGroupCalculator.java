@@ -8,21 +8,19 @@
 package org.eclipse.xtext.ui.refactoring;
 
 import org.eclipse.jface.text.link.LinkedPositionGroup;
-import org.eclipse.xtext.ui.refactoring.impl.LinkedModelCalculator;
+import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
+import org.eclipse.xtext.ui.refactoring.ui.LinkedPositionGroupCalculator;
 
 import com.google.inject.ImplementedBy;
 
 /**
  * @author Holger Schill - Initial contribution and API
+ * @author Jan Koehnlein
  */
-@ImplementedBy(LinkedModelCalculator.class)
-public interface ILinkedModelCalculator {
+@ImplementedBy(LinkedPositionGroupCalculator.class)
+public interface ILinkedPositionGroupCalculator {
 
-	public void init(IRenameElementContext renameElementContext);
-	
-	public LinkedPositionGroup getLinkedPositionGroup();
-	
-	public IRenameStrategy getRenameStrategy();
+	public LinkedPositionGroup getLinkedPositionGroup(IRenameElementContext renameElementContext, ProcessorBasedRefactoring renameRefactoring);
 	
 }

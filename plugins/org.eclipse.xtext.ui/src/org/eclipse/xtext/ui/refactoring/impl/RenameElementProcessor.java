@@ -126,6 +126,14 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 		return new Object[] { targetElementURI };
 	}
 	
+	public String getOriginalName() {
+		return renameStrategy.getOriginalName();
+	}
+
+	public RefactoringStatus validateNewName(String newName) {
+		return renameStrategy.validateNewName(newName);
+	}
+
 	protected String getLanguageName() {
 		return languageName;
 	}

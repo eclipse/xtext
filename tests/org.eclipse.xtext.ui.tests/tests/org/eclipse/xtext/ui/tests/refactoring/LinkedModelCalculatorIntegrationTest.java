@@ -18,12 +18,14 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.text.link.LinkedPosition;
 import org.eclipse.jface.text.link.LinkedPositionGroup;
+import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
-import org.eclipse.xtext.ui.refactoring.ILinkedModelCalculator;
+import org.eclipse.xtext.ui.refactoring.ILinkedPositionGroupCalculator;
+import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
@@ -45,9 +47,12 @@ public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 	private static final URI uriToFile2 = URI.createURI("platform:/resource/" + pathToFile2);
 	private IProject project;
 	@Inject
-	private ILinkedModelCalculator linkedModelCalculator;
+	private ILinkedPositionGroupCalculator linkedModelCalculator;
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
+	
+	@Inject 
+	private IRenameRefactoringProvider renameRefactoringProvider;
 	
 	@Override
 	protected String getEditorId() {
@@ -73,17 +78,15 @@ public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 		waitForAutoBuild();
 		XtextEditor editor = openEditor(file1);
 		EObject a  = editor.getDocument().readOnly(new IUnitOfWork<EObject, XtextResource>(){
-
 			public EObject exec(XtextResource state) throws Exception {
 				return state.getContents().get(0).eContents().get(0);
 			}
-			
 		});
 		URI uri = EcoreUtil.getURI(a);
 		selectElementInEditor(a, uri, editor, (XtextResource) a.eResource());
 		IRenameElementContext renameElementContext = new IRenameElementContext.Impl(uri, a.eClass(), editor, editor.getSelectionProvider().getSelection(),uriToFile1);
-		linkedModelCalculator.init(renameElementContext);
-		LinkedPositionGroup linkedPositionGroup = linkedModelCalculator.getLinkedPositionGroup();
+		ProcessorBasedRefactoring renameRefactoring = renameRefactoringProvider.getRenameRefactoring(renameElementContext);
+		LinkedPositionGroup linkedPositionGroup = linkedModelCalculator.getLinkedPositionGroup(renameElementContext, renameRefactoring);
 		LinkedPosition[] positions = linkedPositionGroup.getPositions();
 		assertEquals(3, positions.length);
 		int[] offsets = {0,10,24};
@@ -110,8 +113,8 @@ public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 		URI uri = EcoreUtil.getURI(a);
 		selectElementInEditor(a, uri, editor, (XtextResource) a.eResource());
 		IRenameElementContext renameElementContext = new IRenameElementContext.Impl(uri, a.eClass(), editor, editor.getSelectionProvider().getSelection(),uriToFile2);
-		linkedModelCalculator.init(renameElementContext);
-		LinkedPositionGroup linkedPositionGroup = linkedModelCalculator.getLinkedPositionGroup();
+		ProcessorBasedRefactoring renameRefactoring = renameRefactoringProvider.getRenameRefactoring(renameElementContext);
+		LinkedPositionGroup linkedPositionGroup = linkedModelCalculator.getLinkedPositionGroup(renameElementContext, renameRefactoring);
 		LinkedPosition[] positions = linkedPositionGroup.getPositions();
 		assertEquals(2, positions.length);
 		
