@@ -60,7 +60,7 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 		return message;
 	}
 
-	public EObject getSemanitcObject() {
+	public EObject getSemanticObject() {
 		return semanticObject;
 	}
 
