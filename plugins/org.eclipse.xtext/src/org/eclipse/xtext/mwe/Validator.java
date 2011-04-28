@@ -28,10 +28,10 @@ import org.eclipse.xtext.validation.Issue;
 import com.google.common.base.Function;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
-import com.google.inject.internal.Maps;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

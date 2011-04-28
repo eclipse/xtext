@@ -17,7 +17,7 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.AbstractStaticMethodsFeature
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendImport;
 
-import com.google.inject.internal.Lists;
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

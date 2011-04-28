@@ -21,8 +21,8 @@ import org.eclipse.xtext.resource.ISelectable;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import com.google.inject.internal.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

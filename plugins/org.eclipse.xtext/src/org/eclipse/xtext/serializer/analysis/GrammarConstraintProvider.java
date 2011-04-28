@@ -42,13 +42,13 @@ import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -96,7 +96,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 					return from.getName();
 				}
 			});
-			return getName() + ": " + Join.join(" | ", constraintNames) + ";";
+			return getName() + ": " + Joiner.on(" | ").join(constraintNames) + ";";
 		}
 	}
 
@@ -733,9 +733,9 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 					if (mustWrap || width > 140 || children.size() > 5) {
 						for (int i = 0; i < childStrs.size(); i++)
 							childStrs.set(i, childStrs.get(i).replaceAll("\\n", "\n    "));
-						return "(\n    " + Join.join(" | \n    ", childStrs) + "\n)\n" + getCardinality();
+						return "(\n    " + Joiner.on(" | \n    ").join(childStrs) + "\n)\n" + getCardinality();
 					} else
-						return "(" + Join.join(" | ", childStrs) + ")" + getCardinality();
+						return "(" + Joiner.on(" | ").join(childStrs) + ")" + getCardinality();
 				case GROUP:
 					List<String> childStrs2 = Lists.newArrayList();
 					int width2 = 0;
@@ -750,9 +750,9 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 					if (mustWrap2 || (width2 > 140 && children.size() > 2)) {
 						for (int i = 0; i < childStrs2.size(); i++)
 							childStrs2.set(i, childStrs2.get(i).replaceAll("\\n", "\n    "));
-						return "(\n    " + Join.join("\n    ", childStrs2) + "\n)\n" + getCardinality();
+						return "(\n    " + Joiner.on("\n    ").join(childStrs2) + "\n)\n" + getCardinality();
 					} else
-						return "(" + Join.join(" ", childStrs2) + ")" + getCardinality();
+						return "(" + Joiner.on(' ').join(childStrs2) + ")" + getCardinality();
 				case ASSIGNED_ACTION_CALL:
 					return getFeatureName() + getAssignmentOperator() + context2Name(getAction()) + getCardinality();
 				case ASSIGNED_PARSER_RULE_CALL:
@@ -1209,7 +1209,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			if (visited.add(pr))
 				rules.add(pr.getName());
 		}
-		return Join.join("_", rules) + "_" + Join.join("_", actions) + "_"
+		return Joiner.on("_").join(rules) + "_" + Joiner.on('_').join(actions) + "_"
 				+ equalConstraints.iterator().next().getType().getName();
 	}
 

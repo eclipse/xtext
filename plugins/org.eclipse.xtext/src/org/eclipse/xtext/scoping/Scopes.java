@@ -25,9 +25,9 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
-import com.google.inject.internal.Lists;
 
 /**
  * This class contains static utility functions to create and work on {@link IScope} and {@link IScopedElement}

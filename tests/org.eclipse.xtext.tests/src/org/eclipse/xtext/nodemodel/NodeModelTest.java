@@ -29,7 +29,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.TestLanguageStandaloneSetup;
 
-import com.google.inject.internal.Lists;
+import com.google.common.collect.Lists;
 
 public class NodeModelTest extends AbstractXtextTests {
 

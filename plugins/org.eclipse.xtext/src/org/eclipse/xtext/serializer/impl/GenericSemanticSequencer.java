@@ -44,11 +44,11 @@ import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
-import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -175,9 +175,9 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		public String toString() {
 			List<String> result = Lists.newArrayList();
 			for (IConstraintElement assign : getFeature().getAssignments()) {
-				result.add(assign + "=>(" + Join.join(", ", getValuesFor(assign)) + ")");
+				result.add(assign + "=>(" + Joiner.on(", ").join(getValuesFor(assign)) + ")");
 			}
-			return Join.join(", ", result);
+			return Joiner.on(", ").join(result);
 		}
 	}
 
@@ -890,7 +890,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 					result.append("] ");
 
 				}
-				result.append(Join.join(", ", values[ele.getAssignmentID()].getValuesFor(ele)));
+				result.append(Joiner.on(", ").join(values[ele.getAssignmentID()].getValuesFor(ele)));
 			}
 			result.append("\n");
 		}
@@ -1206,7 +1206,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		if (constraintContexts == null) {
 			constraints = Maps.newHashMap();
 			constraintContexts = grammarConstraintProvider.getConstraints(grammarAccess.getGrammar());
-			//			System.out.println(Join.join("\n", constraintContexts));
+			//			System.out.println(Joiner.on("\n").join(constraintContexts));
 			for (IConstraintContext ctx : constraintContexts)
 				for (IConstraint constraint : ctx.getConstraints())
 					constraints.put(Tuples.create(ctx.getContext(), constraint.getType()), constraint);

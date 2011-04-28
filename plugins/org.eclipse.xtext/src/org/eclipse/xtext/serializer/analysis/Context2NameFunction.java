@@ -19,8 +19,8 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.util.EmfFormatter;
 
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
-import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -56,6 +56,6 @@ public class Context2NameFunction implements Function<EObject, String> {
 			current = current.eContainer();
 		}
 		Collections.reverse(indices);
-		return action.getType().getClassifier().getName() + "_" + Join.join("_", indices);
+		return action.getType().getClassifier().getName() + "_" + Joiner.on('_').join(indices);
 	}
 }

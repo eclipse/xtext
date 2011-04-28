@@ -18,9 +18,9 @@ import org.eclipse.xtext.ui.codetemplates.ui.highlighting.TemplateBodyHighlighte
 import org.eclipse.xtext.ui.codetemplates.ui.partialEditing.PartialContentAssistContextFactory;
 import org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper;
 
+import com.google.common.collect.Maps;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import com.google.inject.internal.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

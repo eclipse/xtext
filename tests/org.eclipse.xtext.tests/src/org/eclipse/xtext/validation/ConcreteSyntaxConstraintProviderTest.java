@@ -26,7 +26,6 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -83,9 +82,9 @@ public class ConcreteSyntaxConstraintProviderTest extends AbstractXtextTests {
 			case ASSIGNMENT:
 				return t + c.getAssignmentName() + c.getCardinality();
 			case GROUP:
-				return t + "(" + Join.join(" ", contents) + ")" + c.getCardinality();
+				return t + "(" + Joiner.on(" ").join(contents) + ")" + c.getCardinality();
 			case ALTERNATIVE:
-				return t + "(" + Join.join("|", contents) + ")" + c.getCardinality();
+				return t + "(" + Joiner.on("|").join(contents) + ")" + c.getCardinality();
 			case ACTION:
 				return t + "{}";
 		}

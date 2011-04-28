@@ -45,7 +45,7 @@ import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.inject.internal.Lists;
+import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
