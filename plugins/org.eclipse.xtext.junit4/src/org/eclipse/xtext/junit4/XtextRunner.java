@@ -15,6 +15,7 @@ import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 
 import com.google.common.collect.Maps;
+import com.google.inject.Injector;
 
 /**
  * @author Michael Clay - Initial contribution and API
@@ -30,8 +31,10 @@ public class XtextRunner extends BlockJUnit4ClassRunner {
 	protected Object createTest() throws Exception {
 		Object object = super.createTest();
 		IInjectorProvider injectorProvider = getOrCreateInjectorProvider();
-		if (injectorProvider != null && injectorProvider.getInjector() != null) {
-			injectorProvider.getInjector().injectMembers(object);
+		if (injectorProvider != null) {
+			Injector injector = injectorProvider.getInjector();
+			if (injector != null)
+				injector.injectMembers(object);
 		}
 		return object;
 	}

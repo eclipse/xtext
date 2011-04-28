@@ -1,8 +1,6 @@
 
 package org.eclipse.xtext.example.domainmodel.tests;
 
-import static junit.framework.Assert.*;
-import org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.domainmodel.PackageDeclaration;
@@ -15,11 +13,13 @@ import org.junit.runner.RunWith;
 
 import com.google.inject.Inject;
 
+import static junit.framework.Assert.*;
+
 /**
  * Example test
  */
 @RunWith(XtextRunner.class)
-@InjectWith(DomainmodelInjectorProvider.class)
+@InjectWith(InjectorProviderCustom.class)
 public class ParserTest {
 	
 	@Inject
