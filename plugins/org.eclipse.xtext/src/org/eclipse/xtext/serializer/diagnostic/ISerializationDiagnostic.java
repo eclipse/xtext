@@ -40,7 +40,7 @@ public interface ISerializationDiagnostic {
 			return exception.getMessage();
 		}
 
-		public EObject getSemanitcObject() {
+		public EObject getSemanticObject() {
 			return null;
 		}
 
@@ -54,8 +54,8 @@ public interface ISerializationDiagnostic {
 				throw new RuntimeException(diagnostic.getException());
 			else {
 				String msg = diagnostic.getMessage();
-				if (diagnostic.getSemanitcObject() != null)
-					msg += "\n" + "Semantic Object" + EmfFormatter.objPath(diagnostic.getSemanitcObject());
+				if (diagnostic.getSemanticObject() != null)
+					msg += "\n" + "Semantic Object" + EmfFormatter.objPath(diagnostic.getSemanticObject());
 				throw new RuntimeException(msg);
 			}
 		}
@@ -80,5 +80,5 @@ public interface ISerializationDiagnostic {
 
 	String getMessage();
 
-	EObject getSemanitcObject();
+	EObject getSemanticObject();
 }
