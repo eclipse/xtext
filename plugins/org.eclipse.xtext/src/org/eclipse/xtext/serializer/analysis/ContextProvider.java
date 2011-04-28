@@ -28,10 +28,12 @@ import org.eclipse.xtext.util.EmfFormatter;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Singleton
 public class ContextProvider implements IContextProvider {
 	@Inject
 	protected ActionFilterNFAProvider nfaProvider;
@@ -42,7 +44,7 @@ public class ContextProvider implements IContextProvider {
 		TreeIterator<EObject> ti = EcoreUtil2.eAll(context);
 		while (ti.hasNext()) {
 			EObject obj = ti.next();
-			if (GrammarUtil.isUnassignedParserRuleCall(obj))
+			if (GrammarUtil.isUnassignedParserParserRuleCall(obj))
 				collectTypesForContext((ParserRule) ((RuleCall) obj).getRule(), types, visited);
 			else if (obj instanceof Action)
 				types.add((EClass) ((Action) obj).getType().getClassifier());
@@ -98,7 +100,7 @@ public class ContextProvider implements IContextProvider {
 		if (GrammarUtil.isParserParserRule(context))
 			collectTypesForContext((ParserRule) context, result, Sets.newHashSet());
 		else if (GrammarUtil.isAssignedAction(context))
-			collectTypesForContext((Action) context, result, Sets.newHashSet());
+			collectTypesForContext(nfaProvider.getNFA((Action) context), result, false, Sets.newHashSet());
 		else
 			throw new RuntimeException("This is not a valid context: " + EmfFormatter.objPath(context));
 		return result;
