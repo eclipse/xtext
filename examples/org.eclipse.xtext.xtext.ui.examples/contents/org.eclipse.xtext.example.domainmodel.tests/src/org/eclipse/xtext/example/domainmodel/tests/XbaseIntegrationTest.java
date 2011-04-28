@@ -2,7 +2,6 @@ package org.eclipse.xtext.example.domainmodel.tests;
 
 import java.lang.reflect.Method;
 
-import org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.generator.DomainmodelGenerator;
@@ -32,7 +31,7 @@ import com.google.inject.Provider;
  * @author Sven Efftinge
  */
 @RunWith(XtextRunner.class)
-@InjectWith(DomainmodelInjectorProvider.class)
+@InjectWith(InjectorProviderCustom.class)
 public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 
 	/**
