@@ -32,7 +32,7 @@ public abstract class AbstractScopingFragment extends AbstractInheritingGenerato
 		return naming.basePackageRuntime(grammar) + ".scoping." + GrammarUtil.getName(grammar) + "ScopeProvider";
 	}
 	
-	private boolean generateStub;
+	private boolean generateStub = true;
 	
 	/**
 	 * @since 2.0
