@@ -9,10 +9,12 @@ package org.eclipse.xtext.common.types.impl;
 
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 
@@ -29,19 +31,37 @@ class NameConcatHelper {
 		if (constraints == null || constraints.isEmpty())
 			return;
 		int wasLength = result.length();
+		boolean hasLowerBound = false;
+		if (nameType != NameType.ID) {
+			for (JvmTypeConstraint constraint : constraints) {
+				if (constraint instanceof JvmLowerBound) {
+					hasLowerBound = true;
+					break;
+				}
+			}
+		}
 		for (JvmTypeConstraint constraint : constraints) {
 			if (result.length() != wasLength)
 				result.append(" & ");
-			switch(nameType) {
-				case ID: result.append(constraint.getIdentifier()); break;
-				case QUALIFIED: result.append(constraint.getQualifiedName(innerClassDelimiter)); break;
-				case SIMPLE: result.append(constraint.getSimpleName()); break;
+			if (!hasLowerBound || constraint instanceof JvmLowerBound || nameType == NameType.ID) {
+				switch(nameType) {
+					case ID: result.append(constraint.getIdentifier()); break;
+					case QUALIFIED: result.append(constraint.getQualifiedName(innerClassDelimiter)); break;
+					case SIMPLE: result.append(constraint.getSimpleName()); break;
+				}
 			}
 		}
 	}
 
 	static String computeFor(JvmWildcardTypeReference typeReference, char innerClassDelimiter, NameType nameType) {
 		if (typeReference.eIsSet(TypesPackage.Literals.JVM_CONSTRAINT_OWNER__CONSTRAINTS)) {
+			if (typeReference.getConstraints().size() == 1 && nameType != NameType.ID) {
+				JvmTypeConstraint onlyConstraint = typeReference.getConstraints().get(0);
+				if (onlyConstraint instanceof JvmUpperBound && 
+						Object.class.getCanonicalName().equals(onlyConstraint.getTypeReference().getIdentifier())) {
+					return "?";
+				}
+			}
 			StringBuilder mutableResult = new StringBuilder(64);
 			mutableResult.append("? ");
 			appendConstraintsName(mutableResult, typeReference.getConstraints(), innerClassDelimiter, nameType);
