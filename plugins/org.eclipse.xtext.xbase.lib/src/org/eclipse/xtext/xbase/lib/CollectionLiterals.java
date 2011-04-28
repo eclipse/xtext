@@ -30,8 +30,11 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API
+ * This is an extension library for {@link java.util.Collection collections}.
  * 
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+/*
  * To Be Discussed:
  * #emptySortedSet
  * #emptySortedMap
@@ -40,75 +43,206 @@ import com.google.common.collect.Sets;
  */
 public class CollectionLiterals {
 
+	/**
+	 * Returns the empty, immutable list.
+	 * 
+	 * @return an empty, immutable list.
+	 * @see Collections#emptyList()
+	 */
 	public static final <T> List<T> emptyList() {
 		return Collections.emptyList();
-    }
-	
+	}
+
+	/**
+	 * Returns the empty, immutable set.
+	 * 
+	 * @return an empty, immutable set.
+	 * @see Collections#emptySet()
+	 */
 	public static final <T> Set<T> emptySet() {
 		return Collections.emptySet();
-    }
-	
-	public static final <K,V> Map<K,V> emptyMap() {
+	}
+
+	/**
+	 * Returns the empty, immutable map.
+	 * 
+	 * @return an empty, immutable map.
+	 * @see Collections#emptyMap()
+	 */
+	public static final <K, V> Map<K, V> emptyMap() {
 		return Collections.emptyMap();
-    }
-	
+	}
+
+	/**
+	 * Returns an immutable list containing the given elements, in order.
+	 * 
+	 * @param elements
+	 *            the elements that should be contained in the list. May not be <code>null</code> or contain any
+	 *            <code>null</code> values.
+	 * @return an immutable list containing the given elements.
+	 * @throws NullPointerException
+	 *             if {@code elements} or any of items in {@code elements} is <code>null</code>
+	 */
 	public static final <T> List<T> newImmutableList(T... elements) {
 		return ImmutableList.of(elements);
 	}
-	
+
+	/**
+	 * Returns an immutable set containing the given elements. Repeated occurrences of an element (according to
+	 * {@link Object#equals}) after the first are ignored
+	 * 
+	 * @param elements
+	 *            the elements that should be contained in the set. May not be <code>null</code> or contain any
+	 *            <code>null</code> values.
+	 * @return an immutable set containing the given elements.
+	 * @throws NullPointerException
+	 *             if {@code elements} or any of items in {@code elements} is <code>null</code>
+	 */
 	public static final <T> Set<T> newImmutableSet(T... elements) {
 		return ImmutableSet.of(elements);
 	}
-	
-	public static final <K,V> Map<K,V> newImmutableMap(Pair<K, V>... entries) {
-		if (entries == null || entries.length == 0)
+
+	/**
+	 * Returns an immutable map containing the given entries. Repeated occurrences of a keys will cause an
+	 * {@link IllegalArgumentException}.
+	 * 
+	 * @param entries
+	 *            the entries that should be contained in the map. May not be <code>null</code> or contain any
+	 *            <code>null</code> keys or value.
+	 * @return an immutable map containing the given entries.
+	 * @throws NullPointerException
+	 *             if {@code entries} or any key or value in {@code entries} is <code>null</code>
+	 * @throws IllegalArgumentException
+	 *             if duplicate keys are contained in {@code entries}.
+	 */
+	public static final <K, V> Map<K, V> newImmutableMap(Pair<K, V>... entries) {
+		if (entries.length == 0)
 			return emptyMap();
 		ImmutableMap.Builder<K, V> builder = ImmutableMap.builder();
-		for(Pair<K, V> entry: entries) {
+		for (Pair<K, V> entry : entries) {
 			builder.put(entry.getKey(), entry.getValue());
 		}
 		return builder.build();
 	}
-	
+
+	/**
+	 * Creates a mutable {@link ArrayList} instance containing the given initial elements.
+	 * 
+	 * @param initial
+	 *            the initial elements that the list should contain, in order. May not be <code>null</code> but may
+	 *            contain <code>null</code> values.
+	 * @return a new {@link ArrayList} containing those elements
+	 */
 	public static final <T> ArrayList<T> newArrayList(T... initial) {
 		return Lists.newArrayList(initial);
 	}
-	
+
+	/**
+	 * Creates a mutable {@link LinkedList} instance containing the given initial elements.
+	 * 
+	 * @param initial
+	 *            the initial elements that the list should contain, in order. May not be <code>null</code> but may
+	 *            contain <code>null</code> values.
+	 * @return a new {@link LinkedList} containing those elements
+	 */
 	public static final <T> LinkedList<T> newLinkedList(T... initial) {
-		if (initial != null && initial.length > 0)
+		if (initial.length > 0)
 			return Lists.newLinkedList(Arrays.asList(initial));
 		return Lists.newLinkedList();
 	}
-	
+
+	/**
+	 * Creates a mutable {@link HashSet} instance containing the given initial elements.
+	 * 
+	 * @param initial
+	 *            the initial elements that the set should contain, in order. May not be <code>null</code> but may
+	 *            contain <code>null</code> values.
+	 * @return a new {@link HashSet} containing those elements
+	 */
 	public static final <T> HashSet<T> newHashSet(T... initial) {
 		return Sets.newHashSet(initial);
 	}
-	
+
+	/**
+	 * Creates a mutable {@link LinkedHashSet} instance containing the given initial elements.
+	 * 
+	 * @param initial
+	 *            the initial elements that the set should contain, in order. May not be <code>null</code> but may
+	 *            contain <code>null</code> values.
+	 * @return a new {@link LinkedHashSet} containing those elements
+	 */
 	public static final <T> LinkedHashSet<T> newLinkedHashSet(T... initial) {
-		if (initial != null && initial.length > 0)
+		if (initial.length > 0)
 			return Sets.newLinkedHashSet(Arrays.asList(initial));
 		return Sets.newLinkedHashSet();
 	}
 
+	/**
+	 * Creates a mutable {@link TreeSet} instance containing the given initial elements.
+	 * 
+	 * @param initial
+	 *            the initial elements that the set should contain, in order. May not be <code>null</code> but may
+	 *            contain <code>null</code> values.
+	 * @param comparator
+	 *            the comparator that should be used. May be <code>null</code> which indicates that the natural ordering
+	 *            of the items should be used.
+	 * @return a new {@link TreeSet} containing those elements
+	 */
 	public static final <T> TreeSet<T> newTreeSet(Comparator<? super T> comparator, T... initial) {
-		TreeSet<T> result = Sets.newTreeSet(comparator);
-		if (initial != null && initial.length > 0)
+		TreeSet<T> result = new TreeSet<T>(comparator);
+		if (initial.length > 0)
 			result.addAll(Arrays.asList(initial));
 		return result;
 	}
-	
+
+	/**
+	 * Creates a mutable {@link HashMap} instance containing the given initial entries. Repeated occurrences of a keys
+	 * will cause an {@link IllegalArgumentException}.
+	 * 
+	 * @param initial
+	 *            the entries that should be contained in the map. May not be <code>null</code> but may contain
+	 *            <code>null</code> keys or values.
+	 * @return a new {@link HashMap} containing those elements
+	 * @throws IllegalArgumentException
+	 *             if duplicate keys are contained the {@code initial} entries.
+	 */
 	public static final <K, V> HashMap<K, V> newHashMap(Pair<K, V>... initial) {
-		HashMap<K, V> result = Maps.newHashMap();
+		HashMap<K, V> result = Maps.newHashMapWithExpectedSize(initial.length);
 		putAll(result, initial);
 		return result;
 	}
-	
+
+	/**
+	 * Creates a mutable {@link LinkedHashMap} instance containing the given initial entries. Repeated occurrences of a
+	 * keys will cause an {@link IllegalArgumentException}.
+	 * 
+	 * @param initial
+	 *            the entries that should be contained in the map. May not be <code>null</code> but may contain
+	 *            <code>null</code> keys or values.
+	 * @return a new {@link LinkedHashMap} containing those elements
+	 * @throws IllegalArgumentException
+	 *             if duplicate keys are contained the {@code initial} entries.
+	 */
 	public static final <K, V> LinkedHashMap<K, V> newLinkedHashMap(Pair<K, V>... initial) {
-		LinkedHashMap<K, V> result = Maps.newLinkedHashMap();
+		LinkedHashMap<K, V> result = new LinkedHashMap<K, V>(initial.length);
 		putAll(result, initial);
 		return result;
 	}
-	
+
+	/**
+	 * Creates a mutable {@link TreeMap} instance containing the given initial entries. Repeated occurrences of a keys
+	 * will cause an {@link IllegalArgumentException}.
+	 * 
+	 * @param initial
+	 *            the entries that should be contained in the map. May not be <code>null</code> but may contain
+	 *            <code>null</code> keys or values.
+	 * @param comparator
+	 *            the comparator that should be used. May be <code>null</code> which indicates that the natural ordering
+	 *            of the keys should be used.
+	 * @return a new {@link TreeMap} containing those elements
+	 * @throws IllegalArgumentException
+	 *             if duplicate keys are contained the {@code initial} entries.
+	 */
 	public static final <K, V> TreeMap<K, V> newTreeMap(Comparator<? super K> comparator, Pair<K, V>... initial) {
 		TreeMap<K, V> result = Maps.newTreeMap(comparator);
 		putAll(result, initial);
@@ -116,11 +250,11 @@ public class CollectionLiterals {
 	}
 
 	private static <K, V> void putAll(Map<K, V> result, Pair<K, V>... entries) {
-		if (entries != null) {
-			for(Pair<? extends K, ? extends V> entry: entries) {
-				result.put(entry.getKey(), entry.getValue());
-			}
+		for (Pair<? extends K, ? extends V> entry : entries) {
+			if (result.containsKey(entry.getKey()))
+				throw new IllegalArgumentException("duplicate key: " + entry.getKey());
+			result.put(entry.getKey(), entry.getValue());
 		}
 	}
-	
+
 }

@@ -8,45 +8,46 @@
 package org.eclipse.xtext.xbase.lib;
 
 /**
+ * An immutable pair of {@link #getKey() key} and {@link #getValue() value}.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public final class Pair<K, V> {
 
 	private final K k;
 	private final V v;
-	
+
 	public Pair(K k, V v) {
 		this.k = k;
 		this.v = v;
 	}
-	
+
 	public K getKey() {
 		return k;
 	}
-	
+
 	public V getValue() {
 		return v;
 	}
-	
+
 	@Override
 	public boolean equals(Object o) {
 		if (o == this)
 			return true;
-	    if (!(o instanceof Pair))
-	    	return false;
-	    Pair<?, ?> e = (Pair<?, ?>)o;
-	    return ObjectExtensions.operator_equals(k, e.getKey()) && ObjectExtensions.operator_equals(v, e.getValue());
+		if (!(o instanceof Pair))
+			return false;
+		Pair<?, ?> e = (Pair<?, ?>) o;
+		return ObjectExtensions.operator_equals(k, e.getKey()) && ObjectExtensions.operator_equals(v, e.getValue());
 	}
 
 	@Override
 	public int hashCode() {
-	    return ((k   == null)   ? 0 :   k.hashCode()) ^
-		   ((v == null)   ? 0 : v.hashCode());
+		return ((k == null) ? 0 : k.hashCode()) ^ ((v == null) ? 0 : v.hashCode());
 	}
 
 	@Override
 	public String toString() {
-	    return k + "->" + v;
+		return k + "->" + v;
 	}
-       
+
 }
