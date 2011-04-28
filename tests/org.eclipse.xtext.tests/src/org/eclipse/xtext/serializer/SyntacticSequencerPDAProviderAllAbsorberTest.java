@@ -28,7 +28,7 @@ public class SyntacticSequencerPDAProviderAllAbsorberTest extends AbstractSyntac
 	public void testKeyword() throws Exception {
 		String actual = getParserRule("Rule: a1=ID 'kw1' a2=ID;");
 		StringBuilder expected = new StringBuilder();
-		expected.append("Rule:\n");
+		expected.append("Rule_Rule:\n");
 		expected.append("  'kw1' a2=ID\n");
 		expected.append("  a1=ID 'kw1'\n");
 		expected.append("  a1=ID 'kw1' a2=ID\n");
@@ -40,7 +40,7 @@ public class SyntacticSequencerPDAProviderAllAbsorberTest extends AbstractSyntac
 	public void testKeywordOptional() throws Exception {
 		String actual = getParserRule("Rule: a1=ID 'kw1' 'kw2'? a2=ID;");
 		StringBuilder expected = new StringBuilder();
-		expected.append("Rule:\n");
+		expected.append("Rule_Rule:\n");
 		expected.append("  'kw1' 'kw2'?\n");
 		expected.append("  'kw1' 'kw2'? a2=ID\n");
 		expected.append("  'kw1' a2=ID\n");
@@ -56,7 +56,7 @@ public class SyntacticSequencerPDAProviderAllAbsorberTest extends AbstractSyntac
 	public void testKeywordMany() throws Exception {
 		String actual = getParserRule("Rule: a1=ID 'kw1' 'kw2'+ a2=ID;");
 		StringBuilder expected = new StringBuilder();
-		expected.append("Rule:\n");
+		expected.append("Rule_Rule:\n");
 		expected.append("  'kw1' 'kw2'+\n");
 		expected.append("  'kw1' 'kw2'+ !'kw2'+ a2=ID\n");
 		expected.append("  'kw2'+ 'kw2'+\n");
@@ -73,7 +73,7 @@ public class SyntacticSequencerPDAProviderAllAbsorberTest extends AbstractSyntac
 	public void testKeywordOptionalMany() throws Exception {
 		String actual = getParserRule("Rule: a1=ID 'kw1' 'kw2'* a2=ID;");
 		StringBuilder expected = new StringBuilder();
-		expected.append("Rule:\n");
+		expected.append("Rule_Rule:\n");
 		expected.append("  'kw1' 'kw2'*\n");
 		expected.append("  'kw1' 'kw2'* !'kw2'* a2=ID\n");
 		expected.append("  'kw1' a2=ID\n");
@@ -91,7 +91,7 @@ public class SyntacticSequencerPDAProviderAllAbsorberTest extends AbstractSyntac
 	public void testKeywordAlternative() throws Exception {
 		String actual = getParserRule("Rule: a1=ID ('kw1' | 'kw2') a2=ID;");
 		StringBuilder expected = new StringBuilder();
-		expected.append("Rule:\n");
+		expected.append("Rule_Rule:\n");
 		expected.append("  'kw1' a2=ID\n");
 		expected.append("  'kw2' a2=ID\n");
 		expected.append("  a1=ID 'kw1'\n");
@@ -106,7 +106,7 @@ public class SyntacticSequencerPDAProviderAllAbsorberTest extends AbstractSyntac
 	public void testKeywordAllMandatory() throws Exception {
 		String actual = getParserRule("Rule: a1=ID ('kw1' a2=ID | 'kw2' a2=ID 'kw3');");
 		StringBuilder expected = new StringBuilder();
-		expected.append("Rule:\n");
+		expected.append("Rule_Rule:\n");
 		expected.append("  'kw1' a2=ID\n");
 		expected.append("  'kw2' a2=ID\n");
 		expected.append("  'kw3' stop\n");
@@ -183,14 +183,14 @@ public class SyntacticSequencerPDAProviderAllAbsorberTest extends AbstractSyntac
 		grammar.append("Sub: 'kw2' val=ID 'kw3';\n");
 		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
-		expected.append("Model:\n");
+		expected.append("Model_Model:\n");
 		expected.append("  'kw1' sub=Sub\n");
 		expected.append("  'kw4' stop\n");
 		expected.append("  start 'kw1'\n");
 		expected.append("  start 'kw1' sub=Sub\n");
 		expected.append("  sub=Sub 'kw4'\n");
 		expected.append("  sub=Sub 'kw4' stop\n");
-		expected.append("Sub:\n");
+		expected.append("Sub_Sub:\n");
 		expected.append("  'kw2' val=ID\n");
 		expected.append("  'kw3' stop\n");
 		expected.append("  start 'kw2'\n");
@@ -258,24 +258,24 @@ public class SyntacticSequencerPDAProviderAllAbsorberTest extends AbstractSyntac
 		grammar.append("Sub3: 'sub3' val4=ID;\n");
 		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
-		expected.append("Model:\n");
+		expected.append("Model_Model:\n");
 		expected.append("  start start=ID\n");
 		expected.append("  start=ID sub1=Sub1\n");
 		expected.append("  sub1=Sub1 val1=ID\n");
 		expected.append("  val1=ID stop\n");
-		expected.append("Sub1:\n");
+		expected.append("Sub1_Sub1:\n");
 		expected.append("  'sub1' sub2=Sub2\n");
 		expected.append("  start 'sub1'\n");
 		expected.append("  start 'sub1' sub2=Sub2\n");
 		expected.append("  sub2=Sub2 val2=ID\n");
 		expected.append("  val2=ID stop\n");
-		expected.append("Sub2:\n");
+		expected.append("Sub2_Sub2:\n");
 		expected.append("  'sub2' sub3=Sub3\n");
 		expected.append("  start 'sub2'\n");
 		expected.append("  start 'sub2' sub3=Sub3\n");
 		expected.append("  sub3=Sub3 val3=ID\n");
 		expected.append("  val3=ID stop\n");
-		expected.append("Sub3:\n");
+		expected.append("Sub3_Sub3:\n");
 		expected.append("  'sub3' val4=ID\n");
 		expected.append("  start 'sub3'\n");
 		expected.append("  start 'sub3' val4=ID\n");
@@ -292,7 +292,7 @@ public class SyntacticSequencerPDAProviderAllAbsorberTest extends AbstractSyntac
 		grammar.append("enum MyEnum: kw1 | kw2;\n");
 		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
-		expected.append("Model:\n");
+		expected.append("Model_Model:\n");
 		expected.append("  'kw1' d=MyDatatype\n");
 		expected.append("  'kw2' e=MyEnum\n");
 		expected.append("  'kw3' k='kw4'\n");

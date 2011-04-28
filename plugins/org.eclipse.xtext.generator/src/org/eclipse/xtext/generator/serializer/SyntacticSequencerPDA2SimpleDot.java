@@ -9,10 +9,9 @@ package org.eclipse.xtext.generator.serializer;
 
 import java.util.Set;
 
-import org.eclipse.xtext.Action;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.grammaranalysis.IPDAState;
 import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.SequencerNFAProvider;
+import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.SequencerPDAContext;
 import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.SequencerPDAProvider;
 import org.eclipse.xtext.util.GraphvizDotBuilder;
 
@@ -35,10 +34,8 @@ public class SyntacticSequencerPDA2SimpleDot extends GraphvizDotBuilder {
 
 	@Override
 	protected Props drawObject(Object obj) {
-		if (obj instanceof ParserRule)
-			return drawGrammar(pdaProvider.getPDA((ParserRule) obj));
-		if (obj instanceof Action)
-			return drawGrammar(pdaProvider.getPDA((Action) obj));
+		if (obj instanceof SequencerPDAContext)
+			return drawGrammar(pdaProvider.getPDA((SequencerPDAContext) obj));
 		return null;
 	}
 

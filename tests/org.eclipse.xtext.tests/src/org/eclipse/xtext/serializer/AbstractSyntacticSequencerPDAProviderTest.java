@@ -7,27 +7,28 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarToDot;
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
+import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.SequencerNFAProvider;
 import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.SequencerNFAState;
 import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.SequencerNFATransition;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Triple;
+import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -83,26 +84,38 @@ public abstract class AbstractSyntacticSequencerPDAProviderTest extends Abstract
 
 	protected String getParserRule(String body) throws Exception {
 		Grammar grammar = (Grammar) getModel(HEADER + body);
-		try {
-			new SequenceParserNDA2Dot().draw(grammar, "pdf/" + getName() + "-NFA.pdf", "-T pdf");
-			//			SyntacticSequencerPDA2SimpleDot.drawGrammar("pdf/" + getName(), grammar);
-			//			SyntacticSequencerPDA2ExtendedDot.drawGrammar(createSequenceParserPDAProvider(), "pdf/" + getName(), grammar);
-			//			System.out.println(new SequenceParserPDA2Dot().draw(grammar));
-		} catch (IOException e) {
-		}
+		//		try {
+		//			new SequenceParserNDA2Dot().draw(grammar, "pdf/" + getName() + "-NFA.pdf", "-T pdf");
+		//			SyntacticSequencerPDA2SimpleDot.drawGrammar("pdf/" + getName(), grammar);
+		//			SyntacticSequencerPDA2ExtendedDot.drawGrammar(createSequenceParserPDAProvider(), "pdf/" + getName(), grammar);
+		//			System.out.println(new SequenceParserPDA2Dot().draw(grammar));
+		//		} catch (IOException e) {
+		//		}
 
 		List<String> result = Lists.newArrayList();
-		for (ParserRule pr : GrammarUtil.allParserRules(grammar))
-			if (pr.getType().getClassifier() instanceof EClass) {
-				result.add(pr.getName() + ":");
-				result.addAll(pda2lines(createSequenceParserPDAProvider().getPDA(pr)));
+		for (Triple<EClass, EObject, String> ctx : getContexts(grammar)) {
+			result.add(ctx.getFirst().getName() + "_" + ctx.getThird() + ":");
+			result.addAll(pda2lines(createSequenceParserPDAProvider().getPDA(ctx.getSecond(), ctx.getFirst())));
+		}
+		return Join.join("\n", result);
+	}
+
+	private List<Triple<EClass, EObject, String>> getContexts(Grammar grammar) {
+		final Context2NameFunction ctx2name = get(Context2NameFunction.class);
+		final IContextProvider contextProvider = get(IContextProvider.class);
+		List<Triple<EClass, EObject, String>> result = Lists.newArrayList();
+		for (EObject ctx : contextProvider.getAllContexts(grammar))
+			for (EClass type : contextProvider.getTypesForContext(ctx))
+				result.add(Tuples.create(type, ctx, ctx2name.getContextName(ctx)));
+		Collections.sort(result, new Comparator<Triple<EClass, EObject, String>>() {
+			public int compare(Triple<EClass, EObject, String> o1, Triple<EClass, EObject, String> o2) {
+				int c = o1.getFirst().getName().compareTo(o2.getFirst().getName());
+				if (c != 0)
+					return c;
+				return o1.getThird().compareTo(o2.getThird());
 			}
-		for (Action act : GrammarUtil.containedActions(grammar))
-			if (act.getFeature() != null) {
-				result.add("{" + act.getType().getClassifier().getName() + "." + act.getFeature() + "}" + ":");
-				result.addAll(pda2lines(createSequenceParserPDAProvider().getPDA(act)));
-			}
-		return Joiner.on("\n").join(result);
+		});
+		return result;
 	}
 
 	private List<String> pda2lines(ISynAbsorberState start) {
