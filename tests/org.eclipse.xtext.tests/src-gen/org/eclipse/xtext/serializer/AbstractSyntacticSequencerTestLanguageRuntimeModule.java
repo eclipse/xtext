@@ -79,4 +79,14 @@ public abstract class AbstractSyntacticSequencerTestLanguageRuntimeModule extend
 		return org.eclipse.xtext.serializer.parseTreeConstruction.SyntacticSequencerTestLanguageParsetreeConstructor.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	public Class<? extends org.eclipse.xtext.serializer.ISemanticSequencer> bindISemanticSequencer() {
+		return org.eclipse.xtext.serializer.serializer.SyntacticSequencerTestLanguageSemanticSequencer.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	public Class<? extends org.eclipse.xtext.serializer.ISerializer> bindISerializer() {
+		return org.eclipse.xtext.serializer.impl.Serializer.class;
+	}
+
 }

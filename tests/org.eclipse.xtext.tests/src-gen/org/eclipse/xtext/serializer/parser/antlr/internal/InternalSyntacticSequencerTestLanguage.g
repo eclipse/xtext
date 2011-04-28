@@ -171,6 +171,25 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX6BooleanAlternativeParserRuleCall_5_0()); 
+	    }
+		lv_x6_5_0=ruleBooleanAlternative		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x6",
+        		lv_x6_5_0, 
+        		"BooleanAlternative");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 ))
 ;
 
@@ -931,6 +950,96 @@ ruleSingleCrossReference returns [EObject current=null]
 
 )
 ))?)
+;
+
+
+
+
+
+// Entry rule entryRuleBooleanAlternative
+entryRuleBooleanAlternative returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getBooleanAlternativeRule()); }
+	 iv_ruleBooleanAlternative=ruleBooleanAlternative 
+	 { $current=$iv_ruleBooleanAlternative.current; } 
+	 EOF 
+;
+
+// Rule BooleanAlternative
+ruleBooleanAlternative returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#6' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getBooleanAlternativeAccess().getNumberSignDigitSixKeyword_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getBooleanAlternativeAccess().getBoolBooleanAlternativeLiteralParserRuleCall_1_0()); 
+	    }
+		lv_bool_1_0=ruleBooleanAlternativeLiteral		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getBooleanAlternativeRule());
+	        }
+       		set(
+       			$current, 
+       			"bool",
+        		lv_bool_1_0, 
+        		"BooleanAlternativeLiteral");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+;
+
+
+
+
+
+// Entry rule entryRuleBooleanAlternativeLiteral
+entryRuleBooleanAlternativeLiteral returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getBooleanAlternativeLiteralRule()); }
+	 iv_ruleBooleanAlternativeLiteral=ruleBooleanAlternativeLiteral 
+	 { $current=$iv_ruleBooleanAlternativeLiteral.current; } 
+	 EOF 
+;
+
+// Rule BooleanAlternativeLiteral
+ruleBooleanAlternativeLiteral returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getBooleanAlternativeLiteralAccess().getBooleanAlternativeLiteralAction_0(),
+            $current);
+    }
+)(	otherlv_1='kw1' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getBooleanAlternativeLiteralAccess().getKw1Keyword_1_0());
+    }
+
+    |(
+(
+		lv_isTrue_2_0=	'kw2' 
+    {
+        newLeafNode(lv_isTrue_2_0, grammarAccess.getBooleanAlternativeLiteralAccess().getIsTrueKw2Keyword_1_1_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getBooleanAlternativeLiteralRule());
+	        }
+       		setWithLastConsumed($current, "isTrue", true, "kw2");
+	    }
+
+)
+)))
 ;
 
 

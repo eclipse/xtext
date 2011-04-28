@@ -11,16 +11,21 @@ import org.eclipse.xtext.generator.Generator;
 import org.eclipse.xtext.generator.Xtend2ExecutionContext;
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment;
 import org.eclipse.xtext.generator.serializer.AbstractSemanticSequencer;
+import org.eclipse.xtext.generator.serializer.Context2DotRenderer;
 import org.eclipse.xtext.generator.serializer.GrammarConstraints;
 import org.eclipse.xtext.generator.serializer.SemanticSequencer;
 import org.eclipse.xtext.generator.serializer.SerializerFragmentState;
+import org.eclipse.xtext.generator.serializer.SyntacticSequencerPDA2ExtendedDot;
+import org.eclipse.xtext.generator.serializer.SyntacticSequencerPDA2SimpleDot;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
 public class SerializerFragment extends Xtend2GeneratorFragment {
   @Inject private AbstractSemanticSequencer abstractSemanticSequencer;
   @Inject private SemanticSequencer semanticSequencer;
   @Inject private GrammarConstraints grammarConstraints;
+  @Inject private Context2DotRenderer context2DotRenderer;
   
   private final HashMap<ArrayList<?>,SerializerFragmentState> _createCache_state = new HashMap<ArrayList<?>,SerializerFragmentState>();
   
@@ -69,9 +74,25 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
       ctx.writeFile(Generator.SRC_GEN, _fileName_1, _fileContents_1);
       SerializerFragmentState _state = this.state();
       if (_state.generateDebugData) {
-        String _fileName_2 = this.grammarConstraints.getFileName();
-        String _fileContents_2 = this.grammarConstraints.getFileContents();
-        ctx.writeFile(Generator.SRC_GEN, _fileName_2, _fileContents_2);
+        {
+          String _fileName_2 = this.grammarConstraints.getFileName();
+          String _fileContents_2 = this.grammarConstraints.getFileContents();
+          ctx.writeFile(Generator.SRC_GEN, _fileName_2, _fileContents_2);
+          SyntacticSequencerPDA2SimpleDot _syntacticSequencerPDA2SimpleDot = new SyntacticSequencerPDA2SimpleDot();
+          Iterable<Pair<String,String>> _render2Dot = this.context2DotRenderer.render2Dot(_syntacticSequencerPDA2SimpleDot, "pda1");
+          for (Pair<String,String> obj : _render2Dot) {
+            String _key = obj.getKey();
+            String _value = obj.getValue();
+            ctx.writeFile(Generator.SRC_GEN, _key, _value);
+          }
+          SyntacticSequencerPDA2ExtendedDot _syntacticSequencerPDA2ExtendedDot = new SyntacticSequencerPDA2ExtendedDot();
+          Iterable<Pair<String,String>> _render2Dot_1 = this.context2DotRenderer.render2Dot(_syntacticSequencerPDA2ExtendedDot, "pda2");
+          for (Pair<String,String> obj_1 : _render2Dot_1) {
+            String _key_1 = obj_1.getKey();
+            String _value_1 = obj_1.getValue();
+            ctx.writeFile(Generator.SRC_GEN, _key_1, _value_1);
+          }
+        }
       }
     }
   }

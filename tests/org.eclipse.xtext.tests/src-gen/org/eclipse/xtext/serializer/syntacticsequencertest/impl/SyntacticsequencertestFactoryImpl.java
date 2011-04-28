@@ -73,6 +73,8 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
       case SyntacticsequencertestPackage.EXP1: return createExp1();
       case SyntacticsequencertestPackage.EXP2: return createExp2();
       case SyntacticsequencertestPackage.SINGLE_CROSS_REFERENCE: return createSingleCrossReference();
+      case SyntacticsequencertestPackage.BOOLEAN_ALTERNATIVE: return createBooleanAlternative();
+      case SyntacticsequencertestPackage.BOOLEAN_ALTERNATIVE_LITERAL: return createBooleanAlternativeLiteral();
       case SyntacticsequencertestPackage.ADD0: return createAdd0();
       case SyntacticsequencertestPackage.VAL0: return createVal0();
       case SyntacticsequencertestPackage.ADD1: return createAdd1();
@@ -149,6 +151,28 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
   {
     SingleCrossReferenceImpl singleCrossReference = new SingleCrossReferenceImpl();
     return singleCrossReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public BooleanAlternative createBooleanAlternative()
+  {
+    BooleanAlternativeImpl booleanAlternative = new BooleanAlternativeImpl();
+    return booleanAlternative;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public BooleanAlternativeLiteral createBooleanAlternativeLiteral()
+  {
+    BooleanAlternativeLiteralImpl booleanAlternativeLiteral = new BooleanAlternativeLiteralImpl();
+    return booleanAlternativeLiteral;
   }
 
   /**

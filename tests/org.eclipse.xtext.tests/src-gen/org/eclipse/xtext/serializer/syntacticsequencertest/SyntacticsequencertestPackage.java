@@ -115,13 +115,22 @@ public interface SyntacticsequencertestPackage extends EPackage
   int MODEL__X5 = 4;
 
   /**
+   * The feature id for the '<em><b>X6</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X6 = 5;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 5;
+  int MODEL_FEATURE_COUNT = 6;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryKeywordsImpl <em>Mandatory Keywords</em>}' class.
@@ -291,6 +300,62 @@ public interface SyntacticsequencertestPackage extends EPackage
   int SINGLE_CROSS_REFERENCE_FEATURE_COUNT = 5;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.BooleanAlternativeImpl <em>Boolean Alternative</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.BooleanAlternativeImpl
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getBooleanAlternative()
+   * @generated
+   */
+  int BOOLEAN_ALTERNATIVE = 6;
+
+  /**
+   * The feature id for the '<em><b>Bool</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOLEAN_ALTERNATIVE__BOOL = 0;
+
+  /**
+   * The number of structural features of the '<em>Boolean Alternative</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOLEAN_ALTERNATIVE_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.BooleanAlternativeLiteralImpl <em>Boolean Alternative Literal</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.BooleanAlternativeLiteralImpl
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getBooleanAlternativeLiteral()
+   * @generated
+   */
+  int BOOLEAN_ALTERNATIVE_LITERAL = 7;
+
+  /**
+   * The feature id for the '<em><b>Is True</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOLEAN_ALTERNATIVE_LITERAL__IS_TRUE = 0;
+
+  /**
+   * The number of structural features of the '<em>Boolean Alternative Literal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOLEAN_ALTERNATIVE_LITERAL_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.Add0Impl <em>Add0</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -298,7 +363,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd0()
    * @generated
    */
-  int ADD0 = 6;
+  int ADD0 = 8;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -335,7 +400,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal0()
    * @generated
    */
-  int VAL0 = 7;
+  int VAL0 = 9;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -363,7 +428,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd1()
    * @generated
    */
-  int ADD1 = 8;
+  int ADD1 = 10;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -400,7 +465,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal1()
    * @generated
    */
-  int VAL1 = 9;
+  int VAL1 = 11;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -428,7 +493,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd2()
    * @generated
    */
-  int ADD2 = 10;
+  int ADD2 = 12;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -465,7 +530,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getMult2()
    * @generated
    */
-  int MULT2 = 11;
+  int MULT2 = 13;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -502,7 +567,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal2()
    * @generated
    */
-  int VAL2 = 12;
+  int VAL2 = 14;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -587,6 +652,17 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @generated
    */
   EReference getModel_X5();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX6 <em>X6</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X6</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX6()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X6();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryKeywords <em>Mandatory Keywords</em>}'.
@@ -725,6 +801,48 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @generated
    */
   EReference getSingleCrossReference_Ref4();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternative <em>Boolean Alternative</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Boolean Alternative</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternative
+   * @generated
+   */
+  EClass getBooleanAlternative();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternative#getBool <em>Bool</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Bool</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternative#getBool()
+   * @see #getBooleanAlternative()
+   * @generated
+   */
+  EReference getBooleanAlternative_Bool();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternativeLiteral <em>Boolean Alternative Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Boolean Alternative Literal</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternativeLiteral
+   * @generated
+   */
+  EClass getBooleanAlternativeLiteral();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternativeLiteral#isIsTrue <em>Is True</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Is True</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternativeLiteral#isIsTrue()
+   * @see #getBooleanAlternativeLiteral()
+   * @generated
+   */
+  EAttribute getBooleanAlternativeLiteral_IsTrue();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Add0 <em>Add0</em>}'.
@@ -991,6 +1109,14 @@ public interface SyntacticsequencertestPackage extends EPackage
     EReference MODEL__X5 = eINSTANCE.getModel_X5();
 
     /**
+     * The meta object literal for the '<em><b>X6</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X6 = eINSTANCE.getModel_X6();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryKeywordsImpl <em>Mandatory Keywords</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1103,6 +1229,42 @@ public interface SyntacticsequencertestPackage extends EPackage
      * @generated
      */
     EReference SINGLE_CROSS_REFERENCE__REF4 = eINSTANCE.getSingleCrossReference_Ref4();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.BooleanAlternativeImpl <em>Boolean Alternative</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.BooleanAlternativeImpl
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getBooleanAlternative()
+     * @generated
+     */
+    EClass BOOLEAN_ALTERNATIVE = eINSTANCE.getBooleanAlternative();
+
+    /**
+     * The meta object literal for the '<em><b>Bool</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference BOOLEAN_ALTERNATIVE__BOOL = eINSTANCE.getBooleanAlternative_Bool();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.BooleanAlternativeLiteralImpl <em>Boolean Alternative Literal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.BooleanAlternativeLiteralImpl
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getBooleanAlternativeLiteral()
+     * @generated
+     */
+    EClass BOOLEAN_ALTERNATIVE_LITERAL = eINSTANCE.getBooleanAlternativeLiteral();
+
+    /**
+     * The meta object literal for the '<em><b>Is True</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BOOLEAN_ALTERNATIVE_LITERAL__IS_TRUE = eINSTANCE.getBooleanAlternativeLiteral_IsTrue();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.Add0Impl <em>Add0</em>}' class.

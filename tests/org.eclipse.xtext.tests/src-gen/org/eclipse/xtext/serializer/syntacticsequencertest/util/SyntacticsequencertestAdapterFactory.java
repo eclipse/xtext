@@ -108,6 +108,16 @@ public class SyntacticsequencertestAdapterFactory extends AdapterFactoryImpl
         return createSingleCrossReferenceAdapter();
       }
       @Override
+      public Adapter caseBooleanAlternative(BooleanAlternative object)
+      {
+        return createBooleanAlternativeAdapter();
+      }
+      @Override
+      public Adapter caseBooleanAlternativeLiteral(BooleanAlternativeLiteral object)
+      {
+        return createBooleanAlternativeLiteralAdapter();
+      }
+      @Override
       public Adapter caseAdd0(Add0 object)
       {
         return createAdd0Adapter();
@@ -250,6 +260,36 @@ public class SyntacticsequencertestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createSingleCrossReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternative <em>Boolean Alternative</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternative
+   * @generated
+   */
+  public Adapter createBooleanAlternativeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternativeLiteral <em>Boolean Alternative Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternativeLiteral
+   * @generated
+   */
+  public Adapter createBooleanAlternativeLiteralAdapter()
   {
     return null;
   }

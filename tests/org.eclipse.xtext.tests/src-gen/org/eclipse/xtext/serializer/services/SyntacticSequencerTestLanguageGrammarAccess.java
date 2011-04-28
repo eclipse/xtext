@@ -30,12 +30,14 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cX4Exp2ParserRuleCall_3_0 = (RuleCall)cX4Assignment_3.eContents().get(0);
 		private final Assignment cX5Assignment_4 = (Assignment)cAlternatives.eContents().get(4);
 		private final RuleCall cX5SingleCrossReferenceParserRuleCall_4_0 = (RuleCall)cX5Assignment_4.eContents().get(0);
+		private final Assignment cX6Assignment_5 = (Assignment)cAlternatives.eContents().get(5);
+		private final RuleCall cX6BooleanAlternativeParserRuleCall_5_0 = (RuleCall)cX6Assignment_5.eContents().get(0);
 		
 		//Model:
-		//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference;
+		//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative;
 		public ParserRule getRule() { return rule; }
 
-		//x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference
+		//x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//x1=MandatoryKeywords
@@ -67,6 +69,12 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 
 		//SingleCrossReference
 		public RuleCall getX5SingleCrossReferenceParserRuleCall_4_0() { return cX5SingleCrossReferenceParserRuleCall_4_0; }
+
+		//x6=BooleanAlternative
+		public Assignment getX6Assignment_5() { return cX6Assignment_5; }
+
+		//BooleanAlternative
+		public RuleCall getX6BooleanAlternativeParserRuleCall_5_0() { return cX6BooleanAlternativeParserRuleCall_5_0; }
 	}
 
 	public class MandatoryKeywordsElements extends AbstractParserRuleElementFinder {
@@ -566,6 +574,62 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//ID
 		public RuleCall getRef4SingleCrossReferenceIDTerminalRuleCall_5_1_0_1() { return cRef4SingleCrossReferenceIDTerminalRuleCall_5_1_0_1; }
 	}
+
+	public class BooleanAlternativeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BooleanAlternative");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitSixKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cBoolAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cBoolBooleanAlternativeLiteralParserRuleCall_1_0 = (RuleCall)cBoolAssignment_1.eContents().get(0);
+		
+		//BooleanAlternative:
+		//	"#6" bool=BooleanAlternativeLiteral;
+		public ParserRule getRule() { return rule; }
+
+		//"#6" bool=BooleanAlternativeLiteral
+		public Group getGroup() { return cGroup; }
+
+		//"#6"
+		public Keyword getNumberSignDigitSixKeyword_0() { return cNumberSignDigitSixKeyword_0; }
+
+		//bool=BooleanAlternativeLiteral
+		public Assignment getBoolAssignment_1() { return cBoolAssignment_1; }
+
+		//BooleanAlternativeLiteral
+		public RuleCall getBoolBooleanAlternativeLiteralParserRuleCall_1_0() { return cBoolBooleanAlternativeLiteralParserRuleCall_1_0; }
+	}
+
+	public class BooleanAlternativeLiteralElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BooleanAlternativeLiteral");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cBooleanAlternativeLiteralAction_0 = (Action)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Keyword cKw1Keyword_1_0 = (Keyword)cAlternatives_1.eContents().get(0);
+		private final Assignment cIsTrueAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
+		private final Keyword cIsTrueKw2Keyword_1_1_0 = (Keyword)cIsTrueAssignment_1_1.eContents().get(0);
+		
+		//BooleanAlternativeLiteral:
+		//	{BooleanAlternativeLiteral} ("kw1" | isTrue?="kw2");
+		public ParserRule getRule() { return rule; }
+
+		//{BooleanAlternativeLiteral} ("kw1" | isTrue?="kw2")
+		public Group getGroup() { return cGroup; }
+
+		//{BooleanAlternativeLiteral}
+		public Action getBooleanAlternativeLiteralAction_0() { return cBooleanAlternativeLiteralAction_0; }
+
+		//"kw1" | isTrue?="kw2"
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
+		//"kw1"
+		public Keyword getKw1Keyword_1_0() { return cKw1Keyword_1_0; }
+
+		//isTrue?="kw2"
+		public Assignment getIsTrueAssignment_1_1() { return cIsTrueAssignment_1_1; }
+
+		//"kw2"
+		public Keyword getIsTrueKw2Keyword_1_1_0() { return cIsTrueKw2Keyword_1_1_0; }
+	}
 	
 	
 	private ModelElements pModel;
@@ -583,6 +647,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	private TerminalRule tTerminalID;
 	private DatatypeIDElements pDatatypeID;
 	private SingleCrossReferenceElements pSingleCrossReference;
+	private BooleanAlternativeElements pBooleanAlternative;
+	private BooleanAlternativeLiteralElements pBooleanAlternativeLiteral;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -606,7 +672,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 
 	
 	//Model:
-	//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference;
+	//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -750,6 +816,26 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	
 	public ParserRule getSingleCrossReferenceRule() {
 		return getSingleCrossReferenceAccess().getRule();
+	}
+
+	//BooleanAlternative:
+	//	"#6" bool=BooleanAlternativeLiteral;
+	public BooleanAlternativeElements getBooleanAlternativeAccess() {
+		return (pBooleanAlternative != null) ? pBooleanAlternative : (pBooleanAlternative = new BooleanAlternativeElements());
+	}
+	
+	public ParserRule getBooleanAlternativeRule() {
+		return getBooleanAlternativeAccess().getRule();
+	}
+
+	//BooleanAlternativeLiteral:
+	//	{BooleanAlternativeLiteral} ("kw1" | isTrue?="kw2");
+	public BooleanAlternativeLiteralElements getBooleanAlternativeLiteralAccess() {
+		return (pBooleanAlternativeLiteral != null) ? pBooleanAlternativeLiteral : (pBooleanAlternativeLiteral = new BooleanAlternativeLiteralElements());
+	}
+	
+	public ParserRule getBooleanAlternativeLiteralRule() {
+		return getBooleanAlternativeLiteralAccess().getRule();
 	}
 
 	//terminal ID:

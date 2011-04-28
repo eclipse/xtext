@@ -44,6 +44,8 @@ protected class ThisRootNode extends RootToken {
 			case 10: return new Multiplication2_Group(this, this, 10, inst);
 			case 11: return new Prim2_Alternatives(this, this, 11, inst);
 			case 12: return new SingleCrossReference_Group(this, this, 12, inst);
+			case 13: return new BooleanAlternative_Group(this, this, 13, inst);
+			case 14: return new BooleanAlternativeLiteral_Group(this, this, 14, inst);
 			default: return null;
 		}	
 	}	
@@ -53,11 +55,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference;
+ * 	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative;
  *
  **/
 
-// x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference
+// x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -77,6 +79,7 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 2: return new Model_X3Assignment_2(lastRuleCallOrigin, this, 2, inst);
 			case 3: return new Model_X4Assignment_3(lastRuleCallOrigin, this, 3, inst);
 			case 4: return new Model_X5Assignment_4(lastRuleCallOrigin, this, 4, inst);
+			case 5: return new Model_X6Assignment_5(lastRuleCallOrigin, this, 5, inst);
 			default: return null;
 		}	
 	}
@@ -299,6 +302,51 @@ protected class Model_X5Assignment_4 extends AssignmentToken  {
 			if(param.isInstanceOf(grammarAccess.getSingleCrossReferenceRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getModelAccess().getX5SingleCrossReferenceParserRuleCall_4_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x6=BooleanAlternative
+protected class Model_X6Assignment_5 extends AssignmentToken  {
+	
+	public Model_X6Assignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX6Assignment_5();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new BooleanAlternative_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("x6",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x6");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getBooleanAlternativeRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getModelAccess().getX6BooleanAlternativeParserRuleCall_5_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2688,5 +2736,258 @@ protected class SingleCrossReference_Ref4Assignment_5_1 extends AssignmentToken 
 
 
 /************ end Rule SingleCrossReference ****************/
+
+
+/************ begin Rule BooleanAlternative ****************
+ *
+ * BooleanAlternative:
+ * 	"#6" bool=BooleanAlternativeLiteral;
+ *
+ **/
+
+// "#6" bool=BooleanAlternativeLiteral
+protected class BooleanAlternative_Group extends GroupToken {
+	
+	public BooleanAlternative_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getBooleanAlternativeAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new BooleanAlternative_BoolAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getBooleanAlternativeRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "#6"
+protected class BooleanAlternative_NumberSignDigitSixKeyword_0 extends KeywordToken  {
+	
+	public BooleanAlternative_NumberSignDigitSixKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBooleanAlternativeAccess().getNumberSignDigitSixKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// bool=BooleanAlternativeLiteral
+protected class BooleanAlternative_BoolAssignment_1 extends AssignmentToken  {
+	
+	public BooleanAlternative_BoolAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getBooleanAlternativeAccess().getBoolAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new BooleanAlternativeLiteral_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("bool",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("bool");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getBooleanAlternativeLiteralRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getBooleanAlternativeAccess().getBoolBooleanAlternativeLiteralParserRuleCall_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new BooleanAlternative_NumberSignDigitSixKeyword_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+/************ end Rule BooleanAlternative ****************/
+
+
+/************ begin Rule BooleanAlternativeLiteral ****************
+ *
+ * BooleanAlternativeLiteral:
+ * 	{BooleanAlternativeLiteral} ("kw1" | isTrue?="kw2");
+ *
+ **/
+
+// {BooleanAlternativeLiteral} ("kw1" | isTrue?="kw2")
+protected class BooleanAlternativeLiteral_Group extends GroupToken {
+	
+	public BooleanAlternativeLiteral_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getBooleanAlternativeLiteralAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new BooleanAlternativeLiteral_Alternatives_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getBooleanAlternativeLiteralAccess().getBooleanAlternativeLiteralAction_0().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// {BooleanAlternativeLiteral}
+protected class BooleanAlternativeLiteral_BooleanAlternativeLiteralAction_0 extends ActionToken  {
+
+	public BooleanAlternativeLiteral_BooleanAlternativeLiteralAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getBooleanAlternativeLiteralAccess().getBooleanAlternativeLiteralAction_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
+}
+
+// "kw1" | isTrue?="kw2"
+protected class BooleanAlternativeLiteral_Alternatives_1 extends AlternativesToken {
+
+	public BooleanAlternativeLiteral_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getBooleanAlternativeLiteralAccess().getAlternatives_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new BooleanAlternativeLiteral_Kw1Keyword_1_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new BooleanAlternativeLiteral_IsTrueAssignment_1_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "kw1"
+protected class BooleanAlternativeLiteral_Kw1Keyword_1_0 extends KeywordToken  {
+	
+	public BooleanAlternativeLiteral_Kw1Keyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBooleanAlternativeLiteralAccess().getKw1Keyword_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new BooleanAlternativeLiteral_BooleanAlternativeLiteralAction_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// isTrue?="kw2"
+protected class BooleanAlternativeLiteral_IsTrueAssignment_1_1 extends AssignmentToken  {
+	
+	public BooleanAlternativeLiteral_IsTrueAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getBooleanAlternativeLiteralAccess().getIsTrueAssignment_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new BooleanAlternativeLiteral_BooleanAlternativeLiteralAction_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("isTrue",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("isTrue");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getBooleanAlternativeLiteralAccess().getIsTrueKw2Keyword_1_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+
+/************ end Rule BooleanAlternativeLiteral ****************/
 
 }

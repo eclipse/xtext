@@ -80,6 +80,24 @@ public interface SyntacticsequencertestFactory extends EFactory
   SingleCrossReference createSingleCrossReference();
 
   /**
+   * Returns a new object of class '<em>Boolean Alternative</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Boolean Alternative</em>'.
+   * @generated
+   */
+  BooleanAlternative createBooleanAlternative();
+
+  /**
+   * Returns a new object of class '<em>Boolean Alternative Literal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Boolean Alternative Literal</em>'.
+   * @generated
+   */
+  BooleanAlternativeLiteral createBooleanAlternativeLiteral();
+
+  /**
    * Returns a new object of class '<em>Add0</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

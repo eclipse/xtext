@@ -137,6 +137,20 @@ public class SyntacticsequencertestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case SyntacticsequencertestPackage.BOOLEAN_ALTERNATIVE:
+      {
+        BooleanAlternative booleanAlternative = (BooleanAlternative)theEObject;
+        T result = caseBooleanAlternative(booleanAlternative);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SyntacticsequencertestPackage.BOOLEAN_ALTERNATIVE_LITERAL:
+      {
+        BooleanAlternativeLiteral booleanAlternativeLiteral = (BooleanAlternativeLiteral)theEObject;
+        T result = caseBooleanAlternativeLiteral(booleanAlternativeLiteral);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case SyntacticsequencertestPackage.ADD0:
       {
         Add0 add0 = (Add0)theEObject;
@@ -289,6 +303,38 @@ public class SyntacticsequencertestSwitch<T>
    * @generated
    */
   public T caseSingleCrossReference(SingleCrossReference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Boolean Alternative</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Boolean Alternative</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBooleanAlternative(BooleanAlternative object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Boolean Alternative Literal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Boolean Alternative Literal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBooleanAlternativeLiteral(BooleanAlternativeLiteral object)
   {
     return null;
   }
