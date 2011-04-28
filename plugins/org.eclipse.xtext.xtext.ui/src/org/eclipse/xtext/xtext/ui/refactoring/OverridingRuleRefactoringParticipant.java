@@ -11,22 +11,10 @@ import static com.google.common.collect.Lists.*;
 
 import java.util.List;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.ui.editor.findrefs.FindReferenceQueryDataFactory;
-import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
-import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder.IQueryData;
 import org.eclipse.xtext.ui.refactoring.impl.AbstractProcessorBasedRenameParticipant;
-import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
 
@@ -37,35 +25,12 @@ import com.google.inject.Inject;
 public class OverridingRuleRefactoringParticipant extends AbstractProcessorBasedRenameParticipant {
 
 	@Inject
-	private IReferenceFinder referenceFinder;
-
-	@Inject
-	private FindReferenceQueryDataFactory queryDataFactory;
-
-	@Inject
-	private IResourceDescriptions resourceDescriptions;
+	private RuleOverrideUtil ruleOverrideUtil;
 	
 	@Override
 	protected List<EObject> getRenamedElementsOrProxies(EObject originalTarget) {
 		if(originalTarget instanceof AbstractRule) {
-			final String ruleName = ((AbstractRule)originalTarget).getName();
-			Grammar grammar = GrammarUtil.getGrammar(originalTarget);
-			IQueryData queryData = queryDataFactory.createQueryData(grammar, null);
-			final List<IEObjectDescription> overridingRules = newArrayList();
-			IAcceptor<IReferenceDescription> acceptor = new IAcceptor<IReferenceDescription>() {
-				public void accept(IReferenceDescription referenceToGrammar) {
-					if(referenceToGrammar.getEReference() == XtextPackage.Literals.GRAMMAR__USED_GRAMMARS) {
-						IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(referenceToGrammar.getSourceEObjectUri().trimFragment());
-						for(IEObjectDescription rule: resourceDescription.getExportedObjectsByType(XtextPackage.Literals.ABSTRACT_RULE)) {
-							if(Strings.equal(ruleName, rule.getQualifiedName().getLastSegment())) {
-								overridingRules.add(rule);
-								break;
-							}
-						}
-					}
-				}
-			};
-			referenceFinder.findIndexedReferences(queryData, acceptor, new NullProgressMonitor());
+			List<IEObjectDescription> overridingRules = ruleOverrideUtil.getOverridingRules((AbstractRule) originalTarget);
 			List<EObject> result = newArrayList();
 			for(IEObjectDescription overridingRule: overridingRules) {
 				result.add(overridingRule.getEObjectOrProxy());

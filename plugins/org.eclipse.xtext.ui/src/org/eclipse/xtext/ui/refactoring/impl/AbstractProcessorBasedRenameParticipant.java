@@ -69,19 +69,17 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 	protected boolean initialize(Object element) {
 		status = new RefactoringStatus();
 		try {
-			if (element instanceof IRenameElementContext) {
-				List<IRenameElementContext> participantContexts = createRenameElementContexts((IRenameElementContext) element);
-				if (participantContexts != null) {
-					wrappedProcessors = newArrayList();
-					for (IRenameElementContext participantContext : participantContexts) {
-						RenameProcessorProvider renameProcessorProvider = globalServiceProvider.findService(
-								participantContext.getTargetElementURI(), RenameProcessorProvider.class);
-						AbstractRenameProcessor wrappedProcessor = renameProcessorProvider
-								.getRenameRefactoring(participantContext);
-						wrappedProcessors.add(wrappedProcessor);
-					}
-					return true;
+			List<IRenameElementContext> participantContexts = createRenameElementContexts(element);
+			if (participantContexts != null) {
+				wrappedProcessors = newArrayList();
+				for (IRenameElementContext participantContext : participantContexts) {
+					RenameProcessorProvider renameProcessorProvider = globalServiceProvider.findService(
+							participantContext.getTargetElementURI(), RenameProcessorProvider.class);
+					AbstractRenameProcessor wrappedProcessor = renameProcessorProvider
+							.getRenameRefactoring(participantContext);
+					wrappedProcessors.add(wrappedProcessor);
 				}
+				return true;
 			}
 		} catch (Exception exc) {
 			status.addError("Error initializing refactoring participant. See log for details");
@@ -121,19 +119,23 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 		return compositeChange;
 	}
 
-	protected List<IRenameElementContext> createRenameElementContexts(IRenameElementContext triggeringContext) {
-		ResourceSet resourceSet = resourceSetProvider.get(projectUtil.getProject(triggeringContext
-				.getTargetElementURI()));
-		EObject originalTarget = resourceSet.getEObject(triggeringContext.getTargetElementURI(), true);
-		List<EObject> renamedElements = getRenamedElementsOrProxies(originalTarget);
-		if (renamedElements == null || renamedElements.isEmpty())
-			return null;
-		List<IRenameElementContext> contexts = newArrayListWithCapacity(renamedElements.size());
-		for (EObject renamedElement : renamedElements)
-			contexts.add(new IRenameElementContext.Impl(EcoreUtil.getURI(renamedElement), renamedElement.eClass(),
-					triggeringContext.getTriggeringEditor(), triggeringContext.getTriggeringEditorSelection(),
-					triggeringContext.getContextResourceURI()));
-		return contexts;
+	protected List<IRenameElementContext> createRenameElementContexts(Object element) {
+		if (element instanceof IRenameElementContext) {
+			IRenameElementContext triggeringContext = (IRenameElementContext) element;
+			ResourceSet resourceSet = resourceSetProvider.get(projectUtil.getProject(triggeringContext
+					.getTargetElementURI()));
+			EObject originalTarget = resourceSet.getEObject(triggeringContext.getTargetElementURI(), true);
+			List<EObject> renamedElements = getRenamedElementsOrProxies(originalTarget);
+			if (renamedElements == null || renamedElements.isEmpty())
+				return null;
+			List<IRenameElementContext> contexts = newArrayListWithCapacity(renamedElements.size());
+			for (EObject renamedElement : renamedElements)
+				contexts.add(new IRenameElementContext.Impl(EcoreUtil.getURI(renamedElement), renamedElement.eClass(),
+						triggeringContext.getTriggeringEditor(), triggeringContext.getTriggeringEditorSelection(),
+						triggeringContext.getContextResourceURI()));
+			return contexts;
+		}
+		return null;
 	}
 
 	protected abstract List<EObject> getRenamedElementsOrProxies(EObject originalTarget);

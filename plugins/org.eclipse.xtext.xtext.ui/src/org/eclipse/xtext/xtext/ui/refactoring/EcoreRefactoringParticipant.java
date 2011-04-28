@@ -41,9 +41,10 @@ public class EcoreRefactoringParticipant extends AbstractProcessorBasedRenamePar
 	private IResourceDescriptions resourceDescriptions;
 
 	@Override
-	protected List<IRenameElementContext> createRenameElementContexts(IRenameElementContext triggeringContext) {
-		if (triggeringContext.getTargetElementEClass() == XtextPackage.Literals.PARSER_RULE)
-			return super.createRenameElementContexts(triggeringContext);
+	protected List<IRenameElementContext> createRenameElementContexts(Object element) {
+		if (element instanceof IRenameElementContext
+				&& ((IRenameElementContext) element).getTargetElementEClass() == XtextPackage.Literals.PARSER_RULE)
+			return super.createRenameElementContexts(element);
 		else
 			return null;
 	}
@@ -53,15 +54,15 @@ public class EcoreRefactoringParticipant extends AbstractProcessorBasedRenamePar
 		if (originalTarget instanceof ParserRule) {
 			TypeRef returnType = ((ParserRule) originalTarget).getType();
 			if (returnType != null && returnType.getClassifier() != null
-					&& !Strings.isEmpty(returnType.getClassifier().getName()) 
-					&& returnType.getClassifier().eClass() != null
-					&& returnType.getClassifier().getEPackage() != null
+					&& !Strings.isEmpty(returnType.getClassifier().getName())
+					&& returnType.getClassifier().eClass() != null && returnType.getClassifier().getEPackage() != null
 					&& !Strings.isEmpty(returnType.getClassifier().getEPackage().getNsURI())) {
 				String packageNsURI = returnType.getClassifier().getEPackage().getNsURI();
-				QualifiedName classifierQualifiedName = QualifiedName.create(packageNsURI, returnType.getClassifier().getName());
+				QualifiedName classifierQualifiedName = QualifiedName.create(packageNsURI, returnType.getClassifier()
+						.getName());
 				URI platformResourceURI = findPlatformResourceURI(classifierQualifiedName, EcorePackage.Literals.ECLASS);
 				if (platformResourceURI == null) {
-					if(returnType.getMetamodel() instanceof ReferencedMetamodel)
+					if (returnType.getMetamodel() instanceof ReferencedMetamodel)
 						getStatus().addError("Return type " + returnType.getClassifier().getName() + " is not indexed");
 				} else {
 					EObject classifierProxy = EcoreFactory.eINSTANCE.create(returnType.getClassifier().eClass());
@@ -75,12 +76,11 @@ public class EcoreRefactoringParticipant extends AbstractProcessorBasedRenamePar
 		}
 		return null;
 	}
-	
+
 	private URI findPlatformResourceURI(QualifiedName name, EClass type) {
 		for (IResourceDescription resourceDescription : resourceDescriptions.getAllResourceDescriptions()) {
 			if (Strings.equal("ecore", resourceDescription.getURI().fileExtension())) {
-				for (IEObjectDescription eObjectDescription : resourceDescription
-						.getExportedObjectsByType(type)) {
+				for (IEObjectDescription eObjectDescription : resourceDescription.getExportedObjectsByType(type)) {
 					if (name.equals(eObjectDescription.getQualifiedName())) {
 						return eObjectDescription.getEObjectURI();
 					}
