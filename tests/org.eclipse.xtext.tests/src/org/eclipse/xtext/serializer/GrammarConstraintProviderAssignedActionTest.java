@@ -20,8 +20,8 @@ import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
+import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider;
 import org.eclipse.xtext.serializer.analysis.GrammarConstraintProvider;
-import org.eclipse.xtext.serializer.analysis.GrammarConstraintProvider.ActionFilterNFAProvider;
 import org.eclipse.xtext.serializer.analysis.GrammarConstraintProvider.ActionFilterState;
 import org.eclipse.xtext.serializer.analysis.GrammarConstraintProvider.ActionFilterTransition;
 
