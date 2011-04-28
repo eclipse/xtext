@@ -16,7 +16,6 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.serializer.AbstractSyntacticSequencerPDAProviderTest.SequencePDA2Dot;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynEmitterState;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynFollowerOwner;
@@ -52,8 +51,8 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 
 	protected ISynAbsorberState getParserRule(String body, String name) throws Exception {
 		Grammar grammar = (Grammar) getModel(HEADER + body);
-		SequencePDA2Dot.drawGrammar("pdf/" + getName(), grammar);
-		SequenceParserPDA2Dot.drawGrammar(createSequenceParserPDAProvider(), "pdf/" + getName(), grammar);
+		//		SyntacticSequencerPDA2SimpleDot.drawGrammar("pdf/" + getName(), grammar);
+		//		SyntacticSequencerPDA2ExtendedDot.drawGrammar(createSequenceParserPDAProvider(), "pdf/" + getName(), grammar);
 
 		AbstractRule rule = name == null ? grammar.getRules().get(0) : GrammarUtil.findRuleForName(grammar, name);
 		return createSequenceParserPDAProvider().getPDA((ParserRule) rule);
