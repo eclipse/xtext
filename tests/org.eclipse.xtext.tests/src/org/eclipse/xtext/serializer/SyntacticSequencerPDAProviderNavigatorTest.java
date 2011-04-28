@@ -21,8 +21,8 @@ import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynEmitterSt
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynFollowerOwner;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynTransition;
+import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.impl.RCStack;
-import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider;
 
 import com.google.common.collect.Sets;
 

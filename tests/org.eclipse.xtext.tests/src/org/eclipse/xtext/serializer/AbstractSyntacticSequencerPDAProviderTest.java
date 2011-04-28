@@ -24,10 +24,10 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
-import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider;
-import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider.SequencerNFAProvider;
-import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider.SequencerNFAState;
-import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider.SequencerNFATransition;
+import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider;
+import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.SequencerNFAProvider;
+import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.SequencerNFAState;
+import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.SequencerNFATransition;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;

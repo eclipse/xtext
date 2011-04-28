@@ -15,7 +15,7 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
-import org.eclipse.xtext.serializer.impl.GrammarConstraintProvider;
+import org.eclipse.xtext.serializer.analysis.GrammarConstraintProvider;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
