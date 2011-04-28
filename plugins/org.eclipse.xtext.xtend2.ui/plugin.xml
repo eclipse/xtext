@@ -366,4 +366,17 @@
          </newWizardShortcut>
       </perspectiveExtension>
    </extension>
+   <extension
+         point="org.eclipse.ltk.core.refactoring.renameParticipants">
+      <renameParticipant
+            class="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JDTRenamePartcipant"
+            id="org.eclipse.xtext.xtend2.ui.jdtRenameParticipant"
+            name="Xtend rename participant">
+         <enablement>
+         	<with variable="element">
+        		<instanceof value="org.eclipse.jdt.core.IMember"/>
+        	</with>
+        </enablement>
+      </renameParticipant>
+   </extension>
 </plugin>

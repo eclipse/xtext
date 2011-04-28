@@ -18,6 +18,12 @@ import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IComparat
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.ui.refactoring.IRenameProcessorAdapter;
+import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
+import org.eclipse.xtext.ui.refactoring.ui.RenameElementHandler;
+import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JDTRenameProcessorAdapter;
+import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmRenameElementHandler;
+import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmRenameRefactoringProvider;
 import org.eclipse.xtext.xtend2.ui.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtext.xtend2.ui.autoedit.TokenTypeToPartitionMapper;
 import org.eclipse.xtext.xtend2.ui.contentassist.ImportingTypesProposalProvider;
@@ -106,5 +112,20 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 	@Override
 	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
 		return XtendHyperlinkHelper.class;
+	}
+	
+	@SuppressWarnings("restriction")
+	public Class<? extends RenameElementHandler> bindRenameElementHandler() {
+		return JvmRenameElementHandler.class;
+	}
+	
+	@SuppressWarnings("restriction")
+	public Class<? extends IRenameRefactoringProvider> bindIRenameRefactoringProvider() {
+		return JvmRenameRefactoringProvider.class;
+	}
+	
+	@SuppressWarnings("restriction")
+	public Class<? extends IRenameProcessorAdapter.Factory> bindIRenameProcessorAdapter$Factory() {
+		return JDTRenameProcessorAdapter.Factory.class;
 	}
 }
