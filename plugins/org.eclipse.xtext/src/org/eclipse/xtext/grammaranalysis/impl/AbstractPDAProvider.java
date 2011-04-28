@@ -28,7 +28,7 @@ import com.google.common.collect.Sets;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public abstract class AbstractPDAProvider<CTX> implements IPDAProvider {
+public abstract class AbstractPDAProvider<CTX> implements IPDAProvider<CTX> {
 
 	protected static class PDAContext<CTX> {
 		protected CTX context;

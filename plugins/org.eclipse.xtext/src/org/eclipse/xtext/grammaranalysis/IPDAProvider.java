@@ -7,11 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.grammaranalysis;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IPDAProvider {
-	IPDAState getPDA(EObject context);
+public interface IPDAProvider<CTX> {
+	/**
+	 * @since 2.0
+	 */
+	IPDAState getPDA(CTX context);
 }

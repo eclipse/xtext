@@ -9,6 +9,7 @@ package org.eclipse.xtext.serializer;
 
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -55,7 +56,7 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		//		SyntacticSequencerPDA2ExtendedDot.drawGrammar(createSequenceParserPDAProvider(), "pdf/" + getName(), grammar);
 
 		AbstractRule rule = name == null ? grammar.getRules().get(0) : GrammarUtil.findRuleForName(grammar, name);
-		return createSequenceParserPDAProvider().getPDA((ParserRule) rule);
+		return createSequenceParserPDAProvider().getPDA(rule, (EClass) rule.getType().getClassifier());
 	}
 
 	protected ISynTransition findTransition(ISynAbsorberState start, String fromAbsorber, String toAbsorber) {

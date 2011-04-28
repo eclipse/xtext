@@ -119,7 +119,43 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		}
 	}
 
-	public static class SequencerPDAProvider extends AbstractPDAProvider<EObject> {
+	public static class SequencerPDAContext {
+		protected EObject context;
+		protected EClass type;
+
+		private SequencerPDAContext(EObject context, EClass type) {
+			super();
+			this.context = context;
+			this.type = type;
+		}
+
+		@Override
+		public int hashCode() {
+			return context.hashCode() + (type == null ? 0 : type.hashCode());
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			SequencerPDAContext other = (SequencerPDAContext) obj;
+			return context == other.context && type == other.type;
+		}
+
+		public EObject getContext() {
+			return context;
+		}
+
+		public EClass getType() {
+			return type;
+		}
+	}
+
+	public static class SequencerPDAProvider extends AbstractPDAProvider<SequencerPDAContext> {
 
 		protected SequencerNFAProvider nfaProvider;
 
@@ -184,8 +220,8 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		}
 
 		@Override
-		protected List<INFAState<?, ?>> getFollowers(EObject context, INFAState<?, ?> state, boolean returning,
-				boolean canReturn) {
+		protected List<INFAState<?, ?>> getFollowers(SequencerPDAContext context, INFAState<?, ?> state,
+				boolean returning, boolean canReturn) {
 			List<INFAState<?, ?>> result = Lists.newArrayList();
 			for (INFATransition<?, ?> transition : returning ? state.getOutgoingAfterReturn() : state.getOutgoing()) {
 				if (!GrammarUtil.isAssignedAction(transition.getTarget().getGrammarElement()))
@@ -208,22 +244,23 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		}
 
 		@Override
-		protected List<INFAState<?, ?>> getStartFollowers(EObject context) {
-			if (context instanceof ParserRule)
-				return getParserRuleStartFollowers((ParserRule) context);
-			else if (context instanceof Action)
-				return getActionStartFollowers((Action) context);
+		protected List<INFAState<?, ?>> getStartFollowers(SequencerPDAContext context) {
+			if (context.getContext() instanceof ParserRule)
+				return getParserRuleStartFollowers((ParserRule) context.getContext());
+			else if (context.getContext() instanceof Action)
+				return getActionStartFollowers((Action) context.getContext());
 			return Collections.emptyList();
 		}
 
 		@Override
-		protected boolean isFinalState(EObject context, INFAState<?, ?> state, boolean returning, boolean canReturn) {
-			if (context instanceof Action) {
+		protected boolean isFinalState(SequencerPDAContext context, INFAState<?, ?> state, boolean returning,
+				boolean canReturn) {
+			if (context.getContext() instanceof Action) {
 				for (INFATransition<?, ?> transition : returning ? state.getOutgoingAfterReturn() : state.getOutgoing())
-					if (transition.getTarget().getGrammarElement() == context)
+					if (transition.getTarget().getGrammarElement() == context.getContext())
 						return true;
-			} else if (canReturn && context instanceof ParserRule && state.isEndState()
-					&& GrammarUtil.containingParserRule(state.getGrammarElement()) == context)
+			} else if (canReturn && context.getContext() instanceof ParserRule && state.isEndState()
+					&& GrammarUtil.containingParserRule(state.getGrammarElement()) == context.getContext())
 				return true;
 			return false;
 
@@ -644,9 +681,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 	}
 
-	protected Map<Action, ISynAbsorberState> cacheAction = Maps.newHashMap();
-
-	protected Map<ParserRule, ISynAbsorberState> cacheRule = Maps.newHashMap();
+	protected Map<SequencerPDAContext, ISynAbsorberState> cache = Maps.newHashMap();
 
 	protected SequencerPDAProvider pdaProvider = createSequencerPDAProvider();
 
@@ -737,24 +772,14 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		return new SynTransition(source, target);
 	}
 
-	public ISynAbsorberState getPDA(Action context) {
-		ISynAbsorberState result = cacheAction.get(context);
+	public ISynAbsorberState getPDA(EObject context, EClass type) {
+		SequencerPDAContext ctx = new SequencerPDAContext(context, null);
+		ISynAbsorberState result = cache.get(context);
 		if (result == null) {
 			Map<IPDAState, SynAbsorberState> absorbers = Maps.newHashMap();
 			Map<SynAbsorberState, Map<IPDAState, SynState>> emitters = Maps.newHashMap();
-			result = createAbsorberState(pdaProvider.getPDA(context), absorbers, emitters);
-			cacheAction.put(context, result);
-		}
-		return result;
-	}
-
-	public ISynAbsorberState getPDA(ParserRule context) {
-		ISynAbsorberState result = cacheRule.get(context);
-		if (result == null) {
-			Map<IPDAState, SynAbsorberState> absorbers = Maps.newHashMap();
-			Map<SynAbsorberState, Map<IPDAState, SynState>> emitters = Maps.newHashMap();
-			result = createAbsorberState(pdaProvider.getPDA(context), absorbers, emitters);
-			cacheRule.put(context, result);
+			result = createAbsorberState(pdaProvider.getPDA(ctx), absorbers, emitters);
+			cache.put(ctx, result);
 		}
 		return result;
 	}
