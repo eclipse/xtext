@@ -7,7 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.scoping;
 
-import java.util.Collections;
+import static com.google.common.collect.Lists.*;
+
 import java.util.List;
 import java.util.Set;
 
@@ -29,6 +30,22 @@ public abstract class AbstractScopingFragment extends AbstractInheritingGenerato
 
 	public static String getScopeProviderName(Grammar grammar, Naming naming) {
 		return naming.basePackageRuntime(grammar) + ".scoping." + GrammarUtil.getName(grammar) + "ScopeProvider";
+	}
+	
+	private boolean generateStub;
+	
+	/**
+	 * @since 2.0
+	 */
+	public boolean isGenerateStub() {
+		return generateStub;
+	}
+	
+	/**
+	 * @since 2.0
+	 */
+	public void setGenerateStub(boolean generateStub) {
+		this.generateStub = generateStub;
 	}
 
 	private boolean ignoreCase;
@@ -75,6 +92,6 @@ public abstract class AbstractScopingFragment extends AbstractInheritingGenerato
 
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		return Collections.<Object>singletonList(getScopeProviderSuperClassName(grammar));
+		return newArrayList((Object)getScopeProviderSuperClassName(grammar), (Object)isGenerateStub());
 	}
 }

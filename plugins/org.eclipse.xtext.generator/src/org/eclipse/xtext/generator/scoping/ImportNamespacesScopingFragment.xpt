@@ -12,12 +12,14 @@
 «IMPORT org::eclipse::xtext»
 
 
-«DEFINE addToPluginXmlRt(String scopeProviderSuperClassName) FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlRt(String scopeProviderSuperClassName, Boolean generateStub) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToPluginXmlUi(String scopeProviderSuperClassName) FOR Grammar»«ENDDEFINE»
+«DEFINE addToPluginXmlUi(String scopeProviderSuperClassName, Boolean generateStub) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToStandaloneSetup(String scopeProviderSuperClassName) FOR Grammar»«ENDDEFINE»
+«DEFINE addToStandaloneSetup(String scopeProviderSuperClassName, Boolean generateStub) FOR Grammar»«ENDDEFINE»
 
-«DEFINE generate(String scopeProviderSuperClassName) FOR Grammar»
-	«EXPAND AbstractScopingFragment::JavaScopeProvider(scopeProviderSuperClassName)»
+«DEFINE generate(String scopeProviderSuperClassName, Boolean generateStub) FOR Grammar»
+	«IF generateStub»
+		«EXPAND AbstractScopingFragment::JavaScopeProvider(scopeProviderSuperClassName)»
+	«ENDIF»
 «ENDDEFINE»
