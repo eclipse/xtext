@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EClass
 import com.google.common.collect.Lists
 import java.util.Map
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider
+import org.eclipse.emf.ecore.EcorePackage
 
 class AbstractSemanticSequencer extends GeneratedFile {
 	
@@ -149,6 +150,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 							return; 
 						}
 					«ENDFOR»
+					else break;
 				«ENDFOR»
 				}
 			«ENDFOR»
@@ -159,7 +161,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 	genMethodSequence(IGrammarConstraintProvider$IConstraint c) '''
 		/**
 		 * Constraint:
-		 *     «c.body»
+		 *     «if(c.body == null) "{"+c.type.name+"}" else c.body.toString().replaceAll("\\n","\n*     ")»
 		 *
 		 * Features:
 		«FOR f:c.features.filter(e|e != null)»
@@ -179,6 +181,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 					«val assignment=f.assignments.get(0)»
 					«assignment.type.toAcceptMethod()»(sequenceAcceptor, errorAcceptor, semanticObject, grammarAccess.«assignment.grammarElement.gaAccessor()», semanticObject.«f.feature.getGenFeature().getAccessor»(), -1, («assignment.type.toNodeType»)nodes.getNodeForSingelValue(«f.feature.genTypeLiteral», semanticObject.«f.feature.getGenFeature().getAccessor»()));
 				«ENDFOR»
+				acceptFinish(sequenceAcceptor);
 			«ELSE»
 				genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
 			«ENDIF»

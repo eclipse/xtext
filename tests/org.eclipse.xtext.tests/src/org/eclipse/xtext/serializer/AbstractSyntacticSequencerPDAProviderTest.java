@@ -21,7 +21,6 @@ import org.eclipse.xtext.GrammarToDot;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.grammaranalysis.IPDAState;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
@@ -29,8 +28,6 @@ import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider.SequencerNFAProvider;
 import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider.SequencerNFAState;
 import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider.SequencerNFATransition;
-import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider.SequencerPDAProvider;
-import org.eclipse.xtext.util.GraphvizDotBuilder;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -74,50 +71,6 @@ public abstract class AbstractSyntacticSequencerPDAProviderTest extends Abstract
 		}
 	}
 
-	protected static class SequencePDA2Dot extends GraphvizDotBuilder {
-		protected SequencerPDAProvider pdaProvider = new SequencerPDAProvider(new SequencerNFAProvider());
-
-		public static void drawGrammar(String path, Grammar grammar) {
-			try {
-				for (ParserRule pr : GrammarUtil.allParserRules(grammar))
-					new SequencePDA2Dot().draw(pr, path + "-" + pr.getName() + "-simple-PDA.pdf", "-T pdf");
-				for (Action a : GrammarUtil.containedActions(grammar))
-					if (a.getFeature() != null)
-						new SequencePDA2Dot().draw(a, path + "-" + GrammarUtil.containingRule(a).getName() + "_"
-								+ a.getType().getClassifier().getName() + "_" + a.getFeature() + "-PDA.pdf", "-T pdf");
-			} catch (IOException e) {
-			}
-		}
-
-		@Override
-		protected Props drawObject(Object obj) {
-			if (obj instanceof ParserRule)
-				return drawGrammar(pdaProvider.getPDA((ParserRule) obj));
-			if (obj instanceof Action)
-				return drawGrammar(pdaProvider.getPDA((Action) obj));
-			return null;
-		}
-
-		protected Digraph drawGrammar(IPDAState pr) {
-			Digraph d = new Digraph();
-			Set<IPDAState> visited = Sets.newHashSet();
-			drawState(d, pr, visited);
-			return d;
-		}
-
-		protected void drawState(Digraph d, IPDAState state, Set<IPDAState> visited) {
-			if (state == null || !visited.add(state))
-				return;
-			Node n = new Node(state, state.toString());
-			d.add(n);
-			for (IPDAState follower : state.getFollowers()) {
-				Edge edge = new Edge(state, follower);
-				d.add(edge);
-				drawState(d, follower, visited);
-			}
-		}
-	}
-
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -132,8 +85,8 @@ public abstract class AbstractSyntacticSequencerPDAProviderTest extends Abstract
 		Grammar grammar = (Grammar) getModel(HEADER + body);
 		try {
 			new SequenceParserNDA2Dot().draw(grammar, "pdf/" + getName() + "-NFA.pdf", "-T pdf");
-			SequencePDA2Dot.drawGrammar("pdf/" + getName(), grammar);
-			SequenceParserPDA2Dot.drawGrammar(createSequenceParserPDAProvider(), "pdf/" + getName(), grammar);
+			//			SyntacticSequencerPDA2SimpleDot.drawGrammar("pdf/" + getName(), grammar);
+			//			SyntacticSequencerPDA2ExtendedDot.drawGrammar(createSequenceParserPDAProvider(), "pdf/" + getName(), grammar);
 			//			System.out.println(new SequenceParserPDA2Dot().draw(grammar));
 		} catch (IOException e) {
 		}
@@ -165,8 +118,7 @@ public abstract class AbstractSyntacticSequencerPDAProviderTest extends Abstract
 
 	protected abstract SyntacticSequencerPDAProvider createSequenceParserPDAProvider();
 
-	private void collectAbsorberStates(ISynState state, Set<ISynState> visited,
-			Set<ISynAbsorberState> result) {
+	private void collectAbsorberStates(ISynState state, Set<ISynState> visited, Set<ISynAbsorberState> result) {
 		if (!visited.add(state))
 			return;
 		if (state instanceof ISynAbsorberState)

@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementFullTitleSwitch;
@@ -107,8 +106,8 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 		}
 		//		System.out.println(Join.join("\n", result));
 
-		SequenceParserPDA2Dot.drawGrammar(get(ISyntacticSequencerPDAProvider.class),
-				"pdf/syntacticSequencerTest-PDA.pdf", get(IGrammarAccess.class).getGrammar());
+		//		SyntacticSequencerPDA2ExtendedDot.drawGrammar(get(ISyntacticSequencerPDAProvider.class),
+		//				"pdf/syntacticSequencerTest-PDA.pdf", get(IGrammarAccess.class).getGrammar());
 		//		new SequenceParserPDA2Dot(get(ISyntacticSequencerPDAProvider.class)).draw(get(IGrammarAccess.class)
 		//				.getGrammar(), "pdf/syntacticSequencerTest-PDA.pdf", "-T pdf");
 
@@ -179,5 +178,13 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 
 	public void testCrossRef1_d() throws Exception {
 		testSequence("#5 someid kw4 someid");
+	}
+
+	public void testBooleanAlternative_a() throws Exception {
+		testSequence("#6 kw1");
+	}
+
+	public void testBooleanAlternative_b() throws Exception {
+		testSequence("#6 kw2");
 	}
 }
