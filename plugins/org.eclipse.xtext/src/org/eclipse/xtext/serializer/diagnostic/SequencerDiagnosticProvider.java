@@ -20,7 +20,7 @@ import org.eclipse.xtext.serializer.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
 import org.eclipse.xtext.serializer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.impl.Context2NameFunction;
+import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;

@@ -16,8 +16,8 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.IPDAState;
 import org.eclipse.xtext.grammaranalysis.IPDAState.PDAStateType;
+import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.impl.RCStack;
-import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider;
 
 import com.google.common.base.Predicate;
 import com.google.inject.ImplementedBy;
