@@ -504,16 +504,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		setVisibility(result, method.getModifiers());
 
 		IMethod javaMethod = (IMethod) method.getJavaElement();
-		String[] parameterNames = null;
-		if (javaMethod != null) {
-			try {
-				parameterNames = javaMethod.getRawParameterNames();
-//				parameterNames = javaMethod.getParameterNames();
-			} catch (JavaModelException ex) {
-				if (!ex.isDoesNotExist())
-					log.warn("IMethod.getParameterNames failed", ex);
-			}
-		}
+		String[] parameterNames = fastGetParameterNames(javaMethod);
 		result.setVarArgs(method.isVarargs());
 		for (int i = 0; i < parameterTypes.length; i++) {
 			String parameterName = parameterNames != null ? parameterNames[i] : "p" + i;
@@ -523,6 +514,28 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		for (ITypeBinding exceptionType : method.getExceptionTypes()) {
 			result.getExceptions().add(createTypeReference(exceptionType));
 		}
+	}
+
+	@SuppressWarnings("restriction")
+	protected String[] fastGetParameterNames(IMethod javaMethod) {
+		String[] parameterNames = null;
+		if (javaMethod != null) {
+			try {
+				if (javaMethod instanceof org.eclipse.jdt.internal.core.JavaElement) {
+					org.eclipse.jdt.internal.core.JavaElement casted = (org.eclipse.jdt.internal.core.JavaElement) javaMethod;
+					if (casted.getSourceMapper() != null || casted instanceof org.eclipse.jdt.internal.core.SourceMethod) {
+						parameterNames = javaMethod.getParameterNames();		
+					}
+				}
+				if (parameterNames == null)
+					parameterNames = javaMethod.getRawParameterNames();
+				
+			} catch (JavaModelException ex) {
+				if (!ex.isDoesNotExist())
+					log.warn("IMethod.getParameterNames failed", ex);
+			}
+		}
+		return parameterNames;
 	}
 
 	public void enhanceGenericDeclaration(JvmExecutable result, ITypeBinding[] parameters) {
