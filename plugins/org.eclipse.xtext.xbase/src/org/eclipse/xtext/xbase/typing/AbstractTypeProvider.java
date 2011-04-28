@@ -38,6 +38,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -54,6 +55,17 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	
 	@Inject
 	private TypeArgumentContextProvider typeArgumentContextProvider;
+	
+	{
+		checkIsSingelton();
+	}
+	
+	protected void checkIsSingelton() {
+		Singleton singleton = getClass().getAnnotation(Singleton.class);
+		if (singleton==null) {
+			throw new IllegalStateException("The class "+getClass().getSimpleName()+" must be annotated with @Singleton annotation.");
+		}
+	}
 	
 	// this class is final because of the assumptions that are made in
 	// equals and hashcode
