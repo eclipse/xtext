@@ -43,7 +43,7 @@ public class SyntacticSequencerPDAProviderMinimalAbsorberTest extends AbstractSy
 		grammar.append("Recursion: val=ID | '(' Recursion ')';");
 		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
-		expected.append("Recursion:\n");
+		expected.append("Recursion_Recursion:\n");
 		expected.append("  start '(' >>Recursion !'(' val=ID\n");
 		expected.append("  start val=ID\n");
 		expected.append("  val=ID <<Recursion ')' !<<Recursion stop\n");
@@ -288,7 +288,7 @@ public class SyntacticSequencerPDAProviderMinimalAbsorberTest extends AbstractSy
 		grammar.append("Optional: val1=ID? val2=ID? val3=ID?;");
 		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
-		expected.append("Optional:\n");
+		expected.append("Optional_Optional:\n");
 		expected.append("  start val1=ID\n");
 		expected.append("  start val2=ID\n");
 		expected.append("  start val3=ID\n");
