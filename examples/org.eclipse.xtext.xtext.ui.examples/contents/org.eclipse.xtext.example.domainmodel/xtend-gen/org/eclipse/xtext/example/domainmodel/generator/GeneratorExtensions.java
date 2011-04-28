@@ -3,6 +3,8 @@ package org.eclipse.xtext.example.domainmodel.generator;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.example.domainmodel.DomainmodelExtensions;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
@@ -70,5 +72,11 @@ public class GeneratorExtensions extends DomainmodelExtensions {
     _builder.newLine();
     String _join = IterableExtensions.join(_map, _builder);
     return _join;
+  }
+  
+  public boolean isInterface(final JvmTypeReference typeRef) {
+    JvmType _type = typeRef.getType();
+    boolean _isInterface = ((JvmGenericType) _type).isInterface();
+    return _isInterface;
   }
 }

@@ -5,9 +5,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Feature;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Operation;
@@ -18,6 +16,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.ResourceExtensions;
@@ -30,54 +29,48 @@ public class DomainmodelGenerator implements IGenerator {
   
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
     Iterable<EObject> _allContentsIterable = ResourceExtensions.allContentsIterable(resource);
-    for (EObject element : _allContentsIterable) {
-      if ((element instanceof org.eclipse.xtext.example.domainmodel.domainmodel.Entity)) {
-        {
-          final Entity entity = ((Entity) element);
-          String _fileName = this.generatorExtensions.fileName(entity);
-          StringConcatenation _compile = this.compile(entity);
-          fsa.generateFile(_fileName, _compile);
-        }
-      }
+    Iterable<Entity> _filter = IterableExtensions.<Entity>filter(_allContentsIterable, org.eclipse.xtext.example.domainmodel.domainmodel.Entity.class);
+    for (Entity entity : _filter) {
+      String _fileName = this.generatorExtensions.fileName(entity);
+      StringConcatenation _compile = this.compile(entity);
+      fsa.generateFile(_fileName, _compile);
     }
   }
   
   public StringConcatenation compile(final Entity e) {
-    StringConcatenation _xblockexpression = null;
+    StringConcatenation _builder = new StringConcatenation();
+    ImportManager _importManager = new ImportManager(true);
+    final ImportManager importManager = _importManager;
+    _builder.newLineIfNotEmpty();
+    StringConcatenation _body = this.body(e, importManager);
+    final StringConcatenation body = _body;
+    _builder.newLineIfNotEmpty();
     {
-      ImportManager _importManager = new ImportManager(true);
-      final ImportManager importManager = _importManager;
-      StringConcatenation _body = this.body(e, importManager);
-      final StringConcatenation body = _body;
-      StringConcatenation _builder = new StringConcatenation();
-      {
-        String _packageName = this.generatorExtensions.packageName(e);
-        boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_packageName);
-        boolean _operator_not = BooleanExtensions.operator_not(_isNullOrEmpty);
-        if (_operator_not) {
-          _builder.append("package ");
-          String _packageName_1 = this.generatorExtensions.packageName(e);
-          _builder.append(_packageName_1, "");
-          _builder.append(";");
-          _builder.newLineIfNotEmpty();
-          _builder.newLine();
-        }
+      String _packageName = this.generatorExtensions.packageName(e);
+      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_packageName);
+      boolean _operator_not = BooleanExtensions.operator_not(_isNullOrEmpty);
+      if (_operator_not) {
+        _builder.append("package ");
+        String _packageName_1 = this.generatorExtensions.packageName(e);
+        _builder.append(_packageName_1, "");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
       }
-      {
-        List<String> _imports = importManager.getImports();
-        for(String i : _imports) {
-          _builder.append("import ");
-          _builder.append(i, "");
-          _builder.append(";");
-          _builder.newLineIfNotEmpty();
-        }
-      }
-      _builder.newLine();
-      _builder.append(body, "");
-      _builder.newLineIfNotEmpty();
-      _xblockexpression = (_builder);
     }
-    return _xblockexpression;
+    {
+      List<String> _imports = importManager.getImports();
+      for(String i : _imports) {
+        _builder.append("import ");
+        _builder.append(i, "");
+        _builder.append(";");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.newLine();
+    _builder.append(body, "");
+    _builder.newLineIfNotEmpty();
+    return _builder;
   }
   
   public StringConcatenation body(final Entity e, final ImportManager importManager) {
@@ -97,8 +90,6 @@ public class DomainmodelGenerator implements IGenerator {
         StringConcatenation _feature = this.feature(f, importManager);
         _builder.append(_feature, "	");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.newLine();
       }
     }
     _builder.append("}");
@@ -113,8 +104,7 @@ public class DomainmodelGenerator implements IGenerator {
     if (_operator_notEquals) {
       String _xifexpression_1 = null;
       JvmParameterizedTypeReference _superType_1 = e.getSuperType();
-      JvmType _type = _superType_1.getType();
-      boolean _isInterface = ((JvmGenericType) _type).isInterface();
+      boolean _isInterface = this.generatorExtensions.isInterface(_superType_1);
       if (_isInterface) {
         _xifexpression_1 = "implements ";
       } else {
