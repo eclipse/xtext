@@ -16,6 +16,7 @@ import org.eclipse.xtext.serializer.ISemanticSequencer
 import org.eclipse.xtext.generator.Binding
 import org.eclipse.xtext.serializer.ISerializer
 import org.eclipse.xtext.serializer.impl.Serializer
+import org.eclipse.xtext.serializer.impl.ContextUtil
 
 class SerializerFragment extends Xtend2GeneratorFragment {
 	
@@ -24,6 +25,8 @@ class SerializerFragment extends Xtend2GeneratorFragment {
 	@Inject SemanticSequencer
 	
 	@Inject GrammarConstraints
+	
+	@Inject Context2DotRenderer
 	
 	create new SerializerFragmentState() state() {}
 	
@@ -41,7 +44,12 @@ class SerializerFragment extends Xtend2GeneratorFragment {
 	override generate(Xtend2ExecutionContext ctx) {
 		ctx.writeFile(Generator::SRC, semanticSequencer.fileName, semanticSequencer.fileContents);
 		ctx.writeFile(Generator::SRC_GEN, abstractSemanticSequencer.fileName, abstractSemanticSequencer.fileContents);
-		if(state.generateDebugData)
+		if(state.generateDebugData) {
 			ctx.writeFile(Generator::SRC_GEN, grammarConstraints.fileName, grammarConstraints.fileContents);
+			for(obj:context2DotRenderer.render2Dot(new SyntacticSequencerPDA2SimpleDot(), "pda1"))
+				ctx.writeFile(Generator::SRC_GEN, obj.key, obj.value);
+			for(obj:context2DotRenderer.render2Dot(new SyntacticSequencerPDA2ExtendedDot(), "pda2"))
+				ctx.writeFile(Generator::SRC_GEN, obj.key, obj.value);
+		}
 	}
 }

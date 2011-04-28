@@ -30,7 +30,7 @@ public class NodeModelSemanticSequencer extends AbstractNodeModelSequencer {
 			EObject ge = node.getGrammarElement();
 			if (ge instanceof RuleCall) {
 				RuleCall rc = (RuleCall) ge;
-				if (rc.getRule() == context)
+				if (rc.getRule() == context || GrammarUtil.containedAssignments(rc) == null)
 					continue;
 				if (rc.getRule().getType().getClassifier() instanceof EClass)
 					acceptSemantic(acceptor, semanticObject, rc, node.getSemanticElement(), node);

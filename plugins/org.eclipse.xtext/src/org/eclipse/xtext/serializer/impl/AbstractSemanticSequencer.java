@@ -108,6 +108,10 @@ public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 		out.acceptAssignedTerminal(terminalRC, token6, value, index, node);
 	}
 
+	protected void acceptFinish(ISemanticSequenceAcceptor out) {
+		out.finish();
+	}
+
 	protected boolean acceptSemantic(ISemanticSequenceAcceptor out, EObject semanticObj, IConstraintElement constr,
 			Object value, int index, INode node, ISerializationDiagnostic.Acceptor errors) {
 		switch (constr.getType()) {

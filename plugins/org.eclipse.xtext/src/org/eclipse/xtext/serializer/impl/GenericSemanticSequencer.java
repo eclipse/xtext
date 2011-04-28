@@ -8,6 +8,7 @@
 package org.eclipse.xtext.serializer.impl;
 
 import java.util.Arrays;
+import java.util.BitSet;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -500,12 +501,8 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 
 	protected Map<Pair<EObject, EClass>, IConstraint> constraints;
 
-	
-
 	@Inject
 	protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
-
-	
 
 	@Inject
 	protected IGrammarAccess grammarAccess;
@@ -513,17 +510,11 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 	@Inject
 	protected IGrammarConstraintProvider grammarConstraintProvider;
 
-	
-
 	@Inject
 	protected ISemanticNodeProvider nodeProvider;
 
 	@Inject
 	protected ITransientValueService transientValueService;
-
-
-
-	
 
 	//	protected boolean disableInvalidAlternativeChoices(Quantity quant, Feature2Assignment[] values) {
 	//		if (quant.getConstraintElement().isMany())
@@ -776,7 +767,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			if (feature.getFeature().isMany()) {
 				List<AllocationValue> allocs = getNonTransientValuesForMVFeature(semanticObject, feature, nodes);
 				if (!allocs.isEmpty())
-					createValues(feature, allocs, result);
+					createValues(semanticObject, feature, allocs, result);
 			} else {
 				ValueTransient trans = transientValueService.isValueTransient(semanticObject, feature.getFeature());
 				if (trans != ValueTransient.YES) {
@@ -815,11 +806,14 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			target[ass.getAssignmentID()] = f2a;
 	}
 
-	protected void createValues(IFeatureInfo feature, List<AllocationValue> values, Feature2Assignment[] target) {
+	protected void createValues(EObject semanticObj, IFeatureInfo feature, List<AllocationValue> values,
+			Feature2Assignment[] target) {
 		List<IConstraintElement> remainingAssignments = Lists.newArrayList();
 		for (IConstraintElement ass : feature.getAssignments())
 			if (!isExcludedByDependees(ass, target))
 				remainingAssignments.add(ass);
+		if (feature.isContentValidationNeeded())
+			remainingAssignments = findValidAssignments(semanticObj, remainingAssignments, values);
 		if (remainingAssignments.size() == 0)
 			throw new RuntimeException("no valid assignments"); // TODO: handle this better
 		if (remainingAssignments.size() == 1) {
@@ -1224,6 +1218,21 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			if (feat.isAmbiguous())
 				return true;
 		return false;
+	}
+
+	protected List<IConstraintElement> findValidAssignments(EObject semanticObj, List<IConstraintElement> assignments,
+			List<AllocationValue> values) {
+		BitSet bs = new BitSet();
+		IConstraintElement[] assignmentsAr = assignments.toArray(new IConstraintElement[assignments.size()]);
+		for (AllocationValue value : values)
+			for (IConstraintElement validAssignments : findValidAssignments(semanticObj, assignmentsAr,
+					value.getValue()))
+				bs.set(validAssignments.getFeatureAssignmentID());
+		List<IConstraintElement> result = Lists.newArrayList();
+		for (IConstraintElement ass : assignments)
+			if (bs.get(ass.getFeatureAssignmentID()))
+				result.add(ass);
+		return result;
 	}
 
 	protected boolean isExcludedByDependees(IConstraintElement assignments, Feature2Assignment[] target) {
