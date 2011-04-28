@@ -47,9 +47,9 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.internal.Lists;
 
 /**
  * @author Sven Efftinge

@@ -10,7 +10,7 @@ package org.eclipse.xtext.xtend2.richstring;
 import java.util.Collections;
 import java.util.List;
 
-import com.google.inject.internal.Lists;
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
