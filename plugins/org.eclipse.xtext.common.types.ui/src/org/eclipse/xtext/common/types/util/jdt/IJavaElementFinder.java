@@ -13,11 +13,22 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import com.google.inject.ImplementedBy;
 
 /**
+ * Service to locate the respective {@link IJavaElement java elements} for a
+ * given {@link JvmIdentifiableElement}.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @ImplementedBy(JavaElementFinder.class)
 public interface IJavaElementFinder {
 
+	/**
+	 * Find the {@link IJavaElement} for the {@code element}. If it cannot be located,
+	 * tries to find the {@link IJavaElement} for the container of {@code element}. Returns 
+	 * <code>null</code> if no suitable result can be found. If the given {@code element} is <code>null</code>,
+	 * the result will be <code>null</code>.
+	 * @param element the identifiable. May be <code>null</code>.
+	 * @return the found {@link IJavaElement} or <code>null</code>.
+	 */
 	IJavaElement findElementFor(JvmIdentifiableElement element);
 	
 }
