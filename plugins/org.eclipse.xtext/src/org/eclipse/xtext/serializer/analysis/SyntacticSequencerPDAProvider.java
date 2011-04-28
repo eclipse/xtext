@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.serializer.impl;
+package org.eclipse.xtext.serializer.analysis;
 
 import java.util.Collections;
 import java.util.EnumSet;
@@ -38,6 +38,7 @@ import org.eclipse.xtext.grammaranalysis.impl.AbstractNFATransition;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractPDAProvider;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementFullTitleSwitch;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider;
+import org.eclipse.xtext.serializer.impl.RCStack;
 import org.eclipse.xtext.util.LinkedStack;
 
 import com.google.common.base.Predicate;

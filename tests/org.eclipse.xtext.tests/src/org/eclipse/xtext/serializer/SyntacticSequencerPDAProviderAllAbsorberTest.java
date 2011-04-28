@@ -8,7 +8,7 @@
 package org.eclipse.xtext.serializer;
 
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider;
+import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
