@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public abstract class AbstractJvmModelRenameStrategy extends DefaultRenameStrategy {
 
 	private IJvmModelAssociations jvmModelAssociations;
