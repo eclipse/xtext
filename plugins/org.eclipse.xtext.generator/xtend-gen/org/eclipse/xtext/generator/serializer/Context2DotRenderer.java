@@ -5,8 +5,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.Naming;
-import org.eclipse.xtext.serializer.impl.Context2NameFunction;
-import org.eclipse.xtext.serializer.impl.ContextUtil;
+import org.eclipse.xtext.serializer.IContextProvider;
+import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.util.GraphvizDotBuilder;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -16,13 +16,13 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class Context2DotRenderer {
-  @Inject private ContextUtil contextUtil;
+  @Inject private IContextProvider iContextProvider;
   @Inject private Grammar grammar;
   @Inject private Naming naming;
   @Inject private Context2NameFunction context2NameFunction;
   
   public Iterable<Pair<String,String>> render2Dot(final GraphvizDotBuilder builder, final String name) {
-    List<EObject> _allContexts = this.contextUtil.getAllContexts(this.grammar);
+    List<EObject> _allContexts = this.iContextProvider.getAllContexts(this.grammar);
     final Function1<EObject,Pair<String,String>> _function = new Function1<EObject,Pair<String,String>>() {
         public Pair<String,String> apply(EObject c) {
           String _fileName = Context2DotRenderer.this.getFileName(c, name);

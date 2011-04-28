@@ -188,6 +188,15 @@ public class GrammarUtil {
 			return false;
 		return GrammarUtil.containingAssignment(ele) == null;
 	}
+	
+	/**
+	 * @since 2.0
+	 */
+	public static boolean isUnassignedParserParserRuleCall(EObject ele) {
+		if (!isParserParserRuleCall(ele))
+			return false;
+		return GrammarUtil.containingAssignment(ele) == null;
+	}
 
 	public static boolean isDatatypeRuleCall(EObject grammarElement) {
 		if (grammarElement instanceof RuleCall) {

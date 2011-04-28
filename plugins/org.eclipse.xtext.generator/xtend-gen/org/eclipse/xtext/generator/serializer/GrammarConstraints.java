@@ -17,6 +17,7 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 @SuppressWarnings("all")
 public class GrammarConstraints extends GeneratedFile {
   @Inject private Grammar grammar;
+  @Inject private SemanticSequencerUtil semanticSequencerUtil;
   
   public String getFileExtension() {
     return "xtext";
@@ -58,7 +59,7 @@ public class GrammarConstraints extends GeneratedFile {
     _builder.append("// ******** constraint contexts ********");
     _builder.newLine();
     {
-      List<IConstraintContext> _grammarConstraintContexts = SemanticSequencerUtil.getGrammarConstraintContexts(this.grammar);
+      List<IConstraintContext> _grammarConstraintContexts = this.semanticSequencerUtil.getGrammarConstraintContexts(this.grammar);
       boolean hasAnyElements_1 = false;
       for(IConstraintContext gcc : _grammarConstraintContexts) {
         if (!hasAnyElements_1) {
@@ -98,7 +99,7 @@ public class GrammarConstraints extends GeneratedFile {
     _builder.append("// ******** constraints ********");
     _builder.newLine();
     {
-      Collection<IConstraint> _grammarConstraints = SemanticSequencerUtil.getGrammarConstraints(this.grammar);
+      Collection<IConstraint> _grammarConstraints = this.semanticSequencerUtil.getGrammarConstraints(this.grammar);
       boolean hasAnyElements_3 = false;
       for(IConstraint constraint_1 : _grammarConstraints) {
         if (!hasAnyElements_3) {

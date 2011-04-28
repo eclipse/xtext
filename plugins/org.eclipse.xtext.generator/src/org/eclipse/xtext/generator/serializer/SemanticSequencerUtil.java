@@ -17,24 +17,26 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.serializer.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.ConstraintElementType;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintElement;
-import org.eclipse.xtext.serializer.analysis.GrammarConstraintProvider;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class SemanticSequencerUtil {
 
-	private final static GrammarConstraintProvider gcp = new GrammarConstraintProvider();
+	@Inject
+	protected IGrammarConstraintProvider gcp;
 
-	public static Map<IConstraint, List<EObject>> getGrammarConstraints(Grammar grammar, EClass clazz) {
+	public Map<IConstraint, List<EObject>> getGrammarConstraints(Grammar grammar, EClass clazz) {
 		Map<IConstraint, List<EObject>> result = Maps.newHashMap();
 		for (IConstraintContext ctx : gcp.getConstraints(grammar))
 			for (IConstraint c : ctx.getConstraints())
@@ -47,7 +49,7 @@ public class SemanticSequencerUtil {
 		return result;
 	}
 
-	public static Collection<EObject> getGrammarContexts(Grammar grammar, EClass clazz) {
+	public Collection<EObject> getGrammarContexts(Grammar grammar, EClass clazz) {
 		Set<EObject> result = Sets.newLinkedHashSet();
 		for (IConstraintContext ctx : gcp.getConstraints(grammar))
 			for (IConstraint c : ctx.getConstraints())
@@ -56,25 +58,25 @@ public class SemanticSequencerUtil {
 		return result;
 	}
 
-	public static Collection<EObject> getGrammarContexts(Grammar grammar) {
+	public Collection<EObject> getGrammarContexts(Grammar grammar) {
 		Set<EObject> result = Sets.newLinkedHashSet();
 		for (IConstraintContext ctx : gcp.getConstraints(grammar))
 			result.add(ctx.getContext());
 		return result;
 	}
 
-	public static List<IConstraintContext> getGrammarConstraintContexts(Grammar grammar) {
+	public List<IConstraintContext> getGrammarConstraintContexts(Grammar grammar) {
 		return gcp.getConstraints(grammar);
 	}
 
-	public static Collection<IConstraint> getGrammarConstraints(Grammar grammar) {
+	public Collection<IConstraint> getGrammarConstraints(Grammar grammar) {
 		Set<IConstraint> result = Sets.newTreeSet();
 		for (IConstraintContext ctx : gcp.getConstraints(grammar))
 			result.addAll(ctx.getConstraints());
 		return result;
 	}
 
-	public static boolean canGenerate(IConstraint constraint) {
+	public boolean canGenerate(IConstraint constraint) {
 		if (constraint.getAssignments().length != constraint.getFeatures().length)
 			return false;
 		IConstraintElement body = constraint.getBody();
@@ -91,7 +93,7 @@ public class SemanticSequencerUtil {
 		return false;
 	}
 
-	public static String toAcceptMethod(ConstraintElementType type) {
+	public String toAcceptMethod(ConstraintElementType type) {
 		switch (type) {
 			case ASSIGNED_ACTION_CALL:
 				return "acceptAssignedAction";
@@ -118,7 +120,7 @@ public class SemanticSequencerUtil {
 		}
 	}
 
-	public static String toNodeType(ConstraintElementType type) {
+	public String toNodeType(ConstraintElementType type) {
 		switch (type) {
 			case ASSIGNED_ACTION_CALL:
 			case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:

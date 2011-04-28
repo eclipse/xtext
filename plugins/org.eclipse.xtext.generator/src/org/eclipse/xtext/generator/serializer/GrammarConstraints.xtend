@@ -1,11 +1,13 @@
 package org.eclipse.xtext.generator.serializer
 
 import org.eclipse.xtext.Grammar
-import static extension org.eclipse.xtext.generator.serializer.SemanticSequencerUtil.*
+import org.eclipse.xtext.generator.serializer.SemanticSequencerUtil.*
 
 class GrammarConstraints extends GeneratedFile {
 	
 	@Inject Grammar
+	
+	@Inject extension SemanticSequencerUtil
 	
 	override getFileExtension() {
 		"xtext"

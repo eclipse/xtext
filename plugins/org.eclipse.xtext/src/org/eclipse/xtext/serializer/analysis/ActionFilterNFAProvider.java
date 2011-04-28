@@ -21,6 +21,9 @@ import org.eclipse.xtext.grammaranalysis.impl.AbstractNFATransition;
 import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider.ActionFilterState;
 import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider.ActionFilterTransition;
 
+import com.google.inject.Singleton;
+
+@Singleton
 public class ActionFilterNFAProvider extends AbstractNFAProvider<ActionFilterState, ActionFilterTransition> {
 	public static class ActionFilterState extends AbstractNFAState<ActionFilterState, ActionFilterTransition> {
 

@@ -15,7 +15,6 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
-import org.eclipse.xtext.serializer.analysis.GrammarConstraintProvider;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -38,7 +37,7 @@ public class GrammarConstraintProviderTest extends AbstractXtextTests {
 
 	private String getParserRule(String body) throws Exception {
 		Grammar grammar = (Grammar) getModel(HEADER + body);
-		IGrammarConstraintProvider gcp = new GrammarConstraintProvider();
+		IGrammarConstraintProvider gcp = get(IGrammarConstraintProvider.class);
 
 		List<IConstraintContext> ctxts = gcp.getConstraints(grammar);
 		List<String> result = Lists.newArrayList();

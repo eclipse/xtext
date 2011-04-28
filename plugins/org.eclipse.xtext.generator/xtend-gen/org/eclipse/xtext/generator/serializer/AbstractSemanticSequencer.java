@@ -38,6 +38,7 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 public class AbstractSemanticSequencer extends GeneratedFile {
   @Inject private Grammar grammar;
   @Inject private GrammarAccess grammarAccess;
+  @Inject private SemanticSequencerUtil semanticSequencerUtil;
   
   public String getQualifiedName() {
     String _name = this.getName("Abstract", "SemanticSequencer");
@@ -45,7 +46,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   }
   
   public Iterable<EPackage> getAccessedPackages() {
-    Collection<IConstraint> _grammarConstraints = SemanticSequencerUtil.getGrammarConstraints(this.grammar);
+    Collection<IConstraint> _grammarConstraints = this.semanticSequencerUtil.getGrammarConstraints(this.grammar);
     final Function1<IConstraint,EPackage> _function = new Function1<IConstraint,EPackage>() {
         public EPackage apply(IConstraint e) {
           EClass _type = e.getType();
@@ -59,7 +60,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   }
   
   public Iterable<EClass> getAccessedClasses(final EPackage pkg) {
-    Collection<IConstraint> _grammarConstraints = SemanticSequencerUtil.getGrammarConstraints(this.grammar);
+    Collection<IConstraint> _grammarConstraints = this.semanticSequencerUtil.getGrammarConstraints(this.grammar);
     final Function1<IConstraint,EClass> _function = new Function1<IConstraint,EClass>() {
         public EClass apply(IConstraint e) {
           EClass _type = e.getType();
@@ -82,7 +83,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   }
   
   public Iterable<EClass> getAccessedClasses() {
-    Collection<IConstraint> _grammarConstraints = SemanticSequencerUtil.getGrammarConstraints(this.grammar);
+    Collection<IConstraint> _grammarConstraints = this.semanticSequencerUtil.getGrammarConstraints(this.grammar);
     final Function1<IConstraint,EClass> _function = new Function1<IConstraint,EClass>() {
         public EClass apply(IConstraint e) {
           EClass _type = e.getType();
@@ -95,22 +96,22 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   }
   
   public Map<IConstraint,List<EObject>> getAccessedConstraints(final EClass clazz) {
-    Map<IConstraint,List<EObject>> _grammarConstraints = SemanticSequencerUtil.getGrammarConstraints(this.grammar, clazz);
+    Map<IConstraint,List<EObject>> _grammarConstraints = this.semanticSequencerUtil.getGrammarConstraints(this.grammar, clazz);
     return _grammarConstraints;
   }
   
   public Collection<EObject> getAccessedContexts(final EClass clazz) {
-    Collection<EObject> _grammarContexts = SemanticSequencerUtil.getGrammarContexts(this.grammar, clazz);
+    Collection<EObject> _grammarContexts = this.semanticSequencerUtil.getGrammarContexts(this.grammar, clazz);
     return _grammarContexts;
   }
   
   public Collection<EObject> getAccessedContexts() {
-    Collection<EObject> _grammarContexts = SemanticSequencerUtil.getGrammarContexts(this.grammar);
+    Collection<EObject> _grammarContexts = this.semanticSequencerUtil.getGrammarContexts(this.grammar);
     return _grammarContexts;
   }
   
   public Collection<IConstraint> getAccessedConstraints() {
-    Collection<IConstraint> _grammarConstraints = SemanticSequencerUtil.getGrammarConstraints(this.grammar);
+    Collection<IConstraint> _grammarConstraints = this.semanticSequencerUtil.getGrammarConstraints(this.grammar);
     return _grammarConstraints;
   }
   
@@ -616,7 +617,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     _builder.append(" semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {");
     _builder.newLineIfNotEmpty();
     {
-      boolean _canGenerate = SemanticSequencerUtil.canGenerate(c);
+      boolean _canGenerate = this.semanticSequencerUtil.canGenerate(c);
       if (_canGenerate) {
         _builder.append("\t");
         _builder.append("if(errorAcceptor != null) {");
@@ -675,7 +676,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             ConstraintElementType _type_2 = assignment.getType();
-            String _acceptMethod = SemanticSequencerUtil.toAcceptMethod(_type_2);
+            String _acceptMethod = this.semanticSequencerUtil.toAcceptMethod(_type_2);
             _builder.append(_acceptMethod, "	");
             _builder.append("(sequenceAcceptor, errorAcceptor, semanticObject, grammarAccess.");
             AbstractElement _grammarElement = assignment.getGrammarElement();
@@ -688,7 +689,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             _builder.append(_getAccessor, "	");
             _builder.append("(), -1, (");
             ConstraintElementType _type_3 = assignment.getType();
-            String _nodeType = SemanticSequencerUtil.toNodeType(_type_3);
+            String _nodeType = this.semanticSequencerUtil.toNodeType(_type_3);
             _builder.append(_nodeType, "	");
             _builder.append(")nodes.getNodeForSingelValue(");
             EStructuralFeature _feature_3 = f_2.getFeature();
