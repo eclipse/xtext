@@ -23,11 +23,11 @@ import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
-import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -70,14 +70,14 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 		}
 		String contextName = context2Name.apply(context);
 		String semanticType = semanticObject.eClass().getName();
-		String recommendCtxNames = Join.join(", ", Iterables.transform(recommendedCtxs, context2Name));
-		String validTypeNames = Join.join(", ", Iterables.transform(validTypes, new NamedElement2Name()));
+		String recommendCtxNames = Joiner.on(", ").join(Iterables.transform(recommendedCtxs, context2Name));
+		String validTypeNames = Joiner.on(", ").join(Iterables.transform(validTypes, new NamedElement2Name()));
 		StringBuilder msg = new StringBuilder();
 		msg.append("The context '" + contextName + "' is not valid for type '" + semanticType + "'\n");
 		msg.append("Recommended contexts for type '" + semanticType + "': " + recommendCtxNames + "\n");
 		if (!otherValidCtxs.isEmpty())
 			msg.append("Other valid contexts for type '" + semanticType + "': "
-					+ Join.join(", ", Iterables.transform(otherValidCtxs, context2Name)));
+					+ Joiner.on(", ").join(Iterables.transform(otherValidCtxs, context2Name)));
 		msg.append("The context '" + contextName + "' is valid for types: " + validTypeNames + "\n");
 		return new SerializationDiagnostic(semanticObject, msg.toString());
 	}

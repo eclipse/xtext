@@ -14,8 +14,8 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.inject.internal.Lists;
 
 /**
  * An iterator that can traverse a parse tree in forward and backward direction 

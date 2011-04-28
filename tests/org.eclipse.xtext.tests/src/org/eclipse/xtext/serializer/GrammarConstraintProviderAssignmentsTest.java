@@ -15,11 +15,10 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintElement;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.RelationalDependencyType;
-import org.eclipse.xtext.serializer.analysis.GrammarConstraintProvider;
 import org.eclipse.xtext.util.Pair;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
-import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -47,7 +46,7 @@ public class GrammarConstraintProviderAssignmentsTest extends AbstractXtextTests
 			for (Pair<IConstraintElement, RelationalDependencyType> c : ass.getDependingAssignment())
 				result.add("  " + c.getSecond() + " " + c.getFirst());
 		}
-		return Join.join("\n", result);
+		return Joiner.on("\n").join(result);
 	}
 
 	public void testMandatoryGroup1() throws Exception {

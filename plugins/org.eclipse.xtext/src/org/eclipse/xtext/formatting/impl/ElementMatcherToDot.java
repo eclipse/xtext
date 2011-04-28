@@ -24,7 +24,6 @@ import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
-import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -54,7 +53,7 @@ public class ElementMatcherToDot extends GrammarToDot {
 	}
 
 	protected String toStr(Iterable<IElementPattern> list) {
-		String s1 = Join.join(", ", list);
+		String s1 = Joiner.on(", ").join(list);
 		String s2 = s1.replaceAll("\\\\n|\\n", "\\\\\\\\n");
 		return s2;
 	}
@@ -67,7 +66,7 @@ public class ElementMatcherToDot extends GrammarToDot {
 		if (!transition.getCommonPatterns().isEmpty())
 			label.add("{" + toStr(transition.getCommonPatterns()) + "}");
 		//		for (Map.Entry<AbstractRule, Set<IElementPattern>> e : transition.getExitPatterns().entrySet())
-		//			label.add(e.getKey().getName() + ":{" + Join.join(", ", e.getValue()).replace("\\n", "\\\\n") + "}");
+		//			label.add(e.getKey().getName() + ":{" + Joiner.on(", ").join(e.getValue()).replace("\\n", "\\\\n") + "}");
 		for (Map.Entry<MatcherState, Set<IElementPattern>> e : transition.getGuardPatterns().entrySet())
 			label.add(GrammarUtil.containingRule(e.getKey().getGrammarElement()).getName() + "-" + e.getKey() + ":{"
 					+ toStr(e.getValue()) + "}");

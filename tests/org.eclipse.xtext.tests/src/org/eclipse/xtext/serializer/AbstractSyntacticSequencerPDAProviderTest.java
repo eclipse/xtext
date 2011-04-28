@@ -29,9 +29,9 @@ import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.Seque
 import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.SequencerNFAState;
 import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.SequencerNFATransition;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -102,7 +102,7 @@ public abstract class AbstractSyntacticSequencerPDAProviderTest extends Abstract
 				result.add("{" + act.getType().getClassifier().getName() + "." + act.getFeature() + "}" + ":");
 				result.addAll(pda2lines(createSequenceParserPDAProvider().getPDA(act)));
 			}
-		return Join.join("\n", result);
+		return Joiner.on("\n").join(result);
 	}
 
 	private List<String> pda2lines(ISynAbsorberState start) {
@@ -148,6 +148,6 @@ public abstract class AbstractSyntacticSequencerPDAProviderTest extends Abstract
 	private String pathToStr(ISynState state) {
 		List<String> result = Lists.newArrayList();
 		pathToStr(state, Sets.<ISynState> newHashSet(), result);
-		return Join.join(" ", result);
+		return Joiner.on(" ").join(result);
 	}
 }

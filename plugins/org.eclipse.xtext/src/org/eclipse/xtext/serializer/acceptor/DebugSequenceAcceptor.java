@@ -22,8 +22,8 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.LeafNode;
 import org.eclipse.xtext.util.EmfFormatter;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
-import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -132,7 +132,7 @@ public class DebugSequenceAcceptor implements IEObjectSequenceAcceptor, IRecursi
 		row.add(node == NO_NODE ? "" : node2text(node));
 		table.add(row);
 		if (printInstantly)
-			System.out.println(Join.join("\t", row));
+			System.out.println(Joiner.on('\t').join(row));
 	}
 
 	public void enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
@@ -174,7 +174,7 @@ public class DebugSequenceAcceptor implements IEObjectSequenceAcceptor, IRecursi
 			for (int i = 0; i < line.size() && i < width.length; i++)
 				width[i] = Math.max(width[i], line.get(i).length());
 
-		String format = "%-" + Join.join("s %-", width) + "s %s";
+		String format = "%-" + Joiner.on("s %-").join(width) + "s %s";
 		List<String> lines = Lists.newArrayList();
 		for (List<String> line : table)
 			lines.add(String.format(format, line.toArray()));
@@ -212,6 +212,6 @@ public class DebugSequenceAcceptor implements IEObjectSequenceAcceptor, IRecursi
 
 	@Override
 	public String toString() {
-		return Join.join("\n", getList());
+		return Joiner.on("\n").join(getList());
 	}
 }

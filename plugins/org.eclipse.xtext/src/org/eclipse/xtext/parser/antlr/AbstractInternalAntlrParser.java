@@ -55,7 +55,7 @@ import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.google.inject.internal.Maps;
+import com.google.common.collect.Maps;
 
 /**
  * Base class for Xtext's generated parsers. It is reasonable customizable by means of 
