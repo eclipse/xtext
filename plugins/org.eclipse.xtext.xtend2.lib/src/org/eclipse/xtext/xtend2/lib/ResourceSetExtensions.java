@@ -13,11 +13,22 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 
 /**
+ * This is an extension library for {@link ResourceSet EMF resource sets}.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class ResourceSetExtensions {
 
+	/**
+	 * Returns all the contents of the {@code resourceSet} as an {@link Iterable}.
+	 * 
+	 * @param resourceSet
+	 *            the resourceSet whose contents should be traversed. May not be <code>null</code>.
+	 * @return an iterable that yields all the contents of the resourceSet. Never <code>null</code>.
+	 */
 	public static Iterable<Notifier> allContentsIterable(final ResourceSet resourceSet) {
+		if (resourceSet == null)
+			throw new NullPointerException("resourceSet");
 		return new Iterable<Notifier>() {
 			public Iterator<Notifier> iterator() {
 				return resourceSet.getAllContents();
