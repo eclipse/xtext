@@ -35,26 +35,33 @@ import com.google.inject.Inject;
 
 /**
  * @author Holger Schill - Initial contribution and API
+ * @author Jan Koehnlein
  */
 public class RenameLinkedMode {
+	
+	private static final Logger LOG = Logger.getLogger(RenameLinkedMode.class);
+
 	@Inject
 	private ILinkedPositionGroupCalculator linkedPositionGroupCalculator;
 
 	@Inject
 	private RenameRefactoringController controller;
 
+	@Inject 
+	private LinkedEditingUndoSupport undoSupport;
+	
+	private XtextEditor editor;
 	private RenameRefactoringPopup popup;
 	private FocusEditingSupport focusEditingSupport;
 	private boolean showPreview;
 	private Point originalSelection;
 	private LinkedModeModel linkedModeModel;
-	private XtextEditor editor;
 	private LinkedPositionGroup linkedPositionGroup;
 	private LinkedPosition currentPosition;
-	private Logger log = Logger.getLogger(RenameLinkedMode.class);
+
 
 	public void start(IRenameElementContext renameElementContext, ProcessorBasedRefactoring renameRefactoring) {
-		if (renameRefactoring == null)
+		if (renameRefactoring == null || renameElementContext == null)
 			return;
 		this.linkedPositionGroup = linkedPositionGroupCalculator.getLinkedPositionGroup(renameElementContext,
 				renameRefactoring);
@@ -80,19 +87,18 @@ public class RenameLinkedMode {
 			linkedModeModel.addGroup(linkedPositionGroup);
 			linkedModeModel.forceInstall();
 			linkedModeModel.addLinkingListener(new EditorSynchronizer());
-
+			undoSupport.initialize(editor);
 			LinkedModeUI ui = new EditorLinkedModeUI(linkedModeModel, viewer);
 			ui.setExitPosition(viewer, currentPosition.getOffset(), 0, Integer.MAX_VALUE);
 			ui.setExitPolicy(new ExitPolicy(document));
 			ui.enter();
-
 			if (viewer instanceof IEditingSupportRegistry) {
 				IEditingSupportRegistry registry = (IEditingSupportRegistry) viewer;
 				registry.register(focusEditingSupport);
 			}
 			openPopup();
 		} catch (BadLocationException e) {
-			log.error(e.getMessage(), e);
+			LOG.error(e.getMessage(), e);
 		}
 	}
 
@@ -106,12 +112,16 @@ public class RenameLinkedMode {
 			try {
 				return controller.updateNewName(currentPosition.getContent());
 			} catch (BadLocationException e) {
-				log.error("Error updating new name", e);
+				LOG.error("Error updating new name", e);
 			}
 		return false;
 	}
 
-	public boolean isCaretInLinkedPosition() {
+	public boolean isSameRenameElementContext(IRenameElementContext renameElementContext) {
+		return renameElementContext.getTriggeringEditor() == editor && isCaretInLinkedPosition();
+	}
+	
+	protected boolean isCaretInLinkedPosition() {
 		return getCurrentLinkedPosition() != null;
 	}
 
@@ -133,8 +143,9 @@ public class RenameLinkedMode {
 			linkedModeModel.exit(ILinkedModeListener.NONE);
 		}
 		linkedModeLeft();
+		undoSupport.undoDocumentChanges();
 	}
-
+	
 	protected void linkedModeLeft() {
 		if (popup != null) {
 			popup.close();
@@ -147,12 +158,13 @@ public class RenameLinkedMode {
 		}
 	}
 
-	public class EditorSynchronizer implements ILinkedModeListener {
+	protected class EditorSynchronizer implements ILinkedModeListener {
 
 		public void left(LinkedModeModel model, int flags) {
+			boolean isValidNewName = updateNewName();
 			linkedModeLeft();
 			if ((flags & ILinkedModeListener.UPDATE_CARET) != 0) {
-				if (updateNewName()) {
+				if (isValidNewName) {
 					if (showPreview)
 						controller.startRefactoring(RefactoringType.REFACTORING_PREVIEW);
 					else
@@ -189,26 +201,15 @@ public class RenameLinkedMode {
 		}
 	}
 
-	protected class ExitPolicy extends DeleteBlockingExitPolicy {
-		public ExitPolicy(IDocument document) {
-			super(document);
-		}
-
-		@Override
-		public ExitFlags doExit(LinkedModeModel model, VerifyEvent event, int offset, int length) {
-			showPreview = (event.stateMask & SWT.CTRL) != 0 && (event.character == SWT.CR || event.character == SWT.LF);
-			return super.doExit(model, event, offset, length);
-		}
-	}
-
-	public static class DeleteBlockingExitPolicy implements IExitPolicy {
+	protected class ExitPolicy implements IExitPolicy {
 		private IDocument document;
 
-		public DeleteBlockingExitPolicy(IDocument document) {
+		public ExitPolicy(IDocument document) {
 			this.document = document;
 		}
 
 		public ExitFlags doExit(LinkedModeModel model, VerifyEvent event, int offset, int length) {
+			showPreview = (event.stateMask & SWT.CTRL) != 0 && (event.character == SWT.CR || event.character == SWT.LF);
 			if (length == 0 && (event.character == SWT.BS || event.character == SWT.DEL)) {
 				LinkedPosition position = model.findPosition(new LinkedPosition(document, offset, 0,
 						LinkedPositionGroup.NO_STOP));
@@ -226,8 +227,8 @@ public class RenameLinkedMode {
 					}
 				}
 			}
-
 			return null; // don't change behavior
 		}
 	}
+	
 }
