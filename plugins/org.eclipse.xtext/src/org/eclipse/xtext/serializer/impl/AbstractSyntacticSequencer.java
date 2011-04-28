@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -268,12 +267,9 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 
 	public void createSequence(EObject ctx, EObject semanticObject, INode previousNode,
 			ISyntacticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		SemAcceptor acceptor = new SemAcceptor(ctx, getStartState(ctx), previousNode, sequenceAcceptor, errorAcceptor);
+		SemAcceptor acceptor = new SemAcceptor(ctx, pdaProvider.getPDA(ctx, semanticObject.eClass()), previousNode,
+				sequenceAcceptor, errorAcceptor);
 		semanticSequencer.createSequence(ctx, semanticObject, acceptor, errorAcceptor);
-	}
-
-	protected ISynAbsorberState getStartState(EObject ctx) {
-		return ctx instanceof ParserRule ? pdaProvider.getPDA((ParserRule) ctx) : pdaProvider.getPDA((Action) ctx);
 	}
 
 	@Inject

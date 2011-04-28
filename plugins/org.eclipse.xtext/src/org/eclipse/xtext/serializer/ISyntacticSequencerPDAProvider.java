@@ -10,9 +10,9 @@ package org.eclipse.xtext.serializer;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.Action;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.IPDAState;
 import org.eclipse.xtext.grammaranalysis.IPDAState.PDAStateType;
@@ -199,8 +199,5 @@ public interface ISyntacticSequencerPDAProvider {
 
 	}
 
-	ISynAbsorberState getPDA(Action contet);
-
-	ISynAbsorberState getPDA(ParserRule context);
-
+	ISynAbsorberState getPDA(EObject context, EClass type);
 }
