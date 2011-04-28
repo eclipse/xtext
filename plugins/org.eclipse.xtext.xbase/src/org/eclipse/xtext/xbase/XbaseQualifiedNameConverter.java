@@ -13,6 +13,11 @@ import org.eclipse.xtext.naming.QualifiedName;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XbaseQualifiedNameConverter extends org.eclipse.xtext.naming.IQualifiedNameConverter.DefaultImpl {
+	
+	/**
+	 * the '..' operator would be rejected by {@link org.eclipse.xtext.naming.IQualifiedNameConverter.DefaultImpl}
+	 * so we have to enable it here.
+	 */
 	@Override
 	public QualifiedName toQualifiedName(String qualifiedNameAsString) {
 		if ("..".equals(qualifiedNameAsString))
