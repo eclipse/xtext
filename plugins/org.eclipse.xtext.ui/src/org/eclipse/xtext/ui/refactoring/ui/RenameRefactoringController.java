@@ -7,21 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.ui;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.apache.log4j.Logger;
-import org.eclipse.core.commands.operations.IOperationHistory;
-import org.eclipse.core.commands.operations.IUndoContext;
-import org.eclipse.core.commands.operations.IUndoableOperation;
-import org.eclipse.core.commands.operations.OperationHistoryFactory;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.text.ITextSelection;
-import org.eclipse.jface.text.ITextViewerExtension6;
-import org.eclipse.jface.text.IUndoManager;
-import org.eclipse.jface.text.IUndoManagerExtension;
-import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
@@ -53,13 +40,6 @@ public class RenameRefactoringController {
 	@Inject
 	private IRenameProcessorAdapter.Factory renameProcessorAdapterFactory;
 
-	private RenameLinkedMode activeLinkedMode;
-
-	private IRenameElementContext renameElementContext;
-	private ProcessorBasedRefactoring renameRefactoring;
-	private IRenameProcessorAdapter renameProcessorAdapter;
-	private IUndoableOperation startingUndoOperation;
-
 	/**
 	 * Factory for components from the language holding the declaration of the renamed element.
 	 * 
@@ -83,15 +63,13 @@ public class RenameRefactoringController {
 
 	private DeclaringLanguageComponentFactory declaringLanguage;
 
-	public void startLinkedEditing(IRenameElementContext renameElementContext) {
-		if (activeLinkedMode != null) {
-			if (renameElementContext.getTriggeringEditor() == getXtextEditor() && activeLinkedMode.isCaretInLinkedPosition()) {
-				startRefactoring(RefactoringType.REFACTORING_DIALOG);
-				return;
-			} else {
-				activeLinkedMode.cancel();
-			}
-		}
+	private RenameLinkedMode activeLinkedMode;
+
+	private IRenameElementContext renameElementContext;
+	private ProcessorBasedRefactoring renameRefactoring;
+	private IRenameProcessorAdapter renameProcessorAdapter;
+
+	public void initialize(IRenameElementContext renameElementContext) {
 		try {
 			declaringLanguage = globalServiceProvider.findService(renameElementContext.getTargetElementURI(),
 					DeclaringLanguageComponentFactory.class);
@@ -102,22 +80,13 @@ public class RenameRefactoringController {
 		this.renameElementContext = renameElementContext;
 		renameRefactoring = declaringLanguage.createRenameRefactoring(renameElementContext);
 		renameProcessorAdapter = renameProcessorAdapterFactory.create(renameRefactoring);
-		ISourceViewer viewer = getXtextEditor().getInternalSourceViewer();
-		if (viewer instanceof ITextViewerExtension6) {
-			IUndoManager undoManager = ((ITextViewerExtension6) viewer).getUndoManager();
-			if (undoManager instanceof IUndoManagerExtension) {
-				IUndoManagerExtension undoManagerExtension = (IUndoManagerExtension) undoManager;
-				IUndoContext undoContext = undoManagerExtension.getUndoContext();
-				IOperationHistory operationHistory = OperationHistoryFactory.getOperationHistory();
-				startingUndoOperation = operationHistory.getUndoOperation(undoContext);
-			}
-		}
-		activeLinkedMode = renameLinkedModeProvider.get();
-		// refactorings should not be reused, so the linked mode uses an extra one 
-		activeLinkedMode.start(renameElementContext, declaringLanguage.createRenameRefactoring(renameElementContext));
 	}
-
+	
 	public void startRefactoring(RefactoringType refactoringType) {
+		if(refactoringType == RefactoringType.LINKED_EDITING) {
+			startLinkedEditing();
+			return;
+		}
 		ViewFreezer freezer = new ViewFreezer(getXtextEditor().getInternalSourceViewer());
 		try {
 			freezer.freeze();
@@ -125,7 +94,6 @@ public class RenameRefactoringController {
 			// state and not the new one
 			if(activeLinkedMode != null) 
 				activeLinkedMode.cancel();
-			undoDocumentChanges();
 			switch (refactoringType) {
 				case REFACTORING_DIRECT:
 					startDirectRefactoring();
@@ -135,13 +103,27 @@ public class RenameRefactoringController {
 					break;
 				case REFACTORING_PREVIEW:
 					startRefactoringWithDialog(true);
+					break;
+				default: 
+					throw new IllegalStateException("Invalid refactoring type " + refactoringType.toString());
 			}
-		} catch (CoreException e) {
-			LOG.error(e.getMessage(), e);
 		} finally {
 			freezer.release();
 		}
+	}
 
+	protected void startLinkedEditing() {
+		if (activeLinkedMode != null) {
+			if (activeLinkedMode.isSameRenameElementContext(renameElementContext)) {
+				startRefactoring(RefactoringType.REFACTORING_DIALOG);
+				return;
+			} else {
+				activeLinkedMode.cancel();
+			}
+		}
+		activeLinkedMode = renameLinkedModeProvider.get();
+		// refactorings should not be reused, so the linked mode uses its own instance 
+		activeLinkedMode.start(renameElementContext, declaringLanguage.createRenameRefactoring(renameElementContext));
 	}
 
 	protected void startDirectRefactoring() {
@@ -150,12 +132,8 @@ public class RenameRefactoringController {
 		} else {
 			RenameRefactoringExecuter renameRefactoringExecuter = declaringLanguage.createRenameRefactoringExecuter();
 			try {
-				renameRefactoringExecuter.configure(renameRefactoring);
-				renameRefactoringExecuter.perform(getXtextEditor().getSite());
-			} catch (CoreException e) {
-				LOG.error(e.getMessage(), e);
-				restoreOriginalSelection();
-			} catch (InterruptedException e) {
+				renameRefactoringExecuter.execute(getXtextEditor(), renameRefactoring);
+			} catch (Exception e) {
 				// User canceled operation
 				LOG.error(e.getMessage(), e);
 				restoreOriginalSelection();
@@ -182,7 +160,6 @@ public class RenameRefactoringController {
 			// canceling by the user is ok
 			restoreOriginalSelection();
 		}
-
 	}
 
 	protected void restoreOriginalSelection() {
@@ -206,35 +183,6 @@ public class RenameRefactoringController {
 			return result.hasWarning();
 		} else {
 			return false;
-		}
-	}
-
-	protected void undoDocumentChanges() throws CoreException {
-		final ISourceViewer viewer = getXtextEditor().getInternalSourceViewer();
-		try {
-			getXtextEditor().getSite().getWorkbenchWindow().run(false, true, new IRunnableWithProgress() {
-				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-					if (viewer instanceof ITextViewerExtension6) {
-						IUndoManager undoManager = ((ITextViewerExtension6) viewer).getUndoManager();
-						if (undoManager instanceof IUndoManagerExtension) {
-							IUndoManagerExtension undoManagerExtension = (IUndoManagerExtension) undoManager;
-							IUndoContext undoContext = undoManagerExtension.getUndoContext();
-							IOperationHistory operationHistory = OperationHistoryFactory.getOperationHistory();
-							while (undoManager.undoable()) {
-								if (startingUndoOperation != null
-										&& startingUndoOperation.equals(operationHistory.getUndoOperation(undoContext)))
-									return;
-								undoManager.undo();
-							}
-						}
-					}
-				}
-			});
-
-		} catch (InvocationTargetException e) {
-			LOG.error(e.getMessage(), e);
-		} catch (InterruptedException e) {
-			LOG.error(e.getMessage(), e);
 		}
 	}
 

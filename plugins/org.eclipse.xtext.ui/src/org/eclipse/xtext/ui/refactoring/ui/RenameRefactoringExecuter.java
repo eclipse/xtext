@@ -15,9 +15,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.core.runtime.jobs.IJobManager;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
@@ -25,7 +23,6 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.operation.IRunnableContext;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.PerformChangeOperation;
 import org.eclipse.ltk.core.refactoring.RefactoringCore;
@@ -35,55 +32,36 @@ import org.eclipse.ltk.ui.refactoring.RefactoringUI;
 import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IWorkbenchPartSite;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.xtext.ui.refactoring.impl.Messages;
 
 /**
- * 
  * @author Holger Schill - Initial contribution and API
+ * @author Jan Koehnlein
  */
 public class RenameRefactoringExecuter {
-	private ProcessorBasedRefactoring refactoring;
-	private RefactoringStatus preCheckStatus;
-	private Logger log = Logger.getLogger(RenameRefactoringExecuter.class);
+	private static final Logger LOG = Logger.getLogger(RenameRefactoringExecuter.class);
 
-	public IStatus preCheck() throws CoreException {
-		ensureChecked();
-		if (preCheckStatus.hasFatalError())
-			return preCheckStatus.getEntryMatchingSeverity(RefactoringStatus.FATAL).toStatus();
-		else
-			return Status.OK_STATUS;
-	}
-
-	protected void ensureChecked() throws CoreException {
-		if (preCheckStatus == null) {
-			if (!refactoring.isApplicable()) {
-				preCheckStatus = RefactoringStatus.createFatalErrorStatus("Refactoring ist not applicable"); //$NON-NLS-1$
-			} else {
-				preCheckStatus = new RefactoringStatus();
-			}
-		}
-	}
-
-	public void configure(ProcessorBasedRefactoring renameRefactoring) throws CoreException {
-		refactoring = renameRefactoring;
-		preCheck();
-	}
-
-	public void perform(IWorkbenchPartSite iWorkbenchPartSite) throws InterruptedException {
-		IRunnableContext context = iWorkbenchPartSite.getWorkbenchWindow();
-		Shell parent = iWorkbenchPartSite.getShell();
+	protected boolean isApplicable(Shell parent, ProcessorBasedRefactoring refactoring) {
 		try {
-			ensureChecked();
+			if (refactoring.isApplicable()) {
+				return true;
+			}
+			showFatalErrorMessage(parent, "Refactoring is not applicable");
 		} catch (CoreException e) {
-			// Not executable
-			return;
+			LOG.error("Error detecting applicability of refactoring", e);
+			showFatalErrorMessage(parent, "Cannot apply refactoring. See log for details.");
 		}
-		if (preCheckStatus.hasFatalError()) {
-			showInformation(parent, preCheckStatus);
-			return;
-		}
+		return false;
+	}
+
+	public void execute(IEditorPart editor, ProcessorBasedRefactoring refactoring) throws InterruptedException {
 		Assert.isTrue(Display.getCurrent() != null);
+		IWorkbenchWindow window = editor.getSite().getWorkbenchWindow();
+		Shell shell = editor.getSite().getShell();
+		if (!isApplicable(shell, refactoring))
+			return;
 		final IJobManager manager = Job.getJobManager();
 		final ISchedulingRule rule = ResourcesPlugin.getWorkspace().getRoot();
 		try {
@@ -93,24 +71,22 @@ public class RenameRefactoringExecuter {
 						manager.beginRule(rule, null);
 					}
 				};
-				BusyIndicator.showWhile(parent.getDisplay(), r);
+				BusyIndicator.showWhile(shell.getDisplay(), r);
 			} catch (OperationCanceledException e) {
 				// User cancelled operation
 				// Do nothing
 				return;
 			}
-
-			final WrappingPerformChangeOperation op = new WrappingPerformChangeOperation(parent);
-			refactoring.setValidationContext(parent);
-			context.run(false, true, new WorkbenchRunnableAdapter(op, rule, true));
-			if (op.performChangeOperation != null)
-				context.run(false, false, new WorkbenchRunnableAdapter(op.performChangeOperation, rule, true));
-
-			if (op.performChangeOperation != null) {
-				RefactoringStatus validationStatus = op.performChangeOperation.getValidationStatus();
+			CheckConditionsAndCreateChangeRunnable checkConditionsRunnable = new CheckConditionsAndCreateChangeRunnable(shell, refactoring);
+			refactoring.setValidationContext(shell);
+			window.run(false, true, new WorkbenchRunnableAdapter(checkConditionsRunnable, rule, true));
+			PerformChangeOperation performChangeOperation = checkConditionsRunnable.getPerformChangeOperation();
+			if (performChangeOperation != null) {
+				window.run(false, false, new WorkbenchRunnableAdapter(performChangeOperation, rule, true));
+				RefactoringStatus validationStatus = performChangeOperation.getValidationStatus();
 				if (validationStatus != null && validationStatus.hasFatalError()) {
 					MessageDialog.openError(
-							parent,
+							shell,
 							refactoring.getName(),
 							Messages.format("Cannot execute refactoring",
 									validationStatus.getMessageMatchingSeverity(RefactoringStatus.FATAL))); //$NON-NLS-1$
@@ -118,39 +94,38 @@ public class RenameRefactoringExecuter {
 				}
 			}
 		} catch (InvocationTargetException e) {
-			log.error(e.getMessage(), e);
+			LOG.error(e.getMessage(), e);
 		} finally {
 			manager.endRule(rule);
 			refactoring.setValidationContext(null);
 		}
-
 	}
 
-	private void showInformation(Shell parent, RefactoringStatus status) {
-		String message = status.getMessageMatchingSeverity(RefactoringStatus.FATAL);
-		MessageDialog.openInformation(parent, "Rename refactoring", message); //$NON-NLS-1$
+	private void showFatalErrorMessage(Shell parent, String message) {
+		MessageDialog.openInformation(parent, "Rename refactoring", message);
 	}
 
-	private class WrappingPerformChangeOperation implements IWorkspaceRunnable {
-		public Change change;
-		public PerformChangeOperation performChangeOperation;
-		private Shell parent;
+	protected static class CheckConditionsAndCreateChangeRunnable implements IWorkspaceRunnable {
 
-		public WrappingPerformChangeOperation(Shell parent) {
-			this.parent = parent;
+		private final Shell shell;
+		private final ProcessorBasedRefactoring refactoring;
+
+		private PerformChangeOperation performChangeOperation;
+
+		public CheckConditionsAndCreateChangeRunnable(Shell shell, ProcessorBasedRefactoring refactoring) {
+			this.shell = shell;
+			this.refactoring = refactoring;
 		}
 
 		public void run(IProgressMonitor pm) throws CoreException {
 			try {
-				pm.beginTask("", 11); //$NON-NLS-1$
-				pm.subTask(""); //$NON-NLS-1$
-
+				pm.beginTask("", 11);
+				pm.subTask("");
 				final RefactoringStatus status = refactoring.checkAllConditions(new SubProgressMonitor(pm, 4,
 						SubProgressMonitor.PREPEND_MAIN_LABEL_TO_SUBTASK));
 				if (status.getSeverity() >= RefactoringStatus.WARNING) {
 					final boolean[] canceled = { false };
-
-					parent.getDisplay().syncExec(new Runnable() {
+					shell.getDisplay().syncExec(new Runnable() {
 						public void run() {
 							canceled[0] = showStatusDialog(status);
 						}
@@ -159,8 +134,7 @@ public class RenameRefactoringExecuter {
 						throw new OperationCanceledException();
 					}
 				}
-
-				change = refactoring.createChange(new SubProgressMonitor(pm, 2,
+				Change change = refactoring.createChange(new SubProgressMonitor(pm, 2,
 						SubProgressMonitor.PREPEND_MAIN_LABEL_TO_SUBTASK));
 				change.initializeValidationData(new SubProgressMonitor(pm, 1,
 						SubProgressMonitor.PREPEND_MAIN_LABEL_TO_SUBTASK));
@@ -172,10 +146,14 @@ public class RenameRefactoringExecuter {
 			}
 		}
 
-		private boolean showStatusDialog(RefactoringStatus status) {
-			Dialog dialog = RefactoringUI.createRefactoringStatusDialog(status, parent, refactoring.getName(), false);
+		protected boolean showStatusDialog(RefactoringStatus status) {
+			Dialog dialog = RefactoringUI.createRefactoringStatusDialog(status, shell, refactoring.getName(), false);
 			return dialog.open() == IDialogConstants.CANCEL_ID;
 		}
-	}
 
+		public PerformChangeOperation getPerformChangeOperation() {
+			return performChangeOperation;
+		}
+
+	}
 }

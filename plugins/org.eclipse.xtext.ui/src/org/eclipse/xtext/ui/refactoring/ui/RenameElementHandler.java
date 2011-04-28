@@ -77,7 +77,8 @@ public class RenameElementHandler extends AbstractHandler {
 	}
 
 	protected void startRenameLinkedMode(IRenameElementContext renameElementContext) throws InterruptedException {
-		renameRefactoringController.startLinkedEditing(renameElementContext);
+		renameRefactoringController.initialize(renameElementContext);
+		renameRefactoringController.startRefactoring(RefactoringType.LINKED_EDITING);
 	}
 
 }

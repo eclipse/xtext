@@ -13,5 +13,6 @@ package org.eclipse.xtext.ui.refactoring.ui;
 public enum RefactoringType {
 	REFACTORING_DIALOG,
 	REFACTORING_DIRECT,
-	REFACTORING_PREVIEW
+	REFACTORING_PREVIEW,
+	LINKED_EDITING
 }
