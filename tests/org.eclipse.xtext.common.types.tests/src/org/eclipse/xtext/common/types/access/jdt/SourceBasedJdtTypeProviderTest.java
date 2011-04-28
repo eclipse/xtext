@@ -45,7 +45,7 @@ public class SourceBasedJdtTypeProviderTest extends AbstractTypeProviderTest {
 	
 	@Override
 	protected String getCollectionParamName() {
-		return "arg0";
+		return "c";
 	}
 	
 	@Override

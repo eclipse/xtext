@@ -191,7 +191,7 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 
 	@Override
 	protected String getCollectionParamName() {
-		return "arg0";
+		return "c";
 	}
 
 }
