@@ -5,32 +5,24 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.serializer.analysis;
+package org.eclipse.xtext.serializer;
 
 import java.util.List;
+import java.util.Set;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.serializer.analysis.ContextProvider;
 
-import com.google.common.collect.Lists;
+import com.google.inject.ImplementedBy;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class ContextUtil {
-	public List<EObject> getAllContexts(Grammar grammar) {
-		List<EObject> result = Lists.newArrayList();
-		for (ParserRule pr : GrammarUtil.allParserRules(grammar))
-			if (GrammarUtil.isParserParserRule(pr)) {
-				result.add(pr);
-				for (Action action : GrammarUtil.containedActions(pr))
-					if (GrammarUtil.isAssignedAction(action))
-						result.add(action);
-			}
-		return result;
-	}
+@ImplementedBy(ContextProvider.class)
+public interface IContextProvider {
+	public List<EObject> getAllContexts(Grammar grammar);
 
+	public Set<EClass> getTypesForContext(EObject context);
 }
