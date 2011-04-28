@@ -11,7 +11,7 @@ grammar org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage with org.ecl
 generate syntacticsequencertest "http://www.eclipse.org/2009/tmf/xtext/syntacticsequencertestlanguage"
 
 Model:
-	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference;
+	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative;
 
 MandatoryKeywords:
 	"#1" val1=ID "kw1" val2=ID "kw2" "kw3" val3=ID "kw4";
@@ -58,3 +58,11 @@ SingleCrossReference:
 	("kw2" ref2=[SingleCrossReference|DatatypeID])?
 	("kw3" ref3=[SingleCrossReference|ID])?
 	("kw4" ref4=[SingleCrossReference])?;
+
+BooleanAlternative:
+	"#6" bool=BooleanAlternativeLiteral;
+
+BooleanAlternativeLiteral:
+	{BooleanAlternativeLiteral} ("kw1" | isTrue?="kw2");
+	
+	

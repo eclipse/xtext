@@ -8,6 +8,7 @@
 package org.eclipse.xtext.serializer.diagnostic;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.util.EmfFormatter;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -51,8 +52,12 @@ public interface ISerializationDiagnostic {
 				throw new RuntimeException("Something went wrong during serialization");
 			else if (diagnostic.getException() != null)
 				throw new RuntimeException(diagnostic.getException());
-			else
-				throw new RuntimeException(diagnostic.getMessage());
+			else {
+				String msg = diagnostic.getMessage();
+				if (diagnostic.getSemanitcObject() != null)
+					msg += "\n" + "Semantic Object" + EmfFormatter.objPath(diagnostic.getSemanitcObject());
+				throw new RuntimeException(msg);
+			}
 		}
 	}
 

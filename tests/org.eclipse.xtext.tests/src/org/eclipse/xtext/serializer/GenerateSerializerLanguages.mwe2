@@ -32,12 +32,17 @@ Workflow {
 		language = {
 			uri = "classpath:/org/eclipse/xtext/serializer/SequencerTestLanguage.xtext"
 			fragment = @ TestLanguagesFragments auto-inject {}
-			fragment = serializer.SerializerFragment {}
+			fragment = serializer.SerializerFragment {
+				generateDebugData = true
+			}
 		}
 
 		language = {
 			uri = "classpath:/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.xtext"
 			fragment = @ TestLanguagesFragments auto-inject {}
+			fragment = serializer.SerializerFragment {
+				generateDebugData = true
+			}
 		}
 //		language = {
 //			uri = "classpath:/org/eclipse/xtext/serializer/SerializerFragmentTestLanguage.xtext"

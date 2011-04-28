@@ -162,7 +162,23 @@ public class GrammarConstraintProviderTest extends AbstractXtextTests {
 		String actual = getParserRule("Rule: a1=(ID|'id') | a2=(ID|STRING|'bar') | a3+=(ID|STRING|'bar')*;");
 		StringBuilder expected = new StringBuilder();
 		expected.append("Rule: Rule_Rule;\n");
-		expected.append("  Rule_Rule returns Rule: (a1=ID | a1='id' | a2=ID | a2=STRING | a2='bar' | (a3+=ID | a3+=STRING | a3+='bar')*);");
+		expected.append("  Rule_Rule returns Rule: (\n");
+		expected.append("    a1=ID | \n");
+		expected.append("    a1='id' | \n");
+		expected.append("    a2=ID | \n");
+		expected.append("    a2=STRING | \n");
+		expected.append("    a2='bar' | \n");
+		expected.append("    (a3+=ID | a3+=STRING | a3+='bar')*\n");
+		expected.append(")\n");
+		expected.append(";");
+		assertEquals(expected.toString(), actual);
+	}
+
+	public void testBooleanAlternative() throws Exception {
+		String actual = getParserRule("Rule: {Rule} ('false' | isTrue?='true');");
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule: Rule_Rule;\n");
+		expected.append("  Rule_Rule returns Rule: (isTrue?='true'?);");
 		assertEquals(expected.toString(), actual);
 	}
 

@@ -57,11 +57,11 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 	}
 
 	public String getMessage() {
-		return "foo bar";
+		return message;
 	}
 
 	public EObject getSemanitcObject() {
-		return null;
+		return semanticObject;
 	}
 
 }

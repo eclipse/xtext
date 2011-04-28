@@ -12,6 +12,8 @@ import java.io.Writer;
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -48,14 +50,18 @@ public class Serializer implements ISerializer {
 	@Inject
 	protected ISemanticSequencer semanticSequencer;
 
+	@Inject
+	protected IGrammarAccess grammar;
+
 	protected void serialize(EObject obj, ITokenStream tokenStream, SaveOptions options) throws IOException {
 		ISerializationDiagnostic.Acceptor errors = ISerializationDiagnostic.EXCEPTION_THROWING_ACCEPTOR;
 		ITokenStream formatterTokenStream = formatter.createFormatterStream(null, tokenStream, !options.isFormatting());
-		Iterator<EObject> context = semanticSequencer.findContexts(obj, null).iterator();
-		if (!context.hasNext())
-			throw new RuntimeException("No Context for " + EmfFormatter.objPath(obj) + " could be found");
+		//		Iterator<EObject> context = semanticSequencer.findContexts(obj, null).iterator();
+		//		if (!context.hasNext())
+		//			throw new RuntimeException("No Context for " + EmfFormatter.objPath(obj) + " could be found");
+		EObject context = grammar.getGrammar().getRules().get(0);
 		IRecursiveSequenceAcceptor acceptor = new TokenStreamSequenceAdapter(formatterTokenStream, errors);
-		sequencer.createSequence(context.next(), obj, acceptor, errors);
+		sequencer.createSequence(context, obj, acceptor, errors);
 		formatterTokenStream.flush();
 	}
 
