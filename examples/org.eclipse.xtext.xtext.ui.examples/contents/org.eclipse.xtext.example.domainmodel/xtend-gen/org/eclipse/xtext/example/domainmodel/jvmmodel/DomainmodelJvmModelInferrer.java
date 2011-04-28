@@ -99,13 +99,8 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
   }
   
   public Iterable<JvmDeclaredType> _transform(final Import importDecl) {
-    ArrayList<JvmDeclaredType> _newArrayList = CollectionLiterals.<JvmDeclaredType>newArrayList();
-    return _newArrayList;
-  }
-  
-  public Iterable<JvmDeclaredType> _transform(final Void nothing) {
-    ArrayList<JvmDeclaredType> _newArrayList = CollectionLiterals.<JvmDeclaredType>newArrayList();
-    return _newArrayList;
+    List<JvmDeclaredType> _emptyList = CollectionLiterals.<JvmDeclaredType>emptyList();
+    return _emptyList;
   }
   
   public void _transform(final Property property, final JvmGenericType type) {
@@ -183,7 +178,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
     }
   }
   
-  public Iterable<JvmDeclaredType> transform(final Object entity) {
+  public Iterable<JvmDeclaredType> transform(final EObject entity) {
     if ((entity instanceof Entity)) {
       return _transform((Entity)entity);
     } else if ((entity instanceof Import)) {
@@ -192,8 +187,6 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       return _transform((PackageDeclaration)entity);
     } else if ((entity instanceof DomainModel)) {
       return _transform((DomainModel)entity);
-    } else if ((entity == null)) {
-      return _transform((Void)null);
     } else {
       throw new IllegalArgumentException();
     }

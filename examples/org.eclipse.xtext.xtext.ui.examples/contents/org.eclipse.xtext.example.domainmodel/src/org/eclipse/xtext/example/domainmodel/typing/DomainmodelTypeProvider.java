@@ -13,9 +13,12 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Operation;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 
+import com.google.inject.Singleton;
+
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Singleton
 public class DomainmodelTypeProvider extends XbaseTypeProvider {
 
 	/**

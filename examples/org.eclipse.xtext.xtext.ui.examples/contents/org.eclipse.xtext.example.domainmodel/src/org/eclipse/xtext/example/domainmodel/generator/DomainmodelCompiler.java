@@ -18,7 +18,7 @@ import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class DomainmodelCompiler extends XbaseCompiler {
 
@@ -27,8 +27,7 @@ public class DomainmodelCompiler extends XbaseCompiler {
 		for(JvmFormalParameter param: operation.getParams()) {
 			appendable.declareVariable(param, param.getName());
 		}
-		compile(operation.getBody(), appendable, operation.getType());
-		return appendable.toString();
+		return compile(operation.getBody(), appendable, operation.getType()).toString();
 	}
 	
 	@Override
