@@ -20,7 +20,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
+import org.eclipse.xtext.ui.refactoring.IRenameProcessorAdapter;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -28,30 +28,34 @@ import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
  */
 public class RenameElementWizard extends RefactoringWizard {
 
-	public RenameElementWizard(ProcessorBasedRefactoring refactoring) {
+	private IRenameProcessorAdapter renameProcessorAdapter;
+
+	public RenameElementWizard(ProcessorBasedRefactoring refactoring, IRenameProcessorAdapter renameProcessorAdapter) {
 		super(refactoring, DIALOG_BASED_USER_INTERFACE);
+		this.renameProcessorAdapter = renameProcessorAdapter;
+		
 	}
 
-	protected AbstractRenameProcessor getRefactoringProcessor() {
-		return (AbstractRenameProcessor) ((ProcessorBasedRefactoring) getRefactoring()).getProcessor();
+	protected IRenameProcessorAdapter getRenameProcessorAdapter() {
+		return renameProcessorAdapter;
 	}
 
 	@Override
 	protected void addUserInputPages() {
-		addPage(new UserInputPage(getRefactoringProcessor()));
+		addPage(new UserInputPage(getRenameProcessorAdapter()));
 	}
 
 	protected static class UserInputPage extends UserInputWizardPage {
 
-		private final AbstractRenameProcessor renameElementProcessor;
+		private final IRenameProcessorAdapter renameProcessorAdapter;
 		private Text nameField;
 		private String currentName;
 
-		public UserInputPage(AbstractRenameProcessor processor) {
+		public UserInputPage(IRenameProcessorAdapter renameProcessorAdapter) {
 			super("RenameElementResourceRefactoringInputPage"); //$NON-NLS-1$
-			renameElementProcessor = processor;
-			currentName = renameElementProcessor.getNewName() != null ? renameElementProcessor.getNewName()
-					: renameElementProcessor.getRenameElementStrategy().getOriginalName();
+			this.renameProcessorAdapter = renameProcessorAdapter;
+			currentName = renameProcessorAdapter.getNewName() != null ? renameProcessorAdapter.getNewName()
+					: renameProcessorAdapter.getOriginalName();
 		}
 
 		public void createControl(Composite parent) {
@@ -73,7 +77,7 @@ public class RenameElementWizard extends RefactoringWizard {
 				}
 			});
 			nameField.selectAll();
-			setPageComplete(renameElementProcessor.getRenameElementStrategy().validateNewName(currentName));
+			setPageComplete(renameProcessorAdapter.validateNewName(currentName));
 			setControl(composite);
 		}
 
@@ -87,7 +91,7 @@ public class RenameElementWizard extends RefactoringWizard {
 
 		protected final void validatePage() {
 			String text = nameField.getText();
-			RefactoringStatus status = renameElementProcessor.getRenameElementStrategy().validateNewName(text);
+			RefactoringStatus status = renameProcessorAdapter.validateNewName(text);
 			setPageComplete(status);
 		}
 
@@ -104,7 +108,7 @@ public class RenameElementWizard extends RefactoringWizard {
 		}
 
 		private void setNewName() {
-			renameElementProcessor.setNewName(nameField.getText());
+			renameProcessorAdapter.setNewName(nameField.getText());
 		}
 	}
 }

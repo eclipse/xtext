@@ -92,8 +92,10 @@ public class RenameRefactoringController {
 			freezer.freeze();
 			// Cancel undoable right now because the freezer would show the old
 			// state and not the new one
-			if(activeLinkedMode != null) 
+			if(activeLinkedMode != null) {
 				activeLinkedMode.cancel();
+				activeLinkedMode = null;
+			}
 			switch (refactoringType) {
 				case REFACTORING_DIRECT:
 					startDirectRefactoring();
@@ -119,6 +121,7 @@ public class RenameRefactoringController {
 				return;
 			} else {
 				activeLinkedMode.cancel();
+				activeLinkedMode = null;
 			}
 		}
 		activeLinkedMode = renameLinkedModeProvider.get();
@@ -143,7 +146,7 @@ public class RenameRefactoringController {
 
 	protected void startRefactoringWithDialog(final boolean previewOnly) {
 		try {
-			RenameElementWizard renameElementWizard = new RenameElementWizard(renameRefactoring) {
+			RenameElementWizard renameElementWizard = new RenameElementWizard(renameRefactoring, renameProcessorAdapter) {
 				@Override
 				protected void addUserInputPages() {
 					if (!previewOnly) {
