@@ -7,10 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.junit.evaluation;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.Stack;
 
 import junit.framework.TestCase;
+
+import org.junit.Test;
+
 import testdata.ExceptionSubclass;
 import testdata.OuterClass;
 
@@ -25,25 +29,38 @@ import static java.util.Collections.*;
  */
 public abstract class AbstractXbaseEvaluationTest extends TestCase {
 
-	protected abstract void assertEvaluatesTo(Object object, String string);
-	protected abstract void assertEvaluatesWithException(Class<? extends Throwable> class1, String string);
+	protected void assertEvaluatesTo(Object object, String string) throws Exception {
+		assertEquals(object, invokeXbaseExpression(string));
+	}
+
+	protected void assertEvaluatesWithException(Class<? extends Throwable> class1, String string) throws Exception {
+		try {
+			invokeXbaseExpression(string);
+		} catch (InvocationTargetException e) {
+			assertTrue(e.getClass().toString(), class1.isInstance(e.getCause()));
+		}
+	}
 	
-	public void testEscapeCharacter() throws Exception {
+	protected Object invokeXbaseExpression(String expression) throws Exception {
+		throw new UnsupportedOperationException("Override and implement me!");
+	}
+	
+	@Test public void testEscapeCharacter() throws Exception {
 		String expr = "'foo'.^class";
 		assertEvaluatesTo(String.class, expr);
 	}
 	
-	public void testShortCircuitBooleanExpression_00() throws Exception {
+	@Test public void testShortCircuitBooleanExpression_00() throws Exception {
 		String expr = "true || {if (true) throw new NullPointerException() else false}";
 		assertEvaluatesTo(true, expr);
 	}
 	
-	public void testShortCircuitBooleanExpression_01() throws Exception {
+	@Test public void testShortCircuitBooleanExpression_01() throws Exception {
 		String expr = "false && {if (true) throw new NullPointerException() else false}";
 		assertEvaluatesTo(false, expr);
 	}
 	
-	public void testShortCircuitBooleanExpression_03() throws Exception {
+	@Test public void testShortCircuitBooleanExpression_03() throws Exception {
 		String expr = "{ val i = newArrayList(false,true).iterator" +
 				"  if (i.next && i.next)" +
 				"    throw new NullPointerException()" +
@@ -53,7 +70,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(true, expr);
 	}
 	
-	public void testShortCircuitBooleanExpression_04() throws Exception {
+	@Test public void testShortCircuitBooleanExpression_04() throws Exception {
 		String expr = "{ val i = newArrayList(true,false).iterator" +
 		"  if (i.next || i.next)" +
 		"     i.next" +
@@ -61,7 +78,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(false, expr);
 	}
 	
-	public void testForLoop() throws Exception {
+	@Test public void testForLoop() throws Exception {
 		String expr = 
 			    "{\n" + 
 				"   val list = newArrayList('foo','bar','baz')\n" + 
@@ -72,47 +89,47 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(null, expr);
 	}
 	
-	public void testReferenceInnerClasses() throws Exception {
+	@Test public void testReferenceInnerClasses() throws Exception {
 		assertEvaluatesTo(OuterClass.InnerClass.SINGLETON, "testdata::OuterClass$InnerClass::SINGLETON");
 	}
 	
-	public void testReferenceInnerClasses_00() throws Exception {
+	@Test public void testReferenceInnerClasses_00() throws Exception {
 		assertEvaluatesTo("FOO", "[testdata.OuterClass$InnerClass param| param.toUpperCase('foo')].apply(new testdata.OuterClass$InnerClass())");
 	}
 	
-	public void testReferenceInnerClasses_01() throws Exception {
+	@Test public void testReferenceInnerClasses_01() throws Exception {
 		assertEvaluatesTo(null, "{for (x : newArrayList(new testdata.OuterClass$InnerClass())) { x.toString } null}");
 	}
 	
 	/*
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341642
 	 */
-	public void testBug341642() throws Exception {
+	@Test public void testBug341642() throws Exception {
 		assertEvaluatesTo("a", "newArrayList('a', 'b', 'c').filter(a|a == 'a' || a == 'b').iterator.next");
 	}
 	
-	public void testBug341775() throws Exception {
+	@Test public void testBug341775() throws Exception {
 		assertEvaluatesTo(Boolean.FALSE, "'a'.charAt(0) == 'a'");
 		assertEvaluatesTo(Boolean.TRUE, "'a'.charAt(0) == 'a'.charAt(0)");
 		assertEvaluatesTo(Boolean.TRUE, "'a' == 'a'");
 	}
 	
-	public void testCurrying_01() throws Exception {
+	@Test public void testCurrying_01() throws Exception {
 		assertEvaluatesTo("123456", "[String p1, String p2, String p3, String p4, String p5, String p6| p1+p2+p3+p4+p5+p6].curry('1').curry('2').curry('3').curry('4').curry('5').curry('6').apply()");
 	}
 	
 	/*
 	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=341550
 	 */
-	public void testBug341550() throws Exception {
+	@Test public void testBug341550() throws Exception {
 		assertEvaluatesTo(emptyList(),"switch emptyList() { case emptyList() : emptyList() }");
 	}
 	
-	public void testGenerics_00() throws Exception {
+	@Test public void testGenerics_00() throws Exception {
 		assertEvaluatesTo("", "try {typeof(String).newInstance} catch(Exception e) {}");
 	}
 	
-	public void testGenerics_01() throws Exception {
+	@Test public void testGenerics_01() throws Exception {
 		assertEvaluatesTo("y",
 				"{" +
 				" val x = newArrayList('y',23,true)" +
@@ -120,12 +137,12 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 
-	public void testGenerics_02() throws Exception {
+	@Test public void testGenerics_02() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE,
 				"new java.util.ArrayList<Object>().addAll(typeof(String).declaredFields)");
 	}
 	
-	public void testGenerics_03() throws Exception {
+	@Test public void testGenerics_03() throws Exception {
 		assertEvaluatesTo("y",
 				"{" +
 				" val x = <Object>newArrayList('y',23,true)" +
@@ -136,44 +153,44 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341246
 	 */
-	public void testUnreferencedConstructorInBlock() throws Exception {
+	@Test public void testUnreferencedConstructorInBlock() throws Exception {
 		assertEvaluatesTo(false, "{ new String() false}");
 	}
 	
-	public void testStaticFeatureCall_01() throws Exception {
+	@Test public void testStaticFeatureCall_01() throws Exception {
 		assertEvaluatesTo("false", "String::valueOf(false)");
 	}
 	
-	public void testStaticFeatureCall_02() throws Exception {
+	@Test public void testStaticFeatureCall_02() throws Exception {
 		assertEvaluatesTo(Boolean.FALSE, "Boolean::FALSE");
 	}
 	
-	public void testPrimitiveConversion() throws Exception {
+	@Test public void testPrimitiveConversion() throws Exception {
 		assertEvaluatesTo("2","'ab'.length.toString");
 	}
 	
-	public void testReturnExpression_01() throws Exception {
+	@Test public void testReturnExpression_01() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "return true");
 	}
 	
-	public void testReturnExpression_02() throws Exception {
+	@Test public void testReturnExpression_02() throws Exception {
 		assertEvaluatesTo("xx", "return if ('x'=='x') 'xx'");
 	}
 	
-	public void testReturnExpression_03() throws Exception {
+	@Test public void testReturnExpression_03() throws Exception {
 		assertEvaluatesTo(null, "return if ('x'!='x') 'xx'");
 	}
 	
-	public void testReturnExpression_04() throws Exception {
+	@Test public void testReturnExpression_04() throws Exception {
 		assertEvaluatesTo(null, "return null");
 	}
 	
-	public void testReturnExpression_05() throws Exception {
+	@Test public void testReturnExpression_05() throws Exception {
 		assertEvaluatesTo("yy", "if ('x'!='x') return 'xx' else return 'yy'");
 		assertEvaluatesTo("xx", "if ('x'=='x') return 'xx' else return 'yy'");
 	}
 	
-	public void testReturnExpression_06() throws Exception {
+	@Test public void testReturnExpression_06() throws Exception {
 		assertEvaluatesTo(null, 
 				"{" +
 				" val closure = [Integer i| return i]" +
@@ -183,283 +200,283 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 
-	public void testUnaryOperator_00() throws Exception {
+	@Test public void testUnaryOperator_00() throws Exception {
 		assertEvaluatesTo(new Integer(-19),"-19");
 	}
 	
-	public void testUnaryOperator_01() throws Exception {
+	@Test public void testUnaryOperator_01() throws Exception {
 		assertEvaluatesTo(false,"!true");
 	}
 	
-	public void testUnaryOperator_02() throws Exception {
+	@Test public void testUnaryOperator_02() throws Exception {
 		assertEvaluatesTo("-1","(-1).toString()");
 	}
 	
-	public void testUpToOperator() throws Exception {
+	@Test public void testUpToOperator() throws Exception {
 		assertEvaluatesTo(new Integer(9),"(9..13).iterator().next()");
 	}
 	
-	public void testStringConcatenation_00() throws Exception {
+	@Test public void testStringConcatenation_00() throws Exception {
 		assertEvaluatesTo("foobar", "'foo'+ ('bar' as Object)");
 	}
-	public void testStringConcatenation_01() throws Exception {
+	@Test public void testStringConcatenation_01() throws Exception {
 		assertEvaluatesTo("foo3", "'foo'+3");
 	}
-	public void testStringConcatenation_2() throws Exception {
+	@Test public void testStringConcatenation_2() throws Exception {
 		assertEvaluatesTo("footrue", "'foo'+true");
 	}
 	
-	public void testAddOnIntegers() throws Exception {
+	@Test public void testAddOnIntegers() throws Exception {
 		assertEvaluatesTo(new Integer(3), "1+2");
 	}
 
-	public void testSubtractionOnIntegers() throws Exception {
+	@Test public void testSubtractionOnIntegers() throws Exception {
 		assertEvaluatesTo(new Integer(1), "2-1");
 	}
 
-	public void testMultiplicationOnIntegers() throws Exception {
+	@Test public void testMultiplicationOnIntegers() throws Exception {
 		assertEvaluatesTo(new Integer(42), "6*7");
 	}
 
-	public void testDivisionOnIntegers_01() throws Exception {
+	@Test public void testDivisionOnIntegers_01() throws Exception {
 		assertEvaluatesTo(new Integer(2), "6/3");
 	}
 
-	public void testDivisionOnIntegers_02() throws Exception {
+	@Test public void testDivisionOnIntegers_02() throws Exception {
 		assertEvaluatesTo(new Integer(2), "7/3");
 	}
 
-	public void testModuloOnIntegers() throws Exception {
+	@Test public void testModuloOnIntegers() throws Exception {
 		assertEvaluatesTo(new Integer(1), "7%3");
 	}
 
-	public void testPowerOnIntegers() throws Exception {
+	@Test public void testPowerOnIntegers() throws Exception {
 		assertEvaluatesTo(new Integer(8), "2**3");
 	}
 
-	public void testLessThanOnIntegers_01() throws Exception {
+	@Test public void testLessThanOnIntegers_01() throws Exception {
 		assertEvaluatesTo(new Boolean(true), "3<4");
 	}
 
-	public void testLessThanOnIntegers_02() throws Exception {
+	@Test public void testLessThanOnIntegers_02() throws Exception {
 		assertEvaluatesTo(new Boolean(false), "4<3");
 	}
 
-	public void testGreaterThanOnIntegers_01() throws Exception {
+	@Test public void testGreaterThanOnIntegers_01() throws Exception {
 		assertEvaluatesTo(new Boolean(true), "4>3");
 	}
 
-	public void testGreaterThanOnIntegers_02() throws Exception {
+	@Test public void testGreaterThanOnIntegers_02() throws Exception {
 		assertEvaluatesTo(new Boolean(false), "3>4");
 	}
 
-	public void testLessEqualsThanOnIntegers_01() throws Exception {
+	@Test public void testLessEqualsThanOnIntegers_01() throws Exception {
 		assertEvaluatesTo(new Boolean(true), "3<=3");
 	}
 
-	public void testLessEqualsThanOnIntegers_02() throws Exception {
+	@Test public void testLessEqualsThanOnIntegers_02() throws Exception {
 		assertEvaluatesTo(new Boolean(true), "3<=4");
 	}
 
-	public void testLessEqualsThanOnIntegers_03() throws Exception {
+	@Test public void testLessEqualsThanOnIntegers_03() throws Exception {
 		assertEvaluatesTo(new Boolean(false), "4<=3");
 	}
 
-	public void testGreaterEqualsThanOnIntegers_01() throws Exception {
+	@Test public void testGreaterEqualsThanOnIntegers_01() throws Exception {
 		assertEvaluatesTo(new Boolean(true), "3>=3");
 	}
 
-	public void testGreaterEqualsThanOnIntegers_02() throws Exception {
+	@Test public void testGreaterEqualsThanOnIntegers_02() throws Exception {
 		assertEvaluatesTo(new Boolean(true), "4>=3");
 	}
 
-	public void testGreaterEqualsThanOnIntegers_03() throws Exception {
+	@Test public void testGreaterEqualsThanOnIntegers_03() throws Exception {
 		assertEvaluatesTo(new Boolean(false), "3>=4");
 	}
 
-	public void testOrOnBooleans_01() throws Exception {
+	@Test public void testOrOnBooleans_01() throws Exception {
 		assertEvaluatesTo(new Boolean(true), "true||false");
 	}
 
-	public void testOrOnBooleans_02() throws Exception {
+	@Test public void testOrOnBooleans_02() throws Exception {
 		assertEvaluatesTo(new Boolean(true), "false||true");
 	}
 
-	public void testOrOnBooleans_03() throws Exception {
+	@Test public void testOrOnBooleans_03() throws Exception {
 		assertEvaluatesTo(new Boolean(true), "true||true");
 	}
 
-	public void testOrOnBooleans_04() throws Exception {
+	@Test public void testOrOnBooleans_04() throws Exception {
 		assertEvaluatesTo(new Boolean(false), "false||false");
 	}
 
-	public void testAndOnBooleans_01() throws Exception {
+	@Test public void testAndOnBooleans_01() throws Exception {
 		assertEvaluatesTo(new Boolean(true), "true&&true");
 	}
 
-	public void testAndOnBooleans_02() throws Exception {
+	@Test public void testAndOnBooleans_02() throws Exception {
 		assertEvaluatesTo(new Boolean(false), "false&&true");
 	}
 
-	public void testAndOnBooleans_03() throws Exception {
+	@Test public void testAndOnBooleans_03() throws Exception {
 		assertEvaluatesTo(new Boolean(false), "true&&false");
 	}
 
-	public void testAndOnBooleans_04() throws Exception {
+	@Test public void testAndOnBooleans_04() throws Exception {
 		assertEvaluatesTo(new Boolean(false), "false&&false");
 	}
 
-	public void testNull() {
+	@Test public void testNull() throws Exception {
 		assertEvaluatesTo(null, "null");
 	}
 	
-	public void testNullBlockResult_01() {
+	@Test public void testNullBlockResult_01() throws Exception {
 		assertEvaluatesTo(null, "{ null; }");
 	}
 	
-	public void testNullBlockResult_02() {
+	@Test public void testNullBlockResult_02() throws Exception {
 		assertEvaluatesTo(null, "{ 'literal'.length; null; }");
 	}
 	
-	public void testStringLiteral_01() {
+	@Test public void testStringLiteral_01() throws Exception {
 		assertEvaluatesTo("", "''");
 	}
 	
-	public void testStringLiteral_02() {
+	@Test public void testStringLiteral_02() throws Exception {
 		assertEvaluatesTo("literal", "'literal'");
 	}
 	
-	public void testStringLiteral_03() {
+	@Test public void testStringLiteral_03() throws Exception {
 		assertEvaluatesTo("lite\r\nr\\al", "'lite\r\nr\\\\al'");
 	}
 	
-	public void testBooleanLiteral_01() {
+	@Test public void testBooleanLiteral_01() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "true");
 	}
 	
-	public void testBooleanLiteral_02() {
+	@Test public void testBooleanLiteral_02() throws Exception {
 		assertEvaluatesTo(Boolean.FALSE, "false");
 	}
 	
-	public void testIntLiteral_01() {
+	@Test public void testIntLiteral_01() throws Exception {
 		assertEvaluatesTo(53, "53");
 	}
 	
-	public void testIntLiteral_02() {
+	@Test public void testIntLiteral_02() throws Exception {
 		assertEvaluatesTo(0, "0");
 	}
 	
-	public void testTypeLiteral_01() {
+	@Test public void testTypeLiteral_01() throws Exception {
 		assertEvaluatesTo(Void.class, "typeof(Void)");
 	}
 
-	public void testTypeLiteral_02() {
+	@Test public void testTypeLiteral_02() throws Exception {
 		assertEvaluatesTo(Void.TYPE, "typeof(void)");
 	}
 	
-	public void testIfExpression_00() {
+	@Test public void testIfExpression_00() throws Exception {
 		assertEvaluatesTo(null, "if (0==1) 'literal'");
 	}
 	
-	public void testIfExpression_01() {
+	@Test public void testIfExpression_01() throws Exception {
 		assertEvaluatesTo(null, "if (false) 'literal'");
 	}
 	
-	public void testIfExpression_02() {
+	@Test public void testIfExpression_02() throws Exception {
 		assertEvaluatesTo("literal", "if (true) 'literal'");
 	}
 	
-	public void testIfExpression_03() {
+	@Test public void testIfExpression_03() throws Exception {
 		assertEvaluatesTo("then", "if (true) 'then' else 'else'");
 	}
 	
-	public void testIfExpression_04() {
+	@Test public void testIfExpression_04() throws Exception {
 		assertEvaluatesTo("else", "if (false) 'then' else 'else'");
 	}
 	
-	public void testIfExpression_withThrowExpression_00() {
+	@Test public void testIfExpression_withThrowExpression_00() throws Exception {
 		assertEvaluatesWithException(NullPointerException.class, "if (false) throw new NullPointerException() else throw new NullPointerException()");
 	}
 	
-	public void testIfExpression_withThrowExpression_01() {
+	@Test public void testIfExpression_withThrowExpression_01() throws Exception {
 		assertEvaluatesWithException(NullPointerException.class, "if (false) 'then' else throw new NullPointerException()");
 	}
 	
-	public void testIfExpression_withThrowExpression_02() {
+	@Test public void testIfExpression_withThrowExpression_02() throws Exception {
 		assertEvaluatesTo("then", "if (true) 'then' else throw new NullPointerException()");
 	}
 	
-	public void testVariableDeclaration_01() {
+	@Test public void testVariableDeclaration_01() throws Exception {
 		assertEvaluatesTo("literal", "{var x = 'literal' x = x}");
 	}
 	
-	public void testVariableDeclaration_03() {
+	@Test public void testVariableDeclaration_03() throws Exception {
 		assertEvaluatesTo("literal", "{var String x x = 'literal' x}");
 	}
 	
-	public void testVariableDeclaration_04() {
+	@Test public void testVariableDeclaration_04() throws Exception {
 		assertEvaluatesTo("literal", "{var String x; x = 'literal'}");
 	}
 	
-	public void testVariableDeclaration_06() {
+	@Test public void testVariableDeclaration_06() throws Exception {
 		assertEvaluatesTo(Short.valueOf((short)0), "{var short s s}");
 	}
 	
-	public void testVariableDeclaration_07() {
+	@Test public void testVariableDeclaration_07() throws Exception {
 		assertEvaluatesTo(Character.valueOf((char)0), "{var char c c}");
 	}
 	
-	public void testVariableDeclaration_08() {
+	@Test public void testVariableDeclaration_08() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(42), "{var int i i = 42 i}");
 	}
 	
-	public void testVariableDeclaration_09() {
+	@Test public void testVariableDeclaration_09() throws Exception {
 		assertEvaluatesTo(Boolean.FALSE, "{var boolean b b}");
 	}
 	
-	public void testVariableDeclaration_10() {
+	@Test public void testVariableDeclaration_10() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "{var boolean b b = true b}");
 	}
 	
-	public void testFeatureCall_01() {
+	@Test public void testFeatureCall_01() throws Exception {
 		assertEvaluatesTo("literal", "{var x = 'literal' x}");
 	}
 	
-	public void testFeatureCall_02() {
+	@Test public void testFeatureCall_02() throws Exception {
 		assertEvaluatesTo(new Character('a'), "'a'.toCharArray.iterator.next");
 	}
 	
-	public void testFeatureCall_03() {
+	@Test public void testFeatureCall_03() throws Exception {
 		assertEvaluatesTo(Lists.newArrayList(
 				new Character('a'), 
 				new Character('b'),
 				new Character('c')), "{ var java.util.List<Character> x = ('abc'.toCharArray as Iterable<Character>).toList() x }");
 	}
 	
-	public void testFeatureCall_03_2() {
+	@Test public void testFeatureCall_03_2() throws Exception {
 		assertEvaluatesTo(Lists.newArrayList(
 				new Character('a'), 
 				new Character('b'),
 				new Character('c')), "{ var java.util.List<Character> x = 'abc'.toCharArray x }");
 	}
 	
-	public void testFeatureCall_04() {
+	@Test public void testFeatureCall_04() throws Exception {
 		assertEvaluatesTo(new Integer("literal".length()), "{ var x = 'literal' x.length }");
 	}
 	
-	public void testConstructorCall_00() throws Exception {
+	@Test public void testConstructorCall_00() throws Exception {
 		assertEvaluatesTo("", "new String()");
 	}
 	
-	public void testConstructorCall_02() throws Exception {
+	@Test public void testConstructorCall_02() throws Exception {
 		assertEvaluatesTo("foobar", "new String('foobar')");
 	}
 	
-	public void testAssignment_01() {
+	@Test public void testAssignment_01() throws Exception {
 		assertEvaluatesTo("newValue", "{var x = 'literal' x = 'newValue'}");
 	}
 
-	public void testAssignment_02() {
+	@Test public void testAssignment_02() throws Exception {
 		assertEvaluatesTo("literal", 
 				"{" +
 				"  var x = new testdata.Properties1()" +
@@ -468,7 +485,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testAssignment_03() {
+	@Test public void testAssignment_03() throws Exception {
 		assertEvaluatesTo("literal", 
 				"{" +
 				"  var x = new testdata.Properties1()" +
@@ -477,7 +494,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testAssignment_04() {
+	@Test public void testAssignment_04() throws Exception {
 		assertEvaluatesTo("Integer: 1", 
 				"{" +
 				"  var x = new testdata.Properties1()" +
@@ -486,7 +503,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testAssignment_05() {
+	@Test public void testAssignment_05() throws Exception {
 		assertEvaluatesTo("literal", 
 				"{" +
 				"  var x = new testdata.Properties1()" +
@@ -495,7 +512,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testAssignment_06() {
+	@Test public void testAssignment_06() throws Exception {
 		assertEvaluatesTo("Integer: 1", 
 				"{" +
 				"  var x = new testdata.Properties1()" +
@@ -504,7 +521,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testAssignment_07() {
+	@Test public void testAssignment_07() throws Exception {
 		assertEvaluatesTo(null, 
 				"{" +
 				"  var x = new testdata.Properties1()" +
@@ -513,7 +530,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testAssignment_08() {
+	@Test public void testAssignment_08() throws Exception {
 		assertEvaluatesTo(null, 
 				"{" +
 				"  var x = new testdata.Properties1()" +
@@ -522,7 +539,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testAssignment_09() {
+	@Test public void testAssignment_09() throws Exception {
 		assertEvaluatesTo("Integer: 1", 
 				"{" +
 				"  var x = new testdata.Properties1()" +
@@ -530,7 +547,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testAssignment_10() {
+	@Test public void testAssignment_10() throws Exception {
 		assertEvaluatesTo("literal", 
 				"{" +
 				"  var x = new testdata.Properties1()" +
@@ -538,7 +555,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testAssignment_11() {
+	@Test public void testAssignment_11() throws Exception {
 		assertEvaluatesTo("literal", 
 				"{" +
 				"  var list = new testdata.GenericType1<String>()" +
@@ -547,7 +564,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testAssignment_12() {
+	@Test public void testAssignment_12() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, 
 				"{" +
 				"  var list = new testdata.GenericType1<String>()" +
@@ -555,19 +572,19 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testAssignmentInBlock_01() {
+	@Test public void testAssignmentInBlock_01() throws Exception {
 		assertEvaluatesTo("newValue", "{var x = 'literal' { x = 'newValue' } x }");
 	}
 	
-	public void testThrowInBlock() {
+	@Test public void testThrowInBlock() throws Exception {
 		assertEvaluatesWithException(NullPointerException.class, "{ throw new NullPointerException() }");
 	}
 	
-	public void testThrowInBlock_01() {
+	@Test public void testThrowInBlock_01() throws Exception {
 		assertEvaluatesWithException(NullPointerException.class, "{ 42.toString() throw new NullPointerException() }");
 	}
 	
-	public void testForLoop_01() {
+	@Test public void testForLoop_01() throws Exception {
 		assertEvaluatesTo(new Character('c'), 
 				"{\n" +
 				"  var Character result = null\n" +
@@ -576,7 +593,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testForLoop_02() {
+	@Test public void testForLoop_02() throws Exception {
 		assertEvaluatesTo(new Character('a'), 
 				"{\n" +
 				"  var Character result = null\n" +
@@ -585,11 +602,11 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 
-	public void testForLoop_03() {
+	@Test public void testForLoop_03() throws Exception {
 		assertEvaluatesWithException(ClassCastException.class, "{for(x: 'abc' as Object as java.util.List<Character>) null null}");
 	}
 	
-	public void testForLoop_04() {
+	@Test public void testForLoop_04() throws Exception {
 		assertEvaluatesTo("foobar", 
 				"{ " +
 				" val list = new java.util.ArrayList<String>()" +
@@ -600,12 +617,12 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testFunctionConversion_00() throws Exception {
+	@Test public void testFunctionConversion_00() throws Exception {
 		assertEvaluatesTo("foo",
 				"([|newArrayList('foo').iterator] as Iterable<String>).iterator.next");
 	}
 	
-	public void testWhileLoop_01() {
+	@Test public void testWhileLoop_01() throws Exception {
 		assertEvaluatesTo("newValue", 
 				"{\n" +
 				"  var value = 'oldValue'\n" +
@@ -615,7 +632,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testWhileLoop_02() {
+	@Test public void testWhileLoop_02() throws Exception {
 		assertEvaluatesTo("oldValue", 
 				"{\n" +
 				"  var value = 'oldValue'\n" +
@@ -625,7 +642,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testWhileLoop_03() {
+	@Test public void testWhileLoop_03() throws Exception {
 		assertEvaluatesTo("startfoo", 
 				"{\n" +
 				"  var value = 'start'\n" +
@@ -635,7 +652,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testDoWhileLoop_01() {
+	@Test public void testDoWhileLoop_01() throws Exception {
 		assertEvaluatesTo("newValue", 
 				"{\n" +
 				"  var value = 'oldValue'\n" +
@@ -648,7 +665,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testDoWhileLoop_02() {
+	@Test public void testDoWhileLoop_02() throws Exception {
 		assertEvaluatesTo("newValue", 
 				"{\n" +
 				"  var value = 'oldValue'\n" +
@@ -660,19 +677,19 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testMemberFeatureCall_01() {
+	@Test public void testMemberFeatureCall_01() throws Exception {
 		assertEvaluatesTo("LITERAL", "'literal'.toUpperCase()");
 	}
 	
-	public void testMemberFeatureCall_02() {
+	@Test public void testMemberFeatureCall_02() throws Exception {
 		assertEvaluatesTo("literal", "'literal'.toUpperCase().toLowerCase()");
 	}
 	
-	public void testMemberFeatureCall_03() {
+	@Test public void testMemberFeatureCall_03() throws Exception {
 		assertEvaluatesTo("source", "new java.util.EventObject('source').source");
 	}
 	
-	public void testMemberFeatureCall_04() {
+	@Test public void testMemberFeatureCall_04() throws Exception {
 		assertEvaluatesTo("literal", 
 				"{" +
 				"  var fieldAccess = new testdata.FieldAccess()" +
@@ -680,7 +697,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testMemberFeatureCall_05() {
+	@Test public void testMemberFeatureCall_05() throws Exception {
 		assertEvaluatesTo("literal", 
 				"{" +
 				"  var fieldAccess = new testdata.FieldAccess()" +
@@ -689,7 +706,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testMemberFeatureCall_06() {
+	@Test public void testMemberFeatureCall_06() throws Exception {
 		assertEvaluatesTo(null, 
 				"{" +
 				"  var fieldAccess = new testdata.FieldAccess()" +
@@ -697,190 +714,190 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testMemberFeatureCall_07() {
+	@Test public void testMemberFeatureCall_07() throws Exception {
 		assertEvaluatesTo("finalField", 
 				"new testdata.FieldAccess().finalField");
 	}
 	
-	public void testNullSafeOperator_01() {
+	@Test public void testNullSafeOperator_01() throws Exception {
 		assertEvaluatesWithException(NullPointerException.class, "(null as Object).toString()");
 		assertEvaluatesWithException(NullPointerException.class, "(null as Object)?.toString().toString()");
 	}
 	
-	public void testNullSafeOperator_02() {
+	@Test public void testNullSafeOperator_02() throws Exception {
 		assertEvaluatesTo(null, "(null as Object)?.toString()");
 		assertEvaluatesTo(null, "(null as Object)?.toString()?.toString()");
 	}
 	
 //	TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341048
-//	public void testSpreadOperator_01() {
+//	@Test public void testSpreadOperator_01() throws Exception {
 //		assertEvaluatesWithException(NullPointerException.class, "(null as java.util.List<Object>)*.toString()");
 //		assertEvaluatesWithException(ClassCastException.class, "(new Object() as java.util.List<Object>)*.toString()");
 //	}
 //	
-//	public void testSpreadOperator_02() {
+//	@Test public void testSpreadOperator_02() throws Exception {
 //		assertEvaluatesTo(Lists.newArrayList(
 //				"A", "B", "C"), "('abc'.toCharArray as Iterable<Character>)*.toString*.toUpperCase");
 //	}
 	
-	public void testSwitchExpression_01() {
+	@Test public void testSwitchExpression_01() throws Exception {
 		assertEvaluatesTo(null, "switch 'x' { case false: 'literal' }");
 	}
 	
-	public void testSwitchExpression_02() {
+	@Test public void testSwitchExpression_02() throws Exception {
 		assertEvaluatesTo("literal", "switch 'x' { case 'x': 'literal' }");
 	}
 	
-	public void testSwitchExpression_03() {
+	@Test public void testSwitchExpression_03() throws Exception {
 		assertEvaluatesTo("literal", "switch 'x' { case 'y': 'foo' default : 'literal' }");
 	}
 	
-	public void testSwitchExpression_04() {
+	@Test public void testSwitchExpression_04() throws Exception {
 		assertEvaluatesTo("x", "switch x:'x' { case x.length==3 : 'xxx' default : 'x' }");
 	}
 	
-	public void testSwitchExpression_05() {
+	@Test public void testSwitchExpression_05() throws Exception {
 		assertEvaluatesTo(null, "switch new Object() { String : 'literal' }");
 	}
 	
-	public void testSwitchExpression_06() {
+	@Test public void testSwitchExpression_06() throws Exception {
 		assertEvaluatesTo("literal", "switch new Object() { Object : 'literal' }");
 	}
 	
-	public void testSwitchExpression_07() {
+	@Test public void testSwitchExpression_07() throws Exception {
 		assertEvaluatesTo("literal", "switch new Object() { case false: null default: 'literal' }");
 	}
 	
-	public void testSwitchExpression_08() {
+	@Test public void testSwitchExpression_08() throws Exception {
 		assertEvaluatesTo("literal", "switch x : new Object() { case false: null case x!=null: 'literal' }");
 	}
 	
-	public void testSwitchExpression_09() {
+	@Test public void testSwitchExpression_09() throws Exception {
 		assertEvaluatesTo(4, "switch 'foo' { case 'foo': 4 String: 3 }");
 	}
 	
-	public void testSwitchExpression_10() {
+	@Test public void testSwitchExpression_10() throws Exception {
 		assertEvaluatesTo(3, "switch 'foo' as Object { Boolean case 'foo': 4 String: 3 }");
 	}
 	
-	public void testSwitchExpression_11() {
+	@Test public void testSwitchExpression_11() throws Exception {
 		assertEvaluatesTo(3, "switch new java.util.ArrayList<String>() { java.util.Set<String> : 5 java.util.List<Object>: 3 }");
 	}
 	
-	public void testCastedExpression_01() {
+	@Test public void testCastedExpression_01() throws Exception {
 		assertEvaluatesTo("literal", "'literal' as String");
 	}
 	
-	public void testCastedExpression_02() {
+	@Test public void testCastedExpression_02() throws Exception {
 		assertEvaluatesWithException(ClassCastException.class, "'literal' as Object as Integer");
 	}
 	
-	public void testCastedExpression_03() {
+	@Test public void testCastedExpression_03() throws Exception {
 		assertEvaluatesTo(null, "null as Integer");
 	}
 	
-	public void testTryCatch_01() {
+	@Test public void testTryCatch_01() throws Exception {
 		assertEvaluatesTo("caught", "try { 'literal' as Object as Boolean } catch(ClassCastException e) {'caught'}");
 	}
 	
-	public void testTryCatch_02() {
+	@Test public void testTryCatch_02() throws Exception {
 		assertEvaluatesTo("literal", "try { 'literal' as String } catch(ClassCastException e) {'caught'}");
 	}
 	
-	public void testTryCatch_03() {
+	@Test public void testTryCatch_03() throws Exception {
 		assertEvaluatesTo("ClassCastException", "try { 'literal' as Object as Boolean } catch(ClassCastException e) {e.getClass().getSimpleName()}");
 	}
 	
-	public void testTryCatch_04() {
+	@Test public void testTryCatch_04() throws Exception {
 		assertEvaluatesWithException(NullPointerException.class, "try { 'literal' as Object as Boolean } catch(ClassCastException e) throw new NullPointerException()");
 	}
 	
-	public void testTryCatch_05() {
+	@Test public void testTryCatch_05() throws Exception {
 		assertEvaluatesWithException(NullPointerException.class, 
 				"try 'literal' as Object as Boolean" +
 				"  catch(ClassCastException e) throw new NullPointerException()" +
 				"  catch(NullPointerException e) 'dont catch subsequent exceptions'");
 	}
 	
-	public void testTryCatch_WithThrows() {
+	@Test public void testTryCatch_WithThrows() throws Exception {
 		assertEvaluatesWithException(NullPointerException.class, 
 				"try throw new NullPointerException()" +
 				"  catch(ClassCastException e) throw new NullPointerException()" +
 		"  catch(NullPointerException e) throw new NullPointerException()");
 	}
 	
-	public void testTryCatch_WithThrows_01() {
+	@Test public void testTryCatch_WithThrows_01() throws Exception {
 		assertEvaluatesTo("x", 
 				"try throw new NullPointerException()" +
 				"  catch(ClassCastException e) throw new NullPointerException()" +
 		"  catch(NullPointerException e) 'x'");
 	}
 	
-	public void testTryFinally_01() {
+	@Test public void testTryFinally_01() throws Exception {
 		assertEvaluatesTo("literal", "try 'literal' finally 'finally'.toString");
 	}
 	
-	public void testTryFinally_02() {
+	@Test public void testTryFinally_02() throws Exception {
 		assertEvaluatesTo("finally", "{ var x = 'foo' try 'literal' finally x = 'finally' x }");
 	}
 	
-	public void testConstructor_01() {
+	@Test public void testConstructor_01() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "new java.io.StringReader('literal').markSupported");
 	}
 	
-	public void testConstructor_02() {
+	@Test public void testConstructor_02() throws Exception {
 		assertEvaluatesTo(new Character('a'), "new Character('abc'.charAt(0))");
 	}
 	
-	public void testConstructor_03() {
+	@Test public void testConstructor_03() throws Exception {
 		assertEvaluatesTo("source", "new java.util.EventObject('source').getSource");
 	}
 	
-	public void testConstructor_04() {
+	@Test public void testConstructor_04() throws Exception {
 		assertEvaluatesTo(new Stack<Object>(), "new java.util.Stack()");
 	}
 	
-	public void testThrowExpression_01() {
+	@Test public void testThrowExpression_01() throws Exception {
 		assertEvaluatesWithException(ExceptionSubclass.class, "throw new testdata.ExceptionSubclass()");
 	}
 	
-	public void testThrowExpression_02() {
+	@Test public void testThrowExpression_02() throws Exception {
 		assertEvaluatesWithException(ClassCastException.class, "throw (new Object() as RuntimeException)");
 	}
 	
-	public void testThrowExpression_03() {
+	@Test public void testThrowExpression_03() throws Exception {
 		assertEvaluatesWithException(NullPointerException.class, "throw null");
 	}
 	
-	public void testThrowExpression_04() {
+	@Test public void testThrowExpression_04() throws Exception {
 		assertEvaluatesWithException(NullPointerException.class, "throw new NullPointerException()");
 	}
 	
-	public void testThrowExpression_05() {
+	@Test public void testThrowExpression_05() throws Exception {
 		assertEvaluatesWithException(RuntimeException.class, "if ('foo'=='bar') 'foobar' else throw new RuntimeException()");
 	}
 	
-	public void testInstanceOf_01() {
+	@Test public void testInstanceOf_01() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "'literal' instanceof String");
 	}
 	
-	public void testInstanceOf_02() {
+	@Test public void testInstanceOf_02() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "'literal' instanceof CharSequence");
 	}
 	
-	public void testInstanceOf_03() {
+	@Test public void testInstanceOf_03() throws Exception {
 		assertEvaluatesTo(Boolean.FALSE, "'literal' as Object instanceof Boolean");
 	}
 	
-	public void testInstanceOf_04() {
+	@Test public void testInstanceOf_04() throws Exception {
 		assertEvaluatesTo(Boolean.FALSE, "null instanceof Boolean");
 	}
 	
-	public void testClosure_01() {
+	@Test public void testClosure_01() throws Exception {
 		assertEvaluatesTo("literal", "new testdata.ClosureClient().invoke0(|'literal')");
 	}
 	
-	public void testClosure_02() {
+	@Test public void testClosure_02() throws Exception {
 		assertEvaluatesTo("literal", 
 				"{" +
 				"  val result = 'literal'" +
@@ -888,7 +905,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testClosure_03() {
+	@Test public void testClosure_03() throws Exception {
 		assertEvaluatesTo("literal", 
 				"{" +
 				"  var closure = [|'literal']" +
@@ -896,24 +913,24 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testClosure_05() {
+	@Test public void testClosure_05() throws Exception {
 		assertEvaluatesTo("LITERAL", 
 				"new testdata.ClosureClient().invoke1([String s|s.toUpperCase], 'literal')");
 	}
 	
-	public void testClosure_06() {
+	@Test public void testClosure_06() throws Exception {
 		assertEvaluatesTo("LITERAL", 
 				"new testdata.ClosureClient().invoke2(" +
 				"[Void p1, String s|s.toUpperCase], null, 'literal')");
 	}
 	
-	public void testClosure_06_1() {
+	@Test public void testClosure_06_1() throws Exception {
 		assertEvaluatesTo("LITERAL", 
 				"new testdata.ClosureClient().invoke2(" +
 		"[p1, s|s.toUpperCase], null, 'literal')");
 	}
 	
-	public void testClosure_07() {
+	@Test public void testClosure_07() throws Exception {
 		assertEvaluatesTo("literal", 
 				"{" +
 				"  val func = [|'literal']" +
@@ -921,67 +938,67 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testClosure_07_01() {
+	@Test public void testClosure_07_01() throws Exception {
 		assertEvaluatesTo("literal", 
 		"new testdata.ClosureClient().useProvider(|'literal')");
 	}
 	
-	public void testClosure_08() {
+	@Test public void testClosure_08() throws Exception {
 		assertEvaluatesTo("literal", 
 				"new testdata.ClosureClient().useSupplier(|'literal')");
 	}
 	
-	public void testClosure_09() {
+	@Test public void testClosure_09() throws Exception {
 		assertEvaluatesTo("LITERAL", 
 		"new testdata.ClosureClient().useGoogleCollectFunction([String s|s.toUpperCase], 'literal')");
 	}
 	
-	public void testClosure_09_2() {
+	@Test public void testClosure_09_2() throws Exception {
 		assertEvaluatesTo("LITERAL", 
 		"new testdata.ClosureClient().useGoogleCollectFunction2([String s|s.toUpperCase], 'literal')");
 	}
 	
-	public void testClosure_10() {
+	@Test public void testClosure_10() throws Exception {
 		assertEvaluatesTo("LITERAL", 
 		"new testdata.ClosureClient().useGoogleCollectFunction([s|s.toUpperCase], 'literal')");
 	}
 	
-	public void testClosure_10_2() {
+	@Test public void testClosure_10_2() throws Exception {
 		assertEvaluatesTo("LITERAL", 
 		"new testdata.ClosureClient().useGoogleCollectFunction2([s|s.toUpperCase], 'literal')");
 	}
 	
-	public void testClosure_11() {
+	@Test public void testClosure_11() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, 
 		"new testdata.ClosureClient().useGoogleCollectPredicate([String s|'literal'.equals(s)], 'literal')");
 	}
 	
-	public void testClosure_11_2() {
+	@Test public void testClosure_11_2() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, 
 		"new testdata.ClosureClient().useGoogleCollectPredicate2([String s|'literal'.equals(s)], 'literal')");
 	}
 	
-	public void testClosure_12() {
+	@Test public void testClosure_12() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, 
 		"new testdata.ClosureClient().useGoogleCollectPredicate([s|'literal'.equals(s)], 'literal')");
 	}
 	
-	public void testClosure_12_2() {
+	@Test public void testClosure_12_2() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, 
 		"new testdata.ClosureClient().useGoogleCollectPredicate2([s|'literal'.equals(s)], 'literal')");
 	}
 	
-	public void testClosure_13() {
+	@Test public void testClosure_13() throws Exception {
 		assertEvaluatesTo(Boolean.FALSE, 
 				"new testdata.ClosureClient().useGoogleCollectPredicate([s|'literal'.equals(s)], 'false')");
 	}
 	
-	public void testClosure_13_2() {
+	@Test public void testClosure_13_2() throws Exception {
 		assertEvaluatesTo(Boolean.FALSE, 
 		"new testdata.ClosureClient().useGoogleCollectPredicate2([s|'literal'.equals(s)], 'false')");
 	}
 	
-	public void testClosure_14() {
+	@Test public void testClosure_14() throws Exception {
 		assertEvaluatesTo("literal", 
 				"{" +
 				"  var client = new testdata.ClosureClient()" +
@@ -990,7 +1007,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testClosure_14_2() {
+	@Test public void testClosure_14_2() throws Exception {
 		assertEvaluatesTo("literal", 
 				"{" +
 				"  var client = new testdata.ClosureClient()" +
@@ -999,7 +1016,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testArrayConversion_01() {
+	@Test public void testArrayConversion_01() throws Exception {
 		assertEvaluatesTo("LITERAL", 
 				"{" +
 				"  var client = new testdata.ArrayClient()" +
@@ -1009,7 +1026,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testArrayConversion_02() {
+	@Test public void testArrayConversion_02() throws Exception {
 		assertEvaluatesTo("OTHER", 
 				"{" +
 				"  var client = new testdata.ArrayClient()" +
@@ -1021,7 +1038,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testArrayConversion_03() {
+	@Test public void testArrayConversion_03() throws Exception {
 		assertEvaluatesTo(new Integer(42), 
 				"{" +
 				"  var client = new testdata.ArrayClient()" +
@@ -1032,7 +1049,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testArrayConversion_04() {
+	@Test public void testArrayConversion_04() throws Exception {
 		assertEvaluatesTo(new Integer(17), 
 				"{" +
 				"  var client = new testdata.ArrayClient()" +
@@ -1044,7 +1061,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testArrayConversion_05() {
+	@Test public void testArrayConversion_05() throws Exception {
 		assertEvaluatesTo("literal", 
 				"{" +
 				"  var client = new testdata.ArrayClient()" +
@@ -1056,139 +1073,139 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
-	public void testConstructorVarArgs_01() {
+	@Test public void testConstructorVarArgs_01() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "new testdata.ClassWithVarArgs().defaultConstructor");
 	}
 	
-	public void testConstructorVarArgs_02() {
+	@Test public void testConstructorVarArgs_02() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "new testdata.ClassWithVarArgs(1).varArgConstructor");
 	}
 	
-	public void testConstructorVarArgs_03() {
+	@Test public void testConstructorVarArgs_03() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "new testdata.ClassWithVarArgs(1, '').varArgConstructor");
 	}
 	
-	public void testConstructorVarArgs_04() {
+	@Test public void testConstructorVarArgs_04() throws Exception {
 		assertEvaluatesTo(Boolean.FALSE, "new testdata.ClassWithVarArgs(1, '', '').varArgConstructor");
 	}
 	
-	public void testConstructorVarArgs_05() {
+	@Test public void testConstructorVarArgs_05() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "new testdata.ClassWithVarArgs(1, '', '', '').varArgConstructor");
 	}
 	
-	public void testMethodVarArgs_01() {
+	@Test public void testMethodVarArgs_01() throws Exception {
 		assertEvaluatesTo(Collections.emptyList(), "new testdata.ClassWithVarArgs().stringsToList()");
 	}
 	
-	public void testMethodVarArgs_02() {
+	@Test public void testMethodVarArgs_02() throws Exception {
 		assertEvaluatesTo(Collections.singletonList("s1"), "new testdata.ClassWithVarArgs().stringsToList('s1')");
 	}
 	
-	public void testMethodVarArgs_03() {
+	@Test public void testMethodVarArgs_03() throws Exception {
 		assertEvaluatesTo(Lists.newArrayList("foo", "s1", "s2"), "new testdata.ClassWithVarArgs().stringsToList('s1', 's2')");
 	}
 	
-	public void testMethodVarArgs_04() {
+	@Test public void testMethodVarArgs_04() throws Exception {
 		assertEvaluatesTo(Lists.newArrayList("s1", "s2", "s3"), "new testdata.ClassWithVarArgs().stringsToList('s1', 's2', 's3')");
 	}
 	
-	public void testMethodVarArgs_05() {
+	@Test public void testMethodVarArgs_05() throws Exception {
 		assertEvaluatesTo(Collections.emptyList(), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList() }");
 	}
 	
-	public void testMethodVarArgs_06() {
+	@Test public void testMethodVarArgs_06() throws Exception {
 		assertEvaluatesTo(Collections.singletonList("s1"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList('s1') }");
 	}
 	
-	public void testMethodVarArgs_07() {
+	@Test public void testMethodVarArgs_07() throws Exception {
 		assertEvaluatesTo(Lists.newArrayList("foo", "s1", "s2"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList('s1', 's2') }");
 	}
 	
-	public void testMethodVarArgs_08() {
+	@Test public void testMethodVarArgs_08() throws Exception {
 		assertEvaluatesTo(Lists.newArrayList("s1", "s2", "s3"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList('s1', 's2', 's3') }");
 	}
 	
-	public void testMethodVarArgs_09() {
+	@Test public void testMethodVarArgs_09() throws Exception {
 		assertEvaluatesTo(Lists.newArrayList("s1"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList2('s1') }");
 	}
-	public void testMethodVarArgs_10() {
+	@Test public void testMethodVarArgs_10() throws Exception {
 		assertEvaluatesTo(Lists.newArrayList("s1", "s2"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList2('s1', 's2') }");
 	}
-	public void testMethodVarArgs_11() {
+	@Test public void testMethodVarArgs_11() throws Exception {
 		assertEvaluatesTo(Lists.newArrayList("s1", "s2", "s3"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList2('s1', 's2', 's3') }");
 	}
 	
-	public void testIterableExtension_01() {
+	@Test public void testIterableExtension_01() throws Exception {
 		assertEvaluatesTo(null, "new java.util.ArrayList<String>().findFirst(String e|e.length==0)");
 	}
 	
-	public void testIterableExtension_02() {
+	@Test public void testIterableExtension_02() throws Exception {
 		assertEvaluatesTo(null, "new java.util.ArrayList<String>().findFirst(e|e.length==0)");
 	}
 	
-	public void testIterableExtension_03() {
+	@Test public void testIterableExtension_03() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(12), "newArrayList(1, 2, 3, 4, 5, 6).filter(i|i%2==0).reduce(a,b|a+b)");
 	}
 	
-	public void testIterableExtension_04() {
+	@Test public void testIterableExtension_04() throws Exception {
 		assertEvaluatesTo(Lists.newArrayList(2, 3, 2, 3, 4), "newArrayList('a','aa','b','aa','abc').map(s|s.length+1).toList()");
 	}
 	
-	public void testIterableExtension_05() {
+	@Test public void testIterableExtension_05() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(2 + 3 + 2 + 3 + 4), "newArrayList('a','aa','b','aa','abc').map(s|s.length + 1).reduce(a,b|a+b)");
 	}
 	
-	public void testIterableExtension_06() {
+	@Test public void testIterableExtension_06() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(5), "newArrayList('a','aa','b','aa','abc').map(s|s.length + 1).take(4).toSet().reduce(a,b|a+b)");
 	}
 	
-	public void testIterableExtension_07() {
+	@Test public void testIterableExtension_07() throws Exception {
 		assertEvaluatesTo(Lists.newArrayList("a", "b", "c"), "newArrayList('a','b', 'c', 'd', 'e').take(3).toList()");
 	}
 	
-	public void testIterableExtension_08() {
+	@Test public void testIterableExtension_08() throws Exception {
 		assertEvaluatesTo(Lists.newArrayList("d", "e"), "newArrayList('a', 'b', 'c', 'd', 'e').drop(3).toList()");
 	}
 	
-	public void testIterableExtension_09() {
+	@Test public void testIterableExtension_09() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "(null as Iterable<String>).isNullOrEmpty()");
 		assertEvaluatesTo(Boolean.TRUE, "newArrayList().isNullOrEmpty()");
 		assertEvaluatesTo(Boolean.FALSE, "newHashSet('a').isNullOrEmpty()");
 	}
 	
-	public void testIterableExtension_10() {
+	@Test public void testIterableExtension_10() throws Exception {
 		assertEvaluatesTo("seed 12345", "newArrayList(1, 2, 3, 4, 5).fold('seed ', [s, i|s+i.toString])");
 	}
 	
-	public void testMapConstruction_00() throws Exception {
+	@Test public void testMapConstruction_00() throws Exception {
 		assertEvaluatesTo("vier", "newHashMap(3->'drei',4->'vier').get(4)");
 	}
 	
-	public void testMapConstruction_01() throws Exception {
+	@Test public void testMapConstruction_01() throws Exception {
 		assertEvaluatesTo("vier", "newHashMap(3->'drei',4->'vier').entrySet.findFirst(e|e.key==4).value");
 	}
 	
-	public void testStaticMethod_01() {
+	@Test public void testStaticMethod_01() throws Exception {
 		assertEvaluatesTo(Sets.newTreeSet(), "newTreeSet(String left, String right|left.compareTo(right))");
 	}
 	
-	public void testStaticMethod_02() {
+	@Test public void testStaticMethod_02() throws Exception {
 		assertEvaluatesTo(Sets.newHashSet("a"), "newTreeSet([left, right|left.compareTo(right)], 'a')");
 	}
 	
-	public void testCollectionExtensions_01() {
+	@Test public void testCollectionExtensions_01() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "{ var x = newArrayList('') var result = x.unmodifiableView() x.clear() result.empty }");
 //		assertEvaluatesWithException(UnsupportedOperationException.class, "newArrayList('').unmodifiableView().clear()");
 		assertEvaluatesWithException(UnsupportedOperationException.class, "{ newArrayList('').unmodifiableView().clear() null }");
 	}
 	
-	public void testCollectionExtensions_02() {
+	@Test public void testCollectionExtensions_02() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "{ var x = newHashSet('') var result = x.unmodifiableView() x.clear() result.empty }");
 //		assertEvaluatesWithException(UnsupportedOperationException.class, "newHashSet('').unmodifiableView().clear()");
 		assertEvaluatesWithException(UnsupportedOperationException.class, "{ newHashSet('').unmodifiableView().clear null }");
 	}
 	
-	public void testCollectionExtensions_03() {
+	@Test public void testCollectionExtensions_03() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "newArrayList().unmodifiableView() instanceof java.util.List");
 		assertEvaluatesTo(Boolean.TRUE, "newHashSet().unmodifiableView() instanceof java.util.Set");
 		assertEvaluatesTo(Boolean.TRUE, "newLinkedHashSet().unmodifiableView() instanceof java.util.Set");
@@ -1198,112 +1215,112 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(Boolean.TRUE, "newTreeMap(String a, String b|a.compareTo(b)).unmodifiableView() instanceof java.util.SortedMap");
 	}
 	
-	public void testCollectionExtensions_04() {
+	@Test public void testCollectionExtensions_04() throws Exception {
 		assertEvaluatesTo(Boolean.FALSE, "(newArrayList() as java.util.Collection<Object>).unmodifiableView() instanceof java.util.List");
 		assertEvaluatesTo(Boolean.TRUE, "(newArrayList() as java.util.Collection<Object>).unmodifiableView() instanceof java.util.Collection");
 		assertEvaluatesTo(Boolean.FALSE, "(newHashSet() as java.util.Collection<Object>).unmodifiableView() instanceof java.util.Set");
 		assertEvaluatesTo(Boolean.TRUE, "(newHashSet() as java.util.Collection<Object>).unmodifiableView() instanceof java.util.Collection");
 	}
 	
-	public void testCollectionExtensions_05() {
+	@Test public void testCollectionExtensions_05() throws Exception {
 		assertEvaluatesTo(Collections.singletonList("foo"), "{ var x = newArrayList('foo') var result = x.immutableCopy() x.clear() result  }");
 		assertEvaluatesWithException(UnsupportedOperationException.class, "{ newArrayList('').immutableCopy().clear() null }");
 	}
 	
-	public void testCollectionExtensions_06() {
+	@Test public void testCollectionExtensions_06() throws Exception {
 		assertEvaluatesTo(Collections.singleton("foo"), "{ var x = newHashSet('foo') var result = x.immutableCopy() x.clear() result }");
 		assertEvaluatesWithException(UnsupportedOperationException.class, "{ newHashSet('').immutableCopy().clear null }");
 	}
 	
-	public void testCollectionExtensions_07() {
+	@Test public void testCollectionExtensions_07() throws Exception {
 		assertEvaluatesTo(Lists.newArrayList("a", "b", "c"), "{ var x = newArrayList() x.addAll('a', 'b', 'c') x }");
 		assertEvaluatesTo(Boolean.FALSE, "newHashSet('a', 'b', 'c').addAll('a', 'b', 'c')");
 	}
 	
-	public void testListExtensions_01() {
+	@Test public void testListExtensions_01() throws Exception {
 		assertEvaluatesTo(Lists.newArrayList("a", "b", "c"), "newArrayList('c', 'a', 'b').sort()");
 		assertEvaluatesTo("b", "{ var l = newArrayList('c', 'a', 'b', 'd') l.sort() l.get(1) }");
 	}
 	
-	public void testListExtensions_02() {
+	@Test public void testListExtensions_02() throws Exception {
 		assertEvaluatesTo(Lists.newArrayList("a", "b", "c"), "newArrayList('c', 'a', 'b').sort(a,b|a.compareTo(b))");
 		assertEvaluatesTo(Lists.newArrayList("c", "b", "a"), "newArrayList('c', 'a', 'b').sort(a,b|b.compareTo(a))");
 		assertEvaluatesTo("b", "{ var l = newArrayList('c', 'a', 'b', 'd') l.sort(a,b|a.compareTo(b)) l.get(1) }");
 	}
 	
-	public void testListExtensions_03() {
+	@Test public void testListExtensions_03() throws Exception {
 		assertEvaluatesTo(Lists.newArrayList("aaa", "bb", "c"), "newArrayList('c', 'aaa', 'bb').sortBy(s|-s.length)");
 		assertEvaluatesTo(Lists.newArrayList("c", "bb", "aaa"), "newArrayList('c', 'aaa', 'bb').sortBy(s|s.length)");
 		assertEvaluatesTo("b", "{ var l = newArrayList('c', 'a', 'b', 'd') l.sortBy(a|a) l.get(1) }");
 	}
 	
-	public void testMemberCallOnMultiType_01() throws Exception {
+	@Test public void testMemberCallOnMultiType_01() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(0), "(if (false) new Double('-10') else new Integer('1')).compareTo(1)");
 	}
 	
-	public void testMemberCallOnMultiType_02() throws Exception {
+	@Test public void testMemberCallOnMultiType_02() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(20), "(if (false) new Double('-20') else new Integer('20')).intValue");
 	}
 	
-	public void testMemberCallOnMultiType_03() throws Exception {
+	@Test public void testMemberCallOnMultiType_03() throws Exception {
 		assertEvaluatesTo(
 				Integer.valueOf(20), 
 				"newArrayList('20').map(s|if (false) new Double(s) else new Integer(s)).head.intValue");
 	}
 	
-	public void testMemberCallOnMultiType_04() throws Exception {
+	@Test public void testMemberCallOnMultiType_04() throws Exception {
 		assertEvaluatesTo(
 				Integer.valueOf(20), 
 				"newArrayList(if (false) new Double('-20') else new Integer('20')).map(v|v.intValue).head");
 	}
 	
-	public void testMemberCallOnMultiType_05() throws Exception {
+	@Test public void testMemberCallOnMultiType_05() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(20), "{ var number = if (false) new Double('-10') else new Integer('20') number.intValue}");
 	}
 	
-	public void testMemberCallOnMultiType_06() throws Exception {
+	@Test public void testMemberCallOnMultiType_06() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(20), "{ var x = if (false) new Double('-10') else new Integer('20') x.intValue }");
 	}
 	
-	public void testMemberCallOnMultiType_07() throws Exception {
+	@Test public void testMemberCallOnMultiType_07() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "(if (false) new Double('-20') else new Integer('10')) >= 0");
 	}
 	
-	public void testMemberCallOnMultiType_08() throws Exception {
+	@Test public void testMemberCallOnMultiType_08() throws Exception {
 		assertEvaluatesTo(Boolean.FALSE, "(if (false) new Double('-20') else new Integer('10')) < 0");
 	}
 	
-	public void testBug343144_01() throws Exception {
+	@Test public void testBug343144_01() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(3), 
 			"newArrayList('ab', 'abc').fold(0 as Integer, [max, s | Math::max(s.length, max)])");
 	}
 	
-	public void testBug343144_02() throws Exception {
+	@Test public void testBug343144_02() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(3), 
 			"newArrayList('ab', 'abc').fold(0, [Integer max, s | Math::max(s.length, max)])");
 	}
 	
-	public void testBug343144_03() throws Exception {
+	@Test public void testBug343144_03() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(3), 
 			"newArrayList('ab', 'abc').fold(0, [max, s | Math::max(s.length, max)])");
 	}
 	
-	public void testBug343144_04() throws Exception {
+	@Test public void testBug343144_04() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(3), 
 			"{ val Integer i = 0 newArrayList('ab', 'abc').fold(i, [max, s | Math::max(s.length, max)]) }");
 	}
 	
-	public void testBug343144_05() throws Exception {
+	@Test public void testBug343144_05() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(3), 
 			"{ val int i = 0 newArrayList('ab', 'abc').fold(i, [max, s | Math::max(s.length, max)]) }");
 	}
 	
-	public void testBug343144_06() throws Exception {
+	@Test public void testBug343144_06() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(3), 
 			"{ val i = 0 newArrayList('ab', 'abc').fold(i, [max, s | Math::max(s.length, max)]) }");
 	}
 	
-	public void testBug342434_01() throws Exception {
+	@Test public void testBug342434_01() throws Exception {
 		assertEvaluatesTo("baz", 
 			"{\n" + 
 			"    val x = newArrayList('foo','bar','baz').toArray\n" + 
@@ -1314,7 +1331,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	}
 	
 	// TODO fix type parameter resolution in array types 
-//	public void testBug342434_02() throws Exception {
+//	@Test public void testBug342434_02() throws Exception {
 //		assertEvaluatesTo("baz", 
 //				"{\n" + 
 //				"    val x = newArrayList('foo','bar','baz').toArray\n" + 
@@ -1324,7 +1341,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 //		"}");
 //	}
 	
-	public void testBug342434_03() throws Exception {
+	@Test public void testBug342434_03() throws Exception {
 		assertEvaluatesTo("foo", 
 			"{\n" + 
 			"    val x = new testdata.GenericType1('foo')\n" + 
@@ -1333,7 +1350,7 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 			"}");
 	}
 	
-	public void testBug342434_04() throws Exception {
+	@Test public void testBug342434_04() throws Exception {
 		assertEvaluatesTo("foo", 
 			"{\n" + 
 			"    val testdata.GenericType1<String> x = new testdata.GenericType1()\n" + 
