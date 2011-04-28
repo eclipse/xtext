@@ -21,7 +21,7 @@ import org.eclipse.xtext.serializer.IGrammarConstraintProvider.ConstraintElement
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintElement;
-import org.eclipse.xtext.serializer.impl.GrammarConstraintProvider;
+import org.eclipse.xtext.serializer.analysis.GrammarConstraintProvider;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;

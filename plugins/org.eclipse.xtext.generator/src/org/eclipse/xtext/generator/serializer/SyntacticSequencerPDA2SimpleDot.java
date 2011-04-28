@@ -12,8 +12,8 @@ import java.util.Set;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.grammaranalysis.IPDAState;
-import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider.SequencerNFAProvider;
-import org.eclipse.xtext.serializer.impl.SyntacticSequencerPDAProvider.SequencerPDAProvider;
+import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.SequencerNFAProvider;
+import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.SequencerPDAProvider;
 import org.eclipse.xtext.util.GraphvizDotBuilder;
 
 import com.google.common.collect.Sets;

@@ -20,10 +20,10 @@ import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
-import org.eclipse.xtext.serializer.impl.GrammarConstraintProvider;
-import org.eclipse.xtext.serializer.impl.GrammarConstraintProvider.ActionFilterNFAProvider;
-import org.eclipse.xtext.serializer.impl.GrammarConstraintProvider.ActionFilterState;
-import org.eclipse.xtext.serializer.impl.GrammarConstraintProvider.ActionFilterTransition;
+import org.eclipse.xtext.serializer.analysis.GrammarConstraintProvider;
+import org.eclipse.xtext.serializer.analysis.GrammarConstraintProvider.ActionFilterNFAProvider;
+import org.eclipse.xtext.serializer.analysis.GrammarConstraintProvider.ActionFilterState;
+import org.eclipse.xtext.serializer.analysis.GrammarConstraintProvider.ActionFilterTransition;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
