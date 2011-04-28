@@ -19,6 +19,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -128,6 +129,19 @@ public class GrammarUtil {
 	public static List<CrossReference> containedCrossReferences(EObject e) {
 		return getAllContentsOfType(e, CrossReference.class);
 	}
+	
+	/**
+	 * @since 2.0
+	 */
+	public static boolean containsAssignedAction(ParserRule rule) {
+		TreeIterator<EObject> ti = rule.eAllContents();
+		while (ti.hasNext()) {
+			EObject obj = ti.next();
+			if (obj instanceof Action && ((Action) obj).getFeature() != null)
+				return true;
+		}
+		return false;
+	}
 
 	public static List<AbstractElement> elementsBeforeThisInContainingGroup(AbstractElement _this) {
 		Group g = containingGroup(_this);
@@ -164,6 +178,15 @@ public class GrammarUtil {
 	public static boolean isParserParserRule(EObject grammarElement) {
 		return grammarElement instanceof ParserRule
 				&& ((ParserRule) grammarElement).getType().getClassifier() instanceof EClass;
+	}
+	
+	/**
+	 * @since 2.0
+	 */
+	public static boolean isUnassignedParserRuleCall(EObject ele) {
+		if (!isParserRuleCall(ele))
+			return false;
+		return GrammarUtil.containingAssignment(ele) == null;
 	}
 
 	public static boolean isDatatypeRuleCall(EObject grammarElement) {
