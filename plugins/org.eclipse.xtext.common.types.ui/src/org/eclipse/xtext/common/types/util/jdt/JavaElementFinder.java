@@ -118,7 +118,7 @@ public class JavaElementFinder implements IJavaElementFinder {
 											}
 										}
 									}
-									if (!readable.equals(formalParameter.getParameterType().getIdentifier()))
+									if (!readable.equals(formalParameter.getParameterType().getQualifiedName('.')))
 										match = false;
 								}
 								if (match)
