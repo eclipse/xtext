@@ -59,6 +59,7 @@ public class RenameLinkedMode {
 	private LinkedPositionGroup linkedPositionGroup;
 	private LinkedPosition currentPosition;
 
+	private boolean isActive = false; 
 
 	public void start(IRenameElementContext renameElementContext, ProcessorBasedRefactoring renameRefactoring) {
 		if (renameRefactoring == null || renameElementContext == null)
@@ -97,6 +98,7 @@ public class RenameLinkedMode {
 				registry.register(focusEditingSupport);
 			}
 			openPopup();
+			isActive = true;
 		} catch (BadLocationException e) {
 			LOG.error(e.getMessage(), e);
 		}
@@ -139,11 +141,13 @@ public class RenameLinkedMode {
 	}
 
 	public void cancel() {
-		if (linkedModeModel != null) {
-			linkedModeModel.exit(ILinkedModeListener.NONE);
+		if(isActive) {
+			if (linkedModeModel != null) {
+				linkedModeModel.exit(ILinkedModeListener.NONE);
+			}
+			linkedModeLeft();
+			undoSupport.undoDocumentChanges();
 		}
-		linkedModeLeft();
-		undoSupport.undoDocumentChanges();
 	}
 	
 	protected void linkedModeLeft() {
