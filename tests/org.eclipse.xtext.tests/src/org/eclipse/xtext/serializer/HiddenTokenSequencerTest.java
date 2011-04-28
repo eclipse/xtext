@@ -28,8 +28,8 @@ import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.impl.EmitterNodeIterator;
 import org.eclipse.xtext.serializer.impl.NodeModelSyntacticSequencer;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
-import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -76,7 +76,7 @@ public class HiddenTokenSequencerTest extends AbstractXtextTests {
 		recSequencer.createSequence(context, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
 		//		System.out.println(actual);
 		//		System.out.println(NodeModelUtils.compactDump(NodeModelUtils.findActualNodeFor(model), true));
-		assertEquals(Join.join("\n", getNodeSequence(model)), Join.join("\n", actual.getColumn(4)));
+		assertEquals(Joiner.on("\n").join(getNodeSequence(model)), Joiner.on("\n").join(actual.getColumn(4)));
 	}
 
 	public void testXtext() throws Exception {
@@ -89,7 +89,7 @@ public class HiddenTokenSequencerTest extends AbstractXtextTests {
 				actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
 		//		System.out.println(actual);
 		//		System.out.println(NodeModelUtils.compactDump(NodeModelUtils.getNode(model), false));
-		assertEquals(Join.join("\n", getNodeSequence(model)), Join.join("\n", actual.getColumn(4)));
+		assertEquals(Joiner.on("\n").join(getNodeSequence(model)), Joiner.on("\n").join(actual.getColumn(4)));
 	}
 
 	public void testMandatoryKeywords() throws Exception {
