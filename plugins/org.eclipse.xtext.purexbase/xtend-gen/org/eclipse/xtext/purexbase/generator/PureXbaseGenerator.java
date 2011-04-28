@@ -57,16 +57,13 @@ public class PureXbaseGenerator implements IGenerator {
       StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(impMnr);
       final StringBuilderBasedAppendable appendable = _stringBuilderBasedAppendable;
       XBlockExpression _block = m.getBlock();
-      final StringBuilderBasedAppendable typeConverted_appendable = (StringBuilderBasedAppendable)appendable;
-      final Model typeConverted_m = (Model)m;
-      JvmTypeReference _typeForName = this.typeReferences.getTypeForName("void", typeConverted_m);
-      this.compiler.compile(_block, typeConverted_appendable, _typeForName);
+      JvmTypeReference _typeForName = this.typeReferences.getTypeForName("void", m);
+      this.compiler.compile(_block, appendable, _typeForName);
       StringConcatenation _builder = new StringConcatenation();
       List<String> _imports = impMnr.getImports();
       final Function1<String,String> _function = new Function1<String,String>() {
           public String apply(String e) {
-            final String typeConverted_e = (String)e;
-            String _operator_plus = StringExtensions.operator_plus("import ", typeConverted_e);
+            String _operator_plus = StringExtensions.operator_plus("import ", e);
             String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ";\n");
             return _operator_plus_1;
           }
@@ -79,8 +76,7 @@ public class PureXbaseGenerator implements IGenerator {
       _builder.append("@SuppressWarnings(\"all\")");
       _builder.newLine();
       _builder.append("public class ");
-      final Model typeConverted_m_1 = (Model)m;
-      Resource _eResource = typeConverted_m_1.eResource();
+      Resource _eResource = m.eResource();
       String _name = this.name(_eResource);
       _builder.append(_name, "");
       _builder.append(" {");
