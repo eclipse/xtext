@@ -119,7 +119,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		}
 	}
 
-	public static class SequencerPDAProvider extends AbstractPDAProvider {
+	public static class SequencerPDAProvider extends AbstractPDAProvider<EObject> {
 
 		protected SequencerNFAProvider nfaProvider;
 

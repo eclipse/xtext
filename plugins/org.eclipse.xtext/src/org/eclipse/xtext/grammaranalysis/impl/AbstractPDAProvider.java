@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.grammaranalysis.INFAState;
 import org.eclipse.xtext.grammaranalysis.IPDAProvider;
@@ -29,17 +28,20 @@ import com.google.common.collect.Sets;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public abstract class AbstractPDAProvider implements IPDAProvider {
+public abstract class AbstractPDAProvider<CTX> implements IPDAProvider {
 
-	protected static class PDAContext {
-		protected EObject context;
+	protected static class PDAContext<CTX> {
+		protected CTX context;
 		protected Map<INFAState<?, ?>, PDAState> elements = Maps.newHashMap();
 		protected Map<INFAState<?, ?>, PDAState> ruleCallEnter = Maps.newHashMap();
 		protected Map<INFAState<?, ?>, PDAState> ruleCallExit = Maps.newHashMap();
 		protected PDAState start;
 		protected PDAState stop;
 
-		public PDAContext(EObject context) {
+		/**
+		 * @since 2.0
+		 */
+		public PDAContext(CTX context) {
 			super();
 			this.context = context;
 		}
@@ -154,7 +156,7 @@ public abstract class AbstractPDAProvider implements IPDAProvider {
 
 	protected abstract boolean canEnterRuleCall(INFAState<?, ?> state);
 
-	protected boolean canReachContextEnd(PDAContext context, RuleCallStackElement stack, INFAState<?, ?> fromNfa,
+	protected boolean canReachContextEnd(PDAContext<CTX> context, RuleCallStackElement stack, INFAState<?, ?> fromNfa,
 			boolean returning, boolean canReturn, Set<Pair<Boolean, INFAState<?, ?>>> visited) {
 		if (stack == null || !visited.add(Tuples.<Boolean, INFAState<?, ?>> create(returning, fromNfa)))
 			return false;
@@ -184,15 +186,18 @@ public abstract class AbstractPDAProvider implements IPDAProvider {
 		return false;
 	}
 
-	protected PDAContext createContext(EObject obj) {
-		return new PDAContext(obj);
+	/**
+	 * @since 2.0
+	 */
+	protected PDAContext<CTX> createContext(CTX obj) {
+		return new PDAContext<CTX>(obj);
 	}
 
 	protected PDAState createState(IPDAState.PDAStateType type, AbstractElement element) {
 		return new PDAState(type, element);
 	}
 
-	protected PDAState createState(PDAContext ctx, RuleCallStackElement stack, INFAState<?, ?> fromNfa,
+	protected PDAState createState(PDAContext<CTX> ctx, RuleCallStackElement stack, INFAState<?, ?> fromNfa,
 			boolean returning, boolean canReturn, Set<Pair<Boolean, INFAState<?, ?>>> visited) {
 		Set<Pair<Boolean, INFAState<?, ?>>> visited2 = Sets.newHashSet();
 		if (stack == null
@@ -244,8 +249,11 @@ public abstract class AbstractPDAProvider implements IPDAProvider {
 		return result;
 	}
 
-	public IPDAState getPDA(EObject context) {
-		PDAContext ctx = createContext(context);
+	/**
+	 * @since 2.0
+	 */
+	public IPDAState getPDA(CTX context) {
+		PDAContext<CTX> ctx = createContext(context);
 		ctx.start = createState(IPDAState.PDAStateType.START, null);
 		ctx.stop = createState(IPDAState.PDAStateType.STOP, null);
 		Set<Pair<Boolean, INFAState<?, ?>>> visited = Sets.newHashSet();
@@ -261,9 +269,12 @@ public abstract class AbstractPDAProvider implements IPDAProvider {
 		return ctx.start;
 	}
 
-	protected abstract List<INFAState<?, ?>> getStartFollowers(EObject context);
+	/**
+	 * @since 2.0
+	 */
+	protected abstract List<INFAState<?, ?>> getStartFollowers(CTX context);
 
-	protected PDAState getState(PDAContext ctx, INFAState<?, ?> state, boolean returning) {
+	protected PDAState getState(PDAContext<CTX> ctx, INFAState<?, ?> state, boolean returning) {
 		PDAState result = ctx.elements.get(state);
 		if (result == null) {
 			if (returning)
@@ -274,9 +285,12 @@ public abstract class AbstractPDAProvider implements IPDAProvider {
 		return result;
 	}
 
-	protected abstract boolean isFinalState(EObject context, INFAState<?, ?> state, boolean returning, boolean canReturn);
+	protected abstract boolean isFinalState(CTX context, INFAState<?, ?> state, boolean returning, boolean canReturn);
 
-	protected abstract List<INFAState<?, ?>> getFollowers(EObject context, INFAState<?, ?> state, boolean returning,
+	/**
+	 * @since 2.0
+	 */
+	protected abstract List<INFAState<?, ?>> getFollowers(CTX context, INFAState<?, ?> state, boolean returning,
 			boolean canReturn);
 
 	protected RuleCallStackElement stackPush(RuleCallStackElement stack, INFAState<?, ?> value) {
