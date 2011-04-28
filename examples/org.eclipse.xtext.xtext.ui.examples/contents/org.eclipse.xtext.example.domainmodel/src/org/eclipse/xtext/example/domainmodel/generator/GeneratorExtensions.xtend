@@ -36,4 +36,8 @@ class GeneratorExtensions extends DomainmodelExtensions {
 			'''
 		)
 	}
+	
+	isInterface(JvmTypeReference typeRef) {
+		(typeRef.type as JvmGenericType).isInterface
+	}
 }

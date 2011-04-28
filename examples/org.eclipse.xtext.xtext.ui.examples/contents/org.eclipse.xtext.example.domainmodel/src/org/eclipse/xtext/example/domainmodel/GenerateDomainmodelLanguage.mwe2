@@ -107,7 +107,10 @@ Workflow {
 			fragment = xbase.XbaseGeneratorFragment {}
 			
 			// Code generator
-			fragment = generator.GeneratorFragment {}
+			fragment = generator.GeneratorFragment {
+				generateJavaMain = false
+				generateMwe = false
+			}
 			
 			fragment = org.eclipse.xtext.ui.codetemplates.generator.CodetemplatesGeneratorFragment {}
 		}

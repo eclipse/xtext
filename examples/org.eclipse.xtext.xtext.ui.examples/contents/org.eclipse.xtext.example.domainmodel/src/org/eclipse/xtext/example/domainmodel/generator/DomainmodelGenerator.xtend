@@ -24,53 +24,44 @@ class DomainmodelGenerator implements IGenerator {
 	@Inject DomainmodelCompiler
 	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-		// TODO: use filter
-		for(element: resource.allContentsIterable) {
-			if(element instanceof Entity) {
-				val entity = element as Entity				
-				fsa.generateFile(entity.fileName, entity.compile)
-			}
+		for(entity: resource.allContentsIterable.filter(typeof(Entity))) {
+			fsa.generateFile(entity.fileName, entity.compile)
 		}
 	}
 	
-	compile(Entity e) { 
-		val importManager = new ImportManager(true);
-		val body = body(e, importManager);
-		'''
+	compile(Entity e) ''' 
+		«val importManager = new ImportManager(true)»
+		«/* first evaluate the body in order to collect the used types for the import section */
+		val body = body(e, importManager)»
 		«IF !(e.packageName.isNullOrEmpty)»
 			package «e.packageName»;
 			
 		«ENDIF»
 		«FOR i:importManager.imports»
-		import «i»;
+			import «i»;
 		«ENDFOR»
 		
 		«body»
-		'''
-	}
+	'''
 	
-	body(Entity e, ImportManager importManager) {
-		'''
+	body(Entity e, ImportManager importManager) '''
 		public class «e.name» «e.superTypeClause(importManager)»{
 			«FOR f:e.features»
-			«feature(f, importManager)»
-			
+				«feature(f, importManager)»
 			«ENDFOR»
 		}
-		'''   
-	}
+	'''   
 	
 	superTypeClause(Entity e, ImportManager importManager) {
 		if(e.superType != null)
-			(if ((e.superType.type as JvmGenericType).isInterface) 
+			(if (e.superType.isInterface) 
 				'implements ' 
 			else 
 				'extends ') + e.superType.shortName(importManager) + " "
 		else ""    
 	}
 	
-	dispatch feature(Property p, ImportManager importManager) {
-		'''
+	dispatch feature(Property p, ImportManager importManager) '''
 		private «p.type.shortName(importManager)» «p.name»;
 			
 		public «p.type.shortName(importManager)» get«p.name.toFirstUpper»() {
@@ -80,15 +71,12 @@ class DomainmodelGenerator implements IGenerator {
 		public void set«p.name.toFirstUpper»(«p.type.shortName(importManager)» «p.name») {
 			this.«p.name» = «p.name»;
 		}
-		'''
-	}
+	'''
 
-	dispatch feature(Operation o, ImportManager importManager) {
-		'''
+	dispatch feature(Operation o, ImportManager importManager) '''
 		public «o.type.shortName(importManager)» «o.name»(«o.parameterList(importManager)») {
 			«domainmodelCompiler.compile(o, importManager)» 
 		}
-		'''
-	}
+	'''
 	
 }
