@@ -8,21 +8,45 @@
 package org.eclipse.xtext.xbase.lib;
 
 /**
+ * This is an extension library for {@link String strings}.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
 public class StringExtensions {
-	
+
 	/**
-	 * concatenation operator
+	 * The binary <code>+</code> operator that concatenates two strings.
+	 * 
+	 * @param a
+	 *            a string.
+	 * @param b
+	 *            another string.
+	 * @return <code>a + b</code>
 	 */
 	public static String operator_plus(String a, Object b) {
-		return a+b;
+		return a + b;
 	}
-	
+
+	/**
+	 * Returns <code>true</code> if {@code s} is <code>null</code> or equal to the empty {@link String} <code>""</code>.
+	 * 
+	 * @param s
+	 *            the string
+	 * @return <code>true</code> if {@code s} is <code>null</code> or equal to the empty {@link String} <code>""</code>
+	 */
 	public static boolean isNullOrEmpty(String s) {
-		return s == null || s.equals("");
+		return s == null || s.length() == 0;
 	}
-	
+
+	/**
+	 * Returns the {@link String} {@code s} with an {@link Character#isUpperCase(char) upper case} first character. This
+	 * function is null-safe.
+	 * 
+	 * @param s
+	 *            the string that should get an upper case first character. May be <code>null</code>.
+	 * @return the {@link String} {@code s} with an upper case first character or <code>null</code> if the input
+	 *         {@link String} {@code s} was <code>null</code>.
+	 */
 	public static String toFirstUpper(String s) {
 		if (s == null || s.length() == 0)
 			return s;
@@ -33,6 +57,15 @@ public class StringExtensions {
 		return s.substring(0, 1).toUpperCase() + s.substring(1);
 	}
 
+	/**
+	 * Returns the {@link String} {@code s} with an {@link Character#isLowerCase(char) lower case} first character. This
+	 * function is null-safe.
+	 * 
+	 * @param s
+	 *            the string that should get an lower case first character. May be <code>null</code>.
+	 * @return the {@link String} {@code s} with an lower case first character or <code>null</code> if the input
+	 *         {@link String} {@code s} was <code>null</code>.
+	 */
 	public static String toFirstLower(String s) {
 		if (s == null || s.length() == 0)
 			return s;

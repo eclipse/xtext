@@ -12,11 +12,21 @@ import java.util.AbstractList;
 import java.util.RandomAccess;
 
 /**
+ * This is a library used to convert arrays to lists and vice versa in a way that keeps the identity of the
+ * to-be-converted object. That is, changes in the array will be reflected by the list and changes to the list will be
+ * reflected by the array for both kinds of conversion.
+ * 
+ * The utilities in this class should only be used by the Xbase compiler.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  */
 public class Conversions {
 
+	/**
+	 * Wraps {@code object} in a list if and only if {@code object} is an array. Works for primitive and
+	 * object-component types.
+	 */
 	public static Object doWrapArray(Object object) {
 		if (object == null)
 			return null;
@@ -31,7 +41,11 @@ public class Conversions {
 		}
 		return object;
 	}
-	
+
+	/**
+	 * Unwraps {@code object} to extract the original array if and only if {@code object} was previously created by
+	 * {@link #doWrapArray(Object)}.
+	 */
 	public static Object unwrapArray(Object value) {
 		//TODO if value is instanceof List return list. needs type information.
 		if (value instanceof WrappedArray<?>)
@@ -41,6 +55,9 @@ public class Conversions {
 		return value;
 	}
 
+	/**
+	 * A list that is completely backed by an array and that provides access to that array. Only for internal use.
+	 */
 	public static class WrappedArray<T> extends AbstractList<T> implements RandomAccess {
 
 		public static <T> WrappedArray<T> create(T[] array) {
@@ -83,6 +100,10 @@ public class Conversions {
 
 	}
 
+	/**
+	 * A list that is completely backed by an array of primitives and that provides access to that array. Only for
+	 * internal use.
+	 */
 	public static class WrappedPrimitiveArray extends AbstractList<Object> implements RandomAccess {
 
 		public static WrappedPrimitiveArray create(Object array) {
