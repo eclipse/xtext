@@ -29,15 +29,15 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 
 	override List<JvmDeclaredType> inferJvmModel(EObject sourceObject) {
 		sourceObject.disassociate
-		transform(sourceObject).toList
+		transform( sourceObject ).toList
 	}
 	
 	dispatch Iterable<JvmDeclaredType> transform(DomainModel model) {
-		model.elements.map(e|transform(e)).flatten
+		model.elements.map(e | transform(e)).flatten
 	}
 	 
 	dispatch Iterable<JvmDeclaredType> transform(PackageDeclaration packageDecl) {
-		packageDecl.elements.map(e|transform(e)).flatten
+		packageDecl.elements.map(e | transform(e)).flatten
 	}
 
 	dispatch Iterable<JvmDeclaredType> transform(Entity entity) {
@@ -46,19 +46,14 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 		jvmClass.packageName = entity.packageName
 		entity.associatePrimary(jvmClass)
 		jvmClass.setPublic
-		// TODO we need side-effect only closures
-		// entity.features.forEach(f|transform(f, jvmClass))
-		for(f: entity.features) 
+		for(f : entity.features) {
 			transform(f, jvmClass)
+		} 
 		newArrayList(jvmClass as JvmDeclaredType) 	 
 	}
 	
 	dispatch Iterable<JvmDeclaredType> transform(Import importDecl) {
-		return newArrayList
-	}
-	
-	dispatch Iterable<JvmDeclaredType> transform(Void nothing) {
-		return newArrayList
+		emptyList
 	}
 	
 	dispatch void transform(Property property, JvmGenericType type) {

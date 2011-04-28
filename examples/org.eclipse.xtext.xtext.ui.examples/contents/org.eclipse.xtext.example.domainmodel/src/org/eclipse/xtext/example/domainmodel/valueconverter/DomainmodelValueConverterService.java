@@ -7,31 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.example.domainmodel.valueconverter;
 
-import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
-import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
+import org.eclipse.xtext.xbase.conversion.XbaseValueConverterService;
 
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
- * @author Jan Koehnleinnitial contribution and API
+ * Adds a value conversion for the QualifiedNameWithWildCard rule.
+ * 
+ * @author Jan Koehnlein
  */
 @Singleton
-public class DomainmodelValueConverterService extends DefaultTerminalConverters {
-
-	@Inject
-	private QualifiedNameValueConverter qualifiedNameValueConverter;
-	
-	@ValueConverter(rule = "QualifiedName")
-	public IValueConverter<String> QualifiedName() {
-		return qualifiedNameValueConverter;
-	}
+public class DomainmodelValueConverterService extends XbaseValueConverterService {
 
 	@ValueConverter(rule = "QualifiedNameWithWildCard")
-	public IValueConverter<String> QualifiedNameWithWildCard() {
-		return qualifiedNameValueConverter;
+	public IValueConverter<String> getQualifiedNameWithWildCard() {
+		return getQualifiedNameValueConverter();
 	}
 	
 }
