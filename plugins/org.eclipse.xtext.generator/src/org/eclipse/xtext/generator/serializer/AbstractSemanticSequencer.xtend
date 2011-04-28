@@ -6,7 +6,7 @@ import org.eclipse.xtext.serializer.impl.GrammarConstraintProvider
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider$IConstraint
 import org.eclipse.xtext.Grammar
 import static extension org.eclipse.xtext.generator.GenModelAccess.*
-import static extension org.eclipse.xtext.generator.serializer.SemanticSequencerUtil.*
+import org.eclipse.xtext.generator.serializer.SemanticSequencerUtil.*
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.EClass
 import com.google.common.collect.Lists
@@ -19,6 +19,8 @@ class AbstractSemanticSequencer extends GeneratedFile {
 	@Inject Grammar
 	
 	@Inject extension GrammarAccess
+	
+	@Inject extension SemanticSequencerUtil
 	
 	override String getQualifiedName() {
 		getName("Abstract", "SemanticSequencer");		

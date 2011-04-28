@@ -2,15 +2,15 @@ package org.eclipse.xtext.generator.serializer
 
 import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.util.GraphvizDotBuilder
-import org.eclipse.xtext.serializer.impl.ContextUtil
+import org.eclipse.xtext.serializer.IContextProvider
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.generator.Naming
-import org.eclipse.xtext.serializer.impl.Context2NameFunction
+import org.eclipse.xtext.serializer.analysis.Context2NameFunction
 import org.eclipse.emf.ecore.EObject
 
 class Context2DotRenderer { 
 	
-	@Inject extension ContextUtil
+	@Inject extension IContextProvider
 	
 	@Inject Grammar
 	
