@@ -21,9 +21,9 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
 import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider;
+import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider.ActionFilterState;
+import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider.ActionFilterTransition;
 import org.eclipse.xtext.serializer.analysis.GrammarConstraintProvider;
-import org.eclipse.xtext.serializer.analysis.GrammarConstraintProvider.ActionFilterState;
-import org.eclipse.xtext.serializer.analysis.GrammarConstraintProvider.ActionFilterTransition;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -82,7 +82,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 
 	private String getParserRule(String body) throws Exception {
 		Grammar grammar = (Grammar) getModel(HEADER + body);
-		IGrammarConstraintProvider gcp = new GrammarConstraintProvider();
+		IGrammarConstraintProvider gcp = get(IGrammarConstraintProvider.class);
 
 		try {
 			new ActionFilter2Dot().draw(grammar, getName() + ".pdf", "-T pdf");
@@ -103,25 +103,25 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		return Join.join("\n", result);
 	}
 
-		public void testXtext() {
-			IGrammarConstraintProvider gcp = new GrammarConstraintProvider();
-			List<IConstraintContext> ctxts = gcp.getConstraints(getGrammarAccess().getGrammar());
-			try {
-				new ActionFilter2Dot().draw(getGrammarAccess().getGrammar(), getName() + ".pdf", "-T pdf");
-			} catch (IOException e) {
-				if (log.isDebugEnabled())
-					log.debug(e.getMessage(), e);
-			}
-			List<String> result = Lists.newArrayList();
-			Set<IConstraint> visited = Sets.newHashSet();
-			for (IConstraintContext ctx : ctxts) {
-				result.add(ctx.toString());
-				for (IConstraint c : ctx.getConstraints())
-					if (visited.add(c))
-						result.add("  " + c.toString());
-			}
-			System.out.println(Join.join("\n", result));
+	public void testXtext() {
+		IGrammarConstraintProvider gcp = get(IGrammarConstraintProvider.class);
+		List<IConstraintContext> ctxts = gcp.getConstraints(getGrammarAccess().getGrammar());
+		try {
+			new ActionFilter2Dot().draw(getGrammarAccess().getGrammar(), getName() + ".pdf", "-T pdf");
+		} catch (IOException e) {
+			if (log.isDebugEnabled())
+				log.debug(e.getMessage(), e);
 		}
+		List<String> result = Lists.newArrayList();
+		Set<IConstraint> visited = Sets.newHashSet();
+		for (IConstraintContext ctx : ctxts) {
+			result.add(ctx.toString());
+			for (IConstraint c : ctx.getConstraints())
+				if (visited.add(c))
+					result.add("  " + c.toString());
+		}
+		System.out.println(Join.join("\n", result));
+	}
 
 	public void testAssignedActionMandatory1() throws Exception {
 		String actual = getParserRule("Rule: Foo {Bar.left=current} '+' right=ID; Foo: val=ID;");

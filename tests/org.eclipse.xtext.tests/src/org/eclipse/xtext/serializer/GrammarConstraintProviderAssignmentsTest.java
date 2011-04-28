@@ -38,7 +38,7 @@ public class GrammarConstraintProviderAssignmentsTest extends AbstractXtextTests
 
 	private String getParserRule(String body) throws Exception {
 		Grammar grammar = (Grammar) getModel(HEADER + body);
-		IGrammarConstraintProvider gcp = new GrammarConstraintProvider();
+		IGrammarConstraintProvider gcp = get(IGrammarConstraintProvider.class);
 
 		IConstraint ctxts = gcp.getConstraints(grammar).get(0).getConstraints().get(0);
 		List<String> result = Lists.newArrayList();
