@@ -21,6 +21,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.ui.RenameElementHandler;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.ProjectAwareXtendXtext2EcorePostProcessor;
@@ -37,6 +38,7 @@ import org.eclipse.xtext.xtext.ui.editor.quickfix.XtextGrammarQuickfixProvider;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingCalculator;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
 import org.eclipse.xtext.xtext.ui.refactoring.XtextDependentElementsCalculator;
+import org.eclipse.xtext.xtext.ui.refactoring.XtextRenameElementHandler;
 import org.eclipse.xtext.xtext.ui.refactoring.XtextRenameStrategyProvider;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
 
@@ -147,4 +149,8 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 		return XtextRenameStrategyProvider.class;
 	}
 
+	@SuppressWarnings("restriction")
+	public Class<? extends RenameElementHandler> bindRenameElementHandler() {
+		return XtextRenameElementHandler.class;
+	}
 }
