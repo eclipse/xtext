@@ -83,7 +83,8 @@ public class LinkedPositionGroupCalculator implements ILinkedPositionGroupCalcul
 		final IXtextDocument document = xtextEditor.getDocument();
 		IRenameProcessorAdapter renameProcessorAdapter = renameProcessorAdapterFactory.create(renameRefactoring);
 		final String originalName = renameProcessorAdapter.getOriginalName();
-		renameProcessorAdapter.setNewName(originalName);
+		final String replaceName = originalName + "____";
+		renameProcessorAdapter.setNewName(replaceName);
 		List<ReplaceEdit> edits = computeReplaceEditsForDocument(renameRefactoring, document, progress.newChild(80));
 		if (edits == null)
 			return null;
