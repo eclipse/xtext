@@ -66,6 +66,10 @@ public class LinkedEditingRefactoringIntegrationTest extends AbstractEditorTest 
 		addNature(javaProject.getProject(), XtextProjectHelper.NATURE_ID);
 		Activator.getInstance().getInjector(getEditorId()).injectMembers(this);
 	}
+	
+	public void testTwice() throws Exception {
+		testRefactorEcoreCrossLanguage();
+	}
 
 	public void testRefactorEcoreCrossLanguage() throws Exception {
 		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
@@ -87,6 +91,7 @@ public class LinkedEditingRefactoringIntegrationTest extends AbstractEditorTest 
 		final XtextEditor editor = openEditor(file);
 		final TextSelection selection = new TextSelection(model.indexOf(TEST_CLASS), TEST_CLASS.length());
 		editor.getSelectionProvider().setSelection(selection);
+		waitForDisplay();
 		IRenameElementContext context = editor.getDocument().readOnly(new IUnitOfWork<IRenameElementContext, XtextResource>() {
 			public IRenameElementContext exec(XtextResource state) throws Exception {
 				Reference ref = (Reference) state.getContents().get(0).eContents().get(0);

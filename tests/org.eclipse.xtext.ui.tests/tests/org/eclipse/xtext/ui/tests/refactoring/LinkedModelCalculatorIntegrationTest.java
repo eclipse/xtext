@@ -18,14 +18,12 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.text.link.LinkedPosition;
 import org.eclipse.jface.text.link.LinkedPositionGroup;
-import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
 import org.eclipse.xtext.ui.refactoring.ILinkedPositionGroupCalculator;
-import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
@@ -50,9 +48,6 @@ public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 	private ILinkedPositionGroupCalculator linkedModelCalculator;
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
-	
-	@Inject 
-	private IRenameRefactoringProvider renameRefactoringProvider;
 	
 	@Override
 	protected String getEditorId() {

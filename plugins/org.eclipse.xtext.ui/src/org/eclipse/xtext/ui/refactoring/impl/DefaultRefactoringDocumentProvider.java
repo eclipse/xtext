@@ -174,6 +174,7 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 		@Override
 		public Change createChange(String name, TextEdit textEdit) {
 			TextFileChange textFileChange = new TextFileChange(name, file);
+			textFileChange.setSaveMode(TextFileChange.FORCE_SAVE);
 			textFileChange.setEdit(textEdit);
 			return textFileChange;
 		}

@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.refactoring.ui;
 import java.lang.reflect.InvocationTargetException;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
@@ -36,11 +37,17 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.xtext.ui.refactoring.impl.Messages;
 
+import com.google.inject.Inject;
+
 /**
  * @author Holger Schill - Initial contribution and API
  * @author Jan Koehnlein
  */
 public class RenameRefactoringExecuter {
+	
+	@Inject
+	private IWorkspace workspace;
+	
 	private static final Logger LOG = Logger.getLogger(RenameRefactoringExecuter.class);
 
 	protected boolean isApplicable(Shell parent, ProcessorBasedRefactoring refactoring) {
@@ -63,7 +70,7 @@ public class RenameRefactoringExecuter {
 		if (!isApplicable(shell, refactoring))
 			return;
 		final IJobManager manager = Job.getJobManager();
-		final ISchedulingRule rule = ResourcesPlugin.getWorkspace().getRoot();
+		final ISchedulingRule rule = workspace.getRoot();
 		try {
 			try {
 				Runnable r = new Runnable() {
