@@ -45,7 +45,9 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 		jvmClass.simpleName = entity.name
 		jvmClass.packageName = entity.packageName
 		entity.associatePrimary(jvmClass)
-		jvmClass.setPublic
+		jvmClass.makePublic
+		if (entity.superType != null)
+			jvmClass.superTypes += cloneWithProxies(entity.superType)
 		for(f : entity.features) {
 			transform(f, jvmClass)
 		} 
@@ -60,14 +62,14 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 		val jvmField = typesFactory.createJvmField
 		jvmField.simpleName = property.name
 		jvmField.type = cloneWithProxies(property.type)
-		jvmField.setPrivate
+		jvmField.makePrivate
 		type.members += jvmField
 		property.associatePrimary(jvmField)
 		
 		val jvmGetter = typesFactory.createJvmOperation
 		jvmGetter.simpleName = "get" + property.name.toFirstUpper
 		jvmGetter.returnType = cloneWithProxies(property.type)
-		jvmGetter.setPublic
+		jvmGetter.makePublic
 		type.members += jvmGetter
 		property.associatePrimary(jvmGetter)
 		
@@ -76,7 +78,7 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 		val parameter = typesFactory.createJvmFormalParameter
 		parameter.name = property.name.toFirstUpper
 		parameter.parameterType = cloneWithProxies(property.type)
-		jvmSetter.setPublic
+		jvmSetter.makePublic
 		jvmSetter.parameters += parameter
 		type.members += jvmSetter
 		property.associatePrimary(jvmSetter)
@@ -87,7 +89,7 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 		jvmOperation.simpleName = operation.name
 		jvmOperation.returnType = cloneWithProxies(operation.type)
 		jvmOperation.parameters.addAll(operation.params.map(p|cloneWithProxies(p))) 
-		jvmOperation.setPublic
+		jvmOperation.makePublic
 		type.members += jvmOperation
 		operation.associatePrimary(jvmOperation)
 	}
