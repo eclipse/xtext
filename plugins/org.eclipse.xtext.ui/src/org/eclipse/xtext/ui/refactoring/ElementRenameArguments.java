@@ -32,12 +32,6 @@ public class ElementRenameArguments {
 		this.targetElementURI = targetElementURI;
 		this.renameStrategy = renameStrategy;
 		this.original2newElementURIs = original2newElementURIs;
-		this.contextResourceURI = contextResourceURI;
-	}
-
-	public ElementRenameArguments(URI targetElementURI, String newName, IRenameStrategy renameStrategy,
-			Map<URI, URI> original2newElementURIs, boolean updateReferences) {
-		this(targetElementURI, newName, renameStrategy, original2newElementURIs, null);
 	}
 
 	public Iterable<URI> getRenamedElementURIs() {
@@ -46,10 +40,6 @@ public class ElementRenameArguments {
 
 	public URI getTargetElementURI() {
 		return targetElementURI;
-	}
-
-	public URI getContextResourceURI() {
-		return contextResourceURI;
 	}
 
 	public URI getNewElementURI(URI originalElementURI) {

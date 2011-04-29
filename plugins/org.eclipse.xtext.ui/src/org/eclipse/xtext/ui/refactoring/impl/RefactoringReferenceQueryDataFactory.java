@@ -9,7 +9,6 @@ package org.eclipse.xtext.ui.refactoring.impl;
 
 import static com.google.common.collect.Sets.*;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
 import org.eclipse.xtext.ui.editor.findrefs.ReferenceQueryData;
@@ -23,11 +22,8 @@ import com.google.common.base.Predicate;
 public class RefactoringReferenceQueryDataFactory {
 
 	public IReferenceFinder.IQueryData create(ElementRenameArguments args) {
-		URI contextResourceURI = args.getContextResourceURI();
-		if(contextResourceURI == null) 
-			contextResourceURI = args.getTargetElementURI().trimFragment();
 		return new ReferenceQueryData(args.getTargetElementURI(),
-				newLinkedHashSet(args.getRenamedElementURIs()), contextResourceURI, createFilter(args), "");
+				newLinkedHashSet(args.getRenamedElementURIs()), args.getTargetElementURI().trimFragment(), createFilter(args), "");
 	}
 
 	protected Predicate<IReferenceDescription> createFilter(ElementRenameArguments args) {
