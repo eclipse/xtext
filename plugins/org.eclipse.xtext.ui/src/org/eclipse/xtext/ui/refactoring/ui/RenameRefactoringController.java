@@ -125,8 +125,7 @@ public class RenameRefactoringController {
 			}
 		}
 		activeLinkedMode = renameLinkedModeProvider.get();
-		// refactorings should not be reused, so the linked mode uses its own instance 
-		activeLinkedMode.start(renameElementContext, declaringLanguage.createRenameRefactoring(renameElementContext));
+		activeLinkedMode.start(renameElementContext);
 	}
 
 	protected void startDirectRefactoring() {

@@ -22,7 +22,6 @@ import org.eclipse.jface.text.link.LinkedModeUI.IExitPolicy;
 import org.eclipse.jface.text.link.LinkedPosition;
 import org.eclipse.jface.text.link.LinkedPositionGroup;
 import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.graphics.Point;
@@ -61,11 +60,10 @@ public class RenameLinkedMode {
 
 	private boolean isActive = false; 
 
-	public void start(IRenameElementContext renameElementContext, ProcessorBasedRefactoring renameRefactoring) {
-		if (renameRefactoring == null || renameElementContext == null)
+	public void start(IRenameElementContext renameElementContext) {
+		if (renameElementContext == null)
 			return;
-		this.linkedPositionGroup = linkedPositionGroupCalculator.getLinkedPositionGroup(renameElementContext,
-				renameRefactoring);
+		this.linkedPositionGroup = linkedPositionGroupCalculator.getLinkedPositionGroup(renameElementContext);
 		if (linkedPositionGroup == null)
 			return;
 		this.editor = (XtextEditor) renameElementContext.getTriggeringEditor();
