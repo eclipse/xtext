@@ -182,7 +182,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 			renameStrategy.createDeclarationUpdates(newName, resourceSet, updateAcceptor);
 
 			renameArguments = new ElementRenameArguments(targetElementURI, newName, renameStrategy,
-					original2newElementURIs, true);
+					original2newElementURIs, renameElementContext.getContextResourceURI());
 			referenceUpdaterDispatcher.createReferenceUpdates(renameArguments, resourceSet, updateAcceptor,
 					progress.newChild(98));
 			status.merge(updateAcceptor.getRefactoringStatus());
