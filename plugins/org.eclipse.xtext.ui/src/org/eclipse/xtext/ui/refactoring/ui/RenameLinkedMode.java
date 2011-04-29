@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.refactoring.ui;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
@@ -57,10 +58,10 @@ public class RenameLinkedMode {
 
 	public void start(IRenameElementContext renameElementContext) {
 		if (renameElementContext == null)
-			return;
+			throw new IllegalArgumentException("RenameElementContext is null");
 		this.linkedPositionGroup = linkedPositionGroupCalculator.getLinkedPositionGroup(renameElementContext);
-		if (linkedPositionGroup == null)
-			return;
+		if (linkedPositionGroup == null || linkedPositionGroup.isEmpty())
+			throw new IllegalStateException("Calculation of linked editing positions failed");
 		this.editor = (XtextEditor) renameElementContext.getTriggeringEditor();
 		this.focusEditingSupport = new FocusEditingSupport();
 		ISourceViewer viewer = editor.getInternalSourceViewer();
@@ -73,7 +74,7 @@ public class RenameLinkedMode {
 			}
 		}
 		if (currentPosition == null) {
-			return;
+			throw new IllegalStateException("Current selection is not within any linked editing position");
 		}
 
 		try {
@@ -91,7 +92,7 @@ public class RenameLinkedMode {
 			}
 			openPopup();
 		} catch (BadLocationException e) {
-			LOG.error(e.getMessage(), e);
+			throw new WrappedException(e);
 		}
 	}
 
@@ -132,7 +133,8 @@ public class RenameLinkedMode {
 	}
 
 	/**
-	 * PopUp gets closed and the focus goes back to the editor
+	 * PopUp gets closed and the focus goes back to the editor. Linked mode stays active and can be reenabled, i.e. by
+	 * putting the caret back into a linked editing position.
 	 */
 	public void linkedModeLeft() {
 		if (linkedModeModel != null) {
@@ -150,7 +152,6 @@ public class RenameLinkedMode {
 	}
 
 	protected class EditorSynchronizer implements ILinkedModeListener {
-
 		public void left(LinkedModeModel model, int flags) {
 			boolean isValidNewName = updateNewName();
 			if ((flags & ILinkedModeListener.UPDATE_CARET) != 0 && isValidNewName) {
@@ -168,7 +169,6 @@ public class RenameLinkedMode {
 
 		public void resume(LinkedModeModel model, int flags) {
 		}
-
 	}
 
 	protected class FocusEditingSupport implements IEditingSupport {
@@ -220,5 +220,4 @@ public class RenameLinkedMode {
 			return null; // don't change behavior
 		}
 	}
-
 }

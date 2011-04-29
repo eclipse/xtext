@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.refactoring.ui;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
@@ -75,9 +76,9 @@ public class RenameRefactoringController {
 		try {
 			declaringLanguage = globalServiceProvider.findService(renameElementContext.getTargetElementURI(),
 					DeclaringLanguageComponentFactory.class);
-		} catch (Throwable t) {
-			LOG.error("Error getting refactoring components from declaring language", t);
-			return;
+		} catch (Exception e) {
+			LOG.error("Error getting refactoring components from declaring language", e);
+			throw new WrappedException(e);
 		}
 		this.renameElementContext = renameElementContext;
 		renameRefactoring = declaringLanguage.createRenameRefactoring(renameElementContext);
@@ -95,6 +96,7 @@ public class RenameRefactoringController {
 			// Cancel undoable right now because the freezer would show the old
 			// state and not the new one
 			undoSupport.undoDocumentChanges();
+			undoSupport = null;
 			cancelLinkedMode();
 			switch (refactoringType) {
 				case REFACTORING_DIRECT:
@@ -109,6 +111,9 @@ public class RenameRefactoringController {
 				default:
 					throw new IllegalStateException("Invalid refactoring type " + refactoringType.toString());
 			}
+		} catch (InterruptedException exc) {
+			// canceling by the user is ok
+			restoreOriginalSelection();
 		} finally {
 			freezer.release();
 		}
@@ -142,40 +147,29 @@ public class RenameRefactoringController {
 		}
 	}
 
-	protected void startDirectRefactoring() {
+	protected void startDirectRefactoring() throws InterruptedException {
 		if (renameProcessorAdapter.getNewName() == null) {
 			restoreOriginalSelection();
 		} else {
 			RenameRefactoringExecuter renameRefactoringExecuter = declaringLanguage.createRenameRefactoringExecuter();
-			try {
-				renameRefactoringExecuter.execute(getXtextEditor(), renameRefactoring);
-			} catch (Exception e) {
-				// User canceled operation
-				LOG.error(e.getMessage(), e);
-				restoreOriginalSelection();
-			}
+			renameRefactoringExecuter.execute(getXtextEditor(), renameRefactoring);
 		}
 	}
 
-	protected void startRefactoringWithDialog(final boolean previewOnly) {
-		try {
-			RenameElementWizard renameElementWizard = new RenameElementWizard(renameRefactoring, renameProcessorAdapter) {
-				@Override
-				protected void addUserInputPages() {
-					if (!previewOnly) {
-						super.addUserInputPages();
-					}
+	protected void startRefactoringWithDialog(final boolean previewOnly) throws InterruptedException {
+		RenameElementWizard renameElementWizard = new RenameElementWizard(renameRefactoring, renameProcessorAdapter) {
+			@Override
+			protected void addUserInputPages() {
+				if (!previewOnly) {
+					super.addUserInputPages();
 				}
-			};
-			if (previewOnly) {
-				renameElementWizard.setForcePreviewReview(true);
 			}
-			RefactoringWizardOpenOperation openOperation = new RefactoringWizardOpenOperation(renameElementWizard);
-			openOperation.run(renameElementContext.getTriggeringEditor().getSite().getShell(), "Rename Element");
-		} catch (InterruptedException e) {
-			// canceling by the user is ok
-			restoreOriginalSelection();
+		};
+		if (previewOnly) {
+			renameElementWizard.setForcePreviewReview(true);
 		}
+		RefactoringWizardOpenOperation openOperation = new RefactoringWizardOpenOperation(renameElementWizard);
+		openOperation.run(renameElementContext.getTriggeringEditor().getSite().getShell(), "Rename Element");
 	}
 
 	protected void restoreOriginalSelection() {
