@@ -41,7 +41,7 @@ public class ActionFilterNFAProvider extends AbstractNFAProvider<ActionFilterSta
 		}
 	}
 
-	public static class DefaultBackwardsNFABuilder extends
+	public static class ActionFilterNFABuilder extends
 			AbstractCachingNFABuilder<ActionFilterState, ActionFilterTransition> {
 
 		@Override
@@ -93,7 +93,7 @@ public class ActionFilterNFAProvider extends AbstractNFAProvider<ActionFilterSta
 
 	@Override
 	protected NFABuilder<ActionFilterState, ActionFilterTransition> createBuilder() {
-		return new DefaultBackwardsNFABuilder();
+		return new ActionFilterNFABuilder();
 	}
 
 }

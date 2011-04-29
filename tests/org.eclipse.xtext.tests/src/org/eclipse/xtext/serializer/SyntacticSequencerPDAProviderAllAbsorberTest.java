@@ -127,14 +127,14 @@ public class SyntacticSequencerPDAProviderAllAbsorberTest extends AbstractSyntac
 		grammar.append("Sub: val=ID;\n");
 		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
-		expected.append("Model:\n");
+		expected.append("Sub_Model:\n");
 		expected.append("  <<Sub stop\n");
 		expected.append("  >>Sub val=ID\n");
 		expected.append("  start >>Sub\n");
 		expected.append("  start >>Sub val=ID\n");
 		expected.append("  val=ID <<Sub\n");
 		expected.append("  val=ID <<Sub stop\n");
-		expected.append("Sub:\n");
+		expected.append("Sub_Sub:\n");
 		expected.append("  start val=ID\n");
 		expected.append("  val=ID stop");
 		assertEquals(expected.toString(), actual);
@@ -146,7 +146,7 @@ public class SyntacticSequencerPDAProviderAllAbsorberTest extends AbstractSyntac
 		grammar.append("Sub: 'kw2' val=ID 'kw3';\n");
 		String actual = getParserRule(grammar.toString());
 		StringBuilder expected = new StringBuilder();
-		expected.append("Model:\n");
+		expected.append("Sub_Model:\n");
 		expected.append("  'kw1' >>Sub\n");
 		expected.append("  'kw1' >>Sub 'kw2'\n");
 		expected.append("  'kw1' >>Sub 'kw2' val=ID\n");
@@ -167,7 +167,7 @@ public class SyntacticSequencerPDAProviderAllAbsorberTest extends AbstractSyntac
 		expected.append("  val=ID 'kw3' <<Sub\n");
 		expected.append("  val=ID 'kw3' <<Sub 'kw4'\n");
 		expected.append("  val=ID 'kw3' <<Sub 'kw4' stop\n");
-		expected.append("Sub:\n");
+		expected.append("Sub_Sub:\n");
 		expected.append("  'kw2' val=ID\n");
 		expected.append("  'kw3' stop\n");
 		expected.append("  start 'kw2'\n");
