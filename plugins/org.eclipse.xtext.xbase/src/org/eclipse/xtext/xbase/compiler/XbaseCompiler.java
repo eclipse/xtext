@@ -355,7 +355,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 		// declare local var for the switch expression
 		String name = getNameProvider().getSimpleName(expr);
-		if (name == null) {
+		if (name!=null) { 
+			name = makeJavaIdentifier(name);
+		} else {
 			// define synthetic name
 			name = "__valOfSwitchOver";
 		}
