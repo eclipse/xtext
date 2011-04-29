@@ -29,10 +29,12 @@ import org.eclipse.ltk.core.refactoring.RefactoringTickProvider;
 import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.refactoring.ILinkedPositionGroupCalculator;
 import org.eclipse.xtext.ui.refactoring.IRenameProcessorAdapter;
+import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
@@ -55,11 +57,20 @@ public class LinkedPositionGroupCalculator implements ILinkedPositionGroupCalcul
 	@Inject
 	private IRenameProcessorAdapter.Factory renameProcessorAdapterFactory;
 
+	@Inject
+	private IGlobalServiceProvider globalServiceProvider;
+
 	private Logger log = Logger.getLogger(LinkedPositionGroupCalculator.class);
 
-	public LinkedPositionGroup getLinkedPositionGroup(final IRenameElementContext renameElementContext,
-			final ProcessorBasedRefactoring renameRefactoring) {
+	protected ProcessorBasedRefactoring createRenameRefactoring(IRenameElementContext renameElementContext) {
+		IRenameRefactoringProvider renameRefactoringProvider = globalServiceProvider.findService(
+				renameElementContext.getTargetElementURI(), IRenameRefactoringProvider.class);
+		return renameRefactoringProvider.getRenameRefactoring(renameElementContext);
+	}
+
+	public LinkedPositionGroup getLinkedPositionGroup(final IRenameElementContext renameElementContext) {
 		try {
+			final ProcessorBasedRefactoring renameRefactoring = createRenameRefactoring(renameElementContext);
 			final LinkedPositionGroup[] result = new LinkedPositionGroup[1];
 			workbench.getActiveWorkbenchWindow().run(false, true, new IRunnableWithProgress() {
 				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
@@ -83,8 +94,7 @@ public class LinkedPositionGroupCalculator implements ILinkedPositionGroupCalcul
 		final IXtextDocument document = xtextEditor.getDocument();
 		IRenameProcessorAdapter renameProcessorAdapter = renameProcessorAdapterFactory.create(renameRefactoring);
 		final String originalName = renameProcessorAdapter.getOriginalName();
-		final String replaceName = originalName + "____";
-		renameProcessorAdapter.setNewName(replaceName);
+		renameProcessorAdapter.setNewName(getDummyNewName(originalName));
 		List<ReplaceEdit> edits = computeReplaceEditsForDocument(renameRefactoring, document, progress.newChild(80));
 		if (edits == null)
 			return null;
@@ -121,6 +131,13 @@ public class LinkedPositionGroupCalculator implements ILinkedPositionGroupCalcul
 		return group;
 	}
 
+	/**
+	 * JDT refactorings don't allow to rename to the original name.  
+	 */
+	protected String getDummyNewName(final String originalName) {
+		return originalName + "______";
+	}
+
 	protected Iterable<LinkedPosition> sortPositions(Iterable<LinkedPosition> linkedPositions,
 			final int invocationOffset) {
 		Comparator<LinkedPosition> comparator = new Comparator<LinkedPosition>() {
@@ -140,8 +157,8 @@ public class LinkedPositionGroupCalculator implements ILinkedPositionGroupCalcul
 		return ImmutableSortedSet.copyOf(comparator, linkedPositions);
 	}
 
-	protected List<ReplaceEdit> computeReplaceEditsForDocument(ProcessorBasedRefactoring renameRefactoring, IDocument document,
-			IProgressMonitor monitor) {
+	protected List<ReplaceEdit> computeReplaceEditsForDocument(ProcessorBasedRefactoring renameRefactoring,
+			IDocument document, IProgressMonitor monitor) {
 		try {
 			RefactoringTickProvider ticks = renameRefactoring.getRefactoringTickProvider();
 			SubMonitor subMonitor = SubMonitor.convert(monitor, ticks.getAllTicks());

@@ -85,8 +85,7 @@ public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 		URI uri = EcoreUtil.getURI(a);
 		selectElementInEditor(a, uri, editor, (XtextResource) a.eResource());
 		IRenameElementContext renameElementContext = new IRenameElementContext.Impl(uri, a.eClass(), editor, editor.getSelectionProvider().getSelection(),uriToFile1);
-		ProcessorBasedRefactoring renameRefactoring = renameRefactoringProvider.getRenameRefactoring(renameElementContext);
-		LinkedPositionGroup linkedPositionGroup = linkedModelCalculator.getLinkedPositionGroup(renameElementContext, renameRefactoring);
+		LinkedPositionGroup linkedPositionGroup = linkedModelCalculator.getLinkedPositionGroup(renameElementContext);
 		LinkedPosition[] positions = linkedPositionGroup.getPositions();
 		assertEquals(3, positions.length);
 		int[] offsets = {0,10,24};
@@ -113,8 +112,7 @@ public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 		URI uri = EcoreUtil.getURI(a);
 		selectElementInEditor(a, uri, editor, (XtextResource) a.eResource());
 		IRenameElementContext renameElementContext = new IRenameElementContext.Impl(uri, a.eClass(), editor, editor.getSelectionProvider().getSelection(),uriToFile2);
-		ProcessorBasedRefactoring renameRefactoring = renameRefactoringProvider.getRenameRefactoring(renameElementContext);
-		LinkedPositionGroup linkedPositionGroup = linkedModelCalculator.getLinkedPositionGroup(renameElementContext, renameRefactoring);
+		LinkedPositionGroup linkedPositionGroup = linkedModelCalculator.getLinkedPositionGroup(renameElementContext);
 		LinkedPosition[] positions = linkedPositionGroup.getPositions();
 		assertEquals(2, positions.length);
 		

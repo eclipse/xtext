@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ui.refactoring;
 
 import org.eclipse.jface.text.link.LinkedPositionGroup;
-import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.ui.refactoring.ui.LinkedPositionGroupCalculator;
 
@@ -21,6 +20,6 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(LinkedPositionGroupCalculator.class)
 public interface ILinkedPositionGroupCalculator {
 
-	public LinkedPositionGroup getLinkedPositionGroup(IRenameElementContext renameElementContext, ProcessorBasedRefactoring renameRefactoring);
+	public LinkedPositionGroup getLinkedPositionGroup(IRenameElementContext renameElementContext);
 	
 }
