@@ -37,7 +37,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein
  */
 public class RenameLinkedMode {
-	
+
 	private static final Logger LOG = Logger.getLogger(RenameLinkedMode.class);
 
 	@Inject
@@ -46,9 +46,6 @@ public class RenameLinkedMode {
 	@Inject
 	private RenameRefactoringController controller;
 
-	@Inject 
-	private LinkedEditingUndoSupport undoSupport;
-	
 	private XtextEditor editor;
 	private RenameRefactoringPopup popup;
 	private FocusEditingSupport focusEditingSupport;
@@ -57,8 +54,6 @@ public class RenameLinkedMode {
 	private LinkedModeModel linkedModeModel;
 	private LinkedPositionGroup linkedPositionGroup;
 	private LinkedPosition currentPosition;
-
-	private boolean isActive = false; 
 
 	public void start(IRenameElementContext renameElementContext) {
 		if (renameElementContext == null)
@@ -86,7 +81,6 @@ public class RenameLinkedMode {
 			linkedModeModel.addGroup(linkedPositionGroup);
 			linkedModeModel.forceInstall();
 			linkedModeModel.addLinkingListener(new EditorSynchronizer());
-			undoSupport.initialize(editor);
 			LinkedModeUI ui = new EditorLinkedModeUI(linkedModeModel, viewer);
 			ui.setExitPosition(viewer, currentPosition.getOffset(), 0, Integer.MAX_VALUE);
 			ui.setExitPolicy(new ExitPolicy(document));
@@ -96,14 +90,13 @@ public class RenameLinkedMode {
 				registry.register(focusEditingSupport);
 			}
 			openPopup();
-			isActive = true;
 		} catch (BadLocationException e) {
 			LOG.error(e.getMessage(), e);
 		}
 	}
 
 	protected void openPopup() {
-		popup = new RenameRefactoringPopup(editor, this, controller, updateNewName());
+		popup = new RenameRefactoringPopup(editor, controller, updateNewName());
 		popup.open();
 	}
 
@@ -120,7 +113,7 @@ public class RenameLinkedMode {
 	public boolean isSameRenameElementContext(IRenameElementContext renameElementContext) {
 		return renameElementContext.getTriggeringEditor() == editor && isCaretInLinkedPosition();
 	}
-	
+
 	protected boolean isCaretInLinkedPosition() {
 		return getCurrentLinkedPosition() != null;
 	}
@@ -138,17 +131,13 @@ public class RenameLinkedMode {
 		return null;
 	}
 
-	public void cancel() {
-		if(isActive) {
-			if (linkedModeModel != null) {
-				linkedModeModel.exit(ILinkedModeListener.NONE);
-			}
-			linkedModeLeft();
-			undoSupport.undoDocumentChanges();
+	/**
+	 * PopUp gets closed and the focus goes back to the editor
+	 */
+	public void linkedModeLeft() {
+		if (linkedModeModel != null) {
+			linkedModeModel.exit(ILinkedModeListener.NONE);
 		}
-	}
-	
-	protected void linkedModeLeft() {
 		if (popup != null) {
 			popup.close();
 		}
@@ -164,14 +153,13 @@ public class RenameLinkedMode {
 
 		public void left(LinkedModeModel model, int flags) {
 			boolean isValidNewName = updateNewName();
-			linkedModeLeft();
-			if ((flags & ILinkedModeListener.UPDATE_CARET) != 0) {
-				if (isValidNewName) {
-					if (showPreview)
-						controller.startRefactoring(RefactoringType.REFACTORING_PREVIEW);
-					else
-						controller.startRefactoring(RefactoringType.REFACTORING_DIRECT);
-				}
+			if ((flags & ILinkedModeListener.UPDATE_CARET) != 0 && isValidNewName) {
+				if (showPreview)
+					controller.startRefactoring(RefactoringType.REFACTORING_PREVIEW);
+				else
+					controller.startRefactoring(RefactoringType.REFACTORING_DIRECT);
+			} else {
+				controller.cancelLinkedMode();
 			}
 		}
 
@@ -232,5 +220,5 @@ public class RenameLinkedMode {
 			return null; // don't change behavior
 		}
 	}
-	
+
 }

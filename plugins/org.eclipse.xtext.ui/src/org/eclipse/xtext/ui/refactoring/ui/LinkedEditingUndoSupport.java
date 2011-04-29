@@ -33,7 +33,7 @@ public class LinkedEditingUndoSupport {
 	
 	private XtextEditor editor;
 
-	public void initialize(XtextEditor editor) {
+	public LinkedEditingUndoSupport(XtextEditor editor) {
 		this.editor = editor;
 		ISourceViewer viewer = editor.getInternalSourceViewer();
 		if (viewer instanceof ITextViewerExtension6) {

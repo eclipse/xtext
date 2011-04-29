@@ -115,11 +115,11 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 
 
 
-	public RenameRefactoringPopup(XtextEditor editor, RenameLinkedMode renameLinkedMode, RenameRefactoringController controller, boolean isValid) {
+	public RenameRefactoringPopup(XtextEditor editor, RenameRefactoringController controller, boolean isValid) {
 		this.editor = editor;
-		this.renameLinkedMode = renameLinkedMode;
 		this.controller = controller;
 		this.isValid = isValid;
+		this.renameLinkedMode = controller.getActiveLinkedMode();
 	}
 
 	private void updateVisibility() {
@@ -188,7 +188,7 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 					public void run() {
 						Shell activeShell = display.getActiveShell();
 						if (activeShell != editorShell) {
-							renameLinkedMode.cancel();
+							controller.cancelLinkedMode();
 						}
 					}
 				});
@@ -479,7 +479,6 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 						menuManager.dispose();
 						menuManager = null;
 					}
-					renameLinkedMode.cancel();
 				}
 			});
 		}

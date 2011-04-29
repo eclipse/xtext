@@ -69,6 +69,8 @@ public class RenameRefactoringController {
 	private ProcessorBasedRefactoring renameRefactoring;
 	private IRenameProcessorAdapter renameProcessorAdapter;
 
+	private LinkedEditingUndoSupport undoSupport;
+
 	public void initialize(IRenameElementContext renameElementContext) {
 		try {
 			declaringLanguage = globalServiceProvider.findService(renameElementContext.getTargetElementURI(),
@@ -81,9 +83,9 @@ public class RenameRefactoringController {
 		renameRefactoring = declaringLanguage.createRenameRefactoring(renameElementContext);
 		renameProcessorAdapter = renameProcessorAdapterFactory.create(renameRefactoring);
 	}
-	
+
 	public void startRefactoring(RefactoringType refactoringType) {
-		if(refactoringType == RefactoringType.LINKED_EDITING) {
+		if (refactoringType == RefactoringType.LINKED_EDITING) {
 			startLinkedEditing();
 			return;
 		}
@@ -92,10 +94,8 @@ public class RenameRefactoringController {
 			freezer.freeze();
 			// Cancel undoable right now because the freezer would show the old
 			// state and not the new one
-			if(activeLinkedMode != null) {
-				activeLinkedMode.cancel();
-				activeLinkedMode = null;
-			}
+			undoSupport.undoDocumentChanges();
+			cancelLinkedMode();
 			switch (refactoringType) {
 				case REFACTORING_DIRECT:
 					startDirectRefactoring();
@@ -106,7 +106,7 @@ public class RenameRefactoringController {
 				case REFACTORING_PREVIEW:
 					startRefactoringWithDialog(true);
 					break;
-				default: 
+				default:
 					throw new IllegalStateException("Invalid refactoring type " + refactoringType.toString());
 			}
 		} finally {
@@ -120,12 +120,26 @@ public class RenameRefactoringController {
 				startRefactoring(RefactoringType.REFACTORING_DIALOG);
 				return;
 			} else {
-				activeLinkedMode.cancel();
-				activeLinkedMode = null;
+				cancelLinkedMode();
 			}
 		}
 		activeLinkedMode = renameLinkedModeProvider.get();
 		activeLinkedMode.start(renameElementContext);
+		undoSupport = new LinkedEditingUndoSupport(getXtextEditor());
+	}
+
+	public RenameLinkedMode getActiveLinkedMode() {
+		return activeLinkedMode;
+	}
+
+	/**
+	 * Linked mode is unrecoverable canceled.
+	 */
+	public void cancelLinkedMode() {
+		if (activeLinkedMode != null) {
+			activeLinkedMode.linkedModeLeft();
+			activeLinkedMode = null;
+		}
 	}
 
 	protected void startDirectRefactoring() {
@@ -167,8 +181,8 @@ public class RenameRefactoringController {
 	protected void restoreOriginalSelection() {
 		ISelection originalSelection = renameElementContext.getTriggeringEditorSelection();
 		if (originalSelection instanceof ITextSelection) {
-			getXtextEditor().getInternalSourceViewer().setSelectedRange(((ITextSelection) originalSelection).getOffset(),
-					((ITextSelection) originalSelection).getLength());
+			getXtextEditor().getInternalSourceViewer().setSelectedRange(
+					((ITextSelection) originalSelection).getOffset(), ((ITextSelection) originalSelection).getLength());
 		}
 	}
 
