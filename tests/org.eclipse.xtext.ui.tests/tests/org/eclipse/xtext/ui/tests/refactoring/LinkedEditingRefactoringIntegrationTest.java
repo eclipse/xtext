@@ -84,10 +84,10 @@ public class LinkedEditingRefactoringIntegrationTest extends AbstractEditorTest 
 		ecoreResource.save(null);
 		ecoreResource.unload();
 		project.refreshLocal(IResource.DEPTH_INFINITE, null);
-		waitForAutoBuild();
 		
 		String model = "ref test." + TEST_CLASS;
 		IFile file = createFile(TEST_PROJECT + "/ref.referringtestlanguage", model);
+		waitForAutoBuild();
 		final XtextEditor editor = openEditor(file);
 		final TextSelection selection = new TextSelection(model.indexOf(TEST_CLASS), TEST_CLASS.length());
 		editor.getSelectionProvider().setSelection(selection);
