@@ -262,14 +262,14 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 		@Override
 		public int hashCode() {
-			return type.hashCode() + (body == null ? 0 : (7 * body.hashCode()));
+			return (type == null ? 0 : type.hashCode()) + (body == null ? 0 : (7 * body.hashCode()));
 		}
 
 		protected void initLists() {
 			List<IConstraintElement> ele = Lists.newArrayList();
 			List<IConstraintElement> ass = Lists.newArrayList();
 			@SuppressWarnings("unchecked")
-			List<IConstraintElement>[] feat = new List[getType().getFeatureCount()];
+			List<IConstraintElement>[] feat = new List[getType() == null ? 0 : getType().getFeatureCount()];
 			if (body != null)
 				collectElements(body, ele, ass, feat);
 			elements = ele.toArray(new IConstraintElement[ele.size()]);
@@ -1194,9 +1194,10 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 	protected String findBestConstraintName(Collection<IConstraint> equalConstraints) {
 		// strategy 1: if there is a parser rule context, use it for a name
 		for (IConstraint c : equalConstraints)
-			if (((Constraint) c).getMostSpecificContext() instanceof ParserRule)
-				return context2Name.getContextName((ParserRule) ((Constraint) c).getMostSpecificContext()) + "_"
-						+ c.getType().getName();
+			if (((Constraint) c).getMostSpecificContext() instanceof ParserRule) {
+				String type = c.getType() != null ? c.getType().getName() : "null";
+				return context2Name.getContextName((ParserRule) ((Constraint) c).getMostSpecificContext()) + "_" + type;
+			}
 
 		// strategy 2: use the names of all actions
 		List<String> actions = Lists.newArrayList();
