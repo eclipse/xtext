@@ -17,16 +17,16 @@ import org.eclipse.xtext.common.types.JvmVisibility;
  */
 public class JvmVisibilityExtension {
 
-	public void setPublic(JvmMember member) {
+	public void makePublic(JvmMember member) {
 		member.setVisibility(JvmVisibility.PUBLIC);
 	}
-	public void setProtected(JvmMember member) {
+	public void makeProtected(JvmMember member) {
 		member.setVisibility(JvmVisibility.PROTECTED);
 	}
-	public void setPrivate(JvmMember member) {
+	public void makePrivate(JvmMember member) {
 		member.setVisibility(JvmVisibility.PRIVATE);
 	}
-	public void setPackagePrivte(JvmMember member) {
+	public void makePackagePrivte(JvmMember member) {
 		member.setVisibility(JvmVisibility.DEFAULT);
 	}
 }
