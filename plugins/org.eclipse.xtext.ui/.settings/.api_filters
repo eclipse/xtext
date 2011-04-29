@@ -14,4 +14,31 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/findrefs/DefaultReferenceFinder.java" type="org.eclipse.xtext.ui.editor.findrefs.DefaultReferenceFinder">
+        <filter comment="Multiple targets and one local resource do not make sense" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.findrefs.DefaultReferenceFinder"/>
+                <message_argument value="findLocalReferences(Resource, Set&lt;EObject&gt;, IAcceptor&lt;IReferenceDescription&gt;, Predicate&lt;IReferenceDescription&gt;, IProgressMonitor)"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Multiple targets and one local resource do not make sense" id="1143996420">
+            <message_arguments>
+                <message_argument value="findLocalReferences(Set&lt;EObject&gt;, IAcceptor&lt;IReferenceDescription&gt;, Predicate&lt;IReferenceDescription&gt;, IProgressMonitor)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/findrefs/IReferenceFinder.java" type="org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder">
+        <filter comment="Multiple targets and one local resource do not make sense" id="403804204">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder"/>
+                <message_argument value="findLocalReferences(Set&lt;EObject&gt;, IAcceptor&lt;IReferenceDescription&gt;, Predicate&lt;IReferenceDescription&gt;, IProgressMonitor)"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Multiple targets and one local resource do not make sense" id="405901410">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder"/>
+                <message_argument value="findLocalReferences(Resource, Set&lt;EObject&gt;, IAcceptor&lt;IReferenceDescription&gt;, Predicate&lt;IReferenceDescription&gt;, IProgressMonitor)"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>
