@@ -36,7 +36,7 @@ public class RenameElementHandler extends AbstractHandler {
 
 	@Inject
 	protected RenameRefactoringController renameRefactoringController;
-	
+
 	protected static final Logger LOG = Logger.getLogger(RenameElementHandler.class);
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -50,8 +50,7 @@ public class RenameElementHandler extends AbstractHandler {
 								EObject targetElement = eObjectAtOffsetHelper.resolveElementAt(resource,
 										selection.getOffset());
 								if (targetElement != null) {
-									return createRenameElementContext(
-											targetElement, editor, selection, resource);
+									return createRenameElementContext(targetElement, editor, selection, resource);
 								}
 								return null;
 							}
@@ -61,7 +60,8 @@ public class RenameElementHandler extends AbstractHandler {
 				}
 			}
 		} catch (Exception exc) {
-			MessageDialog.openError(Display.getCurrent().getActiveShell(), "Error initializing refactoring", exc.getMessage());
+			MessageDialog.openError(Display.getCurrent().getActiveShell(), "Error initializing refactoring",
+					exc.getMessage());
 			LOG.error("Error initializing refactoring", exc);
 		}
 		return null;
@@ -70,9 +70,8 @@ public class RenameElementHandler extends AbstractHandler {
 	protected IRenameElementContext createRenameElementContext(EObject targetElement, final XtextEditor editor,
 			final ITextSelection selection, XtextResource resource) {
 		final URI targetElementURI = EcoreUtil2.getNormalizedURI(targetElement);
-		IRenameElementContext.Impl renameElementContext = new IRenameElementContext.Impl(
-				targetElementURI, targetElement.eClass(), editor, selection, resource
-				.getURI());
+		IRenameElementContext.Impl renameElementContext = new IRenameElementContext.Impl(targetElementURI,
+				targetElement.eClass(), editor, selection, resource.getURI());
 		return renameElementContext;
 	}
 
