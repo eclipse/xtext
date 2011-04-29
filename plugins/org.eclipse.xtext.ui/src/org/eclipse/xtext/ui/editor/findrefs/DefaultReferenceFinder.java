@@ -12,7 +12,7 @@ import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -71,26 +71,28 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 		final SubMonitor subMonitor = SubMonitor.convert(monitor, "Find references", 1);
 		localResourceAccess.readOnly(queryData.getLocalContextResourceURI(), new IUnitOfWork<Boolean, ResourceSet>() {
 			public Boolean exec(ResourceSet localContext) throws Exception {
-				Resource localResource = localContext.getResource(queryData.getLocalContextResourceURI(), true);
 				Set<EObject> targets = newHashSet();
 				for (URI targetURI : queryData.getTargetURIs()) {
 					EObject target = localContext.getEObject(targetURI, true);
 					if (target != null)
 						targets.add(target);
 				}
-				findLocalReferences(localResource, targets, acceptor, queryData.getResultFilter(), subMonitor);
+				findLocalReferences(targets, acceptor, queryData.getResultFilter(), subMonitor);
 				return true;
 			}
 		});
 	}
 
-	public void findLocalReferences(Resource resource, Set<EObject> targets,
+	public void findLocalReferences(Set<EObject> targets,
 			IAcceptor<IReferenceDescription> acceptor, Predicate<IReferenceDescription> filter, IProgressMonitor monitor) {
 		if (monitor != null && monitor.isCanceled())
 			return;
 		if (targets != null && !targets.isEmpty()) {
-			Map<EObject, Collection<Setting>> targetResourceInternalCrossRefs = CrossReferencer.find(Collections
-					.singletonList(resource));
+			Set<Resource> targetResources = new HashSet<Resource>();
+			for(EObject target: targets) {
+				targetResources.add(target.eResource());
+			}
+			Map<EObject, Collection<Setting>> targetResourceInternalCrossRefs = CrossReferencer.find(targetResources);
 			Map<EObject, URI> exportedElementsMap = null;
 			SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.ReferenceQuery_monitor, targets.size());
 			for (EObject target : targets) {
@@ -114,7 +116,7 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 								}
 							}
 							if (exportedElementsMap == null)
-								exportedElementsMap = createExportedElementsMap(resource);
+								exportedElementsMap = createExportedElementsMap(target.eResource());
 							IReferenceDescription localReferenceDescription = new DefaultReferenceDescription(source,
 									target, reference, index, findClosestExportedContainerURI(source,
 											exportedElementsMap));

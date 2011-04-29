@@ -12,7 +12,6 @@ import java.util.Set;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.util.IAcceptor;
@@ -66,7 +65,10 @@ public interface IReferenceFinder {
 	void findLocalReferences(IQueryData queryData, ILocalResourceAccess localContextProvider,
 			IAcceptor<IReferenceDescription> acceptor, IProgressMonitor progressMonitor);
 
-	void findLocalReferences(Resource resource, Set<EObject> targets, IAcceptor<IReferenceDescription> acceptor,
+	/**
+	 * @since 2.0
+	 */
+	void findLocalReferences(Set<EObject> targets, IAcceptor<IReferenceDescription> acceptor,
 			Predicate<IReferenceDescription> filter, IProgressMonitor monitor);
 
 }
