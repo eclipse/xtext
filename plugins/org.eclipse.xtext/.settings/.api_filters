@@ -49,6 +49,12 @@
         <filter id="336695337">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.grammaranalysis.impl.AbstractPDAProvider"/>
+                <message_argument value="canPass(CTX, INFAState&lt;?,?&gt;, EClass)"/>
+            </message_arguments>
+        </filter>
+        <filter id="336695337">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.grammaranalysis.impl.AbstractPDAProvider"/>
                 <message_argument value="getFollowers(CTX, INFAState&lt;?,?&gt;, boolean, boolean)"/>
             </message_arguments>
         </filter>
@@ -67,7 +73,19 @@
         <filter id="338792546">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.grammaranalysis.impl.AbstractPDAProvider"/>
+                <message_argument value="canReachContextEnd(AbstractPDAProvider.PDAContext, AbstractPDAProvider.RuleCallStackElement, INFAState&lt;?,?&gt;, boolean, boolean, Set&lt;Pair&lt;Boolean,INFAState&lt;?,?&gt;&gt;&gt;)"/>
+            </message_arguments>
+        </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.grammaranalysis.impl.AbstractPDAProvider"/>
                 <message_argument value="createContext(EObject)"/>
+            </message_arguments>
+        </filter>
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.grammaranalysis.impl.AbstractPDAProvider"/>
+                <message_argument value="createState(AbstractPDAProvider.PDAContext, AbstractPDAProvider.RuleCallStackElement, INFAState&lt;?,?&gt;, boolean, boolean, Set&lt;Pair&lt;Boolean,INFAState&lt;?,?&gt;&gt;&gt;)"/>
             </message_arguments>
         </filter>
         <filter id="338792546">
@@ -92,6 +110,11 @@
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.grammaranalysis.impl.AbstractPDAProvider"/>
                 <message_argument value="isFinalState(EObject, INFAState&lt;?,?&gt;, boolean, boolean)"/>
+            </message_arguments>
+        </filter>
+        <filter id="1143996420">
+            <message_arguments>
+                <message_argument value="canReachContextEnd(AbstractPDAProvider.PDAContext&lt;CTX&gt;, AbstractPDAProvider.RuleCallStackElement, INFAState&lt;?,?&gt;, EClass, boolean, boolean, Set&lt;Pair&lt;Boolean,INFAState&lt;?,?&gt;&gt;&gt;)"/>
             </message_arguments>
         </filter>
         <filter id="1143996420">

@@ -47,16 +47,18 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 			+ "generate sequenceParserPDAProviderTest \"http://www.eclipse.org/2010/tmf/xtext/SequenceParserPDAProvider\"  ";
 
 	protected ISynAbsorberState getParserRule(String body) throws Exception {
-		return getParserRule(body, null);
+		return getParserRule(body, null, null);
 	}
 
-	protected ISynAbsorberState getParserRule(String body, String name) throws Exception {
+	protected ISynAbsorberState getParserRule(String body, String name, String typeName) throws Exception {
 		Grammar grammar = (Grammar) getModel(HEADER + body);
 		//		SyntacticSequencerPDA2SimpleDot.drawGrammar("pdf/" + getName(), grammar);
 		//		SyntacticSequencerPDA2ExtendedDot.drawGrammar(createSequenceParserPDAProvider(), "pdf/" + getName(), grammar);
 
 		AbstractRule rule = name == null ? grammar.getRules().get(0) : GrammarUtil.findRuleForName(grammar, name);
-		return createSequenceParserPDAProvider().getPDA(rule, (EClass) rule.getType().getClassifier());
+		EClass type = (EClass) (typeName == null ? rule.getType().getClassifier() : grammar.getMetamodelDeclarations()
+				.get(0).getEPackage().getEClassifier(typeName));
+		return createSequenceParserPDAProvider().getPDA(rule, type);
 	}
 
 	protected ISynTransition findTransition(ISynAbsorberState start, String fromAbsorber, String toAbsorber) {
@@ -171,7 +173,7 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Addition returns Expr: Prim ({Add.left=current} '+' right=Prim)*;\n");
 		grammar.append("Prim returns Expr: {Val} name=ID | '(' Addition ')';\n");
-		ISynAbsorberState start = getParserRule(grammar.toString(), "Prim");
+		ISynAbsorberState start = getParserRule(grammar.toString(), "Prim", "Val");
 
 		ISynTransition trans1 = findTransition(start, "start", "name=ID");
 		assertFalse(trans1.involvesUnassignedTokenRuleCalls());

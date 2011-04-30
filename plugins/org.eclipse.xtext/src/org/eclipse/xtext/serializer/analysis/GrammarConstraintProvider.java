@@ -944,6 +944,8 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			Set<Object> visited) {
 		boolean isOptional = GrammarUtil.isOptionalCardinality(ele);
 		if (ele instanceof Action) {
+			if (requiredType == null)
+				return INVALID;
 			Action action = (Action) ele;
 			if (action.getFeature() == null) {
 				if (action.getType().getClassifier() == requiredType)
@@ -974,6 +976,8 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				return new ConstraintElement(context, getConstraintElementType(ele), ele);
 			return null;
 		} else if (ele instanceof Assignment) {
+			if (requiredType == null)
+				return INVALID;
 			Assignment ass = (Assignment) ele;
 			ConstraintElement result = createConstraintElement(context, ass.getTerminal(), requiredType, visited);
 			if (result != null && result != INVALID) {
