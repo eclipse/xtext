@@ -13,7 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.grammaranalysis.INFAState;
 import org.eclipse.xtext.grammaranalysis.IPDAProvider;
 import org.eclipse.xtext.grammaranalysis.IPDAState;
@@ -156,10 +159,31 @@ public abstract class AbstractPDAProvider<CTX> implements IPDAProvider<CTX> {
 
 	protected abstract boolean canEnterRuleCall(INFAState<?, ?> state);
 
+	/**
+	 * @since 2.0
+	 */
+	protected abstract boolean canPass(CTX context, INFAState<?, ?> state, EClass constructedType);
+
+	/**
+	 * @since 2.0
+	 */
+	protected EClass getConstructedType(AbstractElement ele) {
+		if (ele instanceof Action)
+			return (EClass) ((Action) ele).getType().getClassifier();
+		if (GrammarUtil.containingAssignment(ele) != null)
+			return (EClass) GrammarUtil.containingRule(ele).getType().getClassifier();
+		return null;
+	}
+
 	protected boolean canReachContextEnd(PDAContext<CTX> context, RuleCallStackElement stack, INFAState<?, ?> fromNfa,
-			boolean returning, boolean canReturn, Set<Pair<Boolean, INFAState<?, ?>>> visited) {
+			EClass constructedType, boolean returning, boolean canReturn, Set<Pair<Boolean, INFAState<?, ?>>> visited) {
 		if (stack == null || !visited.add(Tuples.<Boolean, INFAState<?, ?>> create(returning, fromNfa)))
 			return false;
+
+		if (!canPass(context.context, fromNfa, constructedType))
+			return false;
+		else if (constructedType == null)
+			constructedType = getConstructedType(fromNfa.getGrammarElement());
 
 		if (isFinalState(context.context, fromNfa, returning, canReturn))
 			return true;
@@ -174,13 +198,14 @@ public abstract class AbstractPDAProvider<CTX> implements IPDAProvider<CTX> {
 		for (INFAState<?, ?> follower : getFollowers(context.context, fromNfa, returning, canReturn)) {
 			boolean targetCanReturn = !canEnterRuleCall(follower);
 			boolean targetReturning = !follower.getOutgoingAfterReturn().isEmpty() && targetCanReturn;
-			if (canReachContextEnd(context, stack, follower, targetReturning, targetCanReturn, visited))
+			if (canReachContextEnd(context, stack, follower, constructedType, targetReturning, targetCanReturn, visited))
 				return true;
 		}
 
 		if (canReturn && fromNfa.isEndState() && stack != null && stack.getRuleCall() != null) {
 			visited = Sets.newHashSet();
-			if (canReachContextEnd(context, stack.getParent(), stack.getRuleCall(), true, true, visited))
+			if (canReachContextEnd(context, stack.getParent(), stack.getRuleCall(), constructedType, true, true,
+					visited))
 				return true;
 		}
 		return false;
@@ -197,12 +222,18 @@ public abstract class AbstractPDAProvider<CTX> implements IPDAProvider<CTX> {
 		return new PDAState(type, element);
 	}
 
+	/**
+	 * @since 2.0
+	 */
 	protected PDAState createState(PDAContext<CTX> ctx, RuleCallStackElement stack, INFAState<?, ?> fromNfa,
-			boolean returning, boolean canReturn, Set<Pair<Boolean, INFAState<?, ?>>> visited) {
+			EClass constructedType, boolean returning, boolean canReturn, Set<Pair<Boolean, INFAState<?, ?>>> visited) {
 		Set<Pair<Boolean, INFAState<?, ?>>> visited2 = Sets.newHashSet();
 		if (stack == null
-				|| !canReachContextEnd(ctx, stack.cloneWithoutVisited(), fromNfa, returning, canReturn, visited2))
+				|| !canReachContextEnd(ctx, stack.cloneWithoutVisited(), fromNfa, constructedType, returning,
+						canReturn, visited2))
 			return null;
+		if (constructedType == null)
+			constructedType = getConstructedType(fromNfa.getGrammarElement());
 		AbstractElement ge = fromNfa.getGrammarElement();
 		PDAState result = null;
 		if (canEnterRuleCall(fromNfa)) {
@@ -235,14 +266,14 @@ public abstract class AbstractPDAProvider<CTX> implements IPDAProvider<CTX> {
 		for (INFAState<?, ?> follower : getFollowers(ctx.context, fromNfa, returning, canReturn)) {
 			boolean folCanReturn = !canEnterRuleCall(follower);
 			boolean folReturning = !follower.getOutgoingAfterReturn().isEmpty() && folCanReturn;
-			PDAState r = createState(ctx, stack, follower, folReturning, folCanReturn, visited);
+			PDAState r = createState(ctx, stack, follower, constructedType, folReturning, folCanReturn, visited);
 			if (r != null)
 				result.followers.add(r);
 		}
 
 		if (canReturn && fromNfa.isEndState() && stack != null && stack.getRuleCall() != null) {
 			visited = Sets.newHashSet();
-			PDAState r = createState(ctx, stack.getParent(), stack.getRuleCall(), true, true, visited);
+			PDAState r = createState(ctx, stack.getParent(), stack.getRuleCall(), constructedType, true, true, visited);
 			if (r != null)
 				result.followers.add(r);
 		}
@@ -262,7 +293,7 @@ public abstract class AbstractPDAProvider<CTX> implements IPDAProvider<CTX> {
 			boolean targetCanReturn = !canEnterRuleCall(state);
 			boolean targetReturning = !state.getOutgoingAfterReturn().isEmpty() && targetCanReturn;
 			RuleCallStackElement stack = new RuleCallStackElement(null, null);
-			IPDAState s = createState(ctx, stack, state, targetReturning, targetCanReturn, visited);
+			IPDAState s = createState(ctx, stack, state, null, targetReturning, targetCanReturn, visited);
 			if (s != null)
 				ctx.start.followers.add(s);
 		}

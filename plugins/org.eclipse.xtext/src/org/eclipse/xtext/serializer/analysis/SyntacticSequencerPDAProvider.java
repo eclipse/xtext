@@ -265,6 +265,18 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			return false;
 
 		}
+
+		@Override
+		protected boolean canPass(SequencerPDAContext context, INFAState<?, ?> state, EClass constructedType) {
+			AbstractElement ele = state.getGrammarElement();
+			if (ele instanceof Action)
+				return ((Action) ele).getType().getClassifier() == context.getType();
+			if (constructedType != null)
+				return true;
+			if (GrammarUtil.containingAssignment(ele) != null)
+				return GrammarUtil.containingRule(ele).getType().getClassifier() == context.getType();
+			return true;
+		}
 	}
 
 	protected static class SynAbsorberState extends SynState implements ISynAbsorberState {
@@ -773,7 +785,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 	}
 
 	public ISynAbsorberState getPDA(EObject context, EClass type) {
-		SequencerPDAContext ctx = new SequencerPDAContext(context, null);
+		SequencerPDAContext ctx = new SequencerPDAContext(context, type);
 		ISynAbsorberState result = cache.get(context);
 		if (result == null) {
 			Map<IPDAState, SynAbsorberState> absorbers = Maps.newHashMap();
