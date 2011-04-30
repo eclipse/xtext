@@ -94,7 +94,8 @@ public abstract class AbstractSyntacticSequencerPDAProviderTest extends Abstract
 
 		List<String> result = Lists.newArrayList();
 		for (Triple<EClass, EObject, String> ctx : getContexts(grammar)) {
-			result.add(ctx.getFirst().getName() + "_" + ctx.getThird() + ":");
+			String t = ctx.getFirst() == null ? "null" : ctx.getFirst().getName();
+			result.add(t + "_" + ctx.getThird() + ":");
 			result.addAll(pda2lines(createSequenceParserPDAProvider().getPDA(ctx.getSecond(), ctx.getFirst())));
 		}
 		return Join.join("\n", result);
@@ -109,7 +110,9 @@ public abstract class AbstractSyntacticSequencerPDAProviderTest extends Abstract
 				result.add(Tuples.create(type, ctx, ctx2name.getContextName(ctx)));
 		Collections.sort(result, new Comparator<Triple<EClass, EObject, String>>() {
 			public int compare(Triple<EClass, EObject, String> o1, Triple<EClass, EObject, String> o2) {
-				int c = o1.getFirst().getName().compareTo(o2.getFirst().getName());
+				String n1 = o1.getFirst() == null ? "null" : o1.getFirst().getName();
+				String n2 = o2.getFirst() == null ? "null" : o2.getFirst().getName();
+				int c = n1.compareTo(n2);
 				if (c != 0)
 					return c;
 				return o1.getThird().compareTo(o2.getThird());
