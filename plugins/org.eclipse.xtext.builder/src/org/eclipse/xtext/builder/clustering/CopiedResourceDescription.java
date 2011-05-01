@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.clustering;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -63,11 +64,15 @@ public class CopiedResourceDescription extends AbstractResourceDescription {
     }
 
     public Iterable<QualifiedName> getImportedNames() {
-        throw new UnsupportedOperationException("getImportedNames()");
+    	// TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=344373
+    	return Collections.emptyList();
+//        throw new UnsupportedOperationException("getImportedNames()");
     }
 
     public Iterable<IReferenceDescription> getReferenceDescriptions() {
-        throw new UnsupportedOperationException("getReferenceDescriptions()");
+    	// TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=344373
+    	return Collections.emptyList();
+//        throw new UnsupportedOperationException("getReferenceDescriptions()");
     }
 
     public URI getURI() {
