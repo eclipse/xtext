@@ -59,8 +59,8 @@ public interface ISerializationDiagnostic {
 				throw new RuntimeException(diagnostic.getException());
 			else {
 				String msg = diagnostic.getMessage();
-				if (diagnostic.getSemanitcObject() != null)
-					msg += "\nSemantic Object: " + EmfFormatter.objPath(diagnostic.getSemanitcObject());
+				if (diagnostic.getSemanticObject() != null)
+					msg += "\nSemantic Object: " + EmfFormatter.objPath(diagnostic.getSemanticObject());
 				if (diagnostic.getContext() != null)
 					msg += "\nContext: " + new Context2NameFunction().getContextName(diagnostic.getContext());
 				throw new RuntimeException(msg);
@@ -87,7 +87,7 @@ public interface ISerializationDiagnostic {
 
 	String getMessage();
 
-	EObject getSemanitcObject();
+	EObject getSemanticObject();
 
 	EObject getContext();
 }
