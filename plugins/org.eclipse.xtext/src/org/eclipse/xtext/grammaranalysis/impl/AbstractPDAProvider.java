@@ -197,7 +197,7 @@ public abstract class AbstractPDAProvider<CTX> implements IPDAProvider<CTX> {
 
 		for (INFAState<?, ?> follower : getFollowers(context.context, fromNfa, returning, canReturn)) {
 			boolean targetCanReturn = !canEnterRuleCall(follower);
-			boolean targetReturning = !follower.getOutgoingAfterReturn().isEmpty() && targetCanReturn;
+			boolean targetReturning = follower.hasOutgoingRuleCall() && targetCanReturn;
 			if (canReachContextEnd(context, stack, follower, constructedType, targetReturning, targetCanReturn, visited))
 				return true;
 		}
@@ -265,7 +265,7 @@ public abstract class AbstractPDAProvider<CTX> implements IPDAProvider<CTX> {
 
 		for (INFAState<?, ?> follower : getFollowers(ctx.context, fromNfa, returning, canReturn)) {
 			boolean folCanReturn = !canEnterRuleCall(follower);
-			boolean folReturning = !follower.getOutgoingAfterReturn().isEmpty() && folCanReturn;
+			boolean folReturning = follower.hasOutgoingRuleCall() && folCanReturn;
 			PDAState r = createState(ctx, stack, follower, constructedType, folReturning, folCanReturn, visited);
 			if (r != null)
 				result.followers.add(r);

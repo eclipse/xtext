@@ -79,18 +79,18 @@ public class HiddenTokenSequencerTest extends AbstractXtextTests {
 		assertEquals(Joiner.on("\n").join(getNodeSequence(model)), Joiner.on("\n").join(actual.getColumn(4)));
 	}
 
-	public void testXtext() throws Exception {
-		with(XtextStandaloneSetup.class);
-		Grammar model = (Grammar) new XtextResourceSet()
-				.getResource(URI.createURI("classpath:/org/eclipse/xtext/Xtext.xtext"), true).getContents().get(0);
-		IRecursiveSequencer recSequencer = get(IRecursiveSequencer.class);
-		DebugSequenceAcceptor actual = new NoEnterNodesDebugSequenceAcceptor(false);
-		recSequencer.createSequence(/*syn, semSequencer,*/getGrammarAccess().getGrammar().getRules().get(0), model,
-				actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
-		//		System.out.println(actual);
-		//		System.out.println(NodeModelUtils.compactDump(NodeModelUtils.getNode(model), false));
-		assertEquals(Joiner.on("\n").join(getNodeSequence(model)), Joiner.on("\n").join(actual.getColumn(4)));
-	}
+	//	public void testXtext() throws Exception {
+	//		with(XtextStandaloneSetup.class);
+	//		Grammar model = (Grammar) new XtextResourceSet()
+	//				.getResource(URI.createURI("classpath:/org/eclipse/xtext/Xtext.xtext"), true).getContents().get(0);
+	//		IRecursiveSequencer recSequencer = get(IRecursiveSequencer.class);
+	//		DebugSequenceAcceptor actual = new NoEnterNodesDebugSequenceAcceptor(false);
+	//		recSequencer.createSequence(/*syn, semSequencer,*/getGrammarAccess().getGrammar().getRules().get(0), model,
+	//				actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
+	//		//		System.out.println(actual);
+	//		//		System.out.println(NodeModelUtils.compactDump(NodeModelUtils.getNode(model), false));
+	//		assertEquals(Join.join("\n", getNodeSequence(model)), Join.join("\n", actual.getColumn(4)));
+	//	}
 
 	public void testMandatoryKeywords() throws Exception {
 		testSequence("#1 a kw1 b kw2 kw3 c kw4");

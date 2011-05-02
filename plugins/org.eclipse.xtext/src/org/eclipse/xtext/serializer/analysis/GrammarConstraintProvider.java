@@ -925,7 +925,12 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 	protected final static ConstraintElement INVALID = new ConstraintElement();
 
-	protected final static ConstraintElement TYPEMATCH = new ConstraintElement();
+	protected final static ConstraintElement TYPEMATCH = new ConstraintElement() {
+		@Override
+		protected boolean isTypeMatch() {
+			return true;
+		}
+	};
 
 	protected final static ConstraintElement UNINTITIALIZED = new ConstraintElement();
 
@@ -1087,11 +1092,6 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			} else
 				return INVALID;
 		}
-		if (allowLocal && state.isEndState()
-				&& !GrammarUtil.isUnassignedParserParserRuleCall(state.getGrammarElement())) {
-			if (GrammarUtil.containingRule(state.getGrammarElement()).getType().getClassifier() != requiredType)
-				return INVALID;
-		}
 		if (!visited.add(state))
 			return INVALID;
 		List<ConstraintElement> followers = Lists.newArrayList();
@@ -1110,6 +1110,12 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return INVALID;
 		ConstraintElement local = allowLocal ? createConstraintElement(context, state.getGrammarElement(),
 				requiredType, visited) : null;
+		if (allowLocal && state.isEndState()
+				&& !GrammarUtil.isUnassignedParserParserRuleCall(state.getGrammarElement())) {
+			if (GrammarUtil.containingRule(state.getGrammarElement()).getType().getClassifier() != requiredType
+					&& (local == null || !local.isTypeMatch()))
+				return INVALID;
+		}
 		if (local == INVALID && !GrammarUtil.isOptionalCardinality(state.getGrammarElement()))
 			return INVALID;
 		if (followers.isEmpty())
@@ -1314,7 +1320,9 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			} else if (ce != null && ce != INVALID) {
 				Constraint constraint = new RuleConstraint(context, type, ce, context2Name);
 				result.addConstraint(constraint);
-			}
+			} else
+				System.err.println("constraint is " + ce + " for context " + context2Name.getContextName(context)
+						+ " and type " + (type == null ? "null" : type.getName()));
 		}
 		return result;
 	}

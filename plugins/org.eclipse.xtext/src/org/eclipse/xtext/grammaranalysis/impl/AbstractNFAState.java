@@ -271,6 +271,15 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 		return outgoingRuleCalls.isEmpty() ? Collections.<T> emptyList() : outgoing;
 	}
 
+	/**
+	 * @since 2.0
+	 */
+	public boolean hasOutgoingRuleCall() {
+		if (outgoing == null || outgoingRuleCalls == null)
+			collectAllOutgoingTransitions();
+		return !outgoingRuleCalls.isEmpty();
+	}
+
 	public boolean isEndState() {
 		if (outgoing == null || outgoingRuleCalls == null)
 			collectAllOutgoingTransitions();

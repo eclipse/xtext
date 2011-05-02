@@ -374,4 +374,21 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		expected.append("Bar: Bar_Bar;");
 		assertEquals(expected.toString(), actual);
 	}
+
+	public void testActionSingleAndAssigned() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Model: {Act1} act1=ID | Foo ({Act2.left=current} act2=ID)?;\n");
+		grammar.append("Foo: foo=ID {Act1.f1=current} act1=ID val=ID;\n");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Model: Model_Act1 | Model_Act2;\n");
+		expected.append("  Model_Act1 returns Act1: (act1=ID | (f1=Foo_Act1_1 act1=ID val=ID));\n");
+		expected.append("  Model_Act2 returns Act2: (left=Model_Act2_1_1_0 act2=ID);\n");
+		expected.append("Model_Act2_1_1_0: Foo_Act1;\n");
+		expected.append("  Foo_Act1 returns Act1: (f1=Foo_Act1_1 act1=ID val=ID);\n");
+		expected.append("Foo: Foo_Act1;\n");
+		expected.append("Foo_Act1_1: Foo_Act1_1_Foo;\n");
+		expected.append("  Foo_Act1_1_Foo returns Foo: foo=ID;");
+		assertEquals(expected.toString(), actual);
+	}
 }

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.serializer.diagnostic;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.util.EmfFormatter;
 
 /**
@@ -44,6 +45,10 @@ public interface ISerializationDiagnostic {
 			return null;
 		}
 
+		public EObject getContext() {
+			return null;
+		}
+
 	}
 
 	public class ExceptionThrowingAcceptor implements Acceptor {
@@ -54,8 +59,10 @@ public interface ISerializationDiagnostic {
 				throw new RuntimeException(diagnostic.getException());
 			else {
 				String msg = diagnostic.getMessage();
-				if (diagnostic.getSemanticObject() != null)
-					msg += "\n" + "Semantic Object" + EmfFormatter.objPath(diagnostic.getSemanticObject());
+				if (diagnostic.getSemanitcObject() != null)
+					msg += "\nSemantic Object: " + EmfFormatter.objPath(diagnostic.getSemanitcObject());
+				if (diagnostic.getContext() != null)
+					msg += "\nContext: " + new Context2NameFunction().getContextName(diagnostic.getContext());
 				throw new RuntimeException(msg);
 			}
 		}
@@ -80,5 +87,7 @@ public interface ISerializationDiagnostic {
 
 	String getMessage();
 
-	EObject getSemanticObject();
+	EObject getSemanitcObject();
+
+	EObject getContext();
 }

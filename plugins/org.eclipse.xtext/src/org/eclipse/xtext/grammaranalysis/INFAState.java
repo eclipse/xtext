@@ -31,6 +31,11 @@ public interface INFAState<S extends INFAState, T extends INFATransition> {
 	List<T> getOutgoing();
 
 	List<T> getOutgoingAfterReturn();
+	
+	/**
+	 * @since 2.0
+	 */
+	boolean hasOutgoingRuleCall();
 
 	boolean isEndState();
 

@@ -28,7 +28,7 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(SyntacticSequencerPDAProvider.class)
 public interface ISyntacticSequencerPDAProvider {
 
-	interface ISynAbsorberState extends ISynState {
+	public interface ISynAbsorberState extends ISynState {
 		List<ISynTransition> getOutTransitions();
 
 		Map<AbstractElement, ISynTransition> getOutTransitionsByElement();
@@ -38,14 +38,14 @@ public interface ISyntacticSequencerPDAProvider {
 		Map<AbstractElement, ISynTransition> getOutTransitionsByRuleCallExit();
 	}
 
-	interface ISynEmitterState extends ISynState, ISynNavigable {
+	public interface ISynEmitterState extends ISynState, ISynNavigable {
 	}
 
-	interface ISynFollowerOwner {
+	public interface ISynFollowerOwner {
 		List<ISynState> getFollowers();
 	}
 
-	interface ISynNavigable extends ISynFollowerOwner {
+	public interface ISynNavigable extends ISynFollowerOwner {
 		ISynAbsorberState getTarget();
 
 		int getDistanceTo(Predicate<ISynState> matches, Predicate<ISynState> bounds, RCStack stack);
@@ -66,20 +66,20 @@ public interface ISyntacticSequencerPDAProvider {
 		boolean hasEmitters();
 	}
 
-	interface ISynState extends ISynFollowerOwner {
+	public interface ISynState extends ISynFollowerOwner {
 
 		AbstractElement getGrammarElement();
 
 		SynStateType getType();
 	}
 
-	interface ISynTransition extends ISynNavigable {
+	public interface ISynTransition extends ISynNavigable {
 
 		ISynAbsorberState getSource();
 
 	}
 
-	class SynPredicates {
+	public class SynPredicates {
 		public static Predicate<ISynState> absorber(final AbstractElement ele) {
 			return new Predicate<ISynState>() {
 				public boolean apply(ISynState input) {
@@ -145,7 +145,7 @@ public interface ISyntacticSequencerPDAProvider {
 		}
 	}
 
-	enum SynStateType {
+	public enum SynStateType {
 		ASSIGNED_ACTION_CALL(PDAStateType.ELEMENT), //
 		ASSIGNED_BOOLEAN_KEYWORD(PDAStateType.ELEMENT), //
 		ASSIGNED_CROSSREF_DATATYPE_RULE_CALL(PDAStateType.ELEMENT), //
