@@ -29,20 +29,13 @@ import static java.util.Collections.*;
  */
 public abstract class AbstractXbaseEvaluationTest extends TestCase {
 
-	protected void assertEvaluatesTo(Object object, String string) throws Exception {
-		assertEquals(object, invokeXbaseExpression(string));
-	}
-
-	protected void assertEvaluatesWithException(Class<? extends Throwable> class1, String string) throws Exception {
-		try {
-			invokeXbaseExpression(string);
-		} catch (InvocationTargetException e) {
-			assertTrue(e.getClass().toString(), class1.isInstance(e.getCause()));
-		}
-	}
-	
-	protected Object invokeXbaseExpression(String expression) throws Exception {
-		throw new UnsupportedOperationException("Override and implement me!");
+	@Test public void testNestedClosures() throws Exception {
+		String expr = 
+				"{ " +
+				" val x = 'foo' " +
+				" [String s | x + [ String s1 | s1 + s + x].apply(s) ].apply(x)" +
+				"}";
+		assertEvaluatesTo("foofoofoofoo", expr);
 	}
 	
 	@Test public void testEscapeCharacter() throws Exception {
@@ -1357,5 +1350,22 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 			"    x.set('foo')\n" + 
 			"    x.get\n" + 
 			"}");
+	}
+	
+	
+	protected void assertEvaluatesTo(Object object, String string) throws Exception {
+		assertEquals(object, invokeXbaseExpression(string));
+	}
+
+	protected void assertEvaluatesWithException(Class<? extends Throwable> class1, String string) throws Exception {
+		try {
+			invokeXbaseExpression(string);
+		} catch (InvocationTargetException e) {
+			assertTrue(e.getClass().toString(), class1.isInstance(e.getCause()));
+		}
+	}
+	
+	protected Object invokeXbaseExpression(String expression) throws Exception {
+		throw new UnsupportedOperationException("Override and implement me!");
 	}
 }
