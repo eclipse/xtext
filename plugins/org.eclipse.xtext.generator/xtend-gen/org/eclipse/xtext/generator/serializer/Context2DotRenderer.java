@@ -26,8 +26,7 @@ public class Context2DotRenderer {
     final Function1<EObject,Pair<String,String>> _function = new Function1<EObject,Pair<String,String>>() {
         public Pair<String,String> apply(EObject c) {
           String _fileName = Context2DotRenderer.this.getFileName(c, name);
-          final EObject typeConverted_c = (EObject)c;
-          String _draw = builder.draw(typeConverted_c);
+          String _draw = builder.draw(c);
           Pair<String,String> _operator_mappedTo = ObjectExtensions.<String, String>operator_mappedTo(_fileName, _draw);
           return _operator_mappedTo;
         }
@@ -47,8 +46,7 @@ public class Context2DotRenderer {
     String _contextName = this.context2NameFunction.getContextName(ctx);
     String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, _contextName);
     String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, "_");
-    final String typeConverted_name = (String)name;
-    String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, typeConverted_name);
+    String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, name);
     String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, ".dot");
     return _operator_plus_6;
   }
