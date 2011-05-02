@@ -210,7 +210,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 	}
 
 	protected Set<INode> getCommentsForEObject(EObject semanticObject, INode node) {
-		if(node == null)
+		if (node == null)
 			return Collections.emptySet();
 		Set<INode> result = Sets.newHashSet();
 		BidiTreeIterator<INode> ti = node.getAsTreeIterable().iterator();
@@ -235,7 +235,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 			INode next = ni.next();
 			if (tokenUtil.isWhitespaceOrCommentNode(next)) {
 				out.add(next);
-			} else if (next == to) {
+			} else if (next.equals(to)) {
 				if (next instanceof ICompositeNode
 						&& (GrammarUtil.isDatatypeRuleCall(next.getGrammarElement())
 								|| GrammarUtil.isEnumRuleCall(next.getGrammarElement()) || next.getGrammarElement() instanceof CrossReference))

@@ -33,6 +33,8 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 
 	protected EObject semanticObject;
 
+	protected EObject context;
+
 	public SerializationDiagnostic(EObject semanticObject, AbstractElement element, String message) {
 		this(semanticObject, getFeature(semanticObject, element), message);
 	}
@@ -42,6 +44,13 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 		this.semanticObject = semanticObject;
 		this.message = message;
 		this.feature = feature;
+	}
+
+	public SerializationDiagnostic(EObject semanticObject, EObject context, String message) {
+		super();
+		this.semanticObject = semanticObject;
+		this.message = message;
+		this.context = context;
 	}
 
 	public SerializationDiagnostic(EObject semanticObject, String message) {
@@ -62,6 +71,10 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 
 	public EObject getSemanticObject() {
 		return semanticObject;
+	}
+
+	public EObject getContext() {
+		return context;
 	}
 
 }

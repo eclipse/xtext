@@ -123,7 +123,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		protected EObject context;
 		protected EClass type;
 
-		private SequencerPDAContext(EObject context, EClass type) {
+		public SequencerPDAContext(EObject context, EClass type) {
 			super();
 			this.context = context;
 			this.type = type;
@@ -504,8 +504,8 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 						break;
 				}
 			}
-			List<ISynState> r = current.getShortestPathTo(matches, SynPredicates.ruleCallExitsOrAbsorber(), stack,
-					false);
+			//			List<ISynState> r = current.getShortestPathTo(matches, SynPredicates.ruleCallExitsOrAbsorber(), stack,
+			List<ISynState> r = current.getShortestPathTo(matches, SynPredicates.absorber(), stack, false);
 			if (r != null)
 				result.addAll(r);
 			return result;

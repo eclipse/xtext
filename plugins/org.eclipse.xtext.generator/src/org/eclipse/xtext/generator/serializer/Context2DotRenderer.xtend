@@ -19,8 +19,12 @@ class Context2DotRenderer {
 	
 	@Inject extension Context2NameFunction
 	
+	types(EObject ctx) {
+		ctx.typesForContext.map( t | new SyntacticSequencerPDAProvider$SequencerPDAContext(ctx, t))
+	}
+	
 	contexts() {
-		grammar.allContexts.map(c | c.typesForContext.map( t | new SyntacticSequencerPDAProvider$SequencerPDAContext(c, t))).flatten
+		grammar.allContexts.map(c | c.types).flatten
 	}
 	
 	Iterable<Pair<String, String>> render2Dot(GraphvizDotBuilder builder, String name) {

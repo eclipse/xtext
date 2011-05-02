@@ -179,7 +179,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 					«ENDFOR»
 				}
 				INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-				«FOR f:c.features.filter(e|e != null)»
+				«FOR f: if(c.body.featureInfo != null) newArrayList(c.body.featureInfo) else c.body.children.filter(e|e.featureInfo != null).map(e|e.featureInfo)»
 					«val assignment=f.assignments.get(0)»
 					«assignment.type.toAcceptMethod()»(sequenceAcceptor, errorAcceptor, semanticObject, grammarAccess.«assignment.grammarElement.gaAccessor()», semanticObject.«f.feature.getGenFeature().getAccessor»(), -1, («assignment.type.toNodeType»)nodes.getNodeForSingelValue(«f.feature.genTypeLiteral», semanticObject.«f.feature.getGenFeature().getAccessor»()));
 				«ENDFOR»

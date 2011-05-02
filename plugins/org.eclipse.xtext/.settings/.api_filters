@@ -31,6 +31,14 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/grammaranalysis/INFAState.java" type="org.eclipse.xtext.grammaranalysis.INFAState">
+        <filter id="403804204">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.grammaranalysis.INFAState"/>
+                <message_argument value="hasOutgoingRuleCall()"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/grammaranalysis/IPDAProvider.java" type="org.eclipse.xtext.grammaranalysis.IPDAProvider">
         <filter id="403804204">
             <message_arguments>

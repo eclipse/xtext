@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.diagnostic;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynNavigable;
@@ -21,8 +22,8 @@ import com.google.inject.ImplementedBy;
 
 @ImplementedBy(SyntacticSequencerDiagnosticProvider.class)
 public interface ISyntacticSequencerDiagnosticProvider {
-	ISerializationDiagnostic createInvalidFollowingAbsorberDiagnostic(ISynAbsorberState from, AbstractElement to,
-			boolean toReturning);
+	ISerializationDiagnostic createInvalidFollowingAbsorberDiagnostic(EObject context, EObject semanticObject,
+			ISynAbsorberState from, AbstractElement to);
 
 	ISerializationDiagnostic createUnexpectedStackStateDiagnostic(ISynState toConsume, RCStack stack);
 
