@@ -79,19 +79,19 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 		assertEquals(Joiner.on("\n").join(getNodeSequence(model)), Joiner.on("\n").join(actual.getColumn(4)));
 	}
 
-	public void testXtext() throws Exception {
-		with(XtextStandaloneSetup.class);
-		Grammar model = (Grammar) new XtextResourceSet()
-				.getResource(URI.createURI("classpath:/org/eclipse/xtext/Xtext.xtext"), true).getContents().get(0);
-		IRecursiveSequencer recSequencer = get(IRecursiveSequencer.class);
-		DebugSequenceAcceptor actual = new NoEnterNodesDebugSequenceAcceptor(false);
-		((IHiddenTokenSequencerOwner) recSequencer).setHiddenTokenSequencer(get(PassThroughHiddenTokenSequencer.class));
-		recSequencer.createSequence(/*syn, semSequencer,*/getGrammarAccess().getGrammar().getRules().get(0), model,
-				actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
-		//		System.out.println(actual);
-		//		System.out.println(NodeModelUtils.compactDump(NodeModelUtils.getNode(model), false));
-		assertEquals(Joiner.on("\n").join(getNodeSequence(model)), Joiner.on("\n").join(actual.getColumn(4)));
-	}
+	//	public void testXtext() throws Exception {
+	//		with(XtextStandaloneSetup.class);
+	//		Grammar model = (Grammar) new XtextResourceSet()
+	//				.getResource(URI.createURI("classpath:/org/eclipse/xtext/Xtext.xtext"), true).getContents().get(0);
+	//		IRecursiveSequencer recSequencer = get(IRecursiveSequencer.class);
+	//		DebugSequenceAcceptor actual = new NoEnterNodesDebugSequenceAcceptor(false);
+	//		((IHiddenTokenSequencerOwner) recSequencer).setHiddenTokenSequencer(get(PassThroughHiddenTokenSequencer.class));
+	//		recSequencer.createSequence(/*syn, semSequencer,*/getGrammarAccess().getGrammar().getRules().get(0), model,
+	//				actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
+	//		//		System.out.println(actual);
+	//		//		System.out.println(NodeModelUtils.compactDump(NodeModelUtils.getNode(model), false));
+	//		assertEquals(Join.join("\n", getNodeSequence(model)), Join.join("\n", actual.getColumn(4)));
+	//	}
 
 	public void testMandatoryKeywords() throws Exception {
 		List<IConstraintContext> ctxts = get(IGrammarConstraintProvider.class).getConstraints(
