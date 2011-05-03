@@ -49,7 +49,6 @@ Workflow {
 			uri = "classpath:/org/eclipse/xtext/xbase/Xtype.xtext" 
 			fileExtensions="___xtype"
 			fragment = grammarAccess.GrammarAccessFragment {}
-			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 			fragment = serializer.SerializerFragment {
 				// generateDebugData = true
 			}
@@ -62,7 +61,6 @@ Workflow {
 			uri = "classpath:/org/eclipse/xtext/xbase/Xbase.xtext" 	
 			fileExtensions = "___xbase"
 			fragment = grammarAccess.GrammarAccessFragment {}
-			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 			fragment = serializer.SerializerFragment {
 				// generateDebugData = true
 			}
