@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -139,8 +140,8 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		Class<?> clazz = compileJavaCode("x.Y", 
 				"package x " +
 				"class Y {" +
-				"  create new StringBuilder() aBuilder(String x) {" +
-				"   this.append(x)" +
+				"  create result: new StringBuilder() aBuilder(String x) {" +
+				"   result.append(x)" +
 				"  }" +
 				"}");
 		Object instance = clazz.newInstance();
@@ -153,6 +154,24 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		assertEquals("Bar", sb2.toString());
 		sb = (StringBuilder) method.invoke(instance, "Foo");
 		assertEquals("FooBar",sb.toString());
+	}
+	
+	public void testCreateExtension_01() throws Exception {
+		Class<?> clazz = compileJavaCode("x.Y", 
+				"package x " +
+				"import java.util.List " +
+				"class Y {" +
+				"  Iterable<String> create result: newArrayList listWith(String s) {" +
+				"   result.add(s)" +
+				"  }" +
+				"}");
+		Object instance = clazz.newInstance();
+		Method method = clazz.getDeclaredMethod("listWith", String.class);
+		@SuppressWarnings("unchecked")
+		Iterable<String> iterable = (Iterable<String>) method.invoke(instance, "Foo");
+		assertSame(iterable, method.invoke(instance, "Foo"));
+		assertTrue(iterable instanceof ArrayList);
+		assertEquals("Foo", iterable.iterator().next());
 	}
 	
 	public void testCreateExtension_threadSafety() throws Exception {
@@ -263,7 +282,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		Class<?> class1 = compileJavaCode("x.Y",
 				"package x " +
 				"class Y { " +
-				"  @Inject extension test.GenericExtensionMethods<String,Integer> as x" +
+				"  @Inject extension test.GenericExtensionMethods<String,Integer> x" +
 				"  " +
 				"  foo(String arg) { " +
 				"    arg.method " +
@@ -278,7 +297,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		Class<?> class1 = compileJavaCode("x.Y",
 				"package x " +
 				"class Y { " +
-				"  @Inject extension test.ExtensionMethods " +
+				"  @Inject extension test.ExtensionMethods e" +
 				"  " +
 				"  foo(String arg) { " +
 				"    (arg as CharSequence).generic()" +
@@ -291,7 +310,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		Class<?> class1 = compileJavaCode("x.Y",
 				"package x " +
 				"class Y { " +
-				"  @Inject extension test.ExtensionMethods " +
+				"  @Inject extension test.ExtensionMethods e" +
 				"  " +
 				"  foo(String arg) { " +
 				"    arg.generic()" +
@@ -304,7 +323,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		Class<?> class1 = compileJavaCode("x.Y",
 				"package x " +
 				"class Y { " +
-				"  @Inject extension test.ExtensionMethods " +
+				"  @Inject extension test.ExtensionMethods e" +
 				"  foo(String arg) { " +
 				"    return arg - 'bar' " +
 				"  } " +
@@ -313,7 +332,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testInjectedExtensionMethod_05() throws Exception {
-		Class<?> class1 = compileJavaCode("x.Y","package x class Y { @Inject extension test.ExtensionMethods foo(String arg) { return arg.operator_minus('bar') } }");
+		Class<?> class1 = compileJavaCode("x.Y","package x class Y { @Inject extension test.ExtensionMethods e foo(String arg) { return arg.operator_minus('bar') } }");
 		assertEquals(ExtensionMethods.OPERATOR_MINUS_STRING_STRING,apply(class1,"foo", "foobar"));
 	}
 	
@@ -321,7 +340,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		Class<?> class1 = compileJavaCode("x.Y",
 				"package x " +
 				"class Y { " +
-				"  @Inject extension test.ExtensionMethods " +
+				"  @Inject extension test.ExtensionMethods e" +
 				"  a(String arg) { " +
 				"    return arg.operator_minus('bar') " +
 				"  } " +
@@ -353,7 +372,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testDependencyDeclaration() throws Exception {
-		invokeAndExpect2(Boolean.TRUE, "check() {obj!=null} @Inject test.ExtensionMethods as obj", "check");
+		invokeAndExpect2(Boolean.TRUE, "check() {obj!=null} @Inject test.ExtensionMethods obj", "check");
 	}
 	
 	public void testReturnTypeAndReturnExpression_00() throws Exception {

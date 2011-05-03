@@ -42,24 +42,10 @@ public class LinkingTest extends AbstractXtend2TestCase {
 	public void testCreateExtension_00() throws Exception {
 		XtendClass clazz = clazz(
 				"class Foo { " +
-				"  create newArrayList('foo') getListWithFooAnd(String s) {" +
-				"    this" +
+				"  create list: newArrayList('foo') getListWithFooAnd(String s) {" +
+				"    list" +
 				"  }" +
 				"}");
-		assertEquals(1, clazz.getMembers().size());
-		
-		XtendFunction func= (XtendFunction) clazz.getMembers().get(0);
-		XFeatureCall featureCall = (XFeatureCall) ((XBlockExpression)func.getExpression()).getExpressions().get(0);
-		assertEquals(func.getCreateExtensionInfo(), featureCall.getFeature());
-	}
-	
-	public void testCreateExtension_01() throws Exception {
-		XtendClass clazz = clazz(
-				"class Foo { " +
-				"  create foo : newArrayList('foo') getListWithFooAnd(String s) {" +
-				"    foo" +
-				"  }" +
-		"}");
 		assertEquals(1, clazz.getMembers().size());
 		
 		XtendFunction func= (XtendFunction) clazz.getMembers().get(0);
@@ -70,7 +56,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 	public void testDeclaredDependency_00() throws Exception {
 		XtendClass clazz = clazz(
 				"class Foo {" +
-				"  @Inject java.util.ArrayList<String>" +
+				"  @Inject java.util.ArrayList<String> arrayList" +
 				"  foo() {arrayList}" +
 				"}");
 		XtendFunction func = (XtendFunction) clazz.getMembers().get(1);
@@ -82,7 +68,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 	public void testInjectedExtensionMethodCall() throws Exception {
 		XtendClass clazz = clazz("" +
 				"class Foo {" +
-				"  @Inject extension String" +
+				"  @Inject extension String string" +
 				"  foo() " +
 				"    {(1 as int).indexOf()}" +
 				"}");

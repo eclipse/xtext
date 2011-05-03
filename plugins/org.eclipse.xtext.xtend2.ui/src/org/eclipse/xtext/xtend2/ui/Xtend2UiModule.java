@@ -44,6 +44,7 @@ import com.google.inject.name.Names;
 /**
  * Use this class to register components to be used within the IDE.
  */
+@SuppressWarnings("restriction")
 public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2UiModule {
 	public Xtend2UiModule(AbstractUIPlugin plugin) {
 		super(plugin);
@@ -69,7 +70,8 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 		return RichStringAwareTokenScanner.class;
 	}
 	
-	public Class<? extends ISemanticHighlightingCalculator> bindSemanticHighlightingCalculator() {
+	@Override
+	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
 		return RichStringAwareHighlightingCalculator.class;
 	}
 	
@@ -114,17 +116,14 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 		return XtendHyperlinkHelper.class;
 	}
 	
-	@SuppressWarnings("restriction")
 	public Class<? extends RenameElementHandler> bindRenameElementHandler() {
 		return JvmRenameElementHandler.class;
 	}
 	
-	@SuppressWarnings("restriction")
 	public Class<? extends IRenameRefactoringProvider> bindIRenameRefactoringProvider() {
 		return JvmRenameRefactoringProvider.class;
 	}
 	
-	@SuppressWarnings("restriction")
 	public Class<? extends IRenameProcessorAdapter.Factory> bindIRenameProcessorAdapter$Factory() {
 		return JDTRenameProcessorAdapter.Factory.class;
 	}

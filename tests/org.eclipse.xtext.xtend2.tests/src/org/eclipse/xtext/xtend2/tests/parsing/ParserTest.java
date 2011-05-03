@@ -30,15 +30,15 @@ public class ParserTest extends AbstractXtend2TestCase {
 	public void testCreateExtension_00() throws Exception {
 		XtendClass clazz = clazz(
 				"class Foo { " +
-				"  create newArrayList('foo') getListWithFooAnd(String s) {" +
-				"    this.add(s)" +
+				"  create list: newArrayList('foo') getListWithFooAnd(String s) {" +
+				"    list.add(s)" +
 				"  }" +
 				"}");
 		assertEquals(1, clazz.getMembers().size());
 		
 		XtendFunction func= (XtendFunction) clazz.getMembers().get(0);
 		assertNotNull(func.getCreateExtensionInfo().getCreateExpression());
-		assertEquals("this", func.getCreateExtensionInfo().getName());
+		assertEquals("list", func.getCreateExtensionInfo().getName());
 	}
 	
 	public void testCreateExtension_01() throws Exception {
@@ -58,7 +58,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	public void testDeclaredDependency_00() throws Exception {
 		XtendClass clazz = clazz(
 			"class Foo { " +
-			"  @Inject java.util.Map<String,String>" +
+			"  @Inject java.util.Map<String,String> map" +
 			"}");
 		assertEquals(1, clazz.getMembers().size());
 		DeclaredDependency dependency = (DeclaredDependency) clazz.getMembers().get(0);
@@ -71,20 +71,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	public void testDeclaredDependency_01() throws Exception {
 		XtendClass clazz = clazz(
 				"class Foo { " +
-				"  @Inject java.util.Map<String,String> as map" +
-		"}");
-		assertEquals(1, clazz.getMembers().size());
-		DeclaredDependency dependency = (DeclaredDependency) clazz.getMembers().get(0);
-		assertEquals("java.util.Map",dependency.getType().getType().getIdentifier());
-		assertEquals("map",dependency.getName());
-		assertEquals("map",dependency.getSimpleName());
-		assertEquals("java.util.Map<java.lang.String,java.lang.String>", dependency.getType().getIdentifier());
-	}
-	
-	public void testDeclaredDependency_02() throws Exception {
-		XtendClass clazz = clazz(
-				"class Foo { " +
-				"  @Inject java.util.Map<String,String> map() {null as String}" +
+				"  @Inject java.util.Map<String,String> map map() {null as String}" +
 		"}");
 		assertEquals(2, clazz.getMembers().size());
 		DeclaredDependency dependency = (DeclaredDependency) clazz.getMembers().get(0);
@@ -98,8 +85,8 @@ public class ParserTest extends AbstractXtend2TestCase {
 	public void testDeclaredDependency_03() throws Exception {
 		XtendClass clazz = clazz(
 				"class Foo { " +
-				"  @Inject java.util.Map<String,String>" +
-				"  @Inject java.util.List as myList" +
+				"  @Inject java.util.Map<String,String> map" +
+				"  @Inject java.util.List myList" +
 		"}");
 		assertEquals(2, clazz.getMembers().size());
 		DeclaredDependency dependency = (DeclaredDependency) clazz.getMembers().get(0);

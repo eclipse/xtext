@@ -156,7 +156,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		final String input = 
 			"package foo\n" +
 			"class Bar {\n" +
-			"  @Inject String" +
+			"  @Inject String string" +
 			"}\n";
 		final String expected =  
 			"package foo;\n" +
@@ -181,7 +181,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		final String input = 
 			"package foo\n" +
 			"class Bar {\n" +
-			"  @Inject String" +
+			"  @Inject String string" +
 			"}\n";
 		final String expected =  
 			"package foo;\n" +

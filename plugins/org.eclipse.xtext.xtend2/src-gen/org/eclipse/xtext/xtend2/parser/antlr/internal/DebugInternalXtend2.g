@@ -47,9 +47,7 @@ ruleMember :
 
 // Rule DeclaredDependency
 ruleDeclaredDependency :
-	'@Inject' 'extension'? ruleJvmTypeReference (
-		'as' RULE_ID
-	)?
+	'@Inject' 'extension'? ruleJvmTypeReference RULE_ID
 ;
 
 // Rule Function
@@ -61,10 +59,7 @@ ruleFunction :
 		'<' ruleJvmTypeParameter (
 			',' ruleJvmTypeParameter
 		)* '>'
-	)? (
-		ruleJvmTypeReference |
-		ruleCreateExtensionInfo
-	)? RULE_ID '(' (
+	)? ruleJvmTypeReference? ruleCreateExtensionInfo? RULE_ID '(' (
 		ruleParameter (
 			',' ruleParameter
 		)*
@@ -76,9 +71,7 @@ ruleFunction :
 
 // Rule CreateExtensionInfo
 ruleCreateExtensionInfo :
-	'create' (
-		RULE_ID ':'
-	)? ruleXExpression
+	'create' RULE_ID ':' ruleXExpression
 ;
 
 // Rule Parameter
