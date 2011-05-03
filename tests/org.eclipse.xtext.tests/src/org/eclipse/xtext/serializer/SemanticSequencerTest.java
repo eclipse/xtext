@@ -48,7 +48,7 @@ public class SemanticSequencerTest extends AbstractXtextTests {
 		assertTrue(generatedSequencer instanceof SequencerTestLanguageSemanticSequencer);
 		EObject model = getModel(stringModel).eContents().get(0);
 		NodeModelSemanticSequencer nmSequencer = new NodeModelSemanticSequencer();
-		EObject context = nmSequencer.findContexts(model, null).iterator().next();
+		EObject context = nmSequencer.findContexts(model, true, null).iterator().next();
 		ISyntacticSequencer synSeq = get(PassThroughSyntacticSequencer.class);
 		IHiddenTokenSequencer hiddenSeq = get(PassThroughHiddenTokenSequencer.class);
 		IRecursiveSequencer recSequencer = get(IRecursiveSequencer.class);
