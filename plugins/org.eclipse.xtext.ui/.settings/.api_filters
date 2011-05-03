@@ -15,29 +15,146 @@
         </filter>
     </resource>
     <resource path="src/org/eclipse/xtext/ui/editor/findrefs/DefaultReferenceFinder.java" type="org.eclipse.xtext.ui.editor.findrefs.DefaultReferenceFinder">
-        <filter comment="Multiple targets and one local resource do not make sense" id="338792546">
+        <filter comment="Findrefs is not yet mature for being API" id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.ui.editor.findrefs.DefaultReferenceFinder"/>
-                <message_argument value="findLocalReferences(Resource, Set&lt;EObject&gt;, IAcceptor&lt;IReferenceDescription&gt;, Predicate&lt;IReferenceDescription&gt;, IProgressMonitor)"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
             </message_arguments>
         </filter>
-        <filter comment="Multiple targets and one local resource do not make sense" id="1143996420">
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/findrefs/EditorResourceAccess.java" type="org.eclipse.xtext.ui.editor.findrefs.EditorResourceAccess">
+        <filter comment="Findrefs is not yet mature for being API" id="305365105">
             <message_arguments>
-                <message_argument value="findLocalReferences(Set&lt;EObject&gt;, IAcceptor&lt;IReferenceDescription&gt;, Predicate&lt;IReferenceDescription&gt;, IProgressMonitor)"/>
+                <message_argument value="org.eclipse.xtext.ui.editor.findrefs.EditorResourceAccess"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/findrefs/FindReferenceQueryDataFactory.java" type="org.eclipse.xtext.ui.editor.findrefs.FindReferenceQueryDataFactory">
+        <filter comment="Findrefs is not yet mature for being API" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.findrefs.FindReferenceQueryDataFactory"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/findrefs/FindReferencesHandler.java" type="org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler">
+        <filter comment="Findrefs is not yet mature for being API" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
             </message_arguments>
         </filter>
     </resource>
     <resource path="src/org/eclipse/xtext/ui/editor/findrefs/IReferenceFinder.java" type="org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder">
-        <filter comment="Multiple targets and one local resource do not make sense" id="403804204">
+        <filter comment="Findrefs is not yet mature for being API" id="305365105">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder"/>
-                <message_argument value="findLocalReferences(Set&lt;EObject&gt;, IAcceptor&lt;IReferenceDescription&gt;, Predicate&lt;IReferenceDescription&gt;, IProgressMonitor)"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
             </message_arguments>
         </filter>
-        <filter comment="Multiple targets and one local resource do not make sense" id="405901410">
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/findrefs/LoadingResourceAccess.java" type="org.eclipse.xtext.ui.editor.findrefs.LoadingResourceAccess">
+        <filter comment="Findrefs is not yet mature for being API" id="305365105">
             <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder"/>
-                <message_argument value="findLocalReferences(Resource, Set&lt;EObject&gt;, IAcceptor&lt;IReferenceDescription&gt;, Predicate&lt;IReferenceDescription&gt;, IProgressMonitor)"/>
+                <message_argument value="org.eclipse.xtext.ui.editor.findrefs.LoadingResourceAccess"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/findrefs/Messages.java" type="org.eclipse.xtext.ui.editor.findrefs.Messages">
+        <filter comment="Findrefs is not yet mature for being API" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.findrefs.Messages"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/findrefs/ReferenceQuery.java" type="org.eclipse.xtext.ui.editor.findrefs.ReferenceQuery">
+        <filter comment="Findrefs is not yet mature for being API" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.findrefs.ReferenceQuery"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/findrefs/ReferenceQueryData.java" type="org.eclipse.xtext.ui.editor.findrefs.ReferenceQueryData">
+        <filter comment="Findrefs is not yet mature for being API" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.findrefs.ReferenceQueryData"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/findrefs/ReferenceSearchResult.java" type="org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchResult">
+        <filter comment="Findrefs is not yet mature for being API" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchResult"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/findrefs/ReferenceSearchResultContentProvider.java" type="org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchResultContentProvider">
+        <filter comment="Findrefs is not yet mature for being API" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchResultContentProvider"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/findrefs/ReferenceSearchResultEvents.java" type="org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchResultEvents">
+        <filter comment="Findrefs is not yet mature for being API" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchResultEvents"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/findrefs/ReferenceSearchResultLabelProvider.java" type="org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchResultLabelProvider">
+        <filter comment="Findrefs is not yet mature for being API" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchResultLabelProvider"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/findrefs/ReferenceSearchViewPage.java" type="org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchViewPage">
+        <filter comment="Findrefs is not yet mature for being API" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchViewPage"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/findrefs/ReferenceSearchViewPageActions.java" type="org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchViewPageActions">
+        <filter comment="Findrefs is not yet mature for being API" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchViewPageActions"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/findrefs/ReferenceSearchViewTreeNode.java" type="org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchViewTreeNode">
+        <filter comment="Findrefs is not yet mature for being API" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchViewTreeNode"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/findrefs/SimpleLocalResourceAccess.java" type="org.eclipse.xtext.ui.editor.findrefs.SimpleLocalResourceAccess">
+        <filter comment="Findrefs is not yet mature for being API" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.findrefs.SimpleLocalResourceAccess"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/ui/editor/findrefs/TreeViewerNavigator.java" type="org.eclipse.xtext.ui.editor.findrefs.TreeViewerNavigator">
+        <filter comment="Findrefs is not yet mature for being API" id="305365105">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.findrefs.TreeViewerNavigator"/>
+                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
             </message_arguments>
         </filter>
     </resource>
