@@ -824,11 +824,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       boolean _operator_not = BooleanExtensions.operator_not(_contains);
       if (_operator_not) {
         _builder.append("\t");
-        _builder.append("superSequencer.sequence_");
-        String _name_2 = c.getName();
-        _builder.append(_name_2, "	");
-        _builder.append("(context, semanticObject);");
-        _builder.newLineIfNotEmpty();} else {
+        _builder.append("superSequencer.createSequence(context, semanticObject);");
+        _builder.newLine();} else {
         boolean _canGenerate = this.semanticSequencerUtil.canGenerate(c);
         if (_canGenerate) {
           _builder.append("\t");
