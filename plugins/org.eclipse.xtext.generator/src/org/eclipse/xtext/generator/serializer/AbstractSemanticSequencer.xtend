@@ -79,18 +79,14 @@ class AbstractSemanticSequencer extends GeneratedFile {
 			import «e.genPackage.qualifiedPackageName».*;
 		«ENDFOR»
 		
-		import com.google.common.collect.Lists;
 		import com.google.inject.Inject;
+		import com.google.inject.Provider;	
 		
 		@SuppressWarnings("restriction")
 		public class «simpleName» extends AbstractSemanticSequencer {
 		
 			@Inject
 			protected «grammar.gaSimpleName» grammarAccess;
-			
-			@Inject
-			@GenericSequencer
-			protected ISemanticSequencer genericSequencer;
 			
 			@Inject
 			protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
@@ -100,6 +96,19 @@ class AbstractSemanticSequencer extends GeneratedFile {
 			
 			@Inject
 			protected ISemanticNodeProvider nodeProvider;
+			
+			@Inject
+			@GenericSequencer
+			protected Provider<ISemanticSequencer> genericSequencerProvider;
+			
+			protected ISemanticSequencer genericSequencer;
+			
+			@Override
+			public void init(ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+				super.init(sequenceAcceptor, errorAcceptor);
+				this.genericSequencer = genericSequencerProvider.get();
+				this.genericSequencer.init(sequenceAcceptor, errorAcceptor);
+			}
 			
 			«genMethodFindContext»	
 			
@@ -112,14 +121,14 @@ class AbstractSemanticSequencer extends GeneratedFile {
 	'''.toString }
 	
 	genMethodFindContext() '''
-		public Iterable<EObject> findContexts(EObject semanticObject, Iterable<EObject> contextCandidates) {
+		public Iterable<EObject> findContexts(EObject semanticObject, boolean consultContainer, Iterable<EObject> contextCandidates) {
 			«var pkgi = 0»
 			«FOR pkg:accessedPackages  /* ITERATOR i */»
 				«IF (pkgi = pkgi + 1) > 1 /* !i.firstIteration */»else «ENDIF»if(semanticObject.eClass().getEPackage() == «pkg.genPackage.packageInterfaceName».eINSTANCE) 
 					switch(semanticObject.eClass().getClassifierID()) {
 						«val width = pkg.accessedClasses.fold(0, [max, type | Math::max(type.genIntLiteral.length, max)])»
 						«FOR type:pkg.accessedClasses»
-							case «type.genIntLiteral»:«(type.genIntLiteral.length..width).fold("",[s, i|s + " "])»return «IF type.accessedContexts.size == 1»singleton((EObject)grammarAccess.«type.accessedContexts.iterator.next.gaAccessor()»)«ELSE»findContexts((«type.getGenClass().interfaceName»)semanticObject, contextCandidates)«ENDIF»;
+							case «type.genIntLiteral»:«(type.genIntLiteral.length..width).fold("",[s, i|s + " "])»return «IF type.accessedContexts.size == 1»singleton((EObject)grammarAccess.«type.accessedContexts.iterator.next.gaAccessor()»)«ELSE»findContexts((«type.getGenClass().interfaceName»)semanticObject, consultContainer, contextCandidates)«ENDIF»;
 						«ENDFOR»
 					}
 			«ENDFOR»	
@@ -133,13 +142,13 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		 * Potential Result Contexts:
 		 *     «FOR ctx:type.accessedContexts SEPARATOR "\n*     "»«ctx.gaAccessor»«ENDFOR»
 		 */
-		protected Iterable<EObject> findContexts(«type.genClass().interfaceName» semanticObject, Iterable<EObject> contextCandidates) {
-			return genericSequencer.findContexts(semanticObject, contextCandidates);
+		protected Iterable<EObject> findContexts(«type.genClass().interfaceName» semanticObject, boolean consultContainer, Iterable<EObject> contextCandidates) {
+			return genericSequencer.findContexts(semanticObject, consultContainer, contextCandidates);
 		}
 	'''
 	
 	genMethodCreateSequence() '''
-		public void createSequence(EObject context, EObject semanticObject, ISemanticSequenceAcceptor sequenceAcceptor,	Acceptor errorAcceptor) {
+		public void createSequence(EObject context, EObject semanticObject) {
 			«var pkgi = 0 »
 			«FOR pkg:accessedPackages /* ITERATOR i */»
 			«IF (pkgi = pkgi + 1) > 1 /*!i.firstIteration */»else «ENDIF»if(semanticObject.eClass().getEPackage() == «pkg.getGenPackage().packageInterfaceName».eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
@@ -148,7 +157,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 					«var ctxi = 0»
 					«FOR ctx: type.accessedConstraints.entrySet /* ITERATOR j-  */»
 						«IF (ctxi = ctxi + 1) > 1 /*!j.firstIteration  */»else «ENDIF»if(«FOR c:ctx.value SEPARATOR " ||\n   "»context == grammarAccess.«c.gaAccessor»«ENDFOR») {
-							sequence_«ctx.key.name»(context, («type.name») semanticObject, sequenceAcceptor, errorAcceptor); 
+							sequence_«ctx.key.name»(context, («type.name») semanticObject); 
 							return; 
 						}
 					«ENDFOR»
@@ -170,7 +179,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 			«" *    "»«f.toString().replaceAll("\\n","\n *     ")»
 		«ENDFOR»
 		 */
-		protected void sequence_«c.name»(EObject context, «c.type.getGenClass().interfaceName» semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+		protected void sequence_«c.name»(EObject context, «c.type.getGenClass().interfaceName» semanticObject) {
 			«IF c.canGenerate()»
 				if(errorAcceptor != null) {
 					«FOR f:c.features.filter(e|e != null)»
@@ -181,11 +190,11 @@ class AbstractSemanticSequencer extends GeneratedFile {
 				INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
 				«FOR f: if(c.body.featureInfo != null) newArrayList(c.body.featureInfo) else c.body.children.filter(e|e.featureInfo != null).map(e|e.featureInfo)»
 					«val assignment=f.assignments.get(0)»
-					«assignment.type.toAcceptMethod()»(sequenceAcceptor, errorAcceptor, semanticObject, grammarAccess.«assignment.grammarElement.gaAccessor()», semanticObject.«f.feature.getGenFeature().getAccessor»(), -1, («assignment.type.toNodeType»)nodes.getNodeForSingelValue(«f.feature.genTypeLiteral», semanticObject.«f.feature.getGenFeature().getAccessor»()));
+					«assignment.type.toAcceptMethod()»(semanticObject, grammarAccess.«assignment.grammarElement.gaAccessor()», semanticObject.«f.feature.getGenFeature().getAccessor»(), -1, («assignment.type.toNodeType»)nodes.getNodeForSingelValue(«f.feature.genTypeLiteral», semanticObject.«f.feature.getGenFeature().getAccessor»()));
 				«ENDFOR»
-				acceptFinish(sequenceAcceptor);
+				acceptFinish();
 			«ELSE»
-				genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+				genericSequencer.createSequence(context, semanticObject);
 			«ENDIF»
 		}
 	'''
