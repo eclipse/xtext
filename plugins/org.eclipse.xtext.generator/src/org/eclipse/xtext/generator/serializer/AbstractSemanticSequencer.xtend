@@ -217,7 +217,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		 */
 		protected void sequence_«c.name»(EObject context, «c.type.getGenClass().interfaceName» semanticObject) {
 			«IF !newHashSet(grammar, null).contains(c.mostConcreteGrammar)»
-				superSequencer.sequence_«c.name»(context, semanticObject);
+				superSequencer.createSequence(context, semanticObject);
 			«ELSEIF c.canGenerate()»
 				if(errorAcceptor != null) {
 					«FOR f:c.features.filter(e|e != null)»
