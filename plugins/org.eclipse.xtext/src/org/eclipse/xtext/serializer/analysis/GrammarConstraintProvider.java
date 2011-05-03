@@ -289,8 +289,9 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 		@Override
 		public String toString() {
-			String body = getBody() != null ? getBody().toString() : "{" + type.getName() + "}";
-			return getName() + " returns " + getType().getName() + ": " + body + ";";
+			String typeName = getType() == null ? "null" : getType().getName();
+			String body = getBody() != null ? getBody().toString() : "{" + typeName + "}";
+			return getName() + " returns " + typeName + ": " + body + ";";
 		}
 
 	}
@@ -1279,13 +1280,18 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		ActionFilterState start = nfaProvider.getNFA(context);
 		Set<EClass> types = contextProvider.getTypesForContext(context);
 		for (EClass type : types) {
-			ConstraintElement ce = createConstraintElement(context, start, type, false, Sets.newHashSet());
-			if (ce == TYPEMATCH) {
-				Constraint constraint = new ActionConstraint(context, type, null, context2Name);
+			if (type == null) {
+				Constraint constraint = new ActionConstraint(context, null, null, context2Name);
 				result.addConstraint(constraint);
-			} else if (ce != null && ce != INVALID) {
-				Constraint constraint = new ActionConstraint(context, type, ce, context2Name);
-				result.addConstraint(constraint);
+			} else {
+				ConstraintElement ce = createConstraintElement(context, start, type, false, Sets.newHashSet());
+				if (ce == TYPEMATCH) {
+					Constraint constraint = new ActionConstraint(context, type, null, context2Name);
+					result.addConstraint(constraint);
+				} else if (ce != null && ce != INVALID) {
+					Constraint constraint = new ActionConstraint(context, type, ce, context2Name);
+					result.addConstraint(constraint);
+				}
 			}
 		}
 		return result;
@@ -1313,16 +1319,21 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				context2Name.getContextName(context));
 		Set<EClass> types = contextProvider.getTypesForContext(context);
 		for (EClass type : types) {
-			ConstraintElement ce = createConstraintElement(context, type, Sets.newHashSet());
-			if (ce == TYPEMATCH) {
-				Constraint constraint = new RuleConstraint(context, type, null, context2Name);
+			if (type == null) {
+				Constraint constraint = new RuleConstraint(context, null, null, context2Name);
 				result.addConstraint(constraint);
-			} else if (ce != null && ce != INVALID) {
-				Constraint constraint = new RuleConstraint(context, type, ce, context2Name);
-				result.addConstraint(constraint);
-			} else
-				System.err.println("constraint is " + ce + " for context " + context2Name.getContextName(context)
-						+ " and type " + (type == null ? "null" : type.getName()));
+			} else {
+				ConstraintElement ce = createConstraintElement(context, type, Sets.newHashSet());
+				if (ce == TYPEMATCH) {
+					Constraint constraint = new RuleConstraint(context, type, null, context2Name);
+					result.addConstraint(constraint);
+				} else if (ce != null && ce != INVALID) {
+					Constraint constraint = new RuleConstraint(context, type, ce, context2Name);
+					result.addConstraint(constraint);
+				} else
+					System.err.println("constraint is " + ce + " for context " + context2Name.getContextName(context)
+							+ " and type " + type.getName());
+			}
 		}
 		return result;
 	}

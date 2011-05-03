@@ -56,14 +56,22 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   
   public Iterable<EPackage> getAccessedPackages() {
     Collection<IConstraint> _grammarConstraints = this.semanticSequencerUtil.getGrammarConstraints(this.grammar);
-    final Function1<IConstraint,EPackage> _function = new Function1<IConstraint,EPackage>() {
-        public EPackage apply(IConstraint e) {
+    final Function1<IConstraint,Boolean> _function = new Function1<IConstraint,Boolean>() {
+        public Boolean apply(IConstraint e) {
           EClass _type = e.getType();
-          EPackage _ePackage = _type.getEPackage();
+          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_type, null);
+          return ((Boolean)_operator_notEquals);
+        }
+      };
+    Iterable<IConstraint> _filter = IterableExtensions.<IConstraint>filter(_grammarConstraints, _function);
+    final Function1<IConstraint,EPackage> _function_1 = new Function1<IConstraint,EPackage>() {
+        public EPackage apply(IConstraint e_1) {
+          EClass _type_1 = e_1.getType();
+          EPackage _ePackage = _type_1.getEPackage();
           return _ePackage;
         }
       };
-    Iterable<EPackage> _map = IterableExtensions.<IConstraint, EPackage>map(_grammarConstraints, _function);
+    Iterable<EPackage> _map = IterableExtensions.<IConstraint, EPackage>map(_filter, _function_1);
     Set<EPackage> _set = IterableExtensions.<EPackage>toSet(_map);
     return _set;
   }
@@ -79,11 +87,19 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     Iterable<EClass> _map = IterableExtensions.<IConstraint, EClass>map(_grammarConstraints, _function);
     final Function1<EClass,Boolean> _function_1 = new Function1<EClass,Boolean>() {
         public Boolean apply(EClass e_1) {
+          boolean _operator_and = false;
           final EClass typeConverted_e_1 = (EClass)e_1;
-          EPackage _ePackage = typeConverted_e_1.getEPackage();
-          final EPackage typeConverted_pkg = (EPackage)pkg;
-          boolean _operator_equals = ObjectExtensions.operator_equals(_ePackage, typeConverted_pkg);
-          return ((Boolean)_operator_equals);
+          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(typeConverted_e_1, null);
+          if (!_operator_notEquals) {
+            _operator_and = false;
+          } else {
+            final EClass typeConverted_e_1_1 = (EClass)e_1;
+            EPackage _ePackage = typeConverted_e_1_1.getEPackage();
+            final EPackage typeConverted_pkg = (EPackage)pkg;
+            boolean _operator_equals = ObjectExtensions.operator_equals(_ePackage, typeConverted_pkg);
+            _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_equals);
+          }
+          return ((Boolean)_operator_and);
         }
       };
     Iterable<EClass> _filter = IterableExtensions.<EClass>filter(_map, _function_1);
@@ -468,13 +484,21 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     _builder.newLine();
     _builder.append("\t");
     Collection<IConstraint> _accessedConstraints = this.getAccessedConstraints();
-    final Function1<IConstraint,StringConcatenation> _function_2 = new Function1<IConstraint,StringConcatenation>() {
-        public StringConcatenation apply(IConstraint e_3) {
-          StringConcatenation _genMethodSequence = AbstractSemanticSequencer.this.genMethodSequence(e_3);
+    final Function1<IConstraint,Boolean> _function_2 = new Function1<IConstraint,Boolean>() {
+        public Boolean apply(IConstraint e_3) {
+          EClass _type = e_3.getType();
+          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_type, null);
+          return ((Boolean)_operator_notEquals);
+        }
+      };
+    Iterable<IConstraint> _filter_1 = IterableExtensions.<IConstraint>filter(_accessedConstraints, _function_2);
+    final Function1<IConstraint,StringConcatenation> _function_3 = new Function1<IConstraint,StringConcatenation>() {
+        public StringConcatenation apply(IConstraint e_4) {
+          StringConcatenation _genMethodSequence = AbstractSemanticSequencer.this.genMethodSequence(e_4);
           return _genMethodSequence;
         }
       };
-    String _join_1 = IterableExtensions.<IConstraint>join(_accessedConstraints, "\n\n", _function_2);
+    String _join_1 = IterableExtensions.<IConstraint>join(_filter_1, "\n\n", _function_3);
     _builder.append(_join_1, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("}");

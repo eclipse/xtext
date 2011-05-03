@@ -31,11 +31,11 @@ class AbstractSemanticSequencer extends GeneratedFile {
 	}
 	
 	Iterable<EPackage> getAccessedPackages() {
-		grammar.grammarConstraints.map(e|e.type.EPackage).toSet
+		grammar.grammarConstraints.filter(e|e.type != null).map(e|e.type.EPackage).toSet
 	}
 	
 	Iterable<EClass> getAccessedClasses(EPackage pkg) {
-		grammar.grammarConstraints.map(e|e.type).filter(e|e.EPackage == pkg).toSet
+		grammar.grammarConstraints.map(e|e.type).filter(e|e != null && e.EPackage == pkg).toSet
 	}
 	
 	Iterable<EClass> getAccessedClasses() {
@@ -152,7 +152,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 			
 			«genMethodCreateSequence»
 			
-			«accessedConstraints.join("\n\n",[e|e.genMethodSequence])»
+			«accessedConstraints.filter(e|e.type!=null).join("\n\n",[e|e.genMethodSequence])»
 		}
 	'''.toString }
 	
