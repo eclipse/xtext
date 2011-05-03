@@ -43,17 +43,20 @@ public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 	private static final String pathToFile2 = TEST_PROJECT + "/file2.refactoringtestlanguage";
 	private static final URI uriToFile1 = URI.createURI("platform:/resource/" + pathToFile1);
 	private static final URI uriToFile2 = URI.createURI("platform:/resource/" + pathToFile2);
+	
 	private IProject project;
+	
 	@Inject
 	private ILinkedPositionGroupCalculator linkedModelCalculator;
+	
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
-	
+
 	@Override
 	protected String getEditorId() {
 		return "org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage";
 	}
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -63,7 +66,7 @@ public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 		Injector injector = Activator.getInstance().getInjector(getEditorId());
 		injector.injectMembers(this);
 	}
-	
+
 	public void testCorrectTextEditsDeclarationInFile() throws Exception {
 		String initialModel1 = "A { B ref A } C { D ref A }";
 		createFile(pathToFile1, initialModel1);
@@ -72,23 +75,25 @@ public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 		createFile(pathToFile2, initialModel2);
 		waitForAutoBuild();
 		XtextEditor editor = openEditor(file1);
-		EObject a  = editor.getDocument().readOnly(new IUnitOfWork<EObject, XtextResource>(){
+		EObject a = editor.getDocument().readOnly(new IUnitOfWork<EObject, XtextResource>() {
 			public EObject exec(XtextResource state) throws Exception {
 				return state.getContents().get(0).eContents().get(0);
 			}
 		});
 		URI uri = EcoreUtil.getURI(a);
 		selectElementInEditor(a, uri, editor, (XtextResource) a.eResource());
-		IRenameElementContext renameElementContext = new IRenameElementContext.Impl(uri, a.eClass(), editor, editor.getSelectionProvider().getSelection(),uriToFile1);
-		LinkedPositionGroup linkedPositionGroup = linkedModelCalculator.getLinkedPositionGroup(renameElementContext);
+		IRenameElementContext renameElementContext = new IRenameElementContext.Impl(uri, a.eClass(), editor, editor
+				.getSelectionProvider().getSelection(), uriToFile1);
+		LinkedPositionGroup linkedPositionGroup = linkedModelCalculator.getLinkedPositionGroup(renameElementContext,
+				null);
 		LinkedPosition[] positions = linkedPositionGroup.getPositions();
 		assertEquals(3, positions.length);
-		int[] offsets = {0,10,24};
-		for(int i = 0; i<positions.length;i++){
+		int[] offsets = { 0, 10, 24 };
+		for (int i = 0; i < positions.length; i++) {
 			assertEquals(offsets[i], positions[i].getOffset());
 		}
 	}
-	
+
 	public void testCorrectTextEditsDeclarationNotInFile() throws Exception {
 		String initialModel1 = "A { B ref A } C { D ref A }";
 		createFile(pathToFile1, initialModel1);
@@ -96,28 +101,29 @@ public class LinkedModelCalculatorIntegrationTest extends AbstractEditorTest {
 		IFile file2 = createFile(pathToFile2, initialModel2);
 		waitForAutoBuild();
 		XtextEditor editor = openEditor(file2);
-		EObject a  = editor.getDocument().readOnly(new IUnitOfWork<EObject, XtextResource>(){
+		EObject a = editor.getDocument().readOnly(new IUnitOfWork<EObject, XtextResource>() {
 
 			public EObject exec(XtextResource state) throws Exception {
-				return ((Element)state.getContents().get(0).eContents().get(0)).getReferenced().get(0);
+				return ((Element) state.getContents().get(0).eContents().get(0)).getReferenced().get(0);
 			}
-			
+
 		});
 
 		URI uri = EcoreUtil.getURI(a);
 		selectElementInEditor(a, uri, editor, (XtextResource) a.eResource());
-		IRenameElementContext renameElementContext = new IRenameElementContext.Impl(uri, a.eClass(), editor, editor.getSelectionProvider().getSelection(),uriToFile2);
-		LinkedPositionGroup linkedPositionGroup = linkedModelCalculator.getLinkedPositionGroup(renameElementContext);
+		IRenameElementContext renameElementContext = new IRenameElementContext.Impl(uri, a.eClass(), editor, editor
+				.getSelectionProvider().getSelection(), uriToFile2);
+		LinkedPositionGroup linkedPositionGroup = linkedModelCalculator.getLinkedPositionGroup(renameElementContext,
+				null);
 		LinkedPosition[] positions = linkedPositionGroup.getPositions();
 		assertEquals(2, positions.length);
-		
-		int[] offsets = {8,26};
-		for(int i = 0; i<positions.length;i++){
+
+		int[] offsets = { 8, 26 };
+		for (int i = 0; i < positions.length; i++) {
 			assertEquals(offsets[i], positions[i].getOffset());
 		}
 	}
-	
-	
+
 	protected void selectElementInEditor(EObject targetElement, final URI targetElementURI, final XtextEditor editor,
 			XtextResource editorResource) {
 		if (targetElementURI != null && targetElementURI.trimFragment().equals(editorResource.getURI())) {

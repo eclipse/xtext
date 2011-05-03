@@ -20,14 +20,13 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
  */
 public class ElementRenameArguments {
 
-	private URI contextResourceURI = null;
 	private final URI targetElementURI;
 	private final Map<URI, URI> original2newElementURIs;
 	private final IRenameStrategy renameStrategy;
 	private final String newName;
 
 	public ElementRenameArguments(URI targetElementURI, String newName, IRenameStrategy renameStrategy,
-			Map<URI, URI> original2newElementURIs, URI contextResourceURI) {
+			Map<URI, URI> original2newElementURIs) {
 		this.newName = newName;
 		this.targetElementURI = targetElementURI;
 		this.renameStrategy = renameStrategy;

@@ -7,14 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.ui;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.ltk.ui.refactoring.RefactoringWizardOpenOperation;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.refactoring.IRenameProcessorAdapter;
@@ -31,6 +36,9 @@ import com.google.inject.Singleton;
 public class RenameRefactoringController {
 
 	private static final Logger LOG = Logger.getLogger(RenameRefactoringController.class);
+
+	@Inject
+	private IWorkbench workbench;
 
 	@Inject
 	private Provider<RenameLinkedMode> renameLinkedModeProvider;
@@ -86,12 +94,13 @@ public class RenameRefactoringController {
 	}
 
 	public void startRefactoring(RefactoringType refactoringType) {
-		if (refactoringType == RefactoringType.LINKED_EDITING) {
-			startLinkedEditing();
-			return;
-		}
-		ViewFreezer freezer = new ViewFreezer(getXtextEditor().getInternalSourceViewer());
+		ViewFreezer freezer = null;
 		try {
+			if (refactoringType == RefactoringType.LINKED_EDITING) {
+				startLinkedEditing();
+				return;
+			}
+			freezer = new ViewFreezer(getXtextEditor().getInternalSourceViewer());
 			freezer.freeze();
 			// Cancel undoable right now because the freezer would show the old
 			// state and not the new one
@@ -115,11 +124,12 @@ public class RenameRefactoringController {
 			// canceling by the user is ok
 			restoreOriginalSelection();
 		} finally {
-			freezer.release();
+			if(freezer != null)
+				freezer.release();
 		}
 	}
 
-	protected void startLinkedEditing() {
+	protected void startLinkedEditing() throws InterruptedException {
 		if (activeLinkedMode != null) {
 			if (activeLinkedMode.isSameRenameElementContext(renameElementContext)) {
 				startRefactoring(RefactoringType.REFACTORING_DIALOG);
@@ -128,9 +138,18 @@ public class RenameRefactoringController {
 				cancelLinkedMode();
 			}
 		}
-		activeLinkedMode = renameLinkedModeProvider.get();
-		activeLinkedMode.start(renameElementContext);
-		undoSupport = new LinkedEditingUndoSupport(getXtextEditor());
+
+		try {
+			workbench.getProgressService().run(false, true, new IRunnableWithProgress() {
+				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+					activeLinkedMode = renameLinkedModeProvider.get();
+					activeLinkedMode.start(renameElementContext, monitor);
+					undoSupport = new LinkedEditingUndoSupport(getXtextEditor());
+				}
+			});
+		} catch (Exception exc) {
+			throw new WrappedException(exc);
+		}
 	}
 
 	public RenameLinkedMode getActiveLinkedMode() {

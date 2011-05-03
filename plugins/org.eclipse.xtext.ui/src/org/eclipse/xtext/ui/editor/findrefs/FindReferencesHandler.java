@@ -27,6 +27,8 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
+ * This class must neither be renamed nor moved.
+ *  
  * @author Jan Köhnlein - Initial contribution and API
  * @author Peter Friese
  */

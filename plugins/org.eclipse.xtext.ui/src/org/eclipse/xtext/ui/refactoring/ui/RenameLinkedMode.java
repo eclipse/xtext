@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.refactoring.ui;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
@@ -56,10 +57,10 @@ public class RenameLinkedMode {
 	private LinkedPositionGroup linkedPositionGroup;
 	private LinkedPosition currentPosition;
 
-	public void start(IRenameElementContext renameElementContext) {
+	public void start(IRenameElementContext renameElementContext, IProgressMonitor monitor) {
 		if (renameElementContext == null)
 			throw new IllegalArgumentException("RenameElementContext is null");
-		this.linkedPositionGroup = linkedPositionGroupCalculator.getLinkedPositionGroup(renameElementContext);
+		this.linkedPositionGroup = linkedPositionGroupCalculator.getLinkedPositionGroup(renameElementContext, monitor);
 		if (linkedPositionGroup == null || linkedPositionGroup.isEmpty())
 			throw new IllegalStateException("Calculation of linked editing positions failed");
 		this.editor = (XtextEditor) renameElementContext.getTriggeringEditor();

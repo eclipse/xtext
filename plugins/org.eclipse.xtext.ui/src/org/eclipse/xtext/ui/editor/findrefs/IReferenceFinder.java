@@ -11,7 +11,6 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.util.IAcceptor;
@@ -47,28 +46,19 @@ public interface IReferenceFinder {
 		String getLabel();
 	}
 
-	/**
-	 * Finds all References for given URIs.
-	 */
 	void findAllReferences(IQueryData queryData, ILocalResourceAccess localContextProvider,
 			IAcceptor<IReferenceDescription> acceptor, IProgressMonitor progressMonitor);
 
-	/**
-	 * Finds all References for given URIs.
-	 */
 	void findIndexedReferences(IQueryData queryData, IAcceptor<IReferenceDescription> acceptor,
 			IProgressMonitor progressMonitor);
 
 	/**
-	 * Finds all local references for the given URIs.
-	 */
-	void findLocalReferences(IQueryData queryData, ILocalResourceAccess localContextProvider,
-			IAcceptor<IReferenceDescription> acceptor, IProgressMonitor progressMonitor);
-
-	/**
 	 * @since 2.0
 	 */
-	void findLocalReferences(Set<EObject> targets, IAcceptor<IReferenceDescription> acceptor,
-			Predicate<IReferenceDescription> filter, IProgressMonitor monitor);
+	void findIndexedReferences(IQueryData queryData, URI resourceURI, IAcceptor<IReferenceDescription> acceptor,
+			IProgressMonitor progressMonitor);
+
+	void findLocalReferences(IQueryData queryData, ILocalResourceAccess localContextProvider,
+			IAcceptor<IReferenceDescription> acceptor, IProgressMonitor progressMonitor);
 
 }
