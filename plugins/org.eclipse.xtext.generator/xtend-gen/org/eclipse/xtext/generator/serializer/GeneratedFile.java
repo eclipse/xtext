@@ -10,12 +10,12 @@ public class GeneratedFile {
   @Inject private Grammar grammar;
   @Inject private Naming naming;
   
-  public String getName(final String prefix, final String component) {
-    String _basePackageRuntime = this.naming.basePackageRuntime(this.grammar);
+  public String getName(final Grammar grammar, final String prefix, final String component) {
+    String _basePackageRuntime = this.naming.basePackageRuntime(grammar);
     String _operator_plus = StringExtensions.operator_plus(_basePackageRuntime, ".serializer.");
     final String typeConverted_prefix = (String)prefix;
     String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, typeConverted_prefix);
-    String _name = this.grammar.getName();
+    String _name = grammar.getName();
     String _simpleName = this.naming.toSimpleName(_name);
     String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _simpleName);
     final String typeConverted_component = (String)component;
@@ -24,6 +24,11 @@ public class GeneratedFile {
   }
   
   public String getQualifiedName() {
+    String _qualifiedName = this.getQualifiedName(this.grammar);
+    return _qualifiedName;
+  }
+  
+  public String getQualifiedName(final Grammar grammar) {
     return null;
   }
   
@@ -35,6 +40,12 @@ public class GeneratedFile {
   
   public String getSimpleName() {
     String _qualifiedName = this.getQualifiedName();
+    String _simpleName = this.naming.toSimpleName(_qualifiedName);
+    return _simpleName;
+  }
+  
+  public String getSimpleName(final Grammar grammar) {
+    String _qualifiedName = this.getQualifiedName(grammar);
     String _simpleName = this.naming.toSimpleName(_qualifiedName);
     return _simpleName;
   }

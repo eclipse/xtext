@@ -13,8 +13,8 @@ class GrammarConstraints extends GeneratedFile {
 		"xtext"
 	}
 	 	
-	override getQualifiedName() {
-		getName("", "GrammarConstraints")
+	override getQualifiedName(Grammar grammar) {
+		grammar.getName("", "GrammarConstraints")
 	} 	
 	
 	override getFileContents() { '''

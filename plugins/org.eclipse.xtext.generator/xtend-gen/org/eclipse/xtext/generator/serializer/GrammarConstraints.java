@@ -23,8 +23,8 @@ public class GrammarConstraints extends GeneratedFile {
     return "xtext";
   }
   
-  public String getQualifiedName() {
-    String _name = this.getName("", "GrammarConstraints");
+  public String getQualifiedName(final Grammar grammar) {
+    String _name = this.getName(grammar, "", "GrammarConstraints");
     return _name;
   }
   

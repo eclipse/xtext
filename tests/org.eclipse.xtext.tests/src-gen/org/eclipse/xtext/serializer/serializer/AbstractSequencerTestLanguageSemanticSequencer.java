@@ -43,6 +43,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	
 	protected ISemanticSequencer genericSequencer;
 	
+	
 	@Override
 	public void init(ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		super.init(sequenceAcceptor, errorAcceptor);

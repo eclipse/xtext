@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import org.eclipse.xtext.common.types.*;
 import org.eclipse.xtext.xbase.*;
 import org.eclipse.xtext.xtype.*;
+import org.eclipse.xtext.xbase.serializer.XtypeSemanticSequencer;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;	
@@ -45,11 +46,18 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 	
 	protected ISemanticSequencer genericSequencer;
 	
+	@Inject
+	protected Provider<XtypeSemanticSequencer> superSequencerProvider;
+	 
+	protected XtypeSemanticSequencer superSequencer; 
+	
 	@Override
 	public void init(ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		super.init(sequenceAcceptor, errorAcceptor);
 		this.genericSequencer = genericSequencerProvider.get();
 		this.genericSequencer.init(sequenceAcceptor, errorAcceptor);
+		this.superSequencer = superSequencerProvider.get();
+		this.superSequencer.init(sequenceAcceptor, errorAcceptor); 
 	}
 	
 	public Iterable<EObject> findContexts(EObject semanticObject, boolean consultContainer, Iterable<EObject> contextCandidates) {
@@ -1007,12 +1015,12 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 				}
 				else break;
 			case TypesPackage.JVM_UPPER_BOUND:
-				if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
-					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				if(context == grammarAccess.getJvmUpperBoundRule()) {
+					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getJvmUpperBoundRule()) {
-					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				else if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
+					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
 				else break;
@@ -1842,7 +1850,7 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 	 *    typeReference[1, 1]
 	 */
 	protected void sequence_JvmLowerBound_JvmLowerBound(EObject context, JvmLowerBound semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		superSequencer.sequence_JvmLowerBound_JvmLowerBound(context, semanticObject);
 	}
 	
 	
@@ -1855,7 +1863,7 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 	 *    type[1, 1]
 	 */
 	protected void sequence_JvmParameterizedTypeReference_JvmParameterizedTypeReference(EObject context, JvmParameterizedTypeReference semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		superSequencer.sequence_JvmParameterizedTypeReference_JvmParameterizedTypeReference(context, semanticObject);
 	}
 	
 	
@@ -1868,7 +1876,7 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 	 *    name[1, 1]
 	 */
 	protected void sequence_JvmTypeParameter_JvmTypeParameter(EObject context, JvmTypeParameter semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		superSequencer.sequence_JvmTypeParameter_JvmTypeParameter(context, semanticObject);
 	}
 	
 	
@@ -1880,7 +1888,7 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 	 *    typeReference[1, 1]
 	 */
 	protected void sequence_JvmUpperBoundAnded_JvmUpperBound(EObject context, JvmUpperBound semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		superSequencer.sequence_JvmUpperBoundAnded_JvmUpperBound(context, semanticObject);
 	}
 	
 	
@@ -1892,7 +1900,7 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 	 *    typeReference[1, 1]
 	 */
 	protected void sequence_JvmUpperBound_JvmUpperBound(EObject context, JvmUpperBound semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		superSequencer.sequence_JvmUpperBound_JvmUpperBound(context, semanticObject);
 	}
 	
 	
@@ -1904,7 +1912,7 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 	 *    constraints[0, 2]
 	 */
 	protected void sequence_JvmWildcardTypeReference_JvmWildcardTypeReference(EObject context, JvmWildcardTypeReference semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		superSequencer.sequence_JvmWildcardTypeReference_JvmWildcardTypeReference(context, semanticObject);
 	}
 	
 	
@@ -2165,7 +2173,7 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 	 *    returnType[1, 1]
 	 */
 	protected void sequence_XFunctionTypeRef_XFunctionTypeRef(EObject context, XFunctionTypeRef semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		superSequencer.sequence_XFunctionTypeRef_XFunctionTypeRef(context, semanticObject);
 	}
 	
 	

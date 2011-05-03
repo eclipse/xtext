@@ -9,11 +9,15 @@ class GeneratedFile {
 	
 	@Inject extension Naming
 	
-	String getName(String prefix, String component) {
+	String getName(Grammar grammar, String prefix, String component) {
 		grammar.basePackageRuntime + ".serializer." + prefix + grammar.name.toSimpleName + component
 	}
 	
 	String getQualifiedName() {
+		grammar.qualifiedName;		
+	}
+	
+	String getQualifiedName(Grammar grammar) {
 		// abstract		
 	}
 	
@@ -23,6 +27,10 @@ class GeneratedFile {
 	
 	String getSimpleName() {
 		qualifiedName.toSimpleName
+	}
+	
+	String getSimpleName(Grammar grammar) {
+		grammar.qualifiedName.toSimpleName
 	}
 	
 	String getFileName() {

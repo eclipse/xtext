@@ -1,6 +1,7 @@
 package org.eclipse.xtext.generator.serializer;
 
 import com.google.inject.Inject;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.serializer.AbstractSemanticSequencer;
 import org.eclipse.xtext.generator.serializer.GeneratedFile;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
@@ -9,8 +10,8 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 public class SemanticSequencer extends GeneratedFile {
   @Inject private AbstractSemanticSequencer abstractSemanticSequencer;
   
-  public String getQualifiedName() {
-    String _name = this.getName("", "SemanticSequencer");
+  public String getQualifiedName(final Grammar grammar) {
+    String _name = this.getName(grammar, "", "SemanticSequencer");
     return _name;
   }
   
