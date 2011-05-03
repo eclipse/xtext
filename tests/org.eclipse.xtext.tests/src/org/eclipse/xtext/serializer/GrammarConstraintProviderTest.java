@@ -144,8 +144,9 @@ public class GrammarConstraintProviderTest extends AbstractXtextTests {
 	public void testEmptyAlternatives() throws Exception {
 		String actual = getParserRule("Rule: (x1=ID | x2=ID | 'foo') (x3=ID | x4=ID | 'foo' | 'bar');");
 		StringBuilder expected = new StringBuilder();
-		expected.append("Rule: Rule_Rule;\n");
-		expected.append("  Rule_Rule returns Rule: ((x1=ID | x2=ID)? (x3=ID | x4=ID)?);");
+		expected.append("Rule: Rule_Rule | Rule_null;\n");
+		expected.append("  Rule_Rule returns Rule: ((x1=ID | x2=ID)? (x3=ID | x4=ID)?);\n");
+		expected.append("  Rule_null returns null: {null};");
 		assertEquals(expected.toString(), actual);
 	}
 
