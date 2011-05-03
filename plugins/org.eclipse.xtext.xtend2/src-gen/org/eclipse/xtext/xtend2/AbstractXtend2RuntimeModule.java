@@ -39,11 +39,6 @@ public abstract class AbstractXtend2RuntimeModule extends DefaultRuntimeModule {
 		return org.eclipse.xtext.xtend2.services.Xtend2GrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.xtend2.parseTreeConstruction.Xtend2ParsetreeConstructor.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.xtend2.serializer.Xtend2SemanticSequencer.class;
