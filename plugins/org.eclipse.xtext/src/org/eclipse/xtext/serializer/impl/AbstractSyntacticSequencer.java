@@ -34,6 +34,7 @@ import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor
 import org.eclipse.xtext.serializer.diagnostic.ISyntacticSequencerDiagnosticProvider;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -284,12 +285,24 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 	//		ISynAbsorberState startState = getStartState(ctx);
 	//		return new SemAcceptor(ctx, startState, previousNode, constructor, errorAcceptor);
 	//	}
+	
+	@Inject
+	protected Injector injector;
 
 	public void createSequence(EObject ctx, EObject semanticObject, INode previousNode,
 			ISyntacticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		SemAcceptor acceptor = new SemAcceptor(ctx, semanticObject, pdaProvider.getPDA(ctx, semanticObject.eClass()),
 				previousNode, sequenceAcceptor, errorAcceptor);
-		semanticSequencer.createSequence(ctx, semanticObject, acceptor, errorAcceptor);
+		try {
+			ISemanticSequencer ss = semanticSequencer.getClass().newInstance();
+			injector.injectMembers(ss);
+			ss.init(acceptor, errorAcceptor);
+			ss.createSequence(ctx, semanticObject);
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Inject

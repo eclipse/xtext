@@ -19,18 +19,14 @@ import org.eclipse.xtext.serializer.impl.AbstractSemanticSequencer;
 import org.eclipse.xtext.serializer.services.SequencerTestLanguageGrammarAccess;
 import org.eclipse.xtext.serializer.sequencertest.*;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Provider;	
 
 @SuppressWarnings("restriction")
 public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject
 	protected SequencerTestLanguageGrammarAccess grammarAccess;
-	
-	@Inject
-	@GenericSequencer
-	protected ISemanticSequencer genericSequencer;
 	
 	@Inject
 	protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
@@ -41,7 +37,20 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	@Inject
 	protected ISemanticNodeProvider nodeProvider;
 	
-	public Iterable<EObject> findContexts(EObject semanticObject, Iterable<EObject> contextCandidates) {
+	@Inject
+	@GenericSequencer
+	protected Provider<ISemanticSequencer> genericSequencerProvider;
+	
+	protected ISemanticSequencer genericSequencer;
+	
+	@Override
+	public void init(ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+		super.init(sequenceAcceptor, errorAcceptor);
+		this.genericSequencer = genericSequencerProvider.get();
+		this.genericSequencer.init(sequenceAcceptor, errorAcceptor);
+	}
+	
+	public Iterable<EObject> findContexts(EObject semanticObject, boolean consultContainer, Iterable<EObject> contextCandidates) {
 		if(semanticObject.eClass().getEPackage() == SequencertestPackage.eINSTANCE) 
 			switch(semanticObject.eClass().getClassifierID()) {
 				case SequencertestPackage.ALT_LIST1:                           return singleton((EObject)grammarAccess.getAltList1Rule());
@@ -74,155 +83,155 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	}
 	
 	
-	public void createSequence(EObject context, EObject semanticObject, ISemanticSequenceAcceptor sequenceAcceptor,	Acceptor errorAcceptor) {
+	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == SequencertestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case SequencertestPackage.ALT_LIST1:
 				if(context == grammarAccess.getAltList1Rule()) {
-					sequence_AltList1_AltList1(context, (AltList1) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_AltList1_AltList1(context, (AltList1) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.ALT_LIST2:
 				if(context == grammarAccess.getAltList2Rule()) {
-					sequence_AltList2_AltList2(context, (AltList2) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_AltList2_AltList2(context, (AltList2) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.ALTERNATIVE_MULTIPLICITIES:
 				if(context == grammarAccess.getAlternativeMultiplicitiesRule()) {
-					sequence_AlternativeMultiplicities_AlternativeMultiplicities(context, (AlternativeMultiplicities) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_AlternativeMultiplicities_AlternativeMultiplicities(context, (AlternativeMultiplicities) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.DEPENDENT_ALTERNATIVE1:
 				if(context == grammarAccess.getDependentAlternative1Rule()) {
-					sequence_DependentAlternative1_DependentAlternative1(context, (DependentAlternative1) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_DependentAlternative1_DependentAlternative1(context, (DependentAlternative1) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.DEPENDENT_ALTERNATIVE2:
 				if(context == grammarAccess.getDependentAlternative2Rule()) {
-					sequence_DependentAlternative2_DependentAlternative2(context, (DependentAlternative2) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_DependentAlternative2_DependentAlternative2(context, (DependentAlternative2) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.GROUP_MULTIPLICITIES:
 				if(context == grammarAccess.getGroupMultiplicitiesRule()) {
-					sequence_GroupMultiplicities_GroupMultiplicities(context, (GroupMultiplicities) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_GroupMultiplicities_GroupMultiplicities(context, (GroupMultiplicities) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.LIST1:
 				if(context == grammarAccess.getList1Rule()) {
-					sequence_List1_List1(context, (List1) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_List1_List1(context, (List1) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.LIST2:
 				if(context == grammarAccess.getList2Rule()) {
-					sequence_List2_List2(context, (List2) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_List2_List2(context, (List2) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.MODEL:
 				if(context == grammarAccess.getModelRule()) {
-					sequence_Model_Model(context, (Model) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_Model_Model(context, (Model) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.MULTI_KEYWORDS_OR_ID:
 				if(context == grammarAccess.getMultiKeywordsOrIDRule()) {
-					sequence_MultiKeywordsOrID_MultiKeywordsOrID(context, (MultiKeywordsOrID) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_MultiKeywordsOrID_MultiKeywordsOrID(context, (MultiKeywordsOrID) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.MULTI_KEYWORDS:
 				if(context == grammarAccess.getMultiKeywordsRule()) {
-					sequence_MultiKeywords_MultiKeywords(context, (MultiKeywords) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_MultiKeywords_MultiKeywords(context, (MultiKeywords) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.MULTI_TERMINALS:
 				if(context == grammarAccess.getMultiTerminalsRule()) {
-					sequence_MultiTerminals_MultiTerminals(context, (MultiTerminals) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_MultiTerminals_MultiTerminals(context, (MultiTerminals) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.OPTIONAL:
 				if(context == grammarAccess.getOptionalRule()) {
-					sequence_Optional_Optional(context, (Optional) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_Optional_Optional(context, (Optional) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.SIMPLE_ALTERNATIVE:
 				if(context == grammarAccess.getSimpleAlternativeRule()) {
-					sequence_SimpleAlternative_SimpleAlternative(context, (SimpleAlternative) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_SimpleAlternative_SimpleAlternative(context, (SimpleAlternative) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.SIMPLE_GROUP:
 				if(context == grammarAccess.getSimpleGroupRule()) {
-					sequence_SimpleGroup_SimpleGroup(context, (SimpleGroup) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_SimpleGroup_SimpleGroup(context, (SimpleGroup) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.SIMPLE_MULTIPLICITIES:
 				if(context == grammarAccess.getSimpleMultiplicitiesRule()) {
-					sequence_SimpleMultiplicities_SimpleMultiplicities(context, (SimpleMultiplicities) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_SimpleMultiplicities_SimpleMultiplicities(context, (SimpleMultiplicities) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE_CHILD1:
 				if(context == grammarAccess.getSingleContainmentReferenceChild1Rule()) {
-					sequence_SingleContainmentReferenceChild1_SingleContainmentReferenceChild1(context, (SingleContainmentReferenceChild1) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_SingleContainmentReferenceChild1_SingleContainmentReferenceChild1(context, (SingleContainmentReferenceChild1) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE_CHILD2:
 				if(context == grammarAccess.getSingleContainmentReferenceChild2Rule()) {
-					sequence_SingleContainmentReferenceChild2_SingleContainmentReferenceChild2(context, (SingleContainmentReferenceChild2) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_SingleContainmentReferenceChild2_SingleContainmentReferenceChild2(context, (SingleContainmentReferenceChild2) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE_CHILD3:
 				if(context == grammarAccess.getSingleContainmentReferenceChild3Rule()) {
-					sequence_SingleContainmentReferenceChild3_SingleContainmentReferenceChild3(context, (SingleContainmentReferenceChild3) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_SingleContainmentReferenceChild3_SingleContainmentReferenceChild3(context, (SingleContainmentReferenceChild3) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE:
 				if(context == grammarAccess.getSingleContainmentReferenceRule()) {
-					sequence_SingleContainmentReference_SingleContainmentReference(context, (SingleContainmentReference) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_SingleContainmentReference_SingleContainmentReference(context, (SingleContainmentReference) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.SINGLE_CROSS_REFERENCE:
 				if(context == grammarAccess.getSingleCrossReferenceRule()) {
-					sequence_SingleCrossReference_SingleCrossReference(context, (SingleCrossReference) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_SingleCrossReference_SingleCrossReference(context, (SingleCrossReference) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.SINGLE_ENUM:
 				if(context == grammarAccess.getSingleEnumRule()) {
-					sequence_SingleEnum_SingleEnum(context, (SingleEnum) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_SingleEnum_SingleEnum(context, (SingleEnum) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.SINGLE_KEYWORDS_OR_ID:
 				if(context == grammarAccess.getSingleKeywordsOrIDRule()) {
-					sequence_SingleKeywordsOrID_SingleKeywordsOrID(context, (SingleKeywordsOrID) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_SingleKeywordsOrID_SingleKeywordsOrID(context, (SingleKeywordsOrID) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.SINGLE_KEYWORDS:
 				if(context == grammarAccess.getSingleKeywordsRule()) {
-					sequence_SingleKeywords_SingleKeywords(context, (SingleKeywords) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_SingleKeywords_SingleKeywords(context, (SingleKeywords) semanticObject); 
 					return; 
 				}
 				else break;
 			case SequencertestPackage.SINGLE_TERMINALS:
 				if(context == grammarAccess.getSingleTerminalsRule()) {
-					sequence_SingleTerminals_SingleTerminals(context, (SingleTerminals) semanticObject, sequenceAcceptor, errorAcceptor); 
+					sequence_SingleTerminals_SingleTerminals(context, (SingleTerminals) semanticObject); 
 					return; 
 				}
 				else break;
@@ -257,8 +266,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET val1
 	 *         EXCLUDE_IF_SET val3
 	 */
-	protected void sequence_AltList1_AltList1(EObject context, AltList1 semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+	protected void sequence_AltList1_AltList1(EObject context, AltList1 semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -281,8 +290,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET val1
 	 *         EXCLUDE_IF_SET val2
 	 */
-	protected void sequence_AltList2_AltList2(EObject context, AltList2 semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+	protected void sequence_AltList2_AltList2(EObject context, AltList2 semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -300,8 +309,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *    val6[0, *]
 	 *    val7[0, *]
 	 */
-	protected void sequence_AlternativeMultiplicities_AlternativeMultiplicities(EObject context, AlternativeMultiplicities semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+	protected void sequence_AlternativeMultiplicities_AlternativeMultiplicities(EObject context, AlternativeMultiplicities semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -316,8 +325,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         MANDATORY_IF_SET val
 	 *         EXCLUDE_IF_SET val
 	 */
-	protected void sequence_DependentAlternative1_DependentAlternative1(EObject context, DependentAlternative1 semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+	protected void sequence_DependentAlternative1_DependentAlternative1(EObject context, DependentAlternative1 semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -333,8 +342,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET val
 	 *         EXCLUDE_IF_SET val
 	 */
-	protected void sequence_DependentAlternative2_DependentAlternative2(EObject context, DependentAlternative2 semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+	protected void sequence_DependentAlternative2_DependentAlternative2(EObject context, DependentAlternative2 semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -359,8 +368,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *    val7[0, *]
 	 *         SAME val6
 	 */
-	protected void sequence_GroupMultiplicities_GroupMultiplicities(EObject context, GroupMultiplicities semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+	protected void sequence_GroupMultiplicities_GroupMultiplicities(EObject context, GroupMultiplicities semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -371,8 +380,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 * Features:
 	 *    val1[1, *]
 	 */
-	protected void sequence_List1_List1(EObject context, List1 semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+	protected void sequence_List1_List1(EObject context, List1 semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -383,8 +392,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 * Features:
 	 *    val1[0, *]
 	 */
-	protected void sequence_List2_List2(EObject context, List2 semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+	protected void sequence_List2_List2(EObject context, List2 semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -792,8 +801,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x19
 	 *         EXCLUDE_IF_SET x20
 	 */
-	protected void sequence_Model_Model(EObject context, Model semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+	protected void sequence_Model_Model(EObject context, Model semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -804,8 +813,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 * Features:
 	 *    val[0, 4]
 	 */
-	protected void sequence_MultiKeywordsOrID_MultiKeywordsOrID(EObject context, MultiKeywordsOrID semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+	protected void sequence_MultiKeywordsOrID_MultiKeywordsOrID(EObject context, MultiKeywordsOrID semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -816,8 +825,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 * Features:
 	 *    val[0, 3]
 	 */
-	protected void sequence_MultiKeywords_MultiKeywords(EObject context, MultiKeywords semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+	protected void sequence_MultiKeywords_MultiKeywords(EObject context, MultiKeywords semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -828,8 +837,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 * Features:
 	 *    val[0, 2]
 	 */
-	protected void sequence_MultiTerminals_MultiTerminals(EObject context, MultiTerminals semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+	protected void sequence_MultiTerminals_MultiTerminals(EObject context, MultiTerminals semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -846,8 +855,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_UNSET int1
 	 *         MANDATORY_IF_SET int1
 	 */
-	protected void sequence_Optional_Optional(EObject context, Optional semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+	protected void sequence_Optional_Optional(EObject context, Optional semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -861,8 +870,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *    val2[0, 1]
 	 *         EXCLUDE_IF_SET val1
 	 */
-	protected void sequence_SimpleAlternative_SimpleAlternative(EObject context, SimpleAlternative semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+	protected void sequence_SimpleAlternative_SimpleAlternative(EObject context, SimpleAlternative semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -874,7 +883,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *    val1[1, 1]
 	 *    val2[1, 1]
 	 */
-	protected void sequence_SimpleGroup_SimpleGroup(EObject context, SimpleGroup semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+	protected void sequence_SimpleGroup_SimpleGroup(EObject context, SimpleGroup semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, SequencertestPackage.Literals.SIMPLE_GROUP__VAL1) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SequencertestPackage.Literals.SIMPLE_GROUP__VAL1));
@@ -882,9 +891,9 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SequencertestPackage.Literals.SIMPLE_GROUP__VAL2));
 		}
 		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedTerminal(sequenceAcceptor, errorAcceptor, semanticObject, grammarAccess.getSimpleGroupAccess().getVal1IDTerminalRuleCall_1_0(), semanticObject.getVal1(), -1, (ILeafNode)nodes.getNodeForSingelValue(SequencertestPackage.Literals.SIMPLE_GROUP__VAL1, semanticObject.getVal1()));
-		acceptAssignedTerminal(sequenceAcceptor, errorAcceptor, semanticObject, grammarAccess.getSimpleGroupAccess().getVal2IDTerminalRuleCall_2_0(), semanticObject.getVal2(), -1, (ILeafNode)nodes.getNodeForSingelValue(SequencertestPackage.Literals.SIMPLE_GROUP__VAL2, semanticObject.getVal2()));
-		acceptFinish(sequenceAcceptor);
+		acceptAssignedTerminal(semanticObject, grammarAccess.getSimpleGroupAccess().getVal1IDTerminalRuleCall_1_0(), semanticObject.getVal1(), -1, (ILeafNode)nodes.getNodeForSingelValue(SequencertestPackage.Literals.SIMPLE_GROUP__VAL1, semanticObject.getVal1()));
+		acceptAssignedTerminal(semanticObject, grammarAccess.getSimpleGroupAccess().getVal2IDTerminalRuleCall_2_0(), semanticObject.getVal2(), -1, (ILeafNode)nodes.getNodeForSingelValue(SequencertestPackage.Literals.SIMPLE_GROUP__VAL2, semanticObject.getVal2()));
+		acceptFinish();
 	}
 	
 	
@@ -898,8 +907,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *    val3[1, *]
 	 *    val4[0, *]
 	 */
-	protected void sequence_SimpleMultiplicities_SimpleMultiplicities(EObject context, SimpleMultiplicities semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+	protected void sequence_SimpleMultiplicities_SimpleMultiplicities(EObject context, SimpleMultiplicities semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -910,14 +919,14 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 * Features:
 	 *    val[1, 1]
 	 */
-	protected void sequence_SingleContainmentReferenceChild1_SingleContainmentReferenceChild1(EObject context, SingleContainmentReferenceChild1 semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+	protected void sequence_SingleContainmentReferenceChild1_SingleContainmentReferenceChild1(EObject context, SingleContainmentReferenceChild1 semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD1__VAL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD1__VAL));
 		}
 		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedKeyword(sequenceAcceptor, errorAcceptor, semanticObject, grammarAccess.getSingleContainmentReferenceChild1Access().getValKw1Keyword_0(), semanticObject.getVal(), -1, (ILeafNode)nodes.getNodeForSingelValue(SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD1__VAL, semanticObject.getVal()));
-		acceptFinish(sequenceAcceptor);
+		acceptAssignedKeyword(semanticObject, grammarAccess.getSingleContainmentReferenceChild1Access().getValKw1Keyword_0(), semanticObject.getVal(), -1, (ILeafNode)nodes.getNodeForSingelValue(SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD1__VAL, semanticObject.getVal()));
+		acceptFinish();
 	}
 	
 	
@@ -928,14 +937,14 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 * Features:
 	 *    val[1, 1]
 	 */
-	protected void sequence_SingleContainmentReferenceChild2_SingleContainmentReferenceChild2(EObject context, SingleContainmentReferenceChild2 semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+	protected void sequence_SingleContainmentReferenceChild2_SingleContainmentReferenceChild2(EObject context, SingleContainmentReferenceChild2 semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD2__VAL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD2__VAL));
 		}
 		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedKeyword(sequenceAcceptor, errorAcceptor, semanticObject, grammarAccess.getSingleContainmentReferenceChild2Access().getValKw2Keyword_0(), semanticObject.getVal(), -1, (ILeafNode)nodes.getNodeForSingelValue(SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD2__VAL, semanticObject.getVal()));
-		acceptFinish(sequenceAcceptor);
+		acceptAssignedKeyword(semanticObject, grammarAccess.getSingleContainmentReferenceChild2Access().getValKw2Keyword_0(), semanticObject.getVal(), -1, (ILeafNode)nodes.getNodeForSingelValue(SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD2__VAL, semanticObject.getVal()));
+		acceptFinish();
 	}
 	
 	
@@ -946,14 +955,14 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 * Features:
 	 *    val[1, 1]
 	 */
-	protected void sequence_SingleContainmentReferenceChild3_SingleContainmentReferenceChild3(EObject context, SingleContainmentReferenceChild3 semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+	protected void sequence_SingleContainmentReferenceChild3_SingleContainmentReferenceChild3(EObject context, SingleContainmentReferenceChild3 semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD3__VAL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD3__VAL));
 		}
 		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedKeyword(sequenceAcceptor, errorAcceptor, semanticObject, grammarAccess.getSingleContainmentReferenceChild3Access().getValKw3Keyword_0(), semanticObject.getVal(), -1, (ILeafNode)nodes.getNodeForSingelValue(SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD3__VAL, semanticObject.getVal()));
-		acceptFinish(sequenceAcceptor);
+		acceptAssignedKeyword(semanticObject, grammarAccess.getSingleContainmentReferenceChild3Access().getValKw3Keyword_0(), semanticObject.getVal(), -1, (ILeafNode)nodes.getNodeForSingelValue(SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD3__VAL, semanticObject.getVal()));
+		acceptFinish();
 	}
 	
 	
@@ -964,8 +973,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 * Features:
 	 *    child[0, 3]
 	 */
-	protected void sequence_SingleContainmentReference_SingleContainmentReference(EObject context, SingleContainmentReference semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+	protected void sequence_SingleContainmentReference_SingleContainmentReference(EObject context, SingleContainmentReference semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -977,8 +986,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *    name[0, 3]
 	 *    ref[0, 3]
 	 */
-	protected void sequence_SingleCrossReference_SingleCrossReference(EObject context, SingleCrossReference semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+	protected void sequence_SingleCrossReference_SingleCrossReference(EObject context, SingleCrossReference semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -989,8 +998,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 * Features:
 	 *    val[0, 3]
 	 */
-	protected void sequence_SingleEnum_SingleEnum(EObject context, SingleEnum semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+	protected void sequence_SingleEnum_SingleEnum(EObject context, SingleEnum semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -1001,8 +1010,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 * Features:
 	 *    val[0, 4]
 	 */
-	protected void sequence_SingleKeywordsOrID_SingleKeywordsOrID(EObject context, SingleKeywordsOrID semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+	protected void sequence_SingleKeywordsOrID_SingleKeywordsOrID(EObject context, SingleKeywordsOrID semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -1013,8 +1022,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 * Features:
 	 *    val[0, 3]
 	 */
-	protected void sequence_SingleKeywords_SingleKeywords(EObject context, SingleKeywords semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+	protected void sequence_SingleKeywords_SingleKeywords(EObject context, SingleKeywords semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -1025,7 +1034,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 * Features:
 	 *    val[0, 2]
 	 */
-	protected void sequence_SingleTerminals_SingleTerminals(EObject context, SingleTerminals semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+	protected void sequence_SingleTerminals_SingleTerminals(EObject context, SingleTerminals semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 }

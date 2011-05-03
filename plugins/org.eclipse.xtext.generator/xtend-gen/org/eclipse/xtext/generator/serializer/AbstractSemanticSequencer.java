@@ -173,9 +173,9 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       }
     }
     _builder.newLine();
-    _builder.append("import com.google.common.collect.Lists;");
-    _builder.newLine();
     _builder.append("import com.google.inject.Inject;");
+    _builder.newLine();
+    _builder.append("import com.google.inject.Provider;\t");
     _builder.newLine();
     _builder.newLine();
     _builder.append("@SuppressWarnings(\"restriction\")");
@@ -201,17 +201,6 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     _builder.append("@Inject");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("@GenericSequencer");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("protected ISemanticSequencer genericSequencer;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("@Inject");
-    _builder.newLine();
-    _builder.append("\t");
     _builder.append("protected ISemanticSequencerDiagnosticProvider diagnosticProvider;");
     _builder.newLine();
     _builder.append("\t");
@@ -229,6 +218,42 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("protected ISemanticNodeProvider nodeProvider;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Inject");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@GenericSequencer");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("protected Provider<ISemanticSequencer> genericSequencerProvider;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("protected ISemanticSequencer genericSequencer;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void init(ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("super.init(sequenceAcceptor, errorAcceptor);");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this.genericSequencer = genericSequencerProvider.get();");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this.genericSequencer.init(sequenceAcceptor, errorAcceptor);");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
     _builder.newLine();
     _builder.append("\t");
     _builder.newLine();
@@ -286,7 +311,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   
   public StringConcatenation genMethodFindContext() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("public Iterable<EObject> findContexts(EObject semanticObject, Iterable<EObject> contextCandidates) {");
+    _builder.append("public Iterable<EObject> findContexts(EObject semanticObject, boolean consultContainer, Iterable<EObject> contextCandidates) {");
     _builder.newLine();
     _builder.append("\t");
     int pkgi = 0;
@@ -370,7 +395,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                 GenClass _genClass = GenModelAccess.getGenClass(type_1);
                 String _interfaceName = _genClass.getInterfaceName();
                 _builder.append(_interfaceName, "			");
-                _builder.append(")semanticObject, contextCandidates)");
+                _builder.append(")semanticObject, consultContainer, contextCandidates)");
               }
             }
             _builder.append(";");
@@ -421,10 +446,10 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     GenClass _genClass = GenModelAccess.getGenClass(type);
     String _interfaceName = _genClass.getInterfaceName();
     _builder.append(_interfaceName, "");
-    _builder.append(" semanticObject, Iterable<EObject> contextCandidates) {");
+    _builder.append(" semanticObject, boolean consultContainer, Iterable<EObject> contextCandidates) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
-    _builder.append("return genericSequencer.findContexts(semanticObject, contextCandidates);");
+    _builder.append("return genericSequencer.findContexts(semanticObject, consultContainer, contextCandidates);");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -433,7 +458,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   
   public StringConcatenation genMethodCreateSequence() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("public void createSequence(EObject context, EObject semanticObject, ISemanticSequenceAcceptor sequenceAcceptor,\tAcceptor errorAcceptor) {");
+    _builder.append("public void createSequence(EObject context, EObject semanticObject) {");
     _builder.newLine();
     _builder.append("\t");
     int pkgi = 0;
@@ -518,7 +543,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                 final EClass typeConverted_type_1 = (EClass)type;
                 String _name_1 = typeConverted_type_1.getName();
                 _builder.append(_name_1, "				");
-                _builder.append(") semanticObject, sequenceAcceptor, errorAcceptor); ");
+                _builder.append(") semanticObject); ");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");
                 _builder.append("\t");
@@ -616,7 +641,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     GenClass _genClass = GenModelAccess.getGenClass(_type_1);
     String _interfaceName = _genClass.getInterfaceName();
     _builder.append(_interfaceName, "");
-    _builder.append(" semanticObject, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {");
+    _builder.append(" semanticObject) {");
     _builder.newLineIfNotEmpty();
     {
       boolean _canGenerate = this.semanticSequencerUtil.canGenerate(c);
@@ -700,7 +725,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             ConstraintElementType _type_2 = assignment.getType();
             String _acceptMethod = this.semanticSequencerUtil.toAcceptMethod(_type_2);
             _builder.append(_acceptMethod, "	");
-            _builder.append("(sequenceAcceptor, errorAcceptor, semanticObject, grammarAccess.");
+            _builder.append("(semanticObject, grammarAccess.");
             AbstractElement _grammarElement = assignment.getGrammarElement();
             String _gaAccessor = this.grammarAccess.gaAccessor(_grammarElement);
             _builder.append(_gaAccessor, "	");
@@ -727,10 +752,10 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           }
         }
         _builder.append("\t");
-        _builder.append("acceptFinish(sequenceAcceptor);");
+        _builder.append("acceptFinish();");
         _builder.newLine();} else {
         _builder.append("\t");
-        _builder.append("genericSequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);");
+        _builder.append("genericSequencer.createSequence(context, semanticObject);");
         _builder.newLine();
       }
     }

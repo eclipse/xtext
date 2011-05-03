@@ -40,7 +40,8 @@ public interface ISyntacticSequencer {
 
 		public void createSequence(EObject context, EObject semanticObject, INode previousNode,
 				ISyntacticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-			sequencer.createSequence(context, semanticObject, sequenceAcceptor, errorAcceptor);
+			sequencer.init(sequenceAcceptor, errorAcceptor);
+			sequencer.createSequence(context, semanticObject);
 		}
 	}
 

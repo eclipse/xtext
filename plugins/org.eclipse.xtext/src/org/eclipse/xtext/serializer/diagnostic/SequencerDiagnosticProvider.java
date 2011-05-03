@@ -58,7 +58,7 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 	}
 
 	public ISerializationDiagnostic createInvalidContextOrTypeDiagnostic(EObject semanticObject, EObject context) {
-		Set<EObject> recommendations = Sets.newHashSet(semanticSequencer.findContexts(semanticObject, null));
+		Set<EObject> recommendations = Sets.newHashSet(semanticSequencer.findContexts(semanticObject, true, null));
 		List<EClass> validTypes = getValidTypes(context);
 		List<EObject> recommendedCtxs = Lists.newArrayList();
 		List<EObject> otherValidCtxs = Lists.newArrayList();
