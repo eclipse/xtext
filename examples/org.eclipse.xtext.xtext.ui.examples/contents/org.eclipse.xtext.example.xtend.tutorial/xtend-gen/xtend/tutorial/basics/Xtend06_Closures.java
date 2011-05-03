@@ -16,7 +16,7 @@ public class Xtend06_Closures {
   
   public ArrayList<Object> closures_01(final List<Person> persons) {
     final Function1<Person,String> _function = new Function1<Person,String>() {
-        public String apply(Person p) {
+        public String apply(final Person p) {
           String _name = p.getName();
           String _operator_plus = StringExtensions.operator_plus(_name, ", ");
           String _forename = p.getForename();
@@ -42,7 +42,7 @@ public class Xtend06_Closures {
   
   public void closures_02(final List<Person> persons) {
     final Function2<Person,Person,Integer> _function = new Function2<Person,Person,Integer>() {
-        public Integer apply(Person a , Person b) {
+        public Integer apply(final Person a , final Person b) {
           String _name = a.getName();
           String _name_1 = b.getName();
           int _compareTo = _name.compareTo(_name_1);
@@ -50,15 +50,15 @@ public class Xtend06_Closures {
         }
       };
     Collections.<Person>sort(persons, new Comparator<Person>() {
-        public int compare(Person arg0,Person arg1) {
-          return _function.apply(arg0,arg1);
+        public int compare(Person o1,Person o2) {
+          return _function.apply(o1,o2);
         }
     });
   }
   
   public Function1<String,String> closures_withoutTypeInference() {
     final Function1<String,String> _function = new Function1<String,String>() {
-        public String apply(String s) {
+        public String apply(final String s) {
           String _upperCase = s.toUpperCase();
           return _upperCase;
         }

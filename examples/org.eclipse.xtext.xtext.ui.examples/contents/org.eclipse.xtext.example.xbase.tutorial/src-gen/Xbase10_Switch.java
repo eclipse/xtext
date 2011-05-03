@@ -37,7 +37,7 @@ public class Xbase10_Switch {
 		  ArrayList<Shape> _newArrayList_1 = CollectionLiterals.<Shape>newArrayList(_rectangle, _circle, _rectangle_1);
 		  final ArrayList<Shape> list2 = _newArrayList_1;
 		  final Function1<Shape,String> _function = new Function1<Shape,String>() {
-		      public String apply(Shape shape) {
+		      public String apply(final Shape shape) {
 		        String _switchResult_1 = null;
 		        final Shape shape_1 = shape;
 		        boolean matched_1 = false;

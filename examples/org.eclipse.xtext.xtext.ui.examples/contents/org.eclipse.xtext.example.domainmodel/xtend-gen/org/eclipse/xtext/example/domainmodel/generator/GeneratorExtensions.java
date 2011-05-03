@@ -57,7 +57,7 @@ public class GeneratorExtensions extends DomainmodelExtensions {
   public String parameterList(final Operation o, final ImportManager importManager) {
     EList<JvmFormalParameter> _params = o.getParams();
     final Function1<JvmFormalParameter,String> _function = new Function1<JvmFormalParameter,String>() {
-        public String apply(JvmFormalParameter p) {
+        public String apply(final JvmFormalParameter p) {
           JvmTypeReference _parameterType = p.getParameterType();
           String _shortName = GeneratorExtensions.this.shortName(_parameterType, importManager);
           String _operator_plus = StringExtensions.operator_plus(_shortName, " ");

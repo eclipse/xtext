@@ -58,7 +58,7 @@ public class DomainmodelScopeProvider extends XbaseScopeProvider {
           {
             EList<JvmFormalParameter> _params = context_3.getParams();
             final Function1<JvmFormalParameter,IEObjectDescription> _function = new Function1<JvmFormalParameter,IEObjectDescription>() {
-                public IEObjectDescription apply(JvmFormalParameter e) {
+                public IEObjectDescription apply(final JvmFormalParameter e) {
                   IEObjectDescription _createIEObjectDescription = DomainmodelScopeProvider.this.createIEObjectDescription(e);
                   return _createIEObjectDescription;
                 }

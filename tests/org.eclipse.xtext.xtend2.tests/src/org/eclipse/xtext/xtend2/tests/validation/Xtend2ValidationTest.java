@@ -57,7 +57,7 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testVoidInDependency() throws Exception {
-		XtendClass clazz = clazz("class X { @Inject void }");
+		XtendClass clazz = clazz("class X { @Inject void v }");
 		helper.assertError(clazz, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE);
 	}
 	
@@ -67,32 +67,32 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testNoReturnInCreateFunctions() throws Exception {
-		XtendFunction function = function("create if (true) return 'foo' else 'bar' foo() { }");
+		XtendFunction function = function("create result: if (true) return 'foo' else 'bar' foo() { }");
 		helper.assertError(function, XbasePackage.Literals.XRETURN_EXPRESSION, INVALID_EARLY_EXIT);
 	}
 	
 	public void testNoReturnInCreateFunctions_00() throws Exception {
-		XtendFunction function = function("create [|if (true) return 'foo' else 'bar'] foo() { }");
+		XtendFunction function = function("create result: [|if (true) return 'foo' else 'bar'] foo() { }");
 		helper.assertNoErrors(function);
 	}
 	
 	public void testNoReturnInCreateFunctions_01() throws Exception {
-		XtendFunction function = function("create 'foo' foo() { return 'bar' }");
+		XtendFunction function = function("create result:'foo' foo() { return 'bar' }");
 		helper.assertError(function, XbasePackage.Literals.XSTRING_LITERAL, INCOMPATIBLE_TYPES);
 	}
 	
 	public void testNoReturnInCreateFunctions_02() throws Exception {
-		XtendFunction function = function("create 'foo' foo() { return }");
+		XtendFunction function = function("create result:'foo' foo() { return }");
 		helper.assertNoErrors(function);
 	}
 	
 	public void testNoReturnInCreateFunctions_03() throws Exception {
-		XtendFunction function = function("create 'foo' foo() { [|return 'foo'].apply() }");
+		XtendFunction function = function("create result:'foo' foo() { [|return 'foo'].apply() }");
 		helper.assertNoErrors(function);
 	}
 	
 	public void testNoReturnInCreateFunctions_04() throws Exception {
-		XtendFunction function = function("create 'foo' foo() { if (true) 'foo'+'bar' else return 'baz' }");
+		XtendFunction function = function("create result:'foo' foo() { if (true) 'foo'+'bar' else return 'baz' }");
 		helper.assertError(function, XbasePackage.Literals.XSTRING_LITERAL, INCOMPATIBLE_TYPES);
 	}
 

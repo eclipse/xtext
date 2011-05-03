@@ -35,15 +35,15 @@ Member returns XtendMember:
 	Function | DeclaredDependency ;
 
 DeclaredDependency returns DeclaredDependency :
-	'@Inject' (extension?='extension')? type=JvmTypeReference ('as' name=ID)?;
+	'@Inject' (extension?='extension')? type=JvmTypeReference name=ID;
 
 Function returns XtendFunction :
 	(override?='override'? & dispatch?='dispatch'?) ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
-	(returnType=JvmTypeReference | createExtensionInfo=CreateExtensionInfo)? name=ID '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')'
+	returnType=JvmTypeReference? createExtensionInfo=CreateExtensionInfo? name=ID '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')'
 		(expression=XBlockExpression | expression=RichString )?;
 
 CreateExtensionInfo:
-	'create' (name=ID ':')? createExpression=XExpression
+	'create' name=ID ':' createExpression=XExpression
 ;
 
 // type is mandatory for Xtend functions

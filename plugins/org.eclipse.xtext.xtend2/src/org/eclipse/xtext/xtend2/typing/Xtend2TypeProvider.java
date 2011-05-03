@@ -70,6 +70,18 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 			if (function.getCreateExtensionInfo()!=null)
 				return getTypeReferences().getTypeForName(Void.TYPE, function);
 			JvmTypeReference declaredOrInferredReturnType = getDeclaredOrOverriddenReturnType(function);
+			// TODO why do we expect null if Void.TYPE is the declared return type?
+			if (declaredOrInferredReturnType == null || getTypeReferences().is(declaredOrInferredReturnType, Void.TYPE))
+				return null;
+			return declaredOrInferredReturnType;
+		}
+		return null;
+	}
+	
+	protected JvmTypeReference _expectedType(CreateExtensionInfo info, EReference reference, int index, boolean rawType) {
+		if (reference == Xtend2Package.Literals.CREATE_EXTENSION_INFO__CREATE_EXPRESSION) {
+			XtendFunction function = EcoreUtil2.getContainerOfType(info, XtendFunction.class);
+			JvmTypeReference declaredOrInferredReturnType = getDeclaredOrOverriddenReturnType(function);
 			if (declaredOrInferredReturnType == null || getTypeReferences().is(declaredOrInferredReturnType, Void.TYPE))
 				return null;
 			return declaredOrInferredReturnType;
@@ -86,9 +98,9 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 			return null;
 		if (function.getCreateExtensionInfo()!=null) {
 			if (EcoreUtil.isAncestor(function.getCreateExtensionInfo().getCreateExpression(), expr))
-				return null;
+				return getDeclaredOrOverriddenReturnType(function);
 		}
-		return _expectedType(function, Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION,0,rawType);
+		return _expectedType(function, Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION, 0, rawType);
 	}
 	
 	protected JvmTypeReference _type(RichString richString, boolean rawType) {
@@ -212,12 +224,15 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 	}
 
 	protected JvmTypeReference getDeclaredOrOverriddenReturnType(XtendFunction func) {
+		if (func.getReturnType() != null)
+			return func.getReturnType();
+		JvmTypeReference overridden = overridesService.getOverriddenReturnType(func);
+		if (overridden != null)
+			return overridden;
 		if (func.getCreateExtensionInfo()!=null) {
 			return getType(func.getCreateExtensionInfo().getCreateExpression());
 		}
-		if (func.getReturnType() != null)
-			return func.getReturnType();
-		return overridesService.getOverriddenReturnType(func);
+		return null;
 	}
 
 	protected JvmTypeReference _typeForIdentifiable(JvmGenericType type, boolean rawType) {

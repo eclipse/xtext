@@ -56,7 +56,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
   public Iterable<JvmDeclaredType> _transform(final DomainModel model) {
     EList<AbstractElement> _elements = model.getElements();
     final Function1<AbstractElement,Iterable<JvmDeclaredType>> _function = new Function1<AbstractElement,Iterable<JvmDeclaredType>>() {
-        public Iterable<JvmDeclaredType> apply(AbstractElement e) {
+        public Iterable<JvmDeclaredType> apply(final AbstractElement e) {
           Iterable<JvmDeclaredType> _transform = DomainmodelJvmModelInferrer.this.transform(e);
           return _transform;
         }
@@ -69,7 +69,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
   public Iterable<JvmDeclaredType> _transform(final PackageDeclaration packageDecl) {
     EList<AbstractElement> _elements = packageDecl.getElements();
     final Function1<AbstractElement,Iterable<JvmDeclaredType>> _function = new Function1<AbstractElement,Iterable<JvmDeclaredType>>() {
-        public Iterable<JvmDeclaredType> apply(AbstractElement e) {
+        public Iterable<JvmDeclaredType> apply(final AbstractElement e) {
           Iterable<JvmDeclaredType> _transform = DomainmodelJvmModelInferrer.this.transform(e);
           return _transform;
         }
@@ -174,7 +174,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       EList<JvmFormalParameter> _parameters = jvmOperation.getParameters();
       EList<JvmFormalParameter> _params = operation.getParams();
       final Function1<JvmFormalParameter,JvmFormalParameter> _function = new Function1<JvmFormalParameter,JvmFormalParameter>() {
-          public JvmFormalParameter apply(JvmFormalParameter p) {
+          public JvmFormalParameter apply(final JvmFormalParameter p) {
             JvmFormalParameter _cloneWithProxies_1 = EcoreUtil2.<JvmFormalParameter>cloneWithProxies(p);
             return _cloneWithProxies_1;
           }

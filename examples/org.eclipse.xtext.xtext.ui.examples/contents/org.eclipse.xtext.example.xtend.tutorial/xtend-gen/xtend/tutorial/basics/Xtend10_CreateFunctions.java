@@ -67,7 +67,7 @@ public class Xtend10_CreateFunctions extends TestCase {
       result.setName(_name);
       Iterable<NetNode> _references = toCopy.getReferences();
       final Function1<NetNode,NetNode> _function = new Function1<NetNode,NetNode>() {
-          public NetNode apply(NetNode node) {
+          public NetNode apply(final NetNode node) {
             NetNode _copyNet = Xtend10_CreateFunctions.this.copyNet(node);
             return _copyNet;
           }

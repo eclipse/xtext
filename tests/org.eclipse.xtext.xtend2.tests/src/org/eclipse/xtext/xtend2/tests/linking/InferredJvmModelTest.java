@@ -48,7 +48,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 	private IXtend2JvmAssociations associations;
 	
 	public void testDeclaredDependency_00() throws Exception {
-		XtendFile xtendFile = file("class Foo { @Inject String }");
+		XtendFile xtendFile = file("class Foo { @Inject String string }");
 		JvmGenericType type = getInferredType(xtendFile);
 		Iterable<JvmField> iterable = type.getDeclaredFields();
 		JvmField next = iterable.iterator().next();
@@ -453,7 +453,7 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		assertEquals(inferredType, ((JvmUpperBound) typeConstraint).getTypeReference().getType());
 	}
 
-	public void testInferredFunction() throws Exception {
+	public void testInferredFunction_01() throws Exception {
 		XtendFile xtendFile = file("class Foo { bar() { true } }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		XtendClass xtendClass = xtendFile.getXtendClass();
@@ -466,9 +466,32 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		assertEquals(jvmMember, associations.getDirectlyInferredOperation(xtendFunction));
 		assertEquals(xtendFunction, associations.getXtendFunction((JvmOperation) inferredType.getMembers().get(1)));
 	}
+	
+	public void testInferredFunction_02() throws Exception {
+		XtendFile xtendFile = file("class Foo { create result: newArrayList(s) newList(String s) {} }");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		XtendClass xtendClass = xtendFile.getXtendClass();
+		EList<JvmMember> jvmMembers = inferredType.getMembers();
+		assertEquals(2, jvmMembers.size());
+		JvmMember jvmMember = jvmMembers.get(1);
+		assertTrue(jvmMember instanceof JvmOperation);
+		XtendFunction xtendFunction = (XtendFunction) xtendClass.getMembers().get(0);
+		assertEquals(xtendFunction.getIdentifier(), jvmMember.getIdentifier());
+		assertEquals("java.util.ArrayList<java.lang.String>", ((JvmOperation) jvmMember).getReturnType().getIdentifier());
+	}
 
-	public void testInferredFunctionWithReturnType() throws Exception {
+	public void testInferredFunctionWithReturnType_01() throws Exception {
 		XtendFile xtendFile = file("class Foo { Boolean bar() { true } }");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		assertTrue(inferredType.getMembers().get(0) instanceof JvmConstructor);
+		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
+		XtendFunction xtendFunction = (XtendFunction) xtendFile.getXtendClass().getMembers().get(0);
+		assertFalse(xtendFunction.getReturnType() == jvmOperation.getReturnType());
+		assertEquals(xtendFunction.getReturnType().getType(), jvmOperation.getReturnType().getType());
+	}
+	
+	public void testInferredFunctionWithReturnType_02() throws Exception {
+		XtendFile xtendFile = file("class Foo { Iterable<String> create result: newArrayList newList() {} }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		assertTrue(inferredType.getMembers().get(0) instanceof JvmConstructor);
 		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);

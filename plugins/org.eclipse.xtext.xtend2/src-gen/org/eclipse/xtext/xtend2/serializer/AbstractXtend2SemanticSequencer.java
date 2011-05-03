@@ -1181,12 +1181,12 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 					sequence_RichStringLiteralEnd_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getRichStringLiteralInbetweenRule()) {
-					sequence_RichStringLiteralInbetween_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
-					return; 
-				}
 				else if(context == grammarAccess.getRichStringLiteralStartRule()) {
 					sequence_RichStringLiteralStart_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getRichStringLiteralInbetweenRule()) {
+					sequence_RichStringLiteralInbetween_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
 				else break;
@@ -2146,23 +2146,32 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (name=ID? createExpression=XExpression)
+	 *     (name=ID createExpression=XExpression)
 	 *
 	 * Features:
 	 *    createExpression[1, 1]
-	 *    name[0, 1]
+	 *    name[1, 1]
 	 */
 	protected void sequence_CreateExtensionInfo_CreateExtensionInfo(EObject context, CreateExtensionInfo semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, Xtend2Package.Literals.CREATE_EXTENSION_INFO__CREATE_EXPRESSION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Xtend2Package.Literals.CREATE_EXTENSION_INFO__CREATE_EXPRESSION));
+			if(transientValues.isValueTransient(semanticObject, Xtend2Package.Literals.CREATE_EXTENSION_INFO__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Xtend2Package.Literals.CREATE_EXTENSION_INFO__NAME));
+		}
+		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
+		acceptAssignedTerminal(semanticObject, grammarAccess.getCreateExtensionInfoAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName(), -1, (ILeafNode)nodes.getNodeForSingelValue(Xtend2Package.Literals.CREATE_EXTENSION_INFO__NAME, semanticObject.getName()));
+		acceptAssignedParserRuleCall(semanticObject, grammarAccess.getCreateExtensionInfoAccess().getCreateExpressionXExpressionParserRuleCall_3_0(), semanticObject.getCreateExpression(), -1, (ICompositeNode)nodes.getNodeForSingelValue(Xtend2Package.Literals.CREATE_EXTENSION_INFO__CREATE_EXPRESSION, semanticObject.getCreateExpression()));
+		acceptFinish();
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (extension?='extension'? type=JvmTypeReference name=ID?)
+	 *     (extension?='extension'? type=JvmTypeReference name=ID)
 	 *
 	 * Features:
-	 *    name[0, 1]
+	 *    name[1, 1]
 	 *    type[1, 1]
 	 *    extension[0, 1]
 	 */
@@ -2191,7 +2200,8 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	 *         override?='override'?
 	 *         dispatch?='dispatch'?
 	 *         (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)?
-	 *         (returnType=JvmTypeReference | createExtensionInfo=CreateExtensionInfo)?
+	 *         returnType=JvmTypeReference?
+	 *         createExtensionInfo=CreateExtensionInfo?
 	 *         name=ID
 	 *         (parameters+=Parameter parameters+=Parameter*)?
 	 *         (expression=XBlockExpression | expression=RichString)?
@@ -2203,12 +2213,10 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	 *    name[1, 1]
 	 *    expression[0, 2]
 	 *    returnType[0, 1]
-	 *         EXCLUDE_IF_SET createExtensionInfo
 	 *    parameters[0, *]
 	 *    override[0, 1]
 	 *    dispatch[0, 1]
 	 *    createExtensionInfo[0, 1]
-	 *         EXCLUDE_IF_SET returnType
 	 */
 	protected void sequence_Function_XtendFunction(EObject context, XtendFunction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

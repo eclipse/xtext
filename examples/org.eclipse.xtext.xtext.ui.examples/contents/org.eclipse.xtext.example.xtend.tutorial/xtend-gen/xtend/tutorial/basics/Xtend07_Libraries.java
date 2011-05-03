@@ -40,7 +40,7 @@ public class Xtend07_Libraries extends TestCase {
     Iterable<String> _xblockexpression = null;
     {
       final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
-          public Boolean apply(String e) {
+          public Boolean apply(final String e) {
             int _length = e.length();
             boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_length), ((Integer)3));
             return ((Boolean)_operator_equals);
@@ -49,7 +49,7 @@ public class Xtend07_Libraries extends TestCase {
       String _findFirst = IterableExtensions.<String>findFirst(myStrings, _function);
       InputOutput.<String>println(_findFirst);
       final Function1<String,String> _function_1 = new Function1<String,String>() {
-          public String apply(String e_1) {
+          public String apply(final String e_1) {
             String _upperCase = e_1.toUpperCase();
             return _upperCase;
           }
@@ -57,7 +57,7 @@ public class Xtend07_Libraries extends TestCase {
       Iterable<String> _map = IterableExtensions.<String, String>map(myStrings, _function_1);
       InputOutput.<Iterable<String>>println(_map);
       final Function1<String,Boolean> _function_2 = new Function1<String,Boolean>() {
-          public Boolean apply(String e_2) {
+          public Boolean apply(final String e_2) {
             int _length_1 = e_2.length();
             boolean _operator_lessEqualsThan = ComparableExtensions.<Integer>operator_lessEqualsThan(((Integer)_length_1), ((Integer)3));
             return ((Boolean)_operator_lessEqualsThan);
