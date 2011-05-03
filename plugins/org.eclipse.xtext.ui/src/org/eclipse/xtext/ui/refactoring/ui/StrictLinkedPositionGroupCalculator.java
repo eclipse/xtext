@@ -7,10 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.ui;
 
-import static com.google.common.collect.Iterables.*;
-
-import java.lang.reflect.InvocationTargetException;
-import java.util.Comparator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -18,38 +14,26 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.link.LinkedPosition;
 import org.eclipse.jface.text.link.LinkedPositionGroup;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.RefactoringTickProvider;
 import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.text.edits.ReplaceEdit;
-import org.eclipse.ui.IWorkbench;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.refactoring.ILinkedPositionGroupCalculator;
 import org.eclipse.xtext.ui.refactoring.IRenameProcessorAdapter;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicates;
-import com.google.common.collect.ImmutableSortedSet;
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
  * @author Holger Schill - Initial contribution and API
  * @author Jan Koehnlein
  */
-public class LinkedPositionGroupCalculator implements ILinkedPositionGroupCalculator {
-
-	@Inject
-	private IWorkbench workbench;
+public class StrictLinkedPositionGroupCalculator extends AbstractLinkedPositionGroupCalculator {
 
 	@Inject
 	private ReplaceEditExtractor replaceEditExtractor;
@@ -60,7 +44,7 @@ public class LinkedPositionGroupCalculator implements ILinkedPositionGroupCalcul
 	@Inject
 	private IGlobalServiceProvider globalServiceProvider;
 
-	private Logger log = Logger.getLogger(LinkedPositionGroupCalculator.class);
+	private Logger log = Logger.getLogger(StrictLinkedPositionGroupCalculator.class);
 
 	protected ProcessorBasedRefactoring createRenameRefactoring(IRenameElementContext renameElementContext) {
 		IRenameRefactoringProvider renameRefactoringProvider = globalServiceProvider.findService(
@@ -68,19 +52,16 @@ public class LinkedPositionGroupCalculator implements ILinkedPositionGroupCalcul
 		return renameRefactoringProvider.getRenameRefactoring(renameElementContext);
 	}
 
-	public LinkedPositionGroup getLinkedPositionGroup(final IRenameElementContext renameElementContext) {
+	public LinkedPositionGroup getLinkedPositionGroup(final IRenameElementContext renameElementContext,
+			IProgressMonitor monitor) {
 		try {
 			final ProcessorBasedRefactoring renameRefactoring = createRenameRefactoring(renameElementContext);
 			final LinkedPositionGroup[] result = new LinkedPositionGroup[1];
-			workbench.getActiveWorkbenchWindow().run(false, true, new IRunnableWithProgress() {
-				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-					result[0] = internalGetLinkedPositionGroup(renameElementContext, renameRefactoring, monitor);
-					if (monitor.isCanceled())
-						result[0] = null;
-					else
-						monitor.done();
-				}
-			});
+			result[0] = internalGetLinkedPositionGroup(renameElementContext, renameRefactoring, monitor);
+			if (monitor.isCanceled())
+				result[0] = null;
+			else
+				monitor.done();
 			return result[0];
 		} catch (Exception exc) {
 			throw new WrappedException(exc);
@@ -96,65 +77,14 @@ public class LinkedPositionGroupCalculator implements ILinkedPositionGroupCalcul
 		final String originalName = renameProcessorAdapter.getOriginalName();
 		renameProcessorAdapter.setNewName(getDummyNewName(originalName));
 		List<ReplaceEdit> edits = computeReplaceEditsForDocument(renameRefactoring, document, progress.newChild(80));
-		if (edits == null)
-			return null;
-		LinkedPositionGroup group = new LinkedPositionGroup();
-		Iterable<LinkedPosition> linkedPositions = filter(
-				Iterables.transform(edits, new Function<ReplaceEdit, LinkedPosition>() {
-					public LinkedPosition apply(ReplaceEdit edit) {
-						try {
-							String textToReplace = document.get(edit.getOffset(), edit.getLength());
-							int indexOf = textToReplace.indexOf(originalName);
-							if (indexOf != -1) {
-								int calculatedOffset = edit.getOffset() + indexOf;
-								return new LinkedPosition(document, calculatedOffset, originalName.length());
-							}
-						} catch (BadLocationException exc) {
-							log.error(exc.getMessage(), exc);
-						}
-						return null;
-					}
-				}), Predicates.notNull());
-		progress.worked(10);
-		final int invocationOffset = xtextEditor.getInternalSourceViewer().getSelectedRange().x;
-		int i = 0;
-		for (LinkedPosition position : sortPositions(linkedPositions, invocationOffset)) {
-			try {
-				position.setSequenceNumber(i);
-				i++;
-				group.addPosition(position);
-			} catch (BadLocationException e) {
-				log.error(e.getMessage(), e);
-				return null;
-			}
-		}
-		return group;
+		return createLinkedGroupFromReplaceEdits(edits, xtextEditor, originalName, progress);
 	}
 
 	/**
-	 * JDT refactorings don't allow to rename to the original name.  
+	 * JDT refactorings must change the name.
 	 */
-	protected String getDummyNewName(final String originalName) {
-		return originalName + "______";
-	}
-
-	protected Iterable<LinkedPosition> sortPositions(Iterable<LinkedPosition> linkedPositions,
-			final int invocationOffset) {
-		Comparator<LinkedPosition> comparator = new Comparator<LinkedPosition>() {
-
-			public int compare(LinkedPosition left, LinkedPosition right) {
-				return rank(left) - rank(right);
-			}
-
-			private int rank(LinkedPosition o1) {
-				int relativeRank = o1.getOffset() + o1.length - invocationOffset;
-				if (relativeRank < 0)
-					return Integer.MAX_VALUE + relativeRank;
-				else
-					return relativeRank;
-			}
-		};
-		return ImmutableSortedSet.copyOf(comparator, linkedPositions);
+	protected String getDummyNewName(String originalName) {
+		return originalName + "_____";
 	}
 
 	protected List<ReplaceEdit> computeReplaceEditsForDocument(ProcessorBasedRefactoring renameRefactoring,

@@ -66,6 +66,23 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 		findIndexedReferences(queryData.getTargetURIs(), acceptor, queryData.getResultFilter(), monitor);
 	}
 
+	/**
+	 * @since 2.0
+	 */
+	public void findIndexedReferences(IQueryData queryData, URI resourceURI, IAcceptor<IReferenceDescription> acceptor,
+			IProgressMonitor progressMonitor) {
+		IResourceDescription resourceDescription = index.getResourceDescription(resourceURI.trimFragment());
+		if (resourceDescription != null) {
+			for (IReferenceDescription referenceDescription : resourceDescription.getReferenceDescriptions()) {
+				if (queryData.getTargetURIs().contains(referenceDescription.getTargetEObjectUri())
+						&& (queryData.getResultFilter() == null || queryData.getResultFilter().apply(
+								referenceDescription))) {
+					acceptor.accept(referenceDescription);
+				}
+			}
+		}
+	}
+
 	public void findLocalReferences(final IQueryData queryData, ILocalResourceAccess localResourceAccess,
 			final IAcceptor<IReferenceDescription> acceptor, IProgressMonitor monitor) {
 		final SubMonitor subMonitor = SubMonitor.convert(monitor, "Find references", 1);
@@ -83,13 +100,13 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 		});
 	}
 
-	public void findLocalReferences(Set<EObject> targets,
-			IAcceptor<IReferenceDescription> acceptor, Predicate<IReferenceDescription> filter, IProgressMonitor monitor) {
+	public void findLocalReferences(Set<EObject> targets, IAcceptor<IReferenceDescription> acceptor,
+			Predicate<IReferenceDescription> filter, IProgressMonitor monitor) {
 		if (monitor != null && monitor.isCanceled())
 			return;
 		if (targets != null && !targets.isEmpty()) {
 			Set<Resource> targetResources = new HashSet<Resource>();
-			for(EObject target: targets) {
+			for (EObject target : targets) {
 				targetResources.add(target.eResource());
 			}
 			Map<EObject, Collection<Setting>> targetResourceInternalCrossRefs = CrossReferencer.find(targetResources);

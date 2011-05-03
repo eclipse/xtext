@@ -7,9 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.text.link.LinkedPositionGroup;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.ui.refactoring.ui.LinkedPositionGroupCalculator;
+import org.eclipse.xtext.ui.refactoring.ui.SimpleLinkedPositionGroupCalculator;
 
 import com.google.inject.ImplementedBy;
 
@@ -17,9 +18,10 @@ import com.google.inject.ImplementedBy;
  * @author Holger Schill - Initial contribution and API
  * @author Jan Koehnlein
  */
-@ImplementedBy(LinkedPositionGroupCalculator.class)
+@ImplementedBy(SimpleLinkedPositionGroupCalculator.class)
 public interface ILinkedPositionGroupCalculator {
 
-	public LinkedPositionGroup getLinkedPositionGroup(IRenameElementContext renameElementContext);
-	
+	public LinkedPositionGroup getLinkedPositionGroup(IRenameElementContext renameElementContext,
+			IProgressMonitor monitor);
+
 }
