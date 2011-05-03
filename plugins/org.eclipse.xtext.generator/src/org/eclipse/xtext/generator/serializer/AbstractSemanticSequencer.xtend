@@ -4,8 +4,10 @@ import org.eclipse.xtext.generator.grammarAccess.GrammarAccess
 import java.util.List
 import org.eclipse.xtext.serializer.impl.GrammarConstraintProvider
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider$IConstraint
+import org.eclipse.xtext.serializer.IGrammarConstraintProvider$IConstraintElement
 import org.eclipse.xtext.Grammar
 import static extension org.eclipse.xtext.generator.GenModelAccess.*
+import static extension org.eclipse.xtext.GrammarUtil.*
 import org.eclipse.xtext.generator.serializer.SemanticSequencerUtil.*
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.EClass
@@ -22,8 +24,10 @@ class AbstractSemanticSequencer extends GeneratedFile {
 	
 	@Inject extension SemanticSequencerUtil
 	
-	override String getQualifiedName() {
-		getName("Abstract", "SemanticSequencer");		
+	@Inject SemanticSequencer
+	
+	override String getQualifiedName(Grammar grammar) {
+		grammar.getName("Abstract", "SemanticSequencer");		
 	}
 	
 	Iterable<EPackage> getAccessedPackages() {
@@ -54,6 +58,24 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		grammar.getGrammarConstraints()
 	}
 	
+	getGrammars(IGrammarConstraintProvider$IConstraintElement ele) {
+		val result = <Grammar>newHashSet();
+		if(ele != null && ele.grammarElement != null) result.add(ele.grammarElement.grammar);
+		if(ele != null && ele.children != null) for(g:ele.children.map(c|c.grammars).flatten) result.add(g);
+		return result;
+	}
+	
+	uses(Grammar g1, Grammar g2) {
+		g1 != null && g1.usedGrammars.exists(e|e == g2 || e.uses(g2))
+	}
+	
+	getMostConcreteGrammar(IGrammarConstraintProvider$IConstraint constraint) {
+		constraint.body.grammars.reduce(x, y | if(x.uses(y)) x else y)
+	}
+	
+	usesSuperGrammar() {
+		accessedConstraints.map(c|c.mostConcreteGrammar).exists(g|g!=grammar)
+	}
 	
 	override getFileContents() { '''
 		package «packageName»;
@@ -78,6 +100,9 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		«FOR e:accessedPackages»
 			import «e.genPackage.qualifiedPackageName».*;
 		«ENDFOR»
+		«IF usesSuperGrammar»
+			import «semanticSequencer.getQualifiedName(grammar.usedGrammars.head)»;
+		«ENDIF»
 		
 		import com.google.inject.Inject;
 		import com.google.inject.Provider;	
@@ -103,11 +128,22 @@ class AbstractSemanticSequencer extends GeneratedFile {
 			
 			protected ISemanticSequencer genericSequencer;
 			
+			«IF usesSuperGrammar»
+				@Inject
+				protected Provider<«semanticSequencer.getSimpleName(grammar.usedGrammars.head)»> superSequencerProvider;
+				 
+				protected «semanticSequencer.getSimpleName(grammar.usedGrammars.head)» superSequencer; 
+			«ENDIF»
+			
 			@Override
 			public void init(ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 				super.init(sequenceAcceptor, errorAcceptor);
 				this.genericSequencer = genericSequencerProvider.get();
 				this.genericSequencer.init(sequenceAcceptor, errorAcceptor);
+				«IF usesSuperGrammar»
+					this.superSequencer = superSequencerProvider.get();
+					this.superSequencer.init(sequenceAcceptor, errorAcceptor); 
+				«ENDIF»
 			}
 			
 			«genMethodFindContext»	
@@ -180,7 +216,9 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		«ENDFOR»
 		 */
 		protected void sequence_«c.name»(EObject context, «c.type.getGenClass().interfaceName» semanticObject) {
-			«IF c.canGenerate()»
+			«IF !newHashSet(grammar, null).contains(c.mostConcreteGrammar)»
+				superSequencer.sequence_«c.name»(context, semanticObject);
+			«ELSEIF c.canGenerate()»
 				if(errorAcceptor != null) {
 					«FOR f:c.features.filter(e|e != null)»
 						if(transientValues.isValueTransient(semanticObject, «f.feature.genTypeLiteral») == ValueTransient.YES)
