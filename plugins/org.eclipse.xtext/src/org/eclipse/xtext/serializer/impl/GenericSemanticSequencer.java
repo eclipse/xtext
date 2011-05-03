@@ -37,9 +37,7 @@ import org.eclipse.xtext.serializer.ISemanticNodeProvider;
 import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.ITransientValueService;
 import org.eclipse.xtext.serializer.ITransientValueService.ValueTransient;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -61,8 +59,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			super();
 		}
 
-		public abstract void accept(EObject semanticObj, IConstraintElement constraint,
-				ISemanticSequenceAcceptor acceptor, ISerializationDiagnostic.Acceptor errors);
+		public abstract void accept(EObject semanticObj, IConstraintElement constraint);
 
 		public abstract int maxValues(IConstraintElement constraint);
 
@@ -91,9 +88,8 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		}
 
 		@Override
-		public void accept(EObject semanticObj, IConstraintElement constraint, ISemanticSequenceAcceptor acceptor,
-				ISerializationDiagnostic.Acceptor errors) {
-			acceptSemantic(acceptor, semanticObj, constraint, value, index, node, errors);
+		public void accept(EObject semanticObj, IConstraintElement constraint) {
+			acceptSemantic(semanticObj, constraint, value, index, node);
 		}
 
 		public Object getValue() {
@@ -125,9 +121,8 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		}
 
 		@Override
-		public void accept(EObject semanticObj, IConstraintElement constraint, ISemanticSequenceAcceptor acceptor,
-				ISerializationDiagnostic.Acceptor errors) {
-			child.accept(semanticObj, acceptor, errors);
+		public void accept(EObject semanticObj, IConstraintElement constraint) {
+			child.accept(semanticObj);
 		}
 
 		protected Quantity getChild() {
@@ -194,10 +189,9 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		}
 
 		@Override
-		public void accept(EObject semanticObj, IConstraintElement constraint, ISemanticSequenceAcceptor acceptor,
-				ISerializationDiagnostic.Acceptor errors) {
+		public void accept(EObject semanticObj, IConstraintElement constraint) {
 			for (Quantity q : children)
-				q.accept(semanticObj, acceptor, errors);
+				q.accept(semanticObj);
 		}
 
 		public void addChild(Quantity quantity) {
@@ -338,11 +332,10 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			this.constraintElement = constraintElement;
 		}
 
-		public void accept(EObject semanticObj, ISemanticSequenceAcceptor acceptor,
-				ISerializationDiagnostic.Acceptor errors) {
+		public void accept(EObject semanticObj) {
 			if (instances != null)
 				for (Allocation a : instances)
-					a.accept(semanticObj, constraintElement, acceptor, errors);
+					a.accept(semanticObj, constraintElement);
 		}
 
 		public List<? extends Allocation> getAllocations() {
@@ -633,8 +626,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		return false;
 	}
 
-	public void createSequence(EObject context, EObject semanticObject, ISemanticSequenceAcceptor sequenceAcceptor,
-			ISerializationDiagnostic.Acceptor errorAcceptor) {
+	public void createSequence(EObject context, EObject semanticObject) {
 		initConstraints();
 		IConstraint constraint = getConstraint(context, semanticObject.eClass());
 		//		System.out.println("Constraint: " + constraint);
@@ -652,7 +644,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 					values));
 			//		System.out.println("Quantity: " + quant + " EndQuantity");
 			//		List<IGrammarValuePair> result = Lists.newArrayList();
-			quant.accept(semanticObject, sequenceAcceptor, errorAcceptor);
+			quant.accept(semanticObject);
 		}
 		sequenceAcceptor.finish();
 	}
@@ -911,7 +903,8 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		return result;
 	}
 
-	public Iterable<EObject> findContexts(EObject semanitcObject, Iterable<EObject> contextCandidates) {
+	public Iterable<EObject> findContexts(EObject semanitcObject, boolean consultContext,
+			Iterable<EObject> contextCandidates) {
 		initConstraints();
 		// TODO: actually validate if the constraints match
 		if (contextCandidates == null)
@@ -948,7 +941,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		Set<EObject> contexts = Sets.newHashSet();
 		for (IConstraintElement ass : assignments)
 			contexts.add(ass.getCallContext());
-		contexts = Sets.newHashSet(findContexts(value, contexts));
+		contexts = Sets.newHashSet(findContexts(value, false, contexts));
 		List<IConstraintElement> result = Lists.newArrayList();
 		for (IConstraintElement ass : assignments)
 			if (contexts.contains(ass.getCallContext()))

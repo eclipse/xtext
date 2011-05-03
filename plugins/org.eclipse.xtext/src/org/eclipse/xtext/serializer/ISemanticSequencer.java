@@ -1,6 +1,5 @@
 package org.eclipse.xtext.serializer;
 
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
@@ -14,6 +13,8 @@ public interface ISemanticSequencer {
 	public interface ISemanticSequencerOwner {
 		public void setSemanticSequencer(ISemanticSequencer sequencer);
 	}
+
+	void init(ISemanticSequenceAcceptor sequenceAcceptor, ISerializationDiagnostic.Acceptor errorAcceptor);
 
 	/**
 	 * An implementation of this interface converts all direct children of a semantic object into a sequence of
@@ -51,9 +52,8 @@ public interface ISemanticSequencer {
 	 * 
 	 *         (DatatypeRuleCall, ReferencedEObject) for assigned cross references.
 	 */
-	void createSequence(EObject context, EObject semanticObject, ISemanticSequenceAcceptor sequenceAcceptor,
-			ISerializationDiagnostic.Acceptor errorAcceptor);
+	void createSequence(EObject context, EObject semanticObject);
 
-	Iterable<EObject> findContexts(EObject semanitcObject, Iterable<EObject> contextCandidates);
+	Iterable<EObject> findContexts(EObject semanitcObject, boolean consultContainer, Iterable<EObject> contextCandidates);
 
 }

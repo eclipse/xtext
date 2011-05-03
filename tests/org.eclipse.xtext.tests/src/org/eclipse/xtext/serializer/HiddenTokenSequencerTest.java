@@ -9,24 +9,20 @@ package org.eclipse.xtext.serializer;
 
 import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
-import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementFullTitleSwitch;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.serializer.acceptor.DebugSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.impl.EmitterNodeIterator;
-import org.eclipse.xtext.serializer.impl.NodeModelSyntacticSequencer;
+import org.eclipse.xtext.serializer.impl.NodeModelSemanticSequencer;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -69,8 +65,8 @@ public class HiddenTokenSequencerTest extends AbstractXtextTests {
 
 	private void testSequence(String stringModel) throws Exception {
 		EObject model = getModel(stringModel);
-		NodeModelSyntacticSequencer nmSequencer = new NodeModelSyntacticSequencer();
-		EObject context = nmSequencer.findContexts(model, null).iterator().next();
+		NodeModelSemanticSequencer nmSequencer = new NodeModelSemanticSequencer();
+		EObject context = nmSequencer.findContexts(model, true, null).iterator().next();
 		IRecursiveSequencer recSequencer = get(IRecursiveSequencer.class);
 		DebugSequenceAcceptor actual = new NoEnterNodesDebugSequenceAcceptor(false);
 		recSequencer.createSequence(context, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
