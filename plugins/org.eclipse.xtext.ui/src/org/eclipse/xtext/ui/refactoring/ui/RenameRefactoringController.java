@@ -99,6 +99,12 @@ public class RenameRefactoringController {
 			if (refactoringType == RefactoringType.LINKED_EDITING) {
 				startLinkedEditing();
 				return;
+			} else if(refactoringType == RefactoringType.REFACTORING_DIALOG && activeLinkedMode != null){
+				// If we come from the action out of the PopUp to open up a dialog, the name must be set and it could be invalid
+				// This is ok as long as he user correct this in the dialog which will take care for validation.
+				// The new value out of the LinkedModelModel must be set before it is left
+				// In all other cases we come from org.eclipse.xtext.ui.refactoring.ui.RenameLinkedMode.EditorSynchronizer and the new value has already been set.
+				activeLinkedMode.updateNewName();
 			}
 			freezer = new ViewFreezer(getXtextEditor().getInternalSourceViewer());
 			freezer.freeze();

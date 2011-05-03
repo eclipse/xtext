@@ -98,11 +98,11 @@ public class RenameLinkedMode {
 	}
 
 	protected void openPopup() {
-		popup = new RenameRefactoringPopup(editor, controller, updateNewName());
+		popup = new RenameRefactoringPopup(editor, controller);
 		popup.open();
 	}
 
-	protected boolean updateNewName() {
+	public boolean updateNewName() {
 		if (currentPosition != null)
 			try {
 				return controller.updateNewName(currentPosition.getContent());

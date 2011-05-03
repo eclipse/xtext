@@ -98,7 +98,6 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 	private XtextEditor editor;
 	private RenameLinkedMode renameLinkedMode;
 	private RenameRefactoringController controller;
-	private boolean isValid;
 
 	private Region region;
 	private static final int WIDGET_PRIORITY = 1000;
@@ -115,10 +114,9 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 
 
 
-	public RenameRefactoringPopup(XtextEditor editor, RenameRefactoringController controller, boolean isValid) {
+	public RenameRefactoringPopup(XtextEditor editor, RenameRefactoringController controller) {
 		this.editor = editor;
 		this.controller = controller;
-		this.isValid = isValid;
 		this.renameLinkedMode = controller.getActiveLinkedMode();
 	}
 
@@ -286,6 +284,7 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 			}
 
 			public void menuAboutToShow(IMenuManager manager) {
+				boolean canRefactor = renameLinkedMode.updateNewName();
 				IAction refactorAction = new Action("Rename...") {
 					@Override
 					public void run() {
@@ -294,7 +293,7 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 					}
 				};
 				refactorAction.setAccelerator(SWT.CR);
-				refactorAction.setEnabled(isValid);
+				refactorAction.setEnabled(canRefactor);
 				manager.add(refactorAction);
 
 				IAction previewAction = new Action("Preview...") {
@@ -305,7 +304,7 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 					}
 				};
 				previewAction.setAccelerator(SWT.CTRL | SWT.CR);
-				previewAction.setEnabled(isValid);
+				previewAction.setEnabled(canRefactor);
 				manager.add(previewAction);
 
 				IAction openDialogAction = new Action("Open Rename Dialog..." + '\t' + openDialogBinding) {
