@@ -44,6 +44,16 @@ public abstract class AbstractXtend2RuntimeModule extends DefaultRuntimeModule {
 		return org.eclipse.xtext.xtend2.parseTreeConstruction.Xtend2ParsetreeConstructor.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	public Class<? extends org.eclipse.xtext.serializer.ISemanticSequencer> bindISemanticSequencer() {
+		return org.eclipse.xtext.xtend2.serializer.Xtend2SemanticSequencer.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	public Class<? extends org.eclipse.xtext.serializer.ISerializer> bindISerializer() {
+		return org.eclipse.xtext.serializer.impl.Serializer.class;
+	}
+
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
 		return org.eclipse.xtext.xtend2.parser.antlr.Xtend2Parser.class;
