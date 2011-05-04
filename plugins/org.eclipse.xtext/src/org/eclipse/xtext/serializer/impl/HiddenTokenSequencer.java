@@ -243,7 +243,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 						INode next2 = ni.next();
 						if (tokenUtil.isWhitespaceOrCommentNode(next2)) {
 							out.add(next2);
-						} else
+						} else if (next2 instanceof ILeafNode)
 							return out;
 					}
 				else
