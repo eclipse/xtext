@@ -28,8 +28,8 @@ public class JvmModelReferenceFilter implements Predicate<IReferenceDescription>
 	}
 
 	protected boolean isInferredJvmElement(URI elementURI) {
-		// TODO implement a better strategy
-		return elementURI.fragment().startsWith("/1/");
+		String fragment = elementURI.fragment();
+		return !fragment.startsWith("/0") && !fragment.startsWith("//") && !fragment.equals("/");
 	}
 	
 }
