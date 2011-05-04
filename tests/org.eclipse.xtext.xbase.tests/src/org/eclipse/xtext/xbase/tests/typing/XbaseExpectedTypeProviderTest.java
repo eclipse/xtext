@@ -54,7 +54,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	
 	public void testBinaryOperationCall_02() throws Exception {
 		XBinaryOperation fc = (XBinaryOperation) expression("new java.util.ArrayList<CharSequence>() += emptyList()");
-		assertExpected("java.util.Collection<? extends java.lang.CharSequence>", fc.getRightOperand());
+		assertExpected("java.lang.Iterable<? extends java.lang.CharSequence>", fc.getRightOperand());
 	}
 	
 	public void testTypeParamInference_01() throws Exception {
