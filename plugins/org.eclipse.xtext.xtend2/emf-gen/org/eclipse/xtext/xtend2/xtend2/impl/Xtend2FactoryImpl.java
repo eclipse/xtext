@@ -124,7 +124,7 @@ public class Xtend2FactoryImpl extends EFactoryImpl implements Xtend2Factory
 	 */
 	public XtendClassSuperCallReferable createXtendClassSuperCallReferable()
 	{
-		XtendClassSuperCallReferableImpl xtendClassSuperCallReferable = new XtendClassSuperCallReferableImpl();
+		XtendClassSuperCallReferableImplCustom xtendClassSuperCallReferable = new XtendClassSuperCallReferableImplCustom();
 		return xtendClassSuperCallReferable;
 	}
 
