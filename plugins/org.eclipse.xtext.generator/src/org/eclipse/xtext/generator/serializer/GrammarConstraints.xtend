@@ -5,9 +5,9 @@ import org.eclipse.xtext.generator.serializer.SemanticSequencerUtil.*
 
 class GrammarConstraints extends GeneratedFile {
 	
-	@Inject Grammar
+	@Inject Grammar grammar
 	
-	@Inject extension SemanticSequencerUtil
+	@Inject extension SemanticSequencerUtil sequencerUtil
 	
 	override getFileExtension() {
 		"xtext"

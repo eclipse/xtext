@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject
  */
 class GrammarAccess {
 	
-	@Inject Naming  
+	@Inject Naming naming
 	
 	/**
 	 * Returns the invokation of the element accessor method as full qualified Java statement.

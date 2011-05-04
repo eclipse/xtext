@@ -5,9 +5,9 @@ import org.eclipse.xtext.generator.Naming
 
 class GeneratedFile {
 	
-	@Inject Grammar
+	@Inject Grammar grammar
 	
-	@Inject extension Naming
+	@Inject extension Naming naming
 	
 	String getName(Grammar grammar, String prefix, String component) {
 		grammar.basePackageRuntime + ".serializer." + prefix + grammar.name.toSimpleName + component

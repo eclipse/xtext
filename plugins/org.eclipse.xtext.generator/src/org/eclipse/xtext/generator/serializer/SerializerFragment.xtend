@@ -20,15 +20,15 @@ import org.eclipse.xtext.serializer.impl.ContextUtil
 
 class SerializerFragment extends Xtend2GeneratorFragment {
 	
-	@Inject AbstractSemanticSequencer
+	@Inject AbstractSemanticSequencer abstractSemanticSequencer
 	
-	@Inject SemanticSequencer
+	@Inject SemanticSequencer semanticSequencer
 	
-	@Inject GrammarConstraints
+	@Inject GrammarConstraints grammarConstraints
 	
-	@Inject Context2DotRenderer
+	@Inject Context2DotRenderer dotRenderer
 	
-	create new SerializerFragmentState() state() {}
+	create result: new SerializerFragmentState() state() {}
 	
 	setGenerateDebugData(boolean doGenerate) {
 		state.generateDebugData = doGenerate
@@ -48,7 +48,7 @@ class SerializerFragment extends Xtend2GeneratorFragment {
 			ctx.writeFile(Generator::SRC_GEN, grammarConstraints.fileName, grammarConstraints.fileContents);
 //			for(obj:context2DotRenderer.render2Dot(new SyntacticSequencerPDA2SimpleDot(), "pda"))
 //				ctx.writeFile(Generator::SRC_GEN, obj.key, obj.value);
-			for(obj:context2DotRenderer.render2Dot(new SyntacticSequencerPDA2ExtendedDot(), "pda"))
+			for(obj:dotRenderer.render2Dot(new SyntacticSequencerPDA2ExtendedDot(), "pda"))
 				ctx.writeFile(Generator::SRC_GEN, obj.key, obj.value);
 		}
 	}
