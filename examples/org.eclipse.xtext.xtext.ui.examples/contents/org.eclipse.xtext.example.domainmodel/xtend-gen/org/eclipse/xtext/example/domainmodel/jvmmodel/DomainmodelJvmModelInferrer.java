@@ -38,14 +38,14 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 @SuppressWarnings("all")
 public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
   @Inject private TypesFactory typesFactory;
-  @Inject private IJvmModelAssociator iJvmModelAssociator;
+  @Inject private IJvmModelAssociator jvmModelAssociator;
   @Inject private JvmVisibilityExtension jvmVisibilityExtension;
   @Inject private DomainmodelExtensions domainmodelExtensions;
   
   public List<JvmDeclaredType> inferJvmModel(final EObject sourceObject) {
     List<JvmDeclaredType> _xblockexpression = null;
     {
-      this.iJvmModelAssociator.disassociate(sourceObject);
+      this.jvmModelAssociator.disassociate(sourceObject);
       Iterable<JvmDeclaredType> _transform = this.transform(sourceObject);
       List<JvmDeclaredType> _list = IterableExtensions.<JvmDeclaredType>toList(_transform);
       _xblockexpression = (_list);
@@ -88,7 +88,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       jvmClass.setSimpleName(_name);
       String _packageName = this.domainmodelExtensions.packageName(entity);
       jvmClass.setPackageName(_packageName);
-      this.iJvmModelAssociator.associatePrimary(entity, jvmClass);
+      this.jvmModelAssociator.associatePrimary(entity, jvmClass);
       this.jvmVisibilityExtension.makePublic(jvmClass);
       JvmParameterizedTypeReference _superType = entity.getSuperType();
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_superType, null);
@@ -125,7 +125,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       this.jvmVisibilityExtension.makePrivate(jvmField);
       EList<JvmMember> _members = type.getMembers();
       CollectionExtensions.<JvmField>operator_add(_members, jvmField);
-      this.iJvmModelAssociator.associatePrimary(property, jvmField);
+      this.jvmModelAssociator.associatePrimary(property, jvmField);
       JvmOperation _createJvmOperation = this.typesFactory.createJvmOperation();
       final JvmOperation jvmGetter = _createJvmOperation;
       String _name_1 = property.getName();
@@ -138,7 +138,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       this.jvmVisibilityExtension.makePublic(jvmGetter);
       EList<JvmMember> _members_1 = type.getMembers();
       CollectionExtensions.<JvmOperation>operator_add(_members_1, jvmGetter);
-      this.iJvmModelAssociator.associatePrimary(property, jvmGetter);
+      this.jvmModelAssociator.associatePrimary(property, jvmGetter);
       JvmOperation _createJvmOperation_1 = this.typesFactory.createJvmOperation();
       final JvmOperation jvmSetter = _createJvmOperation_1;
       String _name_2 = property.getName();
@@ -158,7 +158,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, parameter);
       EList<JvmMember> _members_2 = type.getMembers();
       CollectionExtensions.<JvmOperation>operator_add(_members_2, jvmSetter);
-      this.iJvmModelAssociator.associatePrimary(property, jvmSetter);
+      this.jvmModelAssociator.associatePrimary(property, jvmSetter);
     }
   }
   
@@ -184,7 +184,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       this.jvmVisibilityExtension.makePublic(jvmOperation);
       EList<JvmMember> _members = type.getMembers();
       CollectionExtensions.<JvmOperation>operator_add(_members, jvmOperation);
-      this.iJvmModelAssociator.associatePrimary(operation, jvmOperation);
+      this.jvmModelAssociator.associatePrimary(operation, jvmOperation);
     }
   }
   

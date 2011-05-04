@@ -4,7 +4,7 @@ import org.eclipse.xtext.Grammar
 
 class SemanticSequencer extends GeneratedFile {
 	
-	@Inject AbstractSemanticSequencer
+	@Inject AbstractSemanticSequencer sequencer
 	
 	override String getQualifiedName(Grammar grammar) {
 		grammar.getName("", "SemanticSequencer");		
@@ -13,7 +13,7 @@ class SemanticSequencer extends GeneratedFile {
 	override String getFileContents() { '''
 		package «packageName»;
 		
-		public class «simpleName» extends «abstractSemanticSequencer.simpleName» {
+		public class «simpleName» extends «sequencer.simpleName» {
 		}
 		'''.toString
 	}

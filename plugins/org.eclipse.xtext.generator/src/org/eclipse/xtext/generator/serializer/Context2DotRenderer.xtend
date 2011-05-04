@@ -11,13 +11,13 @@ import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider$Seque
 
 class Context2DotRenderer { 
 	
-	@Inject extension IContextProvider
+	@Inject extension IContextProvider contextProvider
 	
-	@Inject Grammar
+	@Inject Grammar grammar
 	
-	@Inject extension Naming
+	@Inject extension Naming naming
 	
-	@Inject extension Context2NameFunction
+	@Inject extension Context2NameFunction nameFunction
 	
 	types(EObject ctx) {
 		ctx.typesForContext.map( t | new SyntacticSequencerPDAProvider$SequencerPDAContext(ctx, t))

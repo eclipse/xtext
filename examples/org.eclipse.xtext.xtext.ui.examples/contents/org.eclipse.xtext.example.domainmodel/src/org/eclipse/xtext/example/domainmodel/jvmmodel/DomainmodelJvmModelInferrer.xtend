@@ -19,13 +19,13 @@ import static org.eclipse.xtext.EcoreUtil2.*
 
 class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 
-	@Inject TypesFactory
+	@Inject TypesFactory typesFactory
 	
-	@Inject extension IJvmModelAssociator
+	@Inject extension IJvmModelAssociator jvmModelAssociator
 		
-	@Inject extension JvmVisibilityExtension
+	@Inject extension JvmVisibilityExtension jvmVisibilityExtension
 	
-	@Inject extension DomainmodelExtensions
+	@Inject extension DomainmodelExtensions domainmodelExtensions
 
 	override List<JvmDeclaredType> inferJvmModel(EObject sourceObject) {
 		sourceObject.disassociate

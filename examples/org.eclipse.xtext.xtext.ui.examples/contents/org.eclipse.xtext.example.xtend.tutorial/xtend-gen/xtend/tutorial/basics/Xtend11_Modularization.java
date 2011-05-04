@@ -7,10 +7,10 @@ import xtend.tutorial.util.Person;
 
 @SuppressWarnings("all")
 public class Xtend11_Modularization {
-  @Inject private Xtend11_PersonExtensions xtend11_PersonExtensions;
+  @Inject private Xtend11_PersonExtensions extensions;
   
   public void printTheName(final Person person) {
-    String _fullName = this.xtend11_PersonExtensions.fullName(person);
+    String _fullName = this.extensions.fullName(person);
     InputOutput.<String>println(_fullName);
   }
 }

@@ -20,13 +20,13 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class Context2DotRenderer {
-  @Inject private IContextProvider iContextProvider;
+  @Inject private IContextProvider contextProvider;
   @Inject private Grammar grammar;
   @Inject private Naming naming;
-  @Inject private Context2NameFunction context2NameFunction;
+  @Inject private Context2NameFunction nameFunction;
   
   public Iterable<SequencerPDAContext> types(final EObject ctx) {
-    Set<EClass> _typesForContext = this.iContextProvider.getTypesForContext(ctx);
+    Set<EClass> _typesForContext = this.contextProvider.getTypesForContext(ctx);
     final Function1<EClass,SequencerPDAContext> _function = new Function1<EClass,SequencerPDAContext>() {
         public SequencerPDAContext apply(final EClass t) {
           SequencerPDAContext _sequencerPDAContext = new SequencerPDAContext(ctx, t);
@@ -38,7 +38,7 @@ public class Context2DotRenderer {
   }
   
   public Iterable<SequencerPDAContext> contexts() {
-    List<EObject> _allContexts = this.iContextProvider.getAllContexts(this.grammar);
+    List<EObject> _allContexts = this.contextProvider.getAllContexts(this.grammar);
     final Function1<EObject,Iterable<SequencerPDAContext>> _function = new Function1<EObject,Iterable<SequencerPDAContext>>() {
         public Iterable<SequencerPDAContext> apply(final EObject c) {
           Iterable<SequencerPDAContext> _types = Context2DotRenderer.this.types(c);
@@ -75,7 +75,7 @@ public class Context2DotRenderer {
       String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name_1);
       String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "_");
       EObject _context = ctx.getContext();
-      String _contextName = this.context2NameFunction.getContextName(_context);
+      String _contextName = this.nameFunction.getContextName(_context);
       String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, _contextName);
       String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, "_");
       String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, name);

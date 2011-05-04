@@ -62,7 +62,7 @@ public class PureXbaseGenerator implements IGenerator {
       StringConcatenation _builder = new StringConcatenation();
       List<String> _imports = impMnr.getImports();
       final Function1<String,String> _function = new Function1<String,String>() {
-          public String apply(String e) {
+          public String apply(final String e) {
             String _operator_plus = StringExtensions.operator_plus("import ", e);
             String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ";\n");
             return _operator_plus_1;

@@ -24,22 +24,22 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
   @Inject private AbstractSemanticSequencer abstractSemanticSequencer;
   @Inject private SemanticSequencer semanticSequencer;
   @Inject private GrammarConstraints grammarConstraints;
-  @Inject private Context2DotRenderer context2DotRenderer;
+  @Inject private Context2DotRenderer dotRenderer;
   
   private final HashMap<ArrayList<?>,SerializerFragmentState> _createCache_state = new HashMap<ArrayList<?>,SerializerFragmentState>();
   
   public SerializerFragmentState state() {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList();
-    SerializerFragmentState _this;
+    SerializerFragmentState result;
     synchronized (_createCache_state) {
       if (_createCache_state.containsKey(_cacheKey)) {
         return _createCache_state.get(_cacheKey);
       }
       SerializerFragmentState _serializerFragmentState = new SerializerFragmentState();
-      _this = _serializerFragmentState;
-      _createCache_state.put(_cacheKey, _this);
+      result = _serializerFragmentState;
+      _createCache_state.put(_cacheKey, result);
     }
-    return _this;
+    return result;
   }
   
   public boolean setGenerateDebugData(final boolean doGenerate) {
@@ -78,7 +78,7 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
           String _fileContents_2 = this.grammarConstraints.getFileContents();
           ctx.writeFile(Generator.SRC_GEN, _fileName_2, _fileContents_2);
           SyntacticSequencerPDA2ExtendedDot _syntacticSequencerPDA2ExtendedDot = new SyntacticSequencerPDA2ExtendedDot();
-          Iterable<Pair<String,String>> _render2Dot = this.context2DotRenderer.render2Dot(_syntacticSequencerPDA2ExtendedDot, "pda");
+          Iterable<Pair<String,String>> _render2Dot = this.dotRenderer.render2Dot(_syntacticSequencerPDA2ExtendedDot, "pda");
           for (Pair<String,String> obj : _render2Dot) {
             String _key = obj.getKey();
             String _value = obj.getValue();

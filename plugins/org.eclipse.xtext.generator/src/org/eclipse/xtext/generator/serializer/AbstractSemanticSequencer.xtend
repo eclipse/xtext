@@ -18,13 +18,13 @@ import org.eclipse.emf.ecore.EcorePackage
 
 class AbstractSemanticSequencer extends GeneratedFile {
 	
-	@Inject Grammar
+	@Inject Grammar grammar
 	
-	@Inject extension GrammarAccess
+	@Inject extension GrammarAccess grammarAccess
 	
-	@Inject extension SemanticSequencerUtil
+	@Inject extension SemanticSequencerUtil sequencerUtil
 	
-	@Inject SemanticSequencer
+	@Inject SemanticSequencer sequencer
 	
 	override String getQualifiedName(Grammar grammar) {
 		grammar.getName("Abstract", "SemanticSequencer");		
@@ -101,7 +101,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 			import «e.genPackage.qualifiedPackageName».*;
 		«ENDFOR»
 		«IF usesSuperGrammar»
-			import «semanticSequencer.getQualifiedName(grammar.usedGrammars.head)»;
+			import «sequencer.getQualifiedName(grammar.usedGrammars.head)»;
 		«ENDIF»
 		
 		import com.google.inject.Inject;
@@ -130,9 +130,9 @@ class AbstractSemanticSequencer extends GeneratedFile {
 			
 			«IF usesSuperGrammar»
 				@Inject
-				protected Provider<«semanticSequencer.getSimpleName(grammar.usedGrammars.head)»> superSequencerProvider;
+				protected Provider<«sequencer.getSimpleName(grammar.usedGrammars.head)»> superSequencerProvider;
 				 
-				protected «semanticSequencer.getSimpleName(grammar.usedGrammars.head)» superSequencer; 
+				protected «sequencer.getSimpleName(grammar.usedGrammars.head)» superSequencer; 
 			«ENDIF»
 			
 			@Override
