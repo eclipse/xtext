@@ -15,7 +15,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType
  */
 class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
 
-	@Inject IJvmModelAssociator 
+	@Inject IJvmModelAssociator jvmModelAssociator
 
    	override List<? extends JvmDeclaredType> inferJvmModel(EObject sourceObject) {
    		return newArrayList();

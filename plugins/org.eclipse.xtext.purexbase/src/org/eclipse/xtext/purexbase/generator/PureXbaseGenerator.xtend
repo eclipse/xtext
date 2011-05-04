@@ -11,8 +11,8 @@ import org.eclipse.xtext.common.types.util.TypeReferences
 
 class PureXbaseGenerator implements IGenerator {
 	
-	@Inject XbaseCompiler as compiler
-	@Inject TypeReferences
+	@Inject XbaseCompiler compiler
+	@Inject TypeReferences typeReferences
 	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		fsa.generateFile(resource.name+".java",generateMain(resource.contents.head as Model))
