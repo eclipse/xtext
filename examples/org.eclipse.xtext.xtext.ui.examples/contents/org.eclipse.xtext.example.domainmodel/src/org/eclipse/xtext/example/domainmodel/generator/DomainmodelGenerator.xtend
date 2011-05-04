@@ -19,9 +19,9 @@ import static extension org.eclipse.xtext.xtend2.lib.ResourceExtensions.*
 
 class DomainmodelGenerator implements IGenerator {
 	
-	@Inject extension GeneratorExtensions 
+	@Inject extension GeneratorExtensions generatorExtensions
 	
-	@Inject DomainmodelCompiler
+	@Inject DomainmodelCompiler domainmodelCompiler
 	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		for(entity: resource.allContentsIterable.filter(typeof(Entity))) {

@@ -21,7 +21,7 @@ import org.eclipse.xtext.EcoreUtil2
 
 class DomainmodelScopeProvider extends XbaseScopeProvider {
 
-	@Inject extension IJvmModelAssociations as associations
+	@Inject extension IJvmModelAssociations associations
 	
 	override IScope createLocalVarScope(EObject context, EReference reference, IScope parent,
 			boolean includeCurrentBlock, int idx) {
