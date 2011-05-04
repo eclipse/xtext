@@ -9,17 +9,25 @@ package org.eclipse.xtext.ui.label;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IEditorDescriptor;
-import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.IWorkbench;
+
+import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class DefaultEditorImageUtil {
+	
+	@Inject
+	private IWorkbench workbench;
+	
 	public ImageDescriptor getDefaultEditorImageDescriptor(String fileName) {
 		if (fileName != null) {
-			IEditorDescriptor defaultEditor = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(fileName);
+			IEditorDescriptor defaultEditor = workbench.getEditorRegistry().getDefaultEditor(fileName);
 			if (defaultEditor != null) {
 				return defaultEditor.getImageDescriptor();
+			} else {
+				return workbench.getEditorRegistry().getSystemExternalEditorImageDescriptor(fileName);
 			}
 		}
 		return null;
