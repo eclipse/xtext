@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.lib;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -630,6 +631,60 @@ public class IterableExtensions {
 			result.put(computeKeys.apply(v), v);
 		}
 		return result;
+	}
+	
+	/**
+	 * Creates a sorted list that contains the items of the given iterable. 
+	 * The resulting list is in ascending order, according to the natural ordering of the 
+	 * elements in the iterable.
+	 * 
+	 * @param iterable
+	 *            the items to be sorted. May not be <code>null</code>.
+	 * @return a sorted list as a shallow copy of the given iterable.
+	 * @see Collections#sort(List)
+	 * @see #sort(Iterable, Comparator)
+	 * @see #sortBy(Iterable, Function1)
+	 * @see ListExtensions#sortInplace(List)
+	 */
+	public static <T extends Comparable<? super T>> List<T> sort(Iterable<T> iterable) {
+		return ListExtensions.sortInplace(Lists.newArrayList(iterable));
+	}
+
+	/**
+	 * Creates a sorted list that contains the items of the given iterable. 
+	 * The resulting list is sorted according to the order induced by the specified comparator.
+	 * 
+	 * @param iterable
+	 *            the items to be sorted. May not be <code>null</code>.
+	 * @param comparator
+	 *            the comparator to be used. May be <code>null</code> to indicate that the natural ordering of the
+	 *            elements should be used.
+	 * @return a sorted list as a shallow copy of the given iterable.
+	 * @see Collections#sort(List, Comparator)
+	 * @see #sort(Iterable)
+	 * @see #sortBy(Iterable, Function1)
+	 * @see ListExtensions#sortInplace(List, Comparator)
+	 */
+	public static <T> List<T> sort(Iterable<T> iterable, Comparator<? super T> comparator) {
+		return ListExtensions.sortInplace(Lists.newArrayList(iterable), comparator);
+	}
+
+	/**
+	 * Creates a sorted list that contains the items of the given iterable.
+	 * The resulting list is sorted according to the order induced by applying a key function to each element which yields a
+	 * comparable criteria.
+	 * 
+	 * @param iterable
+	 *            the elements to be sorted. May not be <code>null</code>.
+	 * @param key
+	 *            the key function to-be-used. May not be <code>null</code>.
+	 * @return a sorted list as a shallow copy of the given iterable.
+	 * @see #sort(Iterable)
+	 * @see #sort(Iterable, Comparator)
+	 * @see ListExtensions#sortInplaceBy(List, Function1)
+	 */
+	public static <T, C extends Comparable<? super C>> List<T> sortBy(Iterable<T> iterable, final Functions.Function1<T, C> key) {
+		return ListExtensions.sortInplaceBy(Lists.newArrayList(iterable), key);
 	}
 
 	/*

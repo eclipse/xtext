@@ -33,20 +33,20 @@ import com.google.common.collect.Lists;
 public class ListExtensions {
 
 	/**
-	 * Sorts the specified list into ascending order, according to the natural ordering of its elements.
+	 * Sorts the specified list itself into ascending order, according to the natural ordering of its elements.
 	 * 
 	 * @param list
 	 *            the list to be sorted. May not be <code>null</code>.
 	 * @return the sorted list itself.
 	 * @see Collections#sort(List)
 	 */
-	public static <T extends Comparable<? super T>> List<T> sort(List<T> list) {
+	public static <T extends Comparable<? super T>> List<T> sortInplace(List<T> list) {
 		Collections.sort(list);
 		return list;
 	}
 
 	/**
-	 * Sorts the specified list according to the order induced by the specified comparator.
+	 * Sorts the specified list itself according to the order induced by the specified comparator.
 	 * 
 	 * @param list
 	 *            the list to be sorted. May not be <code>null</code>.
@@ -54,15 +54,17 @@ public class ListExtensions {
 	 *            the comparator to be used. May be <code>null</code> to indicate that the natural ordering of the
 	 *            elements should be used.
 	 * @return the sorted list itself.
-	 * @see Collections#sort(List)
+	 * @see Collections#sort(List, Comparator)
+	 * @see #sortInplace(List)
+	 * @see #sortInplaceBy(List, Function1)
 	 */
-	public static <T> List<T> sort(List<T> list, Comparator<? super T> comparator) {
+	public static <T> List<T> sortInplace(List<T> list, Comparator<? super T> comparator) {
 		Collections.sort(list, comparator);
 		return list;
 	}
 
 	/**
-	 * Sorts the specified list according to the order induced by applying a key function to each element which yields a
+	 * Sorts the specified list itself according to the order induced by applying a key function to each element which yields a
 	 * comparable criteria.
 	 * 
 	 * @param list
@@ -72,7 +74,7 @@ public class ListExtensions {
 	 * @return the sorted list itself.
 	 * @see Collections#sort(List)
 	 */
-	public static <T, C extends Comparable<? super C>> List<T> sortBy(List<T> list, final Functions.Function1<T, C> key) {
+	public static <T, C extends Comparable<? super C>> List<T> sortInplaceBy(List<T> list, final Functions.Function1<T, C> key) {
 		if (key == null)
 			throw new NullPointerException("key");
 		Comparator<T> comparator = new Comparator<T>() {
