@@ -17,6 +17,9 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.LightweightPosition.IntToStrin
 import com.google.common.collect.Lists;
 
 /**
+ * Accepts a bunch of positions and creates a list
+ * of positions from them that do not overlap.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class MergingHighlightedPositionAcceptor implements IHighlightedPositionAcceptor, ISemanticHighlightingCalculator {
@@ -69,7 +72,8 @@ public class MergingHighlightedPositionAcceptor implements IHighlightedPositionA
 			LightweightPosition next = getPositions().get(i);
 			int exclusiveEndOffset = prev.getOffset() + prev.getLength();
 			if (next.getOffset() < exclusiveEndOffset) {
-				prev.setLength(next.getOffset() - prev.getOffset());
+				int newLength = next.getOffset() - prev.getOffset();
+				prev.setLength(newLength);
 				mergePositions(i, exclusiveEndOffset, prev.getTimestamp(), prev.internalGetIds());
 				if (prev.getLength() == 0) {
 					getPositions().remove(i - 1);
@@ -139,7 +143,7 @@ public class MergingHighlightedPositionAcceptor implements IHighlightedPositionA
 		if (newPosSize != 0)
 			getPositions().addAll(i, newPositions);
 		if (i - 1 + newPosSize != listIdx) {
-			Collections.sort(getPositions().subList(listIdx, i - 1 + newPosSize));
+			Collections.sort(getPositions().subList(listIdx, i + newPosSize));
 		}
 	}
 

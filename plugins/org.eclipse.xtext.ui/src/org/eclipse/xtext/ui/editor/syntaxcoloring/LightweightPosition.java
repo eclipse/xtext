@@ -56,6 +56,11 @@ public class LightweightPosition implements Comparable<LightweightPosition>{
 			return true;
 		}
 		
+		@Override
+		public String toString() {
+			return Arrays.toString(ids) + "@" + timestamp;
+		}
+		
 	}
 	
 	private final int offset;
