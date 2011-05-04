@@ -10,8 +10,11 @@ package org.eclipse.xtext.serializer.impl;
 import java.util.List;
 
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.EnumRule;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
@@ -77,6 +80,22 @@ public class SyntacticSequencer extends AbstractSyntacticSequencer {
 				acceptNode(next, tokenAcceptor);
 			}
 		}
+	}
+
+	@Override
+	protected String getUnassignedRuleCallValue(RuleCall ruleCall, INode node) {
+		if (node != null)
+			return node.getText().trim();
+		AbstractRule rule = ruleCall.getRule();
+		if (GrammarUtil.isDatatypeRule(rule)) {
+			if (rule.getAlternatives() instanceof Keyword)
+				return ((Keyword) rule.getAlternatives()).getValue();
+			if (rule.getAlternatives() instanceof Alternatives)
+				for (AbstractElement ele : ((Alternatives) rule.getAlternatives()).getElements())
+					if (ele instanceof Keyword)
+						((Keyword) ele).getValue();
+		}
+		return "foo";
 	}
 
 }

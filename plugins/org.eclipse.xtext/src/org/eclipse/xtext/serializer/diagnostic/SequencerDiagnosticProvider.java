@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.serializer.IContextFinder;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
@@ -51,19 +52,19 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 	protected IGrammarConstraintProvider grammarConstraints;
 
 	@Inject
-	protected ISemanticSequencer semanticSequencer;
+	protected IContextFinder contextFinder;
 
 	public ISerializationDiagnostic createFeatureValueMissing(EObject semanticObject, EStructuralFeature feature) {
 		return new SerializationDiagnostic(semanticObject, "foo bar");
 	}
 
 	public ISerializationDiagnostic createInvalidContextOrTypeDiagnostic(EObject semanticObject, EObject context) {
-		Set<EObject> recommendations = Sets.newHashSet(semanticSequencer.findContexts(semanticObject, true, null));
+		Set<EObject> contexts = Sets.newHashSet(contextFinder.findContextsByContentsAndContainer(semanticObject, null));
 		List<EClass> validTypes = getValidTypes(context);
 		List<EObject> recommendedCtxs = Lists.newArrayList();
 		List<EObject> otherValidCtxs = Lists.newArrayList();
 		for (EObject ctx : getValidContexts(semanticObject.eClass())) {
-			if (recommendations.contains(ctx))
+			if (contexts.contains(ctx))
 				recommendedCtxs.add(ctx);
 			else
 				otherValidCtxs.add(ctx);

@@ -53,7 +53,4 @@ public interface ISemanticSequencer {
 	 *         (DatatypeRuleCall, ReferencedEObject) for assigned cross references.
 	 */
 	void createSequence(EObject context, EObject semanticObject);
-
-	Iterable<EObject> findContexts(EObject semanitcObject, boolean consultContainer, Iterable<EObject> contextCandidates);
-
 }

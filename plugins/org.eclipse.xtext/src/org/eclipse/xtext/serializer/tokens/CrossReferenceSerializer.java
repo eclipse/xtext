@@ -9,24 +9,27 @@ package org.eclipse.xtext.serializer.tokens;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
-import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.diagnostic.ITokenDiagnosticProvider;
-import org.eclipse.xtext.util.EmfFormatter;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -40,8 +43,8 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 	@Inject
 	private LinkingHelper linkingHelper;
 
-	@Inject
-	private ILinkingService linkingService;
+	//	@Inject
+	//	private ILinkingService linkingService;
 
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
@@ -52,68 +55,93 @@ public class CrossReferenceSerializer implements ICrossReferenceSerializer {
 	@Inject
 	protected TokenUtil tokenUtil;
 
-	//	public boolean equalsOrReplacesNode(EObject context, CrossReference crossref, EObject target, INode node) {
-	//		if (crossref != node.getGrammarElement())
-	//			return false;
-	//		EReference ref = GrammarUtil.getReference(crossref);
-	//		if (!ref.isMany())
-	//			return true;
-	//		List<EObject> objects = linkingService.getLinkedObjects(context, ref, node);
-	//		return objects.contains(target);
-	//	}
-
 	@Inject
 	private IValueConverterService valueConverter;
 
-	protected String getConvertedValue(String unconverted, CrossReference grammarElement) {
-		String ruleName = linkingHelper.getRuleNameFrom(grammarElement);
-		if (ruleName == null)
-			throw new IllegalStateException("Could not determine targeted rule name for "
-					+ EmfFormatter.objPath(grammarElement));
-		return valueConverter.toString(unconverted, ruleName);
-	}
+	//	protected String getConvertedValue(String unconverted, CrossReference grammarElement) {
+	//		String ruleName = linkingHelper.getRuleNameFrom(grammarElement);
+	//		if (ruleName == null)
+	//			throw new IllegalStateException("Could not determine targeted rule name for "
+	//					+ EmfFormatter.objPath(grammarElement));
+	//		return valueConverter.toString(unconverted, ruleName);
+	//	}
+	//
+	//	protected String getUnconvertedLinkText(EObject object, EReference reference, EObject context) {
+	//		IScope scope = scopeProvider.getScope(context, reference);
+	//		if (scope == null)
+	//			return null;
+	//		IEObjectDescription eObjectDescription = scope.getSingleElement(object);
+	//		if (eObjectDescription != null) {
+	//			return qualifiedNameConverter.toString(eObjectDescription.getName());
+	//		}
+	//		return null;
+	//	}
 
-	protected String getUnconvertedLinkText(EObject object, EReference reference, EObject context) {
-		IScope scope = scopeProvider.getScope(context, reference);
-		if (scope == null)
-			return null;
-		IEObjectDescription eObjectDescription = scope.getSingleElement(object);
-		if (eObjectDescription != null) {
-			return qualifiedNameConverter.toString(eObjectDescription.getName());
-		}
-		return null;
-	}
-
-	public boolean isValid(EObject context, CrossReference crossref, EObject target, Acceptor errors) {
-		String text = null;
-		try {
-			final EReference ref = GrammarUtil.getReference(crossref, context.eClass());
-			text = getUnconvertedLinkText(target, ref, context);
-			if (text == null)
-				return true; // maybe we'll find something useful in the node model later on?
-			getConvertedValue(text, crossref);
+	public boolean isValid(EObject semanticObject, CrossReference crossref, EObject target, INode node, Acceptor errors) {
+		if (target.eIsProxy() && node != null)
 			return true;
-		} catch (ValueConverterException e) {
+		final EReference ref = GrammarUtil.getReference(crossref, semanticObject.eClass());
+		final IScope scope = scopeProvider.getScope(semanticObject, ref);
+		if (scope == null) {
 			if (errors != null)
-				errors.accept(diagnostics.getValueConversionExceptionDiagnostic(context, crossref, text, e));
+				errors.accept(diagnostics.getNoScopeFoundDiagnostic(semanticObject, crossref, target));
 			return false;
 		}
+		return getCrossReferenceNameFromScope(semanticObject, crossref, target, scope, errors) != null;
 	}
 
-	public String serializeCrossRef(EObject context, CrossReference crossref, EObject target, INode node,
-			Acceptor errorAcceptor) {
-		final EReference ref = GrammarUtil.getReference(crossref, context.eClass());
-		String text = null;
-		if (node != null) {
-			List<EObject> objects = linkingService.getLinkedObjects(context, ref, node);
-			if (objects.contains(target))
-				return tokenUtil.serializeNode(node);
+	public String serializeCrossRef(EObject semanticObject, CrossReference crossref, EObject target, INode node,
+			Acceptor errors) {
+
+		if (target.eIsProxy() && node != null)
+			return tokenUtil.serializeNode(node);
+
+		final EReference ref = GrammarUtil.getReference(crossref, semanticObject.eClass());
+		final IScope scope = scopeProvider.getScope(semanticObject, ref);
+		if (scope == null) {
+			if (errors != null)
+				errors.accept(diagnostics.getNoScopeFoundDiagnostic(semanticObject, crossref, target));
+			return null;
 		}
-		text = getUnconvertedLinkText(target, ref, context);
-		if (text != null)
-			return getConvertedValue(text, crossref);
+
 		if (node != null) {
-			return linkingHelper.getCrossRefNodeAsString(node, false);
+			String text = linkingHelper.getCrossRefNodeAsString(node, true);
+			QualifiedName qn = qualifiedNameConverter.toQualifiedName(text);
+			URI targetURI = EcoreUtil.getURI(target);
+			for (IEObjectDescription desc : scope.getElements(qn))
+				if (desc.getEObjectURI().equals(targetURI))
+					return tokenUtil.serializeNode(node);
+		}
+
+		return getCrossReferenceNameFromScope(semanticObject, crossref, target, scope, errors);
+	}
+
+	protected String getCrossReferenceNameFromScope(EObject semanticObject, CrossReference crossref, EObject target,
+			final IScope scope, Acceptor errors) {
+		String ruleName = linkingHelper.getRuleNameFrom(crossref);
+		boolean foundOne = false;
+		List<ISerializationDiagnostic> recordedErrros = null;
+		for (IEObjectDescription desc : scope.getElements(target)) {
+			foundOne = true;
+			String unconverted = qualifiedNameConverter.toString(desc.getName());
+			try {
+				return valueConverter.toString(unconverted, ruleName);
+			} catch (ValueConverterException e) {
+				if (errors != null) {
+					if (recordedErrros == null)
+						recordedErrros = Lists.newArrayList();
+					recordedErrros.add(diagnostics.getValueConversionExceptionDiagnostic(semanticObject, crossref,
+							unconverted, e));
+				}
+			}
+		}
+		if (errors != null) {
+			if (recordedErrros != null)
+				for (ISerializationDiagnostic diag : recordedErrros)
+					errors.accept(diag);
+			if (!foundOne)
+				errors.accept(diagnostics.getNoEObjectDescriptionFoundDiagnostic(semanticObject, crossref, target,
+						scope));
 		}
 		return null;
 	}
