@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.tests.serializer;
 import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.serializer.ISerializer;
-import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
@@ -68,34 +67,20 @@ public class XbaseSerializerWithNodeModelTest extends AbstractXbaseEvaluationTes
 	}
 
 	@Override
-	protected void assertEvaluatesTo(Object object, String string) {
+	protected void assertEvaluatesTo(Object object, String string) throws Exception {
 		assertSerializeable(string);
 	}
 
 	@Override
-	protected void assertEvaluatesWithException(Class<? extends Throwable> class1, String string) {
+	protected void assertEvaluatesWithException(Class<? extends Throwable> class1, String string) throws Exception {
 		assertSerializeable(string);
 	}
 
-	protected void assertSerializeable(String expected) {
-		try {
-			XExpression expr = expression(expected, true);
-			//			System.out.println(EmfFormatter.objToStr(expr));
-			String actual = serializer.serialize(expr);
-			assertEquals(expected, actual);
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail(e.getMessage());
-		}
+	protected void assertSerializeable(String expected) throws Exception {
+		XExpression expr = expression(expected, true);
+		//			System.out.println(EmfFormatter.objToStr(expr));
+		String actual = serializer.serialize(expr);
+		assertEquals(expected, actual);
 	}
 
-	@Override
-	public void testSubtractionOnIntegers() throws Exception {
-		// FIXME: https://bugs.eclipse.org/bugs/show_bug.cgi?id=344707
-	}
-
-	@Override
-	public void testForLoop_04() throws Exception {
-		// FIXME: https://bugs.eclipse.org/bugs/show_bug.cgi?id=344707
-	}
 }

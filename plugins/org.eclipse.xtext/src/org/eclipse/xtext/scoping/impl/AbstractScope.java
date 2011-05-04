@@ -152,18 +152,7 @@ public abstract class AbstractScope implements IScope {
 				return getParent().getElements(object);
 			}
 		});
-		Iterable<IEObjectDescription> unfilteredResult = Iterables.concat(localElements, parentElements);
-		Iterable<IEObjectDescription> result = Iterables.filter(unfilteredResult, new Predicate<IEObjectDescription>() {
-			public boolean apply(IEObjectDescription input) {
-				Iterable<IEObjectDescription> localByName = getLocalElementsByName(input.getName());
-				for(IEObjectDescription local: localByName) {
-					if (!local.getEObjectURI().equals(uri)) {
-						return false;
-					}
-				}
-				return true;
-			}
-		});
+		Iterable<IEObjectDescription> result = Iterables.concat(localElements, parentElements);
 		return result;
 	}
 	

@@ -74,12 +74,12 @@ public class XbaseSerializerWithoutNodeModelTest extends AbstractXbaseEvaluation
 	}
 
 	@Override
-	protected void assertEvaluatesTo(Object object, String string) {
+	protected void assertEvaluatesTo(Object object, String string) throws Exception {
 		assertSerializeable(string);
 	}
 
 	@Override
-	protected void assertEvaluatesWithException(Class<? extends Throwable> class1, String string) {
+	protected void assertEvaluatesWithException(Class<? extends Throwable> class1, String string) throws Exception {
 		assertSerializeable(string);
 	}
 
@@ -118,48 +118,15 @@ public class XbaseSerializerWithoutNodeModelTest extends AbstractXbaseEvaluation
 		// FIXME: https://bugs.eclipse.org/bugs/show_bug.cgi?id=344706
 	}
 
-	@Override
-	public void testSubtractionOnIntegers() throws Exception {
-		// FIXME: https://bugs.eclipse.org/bugs/show_bug.cgi?id=344707
-	}
-
-	@Override
-	public void testForLoop_04() throws Exception {
-		// FIXME: https://bugs.eclipse.org/bugs/show_bug.cgi?id=344707
-	}
-
-	protected void assertSerializeable(String exprStr) {
-		XExpression expr = null;
-		String exprSerialized = null;
-		XExpression exprReparsed = null;
-		try {
-			expr = expression(exprStr, true);
-			removeNodeModel(expr);
-			exprSerialized = serializer.serialize(expr);
-			exprReparsed = expression(exprSerialized, true);
-			assertEquals(EmfFormatter.objToStr(expr), EmfFormatter.objToStr(exprReparsed));
-		} catch (Throwable e) {
-
-			// FIXME: https://bugs.eclipse.org/bugs/show_bug.cgi?id=344707
-			if (e.getMessage().contains("No EObjectDescription could be found"))
-				return;
-
-			System.out.println("---- Expected----");
-			System.out.println(exprStr);
-			System.out.println("-----------------");
-			System.out.println("---- Actual----");
-			System.out.println(exprSerialized);
-			System.out.println("-----------------");
-
-			if (e instanceof RuntimeException)
-				throw (RuntimeException) e;
-			else if (e instanceof Error)
-				throw (Error) e;
-			else {
-				e.printStackTrace();
-				fail(e.getMessage());
-			}
-
+	protected void assertSerializeable(String input) throws Exception {
+		XExpression expression = expression(input, true);
+		removeNodeModel(expression);
+		String serialized = serializer.serialize(expression);
+		XExpression reparsed = expression(serialized, true);
+		if (!EcoreUtil.equals(expression, reparsed)) {
+			assertEquals(EmfFormatter.objToStr(expression), EmfFormatter.objToStr(reparsed));
+			assertEquals(input, serialized);
+			fail("EcoreUtil#equals was false for: " + serialized + " / " + input);
 		}
 	}
 }
