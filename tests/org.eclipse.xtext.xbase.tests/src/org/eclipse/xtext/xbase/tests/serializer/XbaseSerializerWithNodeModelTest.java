@@ -24,7 +24,7 @@ import com.google.inject.Injector;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class XbaseSerializerTest extends AbstractXbaseEvaluationTest {
+public class XbaseSerializerWithNodeModelTest extends AbstractXbaseEvaluationTest {
 
 	static Injector injector = new XbaseStandaloneSetup() {
 		@Override
@@ -91,13 +91,11 @@ public class XbaseSerializerTest extends AbstractXbaseEvaluationTest {
 
 	@Override
 	public void testSubtractionOnIntegers() throws Exception {
-		// FIXME: disabled, this is some problem with scoping.
-		//super.testSubtractionOnIntegers();
+		// FIXME: https://bugs.eclipse.org/bugs/show_bug.cgi?id=344707
 	}
 
 	@Override
 	public void testForLoop_04() throws Exception {
-		// FIXME: disabled, this is some problem with scoping.
-		//super.testSubtractionOnIntegers();
+		// FIXME: https://bugs.eclipse.org/bugs/show_bug.cgi?id=344707
 	}
 }
