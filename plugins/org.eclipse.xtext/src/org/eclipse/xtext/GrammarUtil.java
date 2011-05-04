@@ -163,7 +163,7 @@ public class GrammarUtil {
 		return false;
 	}
 
-	public static boolean isParserParserRuleCall(EObject grammarElement) {
+	public static boolean isEObjectRuleCall(EObject grammarElement) {
 		if (grammarElement instanceof RuleCall) {
 			AbstractRule calledRule = ((RuleCall) grammarElement).getRule();
 			return calledRule != null && calledRule instanceof ParserRule
@@ -175,7 +175,7 @@ public class GrammarUtil {
 	/**
 	 * @since 2.0
 	 */
-	public static boolean isParserParserRule(EObject grammarElement) {
+	public static boolean isEObjectRule(EObject grammarElement) {
 		return grammarElement instanceof ParserRule
 				&& ((ParserRule) grammarElement).getType().getClassifier() instanceof EClass;
 	}
@@ -192,8 +192,8 @@ public class GrammarUtil {
 	/**
 	 * @since 2.0
 	 */
-	public static boolean isUnassignedParserParserRuleCall(EObject ele) {
-		if (!isParserParserRuleCall(ele))
+	public static boolean isUnassignedEObjectRuleCall(EObject ele) {
+		if (!isEObjectRuleCall(ele))
 			return false;
 		return GrammarUtil.containingAssignment(ele) == null;
 	}
@@ -201,8 +201,8 @@ public class GrammarUtil {
 	/**
 	 * @since 2.0
 	 */
-	public static boolean isAssignedParserParserRuleCall(EObject ele) {
-		if (!isParserParserRuleCall(ele))
+	public static boolean isAssignedEObjectRuleCall(EObject ele) {
+		if (!isEObjectRuleCall(ele))
 			return false;
 		return GrammarUtil.containingAssignment(ele) != null;
 	}

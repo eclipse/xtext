@@ -75,7 +75,7 @@ public class NodeModelStreamer implements INodeModelStreamer {
 	 * @since 2.0
 	 */
 	protected ParserRule findRootRuleForRegion(INode node) {
-		if (GrammarUtil.isParserParserRule(node.getGrammarElement()))
+		if (GrammarUtil.isEObjectRule(node.getGrammarElement()))
 			return (ParserRule) node.getGrammarElement();
 		if (node.hasDirectSemanticElement())
 			return GrammarUtil.containingParserRule(node.getGrammarElement());

@@ -61,7 +61,7 @@ public class TypeFinderNFAProvider extends AbstractNFAProvider<TypeFinderState, 
 			if (ele instanceof Assignment || ele instanceof Action)
 				return false;
 
-			if (GrammarUtil.isUnassignedParserParserRuleCall(ele))
+			if (GrammarUtil.isUnassignedEObjectRuleCall(ele))
 				return false;
 
 			return true;

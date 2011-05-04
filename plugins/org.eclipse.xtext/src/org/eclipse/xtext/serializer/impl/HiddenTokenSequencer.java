@@ -180,7 +180,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 
 	protected boolean canPass(INode node) {
 		EObject ge = node.getGrammarElement();
-		return GrammarUtil.isParserParserRuleCall(ge) || GrammarUtil.isUnassignedAction(ge);
+		return GrammarUtil.isEObjectRuleCall(ge) || GrammarUtil.isUnassignedAction(ge);
 	}
 
 	public void createSequence(EObject context, EObject semanticObject, INode previousNode,
