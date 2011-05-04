@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil.CrossReferencer;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -148,7 +149,7 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 	}
 
 	protected Map<EObject, URI> createExportedElementsMap(Resource resource) {
-		IResourceDescription resourceDescription = index.getResourceDescription(resource.getURI());
+		IResourceDescription resourceDescription = index.getResourceDescription(EcoreUtil2.getNormalizedURI(resource));
 		Map<EObject, URI> exportedElementMap = newHashMap();
 		if (resourceDescription != null) {
 			for (IEObjectDescription exportedEObjectDescription : resourceDescription.getExportedObjects()) {
