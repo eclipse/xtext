@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xbase.serializer;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -17,11 +18,11 @@ import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvid
 import org.eclipse.xtext.serializer.diagnostic.SerializationDiagnostic;
 import org.eclipse.xtext.serializer.tokens.IValueSerializer;
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XAdditiveExpressionElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XAndExpressionElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XAssignmentElements;
@@ -33,6 +34,7 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XOrExpressionElements
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XOtherOperatorExpressionElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XRelationalExpressionElements;
 
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 @SuppressWarnings("restriction")
@@ -46,9 +48,6 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	
 	@Inject
 	private IValueSerializer valueSerializer;
-	
-	@Inject
-	private OperatorMapping operatorMapping;
 	
 	/**
 	 * Constraint:
@@ -66,9 +65,10 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	@Override
 	protected void sequence_XAdditiveExpression_XBinaryOperation(EObject context, XBinaryOperation semanticObject) {
 		IScope scope = scopeProvider.getScope(semanticObject, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
-		IEObjectDescription eObjectDescription = scope.getSingleElement(semanticObject.getFeature());
-		String operatorName = qualifiedNameConverter.toString(operatorMapping.getOperator(eObjectDescription.getName()));
-		
+		Set<String> operatorNames = Sets.newHashSet();
+		for (IEObjectDescription desc : scope.getElements(semanticObject.getFeature()))
+			operatorNames.add(qualifiedNameConverter.toString(desc.getName()));
+
 		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
 		ICompositeNode leftNode = (ICompositeNode) nodes.getNodeForSingelValue(XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND, semanticObject.getLeftOperand());
 		ICompositeNode featureNode = (ICompositeNode) nodes.getNodeForSingelValue(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, semanticObject.getFeature());
@@ -83,42 +83,49 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 		XOrExpressionElements opOr = grammarAccess.getXOrExpressionAccess();
 		XAssignmentElements opMultiAssign = grammarAccess.getXAssignmentAccess();
 		
-		if(valueSerializer.isValid(semanticObject, opAdd.getFeatureJvmIdentifiableElementOpAddParserRuleCall_1_0_0_1_0_1(), operatorName, null)) {
+		if(isValidOperator(semanticObject, opAdd.getFeatureJvmIdentifiableElementOpAddParserRuleCall_1_0_0_1_0_1(), operatorNames)) {
 			acceptAssignedAction(semanticObject, opAdd.getXBinaryOperationLeftOperandAction_1_0_0_0(), semanticObject.getLeftOperand(), -1, leftNode);
 			acceptAssignedCrossRefDatatype(semanticObject, opAdd.getFeatureJvmIdentifiableElementOpAddParserRuleCall_1_0_0_1_0_1(), semanticObject.getFeature(), -1, featureNode);
 			acceptAssignedParserRuleCall(semanticObject, opAdd.getRightOperandXMultiplicativeExpressionParserRuleCall_1_1_0(), semanticObject.getRightOperand(), -1, rightNode);
-		} else if(valueSerializer.isValid(semanticObject, opMulti.getFeatureJvmIdentifiableElementOpMultiParserRuleCall_1_0_0_1_0_1(), operatorName, null)) {
+		} else if(isValidOperator(semanticObject, opMulti.getFeatureJvmIdentifiableElementOpMultiParserRuleCall_1_0_0_1_0_1(), operatorNames)) {
 			acceptAssignedAction(semanticObject, opMulti.getXBinaryOperationLeftOperandAction_1_0_0_0(), semanticObject.getLeftOperand(), -1, leftNode);
 			acceptAssignedCrossRefDatatype(semanticObject, opMulti.getFeatureJvmIdentifiableElementOpMultiParserRuleCall_1_0_0_1_0_1(), semanticObject.getFeature(), -1, featureNode);
 			acceptAssignedParserRuleCall(semanticObject, opMulti.getRightOperandXUnaryOperationParserRuleCall_1_1_0(), semanticObject.getRightOperand(), -1, rightNode);
-		} else if(valueSerializer.isValid(semanticObject, opOther.getFeatureJvmIdentifiableElementOpOtherParserRuleCall_1_0_0_1_0_1(), operatorName, null)) {
+		} else if(isValidOperator(semanticObject, opOther.getFeatureJvmIdentifiableElementOpOtherParserRuleCall_1_0_0_1_0_1(), operatorNames)) {
 			acceptAssignedAction(semanticObject, opOther.getXBinaryOperationLeftOperandAction_1_0_0_0(), semanticObject.getLeftOperand(), -1, leftNode);
 			acceptAssignedCrossRefDatatype(semanticObject, opOther.getFeatureJvmIdentifiableElementOpOtherParserRuleCall_1_0_0_1_0_1(), semanticObject.getFeature(), -1, featureNode);
 			acceptAssignedParserRuleCall(semanticObject, opOther.getRightOperandXAdditiveExpressionParserRuleCall_1_1_0(), semanticObject.getRightOperand(), -1, rightNode);
-		} else if(valueSerializer.isValid(semanticObject, opCompare.getFeatureJvmIdentifiableElementOpCompareParserRuleCall_1_1_0_0_1_0_1(), operatorName, null)) {
+		} else if(isValidOperator(semanticObject, opCompare.getFeatureJvmIdentifiableElementOpCompareParserRuleCall_1_1_0_0_1_0_1(), operatorNames)) {
 			acceptAssignedAction(semanticObject, opCompare.getXBinaryOperationLeftOperandAction_1_1_0_0_0(), semanticObject.getLeftOperand(), -1, leftNode);
 			acceptAssignedCrossRefDatatype(semanticObject, opCompare.getFeatureJvmIdentifiableElementOpCompareParserRuleCall_1_1_0_0_1_0_1(), semanticObject.getFeature(), -1, featureNode);
 			acceptAssignedParserRuleCall(semanticObject, opCompare.getRightOperandXOtherOperatorExpressionParserRuleCall_1_1_1_0(), semanticObject.getRightOperand(), -1, rightNode);
-		} else if(valueSerializer.isValid(semanticObject, opEquality.getFeatureJvmIdentifiableElementOpEqualityParserRuleCall_1_0_0_1_0_1(), operatorName, null)) {
+		} else if(isValidOperator(semanticObject, opEquality.getFeatureJvmIdentifiableElementOpEqualityParserRuleCall_1_0_0_1_0_1(), operatorNames)) {
 			acceptAssignedAction(semanticObject, opEquality.getXBinaryOperationLeftOperandAction_1_0_0_0(), semanticObject.getLeftOperand(), -1, leftNode);
 			acceptAssignedCrossRefDatatype(semanticObject, opEquality.getFeatureJvmIdentifiableElementOpEqualityParserRuleCall_1_0_0_1_0_1(), semanticObject.getFeature(), -1, featureNode);
 			acceptAssignedParserRuleCall(semanticObject, opEquality.getRightOperandXRelationalExpressionParserRuleCall_1_1_0(), semanticObject.getRightOperand(), -1, rightNode);
-		} else if(valueSerializer.isValid(semanticObject, opAnd.getFeatureJvmIdentifiableElementOpAndParserRuleCall_1_0_0_1_0_1(), operatorName, null)) {
+		} else if(isValidOperator(semanticObject, opAnd.getFeatureJvmIdentifiableElementOpAndParserRuleCall_1_0_0_1_0_1(), operatorNames)) {
 			acceptAssignedAction(semanticObject, opAnd.getXBinaryOperationLeftOperandAction_1_0_0_0(), semanticObject.getLeftOperand(), -1, leftNode);
 			acceptAssignedCrossRefDatatype(semanticObject, opAnd.getFeatureJvmIdentifiableElementOpAndParserRuleCall_1_0_0_1_0_1(), semanticObject.getFeature(), -1, featureNode);
 			acceptAssignedParserRuleCall(semanticObject, opAnd.getRightOperandXEqualityExpressionParserRuleCall_1_1_0(), semanticObject.getRightOperand(), -1, rightNode);
-		} else if(valueSerializer.isValid(semanticObject, opOr.getFeatureJvmIdentifiableElementOpOrParserRuleCall_1_0_0_1_0_1(), operatorName, null)) {
+		} else if(isValidOperator(semanticObject, opOr.getFeatureJvmIdentifiableElementOpOrParserRuleCall_1_0_0_1_0_1(), operatorNames)) {
 			acceptAssignedAction(semanticObject, opOr.getXBinaryOperationLeftOperandAction_1_0_0_0(), semanticObject.getLeftOperand(), -1, leftNode);
 			acceptAssignedCrossRefDatatype(semanticObject, opOr.getFeatureJvmIdentifiableElementOpOrParserRuleCall_1_0_0_1_0_1(), semanticObject.getFeature(), -1, featureNode);
 			acceptAssignedParserRuleCall(semanticObject, opOr.getRightOperandXAndExpressionParserRuleCall_1_1_0(), semanticObject.getRightOperand(), -1, rightNode);
-		} else if(valueSerializer.isValid(semanticObject, opMultiAssign.getFeatureJvmIdentifiableElementOpMultiAssignParserRuleCall_1_1_0_0_1_0_1(), operatorName, null)) {
+		} else if(isValidOperator(semanticObject, opMultiAssign.getFeatureJvmIdentifiableElementOpMultiAssignParserRuleCall_1_1_0_0_1_0_1(), operatorNames)) {
 			acceptAssignedAction(semanticObject, opMultiAssign.getXBinaryOperationLeftOperandAction_1_1_0_0_0(), semanticObject.getLeftOperand(), -1, leftNode);
 			acceptAssignedCrossRefDatatype(semanticObject, opMultiAssign.getFeatureJvmIdentifiableElementOpMultiAssignParserRuleCall_1_1_0_0_1_0_1(), semanticObject.getFeature(), -1, featureNode);
 			acceptAssignedParserRuleCall(semanticObject, opMultiAssign.getRightOperandXAssignmentParserRuleCall_1_1_1_0(), semanticObject.getRightOperand(), -1, rightNode);
 		} else if (errorAcceptor != null) {
-			errorAcceptor.accept(new SerializationDiagnostic(semanticObject, context, "Operator "+operatorName+" is not supported."));
+			errorAcceptor.accept(new SerializationDiagnostic(semanticObject, context, "Operator "+operatorNames+" is not supported."));
 		} 
 		acceptFinish();
+	}
+	
+	protected boolean isValidOperator(EObject semanticObject, RuleCall ruleCall, Iterable<String> names) {
+		for (String name : names)
+			if (valueSerializer.isValid(semanticObject, ruleCall, name, null))
+				return true;
+		return false;
 	}
 	
 	
@@ -195,10 +202,13 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	
 	protected boolean isXShortClosure(EObject semanticObject, EReference reference, INodesForEObjectProvider nodes) {
 		List<?> values = (List<?>) semanticObject.eGet(reference);
+		if (values.size() != 1 || !(values.get(0) instanceof XClosure))
+			return false;
 		INode node = nodes.getNodeForMultiValue(reference, 0, 0, values.get(0));
-		if(node != null && node.getGrammarElement() instanceof RuleCall)
-			return ((RuleCall)node.getGrammarElement()).getRule() == grammarAccess.getXShortClosureAccess().getXClosureAction_0_0_0();
-		return values.size() == 1;
+		if (node != null && node.getGrammarElement() instanceof RuleCall)
+			return ((RuleCall) node.getGrammarElement()).getRule() == grammarAccess.getXShortClosureAccess()
+					.getXClosureAction_0_0_0();
+		return true;
 	}
 	
 	

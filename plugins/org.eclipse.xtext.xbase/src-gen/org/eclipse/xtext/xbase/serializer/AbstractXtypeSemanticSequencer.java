@@ -52,62 +52,7 @@ public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 		this.genericSequencer.init(sequenceAcceptor, errorAcceptor);
 	}
 	
-	public Iterable<EObject> findContexts(EObject semanticObject, boolean consultContainer, Iterable<EObject> contextCandidates) {
-		if(semanticObject.eClass().getEPackage() == TypesPackage.eINSTANCE) 
-			switch(semanticObject.eClass().getClassifierID()) {
-				case TypesPackage.JVM_LOWER_BOUND:                  return singleton((EObject)grammarAccess.getJvmLowerBoundRule());
-				case TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE: return findContexts((JvmParameterizedTypeReference)semanticObject, consultContainer, contextCandidates);
-				case TypesPackage.JVM_TYPE_PARAMETER:               return singleton((EObject)grammarAccess.getJvmTypeParameterRule());
-				case TypesPackage.JVM_UPPER_BOUND:                  return findContexts((JvmUpperBound)semanticObject, consultContainer, contextCandidates);
-				case TypesPackage.JVM_WILDCARD_TYPE_REFERENCE:      return findContexts((JvmWildcardTypeReference)semanticObject, consultContainer, contextCandidates);
-			}
-		else if(semanticObject.eClass().getEPackage() == XtypePackage.eINSTANCE) 
-			switch(semanticObject.eClass().getClassifierID()) {
-				case XtypePackage.XFUNCTION_TYPE_REF: return findContexts((XFunctionTypeRef)semanticObject, consultContainer, contextCandidates);
-			}
-		return Collections.emptyList();
-	}
 	
-	/**
-	 * Potential Result Contexts:
-	 *     getJvmTypeReferenceRule()
-	 *     getJvmParameterizedTypeReferenceRule()
-	 *     getJvmArgumentTypeReferenceRule()
-	 */
-	protected Iterable<EObject> findContexts(JvmParameterizedTypeReference semanticObject, boolean consultContainer, Iterable<EObject> contextCandidates) {
-		return genericSequencer.findContexts(semanticObject, consultContainer, contextCandidates);
-	}
-	
-	
-	/**
-	 * Potential Result Contexts:
-	 *     getJvmUpperBoundRule()
-	 *     getJvmUpperBoundAndedRule()
-	 */
-	protected Iterable<EObject> findContexts(JvmUpperBound semanticObject, boolean consultContainer, Iterable<EObject> contextCandidates) {
-		return genericSequencer.findContexts(semanticObject, consultContainer, contextCandidates);
-	}
-	
-	
-	/**
-	 * Potential Result Contexts:
-	 *     getJvmArgumentTypeReferenceRule()
-	 *     getJvmWildcardTypeReferenceRule()
-	 */
-	protected Iterable<EObject> findContexts(JvmWildcardTypeReference semanticObject, boolean consultContainer, Iterable<EObject> contextCandidates) {
-		return genericSequencer.findContexts(semanticObject, consultContainer, contextCandidates);
-	}
-	
-	
-	/**
-	 * Potential Result Contexts:
-	 *     getJvmTypeReferenceRule()
-	 *     getXFunctionTypeRefRule()
-	 *     getJvmArgumentTypeReferenceRule()
-	 */
-	protected Iterable<EObject> findContexts(XFunctionTypeRef semanticObject, boolean consultContainer, Iterable<EObject> contextCandidates) {
-		return genericSequencer.findContexts(semanticObject, consultContainer, contextCandidates);
-	}
 	
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == TypesPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
