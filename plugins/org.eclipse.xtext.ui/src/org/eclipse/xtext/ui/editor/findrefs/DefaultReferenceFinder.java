@@ -101,7 +101,7 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 		});
 	}
 
-	public void findLocalReferences(Set<EObject> targets, IAcceptor<IReferenceDescription> acceptor,
+	public void findLocalReferences(Set<? extends EObject> targets, IAcceptor<IReferenceDescription> acceptor,
 			Predicate<IReferenceDescription> filter, IProgressMonitor monitor) {
 		if (monitor != null && monitor.isCanceled())
 			return;
