@@ -37,7 +37,7 @@ public class Context2NameFunction implements Function<EObject, String> {
 	}
 
 	public String getContextName(EObject ctx) {
-		if (GrammarUtil.isParserParserRule(ctx))
+		if (GrammarUtil.isEObjectRule(ctx))
 			return getContextName((ParserRule) ctx);
 		if (GrammarUtil.isAssignedAction(ctx))
 			return getContextName((Action) ctx);

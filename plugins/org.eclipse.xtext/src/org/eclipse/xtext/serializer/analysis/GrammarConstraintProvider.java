@@ -962,7 +962,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				new ConstraintElement(context, getConstraintElementType(ele), ele);
 		} else if (ele instanceof RuleCall) {
 			RuleCall rc = (RuleCall) ele;
-			if (GrammarUtil.isUnassignedParserParserRuleCall(rc)) {
+			if (GrammarUtil.isUnassignedEObjectRuleCall(rc)) {
 				if (!visited.add(rc))
 					return null;
 				ConstraintElement result = createConstraintElement((ParserRule) rc.getRule(), requiredType, visited);
@@ -1112,7 +1112,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		ConstraintElement local = allowLocal ? createConstraintElement(context, state.getGrammarElement(),
 				requiredType, visited) : null;
 		if (allowLocal && state.isEndState()
-				&& !GrammarUtil.isUnassignedParserParserRuleCall(state.getGrammarElement())) {
+				&& !GrammarUtil.isUnassignedEObjectRuleCall(state.getGrammarElement())) {
 			if (GrammarUtil.containingRule(state.getGrammarElement()).getType().getClassifier() != requiredType
 					&& (local == null || !local.isTypeMatch()))
 				return INVALID;

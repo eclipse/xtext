@@ -46,7 +46,7 @@ public class ContextProvider implements IContextProvider {
 				types.add((EClass) ((Action) state.getGrammarElement()).getType().getClassifier());
 				return;
 			}
-			if (state.isEndState() && !GrammarUtil.isUnassignedParserParserRuleCall(state.getGrammarElement())) {
+			if (state.isEndState() && !GrammarUtil.isUnassignedEObjectRuleCall(state.getGrammarElement())) {
 				if (hasAssignment)
 					types.add((EClass) GrammarUtil.containingRule(state.getGrammarElement()).getType().getClassifier());
 				else
@@ -63,7 +63,7 @@ public class ContextProvider implements IContextProvider {
 	public List<EObject> getAllContexts(Grammar grammar) {
 		List<EObject> result = Lists.newArrayList();
 		for (ParserRule pr : GrammarUtil.allParserRules(grammar))
-			if (GrammarUtil.isParserParserRule(pr)) {
+			if (GrammarUtil.isEObjectRule(pr)) {
 				result.add(pr);
 				for (Action action : GrammarUtil.containedActions(pr))
 					if (GrammarUtil.isAssignedAction(action))
