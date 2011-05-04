@@ -28,7 +28,7 @@ public class Context2DotRenderer {
   public Iterable<SequencerPDAContext> types(final EObject ctx) {
     Set<EClass> _typesForContext = this.iContextProvider.getTypesForContext(ctx);
     final Function1<EClass,SequencerPDAContext> _function = new Function1<EClass,SequencerPDAContext>() {
-        public SequencerPDAContext apply(EClass t) {
+        public SequencerPDAContext apply(final EClass t) {
           SequencerPDAContext _sequencerPDAContext = new SequencerPDAContext(ctx, t);
           return _sequencerPDAContext;
         }
@@ -40,7 +40,7 @@ public class Context2DotRenderer {
   public Iterable<SequencerPDAContext> contexts() {
     List<EObject> _allContexts = this.iContextProvider.getAllContexts(this.grammar);
     final Function1<EObject,Iterable<SequencerPDAContext>> _function = new Function1<EObject,Iterable<SequencerPDAContext>>() {
-        public Iterable<SequencerPDAContext> apply(EObject c) {
+        public Iterable<SequencerPDAContext> apply(final EObject c) {
           Iterable<SequencerPDAContext> _types = Context2DotRenderer.this.types(c);
           return _types;
         }
@@ -53,10 +53,9 @@ public class Context2DotRenderer {
   public Iterable<Pair<String,String>> render2Dot(final GraphvizDotBuilder builder, final String name) {
     Iterable<SequencerPDAContext> _contexts = this.contexts();
     final Function1<SequencerPDAContext,Pair<String,String>> _function = new Function1<SequencerPDAContext,Pair<String,String>>() {
-        public Pair<String,String> apply(SequencerPDAContext c) {
+        public Pair<String,String> apply(final SequencerPDAContext c) {
           String _fileName = Context2DotRenderer.this.getFileName(c, name);
-          final SequencerPDAContext typeConverted_c = (SequencerPDAContext)c;
-          String _draw = builder.draw(typeConverted_c);
+          String _draw = builder.draw(c);
           Pair<String,String> _operator_mappedTo = ObjectExtensions.<String, String>operator_mappedTo(_fileName, _draw);
           return _operator_mappedTo;
         }
@@ -79,14 +78,12 @@ public class Context2DotRenderer {
       String _contextName = this.context2NameFunction.getContextName(_context);
       String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, _contextName);
       String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, "_");
-      final String typeConverted_name = (String)name;
-      String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, typeConverted_name);
+      String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, name);
       final String fn = _operator_plus_5;
       String _basePackageRuntime = this.naming.basePackageRuntime(this.grammar);
       String _asPath = this.naming.asPath(_basePackageRuntime);
       String _operator_plus_6 = StringExtensions.operator_plus(_asPath, "/serializer/");
-      final String typeConverted_fn = (String)fn;
-      String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, typeConverted_fn);
+      String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, fn);
       String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, ".dot");
       _xblockexpression = (_operator_plus_8);
     }

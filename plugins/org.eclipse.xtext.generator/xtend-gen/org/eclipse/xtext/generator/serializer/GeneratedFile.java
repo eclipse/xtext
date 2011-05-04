@@ -13,13 +13,11 @@ public class GeneratedFile {
   public String getName(final Grammar grammar, final String prefix, final String component) {
     String _basePackageRuntime = this.naming.basePackageRuntime(grammar);
     String _operator_plus = StringExtensions.operator_plus(_basePackageRuntime, ".serializer.");
-    final String typeConverted_prefix = (String)prefix;
-    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, typeConverted_prefix);
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, prefix);
     String _name = grammar.getName();
     String _simpleName = this.naming.toSimpleName(_name);
     String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _simpleName);
-    final String typeConverted_component = (String)component;
-    String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, typeConverted_component);
+    String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, component);
     return _operator_plus_3;
   }
   

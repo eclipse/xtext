@@ -17,8 +17,7 @@ public class GrammarAccess {
   @Inject private Naming naming;
   
   public String gaFullAccessor(final AbstractElement ele) {
-    final AbstractElement typeConverted_ele = (AbstractElement)ele;
-    Grammar _grammar = GrammarUtil.getGrammar(typeConverted_ele);
+    Grammar _grammar = GrammarUtil.getGrammar(ele);
     String _gaSimpleName = this.gaSimpleName(_grammar);
     String _operator_plus = StringExtensions.operator_plus(_gaSimpleName, ".INSTANCE.");
     String _gaRuleElementAccessor = this.gaRuleElementAccessor(ele);
@@ -27,8 +26,7 @@ public class GrammarAccess {
   }
   
   public String toJavaIdentifier(final String text, final boolean uppercaseFirst) {
-    final boolean typeConverted_uppercaseFirst = (boolean)uppercaseFirst;
-    String _javaIdentifier = GrammarAccessUtil.toJavaIdentifier(text, ((Boolean)typeConverted_uppercaseFirst));
+    String _javaIdentifier = GrammarAccessUtil.toJavaIdentifier(text, ((Boolean)uppercaseFirst));
     return _javaIdentifier;
   }
   
@@ -99,8 +97,7 @@ public class GrammarAccess {
   }
   
   public String gaRuleElementAccessor(final AbstractElement ele) {
-    final AbstractElement typeConverted_ele = (AbstractElement)ele;
-    AbstractRule _containingRule = GrammarUtil.containingRule(typeConverted_ele);
+    AbstractRule _containingRule = GrammarUtil.containingRule(ele);
     String _gaElementsAccessor = this.gaElementsAccessor(_containingRule);
     String _operator_plus = StringExtensions.operator_plus(_gaElementsAccessor, ".");
     String _gaElementAccessor = this.gaElementAccessor(ele);
@@ -110,8 +107,7 @@ public class GrammarAccess {
   
   public String gaTypeAccessor(final TypeRef ele) {
     String _switchResult = null;
-    final TypeRef typeConverted_ele = (TypeRef)ele;
-    EObject _eContainer = typeConverted_ele.eContainer();
+    EObject _eContainer = ele.eContainer();
     final EObject cnt = _eContainer;
     boolean matched = false;
     if (!matched) {
@@ -133,8 +129,7 @@ public class GrammarAccess {
       }
     }
     if (!matched) {
-      final TypeRef typeConverted_ele_1 = (TypeRef)ele;
-      EObject _eContainer_1 = typeConverted_ele_1.eContainer();
+      EObject _eContainer_1 = ele.eContainer();
       EClass _eClass = _eContainer_1.eClass();
       String _name = _eClass.getName();
       String _operator_plus_2 = StringExtensions.operator_plus("<error: unknown type ", _name);
