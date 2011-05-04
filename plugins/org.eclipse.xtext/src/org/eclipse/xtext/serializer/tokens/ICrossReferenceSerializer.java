@@ -19,10 +19,8 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(CrossReferenceSerializer.class)
 public interface ICrossReferenceSerializer {
 
-	boolean isValid(EObject context, CrossReference crossref, EObject target,
+	boolean isValid(EObject context, CrossReference crossref, EObject target, INode node,
 			ISerializationDiagnostic.Acceptor errorAcceptor);
-
-	//	boolean equalsOrReplacesNode(EObject context, CrossReference crossref, EObject target, INode node);
 
 	String serializeCrossRef(EObject context, CrossReference crossref, EObject target, INode node,
 			ISerializationDiagnostic.Acceptor errorAcceptor);

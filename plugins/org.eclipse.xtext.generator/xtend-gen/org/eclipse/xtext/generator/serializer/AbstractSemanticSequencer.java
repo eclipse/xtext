@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -57,7 +56,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   public Iterable<EPackage> getAccessedPackages() {
     Collection<IConstraint> _grammarConstraints = this.sequencerUtil.getGrammarConstraints(this.grammar);
     final Function1<IConstraint,Boolean> _function = new Function1<IConstraint,Boolean>() {
-        public Boolean apply(final IConstraint e) {
+        public Boolean apply(IConstraint e) {
           EClass _type = e.getType();
           boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_type, null);
           return ((Boolean)_operator_notEquals);
@@ -65,7 +64,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       };
     Iterable<IConstraint> _filter = IterableExtensions.<IConstraint>filter(_grammarConstraints, _function);
     final Function1<IConstraint,EPackage> _function_1 = new Function1<IConstraint,EPackage>() {
-        public EPackage apply(final IConstraint e_1) {
+        public EPackage apply(IConstraint e_1) {
           EClass _type_1 = e_1.getType();
           EPackage _ePackage = _type_1.getEPackage();
           return _ePackage;
@@ -79,21 +78,24 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   public Iterable<EClass> getAccessedClasses(final EPackage pkg) {
     Collection<IConstraint> _grammarConstraints = this.sequencerUtil.getGrammarConstraints(this.grammar);
     final Function1<IConstraint,EClass> _function = new Function1<IConstraint,EClass>() {
-        public EClass apply(final IConstraint e) {
+        public EClass apply(IConstraint e) {
           EClass _type = e.getType();
           return _type;
         }
       };
     Iterable<EClass> _map = IterableExtensions.<IConstraint, EClass>map(_grammarConstraints, _function);
     final Function1<EClass,Boolean> _function_1 = new Function1<EClass,Boolean>() {
-        public Boolean apply(final EClass e_1) {
+        public Boolean apply(EClass e_1) {
           boolean _operator_and = false;
-          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(e_1, null);
+          final EClass typeConverted_e_1 = (EClass)e_1;
+          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(typeConverted_e_1, null);
           if (!_operator_notEquals) {
             _operator_and = false;
           } else {
-            EPackage _ePackage = e_1.getEPackage();
-            boolean _operator_equals = ObjectExtensions.operator_equals(_ePackage, pkg);
+            final EClass typeConverted_e_1_1 = (EClass)e_1;
+            EPackage _ePackage = typeConverted_e_1_1.getEPackage();
+            final EPackage typeConverted_pkg = (EPackage)pkg;
+            boolean _operator_equals = ObjectExtensions.operator_equals(_ePackage, typeConverted_pkg);
             _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_equals);
           }
           return ((Boolean)_operator_and);
@@ -107,7 +109,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   public Iterable<EClass> getAccessedClasses() {
     Collection<IConstraint> _grammarConstraints = this.sequencerUtil.getGrammarConstraints(this.grammar);
     final Function1<IConstraint,EClass> _function = new Function1<IConstraint,EClass>() {
-        public EClass apply(final IConstraint e) {
+        public EClass apply(IConstraint e) {
           EClass _type = e.getType();
           return _type;
         }
@@ -142,7 +144,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       HashSet<Grammar> _newHashSet = CollectionLiterals.<Grammar>newHashSet();
       final HashSet<Grammar> result = _newHashSet;
       boolean _operator_and = false;
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(ele, null);
+      final IConstraintElement typeConverted_ele = (IConstraintElement)ele;
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(typeConverted_ele, null);
       if (!_operator_notEquals) {
         _operator_and = false;
       } else {
@@ -156,7 +159,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
         result.add(_grammar);
       }
       boolean _operator_and_1 = false;
-      boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(ele, null);
+      final IConstraintElement typeConverted_ele_1 = (IConstraintElement)ele;
+      boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(typeConverted_ele_1, null);
       if (!_operator_notEquals_2) {
         _operator_and_1 = false;
       } else {
@@ -167,7 +171,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       if (_operator_and_1) {
         List<IConstraintElement> _children_1 = ele.getChildren();
         final Function1<IConstraintElement,HashSet<Grammar>> _function = new Function1<IConstraintElement,HashSet<Grammar>>() {
-            public HashSet<Grammar> apply(final IConstraintElement c) {
+            public HashSet<Grammar> apply(IConstraintElement c) {
               HashSet<Grammar> _grammars = AbstractSemanticSequencer.this.getGrammars(c);
               return _grammars;
             }
@@ -184,15 +188,18 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   
   public boolean uses(final Grammar g1, final Grammar g2) {
     boolean _operator_and = false;
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(g1, null);
+    final Grammar typeConverted_g1 = (Grammar)g1;
+    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(typeConverted_g1, null);
     if (!_operator_notEquals) {
       _operator_and = false;
     } else {
       EList<Grammar> _usedGrammars = g1.getUsedGrammars();
       final Function1<Grammar,Boolean> _function = new Function1<Grammar,Boolean>() {
-          public Boolean apply(final Grammar e) {
+          public Boolean apply(Grammar e) {
             boolean _operator_or = false;
-            boolean _operator_equals = ObjectExtensions.operator_equals(e, g2);
+            final Grammar typeConverted_e = (Grammar)e;
+            final Grammar typeConverted_g2 = (Grammar)g2;
+            boolean _operator_equals = ObjectExtensions.operator_equals(typeConverted_e, typeConverted_g2);
             if (_operator_equals) {
               _operator_or = true;
             } else {
@@ -212,7 +219,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     IConstraintElement _body = constraint.getBody();
     HashSet<Grammar> _grammars = this.getGrammars(_body);
     final Function2<Grammar,Grammar,Grammar> _function = new Function2<Grammar,Grammar,Grammar>() {
-        public Grammar apply(final Grammar x , final Grammar y) {
+        public Grammar apply(Grammar x , Grammar y) {
           Grammar _xifexpression = null;
           boolean _uses = AbstractSemanticSequencer.this.uses(x, y);
           if (_uses) {
@@ -230,15 +237,16 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   public boolean usesSuperGrammar() {
     Collection<IConstraint> _accessedConstraints = this.getAccessedConstraints();
     final Function1<IConstraint,Grammar> _function = new Function1<IConstraint,Grammar>() {
-        public Grammar apply(final IConstraint c) {
+        public Grammar apply(IConstraint c) {
           Grammar _mostConcreteGrammar = AbstractSemanticSequencer.this.getMostConcreteGrammar(c);
           return _mostConcreteGrammar;
         }
       };
     Iterable<Grammar> _map = IterableExtensions.<IConstraint, Grammar>map(_accessedConstraints, _function);
     final Function1<Grammar,Boolean> _function_1 = new Function1<Grammar,Boolean>() {
-        public Boolean apply(final Grammar g) {
-          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(g, AbstractSemanticSequencer.this.grammar);
+        public Boolean apply(Grammar g) {
+          final Grammar typeConverted_g = (Grammar)g;
+          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(typeConverted_g, AbstractSemanticSequencer.this.grammar);
           return ((Boolean)_operator_notEquals);
         }
       };
@@ -439,31 +447,13 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    StringConcatenation _genMethodFindContext = this.genMethodFindContext();
-    _builder.append(_genMethodFindContext, "	");
+    _builder.append("", "	");
     _builder.append("\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    Iterable<EClass> _accessedClasses = this.getAccessedClasses();
-    final Function1<EClass,Boolean> _function = new Function1<EClass,Boolean>() {
-        public Boolean apply(final EClass e_1) {
-          Collection<EObject> _accessedContexts = AbstractSemanticSequencer.this.getAccessedContexts(e_1);
-          int _size = _accessedContexts.size();
-          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size), ((Integer)1));
-          return ((Boolean)_operator_greaterThan);
-        }
-      };
-    Iterable<EClass> _filter = IterableExtensions.<EClass>filter(_accessedClasses, _function);
-    final Function1<EClass,StringConcatenation> _function_1 = new Function1<EClass,StringConcatenation>() {
-        public StringConcatenation apply(final EClass e_2) {
-          StringConcatenation _genMethodFindContextType = AbstractSemanticSequencer.this.genMethodFindContextType(e_2);
-          return _genMethodFindContextType;
-        }
-      };
-    String _join = IterableExtensions.<EClass>join(_filter, "\n\n", _function_1);
-    _builder.append(_join, "	");
+    _builder.append("", "	");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
@@ -475,168 +465,27 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     _builder.newLine();
     _builder.append("\t");
     Collection<IConstraint> _accessedConstraints = this.getAccessedConstraints();
-    final Function1<IConstraint,Boolean> _function_2 = new Function1<IConstraint,Boolean>() {
-        public Boolean apply(final IConstraint e_3) {
-          EClass _type = e_3.getType();
+    final Function1<IConstraint,Boolean> _function = new Function1<IConstraint,Boolean>() {
+        public Boolean apply(IConstraint e_1) {
+          EClass _type = e_1.getType();
           boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_type, null);
           return ((Boolean)_operator_notEquals);
         }
       };
-    Iterable<IConstraint> _filter_1 = IterableExtensions.<IConstraint>filter(_accessedConstraints, _function_2);
-    final Function1<IConstraint,StringConcatenation> _function_3 = new Function1<IConstraint,StringConcatenation>() {
-        public StringConcatenation apply(final IConstraint e_4) {
-          StringConcatenation _genMethodSequence = AbstractSemanticSequencer.this.genMethodSequence(e_4);
+    Iterable<IConstraint> _filter = IterableExtensions.<IConstraint>filter(_accessedConstraints, _function);
+    final Function1<IConstraint,StringConcatenation> _function_1 = new Function1<IConstraint,StringConcatenation>() {
+        public StringConcatenation apply(IConstraint e_2) {
+          StringConcatenation _genMethodSequence = AbstractSemanticSequencer.this.genMethodSequence(e_2);
           return _genMethodSequence;
         }
       };
-    String _join_1 = IterableExtensions.<IConstraint>join(_filter_1, "\n\n", _function_3);
-    _builder.append(_join_1, "	");
+    String _join = IterableExtensions.<IConstraint>join(_filter, "\n\n", _function_1);
+    _builder.append(_join, "	");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
     String _string = _builder.toString();
     return _string;
-  }
-  
-  public StringConcatenation genMethodFindContext() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("public Iterable<EObject> findContexts(EObject semanticObject, boolean consultContainer, Iterable<EObject> contextCandidates) {");
-    _builder.newLine();
-    _builder.append("\t");
-    int pkgi = 0;
-    _builder.newLineIfNotEmpty();
-    {
-      Iterable<EPackage> _accessedPackages = this.getAccessedPackages();
-      for(EPackage pkg : _accessedPackages) {
-        _builder.append("\t");
-        {
-          int _operator_plus = IntegerExtensions.operator_plus(((Integer)pkgi), ((Integer)1));
-          int _pkgi = pkgi = _operator_plus;
-          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_pkgi), ((Integer)1));
-          if (_operator_greaterThan) {
-            _builder.append("else ");
-          }
-        }
-        _builder.append("if(semanticObject.eClass().getEPackage() == ");
-        GenPackage _genPackage = GenModelAccess.getGenPackage(pkg);
-        String _packageInterfaceName = _genPackage.getPackageInterfaceName();
-        _builder.append(_packageInterfaceName, "	");
-        _builder.append(".eINSTANCE) ");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("\t");
-        _builder.append("switch(semanticObject.eClass().getClassifierID()) {");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("\t\t");
-        Iterable<EClass> _accessedClasses = this.getAccessedClasses(pkg);
-        final Function2<Integer,EClass,Integer> _function = new Function2<Integer,EClass,Integer>() {
-            public Integer apply(final Integer max , final EClass type) {
-              String _genIntLiteral = GenModelAccess.getGenIntLiteral(type);
-              int _length = _genIntLiteral.length();
-              int _max = Math.max(_length, max);
-              return ((Integer)_max);
-            }
-          };
-        Integer _fold = IterableExtensions.<EClass, Integer>fold(_accessedClasses, ((Integer)0), _function);
-        final Integer width = _fold;
-        _builder.newLineIfNotEmpty();
-        {
-          Iterable<EClass> _accessedClasses_1 = this.getAccessedClasses(pkg);
-          for(EClass type_1 : _accessedClasses_1) {
-            _builder.append("\t");
-            _builder.append("\t\t");
-            _builder.append("case ");
-            String _genIntLiteral_1 = GenModelAccess.getGenIntLiteral(type_1);
-            _builder.append(_genIntLiteral_1, "			");
-            _builder.append(":");
-            String _genIntLiteral_2 = GenModelAccess.getGenIntLiteral(type_1);
-            int _length_1 = _genIntLiteral_2.length();
-            Iterable<Integer> _operator_upTo = IntegerExtensions.operator_upTo(((Integer)_length_1), width);
-            final Function2<String,Integer,String> _function_1 = new Function2<String,Integer,String>() {
-                public String apply(final String s , final Integer i) {
-                  String _operator_plus_1 = StringExtensions.operator_plus(s, " ");
-                  return _operator_plus_1;
-                }
-              };
-            String _fold_1 = IterableExtensions.<Integer, String>fold(_operator_upTo, "", _function_1);
-            _builder.append(_fold_1, "			");
-            _builder.append("return ");
-            {
-              Collection<EObject> _accessedContexts = this.getAccessedContexts(type_1);
-              int _size = _accessedContexts.size();
-              boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size), ((Integer)1));
-              if (_operator_equals) {
-                _builder.append("singleton((EObject)grammarAccess.");
-                Collection<EObject> _accessedContexts_1 = this.getAccessedContexts(type_1);
-                Iterator<EObject> _iterator = _accessedContexts_1.iterator();
-                EObject _next = _iterator.next();
-                String _gaAccessor = this.grammarAccess.gaAccessor(_next);
-                _builder.append(_gaAccessor, "			");
-                _builder.append(")");} else {
-                _builder.append("findContexts((");
-                GenClass _genClass = GenModelAccess.getGenClass(type_1);
-                String _interfaceName = _genClass.getInterfaceName();
-                _builder.append(_interfaceName, "			");
-                _builder.append(")semanticObject, consultContainer, contextCandidates)");
-              }
-            }
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
-          }
-        }
-        _builder.append("\t");
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-      }
-    }
-    _builder.append("\t");
-    _builder.append("return Collections.emptyList();");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    return _builder;
-  }
-  
-  public StringConcatenation genMethodFindContextType(final EClass type) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("/**");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* Potential Result Contexts:");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("*     ");
-    {
-      Collection<EObject> _accessedContexts = this.getAccessedContexts(type);
-      boolean hasAnyElements = false;
-      for(EObject ctx : _accessedContexts) {
-        if (!hasAnyElements) {
-          hasAnyElements = true;
-        } else {
-          _builder.appendImmediate("\n*     ", " ");
-        }
-        String _gaAccessor = this.grammarAccess.gaAccessor(ctx);
-        _builder.append(_gaAccessor, " ");
-      }
-    }
-    _builder.newLineIfNotEmpty();
-    _builder.append(" ");
-    _builder.append("*/");
-    _builder.newLine();
-    _builder.append("protected Iterable<EObject> findContexts(");
-    GenClass _genClass = GenModelAccess.getGenClass(type);
-    String _interfaceName = _genClass.getInterfaceName();
-    _builder.append(_interfaceName, "");
-    _builder.append(" semanticObject, boolean consultContainer, Iterable<EObject> contextCandidates) {");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("return genericSequencer.findContexts(semanticObject, consultContainer, contextCandidates);");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    return _builder;
   }
   
   public StringConcatenation genMethodCreateSequence() {
@@ -651,9 +500,10 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       for(EPackage pkg : _accessedPackages) {
         _builder.append("\t");
         {
-          int _operator_plus = IntegerExtensions.operator_plus(((Integer)pkgi), ((Integer)1));
+          final int typeConverted_pkgi = (int)pkgi;
+          int _operator_plus = IntegerExtensions.operator_plus(((Integer)typeConverted_pkgi), ((Number)1));
           int _pkgi = pkgi = _operator_plus;
-          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_pkgi), ((Integer)1));
+          boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Comparable<? super Integer>)_pkgi), ((Integer)1));
           if (_operator_greaterThan) {
             _builder.append("else ");
           }
@@ -670,7 +520,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             _builder.append("\t");
             _builder.append("\t");
             _builder.append("case ");
-            String _genIntLiteral = GenModelAccess.getGenIntLiteral(type);
+            final EClass typeConverted_type = (EClass)type;
+            String _genIntLiteral = GenModelAccess.getGenIntLiteral(typeConverted_type);
             _builder.append(_genIntLiteral, "		");
             _builder.append(":");
             _builder.newLineIfNotEmpty();
@@ -687,9 +538,10 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                 _builder.append("\t");
                 _builder.append("\t");
                 {
-                  int _operator_plus_1 = IntegerExtensions.operator_plus(((Integer)ctxi), ((Integer)1));
+                  final int typeConverted_ctxi = (int)ctxi;
+                  int _operator_plus_1 = IntegerExtensions.operator_plus(((Integer)typeConverted_ctxi), ((Number)1));
                   int _ctxi = ctxi = _operator_plus_1;
-                  boolean _operator_greaterThan_1 = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_ctxi), ((Integer)1));
+                  boolean _operator_greaterThan_1 = ComparableExtensions.<Integer>operator_greaterThan(((Comparable<? super Integer>)_ctxi), ((Integer)1));
                   if (_operator_greaterThan_1) {
                     _builder.append("else ");
                   }
@@ -720,7 +572,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                 String _name = _key.getName();
                 _builder.append(_name, "				");
                 _builder.append("(context, (");
-                String _name_1 = type.getName();
+                final EClass typeConverted_type_1 = (EClass)type;
+                String _name_1 = typeConverted_type_1.getName();
                 _builder.append(_name_1, "				");
                 _builder.append(") semanticObject); ");
                 _builder.newLineIfNotEmpty();
@@ -793,15 +646,17 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     {
       IFeatureInfo[] _features = c.getFeatures();
       final Function1<IFeatureInfo,Boolean> _function = new Function1<IFeatureInfo,Boolean>() {
-          public Boolean apply(final IFeatureInfo e) {
-            boolean _operator_notEquals = ObjectExtensions.operator_notEquals(e, null);
+          public Boolean apply(IFeatureInfo e) {
+            final IFeatureInfo typeConverted_e = (IFeatureInfo)e;
+            boolean _operator_notEquals = ObjectExtensions.operator_notEquals(typeConverted_e, null);
             return ((Boolean)_operator_notEquals);
           }
         };
       Iterable<IFeatureInfo> _filter = IterableExtensions.<IFeatureInfo>filter(((Iterable<IFeatureInfo>)Conversions.doWrapArray(_features)), _function);
       for(IFeatureInfo f : _filter) {
         _builder.append(" *    ", "");
-        String _string_1 = f.toString();
+        final IFeatureInfo typeConverted_f = (IFeatureInfo)f;
+        String _string_1 = typeConverted_f.toString();
         String _replaceAll_1 = _string_1.replaceAll("\\n", "\n *     ");
         _builder.append(_replaceAll_1, "");
         _builder.newLineIfNotEmpty();
@@ -837,8 +692,9 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           {
             IFeatureInfo[] _features_1 = c.getFeatures();
             final Function1<IFeatureInfo,Boolean> _function_1 = new Function1<IFeatureInfo,Boolean>() {
-                public Boolean apply(final IFeatureInfo e_1) {
-                  boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(e_1, null);
+                public Boolean apply(IFeatureInfo e_1) {
+                  final IFeatureInfo typeConverted_e_1 = (IFeatureInfo)e_1;
+                  boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(typeConverted_e_1, null);
                   return ((Boolean)_operator_notEquals_1);
                 }
               };
@@ -883,7 +739,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
               IConstraintElement _body_4 = c.getBody();
               List<IConstraintElement> _children = _body_4.getChildren();
               final Function1<IConstraintElement,Boolean> _function_2 = new Function1<IConstraintElement,Boolean>() {
-                  public Boolean apply(final IConstraintElement e_2) {
+                  public Boolean apply(IConstraintElement e_2) {
                     IFeatureInfo _featureInfo_2 = e_2.getFeatureInfo();
                     boolean _operator_notEquals_3 = ObjectExtensions.operator_notEquals(_featureInfo_2, null);
                     return ((Boolean)_operator_notEquals_3);
@@ -891,7 +747,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                 };
               Iterable<IConstraintElement> _filter_2 = IterableExtensions.<IConstraintElement>filter(_children, _function_2);
               final Function1<IConstraintElement,IFeatureInfo> _function_3 = new Function1<IConstraintElement,IFeatureInfo>() {
-                  public IFeatureInfo apply(final IConstraintElement e_3) {
+                  public IFeatureInfo apply(IConstraintElement e_3) {
                     IFeatureInfo _featureInfo_3 = e_3.getFeatureInfo();
                     return _featureInfo_3;
                   }

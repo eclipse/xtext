@@ -51,37 +51,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 		this.genericSequencer.init(sequenceAcceptor, errorAcceptor);
 	}
 	
-	public Iterable<EObject> findContexts(EObject semanticObject, boolean consultContainer, Iterable<EObject> contextCandidates) {
-		if(semanticObject.eClass().getEPackage() == SequencertestPackage.eINSTANCE) 
-			switch(semanticObject.eClass().getClassifierID()) {
-				case SequencertestPackage.ALT_LIST1:                           return singleton((EObject)grammarAccess.getAltList1Rule());
-				case SequencertestPackage.ALT_LIST2:                           return singleton((EObject)grammarAccess.getAltList2Rule());
-				case SequencertestPackage.ALTERNATIVE_MULTIPLICITIES:          return singleton((EObject)grammarAccess.getAlternativeMultiplicitiesRule());
-				case SequencertestPackage.DEPENDENT_ALTERNATIVE1:              return singleton((EObject)grammarAccess.getDependentAlternative1Rule());
-				case SequencertestPackage.DEPENDENT_ALTERNATIVE2:              return singleton((EObject)grammarAccess.getDependentAlternative2Rule());
-				case SequencertestPackage.GROUP_MULTIPLICITIES:                return singleton((EObject)grammarAccess.getGroupMultiplicitiesRule());
-				case SequencertestPackage.LIST1:                               return singleton((EObject)grammarAccess.getList1Rule());
-				case SequencertestPackage.LIST2:                               return singleton((EObject)grammarAccess.getList2Rule());
-				case SequencertestPackage.MODEL:                               return singleton((EObject)grammarAccess.getModelRule());
-				case SequencertestPackage.MULTI_KEYWORDS_OR_ID:                return singleton((EObject)grammarAccess.getMultiKeywordsOrIDRule());
-				case SequencertestPackage.MULTI_KEYWORDS:                      return singleton((EObject)grammarAccess.getMultiKeywordsRule());
-				case SequencertestPackage.MULTI_TERMINALS:                     return singleton((EObject)grammarAccess.getMultiTerminalsRule());
-				case SequencertestPackage.OPTIONAL:                            return singleton((EObject)grammarAccess.getOptionalRule());
-				case SequencertestPackage.SIMPLE_ALTERNATIVE:                  return singleton((EObject)grammarAccess.getSimpleAlternativeRule());
-				case SequencertestPackage.SIMPLE_GROUP:                        return singleton((EObject)grammarAccess.getSimpleGroupRule());
-				case SequencertestPackage.SIMPLE_MULTIPLICITIES:               return singleton((EObject)grammarAccess.getSimpleMultiplicitiesRule());
-				case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE_CHILD1: return singleton((EObject)grammarAccess.getSingleContainmentReferenceChild1Rule());
-				case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE_CHILD2: return singleton((EObject)grammarAccess.getSingleContainmentReferenceChild2Rule());
-				case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE_CHILD3: return singleton((EObject)grammarAccess.getSingleContainmentReferenceChild3Rule());
-				case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE:        return singleton((EObject)grammarAccess.getSingleContainmentReferenceRule());
-				case SequencertestPackage.SINGLE_CROSS_REFERENCE:              return singleton((EObject)grammarAccess.getSingleCrossReferenceRule());
-				case SequencertestPackage.SINGLE_ENUM:                         return singleton((EObject)grammarAccess.getSingleEnumRule());
-				case SequencertestPackage.SINGLE_KEYWORDS_OR_ID:               return singleton((EObject)grammarAccess.getSingleKeywordsOrIDRule());
-				case SequencertestPackage.SINGLE_KEYWORDS:                     return singleton((EObject)grammarAccess.getSingleKeywordsRule());
-				case SequencertestPackage.SINGLE_TERMINALS:                    return singleton((EObject)grammarAccess.getSingleTerminalsRule());
-			}
-		return Collections.emptyList();
-	}
 	
 	
 	public void createSequence(EObject context, EObject semanticObject) {

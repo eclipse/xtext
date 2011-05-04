@@ -146,9 +146,9 @@ class AbstractSemanticSequencer extends GeneratedFile {
 				«ENDIF»
 			}
 			
-			«genMethodFindContext»	
+			« /* genMethodFindContext */ ""»	
 			
-			«accessedClasses.filter(e|e.accessedContexts.size > 1).join("\n\n", [e|e.genMethodFindContextType()])»
+			« /* accessedClasses.filter(e|e.accessedContexts.size > 1).join("\n\n", [e|e.genMethodFindContextType()]) */ ""»
 			
 			«genMethodCreateSequence»
 			
@@ -156,32 +156,32 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		}
 	'''.toString }
 	
-	genMethodFindContext() '''
-		public Iterable<EObject> findContexts(EObject semanticObject, boolean consultContainer, Iterable<EObject> contextCandidates) {
-			«var pkgi = 0»
-			«FOR pkg:accessedPackages  /* ITERATOR i */»
-				«IF (pkgi = pkgi + 1) > 1 /* !i.firstIteration */»else «ENDIF»if(semanticObject.eClass().getEPackage() == «pkg.genPackage.packageInterfaceName».eINSTANCE) 
-					switch(semanticObject.eClass().getClassifierID()) {
-						«val width = pkg.accessedClasses.fold(0, [max, type | Math::max(type.genIntLiteral.length, max)])»
-						«FOR type:pkg.accessedClasses»
-							case «type.genIntLiteral»:«(type.genIntLiteral.length..width).fold("",[s, i|s + " "])»return «IF type.accessedContexts.size == 1»singleton((EObject)grammarAccess.«type.accessedContexts.iterator.next.gaAccessor()»)«ELSE»findContexts((«type.getGenClass().interfaceName»)semanticObject, consultContainer, contextCandidates)«ENDIF»;
-						«ENDFOR»
-					}
-			«ENDFOR»	
-			return Collections.emptyList();
-		}
-	'''
-		
-	
-	genMethodFindContextType(EClass type) '''
-		/**
-		 * Potential Result Contexts:
-		 *     «FOR ctx:type.accessedContexts SEPARATOR "\n*     "»«ctx.gaAccessor»«ENDFOR»
-		 */
-		protected Iterable<EObject> findContexts(«type.genClass().interfaceName» semanticObject, boolean consultContainer, Iterable<EObject> contextCandidates) {
-			return genericSequencer.findContexts(semanticObject, consultContainer, contextCandidates);
-		}
-	'''
+//	genMethodFindContext() '''
+//		public Iterable<EObject> findContexts(EObject semanticObject, boolean consultContainer, Iterable<EObject> contextCandidates) {
+//			«var pkgi = 0»
+//			«FOR pkg:accessedPackages  /* ITERATOR i */»
+//				«IF (pkgi = pkgi + 1) > 1 /* !i.firstIteration */»else «ENDIF»if(semanticObject.eClass().getEPackage() == «pkg.genPackage.packageInterfaceName».eINSTANCE) 
+//					switch(semanticObject.eClass().getClassifierID()) {
+//						«val width = pkg.accessedClasses.fold(0, [max, type | Math::max(type.genIntLiteral.length, max)])»
+//						«FOR type:pkg.accessedClasses»
+//							case «type.genIntLiteral»:«(type.genIntLiteral.length..width).fold("",[s, i|s + " "])»return «IF type.accessedContexts.size == 1»singleton((EObject)grammarAccess.«type.accessedContexts.iterator.next.gaAccessor()»)«ELSE»findContexts((«type.getGenClass().interfaceName»)semanticObject, consultContainer, contextCandidates)«ENDIF»;
+//						«ENDFOR»
+//					}
+//			«ENDFOR»	
+//			return Collections.emptyList();
+//		}
+//	'''
+//		
+//	
+//	genMethodFindContextType(EClass type) '''
+//		/**
+//		 * Potential Result Contexts:
+//		 *     «FOR ctx:type.accessedContexts SEPARATOR "\n*     "»«ctx.gaAccessor»«ENDFOR»
+//		 */
+//		protected Iterable<EObject> findContexts(«type.genClass().interfaceName» semanticObject, boolean consultContainer, Iterable<EObject> contextCandidates) {
+//			return genericSequencer.findContexts(semanticObject, consultContainer, contextCandidates);
+//		}
+//	'''
 	
 	genMethodCreateSequence() '''
 		public void createSequence(EObject context, EObject semanticObject) {

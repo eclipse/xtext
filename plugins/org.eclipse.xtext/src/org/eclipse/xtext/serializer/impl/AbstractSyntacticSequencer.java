@@ -52,7 +52,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		protected ISerializationDiagnostic.Acceptor errorAcceptor;
 
 		protected INode lastNode;
-		
+
 		protected INode rootNode;
 
 		protected ISynFollowerOwner lastState;
@@ -254,12 +254,12 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 				return;
 			case UNASSIGNED_DATATYPE_RULE_CALL:
 				RuleCall rc3 = (RuleCall) emitter.getGrammarElement();
-				String value3 = node != null ? node.getText().trim() : "foo";// TODO: allow to customize this value
+				String value3 = getUnassignedRuleCallValue(rc3, node);
 				delegate.acceptUnassignedDatatype(rc3, value3, (ICompositeNode) node);
 				return;
 			case UNASSIGNED_TERMINAL_RULE_CALL:
 				RuleCall rc4 = (RuleCall) emitter.getGrammarElement();
-				String value4 = node != null ? node.getText() : "foo";// TODO: allow to customize this value
+				String value4 = getUnassignedRuleCallValue(rc4, node);
 				delegate.acceptUnassignedTerminal(rc4, value4, (ILeafNode) node);
 				return;
 			case ASSIGNED_ACTION_CALL:
@@ -280,12 +280,14 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		throw new RuntimeException("invalid state for emitting: " + emitter + " (" + emitter.getType() + ")");
 	}
 
+	protected abstract String getUnassignedRuleCallValue(RuleCall ruleCall, INode node);
+
 	//	public ISemanticSequenceAcceptor createAcceptor(EObject ctx, EObject semanticRoot, INode previousNode,
 	//			ISyntacticSequenceAcceptor constructor, ISerializationDiagnostic.Acceptor errorAcceptor) {
 	//		ISynAbsorberState startState = getStartState(ctx);
 	//		return new SemAcceptor(ctx, startState, previousNode, constructor, errorAcceptor);
 	//	}
-	
+
 	@Inject
 	protected Injector injector;
 

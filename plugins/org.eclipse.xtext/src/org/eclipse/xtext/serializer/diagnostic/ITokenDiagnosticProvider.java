@@ -9,6 +9,8 @@ package org.eclipse.xtext.serializer.diagnostic;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.scoping.IScope;
 
 import com.google.inject.ImplementedBy;
 
@@ -22,4 +24,9 @@ public interface ITokenDiagnosticProvider {
 
 	ISerializationDiagnostic getValueConversionExceptionDiagnostic(EObject semanticObject, AbstractElement element,
 			Object value, Throwable exception);
+
+	ISerializationDiagnostic getNoScopeFoundDiagnostic(EObject semanticObject, CrossReference element, EObject target);
+
+	ISerializationDiagnostic getNoEObjectDescriptionFoundDiagnostic(EObject semanticObject, CrossReference element,
+			EObject target, IScope scope);
 }
