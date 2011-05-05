@@ -27,13 +27,10 @@ import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
 public class JvmRenameRefactoringProvider extends DefaultRenameRefactoringProvider {
-
-//	private PolymorphicDispatcher<JavaRenameProcessor> createProcessor = PolymorphicDispatcher.createForSingleTarget(
-//			"createProcessor", this);
 
 	@Override
 	public ProcessorBasedRefactoring getRenameRefactoring(IRenameElementContext renameElementContext) {
@@ -47,11 +44,6 @@ public class JvmRenameRefactoringProvider extends DefaultRenameRefactoringProvid
 					} catch (Exception exc) {
 						throw new WrappedException(exc);
 					}
-					//					JavaRenameProcessor javaRenameProcessor = createProcessor.invoke(javaElement);
-					//					if (javaRenameProcessor != null) {
-					//						return new RenameRefactoring(javaRenameProcessor);
-					//					}
-
 				}
 			}
 		}
@@ -62,56 +54,9 @@ public class JvmRenameRefactoringProvider extends DefaultRenameRefactoringProvid
 		return "java".equals(javaElement.getResource().getFileExtension());
 	}
 
-//	protected JavaRenameProcessor createProcessor(ICompilationUnit compilationUnit) throws CoreException {
-//		return configure(new RenameCompilationUnitProcessor(compilationUnit));
-//	}
-//
-//	protected JavaRenameProcessor createProcessor(IType type) throws JavaModelException {
-//		return configure(new RenameTypeProcessor(type));
-//	}
-//
-//	protected JavaRenameProcessor createProcessor(IMethod method) throws JavaModelException {
-//		if (MethodChecks.isVirtual(method)) {
-//			return configure(new RenameVirtualMethodProcessor(method));
-//		} else {
-//			return configure(new RenameNonVirtualMethodProcessor(method));
-//		}
-//	}
-//
-//	protected JavaRenameProcessor createProcessor(IField field) throws JavaModelException {
-//		if (JdtFlags.isEnum(field))
-//			return configure(new RenameEnumConstProcessor(field));
-//		else {
-//			final RenameFieldProcessor processor = new RenameFieldProcessor(field);
-//			processor.setRenameGetter(true);
-//			processor.setRenameSetter(true);
-//			return configure(processor);
-//		}
-//	}
-//
-//	protected JavaRenameProcessor configure(JavaRenameProcessor processor) {
-//		if (processor instanceof IReferenceUpdating) {
-//			IReferenceUpdating reference = (IReferenceUpdating) processor;
-//			reference.setUpdateReferences(isUpdateReferences());
-//		}
-//		if (processor instanceof ITextUpdating) {
-//			ITextUpdating text = (ITextUpdating) processor;
-//			text.setUpdateTextualMatches(isUpdateTextualMatches());
-//		}
-//		return processor;
-//	}
-//
-//	protected boolean isUpdateReferences() {
-//		return true;
-//	}
-//
-//	protected boolean isUpdateTextualMatches() {
-//		return true;
-//	}
-//
 	/**
 	 * Copied from {@link org.eclipse.jdt.internal.ui.refactoring.reorg.RenameLinkedMode}. There does not seem to be a
-	 * way to properly initialize a JDT refactoring from the outside.
+	 * clean way to initialize a JDT refactoring from the outside.
 	 */
 	protected RenameJavaElementDescriptor createRenameDescriptor(IJavaElement javaElement, String newName)
 			throws JavaModelException {
