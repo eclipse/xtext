@@ -137,6 +137,7 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 		public Change createChange(String name, TextEdit textEdit) {
 			DocumentChange documentChange = new DocumentChange(getName(), document);
 			documentChange.setEdit(textEdit);
+			documentChange.setTextType(getURI().fileExtension());
 			return new DisplayChangeWrapper(documentChange);
 		}
 
@@ -176,6 +177,7 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 			TextFileChange textFileChange = new TextFileChange(name, file);
 			textFileChange.setSaveMode(TextFileChange.FORCE_SAVE);
 			textFileChange.setEdit(textEdit);
+			textFileChange.setTextType(getURI().fileExtension());
 			return textFileChange;
 		}
 
