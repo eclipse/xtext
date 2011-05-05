@@ -14,7 +14,6 @@ import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.refactoring.IJavaRefactorings;
 import org.eclipse.jdt.core.refactoring.descriptors.RenameJavaElementDescriptor;
-import org.eclipse.jdt.internal.corext.refactoring.rename.JavaRenameProcessor;
 import org.eclipse.jdt.internal.corext.refactoring.rename.RenamingNameSuggestor;
 import org.eclipse.jdt.internal.ui.JavaPlugin;
 import org.eclipse.jdt.internal.ui.refactoring.DelegateUIHelper;
@@ -26,7 +25,6 @@ import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.ltk.ui.refactoring.RefactoringWizardPage;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.util.PolymorphicDispatcher;
 
 /**
  * @author koehnlein - Initial contribution and API
