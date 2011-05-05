@@ -27,9 +27,9 @@ public class JvmFeatureScope extends SimpleScope {
 	public String getScopeDescription() {
 		return scopeDescription;
 	}
-
+	
 	@Override
-	protected Object getShadowingKey(IEObjectDescription description) {
+	protected String getShadowingKey(IEObjectDescription description) {
 		return ((JvmFeatureDescription)description).getKey();
 	}
 	
@@ -43,6 +43,25 @@ public class JvmFeatureScope extends SimpleScope {
 		if (scopeDescription!=null)
 			return "'"+scopeDescription+"'"+getAllLocalElements() + " -> " + getParent().toString();
 		return super.toString();
+	}
+	
+	/*
+	 * Specialized to interpret the shadowing key of sugared assignments to make sure
+	 * that fields with the very same name shadow properties, e.g. field prop1 has to
+	 * shadow all overloaded versions of setProp1(type).
+	 */
+	@Override
+	protected boolean isShadowed(IEObjectDescription fromParent) {
+		boolean result = super.isShadowed(fromParent);
+		if (result == false) {
+			String parentShadowingKey = getShadowingKey(fromParent);
+			int assignmentIndicator = parentShadowingKey.indexOf("=(");
+			if (assignmentIndicator >= 0) { // sugared assignment
+				String shortShadowingKey = parentShadowingKey.substring(0, assignmentIndicator);
+				result = shadowingIndex.contains(shortShadowingKey);
+			}
+		}
+		return result;
 	}
 
 }

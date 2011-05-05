@@ -8,13 +8,12 @@
 package org.eclipse.xtext.scoping.impl;
 
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-
-import com.google.common.collect.Maps;
 
 /**
  * A scope implemented using a {@link Map} used for efficient lookup of ordinary named 
@@ -34,11 +33,14 @@ public class MapBasedScope extends AbstractScope {
 		Map<QualifiedName, IEObjectDescription> map = null;
 		for(IEObjectDescription description: descriptions) {
 			if (map == null)
-				map = Maps.newHashMapWithExpectedSize(3);
-			if (ignoreCase)
-				map.put(description.getName().toLowerCase(), description);
-			else
-				map.put(description.getName(), description);
+				map = new LinkedHashMap<QualifiedName, IEObjectDescription>(4);
+			QualifiedName name = ignoreCase ? description.getName().toLowerCase() : description.getName();
+			IEObjectDescription previous = map.put(name, description);
+			// we are optimistic that no duplicate names are used
+			// however, if the name was already used, the first one should win
+			if (previous != null) {
+				map.put(name, previous);
+			}
 		}
 		if (map == null || map.isEmpty()) {
 			return parent;

@@ -47,8 +47,8 @@ public class XFeatureCallSugarDescriptionProvider extends DefaultJvmFeatureDescr
 			if (syntacticalNumberOfArguments<=1) {
 				QualifiedName operator = operatorMapping.getOperator(QualifiedName.create(op.getSimpleName()));
 				if (operator != null) {
-					final String shadowingString = getSignature(op, context).replace(op.getSimpleName(),
-							operator.toString());
+					
+					final String shadowingString = operator.toString() + getSignature(op, context).substring(op.getSimpleName().length());
 					acceptor.accept(createJvmFeatureDescription(operator, op, context, shadowingString,
 							isValid(feature)));
 				}

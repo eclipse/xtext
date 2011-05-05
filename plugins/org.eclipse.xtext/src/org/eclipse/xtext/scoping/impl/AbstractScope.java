@@ -179,9 +179,22 @@ public abstract class AbstractScope implements IScope {
 		Iterable<IEObjectDescription> result = Iterables.filter(localElements, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
 				if (input.getEObjectOrProxy() == object)
-					return true;
+					return canBeFoundByName(input);
 				if (uri.equals(input.getEObjectURI())) {
-					return true;
+					return canBeFoundByName(input);
+				}
+				return false;
+			}
+			
+			public boolean canBeFoundByName(IEObjectDescription input) {
+				IEObjectDescription lookUp = getSingleLocalElementByName(input.getName());
+				if (lookUp != null) {
+					if (lookUp == input)
+						return true;
+					if (lookUp.getEObjectOrProxy() == object)
+						return true;
+					if (uri.equals(lookUp.getEObjectURI()))
+						return true;
 				}
 				return false;
 			}

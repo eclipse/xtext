@@ -565,6 +565,15 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
+	@Test public void testAssignment_13() throws Exception {
+		assertEvaluatesTo("literal", 
+				"{" +
+				"  var x = new testdata.Properties2()" +
+				"  x.prop2 = 'literal'" +
+				"  x.prop2" +
+				"}");
+	}
+	
 	@Test public void testAssignmentInBlock_01() throws Exception {
 		assertEvaluatesTo("newValue", "{var x = 'literal' { x = 'newValue' } x }");
 	}
