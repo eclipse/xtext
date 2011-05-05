@@ -29,7 +29,10 @@ public class XAssignmentSugarDescriptionProvider extends DefaultJvmFeatureDescri
 			final JvmOperation jvmOperation = (JvmOperation) feature;
 			if (isSetterMethod(jvmOperation)) {
 				String propertyName = getPropertyNameForSetter(jvmOperation.getSimpleName());
-				JvmFeatureDescription description = createJvmFeatureDescription(QualifiedName.create(propertyName), jvmOperation, context, propertyName, isValid(feature));
+				String shadowingString = getSignature(jvmOperation, context);
+				shadowingString = propertyName + "=" + shadowingString.substring(jvmOperation.getSimpleName().length());
+				JvmFeatureDescription description = createJvmFeatureDescription(QualifiedName.create(propertyName), 
+						jvmOperation, context, shadowingString, isValid(feature));
 				acceptor.accept(description);
 			}
 		}

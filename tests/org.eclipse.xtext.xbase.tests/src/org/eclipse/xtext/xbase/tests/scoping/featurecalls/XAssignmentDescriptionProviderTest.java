@@ -57,11 +57,11 @@ public class XAssignmentDescriptionProviderTest extends AbstractJvmFeatureScopeP
 		
 		assertSetsEqual(newHashSet("publicField"),	getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("publicProperty"),	getSignatures(scope));
+		assertSetsEqual(newHashSet("publicProperty=(java.lang.String)"),	getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
 		assertSetsEqual(newHashSet("privateField","protectedField"),	getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("privateProperty","protectedProperty"),	getSignatures(scope));
+		assertSetsEqual(newHashSet("privateProperty=(java.lang.String)","protectedProperty=(java.lang.String)"),	getSignatures(scope));
 		assertSame(IScope.NULLSCOPE, scope.getParent());
 	}
 	
@@ -82,11 +82,11 @@ public class XAssignmentDescriptionProviderTest extends AbstractJvmFeatureScopeP
 		
 		assertSetsEqual(newHashSet("publicField","protectedField"),	getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("publicProperty","protectedProperty"),	getSignatures(scope));
+		assertSetsEqual(newHashSet("publicProperty=(java.lang.String)", "protectedProperty=(java.lang.String)"),	getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
 		assertSetsEqual(newHashSet("privateField"),	getSignatures(scope));
 		scope = (JvmFeatureScope) scope.getParent();
-		assertSetsEqual(newHashSet("privateProperty"),	getSignatures(scope));
+		assertSetsEqual(newHashSet("privateProperty=(java.lang.String)"),	getSignatures(scope));
 		assertSame(IScope.NULLSCOPE, scope.getParent());
 	}
 	
