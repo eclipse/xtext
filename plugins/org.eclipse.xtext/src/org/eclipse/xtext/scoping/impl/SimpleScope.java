@@ -9,9 +9,13 @@ package org.eclipse.xtext.scoping.impl;
 
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 /**
@@ -46,6 +50,39 @@ public class SimpleScope extends AbstractScope {
 	@Override
 	protected Iterable<IEObjectDescription> getAllLocalElements() {
 		return descriptions;
+	}
+	
+	@Override
+	protected Iterable<IEObjectDescription> getLocalElementsByEObject(final EObject object, final URI uri) {
+		Iterable<IEObjectDescription> localElements = getAllLocalElements();
+		Iterable<IEObjectDescription> result = Iterables.filter(localElements, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				if (input.getEObjectOrProxy() == object)
+					return canBeFoundByNameAndShadowingKey(input);
+				if (uri.equals(input.getEObjectURI())) {
+					return canBeFoundByNameAndShadowingKey(input);
+				}
+				return false;
+			}
+			
+			public boolean canBeFoundByNameAndShadowingKey(IEObjectDescription input) {
+				Iterable<IEObjectDescription> lookUp = getLocalElementsByName(input.getName());
+				Object myShadowingKey = getShadowingKey(input);
+				for(IEObjectDescription other: lookUp) {
+					if (myShadowingKey.equals(getShadowingKey(other))) {
+						if (other == input)
+							return true;
+						if (other.getEObjectOrProxy() == object)
+							return true;
+						if (uri.equals(other.getEObjectURI()))
+							return true;
+						return false;
+					}
+				}
+				return false;
+			}
+		});
+		return result;
 	}
 	
 	/**
