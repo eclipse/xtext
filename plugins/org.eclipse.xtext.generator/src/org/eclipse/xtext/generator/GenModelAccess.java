@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -78,7 +79,12 @@ public class GenModelAccess {
 		URI genModelURI = EcorePlugin.getEPackageNsURIToGenModelLocationMap().get(pkg.getNsURI());
 		if (genModelURI == null)
 			throw new RuntimeException("No GenModel for EPackage '" + pkg.getNsURI() + "' is registered.");
-		Resource genModelResource = pkg.eResource().getResourceSet().getResource(genModelURI, true);
+		ResourceSet resourceSet = pkg.eResource().getResourceSet();
+		if (resourceSet == null)
+			throw new RuntimeException("There is no ResourceSet for EPackage '" + pkg.getNsURI() + "'. "
+					+ "Please make sure the EPackage has been loaded from a .ecore file "
+					+ "and not from the generated Java file.");
+		Resource genModelResource = resourceSet.getResource(genModelURI, true);
 		if (genModelResource == null)
 			throw new RuntimeException("Error loading GenModel " + genModelURI);
 		for (EObject model : genModelResource.getContents())
