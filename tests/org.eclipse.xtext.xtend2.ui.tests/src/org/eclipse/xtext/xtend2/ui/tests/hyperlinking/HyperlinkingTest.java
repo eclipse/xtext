@@ -34,10 +34,10 @@ public class HyperlinkingTest extends AbstractXtend2UITestCase {
 	
 	public void testDispatchMethod() throws Exception {
 		String modelAsString = "class Foo {\n"
-				+ "  bar() { foo(new Object()) }\n"
-				+ "  dispatch foo(Object o) { null }\n"
-				+ "  dispatch foo(String s) { null }\n"
-				+ "  dispatch foo(Number n) { null }\n"
+				+ "  def bar() { foo(new Object()) }\n"
+				+ "  def dispatch foo(Object o) { null }\n"
+				+ "  def dispatch foo(String s) { null }\n"
+				+ "  def dispatch foo(Number n) { null }\n"
 				+ "}";
 		XtextResource resource = (XtextResource) testHelper.xtendFile("Foo", modelAsString).eResource();
 		IHyperlink[] hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, modelAsString.indexOf("foo"), true);
@@ -49,8 +49,8 @@ public class HyperlinkingTest extends AbstractXtend2UITestCase {
 	
 	public void testPlainMethod() throws Exception {
 		String modelAsString = "class Foo {\n"
-				+ "  bar() { foo() }\n"
-				+ "  foo() { null }\n"
+				+ "  def bar() { foo() }\n"
+				+ "  def foo() { null }\n"
 				+ "}";
 		XtextResource resource = (XtextResource) testHelper.xtendFile("Foo", modelAsString).eResource();
 		IHyperlink[] hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, modelAsString.indexOf("foo"), true);
@@ -61,7 +61,7 @@ public class HyperlinkingTest extends AbstractXtend2UITestCase {
 	public void testConstructor() throws Exception {
 		String modelAsString =
 			"class Foo {\n"
-				+ "  bar() { new Foo() }\n"
+				+ "  def bar() { new Foo() }\n"
 				+ "}";
 		XtextResource resource = (XtextResource) testHelper.xtendFile("Foo", modelAsString).eResource();
 		IHyperlink[] hyperlinks = hyperlinkHelper.createHyperlinksByOffset(resource, modelAsString.indexOf("Foo", 10), true);

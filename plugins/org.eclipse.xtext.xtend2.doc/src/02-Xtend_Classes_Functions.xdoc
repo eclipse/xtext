@@ -193,7 +193,7 @@ You'll only have to change the binding in your guice module. Also this gives you
 or allows you to write against an SPI, where the concrete implementation can be provided by a third party.
 
 code[
-DeclaredDependency : 
+XtendField : 
 	'@Inject' 'extension'? 
 	('@'STRING | '@'TypeReference)? 
 	TypeReference ('as' ID)?;

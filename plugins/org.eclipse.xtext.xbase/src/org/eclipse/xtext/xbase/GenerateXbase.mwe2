@@ -92,5 +92,40 @@ Workflow {
 				antlrParam = "-Xconversiontimeout" antlrParam = "10000"
 			}
 		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/xbase/annotations/XbaseWithAnnotations.xtext" 	
+			fileExtensions = "___xbasewithannotations"
+			fragment = grammarAccess.GrammarAccessFragment {}
+			fragment = serializer.SerializerFragment {
+				// generateDebugData = true
+			}
+			fragment = resourceFactory.ResourceFactoryFragment {
+				fileExtensions = "___xbasewithannotations"
+			}
+			fragment = XtextAntlrGeneratorFragment {
+				options = auto-inject {}
+				antlrParam = "-Xconversiontimeout" antlrParam = "10000"
+			}
+			fragment = DebugAntlrGeneratorFragment {
+				options = auto-inject {}
+			}
+			fragment = validation.JavaValidatorFragment {}
+			fragment = scoping.ImportNamespacesScopingFragment {}
+			fragment = types.TypesGeneratorFragment {}
+			fragment = xbase.XbaseGeneratorFragment {
+				generateXtendInferrer = false
+				useInferredJvmModel = false
+			}
+			fragment = builder.BuilderIntegrationFragment {}
+			fragment = formatting.FormatterFragment {}
+			fragment = quickfix.QuickfixProviderFragment {}
+			fragment = labeling.LabelProviderFragment {}
+			fragment = outline.OutlineTreeProviderFragment {}
+			fragment = contentAssist.JavaBasedContentAssistFragment {}
+			fragment = XtextAntlrUiGeneratorFragment {
+				options = auto-inject {}
+				antlrParam = "-Xconversiontimeout" antlrParam = "10000"
+			}
+		}
 	}
 }

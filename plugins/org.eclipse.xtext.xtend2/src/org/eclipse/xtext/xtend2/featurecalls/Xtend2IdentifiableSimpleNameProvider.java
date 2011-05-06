@@ -10,7 +10,8 @@ package org.eclipse.xtext.xtend2.featurecalls;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
-import org.eclipse.xtext.xtend2.xtend2.XtendMember;
+import org.eclipse.xtext.xtend2.xtend2.XtendField;
+import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -21,8 +22,10 @@ public class Xtend2IdentifiableSimpleNameProvider extends IdentifiableSimpleName
 	public String getSimpleName(JvmIdentifiableElement element) {
 		if (element instanceof XtendClass) {
 			return "this";
-		} else if (element instanceof XtendMember) {
-			return ((XtendMember) element).getSimpleName();
+		} else if (element instanceof XtendFunction) {
+			return ((XtendFunction) element).getName();
+		} else if (element instanceof XtendField) {
+			return ((XtendField) element).getName();
 		}
 		return super.getSimpleName(element);
 	}

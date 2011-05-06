@@ -29,22 +29,22 @@ public class OverrideValidationTest extends AbstractXtend2TestCase {
 	//TODO override declarations in interfaces
 
 	public void testDuplicateMethod_0() throws Exception {
-		XtendClass xtendClass = clazz("class Foo { bar(int x) {true} bar(int x) {false} }");
+		XtendClass xtendClass = clazz("class Foo { def bar(int x) {true} def bar(int x) {false} }");
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD, "duplicate");
 	}
 
 	public void testDuplicateMethod_1() throws Exception {
-		XtendClass xtendClass = clazz("class Foo { bar(String x) {true} bar(int x) {false} }");
+		XtendClass xtendClass = clazz("class Foo { def bar(String x) {true} def bar(int x) {false} }");
 		helper.assertNoError(xtendClass, DUPLICATE_METHOD);
 	}
 
 	public void testDuplicateMethod_2() throws Exception {
-		XtendClass xtendClass = clazz("class Foo { bar(String x) {true} bar(String x, int x) {false} }");
+		XtendClass xtendClass = clazz("class Foo { def bar(String x) {true} def bar(String x, int x) {false} }");
 		helper.assertNoError(xtendClass, DUPLICATE_METHOD);
 	}
 	
 	public void testDuplicateMethod_3() throws Exception {
-		XtendClass xtendClass = clazz("class Foo { bar(java.util.List<String> x) {true} bar(java.util.List<Integer> x) {false} }");
+		XtendClass xtendClass = clazz("class Foo { def bar(java.util.List<String> x) {true} def bar(java.util.List<Integer> x) {false} }");
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD, "erasure", "List)", "List<String");
 		helper.assertError(xtendClass.getMembers().get(1), XTEND_FUNCTION, DUPLICATE_METHOD, "erasure", "List)", "List<Integer");
 	}
@@ -65,32 +65,32 @@ public class OverrideValidationTest extends AbstractXtend2TestCase {
 	}
 
 	public void testMissingOverride_0() throws Exception {
-		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { string() {null} }");
+		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { def string() {null} }");
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, MISSING_OVERRIDE);
 	}
 
 	public void testMissingOverride_1() throws Exception {
-		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { string(int i) { null} }");
+		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { def string(int i) { null} }");
 		helper.assertNoError(xtendClass.getMembers().get(0), MISSING_OVERRIDE);
 	}
 
 	public void testMissingOverride_2() throws Exception {
-		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { string(String s) {null} }");
+		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { def string(String s) {null} }");
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, MISSING_OVERRIDE);
 	}
 
 	public void testMissingOverride_3() throws Exception {
-		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { object(String s) {null} }");
+		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { def object(String s) {null} }");
 		helper.assertNoError(xtendClass.getMembers().get(0), MISSING_OVERRIDE);
 	}
 
 	public void testMissingOverride_4() throws Exception {
-		XtendClass xtendClass = clazz("class Foo implements test.SomeInterface { foo() { true } }");
+		XtendClass xtendClass = clazz("class Foo implements test.SomeInterface { def foo() { true } }");
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, MISSING_OVERRIDE);
 	}
 	
 	public void testMissingOverride_5() throws Exception {
-		XtendClass xtendClass = clazz("class Foo { boolean equals(Object x) { return true } }");
+		XtendClass xtendClass = clazz("class Foo { def boolean equals(Object x) { return true } }");
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, MISSING_OVERRIDE);
 	}
 
@@ -105,7 +105,7 @@ public class OverrideValidationTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testIncompatibleReturnType_2() throws Exception {
-		XtendClass xtendClass = clazz("class Foo implements test.SomeInterface { foo() {} }");
+		XtendClass xtendClass = clazz("class Foo implements test.SomeInterface { def foo() {} }");
 		helper.assertError(xtendClass.getMembers().get(0), XbasePackage.Literals.XBLOCK_EXPRESSION, INCOMPATIBLE_RETURN_TYPE);
 	}
 

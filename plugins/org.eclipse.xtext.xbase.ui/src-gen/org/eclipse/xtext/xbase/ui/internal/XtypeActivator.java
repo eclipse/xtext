@@ -37,6 +37,7 @@ public class XtypeActivator extends AbstractUIPlugin {
 		try {
 			registerInjectorFor("org.eclipse.xtext.xbase.Xtype");
 			registerInjectorFor("org.eclipse.xtext.xbase.Xbase");
+			registerInjectorFor("org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations");
 			
 		} catch (Exception e) {
 			Logger.getLogger(getClass()).error(e.getMessage(), e);
@@ -67,6 +68,9 @@ public class XtypeActivator extends AbstractUIPlugin {
 		if ("org.eclipse.xtext.xbase.Xbase".equals(grammar)) {
 		  return new org.eclipse.xtext.xbase.XbaseRuntimeModule();
 		}
+		if ("org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations".equals(grammar)) {
+		  return new org.eclipse.xtext.xbase.annotations.XbaseWithAnnotationsRuntimeModule();
+		}
 		
 		throw new IllegalArgumentException(grammar);
 	}
@@ -77,6 +81,9 @@ public class XtypeActivator extends AbstractUIPlugin {
 		}
 		if ("org.eclipse.xtext.xbase.Xbase".equals(grammar)) {
 		  return new org.eclipse.xtext.xbase.ui.XbaseUiModule(this);
+		}
+		if ("org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations".equals(grammar)) {
+		  return new org.eclipse.xtext.xbase.annotations.ui.XbaseWithAnnotationsUiModule(this);
 		}
 		
 		throw new IllegalArgumentException(grammar);

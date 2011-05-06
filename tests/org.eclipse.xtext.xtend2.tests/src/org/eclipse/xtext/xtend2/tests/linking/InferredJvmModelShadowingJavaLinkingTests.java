@@ -54,7 +54,7 @@ public class InferredJvmModelShadowingJavaLinkingTests extends AbstractXtend2Tes
 	}
 	
 	public void testLinkJavaConstructor() throws Exception {
-		XtendClass bar = classFile("test/Bar", "package test class Bar { bar() {new Foo()} }");
+		XtendClass bar = classFile("test/Bar", "package test class Bar { def bar() {new Foo()} }");
 		final XExpression block = ((XtendFunction)bar.getMembers().get(0)).getExpression();
 		XConstructorCall constructorCall = (XConstructorCall) ((XBlockExpression)block).getExpressions().get(0);
 		assertTrue(isJavaElement(constructorCall.getConstructor()));
@@ -62,22 +62,22 @@ public class InferredJvmModelShadowingJavaLinkingTests extends AbstractXtend2Tes
 	
 	public void testLinkInferredJvmConstructor() throws Exception {
 		XtendClass foo = classFile("test/Foo", "package test class Foo {}");
-		XtendClass bar = classFile("test/Bar", "package test class Bar { bar() {new Foo()} }");
+		XtendClass bar = classFile("test/Bar", "package test class Bar { def bar() {new Foo()} }");
 		final XExpression block = ((XtendFunction)bar.getMembers().get(0)).getExpression();
 		XConstructorCall constructorCall = (XConstructorCall) ((XBlockExpression)block).getExpressions().get(0);
 		assertEquals(associations.getInferredConstructor(foo), constructorCall.getConstructor());
 	}
 	
 	public void testLinkJavaMethod() throws Exception {
-		XtendClass bar = classFile("test/Bar", "package test class Bar { bar(Foo foo) {foo.foo()} }");
+		XtendClass bar = classFile("test/Bar", "package test class Bar { def bar(Foo foo) {foo.foo()} }");
 		final XExpression block = ((XtendFunction)bar.getMembers().get(0)).getExpression();
 		XMemberFeatureCall methodCall = (XMemberFeatureCall) ((XBlockExpression)block).getExpressions().get(0);
 		assertTrue(isJavaElement(methodCall.getFeature()));
 	}
 	
 	public void testLinkInferredJvmOperation() throws Exception {
-		XtendClass foo = classFile("test/Foo", "package test class Foo { foo() :this; }");
-		XtendClass bar = classFile("test/Bar", "package test class Bar { bar(Foo foo) {foo.foo()} }");
+		XtendClass foo = classFile("test/Foo", "package test class Foo { def foo() :this; }");
+		XtendClass bar = classFile("test/Bar", "package test class Bar { def bar(Foo foo) {foo.foo()} }");
 		final XBlockExpression block = (XBlockExpression) ((XtendFunction)bar.getMembers().get(0)).getExpression();
 		XMemberFeatureCall methodCall = (XMemberFeatureCall) block.getExpressions().get(0);
 		assertEquals(associations.getDirectlyInferredOperation((XtendFunction)foo.getMembers().get(0)), methodCall.getFeature());

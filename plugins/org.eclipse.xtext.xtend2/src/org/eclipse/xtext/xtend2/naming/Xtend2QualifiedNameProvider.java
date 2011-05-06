@@ -15,19 +15,26 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendField;
+import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 
 import com.google.inject.Inject;
+
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class Xtend2QualifiedNameProvider extends IQualifiedNameProvider.AbstractImpl {
 
-	@Inject 
+	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
-	
+
 	public QualifiedName getFullyQualifiedName(EObject obj) {
-		if (obj instanceof JvmType || obj instanceof JvmMember || obj instanceof XtendClass || obj instanceof XtendMember) {
+		if (obj instanceof JvmType 
+				|| obj instanceof JvmMember 
+				|| obj instanceof XtendClass
+				|| obj instanceof XtendFunction 
+				|| obj instanceof XtendField) {
 			final String qualifiedName = ((JvmIdentifiableElement) obj).getQualifiedName();
 			return qualifiedNameConverter.toQualifiedName(qualifiedName);
 		}

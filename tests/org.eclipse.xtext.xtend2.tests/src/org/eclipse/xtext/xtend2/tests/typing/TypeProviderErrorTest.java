@@ -34,7 +34,7 @@ public class TypeProviderErrorTest extends AbstractXtend2TestCase {
 	
 	public void testNoException_01() throws Exception {
 		XtendFunction function = function(
-				"richStrings_04() {\n" + 
+				"def richStrings_04() {\n" + 
 				"	'''«FORa:'1'.toCharArray»«FOR a:'1'.toCharArray»foobar«ENDFOR»«ENDFOR»'''\n" + 
 				"}\n");
 		Iterator<Object> contents = EcoreUtil.getAllContents(function.eResource(), true);
@@ -52,7 +52,7 @@ public class TypeProviderErrorTest extends AbstractXtend2TestCase {
 		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.typing\n" + 
 				"import org.eclipse.emf.ecore.EClass\n" + 
 				"class NoException {\n" + 
-				"	dispatch transform(EClass model) {\n" + 
+				"	def dispatch transform(EClass model) {\n" + 
 				"		model.ETypeParameters.map(e|transform");
 		Iterator<Object> contents = EcoreUtil.getAllContents(file.eResource(), true);
 		while(contents.hasNext()) {
@@ -69,10 +69,10 @@ public class TypeProviderErrorTest extends AbstractXtend2TestCase {
 				"import static java.util.Arrays.*\n" + 
 				"import static extension java.util.Collections.*\n" + 
 				"class NoException {\n" + 
-				"	@Inject\n" + 
-				"	ArrayList as myList\n" + 
-				"	@Inject extension String\n" + 
-				"	boolean something(int i) {\n" + 
+				"	@com.google.inject.Inject\n" + 
+				"	ArrayList myList\n" + 
+				"	@com.google.inject.Inject extension String\n" + 
+				"	def boolean something(int i) {\n" + 
 				"	  if (i.indexOf() == 0) {\n" + 
 				"	    return myList.contains(i)\n" + 
 				"	  } \n" + 
@@ -110,13 +110,13 @@ public class TypeProviderErrorTest extends AbstractXtend2TestCase {
 				"import org.eclipse.emf.ecore.EStructuralFeature\n" + 
 				"import org.eclipse.emf.ecore.EObject\n" + 
 				"class NoException {\n" + 
-				"	dispatchtransform(EClass model) {\n" + 
+				"	def dispatchtransform(EClass model) {\n" + 
 				"		model.ETypeParameters.map(e|transform(e))\n" + 
 				"	}\n" + 
-				"	dispatch transform(EPackage packageDecl) {\n" + 
+				"	def dispatch transform(EPackage packageDecl) {\n" + 
 				"		packageDecl.eContents.map(e|transform(e))\n" + 
 				"	}\n" + 
-				"	dispatch transform(EStructuralFeature entity) {\n" + 
+				"	def dispatch transform(EStructuralFeature entity) {\n" + 
 				"		val inferredType = null\n" + 
 				"		newArrayList(inferredType as EObject) 	 \n" + 
 				"	}\n" + 
@@ -134,10 +134,10 @@ public class TypeProviderErrorTest extends AbstractXtend2TestCase {
 	public void testNoException_06() throws Exception {
 		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.typing\n" + 
 				"class NoException {\n" + 
-				"	recursive() {\n" + 
+				"	def recursive() {\n" + 
 				"		indirection\n" + 
 				"	}\n" +
-				"   indirection() {\n" +
+				"   def indirection() {\n" +
 				"       recursive()\n" +
 				"   }\n" +
 				"}");

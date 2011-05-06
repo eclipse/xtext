@@ -62,7 +62,7 @@ public class DispatchingSupport {
 	public JvmOperation findSyntheticDispatchMethod(XtendClass clazz, final Pair<String,Integer> signature) {
 		Iterable<XtendFunction> filter = filter(filter(clazz.getMembers(),XtendFunction.class), new Predicate<XtendFunction>() {
 			public boolean apply(XtendFunction input) {
-				return input.isDispatch() && input.getParameters().size()==signature.getSecond() && input.getSimpleName().equals(signature.getFirst()); 
+				return input.isDispatch() && input.getParameters().size()==signature.getSecond() && input.getName().equals(signature.getFirst()); 
 			}
 		});
 		final Iterator<XtendFunction> iterator = filter.iterator();

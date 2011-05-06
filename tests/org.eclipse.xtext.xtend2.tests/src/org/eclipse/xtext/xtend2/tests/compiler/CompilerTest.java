@@ -53,7 +53,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	public void testEscapeCharacterForReservedNames() throws Exception {
 		String code = 
 			"package x class Z {" +
-			"  ^create(Object x){\n" +
+			"  def ^create(Object x){\n" +
 			"    ^create(x)" + 
 			"  }\n" + 
 			"}";
@@ -64,10 +64,10 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	public void testRethrownCheckedExceptions_00() throws Exception {
 		Class<?> clazz = compileJavaCode("x.Y",
 				"package x class Y {" +
-				"  foo() {\n" +
+				"  def foo() {\n" +
 				"    throw new java.io.IOException()" + 
 				"  }\n" +
-				"  bar(){\n" +
+				"  def bar(){\n" +
 				"    foo()" +
 				"  }\n" + 
 				"}");
@@ -83,13 +83,13 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	public void testRethrownCheckedExceptions_01() throws Exception {
 		Class<?> clazz = compileJavaCode("x.Y",
 				"package x class Y {" +
-				"  dispatch foo(String x) {\n" +
+				"  def dispatch foo(String x) {\n" +
 				"    throw new java.io.EOFException()" + 
 				"  }\n" +
-				"  dispatch foo(Object x) {\n" +
+				"  def dispatch foo(Object x) {\n" +
 				"    throw new java.io.FileNotFoundException()" + 
 				"  }\n" +
-				"  bar(){\n" +
+				"  def bar(){\n" +
 				"    foo('bar')" +
 				"  }\n" + 
 		"}");
@@ -140,7 +140,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		Class<?> clazz = compileJavaCode("x.Y", 
 				"package x " +
 				"class Y {" +
-				"  create result: new StringBuilder() aBuilder(String x) {" +
+				"  def create result: new StringBuilder() aBuilder(String x) {" +
 				"   result.append(x)" +
 				"  }" +
 				"}");
@@ -161,7 +161,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"package x " +
 				"import java.util.List " +
 				"class Y {" +
-				"  Iterable<String> create result: newArrayList listWith(String s) {" +
+				"  def Iterable<String> create result: newArrayList listWith(String s) {" +
 				"   result.add(s)" +
 				"  }" +
 				"}");
@@ -178,7 +178,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		String xtendCode = 
 			"package x " +
 			"class Y {" +
-			"  create result: {Thread::sleep(10) new StringBuilder()} aBuilder(String x) {" +
+			"  def create result: {Thread::sleep(10) new StringBuilder()} aBuilder(String x) {" +
 			"   Thread::sleep(10)" +
 			"   result.append(x)" +
 			"  }" +
@@ -216,15 +216,15 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		Class<?> clazz = compileJavaCode("x.Y", 
 				"package x " +
 				"class Y {" +
-				"  int a() {" +
+				"  def int a() {" +
 				"   b()" +
 				"  }" +
 				"  " +
-				"  b() {" +
+				"  def b() {" +
 				"    c()" +
 				"  }" +
 				"  " +
-				"  c() {" +
+				"  def c() {" +
 				"    2" +
 				"  }" +
 		"}");
@@ -235,11 +235,11 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		Class<?> class1 = compileJavaCode("x.Y",
 				"package x " +
 				"class Y { " +
-				" operator_plus(int x, String s) {" +
+				" def operator_plus(int x, String s) {" +
 				"   x.toString + s" +
 				" }" +
 				"" +
-				" test() {" +
+				" def test() {" +
 				"    return 42 + 'foo'" +
 				" }" +
 				"}");
@@ -250,11 +250,11 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		Class<?> class1 = compileJavaCode("x.Y",
 				"package x " +
 				"class Y { " +
-				" getSize(String s) {" +
+				" def getSize(String s) {" +
 				"   s.length" +
 				" }" +
 				"" +
-				" test() {" +
+				" def test() {" +
 				"    return 'foo'.size" +
 				" }" +
 		"}");
@@ -262,7 +262,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testStaticExtensionMethod_01() throws Exception {
-		Class<?> class1 = compileJavaCode("x.Y","package x import static extension java.util.Collections.* class Y { foo() {'foo'.singleton()}}");
+		Class<?> class1 = compileJavaCode("x.Y","package x import static extension java.util.Collections.* class Y { def foo() {'foo'.singleton()}}");
 		assertEquals(singleton("foo"),apply(class1,"foo"));
 	}
 	
@@ -271,7 +271,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"package x " +
 				"import static extension java.util.Collections.* " +
 				"class Y { " +
-				" foo() {" +
+				" def foo() {" +
 				"   'foo'.singleton" +
 				" }" +
 				"}");
@@ -282,9 +282,9 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		Class<?> class1 = compileJavaCode("x.Y",
 				"package x " +
 				"class Y { " +
-				"  @Inject extension test.GenericExtensionMethods<String,Integer> x" +
+				"  @com.google.inject.Inject extension test.GenericExtensionMethods<String,Integer> x" +
 				"  " +
-				"  foo(String arg) { " +
+				"  def foo(String arg) { " +
 				"    arg.method " +
 				"    42.method" +
 				"    return x.result" +
@@ -297,9 +297,9 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		Class<?> class1 = compileJavaCode("x.Y",
 				"package x " +
 				"class Y { " +
-				"  @Inject extension test.ExtensionMethods e" +
+				"  @com.google.inject.Inject extension test.ExtensionMethods e" +
 				"  " +
-				"  foo(String arg) { " +
+				"  def foo(String arg) { " +
 				"    (arg as CharSequence).generic()" +
 				"  }" +
 		"}");
@@ -310,9 +310,9 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		Class<?> class1 = compileJavaCode("x.Y",
 				"package x " +
 				"class Y { " +
-				"  @Inject extension test.ExtensionMethods e" +
+				"  @com.google.inject.Inject extension test.ExtensionMethods e" +
 				"  " +
-				"  foo(String arg) { " +
+				"  def foo(String arg) { " +
 				"    arg.generic()" +
 				"  }" +
 		"}");
@@ -323,8 +323,8 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		Class<?> class1 = compileJavaCode("x.Y",
 				"package x " +
 				"class Y { " +
-				"  @Inject extension test.ExtensionMethods e" +
-				"  foo(String arg) { " +
+				"  @com.google.inject.Inject extension test.ExtensionMethods e" +
+				"  def foo(String arg) { " +
 				"    return arg - 'bar' " +
 				"  } " +
 				"}");
@@ -332,7 +332,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testInjectedExtensionMethod_05() throws Exception {
-		Class<?> class1 = compileJavaCode("x.Y","package x class Y { @Inject extension test.ExtensionMethods e foo(String arg) { return arg.operator_minus('bar') } }");
+		Class<?> class1 = compileJavaCode("x.Y","package x class Y { @com.google.inject.Inject extension test.ExtensionMethods e def foo(String arg) { return arg.operator_minus('bar') } }");
 		assertEquals(ExtensionMethods.OPERATOR_MINUS_STRING_STRING,apply(class1,"foo", "foobar"));
 	}
 	
@@ -340,17 +340,17 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		Class<?> class1 = compileJavaCode("x.Y",
 				"package x " +
 				"class Y { " +
-				"  @Inject extension test.ExtensionMethods e" +
-				"  a(String arg) { " +
+				"  @com.google.inject.Inject extension test.ExtensionMethods e" +
+				"  def a(String arg) { " +
 				"    return arg.operator_minus('bar') " +
 				"  } " +
-				"  b(String arg) { " +
+				"  def b(String arg) { " +
 				"    return (arg as Object).operator_minus('bar') " +
 				"  } " +
-				"  c(String arg) { " +
+				"  def c(String arg) { " +
 				"    return arg.operator_minus('bar' as Object) " +
 				"  } " +
-				"  d(String arg) { " +
+				"  def d(String arg) { " +
 				"    return arg.operator_minus('bar' as CharSequence) " +
 				"  } " +
 				"}");
@@ -361,23 +361,23 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testExtensionMethodForLocalFunctions_00() throws Exception {
-		invokeAndExpect2("foobar", " with(String x, String y) { x+y} main(String x) { x.with('bar')}", "main", "foo"); 
+		invokeAndExpect2("foobar", "def with(String x, String y) { x+y} def main(String x) { x.with('bar')}", "main", "foo"); 
 	}
 	
 	public void testClosureReturnsVoid() throws Exception {
 		invokeAndExpect2(null, 
-				"foo() { " +
+				"def foo() { " +
 				"  [|{}].apply" +
 				"}", "foo"); 
 	}
 	
 	public void testDependencyDeclaration() throws Exception {
-		invokeAndExpect2(Boolean.TRUE, "check() {obj!=null} @Inject test.ExtensionMethods obj", "check");
+		invokeAndExpect2(Boolean.TRUE, "def check() {obj!=null} @com.google.inject.Inject test.ExtensionMethods obj", "check");
 	}
 	
 	public void testReturnTypeAndReturnExpression_00() throws Exception {
 		String decl = 
-			"String test() {" +
+			"def String test() {" +
 			"  return 'foo'" +
 			"}";
 		invokeAndExpect2("foo", decl, "test");
@@ -385,7 +385,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	
 	public void testReturnTypeAndReturnExpression_01() throws Exception {
 		String decl = 
-			"CharSequence test() {" +
+			"def CharSequence test() {" +
 			"  if ('foo' == 'foo') {" +
 			"    return 'foo'" +
 			"  }" +
@@ -408,17 +408,17 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testDispatchFunction_00() throws Exception {
-		final String definition = "x(p1)} dispatch x(String s) {'string'} dispatch x(Object o) {'object'";
+		final String definition = "x(p1)} def dispatch x(String s) {'string'} def dispatch x(Object o) {'object'";
 		invokeAndExpect("string", definition,"bar");
 		invokeAndExpect("object", definition,42);
 	}
 	
 	public void testDispatchFunction_01() throws Exception {
 		final String definition = "x(p1)} " +
-				" dispatch x(Comparable<Boolean> s) {'comparable'}" +
-				" dispatch x(String s) {'string'}" +
-				" dispatch x(CharSequence o) {'charSeq'}" +
-				" dispatch x(Integer o) {'integer'";
+				"def  dispatch x(Comparable<Boolean> s) {'comparable'}" +
+				"def  dispatch x(String s) {'string'}" +
+				"def  dispatch x(CharSequence o) {'charSeq'}" +
+				"def  dispatch x(Integer o) {'integer'";
 		invokeAndExpect("string", definition,"bar");
 		invokeAndExpect("integer", definition,42);
 		invokeAndExpect("charSeq", definition,new StringBuilder());
@@ -433,26 +433,26 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	
 	public void testDispatchFunction_02() throws Exception {
 		final String definition = "x(p1 as String)}" +
-				" dispatch x(Void s) {'null'}" +
-				" dispatch x(String s) {'string'";
+				"def  dispatch x(Void s) {'null'}" +
+				"def  dispatch x(String s) {'string'";
 		invokeAndExpect("string", definition,"bar");
 		invokeAndExpect("null", definition,new Object[]{null});
 	}
 	
 	public void testImportsAndExtensions_01() throws Exception {
 		final String definition = "x(p1 as String)}" +
-				" dispatch x(Void s) {'null'}" +
-				" dispatch x(String s) {'string'";
+				"def  dispatch x(Void s) {'null'}" +
+				"def  dispatch x(String s) {'string'";
 		invokeAndExpect("string", definition,"bar");
 		invokeAndExpect("null", definition, new Object[]{null});
 	}
 
 	public void testDispatchFunction_03() throws Exception {
 		final String definition = "doIt(p1) }" +
-				"   dispatch doIt(org.eclipse.emf.ecore.EStructuralFeature x) { typeof(org.eclipse.emf.ecore.EStructuralFeature) }\n" + 
-				"	dispatch doIt(org.eclipse.emf.ecore.EReference x) { typeof(org.eclipse.emf.ecore.EReference) }\n" + 
-				"	dispatch doIt(org.eclipse.emf.ecore.EAttribute x) { typeof(org.eclipse.emf.ecore.EAttribute) }\n" + 
-				"	dispatch doIt(org.eclipse.emf.ecore.ETypedElement x) { typeof(org.eclipse.emf.ecore.ETypedElement) ";
+				" def dispatch doIt(org.eclipse.emf.ecore.EStructuralFeature x) { typeof(org.eclipse.emf.ecore.EStructuralFeature) }\n" + 
+				" def dispatch doIt(org.eclipse.emf.ecore.EReference x) { typeof(org.eclipse.emf.ecore.EReference) }\n" + 
+				" def dispatch doIt(org.eclipse.emf.ecore.EAttribute x) { typeof(org.eclipse.emf.ecore.EAttribute) }\n" + 
+				" def dispatch doIt(org.eclipse.emf.ecore.ETypedElement x) { typeof(org.eclipse.emf.ecore.ETypedElement) ";
 		invokeAndExpect(EReference.class, definition,Xtend2Package.Literals.RICH_STRING_ELSE_IF__IF);
 		invokeAndExpect(EAttribute.class, definition,Xtend2Package.Literals.XTEND_FILE__PACKAGE);
 		invokeAndExpect(ETypedElement.class, definition,EcoreFactory.eINSTANCE.createEOperation());
@@ -460,9 +460,9 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	
 	public void testDispatchFunction_04() throws Exception {
 		final String definition = "x(p1)}" +
-		" dispatch x(int s) {'int'}" +
-		" dispatch x(boolean s) {'boolean'}" +
-		" dispatch x(double s) {'double'";
+		" def dispatch x(int s) {'int'}" +
+		" def dispatch x(boolean s) {'boolean'}" +
+		" def dispatch x(double s) {'double'";
 		invokeAndExpect("int", definition,42);
 		invokeAndExpect("double", definition,42d);
 		invokeAndExpect("boolean", definition,true);
@@ -477,10 +477,10 @@ public class CompilerTest extends AbstractXtend2TestCase {
 
 	public void testDispatchFunction_06() throws Exception {
 		final String definition = "foo(p1)} " +
-				"dispatch foo (String string) {\n" + 
+				"def dispatch foo (String string) {\n" + 
 				"    string + string\n" + 
 				"}\n" + 
-				"dispatch foo (Object o) {\n" + 
+				"def dispatch foo (Object o) {\n" + 
 				"    null\n";
 		invokeAndExpect("zonkzonk", definition, "zonk");
 		invokeAndExpect(null, definition, Integer.valueOf(1));
@@ -488,10 +488,10 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	
 	public void testDispatchFunction_07() throws Exception {
 		final String definition = "foo(p1)} " +
-				"dispatch foo (String string) {\n" + 
+				"def dispatch foo (String string) {\n" + 
 				"    string + string\n" + 
 				"}\n" + 
-				"dispatch foo (Void nullCase) {\n" + 
+				"def dispatch foo (Void nullCase) {\n" + 
 				"    'literal'\n";
 		invokeAndExpect("zonkzonk", definition, "zonk");
 		invokeAndExpect("literal", definition, new Object[]{ null });
@@ -505,21 +505,21 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	
 	public void testDispatchFunction_08() throws Exception {
 		final String definition = "foo(p1)} " +
-		"dispatch String foo(String string) {\n" + 
+		"def dispatch String foo(String string) {\n" + 
 		"    string + string\n" + 
 		"}\n" + 
-		"String foo(Object x) {\n" + 
+		"def String foo(Object x) {\n" + 
 		"    'literal'\n";
 		invokeAndExpect("zonkzonk", definition, "zonk");
 	}
 	
 	public void testGenericFunction_01() throws Exception {
 		final String definition = 
-			"test(String arg) {\n" + 
+			"def test(String arg) {\n" + 
 			"  arg.doApply(e|e+arg);\n" + 
 			"}\n" + 
 			"\n" + 
-			"<T extends CharSequence, R> R doApply(T obj, (T)=>R fun) {\n" + 
+			"def <T extends CharSequence, R> R doApply(T obj, (T)=>R fun) {\n" + 
 			"  fun.apply(obj)\n" + 
 			"}";
 		invokeAndExpect2("foofoo", definition, "test", "foo");
@@ -527,10 +527,10 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	
 	public void testGenericFunction_02() throws Exception {
 		String def = 
-			    "test(String x) {" +
+			    "def test(String x) {" +
 			    "  x.init(e|{})" +
 			    "}" +
-			    "<T> T init(T obj, (T)=>Void function) {\n" + 
+			    "def <T> T init(T obj, (T)=>Void function) {\n" + 
 				"  function.apply(obj)\n" + 
 				"  return obj\n" + 
 				"}";
@@ -538,14 +538,14 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testFunctionCall_00() throws Exception {
-		invokeAndExpect("foobar", "bar(p1)} bar(String x) {'foo'+x","bar");
+		invokeAndExpect("foobar", "bar(p1)} def bar(String x) {'foo'+x","bar");
 	}
 	
 	public void testBug342134() throws Exception {
 		List<String> list = newArrayList("a", "b", "c");
 		invokeAndExpect2(
 				list, 
-				"bug342134(java.util.ArrayList<String> strings) {\n" + 
+				"def bug342134(java.util.ArrayList<String> strings) {\n" + 
 				"    strings.map(e| newArrayList(e)).flatten.toList\n" + 
 				"}", "bug342134", list);
 	}
@@ -553,7 +553,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	public void testTypeInferrence_00() throws Exception {
 		compileJavaCode("Foo", "import org.eclipse.emf.ecore.EObject " +
 				"class Foo { " +
-				"	Iterable<? extends EObject> test(EObject e) {" +
+				"	def Iterable<? extends EObject> test(EObject e) {" +
 				"		e.eContents().map(o|test(o)).flatten()" +
 				"	}" +
 				"}");
@@ -561,18 +561,18 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	
 	public void testDispatchTypes() throws Exception {
 		compileJavaCode("Dispatch", "class Dispatch { " +
-				 "  dispatch doSomething(int i) { i.toString() } " +
-				 "  dispatch doSomething(Object o) { null } " +
+				 "  def dispatch doSomething(int i) { i.toString() } " +
+				 "  def dispatch doSomething(Object o) { null } " +
 				 "}");
 	}
 	
 	public void testBug343090_1() throws Exception {
 		invokeAndExpect2(
 				23, 
-				"bug343090(Integer a, Integer b) {\n" + 
+				"def bug343090(Integer a, Integer b) {\n" + 
 				"    addFunction.apply(a, b)\n" + 
 				"}\n" +
-				"addFunction() {\n" + 
+				"def addFunction() {\n" + 
 				"    [Integer a, Integer b|a+b] as (Integer,Integer)=>Integer\n" + 
 				"}", "bug343090", Integer.valueOf(18), Integer.valueOf(5));
 	}
@@ -580,10 +580,10 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	public void testBug343090_2() throws Exception {
 		invokeAndExpect2(
 				23, 
-				"bug343090(Integer a, Integer b) {\n" + 
+				"def bug343090(Integer a, Integer b) {\n" + 
 				"    <Integer>addFunction.apply(a, b)\n" + 
 				"}\n" +
-				"<T extends Integer> addFunction() {\n" + 
+				"def <T extends Integer> addFunction() {\n" + 
 				"    [T a,T b|a+b] as (T,T)=>T\n" + 
 				"}", "bug343090", Integer.valueOf(18), Integer.valueOf(5));
 	}
@@ -591,10 +591,10 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	public void testBug343090_3() throws Exception {
 		invokeAndExpect2(
 				23, 
-				"bug343090(Integer a, Integer b) {\n" + 
+				"def bug343090(Integer a, Integer b) {\n" + 
 				"    addFunction.apply(a, b)\n" + 
 				"}\n" +
-				"<T extends Integer> addFunction() {\n" + 
+				"def <T extends Integer> addFunction() {\n" + 
 				"    [T a,T b|a+b] as (T,T)=>T\n" + 
 				"}", "bug343090", Integer.valueOf(18), Integer.valueOf(5));
 	}
@@ -602,10 +602,10 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	public void testBug343088_1() throws Exception {
 		invokeAndExpect2(
 				23, 
-				"bug343088(Integer a, Integer b) {\n" + 
+				"def bug343088(Integer a, Integer b) {\n" + 
 				"    addFunction.apply(a, b)\n" + 
 				"}\n" +
-				"<T extends Integer> (T,T)=>T addFunction() {\n" + 
+				"def <T extends Integer> (T,T)=>T addFunction() {\n" + 
 				"    [T a,T b|(a+(b as Integer)) as T]\n" + 
 				"}", "bug343088", Integer.valueOf(18), Integer.valueOf(5));
 	}
@@ -613,10 +613,10 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	public void testBug343088_2() throws Exception {
 		invokeAndExpect2(
 				23, 
-				"bug343088(Integer a, Integer b) {\n" + 
+				"def bug343088(Integer a, Integer b) {\n" + 
 				"    addFunction.apply(a, b)\n" + 
 				"}\n" +
-				"<T extends Integer> (T,T)=>T addFunction() {\n" + 
+				"def <T extends Integer> (T,T)=>T addFunction() {\n" + 
 				"    [T a,T b|(a+b) as T]\n" + 
 				"}", "bug343088", Integer.valueOf(18), Integer.valueOf(5));
 	}
@@ -653,7 +653,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		assertEquals(expectation,apply(class1,methodToInvoke,args));
 	}
 	protected void invokeAndExpect(Object expectation, String functionDef, Object...args) throws Exception {
-		String fullClass = "package x class Y { Object testEntry(";
+		String fullClass = "package x class Y { def Object testEntry(";
 		for (int i = 0; i < args.length; i++) {
 			Object object = args[i];
 			if (object == null) {

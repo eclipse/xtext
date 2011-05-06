@@ -7,20 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.xtend2.impl;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class XtendMemberImplCustom extends XtendMemberImpl {
 
 	@Override
-	public String getIdentifier() {
-		return computeIdentifier();
+	public EList<XAnnotation> getAnnotations() {
+		if (getAnnotationInfo()!=null) {
+			return getAnnotationInfo().getAnnotations();
+		}
+		return super.getAnnotations();
 	}
 	
-	protected String computeIdentifier() {
-		String typeName = getDeclaringType().getIdentifier();
-		if (typeName!=null)
-			return typeName+"."+getSimpleName();
-		return getSimpleName();
-	}
 }

@@ -38,11 +38,12 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.resource.Xtend2Resource;
-import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
+import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
+import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -85,9 +86,12 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			target.getSuperTypes().add(EcoreUtil2.cloneWithProxies(superType));
 		for (JvmTypeParameter typeParameter : source.getTypeParameters())
 			target.getTypeParameters().add(EcoreUtil2.cloneWithProxies(typeParameter));
-		for (XtendMember member : source.getMembers())
-			if (member.getName() != null)
+		for (XtendMember member : source.getMembers()) {
+			if (member instanceof XtendField && ((XtendField) member).getName()!=null
+				|| member instanceof XtendFunction && ((XtendFunction) member).getName()!=null) {
 				transform(member, target);
+			}
+		}
 		appendSyntheticDispatchMethods(source, target);
 		computeInferredReturnTypes(target);
 		return target;
@@ -149,8 +153,12 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			}
 			target.setSimpleName(sourceName);
 			target.setVisibility(JvmVisibility.PUBLIC);
-			for (JvmFormalParameter parameter : source.getParameters())
-				target.getParameters().add(EcoreUtil2.cloneWithProxies(parameter));
+			for (XtendParameter parameter : source.getParameters()) {
+				JvmFormalParameter jvmParam = typesFactory.createJvmFormalParameter();
+				jvmParam.setName(parameter.getName());
+				jvmParam.setParameterType(EcoreUtil2.cloneWithProxies(parameter.getParameterType()));
+				target.getParameters().add(jvmParam);
+			}
 			if (source.getReturnType()!=null) {
 				target.setReturnType(EcoreUtil2.cloneWithProxies(source.getReturnType()));
 			} else {
@@ -159,8 +167,8 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			for (JvmTypeParameter typeParameter : source.getTypeParameters())
 				target.getTypeParameters().add(EcoreUtil2.cloneWithProxies(typeParameter));
 			return target;
-		} else if (sourceMember instanceof DeclaredDependency) {
-			DeclaredDependency dep = (DeclaredDependency) sourceMember;
+		} else if (sourceMember instanceof XtendField) {
+			XtendField dep = (XtendField) sourceMember;
 			JvmField field = typesFactory.createJvmField();
 			container.getMembers().add(field);
 			associator.associatePrimary(dep, field);

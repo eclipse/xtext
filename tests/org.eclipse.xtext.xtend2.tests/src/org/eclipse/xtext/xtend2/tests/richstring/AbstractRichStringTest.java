@@ -18,7 +18,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 public abstract class AbstractRichStringTest extends AbstractXtend2TestCase {
 
 	protected String getPrefix() {
-		return "class Foo { foo() ";
+		return "class Foo { def foo() ";
 	}
 	
 	protected int getPrefixLength() {

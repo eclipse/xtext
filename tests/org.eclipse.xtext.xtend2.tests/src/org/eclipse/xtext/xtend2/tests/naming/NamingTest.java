@@ -37,7 +37,7 @@ public class NamingTest extends AbstractXtend2TestCase {
 	}
 
 	public void testQualifiedNameProvider_1() throws Exception {
-		XtendFile file = file("package foo class Bar { baz() {this} }");
+		XtendFile file = file("package foo class Bar { def baz() {this} }");
 		XtendFunction function = (XtendFunction) file.getXtendClass().getMembers().get(0);
 		assertEquals(QualifiedName.create("foo", "Bar", "baz"), nameProvider.getFullyQualifiedName(function));
 		assertEquals(QualifiedName.create("foo", "Bar", "baz"),
@@ -52,7 +52,7 @@ public class NamingTest extends AbstractXtend2TestCase {
 	}
 
 	public void testQualifiedNames_1() throws Exception {
-		XtendFile file = file("package foo class Bar { baz() {this} }");
+		XtendFile file = file("package foo class Bar { def baz() {this} }");
 		XtendFunction function = (XtendFunction) file.getXtendClass().getMembers().get(0);
 		assertEquals("foo.Bar.baz", function.getQualifiedName());
 		assertEquals("foo.Bar.baz", associations.getDirectlyInferredOperation(function).getQualifiedName());
@@ -66,7 +66,7 @@ public class NamingTest extends AbstractXtend2TestCase {
 	}
 
 	public void testIdentifier_1() throws Exception {
-		XtendFile file = file("package foo class Bar { baz() {this} baz(Bar f) {f}}");
+		XtendFile file = file("package foo class Bar { def baz() {this} def baz(Bar f) {f}}");
 		XtendFunction baz0 = (XtendFunction) file.getXtendClass().getMembers().get(0);
 		XtendFunction baz1 = (XtendFunction) file.getXtendClass().getMembers().get(1);
 		assertEquals("foo.Bar.baz()", baz0.getIdentifier());

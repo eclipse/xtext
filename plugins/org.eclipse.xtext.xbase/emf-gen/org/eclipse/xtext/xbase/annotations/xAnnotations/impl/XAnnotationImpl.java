@@ -1,0 +1,280 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ */
+package org.eclipse.xtext.xbase.annotations.xAnnotations.impl;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eclipse.xtext.common.types.JvmAnnotationType;
+
+import org.eclipse.xtext.xbase.XExpression;
+
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+
+import org.eclipse.xtext.xbase.impl.XExpressionImpl;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>XAnnotation</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationImpl#getElementValuePairs <em>Element Value Pairs</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationImpl#getAnnotationType <em>Annotation Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationImpl#getValues <em>Values</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class XAnnotationImpl extends XExpressionImpl implements XAnnotation
+{
+	/**
+	 * The cached value of the '{@link #getElementValuePairs() <em>Element Value Pairs</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getElementValuePairs()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<XAnnotationElementValuePair> elementValuePairs;
+
+	/**
+	 * The cached value of the '{@link #getAnnotationType() <em>Annotation Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAnnotationType()
+	 * @generated
+	 * @ordered
+	 */
+	protected JvmAnnotationType annotationType;
+
+	/**
+	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getValues()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<XExpression> values;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected XAnnotationImpl()
+	{
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass()
+	{
+		return XAnnotationsPackage.Literals.XANNOTATION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<XAnnotationElementValuePair> getElementValuePairs()
+	{
+		if (elementValuePairs == null)
+		{
+			elementValuePairs = new EObjectContainmentEList<XAnnotationElementValuePair>(XAnnotationElementValuePair.class, this, XAnnotationsPackage.XANNOTATION__ELEMENT_VALUE_PAIRS);
+		}
+		return elementValuePairs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmAnnotationType getAnnotationType()
+	{
+		if (annotationType != null && annotationType.eIsProxy())
+		{
+			InternalEObject oldAnnotationType = (InternalEObject)annotationType;
+			annotationType = (JvmAnnotationType)eResolveProxy(oldAnnotationType);
+			if (annotationType != oldAnnotationType)
+			{
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, XAnnotationsPackage.XANNOTATION__ANNOTATION_TYPE, oldAnnotationType, annotationType));
+			}
+		}
+		return annotationType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmAnnotationType basicGetAnnotationType()
+	{
+		return annotationType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAnnotationType(JvmAnnotationType newAnnotationType)
+	{
+		JvmAnnotationType oldAnnotationType = annotationType;
+		annotationType = newAnnotationType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XAnnotationsPackage.XANNOTATION__ANNOTATION_TYPE, oldAnnotationType, annotationType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<XExpression> getValues()
+	{
+		if (values == null)
+		{
+			values = new EObjectContainmentEList<XExpression>(XExpression.class, this, XAnnotationsPackage.XANNOTATION__VALUES);
+		}
+		return values;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
+		switch (featureID)
+		{
+			case XAnnotationsPackage.XANNOTATION__ELEMENT_VALUE_PAIRS:
+				return ((InternalEList<?>)getElementValuePairs()).basicRemove(otherEnd, msgs);
+			case XAnnotationsPackage.XANNOTATION__VALUES:
+				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType)
+	{
+		switch (featureID)
+		{
+			case XAnnotationsPackage.XANNOTATION__ELEMENT_VALUE_PAIRS:
+				return getElementValuePairs();
+			case XAnnotationsPackage.XANNOTATION__ANNOTATION_TYPE:
+				if (resolve) return getAnnotationType();
+				return basicGetAnnotationType();
+			case XAnnotationsPackage.XANNOTATION__VALUES:
+				return getValues();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void eSet(int featureID, Object newValue)
+	{
+		switch (featureID)
+		{
+			case XAnnotationsPackage.XANNOTATION__ELEMENT_VALUE_PAIRS:
+				getElementValuePairs().clear();
+				getElementValuePairs().addAll((Collection<? extends XAnnotationElementValuePair>)newValue);
+				return;
+			case XAnnotationsPackage.XANNOTATION__ANNOTATION_TYPE:
+				setAnnotationType((JvmAnnotationType)newValue);
+				return;
+			case XAnnotationsPackage.XANNOTATION__VALUES:
+				getValues().clear();
+				getValues().addAll((Collection<? extends XExpression>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID)
+	{
+		switch (featureID)
+		{
+			case XAnnotationsPackage.XANNOTATION__ELEMENT_VALUE_PAIRS:
+				getElementValuePairs().clear();
+				return;
+			case XAnnotationsPackage.XANNOTATION__ANNOTATION_TYPE:
+				setAnnotationType((JvmAnnotationType)null);
+				return;
+			case XAnnotationsPackage.XANNOTATION__VALUES:
+				getValues().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID)
+	{
+		switch (featureID)
+		{
+			case XAnnotationsPackage.XANNOTATION__ELEMENT_VALUE_PAIRS:
+				return elementValuePairs != null && !elementValuePairs.isEmpty();
+			case XAnnotationsPackage.XANNOTATION__ANNOTATION_TYPE:
+				return annotationType != null;
+			case XAnnotationsPackage.XANNOTATION__VALUES:
+				return values != null && !values.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
+
+} //XAnnotationImpl

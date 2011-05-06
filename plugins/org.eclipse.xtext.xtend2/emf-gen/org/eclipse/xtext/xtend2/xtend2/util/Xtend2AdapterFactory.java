@@ -101,6 +101,11 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 				return createXtendClassAdapter();
 			}
 			@Override
+			public Adapter caseXtendAnnotationTarget(XtendAnnotationTarget object)
+			{
+				return createXtendAnnotationTargetAdapter();
+			}
+			@Override
 			public Adapter caseXtendClassSuperCallReferable(XtendClassSuperCallReferable object)
 			{
 				return createXtendClassSuperCallReferableAdapter();
@@ -114,6 +119,16 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 			public Adapter caseXtendFunction(XtendFunction object)
 			{
 				return createXtendFunctionAdapter();
+			}
+			@Override
+			public Adapter caseXtendField(XtendField object)
+			{
+				return createXtendFieldAdapter();
+			}
+			@Override
+			public Adapter caseXtendParameter(XtendParameter object)
+			{
+				return createXtendParameterAdapter();
 			}
 			@Override
 			public Adapter caseRichString(RichString object)
@@ -139,11 +154,6 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 			public Adapter caseRichStringElseIf(RichStringElseIf object)
 			{
 				return createRichStringElseIfAdapter();
-			}
-			@Override
-			public Adapter caseDeclaredDependency(DeclaredDependency object)
-			{
-				return createDeclaredDependencyAdapter();
 			}
 			@Override
 			public Adapter caseCreateExtensionInfo(CreateExtensionInfo object)
@@ -248,6 +258,21 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtend2.xtend2.XtendAnnotationTarget <em>Xtend Annotation Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendAnnotationTarget
+	 * @generated
+	 */
+	public Adapter createXtendAnnotationTargetAdapter()
+	{
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable <em>Xtend Class Super Call Referable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -288,6 +313,36 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXtendFunctionAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtend2.xtend2.XtendField <em>Xtend Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendField
+	 * @generated
+	 */
+	public Adapter createXtendFieldAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtend2.xtend2.XtendParameter <em>Xtend Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xtend2.xtend2.XtendParameter
+	 * @generated
+	 */
+	public Adapter createXtendParameterAdapter()
 	{
 		return null;
 	}
@@ -363,21 +418,6 @@ public class Xtend2AdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createRichStringElseIfAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtend2.xtend2.DeclaredDependency <em>Declared Dependency</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xtend2.xtend2.DeclaredDependency
-	 * @generated
-	 */
-	public Adapter createDeclaredDependencyAdapter()
 	{
 		return null;
 	}

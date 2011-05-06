@@ -32,7 +32,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * @model
  * @generated
  */
-public interface XtendClass extends JvmIdentifiableElement, JvmTypeParameterDeclarator
+public interface XtendClass extends JvmIdentifiableElement, JvmTypeParameterDeclarator, XtendAnnotationTarget
 {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -121,7 +121,6 @@ public interface XtendClass extends JvmIdentifiableElement, JvmTypeParameterDecl
 	/**
 	 * Returns the value of the '<em><b>Members</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.xtend2.xtend2.XtendMember}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.xtend2.xtend2.XtendMember#getDeclaringType <em>Declaring Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Members</em>' containment reference list isn't clear,
@@ -130,8 +129,7 @@ public interface XtendClass extends JvmIdentifiableElement, JvmTypeParameterDecl
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Members</em>' containment reference list.
 	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendClass_Members()
-	 * @see org.eclipse.xtext.xtend2.xtend2.XtendMember#getDeclaringType
-	 * @model opposite="declaringType" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<XtendMember> getMembers();

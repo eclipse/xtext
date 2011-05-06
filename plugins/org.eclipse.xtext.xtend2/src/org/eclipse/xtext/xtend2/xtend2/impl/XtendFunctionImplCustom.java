@@ -7,14 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.xtend2.impl;
 
-import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
+import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XtendFunctionImplCustom extends XtendFunctionImpl {
+	
 	@Override
 	public String getSimpleName() {
 		return getName();
@@ -22,12 +24,40 @@ public class XtendFunctionImplCustom extends XtendFunctionImpl {
 	
 	@Override
 	public String getIdentifier() {
-		return computeIdentifier();
+		String qn = getQualifiedName();
+		if (qn == null)
+			return null;
+		StringBuilder builder = new StringBuilder(qn);
+		builder.append('(');
+		boolean first = true;
+		for(XtendParameter parameter: getParameters()) {
+			if (!first) {
+				builder.append(',');
+			} else {
+				first = false;
+			}
+			if (parameter.getParameterType() != null && parameter.getParameterType().getType() != null)
+				builder.append(parameter.getParameterType().getType().getIdentifier());
+			else
+				builder.append("null");
+		}
+		builder.append(')');
+		return builder.toString();
+	}
+	
+	@Override
+	public String getQualifiedName() {
+		if (!(eContainer() instanceof XtendClass))
+			return getSimpleName();
+		StringBuilder builder = new StringBuilder(((XtendClass)eContainer()).getIdentifier());
+		builder.append(".");
+		builder.append(getName());
+		return builder.toString();
 	}
 	
 	@Override
 	public String getQualifiedName(char innerClassDelimiter) {
-		return super.computeIdentifier();
+		return getQualifiedName();
 	}
 
 	@Override
@@ -35,27 +65,4 @@ public class XtendFunctionImplCustom extends XtendFunctionImpl {
 		return EmfFormatter.objToStr(this, Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION);
 	}
 	
-	@Override
-	protected String computeIdentifier() {
-		String result = super.computeIdentifier();
-		if (result != null) {
-			StringBuilder builder = new StringBuilder(result);
-			builder.append('(');
-			boolean first = true;
-			for(JvmFormalParameter parameter: getParameters()) {
-				if (!first) {
-					builder.append(',');
-				} else {
-					first = false;
-				}
-				if (parameter.getParameterType() != null && parameter.getParameterType().getType() != null)
-					builder.append(parameter.getParameterType().getType().getIdentifier());
-				else
-					builder.append("null");
-			}
-			builder.append(')');
-			return builder.toString();
-		}
-		return null;
-	}
 }

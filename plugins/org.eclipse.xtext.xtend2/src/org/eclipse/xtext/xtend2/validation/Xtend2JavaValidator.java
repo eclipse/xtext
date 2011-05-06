@@ -31,7 +31,6 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
@@ -42,24 +41,27 @@ import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
+import org.eclipse.xtext.xbase.XbasePackage.Literals;
+import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
 import org.eclipse.xtext.xtend2.typing.XtendOverridesService;
-import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringElseIf;
 import org.eclipse.xtext.xtend2.xtend2.RichStringForLoop;
 import org.eclipse.xtext.xtend2.xtend2.RichStringIf;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -77,7 +79,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge
  */
 @ComposedChecks(validators = { ClasspathBasedChecks.class })
-public class Xtend2JavaValidator extends XbaseJavaValidator {
+public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 
 	@Inject
 	private FeatureOverridesService featureOverridesService;
@@ -125,15 +127,26 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 		return typeConformanceCheckedReferences;
 	}
 	
+	@Override
+	@Check
+	public void checkAssignment(XAssignment assignment) {
+		JvmIdentifiableElement assignmentFeature = assignment.getFeature();
+		if (assignmentFeature instanceof XtendParameter)
+			error("Assignment to final parameter", Literals.XASSIGNMENT__ASSIGNABLE,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ASSIGNMENT_TO_FINAL);
+		else
+			super.checkAssignment(assignment);
+	}
+	
 	@Check
 	public void checkVariableNameShadowing(XtendFunction func) {
-		for (JvmFormalParameter p : func.getParameters()) {
-			super.checkDeclaredVariableName(func, p, TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME);
+		for (XtendParameter p : func.getParameters()) {
+			super.checkDeclaredVariableName(func, p, Xtend2Package.Literals.XTEND_PARAMETER__NAME);
 		}
 	}
 	
 	@Check
-	public void checkNoVoidInDependencyDeclaration(DeclaredDependency dep) {
+	public void checkNoVoidInDependencyDeclaration(XtendField dep) {
 		if (typeReferences.is(dep.getType(),Void.TYPE)) {
 			error("Primitives void cannot be a dependency.",dep.getType(), null, INVALID_USE_OF_TYPE);
 		}
@@ -230,7 +243,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 							XtendFunction otherSource = associations.getXtendFunction(operation);
 							error("Duplicate method " + getReadableSignature(otherSource, operation.getParameters()) + 
 									" in type " + inferredType.getSimpleName(), 
-									otherSource, XTEND_MEMBER__NAME, DUPLICATE_METHOD);
+									otherSource, XTEND_FUNCTION__NAME, DUPLICATE_METHOD);
 						}
 					} else {
 						for(JvmOperation operation: operationsWithSameReadableSignature) {
@@ -238,7 +251,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 							error("Method  " + getReadableSignature(otherSource, operation.getParameters()) +
 									" has the same erasure " + getReadableErasure(otherSource, operation.getParameters()) +
 									" as another method in type " + inferredType.getSimpleName(), 
-									otherSource, XTEND_MEMBER__NAME, DUPLICATE_METHOD);
+									otherSource, XTEND_FUNCTION__NAME, DUPLICATE_METHOD);
 						}
 					}
 				}
@@ -260,7 +273,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 									// due to name transformations in JVM model inference
 									getReadableSignature(source, operation.getParameters()) + " of type " + 
 									operation.getDeclaringType().getSimpleName() +
-									" but does not override it.", source, XTEND_MEMBER__NAME, DUPLICATE_METHOD);
+									" but does not override it.", source, XTEND_FUNCTION__NAME, DUPLICATE_METHOD);
 						}
 					}
 				}
@@ -300,7 +313,7 @@ public class Xtend2JavaValidator extends XbaseJavaValidator {
 		}
 		if (!function.isOverride())
 			error("Missing 'override'. Function overrides " + canonicalName(overriddenOperation), function,
-					XTEND_MEMBER__NAME, MISSING_OVERRIDE);
+					XTEND_FUNCTION__NAME, MISSING_OVERRIDE);
 		if (function.getReturnType()==null)
 			return;
 		TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(getTypeRefs()

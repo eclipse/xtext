@@ -115,7 +115,7 @@ public class CompilerTestHelper {
 	protected String compileToJavaCode(String xtendCode) {
 		StringWriter appandable = new StringWriter();
 		try {
-			final String text = "package foo class Test { Object foo() {" + xtendCode + "} }";
+			final String text = "package foo class Test { def Object foo() {" + xtendCode + "} }";
 			final XtendFile file = parseHelper.parse(text);
 			validationHelper.assertNoErrors(file);
 			xtend2Compiler.compile(file, appandable);

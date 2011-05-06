@@ -87,53 +87,64 @@ public class OutlineTests extends AbstractXtend2UITestCase {
 	}
 
 	public void testSimpleMethod() throws Exception {
-		AssertBuilder assertBuilder = newAssertBuilder("class Foo { foo() {null} }");
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def foo() {null} }");
 		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo() : Object").numChildren(0);
 	}
 	
 	public void testMethodWithParameter() throws Exception {
-		AssertBuilder assertBuilder = newAssertBuilder("class Foo { foo(int bar) {null} }");
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def foo(int bar) {null} }");
 		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo(int) : Object").numChildren(0);
 	}
 	
 	public void testMethodWithParameters() throws Exception {
-		AssertBuilder assertBuilder = newAssertBuilder("class Foo { foo(int bar, java.lang.Object x) {null} }");
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def foo(int bar, java.lang.Object x) {null} }");
 		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo(int, Object) : Object").numChildren(0);
 	}
 	
 	public void testMethodWithReturnType() throws Exception {
-		AssertBuilder assertBuilder = newAssertBuilder("class Foo { java.lang.Object foo() {null} }");
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def java.lang.Object foo() {null} }");
 		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo() : Object").numChildren(0);
 	}
 	
 	public void testMethodWithTypeParameter() throws Exception {
-		AssertBuilder assertBuilder = newAssertBuilder("class Foo { <T> foo() {null} }");
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def <T> foo() {null} }");
 		assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo() : Object").numChildren(0);
 	}
 	
 	public void testDispatchMethod() throws Exception {
-		AssertBuilder assertBuilder = newAssertBuilder("class Foo { dispatch foo(String x) {''} dispatch foo(Object y) {''} }");
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def dispatch foo(String x) {''} def dispatch foo(Object y) {''} }");
 		AssertBuilder dispatcher = assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo(Object) : String").numChildren(2);
 		dispatcher.child(0, "foo(String) : String").numChildren(0);
 		dispatcher.child(1, "foo(Object) : String").numChildren(0);
 	}
 	
 	public void testDispatchMethod_1() throws Exception {
-		AssertBuilder assertBuilder = newAssertBuilder("class Foo { dispatch foo(Object x) {''} dispatch foo(String y) {''} }");
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo { def dispatch foo(Object x) {''} def dispatch foo(String y) {''} }");
 		AssertBuilder dispatcher = assertBuilder.numChildren(1).child(0, "Foo").numChildren(1).child(0, "foo(Object) : String").numChildren(2);
 		dispatcher.child(0, "foo(Object) : String").numChildren(0);
 		dispatcher.child(1, "foo(String) : String").numChildren(0);
 	}
 	
 	public void testDispatchMethods() throws Exception {
-		AssertBuilder assertBuilder = newAssertBuilder("class Foo { dispatch foo(String x) {''} dispatch foo(Object y) {''} dispatch bar(String x) {''} dispatch bar(Object y) {''}}");
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo {" +
+				" def dispatch foo(String x) {''}" +
+				" def dispatch foo(Object y) {''}" +
+				" def dispatch bar(String x) {''}" +
+				" def dispatch bar(Object y) {''}" +
+				"}");
 		AssertBuilder foo = assertBuilder.numChildren(1).child(0, "Foo").numChildren(2);
 		foo.child(0, "foo(Object) : String").numChildren(2);
 		foo.child(1, "bar(Object) : String").numChildren(2);
 	}
 	
 	public void testMixedMethods_Order() throws Exception {
-		AssertBuilder assertBuilder = newAssertBuilder("class Foo { baz() {null} dispatch foo(String x) {''} dispatch bar(String x) {''} dispatch bar(Object y) {''} dispatch foo(Object y) {''}}");
+		AssertBuilder assertBuilder = newAssertBuilder("class Foo {" +
+				" def baz() {null}" +
+				" def dispatch foo(String x) {''}" +
+				" def dispatch bar(String x) {''}" +
+				" def dispatch bar(Object y) {''}" +
+				" def dispatch foo(Object y) {''}" +
+				"}");
 		AssertBuilder foo = assertBuilder.numChildren(1).child(0, "Foo").numChildren(3);
 		foo.child(0, "foo(Object) : String").numChildren(2);
 		foo.child(1, "bar(Object) : String").numChildren(2);
@@ -142,7 +153,13 @@ public class OutlineTests extends AbstractXtend2UITestCase {
 	
 	public void testMixmethods_Sorting() throws Exception {
 		setSorting(true);
-		AssertBuilder assertBuilder = newAssertBuilder("package test import java.lang.* class Foo { baz() {null} dispatch foo(String x) {''} dispatch bar(String x) {''} dispatch bar(Object y) {''} dispatch foo(Object y) {''}}").numChildren(3);
+		AssertBuilder assertBuilder = newAssertBuilder("package test import java.lang.* class Foo {" +
+				" def baz() {null}" +
+				" def dispatch foo(String x) {''}" +
+				" def dispatch bar(String x) {''}" +
+				" def dispatch bar(Object y) {''}" +
+				" def dispatch foo(Object y) {''}" +
+				"}").numChildren(3);
 		assertBuilder.child(0, "test").numChildren(0);
 		assertBuilder.child(1, "import declarations").numChildren(1);
 		AssertBuilder foo = assertBuilder.child(2, "Foo").numChildren(3);

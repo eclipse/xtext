@@ -61,7 +61,7 @@ public class Xtend2RenameStrategy extends AbstractJvmModelRenameStrategy {
 		} else if(renamedElement instanceof XtendFunction) {
 			JvmMember inferredJvmMember = getJvmModelAssociations().getDirectlyInferredOperation(((XtendFunction) renamedElement));
 			if(inferredJvmMember != null) {
-				inferredJvmMember.setSimpleName(((XtendMember) renamedElement).getName());
+				inferredJvmMember.setSimpleName(((XtendFunction) renamedElement).getName());
 			}
 		}
 	}

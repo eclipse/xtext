@@ -26,7 +26,7 @@ ruleQualifiedNameWithWildCard :
 
 // Rule Class
 ruleClass :
-	'class' RULE_ID (
+	ruleXAnnotation* 'class' RULE_ID (
 		'<' ruleJvmTypeParameter (
 			',' ruleJvmTypeParameter
 		)* '>'
@@ -41,32 +41,24 @@ ruleClass :
 
 // Rule Member
 ruleMember :
-	ruleFunction |
-	ruleDeclaredDependency
-;
-
-// Rule DeclaredDependency
-ruleDeclaredDependency :
-	'@Inject' 'extension'? ruleJvmTypeReference RULE_ID
-;
-
-// Rule Function
-ruleFunction :
-	(
-		'override'? |
-		'dispatch'?
-	)* (
-		'<' ruleJvmTypeParameter (
-			',' ruleJvmTypeParameter
-		)* '>'
-	)? ruleJvmTypeReference? ruleCreateExtensionInfo? RULE_ID '(' (
-		ruleParameter (
-			',' ruleParameter
-		)*
-	)? ')' (
-		ruleXBlockExpression |
-		ruleRichString
-	)?
+	ruleXAnnotation* (
+		'extension'? ruleJvmTypeReference RULE_ID |
+		(
+			'def' |
+			'override'
+		) 'dispatch'? (
+			'<' ruleJvmTypeParameter (
+				',' ruleJvmTypeParameter
+			)* '>'
+		)? ruleJvmTypeReference? ruleCreateExtensionInfo? RULE_ID '(' (
+			ruleParameter (
+				',' ruleParameter
+			)*
+		)? ')' (
+			ruleXBlockExpression |
+			ruleRichString
+		)?
+	)
 ;
 
 // Rule CreateExtensionInfo
@@ -76,7 +68,7 @@ ruleCreateExtensionInfo :
 
 // Rule Parameter
 ruleParameter :
-	ruleJvmTypeReference RULE_ID
+	ruleXAnnotation* ruleJvmTypeReference RULE_ID
 ;
 
 // Rule XStringLiteral
@@ -154,6 +146,58 @@ ruleRichStringIf :
 // Rule RichStringElseIf
 ruleRichStringElseIf :
 	'ELSEIF' ruleXExpression ruleInternalRichString
+;
+
+// Rule XAnnotation
+ruleXAnnotation :
+	'@' ruleQualifiedName (
+		( (
+		'('
+		) => '(' ) (
+			ruleXAnnotationElementValuePair (
+				',' ruleXAnnotationElementValuePair
+			)* |
+			ruleXAnnotationElementValue (
+				',' ruleXAnnotationElementValue
+			)*
+		) ')'
+	)?
+;
+
+// Rule XAnnotationElementValuePair
+ruleXAnnotationElementValuePair :
+	RULE_ID '=' ruleXAnnotationElementValue
+;
+
+// Rule XAnnotationElementValueStringConcatenation
+ruleXAnnotationElementValueStringConcatenation :
+	ruleXAnnotationElementValue (
+		'+' ruleXAnnotationElementValue
+	)*
+;
+
+// Rule XAnnotationElementValue
+ruleXAnnotationElementValue :
+	ruleXAnnotation |
+	ruleXAnnotationValueArray |
+	ruleXStringLiteral |
+	ruleXBooleanLiteral |
+	ruleXIntLiteral |
+	ruleXTypeLiteral |
+	ruleXAnnotationValueFieldReference |
+	'(' ruleXAnnotationElementValueStringConcatenation ')'
+;
+
+// Rule XAnnotationValueFieldReference
+ruleXAnnotationValueFieldReference :
+	ruleStaticQualifier? ruleIdOrSuper
+;
+
+// Rule XAnnotationValueArray
+ruleXAnnotationValueArray :
+	'{' ruleXAnnotationElementValue (
+		',' ruleXAnnotationElementValue
+	)* '}'
 ;
 
 // Rule XExpression

@@ -46,6 +46,10 @@ import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
 
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+
+import org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationsPackageImpl;
+
 import org.eclipse.xtext.xtype.XtypePackage;
 
 import org.eclipse.xtext.xtype.impl.XtypePackageImpl;
@@ -313,14 +317,17 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		TypesPackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
+		XAnnotationsPackageImpl theXAnnotationsPackage = (XAnnotationsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(XAnnotationsPackage.eNS_URI) instanceof XAnnotationsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(XAnnotationsPackage.eNS_URI) : XAnnotationsPackage.eINSTANCE);
 		XtypePackageImpl theXtypePackage = (XtypePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(XtypePackage.eNS_URI) instanceof XtypePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(XtypePackage.eNS_URI) : XtypePackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theXbasePackage.createPackageContents();
+		theXAnnotationsPackage.createPackageContents();
 		theXtypePackage.createPackageContents();
 
 		// Initialize created meta-data
 		theXbasePackage.initializePackageContents();
+		theXAnnotationsPackage.initializePackageContents();
 		theXtypePackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed

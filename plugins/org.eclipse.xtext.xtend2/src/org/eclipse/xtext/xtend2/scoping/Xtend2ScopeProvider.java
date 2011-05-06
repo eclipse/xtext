@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -40,10 +39,11 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvid
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo;
-import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -106,14 +106,14 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 			return getScopeForXtendClass((XtendClass) context, parent);
 		} else if (context instanceof XtendFunction) {
 			XtendFunction func = (XtendFunction) context;
-			EList<JvmFormalParameter> list = func.getParameters();
+			EList<XtendParameter> list = func.getParameters();
 			List<IEObjectDescription> descriptions = Lists.newArrayList();
 			if (func.getCreateExtensionInfo()!=null) {
 				CreateExtensionInfo info = func.getCreateExtensionInfo();
 				IEObjectDescription description = EObjectDescription.create(QualifiedName.create(info.getName()), info, null);
 				descriptions.add(description);
 			}
-			for (JvmFormalParameter jvmFormalParameter : list) {
+			for (XtendParameter jvmFormalParameter : list) {
 				if (!Strings.isEmpty(jvmFormalParameter.getName())) {
 					IEObjectDescription desc = createIEObjectDescription(jvmFormalParameter);
 					descriptions.add(desc);
@@ -169,15 +169,15 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 			insertDescriptionProviders(featureProvider, currentContext, callToThis, result);
 
 			// injected extensions
-			Iterable<DeclaredDependency> iterable = getExtensionDependencies(xtendClass);
-			for (DeclaredDependency declaredDependency : iterable) {
-				JvmIdentifiableElement dependencyImplicitReceiver = findImplicitReceiverFor(declaredDependency);
+			Iterable<XtendField> iterable = getExtensionDependencies(xtendClass);
+			for (XtendField XtendField : iterable) {
+				JvmIdentifiableElement dependencyImplicitReceiver = findImplicitReceiverFor(XtendField);
 				XMemberFeatureCall callToDependency = XbaseFactory.eINSTANCE.createXMemberFeatureCall();
 				callToDependency.setMemberCallTarget(EcoreUtil2.clone(callToThis));
 				callToDependency.setFeature(dependencyImplicitReceiver);
 				if (dependencyImplicitReceiver != null) {
 					featureProvider = extensionMethodsFeaturesProvider.get();
-					featureProvider.setContext(declaredDependency.getType());
+					featureProvider.setContext(XtendField.getType());
 					insertDescriptionProviders(featureProvider, currentContext, callToDependency, result);
 				}
 			}
@@ -186,8 +186,8 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 		return result;
 	}
 
-	protected JvmIdentifiableElement findImplicitReceiverFor(DeclaredDependency declaredDependency) {
-		Set<EObject> elements = xtend2jvmAssociations.getJvmElements(declaredDependency);
+	protected JvmIdentifiableElement findImplicitReceiverFor(XtendField XtendField) {
+		Set<EObject> elements = xtend2jvmAssociations.getJvmElements(XtendField);
 		if (!elements.isEmpty()) {
 			final JvmIdentifiableElement field = (JvmIdentifiableElement) elements.iterator().next();
 			return field;
@@ -195,10 +195,10 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 		return null;
 	}
 
-	protected Iterable<DeclaredDependency> getExtensionDependencies(XtendClass context) {
-		return Iterables.filter(EcoreUtil2.typeSelect(context.getMembers(), DeclaredDependency.class),
-				new Predicate<DeclaredDependency>() {
-					public boolean apply(DeclaredDependency input) {
+	protected Iterable<XtendField> getExtensionDependencies(XtendClass context) {
+		return Iterables.filter(EcoreUtil2.typeSelect(context.getMembers(), XtendField.class),
+				new Predicate<XtendField>() {
+					public boolean apply(XtendField input) {
 						return input.isExtension();
 					}
 				});
@@ -222,7 +222,7 @@ public class Xtend2ScopeProvider extends XbaseScopeProvider {
 		result.add(3, sugaredProvider);
 	}
 
-	protected IEObjectDescription createIEObjectDescription(JvmFormalParameter jvmFormalParameter) {
+	protected IEObjectDescription createIEObjectDescription(XtendParameter jvmFormalParameter) {
 		return EObjectDescription.create(QualifiedName.create(jvmFormalParameter.getName()), jvmFormalParameter, null);
 	}
 

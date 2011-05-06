@@ -13,12 +13,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
-
-import org.eclipse.xtext.common.types.impl.JvmIdentifiableElementImplCustom;
-
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
-import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendAnnotationTarget;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 
 /**
@@ -28,34 +24,23 @@ import org.eclipse.xtext.xtend2.xtend2.XtendMember;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendMemberImpl#getDeclaringType <em>Declaring Type</em>}</li>
- *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendMemberImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendMemberImpl#getAnnotationInfo <em>Annotation Info</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class XtendMemberImpl extends JvmIdentifiableElementImplCustom implements XtendMember
+public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendMember
 {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getAnnotationInfo() <em>Annotation Info</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getAnnotationInfo()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
+	protected XtendAnnotationTarget annotationInfo;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -83,10 +68,9 @@ public abstract class XtendMemberImpl extends JvmIdentifiableElementImplCustom i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public XtendClass getDeclaringType()
+	public XtendAnnotationTarget getAnnotationInfo()
 	{
-		if (eContainerFeatureID() != Xtend2Package.XTEND_MEMBER__DECLARING_TYPE) return null;
-		return (XtendClass)eContainer();
+		return annotationInfo;
 	}
 
 	/**
@@ -94,9 +78,15 @@ public abstract class XtendMemberImpl extends JvmIdentifiableElementImplCustom i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetDeclaringType(XtendClass newDeclaringType, NotificationChain msgs)
+	public NotificationChain basicSetAnnotationInfo(XtendAnnotationTarget newAnnotationInfo, NotificationChain msgs)
 	{
-		msgs = eBasicSetContainer((InternalEObject)newDeclaringType, Xtend2Package.XTEND_MEMBER__DECLARING_TYPE, msgs);
+		XtendAnnotationTarget oldAnnotationInfo = annotationInfo;
+		annotationInfo = newAnnotationInfo;
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_MEMBER__ANNOTATION_INFO, oldAnnotationInfo, newAnnotationInfo);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
 		return msgs;
 	}
 
@@ -105,63 +95,20 @@ public abstract class XtendMemberImpl extends JvmIdentifiableElementImplCustom i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDeclaringType(XtendClass newDeclaringType)
+	public void setAnnotationInfo(XtendAnnotationTarget newAnnotationInfo)
 	{
-		if (newDeclaringType != eInternalContainer() || (eContainerFeatureID() != Xtend2Package.XTEND_MEMBER__DECLARING_TYPE && newDeclaringType != null))
+		if (newAnnotationInfo != annotationInfo)
 		{
-			if (EcoreUtil.isAncestor(this, newDeclaringType))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newDeclaringType != null)
-				msgs = ((InternalEObject)newDeclaringType).eInverseAdd(this, Xtend2Package.XTEND_CLASS__MEMBERS, XtendClass.class, msgs);
-			msgs = basicSetDeclaringType(newDeclaringType, msgs);
+			if (annotationInfo != null)
+				msgs = ((InternalEObject)annotationInfo).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_MEMBER__ANNOTATION_INFO, null, msgs);
+			if (newAnnotationInfo != null)
+				msgs = ((InternalEObject)newAnnotationInfo).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_MEMBER__ANNOTATION_INFO, null, msgs);
+			msgs = basicSetAnnotationInfo(newAnnotationInfo, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_MEMBER__DECLARING_TYPE, newDeclaringType, newDeclaringType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName()
-	{
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName)
-	{
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_MEMBER__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-	{
-		switch (featureID)
-		{
-			case Xtend2Package.XTEND_MEMBER__DECLARING_TYPE:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetDeclaringType((XtendClass)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
+			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_MEMBER__ANNOTATION_INFO, newAnnotationInfo, newAnnotationInfo));
 	}
 
 	/**
@@ -174,26 +121,10 @@ public abstract class XtendMemberImpl extends JvmIdentifiableElementImplCustom i
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_MEMBER__DECLARING_TYPE:
-				return basicSetDeclaringType(null, msgs);
+			case Xtend2Package.XTEND_MEMBER__ANNOTATION_INFO:
+				return basicSetAnnotationInfo(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs)
-	{
-		switch (eContainerFeatureID())
-		{
-			case Xtend2Package.XTEND_MEMBER__DECLARING_TYPE:
-				return eInternalContainer().eInverseRemove(this, Xtend2Package.XTEND_CLASS__MEMBERS, XtendClass.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -206,10 +137,8 @@ public abstract class XtendMemberImpl extends JvmIdentifiableElementImplCustom i
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_MEMBER__DECLARING_TYPE:
-				return getDeclaringType();
-			case Xtend2Package.XTEND_MEMBER__NAME:
-				return getName();
+			case Xtend2Package.XTEND_MEMBER__ANNOTATION_INFO:
+				return getAnnotationInfo();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -224,11 +153,8 @@ public abstract class XtendMemberImpl extends JvmIdentifiableElementImplCustom i
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_MEMBER__DECLARING_TYPE:
-				setDeclaringType((XtendClass)newValue);
-				return;
-			case Xtend2Package.XTEND_MEMBER__NAME:
-				setName((String)newValue);
+			case Xtend2Package.XTEND_MEMBER__ANNOTATION_INFO:
+				setAnnotationInfo((XtendAnnotationTarget)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -244,11 +170,8 @@ public abstract class XtendMemberImpl extends JvmIdentifiableElementImplCustom i
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_MEMBER__DECLARING_TYPE:
-				setDeclaringType((XtendClass)null);
-				return;
-			case Xtend2Package.XTEND_MEMBER__NAME:
-				setName(NAME_EDEFAULT);
+			case Xtend2Package.XTEND_MEMBER__ANNOTATION_INFO:
+				setAnnotationInfo((XtendAnnotationTarget)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -264,29 +187,10 @@ public abstract class XtendMemberImpl extends JvmIdentifiableElementImplCustom i
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.XTEND_MEMBER__DECLARING_TYPE:
-				return getDeclaringType() != null;
-			case Xtend2Package.XTEND_MEMBER__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case Xtend2Package.XTEND_MEMBER__ANNOTATION_INFO:
+				return annotationInfo != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString()
-	{
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //XtendMemberImpl

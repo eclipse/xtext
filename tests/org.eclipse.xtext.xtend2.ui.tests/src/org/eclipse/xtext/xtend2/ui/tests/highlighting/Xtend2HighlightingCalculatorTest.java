@@ -55,7 +55,7 @@ public class Xtend2HighlightingCalculatorTest extends AbstractXtend2UITestCase i
 	}
 	
 	protected String getPrefix() {
-		return "class Foo { foo() ";
+		return "class Foo { def foo() ";
 	}
 	
 	protected int getPrefixLength() {
