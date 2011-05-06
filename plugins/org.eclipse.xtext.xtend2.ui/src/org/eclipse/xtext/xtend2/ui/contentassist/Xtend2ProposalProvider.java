@@ -3,8 +3,16 @@
 */
 package org.eclipse.xtext.xtend2.ui.contentassist;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.core.Flags;
+import org.eclipse.jdt.core.search.IJavaSearchConstants;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
+import org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.xbase.XbasePackage;
 
 import com.google.common.base.Predicate;
 /**
@@ -12,6 +20,7 @@ import com.google.common.base.Predicate;
  */
 public class Xtend2ProposalProvider extends AbstractXtend2ProposalProvider {
 
+	@SuppressWarnings("restriction")
 	@Override
 	protected Predicate<IEObjectDescription> getFeatureDescriptionPredicate(ContentAssistContext contentAssistContext) {
 		if (contentAssistContext.getPrefix().startsWith("_"))
@@ -24,6 +33,30 @@ public class Xtend2ProposalProvider extends AbstractXtend2ProposalProvider {
 			}
 			
 		};
+	}
+	
+	@SuppressWarnings("restriction")
+	@Override
+	public void completeClass_Extends(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE,
+						new ITypesProposalProvider.Filter() {
+							public int getSearchFor() {
+								return IJavaSearchConstants.CLASS;
+							}
+							
+							public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName, char[][] enclosingTypeNames,
+									String path) {
+								return !Flags.isFinal(modifiers);
+							}
+						}, acceptor);
+	}
+	
+	@SuppressWarnings("restriction")
+	@Override
+	public void completeClass_Implements(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, TypeMatchFilters.all(IJavaSearchConstants.INTERFACE), acceptor);
 	}
 	
 }

@@ -210,13 +210,6 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	}
 	
 	@Override
-	public void completeXMemberFeatureCall_Feature(EObject model, Assignment assignment, ContentAssistContext context,
-			ICompletionProposalAcceptor acceptor) {
-		// TODO Auto-generated method stub
-		super.completeXMemberFeatureCall_Feature(model, assignment, context, acceptor);
-	}
-	
-	@Override
 	public void completeXFeatureCall_Feature(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		if (model instanceof XBlockExpression) {
@@ -290,7 +283,8 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor,
 			Predicate<IEObjectDescription> filter) {
 		if (reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR) {
-			completeJavaTypes(contentAssistContext, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor);
+			completeJavaTypes(contentAssistContext, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE,
+					TypeMatchFilters.canInstantiate(), acceptor);
 			return;
 		}
 		// guard for feature call scopes
