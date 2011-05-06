@@ -14,8 +14,8 @@
       <ePackage href="http://www.eclipse.org/Xtext/Xbase/XAnnotations#/"/>
     </metamodelDeclarations>
     <rules xsi:type="xtext:ParserRule" name="XAnnotation">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xbase#//XExpression"/>
+      <type metamodel="/0/@metamodelDeclarations.3">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/Xtext/Xbase/XAnnotations#//XAnnotation"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Action">
@@ -33,8 +33,8 @@
           </terminal>
         </elements>
         <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value="("/>
-          <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Keyword" predicated="true" value="("/>
+          <elements xsi:type="xtext:Alternatives" cardinality="?">
             <elements xsi:type="xtext:Group">
               <elements xsi:type="xtext:Assignment" feature="elementValuePairs" operator="+=">
                 <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>

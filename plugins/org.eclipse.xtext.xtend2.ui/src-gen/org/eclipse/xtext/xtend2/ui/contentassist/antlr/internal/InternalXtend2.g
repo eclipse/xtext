@@ -7517,7 +7517,7 @@ rule__XAnnotation__Group_3__1__Impl
 :
 (
 { before(grammarAccess.getXAnnotationAccess().getAlternatives_3_1()); }
-(rule__XAnnotation__Alternatives_3_1)
+(rule__XAnnotation__Alternatives_3_1)?
 { after(grammarAccess.getXAnnotationAccess().getAlternatives_3_1()); }
 )
 

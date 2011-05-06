@@ -32,7 +32,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbaseFactory;
-import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
+import org.eclipse.xtext.xbase.annotations.scoping.XbaseWithAnnotationsScopeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IFeaturesForTypeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
@@ -54,7 +54,7 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge
  */
-public class Xtend2ScopeProvider extends XbaseScopeProvider {
+public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 
 	@Inject
 	private IXtend2JvmAssociations xtend2jvmAssociations;

@@ -2843,9 +2843,9 @@ rule__XAnnotation__Group_3__0__Impl
 :
 (
 { before(grammarAccess.getXAnnotationAccess().getLeftParenthesisKeyword_3_0()); }
-
+(
 	'(' 
-
+)
 { after(grammarAccess.getXAnnotationAccess().getLeftParenthesisKeyword_3_0()); }
 )
 
@@ -2874,7 +2874,7 @@ rule__XAnnotation__Group_3__1__Impl
 :
 (
 { before(grammarAccess.getXAnnotationAccess().getAlternatives_3_1()); }
-(rule__XAnnotation__Alternatives_3_1)
+(rule__XAnnotation__Alternatives_3_1)?
 { after(grammarAccess.getXAnnotationAccess().getAlternatives_3_1()); }
 )
 

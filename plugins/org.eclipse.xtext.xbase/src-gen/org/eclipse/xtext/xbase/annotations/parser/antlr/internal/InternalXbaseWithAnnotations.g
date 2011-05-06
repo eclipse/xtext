@@ -102,11 +102,12 @@ ruleXAnnotation returns [EObject current=null]
 	    }
 
 )
-)(	otherlv_3='(' 
+)(((	'(' 
+)=>	otherlv_3='(' 
     {
     	newLeafNode(otherlv_3, grammarAccess.getXAnnotationAccess().getLeftParenthesisKeyword_3_0());
     }
-(((
+)(((
 (
 		{ 
 	        newCompositeNode(grammarAccess.getXAnnotationAccess().getElementValuePairsXAnnotationElementValuePairParserRuleCall_3_1_0_0_0()); 
@@ -187,7 +188,7 @@ ruleXAnnotation returns [EObject current=null]
 	    }
 
 )
-))*))	otherlv_10=')' 
+))*))?	otherlv_10=')' 
     {
     	newLeafNode(otherlv_10, grammarAccess.getXAnnotationAccess().getRightParenthesisKeyword_3_2());
     }

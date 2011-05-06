@@ -160,7 +160,7 @@ ruleXAnnotation :
 			ruleXAnnotationElementValue (
 				',' ruleXAnnotationElementValue
 			)*
-		) ')'
+		)? ')'
 	)?
 ;
 

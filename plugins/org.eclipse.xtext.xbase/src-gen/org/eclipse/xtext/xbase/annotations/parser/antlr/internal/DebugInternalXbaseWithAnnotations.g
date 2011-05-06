@@ -6,14 +6,16 @@ grammar DebugInternalXbaseWithAnnotations ;
 // Rule XAnnotation
 ruleXAnnotation :
 	'@' ruleQualifiedName (
-		'(' (
+		( (
+		'('
+		) => '(' ) (
 			ruleXAnnotationElementValuePair (
 				',' ruleXAnnotationElementValuePair
 			)* |
 			ruleXAnnotationElementValue (
 				',' ruleXAnnotationElementValue
 			)*
-		) ')'
+		)? ')'
 	)?
 ;
 
