@@ -54,6 +54,8 @@ public interface IAssignedTokenSequenceAcceptor {
 		protected abstract IAssignedTokenSequenceAcceptor delegate();
 	}
 
+	public final static int NO_INDEX = -1;
+
 	void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, String token, EObject value, int index, ICompositeNode node);
 
 	void acceptAssignedCrossRefEnum(RuleCall enumRC, String token, EObject value, int index, ICompositeNode node);
