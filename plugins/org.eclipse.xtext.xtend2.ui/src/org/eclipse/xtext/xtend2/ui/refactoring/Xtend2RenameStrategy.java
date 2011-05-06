@@ -23,6 +23,7 @@ import com.google.inject.Inject;
 /**
  * Encapsulates the model changes of a rename refactoring.  
  */
+@SuppressWarnings("restriction")
 public class Xtend2RenameStrategy extends AbstractJvmModelRenameStrategy {
 
 	public static class Provider extends DefaultRenameStrategy.Provider {
