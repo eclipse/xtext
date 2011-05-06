@@ -42,6 +42,10 @@ import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvid
 import org.eclipse.xtext.serializer.ITransientValueService;
 import org.eclipse.xtext.serializer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
+import org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer;
+import org.eclipse.xtext.serializer.tokens.IEnumLiteralSerializer;
+import org.eclipse.xtext.serializer.tokens.IKeywordSerializer;
+import org.eclipse.xtext.serializer.tokens.IValueSerializer;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -153,15 +157,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			return "Alt-Choice {\n" + newPrefix + child.toString(newPrefix) + "\n" + prefix + "}";
 		}
 	}
-
-	//	protected class AssignedAllocationValue extends AllocationValue {
-	//		protected EStructuralFeature feature;
-	//
-	//		public AssignedAllocationValue(EStructuralFeature feature, Object value) {
-	//			super(value);
-	//			this.feature = feature;
-	//		}
-	//	}
 
 	protected abstract class Feature2Assignment {
 		public abstract IFeatureInfo getFeature();
@@ -323,6 +318,15 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		}
 
 	}
+
+	//	protected class AssignedAllocationValue extends AllocationValue {
+	//		protected EStructuralFeature feature;
+	//
+	//		public AssignedAllocationValue(EStructuralFeature feature, Object value) {
+	//			super(value);
+	//			this.feature = feature;
+	//		}
+	//	}
 
 	protected class Quantity {
 
@@ -506,7 +510,13 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 	protected IContextFinder contextFinder;
 
 	@Inject
+	protected ICrossReferenceSerializer crossRefSerializer;
+
+	@Inject
 	protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
+
+	@Inject
+	protected IEnumLiteralSerializer enumLiteralSerializer;
 
 	@Inject
 	protected IGrammarAccess grammarAccess;
@@ -515,7 +525,13 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 	protected IGrammarConstraintProvider grammarConstraintProvider;
 
 	@Inject
+	protected IKeywordSerializer keywordSerializer;
+
+	@Inject
 	protected ISemanticNodeProvider nodeProvider;
+
+	@Inject
+	protected ITransientValueService transientValueService;
 
 	//	protected boolean disableInvalidAlternativeChoices(Quantity quant, Feature2Assignment[] values) {
 	//		if (quant.getConstraintElement().isMany())
@@ -540,7 +556,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 	//	}
 
 	@Inject
-	protected ITransientValueService transientValueService;
+	protected IValueSerializer valueSerializer;
 
 	//	protected List<Quantity> createIndependentlyDecideableQuantities(IConstraint constraint,
 	//			List<List<AllocationValue>> mandatory) {
@@ -583,6 +599,84 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 	//			}
 	//	}
 
+	protected boolean acceptSemantic(EObject semanticObj, IConstraintElement constr, Object value, int index, INode node) {
+		switch (constr.getType()) {
+			case ASSIGNED_ACTION_CALL:
+				sequenceAcceptor.acceptAssignedAction(constr.getAction(), (EObject) value, (ICompositeNode) node);
+				return true;
+			case ASSIGNED_PARSER_RULE_CALL:
+				sequenceAcceptor.acceptAssignedParserRuleCall(constr.getRuleCall(), (EObject) value,
+						(ICompositeNode) node);
+				return true;
+			case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
+				RuleCall datatypeRC = constr.getRuleCall();
+				EObject value1 = (EObject) value;
+				ICompositeNode node1 = (ICompositeNode) node;
+				String token1 = crossRefSerializer.serializeCrossRef(semanticObj,
+						GrammarUtil.containingCrossReference(datatypeRC), value1, node1, errorAcceptor);
+				sequenceAcceptor.acceptAssignedCrossRefDatatype(datatypeRC, token1, value1, index, node1);
+				return true;
+			case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
+				RuleCall terminalRC = constr.getRuleCall();
+				EObject value2 = (EObject) value;
+				ILeafNode node2 = (ILeafNode) node;
+				String token2 = crossRefSerializer.serializeCrossRef(semanticObj,
+						GrammarUtil.containingCrossReference(terminalRC), value2, node2, errorAcceptor);
+				sequenceAcceptor.acceptAssignedCrossRefTerminal(terminalRC, token2, value2, index, node2);
+				return true;
+			case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
+				RuleCall enumRC = constr.getRuleCall();
+				ICompositeNode node3 = (ICompositeNode) node;
+				EObject target3 = (EObject) value;
+				String token3 = crossRefSerializer.serializeCrossRef(semanticObj,
+						GrammarUtil.containingCrossReference(enumRC), target3, node3, errorAcceptor);
+				sequenceAcceptor.acceptAssignedCrossRefEnum(enumRC, token3, target3, index, node3);
+				return true;
+			case ASSIGNED_DATATYPE_RULE_CALL:
+				RuleCall datatypeRC1 = constr.getRuleCall();
+				ICompositeNode node4 = (ICompositeNode) node;
+				String token4 = valueSerializer.serializeAssignedValue(semanticObj, datatypeRC1, value, node4,
+						errorAcceptor);
+				sequenceAcceptor.acceptAssignedDatatype(datatypeRC1, token4, value, index, node4);
+				return true;
+			case ASSIGNED_ENUM_RULE_CALL:
+				RuleCall enumRC1 = constr.getRuleCall();
+				ICompositeNode node5 = (ICompositeNode) node;
+				String token5 = enumLiteralSerializer.serializeAssignedEnumLiteral(semanticObj, enumRC1, value, node5,
+						errorAcceptor);
+				sequenceAcceptor.acceptAssignedEnum(enumRC1, token5, value, index, node5);
+				return true;
+			case ASSIGNED_TERMINAL_RULE_CALL:
+				RuleCall terminalRC1 = constr.getRuleCall();
+				ILeafNode node6 = (ILeafNode) node;
+				String token6 = valueSerializer.serializeAssignedValue(semanticObj, terminalRC1, value, node6,
+						errorAcceptor);
+				sequenceAcceptor.acceptAssignedTerminal(terminalRC1, token6, value, index, node6);
+				return true;
+			case ASSIGNED_KEYWORD:
+				Keyword keyword = constr.getKeyword();
+				String value3 = (String) value;
+				ILeafNode node7 = (ILeafNode) node;
+				String token7 = keywordSerializer.serializeAssignedKeyword(semanticObj, keyword, value3, node7,
+						errorAcceptor);
+				sequenceAcceptor.acceptAssignedKeyword(keyword, token7, value3, index, node7);
+				return true;
+			case ASSIGNED_BOOLEAN_KEYWORD:
+				Keyword keyword1 = constr.getKeyword();
+				Boolean value4 = (Boolean) value;
+				ILeafNode node8 = (ILeafNode) node;
+				String token71 = keywordSerializer.serializeAssignedKeyword(semanticObj, keyword1, value4, node8,
+						errorAcceptor);
+				sequenceAcceptor
+						.acceptAssignedKeyword(keyword1, token71, value4 == null ? false : value4, index, node8);
+				return true;
+			case ALTERNATIVE:
+			case GROUP:
+				return false;
+		}
+		return false;
+	}
+
 	protected void applydeterministicQuantities(IConstraint constraint, Feature2Assignment[] values) {
 		boolean changed;
 		do {
@@ -599,6 +693,16 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 				}
 		} while (changed);
 	}
+
+	//	protected AllocationValue getNonTransientValuesForSVFeature(EObject semanticObject, IFeatureInfo feature,
+	//			INodesForEObjectProvider nodes) {
+	//		if (transientValueService.isValueTransient(semanticObject, feature.getFeature()) != ValueTransient.NO) {
+	//			Object value = semanticObject.eGet(feature.getFeature());
+	//			INode node = nodes.getNodeForSingelValue(feature.getFeature(), value);
+	//			return new AllocationValue(value, node);
+	//		}
+	//		return null;
+	//	}
 
 	protected boolean containsUnavailableFeature(Feature2Assignment[] values, IConstraintElement element,
 			IConstraintElement excludeAssignment) {
@@ -636,16 +740,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		}
 		return false;
 	}
-
-	//	protected AllocationValue getNonTransientValuesForSVFeature(EObject semanticObject, IFeatureInfo feature,
-	//			INodesForEObjectProvider nodes) {
-	//		if (transientValueService.isValueTransient(semanticObject, feature.getFeature()) != ValueTransient.NO) {
-	//			Object value = semanticObject.eGet(feature.getFeature());
-	//			INode node = nodes.getNodeForSingelValue(feature.getFeature(), value);
-	//			return new AllocationValue(value, node);
-	//		}
-	//		return null;
-	//	}
 
 	public void createSequence(EObject context, EObject semanticObject) {
 		initConstraints();
@@ -1237,84 +1331,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 				case MANDATORY_IF_SET:
 				case SAME_OR_MORE:
 			}
-		return false;
-	}
-
-	protected boolean acceptSemantic(EObject semanticObj, IConstraintElement constr, Object value, int index, INode node) {
-		switch (constr.getType()) {
-			case ASSIGNED_ACTION_CALL:
-				sequenceAcceptor.acceptAssignedAction(constr.getAction(), (EObject) value, (ICompositeNode) node);
-				return true;
-			case ASSIGNED_PARSER_RULE_CALL:
-				sequenceAcceptor.acceptAssignedParserRuleCall(constr.getRuleCall(), (EObject) value,
-						(ICompositeNode) node);
-				return true;
-			case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
-				RuleCall datatypeRC = constr.getRuleCall();
-				EObject value1 = (EObject) value;
-				ICompositeNode node1 = (ICompositeNode) node;
-				String token1 = crossRefSerializer.serializeCrossRef(semanticObj,
-						GrammarUtil.containingCrossReference(datatypeRC), value1, node1, errorAcceptor);
-				sequenceAcceptor.acceptAssignedCrossRefDatatype(datatypeRC, token1, value1, index, node1);
-				return true;
-			case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
-				RuleCall terminalRC = constr.getRuleCall();
-				EObject value2 = (EObject) value;
-				ILeafNode node2 = (ILeafNode) node;
-				String token2 = crossRefSerializer.serializeCrossRef(semanticObj,
-						GrammarUtil.containingCrossReference(terminalRC), value2, node2, errorAcceptor);
-				sequenceAcceptor.acceptAssignedCrossRefTerminal(terminalRC, token2, value2, index, node2);
-				return true;
-			case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
-				RuleCall enumRC = constr.getRuleCall();
-				ICompositeNode node3 = (ICompositeNode) node;
-				EObject target3 = (EObject) value;
-				String token3 = crossRefSerializer.serializeCrossRef(semanticObj,
-						GrammarUtil.containingCrossReference(enumRC), target3, node3, errorAcceptor);
-				sequenceAcceptor.acceptAssignedCrossRefEnum(enumRC, token3, target3, index, node3);
-				return true;
-			case ASSIGNED_DATATYPE_RULE_CALL:
-				RuleCall datatypeRC1 = constr.getRuleCall();
-				ICompositeNode node4 = (ICompositeNode) node;
-				String token4 = valueSerializer.serializeAssignedValue(semanticObj, datatypeRC1, value, node4,
-						errorAcceptor);
-				sequenceAcceptor.acceptAssignedDatatype(datatypeRC1, token4, value, index, node4);
-				return true;
-			case ASSIGNED_ENUM_RULE_CALL:
-				RuleCall enumRC1 = constr.getRuleCall();
-				ICompositeNode node5 = (ICompositeNode) node;
-				String token5 = enumLiteralSerializer.serializeAssignedEnumLiteral(semanticObj, enumRC1, value, node5,
-						errorAcceptor);
-				sequenceAcceptor.acceptAssignedEnum(enumRC1, token5, value, index, node5);
-				return true;
-			case ASSIGNED_TERMINAL_RULE_CALL:
-				RuleCall terminalRC1 = constr.getRuleCall();
-				ILeafNode node6 = (ILeafNode) node;
-				String token6 = valueSerializer.serializeAssignedValue(semanticObj, terminalRC1, value, node6,
-						errorAcceptor);
-				sequenceAcceptor.acceptAssignedTerminal(terminalRC1, token6, value, index, node6);
-				return true;
-			case ASSIGNED_KEYWORD:
-				Keyword keyword = constr.getKeyword();
-				String value3 = (String) value;
-				ILeafNode node7 = (ILeafNode) node;
-				String token7 = keywordSerializer.serializeAssignedKeyword(semanticObj, keyword, value3, node7,
-						errorAcceptor);
-				sequenceAcceptor.acceptAssignedKeyword(keyword, token7, value3, index, node7);
-				return true;
-			case ASSIGNED_BOOLEAN_KEYWORD:
-				Keyword keyword1 = constr.getKeyword();
-				Boolean value4 = (Boolean) value;
-				ILeafNode node8 = (ILeafNode) node;
-				String token71 = keywordSerializer.serializeAssignedKeyword(semanticObj, keyword1, value4, node8,
-						errorAcceptor);
-				sequenceAcceptor
-						.acceptAssignedKeyword(keyword1, token71, value4 == null ? false : value4, index, node8);
-				return true;
-			case ALTERNATIVE:
-			case GROUP:
-				return false;
-		}
 		return false;
 	}
 

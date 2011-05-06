@@ -15,10 +15,6 @@ import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.SequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
-import org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer;
-import org.eclipse.xtext.serializer.tokens.IEnumLiteralSerializer;
-import org.eclipse.xtext.serializer.tokens.IKeywordSerializer;
-import org.eclipse.xtext.serializer.tokens.IValueSerializer;
 
 import com.google.inject.Inject;
 
@@ -27,16 +23,7 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 
-	@Inject
-	protected ICrossReferenceSerializer crossRefSerializer;
-
-	@Inject
-	protected IEnumLiteralSerializer enumLiteralSerializer;
-
 	protected ISerializationDiagnostic.Acceptor errorAcceptor;
-
-	@Inject
-	protected IKeywordSerializer keywordSerializer;
 
 	@Inject
 	protected ISemanticNodeProvider nodeProvider;
@@ -45,9 +32,6 @@ public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 
 	@Inject
 	protected SequenceAcceptor.Provider sequenceAcceptorProvider;
-
-	@Inject
-	protected IValueSerializer valueSerializer;
 
 	protected INodesForEObjectProvider createNodeProvider(EObject semanticObject) {
 		return nodeProvider.getNodesForSemanticObject(semanticObject, null);
