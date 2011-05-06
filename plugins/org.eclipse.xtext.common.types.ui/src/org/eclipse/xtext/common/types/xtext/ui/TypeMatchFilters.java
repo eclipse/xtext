@@ -8,6 +8,7 @@
 package org.eclipse.xtext.common.types.xtext.ui;
 
 import org.eclipse.jdt.core.Flags;
+import org.eclipse.jdt.core.search.IJavaSearchConstants;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider.Filter;
 
@@ -22,6 +23,10 @@ public final class TypeMatchFilters {
 	
 	public static ITypesProposalProvider.Filter all() {
 		return new All();
+	}
+	
+	public static ITypesProposalProvider.Filter all(int searchFor) {
+		return new All(searchFor);
 	}
 	
 	public static ITypesProposalProvider.Filter none() {
@@ -49,9 +54,24 @@ public final class TypeMatchFilters {
 	}
 	
 	public static class All implements ITypesProposalProvider.Filter {
+		
+		private final int searchFor;
+
+		public All(int searchFor) {
+			this.searchFor = searchFor;
+		}
+		
+		public All() {
+			this(IJavaSearchConstants.TYPE);
+		}
+
 		public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 				char[][] enclosingTypeNames, String path) {
 			return true;
+		}
+		
+		public int getSearchFor() {
+			return searchFor;
 		}
 	}
 	
@@ -59,6 +79,10 @@ public final class TypeMatchFilters {
 		public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 				char[][] enclosingTypeNames, String path) {
 			return false;
+		}
+		
+		public int getSearchFor() {
+			return IJavaSearchConstants.TYPE;
 		}
 	}
 	
@@ -73,6 +97,10 @@ public final class TypeMatchFilters {
 		public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 				char[][] enclosingTypeNames, String path) {
 			return !delegate.accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path);
+		}
+		
+		public int getSearchFor() {
+			return delegate.getSearchFor();
 		}
 	}
 	
@@ -96,6 +124,10 @@ public final class TypeMatchFilters {
 			}
 			return result;
 		}
+		
+		public int getSearchFor() {
+			return delegates[0].getSearchFor();
+		}
 	}
 	
 	public static class Or implements ITypesProposalProvider.Filter {
@@ -118,6 +150,10 @@ public final class TypeMatchFilters {
 			}
 			return result;
 		}
+		
+		public int getSearchFor() {
+			return delegates[0].getSearchFor();
+		}
 	}
 	
 	public static class CanInstantiate implements ITypesProposalProvider.Filter {
@@ -125,12 +161,20 @@ public final class TypeMatchFilters {
 				char[][] enclosingTypeNames, String path) {
 			return !Flags.isAbstract(modifiers) && !Flags.isInterface(modifiers);
 		}
+		
+		public int getSearchFor() {
+			return IJavaSearchConstants.CLASS;
+		}
 	}
 
 	public static class IsPublic implements ITypesProposalProvider.Filter {
 		public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 				char[][] enclosingTypeNames, String path) {
 			return Flags.isPublic(modifiers);
+		}
+		
+		public int getSearchFor() {
+			return IJavaSearchConstants.TYPE;
 		}
 	}
 }
