@@ -18,7 +18,7 @@ class DomainmodelExtensions {
 	 *  a PackageDeclaration, an Entity or a JvmDeclaredType
 	 * returns null otherwise
 	 */
-	String packageName(Object o) {
+	def String packageName(Object o) {
 		switch(o) {
 			PackageDeclaration : concatPath(packageName(o.eContainer), o.name)
 			EObject : packageName(o.eContainer)
@@ -27,7 +27,7 @@ class DomainmodelExtensions {
 		}
 	}
 	
-	concatPath(String prefix, String suffix) {
+	def concatPath(String prefix, String suffix) {
 		if (prefix.nullOrEmpty) 
 			suffix 
 		else 

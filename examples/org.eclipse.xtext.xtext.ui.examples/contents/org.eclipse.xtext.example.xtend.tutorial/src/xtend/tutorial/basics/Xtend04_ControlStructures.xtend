@@ -10,7 +10,7 @@ class Xtend04_ControlStructures {
 	/**
 	 * if expressions look exactly like Java's if statements.
 	 */
-	ifExpression(String param) {
+	def ifExpression(String param) {
 		if (param!=null) {
 			param.length
 		} else {
@@ -22,14 +22,14 @@ class Xtend04_ControlStructures {
 	 * ... but note that they are expression so they are more like Java's
 	 * ternary operator.
 	 */
-	ifExpression_01(String param) {
+	def ifExpression_01(String param) {
 		ifExpression(if (param=='foo') 'bar' else 'baz') 
 	}
 	
 	/**
 	 * ... but the else branch is optional and if not specified defaults to 'else null'
 	 */
-	ifExpression_02(String param) {
+	def ifExpression_02(String param) {
 		ifExpression_01(if (param=='bar') 'foo') 
 	}
 	
@@ -37,7 +37,7 @@ class Xtend04_ControlStructures {
 	 * The switch expression is very different to the one from Java
 	 * It supports dispatching over types, it has no fall through, and it uses a first match wins strategy.
 	 */
-	switchExpression_01(Shape shape) {
+	def switchExpression_01(Shape shape) {
 		switch (shape) {
 			Circle 	: 
 				'a circle : diameter='+shape.diameter
@@ -51,7 +51,7 @@ class Xtend04_ControlStructures {
 	/**
 	 * switch can also be used more traditionally (without any type guards)
 	 */
-	switchExpression_02(String value) {
+	def switchExpression_02(String value) {
 		switch(value) {
 			case 'foo' : "it's foo"
 			case 'bar' : 'a bar'

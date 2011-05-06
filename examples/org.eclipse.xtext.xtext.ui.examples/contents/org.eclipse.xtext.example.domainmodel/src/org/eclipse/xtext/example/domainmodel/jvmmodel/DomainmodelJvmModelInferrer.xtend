@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.*
 import org.eclipse.xtext.common.types.util.*
 import static org.eclipse.xtext.common.types.*
 import java.util.*
+import com.google.inject.Inject
 import static org.eclipse.xtext.EcoreUtil2.*
 
 class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
@@ -32,15 +33,15 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 		transform( sourceObject ).toList
 	}
 	
-	dispatch Iterable<JvmDeclaredType> transform(DomainModel model) {
+	def dispatch Iterable<JvmDeclaredType> transform(DomainModel model) {
 		model.elements.map(e | transform(e)).flatten
 	}
 	 
-	dispatch Iterable<JvmDeclaredType> transform(PackageDeclaration packageDecl) {
+	def dispatch Iterable<JvmDeclaredType> transform(PackageDeclaration packageDecl) {
 		packageDecl.elements.map(e | transform(e)).flatten
 	}
 
-	dispatch Iterable<JvmDeclaredType> transform(Entity entity) {
+	def dispatch Iterable<JvmDeclaredType> transform(Entity entity) {
 		val jvmClass = typesFactory.createJvmGenericType 
 		jvmClass.simpleName = entity.name
 		jvmClass.packageName = entity.packageName
@@ -54,11 +55,11 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 		newArrayList(jvmClass as JvmDeclaredType) 	 
 	}
 	
-	dispatch Iterable<JvmDeclaredType> transform(Import importDecl) {
+	def dispatch Iterable<JvmDeclaredType> transform(Import importDecl) {
 		emptyList
 	}
 	
-	dispatch void transform(Property property, JvmGenericType type) {
+	def dispatch void transform(Property property, JvmGenericType type) {
 		val jvmField = typesFactory.createJvmField
 		jvmField.simpleName = property.name
 		jvmField.type = cloneWithProxies(property.type)
@@ -84,7 +85,7 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 		property.associatePrimary(jvmSetter)
 	}
 	
-	dispatch void transform(Operation operation, JvmGenericType type) {
+	def dispatch void transform(Operation operation, JvmGenericType type) {
 		val jvmOperation = typesFactory.createJvmOperation
 		jvmOperation.simpleName = operation.name
 		jvmOperation.returnType = cloneWithProxies(operation.type)

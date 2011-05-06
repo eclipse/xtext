@@ -14,7 +14,7 @@ class Xtend09_DispatchMethods extends TestCase {
 	 * Have a look at the generated Java code to understand how it is mapped to Java.
 	 */
 	 
-	 dispatch toLabel(Rectangle rectangle) {
+	 def dispatch toLabel(Rectangle rectangle) {
 	 	if (rectangle.height == rectangle.width) {
 	 		'''It's a square (x : «rectangle.height»)'''
 	 	} else {
@@ -22,10 +22,10 @@ class Xtend09_DispatchMethods extends TestCase {
 	 	}
 	 }
 	 
-	 dispatch toLabel(Circle circle) 
+	 def dispatch toLabel(Circle circle) 
 	 	'''It's a circle (diameter : «circle.diameter»)'''
 	 
-	 void testDispatchMethods() {
+	 def void testDispatchMethods() {
 	 	val list = newArrayList(new Rectangle( 3, 4 ), new Circle( 3 ), new Rectangle( 5, 5 ))
 	 	for (Shape shape : list) {
 	 		println(shape.toLabel)

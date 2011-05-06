@@ -17,27 +17,27 @@ import org.eclipse.xtext.xbase.compiler.*
 
 class GeneratorExtensions extends DomainmodelExtensions {
 	
-	shortName(JvmTypeReference r, ImportManager importManager) {
+	def shortName(JvmTypeReference r, ImportManager importManager) {
 		val builder = new StringBuilder()
 		importManager.appendTypeRef(r, builder)
 		builder.toString
 	}
 	
-	fileName(Entity e) {
+	def fileName(Entity e) {
 		e.packageName.folderName + "/" + e.name + '.java'
 	}
 	
-	folderName(String javaPackageName) {
+	def folderName(String javaPackageName) {
 		if(javaPackageName != null) javaPackageName.replace('.', '/') else "" 
 	}
 	
-	parameterList(Operation o, ImportManager importManager) {
+	def parameterList(Operation o, ImportManager importManager) {
 		o.params.map(p| p.parameterType.shortName(importManager) + ' ' + p.name).join(''', 
 			'''
 		)
 	}
 	
-	isInterface(JvmTypeReference typeRef) {
+	def isInterface(JvmTypeReference typeRef) {
 		(typeRef.type as JvmGenericType).isInterface
 	}
 }

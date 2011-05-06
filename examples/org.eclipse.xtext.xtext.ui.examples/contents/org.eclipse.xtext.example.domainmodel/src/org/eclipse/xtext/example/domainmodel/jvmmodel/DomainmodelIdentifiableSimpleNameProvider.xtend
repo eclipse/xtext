@@ -6,11 +6,11 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement
 
 class DomainmodelIdentifiableSimpleNameProvider extends IdentifiableSimpleNameProvider {
 	
-	dispatch getSimpleName(JvmType element) {
+	def dispatch getSimpleName(JvmType element) {
 		return "this";
 	}
 	
-	dispatch getSimpleName(JvmIdentifiableElement element) {
+	def dispatch getSimpleName(JvmIdentifiableElement element) {
 		return super.getSimpleName(element);
 	}
 }

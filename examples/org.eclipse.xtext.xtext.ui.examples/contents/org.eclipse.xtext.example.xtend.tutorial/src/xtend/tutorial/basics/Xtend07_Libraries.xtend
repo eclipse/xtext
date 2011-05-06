@@ -7,17 +7,17 @@ import junit.framework.TestCase
 
 class Xtend07_Libraries extends TestCase {
 	
-	void testCollectionLiterals() {
+	def void testCollectionLiterals() {
 		println(newArrayList('foo','bar','baz'))
 		println(newHashMap( 2 -> 'two', 42 -> 'fourty two'))
 		println(newHashSet(1,2,3,3,3))
 	}
 	
-	void testStringUtilities() {
+	def void testStringUtilities() {
 		println('foo'.toFirstUpper)
 	}
 	
-	testHigherOrderFunctions(Iterable<String> myStrings) {
+	def testHigherOrderFunctions(Iterable<String> myStrings) {
 		
 		// find the first string with length 3
 		println(myStrings.findFirst(e|e.length == 3))
@@ -32,7 +32,7 @@ class Xtend07_Libraries extends TestCase {
 	/**
 	 * all operator are built via library
 	 */
-	operators() {
+	def operators() {
 		// string concatenation is built via library
 		println('Hello'+' '+'World!')
 		

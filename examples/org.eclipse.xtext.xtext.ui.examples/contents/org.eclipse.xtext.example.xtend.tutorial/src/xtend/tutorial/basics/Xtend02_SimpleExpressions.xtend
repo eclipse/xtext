@@ -8,37 +8,37 @@ class Xtend02_SimpleExpressions {
 	 * string literals can be multi line and 
 	 * can be terminated by either single quotes or double quotes
 	 */
-	stringLiteral() {
+	def stringLiteral() {
 		'Hello World'
 	}
 	
-	booleanLiteral() {
+	def booleanLiteral() {
 		true || false
 	}
 	
-	intLiteral() {
+	def intLiteral() {
 		42 + 21
 	}
 	
-	nullLiteral() {
+	def nullLiteral() {
 		null
 	}
 	
-	objectConstruction() {
+	def objectConstruction() {
 		new ArrayList<String>()
 	}
 	
 	/**
 	 * The equivalent to Java's String.class is typeof(String)
 	 */
-	clazzLiteral() {
+	def clazzLiteral() {
 		typeof(String)
 	}
 	
 	/**
 	 * the equivalent to Java's ((String)null) is (null as String)
 	 */
-	casts() {
+	def casts() {
 		(null as String).toString() // results in a NullPointerException
 	}
 	
@@ -46,7 +46,7 @@ class Xtend02_SimpleExpressions {
 	 * variable declaration can occure within a block expression.
 	 * Which in turn can occure everywhere an expression can occure.
 	 */
-	variableDeclaration() {
+	def variableDeclaration() {
 		val myString = 'Hello World'
 		var modifiable = {
 			val myOther = myString.toLowerCase

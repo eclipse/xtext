@@ -13,21 +13,21 @@ class Xtend03_MethodInvocation {
 	/**
 	 * Xtend supports the Java syntax
 	 */
-	simpleMethodCall_01(Object myObject) {
+	def simpleMethodCall_01(Object myObject) {
 		myObject.toString()
 	}
 	
 	/**
 	 * if a method does not take arguments you can leave out the parenthesis
 	 */
-	simpleMethodCall_02(Object myObject) {
+	def simpleMethodCall_02(Object myObject) {
 		myObject.toString
 	}
 	
 	/**
 	 * Static property or method access is done using th
 	 */
-	staticProperties() {
+	def staticProperties() {
 		System::out.println("Hello World!")
 		
 		//Note: there is a preferred built in library for this
@@ -37,7 +37,7 @@ class Xtend03_MethodInvocation {
 	/**
 	 * properties (i.e. getter and setter) can be accessed using the more readable property-syntax
 	 */
-	propertAccess(Person person) {
+	def propertAccess(Person person) {
 		person.forename = 'Joe'
 		person.name = 'Developer'
 		return person.forename+" "+person.name
@@ -50,7 +50,7 @@ class Xtend03_MethodInvocation {
 	 * 
 	 * (Tip: Hover or use F3 over an operator to go to its declaration)
 	 */
-	operatorOverloading(Amount a, Amount b) {
+	def operatorOverloading(Amount a, Amount b) {
 		return (a + b) * 2
 	}
 	
@@ -59,11 +59,11 @@ class Xtend03_MethodInvocation {
 	 * They allow for adding functions to existing types withot modifying them.
 	 * Local functions within Xtend classes can be used using the extension syntax by default.
 	 */
-	extensionMethods(String string) {
+	def extensionMethods(String string) {
 		string.splitOnUnderscore
 	}
 	
-	splitOnUnderscore(String s) {
+	def splitOnUnderscore(String s) {
 		return s.split('_')
 	}
 	
@@ -71,7 +71,7 @@ class Xtend03_MethodInvocation {
 	 * If you put the keyword 'extension' in a 'static' import, the imported static functions
 	 * can be accessed using the extension syntax as well.
 	 */
-	staticExtensionMethods(String string) {
+	def staticExtensionMethods(String string) {
 		'foo'.singletonList
 	}
 	

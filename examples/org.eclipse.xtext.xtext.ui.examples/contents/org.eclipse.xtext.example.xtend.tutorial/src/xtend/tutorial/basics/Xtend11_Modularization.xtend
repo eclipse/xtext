@@ -5,6 +5,7 @@ import com.google.inject.Guice
 import junit.framework.Assert
 import xtend.tutorial.util.Person
 import xtend.tutorial.util.XtendModule
+import com.google.inject.Inject
 
 class Xtend11_Modularization {
 	
@@ -17,7 +18,7 @@ class Xtend11_Modularization {
 	 */
 	@Inject extension Xtend11_PersonExtensions extensions
 	
-	void printTheName(Person person) {
+	def void printTheName(Person person) {
 		println( person.fullName )
 	}
 	

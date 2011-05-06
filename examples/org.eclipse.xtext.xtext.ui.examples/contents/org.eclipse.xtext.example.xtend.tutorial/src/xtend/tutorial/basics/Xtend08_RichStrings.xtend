@@ -5,7 +5,7 @@ import junit.framework.TestCase
 
 class Xtend08_RichStrings extends TestCase {
 	
-	void testRichStrings() {
+	def void testRichStrings() {
 		println(new Person("Joe", "Developer").writeLetterTo)
 	}
 	
@@ -14,7 +14,7 @@ class Xtend08_RichStrings extends TestCase {
 	 * It supports a unique automatic indentation handling, which is also refelected tooling-wise
 	 * Note the indentation before the call to signature.
 	 */
-	writeLetterTo(Person p) '''
+	def writeLetterTo(Person p) '''
 		Dear «p.forename»,
 		
 		bla bla foo
@@ -26,7 +26,7 @@ class Xtend08_RichStrings extends TestCase {
 			«signature»
 	'''
 	
-	signature() '''
+	def signature() '''
 		Bla bla Foo Bar
 		(c) 2011 - all rights reserved
 		 - note the multiline, and the correct indentation -
