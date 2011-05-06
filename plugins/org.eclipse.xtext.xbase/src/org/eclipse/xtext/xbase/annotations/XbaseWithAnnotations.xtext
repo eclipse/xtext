@@ -1,0 +1,52 @@
+/*******************************************************************************
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+grammar org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations with org.eclipse.xtext.xbase.Xbase
+
+import "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore" as xbase
+import "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore" as xtype
+import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore" as types
+import "platform:/resource/org.eclipse.xtext.xbase/model/XAnnotations.ecore"
+
+XAnnotation :
+	{XAnnotation}
+	'@' annotationType=[types::JvmAnnotationType | QualifiedName] (=>'('(
+		elementValuePairs+=XAnnotationElementValuePair (',' elementValuePairs+=XAnnotationElementValuePair)* |
+		values+=XAnnotationElementValue (',' values+=XAnnotationElementValue)*
+	)')')?
+;
+
+XAnnotationElementValuePair :
+	element=[types::JvmOperation] '=' value=XAnnotationElementValue	
+;
+
+XAnnotationElementValueStringConcatenation returns xbase::XExpression :
+	XAnnotationElementValue ({XAnnotationElementValueBinaryOperation.leftOperand = current} operator='+' rightOperand=XAnnotationElementValue)*
+;
+
+XAnnotationElementValue returns xbase::XExpression :
+	XAnnotation |
+	XAnnotationValueArray |
+	XStringLiteral |
+	XBooleanLiteral |
+	XIntLiteral |
+	XTypeLiteral |
+	XAnnotationValueFieldReference |
+	'(' XAnnotationElementValueStringConcatenation ')'
+;
+
+XAnnotationValueFieldReference returns xbase::XExpression :
+	{xbase::XFeatureCall} 
+	(declaringType=[types::JvmDeclaredType|StaticQualifier])?
+	feature=[types::JvmIdentifiableElement|IdOrSuper] 
+;
+
+XAnnotationValueArray returns xbase::XExpression :
+	{XAnnotationValueArray} 
+	'{' values+=XAnnotationElementValue (',' values+=XAnnotationElementValue)* '}'
+;
+
