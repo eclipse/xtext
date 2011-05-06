@@ -508,7 +508,12 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		result.setVarArgs(method.isVarargs());
 		for (int i = 0; i < parameterTypes.length; i++) {
 			String parameterName = parameterNames != null ? parameterNames[i] : "p" + i;
-			IAnnotationBinding[] parameterAnnotations = method.getParameterAnnotations(i);
+			IAnnotationBinding[] parameterAnnotations = null;
+			try {
+				parameterAnnotations = method.getParameterAnnotations(i);
+			} catch(@SuppressWarnings("restriction") org.eclipse.jdt.internal.compiler.problem.AbortCompilation aborted) {
+				parameterAnnotations = null;
+			}
 			result.getParameters().add(createFormalParameter(parameterTypes[i], parameterName, parameterAnnotations));
 		}
 		for (ITypeBinding exceptionType : method.getExceptionTypes()) {
@@ -560,8 +565,10 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		JvmFormalParameter result = TypesFactory.eINSTANCE.createJvmFormalParameter();
 		result.setName(paramName);
 		result.setParameterType(createTypeReference(parameterType));
-		for (IAnnotationBinding annotation : annotations) {
-			createAnnotationReference(result, annotation);
+		if (annotations != null) {
+			for (IAnnotationBinding annotation : annotations) {
+				createAnnotationReference(result, annotation);
+			}
 		}
 		return result;
 	}
