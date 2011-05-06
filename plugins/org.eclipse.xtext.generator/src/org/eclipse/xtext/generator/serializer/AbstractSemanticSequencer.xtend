@@ -80,17 +80,13 @@ class AbstractSemanticSequencer extends GeneratedFile {
 	override getFileContents() { '''
 		package «packageName»;
 		
-		import java.util.Collections;
-		import static java.util.Collections.singleton;
-		
 		import org.eclipse.emf.ecore.EObject;
-		import org.eclipse.xtext.nodemodel.ICompositeNode;
-		import org.eclipse.xtext.nodemodel.ILeafNode;
 		import org.eclipse.xtext.serializer.GenericSequencer;
 		import org.eclipse.xtext.serializer.ISemanticNodeProvider;
 		import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider;
 		import org.eclipse.xtext.serializer.ISemanticSequencer;
 		import org.eclipse.xtext.serializer.ITransientValueService;
+		import org.eclipse.xtext.serializer.acceptor.SequenceAcceptor;
 		import org.eclipse.xtext.serializer.ITransientValueService.ValueTransient;
 		import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 		import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
@@ -225,12 +221,13 @@ class AbstractSemanticSequencer extends GeneratedFile {
 							errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, «f.feature.genTypeLiteral»));
 					«ENDFOR»
 				}
-				INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
+				INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+				SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
 				«FOR f: if(c.body.featureInfo != null) newArrayList(c.body.featureInfo) else c.body.children.filter(e|e.featureInfo != null).map(e|e.featureInfo)»
 					«val assignment=f.assignments.get(0)»
-					«assignment.type.toAcceptMethod()»(semanticObject, grammarAccess.«assignment.grammarElement.gaAccessor()», semanticObject.«f.feature.getGenFeature().getAccessor»(), -1, («assignment.type.toNodeType»)nodes.getNodeForSingelValue(«f.feature.genTypeLiteral», semanticObject.«f.feature.getGenFeature().getAccessor»()));
+					acceptor.accept(grammarAccess.«assignment.grammarElement.gaAccessor()», semanticObject.«f.feature.getGenFeature().getAccessor»());
 				«ENDFOR»
-				acceptFinish();
+				acceptor.finish();
 			«ELSE»
 				genericSequencer.createSequence(context, semanticObject);
 			«ENDIF»
