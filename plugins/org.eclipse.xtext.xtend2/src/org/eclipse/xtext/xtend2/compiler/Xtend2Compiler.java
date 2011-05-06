@@ -284,9 +284,9 @@ public class Xtend2Compiler extends XbaseCompiler {
 		if (obj.isDispatch()) {
 			name = "_" + name;
 		}
-		appendable.append("\n\n");
+		appendable.append("\n");
 		generateAnnotations(obj, appendable);
-		appendable.append("public ");
+		appendable.append("\npublic ");
 		appendTypeParameterDeclaration(obj.getTypeParameters(), appendable);
 		serialize(resolveMultiType(returnType), obj, appendable);
 		appendable.append(" ").append(name).append("(");
