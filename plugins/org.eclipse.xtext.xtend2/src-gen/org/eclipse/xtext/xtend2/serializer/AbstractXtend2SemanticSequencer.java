@@ -1,16 +1,12 @@
 package org.eclipse.xtext.xtend2.serializer;
 
-import java.util.Collections;
-import static java.util.Collections.singleton;
-
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.serializer.GenericSequencer;
 import org.eclipse.xtext.serializer.ISemanticNodeProvider;
 import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.ITransientValueService;
+import org.eclipse.xtext.serializer.acceptor.SequenceAcceptor;
 import org.eclipse.xtext.serializer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
@@ -95,29 +91,25 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 					sequence_RichStringLiteralInbetween_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getInternalRichStringLiteralRule()) {
-					sequence_InternalRichStringLiteral_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
+				else if(context == grammarAccess.getRichStringLiteralStartRule()) {
+					sequence_RichStringLiteralStart_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getRichStringLiteralRule()) {
 					sequence_RichStringLiteral_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getRichStringLiteralStartRule()) {
-					sequence_RichStringLiteralStart_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
-					return; 
-				}
 				else if(context == grammarAccess.getRichStringLiteralEndRule()) {
 					sequence_RichStringLiteralEnd_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
-				else break;
-			case Xtend2Package.RICH_STRING:
-				if(context == grammarAccess.getInternalRichStringRule()) {
-					sequence_InternalRichString_RichString(context, (RichString) semanticObject); 
+				else if(context == grammarAccess.getInternalRichStringLiteralRule()) {
+					sequence_InternalRichStringLiteral_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getXStringLiteralRule() ||
+				else break;
+			case Xtend2Package.RICH_STRING:
+				if(context == grammarAccess.getXStringLiteralRule() ||
 				   context == grammarAccess.getRichStringRule() ||
 				   context == grammarAccess.getRichStringPartRule() ||
 				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
@@ -152,6 +144,10 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				   context == grammarAccess.getXParenthesizedExpressionRule() ||
 				   context == grammarAccess.getXExpressionInsideBlockRule()) {
 					sequence_RichString_RichString(context, (RichString) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getInternalRichStringRule()) {
+					sequence_InternalRichString_RichString(context, (RichString) semanticObject); 
 					return; 
 				}
 				else break;
@@ -229,12 +225,12 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				}
 				else break;
 			case TypesPackage.JVM_UPPER_BOUND:
-				if(context == grammarAccess.getJvmUpperBoundRule()) {
-					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
+					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
-					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				else if(context == grammarAccess.getJvmUpperBoundRule()) {
+					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
 				else break;
@@ -507,7 +503,11 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				}
 				else break;
 			case XbasePackage.XCLOSURE:
-				if(context == grammarAccess.getRichStringPartRule() ||
+				if(context == grammarAccess.getXShortClosureRule()) {
+					sequence_XShortClosure_XClosure(context, (XClosure) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getRichStringPartRule() ||
 				   context == grammarAccess.getXExpressionRule() ||
 				   context == grammarAccess.getXAssignmentRule() ||
 				   context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
@@ -538,10 +538,6 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				   context == grammarAccess.getXParenthesizedExpressionRule() ||
 				   context == grammarAccess.getXExpressionInsideBlockRule()) {
 					sequence_XClosure_XClosure(context, (XClosure) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getXShortClosureRule()) {
-					sequence_XShortClosure_XClosure(context, (XClosure) semanticObject); 
 					return; 
 				}
 				else break;
@@ -1159,10 +1155,11 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 			if(transientValues.isValueTransient(semanticObject, Xtend2Package.Literals.CREATE_EXTENSION_INFO__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Xtend2Package.Literals.CREATE_EXTENSION_INFO__NAME));
 		}
-		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedTerminal(semanticObject, grammarAccess.getCreateExtensionInfoAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName(), -1, (ILeafNode)nodes.getNodeForSingelValue(Xtend2Package.Literals.CREATE_EXTENSION_INFO__NAME, semanticObject.getName()));
-		acceptAssignedParserRuleCall(semanticObject, grammarAccess.getCreateExtensionInfoAccess().getCreateExpressionXExpressionParserRuleCall_3_0(), semanticObject.getCreateExpression(), -1, (ICompositeNode)nodes.getNodeForSingelValue(Xtend2Package.Literals.CREATE_EXTENSION_INFO__CREATE_EXPRESSION, semanticObject.getCreateExpression()));
-		acceptFinish();
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		acceptor.accept(grammarAccess.getCreateExtensionInfoAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		acceptor.accept(grammarAccess.getCreateExtensionInfoAccess().getCreateExpressionXExpressionParserRuleCall_3_0(), semanticObject.getCreateExpression());
+		acceptor.finish();
 	}
 	
 	
@@ -1208,9 +1205,10 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 			if(transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE));
 		}
-		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedTerminal(semanticObject, grammarAccess.getInternalRichStringLiteralAccess().getValueRICH_TEXT_INBETWEENTerminalRuleCall_1_0(), semanticObject.getValue(), -1, (ILeafNode)nodes.getNodeForSingelValue(XbasePackage.Literals.XSTRING_LITERAL__VALUE, semanticObject.getValue()));
-		acceptFinish();
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		acceptor.accept(grammarAccess.getInternalRichStringLiteralAccess().getValueRICH_TEXT_INBETWEENTerminalRuleCall_1_0(), semanticObject.getValue());
+		acceptor.finish();
 	}
 	
 	
@@ -1423,10 +1421,11 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 			if(transientValues.isValueTransient(semanticObject, Xtend2Package.Literals.RICH_STRING_ELSE_IF__THEN) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Xtend2Package.Literals.RICH_STRING_ELSE_IF__THEN));
 		}
-		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedParserRuleCall(semanticObject, grammarAccess.getRichStringElseIfAccess().getIfXExpressionParserRuleCall_1_0(), semanticObject.getIf(), -1, (ICompositeNode)nodes.getNodeForSingelValue(Xtend2Package.Literals.RICH_STRING_ELSE_IF__IF, semanticObject.getIf()));
-		acceptAssignedParserRuleCall(semanticObject, grammarAccess.getRichStringElseIfAccess().getThenInternalRichStringParserRuleCall_2_0(), semanticObject.getThen(), -1, (ICompositeNode)nodes.getNodeForSingelValue(Xtend2Package.Literals.RICH_STRING_ELSE_IF__THEN, semanticObject.getThen()));
-		acceptFinish();
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		acceptor.accept(grammarAccess.getRichStringElseIfAccess().getIfXExpressionParserRuleCall_1_0(), semanticObject.getIf());
+		acceptor.accept(grammarAccess.getRichStringElseIfAccess().getThenInternalRichStringParserRuleCall_2_0(), semanticObject.getThen());
+		acceptor.finish();
 	}
 	
 	
@@ -1482,9 +1481,10 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 			if(transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE));
 		}
-		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedTerminal(semanticObject, grammarAccess.getRichStringLiteralEndAccess().getValueRICH_TEXT_ENDTerminalRuleCall_1_0(), semanticObject.getValue(), -1, (ILeafNode)nodes.getNodeForSingelValue(XbasePackage.Literals.XSTRING_LITERAL__VALUE, semanticObject.getValue()));
-		acceptFinish();
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		acceptor.accept(grammarAccess.getRichStringLiteralEndAccess().getValueRICH_TEXT_ENDTerminalRuleCall_1_0(), semanticObject.getValue());
+		acceptor.finish();
 	}
 	
 	
@@ -1500,9 +1500,10 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 			if(transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE));
 		}
-		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedTerminal(semanticObject, grammarAccess.getRichStringLiteralInbetweenAccess().getValueRICH_TEXT_INBETWEENTerminalRuleCall_1_0(), semanticObject.getValue(), -1, (ILeafNode)nodes.getNodeForSingelValue(XbasePackage.Literals.XSTRING_LITERAL__VALUE, semanticObject.getValue()));
-		acceptFinish();
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		acceptor.accept(grammarAccess.getRichStringLiteralInbetweenAccess().getValueRICH_TEXT_INBETWEENTerminalRuleCall_1_0(), semanticObject.getValue());
+		acceptor.finish();
 	}
 	
 	
@@ -1518,9 +1519,10 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 			if(transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE));
 		}
-		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedTerminal(semanticObject, grammarAccess.getRichStringLiteralStartAccess().getValueRICH_TEXT_STARTTerminalRuleCall_1_0(), semanticObject.getValue(), -1, (ILeafNode)nodes.getNodeForSingelValue(XbasePackage.Literals.XSTRING_LITERAL__VALUE, semanticObject.getValue()));
-		acceptFinish();
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		acceptor.accept(grammarAccess.getRichStringLiteralStartAccess().getValueRICH_TEXT_STARTTerminalRuleCall_1_0(), semanticObject.getValue());
+		acceptor.finish();
 	}
 	
 	
@@ -1536,9 +1538,10 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 			if(transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE));
 		}
-		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedTerminal(semanticObject, grammarAccess.getRichStringLiteralAccess().getValueRICH_TEXTTerminalRuleCall_1_0(), semanticObject.getValue(), -1, (ILeafNode)nodes.getNodeForSingelValue(XbasePackage.Literals.XSTRING_LITERAL__VALUE, semanticObject.getValue()));
-		acceptFinish();
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		acceptor.accept(grammarAccess.getRichStringLiteralAccess().getValueRICH_TEXTTerminalRuleCall_1_0(), semanticObject.getValue());
+		acceptor.finish();
 	}
 	
 	
@@ -1977,9 +1980,10 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 			if(transientValues.isValueTransient(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XbasePackage.Literals.XSTRING_LITERAL__VALUE));
 		}
-		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedTerminal(semanticObject, grammarAccess.getXStringLiteralAccess().getValueSTRINGTerminalRuleCall_0_1_0(), semanticObject.getValue(), -1, (ILeafNode)nodes.getNodeForSingelValue(XbasePackage.Literals.XSTRING_LITERAL__VALUE, semanticObject.getValue()));
-		acceptFinish();
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		acceptor.accept(grammarAccess.getXStringLiteralAccess().getValueSTRINGTerminalRuleCall_0_1_0(), semanticObject.getValue());
+		acceptor.finish();
 	}
 	
 	
