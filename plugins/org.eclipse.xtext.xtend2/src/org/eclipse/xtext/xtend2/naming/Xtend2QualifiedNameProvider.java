@@ -35,6 +35,8 @@ public class Xtend2QualifiedNameProvider extends IQualifiedNameProvider.Abstract
 				|| obj instanceof XtendFunction 
 				|| obj instanceof XtendField) {
 			final String qualifiedName = ((JvmIdentifiableElement) obj).getQualifiedName();
+			if (qualifiedName == null)
+				return null;
 			return qualifiedNameConverter.toQualifiedName(qualifiedName);
 		}
 		return null;
