@@ -1,16 +1,12 @@
 package org.eclipse.xtext.serializer.serializer;
 
-import java.util.Collections;
-import static java.util.Collections.singleton;
-
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.serializer.GenericSequencer;
 import org.eclipse.xtext.serializer.ISemanticNodeProvider;
 import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.ITransientValueService;
+import org.eclipse.xtext.serializer.acceptor.SequenceAcceptor;
 import org.eclipse.xtext.serializer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
@@ -172,10 +168,11 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.ADD0__RIGHT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.ADD0__RIGHT));
 		}
-		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedAction(semanticObject, grammarAccess.getAddition0Access().getAdd0LeftAction_1_0(), semanticObject.getLeft(), -1, (ICompositeNode)nodes.getNodeForSingelValue(SyntacticsequencertestPackage.Literals.ADD0__LEFT, semanticObject.getLeft()));
-		acceptAssignedParserRuleCall(semanticObject, grammarAccess.getAddition0Access().getRightPrim0ParserRuleCall_1_2_0(), semanticObject.getRight(), -1, (ICompositeNode)nodes.getNodeForSingelValue(SyntacticsequencertestPackage.Literals.ADD0__RIGHT, semanticObject.getRight()));
-		acceptFinish();
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		acceptor.accept(grammarAccess.getAddition0Access().getAdd0LeftAction_1_0(), semanticObject.getLeft());
+		acceptor.accept(grammarAccess.getAddition0Access().getRightPrim0ParserRuleCall_1_2_0(), semanticObject.getRight());
+		acceptor.finish();
 	}
 	
 	
@@ -194,10 +191,11 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.ADD1__RIGHT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.ADD1__RIGHT));
 		}
-		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedAction(semanticObject, grammarAccess.getAddition1Access().getAdd1LeftAction_1_0(), semanticObject.getLeft(), -1, (ICompositeNode)nodes.getNodeForSingelValue(SyntacticsequencertestPackage.Literals.ADD1__LEFT, semanticObject.getLeft()));
-		acceptAssignedParserRuleCall(semanticObject, grammarAccess.getAddition1Access().getRightPrim1ParserRuleCall_1_2_0(), semanticObject.getRight(), -1, (ICompositeNode)nodes.getNodeForSingelValue(SyntacticsequencertestPackage.Literals.ADD1__RIGHT, semanticObject.getRight()));
-		acceptFinish();
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		acceptor.accept(grammarAccess.getAddition1Access().getAdd1LeftAction_1_0(), semanticObject.getLeft());
+		acceptor.accept(grammarAccess.getAddition1Access().getRightPrim1ParserRuleCall_1_2_0(), semanticObject.getRight());
+		acceptor.finish();
 	}
 	
 	
@@ -216,10 +214,11 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.ADD2__RIGHT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.ADD2__RIGHT));
 		}
-		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedAction(semanticObject, grammarAccess.getAddition2Access().getAdd2LeftAction_1_0(), semanticObject.getLeft(), -1, (ICompositeNode)nodes.getNodeForSingelValue(SyntacticsequencertestPackage.Literals.ADD2__LEFT, semanticObject.getLeft()));
-		acceptAssignedParserRuleCall(semanticObject, grammarAccess.getAddition2Access().getRightMultiplication2ParserRuleCall_1_2_0(), semanticObject.getRight(), -1, (ICompositeNode)nodes.getNodeForSingelValue(SyntacticsequencertestPackage.Literals.ADD2__RIGHT, semanticObject.getRight()));
-		acceptFinish();
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		acceptor.accept(grammarAccess.getAddition2Access().getAdd2LeftAction_1_0(), semanticObject.getLeft());
+		acceptor.accept(grammarAccess.getAddition2Access().getRightMultiplication2ParserRuleCall_1_2_0(), semanticObject.getRight());
+		acceptor.finish();
 	}
 	
 	
@@ -247,9 +246,10 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.BOOLEAN_ALTERNATIVE__BOOL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.BOOLEAN_ALTERNATIVE__BOOL));
 		}
-		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedParserRuleCall(semanticObject, grammarAccess.getBooleanAlternativeAccess().getBoolBooleanAlternativeLiteralParserRuleCall_1_0(), semanticObject.getBool(), -1, (ICompositeNode)nodes.getNodeForSingelValue(SyntacticsequencertestPackage.Literals.BOOLEAN_ALTERNATIVE__BOOL, semanticObject.getBool()));
-		acceptFinish();
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		acceptor.accept(grammarAccess.getBooleanAlternativeAccess().getBoolBooleanAlternativeLiteralParserRuleCall_1_0(), semanticObject.getBool());
+		acceptor.finish();
 	}
 	
 	
@@ -271,11 +271,12 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.MANDATORY_KEYWORDS__VAL3) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.MANDATORY_KEYWORDS__VAL3));
 		}
-		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedTerminal(semanticObject, grammarAccess.getMandatoryKeywordsAccess().getVal1IDTerminalRuleCall_1_0(), semanticObject.getVal1(), -1, (ILeafNode)nodes.getNodeForSingelValue(SyntacticsequencertestPackage.Literals.MANDATORY_KEYWORDS__VAL1, semanticObject.getVal1()));
-		acceptAssignedTerminal(semanticObject, grammarAccess.getMandatoryKeywordsAccess().getVal2IDTerminalRuleCall_3_0(), semanticObject.getVal2(), -1, (ILeafNode)nodes.getNodeForSingelValue(SyntacticsequencertestPackage.Literals.MANDATORY_KEYWORDS__VAL2, semanticObject.getVal2()));
-		acceptAssignedTerminal(semanticObject, grammarAccess.getMandatoryKeywordsAccess().getVal3IDTerminalRuleCall_6_0(), semanticObject.getVal3(), -1, (ILeafNode)nodes.getNodeForSingelValue(SyntacticsequencertestPackage.Literals.MANDATORY_KEYWORDS__VAL3, semanticObject.getVal3()));
-		acceptFinish();
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		acceptor.accept(grammarAccess.getMandatoryKeywordsAccess().getVal1IDTerminalRuleCall_1_0(), semanticObject.getVal1());
+		acceptor.accept(grammarAccess.getMandatoryKeywordsAccess().getVal2IDTerminalRuleCall_3_0(), semanticObject.getVal2());
+		acceptor.accept(grammarAccess.getMandatoryKeywordsAccess().getVal3IDTerminalRuleCall_6_0(), semanticObject.getVal3());
+		acceptor.finish();
 	}
 	
 	
@@ -349,10 +350,11 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.MULT2__RIGHT) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.MULT2__RIGHT));
 		}
-		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedAction(semanticObject, grammarAccess.getMultiplication2Access().getMult2LeftAction_1_0(), semanticObject.getLeft(), -1, (ICompositeNode)nodes.getNodeForSingelValue(SyntacticsequencertestPackage.Literals.MULT2__LEFT, semanticObject.getLeft()));
-		acceptAssignedParserRuleCall(semanticObject, grammarAccess.getMultiplication2Access().getRightPrim2ParserRuleCall_1_2_0(), semanticObject.getRight(), -1, (ICompositeNode)nodes.getNodeForSingelValue(SyntacticsequencertestPackage.Literals.MULT2__RIGHT, semanticObject.getRight()));
-		acceptFinish();
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		acceptor.accept(grammarAccess.getMultiplication2Access().getMult2LeftAction_1_0(), semanticObject.getLeft());
+		acceptor.accept(grammarAccess.getMultiplication2Access().getRightPrim2ParserRuleCall_1_2_0(), semanticObject.getRight());
+		acceptor.finish();
 	}
 	
 	
@@ -368,9 +370,10 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.VAL0__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.VAL0__NAME));
 		}
-		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedTerminal(semanticObject, grammarAccess.getPrim0Access().getNameIDTerminalRuleCall_1_0(), semanticObject.getName(), -1, (ILeafNode)nodes.getNodeForSingelValue(SyntacticsequencertestPackage.Literals.VAL0__NAME, semanticObject.getName()));
-		acceptFinish();
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		acceptor.accept(grammarAccess.getPrim0Access().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		acceptor.finish();
 	}
 	
 	
@@ -386,9 +389,10 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.VAL1__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.VAL1__NAME));
 		}
-		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedTerminal(semanticObject, grammarAccess.getPrim1Access().getNameIDTerminalRuleCall_0_1_0(), semanticObject.getName(), -1, (ILeafNode)nodes.getNodeForSingelValue(SyntacticsequencertestPackage.Literals.VAL1__NAME, semanticObject.getName()));
-		acceptFinish();
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		acceptor.accept(grammarAccess.getPrim1Access().getNameIDTerminalRuleCall_0_1_0(), semanticObject.getName());
+		acceptor.finish();
 	}
 	
 	
@@ -404,9 +408,10 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.VAL2__NAME) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.VAL2__NAME));
 		}
-		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedTerminal(semanticObject, grammarAccess.getPrim2Access().getNameIDTerminalRuleCall_0_1_0(), semanticObject.getName(), -1, (ILeafNode)nodes.getNodeForSingelValue(SyntacticsequencertestPackage.Literals.VAL2__NAME, semanticObject.getName()));
-		acceptFinish();
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		acceptor.accept(grammarAccess.getPrim2Access().getNameIDTerminalRuleCall_0_1_0(), semanticObject.getName());
+		acceptor.finish();
 	}
 	
 	

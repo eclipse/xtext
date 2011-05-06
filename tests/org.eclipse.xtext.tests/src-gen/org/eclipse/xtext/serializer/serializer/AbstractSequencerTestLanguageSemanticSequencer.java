@@ -1,16 +1,12 @@
 package org.eclipse.xtext.serializer.serializer;
 
-import java.util.Collections;
-import static java.util.Collections.singleton;
-
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.serializer.GenericSequencer;
 import org.eclipse.xtext.serializer.ISemanticNodeProvider;
 import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.ITransientValueService;
+import org.eclipse.xtext.serializer.acceptor.SequenceAcceptor;
 import org.eclipse.xtext.serializer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
@@ -860,10 +856,11 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 			if(transientValues.isValueTransient(semanticObject, SequencertestPackage.Literals.SIMPLE_GROUP__VAL2) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SequencertestPackage.Literals.SIMPLE_GROUP__VAL2));
 		}
-		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedTerminal(semanticObject, grammarAccess.getSimpleGroupAccess().getVal1IDTerminalRuleCall_1_0(), semanticObject.getVal1(), -1, (ILeafNode)nodes.getNodeForSingelValue(SequencertestPackage.Literals.SIMPLE_GROUP__VAL1, semanticObject.getVal1()));
-		acceptAssignedTerminal(semanticObject, grammarAccess.getSimpleGroupAccess().getVal2IDTerminalRuleCall_2_0(), semanticObject.getVal2(), -1, (ILeafNode)nodes.getNodeForSingelValue(SequencertestPackage.Literals.SIMPLE_GROUP__VAL2, semanticObject.getVal2()));
-		acceptFinish();
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		acceptor.accept(grammarAccess.getSimpleGroupAccess().getVal1IDTerminalRuleCall_1_0(), semanticObject.getVal1());
+		acceptor.accept(grammarAccess.getSimpleGroupAccess().getVal2IDTerminalRuleCall_2_0(), semanticObject.getVal2());
+		acceptor.finish();
 	}
 	
 	
@@ -894,9 +891,10 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 			if(transientValues.isValueTransient(semanticObject, SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD1__VAL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD1__VAL));
 		}
-		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedKeyword(semanticObject, grammarAccess.getSingleContainmentReferenceChild1Access().getValKw1Keyword_0(), semanticObject.getVal(), -1, (ILeafNode)nodes.getNodeForSingelValue(SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD1__VAL, semanticObject.getVal()));
-		acceptFinish();
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		acceptor.accept(grammarAccess.getSingleContainmentReferenceChild1Access().getValKw1Keyword_0(), semanticObject.getVal());
+		acceptor.finish();
 	}
 	
 	
@@ -912,9 +910,10 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 			if(transientValues.isValueTransient(semanticObject, SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD2__VAL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD2__VAL));
 		}
-		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedKeyword(semanticObject, grammarAccess.getSingleContainmentReferenceChild2Access().getValKw2Keyword_0(), semanticObject.getVal(), -1, (ILeafNode)nodes.getNodeForSingelValue(SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD2__VAL, semanticObject.getVal()));
-		acceptFinish();
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		acceptor.accept(grammarAccess.getSingleContainmentReferenceChild2Access().getValKw2Keyword_0(), semanticObject.getVal());
+		acceptor.finish();
 	}
 	
 	
@@ -930,9 +929,10 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 			if(transientValues.isValueTransient(semanticObject, SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD3__VAL) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD3__VAL));
 		}
-		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
-		acceptAssignedKeyword(semanticObject, grammarAccess.getSingleContainmentReferenceChild3Access().getValKw3Keyword_0(), semanticObject.getVal(), -1, (ILeafNode)nodes.getNodeForSingelValue(SequencertestPackage.Literals.SINGLE_CONTAINMENT_REFERENCE_CHILD3__VAL, semanticObject.getVal()));
-		acceptFinish();
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		acceptor.accept(grammarAccess.getSingleContainmentReferenceChild3Access().getValKw3Keyword_0(), semanticObject.getVal());
+		acceptor.finish();
 	}
 	
 	

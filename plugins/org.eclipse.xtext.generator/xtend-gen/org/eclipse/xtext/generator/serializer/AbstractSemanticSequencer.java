@@ -24,7 +24,6 @@ import org.eclipse.xtext.generator.grammarAccess.GrammarAccess;
 import org.eclipse.xtext.generator.serializer.GeneratedFile;
 import org.eclipse.xtext.generator.serializer.SemanticSequencer;
 import org.eclipse.xtext.generator.serializer.SemanticSequencerUtil;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.ConstraintElementType;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintElement;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IFeatureInfo;
@@ -253,16 +252,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("import java.util.Collections;");
-    _builder.newLine();
-    _builder.append("import static java.util.Collections.singleton;");
-    _builder.newLine();
-    _builder.newLine();
     _builder.append("import org.eclipse.emf.ecore.EObject;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.xtext.nodemodel.ICompositeNode;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.xtext.nodemodel.ILeafNode;");
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.serializer.GenericSequencer;");
     _builder.newLine();
@@ -273,6 +263,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     _builder.append("import org.eclipse.xtext.serializer.ISemanticSequencer;");
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.serializer.ITransientValueService;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.serializer.acceptor.SequenceAcceptor;");
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.serializer.ITransientValueService.ValueTransient;");
     _builder.newLine();
@@ -707,7 +699,10 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           _builder.append("}");
           _builder.newLine();
           _builder.append("\t");
-          _builder.append("INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);");
+          _builder.append("INodesForEObjectProvider nodes = createNodeProvider(semanticObject);");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);");
           _builder.newLine();
           {
             Iterable<IFeatureInfo> _xifexpression_1 = null;
@@ -746,10 +741,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
               final IConstraintElement assignment = _get;
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
-              ConstraintElementType _type_2 = assignment.getType();
-              String _acceptMethod = this.sequencerUtil.toAcceptMethod(_type_2);
-              _builder.append(_acceptMethod, "	");
-              _builder.append("(semanticObject, grammarAccess.");
+              _builder.append("acceptor.accept(grammarAccess.");
               AbstractElement _grammarElement = assignment.getGrammarElement();
               String _gaAccessor = this.grammarAccess.gaAccessor(_grammarElement);
               _builder.append(_gaAccessor, "	");
@@ -758,25 +750,12 @@ public class AbstractSemanticSequencer extends GeneratedFile {
               GenFeature _genFeature = GenModelAccess.getGenFeature(_feature_2);
               String _getAccessor = _genFeature.getGetAccessor();
               _builder.append(_getAccessor, "	");
-              _builder.append("(), -1, (");
-              ConstraintElementType _type_3 = assignment.getType();
-              String _nodeType = this.sequencerUtil.toNodeType(_type_3);
-              _builder.append(_nodeType, "	");
-              _builder.append(")nodes.getNodeForSingelValue(");
-              EStructuralFeature _feature_3 = f_2.getFeature();
-              String _genTypeLiteral_2 = GenModelAccess.getGenTypeLiteral(_feature_3);
-              _builder.append(_genTypeLiteral_2, "	");
-              _builder.append(", semanticObject.");
-              EStructuralFeature _feature_4 = f_2.getFeature();
-              GenFeature _genFeature_1 = GenModelAccess.getGenFeature(_feature_4);
-              String _getAccessor_1 = _genFeature_1.getGetAccessor();
-              _builder.append(_getAccessor_1, "	");
-              _builder.append("()));");
+              _builder.append("());");
               _builder.newLineIfNotEmpty();
             }
           }
           _builder.append("\t");
-          _builder.append("acceptFinish();");
+          _builder.append("acceptor.finish();");
           _builder.newLine();} else {
           _builder.append("\t");
           _builder.append("genericSequencer.createSequence(context, semanticObject);");
