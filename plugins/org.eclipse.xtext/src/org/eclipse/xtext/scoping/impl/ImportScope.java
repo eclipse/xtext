@@ -99,7 +99,13 @@ public class ImportScope extends AbstractScope {
 		return filter(aliasedElements, new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
 				IEObjectDescription description = getSingleLocalElementByName(input.getName());
-				return description!=null && description.getEObjectOrProxy()==input.getEObjectOrProxy();
+				if (description==null)
+					return false;
+				if (description.getEObjectOrProxy()==input.getEObjectOrProxy())
+					return true;
+				if (input.getEObjectURI().equals(description.getEObjectURI()))
+					return true;
+				return false;
 			}
 		});
 	}
