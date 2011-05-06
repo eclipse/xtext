@@ -366,6 +366,8 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 		protected void addChild(ConstraintElement child) {
 			child.container = this;
+			if (child == INVALID || child == TYPEMATCH)
+				throw new RuntimeException("This is not a valid child: '" + child + "'");
 			this.children.add(child);
 			if (child.isTypeMatch())
 				typeMatch();
@@ -1096,12 +1098,15 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		if (!visited.add(state))
 			return INVALID;
 		List<ConstraintElement> followers = Lists.newArrayList();
-		boolean allInvalid = true, containsOne = false;
+		boolean allInvalid = true, containsOne = false, typematch = false;
 		for (ActionFilterTransition t : state.getAllOutgoing())
 			if (!t.isRuleCall() && t.getTarget() != state) {
 				containsOne = true;
 				ConstraintElement f = createConstraintElement(context, t.getTarget(), requiredType, true, visited);
-				if (f != INVALID) {
+				if (f == TYPEMATCH) {
+					allInvalid = false;
+					typematch = true;
+				} else if (f != INVALID) {
 					allInvalid = false;
 					if (f != null)
 						followers.add(f);
@@ -1111,8 +1116,9 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return INVALID;
 		ConstraintElement local = allowLocal ? createConstraintElement(context, state.getGrammarElement(),
 				requiredType, visited) : null;
-		if (allowLocal && state.isEndState()
-				&& !GrammarUtil.isUnassignedEObjectRuleCall(state.getGrammarElement())) {
+		if (typematch && local != null)
+			local.typeMatch();
+		if (allowLocal && state.isEndState() && !GrammarUtil.isUnassignedEObjectRuleCall(state.getGrammarElement())) {
 			if (GrammarUtil.containingRule(state.getGrammarElement()).getType().getClassifier() != requiredType
 					&& (local == null || !local.isTypeMatch()))
 				return INVALID;
@@ -1120,7 +1126,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		if (local == INVALID && !GrammarUtil.isOptionalCardinality(state.getGrammarElement()))
 			return INVALID;
 		if (followers.isEmpty())
-			return local == INVALID || local == null ? null : local;
+			return local == INVALID || local == null ? (typematch ? TYPEMATCH : null) : local;
 		if (local != INVALID && local != null)
 			for (int i = 0; i < followers.size(); i++) {
 				ConstraintElement follower = followers.get(i);
@@ -1291,7 +1297,9 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				} else if (ce != null && ce != INVALID) {
 					Constraint constraint = new ActionConstraint(context, type, ce, context2Name);
 					result.addConstraint(constraint);
-				}
+				} else
+					System.err.println("constraint is " + ce + " for context " + context2Name.getContextName(context)
+							+ " and type " + type.getName());
 			}
 		}
 		return result;
