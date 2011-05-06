@@ -145,10 +145,12 @@ public class RenameLinkedMode {
 			popup.close();
 		}
 
-		ISourceViewer viewer = editor.getInternalSourceViewer();
-		if (viewer instanceof IEditingSupportRegistry) {
-			IEditingSupportRegistry registry = (IEditingSupportRegistry) viewer;
-			registry.unregister(focusEditingSupport);
+		if (editor != null) {
+			ISourceViewer viewer = editor.getInternalSourceViewer();
+			if (viewer instanceof IEditingSupportRegistry) {
+				IEditingSupportRegistry registry = (IEditingSupportRegistry) viewer;
+				registry.unregister(focusEditingSupport);
+			}
 		}
 	}
 
