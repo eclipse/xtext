@@ -15,6 +15,7 @@ import com.google.common.collect.Lists
 import java.util.Map
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider
 import org.eclipse.emf.ecore.EcorePackage
+import com.google.inject.Inject
 
 class AbstractSemanticSequencer extends GeneratedFile {
 	
@@ -30,50 +31,50 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		grammar.getName("Abstract", "SemanticSequencer");		
 	}
 	
-	Iterable<EPackage> getAccessedPackages() {
+	def Iterable<EPackage> getAccessedPackages() {
 		grammar.grammarConstraints.filter(e|e.type != null).map(e|e.type.EPackage).toSet
 	}
 	
-	Iterable<EClass> getAccessedClasses(EPackage pkg) {
+	def Iterable<EClass> getAccessedClasses(EPackage pkg) {
 		grammar.grammarConstraints.map(e|e.type).filter(e|e != null && e.EPackage == pkg).toSet
 	}
 	
-	Iterable<EClass> getAccessedClasses() {
+	def Iterable<EClass> getAccessedClasses() {
 		grammar.grammarConstraints.map(e|e.type).toSet
 	}
 	
-	getAccessedConstraints(EClass clazz) {
+	def getAccessedConstraints(EClass clazz) {
 		grammar.getGrammarConstraints(clazz)
 	}
 	
-	getAccessedContexts(EClass clazz) {
+	def getAccessedContexts(EClass clazz) {
 		grammar.getGrammarContexts(clazz)
 	}
 	
-	getAccessedContexts() {
+	def getAccessedContexts() {
 		grammar.getGrammarContexts()
 	}
 	
-	getAccessedConstraints() {
+	def getAccessedConstraints() {
 		grammar.getGrammarConstraints()
 	}
 	
-	getGrammars(IGrammarConstraintProvider$IConstraintElement ele) {
+	def getGrammars(IGrammarConstraintProvider$IConstraintElement ele) {
 		val result = <Grammar>newHashSet();
 		if(ele != null && ele.grammarElement != null) result.add(ele.grammarElement.grammar);
 		if(ele != null && ele.children != null) for(g:ele.children.map(c|c.grammars).flatten) result.add(g);
 		return result;
 	}
 	
-	uses(Grammar g1, Grammar g2) {
+	def uses(Grammar g1, Grammar g2) {
 		g1 != null && g1.usedGrammars.exists(e|e == g2 || e.uses(g2))
 	}
 	
-	getMostConcreteGrammar(IGrammarConstraintProvider$IConstraint constraint) {
+	def getMostConcreteGrammar(IGrammarConstraintProvider$IConstraint constraint) {
 		constraint.body.grammars.reduce(x, y | if(x.uses(y)) x else y)
 	}
 	
-	usesSuperGrammar() {
+	def usesSuperGrammar() {
 		accessedConstraints.map(c|c.mostConcreteGrammar).exists(g|g!=grammar)
 	}
 	
@@ -179,7 +180,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 //		}
 //	'''
 	
-	genMethodCreateSequence() '''
+	def genMethodCreateSequence() '''
 		public void createSequence(EObject context, EObject semanticObject) {
 			«var pkgi = 0 »
 			«FOR pkg:accessedPackages /* ITERATOR i */»
@@ -201,7 +202,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		}
 	'''
 	
-	genMethodSequence(IGrammarConstraintProvider$IConstraint c) '''
+	def genMethodSequence(IGrammarConstraintProvider$IConstraint c) '''
 		/**
 		 * Constraint:
 		 *     «if(c.body == null) "{"+c.type.name+"}" else c.body.toString().replaceAll("\\n","\n*     ")»

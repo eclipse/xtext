@@ -2,6 +2,7 @@ package org.eclipse.xtext.generator.serializer
 
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.generator.Naming
+import com.google.inject.Inject
 
 class GeneratedFile {
 	
@@ -9,39 +10,39 @@ class GeneratedFile {
 	
 	@Inject extension Naming naming
 	
-	String getName(Grammar grammar, String prefix, String component) {
+	def String getName(Grammar grammar, String prefix, String component) {
 		grammar.basePackageRuntime + ".serializer." + prefix + grammar.name.toSimpleName + component
 	}
 	
-	String getQualifiedName() {
+	def String getQualifiedName() {
 		grammar.qualifiedName;		
 	}
 	
-	String getQualifiedName(Grammar grammar) {
+	def String getQualifiedName(Grammar grammar) {
 		// abstract		
 	}
 	
-	String getPackageName() {
+	def String getPackageName() {
 		qualifiedName.toPackageName
 	}
 	
-	String getSimpleName() {
+	def String getSimpleName() {
 		qualifiedName.toSimpleName
 	}
 	
-	String getSimpleName(Grammar grammar) {
+	def String getSimpleName(Grammar grammar) {
 		grammar.qualifiedName.toSimpleName
 	}
 	
-	String getFileName() {
+	def String getFileName() {
 		qualifiedName.asPath + "." + fileExtension;
 	}
 	
-	String getFileExtension() {
+	def String getFileExtension() {
 		"java";
 	}
 	
-	String getFileContents() {
+	def String getFileContents() {
 		"<not implemented>";
 	}
 }

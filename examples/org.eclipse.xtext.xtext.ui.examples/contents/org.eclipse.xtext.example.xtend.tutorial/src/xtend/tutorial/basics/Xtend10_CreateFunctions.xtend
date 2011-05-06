@@ -15,7 +15,7 @@ import xtend.tutorial.util.NetNode
  */
 class Xtend10_CreateFunctions extends TestCase {
 	
-	void testCreateFunctions() {
+	def void testCreateFunctions() {
 		val nodeA = new NetNode()
 		nodeA.name = "A"
 		val nodeB = new NetNode()
@@ -41,7 +41,7 @@ class Xtend10_CreateFunctions extends TestCase {
 	 * create a copy of the given NetNode
 	 * initializes the fields lazily
 	 */
-	create result : new NetNode() copyNet(NetNode toCopy) {
+	def create result : new NetNode() copyNet(NetNode toCopy) {
 		result.name = toCopy.name
 		result.references = toCopy.references.map( node | node.copyNet)
 	}

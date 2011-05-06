@@ -18,6 +18,7 @@ import org.eclipse.xtext.scoping.impl.MapBasedScope
 import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.EcoreUtil2
+import com.google.inject.Inject
 
 class DomainmodelScopeProvider extends XbaseScopeProvider {
 
@@ -40,11 +41,11 @@ class DomainmodelScopeProvider extends XbaseScopeProvider {
 		return super.createLocalVarScope(context, reference, parent, includeCurrentBlock, idx)
 	}
 	
-	createIEObjectDescription(JvmFormalParameter jvmFormalParameter) {
+	def createIEObjectDescription(JvmFormalParameter jvmFormalParameter) {
 		EObjectDescription::^create(QualifiedName::^create(jvmFormalParameter.name), jvmFormalParameter, null);
 	}
 
-	JvmType getJvmType(Entity entity) {
+	def JvmType getJvmType(Entity entity) {
 		entity.jvmElements.filter(typeof(JvmType)).head
 	}
 	

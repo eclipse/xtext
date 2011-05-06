@@ -17,6 +17,7 @@ import org.eclipse.xtext.generator.Binding
 import org.eclipse.xtext.serializer.ISerializer
 import org.eclipse.xtext.serializer.impl.Serializer
 import org.eclipse.xtext.serializer.impl.ContextUtil
+import com.google.inject.Inject
 
 class SerializerFragment extends Xtend2GeneratorFragment {
 	
@@ -28,9 +29,9 @@ class SerializerFragment extends Xtend2GeneratorFragment {
 	
 	@Inject Context2DotRenderer dotRenderer
 	
-	create result: new SerializerFragmentState() state() {}
+	def create result: new SerializerFragmentState() state() {}
 	
-	setGenerateDebugData(boolean doGenerate) {
+	def setGenerateDebugData(boolean doGenerate) {
 		state.generateDebugData = doGenerate
 	}
 	

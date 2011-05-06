@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.*
 import org.eclipse.xtext.example.domainmodel.domainmodel.*
 import org.eclipse.xtext.common.types.*
 import java.util.*
+import com.google.inject.Inject
 import static extension org.eclipse.xtext.xtend2.lib.ResourceExtensions.*
 
 class DomainmodelGenerator implements IGenerator {
@@ -29,7 +30,7 @@ class DomainmodelGenerator implements IGenerator {
 		}
 	}
 	
-	compile(Entity e) ''' 
+	def compile(Entity e) ''' 
 		«val importManager = new ImportManager(true)»
 		«/* first evaluate the body in order to collect the used types for the import section */
 		val body = body(e, importManager)»
@@ -44,7 +45,7 @@ class DomainmodelGenerator implements IGenerator {
 		«body»
 	'''
 	
-	body(Entity e, ImportManager importManager) '''
+	def body(Entity e, ImportManager importManager) '''
 		public class «e.name» «e.superTypeClause(importManager)»{
 			«FOR f:e.features»
 				«feature(f, importManager)»
@@ -52,7 +53,7 @@ class DomainmodelGenerator implements IGenerator {
 		}
 	'''   
 	
-	superTypeClause(Entity e, ImportManager importManager) {
+	def superTypeClause(Entity e, ImportManager importManager) {
 		if(e.superType != null)
 			(if (e.superType.isInterface) 
 				'implements ' 
@@ -61,7 +62,7 @@ class DomainmodelGenerator implements IGenerator {
 		else ""    
 	}
 	
-	dispatch feature(Property p, ImportManager importManager) '''
+	def dispatch feature(Property p, ImportManager importManager) '''
 		private «p.type.shortName(importManager)» «p.name»;
 			
 		public «p.type.shortName(importManager)» get«p.name.toFirstUpper»() {
@@ -73,7 +74,7 @@ class DomainmodelGenerator implements IGenerator {
 		}
 	'''
 
-	dispatch feature(Operation o, ImportManager importManager) '''
+	def dispatch feature(Operation o, ImportManager importManager) '''
 		public «o.type.shortName(importManager)» «o.name»(«o.parameterList(importManager)») {
 			«domainmodelCompiler.compile(o, importManager)» 
 		}

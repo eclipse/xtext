@@ -12,7 +12,7 @@ class Xtend06_Closures {
 	 * a much more convenient and readable syntax.
 	 * 
 	 */
-	closures_01(List<Person> persons) {
+	def closures_01(List<Person> persons) {
 		persons.personsToString(p | p.name+", "+p.forename )
 	}
 	
@@ -22,7 +22,7 @@ class Xtend06_Closures {
 	 * The general syntax if
 	 * (typeParam1 ,... typeParamN) => returnType
 	 */
-	personsToString(List<Person> persons, (Person)=>String toString) {
+	def personsToString(List<Person> persons, (Person)=>String toString) {
 		val result = newArrayList()
 		for (p : persons) 
 			result += toString.apply(p)
@@ -40,7 +40,7 @@ class Xtend06_Closures {
 	 * 
 	 * Note also that you have to put a closure into square brackets is it isn't the only argument to a function.
 	 */
-	closures_02(List<Person> persons) {
+	def closures_02(List<Person> persons) {
 		// sort by name 
 		Collections::sort(persons, [ a, b | a.name.compareTo( b.name ) ] )
 	}
@@ -49,7 +49,7 @@ class Xtend06_Closures {
 	 * sometimes one need to explicitly specify the parameter types, 
 	 * because there is no context to they can be inferred from. 
 	 */
-	closures_withoutTypeInference() {
+	def closures_withoutTypeInference() {
 		return [String s | s.toUpperCase]
 	}
 }
