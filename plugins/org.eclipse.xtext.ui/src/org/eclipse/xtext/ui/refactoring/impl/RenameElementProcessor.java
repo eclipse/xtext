@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
@@ -72,9 +73,10 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	@Inject
 	private IRenamedElementTracker renameElementTracker;
 
-	@Inject@Named(Constants.LANGUAGE_NAME)
+	@Inject
+	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
-	
+
 	private IRenameElementContext renameElementContext;
 	private ResourceSet resourceSet;
 	private RefactoringStatus status;
@@ -88,34 +90,45 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 
 	private ElementRenameArguments renameArguments;
 
-
 	@Override
 	public boolean initialize(final IRenameElementContext renameElementContext) {
 		status = new RefactoringStatus();
 		try {
 			this.renameElementContext = renameElementContext;
 			this.targetElementURI = renameElementContext.getTargetElementURI();
-			resourceSet = resourceSetProvider.get(projectUtil.getProject(targetElementURI));
+			resourceSet = createResourceSet(renameElementContext);
 			targetElement = resourceSet.getEObject(targetElementURI, true);
 			if (targetElement == null) {
 				throw new RefactoringStatusException("Rename target element can not be resolved", true);
 			}
-			IFile targetFile = ResourceUtil.getFile(targetElement.eResource());
-			if(targetFile == null || !targetFile.isAccessible())
-				throw new RefactoringStatusException("Rename target cannot be accessed", true);
-			if(targetFile.isReadOnly())
-				throw new RefactoringStatusException("Target file is read-only", true);
-			this.renameStrategy = strategyProvider.get(targetElement, renameElementContext);
-			if(this.renameStrategy == null)
+			checkTargetFile(targetElement.eResource());
+			this.renameStrategy = createRenameElementStrategy(targetElement, renameElementContext);
+			if (this.renameStrategy == null)
 				return false;
 		} catch (Exception e) {
 			handleException(status, e);
-			if(status.getSeverity()==RefactoringStatus.FATAL)
+			if (status.getSeverity() == RefactoringStatus.FATAL)
 				throw (e instanceof RuntimeException) ? (RuntimeException) e : new WrappedException(e);
 		}
 		return true;
 	}
 
+	protected ResourceSet createResourceSet(IRenameElementContext renameElementContext) {
+		return resourceSetProvider.get(projectUtil.getProject(targetElementURI));
+	}
+
+	protected void checkTargetFile(Resource resource) {
+		IFile targetFile = ResourceUtil.getFile(resource);
+		if (targetFile == null || !targetFile.isAccessible())
+			throw new RefactoringStatusException("Rename target cannot be accessed", true);
+		if (targetFile.isReadOnly())
+			throw new RefactoringStatusException("Target file is read-only", true);
+	}
+
+	protected IRenameStrategy createRenameElementStrategy(EObject targetElement, IRenameElementContext renameElementContext) {
+		return strategyProvider.get(targetElement, renameElementContext);
+	}
+	
 	@Override
 	public IRenameStrategy getRenameElementStrategy() {
 		return renameStrategy;
@@ -125,7 +138,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	public Object[] getElements() {
 		return new Object[] { targetElementURI };
 	}
-	
+
 	public String getOriginalName() {
 		return renameStrategy.getOriginalName();
 	}
@@ -137,7 +150,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	protected String getLanguageName() {
 		return languageName;
 	}
-	
+
 	@Override
 	public String getIdentifier() {
 		return getLanguageName() + ".ui.refactoring.Processor";
@@ -157,7 +170,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	public void setNewName(String newName) {
 		this.newName = newName;
 	}
-	
+
 	@Override
 	public String getNewName() {
 		return newName;
@@ -202,7 +215,8 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	public RefactoringParticipant[] loadParticipants(RefactoringStatus status, SharableParticipants sharedParticipants)
 			throws CoreException {
 		RenameParticipant[] renameParticipants = ParticipantManager.loadRenameParticipants(status, this,
-				renameElementContext, new RenameArguments(newName, true), new String[] { XtextProjectHelper.NATURE_ID }, sharedParticipants);
+				renameElementContext, new RenameArguments(newName, true),
+				new String[] { XtextProjectHelper.NATURE_ID }, sharedParticipants);
 		return renameParticipants;
 	}
 
