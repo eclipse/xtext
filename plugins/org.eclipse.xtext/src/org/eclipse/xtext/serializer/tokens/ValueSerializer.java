@@ -77,14 +77,24 @@ public class ValueSerializer implements IValueSerializer {
 		}
 	}
 
-	public String serializeAssignedValue(EObject context, RuleCall ruleCall, Object value, INode node,
-			Acceptor errorAcceptor) {
+	public String serializeAssignedValue(EObject context, RuleCall ruleCall, Object value, INode node, Acceptor errors) {
 		if (node != null) {
 			Object converted = converter.toValue(serialize(node), ruleCall.getRule().getName(), node);
 			if (converted != null && converted.equals(value))
 				return tokenUtil.serializeNode(node);
 		}
-		return converter.toString(value, ruleCall.getRule().getName());
+		try {
+			String str = converter.toString(value, ruleCall.getRule().getName());
+			if (str != null)
+				return str;
+			if (errors != null)
+				errors.accept(diagnostics.getNullNotAllowedDiagnostic(context, ruleCall));
+			return null;
+		} catch (Throwable e) {
+			if (errors != null)
+				errors.accept(diagnostics.getValueConversionExceptionDiagnostic(context, ruleCall, value, e));
+			return null;
+		}
 	}
 
 }
