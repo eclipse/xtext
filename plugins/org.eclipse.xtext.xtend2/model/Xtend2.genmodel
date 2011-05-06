@@ -4,7 +4,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.xtend2/emf-gen"
     modelPluginID="org.eclipse.xtext.xtend2" modelName="Xtend2" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
-    usedGenPackages="../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types ../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
+    usedGenPackages="../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types ../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase ../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xAnnotations">
   <foreignModel>Xtend2.ecore</foreignModel>
   <genPackages prefix="Xtend2" basePackage="org.eclipse.xtext.xtend2" disposableProviderFactory="true"
       ecorePackage="Xtend2.ecore#/">
@@ -30,12 +30,16 @@
       <genOperations ecoreOperation="Xtend2.ecore#//XtendClass/getPackageName"/>
       <genOperations ecoreOperation="Xtend2.ecore#//XtendClass/getSimpleName"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="Xtend2.ecore#//XtendAnnotationTarget">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtend2.ecore#//XtendAnnotationTarget/annotations"/>
+    </genClasses>
     <genClasses ecoreClass="Xtend2.ecore#//XtendClassSuperCallReferable">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Xtend2.ecore#//XtendClassSuperCallReferable/xtendClass"/>
     </genClasses>
     <genClasses image="false" ecoreClass="Xtend2.ecore#//XtendMember">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Xtend2.ecore#//XtendMember/declaringType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtend2.ecore#//XtendMember/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtend2.ecore#//XtendMember/annotationInfo"/>
       <genOperations ecoreOperation="Xtend2.ecore#//XtendMember/getSimpleName"/>
     </genClasses>
     <genClasses ecoreClass="Xtend2.ecore#//XtendFunction">
@@ -45,6 +49,14 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtend2.ecore#//XtendFunction/override"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtend2.ecore#//XtendFunction/dispatch"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtend2.ecore#//XtendFunction/createExtensionInfo"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtend2.ecore#//XtendField">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtend2.ecore#//XtendField/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtend2.ecore#//XtendField/extension"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtend2.ecore#//XtendParameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtend2.ecore#//XtendParameter/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtend2.ecore#//XtendParameter/parameterType"/>
     </genClasses>
     <genClasses ecoreClass="Xtend2.ecore#//RichString"/>
     <genClasses ecoreClass="Xtend2.ecore#//RichStringLiteral"/>
@@ -62,10 +74,6 @@
     <genClasses ecoreClass="Xtend2.ecore#//RichStringElseIf">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtend2.ecore#//RichStringElseIf/if"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtend2.ecore#//RichStringElseIf/then"/>
-    </genClasses>
-    <genClasses ecoreClass="Xtend2.ecore#//DeclaredDependency">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtend2.ecore#//DeclaredDependency/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtend2.ecore#//DeclaredDependency/extension"/>
     </genClasses>
     <genClasses ecoreClass="Xtend2.ecore#//CreateExtensionInfo">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtend2.ecore#//CreateExtensionInfo/createExpression"/>

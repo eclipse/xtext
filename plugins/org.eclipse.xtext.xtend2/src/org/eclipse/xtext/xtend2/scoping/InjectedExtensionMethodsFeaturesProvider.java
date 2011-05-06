@@ -22,7 +22,7 @@ import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IFeaturesForTypeProvider;
-import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
+import org.eclipse.xtext.xtend2.xtend2.XtendField;
 
 import com.google.inject.Inject;
 
@@ -40,15 +40,15 @@ public class InjectedExtensionMethodsFeaturesProvider implements IFeaturesForTyp
 	@Inject
 	private TypeConformanceComputer typeConformanceComputer;
 	
-	private DeclaredDependency declaredDependency;
+	private XtendField XtendField;
 	
-	public void setContext(DeclaredDependency declaredDependency) {
-		this.declaredDependency = declaredDependency;
+	public void setContext(XtendField XtendField) {
+		this.XtendField = XtendField;
 	}
 	
 	public Iterable<? extends JvmFeature> getFeaturesForType(JvmTypeReference type) {
 		List<JvmFeature> result = newArrayList();
-		JvmTypeReference typeReference = declaredDependency.getType();
+		JvmTypeReference typeReference = XtendField.getType();
 		Iterable<JvmFeature> iterable = overridesService.getAllJvmFeatures(typeReference);
 		for (JvmFeature jvmFeature : iterable) {
 			if (jvmFeature instanceof JvmOperation) {

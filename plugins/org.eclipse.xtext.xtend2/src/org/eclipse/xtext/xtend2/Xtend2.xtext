@@ -5,11 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-grammar org.eclipse.xtext.xtend2.Xtend2 with org.eclipse.xtext.xbase.Xbase
+grammar org.eclipse.xtext.xtend2.Xtend2 with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations
 
 import "platform:/resource/org.eclipse.xtext.xtend2/model/Xtend2.ecore"
 import "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore" as xbase
 import "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore" as xtype
+import "platform:/resource/org.eclipse.xtext.xbase/model/XAnnotations.ecore" as annotations
 import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore" as types
 
 File returns XtendFile : 
@@ -26,30 +27,31 @@ QualifiedNameWithWildCard :
 	QualifiedName  ('.' '*')?;
 	
 Class returns XtendClass :
+   annotations+=XAnnotation* 
    "class" name=ID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
    ("extends" extends=JvmTypeReference)? ('implements' implements+=JvmTypeReference (',' implements+=JvmTypeReference)*)?'{'
 	   (members+=Member)*
    '}';
 
 Member returns XtendMember:
-	Function | DeclaredDependency ;
-
-DeclaredDependency returns DeclaredDependency :
-	'@Inject' (extension?='extension')? type=JvmTypeReference name=ID;
-
-Function returns XtendFunction :
-	(override?='override'? & dispatch?='dispatch'?) ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
-	returnType=JvmTypeReference? createExtensionInfo=CreateExtensionInfo? name=ID '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')'
-		(expression=XBlockExpression | expression=RichString )?;
+	{XtendMember} annotations+=XAnnotation* 
+	(
+		{XtendField.annotationInfo = current}	
+		(extension?='extension')? type=JvmTypeReference name=ID
+		
+	|	{XtendFunction.annotationInfo = current}
+		('def' | override?='override') (dispatch?='dispatch'?) ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
+		returnType=JvmTypeReference? createExtensionInfo=CreateExtensionInfo? name=ID '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')'
+			(expression=XBlockExpression | expression=RichString )?
+	) ;
 
 CreateExtensionInfo:
 	'create' name=ID ':' createExpression=XExpression
 ;
 
-// type is mandatory for Xtend functions
-Parameter returns types::JvmFormalParameter:
+Parameter returns XtendParameter:
+	annotations+=XAnnotation* 
 	parameterType=JvmTypeReference name=ID;
-
 		
 XStringLiteral returns xbase::XExpression:
 	{xbase::XStringLiteral} value=STRING |

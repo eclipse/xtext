@@ -250,7 +250,7 @@ public class RichStringEvaluationTest extends AbstractRichStringEvaluationTest {
 	}
 	
 	protected RichString richString(String string) throws Exception {
-		XtendClass clazz = clazz("class Foo { foo() "+string+"}");
+		XtendClass clazz = clazz("class Foo { def foo() "+string+"}");
 		XtendFunction function = (XtendFunction) clazz.getMembers().get(0);
 		return (RichString) function.getExpression();
 	}

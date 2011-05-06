@@ -57,12 +57,12 @@ public interface IXtend2JvmAssociations extends IJvmModelAssociations {
 		
 		public JvmOperation getDispatchOperation(XtendFunction dispatchFunction) {
 			if (!dispatchFunction.isDispatch())
-				throw new IllegalArgumentException("Function " + dispatchFunction.getSimpleName() + " is not a dispatch function");
+				throw new IllegalArgumentException("Function " + dispatchFunction.getName() + " is not a dispatch function");
 			Set<EObject> jvmElements = getJvmElements(dispatchFunction);
 			for(EObject candidate: jvmElements) {
 				if (candidate instanceof JvmOperation) {
 					// other operation has '_' prefix
-					if (dispatchFunction.getSimpleName().equals(((JvmOperation) candidate).getSimpleName())) {
+					if (dispatchFunction.getName().equals(((JvmOperation) candidate).getSimpleName())) {
 						return (JvmOperation) candidate;
 					}
 				}

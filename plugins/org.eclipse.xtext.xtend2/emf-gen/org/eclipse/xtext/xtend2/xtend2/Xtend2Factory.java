@@ -62,6 +62,15 @@ public interface Xtend2Factory extends EFactory
 	XtendClassSuperCallReferable createXtendClassSuperCallReferable();
 
 	/**
+	 * Returns a new object of class '<em>Xtend Member</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Xtend Member</em>'.
+	 * @generated
+	 */
+	XtendMember createXtendMember();
+
+	/**
 	 * Returns a new object of class '<em>Xtend Function</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -69,6 +78,24 @@ public interface Xtend2Factory extends EFactory
 	 * @generated
 	 */
 	XtendFunction createXtendFunction();
+
+	/**
+	 * Returns a new object of class '<em>Xtend Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Xtend Field</em>'.
+	 * @generated
+	 */
+	XtendField createXtendField();
+
+	/**
+	 * Returns a new object of class '<em>Xtend Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Xtend Parameter</em>'.
+	 * @generated
+	 */
+	XtendParameter createXtendParameter();
 
 	/**
 	 * Returns a new object of class '<em>Rich String</em>'.
@@ -114,15 +141,6 @@ public interface Xtend2Factory extends EFactory
 	 * @generated
 	 */
 	RichStringElseIf createRichStringElseIf();
-
-	/**
-	 * Returns a new object of class '<em>Declared Dependency</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Declared Dependency</em>'.
-	 * @generated
-	 */
-	DeclaredDependency createDeclaredDependency();
 
 	/**
 	 * Returns a new object of class '<em>Create Extension Info</em>'.

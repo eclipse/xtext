@@ -84,11 +84,6 @@ public abstract class AbstractXtend2RuntimeModule extends DefaultRuntimeModule {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper> bindIUnorderedGroupHelper() {
-		return org.eclipse.xtext.parser.antlr.UnorderedGroupHelper.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.xtend2.validation.Xtend2JavaValidator> bindXtend2JavaValidator() {
 		return org.eclipse.xtext.xtend2.validation.Xtend2JavaValidator.class;

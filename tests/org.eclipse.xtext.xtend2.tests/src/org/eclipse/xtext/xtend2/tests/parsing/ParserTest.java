@@ -13,7 +13,7 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
-import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
+import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringElseIf;
 import org.eclipse.xtext.xtend2.xtend2.RichStringForLoop;
@@ -30,7 +30,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	public void testCreateExtension_00() throws Exception {
 		XtendClass clazz = clazz(
 				"class Foo { " +
-				"  create list: newArrayList('foo') getListWithFooAnd(String s) {" +
+				"  def create list: newArrayList('foo') getListWithFooAnd(String s) {" +
 				"    list.add(s)" +
 				"  }" +
 				"}");
@@ -44,7 +44,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	public void testCreateExtension_01() throws Exception {
 		XtendClass clazz = clazz(
 				"class Foo { " +
-				"  create foo : newArrayList('foo') getListWithFooAnd(String s) {" +
+				"  def create foo : newArrayList('foo') getListWithFooAnd(String s) {" +
 				"    foo.add(s)" +
 				"  }" +
 		"}");
@@ -55,54 +55,50 @@ public class ParserTest extends AbstractXtend2TestCase {
 		assertEquals("foo", func.getCreateExtensionInfo().getName());
 	}
 	
-	public void testDeclaredDependency_00() throws Exception {
+	public void testXtendField_00() throws Exception {
 		XtendClass clazz = clazz(
 			"class Foo { " +
-			"  @Inject java.util.Map<String,String> map" +
+			"  @com.google.inject.Inject java.util.Map<String,String> map" +
 			"}");
 		assertEquals(1, clazz.getMembers().size());
-		DeclaredDependency dependency = (DeclaredDependency) clazz.getMembers().get(0);
-		assertEquals("java.util.Map",dependency.getType().getType().getIdentifier());
-		assertEquals("map",dependency.getName());
-		assertEquals("map",dependency.getSimpleName());
-		assertEquals("java.util.Map<java.lang.String,java.lang.String>", dependency.getType().getIdentifier());
+		XtendField field = (XtendField) clazz.getMembers().get(0);
+		assertEquals("java.util.Map",field.getType().getType().getIdentifier());
+		assertEquals("map",field.getName());
+		assertEquals("java.util.Map<java.lang.String,java.lang.String>", field.getType().getIdentifier());
 	}
 	
-	public void testDeclaredDependency_01() throws Exception {
+	public void testXtendField_01() throws Exception {
 		XtendClass clazz = clazz(
 				"class Foo { " +
-				"  @Inject java.util.Map<String,String> map map() {null as String}" +
+				"  @com.google.inject.Inject java.util.Map<String,String> map def map() {null as String}" +
 		"}");
 		assertEquals(2, clazz.getMembers().size());
-		DeclaredDependency dependency = (DeclaredDependency) clazz.getMembers().get(0);
-		assertEquals("java.util.Map",dependency.getType().getType().getIdentifier());
-		assertEquals("map",dependency.getName());
-		assertEquals("map",dependency.getSimpleName());
-		assertEquals("java.util.Map<java.lang.String,java.lang.String>", dependency.getType().getIdentifier());
+		XtendField field = (XtendField) clazz.getMembers().get(0);
+		assertEquals("java.util.Map",field.getType().getType().getIdentifier());
+		assertEquals("map",field.getName());
+		assertEquals("java.util.Map<java.lang.String,java.lang.String>", field.getType().getIdentifier());
 		assertTrue(clazz.getMembers().get(1) instanceof XtendFunction);
 	}
 	
-	public void testDeclaredDependency_03() throws Exception {
+	public void testXtendField_03() throws Exception {
 		XtendClass clazz = clazz(
 				"class Foo { " +
-				"  @Inject java.util.Map<String,String> map" +
-				"  @Inject java.util.List myList" +
+				"  @com.google.inject.Inject java.util.Map<String,String> map" +
+				"  @com.google.inject.Inject java.util.List myList" +
 		"}");
 		assertEquals(2, clazz.getMembers().size());
-		DeclaredDependency dependency = (DeclaredDependency) clazz.getMembers().get(0);
-		assertEquals("java.util.Map",dependency.getType().getType().getIdentifier());
-		assertEquals("map",dependency.getName());
-		assertEquals("map",dependency.getSimpleName());
-		assertEquals("java.util.Map<java.lang.String,java.lang.String>", dependency.getType().getIdentifier());
-		dependency = (DeclaredDependency) clazz.getMembers().get(1);
-		assertEquals("java.util.List",dependency.getType().getType().getIdentifier());
-		assertEquals("myList",dependency.getName());
-		assertEquals("myList",dependency.getSimpleName());
-		assertEquals("java.util.List", dependency.getType().getIdentifier());
+		XtendField field = (XtendField) clazz.getMembers().get(0);
+		assertEquals("java.util.Map",field.getType().getType().getIdentifier());
+		assertEquals("map",field.getName());
+		assertEquals("java.util.Map<java.lang.String,java.lang.String>", field.getType().getIdentifier());
+		field = (XtendField) clazz.getMembers().get(1);
+		assertEquals("java.util.List",field.getType().getType().getIdentifier());
+		assertEquals("myList",field.getName());
+		assertEquals("java.util.List", field.getType().getIdentifier());
 	}
 	
 	public void testFunction_0() throws Exception {
-		XtendFunction func = function("foo() {foo}");
+		XtendFunction func = function("def foo() {foo}");
 		assertEquals("foo", func.getName());
 		assertTrue(((XBlockExpression)func.getExpression()).getExpressions().get(0) instanceof XFeatureCall);
 		assertEquals(0, func.getParameters().size());
@@ -111,7 +107,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testFunction_1() throws Exception {
-		XtendFunction func = function("String foo() {foo}");
+		XtendFunction func = function("def String foo() {foo}");
 		assertEquals("foo", func.getName());
 		assertTrue(((XBlockExpression)func.getExpression()).getExpressions().get(0) instanceof XFeatureCall);
 		assertEquals(0, func.getParameters().size());
@@ -120,7 +116,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testFunction_2() throws Exception {
-		XtendFunction func = function("foo(String s) {s}");
+		XtendFunction func = function("def foo(String s) {s}");
 		assertEquals("foo", func.getName());
 		assertTrue(((XBlockExpression)func.getExpression()).getExpressions().get(0) instanceof XFeatureCall);
 		assertEquals(1, func.getParameters().size());
@@ -131,7 +127,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testFunction_3() throws Exception {
-		XtendFunction func = function("foo(String s, Integer i) {s}");
+		XtendFunction func = function("def foo(String s, Integer i) {s}");
 		assertEquals("foo", func.getName());
 		assertTrue(((XBlockExpression)func.getExpression()).getExpressions().get(0) instanceof XFeatureCall);
 		assertEquals(2, func.getParameters().size());
@@ -144,7 +140,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testFunction_4() throws Exception {
-		XtendFunction func = function("foo() {foo}");
+		XtendFunction func = function("def foo() {foo}");
 		assertEquals("foo", func.getName());
 		assertTrue(((XBlockExpression)func.getExpression()).getExpressions().get(0) instanceof XFeatureCall);
 		assertEquals(0, func.getParameters().size());
@@ -154,7 +150,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testFunction_5() throws Exception {
-		XtendFunction func = function("dispatch foo(String s) {foo('x')}");
+		XtendFunction func = function("def dispatch foo(String s) {foo('x')}");
 		assertEquals("foo", func.getName());
 		assertTrue(((XBlockExpression)func.getExpression()).getExpressions().get(0) instanceof XFeatureCall);
 		assertEquals(1, func.getParameters().size());
@@ -187,7 +183,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 
 
 	public void testTypeParams_1() throws Exception {
-		XtendFunction func = function("<T> foo(T t) {t}");
+		XtendFunction func = function("def <T> foo(T t) {t}");
 		assertEquals(1, func.getTypeParameters().size());
 		JvmTypeParameter tp = func.getTypeParameters().get(0);
 		assertEquals("T", tp.getName());
@@ -195,7 +191,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testTypeParams_2() throws Exception {
-		XtendFunction func = function("<T extends CharSequence> foo(T t) { t}");
+		XtendFunction func = function("def <T extends CharSequence> foo(T t) { t}");
 		assertEquals(1, func.getTypeParameters().size());
 		JvmTypeParameter tp = func.getTypeParameters().get(0);
 		assertEquals("T", tp.getName());
@@ -204,7 +200,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testTypeParams_3() throws Exception {
-		XtendFunction func = function("<T extends CharSequence & java.io.Serializable> foo(T t) { t}");
+		XtendFunction func = function("def <T extends CharSequence & java.io.Serializable> foo(T t) { t}");
 		assertEquals(1, func.getTypeParameters().size());
 		JvmTypeParameter tp = func.getTypeParameters().get(0);
 		assertEquals("T", tp.getName());
@@ -215,7 +211,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testTypeParams_4() throws Exception {
-		XtendFunction func = function("<T super Foo> foo(T t) { t}");
+		XtendFunction func = function("def <T super Foo> foo(T t) { t}");
 		assertEquals(1, func.getTypeParameters().size());
 		JvmTypeParameter tp = func.getTypeParameters().get(0);
 		assertEquals("T", tp.getName());
@@ -224,14 +220,14 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testFunctionTypeRef_0() throws Exception {
-		XtendFunction func = function("=>Boolean foo() { [|true]}");
+		XtendFunction func = function("def =>Boolean foo() { [|true]}");
 		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
 		assertNotNull(type.getReturnType());
 		assertEquals(0,type.getParamTypes().size());
 	}
 	
 	public void testFunctionTypeRef_1() throws Exception {
-		XtendFunction func = function("(String)=>Boolean foo() { [String s|s==null]}");
+		XtendFunction func = function("def (String)=>Boolean foo() { [String s|s==null]}");
 		XFunctionTypeRef type = (XFunctionTypeRef) func.getReturnType();
 		assertNotNull(type.getReturnType());
 		assertEquals(1,type.getParamTypes().size());
@@ -241,8 +237,8 @@ public class ParserTest extends AbstractXtend2TestCase {
 	public void testUnambiguity_00() throws Exception {
 		XtendClass clazz = clazz("package x\n" +
 			"class Foo {\n" +
-			"  String x(String bar) {String}\n" +
-			"  String(String x) {x}\n" +
+			"  def String x(String bar) {String}\n" +
+			"  def String(String x) {x}\n" +
 			"}");
 		XtendFunction f1 = (XtendFunction) clazz.getMembers().get(0);
 		XtendFunction f2 = (XtendFunction) clazz.getMembers().get(1);
@@ -253,8 +249,8 @@ public class ParserTest extends AbstractXtend2TestCase {
 	public void testUnambiguity_01() throws Exception {
 		XtendClass clazz = clazz("package x\n" +
 				"class Foo {\n" +
-				"  String x(Foo bar) {String}\n" +
-				"  String x(Baz x) {baz}\n" +
+				"  def String x(Foo bar) {String}\n" +
+				"  def String x(Baz x) {baz}\n" +
 		"}");
 		XtendFunction f1 = (XtendFunction) clazz.getMembers().get(0);
 		XtendFunction f2 = (XtendFunction) clazz.getMembers().get(1);
@@ -263,7 +259,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 
 	public void testRichString_00() throws Exception {
-		XtendFunction function = function("foo() ''' foo '''");
+		XtendFunction function = function("def foo() ''' foo '''");
 		assertTrue(function.getExpression() instanceof RichString);
 		RichString richString = (RichString) function.getExpression();
 		assertEquals(1, richString.getExpressions().size());
@@ -272,7 +268,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testRichString_01() throws Exception {
-		XtendFunction function = function("foo() ''' foo «'holla'» bar '''");
+		XtendFunction function = function("def foo() ''' foo «'holla'» bar '''");
 		final RichString richString = (RichString) function.getExpression();
 		assertTrue(richString.getExpressions().get(0) instanceof RichStringLiteral); 
 		assertTrue(richString.getExpressions().get(1) instanceof XStringLiteral); 
@@ -280,12 +276,12 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testRichString_02() throws Exception {
-		XtendFunction function = function("foo() ''''''");
+		XtendFunction function = function("def foo() ''''''");
 		assertTrue(function.getExpression() instanceof RichString); 
 	}
 	
 	public void testRichStringIF_00() throws Exception {
-		XtendFunction function = function("foo() ''' foo «IF true» wurst «ELSEIF null==3» brot «ELSE» machine «ENDIF» bar '''");
+		XtendFunction function = function("def foo() ''' foo «IF true» wurst «ELSEIF null==3» brot «ELSE» machine «ENDIF» bar '''");
 		final RichString richString = (RichString) function.getExpression();
 		assertTrue(richString.getExpressions().get(0) instanceof RichStringLiteral);
 		
@@ -304,7 +300,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testRichStringIF_01() throws Exception {
-		XtendFunction function = function("foo() ''' foo «IF true» wurst «IF false» brot «ELSE» machine «ENDIF» bar «ENDIF»'''");
+		XtendFunction function = function("def foo() ''' foo «IF true» wurst «IF false» brot «ELSE» machine «ENDIF» bar «ENDIF»'''");
 		final RichString richString = (RichString) function.getExpression();
 		assertTrue(richString.getExpressions().get(0) instanceof RichStringLiteral);
 		
@@ -323,7 +319,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testRichStringFOR_01() throws Exception {
-		XtendFunction function = function("withForLoop() '''«FOR i: 1..10»«i»«ENDFOR»'''");
+		XtendFunction function = function("def withForLoop() '''«FOR i: 1..10»«i»«ENDFOR»'''");
 		final RichString richString = (RichString) function.getExpression();
 		final RichStringForLoop rsFor = (RichStringForLoop) richString.getExpressions().get(1);
 		assertTrue(rsFor.getForExpression() instanceof XBinaryOperation);
@@ -337,7 +333,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testRichStringFOR_02() throws Exception {
-		XtendFunction function = function("withForLoop() '''«FOR i: 1..10 BEFORE 'a' SEPARATOR '\t' AFTER i»«ENDFOR»'''");
+		XtendFunction function = function("def withForLoop() '''«FOR i: 1..10 BEFORE 'a' SEPARATOR '\t' AFTER i»«ENDFOR»'''");
 		final RichString richString = (RichString) function.getExpression();
 		final RichStringForLoop rsFor = (RichStringForLoop) richString.getExpressions().get(1);
 		assertTrue(rsFor.getForExpression() instanceof XBinaryOperation);
@@ -349,7 +345,7 @@ public class ParserTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testRichStringFOR_03() throws Exception {
-		XtendFunction function = function("withForLoop(String it) '''«it»«val it = 1..10»«FOR i: it SEPARATOR it»«ENDFOR»'''");
+		XtendFunction function = function("def withForLoop(String it) '''«it»«val it = 1..10»«FOR i: it SEPARATOR it»«ENDFOR»'''");
 		final RichString richString = (RichString) function.getExpression();
 		assertTrue(richString.getExpressions().get(0) instanceof RichStringLiteral);
 		assertTrue(richString.getExpressions().get(1) instanceof XFeatureCall);

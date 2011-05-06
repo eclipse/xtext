@@ -71,13 +71,15 @@ public class Xtend2FactoryImpl extends EFactoryImpl implements Xtend2Factory
 			case Xtend2Package.XTEND_IMPORT: return createXtendImport();
 			case Xtend2Package.XTEND_CLASS: return createXtendClass();
 			case Xtend2Package.XTEND_CLASS_SUPER_CALL_REFERABLE: return createXtendClassSuperCallReferable();
+			case Xtend2Package.XTEND_MEMBER: return createXtendMember();
 			case Xtend2Package.XTEND_FUNCTION: return createXtendFunction();
+			case Xtend2Package.XTEND_FIELD: return createXtendField();
+			case Xtend2Package.XTEND_PARAMETER: return createXtendParameter();
 			case Xtend2Package.RICH_STRING: return createRichString();
 			case Xtend2Package.RICH_STRING_LITERAL: return createRichStringLiteral();
 			case Xtend2Package.RICH_STRING_FOR_LOOP: return createRichStringForLoop();
 			case Xtend2Package.RICH_STRING_IF: return createRichStringIf();
 			case Xtend2Package.RICH_STRING_ELSE_IF: return createRichStringElseIf();
-			case Xtend2Package.DECLARED_DEPENDENCY: return createDeclaredDependency();
 			case Xtend2Package.CREATE_EXTENSION_INFO: return createCreateExtensionInfo();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -133,10 +135,43 @@ public class Xtend2FactoryImpl extends EFactoryImpl implements Xtend2Factory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public XtendMember createXtendMember()
+	{
+		XtendMemberImplCustom xtendMember = new XtendMemberImplCustom();
+		return xtendMember;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public XtendFunction createXtendFunction()
 	{
 		XtendFunctionImplCustom xtendFunction = new XtendFunctionImplCustom();
 		return xtendFunction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XtendField createXtendField()
+	{
+		XtendFieldImplCustom xtendField = new XtendFieldImplCustom();
+		return xtendField;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XtendParameter createXtendParameter()
+	{
+		XtendParameterImplCustom xtendParameter = new XtendParameterImplCustom();
+		return xtendParameter;
 	}
 
 	/**
@@ -192,17 +227,6 @@ public class Xtend2FactoryImpl extends EFactoryImpl implements Xtend2Factory
 	{
 		RichStringElseIfImpl richStringElseIf = new RichStringElseIfImpl();
 		return richStringElseIf;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DeclaredDependency createDeclaredDependency()
-	{
-		DeclaredDependencyImplCustom declaredDependency = new DeclaredDependencyImplCustom();
-		return declaredDependency;
 	}
 
 	/**

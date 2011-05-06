@@ -31,11 +31,10 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XReturnExpression;
-import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
+import org.eclipse.xtext.xbase.annotations.typing.XbaseWithAnnotationsTypeProvider;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo;
-import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringElseIf;
 import org.eclipse.xtext.xtend2.xtend2.RichStringForLoop;
@@ -44,7 +43,9 @@ import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable;
+import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -57,7 +58,7 @@ import com.google.inject.Singleton;
  * Type provider that is aware of Xtend specific expressions and the inferred JVM model.
  */
 @Singleton
-public class Xtend2TypeProvider extends XbaseTypeProvider {
+public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 
 	@Inject
 	private IXtend2JvmAssociations xtend2jvmAssociations;
@@ -71,6 +72,7 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 				return getTypeReferences().getTypeForName(Void.TYPE, function);
 			JvmTypeReference declaredOrInferredReturnType = getDeclaredOrOverriddenReturnType(function);
 			// TODO why do we expect null if Void.TYPE is the declared return type?
+			// SE: because null means 'no expectation' The return type conformance is handled in the validator (please remove comment if questions is answered)
 			if (declaredOrInferredReturnType == null || getTypeReferences().is(declaredOrInferredReturnType, Void.TYPE))
 				return null;
 			return declaredOrInferredReturnType;
@@ -141,6 +143,10 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 		return _expectedType((XForLoopExpression)expr, reference, index, rawType);
 	}
 
+	protected JvmTypeReference _typeForIdentifiable(XtendParameter param, boolean rawType) {
+		return param.getParameterType();
+	}
+	
 	protected JvmTypeReference _typeForIdentifiable(XtendClass clazz, boolean rawType) {
 		JvmParameterizedTypeReference typeReference = getTypesFactory().createJvmParameterizedTypeReference();
 		typeReference.setType(xtend2jvmAssociations.getInferredType(clazz));
@@ -169,7 +175,7 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 			JvmOperation operation = xtend2jvmAssociations.getDirectlyInferredOperation(func);
 			if (operation == null)
 				return null;
-			XtendClass type = func.getDeclaringType();
+			XtendClass type = (XtendClass) func.eContainer();
 			for(JvmTypeReference reference: Iterables.filter(EcoreUtil2.eAllContents(returnType), JvmTypeReference.class)) {
 				if (reference.getType() instanceof JvmTypeParameter) {
 					JvmTypeParameter parameter = (JvmTypeParameter) reference.getType();
@@ -219,7 +225,7 @@ public class Xtend2TypeProvider extends XbaseTypeProvider {
 		return getTypeReferences().getTypeForName(Object.class, func);
 	}
 	
-	protected JvmTypeReference _typeForIdentifiable(DeclaredDependency dependency, boolean rawType) {
+	protected JvmTypeReference _typeForIdentifiable(XtendField dependency, boolean rawType) {
 		return dependency.getType();
 	}
 

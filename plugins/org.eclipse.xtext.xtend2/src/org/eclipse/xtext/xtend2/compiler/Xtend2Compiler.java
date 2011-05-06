@@ -49,7 +49,7 @@ import org.eclipse.xtext.xtend2.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtext.xtend2.richstring.DefaultIndentationHandler;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
 import org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo;
-import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
+import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringForLoop;
 import org.eclipse.xtext.xtend2.xtend2.RichStringIf;
@@ -59,6 +59,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
+import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
@@ -150,8 +151,8 @@ public class Xtend2Compiler extends XbaseCompiler {
 		for (XtendMember member : obj.getMembers()) {
 			if (member instanceof XtendFunction) {
 				compile((XtendFunction) member, appendable);
-			} else if (member instanceof DeclaredDependency) {
-				compile((DeclaredDependency) member, appendable);
+			} else if (member instanceof XtendField) {
+				compile((XtendField) member, appendable);
 			}
 		}
 		generateDispatchMethods(obj, appendable);
@@ -160,18 +161,18 @@ public class Xtend2Compiler extends XbaseCompiler {
 	}
 
 
-	protected void compile(DeclaredDependency dependency, IAppendable appendable) {
+	protected void compile(XtendField field, IAppendable appendable) {
 		String javaxInject = "javax.inject.Inject";
-		JvmTypeReference inject = getTypeReferences().getTypeForName(javaxInject, dependency);
+		JvmTypeReference inject = getTypeReferences().getTypeForName(javaxInject, field);
 		if (inject == null) {
-			inject = getTypeReferences().getTypeForName(Inject.class, dependency);
+			inject = getTypeReferences().getTypeForName(Inject.class, field);
 		}
 		appendable.append("\n@");
-		serialize(inject, dependency, appendable);
+		serialize(inject, field, appendable);
 		appendable.append(" private ");
-		serialize(dependency.getType(), dependency, appendable);
+		serialize(field.getType(), field, appendable);
 		appendable.append(" ");
-		appendable.append(appendable.declareVariable(dependency, dependency.getSimpleName())).append(";");
+		appendable.append(appendable.declareVariable(field, field.getName())).append(";");
 	}
 
 	protected void generateDispatchMethods(XtendClass obj, IAppendable appendable) {
@@ -190,7 +191,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		serialize(dispatchOperation.getReturnType(), dispatchOperation, a);
 		a.append(" ");
 		a.append(dispatchOperation.getSimpleName()).append("(");
-		declareParameters(dispatchOperation.getParameters(), a);
+		declareJvmParameters(dispatchOperation.getParameters(), a);
 		a.append(") ");
 		declareExceptions(dispatchOperation, a);
 		a.append("{");
@@ -279,7 +280,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		appendTypeParameterDeclaration(obj.getTypeParameters(), appendable);
 		serialize(resolveMultiType(returnType), obj, appendable);
 		appendable.append(" ").append(name).append("(");
-		final EList<JvmFormalParameter> parameters = obj.getParameters();
+		final EList<XtendParameter> parameters = obj.getParameters();
 		declareParameters(parameters, appendable);
 		appendable.append(") ");
 		JvmOperation operation = associations.getDirectlyInferredOperation(obj);
@@ -323,9 +324,9 @@ public class Xtend2Compiler extends XbaseCompiler {
 		appendable.append(cacheKeyVarName).append(" = ");
 		serialize(collectonLiterals, info.getCreateExpression(), appendable);
 		appendable.append(".newArrayList(");
-		EList<JvmFormalParameter> list = obj.getParameters();
-		for (Iterator<JvmFormalParameter> iterator = list.iterator(); iterator.hasNext();) {
-			JvmFormalParameter jvmFormalParameter = iterator.next();
+		EList<XtendParameter> list = obj.getParameters();
+		for (Iterator<XtendParameter> iterator = list.iterator(); iterator.hasNext();) {
+			XtendParameter jvmFormalParameter = iterator.next();
 			appendable.append(appendable.getName(jvmFormalParameter));
 			if (iterator.hasNext()) {
 				appendable.append(", ");
@@ -431,7 +432,19 @@ public class Xtend2Compiler extends XbaseCompiler {
 		return result;
 	}
 
-	protected void declareParameters(final EList<JvmFormalParameter> parameters, IAppendable appendable) {
+	protected void declareParameters(final EList<XtendParameter> parameters, IAppendable appendable) {
+		final int numParams = parameters.size();
+		for (int i = 0; i < numParams; i++) {
+			XtendParameter p = parameters.get(i);
+			String varName = declareNameInVariableScope(p, appendable);
+			appendable.append("final ");
+			serialize(p.getParameterType(),p,appendable);
+			appendable.append(" ").append(varName);
+			if (i != numParams - 1)
+				appendable.append(", ");
+		}
+	}
+	protected void declareJvmParameters(final EList<JvmFormalParameter> parameters, IAppendable appendable) {
 		final int numParams = parameters.size();
 		for (int i = 0; i < numParams; i++) {
 			JvmFormalParameter p = parameters.get(i);

@@ -32,13 +32,13 @@ public class DispatchingSupportTest extends AbstractXtend2TestCase {
 	
 	public void testSort_00() throws Exception {
 		XtendClass clazz = clazz("class X {\n" +
-				"  dispatch foo(Integer i) {null}" +
-				"  dispatch foo(Comparable<?> i) {null}" +
-				"  dispatch foo(java.io.Serializable i) {null}" +
-				"  dispatch foo(String i) {null}" +
-				"  dispatch foo(Number i) {null}" +
-				"  dispatch foo(Object i) {null}" +
-				"  dispatch foo(CharSequence i) {null}" +
+				" def dispatch foo(Integer i) {null}" +
+				" def dispatch foo(Comparable<?> i) {null}" +
+				" def dispatch foo(java.io.Serializable i) {null}" +
+				" def dispatch foo(String i) {null}" +
+				" def dispatch foo(Number i) {null}" +
+				" def dispatch foo(Object i) {null}" +
+				" def dispatch foo(CharSequence i) {null}" +
 			"}");
 		Multimap<Pair<String, Integer>, JvmOperation> multimap = dispatchingSupport.getDispatchMethods((JvmGenericType) clazz.eResource().getContents().get(1));
 		Collection<JvmOperation> collection = multimap.values();
@@ -55,9 +55,9 @@ public class DispatchingSupportTest extends AbstractXtend2TestCase {
 	
 	public void testSort_01() throws Exception {
 		XtendClass clazz = clazz("class X {\n" +
-				"  dispatch foo(Integer i) {null}" +
-				"  dispatch foo(Boolean i) {null}" +
-				"  dispatch foo(String i) {null}" +
+				" def dispatch foo(Integer i) {null}" +
+				" def dispatch foo(Boolean i) {null}" +
+				" def dispatch foo(String i) {null}" +
 		"}");
 		Multimap<Pair<String, Integer>, JvmOperation> multimap = dispatchingSupport.getDispatchMethods((JvmGenericType) clazz.eResource().getContents().get(1));
 		Collection<JvmOperation> collection = multimap.values();
@@ -70,9 +70,9 @@ public class DispatchingSupportTest extends AbstractXtend2TestCase {
 	
 	public void testSort_02() throws Exception {
 		XtendClass clazz = clazz("class X {\n" +
-				"  dispatch foo(int a, String b) {null}" +
-				"  dispatch foo(Boolean i, Object b) {null}" +
-				"  dispatch foo(Object i, String b) {null}" +
+				" def dispatch foo(int a, String b) {null}" +
+				" def dispatch foo(Boolean i, Object b) {null}" +
+				" def dispatch foo(Object i, String b) {null}" +
 		"}");
 		Multimap<Pair<String, Integer>, JvmOperation> multimap = dispatchingSupport.getDispatchMethods((JvmGenericType) clazz.eResource().getContents().get(1));
 		Collection<JvmOperation> collection = multimap.values();

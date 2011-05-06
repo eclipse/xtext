@@ -37,7 +37,7 @@ public class EObjectLocationTests extends AbstractXtend2TestCase {
 	private IXtend2JvmAssociations xtend2jvmAssociations;
 	
 	public void testResolveElement() throws Exception {
-		String model = "class Foo extends Object { Foo foo() { hashCode(); this }}";
+		String model = "class Foo extends Object { def Foo foo() { hashCode(); this }}";
 		XtendFile file = file(model);
 		XtextResource resource = (XtextResource) file.eResource();
 		EObject fooDeclaration = eObjectAtOffsetHelper.resolveElementAt(resource, model.indexOf("Foo"));
@@ -51,7 +51,7 @@ public class EObjectLocationTests extends AbstractXtend2TestCase {
 	}
 	
 	public void testResolveCrossReference() throws Exception {
-		String model = "class Foo extends Object { Foo foo() { hashCode(); this }}";
+		String model = "class Foo extends Object { def Foo foo() { hashCode(); this }}";
 		XtendFile file = file(model);
 		XtextResource resource = (XtextResource) file.eResource();
 		EObject fooReference = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, model.lastIndexOf("Foo"));
@@ -62,7 +62,7 @@ public class EObjectLocationTests extends AbstractXtend2TestCase {
 	}
 	
 	public void testFullLocationInFile() throws Exception {
-		String model = "class Foo extends Object { Foo foo() {this }}";
+		String model = "class Foo extends Object { def Foo foo() {this }}";
 		XtendClass clazz = clazz(model);
 		JvmGenericType inferredType = xtend2jvmAssociations.getInferredType(clazz);
 		assertEquals(locationInFileProvider.getFullTextRegion(clazz), locationInFileProvider.getFullTextRegion(inferredType));
@@ -74,7 +74,7 @@ public class EObjectLocationTests extends AbstractXtend2TestCase {
 	}
 
 	public void testSignificantLocationInFile() throws Exception {
-		String model = "class Foo extends Object { Foo foo() {this} }";
+		String model = "class Foo extends Object { def Foo foo() {this} }";
 		XtendClass clazz = clazz(model);
 		JvmGenericType inferredType = xtend2jvmAssociations.getInferredType(clazz);
 		assertEquals(locationInFileProvider.getSignificantTextRegion(clazz), locationInFileProvider.getSignificantTextRegion(inferredType));

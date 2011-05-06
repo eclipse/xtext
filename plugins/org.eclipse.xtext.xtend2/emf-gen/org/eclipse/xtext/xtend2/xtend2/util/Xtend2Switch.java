@@ -123,6 +123,14 @@ public class Xtend2Switch<T>
 				T result = caseXtendClass(xtendClass);
 				if (result == null) result = caseJvmIdentifiableElement(xtendClass);
 				if (result == null) result = caseJvmTypeParameterDeclarator(xtendClass);
+				if (result == null) result = caseXtendAnnotationTarget(xtendClass);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Xtend2Package.XTEND_ANNOTATION_TARGET:
+			{
+				XtendAnnotationTarget xtendAnnotationTarget = (XtendAnnotationTarget)theEObject;
+				T result = caseXtendAnnotationTarget(xtendAnnotationTarget);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -138,7 +146,7 @@ public class Xtend2Switch<T>
 			{
 				XtendMember xtendMember = (XtendMember)theEObject;
 				T result = caseXtendMember(xtendMember);
-				if (result == null) result = caseJvmIdentifiableElement(xtendMember);
+				if (result == null) result = caseXtendAnnotationTarget(xtendMember);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -149,6 +157,26 @@ public class Xtend2Switch<T>
 				if (result == null) result = caseXtendMember(xtendFunction);
 				if (result == null) result = caseJvmTypeParameterDeclarator(xtendFunction);
 				if (result == null) result = caseJvmIdentifiableElement(xtendFunction);
+				if (result == null) result = caseXtendAnnotationTarget(xtendFunction);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Xtend2Package.XTEND_FIELD:
+			{
+				XtendField xtendField = (XtendField)theEObject;
+				T result = caseXtendField(xtendField);
+				if (result == null) result = caseXtendMember(xtendField);
+				if (result == null) result = caseJvmIdentifiableElement(xtendField);
+				if (result == null) result = caseXtendAnnotationTarget(xtendField);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case Xtend2Package.XTEND_PARAMETER:
+			{
+				XtendParameter xtendParameter = (XtendParameter)theEObject;
+				T result = caseXtendParameter(xtendParameter);
+				if (result == null) result = caseJvmIdentifiableElement(xtendParameter);
+				if (result == null) result = caseXtendAnnotationTarget(xtendParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -191,15 +219,6 @@ public class Xtend2Switch<T>
 			{
 				RichStringElseIf richStringElseIf = (RichStringElseIf)theEObject;
 				T result = caseRichStringElseIf(richStringElseIf);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case Xtend2Package.DECLARED_DEPENDENCY:
-			{
-				DeclaredDependency declaredDependency = (DeclaredDependency)theEObject;
-				T result = caseDeclaredDependency(declaredDependency);
-				if (result == null) result = caseXtendMember(declaredDependency);
-				if (result == null) result = caseJvmIdentifiableElement(declaredDependency);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -264,6 +283,22 @@ public class Xtend2Switch<T>
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Xtend Annotation Target</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Xtend Annotation Target</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXtendAnnotationTarget(XtendAnnotationTarget object)
+	{
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Xtend Class Super Call Referable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -307,6 +342,38 @@ public class Xtend2Switch<T>
 	 * @generated
 	 */
 	public T caseXtendFunction(XtendFunction object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Xtend Field</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Xtend Field</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXtendField(XtendField object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Xtend Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Xtend Parameter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXtendParameter(XtendParameter object)
 	{
 		return null;
 	}
@@ -387,22 +454,6 @@ public class Xtend2Switch<T>
 	 * @generated
 	 */
 	public T caseRichStringElseIf(RichStringElseIf object)
-	{
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Declared Dependency</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Declared Dependency</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDeclaredDependency(DeclaredDependency object)
 	{
 		return null;
 	}

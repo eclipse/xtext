@@ -61,24 +61,24 @@ public class RefactoringIntegrationTest extends AbstractXtend2UITestCase {
 	}
 
 	public void testRenameVariable() throws Exception {
-		performRenameTest("Foo", "class Foo { foo() { val bar = 7; bar + 1 }}", "bar", "baz");
+		performRenameTest("Foo", "class Foo { def foo() { val bar = 7; bar + 1 }}", "bar", "baz");
 	}
 
 	public void testRenameParamter() throws Exception {
-		performRenameTest("Foo", "class Foo { foo(int bar) { bar + 1 }}", "bar", "baz");
+		performRenameTest("Foo", "class Foo { def foo(int bar) { bar + 1 }}", "bar", "baz");
 	}
 
 	public void testRefactorTypeParameter() throws Exception {
-		performRenameTest("Foo", "class Foo <T> { T foo() null }", "T", "U");
+		performRenameTest("Foo", "class Foo <T> { def T foo() null }", "T", "U");
 	}
 
 	public void testRenameMethod() throws Exception {
-		performRenameTest("Foo", "class Foo { Integer foo() { foo(); 1 }}", "Bar",
-				"class Baz { baz(Foo arg) {arg.foo()} }", "foo", "bar");
+		performRenameTest("Foo", "class Foo { def Integer foo() { foo(); 1 }}", "Bar",
+				"class Baz { def baz(Foo arg) {arg.foo()} }", "foo", "bar");
 	}
 
 	public void testRenameClass() throws Exception {
-		performRenameTest("Foo", "class Foo { Foo foo() {this} }", "Baz", "class Baz { Foo foo() {new Foo()} }", "Foo",
+		performRenameTest("Foo", "class Foo { def Foo foo() {this} }", "Baz", "class Baz { def Foo foo() {new Foo()} }", "Foo",
 				"Bar");
 	}
 

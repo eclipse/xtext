@@ -36,7 +36,7 @@ public class IndexingTest extends AbstractXtend2TestCase {
 		Iterator<IEObjectDescription> iterator = getExportedObjects(
 				"package test\n" +
 				"class Foo {\n" +
-				"  bar() {this}\n" +
+				"  def bar() {this}\n" +
 				"}");
 		expect(iterator, "test.Foo", XTEND_CLASS);
 		expect(iterator, "test.Foo.bar", XTEND_FUNCTION);
@@ -50,8 +50,8 @@ public class IndexingTest extends AbstractXtend2TestCase {
 		Iterator<IEObjectDescription> iterator = getExportedObjects(
 				"package test\n" +
 				"class Foo {\n" +
-				"  dispatch foo(Object x) {x.toString}\n" +
-				"  dispatch foo(String y) {y}\n" +
+				"  def dispatch foo(Object x) {x.toString}\n" +
+				"  def dispatch foo(String y) {y}\n" +
 				"}");
 		expect(iterator, "test.Foo", XTEND_CLASS);
 		expect(iterator, "test.Foo.foo", XTEND_FUNCTION);

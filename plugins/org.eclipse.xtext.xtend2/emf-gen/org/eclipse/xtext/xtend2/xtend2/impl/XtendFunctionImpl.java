@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -32,6 +32,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,6 +42,7 @@ import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getTypeParameters <em>Type Parameters</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFunctionImpl#getParameters <em>Parameters</em>}</li>
@@ -63,6 +65,26 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	 * @ordered
 	 */
 	protected EList<JvmTypeParameter> typeParameters;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
@@ -92,7 +114,7 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<JvmFormalParameter> parameters;
+	protected EList<XtendParameter> parameters;
 
 	/**
 	 * The default value of the '{@link #isOverride() <em>Override</em>}' attribute.
@@ -177,6 +199,29 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 			typeParameters = new EObjectContainmentWithInverseEList.Resolving<JvmTypeParameter>(JvmTypeParameter.class, this, Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS, TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR);
 		}
 		return typeParameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName()
+	{
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName)
+	{
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FUNCTION__NAME, oldName, name));
 	}
 
 	/**
@@ -280,11 +325,11 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<JvmFormalParameter> getParameters()
+	public EList<XtendParameter> getParameters()
 	{
 		if (parameters == null)
 		{
-			parameters = new EObjectContainmentEList<JvmFormalParameter>(JvmFormalParameter.class, this, Xtend2Package.XTEND_FUNCTION__PARAMETERS);
+			parameters = new EObjectContainmentEList<XtendParameter>(XtendParameter.class, this, Xtend2Package.XTEND_FUNCTION__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -388,6 +433,54 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getIdentifier()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getSimpleName()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getQualifiedName()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getQualifiedName(char innerClassDelimiter)
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
@@ -436,6 +529,8 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 		{
 			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
 				return getTypeParameters();
+			case Xtend2Package.XTEND_FUNCTION__NAME:
+				return getName();
 			case Xtend2Package.XTEND_FUNCTION__EXPRESSION:
 				return getExpression();
 			case Xtend2Package.XTEND_FUNCTION__RETURN_TYPE:
@@ -467,6 +562,9 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 				getTypeParameters().clear();
 				getTypeParameters().addAll((Collection<? extends JvmTypeParameter>)newValue);
 				return;
+			case Xtend2Package.XTEND_FUNCTION__NAME:
+				setName((String)newValue);
+				return;
 			case Xtend2Package.XTEND_FUNCTION__EXPRESSION:
 				setExpression((XExpression)newValue);
 				return;
@@ -475,7 +573,7 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 				return;
 			case Xtend2Package.XTEND_FUNCTION__PARAMETERS:
 				getParameters().clear();
-				getParameters().addAll((Collection<? extends JvmFormalParameter>)newValue);
+				getParameters().addAll((Collection<? extends XtendParameter>)newValue);
 				return;
 			case Xtend2Package.XTEND_FUNCTION__OVERRIDE:
 				setOverride((Boolean)newValue);
@@ -502,6 +600,9 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 		{
 			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
 				getTypeParameters().clear();
+				return;
+			case Xtend2Package.XTEND_FUNCTION__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 			case Xtend2Package.XTEND_FUNCTION__EXPRESSION:
 				setExpression((XExpression)null);
@@ -537,6 +638,8 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 		{
 			case Xtend2Package.XTEND_FUNCTION__TYPE_PARAMETERS:
 				return typeParameters != null && !typeParameters.isEmpty();
+			case Xtend2Package.XTEND_FUNCTION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case Xtend2Package.XTEND_FUNCTION__EXPRESSION:
 				return expression != null;
 			case Xtend2Package.XTEND_FUNCTION__RETURN_TYPE:
@@ -569,6 +672,13 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 				default: return -1;
 			}
 		}
+		if (baseClass == JvmIdentifiableElement.class)
+		{
+			switch (derivedFeatureID)
+			{
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -588,6 +698,13 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 				default: return -1;
 			}
 		}
+		if (baseClass == JvmIdentifiableElement.class)
+		{
+			switch (baseFeatureID)
+			{
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -602,7 +719,9 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (override: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", override: ");
 		result.append(override);
 		result.append(", dispatch: ");
 		result.append(dispatch);

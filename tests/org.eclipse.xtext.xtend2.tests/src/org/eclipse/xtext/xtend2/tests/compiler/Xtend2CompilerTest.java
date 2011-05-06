@@ -9,11 +9,6 @@ package org.eclipse.xtext.xtend2.tests.compiler;
 
 import java.io.StringWriter;
 
-import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.xtext.common.types.JvmAnnotationType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xtend2.compiler.Xtend2Compiler;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
@@ -23,7 +18,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 	public void testJavaLangReflectImport() throws Exception {
 		final String input = "package foo\n" +
 				"class Bar {\n" +
-				"  void doStuff(java.lang.reflect.Method m) {}\n" +
+				"  def void doStuff(java.lang.reflect.Method m) {}\n" +
 				"}\n";
 		final String expected = "package foo;\n" + 
 				"\n" +
@@ -41,7 +36,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 	public void testSimple() throws Exception {
 		final String input = "package foo\n" +
 		"class Bar {\n" +
-		"  Integer doStuff(String x) {x.length}\n" +
+		"  def Integer doStuff(String x) {x.length}\n" +
 		"}\n";
 		final String expected = "package foo;\n" + 
 		"\n" +
@@ -61,7 +56,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		final String input = 
 		"package foo\n" +
 		"class Bar {\n" +
-		"  foo() {new String()}\n" +
+		"  def foo() {new String()}\n" +
 		"}\n";
 		final String expected =  
 		"package foo;\n" +
@@ -113,7 +108,7 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		final String input = 
 			"package foo\n" +
 			"class Bar {\n" +
-			"  foo() {new java.util.HashMap<String,java.io.Serializable>()}" +
+			"  def foo() {new java.util.HashMap<String,java.io.Serializable>()}" +
 			"}\n";
 		final String expected =  
 			"package foo;\n" +
@@ -132,56 +127,11 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		assertCompilesTo(expected, input);
 	}
 	
-	protected static class JavaxInjectAwareTypeReferences extends TypeReferences {
-		
-		private boolean javaxInjectAvailable = true;
-		
-		@Override
-		public JvmTypeReference getTypeForName(String typeName, Notifier context, JvmTypeReference... params) {
-			if ("javax.inject.Inject".equals(typeName)) {
-				if (javaxInjectAvailable) {
-					JvmAnnotationType inject = TypesFactory.eINSTANCE.createJvmAnnotationType();
-					inject.setPackageName("javax.inject");
-					inject.setSimpleName("Inject");
-					return createTypeRef(inject);
-				} else {
-					return null;
-				}
-			}
-			return super.getTypeForName(typeName, context, params);
-		}
-	}
-	
-	public void testJavaxInject() throws Exception {
+	public void testAnnotation() throws Exception {
 		final String input = 
 			"package foo\n" +
 			"class Bar {\n" +
-			"  @Inject String string" +
-			"}\n";
-		final String expected =  
-			"package foo;\n" +
-			"\n" + 
-			"import javax.inject.Inject;\n" + 
-			"\n" +
-			"@SuppressWarnings(\"all\")\n" +
-			"public class Bar {\n" +
-			"  @Inject private String string;\n" + 
-			"}";
-		XtendFile file = file(input,true);
-		Xtend2Compiler compiler = get(Xtend2Compiler.class);
-		JavaxInjectAwareTypeReferences typeReferences = get(JavaxInjectAwareTypeReferences.class);
-		typeReferences.javaxInjectAvailable = true;
-		compiler.setTypeReferences(typeReferences);
-		StringWriter appendable = new StringWriter();
-		compiler.compile(file, appendable);
-		assertEquals(expected,appendable.toString());
-	}
-	
-	public void testGoogleInject() throws Exception {
-		final String input = 
-			"package foo\n" +
-			"class Bar {\n" +
-			"  @Inject String string" +
+			"  @com.google.inject.Inject String string" +
 			"}\n";
 		final String expected =  
 			"package foo;\n" +
@@ -194,9 +144,6 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			"}";
 		XtendFile file = file(input,true);
 		Xtend2Compiler compiler = get(Xtend2Compiler.class);
-		JavaxInjectAwareTypeReferences typeReferences = get(JavaxInjectAwareTypeReferences.class);
-		typeReferences.javaxInjectAvailable = false;
-		compiler.setTypeReferences(typeReferences);
 		StringWriter appendable = new StringWriter();
 		compiler.compile(file, appendable);
 		assertEquals(expected,appendable.toString());

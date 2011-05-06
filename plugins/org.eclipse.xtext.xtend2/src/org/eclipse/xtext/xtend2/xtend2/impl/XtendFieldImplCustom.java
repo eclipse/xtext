@@ -7,20 +7,26 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.xtend2.impl;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 
 /**
- * @author Jan Koehnlein - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
-public class XtendMemberImplCustom extends XtendMemberImpl {
+public class XtendFieldImplCustom extends XtendFieldImpl {
 
 	@Override
-	public EList<XAnnotation> getAnnotations() {
-		if (getAnnotationInfo()!=null) {
-			return getAnnotationInfo().getAnnotations();
-		}
-		return super.getAnnotations();
+	public String getIdentifier() {
+		return getQualifiedName();
 	}
 	
+	@Override
+	public String getQualifiedName() {
+		return getQualifiedName('$');
+	}
+	
+	@Override
+	public String getQualifiedName(char innerClassDelimiter) {
+		return eContainer != null ? ((XtendClass) eContainer()).getQualifiedName(innerClassDelimiter) + "." + getName()
+				: getName();
+	}
 }

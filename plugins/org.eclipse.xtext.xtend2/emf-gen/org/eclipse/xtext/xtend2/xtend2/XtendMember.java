@@ -5,7 +5,6 @@
  */
 package org.eclipse.xtext.xtend2.xtend2;
 
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,77 +14,40 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendMember#getDeclaringType <em>Declaring Type</em>}</li>
- *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendMember#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.XtendMember#getAnnotationInfo <em>Annotation Info</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendMember()
- * @model abstract="true"
+ * @model
  * @generated
  */
-public interface XtendMember extends JvmIdentifiableElement
+public interface XtendMember extends XtendAnnotationTarget
 {
 	/**
-	 * Returns the value of the '<em><b>Declaring Type</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.xtend2.xtend2.XtendClass#getMembers <em>Members</em>}'.
+	 * Returns the value of the '<em><b>Annotation Info</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Declaring Type</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Annotation Info</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Declaring Type</em>' container reference.
-	 * @see #setDeclaringType(XtendClass)
-	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendMember_DeclaringType()
-	 * @see org.eclipse.xtext.xtend2.xtend2.XtendClass#getMembers
-	 * @model opposite="members" transient="false"
+	 * @return the value of the '<em>Annotation Info</em>' containment reference.
+	 * @see #setAnnotationInfo(XtendAnnotationTarget)
+	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendMember_AnnotationInfo()
+	 * @model containment="true"
 	 * @generated
 	 */
-	XtendClass getDeclaringType();
+	XtendAnnotationTarget getAnnotationInfo();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.xtend2.xtend2.XtendMember#getDeclaringType <em>Declaring Type</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.xtext.xtend2.xtend2.XtendMember#getAnnotationInfo <em>Annotation Info</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Declaring Type</em>' container reference.
-	 * @see #getDeclaringType()
+	 * @param value the new value of the '<em>Annotation Info</em>' containment reference.
+	 * @see #getAnnotationInfo()
 	 * @generated
 	 */
-	void setDeclaringType(XtendClass value);
-
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.eclipse.xtext.xtend2.xtend2.Xtend2Package#getXtendMember_Name()
-	 * @model
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.xtend2.xtend2.XtendMember#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	String getSimpleName();
+	void setAnnotationInfo(XtendAnnotationTarget value);
 
 } // XtendMember

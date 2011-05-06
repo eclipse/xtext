@@ -15,25 +15,46 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
-import org.eclipse.xtext.xtend2.xtend2.DeclaredDependency;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
+import org.eclipse.xtext.xtend2.xtend2.XtendField;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Declared Dependency</b></em>'.
+ * An implementation of the model object '<em><b>Xtend Field</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.DeclaredDependencyImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.DeclaredDependencyImpl#isExtension <em>Extension</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtend2.xtend2.impl.XtendFieldImpl#isExtension <em>Extension</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class DeclaredDependencyImpl extends XtendMemberImplCustom implements DeclaredDependency
+public class XtendFieldImpl extends XtendMemberImplCustom implements XtendField
 {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -69,7 +90,7 @@ public class DeclaredDependencyImpl extends XtendMemberImplCustom implements Dec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DeclaredDependencyImpl()
+	protected XtendFieldImpl()
 	{
 		super();
 	}
@@ -82,7 +103,30 @@ public class DeclaredDependencyImpl extends XtendMemberImplCustom implements Dec
 	@Override
 	protected EClass eStaticClass()
 	{
-		return Xtend2Package.Literals.DECLARED_DEPENDENCY;
+		return Xtend2Package.Literals.XTEND_FIELD;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName()
+	{
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName)
+	{
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FIELD__NAME, oldName, name));
 	}
 
 	/**
@@ -106,7 +150,7 @@ public class DeclaredDependencyImpl extends XtendMemberImplCustom implements Dec
 		type = newType;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.DECLARED_DEPENDENCY__TYPE, oldType, newType);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FIELD__TYPE, oldType, newType);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -123,14 +167,14 @@ public class DeclaredDependencyImpl extends XtendMemberImplCustom implements Dec
 		{
 			NotificationChain msgs = null;
 			if (type != null)
-				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.DECLARED_DEPENDENCY__TYPE, null, msgs);
+				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_FIELD__TYPE, null, msgs);
 			if (newType != null)
-				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.DECLARED_DEPENDENCY__TYPE, null, msgs);
+				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Xtend2Package.XTEND_FIELD__TYPE, null, msgs);
 			msgs = basicSetType(newType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.DECLARED_DEPENDENCY__TYPE, newType, newType));
+			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FIELD__TYPE, newType, newType));
 	}
 
 	/**
@@ -153,7 +197,55 @@ public class DeclaredDependencyImpl extends XtendMemberImplCustom implements Dec
 		boolean oldExtension = extension;
 		extension = newExtension;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.DECLARED_DEPENDENCY__EXTENSION, oldExtension, extension));
+			eNotify(new ENotificationImpl(this, Notification.SET, Xtend2Package.XTEND_FIELD__EXTENSION, oldExtension, extension));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getIdentifier()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getSimpleName()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getQualifiedName()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getQualifiedName(char innerClassDelimiter)
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -166,7 +258,7 @@ public class DeclaredDependencyImpl extends XtendMemberImplCustom implements Dec
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.DECLARED_DEPENDENCY__TYPE:
+			case Xtend2Package.XTEND_FIELD__TYPE:
 				return basicSetType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -182,9 +274,11 @@ public class DeclaredDependencyImpl extends XtendMemberImplCustom implements Dec
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.DECLARED_DEPENDENCY__TYPE:
+			case Xtend2Package.XTEND_FIELD__NAME:
+				return getName();
+			case Xtend2Package.XTEND_FIELD__TYPE:
 				return getType();
-			case Xtend2Package.DECLARED_DEPENDENCY__EXTENSION:
+			case Xtend2Package.XTEND_FIELD__EXTENSION:
 				return isExtension();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -200,10 +294,13 @@ public class DeclaredDependencyImpl extends XtendMemberImplCustom implements Dec
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.DECLARED_DEPENDENCY__TYPE:
+			case Xtend2Package.XTEND_FIELD__NAME:
+				setName((String)newValue);
+				return;
+			case Xtend2Package.XTEND_FIELD__TYPE:
 				setType((JvmTypeReference)newValue);
 				return;
-			case Xtend2Package.DECLARED_DEPENDENCY__EXTENSION:
+			case Xtend2Package.XTEND_FIELD__EXTENSION:
 				setExtension((Boolean)newValue);
 				return;
 		}
@@ -220,10 +317,13 @@ public class DeclaredDependencyImpl extends XtendMemberImplCustom implements Dec
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.DECLARED_DEPENDENCY__TYPE:
+			case Xtend2Package.XTEND_FIELD__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case Xtend2Package.XTEND_FIELD__TYPE:
 				setType((JvmTypeReference)null);
 				return;
-			case Xtend2Package.DECLARED_DEPENDENCY__EXTENSION:
+			case Xtend2Package.XTEND_FIELD__EXTENSION:
 				setExtension(EXTENSION_EDEFAULT);
 				return;
 		}
@@ -240,9 +340,11 @@ public class DeclaredDependencyImpl extends XtendMemberImplCustom implements Dec
 	{
 		switch (featureID)
 		{
-			case Xtend2Package.DECLARED_DEPENDENCY__TYPE:
+			case Xtend2Package.XTEND_FIELD__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case Xtend2Package.XTEND_FIELD__TYPE:
 				return type != null;
-			case Xtend2Package.DECLARED_DEPENDENCY__EXTENSION:
+			case Xtend2Package.XTEND_FIELD__EXTENSION:
 				return extension != EXTENSION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -259,10 +361,12 @@ public class DeclaredDependencyImpl extends XtendMemberImplCustom implements Dec
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (extension: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", extension: ");
 		result.append(extension);
 		result.append(')');
 		return result.toString();
 	}
 
-} //DeclaredDependencyImpl
+} //XtendFieldImpl

@@ -45,7 +45,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 	private ITypeProvider typeProvider;
 	
 	public void testNoException_01() throws Exception {
-		XtendFunction function = function("noException() {\n" + 
+		XtendFunction function = function("def noException() {\n" + 
 				// exception case is Integeri
 				"	    val closure = [Integeri| return i]\n" + 
 				"	    for (x : 1..100) closure.apply(x)\n" + 
@@ -57,7 +57,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 	}
 	
 	public void testNoException_02() throws Exception {
-		XtendFunction function = function("noException() {\n" + 
+		XtendFunction function = function("def noException() {\n" + 
 				// exception case is i
 				"	    val closure = [ i| return i]\n" + 
 				"	    for (x : 1..100) closure.apply(x)\n" + 
