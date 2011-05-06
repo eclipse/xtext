@@ -9,8 +9,13 @@ package org.eclipse.xtext.ui.refactoring;
 
 import static org.eclipse.xtext.util.Strings.*;
 
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
+import org.eclipse.ltk.core.refactoring.participants.CheckConditionsContext;
 import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
+import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
 
 import com.google.inject.ImplementedBy;
 
@@ -24,7 +29,7 @@ public interface IRenameProcessorAdapter {
 
 	@ImplementedBy(DefaultFactory.class)
 	interface Factory {
-		IRenameProcessorAdapter create(ProcessorBasedRefactoring renameRefactoring);
+		IRenameProcessorAdapter create(RenameProcessor renameProcessor);
 	}
 
 	String getOriginalName();
@@ -34,13 +39,21 @@ public interface IRenameProcessorAdapter {
 	void setNewName(String newName);
 
 	RefactoringStatus validateNewName(String newName);
+	
+	RefactoringStatus checkInitialConditions(IProgressMonitor pm) throws Exception; 
+	
+	RefactoringStatus checkFinalConditions(IProgressMonitor pm, CheckConditionsContext context)
+			throws Exception;
+	
+	Change createChange(IProgressMonitor pm) throws Exception;
+	
 
 	class DefaultFactory implements Factory {
-		public IRenameProcessorAdapter create(ProcessorBasedRefactoring renameRefactoring) {
-			if (renameRefactoring.getProcessor() instanceof IRenameProcessorAdapter) {
-				return (IRenameProcessorAdapter) renameRefactoring.getProcessor();
+		public IRenameProcessorAdapter create(RenameProcessor renameProcessor) {
+			if (renameProcessor instanceof IRenameProcessorAdapter) {
+				return (IRenameProcessorAdapter) renameProcessor;
 			}
-			throw new IllegalArgumentException("Cannot adapt " + notNull(renameRefactoring)
+			throw new IllegalArgumentException("Cannot adapt " + notNull(renameProcessor)
 					+ " to IRenameProcessorAdapter");
 		}
 	}

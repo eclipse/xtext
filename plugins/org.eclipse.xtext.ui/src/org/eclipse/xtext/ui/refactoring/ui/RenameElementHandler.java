@@ -56,13 +56,13 @@ public class RenameElementHandler extends AbstractHandler {
 							}
 						});
 				if (renameElementContext != null) {
-					startRenameLinkedMode(renameElementContext);
+					startRenameElement(renameElementContext);
 				}
 			}
 		} catch (Exception exc) {
+			LOG.error("Error initializing refactoring", exc);
 			MessageDialog.openError(Display.getCurrent().getActiveShell(), "Error initializing refactoring",
 					exc.getMessage());
-			LOG.error("Error initializing refactoring", exc);
 		}
 		return null;
 	}
@@ -75,7 +75,7 @@ public class RenameElementHandler extends AbstractHandler {
 		return renameElementContext;
 	}
 
-	protected void startRenameLinkedMode(IRenameElementContext renameElementContext) throws InterruptedException {
+	protected void startRenameElement(IRenameElementContext renameElementContext) throws InterruptedException {
 		renameRefactoringController.initialize(renameElementContext);
 		renameRefactoringController.startRefactoring(RefactoringType.LINKED_EDITING);
 	}

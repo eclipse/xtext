@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.refactoring;
 
 import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
+import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
@@ -24,4 +25,6 @@ import com.google.inject.ImplementedBy;
 public interface IRenameRefactoringProvider {
 
 	ProcessorBasedRefactoring getRenameRefactoring(IRenameElementContext renameElementContext);
+	
+	RenameProcessor getRenameProcessor(IRenameElementContext renameElementContext);
 }

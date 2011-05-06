@@ -17,6 +17,7 @@ import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
+import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
 import org.eclipse.ltk.ui.refactoring.RefactoringWizardOpenOperation;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
@@ -81,18 +82,23 @@ public class RenameRefactoringController {
 	private LinkedEditingUndoSupport undoSupport;
 
 	public void initialize(IRenameElementContext renameElementContext) {
+		declaringLanguage = getDeclaringLanguageComponentFactory(renameElementContext);
+		this.renameElementContext = renameElementContext;
+		renameRefactoring = declaringLanguage.createRenameRefactoring(renameElementContext);
+		renameProcessorAdapter = renameProcessorAdapterFactory.create((RenameProcessor) renameRefactoring.getProcessor());
+	}
+
+	protected DeclaringLanguageComponentFactory getDeclaringLanguageComponentFactory(IRenameElementContext renameElementContext) {
 		try {
-			declaringLanguage = globalServiceProvider.findService(renameElementContext.getTargetElementURI(),
+			DeclaringLanguageComponentFactory languageComponentFactory = globalServiceProvider.findService(renameElementContext.getTargetElementURI(),
 					DeclaringLanguageComponentFactory.class);
+			return languageComponentFactory;
 		} catch (Exception e) {
 			LOG.error("Error getting refactoring components from declaring language", e);
 			throw new WrappedException(e);
 		}
-		this.renameElementContext = renameElementContext;
-		renameRefactoring = declaringLanguage.createRenameRefactoring(renameElementContext);
-		renameProcessorAdapter = renameProcessorAdapterFactory.create(renameRefactoring);
 	}
-
+	
 	public void startRefactoring(RefactoringType refactoringType) {
 		ViewFreezer freezer = null;
 		try {

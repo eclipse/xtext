@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.ui.jvmmodel.refactoring;
+package org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt;
 
 
 import java.util.List;
@@ -18,14 +18,16 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
 /**
+ * A {@link IRenameElementContext} that triggers a JDT rename refactoring.
+ * 
  * @author koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class RenameJavaElementContext extends IRenameElementContext.Impl {
+public class RenameJvmDeclarationContext extends IRenameElementContext.Impl {
 
 	private List<IJavaElement> javaElements;
 
-	public RenameJavaElementContext(URI targetElementURI, EClass targetElementEClass, List<IJavaElement> javaElements, IEditorPart editor,
+	public RenameJvmDeclarationContext(URI targetElementURI, EClass targetElementEClass, List<IJavaElement> javaElements, IEditorPart editor,
 			ISelection selection, URI contextResourceURI) {
 		super(targetElementURI, targetElementEClass, editor, selection, contextResourceURI);
 		this.javaElements = javaElements;

@@ -20,18 +20,20 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.refactoring.IRenameProcessorAdapter;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
+import org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider;
 import org.eclipse.xtext.ui.refactoring.ui.RenameElementHandler;
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JDTRenameProcessorAdapter;
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmRenameElementHandler;
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmRenameRefactoringProvider;
+import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelRefactoringResourceSetProvider;
+import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JavaRenameProcessorAdapter;
+import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JvmRenameElementHandler;
+import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JvmRenameRefactoringProvider;
 import org.eclipse.xtext.xtend2.ui.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtext.xtend2.ui.autoedit.TokenTypeToPartitionMapper;
 import org.eclipse.xtext.xtend2.ui.contentassist.ImportingTypesProposalProvider;
 import org.eclipse.xtext.xtend2.ui.editor.Xtend2DoubleClickStrategyProvider;
 import org.eclipse.xtext.xtend2.ui.editor.Xtend2FoldingRegionProvider;
 import org.eclipse.xtext.xtend2.ui.highlighting.HighlightingConfiguration;
-import org.eclipse.xtext.xtend2.ui.highlighting.RichStringAwareTokenScanner;
 import org.eclipse.xtext.xtend2.ui.highlighting.RichStringAwareHighlightingCalculator;
+import org.eclipse.xtext.xtend2.ui.highlighting.RichStringAwareTokenScanner;
 import org.eclipse.xtext.xtend2.ui.highlighting.ShowWhitespaceCharactersActionContributor;
 import org.eclipse.xtext.xtend2.ui.highlighting.TokenToAttributeIdMapper;
 import org.eclipse.xtext.xtend2.ui.hyperlinking.XtendHyperlinkHelper;
@@ -49,82 +51,89 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 	public Xtend2UiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}
-	
+
 	public void configureDebugMode(Binder binder) {
 		if (Boolean.getBoolean("org.eclipse.xtext.xtend.debug")) {
 			binder.bindConstant().annotatedWith(Names.named(AbstractEditStrategy.DEBUG)).to(true);
 		}
 	}
-	
+
 	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
 		return HighlightingConfiguration.class;
 	}
-	
+
 	@Override
 	public Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindAbstractAntlrTokenToAttributeIdMapper() {
 		return TokenToAttributeIdMapper.class;
 	}
-	
+
 	@Override
 	public Class<? extends ITokenScanner> bindITokenScanner() {
 		return RichStringAwareTokenScanner.class;
 	}
-	
+
 	@Override
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
 		return RichStringAwareHighlightingCalculator.class;
 	}
-	
+
 	public Class<? extends ITokenTypeToPartitionTypeMapper> bindITokenTypeToPartitionTypeMapper() {
 		return TokenTypeToPartitionMapper.class;
 	}
-	
+
 	@Override
 	public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
 		return AutoEditStrategyProvider.class;
 	}
-	
+
 	public void configureIShowWhitespaceCharactersActionContributor(Binder binder) {
-		binder.bind(IActionContributor.class).annotatedWith(Names.named("Show Whitespace")).to(ShowWhitespaceCharactersActionContributor.class);
+		binder.bind(IActionContributor.class).annotatedWith(Names.named("Show Whitespace"))
+				.to(ShowWhitespaceCharactersActionContributor.class);
 	}
-	
+
 	public Class<? extends DoubleClickStrategyProvider> bindDoubleClickStrategyProvider() {
 		return Xtend2DoubleClickStrategyProvider.class;
 	}
-	
+
 	@Override
 	public Class<? extends IComparator> bindOutlineFilterAndSorter$IComparator() {
 		return Xtend2OutlineNodeComparator.class;
 	}
-	
+
 	public Class<? extends IFoldingRegionProvider> bindIFoldingRegionProvider() {
 		return Xtend2FoldingRegionProvider.class;
 	}
-	
+
 	@Override
 	public Class<? extends ITypesProposalProvider> bindITypesProposalProvider() {
 		return ImportingTypesProposalProvider.class;
 	}
-	
+
 	@Override
 	public Class<? extends IContentOutlinePage> bindIContentOutlinePage() {
 		return Xtend2OutlinePage.class;
 	}
-	
+
 	@Override
 	public Class<? extends IHyperlinkHelper> bindIHyperlinkHelper() {
 		return XtendHyperlinkHelper.class;
 	}
-	
+
 	public Class<? extends RenameElementHandler> bindRenameElementHandler() {
 		return JvmRenameElementHandler.class;
 	}
-	
+
 	public Class<? extends IRenameRefactoringProvider> bindIRenameRefactoringProvider() {
 		return JvmRenameRefactoringProvider.class;
 	}
-	
+
 	public Class<? extends IRenameProcessorAdapter.Factory> bindIRenameProcessorAdapter$Factory() {
-		return JDTRenameProcessorAdapter.Factory.class;
+		return JavaRenameProcessorAdapter.Factory.class;
 	}
+	
+	// TODO: remove this after regenerating xtend
+	public Class<? extends RefactoringResourceSetProvider> bindRefactoringResourceSetProvider() {
+		return JvmModelRefactoringResourceSetProvider.class;
+	}
+
 }
