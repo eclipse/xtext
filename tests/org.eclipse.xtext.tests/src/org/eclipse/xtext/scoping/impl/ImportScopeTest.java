@@ -13,9 +13,14 @@ import static com.google.common.collect.Lists.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -359,6 +364,47 @@ public class ImportScopeTest extends TestCase {
 		Iterable<IEObjectDescription> iterable = scope.getElements(EcorePackage.Literals.EANNOTATION);
 		assertEquals(1, size(iterable));
 		assertEquals("com.foo",iterable.iterator().next().getName().toString());
+	}
+	
+	/**
+	 * Returns a new proxy each time {@link #getEObjectOrProxy()} is called. Behavior is similar to the descriptions from 
+	 * the index. 
+	 */
+	protected final class ProxyReturningDescription extends EObjectDescription {
+		protected ProxyReturningDescription(QualifiedName qualifiedName, EObject element, Map<String, String> userData) {
+			super(qualifiedName, element, userData);
+		}
+
+		@Override
+		public EObject getEObjectOrProxy() {
+			EObject element = super.getEObjectOrProxy();
+			InternalEObject result = (InternalEObject) EcoreFactory.eINSTANCE.create(element.eClass());
+			result.eSetProxyURI(EcoreUtil.getURI(element));
+			return result;
+		}
+	}
+	
+	public void testGetByEObject_02() throws Exception {
+		final IEObjectDescription desc1 = new ProxyReturningDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
+		final IEObjectDescription desc2 = new ProxyReturningDescription(QualifiedName.create("de","foo"), EcorePackage.Literals.EATTRIBUTE, null);
+		SimpleScope outer = new SimpleScope(newArrayList(desc1,desc2), false);
+		ImportNormalizer n1 = new ImportNormalizer(QualifiedName.create("com"), true, false);
+		TestableImportScope scope = new TestableImportScope(newArrayList(n1), outer, new ScopeBasedSelectable(outer), EcorePackage.Literals.EOBJECT, true);
+		IEObjectDescription description = scope.getSingleElement(EcorePackage.Literals.EANNOTATION);
+		assertEquals("foo", description.getName().toString());
+	}
+	
+	public void testGetByEObject_03() throws Exception {
+		final IEObjectDescription desc1 = new ProxyReturningDescription(QualifiedName.create("com","foo"), EcorePackage.Literals.EANNOTATION, null);
+		final IEObjectDescription desc2 = new ProxyReturningDescription(QualifiedName.create("de","bar"), EcorePackage.Literals.EATTRIBUTE, null);
+		SimpleScope outer = new SimpleScope(newArrayList(desc1,desc2), true);
+		ImportNormalizer n1 = new ImportNormalizer(QualifiedName.create("COM"), true, true);
+		ImportNormalizer n2 = new ImportNormalizer(QualifiedName.create("DE"), true, true);
+		TestableImportScope scope = new TestableImportScope(newArrayList(n1, n2), outer, new ScopeBasedSelectable(outer), EcorePackage.Literals.EOBJECT, true);
+		IEObjectDescription fooDescription = scope.getSingleElement(EcorePackage.Literals.EANNOTATION);
+		assertEquals("foo", fooDescription.getName().toString());
+		IEObjectDescription barDescription = scope.getSingleElement(EcorePackage.Literals.EATTRIBUTE);
+		assertEquals("bar", barDescription.getName().toString());
 	}
 	
 }
