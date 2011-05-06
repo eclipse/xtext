@@ -14,10 +14,12 @@ import "platform:/resource/org.eclipse.xtext.xbase/model/XAnnotations.ecore"
 
 XAnnotation :
 	{XAnnotation}
-	'@' annotationType=[types::JvmAnnotationType | QualifiedName] (=>'('(
-		elementValuePairs+=XAnnotationElementValuePair (',' elementValuePairs+=XAnnotationElementValuePair)* |
-		values+=XAnnotationElementValue (',' values+=XAnnotationElementValue)*
-	)')')?
+	'@' annotationType=[types::JvmAnnotationType | QualifiedName] (=>'('
+		(
+			elementValuePairs+=XAnnotationElementValuePair (',' elementValuePairs+=XAnnotationElementValuePair)* 
+		|	values+=XAnnotationElementValue (',' values+=XAnnotationElementValue)*
+		)?
+	')')?
 ;
 
 XAnnotationElementValuePair :
