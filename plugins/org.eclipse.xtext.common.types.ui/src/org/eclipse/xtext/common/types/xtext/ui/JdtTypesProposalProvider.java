@@ -122,7 +122,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 	}
 	
 	public void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory, 
-			ContentAssistContext context, EReference typeReference, Filter filter, IValueConverter<String> valueConverter, ICompletionProposalAcceptor acceptor) {
+			ContentAssistContext context, EReference typeReference, final Filter filter, IValueConverter<String> valueConverter, ICompletionProposalAcceptor acceptor) {
 		if (superType == null || superType.eIsProxy())
 			return;
 		if (superType.eResource() == null || superType.eResource().getResourceSet() == null)
@@ -162,6 +162,9 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 						return !superTypes.contains(fqNameAsString);
 					}
 					
+					public int getSearchFor() {
+						return filter.getSearchFor();
+					}
 					
 				}), valueConverter, acceptor);
 			}
@@ -228,7 +231,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		searchEngine.searchAllTypeNames(
 				packageName, SearchPattern.R_PATTERN_MATCH, 
 				typeName, SearchPattern.R_PREFIX_MATCH, 
-				IJavaSearchConstants.TYPE, scope, 
+				filter.getSearchFor(), scope, 
 				new TypeNameRequestor() {
 					@Override
 					public void acceptType(int modifiers,

@@ -132,16 +132,20 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	}
 
 	protected void completeJavaTypes(ContentAssistContext context, EReference reference, ICompletionProposalAcceptor acceptor) {
-		completeJavaTypes(context, reference, qualifiedNameValueConverter, acceptor);
+		completeJavaTypes(context, reference, qualifiedNameValueConverter, TypeMatchFilters.all(), acceptor);
 	}
 	
-	protected void completeJavaTypes(ContentAssistContext context, EReference reference, IValueConverter<String> valueConverter, ICompletionProposalAcceptor acceptor) {
+	protected void completeJavaTypes(ContentAssistContext context, EReference reference, ITypesProposalProvider.Filter filter, ICompletionProposalAcceptor acceptor) {
+		completeJavaTypes(context, reference, qualifiedNameValueConverter, filter, acceptor);
+	}
+	
+	protected void completeJavaTypes(ContentAssistContext context, EReference reference, IValueConverter<String> valueConverter, ITypesProposalProvider.Filter filter, ICompletionProposalAcceptor acceptor) {
 		if (context.getPrefix().length() > 0) {
 			if (Character.isJavaIdentifierStart(context.getPrefix().charAt(0))) {
-				typeProposalProvider.createTypeProposals(this, context, reference, TypeMatchFilters.all(), valueConverter, acceptor);
+				typeProposalProvider.createTypeProposals(this, context, reference, filter, valueConverter, acceptor);
 			}
 		} else {
-			typeProposalProvider.createTypeProposals(this, context, reference, TypeMatchFilters.all(), valueConverter, acceptor);
+			typeProposalProvider.createTypeProposals(this, context, reference, filter, valueConverter, acceptor);
 		}
 	}
 	
@@ -156,7 +160,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			ICompletionProposalAcceptor acceptor) {
 		if (getXbaseCrossReferenceProposalCreator().isShowTypeProposals()) {
 			ContentAssistContext modifiedContext = context.copy().setMatcher(staticQualifierPrefixMatcher).toContext();
-			completeJavaTypes(modifiedContext, XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE, staticQualifierValueConverter, acceptor);
+			completeJavaTypes(modifiedContext, XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE, staticQualifierValueConverter, TypeMatchFilters.all(), acceptor);
 		}
 	}
 	

@@ -43,6 +43,11 @@ public interface ITypesProposalProvider {
 	interface Filter {
 		boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 						char[][] enclosingTypeNames, String path);
+		
+		/**
+		 * @see org.eclipse.jdt.core.search.IJavaSearchConstants
+		 */
+		int getSearchFor();
 	}
 	
 	public class Null implements ITypesProposalProvider {
