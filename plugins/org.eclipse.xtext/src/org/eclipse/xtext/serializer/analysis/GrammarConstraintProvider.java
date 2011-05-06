@@ -166,6 +166,9 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				List<IConstraintElement> assignments, List<IConstraintElement>[] assignmentsByFeature) {
 			ele.setElementId(elements.size());
 			elements.add(ele);
+			//TODO remove me
+			if (ele.getType() == null)
+				return;
 			switch (ele.getType()) {
 				case ASSIGNED_ACTION_CALL:
 				case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
