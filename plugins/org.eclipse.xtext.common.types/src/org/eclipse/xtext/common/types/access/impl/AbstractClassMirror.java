@@ -71,6 +71,9 @@ public abstract class AbstractClassMirror implements IClassMirror {
 			if (getTypeName().equals(fragment)) {
 				if (resource.getContents().isEmpty()) {
 					logger.error("resource is empty: " + resource.getURI());
+					if (logger.isDebugEnabled()) {
+						logger.debug(getClass().getName(), new Exception());
+					}
 					return null;
 				}
 				return resource.getContents().get(0);

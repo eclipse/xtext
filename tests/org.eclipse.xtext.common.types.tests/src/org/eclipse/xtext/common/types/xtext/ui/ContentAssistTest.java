@@ -43,11 +43,11 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testDefaultArrayList_01() throws Exception {
-		newBuilder().append("default ArrayLis").assertText("java.util.ArrayList");
+		newBuilder().append("default ArrayLis").assertText("java.util.ArrayList", "com.google.common.collect.ArrayListMultimap");
 	}
 	
 	public void testDefaultArrayList_02() throws Exception {
-		newBuilder().append("import java.util.* default ArrayLis").assertText("ArrayList");
+		newBuilder().append("import java.util.* default ArrayLis").assertText("ArrayList", "com.google.common.collect.ArrayListMultimap");
 	}
 
 	public void testDefaultBlockingQueue_01() throws Exception {
@@ -59,11 +59,11 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testCustomArrayList_01() throws Exception {
-		newBuilder().append("custom ArrayLis").assertText("java.util.ArrayList");
+		newBuilder().append("custom ArrayLis").assertText("java.util.ArrayList", "com.google.common.collect.ArrayListMultimap");
 	}
 	
 	public void testCustomArrayList_02() throws Exception {
-		newBuilder().append("import java.util.* custom ArrayLis").assertText("ArrayList");
+		newBuilder().append("import java.util.* custom ArrayLis").assertText("ArrayList", "com.google.common.collect.ArrayListMultimap");
 	}
 	
 	public void testCustomArrayList_03() throws Exception {

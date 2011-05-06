@@ -88,6 +88,7 @@ import org.eclipse.xtext.common.types.testSetups.TestEnum;
 import org.eclipse.xtext.common.types.testSetups.TypeWithInnerAnnotation;
 import org.eclipse.xtext.common.types.testSetups.TypeWithInnerEnum;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
@@ -2113,6 +2114,11 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 	
 	public void testArraysArraylist_02() {
 		assertNotNull(getTypeProvider().findTypeByName("java.util.Arrays$ArrayList"));
+	}
+	
+	public void testGoogleFunction() {
+		String functionType = Function.class.getName();
+		assertNotNull(getTypeProvider().findTypeByName(functionType));
 	}
 	
 	protected abstract String getCollectionParamName();
