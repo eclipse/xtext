@@ -91,11 +91,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				}
 				else break;
 			case Xtend2Package.RICH_STRING_LITERAL:
-				if(context == grammarAccess.getRichStringLiteralEndRule()) {
-					sequence_RichStringLiteralEnd_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getRichStringLiteralInbetweenRule()) {
+				if(context == grammarAccess.getRichStringLiteralInbetweenRule()) {
 					sequence_RichStringLiteralInbetween_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
@@ -103,12 +99,16 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 					sequence_InternalRichStringLiteral_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
+				else if(context == grammarAccess.getRichStringLiteralRule()) {
+					sequence_RichStringLiteral_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
+					return; 
+				}
 				else if(context == grammarAccess.getRichStringLiteralStartRule()) {
 					sequence_RichStringLiteralStart_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getRichStringLiteralRule()) {
-					sequence_RichStringLiteral_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
+				else if(context == grammarAccess.getRichStringLiteralEndRule()) {
+					sequence_RichStringLiteralEnd_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
 				else break;
@@ -229,12 +229,12 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				}
 				else break;
 			case TypesPackage.JVM_UPPER_BOUND:
-				if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
-					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				if(context == grammarAccess.getJvmUpperBoundRule()) {
+					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getJvmUpperBoundRule()) {
-					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				else if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
+					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
 				else break;
@@ -507,11 +507,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				}
 				else break;
 			case XbasePackage.XCLOSURE:
-				if(context == grammarAccess.getXShortClosureRule()) {
-					sequence_XShortClosure_XClosure(context, (XClosure) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getRichStringPartRule() ||
+				if(context == grammarAccess.getRichStringPartRule() ||
 				   context == grammarAccess.getXExpressionRule() ||
 				   context == grammarAccess.getXAssignmentRule() ||
 				   context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
@@ -542,6 +538,10 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				   context == grammarAccess.getXParenthesizedExpressionRule() ||
 				   context == grammarAccess.getXExpressionInsideBlockRule()) {
 					sequence_XClosure_XClosure(context, (XClosure) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getXShortClosureRule()) {
+					sequence_XShortClosure_XClosure(context, (XClosure) semanticObject); 
 					return; 
 				}
 				else break;

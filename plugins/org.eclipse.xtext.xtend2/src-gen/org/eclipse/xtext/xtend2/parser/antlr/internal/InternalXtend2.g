@@ -1953,7 +1953,7 @@ ruleXAnnotation returns [EObject current=null]
 	    }
 
 )
-))*))	otherlv_10=')' 
+))*))?	otherlv_10=')' 
     {
     	newLeafNode(otherlv_10, grammarAccess.getXAnnotationAccess().getRightParenthesisKeyword_3_2());
     }

@@ -37,6 +37,8 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.annotations.compiler.AnnotationCompiler;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.DelegatingAppendable;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
@@ -49,13 +51,14 @@ import org.eclipse.xtext.xtend2.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtext.xtend2.richstring.DefaultIndentationHandler;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
 import org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo;
-import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringForLoop;
 import org.eclipse.xtext.xtend2.xtend2.RichStringIf;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
+import org.eclipse.xtext.xtend2.xtend2.XtendAnnotationTarget;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendClassSuperCallReferable;
+import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendMember;
@@ -85,6 +88,9 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 	@Inject
 	private IXtend2JvmAssociations associations;
+	
+	@Inject
+	private AnnotationCompiler annotationCompiler; 
 
 	/**
 	 * Compile the given {@link XtendFile file} to java code and write
@@ -131,6 +137,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 	protected void compile(XtendClass obj, IAppendable appendable) {
 		//TODO abstract, final
 		appendable.append("\n@SuppressWarnings(\"all\")");
+		generateAnnotations(obj, appendable);
 		appendable.append("\npublic class ").append(obj.getName());
 		appendTypeParameterDeclaration(obj.getTypeParameters(), appendable);
 		if (obj.getExtends() != null) {
@@ -162,17 +169,18 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 
 	protected void compile(XtendField field, IAppendable appendable) {
-		String javaxInject = "javax.inject.Inject";
-		JvmTypeReference inject = getTypeReferences().getTypeForName(javaxInject, field);
-		if (inject == null) {
-			inject = getTypeReferences().getTypeForName(Inject.class, field);
-		}
-		appendable.append("\n@");
-		serialize(inject, field, appendable);
+		generateAnnotations(field, appendable);
 		appendable.append(" private ");
 		serialize(field.getType(), field, appendable);
 		appendable.append(" ");
 		appendable.append(appendable.declareVariable(field, field.getName())).append(";");
+	}
+
+	protected void generateAnnotations(XtendAnnotationTarget annotationTarget, IAppendable appendable) {
+		for (XAnnotation anno : annotationTarget.getAnnotations()) {
+			appendable.append("\n");
+			annotationCompiler.generate(anno, appendable);
+		}
 	}
 
 	protected void generateDispatchMethods(XtendClass obj, IAppendable appendable) {
@@ -276,7 +284,9 @@ public class Xtend2Compiler extends XbaseCompiler {
 		if (obj.isDispatch()) {
 			name = "_" + name;
 		}
-		appendable.append("\n\n").append("public ");
+		appendable.append("\n\n");
+		generateAnnotations(obj, appendable);
+		appendable.append("public ");
 		appendTypeParameterDeclaration(obj.getTypeParameters(), appendable);
 		serialize(resolveMultiType(returnType), obj, appendable);
 		appendable.append(" ").append(name).append("(");

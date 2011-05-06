@@ -625,7 +625,7 @@
         </elements>
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Keyword" predicated="true" value="("/>
-          <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Alternatives" cardinality="?">
             <elements xsi:type="xtext:Group">
               <elements xsi:type="xtext:Assignment" feature="elementValuePairs" operator="+=">
                 <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
