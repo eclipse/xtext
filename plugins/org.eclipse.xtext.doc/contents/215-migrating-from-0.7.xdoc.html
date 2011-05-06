@@ -1,0 +1,606 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Migrating from Xtext 0.7.x to 1.0</title>
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="index.html" title="">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+
+<a name="migrating_from_0_7"></a>
+<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Migrating from Xtext 0.7.x to 1.0</h1>
+
+<p>
+Most of the tasks when migrating to Xtext 1.0 can be automated. Some changes will be necessary in the manually written code where you have to carefully
+verify that your implementation is still working with Xtext 1.0. A reliable test-suite helps a lot. 
+</p>
+
+<p>
+The grammar language is fully backward compatible. You should not have to apply any changes in the primary artifact. However, we introduced some additional
+validation rules that mark inconsistencies in your grammar. If you get any warnings in the grammar editor, it should be straight forward to fix them.
+</p>
+
+<p>
+<em>Tip: You&apos;ll learn something about the new features if you compare a freshly created Xtext project based on 0.7.x with a new Xtext project based on 1.0. Especially the new fragments in the workflow are a good indicator for useful new features.</em> 
+</p>
+
+
+
+
+<a name="migrating_from_0_7-4"></a>
+<div class="section" title="Take the Shortcut">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+Take the Shortcut
+</h2>
+</div>
+</div>
+</div>
+
+
+
+<p>
+If you haven&apos;t made too many customizations to the generated defaults and if you&apos;re not referencing many classes of your Xtext language from the outside, you might consider starting with a new Xtext project, copying your grammar and then manually restoring your changes step by step. If that does not work for you, go on reading!
+</p>
+
+
+</div>
+
+
+
+<a name="migrating_from_0_7-5"></a>
+<div class="section" title="Migrating Step By Step">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+Migrating Step By Step
+</h2>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Before you start the migration to Xtext 1.0, you should make sure that no old plug-ins are in your target platform. Some plug-ins from Xtext 0.7.x have been merged and 
+do no longer exist. 
+</p>
+
+<p>
+<em>Tip: The following steps try to use the Eclipse compiler to spot any source-incompatible changes while fixing them with only a few well described user actions. Doing these steps in another order causes most likely a higher effort.</em>
+</p>
+
+
+
+
+<a name="migrating_from_0_7-5-3"></a>
+<div class="section" title="Update the Plug-in Dependencies and Import Statements">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Update the Plug-in Dependencies and Import Statements
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+You should update the constraints from version <em>0.7.x</em> to <em>[1.0.0,2.0.0)</em> in your manifest files if you specified any concrete versions.
+Make sure that your <em>dsl.ui</em>-projects do not refer to the plug-in <em>org.eclipse.xtext.ui.common</em> or <em>org.eclipse.xtext.ui.core</em> but to <em>org.eclipse.xtext.ui</em> instead. The arguably easiest way is a global text-based search and replace across the manifest files. The bundle <em>org.eclipse.xtext.log4j</em> is obsolete as well. The generator will create <em>import-package</em> entries in the manifests later on.
+</p>
+
+<p>
+The next step is to fix the import statements in your classes to match the refactored naming scheme in Xtext. Perform a global search for "_import org.eclipse.xtext.ui.common._" and 
+"_import org.eclipse.xtext.ui.core._" and replace the matches with "_import org.eclipse.xtext.ui._". This fixes most of the problems in the manually written code. 
+</p>
+
+
+</div>
+
+
+
+<a name="migrating_from_0_7-5-4"></a>
+<div class="section" title="Rename the Packages in the dsl.ui-Plug-in">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Rename the Packages in the dsl.ui-Plug-in
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+We changed the naming pattern for artifacts in the <em>dsl.ui</em>-plug-in to match the OSGI conventions. The easiest way to update your existing projects is to apply a 
+"Rename Package" refactoring on the packages in the <em>src</em>- and <em>src-gen</em> folder <em>before</em> you re-run the workflow that regenerates your language. Make sure you ticked "Rename sub-packages" in the dialog. It is error-prone to enable the search in non-Java files as this will perform incompatible changes in the manifest files. Furthermore, it is important to perform the rename operation in the <em>src-gen</em> folder, too. This ensures that the references in your manually written code are properly updated.
+</p>
+
+
+</div>
+
+
+
+<a name="migrating_from_0_7-5-5"></a>
+<div class="section" title="Update the Workflow">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Update the Workflow
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+The <em>JavaScopingFragment</em> does no longer exist. It has been superseded by the <em>ImportURIScopingFragment</em> in combination with the <em>SimpleNamesFragment</em>.
+Please replace  
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+&lt;fragment&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;class=<span class="string" >"org.eclipse.xtext.generator.scoping.JavaScopingFragment"</span>/&gt;
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+with
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+&lt;fragment&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;class=<span class="string" >"org.eclipse.xtext.generator.scoping.ImportURIScopingFragment"</span>/&gt;<br />
+&lt;fragment&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;class=<span class="string" >"org.eclipse.xtext.generator.exporting.SimpleNamesFragment"</span>/&gt;
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+The <em>PackratParserFragment</em> has been abandoned as well. It is save to remove the reference to that one if it is activated in your workflow. After you&apos;ve changed your workflow, it should be possible to regenerate your language without any errors in the console. It is ok to have compilation errors prior to executing the workflow.
+</p>
+
+
+</div>
+
+
+
+<a name="migrating_from_0_7-5-6"></a>
+<div class="section" title="MANIFEST.MF and plugin.xml">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+MANIFEST.MF and plugin.xml
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+The previous rename package refactoring updated most of the entries in the <em>MANIFEST.MF</em> and and some entries in the <em>plugin.xml</em>. Others have to be fixed manually. The Eclipse compiler will point to many of the remaining problems in the manifest files but it is unlikely that it will spot the erroneous references in the <em>plugin.xml</em>.
+</p>
+
+<p>
+
+
+<ul>
+
+<li>
+
+<p>
+In the generated UI plug-in&apos;s <em>MANIFEST.MF</em>, remove the package exports of no longer existing packages and make sure the bundle activator points to the newly generated one (with <em>.ui.</em> in its package name).  
+</p>
+
+</li>
+
+<li>
+
+<p>
+It was already mentioned that the plug-ins <em>org.eclipse.xtext.ui.core</em> and <em>org.eclipse.xtext.ui.common</em> have been merged into a new single plug-in <em>org.eclipse.xtext.ui</em>. The same happened to the respective Java packages. Change eventually remaining bundle-dependencies in all manifests. 
+</p>
+
+</li>
+
+<li>
+
+<p>
+The plug-in <em>org.eclipse.xtext.log4j</em> no longer exists. We use a package import of <em>org.apache.log4j</em> instead. Also remove the buddy registration. 
+</p>
+
+</li>
+
+<li>
+
+<p>
+Due to renamed packages, you have to fix all references to classes therein in the <em>plugin.xml</em>. A diff with the <em>plugin.xml_gen</em> will be a great help. If you haven&apos;t added a lot manually, consider merging these into the generated version instead of going the other way around. Note that warnings in the <em>plugin.xml</em> can be considered to be real errors most of the time. Make sure
+</p>
+
+</li>
+
+<li>
+
+<p>
+the <em>[MyDsl]ExecutableExtensionFactory</em> has the <em>.ui.</em> package prefix
+</p>
+
+</li>
+
+<li>
+
+<p>
+classes from <em>org.eclipse.xtext.ui.common</em> and <em>org.eclipse.xtext.ui.core</em> are now usually somewhere in <em>org.eclipse.xtext.ui</em>. They are also referenced by the <em>[MyDsl]ExecutableExtensionFactory</em> and thus not covered by the editor&apos;s validation. 
+</p>
+
+</li>
+
+<li>
+
+<p>
+A number of new features are being registered in the <em>plugin.xml</em>, e.g. <em>Find references</em>, <em>Quick Outline</em>, and <em>Quick Fixes</em>. You can enable them by manually copying the respective entries from <em>plugin.xml</em>__gen_ to  <em>plugin.xml</em>.
+</p>
+
+</li>
+
+<li>
+
+<p>
+To run MWE2 workflows later on, you must change the plug-in dependencies from <em>org.eclipse.emf.mwe.core</em> to <em>org.eclipse.emf.mwe2.launch</em> in your manifest. Optional resolution is fine.
+</p>
+
+</li>
+
+</ul>
+
+</p>
+
+
+</div>
+
+
+
+<a name="migrating_from_0_7-5-7"></a>
+<div class="section" title="Noteworthy API Changes">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+Noteworthy API Changes
+</h3>
+</div>
+</div>
+</div>
+
+
+
+<p>
+The <em>src</em> folders are generated once, so existing code will not be overwritten but has to be updated manually. At least one new class has appeared in your <em>src</em>-folder of the <em>ui</em> plug-in. there will now be a <em>[MyDsl]StandaloneSetup</em> inheriting form the generated <em>[MyDsl]StandaloneSetupGenerated</em> to allow customization.
+</p>
+
+<p>
+You will face a couple of compilation problems due to changes in the API. Here&apos;s a list of the most prominent changes. It is usually only necessary to change your code, if you face any compilation problems.
+
+
+<ul>
+
+<li>
+
+<p>
+The method <em>IScopeProvider.getScope(EObject,EClass)</em> has been removed. Use  <em>IScopeProvider.getScope(EObject,EReference)</em> instead. 
+</p>
+
+</li>
+
+<li>
+
+<p>
+Renamed <em>DefaultScopeProvider</em> to <em>SimpleNameScopeProvider</em>. There have been further significant changes in the scoping API that allow for optimized implementations. Consult the 
+<a href="080-scoping.xdoc.html#scoping">section on scoping</a> for details.
+</p>
+
+</li>
+
+<li>
+
+<p>
+The return type of <em>AbstractInjectableValidator.getEPackages()</em> was changed from <em>List&lt;? extends EPackage&gt;</em> to <em>List&amp;lt;EPackage&gt;</em>.
+</p>
+
+</li>
+
+<li>
+
+<p>
+The parser interfaces now use <em>java.io.Reader</em> instead of <em>java.io.InputStream</em> to explicitly address encoding. Have a look at the 
+<a href="115-encoding.xdoc.html#encoding">section on encoding</a> for details.
+</p>
+
+</li>
+
+<li>
+
+<p>
+The handling of <em>ILabelProvider</em> in various contexts has been refactored. The former base class <em>DefaultLabelProvider</em> no longer exists. Use the <em>DefaultEObjectLabelProvider</em> instead. See the 
+<a href="140-labelprovider.xdoc.html#labelProvider">section on label providers</a> for details. 
+</p>
+
+</li>
+
+<li>
+
+<p>
+We have introduced a couple of new packages to better separate concerns. Most classes should be easy to relocate. 
+</p>
+
+</li>
+
+<li>
+
+<p>
+The runtime and UI modules have separate base classes <em>DefaultRuntimeModule</em> and <em>DefaultUiModule</em> now. We use Guice&apos;s module overrides to combine them with the newly introduced <em>SharedModule</em>.  You have to add a constructor the your <em>[MyDsl]UiModule</em> that takes an <em>AbstractUiPlugin</em> as argument and pass that one to the super constructor. <em>Tip: There is an Eclipse quick fix available for that one.</em>
+</p>
+
+</li>
+
+<li>
+
+<p>
+The interfaces <em>ILexicalHighlightigConfiguration</em> and <em>ISemanticHighlightingConfiguration</em> have been merged into <em>IHighlightingConfiguration</em>.
+</p>
+
+</li>
+
+<li>
+
+<p>
+The <em>DefaultTemplateProposalProvider</em> takes an additional, injectable constructor parameter of type <em>ContextTypeIdHelper</em>.
+</p>
+
+</li>
+
+<li>
+
+<p>
+The <em>HyperlinkHelper</em> uses field injection instead of constructor injection. The method <em>createHyperlinksByOffset</em> should be overridden instead of the former <em>findCrossLinkedEObject</em>.
+</p>
+
+</li>
+
+<li>
+
+<p>
+The API to skip a node in the outline has changed. Instead of returning the <em>HIDDEN_NODE</em> you&apos;ll have to implement <em>boolean consumeNode(MyType)</em> and return <em>false</em>.
+</p>
+
+</li>
+
+<li>
+
+<p>
+The <em>Readonly*Storage</em> implementations have been removed. There is a new API to open editors for objects with a given URI. Please use the <em>IURIEditorOpener</em> to create an editor or the <em>IStorage2UriMapper</em> to obtain an <em>IStorage</em> for a given URI.
+</p>
+
+</li>
+
+<li>
+
+<p>
+The interfaces <em>IStateAccess</em> and <em>IEObjectHandle</em> have been moved along with the <em>IUnitOfWork</em> to the package <em>org.eclipse.xtext.util.concurrent</em>.
+</p>
+
+</li>
+
+<li>
+
+<p>
+The <em>ValidationJobFactory</em> is gone. Please implement a custom <em>IResourceValidator</em> instead.
+</p>
+
+</li>
+
+<li>
+
+<p>
+The grammar elements <em>Alternatives</em> and <em>Group</em> have a new common super type <em>CompoundElement</em>. The methods <em>getGroups</em> and <em>getTokens</em> have been refactored to <em>getElements</em>.
+</p>
+
+</li>
+
+<li>
+
+<p>
+Completion proposals take a <em>StyledString</em> instead of a plain string as display string.
+</p>
+
+</li>
+
+<li>
+
+<p>
+The <em>AbstractLabelProvider</em> does no longer expose its <em>IImageHelper</em>. Use <em>convertToImage</em> instead or inject your own <em>IImageHelper</em>.
+</p>
+
+</li>
+
+<li>
+
+<p>
+The implementation-classes from <em>org.eclipse.xtext.index</em> were superseded by the builder infrastructure. Use the <em>QualifiedNamesFragment</em> and the <em>ImportNamespacesScopingFragment</em> instead of the <em>ImportedNamespacesScopingFragment</em>. Please refer to the section about the builder infrastructure for details.
+</p>
+
+</li>
+
+<li>
+
+<p>
+All the Xtend-based fragments were removed. 
+</p>
+
+</li>
+
+<li>
+
+<p>
+_ILinkingService.getLinkText_ was removed. Have a look at the <em>LinkingHelper</em> and the <em>CrossReferenceSerializer</em> if you relied on this method.
+</p>
+
+</li>
+
+<li>
+
+<p>
+The <em>SerializerUtil</em> was renamed to <em>Serializer</em>. There were other heavy refactorings that involved the serializer and its components (like e.g. the <em>ITransientValueService</em>) but it should be pretty straight forward to migrate existing client code.
+</p>
+
+</li>
+
+<li>
+
+<p>
+The method-signatures of the <em>IFragmentProvider</em> have changed. The documentation will give a clue on how to update existing implementations.
+</p>
+
+</li>
+
+<li>
+
+<p>
+Some static methods were removed from utility classes such as <em>EcoreUtil2</em> and <em>ParsetreeUtil</em> in favor of more sophisticated implementations.
+</p>
+
+</li>
+
+</ul>
+
+</p>
+
+
+</div>
+
+</div>
+
+
+
+<a name="migrating_from_0_7-6"></a>
+<div class="section" title="Now Go For The New Features">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+Now Go For The New Features
+</h2>
+</div>
+</div>
+</div>
+
+
+
+<p>
+After migrating, some of the new features in Xtext 1.0 will be automatically available. Others require further configuration.
+We recommend reading the sections about
+
+
+<ul>
+
+<li>
+
+<p>
+
+<a href="080-scoping.xdoc.html#index_based">qualified names and namespace imports</a>
+</p>
+
+</li>
+
+<li>
+
+<p>
+
+<a href="080-scoping.xdoc.html#containers">the builder infrastructure</a>
+</p>
+
+</li>
+
+<li>
+
+<p>
+
+<a href="155-quickfix.xdoc.html#quickfixes">quick fixes</a>
+</p>
+
+</li>
+
+<li>
+
+<p>
+
+<a href="020-grammar-language.xdoc.html#unordered_groups">unordered groups</a>
+</p>
+
+</li>
+
+<li>
+
+<p>
+
+<a href="170-outline.xdoc.html#quick_outline">quick outline</a>
+</p>
+
+</li>
+
+<li>
+
+<p>
+
+<a href="118-mwe-in-depth.xdoc.html#MWE2">MWE2</a>
+</p>
+
+</li>
+
+<li>
+
+<p>
+
+<a href="199-jvmtypes.xdoc.html#jvmtypes">refering to Java elements</a>
+</p>
+
+</li>
+
+</ul>
+
+For an overview over the new features consult our <a href="http://www.eclipse.org/Xtext/documentation/helios/new_and_noteworthy.php">New and Noteworthy</a> online. 
+</p>
+
+
+</div>
+
+</body>
+</html>
