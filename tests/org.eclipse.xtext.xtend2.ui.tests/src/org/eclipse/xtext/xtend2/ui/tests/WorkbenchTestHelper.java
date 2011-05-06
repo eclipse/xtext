@@ -122,7 +122,8 @@ public class WorkbenchTestHelper extends Assert {
 	}
 
 	public IFile createFile(String fileName, String content) throws Exception {
-		IFile file = IResourcesSetupUtil.createFile(TESTPROJECT_NAME + "/src/" + fileName + "." + getFileExtension(),
+		String extension = (fileName.indexOf(".") != -1) ? "" : "." + getFileExtension();
+		IFile file = IResourcesSetupUtil.createFile(TESTPROJECT_NAME + "/src/" + fileName + extension,
 				content);
 		getFiles().add(file);
 		return file;
@@ -217,7 +218,7 @@ public class WorkbenchTestHelper extends Assert {
 		}
 	}
 
-	protected XtextEditor openEditor(IFile file) throws Exception {
+	public XtextEditor openEditor(IFile file) throws Exception {
 		IEditorPart openEditor = openEditor(file, getEditorID());
 		XtextEditor xtextEditor = EditorUtils.getXtextEditor(openEditor);
 		if (xtextEditor != null) {
