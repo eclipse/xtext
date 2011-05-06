@@ -5,6 +5,7 @@ import static extension org.eclipse.xtext.GrammarUtil.*
 import org.eclipse.xtext.generator.GrammarAccessUtil
 import org.eclipse.xtext.generator.Naming
 import org.eclipse.emf.ecore.EObject
+import com.google.inject.Inject
 
 // ******************************************************************************
 // ***  this API can be used by other templates to generate code             ****
@@ -24,10 +25,10 @@ class GrammarAccess {
 	 * @param ele the element
 	 * @return The java statement
 	 */	
-	String gaFullAccessor(AbstractElement ele) {
+	def String gaFullAccessor(AbstractElement ele) {
 		ele.grammar.gaSimpleName() + ".INSTANCE." + ele.gaRuleElementAccessor()
 	}
-		
+
 	/**
 	 * Converts an arbitary string to a valid Java identifier
 	 * The string is being split up along the the caracters that are not valid as java 
@@ -37,7 +38,7 @@ class GrammarAccess {
 	 * @param uppercaseFirst whether the first character of the returned identifier should be uppercase or lowercase
 	 * @return the java identifier
 	 */
-	String toJavaIdentifier(String text, boolean uppercaseFirst) {
+	def String toJavaIdentifier(String text, boolean uppercaseFirst) {
 		GrammarAccessUtil::toJavaIdentifier(text, uppercaseFirst)
 	}
 		
@@ -47,7 +48,7 @@ class GrammarAccess {
 	 * @param rule the Rule
 	 * @return the identifier
 	 */
-	String gaRuleIdentifyer(AbstractRule rule) {
+	def String gaRuleIdentifyer(AbstractRule rule) {
 		rule.name.toJavaIdentifier(true)
 	}
 		
@@ -58,7 +59,7 @@ class GrammarAccess {
 	 * @param element the element
 	 * @return the element's identifier
 	 */
-	String gaElementIdentifyer(AbstractElement element) {
+	def String gaElementIdentifyer(AbstractElement element) {
 		GrammarAccessUtil::getUniqueElementName(element);
 	}
 	/**
@@ -66,7 +67,7 @@ class GrammarAccess {
 	 * @param grammar 
 	 * @return the GrammarAccess' full qualified Java class name
 	 */
-	String gaFQName(Grammar grammar) {
+	def String gaFQName(Grammar grammar) {
 		GrammarAccessUtil::getGrammarAccessFQName(grammar, naming)
 	}
 
@@ -76,7 +77,7 @@ class GrammarAccess {
 	 * @param grammar the grammar
 	 * @return the GrammarAccess' simple class name
 	 */
-	String gaSimpleName(Grammar grammar) {
+	def String gaSimpleName(Grammar grammar) {
 		naming.toSimpleName(gaFQName(grammar))
 	}
 	
@@ -85,7 +86,7 @@ class GrammarAccess {
 	 * @param rule the rule for which the accessor method is needed
 	 * @return the method's name.
 	 */
-	String gaRuleAccessMethodName(AbstractRule rule) {
+	def String gaRuleAccessMethodName(AbstractRule rule) {
 		"get" + rule.gaRuleIdentifyer() + "Rule"
 	}
 		
@@ -94,7 +95,7 @@ class GrammarAccess {
 	 * @param rule the rule for which the accessor method is needed
 	 * @return the method's name.
 	 */
-	String gaRuleElementsMethodName(AbstractRule rule) {
+	def String gaRuleElementsMethodName(AbstractRule rule) {
 		"get" + rule.gaRuleIdentifyer() + "Access"
 	}
 	
@@ -103,7 +104,7 @@ class GrammarAccess {
 	 * @param element the element for which the accesor method is needed
 	 * @return the method's name.
 	 */
-	String gaElementAccessMethodeName(AbstractElement element) {
+	def String gaElementAccessMethodeName(AbstractElement element) {
 		"get" + element.gaElementIdentifyer()
 	}
 	
@@ -113,7 +114,7 @@ class GrammarAccess {
 	 * @param rule
 	 * @return the simple class name
 	 */	
-	String gaRuleAccesorClassName(AbstractRule rule) {
+	def String gaRuleAccesorClassName(AbstractRule rule) {
 		rule.gaRuleIdentifyer() + "Elements"
 	}
 		
@@ -122,7 +123,7 @@ class GrammarAccess {
 	 * @param rule the rule
 	 * @return The java statement
 	 */	
-	String gaRuleAccessor(AbstractRule rule) {
+	def String gaRuleAccessor(AbstractRule rule) {
 		rule.gaRuleAccessMethodName() + "()"
 	}
 	
@@ -131,7 +132,7 @@ class GrammarAccess {
 	 * @param rule the rule
 	 * @return The java statement
 	 */	
-	String gaElementsAccessor(AbstractRule rule) {
+	def String gaElementsAccessor(AbstractRule rule) {
 		rule.gaRuleElementsMethodName() + "()"
 	}
 		
@@ -142,7 +143,7 @@ class GrammarAccess {
 	 * @param ele the element
 	 * @return The java statement
 	 */	
-	String gaElementAccessor(AbstractElement ele){
+	def String gaElementAccessor(AbstractElement ele){
 		ele.gaElementAccessMethodeName() + "()";
 	}
 		
@@ -153,7 +154,7 @@ class GrammarAccess {
 	 * @param ele the element
 	 * @return The java statement
 	 */	
-	String gaRuleElementAccessor(AbstractElement ele) {
+	def String gaRuleElementAccessor(AbstractElement ele) {
 		ele.containingRule().gaElementsAccessor() + "." + ele.gaElementAccessor();
 	}
 	
@@ -162,7 +163,7 @@ class GrammarAccess {
 	 * Example1: getFooRule().getType()
 	 * Example2: getBarRule().getFooAction().getType()
 	 */
-	String gaTypeAccessor(TypeRef ele) {
+	def String gaTypeAccessor(TypeRef ele) {
 		switch cnt: ele.eContainer() {
 			AbstractElement: cnt.gaRuleElementAccessor() + ".getType()"
 			AbstractRule: cnt.gaRuleAccessor() + ".getType()"
@@ -174,7 +175,7 @@ class GrammarAccess {
 	 * Example1: getFooRule()
 	 * Example2: getBarRule().getFooAction()
 	 */
-	String gaAccessor(EObject ele) {
+	def String gaAccessor(EObject ele) {
 		switch ele {
 			AbstractElement: ele.gaRuleElementAccessor()
 			AbstractRule: ele.gaRuleAccessor() 
@@ -184,7 +185,7 @@ class GrammarAccess {
 	/*
 	 *
 	 */
-	String grammarFragmentToStr(EObject ele, String prefix) {
+	def String grammarFragmentToStr(EObject ele, String prefix) {
 		GrammarAccessUtil::serialize(ele, prefix);
 	}
 	

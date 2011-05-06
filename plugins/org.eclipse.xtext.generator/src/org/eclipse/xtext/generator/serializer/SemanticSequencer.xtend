@@ -1,6 +1,7 @@
 package org.eclipse.xtext.generator.serializer
 
 import org.eclipse.xtext.Grammar
+import com.google.inject.Inject
 
 class SemanticSequencer extends GeneratedFile {
 	

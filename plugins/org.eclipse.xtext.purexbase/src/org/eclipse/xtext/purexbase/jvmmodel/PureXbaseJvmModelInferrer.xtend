@@ -5,6 +5,7 @@ import java.util.List
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmDeclaredType
+import com.google.inject.Inject
 
 /**
  * Infers a JVM model from the source model. 

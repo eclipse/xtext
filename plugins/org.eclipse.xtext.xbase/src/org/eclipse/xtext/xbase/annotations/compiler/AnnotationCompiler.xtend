@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
- package org.eclipse.xtext.xbase.annotations.compiler
+package org.eclipse.xtext.xbase.annotations.compiler
 
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation
@@ -27,7 +27,7 @@ import org.eclipse.xtext.util.Strings
  */
 class AnnotationCompiler {
 	
-	dispatch void generate(XAnnotation annotation, IAppendable a) {
+	def dispatch void generate(XAnnotation annotation, IAppendable a) {
 		a.append('@').append(annotation.annotationType)
 		if (!annotation.values.isEmpty()) {
 			a.append('(')
@@ -50,18 +50,18 @@ class AnnotationCompiler {
 		}
 	}
 	
-	dispatch void generate(XAnnotationElementValuePair binaryOp, IAppendable a) {
+	def dispatch void generate(XAnnotationElementValuePair binaryOp, IAppendable a) {
 		a.append(binaryOp.getElement().simpleName).append(" = ")
 		binaryOp.value.generate(a)
 	}
 	
-	dispatch void generate(XAnnotationElementValueBinaryOperation binaryOp, IAppendable a) {
+	def dispatch void generate(XAnnotationElementValueBinaryOperation binaryOp, IAppendable a) {
 		binaryOp.leftOperand.generate(a)
 		a.append(" + ")
 		binaryOp.rightOperand.generate(a)
 	}
 	
-	dispatch void generate(XAnnotationValueArray array, IAppendable a) {
+	def dispatch void generate(XAnnotationValueArray array, IAppendable a) {
 		a.append('{')
 		val iter = array.values.iterator
 		while (iter.hasNext) {
@@ -72,26 +72,26 @@ class AnnotationCompiler {
 		a.append('}')
 	}
 	
-	dispatch void generate(XFeatureCall featureCall, IAppendable a) {
+	def dispatch void generate(XFeatureCall featureCall, IAppendable a) {
 		if (featureCall.declaringType != null) {
 			a.append(featureCall.declaringType)
 			a.append('.')			
 		}
 	}
 	
-	dispatch void generate(XStringLiteral stringLiteral, IAppendable a) {
+	def dispatch void generate(XStringLiteral stringLiteral, IAppendable a) {
 		a.append('"').append(Strings::convertToJavaString(stringLiteral.value)).append('"')
 	}
 	
-	dispatch void generate(XBooleanLiteral booleanLiteral, IAppendable a) {
+	def dispatch void generate(XBooleanLiteral booleanLiteral, IAppendable a) {
 		a.append(booleanLiteral.isTrue)
 	}
 	
-	dispatch void generate(XIntLiteral intLiteral, IAppendable a) {
+	def dispatch void generate(XIntLiteral intLiteral, IAppendable a) {
 		a.append(intLiteral.value)
 	}
 	
-	dispatch void generate(XTypeLiteral typeLiteral, IAppendable a) {
+	def dispatch void generate(XTypeLiteral typeLiteral, IAppendable a) {
 		a.append(typeLiteral.type).append('.class')
 	}
 }
