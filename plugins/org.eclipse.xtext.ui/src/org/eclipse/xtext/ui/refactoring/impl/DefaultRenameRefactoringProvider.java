@@ -26,10 +26,17 @@ public class DefaultRenameRefactoringProvider implements IRenameRefactoringProvi
 	private Provider<AbstractRenameProcessor> processorProvider;
 
 	public ProcessorBasedRefactoring getRenameRefactoring(IRenameElementContext renameElementContext) {
-		AbstractRenameProcessor processor = processorProvider.get();
+		RenameProcessor processor = getRenameProcessor(renameElementContext);
 		if (processor != null) {
-			if(processor.initialize(renameElementContext))
-				return new RenameRefactoring(processor);
+			return new RenameRefactoring(processor);
+		}
+		return null;
+	}
+	
+	public RenameProcessor getRenameProcessor(IRenameElementContext renameElementContext) {
+		AbstractRenameProcessor processor = processorProvider.get();
+		if (processor != null && processor.initialize(renameElementContext)) {
+			return processor;
 		}
 		return null;
 	}

@@ -20,6 +20,7 @@ import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.RefactoringTickProvider;
 import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
+import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -73,7 +74,7 @@ public class StrictLinkedPositionGroupCalculator extends AbstractLinkedPositionG
 		SubMonitor progress = SubMonitor.convert(monitor, 100);
 		XtextEditor xtextEditor = (XtextEditor) renameElementContext.getTriggeringEditor();
 		final IXtextDocument document = xtextEditor.getDocument();
-		IRenameProcessorAdapter renameProcessorAdapter = renameProcessorAdapterFactory.create(renameRefactoring);
+		IRenameProcessorAdapter renameProcessorAdapter = renameProcessorAdapterFactory.create((RenameProcessor) renameRefactoring.getProcessor());
 		final String originalName = renameProcessorAdapter.getOriginalName();
 		renameProcessorAdapter.setNewName(getDummyNewName(originalName));
 		List<ReplaceEdit> edits = computeReplaceEditsForDocument(renameRefactoring, document, progress.newChild(80));

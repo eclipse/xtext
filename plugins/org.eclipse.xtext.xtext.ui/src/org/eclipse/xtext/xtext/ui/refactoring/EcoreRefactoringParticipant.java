@@ -41,7 +41,7 @@ public class EcoreRefactoringParticipant extends AbstractProcessorBasedRenamePar
 	private IResourceDescriptions resourceDescriptions;
 
 	@Override
-	protected List<IRenameElementContext> createRenameElementContexts(Object element) {
+	protected List<? extends IRenameElementContext> createRenameElementContexts(Object element) {
 		if (element instanceof IRenameElementContext
 				&& ((IRenameElementContext) element).getTargetElementEClass() == XtextPackage.Literals.PARSER_RULE)
 			return super.createRenameElementContexts(element);

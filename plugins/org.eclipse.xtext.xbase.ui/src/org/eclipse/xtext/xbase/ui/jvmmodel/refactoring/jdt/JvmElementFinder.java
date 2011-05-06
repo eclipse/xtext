@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.ui.jvmmodel.refactoring;
+package org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
@@ -28,7 +28,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class IndexedJvmElementFinder {
+public class JvmElementFinder {
 
 	@Inject
 	private IJvmTypeProvider.Factory typeProviderFactory;
@@ -42,19 +42,21 @@ public class IndexedJvmElementFinder {
 	@Inject
 	private IResourceDescriptions resourceDescriptions;
 
-	protected JvmIdentifiableElement findIndexedJvmElement(IJavaElement javaElement, EClass expectedJvmType,
-			ResourceSet resourceSet) {
+	public EObject getCorrespondingJvmElement(IJavaElement javaElement, ResourceSet resourceSet) {
 		typeProviderFactory.findOrCreateTypeProvider(resourceSet);
-		QualifiedName qualifiedName = getQualifiedNameForJavaElement(javaElement, resourceSet);
+		URI jvmElementURI = typeURIHelper.getFullURI(javaElement);
+		return resourceSet.getEObject(jvmElementURI, true);
+	}
+	
+	public JvmIdentifiableElement findJvmElementDeclarationInIndex(EObject jvmElement, IProject project) {
+		QualifiedName qualifiedName = qualifiedNameProvider.getFullyQualifiedName(jvmElement);
 		if (qualifiedName != null) {
-			IEObjectDescription indexedElementDescription = findIndexedElement(javaElement.getJavaProject()
-					.getProject(), qualifiedName, expectedJvmType);
+			IEObjectDescription indexedElementDescription = findIndexedElement(project, qualifiedName, jvmElement.eClass());
 			if (indexedElementDescription != null)
 				return (JvmIdentifiableElement) EcoreUtil.resolve(indexedElementDescription.getEObjectOrProxy(),
-						resourceSet);
+						jvmElement);
 		}
 		return null;
-
 	}
 
 	protected IEObjectDescription findIndexedElement(IProject project, QualifiedName qualifiedName,
@@ -67,11 +69,4 @@ public class IndexedJvmElementFinder {
 		}
 		return null;
 	}
-
-	protected QualifiedName getQualifiedNameForJavaElement(IJavaElement javaElement, ResourceSet resourceSet) {
-		URI elementURI = typeURIHelper.getFullURI(javaElement);
-		EObject eObject = resourceSet.getEObject(elementURI, true);
-		return (eObject != null) ? qualifiedNameProvider.getFullyQualifiedName(eObject) : null;
-	}
-
 }
