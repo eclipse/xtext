@@ -39,7 +39,7 @@ public class Xtend2ProposalProvider extends AbstractXtend2ProposalProvider {
 	@Override
 	public void completeClass_Extends(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE,
+		completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, true, getQualifiedNameValueConverter(),
 						new ITypesProposalProvider.Filter() {
 							public int getSearchFor() {
 								return IJavaSearchConstants.CLASS;
@@ -56,7 +56,7 @@ public class Xtend2ProposalProvider extends AbstractXtend2ProposalProvider {
 	@Override
 	public void completeClass_Implements(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, TypeMatchFilters.all(IJavaSearchConstants.INTERFACE), acceptor);
+		completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, true, getQualifiedNameValueConverter(), TypeMatchFilters.all(IJavaSearchConstants.INTERFACE), acceptor);
 	}
 	
 }
