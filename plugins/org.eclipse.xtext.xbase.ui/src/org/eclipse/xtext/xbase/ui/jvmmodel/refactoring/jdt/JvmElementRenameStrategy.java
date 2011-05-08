@@ -40,8 +40,4 @@ public class JvmElementRenameStrategy extends AbstractRenameStrategy {
 			return simpleNameResolver.getAttribute(eObject);
 	}
 	
-	@Override
-	protected void resolveProxies(ResourceSet resourceSet) {
-		// don't resolve proxies
-	}
 }

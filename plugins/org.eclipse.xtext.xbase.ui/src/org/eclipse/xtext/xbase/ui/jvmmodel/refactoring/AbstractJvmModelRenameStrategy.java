@@ -8,13 +8,9 @@
 package org.eclipse.xtext.xbase.ui.jvmmodel.refactoring;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
-import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
 /**
@@ -30,15 +26,6 @@ public abstract class AbstractJvmModelRenameStrategy extends DefaultRenameStrate
 		this.jvmModelAssociations = xtend2jvmAssociations;
 	}
 
-	@Override
-	protected void resolveProxies(ResourceSet resourceSet) {
-		for(int i=0; i< resourceSet.getResources().size(); ++i) {
-			Resource resource = resourceSet.getResources().get(i);
-			if(!(resource instanceof TypeResource))
-				EcoreUtil2.resolveLazyCrossReferences(resource, CancelIndicator.NullImpl);
-		}
-	}
-	
 	@Override
 	public void applyDeclarationChange(String newName, ResourceSet resourceSet) {
 		super.applyDeclarationChange(newName, resourceSet);
