@@ -10,10 +10,14 @@ package org.eclipse.xtext.ui.refactoring.impl;
 import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.util.Strings.*;
 
+import java.util.Collection;
+import java.util.List;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -51,9 +55,22 @@ public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 			ResourceSet resourceSet = resourceSetProvider.get(project);
 			loadTargetResource(resourceSet, elementRenameArguments, projectProgress.newChild(1));
 			loadReferringResources(resourceSet, resource2references.keySet(), projectProgress.newChild(5));
+			resolveReferenceProxies(resourceSet, resource2references.values(), projectProgress.newChild(10));
 			elementRenameArguments.applyDeclarationChange(resourceSet);
 			createReferenceUpdates(elementRenameArguments, resource2references, resourceSet, updateAcceptor,
 					projectProgress.newChild(94));
+		}
+	}
+
+	protected void resolveReferenceProxies(ResourceSet resourceSet, Collection<IReferenceDescription> values,
+			SubMonitor newChild) {
+		for (IReferenceDescription referenceDescription : values) {
+			EObject sourceEObject = resourceSet.getEObject(referenceDescription.getSourceEObjectUri(), false);
+			if (sourceEObject == null)
+				throw new RefactoringStatusException("Cannot find referring element "
+						+ notNull(referenceDescription.getSourceEObjectUri())
+						+ ". Maybe the index is be corrupt. Consider a rebuild.", true);
+			resolveReference(sourceEObject, referenceDescription);
 		}
 	}
 
@@ -85,6 +102,14 @@ public abstract class AbstractReferenceUpdater implements IReferenceUpdater {
 				throw new RefactoringStatusException("Resource " + notNull(referringResourceURI) + " cannot be loaded",
 						true);
 			progress.worked(1);
+		}
+	}
+
+	protected void resolveReference(EObject referringElement, IReferenceDescription referenceDescription) {
+		Object unresolvedValue = referringElement.eGet(referenceDescription.getEReference());
+		if (referenceDescription.getEReference().isMany()) {
+			List<?> list = (List<?>) unresolvedValue;
+			list.get(referenceDescription.getIndexInList());
 		}
 	}
 }

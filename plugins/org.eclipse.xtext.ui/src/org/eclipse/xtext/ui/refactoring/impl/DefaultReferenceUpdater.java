@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.refactoring.impl;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Iterator;
-import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
@@ -80,21 +79,12 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 		URI referringElementNewURI = elementRenameArguments
 				.getNewElementURI(referenceDescription.getSourceEObjectUri());
 		EObject referringElement = resourceSet.getEObject(referringElementNewURI, false);
-		resolveReference(referringElement, referenceDescription);
 		URI targetElementNewURI = elementRenameArguments.getNewElementURI(referenceDescription.getTargetEObjectUri());
 		EObject newTargetElement = resourceSet.getEObject(targetElementNewURI, false);
 		createReferenceUpdate(referringElement, referringResourceURI, referenceDescription.getEReference(),
 				referenceDescription.getIndexInList(), newTargetElement, updateAcceptor);
 	}
 
-	protected void resolveReference(EObject referringElement, IReferenceDescription referenceDescription) {
-		Object unresolvedValue = referringElement.eGet(referenceDescription.getEReference());
-		if(referenceDescription.getEReference().isMany()) {
-			List<?> list = (List<?>) unresolvedValue;
-			list.get(referenceDescription.getIndexInList());
-		}
-	}
-	
 	protected void createReferenceUpdate(EObject referringElement, URI referringResourceURI, EReference reference,
 			int indexInList, EObject newTargetElement, IRefactoringUpdateAcceptor updateAcceptor) {
 		if (!transientValueService.isTransient(referringElement, reference, indexInList)) {
