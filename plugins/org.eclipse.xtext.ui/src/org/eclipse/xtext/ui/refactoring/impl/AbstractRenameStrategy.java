@@ -49,14 +49,8 @@ public abstract class AbstractRenameStrategy implements IRenameStrategy {
 	}
 
 	public void applyDeclarationChange(String newName, ResourceSet resourceSet) {
-		resolveProxies(resourceSet);
 		EObject renamedElement = setName(targetElementOriginalURI, newName, resourceSet);
 		targetElementNewURI = EcoreUtil.getURI(renamedElement);
-	}
-
-	protected void resolveProxies(ResourceSet resourceSet) {
-		for(int i=0; i< resourceSet.getResources().size(); ++i) 
-			EcoreUtil2.resolveLazyCrossReferences(resourceSet.getResources().get(i), CancelIndicator.NullImpl);
 	}
 
 	public void revertDeclarationChange(ResourceSet resourceSet) {
