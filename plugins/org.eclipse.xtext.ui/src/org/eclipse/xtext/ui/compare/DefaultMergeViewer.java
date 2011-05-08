@@ -131,8 +131,8 @@ public class DefaultMergeViewer extends TextMergeViewer {
 
 	protected void configureSourceViewer(SourceViewer sourceViewer) {
 		IEditorInput editorInput = getEditorInput(sourceViewer);
-		sourceViewer.unconfigure();
 		SourceViewerConfiguration sourceViewerConfiguration = createSourceViewerConfiguration(sourceViewer, editorInput);
+		sourceViewer.unconfigure();
 		sourceViewer.configure(sourceViewerConfiguration);
 		if (null == editorInput) {
 			sourceViewer.setHyperlinkDetectors(null, sourceViewerConfiguration.getHyperlinkStateMask(sourceViewer));
