@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
@@ -20,12 +21,20 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 public class JvmReferenceUpdateRenameProcessor extends RenameElementProcessor {
 
 	@Override
+	protected ResourceSet createResourceSet(IRenameElementContext renameElementContext) {
+		return getResourceSetProvider().get(
+				((RenameJvmReferenceContext) renameElementContext).getReferencedJavaElement().getJavaProject()
+						.getProject());
+	}
+
+	@Override
 	protected void checkTargetFile(Resource resource) {
 		// don't check, there is no file
 	}
-	
+
 	@Override
-	protected IRenameStrategy createRenameElementStrategy(EObject targetElement, IRenameElementContext renameElementContext) {
+	protected IRenameStrategy createRenameElementStrategy(EObject targetElement,
+			IRenameElementContext renameElementContext) {
 		return new JvmElementRenameStrategy(targetElement);
 	}
 }
