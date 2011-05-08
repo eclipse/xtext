@@ -61,11 +61,12 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 	
 	public void nextMode() {
 		switch(mode) {
-			case 0:
-			case 7: mode = 1; return;
+			case 0: 
+			case 7: mode = 8; return;
 			case 1: mode = 2; return;
 			case 2: mode = 4; return;
 			case 4: mode = 7; return;
+			case 8: mode = 1; return;
 			default: throw new IllegalStateException("mode:" + mode);
 		}
 	}
@@ -73,10 +74,11 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 	public String getNextCategory() {
 		switch(mode) {
 			case 0:
-			case 7: return "shortest proposals";
+			case 7: return "smart proposals";
 			case 1: return "java-like proposals";
 			case 2: return "type proposals";
 			case 4: return "all proposals";
+			case 8: return "shortest proposals";
 			default: throw new IllegalStateException("mode:" + mode);
 		}
 	}
@@ -101,6 +103,10 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 		return mode == 7;
 	}
 	
+	protected boolean isShowSmartProposals() {
+		return mode == 8;
+	}
+	
 	@Inject
 	private IQualifiedNameConverter nameConverter;
 	
@@ -109,11 +115,11 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 			ICompletionProposalAcceptor acceptor, Predicate<IEObjectDescription> filter,
 			Function<IEObjectDescription, ICompletionProposal> proposalFactory) {
 		if (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(getEReferenceType(model, reference))) {
-			if (!isShowTypeProposals())
+			if (!isShowTypeProposals() && !isShowSmartProposals())
 				return;
 		}
 		if (reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE) {
-			if (!isShowShortestSugar() && !isShowJavaLikeProposals())
+			if (!isShowShortestSugar() && !isShowJavaLikeProposals() && !isShowSmartProposals())
 				return;
 		}
 		super.lookupCrossReference(scope, model, reference, acceptor, filter, proposalFactory);
@@ -158,7 +164,7 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 	public Iterable<IEObjectDescription> queryScope(IScope scope, EObject model, EReference reference,
 			Predicate<IEObjectDescription> filter) {
 		if (reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE) {
-			Map<EObject, JvmFeatureDescription> filteredDescriptions = Maps.newLinkedHashMap();
+			Map<EObject, IEObjectDescription> filteredDescriptions = Maps.newLinkedHashMap();
 			List<IEObjectDescription> others = Lists.newArrayList();
 			Iterable<IEObjectDescription> allDescriptions =	super.queryScope(scope, model, reference, filter);
 			for(IEObjectDescription description: allDescriptions) {
@@ -166,25 +172,56 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 					if (description instanceof JvmFeatureDescription) {
 						JvmFeatureDescription featureDescription = (JvmFeatureDescription) description;
 						if (filteredDescriptions.containsKey(featureDescription.getEObjectOrProxy())) {
-							if (isShowShortestSugar()) {
-								JvmFeatureDescription previous = filteredDescriptions.get(featureDescription.getEObjectOrProxy());
-								String previousName = nameConverter.toString(previous.getName());
+							if (isShowShortestSugar() || isShowSmartProposals()) {
+								IEObjectDescription previousDescription = filteredDescriptions.get(featureDescription.getEObjectOrProxy());
+								JvmFeatureDescription previousFeatureDescription = null;
+								MultiNameDescription multiNameDescription = null;
+								if (previousDescription instanceof JvmFeatureDescription) {
+									previousFeatureDescription = (JvmFeatureDescription) previousDescription;
+								} else if (previousDescription instanceof MultiNameDescription) {
+									multiNameDescription = (MultiNameDescription) previousDescription;
+									previousFeatureDescription = (JvmFeatureDescription) multiNameDescription.getDelegate();
+								}
+								if (previousFeatureDescription == null)
+									continue;
+								String previousName = nameConverter.toString(previousFeatureDescription.getName());
 								String candidateName = nameConverter.toString(featureDescription.getName());
 								if (previousName.length() > candidateName.length()) {
-									filteredDescriptions.put(featureDescription.getEObjectOrProxy(), featureDescription);
-									if (isShowAllProposals() && previous.getKey().endsWith(")"))
-										others.add(previous);
+									if (!isShowSmartProposals()) {
+										filteredDescriptions.put(featureDescription.getEObjectOrProxy(), featureDescription);
+										if (isShowAllProposals() && previousFeatureDescription.getKey().endsWith(")"))
+											others.add(previousFeatureDescription);
+									} else {
+										if (multiNameDescription == null) {
+											multiNameDescription = new MultiNameDescription(featureDescription);
+											multiNameDescription.addOtherName(previousFeatureDescription.getName());
+											filteredDescriptions.put(featureDescription.getEObjectOrProxy(), multiNameDescription);
+										} else {
+											multiNameDescription.addOtherName(previousFeatureDescription.getName());
+											multiNameDescription.setDelegate(featureDescription);
+										}
+									}
 								} else if (previousName.length() == candidateName.length()) {
-									if (previous.getKey().endsWith(")")) {
+									if (previousFeatureDescription.getKey().endsWith(")")) {
 										if (!isShowAllProposals()) {
-											if (!previous.getEObjectOrProxy().eIsProxy() && previous.getEObjectOrProxy() instanceof JvmExecutable) {
-												JvmExecutable exectuable = (JvmExecutable) previous.getEObjectOrProxy();
+											if (!previousFeatureDescription.getEObjectOrProxy().eIsProxy() && previousFeatureDescription.getEObjectOrProxy() instanceof JvmExecutable) {
+												JvmExecutable exectuable = (JvmExecutable) previousFeatureDescription.getEObjectOrProxy();
 												if (!exectuable.isVarArgs()) {
 													filteredDescriptions.put(featureDescription.getEObjectOrProxy(), featureDescription);
 												}
 											} else {
 												filteredDescriptions.put(featureDescription.getEObjectOrProxy(), featureDescription);
 											}
+										}
+									}
+								} else {
+									if (isShowSmartProposals()) {
+										if (multiNameDescription == null) {
+											multiNameDescription = new MultiNameDescription(previousFeatureDescription);
+											multiNameDescription.addOtherName(featureDescription.getName());
+											filteredDescriptions.put(featureDescription.getEObjectOrProxy(), multiNameDescription);
+										} else {
+											multiNameDescription.addOtherName(featureDescription.getName());
 										}
 									}
 								}

@@ -28,6 +28,8 @@ import org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -36,10 +38,12 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -120,7 +124,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	@Override
 	public void completeJvmParameterizedTypeReference_Type(EObject model, Assignment assignment,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		if (getXbaseCrossReferenceProposalCreator().isShowTypeProposals()) {
+		if (getXbaseCrossReferenceProposalCreator().isShowTypeProposals() || getXbaseCrossReferenceProposalCreator().isShowSmartProposals()) {
 			completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, acceptor);
 		}
 	}
@@ -140,25 +144,37 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	}
 	
 	protected void completeJavaTypes(ContentAssistContext context, EReference reference, IValueConverter<String> valueConverter, ITypesProposalProvider.Filter filter, ICompletionProposalAcceptor acceptor) {
-		if (context.getPrefix().length() > 0) {
+		completeJavaTypes(context, reference, false, valueConverter, filter, acceptor);
+	}
+
+	protected void completeJavaTypes(ContentAssistContext context, EReference reference, boolean forced,
+			IValueConverter<String> valueConverter, ITypesProposalProvider.Filter filter,
+			ICompletionProposalAcceptor acceptor) {
+		String prefix = context.getPrefix();
+		if (prefix.length() > 0) {
 			if (Character.isJavaIdentifierStart(context.getPrefix().charAt(0))) {
+				if (!forced && getXbaseCrossReferenceProposalCreator().isShowSmartProposals()) {
+					if (!prefix.contains(".") && !prefix.contains("::") && !Character.isUpperCase(prefix.charAt(0)))
+						return;
+				}
 				typeProposalProvider.createTypeProposals(this, context, reference, filter, valueConverter, acceptor);
 			}
 		} else {
-			typeProposalProvider.createTypeProposals(this, context, reference, filter, valueConverter, acceptor);
+			if (forced || !getXbaseCrossReferenceProposalCreator().isShowSmartProposals())
+				typeProposalProvider.createTypeProposals(this, context, reference, filter, valueConverter, acceptor);
 		}
 	}
 	
 	@Override
 	public void completeXTypeLiteral_Type(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, acceptor);
+		completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, true, qualifiedNameValueConverter, TypeMatchFilters.all(), acceptor);
 	}
 	
 	@Override
 	public void completeXFeatureCall_DeclaringType(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		if (getXbaseCrossReferenceProposalCreator().isShowTypeProposals()) {
+		if (getXbaseCrossReferenceProposalCreator().isShowTypeProposals() || getXbaseCrossReferenceProposalCreator().isShowSmartProposals()) {
 			ContentAssistContext modifiedContext = context.copy().setMatcher(staticQualifierPrefixMatcher).toContext();
 			completeJavaTypes(modifiedContext, XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE, staticQualifierValueConverter, TypeMatchFilters.all(), acceptor);
 		}
@@ -273,6 +289,24 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		}
 	}
 	
+	@Override
+	public void completeXCasePart_Then(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.completeXCasePart_Then(model, assignment, context, acceptor);
+		if (model instanceof XCasePart) {
+			createLocalVariableAndImplicitProposals(model, -1, context, acceptor);
+		}
+	}
+	
+	@Override
+	public void completeXCasePart_Case(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.completeXCasePart_Case(model, assignment, context, acceptor);
+		if (model instanceof XCasePart) {
+			createLocalVariableAndImplicitProposals(model, -1, context, acceptor);
+		}
+	}
+	
 	/**
 	 * Customized to be able to treat binary operations in a special way with respect to scoping.
 	 * Since the operator is a cross reference, we have to be careful to choose the right context for
@@ -283,8 +317,8 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor,
 			Predicate<IEObjectDescription> filter) {
 		if (reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR) {
-			completeJavaTypes(contentAssistContext, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE,
-					TypeMatchFilters.canInstantiate(), acceptor);
+			completeJavaTypes(contentAssistContext, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true,
+					qualifiedNameValueConverter, TypeMatchFilters.canInstantiate(), acceptor);
 			return;
 		}
 		// guard for feature call scopes
@@ -348,13 +382,13 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	}
 	
 	protected void createLocalVariableAndImplicitProposals(EObject context, boolean includeCurrentObject, int idx, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
-		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory("ID", contentAssistContext);
+		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory(grammarAccess.getIdOrSuperRule().getName(), contentAssistContext);
 		IScope scope = getScopeProvider().createSimpleFeatureCallScope(context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, contentAssistContext.getResource(), includeCurrentObject, idx);
 		getCrossReferenceProposalCreator().lookupCrossReference(scope, context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, acceptor, getFeatureDescriptionPredicate(contentAssistContext), proposalFactory);
 	}
 	
 	/**
-	 * Create proposal for {@link XAbstractFeatureCall#getFeature() simple feature calls} that use an <code>ID</code>
+	 * Create proposal for {@link XAbstractFeatureCall#getFeature() simple feature calls} that use an <code>IdOrSuper</code>
 	 * as concrete syntax.
 	 */
 	protected void createLocalVariableAndImplicitProposals(EObject context, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
@@ -407,11 +441,32 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		return new DefaultProposalCreator(contentAssistContext, ruleName, getQualifiedNameConverter()) {
 			@Override
 			public ICompletionProposal apply(IEObjectDescription candidate) {
-				if (candidate instanceof JvmFeatureDescription && "ID".equals(ruleName)) {
+				IEObjectDescription myCandidate = candidate;
+				ContentAssistContext myContentAssistContext = contentAssistContext;
+				if (myCandidate instanceof MultiNameDescription) {
+					final MultiNameDescription multiNamed = (MultiNameDescription) candidate;
+					myCandidate = multiNamed.getDelegate();
+					myContentAssistContext = myContentAssistContext.copy().setMatcher(new PrefixMatcher() {
+						@Override
+						public boolean isCandidateMatchingPrefix(String name, String prefix) {
+							PrefixMatcher delegateMatcher = contentAssistContext.getMatcher();
+							if (delegateMatcher.isCandidateMatchingPrefix(name, prefix))
+								return true;
+							IQualifiedNameConverter converter = getQualifiedNameConverter();
+							for(QualifiedName otherName: multiNamed.getOtherNames()) {
+								String alternative = converter.toString(otherName);
+								if (delegateMatcher.isCandidateMatchingPrefix(alternative, prefix))
+									return true;
+							}
+							return false;
+						}
+					}).toContext();
+				}
+				if (myCandidate instanceof JvmFeatureDescription && (grammarAccess.getIdOrSuperRule().getName().equals(ruleName) || grammarAccess.getIDRule().getName().equals(ruleName))) {
 					ICompletionProposal result = null;
-					String key = ((JvmFeatureDescription) candidate).getKey();
+					String key = ((JvmFeatureDescription) myCandidate).getKey();
 					boolean withParenths = key.endsWith(")");
-					String proposal = getQualifiedNameConverter().toString(candidate.getName());
+					String proposal = getQualifiedNameConverter().toString(myCandidate.getName());
 					if (ruleName != null) {
 						try {
 							proposal = getValueConverter().toString(proposal, ruleName);
@@ -423,12 +478,12 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 					if (withParenths) {
 						proposal = proposal + "()";
 					}
-					EObject objectOrProxy = candidate.getEObjectOrProxy();
+					EObject objectOrProxy = myCandidate.getEObjectOrProxy();
 					StyledString displayString = getStyledDisplayString((JvmFeature)objectOrProxy,
 							withParenths,
-							getQualifiedNameConverter().toString(candidate.getQualifiedName()),
-							getQualifiedNameConverter().toString(candidate.getName()));
-					result = createCompletionProposal(proposal, displayString, null, contentAssistContext);
+							getQualifiedNameConverter().toString(myCandidate.getQualifiedName()),
+							getQualifiedNameConverter().toString(myCandidate.getName()));
+					result = createCompletionProposal(proposal, displayString, null, myContentAssistContext);
 					if (result instanceof ConfigurableCompletionProposal) {
 						ConfigurableCompletionProposal casted = (ConfigurableCompletionProposal) result;
 						casted.setAdditionalProposalInfo(objectOrProxy);
@@ -437,10 +492,10 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 							casted.setSelectionStart(casted.getReplacementOffset() + proposal.length() - 1);
 							casted.setSelectionLength(0);
 							casted.setAutoInsertable(false);
-							casted.setSimpleLinkedMode(contentAssistContext.getViewer(), '\t', '\n');
+							casted.setSimpleLinkedMode(myContentAssistContext.getViewer(), '\t', '\n');
 						}
 					}
-					getPriorityHelper().adjustCrossReferencePriority(result, contentAssistContext.getPrefix());
+					getPriorityHelper().adjustCrossReferencePriority(result, myContentAssistContext.getPrefix());
 					return result;
 				}
 				return super.apply(candidate);
@@ -497,5 +552,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	
 	protected Predicate<IEObjectDescription> getFeatureDescriptionPredicate(ContentAssistContext contentAssistContext) {
 		return featureDescriptionPredicate;
+	}
+	
+	protected QualifiedNameValueConverter getQualifiedNameValueConverter() {
+		return qualifiedNameValueConverter;
 	}
 }
