@@ -232,4 +232,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 		}
 	}
 
+	protected RefactoringResourceSetProvider getResourceSetProvider() {
+		return resourceSetProvider;
+	}
 }
