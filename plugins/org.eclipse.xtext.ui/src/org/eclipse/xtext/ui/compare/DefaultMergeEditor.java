@@ -85,6 +85,7 @@ public class DefaultMergeEditor extends XtextEditor {
 		SourceViewer sourceViewer = (SourceViewer) createSourceViewer(composite, createVerticalRuler(), SWT.H_SCROLL
 				| SWT.V_SCROLL | textOrientation);
 		setSourceViewer(this, sourceViewer);
+		getSourceViewer().configure(getXtextSourceViewerConfiguration());
 		getSourceViewerDecorationSupport(sourceViewer).install(getPreferenceStore());
 		getSelectionProvider().addSelectionChangedListener(getSelectionChangedListener());
 	}
