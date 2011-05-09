@@ -25,6 +25,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.resource.XtextResource;
@@ -64,10 +65,10 @@ public class JvmRenameElementHandler extends RenameElementHandler {
 	public IRenameElementContext createRenameElementContext(EObject targetElement, XtextEditor editor,
 			ITextSelection selection, XtextResource resource) {
 		if (targetElement.eClass() != null && targetElement.eClass().getEPackage() == TypesPackage.eINSTANCE
-				&& targetElement instanceof JvmIdentifiableElement) {
-			IJavaElement javaElement = javaElementFinder.findElementFor((JvmIdentifiableElement) targetElement);
+				&& targetElement instanceof JvmMember) {
+			IJavaElement javaElement = javaElementFinder.findElementFor((JvmMember) targetElement);
 			if (javaElement != null)
-				return new RenameJvmReferenceContext(targetElement, javaElement, editor, selection,
+				return new RenameJvmReferenceContext((JvmMember) targetElement, javaElement, editor, selection,
 						EcoreUtil2.getNormalizedResourceURI(targetElement));
 		}
 		Set<EObject> jvmElements = associations.getJvmElements(targetElement);
