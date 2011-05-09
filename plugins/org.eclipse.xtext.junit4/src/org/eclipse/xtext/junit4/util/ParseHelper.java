@@ -49,11 +49,11 @@ public class ParseHelper<T extends EObject> {
 		}
 	}
 	
-	public T parse(String text) throws Exception {
+	public T parse(CharSequence text) throws Exception {
 		return parse(text, resourceSetProvider.get());
 	}
 	
-	public T parse(String text, ResourceSet resourceSetToUse) throws Exception {
+	public T parse(CharSequence text, ResourceSet resourceSetToUse) throws Exception {
 		return parse(getAsStream(text), computeUnusedUri(resourceSetToUse),null, resourceSetToUse);
 	}
 	
@@ -67,8 +67,8 @@ public class ParseHelper<T extends EObject> {
 		throw new IllegalStateException();
 	}
 
-	protected InputStream getAsStream(String text) {
-		return new StringInputStream(text);
+	protected InputStream getAsStream(CharSequence text) {
+		return new StringInputStream(text == null ? "" : text.toString());
 	}
 
 }
