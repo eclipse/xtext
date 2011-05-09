@@ -265,7 +265,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       List<String> _imports_5 = file.getImports();
       CollectionExtensions.<String>operator_add(_imports_5, "org.eclipse.xtext.serializer.ITransientValueService");
       List<String> _imports_6 = file.getImports();
-      CollectionExtensions.<String>operator_add(_imports_6, "org.eclipse.xtext.serializer.acceptor.SequenceAcceptor");
+      CollectionExtensions.<String>operator_add(_imports_6, "org.eclipse.xtext.serializer.acceptor.SequenceFeeder");
       List<String> _imports_7 = file.getImports();
       CollectionExtensions.<String>operator_add(_imports_7, "org.eclipse.xtext.serializer.ITransientValueService.ValueTransient");
       List<String> _imports_8 = file.getImports();
@@ -699,7 +699,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           _builder.append("INodesForEObjectProvider nodes = createNodeProvider(semanticObject);");
           _builder.newLine();
           _builder.append("\t");
-          _builder.append("SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);");
+          _builder.append("SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);");
           _builder.newLine();
           {
             Iterable<IFeatureInfo> _xifexpression_1 = null;
@@ -738,7 +738,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
               final IConstraintElement assignment = _get;
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
-              _builder.append("acceptor.accept(grammarAccess.");
+              _builder.append("feeder.accept(grammarAccess.");
               AbstractElement _grammarElement = assignment.getGrammarElement();
               String _gaAccessor = this.grammarAccess.gaAccessor(_grammarElement);
               _builder.append(_gaAccessor, "	");
@@ -752,7 +752,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             }
           }
           _builder.append("\t");
-          _builder.append("acceptor.finish();");
+          _builder.append("feeder.finish();");
           _builder.newLine();} else {
           _builder.append("\t");
           _builder.append("genericSequencer.createSequence(context, semanticObject);");

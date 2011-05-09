@@ -6,7 +6,7 @@ import org.eclipse.xtext.serializer.ISemanticNodeProvider;
 import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.ITransientValueService;
-import org.eclipse.xtext.serializer.acceptor.SequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
@@ -168,10 +168,10 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.ADD0__RIGHT));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
-		acceptor.accept(grammarAccess.getAddition0Access().getAdd0LeftAction_1_0(), semanticObject.getLeft());
-		acceptor.accept(grammarAccess.getAddition0Access().getRightPrim0ParserRuleCall_1_2_0(), semanticObject.getRight());
-		acceptor.finish();
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getAddition0Access().getAdd0LeftAction_1_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getAddition0Access().getRightPrim0ParserRuleCall_1_2_0(), semanticObject.getRight());
+		feeder.finish();
 	}
 	
 	
@@ -191,10 +191,10 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.ADD1__RIGHT));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
-		acceptor.accept(grammarAccess.getAddition1Access().getAdd1LeftAction_1_0(), semanticObject.getLeft());
-		acceptor.accept(grammarAccess.getAddition1Access().getRightPrim1ParserRuleCall_1_2_0(), semanticObject.getRight());
-		acceptor.finish();
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getAddition1Access().getAdd1LeftAction_1_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getAddition1Access().getRightPrim1ParserRuleCall_1_2_0(), semanticObject.getRight());
+		feeder.finish();
 	}
 	
 	
@@ -214,10 +214,10 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.ADD2__RIGHT));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
-		acceptor.accept(grammarAccess.getAddition2Access().getAdd2LeftAction_1_0(), semanticObject.getLeft());
-		acceptor.accept(grammarAccess.getAddition2Access().getRightMultiplication2ParserRuleCall_1_2_0(), semanticObject.getRight());
-		acceptor.finish();
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getAddition2Access().getAdd2LeftAction_1_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getAddition2Access().getRightMultiplication2ParserRuleCall_1_2_0(), semanticObject.getRight());
+		feeder.finish();
 	}
 	
 	
@@ -246,9 +246,9 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.BOOLEAN_ALTERNATIVE__BOOL));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
-		acceptor.accept(grammarAccess.getBooleanAlternativeAccess().getBoolBooleanAlternativeLiteralParserRuleCall_1_0(), semanticObject.getBool());
-		acceptor.finish();
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getBooleanAlternativeAccess().getBoolBooleanAlternativeLiteralParserRuleCall_1_0(), semanticObject.getBool());
+		feeder.finish();
 	}
 	
 	
@@ -271,11 +271,11 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.MANDATORY_KEYWORDS__VAL3));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
-		acceptor.accept(grammarAccess.getMandatoryKeywordsAccess().getVal1IDTerminalRuleCall_1_0(), semanticObject.getVal1());
-		acceptor.accept(grammarAccess.getMandatoryKeywordsAccess().getVal2IDTerminalRuleCall_3_0(), semanticObject.getVal2());
-		acceptor.accept(grammarAccess.getMandatoryKeywordsAccess().getVal3IDTerminalRuleCall_6_0(), semanticObject.getVal3());
-		acceptor.finish();
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getMandatoryKeywordsAccess().getVal1IDTerminalRuleCall_1_0(), semanticObject.getVal1());
+		feeder.accept(grammarAccess.getMandatoryKeywordsAccess().getVal2IDTerminalRuleCall_3_0(), semanticObject.getVal2());
+		feeder.accept(grammarAccess.getMandatoryKeywordsAccess().getVal3IDTerminalRuleCall_6_0(), semanticObject.getVal3());
+		feeder.finish();
 	}
 	
 	
@@ -350,10 +350,10 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.MULT2__RIGHT));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
-		acceptor.accept(grammarAccess.getMultiplication2Access().getMult2LeftAction_1_0(), semanticObject.getLeft());
-		acceptor.accept(grammarAccess.getMultiplication2Access().getRightPrim2ParserRuleCall_1_2_0(), semanticObject.getRight());
-		acceptor.finish();
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getMultiplication2Access().getMult2LeftAction_1_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getMultiplication2Access().getRightPrim2ParserRuleCall_1_2_0(), semanticObject.getRight());
+		feeder.finish();
 	}
 	
 	
@@ -370,9 +370,9 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.VAL0__NAME));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
-		acceptor.accept(grammarAccess.getPrim0Access().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		acceptor.finish();
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getPrim0Access().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	
@@ -389,9 +389,9 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.VAL1__NAME));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
-		acceptor.accept(grammarAccess.getPrim1Access().getNameIDTerminalRuleCall_0_1_0(), semanticObject.getName());
-		acceptor.finish();
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getPrim1Access().getNameIDTerminalRuleCall_0_1_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	
@@ -408,9 +408,9 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.VAL2__NAME));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
-		acceptor.accept(grammarAccess.getPrim2Access().getNameIDTerminalRuleCall_0_1_0(), semanticObject.getName());
-		acceptor.finish();
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getPrim2Access().getNameIDTerminalRuleCall_0_1_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	

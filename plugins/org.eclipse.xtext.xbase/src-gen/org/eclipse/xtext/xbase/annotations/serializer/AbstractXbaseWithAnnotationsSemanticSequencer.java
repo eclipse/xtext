@@ -6,7 +6,7 @@ import org.eclipse.xtext.serializer.ISemanticNodeProvider;
 import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.ITransientValueService;
-import org.eclipse.xtext.serializer.acceptor.SequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
@@ -87,12 +87,12 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 				}
 				else break;
 			case TypesPackage.JVM_UPPER_BOUND:
-				if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
-					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				if(context == grammarAccess.getJvmUpperBoundRule()) {
+					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getJvmUpperBoundRule()) {
-					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				else if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
+					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
 				else break;
@@ -1081,10 +1081,10 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__ELEMENT));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
-		acceptor.accept(grammarAccess.getXAnnotationElementValuePairAccess().getElementJvmOperationIDTerminalRuleCall_0_0_1(), semanticObject.getElement());
-		acceptor.accept(grammarAccess.getXAnnotationElementValuePairAccess().getValueXAnnotationElementValueParserRuleCall_2_0(), semanticObject.getValue());
-		acceptor.finish();
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getXAnnotationElementValuePairAccess().getElementJvmOperationIDTerminalRuleCall_0_0_1(), semanticObject.getElement());
+		feeder.accept(grammarAccess.getXAnnotationElementValuePairAccess().getValueXAnnotationElementValueParserRuleCall_2_0(), semanticObject.getValue());
+		feeder.finish();
 	}
 	
 	
@@ -1112,11 +1112,11 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__OPERATOR));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
-		acceptor.accept(grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0(), semanticObject.getLeftOperand());
-		acceptor.accept(grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getOperatorPlusSignKeyword_1_1_0(), semanticObject.getOperator());
-		acceptor.accept(grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getRightOperandXAnnotationElementValueParserRuleCall_1_2_0(), semanticObject.getRightOperand());
-		acceptor.finish();
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0(), semanticObject.getLeftOperand());
+		feeder.accept(grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getOperatorPlusSignKeyword_1_1_0(), semanticObject.getOperator());
+		feeder.accept(grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getRightOperandXAnnotationElementValueParserRuleCall_1_2_0(), semanticObject.getRightOperand());
+		feeder.finish();
 	}
 	
 	

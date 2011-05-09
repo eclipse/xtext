@@ -14,7 +14,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.acceptor.SequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.diagnostic.SerializationDiagnostic;
 import org.eclipse.xtext.serializer.tokens.IValueSerializer;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -65,7 +65,7 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	@Override
 	protected void sequence_XAdditiveExpression_XBinaryOperation(EObject context, XBinaryOperation operation) {
 		INodesForEObjectProvider nodes = createNodeProvider(operation);
-		SequenceAcceptor acceptor = createSequencerAcceptor(operation, nodes);
+		SequenceFeeder acceptor = createSequencerFeeder(operation, nodes);
 		XAdditiveExpressionElements opAdd = grammarAccess.getXAdditiveExpressionAccess();
 		XMultiplicativeExpressionElements opMulti = grammarAccess.getXMultiplicativeExpressionAccess();
 		XOtherOperatorExpressionElements opOther = grammarAccess.getXOtherOperatorExpressionAccess();
@@ -155,7 +155,7 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	@Override
 	protected void sequence_XFeatureCall_XFeatureCall(EObject context, XFeatureCall call) {
 		INodesForEObjectProvider nodes = createNodeProvider(call);
-		SequenceAcceptor acceptor = createSequencerAcceptor(call, nodes);
+		SequenceFeeder acceptor = createSequencerFeeder(call, nodes);
 		XFeatureCallElements xfce = grammarAccess.getXFeatureCallAccess();
 
 		// declaringType=[JvmDeclaredType|StaticQualifier]?
@@ -231,7 +231,7 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	@Override
 	protected void sequence_XMemberFeatureCall_XMemberFeatureCall(EObject context, XMemberFeatureCall semanticObject) {
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+		SequenceFeeder acceptor = createSequencerFeeder(semanticObject, nodes);
 		XMemberFeatureCallElements xmfce = grammarAccess.getXMemberFeatureCallAccess();
 
 		// memberCallTarget=XMemberFeatureCall_XMemberFeatureCall_1_1_0_0_0

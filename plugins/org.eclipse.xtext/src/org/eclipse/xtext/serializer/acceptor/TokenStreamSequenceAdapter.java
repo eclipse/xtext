@@ -23,7 +23,7 @@ import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Exceptio
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class TokenStreamSequenceAdapter implements IEObjectSequenceAcceptor {
+public class TokenStreamSequenceAdapter implements ISequenceAcceptor {
 
 	protected ISerializationDiagnostic.Acceptor errorAcceptor;
 

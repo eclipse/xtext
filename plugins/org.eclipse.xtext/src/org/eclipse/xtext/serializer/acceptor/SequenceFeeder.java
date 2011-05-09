@@ -37,7 +37,7 @@ import com.google.inject.Inject;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class SequenceAcceptor {
+public class SequenceFeeder {
 
 	public static class Provider {
 		@Inject
@@ -52,9 +52,9 @@ public class SequenceAcceptor {
 		@Inject
 		protected IValueSerializer valueSerializer;
 
-		public SequenceAcceptor create(EObject semanitcObject, INodesForEObjectProvider nodes,
+		public SequenceFeeder create(EObject semanitcObject, INodesForEObjectProvider nodes,
 				ISemanticSequencer masterSequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-			return new SequenceAcceptor(this, semanitcObject, nodes, masterSequencer, sequenceAcceptor, errorAcceptor);
+			return new SequenceFeeder(this, semanitcObject, nodes, masterSequencer, sequenceAcceptor, errorAcceptor);
 		}
 	}
 
@@ -70,7 +70,7 @@ public class SequenceAcceptor {
 
 	protected ISemanticSequenceAcceptor sequenceAcceptor;
 
-	protected SequenceAcceptor(Provider provider, EObject semanitcObject, INodesForEObjectProvider nodes,
+	protected SequenceFeeder(Provider provider, EObject semanitcObject, INodesForEObjectProvider nodes,
 			ISemanticSequencer masterSequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		super();
 		if (semanitcObject == null || nodes == null || sequenceAcceptor == null)
@@ -110,7 +110,7 @@ public class SequenceAcceptor {
 		ILeafNode node = getLeafNode(feature, value);
 		String token = getToken(keyword, value, node);
 		assertIndex(feature);
-		acceptKeyword(ass, keyword, value, token, IAssignedTokenSequenceAcceptor.NO_INDEX, node);
+		acceptKeyword(ass, keyword, value, token, ISemanticSequenceAcceptor.NO_INDEX, node);
 	}
 
 	public void accept(Keyword keyword, Object value) {
@@ -120,7 +120,7 @@ public class SequenceAcceptor {
 		assertValue(feature, value);
 		ILeafNode node = getLeafNode(feature, value);
 		String token = getToken(keyword, value, node);
-		acceptKeyword(ass, keyword, value, token, IAssignedTokenSequenceAcceptor.NO_INDEX, node);
+		acceptKeyword(ass, keyword, value, token, ISemanticSequenceAcceptor.NO_INDEX, node);
 	}
 
 	public void accept(Keyword keyword, Object value, ILeafNode node) {
@@ -129,7 +129,7 @@ public class SequenceAcceptor {
 		assertIndex(feature);
 		assertValue(feature, value);
 		String token = getToken(keyword, value, node);
-		acceptKeyword(ass, keyword, value, token, IAssignedTokenSequenceAcceptor.NO_INDEX, node);
+		acceptKeyword(ass, keyword, value, token, ISemanticSequenceAcceptor.NO_INDEX, node);
 	}
 
 	public void accept(Keyword keyword, Object value, int index) {
@@ -168,7 +168,7 @@ public class SequenceAcceptor {
 		assertIndex(feature);
 		assertValue(feature, value);
 		ILeafNode node = getLeafNode(feature, value);
-		acceptKeyword(ass, keyword, value, token, IAssignedTokenSequenceAcceptor.NO_INDEX, node);
+		acceptKeyword(ass, keyword, value, token, ISemanticSequenceAcceptor.NO_INDEX, node);
 	}
 
 	public void accept(Keyword keyword, Object value, String token, ILeafNode node) {
@@ -176,7 +176,7 @@ public class SequenceAcceptor {
 		EStructuralFeature feature = getFeature(ass.getFeature());
 		assertIndex(feature);
 		assertValue(feature, value);
-		acceptKeyword(ass, keyword, value, token, IAssignedTokenSequenceAcceptor.NO_INDEX, node);
+		acceptKeyword(ass, keyword, value, token, ISemanticSequenceAcceptor.NO_INDEX, node);
 	}
 
 	public void accept(Keyword keyword, Object value, String token, int index) {
@@ -212,14 +212,14 @@ public class SequenceAcceptor {
 		assertValue(feature, value);
 		INode node = getNode(feature, value);
 		String token = getToken(rc, value, node);
-		acceptRuleCall(rc, value, token, IAssignedTokenSequenceAcceptor.NO_INDEX, node);
+		acceptRuleCall(rc, value, token, ISemanticSequenceAcceptor.NO_INDEX, node);
 	}
 
 	public void accept(RuleCall rc, Object value, INode node) {
 		EStructuralFeature feature = getFeature(rc);
 		String token = getToken(rc, value, node);
 		assertIndex(feature);
-		acceptRuleCall(rc, value, token, IAssignedTokenSequenceAcceptor.NO_INDEX, node);
+		acceptRuleCall(rc, value, token, ISemanticSequenceAcceptor.NO_INDEX, node);
 	}
 
 	public void accept(RuleCall rc, Object value, int index) {
@@ -254,14 +254,14 @@ public class SequenceAcceptor {
 		assertIndex(feature);
 		assertValue(feature, value);
 		INode node = getNode(feature, value);
-		acceptRuleCall(rc, value, token, IAssignedTokenSequenceAcceptor.NO_INDEX, node);
+		acceptRuleCall(rc, value, token, ISemanticSequenceAcceptor.NO_INDEX, node);
 	}
 
 	public void accept(RuleCall rc, Object value, String token, INode node) {
 		EStructuralFeature feature = getFeature(rc);
 		assertIndex(feature);
 		assertValue(feature, value);
-		acceptRuleCall(rc, value, token, IAssignedTokenSequenceAcceptor.NO_INDEX, node);
+		acceptRuleCall(rc, value, token, ISemanticSequenceAcceptor.NO_INDEX, node);
 	}
 
 	public void accept(RuleCall rc, Object value, String token, int index) {

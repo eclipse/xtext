@@ -12,7 +12,7 @@ import org.eclipse.xtext.serializer.ISemanticNodeProvider;
 import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.acceptor.SequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 
@@ -33,20 +33,20 @@ public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 	protected ISemanticSequenceAcceptor sequenceAcceptor;
 
 	@Inject
-	protected SequenceAcceptor.Provider sequenceAcceptorProvider;
+	protected SequenceFeeder.Provider sequenceFeederProvider;
 
 	protected INodesForEObjectProvider createNodeProvider(EObject semanticObject) {
 		return nodeProvider.getNodesForSemanticObject(semanticObject, null);
 	}
 
-	protected SequenceAcceptor createSequencerAcceptor(EObject semanticObject) {
+	protected SequenceFeeder createSequencerFeeder(EObject semanticObject) {
 		INodesForEObjectProvider nodeProvider = createNodeProvider(semanticObject);
-		return sequenceAcceptorProvider.create(semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
+		return sequenceFeederProvider.create(semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
 				errorAcceptor);
 	}
 
-	protected SequenceAcceptor createSequencerAcceptor(EObject semanticObject, INodesForEObjectProvider nodeProvider) {
-		return sequenceAcceptorProvider.create(semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
+	protected SequenceFeeder createSequencerFeeder(EObject semanticObject, INodesForEObjectProvider nodeProvider) {
+		return sequenceFeederProvider.create(semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
 				errorAcceptor);
 	}
 
