@@ -80,18 +80,23 @@ public class DefaultOccurrenceComputer implements IOccurrenceComputer {
 			final SubMonitor monitor) {
 		final IXtextDocument document = editor.getDocument();
 		return document.readOnly(new IUnitOfWork<Map<Annotation, Position>, XtextResource>() {
-			public Map<Annotation, Position> exec(XtextResource resource) throws Exception {
+			public Map<Annotation, Position> exec(final XtextResource resource) throws Exception {
 				EObject target = eObjectAtOffsetHelper.resolveElementAt(resource, (selection).getOffset());
 				if (target != null) {
 					monitor.setWorkRemaining(100);
 					final List<IReferenceDescription> references = newArrayList();
 					IQueryData queryData = queryDataFactory.createQueryData(target, resource.getURI());
-					referenceFinder.findLocalReferences(queryData, editorResourceAccess,
-							new IAcceptor<IReferenceDescription>() {
-								public void accept(IReferenceDescription reference) {
-									references.add(reference);
-								}
-							}, monitor.newChild(80));
+					IAcceptor<IReferenceDescription> acceptor = new IAcceptor<IReferenceDescription>() {
+						public void accept(IReferenceDescription reference) {
+							if (resource.getURI().equals(reference.getSourceEObjectUri().trimFragment()))
+								references.add(reference);
+						}
+					};
+					if (target.eResource() == resource) {
+						referenceFinder.findLocalReferences(queryData, editorResourceAccess, acceptor, monitor.newChild(40));
+					} else {
+						referenceFinder.findIndexedReferences(queryData, queryData.getLocalContextResourceURI(), acceptor, monitor.newChild(40));
+					}
 					if (monitor.isCanceled())
 						return emptyMap();
 					Map<Annotation, Position> result = newHashMapWithExpectedSize(references.size() + 1);
