@@ -13,6 +13,9 @@ import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.AbstractJvmModelRenameStrategy;
+import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JvmMemberRenameStrategy;
+import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JvmReferenceUpdateRenameProcessor;
+import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.RenameJvmReferenceContext;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
@@ -33,6 +36,9 @@ public class Xtend2RenameStrategy extends AbstractJvmModelRenameStrategy {
 
 		@Override
 		public IRenameStrategy get(EObject targetElement, IRenameElementContext renameElementContext) {
+			if (renameElementContext instanceof RenameJvmReferenceContext) {
+				return new JvmMemberRenameStrategy((JvmMember) targetElement);
+			}
 			return new Xtend2RenameStrategy(targetElement, getLocationInFileProvider(), jvmModelAssociations);
 		}
 	}

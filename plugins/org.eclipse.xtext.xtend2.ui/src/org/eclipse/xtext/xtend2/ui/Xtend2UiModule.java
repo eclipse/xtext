@@ -21,9 +21,11 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculato
 import org.eclipse.xtext.ui.refactoring.IRenameProcessorAdapter;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider;
+import org.eclipse.xtext.ui.refactoring.ui.IRenameSupport;
 import org.eclipse.xtext.ui.refactoring.ui.RenameElementHandler;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelRefactoringResourceSetProvider;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JavaRenameProcessorAdapter;
+import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JdtAwareRenameSupportFactory;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JvmRenameElementHandler;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JvmRenameRefactoringProvider;
 import org.eclipse.xtext.xtend2.ui.autoedit.AutoEditStrategyProvider;
@@ -131,9 +133,14 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 		return JavaRenameProcessorAdapter.Factory.class;
 	}
 	
+	public Class<? extends IRenameSupport.Factory> bindIRenameSupport$Factory() {
+		return JdtAwareRenameSupportFactory.class;
+	}
+
 	// TODO: remove this after regenerating xtend
 	public Class<? extends RefactoringResourceSetProvider> bindRefactoringResourceSetProvider() {
 		return JvmModelRefactoringResourceSetProvider.class;
 	}
+	
 
 }
