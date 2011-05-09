@@ -94,7 +94,7 @@ public class XbaseWithAnnotationsJavaValidator extends XbaseJavaValidator {
 		Iterable<JvmOperation> attributes = annotationUtil.findAllAttributes(annotationType);
 		for (JvmOperation jvmOperation : attributes) {
 			XExpression value = annotationUtil.findValue(annotation, jvmOperation);
-			if (value == null /*&& jvmOperation.getDefaultValue() == null */) {
+			if (value == null && jvmOperation.getDefaultValue() == null) {
 				error("The annotation must define the attribute '"+jvmOperation.getSimpleName()+"'.", annotation, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ANNOTATIONS_MISSING_ATTRIBUTE_DEFINITION);
 			}
 		}
