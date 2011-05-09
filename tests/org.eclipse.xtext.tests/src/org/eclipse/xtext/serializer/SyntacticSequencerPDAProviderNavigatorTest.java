@@ -23,7 +23,7 @@ import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynFollowerO
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider;
-import org.eclipse.xtext.serializer.impl.RCStack;
+import org.eclipse.xtext.serializer.impl.RuleCallStack;
 
 import com.google.common.collect.Sets;
 
@@ -80,8 +80,8 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		return null;
 	}
 
-	protected RCStack newStack() {
-		return new RCStack();
+	protected RuleCallStack newStack() {
+		return new RuleCallStack();
 	}
 
 	protected ISynEmitterState findEmitter(ISynFollowerOwner start, String name, Set<ISynFollowerOwner> visited) {
@@ -97,8 +97,8 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		return null;
 	}
 
-	protected RCStack newStack(ISynTransition start, String... ruleCalls) {
-		RCStack result = new RCStack();
+	protected RuleCallStack newStack(ISynTransition start, String... ruleCalls) {
+		RuleCallStack result = new RuleCallStack();
 		for (String name : ruleCalls) {
 			ISynEmitterState emitter = findEmitter(start, name, Sets.<ISynFollowerOwner> newHashSet());
 			result.push((RuleCall) emitter.getGrammarElement());
@@ -181,14 +181,14 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		assertEquals(1, trans1.getDistanceWithStackToAbsorber(newStack()));
 		assertEquals("[{Val}]", trans1.getShortestPathToAbsorber(newStack()).toString());
 
-		RCStack stack2 = newStack();
+		RuleCallStack stack2 = newStack();
 		ISynTransition trans2 = findTransition(start, "name=ID", "stop");
 		assertFalse(trans2.involvesUnassignedTokenRuleCalls());
 		assertFalse(trans2.isSyntacticallyAmbiguous());
 		assertEquals(0, trans2.getDistanceWithStackToAbsorber(stack2));
 		assertEquals("[]", trans2.getShortestPathToAbsorber(stack2).toString());
 
-		RCStack stack3 = newStack(trans1, ">>Addition", ">>Prim");
+		RuleCallStack stack3 = newStack(trans1, ">>Addition", ">>Prim");
 		ISynTransition trans3 = findTransition(start, "name=ID", "stop");
 		assertFalse(trans3.involvesUnassignedTokenRuleCalls());
 		assertFalse(trans3.isSyntacticallyAmbiguous());
