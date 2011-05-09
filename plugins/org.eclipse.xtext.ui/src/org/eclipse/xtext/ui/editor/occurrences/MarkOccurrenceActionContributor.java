@@ -13,8 +13,6 @@ import java.util.Map;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IToolBarManager;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IWorkbench;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.actions.AbstractToggleActionContributor;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
@@ -34,9 +32,6 @@ public class MarkOccurrenceActionContributor extends AbstractToggleActionContrib
 
 	@Inject
 	private Provider<OccurrenceMarker> occurrenceMarkerProvider;
-
-	@Inject(optional=true)
-	private IWorkbench workbench;
 
 	private Map<XtextEditor, OccurrenceMarker> editor2marker = newHashMap();
 	
@@ -75,16 +70,6 @@ public class MarkOccurrenceActionContributor extends AbstractToggleActionContrib
 
 	@Override
 	protected void stateChanged(boolean newState) {
-		if (workbench==null)
-			throw new IllegalStateException("no workbench");
-		if(newState) {
-			IEditorPart activeEditor = workbench.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-			if(activeEditor instanceof XtextEditor) {
-				OccurrenceMarker occurrenceMarker = editor2marker.get(activeEditor);
-				occurrenceMarker.setMarkOccurrences(newState);
-				return;
-			}
-		}
 		for(OccurrenceMarker occurrenceMarker: editor2marker.values()) {
 			occurrenceMarker.setMarkOccurrences(newState);
 		}

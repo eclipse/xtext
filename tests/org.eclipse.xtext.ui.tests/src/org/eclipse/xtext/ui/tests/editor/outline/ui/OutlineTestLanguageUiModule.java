@@ -6,6 +6,7 @@ package org.eclipse.xtext.ui.tests.editor.outline.ui;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
 import org.eclipse.xtext.ui.editor.outline.actions.OutlineWithEditorLinker;
 import org.eclipse.xtext.ui.tests.editor.outline.CustomOutlineWithEditorLinker;
@@ -38,4 +39,11 @@ public class OutlineTestLanguageUiModule extends
 	public Class<? extends OutlineWithEditorLinker> bindOutlineWithEditorLinker() {
 		return CustomOutlineWithEditorLinker.class;
 	}
+	
+	@Override
+	public Class<? extends IXtextEditorCallback> bindIXtextEditorCallback() {
+		return null;
+	}
+	
+	
 }
