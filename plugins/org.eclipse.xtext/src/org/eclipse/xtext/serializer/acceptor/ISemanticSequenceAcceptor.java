@@ -17,9 +17,16 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
  */
 public interface ISemanticSequenceAcceptor extends IAssignedTokenSequenceAcceptor {
 
-	void acceptAssignedAction(Action action, EObject semanticChild, ICompositeNode node);
+	//	void acceptAssignedAction(Action action, EObject semanticChild, ICompositeNode node);
+	//	void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild, ICompositeNode node);
 
-	void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild, ICompositeNode node);
+	boolean enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node);
+
+	boolean enterAssignedParserRuleCall(RuleCall rc, EObject semanticChild, ICompositeNode node);
+
+	void leaveAssignedAction(Action action, EObject semanticChild);
+
+	void leaveAssignedParserRuleCall(RuleCall rc, EObject semanticChild);
 
 	void finish();
 

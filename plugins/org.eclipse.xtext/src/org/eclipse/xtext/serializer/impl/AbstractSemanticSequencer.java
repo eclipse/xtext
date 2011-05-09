@@ -25,6 +25,8 @@ public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 
 	protected ISerializationDiagnostic.Acceptor errorAcceptor;
 
+	protected ISemanticSequencer masterSequencer;
+
 	@Inject
 	protected ISemanticNodeProvider nodeProvider;
 
@@ -39,16 +41,28 @@ public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 
 	protected SequenceAcceptor createSequencerAcceptor(EObject semanticObject) {
 		INodesForEObjectProvider nodeProvider = createNodeProvider(semanticObject);
-		return sequenceAcceptorProvider.create(semanticObject, nodeProvider, sequenceAcceptor, errorAcceptor);
+		return sequenceAcceptorProvider.create(semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
+				errorAcceptor);
 	}
 
 	protected SequenceAcceptor createSequencerAcceptor(EObject semanticObject, INodesForEObjectProvider nodeProvider) {
-		return sequenceAcceptorProvider.create(semanticObject, nodeProvider, sequenceAcceptor, errorAcceptor);
+		return sequenceAcceptorProvider.create(semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
+				errorAcceptor);
 	}
 
 	public void init(ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+		init(this, sequenceAcceptor, errorAcceptor);
+	}
+
+	public void init(ISemanticSequencer sequencer, ISemanticSequenceAcceptor sequenceAcceptor,
+			ISerializationDiagnostic.Acceptor errorAcceptor) {
+		this.masterSequencer = sequencer;
 		this.sequenceAcceptor = sequenceAcceptor;
 		this.errorAcceptor = errorAcceptor;
+	}
+
+	public void setMasterSequencer(ISemanticSequencer sequencer) {
+		this.masterSequencer = sequencer;
 	}
 
 }

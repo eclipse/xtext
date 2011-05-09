@@ -38,7 +38,7 @@ import org.eclipse.xtext.grammaranalysis.impl.AbstractNFATransition;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractPDAProvider;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementFullTitleSwitch;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider;
-import org.eclipse.xtext.serializer.impl.RCStack;
+import org.eclipse.xtext.serializer.impl.RuleCallStack;
 import org.eclipse.xtext.util.LinkedStack;
 
 import com.google.common.base.Predicate;
@@ -370,7 +370,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		}
 
 		protected int distanceTo(ISynState state, Predicate<ISynState> matches, Predicate<ISynState> bounds,
-				RCStack stack, LinkedStack<ISynState> visited) {
+				RuleCallStack stack, LinkedStack<ISynState> visited) {
 			if (matches.apply(state))
 				return 0;
 			if (bounds.apply(state))
@@ -396,11 +396,11 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			return dist;
 		}
 
-		public int getDistanceTo(Predicate<ISynState> matches, Predicate<ISynState> bounds, RCStack stack) {
+		public int getDistanceTo(Predicate<ISynState> matches, Predicate<ISynState> bounds, RuleCallStack stack) {
 			return distanceTo(this, matches, bounds, stack, new LinkedStack<ISynState>());
 		}
 
-		public int getDistanceWithStackToAbsorber(RCStack stack) {
+		public int getDistanceWithStackToAbsorber(RuleCallStack stack) {
 			if (involvesRuleExit()) {
 				return getDistanceWithStackToElement(SynPredicates.absorber(), stack);
 			}
@@ -409,7 +409,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			return distanceToAbsorber;
 		}
 
-		public int getDistanceWithStackToElement(Predicate<ISynState> matches, RCStack stack) {
+		public int getDistanceWithStackToElement(Predicate<ISynState> matches, RuleCallStack stack) {
 			int result = 0;
 			if (involvesRuleExit()) {
 				while (!stack.isEmpty()) {
@@ -425,12 +425,12 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			return result + getDistanceTo(matches, SynPredicates.absorber(), stack);
 		}
 
-		public List<ISynState> getShortestPathTo(AbstractElement ele, RCStack stack, boolean addMatch) {
+		public List<ISynState> getShortestPathTo(AbstractElement ele, RuleCallStack stack, boolean addMatch) {
 			return getShortestPathTo(SynPredicates.emitter(ele), SynPredicates.absorber(), stack, addMatch);
 		}
 
 		public List<ISynState> getShortestPathTo(Predicate<ISynState> matches, Predicate<ISynState> bounds,
-				RCStack stack, boolean addMatch) {
+				RuleCallStack stack, boolean addMatch) {
 			List<ISynState> routes;
 			//			if (getType() == SynStateType.TRANSITION)
 			routes = getFollowers();
@@ -480,7 +480,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			}
 		}
 
-		public List<ISynState> getShortestPathToAbsorber(RCStack stack) {
+		public List<ISynState> getShortestPathToAbsorber(RuleCallStack stack) {
 			if (involvesRuleExit())
 				return getShortestPathToElement(SynPredicates.absorber(), stack);
 			if (shortestPathToAbsorber == null)
@@ -489,7 +489,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			return shortestPathToAbsorber;
 		}
 
-		protected List<ISynState> getShortestPathToElement(Predicate<ISynState> matches, RCStack stack) {
+		protected List<ISynState> getShortestPathToElement(Predicate<ISynState> matches, RuleCallStack stack) {
 			List<ISynState> result = Lists.newArrayList();
 			ISynNavigable current = this;
 			if (involvesRuleExit()) {
@@ -559,8 +559,8 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			return syntacticallyAmbiguous;
 		}
 
-		protected boolean isSyntacticallyAmbiguous(ISynState state, RCStack exits, RCStack stack,
-				List<RCStack> results, Set<ISynState> visited) {
+		protected boolean isSyntacticallyAmbiguous(ISynState state, RuleCallStack exits, RuleCallStack stack,
+				List<RuleCallStack> results, Set<ISynState> visited) {
 			if (!visited.add(state))
 				return true;
 			if (state instanceof ISynAbsorberState) {
@@ -597,9 +597,9 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		}
 
 		protected boolean isSyntacticallyAmbiguous(List<ISynState> states) {
-			RCStack exits = new RCStack();
-			RCStack stack = new RCStack();
-			List<RCStack> results = Lists.newArrayList();
+			RuleCallStack exits = new RuleCallStack();
+			RuleCallStack stack = new RuleCallStack();
+			List<RuleCallStack> results = Lists.newArrayList();
 			Set<ISynState> visited = Sets.newHashSet();
 			for (ISynState state : states)
 				if (isSyntacticallyAmbiguous(state, exits, stack, results, visited))

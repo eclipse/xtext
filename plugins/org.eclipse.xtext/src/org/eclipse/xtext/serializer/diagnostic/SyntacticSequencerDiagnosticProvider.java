@@ -16,7 +16,7 @@ import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynAbsorberS
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynTransition;
-import org.eclipse.xtext.serializer.impl.RCStack;
+import org.eclipse.xtext.serializer.impl.RuleCallStack;
 
 import com.google.common.collect.Lists;
 import com.google.inject.internal.Join;
@@ -26,12 +26,12 @@ import com.google.inject.internal.Join;
  */
 public class SyntacticSequencerDiagnosticProvider implements ISyntacticSequencerDiagnosticProvider {
 
-	public ISerializationDiagnostic createUnexpectedStackStateDiagnostic(ISynState toConsume, RCStack stack) {
+	public ISerializationDiagnostic createUnexpectedStackStateDiagnostic(ISynState toConsume, RuleCallStack stack) {
 		return null;
 	}
 
 	public ISerializationDiagnostic createUnexpectedEmitterDiagnostic(ISynNavigable currentState,
-			AbstractElement target, RCStack stack) {
+			AbstractElement target, RuleCallStack stack) {
 		return null;
 	}
 

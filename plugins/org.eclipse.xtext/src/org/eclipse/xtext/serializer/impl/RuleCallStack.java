@@ -11,11 +11,11 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementFullTitleSwitch;
 import org.eclipse.xtext.util.AbstractLinkedStack;
 
-public class RCStack extends AbstractLinkedStack<RCStack, RuleCall> {
+public class RuleCallStack extends AbstractLinkedStack<RuleCallStack, RuleCall> {
 
 	@Override
-	protected RCStack createStack() {
-		return new RCStack();
+	protected RuleCallStack createStack() {
+		return new RuleCallStack();
 	}
 
 	@Override

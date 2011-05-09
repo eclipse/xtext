@@ -10,6 +10,6 @@ package org.eclipse.xtext.serializer.acceptor;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IEObjectSequenceAcceptor extends ISyntacticSequenceAcceptor, IHiddenTokensAcceptor {
+public interface IEObjectSequenceAcceptor extends ISyntacticSequenceAcceptor, IHiddenTokenAcceptor {
 
 }

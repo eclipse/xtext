@@ -10,11 +10,10 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(GenericSemanticSequencer.class)
 public interface ISemanticSequencer {
 
-	public interface ISemanticSequencerOwner {
-		public void setSemanticSequencer(ISemanticSequencer sequencer);
-	}
-
 	void init(ISemanticSequenceAcceptor sequenceAcceptor, ISerializationDiagnostic.Acceptor errorAcceptor);
+
+	void init(ISemanticSequencer sequencer, ISemanticSequenceAcceptor sequenceAcceptor,
+			ISerializationDiagnostic.Acceptor errorAcceptor);
 
 	/**
 	 * An implementation of this interface converts all direct children of a semantic object into a sequence of

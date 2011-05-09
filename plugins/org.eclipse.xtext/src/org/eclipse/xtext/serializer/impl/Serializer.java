@@ -9,10 +9,8 @@ package org.eclipse.xtext.serializer.impl;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -21,16 +19,19 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
 import org.eclipse.xtext.parsetree.reconstr.impl.WriterTokenStream;
 import org.eclipse.xtext.resource.SaveOptions;
-import org.eclipse.xtext.serializer.IRecursiveSequencer;
+import org.eclipse.xtext.serializer.IHiddenTokenSequencer;
 import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.ISerializer;
-import org.eclipse.xtext.serializer.acceptor.IRecursiveSequenceAcceptor;
+import org.eclipse.xtext.serializer.ISyntacticSequencer;
+import org.eclipse.xtext.serializer.acceptor.IEObjectSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.TokenStreamSequenceAdapter;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
-import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.ReplaceRegion;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -45,13 +46,27 @@ public class Serializer implements ISerializer {
 	protected IFormatter formatter;
 
 	@Inject
-	protected IRecursiveSequencer sequencer;
+	protected Provider<ISemanticSequencer> semanticSequencerProvider;
 
 	@Inject
-	protected ISemanticSequencer semanticSequencer;
+	protected Provider<ISyntacticSequencer> syntacticSequencerProvider;
+
+	@Inject
+	protected Provider<IHiddenTokenSequencer> hiddenTokenSequencerProvider;
 
 	@Inject
 	protected IGrammarAccess grammar;
+
+	protected void serialize(EObject semanticObject, EObject context, IEObjectSequenceAcceptor tokens,
+			ISerializationDiagnostic.Acceptor errors) {
+		ISemanticSequencer semantic = semanticSequencerProvider.get();
+		ISyntacticSequencer syntactic = syntacticSequencerProvider.get();
+		IHiddenTokenSequencer hidden = hiddenTokenSequencerProvider.get();
+		semantic.init((ISemanticSequenceAcceptor) syntactic, errors);
+		syntactic.init(context, semanticObject, (ISyntacticSequenceAcceptor) hidden, errors);
+		hidden.init(context, semanticObject, tokens, errors);
+		semantic.createSequence(context, semanticObject);
+	}
 
 	protected void serialize(EObject obj, ITokenStream tokenStream, SaveOptions options) throws IOException {
 		ISerializationDiagnostic.Acceptor errors = ISerializationDiagnostic.EXCEPTION_THROWING_ACCEPTOR;
@@ -60,8 +75,9 @@ public class Serializer implements ISerializer {
 		//		if (!context.hasNext())
 		//			throw new RuntimeException("No Context for " + EmfFormatter.objPath(obj) + " could be found");
 		EObject context = grammar.getGrammar().getRules().get(0);
-		IRecursiveSequenceAcceptor acceptor = new TokenStreamSequenceAdapter(formatterTokenStream, errors);
-		sequencer.createSequence(context, obj, acceptor, errors);
+		IEObjectSequenceAcceptor acceptor = new TokenStreamSequenceAdapter(formatterTokenStream, errors);
+		//		sequencer.createSequence(context, obj, acceptor, errors);
+		serialize(obj, context, acceptor, errors);
 		formatterTokenStream.flush();
 	}
 
