@@ -9,12 +9,10 @@ package org.eclipse.xtext.ui.refactoring;
 
 import static org.eclipse.xtext.util.Strings.*;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.CheckConditionsContext;
-import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
 import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
 
 import com.google.inject.ImplementedBy;

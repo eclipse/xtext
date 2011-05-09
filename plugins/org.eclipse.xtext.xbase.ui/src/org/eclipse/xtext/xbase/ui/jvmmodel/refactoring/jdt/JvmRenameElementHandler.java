@@ -15,14 +15,9 @@ import java.util.Set;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.jdt.core.refactoring.descriptors.RenameJavaElementDescriptor;
-import org.eclipse.jdt.ui.refactoring.RenameSupport;
 import org.eclipse.jface.text.ITextSelection;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -50,14 +45,8 @@ public class JvmRenameElementHandler extends RenameElementHandler {
 	@Inject
 	private IJavaElementFinder javaElementFinder;
 
-	@Inject
-	private JvmRenameRefactoringProvider jvmRenameRefactorigProvider;
-
-	private Shell activeShell;
-
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		this.activeShell = HandlerUtil.getActiveShell(event);
 		return super.execute(event);
 	}
 
@@ -69,7 +58,7 @@ public class JvmRenameElementHandler extends RenameElementHandler {
 			IJavaElement javaElement = javaElementFinder.findElementFor((JvmMember) targetElement);
 			if (javaElement != null)
 				return new RenameJvmReferenceContext((JvmMember) targetElement, javaElement, editor, selection,
-						EcoreUtil2.getNormalizedResourceURI(targetElement));
+						resource.getURI());
 		}
 		Set<EObject> jvmElements = associations.getJvmElements(targetElement);
 		if (!jvmElements.isEmpty()) {
@@ -86,26 +75,11 @@ public class JvmRenameElementHandler extends RenameElementHandler {
 						EcoreUtil2.getNormalizedResourceURI(targetElement));
 			}
 		}
-
 		return super.createRenameElementContext(targetElement, editor, selection, resource);
 	}
 
 	@Override
 	protected void startRenameElement(IRenameElementContext renameElementContext) throws InterruptedException {
-		if (renameElementContext instanceof RenameJvmReferenceContext) {
-			try {
-				// for renaming JVM references directly, use JDT rename dialog 
-				IJavaElement referencedJavaElement = ((RenameJvmReferenceContext) renameElementContext)
-						.getReferencedJavaElement();
-				RenameJavaElementDescriptor renameDescriptor = jvmRenameRefactorigProvider.createRenameDescriptor(
-						referencedJavaElement, referencedJavaElement.getElementName());
-				RenameSupport renameSupport = RenameSupport.create(renameDescriptor);
-				renameSupport.openDialog(activeShell);
-				return;
-			} catch (Exception exc) {
-				throw new WrappedException(exc);
-			}
-		}
 		super.startRenameElement(renameElementContext);
 	}
 }

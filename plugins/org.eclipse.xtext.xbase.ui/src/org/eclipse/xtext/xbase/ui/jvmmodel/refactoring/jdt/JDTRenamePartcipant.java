@@ -58,8 +58,6 @@ public class JDTRenamePartcipant extends AbstractProcessorBasedRenameParticipant
 	private ResourceSet resourceSet;
 
 	private Set<EObject> sourceElements;
-	
-	
 
 	@Override
 	protected List<? extends IRenameElementContext> createRenameElementContexts(Object element) {

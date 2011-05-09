@@ -29,7 +29,7 @@ public class JvmMemberRenameStrategy implements IRenameStrategy {
 	protected URI targetMemberNewURI;
 	protected String originalName;
 
-	protected JvmMemberRenameStrategy(JvmMember targetMember) {
+	public JvmMemberRenameStrategy(JvmMember targetMember) {
 		targetMemberOriginalURI = EcoreUtil.getURI(targetMember);
 		originalName = targetMember.getSimpleName();
 	}
