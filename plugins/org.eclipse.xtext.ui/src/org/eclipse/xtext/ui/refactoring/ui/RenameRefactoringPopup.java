@@ -284,7 +284,7 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 			}
 
 			public void menuAboutToShow(IMenuManager manager) {
-				boolean canRefactor = renameLinkedMode.updateNewName();
+				boolean canRefactor = renameLinkedMode.isCurrentNameValid();
 				IAction refactorAction = new Action("Rename...") {
 					@Override
 					public void run() {

@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.ui;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.WrappedException;
@@ -53,9 +55,11 @@ public class RenameLinkedMode {
 	private FocusEditingSupport focusEditingSupport;
 	private boolean showPreview;
 	private Point originalSelection;
+	private String originalName;
 	private LinkedModeModel linkedModeModel;
 	private LinkedPositionGroup linkedPositionGroup;
 	private LinkedPosition currentPosition;
+
 
 	public void start(IRenameElementContext renameElementContext, IProgressMonitor monitor) {
 		if (renameElementContext == null)
@@ -71,6 +75,7 @@ public class RenameLinkedMode {
 		for (LinkedPosition linkedPosition : linkedPositionGroup.getPositions()) {
 			if (linkedPosition.includes(originalSelection.x + originalSelection.y)) {
 				currentPosition = linkedPosition;
+				originalName = getCurrentName();
 				viewer.setSelectedRange(currentPosition.offset, currentPosition.length);
 			}
 		}
@@ -102,14 +107,19 @@ public class RenameLinkedMode {
 		popup.open();
 	}
 
-	public boolean updateNewName() {
+	public boolean isCurrentNameValid() {
+		String currentName = getCurrentName();
+		return !isEmpty(currentName) && !equal(originalName, currentName);
+	}
+	
+	public String getCurrentName() {
 		if (currentPosition != null)
 			try {
-				return controller.updateNewName(currentPosition.getContent());
+				return currentPosition.getContent();
 			} catch (BadLocationException e) {
 				LOG.error("Error updating new name", e);
 			}
-		return false;
+		return null;
 	}
 
 	public boolean isSameRenameElementContext(IRenameElementContext renameElementContext) {
@@ -156,8 +166,8 @@ public class RenameLinkedMode {
 
 	protected class EditorSynchronizer implements ILinkedModeListener {
 		public void left(LinkedModeModel model, int flags) {
-			boolean isValidNewName = updateNewName();
-			if ((flags & ILinkedModeListener.UPDATE_CARET) != 0 && isValidNewName) {
+			//boolean isValidNewName = updateNewName();
+			if ((flags & ILinkedModeListener.UPDATE_CARET) != 0) {// && isValidNewName) {
 				if (showPreview)
 					controller.startRefactoring(RefactoringType.REFACTORING_PREVIEW);
 				else

@@ -78,7 +78,7 @@ public class SimpleLinkedPositionGroupCalculator extends AbstractLinkedPositionG
 			IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, 100);
 		XtextEditor editor = (XtextEditor) renameElementContext.getTriggeringEditor();
-		IProject project = projectUtil.getProject(renameElementContext.getTargetElementURI());
+		IProject project = projectUtil.getProject(renameElementContext.getContextResourceURI());
 		ResourceSet resourceSet = resourceSetProvider.get(project);
 		EObject targetElement = resourceSet.getEObject(renameElementContext.getTargetElementURI(), true);
 		if (targetElement == null)
