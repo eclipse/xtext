@@ -185,6 +185,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="#//JvmTypeReference"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defaultValue" eType="#//JvmAnnotationValue"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>Returns the default value for the annotation member represented by this JvmOperation instance.&lt;/p>&#xA;&lt;p>Returns null if no default is associated with the member, or if the operation does not represent a declared member of an annotation type.&lt;/p>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmFormalParameter" eSuperTypes="#//JvmIdentifiableElement #//JvmAnnotationTarget">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -203,6 +209,9 @@
         eType="#//JvmAnnotationValue" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmAnnotationValue" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&lt;p>Represents the value of an annotation member.&lt;/p>&#xA;&lt;p>That is, either the default value of an operation as a member of an annotation type, or the &#xA;concrete value in an annotation reference is returned.&lt;/p>"/>
+    </eAnnotations>
     <eOperations name="getValueName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="#//JvmOperation"/>
   </eClassifiers>
