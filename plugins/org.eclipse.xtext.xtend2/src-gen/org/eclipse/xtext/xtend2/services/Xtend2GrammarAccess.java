@@ -1367,7 +1367,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	//XAnnotation:
 	//	{XAnnotation} "@" annotationType=[types::JvmAnnotationType|QualifiedName] ("("
 	//	(elementValuePairs+=XAnnotationElementValuePair ("," elementValuePairs+=XAnnotationElementValuePair)* |
-	//	values+=XAnnotationElementValue ("," values+=XAnnotationElementValue)*)? ")")?;
+	//	value=XAnnotationElementValue)? ")")?;
 	public XbaseWithAnnotationsGrammarAccess.XAnnotationElements getXAnnotationAccess() {
 		return gaXbaseWithAnnotations.getXAnnotationAccess();
 	}

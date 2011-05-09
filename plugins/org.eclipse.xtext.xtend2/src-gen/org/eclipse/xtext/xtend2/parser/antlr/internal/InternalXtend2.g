@@ -1913,49 +1913,27 @@ ruleXAnnotation returns [EObject current=null]
 
 )
 ))*)
-    |((
+    |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXAnnotationAccess().getValuesXAnnotationElementValueParserRuleCall_3_1_1_0_0()); 
+	        newCompositeNode(grammarAccess.getXAnnotationAccess().getValueXAnnotationElementValueParserRuleCall_3_1_1_0()); 
 	    }
-		lv_values_7_0=ruleXAnnotationElementValue		{
+		lv_value_7_0=ruleXAnnotationElementValue		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getXAnnotationRule());
 	        }
-       		add(
+       		set(
        			$current, 
-       			"values",
-        		lv_values_7_0, 
+       			"value",
+        		lv_value_7_0, 
         		"XAnnotationElementValue");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)(	otherlv_8=',' 
+))?	otherlv_8=')' 
     {
-    	newLeafNode(otherlv_8, grammarAccess.getXAnnotationAccess().getCommaKeyword_3_1_1_1_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getXAnnotationAccess().getValuesXAnnotationElementValueParserRuleCall_3_1_1_1_1_0()); 
-	    }
-		lv_values_9_0=ruleXAnnotationElementValue		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getXAnnotationRule());
-	        }
-       		add(
-       			$current, 
-       			"values",
-        		lv_values_9_0, 
-        		"XAnnotationElementValue");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))*))?	otherlv_10=')' 
-    {
-    	newLeafNode(otherlv_10, grammarAccess.getXAnnotationAccess().getRightParenthesisKeyword_3_2());
+    	newLeafNode(otherlv_8, grammarAccess.getXAnnotationAccess().getRightParenthesisKeyword_3_2());
     }
 )?)
 ;

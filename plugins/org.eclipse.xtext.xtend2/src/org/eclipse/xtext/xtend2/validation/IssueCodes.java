@@ -19,6 +19,7 @@ public final class IssueCodes {
 
 	protected static final String ISSUE_CODE_PREFIX = "org.eclipse.xtext.xtend2.validation.IssueCodes.";
 
+	public static final String ANNOTATION_WRONG_TARGET = ISSUE_CODE_PREFIX+ "wrong_annotation_target";
 	public static final String CASE_FUNC_WITHOUT_PARAMS = ISSUE_CODE_PREFIX + "case_function_without_params";
 	public static final String CASE_FUNC_WITH_TYPE_PARAMS = ISSUE_CODE_PREFIX + "case_function_with_type_params";
 	public static final String SINGLE_CASE_FUNCTION = ISSUE_CODE_PREFIX + "single_case_function";
@@ -37,4 +38,5 @@ public final class IssueCodes {
 
 	public static final String CLASS_MUST_BE_ABSTRACT = ISSUE_CODE_PREFIX + "class_must_be_defined_abstract";
 	public static final String DUPLICATE_PARAMETER_NAME = ISSUE_CODE_PREFIX + "duplicate_parameter_name";
+
 }
