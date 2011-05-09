@@ -87,12 +87,12 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 				}
 				else break;
 			case TypesPackage.JVM_UPPER_BOUND:
-				if(context == grammarAccess.getJvmUpperBoundRule()) {
-					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
+					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
-					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				else if(context == grammarAccess.getJvmUpperBoundRule()) {
+					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
 				else break;
@@ -1147,22 +1147,13 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         annotationType=[JvmAnnotationType|QualifiedName]
-	 *         (
-	 *             (elementValuePairs+=XAnnotationElementValuePair elementValuePairs+=XAnnotationElementValuePair*) | 
-	 *             (values+=XAnnotationElementValue values+=XAnnotationElementValue*)
-	 *         )
-	 *         ?
-	 *     )
-	 *     
+	 *     (annotationType=[JvmAnnotationType|QualifiedName] ((elementValuePairs+=XAnnotationElementValuePair elementValuePairs+=XAnnotationElementValuePair*) | value=XAnnotationElementValue)?)
 	 *
 	 * Features:
 	 *    elementValuePairs[1, *]
-	 *         EXCLUDE_IF_SET values
-	 *         EXCLUDE_IF_SET values
+	 *         EXCLUDE_IF_SET value
 	 *    annotationType[1, 1]
-	 *    values[1, *]
+	 *    value[0, 1]
 	 *         EXCLUDE_IF_SET elementValuePairs
 	 *         EXCLUDE_IF_SET elementValuePairs
 	 */

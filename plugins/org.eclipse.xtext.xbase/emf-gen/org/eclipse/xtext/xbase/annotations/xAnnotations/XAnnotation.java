@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation#getElementValuePairs <em>Element Value Pairs</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation#getAnnotationType <em>Annotation Type</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation#getValues <em>Values</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -74,19 +74,29 @@ public interface XAnnotation extends XExpression
 	void setAnnotationType(JvmAnnotationType value);
 
 	/**
-	 * Returns the value of the '<em><b>Values</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtext.xbase.XExpression}.
+	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Values</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Value</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Values</em>' containment reference list.
-	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage#getXAnnotation_Values()
+	 * @return the value of the '<em>Value</em>' containment reference.
+	 * @see #setValue(XExpression)
+	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage#getXAnnotation_Value()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<XExpression> getValues();
+	XExpression getValue();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation#getValue <em>Value</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Value</em>' containment reference.
+	 * @see #getValue()
+	 * @generated
+	 */
+	void setValue(XExpression value);
 
 } // XAnnotation

@@ -174,7 +174,7 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXAnnotation_Values()
+	public EReference getXAnnotation_Value()
 	{
 		return (EReference)xAnnotationEClass.getEStructuralFeatures().get(2);
 	}
@@ -302,7 +302,7 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 		xAnnotationEClass = createEClass(XANNOTATION);
 		createEReference(xAnnotationEClass, XANNOTATION__ELEMENT_VALUE_PAIRS);
 		createEReference(xAnnotationEClass, XANNOTATION__ANNOTATION_TYPE);
-		createEReference(xAnnotationEClass, XANNOTATION__VALUES);
+		createEReference(xAnnotationEClass, XANNOTATION__VALUE);
 
 		xAnnotationElementValuePairEClass = createEClass(XANNOTATION_ELEMENT_VALUE_PAIR);
 		createEReference(xAnnotationElementValuePairEClass, XANNOTATION_ELEMENT_VALUE_PAIR__VALUE);
@@ -358,7 +358,7 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 		initEClass(xAnnotationEClass, XAnnotation.class, "XAnnotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXAnnotation_ElementValuePairs(), this.getXAnnotationElementValuePair(), null, "elementValuePairs", null, 0, -1, XAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXAnnotation_AnnotationType(), theTypesPackage.getJvmAnnotationType(), null, "annotationType", null, 0, 1, XAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getXAnnotation_Values(), theXbasePackage.getXExpression(), null, "values", null, 0, -1, XAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXAnnotation_Value(), theXbasePackage.getXExpression(), null, "value", null, 0, 1, XAnnotation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xAnnotationElementValuePairEClass, XAnnotationElementValuePair.class, "XAnnotationElementValuePair", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXAnnotationElementValuePair_Value(), theXbasePackage.getXExpression(), null, "value", null, 0, 1, XAnnotationElementValuePair.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

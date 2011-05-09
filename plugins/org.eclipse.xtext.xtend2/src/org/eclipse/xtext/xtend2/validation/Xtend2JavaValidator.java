@@ -9,19 +9,24 @@ package org.eclipse.xtext.xtend2.validation;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Maps.*;
 import static java.util.Collections.*;
 import static org.eclipse.xtext.util.Strings.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import static org.eclipse.xtext.xtend2.validation.IssueCodes.*;
 import static org.eclipse.xtext.xtend2.xtend2.Xtend2Package.Literals.*;
 
+import java.lang.annotation.ElementType;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -48,7 +53,10 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
+import org.eclipse.xtext.xbase.annotations.typing.XAnnotationUtil;
 import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xtend2.dispatch.DispatchingSupport;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
@@ -105,6 +113,9 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Inject
 	private TypeReferences typeReferences;
 	
+	@Inject
+	private XAnnotationUtil annotationUtil;
+	
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.copyOf(
 			Iterables.concat(
 					super.getTypeConformanceCheckedReferences(),
@@ -119,12 +130,47 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Override
 	protected List<EPackage> getEPackages() {
-		return newArrayList(Xtend2Package.eINSTANCE, XbasePackage.eINSTANCE);
+		return newArrayList(Xtend2Package.eINSTANCE, XbasePackage.eINSTANCE, XAnnotationsPackage.eINSTANCE);
 	}
 	
 	@Override
 	protected Set<EReference> getTypeConformanceCheckedReferences() {
 		return typeConformanceCheckedReferences;
+	}
+	
+	@Check
+	public void checkAnnotationTarget(XAnnotation annotation) {
+		JvmAnnotationType annotationType = annotation.getAnnotationType();
+		Set<ElementType> targets = annotationUtil.getAnnotationTargets(annotationType);
+		if (targets.isEmpty())
+			return;
+		final EObject eContainer = getContainingAnnotationTarget(annotation);
+		final Map<Class<?>, ElementType> targetInfos = getTargetInfos();
+		for (Entry<Class<?>, ElementType> mapping : targetInfos.entrySet()) {
+			if (mapping.getKey().isInstance(eContainer)) {
+				if (!targets.contains(mapping.getValue())) {
+					error("The annotation @"+annotation.getAnnotationType().getIdentifier()+" is disallowed for this location.", annotation, null, INSIGNIFICANT_INDEX, ANNOTATION_WRONG_TARGET);
+				}
+			}
+		}
+	}
+
+	protected EObject getContainingAnnotationTarget(XAnnotation annotation) {
+		final EObject eContainer = annotation.eContainer();
+		// in fields and functions annotations are contained in a synthetic container
+		if (eContainer.eClass() == Xtend2Package.Literals.XTEND_MEMBER) {
+			return eContainer.eContainer();
+		}
+		return eContainer;
+	}
+	
+	protected Map<Class<?>, ElementType> getTargetInfos() {
+		Map<Class<?>, ElementType> result = newHashMap();
+		result.put(XtendClass.class, ElementType.TYPE);
+		result.put(XtendField.class, ElementType.FIELD);
+		result.put(XtendFunction.class, ElementType.METHOD);
+		result.put(XtendParameter.class, ElementType.PARAMETER);
+		return result;
 	}
 	
 	@Override

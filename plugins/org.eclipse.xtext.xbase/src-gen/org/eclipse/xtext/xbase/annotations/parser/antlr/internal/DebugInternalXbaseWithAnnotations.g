@@ -12,9 +12,7 @@ ruleXAnnotation :
 			ruleXAnnotationElementValuePair (
 				',' ruleXAnnotationElementValuePair
 			)* |
-			ruleXAnnotationElementValue (
-				',' ruleXAnnotationElementValue
-			)*
+			ruleXAnnotationElementValue
 		)? ')'
 	)?
 ;

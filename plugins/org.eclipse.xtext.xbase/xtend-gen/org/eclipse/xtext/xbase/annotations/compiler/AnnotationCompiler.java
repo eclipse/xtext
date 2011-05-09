@@ -30,54 +30,38 @@ public class AnnotationCompiler {
       IAppendable _append = a.append("@");
       JvmAnnotationType _annotationType = annotation.getAnnotationType();
       _append.append(_annotationType);
-      EList<XExpression> _values = annotation.getValues();
-      boolean _isEmpty = _values.isEmpty();
-      boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
-      if (_operator_not) {
+      XExpression _value = annotation.getValue();
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_value, null);
+      if (_operator_notEquals) {
         {
           a.append("(");
-          EList<XExpression> _values_1 = annotation.getValues();
-          Iterator<XExpression> _iterator = _values_1.iterator();
-          final Iterator<XExpression> iter = _iterator;
-          boolean _hasNext = iter.hasNext();
-          Boolean _xwhileexpression = _hasNext;
-          while (_xwhileexpression) {
-            {
-              XExpression _next = iter.next();
-              this.generate(_next, a);
-              boolean _hasNext_1 = iter.hasNext();
-              if (_hasNext_1) {
-                a.append(",");
-              }
-            }
-            boolean _hasNext_2 = iter.hasNext();
-            _xwhileexpression = _hasNext_2;
-          }
+          XExpression _value_1 = annotation.getValue();
+          this.generate(_value_1, a);
           a.append(")");
         }
       } else {
         EList<XAnnotationElementValuePair> _elementValuePairs = annotation.getElementValuePairs();
-        boolean _isEmpty_1 = _elementValuePairs.isEmpty();
-        boolean _operator_not_1 = BooleanExtensions.operator_not(_isEmpty_1);
-        if (_operator_not_1) {
+        boolean _isEmpty = _elementValuePairs.isEmpty();
+        boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
+        if (_operator_not) {
           {
             a.append("(");
             EList<XAnnotationElementValuePair> _elementValuePairs_1 = annotation.getElementValuePairs();
-            Iterator<XAnnotationElementValuePair> _iterator_1 = _elementValuePairs_1.iterator();
-            final Iterator<XAnnotationElementValuePair> iter_1 = _iterator_1;
-            boolean _hasNext_3 = iter_1.hasNext();
-            Boolean _xwhileexpression_1 = _hasNext_3;
-            while (_xwhileexpression_1) {
+            Iterator<XAnnotationElementValuePair> _iterator = _elementValuePairs_1.iterator();
+            final Iterator<XAnnotationElementValuePair> iter = _iterator;
+            boolean _hasNext = iter.hasNext();
+            Boolean _xwhileexpression = _hasNext;
+            while (_xwhileexpression) {
               {
-                XAnnotationElementValuePair _next_1 = iter_1.next();
-                this.generate(_next_1, a);
-                boolean _hasNext_4 = iter_1.hasNext();
-                if (_hasNext_4) {
+                XAnnotationElementValuePair _next = iter.next();
+                this.generate(_next, a);
+                boolean _hasNext_1 = iter.hasNext();
+                if (_hasNext_1) {
                   a.append(",");
                 }
               }
-              boolean _hasNext_5 = iter_1.hasNext();
-              _xwhileexpression_1 = _hasNext_5;
+              boolean _hasNext_2 = iter.hasNext();
+              _xwhileexpression = _hasNext_2;
             }
             a.append(")");
           }

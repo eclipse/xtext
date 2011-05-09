@@ -39,7 +39,7 @@ import org.eclipse.xtext.xbase.impl.XExpressionImpl;
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationImpl#getElementValuePairs <em>Element Value Pairs</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationImpl#getAnnotationType <em>Annotation Type</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationImpl#getValues <em>Values</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -68,14 +68,14 @@ public class XAnnotationImpl extends XExpressionImpl implements XAnnotation
 	protected JvmAnnotationType annotationType;
 
 	/**
-	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValues()
+	 * @see #getValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<XExpression> values;
+	protected XExpression value;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -160,13 +160,47 @@ public class XAnnotationImpl extends XExpressionImpl implements XAnnotation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<XExpression> getValues()
+	public XExpression getValue()
 	{
-		if (values == null)
+		return value;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetValue(XExpression newValue, NotificationChain msgs)
+	{
+		XExpression oldValue = value;
+		value = newValue;
+		if (eNotificationRequired())
 		{
-			values = new EObjectContainmentEList<XExpression>(XExpression.class, this, XAnnotationsPackage.XANNOTATION__VALUES);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XAnnotationsPackage.XANNOTATION__VALUE, oldValue, newValue);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
-		return values;
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setValue(XExpression newValue)
+	{
+		if (newValue != value)
+		{
+			NotificationChain msgs = null;
+			if (value != null)
+				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XAnnotationsPackage.XANNOTATION__VALUE, null, msgs);
+			if (newValue != null)
+				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XAnnotationsPackage.XANNOTATION__VALUE, null, msgs);
+			msgs = basicSetValue(newValue, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XAnnotationsPackage.XANNOTATION__VALUE, newValue, newValue));
 	}
 
 	/**
@@ -181,8 +215,8 @@ public class XAnnotationImpl extends XExpressionImpl implements XAnnotation
 		{
 			case XAnnotationsPackage.XANNOTATION__ELEMENT_VALUE_PAIRS:
 				return ((InternalEList<?>)getElementValuePairs()).basicRemove(otherEnd, msgs);
-			case XAnnotationsPackage.XANNOTATION__VALUES:
-				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
+			case XAnnotationsPackage.XANNOTATION__VALUE:
+				return basicSetValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -202,8 +236,8 @@ public class XAnnotationImpl extends XExpressionImpl implements XAnnotation
 			case XAnnotationsPackage.XANNOTATION__ANNOTATION_TYPE:
 				if (resolve) return getAnnotationType();
 				return basicGetAnnotationType();
-			case XAnnotationsPackage.XANNOTATION__VALUES:
-				return getValues();
+			case XAnnotationsPackage.XANNOTATION__VALUE:
+				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -226,9 +260,8 @@ public class XAnnotationImpl extends XExpressionImpl implements XAnnotation
 			case XAnnotationsPackage.XANNOTATION__ANNOTATION_TYPE:
 				setAnnotationType((JvmAnnotationType)newValue);
 				return;
-			case XAnnotationsPackage.XANNOTATION__VALUES:
-				getValues().clear();
-				getValues().addAll((Collection<? extends XExpression>)newValue);
+			case XAnnotationsPackage.XANNOTATION__VALUE:
+				setValue((XExpression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -250,8 +283,8 @@ public class XAnnotationImpl extends XExpressionImpl implements XAnnotation
 			case XAnnotationsPackage.XANNOTATION__ANNOTATION_TYPE:
 				setAnnotationType((JvmAnnotationType)null);
 				return;
-			case XAnnotationsPackage.XANNOTATION__VALUES:
-				getValues().clear();
+			case XAnnotationsPackage.XANNOTATION__VALUE:
+				setValue((XExpression)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -271,8 +304,8 @@ public class XAnnotationImpl extends XExpressionImpl implements XAnnotation
 				return elementValuePairs != null && !elementValuePairs.isEmpty();
 			case XAnnotationsPackage.XANNOTATION__ANNOTATION_TYPE:
 				return annotationType != null;
-			case XAnnotationsPackage.XANNOTATION__VALUES:
-				return values != null && !values.isEmpty();
+			case XAnnotationsPackage.XANNOTATION__VALUE:
+				return value != null;
 		}
 		return super.eIsSet(featureID);
 	}

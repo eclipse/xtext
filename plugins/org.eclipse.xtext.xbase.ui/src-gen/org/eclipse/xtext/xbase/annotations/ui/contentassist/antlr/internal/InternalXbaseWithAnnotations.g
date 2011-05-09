@@ -1908,9 +1908,9 @@ rule__XAnnotation__Alternatives_3_1
 )
 
     |(
-{ before(grammarAccess.getXAnnotationAccess().getGroup_3_1_1()); }
-(rule__XAnnotation__Group_3_1_1__0)
-{ after(grammarAccess.getXAnnotationAccess().getGroup_3_1_1()); }
+{ before(grammarAccess.getXAnnotationAccess().getValueAssignment_3_1_1()); }
+(rule__XAnnotation__ValueAssignment_3_1_1)
+{ after(grammarAccess.getXAnnotationAccess().getValueAssignment_3_1_1()); }
 )
 
 ;
@@ -3032,130 +3032,6 @@ rule__XAnnotation__Group_3_1_0_1__1__Impl
 { before(grammarAccess.getXAnnotationAccess().getElementValuePairsAssignment_3_1_0_1_1()); }
 (rule__XAnnotation__ElementValuePairsAssignment_3_1_0_1_1)
 { after(grammarAccess.getXAnnotationAccess().getElementValuePairsAssignment_3_1_0_1_1()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-
-
-
-
-rule__XAnnotation__Group_3_1_1__0
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-	rule__XAnnotation__Group_3_1_1__0__Impl
-	rule__XAnnotation__Group_3_1_1__1
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__XAnnotation__Group_3_1_1__0__Impl
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getXAnnotationAccess().getValuesAssignment_3_1_1_0()); }
-(rule__XAnnotation__ValuesAssignment_3_1_1_0)
-{ after(grammarAccess.getXAnnotationAccess().getValuesAssignment_3_1_1_0()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-rule__XAnnotation__Group_3_1_1__1
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-	rule__XAnnotation__Group_3_1_1__1__Impl
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__XAnnotation__Group_3_1_1__1__Impl
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getXAnnotationAccess().getGroup_3_1_1_1()); }
-(rule__XAnnotation__Group_3_1_1_1__0)*
-{ after(grammarAccess.getXAnnotationAccess().getGroup_3_1_1_1()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-
-
-
-
-rule__XAnnotation__Group_3_1_1_1__0
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-	rule__XAnnotation__Group_3_1_1_1__0__Impl
-	rule__XAnnotation__Group_3_1_1_1__1
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__XAnnotation__Group_3_1_1_1__0__Impl
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getXAnnotationAccess().getCommaKeyword_3_1_1_1_0()); }
-
-	',' 
-
-{ after(grammarAccess.getXAnnotationAccess().getCommaKeyword_3_1_1_1_0()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-rule__XAnnotation__Group_3_1_1_1__1
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-	rule__XAnnotation__Group_3_1_1_1__1__Impl
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__XAnnotation__Group_3_1_1_1__1__Impl
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getXAnnotationAccess().getValuesAssignment_3_1_1_1_1()); }
-(rule__XAnnotation__ValuesAssignment_3_1_1_1_1)
-{ after(grammarAccess.getXAnnotationAccess().getValuesAssignment_3_1_1_1_1()); }
 )
 
 ;
@@ -13123,29 +12999,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__XAnnotation__ValuesAssignment_3_1_1_0
+rule__XAnnotation__ValueAssignment_3_1_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getXAnnotationAccess().getValuesXAnnotationElementValueParserRuleCall_3_1_1_0_0()); }
-	ruleXAnnotationElementValue{ after(grammarAccess.getXAnnotationAccess().getValuesXAnnotationElementValueParserRuleCall_3_1_1_0_0()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__XAnnotation__ValuesAssignment_3_1_1_1_1
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getXAnnotationAccess().getValuesXAnnotationElementValueParserRuleCall_3_1_1_1_1_0()); }
-	ruleXAnnotationElementValue{ after(grammarAccess.getXAnnotationAccess().getValuesXAnnotationElementValueParserRuleCall_3_1_1_1_1_0()); }
+{ before(grammarAccess.getXAnnotationAccess().getValueXAnnotationElementValueParserRuleCall_3_1_1_0()); }
+	ruleXAnnotationElementValue{ after(grammarAccess.getXAnnotationAccess().getValueXAnnotationElementValueParserRuleCall_3_1_1_0()); }
 )
 
 ;

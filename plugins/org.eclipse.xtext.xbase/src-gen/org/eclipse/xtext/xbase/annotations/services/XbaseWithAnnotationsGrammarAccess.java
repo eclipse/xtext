@@ -36,24 +36,19 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		private final Keyword cCommaKeyword_3_1_0_1_0 = (Keyword)cGroup_3_1_0_1.eContents().get(0);
 		private final Assignment cElementValuePairsAssignment_3_1_0_1_1 = (Assignment)cGroup_3_1_0_1.eContents().get(1);
 		private final RuleCall cElementValuePairsXAnnotationElementValuePairParserRuleCall_3_1_0_1_1_0 = (RuleCall)cElementValuePairsAssignment_3_1_0_1_1.eContents().get(0);
-		private final Group cGroup_3_1_1 = (Group)cAlternatives_3_1.eContents().get(1);
-		private final Assignment cValuesAssignment_3_1_1_0 = (Assignment)cGroup_3_1_1.eContents().get(0);
-		private final RuleCall cValuesXAnnotationElementValueParserRuleCall_3_1_1_0_0 = (RuleCall)cValuesAssignment_3_1_1_0.eContents().get(0);
-		private final Group cGroup_3_1_1_1 = (Group)cGroup_3_1_1.eContents().get(1);
-		private final Keyword cCommaKeyword_3_1_1_1_0 = (Keyword)cGroup_3_1_1_1.eContents().get(0);
-		private final Assignment cValuesAssignment_3_1_1_1_1 = (Assignment)cGroup_3_1_1_1.eContents().get(1);
-		private final RuleCall cValuesXAnnotationElementValueParserRuleCall_3_1_1_1_1_0 = (RuleCall)cValuesAssignment_3_1_1_1_1.eContents().get(0);
+		private final Assignment cValueAssignment_3_1_1 = (Assignment)cAlternatives_3_1.eContents().get(1);
+		private final RuleCall cValueXAnnotationElementValueParserRuleCall_3_1_1_0 = (RuleCall)cValueAssignment_3_1_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//XAnnotation:
 		//	{XAnnotation} "@" annotationType=[types::JvmAnnotationType|QualifiedName] ("("
 		//	(elementValuePairs+=XAnnotationElementValuePair ("," elementValuePairs+=XAnnotationElementValuePair)* |
-		//	values+=XAnnotationElementValue ("," values+=XAnnotationElementValue)*)? ")")?;
+		//	value=XAnnotationElementValue)? ")")?;
 		public ParserRule getRule() { return rule; }
 
 		//{XAnnotation} "@" annotationType=[types::JvmAnnotationType|QualifiedName] ("("
 		//(elementValuePairs+=XAnnotationElementValuePair ("," elementValuePairs+=XAnnotationElementValuePair)* |
-		//values+=XAnnotationElementValue ("," values+=XAnnotationElementValue)*)? ")")?
+		//value=XAnnotationElementValue)? ")")?
 		public Group getGroup() { return cGroup; }
 
 		//{XAnnotation}
@@ -72,14 +67,14 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		public RuleCall getAnnotationTypeJvmAnnotationTypeQualifiedNameParserRuleCall_2_0_1() { return cAnnotationTypeJvmAnnotationTypeQualifiedNameParserRuleCall_2_0_1; }
 
 		//(=> "(" (elementValuePairs+=XAnnotationElementValuePair ("," elementValuePairs+=XAnnotationElementValuePair)* |
-		//values+=XAnnotationElementValue ("," values+=XAnnotationElementValue)*)? ")")?
+		//value=XAnnotationElementValue)? ")")?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//=> "("
 		public Keyword getLeftParenthesisKeyword_3_0() { return cLeftParenthesisKeyword_3_0; }
 
 		//(elementValuePairs+=XAnnotationElementValuePair ("," elementValuePairs+=XAnnotationElementValuePair)* |
-		//values+=XAnnotationElementValue ("," values+=XAnnotationElementValue)*)?
+		//value=XAnnotationElementValue)?
 		public Alternatives getAlternatives_3_1() { return cAlternatives_3_1; }
 
 		//elementValuePairs+=XAnnotationElementValuePair ("," elementValuePairs+=XAnnotationElementValuePair)*
@@ -103,26 +98,11 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		//XAnnotationElementValuePair
 		public RuleCall getElementValuePairsXAnnotationElementValuePairParserRuleCall_3_1_0_1_1_0() { return cElementValuePairsXAnnotationElementValuePairParserRuleCall_3_1_0_1_1_0; }
 
-		//values+=XAnnotationElementValue ("," values+=XAnnotationElementValue)*
-		public Group getGroup_3_1_1() { return cGroup_3_1_1; }
-
-		//values+=XAnnotationElementValue
-		public Assignment getValuesAssignment_3_1_1_0() { return cValuesAssignment_3_1_1_0; }
+		//value=XAnnotationElementValue
+		public Assignment getValueAssignment_3_1_1() { return cValueAssignment_3_1_1; }
 
 		//XAnnotationElementValue
-		public RuleCall getValuesXAnnotationElementValueParserRuleCall_3_1_1_0_0() { return cValuesXAnnotationElementValueParserRuleCall_3_1_1_0_0; }
-
-		//("," values+=XAnnotationElementValue)*
-		public Group getGroup_3_1_1_1() { return cGroup_3_1_1_1; }
-
-		//","
-		public Keyword getCommaKeyword_3_1_1_1_0() { return cCommaKeyword_3_1_1_1_0; }
-
-		//values+=XAnnotationElementValue
-		public Assignment getValuesAssignment_3_1_1_1_1() { return cValuesAssignment_3_1_1_1_1; }
-
-		//XAnnotationElementValue
-		public RuleCall getValuesXAnnotationElementValueParserRuleCall_3_1_1_1_1_0() { return cValuesXAnnotationElementValueParserRuleCall_3_1_1_1_1_0; }
+		public RuleCall getValueXAnnotationElementValueParserRuleCall_3_1_1_0() { return cValueXAnnotationElementValueParserRuleCall_3_1_1_0; }
 
 		//")"
 		public Keyword getRightParenthesisKeyword_3_2() { return cRightParenthesisKeyword_3_2; }
@@ -386,7 +366,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	//XAnnotation:
 	//	{XAnnotation} "@" annotationType=[types::JvmAnnotationType|QualifiedName] ("("
 	//	(elementValuePairs+=XAnnotationElementValuePair ("," elementValuePairs+=XAnnotationElementValuePair)* |
-	//	values+=XAnnotationElementValue ("," values+=XAnnotationElementValue)*)? ")")?;
+	//	value=XAnnotationElementValue)? ")")?;
 	public XAnnotationElements getXAnnotationAccess() {
 		return (pXAnnotation != null) ? pXAnnotation : (pXAnnotation = new XAnnotationElements());
 	}

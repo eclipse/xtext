@@ -90,13 +90,13 @@ public interface XAnnotationsPackage extends EPackage
 	int XANNOTATION__ANNOTATION_TYPE = XbasePackage.XEXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XANNOTATION__VALUES = XbasePackage.XEXPRESSION_FEATURE_COUNT + 2;
+	int XANNOTATION__VALUE = XbasePackage.XEXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>XAnnotation</em>' class.
@@ -252,15 +252,15 @@ public interface XAnnotationsPackage extends EPackage
 	EReference getXAnnotation_AnnotationType();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation#getValues <em>Values</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Values</em>'.
-	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation#getValues()
+	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation#getValue()
 	 * @see #getXAnnotation()
 	 * @generated
 	 */
-	EReference getXAnnotation_Values();
+	EReference getXAnnotation_Value();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair <em>XAnnotation Element Value Pair</em>}'.
@@ -408,12 +408,12 @@ public interface XAnnotationsPackage extends EPackage
 		EReference XANNOTATION__ANNOTATION_TYPE = eINSTANCE.getXAnnotation_AnnotationType();
 
 		/**
-		 * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference XANNOTATION__VALUES = eINSTANCE.getXAnnotation_Values();
+		EReference XANNOTATION__VALUE = eINSTANCE.getXAnnotation_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationElementValuePairImpl <em>XAnnotation Element Value Pair</em>}' class.

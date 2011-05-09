@@ -116,8 +116,6 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getXAnnotationAccess().getGroup_3(), "rule__XAnnotation__Group_3__0");
 					put(grammarAccess.getXAnnotationAccess().getGroup_3_1_0(), "rule__XAnnotation__Group_3_1_0__0");
 					put(grammarAccess.getXAnnotationAccess().getGroup_3_1_0_1(), "rule__XAnnotation__Group_3_1_0_1__0");
-					put(grammarAccess.getXAnnotationAccess().getGroup_3_1_1(), "rule__XAnnotation__Group_3_1_1__0");
-					put(grammarAccess.getXAnnotationAccess().getGroup_3_1_1_1(), "rule__XAnnotation__Group_3_1_1_1__0");
 					put(grammarAccess.getXAnnotationElementValuePairAccess().getGroup(), "rule__XAnnotationElementValuePair__Group__0");
 					put(grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getGroup(), "rule__XAnnotationElementValueStringConcatenation__Group__0");
 					put(grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getGroup_1(), "rule__XAnnotationElementValueStringConcatenation__Group_1__0");
@@ -306,8 +304,7 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getXAnnotationAccess().getAnnotationTypeAssignment_2(), "rule__XAnnotation__AnnotationTypeAssignment_2");
 					put(grammarAccess.getXAnnotationAccess().getElementValuePairsAssignment_3_1_0_0(), "rule__XAnnotation__ElementValuePairsAssignment_3_1_0_0");
 					put(grammarAccess.getXAnnotationAccess().getElementValuePairsAssignment_3_1_0_1_1(), "rule__XAnnotation__ElementValuePairsAssignment_3_1_0_1_1");
-					put(grammarAccess.getXAnnotationAccess().getValuesAssignment_3_1_1_0(), "rule__XAnnotation__ValuesAssignment_3_1_1_0");
-					put(grammarAccess.getXAnnotationAccess().getValuesAssignment_3_1_1_1_1(), "rule__XAnnotation__ValuesAssignment_3_1_1_1_1");
+					put(grammarAccess.getXAnnotationAccess().getValueAssignment_3_1_1(), "rule__XAnnotation__ValueAssignment_3_1_1");
 					put(grammarAccess.getXAnnotationElementValuePairAccess().getElementAssignment_0(), "rule__XAnnotationElementValuePair__ElementAssignment_0");
 					put(grammarAccess.getXAnnotationElementValuePairAccess().getValueAssignment_2(), "rule__XAnnotationElementValuePair__ValueAssignment_2");
 					put(grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getOperatorAssignment_1_1(), "rule__XAnnotationElementValueStringConcatenation__OperatorAssignment_1_1");

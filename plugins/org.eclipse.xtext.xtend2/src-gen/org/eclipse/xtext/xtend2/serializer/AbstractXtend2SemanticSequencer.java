@@ -13,14 +13,15 @@ import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvi
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.impl.AbstractSemanticSequencer;
 import org.eclipse.xtext.xtend2.services.Xtend2GrammarAccess;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
 import org.eclipse.xtext.xtend2.xtend2.*;
 import org.eclipse.xtext.common.types.*;
 import org.eclipse.xtext.xbase.*;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.*;
 import org.eclipse.xtext.xtype.*;
 import org.eclipse.xtext.xbase.annotations.serializer.XbaseWithAnnotationsSemanticSequencer;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;	
 
 @SuppressWarnings("restriction")
 public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
@@ -90,25 +91,29 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 					sequence_RichStringLiteral_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getRichStringLiteralEndRule()) {
-					sequence_RichStringLiteralEnd_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getInternalRichStringLiteralRule()) {
-					sequence_InternalRichStringLiteral_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
+				else if(context == grammarAccess.getRichStringLiteralInbetweenRule()) {
+					sequence_RichStringLiteralInbetween_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getRichStringLiteralStartRule()) {
 					sequence_RichStringLiteralStart_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getRichStringLiteralInbetweenRule()) {
-					sequence_RichStringLiteralInbetween_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
+				else if(context == grammarAccess.getInternalRichStringLiteralRule()) {
+					sequence_InternalRichStringLiteral_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getRichStringLiteralEndRule()) {
+					sequence_RichStringLiteralEnd_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
 				else break;
 			case Xtend2Package.RICH_STRING:
-				if(context == grammarAccess.getXStringLiteralRule() ||
+				if(context == grammarAccess.getInternalRichStringRule()) {
+					sequence_InternalRichString_RichString(context, (RichString) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getXStringLiteralRule() ||
 				   context == grammarAccess.getRichStringRule() ||
 				   context == grammarAccess.getRichStringPartRule() ||
 				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
@@ -143,10 +148,6 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				   context == grammarAccess.getXParenthesizedExpressionRule() ||
 				   context == grammarAccess.getXExpressionInsideBlockRule()) {
 					sequence_RichString_RichString(context, (RichString) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getInternalRichStringRule()) {
-					sequence_InternalRichString_RichString(context, (RichString) semanticObject); 
 					return; 
 				}
 				else break;
@@ -224,12 +225,12 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				}
 				else break;
 			case TypesPackage.JVM_UPPER_BOUND:
-				if(context == grammarAccess.getJvmUpperBoundRule()) {
-					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
+					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
-					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				else if(context == grammarAccess.getJvmUpperBoundRule()) {
+					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
 				else break;
@@ -1660,22 +1661,13 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         annotationType=[JvmAnnotationType|QualifiedName]
-	 *         (
-	 *             (elementValuePairs+=XAnnotationElementValuePair elementValuePairs+=XAnnotationElementValuePair*) | 
-	 *             (values+=XAnnotationElementValue values+=XAnnotationElementValue*)
-	 *         )
-	 *         ?
-	 *     )
-	 *     
+	 *     (annotationType=[JvmAnnotationType|QualifiedName] ((elementValuePairs+=XAnnotationElementValuePair elementValuePairs+=XAnnotationElementValuePair*) | value=XAnnotationElementValue)?)
 	 *
 	 * Features:
 	 *    elementValuePairs[1, *]
-	 *         EXCLUDE_IF_SET values
-	 *         EXCLUDE_IF_SET values
+	 *         EXCLUDE_IF_SET value
 	 *    annotationType[1, 1]
-	 *    values[1, *]
+	 *    value[0, 1]
 	 *         EXCLUDE_IF_SET elementValuePairs
 	 *         EXCLUDE_IF_SET elementValuePairs
 	 */

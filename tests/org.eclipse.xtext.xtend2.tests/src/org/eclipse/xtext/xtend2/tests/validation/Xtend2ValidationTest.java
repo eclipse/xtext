@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.validation.IssueCodes;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
@@ -30,6 +31,26 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 
 	@Inject
 	private ValidationTestHelper helper;
+	
+	public void testAnnotationTarget_00() throws Exception {
+		XtendClass clazz = clazz("@testdata.Annotation2('foo') class X { }");
+		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, IssueCodes.ANNOTATION_WRONG_TARGET);
+	}
+	
+	public void testAnnotationTarget_01() throws Exception {
+		XtendClass clazz = clazz("class X { @testdata.Annotation2('foo')  String foo }");
+		helper.assertNoErrors(clazz);
+	}
+	
+	public void testAnnotationTarget_02() throws Exception {
+		XtendClass clazz = clazz("class X { @testdata.Annotation2('foo') def String foo() }");
+		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, IssueCodes.ANNOTATION_WRONG_TARGET);
+	}
+	
+	public void testAnnotationTarget_03() throws Exception {
+		XtendClass clazz = clazz("class X {  def String foo(@testdata.Annotation2('foo') String bar) }");
+		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, IssueCodes.ANNOTATION_WRONG_TARGET);
+	}
 	
 	public void testShadowingVariableNames_00() throws Exception {
 		XtendClass clazz = clazz("class X { def foo() { val this = 'foo' } }");
