@@ -60,7 +60,7 @@ code[Xtend][
 new Foo().singletonList()
 ]
 
-Although this is supported it is generally much nicer to use ref:inject[injected extensions], because
+Although this is supported it is generally much nicer to use ref:fields[injected extensions], because
 they don't bind you to the actual implementation.
 
 section:Xtend_ClassDeclaration[Class Declaration]
@@ -98,13 +98,13 @@ class ArrayList<E> extends AbstractList<E>
 }
 ]
 
-section:inject[Dependency Injection]
+section:fields[Fields]
 
-Xtend has built-in support for dependency injection, which means that declaring dependencies is a first class feature of Xtend.
-A dependency declaration is done as part of the class body and looks like this:
+Fields in Xtend are always private and are usually used together with an annotation for a dependency
+injection container. Example:
 
 code[Xtend][
-	@Inject MyService as myService;
+	@Inject MyService myService
 ]
 
 This will translate to the following Java field: 
@@ -117,53 +117,16 @@ code[Java][
 Note that the visibility is always code[private], is you want to provide access to an injected object
 you need to write an accessor function. 
 
-section2[Name can be inferred]
+section2[Extension Methods]
 
-You could leave the name out as by default it will be the lower case version of the simple name of the class.
-That is the following inject declaration would be equvalent with the former.
+You can make the instance methods provided by the field available as extension
+methods, by adding the keyword code[extension] to the field declaration.
 
-code[Xtend][
-	@Inject MyService;
-]
-
-section2[Guice Keys]
-
-Xtend uses link[http://code.google.com/p/google-guice/][Guice] as the dependency injection container, which in turn uses types as keys. Those types can be generified, which
-is why you can write the following.
-
-code[Xtend][
-	@Inject HashMap<String,MyType> myCache;
-]
-
-e[To be implemented: ]
-Also Guice allows to use annotations to further distinct between different implementations of the same type. This is usually done by using
-the code[com.google.inject.name.Named] annotation or a custom annotation which is itself annotated with code[com.google.inject.BindingAnnotation].
-
-Xtend supports these two variants:
-
-code[Xtend][
-	@Inject @CustomAnnotation my.Service customService; 
-	@Inject @"NamedThingy" my.Service namedService;
-]
-
-Providers are declared like in plain Guice. That is you wrap your type into code[com.google.inject.Provider].
-Example:
-
-code[Xtend][
-	@Inject @CustomAnnotation Provider<Service> customServiceProvider; 
-]
-
-section2[Injected Extension Methods]
-
-You can make the instance methods provided by the declared dependency available as extension
-methods, by adding the keyword code[extension] after the code[@Inject] keyword.
-
-Imagine you want to add a method 'fullName' to a closed type 'Entity'. With injected extension methods,
-you could declare the following class
+Imagine you want to add a method 'fullName' to a closed type 'Entity'. With extension methods, you could declare the following class
 
 code[Xtend][
 class PersonExtensions {
-   getFullName(Person p) {
+   def getFullName(Person p) {
      p.forename + " " + p.name
    }
 }
@@ -172,13 +135,20 @@ class PersonExtensions {
 And if you have an instance of this class injected as extension like this:
 
 code[Xtend][
-@Inject extension PersonExtensions;
+@Inject extension PersonExtensions personExtensions;
 ]  
 
-The method is being put on the member scope of Person:
+The method is being put on the member scope of Person.
+So you can write the following
 
 code[Xtend][
 myPerson.getFullName()
+]
+
+which is the a shorthand for 
+
+code[Xtend][
+personExtensions.getFullName(myPerson)
 ]
 
 Of course the property shorthand is also available
@@ -187,60 +157,39 @@ code[Xtend][
 myPerson.fullName
 ]
 
-The nice thing with using injection as opposed to ref:imports[static extensions] is, that in case there is a bug in the extension or it is implemented inefficiently or you 
+The nice thing with using dependency injection in combination with the extension modifier as opposed to ref:imports[static extensions] is, that in case there is a bug in the extension or it is implemented inefficiently or you 
 just need a different strategy, you can simply exchange the component with another implementation. You do this without modifying the library nor the client code. 
 You'll only have to change the binding in your guice module. Also this gives you a general hook for any AOP-like thing you would want to do, 
 or allows you to write against an SPI, where the concrete implementation can be provided by a third party.
-
-code[
-XtendField : 
-	'@Inject' 'extension'? 
-	('@'STRING | '@'TypeReference)? 
-	TypeReference ('as' ID)?;
-]
 
 section:Functions[Functions]
 
 Xtend functions are declared within a class and are translated to a corresponding Java method with the exact same signature. 
 (The only exceptions are dispatch methods, which are explained ref:polymorphicDispatch[here]). 
 
-Let's start with an example a simple example
+Let's start with a simple example
 
 code[Xtend][
-boolean equalsIgnoreCase(String s1,String s2) :
+def boolean equalsIgnoreCase(String s1, String s2) :
 	s1.toLowerCase() == s2.toLowerCase();
 ]
 
 section2[Visibility]
 
-e[To be implemented: ]
-The default visibility of a function is code[public], which can also be declared explicitly. 
-The two other available visibilities are code[protected] and code[private].
+So far the visibility of any function is code[public]. 
+It is planned to add support for code[protected] and code[private] very soon.
 
 section2[Overriding Functions]
 
 Functions can override a function/method from the super class or implemented interfaces using the keyword code[overrides].
 If a function is annotated with the keyword code[final], it cannot be overridden.
-The code[override] keyword is mandatory.
+IF a function overrides a function (or method) from a super type, the code[override] keyword is mandatory and replaces the keyword code[def].
 
 Example:
 code[Xtend][
-final override boolean equalsIgnoreCase(String s1,String s2) :
+override boolean equalsIgnoreCase(String s1,String s2) :
 	s1.toLowerCase() == s2.toLowerCase();
 ]
-
-section2[Abstract Functions]
-
-e[To be implemented: ]
-
-A function is automatically considered code[abstract] if its expression (body) is not defined.
-
-Example:
-code[Xtend][
-boolean equalsIgnoreCase(String s1,String s2);
-]
-
-In such cases a semicolon is mandatory and the class needs to be flagged code[abstract] otherwise the compiler will complain.
 
 section2:declaredExceptions[Declared Exceptions]
 
@@ -255,14 +204,14 @@ code[Xtend][
 /*
  * throws an IOException
  */
-void throwIOException() throws IOException {
+def void throwIOException() throws IOException {
    throw new IOException()
 }
 
 /*
  * throws a WrappedException
  */
-void throwWrappedException() {
+def void throwWrappedException() {
    throw new IOException()
 }
 ]
@@ -273,14 +222,14 @@ If the return type of a function can be inferred it does not need to be declared
 That is the function
 
 code[Xtend][
-boolean equalsIgnoreCase(String s1,String s2) :
+def boolean equalsIgnoreCase(String s1,String s2) :
 	s1.toLowerCase() == s2.toLowerCase();
 ]
 
 could be declared like this:
 
 code[Xtend][
-equalsIgnoreCase(String s1,String s2) :
+def equalsIgnoreCase(String s1,String s2) :
 	s1.toLowerCase() == s2.toLowerCase();
 ]
 
@@ -304,8 +253,8 @@ used to decide which of the overloaded methods is being invoked. This essentiall
 A dispatch function is marked using the keyword code[dispatch].
 
 code[Xtend][
-dispatch foo(Number x) { "it's a number" }
-dispatch foo(Integer x) { "it's an int" }
+def dispatch foo(Number x) { "it's a number" }
+def dispatch foo(Integer x) { "it's an int" }
 ] 
 
 For a set of visible dispatch functions in the current type hierarchy, the compiler inferres a common
@@ -342,33 +291,33 @@ different overloaded methods are matched in the order they are declared within t
 Example:
 
 code[Xtend][
-	dispatch foo(Number x, Integer y) { "it's some number and an int" }
-	dispatch foo(Integer x, Number x) { "it's an int and a number" }
+def dispatch foo(Number x, Integer y) { "it's some number and an int" }
+def dispatch foo(Integer x, Number x) { "it's an int and a number" }
 ]
 
 generates the following Java code :
 
 code[Java][
-	public String foo(Number x, Number y) {
-		if ((x instanceof Number) 
-			&& (y instanceof Integer)) {
-			return _foo((Number)x,(Integer)y);
-		} else if ((x instanceof Integer) 
-			&& (y instanceof Number)){
-			return _foo((Integer)x,(Number)y);
-		} else {
-			throw new IllegalArgumentException(
-				"Couldn't handle argument x:"+x+", argument y:"+y);
-		}
-	} 
+public String foo(Number x, Number y) {
+	if ((x instanceof Number) 
+		&& (y instanceof Integer)) {
+		return _foo((Number)x,(Integer)y);
+	} else if ((x instanceof Integer) 
+		&& (y instanceof Number)){
+		return _foo((Integer)x,(Number)y);
+	} else {
+		throw new IllegalArgumentException(
+			"Couldn't handle argument x:"+x+", argument y:"+y);
+	}
+} 
 ]
 
 As you can see a null reference is never a match. If you want to fetch null you can declare a parameter using the type code[java.lang.Void].
 
 code[Xtend][
-	dispatch foo(Number x) { 'it's some number' }
-	dispatch foo(Integer x) { 'it's an int' }
-	dispatch foo(Void x) { throw new NullPointerException("x") }
+def dispatch foo(Number x) { "it's some number" }
+def dispatch foo(Integer x) { "it's an int" }
+def dispatch foo(Void x) { throw new NullPointerException("x") }
 ]
 
 Which compiles to the following Java code:
@@ -395,25 +344,26 @@ dispatch. Conforming means they have the right number of arguments and have the 
 
 For example, consider the following Java class :
 code[Java][
-	public abstract class AbstractLabelProvider {
-	   protected String _label(Object o) {
-	   	 // some generic implementation
-	   }
-	}
+public abstract class AbstractLabelProvider {
+   protected String _label(Object o) {
+   	 // some generic implementation
+   }
+}
 ]
 
 and consider the following Xtend class extends it :
 
 code[Xtend][
 class MyLabelProvider extends AbstractLabelProvider {
-   dispatch label(Entity this)  {
+   def dispatch label(Entity this)  {
      name
    }
      
-   dispatch label(Method this) { 
+   def dispatch label(Method this) { 
      name+"("+params.toString(",")+"):"+type
    }
-   dispatch label(Field this) { 
+   
+   def dispatch label(Field this) { 
      name+type
    }
 }
@@ -421,21 +371,21 @@ class MyLabelProvider extends AbstractLabelProvider {
 
 The resulting dispatch method in the generated Java class 'MyLabelProvider' would then look like this:
 
-code[Xtend][
-	public String label(Object o) {
-		if (o instanceof Field) {
-			return _label((Field)o);
-		} else if (o instanceof Method){
-			return _foo((Method)o);
-		} else if (o instanceof Entity){
-			return _foo((Entity)o);
-		} else if (o instanceof Object){
-			return _foo((Object)o);
-		} else {
-			throw new IllegalArgumentException(
-				"Couldn't handle argument o:"+o);
-		}
+code[Java][
+public String label(Object o) {
+	if (o instanceof Field) {
+		return _label((Field)o);
+	} else if (o instanceof Method){
+		return _foo((Method)o);
+	} else if (o instanceof Entity){
+		return _foo((Entity)o);
+	} else if (o instanceof Object){
+		return _foo((Object)o);
+	} else {
+		throw new IllegalArgumentException(
+			"Couldn't handle argument o:"+o);
 	}
+}
 ]
 
 section2:CreateFunctions[Create Functions]
@@ -463,11 +413,11 @@ code[
 A function like the following could do the trick :
 
 code[Xtend][
-List<Person> copyPersons(List<Person> persons) {
+def List<Person> copyPersons(List<Person> persons) {
 	persons.map( p | p.copy )
 }
 
-copy(Person p) {
+def copy(Person p) {
 	val result = new Person()
 	result.name = p.name
 	// The following is wrong and results in a stack over flow
@@ -484,7 +434,7 @@ the incoming parameters to the created object and supporting two expressions. On
 object and one to initialize it. 
 
 code[Xtend][
-create new Person() copy(Person p) {
+def create new Person() copy(Person p) {
 	name = p.name
 	// now it works	
 	friendWith = p.friendWith.map( p | p.copy )   
@@ -502,4 +452,23 @@ in turn calls itself using the same set of arguments the previously created and 
 The lifecycle of the cache is attached to the one of the Xtend class instance. That is you can control
 how long the cache lives by means of Guice.
 
+section:Annotations[Annotations]
+
+Xtend supports Java annotations. The syntax is exactly like specified in the Java Language Specification.
+Annotations are available on classes, fields, functions and parameters.
+
+Example:
+
+code[Xtend][
+@TypeAnnotation(typeof(String))
+class MyClass {
+  @FieldAnnotation(children = {@MyAnno(true), @MyAnnot(false)}
+  String myField
+  
+  @MethodAnnotation(children = {@MyAnno(true), @MyAnnot(false)}
+  def String myMethod(@ParameterAnnotation String param) {
+  	//...
+  }
+}
+]
 

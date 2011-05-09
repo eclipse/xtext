@@ -14,12 +14,8 @@
 <topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Xtend_ClassDeclaration-5" label="Examples" >
 </topic>
 </topic>
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#inject" label="Dependency Injection" >
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#inject-6" label="Name can be inferred" >
-</topic>
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#inject-7" label="Guice Keys" >
-</topic>
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#inject-8" label="Injected Extension Methods" >
+<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#fields" label="Fields" >
+<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#fields-6" label="Extension Methods" >
 </topic>
 </topic>
 <topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Functions" label="Functions" >
@@ -27,13 +23,11 @@
 </topic>
 <topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Functions-5" label="Overriding Functions" >
 </topic>
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Functions-6" label="Abstract Functions" >
-</topic>
 <topic href="contents/02-Xtend_Classes_Functions.xdoc.html#declaredExceptions" label="Declared Exceptions" >
 </topic>
 <topic href="contents/02-Xtend_Classes_Functions.xdoc.html#inferredReturnTypes" label="Inferred Return Types" >
 </topic>
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Functions-9" label="Generics" >
+<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Functions-8" label="Generics" >
 </topic>
 <topic href="contents/02-Xtend_Classes_Functions.xdoc.html#polymorphicDispatch" label="Dispatch Functions" >
 <topic href="contents/02-Xtend_Classes_Functions.xdoc.html#polymorphicDispatch-17" label="Overloading Functions from Super Types" >
@@ -43,6 +37,8 @@
 <topic href="contents/02-Xtend_Classes_Functions.xdoc.html#CreateFunctions-8" label="How it works" >
 </topic>
 </topic>
+</topic>
+<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Annotations" label="Annotations" >
 </topic>
 </topic>
 <topic href="contents/03-Xtend_Expressions.xdoc.html" label="Expressions" >
