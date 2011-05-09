@@ -26,8 +26,6 @@ import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynEmitterSt
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynTransition;
-import org.eclipse.xtext.serializer.acceptor.IUnassignedTokenSequenceAcceptor;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -35,39 +33,36 @@ import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor
 public class SyntacticSequencer extends AbstractSyntacticSequencer {
 
 	@Override
-	protected void transition(ISynTransition transition, INode fromNode, INode toNode, RuleCallStack stack,
-			IUnassignedTokenSequenceAcceptor tokenAcceptor, Acceptor errorAcceptor) {
+	protected void transition(ISynTransition transition, INode fromNode, INode toNode, RuleCallStack stack) {
 		if (!transition.hasEmitters())
 			return;
 		if (transition.isSyntacticallyAmbiguous())
-			ambiguousTransition(transition, fromNode, toNode, stack, tokenAcceptor, errorAcceptor);
+			ambiguousTransition(transition, fromNode, toNode, stack);
 	}
 
-	protected void ambiguousTransition(ISynTransition transition, INode fromNode, INode toNode, RuleCallStack stack,
-			IUnassignedTokenSequenceAcceptor tokenAcceptor, Acceptor errorAcceptor) {
-		acceptNodes(transition, fromNode, toNode, stack.clone(), tokenAcceptor);
+	protected void ambiguousTransition(ISynTransition transition, INode fromNode, INode toNode, RuleCallStack stack) {
+		acceptNodes(transition, fromNode, toNode, stack.clone());
 	}
 
-	protected void acceptNode(INode node, IUnassignedTokenSequenceAcceptor tokenAcceptor) {
+	protected void acceptNode(INode node) {
 		Object ge = node.getGrammarElement();
 		if (ge instanceof Keyword)
-			tokenAcceptor.acceptUnassignedKeyword((Keyword) ge, (ILeafNode) node);
+			acceptUnassignedKeyword((Keyword) ge, (ILeafNode) node);
 		else if (ge instanceof RuleCall) {
 			RuleCall rc = (RuleCall) ge;
 			if (rc.getRule() instanceof TerminalRule)
-				tokenAcceptor.acceptUnassignedTerminal(rc, node.getText(), (ILeafNode) node);
+				acceptUnassignedTerminal(rc, node.getText(), (ILeafNode) node);
 			else if (rc.getRule() instanceof ParserRule)
-				tokenAcceptor.acceptUnassignedDatatype(rc, node.getText(), (ICompositeNode) node);
+				acceptUnassignedDatatype(rc, node.getText(), (ICompositeNode) node);
 			else if (rc.getRule() instanceof EnumRule)
-				tokenAcceptor.acceptUnassignedEnum(rc, node.getText(), (ICompositeNode) node);
+				acceptUnassignedEnum(rc, node.getText(), (ICompositeNode) node);
 		} else if (ge instanceof Action)
-			tokenAcceptor.acceptUnassignedAction((Action) ge);
+			acceptUnassignedAction((Action) ge);
 		else
 			throw new RuntimeException("Unexpected grammar element: " + node.getGrammarElement());
 	}
 
-	protected void acceptNodes(ISynNavigable fromState, INode fromNode, INode toNode, RuleCallStack stack,
-			IUnassignedTokenSequenceAcceptor tokenAcceptor) {
+	protected void acceptNodes(ISynNavigable fromState, INode fromNode, INode toNode, RuleCallStack stack) {
 		EmitterNodeIterator ni = new EmitterNodeIterator(fromNode, toNode, false, false);
 		while (ni.hasNext()) {
 			INode next = ni.next();
@@ -77,7 +72,7 @@ public class SyntacticSequencer extends AbstractSyntacticSequencer {
 					fromState = (ISynEmitterState) path.get(path.size() - 1);
 				else
 					return;
-				acceptNode(next, tokenAcceptor);
+				acceptNode(next);
 			}
 		}
 	}
