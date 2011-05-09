@@ -25,6 +25,7 @@ import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.impl.AbstractProcessorBasedRenameParticipant;
@@ -81,17 +82,17 @@ public class JDTRenamePartcipant extends AbstractProcessorBasedRenameParticipant
 							contexts.add(createRenameDeclarationContext(sourceElement));
 						return contexts;
 					}
-				} else {
+				} else if(correspondingJvmElement instanceof JvmMember){
 					// there is no declaration in the index, so search for references only
-					return singletonList(createRenameReferenceContext(correspondingJvmElement));
+					return singletonList(createRenameReferenceContext((JvmMember)correspondingJvmElement));
 				}
 			}
 		}
 		return null;
 	}
 
-	protected RenameJvmReferenceContext createRenameReferenceContext(EObject jvmElement) {
-		return new RenameJvmReferenceContext(jvmElement, javaElement, null, null, null);
+	protected RenameJvmReferenceContext createRenameReferenceContext(JvmMember jvmMember) {
+		return new RenameJvmReferenceContext(jvmMember, javaElement, null, null, null);
 	}
 	
 	protected IRenameElementContext createRenameDeclarationContext(EObject jvmElement) {

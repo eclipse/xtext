@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
@@ -35,6 +36,6 @@ public class JvmReferenceUpdateRenameProcessor extends RenameElementProcessor {
 	@Override
 	protected IRenameStrategy createRenameElementStrategy(EObject targetElement,
 			IRenameElementContext renameElementContext) {
-		return new JvmElementRenameStrategy(targetElement);
+		return new JvmMemberRenameStrategy((JvmMember)targetElement);
 	}
 }

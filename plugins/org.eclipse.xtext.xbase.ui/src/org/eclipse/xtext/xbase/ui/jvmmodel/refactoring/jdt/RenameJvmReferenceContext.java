@@ -8,11 +8,11 @@
 package org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
 /**
@@ -23,15 +23,15 @@ public class RenameJvmReferenceContext extends IRenameElementContext.Impl {
 
 	private final IJavaElement referencedJavaElement;
 
-	public RenameJvmReferenceContext(EObject referencedJvmElement, IJavaElement referencedJavaElement,
+	public RenameJvmReferenceContext(JvmMember referencedJvmMember, IJavaElement referencedJavaElement,
 			IEditorPart triggeringEditor, ISelection triggeringEditorSelection, URI contextResourceURI) {
-		super(EcoreUtil.getURI(referencedJvmElement), referencedJvmElement.eClass(), triggeringEditor,
+		super(EcoreUtil.getURI(referencedJvmMember), referencedJvmMember.eClass(), triggeringEditor,
 				triggeringEditorSelection, contextResourceURI);
 		this.referencedJavaElement = referencedJavaElement;
 	}
 
-	public RenameJvmReferenceContext(EObject referencedJvmElement, IJavaElement referencedJavaElement) {
-		this(referencedJvmElement, referencedJavaElement, null, null, null);
+	public RenameJvmReferenceContext(JvmMember referencedJvmMember, IJavaElement referencedJavaElement) {
+		this(referencedJvmMember, referencedJavaElement, null, null, null);
 	}
 
 	public IJavaElement getReferencedJavaElement() {
