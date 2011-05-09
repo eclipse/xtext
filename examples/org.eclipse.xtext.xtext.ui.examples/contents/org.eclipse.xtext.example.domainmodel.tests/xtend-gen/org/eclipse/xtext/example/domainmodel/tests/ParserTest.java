@@ -24,8 +24,8 @@ import org.junit.runner.RunWith;
 public class ParserTest {
   @Inject private ParseHelper<DomainModel> parser;
   
-  @Test
-  public void testParsing() throws Exception {
+  
+  @Test public void testParsing() throws Exception {
     {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package example {");
