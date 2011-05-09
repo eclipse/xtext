@@ -13,10 +13,9 @@ import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvi
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.impl.AbstractSemanticSequencer;
 import org.eclipse.xtext.serializer.services.SequencerTestLanguageGrammarAccess;
-import org.eclipse.xtext.serializer.sequencertest.*;
-
 import com.google.inject.Inject;
-import com.google.inject.Provider;	
+import com.google.inject.Provider;
+import org.eclipse.xtext.serializer.sequencertest.*;
 
 @SuppressWarnings("restriction")
 public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSemanticSequencer {

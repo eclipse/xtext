@@ -78,80 +78,78 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		accessedConstraints.map(c|c.mostConcreteGrammar).exists(g|g!=grammar)
 	}
 	
-	override getFileContents() { '''
-		package «packageName»;
+	override getFileContents() {
+		val file = new JavaFile(packageName);
 		
-		import org.eclipse.emf.ecore.EObject;
-		import org.eclipse.xtext.serializer.GenericSequencer;
-		import org.eclipse.xtext.serializer.ISemanticNodeProvider;
-		import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider;
-		import org.eclipse.xtext.serializer.ISemanticSequencer;
-		import org.eclipse.xtext.serializer.ITransientValueService;
-		import org.eclipse.xtext.serializer.acceptor.SequenceAcceptor;
-		import org.eclipse.xtext.serializer.ITransientValueService.ValueTransient;
-		import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-		import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-		import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
-		import org.eclipse.xtext.serializer.impl.AbstractSemanticSequencer;
-		import «grammar.gaFQName»;
-		«FOR e:accessedPackages»
-			import «e.genPackage.qualifiedPackageName».*;
-		«ENDFOR»
-		«IF usesSuperGrammar»
-			import «sequencer.getQualifiedName(grammar.usedGrammars.head)»;
-		«ENDIF»
+		file.imports += "org.eclipse.emf.ecore.EObject";
+		file.imports += "org.eclipse.xtext.serializer.GenericSequencer";
+		file.imports += "org.eclipse.xtext.serializer.ISemanticNodeProvider";
+		file.imports += "org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider";
+		file.imports += "org.eclipse.xtext.serializer.ISemanticSequencer";
+		file.imports += "org.eclipse.xtext.serializer.ITransientValueService";
+		file.imports += "org.eclipse.xtext.serializer.acceptor.SequenceAcceptor";
+		file.imports += "org.eclipse.xtext.serializer.ITransientValueService.ValueTransient";
+		file.imports += "org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor";
+		file.imports += "org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider";
+		file.imports += "org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor";
+		file.imports += "org.eclipse.xtext.serializer.impl.AbstractSemanticSequencer";
+		file.imports += grammar.gaFQName;
+		file.imports += "com.google.inject.Inject";
+		file.imports += "com.google.inject.Provider";
+		file.imports.addAll(accessedPackages.map(e|e.genPackage.qualifiedPackageName + ".*"));
 		
-		import com.google.inject.Inject;
-		import com.google.inject.Provider;	
-		
-		@SuppressWarnings("restriction")
-		public class «simpleName» extends AbstractSemanticSequencer {
-		
-			@Inject
-			protected «grammar.gaSimpleName» grammarAccess;
+		if(usesSuperGrammar) file.imports += sequencer.getQualifiedName(grammar.usedGrammars.head);
+		file.body = '''
+			@SuppressWarnings("restriction")
+			public class «simpleName» extends AbstractSemanticSequencer {
 			
-			@Inject
-			protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
-			
-			@Inject
-			protected ITransientValueService transientValues;
-			
-			@Inject
-			protected ISemanticNodeProvider nodeProvider;
-			
-			@Inject
-			@GenericSequencer
-			protected Provider<ISemanticSequencer> genericSequencerProvider;
-			
-			protected ISemanticSequencer genericSequencer;
-			
-			«IF usesSuperGrammar»
 				@Inject
-				protected Provider<«sequencer.getSimpleName(grammar.usedGrammars.head)»> superSequencerProvider;
-				 
-				protected «sequencer.getSimpleName(grammar.usedGrammars.head)» superSequencer; 
-			«ENDIF»
-			
-			@Override
-			public void init(ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-				super.init(sequenceAcceptor, errorAcceptor);
-				this.genericSequencer = genericSequencerProvider.get();
-				this.genericSequencer.init(sequenceAcceptor, errorAcceptor);
+				protected «grammar.gaSimpleName» grammarAccess;
+				
+				@Inject
+				protected ISemanticSequencerDiagnosticProvider diagnosticProvider;
+				
+				@Inject
+				protected ITransientValueService transientValues;
+				
+				@Inject
+				protected ISemanticNodeProvider nodeProvider;
+				
+				@Inject
+				@GenericSequencer
+				protected Provider<ISemanticSequencer> genericSequencerProvider;
+				
+				protected ISemanticSequencer genericSequencer;
+				
 				«IF usesSuperGrammar»
-					this.superSequencer = superSequencerProvider.get();
-					this.superSequencer.init(sequenceAcceptor, errorAcceptor); 
+					@Inject
+					protected Provider<«sequencer.getSimpleName(grammar.usedGrammars.head)»> superSequencerProvider;
+					 
+					protected «sequencer.getSimpleName(grammar.usedGrammars.head)» superSequencer; 
 				«ENDIF»
+				
+				@Override
+				public void init(ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+					super.init(sequenceAcceptor, errorAcceptor);
+					this.genericSequencer = genericSequencerProvider.get();
+					this.genericSequencer.init(sequenceAcceptor, errorAcceptor);
+					«IF usesSuperGrammar»
+						this.superSequencer = superSequencerProvider.get();
+						this.superSequencer.init(sequenceAcceptor, errorAcceptor); 
+					«ENDIF»
+				}
+				
+				« /* genMethodFindContext */ ""»
+				
+				« /* accessedClasses.filter(e|e.accessedContexts.size > 1).join("\n\n", [e|e.genMethodFindContextType()]) */ ""»
+				
+				«genMethodCreateSequence»
+				
+				«accessedConstraints.filter(e|e.type!=null).join("\n\n",[e|e.genMethodSequence])»
 			}
-			
-			« /* genMethodFindContext */ ""»	
-			
-			« /* accessedClasses.filter(e|e.accessedContexts.size > 1).join("\n\n", [e|e.genMethodFindContextType()]) */ ""»
-			
-			«genMethodCreateSequence»
-			
-			«accessedConstraints.filter(e|e.type!=null).join("\n\n",[e|e.genMethodSequence])»
-		}
-	'''.toString }
+		'''.toString; 
+		file.toString 
+	}
 	
 //	genMethodFindContext() '''
 //		public Iterable<EObject> findContexts(EObject semanticObject, boolean consultContainer, Iterable<EObject> contextCandidates) {

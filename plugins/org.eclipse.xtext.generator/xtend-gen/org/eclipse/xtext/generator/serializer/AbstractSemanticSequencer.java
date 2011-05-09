@@ -22,12 +22,14 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.GenModelAccess;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess;
 import org.eclipse.xtext.generator.serializer.GeneratedFile;
+import org.eclipse.xtext.generator.serializer.JavaFile;
 import org.eclipse.xtext.generator.serializer.SemanticSequencer;
 import org.eclipse.xtext.generator.serializer.SemanticSequencerUtil;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintElement;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IFeatureInfo;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
+import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -245,230 +247,225 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   }
   
   public String getFileContents() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package ");
-    String _packageName = this.getPackageName();
-    _builder.append(_packageName, "");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("import org.eclipse.emf.ecore.EObject;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.xtext.serializer.GenericSequencer;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.xtext.serializer.ISemanticNodeProvider;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.xtext.serializer.ISemanticSequencer;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.xtext.serializer.ITransientValueService;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.xtext.serializer.acceptor.SequenceAcceptor;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.xtext.serializer.ITransientValueService.ValueTransient;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.xtext.serializer.impl.AbstractSemanticSequencer;");
-    _builder.newLine();
-    _builder.append("import ");
-    String _gaFQName = this.grammarAccess.gaFQName(this.grammar);
-    _builder.append(_gaFQName, "");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
+    String _xblockexpression = null;
     {
+      String _packageName = this.getPackageName();
+      JavaFile _javaFile = new JavaFile(_packageName);
+      final JavaFile file = _javaFile;
+      List<String> _imports = file.getImports();
+      CollectionExtensions.<String>operator_add(_imports, "org.eclipse.emf.ecore.EObject");
+      List<String> _imports_1 = file.getImports();
+      CollectionExtensions.<String>operator_add(_imports_1, "org.eclipse.xtext.serializer.GenericSequencer");
+      List<String> _imports_2 = file.getImports();
+      CollectionExtensions.<String>operator_add(_imports_2, "org.eclipse.xtext.serializer.ISemanticNodeProvider");
+      List<String> _imports_3 = file.getImports();
+      CollectionExtensions.<String>operator_add(_imports_3, "org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider");
+      List<String> _imports_4 = file.getImports();
+      CollectionExtensions.<String>operator_add(_imports_4, "org.eclipse.xtext.serializer.ISemanticSequencer");
+      List<String> _imports_5 = file.getImports();
+      CollectionExtensions.<String>operator_add(_imports_5, "org.eclipse.xtext.serializer.ITransientValueService");
+      List<String> _imports_6 = file.getImports();
+      CollectionExtensions.<String>operator_add(_imports_6, "org.eclipse.xtext.serializer.acceptor.SequenceAcceptor");
+      List<String> _imports_7 = file.getImports();
+      CollectionExtensions.<String>operator_add(_imports_7, "org.eclipse.xtext.serializer.ITransientValueService.ValueTransient");
+      List<String> _imports_8 = file.getImports();
+      CollectionExtensions.<String>operator_add(_imports_8, "org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor");
+      List<String> _imports_9 = file.getImports();
+      CollectionExtensions.<String>operator_add(_imports_9, "org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider");
+      List<String> _imports_10 = file.getImports();
+      CollectionExtensions.<String>operator_add(_imports_10, "org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor");
+      List<String> _imports_11 = file.getImports();
+      CollectionExtensions.<String>operator_add(_imports_11, "org.eclipse.xtext.serializer.impl.AbstractSemanticSequencer");
+      List<String> _imports_12 = file.getImports();
+      String _gaFQName = this.grammarAccess.gaFQName(this.grammar);
+      CollectionExtensions.<String>operator_add(_imports_12, _gaFQName);
+      List<String> _imports_13 = file.getImports();
+      CollectionExtensions.<String>operator_add(_imports_13, "com.google.inject.Inject");
+      List<String> _imports_14 = file.getImports();
+      CollectionExtensions.<String>operator_add(_imports_14, "com.google.inject.Provider");
+      List<String> _imports_15 = file.getImports();
       Iterable<EPackage> _accessedPackages = this.getAccessedPackages();
-      for(EPackage e : _accessedPackages) {
-        _builder.append("import ");
-        GenPackage _genPackage = GenModelAccess.getGenPackage(e);
-        String _qualifiedPackageName = _genPackage.getQualifiedPackageName();
-        _builder.append(_qualifiedPackageName, "");
-        _builder.append(".*;");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    {
+      final Function1<EPackage,String> _function = new Function1<EPackage,String>() {
+          public String apply(final EPackage e) {
+            GenPackage _genPackage = GenModelAccess.getGenPackage(e);
+            String _qualifiedPackageName = _genPackage.getQualifiedPackageName();
+            String _operator_plus = StringExtensions.operator_plus(_qualifiedPackageName, ".*");
+            return _operator_plus;
+          }
+        };
+      Iterable<String> _map = IterableExtensions.<EPackage, String>map(_accessedPackages, _function);
+      CollectionExtensions.<String>addAll(_imports_15, _map);
       boolean _usesSuperGrammar = this.usesSuperGrammar();
       if (_usesSuperGrammar) {
-        _builder.append("import ");
+        List<String> _imports_16 = file.getImports();
         EList<Grammar> _usedGrammars = this.grammar.getUsedGrammars();
         Grammar _head = IterableExtensions.<Grammar>head(_usedGrammars);
         String _qualifiedName = this.sequencer.getQualifiedName(_head);
-        _builder.append(_qualifiedName, "");
-        _builder.append(";");
-        _builder.newLineIfNotEmpty();
+        CollectionExtensions.<String>operator_add(_imports_16, _qualifiedName);
       }
-    }
-    _builder.newLine();
-    _builder.append("import com.google.inject.Inject;");
-    _builder.newLine();
-    _builder.append("import com.google.inject.Provider;\t");
-    _builder.newLine();
-    _builder.newLine();
-    _builder.append("@SuppressWarnings(\"restriction\")");
-    _builder.newLine();
-    _builder.append("public class ");
-    String _simpleName = this.getSimpleName();
-    _builder.append(_simpleName, "");
-    _builder.append(" extends AbstractSemanticSequencer {");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("@Inject");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("protected ");
-    String _gaSimpleName = this.grammarAccess.gaSimpleName(this.grammar);
-    _builder.append(_gaSimpleName, "	");
-    _builder.append(" grammarAccess;");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("@Inject");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("protected ISemanticSequencerDiagnosticProvider diagnosticProvider;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("@Inject");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("protected ITransientValueService transientValues;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("@Inject");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("protected ISemanticNodeProvider nodeProvider;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("@Inject");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("@GenericSequencer");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("protected Provider<ISemanticSequencer> genericSequencerProvider;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("protected ISemanticSequencer genericSequencer;");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    {
-      boolean _usesSuperGrammar_1 = this.usesSuperGrammar();
-      if (_usesSuperGrammar_1) {
-        _builder.append("\t");
-        _builder.append("@Inject");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("protected Provider<");
-        EList<Grammar> _usedGrammars_1 = this.grammar.getUsedGrammars();
-        Grammar _head_1 = IterableExtensions.<Grammar>head(_usedGrammars_1);
-        String _simpleName_1 = this.sequencer.getSimpleName(_head_1);
-        _builder.append(_simpleName_1, "	");
-        _builder.append("> superSequencerProvider;");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append(" ");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("protected ");
-        EList<Grammar> _usedGrammars_2 = this.grammar.getUsedGrammars();
-        Grammar _head_2 = IterableExtensions.<Grammar>head(_usedGrammars_2);
-        String _simpleName_2 = this.sequencer.getSimpleName(_head_2);
-        _builder.append(_simpleName_2, "	");
-        _builder.append(" superSequencer; ");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("@Override");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public void init(ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("super.init(sequenceAcceptor, errorAcceptor);");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("this.genericSequencer = genericSequencerProvider.get();");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("this.genericSequencer.init(sequenceAcceptor, errorAcceptor);");
-    _builder.newLine();
-    {
-      boolean _usesSuperGrammar_2 = this.usesSuperGrammar();
-      if (_usesSuperGrammar_2) {
-        _builder.append("\t\t");
-        _builder.append("this.superSequencer = superSequencerProvider.get();");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("this.superSequencer.init(sequenceAcceptor, errorAcceptor); ");
-        _builder.newLine();
-      }
-    }
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("", "	");
-    _builder.append("\t");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("", "	");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    StringConcatenation _genMethodCreateSequence = this.genMethodCreateSequence();
-    _builder.append(_genMethodCreateSequence, "	");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    Collection<IConstraint> _accessedConstraints = this.getAccessedConstraints();
-    final Function1<IConstraint,Boolean> _function = new Function1<IConstraint,Boolean>() {
-        public Boolean apply(final IConstraint e_1) {
-          EClass _type = e_1.getType();
-          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_type, null);
-          return ((Boolean)_operator_notEquals);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("@SuppressWarnings(\"restriction\")");
+      _builder.newLine();
+      _builder.append("public class ");
+      String _simpleName = this.getSimpleName();
+      _builder.append(_simpleName, "");
+      _builder.append(" extends AbstractSemanticSequencer {");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Inject");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("protected ");
+      String _gaSimpleName = this.grammarAccess.gaSimpleName(this.grammar);
+      _builder.append(_gaSimpleName, "	");
+      _builder.append(" grammarAccess;");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Inject");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("protected ISemanticSequencerDiagnosticProvider diagnosticProvider;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Inject");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("protected ITransientValueService transientValues;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Inject");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("protected ISemanticNodeProvider nodeProvider;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Inject");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@GenericSequencer");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("protected Provider<ISemanticSequencer> genericSequencerProvider;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("protected ISemanticSequencer genericSequencer;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      {
+        boolean _usesSuperGrammar_1 = this.usesSuperGrammar();
+        if (_usesSuperGrammar_1) {
+          _builder.append("\t");
+          _builder.append("@Inject");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("protected Provider<");
+          EList<Grammar> _usedGrammars_1 = this.grammar.getUsedGrammars();
+          Grammar _head_1 = IterableExtensions.<Grammar>head(_usedGrammars_1);
+          String _simpleName_1 = this.sequencer.getSimpleName(_head_1);
+          _builder.append(_simpleName_1, "	");
+          _builder.append("> superSequencerProvider;");
+          _builder.newLineIfNotEmpty();
+          _builder.append("\t");
+          _builder.append(" ");
+          _builder.newLine();
+          _builder.append("\t");
+          _builder.append("protected ");
+          EList<Grammar> _usedGrammars_2 = this.grammar.getUsedGrammars();
+          Grammar _head_2 = IterableExtensions.<Grammar>head(_usedGrammars_2);
+          String _simpleName_2 = this.sequencer.getSimpleName(_head_2);
+          _builder.append(_simpleName_2, "	");
+          _builder.append(" superSequencer; ");
+          _builder.newLineIfNotEmpty();
         }
-      };
-    Iterable<IConstraint> _filter = IterableExtensions.<IConstraint>filter(_accessedConstraints, _function);
-    final Function1<IConstraint,StringConcatenation> _function_1 = new Function1<IConstraint,StringConcatenation>() {
-        public StringConcatenation apply(final IConstraint e_2) {
-          StringConcatenation _genMethodSequence = AbstractSemanticSequencer.this.genMethodSequence(e_2);
-          return _genMethodSequence;
+      }
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("@Override");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public void init(ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("super.init(sequenceAcceptor, errorAcceptor);");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("this.genericSequencer = genericSequencerProvider.get();");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("this.genericSequencer.init(sequenceAcceptor, errorAcceptor);");
+      _builder.newLine();
+      {
+        boolean _usesSuperGrammar_2 = this.usesSuperGrammar();
+        if (_usesSuperGrammar_2) {
+          _builder.append("\t\t");
+          _builder.append("this.superSequencer = superSequencerProvider.get();");
+          _builder.newLine();
+          _builder.append("\t\t");
+          _builder.append("this.superSequencer.init(sequenceAcceptor, errorAcceptor); ");
+          _builder.newLine();
         }
-      };
-    String _join = IterableExtensions.<IConstraint>join(_filter, "\n\n", _function_1);
-    _builder.append(_join, "	");
-    _builder.newLineIfNotEmpty();
-    _builder.append("}");
-    _builder.newLine();
-    String _string = _builder.toString();
-    return _string;
+      }
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("", "	");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("", "	");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      StringConcatenation _genMethodCreateSequence = this.genMethodCreateSequence();
+      _builder.append(_genMethodCreateSequence, "	");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      Collection<IConstraint> _accessedConstraints = this.getAccessedConstraints();
+      final Function1<IConstraint,Boolean> _function_1 = new Function1<IConstraint,Boolean>() {
+          public Boolean apply(final IConstraint e_1) {
+            EClass _type = e_1.getType();
+            boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_type, null);
+            return ((Boolean)_operator_notEquals);
+          }
+        };
+      Iterable<IConstraint> _filter = IterableExtensions.<IConstraint>filter(_accessedConstraints, _function_1);
+      final Function1<IConstraint,StringConcatenation> _function_2 = new Function1<IConstraint,StringConcatenation>() {
+          public StringConcatenation apply(final IConstraint e_2) {
+            StringConcatenation _genMethodSequence = AbstractSemanticSequencer.this.genMethodSequence(e_2);
+            return _genMethodSequence;
+          }
+        };
+      String _join = IterableExtensions.<IConstraint>join(_filter, "\n\n", _function_2);
+      _builder.append(_join, "	");
+      _builder.newLineIfNotEmpty();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      file.setBody(_string);
+      String _string_1 = file.toString();
+      _xblockexpression = (_string_1);
+    }
+    return _xblockexpression;
   }
   
   public StringConcatenation genMethodCreateSequence() {
