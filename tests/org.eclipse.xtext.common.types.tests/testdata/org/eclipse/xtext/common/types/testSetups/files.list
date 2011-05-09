@@ -15,6 +15,7 @@ SubClass.java.txt
 SubOfGenericClass.java.txt
 SuperClass.java.txt
 TestAnnotation.java.txt
+TestAnnotationWithDefaults.java.txt
 TestAnnotationWithStringDefault.java.txt
 TestEnum.java.txt
 TestScenario.java.txt
