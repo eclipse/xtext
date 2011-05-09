@@ -58,8 +58,6 @@ public class AnnotationsValidatorTest extends AbstractXbaseWithAnnotationsTest {
 	public void testTypeConformance_09() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation1(true)", false);
 		validator.assertError(annotation, XAnnotationsPackage.Literals.XANNOTATION, IssueCodes.ANNOTATIONS_MISSING_ATTRIBUTE_DEFINITION, "children");
-		//TODO next assertion should be wrong as soon as JvmOperation.getDefaultValue is introduced and used.
-		validator.assertError(annotation, XAnnotationsPackage.Literals.XANNOTATION, IssueCodes.ANNOTATIONS_MISSING_ATTRIBUTE_DEFINITION, "foo");
 	}
 	
 	public void testTypeConformance_10() throws Exception {
