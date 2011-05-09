@@ -158,6 +158,7 @@ public class JvmOperationItemProvider
 		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.JVM_OPERATION__RETURN_TYPE);
+			childrenFeatures.add(TypesPackage.Literals.JVM_OPERATION__DEFAULT_VALUE);
 		}
 		return childrenFeatures;
 	}
@@ -223,6 +224,7 @@ public class JvmOperationItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.JVM_OPERATION__RETURN_TYPE:
+			case TypesPackage.JVM_OPERATION__DEFAULT_VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -265,6 +267,66 @@ public class JvmOperationItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.JVM_OPERATION__RETURN_TYPE,
 				 TypesFactory.eINSTANCE.createJvmMultiTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_OPERATION__DEFAULT_VALUE,
+				 TypesFactory.eINSTANCE.createJvmIntAnnotationValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_OPERATION__DEFAULT_VALUE,
+				 TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_OPERATION__DEFAULT_VALUE,
+				 TypesFactory.eINSTANCE.createJvmByteAnnotationValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_OPERATION__DEFAULT_VALUE,
+				 TypesFactory.eINSTANCE.createJvmShortAnnotationValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_OPERATION__DEFAULT_VALUE,
+				 TypesFactory.eINSTANCE.createJvmLongAnnotationValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_OPERATION__DEFAULT_VALUE,
+				 TypesFactory.eINSTANCE.createJvmDoubleAnnotationValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_OPERATION__DEFAULT_VALUE,
+				 TypesFactory.eINSTANCE.createJvmFloatAnnotationValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_OPERATION__DEFAULT_VALUE,
+				 TypesFactory.eINSTANCE.createJvmCharAnnotationValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_OPERATION__DEFAULT_VALUE,
+				 TypesFactory.eINSTANCE.createJvmStringAnnotationValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_OPERATION__DEFAULT_VALUE,
+				 TypesFactory.eINSTANCE.createJvmTypeAnnotationValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_OPERATION__DEFAULT_VALUE,
+				 TypesFactory.eINSTANCE.createJvmAnnotationAnnotationValue()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.JVM_OPERATION__DEFAULT_VALUE,
+				 TypesFactory.eINSTANCE.createJvmEnumAnnotationValue()));
 	}
 
 	/**

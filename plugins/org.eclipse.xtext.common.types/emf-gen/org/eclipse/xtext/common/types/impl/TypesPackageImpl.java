@@ -1132,6 +1132,16 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getJvmOperation_DefaultValue()
+	{
+		return (EReference)jvmOperationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getJvmFormalParameter()
 	{
 		return jvmFormalParameterEClass;
@@ -1621,6 +1631,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		createEAttribute(jvmOperationEClass, JVM_OPERATION__FINAL);
 		createEAttribute(jvmOperationEClass, JVM_OPERATION__ABSTRACT);
 		createEReference(jvmOperationEClass, JVM_OPERATION__RETURN_TYPE);
+		createEReference(jvmOperationEClass, JVM_OPERATION__DEFAULT_VALUE);
 
 		jvmFormalParameterEClass = createEClass(JVM_FORMAL_PARAMETER);
 		createEAttribute(jvmFormalParameterEClass, JVM_FORMAL_PARAMETER__NAME);
@@ -1919,6 +1930,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		initEAttribute(getJvmOperation_Final(), ecorePackage.getEBoolean(), "final", null, 0, 1, JvmOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJvmOperation_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, JvmOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJvmOperation_ReturnType(), this.getJvmTypeReference(), null, "returnType", null, 0, 1, JvmOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJvmOperation_DefaultValue(), this.getJvmAnnotationValue(), null, "defaultValue", null, 0, 1, JvmOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(jvmFormalParameterEClass, JvmFormalParameter.class, "JvmFormalParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getJvmFormalParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, JvmFormalParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2041,6 +2053,20 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		   new String[] 
 		   {
 			 "documentation", "<p>The identifier of a JvmTypeReference is a canonical representation of the referenced type \nincluding its type arguments.</p>\n<p>The types fully qualified name is used (\'$\' is the delimiter for inner types).</p>\n<p>Examples for reference identifiers are:</p>\n<ul>\n<li>java.lang.String for a reference to an object type</li>\n<li>java.util.Map$Entry<java.lang.Object,java.lang.Integer> for a parameterized type</li>\n<li>java.util.List<? extends java.lang.String>[] for a generic array type</li>\n</ul>"
+		   });		
+		addAnnotation
+		  (getJvmOperation_DefaultValue(), 
+		   source, 
+		   new String[] 
+		   {
+			 "documentation", "<p>Returns the default value for the annotation member represented by this JvmOperation instance.</p>\n<p>Returns null if no default is associated with the member, or if the operation does not represent a declared member of an annotation type.</p>"
+		   });		
+		addAnnotation
+		  (jvmAnnotationValueEClass, 
+		   source, 
+		   new String[] 
+		   {
+			 "documentation", "<p>Represents the value of an annotation member.</p>\n<p>That is, either the default value of an operation as a member of an annotation type, or the \nconcrete value in an annotation reference is returned.</p>"
 		   });
 	}
 

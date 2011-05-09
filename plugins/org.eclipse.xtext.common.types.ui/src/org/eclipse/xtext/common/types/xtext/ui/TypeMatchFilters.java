@@ -25,6 +25,9 @@ public final class TypeMatchFilters {
 		return new All();
 	}
 	
+	/**
+	 * @since 2.0
+	 */
 	public static ITypesProposalProvider.Filter all(int searchFor) {
 		return new All(searchFor);
 	}
@@ -57,6 +60,9 @@ public final class TypeMatchFilters {
 		
 		private final int searchFor;
 
+		/**
+		 * @since 2.0
+		 */
 		public All(int searchFor) {
 			this.searchFor = searchFor;
 		}
@@ -70,17 +76,24 @@ public final class TypeMatchFilters {
 			return true;
 		}
 		
+		/**
+		 * @since 2.0
+		 */
 		public int getSearchFor() {
 			return searchFor;
 		}
 	}
 	
 	public static class None implements ITypesProposalProvider.Filter {
+		
 		public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 				char[][] enclosingTypeNames, String path) {
 			return false;
 		}
 		
+		/**
+		 * @since 2.0
+		 */
 		public int getSearchFor() {
 			return IJavaSearchConstants.TYPE;
 		}
@@ -99,6 +112,9 @@ public final class TypeMatchFilters {
 			return !delegate.accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path);
 		}
 		
+		/**
+		 * @since 2.0
+		 */
 		public int getSearchFor() {
 			return delegate.getSearchFor();
 		}
@@ -125,6 +141,9 @@ public final class TypeMatchFilters {
 			return result;
 		}
 		
+		/**
+		 * @since 2.0
+		 */
 		public int getSearchFor() {
 			return delegates[0].getSearchFor();
 		}
@@ -150,7 +169,10 @@ public final class TypeMatchFilters {
 			}
 			return result;
 		}
-		
+
+		/**
+		 * @since 2.0
+		 */
 		public int getSearchFor() {
 			return delegates[0].getSearchFor();
 		}
@@ -162,6 +184,9 @@ public final class TypeMatchFilters {
 			return !Flags.isAbstract(modifiers) && !Flags.isInterface(modifiers);
 		}
 		
+		/**
+		 * @since 2.0
+		 */
 		public int getSearchFor() {
 			return IJavaSearchConstants.CLASS;
 		}
@@ -173,6 +198,9 @@ public final class TypeMatchFilters {
 			return Flags.isPublic(modifiers);
 		}
 		
+		/**
+		 * @since 2.0
+		 */
 		public int getSearchFor() {
 			return IJavaSearchConstants.TYPE;
 		}

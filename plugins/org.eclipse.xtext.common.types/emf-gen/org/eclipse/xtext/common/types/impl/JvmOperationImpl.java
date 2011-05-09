@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -28,6 +29,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmOperationImpl#isFinal <em>Final</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmOperationImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmOperationImpl#getReturnType <em>Return Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmOperationImpl#getDefaultValue <em>Default Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -104,6 +106,16 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 	 * @ordered
 	 */
 	protected JvmTypeReference returnType;
+
+	/**
+	 * The cached value of the '{@link #getDefaultValue() <em>Default Value</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDefaultValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected JvmAnnotationValue defaultValue;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -275,6 +287,81 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public JvmAnnotationValue getDefaultValue()
+	{
+		if (defaultValue != null && defaultValue.eIsProxy())
+		{
+			InternalEObject oldDefaultValue = (InternalEObject)defaultValue;
+			defaultValue = (JvmAnnotationValue)eResolveProxy(oldDefaultValue);
+			if (defaultValue != oldDefaultValue)
+			{
+				InternalEObject newDefaultValue = (InternalEObject)defaultValue;
+				NotificationChain msgs = oldDefaultValue.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_OPERATION__DEFAULT_VALUE, null, null);
+				if (newDefaultValue.eInternalContainer() == null)
+				{
+					msgs = newDefaultValue.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_OPERATION__DEFAULT_VALUE, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.JVM_OPERATION__DEFAULT_VALUE, oldDefaultValue, defaultValue));
+			}
+		}
+		return defaultValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmAnnotationValue basicGetDefaultValue()
+	{
+		return defaultValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDefaultValue(JvmAnnotationValue newDefaultValue, NotificationChain msgs)
+	{
+		JvmAnnotationValue oldDefaultValue = defaultValue;
+		defaultValue = newDefaultValue;
+		if (eNotificationRequired())
+		{
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_OPERATION__DEFAULT_VALUE, oldDefaultValue, newDefaultValue);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDefaultValue(JvmAnnotationValue newDefaultValue)
+	{
+		if (newDefaultValue != defaultValue)
+		{
+			NotificationChain msgs = null;
+			if (defaultValue != null)
+				msgs = ((InternalEObject)defaultValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_OPERATION__DEFAULT_VALUE, null, msgs);
+			if (newDefaultValue != null)
+				msgs = ((InternalEObject)newDefaultValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_OPERATION__DEFAULT_VALUE, null, msgs);
+			msgs = basicSetDefaultValue(newDefaultValue, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_OPERATION__DEFAULT_VALUE, newDefaultValue, newDefaultValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -282,6 +369,8 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 		{
 			case TypesPackage.JVM_OPERATION__RETURN_TYPE:
 				return basicSetReturnType(null, msgs);
+			case TypesPackage.JVM_OPERATION__DEFAULT_VALUE:
+				return basicSetDefaultValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -305,6 +394,9 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 			case TypesPackage.JVM_OPERATION__RETURN_TYPE:
 				if (resolve) return getReturnType();
 				return basicGetReturnType();
+			case TypesPackage.JVM_OPERATION__DEFAULT_VALUE:
+				if (resolve) return getDefaultValue();
+				return basicGetDefaultValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -330,6 +422,9 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 				return;
 			case TypesPackage.JVM_OPERATION__RETURN_TYPE:
 				setReturnType((JvmTypeReference)newValue);
+				return;
+			case TypesPackage.JVM_OPERATION__DEFAULT_VALUE:
+				setDefaultValue((JvmAnnotationValue)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -357,6 +452,9 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 			case TypesPackage.JVM_OPERATION__RETURN_TYPE:
 				setReturnType((JvmTypeReference)null);
 				return;
+			case TypesPackage.JVM_OPERATION__DEFAULT_VALUE:
+				setDefaultValue((JvmAnnotationValue)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -379,6 +477,8 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 				return abstract_ != ABSTRACT_EDEFAULT;
 			case TypesPackage.JVM_OPERATION__RETURN_TYPE:
 				return returnType != null;
+			case TypesPackage.JVM_OPERATION__DEFAULT_VALUE:
+				return defaultValue != null;
 		}
 		return super.eIsSet(featureID);
 	}

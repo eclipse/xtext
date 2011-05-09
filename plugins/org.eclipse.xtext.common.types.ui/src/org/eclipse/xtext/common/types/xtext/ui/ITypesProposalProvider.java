@@ -46,6 +46,7 @@ public interface ITypesProposalProvider {
 		
 		/**
 		 * @see org.eclipse.jdt.core.search.IJavaSearchConstants
+		 * @since 2.0
 		 */
 		int getSearchFor();
 	}

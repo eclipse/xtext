@@ -294,8 +294,28 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 
 	protected void createMethods(Class<?> clazz, JvmDeclaredType result) {
 		for (Method method : clazz.getDeclaredMethods()) {
-			if (!method.isSynthetic())
-				result.getMembers().add(createOperation(method));
+			if (!method.isSynthetic()) {
+				JvmOperation operation = createOperation(method);
+				if (clazz.isAnnotation()) {
+					setDefaultValue(operation, method);
+				}
+				result.getMembers().add(operation);
+			}
+		}
+	}
+
+	private void setDefaultValue(JvmOperation operation, Method method) {
+		Object defaultValue = method.getDefaultValue();
+		if (defaultValue != null) {
+			if (method.getReturnType().isArray()) {
+				JvmAnnotationValue annotationValue = createArrayAnnotationValue(defaultValue, method.getReturnType());
+				operation.setDefaultValue(annotationValue);
+				annotationValue.setOperation(operation);
+			} else {
+				JvmAnnotationValue annotationValue = createAnnotationValue(defaultValue, method.getReturnType());
+				operation.setDefaultValue(annotationValue);
+				annotationValue.setOperation(operation);
+			}
 		}
 	}
 

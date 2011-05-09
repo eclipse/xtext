@@ -166,46 +166,51 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			JvmAnnotationValue result) {
 		Object value = memberValuePair.getValue();
 		if (value != null) {
-			boolean valueIsArray = value.getClass().isArray();
-			int length = valueIsArray ? Array.getLength(value) : 1;
-			if (length > 0) {
-				List<Object> valuesAsList = Lists.newArrayListWithExpectedSize(length);
-				if (result instanceof JvmTypeAnnotationValue) {
-					for (int i = 0; i < length; i++) {
-						ITypeBinding referencedType = (ITypeBinding) (valueIsArray ? Array.get(value, i) : value);
-						JvmTypeReference typeReference = createTypeReference(referencedType);
-						valuesAsList.add(typeReference);
-					}
-				} else if (result instanceof JvmAnnotationAnnotationValue) {
-					for (int i = 0; i < length; i++) {
-						IAnnotationBinding nestedAnnotation = (IAnnotationBinding) (valueIsArray ? Array.get(value, i)
-								: value);
-						createAnnotationReference((JvmAnnotationTarget) result, nestedAnnotation);
-					}
-				} else if (result instanceof JvmEnumAnnotationValue) {
-					for (int i = 0; i < length; i++) {
-						IVariableBinding variableBinding = (IVariableBinding) (valueIsArray ? Array.get(value, i) : value);
-						JvmEnumerationLiteral proxy = createEnumLiteralProxy(variableBinding);
-						valuesAsList.add(proxy);
-					}
-				} else {
-					for (int i = 0; i < length; i++) {
-						valuesAsList.add(valueIsArray ? Array.get(value, i) : value);
-					}
+			createArrayAnnotationValue(value, result);
+		}
+		return result;
+	}
+
+	private JvmAnnotationValue createArrayAnnotationValue(Object value, JvmAnnotationValue result) {
+		boolean valueIsArray = value.getClass().isArray();
+		int length = valueIsArray ? Array.getLength(value) : 1;
+		if (length > 0) {
+			List<Object> valuesAsList = Lists.newArrayListWithExpectedSize(length);
+			if (result instanceof JvmTypeAnnotationValue) {
+				for (int i = 0; i < length; i++) {
+					ITypeBinding referencedType = (ITypeBinding) (valueIsArray ? Array.get(value, i) : value);
+					JvmTypeReference typeReference = createTypeReference(referencedType);
+					valuesAsList.add(typeReference);
 				}
-				if (!(result instanceof JvmAnnotationAnnotationValue)) {
-					EStructuralFeature structuralFeature = result.eClass().getEStructuralFeature("values");
-					if (structuralFeature.getEType() instanceof EDataType) {
-						List<Object> convertedValues = Lists.newArrayListWithExpectedSize(valuesAsList.size());
-						for (Object wrongType : valuesAsList) {
-							Object convertedValue = EcoreFactory.eINSTANCE.createFromString((EDataType) structuralFeature
-									.getEType(), wrongType.toString());
-							convertedValues.add(convertedValue);
-						}
-						result.eSet(structuralFeature, convertedValues);
-					} else {
-						result.eSet(structuralFeature, valuesAsList);
+			} else if (result instanceof JvmAnnotationAnnotationValue) {
+				for (int i = 0; i < length; i++) {
+					IAnnotationBinding nestedAnnotation = (IAnnotationBinding) (valueIsArray ? Array.get(value, i)
+							: value);
+					createAnnotationReference((JvmAnnotationTarget) result, nestedAnnotation);
+				}
+			} else if (result instanceof JvmEnumAnnotationValue) {
+				for (int i = 0; i < length; i++) {
+					IVariableBinding variableBinding = (IVariableBinding) (valueIsArray ? Array.get(value, i) : value);
+					JvmEnumerationLiteral proxy = createEnumLiteralProxy(variableBinding);
+					valuesAsList.add(proxy);
+				}
+			} else {
+				for (int i = 0; i < length; i++) {
+					valuesAsList.add(valueIsArray ? Array.get(value, i) : value);
+				}
+			}
+			if (!(result instanceof JvmAnnotationAnnotationValue)) {
+				EStructuralFeature structuralFeature = result.eClass().getEStructuralFeature("values");
+				if (structuralFeature.getEType() instanceof EDataType) {
+					List<Object> convertedValues = Lists.newArrayListWithExpectedSize(valuesAsList.size());
+					for (Object wrongType : valuesAsList) {
+						Object convertedValue = EcoreFactory.eINSTANCE.createFromString((EDataType) structuralFeature
+								.getEType(), wrongType.toString());
+						convertedValues.add(convertedValue);
 					}
+					result.eSet(structuralFeature, convertedValues);
+				} else {
+					result.eSet(structuralFeature, valuesAsList);
 				}
 			}
 		}
@@ -228,6 +233,10 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 
 	public JvmAnnotationValue createAnnotationValue(IMemberValuePairBinding memberValuePair, JvmAnnotationValue result) {
 		Object value = memberValuePair.getValue();
+		return createAnnotationValue(value, result);
+	}
+
+	private JvmAnnotationValue createAnnotationValue(Object value, JvmAnnotationValue result) {
 		if (result instanceof JvmTypeAnnotationValue) {
 			ITypeBinding referencedType = (ITypeBinding) value;
 			JvmTypeReference typeReference = createTypeReference(referencedType);
@@ -316,9 +325,31 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 				if (method.isConstructor()) {
 					result.getMembers().add(createConstructor(method));
 				} else {
-					result.getMembers().add(createOperation(method));
+					JvmOperation operation = createOperation(method);
+					if (typeBinding.isAnnotation()) {
+						setDefaultValue(operation, method);
+					}
+					result.getMembers().add(operation);
 				}
 			}
+		}
+	}
+	
+	private void setDefaultValue(JvmOperation operation, IMethodBinding method) {
+		Object defaultValue = method.getDefaultValue();
+		if (defaultValue != null) {
+			ITypeBinding originalTypeBinding = method.getReturnType();
+			ITypeBinding typeBinding = originalTypeBinding;
+			if (typeBinding.isArray()) {
+				typeBinding = typeBinding.getComponentType();
+			}
+			if (typeBinding.isParameterizedType())
+				typeBinding = typeBinding.getErasure();
+			JvmAnnotationValue annotationValue = originalTypeBinding.isArray() ? 
+					createArrayAnnotationValue(defaultValue, createAnnotationValue(typeBinding)) : 
+					createAnnotationValue(defaultValue, createAnnotationValue(typeBinding));
+			operation.setDefaultValue(annotationValue);
+			annotationValue.setOperation(operation);
 		}
 	}
 

@@ -12,6 +12,12 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Jvm Annotation Value</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * <p>Represents the value of an annotation member.</p>
+ * <p>That is, either the default value of an operation as a member of an annotation type, or the 
+ * concrete value in an annotation reference is returned.</p>
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

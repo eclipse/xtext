@@ -1820,13 +1820,23 @@ public interface TypesPackage extends EPackage
 	int JVM_OPERATION__RETURN_TYPE = JVM_EXECUTABLE_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Default Value</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 * @since 2.0
+	 */
+	int JVM_OPERATION__DEFAULT_VALUE = JVM_EXECUTABLE_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Jvm Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_OPERATION_FEATURE_COUNT = JVM_EXECUTABLE_FEATURE_COUNT + 4;
+	int JVM_OPERATION_FEATURE_COUNT = JVM_EXECUTABLE_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmFormalParameterImpl <em>Jvm Formal Parameter</em>}' class.
@@ -3120,6 +3130,18 @@ public interface TypesPackage extends EPackage
 	EReference getJvmOperation_ReturnType();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.JvmOperation#getDefaultValue <em>Default Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Default Value</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmOperation#getDefaultValue()
+	 * @see #getJvmOperation()
+	 * @generated
+	 * @since 2.0
+	 */
+	EReference getJvmOperation_DefaultValue();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmFormalParameter <em>Jvm Formal Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4117,6 +4139,15 @@ public interface TypesPackage extends EPackage
 		 * @generated
 		 */
 		EReference JVM_OPERATION__RETURN_TYPE = eINSTANCE.getJvmOperation_ReturnType();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 * @since 2.0
+		 */
+		EReference JVM_OPERATION__DEFAULT_VALUE = eINSTANCE.getJvmOperation_DefaultValue();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmFormalParameterImpl <em>Jvm Formal Parameter</em>}' class.
