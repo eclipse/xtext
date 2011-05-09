@@ -87,7 +87,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		file.imports += "org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider";
 		file.imports += "org.eclipse.xtext.serializer.ISemanticSequencer";
 		file.imports += "org.eclipse.xtext.serializer.ITransientValueService";
-		file.imports += "org.eclipse.xtext.serializer.acceptor.SequenceAcceptor";
+		file.imports += "org.eclipse.xtext.serializer.acceptor.SequenceFeeder";
 		file.imports += "org.eclipse.xtext.serializer.ITransientValueService.ValueTransient";
 		file.imports += "org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor";
 		file.imports += "org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider";
@@ -221,12 +221,12 @@ class AbstractSemanticSequencer extends GeneratedFile {
 					«ENDFOR»
 				}
 				INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-				SequenceAcceptor acceptor = createSequencerAcceptor(semanticObject, nodes);
+				SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 				«FOR f: if(c.body.featureInfo != null) newArrayList(c.body.featureInfo) else c.body.children.filter(e|e.featureInfo != null).map(e|e.featureInfo)»
 					«val assignment=f.assignments.get(0)»
-					acceptor.accept(grammarAccess.«assignment.grammarElement.gaAccessor()», semanticObject.«f.feature.getGenFeature().getAccessor»());
+					feeder.accept(grammarAccess.«assignment.grammarElement.gaAccessor()», semanticObject.«f.feature.getGenFeature().getAccessor»());
 				«ENDFOR»
-				acceptor.finish();
+				feeder.finish();
 			«ELSE»
 				genericSequencer.createSequence(context, semanticObject);
 			«ENDIF»
