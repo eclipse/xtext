@@ -169,8 +169,9 @@ public class Xtend2Compiler extends XbaseCompiler {
 
 
 	protected void compile(XtendField field, IAppendable appendable) {
+		appendable.append("\n");
 		generateAnnotations(field, appendable);
-		appendable.append(" private ");
+		appendable.append("\nprivate ");
 		serialize(field.getType(), field, appendable);
 		appendable.append(" ");
 		appendable.append(appendable.declareVariable(field, field.getName())).append(";");

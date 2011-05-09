@@ -89,9 +89,15 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 	protected void processDelta(Delta delta, IBuildContext context, final SubMonitor progress) {
 		progress.setWorkRemaining(100);
 		URI sourceURI = delta.getUri();
+		if (sourceURI.isArchive())
+			return;
 		IFile sourceFile = null;
 		try {
 			sourceFile = compilationFileProvider.getFile(sourceURI, context.getBuiltProject());
+			if (sourceFile == null)
+				return;
+			if (sourceFile.isDerived())
+				return;
 			if (sourceFile.exists() && hasErrors(sourceFile))
 				return;
 			if (!sourceFile.exists() && delta.getNew() != null)
