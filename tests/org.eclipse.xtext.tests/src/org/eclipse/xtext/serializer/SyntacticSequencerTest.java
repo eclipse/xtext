@@ -21,9 +21,8 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
-import org.eclipse.xtext.serializer.IHiddenTokenSequencer.IHiddenTokenSequencerOwner;
-import org.eclipse.xtext.serializer.IHiddenTokenSequencer.PassThroughHiddenTokenSequencer;
 import org.eclipse.xtext.serializer.acceptor.DebugSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.impl.EmitterNodeIterator;
 import org.eclipse.xtext.serializer.impl.NodeModelSemanticSequencer;
@@ -31,6 +30,8 @@ import org.eclipse.xtext.serializer.impl.NodeModelSemanticSequencer;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -41,6 +42,7 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(SyntacticSequencerTestLanguageStandaloneSetup.class);
+		getInjector().injectMembers(this);
 	}
 
 	private static class NoEnterNodesDebugSequenceAcceptor extends DebugSequenceAcceptor {
@@ -50,26 +52,36 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 		}
 
 		@Override
-		public void enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
-			add(titles.doSwitch(action) + " {", semanticChild.eClass().getName(), "", -1, NO_NODE);
-			indentation++;
+		public boolean enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
+			return super.enterAssignedAction(action, semanticChild, NO_NODE);
 		}
 
 		@Override
-		public void enterAssignedParserRuleCall(RuleCall rc, EObject newCurrent, ICompositeNode node) {
-			add(titles.doSwitch(rc) + " {", newCurrent.eClass().getName(), "", -1, NO_NODE);
-			indentation++;
+		public boolean enterAssignedParserRuleCall(RuleCall rc, EObject newCurrent, ICompositeNode node) {
+			return super.enterAssignedParserRuleCall(rc, newCurrent, NO_NODE);
 		}
 	}
+
+	@Inject
+	private Provider<ISemanticSequencer> semanticSequencerProvider;
+
+	@Inject
+	private Provider<ISyntacticSequencer> syntacticSequencerProvider;
 
 	private void testSequence(String stringModel) throws Exception {
 		EObject model = getModel(stringModel);
 		NodeModelSemanticSequencer nmSequencer = new NodeModelSemanticSequencer();
 		EObject context = nmSequencer.findContexts(model, true, null).iterator().next();
-		IRecursiveSequencer recSequencer = get(IRecursiveSequencer.class);
 		DebugSequenceAcceptor actual = new NoEnterNodesDebugSequenceAcceptor(false);
-		((IHiddenTokenSequencerOwner) recSequencer).setHiddenTokenSequencer(get(PassThroughHiddenTokenSequencer.class));
-		recSequencer.createSequence(context, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
+		ISemanticSequencer semanticSequencer = semanticSequencerProvider.get();
+		ISyntacticSequencer syntacticSequencer = syntacticSequencerProvider.get();
+		semanticSequencer
+				.init((ISemanticSequenceAcceptor) syntacticSequencer, ISerializationDiagnostic.STDERR_ACCEPTOR);
+		syntacticSequencer.init(context, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
+		semanticSequencer.createSequence(context, model);
+
+		//		((IHiddenTokenSequencerOwner) recSequencer).setHiddenTokenSequencer(get(PassThroughHiddenTokenSequencer.class));
+		//		recSequencer.createSequence(context, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
 		//		System.out.println(actual);
 		//		System.out.println(NodeModelUtils.compactDump(NodeModelUtils.findActualNodeFor(model), false));
 		assertEquals(Joiner.on("\n").join(getNodeSequence(model)), Joiner.on("\n").join(actual.getColumn(4)));
