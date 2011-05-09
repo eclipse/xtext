@@ -17,7 +17,7 @@ XAnnotation :
 	'@' annotationType=[types::JvmAnnotationType | QualifiedName] (=>'('
 		(
 			elementValuePairs+=XAnnotationElementValuePair (',' elementValuePairs+=XAnnotationElementValuePair)* 
-		|	values+=XAnnotationElementValue (',' values+=XAnnotationElementValue)*
+		|	value=XAnnotationElementValue
 		)?
 	')')?
 ;

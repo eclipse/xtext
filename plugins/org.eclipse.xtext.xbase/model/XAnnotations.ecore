@@ -7,8 +7,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="elementValuePairs" upperBound="-1"
         eType="#//XAnnotationElementValuePair" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotationType" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmAnnotationType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
-        eType="ecore:EClass Xbase.ecore#//XExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass Xbase.ecore#//XExpression"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XAnnotationElementValuePair">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass Xbase.ecore#//XExpression"

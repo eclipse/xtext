@@ -29,14 +29,9 @@ class AnnotationCompiler {
 	
 	def dispatch void generate(XAnnotation annotation, IAppendable a) {
 		a.append('@').append(annotation.annotationType)
-		if (!annotation.values.isEmpty()) {
+		if (annotation.value != null) {
 			a.append('(')
-			val iter = annotation.values.iterator
-			while (iter.hasNext) {
-				iter.next.generate(a)
-				if (iter.hasNext)
-					a.append(',')
-			}
+			annotation.value.generate(a)
 			a.append(')')
 		} else if (!annotation.elementValuePairs.isEmpty()) {
 			a.append('(')
