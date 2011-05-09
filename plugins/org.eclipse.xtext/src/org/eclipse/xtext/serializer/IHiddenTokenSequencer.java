@@ -1,7 +1,7 @@
 package org.eclipse.xtext.serializer;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.acceptor.IEObjectSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.impl.HiddenTokenSequencer;
 
@@ -32,6 +32,6 @@ public interface IHiddenTokenSequencer {
 	//		}
 	//	}
 
-	void init(EObject context, EObject semanticObject, IEObjectSequenceAcceptor sequenceAcceptor,
+	void init(EObject context, EObject semanticObject, ISequenceAcceptor sequenceAcceptor,
 			ISerializationDiagnostic.Acceptor errorAcceptor);
 }

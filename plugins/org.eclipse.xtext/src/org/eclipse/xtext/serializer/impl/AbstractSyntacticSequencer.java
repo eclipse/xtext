@@ -28,7 +28,6 @@ import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
-import org.eclipse.xtext.serializer.acceptor.IUnassignedTokenSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISyntacticSequencerDiagnosticProvider;
@@ -38,8 +37,7 @@ import com.google.inject.Inject;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer, ISemanticSequenceAcceptor,
-		IUnassignedTokenSequenceAcceptor {
+public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer, ISemanticSequenceAcceptor {
 
 	protected class SyntacticalContext {
 

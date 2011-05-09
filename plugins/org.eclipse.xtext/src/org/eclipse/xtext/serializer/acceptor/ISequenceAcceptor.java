@@ -13,22 +13,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IHiddenTokenAcceptor extends IUnassignedTokenSequenceAcceptor {
-
-	public abstract class HiddenTokensDelegator extends UnassignedTokenDelegator implements IHiddenTokenAcceptor {
-
-		public void acceptComment(AbstractRule rule, String token, ILeafNode node) {
-			delegate().acceptComment(rule, token, node);
-		}
-
-		public void acceptWhitespace(AbstractRule rule, String token, ILeafNode node) {
-			delegate().acceptWhitespace(rule, token, node);
-		}
-
-		@Override
-		protected abstract IHiddenTokenAcceptor delegate();
-	}
-
+public interface ISequenceAcceptor extends ISyntacticSequenceAcceptor {
 	void acceptComment(AbstractRule rule, String token, ILeafNode node);
 
 	void acceptWhitespace(AbstractRule rule, String token, ILeafNode node);

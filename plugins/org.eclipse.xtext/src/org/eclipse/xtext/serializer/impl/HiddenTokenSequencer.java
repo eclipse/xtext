@@ -28,7 +28,7 @@ import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil;
 import org.eclipse.xtext.serializer.IHiddenTokenSequencer;
 import org.eclipse.xtext.serializer.ISyntacticSequencer;
-import org.eclipse.xtext.serializer.acceptor.IEObjectSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 
@@ -43,7 +43,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 
 	//		protected Set<INode> comments;
 
-	protected IEObjectSequenceAcceptor delegate;
+	protected ISequenceAcceptor delegate;
 
 	@Inject
 	protected IHiddenTokenHelper hiddenTokenHelper;
@@ -238,7 +238,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 		return out;
 	}
 
-	public void init(EObject context, EObject semanticObject, IEObjectSequenceAcceptor sequenceAcceptor,
+	public void init(EObject context, EObject semanticObject, ISequenceAcceptor sequenceAcceptor,
 			Acceptor errorAcceptor) {
 		this.delegate = sequenceAcceptor;
 		this.lastNode = NodeModelUtils.findActualNodeFor(semanticObject);

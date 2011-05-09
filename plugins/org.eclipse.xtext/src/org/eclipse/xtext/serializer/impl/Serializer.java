@@ -23,7 +23,7 @@ import org.eclipse.xtext.serializer.IHiddenTokenSequencer;
 import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.ISyntacticSequencer;
-import org.eclipse.xtext.serializer.acceptor.IEObjectSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.TokenStreamSequenceAdapter;
@@ -57,7 +57,7 @@ public class Serializer implements ISerializer {
 	@Inject
 	protected IGrammarAccess grammar;
 
-	protected void serialize(EObject semanticObject, EObject context, IEObjectSequenceAcceptor tokens,
+	protected void serialize(EObject semanticObject, EObject context, ISequenceAcceptor tokens,
 			ISerializationDiagnostic.Acceptor errors) {
 		ISemanticSequencer semantic = semanticSequencerProvider.get();
 		ISyntacticSequencer syntactic = syntacticSequencerProvider.get();
@@ -75,7 +75,7 @@ public class Serializer implements ISerializer {
 		//		if (!context.hasNext())
 		//			throw new RuntimeException("No Context for " + EmfFormatter.objPath(obj) + " could be found");
 		EObject context = grammar.getGrammar().getRules().get(0);
-		IEObjectSequenceAcceptor acceptor = new TokenStreamSequenceAdapter(formatterTokenStream, errors);
+		ISequenceAcceptor acceptor = new TokenStreamSequenceAdapter(formatterTokenStream, errors);
 		//		sequencer.createSequence(context, obj, acceptor, errors);
 		serialize(obj, context, acceptor, errors);
 		formatterTokenStream.flush();

@@ -28,7 +28,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class DebugSequenceAcceptor implements IEObjectSequenceAcceptor {
+public class DebugSequenceAcceptor implements ISequenceAcceptor {
 
 	protected final static int COLS = 5;
 
