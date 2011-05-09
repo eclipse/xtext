@@ -140,7 +140,9 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 			"\n" +
 			"@SuppressWarnings(\"all\")\n" +
 			"public class Bar {\n" +
-			"  @Inject private String string;\n" + 
+			"  \n" +
+			"  @Inject\n" +
+			"  private String string;\n" + 
 			"}";
 		XtendFile file = file(input,true);
 		Xtend2Compiler compiler = get(Xtend2Compiler.class);

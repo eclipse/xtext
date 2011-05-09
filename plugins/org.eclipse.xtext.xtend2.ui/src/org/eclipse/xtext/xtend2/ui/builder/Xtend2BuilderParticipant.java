@@ -96,8 +96,6 @@ public class Xtend2BuilderParticipant implements IXtextBuilderParticipant {
 			sourceFile = compilationFileProvider.getFile(sourceURI, context.getBuiltProject());
 			if (sourceFile == null)
 				return;
-			if (sourceFile.isDerived())
-				return;
 			if (sourceFile.exists() && hasErrors(sourceFile))
 				return;
 			if (!sourceFile.exists() && delta.getNew() != null)
