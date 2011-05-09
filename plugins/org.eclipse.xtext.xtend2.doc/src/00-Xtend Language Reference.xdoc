@@ -13,7 +13,7 @@ codelanguage-def[Java][
 	const,float,native,super,while]
 
 codelanguage-def[Xtend][
-	abstract,continue,for,new,switch,assert,default,goto,package,synchronized,
+	abstract,continue,def,override,for,new,switch,assert,default,goto,package,synchronized,
 	boolean,do,if,private,this,break,double,implements,protected,throw,
 	byte,else,import,public,throws,
 	case,enum,instanceof,return,

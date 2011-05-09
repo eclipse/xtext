@@ -172,7 +172,7 @@ allows to use its methods for example like this :
 
 <p>
 Although this is supported it is generally much nicer to use 
-<a href="02-Xtend_Classes_Functions.xdoc.html#inject">injected extensions</a>, because
+<a href="02-Xtend_Classes_Functions.xdoc.html#fields">injected extensions</a>, because
 they don&apos;t bind you to the actual implementation.
 </p>
 
@@ -313,15 +313,15 @@ A more advanced class declaration in Xtend :
 
 </div>
 
-<a name="inject"></a>
+<a name="fields"></a>
 
-<a name="inject"></a>
-<div class="section" title="Dependency Injection">
+<a name="fields"></a>
+<div class="section" title="Fields">
 <div class="titlepage">
 <div>
 <div>
 <h2 class="title">
-Dependency Injection
+Fields
 </h2>
 </div>
 </div>
@@ -330,8 +330,8 @@ Dependency Injection
 
 
 <p>
-Xtend has built-in support for dependency injection, which means that declaring dependencies is a first class feature of Xtend.
-A dependency declaration is done as part of the class body and looks like this:
+Fields in Xtend are always private and are usually used together with an annotation for a dependency
+injection container. Example:
 </p>
 
 <p>
@@ -339,7 +339,7 @@ A dependency declaration is done as part of the class body and looks like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@<span class="keyword">Inject</span>&nbsp;MyService&nbsp;<span class="keyword">as</span>&nbsp;myService;
+@<span class="keyword">Inject</span>&nbsp;MyService&nbsp;myService
 </p>
 </div>
 </div>
@@ -374,13 +374,13 @@ you need to write an accessor function.
 
 
 
-<a name="inject-6"></a>
-<div class="section" title="Name can be inferred">
+<a name="fields-6"></a>
+<div class="section" title="Extension Methods">
 <div class="titlepage">
 <div>
 <div>
 <h3 class="title">
-Name can be inferred
+Extension Methods
 </h3>
 </div>
 </div>
@@ -389,134 +389,13 @@ Name can be inferred
 
 
 <p>
-You could leave the name out as by default it will be the lower case version of the simple name of the class.
-That is the following inject declaration would be equvalent with the former.
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-@<span class="keyword">Inject</span>&nbsp;MyService;
-</p>
-</div>
-</div>
-
-
-</p>
-
-
-</div>
-
-
-
-<a name="inject-7"></a>
-<div class="section" title="Guice Keys">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Guice Keys
-</h3>
-</div>
-</div>
-</div>
-
-
-
-<p>
-Xtend uses <a href="http://code.google.com/p/google-guice/">Guice</a> as the dependency injection container, which in turn uses types as keys. Those types can be generified, which
-is why you can write the following.
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-@<span class="keyword">Inject</span>&nbsp;HashMap&lt;String,MyType&gt;&nbsp;myCache;
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-<em>To be implemented: </em>
-Also Guice allows to use annotations to further distinct between different implementations of the same type. This is usually done by using
-the <span class="inlinecode">com.google.inject.name.Named</span>
- annotation or a custom annotation which is itself annotated with <span class="inlinecode">com.google.inject.BindingAnnotation</span>
-.
-</p>
-
-<p>
-Xtend supports these two variants:
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-@<span class="keyword">Inject</span>&nbsp;@CustomAnnotation&nbsp;my.Service&nbsp;customService;&nbsp;<br />
-@<span class="keyword">Inject</span>&nbsp;@<span class="string" >"NamedThingy"</span>&nbsp;my.Service&nbsp;namedService;
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-Providers are declared like in plain Guice. That is you wrap your type into <span class="inlinecode">com.google.inject.Provider</span>
-.
-Example:
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-@<span class="keyword">Inject</span>&nbsp;@CustomAnnotation&nbsp;Provider&lt;Service&gt;&nbsp;customServiceProvider;
-</p>
-</div>
-</div>
-
-
-</p>
-
-
-</div>
-
-
-
-<a name="inject-8"></a>
-<div class="section" title="Injected Extension Methods">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Injected Extension Methods
-</h3>
-</div>
-</div>
-</div>
-
-
-
-<p>
-You can make the instance methods provided by the declared dependency available as extension
+You can make the instance methods provided by the field available as extension
 methods, by adding the keyword <span class="inlinecode">extension</span>
- after the <span class="inlinecode">@Inject</span>
- keyword.
+ to the field declaration.
 </p>
 
 <p>
-Imagine you want to add a method &apos;fullName&apos; to a closed type &apos;Entity&apos;. With injected extension methods,
-you could declare the following class
+Imagine you want to add a method &apos;fullName&apos; to a closed type &apos;Entity&apos;. With extension methods, you could declare the following class
 </p>
 
 <p>
@@ -525,7 +404,7 @@ you could declare the following class
 <div class="incode">
 <p class="code">
 <span class="keyword">class</span>&nbsp;PersonExtensions&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;getFullName(Person&nbsp;p)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;getFullName(Person&nbsp;p)&nbsp;{<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p.forename&nbsp;+&nbsp;<span class="string" >"&nbsp;"</span>&nbsp;+&nbsp;p.name<br />
 &nbsp;&nbsp;&nbsp;}<br />
 }
@@ -545,7 +424,7 @@ And if you have an instance of this class injected as extension like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@<span class="keyword">Inject</span>&nbsp;<span class="keyword">extension</span>&nbsp;PersonExtensions;
+@<span class="keyword">Inject</span>&nbsp;<span class="keyword">extension</span>&nbsp;PersonExtensions&nbsp;personExtensions;
 </p>
 </div>
 </div>
@@ -554,7 +433,8 @@ And if you have an instance of this class injected as extension like this:
 </p>
 
 <p>
-The method is being put on the member scope of Person:
+The method is being put on the member scope of Person.
+So you can write the following
 </p>
 
 <p>
@@ -563,6 +443,23 @@ The method is being put on the member scope of Person:
 <div class="incode">
 <p class="code">
 myPerson.getFullName()
+</p>
+</div>
+</div>
+
+
+</p>
+
+<p>
+which is the a shorthand for 
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+personExtensions.getFullName(myPerson)
 </p>
 </div>
 </div>
@@ -588,27 +485,11 @@ myPerson.fullName
 </p>
 
 <p>
-The nice thing with using injection as opposed to 
+The nice thing with using dependency injection in combination with the extension modifier as opposed to 
 <a href="02-Xtend_Classes_Functions.xdoc.html#imports">static extensions</a> is, that in case there is a bug in the extension or it is implemented inefficiently or you 
 just need a different strategy, you can simply exchange the component with another implementation. You do this without modifying the library nor the client code. 
 You&apos;ll only have to change the binding in your guice module. Also this gives you a general hook for any AOP-like thing you would want to do, 
 or allows you to write against an SPI, where the concrete implementation can be provided by a third party.
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-XtendField&nbsp;:&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&apos;@Inject&apos;&nbsp;&apos;extension&apos;?&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;(&apos;@&apos;STRING&nbsp;|&nbsp;&apos;@&apos;TypeReference)?&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;TypeReference&nbsp;(&apos;as&apos;&nbsp;ID)?;
-</p>
-</div>
-</div>
-
-
 </p>
 
 
@@ -639,7 +520,7 @@ Xtend functions are declared within a class and are translated to a correspondin
 </p>
 
 <p>
-Let&apos;s start with an example a simple example
+Let&apos;s start with a simple example
 </p>
 
 <p>
@@ -647,7 +528,7 @@ Let&apos;s start with an example a simple example
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />
+<span class="keyword">def</span>&nbsp;<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,&nbsp;String&nbsp;s2)&nbsp;:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();
 </p>
 </div>
@@ -674,12 +555,11 @@ Visibility
 
 
 <p>
-<em>To be implemented: </em>
-The default visibility of a function is <span class="inlinecode">public</span>
-, which can also be declared explicitly. 
-The two other available visibilities are <span class="inlinecode">protected</span>
+So far the visibility of any function is <span class="inlinecode">public</span>
+. 
+It is planned to add support for <span class="inlinecode">protected</span>
  and <span class="inlinecode">private</span>
-.
+ very soon.
 </p>
 
 
@@ -706,8 +586,9 @@ Functions can override a function/method from the super class or implemented int
 .
 If a function is annotated with the keyword <span class="inlinecode">final</span>
 , it cannot be overridden.
-The <span class="inlinecode">override</span>
- keyword is mandatory.
+IF a function overrides a function (or method) from a super type, the <span class="inlinecode">override</span>
+ keyword is mandatory and replaces the keyword <span class="inlinecode">def</span>
+.
 </p>
 
 <p>
@@ -716,60 +597,13 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">final</span>&nbsp;override&nbsp;<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />
+<span class="keyword">override</span>&nbsp;<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();
 </p>
 </div>
 </div>
 
 
-</p>
-
-
-</div>
-
-
-
-<a name="Functions-6"></a>
-<div class="section" title="Abstract Functions">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Abstract Functions
-</h3>
-</div>
-</div>
-</div>
-
-
-
-<p>
-<em>To be implemented: </em>
-</p>
-
-<p>
-A function is automatically considered <span class="inlinecode">abstract</span>
- if its expression (body) is not defined.
-</p>
-
-<p>
-Example:
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2);
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-In such cases a semicolon is mandatory and the class needs to be flagged <span class="inlinecode">abstract</span>
- otherwise the compiler will complain.
 </p>
 
 
@@ -812,14 +646,14 @@ A declared checked exception will not be wrapped automatically.
 <span class="comment" >/*<br />
 &nbsp;*&nbsp;throws&nbsp;an&nbsp;IOException<br />
 &nbsp;*/</span><br />
-<span class="keyword">void</span>&nbsp;throwIOException()&nbsp;<span class="keyword">throws</span>&nbsp;IOException&nbsp;{<br />
+<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;throwIOException()&nbsp;<span class="keyword">throws</span>&nbsp;IOException&nbsp;{<br />
 &nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IOException()<br />
 }<br />
 <br />
 <span class="comment" >/*<br />
 &nbsp;*&nbsp;throws&nbsp;a&nbsp;WrappedException<br />
 &nbsp;*/</span><br />
-<span class="keyword">void</span>&nbsp;throwWrappedException()&nbsp;{<br />
+<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;throwWrappedException()&nbsp;{<br />
 &nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IOException()<br />
 }
 </p>
@@ -858,7 +692,7 @@ That is the function
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />
+<span class="keyword">def</span>&nbsp;<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();
 </p>
 </div>
@@ -876,7 +710,7 @@ could be declared like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />
+<span class="keyword">def</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();
 </p>
 </div>
@@ -896,7 +730,7 @@ The compiler tells the user when it needs to be specified.
 
 
 
-<a name="Functions-9"></a>
+<a name="Functions-8"></a>
 <div class="section" title="Generics">
 <div class="titlepage">
 <div>
@@ -954,8 +788,8 @@ A dispatch function is marked using the keyword <span class="inlinecode">dispatc
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">dispatch</span>&nbsp;foo(Number&nbsp;x)&nbsp;{&nbsp;<span class="string" >"it&apos;s&nbsp;a&nbsp;number"</span>&nbsp;}<br />
-<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x)&nbsp;{&nbsp;<span class="string" >"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;}
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Number&nbsp;x)&nbsp;{&nbsp;<span class="string" >"it&apos;s&nbsp;a&nbsp;number"</span>&nbsp;}<br />
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x)&nbsp;{&nbsp;<span class="string" >"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;}
 </p>
 </div>
 </div>
@@ -1018,8 +852,8 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">dispatch</span>&nbsp;foo(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;{&nbsp;<span class="string" >"it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;int"</span>&nbsp;}<br />
-<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x,&nbsp;Number&nbsp;x)&nbsp;{&nbsp;<span class="string" >"it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number"</span>&nbsp;}
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;{&nbsp;<span class="string" >"it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;int"</span>&nbsp;}<br />
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x,&nbsp;Number&nbsp;x)&nbsp;{&nbsp;<span class="string" >"it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number"</span>&nbsp;}
 </p>
 </div>
 </div>
@@ -1065,9 +899,9 @@ As you can see a null reference is never a match. If you want to fetch null you 
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">dispatch</span>&nbsp;foo(Number&nbsp;x)&nbsp;{&nbsp;<span class="string" >&apos;it&apos;</span>s&nbsp;some&nbsp;number<span class="string" >&apos;&nbsp;}<br />
-dispatch&nbsp;foo(Integer&nbsp;x)&nbsp;{&nbsp;&apos;</span>it<span class="string" >&apos;s&nbsp;an&nbsp;int&apos;</span>&nbsp;}<br />
-<span class="keyword">dispatch</span>&nbsp;foo(Void&nbsp;x)&nbsp;{&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;NullPointerException(<span class="string" >"x"</span>)&nbsp;}
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Number&nbsp;x)&nbsp;{&nbsp;<span class="string" >"it&apos;s&nbsp;some&nbsp;number"</span>&nbsp;}<br />
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x)&nbsp;{&nbsp;<span class="string" >"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;}<br />
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Void&nbsp;x)&nbsp;{&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;NullPointerException(<span class="string" >"x"</span>)&nbsp;}
 </p>
 </div>
 </div>
@@ -1153,14 +987,15 @@ and consider the following Xtend class extends it :
 <div class="incode">
 <p class="code">
 <span class="keyword">class</span>&nbsp;MyLabelProvider&nbsp;<span class="keyword">extends</span>&nbsp;AbstractLabelProvider&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Entity&nbsp;<span class="keyword">this</span>)&nbsp;&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Entity&nbsp;<span class="keyword">this</span>)&nbsp;&nbsp;{<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<br />
 &nbsp;&nbsp;&nbsp;}<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Method&nbsp;<span class="keyword">this</span>)&nbsp;{&nbsp;<br />
+&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Method&nbsp;<span class="keyword">this</span>)&nbsp;{&nbsp;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name+<span class="string" >"("</span>+params.toString(<span class="string" >","</span>)+<span class="string" >"):"</span>+type<br />
 &nbsp;&nbsp;&nbsp;}<br />
-&nbsp;&nbsp;&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Field&nbsp;<span class="keyword">this</span>)&nbsp;{&nbsp;<br />
+&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Field&nbsp;<span class="keyword">this</span>)&nbsp;{&nbsp;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name+type<br />
 &nbsp;&nbsp;&nbsp;}<br />
 }
@@ -1264,11 +1099,11 @@ A function like the following could do the trick :
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-List&lt;Person&gt;&nbsp;copyPersons(List&lt;Person&gt;&nbsp;persons)&nbsp;{<br />
+<span class="keyword">def</span>&nbsp;List&lt;Person&gt;&nbsp;copyPersons(List&lt;Person&gt;&nbsp;persons)&nbsp;{<br />
 &nbsp;&nbsp;&nbsp;&nbsp;persons.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)<br />
 }<br />
 <br />
-copy(Person&nbsp;p)&nbsp;{<br />
+<span class="keyword">def</span>&nbsp;copy(Person&nbsp;p)&nbsp;{<br />
 &nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;result&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person()<br />
 &nbsp;&nbsp;&nbsp;&nbsp;result.name&nbsp;=&nbsp;p.name<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" >//&nbsp;The&nbsp;following&nbsp;is&nbsp;wrong&nbsp;and&nbsp;results&nbsp;in&nbsp;a&nbsp;stack&nbsp;over&nbsp;flow<br />
@@ -1296,7 +1131,7 @@ object and one to initialize it.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">create</span>&nbsp;<span class="keyword">new</span>&nbsp;Person()&nbsp;copy(Person&nbsp;p)&nbsp;{<br />
+<span class="keyword">def</span>&nbsp;<span class="keyword">create</span>&nbsp;<span class="keyword">new</span>&nbsp;Person()&nbsp;copy(Person&nbsp;p)&nbsp;{<br />
 &nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;p.name<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" >//&nbsp;now&nbsp;it&nbsp;works&nbsp;&nbsp;&nbsp;&nbsp;<br />
 </span>&nbsp;&nbsp;&nbsp;&nbsp;friendWith&nbsp;=&nbsp;p.friendWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;&nbsp;&nbsp;<br />
@@ -1343,6 +1178,56 @@ how long the cache lives by means of Guice.
 </div>
 
 </div>
+
+</div>
+
+<a name="Annotations"></a>
+
+<a name="Annotations"></a>
+<div class="section" title="Annotations">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+Annotations
+</h2>
+</div>
+</div>
+</div>
+
+
+
+<p>
+Xtend supports Java annotations. The syntax is exactly like specified in the Java Language Specification.
+Annotations are available on classes, fields, functions and parameters.
+</p>
+
+<p>
+Example:
+</p>
+
+<p>
+
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@TypeAnnotation(<span class="keyword">typeof</span>(String))<br />
+<span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br />
+&nbsp;&nbsp;@FieldAnnotation(children&nbsp;=&nbsp;{@MyAnno(true),&nbsp;@MyAnnot(false)}<br />
+&nbsp;&nbsp;String&nbsp;myField<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;@MethodAnnotation(children&nbsp;=&nbsp;{@MyAnno(true),&nbsp;@MyAnnot(false)}<br />
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;myMethod(@ParameterAnnotation&nbsp;String&nbsp;param)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" >//...<br />
+</span>&nbsp;&nbsp;}<br />
+}
+</p>
+</div>
+</div>
+
+
+</p>
+
 
 </div>
 
