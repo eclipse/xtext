@@ -40,10 +40,10 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	
 	
 	@Override
-	public void init(ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		super.init(sequenceAcceptor, errorAcceptor);
+	public void init(ISemanticSequencer sequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+		super.init(sequencer, sequenceAcceptor, errorAcceptor);
 		this.genericSequencer = genericSequencerProvider.get();
-		this.genericSequencer.init(sequenceAcceptor, errorAcceptor);
+		this.genericSequencer.init(sequencer, sequenceAcceptor, errorAcceptor);
 	}
 	
 	

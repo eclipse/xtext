@@ -35,7 +35,7 @@ import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor
 public class SyntacticSequencer extends AbstractSyntacticSequencer {
 
 	@Override
-	protected void transition(ISynTransition transition, INode fromNode, INode toNode, RCStack stack,
+	protected void transition(ISynTransition transition, INode fromNode, INode toNode, RuleCallStack stack,
 			IUnassignedTokenSequenceAcceptor tokenAcceptor, Acceptor errorAcceptor) {
 		if (!transition.hasEmitters())
 			return;
@@ -43,7 +43,7 @@ public class SyntacticSequencer extends AbstractSyntacticSequencer {
 			ambiguousTransition(transition, fromNode, toNode, stack, tokenAcceptor, errorAcceptor);
 	}
 
-	protected void ambiguousTransition(ISynTransition transition, INode fromNode, INode toNode, RCStack stack,
+	protected void ambiguousTransition(ISynTransition transition, INode fromNode, INode toNode, RuleCallStack stack,
 			IUnassignedTokenSequenceAcceptor tokenAcceptor, Acceptor errorAcceptor) {
 		acceptNodes(transition, fromNode, toNode, stack.clone(), tokenAcceptor);
 	}
@@ -66,7 +66,7 @@ public class SyntacticSequencer extends AbstractSyntacticSequencer {
 			throw new RuntimeException("Unexpected grammar element: " + node.getGrammarElement());
 	}
 
-	protected void acceptNodes(ISynNavigable fromState, INode fromNode, INode toNode, RCStack stack,
+	protected void acceptNodes(ISynNavigable fromState, INode fromNode, INode toNode, RuleCallStack stack,
 			IUnassignedTokenSequenceAcceptor tokenAcceptor) {
 		EmitterNodeIterator ni = new EmitterNodeIterator(fromNode, toNode, false, false);
 		while (ni.hasNext()) {

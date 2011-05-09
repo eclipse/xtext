@@ -8,14 +8,7 @@
 package org.eclipse.xtext.serializer;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.serializer.IHiddenTokenSequencer.IHiddenTokenSequencerOwner;
-import org.eclipse.xtext.serializer.IHiddenTokenSequencer.PassThroughHiddenTokenSequencer;
-import org.eclipse.xtext.serializer.ISemanticSequencer.ISemanticSequencerOwner;
-import org.eclipse.xtext.serializer.ISyntacticSequencer.ISyntacticSequencerOwner;
-import org.eclipse.xtext.serializer.ISyntacticSequencer.PassThroughSyntacticSequencer;
 import org.eclipse.xtext.serializer.acceptor.DebugSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.impl.GenericSemanticSequencer;
@@ -23,6 +16,7 @@ import org.eclipse.xtext.serializer.impl.NodeModelSemanticSequencer;
 import org.eclipse.xtext.serializer.serializer.SequencerTestLanguageSemanticSequencer;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -37,58 +31,72 @@ public class SemanticSequencerTest extends AbstractXtextTests {
 	}
 
 	@Inject
-	private ISemanticSequencer generatedSequencer;
+	private Provider<ISemanticSequencer> generatedSequencerProvider;
 
 	@Inject
 	@GenericSequencer
-	private ISemanticSequencer genericSequencer;
+	private Provider<ISemanticSequencer> genericSequencerProvider;
 
 	private void testSequence(String stringModel) throws Exception {
+		DebugSequenceAcceptor genericActual = new DebugSequenceAcceptor();
+		DebugSequenceAcceptor generatedActual = new DebugSequenceAcceptor();
+		DebugSequenceAcceptor expected = new DebugSequenceAcceptor();
+
+		ISemanticSequencer generatedSequencer = generatedSequencerProvider.get();
+		ISemanticSequencer genericSequencer = genericSequencerProvider.get();
+		NodeModelSemanticSequencer nmSequencer = new NodeModelSemanticSequencer();
+
 		assertTrue(genericSequencer instanceof GenericSemanticSequencer);
 		assertTrue(generatedSequencer instanceof SequencerTestLanguageSemanticSequencer);
+
+		generatedSequencer.init(generatedActual, ISerializationDiagnostic.STDERR_ACCEPTOR);
+		genericSequencer.init(genericActual, ISerializationDiagnostic.STDERR_ACCEPTOR);
+		nmSequencer.init(expected, ISerializationDiagnostic.STDERR_ACCEPTOR);
+
 		EObject model = getModel(stringModel).eContents().get(0);
-		NodeModelSemanticSequencer nmSequencer = new NodeModelSemanticSequencer();
 		EObject context = nmSequencer.findContexts(model, true, null).iterator().next();
-		ISyntacticSequencer synSeq = get(PassThroughSyntacticSequencer.class);
-		IHiddenTokenSequencer hiddenSeq = get(PassThroughHiddenTokenSequencer.class);
-		IRecursiveSequencer recSequencer = get(IRecursiveSequencer.class);
-		((IHiddenTokenSequencerOwner) recSequencer).setHiddenTokenSequencer(hiddenSeq);
-		((ISyntacticSequencerOwner) hiddenSeq).setSyntacticSequencer(synSeq);
 
-		((ISemanticSequencerOwner) synSeq).setSemanticSequencer(genericSequencer);
-		DebugSequenceAcceptor genericActual = new DebugSequenceAcceptor();
-		recSequencer.createSequence(context, model, genericActual, ISerializationDiagnostic.STDERR_ACCEPTOR);
+		generatedSequencer.createSequence(context, model);
+		genericSequencer.createSequence(context, model);
+		nmSequencer.createSequence(context, model);
 
-		((ISemanticSequencerOwner) synSeq).setSemanticSequencer(generatedSequencer);
-		DebugSequenceAcceptor generatedActual = new DebugSequenceAcceptor();
-		recSequencer.createSequence(context, model, generatedActual, ISerializationDiagnostic.STDERR_ACCEPTOR);
-
-		((ISemanticSequencerOwner) synSeq).setSemanticSequencer(nmSequencer);
-		DebugSequenceAcceptor expected = new DebugSequenceAcceptor();
-		recSequencer.createSequence(context, model, expected, ISerializationDiagnostic.STDERR_ACCEPTOR);
+		//		ISyntacticSequencer synSeq = get(PassThroughSyntacticSequencer.class);
+		//		IHiddenTokenSequencer hiddenSeq = get(PassThroughHiddenTokenSequencer.class);
+		//		IRecursiveSequencer recSequencer = get(IRecursiveSequencer.class);
+		//		((IHiddenTokenSequencerOwner) recSequencer).setHiddenTokenSequencer(hiddenSeq);
+		//		((ISyntacticSequencerOwner) hiddenSeq).setSyntacticSequencer(synSeq);
+		//
+		//		((ISemanticSequencerOwner) synSeq).setSemanticSequencer(genericSequencer);
+		//		recSequencer.createSequence(context, model, genericActual, ISerializationDiagnostic.STDERR_ACCEPTOR);
+		//
+		//		((ISemanticSequencerOwner) synSeq).setSemanticSequencer(generatedSequencer);
+		//		recSequencer.createSequence(context, model, generatedActual, ISerializationDiagnostic.STDERR_ACCEPTOR);
+		//
+		//		((ISemanticSequencerOwner) synSeq).setSemanticSequencer(nmSequencer);
+		//		recSequencer.createSequence(context, model, expected, ISerializationDiagnostic.STDERR_ACCEPTOR);
 
 		assertEquals(expected.toString(), genericActual.toString());
 		assertEquals(expected.toString(), generatedActual.toString());
 	}
 
-	public void testXtext() throws Exception {
-		with(XtextStandaloneSetup.class);
-		EObject model = getGrammarAccess().getGrammar();
-		//		System.out.println(EmfFormatter.objToStr(model));
-		EObject ctx = GrammarUtil.findRuleForName(getGrammarAccess().getGrammar(), "AbstractToken");
-		//		ISemanticSequencer semSequencer = get(ISemanticSequencer.class);
-		//		EObject ctx = semSequencer.findContexts(model, null).iterator().next();
-		ISyntacticSequencer synSeq = get(PassThroughSyntacticSequencer.class);
-		IHiddenTokenSequencer hiddenSeq = get(PassThroughHiddenTokenSequencer.class);
-		IRecursiveSequencer recSequencer = get(IRecursiveSequencer.class);
-		((IHiddenTokenSequencerOwner) recSequencer).setHiddenTokenSequencer(hiddenSeq);
-		((ISyntacticSequencerOwner) hiddenSeq).setSyntacticSequencer(synSeq);
-		DebugSequenceAcceptor actual = new DebugSequenceAcceptor();
-		recSequencer.createSequence( /* semSequencer, */ctx, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
-		//		String actual = sequenceRecursively(semSequencer, ctx, model, true);
-		//		System.out.println(actual);
-		assertNotNull(actual);
-	}
+	//	public void testXtext() throws Exception {
+	//		with(XtextStandaloneSetup.class);
+	//		EObject model = getGrammarAccess().getGrammar();
+	//		//		System.out.println(EmfFormatter.objToStr(model));
+	//		EObject ctx = GrammarUtil.findRuleForName(getGrammarAccess().getGrammar(), "AbstractToken");
+	//		//		ISemanticSequencer semSequencer = get(ISemanticSequencer.class);
+	//		//		EObject ctx = semSequencer.findContexts(model, null).iterator().next();
+	//		ISyntacticSequencer synSeq = get(PassThroughSyntacticSequencer.class);
+	//		IHiddenTokenSequencer hiddenSeq = get(PassThroughHiddenTokenSequencer.class);
+	//		IRecursiveSequencer recSequencer = get(IRecursiveSequencer.class);
+	//		((IHiddenTokenSequencerOwner) recSequencer).setHiddenTokenSequencer(hiddenSeq);
+	//		((ISyntacticSequencerOwner) hiddenSeq).setSyntacticSequencer(synSeq);
+	//		DebugSequenceAcceptor actual = new DebugSequenceAcceptor();
+	//		recSequencer.createSequence( /* semSequencer, */ctx, model, actual, ISerializationDiagnostic.STDERR_ACCEPTOR);
+	//		//		String actual = sequenceRecursively(semSequencer, ctx, model, true);
+	//		//		System.out.println(actual);
+	//		assertNotNull(actual);
+	//	}
 
 	public void testSimpleGroup() throws Exception {
 		testSequence("#1 a b");

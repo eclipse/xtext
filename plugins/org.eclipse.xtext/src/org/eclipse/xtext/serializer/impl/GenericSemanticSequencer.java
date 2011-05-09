@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EnumRule;
@@ -599,14 +600,27 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 	//			}
 	//	}
 
+	protected void acceptAction(Action action, EObject semanticChild, ICompositeNode node) {
+		if (sequenceAcceptor.enterAssignedAction(action, semanticChild, node)) {
+			masterSequencer.createSequence(action, semanticChild);
+			sequenceAcceptor.leaveAssignedAction(action, semanticChild);
+		}
+	}
+
+	protected void acceptEObjectRuleCall(RuleCall ruleCall, EObject semanticChild, ICompositeNode node) {
+		if (sequenceAcceptor.enterAssignedParserRuleCall(ruleCall, semanticChild, node)) {
+			masterSequencer.createSequence(ruleCall.getRule(), semanticChild);
+			sequenceAcceptor.leaveAssignedParserRuleCall(ruleCall, semanticChild);
+		}
+	}
+
 	protected boolean acceptSemantic(EObject semanticObj, IConstraintElement constr, Object value, int index, INode node) {
 		switch (constr.getType()) {
 			case ASSIGNED_ACTION_CALL:
-				sequenceAcceptor.acceptAssignedAction(constr.getAction(), (EObject) value, (ICompositeNode) node);
+				acceptAction(constr.getAction(), (EObject) value, (ICompositeNode) node);
 				return true;
 			case ASSIGNED_PARSER_RULE_CALL:
-				sequenceAcceptor.acceptAssignedParserRuleCall(constr.getRuleCall(), (EObject) value,
-						(ICompositeNode) node);
+				acceptEObjectRuleCall(constr.getRuleCall(), (EObject) value, (ICompositeNode) node);
 				return true;
 			case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
 				RuleCall datatypeRC = constr.getRuleCall();

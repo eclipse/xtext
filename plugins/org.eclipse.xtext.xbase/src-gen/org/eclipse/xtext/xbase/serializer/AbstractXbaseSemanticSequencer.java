@@ -47,12 +47,12 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 	protected XtypeSemanticSequencer superSequencer; 
 	
 	@Override
-	public void init(ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		super.init(sequenceAcceptor, errorAcceptor);
+	public void init(ISemanticSequencer sequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+		super.init(sequencer, sequenceAcceptor, errorAcceptor);
 		this.genericSequencer = genericSequencerProvider.get();
-		this.genericSequencer.init(sequenceAcceptor, errorAcceptor);
+		this.genericSequencer.init(sequencer, sequenceAcceptor, errorAcceptor);
 		this.superSequencer = superSequencerProvider.get();
-		this.superSequencer.init(sequenceAcceptor, errorAcceptor); 
+		this.superSequencer.init(sequencer, sequenceAcceptor, errorAcceptor); 
 	}
 	
 	
@@ -86,12 +86,12 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 				}
 				else break;
 			case TypesPackage.JVM_UPPER_BOUND:
-				if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
-					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				if(context == grammarAccess.getJvmUpperBoundRule()) {
+					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getJvmUpperBoundRule()) {
-					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				else if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
+					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
 				else break;

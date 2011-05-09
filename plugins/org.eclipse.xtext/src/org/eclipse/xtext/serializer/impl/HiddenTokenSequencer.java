@@ -22,13 +22,12 @@ import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenHelper;
 import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil;
 import org.eclipse.xtext.serializer.IHiddenTokenSequencer;
 import org.eclipse.xtext.serializer.ISyntacticSequencer;
-import org.eclipse.xtext.serializer.ISyntacticSequencer.ISyntacticSequencerOwner;
-import org.eclipse.xtext.serializer.acceptor.IHiddenTokensAcceptor;
 import org.eclipse.xtext.serializer.acceptor.IEObjectSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
@@ -40,173 +39,135 @@ import com.google.inject.Inject;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSequencerOwner {
+public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSequenceAcceptor {
 
-	protected class SynAcceptor implements ISyntacticSequenceAcceptor {
+	//		protected Set<INode> comments;
 
-		protected Set<INode> comments;
+	protected IEObjectSequenceAcceptor delegate;
 
-		protected IEObjectSequenceAcceptor delegate;
+	@Inject
+	protected IHiddenTokenHelper hiddenTokenHelper;
 
-		protected INode lastNode;
+	protected INode lastNode;
 
-		protected INode rootNode;
-
-		public SynAcceptor(IEObjectSequenceAcceptor delegate, INode lastNode, Set<INode> comments) {
-			super();
-			this.delegate = delegate;
-			this.lastNode = lastNode;
-			this.rootNode = lastNode;
-			this.comments = comments;
-		}
-
-		public void acceptAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
-			emitHiddenTokens(getHiddenNodesBetween(lastNode, node), comments, delegate);
-			lastNode = getLastLeaf(node);
-			delegate.acceptAssignedAction(action, semanticChild, node);
-		}
-
-		public void acceptAssignedCrossRefDatatype(RuleCall rc, String tkn, EObject val, int index, ICompositeNode node) {
-			emitHiddenTokens(getHiddenNodesBetween(lastNode, node), comments, delegate);
-			lastNode = getLastLeaf(node);
-			delegate.acceptAssignedCrossRefDatatype(rc, tkn, val, index, node);
-		}
-
-		public void acceptAssignedCrossRefEnum(RuleCall rc, String token, EObject value, int index, ICompositeNode node) {
-			emitHiddenTokens(getHiddenNodesBetween(lastNode, node), comments, delegate);
-			lastNode = getLastLeaf(node);
-			delegate.acceptAssignedCrossRefEnum(rc, token, value, index, node);
-		}
-
-		public void acceptAssignedCrossRefTerminal(RuleCall rc, String token, EObject value, int index, ILeafNode node) {
-			emitHiddenTokens(getHiddenNodesBetween(lastNode, node), comments, delegate);
-			lastNode = node;
-			delegate.acceptAssignedCrossRefTerminal(rc, token, value, index, node);
-		}
-
-		public void acceptAssignedDatatype(RuleCall rc, String token, Object value, int index, ICompositeNode node) {
-			emitHiddenTokens(getHiddenNodesBetween(lastNode, node), comments, delegate);
-			lastNode = getLastLeaf(node);
-			delegate.acceptAssignedDatatype(rc, token, value, index, node);
-		}
-
-		public void acceptAssignedEnum(RuleCall enumRC, String token, Object value, int index, ICompositeNode node) {
-			emitHiddenTokens(getHiddenNodesBetween(lastNode, node), comments, delegate);
-			lastNode = getLastLeaf(node);
-			delegate.acceptAssignedEnum(enumRC, token, value, index, node);
-		}
-
-		public void acceptAssignedKeyword(Keyword keyword, String token, Boolean value, int index, ILeafNode node) {
-			emitHiddenTokens(getHiddenNodesBetween(lastNode, node), comments, delegate);
-			lastNode = node;
-			delegate.acceptAssignedKeyword(keyword, token, value, index, node);
-		}
-
-		public void acceptAssignedKeyword(Keyword keyword, String token, String value, int index, ILeafNode node) {
-			emitHiddenTokens(getHiddenNodesBetween(lastNode, node), comments, delegate);
-			lastNode = node;
-			delegate.acceptAssignedKeyword(keyword, token, value, index, node);
-		}
-
-		public void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild, ICompositeNode node) {
-			emitHiddenTokens(getHiddenNodesBetween(lastNode, node), comments, delegate);
-			lastNode = getLastLeaf(node);
-			delegate.acceptAssignedParserRuleCall(ruleCall, semanticChild, node);
-		}
-
-		public void acceptAssignedTerminal(RuleCall terminalRC, String token, Object value, int index, ILeafNode node) {
-			emitHiddenTokens(getHiddenNodesBetween(lastNode, node), comments, delegate);
-			lastNode = node;
-			delegate.acceptAssignedTerminal(terminalRC, token, value, index, node);
-		}
-
-		public void acceptUnassignedAction(Action action) {
-			delegate.acceptUnassignedAction(action);
-		}
-
-		public void acceptUnassignedDatatype(RuleCall datatypeRC, String token, ICompositeNode node) {
-			emitHiddenTokens(getHiddenNodesBetween(lastNode, node), comments, delegate);
-			lastNode = getLastLeaf(node);
-			delegate.acceptUnassignedDatatype(datatypeRC, token, node);
-		}
-
-		public void acceptUnassignedEnum(RuleCall enumRC, String token, ICompositeNode node) {
-			emitHiddenTokens(getHiddenNodesBetween(lastNode, node), comments, delegate);
-			lastNode = getLastLeaf(node);
-			delegate.acceptUnassignedEnum(enumRC, token, node);
-		}
-
-		public void acceptUnassignedKeyword(Keyword keyword, ILeafNode node) {
-			emitHiddenTokens(getHiddenNodesBetween(lastNode, node), comments, delegate);
-			lastNode = node;
-			delegate.acceptUnassignedKeyword(keyword, node);
-		}
-
-		public void acceptUnassignedTerminal(RuleCall terminalRC, String token, ILeafNode node) {
-			emitHiddenTokens(getHiddenNodesBetween(lastNode, node), comments, delegate);
-			lastNode = node;
-			delegate.acceptUnassignedTerminal(terminalRC, token, node);
-		}
-
-		public void enterUnassignedParserRuleCall(RuleCall rc) {
-			delegate.enterUnassignedParserRuleCall(rc);
-		}
-
-		protected INode getLastLeaf(INode node) {
-			while (node instanceof ICompositeNode)
-				node = ((ICompositeNode) node).getLastChild();
-			return node;
-		}
-
-		public void finish() {
-			if (rootNode != null && rootNode == rootNode.getRootNode())
-				emitHiddenTokens(getRemainingHiddenNodesInContainer(lastNode, rootNode), comments, delegate);
-			delegate.finish();
-		}
-
-		public void leaveUnssignedParserRuleCall(RuleCall rc) {
-			delegate.leaveUnssignedParserRuleCall(rc);
-		}
-
-	}
+	protected INode rootNode;
 
 	protected ISyntacticSequencer sequencer;
 
 	@Inject
 	protected TokenUtil tokenUtil;
 
-	@Inject
-	protected IHiddenTokenHelper hiddenTokenHelper;
-
-	protected boolean canPass(INode node) {
-		EObject ge = node.getGrammarElement();
-		return GrammarUtil.isEObjectRuleCall(ge) || GrammarUtil.isUnassignedAction(ge);
+	public void acceptAssignedCrossRefDatatype(RuleCall rc, String tkn, EObject val, int index, ICompositeNode node) {
+		emitHiddenTokens(getHiddenNodesBetween(lastNode, node));
+		lastNode = getLastLeaf(node);
+		delegate.acceptAssignedCrossRefDatatype(rc, tkn, val, index, node);
 	}
 
-	public void createSequence(EObject context, EObject semanticObject, INode previousNode,
-			IEObjectSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		Set<INode> comments = getCommentsForEObject(semanticObject, previousNode);
-		SynAcceptor acc = new SynAcceptor(sequenceAcceptor, previousNode, comments);
-		sequencer.createSequence(context, semanticObject, previousNode, acc, errorAcceptor);
+	public void acceptAssignedCrossRefEnum(RuleCall rc, String token, EObject value, int index, ICompositeNode node) {
+		emitHiddenTokens(getHiddenNodesBetween(lastNode, node));
+		lastNode = getLastLeaf(node);
+		delegate.acceptAssignedCrossRefEnum(rc, token, value, index, node);
 	}
 
-	protected void emitHiddenTokens(List<INode> hiddens, Set<INode> comments, IHiddenTokensAcceptor acc) {
+	public void acceptAssignedCrossRefTerminal(RuleCall rc, String token, EObject value, int index, ILeafNode node) {
+		emitHiddenTokens(getHiddenNodesBetween(lastNode, node));
+		lastNode = node;
+		delegate.acceptAssignedCrossRefTerminal(rc, token, value, index, node);
+	}
+
+	public void acceptAssignedDatatype(RuleCall rc, String token, Object value, int index, ICompositeNode node) {
+		emitHiddenTokens(getHiddenNodesBetween(lastNode, node));
+		lastNode = getLastLeaf(node);
+		delegate.acceptAssignedDatatype(rc, token, value, index, node);
+	}
+
+	public void acceptAssignedEnum(RuleCall enumRC, String token, Object value, int index, ICompositeNode node) {
+		emitHiddenTokens(getHiddenNodesBetween(lastNode, node));
+		lastNode = getLastLeaf(node);
+		delegate.acceptAssignedEnum(enumRC, token, value, index, node);
+	}
+
+	public void acceptAssignedKeyword(Keyword keyword, String token, Boolean value, int index, ILeafNode node) {
+		emitHiddenTokens(getHiddenNodesBetween(lastNode, node));
+		lastNode = node;
+		delegate.acceptAssignedKeyword(keyword, token, value, index, node);
+	}
+
+	public void acceptAssignedKeyword(Keyword keyword, String token, String value, int index, ILeafNode node) {
+		emitHiddenTokens(getHiddenNodesBetween(lastNode, node));
+		lastNode = node;
+		delegate.acceptAssignedKeyword(keyword, token, value, index, node);
+	}
+
+	public void acceptAssignedTerminal(RuleCall terminalRC, String token, Object value, int index, ILeafNode node) {
+		emitHiddenTokens(getHiddenNodesBetween(lastNode, node));
+		lastNode = node;
+		delegate.acceptAssignedTerminal(terminalRC, token, value, index, node);
+	}
+
+	public void acceptUnassignedAction(Action action) {
+		delegate.acceptUnassignedAction(action);
+	}
+
+	public void acceptUnassignedDatatype(RuleCall datatypeRC, String token, ICompositeNode node) {
+		emitHiddenTokens(getHiddenNodesBetween(lastNode, node));
+		lastNode = getLastLeaf(node);
+		delegate.acceptUnassignedDatatype(datatypeRC, token, node);
+	}
+
+	public void acceptUnassignedEnum(RuleCall enumRC, String token, ICompositeNode node) {
+		emitHiddenTokens(getHiddenNodesBetween(lastNode, node));
+		lastNode = getLastLeaf(node);
+		delegate.acceptUnassignedEnum(enumRC, token, node);
+	}
+
+	public void acceptUnassignedKeyword(Keyword keyword, ILeafNode node) {
+		emitHiddenTokens(getHiddenNodesBetween(lastNode, node));
+		lastNode = node;
+		delegate.acceptUnassignedKeyword(keyword, node);
+	}
+
+	public void acceptUnassignedTerminal(RuleCall terminalRC, String token, ILeafNode node) {
+		emitHiddenTokens(getHiddenNodesBetween(lastNode, node));
+		lastNode = node;
+		delegate.acceptUnassignedTerminal(terminalRC, token, node);
+	}
+
+	protected void emitHiddenTokens(List<INode> hiddens /* Set<INode> comments, */) {
 		if (hiddens == null)
 			return;
 		boolean lastNonWhitespace = true;
 		for (INode node : hiddens)
 			if (tokenUtil.isCommentNode(node)) {
 				if (lastNonWhitespace)
-					acc.acceptWhitespace(hiddenTokenHelper.getWhitespaceRuleFor(null, ""), "", null);
+					delegate.acceptWhitespace(hiddenTokenHelper.getWhitespaceRuleFor(null, ""), "", null);
 				lastNonWhitespace = true;
-				comments.remove(node);
-				acc.acceptComment((AbstractRule) node.getGrammarElement(), node.getText(), (ILeafNode) node);
+				//				comments.remove(node);
+				delegate.acceptComment((AbstractRule) node.getGrammarElement(), node.getText(), (ILeafNode) node);
 			} else {
-				acc.acceptWhitespace((AbstractRule) node.getGrammarElement(), node.getText(), (ILeafNode) node);
+				delegate.acceptWhitespace((AbstractRule) node.getGrammarElement(), node.getText(), (ILeafNode) node);
 				lastNonWhitespace = false;
 			}
 		if (lastNonWhitespace)// FIXME: determine the whitespace rule correctly 
-			acc.acceptWhitespace(hiddenTokenHelper.getWhitespaceRuleFor(null, ""), "", null);
+			delegate.acceptWhitespace(hiddenTokenHelper.getWhitespaceRuleFor(null, ""), "", null);
+	}
+
+	public boolean enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
+		return delegate.enterAssignedAction(action, semanticChild, node);
+	}
+
+	public boolean enterAssignedParserRuleCall(RuleCall rc, EObject semanticChild, ICompositeNode node) {
+		return delegate.enterAssignedParserRuleCall(rc, semanticChild, node);
+	}
+
+	public void enterUnassignedParserRuleCall(RuleCall rc) {
+		delegate.enterUnassignedParserRuleCall(rc);
+	}
+
+	public void finish() {
+		if (rootNode != null && rootNode == rootNode.getRootNode())
+			emitHiddenTokens(getRemainingHiddenNodesInContainer(lastNode, rootNode));
+		delegate.finish();
 	}
 
 	protected Set<INode> getCommentsForEObject(EObject semanticObject, INode node) {
@@ -248,10 +209,16 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 					}
 				else
 					return out;
-			} else if (!canPass(next))
+			} else if (tokenUtil.isToken(next))
 				return null;
 		}
 		return out;
+	}
+
+	protected INode getLastLeaf(INode node) {
+		while (node instanceof ICompositeNode)
+			node = ((ICompositeNode) node).getLastChild();
+		return node;
 	}
 
 	protected List<INode> getRemainingHiddenNodesInContainer(INode from, INode root) {
@@ -265,15 +232,29 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 				return out;
 			else if (tokenUtil.isWhitespaceOrCommentNode(next)) {
 				out.add(next);
-			} else if (!canPass(next))
+			} else if (tokenUtil.isToken(next))
 				return Collections.emptyList();
 		}
 		return out;
 	}
 
-	@Inject
-	public void setSyntacticSequencer(ISyntacticSequencer sequencer) {
-		this.sequencer = sequencer;
+	public void init(EObject context, EObject semanticObject, IEObjectSequenceAcceptor sequenceAcceptor,
+			Acceptor errorAcceptor) {
+		this.delegate = sequenceAcceptor;
+		this.lastNode = NodeModelUtils.findActualNodeFor(semanticObject);
+		this.rootNode = lastNode;
+	}
+
+	public void leaveAssignedAction(Action action, EObject semanticChild) {
+		delegate.leaveAssignedAction(action, semanticChild);
+	}
+
+	public void leaveAssignedParserRuleCall(RuleCall rc, EObject semanticChild) {
+		delegate.leaveAssignedParserRuleCall(rc, semanticChild);
+	}
+
+	public void leaveUnssignedParserRuleCall(RuleCall rc) {
+		delegate.leaveUnssignedParserRuleCall(rc);
 	}
 
 }

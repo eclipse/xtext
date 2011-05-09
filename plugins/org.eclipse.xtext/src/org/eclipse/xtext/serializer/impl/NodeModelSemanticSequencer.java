@@ -81,7 +81,10 @@ public class NodeModelSemanticSequencer extends AbstractSemanticSequencer {
 		String token = node.getText().trim();
 		if (ele instanceof Action) {
 			if (((Action) ele).getFeature() != null) {
-				sequenceAcceptor.acceptAssignedAction(((Action) ele), (EObject) value, (ICompositeNode) node);
+				if (sequenceAcceptor.enterAssignedAction((Action) ele, (EObject) value, (ICompositeNode) node)) {
+					createSequence(ele, (EObject) value);
+					sequenceAcceptor.leaveAssignedAction((Action) ele, (EObject) value);
+				}
 				return true;
 			}
 		} else if (GrammarUtil.containingCrossReference(ele) != null) {
@@ -111,9 +114,11 @@ public class NodeModelSemanticSequencer extends AbstractSemanticSequencer {
 				RuleCall rc = (RuleCall) ele;
 				if (rc.getRule() instanceof ParserRule) {
 					if (rc.getRule().getType().getClassifier() instanceof EClass)
-						sequenceAcceptor.acceptAssignedParserRuleCall(rc, (EObject) value, (ICompositeNode) node);
-					else
-						sequenceAcceptor.acceptAssignedDatatype(rc, token, value, index, (ICompositeNode) node);
+						if (sequenceAcceptor.enterAssignedParserRuleCall(rc, (EObject) value, (ICompositeNode) node)) {
+							createSequence(rc.getRule(), (EObject) value);
+							sequenceAcceptor.leaveAssignedParserRuleCall(rc, (EObject) value);
+						} else
+							sequenceAcceptor.acceptAssignedDatatype(rc, token, value, index, (ICompositeNode) node);
 					return true;
 				}
 				if (rc.getRule() instanceof TerminalRule) {

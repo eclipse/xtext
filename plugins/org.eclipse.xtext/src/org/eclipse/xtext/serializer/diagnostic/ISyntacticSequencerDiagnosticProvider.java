@@ -12,7 +12,7 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
-import org.eclipse.xtext.serializer.impl.RCStack;
+import org.eclipse.xtext.serializer.impl.RuleCallStack;
 
 import com.google.inject.ImplementedBy;
 
@@ -25,8 +25,8 @@ public interface ISyntacticSequencerDiagnosticProvider {
 	ISerializationDiagnostic createInvalidFollowingAbsorberDiagnostic(EObject context, EObject semanticObject,
 			ISynAbsorberState from, AbstractElement to);
 
-	ISerializationDiagnostic createUnexpectedStackStateDiagnostic(ISynState toConsume, RCStack stack);
+	ISerializationDiagnostic createUnexpectedStackStateDiagnostic(ISynState toConsume, RuleCallStack stack);
 
 	ISerializationDiagnostic createUnexpectedEmitterDiagnostic(ISynNavigable currentState, AbstractElement target,
-			RCStack stack);
+			RuleCallStack stack);
 }

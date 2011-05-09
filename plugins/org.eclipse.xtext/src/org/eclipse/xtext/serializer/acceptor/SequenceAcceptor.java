@@ -24,6 +24,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider;
+import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer;
@@ -52,12 +53,14 @@ public class SequenceAcceptor {
 		protected IValueSerializer valueSerializer;
 
 		public SequenceAcceptor create(EObject semanitcObject, INodesForEObjectProvider nodes,
-				ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-			return new SequenceAcceptor(this, semanitcObject, nodes, sequenceAcceptor, errorAcceptor);
+				ISemanticSequencer masterSequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+			return new SequenceAcceptor(this, semanitcObject, nodes, masterSequencer, sequenceAcceptor, errorAcceptor);
 		}
 	}
 
 	protected ISerializationDiagnostic.Acceptor errorAcceptor;
+
+	protected ISemanticSequencer masterSequencer;
 
 	protected INodesForEObjectProvider nodes;
 
@@ -68,13 +71,14 @@ public class SequenceAcceptor {
 	protected ISemanticSequenceAcceptor sequenceAcceptor;
 
 	protected SequenceAcceptor(Provider provider, EObject semanitcObject, INodesForEObjectProvider nodes,
-			ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+			ISemanticSequencer masterSequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		super();
 		if (semanitcObject == null || nodes == null || sequenceAcceptor == null)
 			throw new NullPointerException();
 		this.provider = provider;
 		this.semanticObject = semanitcObject;
 		this.nodes = nodes;
+		this.masterSequencer = masterSequencer;
 		this.sequenceAcceptor = sequenceAcceptor;
 		this.errorAcceptor = errorAcceptor;
 	}
@@ -83,12 +87,12 @@ public class SequenceAcceptor {
 		assertAction(action);
 		EStructuralFeature ref = getFeature(action.getFeature());
 		ICompositeNode node = ref.isMany() ? getCompositeNode(ref, 0, 0, child) : getCompositeNode(ref, child);
-		sequenceAcceptor.acceptAssignedAction(action, child, node);
+		acceptAction(action, child, node);
 	}
 
 	public void accept(Action action, EObject semanticChild, ICompositeNode node) {
 		assertAction(action);
-		sequenceAcceptor.acceptAssignedAction(action, semanticChild, node);
+		acceptAction(action, semanticChild, node);
 	}
 
 	public void accept(Action action, EObject child, int indexInNonTransient) {
@@ -96,7 +100,7 @@ public class SequenceAcceptor {
 		EStructuralFeature ref = getFeature(action.getFeature());
 		assertIndex(ref, indexInNonTransient);
 		ICompositeNode node = getCompositeNode(ref, 0, indexInNonTransient, child);
-		sequenceAcceptor.acceptAssignedAction(action, child, node);
+		acceptAction(action, child, node);
 	}
 
 	public void accept(Keyword keyword) {
@@ -283,6 +287,20 @@ public class SequenceAcceptor {
 		acceptRuleCall(rc, value, token, indexInFeature, node);
 	}
 
+	protected void acceptAction(Action action, EObject semanticChild, ICompositeNode node) {
+		if (sequenceAcceptor.enterAssignedAction(action, semanticChild, node)) {
+			masterSequencer.createSequence(action, semanticChild);
+			sequenceAcceptor.leaveAssignedAction(action, semanticChild);
+		}
+	}
+
+	protected void acceptEObjectRuleCall(RuleCall ruleCall, EObject semanticChild, ICompositeNode node) {
+		if (sequenceAcceptor.enterAssignedParserRuleCall(ruleCall, semanticChild, node)) {
+			masterSequencer.createSequence(ruleCall.getRule(), semanticChild);
+			sequenceAcceptor.leaveAssignedParserRuleCall(ruleCall, semanticChild);
+		}
+	}
+
 	// TODO: test boolean assignments with terminal- and datatype rules.
 	protected void acceptKeyword(Assignment ass, Keyword keyword, Object value, String token, int index, ILeafNode node) {
 		if (GrammarUtil.isBooleanAssignment(ass))
@@ -304,7 +322,7 @@ public class SequenceAcceptor {
 		} else {
 			if (rc.getRule() instanceof ParserRule) {
 				if (rc.getRule().getType().getClassifier() instanceof EClass)
-					sequenceAcceptor.acceptAssignedParserRuleCall(rc, (EObject) value, getCompositeNode(node));
+					acceptEObjectRuleCall(rc, (EObject) value, getCompositeNode(node));
 				else
 					sequenceAcceptor.acceptAssignedDatatype(rc, token, value, index, getCompositeNode(node));
 			} else if (rc.getRule() instanceof TerminalRule)

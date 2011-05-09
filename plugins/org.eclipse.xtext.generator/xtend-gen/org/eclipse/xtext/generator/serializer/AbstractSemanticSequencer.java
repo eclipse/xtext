@@ -396,16 +396,16 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       _builder.append("@Override");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("public void init(ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {");
+      _builder.append("public void init(ISemanticSequencer sequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("super.init(sequenceAcceptor, errorAcceptor);");
+      _builder.append("super.init(sequencer, sequenceAcceptor, errorAcceptor);");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("this.genericSequencer = genericSequencerProvider.get();");
       _builder.newLine();
       _builder.append("\t\t");
-      _builder.append("this.genericSequencer.init(sequenceAcceptor, errorAcceptor);");
+      _builder.append("this.genericSequencer.init(sequencer, sequenceAcceptor, errorAcceptor);");
       _builder.newLine();
       {
         boolean _usesSuperGrammar_2 = this.usesSuperGrammar();
@@ -414,7 +414,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           _builder.append("this.superSequencer = superSequencerProvider.get();");
           _builder.newLine();
           _builder.append("\t\t");
-          _builder.append("this.superSequencer.init(sequenceAcceptor, errorAcceptor); ");
+          _builder.append("this.superSequencer.init(sequencer, sequenceAcceptor, errorAcceptor); ");
           _builder.newLine();
         }
       }

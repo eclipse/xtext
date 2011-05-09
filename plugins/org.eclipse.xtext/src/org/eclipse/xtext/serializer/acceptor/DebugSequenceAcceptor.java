@@ -19,7 +19,7 @@ import org.eclipse.xtext.grammaranalysis.impl.GrammarElementFullTitleSwitch;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.impl.LeafNode;
+import org.eclipse.xtext.nodemodel.impl.CompositeNode;
 import org.eclipse.xtext.util.EmfFormatter;
 
 import com.google.common.base.Joiner;
@@ -28,11 +28,11 @@ import com.google.common.collect.Lists;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class DebugSequenceAcceptor implements IEObjectSequenceAcceptor, IRecursiveSequenceAcceptor {
+public class DebugSequenceAcceptor implements IEObjectSequenceAcceptor {
 
 	protected final static int COLS = 5;
 
-	protected static final INode NO_NODE = new LeafNode();
+	protected static final ICompositeNode NO_NODE = new CompositeNode();
 
 	protected int indentation = 0;
 
@@ -49,10 +49,6 @@ public class DebugSequenceAcceptor implements IEObjectSequenceAcceptor, IRecursi
 	public DebugSequenceAcceptor(boolean printInstantly) {
 		super();
 		this.printInstantly = printInstantly;
-	}
-
-	public void acceptAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
-		add(titles.doSwitch(action), EmfFormatter.objPath(semanticChild), "", -1, node);
 	}
 
 	public void acceptAssignedCrossRefDatatype(RuleCall rc, String token, EObject value, int index, ICompositeNode node) {
@@ -81,10 +77,6 @@ public class DebugSequenceAcceptor implements IEObjectSequenceAcceptor, IRecursi
 
 	public void acceptAssignedKeyword(Keyword keyword, String token, String value, int index, ILeafNode node) {
 		add(titles.doSwitch(keyword), token, "'" + value + "'", index, node);
-	}
-
-	public void acceptAssignedParserRuleCall(RuleCall ruleCall, EObject semanticChild, ICompositeNode node) {
-		add(titles.doSwitch(ruleCall), EmfFormatter.objPath(semanticChild), null, -1, node);
 	}
 
 	public void acceptAssignedTerminal(RuleCall terminalRC, String token, Object value, int index, ILeafNode node) {
@@ -135,14 +127,16 @@ public class DebugSequenceAcceptor implements IEObjectSequenceAcceptor, IRecursi
 			System.out.println(Joiner.on('\t').join(row));
 	}
 
-	public void enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
+	public boolean enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
 		add(titles.doSwitch(action) + " {", semanticChild.eClass().getName(), "", -1, node);
 		indentation++;
+		return true;
 	}
 
-	public void enterAssignedParserRuleCall(RuleCall rc, EObject newCurrent, ICompositeNode node) {
+	public boolean enterAssignedParserRuleCall(RuleCall rc, EObject newCurrent, ICompositeNode node) {
 		add(titles.doSwitch(rc) + " {", newCurrent.eClass().getName(), "", -1, node);
 		indentation++;
+		return true;
 	}
 
 	public void enterUnassignedParserRuleCall(RuleCall rc) {
@@ -151,10 +145,6 @@ public class DebugSequenceAcceptor implements IEObjectSequenceAcceptor, IRecursi
 	}
 
 	public void finish() {
-	}
-
-	public void finish(INode node) {
-
 	}
 
 	public List<String> getColumn(int i) {
@@ -190,7 +180,7 @@ public class DebugSequenceAcceptor implements IEObjectSequenceAcceptor, IRecursi
 		add("}", "", "", -1, NO_NODE);
 	}
 
-	public void leaveAssignedParserRuleCall(RuleCall rc) {
+	public void leaveAssignedParserRuleCall(RuleCall rc, EObject semanticChild) {
 		indentation--;
 		add("}", "", "", -1, NO_NODE);
 	}

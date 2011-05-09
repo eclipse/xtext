@@ -23,7 +23,7 @@ import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Exceptio
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class TokenStreamSequenceAdapter implements IRecursiveSequenceAcceptor {
+public class TokenStreamSequenceAdapter implements IEObjectSequenceAcceptor {
 
 	protected ISerializationDiagnostic.Acceptor errorAcceptor;
 
@@ -93,13 +93,18 @@ public class TokenStreamSequenceAdapter implements IRecursiveSequenceAcceptor {
 		writeHidden(rule, token);
 	}
 
-	public void enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
+	public boolean enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
+		return true;
 	}
 
-	public void enterAssignedParserRuleCall(RuleCall rc, EObject newCurrent, ICompositeNode node) {
+	public boolean enterAssignedParserRuleCall(RuleCall rc, EObject newCurrent, ICompositeNode node) {
+		return true;
 	}
 
 	public void enterUnassignedParserRuleCall(RuleCall rc) {
+	}
+
+	public void finish() {
 	}
 
 	protected void flush() {
@@ -115,6 +120,9 @@ public class TokenStreamSequenceAdapter implements IRecursiveSequenceAcceptor {
 	}
 
 	public void leaveAssignedParserRuleCall(RuleCall rc) {
+	}
+
+	public void leaveAssignedParserRuleCall(RuleCall rc, EObject semanticChild) {
 	}
 
 	public void leaveUnssignedParserRuleCall(RuleCall rc) {

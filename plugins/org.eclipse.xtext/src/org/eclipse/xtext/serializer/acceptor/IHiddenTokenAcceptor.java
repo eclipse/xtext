@@ -13,9 +13,9 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IHiddenTokensAcceptor extends IUnassignedTokenSequenceAcceptor {
+public interface IHiddenTokenAcceptor extends IUnassignedTokenSequenceAcceptor {
 
-	public abstract class HiddenTokensDelegator extends UnassignedTokenDelegator implements IHiddenTokensAcceptor {
+	public abstract class HiddenTokensDelegator extends UnassignedTokenDelegator implements IHiddenTokenAcceptor {
 
 		public void acceptComment(AbstractRule rule, String token, ILeafNode node) {
 			delegate().acceptComment(rule, token, node);
@@ -26,7 +26,7 @@ public interface IHiddenTokensAcceptor extends IUnassignedTokenSequenceAcceptor 
 		}
 
 		@Override
-		protected abstract IHiddenTokensAcceptor delegate();
+		protected abstract IHiddenTokenAcceptor delegate();
 	}
 
 	void acceptComment(AbstractRule rule, String token, ILeafNode node);

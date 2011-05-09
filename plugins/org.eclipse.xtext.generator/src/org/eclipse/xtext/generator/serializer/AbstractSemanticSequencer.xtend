@@ -129,13 +129,13 @@ class AbstractSemanticSequencer extends GeneratedFile {
 				«ENDIF»
 				
 				@Override
-				public void init(ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-					super.init(sequenceAcceptor, errorAcceptor);
+				public void init(ISemanticSequencer sequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+					super.init(sequencer, sequenceAcceptor, errorAcceptor);
 					this.genericSequencer = genericSequencerProvider.get();
-					this.genericSequencer.init(sequenceAcceptor, errorAcceptor);
+					this.genericSequencer.init(sequencer, sequenceAcceptor, errorAcceptor);
 					«IF usesSuperGrammar»
 						this.superSequencer = superSequencerProvider.get();
-						this.superSequencer.init(sequenceAcceptor, errorAcceptor); 
+						this.superSequencer.init(sequencer, sequenceAcceptor, errorAcceptor); 
 					«ENDIF»
 				}
 				

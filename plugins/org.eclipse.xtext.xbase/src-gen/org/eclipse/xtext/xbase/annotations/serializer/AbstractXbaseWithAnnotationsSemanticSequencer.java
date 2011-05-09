@@ -48,12 +48,12 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 	protected XbaseSemanticSequencer superSequencer; 
 	
 	@Override
-	public void init(ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-		super.init(sequenceAcceptor, errorAcceptor);
+	public void init(ISemanticSequencer sequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
+		super.init(sequencer, sequenceAcceptor, errorAcceptor);
 		this.genericSequencer = genericSequencerProvider.get();
-		this.genericSequencer.init(sequenceAcceptor, errorAcceptor);
+		this.genericSequencer.init(sequencer, sequenceAcceptor, errorAcceptor);
 		this.superSequencer = superSequencerProvider.get();
-		this.superSequencer.init(sequenceAcceptor, errorAcceptor); 
+		this.superSequencer.init(sequencer, sequenceAcceptor, errorAcceptor); 
 	}
 	
 	
@@ -138,14 +138,7 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 				}
 				else break;
 			case XbasePackage.XFEATURE_CALL:
-				if(context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
-				   context == grammarAccess.getXAnnotationElementValueRule() ||
-				   context == grammarAccess.getXAnnotationValueFieldReferenceRule()) {
-					sequence_XAnnotationValueFieldReference_XFeatureCall(context, (XFeatureCall) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getXExpressionRule() ||
+				if(context == grammarAccess.getXExpressionRule() ||
 				   context == grammarAccess.getXAssignmentRule() ||
 				   context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
 				   context == grammarAccess.getXOrExpressionRule() ||
@@ -174,6 +167,13 @@ public class AbstractXbaseWithAnnotationsSemanticSequencer extends AbstractSeman
 				   context == grammarAccess.getXExpressionInsideBlockRule() ||
 				   context == grammarAccess.getXFeatureCallRule()) {
 					sequence_XFeatureCall_XFeatureCall(context, (XFeatureCall) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
+				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
+				   context == grammarAccess.getXAnnotationElementValueRule() ||
+				   context == grammarAccess.getXAnnotationValueFieldReferenceRule()) {
+					sequence_XAnnotationValueFieldReference_XFeatureCall(context, (XFeatureCall) semanticObject); 
 					return; 
 				}
 				else break;
