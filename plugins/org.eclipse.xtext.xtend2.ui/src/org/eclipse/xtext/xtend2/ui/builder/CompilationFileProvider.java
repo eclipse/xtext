@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xtend2.ui.builder;
 
 import static com.google.common.collect.Iterables.*;
-import static org.eclipse.xtext.util.Strings.*;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -37,22 +36,24 @@ public class CompilationFileProvider {
 	public IFile getFile(URI fileURI, IProject project) {
 		Iterable<Pair<IStorage, IProject>> storages = storage2UriMapper.getStorages(fileURI);
 		if(isEmpty(storages)) {
-			throw new IllegalArgumentException("Cannot detect IStorage for " + notNull(fileURI));
+			return null;
 		}
 		for(Pair<IStorage, IProject> pair: storages) {
 			if(project.equals(pair.getSecond())) {
 				IStorage storage = pair.getFirst();
 				if(!(storage instanceof IFile)) {
-					throw new IllegalArgumentException("Source file must reside in the workspace");
+					return null;
 				}
 				return (IFile) storage;
 			}
 		}
-		throw new IllegalArgumentException("Cannot detect IFile for " + notNull(fileURI));
+		return null;
 	}
 	
 	public IFile getTargetFile(URI sourceFileURI, IProject project, SubMonitor monitor) throws CoreException {
 		IFile sourceFile = getFile(sourceFileURI, project);
+		if (sourceFile == null)
+			return null;
 		IPath sourceClasspathRelativePath = getClasspathRelativePath(sourceFile, getJavaProject(project));
 		if(sourceClasspathRelativePath == null) 
 			sourceClasspathRelativePath = sourceFile.getProjectRelativePath();
