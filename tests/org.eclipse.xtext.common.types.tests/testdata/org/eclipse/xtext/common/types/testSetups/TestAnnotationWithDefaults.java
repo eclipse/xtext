@@ -22,15 +22,18 @@ public @interface TestAnnotationWithDefaults  {
 	double doubleValue() default 23d;
 	boolean booleanValue() default true;
 	short shortValue() default 12;
-	long[] longValue() default {50, 60};
-	char[] charValue() default {};
+	long[] longArrayValue() default {50, 60};
+	char[] charArrayValue() default 'a';
 	TestEnum enumValue() default TestEnum.FirstValue;
 	NestedAnnotation annotationValue() default @NestedAnnotation("AnotherString");
-	NestedAnnotation[] annotationArrayValue() default { @NestedAnnotation("AnotherString"), @NestedAnnotation };
+	NestedAnnotation[] annotationArrayValue() default { 
+		@NestedAnnotation("AnotherString"), 
+		@NestedAnnotation 
+	};
 	String stringValue() default "";
 	String[] stringArrayValue() default { "arrayValue" };
 	Class<? extends CharSequence> charSequenceClass() default String.class;
-	Class<?>[] classArray() default { Object.class, int.class };
+	Class<?>[] classArray() default {};
 	
 	@Retention(RetentionPolicy.RUNTIME)
 	@interface NestedAnnotation {
