@@ -90,7 +90,8 @@ public class SimpleLinkedPositionGroupCalculator extends AbstractLinkedPositionG
 		String newName = renameStrategy.getOriginalName();
 		Iterable<URI> dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(targetElement,
 				progress.newChild(10));
-		LocalResourceRefactoringUpdateAcceptor updateAcceptor = new LocalResourceRefactoringUpdateAcceptor();
+		LocalResourceRefactoringUpdateAcceptor updateAcceptor = new LocalResourceRefactoringUpdateAcceptor(
+				renameElementContext.getContextResourceURI());
 		renameStrategy.createDeclarationUpdates(newName, resourceSet, updateAcceptor);
 		Map<URI, URI> original2newEObjectURI = renamedElementTracker.renameAndTrack(
 				concat(Collections.singleton(renameElementContext.getTargetElementURI()), dependentElementURIs),
@@ -122,6 +123,11 @@ public class SimpleLinkedPositionGroupCalculator extends AbstractLinkedPositionG
 	public static class LocalResourceRefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor {
 
 		private List<ReplaceEdit> textEdits = newArrayList();
+		private final URI localResourceURI;
+
+		public LocalResourceRefactoringUpdateAcceptor(URI localResourceURI) {
+			this.localResourceURI = localResourceURI;
+		}
 
 		public List<ReplaceEdit> getTextEdits() {
 			return textEdits;
@@ -140,11 +146,11 @@ public class SimpleLinkedPositionGroupCalculator extends AbstractLinkedPositionG
 		}
 
 		public void accept(URI resourceURI, Change change) {
-			throw new UnsupportedOperationException("Only text changes are accepted");
+			// ignore
 		}
 
 		public void accept(URI resourceURI, TextEdit textEdit) {
-			if (textEdit instanceof ReplaceEdit) {
+			if (localResourceURI.equals(resourceURI) && textEdit instanceof ReplaceEdit) {
 				textEdits.add((ReplaceEdit) textEdit);
 			}
 		}

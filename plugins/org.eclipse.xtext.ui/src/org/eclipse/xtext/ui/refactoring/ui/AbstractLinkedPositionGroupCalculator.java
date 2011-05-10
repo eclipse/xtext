@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.refactoring.ui;
 
 import static com.google.common.collect.Iterables.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Comparator;
 import java.util.List;
@@ -52,7 +53,7 @@ public abstract class AbstractLinkedPositionGroupCalculator implements ILinkedPo
 								return new LinkedPosition(document, calculatedOffset, originalName.length());
 							}
 						} catch (BadLocationException exc) {
-							LOG.error(exc.getMessage(), exc);
+							LOG.error("Skipping invalid text edit " + notNull(edit), exc);
 						}
 						return null;
 					}

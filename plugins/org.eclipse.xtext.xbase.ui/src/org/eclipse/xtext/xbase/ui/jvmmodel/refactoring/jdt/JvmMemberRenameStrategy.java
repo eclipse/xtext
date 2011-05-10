@@ -24,7 +24,7 @@ import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
  */
 @SuppressWarnings("restriction")
 public class JvmMemberRenameStrategy implements IRenameStrategy {
-
+	
 	protected URI targetMemberOriginalURI;
 	protected URI targetMemberNewURI;
 	protected String originalName;
@@ -49,17 +49,18 @@ public class JvmMemberRenameStrategy implements IRenameStrategy {
 		member.setSimpleName(newName);
 		if (member instanceof JvmGenericType && ((InternalEObject) member).eDirectResource() != null) {
 			Resource typeResource = member.eResource();
-			String originalURI = typeResource.getURI().toString();
-			int lastIndexOf = Math.max(originalURI.lastIndexOf('.'), originalURI.lastIndexOf('/') + 1);
-			URI typeResourceNewURI  = URI.createURI(originalURI.substring(0, lastIndexOf) + newName);
-			typeResource.setURI(typeResourceNewURI);
-			if(typeResource instanceof TypeResource)
+			if (typeResource instanceof TypeResource) {
+				String originalURI = typeResource.getURI().toString();
+				int lastIndexOf = Math.max(originalURI.lastIndexOf('.'), originalURI.lastIndexOf('/') + 1);
+				URI typeResourceNewURI = URI.createURI(originalURI.substring(0, lastIndexOf) + newName);
+				typeResource.setURI(typeResourceNewURI);
 				// disconnect the mirrored IJavaElement as it is invalid now
-				((TypeResource)typeResource).setMirror(null);
+				((TypeResource) typeResource).setMirror(null);
+			}
 		}
 		return member;
 	}
-	
+
 	public void createDeclarationUpdates(String newName, ResourceSet resourceSet,
 			IRefactoringUpdateAcceptor updateAcceptor) {
 	}
@@ -67,7 +68,7 @@ public class JvmMemberRenameStrategy implements IRenameStrategy {
 	public String getOriginalName() {
 		return originalName;
 	}
-	
+
 	public RefactoringStatus validateNewName(String newName) {
 		return new RefactoringStatus();
 	}
