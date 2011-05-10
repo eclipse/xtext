@@ -66,6 +66,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.texteditor.DefaultMarkerAnnotationAccess;
 import org.eclipse.xtext.ui.XtextUIMessages;
+import org.eclipse.xtext.ui.editor.hover.AnnotationWithQuickFixesHover.AnnotationInfo;
 import org.eclipse.xtext.ui.editor.quickfix.QuickAssistInvocationContext;
 import org.eclipse.xtext.ui.editor.quickfix.XtextQuickAssistProcessor;
 
@@ -651,11 +652,14 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 	 */
 	private IInformationControlCreator fPresenterControlCreator;
 
+	private volatile AnnotationInfo recentAnnotationInfo;
+	
 	// DIFF: this code is entirely different, as the hover subclasses from AbstractProblemHover and 
 	// hooks different methods
 	
 	@Override
 	protected Region getHoverRegionInternal(final int lineNumber, final int offset) {
+		recentAnnotationInfo = null;
 		List<Annotation> annotations = getAnnotations(lineNumber, offset);
 		if (annotations != null) {
 			for (Annotation annotation : annotations) {
@@ -674,6 +678,9 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 	
 	@Override
 	protected Object getHoverInfoInternal(ITextViewer textViewer, final int lineNumber, final int offset) {
+		AnnotationInfo result = recentAnnotationInfo;
+		if (result != null)
+			return result;
 		List<Annotation> annotations = getAnnotations(lineNumber, offset);
 		if (annotations != null) {
 			for (Annotation annotation : annotations) {
@@ -685,7 +692,9 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 					// workbench.getActiveWorkbenchWindow() will return null in LanguageSpecificURIEditorOpener and
 					// cause an exception
 					Display.getDefault().syncExec(runnable);
-					return new AnnotationInfo (annotation, position, sourceViewer, runnable.proposals);				
+					result = new AnnotationInfo (annotation, position, sourceViewer, runnable.proposals);
+					recentAnnotationInfo = result;
+					return result;
 				}
 			}
 		}
