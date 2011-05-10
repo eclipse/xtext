@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.CrossReference;
@@ -28,6 +29,7 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
+import org.eclipse.xtext.util.StopWatch;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 
@@ -42,6 +44,8 @@ import com.google.inject.Provider;
  */
 public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider {
 
+	private static final Logger logger = Logger.getLogger(DefaultQuickfixProvider.class);
+	
 	@Inject
 	private ISimilarityMatcher similarityMatcher;
 
@@ -149,13 +153,19 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 
 	@Override
 	public List<IssueResolution> getResolutions(Issue issue) {
-		if (Diagnostic.LINKING_DIAGNOSTIC.equals(issue.getCode())) {
-			List<IssueResolution> result = new ArrayList<IssueResolution>();
-			result.addAll(getResolutionsForLinkingIssue(issue));
-			result.addAll(super.getResolutions(issue));
-			return result;
-		} else
-			return super.getResolutions(issue);
+		StopWatch stopWatch = new StopWatch(logger);
+		try {
+			if (Diagnostic.LINKING_DIAGNOSTIC.equals(issue.getCode())) {
+				List<IssueResolution> result = new ArrayList<IssueResolution>();
+				result.addAll(getResolutionsForLinkingIssue(issue));
+				result.addAll(super.getResolutions(issue));
+				return result;
+			} else
+				return super.getResolutions(issue);
+		} finally {
+			stopWatch.resetAndLog("#getResolutions");			
+		}
+		
 	}
 
 	@Override
@@ -163,4 +173,31 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 		return Diagnostic.LINKING_DIAGNOSTIC.equals(issueCode) || super.hasResolutionFor(issueCode);
 	}
 
+	/**
+	 * @since 2.0
+	 */
+	protected IssueModificationContext.Factory getModificationContextFactory() {
+		return modificationContextFactory;
+	}
+
+	/**
+	 * @since 2.0
+	 */
+	protected IScopeProvider getScopeProvider() {
+		return scopeProvider;
+	}
+
+	/**
+	 * @since 2.0
+	 */
+	protected IQualifiedNameConverter getQualifiedNameConverter() {
+		return qualifiedNameConverter;
+	}
+
+	/**
+	 * @since 2.0
+	 */
+	protected ISimilarityMatcher getSimilarityMatcher() {
+		return similarityMatcher;
+	}
 }
