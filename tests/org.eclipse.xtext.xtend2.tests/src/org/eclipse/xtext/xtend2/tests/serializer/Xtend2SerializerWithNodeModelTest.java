@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtend2.tests.serializer;
 
-import org.eclipse.xtext.serializer.ISerializer;
-import org.eclipse.xtext.serializer.impl.Serializer;
+import org.eclipse.xtext.junit.serializer.SerializerTester;
+import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
 import com.google.inject.Inject;
 
@@ -16,27 +16,15 @@ import com.google.inject.Inject;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class SerializerTest extends AbstractXtend2TestData {
+public class Xtend2SerializerWithNodeModelTest extends AbstractXtend2TestData {
 
 	@Inject
-	private ISerializer serializer;
-
-	public void testSerializer() {
-		assertTrue(serializer instanceof Serializer);
-	}
+	private SerializerTester tester;
 
 	@Override
 	protected void doTest(String fileContents) throws Exception {
-		assertEquals(fileContents, serializer.serialize(file(fileContents)));
+		XtendFile file = file(fileContents, true);
+		tester.assertSerializeWithNodeModel(file);
 	}
-	
-	//TODO enable me
-	@Override
-	public void testHelloWorld() throws Exception {
-	}
-	
-	@Override
-	public void testSimpleExpressions() throws Exception {
-	}
-	
+
 }
