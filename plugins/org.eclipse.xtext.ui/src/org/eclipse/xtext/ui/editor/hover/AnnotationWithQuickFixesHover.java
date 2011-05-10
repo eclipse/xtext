@@ -66,6 +66,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.texteditor.DefaultMarkerAnnotationAccess;
 import org.eclipse.xtext.ui.XtextUIMessages;
+import org.eclipse.xtext.ui.editor.quickfix.QuickAssistInvocationContext;
 import org.eclipse.xtext.ui.editor.quickfix.XtextQuickAssistProcessor;
 
 import com.google.inject.Inject;
@@ -678,7 +679,7 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 			for (Annotation annotation : annotations) {
 				if (annotation.getText() != null) {
 					Position position = getAnnotationModel().getPosition(annotation);
-					final IQuickAssistInvocationContext invocationContext = new TextInvocationContext(sourceViewer, position.getOffset(), position.getLength());
+					final IQuickAssistInvocationContext invocationContext = new QuickAssistInvocationContext(sourceViewer, position.getOffset(), position.getLength(), true);
 					CompletionProposalRunnable runnable = new CompletionProposalRunnable(invocationContext);	
 					// Note: the resolutions have to be retrieved from the UI thread, otherwise
 					// workbench.getActiveWorkbenchWindow() will return null in LanguageSpecificURIEditorOpener and
