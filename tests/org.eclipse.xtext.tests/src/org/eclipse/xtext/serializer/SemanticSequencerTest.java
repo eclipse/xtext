@@ -9,7 +9,7 @@ package org.eclipse.xtext.serializer;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.serializer.acceptor.DebugSequenceAcceptor;
+import org.eclipse.xtext.junit.serializer.DebugSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.impl.GenericSemanticSequencer;
 import org.eclipse.xtext.serializer.impl.NodeModelSemanticSequencer;

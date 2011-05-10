@@ -7,10 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.serializer;
 
-import org.eclipse.xtext.junit.util.ParseHelper;
-import org.eclipse.xtext.junit.validation.ValidationTestHelper;
-import org.eclipse.xtext.serializer.ISerializer;
-import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.junit.serializer.SerializerTester;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -38,33 +35,7 @@ public class XbaseSerializerWithNodeModelTest extends AbstractXbaseEvaluationTes
 	}.createInjectorAndDoEMFRegistration();
 
 	@Inject
-	private ParseHelper<XExpression> parseHelper;
-
-	@Inject
-	private ISerializer serializer;
-
-	@Inject
-	private ValidationTestHelper validationHelper;
-
-	protected XExpression expression(String string, boolean resolve) throws Exception {
-		XExpression result = parseHelper.parse(string);
-		if (resolve) {
-			validationHelper.assertNoErrors(result);
-		}
-		return result;
-	}
-
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		injector.injectMembers(this);
-	}
-
-	@Override
-	protected void tearDown() throws Exception {
-		parseHelper = null;
-		super.tearDown();
-	}
+	private SerializerTester tester;
 
 	@Override
 	protected void assertEvaluatesTo(Object object, String string) throws Exception {
@@ -77,10 +48,13 @@ public class XbaseSerializerWithNodeModelTest extends AbstractXbaseEvaluationTes
 	}
 
 	protected void assertSerializeable(String expected) throws Exception {
-		XExpression expr = expression(expected, true);
-		//			System.out.println(EmfFormatter.objToStr(expr));
-		String actual = serializer.serialize(expr);
-		assertEquals(expected, actual);
+		tester.assertSerializeWithNodeModel(expected);
+	}
+
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		injector.injectMembers(this);
 	}
 
 }
