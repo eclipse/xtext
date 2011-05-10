@@ -94,14 +94,20 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
 					}
 				}
 			}
-			Iterator<Annotation> iterator = applicableAnnotations.iterator();
-			if (!result.isEmpty()) {
-				while(iterator.hasNext()){
-					Position pos = annotationModel.getPosition(iterator.next());
-					if (pos != null) {
-						sourceViewer.setSelectedRange(pos.getOffset(), pos.getLength());
-						sourceViewer.revealRange(pos.getOffset(), pos.getLength());
-						break;
+			boolean select = true;
+			if (invocationContext instanceof QuickAssistInvocationContext) {
+				select = !((QuickAssistInvocationContext) invocationContext).isSuppressSelection();
+			}
+			if (select) {
+				Iterator<Annotation> iterator = applicableAnnotations.iterator();
+				if (!result.isEmpty()) {
+					while(iterator.hasNext()){
+						Position pos = annotationModel.getPosition(iterator.next());
+						if (pos != null) {
+							sourceViewer.setSelectedRange(pos.getOffset(), pos.getLength());
+							sourceViewer.revealRange(pos.getOffset(), pos.getLength());
+							break;
+						}
 					}
 				}
 			}
