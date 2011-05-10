@@ -49,15 +49,11 @@ public class RefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor {
 
 	public void accept(URI resourceURI, TextEdit textEdit) {
 		IRefactoringDocument document = getDocument(resourceURI);
-		if (document2change.containsKey(document))
-			throw new IllegalStateException("Cannot accept changes and text edits for the same document.");
 		document2textEdits.put(document, textEdit);
 	}
 
 	public void accept(URI resourceURI, Change change) {
 		IRefactoringDocument document = getDocument(resourceURI);
-		if (document2textEdits.containsKey(document))
-			throw new IllegalStateException("Cannot accept changes and text edits for the same document.");
 		document2change.put(document, change);
 	}
 	
