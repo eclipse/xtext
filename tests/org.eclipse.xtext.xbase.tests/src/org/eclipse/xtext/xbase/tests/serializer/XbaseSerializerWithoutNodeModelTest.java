@@ -123,10 +123,11 @@ public class XbaseSerializerWithoutNodeModelTest extends AbstractXbaseEvaluation
 		removeNodeModel(expression);
 		String serialized = serializer.serialize(expression);
 		XExpression reparsed = expression(serialized, true);
-		if (!EcoreUtil.equals(expression, reparsed)) {
-			assertEquals(EmfFormatter.objToStr(expression), EmfFormatter.objToStr(reparsed));
-			assertEquals(input, serialized);
-			fail("EcoreUtil#equals was false for: " + serialized + " / " + input);
-		}
+		// don't use EcoreUtil.equals() for now because it slows down this test by factor five.
+		//		if (!EcoreUtil.equals(expression, reparsed)) {
+		assertEquals(EmfFormatter.objToStr(expression), EmfFormatter.objToStr(reparsed));
+		//			assertEquals(input, serialized);
+		//			fail("EcoreUtil#equals was false for: " + serialized + " / " + input);
+		//		}
 	}
 }
