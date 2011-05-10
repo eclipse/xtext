@@ -72,7 +72,7 @@ public class JvmRenameElementHandler extends RenameElementHandler {
 			if (!javaElements.isEmpty()) {
 				return new RenameJvmDeclarationContext(EcoreUtil2.getNormalizedURI(targetElement),
 						targetElement.eClass(), javaElements, editor, selection,
-						EcoreUtil2.getNormalizedResourceURI(targetElement));
+						EcoreUtil2.getNormalizedURI(resource));
 			}
 		}
 		return super.createRenameElementContext(targetElement, editor, selection, resource);

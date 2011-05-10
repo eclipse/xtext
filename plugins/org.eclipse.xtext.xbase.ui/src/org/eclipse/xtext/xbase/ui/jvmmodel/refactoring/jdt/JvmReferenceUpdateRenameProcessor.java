@@ -20,7 +20,7 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
  */
 @SuppressWarnings("restriction")
 public class JvmReferenceUpdateRenameProcessor extends RenameElementProcessor {
-
+	
 	@Override
 	protected ResourceSet createResourceSet(IRenameElementContext renameElementContext) {
 		return getResourceSetProvider().get(
