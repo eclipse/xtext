@@ -4626,42 +4626,7 @@
       </markerResolutionGenerator>
    </extension>
    
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/2010/tmf/xtext/parser/EncodingUiTest" 
-       class = "org.eclipse.xtext.ui.tests.editor.encoding.encodingTest.EncodingTestPackage"
-       genModel = "org/eclipse/xtext/ui/tests/editor/encoding/EncodingUiTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-    <extension
-            point="org.eclipse.ui.editors">
-        <editor
-            class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
-            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-            default="true"
-            extensions="encodinguitestlanguage"
-            id="org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage"
-            name="EncodingUiTestLanguage Editor">
-        </editor>
-    </extension>
-
-	<extension
-		point="org.eclipse.emf.ecore.extension_parser">
-		<parser
-			class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-			type="encodinguitestlanguage">
-		</parser>
-	</extension>
-	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
-        <resourceServiceProvider
-            class="org.eclipse.xtext.ui.tests.editor.encoding.ui.EncodingUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-            uriExtension="encodinguitestlanguage">
-        </resourceServiceProvider>
-    </extension>
-
-   <extension
+      <extension
          point="org.eclipse.ui.editors">
       <editor
             name="Sample Multi-page Editor"
@@ -4671,7 +4636,7 @@
             id="org.eclipse.xtext.ui.tests.mpe.MultiPageEditor">
       </editor>
    </extension>
-
+   
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.eclipse.org/xtext/refactoringTestLanguage" 
@@ -4679,8 +4644,6 @@
        genModel = "org/eclipse/xtext/ui/tests/refactoring/RefactoringTestLanguage.genmodel" /> 
 	
   </extension>
-
-
 
     <extension
             point="org.eclipse.ui.editors">
