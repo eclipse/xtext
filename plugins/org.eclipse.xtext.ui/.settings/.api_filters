@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <component id="org.eclipse.xtext.ui" version="2">
-    <resource path="src/org/eclipse/xtext/ui/editor/XtextSourceViewer.java" type="org.eclipse.xtext.ui.editor.XtextSourceViewer">
-        <filter id="571473929">
-            <message_arguments>
-                <message_argument value="ProjectionViewer"/>
-                <message_argument value="XtextSourceViewer"/>
-            </message_arguments>
-        </filter>
-    </resource>
+<resource path="META-INF/MANIFEST.MF">
+<filter id="924844039">
+<message_arguments>
+<message_argument value="2.0.0.qualifier"/>
+<message_argument value="2.0.0.v201105041334"/>
+</message_arguments>
+</filter>
+</resource>
+<resource path="src/org/eclipse/xtext/ui/editor/XtextSourceViewer.java" type="org.eclipse.xtext.ui.editor.XtextSourceViewer">
+<filter id="571473929">
+<message_arguments>
+<message_argument value="ProjectionViewer"/>
+<message_argument value="XtextSourceViewer"/>
+</message_arguments>
+</filter>
+</resource>
 </component>
