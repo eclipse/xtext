@@ -7,17 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.serializer;
 
-import java.util.Iterator;
-
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.junit.util.ParseHelper;
-import org.eclipse.xtext.junit.validation.ValidationTestHelper;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.serializer.ISerializer;
-import org.eclipse.xtext.util.EmfFormatter;
-import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.junit.serializer.SerializerTester;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -45,33 +35,7 @@ public class XbaseSerializerWithoutNodeModelTest extends AbstractXbaseEvaluation
 	}.createInjectorAndDoEMFRegistration();
 
 	@Inject
-	private ParseHelper<XExpression> parseHelper;
-
-	@Inject
-	private ISerializer serializer;
-
-	@Inject
-	private ValidationTestHelper validationHelper;
-
-	protected XExpression expression(String string, boolean resolve) throws Exception {
-		XExpression result = parseHelper.parse(string);
-		if (resolve) {
-			validationHelper.assertNoErrors(result);
-		}
-		return result;
-	}
-
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		injector.injectMembers(this);
-	}
-
-	@Override
-	protected void tearDown() throws Exception {
-		parseHelper = null;
-		super.tearDown();
-	}
+	private SerializerTester tester;
 
 	@Override
 	protected void assertEvaluatesTo(Object object, String string) throws Exception {
@@ -83,19 +47,14 @@ public class XbaseSerializerWithoutNodeModelTest extends AbstractXbaseEvaluation
 		assertSerializeable(string);
 	}
 
-	protected void removeNodeModel(EObject eObject) {
-		Iterator<Object> iterator = EcoreUtil.getAllContents(eObject.eResource(), false);
-		while (iterator.hasNext()) {
-			EObject object = (EObject) iterator.next();
-			Iterator<Adapter> adapters = object.eAdapters().iterator();
-			while (adapters.hasNext()) {
-				Adapter adapter = adapters.next();
-				if (adapter instanceof ICompositeNode) {
-					adapters.remove();
-					break;
-				}
-			}
-		}
+	protected void assertSerializeable(String expected) throws Exception {
+		tester.assertSerializeWithoutNodeModel(expected);
+	}
+
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		injector.injectMembers(this);
 	}
 
 	@Override
@@ -116,18 +75,5 @@ public class XbaseSerializerWithoutNodeModelTest extends AbstractXbaseEvaluation
 	@Override
 	public void testMemberCallOnMultiType_08() throws Exception {
 		// FIXME: https://bugs.eclipse.org/bugs/show_bug.cgi?id=344706
-	}
-
-	protected void assertSerializeable(String input) throws Exception {
-		XExpression expression = expression(input, true);
-		removeNodeModel(expression);
-		String serialized = serializer.serialize(expression);
-		XExpression reparsed = expression(serialized, true);
-		// don't use EcoreUtil.equals() for now because it slows down this test by factor five.
-		//		if (!EcoreUtil.equals(expression, reparsed)) {
-		assertEquals(EmfFormatter.objToStr(expression), EmfFormatter.objToStr(reparsed));
-		//			assertEquals(input, serialized);
-		//			fail("EcoreUtil#equals was false for: " + serialized + " / " + input);
-		//		}
 	}
 }
