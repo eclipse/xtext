@@ -4,14 +4,25 @@
 */
 package org.eclipse.xtext.xtend2.ui.refactoring;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.ltk.core.refactoring.resource.RenameResourceChange;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.impl.RefactoringStatusException;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.util.ResourceUtil;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.AbstractJvmModelRenameStrategy;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JvmMemberRenameStrategy;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JvmReferenceUpdateRenameProcessor;
@@ -49,6 +60,15 @@ public class Xtend2RenameStrategy extends AbstractJvmModelRenameStrategy {
 	}
 	
 	@Override
+	public void createDeclarationUpdates(String newName, ResourceSet resourceSet,
+			IRefactoringUpdateAcceptor updateAcceptor) {
+		super.createDeclarationUpdates(newName, resourceSet, updateAcceptor);
+		IPath path = getPathToRename(targetElementOriginalURI, resourceSet);
+		if(path != null) 
+			updateAcceptor.accept(targetElementOriginalURI.trimFragment(), new RenameResourceChange(path, newName + "." + path.getFileExtension()));
+	}
+	
+	@Override
 	protected IXtend2JvmAssociations getJvmModelAssociations() {
 		return (IXtend2JvmAssociations) super.getJvmModelAssociations();
 	}
@@ -71,5 +91,18 @@ public class Xtend2RenameStrategy extends AbstractJvmModelRenameStrategy {
 				inferredJvmMember.setSimpleName(((XtendFunction) renamedElement).getName());
 			}
 		}
+	}
+	
+	protected IPath getPathToRename(URI elementURI, ResourceSet resourceSet) {
+		EObject targetObject = resourceSet.getEObject(elementURI, false);
+		if(targetObject instanceof XtendClass) {
+			URI resourceURI = EcoreUtil2.getNormalizedResourceURI(targetObject);
+			if(!resourceURI.isPlatformResource())
+				throw new RefactoringStatusException("Renamed class does not reside in the workspace", true);
+			IPath path = new Path("/").append(new Path(resourceURI.path()).removeFirstSegments(1));
+			return path;
+		}
+		return null;
+		
 	}
 }
