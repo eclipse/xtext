@@ -59,24 +59,4 @@ public class UpdateAcceptorTest extends TestCase {
 				((MultiTextEdit) change0.getTextEdit()).getChildrenSize()
 						+ ((MultiTextEdit) change1.getTextEdit()).getChildrenSize());
 	}
-
-	public void testProhibitChangeAndReplaceEditForSameDocument() {
-
-		updateAcceptor.accept(resourceURI0, new MockChange("foo", new ReplaceEdit(0, 1, "foo")));
-		updateAcceptor.accept(resourceURI0, new MockChange("bar", new ReplaceEdit(0, 1, "bar")));
-		try {
-			updateAcceptor.accept(resourceURI0, new ReplaceEdit(0, 1, "bar"));
-			fail("UpdateAcceptor should not allow ReplaceEdits and Changes on the smae IRefactoringDocument");
-		} catch (Exception e) {
-			// ok
-		}
-		updateAcceptor.accept(resourceURI1, new ReplaceEdit(0, 1, "foo"));
-		updateAcceptor.accept(resourceURI1, new ReplaceEdit(0, 1, "bar"));
-		try {
-			updateAcceptor.accept(resourceURI1, new MockChange("foo", new ReplaceEdit(0, 1, "foo")));
-			fail("UpdateAcceptor should not allow ReplaceEdits and Changes on the smae IRefactoringDocument");
-		} catch (Exception e) {
-			// ok
-		}
-	}
 }
