@@ -175,7 +175,10 @@ public abstract class EClassifierInfo {
 						}
 						return result;
 					} else {
-						errorMessage.append("The existing feature '" + name + "' has an incompatible type '" + existingFeature.getEType().getName() + "'.");
+						String msgPart = " has no type.";
+						if (existingFeature.getEType() != null)
+							msgPart = " has an incompatible type '" + existingFeature.getEType().getName()+"'.";
+						errorMessage.append("The existing feature '" + name + "'" + msgPart);
 					}
 				} else {
 					errorMessage.append("The existing feature '" + name + "' has a different cardinality.");
