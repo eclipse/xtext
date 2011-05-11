@@ -10,6 +10,7 @@ Workflow {
 		// or define search scope explicitly
 		modelPath = modelPath
 		targetDir = targetDir
+		document = "Xtext Documentation"
 		pdfLatex = "/usr/texbin/pdflatex"
 	}
 

@@ -9,7 +9,22 @@ case,enum,instanceof,return,transient,
 catch,extends,int,short,try,
 char,final,interface,static,void,
 class,finally,long,strictfp,volatile,
-const,float,native,super,while]
+const,float,native,super,while,null]
+
+codelanguage-def[Xtext][
+	grammar,
+	import,
+	generate,
+	terminal,
+	enum,
+	returns,
+	with,
+	hidden,
+	as,
+	current,
+	fragment,
+	EOF
+]
 
 codelanguage-def[Xbase][
 	extends,
@@ -34,7 +49,18 @@ codelanguage-def[Xbase][
 	throw,
 	try,
 	catch,
-	finally
+	finally,
+	this, 
+	int, 
+	boolean, 
+	short, 
+	char, 
+	double, 
+	float, 
+	long, 
+	byte, 
+	void,
+	return
 ]
 
 chapter-ref[Preface]

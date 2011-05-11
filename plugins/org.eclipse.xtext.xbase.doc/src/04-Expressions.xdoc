@@ -1,7 +1,8 @@
 chapter:Xbase_Expressions[Expressions]
 
 Expressions are the main language constructs which are used to express behavior and computation of values. The concept of 
-statements is not supported, but instead powerful expressions are used to handle situations in which the imperative nature of statements are a better fit. An 
+statements is not supported, but instead powerful expressions are used to handle situations in which the imperative nature of statements would
+be helpful, too. An 
 expression always results in a value (might be the value 'null' though). In addition every resolved expressions is
 of a static type.
 
@@ -38,8 +39,8 @@ section2:Xbase_Expressions_BooleanLiteral[Boolean Literals]
 There are two boolean literals, code[true] and code[false] which correspond to their Java counterpart of type e[boolean]. 
 
 ul[
-	item[code[true]]
-	item[code[false]]
+	item[code[Xbase][true]]
+	item[code[Xbase][false]]
 ]
 
 section2:Xbase_Expressions_NullLiteral[Null Literal]
@@ -48,7 +49,7 @@ The null pointer literal is, like in Java, code[null].
 It is a member of any reference type.
 
 ul[
-	item[code[null]]
+	item[code[Xbase][null]]
 ]
 
 section2:Xbase_Expressions_TypeLiteral[Type Literals]
@@ -56,7 +57,7 @@ section2:Xbase_Expressions_TypeLiteral[Type Literals]
 Type literals are specified using the keyword e[typeof] :
 
 ul[
-  item[code[typeof(java.lang.String)] which yields java.lang.String.class]
+  item[code[Xbase][typeof(java.lang.String)] which yields java.lang.String.class]
 ]
 
 section:Xbase_Expressions_TypeCasts[Type Casts]
@@ -68,7 +69,7 @@ The conformance rules for casts are defined in the link[http://java.sun.com/docs
 
 section2[Syntax]
 
-code[
+code[Xtext][
 XCastedExpression:
 	Expression 'as' JvmTypeReference;
 ]
@@ -76,14 +77,14 @@ XCastedExpression:
 section2[Examples]
 
 ul[
-	item[code[my.foo as MyType]]
-	item[code[(1 + 3 * 5 * (- 23)) as BigInteger]]
+	item[code[Xbase][my.foo as MyType]]
+	item[code[Xbase][(1 + 3 * 5 * (- 23)) as BigInteger]]
 ]
 
 section:Xbase_Expressions_Operators[Infix Operators / Operator Overloading]
 
-There are a couple of common predefined infix operators. In contrast to Java, the operators are not fixed
-to operations on certain types. Instead an operator to method mapping allows users to redefine the 
+There are a couple of common predefined infix operators. In contrast to Java, the operators are not limited
+to operations on certain types. Instead an operator-to-method mapping allows users to redefine the 
 operators for any type just by implementing the corresponding method signature.
 The following defines the operators and the corresponding Java method signatures / expressions.
 
@@ -134,8 +135,8 @@ section2[Short-Circuit Boolean Operators]
 If the operators code[||] and code[&&] are used in a context where the left hand operand is of type boolean, the operation is evaluated
 in short circuit mode, which means that the right hand operand might not be evaluated at all in the following cases: 
 ol[
-	item[in the case of code[||] the operand on the right hand side is not evaluated if the left operand evaluates to code[true].]
-	item[in the case of code[&&] the operand on the right hand side is not evaluated if the left operand evaluates to code[false].]
+	item[in the case of code[||] the operand on the right hand side is not evaluated if the left operand evaluates to code[Xbase][true].]
+	item[in the case of code[&&] the operand on the right hand side is not evaluated if the left operand evaluates to code[Xbase][false].]
 ] 
 
 section2[Examples]
@@ -157,7 +158,7 @@ ref:Xbase_Expressions_VariableDeclaration[Local variables] can be reassigned usi
 that operator:
 Given the expression 
 
-code[
+code[Xbase][
 	myObj.myProperty = "foo"
 ]
 
@@ -188,7 +189,7 @@ which are made available for the current expression's scope.
 section2[Syntax]
 
 The following snippet is a simplification of the real Xtext rules, which cover more than the concrete syntax.
-code[
+code[Xtext][
 FeatureCall :
 	ID |
 	Expression ('.' ID ('(' Expression (',' Expression)* ')')?)*
@@ -200,22 +201,22 @@ Feature calls are directly translated to their Java equivalent with the exceptio
 described in ref:Xbase_Expressions_PropertyAssignment applies. 
 That is, for the following expression
 
-code[
+code[Xbase][
 	myObj.myProperty
 ]
 
-the compiler first looks for an accessible field in the type of code[myObj]. If no such field exists it looks for a method called code[myProperty()] before it looks 
-for the getter methods code[getMyProperty()]. If none of these members can be found the expression is unbound and a compiliation error is thrown.
+the compiler first looks for an accessible field in the type of code[Xbase][myObj]. If no such field exists it looks for a method called code[Java][myProperty()] before it looks 
+for the getter methods code[Java][getMyProperty()]. If none of these members can be found the expression is unbound and a compiliation error is thrown.
 
 section2:Xbase_Expressions_ImplicitThis[Implicit 'this' variable]
 
-If the current scope contains a variable named code[this], the compiler will make all its members available to the scope. 
+If the current scope contains a variable named code[Xbase][this], the compiler will make all its members available to the scope. 
 That is if 
-code[
+code[Xbase][
 	this.myProperty
 ]
 is a valid expression
-code[
+code[Xbase][
 	myProperty
 ]
 is valid as well and is equivalent, as long as there is no local variable 'myProperty' on the scope,
@@ -270,13 +271,13 @@ Xbase supports the safe navigation operator code[?.] to make such code more read
 
 Instead of writing 
 
-code[
+code[Java][
 	if ( myRef != null ) myRef.doStuff()
 ]
 
 one can write
 
-code[
+code[Xbase][
 	myRef?.doStuff()
 ]
 
@@ -288,12 +289,12 @@ section2[Examples]
 
 ul[
 	item[
-		code[
+		code[Xbase][
 			new String()
 		]
 	]
 	item[
-		code[
+		code[Xbase][
 			new java.util.ArrayList<java.math.BigDecimal>()
 		]
 	]
@@ -301,7 +302,7 @@ ul[
 
 section2[Syntax]
 
-code[
+code[Xtext][
 XConstructorCall:
   'new' QualifiedName 
   		('<' JvmTypeArgument (',' JvmTypeArgument)* '>')? 
@@ -315,7 +316,7 @@ so that any final variables and parameters visible at construction time can be r
 
 section2[Syntax]
 
-code[
+code[Xtext][
 XClosure:
 	'\[' ( JvmFormalParameter (',' JvmFormalParameter)* )? 
 		'|' XExpression '\]';
@@ -324,19 +325,19 @@ XClosure:
 The surrounding square brackets are optional if the closure is the single argument of a method invocation.
 That is you can write
 
-code[
+code[Xbase][
 	myList.find(e|e.name==null)
 ]
 
 instead of
 
-code[
+code[Xbase][
 	myList.find(\[e|e.name==null\])
 ]
 
 But in all other cases the square brackets are mandatory:
 
-code[
+code[Xbase][
 	val func = \[String s| s.length>3\]
 ]
 
@@ -347,16 +348,16 @@ parameters as well as the return type. The return type is never specified explic
 The parameter types can be inferred if the closure is used in a context where this is possible.
 
 For instance, given the following Java method signature:
-code[
+code[Java][
 	public T <T>getFirst(List<T> list, Function0<T,Boolean> predicate) 
 ] 
 
 the type of the parameter can be inferred. Which allows users to write:
-code[
+code[Xbase][
 	arrayList( "Foo", "Bar" ).findFirst( e | e == "Bar" )
 ]
 instead of 
-code[
+code[Xbase][
 	arrayList( "Foo", "Bar" ).findFirst( String e | e == "Bar" )
 ]
 
@@ -379,7 +380,7 @@ don't count).
 As a result given the method code[java.util.Collections.sort(List<T>, Comparator<? super T>)] is available
 as an extension method, it can be invoked like this
 
-code[
+code[Xbase][
 newArrayList( 'aaa', 'bb', 'c' ).sort(
 	e1, e2 | if ( e1.length > e2.length ) {
 				-1 
@@ -393,37 +394,37 @@ newArrayList( 'aaa', 'bb', 'c' ).sort(
 section2[Examples]
 
 ul[
-	item[code[\[ | "foo" \]   // closure without parameters]]
-	item[code[\[ String s | s.toUpperCase() \] // explicit argument type]]
-	item[code[\[ a,b,a | a+b+c \] // inferred argument types]]
+	item[code[Xbase][\[ | "foo" \]   // closure without parameters]]
+	item[code[Xbase][\[ String s | s.toUpperCase() \] // explicit argument type]]
+	item[code[Xbase][\[ a,b,a | a+b+c \] // inferred argument types]]
 ]
 
 section:Xbase_Expressions_IfExpression[If Expression]
 
 An if expression is used to choose two different values based on a predicate. While it has the syntax of Java's if statement it behaves  
-like Java's ternary operator (code[predicate ? thenPart : elsePart]), i.e. it is an expression that returns a value. Consequently, you can use 
+like Java's ternary operator (code[Java][predicate ? thenPart : elsePart]), i.e. it is an expression that returns a value. Consequently, you can use 
 if expressions deeply nested within expressions.
 
 section2[Syntax]
 
-code[
+code[Xtext][
 XIfExpression:
 	'if' '(' XExpression ')'
 		XExpression
 	('else' XExpression)?;
 ]
 
-An expression code[if (p) e1 else e2] results in either the value code[e1] or code[e2] depending on whether the predicate code[p] 
-evaluates to code[true] or code[false]. The else part is optional which is a shorthand for code[else null].
+An expression code[Xbase][if (p) e1 else e2] results in either the value code[e1] or code[e2] depending on whether the predicate code[p] 
+evaluates to code[Xbase][true] or code[Xbase][false]. The else part is optional which is a shorthand for code[Xbase][else null].
 That means 
 
-code[
+code[Xbase][
 	if (foo) x 
 ]
 
 is the a short hand for
 
-code[
+code[Xbase][
 	if (foo) x else null
 ]
 
@@ -435,9 +436,9 @@ It uses the rules defined in ref:Xbase_Types_CommonSuperType.
 section2[Examples]
 
 ul[
-	item[code[if (isFoo) this else that]]
-	item[code[if (isFoo) { this } else if (thatFoo) { that } else { other }]]
-	item[code[if (isFoo) this]]
+	item[code[Xbase][if (isFoo) this else that]]
+	item[code[Xbase][if (isFoo) { this } else if (thatFoo) { that } else { other }]]
+	item[code[Xbase][if (isFoo) this]]
 ]
 
 section:Xbase_Expressions_SwitchExpression[Switch Expression]
@@ -446,7 +447,7 @@ The switch expression is a bit different from Java's. First, there is no fall th
 Second, the use of switch is not limited to certain values but can be used for any object reference instead.
  
 For a switch expression 
-code[
+code[Xbase][
 switch e {
 	case e1 : er1
 	case e2 : er2
@@ -464,11 +465,11 @@ The guard of each case clause is evaluated until the switch value equals the res
 Then the right hand expression of the case evaluated and the result is returned.
 
 If none of the guards matches the default expression is evaluated an returned. If no default expression
-is specified the expression evaluates to code[null].
+is specified the expression evaluates to code[Xbase][null].
 
 Example:
 
-code[
+code[Xbase][
 switch myString {
 	case myString.length>5 : 'a long string.'
 	case 'foo' : 'It's a foo.'
@@ -481,7 +482,7 @@ section2[Type guards]
 In addition to the case guards one can add a so called e[Type Guard] which is syntactically just a ref:Xbase_Types_TypeReferences[type reference] preceding
 the than optional case keyword. The compiler will use that type for the switch expression in subsequent expressions.
 Example:
-code[
+code[Xbase][
 var Object x = ...;
 switch x {
 	String case x.length()>0 : x.length()
@@ -505,24 +506,28 @@ section2[Examples]
 
 ul[
 	item[
-	switch foo {
-		Entity : foo.superType.name
-		Datatype : foo.name
-		default : throw new IllegalStateException
-	}
+		code[Xbase][
+			switch foo {
+				Entity : foo.superType.name
+				Datatype : foo.name
+				default : throw new IllegalStateException
+			}
+		]
 	]
 	item[
-	switch x : foo.bar.complicated('hello',42) {
-		case "hello42" : ...
-		case x.length<2 : ...
-		default : ....
-	}
+		code[Xbase][
+			switch x : foo.bar.complicated('hello',42) {
+				case "hello42" : ...
+				case x.length<2 : ...
+				default : ....
+			}
+		]
 	]
 ]
 
 section2[Syntax]
 
-code[
+code[Xtext][
 XSwitchExpression:
 	'switch' (ID ':')? XExpression '{'
 		XCasePart+
@@ -531,8 +536,8 @@ XSwitchExpression:
 
 XCasePart:
 	JvmTypeReference? ('case' XExpression)? ':' XExpression );
-]
 }
+]
 
 section:Xbase_Expressions_VariableDeclaration[Variable Declarations]
 
@@ -541,11 +546,11 @@ the block. Although overriding or shadowing variables from outer scopes is allow
 used to overload the variable name 'this', in order to subsequently access an object's features in an
 unqualified manner.
 
-A variable declaration starting with the keyword code[val] denotes a so called value, which is essentially a final (i.e. unsettable) variable. In rare cases, one
-needs to update the value of a reference. In such situations the variable needs to be declared with the keyword code[var], which stands for 'variable'.
+A variable declaration starting with the keyword code[Xbase][val] denotes a so called value, which is essentially a final (i.e. unsettable) variable. In rare cases, one
+needs to update the value of a reference. In such situations the variable needs to be declared with the keyword code[Xbase][var], which stands for 'variable'.
 
-A typical example for using code[var] is a counter in a loop. 
-code[
+A typical example for using code[Xbase][var] is a counter in a loop. 
+code[Xbase][
 {
 	val max = 100
 	var i = 0
@@ -561,7 +566,7 @@ closure.
 
 section2[Syntax]
 
-code[
+code[Xtext][
 XVariableDeclaration:
 	('val' | 'var') JvmTypeReference? ID '=' XExpression;
 ]
@@ -571,13 +576,13 @@ section2[Typing]
 The return type of a variable declaration expression is always code[void]. 
 The type of the variable itself can either be explicitly declared or be inferred from the right hand side expression.
 Here is an example for an explicitly declared type:
-code[
+code[Xbase][
 	var List<String> msg = new ArrayList<String>(); 
 ]
 In such cases, the right hand expression's type must ref:Xbase_Types_ConformanceRules[conform] to the type on the left hand side. 
 
 Alternatively the type can be left out and will be inferred from the initialization expression:  
-code[
+code[Xbase][
 	var msg = new ArrayList<String>(); // -> type ArrayList<String>  
 ]
 
@@ -611,7 +616,7 @@ code[Xbase][
 
 section2[Syntax]
 
-code[
+code[Xtext][
 XBlockExpression:
 	'{'
 		(XExpressionInsideBlock ';'?)*
@@ -620,24 +625,24 @@ XBlockExpression:
 
 section:Xbase_Expressions_ForLoop[For Loop]
 
-The for loop code[for (T1 variable : iterableOfT1) expression] is used to execute a certain expression for each element of an
+The for loop code[Xbase][for (T1 variable : iterableOfT1) expression] is used to execute a certain expression for each element of an
 array of an instance of code[java.lang.Iterable].
 The local code[variable] is final, hence canot be updated. 
 
-The return type of a for loop is code[void].
+The return type of a for loop is code[Xbase][void].
 The type of the local variable can be left out. In that case it is inferred from the type of the array
 or code[java.lang.Iterable] returned by the iterable expression.
 
 ul[
 	item[
-		code[
+		code[Xbase][
 			for (String s : myStrings) {
 				doSideEffect(s);
 			}
 		]
 	]
 	item[
-		code[
+		code[Xbase][
 			for (s : myStrings)
 				doSideEffect(s)
 		]
@@ -646,7 +651,7 @@ ul[
 
 section2[Syntax]
 
-code[
+code[Xtext][
 XForExpression:
 	'for' '(' JvmFormalParameter ':' XExpression ')' 
 		XExpression
@@ -655,12 +660,12 @@ XForExpression:
 
 section:Xbase_Expressions_WhileExpression[While Loop]
 
-A while loop code[while (predicate) expression] is used to execute a certain expression unless the predicate is evaluated to code[false].
-The return type of a while loop is code[void].
+A while loop code[Xbase][while (predicate) expression] is used to execute a certain expression unless the predicate is evaluated to code[Xbase][false].
+The return type of a while loop is code[Xbase][void].
 
 section2[Syntax]
 
-code[
+code[Xtext][
 XWhileExpression:
 	'while' '(' predicate=XExpression ')'
 		body=XExpression;
@@ -669,26 +674,26 @@ XWhileExpression:
 section2[Examples]
 
 ul[
-	item[code[
-	while (true) {
-		doSideEffect("foo");
-	}
+	item[code[Xbase][
+		while (true) {
+			doSideEffect("foo");
+		}
 	]]
-	item[code[
-	while ( ( i = i + 1 ) < max ) 
-		doSideEffect( "foo" )
+	item[code[Xbase][
+		while ( ( i = i + 1 ) < max ) 
+			doSideEffect( "foo" )
 	]]
 ]
 
 section:Xbase_Expressions_DoWhileExpression[Do-While Loop]
 
-A do-while loop code[do expression while (predicate)] is used to execute a certain expression unless the predicate is evaluated to code[false].
+A do-while loop code[Xbase][do expression while (predicate)] is used to execute a certain expression unless the predicate is evaluated to code[Xbase][false].
 The difference to the ref:Xbase_Expressions_WhileExpression[while loop] is that the execution starts by executing the block once before evaluating the predicate for the first time.
-The return type of a do-while loop is code[void].
+The return type of a do-while loop is code[Xbase][void].
 
 section2[Syntax]
 
-code[
+code[Xtext][
 XDoWhileExpression:
 	'do'
 		body=XExpression
@@ -698,13 +703,13 @@ XDoWhileExpression:
 section2[Examples]
 
 ul[
-	item[code[
-	do {
-		doSideEffect("foo");
-	} while (true)
+	item[code[Xbase][
+		do {
+			doSideEffect("foo");
+		} while (true)
 	]]
-	item[code[
-	do doSideEffect("foo") while ((i=i+1)<max)
+	item[code[Xbase][
+		do doSideEffect("foo") while ((i=i+1)<max)
 	]]
 ]
 
@@ -712,9 +717,9 @@ section:Xbase_Expressions_Return[Return Expression]
 
 Although an explicit return is often not necessary, it is supported.
 In a closure for instance a return expression is always implied if the expression itself is not of type
-code[void]. Anyway you can make it explicit:
+code[Xbase][void]. Anyway you can make it explicit:
 
-code[
+code[Xbase][
 	listOfStrings.map(e| {
 		if (e==null) 
 			return "NULL"
@@ -726,7 +731,7 @@ section:Xbase_Expressions_Throw[Throwing Exceptions]
 
 Like in Java it is possible to throw code[java.lang.Throwable]. The syntax is exactly the same as in Java.
 
-code[
+code[Xbase][
 {
 	...
 	if (myList.isEmpty)
@@ -742,7 +747,7 @@ You are not forced to declare checked exceptions, if you don't catch checked exc
 in a wrapping runtime exception. 
 Other than that the syntax again is like the one known from Java.
 
-code[
+code[Xbase][
 	try {
 		throw new RuntimeException()
 	} catch (NullPointerException e) {
