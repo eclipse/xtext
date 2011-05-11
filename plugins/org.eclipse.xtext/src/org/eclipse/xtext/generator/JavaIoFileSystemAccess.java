@@ -16,12 +16,12 @@ import java.io.IOException;
  * @author Jan Koehnlein
  */
 public class JavaIoFileSystemAccess extends AbstractFileSystemAccess {
-	
+
 	public void generateFile(String fileName, String slot, CharSequence contents) {
 		String outlet = getPathes().get(slot);
-		if (outlet==null)
-			throw new IllegalArgumentException("A slot with name '"+slot+"' has not been configured.");
-		String pathName = toSystemFileName(outlet+"/"+fileName);
+		if (outlet == null)
+			throw new IllegalArgumentException("A slot with name '" + slot + "' has not been configured.");
+		String pathName = toSystemFileName(outlet + "/" + fileName);
 		File file = new File(pathName);
 		try {
 			createFolder(file.getParentFile());
@@ -32,11 +32,10 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	protected void createFolder(File parent) {
-		if(!parent.exists()) {
-			createFolder(parent.getParentFile());
-			parent.mkdir();
+		if (parent != null && !parent.exists()) {
+			parent.mkdirs();
 		}
 	}
 
