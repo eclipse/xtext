@@ -3,7 +3,7 @@ package org.eclipse.xtext.serializer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
-import org.eclipse.xtext.serializer.impl.SyntacticSequencer;
+import org.eclipse.xtext.serializer.impl.GenericSyntacticSequencer;
 
 import com.google.inject.ImplementedBy;
 
@@ -18,7 +18,7 @@ import com.google.inject.ImplementedBy;
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@ImplementedBy(SyntacticSequencer.class)
+@ImplementedBy(GenericSyntacticSequencer.class)
 public interface ISyntacticSequencer {
 
 	public interface ISyntacticSequencerOwner {
