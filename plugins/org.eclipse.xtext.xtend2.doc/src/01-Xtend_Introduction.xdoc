@@ -12,14 +12,14 @@ ul[
 	item[Powerful switch expressions - type based switching with implicit casts]
 	item[No statements - Everything is an expression]
 	item[First class support for template syntax, with intelligent whitespace handling]
-	item[injected extension methods - Enhance closed types with new functionality injected via JSR-330]
+	item[Extension methods - Enhance closed types with new functionality optionally injected via JSR-330]
 	item[property access syntax - shorthands for getter and setter access]
 	item[multiple dispatch aka polymorphic method invocation]
 	item[translates to Java not bytecode - understand what's going on and use your code for platforms such as Android or GWT]
 ]
 
 It is not aiming at replacing Java all together but meant to be used to write Guice-injected component implementations. Therefore its library is just a 
-thin layer over the Java Development Kit (JDK) and interacts with Java exactly the same as it interacts with Xtend code. Also Java can call Xtend functions 
-complete transparent way. And of course, it provides a modern Eclipse-based IDE closely integrated with the Java Development Tools (JDT).
+thin layer over the Java Development Kit (JDK) and interacts with Java exactly the same as it interacts with Xtend code. Also Java can call Xtend functions
+in a completely transparent way. And of course, it provides a modern Eclipse-based IDE closely integrated with the Java Development Tools (JDT).
 
-img[../images/Xtend_and_Java.png][Xtend and Java Vis-a-Vis][][]
+%% img[../images/Xtend_and_Java.png][Xtend and Java Vis-a-Vis][][]

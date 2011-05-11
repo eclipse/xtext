@@ -13,6 +13,7 @@ Workflow {
 		// or define search scope explicitly
 		modelPath = modelPath
 		targetDir = targetDir
+		document = "Xbase Language Reference"
 //		pdfLatex = "/usr/texbin/pdflatex"
 	}
 

@@ -11,6 +11,7 @@ Workflow {
 		// or define search scope explicitly
 		modelPath = modelPath
 		targetDir = targetDir
+		document = "Xtend Language Reference"
 //		pdfLatex = "/usr/texbin/pdflatex"
 	}
 

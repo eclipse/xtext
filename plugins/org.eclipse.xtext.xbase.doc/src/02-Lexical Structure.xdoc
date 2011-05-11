@@ -19,7 +19,7 @@ In such cases you use an escaped identifier code[^service] to reference the Java
 
 section2[Syntax]
 
-code[
+code[Xtext][
 terminal ID: 
 	'^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*
 ;
@@ -74,7 +74,7 @@ There is no negative integer literal, instead the expression code[-23] is parsed
 
 section2[Syntax]
 
-code[
+code[Xtext][
 terminal INT returns ecore::EInt: 
 	('0'..'9')+
 ;
@@ -87,7 +87,7 @@ The syntax is the same as the one known from Java (see link[http://java.sun.com/
 
 section2[Syntax]
 
-code[
+code[Xtext][
 terminal ML_COMMENT	: 
 	'/*' -> '*/'
 ;
@@ -104,29 +104,29 @@ section:Xbase_Syntax_Keywords[Reserved Keywords]
 
 The following list of words are reserved keywords, thus reducing the set of possible identifiers:
 ol[
-	item[code[extends]]
-	item[code[super]]
-	item[code[instanceof]]
-	item[code[as]]
-	item[code[new]]
-	item[code[null]]
-	item[code[false]]
-	item[code[true]]
-	item[code[val]]
-	item[code[var]]
-	item[code[if]]
-	item[code[else]]
-	item[code[switch]]
-	item[code[case]]
-	item[code[default]]
-	item[code[do]]
-	item[code[while]]
-	item[code[for]]
-	item[code[typeof]]
-	item[code[throw]]
-	item[code[try]]
-	item[code[catch]]
-	item[code[finally]]
+	item[code[Xbase][extends]]
+	item[code[Xbase][super]]
+	item[code[Xbase][instanceof]]
+	item[code[Xbase][as]]
+	item[code[Xbase][new]]
+	item[code[Xbase][null]]
+	item[code[Xbase][false]]
+	item[code[Xbase][true]]
+	item[code[Xbase][val]]
+	item[code[Xbase][var]]
+	item[code[Xbase][if]]
+	item[code[Xbase][else]]
+	item[code[Xbase][switch]]
+	item[code[Xbase][case]]
+	item[code[Xbase][default]]
+	item[code[Xbase][do]]
+	item[code[Xbase][while]]
+	item[code[Xbase][for]]
+	item[code[Xbase][typeof]]
+	item[code[Xbase][throw]]
+	item[code[Xbase][try]]
+	item[code[Xbase][catch]]
+	item[code[Xbase][finally]]
 ]
 
 However, in case some of the keywords have to be used as identifiers, the escape character for ref:Xbase_Syntax_EscapedIdentifiers[identifiers] comes in handy. 
