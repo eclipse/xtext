@@ -39,7 +39,7 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer, ISemanticSequenceAcceptor {
 
-	protected class SyntacticalContext {
+	protected static class SyntacticalContext {
 
 		protected EObject context;
 
@@ -143,122 +143,79 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 
 	public void acceptAssignedCrossRefDatatype(RuleCall datatypeRC, String token, EObject value, int index,
 			ICompositeNode node) {
-		SyntacticalContext i = contexts.peek();
-		i.lastState = transitionBegin(i.context, i.semanticObject, i.lastState, i.getLastNode(), datatypeRC, node,
-				i.stack);
-		transition(i.lastState, i.getLastNode(), node, i.stack);
-		i.lastState = transitionFinish(i.lastState, i.getLastNode(), null, i.stack);
-		i.setLastNode(node);
+		navigateToAbsorber(datatypeRC, node);
 		delegate.acceptAssignedCrossRefDatatype(datatypeRC, token, value, index, node);
 	}
 
 	public void acceptAssignedCrossRefEnum(RuleCall enumRC, String token, EObject value, int index, ICompositeNode node) {
-		SyntacticalContext i = contexts.peek();
-		i.lastState = transitionBegin(i.context, i.semanticObject, i.lastState, i.getLastNode(), enumRC, node, i.stack);
-		transition(i.lastState, i.getLastNode(), node, i.stack);
-		i.lastState = transitionFinish(i.lastState, i.getLastNode(), null, i.stack);
-		i.setLastNode(node);
+		navigateToAbsorber(enumRC, node);
 		delegate.acceptAssignedCrossRefEnum(enumRC, token, value, index, node);
 	}
 
 	public void acceptAssignedCrossRefTerminal(RuleCall terminalRC, String token, EObject value, int index,
 			ILeafNode node) {
-		SyntacticalContext i = contexts.peek();
-		i.lastState = transitionBegin(i.context, i.semanticObject, i.lastState, i.getLastNode(), terminalRC, node,
-				i.stack);
-		transition(i.lastState, i.getLastNode(), node, i.stack);
-		i.lastState = transitionFinish(i.lastState, i.getLastNode(), node, i.stack);
-		i.setLastNode(node);
+		navigateToAbsorber(terminalRC, node);
 		delegate.acceptAssignedCrossRefTerminal(terminalRC, token, value, index, node);
 	}
 
 	public void acceptAssignedDatatype(RuleCall datatypeRC, String token, Object value, int index, ICompositeNode node) {
-		SyntacticalContext i = contexts.peek();
-		i.lastState = transitionBegin(i.context, i.semanticObject, i.lastState, i.getLastNode(), datatypeRC, node,
-				i.stack);
-		transition(i.lastState, i.getLastNode(), node, i.stack);
-		i.lastState = transitionFinish(i.lastState, i.getLastNode(), node, i.stack);
-		i.setLastNode(node);
+		navigateToAbsorber(datatypeRC, node);
 		delegate.acceptAssignedDatatype(datatypeRC, token, value, index, node);
 	}
 
 	public void acceptAssignedEnum(RuleCall enumRC, String token, Object value, int index, ICompositeNode node) {
-		SyntacticalContext i = contexts.peek();
-		i.lastState = transitionBegin(i.context, i.semanticObject, i.lastState, i.getLastNode(), enumRC, node, i.stack);
-		transition(i.lastState, i.getLastNode(), node, i.stack);
-		i.lastState = transitionFinish(i.lastState, i.getLastNode(), node, i.stack);
-		i.setLastNode(node);
+		navigateToAbsorber(enumRC, node);
 		delegate.acceptAssignedEnum(enumRC, token, value, index, node);
 	}
 
 	public void acceptAssignedKeyword(Keyword keyword, String token, Boolean value, int index, ILeafNode node) {
-		SyntacticalContext i = contexts.peek();
-		i.lastState = transitionBegin(i.context, i.semanticObject, i.lastState, i.getLastNode(), keyword, node, i.stack);
-		transition(i.lastState, i.getLastNode(), node, i.stack);
-		i.lastState = transitionFinish(i.lastState, i.getLastNode(), node, i.stack);
-		i.setLastNode(node);
+		navigateToAbsorber(keyword, node);
 		delegate.acceptAssignedKeyword(keyword, token, value, index, node);
 	}
 
 	public void acceptAssignedKeyword(Keyword keyword, String token, String value, int index, ILeafNode node) {
-		SyntacticalContext i = contexts.peek();
-		i.lastState = transitionBegin(i.context, i.semanticObject, i.lastState, i.getLastNode(), keyword, node, i.stack);
-		transition(i.lastState, i.getLastNode(), node, i.stack);
-		i.lastState = transitionFinish(i.lastState, i.getLastNode(), node, i.stack);
-		i.setLastNode(node);
+		navigateToAbsorber(keyword, node);
 		delegate.acceptAssignedKeyword(keyword, token, value, index, node);
 	}
 
 	public void acceptAssignedTerminal(RuleCall terminalRC, String token, Object value, int index, ILeafNode node) {
-		SyntacticalContext i = contexts.peek();
-		i.lastState = transitionBegin(i.context, i.semanticObject, i.lastState, i.getLastNode(), terminalRC, node,
-				i.stack);
-		transition(i.lastState, i.getLastNode(), node, i.stack);
-		i.lastState = transitionFinish(i.lastState, i.getLastNode(), null, i.stack);
-		i.setLastNode(node);
+		navigateToAbsorber(terminalRC, node);
 		delegate.acceptAssignedTerminal(terminalRC, token, value, index, node);
 	}
 
 	public void acceptUnassignedAction(Action action) {
 		SyntacticalContext i = contexts.peek();
-		i.lastState = transition(i.lastState, i.getLastNode(), action, null, i.stack);
+		i.lastState = navigateToEmitter(i.lastState, i.getLastNode(), action, null, i.stack);
 		delegate.acceptUnassignedAction(action);
 	}
 
 	public void acceptUnassignedDatatype(RuleCall datatypeRC, String value, ICompositeNode node) {
-		SyntacticalContext i = contexts.peek();
-		i.lastState = transition(i.lastState, i.getLastNode(), datatypeRC, node, i.stack);
-		i.setLastNode(node);
+		navigateToEmitter(datatypeRC, node);
 		delegate.acceptUnassignedDatatype(datatypeRC, value, node);
 	}
 
 	public void acceptUnassignedEnum(RuleCall enumRC, String value, ICompositeNode node) {
-		SyntacticalContext i = contexts.peek();
-		i.lastState = transition(i.lastState, i.getLastNode(), enumRC, node, i.stack);
-		i.setLastNode(node);
+		navigateToEmitter(enumRC, node);
 		delegate.acceptUnassignedEnum(enumRC, value, node);
 	}
 
 	public void acceptUnassignedKeyword(Keyword keyword, ILeafNode node) {
-		SyntacticalContext i = contexts.peek();
-		i.lastState = transition(i.lastState, i.getLastNode(), keyword, node, i.stack);
-		i.setLastNode(node);
+		navigateToEmitter(keyword, node);
 		delegate.acceptUnassignedKeyword(keyword, node);
 	}
 
 	public void acceptUnassignedTerminal(RuleCall terminalRC, String value, ILeafNode node) {
-		SyntacticalContext i = contexts.peek();
-		i.lastState = transition(i.lastState, i.getLastNode(), terminalRC, node, i.stack);
-		i.setLastNode(node);
+		navigateToEmitter(terminalRC, node);
 		delegate.acceptUnassignedTerminal(terminalRC, value, node);
 	}
 
+	protected void emitOptionalTokens(ISynFollowerOwner fromState, INode fromNode, INode toNode, RuleCallStack stack) {
+		if (fromState instanceof ISynTransition)
+			transition((ISynTransition) fromState, fromNode, toNode, stack);
+	}
+
 	public boolean enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
-		SyntacticalContext i = contexts.peek();
-		i.lastState = transitionBegin(i.context, i.semanticObject, i.lastState, i.getLastNode(), action, node, i.stack);
-		transition(i.lastState, i.getLastNode(), node, i.stack);
-		i.lastState = transitionFinish(i.lastState, i.getLastNode(), node, i.stack);
-		i.setLastNode(getLastLeaf(node));
+		navigateToAbsorber(action, node);
 		boolean shouldEnter = delegate.enterAssignedAction(action, semanticChild, node);
 		if (shouldEnter) {
 			ISynAbsorberState pda = pdaProvider.getPDA(action, semanticChild.eClass());
@@ -269,11 +226,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 	}
 
 	public boolean enterAssignedParserRuleCall(RuleCall rc, EObject semanticChild, ICompositeNode node) {
-		SyntacticalContext i = contexts.peek();
-		i.lastState = transitionBegin(i.context, i.semanticObject, i.lastState, i.getLastNode(), rc, node, i.stack);
-		transition(i.lastState, i.getLastNode(), node, i.stack);
-		i.lastState = transitionFinish(i.lastState, i.getLastNode(), node, i.stack);
-		i.setLastNode(getLastLeaf(node));
+		navigateToAbsorber(rc, node);
 		boolean shouldEnter = delegate.enterAssignedParserRuleCall(rc, semanticChild, node);
 		if (shouldEnter) {
 			ISynAbsorberState pda = pdaProvider.getPDA(rc.getRule(), semanticChild.eClass());
@@ -283,11 +236,26 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		return shouldEnter;
 	}
 
+	protected ISynTransition findTransition(EObject context, EObject semanticObject, ISynFollowerOwner fromState,
+			INode fromNode, AbstractElement toEle, INode toNode, RuleCallStack stack) {
+		if (fromState == null)
+			return null;
+		if (fromState instanceof ISynAbsorberState) {
+			ISynAbsorberState fromAbsorber = (ISynAbsorberState) fromState;
+			ISynTransition transition = fromAbsorber.getOutTransitionsByElement().get(toEle);
+			if (transition == null) {
+				if (errorAcceptor != null)
+					errorAcceptor.accept(diagnosticProvider.createInvalidFollowingAbsorberDiagnostic(context,
+							semanticObject, fromAbsorber, toEle));
+				return null;
+			}
+			return transition;
+		}
+		return null;
+	}
+
 	public void finish() {
-		SyntacticalContext i = contexts.peek();
-		i.lastState = transitionBegin(i.context, i.semanticObject, i.lastState, null, null, null, i.stack);
-		transition(i.lastState, i.getLastNode(), i.getLastNode(), i.stack);
-		i.lastState = transitionFinish(i.lastState, i.getLastNode(), null, i.stack);
+		navigateToAbsorber(null, null);
 		delegate.finish();
 	}
 
@@ -313,17 +281,39 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		contexts.pop();
 	}
 
-	//	public ISemanticSequenceAcceptor createAcceptor(EObject ctx, EObject semanticRoot, INode previousNode,
-	//			ISyntacticSequenceAcceptor constructor, ISerializationDiagnostic.Acceptor errorAcceptor) {
-	//		ISynAbsorberState startState = getStartState(ctx);
-	//		return new SemAcceptor(ctx, startState, previousNode, constructor, errorAcceptor);
-	//	}
-
 	public void leaveAssignedParserRuleCall(RuleCall rc, EObject semanticChild) {
 		contexts.pop();
 	}
 
-	protected ISynFollowerOwner transition(ISynFollowerOwner fromState, INode fromNode, AbstractElement toEle,
+	protected void navigateToAbsorber(AbstractElement ele, INode node) {
+		SyntacticalContext i = contexts.peek();
+		i.lastState = findTransition(i.context, i.semanticObject, i.lastState, i.getLastNode(), ele, node, i.stack);
+		emitOptionalTokens(i.lastState, i.getLastNode(), node, i.stack);
+		i.lastState = navigateToAbsorber(i.lastState, i.getLastNode(), null, i.stack);
+		i.setLastNode(getLastLeaf(node));
+	}
+
+	protected ISynAbsorberState navigateToAbsorber(ISynFollowerOwner fromState, INode fromNode, INode toNode,
+			RuleCallStack stack) {
+		if (fromState instanceof ISynAbsorberState)
+			return (ISynAbsorberState) fromState;
+		if (fromState instanceof ISynNavigable) {
+			ISynNavigable fromEmitter = (ISynNavigable) fromState;
+			//			RCStack back = stack.clone();
+			if (fromEmitter.hasEmitters())
+				accept(fromNode, fromEmitter.getShortestPathToAbsorber(stack), stack);
+			return fromEmitter.getTarget();
+		}
+		return null;
+	}
+
+	protected void navigateToEmitter(AbstractElement ele, INode node) {
+		SyntacticalContext i = contexts.peek();
+		i.lastState = navigateToEmitter(i.lastState, i.getLastNode(), ele, node, i.stack);
+		i.setLastNode(node);
+	}
+
+	protected ISynFollowerOwner navigateToEmitter(ISynFollowerOwner fromState, INode fromNode, AbstractElement toEle,
 			INode toNode, RuleCallStack stack) {
 		if (fromState instanceof ISynAbsorberState)
 			return fromState;
@@ -345,43 +335,6 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		return null;
 	}
 
-	protected void transition(ISynFollowerOwner fromState, INode fromNode, INode toNode, RuleCallStack stack) {
-		if (fromState instanceof ISynTransition)
-			transition((ISynTransition) fromState, fromNode, toNode, stack);
-	}
-
 	protected abstract void transition(ISynTransition transition, INode fromNode, INode toNode, RuleCallStack stack);
-
-	protected ISynNavigable transitionBegin(EObject context, EObject semanticObject, ISynFollowerOwner fromState,
-			INode fromNode, AbstractElement toEle, INode toNode, RuleCallStack stack) {
-		if (fromState == null)
-			return null;
-		if (fromState instanceof ISynAbsorberState) {
-			ISynAbsorberState fromAbsorber = (ISynAbsorberState) fromState;
-			ISynTransition transition = fromAbsorber.getOutTransitionsByElement().get(toEle);
-			if (transition == null) {
-				if (errorAcceptor != null)
-					errorAcceptor.accept(diagnosticProvider.createInvalidFollowingAbsorberDiagnostic(context,
-							semanticObject, fromAbsorber, toEle));
-				return null;
-			}
-			return transition;
-		}
-		return null;
-	}
-
-	protected ISynAbsorberState transitionFinish(ISynFollowerOwner fromState, INode fromNode, INode toNode,
-			RuleCallStack stack) {
-		if (fromState instanceof ISynAbsorberState)
-			return (ISynAbsorberState) fromState;
-		if (fromState instanceof ISynNavigable) {
-			ISynNavigable fromEmitter = (ISynNavigable) fromState;
-			//			RCStack back = stack.clone();
-			if (fromEmitter.hasEmitters())
-				accept(fromNode, fromEmitter.getShortestPathToAbsorber(stack), stack);
-			return fromEmitter.getTarget();
-		}
-		return null;
-	}
 
 }
