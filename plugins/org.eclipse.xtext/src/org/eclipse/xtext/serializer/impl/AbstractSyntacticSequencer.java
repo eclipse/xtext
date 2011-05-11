@@ -13,8 +13,11 @@ import java.util.Stack;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -22,6 +25,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.serializer.ISyntacticSequencer;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynAbsorberState;
+import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynEmitterState;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynFollowerOwner;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
@@ -66,6 +70,40 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 
 		protected void setLastNode(INode lastNode) {
 			this.lastNode = lastNode;
+		}
+	}
+
+	protected void acceptNode(INode node) {
+		Object ge = node.getGrammarElement();
+		if (ge instanceof Keyword)
+			acceptUnassignedKeyword((Keyword) ge, (ILeafNode) node);
+		else if (ge instanceof RuleCall) {
+			RuleCall rc = (RuleCall) ge;
+			if (rc.getRule() instanceof TerminalRule)
+				acceptUnassignedTerminal(rc, node.getText(), (ILeafNode) node);
+			else if (rc.getRule() instanceof ParserRule)
+				acceptUnassignedDatatype(rc, node.getText(), (ICompositeNode) node);
+			else if (rc.getRule() instanceof EnumRule)
+				acceptUnassignedEnum(rc, node.getText(), (ICompositeNode) node);
+		} else if (ge instanceof Action)
+			acceptUnassignedAction((Action) ge);
+		else
+			throw new RuntimeException("Unexpected grammar element: " + node.getGrammarElement());
+	}
+
+	protected void acceptNodes(ISynNavigable fromState, INode fromNode, INode toNode) {
+		RuleCallStack stack = contexts.peek().stack.clone();
+		EmitterNodeIterator ni = new EmitterNodeIterator(fromNode, toNode, false, false);
+		while (ni.hasNext()) {
+			INode next = ni.next();
+			List<ISynState> path = fromState.getShortestPathTo((AbstractElement) next.getGrammarElement(), stack, true);
+			if (path != null) {
+				if (path.get(path.size() - 1) instanceof ISynEmitterState)
+					fromState = (ISynEmitterState) path.get(path.size() - 1);
+				else
+					return;
+				acceptNode(next);
+			}
 		}
 	}
 
@@ -115,12 +153,12 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 				return;
 			case UNASSIGNED_DATATYPE_RULE_CALL:
 				RuleCall rc3 = (RuleCall) emitter.getGrammarElement();
-				String value3 = getUnassignedRuleCallValue(rc3, node);
+				String value3 = getUnassignedRuleCallToken(rc3, node);
 				delegate.acceptUnassignedDatatype(rc3, value3, (ICompositeNode) node);
 				return;
 			case UNASSIGNED_TERMINAL_RULE_CALL:
 				RuleCall rc4 = (RuleCall) emitter.getGrammarElement();
-				String value4 = getUnassignedRuleCallValue(rc4, node);
+				String value4 = getUnassignedRuleCallToken(rc4, node);
 				delegate.acceptUnassignedTerminal(rc4, value4, (ILeafNode) node);
 				return;
 			case ASSIGNED_ACTION_CALL:
@@ -209,11 +247,6 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		delegate.acceptUnassignedTerminal(terminalRC, value, node);
 	}
 
-	protected void emitOptionalTokens(ISynFollowerOwner fromState, INode fromNode, INode toNode, RuleCallStack stack) {
-		if (fromState instanceof ISynTransition)
-			transition((ISynTransition) fromState, fromNode, toNode, stack);
-	}
-
 	public boolean enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
 		navigateToAbsorber(action, node);
 		boolean shouldEnter = delegate.enterAssignedAction(action, semanticChild, node);
@@ -266,7 +299,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		return result != null ? result : node;
 	}
 
-	protected abstract String getUnassignedRuleCallValue(RuleCall ruleCall, INode node);
+	protected abstract String getUnassignedRuleCallToken(RuleCall ruleCall, INode node);
 
 	public void init(EObject context, EObject semanticObject, ISyntacticSequenceAcceptor sequenceAcceptor,
 			Acceptor errorAcceptor) {
@@ -286,11 +319,12 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 	}
 
 	protected void navigateToAbsorber(AbstractElement ele, INode node) {
-		SyntacticalContext i = contexts.peek();
-		i.lastState = findTransition(i.context, i.semanticObject, i.lastState, i.getLastNode(), ele, node, i.stack);
-		emitOptionalTokens(i.lastState, i.getLastNode(), node, i.stack);
-		i.lastState = navigateToAbsorber(i.lastState, i.getLastNode(), null, i.stack);
-		i.setLastNode(getLastLeaf(node));
+		SyntacticalContext ctx = contexts.peek();
+		ctx.lastState = findTransition(ctx.context, ctx.semanticObject, ctx.lastState, ctx.getLastNode(), ele, node,
+				ctx.stack);
+		emitUnassignedTokens((ISynTransition) ctx.lastState, ctx.getLastNode(), node);
+		ctx.lastState = navigateToAbsorber(ctx.lastState, ctx.getLastNode(), null, ctx.stack);
+		ctx.setLastNode(getLastLeaf(node));
 	}
 
 	protected ISynAbsorberState navigateToAbsorber(ISynFollowerOwner fromState, INode fromNode, INode toNode,
@@ -308,9 +342,9 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 	}
 
 	protected void navigateToEmitter(AbstractElement ele, INode node) {
-		SyntacticalContext i = contexts.peek();
-		i.lastState = navigateToEmitter(i.lastState, i.getLastNode(), ele, node, i.stack);
-		i.setLastNode(node);
+		SyntacticalContext ctx = contexts.peek();
+		ctx.lastState = navigateToEmitter(ctx.lastState, ctx.getLastNode(), ele, node, ctx.stack);
+		ctx.setLastNode(node);
 	}
 
 	protected ISynFollowerOwner navigateToEmitter(ISynFollowerOwner fromState, INode fromNode, AbstractElement toEle,
@@ -335,6 +369,6 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		return null;
 	}
 
-	protected abstract void transition(ISynTransition transition, INode fromNode, INode toNode, RuleCallStack stack);
+	protected abstract void emitUnassignedTokens(ISynTransition transition, INode fromNode, INode toNode);
 
 }
