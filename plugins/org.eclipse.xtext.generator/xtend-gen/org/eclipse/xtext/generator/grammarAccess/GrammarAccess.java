@@ -14,7 +14,9 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class GrammarAccess {
-  @Inject private Naming naming;
+  
+  @Inject
+  private Naming naming;
   
   public String gaFullAccessor(final AbstractElement ele) {
     Grammar _grammar = GrammarUtil.getGrammar(ele);

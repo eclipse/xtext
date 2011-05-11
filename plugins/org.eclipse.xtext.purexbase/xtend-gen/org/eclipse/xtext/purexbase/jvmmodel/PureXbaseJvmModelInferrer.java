@@ -11,7 +11,9 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 
 @SuppressWarnings("all")
 public class PureXbaseJvmModelInferrer implements IJvmModelInferrer {
-  @Inject private IJvmModelAssociator jvmModelAssociator;
+  
+  @Inject
+  private IJvmModelAssociator jvmModelAssociator;
   
   public List<? extends JvmDeclaredType> inferJvmModel(final EObject sourceObject) {
     ArrayList<JvmDeclaredType> _newArrayList = CollectionLiterals.<JvmDeclaredType>newArrayList();

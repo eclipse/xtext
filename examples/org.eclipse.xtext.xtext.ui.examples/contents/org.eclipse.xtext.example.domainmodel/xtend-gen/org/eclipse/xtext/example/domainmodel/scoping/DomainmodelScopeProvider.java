@@ -28,7 +28,9 @@ import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 
 @SuppressWarnings("all")
 public class DomainmodelScopeProvider extends XbaseScopeProvider {
-  @Inject private IJvmModelAssociations associations;
+  
+  @Inject
+  private IJvmModelAssociations associations;
   
   public IScope createLocalVarScope(final EObject context, final EReference reference, final IScope parent, final boolean includeCurrentBlock, final int idx) {
     {

@@ -44,10 +44,18 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class AbstractSemanticSequencer extends GeneratedFile {
-  @Inject private Grammar grammar;
-  @Inject private GrammarAccess grammarAccess;
-  @Inject private SemanticSequencerUtil sequencerUtil;
-  @Inject private SemanticSequencer sequencer;
+  
+  @Inject
+  private Grammar grammar;
+  
+  @Inject
+  private GrammarAccess grammarAccess;
+  
+  @Inject
+  private SemanticSequencerUtil sequencerUtil;
+  
+  @Inject
+  private SemanticSequencer sequencer;
   
   public String getQualifiedName(final Grammar grammar) {
     String _name = this.getName(grammar, "Abstract", "SemanticSequencer");

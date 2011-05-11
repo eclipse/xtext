@@ -22,7 +22,9 @@ import org.junit.runner.RunWith;
 @RunWith(XtextRunner.class)
 @InjectWith(InjectorProviderCustom.class)
 public class ParserTest {
-  @Inject private ParseHelper<DomainModel> parser;
+  
+  @Inject
+  private ParseHelper<DomainModel> parser;
   
   @Test
   public void testParsing() throws Exception {

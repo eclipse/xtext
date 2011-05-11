@@ -21,10 +21,18 @@ import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
 public class SerializerFragment extends Xtend2GeneratorFragment {
-  @Inject private AbstractSemanticSequencer abstractSemanticSequencer;
-  @Inject private SemanticSequencer semanticSequencer;
-  @Inject private GrammarConstraints grammarConstraints;
-  @Inject private Context2DotRenderer dotRenderer;
+  
+  @Inject
+  private AbstractSemanticSequencer abstractSemanticSequencer;
+  
+  @Inject
+  private SemanticSequencer semanticSequencer;
+  
+  @Inject
+  private GrammarConstraints grammarConstraints;
+  
+  @Inject
+  private Context2DotRenderer dotRenderer;
   
   private final HashMap<ArrayList<?>,SerializerFragmentState> _createCache_state = new HashMap<ArrayList<?>,SerializerFragmentState>();
   

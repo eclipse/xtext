@@ -37,10 +37,18 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
-  @Inject private TypesFactory typesFactory;
-  @Inject private IJvmModelAssociator jvmModelAssociator;
-  @Inject private JvmVisibilityExtension jvmVisibilityExtension;
-  @Inject private DomainmodelExtensions domainmodelExtensions;
+  
+  @Inject
+  private TypesFactory typesFactory;
+  
+  @Inject
+  private IJvmModelAssociator jvmModelAssociator;
+  
+  @Inject
+  private JvmVisibilityExtension jvmVisibilityExtension;
+  
+  @Inject
+  private DomainmodelExtensions domainmodelExtensions;
   
   public List<JvmDeclaredType> inferJvmModel(final EObject sourceObject) {
     List<JvmDeclaredType> _xblockexpression = null;

@@ -24,8 +24,12 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class PureXbaseGenerator implements IGenerator {
-  @Inject private XbaseCompiler compiler;
-  @Inject private TypeReferences typeReferences;
+  
+  @Inject
+  private XbaseCompiler compiler;
+  
+  @Inject
+  private TypeReferences typeReferences;
   
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
     String _name = this.name(resource);

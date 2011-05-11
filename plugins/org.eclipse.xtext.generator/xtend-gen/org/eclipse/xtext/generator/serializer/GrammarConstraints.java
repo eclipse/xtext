@@ -16,8 +16,12 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class GrammarConstraints extends GeneratedFile {
-  @Inject private Grammar grammar;
-  @Inject private SemanticSequencerUtil sequencerUtil;
+  
+  @Inject
+  private Grammar grammar;
+  
+  @Inject
+  private SemanticSequencerUtil sequencerUtil;
   
   public String getFileExtension() {
     return "xtext";

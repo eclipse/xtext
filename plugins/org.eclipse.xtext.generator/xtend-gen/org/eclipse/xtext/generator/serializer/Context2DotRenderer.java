@@ -20,10 +20,18 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class Context2DotRenderer {
-  @Inject private IContextProvider contextProvider;
-  @Inject private Grammar grammar;
-  @Inject private Naming naming;
-  @Inject private Context2NameFunction nameFunction;
+  
+  @Inject
+  private IContextProvider contextProvider;
+  
+  @Inject
+  private Grammar grammar;
+  
+  @Inject
+  private Naming naming;
+  
+  @Inject
+  private Context2NameFunction nameFunction;
   
   public Iterable<SequencerPDAContext> types(final EObject ctx) {
     Set<EClass> _typesForContext = this.contextProvider.getTypesForContext(ctx);

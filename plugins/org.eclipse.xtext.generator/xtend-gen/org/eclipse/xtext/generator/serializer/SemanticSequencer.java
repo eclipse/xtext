@@ -8,7 +8,9 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class SemanticSequencer extends GeneratedFile {
-  @Inject private AbstractSemanticSequencer sequencer;
+  
+  @Inject
+  private AbstractSemanticSequencer sequencer;
   
   public String getQualifiedName(final Grammar grammar) {
     String _name = this.getName(grammar, "", "SemanticSequencer");

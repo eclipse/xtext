@@ -7,8 +7,12 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class GeneratedFile {
-  @Inject private Grammar grammar;
-  @Inject private Naming naming;
+  
+  @Inject
+  private Grammar grammar;
+  
+  @Inject
+  private Naming naming;
   
   public String getName(final Grammar grammar, final String prefix, final String component) {
     String _basePackageRuntime = this.naming.basePackageRuntime(grammar);
