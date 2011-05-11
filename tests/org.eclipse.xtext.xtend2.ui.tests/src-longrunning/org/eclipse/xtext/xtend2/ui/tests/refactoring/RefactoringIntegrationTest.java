@@ -74,31 +74,32 @@ public class RefactoringIntegrationTest extends AbstractXtend2UITestCase {
 	}
 
 	public void testRenameMethod() throws Exception {
-		performRenameTest("Foo", "class Foo { def Integer foo() { foo(); 1 }}", "Bar",
+		performRenameTestWithReferringFile("Foo", "Foo", "class Foo { def Integer foo() { foo(); 1 }}", "Bar",
 				"class Baz { def baz(Foo arg) {arg.foo()} }", "foo", "bar");
 	}
 
 	public void testRenameClass() throws Exception {
-		performRenameTest("Foo", "class Foo { def Foo foo() {this} }", "Baz", "class Baz { def Foo foo() {new Foo()} }", "Foo",
+		performRenameTestWithReferringFile("Foo", "Bar", "class Foo { def Foo foo() {this} }", "Baz", "class Baz { def Foo foo() {new Foo()} }", "Foo",
 				"Bar");
 	}
 
 	protected void performRenameTest(String fileName, String originalContents, String oldName, String newName)
 			throws Exception {
 		IFile file = testHelper.createFile(fileName, originalContents);
-		performRenameTest(file, originalContents, oldName, newName);
+		performRenameTest(file, originalContents, oldName, newName, file);
 	}
 
-	protected void performRenameTest(String fileName, String originalContents, String referringFileName,
+	protected void performRenameTestWithReferringFile(String fileName, String newFileName, String originalContents, String referringFileName,
 			String referringFileContents, String oldName, String newName) throws Exception {
 		IFile file = testHelper.createFile(fileName, originalContents);
+		IFile newFile = testHelper.getFile(newFileName);
 		IFile referringFile = testHelper.createFile(referringFileName, referringFileContents);
-		performRenameTest(file, originalContents, oldName, newName);
+		performRenameTest(file, originalContents, oldName, newName, newFile);
 		String refferingFileContentsAfterRename = testHelper.getContents(referringFile);
 		assertEquals(referringFileContents.replace(oldName, newName), refferingFileContentsAfterRename);
 	}
 
-	protected void performRenameTest(IFile file, String originalContents, String oldName, String newName)
+	protected void performRenameTest(IFile file, String originalContents, String oldName, String newName, IFile newFile)
 			throws Exception {
 		IResourcesSetupUtil.waitForAutoBuild();
 		ResourceSet resourceSet = resourceSetProvider.get(file.getProject());
@@ -106,7 +107,7 @@ public class RefactoringIntegrationTest extends AbstractXtend2UITestCase {
 				testHelper.uri(file), true);
 		EObject target = eObjectAtOffsetHelper.resolveElementAt(resource, originalContents.indexOf(oldName));
 		doRename(target, newName);
-		String contentsAfterRename = testHelper.getContents(file);
+		String contentsAfterRename = testHelper.getContents(newFile);
 		assertEquals(originalContents.replace(oldName, newName), contentsAfterRename);
 	}
 

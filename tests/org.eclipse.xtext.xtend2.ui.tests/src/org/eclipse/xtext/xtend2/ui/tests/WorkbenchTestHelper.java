@@ -27,6 +27,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -122,11 +123,21 @@ public class WorkbenchTestHelper extends Assert {
 	}
 
 	public IFile createFile(String fileName, String content) throws Exception {
-		String extension = (fileName.indexOf(".") != -1) ? "" : "." + getFileExtension();
-		IFile file = IResourcesSetupUtil.createFile(TESTPROJECT_NAME + "/src/" + fileName + extension,
+		String fullFileName = getFullFileName(fileName);
+		IFile file = IResourcesSetupUtil.createFile(fullFileName,
 				content);
 		getFiles().add(file);
 		return file;
+	}
+	
+	public IFile getFile(String fileName) {
+		return workspace.getRoot().getFile(new Path(getFullFileName(fileName)));
+	}
+
+	protected String getFullFileName(String fileName) {
+		String extension = (fileName.indexOf(".") != -1) ? "" : "." + getFileExtension();
+		String fullFileName = TESTPROJECT_NAME + "/src/" + fileName + extension;
+		return fullFileName;
 	}
 	
 	public String getFileExtension() {
