@@ -24,8 +24,12 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class DomainmodelGenerator implements IGenerator {
-  @Inject private GeneratorExtensions generatorExtensions;
-  @Inject private DomainmodelCompiler domainmodelCompiler;
+  
+  @Inject
+  private GeneratorExtensions generatorExtensions;
+  
+  @Inject
+  private DomainmodelCompiler domainmodelCompiler;
   
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
     Iterable<EObject> _allContentsIterable = ResourceExtensions.allContentsIterable(resource);
