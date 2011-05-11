@@ -58,17 +58,17 @@ public class CompilationFileProvider {
 		if(sourceClasspathRelativePath == null) 
 			sourceClasspathRelativePath = sourceFile.getProjectRelativePath();
 		IPath targetClasspathRelativePath = sourceClasspathRelativePath.removeFileExtension().addFileExtension(TARGET_FILE_EXTENSION);
-		IFile targetFile = getTargetFolder(project, monitor).getFile(targetClasspathRelativePath);
+		IFolder targetFolder = getTargetFolder(project, monitor);
+		if(!targetFolder.exists()) {
+			targetFolder.create(true, true, monitor);
+			makeSrcFolder(targetFolder, JavaCore.create(project)); 
+		}
+		IFile targetFile = targetFolder.getFile(targetClasspathRelativePath);
 		return targetFile;
 	}
 	
 	public IFolder getTargetFolder(IProject project, SubMonitor monitor) throws CoreException {
-		IJavaProject javaProject = getJavaProject(project);
-		IFolder targetFolder = javaProject.getProject().getFolder(getTargetFolderName());
-		if(!targetFolder.exists()) {
-			targetFolder.create(true, true, monitor);
-			makeSrcFolder(targetFolder, javaProject); 
-		}
+		IFolder targetFolder = project.getFolder(getTargetFolderName());
 		return targetFolder;
 	}
 	
