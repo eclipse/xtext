@@ -55,8 +55,12 @@ public class CompilationFileProviderTest extends AbstractXtend2UITestCase {
 		}
 		IJavaProject javaProject = makeJavaProject(project);
 		IFolder targetFolder = compilationFileProvider.getTargetFolder(project, null);
-		assertTrue(targetFolder.exists());
+		assertFalse("don't create empty target folder", targetFolder.exists());
 		assertEquals(compilationFileProvider.getTargetFolderName(), targetFolder.getName());
+		
+		compilationFileProvider.getTargetFile(URI.createURI("platform:/resource/" + project.getName() + "/sample.xtend"), project, null);
+		
+		assertTrue("create target folder on demand", targetFolder.exists());
 		IPackageFragmentRoot packageFragmentRoot = javaProject.getPackageFragmentRoot(targetFolder);
 		assertNotNull(packageFragmentRoot);
 		assertEquals(targetFolder.getFullPath(), packageFragmentRoot.getPath());
