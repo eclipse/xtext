@@ -61,6 +61,8 @@ public abstract class AbstractTypeScope extends AbstractScope {
 			return result;
 		} catch (TypeNotFoundException e) {
 			return null;
+		} catch (IllegalArgumentException e) {
+			return null;
 		}
 	}
 	
