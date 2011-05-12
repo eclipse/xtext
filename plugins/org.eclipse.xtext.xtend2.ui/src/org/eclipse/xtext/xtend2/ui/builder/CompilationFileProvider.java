@@ -68,6 +68,9 @@ public class CompilationFileProvider {
 	}
 	
 	public IFolder getTargetFolder(IProject project, SubMonitor monitor) throws CoreException {
+		if(!project.hasNature(JavaCore.NATURE_ID)) {
+			throw new IllegalStateException("Xtend files must reside in a Java project");
+		}
 		IFolder targetFolder = project.getFolder(getTargetFolderName());
 		return targetFolder;
 	}
