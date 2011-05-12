@@ -42,6 +42,7 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.ui.util.ResourceUtil;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
 /**
@@ -86,9 +87,11 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 	private String newName;
 
 	@Inject
-	private IRefactoringUpdateAcceptor updateAcceptor;
+	private Provider<IRefactoringUpdateAcceptor> updateAcceptorProvider;
 
 	private ElementRenameArguments renameArguments;
+
+	private IRefactoringUpdateAcceptor currentUpdateAcceptor;
 
 	@Override
 	public boolean initialize(final IRenameElementContext renameElementContext) {
@@ -187,18 +190,19 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 			throws CoreException, OperationCanceledException {
 		SubMonitor progress = SubMonitor.convert(monitor, 100);
 		try {
+			currentUpdateAcceptor = updateAcceptorProvider.get();
 			Iterable<URI> dependentElementURIs = dependentElementsCalculator.getDependentElementURIs(targetElement,
 					progress.newChild(1));
 			Map<URI, URI> original2newElementURIs = renameElementTracker.renameAndTrack(
 					concat(Collections.singleton(targetElementURI), dependentElementURIs), newName, resourceSet,
 					renameStrategy, progress.newChild(1));
-			renameStrategy.createDeclarationUpdates(newName, resourceSet, updateAcceptor);
+			renameStrategy.createDeclarationUpdates(newName, resourceSet, currentUpdateAcceptor);
 
 			renameArguments = new ElementRenameArguments(targetElementURI, newName, renameStrategy,
 					original2newElementURIs);
-			referenceUpdaterDispatcher.createReferenceUpdates(renameArguments, resourceSet, updateAcceptor,
+			referenceUpdaterDispatcher.createReferenceUpdates(renameArguments, resourceSet, currentUpdateAcceptor,
 					progress.newChild(98));
-			status.merge(updateAcceptor.getRefactoringStatus());
+			status.merge(currentUpdateAcceptor.getRefactoringStatus());
 		} catch (Exception exc) {
 			handleException(status, exc);
 		}
@@ -207,7 +211,7 @@ public class RenameElementProcessor extends AbstractRenameProcessor {
 
 	@Override
 	public Change createChange(IProgressMonitor monitor) throws CoreException, OperationCanceledException {
-		return updateAcceptor.createCompositeChange("Rename " + renameStrategy.getOriginalName() + " to " + newName,
+		return currentUpdateAcceptor.createCompositeChange("Rename " + renameStrategy.getOriginalName() + " to " + newName,
 				monitor);
 	}
 
