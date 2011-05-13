@@ -29,7 +29,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reex
 Bundle-Activator: org.eclipse.xtext.ui.internal.Activator
 Export-Package: org.eclipse.xtext.common.ui.contentassist,
  org.eclipse.xtext.ui,
- org.eclipse.xtext.ui.compare,
+ org.eclipse.xtext.ui.compare;x-internal:=true,
  org.eclipse.xtext.ui.containers,
  org.eclipse.xtext.ui.editor,
  org.eclipse.xtext.ui.editor.actions,
