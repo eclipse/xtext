@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.compare;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.jface.text.ITextViewerExtension2;
 import org.eclipse.jface.text.ITextViewerExtension6;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewer;
@@ -39,6 +40,13 @@ public class DefaultContentViewer extends AbstractContentViewer {
 			ITextViewerExtension6 textViewerExtension6 = (ITextViewerExtension6) sourceViewer;
 			textViewerExtension6.setHyperlinkDetectors(null,
 					sourceViewerConfiguration.getHyperlinkStateMask(sourceViewer));
+		}
+		if (sourceViewer instanceof ITextViewerExtension2) {
+			ITextViewerExtension2 textViewerExtension2 = (ITextViewerExtension2) sourceViewer;
+			String[] configuredContentTypes = sourceViewerConfiguration.getConfiguredContentTypes(sourceViewer);
+			for (String contentType : configuredContentTypes) {
+				textViewerExtension2.removeTextHovers(contentType);
+			}
 		}
 	}
 
