@@ -98,6 +98,24 @@ public interface SyntacticsequencertestFactory extends EFactory
   BooleanAlternativeLiteral createBooleanAlternativeLiteral();
 
   /**
+   * Returns a new object of class '<em>Unassigned Datatype</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unassigned Datatype</em>'.
+   * @generated
+   */
+  UnassignedDatatype createUnassignedDatatype();
+
+  /**
+   * Returns a new object of class '<em>Ambiguous Transition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Ambiguous Transition</em>'.
+   * @generated
+   */
+  AmbiguousTransition createAmbiguousTransition();
+
+  /**
    * Returns a new object of class '<em>Add0</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

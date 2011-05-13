@@ -27,6 +27,12 @@
         <elements xsi:type="xtext:Assignment" feature="x6" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.15"/>
         </elements>
+        <elements xsi:type="xtext:Assignment" feature="x7" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.17"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x8" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.19"/>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="MandatoryKeywords">
@@ -311,6 +317,36 @@
           <elements xsi:type="xtext:Assignment" feature="isTrue" operator="?=">
             <terminal xsi:type="xtext:Keyword" value="kw2"/>
           </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="UnassignedDatatype">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/syntacticsequencertestlanguage#//UnassignedDatatype"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="#7"/>
+        <elements xsi:type="xtext:Assignment" feature="val" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="UnassignedDatatypeRule">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:Keyword" value="kw1"/>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="AmbiguousTransition">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/syntacticsequencertestlanguage#//AmbiguousTransition"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="#8"/>
+        <elements xsi:type="xtext:Keyword" cardinality="?" value="kw1"/>
+        <elements xsi:type="xtext:Assignment" feature="val" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </elements>
       </alternatives>
     </rules>

@@ -75,6 +75,8 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
       case SyntacticsequencertestPackage.SINGLE_CROSS_REFERENCE: return createSingleCrossReference();
       case SyntacticsequencertestPackage.BOOLEAN_ALTERNATIVE: return createBooleanAlternative();
       case SyntacticsequencertestPackage.BOOLEAN_ALTERNATIVE_LITERAL: return createBooleanAlternativeLiteral();
+      case SyntacticsequencertestPackage.UNASSIGNED_DATATYPE: return createUnassignedDatatype();
+      case SyntacticsequencertestPackage.AMBIGUOUS_TRANSITION: return createAmbiguousTransition();
       case SyntacticsequencertestPackage.ADD0: return createAdd0();
       case SyntacticsequencertestPackage.VAL0: return createVal0();
       case SyntacticsequencertestPackage.ADD1: return createAdd1();
@@ -173,6 +175,28 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
   {
     BooleanAlternativeLiteralImpl booleanAlternativeLiteral = new BooleanAlternativeLiteralImpl();
     return booleanAlternativeLiteral;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnassignedDatatype createUnassignedDatatype()
+  {
+    UnassignedDatatypeImpl unassignedDatatype = new UnassignedDatatypeImpl();
+    return unassignedDatatype;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AmbiguousTransition createAmbiguousTransition()
+  {
+    AmbiguousTransitionImpl ambiguousTransition = new AmbiguousTransitionImpl();
+    return ambiguousTransition;
   }
 
   /**

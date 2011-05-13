@@ -32,12 +32,18 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cX5SingleCrossReferenceParserRuleCall_4_0 = (RuleCall)cX5Assignment_4.eContents().get(0);
 		private final Assignment cX6Assignment_5 = (Assignment)cAlternatives.eContents().get(5);
 		private final RuleCall cX6BooleanAlternativeParserRuleCall_5_0 = (RuleCall)cX6Assignment_5.eContents().get(0);
+		private final Assignment cX7Assignment_6 = (Assignment)cAlternatives.eContents().get(6);
+		private final RuleCall cX7UnassignedDatatypeParserRuleCall_6_0 = (RuleCall)cX7Assignment_6.eContents().get(0);
+		private final Assignment cX8Assignment_7 = (Assignment)cAlternatives.eContents().get(7);
+		private final RuleCall cX8AmbiguousTransitionParserRuleCall_7_0 = (RuleCall)cX8Assignment_7.eContents().get(0);
 		
 		//Model:
-		//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative;
+		//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
+		//	x7=UnassignedDatatype | x8=AmbiguousTransition;
 		public ParserRule getRule() { return rule; }
 
-		//x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative
+		//x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
+		//x7=UnassignedDatatype | x8=AmbiguousTransition
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//x1=MandatoryKeywords
@@ -75,6 +81,18 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 
 		//BooleanAlternative
 		public RuleCall getX6BooleanAlternativeParserRuleCall_5_0() { return cX6BooleanAlternativeParserRuleCall_5_0; }
+
+		//x7=UnassignedDatatype
+		public Assignment getX7Assignment_6() { return cX7Assignment_6; }
+
+		//UnassignedDatatype
+		public RuleCall getX7UnassignedDatatypeParserRuleCall_6_0() { return cX7UnassignedDatatypeParserRuleCall_6_0; }
+
+		//x8=AmbiguousTransition
+		public Assignment getX8Assignment_7() { return cX8Assignment_7; }
+
+		//AmbiguousTransition
+		public RuleCall getX8AmbiguousTransitionParserRuleCall_7_0() { return cX8AmbiguousTransitionParserRuleCall_7_0; }
 	}
 
 	public class MandatoryKeywordsElements extends AbstractParserRuleElementFinder {
@@ -630,6 +648,74 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//"kw2"
 		public Keyword getIsTrueKw2Keyword_1_1_0() { return cIsTrueKw2Keyword_1_1_0; }
 	}
+
+	public class UnassignedDatatypeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnassignedDatatype");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitSevenKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cValIDTerminalRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
+		private final RuleCall cUnassignedDatatypeRuleParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		
+		//UnassignedDatatype:
+		//	"#7" val=ID UnassignedDatatypeRule;
+		public ParserRule getRule() { return rule; }
+
+		//"#7" val=ID UnassignedDatatypeRule
+		public Group getGroup() { return cGroup; }
+
+		//"#7"
+		public Keyword getNumberSignDigitSevenKeyword_0() { return cNumberSignDigitSevenKeyword_0; }
+
+		//val=ID
+		public Assignment getValAssignment_1() { return cValAssignment_1; }
+
+		//ID
+		public RuleCall getValIDTerminalRuleCall_1_0() { return cValIDTerminalRuleCall_1_0; }
+
+		//UnassignedDatatypeRule
+		public RuleCall getUnassignedDatatypeRuleParserRuleCall_2() { return cUnassignedDatatypeRuleParserRuleCall_2; }
+	}
+
+	public class UnassignedDatatypeRuleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnassignedDatatypeRule");
+		private final Keyword cKw1Keyword = (Keyword)rule.eContents().get(1);
+		
+		//UnassignedDatatypeRule:
+		//	"kw1";
+		public ParserRule getRule() { return rule; }
+
+		//"kw1"
+		public Keyword getKw1Keyword() { return cKw1Keyword; }
+	}
+
+	public class AmbiguousTransitionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AmbiguousTransition");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitEightKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cKw1Keyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cValAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cValIDTerminalRuleCall_2_0 = (RuleCall)cValAssignment_2.eContents().get(0);
+		
+		//AmbiguousTransition:
+		//	"#8" "kw1"? val=ID;
+		public ParserRule getRule() { return rule; }
+
+		//"#8" "kw1"? val=ID
+		public Group getGroup() { return cGroup; }
+
+		//"#8"
+		public Keyword getNumberSignDigitEightKeyword_0() { return cNumberSignDigitEightKeyword_0; }
+
+		//"kw1"?
+		public Keyword getKw1Keyword_1() { return cKw1Keyword_1; }
+
+		//val=ID
+		public Assignment getValAssignment_2() { return cValAssignment_2; }
+
+		//ID
+		public RuleCall getValIDTerminalRuleCall_2_0() { return cValIDTerminalRuleCall_2_0; }
+	}
 	
 	
 	private ModelElements pModel;
@@ -649,6 +735,9 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	private SingleCrossReferenceElements pSingleCrossReference;
 	private BooleanAlternativeElements pBooleanAlternative;
 	private BooleanAlternativeLiteralElements pBooleanAlternativeLiteral;
+	private UnassignedDatatypeElements pUnassignedDatatype;
+	private UnassignedDatatypeRuleElements pUnassignedDatatypeRule;
+	private AmbiguousTransitionElements pAmbiguousTransition;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -672,7 +761,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 
 	
 	//Model:
-	//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative;
+	//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
+	//	x7=UnassignedDatatype | x8=AmbiguousTransition;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -836,6 +926,36 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	
 	public ParserRule getBooleanAlternativeLiteralRule() {
 		return getBooleanAlternativeLiteralAccess().getRule();
+	}
+
+	//UnassignedDatatype:
+	//	"#7" val=ID UnassignedDatatypeRule;
+	public UnassignedDatatypeElements getUnassignedDatatypeAccess() {
+		return (pUnassignedDatatype != null) ? pUnassignedDatatype : (pUnassignedDatatype = new UnassignedDatatypeElements());
+	}
+	
+	public ParserRule getUnassignedDatatypeRule() {
+		return getUnassignedDatatypeAccess().getRule();
+	}
+
+	//UnassignedDatatypeRule:
+	//	"kw1";
+	public UnassignedDatatypeRuleElements getUnassignedDatatypeRuleAccess() {
+		return (pUnassignedDatatypeRule != null) ? pUnassignedDatatypeRule : (pUnassignedDatatypeRule = new UnassignedDatatypeRuleElements());
+	}
+	
+	public ParserRule getUnassignedDatatypeRuleRule() {
+		return getUnassignedDatatypeRuleAccess().getRule();
+	}
+
+	//AmbiguousTransition:
+	//	"#8" "kw1"? val=ID;
+	public AmbiguousTransitionElements getAmbiguousTransitionAccess() {
+		return (pAmbiguousTransition != null) ? pAmbiguousTransition : (pAmbiguousTransition = new AmbiguousTransitionElements());
+	}
+	
+	public ParserRule getAmbiguousTransitionRule() {
+		return getAmbiguousTransitionAccess().getRule();
 	}
 
 	//terminal ID:

@@ -190,6 +190,44 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX7UnassignedDatatypeParserRuleCall_6_0()); 
+	    }
+		lv_x7_6_0=ruleUnassignedDatatype		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x7",
+        		lv_x7_6_0, 
+        		"UnassignedDatatype");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX8AmbiguousTransitionParserRuleCall_7_0()); 
+	    }
+		lv_x8_7_0=ruleAmbiguousTransition		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x8",
+        		lv_x8_7_0, 
+        		"AmbiguousTransition");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 ))
 ;
 
@@ -1040,6 +1078,131 @@ ruleBooleanAlternativeLiteral returns [EObject current=null]
 
 )
 )))
+;
+
+
+
+
+
+// Entry rule entryRuleUnassignedDatatype
+entryRuleUnassignedDatatype returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getUnassignedDatatypeRule()); }
+	 iv_ruleUnassignedDatatype=ruleUnassignedDatatype 
+	 { $current=$iv_ruleUnassignedDatatype.current; } 
+	 EOF 
+;
+
+// Rule UnassignedDatatype
+ruleUnassignedDatatype returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#7' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getUnassignedDatatypeAccess().getNumberSignDigitSevenKeyword_0());
+    }
+(
+(
+		lv_val_1_0=RULE_ID
+		{
+			newLeafNode(lv_val_1_0, grammarAccess.getUnassignedDatatypeAccess().getValIDTerminalRuleCall_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getUnassignedDatatypeRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val",
+        		lv_val_1_0, 
+        		"ID");
+	    }
+
+)
+)
+    { 
+        newCompositeNode(grammarAccess.getUnassignedDatatypeAccess().getUnassignedDatatypeRuleParserRuleCall_2()); 
+    }
+ruleUnassignedDatatypeRule
+    { 
+        afterParserOrEnumRuleCall();
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleUnassignedDatatypeRule
+entryRuleUnassignedDatatypeRule returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getUnassignedDatatypeRuleRule()); } 
+	 iv_ruleUnassignedDatatypeRule=ruleUnassignedDatatypeRule 
+	 { $current=$iv_ruleUnassignedDatatypeRule.current.getText(); }  
+	 EOF 
+;
+
+// Rule UnassignedDatatypeRule
+ruleUnassignedDatatypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+
+	kw='kw1' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getUnassignedDatatypeRuleAccess().getKw1Keyword()); 
+    }
+
+    ;
+
+
+
+
+
+// Entry rule entryRuleAmbiguousTransition
+entryRuleAmbiguousTransition returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getAmbiguousTransitionRule()); }
+	 iv_ruleAmbiguousTransition=ruleAmbiguousTransition 
+	 { $current=$iv_ruleAmbiguousTransition.current; } 
+	 EOF 
+;
+
+// Rule AmbiguousTransition
+ruleAmbiguousTransition returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#8' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getAmbiguousTransitionAccess().getNumberSignDigitEightKeyword_0());
+    }
+(	otherlv_1='kw1' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getAmbiguousTransitionAccess().getKw1Keyword_1());
+    }
+)?(
+(
+		lv_val_2_0=RULE_ID
+		{
+			newLeafNode(lv_val_2_0, grammarAccess.getAmbiguousTransitionAccess().getValIDTerminalRuleCall_2_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getAmbiguousTransitionRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val",
+        		lv_val_2_0, 
+        		"ID");
+	    }
+
+)
+))
 ;
 
 

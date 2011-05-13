@@ -118,6 +118,16 @@ public class SyntacticsequencertestAdapterFactory extends AdapterFactoryImpl
         return createBooleanAlternativeLiteralAdapter();
       }
       @Override
+      public Adapter caseUnassignedDatatype(UnassignedDatatype object)
+      {
+        return createUnassignedDatatypeAdapter();
+      }
+      @Override
+      public Adapter caseAmbiguousTransition(AmbiguousTransition object)
+      {
+        return createAmbiguousTransitionAdapter();
+      }
+      @Override
       public Adapter caseAdd0(Add0 object)
       {
         return createAdd0Adapter();
@@ -290,6 +300,36 @@ public class SyntacticsequencertestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createBooleanAlternativeLiteralAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.UnassignedDatatype <em>Unassigned Datatype</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.UnassignedDatatype
+   * @generated
+   */
+  public Adapter createUnassignedDatatypeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition <em>Ambiguous Transition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition
+   * @generated
+   */
+  public Adapter createAmbiguousTransitionAdapter()
   {
     return null;
   }

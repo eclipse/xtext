@@ -16,6 +16,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Model/x4"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Model/x5"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Model/x6"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Model/x7"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Model/x8"/>
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//MandatoryKeywords">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//MandatoryKeywords/val1"/>
@@ -37,6 +39,12 @@
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//BooleanAlternativeLiteral">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//BooleanAlternativeLiteral/isTrue"/>
+    </genClasses>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//UnassignedDatatype">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//UnassignedDatatype/val"/>
+    </genClasses>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//AmbiguousTransition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//AmbiguousTransition/val"/>
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Add0">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Add0/left"/>

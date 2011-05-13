@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Add0;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Add1;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Add2;
+import org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition;
 import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternative;
 import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternativeLiteral;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp0;
@@ -26,6 +27,7 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.Mult2;
 import org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference;
 import org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestFactory;
 import org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage;
+import org.eclipse.xtext.serializer.syntacticsequencertest.UnassignedDatatype;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Val0;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Val1;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Val2;
@@ -93,6 +95,20 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * @generated
    */
   private EClass booleanAlternativeLiteralEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass unassignedDatatypeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass ambiguousTransitionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -281,6 +297,26 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getModel_X7()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X8()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(7);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getMandatoryKeywords()
   {
     return mandatoryKeywordsEClass;
@@ -444,6 +480,46 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
   public EAttribute getBooleanAlternativeLiteral_IsTrue()
   {
     return (EAttribute)booleanAlternativeLiteralEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getUnassignedDatatype()
+  {
+    return unassignedDatatypeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getUnassignedDatatype_Val()
+  {
+    return (EAttribute)unassignedDatatypeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAmbiguousTransition()
+  {
+    return ambiguousTransitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAmbiguousTransition_Val()
+  {
+    return (EAttribute)ambiguousTransitionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -663,6 +739,8 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     createEReference(modelEClass, MODEL__X4);
     createEReference(modelEClass, MODEL__X5);
     createEReference(modelEClass, MODEL__X6);
+    createEReference(modelEClass, MODEL__X7);
+    createEReference(modelEClass, MODEL__X8);
 
     mandatoryKeywordsEClass = createEClass(MANDATORY_KEYWORDS);
     createEAttribute(mandatoryKeywordsEClass, MANDATORY_KEYWORDS__VAL1);
@@ -687,6 +765,12 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
 
     booleanAlternativeLiteralEClass = createEClass(BOOLEAN_ALTERNATIVE_LITERAL);
     createEAttribute(booleanAlternativeLiteralEClass, BOOLEAN_ALTERNATIVE_LITERAL__IS_TRUE);
+
+    unassignedDatatypeEClass = createEClass(UNASSIGNED_DATATYPE);
+    createEAttribute(unassignedDatatypeEClass, UNASSIGNED_DATATYPE__VAL);
+
+    ambiguousTransitionEClass = createEClass(AMBIGUOUS_TRANSITION);
+    createEAttribute(ambiguousTransitionEClass, AMBIGUOUS_TRANSITION__VAL);
 
     add0EClass = createEClass(ADD0);
     createEReference(add0EClass, ADD0__LEFT);
@@ -759,6 +843,8 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     initEReference(getModel_X4(), this.getExp2(), null, "x4", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X5(), this.getSingleCrossReference(), null, "x5", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X6(), this.getBooleanAlternative(), null, "x6", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X7(), this.getUnassignedDatatype(), null, "x7", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X8(), this.getAmbiguousTransition(), null, "x8", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(mandatoryKeywordsEClass, MandatoryKeywords.class, "MandatoryKeywords", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMandatoryKeywords_Val1(), ecorePackage.getEString(), "val1", null, 0, 1, MandatoryKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -783,6 +869,12 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
 
     initEClass(booleanAlternativeLiteralEClass, BooleanAlternativeLiteral.class, "BooleanAlternativeLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getBooleanAlternativeLiteral_IsTrue(), ecorePackage.getEBoolean(), "isTrue", null, 0, 1, BooleanAlternativeLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(unassignedDatatypeEClass, UnassignedDatatype.class, "UnassignedDatatype", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getUnassignedDatatype_Val(), ecorePackage.getEString(), "val", null, 0, 1, UnassignedDatatype.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(ambiguousTransitionEClass, AmbiguousTransition.class, "AmbiguousTransition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAmbiguousTransition_Val(), ecorePackage.getEString(), "val", null, 0, 1, AmbiguousTransition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(add0EClass, Add0.class, "Add0", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAdd0_Left(), this.getExp0(), null, "left", null, 0, 1, Add0.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -16,6 +16,10 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="x6" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//BooleanAlternative"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x7" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//UnassignedDatatype"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x8" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//AmbiguousTransition"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MandatoryKeywords">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -38,6 +42,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanAlternativeLiteral">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTrue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnassignedDatatype">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AmbiguousTransition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Add0" eSuperTypes="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp0">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="ecore:EClass platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.ecore#//Exp0"

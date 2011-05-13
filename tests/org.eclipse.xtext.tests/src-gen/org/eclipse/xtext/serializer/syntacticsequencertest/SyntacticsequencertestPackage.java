@@ -124,13 +124,31 @@ public interface SyntacticsequencertestPackage extends EPackage
   int MODEL__X6 = 5;
 
   /**
+   * The feature id for the '<em><b>X7</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X7 = 6;
+
+  /**
+   * The feature id for the '<em><b>X8</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X8 = 7;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 6;
+  int MODEL_FEATURE_COUNT = 8;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryKeywordsImpl <em>Mandatory Keywords</em>}' class.
@@ -356,6 +374,62 @@ public interface SyntacticsequencertestPackage extends EPackage
   int BOOLEAN_ALTERNATIVE_LITERAL_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.UnassignedDatatypeImpl <em>Unassigned Datatype</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.UnassignedDatatypeImpl
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getUnassignedDatatype()
+   * @generated
+   */
+  int UNASSIGNED_DATATYPE = 8;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNASSIGNED_DATATYPE__VAL = 0;
+
+  /**
+   * The number of structural features of the '<em>Unassigned Datatype</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNASSIGNED_DATATYPE_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.AmbiguousTransitionImpl <em>Ambiguous Transition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.AmbiguousTransitionImpl
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAmbiguousTransition()
+   * @generated
+   */
+  int AMBIGUOUS_TRANSITION = 9;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AMBIGUOUS_TRANSITION__VAL = 0;
+
+  /**
+   * The number of structural features of the '<em>Ambiguous Transition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AMBIGUOUS_TRANSITION_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.Add0Impl <em>Add0</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -363,7 +437,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd0()
    * @generated
    */
-  int ADD0 = 8;
+  int ADD0 = 10;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -400,7 +474,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal0()
    * @generated
    */
-  int VAL0 = 9;
+  int VAL0 = 11;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -428,7 +502,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd1()
    * @generated
    */
-  int ADD1 = 10;
+  int ADD1 = 12;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -465,7 +539,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal1()
    * @generated
    */
-  int VAL1 = 11;
+  int VAL1 = 13;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -493,7 +567,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd2()
    * @generated
    */
-  int ADD2 = 12;
+  int ADD2 = 14;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -530,7 +604,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getMult2()
    * @generated
    */
-  int MULT2 = 13;
+  int MULT2 = 15;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -567,7 +641,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal2()
    * @generated
    */
-  int VAL2 = 14;
+  int VAL2 = 16;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -663,6 +737,28 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @generated
    */
   EReference getModel_X6();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX7 <em>X7</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X7</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX7()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X7();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX8 <em>X8</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X8</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX8()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X8();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryKeywords <em>Mandatory Keywords</em>}'.
@@ -843,6 +939,48 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @generated
    */
   EAttribute getBooleanAlternativeLiteral_IsTrue();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.UnassignedDatatype <em>Unassigned Datatype</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Unassigned Datatype</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.UnassignedDatatype
+   * @generated
+   */
+  EClass getUnassignedDatatype();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.syntacticsequencertest.UnassignedDatatype#getVal <em>Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.UnassignedDatatype#getVal()
+   * @see #getUnassignedDatatype()
+   * @generated
+   */
+  EAttribute getUnassignedDatatype_Val();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition <em>Ambiguous Transition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Ambiguous Transition</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition
+   * @generated
+   */
+  EClass getAmbiguousTransition();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition#getVal <em>Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition#getVal()
+   * @see #getAmbiguousTransition()
+   * @generated
+   */
+  EAttribute getAmbiguousTransition_Val();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Add0 <em>Add0</em>}'.
@@ -1117,6 +1255,22 @@ public interface SyntacticsequencertestPackage extends EPackage
     EReference MODEL__X6 = eINSTANCE.getModel_X6();
 
     /**
+     * The meta object literal for the '<em><b>X7</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X7 = eINSTANCE.getModel_X7();
+
+    /**
+     * The meta object literal for the '<em><b>X8</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X8 = eINSTANCE.getModel_X8();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryKeywordsImpl <em>Mandatory Keywords</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1265,6 +1419,42 @@ public interface SyntacticsequencertestPackage extends EPackage
      * @generated
      */
     EAttribute BOOLEAN_ALTERNATIVE_LITERAL__IS_TRUE = eINSTANCE.getBooleanAlternativeLiteral_IsTrue();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.UnassignedDatatypeImpl <em>Unassigned Datatype</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.UnassignedDatatypeImpl
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getUnassignedDatatype()
+     * @generated
+     */
+    EClass UNASSIGNED_DATATYPE = eINSTANCE.getUnassignedDatatype();
+
+    /**
+     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute UNASSIGNED_DATATYPE__VAL = eINSTANCE.getUnassignedDatatype_Val();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.AmbiguousTransitionImpl <em>Ambiguous Transition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.AmbiguousTransitionImpl
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAmbiguousTransition()
+     * @generated
+     */
+    EClass AMBIGUOUS_TRANSITION = eINSTANCE.getAmbiguousTransition();
+
+    /**
+     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute AMBIGUOUS_TRANSITION__VAL = eINSTANCE.getAmbiguousTransition_Val();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.Add0Impl <em>Add0</em>}' class.

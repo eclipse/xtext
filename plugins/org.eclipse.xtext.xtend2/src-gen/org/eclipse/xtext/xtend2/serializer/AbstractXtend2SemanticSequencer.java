@@ -86,8 +86,12 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				}
 				else break;
 			case Xtend2Package.RICH_STRING_LITERAL:
-				if(context == grammarAccess.getRichStringLiteralEndRule()) {
-					sequence_RichStringLiteralEnd_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
+				if(context == grammarAccess.getRichStringLiteralRule()) {
+					sequence_RichStringLiteral_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getRichStringLiteralStartRule()) {
+					sequence_RichStringLiteralStart_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getRichStringLiteralInbetweenRule()) {
@@ -98,12 +102,8 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 					sequence_InternalRichStringLiteral_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getRichStringLiteralRule()) {
-					sequence_RichStringLiteral_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getRichStringLiteralStartRule()) {
-					sequence_RichStringLiteralStart_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
+				else if(context == grammarAccess.getRichStringLiteralEndRule()) {
+					sequence_RichStringLiteralEnd_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
 				else break;
@@ -224,12 +224,12 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				}
 				else break;
 			case TypesPackage.JVM_UPPER_BOUND:
-				if(context == grammarAccess.getJvmUpperBoundRule()) {
-					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
+					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
-					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				else if(context == grammarAccess.getJvmUpperBoundRule()) {
+					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
 				else break;

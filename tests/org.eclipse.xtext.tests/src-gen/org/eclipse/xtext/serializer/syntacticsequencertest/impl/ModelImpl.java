@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition;
 import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternative;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp0;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp1;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryKeywords;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Model;
 import org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference;
 import org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage;
+import org.eclipse.xtext.serializer.syntacticsequencertest.UnassignedDatatype;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,6 +38,8 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.Syntacticsequencertes
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.ModelImpl#getX4 <em>X4</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.ModelImpl#getX5 <em>X5</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.ModelImpl#getX6 <em>X6</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.ModelImpl#getX7 <em>X7</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.ModelImpl#getX8 <em>X8</em>}</li>
  * </ul>
  * </p>
  *
@@ -102,6 +106,26 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected BooleanAlternative x6;
+
+  /**
+   * The cached value of the '{@link #getX7() <em>X7</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX7()
+   * @generated
+   * @ordered
+   */
+  protected UnassignedDatatype x7;
+
+  /**
+   * The cached value of the '{@link #getX8() <em>X8</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX8()
+   * @generated
+   * @ordered
+   */
+  protected AmbiguousTransition x8;
 
   /**
    * <!-- begin-user-doc -->
@@ -417,6 +441,102 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public UnassignedDatatype getX7()
+  {
+    return x7;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX7(UnassignedDatatype newX7, NotificationChain msgs)
+  {
+    UnassignedDatatype oldX7 = x7;
+    x7 = newX7;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SyntacticsequencertestPackage.MODEL__X7, oldX7, newX7);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX7(UnassignedDatatype newX7)
+  {
+    if (newX7 != x7)
+    {
+      NotificationChain msgs = null;
+      if (x7 != null)
+        msgs = ((InternalEObject)x7).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SyntacticsequencertestPackage.MODEL__X7, null, msgs);
+      if (newX7 != null)
+        msgs = ((InternalEObject)newX7).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SyntacticsequencertestPackage.MODEL__X7, null, msgs);
+      msgs = basicSetX7(newX7, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SyntacticsequencertestPackage.MODEL__X7, newX7, newX7));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AmbiguousTransition getX8()
+  {
+    return x8;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX8(AmbiguousTransition newX8, NotificationChain msgs)
+  {
+    AmbiguousTransition oldX8 = x8;
+    x8 = newX8;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SyntacticsequencertestPackage.MODEL__X8, oldX8, newX8);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX8(AmbiguousTransition newX8)
+  {
+    if (newX8 != x8)
+    {
+      NotificationChain msgs = null;
+      if (x8 != null)
+        msgs = ((InternalEObject)x8).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SyntacticsequencertestPackage.MODEL__X8, null, msgs);
+      if (newX8 != null)
+        msgs = ((InternalEObject)newX8).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SyntacticsequencertestPackage.MODEL__X8, null, msgs);
+      msgs = basicSetX8(newX8, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SyntacticsequencertestPackage.MODEL__X8, newX8, newX8));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -434,6 +554,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return basicSetX5(null, msgs);
       case SyntacticsequencertestPackage.MODEL__X6:
         return basicSetX6(null, msgs);
+      case SyntacticsequencertestPackage.MODEL__X7:
+        return basicSetX7(null, msgs);
+      case SyntacticsequencertestPackage.MODEL__X8:
+        return basicSetX8(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -460,6 +584,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getX5();
       case SyntacticsequencertestPackage.MODEL__X6:
         return getX6();
+      case SyntacticsequencertestPackage.MODEL__X7:
+        return getX7();
+      case SyntacticsequencertestPackage.MODEL__X8:
+        return getX8();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -491,6 +619,12 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return;
       case SyntacticsequencertestPackage.MODEL__X6:
         setX6((BooleanAlternative)newValue);
+        return;
+      case SyntacticsequencertestPackage.MODEL__X7:
+        setX7((UnassignedDatatype)newValue);
+        return;
+      case SyntacticsequencertestPackage.MODEL__X8:
+        setX8((AmbiguousTransition)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -524,6 +658,12 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case SyntacticsequencertestPackage.MODEL__X6:
         setX6((BooleanAlternative)null);
         return;
+      case SyntacticsequencertestPackage.MODEL__X7:
+        setX7((UnassignedDatatype)null);
+        return;
+      case SyntacticsequencertestPackage.MODEL__X8:
+        setX8((AmbiguousTransition)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -550,6 +690,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return x5 != null;
       case SyntacticsequencertestPackage.MODEL__X6:
         return x6 != null;
+      case SyntacticsequencertestPackage.MODEL__X7:
+        return x7 != null;
+      case SyntacticsequencertestPackage.MODEL__X8:
+        return x8 != null;
     }
     return super.eIsSet(featureID);
   }

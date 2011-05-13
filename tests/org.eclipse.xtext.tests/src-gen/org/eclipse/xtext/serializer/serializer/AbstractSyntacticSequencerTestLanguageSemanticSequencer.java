@@ -78,6 +78,12 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 					return; 
 				}
 				else break;
+			case SyntacticsequencertestPackage.AMBIGUOUS_TRANSITION:
+				if(context == grammarAccess.getAmbiguousTransitionRule()) {
+					sequence_AmbiguousTransition_AmbiguousTransition(context, (AmbiguousTransition) semanticObject); 
+					return; 
+				}
+				else break;
 			case SyntacticsequencertestPackage.BOOLEAN_ALTERNATIVE_LITERAL:
 				if(context == grammarAccess.getBooleanAlternativeLiteralRule()) {
 					sequence_BooleanAlternativeLiteral_BooleanAlternativeLiteral(context, (BooleanAlternativeLiteral) semanticObject); 
@@ -145,6 +151,12 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 			case SyntacticsequencertestPackage.SINGLE_CROSS_REFERENCE:
 				if(context == grammarAccess.getSingleCrossReferenceRule()) {
 					sequence_SingleCrossReference_SingleCrossReference(context, (SingleCrossReference) semanticObject); 
+					return; 
+				}
+				else break;
+			case SyntacticsequencertestPackage.UNASSIGNED_DATATYPE:
+				if(context == grammarAccess.getUnassignedDatatypeRule()) {
+					sequence_UnassignedDatatype_UnassignedDatatype(context, (UnassignedDatatype) semanticObject); 
 					return; 
 				}
 				else break;
@@ -223,6 +235,25 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	
 	/**
 	 * Constraint:
+	 *     val=ID
+	 *
+	 * Features:
+	 *    val[1, 1]
+	 */
+	protected void sequence_AmbiguousTransition_AmbiguousTransition(EObject context, AmbiguousTransition semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.AMBIGUOUS_TRANSITION__VAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.AMBIGUOUS_TRANSITION__VAL));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getAmbiguousTransitionAccess().getValIDTerminalRuleCall_2_0(), semanticObject.getVal());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (isTrue?='kw2'?)
 	 *
 	 * Features:
@@ -287,7 +318,9 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	 *         x3=Exp1 | 
 	 *         x4=Exp2 | 
 	 *         x5=SingleCrossReference | 
-	 *         x6=BooleanAlternative
+	 *         x6=BooleanAlternative | 
+	 *         x7=UnassignedDatatype | 
+	 *         x8=AmbiguousTransition
 	 *     )
 	 *     
 	 *
@@ -298,36 +331,64 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	 *         EXCLUDE_IF_SET x4
 	 *         EXCLUDE_IF_SET x5
 	 *         EXCLUDE_IF_SET x6
+	 *         EXCLUDE_IF_SET x7
+	 *         EXCLUDE_IF_SET x8
 	 *    x2[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x3
 	 *         EXCLUDE_IF_SET x4
 	 *         EXCLUDE_IF_SET x5
 	 *         EXCLUDE_IF_SET x6
+	 *         EXCLUDE_IF_SET x7
+	 *         EXCLUDE_IF_SET x8
 	 *    x3[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
 	 *         EXCLUDE_IF_SET x4
 	 *         EXCLUDE_IF_SET x5
 	 *         EXCLUDE_IF_SET x6
+	 *         EXCLUDE_IF_SET x7
+	 *         EXCLUDE_IF_SET x8
 	 *    x4[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
 	 *         EXCLUDE_IF_SET x3
 	 *         EXCLUDE_IF_SET x5
 	 *         EXCLUDE_IF_SET x6
+	 *         EXCLUDE_IF_SET x7
+	 *         EXCLUDE_IF_SET x8
 	 *    x5[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
 	 *         EXCLUDE_IF_SET x3
 	 *         EXCLUDE_IF_SET x4
 	 *         EXCLUDE_IF_SET x6
+	 *         EXCLUDE_IF_SET x7
+	 *         EXCLUDE_IF_SET x8
 	 *    x6[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
 	 *         EXCLUDE_IF_SET x3
 	 *         EXCLUDE_IF_SET x4
 	 *         EXCLUDE_IF_SET x5
+	 *         EXCLUDE_IF_SET x7
+	 *         EXCLUDE_IF_SET x8
+	 *    x7[0, 1]
+	 *         EXCLUDE_IF_SET x1
+	 *         EXCLUDE_IF_SET x2
+	 *         EXCLUDE_IF_SET x3
+	 *         EXCLUDE_IF_SET x4
+	 *         EXCLUDE_IF_SET x5
+	 *         EXCLUDE_IF_SET x6
+	 *         EXCLUDE_IF_SET x8
+	 *    x8[0, 1]
+	 *         EXCLUDE_IF_SET x1
+	 *         EXCLUDE_IF_SET x2
+	 *         EXCLUDE_IF_SET x3
+	 *         EXCLUDE_IF_SET x4
+	 *         EXCLUDE_IF_SET x5
+	 *         EXCLUDE_IF_SET x6
+	 *         EXCLUDE_IF_SET x7
 	 */
 	protected void sequence_Model_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -434,5 +495,24 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	 */
 	protected void sequence_SingleCrossReference_SingleCrossReference(EObject context, SingleCrossReference semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     val=ID
+	 *
+	 * Features:
+	 *    val[1, 1]
+	 */
+	protected void sequence_UnassignedDatatype_UnassignedDatatype(EObject context, UnassignedDatatype semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.UNASSIGNED_DATATYPE__VAL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.UNASSIGNED_DATATYPE__VAL));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getUnassignedDatatypeAccess().getValIDTerminalRuleCall_1_0(), semanticObject.getVal());
+		feeder.finish();
 	}
 }

@@ -21,6 +21,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX4 <em>X4</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX5 <em>X5</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX6 <em>X6</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX7 <em>X7</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX8 <em>X8</em>}</li>
  * </ul>
  * </p>
  *
@@ -185,5 +187,57 @@ public interface Model extends EObject
    * @generated
    */
   void setX6(BooleanAlternative value);
+
+  /**
+   * Returns the value of the '<em><b>X7</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X7</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X7</em>' containment reference.
+   * @see #setX7(UnassignedDatatype)
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getModel_X7()
+   * @model containment="true"
+   * @generated
+   */
+  UnassignedDatatype getX7();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX7 <em>X7</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X7</em>' containment reference.
+   * @see #getX7()
+   * @generated
+   */
+  void setX7(UnassignedDatatype value);
+
+  /**
+   * Returns the value of the '<em><b>X8</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X8</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X8</em>' containment reference.
+   * @see #setX8(AmbiguousTransition)
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getModel_X8()
+   * @model containment="true"
+   * @generated
+   */
+  AmbiguousTransition getX8();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX8 <em>X8</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X8</em>' containment reference.
+   * @see #getX8()
+   * @generated
+   */
+  void setX8(AmbiguousTransition value);
 
 } // Model

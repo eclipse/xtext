@@ -11,10 +11,12 @@ import org.eclipse.xtext.generator.Generator;
 import org.eclipse.xtext.generator.Xtend2ExecutionContext;
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment;
 import org.eclipse.xtext.generator.serializer.AbstractSemanticSequencer;
+import org.eclipse.xtext.generator.serializer.AbstractSyntacticSequencer;
 import org.eclipse.xtext.generator.serializer.Context2DotRenderer;
 import org.eclipse.xtext.generator.serializer.GrammarConstraints;
 import org.eclipse.xtext.generator.serializer.SemanticSequencer;
 import org.eclipse.xtext.generator.serializer.SerializerFragmentState;
+import org.eclipse.xtext.generator.serializer.SyntacticSequencer;
 import org.eclipse.xtext.generator.serializer.SyntacticSequencerPDA2ExtendedDot;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -27,6 +29,12 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
   
   @Inject
   private SemanticSequencer semanticSequencer;
+  
+  @Inject
+  private AbstractSyntacticSequencer abstractSyntacticSequencer;
+  
+  @Inject
+  private SyntacticSequencer syntacticSequencer;
   
   @Inject
   private GrammarConstraints grammarConstraints;
@@ -63,9 +71,12 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
       String _name = org.eclipse.xtext.serializer.ISemanticSequencer.class.getName();
       String _qualifiedName = this.semanticSequencer.getQualifiedName();
       bf.addTypeToType(_name, _qualifiedName);
-      String _name_1 = org.eclipse.xtext.serializer.ISerializer.class.getName();
-      String _name_2 = org.eclipse.xtext.serializer.impl.Serializer.class.getName();
-      bf.addTypeToType(_name_1, _name_2);
+      String _name_1 = org.eclipse.xtext.serializer.ISyntacticSequencer.class.getName();
+      String _qualifiedName_1 = this.syntacticSequencer.getQualifiedName();
+      bf.addTypeToType(_name_1, _qualifiedName_1);
+      String _name_2 = org.eclipse.xtext.serializer.ISerializer.class.getName();
+      String _name_3 = org.eclipse.xtext.serializer.impl.Serializer.class.getName();
+      bf.addTypeToType(_name_2, _name_3);
       Set<Binding> _bindings = bf.getBindings();
       return _bindings;
     }
@@ -79,12 +90,18 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
       String _fileName_1 = this.abstractSemanticSequencer.getFileName();
       String _fileContents_1 = this.abstractSemanticSequencer.getFileContents();
       ctx.writeFile(Generator.SRC_GEN, _fileName_1, _fileContents_1);
+      String _fileName_2 = this.syntacticSequencer.getFileName();
+      String _fileContents_2 = this.syntacticSequencer.getFileContents();
+      ctx.writeFile(Generator.SRC, _fileName_2, _fileContents_2);
+      String _fileName_3 = this.abstractSyntacticSequencer.getFileName();
+      String _fileContents_3 = this.abstractSyntacticSequencer.getFileContents();
+      ctx.writeFile(Generator.SRC_GEN, _fileName_3, _fileContents_3);
       SerializerFragmentState _state = this.state();
       if (_state.generateDebugData) {
         {
-          String _fileName_2 = this.grammarConstraints.getFileName();
-          String _fileContents_2 = this.grammarConstraints.getFileContents();
-          ctx.writeFile(Generator.SRC_GEN, _fileName_2, _fileContents_2);
+          String _fileName_4 = this.grammarConstraints.getFileName();
+          String _fileContents_4 = this.grammarConstraints.getFileContents();
+          ctx.writeFile(Generator.SRC_GEN, _fileName_4, _fileContents_4);
           SyntacticSequencerPDA2ExtendedDot _syntacticSequencerPDA2ExtendedDot = new SyntacticSequencerPDA2ExtendedDot();
           Iterable<Pair<String,String>> _render2Dot = this.dotRenderer.render2Dot(_syntacticSequencerPDA2ExtendedDot, "pda");
           for (Pair<String,String> obj : _render2Dot) {

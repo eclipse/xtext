@@ -46,6 +46,8 @@ protected class ThisRootNode extends RootToken {
 			case 12: return new SingleCrossReference_Group(this, this, 12, inst);
 			case 13: return new BooleanAlternative_Group(this, this, 13, inst);
 			case 14: return new BooleanAlternativeLiteral_Group(this, this, 14, inst);
+			case 15: return new UnassignedDatatype_Group(this, this, 15, inst);
+			case 16: return new AmbiguousTransition_Group(this, this, 16, inst);
 			default: return null;
 		}	
 	}	
@@ -55,11 +57,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative;
+ * 	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
+ * 	x7=UnassignedDatatype | x8=AmbiguousTransition;
  *
  **/
 
-// x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative
+// x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
+// x7=UnassignedDatatype | x8=AmbiguousTransition
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -80,6 +84,8 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 3: return new Model_X4Assignment_3(lastRuleCallOrigin, this, 3, inst);
 			case 4: return new Model_X5Assignment_4(lastRuleCallOrigin, this, 4, inst);
 			case 5: return new Model_X6Assignment_5(lastRuleCallOrigin, this, 5, inst);
+			case 6: return new Model_X7Assignment_6(lastRuleCallOrigin, this, 6, inst);
+			case 7: return new Model_X8Assignment_7(lastRuleCallOrigin, this, 7, inst);
 			default: return null;
 		}	
 	}
@@ -347,6 +353,96 @@ protected class Model_X6Assignment_5 extends AssignmentToken  {
 			if(param.isInstanceOf(grammarAccess.getBooleanAlternativeRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getModelAccess().getX6BooleanAlternativeParserRuleCall_5_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x7=UnassignedDatatype
+protected class Model_X7Assignment_6 extends AssignmentToken  {
+	
+	public Model_X7Assignment_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX7Assignment_6();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new UnassignedDatatype_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("x7",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x7");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getUnassignedDatatypeRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getModelAccess().getX7UnassignedDatatypeParserRuleCall_6_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x8=AmbiguousTransition
+protected class Model_X8Assignment_7 extends AssignmentToken  {
+	
+	public Model_X8Assignment_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX8Assignment_7();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new AmbiguousTransition_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("x8",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x8");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getAmbiguousTransitionRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getModelAccess().getX8AmbiguousTransitionParserRuleCall_7_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2989,5 +3085,218 @@ protected class BooleanAlternativeLiteral_IsTrueAssignment_1_1 extends Assignmen
 
 
 /************ end Rule BooleanAlternativeLiteral ****************/
+
+
+/************ begin Rule UnassignedDatatype ****************
+ *
+ * UnassignedDatatype:
+ * 	"#7" val=ID UnassignedDatatypeRule;
+ *
+ **/
+
+// "#7" val=ID UnassignedDatatypeRule
+protected class UnassignedDatatype_Group extends GroupToken {
+	
+	public UnassignedDatatype_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getUnassignedDatatypeAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new UnassignedDatatype_UnassignedDatatypeRuleParserRuleCall_2(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getUnassignedDatatypeRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "#7"
+protected class UnassignedDatatype_NumberSignDigitSevenKeyword_0 extends KeywordToken  {
+	
+	public UnassignedDatatype_NumberSignDigitSevenKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getUnassignedDatatypeAccess().getNumberSignDigitSevenKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// val=ID
+protected class UnassignedDatatype_ValAssignment_1 extends AssignmentToken  {
+	
+	public UnassignedDatatype_ValAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getUnassignedDatatypeAccess().getValAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new UnassignedDatatype_NumberSignDigitSevenKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("val",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("val");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getUnassignedDatatypeAccess().getValIDTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getUnassignedDatatypeAccess().getValIDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// UnassignedDatatypeRule
+protected class UnassignedDatatype_UnassignedDatatypeRuleParserRuleCall_2 extends UnassignedTextToken {
+
+	public UnassignedDatatype_UnassignedDatatypeRuleParserRuleCall_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getUnassignedDatatypeAccess().getUnassignedDatatypeRuleParserRuleCall_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new UnassignedDatatype_ValAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+
+/************ end Rule UnassignedDatatype ****************/
+
+
+
+/************ begin Rule AmbiguousTransition ****************
+ *
+ * AmbiguousTransition:
+ * 	"#8" "kw1"? val=ID;
+ *
+ **/
+
+// "#8" "kw1"? val=ID
+protected class AmbiguousTransition_Group extends GroupToken {
+	
+	public AmbiguousTransition_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getAmbiguousTransitionAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new AmbiguousTransition_ValAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getAmbiguousTransitionRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "#8"
+protected class AmbiguousTransition_NumberSignDigitEightKeyword_0 extends KeywordToken  {
+	
+	public AmbiguousTransition_NumberSignDigitEightKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getAmbiguousTransitionAccess().getNumberSignDigitEightKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// val=ID
+protected class AmbiguousTransition_ValAssignment_2 extends AssignmentToken  {
+	
+	public AmbiguousTransition_ValAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAmbiguousTransitionAccess().getValAssignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new AmbiguousTransition_NumberSignDigitEightKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("val",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("val");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getAmbiguousTransitionAccess().getValIDTerminalRuleCall_2_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getAmbiguousTransitionAccess().getValIDTerminalRuleCall_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule AmbiguousTransition ****************/
 
 }

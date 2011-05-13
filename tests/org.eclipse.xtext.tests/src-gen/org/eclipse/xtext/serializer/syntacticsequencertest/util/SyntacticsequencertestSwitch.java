@@ -151,6 +151,20 @@ public class SyntacticsequencertestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case SyntacticsequencertestPackage.UNASSIGNED_DATATYPE:
+      {
+        UnassignedDatatype unassignedDatatype = (UnassignedDatatype)theEObject;
+        T result = caseUnassignedDatatype(unassignedDatatype);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SyntacticsequencertestPackage.AMBIGUOUS_TRANSITION:
+      {
+        AmbiguousTransition ambiguousTransition = (AmbiguousTransition)theEObject;
+        T result = caseAmbiguousTransition(ambiguousTransition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case SyntacticsequencertestPackage.ADD0:
       {
         Add0 add0 = (Add0)theEObject;
@@ -335,6 +349,38 @@ public class SyntacticsequencertestSwitch<T>
    * @generated
    */
   public T caseBooleanAlternativeLiteral(BooleanAlternativeLiteral object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Unassigned Datatype</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Unassigned Datatype</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseUnassignedDatatype(UnassignedDatatype object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Ambiguous Transition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Ambiguous Transition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAmbiguousTransition(AmbiguousTransition object)
   {
     return null;
   }
