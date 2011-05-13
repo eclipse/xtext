@@ -12,6 +12,7 @@ import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategy;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
+import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IComparator;
@@ -38,6 +39,7 @@ import org.eclipse.xtext.xtend2.ui.highlighting.RichStringAwareHighlightingCalcu
 import org.eclipse.xtext.xtend2.ui.highlighting.RichStringAwareTokenScanner;
 import org.eclipse.xtext.xtend2.ui.highlighting.ShowWhitespaceCharactersActionContributor;
 import org.eclipse.xtext.xtend2.ui.highlighting.TokenToAttributeIdMapper;
+import org.eclipse.xtext.xtend2.ui.hover.XtendHoverProvider;
 import org.eclipse.xtext.xtend2.ui.hyperlinking.XtendHyperlinkHelper;
 import org.eclipse.xtext.xtend2.ui.outline.Xtend2OutlineNodeComparator;
 import org.eclipse.xtext.xtend2.ui.outline.Xtend2OutlinePage;
@@ -142,5 +144,8 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 		return JvmModelRefactoringResourceSetProvider.class;
 	}
 	
-
+	public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider() {
+		return XtendHoverProvider.class;
+	}
+	
 }
