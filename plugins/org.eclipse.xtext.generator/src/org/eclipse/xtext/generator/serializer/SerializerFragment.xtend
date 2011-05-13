@@ -18,12 +18,17 @@ import org.eclipse.xtext.serializer.ISerializer
 import org.eclipse.xtext.serializer.impl.Serializer
 import org.eclipse.xtext.serializer.impl.ContextUtil
 import com.google.inject.Inject
+import org.eclipse.xtext.serializer.ISyntacticSequencer
 
 class SerializerFragment extends Xtend2GeneratorFragment {
 	
 	@Inject AbstractSemanticSequencer abstractSemanticSequencer
 	
 	@Inject SemanticSequencer semanticSequencer
+	
+	@Inject AbstractSyntacticSequencer abstractSyntacticSequencer
+	
+	@Inject SyntacticSequencer syntacticSequencer
 	
 	@Inject GrammarConstraints grammarConstraints
 	
@@ -38,6 +43,7 @@ class SerializerFragment extends Xtend2GeneratorFragment {
 	override Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		val bf = new BindFactory();
 		bf.addTypeToType(typeof(ISemanticSequencer).name, semanticSequencer.qualifiedName);
+		bf.addTypeToType(typeof(ISyntacticSequencer).name, syntacticSequencer.qualifiedName);
 		bf.addTypeToType(typeof(ISerializer).name, typeof(Serializer).name);
 		return bf.bindings;
 	}
@@ -45,6 +51,8 @@ class SerializerFragment extends Xtend2GeneratorFragment {
 	override generate(Xtend2ExecutionContext ctx) {
 		ctx.writeFile(Generator::SRC, semanticSequencer.fileName, semanticSequencer.fileContents);
 		ctx.writeFile(Generator::SRC_GEN, abstractSemanticSequencer.fileName, abstractSemanticSequencer.fileContents);
+		ctx.writeFile(Generator::SRC, syntacticSequencer.fileName, syntacticSequencer.fileContents);
+		ctx.writeFile(Generator::SRC_GEN, abstractSyntacticSequencer.fileName, abstractSyntacticSequencer.fileContents);
 		if(state.generateDebugData) {
 			ctx.writeFile(Generator::SRC_GEN, grammarConstraints.fileName, grammarConstraints.fileContents);
 //			for(obj:context2DotRenderer.render2Dot(new SyntacticSequencerPDA2SimpleDot(), "pda"))

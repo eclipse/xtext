@@ -8,11 +8,13 @@
 package org.eclipse.xtext.generator.serializer;
 
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -23,11 +25,30 @@ public class JavaFile {
 
 	protected List<String> imports = Lists.newArrayList();
 
+	protected Map<String, String> imports2 = Maps.newHashMap();
+
 	protected String packageName;
 
 	protected JavaFile(String packageName) {
 		super();
 		this.packageName = packageName;
+	}
+
+	public String imported(Class<?> clazz) {
+		return imported(clazz.getName().replace('$', '.'));
+	}
+
+	public String imported(String clazz) {
+		String simpleName = Strings.lastToken(clazz, ".");
+		String imported = imports2.get(simpleName);
+		if (imported != null) {
+			if (imported.equals(clazz))
+				return simpleName;
+			else
+				return clazz;
+		}
+		imports2.put(simpleName, clazz);
+		return simpleName;
 	}
 
 	public List<String> getImports() {
@@ -56,6 +77,11 @@ public class JavaFile {
 				result.append(importName);
 				result.append(";\n");
 			}
+		for (String importName : imports2.values()) {
+			result.append("import ");
+			result.append(importName);
+			result.append(";\n");
+		}
 		result.append("\n");
 		result.append(body);
 		return result.toString();
