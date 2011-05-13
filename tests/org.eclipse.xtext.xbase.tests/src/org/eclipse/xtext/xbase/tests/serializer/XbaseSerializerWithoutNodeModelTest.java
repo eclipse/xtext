@@ -56,24 +56,4 @@ public class XbaseSerializerWithoutNodeModelTest extends AbstractXbaseEvaluation
 		super.setUp();
 		injector.injectMembers(this);
 	}
-
-	@Override
-	public void testMemberCallOnMultiType_01() throws Exception {
-		// FIXME: https://bugs.eclipse.org/bugs/show_bug.cgi?id=344706
-	}
-
-	@Override
-	public void testMemberCallOnMultiType_02() throws Exception {
-		// FIXME: https://bugs.eclipse.org/bugs/show_bug.cgi?id=344706
-	}
-
-	@Override
-	public void testMemberCallOnMultiType_07() throws Exception {
-		// FIXME: https://bugs.eclipse.org/bugs/show_bug.cgi?id=344706
-	}
-
-	@Override
-	public void testMemberCallOnMultiType_08() throws Exception {
-		// FIXME: https://bugs.eclipse.org/bugs/show_bug.cgi?id=344706
-	}
 }
