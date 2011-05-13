@@ -4,7 +4,6 @@
 */
 package org.eclipse.xtext.xtend2.ui.refactoring;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
@@ -21,16 +20,12 @@ import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.RefactoringStatusException;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
-import org.eclipse.xtext.ui.util.ResourceUtil;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.AbstractJvmModelRenameStrategy;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JvmMemberRenameStrategy;
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JvmReferenceUpdateRenameProcessor;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.RenameJvmReferenceContext;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
-import org.eclipse.xtext.xtend2.xtend2.XtendMember;
 
 import com.google.inject.Inject;
 
