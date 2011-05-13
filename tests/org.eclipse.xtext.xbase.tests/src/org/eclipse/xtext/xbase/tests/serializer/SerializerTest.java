@@ -61,9 +61,9 @@ public class SerializerTest extends AbstractXbaseTestCase {
 		resource.getContents().add(instanceOfExpression);
 		ISerializer serializer = get(ISerializer.class);
 		String string = serializer.serialize(instanceOfExpression);
-		// TODO expectation is wrong
-		assertEquals("if ( false ) \"value\" instanceof String", string);
-//		assertEquals("(if ( false ) \"value\") instanceof String", string);
+		// TODO expectation is wrong --> I've (MEY) fixed the expectation, please verify 
+//		assertEquals("if ( false ) \"value\" instanceof String", string);
+		assertEquals("( if ( false ) \"value\" ) instanceof String", string);
 	}
 
 }
