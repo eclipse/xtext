@@ -46,6 +46,20 @@ public class FolderUtilTest extends AbstractXtend2UITestCase {
 		assertFalse(file.exists());
 	}
 	
+	// does not work without a team provider that provides a IMoveDeleteHook
+//	public void testClearFolderWithTeamPrivateMember() throws Exception {
+//		createProject("test");
+//		IFolder root = createFolder("/test/root");
+//		IFolder subWithMember = createFolder("/test/root/subWithMember");
+//		IFolder subWithoutMember = createFolder("/test/root/subWithoutMember");
+//		IFile teamPrivate = createFile("/test/root/subWithMember/private.file", "private");
+//		folderUtil.clearFolder(root, null);
+//		assertTrue(root.exists());
+//		assertTrue(subWithMember.exists());
+//		assertFalse(subWithoutMember.exists());
+//		assertTrue(teamPrivate.exists());
+//	}
+	
 	public void testRemoveEmptySubFolders() throws Exception {
 		createProject("test");
 		IFolder one = createFolder("/test/one");
