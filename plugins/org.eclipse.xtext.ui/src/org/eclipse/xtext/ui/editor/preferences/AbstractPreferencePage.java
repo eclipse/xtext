@@ -47,7 +47,7 @@ import com.google.inject.name.Named;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
- *
+ * 
  */
 public abstract class AbstractPreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage,
 		IWorkbenchPropertyPage {
@@ -204,7 +204,6 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 
 	@Override
 	protected void addField(FieldEditor editor) {
-		editor.setPreferenceName(qualifiedName() + "." + editor.getPreferenceName()); //$NON-NLS-1$
 		editors.add(editor);
 		super.addField(editor);
 	}
@@ -213,12 +212,12 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 		boolean isUseProjectSettings = useProjectSettingsButton.getSelection();
 		link.setEnabled(!isUseProjectSettings);
 		if (!isUseProjectSettings) {
-			((ScopedPreferenceStore) getPreferenceStore()).setSearchContexts(new IScopeContext[] { new InstanceScope(),
-					new ConfigurationScope() });
+			((ScopedPreferenceStore) getPreferenceStore()).setSearchContexts(new IScopeContext[] { InstanceScope.INSTANCE,
+					ConfigurationScope.INSTANCE });
 		}
 		else {
 			((ScopedPreferenceStore) getPreferenceStore()).setSearchContexts(new IScopeContext[] {
-					new ProjectScope(currentProject()), new InstanceScope(), new ConfigurationScope() });
+					new ProjectScope(currentProject()), InstanceScope.INSTANCE, ConfigurationScope.INSTANCE });
 		}
 		updateFieldEditors(isUseProjectSettings);
 	}
