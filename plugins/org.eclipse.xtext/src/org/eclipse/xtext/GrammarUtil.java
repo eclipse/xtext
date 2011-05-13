@@ -223,6 +223,17 @@ public class GrammarUtil {
 		}
 		return false;
 	}
+	
+	/**
+	 * @since 2.0
+	 */
+	public static boolean isTerminalRuleCall(EObject grammarElement) {
+		if (grammarElement instanceof RuleCall) {
+			AbstractRule calledRule = ((RuleCall) grammarElement).getRule();
+			return calledRule != null && calledRule instanceof TerminalRule;
+		}
+		return false;
+	}
 
 	public static AbstractRule findRuleForName(Grammar grammar, String ruleName) {
 		if (ruleName == null)
