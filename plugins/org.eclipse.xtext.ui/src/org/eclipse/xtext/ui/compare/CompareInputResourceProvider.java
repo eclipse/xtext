@@ -20,7 +20,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.team.internal.ui.StorageTypedElement;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.internal.Lists;
@@ -55,13 +54,14 @@ public class CompareInputResourceProvider implements IResourceProvider {
 		return resource;
 	}
 
+	@SuppressWarnings("restriction")
 	protected IResource getResource(ITypedElement typedElement) {
 		IResource result = null;
 		if (typedElement instanceof IResourceProvider) {
 			IResourceProvider resourceProvider = (IResourceProvider) typedElement;
 			result = resourceProvider.getResource();
-		} else if (typedElement instanceof StorageTypedElement) {
-			StorageTypedElement storageTypedElement = (StorageTypedElement) typedElement;
+		} else if (typedElement instanceof org.eclipse.team.internal.ui.StorageTypedElement) {
+			org.eclipse.team.internal.ui.StorageTypedElement storageTypedElement = (org.eclipse.team.internal.ui.StorageTypedElement) typedElement;
 			IStorage bufferedStorage = storageTypedElement.getBufferedStorage();
 			result = getExistingFile(bufferedStorage != null ? bufferedStorage.getFullPath() : Path.EMPTY);
 		}
