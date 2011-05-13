@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component id="org.eclipse.xtext.ui" version="2">
 <resource path="META-INF/MANIFEST.MF">
-<filter id="923795461">
-<message_arguments>
-<message_argument value="2.0.0.qualifier"/>
-<message_argument value="2.0.0.v201105041334"/>
-</message_arguments>
-</filter>
 <filter id="924844039">
 <message_arguments>
 <message_argument value="2.0.0.qualifier"/>
@@ -75,6 +69,22 @@
 <message_arguments>
 <message_argument value="ProjectionViewer"/>
 <message_argument value="XtextSourceViewer"/>
+</message_arguments>
+</filter>
+</resource>
+<resource path="src/org/eclipse/xtext/ui/editor/info/ResourceWorkingCopyFileEditorInput.java" type="org.eclipse.xtext.ui.editor.info.ResourceWorkingCopyFileEditorInput">
+<filter id="571473929">
+<message_arguments>
+<message_argument value="FileEditorInput"/>
+<message_argument value="ResourceWorkingCopyFileEditorInput"/>
+</message_arguments>
+</filter>
+</resource>
+<resource path="src/org/eclipse/xtext/ui/editor/quickfix/XtextResourceMarkerAnnotationModel.java" type="org.eclipse.xtext.ui.editor.quickfix.XtextResourceMarkerAnnotationModel">
+<filter id="571473929">
+<message_arguments>
+<message_argument value="ResourceMarkerAnnotationModel"/>
+<message_argument value="XtextResourceMarkerAnnotationModel"/>
 </message_arguments>
 </filter>
 </resource>
