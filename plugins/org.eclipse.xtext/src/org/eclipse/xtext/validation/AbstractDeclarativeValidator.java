@@ -310,6 +310,13 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	protected void info(String message, EObject source, EStructuralFeature feature, int index) {
 		info(message, source, feature, index, null);
 	}
+	
+	/**
+	 * @since 2.0
+	 */
+	protected void info(String message, EStructuralFeature feature, String code, String... issueData) {
+		info(message, state.get().currentObject, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code, issueData);
+	}
 
 	protected void info(String message, EObject source, EStructuralFeature feature, int index, String code, String... issueData) {
 		getMessageAcceptor().acceptInfo(message, source, feature, index, code, issueData);
@@ -324,7 +331,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	}
 
 	protected void warning(String message, EStructuralFeature feature, String code, String... issueData) {
-		warning(message, state.get().currentObject, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code);
+		warning(message, state.get().currentObject, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code, issueData);
 	}
 
 	protected void warning(String message, EStructuralFeature feature, int index, String code, String... issueData) {
@@ -352,7 +359,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	}
 
 	protected void error(String message, EStructuralFeature feature, String code, String... issueData) {
-		error(message, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code);
+		error(message, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code, issueData);
 	}
 
 	protected void error(String message, EStructuralFeature feature, int index, String code, String... issueData) {
