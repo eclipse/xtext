@@ -322,7 +322,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		SyntacticalContext ctx = contexts.peek();
 		ctx.lastState = findTransition(ctx.context, ctx.semanticObject, ctx.lastState, ctx.getLastNode(), ele, node,
 				ctx.stack);
-		emitUnassignedTokens((ISynTransition) ctx.lastState, ctx.getLastNode(), node);
+		emitUnassignedTokens(ctx.semanticObject, (ISynTransition) ctx.lastState, ctx.getLastNode(), node);
 		ctx.lastState = navigateToAbsorber(ctx.lastState, ctx.getLastNode(), null, ctx.stack);
 		ctx.setLastNode(getLastLeaf(node));
 	}
@@ -369,6 +369,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		return null;
 	}
 
-	protected abstract void emitUnassignedTokens(ISynTransition transition, INode fromNode, INode toNode);
+	protected abstract void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode,
+			INode toNode);
 
 }

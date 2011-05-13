@@ -16,6 +16,7 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.IPDAState;
 import org.eclipse.xtext.grammaranalysis.IPDAState.PDAStateType;
+import org.eclipse.xtext.serializer.analysis.NfaToGrammar.AbstractElementAlias;
 import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.impl.RuleCallStack;
 
@@ -43,6 +44,10 @@ public interface ISyntacticSequencerPDAProvider {
 
 	public interface ISynFollowerOwner {
 		List<ISynState> getFollowers();
+
+		EClass getEClass();
+
+		EObject getContext();
 	}
 
 	public interface ISynNavigable extends ISynFollowerOwner {
@@ -52,8 +57,8 @@ public interface ISyntacticSequencerPDAProvider {
 
 		int getDistanceWithStackToAbsorber(RuleCallStack stack);
 
-		List<ISynState> getShortestPathTo(Predicate<ISynState> matches, Predicate<ISynState> bounds, RuleCallStack stack,
-				boolean addMatch);
+		List<ISynState> getShortestPathTo(Predicate<ISynState> matches, Predicate<ISynState> bounds,
+				RuleCallStack stack, boolean addMatch);
 
 		List<ISynState> getShortestPathTo(AbstractElement ele, RuleCallStack stack, boolean addMatch);
 
@@ -77,6 +82,7 @@ public interface ISyntacticSequencerPDAProvider {
 
 		ISynAbsorberState getSource();
 
+		AbstractElementAlias<ISynState> getAmbiguousSyntax();
 	}
 
 	public class SynPredicates {

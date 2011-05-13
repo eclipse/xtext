@@ -38,9 +38,14 @@ import org.eclipse.xtext.grammaranalysis.impl.AbstractNFATransition;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractPDAProvider;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementFullTitleSwitch;
 import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider;
+import org.eclipse.xtext.serializer.analysis.NfaToGrammar.ALternativeAlias;
+import org.eclipse.xtext.serializer.analysis.NfaToGrammar.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.NfaToGrammar.ElementAlias;
+import org.eclipse.xtext.serializer.analysis.NfaToGrammar.GroupAlias;
 import org.eclipse.xtext.serializer.impl.RuleCallStack;
 import org.eclipse.xtext.util.LinkedStack;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -281,14 +286,20 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 	protected static class SynAbsorberState extends SynState implements ISynAbsorberState {
 
+		protected EObject context;
+
+		protected EClass eClass;
+
 		protected Map<AbstractElement, ISynTransition> outTransitionsByElement = Maps.newHashMap();
 
 		protected Map<AbstractElement, ISynTransition> outTransitionsByRuleCallEnter = Maps.newHashMap();
 
 		protected Map<AbstractElement, ISynTransition> outTransitionsByRuleCallExit = Maps.newHashMap();
 
-		public SynAbsorberState(SynStateType type, AbstractElement element) {
+		public SynAbsorberState(SynStateType type, AbstractElement element, EObject context, EClass eClass) {
 			super(type, element);
+			this.context = context;
+			this.eClass = eClass;
 		}
 
 		protected void addTransition(ISynTransition transition) {
@@ -334,6 +345,14 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 		public Map<AbstractElement, ISynTransition> getOutTransitionsByRuleCallExit() {
 			return outTransitionsByRuleCallExit;
+		}
+
+		public EClass getEClass() {
+			return eClass;
+		}
+
+		public EObject getContext() {
+			return context;
 		}
 
 	}
@@ -606,6 +625,14 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 					return true;
 			return results.size() != Sets.newHashSet(results).size();
 		}
+
+		public EClass getEClass() {
+			return target.getEClass();
+		}
+
+		public EObject getContext() {
+			return target.getContext();
+		}
 	}
 
 	protected abstract static class SynState implements ISynState {
@@ -688,7 +715,74 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 		@Override
 		public String toString() {
-			return source + " -> " + target;
+			return getSyntax().toString();
+		}
+
+		public AbstractElementAlias<ISynState> getSyntax() {
+			return new NfaToGrammar().nfaToGtammar(source, target, new Function<ISynState, Iterable<ISynState>>() {
+				public Iterable<ISynState> apply(ISynState from) {
+					if (from == source)
+						return getFollowers();
+					if (from == target)
+						return Collections.emptyList();
+					return from.getFollowers();
+				}
+			});
+		}
+
+		public AbstractElementAlias<ISynState> getShortSyntax() {
+			return new NfaToGrammar().nfaToGtammar(source, target, new Function<ISynState, Iterable<ISynState>>() {
+				public Iterable<ISynState> apply(ISynState from) {
+					if (from == target)
+						return Collections.emptyList();
+					ISynFollowerOwner owner = from == source ? SynTransition.this : from;
+					Set<ISynState> followers = Sets.newHashSet();
+					collectFollowers(owner, followers, Sets.<ISynState> newHashSet(), new Predicate<ISynState>() {
+						public boolean apply(ISynState input) {
+							if (input instanceof ISynAbsorberState)
+								return true;
+							AbstractElement ge = input.getGrammarElement();
+							return ge instanceof Keyword || GrammarUtil.isDatatypeRuleCall(ge)
+									|| GrammarUtil.isEnumRuleCall(ge) || GrammarUtil.isTerminalRuleCall(ge);
+						}
+					});
+					return followers;
+				}
+			});
+		}
+
+		protected void collectFollowers(ISynFollowerOwner owner, Set<ISynState> result, Set<ISynState> visited,
+				Predicate<ISynState> filter) {
+			for (ISynState follower : owner.getFollowers())
+				if (visited.add(follower)) {
+					if (filter.apply(follower))
+						result.add(follower);
+					else
+						collectFollowers(follower, result, visited, filter);
+				}
+		}
+
+		protected AbstractElementAlias<ISynState> ambiguousSyntax;
+
+		public AbstractElementAlias<ISynState> getAmbiguousSyntax() {
+			if (ambiguousSyntax != null)
+				return ambiguousSyntax;
+			ambiguousSyntax = getShortSyntax();
+			if (ambiguousSyntax instanceof GroupAlias) {
+				GroupAlias<ISynState> group = (GroupAlias<ISynState>) ambiguousSyntax;
+				List<AbstractElementAlias<ISynState>> children = group.getChildren();
+				int start = 0;
+				while (start < children.size() && children.get(start) instanceof ElementAlias<?>
+						&& children.get(start).isOne())
+					start++;
+				int end = children.size() - 1;
+				while (end >= 0 && children.get(end) instanceof ElementAlias<?> && children.get(end).isOne())
+					end--;
+				group.children = children.subList(start, end + 1);
+				if (group.children.size() == 1)
+					ambiguousSyntax = group.children.get(0);
+			}
+			return ambiguousSyntax;
 		}
 
 	}
@@ -724,19 +818,19 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 	}
 
 	protected SynAbsorberState createAbsorberState(IPDAState state, Map<IPDAState, SynAbsorberState> absorbers,
-			Map<SynAbsorberState, Map<IPDAState, SynState>> emitters) {
+			Map<SynAbsorberState, Map<IPDAState, SynState>> emitters, EObject context, EClass eClass) {
 		SynAbsorberState result = absorbers.get(state);
 		if (result != null)
 			return result;
 		if (state.getType() == PDAStateType.STOP) {
-			absorbers.put(state, result = createAbsorberState(SynStateType.STOP, null));
+			absorbers.put(state, result = createAbsorberState(SynStateType.STOP, null, context, eClass));
 			return result;
 		}
-		absorbers.put(state, result = createAbsorberState(getType(state), state.getGrammarElement()));
+		absorbers.put(state, result = createAbsorberState(getType(state), state.getGrammarElement(), context, eClass));
 		Set<IPDAState> followers = Sets.newHashSet();
 		collectFollowingAbsorberStates(state, false, Sets.<IPDAState> newHashSet(), followers);
 		for (IPDAState follower : followers) {
-			SynAbsorberState target = createAbsorberState(follower, absorbers, emitters);
+			SynAbsorberState target = createAbsorberState(follower, absorbers, emitters, context, eClass);
 			SynTransition transition = createTransition(result, target);
 			Map<IPDAState, SynState> emitter = emitters.get(target);
 			if (emitter == null)
@@ -747,8 +841,9 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		return result;
 	}
 
-	protected SynAbsorberState createAbsorberState(SynStateType type, AbstractElement element) {
-		return new SynAbsorberState(type, element);
+	protected SynAbsorberState createAbsorberState(SynStateType type, AbstractElement element, EObject context,
+			EClass eClass) {
+		return new SynAbsorberState(type, element, context, eClass);
 	}
 
 	protected SynState createEmitterState(SynStateType type, AbstractElement element, SynAbsorberState target) {
@@ -790,7 +885,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		if (result == null) {
 			Map<IPDAState, SynAbsorberState> absorbers = Maps.newHashMap();
 			Map<SynAbsorberState, Map<IPDAState, SynState>> emitters = Maps.newHashMap();
-			result = createAbsorberState(pdaProvider.getPDA(ctx), absorbers, emitters);
+			result = createAbsorberState(pdaProvider.getPDA(ctx), absorbers, emitters, context, type);
 			cache.put(ctx, result);
 		}
 		return result;

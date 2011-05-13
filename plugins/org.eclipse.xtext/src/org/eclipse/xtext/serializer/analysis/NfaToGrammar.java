@@ -1,0 +1,489 @@
+/*******************************************************************************
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.serializer.analysis;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
+
+import com.google.common.base.Function;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
+import com.google.inject.internal.Join;
+
+/**
+ * @author Moritz Eysholdt - Initial contribution and API
+ */
+public class NfaToGrammar {
+
+	public static abstract class AbstractElementAlias<T> {
+		protected boolean many = false;
+
+		protected boolean optional = false;
+
+		protected AbstractElementAlias() {
+		}
+
+		protected AbstractElementAlias(boolean optional, boolean many) {
+			super();
+			this.optional = optional;
+			this.many = many;
+		}
+
+		public String getCardinality() {
+			if (optional && many)
+				return "*";
+			if (many)
+				return "+";
+			if (optional)
+				return "?";
+			return "";
+		}
+
+		public boolean isMany() {
+			return many;
+		}
+
+		public boolean isOne() {
+			return !optional && !many;
+		}
+
+		public boolean isOptional() {
+			return optional;
+		}
+
+		public void setMany(boolean many) {
+			this.many = many;
+		}
+
+		public void setOptional(boolean optional) {
+			this.optional = optional;
+		}
+
+		@Override
+		public String toString() {
+			return toString(false);
+		}
+
+		public abstract String toString(boolean isNested);
+	}
+
+	public static class ALternativeAlias<T> extends AbstractElementAlias<T> {
+		protected Set<AbstractElementAlias<T>> children = Sets.newHashSet();
+
+		public void addChild(AbstractElementAlias<T> child) {
+			if (child == this)
+				throw new RuntimeException();
+			children.add(child);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			ALternativeAlias<?> other = (ALternativeAlias<?>) obj;
+			return children.equals(other.children) && many == other.many && optional == other.optional;
+		}
+
+		public Set<AbstractElementAlias<T>> getChildren() {
+			return children;
+		}
+
+		@Override
+		public int hashCode() {
+			int result = children.hashCode();
+			if (many)
+				result *= 3;
+			if (optional)
+				result *= 7;
+			return result;
+		}
+
+		@Override
+		public String toString(boolean isNested) {
+			List<String> result = Lists.newArrayList();
+			for (AbstractElementAlias<T> child : children)
+				result.add(child.toString(true));
+			Collections.sort(result);
+			String body = Join.join(" | ", result);
+			if (isOne() && !isNested)
+				return body;
+			return "(" + body + ")" + getCardinality();
+		}
+
+	}
+
+	public static class ElementAlias<T> extends AbstractElementAlias<T> {
+		protected T element;
+
+		public ElementAlias(boolean optional, boolean many, T element) {
+			super(optional, many);
+			this.element = element;
+		}
+
+		public ElementAlias(T element) {
+			super();
+			this.element = element;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			ElementAlias<?> other = (ElementAlias<?>) obj;
+			if (many != other.many || optional != other.optional)
+				return false;
+			// FIXME: don't cast down to ISynState
+			Object e1 = element instanceof ISynState ? ((ISynState) element).getGrammarElement() : element;
+			Object e2 = other.element instanceof ISynState ? ((ISynState) other.element).getGrammarElement()
+					: other.element;
+			return e1 == e2;
+		}
+
+		public T getElement() {
+			return element;
+		}
+
+		@Override
+		public int hashCode() {
+			int result = element instanceof ISynState ? ((ISynState) element).getGrammarElement().hashCode() : element
+					.hashCode();
+			if (many)
+				result *= 3;
+			if (optional)
+				result *= 7;
+			return result;
+		}
+
+		@Override
+		public String toString(boolean isNested) {
+			return element.toString() + getCardinality();
+		}
+	}
+
+	public static class GroupAlias<T> extends AbstractElementAlias<T> {
+		protected List<AbstractElementAlias<T>> children = Lists.newArrayList();
+
+		public GroupAlias() {
+			super();
+		}
+
+		public GroupAlias(boolean optional, boolean many, AbstractElementAlias<T>... children) {
+			super(optional, many);
+			Collections.addAll(this.children, children);
+		}
+
+		public void addChild(AbstractElementAlias<T> child) {
+			if (child == this)
+				throw new RuntimeException();
+			children.add(child);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			GroupAlias<?> other = (GroupAlias<?>) obj;
+			return children.equals(other.children) && many == other.many && optional == other.optional;
+		}
+
+		public List<AbstractElementAlias<T>> getChildren() {
+			return children;
+		}
+
+		@Override
+		public int hashCode() {
+			int result = children.hashCode();
+			if (many)
+				result *= 3;
+			if (optional)
+				result *= 7;
+			return result;
+		}
+
+		@Override
+		public String toString(boolean isNested) {
+			List<String> result = Lists.newArrayList();
+			for (AbstractElementAlias<T> child : children)
+				result.add(child.toString(true));
+			String body = Join.join(" ", result);
+			if (isOne() && !isNested)
+				return body;
+			return "(" + body + ")" + getCardinality();
+		}
+
+	}
+
+	public static class StateAlias<T> {
+		protected AbstractElementAlias<T> element;
+		protected Set<StateAlias<T>> incoming = Sets.newHashSet();
+		protected Set<StateAlias<T>> outgoing = Sets.newHashSet();
+
+		protected StateAlias(AbstractElementAlias<T> element) {
+			super();
+			this.element = element;
+		}
+
+		public void absorbIncoming(StateAlias<T> state) {
+			for (StateAlias<T> in : state.incoming) {
+				in.outgoing.remove(state);
+				in.outgoing.add(this);
+				incoming.add(in);
+			}
+		}
+
+		public void absorbOutgoing(StateAlias<T> state) {
+			for (StateAlias<T> out : state.outgoing) {
+				out.incoming.remove(state);
+				out.incoming.add(this);
+				outgoing.add(out);
+			}
+		}
+
+		public void addOutgoing(StateAlias<T> state) {
+			outgoing.add(state);
+			state.incoming.add(this);
+		}
+
+		protected AbstractElementAlias<T> getElement() {
+			return element;
+		}
+
+		protected Set<StateAlias<T>> getIncoming() {
+			return incoming;
+		}
+
+		protected Set<StateAlias<T>> getOutgoing() {
+			return outgoing;
+		}
+
+		@Override
+		public String toString() {
+			return "S(" + element + ")";
+		}
+
+	}
+
+	protected <T> void collectStates(StateAlias<T> state, Set<StateAlias<T>> visited) {
+		if (!visited.add(state))
+			return;
+		for (StateAlias<T> out : state.getOutgoing())
+			collectStates(out, visited);
+	}
+
+	protected <T> boolean createAlternative(StateAlias<T> state, Set<StateAlias<T>> visited) {
+		if (!visited.add(state))
+			return false;
+		boolean created = false;
+		Multimap<StateAlias<T>, StateAlias<T>> alternative = HashMultimap.create();
+		for (StateAlias<T> candidate1 : state.getOutgoing())
+			if (candidate1.getOutgoing().size() == 1 && candidate1.getIncoming().size() == 1)
+				for (StateAlias<T> candidate2 : state.getOutgoing())
+					if (candidate2.getOutgoing().size() == 1 && candidate2.getIncoming().size() == 1)
+						for (StateAlias<T> target : candidate1.getOutgoing())
+							if (candidate1 != candidate2 && candidate2.getOutgoing().contains(target)) {
+								alternative.put(target, candidate1);
+								alternative.put(target, candidate2);
+							}
+		for (StateAlias<T> target : alternative.keySet()) {
+			ALternativeAlias<T> alt = new ALternativeAlias<T>();
+			StateAlias<T> altState = new StateAlias<T>(alt);
+			for (StateAlias<T> candidate : alternative.get(target)) {
+				alt.addChild(candidate.getElement());
+				state.getOutgoing().remove(candidate);
+				target.getIncoming().remove(candidate);
+			}
+			altState.getIncoming().add(state);
+			altState.getOutgoing().add(target);
+			state.getOutgoing().add(altState);
+			target.getIncoming().add(altState);
+			created = true;
+		}
+
+		for (StateAlias<T> out : state.getOutgoing()) {
+			if (createAlternative(out, visited))
+				created = true;
+		}
+		return created;
+	}
+
+	protected <T> boolean createCycle(StateAlias<T> state, Set<StateAlias<T>> visited) {
+		if (!visited.add(state))
+			return false;
+		if (state.getOutgoing().size() == 1 && state.getIncoming().size() == 1) {
+			StateAlias<T> center = state.getOutgoing().iterator().next();
+			if (center != state && center == state.getIncoming().iterator().next()) {
+				GroupAlias<T> cycle;
+				//				if (state.getElement().isOne() && state.getElement() instanceof GroupAlias) {
+				//					cycle = (GroupAlias) state.getElement();
+				//					cycle.addChild(center.getElement());
+				//				} else {
+				cycle = new GroupAlias<T>();
+				cycle.addChild(state.getElement());
+				cycle.addChild(center.getElement());
+				//				}
+				cycle.setMany(true);
+				cycle.setOptional(true);
+				GroupAlias<T> group;
+				//				if (center.getElement().isOne() && center.getElement() instanceof GroupAlias) {
+				//					group = (GroupAlias) center.getElement();
+				//					group.addChild(cycle);
+				//				} else {
+				group = new GroupAlias<T>();
+				group.addChild(center.getElement());
+				group.addChild(cycle);
+				center.element = group;
+				//				}
+				center.getOutgoing().remove(state);
+				center.getIncoming().remove(state);
+				return true;
+			}
+		}
+		boolean created = false;
+		for (StateAlias<T> out : Lists.newArrayList(state.getOutgoing())) {
+			if (createCycle(out, visited))
+				created = true;
+		}
+		return created;
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	protected <T> void createGroup(StateAlias<T> first, StateAlias<T> second) {
+		GroupAlias<T> group = new GroupAlias<T>();
+		if (first.getElement() instanceof GroupAlias && first.getElement().isOne())
+			group.getChildren().addAll(((GroupAlias) first.getElement()).getChildren());
+		else
+			group.addChild(first.getElement());
+		if (second.getElement() instanceof GroupAlias && second.getElement().isOne())
+			group.getChildren().addAll(((GroupAlias) second.getElement()).getChildren());
+		else
+			group.addChild(second.getElement());
+		first.element = group;
+		first.getOutgoing().clear();
+		first.absorbOutgoing(second);
+	}
+
+	protected <T> boolean createGroups(StateAlias<T> state, Set<StateAlias<T>> visited) {
+		if (!visited.add(state))
+			return false;
+		boolean created = false;
+		if (state.getOutgoing().size() == 1 && state.getOutgoing().iterator().next().getIncoming().size() == 1) {
+			StateAlias<T> follower = state.getOutgoing().iterator().next();
+			if (state != follower) {
+				createGroup(state, follower);
+				created = true;
+			}
+		}
+		for (StateAlias<T> out : state.getOutgoing()) {
+			if (createGroups(out, visited))
+				created = true;
+		}
+		return created;
+	}
+
+	protected <T> boolean createMany(StateAlias<T> state, Set<StateAlias<T>> visited) {
+		if (!visited.add(state))
+			return false;
+		boolean created = false;
+		if (state.getOutgoing().contains(state)) {
+			state.getElement().setMany(true);
+			state.getOutgoing().remove(state);
+			state.getIncoming().remove(state);
+			created = true;
+		}
+		for (StateAlias<T> out : state.getOutgoing()) {
+			if (createMany(out, visited))
+				created = true;
+		}
+		return created;
+	}
+
+	protected <T> boolean createOptional(StateAlias<T> state, Set<StateAlias<T>> visited) {
+		if (!visited.add(state))
+			return false;
+		boolean created = false;
+		Multimap<StateAlias<T>, StateAlias<T>> optional = HashMultimap.create();
+		for (StateAlias<T> candidate : state.getOutgoing())
+			if (candidate.getOutgoing().size() == 1 && candidate.getIncoming().size() == 1)
+				for (StateAlias<T> target : candidate.getOutgoing())
+					if (candidate != target && state.getOutgoing().contains(target))
+						optional.put(target, candidate);
+		for (StateAlias<T> target : optional.keySet()) {
+			for (StateAlias<T> opt : optional.get(target))
+				opt.getElement().setOptional(true);
+			state.getOutgoing().remove(target);
+			target.getIncoming().remove(state);
+			created = true;
+		}
+		for (StateAlias<T> out : state.getOutgoing()) {
+			if (createOptional(out, visited))
+				created = true;
+		}
+		return created;
+	}
+
+	protected <T> Set<StateAlias<T>> getAllStates(StateAlias<T> state) {
+		Set<StateAlias<T>> visited = Sets.<StateAlias<T>> newHashSet();
+		collectStates(state, visited);
+		return visited;
+	}
+
+	public <T> AbstractElementAlias<T> nfaToGtammar(T startT, T stopT, Function<T, Iterable<T>> followers) {
+		StateAlias<T> stop = new StateAlias<T>(new ElementAlias<T>(stopT));
+		StateAlias<T> start = toAlias(startT, stop, followers, Maps.<T, StateAlias<T>> newHashMap());
+		boolean changed = true;
+		while (!start.getOutgoing().isEmpty() && changed) {
+			changed = createMany(start, Sets.<StateAlias<T>> newHashSet());
+			//			System.out.println("after Many: " + Join.join(" ", getAllStates(start)));
+			changed |= createGroups(start, Sets.<StateAlias<T>> newHashSet());
+			//			System.out.println("after Groups: " + Join.join(" ", getAllStates(start)));
+			changed |= createAlternative(start, Sets.<StateAlias<T>> newHashSet());
+			//			System.out.println("after Alternative: " + Join.join(" ", getAllStates(start)));
+			changed |= createOptional(start, Sets.<StateAlias<T>> newHashSet());
+			//			System.out.println("after Optional: " + Join.join(" ", getAllStates(start)));
+			changed |= createCycle(start, Sets.<StateAlias<T>> newHashSet());
+			//			System.out.println("after Cycle: " + Join.join(" ", getAllStates(start)));
+		}
+		//		if (!start.getOutgoing().isEmpty())
+		//			System.err.println("error creating grammar for nfa");
+		return start.getElement();
+	}
+
+	protected <T> StateAlias<T> toAlias(T state, StateAlias<T> stop, Function<T, Iterable<T>> followers,
+			Map<T, StateAlias<T>> cache) {
+		StateAlias<T> result = cache.get(state);
+		if (result != null)
+			return result;
+		result = new StateAlias<T>(new ElementAlias<T>(state));
+		cache.put(state, result);
+		for (T follower : followers.apply(state)) {
+			StateAlias<T> followerState = toAlias(follower, stop, followers, cache);
+			result.getOutgoing().add(followerState);
+			followerState.getIncoming().add(result);
+		}
+		return result;
+	}
+}

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.impl;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
@@ -38,7 +39,7 @@ public class GenericSyntacticSequencer extends AbstractSyntacticSequencer {
 	}
 
 	@Override
-	protected void emitUnassignedTokens(ISynTransition transition, INode fromNode, INode toNode) {
+	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
 		if (!transition.hasEmitters())
 			return;
 		if (transition.isSyntacticallyAmbiguous())
