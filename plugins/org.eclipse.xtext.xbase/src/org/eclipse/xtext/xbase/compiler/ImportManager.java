@@ -40,9 +40,16 @@ public class ImportManager {
 	private Map<String,String> imports = newHashMap();
 
 	private boolean organizeImports;
+
+	private String seedSimpleName;
 	
 	public ImportManager(boolean organizeImports) {
+		this(organizeImports, null);
+	}
+	
+	public ImportManager(boolean organizeImports, String seedSimpleName) {
 		this.organizeImports = organizeImports;
+		this.seedSimpleName = seedSimpleName;
 	}
 	
 	public void appendTypeRef(JvmTypeReference typeRef, StringBuilder builder) {
@@ -99,7 +106,7 @@ public class ImportManager {
 			final String simpleName = type.getSimpleName();
 			if (JAVA_LANG_PACK.matcher(qn).matches() || equal(qn,simpleName)) {
 				builder.append(simpleName);
-			} else if (!organizeImports) {
+			} else if (!organizeImports || simpleName.equals(seedSimpleName)) {
 				builder.append(qn);
 			} else {
 				if (imports.containsKey(simpleName)) {

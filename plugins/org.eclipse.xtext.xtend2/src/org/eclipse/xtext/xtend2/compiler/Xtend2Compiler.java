@@ -107,7 +107,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 				writer.append(obj.getPackage());
 				writer.append(";\n");
 			}
-			ImportManager importManager = new ImportManager(true);
+			ImportManager importManager = new ImportManager(true, obj.getXtendClass() != null ? obj.getXtendClass().getName() : null);
 			StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable(importManager);
 			if (obj.getXtendClass() != null) {
 				compile(obj.getXtendClass(), appendable);
