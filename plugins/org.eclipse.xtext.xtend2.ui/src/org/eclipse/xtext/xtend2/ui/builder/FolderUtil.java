@@ -21,7 +21,7 @@ public class FolderUtil {
 	public void clearFolder(final IFolder folder, final SubMonitor progress) throws CoreException {
 		if (folder.exists()) {
 			for (IResource resource : folder.members())
-				resource.delete(true, progress);
+				resource.delete(IResource.KEEP_HISTORY, progress);
 		}
 	}
 
@@ -31,7 +31,7 @@ public class FolderUtil {
 				if (resource instanceof IFolder) {
 					removeEmptySubFolders((IFolder) resource, progress);
 					if (((IFolder) resource).members().length == 0)
-						resource.delete(true, progress);
+						resource.delete(IResource.KEEP_HISTORY, progress);
 				}
 			}
 		}
