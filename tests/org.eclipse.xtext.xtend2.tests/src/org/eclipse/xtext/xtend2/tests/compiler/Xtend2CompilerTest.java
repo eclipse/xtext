@@ -87,6 +87,52 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		"}";
 		assertCompilesTo(expected, input);
 	}
+	
+	public void testExtendsException() throws Exception {
+		final String input = 
+		"package foo\n" +
+		"class NoSuchElementException extends java.util.NoSuchElementException {\n" +
+		"}\n";
+		final String expected =  
+		"package foo;\n" +
+		"\n" + 
+		"\n" +
+		"@SuppressWarnings(\"all\")\n" +
+		"public class NoSuchElementException extends java.util.NoSuchElementException {\n" +
+		"}";
+		assertCompilesTo(expected, input);
+	}
+	
+//	public void testExtendsArrayList_01() throws Exception {
+//		final String input = 
+//		"package foo\n" +
+//		"class ArrayList<T> extends java.util.ArrayList<T> {\n" +
+//		"}\n";
+//		final String expected =  
+//		"package foo;\n" +
+//		"\n" + 
+//		"\n" +
+//		"@SuppressWarnings(\"all\")\n" +
+//		"public class ArrayList<T> extends java.util.ArrayList<T> {\n" +
+//		"}";
+//		assertCompilesTo(expected, input);
+//	}
+//	
+//	public void testExtendsArrayList_02() throws Exception {
+//		final String input = 
+//		"package foo\n" +
+//		"class StringList extends java.util.ArrayList<String> {\n" +
+//		"}\n";
+//		final String expected =  
+//		"package foo;\n" +
+//		"\n" +
+//		"import java.util.ArrayList;\n" +
+//		"\n" +
+//		"@SuppressWarnings(\"all\")\n" +
+//		"public class StringList extends ArrayList<String> {\n" +
+//		"}";
+//		assertCompilesTo(expected, input);
+//	}
 
 	public void testImplements() throws Exception {
 		final String input = 
