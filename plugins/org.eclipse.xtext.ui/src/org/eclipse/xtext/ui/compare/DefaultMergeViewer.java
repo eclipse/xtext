@@ -14,8 +14,11 @@ import org.eclipse.compare.CompareConfiguration;
 import org.eclipse.compare.IResourceProvider;
 import org.eclipse.compare.ISharedDocumentAdapter;
 import org.eclipse.compare.IStreamContentAccessor;
+import org.eclipse.compare.ITypedElement;
 import org.eclipse.compare.contentmergeviewer.IMergeViewerContentProvider;
 import org.eclipse.compare.contentmergeviewer.TextMergeViewer;
+import org.eclipse.compare.structuremergeviewer.ICompareInput;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.common.util.WrappedException;
@@ -38,8 +41,11 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.PartEventAction;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.CompoundXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Provider;
@@ -48,12 +54,25 @@ import com.google.inject.Provider;
  * @author Michael Clay - Initial contribution and API
  */
 public class DefaultMergeViewer extends TextMergeViewer {
+	private final static IUnitOfWork<Boolean, XtextResource> TEST_EXISTING_XTEXT_RESOURCE = new IUnitOfWork<Boolean, XtextResource>() {
+		public Boolean exec(XtextResource xtextResource) throws Exception {
+			return xtextResource != null;
+		}
+	};
+	private static final IResourceProvider NULL_RESOURCE_PROVIDER = new IResourceProvider() {
+		public IResource getResource() {
+			return null;
+		}
+	};
+
 	protected IDocumentProvider documentProvider;
 	protected Map<ISourceViewer, DefaultMergeEditor> sourceViewerEditorMap;
 	/**
 	 * @since 2.0
 	 */
 	protected Provider<XtextSourceViewerConfiguration> sourceViewerConfigurationProvider;
+
+	private Map<Object, IStreamContentAccessor> inputObjectStreamContentAccessorMap = Maps.newHashMap();
 
 	public DefaultMergeViewer(Composite parent, int styles, CompareConfiguration compareConfiguration,
 			IDocumentProvider documentProvider) {
@@ -86,13 +105,26 @@ public class DefaultMergeViewer extends TextMergeViewer {
 		}
 		if (object instanceof IStreamContentAccessor) {
 			try {
-				documentProvider.connect(object);
-				return documentProvider.getDocument(object);
+				StreamContentAccessorDelegate streamContentAccessorDelegate = new StreamContentAccessorDelegate(
+						(IStreamContentAccessor) object, createResourceProvider(object));
+				documentProvider.connect(streamContentAccessorDelegate);
+				inputObjectStreamContentAccessorMap.put(object, streamContentAccessorDelegate);
+				return documentProvider.getDocument(streamContentAccessorDelegate);
 			} catch (CoreException coreException) {
 				throw new WrappedException(coreException);
 			}
 		}
 		return object;
+	}
+
+	/**
+	 * @since 2.0
+	 */
+	protected IResourceProvider createResourceProvider(Object object) {
+		if (getInput() instanceof ICompareInput && object instanceof ITypedElement) {
+			return new CompareInputResourceProvider(((ICompareInput) getInput()), (ITypedElement) object);
+		}
+		return NULL_RESOURCE_PROVIDER;
 	}
 
 	private boolean supportsSharedDocuments(Object object) {
@@ -118,8 +150,12 @@ public class DefaultMergeViewer extends TextMergeViewer {
 
 	protected void disconnectDocuments() {
 		IMergeViewerContentProvider contentProvider = (IMergeViewerContentProvider) getContentProvider();
-		documentProvider.disconnect(contentProvider.getLeftContent(getInput()));
-		documentProvider.disconnect(contentProvider.getRightContent(getInput()));
+		Object ancestorContent = contentProvider.getAncestorContent(getInput());
+		Object leftContent = contentProvider.getLeftContent(getInput());
+		Object rightContent = contentProvider.getRightContent(getInput());
+		documentProvider.disconnect(inputObjectStreamContentAccessorMap.get(ancestorContent));
+		documentProvider.disconnect(inputObjectStreamContentAccessorMap.get(leftContent));
+		documentProvider.disconnect(inputObjectStreamContentAccessorMap.get(rightContent));
 	}
 
 	@Override
@@ -134,8 +170,15 @@ public class DefaultMergeViewer extends TextMergeViewer {
 		SourceViewerConfiguration sourceViewerConfiguration = createSourceViewerConfiguration(sourceViewer, editorInput);
 		sourceViewer.unconfigure();
 		sourceViewer.configure(sourceViewerConfiguration);
-		if (null == editorInput) {
-			sourceViewer.setHyperlinkDetectors(null, sourceViewerConfiguration.getHyperlinkStateMask(sourceViewer));
+		if (sourceViewer.getDocument() instanceof IXtextDocument) {
+			IXtextDocument xtextDocument = (IXtextDocument) sourceViewer.getDocument();
+			if (!xtextDocument.readOnly(TEST_EXISTING_XTEXT_RESOURCE)) {
+				String[] configuredContentTypes = sourceViewerConfiguration.getConfiguredContentTypes(sourceViewer);
+				for (String contentType : configuredContentTypes) {
+					sourceViewer.removeTextHovers(contentType);
+				}
+				sourceViewer.setHyperlinkDetectors(null, sourceViewerConfiguration.getHyperlinkStateMask(sourceViewer));
+			}
 		}
 	}
 
@@ -161,7 +204,7 @@ public class DefaultMergeViewer extends TextMergeViewer {
 	protected void setEditable(ISourceViewer sourceViewer, boolean state) {
 		super.setEditable(sourceViewer, state);
 		DefaultMergeEditor mergeEditor = getEditor(sourceViewer);
-		if (mergeEditor != null) {
+		if (mergeEditor != null && mergeEditor.getEditorInput() != null) {
 			mergeEditor.setEditable(state);
 		}
 	}

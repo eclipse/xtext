@@ -183,7 +183,9 @@ public class XtextDocument extends Document implements IXtextDocument {
 		@Override
 		public <T> T modify(IUnitOfWork<T, XtextResource> work) {
 			try {
-				validationJob.cancel();
+				if (validationJob!=null) {
+					validationJob.cancel();
+				}
 				return super.modify(work);
 			} catch (RuntimeException e) {
 				try {
@@ -228,8 +230,10 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	public void checkAndUpdateAnnotations() {
-		validationJob.cancel();
-		validationJob.schedule();
+		if (validationJob!=null) {
+			validationJob.cancel();
+			validationJob.schedule();
+		}
 	}
 
 	@SuppressWarnings("unchecked")
