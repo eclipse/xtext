@@ -29,6 +29,16 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	@Inject
 	protected ValidationTestHelper helper;
 	
+	public void testNoWildCardsInTypeArgs() throws Exception {
+		XExpression expr = expression("java::util::Collections::<? extends String>singleton()");
+		helper.assertError(expr, TypesPackage.Literals.JVM_WILDCARD_TYPE_REFERENCE, INVALID_USE_OF_WILDCARD);
+	}
+	
+	public void testNoWildCardsInTypeArgs_01() throws Exception {
+		XExpression expr = expression("new java.util.ArrayList<?>()");
+		helper.assertError(expr, TypesPackage.Literals.JVM_WILDCARD_TYPE_REFERENCE, INVALID_USE_OF_WILDCARD);
+	}
+	
 	public void testSideEffectFreeExpressionInBlock_01() throws Exception {
 		XExpression expr = expression("{ val x = 'foo' x 42 }");
 		helper.assertError(expr, XFEATURE_CALL, SIDE_EFFECT_FREE_EXPRESSION_IN_BLOCK);

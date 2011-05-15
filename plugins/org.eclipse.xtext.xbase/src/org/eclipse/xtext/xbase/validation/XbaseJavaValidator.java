@@ -25,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.Primitives;
@@ -176,6 +177,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			if (primitives.isPrimitive(typeRef)) {
 				error("Primitives cannot be used as type arguments.", typeRef, null, INVALID_USE_OF_TYPE);
 			}
+			if (typeRef instanceof JvmWildcardTypeReference) {
+				error("Wildcard types are not allowed in this context",typeRef,null, INSIGNIFICANT_INDEX, INVALID_USE_OF_WILDCARD);
+			}
 		}
 	}
 	
@@ -184,6 +188,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		for (JvmTypeReference typeRef : expression.getTypeArguments()) {
 			if (primitives.isPrimitive(typeRef)) {
 				error("Primitives cannot be used as type arguments.", typeRef, null, INVALID_USE_OF_TYPE);
+			}
+			if (typeRef instanceof JvmWildcardTypeReference) {
+				error("Wildcard types are not allowed in this context",typeRef,null, INSIGNIFICANT_INDEX, INVALID_USE_OF_WILDCARD);
 			}
 		}
 	}
