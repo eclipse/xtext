@@ -67,9 +67,6 @@ public class DefaultMergeViewer extends TextMergeViewer {
 
 	protected IDocumentProvider documentProvider;
 	protected Map<ISourceViewer, DefaultMergeEditor> sourceViewerEditorMap;
-	/**
-	 * @since 2.0
-	 */
 	protected Provider<XtextSourceViewerConfiguration> sourceViewerConfigurationProvider;
 
 	private Map<Object, IStreamContentAccessor> inputObjectStreamContentAccessorMap = Maps.newHashMap();
@@ -80,9 +77,6 @@ public class DefaultMergeViewer extends TextMergeViewer {
 		this.documentProvider = documentProvider;
 	}
 
-	/**
-	 * @since 2.0
-	 */
 	public DefaultMergeViewer(Composite parent, int styles, CompareConfiguration compareConfiguration,
 			StreamContentDocumentProvider documentProvider,
 			Provider<XtextSourceViewerConfiguration> sourceViewerConfigurationProvider) {
@@ -117,9 +111,6 @@ public class DefaultMergeViewer extends TextMergeViewer {
 		return object;
 	}
 
-	/**
-	 * @since 2.0
-	 */
 	protected IResourceProvider createResourceProvider(Object object) {
 		if (getInput() instanceof ICompareInput && object instanceof ITypedElement) {
 			return new CompareInputResourceProvider(((ICompareInput) getInput()), (ITypedElement) object);
@@ -204,7 +195,7 @@ public class DefaultMergeViewer extends TextMergeViewer {
 	protected void setEditable(ISourceViewer sourceViewer, boolean state) {
 		super.setEditable(sourceViewer, state);
 		DefaultMergeEditor mergeEditor = getEditor(sourceViewer);
-		if (mergeEditor != null && mergeEditor.getEditorInput() != null) {
+		if (mergeEditor != null) {
 			mergeEditor.setEditable(state);
 		}
 	}

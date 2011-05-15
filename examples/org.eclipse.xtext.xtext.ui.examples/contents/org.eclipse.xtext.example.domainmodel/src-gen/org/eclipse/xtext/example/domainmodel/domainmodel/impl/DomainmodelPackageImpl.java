@@ -29,6 +29,8 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.Visibility;
 
 import org.eclipse.xtext.xbase.XbasePackage;
 
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+
 import org.eclipse.xtext.xtype.XtypePackage;
 
 /**
@@ -151,6 +153,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
     isInited = true;
 
     // Initialize simple dependencies
+    XAnnotationsPackage.eINSTANCE.eClass();
     XtypePackage.eINSTANCE.eClass();
     XbasePackage.eINSTANCE.eClass();
 
