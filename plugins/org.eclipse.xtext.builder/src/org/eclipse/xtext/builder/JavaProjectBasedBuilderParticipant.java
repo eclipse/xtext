@@ -67,8 +67,7 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 		final IFolder srcGenFolder = getSrcGenFolder(builtProject);
 		if (!srcGenFolder.exists())
 			return;
-		IPackageFragmentRoot root = javaProject.getPackageFragmentRoot(srcGenFolder);
-		if (!root.exists())
+		if (!isValidOutputFolder(javaProject, srcGenFolder))
 			return;
 		for (IResourceDescription.Delta delta : context.getDeltas()) {
 			final Set<String> oldFiles = newHashSet();
@@ -94,6 +93,14 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 				sourceTargetMap.put(delta.getUri(), newFiles);
 			}
 		}
+	}
+
+	/**
+	 * @since 2.0
+	 */
+	protected boolean isValidOutputFolder(IJavaProject javaProject, final IFolder srcGenFolder) {
+		IPackageFragmentRoot root = javaProject.getPackageFragmentRoot(srcGenFolder);
+		return root.exists();
 	}
 
 	/**
