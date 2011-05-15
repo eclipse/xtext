@@ -106,8 +106,6 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedType("java.util.ArrayList<java.lang.String>", "new java.util.ArrayList<java.lang.String>()");
 		assertResolvedType("java.util.HashMap<java.lang.String,java.lang.Boolean>",
 				"new java.util.HashMap<java.lang.String, java.lang.Boolean>()");
-		assertResolvedType("java.util.HashMap<? extends java.lang.String,? super java.lang.Boolean>",
-				"new java.util.HashMap<? extends java.lang.String, ? super java.lang.Boolean>()");
 	}
 	
 	public void testConstructorTypeInference_01() throws Exception {
@@ -218,7 +216,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testFeatureCall_20() throws Exception {
-		assertResolvedType("java.util.List<java.lang.Boolean>", "newArrayList('').map(s|s.length + 1 == 5).map(boolean b|!b)");
+		assertResolvedType("java.util.List<java.lang.Boolean>", "newArrayList('').map(s|s.length + 1 == 5).map(Boolean b|!b)");
 	}
 	
 	public void testFeatureCall_21() throws Exception {
@@ -330,7 +328,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testMethodTypeParamInference_00() throws Exception {
-		assertResolvedType("java.lang.String", "new java.util.ArrayList<? extends String>().findFirst(e|true)");
+		assertResolvedType("java.lang.String", "new java.util.ArrayList<String>().findFirst(e | true)");
 	}
 	
 	public void testMethodTypeParamInference_01() throws Exception {

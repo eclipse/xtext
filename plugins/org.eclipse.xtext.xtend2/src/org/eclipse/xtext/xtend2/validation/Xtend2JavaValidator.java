@@ -139,6 +139,14 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 	
 	@Check
+	@Override
+	public void checkNoSideffectFreeExpressionsInBlockExpression(XBlockExpression blockExpression) {
+		if (blockExpression instanceof RichString)
+			return;
+		super.checkNoSideffectFreeExpressionsInBlockExpression(blockExpression);
+	}
+	
+	@Check
 	public void checkAnnotationTarget(XAnnotation annotation) {
 		JvmAnnotationType annotationType = annotation.getAnnotationType();
 		Set<ElementType> targets = annotationUtil.getAnnotationTargets(annotationType);

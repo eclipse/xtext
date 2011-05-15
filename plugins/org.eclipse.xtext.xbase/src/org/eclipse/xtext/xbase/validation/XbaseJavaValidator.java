@@ -172,26 +172,44 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 	
 	@Check
-	public void checkTypeArguments(XAbstractFeatureCall expression) {
-		for (JvmTypeReference typeRef : expression.getTypeArguments()) {
-			if (primitives.isPrimitive(typeRef)) {
-				error("Primitives cannot be used as type arguments.", typeRef, null, INVALID_USE_OF_TYPE);
-			}
-			if (typeRef instanceof JvmWildcardTypeReference) {
-				error("Wildcard types are not allowed in this context",typeRef,null, INSIGNIFICANT_INDEX, INVALID_USE_OF_WILDCARD);
+	public void checkClosureParameterTypes(XClosure closure) {
+		if (closure.getFormalParameters().isEmpty())
+			return;
+		for (JvmFormalParameter p : closure.getFormalParameters()) {
+			if (p.getParameterType() == null) {
+				JvmTypeReference type = getTypeProvider().getExpectedType(closure);
+				if (type == null) {
+					error("There is no context to infer the closure's argument types from. Consider typing the arguments or put the closures into a typed context.", closure,
+							null, INSIGNIFICANT_INDEX, TOO_LITTLE_TYPE_INFORMATION);
+					return;
+				}
+			} else {
+				ensureNotPrimitiveNorWildcard(p.getParameterType());
 			}
 		}
 	}
 	
 	@Check
+	public void checkTypeArguments(XAbstractFeatureCall expression) {
+		for (JvmTypeReference typeRef : expression.getTypeArguments()) {
+			ensureNotPrimitiveNorWildcard(typeRef);
+		}
+	}
+
+	
+	@Check
 	public void checkTypeArguments(XConstructorCall expression) {
 		for (JvmTypeReference typeRef : expression.getTypeArguments()) {
-			if (primitives.isPrimitive(typeRef)) {
-				error("Primitives cannot be used as type arguments.", typeRef, null, INVALID_USE_OF_TYPE);
-			}
-			if (typeRef instanceof JvmWildcardTypeReference) {
-				error("Wildcard types are not allowed in this context",typeRef,null, INSIGNIFICANT_INDEX, INVALID_USE_OF_WILDCARD);
-			}
+			ensureNotPrimitiveNorWildcard(typeRef);
+		}
+	}
+	
+	protected void ensureNotPrimitiveNorWildcard(JvmTypeReference typeRef) {
+		if (primitives.isPrimitive(typeRef)) {
+			error("Primitives cannot be used as type arguments.", typeRef, null, INVALID_USE_OF_TYPE);
+		}
+		if (typeRef instanceof JvmWildcardTypeReference) {
+			error("Wildcard types are not allowed in this context",typeRef,null, INSIGNIFICANT_INDEX, INVALID_USE_OF_WILDCARD);
 		}
 	}
 	

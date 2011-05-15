@@ -294,9 +294,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	protected JvmTypeReference _expectedType(XVariableDeclaration expr, EReference reference, int index, boolean rawType) {
 		if (reference == XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT) {
 			final JvmTypeReference type = expr.getType();
-			if (type != null)
-				return type;
-			return getTypeReferences().getTypeForName(Object.class, expr);
+			return type;
 		}
 		return null; // no expectations
 	}
@@ -802,10 +800,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			if (parameter.eContainer() instanceof XClosure) {
 				final XClosure closure = (XClosure) parameter.eContainer();
 				JvmTypeReference type = getExpectedType(closure, rawType);
-				int indexOf = closure.getFormalParameters().indexOf(parameter);
 				if (type == null) {
-					return null;
+					return getTypeReferences().getTypeForName(Object.class, parameter);
 				}
+				int indexOf = closure.getFormalParameters().indexOf(parameter);
 				JvmOperation operation = functionConversion.findSingleMethod(type);
 				if (operation != null && indexOf < operation.getParameters().size()) {
 					JvmFormalParameter declaredParam = getParam(operation, indexOf);
