@@ -45,6 +45,7 @@ public class IssueCodes {
 	public static final String UNREACHABLE_CODE = ISSUE_CODE_PREFIX + "unreachable_code";
 	public static final String UNRESOLVABLE_PROXY = ISSUE_CODE_PREFIX + "unresolvable_proxy";
 	public static final String VARIABLE_NAME_SHADOWING = ISSUE_CODE_PREFIX + "variable_name_shadowing";
+	public static final String SIDE_EFFECT_FREE_EXPRESSION_IN_BLOCK = ISSUE_CODE_PREFIX + "side_effect_free_expression_in_block";
 	
 	// list is not necessarily complete
 	// list is sorted from least important issue to worst issue
@@ -57,6 +58,7 @@ public class IssueCodes {
 			INVALID_ARGUMENT_TYPES,
 			INVALID_NUMBER_OF_ARGUMENTS
 	);
+
 	
 	public static int compareIssueCodes(String left, String right) {
 		if (left == right || left.equals(right))
