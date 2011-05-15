@@ -29,6 +29,11 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	@Inject
 	protected ValidationTestHelper helper;
 	
+	public void testToLittleTypeInformation() throws Exception {
+		XExpression expr = expression("{ val x = [e | e.toString()] }");
+		helper.assertError(expr, XCLOSURE, TOO_LITTLE_TYPE_INFORMATION);
+	}
+	
 	public void testNoWildCardsInTypeArgs() throws Exception {
 		XExpression expr = expression("java::util::Collections::<? extends String>singleton()");
 		helper.assertError(expr, TypesPackage.Literals.JVM_WILDCARD_TYPE_REFERENCE, INVALID_USE_OF_WILDCARD);

@@ -42,6 +42,7 @@ public class IssueCodes {
 	public static final String OBSOLETE_CAST = ISSUE_CODE_PREFIX + "obsolete_cast";
 	public static final String OBSOLETE_INSTANCEOF = ISSUE_CODE_PREFIX + "obsolete_instanceof";
 	public static final String STATIC_ACCESS_TO_INSTANCE_MEMBER = ISSUE_CODE_PREFIX	+ "static_access_to_instance_member";
+	public static final String TOO_LITTLE_TYPE_INFORMATION = ISSUE_CODE_PREFIX + "too_little_type_information";
 	public static final String TOO_MANY_PARAMS_IN_CLOSURE = ISSUE_CODE_PREFIX + "too_many_params_in_closure";
 	public static final String UNREACHABLE_CODE = ISSUE_CODE_PREFIX + "unreachable_code";
 	public static final String UNRESOLVABLE_PROXY = ISSUE_CODE_PREFIX + "unresolvable_proxy";

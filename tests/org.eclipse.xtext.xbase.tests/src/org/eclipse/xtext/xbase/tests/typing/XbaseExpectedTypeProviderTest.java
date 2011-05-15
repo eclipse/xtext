@@ -128,7 +128,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	public void testVariableDeclaration_0() throws Exception {
 		XVariableDeclaration decl = (XVariableDeclaration) ((XBlockExpression) expression("{ " + "  var  x = 'hello'"
 				+ "  null" + "}")).getExpressions().get(0);
-		assertExpected("java.lang.Object", decl.getRight());
+		assertExpected(null, decl.getRight());
 	}
 
 	public void testVariableDeclaration_1() throws Exception {
