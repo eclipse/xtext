@@ -35,6 +35,7 @@ public class IssueCodes {
 	public static final String INVALID_NUMBER_OF_ARGUMENTS = ISSUE_CODE_PREFIX + "invalid_number_of_arguments";
 	public static final String INVALID_NUMBER_OF_TYPE_ARGUMENTS = ISSUE_CODE_PREFIX + "invalid_number_of_type_arguments";
 	public static final String INVALID_USE_OF_TYPE = ISSUE_CODE_PREFIX + "invalid_use_of_void";
+	public static final String INVALID_USE_OF_WILDCARD = ISSUE_CODE_PREFIX + "invalid_use_of_wild_card";
 	public static final String METHOD_ACCESS_WITHOUT_PARENTHESES = ISSUE_CODE_PREFIX + "method_access_without_parentheses";
 	public static final String MISSING_INITIALIZATION = ISSUE_CODE_PREFIX + "missing_initialization";
 	public static final String MISSING_TYPE = ISSUE_CODE_PREFIX + "missing_type";
