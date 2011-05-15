@@ -6,10 +6,13 @@ package org.eclipse.xtext.xtend2.ui.contentassist;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.core.Flags;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
+import org.eclipse.jface.text.contentassist.CompletionProposal;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -59,4 +62,36 @@ public class Xtend2ProposalProvider extends AbstractXtend2ProposalProvider {
 		completeJavaTypes(context, XbasePackage.Literals.XTYPE_LITERAL__TYPE, true, getQualifiedNameValueConverter(), TypeMatchFilters.all(IJavaSearchConstants.INTERFACE), acceptor);
 	}
 	
+	protected void addGuillemotsProposal(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		acceptor.accept(new ConfigurableCompletionProposal("«»", context.getOffset(), context.getSelectedText().length(), 1));
+	}
+
+	public void completeInRichString(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		addGuillemotsProposal(context, acceptor);
+	}
+	
+	@Override
+	public void complete_RICH_TEXT(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeInRichString(model, ruleCall, context, acceptor);
+	}
+	
+	@Override
+	public void complete_RICH_TEXT_START(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeInRichString(model, ruleCall, context, acceptor);
+	}
+	
+	@Override
+	public void complete_RICH_TEXT_END(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeInRichString(model, ruleCall, context, acceptor);
+	}
+	
+	@Override
+	public void complete_RICH_TEXT_INBETWEEN(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeInRichString(model, ruleCall, context, acceptor);
+	}
 }
