@@ -80,9 +80,6 @@ public class StreamContentDocumentProvider extends AbstractDocumentProvider {
 		}
 	}
 
-	/**
-	 * @since 2.0
-	 */
 	protected XtextResource createResource(Object element) {
 		XtextResource xtextResource = null;
 		if (element instanceof IResourceProvider) {
@@ -99,9 +96,6 @@ public class StreamContentDocumentProvider extends AbstractDocumentProvider {
 		return xtextResource;
 	}
 
-	/**
-	 * @since 2.0
-	 */
 	protected void loadResource(Object element, Resource resource) {
 		if (resource == null) {
 			return;
@@ -154,9 +148,6 @@ public class StreamContentDocumentProvider extends AbstractDocumentProvider {
 		super.disposeElementInfo(element, info);
 	}
 
-	/**
-	 * @since 2.0
-	 */
 	protected String getEncoding(Object element) {
 		String encoding = ResourcesPlugin.getEncoding();
 		if (element instanceof IEncodedStreamContentAccessor) {

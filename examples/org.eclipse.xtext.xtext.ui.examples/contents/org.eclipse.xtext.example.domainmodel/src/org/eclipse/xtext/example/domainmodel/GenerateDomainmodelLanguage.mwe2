@@ -104,6 +104,11 @@ Workflow {
 			// rename refactoring
 			fragment = refactoring.RefactorElementNameFragment {}
 			
+			// provides a compare view
+			fragment = compare.CompareFragment {
+				fileExtensions = file.extensions
+			}
+
 			// Xbase support
 			fragment = types.TypesGeneratorFragment {}
 			fragment = xbase.XbaseGeneratorFragment {}

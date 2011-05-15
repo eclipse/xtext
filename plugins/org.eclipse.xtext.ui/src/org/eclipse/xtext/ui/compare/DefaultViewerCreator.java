@@ -27,9 +27,6 @@ public class DefaultViewerCreator implements IViewerCreator {
 	protected Provider<DefaultMergeEditor> mergeEditorProvider;
 	@Inject
 	protected StreamContentDocumentProvider documentProvider;
-	/**
-	 * @since 2.0
-	 */
 	@Inject
 	protected Provider<XtextSourceViewerConfiguration> sourceViewerConfigurationProvider;
 

@@ -26,7 +26,6 @@ import com.google.inject.internal.Lists;
 
 /**
  * @author Michael Clay - Initial contribution and API
- * @since 2.0
  */
 public class CompareInputResourceProvider implements IResourceProvider {
 	private ICompareInput compareInput;

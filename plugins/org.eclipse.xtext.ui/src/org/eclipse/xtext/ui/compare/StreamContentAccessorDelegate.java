@@ -17,7 +17,6 @@ import org.eclipse.core.runtime.CoreException;
 
 /**
  * @author Michael Clay - Initial contribution and API
- * @since 2.0
  */
 public class StreamContentAccessorDelegate implements IStreamContentAccessor, IResourceProvider {
 	private IStreamContentAccessor streamContentAccessor;
