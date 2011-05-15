@@ -29,6 +29,26 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	@Inject
 	protected ValidationTestHelper helper;
 	
+	public void testSideEffectFreeExpressionInBlock_01() throws Exception {
+		XExpression expr = expression("{ val x = 'foo' x 42 }");
+		helper.assertError(expr, XFEATURE_CALL, SIDE_EFFECT_FREE_EXPRESSION_IN_BLOCK);
+	}
+	
+	public void testSideEffectFreeExpressionInBlock_02() throws Exception {
+		XExpression expr = expression("{ val x = 'foo' 'bar' 42 }");
+		helper.assertError(expr, XSTRING_LITERAL, SIDE_EFFECT_FREE_EXPRESSION_IN_BLOCK);
+	}
+	
+	public void testSideEffectFreeExpressionInBlock_03() throws Exception {
+		XExpression expr = expression("{ val x = 'foo' 42 x }");
+		helper.assertError(expr, XINT_LITERAL, SIDE_EFFECT_FREE_EXPRESSION_IN_BLOCK);
+	}
+	
+	public void testLocalVarWithArguments() throws Exception {
+		XExpression expr = expression("{ val x = 'foo' x(42) }");
+		helper.assertError(expr, XFEATURE_CALL, INVALID_NUMBER_OF_ARGUMENTS, "field","variable");
+	}
+	
 	public void testVariableShadowing_00() throws Exception {
 		XExpression expression = expression("{ val x = 'foo' { val x= 'bar' return x } }");
 		helper.assertError(expression, XbasePackage.Literals.XVARIABLE_DECLARATION, VARIABLE_NAME_SHADOWING, "x");

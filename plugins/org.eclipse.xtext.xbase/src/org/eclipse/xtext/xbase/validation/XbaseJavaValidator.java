@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -39,17 +40,23 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
+import org.eclipse.xtext.xbase.XIntLiteral;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XNullLiteral;
+import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
+import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
@@ -113,6 +120,41 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	protected Set<EReference> getTypeConformanceCheckedReferences() {
 		return typeConformanceCheckedReferences;
+	}
+	
+	@Check
+	public void checkVariableReferencesHaveNoArgs(XFeatureCall featureCall) {
+		if (featureCall.getFeature() instanceof JvmOperation) {
+			return;
+		}
+		if (!featureCall.getExplicitArguments().isEmpty())
+			error("No arguments can be passed to a local variable or field.", featureCall, null, INSIGNIFICANT_INDEX, IssueCodes.INVALID_NUMBER_OF_ARGUMENTS);
+	}
+	
+	@Check
+	public void checkNoSideffectFreeExpressionsInBlockExpression(XBlockExpression blockExpression) {
+		for (int i = 0; i< blockExpression.getExpressions().size()-1; i++) {
+			XExpression expr = blockExpression.getExpressions().get(i);
+			if (isSideEffectFree(expr)) {
+				error("The expression does not cause any side effects and therefore doesn't do anything in this context.", expr, null, INSIGNIFICANT_INDEX, IssueCodes.SIDE_EFFECT_FREE_EXPRESSION_IN_BLOCK);
+			}
+		}
+	}
+
+	//TODO extract and put in separate class for general reuse (see also AbstractXbaseCompiler#isVariableDeclarationRequired )
+	protected boolean isSideEffectFree(XExpression expr) {
+		if (expr instanceof XMemberFeatureCall) {
+			return ((XMemberFeatureCall) expr).getFeature() instanceof JvmField;
+		}
+		if (expr instanceof XFeatureCall) {
+			return !(((XFeatureCall) expr).getFeature() instanceof JvmOperation);
+		}
+		return expr instanceof XStringLiteral 
+			|| expr instanceof XTypeLiteral
+			|| expr instanceof XIntLiteral
+			|| expr instanceof XNullLiteral
+			|| expr instanceof XBooleanLiteral
+			|| expr instanceof XClosure;
 	}
 
 	@Check
