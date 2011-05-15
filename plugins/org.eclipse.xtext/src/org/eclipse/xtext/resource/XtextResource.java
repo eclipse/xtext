@@ -279,8 +279,8 @@ public class XtextResource extends ResourceImpl {
 
 	@Override
 	public void doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
-		if (getContents().size() != 1)
-			throw new IllegalStateException("The Xtext resource must contain exactly one root element");
+		if (getContents().isEmpty())
+			throw new IllegalStateException("The Xtext resource must contain at least one element.");
 		SaveOptions saveOptions = SaveOptions.getOptions(options);
 		setEncodingFromOptions(options);
 		serializer.serialize(getContents().get(0), new OutputStreamWriter(outputStream, getEncoding()), saveOptions);
