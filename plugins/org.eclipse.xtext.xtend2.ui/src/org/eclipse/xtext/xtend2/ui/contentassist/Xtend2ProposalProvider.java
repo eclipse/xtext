@@ -68,7 +68,10 @@ public class Xtend2ProposalProvider extends AbstractXtend2ProposalProvider {
 
 	public void completeInRichString(EObject model, RuleCall ruleCall, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		addGuillemotsProposal(context, acceptor);
+		int offset = context.getCurrentNode().getOffset();
+		int length = context.getCurrentNode().getLength();
+		if (context.getOffset() > offset && context.getOffset() < offset+length)
+			addGuillemotsProposal(context, acceptor);
 	}
 	
 	@Override
