@@ -23,7 +23,7 @@ XAnnotation :
 ;
 
 XAnnotationElementValuePair :
-	element=[types::JvmOperation] '=' value=XAnnotationElementValue	
+	element=[types::JvmOperation|ValidID] '=' value=XAnnotationElementValue	
 ;
 
 XAnnotationElementValueStringConcatenation returns xbase::XExpression :

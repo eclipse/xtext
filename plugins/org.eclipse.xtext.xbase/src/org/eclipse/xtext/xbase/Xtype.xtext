@@ -12,7 +12,7 @@ import "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
 import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore"
 
 JvmTypeReference returns JvmParameterizedTypeReference:
-  JvmParameterizedTypeReference|XFunctionTypeRef;
+  JvmParameterizedTypeReference | XFunctionTypeRef;
 
 XFunctionTypeRef:
   ('(' paramTypes+=JvmTypeReference (',' paramTypes+=JvmTypeReference)* ')')? '=>' returnType=JvmTypeReference;
@@ -36,12 +36,16 @@ JvmLowerBound :
  'super' typeReference=JvmTypeReference;
 
 JvmTypeParameter :
-  name=ID 
+  name=ValidID 
   ((constraints+=JvmUpperBound (constraints+=JvmUpperBoundAnded)*) |
    (constraints+=JvmLowerBound))?;
 
 QualifiedName:
-  ID ('.' ID)*;
+  ValidID ('.' ValidID)*;
   
+ValidID:
+	ID
+;
+
 terminal ID:
-	'^'?('a'..'z'|'A'..'Z'|'$'|'_') ('a'..'z'|'A'..'Z'|'$'|'_'|'0'..'9')*;
+	'^'? ('a'..'z'|'A'..'Z'|'$'|'_') ('a'..'z'|'A'..'Z'|'$'|'_'|'0'..'9')*;
