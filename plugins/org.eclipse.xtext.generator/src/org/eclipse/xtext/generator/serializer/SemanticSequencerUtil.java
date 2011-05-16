@@ -17,11 +17,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.ConstraintElementType;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintElement;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.ConstraintElementType;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintElement;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;

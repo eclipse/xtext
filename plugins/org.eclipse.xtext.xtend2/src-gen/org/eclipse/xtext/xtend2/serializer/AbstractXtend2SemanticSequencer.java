@@ -1,26 +1,75 @@
 package org.eclipse.xtext.xtend2.serializer;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.GenericSequencer;
-import org.eclipse.xtext.serializer.ISemanticNodeProvider;
-import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.ITransientValueService;
-import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.ITransientValueService.ValueTransient;
-import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
-import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
-import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
-import org.eclipse.xtext.serializer.impl.AbstractSemanticSequencer;
-import org.eclipse.xtext.xtend2.services.Xtend2GrammarAccess;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import org.eclipse.xtext.xtend2.xtend2.*;
-import org.eclipse.xtext.common.types.*;
-import org.eclipse.xtext.xbase.*;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.*;
-import org.eclipse.xtext.xtype.*;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmLowerBound;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
+import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
+import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
+import org.eclipse.xtext.serializer.sequencer.AbstractSemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
+import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
+import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XBooleanLiteral;
+import org.eclipse.xtext.xbase.XCasePart;
+import org.eclipse.xtext.xbase.XCastedExpression;
+import org.eclipse.xtext.xbase.XCatchClause;
+import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XDoWhileExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XForLoopExpression;
+import org.eclipse.xtext.xbase.XIfExpression;
+import org.eclipse.xtext.xbase.XInstanceOfExpression;
+import org.eclipse.xtext.xbase.XIntLiteral;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XNullLiteral;
+import org.eclipse.xtext.xbase.XReturnExpression;
+import org.eclipse.xtext.xbase.XStringLiteral;
+import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.XThrowExpression;
+import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
+import org.eclipse.xtext.xbase.XTypeLiteral;
+import org.eclipse.xtext.xbase.XUnaryOperation;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.XWhileExpression;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.serializer.XbaseWithAnnotationsSemanticSequencer;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+import org.eclipse.xtext.xtend2.services.Xtend2GrammarAccess;
+import org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo;
+import org.eclipse.xtext.xtend2.xtend2.RichString;
+import org.eclipse.xtext.xtend2.xtend2.RichStringElseIf;
+import org.eclipse.xtext.xtend2.xtend2.RichStringForLoop;
+import org.eclipse.xtext.xtend2.xtend2.RichStringIf;
+import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
+import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
+import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendField;
+import org.eclipse.xtext.xtend2.xtend2.XtendFile;
+import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.eclipse.xtext.xtend2.xtend2.XtendImport;
+import org.eclipse.xtext.xtend2.xtend2.XtendMember;
+import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
+import org.eclipse.xtext.xtype.XFunctionTypeRef;
+import org.eclipse.xtext.xtype.XtypePackage;
 
 @SuppressWarnings("restriction")
 public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
@@ -33,9 +82,6 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	
 	@Inject
 	protected ITransientValueService transientValues;
-	
-	@Inject
-	protected ISemanticNodeProvider nodeProvider;
 	
 	@Inject
 	@GenericSequencer
@@ -56,8 +102,6 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 		this.superSequencer = superSequencerProvider.get();
 		this.superSequencer.init(sequencer, sequenceAcceptor, errorAcceptor); 
 	}
-	
-	
 	
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == Xtend2Package.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
@@ -86,19 +130,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				}
 				else break;
 			case Xtend2Package.RICH_STRING_LITERAL:
-				if(context == grammarAccess.getRichStringLiteralRule()) {
-					sequence_RichStringLiteral_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getRichStringLiteralStartRule()) {
-					sequence_RichStringLiteralStart_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getRichStringLiteralInbetweenRule()) {
-					sequence_RichStringLiteralInbetween_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getInternalRichStringLiteralRule()) {
+				if(context == grammarAccess.getInternalRichStringLiteralRule()) {
 					sequence_InternalRichStringLiteral_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
@@ -106,9 +138,25 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 					sequence_RichStringLiteralEnd_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
+				else if(context == grammarAccess.getRichStringLiteralStartRule()) {
+					sequence_RichStringLiteralStart_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getRichStringLiteralRule()) {
+					sequence_RichStringLiteral_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getRichStringLiteralInbetweenRule()) {
+					sequence_RichStringLiteralInbetween_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
+					return; 
+				}
 				else break;
 			case Xtend2Package.RICH_STRING:
-				if(context == grammarAccess.getXStringLiteralRule() ||
+				if(context == grammarAccess.getInternalRichStringRule()) {
+					sequence_InternalRichString_RichString(context, (RichString) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getXStringLiteralRule() ||
 				   context == grammarAccess.getRichStringRule() ||
 				   context == grammarAccess.getRichStringPartRule() ||
 				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
@@ -143,10 +191,6 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				   context == grammarAccess.getXParenthesizedExpressionRule() ||
 				   context == grammarAccess.getXExpressionInsideBlockRule()) {
 					sequence_RichString_RichString(context, (RichString) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getInternalRichStringRule()) {
-					sequence_InternalRichString_RichString(context, (RichString) semanticObject); 
 					return; 
 				}
 				else break;
@@ -311,14 +355,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				}
 				else break;
 			case XbasePackage.XFEATURE_CALL:
-				if(context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
-				   context == grammarAccess.getXAnnotationElementValueRule() ||
-				   context == grammarAccess.getXAnnotationValueFieldReferenceRule()) {
-					sequence_XAnnotationValueFieldReference_XFeatureCall(context, (XFeatureCall) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getRichStringPartRule() ||
+				if(context == grammarAccess.getRichStringPartRule() ||
 				   context == grammarAccess.getXExpressionRule() ||
 				   context == grammarAccess.getXAssignmentRule() ||
 				   context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
@@ -348,6 +385,13 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				   context == grammarAccess.getXExpressionInsideBlockRule() ||
 				   context == grammarAccess.getXFeatureCallRule()) {
 					sequence_XFeatureCall_XFeatureCall(context, (XFeatureCall) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
+				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
+				   context == grammarAccess.getXAnnotationElementValueRule() ||
+				   context == grammarAccess.getXAnnotationValueFieldReferenceRule()) {
+					sequence_XAnnotationValueFieldReference_XFeatureCall(context, (XFeatureCall) semanticObject); 
 					return; 
 				}
 				else break;

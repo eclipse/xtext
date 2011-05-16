@@ -9,13 +9,13 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.serializer.GenericSequencer;
-import org.eclipse.xtext.serializer.ISemanticSequencer;
-import org.eclipse.xtext.serializer.ITransientValueService;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
-import org.eclipse.xtext.serializer.impl.AbstractSemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.AbstractSemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.xbase.services.XtypeGrammarAccess;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XtypePackage;
@@ -69,12 +69,12 @@ public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 				}
 				else break;
 			case TypesPackage.JVM_UPPER_BOUND:
-				if(context == grammarAccess.getJvmUpperBoundRule()) {
-					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
+					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
-					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				else if(context == grammarAccess.getJvmUpperBoundRule()) {
+					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
 				else break;

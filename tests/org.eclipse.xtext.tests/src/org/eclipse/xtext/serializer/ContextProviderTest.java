@@ -17,6 +17,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
+import org.eclipse.xtext.serializer.analysis.IContextProvider;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 

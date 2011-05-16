@@ -18,11 +18,12 @@ import org.eclipse.xtext.GrammarToDot;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
 import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider.ActionFilterState;
 import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider.ActionFilterTransition;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;

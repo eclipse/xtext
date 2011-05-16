@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.serializer;
+package org.eclipse.xtext.serializer.analysis;
 
 import java.util.List;
 import java.util.Map;
@@ -17,8 +17,7 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.IPDAState;
 import org.eclipse.xtext.grammaranalysis.IPDAState.PDAStateType;
 import org.eclipse.xtext.serializer.analysis.NfaToGrammar.AbstractElementAlias;
-import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider;
-import org.eclipse.xtext.serializer.impl.RuleCallStack;
+import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
 
 import com.google.common.base.Predicate;
 import com.google.inject.ImplementedBy;

@@ -79,7 +79,7 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 		return XtextTransientValueService.class;
 	}
 	
-	public Class<? extends org.eclipse.xtext.serializer.ITransientValueService> bindITransientValueService2() {
+	public Class<? extends org.eclipse.xtext.serializer.sequencer.ITransientValueService> bindITransientValueService2() {
 		return XtextTransientValueService2.class;
 	}
 

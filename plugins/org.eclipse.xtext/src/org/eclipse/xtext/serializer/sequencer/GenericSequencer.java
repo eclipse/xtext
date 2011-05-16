@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.serializer;
+package org.eclipse.xtext.serializer.sequencer;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

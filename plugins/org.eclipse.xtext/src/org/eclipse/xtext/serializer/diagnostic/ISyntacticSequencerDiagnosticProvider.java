@@ -9,10 +9,10 @@ package org.eclipse.xtext.serializer.diagnostic;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynAbsorberState;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynNavigable;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
-import org.eclipse.xtext.serializer.impl.RuleCallStack;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
+import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
 
 import com.google.inject.ImplementedBy;
 

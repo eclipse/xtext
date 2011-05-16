@@ -68,10 +68,10 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
     {
       BindFactory _bindFactory = new BindFactory();
       final BindFactory bf = _bindFactory;
-      String _name = org.eclipse.xtext.serializer.ISemanticSequencer.class.getName();
+      String _name = org.eclipse.xtext.serializer.sequencer.ISemanticSequencer.class.getName();
       String _qualifiedName = this.semanticSequencer.getQualifiedName();
       bf.addTypeToType(_name, _qualifiedName);
-      String _name_1 = org.eclipse.xtext.serializer.ISyntacticSequencer.class.getName();
+      String _name_1 = org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer.class.getName();
       String _qualifiedName_1 = this.syntacticSequencer.getQualifiedName();
       bf.addTypeToType(_name_1, _qualifiedName_1);
       String _name_2 = org.eclipse.xtext.serializer.ISerializer.class.getName();

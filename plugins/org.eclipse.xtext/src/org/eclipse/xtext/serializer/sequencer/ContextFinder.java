@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.serializer.impl;
+package org.eclipse.xtext.serializer.sequencer;
 
 import java.util.List;
 import java.util.Map;
@@ -14,10 +14,9 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.serializer.IContextFinder;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 

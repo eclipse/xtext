@@ -2,9 +2,6 @@ package org.eclipse.xtext.generator.serializer
 
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess
 import java.util.List
-import org.eclipse.xtext.serializer.impl.GrammarConstraintProvider
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider$IConstraint
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider$IConstraintElement
 import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.Group
 import org.eclipse.xtext.Alternatives
@@ -24,22 +21,13 @@ import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.AbstractElement
 import java.util.Set
 import org.eclipse.xtext.RuleCall
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider
-import org.eclipse.xtext.serializer.IContextProvider
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider$ISynAbsorberState
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider$ISynFollowerOwner
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider$ISynTransition
-import org.eclipse.xtext.serializer.ISyntacticSequencer$ISynState
-import org.eclipse.xtext.serializer.ISyntacticSequencer$ISyntacticSequencerOwner
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider$ISynState
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider$ISynEmitterState
-import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider$SynTransition
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementFullTitleSwitch
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.serializer.analysis.NfaToGrammar
 import org.eclipse.xtext.serializer.analysis.NfaToGrammar$NfaToGrammar$AbstractElementAlias
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.IGrammarAccess
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider$ISynTransition
 
 class AbstractSyntacticSequencer extends GeneratedFile {
 	
@@ -58,7 +46,7 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 	override getFileContents() {
 		val file = new JavaFile(packageName);
 		
-		file.imported(typeof(org.eclipse.xtext.serializer.impl.AbstractSyntacticSequencer))
+		file.imported(typeof(org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer))
 		file.imported(typeof(RuleCall))
 		file.imported(typeof(INode))
 		file.imported(typeof(ISyntacticSequencerPDAProvider$ISynTransition))

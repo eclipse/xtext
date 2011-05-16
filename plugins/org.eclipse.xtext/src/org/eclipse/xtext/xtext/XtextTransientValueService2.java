@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
-import static org.eclipse.xtext.serializer.ITransientValueService.ValueTransient.*;
+import static org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient.*;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -25,7 +25,7 @@ import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.serializer.impl.TransientValueService;
+import org.eclipse.xtext.serializer.sequencer.TransientValueService;
 import org.eclipse.xtext.util.Strings;
 
 /**

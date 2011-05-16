@@ -17,13 +17,13 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynAbsorberState;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynEmitterState;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynFollowerOwner;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider;
-import org.eclipse.xtext.serializer.impl.RuleCallStack;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynEmitterState;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynFollowerOwner;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
+import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
 
 import com.google.common.collect.Sets;
 

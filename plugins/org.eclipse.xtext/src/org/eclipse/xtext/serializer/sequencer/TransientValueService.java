@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.serializer.impl;
+package org.eclipse.xtext.serializer.sequencer;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EEnum;
@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.serializer.ITransientValueService;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

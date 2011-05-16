@@ -3,7 +3,7 @@ package org.eclipse.xtext.xbase.serializer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynTransition;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XIfExpression;

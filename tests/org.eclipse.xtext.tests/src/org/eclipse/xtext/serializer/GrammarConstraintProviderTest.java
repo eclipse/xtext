@@ -13,8 +13,9 @@ import java.util.Set;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;

@@ -37,12 +37,10 @@ import org.eclipse.xtext.grammaranalysis.impl.AbstractNFAState;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractNFATransition;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractPDAProvider;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementFullTitleSwitch;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider;
-import org.eclipse.xtext.serializer.analysis.NfaToGrammar.ALternativeAlias;
 import org.eclipse.xtext.serializer.analysis.NfaToGrammar.AbstractElementAlias;
 import org.eclipse.xtext.serializer.analysis.NfaToGrammar.ElementAlias;
 import org.eclipse.xtext.serializer.analysis.NfaToGrammar.GroupAlias;
-import org.eclipse.xtext.serializer.impl.RuleCallStack;
+import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
 import org.eclipse.xtext.util.LinkedStack;
 
 import com.google.common.base.Function;

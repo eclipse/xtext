@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
 
 import com.google.common.base.Function;
 import com.google.common.collect.HashMultimap;

@@ -1,4 +1,4 @@
-package org.eclipse.xtext.serializer;
+package org.eclipse.xtext.serializer.analysis;
 
 import java.util.List;
 
@@ -11,7 +11,6 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.serializer.analysis.GrammarConstraintProvider;
 import org.eclipse.xtext.util.Pair;
 
 import com.google.inject.ImplementedBy;

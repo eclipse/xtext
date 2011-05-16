@@ -2,10 +2,10 @@ package org.eclipse.xtext.generator.serializer;
 
 import java.util.Set;
 
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynAbsorberState;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.SequencerPDAContext;
 import org.eclipse.xtext.util.GraphvizDotBuilder;
 

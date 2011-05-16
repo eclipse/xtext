@@ -8,9 +8,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.serializer.GeneratedFile;
 import org.eclipse.xtext.generator.serializer.SemanticSequencerUtil;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintElement;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintElement;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 

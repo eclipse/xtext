@@ -80,12 +80,12 @@ public abstract class AbstractSyntacticSequencerTestLanguageRuntimeModule extend
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
-	public Class<? extends org.eclipse.xtext.serializer.ISemanticSequencer> bindISemanticSequencer() {
+	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.serializer.serializer.SyntacticSequencerTestLanguageSemanticSequencer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
-	public Class<? extends org.eclipse.xtext.serializer.ISyntacticSequencer> bindISyntacticSequencer() {
+	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
 		return org.eclipse.xtext.serializer.serializer.SyntacticSequencerTestLanguageSyntacticSequencer.class;
 	}
 

@@ -5,16 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.serializer.impl;
+package org.eclipse.xtext.serializer.sequencer;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.serializer.ISemanticNodeProvider;
-import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
+import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 
 import com.google.inject.Inject;
 

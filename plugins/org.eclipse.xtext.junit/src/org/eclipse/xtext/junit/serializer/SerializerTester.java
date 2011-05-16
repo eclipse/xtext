@@ -20,15 +20,15 @@ import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.serializer.IHiddenTokenSequencer;
-import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.ISerializer;
-import org.eclipse.xtext.serializer.ISyntacticSequencer;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.StringBufferSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
+import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.util.EmfFormatter;
 
 import com.google.inject.Inject;
