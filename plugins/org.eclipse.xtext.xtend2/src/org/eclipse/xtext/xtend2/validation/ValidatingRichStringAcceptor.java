@@ -127,8 +127,10 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 		String indentation = indentationStack.getLast();
 		if (unfulfilledIndentationExpectation != null) {
 			if (currentOffset + indentation.length() != lastOffsetOfLiteral) {
-				this.acceptor.acceptWarning("Inconsistent indentation", root, currentOffset, indentation.length(), 
-						IssueCodes.INCONSISTENT_INDENTATION, unfulfilledIndentationExpectation);
+				if (indentation.length() != 0) {
+					this.acceptor.acceptWarning("Inconsistent indentation", root, currentOffset, indentation.length(), 
+							IssueCodes.INCONSISTENT_INDENTATION, unfulfilledIndentationExpectation);
+				}
 			}
 			unfulfilledIndentationExpectation = null;
 		}

@@ -83,6 +83,15 @@ public class RichStringValidationTest extends AbstractRichStringTest {
 		validationTestHelper.assertNoIssues(richString);
 	}
 	
+	public void testRichStringValidation_09() throws Exception {
+		RichString richString = richString("'''\n" + 
+				"  text\n" + 
+				"\n" + 
+				"  text\n" + 
+				"'''");
+		validationTestHelper.assertNoIssues(richString);
+	}
+	
 	public void testNoException_01() throws Exception {
 		RichString richString = richString(
 				"'''«'start'»\n" + 

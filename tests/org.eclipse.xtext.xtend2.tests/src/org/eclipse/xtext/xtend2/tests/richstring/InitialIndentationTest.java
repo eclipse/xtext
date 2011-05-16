@@ -189,4 +189,13 @@ public class InitialIndentationTest extends AbstractRichStringTest {
 				"'''");
 	}
 	
+	public void testForLoopAndEmptyLine_01() throws Exception {
+		assertInitialIndentation("\t\t", 
+			"'''\n" + 
+			"\n" + 
+			"\t\t\t«FOR s: Collections::<String>emptyList»«ENDFOR»\n" + 
+			"\t\t}\n" + 
+			"'''");
+	}
+	
 }
