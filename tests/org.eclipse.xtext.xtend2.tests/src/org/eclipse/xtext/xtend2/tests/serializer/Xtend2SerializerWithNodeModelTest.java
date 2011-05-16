@@ -15,7 +15,6 @@ import com.google.inject.Inject;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class Xtend2SerializerWithNodeModelTest extends AbstractXtend2TestData {
 
 	@Inject
