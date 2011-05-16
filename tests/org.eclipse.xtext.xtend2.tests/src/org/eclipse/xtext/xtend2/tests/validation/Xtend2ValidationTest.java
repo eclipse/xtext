@@ -87,6 +87,31 @@ public class Xtend2ValidationTest extends AbstractXtend2TestCase {
 		helper.assertNoError(function, INVALID_USE_OF_TYPE);
 	}
 	
+	public void testParameterTypeMayNotBeVoid() throws Exception {
+		XtendFunction function = function("def void foo(void myParam) { }");
+		helper.assertError(function, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE);
+	}
+	
+	public void testCreateMayNotReturnVoid() throws Exception {
+		XtendFunction function = function("def void create result: new Object() newObject() { }");
+		helper.assertError(function, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE, "void", "create", "newObject");
+	}
+	
+	public void testCreateExpressionMayNotReturnVoid_01() throws Exception {
+		XtendFunction function = function("def create result: while(true){} illegal() { }");
+		helper.assertError(function, Xtend2Package.Literals.XTEND_FUNCTION, INVALID_USE_OF_TYPE, "void", "create", "function", "illegal");
+	}
+	
+	public void testCreateExpressionMayNotReturnVoid_02() throws Exception {
+		XtendFunction function = function("def String create result: while(true){} illegal() { }");
+		helper.assertError(function, XbasePackage.Literals.XWHILE_EXPRESSION, INCOMPATIBLE_TYPES, "void", "String");
+	}
+
+	public void testCreateExpressionMayNotReturnVoid_03() throws Exception {
+		XtendFunction function = function("override create result: while(true){} toString() { }");
+		helper.assertError(function, XbasePackage.Literals.XWHILE_EXPRESSION, INCOMPATIBLE_TYPES, "void", "String");
+	}
+	
 	public void testNoReturnInCreateFunctions() throws Exception {
 		XtendFunction function = function("def create result: if (true) return 'foo' else 'bar' foo() { }");
 		helper.assertError(function, XbasePackage.Literals.XRETURN_EXPRESSION, INVALID_EARLY_EXIT);

@@ -51,6 +51,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XReturnExpression;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.annotations.typing.XAnnotationUtil;
@@ -120,6 +121,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 			Iterables.concat(
 					super.getTypeConformanceCheckedReferences(),
 					ImmutableSet.of(
+							Xtend2Package.Literals.CREATE_EXTENSION_INFO__CREATE_EXPRESSION,
 							Xtend2Package.Literals.RICH_STRING_FOR_LOOP__AFTER,
 							Xtend2Package.Literals.RICH_STRING_FOR_LOOP__BEFORE,
 							Xtend2Package.Literals.RICH_STRING_FOR_LOOP__SEPARATOR,
@@ -202,7 +204,20 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Check
 	public void checkNoVoidInDependencyDeclaration(XtendField dep) {
 		if (typeReferences.is(dep.getType(),Void.TYPE)) {
-			error("Primitives void cannot be a dependency.",dep.getType(), null, INVALID_USE_OF_TYPE);
+			error("Primitive void cannot be a dependency.",dep.getType(), null, INVALID_USE_OF_TYPE);
+		}
+	}
+	
+	@Check
+	public void checkXtendParameterNotPrimitiveVoid(XtendParameter param) {
+		if (typeReferences.is(param.getParameterType(), Void.TYPE)) {
+			XtendFunction function = (XtendFunction) (param.eContainer() instanceof XtendFunction ? param.eContainer() : null); 
+			if (function != null)
+				error("void is an invalid type for the parameter " + param.getName() + " of the function " +
+						function.getName(), param.getParameterType(), null, INVALID_USE_OF_TYPE);
+			else
+				error("void is an invalid type for the parameter " + param.getName(), 
+						param.getParameterType(), null, INVALID_USE_OF_TYPE);
 		}
 	}
 	
@@ -543,7 +558,7 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 
 	@Check
-	protected void checkNoReturnsInCreateExtensions(XtendFunction func) {
+	public void checkNoReturnsInCreateExtensions(XtendFunction func) {
 		if (func.getCreateExtensionInfo()==null)
 			return;
 		List<XReturnExpression> found = newArrayList();
@@ -558,6 +573,31 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 			if (ret.getExpression()!=null) {
 				error("Return with expression is not allowed within an initializer of a create function.",ret, null, INVALID_EARLY_EXIT);
 			}
+		}
+	}
+	
+	@Check
+	public void checkCreateFunctionIsNotTypeVoid(XtendFunction func) {
+		if (func.getCreateExtensionInfo() == null)
+			return;
+		JvmTypeReference declaredType = func.getReturnType();
+		if (declaredType == null) {
+			declaredType = overridesService.getOverriddenReturnType(func);
+		}
+		if (declaredType == null) {
+			JvmTypeReference inferredType = getTypeProvider().getTypeForIdentifiable(func.getCreateExtensionInfo());
+			if (getTypeRefs().is(inferredType, Void.TYPE)) {
+				error("void is an invalid type for the create function " + func.getName(), 
+						func, 
+						Xtend2Package.Literals.XTEND_FUNCTION__NAME, INVALID_USE_OF_TYPE);
+			}
+		} else if (getTypeRefs().is(declaredType, Void.TYPE)) {
+			if (func.getReturnType() != null)
+				error("Create function " + func.getName() + " may not declare return type void.",
+						func.getReturnType(), null, INVALID_USE_OF_TYPE);
+			else
+				error("The inherited return type void of " + func.getName() + " is invalid for create functions.",
+						func.getReturnType(), null, INVALID_USE_OF_TYPE);
 		}
 	}
 	
