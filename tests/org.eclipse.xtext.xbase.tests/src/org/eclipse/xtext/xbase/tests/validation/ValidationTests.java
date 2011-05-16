@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 
@@ -62,6 +63,21 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	public void testLocalVarWithArguments() throws Exception {
 		XExpression expr = expression("{ val x = 'foo' x(42) }");
 		helper.assertError(expr, XFEATURE_CALL, LOCAL_VAR_ACCESS_WITH_PARENTHESES, "local", "variable");
+	}
+	
+	public void testLocalVarOfTypeVoid_01() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var illegalAssignmentOfVoid = while(true) {} }");
+		helper.assertError(block, XVARIABLE_DECLARATION, INVALID_USE_OF_TYPE, "void");
+	}
+	
+	public void testLocalVarOfTypeVoid_02() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var String s = while(true) {} }");
+		helper.assertError(block, XWHILE_EXPRESSION, INCOMPATIBLE_TYPES, "void", "String");
+	}
+	
+	public void testLocalVarOfTypeVoid_03() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var void illegalVoid; }");
+		helper.assertError(block, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, INVALID_USE_OF_TYPE, "void");
 	}
 	
 	public void testVariableShadowing_00() throws Exception {

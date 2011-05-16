@@ -71,8 +71,6 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 			if (function.getCreateExtensionInfo()!=null)
 				return getTypeReferences().getTypeForName(Void.TYPE, function);
 			JvmTypeReference declaredOrInferredReturnType = getDeclaredOrOverriddenReturnType(function);
-			// TODO why do we expect null if Void.TYPE is the declared return type?
-			// SE: because null means 'no expectation' The return type conformance is handled in the validator (please remove comment if questions is answered)
 			if (declaredOrInferredReturnType == null || getTypeReferences().is(declaredOrInferredReturnType, Void.TYPE))
 				return null;
 			return declaredOrInferredReturnType;
