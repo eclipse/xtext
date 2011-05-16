@@ -89,8 +89,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			declareLocalVariable(expr, b);
 		}
 		b.append("\ntry {").increaseIndentation();
-		internalToJavaStatement(expr.getExpression(), b, true);
-		if (isReferenced && !isPrimitiveVoid(expr.getExpression())) {
+		final boolean canBeReferenced = isReferenced && !isPrimitiveVoid(expr.getExpression());
+		internalToJavaStatement(expr.getExpression(), b, canBeReferenced);
+		if (canBeReferenced) {
 			b.append("\n").append(getVarName(expr, b)).append(" = ");
 			internalToConvertedExpression(expr.getExpression(), b, null);
 			b.append(";");
@@ -107,8 +108,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			serialize(type,expr,b);
 			b.append(" ").append(name).append(") { ");
 			b.increaseIndentation();
-			internalToJavaStatement(catchClause.getExpression(), b, true);
-			if (isReferenced && ! isPrimitiveVoid(catchClause.getExpression())) {
+			final boolean canBeReferenced = isReferenced && ! isPrimitiveVoid(catchClause.getExpression());
+			internalToJavaStatement(catchClause.getExpression(), b, canBeReferenced);
+			if (canBeReferenced) {
 				b.append("\n").append(getVarName(expr, b)).append(" = ");
 				internalToConvertedExpression(catchClause.getExpression(), b, null);
 				b.append(";");
@@ -302,7 +304,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected void _toJavaStatement(XCastedExpression expr, IAppendable b, boolean isReferenced) {
-		internalToJavaStatement(expr.getTarget(), b, true);
+		internalToJavaStatement(expr.getTarget(), b, isReferenced);
 	}
 
 	protected void _toJavaStatement(XIfExpression expr, IAppendable b, boolean isReferenced) {
@@ -312,8 +314,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append("\nif (");
 		internalToJavaExpression(expr.getIf(), b);
 		b.append(") {").increaseIndentation();
-		internalToJavaStatement(expr.getThen(), b, isReferenced);
-		if (isReferenced && !isPrimitiveVoid(expr.getThen())) {
+		final boolean canBeReferenced = isReferenced && !isPrimitiveVoid(expr.getThen());
+		internalToJavaStatement(expr.getThen(), b, canBeReferenced);
+		if (canBeReferenced) {
 			b.append("\n");
 			b.append(getVarName(expr, b));
 			b.append(" = ");
@@ -323,8 +326,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.decreaseIndentation().append("\n}");
 		if (expr.getElse() != null) {
 			b.append(" else {").increaseIndentation();
-			internalToJavaStatement(expr.getElse(), b, isReferenced);
-			if (isReferenced && !isPrimitiveVoid(expr.getElse())) {
+			final boolean canElseBeReferenced = isReferenced && !isPrimitiveVoid(expr.getElse());
+			internalToJavaStatement(expr.getElse(), b, canElseBeReferenced);
+			if (canElseBeReferenced) {
 				b.append("\n");
 				b.append(getVarName(expr, b));
 				b.append(" = ");
@@ -418,8 +422,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.append("\n").append(matchedVariable).append("=true;");
 
 			// execute then part
-			internalToJavaStatement(casePart.getThen(), b, isReferenced);
-			if (isReferenced) {
+			final boolean canBeReferenced = isReferenced && !isPrimitiveVoid(casePart.getThen());
+			internalToJavaStatement(casePart.getThen(), b, canBeReferenced);
+			if (canBeReferenced) {
 				b.append("\n").append(switchResultName).append(" = ");
 				internalToConvertedExpression(casePart.getThen(), b, null);
 				b.append(";");
@@ -438,8 +443,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (expr.getDefault()!=null) {
 			b.append("\nif (!").append(matchedVariable).append(") {");
 			b.increaseIndentation();
-			internalToJavaStatement(expr.getDefault(), b, isReferenced);
-			if (isReferenced) {
+			final boolean canBeReferenced = isReferenced && !isPrimitiveVoid(expr.getDefault());
+			internalToJavaStatement(expr.getDefault(), b, canBeReferenced);
+			if (canBeReferenced) {
 				b.append("\n").append(switchResultName).append(" = ");
 				internalToConvertedExpression(expr.getDefault(), b, null);
 				b.append(";");
