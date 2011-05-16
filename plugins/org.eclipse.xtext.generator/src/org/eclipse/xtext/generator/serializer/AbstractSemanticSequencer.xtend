@@ -30,6 +30,7 @@ import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic$Acceptor
 import com.google.inject.Provider
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider
+import org.eclipse.emf.ecore.ENamedElement
 
 class AbstractSemanticSequencer extends GeneratedFile {
 	
@@ -45,16 +46,20 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		grammar.getName("Abstract", "SemanticSequencer");		
 	}
 	
+	def <T extends ENamedElement> List<T> sort(Iterable<T> iterable) {
+		iterable.sort(p1, p2|p1.name.compareTo(p2.name))
+	}
+	
 	def Iterable<EPackage> getAccessedPackages() {
-		grammar.grammarConstraints.filter(e|e.type != null).map(e|e.type.EPackage).toSet
+		grammar.grammarConstraints.filter(e|e.type != null).map(e|e.type.EPackage).toSet.sort
 	}
 	
 	def Iterable<EClass> getAccessedClasses(EPackage pkg) {
-		grammar.grammarConstraints.map(e|e.type).filter(e|e != null && e.EPackage == pkg).toSet
+		grammar.grammarConstraints.map(e|e.type).filter(e|e != null && e.EPackage == pkg).toSet.sort
 	}
 	
 	def Iterable<EClass> getAccessedClasses() {
-		grammar.grammarConstraints.map(e|e.type).toSet
+		grammar.grammarConstraints.map(e|e.type).toSet.sort
 	}
 	
 	def getAccessedConstraints(EClass clazz) {
