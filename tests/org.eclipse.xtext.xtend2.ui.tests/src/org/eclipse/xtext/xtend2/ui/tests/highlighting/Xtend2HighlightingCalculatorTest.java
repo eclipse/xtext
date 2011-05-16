@@ -150,6 +150,7 @@ public class Xtend2HighlightingCalculatorTest extends AbstractXtend2UITestCase i
 		highlight(model);
 	}
 	
+	@SuppressWarnings("restriction")
 	protected void highlight(String functionBody) {
 		try {
 			XtendFunction model = function(functionBody);
