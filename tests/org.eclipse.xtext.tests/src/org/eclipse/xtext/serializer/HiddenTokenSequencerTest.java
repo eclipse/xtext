@@ -23,8 +23,11 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
-import org.eclipse.xtext.serializer.impl.EmitterNodeIterator;
-import org.eclipse.xtext.serializer.impl.NodeModelSemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.EmitterNodeIterator;
+import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
+import org.eclipse.xtext.serializer.sequencer.NodeModelSemanticSequencer;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
