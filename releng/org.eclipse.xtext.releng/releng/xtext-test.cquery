@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cq:componentQuery xmlns:cq="http://www.eclipse.org/buckminster/CQuery-1.0" resourceMap="xtext-test.rmap">
-    <cq:rootRequest name="org.eclipse.xtext.tests" componentType="eclipse.feature"/>
+    <cq:rootRequest name="org.eclipse.xtext.releng" componentType="buckminster"/>
     <cq:advisorNode namePattern="^org\.eclipse\.xtext\.releng$" useMaterialization="false" useWorkspace="false"/>
 </cq:componentQuery>
