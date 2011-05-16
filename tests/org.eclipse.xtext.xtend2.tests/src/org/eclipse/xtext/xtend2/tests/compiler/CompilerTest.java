@@ -50,6 +50,46 @@ import com.google.inject.Injector;
  */
 public class CompilerTest extends AbstractXtend2TestCase {
 	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=345458
+	 */
+	public void testBug_345458() throws Exception {
+		String code = 
+			"package x class Z {" +
+			"  def ^create(Object x) { \n" + 
+			"    if(true) {\n" + 
+			"      if(true)\n" + 
+			"        'foo'+'bar'\n" + 
+			"      for(c : 'foo'.toCharArray)\n" + 
+			"        'do'+'sideeffect'\n" + 
+			"    }\n" + 
+			"  }\n" +
+			"}\n";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=345371
+	 */
+	public void testVoidInTryCatchCompiles_00() throws Exception {
+		String code = 
+			"package x class Z {" +
+			"  def ^create(Object x) { \n" + 
+			"    try { \n" + 
+			"      val fileName = 'foo' \n" + 
+			"      if (fileName != null) return fileName \n" + 
+			"        return 'bar' \n" + 
+			"    } catch (Exception ex) { \n" + 
+			"        return 'baz'; \n" + 
+			"    }\n" + 
+			"  }\n" +
+			"}\n";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
 	public void testEscapeCharacterForReservedNames() throws Exception {
 		String code = 
 			"package x class Z {" +
