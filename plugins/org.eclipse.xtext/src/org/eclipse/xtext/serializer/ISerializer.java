@@ -19,6 +19,7 @@ import com.google.inject.ImplementedBy;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * @since 2.0
  */
 @ImplementedBy(Serializer.class)
 public interface ISerializer {
