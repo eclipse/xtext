@@ -120,10 +120,12 @@ ruleXAssignment returns [EObject current=null]
 	            $current = createModelElement(grammarAccess.getXAssignmentRule());
 	        }
         }
-	otherlv_1=RULE_ID
-	{
-		newLeafNode(otherlv_1, grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifiableElementCrossReference_0_1_0()); 
-	}
+		{ 
+	        newCompositeNode(grammarAccess.getXAssignmentAccess().getFeatureJvmIdentifiableElementCrossReference_0_1_0()); 
+	    }
+		ruleValidID		{ 
+	        afterParserOrEnumRuleCall();
+	    }
 
 )
 )
@@ -1263,8 +1265,7 @@ ruleXMemberFeatureCall returns [EObject current=null]
 )	'.' 
 (
 (
-	RULE_ID
-
+		ruleValidID
 )
 )	ruleOpSingleAssign))=>((
     {
@@ -1283,10 +1284,12 @@ ruleXMemberFeatureCall returns [EObject current=null]
 	            $current = createModelElement(grammarAccess.getXMemberFeatureCallRule());
 	        }
         }
-	otherlv_3=RULE_ID
-	{
-		newLeafNode(otherlv_3, grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_0_2_0()); 
-	}
+		{ 
+	        newCompositeNode(grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_1_0_0_0_2_0()); 
+	    }
+		ruleValidID		{ 
+	        afterParserOrEnumRuleCall();
+	    }
 
 )
 )
@@ -1429,10 +1432,12 @@ ruleOpSingleAssign
 	            $current = createModelElement(grammarAccess.getXMemberFeatureCallRule());
 	        }
         }
-	otherlv_15=RULE_ID
-	{
-		newLeafNode(otherlv_15, grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_1_1_2_0()); 
-	}
+		{ 
+	        newCompositeNode(grammarAccess.getXMemberFeatureCallAccess().getFeatureJvmIdentifiableElementCrossReference_1_1_2_0()); 
+	    }
+		ruleValidID		{ 
+	        afterParserOrEnumRuleCall();
+	    }
 
 )
 )(((
@@ -2126,19 +2131,19 @@ ruleXSwitchExpression returns [EObject current=null]
     }
 ((
 (
-		lv_localVarName_2_0=RULE_ID
-		{
-			newLeafNode(lv_localVarName_2_0, grammarAccess.getXSwitchExpressionAccess().getLocalVarNameIDTerminalRuleCall_2_0_0()); 
-		}
-		{
+		{ 
+	        newCompositeNode(grammarAccess.getXSwitchExpressionAccess().getLocalVarNameValidIDParserRuleCall_2_0_0()); 
+	    }
+		lv_localVarName_2_0=ruleValidID		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getXSwitchExpressionRule());
+	            $current = createModelElementForParent(grammarAccess.getXSwitchExpressionRule());
 	        }
-       		setWithLastConsumed(
+       		set(
        			$current, 
        			"localVarName",
         		lv_localVarName_2_0, 
-        		"ID");
+        		"ValidID");
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -2700,8 +2705,7 @@ ruleJvmTypeReference
 )
 )(
 (
-RULE_ID
-
+ruleValidID
 )
 )))=>((
 (
@@ -2723,38 +2727,38 @@ RULE_ID
 )
 )(
 (
-		lv_name_4_0=RULE_ID
-		{
-			newLeafNode(lv_name_4_0, grammarAccess.getXVariableDeclarationAccess().getNameIDTerminalRuleCall_2_0_0_1_0()); 
-		}
-		{
+		{ 
+	        newCompositeNode(grammarAccess.getXVariableDeclarationAccess().getNameValidIDParserRuleCall_2_0_0_1_0()); 
+	    }
+		lv_name_4_0=ruleValidID		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getXVariableDeclarationRule());
+	            $current = createModelElementForParent(grammarAccess.getXVariableDeclarationRule());
 	        }
-       		setWithLastConsumed(
+       		set(
        			$current, 
        			"name",
         		lv_name_4_0, 
-        		"ID");
+        		"ValidID");
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
 )))
     |(
 (
-		lv_name_5_0=RULE_ID
-		{
-			newLeafNode(lv_name_5_0, grammarAccess.getXVariableDeclarationAccess().getNameIDTerminalRuleCall_2_1_0()); 
-		}
-		{
+		{ 
+	        newCompositeNode(grammarAccess.getXVariableDeclarationAccess().getNameValidIDParserRuleCall_2_1_0()); 
+	    }
+		lv_name_5_0=ruleValidID		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getXVariableDeclarationRule());
+	            $current = createModelElementForParent(grammarAccess.getXVariableDeclarationRule());
 	        }
-       		setWithLastConsumed(
+       		set(
        			$current, 
        			"name",
         		lv_name_5_0, 
-        		"ID");
+        		"ValidID");
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -2821,19 +2825,19 @@ ruleJvmFormalParameter returns [EObject current=null]
 )
 )?(
 (
-		lv_name_1_0=RULE_ID
-		{
-			newLeafNode(lv_name_1_0, grammarAccess.getJvmFormalParameterAccess().getNameIDTerminalRuleCall_1_0()); 
-		}
-		{
+		{ 
+	        newCompositeNode(grammarAccess.getJvmFormalParameterAccess().getNameValidIDParserRuleCall_1_0()); 
+	    }
+		lv_name_1_0=ruleValidID		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getJvmFormalParameterRule());
+	            $current = createModelElementForParent(grammarAccess.getJvmFormalParameterRule());
 	        }
-       		setWithLastConsumed(
+       		set(
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"ValidID");
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -3058,12 +3062,16 @@ ruleIdOrSuper returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(    this_ID_0=RULE_ID    {
-		$current.merge(this_ID_0);
+(
+    { 
+        newCompositeNode(grammarAccess.getIdOrSuperAccess().getValidIDParserRuleCall_0()); 
+    }
+    this_ValidID_0=ruleValidID    {
+		$current.merge(this_ValidID_0);
     }
 
     { 
-    newLeafNode(this_ID_0, grammarAccess.getIdOrSuperAccess().getIDTerminalRuleCall_0()); 
+        afterParserOrEnumRuleCall();
     }
 
     |
@@ -3093,12 +3101,16 @@ ruleStaticQualifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRul
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(    this_ID_0=RULE_ID    {
-		$current.merge(this_ID_0);
+(
+    { 
+        newCompositeNode(grammarAccess.getStaticQualifierAccess().getValidIDParserRuleCall_0()); 
+    }
+    this_ValidID_0=ruleValidID    {
+		$current.merge(this_ValidID_0);
     }
 
     { 
-    newLeafNode(this_ID_0, grammarAccess.getStaticQualifierAccess().getIDTerminalRuleCall_0()); 
+        afterParserOrEnumRuleCall();
     }
 
 	kw='::' 
@@ -3807,12 +3819,16 @@ ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(    this_ID_0=RULE_ID    {
-		$current.merge(this_ID_0);
+(
+    { 
+        newCompositeNode(grammarAccess.getQualifiedNameAccess().getValidIDParserRuleCall_0()); 
+    }
+    this_ValidID_0=ruleValidID    {
+		$current.merge(this_ValidID_0);
     }
 
     { 
-    newLeafNode(this_ID_0, grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0()); 
+        afterParserOrEnumRuleCall();
     }
 (((
 	'.' 
@@ -3822,12 +3838,16 @@ ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0()); 
     }
-)    this_ID_2=RULE_ID    {
-		$current.merge(this_ID_2);
+)
+    { 
+        newCompositeNode(grammarAccess.getQualifiedNameAccess().getValidIDParserRuleCall_1_1()); 
+    }
+    this_ValidID_2=ruleValidID    {
+		$current.merge(this_ValidID_2);
     }
 
     { 
-    newLeafNode(this_ID_2, grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_1_1()); 
+        afterParserOrEnumRuleCall();
     }
 )*)
     ;
@@ -4286,6 +4306,34 @@ ruleJvmLowerBound returns [EObject current=null]
 ;
 
 
+
+
+
+
+
+// Entry rule entryRuleValidID
+entryRuleValidID returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getValidIDRule()); } 
+	 iv_ruleValidID=ruleValidID 
+	 { $current=$iv_ruleValidID.current.getText(); }  
+	 EOF 
+;
+
+// Rule ValidID
+ruleValidID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+    this_ID_0=RULE_ID    {
+		$current.merge(this_ID_0);
+    }
+
+    { 
+    newLeafNode(this_ID_0, grammarAccess.getValidIDAccess().getIDTerminalRuleCall()); 
+    }
+
+    ;
 
 
 

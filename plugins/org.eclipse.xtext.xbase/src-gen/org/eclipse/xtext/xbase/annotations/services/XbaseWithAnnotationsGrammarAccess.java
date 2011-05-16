@@ -113,26 +113,26 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cElementAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cElementJvmOperationCrossReference_0_0 = (CrossReference)cElementAssignment_0.eContents().get(0);
-		private final RuleCall cElementJvmOperationIDTerminalRuleCall_0_0_1 = (RuleCall)cElementJvmOperationCrossReference_0_0.eContents().get(1);
+		private final RuleCall cElementJvmOperationValidIDParserRuleCall_0_0_1 = (RuleCall)cElementJvmOperationCrossReference_0_0.eContents().get(1);
 		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cValueXAnnotationElementValueParserRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		
 		//XAnnotationElementValuePair:
-		//	element=[types::JvmOperation] "=" value=XAnnotationElementValue;
+		//	element=[types::JvmOperation|ValidID] "=" value=XAnnotationElementValue;
 		public ParserRule getRule() { return rule; }
 
-		//element=[types::JvmOperation] "=" value=XAnnotationElementValue
+		//element=[types::JvmOperation|ValidID] "=" value=XAnnotationElementValue
 		public Group getGroup() { return cGroup; }
 
-		//element=[types::JvmOperation]
+		//element=[types::JvmOperation|ValidID]
 		public Assignment getElementAssignment_0() { return cElementAssignment_0; }
 
-		//[types::JvmOperation]
+		//[types::JvmOperation|ValidID]
 		public CrossReference getElementJvmOperationCrossReference_0_0() { return cElementJvmOperationCrossReference_0_0; }
 
-		//ID
-		public RuleCall getElementJvmOperationIDTerminalRuleCall_0_0_1() { return cElementJvmOperationIDTerminalRuleCall_0_0_1; }
+		//ValidID
+		public RuleCall getElementJvmOperationValidIDParserRuleCall_0_0_1() { return cElementJvmOperationValidIDParserRuleCall_0_0_1; }
 
 		//"="
 		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
@@ -376,7 +376,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//XAnnotationElementValuePair:
-	//	element=[types::JvmOperation] "=" value=XAnnotationElementValue;
+	//	element=[types::JvmOperation|ValidID] "=" value=XAnnotationElementValue;
 	public XAnnotationElementValuePairElements getXAnnotationElementValuePairAccess() {
 		return (pXAnnotationElementValuePair != null) ? pXAnnotationElementValuePair : (pXAnnotationElementValuePair = new XAnnotationElementValuePairElements());
 	}
@@ -439,7 +439,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//XAssignment returns XExpression:
-	//	{XAssignment} / * (declaringType=[types::JvmDeclaredType] '::')? * / feature=[types::JvmIdentifiableElement]
+	//	{XAssignment} / * (declaringType=[types::JvmDeclaredType] '::')? * / feature=[types::JvmIdentifiableElement|ValidID]
 	//	OpSingleAssign value=XAssignment | XOrExpression (=> ({XBinaryOperation.leftOperand=current}
 	//	feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment)?;
 	public XbaseGrammarAccess.XAssignmentElements getXAssignmentAccess() {
@@ -649,10 +649,10 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//XMemberFeatureCall returns XExpression:
-	//	XPrimaryExpression (=> ({XAssignment.assignable=current} "." feature=[types::JvmIdentifiableElement] OpSingleAssign)
-	//	value=XAssignment | => ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." | spreading?="*.")) ("<"
-	//	typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
-	//	feature=[types::JvmIdentifiableElement] (=> explicitOperationCall?="(" (memberCallArguments+=XShortClosure |
+	//	XPrimaryExpression (=> ({XAssignment.assignable=current} "." feature=[types::JvmIdentifiableElement|ValidID]
+	//	OpSingleAssign) value=XAssignment | => ({XMemberFeatureCall.memberCallTarget=current} ("." | nullSafe?="?." |
+	//	spreading?="*.")) ("<" typeArguments+=JvmArgumentTypeReference ("," typeArguments+=JvmArgumentTypeReference)* ">")?
+	//	feature=[types::JvmIdentifiableElement|ValidID] (=> explicitOperationCall?="(" (memberCallArguments+=XShortClosure |
 	//	memberCallArguments+=XExpression ("," memberCallArguments+=XExpression)*)? ")")?)*;
 	public XbaseGrammarAccess.XMemberFeatureCallElements getXMemberFeatureCallAccess() {
 		return gaXbase.getXMemberFeatureCallAccess();
@@ -727,7 +727,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//XSwitchExpression returns XExpression:
-	//	{XSwitchExpression} "switch" (localVarName=ID ":")? switch=XExpression "{" cases+=XCasePart+ ("default" ":"
+	//	{XSwitchExpression} "switch" (localVarName=ValidID ":")? switch=XExpression "{" cases+=XCasePart+ ("default" ":"
 	//	default=XExpression)? "}";
 	public XbaseGrammarAccess.XSwitchExpressionElements getXSwitchExpressionAccess() {
 		return gaXbase.getXSwitchExpressionAccess();
@@ -799,7 +799,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//XVariableDeclaration returns XExpression:
-	//	{XVariableDeclaration} (writeable?="var" | "val") (=> (type=JvmTypeReference name=ID) | name=ID) ("="
+	//	{XVariableDeclaration} (writeable?="var" | "val") (=> (type=JvmTypeReference name=ValidID) | name=ValidID) ("="
 	//	right=XExpression)?;
 	public XbaseGrammarAccess.XVariableDeclarationElements getXVariableDeclarationAccess() {
 		return gaXbase.getXVariableDeclarationAccess();
@@ -810,7 +810,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//JvmFormalParameter returns types::JvmFormalParameter:
-	//	parameterType=JvmTypeReference? name=ID;
+	//	parameterType=JvmTypeReference? name=ValidID;
 	public XbaseGrammarAccess.JvmFormalParameterElements getJvmFormalParameterAccess() {
 		return gaXbase.getJvmFormalParameterAccess();
 	}
@@ -833,7 +833,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//IdOrSuper:
-	//	ID | "super";
+	//	ValidID | "super";
 	public XbaseGrammarAccess.IdOrSuperElements getIdOrSuperAccess() {
 		return gaXbase.getIdOrSuperAccess();
 	}
@@ -843,10 +843,10 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//// This is a workaround since ANTLR will not be able to resolve
-	//// StaticQualifier: ID ('::' ID)*; and XFeatureCall: (StaticQualifier '::')? ID
+	//// StaticQualifier: ValidID ('::' ValidID)*; and XFeatureCall: (StaticQualifier '::')? ValidID
 	//// Make sure to change the value converter if you change the syntax of the StaticQualifier
 	//StaticQualifier:
-	//	(ID "::")+;
+	//	(ValidID "::")+;
 	public XbaseGrammarAccess.StaticQualifierElements getStaticQualifierAccess() {
 		return gaXbase.getStaticQualifierAccess();
 	}
@@ -959,7 +959,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//QualifiedName:
-	//	ID ("." ID)*;
+	//	ValidID ("." ValidID)*;
 	public XbaseGrammarAccess.QualifiedNameElements getQualifiedNameAccess() {
 		return gaXbase.getQualifiedNameAccess();
 	}
@@ -1050,13 +1050,23 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//JvmTypeParameter:
-	//	name=ID (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded* | constraints+=JvmLowerBound)?;
+	//	name=ValidID (constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded* | constraints+=JvmLowerBound)?;
 	public XtypeGrammarAccess.JvmTypeParameterElements getJvmTypeParameterAccess() {
 		return gaXbase.getJvmTypeParameterAccess();
 	}
 	
 	public ParserRule getJvmTypeParameterRule() {
 		return getJvmTypeParameterAccess().getRule();
+	}
+
+	//ValidID:
+	//	ID;
+	public XtypeGrammarAccess.ValidIDElements getValidIDAccess() {
+		return gaXbase.getValidIDAccess();
+	}
+	
+	public ParserRule getValidIDRule() {
+		return getValidIDAccess().getRule();
 	}
 
 	//terminal ID:

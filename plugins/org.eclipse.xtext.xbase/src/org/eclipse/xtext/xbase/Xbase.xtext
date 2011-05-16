@@ -15,7 +15,7 @@ XExpression returns XExpression :
 	XAssignment;
 
 XAssignment returns XExpression :
-	{XAssignment} /* (declaringType=[types::JvmDeclaredType] '::')? */ feature=[types::JvmIdentifiableElement|ID] OpSingleAssign value=XAssignment |	
+	{XAssignment} /* (declaringType=[types::JvmDeclaredType] '::')? */ feature=[types::JvmIdentifiableElement|ValidID] OpSingleAssign value=XAssignment |	
 	XOrExpression (
 		=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment
 	)?;
@@ -87,10 +87,10 @@ XCastedExpression returns XExpression:
 
 XMemberFeatureCall returns XExpression:
 	XPrimaryExpression
-	(=>({XAssignment.assignable=current} '.' feature=[types::JvmIdentifiableElement] OpSingleAssign) value=XAssignment
+	(=>({XAssignment.assignable=current} '.' feature=[types::JvmIdentifiableElement|ValidID] OpSingleAssign) value=XAssignment
 	|=>({XMemberFeatureCall.memberCallTarget=current} ("."|nullSafe?="?."|spreading?="*.")) 
 		('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?  
-		feature=[types::JvmIdentifiableElement] (
+		feature=[types::JvmIdentifiableElement|ValidID] (
 			=>explicitOperationCall?='(' 
 				(
 				    memberCallArguments+=XShortClosure
@@ -140,7 +140,7 @@ XIfExpression returns XExpression:
 
 XSwitchExpression returns XExpression:
 	{XSwitchExpression}
-	'switch' (localVarName=ID ':')? switch=XExpression '{'
+	'switch' (localVarName=ValidID ':')? switch=XExpression '{'
 	(cases+=XCasePart)+
 	('default' ':' default=XExpression )?
 	'}';
@@ -176,10 +176,10 @@ XExpressionInsideBlock returns XExpression:
 
 XVariableDeclaration returns XExpression:
 	{XVariableDeclaration}
-	(writeable?='var'|'val') (=>(type=JvmTypeReference name=ID) | name=ID) ('=' right=XExpression)?;
+	(writeable?='var'|'val') (=>(type=JvmTypeReference name=ValidID) | name=ValidID) ('=' right=XExpression)?;
 
 JvmFormalParameter returns types::JvmFormalParameter:
-	(parameterType=JvmTypeReference)? name=ID;
+	(parameterType=JvmTypeReference)? name=ValidID;
 
 XFeatureCall returns XExpression:
 	{XFeatureCall}
@@ -194,14 +194,14 @@ XFeatureCall returns XExpression:
 	')')?;
 	
 IdOrSuper :
-	ID | 'super'
+	ValidID | 'super'
 ;
 	
 // This is a workaround since ANTLR will not be able to resolve
-// StaticQualifier: ID ('::' ID)*; and XFeatureCall: (StaticQualifier '::')? ID
+// StaticQualifier: ValidID ('::' ValidID)*; and XFeatureCall: (StaticQualifier '::')? ValidID
 // Make sure to change the value converter if you change the syntax of the StaticQualifier
 StaticQualifier:
-	(ID '::')+
+	(ValidID '::')+
 ;
 
 XConstructorCall returns XExpression:
@@ -251,4 +251,4 @@ XCatchClause :
 	=>'catch' '(' declaredParam=JvmFormalParameter ')' expression=XExpression;
 
 QualifiedName:
-  ID (=>'.' ID)*;
+  ValidID (=>'.' ValidID)*;

@@ -113,12 +113,12 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 				}
 				else break;
 			case TypesPackage.JVM_UPPER_BOUND:
-				if(context == grammarAccess.getJvmUpperBoundRule()) {
-					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
+					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
-					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				else if(context == grammarAccess.getJvmUpperBoundRule()) {
+					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
 				else break;
@@ -929,7 +929,7 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (parameterType=JvmTypeReference? name=ID)
+	 *     (parameterType=JvmTypeReference? name=ValidID)
 	 *
 	 * Features:
 	 *    name[1, 1]
@@ -967,7 +967,7 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (name=ID ((constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*) | constraints+=JvmLowerBound)?)
+	 *     (name=ValidID ((constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*) | constraints+=JvmLowerBound)?)
 	 *
 	 * Features:
 	 *    arrayType[1, *]
@@ -1041,8 +1041,8 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (
-	 *         (feature=[JvmIdentifiableElement|ID] value=XAssignment) | 
-	 *         (assignable=XMemberFeatureCall_XAssignment_1_0_0_0_0 feature=[JvmIdentifiableElement|ID] value=XAssignment)
+	 *         (feature=[JvmIdentifiableElement|ValidID] value=XAssignment) | 
+	 *         (assignable=XMemberFeatureCall_XAssignment_1_0_0_0_0 feature=[JvmIdentifiableElement|ValidID] value=XAssignment)
 	 *     )
 	 *     
 	 *
@@ -1318,7 +1318,7 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 	 *         memberCallTarget=XMemberFeatureCall_XMemberFeatureCall_1_1_0_0_0
 	 *         (nullSafe?='?.' | spreading?='*.')?
 	 *         (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)?
-	 *         feature=[JvmIdentifiableElement|ID]
+	 *         feature=[JvmIdentifiableElement|ValidID]
 	 *         (explicitOperationCall?='(' (memberCallArguments+=XShortClosure | (memberCallArguments+=XExpression memberCallArguments+=XExpression*))?)?
 	 *     )
 	 *     
@@ -1413,7 +1413,7 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (localVarName=ID? switch=XExpression cases+=XCasePart+ default=XExpression?)
+	 *     (localVarName=ValidID? switch=XExpression cases+=XCasePart+ default=XExpression?)
 	 *
 	 * Features:
 	 *    switch[1, 1]
@@ -1495,7 +1495,7 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (writeable?='var'? ((type=JvmTypeReference name=ID) | name=ID) right=XExpression?)
+	 *     (writeable?='var'? ((type=JvmTypeReference name=ValidID) | name=ValidID) right=XExpression?)
 	 *
 	 * Features:
 	 *    type[1, 1]

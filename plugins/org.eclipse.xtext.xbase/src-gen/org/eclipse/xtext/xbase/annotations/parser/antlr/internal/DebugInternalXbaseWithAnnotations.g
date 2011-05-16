@@ -19,7 +19,7 @@ ruleXAnnotation :
 
 // Rule XAnnotationElementValuePair
 ruleXAnnotationElementValuePair :
-	RULE_ID '=' ruleXAnnotationElementValue
+	ruleValidID '=' ruleXAnnotationElementValue
 ;
 
 // Rule XAnnotationElementValueStringConcatenation
@@ -60,7 +60,7 @@ ruleXExpression :
 
 // Rule XAssignment
 ruleXAssignment :
-	RULE_ID ruleOpSingleAssign ruleXAssignment |
+	ruleValidID ruleOpSingleAssign ruleXAssignment |
 	ruleXOrExpression (
 		( (
 		ruleOpMultiAssign
@@ -214,9 +214,9 @@ ruleXCastedExpression :
 ruleXMemberFeatureCall :
 	ruleXPrimaryExpression (
 		( (
-		'.' RULE_ID ruleOpSingleAssign
+		'.' ruleValidID ruleOpSingleAssign
 		) => (
-			'.' RULE_ID ruleOpSingleAssign
+			'.' ruleValidID ruleOpSingleAssign
 		) ) ruleXAssignment |
 		( (
 		'.' |
@@ -230,7 +230,7 @@ ruleXMemberFeatureCall :
 			'<' ruleJvmArgumentTypeReference (
 				',' ruleJvmArgumentTypeReference
 			)* '>'
-		)? RULE_ID (
+		)? ruleValidID (
 			( (
 			'('
 			) => '(' ) (
@@ -319,7 +319,7 @@ ruleXIfExpression :
 // Rule XSwitchExpression
 ruleXSwitchExpression :
 	'switch' (
-		RULE_ID ':'
+		ruleValidID ':'
 	)? ruleXExpression '{' ruleXCasePart+ (
 		'default' ':' ruleXExpression
 	)? '}'
@@ -367,11 +367,11 @@ ruleXVariableDeclaration :
 		'val'
 	) (
 		( (
-		ruleJvmTypeReference RULE_ID
+		ruleJvmTypeReference ruleValidID
 		) => (
-			ruleJvmTypeReference RULE_ID
+			ruleJvmTypeReference ruleValidID
 		) ) |
-		RULE_ID
+		ruleValidID
 	) (
 		'=' ruleXExpression
 	)?
@@ -379,7 +379,7 @@ ruleXVariableDeclaration :
 
 // Rule JvmFormalParameter
 ruleJvmFormalParameter :
-	ruleJvmTypeReference? RULE_ID
+	ruleJvmTypeReference? ruleValidID
 ;
 
 // Rule XFeatureCall
@@ -408,14 +408,14 @@ ruleXFeatureCall :
 
 // Rule IdOrSuper
 ruleIdOrSuper :
-	RULE_ID |
+	ruleValidID |
 	'super'
 ;
 
 // Rule StaticQualifier
 ruleStaticQualifier :
 	(
-		RULE_ID '::'
+		ruleValidID '::'
 	)+
 ;
 
@@ -500,10 +500,10 @@ ruleXCatchClause :
 
 // Rule QualifiedName
 ruleQualifiedName :
-	RULE_ID (
+	ruleValidID (
 		( (
 		'.'
-		) => '.' ) RULE_ID
+		) => '.' ) ruleValidID
 	)*
 ;
 
@@ -560,6 +560,11 @@ ruleJvmUpperBoundAnded :
 // Rule JvmLowerBound
 ruleJvmLowerBound :
 	'super' ruleJvmTypeReference
+;
+
+// Rule ValidID
+ruleValidID :
+	RULE_ID
 ;
 
 RULE_ID :

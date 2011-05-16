@@ -56,7 +56,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	public void testBug_345458() throws Exception {
 		String code = 
 			"package x class Z {" +
-			"  def ^create(Object x) { \n" + 
+			"  def create(Object x) { \n" + 
 			"    if(true) {\n" + 
 			"      if(true)\n" + 
 			"        'foo'+'bar'\n" + 
@@ -76,7 +76,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	public void testVoidInTryCatchCompiles_00() throws Exception {
 		String code = 
 			"package x class Z {" +
-			"  def ^create(Object x) { \n" + 
+			"  def create(Object x) { \n" + 
 			"    try { \n" + 
 			"      val fileName = 'foo' \n" + 
 			"      if (fileName != null) return fileName \n" + 
@@ -93,8 +93,8 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	public void testEscapeCharacterForReservedNames() throws Exception {
 		String code = 
 			"package x class Z {" +
-			"  def ^create(Object x){\n" +
-			"    ^create(x)" + 
+			"  def create(Object x){\n" +
+			"    create(x)" + 
 			"  }\n" + 
 			"}";
 		String javaCode = compileToJavaCode(code);
@@ -132,7 +132,7 @@ public class CompilerTest extends AbstractXtend2TestCase {
 				"  def bar(){\n" +
 				"    foo('bar')" +
 				"  }\n" + 
-		"}");
+				"}");
 		Object instance = clazz.newInstance();
 		Method method = clazz.getDeclaredMethod("bar");
 		try {

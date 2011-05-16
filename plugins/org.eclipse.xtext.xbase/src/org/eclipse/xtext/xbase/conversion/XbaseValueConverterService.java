@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.conversion;
 import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
+import org.eclipse.xtext.conversion.impl.KeywordAlternativeConverter;
 import org.eclipse.xtext.conversion.impl.KeywordBasedValueConverter;
 import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter;
 
@@ -37,9 +38,20 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 	@Inject
 	private Provider<KeywordBasedValueConverter> keywordBasedConverterProvider;
 	
+	@Inject
+	private KeywordAlternativeConverter validIDConverter;
+	
+	@Inject
+	private KeywordAlternativeConverter idOrSuperConverter;
+	
 	@ValueConverter(rule = "IdOrSuper")
 	public IValueConverter<String> getIdOrSuperValueConverter() {
-		return ID();
+		return idOrSuperConverter;
+	}
+	
+	@ValueConverter(rule = "ValidID")
+	public IValueConverter<String> getValidIDConverter() {
+		return validIDConverter;
 	}
 	
 	@ValueConverter(rule = "QualifiedName")

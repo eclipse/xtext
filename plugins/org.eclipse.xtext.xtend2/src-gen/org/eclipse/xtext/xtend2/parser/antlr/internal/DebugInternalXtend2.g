@@ -26,7 +26,7 @@ ruleQualifiedNameWithWildCard :
 
 // Rule Class
 ruleClass :
-	ruleXAnnotation* 'class' RULE_ID (
+	ruleXAnnotation* 'class' ruleValidID (
 		'<' ruleJvmTypeParameter (
 			',' ruleJvmTypeParameter
 		)* '>'
@@ -42,7 +42,7 @@ ruleClass :
 // Rule Member
 ruleMember :
 	ruleXAnnotation* (
-		'extension'? ruleJvmTypeReference RULE_ID |
+		'extension'? ruleJvmTypeReference ruleValidID |
 		(
 			'def' |
 			'override'
@@ -50,7 +50,7 @@ ruleMember :
 			'<' ruleJvmTypeParameter (
 				',' ruleJvmTypeParameter
 			)* '>'
-		)? ruleJvmTypeReference? ruleCreateExtensionInfo? RULE_ID '(' (
+		)? ruleJvmTypeReference? ruleCreateExtensionInfo? ruleValidID '(' (
 			ruleParameter (
 				',' ruleParameter
 			)*
@@ -63,12 +63,18 @@ ruleMember :
 
 // Rule CreateExtensionInfo
 ruleCreateExtensionInfo :
-	'create' RULE_ID ':' ruleXExpression
+	'create' ruleValidID ':' ruleXExpression
+;
+
+// Rule ValidID
+ruleValidID :
+	RULE_ID |
+	'create'
 ;
 
 // Rule Parameter
 ruleParameter :
-	ruleXAnnotation* ruleJvmTypeReference RULE_ID
+	ruleXAnnotation* ruleJvmTypeReference ruleValidID
 ;
 
 // Rule XStringLiteral
@@ -164,7 +170,7 @@ ruleXAnnotation :
 
 // Rule XAnnotationElementValuePair
 ruleXAnnotationElementValuePair :
-	RULE_ID '=' ruleXAnnotationElementValue
+	ruleValidID '=' ruleXAnnotationElementValue
 ;
 
 // Rule XAnnotationElementValueStringConcatenation
@@ -205,7 +211,7 @@ ruleXExpression :
 
 // Rule XAssignment
 ruleXAssignment :
-	RULE_ID ruleOpSingleAssign ruleXAssignment |
+	ruleValidID ruleOpSingleAssign ruleXAssignment |
 	ruleXOrExpression (
 		( (
 		ruleOpMultiAssign
@@ -359,9 +365,9 @@ ruleXCastedExpression :
 ruleXMemberFeatureCall :
 	ruleXPrimaryExpression (
 		( (
-		'.' RULE_ID ruleOpSingleAssign
+		'.' ruleValidID ruleOpSingleAssign
 		) => (
-			'.' RULE_ID ruleOpSingleAssign
+			'.' ruleValidID ruleOpSingleAssign
 		) ) ruleXAssignment |
 		( (
 		'.' |
@@ -375,7 +381,7 @@ ruleXMemberFeatureCall :
 			'<' ruleJvmArgumentTypeReference (
 				',' ruleJvmArgumentTypeReference
 			)* '>'
-		)? RULE_ID (
+		)? ruleValidID (
 			( (
 			'('
 			) => '(' ) (
@@ -464,7 +470,7 @@ ruleXIfExpression :
 // Rule XSwitchExpression
 ruleXSwitchExpression :
 	'switch' (
-		RULE_ID ':'
+		ruleValidID ':'
 	)? ruleXExpression '{' ruleXCasePart+ (
 		'default' ':' ruleXExpression
 	)? '}'
@@ -512,11 +518,11 @@ ruleXVariableDeclaration :
 		'val'
 	) (
 		( (
-		ruleJvmTypeReference RULE_ID
+		ruleJvmTypeReference ruleValidID
 		) => (
-			ruleJvmTypeReference RULE_ID
+			ruleJvmTypeReference ruleValidID
 		) ) |
-		RULE_ID
+		ruleValidID
 	) (
 		'=' ruleXExpression
 	)?
@@ -524,7 +530,7 @@ ruleXVariableDeclaration :
 
 // Rule JvmFormalParameter
 ruleJvmFormalParameter :
-	ruleJvmTypeReference? RULE_ID
+	ruleJvmTypeReference? ruleValidID
 ;
 
 // Rule XFeatureCall
@@ -553,14 +559,14 @@ ruleXFeatureCall :
 
 // Rule IdOrSuper
 ruleIdOrSuper :
-	RULE_ID |
+	ruleValidID |
 	'super'
 ;
 
 // Rule StaticQualifier
 ruleStaticQualifier :
 	(
-		RULE_ID '::'
+		ruleValidID '::'
 	)+
 ;
 
@@ -640,10 +646,10 @@ ruleXCatchClause :
 
 // Rule QualifiedName
 ruleQualifiedName :
-	RULE_ID (
+	ruleValidID (
 		( (
 		'.'
-		) => '.' ) RULE_ID
+		) => '.' ) ruleValidID
 	)*
 ;
 
@@ -704,7 +710,7 @@ ruleJvmLowerBound :
 
 // Rule JvmTypeParameter
 ruleJvmTypeParameter :
-	RULE_ID (
+	ruleValidID (
 		ruleJvmUpperBound ruleJvmUpperBoundAnded* |
 		ruleJvmLowerBound
 	)?
