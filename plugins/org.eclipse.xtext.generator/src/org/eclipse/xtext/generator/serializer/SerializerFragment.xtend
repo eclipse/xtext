@@ -12,13 +12,13 @@ import org.eclipse.xtext.generator.Xtend2ExecutionContext
 import org.eclipse.xtext.generator.Naming
 import java.util.Set
 import org.eclipse.xtext.generator.BindFactory
-import org.eclipse.xtext.serializer.ISemanticSequencer
 import org.eclipse.xtext.generator.Binding
 import org.eclipse.xtext.serializer.ISerializer
 import org.eclipse.xtext.serializer.impl.Serializer
 import org.eclipse.xtext.serializer.impl.ContextUtil
 import com.google.inject.Inject
-import org.eclipse.xtext.serializer.ISyntacticSequencer
+import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer
+import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer
 
 class SerializerFragment extends Xtend2GeneratorFragment {
 	

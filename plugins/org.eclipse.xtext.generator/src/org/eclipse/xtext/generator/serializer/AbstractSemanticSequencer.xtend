@@ -2,9 +2,9 @@ package org.eclipse.xtext.generator.serializer
 
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess
 import java.util.List
-import org.eclipse.xtext.serializer.impl.GrammarConstraintProvider
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider$IConstraint
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider$IConstraintElement
+import org.eclipse.xtext.serializer.analysis.GrammarConstraintProvider
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider$IConstraint
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider$IConstraintElement
 import org.eclipse.xtext.Grammar
 import static extension org.eclipse.xtext.generator.GenModelAccess.*
 import static extension org.eclipse.xtext.GrammarUtil.*
@@ -17,18 +17,19 @@ import org.eclipse.xtext.serializer.IGrammarConstraintProvider
 import org.eclipse.emf.ecore.EcorePackage
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.serializer.GenericSequencer
-import org.eclipse.xtext.serializer.ISemanticNodeProvider
-import org.eclipse.xtext.serializer.ISemanticNodeProvider$INodesForEObjectProvider
-import org.eclipse.xtext.serializer.ISemanticSequencer
-import org.eclipse.xtext.serializer.ITransientValueService
-import org.eclipse.xtext.serializer.ITransientValueService$ValueTransient
+import org.eclipse.xtext.serializer.sequencer.GenericSequencer
+import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider
+import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider$INodesForEObjectProvider
+import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService$ValueTransient
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic$Acceptor
 import com.google.inject.Provider
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider
 
 class AbstractSemanticSequencer extends GeneratedFile {
 	
@@ -101,7 +102,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		file.imported(typeof(ISemanticSequenceAcceptor))
 		file.imported(typeof(ISemanticSequencerDiagnosticProvider))
 		file.imported(typeof(ISerializationDiagnostic$Acceptor))
-		file.imported(typeof(org.eclipse.xtext.serializer.impl.AbstractSemanticSequencer))
+		file.imported(typeof(org.eclipse.xtext.serializer.sequencer.AbstractSemanticSequencer))
 		file.imported(typeof(Inject))
 		file.imported(typeof(Provider))
 		
