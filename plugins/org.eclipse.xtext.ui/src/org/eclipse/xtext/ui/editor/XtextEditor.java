@@ -21,6 +21,7 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
@@ -195,6 +196,15 @@ public class XtextEditor extends TextEditor {
 		// to the source viewer yet (it will be created later).
 
 		super.init(site, input);
+	}
+
+	@Override
+	protected void setPreferenceStore(IPreferenceStore preferenceStore) {
+		super.setPreferenceStore(preferenceStore);
+		if (getSourceViewerConfiguration() instanceof XtextSourceViewerConfiguration) {
+			XtextSourceViewerConfiguration xtextSourceViewerConfiguration = (XtextSourceViewerConfiguration) getSourceViewerConfiguration();
+			xtextSourceViewerConfiguration.setPreferenceStore(preferenceStore);
+		}
 	}
 
 	public XtextSourceViewerConfiguration getXtextSourceViewerConfiguration() {
