@@ -163,6 +163,17 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 	
 	@Check
+	public void checkVariableIsNotInferredAsVoid(XVariableDeclaration declaration) {
+		if (declaration.getType() != null)
+			return;
+		JvmTypeReference inferredType = getTypeProvider().getTypeForIdentifiable(declaration);
+		if (typeRefs.is(inferredType, Void.TYPE)) {
+			error("void is an invalid type for the variable " + declaration.getName(), declaration, 
+					XbasePackage.Literals.XVARIABLE_DECLARATION__NAME, INVALID_USE_OF_TYPE);
+		}
+	}
+	
+	@Check
 	public void checkClosureParameterTypes(XClosure closure) {
 		if (closure.getFormalParameters().isEmpty())
 			return;
