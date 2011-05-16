@@ -9,9 +9,8 @@ Xtext models programmatically.
 
 Text files parsed by Xtext are represented as object graphs in memory. We call these object graphs e[Abstract Syntax Tree (AST)], e[semantic model] or 
 simply e[model] interchangeably. In Xtext models are implemented using the e[Eclipse Modeling Framework (EMF)], which can be seen as a very powerful version 
-of JavaBeans. It not only provides the typical getter and setter methods for the different features of a model element but also comes with an long list of 
+of JavaBeans. It not only provides the typical getter and setter methods for the different features of a model element but also comes with a long list of 
 advanced concepts and semantics, which are extremely useful in the context of Xtext.
-
 
 section2:resource[Loading a e[Resource]]
 
