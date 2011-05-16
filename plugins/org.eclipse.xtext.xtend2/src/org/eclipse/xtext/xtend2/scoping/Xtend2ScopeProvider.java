@@ -26,7 +26,6 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
-import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -36,6 +35,9 @@ import org.eclipse.xtext.xbase.annotations.scoping.XbaseWithAnnotationsScopeProv
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IFeaturesForTypeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
+import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
+import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
+import org.eclipse.xtext.xbase.scoping.featurecalls.LocalVarDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo;
@@ -106,31 +108,32 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 			return getScopeForXtendClass((XtendClass) context, parent);
 		} else if (context instanceof XtendFunction) {
 			XtendFunction func = (XtendFunction) context;
-			EList<XtendParameter> list = func.getParameters();
-			List<IEObjectDescription> descriptions = Lists.newArrayList();
+			EList<XtendParameter> parameters = func.getParameters();
+			List<IValidatedEObjectDescription> descriptions = Lists.newArrayList();
 			if (func.getCreateExtensionInfo()!=null) {
 				CreateExtensionInfo info = func.getCreateExtensionInfo();
-				IEObjectDescription description = EObjectDescription.create(QualifiedName.create(info.getName()), info, null);
+				IValidatedEObjectDescription description = new LocalVarDescription(QualifiedName.create(info.getName()), info);
 				descriptions.add(description);
 			}
-			for (XtendParameter jvmFormalParameter : list) {
-				if (!Strings.isEmpty(jvmFormalParameter.getName())) {
-					IEObjectDescription desc = createIEObjectDescription(jvmFormalParameter);
+			for (XtendParameter parameter : parameters) {
+				if (!Strings.isEmpty(parameter.getName())) {
+					IValidatedEObjectDescription desc = createLocalVarDescription(parameter);
 					descriptions.add(desc);
 				}
 			}
-			return MapBasedScope.createScope(
-					super.createLocalVarScope(context, reference, parent, includeCurrentBlock, idx), descriptions);
+			return new JvmFeatureScope(
+					super.createLocalVarScope(context, reference, parent, includeCurrentBlock, idx), 
+					"XtendFunction", descriptions);
 		}
 		return super.createLocalVarScope(context, reference, parent, includeCurrentBlock, idx);
 	}
 
-	protected SimpleScope getScopeForXtendClass(XtendClass context, IScope parent) {
+	protected JvmFeatureScope getScopeForXtendClass(XtendClass context, IScope parent) {
 		XFeatureCall receiver = XbaseFactory.eINSTANCE.createXFeatureCall();
 		receiver.setFeature(context);
-		return new SimpleScope(parent, newArrayList(
-				EObjectDescription.create(THIS, context), 
-				EObjectDescription.create("super", context.getSuperCallReferable())));
+		return new JvmFeatureScope(parent, "XtendClass", newArrayList(
+				new LocalVarDescription(THIS, context), 
+				new LocalVarDescription(QualifiedName.create("super"), context.getSuperCallReferable())));
 	}
 	
 	@Override
@@ -222,8 +225,8 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 		result.add(3, sugaredProvider);
 	}
 
-	protected IEObjectDescription createIEObjectDescription(XtendParameter jvmFormalParameter) {
-		return EObjectDescription.create(QualifiedName.create(jvmFormalParameter.getName()), jvmFormalParameter, null);
+	protected IValidatedEObjectDescription createLocalVarDescription(XtendParameter jvmFormalParameter) {
+		return new LocalVarDescription(QualifiedName.create(jvmFormalParameter.getName()), jvmFormalParameter);
 	}
 
 	@Override

@@ -317,4 +317,68 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		String identifier = featureCall.getFeature().getIdentifier();
 		assertEquals("java.lang.Object.getClass()", identifier);
 	}
+	
+	public void testBug345827_01() throws Exception {
+		XtendFunction function = function("def String name() {\n" + 
+				"  var name = ''\n" +
+				"  name" + 
+				"}");
+		XBlockExpression block = (XBlockExpression) function.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) block.getExpressions().get(1);
+		// TODO actually we should prefer the function in case 'explicitOperationCall' is true
+		// for a featureCall
+		assertSame(block.getExpressions().get(0), featureCall.getFeature());
+	}
+	
+	public void testBug345827_02() throws Exception {
+		XtendFunction function = function("def String name() {\n" + 
+				"  var name = ''\n" +
+				"  name()" + 
+				"}");
+		XBlockExpression block = (XBlockExpression) function.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) block.getExpressions().get(1);
+		assertSame(associator.getDirectlyInferredOperation(function), featureCall.getFeature());
+	}
+	
+	public void testBug345827_03() throws Exception {
+		XtendFunction function = function("def String name(String param) {\n" + 
+				"  var name = ''\n" +
+				"  name()" + 
+		"}");
+		XBlockExpression block = (XBlockExpression) function.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) block.getExpressions().get(1);
+		// TODO actually we should prefer the function in case 'explicitOperationCall' is true
+		// for a featureCall
+		assertSame(block.getExpressions().get(0), featureCall.getFeature());
+	}
+	
+	public void testBug345827_04() throws Exception {
+		XtendFunction function = function("def String name(String param) {\n" + 
+				"  var name = ''\n" +
+				"  name('param')" + 
+		"}");
+		XBlockExpression block = (XBlockExpression) function.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) block.getExpressions().get(1);
+		assertSame(associator.getDirectlyInferredOperation(function), featureCall.getFeature());
+	}
+	
+	public void testBug345827_05() throws Exception {
+		XtendFunction function = function("def String name(String name) {\n" + 
+				"  name()" + 
+		"}");
+		XBlockExpression block = (XBlockExpression) function.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) block.getExpressions().get(0);
+		// TODO actually we should prefer the function in case 'explicitOperationCall' is true
+		// for a featureCall
+		assertSame(function.getParameters().get(0), featureCall.getFeature());
+	}
+	
+	public void testBug345827_06() throws Exception {
+		XtendFunction function = function("def String name(String param) {\n" + 
+				"  name('param')" + 
+		"}");
+		XBlockExpression block = (XBlockExpression) function.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) block.getExpressions().get(0);
+		assertSame(associator.getDirectlyInferredOperation(function), featureCall.getFeature());
+	}
 }
