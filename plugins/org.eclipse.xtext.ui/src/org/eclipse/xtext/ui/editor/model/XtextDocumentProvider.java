@@ -13,8 +13,10 @@ import java.io.IOException;
 import java.util.Collections;
 
 import org.eclipse.core.resources.IEncodedStorage;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -239,6 +241,24 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 			}
 		}
 		return encoding;
+	}
+	
+	@Override
+	public boolean isSynchronized(Object element) {
+		FileInfo info = (FileInfo) getElementInfo(element);
+		IFile iFile = null;
+
+		if (element instanceof IAdaptable) {
+			iFile = (IFile) ((IAdaptable) element).getAdapter(IFile.class);
+		}
+
+		if (iFile != null && info != null) {
+			if (info.fModificationStamp == computeModificationStamp(iFile)) {
+				return super.isSynchronized(element);
+			}
+			return false;
+		}
+		return super.isSynchronized(element);
 	}
 
 }
