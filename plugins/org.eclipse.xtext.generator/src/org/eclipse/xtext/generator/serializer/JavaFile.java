@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;
@@ -27,7 +28,7 @@ public class JavaFile {
 
 	protected String packageName;
 
-	protected JavaFile(String packageName) {
+	public JavaFile(String packageName) {
 		super();
 		this.packageName = packageName;
 	}
@@ -38,6 +39,8 @@ public class JavaFile {
 
 	public String imported(String clazz) {
 		String simpleName = Strings.lastToken(clazz, ".");
+		if (CodeGenUtil.isJavaDefaultType(simpleName))
+			return clazz;
 		String imported = imports.get(simpleName);
 		if (imported != null) {
 			if (imported.equals(clazz))
