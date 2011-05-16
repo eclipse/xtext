@@ -12,10 +12,14 @@ import java.util.List;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -23,6 +27,7 @@ import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingCalculator;
 import org.eclipse.xtext.xtend2.richstring.AbstractRichStringPartAcceptor;
 import org.eclipse.xtext.xtend2.richstring.DefaultIndentationHandler;
 import org.eclipse.xtext.xtend2.richstring.RichStringProcessor;
+import org.eclipse.xtext.xtend2.services.Xtend2GrammarAccess;
 import org.eclipse.xtext.xtend2.xtend2.RichString;
 import org.eclipse.xtext.xtend2.xtend2.RichStringLiteral;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
@@ -43,6 +48,13 @@ public class RichStringAwareHighlightingCalculator extends XbaseHighlightingCalc
 
 	@Inject
 	private Provider<DefaultIndentationHandler> indentationHandlerProvider;
+
+	private Keyword createKeyword;
+
+	@Inject
+	protected void setXtendGrammarAccess(Xtend2GrammarAccess grammarAccess) {
+		this.createKeyword = grammarAccess.getValidIDAccess().getCreateKeyword_1();
+	}
 	
 	@Override
 	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
@@ -75,6 +87,15 @@ public class RichStringAwareHighlightingCalculator extends XbaseHighlightingCalc
 
 	protected RichStringHighlighter createRichStringHighlighter(IHighlightedPositionAcceptor acceptor) {
 		return new RichStringHighlighter(acceptor);
+	}
+	
+	@Override
+	protected void highlightSpecialIdentifiers(ILeafNode leafNode, IHighlightedPositionAcceptor acceptor,
+			TerminalRule idRule) {
+		super.highlightSpecialIdentifiers(leafNode, acceptor, idRule);
+		if (leafNode.getGrammarElement() == createKeyword) {
+			acceptor.addPosition(leafNode.getOffset(), leafNode.getLength(), DefaultHighlightingConfiguration.DEFAULT_ID);
+		}
 	}
 
 	protected class RichStringHighlighter extends AbstractRichStringPartAcceptor.ForLoopOnce {
