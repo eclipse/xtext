@@ -6,12 +6,13 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
-            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-            default="true"
-            extensions="xtend"
-            id="org.eclipse.xtext.xtend2.Xtend2"
-            name="Xtend2 Editor">
+              class="org.eclipse.xtext.xtend2.ui.Xtend2ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+              contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+              default="true"
+              extensions="xtend"
+              icon="icons/xtend_file.png"
+              id="org.eclipse.xtext.xtend2.Xtend2"
+              name="Xtend2 Editor">
         </editor>
     </extension>
     <extension
