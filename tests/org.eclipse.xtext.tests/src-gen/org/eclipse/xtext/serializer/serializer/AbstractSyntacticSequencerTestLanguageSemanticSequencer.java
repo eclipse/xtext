@@ -1,21 +1,34 @@
 package org.eclipse.xtext.serializer.serializer;
 
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.serializer.GenericSequencer;
-import org.eclipse.xtext.serializer.ISemanticNodeProvider;
 import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.ITransientValueService;
-import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.impl.AbstractSemanticSequencer;
 import org.eclipse.xtext.serializer.services.SyntacticSequencerTestLanguageGrammarAccess;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import org.eclipse.xtext.serializer.syntacticsequencertest.*;
+import org.eclipse.xtext.serializer.syntacticsequencertest.Add0;
+import org.eclipse.xtext.serializer.syntacticsequencertest.Add1;
+import org.eclipse.xtext.serializer.syntacticsequencertest.Add2;
+import org.eclipse.xtext.serializer.syntacticsequencertest.AmbiguousTransition;
+import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternative;
+import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternativeLiteral;
+import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryKeywords;
+import org.eclipse.xtext.serializer.syntacticsequencertest.Model;
+import org.eclipse.xtext.serializer.syntacticsequencertest.Mult2;
+import org.eclipse.xtext.serializer.syntacticsequencertest.SingleCrossReference;
+import org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage;
+import org.eclipse.xtext.serializer.syntacticsequencertest.UnassignedDatatype;
+import org.eclipse.xtext.serializer.syntacticsequencertest.Val0;
+import org.eclipse.xtext.serializer.syntacticsequencertest.Val1;
+import org.eclipse.xtext.serializer.syntacticsequencertest.Val2;
 
 @SuppressWarnings("restriction")
 public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
@@ -30,9 +43,6 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	protected ITransientValueService transientValues;
 	
 	@Inject
-	protected ISemanticNodeProvider nodeProvider;
-	
-	@Inject
 	@GenericSequencer
 	protected Provider<ISemanticSequencer> genericSequencerProvider;
 	
@@ -45,8 +55,6 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 		this.genericSequencer = genericSequencerProvider.get();
 		this.genericSequencer.init(sequencer, sequenceAcceptor, errorAcceptor);
 	}
-	
-	
 	
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == SyntacticsequencertestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {

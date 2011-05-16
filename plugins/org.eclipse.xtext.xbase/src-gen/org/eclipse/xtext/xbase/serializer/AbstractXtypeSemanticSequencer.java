@@ -1,8 +1,15 @@
 package org.eclipse.xtext.xbase.serializer;
 
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmLowerBound;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.serializer.GenericSequencer;
-import org.eclipse.xtext.serializer.ISemanticNodeProvider;
 import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.ITransientValueService;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
@@ -10,10 +17,8 @@ import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvi
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.impl.AbstractSemanticSequencer;
 import org.eclipse.xtext.xbase.services.XtypeGrammarAccess;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import org.eclipse.xtext.common.types.*;
-import org.eclipse.xtext.xtype.*;
+import org.eclipse.xtext.xtype.XFunctionTypeRef;
+import org.eclipse.xtext.xtype.XtypePackage;
 
 @SuppressWarnings("restriction")
 public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
@@ -28,9 +33,6 @@ public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 	protected ITransientValueService transientValues;
 	
 	@Inject
-	protected ISemanticNodeProvider nodeProvider;
-	
-	@Inject
 	@GenericSequencer
 	protected Provider<ISemanticSequencer> genericSequencerProvider;
 	
@@ -43,8 +45,6 @@ public class AbstractXtypeSemanticSequencer extends AbstractSemanticSequencer {
 		this.genericSequencer = genericSequencerProvider.get();
 		this.genericSequencer.init(sequencer, sequenceAcceptor, errorAcceptor);
 	}
-	
-	
 	
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == TypesPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {

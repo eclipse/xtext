@@ -1,15 +1,15 @@
 package org.eclipse.xtext.serializer.serializer;
 
-import org.eclipse.emf.ecore.EObject;
 import com.google.inject.Inject;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynTransition;
-import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.serializer.impl.AbstractSyntacticSequencer;
-import org.eclipse.xtext.serializer.analysis.NfaToGrammar.AbstractElementAlias;
-import org.eclipse.xtext.serializer.services.SequencerTestLanguageGrammarAccess;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynTransition;
+import org.eclipse.xtext.serializer.analysis.NfaToGrammar.AbstractElementAlias;
+import org.eclipse.xtext.serializer.impl.AbstractSyntacticSequencer;
+import org.eclipse.xtext.serializer.services.SequencerTestLanguageGrammarAccess;
 
 @SuppressWarnings("restriction")
 public class AbstractSequencerTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {

@@ -1,21 +1,45 @@
 package org.eclipse.xtext.serializer.serializer;
 
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.serializer.GenericSequencer;
-import org.eclipse.xtext.serializer.ISemanticNodeProvider;
 import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.ITransientValueService;
-import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.impl.AbstractSemanticSequencer;
+import org.eclipse.xtext.serializer.sequencertest.AltList1;
+import org.eclipse.xtext.serializer.sequencertest.AltList2;
+import org.eclipse.xtext.serializer.sequencertest.AlternativeMultiplicities;
+import org.eclipse.xtext.serializer.sequencertest.DependentAlternative1;
+import org.eclipse.xtext.serializer.sequencertest.DependentAlternative2;
+import org.eclipse.xtext.serializer.sequencertest.GroupMultiplicities;
+import org.eclipse.xtext.serializer.sequencertest.List1;
+import org.eclipse.xtext.serializer.sequencertest.List2;
+import org.eclipse.xtext.serializer.sequencertest.Model;
+import org.eclipse.xtext.serializer.sequencertest.MultiKeywords;
+import org.eclipse.xtext.serializer.sequencertest.MultiKeywordsOrID;
+import org.eclipse.xtext.serializer.sequencertest.MultiTerminals;
+import org.eclipse.xtext.serializer.sequencertest.Optional;
+import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
+import org.eclipse.xtext.serializer.sequencertest.SimpleAlternative;
+import org.eclipse.xtext.serializer.sequencertest.SimpleGroup;
+import org.eclipse.xtext.serializer.sequencertest.SimpleMultiplicities;
+import org.eclipse.xtext.serializer.sequencertest.SingleContainmentReference;
+import org.eclipse.xtext.serializer.sequencertest.SingleContainmentReferenceChild1;
+import org.eclipse.xtext.serializer.sequencertest.SingleContainmentReferenceChild2;
+import org.eclipse.xtext.serializer.sequencertest.SingleContainmentReferenceChild3;
+import org.eclipse.xtext.serializer.sequencertest.SingleCrossReference;
+import org.eclipse.xtext.serializer.sequencertest.SingleEnum;
+import org.eclipse.xtext.serializer.sequencertest.SingleKeywords;
+import org.eclipse.xtext.serializer.sequencertest.SingleKeywordsOrID;
+import org.eclipse.xtext.serializer.sequencertest.SingleTerminals;
 import org.eclipse.xtext.serializer.services.SequencerTestLanguageGrammarAccess;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import org.eclipse.xtext.serializer.sequencertest.*;
 
 @SuppressWarnings("restriction")
 public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSemanticSequencer {
@@ -30,9 +54,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	protected ITransientValueService transientValues;
 	
 	@Inject
-	protected ISemanticNodeProvider nodeProvider;
-	
-	@Inject
 	@GenericSequencer
 	protected Provider<ISemanticSequencer> genericSequencerProvider;
 	
@@ -45,8 +66,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 		this.genericSequencer = genericSequencerProvider.get();
 		this.genericSequencer.init(sequencer, sequenceAcceptor, errorAcceptor);
 	}
-	
-	
 	
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == SequencertestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {

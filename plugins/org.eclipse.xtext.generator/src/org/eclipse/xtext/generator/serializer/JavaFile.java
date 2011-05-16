@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.serializer;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import org.eclipse.xtext.util.Strings;
 
@@ -23,9 +23,7 @@ public class JavaFile {
 
 	protected String body;
 
-	protected List<String> imports = Lists.newArrayList();
-
-	protected Map<String, String> imports2 = Maps.newHashMap();
+	protected Map<String, String> imports = Maps.newHashMap();
 
 	protected String packageName;
 
@@ -40,27 +38,15 @@ public class JavaFile {
 
 	public String imported(String clazz) {
 		String simpleName = Strings.lastToken(clazz, ".");
-		String imported = imports2.get(simpleName);
+		String imported = imports.get(simpleName);
 		if (imported != null) {
 			if (imported.equals(clazz))
 				return simpleName;
 			else
 				return clazz;
 		}
-		imports2.put(simpleName, clazz);
+		imports.put(simpleName, clazz);
 		return simpleName;
-	}
-
-	public List<String> getImports() {
-		return imports;
-	}
-
-	protected boolean isImportUsed(String importName) {
-		if (importName.endsWith("*"))
-			return true;
-		String simpleName = Strings.lastToken(importName, ".");
-		Pattern p = Pattern.compile("[^a-zA-Z0-9]" + simpleName + "[^a-zA-Z0-9]");
-		return p.matcher(body).find();
 	}
 
 	public void setBody(String body) {
@@ -71,13 +57,9 @@ public class JavaFile {
 	public String toString() {
 		StringBuilder result = new StringBuilder();
 		result.append("package " + packageName + ";\n\n");
-		for (String importName : imports)
-			if (isImportUsed(importName)) {
-				result.append("import ");
-				result.append(importName);
-				result.append(";\n");
-			}
-		for (String importName : imports2.values()) {
+		List<String> sortedImports = Lists.newArrayList(imports.values());
+		Collections.sort(sortedImports);
+		for (String importName : sortedImports) {
 			result.append("import ");
 			result.append(importName);
 			result.append(";\n");
