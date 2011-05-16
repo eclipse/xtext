@@ -11,7 +11,6 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Collections;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;

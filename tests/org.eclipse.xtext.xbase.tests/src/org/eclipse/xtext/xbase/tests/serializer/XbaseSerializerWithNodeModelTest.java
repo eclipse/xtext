@@ -19,7 +19,6 @@ import com.google.inject.Injector;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class XbaseSerializerWithNodeModelTest extends AbstractXbaseEvaluationTest {
 
 	static Injector injector = new XbaseStandaloneSetup() {
