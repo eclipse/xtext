@@ -191,6 +191,17 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(file);
 	}
 	
+	public void testNoException_10() throws Exception {
+		// error condition is empty package name
+		XtendFile file = file("package \n" + 
+				"class MyClass {\n" + 
+				"	aOrB(String a, Unknown b) {\n" + 
+				"	}\n" + 
+				"\n" + 
+				"}");
+		assertNoExceptions(file);
+	}
+	
 	public void testBug343585() throws Exception {
 		XtendFile file = file("class Test extends Test {}");
 		assertNoExceptions(file);
