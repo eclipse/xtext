@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
@@ -31,7 +32,7 @@ public class Xtend2ImportedNamespaceScopeProvider extends XbaseImportedNamespace
 		if (!(context instanceof XtendFile))
 			return Collections.emptyList();
 		List<ImportNormalizer> importedNamespaceResolvers = super.internalGetImportedNamespaceResolvers(context, ignoreCase);
-		if (context instanceof XtendFile && ((XtendFile) context).getPackage() != null) {
+		if (context instanceof XtendFile && !Strings.isEmpty(((XtendFile) context).getPackage())) {
 			importedNamespaceResolvers.add(new ImportNormalizer(nameConverter.toQualifiedName(((XtendFile) context)
 					.getPackage()), true, ignoreCase));
 		}

@@ -57,6 +57,7 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
@@ -341,8 +342,10 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 				if (!nodesForFeature.isEmpty()) {
 					INode node = nodesForFeature.get(0);
 					if (node.getOffset() + node.getLength() <= contentAssistContext.getOffset() - contentAssistContext.getPrefix().length()) {
-						createReceiverProposals(memberFeatureCall, crossReference, reference, contentAssistContext,	acceptor, filter);
-						return;
+						if (!Iterables.isEmpty(node.getLeafNodes())) {
+							createReceiverProposals(memberFeatureCall, crossReference, reference, contentAssistContext,	acceptor, filter);
+							return;
+						}
 					}
 				} 
 			}
@@ -462,7 +465,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 						}
 					}).toContext();
 				}
-				if (myCandidate instanceof JvmFeatureDescription && (grammarAccess.getIdOrSuperRule().getName().equals(ruleName) || grammarAccess.getIDRule().getName().equals(ruleName))) {
+				if (myCandidate instanceof JvmFeatureDescription && (grammarAccess.getIdOrSuperRule().getName().equals(ruleName) || grammarAccess.getValidIDRule().getName().equals(ruleName))) {
 					ICompletionProposal result = null;
 					String key = ((JvmFeatureDescription) myCandidate).getKey();
 					boolean withParenths = key.endsWith(")");
