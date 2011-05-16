@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.jar.Attributes;
@@ -24,6 +25,8 @@ import java.util.jar.Manifest;
 
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Wrapper;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -263,10 +266,35 @@ public class MergeableManifest extends Manifest {
 		this.modified = modified.get();
 		getMainAttributes().put(IMPORT_PACKAGE, result);
 	}
+	
+	/**
+	 * @since 2.0
+	 */
+	protected static String[] splitQuoteAware(String string) {
+		List<StringBuilder> result = Lists.newArrayList(new StringBuilder());
+		boolean inQuote = false;
+		for (int i = 0; i < string.length(); i++)
+			switch (string.charAt(i)) {
+				case ',':
+					if (inQuote)
+						result.get(result.size() - 1).append(string.charAt(i));
+					else
+						result.add(new StringBuilder());
+					break;
+				case '"':
+					inQuote = !inQuote;
+				default:
+					result.get(result.size() - 1).append(string.charAt(i));
+			}
+		String[] resultArray = new String[result.size()];
+		for (int i = 0; i < result.size(); i++)
+			resultArray[i] = result.get(i).toString();
+		return resultArray;
+	}
 
 	public static String mergeIntoCommaSeparatedList(String currentString, Set<String> toMergeIn, Wrapper<Boolean> modified) {
 		String string = currentString == null ? "" : currentString;
-		String[] split = string.split("\\s*,\\s*");
+		String[] split = splitQuoteAware(string);
 		Set<ParameterizedElement> all = new LinkedHashSet<ParameterizedElement>();
 		for (int i = 0; i < split.length; i++) {
 			String value = split[i];
