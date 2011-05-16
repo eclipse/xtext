@@ -7,12 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.nodemodel;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreAdapterFactory;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
+
+import com.google.common.collect.AbstractIterator;
+import com.google.common.collect.Iterables;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -77,6 +82,46 @@ public class CompositeNodeTest extends AbstractCompositeNodeTest {
 		assertEquals(3, thirdChild.getOffset());		
 		assertEquals(3, thirdGrandChild.getTotalOffset());		
 		assertEquals(3, thirdGrandChild.getOffset());		
+	}
+	
+	public void testGetLeafNodes_01() {
+		RootNode rootNode = new RootNode();
+		rootNode.basicSetCompleteContent("my string");
+		CompositeNode first = new CompositeNode();
+		CompositeNode childOfFirst = new CompositeNode();
+		CompositeNode second = new CompositeNode();
+		addChild(rootNode, first);
+		addChild(first, childOfFirst);
+		addChild(rootNode, second);
+		LeafNode leaf = new LeafNode();
+		addChild(second, leaf);
+		assertTrue(Iterables.isEmpty(first.getLeafNodes()));
+		assertTrue(Iterables.isEmpty(childOfFirst.getLeafNodes()));
+		assertSame(leaf, Iterables.getOnlyElement(rootNode.getLeafNodes()));
+		assertSame(leaf, Iterables.getOnlyElement(second.getLeafNodes()));
+		
+		assertTrue(Iterables.isEmpty(getReverseLeafNodes(first)));
+		assertTrue(Iterables.isEmpty(getReverseLeafNodes(childOfFirst)));
+		assertSame(leaf, Iterables.getOnlyElement(getReverseLeafNodes(rootNode)));
+		assertSame(leaf, Iterables.getOnlyElement(getReverseLeafNodes(second)));
+	}
+	
+	protected Iterable<ILeafNode> getReverseLeafNodes(final AbstractNode node) {
+		return Iterables.filter(new Iterable<INode>() {
+			public Iterator<INode> iterator() {
+				return new AbstractIterator<INode>() {
+
+					private BidiTreeIterator<AbstractNode> delegate = node.basicIterator();
+					
+					@Override
+					protected INode computeNext() {
+						if (delegate.hasPrevious())
+							return delegate.previous();
+						return endOfData();
+					}
+				};
+			}
+		}, ILeafNode.class);
 	}
 	
 	@Override
