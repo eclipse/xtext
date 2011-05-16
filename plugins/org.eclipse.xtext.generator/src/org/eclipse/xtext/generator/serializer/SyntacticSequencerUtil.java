@@ -8,6 +8,7 @@
 package org.eclipse.xtext.generator.serializer;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -29,6 +30,8 @@ import org.eclipse.xtext.serializer.analysis.NfaToGrammar.ALternativeAlias;
 import org.eclipse.xtext.serializer.analysis.NfaToGrammar.AbstractElementAlias;
 import org.eclipse.xtext.serializer.analysis.NfaToGrammar.ElementAlias;
 import org.eclipse.xtext.serializer.analysis.NfaToGrammar.GroupAlias;
+import org.eclipse.xtext.util.Triple;
+import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -108,7 +111,11 @@ public class SyntacticSequencerUtil {
 		return result;
 	}
 
-	public Map<AbstractElementAlias<ISynState>, List<ISynTransition>> getAllAmbiguousTransitionsBySyntax() {
+	protected List<Triple<String, AbstractElementAlias<ISynState>, List<ISynTransition>>> ambiguousTransitions;
+
+	public List<Triple<String, AbstractElementAlias<ISynState>, List<ISynTransition>>> getAllAmbiguousTransitionsBySyntax() {
+		if (ambiguousTransitions != null)
+			return ambiguousTransitions;
 		Map<AbstractElementAlias<ISynState>, List<ISynTransition>> result = Maps.newHashMap();
 		for (ISynTransition transition : getAllAmbiguousTransitions()) {
 			AbstractElementAlias<ISynState> syntax = transition.getAmbiguousSyntax();
@@ -117,10 +124,20 @@ public class SyntacticSequencerUtil {
 				result.put(syntax, list = Lists.newArrayList());
 			list.add(transition);
 		}
-		return result;
+		ambiguousTransitions = Lists.newArrayList();
+		for (Map.Entry<AbstractElementAlias<ISynState>, List<ISynTransition>> e : result.entrySet())
+			ambiguousTransitions.add(Tuples.create(elementAliasToIdentifyer(e.getKey()), e.getKey(), e.getValue()));
+		Collections.sort(ambiguousTransitions,
+				new Comparator<Triple<String, AbstractElementAlias<ISynState>, List<ISynTransition>>>() {
+					public int compare(Triple<String, AbstractElementAlias<ISynState>, List<ISynTransition>> o1,
+							Triple<String, AbstractElementAlias<ISynState>, List<ISynTransition>> o2) {
+						return o1.getFirst().compareTo(o2.getFirst());
+					}
+				});
+		return ambiguousTransitions;
 	}
 
-	public String elementAliasToIdentifyer(AbstractElementAlias<ISynState> alias, Set<String> rules, boolean isNested) {
+	protected String elementAliasToIdentifyer(AbstractElementAlias<ISynState> alias, Set<String> rules, boolean isNested) {
 		String card = null;
 		if (alias.isMany() && alias.isOptional())
 			card = "a";
@@ -189,7 +206,7 @@ public class SyntacticSequencerUtil {
 		throw new RuntimeException("unknown element");
 	}
 
-	public String elementAliasToIdentifyer(AbstractElementAlias<ISynState> alias) {
+	protected String elementAliasToIdentifyer(AbstractElementAlias<ISynState> alias) {
 		Set<String> rulesSet = Sets.newHashSet();
 		String body = elementAliasToIdentifyer(alias, rulesSet, false);
 		List<String> rulesList = Lists.newArrayList(rulesSet);

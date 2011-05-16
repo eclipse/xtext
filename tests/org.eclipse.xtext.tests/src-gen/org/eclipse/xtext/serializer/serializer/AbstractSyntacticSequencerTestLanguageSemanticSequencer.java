@@ -92,15 +92,15 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 					return; 
 				}
 				else break;
-			case SyntacticsequencertestPackage.BOOLEAN_ALTERNATIVE_LITERAL:
-				if(context == grammarAccess.getBooleanAlternativeLiteralRule()) {
-					sequence_BooleanAlternativeLiteral_BooleanAlternativeLiteral(context, (BooleanAlternativeLiteral) semanticObject); 
-					return; 
-				}
-				else break;
 			case SyntacticsequencertestPackage.BOOLEAN_ALTERNATIVE:
 				if(context == grammarAccess.getBooleanAlternativeRule()) {
 					sequence_BooleanAlternative_BooleanAlternative(context, (BooleanAlternative) semanticObject); 
+					return; 
+				}
+				else break;
+			case SyntacticsequencertestPackage.BOOLEAN_ALTERNATIVE_LITERAL:
+				if(context == grammarAccess.getBooleanAlternativeLiteralRule()) {
+					sequence_BooleanAlternativeLiteral_BooleanAlternativeLiteral(context, (BooleanAlternativeLiteral) semanticObject); 
 					return; 
 				}
 				else break;
@@ -124,6 +124,18 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 				   context == grammarAccess.getMultiplication2Access().getMult2LeftAction_1_0() ||
 				   context == grammarAccess.getPrim2Rule()) {
 					sequence_Multiplication2_Mult2(context, (Mult2) semanticObject); 
+					return; 
+				}
+				else break;
+			case SyntacticsequencertestPackage.SINGLE_CROSS_REFERENCE:
+				if(context == grammarAccess.getSingleCrossReferenceRule()) {
+					sequence_SingleCrossReference_SingleCrossReference(context, (SingleCrossReference) semanticObject); 
+					return; 
+				}
+				else break;
+			case SyntacticsequencertestPackage.UNASSIGNED_DATATYPE:
+				if(context == grammarAccess.getUnassignedDatatypeRule()) {
+					sequence_UnassignedDatatype_UnassignedDatatype(context, (UnassignedDatatype) semanticObject); 
 					return; 
 				}
 				else break;
@@ -153,18 +165,6 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 				   context == grammarAccess.getMultiplication2Access().getMult2LeftAction_1_0() ||
 				   context == grammarAccess.getPrim2Rule()) {
 					sequence_Prim2_Val2(context, (Val2) semanticObject); 
-					return; 
-				}
-				else break;
-			case SyntacticsequencertestPackage.SINGLE_CROSS_REFERENCE:
-				if(context == grammarAccess.getSingleCrossReferenceRule()) {
-					sequence_SingleCrossReference_SingleCrossReference(context, (SingleCrossReference) semanticObject); 
-					return; 
-				}
-				else break;
-			case SyntacticsequencertestPackage.UNASSIGNED_DATATYPE:
-				if(context == grammarAccess.getUnassignedDatatypeRule()) {
-					sequence_UnassignedDatatype_UnassignedDatatype(context, (UnassignedDatatype) semanticObject); 
 					return; 
 				}
 				else break;

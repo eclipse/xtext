@@ -123,15 +123,15 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 					return; 
 				}
 				else break;
-			case SequencertestPackage.MULTI_KEYWORDS_OR_ID:
-				if(context == grammarAccess.getMultiKeywordsOrIDRule()) {
-					sequence_MultiKeywordsOrID_MultiKeywordsOrID(context, (MultiKeywordsOrID) semanticObject); 
-					return; 
-				}
-				else break;
 			case SequencertestPackage.MULTI_KEYWORDS:
 				if(context == grammarAccess.getMultiKeywordsRule()) {
 					sequence_MultiKeywords_MultiKeywords(context, (MultiKeywords) semanticObject); 
+					return; 
+				}
+				else break;
+			case SequencertestPackage.MULTI_KEYWORDS_OR_ID:
+				if(context == grammarAccess.getMultiKeywordsOrIDRule()) {
+					sequence_MultiKeywordsOrID_MultiKeywordsOrID(context, (MultiKeywordsOrID) semanticObject); 
 					return; 
 				}
 				else break;
@@ -165,6 +165,12 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 					return; 
 				}
 				else break;
+			case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE:
+				if(context == grammarAccess.getSingleContainmentReferenceRule()) {
+					sequence_SingleContainmentReference_SingleContainmentReference(context, (SingleContainmentReference) semanticObject); 
+					return; 
+				}
+				else break;
 			case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE_CHILD1:
 				if(context == grammarAccess.getSingleContainmentReferenceChild1Rule()) {
 					sequence_SingleContainmentReferenceChild1_SingleContainmentReferenceChild1(context, (SingleContainmentReferenceChild1) semanticObject); 
@@ -183,12 +189,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 					return; 
 				}
 				else break;
-			case SequencertestPackage.SINGLE_CONTAINMENT_REFERENCE:
-				if(context == grammarAccess.getSingleContainmentReferenceRule()) {
-					sequence_SingleContainmentReference_SingleContainmentReference(context, (SingleContainmentReference) semanticObject); 
-					return; 
-				}
-				else break;
 			case SequencertestPackage.SINGLE_CROSS_REFERENCE:
 				if(context == grammarAccess.getSingleCrossReferenceRule()) {
 					sequence_SingleCrossReference_SingleCrossReference(context, (SingleCrossReference) semanticObject); 
@@ -201,15 +201,15 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 					return; 
 				}
 				else break;
-			case SequencertestPackage.SINGLE_KEYWORDS_OR_ID:
-				if(context == grammarAccess.getSingleKeywordsOrIDRule()) {
-					sequence_SingleKeywordsOrID_SingleKeywordsOrID(context, (SingleKeywordsOrID) semanticObject); 
-					return; 
-				}
-				else break;
 			case SequencertestPackage.SINGLE_KEYWORDS:
 				if(context == grammarAccess.getSingleKeywordsRule()) {
 					sequence_SingleKeywords_SingleKeywords(context, (SingleKeywords) semanticObject); 
+					return; 
+				}
+				else break;
+			case SequencertestPackage.SINGLE_KEYWORDS_OR_ID:
+				if(context == grammarAccess.getSingleKeywordsOrIDRule()) {
+					sequence_SingleKeywordsOrID_SingleKeywordsOrID(context, (SingleKeywordsOrID) semanticObject); 
 					return; 
 				}
 				else break;

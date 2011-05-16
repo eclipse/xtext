@@ -3,6 +3,7 @@ package org.eclipse.xtext.generator.serializer;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenFeature;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -61,6 +63,23 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     return _name;
   }
   
+  public <T extends ENamedElement> List<T> sort(final Iterable<T> iterable) {
+    final Function2<T,T,Integer> _function = new Function2<T,T,Integer>() {
+        public Integer apply(final T p1 , final T p2) {
+          String _name = p1.getName();
+          String _name_1 = p2.getName();
+          int _compareTo = _name.compareTo(_name_1);
+          return _compareTo;
+        }
+      };
+    List<T> _sort = IterableExtensions.<T>sort(iterable, new Comparator<T>() {
+        public int compare(T o1,T o2) {
+          return _function.apply(o1,o2);
+        }
+    });
+    return _sort;
+  }
+  
   public Iterable<EPackage> getAccessedPackages() {
     Collection<IConstraint> _grammarConstraints = this.sequencerUtil.getGrammarConstraints(this.grammar);
     final Function1<IConstraint,Boolean> _function = new Function1<IConstraint,Boolean>() {
@@ -80,7 +99,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       };
     Iterable<EPackage> _map = IterableExtensions.<IConstraint, EPackage>map(_filter, _function_1);
     Set<EPackage> _set = IterableExtensions.<EPackage>toSet(_map);
-    return _set;
+    List<EPackage> _sort = this.sort(_set);
+    return _sort;
   }
   
   public Iterable<EClass> getAccessedClasses(final EPackage pkg) {
@@ -108,7 +128,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       };
     Iterable<EClass> _filter = IterableExtensions.<EClass>filter(_map, _function_1);
     Set<EClass> _set = IterableExtensions.<EClass>toSet(_filter);
-    return _set;
+    List<EClass> _sort = this.sort(_set);
+    return _sort;
   }
   
   public Iterable<EClass> getAccessedClasses() {
@@ -121,7 +142,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       };
     Iterable<EClass> _map = IterableExtensions.<IConstraint, EClass>map(_grammarConstraints, _function);
     Set<EClass> _set = IterableExtensions.<EClass>toSet(_map);
-    return _set;
+    List<EClass> _sort = this.sort(_set);
+    return _sort;
   }
   
   public Map<IConstraint,List<EObject>> getAccessedConstraints(final EClass clazz) {

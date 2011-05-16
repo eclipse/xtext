@@ -61,15 +61,15 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 			public class «simpleName» extends AbstractSyntacticSequencer {
 			
 				protected «file.imported(grammar.gaFQName)» grammarAccess;
-				«FOR group:util.allAmbiguousTransitionsBySyntax.entrySet»
-					protected AbstractElementAlias<AbstractElement> match_«group.key.elementAliasToIdentifyer»;
+				«FOR group:util.allAmbiguousTransitionsBySyntax»
+					protected AbstractElementAlias<AbstractElement> match_«group.first»;
 				«ENDFOR»
 				
 				@Inject
 				protected void init(IGrammarAccess access) {
 					grammarAccess = («file.imported(grammar.gaFQName)») access;
-					«FOR group:util.allAmbiguousTransitionsBySyntax.entrySet»
-						match_«group.key.elementAliasToIdentifyer» = « group.key.elementAliasToConstructor(file)»;
+					«FOR group:util.allAmbiguousTransitionsBySyntax»
+						match_«group.first» = « group.second.elementAliasToConstructor(file)»;
 					«ENDFOR»
 				}
 				
@@ -81,12 +81,12 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 				
 				«file.genEmitUnassignedTokens()»
 			
-				«FOR group:util.allAmbiguousTransitionsBySyntax.entrySet»
+				«FOR group:util.allAmbiguousTransitionsBySyntax»
 					/**
 					 * Syntax:
-					 *     «group.key»
+					 *     «group.second»
 					 */
-					protected void emit_«group.key.elementAliasToIdentifyer»(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
+					protected void emit_«group.first»(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
 						acceptNodes(transition, fromNode, toNode);
 					}
 					
@@ -106,7 +106,7 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 	def unassignedCalledTokenRules() {
 		val rules = grammar.allRules.filter(e|e.EObjectRule)
 		val calls = rules.map(r|r.containedRuleCalls.filter(e | !e.isAssigned() && !e.isEObjectRuleCall())).flatten
-		calls.map(e | e.rule).toSet
+		calls.map(e | e.rule).toSet.sort(r1, r2 | r1.name.compareTo(r2.name))
 	}
 	
 	def unassignedCalledTokenRuleName(AbstractRule rule) '''get«rule.name»Token'''
@@ -147,9 +147,9 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 			if (!transition.isSyntacticallyAmbiguous())
 				return;
 			«var i = 0»
-			«FOR group:util.allAmbiguousTransitionsBySyntax.entrySet»
-				«IF (i = i + 1) > 1»else «ENDIF»if(match_«group.key.elementAliasToIdentifyer».equals(transition.getAmbiguousSyntax()))
-					emit_«group.key.elementAliasToIdentifyer»(semanticObject, transition, fromNode, toNode);
+			«FOR group:util.allAmbiguousTransitionsBySyntax»
+				«IF (i = i + 1) > 1»else «ENDIF»if(match_«group.first».equals(transition.getAmbiguousSyntax()))
+					emit_«group.first»(semanticObject, transition, fromNode, toNode);
 			«ENDFOR»
 			«IF i > 0»else «ENDIF»acceptNodes(transition, fromNode, toNode);
 		}
