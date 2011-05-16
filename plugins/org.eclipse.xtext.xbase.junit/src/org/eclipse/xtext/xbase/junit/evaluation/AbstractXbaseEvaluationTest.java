@@ -786,6 +786,14 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(3, "switch new java.util.ArrayList<String>() { java.util.Set<String> : 5 java.util.List<Object>: 3 }");
 	}
 	
+	@Test public void testSwitchExpression_12() throws Exception {
+		assertEvaluatesTo("bar", "switch 'foo' { case 'bar' : return 'foo' default : 'bar' }");
+	}
+	
+	@Test public void testSwitchExpression_13() throws Exception {
+		assertEvaluatesTo("bar", "switch 'foo' { case 'bar' : 'foo' default : return 'bar' }");
+	}
+	
 	@Test public void testCastedExpression_01() throws Exception {
 		assertEvaluatesTo("literal", "'literal' as String");
 	}
@@ -833,6 +841,13 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"try throw new NullPointerException()" +
 				"  catch(ClassCastException e) throw new NullPointerException()" +
 		"  catch(NullPointerException e) 'x'");
+	}
+	
+	@Test public void testTryCatch_WithThrows_02() throws Exception {
+		assertEvaluatesTo("foo", 
+				"try 'foo'" +
+				"  catch(ClassCastException e) throw new NullPointerException()" +
+				"  catch(NullPointerException e) 'x'");
 	}
 	
 	@Test public void testTryFinally_01() throws Exception {
