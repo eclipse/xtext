@@ -363,6 +363,42 @@ public abstract class AbstractRichStringEvaluationTest extends TestCase {
 				"'''");
 	}
 	
+	public void testEmptyLineInBetween_01() throws Exception {
+		assertOutput(
+				"test\n" +
+				"\n" +
+				"test\n", 
+				"'''\n" +
+				"  test\n" +
+				"\n" +
+				"  test\n" +
+				"'''");
+	}
+	
+	public void testEmptyLineInBetween_02() throws Exception {
+		assertOutput(
+				"  test\n" +
+				"\n" +
+				"test\n", 
+				"'''\n" +
+				"    test\n" +
+				"\n" +
+				"  test\n" +
+				"'''");
+	}
+	
+	public void testEmptyLineInBetween_03() throws Exception {
+		assertOutput(
+				"test\n" +
+				"\n" +
+				"  test\n", 
+				"'''\n" +
+				"    test\n" +
+				"\n" +
+				"      test\n" +
+				"'''");
+	}
+	
 	public void testTrailingWhitespace_01() throws Exception {
 		assertOutput(
 				"foobar \n", 

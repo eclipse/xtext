@@ -75,6 +75,7 @@ public class InitialTemplateIndentationComputer extends Xtend2Switch<String> {
 			return null;
 		}
 		String result = null;
+		boolean emptyLineSeen = false;
 		for (int i = 1; i < lines.size(); i++) {
 			TextLine line = lines.get(i);
 			CharSequence leadingWS = line.getLeadingWhiteSpace();
@@ -89,10 +90,16 @@ public class InitialTemplateIndentationComputer extends Xtend2Switch<String> {
 				RichString completeString = (RichString) object.eContainer();
 				List<XExpression> siblings = completeString.getExpressions();
 				if (siblings.get(siblings.size() - 1) != object) {
-					result = getBetterString(result, leadingWS.toString());	
+					if (leadingWS.length() == 0) { // empty line
+						emptyLineSeen = true;
+					} else {
+						result = getBetterString(result, leadingWS.toString());
+					}
 				}
 			}
 		}
+		if (emptyLineSeen && result == null)
+			return "";
 		return result;
 	}
 	
