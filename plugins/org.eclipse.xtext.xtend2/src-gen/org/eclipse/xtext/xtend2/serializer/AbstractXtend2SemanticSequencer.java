@@ -130,7 +130,11 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				}
 				else break;
 			case Xtend2Package.RICH_STRING_LITERAL:
-				if(context == grammarAccess.getInternalRichStringLiteralRule()) {
+				if(context == grammarAccess.getRichStringLiteralRule()) {
+					sequence_RichStringLiteral_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getInternalRichStringLiteralRule()) {
 					sequence_InternalRichStringLiteral_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
@@ -142,21 +146,13 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 					sequence_RichStringLiteralStart_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getRichStringLiteralRule()) {
-					sequence_RichStringLiteral_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
-					return; 
-				}
 				else if(context == grammarAccess.getRichStringLiteralInbetweenRule()) {
 					sequence_RichStringLiteralInbetween_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
 				else break;
 			case Xtend2Package.RICH_STRING:
-				if(context == grammarAccess.getInternalRichStringRule()) {
-					sequence_InternalRichString_RichString(context, (RichString) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getXStringLiteralRule() ||
+				if(context == grammarAccess.getXStringLiteralRule() ||
 				   context == grammarAccess.getRichStringRule() ||
 				   context == grammarAccess.getRichStringPartRule() ||
 				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
@@ -191,6 +187,10 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				   context == grammarAccess.getXParenthesizedExpressionRule() ||
 				   context == grammarAccess.getXExpressionInsideBlockRule()) {
 					sequence_RichString_RichString(context, (RichString) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getInternalRichStringRule()) {
+					sequence_InternalRichString_RichString(context, (RichString) semanticObject); 
 					return; 
 				}
 				else break;
@@ -268,12 +268,12 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				}
 				else break;
 			case TypesPackage.JVM_UPPER_BOUND:
-				if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
-					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				if(context == grammarAccess.getJvmUpperBoundRule()) {
+					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getJvmUpperBoundRule()) {
-					sequence_JvmUpperBound_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
+				else if(context == grammarAccess.getJvmUpperBoundAndedRule()) {
+					sequence_JvmUpperBoundAnded_JvmUpperBound(context, (JvmUpperBound) semanticObject); 
 					return; 
 				}
 				else break;
@@ -355,7 +355,14 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				}
 				else break;
 			case XbasePackage.XFEATURE_CALL:
-				if(context == grammarAccess.getRichStringPartRule() ||
+				if(context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
+				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
+				   context == grammarAccess.getXAnnotationElementValueRule() ||
+				   context == grammarAccess.getXAnnotationValueFieldReferenceRule()) {
+					sequence_XAnnotationValueFieldReference_XFeatureCall(context, (XFeatureCall) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getRichStringPartRule() ||
 				   context == grammarAccess.getXExpressionRule() ||
 				   context == grammarAccess.getXAssignmentRule() ||
 				   context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
@@ -385,13 +392,6 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				   context == grammarAccess.getXExpressionInsideBlockRule() ||
 				   context == grammarAccess.getXFeatureCallRule()) {
 					sequence_XFeatureCall_XFeatureCall(context, (XFeatureCall) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
-				   context == grammarAccess.getXAnnotationElementValueRule() ||
-				   context == grammarAccess.getXAnnotationValueFieldReferenceRule()) {
-					sequence_XAnnotationValueFieldReference_XFeatureCall(context, (XFeatureCall) semanticObject); 
 					return; 
 				}
 				else break;
@@ -1163,7 +1163,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	 * Constraint:
 	 *     (
 	 *         annotations+=XAnnotation*
-	 *         name=ID
+	 *         name=ValidID
 	 *         (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)?
 	 *         extends=JvmTypeReference?
 	 *         (implements+=JvmTypeReference implements+=JvmTypeReference*)?
@@ -1185,7 +1185,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (name=ID createExpression=XExpression)
+	 *     (name=ValidID createExpression=XExpression)
 	 *
 	 * Features:
 	 *    createExpression[1, 1]
@@ -1200,7 +1200,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getCreateExtensionInfoAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getCreateExtensionInfoAccess().getNameValidIDParserRuleCall_1_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getCreateExtensionInfoAccess().getCreateExpressionXExpressionParserRuleCall_3_0(), semanticObject.getCreateExpression());
 		feeder.finish();
 	}
@@ -1273,7 +1273,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (parameterType=JvmTypeReference? name=ID)
+	 *     (parameterType=JvmTypeReference? name=ValidID)
 	 *
 	 * Features:
 	 *    name[1, 1]
@@ -1311,7 +1311,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (name=ID ((constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*) | constraints+=JvmLowerBound)?)
+	 *     (name=ValidID ((constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*) | constraints+=JvmLowerBound)?)
 	 *
 	 * Features:
 	 *    arrayType[1, *]
@@ -1366,7 +1366,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	 *             (annotationInfo=Member_XtendField_2_0_0 type=JvmTypeReference)
 	 *         )
 	 *         
-	 *         name=ID
+	 *         name=ValidID
 	 *     )
 	 *     
 	 *
@@ -1413,7 +1413,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	 *         (typeParameters+=JvmTypeParameter typeParameters+=JvmTypeParameter*)?
 	 *         returnType=JvmTypeReference?
 	 *         createExtensionInfo=CreateExtensionInfo?
-	 *         name=ID
+	 *         name=ValidID
 	 *         (parameters+=Parameter parameters+=Parameter*)?
 	 *         (expression=XBlockExpression | expression=RichString)?
 	 *     )
@@ -1437,7 +1437,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (annotations+=XAnnotation* parameterType=JvmTypeReference name=ID)
+	 *     (annotations+=XAnnotation* parameterType=JvmTypeReference name=ValidID)
 	 *
 	 * Features:
 	 *    annotations[0, *]
@@ -1647,7 +1647,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (element=[JvmOperation|ID] value=XAnnotationElementValue)
+	 *     (element=[JvmOperation|ValidID] value=XAnnotationElementValue)
 	 *
 	 * Features:
 	 *    value[1, 1]
@@ -1722,8 +1722,8 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (
-	 *         (feature=[JvmIdentifiableElement|ID] value=XAssignment) | 
-	 *         (assignable=XMemberFeatureCall_XAssignment_1_0_0_0_0 feature=[JvmIdentifiableElement|ID] value=XAssignment)
+	 *         (feature=[JvmIdentifiableElement|ValidID] value=XAssignment) | 
+	 *         (assignable=XMemberFeatureCall_XAssignment_1_0_0_0_0 feature=[JvmIdentifiableElement|ValidID] value=XAssignment)
 	 *     )
 	 *     
 	 *
@@ -1938,7 +1938,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	 *         memberCallTarget=XMemberFeatureCall_XMemberFeatureCall_1_1_0_0_0
 	 *         (nullSafe?='?.' | spreading?='*.')?
 	 *         (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)?
-	 *         feature=[JvmIdentifiableElement|ID]
+	 *         feature=[JvmIdentifiableElement|ValidID]
 	 *         (explicitOperationCall?='(' (memberCallArguments+=XShortClosure | (memberCallArguments+=XExpression memberCallArguments+=XExpression*))?)?
 	 *     )
 	 *     
@@ -2023,7 +2023,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (localVarName=ID? switch=XExpression cases+=XCasePart+ default=XExpression?)
+	 *     (localVarName=ValidID? switch=XExpression cases+=XCasePart+ default=XExpression?)
 	 *
 	 * Features:
 	 *    switch[1, 1]
@@ -2091,7 +2091,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (writeable?='var'? ((type=JvmTypeReference name=ID) | name=ID) right=XExpression?)
+	 *     (writeable?='var'? ((type=JvmTypeReference name=ValidID) | name=ValidID) right=XExpression?)
 	 *
 	 * Features:
 	 *    type[1, 1]

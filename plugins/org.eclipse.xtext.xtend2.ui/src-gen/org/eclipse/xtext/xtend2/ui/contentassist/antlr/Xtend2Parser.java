@@ -40,6 +40,7 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getMemberAccess().getAlternatives_2(), "rule__Member__Alternatives_2");
 					put(grammarAccess.getMemberAccess().getAlternatives_2_1_1(), "rule__Member__Alternatives_2_1_1");
 					put(grammarAccess.getMemberAccess().getAlternatives_2_1_10(), "rule__Member__Alternatives_2_1_10");
+					put(grammarAccess.getValidIDAccess().getAlternatives(), "rule__ValidID__Alternatives");
 					put(grammarAccess.getXStringLiteralAccess().getAlternatives(), "rule__XStringLiteral__Alternatives");
 					put(grammarAccess.getRichStringAccess().getAlternatives_1(), "rule__RichString__Alternatives_1");
 					put(grammarAccess.getInternalRichStringAccess().getAlternatives_1(), "rule__InternalRichString__Alternatives_1");
