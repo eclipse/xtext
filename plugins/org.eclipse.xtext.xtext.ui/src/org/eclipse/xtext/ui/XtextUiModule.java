@@ -48,6 +48,7 @@ import com.google.inject.name.Names;
 /**
  * Use this class to register components to be used within the IDE.
  */
+@SuppressWarnings("restriction")
 public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 	public XtextUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
@@ -125,7 +126,6 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 		return ProjectAwareXtendXtext2EcorePostProcessor.class;
 	}
 
-	@SuppressWarnings("restriction")
 	public Class<? extends IXtextEditorCallback> bindIXtextEditorCallback() {
 		return org.eclipse.xtext.builder.nature.NatureAddingEditorCallback.class;
 	}
@@ -139,17 +139,14 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 		return XtextHyperlinkHelper.class;
 	}
 	
-	@SuppressWarnings("restriction")
 	public Class<? extends IDependentElementsCalculator> bindIDependentElementsCalculator() {
 		return XtextDependentElementsCalculator.class;
 	}
 
-	@SuppressWarnings("restriction")
 	public Class<? extends IRenameStrategy.Provider> bindIRenameStrategy$Provider() {
 		return XtextRenameStrategyProvider.class;
 	}
 
-	@SuppressWarnings("restriction")
 	public Class<? extends RenameElementHandler> bindRenameElementHandler() {
 		return XtextRenameElementHandler.class;
 	}

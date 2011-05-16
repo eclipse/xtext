@@ -24,7 +24,7 @@ PackageDeclaration:
 	'}';
 
 Entity:
-	'entity' name=ID ('extends' superType=JvmTypeReference)? '{'
+	'entity' name=ValidID ('extends' superType=JvmTypeReference)? '{'
 		features+=Feature*
 	'}';
 
@@ -32,10 +32,10 @@ Feature:
 	Property | Operation;
 
 Property:
-	name=ID ':' type=JvmTypeReference;
+	name=ValidID ':' type=JvmTypeReference;
 
 Operation:
-	visibility=Visibility? 'op' name=ID '(' (params+=JvmFormalParameter (',' params+=JvmFormalParameter)*)? ')' ':' type=JvmTypeReference 
+	visibility=Visibility? 'op' name=ValidID '(' (params+=JvmFormalParameter (',' params+=JvmFormalParameter)*)? ')' ':' type=JvmTypeReference 
 		body=XBlockExpression;
 
 enum Visibility:
