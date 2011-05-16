@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.editor;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextDoubleClickStrategy;
@@ -214,6 +215,10 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	@Override
 	public ITextDoubleClickStrategy getDoubleClickStrategy(ISourceViewer sourceViewer, String contentType) {
 		return doubleClickStrategyProvider.getStrategy(sourceViewer, contentType, getConfiguredDocumentPartitioning(sourceViewer));
+	}
+
+	void setPreferenceStore(IPreferenceStore preferenceStore) {
+		this.fPreferenceStore = preferenceStore;
 	}
 
 	
