@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator;
 
+import java.util.List;
+
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 
@@ -45,6 +47,19 @@ public class Xtend2GeneratorFragment extends DefaultGeneratorFragment implements
 
 	public void registerNaming(Naming n) {
 		naming = n;
+	}
+
+	/**
+	 * @since 2.0
+	 */
+	protected List<String> getExportedPackagesRtList(Grammar grammar) {
+		return null; // workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=345955
+	}
+
+	@Override
+	public String[] getExportedPackagesRt(Grammar grammar) {
+		List<String> list = getExportedPackagesRtList(grammar);
+		return list == null ? null : list.toArray(new String[list.size()]);
 	}
 
 }

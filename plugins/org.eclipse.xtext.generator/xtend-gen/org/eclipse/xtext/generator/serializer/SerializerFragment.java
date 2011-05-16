@@ -3,6 +3,7 @@ package org.eclipse.xtext.generator.serializer;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.BindFactory;
@@ -112,5 +113,11 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
         }
       }
     }
+  }
+  
+  public List<String> getExportedPackagesRtList(final Grammar grammar) {
+    String _packageName = this.semanticSequencer.getPackageName();
+    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(_packageName);
+    return _newArrayList;
   }
 }

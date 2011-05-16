@@ -25,7 +25,8 @@ Export-Package: org.eclipse.xtext.xtend2;x-friends:="org.eclipse.xtext.xtend2.te
  org.eclipse.xtext.xtend2.validation;x-friends:="org.eclipse.xtext.xtend2.tests,org.eclipse.xtext.xtend2.ui,org.eclipse.xtext.xtend2.ui.tests",
  org.eclipse.xtext.xtend2.xtend2;x-friends:="org.eclipse.xtext.xtend2.tests,org.eclipse.xtext.xtend2.ui,org.eclipse.xtext.xtend2.ui.tests",
  org.eclipse.xtext.xtend2.xtend2.impl;x-friends:="org.eclipse.xtext.xtend2.tests,org.eclipse.xtext.xtend2.ui,org.eclipse.xtext.xtend2.ui.tests",
- org.eclipse.xtext.xtend2.xtend2.util;x-friends:="org.eclipse.xtext.xtend2.tests,org.eclipse.xtext.xtend2.ui,org.eclipse.xtext.xtend2.ui.tests"
+ org.eclipse.xtext.xtend2.xtend2.util;x-friends:="org.eclipse.xtext.xtend2.tests,org.eclipse.xtext.xtend2.ui,org.eclipse.xtext.xtend2.ui.tests",
+ org.eclipse.xtext.xtend2.serializer
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.xtext.common.types;bundle-version="2.0.0";visibility:=reexport,

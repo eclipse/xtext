@@ -19,6 +19,7 @@ import org.eclipse.xtext.serializer.impl.ContextUtil
 import com.google.inject.Inject
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer
+import java.util.List
 
 class SerializerFragment extends Xtend2GeneratorFragment {
 	
@@ -60,5 +61,9 @@ class SerializerFragment extends Xtend2GeneratorFragment {
 			for(obj:dotRenderer.render2Dot(new SyntacticSequencerPDA2ExtendedDot(), "pda"))
 				ctx.writeFile(Generator::SRC_GEN, obj.key, obj.value);
 		}
+	}
+	
+	override getExportedPackagesRtList(Grammar grammar) {
+		return newArrayList(semanticSequencer.packageName)
 	}
 }
