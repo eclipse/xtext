@@ -73,16 +73,23 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 	protected void highlightSpecialIdentifiers(IHighlightedPositionAcceptor acceptor, ICompositeNode root) {
 		TerminalRule idRule = grammarAccess.getIDRule();
 		for(ILeafNode leaf: root.getLeafNodes()) {
-			if (!leaf.isHidden() && idLengthsToHighlight.get(leaf.getLength())) {
-				EObject element = leaf.getGrammarElement();
-				if (element == idRule || (element instanceof RuleCall && ((RuleCall) element).getRule() == idRule)) {
-					String text = leaf.getText();
-					String highlightingID = highlightedIdentifiers.get(text);
-					if (highlightingID != null) {
-						acceptor.addPosition(leaf.getOffset(), leaf.getLength(), highlightingID);
-					}
-				}	
+			if (!leaf.isHidden()) {
+				highlightSpecialIdentifiers(leaf, acceptor, idRule);
 			}
+		}
+	}
+
+	protected void highlightSpecialIdentifiers(ILeafNode leafNode, IHighlightedPositionAcceptor acceptor,
+			TerminalRule idRule) {
+		if (idLengthsToHighlight.get(leafNode.getLength())) {
+			EObject element = leafNode.getGrammarElement();
+			if (element == idRule || (element instanceof RuleCall && ((RuleCall) element).getRule() == idRule)) {
+				String text = leafNode.getText();
+				String highlightingID = highlightedIdentifiers.get(text);
+				if (highlightingID != null) {
+					acceptor.addPosition(leafNode.getOffset(), leafNode.getLength(), highlightingID);
+				}
+			}	
 		}
 	}
 

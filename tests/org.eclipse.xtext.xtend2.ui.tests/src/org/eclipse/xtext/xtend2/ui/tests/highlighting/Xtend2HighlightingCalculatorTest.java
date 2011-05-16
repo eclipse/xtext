@@ -150,6 +150,18 @@ public class Xtend2HighlightingCalculatorTest extends AbstractXtend2UITestCase i
 		highlight(model);
 	}
 	
+	public void testCreateAsIdentifier() {
+		String model = "{ var String create = '' }";
+		expect(model.indexOf("create"), 6, DefaultHighlightingConfiguration.DEFAULT_ID);
+		highlight(model);
+	}
+	
+	public void testCreateKeyword() {
+		String model = "{} def create result: new Object() create() {}";
+		expect(model.lastIndexOf("create"), 6, DefaultHighlightingConfiguration.DEFAULT_ID);
+		highlight(model);
+	}
+	
 	@SuppressWarnings("restriction")
 	protected void highlight(String functionBody) {
 		try {
