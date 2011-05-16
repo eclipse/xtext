@@ -124,15 +124,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 	
 	@Check
-	public void checkVariableReferencesHaveNoArgs(XFeatureCall featureCall) {
-		if (featureCall.getFeature() instanceof JvmOperation) {
-			return;
-		}
-		if (!featureCall.getExplicitArguments().isEmpty())
-			error("No arguments can be passed to a local variable or field.", featureCall, null, INSIGNIFICANT_INDEX, IssueCodes.INVALID_NUMBER_OF_ARGUMENTS);
-	}
-	
-	@Check
 	public void checkNoSideffectFreeExpressionsInBlockExpression(XBlockExpression blockExpression) {
 		for (int i = 0; i< blockExpression.getExpressions().size()-1; i++) {
 			XExpression expr = blockExpression.getExpressions().get(i);

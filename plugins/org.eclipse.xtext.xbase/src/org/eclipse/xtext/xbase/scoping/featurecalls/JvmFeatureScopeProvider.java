@@ -129,7 +129,7 @@ public class JvmFeatureScopeProvider implements IJvmFeatureScopeProvider {
 			}
 		}
 		if (current == null || parent == current)
-			return new JvmFeatureScope(parent, "No features for type "+typeReference, Collections.<JvmFeatureDescription>emptyList());
+			return new JvmFeatureScope(parent, "No features for type "+typeReference, Collections.<IValidatedEObjectDescription>emptyList());
 		return (JvmFeatureScope) current;
 	}
 

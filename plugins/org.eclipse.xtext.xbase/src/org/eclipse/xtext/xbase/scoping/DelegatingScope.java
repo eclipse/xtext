@@ -7,22 +7,25 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping;
 
+import java.util.Collections;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.impl.AbstractScope;
+import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
+import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DelegatingScope extends AbstractScope {
+public class DelegatingScope extends JvmFeatureScope {
 	
 	private IScope delegate = IScope.NULLSCOPE;
 
 	protected DelegatingScope(IScope parent) {
-		super(parent, false);
+		super(parent, "DelegatingScope", Collections.<IValidatedEObjectDescription>emptyList());
 	}
 	
 	public void setDelegate(IScope delegate) {
@@ -48,7 +51,19 @@ public class DelegatingScope extends AbstractScope {
 	protected Iterable<IEObjectDescription> getAllLocalElements() {
 		return delegate.getAllElements();
 	}
-
+	
+//	@Override
+//	protected boolean isShadowed(IEObjectDescription input) {
+//		// TODO Auto-generated method stub
+//		return super.isShadowed(input);
+//	}
+//	
+//	protected String getShadowingKey(IEObjectDescription description) {
+//		if (description instanceof IValidatedEObjectDescription)
+//			return ((IValidatedEObjectDescription)description).getKey();
+//		return description.getName().toString();
+//	}
+//	
 	@Override
 	public String toString() {
 		return super.toString()+" -> "+delegate;

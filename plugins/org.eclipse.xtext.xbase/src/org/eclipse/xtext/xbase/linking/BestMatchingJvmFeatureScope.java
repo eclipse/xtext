@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
@@ -70,18 +71,20 @@ public class BestMatchingJvmFeatureScope implements IScope {
 	}
 
 	protected IEObjectDescription setImplicitReceiverAndIsValid(IEObjectDescription bestMatch) {
-		if (bestMatch instanceof JvmFeatureDescription) {
+		if (bestMatch instanceof IValidatedEObjectDescription) {
 			if (this.reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE) {
 				final XAbstractFeatureCall featureCall = (XAbstractFeatureCall) this.context;
-				JvmFeatureDescription featureDesc = (JvmFeatureDescription) bestMatch;
-				final XExpression implicitReceiver = featureDesc.getImplicitReceiver();
-				if (implicitReceiver!=null) {
-					featureCall.setImplicitReceiver(EcoreUtil2.clone(implicitReceiver));
+				IValidatedEObjectDescription validated = (IValidatedEObjectDescription) bestMatch;
+				featureCall.setInvalidFeatureIssueCode(validated.getIssueCode());
+				if (validated instanceof JvmFeatureDescription) {
+					final XExpression implicitReceiver = ((JvmFeatureDescription) validated).getImplicitReceiver();
+					if (implicitReceiver!=null) {
+						featureCall.setImplicitReceiver(EcoreUtil2.clone(implicitReceiver));
+					}
 				}
-				featureCall.setInvalidFeatureIssueCode(featureDesc.getIssueCode());
 			} else if(this.reference == XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR) {
 				final XConstructorCall constructorCall = (XConstructorCall) this.context;
-				constructorCall.setInvalidFeatureIssueCode(((JvmFeatureDescription) bestMatch).getIssueCode());
+				constructorCall.setInvalidFeatureIssueCode(((IValidatedEObjectDescription) bestMatch).getIssueCode());
 			}
 		}
 		return bestMatch;
@@ -101,9 +104,9 @@ public class BestMatchingJvmFeatureScope implements IScope {
 	}
 
 	protected IEObjectDescription getBestMatch(IEObjectDescription a, IEObjectDescription b) {
-		if (a instanceof JvmFeatureDescription && b instanceof JvmFeatureDescription) {
-			JvmFeatureDescription descA = (JvmFeatureDescription) a;
-			JvmFeatureDescription descB = (JvmFeatureDescription) b;
+		if (a instanceof IValidatedEObjectDescription && b instanceof IValidatedEObjectDescription) {
+			IValidatedEObjectDescription descA = (IValidatedEObjectDescription) a;
+			IValidatedEObjectDescription descB = (IValidatedEObjectDescription) b;
 			if(descA.isValid()) { 
 				if(!descB.isValid())
 					return a;
@@ -118,30 +121,32 @@ public class BestMatchingJvmFeatureScope implements IScope {
 						return descB;
 				}
 			}
-			TypeArgumentContext contextA = descA.getContext();
-			TypeArgumentContext contextB = descB.getContext();
-			if (descA.getJvmFeature() instanceof JvmExecutable) {
-				if (descB.getJvmFeature() instanceof JvmExecutable) {
-					JvmExecutable opA = (JvmExecutable) descA.getJvmFeature();
-					JvmExecutable opB = (JvmExecutable) descB.getJvmFeature();
-					if (descA.isValid() && descB.isValid()) {
-						if (opA.isVarArgs()) {
-							if (!opB.isVarArgs()) {
-								return b;
+			if (a instanceof JvmFeatureDescription && b instanceof JvmFeatureDescription) {
+				if (descA.getEObjectOrProxy() instanceof JvmExecutable) {
+					if (descB.getEObjectOrProxy() instanceof JvmExecutable) {
+						JvmExecutable opA = (JvmExecutable) descA.getEObjectOrProxy();
+						JvmExecutable opB = (JvmExecutable) descB.getEObjectOrProxy();
+						if (descA.isValid() && descB.isValid()) {
+							if (opA.isVarArgs()) {
+								if (!opB.isVarArgs()) {
+									return b;
+								}
+							} else if (opB.isVarArgs()) {
+								return a;
 							}
-						} else if (opB.isVarArgs()) {
-							return a;
 						}
+						TypeArgumentContext contextA = ((JvmFeatureDescription) descA).getContext();
+						TypeArgumentContext contextB = ((JvmFeatureDescription) descB).getContext();
+						int numParamsA = opA.getParameters().size();
+						int numParamsB = opB.getParameters().size();
+						for (int i = 0; i < Math.min(numParamsA, numParamsB); i++) {
+							JvmTypeReference pA = opA.getParameters().get(numParamsA-i-1).getParameterType();
+							JvmTypeReference pB = opB.getParameters().get(numParamsB-i-1).getParameterType();
+							if (!computer.isConformant(contextB.getLowerBound(pB), contextA.getLowerBound(pA), true))
+								return b;
+						}
+						return a;
 					}
-					int numParamsA = opA.getParameters().size();
-					int numParamsB = opB.getParameters().size();
-					for (int i = 0; i < Math.min(numParamsA, numParamsB); i++) {
-						JvmTypeReference pA = opA.getParameters().get(numParamsA-i-1).getParameterType();
-						JvmTypeReference pB = opB.getParameters().get(numParamsB-i-1).getParameterType();
-						if (!computer.isConformant(contextB.getLowerBound(pB), contextA.getLowerBound(pA), true))
-							return b;
-					}
-					return a;
 				}
 			}
 		}

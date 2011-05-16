@@ -61,7 +61,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	
 	public void testLocalVarWithArguments() throws Exception {
 		XExpression expr = expression("{ val x = 'foo' x(42) }");
-		helper.assertError(expr, XFEATURE_CALL, INVALID_NUMBER_OF_ARGUMENTS, "field","variable");
+		helper.assertError(expr, XFEATURE_CALL, LOCAL_VAR_ACCESS_WITH_PARENTHESES, "local", "variable");
 	}
 	
 	public void testVariableShadowing_00() throws Exception {

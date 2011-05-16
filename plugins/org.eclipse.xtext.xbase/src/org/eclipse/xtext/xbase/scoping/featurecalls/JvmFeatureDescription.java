@@ -11,7 +11,9 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Collections;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -20,7 +22,7 @@ import org.eclipse.xtext.xbase.XExpression;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class JvmFeatureDescription extends EObjectDescription {
+public class JvmFeatureDescription extends EObjectDescription implements IValidatedEObjectDescription {
 
 	private final TypeArgumentContext context;
 	private final String shadowingString;
@@ -38,6 +40,11 @@ public class JvmFeatureDescription extends EObjectDescription {
 		this.isValid = isValid;
 		this.implicitReceiver = implicitReceiver;
 		this.numberOfIrrelevantArguments = numberOfIrrelevantArguments;
+	}
+	
+	@Override
+	public JvmIdentifiableElement getEObjectOrProxy() {
+		return (JvmIdentifiableElement) super.getEObjectOrProxy();
 	}
 
 	public JvmFeature getJvmFeature() {

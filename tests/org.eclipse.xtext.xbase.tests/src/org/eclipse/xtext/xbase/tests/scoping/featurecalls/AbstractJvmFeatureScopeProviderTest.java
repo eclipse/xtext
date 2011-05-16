@@ -19,7 +19,7 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
-import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
+import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScopeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
@@ -56,8 +56,8 @@ public abstract class AbstractJvmFeatureScopeProviderTest extends AbstractXbaseT
 	}
 	
 	protected Set<String> getSignatures(JvmFeatureScope scope) {
-		final Function<JvmFeatureDescription, String> function = new Function<JvmFeatureDescription, String>() {
-			public String apply(JvmFeatureDescription from) {
+		final Function<IValidatedEObjectDescription, String> function = new Function<IValidatedEObjectDescription, String>() {
+			public String apply(IValidatedEObjectDescription from) {
 				return from.getKey();
 			}
 		};

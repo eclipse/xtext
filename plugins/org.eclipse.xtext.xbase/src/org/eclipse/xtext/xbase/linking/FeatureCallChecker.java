@@ -19,9 +19,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
-import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -39,7 +39,9 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
+import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
+import org.eclipse.xtext.xbase.scoping.featurecalls.LocalVarDescription;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
@@ -96,28 +98,28 @@ public class FeatureCallChecker {
 	}
 
 	public String check(IEObjectDescription input) {
-		if (input instanceof JvmFeatureDescription) {
-			final JvmFeatureDescription jvmFeatureDescription = (JvmFeatureDescription) input;
-			JvmFeature jvmFeature = jvmFeatureDescription.getJvmFeature();
-			if (jvmFeature.eIsProxy())
-				jvmFeature = (JvmFeature) EcoreUtil.resolve(jvmFeature, context);
+		if (input instanceof IValidatedEObjectDescription) {
+			final IValidatedEObjectDescription validatedDescription = (IValidatedEObjectDescription) input;
+			JvmIdentifiableElement identifiable = validatedDescription.getEObjectOrProxy();
+			if (identifiable.eIsProxy())
+				identifiable = (JvmIdentifiableElement) EcoreUtil.resolve(identifiable, context);
 			String issueCode;
-			if (jvmFeature.eIsProxy())
+			if (identifiable.eIsProxy())
 				issueCode = UNRESOLVABLE_PROXY;
-			else if (!jvmFeatureDescription.isValid()) {
-				if (Strings.isEmpty(jvmFeatureDescription.getIssueCode()))
+			else if (!validatedDescription.isValid()) {
+				if (Strings.isEmpty(validatedDescription.getIssueCode()))
 					issueCode = FEATURE_NOT_VISIBLE;
 				else
-					return jvmFeatureDescription.getIssueCode();
+					return validatedDescription.getIssueCode();
 			} else
-				issueCode = dispatcher.invoke(jvmFeature, context, reference, jvmFeatureDescription);
-			jvmFeatureDescription.setIssueCode(issueCode);
+				issueCode = dispatcher.invoke(identifiable, context, reference, validatedDescription);
+			validatedDescription.setIssueCode(issueCode);
 			return issueCode;
 		}
 		return null;
 	}
 
-	protected String _case(Object input, Object context, EReference ref, JvmFeatureDescription jvmFeatureDescription) {
+	protected String _case(Object input, Object context, EReference ref, IValidatedEObjectDescription description) {
 		return null;
 	}
 
@@ -185,6 +187,13 @@ public class FeatureCallChecker {
 			return FIELD_ACCESS_WITH_PARENTHESES;
 		if (input.isStatic())
 			return INSTANCE_ACCESS_TO_STATIC_MEMBER;
+		return null;
+	}
+	
+	protected String _case(JvmIdentifiableElement input, XFeatureCall context, EReference ref,
+			LocalVarDescription description) {
+		if (context.isExplicitOperationCall())
+			return LOCAL_VAR_ACCESS_WITH_PARENTHESES;
 		return null;
 	}
 

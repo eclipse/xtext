@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
+import java.util.Collections;
+
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
@@ -19,9 +21,13 @@ public class JvmFeatureScope extends SimpleScope {
 	private String scopeDescription;
 
 	@SuppressWarnings("unchecked")
-	public JvmFeatureScope(IScope parent, String scopeDescription, final Iterable<JvmFeatureDescription> descriptions) {
+	public JvmFeatureScope(IScope parent, String scopeDescription, final Iterable<? extends IValidatedEObjectDescription> descriptions) {
 		super(parent, (Iterable<IEObjectDescription>)(Iterable<?>)descriptions);
 		this.scopeDescription = scopeDescription;
+	}
+	
+	public JvmFeatureScope(IScope parent, String scopeDescription, IValidatedEObjectDescription description) {
+		this(parent, scopeDescription, Collections.singleton(description));
 	}
 
 	public String getScopeDescription() {
@@ -30,12 +36,12 @@ public class JvmFeatureScope extends SimpleScope {
 	
 	@Override
 	protected String getShadowingKey(IEObjectDescription description) {
-		return ((JvmFeatureDescription)description).getKey();
+		return ((IValidatedEObjectDescription)description).getKey();
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Iterable<? extends JvmFeatureDescription> getJvmFeatureDescriptions() {
-		return (Iterable<? extends JvmFeatureDescription>) getAllLocalElements();
+	public Iterable<? extends IValidatedEObjectDescription> getJvmFeatureDescriptions() {
+		return (Iterable<? extends IValidatedEObjectDescription>) getAllLocalElements();
 	}
 	
 	@Override
