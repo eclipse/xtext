@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.serializer.impl;
+package org.eclipse.xtext.serializer.sequencer;
 
 import java.util.Arrays;
 import java.util.BitSet;
@@ -31,18 +31,15 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.serializer.IContextFinder;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintElement;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IFeatureInfo;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.RelationalDependencyType;
-import org.eclipse.xtext.serializer.ISemanticNodeProvider;
-import org.eclipse.xtext.serializer.ISemanticNodeProvider.INodesForEObjectProvider;
-import org.eclipse.xtext.serializer.ITransientValueService;
-import org.eclipse.xtext.serializer.ITransientValueService.ValueTransient;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintElement;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IFeatureInfo;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.RelationalDependencyType;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
+import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer;
 import org.eclipse.xtext.serializer.tokens.IEnumLiteralSerializer;
 import org.eclipse.xtext.serializer.tokens.IKeywordSerializer;

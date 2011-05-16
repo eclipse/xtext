@@ -1,4 +1,4 @@
-package org.eclipse.xtext.serializer.impl;
+package org.eclipse.xtext.serializer.sequencer;
 
 import java.util.Collections;
 import java.util.List;

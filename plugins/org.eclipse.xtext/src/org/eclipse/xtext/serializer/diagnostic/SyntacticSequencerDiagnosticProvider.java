@@ -12,11 +12,11 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementFullTitleSwitch;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynAbsorberState;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynNavigable;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynState;
-import org.eclipse.xtext.serializer.ISyntacticSequencerPDAProvider.ISynTransition;
-import org.eclipse.xtext.serializer.impl.RuleCallStack;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
+import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
 
 import com.google.common.collect.Lists;
 import com.google.inject.internal.Join;

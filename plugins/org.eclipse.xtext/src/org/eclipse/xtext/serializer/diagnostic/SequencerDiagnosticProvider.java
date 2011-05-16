@@ -16,12 +16,11 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.serializer.IContextFinder;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraint;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider.IConstraintContext;
-import org.eclipse.xtext.serializer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
+import org.eclipse.xtext.serializer.sequencer.IContextFinder;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;

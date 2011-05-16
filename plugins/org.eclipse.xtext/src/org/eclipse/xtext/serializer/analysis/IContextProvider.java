@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.serializer;
+package org.eclipse.xtext.serializer.analysis;
 
 import java.util.List;
 import java.util.Set;
@@ -13,7 +13,6 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.serializer.analysis.ContextProvider;
 
 import com.google.inject.ImplementedBy;
 

@@ -1,9 +1,8 @@
-package org.eclipse.xtext.serializer;
+package org.eclipse.xtext.serializer.sequencer;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
-import org.eclipse.xtext.serializer.impl.GenericSemanticSequencer;
 
 import com.google.inject.ImplementedBy;
 

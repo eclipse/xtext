@@ -19,7 +19,6 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.serializer.IContextProvider;
 import org.eclipse.xtext.serializer.analysis.TypeFinderNFAProvider.TypeFinderState;
 import org.eclipse.xtext.serializer.analysis.TypeFinderNFAProvider.TypeFinderTransition;
 import org.eclipse.xtext.util.EmfFormatter;

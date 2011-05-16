@@ -11,8 +11,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.junit.serializer.DebugSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
-import org.eclipse.xtext.serializer.impl.GenericSemanticSequencer;
-import org.eclipse.xtext.serializer.impl.NodeModelSemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.GenericSemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.NodeModelSemanticSequencer;
 import org.eclipse.xtext.serializer.serializer.SequencerTestLanguageSemanticSequencer;
 
 import com.google.inject.Inject;

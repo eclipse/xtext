@@ -33,8 +33,6 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
-import org.eclipse.xtext.serializer.IContextProvider;
-import org.eclipse.xtext.serializer.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider.ActionFilterState;
 import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider.ActionFilterTransition;
 import org.eclipse.xtext.util.EmfFormatter;
