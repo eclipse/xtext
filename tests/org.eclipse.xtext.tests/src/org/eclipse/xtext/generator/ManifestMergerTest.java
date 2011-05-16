@@ -133,6 +133,16 @@ public class ManifestMergerTest extends TestCase {
 		assertEquals("bar;special=foo,x,foo,baz", removeWS(MergeableManifest.mergeIntoCommaSeparatedList(
 				"bar;special=foo ,    x", toMerge, Wrapper.wrap(false))));
 	}
+	
+	public void testMergeIntoCommaSeparatedListWithCommaSeparatedParams() throws Exception {
+		LinkedHashSet<String> toMerge = new LinkedHashSet<String>();
+		toMerge.add("foo");
+		toMerge.add("bar");
+		toMerge.add("baz");
+		
+		assertEquals("bar;x-friends=\"xxx,foo,bar,zzz\",foo,baz", removeWS(MergeableManifest.mergeIntoCommaSeparatedList(
+				"bar;x-friends=\"xxx,foo,bar,zzz\"", toMerge, Wrapper.wrap(false))));
+	}
 
 	public void testMergeIntoCommaSeparatedListInvalidParam() throws Exception {
 		LinkedHashSet<String> toMerge = new LinkedHashSet<String>();
