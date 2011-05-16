@@ -28,11 +28,8 @@ import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.impl.MapBasedScope;
-import org.eclipse.xtext.scoping.impl.SingletonScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -52,9 +49,11 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
+import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScopeProvider;
+import org.eclipse.xtext.xbase.scoping.featurecalls.LocalVarDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.StaticMethodsFeatureForTypeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentSugarDescriptionProvider;
@@ -360,8 +359,8 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 
 	protected IScope createLocalVarScopeForSwitchExpression(XSwitchExpression context, IScope parentScope) {
 		if (context.getLocalVarName() != null) {
-			return new SingletonScope(EObjectDescription.create(QualifiedName.create(context.getLocalVarName()),
-					context), parentScope);
+			return new JvmFeatureScope(parentScope,	"XSwitchExpression",
+					new LocalVarDescription(QualifiedName.create(context.getLocalVarName()), context));
 		}
 		return parentScope;
 	}
@@ -375,7 +374,7 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		if (varName == null) {
 			return parentScope;
 		}
-		return new SingletonScope(EObjectDescription.create(QualifiedName.create(varName), context), parentScope);
+		return new JvmFeatureScope(parentScope, "XCasePart", new LocalVarDescription(QualifiedName.create(varName), context));
 	}
 
 	protected IScope createLocalVarScopeForCatchClause(XCatchClause catchClause, int indexOfContextExpressionInBlock,
@@ -385,30 +384,30 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 
 	protected IScope createLocalVarScopeForBlock(XBlockExpression block, int indexOfContextExpressionInBlock,
 			IScope parentScope) {
-		List<IEObjectDescription> descriptions = Lists.newArrayList();
+		List<IValidatedEObjectDescription> descriptions = Lists.newArrayList();
 		for (int i = 0; i < indexOfContextExpressionInBlock; i++) {
 			XExpression expression = block.getExpressions().get(i);
 			if (expression instanceof XVariableDeclaration) {
 				XVariableDeclaration varDecl = (XVariableDeclaration) expression;
 				if (varDecl.getName() != null) {
-					IEObjectDescription desc = createEObjectDescription(varDecl);
+					IValidatedEObjectDescription desc = createLocalVarDescription(varDecl);
 					descriptions.add(desc);
 				}
 			}
 		}
-		return MapBasedScope.createScope(parentScope, descriptions);
+		return new JvmFeatureScope(parentScope, "XBlockExpression", descriptions);
 	}
 
 	protected IScope createLocalVarScopeForClosure(XClosure closure, IScope parentScope) {
-		List<IEObjectDescription> descriptions = Lists.newArrayList();
+		List<IValidatedEObjectDescription> descriptions = Lists.newArrayList();
 		EList<JvmFormalParameter> params = closure.getFormalParameters();
 		for (JvmFormalParameter p : params) {
 			if (p.getName() != null) {
-				IEObjectDescription desc = createEObjectDescription(p);
+				IValidatedEObjectDescription desc = createLocalVarDescription(p);
 				descriptions.add(desc);
 			}
 		}
-		return MapBasedScope.createScope(parentScope, descriptions);
+		return new JvmFeatureScope(parentScope, "XClosure", descriptions);
 	}
 
 	protected JvmFeatureScope createFeatureScopeForTypeRef(JvmTypeReference receiverType, EObject expression,
@@ -485,15 +484,15 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 	}
 
 	protected IScope createLocalScopeForParameter(JvmFormalParameter p, IScope parentScope) {
-		return (p.getName() != null) ? new SingletonScope(createEObjectDescription(p), parentScope) : parentScope;
+		return (p.getName() != null) ? new JvmFeatureScope(parentScope, "JvmFormalParameter", createLocalVarDescription(p)) : parentScope;
 	}
 
-	protected IEObjectDescription createEObjectDescription(JvmFormalParameter p) {
-		return EObjectDescription.create(QualifiedName.create(p.getName()), p);
+	protected IValidatedEObjectDescription createLocalVarDescription(JvmFormalParameter p) {
+		return new LocalVarDescription(QualifiedName.create(p.getName()), p);
 	}
 
-	protected IEObjectDescription createEObjectDescription(XVariableDeclaration varDecl) {
-		return EObjectDescription.create(QualifiedName.create(varDecl.getName()), varDecl);
+	protected IValidatedEObjectDescription createLocalVarDescription(XVariableDeclaration varDecl) {
+		return new LocalVarDescription(QualifiedName.create(varDecl.getName()), varDecl);
 	}
 	
 	protected DefaultJvmFeatureDescriptionProvider newDefaultFeatureDescProvider() {

@@ -279,9 +279,7 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 				"	};" +
 				"}");
 		XBlockExpression innerBlock = (XBlockExpression)bop.getExpressions().get(1);
-//		TODO: fix expectation
-//		assertEquals("java.util.ArrayList.size()",((XFeatureCall)innerBlock.getExpressions().get(1)).getFeature().getCanonicalName());
-		assertSame(bop.getExpressions().get(0),((XFeatureCall)innerBlock.getExpressions().get(1)).getFeature());
+		assertEquals("java.util.ArrayList.size()",((XFeatureCall)innerBlock.getExpressions().get(1)).getFeature().getIdentifier());
 	}
 	
 	public void testShadowing_5() throws Exception {
@@ -312,6 +310,19 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 				"}");
 		XClosure closure = (XClosure)bop.getExpressions().get(1);
 		assertSame(closure.getFormalParameters().get(0), ((XFeatureCall)((XClosure)closure.getExpression()).getExpression()).getFeature());
+	}
+	
+	public void testShadowing_8() throws Exception {
+		XBlockExpression bop = (XBlockExpression) expression(
+				"{" +
+				"	val size = 23;" +
+				"	{" +
+				"		val this = new java.util.ArrayList<String>(); " +
+				"		size;" +
+				"	};" +
+				"}");
+		XBlockExpression innerBlock = (XBlockExpression)bop.getExpressions().get(1);
+		assertEquals(bop.getExpressions().get(0), ((XFeatureCall)innerBlock.getExpressions().get(1)).getFeature());
 	}
 	
 	public void testSwitchExpression_00() throws Exception {
