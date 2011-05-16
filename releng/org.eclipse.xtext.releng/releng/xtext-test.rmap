@@ -18,7 +18,7 @@
 	<rm:locator pattern="^org\.antlr\.runtime$" searchPathRef="orbit" />
 	<rm:locator pattern="^org\.eclipse\.draw2d$" searchPathRef="gef" />
 	<rm:locator pattern="^org\.eclipse\.xtext\.example(?:\..*)?$" searchPathRef="xtext.examples" />
-	<rm:locator pattern="^org\.eclipse\.xtext(?:\..+)?$" searchPathRef="xtext.tests" failOnError="false"/>
+	<rm:locator pattern="^org\.eclipse\.xtext(?:\..+)?tests(?:\..+)?$" searchPathRef="xtext.tests"/>
 	<rm:locator pattern="^org\.eclipse\.xtext(?:\..+)?$" searchPathRef="tmf" />
 
 	<rm:locator pattern="^org\.eclipse\.test$" searchPathRef="eclipse.test" />
@@ -105,6 +105,12 @@
 		<rm:provider componentTypes="eclipse.feature" readerType="local" mutable="false">
 			<rm:uri format="{0}/features/org.eclipse.xtext.tests.feature">
 				<bc:propertyRef key="checkout.location" />
+			</rm:uri>
+		</rm:provider>
+		<rm:provider componentTypes="osgi.bundle" readerType="local" mutable="false">
+			<rm:uri format="{0}/plugins/{1}">
+				<bc:propertyRef key="checkout.location" />
+				<bc:propertyRef key="buckminster.component" />
 			</rm:uri>
 		</rm:provider>
 		<rm:provider componentTypes="osgi.bundle" readerType="local" mutable="false">
