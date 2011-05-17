@@ -10,6 +10,7 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
@@ -67,10 +68,15 @@ public class Xtend2ProposalProvider extends AbstractXtend2ProposalProvider {
 
 	public void completeInRichString(EObject model, RuleCall ruleCall, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		int offset = context.getCurrentNode().getOffset();
-		int length = context.getCurrentNode().getLength();
-		if (context.getOffset() > offset && context.getOffset() < offset+length)
-			addGuillemotsProposal(context, acceptor);
+		INode node = context.getCurrentNode();
+		int offset = node.getOffset();
+		int length = node.getLength();
+		String currentNodeText = node.getText();
+		if (currentNodeText.startsWith("»") && offset + 1 <= context.getOffset()
+				|| currentNodeText.startsWith("'''") && offset + 3 <= context.getOffset()) {
+			if (context.getOffset() > offset && context.getOffset() < offset+length)
+				addGuillemotsProposal(context, acceptor);
+		}
 	}
 	
 	@Override

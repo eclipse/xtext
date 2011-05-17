@@ -589,33 +589,45 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	public class XStringLiteralElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XStringLiteral");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final Action cXStringLiteralAction_0_0 = (Action)cGroup_0.eContents().get(0);
-		private final Assignment cValueAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final RuleCall cValueSTRINGTerminalRuleCall_0_1_0 = (RuleCall)cValueAssignment_0_1.eContents().get(0);
+		private final RuleCall cSimpleStringLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cRichStringParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//XStringLiteral returns xbase::XExpression:
-		//	{xbase::XStringLiteral} value=STRING | RichString;
+		//	SimpleStringLiteral | RichString;
 		public ParserRule getRule() { return rule; }
 
-		//{xbase::XStringLiteral} value=STRING | RichString
+		//SimpleStringLiteral | RichString
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//{xbase::XStringLiteral} value=STRING
-		public Group getGroup_0() { return cGroup_0; }
-
-		//{xbase::XStringLiteral}
-		public Action getXStringLiteralAction_0_0() { return cXStringLiteralAction_0_0; }
-
-		//value=STRING
-		public Assignment getValueAssignment_0_1() { return cValueAssignment_0_1; }
-
-		//STRING
-		public RuleCall getValueSTRINGTerminalRuleCall_0_1_0() { return cValueSTRINGTerminalRuleCall_0_1_0; }
+		//SimpleStringLiteral
+		public RuleCall getSimpleStringLiteralParserRuleCall_0() { return cSimpleStringLiteralParserRuleCall_0; }
 
 		//RichString
 		public RuleCall getRichStringParserRuleCall_1() { return cRichStringParserRuleCall_1; }
+	}
+
+	public class SimpleStringLiteralElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleStringLiteral");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cXStringLiteralAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cValueSTRINGTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
+		
+		//SimpleStringLiteral returns xbase::XExpression:
+		//	{xbase::XStringLiteral} value=STRING;
+		public ParserRule getRule() { return rule; }
+
+		//{xbase::XStringLiteral} value=STRING
+		public Group getGroup() { return cGroup; }
+
+		//{xbase::XStringLiteral}
+		public Action getXStringLiteralAction_0() { return cXStringLiteralAction_0; }
+
+		//value=STRING
+		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
+
+		//STRING
+		public RuleCall getValueSTRINGTerminalRuleCall_1_0() { return cValueSTRINGTerminalRuleCall_1_0; }
 	}
 
 	public class RichStringElements extends AbstractParserRuleElementFinder {
@@ -1116,6 +1128,7 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	private ValidIDElements pValidID;
 	private ParameterElements pParameter;
 	private XStringLiteralElements pXStringLiteral;
+	private SimpleStringLiteralElements pSimpleStringLiteral;
 	private RichStringElements pRichString;
 	private RichStringLiteralElements pRichStringLiteral;
 	private RichStringLiteralStartElements pRichStringLiteralStart;
@@ -1241,13 +1254,23 @@ public class Xtend2GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XStringLiteral returns xbase::XExpression:
-	//	{xbase::XStringLiteral} value=STRING | RichString;
+	//	SimpleStringLiteral | RichString;
 	public XStringLiteralElements getXStringLiteralAccess() {
 		return (pXStringLiteral != null) ? pXStringLiteral : (pXStringLiteral = new XStringLiteralElements());
 	}
 	
 	public ParserRule getXStringLiteralRule() {
 		return getXStringLiteralAccess().getRule();
+	}
+
+	//SimpleStringLiteral returns xbase::XExpression:
+	//	{xbase::XStringLiteral} value=STRING;
+	public SimpleStringLiteralElements getSimpleStringLiteralAccess() {
+		return (pSimpleStringLiteral != null) ? pSimpleStringLiteral : (pSimpleStringLiteral = new SimpleStringLiteralElements());
+	}
+	
+	public ParserRule getSimpleStringLiteralRule() {
+		return getSimpleStringLiteralAccess().getRule();
 	}
 
 	//RichString returns xbase::XExpression:
