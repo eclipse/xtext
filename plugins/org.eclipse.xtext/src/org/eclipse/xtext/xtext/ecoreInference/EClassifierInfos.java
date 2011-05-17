@@ -192,12 +192,31 @@ public class EClassifierInfos {
 		List<EClassInfo> result = new ArrayList<EClassInfo>();
 		for (EClass superType : subTypeInfo.getEClass().getESuperTypes()) {
 			EClassifierInfo info = getInfoOrNull(superType);
-			if (info != null && info instanceof EClassInfo)
-				result.add((EClassInfo) info);
-			else
-				throw new UnexpectedClassInfoException(TransformationErrorCode.InvalidSupertype, subTypeInfo, info, null);
+			if (info != null) {
+				if (info instanceof EClassInfo) {
+					result.add((EClassInfo) info);
+				} else {
+					throw new UnexpectedClassInfoException(TransformationErrorCode.InvalidSupertype, subTypeInfo, info, null);
+				}
+			} else {
+				if (isPackageKnown(superType.getEPackage().getNsURI())) {
+					throw new UnexpectedClassInfoException(TransformationErrorCode.InvalidSupertype, subTypeInfo, null, "Cannot find info for type '" + superType.getName() + "'");
+				}
+			}
 		}
 		return result;
+	}
+	
+	private boolean isPackageKnown(String nsURI) {
+		for (Triple<String, String, String> key : infoMap.keySet()) {
+			if (key.getFirst().equals(nsURI))
+				return true;
+		}
+		for(EClassifierInfos parent: parents) {
+			if (parent.isPackageKnown(nsURI))
+				return true;
+		}
+		return false;
 	}
 
 }

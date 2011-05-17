@@ -1468,4 +1468,16 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		XtextResource resource = getResourceFromStringAndExpect(grammarAsString, 1);
 		assertTrue(resource.getErrors().get(0).getMessage().contains("containment"));
 	}
+	
+	public void testBug346035_01() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.common.Terminals\n" + 
+			"import 'platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore' as xbase\n" + 
+			"generate myDsl 'uri'\n" + 
+			"Model: elements+=Element*;\n" + 
+			"Element returns xbase::XExpression : {Element} 'Hello';\n" + 
+			"terminal ID : '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;"; 
+		getResourceFromString(grammarAsString);
+//		assertTrue(resource.getErrors().get(0).getMessage().contains("containment"));
+	}
 }
