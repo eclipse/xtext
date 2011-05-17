@@ -32,7 +32,7 @@ public class PreferenceStoreAccessImpl implements IPreferenceStoreAccess {
 	public IPreferenceStore getPreferenceStore() {
 		lazyInitialize();
 		return new ChainedPreferenceStore(new IPreferenceStore[] {
-				new ScopedPreferenceStore(ConfigurationScope.INSTANCE, getQualifier()),
+				new ScopedPreferenceStore(new ConfigurationScope(), getQualifier()),
 				getWritablePreferenceStore(),
 				Activator.getDefault().getPreferenceStore(), EditorsUI.getPreferenceStore() });
 	}
@@ -45,7 +45,7 @@ public class PreferenceStoreAccessImpl implements IPreferenceStoreAccess {
 
 	public IPreferenceStore getWritablePreferenceStore() {
 		lazyInitialize();
-		return new ScopedPreferenceStore(InstanceScope.INSTANCE, getQualifier());
+		return new ScopedPreferenceStore(new InstanceScope(), getQualifier());
 	}
 
 	public IPreferenceStore getWritablePreferenceStore(Object context) {

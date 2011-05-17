@@ -212,12 +212,12 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 		boolean isUseProjectSettings = useProjectSettingsButton.getSelection();
 		link.setEnabled(!isUseProjectSettings);
 		if (!isUseProjectSettings) {
-			((ScopedPreferenceStore) getPreferenceStore()).setSearchContexts(new IScopeContext[] { InstanceScope.INSTANCE,
-					ConfigurationScope.INSTANCE });
+			((ScopedPreferenceStore) getPreferenceStore()).setSearchContexts(new IScopeContext[] { new InstanceScope(),
+					new ConfigurationScope() });
 		}
 		else {
 			((ScopedPreferenceStore) getPreferenceStore()).setSearchContexts(new IScopeContext[] {
-					new ProjectScope(currentProject()), InstanceScope.INSTANCE, ConfigurationScope.INSTANCE });
+					new ProjectScope(currentProject()), new InstanceScope(), new ConfigurationScope() });
 		}
 		updateFieldEditors(isUseProjectSettings);
 	}
