@@ -52,6 +52,7 @@ Workflow {
 			fragment = serializer.SerializerFragment {
 				// generateDebugData = true
 			}
+			fragment = formatting.FormatterFragment {}
 			fragment = contentAssist.JavaBasedContentAssistFragment {}
 			fragment = XtextAntlrGeneratorFragment {
 				options = auto-inject {}
