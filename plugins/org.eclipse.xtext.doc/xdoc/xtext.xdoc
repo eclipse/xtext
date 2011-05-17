@@ -36,8 +36,7 @@ codelanguage-def[LinkingExample][ref]
 
 chapter-ref[Overview]
 
-chapter-ref[getting_started]
-
+%%chapter-ref[getting_started]
 chapter-ref[grammarLanguage]
 
 chapter-ref[configuration]
