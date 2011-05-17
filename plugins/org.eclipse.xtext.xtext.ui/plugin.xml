@@ -343,8 +343,11 @@
             // "
             }
 
-            // the serialization component
-            fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
+            // Serializer 2.0
+            fragment = serializer.SerializerFragment {}
+            
+            // the serialization component (1.0)
+            // fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 
             // a custom ResourceFactory for use with EMF
             fragment = resourceFactory.ResourceFactoryFragment {
@@ -424,8 +427,6 @@
                  fileExtensions = file.extensions
             }
 
-            // Serializer 2.0
-            fragment = serializer.SerializerFragment {}
         }
     }]]>
          </MweSnippet>
