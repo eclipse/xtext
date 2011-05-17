@@ -235,7 +235,7 @@
 		<condition property="composite.repository.base" value="milestones/head/${saved.build.id}">
 			<matches pattern="^[MS]" string="${saved.build.id}" />
 		</condition>
-		<condition property="composite.repository.base" value="releases/head/${base.version}">
+		<condition property="composite.repository.base" value="releases/head/${saved.build.id}">
 			<matches pattern="^R" string="${saved.build.id}" />
 		</condition>
 
