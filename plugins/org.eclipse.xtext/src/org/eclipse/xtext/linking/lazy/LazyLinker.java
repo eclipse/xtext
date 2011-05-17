@@ -47,6 +47,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
@@ -113,7 +114,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 		Iterator<INode> iterator = parentNode.getChildren().iterator();
 		while(iterator.hasNext()) {
 			INode node = iterator.next();
-			if (node.getGrammarElement() instanceof CrossReference) {
+			if (node.getGrammarElement() instanceof CrossReference && !Iterables.isEmpty(node.getLeafNodes())) {
 				CrossReference ref = (CrossReference) node.getGrammarElement();
 				producer.setNode(node);
 				final EReference eRef = GrammarUtil.getReference(ref, obj.eClass());

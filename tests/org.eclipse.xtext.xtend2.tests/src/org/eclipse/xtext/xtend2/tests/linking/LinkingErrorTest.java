@@ -268,6 +268,18 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		XtextResource resource = (XtextResource) clazz.eResource();
 		validateWithoutException(resource);
 	}
+	
+	public void testEmptyProxy_01() throws Exception {
+		XtendFile file = file(
+				"class Name {\n" + 
+				"	def foo() {\n" + 
+				"		''.\n" + 
+				"	}\n" + 
+				"}");
+		assertNoExceptions(file);
+		assertEquals(1, file.eResource().getErrors().size());
+		assertEquals(-1, file.eResource().getErrors().get(0).getMessage().indexOf("''"));
+	}
 
 	protected void validateWithoutException(XtextResource resource) {
 		ResourceValidatorImpl validator = new ResourceValidatorImpl();
