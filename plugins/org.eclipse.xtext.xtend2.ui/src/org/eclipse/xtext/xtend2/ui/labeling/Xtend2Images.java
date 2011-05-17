@@ -46,10 +46,8 @@ public class Xtend2Images {
 		return getJdtImage(JavaElementImageProvider.getMethodImageDescriptor(false, Flags.AccPublic));
 	}
 	
-	public Image forDependency(boolean isExtension) {
-		if (isExtension)
-			return getJdtImage(JavaPluginImages.DESC_OBJS_ANNOTATION_DEFAULT);
-		return getJdtImage(JavaPluginImages.DESC_OBJS_ANNOTATION);
+	public Image forField(boolean isExtension) {
+		return getJdtImage(JavaPluginImages.DESC_FIELD_PRIVATE);
 	}
 	
 	public Image forDispatcherFunction(int flags) {
