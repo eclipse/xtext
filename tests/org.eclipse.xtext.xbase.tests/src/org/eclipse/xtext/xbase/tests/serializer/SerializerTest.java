@@ -41,7 +41,7 @@ public class SerializerTest extends AbstractXbaseTestCase {
 		resource.getContents().add(instanceOfExpression);
 		ISerializer serializer = get(ISerializer.class);
 		String string = serializer.serialize(instanceOfExpression);
-		assertEquals("[ | \"value\" ] instanceof String", string);
+		assertEquals("[| \"value\"] instanceof String", string);
 	}
 	
 	public void testSerialize_02() throws IOException {
@@ -63,7 +63,7 @@ public class SerializerTest extends AbstractXbaseTestCase {
 		String string = serializer.serialize(instanceOfExpression);
 		// TODO expectation is wrong --> I've (MEY) fixed the expectation, please verify 
 //		assertEquals("if ( false ) \"value\" instanceof String", string);
-		assertEquals("( if ( false ) \"value\" ) instanceof String", string);
+		assertEquals("(if(false)\n\t\"value\") instanceof String", string);
 	}
 
 }
