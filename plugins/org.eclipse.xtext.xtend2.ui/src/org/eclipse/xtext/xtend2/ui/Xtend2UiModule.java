@@ -36,6 +36,9 @@ import org.eclipse.xtext.xtend2.ui.hover.XtendHoverProvider;
 import org.eclipse.xtext.xtend2.ui.hyperlinking.XtendHyperlinkHelper;
 import org.eclipse.xtext.xtend2.ui.outline.Xtend2OutlineNodeComparator;
 import org.eclipse.xtext.xtend2.ui.outline.Xtend2OutlinePage;
+import org.eclipse.xtext.xtend2.ui.preferences.Xtend2Preferences;
+import org.eclipse.xtext.xtend2.ui.preferences.Xtend2RootPreferencePage;
+import org.eclipse.xtext.xtend2.ui.refactoring.Xtend2RenameElementHandler;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
