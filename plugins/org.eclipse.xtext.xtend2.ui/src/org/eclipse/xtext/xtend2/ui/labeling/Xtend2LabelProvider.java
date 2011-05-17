@@ -66,7 +66,7 @@ public class Xtend2LabelProvider extends DefaultEObjectLabelProvider {
 	}
 	
 	public Image image(XtendField element) {
-		return images.forDependency(element.isExtension());
+		return images.forField(element.isExtension());
 	}
 
 	public String text(XtendFile element) {
