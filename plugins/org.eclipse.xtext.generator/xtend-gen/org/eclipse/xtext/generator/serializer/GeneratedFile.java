@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 
 @SuppressWarnings("all")
 public class GeneratedFile {
@@ -65,7 +66,10 @@ public class GeneratedFile {
     return "java";
   }
   
-  public String getFileContents() {
-    return "<not implemented>";
+  public CharSequence getFileContents() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<not implemented>");
+    _builder.newLine();
+    return _builder;
   }
 }

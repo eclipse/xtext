@@ -17,7 +17,7 @@ public class SyntacticSequencer extends GeneratedFile {
     return _name;
   }
   
-  public String getFileContents() {
+  public CharSequence getFileContents() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
     String _packageName = this.getPackageName();
@@ -35,7 +35,6 @@ public class SyntacticSequencer extends GeneratedFile {
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
-    String _string = _builder.toString();
-    return _string;
+    return _builder;
   }
 }

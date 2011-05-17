@@ -32,7 +32,7 @@ public class GrammarConstraints extends GeneratedFile {
     return _name;
   }
   
-  public String getFileContents() {
+  public CharSequence getFileContents() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar ");
     String _name = this.grammar.getName();
@@ -139,7 +139,6 @@ public class GrammarConstraints extends GeneratedFile {
         }
       }
     }
-    String _string = _builder.toString();
-    return _string;
+    return _builder;
   }
 }

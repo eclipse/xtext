@@ -86,22 +86,22 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
   public void generate(final Xtend2ExecutionContext ctx) {
     {
       String _fileName = this.semanticSequencer.getFileName();
-      String _fileContents = this.semanticSequencer.getFileContents();
+      CharSequence _fileContents = this.semanticSequencer.getFileContents();
       ctx.writeFile(Generator.SRC, _fileName, _fileContents);
       String _fileName_1 = this.abstractSemanticSequencer.getFileName();
-      String _fileContents_1 = this.abstractSemanticSequencer.getFileContents();
+      CharSequence _fileContents_1 = this.abstractSemanticSequencer.getFileContents();
       ctx.writeFile(Generator.SRC_GEN, _fileName_1, _fileContents_1);
       String _fileName_2 = this.syntacticSequencer.getFileName();
       String _fileContents_2 = this.syntacticSequencer.getFileContents();
       ctx.writeFile(Generator.SRC, _fileName_2, _fileContents_2);
       String _fileName_3 = this.abstractSyntacticSequencer.getFileName();
-      String _fileContents_3 = this.abstractSyntacticSequencer.getFileContents();
+      CharSequence _fileContents_3 = this.abstractSyntacticSequencer.getFileContents();
       ctx.writeFile(Generator.SRC_GEN, _fileName_3, _fileContents_3);
       SerializerFragmentState _state = this.state();
       if (_state.generateDebugData) {
         {
           String _fileName_4 = this.grammarConstraints.getFileName();
-          String _fileContents_4 = this.grammarConstraints.getFileContents();
+          CharSequence _fileContents_4 = this.grammarConstraints.getFileContents();
           ctx.writeFile(Generator.SRC_GEN, _fileName_4, _fileContents_4);
           SyntacticSequencerPDA2ExtendedDot _syntacticSequencerPDA2ExtendedDot = new SyntacticSequencerPDA2ExtendedDot();
           Iterable<Pair<String,String>> _render2Dot = this.dotRenderer.render2Dot(_syntacticSequencerPDA2ExtendedDot, "pda");

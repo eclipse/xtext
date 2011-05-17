@@ -18,7 +18,7 @@ class GrammarConstraints extends GeneratedFile {
 		grammar.getName("", "GrammarConstraints")
 	} 	
 	
-	override getFileContents() { '''
+	override getFileContents() '''
 		grammar «grammar.name»«FOR ug:grammar.usedGrammars BEFORE " with " SEPARATOR ", "»«ug.name»«ENDFOR»
 		
 		generate model "http://«grammar.name»"
@@ -41,5 +41,5 @@ class GrammarConstraints extends GeneratedFile {
 					«constraint.body»;
 				«ENDIF»
 		«ENDFOR»
-	'''.toString }
+	'''
 }

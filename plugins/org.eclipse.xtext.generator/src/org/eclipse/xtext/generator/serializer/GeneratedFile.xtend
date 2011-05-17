@@ -42,7 +42,7 @@ class GeneratedFile {
 		"java";
 	}
 	
-	def String getFileContents() {
-		"<not implemented>";
-	}
+	def CharSequence getFileContents() '''
+		<not implemented>
+	'''
 }
