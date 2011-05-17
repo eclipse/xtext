@@ -79,8 +79,13 @@ ruleParameter :
 
 // Rule XStringLiteral
 ruleXStringLiteral :
-	RULE_STRING |
+	ruleSimpleStringLiteral |
 	ruleRichString
+;
+
+// Rule SimpleStringLiteral
+ruleSimpleStringLiteral :
+	RULE_STRING
 ;
 
 // Rule RichString

@@ -59,8 +59,11 @@ Parameter returns XtendParameter:
 	parameterType=JvmTypeReference name=ValidID;
 		
 XStringLiteral returns xbase::XExpression:
-	{xbase::XStringLiteral} value=STRING |
-	RichString
+	SimpleStringLiteral | RichString
+;
+
+SimpleStringLiteral returns xbase::XExpression:
+	{xbase::XStringLiteral} value=STRING
 ;
 		
 RichString returns xbase::XExpression:

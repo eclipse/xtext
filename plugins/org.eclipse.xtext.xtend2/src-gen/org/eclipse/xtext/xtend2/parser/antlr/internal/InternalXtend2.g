@@ -980,21 +980,61 @@ ruleXStringLiteral returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(((
+(
+    { 
+        newCompositeNode(grammarAccess.getXStringLiteralAccess().getSimpleStringLiteralParserRuleCall_0()); 
+    }
+    this_SimpleStringLiteral_0=ruleSimpleStringLiteral
+    { 
+        $current = $this_SimpleStringLiteral_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getXStringLiteralAccess().getRichStringParserRuleCall_1()); 
+    }
+    this_RichString_1=ruleRichString
+    { 
+        $current = $this_RichString_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleSimpleStringLiteral
+entryRuleSimpleStringLiteral returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getSimpleStringLiteralRule()); }
+	 iv_ruleSimpleStringLiteral=ruleSimpleStringLiteral 
+	 { $current=$iv_ruleSimpleStringLiteral.current; } 
+	 EOF 
+;
+
+// Rule SimpleStringLiteral
+ruleSimpleStringLiteral returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
     {
         $current = forceCreateModelElement(
-            grammarAccess.getXStringLiteralAccess().getXStringLiteralAction_0_0(),
+            grammarAccess.getSimpleStringLiteralAccess().getXStringLiteralAction_0(),
             $current);
     }
 )(
 (
 		lv_value_1_0=RULE_STRING
 		{
-			newLeafNode(lv_value_1_0, grammarAccess.getXStringLiteralAccess().getValueSTRINGTerminalRuleCall_0_1_0()); 
+			newLeafNode(lv_value_1_0, grammarAccess.getSimpleStringLiteralAccess().getValueSTRINGTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getXStringLiteralRule());
+	            $current = createModelElement(grammarAccess.getSimpleStringLiteralRule());
 	        }
        		setWithLastConsumed(
        			$current, 
@@ -1005,16 +1045,6 @@ ruleXStringLiteral returns [EObject current=null]
 
 )
 ))
-    |
-    { 
-        newCompositeNode(grammarAccess.getXStringLiteralAccess().getRichStringParserRuleCall_1()); 
-    }
-    this_RichString_2=ruleRichString
-    { 
-        $current = $this_RichString_2.current; 
-        afterParserOrEnumRuleCall();
-    }
-)
 ;
 
 

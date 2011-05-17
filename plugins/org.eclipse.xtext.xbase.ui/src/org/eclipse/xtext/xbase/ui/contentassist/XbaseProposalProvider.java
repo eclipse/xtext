@@ -222,8 +222,12 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	@Override
 	public void completeXAssignment_Feature(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		if (assignment == grammarAccess.getXAssignmentAccess().getFeatureAssignment_1_1_0_0_1())
+		if (assignment == getXAssignmentFeatureAssignment())
 			super.completeXAssignment_Feature(model, assignment, context, acceptor);
+	}
+
+	protected Assignment getXAssignmentFeatureAssignment() {
+		return grammarAccess.getXAssignmentAccess().getFeatureAssignment_1_1_0_0_1();
 	}
 	
 	@Override
@@ -256,7 +260,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			for(INode leaf: node.getLeafNodes()) {
 				if (leaf.getOffset() >= context.getOffset())
 					break;
-				if (leaf.getGrammarElement() == grammarAccess.getXForLoopExpressionAccess().getRightParenthesisKeyword_6()) {
+				if (leaf.getGrammarElement() == getXForLoopRightParenthesis()) {
 					eachExpression = true;
 					break;
 				}
@@ -271,6 +275,10 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		}
 		if (model == null || model instanceof XExpression || model instanceof XCatchClause)
 			createLocalVariableAndImplicitProposals(model, context, acceptor);
+	}
+
+	protected Keyword getXForLoopRightParenthesis() {
+		return grammarAccess.getXForLoopExpressionAccess().getRightParenthesisKeyword_6();
 	}
 	
 	@Override
@@ -385,9 +393,13 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	}
 	
 	protected void createLocalVariableAndImplicitProposals(EObject context, boolean includeCurrentObject, int idx, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
-		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory(grammarAccess.getIdOrSuperRule().getName(), contentAssistContext);
+		Function<IEObjectDescription, ICompletionProposal> proposalFactory = getProposalFactory(getFeatureCallRuleName(), contentAssistContext);
 		IScope scope = getScopeProvider().createSimpleFeatureCallScope(context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, contentAssistContext.getResource(), includeCurrentObject, idx);
 		getCrossReferenceProposalCreator().lookupCrossReference(scope, context, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, acceptor, getFeatureDescriptionPredicate(contentAssistContext), proposalFactory);
+	}
+
+	protected String getFeatureCallRuleName() {
+		return "IdOrSuper";
 	}
 	
 	/**
@@ -465,7 +477,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 						}
 					}).toContext();
 				}
-				if (myCandidate instanceof JvmFeatureDescription && (grammarAccess.getIdOrSuperRule().getName().equals(ruleName) || grammarAccess.getValidIDRule().getName().equals(ruleName))) {
+				if (myCandidate instanceof JvmFeatureDescription && (isIdRule(ruleName))) {
 					ICompletionProposal result = null;
 					String key = ((JvmFeatureDescription) myCandidate).getKey();
 					boolean withParenths = key.endsWith(")");
@@ -559,5 +571,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	
 	protected QualifiedNameValueConverter getQualifiedNameValueConverter() {
 		return qualifiedNameValueConverter;
+	}
+
+	protected boolean isIdRule(final String ruleName) {
+		return "IdOrSuper".equals(ruleName) || "ValidID".equals(ruleName);
 	}
 }

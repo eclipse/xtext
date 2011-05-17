@@ -94,7 +94,7 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getMemberAccess().getGroup_2_1_8_1(), "rule__Member__Group_2_1_8_1__0");
 					put(grammarAccess.getCreateExtensionInfoAccess().getGroup(), "rule__CreateExtensionInfo__Group__0");
 					put(grammarAccess.getParameterAccess().getGroup(), "rule__Parameter__Group__0");
-					put(grammarAccess.getXStringLiteralAccess().getGroup_0(), "rule__XStringLiteral__Group_0__0");
+					put(grammarAccess.getSimpleStringLiteralAccess().getGroup(), "rule__SimpleStringLiteral__Group__0");
 					put(grammarAccess.getRichStringAccess().getGroup(), "rule__RichString__Group__0");
 					put(grammarAccess.getRichStringAccess().getGroup_1_1(), "rule__RichString__Group_1_1__0");
 					put(grammarAccess.getRichStringAccess().getGroup_1_1_2(), "rule__RichString__Group_1_1_2__0");
@@ -274,7 +274,7 @@ public class Xtend2Parser extends AbstractContentAssistParser {
 					put(grammarAccess.getParameterAccess().getAnnotationsAssignment_0(), "rule__Parameter__AnnotationsAssignment_0");
 					put(grammarAccess.getParameterAccess().getParameterTypeAssignment_1(), "rule__Parameter__ParameterTypeAssignment_1");
 					put(grammarAccess.getParameterAccess().getNameAssignment_2(), "rule__Parameter__NameAssignment_2");
-					put(grammarAccess.getXStringLiteralAccess().getValueAssignment_0_1(), "rule__XStringLiteral__ValueAssignment_0_1");
+					put(grammarAccess.getSimpleStringLiteralAccess().getValueAssignment_1(), "rule__SimpleStringLiteral__ValueAssignment_1");
 					put(grammarAccess.getRichStringAccess().getExpressionsAssignment_1_0(), "rule__RichString__ExpressionsAssignment_1_0");
 					put(grammarAccess.getRichStringAccess().getExpressionsAssignment_1_1_0(), "rule__RichString__ExpressionsAssignment_1_1_0");
 					put(grammarAccess.getRichStringAccess().getExpressionsAssignment_1_1_1(), "rule__RichString__ExpressionsAssignment_1_1_1");
