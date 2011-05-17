@@ -54,7 +54,7 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 
 	@Inject
 	private IRenameProcessorAdapter.Factory processorAdapterFactory;
-	
+
 	private RefactoringStatus status;
 
 	private List<IRenameProcessorAdapter> wrappedProcessors;
@@ -78,18 +78,17 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 			List<IRenameProcessorAdapter> processors = newArrayList();
 			for (IRenameElementContext participantContext : participantContexts) {
 				IRenameRefactoringProvider renameRefactoringProvider = getRenameRefactoringProvider(participantContext);
-				RenameProcessor processor = renameRefactoringProvider
-						.getRenameProcessor(participantContext);
+				RenameProcessor processor = renameRefactoringProvider.getRenameProcessor(participantContext);
 				processors.add(processorAdapterFactory.create(processor));
 			}
 			return processors;
 		}
 		return null;
 	}
-	
+
 	protected IRenameRefactoringProvider getRenameRefactoringProvider(IRenameElementContext renameElementContext) {
-		return globalServiceProvider.findService(
-				renameElementContext.getTargetElementURI(), IRenameRefactoringProvider.class);
+		return globalServiceProvider.findService(renameElementContext.getTargetElementURI(),
+				IRenameRefactoringProvider.class);
 	}
 
 	@Override
@@ -117,10 +116,16 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 
 	@Override
 	public Change createChange(IProgressMonitor pm) throws CoreException, OperationCanceledException {
-		CompositeChange compositeChange = new CompositeChange("Changes form participant: " + getName());
+		CompositeChange compositeChange = null;
 		try {
-			for (IRenameProcessorAdapter wrappedProcessor : wrappedProcessors)
-				compositeChange.add(wrappedProcessor.createChange(pm));
+			for (IRenameProcessorAdapter wrappedProcessor : wrappedProcessors) {
+				Change processorChange = wrappedProcessor.createChange(pm);
+				if(processorChange != null) {
+					if(compositeChange == null)
+						compositeChange = new CompositeChange("Changes form participant: " + getName());
+					compositeChange.add(processorChange);
+				}
+			}
 		} catch (Exception e) {
 			throw new CoreException(new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Error creating change", e));
 		}
@@ -155,7 +160,7 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 	protected RefactoringStatus getStatus() {
 		return status;
 	}
-	
+
 	protected IGlobalServiceProvider getGlobalServiceProvider() {
 		return globalServiceProvider;
 	}
