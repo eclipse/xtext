@@ -92,7 +92,7 @@ public class SerializerFragment extends Xtend2GeneratorFragment {
       CharSequence _fileContents_1 = this.abstractSemanticSequencer.getFileContents();
       ctx.writeFile(Generator.SRC_GEN, _fileName_1, _fileContents_1);
       String _fileName_2 = this.syntacticSequencer.getFileName();
-      String _fileContents_2 = this.syntacticSequencer.getFileContents();
+      CharSequence _fileContents_2 = this.syntacticSequencer.getFileContents();
       ctx.writeFile(Generator.SRC, _fileName_2, _fileContents_2);
       String _fileName_3 = this.abstractSyntacticSequencer.getFileName();
       CharSequence _fileContents_3 = this.abstractSyntacticSequencer.getFileContents();
