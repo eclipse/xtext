@@ -99,6 +99,12 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 					return; 
 				}
 				else break;
+			case SequencertestPackage.FLOAT:
+				if(context == grammarAccess.getFloatRule()) {
+					sequence_Float_Float(context, (org.eclipse.xtext.serializer.sequencertest.Float) semanticObject); 
+					return; 
+				}
+				else break;
 			case SequencertestPackage.GROUP_MULTIPLICITIES:
 				if(context == grammarAccess.getGroupMultiplicitiesRule()) {
 					sequence_GroupMultiplicities_GroupMultiplicities(context, (GroupMultiplicities) semanticObject); 
@@ -333,6 +339,17 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	
 	/**
 	 * Constraint:
+	 *     {Float}
+	 *
+	 * Features:
+	 */
+	protected void sequence_Float_Float(EObject context, org.eclipse.xtext.serializer.sequencertest.Float semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (val1=ID (val2=ID val3=ID)? (val4+=ID val5+=ID)+ (val6+=ID val7+=ID)*)
 	 *
 	 * Features:
@@ -404,7 +421,8 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         x15=SingleContainmentReference | 
 	 *         x19=DependentAlternative1 | 
 	 *         x20=DependentAlternative2 | 
-	 *         x21=Optional
+	 *         x21=Optional | 
+	 *         x22=Float
 	 *     )
 	 *     
 	 *
@@ -430,6 +448,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x19
 	 *         EXCLUDE_IF_SET x20
 	 *         EXCLUDE_IF_SET x21
+	 *         EXCLUDE_IF_SET x22
 	 *    x2[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x3
@@ -451,6 +470,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x19
 	 *         EXCLUDE_IF_SET x20
 	 *         EXCLUDE_IF_SET x21
+	 *         EXCLUDE_IF_SET x22
 	 *    x3[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -472,6 +492,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x19
 	 *         EXCLUDE_IF_SET x20
 	 *         EXCLUDE_IF_SET x21
+	 *         EXCLUDE_IF_SET x22
 	 *    x4[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -493,6 +514,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x19
 	 *         EXCLUDE_IF_SET x20
 	 *         EXCLUDE_IF_SET x21
+	 *         EXCLUDE_IF_SET x22
 	 *    x5[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -514,6 +536,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x19
 	 *         EXCLUDE_IF_SET x20
 	 *         EXCLUDE_IF_SET x21
+	 *         EXCLUDE_IF_SET x22
 	 *    x6[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -535,6 +558,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x19
 	 *         EXCLUDE_IF_SET x20
 	 *         EXCLUDE_IF_SET x21
+	 *         EXCLUDE_IF_SET x22
 	 *    x7[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -556,6 +580,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x19
 	 *         EXCLUDE_IF_SET x20
 	 *         EXCLUDE_IF_SET x21
+	 *         EXCLUDE_IF_SET x22
 	 *    x8[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -577,6 +602,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x19
 	 *         EXCLUDE_IF_SET x20
 	 *         EXCLUDE_IF_SET x21
+	 *         EXCLUDE_IF_SET x22
 	 *    x9[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -598,6 +624,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x19
 	 *         EXCLUDE_IF_SET x20
 	 *         EXCLUDE_IF_SET x21
+	 *         EXCLUDE_IF_SET x22
 	 *    x10[0, 2]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -618,6 +645,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x19
 	 *         EXCLUDE_IF_SET x20
 	 *         EXCLUDE_IF_SET x21
+	 *         EXCLUDE_IF_SET x22
 	 *    x11[0, 2]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -638,6 +666,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x19
 	 *         EXCLUDE_IF_SET x20
 	 *         EXCLUDE_IF_SET x21
+	 *         EXCLUDE_IF_SET x22
 	 *    x12[0, 2]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -658,6 +687,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x19
 	 *         EXCLUDE_IF_SET x20
 	 *         EXCLUDE_IF_SET x21
+	 *         EXCLUDE_IF_SET x22
 	 *    x13[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -679,6 +709,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x19
 	 *         EXCLUDE_IF_SET x20
 	 *         EXCLUDE_IF_SET x21
+	 *         EXCLUDE_IF_SET x22
 	 *    x14[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -700,6 +731,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x19
 	 *         EXCLUDE_IF_SET x20
 	 *         EXCLUDE_IF_SET x21
+	 *         EXCLUDE_IF_SET x22
 	 *    x15[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -721,6 +753,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x19
 	 *         EXCLUDE_IF_SET x20
 	 *         EXCLUDE_IF_SET x21
+	 *         EXCLUDE_IF_SET x22
 	 *    x19[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -742,6 +775,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x15
 	 *         EXCLUDE_IF_SET x20
 	 *         EXCLUDE_IF_SET x21
+	 *         EXCLUDE_IF_SET x22
 	 *    x20[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -763,6 +797,7 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x15
 	 *         EXCLUDE_IF_SET x19
 	 *         EXCLUDE_IF_SET x21
+	 *         EXCLUDE_IF_SET x22
 	 *    x21[0, 1]
 	 *         EXCLUDE_IF_SET x1
 	 *         EXCLUDE_IF_SET x2
@@ -784,6 +819,29 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         EXCLUDE_IF_SET x15
 	 *         EXCLUDE_IF_SET x19
 	 *         EXCLUDE_IF_SET x20
+	 *         EXCLUDE_IF_SET x22
+	 *    x22[0, 1]
+	 *         EXCLUDE_IF_SET x1
+	 *         EXCLUDE_IF_SET x2
+	 *         EXCLUDE_IF_SET x3
+	 *         EXCLUDE_IF_SET x4
+	 *         EXCLUDE_IF_SET x5
+	 *         EXCLUDE_IF_SET x6
+	 *         EXCLUDE_IF_SET x7
+	 *         EXCLUDE_IF_SET x8
+	 *         EXCLUDE_IF_SET x9
+	 *         EXCLUDE_IF_SET x10
+	 *         EXCLUDE_IF_SET x11
+	 *         EXCLUDE_IF_SET x12
+	 *         EXCLUDE_IF_SET x10
+	 *         EXCLUDE_IF_SET x11
+	 *         EXCLUDE_IF_SET x12
+	 *         EXCLUDE_IF_SET x13
+	 *         EXCLUDE_IF_SET x14
+	 *         EXCLUDE_IF_SET x15
+	 *         EXCLUDE_IF_SET x19
+	 *         EXCLUDE_IF_SET x20
+	 *         EXCLUDE_IF_SET x21
 	 */
 	protected void sequence_Model_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

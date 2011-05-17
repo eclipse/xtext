@@ -10,7 +10,32 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.serializer.sequencertest.*;
+import org.eclipse.xtext.serializer.sequencertest.AltList1;
+import org.eclipse.xtext.serializer.sequencertest.AltList2;
+import org.eclipse.xtext.serializer.sequencertest.AlternativeMultiplicities;
+import org.eclipse.xtext.serializer.sequencertest.DependentAlternative1;
+import org.eclipse.xtext.serializer.sequencertest.DependentAlternative2;
+import org.eclipse.xtext.serializer.sequencertest.GroupMultiplicities;
+import org.eclipse.xtext.serializer.sequencertest.List1;
+import org.eclipse.xtext.serializer.sequencertest.List2;
+import org.eclipse.xtext.serializer.sequencertest.Model;
+import org.eclipse.xtext.serializer.sequencertest.MultiKeywords;
+import org.eclipse.xtext.serializer.sequencertest.MultiKeywordsOrID;
+import org.eclipse.xtext.serializer.sequencertest.MultiTerminals;
+import org.eclipse.xtext.serializer.sequencertest.Optional;
+import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
+import org.eclipse.xtext.serializer.sequencertest.SimpleAlternative;
+import org.eclipse.xtext.serializer.sequencertest.SimpleGroup;
+import org.eclipse.xtext.serializer.sequencertest.SimpleMultiplicities;
+import org.eclipse.xtext.serializer.sequencertest.SingleContainmentReference;
+import org.eclipse.xtext.serializer.sequencertest.SingleContainmentReferenceChild1;
+import org.eclipse.xtext.serializer.sequencertest.SingleContainmentReferenceChild2;
+import org.eclipse.xtext.serializer.sequencertest.SingleContainmentReferenceChild3;
+import org.eclipse.xtext.serializer.sequencertest.SingleCrossReference;
+import org.eclipse.xtext.serializer.sequencertest.SingleEnum;
+import org.eclipse.xtext.serializer.sequencertest.SingleKeywords;
+import org.eclipse.xtext.serializer.sequencertest.SingleKeywordsOrID;
+import org.eclipse.xtext.serializer.sequencertest.SingleTerminals;
 
 /**
  * <!-- begin-user-doc -->
@@ -267,6 +292,13 @@ public class SequencertestSwitch<T>
       {
         Optional optional = (Optional)theEObject;
         T result = caseOptional(optional);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SequencertestPackage.FLOAT:
+      {
+        org.eclipse.xtext.serializer.sequencertest.Float float_ = (org.eclipse.xtext.serializer.sequencertest.Float)theEObject;
+        T result = caseFloat(float_);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -670,6 +702,22 @@ public class SequencertestSwitch<T>
    * @generated
    */
   public T caseOptional(Optional object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Float</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Float</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFloat(org.eclipse.xtext.serializer.sequencertest.Float object)
   {
     return null;
   }

@@ -58,6 +58,7 @@ import org.eclipse.xtext.serializer.sequencertest.SingleEnum;
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX19 <em>X19</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX20 <em>X20</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX21 <em>X21</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.sequencertest.impl.ModelImpl#getX22 <em>X22</em>}</li>
  * </ul>
  * </p>
  *
@@ -244,6 +245,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected Optional x21;
+
+  /**
+   * The cached value of the '{@link #getX22() <em>X22</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX22()
+   * @generated
+   * @ordered
+   */
+  protected org.eclipse.xtext.serializer.sequencertest.Float x22;
 
   /**
    * <!-- begin-user-doc -->
@@ -1135,6 +1146,54 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public org.eclipse.xtext.serializer.sequencertest.Float getX22()
+  {
+    return x22;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX22(org.eclipse.xtext.serializer.sequencertest.Float newX22, NotificationChain msgs)
+  {
+    org.eclipse.xtext.serializer.sequencertest.Float oldX22 = x22;
+    x22 = newX22;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X22, oldX22, newX22);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX22(org.eclipse.xtext.serializer.sequencertest.Float newX22)
+  {
+    if (newX22 != x22)
+    {
+      NotificationChain msgs = null;
+      if (x22 != null)
+        msgs = ((InternalEObject)x22).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X22, null, msgs);
+      if (newX22 != null)
+        msgs = ((InternalEObject)newX22).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SequencertestPackage.MODEL__X22, null, msgs);
+      msgs = basicSetX22(newX22, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SequencertestPackage.MODEL__X22, newX22, newX22));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -1176,6 +1235,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return basicSetX20(null, msgs);
       case SequencertestPackage.MODEL__X21:
         return basicSetX21(null, msgs);
+      case SequencertestPackage.MODEL__X22:
+        return basicSetX22(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -1226,6 +1287,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getX20();
       case SequencertestPackage.MODEL__X21:
         return getX21();
+      case SequencertestPackage.MODEL__X22:
+        return getX22();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -1293,6 +1356,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return;
       case SequencertestPackage.MODEL__X21:
         setX21((Optional)newValue);
+        return;
+      case SequencertestPackage.MODEL__X22:
+        setX22((org.eclipse.xtext.serializer.sequencertest.Float)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -1362,6 +1428,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case SequencertestPackage.MODEL__X21:
         setX21((Optional)null);
         return;
+      case SequencertestPackage.MODEL__X22:
+        setX22((org.eclipse.xtext.serializer.sequencertest.Float)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -1412,6 +1481,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return x20 != null;
       case SequencertestPackage.MODEL__X21:
         return x21 != null;
+      case SequencertestPackage.MODEL__X22:
+        return x22 != null;
     }
     return super.eIsSet(featureID);
   }

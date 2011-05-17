@@ -251,6 +251,15 @@ public interface SequencertestFactory extends EFactory
   Optional createOptional();
 
   /**
+   * Returns a new object of class '<em>Float</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Float</em>'.
+   * @generated
+   */
+  Float createFloat();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

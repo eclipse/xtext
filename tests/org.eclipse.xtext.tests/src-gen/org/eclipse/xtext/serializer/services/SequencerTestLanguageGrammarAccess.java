@@ -62,19 +62,21 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cX20DependentAlternative2ParserRuleCall_19_0 = (RuleCall)cX20Assignment_19.eContents().get(0);
 		private final Assignment cX21Assignment_20 = (Assignment)cAlternatives.eContents().get(20);
 		private final RuleCall cX21OptionalParserRuleCall_20_0 = (RuleCall)cX21Assignment_20.eContents().get(0);
+		private final Assignment cX22Assignment_21 = (Assignment)cAlternatives.eContents().get(21);
+		private final RuleCall cX22FloatParserRuleCall_21_0 = (RuleCall)cX22Assignment_21.eContents().get(0);
 		
 		//Model:
 		//	x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities |
 		//	x5=AlternativeMultiplicities | x6=List1 | x7=List2 | x8=AltList1 | x9=AltList2 | x10=SingleKeywords |
 		//	x11=SingleKeywordsOrID | x12=SingleTerminals | x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals |
 		//	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference | x19=DependentAlternative1 |
-		//	x20=DependentAlternative2 | x21=Optional;
+		//	x20=DependentAlternative2 | x21=Optional | x22=Float;
 		public ParserRule getRule() { return rule; }
 
 		//x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities | x5=AlternativeMultiplicities
 		//| x6=List1 | x7=List2 | x8=AltList1 | x9=AltList2 | x10=SingleKeywords | x11=SingleKeywordsOrID | x12=SingleTerminals |
 		//x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals | x13=SingleEnum | x14=SingleCrossReference |
-		//x15=SingleContainmentReference | x19=DependentAlternative1 | x20=DependentAlternative2 | x21=Optional
+		//x15=SingleContainmentReference | x19=DependentAlternative1 | x20=DependentAlternative2 | x21=Optional | x22=Float
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//x1=SimpleGroup
@@ -202,6 +204,12 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 		//Optional
 		public RuleCall getX21OptionalParserRuleCall_20_0() { return cX21OptionalParserRuleCall_20_0; }
+
+		//x22=Float
+		public Assignment getX22Assignment_21() { return cX22Assignment_21; }
+
+		//Float
+		public RuleCall getX22FloatParserRuleCall_21_0() { return cX22FloatParserRuleCall_21_0; }
 	}
 
 	public class SimpleGroupElements extends AbstractParserRuleElementFinder {
@@ -1373,6 +1381,30 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//INT
 		public RuleCall getInt2INTTerminalRuleCall_2_1_0() { return cInt2INTTerminalRuleCall_2_1_0; }
 	}
+
+	public class FloatElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Float");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitTwoDigitTwoKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Action cFloatAction_1 = (Action)cGroup.eContents().get(1);
+		private final Keyword cByeKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//Float:
+		//	"#22" {Float} "Bye";
+		public ParserRule getRule() { return rule; }
+
+		//"#22" {Float} "Bye"
+		public Group getGroup() { return cGroup; }
+
+		//"#22"
+		public Keyword getNumberSignDigitTwoDigitTwoKeyword_0() { return cNumberSignDigitTwoDigitTwoKeyword_0; }
+
+		//{Float}
+		public Action getFloatAction_1() { return cFloatAction_1; }
+
+		//"Bye"
+		public Keyword getByeKeyword_2() { return cByeKeyword_2; }
+	}
 	
 	
 	public class DefEnum1Elements extends AbstractEnumRuleElementFinder {
@@ -1454,6 +1486,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private DependentAlternative1Elements pDependentAlternative1;
 	private DependentAlternative2Elements pDependentAlternative2;
 	private OptionalElements pOptional;
+	private FloatElements pFloat;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -1481,7 +1514,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	//	x5=AlternativeMultiplicities | x6=List1 | x7=List2 | x8=AltList1 | x9=AltList2 | x10=SingleKeywords |
 	//	x11=SingleKeywordsOrID | x12=SingleTerminals | x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals |
 	//	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference | x19=DependentAlternative1 |
-	//	x20=DependentAlternative2 | x21=Optional;
+	//	x20=DependentAlternative2 | x21=Optional | x22=Float;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -1777,6 +1810,16 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	public ParserRule getOptionalRule() {
 		return getOptionalAccess().getRule();
+	}
+
+	//Float:
+	//	"#22" {Float} "Bye";
+	public FloatElements getFloatAccess() {
+		return (pFloat != null) ? pFloat : (pFloat = new FloatElements());
+	}
+	
+	public ParserRule getFloatRule() {
+		return getFloatAccess().getRule();
 	}
 
 	//terminal ID:

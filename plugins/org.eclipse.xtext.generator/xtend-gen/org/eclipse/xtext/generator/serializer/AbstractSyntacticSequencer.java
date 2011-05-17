@@ -64,10 +64,8 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       file.imported(org.eclipse.xtext.nodemodel.INode.class);
       file.imported(org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition.class);
       file.imported(com.google.inject.Inject.class);
-      file.imported(org.eclipse.xtext.AbstractElement.class);
       file.imported(org.eclipse.xtext.IGrammarAccess.class);
       file.imported(org.eclipse.emf.ecore.EObject.class);
-      file.imported("org.eclipse.xtext.serializer.analysis.NfaToGrammar.AbstractElementAlias");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("@SuppressWarnings(\"restriction\")");
       _builder.newLine();
@@ -88,7 +86,13 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         List<Triple<String,AbstractElementAlias<ISynState>,List<ISynTransition>>> _allAmbiguousTransitionsBySyntax = this.util.getAllAmbiguousTransitionsBySyntax();
         for(Triple<String,AbstractElementAlias<ISynState>,List<ISynTransition>> group : _allAmbiguousTransitionsBySyntax) {
           _builder.append("\t");
-          _builder.append("protected AbstractElementAlias<AbstractElement> match_");
+          _builder.append("protected ");
+          String _imported_1 = file.imported("org.eclipse.xtext.serializer.analysis.NfaToGrammar.AbstractElementAlias");
+          _builder.append(_imported_1, "	");
+          _builder.append("<");
+          String _imported_2 = file.imported(org.eclipse.xtext.AbstractElement.class);
+          _builder.append(_imported_2, "	");
+          _builder.append("> match_");
           final Triple<String,AbstractElementAlias<ISynState>,List<ISynTransition>> typeConverted_group = (Triple<String,AbstractElementAlias<ISynState>,List<ISynTransition>>)group;
           String _first = typeConverted_group.getFirst();
           _builder.append(_first, "	");
@@ -107,8 +111,8 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.append("\t\t");
       _builder.append("grammarAccess = (");
       String _gaFQName_1 = this.grammarAccess.gaFQName(this.grammar);
-      String _imported_1 = file.imported(_gaFQName_1);
-      _builder.append(_imported_1, "		");
+      String _imported_3 = file.imported(_gaFQName_1);
+      _builder.append(_imported_3, "		");
       _builder.append(") access;");
       _builder.newLineIfNotEmpty();
       {

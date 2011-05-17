@@ -233,13 +233,22 @@ public interface SequencertestPackage extends EPackage
   int MODEL__X21 = 17;
 
   /**
+   * The feature id for the '<em><b>X22</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X22 = 18;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 18;
+  int MODEL_FEATURE_COUNT = 19;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -1148,6 +1157,25 @@ public interface SequencertestPackage extends EPackage
   int OPTIONAL_FEATURE_COUNT = 3;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.FloatImpl <em>Float</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.FloatImpl
+   * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getFloat()
+   * @generated
+   */
+  int FLOAT = 25;
+
+  /**
+   * The number of structural features of the '<em>Float</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FLOAT_FEATURE_COUNT = 0;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1155,7 +1183,7 @@ public interface SequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getDefEnum()
    * @generated
    */
-  int DEF_ENUM = 25;
+  int DEF_ENUM = 26;
 
 
   /**
@@ -1365,6 +1393,17 @@ public interface SequencertestPackage extends EPackage
    * @generated
    */
   EReference getModel_X21();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.sequencertest.Model#getX22 <em>X22</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X22</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Model#getX22()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X22();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.SimpleGroup <em>Simple Group</em>}'.
@@ -2157,6 +2196,16 @@ public interface SequencertestPackage extends EPackage
   EAttribute getOptional_Int2();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.sequencertest.Float <em>Float</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Float</em>'.
+   * @see org.eclipse.xtext.serializer.sequencertest.Float
+   * @generated
+   */
+  EClass getFloat();
+
+  /**
    * Returns the meta object for enum '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2342,6 +2391,14 @@ public interface SequencertestPackage extends EPackage
      * @generated
      */
     EReference MODEL__X21 = eINSTANCE.getModel_X21();
+
+    /**
+     * The meta object literal for the '<em><b>X22</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X22 = eINSTANCE.getModel_X22();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -2982,6 +3039,16 @@ public interface SequencertestPackage extends EPackage
      * @generated
      */
     EAttribute OPTIONAL__INT2 = eINSTANCE.getOptional_Int2();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.impl.FloatImpl <em>Float</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.FloatImpl
+     * @see org.eclipse.xtext.serializer.sequencertest.impl.SequencertestPackageImpl#getFloat()
+     * @generated
+     */
+    EClass FLOAT = eINSTANCE.getFloat();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.sequencertest.DefEnum <em>Def Enum</em>}' enum.

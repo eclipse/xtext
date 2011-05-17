@@ -14,7 +14,34 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import org.eclipse.xtext.serializer.sequencertest.*;
+import org.eclipse.xtext.serializer.sequencertest.AltList1;
+import org.eclipse.xtext.serializer.sequencertest.AltList2;
+import org.eclipse.xtext.serializer.sequencertest.AlternativeMultiplicities;
+import org.eclipse.xtext.serializer.sequencertest.DefEnum;
+import org.eclipse.xtext.serializer.sequencertest.DependentAlternative1;
+import org.eclipse.xtext.serializer.sequencertest.DependentAlternative2;
+import org.eclipse.xtext.serializer.sequencertest.GroupMultiplicities;
+import org.eclipse.xtext.serializer.sequencertest.List1;
+import org.eclipse.xtext.serializer.sequencertest.List2;
+import org.eclipse.xtext.serializer.sequencertest.Model;
+import org.eclipse.xtext.serializer.sequencertest.MultiKeywords;
+import org.eclipse.xtext.serializer.sequencertest.MultiKeywordsOrID;
+import org.eclipse.xtext.serializer.sequencertest.MultiTerminals;
+import org.eclipse.xtext.serializer.sequencertest.Optional;
+import org.eclipse.xtext.serializer.sequencertest.SequencertestFactory;
+import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
+import org.eclipse.xtext.serializer.sequencertest.SimpleAlternative;
+import org.eclipse.xtext.serializer.sequencertest.SimpleGroup;
+import org.eclipse.xtext.serializer.sequencertest.SimpleMultiplicities;
+import org.eclipse.xtext.serializer.sequencertest.SingleContainmentReference;
+import org.eclipse.xtext.serializer.sequencertest.SingleContainmentReferenceChild1;
+import org.eclipse.xtext.serializer.sequencertest.SingleContainmentReferenceChild2;
+import org.eclipse.xtext.serializer.sequencertest.SingleContainmentReferenceChild3;
+import org.eclipse.xtext.serializer.sequencertest.SingleCrossReference;
+import org.eclipse.xtext.serializer.sequencertest.SingleEnum;
+import org.eclipse.xtext.serializer.sequencertest.SingleKeywords;
+import org.eclipse.xtext.serializer.sequencertest.SingleKeywordsOrID;
+import org.eclipse.xtext.serializer.sequencertest.SingleTerminals;
 
 /**
  * <!-- begin-user-doc -->
@@ -93,6 +120,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
       case SequencertestPackage.DEPENDENT_ALTERNATIVE1: return createDependentAlternative1();
       case SequencertestPackage.DEPENDENT_ALTERNATIVE2: return createDependentAlternative2();
       case SequencertestPackage.OPTIONAL: return createOptional();
+      case SequencertestPackage.FLOAT: return createFloat();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -405,6 +433,17 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
   {
     OptionalImpl optional = new OptionalImpl();
     return optional;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public org.eclipse.xtext.serializer.sequencertest.Float createFloat()
+  {
+    FloatImpl float_ = new FloatImpl();
+    return float_;
   }
 
   /**

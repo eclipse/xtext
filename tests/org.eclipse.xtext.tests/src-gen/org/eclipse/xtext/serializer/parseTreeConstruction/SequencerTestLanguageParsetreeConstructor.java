@@ -56,6 +56,7 @@ protected class ThisRootNode extends RootToken {
 			case 22: return new DependentAlternative1_Group(this, this, 22, inst);
 			case 23: return new DependentAlternative2_Group(this, this, 23, inst);
 			case 24: return new Optional_Group(this, this, 24, inst);
+			case 25: return new Float_Group(this, this, 25, inst);
 			default: return null;
 		}	
 	}	
@@ -69,14 +70,14 @@ protected class ThisRootNode extends RootToken {
  * 	x5=AlternativeMultiplicities | x6=List1 | x7=List2 | x8=AltList1 | x9=AltList2 | x10=SingleKeywords |
  * 	x11=SingleKeywordsOrID | x12=SingleTerminals | x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals |
  * 	x13=SingleEnum | x14=SingleCrossReference | x15=SingleContainmentReference | x19=DependentAlternative1 |
- * 	x20=DependentAlternative2 | x21=Optional;
+ * 	x20=DependentAlternative2 | x21=Optional | x22=Float;
  *
  **/
 
 // x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities | x5=AlternativeMultiplicities
 // | x6=List1 | x7=List2 | x8=AltList1 | x9=AltList2 | x10=SingleKeywords | x11=SingleKeywordsOrID | x12=SingleTerminals |
 // x10=MultiKeywords | x11=MultiKeywordsOrID | x12=MultiTerminals | x13=SingleEnum | x14=SingleCrossReference |
-// x15=SingleContainmentReference | x19=DependentAlternative1 | x20=DependentAlternative2 | x21=Optional
+// x15=SingleContainmentReference | x19=DependentAlternative1 | x20=DependentAlternative2 | x21=Optional | x22=Float
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -112,6 +113,7 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 18: return new Model_X19Assignment_18(lastRuleCallOrigin, this, 18, inst);
 			case 19: return new Model_X20Assignment_19(lastRuleCallOrigin, this, 19, inst);
 			case 20: return new Model_X21Assignment_20(lastRuleCallOrigin, this, 20, inst);
+			case 21: return new Model_X22Assignment_21(lastRuleCallOrigin, this, 21, inst);
 			default: return null;
 		}	
 	}
@@ -1054,6 +1056,51 @@ protected class Model_X21Assignment_20 extends AssignmentToken  {
 			if(param.isInstanceOf(grammarAccess.getOptionalRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
 				element = grammarAccess.getModelAccess().getX21OptionalParserRuleCall_20_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x22=Float
+protected class Model_X22Assignment_21 extends AssignmentToken  {
+	
+	public Model_X22Assignment_21(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX22Assignment_21();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Float_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("x22",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("x22");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getFloatRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getModelAccess().getX22FloatParserRuleCall_21_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -5754,5 +5801,115 @@ protected class Optional_Int2Assignment_2_1 extends AssignmentToken  {
 
 
 /************ end Rule Optional ****************/
+
+
+/************ begin Rule Float ****************
+ *
+ * Float:
+ * 	"#22" {Float} "Bye";
+ *
+ **/
+
+// "#22" {Float} "Bye"
+protected class Float_Group extends GroupToken {
+	
+	public Float_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getFloatAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Float_ByeKeyword_2(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getFloatAccess().getFloatAction_1().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// "#22"
+protected class Float_NumberSignDigitTwoDigitTwoKeyword_0 extends KeywordToken  {
+	
+	public Float_NumberSignDigitTwoDigitTwoKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getFloatAccess().getNumberSignDigitTwoDigitTwoKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// {Float}
+protected class Float_FloatAction_1 extends ActionToken  {
+
+	public Float_FloatAction_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getFloatAccess().getFloatAction_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Float_NumberSignDigitTwoDigitTwoKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
+}
+
+// "Bye"
+protected class Float_ByeKeyword_2 extends KeywordToken  {
+	
+	public Float_ByeKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getFloatAccess().getByeKeyword_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Float_FloatAction_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+
+/************ end Rule Float ****************/
 
 }

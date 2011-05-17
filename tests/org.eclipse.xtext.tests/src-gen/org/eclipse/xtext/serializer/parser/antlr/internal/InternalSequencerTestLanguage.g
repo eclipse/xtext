@@ -476,6 +476,25 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX22FloatParserRuleCall_21_0()); 
+	    }
+		lv_x22_21_0=ruleFloat		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x22",
+        		lv_x22_21_0, 
+        		"Float");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 ))
 ;
 
@@ -2487,6 +2506,41 @@ ruleOptional returns [EObject current=null]
 
 )
 ))?)
+;
+
+
+
+
+
+// Entry rule entryRuleFloat
+entryRuleFloat returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getFloatRule()); }
+	 iv_ruleFloat=ruleFloat 
+	 { $current=$iv_ruleFloat.current; } 
+	 EOF 
+;
+
+// Rule Float
+ruleFloat returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#22' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getFloatAccess().getNumberSignDigitTwoDigitTwoKeyword_0());
+    }
+(
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getFloatAccess().getFloatAction_1(),
+            $current);
+    }
+)	otherlv_2='Bye' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getFloatAccess().getByeKeyword_2());
+    }
+)
 ;
 
 

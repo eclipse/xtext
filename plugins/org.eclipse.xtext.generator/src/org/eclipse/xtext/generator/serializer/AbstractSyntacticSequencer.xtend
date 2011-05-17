@@ -51,10 +51,8 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 		file.imported(typeof(INode))
 		file.imported(typeof(ISyntacticSequencerPDAProvider$ISynTransition))
 		file.imported(typeof(Inject))
-		file.imported(typeof(AbstractElement))
 		file.imported(typeof(IGrammarAccess))
 		file.imported(typeof(EObject))
-		file.imported("org.eclipse.xtext.serializer.analysis.NfaToGrammar.AbstractElementAlias")
 		
 		file.body = '''
 			@SuppressWarnings("restriction")
@@ -62,7 +60,7 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 			
 				protected «file.imported(grammar.gaFQName)» grammarAccess;
 				«FOR group:util.allAmbiguousTransitionsBySyntax»
-					protected AbstractElementAlias<AbstractElement> match_«group.first»;
+					protected «file.imported("org.eclipse.xtext.serializer.analysis.NfaToGrammar.AbstractElementAlias")»<«file.imported(typeof(AbstractElement))»> match_«group.first»;
 				«ENDFOR»
 				
 				@Inject

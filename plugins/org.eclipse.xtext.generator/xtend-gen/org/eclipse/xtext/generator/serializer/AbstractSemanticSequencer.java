@@ -267,8 +267,15 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     Iterable<Grammar> _map = IterableExtensions.<IConstraint, Grammar>map(_accessedConstraints, _function);
     final Function1<Grammar,Boolean> _function_1 = new Function1<Grammar,Boolean>() {
         public Boolean apply(final Grammar g) {
-          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(g, AbstractSemanticSequencer.this.grammar);
-          return ((Boolean)_operator_notEquals);
+          boolean _operator_and = false;
+          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(g, null);
+          if (!_operator_notEquals) {
+            _operator_and = false;
+          } else {
+            boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(g, AbstractSemanticSequencer.this.grammar);
+            _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_notEquals_1);
+          }
+          return ((Boolean)_operator_and);
         }
       };
     boolean _exists = IterableExtensions.<Grammar>exists(_map, _function_1);
@@ -523,8 +530,9 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                 _builder.append(_name, "				");
                 _builder.append("(context, (");
                 GenClass _genClass = GenModelAccess.getGenClass(type);
-                String _interfaceName = _genClass.getInterfaceName();
-                _builder.append(_interfaceName, "				");
+                String _qualifiedInterfaceName = _genClass.getQualifiedInterfaceName();
+                String _imported_1 = file.imported(_qualifiedInterfaceName);
+                _builder.append(_imported_1, "				");
                 _builder.append(") semanticObject); ");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");

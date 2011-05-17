@@ -12,7 +12,32 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.serializer.sequencertest.*;
+import org.eclipse.xtext.serializer.sequencertest.AltList1;
+import org.eclipse.xtext.serializer.sequencertest.AltList2;
+import org.eclipse.xtext.serializer.sequencertest.AlternativeMultiplicities;
+import org.eclipse.xtext.serializer.sequencertest.DependentAlternative1;
+import org.eclipse.xtext.serializer.sequencertest.DependentAlternative2;
+import org.eclipse.xtext.serializer.sequencertest.GroupMultiplicities;
+import org.eclipse.xtext.serializer.sequencertest.List1;
+import org.eclipse.xtext.serializer.sequencertest.List2;
+import org.eclipse.xtext.serializer.sequencertest.Model;
+import org.eclipse.xtext.serializer.sequencertest.MultiKeywords;
+import org.eclipse.xtext.serializer.sequencertest.MultiKeywordsOrID;
+import org.eclipse.xtext.serializer.sequencertest.MultiTerminals;
+import org.eclipse.xtext.serializer.sequencertest.Optional;
+import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
+import org.eclipse.xtext.serializer.sequencertest.SimpleAlternative;
+import org.eclipse.xtext.serializer.sequencertest.SimpleGroup;
+import org.eclipse.xtext.serializer.sequencertest.SimpleMultiplicities;
+import org.eclipse.xtext.serializer.sequencertest.SingleContainmentReference;
+import org.eclipse.xtext.serializer.sequencertest.SingleContainmentReferenceChild1;
+import org.eclipse.xtext.serializer.sequencertest.SingleContainmentReferenceChild2;
+import org.eclipse.xtext.serializer.sequencertest.SingleContainmentReferenceChild3;
+import org.eclipse.xtext.serializer.sequencertest.SingleCrossReference;
+import org.eclipse.xtext.serializer.sequencertest.SingleEnum;
+import org.eclipse.xtext.serializer.sequencertest.SingleKeywords;
+import org.eclipse.xtext.serializer.sequencertest.SingleKeywordsOrID;
+import org.eclipse.xtext.serializer.sequencertest.SingleTerminals;
 
 /**
  * <!-- begin-user-doc -->
@@ -201,6 +226,11 @@ public class SequencertestAdapterFactory extends AdapterFactoryImpl
       public Adapter caseOptional(Optional object)
       {
         return createOptionalAdapter();
+      }
+      @Override
+      public Adapter caseFloat(org.eclipse.xtext.serializer.sequencertest.Float object)
+      {
+        return createFloatAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -595,6 +625,21 @@ public class SequencertestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createOptionalAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.sequencertest.Float <em>Float</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.sequencertest.Float
+   * @generated
+   */
+  public Adapter createFloatAdapter()
   {
     return null;
   }

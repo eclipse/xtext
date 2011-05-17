@@ -94,7 +94,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 	}
 	
 	def usesSuperGrammar() {
-		accessedConstraints.map(c|c.mostConcreteGrammar).exists(g|g!=grammar)
+		accessedConstraints.map(c|c.mostConcreteGrammar).exists(g| g != null && g != grammar)
 	}
 	
 	override getFileContents() {
@@ -167,7 +167,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 					«var ctxi = 0»
 					«FOR ctx: type.accessedConstraints.entrySet /* ITERATOR j-  */»
 						«IF (ctxi = ctxi + 1) > 1 /*!j.firstIteration  */»else «ENDIF»if(«FOR c:ctx.value SEPARATOR " ||\n   "»context == grammarAccess.«c.gaAccessor»«ENDFOR») {
-							sequence_«ctx.key.name»(context, («type.getGenClass().interfaceName») semanticObject); 
+							sequence_«ctx.key.name»(context, («file.imported(type.getGenClass().qualifiedInterfaceName)») semanticObject); 
 							return; 
 						}
 					«ENDFOR»
