@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
+import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Maps.*;
 
 import java.util.Map;
@@ -73,6 +74,8 @@ public class RefactoringUpdateAcceptor implements IRefactoringUpdateAcceptor {
 	public Change createCompositeChange(String name, IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, document2textEdits.keySet().size()
 				+ document2change.keySet().size());
+		if(document2change.isEmpty() && document2textEdits.isEmpty())
+			return null;
 		CompositeChange compositeChange = new CompositeChange(name);
 		for (IRefactoringDocument document : document2textEdits.keySet()) {
 			Iterable<TextEdit> textEdits = document2textEdits.get(document);
