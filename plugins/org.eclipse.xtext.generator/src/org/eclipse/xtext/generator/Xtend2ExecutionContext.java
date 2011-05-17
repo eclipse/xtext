@@ -20,9 +20,12 @@ public class Xtend2ExecutionContext {
 		this.legacyContext = legacyContext;
 	}
 
-	public void writeFile(String outletName, String filename, String contents) {
+	/**
+	 * @since 2.0
+	 */
+	public void writeFile(String outletName, String filename, CharSequence contents) {
 		legacyContext.getOutput().openFile(filename, outletName);
-		legacyContext.getOutput().write(contents);
+		legacyContext.getOutput().write(contents.toString());
 		legacyContext.getOutput().closeFile();
 	}
 }

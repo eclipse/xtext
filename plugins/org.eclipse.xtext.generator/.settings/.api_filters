@@ -8,4 +8,12 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/generator/Xtend2ExecutionContext.java" type="org.eclipse.xtext.generator.Xtend2ExecutionContext">
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.Xtend2ExecutionContext"/>
+                <message_argument value="writeFile(String, String, String)"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>

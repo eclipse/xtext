@@ -11,12 +11,11 @@ class SyntacticSequencer extends GeneratedFile {
 		grammar.getName("", "SyntacticSequencer");		
 	}
 	
-	override String getFileContents() { '''
+	override getFileContents() '''
 		package «packageName»;
 		
 		public class «simpleName» extends «sequencer.simpleName» {
 		}
-		'''.toString
-	}
-	
+	'''
+
 }
