@@ -41,6 +41,7 @@ import com.google.inject.Provider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class RichStringAwareHighlightingCalculator extends XbaseHighlightingCalculator {
 
 	@Inject
