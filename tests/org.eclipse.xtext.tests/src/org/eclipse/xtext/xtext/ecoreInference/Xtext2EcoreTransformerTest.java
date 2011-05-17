@@ -1478,6 +1478,5 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 			"Element returns xbase::XExpression : {Element} 'Hello';\n" + 
 			"terminal ID : '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;"; 
 		getResourceFromString(grammarAsString);
-//		assertTrue(resource.getErrors().get(0).getMessage().contains("containment"));
 	}
 }
