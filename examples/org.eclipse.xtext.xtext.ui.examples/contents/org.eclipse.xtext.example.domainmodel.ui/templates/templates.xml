@@ -13,7 +13,7 @@
 >entity ${name} {
 	${cursor} 
 }</template>
-    <template name="Property" description="template for an Property"
+    <template name="Property" description="template for a Property"
         id="org.eclipse.xtext.example.domainmodel.Domainmodel.Property"
         context="org.eclipse.xtext.example.domainmodel.Domainmodel.Property"
         enabled="true">${propertyName} : ${typeName}</template>
