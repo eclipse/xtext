@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.refactoring.ui;
 import com.google.inject.ImplementedBy;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public interface IRenameSupport {
 	

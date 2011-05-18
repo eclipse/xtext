@@ -13,7 +13,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 /**
  * Workaround to set visibility as long as we cannot deal with enum literals in Xtend.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class JvmVisibilityExtension {
 

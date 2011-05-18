@@ -21,7 +21,7 @@ import com.google.inject.ImplementedBy;
  * A common interface for JDT's {@link org.eclipse.jdt.internal.corext.refactoring.tagging.INameUpdating} and Xtext's
  * {@link AbstractRenameProcessor}. 
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public interface IRenameProcessorAdapter {
 

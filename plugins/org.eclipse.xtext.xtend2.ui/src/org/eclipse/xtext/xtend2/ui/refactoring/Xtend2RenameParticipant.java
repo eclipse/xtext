@@ -13,7 +13,7 @@ import org.eclipse.xtext.xtend2.ui.preferences.Xtend2Preferences;
 import com.google.inject.Inject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
 public class Xtend2RenameParticipant extends JDTRenamePartcipant {

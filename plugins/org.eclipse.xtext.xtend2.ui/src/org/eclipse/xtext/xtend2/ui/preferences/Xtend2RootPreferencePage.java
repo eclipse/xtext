@@ -12,7 +12,7 @@ import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class Xtend2RootPreferencePage extends LanguageRootPreferencePage {
 

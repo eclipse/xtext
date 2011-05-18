@@ -29,7 +29,7 @@ import com.google.inject.Guice;
 import com.google.inject.name.Names;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class PreferenceStoreAccessTest extends TestCase implements IPreferenceStoreInitializer {
 

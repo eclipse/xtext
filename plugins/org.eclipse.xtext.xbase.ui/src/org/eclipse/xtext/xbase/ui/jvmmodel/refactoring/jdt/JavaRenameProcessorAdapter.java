@@ -18,7 +18,7 @@ import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
 import org.eclipse.xtext.ui.refactoring.IRenameProcessorAdapter;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
 public class JavaRenameProcessorAdapter implements IRenameProcessorAdapter {
