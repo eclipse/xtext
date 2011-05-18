@@ -124,6 +124,18 @@ public abstract class AbstractMasterDetailsFieldEditor extends FieldEditor {
 	}
 
 	@Override
+	public void loadDefault() {
+		if (masterList != null) {
+			int selectionIndex = masterList.getSelectionIndex();
+			super.loadDefault();
+			masterList.select(selectionIndex);
+			doLoad();
+		} else {
+			super.loadDefault();
+		}
+	}
+
+	@Override
 	protected void doLoadDefault() {
 		for (Object item : items) {
 			fieldEditorPreferencePage.loadDefaults(calculateClientPreferencePrefix(item));
