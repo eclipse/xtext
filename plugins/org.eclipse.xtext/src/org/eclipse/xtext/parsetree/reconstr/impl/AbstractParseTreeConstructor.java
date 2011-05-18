@@ -446,7 +446,7 @@ public abstract class AbstractParseTreeConstructor implements IParseTreeConstruc
 				INode nextNode = nodeIterator.next();
 				if (tokenUtil.isWhitespaceNode(nextNode)) {
 					whitespaces.add((ILeafNode) nextNode);
-				} else if (nextNode == node) {
+				} else if (node.equals(nextNode)) {
 					if (whitespaces.isEmpty()) {
 						// signal to the formatter not to insert a whitespace
 						out.writeHidden(hiddenTokenHelper.getWhitespaceRuleFor(null, ""), "");
