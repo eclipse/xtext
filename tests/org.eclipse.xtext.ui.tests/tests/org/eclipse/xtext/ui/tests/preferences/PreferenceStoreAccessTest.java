@@ -76,21 +76,21 @@ public class PreferenceStoreAccessTest extends TestCase implements IPreferenceSt
 	}
 
 	public void testScope() {
-		ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(ConfigurationScope.INSTANCE, "org");
+		ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(new ConfigurationScope(), "org");
 		assertFalse("partial keys are not supported", scopedPreferenceStore.getBoolean("xtext.MyLanguage.someBoolean"));
 	}
 	
 	public void testScopeWithAnotherInstance() {
-		ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(ConfigurationScope.INSTANCE, LANGUAGE_ID);
+		ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(new ConfigurationScope(), LANGUAGE_ID);
 		assertTrue(scopedPreferenceStore.getBoolean("someBoolean"));
 	}
 	
 	public void testChainedPreferenceStore() {
-		ScopedPreferenceStore configurationStore = new ScopedPreferenceStore(ConfigurationScope.INSTANCE, LANGUAGE_ID);
+		ScopedPreferenceStore configurationStore = new ScopedPreferenceStore(new ConfigurationScope(), LANGUAGE_ID);
 		configurationStore.setValue("someInt", 12);
 		configurationStore.setValue("anotherInt", 12);
 		configurationStore.setDefault("thirdInt", 12);
-		ScopedPreferenceStore instanceStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, LANGUAGE_ID);
+		ScopedPreferenceStore instanceStore = new ScopedPreferenceStore(new InstanceScope(), LANGUAGE_ID);
 		instanceStore.setValue("someInt", 13);
 		instanceStore.setDefault("anotherInt", 13);
 		ChainedPreferenceStore chainedStore = new ChainedPreferenceStore(new IPreferenceStore[] { instanceStore, configurationStore });

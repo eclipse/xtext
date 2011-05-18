@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.editor.preferences;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.IFileEditorInput;
@@ -33,19 +34,26 @@ public class PreferenceStoreAccessImpl implements IPreferenceStoreAccess {
 		lazyInitialize();
 		return new ChainedPreferenceStore(new IPreferenceStore[] {
 				getWritablePreferenceStore(),
-				new ScopedPreferenceStore(new ConfigurationScope(), getQualifier()),
-				Activator.getDefault().getPreferenceStore(), EditorsUI.getPreferenceStore() });
+				Activator.getDefault().getPreferenceStore(), 
+				EditorsUI.getPreferenceStore() });
 	}
 
 	public IPreferenceStore getContextPreferenceStore(Object context) {
 		lazyInitialize();
-		return new ChainedPreferenceStore(new IPreferenceStore[] { getWritablePreferenceStore(context),
-				getPreferenceStore() });
+		return new ChainedPreferenceStore(new IPreferenceStore[] { 
+				getWritablePreferenceStore(context),
+				Activator.getDefault().getPreferenceStore(),
+				EditorsUI.getPreferenceStore()});
 	}
 
 	public IPreferenceStore getWritablePreferenceStore() {
 		lazyInitialize();
-		return new ScopedPreferenceStore(new InstanceScope(), getQualifier());
+		ScopedPreferenceStore result = new ScopedPreferenceStore(new InstanceScope(), getQualifier());
+		result.setSearchContexts(new IScopeContext[] {
+			new InstanceScope(),
+			new ConfigurationScope()
+		});
+		return result;
 	}
 
 	public IPreferenceStore getWritablePreferenceStore(Object context) {
@@ -54,7 +62,13 @@ public class PreferenceStoreAccessImpl implements IPreferenceStoreAccess {
 			context = ((IFileEditorInput) context).getFile().getProject();
 		}
 		if (context instanceof IProject) {
-			return new ScopedPreferenceStore(new ProjectScope((IProject) context), getQualifier());
+			ProjectScope projectScope = new ProjectScope((IProject) context);
+			ScopedPreferenceStore result = new ScopedPreferenceStore(projectScope, getQualifier());
+			result.setSearchContexts(new IScopeContext[] {
+				projectScope,
+				new InstanceScope(),
+				new ConfigurationScope()
+			});
 		}
 		return getWritablePreferenceStore();
 	}

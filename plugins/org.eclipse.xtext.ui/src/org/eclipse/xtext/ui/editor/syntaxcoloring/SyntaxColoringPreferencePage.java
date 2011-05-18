@@ -8,8 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.syntaxcoloring;
 
-import static org.eclipse.xtext.util.Strings.*;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
