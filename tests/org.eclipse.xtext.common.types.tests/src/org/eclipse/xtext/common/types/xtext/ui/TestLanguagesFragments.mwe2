@@ -11,7 +11,6 @@ import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
 var genModels =""
-var referencedGenModels = ""
 var genModel = ""
 var basePackage = ""
 var javaModelDirectory = ""

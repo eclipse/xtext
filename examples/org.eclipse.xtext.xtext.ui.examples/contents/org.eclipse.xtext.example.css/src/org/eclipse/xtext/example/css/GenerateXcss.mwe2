@@ -14,6 +14,8 @@ Workflow {
     bean = StandaloneSetup {
 		platformUri = "${runtimeProject}/../../../.."
 		platformUri = "${runtimeProject}/.."
+		registerGenModelFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+		registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
 	}
 
 	component = DirectoryCleaner {
@@ -37,12 +39,8 @@ Workflow {
 			fragment = grammarAccess.GrammarAccessFragment {}
 
 			// generates Java API for the generated EPackages 
-			fragment = ecore.EcoreGeneratorFragment {
-			    referencedGenModels = "
-			    platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel,
-			    platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel
-			    "
-			}
+			fragment = ecore.EcoreGeneratorFragment {}
+			
 			// the serialization component
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 

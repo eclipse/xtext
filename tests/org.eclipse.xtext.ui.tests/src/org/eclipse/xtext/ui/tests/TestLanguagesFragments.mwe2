@@ -13,7 +13,6 @@ import de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 import de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 
 var genModels =""
-var referencedGenModels = ""
 var genModel = ""
 var basePackage = ""
 var javaModelDirectory = ""
