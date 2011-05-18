@@ -11,6 +11,7 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
+import org.eclipse.xtext.ui.junit.util.IResourcesSetupUtil;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Binder;
@@ -50,6 +52,16 @@ public class PreferenceStoreAccessTest extends TestCase implements IPreferenceSt
 				binder.bind(IPreferenceStoreInitializer.class).toInstance(PreferenceStoreAccessTest.this);
 			}
 		}).getInstance(IPreferenceStoreAccess.class);
+	}
+	
+	@Override
+	protected void tearDown() throws Exception {
+		getWritable().setToDefault("someBoolean");
+		getWritable().setToDefault("someInt");
+		getWritable().setToDefault("anotherInt");
+		getWritable().setToDefault("thirdInt");
+		getWritable().setToDefault("newValue");
+		super.tearDown();
 	}
 
 	public void testDefault() {
@@ -97,6 +109,23 @@ public class PreferenceStoreAccessTest extends TestCase implements IPreferenceSt
 		getWritable().setValue("newValue", true);
 		assertEquals(1, keys.size());
 		assertEquals("newValue", keys.get(0));
+	}
+
+	public void testProjectScope() throws Exception {
+		try {
+			IProject project = IResourcesSetupUtil.createProject("test");
+			final List<String> keys = Lists.newArrayList();
+			preferenceStoreAccess.getContextPreferenceStore(project).addPropertyChangeListener(new IPropertyChangeListener() {
+				public void propertyChange(PropertyChangeEvent event) {
+					keys.add(event.getProperty());
+				}
+			});
+			getWritable().setValue("newValue", true);
+			assertEquals(1, keys.size());
+			assertEquals("newValue", keys.get(0));
+		} finally {
+			IResourcesSetupUtil.cleanWorkspace();
+		}
 	}
 
 	protected IPreferenceStore getReadable() {
