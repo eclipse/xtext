@@ -6,7 +6,7 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="IgnoreCaseImportsTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="classpath:/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.genmodel#//ignoreCaseLinkingTest">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.genmodel#//ignoreCaseLinkingTest">
   <genPackages prefix="IgnoreCaseImportsTest" basePackage="org.eclipse.xtext.linking"
       disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/IgnoreCaseImportsTestLanguage.ecore#/">
     <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/IgnoreCaseImportsTestLanguage.ecore#//Model">

@@ -11,6 +11,8 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.grammarinheritance.baseInheritanceTest.BaseInheritanceTestPackage;
+
 import org.eclipse.xtext.grammarinheritance.inheritanceTest.InheritanceTestPackage;
 
 import org.eclipse.xtext.grammarinheritance.inheritanceTest2.InheritanceTest2Factory;
@@ -82,6 +84,7 @@ public class InheritanceTest2PackageImpl extends EPackageImpl implements Inherit
 
     // Initialize simple dependencies
     InheritanceTestPackage.eINSTANCE.eClass();
+    BaseInheritanceTestPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theInheritanceTest2Package.createPackageContents();
