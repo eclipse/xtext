@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.syntaxcoloring;
 
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -35,6 +36,9 @@ public class HighlightingHelper implements IHighlightingHelper, IPropertyChangeL
 	@Inject
 	private IPreferenceStoreAccess preferenceStoreAccessor;
 	
+	@Inject
+	private TextAttributeProvider textAttributeProvider;
+	
 	/** Highlighting presenter */
 	private HighlightingPresenter fPresenter;
 	/** Highlighting reconciler */
@@ -49,6 +53,8 @@ public class HighlightingHelper implements IHighlightingHelper, IPropertyChangeL
 	/** The presentation reconciler */
 	private XtextPresentationReconciler fPresentationReconciler;
 
+	private IPreferenceStore preferenceStore;
+
 	public void install(XtextEditor editor, XtextSourceViewer sourceViewer) {
 		fEditor= editor;
 		fSourceViewer= sourceViewer;
@@ -59,7 +65,8 @@ public class HighlightingHelper implements IHighlightingHelper, IPropertyChangeL
 			fConfiguration= null;
 			fPresentationReconciler= null;
 		}
-		preferenceStoreAccessor.getPreferenceStore().addPropertyChangeListener(this);
+		preferenceStore = getPreferenceStoreAccessor().getPreferenceStore();
+		preferenceStore.addPropertyChangeListener(this);
 		enable();
 	}
 
@@ -78,7 +85,7 @@ public class HighlightingHelper implements IHighlightingHelper, IPropertyChangeL
 
 	public void uninstall() {
 		disable();
-		preferenceStoreAccessor.getPreferenceStore().removePropertyChangeListener(this);
+		preferenceStore.removePropertyChangeListener(this);
 		fEditor= null;
 		fSourceViewer= null;
 		fConfiguration= null;
@@ -134,7 +141,9 @@ public class HighlightingHelper implements IHighlightingHelper, IPropertyChangeL
 	}
 
 	public void propertyChange(PropertyChangeEvent event) {
-		if (fReconciler != null && event.getProperty().contains(".syntaxColorer.tokenStyles"))
+		if (fReconciler != null && event.getProperty().contains(".syntaxColorer.tokenStyles")) {
+			textAttributeProvider.propertyChange(event);
 			fReconciler.refresh();
+		}
 	}
 }
