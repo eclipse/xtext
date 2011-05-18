@@ -82,7 +82,9 @@ Workflow {
 			fragment = XtextAntlrUiGeneratorFragment {
 				options = auto-inject {}
 			}
-			fragment = refactoring.RefactorElementNameFragment {}
+			fragment = refactoring.RefactorElementNameFragment {
+				useJdtRefactoring = true
+			}
 			fragment = types.TypesGeneratorFragment {}
 			fragment = xbase.XbaseGeneratorFragment {
 				generateXtendInferrer = false
