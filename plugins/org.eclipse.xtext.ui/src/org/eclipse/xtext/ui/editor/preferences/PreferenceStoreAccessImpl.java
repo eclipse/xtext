@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.editor.preferences;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.editors.text.EditorsUI;
@@ -32,6 +33,7 @@ public class PreferenceStoreAccessImpl implements IPreferenceStoreAccess {
 		lazyInitialize();
 		return new ChainedPreferenceStore(new IPreferenceStore[] {
 				getWritablePreferenceStore(),
+				new ScopedPreferenceStore(new ConfigurationScope(), getQualifier()),
 				Activator.getDefault().getPreferenceStore(), EditorsUI.getPreferenceStore() });
 	}
 
@@ -43,7 +45,7 @@ public class PreferenceStoreAccessImpl implements IPreferenceStoreAccess {
 
 	public IPreferenceStore getWritablePreferenceStore() {
 		lazyInitialize();
-		return new ScopedPreferenceStore(new ConfigurationScope(), getQualifier());
+		return new ScopedPreferenceStore(new InstanceScope(), getQualifier());
 	}
 
 	public IPreferenceStore getWritablePreferenceStore(Object context) {

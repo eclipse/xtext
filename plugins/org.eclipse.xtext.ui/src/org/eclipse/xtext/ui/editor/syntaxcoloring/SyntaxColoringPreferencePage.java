@@ -8,11 +8,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.syntaxcoloring;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.xtext.ui.editor.preferences.AbstractPreferencePage;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 import org.eclipse.xtext.util.Triple;
@@ -65,6 +68,15 @@ public class SyntaxColoringPreferencePage extends AbstractPreferencePage impleme
 
 	public int compare(Triple<String, String, TextStyle> left, Triple<String, String, TextStyle> right) {
 		return left.getSecond().compareTo(right.getSecond());
+	}
+	
+	/**
+	 * TODO: better use unqualified names in preference store. Left this workaround not to break API.
+	 */
+	@Override
+	protected void addField(FieldEditor editor) {
+		editor.setPreferenceName(qualifiedName() + "." + editor.getPreferenceName());
+		super.addField(editor);
 	}
 
 }
