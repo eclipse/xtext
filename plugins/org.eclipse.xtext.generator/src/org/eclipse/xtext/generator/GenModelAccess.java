@@ -91,6 +91,7 @@ public class GenModelAccess {
 			if (model instanceof GenModel)
 				for (GenPackage genPkg : ((GenModel) model).getGenPackages())
 					if (pkg.getNsURI().equals(genPkg.getEcorePackage().getNsURI())) {
+						genPkg.getEcorePackage().getEClassifiers();
 						return genPkg;
 					}
 		throw new RuntimeException("No GenPackage for NsURI " + pkg.getNsURI() + " found in " + genModelURI);
