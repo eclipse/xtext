@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.jvmmodel;
 
 import static com.google.common.collect.Sets.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Collections;
 import java.util.Set;
@@ -16,13 +17,20 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.EcoreUtil2;
+
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssociator {
 
+	@Inject@Named(Constants.LANGUAGE_NAME)
+	private String languageID;
+	
 	public void associate(EObject sourceElement, EObject jvmElement) {
 		associate(sourceElement, jvmElement, false);
 	}
@@ -48,7 +56,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	protected void setSourceAdapter(EObject targetElement, EObject associatedElement) {
 		AbstractAssociationAdapter adapter = getAssociationAdapter(targetElement);
 		if (adapter == null) {
-			adapter = new SourceAssociationAdapter();
+			adapter = new SourceAssociationAdapter(languageID);
 			targetElement.eAdapters().add(adapter);
 		} else
 			checkAdapter(adapter, false);
@@ -58,7 +66,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	protected void setJvmAdapter(EObject targetElement, EObject associatedElement, boolean isPrimary) {
 		AbstractAssociationAdapter adapter = getAssociationAdapter(targetElement);
 		if (adapter == null) {
-			adapter = new JvmAssociationAdapter();
+			adapter = new JvmAssociationAdapter(languageID);
 			targetElement.eAdapters().add(adapter);
 		} else
 			checkAdapter(adapter, true);
@@ -106,17 +114,25 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	}
 
 	protected AbstractAssociationAdapter getAssociationAdapter(EObject jvmOrSourceElement) {
-		return (AbstractAssociationAdapter) EcoreUtil.getAdapter(jvmOrSourceElement.eAdapters(),
+		AbstractAssociationAdapter adapter = (AbstractAssociationAdapter) EcoreUtil.getAdapter(jvmOrSourceElement.eAdapters(),
 				AbstractAssociationAdapter.class);
+		return (adapter != null && equal(adapter.getLanguageID(), languageID)) ? adapter : null;
 	}
 
 	protected static abstract class AbstractAssociationAdapter extends AdapterImpl {
 		private Set<EObject> associatedElements;
+		
+		private String languageID;
 
-		public AbstractAssociationAdapter() {
+		public AbstractAssociationAdapter(String languageID) {
 			super();
+			this.languageID = languageID;
 		}
 
+		public String getLanguageID() {
+			return languageID;
+		}
+		
 		protected boolean addAssociation(EObject associatedElement) {
 			if (associatedElements == null)
 				associatedElements = newLinkedHashSet();
@@ -134,10 +150,17 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	}
 
 	protected static class SourceAssociationAdapter extends AbstractAssociationAdapter {
+		public SourceAssociationAdapter(String languageID) {
+			super(languageID);
+		}
 	}
 
 	protected static class JvmAssociationAdapter extends AbstractAssociationAdapter {
 		private EObject primaryAssociatedElement;
+
+		public JvmAssociationAdapter(String languageID) {
+			super(languageID);
+		}
 
 		public EObject getPrimaryAssociatedElement() {
 			return primaryAssociatedElement;
@@ -148,5 +171,4 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			addAssociation(primaryAssociatedElement);
 		}
 	}
-
 }
