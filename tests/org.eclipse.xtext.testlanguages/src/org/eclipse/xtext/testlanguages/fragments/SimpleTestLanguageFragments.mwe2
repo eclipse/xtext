@@ -21,9 +21,7 @@ LanguageConfig {
 	fragment = grammarAccess.GrammarAccessFragment {}
 
 	// generates Java API for the generated EPackages 
-	fragment = ecore.EcoreGeneratorFragment {
-	// referencedGenModels = "uri to genmodel, uri to next genmodel"
-	}
+	fragment = ecore.EcoreGeneratorFragment {}
 
 	// the serialization component
 	fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
