@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.codetemplates.ui.partialEditing;
 
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.xtext.ui.editor.XtextPresentationReconciler;
@@ -44,11 +45,14 @@ public class HighlightingHelper implements IPropertyChangeListener {
 	/** The presentation reconciler */
 	private XtextPresentationReconciler fPresentationReconciler;
 
+	private IPreferenceStore preferenceStore;
+
 	public void install(XtextSourceViewerConfiguration configuration, XtextSourceViewer sourceViewer) {
 		fSourceViewer= sourceViewer;
 		fConfiguration= configuration;
 		fPresentationReconciler= (XtextPresentationReconciler) fConfiguration.getPresentationReconciler(sourceViewer);
-		preferenceStoreAccessor.getPreferenceStore().addPropertyChangeListener(this);
+		preferenceStore = getPreferenceStoreAccessor().getPreferenceStore();
+		preferenceStore.addPropertyChangeListener(this);
 		enable();
 	}
 
@@ -67,7 +71,7 @@ public class HighlightingHelper implements IPropertyChangeListener {
 
 	public void uninstall() {
 		disable();
-		preferenceStoreAccessor.getPreferenceStore().removePropertyChangeListener(this);
+		preferenceStore.removePropertyChangeListener(this);
 		fSourceViewer= null;
 		fConfiguration= null;
 		fPresentationReconciler= null;
