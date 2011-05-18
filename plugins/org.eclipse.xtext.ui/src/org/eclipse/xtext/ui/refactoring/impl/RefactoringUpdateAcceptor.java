@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
-import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Maps.*;
 
 import java.util.Map;
