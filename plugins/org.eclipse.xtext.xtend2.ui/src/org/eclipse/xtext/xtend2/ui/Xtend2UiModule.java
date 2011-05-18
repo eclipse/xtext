@@ -22,6 +22,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeI
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.refactoring.ui.RenameElementHandler;
+import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JDTRenamePartcipant;
 import org.eclipse.xtext.xtend2.ui.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtext.xtend2.ui.autoedit.TokenTypeToPartitionMapper;
 import org.eclipse.xtext.xtend2.ui.contentassist.ImportingTypesProposalProvider;
@@ -39,6 +40,7 @@ import org.eclipse.xtext.xtend2.ui.outline.Xtend2OutlinePage;
 import org.eclipse.xtext.xtend2.ui.preferences.Xtend2Preferences;
 import org.eclipse.xtext.xtend2.ui.preferences.Xtend2RootPreferencePage;
 import org.eclipse.xtext.xtend2.ui.refactoring.Xtend2RenameElementHandler;
+import org.eclipse.xtext.xtend2.ui.refactoring.Xtend2RenameParticipant;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -135,6 +137,10 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 	@Override
 	public Class<? extends RenameElementHandler> bindRenameElementHandler() {
 		return Xtend2RenameElementHandler.class;
+	}
+	
+	public Class<? extends JDTRenamePartcipant> bindJDTRenamePartcipant() {
+		return Xtend2RenameParticipant.class;
 	}
 	
 }
