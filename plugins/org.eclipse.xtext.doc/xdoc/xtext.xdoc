@@ -1,13 +1,30 @@
 document[Xtext Documentation]
 
 codelanguage-def[Java][
-	abstract, continue, for, new, switch, assert, default, goto, package, synchronized, boolean, do,
-	if, private, this, break, double, implements, protected, throw, byte, else, import, public, throws,
-	case, enum, instanceof, return, transient, catch, extends, int, short, try, char, final, interface,
-	static, void, class, finally, long, strictfp, volatile, const, float, native, super, while
+	abstract,continue,for,new,switch,assert,default,goto,package,synchronized,
+	boolean,do,if,private,this,break,double,implements,protected,throw,
+	byte,else,import,public,throws,
+	case,enum,instanceof,return,transient,
+	catch,extends,int,short,try,
+	char,final,interface,static,void,
+	class,finally,long,strictfp,volatile,
+	const,float,native,super,while,null
 ]
 
-codelanguage-def[Xtext][generate, grammar, import, as, returns, terminal, enum, hidden, with]
+codelanguage-def[Xtext][
+	grammar,
+	import,
+	generate,
+	terminal,
+	enum,
+	returns,
+	with,
+	hidden,
+	as,
+	current,
+	fragment,
+	EOF
+]
 
 codelanguage-def[MWE2][module, var, auto-inject, import, true, false]
 
