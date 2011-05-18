@@ -14,16 +14,12 @@ import org.eclipse.xtext.generator.*
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
 
-var ametamodel.genmodel = "platform:/resource/${projectName}/src/org/eclipse/xtext/grammarinheritance/ametamodel.genmodel"
-var enums.genmodel = "platform:/resource/${projectName}/src/org/eclipse/xtext/enumrules/enums.genmodel"
-var baseinheritance.genmodel = "platform:/resource/${projectName}/src-gen/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.genmodel"
-var inheritance.genmodel = "platform:/resource/${projectName}/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.genmodel"
-var xtext.genmodel = "platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.genmodel"
-var supertest.genmodel = "platform:/resource/${projectName}/src-gen/org/eclipse/xtext/generator/ecore/SuperTestLanguage.genmodel"
-
 Workflow {
 	bean = StandaloneSetup {
 		platformUri = "${runtimeProject}/../.."
+		registerGenModelFile = "platform:/resource/${projectName}/src/org/eclipse/xtext/grammarinheritance/ametamodel.genmodel"
+		registerGenModelFile = "platform:/resource/${projectName}/src/org/eclipse/xtext/enumrules/enums.genmodel"
+		registerGenModelFile = "platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.genmodel" 
 	}
 	
 	component = DirectoryCleaner {
@@ -41,9 +37,7 @@ Workflow {
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/generator/ecore/SubTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {
-				referencedGenModels = supertest.genmodel
-			}
+			fragment = @TestLanguagesFragments {}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xtext"
@@ -100,9 +94,7 @@ Workflow {
 		language = {
 			uri = "classpath:/org/eclipse/xtext/linking/IgnoreCaseNamespacesTestLanguage.xtext"
 			fragment = CompositeGeneratorFragment {
-				fragment = @TestLanguagesFragments {
-					referencedGenModels = "classpath:/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.genmodel"
-				}
+				fragment = @TestLanguagesFragments {}
 				fragment = scoping.ImportNamespacesScopingFragment {
 					ignoreCase = true
 				}
@@ -111,9 +103,7 @@ Workflow {
 		language = {
 			uri = "classpath:/org/eclipse/xtext/linking/IgnoreCaseImportsTestLanguage.xtext"
 			fragment = CompositeGeneratorFragment {
-				fragment = @TestLanguagesFragments {
-					referencedGenModels = "classpath:/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.genmodel"
-				}
+				fragment = @TestLanguagesFragments {}
 				fragment = scoping.ImportURIScopingFragment {
 					ignoreCase = true
 				}
@@ -129,9 +119,7 @@ Workflow {
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/enumrules/EnumRulesTestLanguage.xtext"
-			fragment = @TestLanguagesFragments { 
-				referencedGenModels = enums.genmodel
-			}
+			fragment = @TestLanguagesFragments {}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/enumrules/EnumAndReferenceTestLanguage.xtext"
@@ -158,21 +146,15 @@ Workflow {
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {
-				referencedGenModels = ametamodel.genmodel
-			}
+			fragment = @TestLanguagesFragments {}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {
-				referencedGenModels = baseinheritance.genmodel
-			}
+			fragment = @TestLanguagesFragments {}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTest2Language.xtext"
-			fragment = @TestLanguagesFragments {
-				referencedGenModels = inheritance.genmodel
-			}
+			fragment = @TestLanguagesFragments {}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/index/IndexTestLanguage.xtext"
@@ -180,9 +162,7 @@ Workflow {
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {
-				referencedGenModels = xtext.genmodel
-			}
+			fragment = @TestLanguagesFragments {}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/metamodelreferencing/tests/MultiGenMMTestLanguage.xtext"
@@ -201,21 +181,18 @@ Workflow {
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug289524ExTestLanguage.xtext"
 			fragment = @TestLanguagesFragmentsEx {
-				referencedGenModels = inheritance.genmodel
 				backtrack = true
 			}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug296889TestLanguage.xtext"
 			fragment = @TestLanguagesFragments {
-				referencedGenModels = inheritance.genmodel
 				backtrack = true
 			}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug296889ExTestLanguage.xtext"
 			fragment = @TestLanguagesFragmentsEx {
-				referencedGenModels = inheritance.genmodel
 				backtrack = true
 			}
 		}

@@ -18,6 +18,7 @@ var runtimeProject = "../${projectName}"
 Workflow {
 	bean = StandaloneSetup {
 		platformUri="${runtimeProject}/.."
+		registerGenModelFile = "platform:/resource/${projectName}/src/org/eclipse/xtext/generator/ecore/Genmodel.genmodel"
 	}
 	
 	component = DirectoryCleaner {
@@ -36,9 +37,7 @@ Workflow {
 		*/
 		language = {
 			uri = "classpath:/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {
-				referencedGenModels = "platform:/resource/${projectName}/src/org/eclipse/xtext/generator/ecore/Genmodel.genmodel"
-			}
+			fragment = @TestLanguagesFragments {}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/generator/grammarAccess/GrammarAccessTestLanguage.xtext"
