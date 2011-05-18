@@ -101,6 +101,7 @@ public abstract class AbstractDetailsPart extends FieldEditorPreferencePage {
 	public final void propertyChange(PropertyChangeEvent event) {
 		if (event.getSource() instanceof FieldEditor) {
 			FieldEditor fe = (FieldEditor) event.getSource();
+			internalStore.setValue(fe.getPreferenceName(), fe.getPreferenceStore().getDefaultString(fe.getPreferenceName()));
 			fe.setPreferenceStore(internalStore);
 			fe.store();
 		}
