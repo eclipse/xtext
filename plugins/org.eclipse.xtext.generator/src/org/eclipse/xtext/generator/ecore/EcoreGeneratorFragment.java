@@ -275,6 +275,9 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		for (EPackage pkg : packs)
 			if (EcorePlugin.getEPackageNsURIToGenModelLocationMap().containsKey(pkg.getNsURI()))
 				result.add(GenModelAccess.getGenPackage(pkg));
+			else
+				log.warn("Could not find GenModel for '" + pkg.getNsURI()
+						+ "'; Adding the package to generated GenModel instead.");
 		return result;
 	}
 
