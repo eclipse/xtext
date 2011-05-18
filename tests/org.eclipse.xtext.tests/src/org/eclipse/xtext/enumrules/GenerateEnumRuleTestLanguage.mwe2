@@ -14,11 +14,11 @@ import org.eclipse.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
-var enums.genmodel = "platform:/resource/org.eclipse.xtext.tests/src/org/eclipse/xtext/enumrules/enums.genmodel"
 
 Workflow {
 	bean = StandaloneSetup {
 		platformUri="${runtimeProject}/.."
+		registerGenModelFile = "platform:/resource/org.eclipse.xtext.tests/src/org/eclipse/xtext/enumrules/enums.genmodel"
 	}
 	
 	component = DirectoryCleaner {
@@ -31,9 +31,7 @@ Workflow {
 		
 		language = {
 			uri = "classpath:/org/eclipse/xtext/enumrules/EnumRulesTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {
-				referencedGenModels = enums.genmodel
-			}
+			fragment = @TestLanguagesFragments {}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/enumrules/EnumAndReferenceTestLanguage.xtext"
