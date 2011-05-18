@@ -13,11 +13,11 @@
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
-«DEFINE generate FOR Grammar»«ENDDEFINE»
+«DEFINE generate(boolean useJdtRefactoring) FOR Grammar»«ENDDEFINE»
 
-«DEFINE addToPluginXmlRt FOR Grammar-»«ENDDEFINE»
+«DEFINE addToPluginXmlRt(boolean useJdtRefactoring) FOR Grammar-»«ENDDEFINE»
 
-«DEFINE addToPluginXmlUi FOR Grammar-»
+«DEFINE addToPluginXmlUi(boolean useJdtRefactoring) FOR Grammar-»
    	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
@@ -43,6 +43,21 @@
          </command>
       </menuContribution>
    </extension>
+   «IF useJdtRefactoring-»
+   <extension
+         point="org.eclipse.ltk.core.refactoring.renameParticipants">
+      <renameParticipant
+            class="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JDTRenamePartcipant"
+            id="«name».jdtRenameParticipant"
+            name="«toSimpleName(name)» rename participant">
+         <enablement>
+         	<with variable="element">
+        		<instanceof value="org.eclipse.jdt.core.IMember"/>
+        	</with>
+        </enablement>
+      </renameParticipant>
+   </extension>
+   «ENDIF-»
 «ENDDEFINE»
 
-«DEFINE addToStandaloneSetup FOR Grammar-»«ENDDEFINE»
+«DEFINE addToStandaloneSetup(boolean useJdtRefactoring) FOR Grammar-»«ENDDEFINE»
