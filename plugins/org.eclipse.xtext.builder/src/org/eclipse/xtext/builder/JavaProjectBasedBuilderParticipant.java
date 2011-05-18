@@ -25,7 +25,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
@@ -99,8 +98,7 @@ public class JavaProjectBasedBuilderParticipant implements IXtextBuilderParticip
 	 * @since 2.0
 	 */
 	protected boolean isValidOutputFolder(IJavaProject javaProject, final IFolder srcGenFolder) {
-		IPackageFragmentRoot root = javaProject.getPackageFragmentRoot(srcGenFolder);
-		return root.exists();
+		return srcGenFolder != null && srcGenFolder.exists();
 	}
 
 	/**
