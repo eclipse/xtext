@@ -16,19 +16,12 @@ import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapper;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter.IComparator;
+import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
+import org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
-import org.eclipse.xtext.ui.refactoring.IRenameProcessorAdapter;
-import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
-import org.eclipse.xtext.ui.refactoring.impl.RefactoringResourceSetProvider;
-import org.eclipse.xtext.ui.refactoring.ui.IRenameSupport;
 import org.eclipse.xtext.ui.refactoring.ui.RenameElementHandler;
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelRefactoringResourceSetProvider;
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JavaRenameProcessorAdapter;
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JdtAwareRenameSupportFactory;
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JvmRenameElementHandler;
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JvmRenameRefactoringProvider;
 import org.eclipse.xtext.xtend2.ui.autoedit.AutoEditStrategyProvider;
 import org.eclipse.xtext.xtend2.ui.autoedit.TokenTypeToPartitionMapper;
 import org.eclipse.xtext.xtend2.ui.contentassist.ImportingTypesProposalProvider;
@@ -123,29 +116,22 @@ public class Xtend2UiModule extends org.eclipse.xtext.xtend2.ui.AbstractXtend2Ui
 		return XtendHyperlinkHelper.class;
 	}
 
-	public Class<? extends RenameElementHandler> bindRenameElementHandler() {
-		return JvmRenameElementHandler.class;
-	}
-
-	public Class<? extends IRenameRefactoringProvider> bindIRenameRefactoringProvider() {
-		return JvmRenameRefactoringProvider.class;
-	}
-
-	public Class<? extends IRenameProcessorAdapter.Factory> bindIRenameProcessorAdapter$Factory() {
-		return JavaRenameProcessorAdapter.Factory.class;
-	}
-	
-	public Class<? extends IRenameSupport.Factory> bindIRenameSupport$Factory() {
-		return JdtAwareRenameSupportFactory.class;
-	}
-
-	// TODO: remove this after regenerating xtend
-	public Class<? extends RefactoringResourceSetProvider> bindRefactoringResourceSetProvider() {
-		return JvmModelRefactoringResourceSetProvider.class;
-	}
-	
+	@Override
 	public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider() {
 		return XtendHoverProvider.class;
+	}
+	
+	public void configurePreferenceInitializer(Binder binder) {
+		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("Xtend2RootPreferences")).to(Xtend2Preferences.Initializer.class);
+	}
+	
+	public Class<? extends LanguageRootPreferencePage> bindLanguageRootPreferencePage() {
+		return Xtend2RootPreferencePage.class;
+	}
+
+	@Override
+	public Class<? extends RenameElementHandler> bindRenameElementHandler() {
+		return Xtend2RenameElementHandler.class;
 	}
 	
 }
