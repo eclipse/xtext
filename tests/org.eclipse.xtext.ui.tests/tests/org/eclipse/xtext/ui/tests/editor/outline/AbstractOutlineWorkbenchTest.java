@@ -13,6 +13,7 @@ import java.util.concurrent.TimeoutException;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -60,7 +61,7 @@ public abstract class AbstractOutlineWorkbenchTest extends AbstractEditorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		preferenceStore = new ScopedPreferenceStore(new ConfigurationScope(), getEditorId());
+		preferenceStore = new ScopedPreferenceStore(new InstanceScope(), getEditorId());
 		comparer = new IOutlineNodeComparer.Default();
 		modelAsText = "one { two {} three {} } four {}";
 		file = IResourcesSetupUtil.createFile("test/test.outlinetestlanguage", modelAsText);
