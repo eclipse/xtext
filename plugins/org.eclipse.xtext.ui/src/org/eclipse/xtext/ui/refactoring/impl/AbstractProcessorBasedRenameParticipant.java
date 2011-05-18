@@ -28,6 +28,7 @@ import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.participants.CheckConditionsContext;
 import org.eclipse.ltk.core.refactoring.participants.RenameParticipant;
 import org.eclipse.ltk.core.refactoring.participants.RenameProcessor;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.ui.internal.Activator;
 import org.eclipse.xtext.ui.refactoring.IRenameProcessorAdapter;
@@ -35,6 +36,7 @@ import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -54,6 +56,9 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 
 	@Inject
 	private IRenameProcessorAdapter.Factory processorAdapterFactory;
+	
+	@Inject@Named(Constants.LANGUAGE_NAME)
+	private String languageName;
 
 	private RefactoringStatus status;
 
@@ -93,7 +98,7 @@ public abstract class AbstractProcessorBasedRenameParticipant extends RenamePart
 
 	@Override
 	public String getName() {
-		return getClass().getName();
+		return languageName;
 	}
 
 	@Override
