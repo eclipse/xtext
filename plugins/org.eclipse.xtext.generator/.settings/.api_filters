@@ -16,4 +16,12 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java" type="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment">
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
+                <message_argument value="registerGenmodel(GenModel)"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>
