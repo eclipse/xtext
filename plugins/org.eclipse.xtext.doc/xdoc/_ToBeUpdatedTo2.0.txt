@@ -7,7 +7,7 @@
 # 015-getting-started.xdoc
 # 016-working-with-Xtext-models.xdoc
 # 017-getting-started-xpand.xdoc
-SZ 020-grammar-language.xdoc
+first iteration done (SZ) 020-grammar-language.xdoc
 SE 030-generator.xdoc
 040-dependency-injection.xdoc
 050-heading-runtime.xdoc
