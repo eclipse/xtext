@@ -23,7 +23,7 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class LinkedEditingUndoSupport {
 

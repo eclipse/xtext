@@ -36,7 +36,7 @@ import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
 public class FindReferenceURINormalizationTest extends TestCase {

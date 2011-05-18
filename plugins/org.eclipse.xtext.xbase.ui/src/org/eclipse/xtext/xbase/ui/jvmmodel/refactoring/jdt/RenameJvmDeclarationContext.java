@@ -20,7 +20,7 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 /**
  * A {@link IRenameElementContext} that triggers a JDT rename refactoring.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
 public class RenameJvmDeclarationContext extends IRenameElementContext.Impl {

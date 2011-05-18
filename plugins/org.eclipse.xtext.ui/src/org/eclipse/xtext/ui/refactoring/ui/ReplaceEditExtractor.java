@@ -27,7 +27,7 @@ import org.eclipse.xtext.util.IAcceptor;
 /**
  * Extracts the {@link ReplaceEdit}s for a specific {@link IDocument} from a {@link Change}.
  * 
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 public class ReplaceEditExtractor {
 

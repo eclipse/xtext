@@ -24,7 +24,7 @@ import org.eclipse.xtext.ui.refactoring.ui.IRenameSupport;
 import com.google.inject.Inject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
 public class JdtAwareRenameSupportFactory extends Factory {
