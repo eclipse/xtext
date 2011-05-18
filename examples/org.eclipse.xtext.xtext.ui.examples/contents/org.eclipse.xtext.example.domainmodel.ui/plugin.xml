@@ -204,7 +204,21 @@
          </command>
       </menuContribution>
    </extension>
-   <extension point="org.eclipse.compare.contentViewers">
+   <extension
+         point="org.eclipse.ltk.core.refactoring.renameParticipants">
+      <renameParticipant
+            class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JDTRenamePartcipant"
+            id="org.eclipse.xtext.example.domainmodel.Domainmodel.jdtRenameParticipant"
+            name="Domainmodel rename participant">
+         <enablement>
+         	<with variable="element">
+        		<instanceof value="org.eclipse.jdt.core.IMember"/>
+        	</with>
+        </enablement>
+      </renameParticipant>
+   </extension>
+
+  <extension point="org.eclipse.compare.contentViewers">
     <viewer id="org.eclipse.xtext.example.domainmodel.Domainmodel.compare.contentViewers"
             class="org.eclipse.xtext.example.domainmodel.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
             extensions="dmodel">
@@ -222,6 +236,8 @@
             extensions="dmodel">
     </provider>
   </extension>
+
+
    <extension
          point="org.eclipse.xtext.builder.participant">
       <participant
