@@ -14,7 +14,6 @@ import de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 import de.itemis.xtext.antlr.ex.ca.ContentAssistParserGeneratorFragment
 
 var genModels =""
-var referencedGenModels = ""
 var genModel = ""
 var basePackage = ""
 var javaModelDirectory = ""

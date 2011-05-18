@@ -37,6 +37,10 @@ Workflow {
 	«FOREACH EPackageInfos AS ePackageInfo»«IF ePackageInfo.EPackageJavaFQN!=null-»
 		registerGeneratedEPackage = "«ePackageInfo.EPackageJavaFQN»"
 	«ENDIF»«ENDFOREACH-»
+	«FOREACH EPackageInfos.collect(e|e.genmodelURI).toSet() AS genmodelURI»
+		// registerGenModelFile = "«genmodelURI»"
+	«ENDFOREACH-»
+	
 	}
 
 	component = DirectoryCleaner {
@@ -60,10 +64,7 @@ Workflow {
 			fragment = grammarAccess.GrammarAccessFragment {}
 
 			// generates Java API for the generated EPackages
-			// fragment = ecore.EcoreGeneratorFragment {
-			// 		referencedGenModels = "«FOREACH EPackageInfos.collect(e|e.genmodelURI).toSet() AS genmodelURI ITERATOR iter
-		»«genmodelURI»«IF !iter.lastIteration», «ENDIF»«ENDFOREACH-»"
-			// }
+			// fragment = ecore.EcoreGeneratorFragment {}
 
 			// the serialization component
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}

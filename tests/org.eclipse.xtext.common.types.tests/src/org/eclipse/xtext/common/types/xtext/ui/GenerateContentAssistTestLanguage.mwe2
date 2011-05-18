@@ -21,6 +21,7 @@ var runtimeProject = "../${projectName}"
 Workflow {
 	bean = StandaloneSetup {
 		platformUri = "${runtimeProject}/../.."
+		registerGenModelFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
 	} 
 	
 	component = DirectoryCleaner {
@@ -38,7 +39,6 @@ Workflow {
 			uri="classpath:/org/eclipse/xtext/common/types/xtext/ui/ContentAssistTestLanguage.xtext"
 			fileExtensions = "typesAssistTest"
 			fragment = @TestLanguagesFragments {
-				referencedGenModels = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
 				file.extensions = "typesAssistTest"
 			}
 		}
