@@ -17,7 +17,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.texteditor.ITextEditor;
-import org.eclipse.xtext.ui.PluginImageHelper;
+import org.eclipse.xtext.ui.IImageHelper;
 
 import com.google.inject.Inject;
 
@@ -31,7 +31,7 @@ public class NewXtend2ClassWizard extends NewElementWizard {
 	private NewXtend2ClassWizardPage fPage;
 
 	@Inject
-	public NewXtend2ClassWizard(PluginImageHelper imgHelper, NewXtend2ClassWizardPage fPage) {
+	public NewXtend2ClassWizard(IImageHelper imgHelper, NewXtend2ClassWizardPage fPage) {
 		this.fPage= fPage;
 		Image image = imgHelper.getImage("xtend_wizard_big.png");
 		setDefaultPageImageDescriptor(ImageDescriptor.createFromImage(image));
