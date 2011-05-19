@@ -209,4 +209,28 @@ public class NfaToGrammarTest extends AbstractXtextTests {
 		y.add(x);
 		assertEquals("start x (y x)* stop", nfa2g(start, stop));
 	}
+
+	public void testOptionalChain1() {
+		S start = new S("start");
+		S stop = new S("stop");
+		S x = new S("x");
+		S y = new S("y");
+		start.add(x, y, stop);
+		x.add(y, stop);
+		y.add(stop);
+		assertEquals("start x? y? stop", nfa2g(start, stop));
+	}
+
+	public void testOptionalChain2() {
+		S start = new S("start");
+		S stop = new S("stop");
+		S x = new S("x");
+		S y = new S("y");
+		S z = new S("z");
+		start.add(x, y, z, stop);
+		x.add(y, z, stop);
+		y.add(z, stop);
+		z.add(stop);
+		assertEquals("start x? y? z? stop", nfa2g(start, stop));
+	}
 }
