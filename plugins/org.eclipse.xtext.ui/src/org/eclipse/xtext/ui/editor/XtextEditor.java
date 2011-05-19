@@ -85,6 +85,7 @@ import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingHelper;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.TextAttributeProvider;
 import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
 import org.eclipse.xtext.ui.internal.Activator;
 
@@ -135,6 +136,9 @@ public class XtextEditor extends TextEditor {
 
 	@Inject
 	private IPreferenceStoreAccess preferenceStoreAccess;
+	
+	@Inject
+	private TextAttributeProvider textAttributeProvider;
 
 	private ISelectionChangedListener selectionChangedListener;
 	
@@ -465,6 +469,7 @@ public class XtextEditor extends TextEditor {
 		// handlePrefStoreChanged service
 		boolean tokenStyleChanged = event.getProperty().contains(".syntaxColorer.tokenStyles");
 		if (tokenStyleChanged) {
+			textAttributeProvider.propertyChange(event);
 			initializeViewerColors(getSourceViewer());
 			getSourceViewer().invalidateTextPresentation();
 		}
