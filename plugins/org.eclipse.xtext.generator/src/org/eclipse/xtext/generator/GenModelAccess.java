@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -77,8 +78,15 @@ public class GenModelAccess {
 
 	public static GenPackage getGenPackage(EPackage pkg) {
 		URI genModelURI = EcorePlugin.getEPackageNsURIToGenModelLocationMap().get(pkg.getNsURI());
-		if (genModelURI == null)
-			throw new RuntimeException("No GenModel for EPackage '" + pkg.getNsURI() + "' is registered.");
+		if (genModelURI == null) {
+			String from = pkg.eResource() != null ? " from " + pkg.eResource().getURI() : "";
+			StringBuilder buf = new StringBuilder();
+			buf.append("Could not find a GenModel for EPackage '" + pkg.getNsURI() + "'" + from + "\n");
+			buf.append("If the missing GenModel has been generated via " + EcoreGeneratorFragment.class.getSimpleName());
+			buf.append(" make sure to run it first in the workflow.\n");
+			buf.append("If you have a *.genmodel-file, make sure to register it via StandaloneSetup.registerGenModelFile(String)");
+			throw new RuntimeException(buf.toString());
+		}
 		ResourceSet resourceSet = pkg.eResource().getResourceSet();
 		if (resourceSet == null)
 			throw new RuntimeException("There is no ResourceSet for EPackage '" + pkg.getNsURI() + "'. "
