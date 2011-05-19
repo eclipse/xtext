@@ -13,7 +13,7 @@ import org.eclipse.jdt.internal.ui.JavaPluginImages;
 import org.eclipse.jdt.internal.ui.viewsupport.JavaElementImageProvider;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.ui.PluginImageHelper;
+import org.eclipse.xtext.ui.IImageHelper;
 
 import com.google.inject.Inject;
 
@@ -24,7 +24,7 @@ import com.google.inject.Inject;
 public class Xtend2Images {
 
 	@Inject
-	private PluginImageHelper imageHelper;
+	private IImageHelper imageHelper;
 	
 	public Image forPackage() {
 		return getJdtImage(JavaPluginImages.DESC_OBJS_PACKDECL);

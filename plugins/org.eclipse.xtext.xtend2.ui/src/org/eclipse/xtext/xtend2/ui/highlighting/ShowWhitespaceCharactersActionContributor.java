@@ -11,7 +11,7 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
-import org.eclipse.xtext.ui.PluginImageHelper;
+import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 
@@ -25,7 +25,7 @@ import com.google.inject.Singleton;
 public class ShowWhitespaceCharactersActionContributor implements IActionContributor {
 
 	@Inject
-	private PluginImageHelper imageHelper;
+	private IImageHelper imageHelper;
 
 	public void contributeActions(XtextEditor editor) {
 		IAction action = editor.getAction(ITextEditorActionConstants.SHOW_WHITESPACE_CHARACTERS);
