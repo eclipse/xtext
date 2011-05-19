@@ -90,10 +90,6 @@ public class ReferenceUpdaterDispatcher {
 						true);
 			}
 			URI sourceResourceURI = referenceDescription.getSourceEObjectUri().trimFragment();
-			if (!sourceResourceURI.isPlatformResource()) {
-				throw new RefactoringStatusException("Referring element is not in workspace: "
-						+ notNull(sourceResourceURI), false);
-			}
 			IReferenceUpdater referenceUpdater = getReferenceUpdater(sourceResourceURI);
 			if (referenceUpdater == null)
 				status.addError("Cannot find a reference updater for " + notNull(sourceResourceURI)

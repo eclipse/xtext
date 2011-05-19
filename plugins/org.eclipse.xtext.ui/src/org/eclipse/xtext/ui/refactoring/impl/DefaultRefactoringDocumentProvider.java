@@ -11,8 +11,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jface.text.IDocument;
@@ -44,26 +42,18 @@ public class DefaultRefactoringDocumentProvider implements IRefactoringDocument.
 	private IWorkbench workbench;
 
 	@Inject
-	private IWorkspace workspace;
+	private ProjectUtil projectUtil;
 
 	@Inject
 	private IGlobalServiceProvider globalServiceProvider;
 
 	protected IFileEditorInput getEditorInput(URI resourceURI, RefactoringStatus status) {
-		if (!resourceURI.isPlatformResource()) {
-			status.addError("Cannot change resource " + resourceURI.toString());
+		try {
+			IFile file = projectUtil.findFileStorage(resourceURI, true);
+			return new FileEditorInput(file);
+		} catch (IllegalArgumentException e) {
+			status.addError("No suitable storage found for resource " + resourceURI.toString());
 			return null;
-		} else {
-			IFile file = workspace.getRoot().getFile(new Path(resourceURI.toPlatformString(true)));
-			if (!file.isAccessible()) {
-				status.addError("File " + file.getName() + " does not exist");
-				return null;
-			}
-			if (file.isReadOnly()) {
-				status.addError("File " + file.getName() + " is read only");
-			}
-			FileEditorInput fileEditorInput = new FileEditorInput(file);
-			return fileEditorInput;
 		}
 	}
 
