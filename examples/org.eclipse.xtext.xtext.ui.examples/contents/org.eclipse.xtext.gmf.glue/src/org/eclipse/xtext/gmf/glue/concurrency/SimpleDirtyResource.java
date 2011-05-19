@@ -47,4 +47,8 @@ public class SimpleDirtyResource implements IDirtyResource {
 		return resource;
 	}
 
+	public String getActualContents() {
+		return getContents();
+	}
+
 }
