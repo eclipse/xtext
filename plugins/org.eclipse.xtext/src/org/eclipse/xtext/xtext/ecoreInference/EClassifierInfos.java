@@ -199,7 +199,9 @@ public class EClassifierInfos {
 					throw new UnexpectedClassInfoException(TransformationErrorCode.InvalidSupertype, subTypeInfo, info, null);
 				}
 			} else {
-				if (isPackageKnown(superType.getEPackage().getNsURI())) {
+				if (superType.eIsProxy()) {
+					throw new UnexpectedClassInfoException(TransformationErrorCode.InvalidSupertype, subTypeInfo, null, "Cannot load all supertypes of  '" + subTypeInfo.getEClass().getName() + "'");
+				} else if (isPackageKnown(superType.getEPackage().getNsURI())) {
 					throw new UnexpectedClassInfoException(TransformationErrorCode.InvalidSupertype, subTypeInfo, null, "Cannot find info for type '" + superType.getName() + "'");
 				}
 			}
