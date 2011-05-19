@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.editor.outline.impl;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.ui.PluginImageHelper;
+import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.label.AbstractLabelProvider;
 
@@ -29,7 +29,7 @@ public class OutlineNodeLabelProvider extends DelegatingStyledCellLabelProvider 
 	public static class Delegate extends AbstractLabelProvider {
 
 		@Inject
-		private PluginImageHelper pluginImageHelper;
+		private IImageHelper imageHelper;
 
 		@Override
 		protected Object doGetText(Object element) {
@@ -49,7 +49,7 @@ public class OutlineNodeLabelProvider extends DelegatingStyledCellLabelProvider 
 
 		@Override
 		protected Object getDefaultImage() {
-			return pluginImageHelper.getImage("defaultoutlinenode.gif");
+			return imageHelper.getImage("defaultoutlinenode.gif");
 		}
 
 		@Override

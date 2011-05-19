@@ -15,16 +15,18 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleEvent;
-import org.osgi.framework.BundleListener;
+import org.osgi.framework.SynchronousBundleListener;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow
  */
-public class PluginImageHelper implements IImageHelper, BundleListener {
+@Singleton
+public class PluginImageHelper implements IImageHelper, SynchronousBundleListener {
 	private Map<ImageDescriptor, Image> registry = Maps.newHashMapWithExpectedSize(10);
 
 	@Inject
@@ -140,7 +142,8 @@ public class PluginImageHelper implements IImageHelper, BundleListener {
 	}
 
 	public void bundleChanged(BundleEvent event) {
-		if (event.getType() == BundleEvent.STOPPED) {
+		if (event.getType() == BundleEvent.STOPPING
+				&& event.getBundle().getBundleId() == getPlugin().getBundle().getBundleId()) {
 			dispose();
 		}
 	}
