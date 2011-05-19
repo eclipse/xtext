@@ -205,10 +205,10 @@ public abstract class GraphvizDotBuilder {
 		if (cls == null)
 			return null;
 		if (cls instanceof EPackage)
-			return "cluster" + cls.hashCode();
+			return "cluster" + Math.abs(cls.hashCode());
 		if (cls instanceof EObject)
-			return ((EObject) cls).eClass().getName().toLowerCase() + cls.hashCode();
-		return cls.getClass().getSimpleName().toLowerCase() + cls.hashCode();
+			return ((EObject) cls).eClass().getName().toLowerCase() + Math.abs(cls.hashCode());
+		return cls.getClass().getSimpleName().toLowerCase() + Math.abs(cls.hashCode());
 	}
 
 }

@@ -7,12 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.analysis;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
+import org.eclipse.xtext.util.GraphvizDotBuilder;
 
 import com.google.common.base.Function;
 import com.google.common.collect.HashMultimap;
@@ -287,6 +289,37 @@ public class NfaToGrammar {
 
 	}
 
+	protected static class StatesToDot<T> extends GraphvizDotBuilder {
+
+		@SuppressWarnings("unchecked")
+		@Override
+		protected Props drawObject(Object obj) {
+			if (obj instanceof StateAlias<?>) {
+				Digraph dg = new Digraph();
+				drawState(dg, (StateAlias<T>) obj, Maps.<StateAlias<T>, Node> newHashMap());
+				return dg;
+			}
+			return null;
+		}
+
+		protected Node drawState(Digraph dg, StateAlias<T> state, Map<StateAlias<T>, Node> nodes) {
+			Node n = nodes.get(state);
+			if (n != null)
+				return n;
+			n = new Node(state, state.getElement().toString());
+			nodes.put(state, n);
+			dg.add(n);
+			for (StateAlias<T> follower : state.getOutgoing()) {
+				drawState(dg, follower, nodes);
+				Edge e = new Edge(state, follower);
+				e.put("arrowhead", "onormal");
+				dg.add(e);
+			}
+			return n;
+		}
+
+	}
+
 	protected <T> void collectStates(StateAlias<T> state, Set<StateAlias<T>> visited) {
 		if (!visited.add(state))
 			return;
@@ -425,17 +458,33 @@ public class NfaToGrammar {
 		if (!visited.add(state))
 			return false;
 		boolean created = false;
-		Multimap<StateAlias<T>, StateAlias<T>> optional = HashMultimap.create();
+		StateAlias<T> optional = null;
 		for (StateAlias<T> candidate : state.getOutgoing())
-			if (candidate.getOutgoing().size() == 1 && candidate.getIncoming().size() == 1)
-				for (StateAlias<T> target : candidate.getOutgoing())
-					if (candidate != target && state.getOutgoing().contains(target))
-						optional.put(target, candidate);
-		for (StateAlias<T> target : optional.keySet()) {
-			for (StateAlias<T> opt : optional.get(target))
-				opt.getElement().setOptional(true);
-			state.getOutgoing().remove(target);
-			target.getIncoming().remove(state);
+			if (candidate.getIncoming().size() == 1 && candidate.getOutgoing().size() > 0) {
+				Set<StateAlias<T>> allOut = Sets.newHashSet();
+				allOut.add(candidate);
+				allOut.addAll(candidate.getOutgoing());
+				if (state.getOutgoing().equals(allOut)) {
+					optional = candidate;
+					break;
+				}
+			}
+		if (optional != null) {
+			optional.getElement().setOptional(true);
+			if (state.getElement() instanceof GroupAlias && state.getElement().isOne()) {
+				GroupAlias<T> group = (GroupAlias<T>) state.getElement();
+				group.addChild(optional.getElement());
+			} else {
+				GroupAlias<T> group = new GroupAlias<T>();
+				group.addChild(state.getElement());
+				group.addChild(optional.getElement());
+				state.element = group;
+			}
+			state.getOutgoing().remove(optional);
+			for (StateAlias<T> out : optional.getOutgoing())
+				out.getIncoming().remove(optional);
+			optional.getIncoming().clear();
+			optional.getOutgoing().clear();
 			created = true;
 		}
 		for (StateAlias<T> out : state.getOutgoing()) {
@@ -467,8 +516,15 @@ public class NfaToGrammar {
 			changed |= createCycle(start, Sets.<StateAlias<T>> newHashSet());
 			//			System.out.println("after Cycle: " + Join.join(" ", getAllStates(start)));
 		}
-		//		if (!start.getOutgoing().isEmpty())
-		//			System.err.println("error creating grammar for nfa");
+		//		if (!start.getOutgoing().isEmpty()) {
+		//			System.err.println("error creating grammar for nfa: " + Join.join(" ", getAllStates(start)));
+		//			StatesToDot<T> dot = new StatesToDot<T>();
+		//			try {
+		//				dot.draw(start, "pdf/" + start.toString().replaceAll("[^a-zA-Z0-9]", "") + ".pdf", "-Tpdf");
+		//			} catch (IOException e) {
+		//				e.printStackTrace();
+		//			}
+		//		}
 		return start.getElement();
 	}
 
