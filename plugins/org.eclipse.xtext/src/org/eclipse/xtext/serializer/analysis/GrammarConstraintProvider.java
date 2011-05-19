@@ -176,10 +176,11 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				case ASSIGNED_PARSER_RULE_CALL:
 				case ASSIGNED_TERMINAL_RULE_CALL:
 					EClass type = ele.getContainingConstraint().getType();
-					if (type.getEStructuralFeature(ele.getFeatureName()) == null)
+					EStructuralFeature feature = type.getEStructuralFeature(ele.getFeatureName());
+					if (feature == null)
 						throw new RuntimeException("Feature " + ele.getFeatureName() + " not found in "
 								+ type.getName());
-					int featureID = type.getEStructuralFeature(ele.getFeatureName()).getFeatureID();
+					int featureID = type.getFeatureID(feature);
 					List<IConstraintElement> assignmentByFeature = assignmentsByFeature[featureID];
 					if (assignmentByFeature == null)
 						assignmentsByFeature[featureID] = assignmentByFeature = Lists.newArrayList();
