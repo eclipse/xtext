@@ -148,11 +148,13 @@ public class Xtend2JvmModelInferrer implements IJvmModelInferrer {
 			container.getMembers().add(target);
 			associator.associatePrimary(source, target);
 			String sourceName = source.getName();
+			JvmVisibility visibility = JvmVisibility.PUBLIC;
 			if (source.isDispatch()) {
 				sourceName = "_" + sourceName;
+				visibility = JvmVisibility.PROTECTED;
 			}
 			target.setSimpleName(sourceName);
-			target.setVisibility(JvmVisibility.PUBLIC);
+			target.setVisibility(visibility);
 			for (XtendParameter parameter : source.getParameters()) {
 				JvmFormalParameter jvmParam = typesFactory.createJvmFormalParameter();
 				jvmParam.setName(parameter.getName());

@@ -97,7 +97,10 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		});
 		for(JvmMember member: inferredType.getMembers()) {
 			if (member instanceof JvmExecutable) {
-				assertEquals(JvmVisibility.PUBLIC, member.getVisibility());
+				if (member.getSimpleName().startsWith("_"))
+					assertEquals(JvmVisibility.PROTECTED, member.getVisibility());
+				else
+					assertEquals(JvmVisibility.PUBLIC, member.getVisibility());
 			} else {
 				assertEquals(JvmVisibility.PRIVATE, member.getVisibility());
 			}

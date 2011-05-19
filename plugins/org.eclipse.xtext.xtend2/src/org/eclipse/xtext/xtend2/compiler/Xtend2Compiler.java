@@ -32,6 +32,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
@@ -196,7 +197,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 	protected void generateDispatchMethod(JvmOperation dispatchOperation, Collection<JvmOperation> collection,
 			IAppendable a) {
 		a.openScope();
-		a.append("\n\npublic ");
+		a.append("\n\n").append(getJavaVisibility(dispatchOperation.getVisibility())).append(" ");
 		serialize(dispatchOperation.getReturnType(), dispatchOperation, a);
 		a.append(" ");
 		a.append(dispatchOperation.getSimpleName()).append("(");
@@ -280,21 +281,22 @@ public class Xtend2Compiler extends XbaseCompiler {
 		}
 		
 		appendable.openScope();
-		JvmTypeReference returnType = associations.getDirectlyInferredOperation(obj).getReturnType();
+		final JvmOperation directlyInferredOperation = associations.getDirectlyInferredOperation(obj);
+		JvmTypeReference returnType = directlyInferredOperation.getReturnType();
 		String name = obj.getName();
 		if (obj.isDispatch()) {
 			name = "_" + name;
 		}
 		appendable.append("\n");
 		generateAnnotations(obj, appendable);
-		appendable.append("\npublic ");
+		appendable.append("\n").append(getJavaVisibility(directlyInferredOperation.getVisibility())).append(" ");
 		appendTypeParameterDeclaration(obj.getTypeParameters(), appendable);
 		serialize(resolveMultiType(returnType), obj, appendable);
 		appendable.append(" ").append(name).append("(");
 		final EList<XtendParameter> parameters = obj.getParameters();
 		declareParameters(parameters, appendable);
 		appendable.append(") ");
-		JvmOperation operation = associations.getDirectlyInferredOperation(obj);
+		JvmOperation operation = directlyInferredOperation;
 		declareExceptions(operation, appendable);
 		appendable.append("{");
 		appendable.increaseIndentation();
@@ -305,6 +307,16 @@ public class Xtend2Compiler extends XbaseCompiler {
 		}
 		appendable.decreaseIndentation();
 		appendable.append("\n}").closeScope();
+	}
+
+	protected Object getJavaVisibility(JvmVisibility visibility) {
+		switch (visibility) {
+			case PUBLIC : return "public";
+			case PROTECTED : return "protected";
+			case PRIVATE : return "private";
+			case DEFAULT : return "";
+		}
+		return null;
 	}
 
 	protected void declareExceptions(JvmOperation obj, IAppendable appendable) {

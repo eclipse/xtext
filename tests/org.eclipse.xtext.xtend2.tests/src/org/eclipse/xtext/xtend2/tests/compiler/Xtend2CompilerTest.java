@@ -103,6 +103,39 @@ public class Xtend2CompilerTest extends AbstractXtend2TestCase {
 		assertCompilesTo(expected, input);
 	}
 	
+	public void testVisibilityOfDispatchMethods() throws Exception {
+		final String input = 
+			"package foo\n" +
+			"class NoSuchElementException {\n" +
+			"  def dispatch void foo(String s) {}\n" +
+			"  def dispatch void foo(Object s) {}\n" +
+			"}\n";
+		final String expected =  
+			"package foo;\n" +
+			"\n" + 
+			"\n" +
+			"@SuppressWarnings(\"all\")\n" +
+			"public class NoSuchElementException {\n" + 
+			"  \n" + 
+			"  protected void _foo(final String s) {\n" + 
+			"  }\n" + 
+			"  \n" + 
+			"  protected void _foo(final Object s) {\n" + 
+			"  }\n" + 
+			"  \n" + 
+			"  public void foo(final Object s) {\n" + 
+			"    if ((s instanceof String)) {\n" + 
+			"      _foo((String)s);\n" + 
+			"    } else if ((s instanceof Object)) {\n" + 
+			"      _foo((Object)s);\n" + 
+			"    } else {\n" + 
+			"      throw new IllegalArgumentException();\n" + 
+			"    }\n" + 
+			"  }\n" +
+			"}";
+		assertCompilesTo(expected, input);
+	}
+	
 //	public void testExtendsArrayList_01() throws Exception {
 //		final String input = 
 //		"package foo\n" +
