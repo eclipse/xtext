@@ -83,8 +83,8 @@ public class InheritanceTest2PackageImpl extends EPackageImpl implements Inherit
     isInited = true;
 
     // Initialize simple dependencies
-    InheritanceTestPackage.eINSTANCE.eClass();
     BaseInheritanceTestPackage.eINSTANCE.eClass();
+    InheritanceTestPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theInheritanceTest2Package.createPackageContents();
