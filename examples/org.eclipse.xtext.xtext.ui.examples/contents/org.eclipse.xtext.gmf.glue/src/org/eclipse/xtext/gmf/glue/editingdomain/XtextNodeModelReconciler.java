@@ -16,18 +16,17 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.transaction.TransactionalEditingDomain.Lifecycle;
 import org.eclipse.emf.transaction.TransactionalEditingDomainEvent;
 import org.eclipse.emf.transaction.TransactionalEditingDomainListener;
-import org.eclipse.emf.transaction.TransactionalEditingDomain.Lifecycle;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.emf.workspace.IWorkspaceCommandStack;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.xtext.gmf.glue.Activator;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.reconstr.Serializer;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.serializer.ISerializer;
 
 /**
  * Reconciles the node models of all XtextResources in a TransactionalEditingDomain with semantic changes.
@@ -107,9 +106,8 @@ public class XtextNodeModelReconciler extends AdapterImpl implements Transaction
 					ICommand updateXtextResourceTextCommand = null;
 					for (EObject modificationRoot : changeAggregator.getModificationRoots()) {
 						XtextResource xtextResource = (XtextResource) modificationRoot.eResource();
-						NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(modificationRoot);
-						CompositeNode parserNode = nodeAdapter.getParserNode();
-						Serializer serializer = xtextResource.getSerializer();
+						ICompositeNode parserNode = NodeModelUtils.findActualNodeFor(modificationRoot);
+						ISerializer serializer = xtextResource.getSerializer();
 						String newText = serializer.serialize(modificationRoot);
 						ICommand newCommand = UpdateXtextResourceTextCommand.createUpdateCommand(xtextResource,
 								parserNode.getOffset(), parserNode.getLength(), newText);

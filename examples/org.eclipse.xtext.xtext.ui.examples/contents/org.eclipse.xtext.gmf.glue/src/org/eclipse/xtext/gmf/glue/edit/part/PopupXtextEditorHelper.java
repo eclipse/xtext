@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.gmf.glue.edit.part;
 
+import static com.google.common.collect.Iterables.*;
+
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.ecore.EObject;
@@ -34,10 +36,9 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.xtext.gmf.glue.Activator;
 import org.eclipse.xtext.gmf.glue.editingdomain.UpdateXtextResourceTextCommand;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parsetree.CompositeNode;
-import org.eclipse.xtext.parsetree.NodeAdapter;
-import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.CompoundXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -184,6 +185,7 @@ public class PopupXtextEditorHelper {
 	private void registerKeyListener() {
 		XtextSourceViewer sourceViewer = (XtextSourceViewer) xtextEditor.getInternalSourceViewer();
 		final StyledText xtextTextWidget = sourceViewer.getTextWidget();
+		
 		PopupXtextEditorKeyListener keyListener = new PopupXtextEditorKeyListener(this, sourceViewer
 				.getContentAssistant());
 		xtextTextWidget.addVerifyKeyListener(keyListener);
@@ -199,7 +201,7 @@ public class PopupXtextEditorHelper {
 				if (semanticElementInDocument == null) {
 					return false;
 				}
-				CompositeNode xtextNode = getCompositeNode(semanticElementInDocument);
+				ICompositeNode xtextNode = getCompositeNode(semanticElementInDocument);
 				if (xtextNode == null) {
 					return false;
 				}
@@ -257,20 +259,15 @@ public class PopupXtextEditorHelper {
 		xtextEditorComposite.setBounds(bounds.x, bounds.y, width, height);
 	}
 
-	private CompositeNode getCompositeNode(EObject semanticElement) {
-		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(semanticElement);
-		if (nodeAdapter != null) {
-			final CompositeNode parserNode = nodeAdapter.getParserNode();
-			return parserNode;
-		}
-		return null;
+	private ICompositeNode getCompositeNode(EObject semanticElement) {
+		return NodeModelUtils.findActualNodeFor(semanticElement);
 	}
 
 	private boolean isDocumentHasErrors(final IXtextDocument xtextDocument) {
 		return (xtextDocument.readOnly(new IUnitOfWork<Boolean, XtextResource>() {
 			public Boolean exec(XtextResource state) throws Exception {
 				IParseResult parseResult = state.getParseResult();
-				return !state.getErrors().isEmpty() || parseResult == null || !parseResult.getParseErrors().isEmpty();
+				return !state.getErrors().isEmpty() || parseResult == null || !isEmpty(parseResult.getSyntaxErrors());
 			}
 		}));
 	}
