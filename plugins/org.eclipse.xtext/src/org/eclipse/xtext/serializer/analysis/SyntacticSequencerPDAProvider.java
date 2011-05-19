@@ -760,10 +760,12 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 				}
 		}
 
-		protected AbstractElementAlias<ISynState> ambiguousSyntax;
+		protected AbstractElementAlias<ISynState> ambiguousSyntax = UNINITIALIZED;
+
+		protected static final AbstractElementAlias<ISynState> UNINITIALIZED = new ElementAlias<ISynState>(null);
 
 		public AbstractElementAlias<ISynState> getAmbiguousSyntax() {
-			if (ambiguousSyntax != null)
+			if (ambiguousSyntax != UNINITIALIZED)
 				return ambiguousSyntax;
 			ambiguousSyntax = getShortSyntax();
 			if (ambiguousSyntax instanceof GroupAlias) {
@@ -776,9 +778,12 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 				int end = children.size() - 1;
 				while (end >= 0 && children.get(end) instanceof ElementAlias<?> && children.get(end).isOne())
 					end--;
-				group.children = children.subList(start, end + 1);
-				if (group.children.size() == 1)
-					ambiguousSyntax = group.children.get(0);
+				if (start <= end) {
+					group.children = children.subList(start, end + 1);
+					if (group.children.size() == 1)
+						ambiguousSyntax = group.children.get(0);
+				} else
+					ambiguousSyntax = null;
 			}
 			return ambiguousSyntax;
 		}
