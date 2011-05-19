@@ -14,4 +14,9 @@ public class PureXbaseJavaValidator extends XbaseJavaValidator {
 			super.checkInnerExpressions(block);
 		}
 	}
+	
+	@Check
+	@Override
+	public void checkNoSideffectFreeExpressionsInBlockExpression(XBlockExpression blockExpression) {
+	}
 }
