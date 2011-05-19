@@ -36,7 +36,9 @@ public class JvmFeatureScope extends SimpleScope {
 	
 	@Override
 	protected String getShadowingKey(IEObjectDescription description) {
-		return ((IValidatedEObjectDescription)description).getKey();
+		if (description instanceof IValidatedEObjectDescription)
+			return ((IValidatedEObjectDescription)description).getKey();
+		return String.valueOf(super.getShadowingKey(description));
 	}
 	
 	@SuppressWarnings("unchecked")
