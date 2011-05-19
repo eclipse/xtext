@@ -119,10 +119,12 @@ public class SyntacticSequencerUtil {
 		Map<AbstractElementAlias<ISynState>, List<ISynTransition>> result = Maps.newHashMap();
 		for (ISynTransition transition : getAllAmbiguousTransitions()) {
 			AbstractElementAlias<ISynState> syntax = transition.getAmbiguousSyntax();
-			List<ISynTransition> list = result.get(syntax);
-			if (list == null)
-				result.put(syntax, list = Lists.newArrayList());
-			list.add(transition);
+			if (syntax != null) {
+				List<ISynTransition> list = result.get(syntax);
+				if (list == null)
+					result.put(syntax, list = Lists.newArrayList());
+				list.add(transition);
+			}
 		}
 		ambiguousTransitions = Lists.newArrayList();
 		for (Map.Entry<AbstractElementAlias<ISynState>, List<ISynTransition>> e : result.entrySet())
