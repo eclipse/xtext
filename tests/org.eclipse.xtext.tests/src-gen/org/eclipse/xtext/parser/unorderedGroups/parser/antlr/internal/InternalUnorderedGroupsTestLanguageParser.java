@@ -3120,7 +3120,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
                                     else if ( (LA21_1==13) ) {
                                         int LA21_4 = input.LA(3);
 
-                                        if ( LA21_4 >=12 && LA21_4 <=13 && getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_12_1(), 0) ) {
+                                        if ( LA21_4 >=12 && LA21_4<=13 && getUnorderedGroupHelper().canSelect(grammarAccess.getModelAccess().getUnorderedGroup_1_12_1(), 0) ) {
                                             alt21=1;
                                         }
 
@@ -6975,7 +6975,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
                                     if ( (LA51_1==13) ) {
                                         int LA51_3 = input.LA(3);
 
-                                        if ( LA51_3 >=12 && LA51_3 <=13 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_12_1(), 0) ) {
+                                        if ( LA51_3 >=12 && LA51_3<=13 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedDatatypeAccess().getUnorderedGroup_12_1(), 0) ) {
                                             alt51=1;
                                         }
 
