@@ -729,12 +729,14 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 				ResourceSet rs = new XtextResourceSet();
 				GenModelHelper gmh = new GenModelHelper();
 				for (String uriStr : getReferencedGenModels().split(",")) {
-					URI uri = URI.createURI(uriStr);
+					URI uri = URI.createURI(uriStr.trim());
 					gmh.registerGenModel(rs, uri);
 				}
 			}
+		} catch (ConfigurationException ce) {
+			throw ce;
 		} catch (Exception e) {
-			log.error(e);
+			log.error(e, e);
 		}
 	}
 
