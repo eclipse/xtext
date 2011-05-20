@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -280,6 +281,11 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 			if (!found)
 				result.add(GenModelAccess.getGenPackage(pkg));
 		}
+		Collections.sort(result, new Comparator<GenPackage>() {
+			public int compare(GenPackage o1, GenPackage o2) {
+				return EcoreUtil.getURI(o1).toString().compareTo(EcoreUtil.getURI(o2).toString());
+			}
+		});
 		return result;
 	}
 
