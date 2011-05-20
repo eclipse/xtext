@@ -8,12 +8,15 @@ codeRef[org.eclipse.xtext.ISetup]-implementations in normal mode and uses Eclips
 extension mechanism when it should be configured in an OSGi environment.   
 
 
-section[Runtime Setup (ISetup)]
+section:runtimeSetup[Runtime Setup (ISetup)]
 
 For each language there is an implementation of codeRef[org.eclipse.xtext.ISetup] 
 generated. It implements a method called e[createInjectorAndDoEMFRegistration()], which can be called 
-to do the initialization of the language infrastructure. This class is intended to be used for 
-runtime and for unit testing, only.
+to do the initialization of the language infrastructure. 
+
+e[Caveat]: The codeRef[org.eclipse.xtext.ISetup] class is intended to be used for runtime and for unit 
+testing, only. if you use it in a Equinox scenario, you will very likely break the running application 
+because entries to the global registries will be overwritten.
 
 The setup method returns an e[Injector], which can further be used to obtain a parser, etc. It also 
 registers the codeRef[org.eclipse.emf.ecore.resource.Resource$Factory] and generated 
@@ -22,7 +25,7 @@ by EMF. So basically after having run the setup and you can start using EMF API 
 of your language.
 
 
-section[Setup within Eclipse-Equinox (OSGi)]
+section:equinoxSetup[Setup within Eclipse-Equinox (OSGi)]
 
 Within Eclipse we have a generated e[Activator], which creates a Guice codeRef[com.google.inject.Injector]
 using the ref:guicemodules[modules]. In addition an codeRef[org.eclipse.core.runtime.IExecutableExtensionFactory] 
@@ -33,8 +36,8 @@ declare dependencies and get them injected upon creation.
 The only thing you have to do in order to use this factory is to prefix the class with the factory 
 e[\[MyLanguageName\]ExecutableExtensionFactory] name followed by a colon.
 
-code[XML][<extension
-  point="org.eclipse.ui.editors">
+code[XML][
+<extension point="org.eclipse.ui.editors">
   <editor
     class="<MyLanguageName>ExecutableExtensionFactory:
       org.eclipse.xtext.ui.editor.XtextEditor"

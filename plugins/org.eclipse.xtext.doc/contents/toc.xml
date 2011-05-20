@@ -127,9 +127,9 @@
 		</topic>
 	</topic>
 	<topic href="contents/050-heading-runtime.xdoc.html#Xtext Documentation-4" label="Runtime Concepts" >
-		<topic href="contents/050-heading-runtime.xdoc.html#runtime_concepts-2" label="Runtime Setup (ISetup)" >
+		<topic href="contents/050-heading-runtime.xdoc.html#runtimeSetup" label="Runtime Setup (ISetup)" >
 		</topic>
-		<topic href="contents/050-heading-runtime.xdoc.html#runtime_concepts-3" label="Setup within Eclipse-Equinox (OSGi)" >
+		<topic href="contents/050-heading-runtime.xdoc.html#equinoxSetup" label="Setup within Eclipse-Equinox (OSGi)" >
 		</topic>
 		<topic href="contents/050-heading-runtime.xdoc.html#runtime_concepts-4" label="Logging" >
 		</topic>
@@ -144,9 +144,7 @@
 			</topic>
 			<topic href="contents/050-heading-runtime.xdoc.html#custom_validation" label="Custom Validation" >
 			</topic>
-			<topic href="contents/050-heading-runtime.xdoc.html#check_based_validation" label="Validation with the Check Language" >
-			</topic>
-			<topic href="contents/050-heading-runtime.xdoc.html#validation-5" label="Validating Manually" >
+			<topic href="contents/050-heading-runtime.xdoc.html#validation-4" label="Validating Manually" >
 			</topic>
 			<topic href="contents/050-heading-runtime.xdoc.html#test_validators" label="Test Validators" >
 			</topic>

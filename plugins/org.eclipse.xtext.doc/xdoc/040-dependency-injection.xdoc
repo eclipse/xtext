@@ -144,17 +144,9 @@ public static void main(String\[\] args) {
 }
 ]
 
-Xtext uses EMF which makes use of a couple of global registries, which have to be configured on startup. 
-Because we want to leverage Guice also for everything that we put into those registries, we have introduced
-a so called codeRef[org.eclipse.xtext.ISetup] which provides a method e[Injector createInjectorAndDoEMFRegistration()]. 
-So instead of using the plain Guice code shown above you rather use the codeRef[org.eclipse.xtext.ISetup] 
-class generated for your language, which, as the method name suggests, creates an e[Injector] and uses it to 
-initialize a couple of EMF objects and registers them in the corresponding registries.
-
-code[Java][
-Injector injector = 
-    new MyStandaloneSetup().createInjectorAndDoEMFRegistration(); 
-]
+In Xtext, you should never instantiate the injector of your language yourself. The sections
+ref:runtimeSetup[Runtime Setup] and ref:equinoxSetup[Equinox Setup] explain how to access it in 
+different scenarios. 
 
 These are the basic ideas around Guice and the small extension Xtext provides on top. For more information we 
 strongly encourage you to read through the documentation on 

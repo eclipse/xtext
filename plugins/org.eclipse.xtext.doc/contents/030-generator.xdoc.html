@@ -584,23 +584,15 @@ method. It could look like this:
 </div>
 </p>
 <p>
-Xtext uses EMF which makes use of a couple of global registries, which have to be configured on startup. 
-Because we want to leverage Guice also for everything that we put into those registries, we have introduced
-a so called <em>org.eclipse.xtext.ISetup</em> which provides a method <em>Injector createInjectorAndDoEMFRegistration()
-</em>. 
-So instead of using the plain Guice code shown above you rather use the <em>org.eclipse.xtext.ISetup</em> 
-class generated for your language, which, as the method name suggests, creates an <em>Injector
-</em> and uses it to 
-initialize a couple of EMF objects and registers them in the corresponding registries.
-</p>
-<p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-Injector&nbsp;injector&nbsp;=&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;MyStandaloneSetup().createInjectorAndDoEMFRegistration();
-</p>
-</div>
-</div>
+In Xtext, you should never instantiate the injector of your language yourself. The sections
+<a href="050-heading-runtime.xdoc.html#runtimeSetup">
+Runtime Setup
+</a>
+ and <a href="050-heading-runtime.xdoc.html#equinoxSetup">
+Equinox Setup
+</a>
+ explain how to access it in 
+different scenarios. 
 </p>
 <p>
 These are the basic ideas around Guice and the small extension Xtext provides on top. For more information we 
