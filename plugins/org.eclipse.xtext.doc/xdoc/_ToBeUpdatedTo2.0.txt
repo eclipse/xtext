@@ -10,8 +10,8 @@
 DONE SZ 020-grammar-language.xdoc
 DONE SE 030-generator.xdoc
 DONE JK 040-dependency-injection.xdoc
-050-heading-runtime.xdoc
-060-validation.xdoc
+DONE JK 050-heading-runtime.xdoc
+DONE JK 060-validation.xdoc
 070-linking.xdoc
 080-scoping.xdoc
 090-valueconverter.xdoc
