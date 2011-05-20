@@ -1,241 +1,115 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Lexical Syntax</title>
+
 <link href="book.css" rel="stylesheet" type="text/css">
 <link href="code.css" rel="stylesheet" type="text/css">
 <link rel="home" href="index.html" title="">
 </head>
-<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-
-<a name="Xbase_Syntax"></a>
-<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">Lexical Syntax</h1>
-
+<body>
+<a name="Xbase Language Reference-3"></a>
+<h2>Lexical Syntax</h2>
 <p>
 Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. However the default implementation is carefully 
 chosen and it is recommended to stick with the lexical syntax described in the following.
 </p>
-
-
 <a name="Xbase_Syntax_Identifiers"></a>
-
-<a name="Xbase_Syntax_Identifiers"></a>
-<div class="section" title="Identifiers">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title">
-Identifiers
-</h2>
-</div>
-</div>
-</div>
-
-
-
+<h2>Identifiers</h2>
 <p>
 Identifiers are used to name all constructs, such as types, methods and variables. Xbase uses the default
 Identifier-Syntax from Xtext - compared to Java, they are slightly simplified to match the common cases
-while having less ambiguities. They start with a letter <em>a</em>-<em>z</em>, <em>A</em>-<em>Z</em> or an underscore followed
-by more of these characters or a digit <em>0</em>-<em>9</em>. 
+while having less ambiguities. They start with a letter 
+<em>a
+</em>
+-
+<em>z
+</em>
+, 
+<em>A
+</em>
+-
+<em>Z
+</em>
+ or an underscore followed
+by more of these characters or a digit 
+<em>0
+</em>
+-
+<em>9
+</em>
+. 
 </p>
-
-
 <a name="Xbase_Syntax_EscapedIdentifiers"></a>
-
-<a name="Xbase_Syntax_EscapedIdentifiers"></a>
-<div class="section" title="Escaped Identifiers">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Escaped Identifiers
-</h3>
-</div>
-</div>
-</div>
-
-
-
+<h3>Escaped Identifiers</h3>
 <p>
 Identifiers may not have the same spelling as any reserved keyword. 
-However, identifiers starting with a <span class="inlinecode">^</span>
+However, identifiers starting with a 
+<span class="inlinecode">^</span>
  are so called escaped identifiers. Escaped identifiers are used in cases when there is a 
-conflict with a reserved keyword. Imagine you have introduced a keyword <span class="inlinecode">service</span>
- in your language but want to call a Java property <em>service</em> at some point. 
-In such cases you use an escaped identifier <span class="inlinecode">^service</span>
+conflict with a reserved keyword. Imagine you have introduced a keyword 
+<span class="inlinecode">service</span>
+ in your language but want to call a Java property 
+<em>service
+</em>
+ at some point. 
+In such cases you use an escaped identifier 
+<span class="inlinecode">^service</span>
  to reference the Java property.
 </p>
-
-
-</div>
-
-
-
 <a name="Xbase_Syntax_Identifiers-3"></a>
-<div class="section" title="Syntax">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Syntax
-</h3>
-</div>
-</div>
-</div>
-
-
-
+<h3>Syntax</h3>
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-terminal&nbsp;ID:&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&apos;^&apos;?&nbsp;(&apos;a&apos;..&apos;z&apos;|&apos;A&apos;..&apos;Z&apos;|&apos;_&apos;)&nbsp;(&apos;a&apos;..&apos;z&apos;|&apos;A&apos;..&apos;Z&apos;|&apos;_&apos;|&apos;0&apos;..&apos;9&apos;)*<br />
+<span class="keyword">terminal</span>&nbsp;ID:&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >&apos;^&apos;</span>?&nbsp;(<span class="string" >&apos;a&apos;</span>..<span class="string" >&apos;z&apos;</span>|<span class="string" >&apos;A&apos;</span>..<span class="string" >&apos;Z&apos;</span>|<span class="string" >&apos;_&apos;</span>)&nbsp;(<span class="string" >&apos;a&apos;</span>..<span class="string" >&apos;z&apos;</span>|<span class="string" >&apos;A&apos;</span>..<span class="string" >&apos;Z&apos;</span>|<span class="string" >&apos;_&apos;</span>|<span class="string" >&apos;0&apos;</span>..<span class="string" >&apos;9&apos;</span>)*<br />
 ;
 </p>
 </div>
 </div>
-
-
 </p>
-
-
-</div>
-
-
-
 <a name="Xbase_Syntax_Identifiers-4"></a>
-<div class="section" title="Examples">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Examples
-</h3>
-</div>
-</div>
-</div>
-
-
-
+<h3>Examples</h3>
 <p>
-
 <ul>
-
-<li>
-
-<p>
-<span class="inlinecode">Foo</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">Foo42</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">FOO</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">_42</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">_foo</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">^extends</span>
-
-</p>
-
-</li>
-
+	<li>
+		<span class="inlinecode">Foo</span>
+	</li>
+	<li>
+		<span class="inlinecode">Foo42</span>
+	</li>
+	<li>
+		<span class="inlinecode">FOO</span>
+	</li>
+	<li>
+		<span class="inlinecode">_42</span>
+	</li>
+	<li>
+		<span class="inlinecode">_foo</span>
+	</li>
+	<li>
+		<span class="inlinecode">^extends</span>
+	</li>
 </ul>
-
 </p>
-
-
-</div>
-
-</div>
-
 <a name="Xbase_Syntax_StringLiteral"></a>
-
-<a name="Xbase_Syntax_StringLiteral"></a>
-<div class="section" title="String Literals">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title">
-String Literals
-</h2>
-</div>
-</div>
-</div>
-
-
-
+<h2>String Literals</h2>
 <p>
 String literals can either use single quotes (&apos;) or double quotes (") as their terminals. When using double quotes all literals allowed by Java string literals are
 supported. In addition new line characters are allowed, that is in Xbase all string literals can span multiple lines. When using single quotes the only difference
 is that single quotes within the literal have to be escaped and double quotes do not.
 </p>
-
 <p>
-See <a href="http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.10.5">¤ 3.10.5 String Literals</a>
+See 
+<a href="http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.10.5">§ 3.10.5 String Literals</a>
 </p>
-
 <p>
 In contrast to Java, equal string literals within the same class do not neccessarily refer to the same instance at runtime.
 </p>
-
-
-
-
 <a name="Xbase_Syntax_StringLiteral-4"></a>
-<div class="section" title="Syntax">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Syntax
-</h3>
-</div>
-</div>
-</div>
-
-
-
+<h3>Syntax</h3>
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
@@ -243,493 +117,193 @@ Syntax
 </p>
 </div>
 </div>
-
-
 </p>
-
-
-</div>
-
-
-
 <a name="Xbase_Syntax_StringLiteral-5"></a>
-<div class="section" title="Examples">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Examples
-</h3>
-</div>
-</div>
-</div>
-
-
-
+<h3>Examples</h3>
 <p>
-
 <ul>
-
-<li>
-
-<p>
-<span class="inlinecode">&apos;Foo&nbsp;Bar&nbsp;Baz&apos;</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">"Foo&nbsp;Bar&nbsp;Baz"</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-"&nbsp;the&nbsp;quick&nbsp;brown&nbsp;fox&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jumps&nbsp;over&nbsp;the&nbsp;lazy&nbsp;dog."
-</p>
-</div>
-</div>
-
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">&apos;Escapes&nbsp;:&nbsp;\&apos;&nbsp;&apos;</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">"Escapes&nbsp;:&nbsp;\"&nbsp;"</span>
-
-</p>
-
-</li>
-
+	<li>
+		<span class="inlinecode">&apos;Foo&nbsp;Bar&nbsp;Baz&apos;</span>
+	</li>
+	<li>
+		<span class="inlinecode">"Foo&nbsp;Bar&nbsp;Baz"</span>
+	</li>
+	<li>
+		<div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		"&nbsp;the&nbsp;quick&nbsp;brown&nbsp;fox&nbsp;<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jumps&nbsp;over&nbsp;the&nbsp;lazy&nbsp;dog."
+		</p>
+		</div>
+		</div>
+	</li>
+	<li>
+		<span class="inlinecode">&apos;Escapes&nbsp;:&nbsp;\&apos;&nbsp;&apos;</span>
+	</li>
+	<li>
+		<span class="inlinecode">"Escapes&nbsp;:&nbsp;\"&nbsp;"</span>
+	</li>
 </ul>
-
 </p>
-
-
-</div>
-
-</div>
-
 <a name="Xbase_Syntax_IntegerLiteral"></a>
-
-<a name="Xbase_Syntax_IntegerLiteral"></a>
-<div class="section" title="Integer Literals">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title">
-Integer Literals
-</h2>
-</div>
-</div>
-</div>
-
-
-
+<h2>Integer Literals</h2>
 <p>
 Integer literals consist of one or more digits. 
-Only decimal literals are supported and they always result in a value of type <span class="inlinecode">java.lang.Integer</span>
+Only decimal literals are supported and they always result in a value of type 
+<span class="inlinecode">java.lang.Integer</span>
  
-(it might result in native type <span class="inlinecode">int</span>
+(it might result in native type 
+<span class="inlinecode">int</span>
  when translated to Java, see 
-<a href="03-Types.xdoc.html#Xbase_Types">Types</a>).
-The compiler makes sure that only numbers between 0 and <em>Integer.MAX</em> (0x7fffffff) are used.
+<a href="03-Types.xdoc.html#Xbase_Types">
+Types
+</a>
+).
+The compiler makes sure that only numbers between 0 and 
+<em>Integer.MAX
+</em>
+ (0x7fffffff) are used.
 </p>
-
 <p>
-There is no negative integer literal, instead the expression <span class="inlinecode">-23</span>
- is parsed as the prefix operator <span class="inlinecode">-</span>
+There is no negative integer literal, instead the expression 
+<span class="inlinecode">-23</span>
+ is parsed as the prefix operator 
+<span class="inlinecode">-</span>
  applied to an integer literal.
 </p>
-
-
-
-
 <a name="Xbase_Syntax_IntegerLiteral-3"></a>
-<div class="section" title="Syntax">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Syntax
-</h3>
-</div>
-</div>
-</div>
-
-
-
+<h3>Syntax</h3>
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-terminal&nbsp;INT&nbsp;returns&nbsp;ecore::EInt:&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;(&apos;0&apos;..&apos;9&apos;)+<br />
+<span class="keyword">terminal</span>&nbsp;INT&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EInt:&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string" >&apos;0&apos;</span>..<span class="string" >&apos;9&apos;</span>)+<br />
 ;
 </p>
 </div>
 </div>
-
-
 </p>
-
-
-</div>
-
-</div>
-
 <a name="Xbase_Syntax_Comments"></a>
-
-<a name="Xbase_Syntax_Comments"></a>
-<div class="section" title="Comments">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title">
-Comments
-</h2>
-</div>
-</div>
-</div>
-
-
-
+<h2>Comments</h2>
 <p>
 Xbase comes with two different kinds of comments: Single-line comments and multi-line comments.
-The syntax is the same as the one known from Java (see <a href="http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.7">¤ 3.7 Comments</a>).
+The syntax is the same as the one known from Java (see 
+<a href="http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.7">§ 3.7 Comments</a>
+).
 </p>
-
-
-
-
 <a name="Xbase_Syntax_Comments-2"></a>
-<div class="section" title="Syntax">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Syntax
-</h3>
-</div>
-</div>
-</div>
-
-
-
+<h3>Syntax</h3>
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-terminal&nbsp;ML_COMMENT&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&apos;/*&apos;&nbsp;-&gt;&nbsp;&apos;*/&apos;<br />
+<span class="keyword">terminal</span>&nbsp;ML_COMMENT&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >&apos;/*&apos;</span>&nbsp;-&gt;&nbsp;<span class="string" >&apos;*/&apos;</span><br />
 ;<br />
-terminal&nbsp;SL_COMMENT&nbsp;:&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&apos;//&apos;&nbsp;!(&apos;\n&apos;|&apos;\r&apos;)*&nbsp;(&apos;\r&apos;?&nbsp;&apos;\n&apos;)?<br />
+<span class="keyword">terminal</span>&nbsp;SL_COMMENT&nbsp;:&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >&apos;//&apos;</span>&nbsp;!(<span class="string" >&apos;\n&apos;</span>|<span class="string" >&apos;\r&apos;</span>)*&nbsp;(<span class="string" >&apos;\r&apos;</span>?&nbsp;<span class="string" >&apos;\n&apos;</span>)?<br />
 ;
 </p>
 </div>
 </div>
-
-
 </p>
-
-
-</div>
-
-</div>
-
 <a name="Xbase_Syntax_Whitespace"></a>
-
-<a name="Xbase_Syntax_Whitespace"></a>
-<div class="section" title="White Space">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title">
-White Space
-</h2>
-</div>
-</div>
-</div>
-
-
-
+<h2>White Space</h2>
 <p>
-The white space characters <span class="inlinecode">&apos;&nbsp;&apos;</span>
-, <span class="inlinecode">&apos;\t&apos;</span>
-, <span class="inlinecode">&apos;\n&apos;</span>
-, and <span class="inlinecode">&apos;\r</span>
+The white space characters 
+<span class="inlinecode">&apos;&nbsp;&apos;</span>
+, 
+<span class="inlinecode">&apos;\t&apos;</span>
+, 
+<span class="inlinecode">&apos;\n&apos;</span>
+, and 
+<span class="inlinecode">&apos;\r</span>
  are allowed to occur anywhere between the other syntactic elements. 
 </p>
-
-
-</div>
-
 <a name="Xbase_Syntax_Keywords"></a>
-
-<a name="Xbase_Syntax_Keywords"></a>
-<div class="section" title="Reserved Keywords">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title">
-Reserved Keywords
-</h2>
-</div>
-</div>
-</div>
-
-
-
+<h2>Reserved Keywords</h2>
 <p>
 The following list of words are reserved keywords, thus reducing the set of possible identifiers:
-
 <ol>
-
-<li>
-
-<p>
-<span class="inlinecode">extends</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">super</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">instanceof</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">as</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">new</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">null</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">false</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">true</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">val</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">var</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">if</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">else</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">switch</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">case</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">default</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">do</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">while</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">for</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">typeof</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">throw</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">try</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">catch</span>
-
-</p>
-
-</li>
-
-<li>
-
-<p>
-<span class="inlinecode">finally</span>
-
-</p>
-
-</li>
-
+	<li>
+		<span class="inlinecode"><span class="keyword">extends</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">super</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">instanceof</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">as</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">new</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">null</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">false</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">true</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">val</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">var</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">if</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">else</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">switch</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">case</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">default</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">do</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">while</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">for</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">typeof</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">throw</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">try</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">catch</span></span>
+	</li>
+	<li>
+		<span class="inlinecode"><span class="keyword">finally</span></span>
+	</li>
 </ol>
-
 </p>
-
 <p>
 However, in case some of the keywords have to be used as identifiers, the escape character for 
-<a href="02-Lexical%20Structure.xdoc.html#Xbase_Syntax_EscapedIdentifiers">identifiers</a> comes in handy. 
-
+<a href="02-Lexical%20Structure.xdoc.html#Xbase_Syntax_EscapedIdentifiers">
+identifiers
+</a>
+ comes in handy. 
 </p>
-
-
-</div>
-
 </body>
 </html>

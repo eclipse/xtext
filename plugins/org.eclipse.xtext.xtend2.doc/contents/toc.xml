@@ -1,160 +1,161 @@
-<toc topic="contents/01-Xtend_Introduction.xdoc.html" label="Xtend Language Reference">
-<topic href="contents/01-Xtend_Introduction.xdoc.html" label="Introduction" >
-</topic>
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html" label="Classes and Functions" >
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#packageDecl" label="Package Declaration" >
-</topic>
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#imports" label="Imports" >
-</topic>
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Xtend_ClassDeclaration" label="Class Declaration" >
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Xtend_ClassDeclaration-3" label="Inheritance" >
-</topic>
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Xtend_ClassDeclaration-4" label="Generics" >
-</topic>
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Xtend_ClassDeclaration-5" label="Examples" >
-</topic>
-</topic>
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#fields" label="Fields" >
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#fields-6" label="Extension Methods" >
-</topic>
-</topic>
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Functions" label="Functions" >
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Functions-4" label="Visibility" >
-</topic>
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Functions-5" label="Overriding Functions" >
-</topic>
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#declaredExceptions" label="Declared Exceptions" >
-</topic>
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#inferredReturnTypes" label="Inferred Return Types" >
-</topic>
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Functions-8" label="Generics" >
-</topic>
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#polymorphicDispatch" label="Dispatch Functions" >
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#polymorphicDispatch-17" label="Overloading Functions from Super Types" >
-</topic>
-</topic>
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#CreateFunctions" label="Create Functions" >
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#CreateFunctions-8" label="How it works" >
-</topic>
-</topic>
-</topic>
-<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Annotations" label="Annotations" >
-</topic>
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html" label="Expressions" >
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-2" label="Blocks" >
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_Blocks-3" label="Examples" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_Blocks-4" label="Syntax" >
-</topic>
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-3" label="Literals" >
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_StringLiterals" label="String Literals" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_IntegerLiterals" label="Integer Literals" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_BooleanLiteral" label="Boolean Literals" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_NullLiteral" label="Null Literal" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_TypeLiteral" label="Type Literals" >
-</topic>
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-4" label="Infix Operators / Operator Overloading" >
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_Operators-3" label="Short-Circuit Boolean Operators" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_Operators-4" label="Examples" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_PropertyAssignment" label="Assignments" >
-</topic>
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-5" label="Feature Calls" >
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_FeatureCalls-2" label="Syntax" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_PropertyAccess" label="Property Access" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_ImplicitThis" label="Implicit 'this' variable" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_NullSafeFeatureCalls" label="Null-Safe Feature Call" >
-</topic>
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-6" label="Constructor Call" >
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_ConstructorCall-2" label="Examples" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_ConstructorCall-3" label="Syntax" >
-</topic>
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-7" label="If Expression" >
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_IfExpression-2" label="Syntax" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_IfTypeInference" label="Typing" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_IfExpression-4" label="Examples" >
-</topic>
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-8" label="For Loop" >
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_ForLoop-4" label="Syntax" >
-</topic>
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-9" label="While Loop" >
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_WhileExpression-2" label="Syntax" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_WhileExpression-3" label="Examples" >
-</topic>
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-10" label="Do-While Loop" >
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_DoWhileExpression-2" label="Syntax" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_DoWhileExpression-3" label="Examples" >
-</topic>
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-11" label="Variable Declarations" >
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_VariableDeclaration-5" label="Syntax" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_VariableDeclaration-6" label="Typing" >
-</topic>
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-12" label="Closures" >
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_Closures-2" label="Syntax" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_ClosuresTypeInference" label="Typing" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_FunctionMapping" label="Function Mapping" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_Closures-5" label="Examples" >
-</topic>
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-13" label="Switch Expression" >
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_SwitchExpression-7" label="Type guards" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_SwitchExpression-8" label="Typing" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_SwitchExpression-9" label="Examples" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_SwitchExpression-10" label="Syntax" >
-</topic>
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-14" label="Type Casts" >
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_TypeCasts-3" label="Syntax" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_TypeCasts-4" label="Examples" >
-</topic>
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_RichStrings" label="Rich Strings" >
-<topic href="contents/03-Xtend_Expressions.xdoc.html#RichStringIF" label="Conditions in Rich Strings" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#RichStringFOREACH" label="Loops in Rich Strings" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#RichStringType" label="Typing" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#WhitespaceHandling" label="Whitespace Handling" >
-</topic>
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-16" label="Return Expression" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-17" label="Throwing Exceptions" >
-</topic>
-<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-18" label="Try, Catch, Finally" >
-</topic>
-</topic>
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<toc topic="contents/01-Xtend_Introduction.xdoc.html" label="Xtend Language Reference" >
+	<topic href="contents/01-Xtend_Introduction.xdoc.html#Xtend Language Reference-2" label="Introduction" >
+	</topic>
+	<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Xtend Language Reference-3" label="Classes and Functions" >
+		<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#packageDecl" label="Package Declaration" >
+		</topic>
+		<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#imports" label="Imports" >
+		</topic>
+		<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Xtend_ClassDeclaration" label="Class Declaration" >
+			<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Xtend_ClassDeclaration-3" label="Inheritance" >
+			</topic>
+			<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Xtend_ClassDeclaration-4" label="Generics" >
+			</topic>
+			<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Xtend_ClassDeclaration-5" label="Examples" >
+			</topic>
+		</topic>
+		<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#fields" label="Fields" >
+			<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#fields-6" label="Extension Methods" >
+			</topic>
+		</topic>
+		<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Functions" label="Functions" >
+			<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Functions-4" label="Visibility" >
+			</topic>
+			<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Functions-5" label="Overriding Functions" >
+			</topic>
+			<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#declaredExceptions" label="Declared Exceptions" >
+			</topic>
+			<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#inferredReturnTypes" label="Inferred Return Types" >
+			</topic>
+			<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Functions-8" label="Generics" >
+			</topic>
+			<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#polymorphicDispatch" label="Dispatch Functions" >
+				<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#polymorphicDispatch-17" label="Overloading Functions from Super Types" >
+				</topic>
+			</topic>
+			<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#CreateFunctions" label="Create Functions" >
+				<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#CreateFunctions-10" label="How it works" >
+				</topic>
+			</topic>
+		</topic>
+		<topic href="contents/02-Xtend_Classes_Functions.xdoc.html#Annotations" label="Annotations" >
+		</topic>
+	</topic>
+	<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend Language Reference-4" label="Expressions" >
+		<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-2" label="Blocks" >
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_Blocks-3" label="Examples" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_Blocks-4" label="Syntax" >
+			</topic>
+		</topic>
+		<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-3" label="Literals" >
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_StringLiterals" label="String Literals" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_IntegerLiterals" label="Integer Literals" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_BooleanLiteral" label="Boolean Literals" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_NullLiteral" label="Null Literal" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_TypeLiteral" label="Type Literals" >
+			</topic>
+		</topic>
+		<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-4" label="Infix Operators / Operator Overloading" >
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_Operators-3" label="Short-Circuit Boolean Operators" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_Operators-4" label="Examples" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_PropertyAssignment" label="Assignments" >
+			</topic>
+		</topic>
+		<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-5" label="Feature Calls" >
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_FeatureCalls-2" label="Syntax" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_PropertyAccess" label="Property Access" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_ImplicitThis" label="Implicit 'this' variable" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_NullSafeFeatureCalls" label="Null-Safe Feature Call" >
+			</topic>
+		</topic>
+		<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-6" label="Constructor Call" >
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_ConstructorCall-2" label="Examples" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_ConstructorCall-3" label="Syntax" >
+			</topic>
+		</topic>
+		<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-7" label="If Expression" >
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_IfExpression-2" label="Syntax" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_IfTypeInference" label="Typing" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_IfExpression-4" label="Examples" >
+			</topic>
+		</topic>
+		<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-8" label="For Loop" >
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_ForLoop-4" label="Syntax" >
+			</topic>
+		</topic>
+		<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-9" label="While Loop" >
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_WhileExpression-2" label="Syntax" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_WhileExpression-3" label="Examples" >
+			</topic>
+		</topic>
+		<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-10" label="Do-While Loop" >
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_DoWhileExpression-2" label="Syntax" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_DoWhileExpression-3" label="Examples" >
+			</topic>
+		</topic>
+		<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-11" label="Variable Declarations" >
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_VariableDeclaration-5" label="Syntax" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_VariableDeclaration-6" label="Typing" >
+			</topic>
+		</topic>
+		<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-12" label="Closures" >
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_Closures-2" label="Syntax" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_ClosuresTypeInference" label="Typing" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_FunctionMapping" label="Function Mapping" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_Closures-5" label="Examples" >
+			</topic>
+		</topic>
+		<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-13" label="Switch Expression" >
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_SwitchExpression-7" label="Type guards" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_SwitchExpression-8" label="Typing" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_SwitchExpression-9" label="Examples" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_SwitchExpression-10" label="Syntax" >
+			</topic>
+		</topic>
+		<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-14" label="Type Casts" >
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_TypeCasts-3" label="Syntax" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#Xbase_Expressions_TypeCasts-4" label="Examples" >
+			</topic>
+		</topic>
+		<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_RichStrings" label="Rich Strings" >
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#RichStringIF" label="Conditions in Rich Strings" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#RichStringFOREACH" label="Loops in Rich Strings" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#RichStringType" label="Typing" >
+			</topic>
+			<topic href="contents/03-Xtend_Expressions.xdoc.html#WhitespaceHandling" label="Whitespace Handling" >
+			</topic>
+		</topic>
+		<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-16" label="Return Expression" >
+		</topic>
+		<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-17" label="Throwing Exceptions" >
+		</topic>
+		<topic href="contents/03-Xtend_Expressions.xdoc.html#Xtend_Expressions-18" label="Try, Catch, Finally" >
+		</topic>
+	</topic>
 </toc>
