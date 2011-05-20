@@ -22,6 +22,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.parsetree.reconstr.impl.TokenUtil;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.acceptor.ISyntacticSequenceAcceptor;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
@@ -72,40 +73,6 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		}
 	}
 
-	protected void acceptNode(INode node) {
-		Object ge = node.getGrammarElement();
-		if (ge instanceof Keyword)
-			acceptUnassignedKeyword((Keyword) ge, (ILeafNode) node);
-		else if (ge instanceof RuleCall) {
-			RuleCall rc = (RuleCall) ge;
-			if (rc.getRule() instanceof TerminalRule)
-				acceptUnassignedTerminal(rc, node.getText(), (ILeafNode) node);
-			else if (rc.getRule() instanceof ParserRule)
-				acceptUnassignedDatatype(rc, node.getText(), (ICompositeNode) node);
-			else if (rc.getRule() instanceof EnumRule)
-				acceptUnassignedEnum(rc, node.getText(), (ICompositeNode) node);
-		} else if (ge instanceof Action)
-			acceptUnassignedAction((Action) ge);
-		else
-			throw new RuntimeException("Unexpected grammar element: " + node.getGrammarElement());
-	}
-
-	protected void acceptNodes(ISynNavigable fromState, INode fromNode, INode toNode) {
-		RuleCallStack stack = contexts.peek().stack.clone();
-		EmitterNodeIterator ni = new EmitterNodeIterator(fromNode, toNode, false, false);
-		while (ni.hasNext()) {
-			INode next = ni.next();
-			List<ISynState> path = fromState.getShortestPathTo((AbstractElement) next.getGrammarElement(), stack, true);
-			if (path != null) {
-				if (path.get(path.size() - 1) instanceof ISynEmitterState)
-					fromState = (ISynEmitterState) path.get(path.size() - 1);
-				else
-					return;
-				acceptNode(next);
-			}
-		}
-	}
-
 	protected Stack<SyntacticalContext> contexts = new Stack<SyntacticalContext>();
 
 	protected ISyntacticSequenceAcceptor delegate;
@@ -117,6 +84,9 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 
 	@Inject
 	protected ISyntacticSequencerPDAProvider pdaProvider;
+
+	@Inject
+	protected TokenUtil tokenUtil;
 
 	protected void accept(INode fromNode, List<ISynState> path, RuleCallStack stack) {
 		if (path.isEmpty())
@@ -220,6 +190,40 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		delegate.acceptAssignedTerminal(terminalRC, token, value, index, node);
 	}
 
+	protected void acceptNode(INode node) {
+		Object ge = node.getGrammarElement();
+		if (ge instanceof Keyword)
+			acceptUnassignedKeyword((Keyword) ge, (ILeafNode) node);
+		else if (ge instanceof RuleCall) {
+			RuleCall rc = (RuleCall) ge;
+			if (rc.getRule() instanceof TerminalRule)
+				acceptUnassignedTerminal(rc, node.getText(), (ILeafNode) node);
+			else if (rc.getRule() instanceof ParserRule)
+				acceptUnassignedDatatype(rc, node.getText(), (ICompositeNode) node);
+			else if (rc.getRule() instanceof EnumRule)
+				acceptUnassignedEnum(rc, node.getText(), (ICompositeNode) node);
+		} else if (ge instanceof Action)
+			acceptUnassignedAction((Action) ge);
+		else
+			throw new RuntimeException("Unexpected grammar element: " + node.getGrammarElement());
+	}
+
+	protected void acceptNodes(ISynNavigable fromState, INode fromNode, INode toNode) {
+		RuleCallStack stack = contexts.peek().stack.clone();
+		EmitterNodeIterator ni = new EmitterNodeIterator(fromNode, toNode, false, false);
+		while (ni.hasNext()) {
+			INode next = ni.next();
+			List<ISynState> path = fromState.getShortestPathTo((AbstractElement) next.getGrammarElement(), stack, true);
+			if (path != null) {
+				if (path.get(path.size() - 1) instanceof ISynEmitterState)
+					fromState = (ISynEmitterState) path.get(path.size() - 1);
+				else
+					return;
+				acceptNode(next);
+			}
+		}
+	}
+
 	public void acceptUnassignedAction(Action action) {
 		SyntacticalContext i = contexts.peek();
 		i.lastState = navigateToEmitter(i.lastState, i.getLastNode(), action, null, i.stack);
@@ -245,6 +249,9 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		navigateToEmitter(terminalRC, node);
 		delegate.acceptUnassignedTerminal(terminalRC, value, node);
 	}
+
+	protected abstract void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode,
+			INode toNode);
 
 	public boolean enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
 		navigateToAbsorber(action, node);
@@ -296,6 +303,10 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		while (result instanceof ICompositeNode)
 			result = ((ICompositeNode) result).getLastChild();
 		return result != null ? result : node;
+	}
+
+	protected String getTokenText(INode node) {
+		return tokenUtil.serializeNode(node);
 	}
 
 	protected abstract String getUnassignedRuleCallToken(RuleCall ruleCall, INode node);
@@ -367,8 +378,5 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		}
 		return null;
 	}
-
-	protected abstract void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode,
-			INode toNode);
 
 }
