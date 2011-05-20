@@ -2,13 +2,8 @@ chapter:grammarLanguage[The Grammar Language]
 
 The link[http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext][grammar language] 
 is the corner stone of Xtext. It is a domain-specific language, carefully designed for the description of textual languages.
-<<<<<<< Updated upstream
 The main idea is to describe the concrete syntax and how it is mapped to an in-memory representation
 - the semantic model. This model will be produced by the parser on-the-fly when it consumes an input file. 
-
-=======
-The main idea is to describe the concrete syntax and how it is mapped to an in-memory model created during parsing.
->>>>>>> Stashed changes
 
 section[A First Example]
 

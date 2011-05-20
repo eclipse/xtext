@@ -13,16 +13,10 @@
 <p>
 The <a href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext">grammar language</a> 
 is the corner stone of Xtext. It is a domain-specific language, carefully designed for the description of textual languages.
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream
 The main idea is to describe the concrete syntax and how it is mapped to an in-memory representation
 - the semantic model. This model will be produced by the parser on-the-fly when it consumes an input file. 
 </p>
-<p>
-=======
-The main idea is to describe the concrete syntax and how it is mapped to an in-memory model created during parsing.
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; Stashed changes
-</p>
-<a name="grammarLanguage-3"></a>
+<a name="grammarLanguage-2"></a>
 <h2>A First Example</h2>
 <p>
 To get an idea of how it works we&apos;ll start by implementing a <a href="http://martinfowler.com/bliki/SyntacticNoise.html">simple example</a> 
@@ -1672,7 +1666,7 @@ Example :
 <em>Note that declared terminal rules always get a higher priority then imported terminal rules.
 </em>
 </p>
-<a name="grammarLanguage-7"></a>
+<a name="grammarLanguage-6"></a>
 <h2>Common Terminals</h2>
 <p>
 Xtext ships with a default set of predefined, reasonable and often required terminal rules. The grammar

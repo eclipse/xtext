@@ -15,7 +15,7 @@
 		</topic>
 	</topic>
 	<topic href="contents/020-grammar-language.xdoc.html#Xtext Documentation-2" label="The Grammar Language" >
-		<topic href="contents/020-grammar-language.xdoc.html#grammarLanguage-3" label="A First Example" >
+		<topic href="contents/020-grammar-language.xdoc.html#grammarLanguage-2" label="A First Example" >
 		</topic>
 		<topic href="contents/020-grammar-language.xdoc.html#syntax" label="The Syntax" >
 			<topic href="contents/020-grammar-language.xdoc.html#syntax-2" label="Language Declaration" >
@@ -103,7 +103,7 @@
 		</topic>
 		<topic href="contents/020-grammar-language.xdoc.html#grammarMixins" label="Grammar Mixins" >
 		</topic>
-		<topic href="contents/020-grammar-language.xdoc.html#grammarLanguage-7" label="Common Terminals" >
+		<topic href="contents/020-grammar-language.xdoc.html#grammarLanguage-6" label="Common Terminals" >
 		</topic>
 	</topic>
 	<topic href="contents/030-generator.xdoc.html#Xtext Documentation-3" label="Configuration" >
