@@ -173,11 +173,13 @@ public class CrossRefTest extends AbstractXtextTests {
 	/* see https://bugs.eclipse.org/bugs/show_bug.cgi?id=298506 */
 	public void testCrossReferenceValueConverter() throws Exception {
 		Resource r = get(XtextResourceSet.class).createResource(URI.createURI("test." + getCurrentFileExtension()));
+		Main main = LangATestLanguageFactory.eINSTANCE.createMain();
 		Type ele = LangATestLanguageFactory.eINSTANCE.createType();
-		r.getContents().add(ele);
+		r.getContents().add(main);
+		main.getTypes().add(ele);
 		ele.setName("type");
 		ele.setExtends(ele);
-		assertEquals("type ^type extends ^type", getSerializer().serialize(ele));
+		assertEquals("type ^type extends ^type", getSerializer().serialize(main));
 	}
 
 }

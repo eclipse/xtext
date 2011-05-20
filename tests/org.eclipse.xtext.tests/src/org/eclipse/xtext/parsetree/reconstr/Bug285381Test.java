@@ -32,7 +32,7 @@ public class Bug285381Test extends AbstractXtextTests {
 		Type newType = LangATestLanguageFactory.eINSTANCE.createType();
 		newType.setName("Foo");
 		parsedType.setExtends(newType);
-		String serialized = serialize(parsedType);
+		String serialized = serialize(model);
 		// we use the existing value from the node model
 		// since there is not string representation of the newType
 		assertEquals(modelAsString, serialized); 
@@ -47,7 +47,7 @@ public class Bug285381Test extends AbstractXtextTests {
 		newType.setName("Foo");
 		parsedType.setExtends(newType);
 		try {
-			serialize(parsedType);
+			serialize(model);
 			fail("expected XtextSerializationException");
 		} catch(XtextSerializationException e) {
 			// expected
