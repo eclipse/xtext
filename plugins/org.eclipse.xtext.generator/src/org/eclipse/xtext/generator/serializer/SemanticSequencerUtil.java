@@ -82,11 +82,13 @@ public class SemanticSequencerUtil {
 		IConstraintElement body = constraint.getBody();
 		if (body == null)
 			return false;
-		if (body.getFeatureInfo() != null && !body.isOptional() && !body.isMany())
+		if (body.getFeatureInfo() != null && !body.isOptional() && !body.isMany()
+				&& !body.getFeatureInfo().getFeature().isMany())
 			return true;
 		if (body.getType() == ConstraintElementType.GROUP) {
 			for (IConstraintElement child : body.getChildren())
-				if (child.getFeatureInfo() == null || child.isOptional() || child.isMany())
+				if (child.getFeatureInfo() == null || child.isOptional() || child.isMany()
+						|| child.getFeatureInfo().getFeature().isMany())
 					return false;
 			return true;
 		}
