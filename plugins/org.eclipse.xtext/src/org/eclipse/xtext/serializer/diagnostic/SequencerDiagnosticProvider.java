@@ -37,7 +37,7 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 	public static class NamedElement2Name implements Function<ENamedElement, String> {
 
 		public String apply(ENamedElement from) {
-			return from.getName();
+			return from == null ? "null" : from.getName();
 		}
 	}
 
