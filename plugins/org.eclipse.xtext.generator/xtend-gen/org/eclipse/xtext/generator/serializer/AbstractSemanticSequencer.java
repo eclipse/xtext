@@ -73,8 +73,8 @@ public class AbstractSemanticSequencer extends GeneratedFile {
         }
       };
     List<T> _sort = IterableExtensions.<T>sort(iterable, new Comparator<T>() {
-        public int compare(T o1,T o2) {
-          return _function.apply(o1,o2);
+        public int compare(T arg0,T arg1) {
+          return _function.apply(arg0,arg1);
         }
     });
     return _sort;
@@ -282,7 +282,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     return _exists;
   }
   
-  public String getFileContents() {
+  public CharSequence getFileContents() {
     String _xblockexpression = null;
     {
       String _packageName = this.getPackageName();

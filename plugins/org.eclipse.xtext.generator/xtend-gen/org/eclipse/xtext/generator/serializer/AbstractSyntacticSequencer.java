@@ -53,7 +53,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     return _name;
   }
   
-  public String getFileContents() {
+  public CharSequence getFileContents() {
     String _xblockexpression = null;
     {
       String _packageName = this.getPackageName();
@@ -262,8 +262,8 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           }
         };
       List<AbstractRule> _sort = IterableExtensions.<AbstractRule>sort(_set, new Comparator<AbstractRule>() {
-          public int compare(AbstractRule o1,AbstractRule o2) {
-            return _function_4.apply(o1,o2);
+          public int compare(AbstractRule arg0,AbstractRule arg1) {
+            return _function_4.apply(arg0,arg1);
           }
       });
       _xblockexpression = (_sort);

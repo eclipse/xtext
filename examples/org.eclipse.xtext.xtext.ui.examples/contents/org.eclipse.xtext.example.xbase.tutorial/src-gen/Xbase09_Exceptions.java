@@ -5,7 +5,7 @@ public class Xbase09_Exceptions {
 		
 		{
 		  try {
-		    String _string = ((Object) null).toString();
+		    ((Object) null).toString();
 		  } catch (NullPointerException e) { 
 		    RuntimeException _runtimeException = new RuntimeException(e);
 		    throw _runtimeException;
