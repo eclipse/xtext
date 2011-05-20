@@ -12,8 +12,8 @@ DONE SE 030-generator.xdoc
 DONE JK 040-dependency-injection.xdoc
 DONE JK 050-heading-runtime.xdoc
 DONE JK 060-validation.xdoc
-070-linking.xdoc
-080-scoping.xdoc
+DONE JK 070-linking.xdoc
+DONE JK 080-scoping.xdoc
 090-valueconverter.xdoc
 100-serialization.xdoc
 105-formatting.xdoc

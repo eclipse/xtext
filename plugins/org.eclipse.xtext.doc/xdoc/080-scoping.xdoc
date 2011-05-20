@@ -1,12 +1,13 @@
 section:scoping[Scoping]
 
 Using the scoping API one defines which elements are referable by a certain reference. For instance, 
-using the introductory example (fowler's state machine language)
+using the introductory example (Fowler's state machine language)
 a transition contains two cross-references: One to a declared event and one to a declared state.
 
 Example:
 
-code[FowlerExample][events
+code[FowlerExample][
+events
   nothingImportant  MYEV
 end
  
@@ -36,11 +37,14 @@ code[Java][public interface IScopeProvider {
 	 * provides access to the compatible visible EObjects 
 	 * for a given reference.
 	 *
-	 * @param context the element from which an element shall be referenced
-	 * @param reference the reference to be used to filter the elements.
-	 * @return {@link IScope} representing the inner most {@link IScope} for 
-	 *         the passed context and reference. Note for implementors: The 
-	 *         result may not be <code>null</code>. Return 
+	 * @param context the element from which an element shall be 
+	 *        referenced
+	 * @param reference the reference to be used to filter the 
+	 *        elements.
+	 * @return {@link IScope} representing the inner most 
+	 *         {@link IScope} for the passed context and reference. 
+	 *         Note for implementors: The result may not be 
+	 *         <code>null</code>. Return 
 	 *         <code>IScope.NULLSCOPE</code> instead.
 	 */
 	IScope getScope(EObject context, EReference reference);
@@ -69,7 +73,7 @@ codeRef[org.eclipse.xtext.scoping.IGlobalScopeProvider]. The data structures use
 store its elements are described in the next section.
 
 
-section3:resourcedescriptions[e[Resource] and e[EObject] Descriptions (_IResourceDescription_, e[IEObjectDescription])]
+section3:resourcedescriptions[e[Resource] and e[EObject] Descriptions e[(IResourceDescription, IEObjectDescription)]]
 
 In order to make states and events of one file referable from another file you need to export them as 
 part of a so called codeRef[org.eclipse.xtext.resource.IResourceDescription]. 
@@ -82,14 +86,14 @@ those names, which couldn't be resolved. This information is important in order 
 hull of dependent resources, which the shipped index infrastructure automatically does for you.
 
 For users and especially in the context of scoping the most important information is the list of 
-exported e[EObjects]. An codeRef[org.eclipse.xtext.resource.IEObjectDescription] 
-contains information about the e[URI] to the actual e[EObject] and the qualified name of that element 
-as well as the corresponding e[EClass]. In addition one can export arbitrary information using the 
-e[user data] map. The following diagram gives an overview on the description classes and their relationships.
+exported codeRef[org.eclipse.emf.ecore.EObject]s. An codeRef[org.eclipse.xtext.resource.IEObjectDescription] 
+contains information about the codeRef[org.eclipse.emf.common.util.URI] to the actual 
+codeRef[org.eclipse.emf.ecore.EObject] and the codeRef[org.eclipse.xtext.naming.QualifiedName]
+of that element as well as the corresponding codeRef[org.eclipse.emf.ecore.EClass]. In addition one can 
+export arbitrary information using the e[user data] map. The following diagram gives an overview on the 
+description classes and their relationships.
 
-todo[fix image]
 img[images/index_datamodel.png][(Descriptions)][ ][ ]
-
 
 A language is configured with a default implementation of e[IResourceDescription.Manager] which computes 
 the list of exported e[IEObjectDescriptions] by iterating the whole EMF model and applying the 
@@ -107,43 +111,52 @@ the simple name with the qualified name of its parent exported e[EObject]. This 
 the qualified name computation of most namespace-based languages (like e.g. Java). 
 
 As mentioned above, in order to calculate an e[IResourceDescription] for a resource the framework asks 
-the e[IResourceDescription.Manager]. Here's some Java code showing how to do that:
+the e[IResourceDescription.Manager]. To convert between a codeRef[org.eclipse.xtext.naming.QualifiedName]
+and its codeRef[java.lang.String] representation you can use the 
+codeRef[org.eclipse.xtext.naming.IQualifiedNameConverter].
+Here is some Java code showing how to do that:
 
-code[Java][Manager manager = // obtain an instance of IResourceDescription.Manager
-IResourceDescription description = manager.getResourceDescription(resource);
-for (IEObjectDescription objDescription : description.getExportedObjects()) {
-  System.out.println(objDescription.getQualifiedName());
+code[Java][
+@Inject IQualifiedNameConverter converter;
+
+Manager manager = // obtain an instance of IResourceDescription.Manager
+IResourceDescription description =
+	manager.getResourceDescription(resource);
+for (IEObjectDescription eod : description.getExportedObjects()) {
+  System.out.println(converter.toString(eod.getQualifiedName()));
 } 
-  ]
+]
 
 In order to obtain an e[IResourceDescription.Manager] it is best to ask the corresponding 
 codeRef[org.eclipse.xtext.resource.IResourceServiceProvider]. That is because each 
 language might have a totally different implementation and as you might refer from your language to a 
-different language you can't reuse your language's e[IResourceDescription.Manager]. One basically asks 
+different language you cannot reuse your language's e[IResourceDescription.Manager]. One basically asks 
 the e[IResourceServiceProvider.Registry] (there is usually one global instance) for an 
 e[IResourceServiceProvider], which in turn provides an e[IResourceDescription.Manager] along other 
 useful services.
 
-If you're running in a Guice enabled scenario, the code looks like this:
+If you are running in a Guice enabled scenario, the code looks like this:
 
-code[Java][@Inject 
-private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
+code[Java][
+@Inject 
+private IResourceServiceProvider.Registry rspr;
 	
 private IResourceDescription.Manager getManager(Resource res) {
   IResourceServiceProvider resourceServiceProvider = 
-    resourceServiceProviderRegistry.getResourceServiceProvider(res.getURI());
+    rspr.getResourceServiceProvider(res.getURI());
   return resourceServiceProvider.getResourceDescriptionManager();
 }
 ]
 
 If you don't run in a Guice enabled context you will likely have to directly access the singleton:
 
-code[Java][private IResourceServiceProvider.Registry resourceServiceProviderRegistry = 
+code[Java][
+private IResourceServiceProvider.Registry rspr = 
   IResourceServiceProvider.Registry.INSTANCE;
 ]
 
 However, we strongly encourage you to use dependency injection.
-Now, that we know how to export elements to be referenceable from other resources, we need to learn 
+Now, that we know how to export elements to be referable from other resources, we need to learn 
 how those exported e[IEObjectDescriptions] can be made available to the referencing resources. That is 
 the responsibility of global scoping (i.e. 
 codeRef[org.eclipse.xtext.scoping.IGlobalScopeProvider]) which is described in the 
@@ -160,7 +173,8 @@ Talking of the introductory example and given you would want to add support for 
 e[States] and e[Events] from within your state machine, all you had to do is add something like the 
 following to the grammar definition:
 
-code[Xtext][Statemachine :
+code[Xtext][
+Statemachine :
   (imports+=Import)* // allow imports
   'events'
      (events+=Event)+
@@ -178,33 +192,31 @@ Import :
 ]
 
 This effectively allows import statements to be declared before the events section. In addition 
-you'll have to make sure that you have bound the 
+you will have to make sure that you have bound the 
 codeRef[org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider] for the type 
-e[IGlobalScopeProvider] by the means of ref:dependencyInjection[Guice]. That implementation looks up any 
-e[EAttributes] named 'importURI' in your model and interprets their values as URIs that point to imported
-resources. That is it adds the corresponding resources to the current resource's resource set. In 
-addition the scope provider uses the ref:resourcedescriptions[_IResourceDescription.Manager_] of that 
+codeRef[org.eclipse.xtext.scoping.IGlobalScopeProvider] by the means of ref:dependencyInjection[Guice]. 
+That implementation looks up any e[EAttributes] named 'importURI' in your model and interprets their 
+values as URIs that point to imported resources. That is it adds the corresponding resources to the current 
+resource's resource set. In addition the scope provider uses the 
+ref:resourcedescriptions[e[IResourceDescription.Manager]] of that 
 imported resource to compute all the e[IEObjectDescriptions] returned by the e[IScope].  
 
 Global scopes based on import URIs are available if you use the 
 codeRef[org.eclipse.xtext.generator.scoping.ImportURIScopingFragment] in the 
 workflow of your language. It will bind an 
-codeRef[org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider] 
-(e[org.eclipse.xtext.resource.ignorecase.IgnoreCaseImportUriGlobalScopeProvider]todo[fixme] 
-if the e[caseInsensitve] flag is set) that handles e[importURI] features.
+codeRef[org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider] that handles e[importURI] features.
 
 
 section3:index_based[Global Scopes Based On External Configuration (e.g. Classpath-Based)]
 
 Instead of explicitly referring to imported resources, the other possibility is to have some kind of 
 external configuration in order to define what is visible from outside a resource. Java for instances 
-uses the notion of classpaths to define containers (jars and class folders) which contain any 
+uses the notion of the classpath to define containers (jars and class folders) which contain any 
 referenceable elements. In the case of Java also the order of such entries is important. 
 
 Since version 1.0.0 Xtext provides support for this kind of global scoping. To enable it, a 
 codeRef[org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider] has to be bound to 
-the e[IGlobalScopeProvider] interface. For case insensitive names use the 
-e[org.eclipse.xtext.resource.ignorecase.IgnoreCaseDefaultGlobalScopeProvider]todo[fixme].
+the e[IGlobalScopeProvider] interface. 
 
 By default Xtext leverages the classpath mechanism since it is well designed and already understood 
 by most of our users. The available tooling provided by JDT and PDE to configure the classpath adds 
@@ -238,12 +250,11 @@ the referencing language by means of so called e[IContainers]: While Java might 
 via e[ClassLoader.loadResource()] (i.e. using the classpath mechanism), another language could load 
 the same resource using the file system paths. 
 
-
 Consequently, the information which container a resource belongs to depends on the referencing 
 context. Therefore an e[IResourceServiceProvider] provides another interesting service, which is called
 e[IContainer.Manager]. For a given e[IResourceDescription], the e[IContainer.Manager] provides you with 
 the codeRef[org.eclipse.xtext.resource.IContainer] as well as with a list of all 
-e[IContainers] which are visible from there. Note that the index (_IResourceDesciptions_) is globally 
+e[IContainers] which are visible from there. Note that the index e[(IResourceDesciptions)] is globally 
 shared between all languages while the e[IContainer.Manager] that adds the semantics of containers can 
 be very different depending on the language. The following method lists all resources visible from a 
 given e[Resource]:  
@@ -288,12 +299,11 @@ section4:jdt_based_containers[JDT-Based Container Manager]
 As JDT is an Eclipse feature, this JDT-based container management is only available in the UI scenario. 
 It assumes so called e[IPackageFragmentRoots] as containers. An e[IPackageFragmentRoot] in JDT is the 
 root of a tree of Java model elements. It usually refers to 
-todo[revise indentation levels]
 ul[
-item[a source folder of a Java project,]
-item[a referenced jar, ]
-item[a classpath entry of a referenced Java project, or]
-item[the exported packages of a required PDE plug-in.]
+	item[a source folder of a Java project,]
+	item[a referenced jar, ]
+	item[a classpath entry of a referenced Java project, or]
+	item[the exported packages of a required PDE plug-in.]
 ]
 
 So for an element to be referable, its resource must be on the classpath of the caller's Java project 
@@ -310,16 +320,17 @@ code[Java][public Class<? extends IContainer.Manager> bindIContainer$Manager() {
 
 in the runtime module and 
 
-code[Java][public Provider<IAllContainersState> provideIAllContainersState() {
+code[Java][
+public Provider<IAllContainersState> provideIAllContainersState() {
   return org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();
-  // return org.eclipse.xtext.ui.shared.Access.getStrictJavaProjectsState();
 }
 ]
 
 in the UI module of the referencing language. The latter looks a bit more difficult than a common 
-binding, as we have to bind a global singleton to a Guice provider. The e[StrictJavaProjectsState] 
-requires all elements to be on the classpath, while the default e[JavaProjectsState] also allows models 
-in non-source folders. 
+binding, as we have to bind a global singleton to a Guice provider. A 
+codeRef[org.eclipse.xtext.ui.containers.StrictJavaProjectsState] requires all elements to be on the 
+classpath, while the default codeRef[org.eclipse.xtext.ui.containers.JavaProjectsState] also allows 
+models in non-source folders. 
 
 
 section4:project_based_containers[Eclipse Project-Based Containers]
@@ -451,7 +462,8 @@ scope are quite often owned or referenced by a container of the context object. 
 e[State] objects could for instance be owned by a containing e[StateMachine] object.
 
 If no method specific to the cross-reference in question was found for any of the objects in the 
-containment hierarchy, the implementation will start looking for methods matching the other signature. Again it will first attempt to match the context object. Thus in the 
+containment hierarchy, the implementation will start looking for methods matching the other signature.
+Again it will first attempt to match the context object. Thus in the 
 example the signature first matched would be:
 
 code[Java][IScope scope_State(Transition this, EReference ref)]
@@ -479,10 +491,12 @@ section3[codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider]]
 
 The codeRef[org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider] 
 makes use of the so called codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider] 
-service. It computes qualified names for EObjects. The default implementation 
-(codeRef[org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider]) uses 
-a simple name look up and concatenates the result to the qualified name of its parent object using a dot 
-as separator. 
+service. It computes codeRef[org.eclipse.xtext.naming.QualifiedName]s for EObjects. A qualified name
+consists of several segments
+
+The default implementation (codeRef[org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider]) uses 
+a simple name look up composes the qualified name of the simple names of all containers and the object
+itself. 
 
 It also allows to override the name computation declaratively. The following snippet shows how you could 
 make e[Transitions] in the state machine example referable by giving them a name. Don't forget to bind 
@@ -490,11 +504,12 @@ your implementation in your runtime module.
 
 code[Java][FowlerDslQualifiedNameProvider 
       extends DefaultDeclarativeQualifiedNameProvider {
-  public String qualifiedName(Transition t) {
+  public QualifiedName qualifiedName(Transition t) {
     if(t.getEvent() == null || !(t.eContainer() instanceof State)) 
       return null;
     else 
-      return ((State)t.eContainer()).getName() + "." t.getEvent().getName();
+      return QualifiedName.create((State)t.eContainer()).getName(), 
+      	t.getEvent().getName());
   }
 }
 ]

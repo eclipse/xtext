@@ -3,7 +3,6 @@ section:linking[Linking]
 The linking feature allows for specification of cross-references within an Xtext grammar.
 The following things are needed for the linking:
 
-todo[revise indentation levels]
 ol[
 item[declaration of a crosslink in the grammar (at least in the Ecore model)]
 item[specification of linking semantics (usually provided via the ref:scoping[scoping API])]
@@ -27,7 +26,7 @@ code[Xtext][ReferringType :
 ]
 
 The ref:metamodelInference[Ecore model inference] would create an e[EClass] e[ReferringType] with an 
-e[EReference] e[referencedObject] of type e[Entity] (_containment=false_). The referenced object would 
+e[EReference] e[referencedObject] of type e[Entity] e[(containment=false)]. The referenced object would 
 be identified either by a e[STRING] and the surrounding information in the current context 
 (see ref:scoping[scoping]). If you do not use e[generate] but e[import] an existing Ecore model, 
 the class e[ReferringType] (or one of its super types) would need to have an e[EReference] of type 

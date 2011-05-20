@@ -65,7 +65,7 @@ The only thing you have to do in order to use this factory is to prefix the clas
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<extension</br>&nbsp;&nbsp;point=<span class="string">"org.eclipse.ui.editors"</span>></br>&nbsp;&nbsp;<editor</br>&nbsp;&nbsp;&nbsp;&nbsp;class=<span class="string">"<MyLanguageName>ExecutableExtensionFactory:</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.ui.editor.XtextEditor"</span></br>&nbsp;&nbsp;&nbsp;&nbsp;contributorClass=</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"org.eclipse.ui.editors.text.TextEditorActionContributor"</span></br>&nbsp;&nbsp;&nbsp;&nbsp;default=<span class="string">"true"</span></br>&nbsp;&nbsp;&nbsp;&nbsp;extensions=<span class="string">"ecoredsl"</span></br>&nbsp;&nbsp;&nbsp;&nbsp;id=<span class="string">"org.eclipse.xtext.example.EcoreDsl"</span></br>&nbsp;&nbsp;&nbsp;&nbsp;name=<span class="string">"EcoreDsl&nbsp;Editor"</span>></br>&nbsp;&nbsp;</editor></br></extension>
+<extension&nbsp;point=<span class="string">"org.eclipse.ui.editors"</span>></br>&nbsp;&nbsp;<editor</br>&nbsp;&nbsp;&nbsp;&nbsp;class=<span class="string">"<MyLanguageName>ExecutableExtensionFactory:</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.ui.editor.XtextEditor"</span></br>&nbsp;&nbsp;&nbsp;&nbsp;contributorClass=</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"org.eclipse.ui.editors.text.TextEditorActionContributor"</span></br>&nbsp;&nbsp;&nbsp;&nbsp;default=<span class="string">"true"</span></br>&nbsp;&nbsp;&nbsp;&nbsp;extensions=<span class="string">"ecoredsl"</span></br>&nbsp;&nbsp;&nbsp;&nbsp;id=<span class="string">"org.eclipse.xtext.example.EcoreDsl"</span></br>&nbsp;&nbsp;&nbsp;&nbsp;name=<span class="string">"EcoreDsl&nbsp;Editor"</span>></br>&nbsp;&nbsp;</editor></br></extension>
 </p>
 </div>
 </div>
@@ -296,7 +296,7 @@ generator fragment
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.validation.JavaValidatorFragment&nbsp;{}
+fragment&nbsp;=&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.generator.validation.JavaValidatorFragment&nbsp;{}
 </p>
 </div>
 </div>
@@ -508,10 +508,6 @@ The linking feature allows for specification of cross-references within an Xtext
 The following things are needed for the linking:
 </p>
 <p>
-<div class="todo" >
-revise indentation levels
-</div>
-
 <ol>
 	<li>
 		declaration of a crosslink in the grammar (at least in the Ecore model)
@@ -560,7 +556,8 @@ Ecore model inference
 <em>EReference
 </em> <em>referencedObject
 </em> of type <em>Entity
-</em> (_containment=false_). The referenced object would 
+</em> <em>(containment=false)
+</em>. The referenced object would 
 be identified either by a <em>STRING
 </em> and the surrounding information in the current context 
 (see <a href="050-heading-runtime.xdoc.html#scoping">
@@ -635,7 +632,7 @@ scoping API
 <h2>Scoping</h2>
 <p>
 Using the scoping API one defines which elements are referable by a certain reference. For instance, 
-using the introductory example (fowler&apos;s state machine language)
+using the introductory example (Fowler&apos;s state machine language)
 a transition contains two cross-references: One to a declared event and one to a declared state.
 </p>
 <p>
@@ -683,7 +680,7 @@ an <em>org.eclipse.xtext.scoping.IScope</em> for a given context <em>EObject
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">interface</span>&nbsp;IScopeProvider&nbsp;{</br></br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;scope&nbsp;for&nbsp;the&nbsp;given&nbsp;context.&nbsp;The&nbsp;scope&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;provides&nbsp;access&nbsp;to&nbsp;the&nbsp;compatible&nbsp;visible&nbsp;EObjects&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;for&nbsp;a&nbsp;given&nbsp;reference.</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;context&nbsp;the&nbsp;element&nbsp;from&nbsp;which&nbsp;an&nbsp;element&nbsp;shall&nbsp;be&nbsp;referenced</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;reference&nbsp;the&nbsp;reference&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;filter&nbsp;the&nbsp;elements.</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;{@link&nbsp;IScope}&nbsp;representing&nbsp;the&nbsp;inner&nbsp;most&nbsp;{@link&nbsp;IScope}&nbsp;for&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;passed&nbsp;context&nbsp;and&nbsp;reference.&nbsp;Note&nbsp;for&nbsp;implementors:&nbsp;The&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;may&nbsp;not&nbsp;be&nbsp;<code>null</code>.&nbsp;Return&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>IScope.NULLSCOPE</code>&nbsp;instead.</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></br>&nbsp;&nbsp;&nbsp;&nbsp;IScope&nbsp;getScope(EObject&nbsp;context,&nbsp;EReference&nbsp;reference);</br></br>}
+<span class="keyword">public</span>&nbsp;<span class="keyword">interface</span>&nbsp;IScopeProvider&nbsp;{</br></br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;scope&nbsp;for&nbsp;the&nbsp;given&nbsp;context.&nbsp;The&nbsp;scope&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;provides&nbsp;access&nbsp;to&nbsp;the&nbsp;compatible&nbsp;visible&nbsp;EObjects&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;for&nbsp;a&nbsp;given&nbsp;reference.</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;context&nbsp;the&nbsp;element&nbsp;from&nbsp;which&nbsp;an&nbsp;element&nbsp;shall&nbsp;be&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;referenced</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;reference&nbsp;the&nbsp;reference&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;filter&nbsp;the&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elements.</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;{@link&nbsp;IScope}&nbsp;representing&nbsp;the&nbsp;inner&nbsp;most&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{@link&nbsp;IScope}&nbsp;for&nbsp;the&nbsp;passed&nbsp;context&nbsp;and&nbsp;reference.&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;for&nbsp;implementors:&nbsp;The&nbsp;result&nbsp;may&nbsp;not&nbsp;be&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>null</code>.&nbsp;Return&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>IScope.NULLSCOPE</code>&nbsp;instead.</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></br>&nbsp;&nbsp;&nbsp;&nbsp;IScope&nbsp;getScope(EObject&nbsp;context,&nbsp;EReference&nbsp;reference);</br></br>}
 </p>
 </div>
 </div>
@@ -715,7 +712,7 @@ As the name suggests, global scopes are provided by instances of the
 store its elements are described in the next section.
 </p>
 <a name="resourcedescriptions"></a>
-<h4>Resource and EObject Descriptions (_IResourceDescription_, IEObjectDescription)</h4>
+<h4>Resource and EObject Descriptions (IResourceDescription, IEObjectDescription)</h4>
 <p>
 In order to make states and events of one file referable from another file you need to export them as 
 part of a so called <em>org.eclipse.xtext.resource.IResourceDescription</em>. 
@@ -733,21 +730,15 @@ hull of dependent resources, which the shipped index infrastructure automaticall
 </p>
 <p>
 For users and especially in the context of scoping the most important information is the list of 
-exported <em>EObjects
-</em>. An <em>org.eclipse.xtext.resource.IEObjectDescription</em> 
-contains information about the <em>URI
-</em> to the actual <em>EObject
-</em> and the qualified name of that element 
-as well as the corresponding <em>EClass
-</em>. In addition one can export arbitrary information using the 
-<em>user data
-</em> map. The following diagram gives an overview on the description classes and their relationships.
+exported <em>org.eclipse.emf.ecore.EObject</em>s. An <em>org.eclipse.xtext.resource.IEObjectDescription</em> 
+contains information about the <em>org.eclipse.emf.common.util.URI</em> to the actual 
+<em>org.eclipse.emf.ecore.EObject</em> and the <em>org.eclipse.xtext.naming.QualifiedName</em>
+of that element as well as the corresponding <em>org.eclipse.emf.ecore.EClass</em>. In addition one can 
+export arbitrary information using the <em>user data
+</em> map. The following diagram gives an overview on the 
+description classes and their relationships.
 </p>
 <p>
-<div class="todo" >
-fix image
-</div>
-
 <div class="image" >
 <img src="images/index_datamodel.png" class=" " 
  style=" " />
@@ -785,13 +776,16 @@ the qualified name computation of most namespace-based languages (like e.g. Java
 As mentioned above, in order to calculate an <em>IResourceDescription
 </em> for a resource the framework asks 
 the <em>IResourceDescription.Manager
-</em>. Here&apos;s some Java code showing how to do that:
+</em>. To convert between a <em>org.eclipse.xtext.naming.QualifiedName</em>
+and its <em>java.lang.String</em> representation you can use the 
+<em>org.eclipse.xtext.naming.IQualifiedNameConverter</em>.
+Here is some Java code showing how to do that:
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Manager&nbsp;manager&nbsp;=&nbsp;<span class="comment">//&nbsp;obtain&nbsp;an&nbsp;instance&nbsp;of&nbsp;IResourceDescription.Manager</br></span>IResourceDescription&nbsp;description&nbsp;=&nbsp;manager.getResourceDescription(resource);</br><span class="keyword">for</span>&nbsp;(IEObjectDescription&nbsp;objDescription&nbsp;:&nbsp;description.getExportedObjects())&nbsp;{</br>&nbsp;&nbsp;System.out.println(objDescription.getQualifiedName());</br>}
+@Inject&nbsp;IQualifiedNameConverter&nbsp;converter;</br></br>Manager&nbsp;manager&nbsp;=&nbsp;<span class="comment">//&nbsp;obtain&nbsp;an&nbsp;instance&nbsp;of&nbsp;IResourceDescription.Manager</br></span>IResourceDescription&nbsp;description&nbsp;=</br>&nbsp;&nbsp;&nbsp;&nbsp;manager.getResourceDescription(resource);</br><span class="keyword">for</span>&nbsp;(IEObjectDescription&nbsp;eod&nbsp;:&nbsp;description.getExportedObjects())&nbsp;{</br>&nbsp;&nbsp;System.out.println(converter.toString(eod.getQualifiedName()));</br>}
 </p>
 </div>
 </div>
@@ -801,7 +795,7 @@ In order to obtain an <em>IResourceDescription.Manager
 </em> it is best to ask the corresponding 
 <em>org.eclipse.xtext.resource.IResourceServiceProvider</em>. That is because each 
 language might have a totally different implementation and as you might refer from your language to a 
-different language you can&apos;t reuse your language&apos;s <em>IResourceDescription.Manager
+different language you cannot reuse your language&apos;s <em>IResourceDescription.Manager
 </em>. One basically asks 
 the <em>IResourceServiceProvider.Registry
 </em> (there is usually one global instance) for an 
@@ -811,13 +805,13 @@ the <em>IResourceServiceProvider.Registry
 useful services.
 </p>
 <p>
-If you&apos;re running in a Guice enabled scenario, the code looks like this:
+If you are running in a Guice enabled scenario, the code looks like this:
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Inject&nbsp;</br><span class="keyword">private</span>&nbsp;IResourceServiceProvider.Registry&nbsp;resourceServiceProviderRegistry;</br>&nbsp;&nbsp;&nbsp;&nbsp;</br><span class="keyword">private</span>&nbsp;IResourceDescription.Manager&nbsp;getManager(Resource&nbsp;res)&nbsp;{</br>&nbsp;&nbsp;IResourceServiceProvider&nbsp;resourceServiceProvider&nbsp;=&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;resourceServiceProviderRegistry.getResourceServiceProvider(res.getURI());</br>&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;resourceServiceProvider.getResourceDescriptionManager();</br>}
+@Inject&nbsp;</br><span class="keyword">private</span>&nbsp;IResourceServiceProvider.Registry&nbsp;rspr;</br>&nbsp;&nbsp;&nbsp;&nbsp;</br><span class="keyword">private</span>&nbsp;IResourceDescription.Manager&nbsp;getManager(Resource&nbsp;res)&nbsp;{</br>&nbsp;&nbsp;IResourceServiceProvider&nbsp;resourceServiceProvider&nbsp;=&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;rspr.getResourceServiceProvider(res.getURI());</br>&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;resourceServiceProvider.getResourceDescriptionManager();</br>}
 </p>
 </div>
 </div>
@@ -829,14 +823,14 @@ If you don&apos;t run in a Guice enabled context you will likely have to directl
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">private</span>&nbsp;IResourceServiceProvider.Registry&nbsp;resourceServiceProviderRegistry&nbsp;=&nbsp;</br>&nbsp;&nbsp;IResourceServiceProvider.Registry.INSTANCE;
+<span class="keyword">private</span>&nbsp;IResourceServiceProvider.Registry&nbsp;rspr&nbsp;=&nbsp;</br>&nbsp;&nbsp;IResourceServiceProvider.Registry.INSTANCE;
 </p>
 </div>
 </div>
 </p>
 <p>
 However, we strongly encourage you to use dependency injection.
-Now, that we know how to export elements to be referenceable from other resources, we need to learn 
+Now, that we know how to export elements to be referable from other resources, we need to learn 
 how those exported <em>IEObjectDescriptions
 </em> can be made available to the referencing resources. That is 
 the responsibility of global scoping (i.e. 
@@ -869,18 +863,19 @@ Statemachine&nbsp;:</br>&nbsp;&nbsp;(imports+=Import)*&nbsp;<span class="comment
 </p>
 <p>
 This effectively allows import statements to be declared before the events section. In addition 
-you&apos;ll have to make sure that you have bound the 
+you will have to make sure that you have bound the 
 <em>org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider</em> for the type 
-<em>IGlobalScopeProvider
-</em> by the means of <a href="050-heading-runtime.xdoc.html#dependencyInjection">
+<em>org.eclipse.xtext.scoping.IGlobalScopeProvider</em> by the means of <a href="050-heading-runtime.xdoc.html#dependencyInjection">
 Guice
 </a>
-. That implementation looks up any 
-<em>EAttributes
-</em> named &apos;importURI&apos; in your model and interprets their values as URIs that point to imported
-resources. That is it adds the corresponding resources to the current resource&apos;s resource set. In 
-addition the scope provider uses the <a href="050-heading-runtime.xdoc.html#resourcedescriptions">
-_IResourceDescription.Manager_
+. 
+That implementation looks up any <em>EAttributes
+</em> named &apos;importURI&apos; in your model and interprets their 
+values as URIs that point to imported resources. That is it adds the corresponding resources to the current 
+resource&apos;s resource set. In addition the scope provider uses the 
+<a href="050-heading-runtime.xdoc.html#resourcedescriptions">
+<em>IResourceDescription.Manager
+</em>
 </a>
  of that 
 imported resource to compute all the <em>IEObjectDescriptions
@@ -891,14 +886,7 @@ imported resource to compute all the <em>IEObjectDescriptions
 Global scopes based on import URIs are available if you use the 
 <em>org.eclipse.xtext.generator.scoping.ImportURIScopingFragment</em> in the 
 workflow of your language. It will bind an 
-<em>org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider</em> 
-(<em>org.eclipse.xtext.resource.ignorecase.IgnoreCaseImportUriGlobalScopeProvider
-</em><div class="todo" >
-fixme
-</div>
- 
-if the <em>caseInsensitve
-</em> flag is set) that handles <em>importURI
+<em>org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider</em> that handles <em>importURI
 </em> features.
 </p>
 <a name="index_based"></a>
@@ -906,19 +894,14 @@ if the <em>caseInsensitve
 <p>
 Instead of explicitly referring to imported resources, the other possibility is to have some kind of 
 external configuration in order to define what is visible from outside a resource. Java for instances 
-uses the notion of classpaths to define containers (jars and class folders) which contain any 
+uses the notion of the classpath to define containers (jars and class folders) which contain any 
 referenceable elements. In the case of Java also the order of such entries is important. 
 </p>
 <p>
 Since version 1.0.0 Xtext provides support for this kind of global scoping. To enable it, a 
 <em>org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider</em> has to be bound to 
 the <em>IGlobalScopeProvider
-</em> interface. For case insensitive names use the 
-<em>org.eclipse.xtext.resource.ignorecase.IgnoreCaseDefaultGlobalScopeProvider
-</em><div class="todo" >
-fixme
-</div>
-.
+</em> interface. 
 </p>
 <p>
 By default Xtext leverages the classpath mechanism since it is well designed and already understood 
@@ -976,7 +959,8 @@ context. Therefore an <em>IResourceServiceProvider
 </em> provides you with 
 the <em>org.eclipse.xtext.resource.IContainer</em> as well as with a list of all 
 <em>IContainers
-</em> which are visible from there. Note that the index (_IResourceDesciptions_) is globally 
+</em> which are visible from there. Note that the index <em>(IResourceDesciptions)
+</em> is globally 
 shared between all languages while the <em>IContainer.Manager
 </em> that adds the semantics of containers can 
 be very different depending on the language. The following method lists all resources visible from a 
@@ -1028,10 +1012,6 @@ It assumes so called <em>IPackageFragmentRoots
 </em> as containers. An <em>IPackageFragmentRoot
 </em> in JDT is the 
 root of a tree of Java model elements. It usually refers to 
-<div class="todo" >
-revise indentation levels
-</div>
-
 <ul>
 	<li>
 		a source folder of a Java project,
@@ -1072,18 +1052,17 @@ in the runtime module and
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;Provider<IAllContainersState>&nbsp;provideIAllContainersState()&nbsp;{</br>&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();</br>&nbsp;&nbsp;<span class="comment">//&nbsp;return&nbsp;org.eclipse.xtext.ui.shared.Access.getStrictJavaProjectsState();</br></span>}
+<span class="keyword">public</span>&nbsp;Provider<IAllContainersState>&nbsp;provideIAllContainersState()&nbsp;{</br>&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();</br>}
 </p>
 </div>
 </div>
 </p>
 <p>
 in the UI module of the referencing language. The latter looks a bit more difficult than a common 
-binding, as we have to bind a global singleton to a Guice provider. The <em>StrictJavaProjectsState
-</em> 
-requires all elements to be on the classpath, while the default <em>JavaProjectsState
-</em> also allows models 
-in non-source folders. 
+binding, as we have to bind a global singleton to a Guice provider. A 
+<em>org.eclipse.xtext.ui.containers.StrictJavaProjectsState</em> requires all elements to be on the 
+classpath, while the default <em>org.eclipse.xtext.ui.containers.JavaProjectsState</em> also allows 
+models in non-source folders. 
 </p>
 <a name="project_based_containers"></a>
 <h5>Eclipse Project-Based Containers
@@ -1241,7 +1220,8 @@ scope are quite often owned or referenced by a container of the context object. 
 </p>
 <p>
 If no method specific to the cross-reference in question was found for any of the objects in the 
-containment hierarchy, the implementation will start looking for methods matching the other signature. Again it will first attempt to match the context object. Thus in the 
+containment hierarchy, the implementation will start looking for methods matching the other signature.
+Again it will first attempt to match the context object. Thus in the 
 example the signature first matched would be:
 </p>
 <p>
@@ -1274,10 +1254,13 @@ extends <em>org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvi
 <p>
 The <em>org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider</em> 
 makes use of the so called <em>org.eclipse.xtext.naming.IQualifiedNameProvider</em> 
-service. It computes qualified names for EObjects. The default implementation 
-(<em>org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider</em>) uses 
-a simple name look up and concatenates the result to the qualified name of its parent object using a dot 
-as separator. 
+service. It computes <em>org.eclipse.xtext.naming.QualifiedName</em>s for EObjects. A qualified name
+consists of several segments
+</p>
+<p>
+The default implementation (<em>org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider</em>) uses 
+a simple name look up composes the qualified name of the simple names of all containers and the object
+itself. 
 </p>
 <p>
 It also allows to override the name computation declaratively. The following snippet shows how you could 
@@ -1289,7 +1272,7 @@ your implementation in your runtime module.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-FowlerDslQualifiedNameProvider&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;DefaultDeclarativeQualifiedNameProvider&nbsp;{</br>&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;qualifiedName(Transition&nbsp;t)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(t.getEvent()&nbsp;==&nbsp;<span class="keyword">null</span>&nbsp;|| !(t.eContainer()&nbsp;<span class="keyword">instanceof</span>&nbsp;State))&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">null</span>;</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span>&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;((State)t.eContainer()).getName()&nbsp;+&nbsp;<span class="string">"."</span>&nbsp;t.getEvent().getName();</br>&nbsp;&nbsp;}</br>}
+FowlerDslQualifiedNameProvider&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;DefaultDeclarativeQualifiedNameProvider&nbsp;{</br>&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;QualifiedName&nbsp;qualifiedName(Transition&nbsp;t)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(t.getEvent()&nbsp;==&nbsp;<span class="keyword">null</span>&nbsp;|| !(t.eContainer()&nbsp;<span class="keyword">instanceof</span>&nbsp;State))&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">null</span>;</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span>&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;QualifiedName.create((State)t.eContainer()).getName(),&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.getEvent().getName());</br>&nbsp;&nbsp;}</br>}
 </p>
 </div>
 </div>

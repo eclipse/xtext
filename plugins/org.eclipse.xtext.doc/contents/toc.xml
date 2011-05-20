@@ -157,7 +157,7 @@
 		</topic>
 		<topic href="contents/050-heading-runtime.xdoc.html#runtime_concepts-7" label="Scoping" >
 			<topic href="contents/050-heading-runtime.xdoc.html#global_scopes" label="Global Scopes and IResourceDescriptions" >
-				<topic href="contents/050-heading-runtime.xdoc.html#resourcedescriptions" label="Resource and EObject Descriptions (_IResourceDescription_, IEObjectDescription)" >
+				<topic href="contents/050-heading-runtime.xdoc.html#resourcedescriptions" label="Resource and EObject Descriptions (IResourceDescription, IEObjectDescription)" >
 				</topic>
 				<topic href="contents/050-heading-runtime.xdoc.html#import_uri" label="Global Scopes Based On Explicit Imports (ImportURI Mechanism)" >
 				</topic>
