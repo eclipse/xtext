@@ -1,1469 +1,968 @@
 <html>
 <head>
-<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
 <title>IDE Concepts</title>
+
 <link href="book.css" rel="stylesheet" type="text/css">
 <link href="code.css" rel="stylesheet" type="text/css">
 <link rel="home" href="index.html" title="">
 </head>
-<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-
-<a name="ide_concepts"></a>
-<h1 xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">IDE Concepts</h1>
-
+<body>
+<a name="Xtext Documentation-6"></a>
+<h1>IDE Concepts</h1>
 <p>
 For the following part we will refer to a concrete example grammar in order to explain certain aspect 
 of the UI more clearly. The used example grammar is as follows:
 </p>
-
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;org.eclipse.text.documentation.Sample&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals<br />
-<br />
-<span class="keyword">generate</span>&nbsp;gen&nbsp;<span class="string" >&apos;http://www.eclipse.org/xtext/documentation/Sample&apos;</span><br />
-<br />
-Model&nbsp;:<br />
-&nbsp;&nbsp;<span class="string" >"model"</span>&nbsp;intAttribute=INT&nbsp;(stringDescription=STRING)?&nbsp;<span class="string" >"{"</span>&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(rules&nbsp;+=&nbsp;AbstractRule)*&nbsp;<br />
-&nbsp;&nbsp;<span class="string" >"}"</span>&nbsp;<br />
-;<br />
-<br />
-AbstractRule:<br />
-&nbsp;&nbsp;RuleA&nbsp;|&nbsp;RuleB<br />
-;<br />
-<br />
-RuleA&nbsp;:<br />
-&nbsp;&nbsp;&nbsp;<span class="string" >"RuleA"</span>&nbsp;<span class="string" >"("</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string" >")"</span>&nbsp;;<br />
-<br />
-RuleB&nbsp;return&nbsp;gen::CustomType:<br />
-&nbsp;&nbsp;&nbsp;<span class="string" >"RuleB"</span>&nbsp;<span class="string" >"("</span>&nbsp;ruleA&nbsp;=&nbsp;[RuleA]&nbsp;<span class="string" >")"</span>&nbsp;;
+<span class="keyword">grammar</span>&nbsp;org.eclipse.text.documentation.Sample&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals</br></br><span class="keyword">generate</span>&nbsp;gen&nbsp;<span class="string">'http://www.eclipse.org/xtext/documentation/Sample'</span></br></br>Model&nbsp;:</br>&nbsp;&nbsp;<span class="string">"model"</span>&nbsp;intAttribute=INT&nbsp;(stringDescription=STRING)?&nbsp;<span class="string">"{"</span>&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(rules&nbsp;+=&nbsp;AbstractRule)*&nbsp;</br>&nbsp;&nbsp;<span class="string">"}"</span>&nbsp;</br>;</br></br>AbstractRule:</br>&nbsp;&nbsp;RuleA&nbsp;|&nbsp;RuleB</br>;</br></br>RuleA&nbsp;:</br>&nbsp;&nbsp;&nbsp;<span class="string">"RuleA"</span>&nbsp;<span class="string">"("</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">")"</span>&nbsp;;</br></br>RuleB&nbsp;return&nbsp;gen::CustomType:</br>&nbsp;&nbsp;&nbsp;<span class="string">"RuleB"</span>&nbsp;<span class="string">"("</span>&nbsp;ruleA&nbsp;=&nbsp;[RuleA]&nbsp;<span class="string">")"</span>&nbsp;;
 </p>
 </div>
 </div>
-
-
 </p>
-
-
-
-
 <a name="ide_concepts-3"></a>
-<div class="section" title="Label Provider">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title">
-Label Provider
-</h2>
-</div>
-</div>
-</div>
-
-
-
+<h2>Label Provider</h2>
 <p>
 There are various places in the UI in which model elements have to be presented to the user: In the 
-
-<a href="170-outline.xdoc.html#outline">outline view</a>, in 
-<a href="180-hyperlinking.xdoc.html#hyperlinking">hyper links</a>, in 
-<a href="150-contentassist.xdoc.html#contentAssist">content proposals</a>, 
-find dialogs etc. Xtext allows to customize each of these appearances by individual <em>ILabelProviders</em>. 
+<a href="120-heading-UI.xdoc.html#outline">
+outline view
+</a>
+, in 
+<a href="120-heading-UI.xdoc.html#hyperlinking">
+hyper links
+</a>
+, in 
+<a href="120-heading-UI.xdoc.html#contentAssist">
+content proposals
+</a>
+, 
+find dialogs etc. Xtext allows to customize each of these appearances by individual 
+<em>ILabelProviders
+</em>
+. 
 </p>
-
 <p>
-An <em>ILabelProvider</em> has two methods: <em>getText(Object)</em> returns the text in an object&apos;s label, 
-while <em>getImage(Object)</em> returns the icon. In addition, the Eclipse UI framework offers the 
-<em>IStyledLabelProvider</em>, which returns a styled string (i.e. with custom fonts, colors etc.) in the 
-<em>getStyledText(Object)</em> method. 
+An 
+<em>ILabelProvider
+</em>
+ has two methods: 
+<em>getText(Object)
+</em>
+ returns the text in an object&apos;s label, 
+while 
+<em>getImage(Object)
+</em>
+ returns the icon. In addition, the Eclipse UI framework offers the 
+<em>IStyledLabelProvider
+</em>
+, which returns a styled string (i.e. with custom fonts, colors etc.) in the 
+<em>getStyledText(Object)
+</em>
+ method. 
 </p>
-
 <p>
 Almost all label providers in the Xtext framework inherit from the base class 
-
 <em>org.eclipse.xtext.ui.label.AbstractLabelProvider</em>
  which unifies both 
-approaches. Subclasses can either return a styled string or a string in the <em>doGetText(Object)</em> method. 
+approaches. Subclasses can either return a styled string or a string in the 
+<em>doGetText(Object)
+</em>
+ method. 
 The framework will automatically convert it to a styled text (with default styles) or to a plain text 
 in the respective methods. 
 </p>
-
 <p>
 Dealing with images can be cumbersome, too, as image handles tend to be scarce system resources. 
 The 
 <em>org.eclipse.xtext.ui.label.AbstractLabelProvider</em>
  helps you managing 
-the images: In your implementation of <em>doGetImage(Object)</em> you can as well return an <em>Image</em> or a string, 
-representing a path in the <em>icons/</em> folder of the containing plug-in. This path is actually 
+the images: In your implementation of 
+<em>doGetImage(Object)
+</em>
+ you can as well return an 
+<em>Image
+</em>
+ or a string, 
+representing a path in the 
+<em>icons/
+</em>
+ folder of the containing plug-in. This path is actually 
 configurable by Google Guice. Have a look at the 
-
 <em>org.eclipse.xtext.ui.PluginImageHelper</em>
  to learn about the 
 customizing possibilities.
 </p>
-
 <p>
 If you have the 
-
 <em>org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment</em>
  in the 
 list of generator fragments in the MWE2 workflow for your language, it will automatically create 
 stubs and bindings for an 
-<a href="140-labelprovider.xdoc.html#EObjectLabelProvider">_{MyLang}EObjectLabelProvider_</a> and an 
-
-<a href="140-labelprovider.xdoc.html#DescriptionLabelProvider">_{MyLang}DescriptionLabelProvider_</a> which you can implement by manually. 
+<a href="120-heading-UI.xdoc.html#EObjectLabelProvider">
+_{MyLang}EObjectLabelProvider_
+</a>
+ and an 
+<a href="120-heading-UI.xdoc.html#DescriptionLabelProvider">
+_{MyLang}DescriptionLabelProvider_
+</a>
+ which you can implement by manually. 
 </p>
-
-
 <a name="EObjectLabelProvider"></a>
-
-<a name="EObjectLabelProvider"></a>
-<div class="section" title="Label Providers For EObjects">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Label Providers For EObjects
-</h3>
-</div>
-</div>
-</div>
-
-
-
+<h3>Label Providers For EObjects</h3>
 <p>
 The first set of label providers refers to actually loaded and thereby available model elements. 
-By default, Xtext binds the <em>DefaultEObjectLabelProvider</em> to all use cases, but you can change the 
+By default, Xtext binds the 
+<em>DefaultEObjectLabelProvider
+</em>
+ to all use cases, but you can change the 
 binding individually for the Outline, Content Assist or other places. For that purpose, there is a 
-so called <em>binding annotation</em> for each use case. For example, to use a custom 
-<em>MyContentAssistLabelProvider</em> to display elements in the content assist, you have to override
+so called 
+<em>binding annotation
+</em>
+ for each use case. For example, to use a custom 
+<em>MyContentAssistLabelProvider
+</em>
+ to display elements in the content assist, you have to override
 </p>
-
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Override<br />
-<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configureContentProposalLabelProvider(Binder&nbsp;binder)&nbsp;{<br />
-&nbsp;&nbsp;binder.bind(ILabelProvider.<span class="keyword">class</span>)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;.annotatedWith(ContentProposalLabelProvider.<span class="keyword">class</span>)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;.to(MyContentAssistLabelProvider.<span class="keyword">class</span>);<br />
-}<br />
-<br />
-p.in&nbsp;your&nbsp;language<span class="string" >&apos;s&nbsp;UI&nbsp;module.</span>
+@Override</br><span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configureContentProposalLabelProvider(Binder&nbsp;binder)&nbsp;{</br>&nbsp;&nbsp;binder.bind(ILabelProvider.<span class="keyword">class</span>)</br>&nbsp;&nbsp;&nbsp;&nbsp;.annotatedWith(ContentProposalLabelProvider.<span class="keyword">class</span>)</br>&nbsp;&nbsp;&nbsp;&nbsp;.to(MyContentAssistLabelProvider.<span class="keyword">class</span>);</br>}</br></br>p.in&nbsp;your&nbsp;language<span class="string">'s&nbsp;UI&nbsp;module.</span>
 </p>
 </div>
 </div>
-
-
 </p>
-
 <p>
-If your grammar uses an imported <em>EPackage</em>, there may be an existing <em>.edit</em> plug-in generated 
+If your grammar uses an imported 
+<em>EPackage
+</em>
+, there may be an existing 
+<em>.edit
+</em>
+ plug-in generated 
 by EMF that also provides label providers for model elements. To use this as a fallback, your label 
 provider should call the constructor with the 
 delegate parameter and use DI for the initialization, e.g.
 </p>
-
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyLabelProvider&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;MyLabelProvider(AdapterFactoryLabelProvider&nbsp;delegate)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>(delegate);<br />
-&nbsp;&nbsp;&nbsp;&nbsp;}<br />
-&nbsp;&nbsp;&nbsp;&nbsp;...<br />
-}
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyLabelProvider&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;&nbsp;&nbsp;&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;MyLabelProvider(AdapterFactoryLabelProvider&nbsp;delegate)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>(delegate);</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br>&nbsp;&nbsp;&nbsp;&nbsp;...</br>}
 </p>
 </div>
 </div>
-
-
 </p>
-
-
 <a name="DefaultEObjectLabelProvider"></a>
-
-<a name="DefaultEObjectLabelProvider"></a>
-<div class="section" title="DefaultEObjectLabelProvider">
-<div class="titlepage">
-<div>
-<div>
-<h4 class="title">
-DefaultEObjectLabelProvider
-</h4>
-</div>
-</div>
-</div>
-
-
-
+<h4>DefaultEObjectLabelProvider</h4>
 <p>
-The default implementation of the <em>LabelProvider</em> interface utilizes the polymorphic dispatcher idiom 
+The default implementation of the 
+<em>LabelProvider
+</em>
+ interface utilizes the polymorphic dispatcher idiom 
 to implement an external visitor as the requirements of the LabelProvider are kind of a best match for 
 this pattern. It comes down to the fact that the only thing you need to do is to implement a method 
 that matches a specific signature. It either provides a image filename or the text to be used to 
 represent your model element. Have a look at following example to get a more detailed idea about 
-the <em>DefaultEObjectLabelProvider</em>.
+the 
+<em>DefaultEObjectLabelProvider
+</em>
+.
 </p>
-
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;SampleLabelProvider&nbsp;<span class="keyword">extends</span>&nbsp;DefaultLabelProvider&nbsp;{<br />
-<br />
-&nbsp;&nbsp;String&nbsp;text(RuleA&nbsp;rule)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string" >"Rule:&nbsp;"</span>&nbsp;+&nbsp;rule.getName();<br />
-&nbsp;&nbsp;}<br />
-&nbsp;&nbsp;<br />
-&nbsp;&nbsp;String&nbsp;image(RuleA&nbsp;rule)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string" >"ruleA.gif"</span>;<br />
-&nbsp;&nbsp;}<br />
-&nbsp;&nbsp;<br />
-&nbsp;&nbsp;String&nbsp;image(RuleB&nbsp;rule)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string" >"ruleB.gif"</span>;<br />
-&nbsp;&nbsp;}<br />
-}
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;SampleLabelProvider&nbsp;<span class="keyword">extends</span>&nbsp;DefaultLabelProvider&nbsp;{</br></br>&nbsp;&nbsp;String&nbsp;text(RuleA&nbsp;rule)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"Rule:&nbsp;"</span>&nbsp;+&nbsp;rule.getName();</br>&nbsp;&nbsp;}</br>&nbsp;&nbsp;</br>&nbsp;&nbsp;String&nbsp;image(RuleA&nbsp;rule)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"ruleA.gif"</span>;</br>&nbsp;&nbsp;}</br>&nbsp;&nbsp;</br>&nbsp;&nbsp;String&nbsp;image(RuleB&nbsp;rule)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"ruleB.gif"</span>;</br>&nbsp;&nbsp;}</br>}
 </p>
 </div>
 </div>
-
-
 </p>
-
 <p>
 What is especially nice about the default implementation is the actual reason for its class 
 name: It provides very reasonable defaults. To compute the label for a certain model element, it will 
-at first have a look for an EAttribute <em>name</em> and try to use this one. If it cannot find such a feature, 
+at first have a look for an EAttribute 
+<em>name
+</em>
+ and try to use this one. If it cannot find such a feature, 
 it will try to use the first feature, that can be used best as a label. At worst it will return the 
 class name of the model element, which is kind of unlikely to happen.
 </p>
-
 <p>
-You can a also customize error handling by overriding the methods <em>handleTextError()</em> or 
-<em>handleImageError()</em>.
+You can a also customize error handling by overriding the methods 
+<em>handleTextError()
+</em>
+ or 
+<em>handleImageError()
+</em>
+.
 </p>
-
-
-</div>
-
-</div>
-
 <a name="DescriptionLabelProvider"></a>
-
-<a name="DescriptionLabelProvider"></a>
-<div class="section" title="Label Providers For Index Entries">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Label Providers For Index Entries
-</h3>
-</div>
-</div>
-</div>
-
-
-
+<h3>Label Providers For Index Entries</h3>
 <p>
 Xtext maintains an index of all model elements to allow quick searching and linking without loading 
 the referenced resource (See the chapter on 
-<a href="080-scoping.xdoc.html#index_based">index-based scopes</a> for details). The 
-elements from this index also appear in some UI contexts, e.g. in the <em>Find model elements</em> dialog or 
-in the <em>Find references</em> view. For reasons of scalability, the UI should not automatically load 
+<a href="050-heading-runtime.xdoc.html#index_based">
+index-based scopes
+</a>
+ for details). The 
+elements from this index also appear in some UI contexts, e.g. in the 
+<em>Find model elements
+</em>
+ dialog or 
+in the 
+<em>Find references
+</em>
+ view. For reasons of scalability, the UI should not automatically load 
 resources, so we need another implementation of a label provider that works with the elements from the 
-index, i.e. <em>IResourceDescription</em>, <em>IEObjectDescription</em>, and <em>IReferenceDescription</em>.
+index, i.e. 
+<em>IResourceDescription
+</em>
+, 
+<em>IEObjectDescription
+</em>
+, and 
+<em>IReferenceDescription
+</em>
+.
 </p>
-
 <p>
 The default implementation of this service is the 
-
 <em>org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider</em>
 . It employs the 
 same polymorphic dispatch mechanism as the 
-<a href="140-labelprovider.xdoc.html#DefaultEObjectLabelProvider">DefaultEObjectLabelProvider</a>. 
-The default text of an <em>EObjectDescription</em> is its indexed name. The image is resolved by dispatching 
-to <em>image(EClass)</em> with the <em>EClass</em> of the described object. This is likely the only method you want 
-to override. <em>IResourceDescriptions</em> will be represented with their path and the icon registered for 
+<a href="120-heading-UI.xdoc.html#DefaultEObjectLabelProvider">
+DefaultEObjectLabelProvider
+</a>
+. 
+The default text of an 
+<em>EObjectDescription
+</em>
+ is its indexed name. The image is resolved by dispatching 
+to 
+<em>image(EClass)
+</em>
+ with the 
+<em>EClass
+</em>
+ of the described object. This is likely the only method you want 
+to override. 
+<em>IResourceDescriptions
+</em>
+ will be represented with their path and the icon registered for 
 your language&apos;s editor. 
 </p>
-
 <p>
 To have a custom description label provider, make sure it is bound in your UI module:
 </p>
-
 <p>
 <span class="inlinecode"><span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configureResourceUIServiceLabelProvider(Binder&nbsp;binder)&nbsp;{</span>
-
 </p>
-
 <p>
   binder.bind(ILabelProvider.class)
     .annotatedWith(ResourceServiceDescriptionLabelProvider.class)
     .to(MyCustomDefaultDescriptionLabelProvider.class);
 }
 </p>
-
-
-</div>
-
-</div>
-
-
-
 <a name="ide_concepts-4"></a>
-<div class="section" title="Content Assist">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title">
-Content Assist
-</h2>
-</div>
-</div>
-</div>
-
-
-
+<h2>Content Assist</h2>
 <p>
 The Xtext generator, amongst other things, generates the following two content assist (CA) related artifacts:
 </p>
-
 <p>
-
+<div class="todo" >
+revise indentation levels
+</div>
 
 <ul>
-
-<li>
-
-<p>
-an abstract proposal provider class named <em>Abstract[Language]ProposalProvider</em> generated into the <em>src-gen</em> folder within the <em>ui</em> project
-</p>
-
-</li>
-
-<li>
-
-<p>
-a concrete sub-class in the <em>src</em>-folder of the <em>ui</em> project called <em>[Language]ProposalProvider</em>
-</p>
-
-</li>
-
+	<li>
+		an abstract proposal provider class named 
+		<em>Abstract[Language]ProposalProvider
+		</em>
+		 generated into the 
+		<em>src-gen
+		</em>
+		 folder within the 
+		<em>ui
+		</em>
+		 project
+	</li>
+	<li>
+		a concrete sub-class in the 
+		<em>src
+		</em>
+		-folder of the 
+		<em>ui
+		</em>
+		 project called 
+		<em>[Language]ProposalProvider
+		</em>
+	</li>
 </ul>
-
 </p>
-
 <p>
-First we will investigate the generated <em>Abstract[Language]ProposalProvider</em> with methods that look like this:
+First we will investigate the generated 
+<em>Abstract[Language]ProposalProvider
+</em>
+ with methods that look like this:
 </p>
-
-
-
-
 <a name="contentAssist-4"></a>
-<div class="section" title="ProposalProvider">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-ProposalProvider
-</h3>
-</div>
-</div>
-</div>
-
-
-
+<h3>ProposalProvider</h3>
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;complete[TypeName]_[FeatureName](<br />
-&nbsp;&nbsp;EObject&nbsp;model,&nbsp;<br />
-&nbsp;&nbsp;Assignment&nbsp;assignment,&nbsp;<br />
-&nbsp;&nbsp;ContentAssistContext&nbsp;context,&nbsp;<br />
-&nbsp;&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{<br />
-&nbsp;&nbsp;<span class="comment" >//&nbsp;clients&nbsp;may&nbsp;override<br />
-</span>}<br />
-<br />
-<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;complete_[RuleName](<br />
-&nbsp;&nbsp;EObject&nbsp;model,&nbsp;<br />
-&nbsp;&nbsp;RuleCall&nbsp;ruleCall,&nbsp;<br />
-&nbsp;&nbsp;ContentAssistContext&nbsp;context,&nbsp;<br />
-&nbsp;&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{<br />
-&nbsp;&nbsp;<span class="comment" >//&nbsp;clients&nbsp;may&nbsp;override<br />
-</span>}
+<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;complete[TypeName]_[FeatureName](</br>&nbsp;&nbsp;EObject&nbsp;model,&nbsp;</br>&nbsp;&nbsp;Assignment&nbsp;assignment,&nbsp;</br>&nbsp;&nbsp;ContentAssistContext&nbsp;context,&nbsp;</br>&nbsp;&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{</br>&nbsp;&nbsp;<span class="comment">//&nbsp;clients&nbsp;may&nbsp;override</br></span>}</br></br><span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;complete_[RuleName](</br>&nbsp;&nbsp;EObject&nbsp;model,&nbsp;</br>&nbsp;&nbsp;RuleCall&nbsp;ruleCall,&nbsp;</br>&nbsp;&nbsp;ContentAssistContext&nbsp;context,&nbsp;</br>&nbsp;&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{</br>&nbsp;&nbsp;<span class="comment">//&nbsp;clients&nbsp;may&nbsp;override</br></span>}
 </p>
 </div>
 </div>
-
-
 </p>
-
 <p>
-The snippet above indicates that the generated ProposalProvider class contains a <em>complete*</em>-method 
+The snippet above indicates that the generated ProposalProvider class contains a 
+<em>complete*
+</em>
+-method 
 for each assigned feature in the grammar and for each rule. The brackets are place-holders that should 
 give a clue about the naming scheme used to create the various entry points for clients. The generated 
 proposal provider falls back to some default behavior for cross-references and keywords. Furthermore 
 it inherits the logic that was introduced in reused grammars. 
 </p>
-
 <p>
 Clients who want to customize the behavior may override the methods from the 
-<em>AbstractProposalProvider</em> or introduce new methods with a specialized first parameter. The framework 
+<em>AbstractProposalProvider
+</em>
+ or introduce new methods with a specialized first parameter. The framework 
 dispatches method calls according to the current context to the most concrete implementation, that 
 can be found.
 </p>
-
 <p>
 It is important to know, that for a given offset in a model file, many possible grammar elements exist. 
 The framework dispatches to the method declarations for any valid element. That means, that a bunch 
-of <em>complete*</em> methods may be called.
+of 
+<em>complete*
+</em>
+ methods may be called.
 </p>
-
-
-</div>
-
-
-
 <a name="contentAssist-5"></a>
-<div class="section" title="Sample Implementation">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Sample Implementation
-</h3>
-</div>
-</div>
-</div>
-
-
-
+<h3>Sample Implementation</h3>
 <p>
 To provide a dummy proposal for the description of a model object, you may introduce a specialization 
 of the generated method and implement it as follows. This will give &apos;Description for model #7&apos; for a 
 model with the intAttribute &apos;7&apos;
 </p>
-
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;completeModel_StringDescription&nbsp;(<br />
-&nbsp;&nbsp;Model&nbsp;model,&nbsp;<br />
-&nbsp;&nbsp;Assignment&nbsp;assignment,&nbsp;<br />
-&nbsp;&nbsp;ContentAssistContext&nbsp;context,&nbsp;<br />
-&nbsp;&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{<br />
-&nbsp;&nbsp;<span class="comment" >//&nbsp;call&nbsp;implementation&nbsp;in&nbsp;superclass<br />
-</span>&nbsp;&nbsp;<span class="keyword">super</span>.completeModel_StringDescription(<br />
-&nbsp;&nbsp;&nbsp;&nbsp;model,&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;assignment,&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;context,&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;acceptor);<br />
-<br />
-&nbsp;&nbsp;<span class="comment" >//&nbsp;compute&nbsp;the&nbsp;plain&nbsp;proposal<br />
-</span>&nbsp;&nbsp;String&nbsp;proposal&nbsp;=&nbsp;<span class="string" >"Description&nbsp;for&nbsp;model&nbsp;#"</span>&nbsp;+&nbsp;model.getIntAttribute();<br />
-<br />
-&nbsp;&nbsp;<span class="comment" >//&nbsp;convert&nbsp;it&nbsp;to&nbsp;a&nbsp;valid&nbsp;STRING-terminal<br />
-</span>&nbsp;&nbsp;proposal&nbsp;=&nbsp;getValueConverter().toString(proposal,&nbsp;<span class="string" >"STRING"</span>);<br />
-<br />
-&nbsp;&nbsp;<span class="comment" >//&nbsp;create&nbsp;the&nbsp;completion&nbsp;proposal<br />
-</span>&nbsp;&nbsp;<span class="comment" >//&nbsp;the&nbsp;result&nbsp;may&nbsp;be&nbsp;null&nbsp;as&nbsp;the&nbsp;createCompletionProposal(..)&nbsp;methods&nbsp;<br />
-</span>&nbsp;&nbsp;<span class="comment" >//&nbsp;check&nbsp;for&nbsp;valid&nbsp;prefixes<br />
-</span>&nbsp;&nbsp;<span class="comment" >//&nbsp;and&nbsp;terminal&nbsp;token&nbsp;conflicts<br />
-</span>&nbsp;&nbsp;ICompletionProposal&nbsp;completionProposal&nbsp;=&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;createCompletionProposal(proposal,&nbsp;context);<br />
-<br />
-&nbsp;&nbsp;<span class="comment" >//&nbsp;register&nbsp;the&nbsp;proposal,&nbsp;the&nbsp;acceptor&nbsp;handles&nbsp;null-values&nbsp;gracefully<br />
-</span>&nbsp;&nbsp;acceptor.accept(completionProposal);<br />
-}
+<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;completeModel_StringDescription&nbsp;(</br>&nbsp;&nbsp;Model&nbsp;model,&nbsp;</br>&nbsp;&nbsp;Assignment&nbsp;assignment,&nbsp;</br>&nbsp;&nbsp;ContentAssistContext&nbsp;context,&nbsp;</br>&nbsp;&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{</br>&nbsp;&nbsp;<span class="comment">//&nbsp;call&nbsp;implementation&nbsp;in&nbsp;superclass</br></span>&nbsp;&nbsp;<span class="keyword">super</span>.completeModel_StringDescription(</br>&nbsp;&nbsp;&nbsp;&nbsp;model,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;assignment,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;context,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;acceptor);</br></br>&nbsp;&nbsp;<span class="comment">//&nbsp;compute&nbsp;the&nbsp;plain&nbsp;proposal</br></span>&nbsp;&nbsp;String&nbsp;proposal&nbsp;=&nbsp;<span class="string">"Description&nbsp;for&nbsp;model&nbsp;#"</span>&nbsp;+&nbsp;model.getIntAttribute();</br></br>&nbsp;&nbsp;<span class="comment">//&nbsp;convert&nbsp;it&nbsp;to&nbsp;a&nbsp;valid&nbsp;STRING-terminal</br></span>&nbsp;&nbsp;proposal&nbsp;=&nbsp;getValueConverter().toString(proposal,&nbsp;<span class="string">"STRING"</span>);</br></br>&nbsp;&nbsp;<span class="comment">//&nbsp;create&nbsp;the&nbsp;completion&nbsp;proposal</br></span>&nbsp;&nbsp;<span class="comment">//&nbsp;the&nbsp;result&nbsp;may&nbsp;be&nbsp;null&nbsp;as&nbsp;the&nbsp;createCompletionProposal(..)&nbsp;methods&nbsp;</br></span>&nbsp;&nbsp;<span class="comment">//&nbsp;check&nbsp;for&nbsp;valid&nbsp;prefixes</br></span>&nbsp;&nbsp;<span class="comment">//&nbsp;and&nbsp;terminal&nbsp;token&nbsp;conflicts</br></span>&nbsp;&nbsp;ICompletionProposal&nbsp;completionProposal&nbsp;=&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;createCompletionProposal(proposal,&nbsp;context);</br></br>&nbsp;&nbsp;<span class="comment">//&nbsp;register&nbsp;the&nbsp;proposal,&nbsp;the&nbsp;acceptor&nbsp;handles&nbsp;null-values&nbsp;gracefully</br></span>&nbsp;&nbsp;acceptor.accept(completionProposal);</br>}
 </p>
 </div>
 </div>
-
-
 </p>
-
-
-</div>
-
-</div>
-
-
-
 <a name="ide_concepts-5"></a>
-<div class="section" title="Quick Fixes">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title">
-Quick Fixes
-</h2>
-</div>
-</div>
-</div>
-
-
-
+<h2>Quick Fixes</h2>
 <p>
 For validations written using the 
-<a href="060-validation.xdoc.html#custom_validation">AbstractDeclarativeValidator</a> 
+<a href="050-heading-runtime.xdoc.html#custom_validation">
+AbstractDeclarativeValidator
+</a>
+ 
 it is possible to provide corresponding quick fixes in the editor. To be able to implement a quick fix 
-for a given diagnostic (a warning or error) the underlying <em>cause</em> of the diagnostic must be known 
+for a given diagnostic (a warning or error) the underlying 
+<em>cause
+</em>
+ of the diagnostic must be known 
 (i.e. what actual problem does the diagnostic represent?), otherwise the fix doesn&apos;t know what needs 
 to be done. As we don&apos;t want to deduce this from the diagnostic&apos;s error message we associate a problem 
-specific <em>code</em> with the diagnostic.
+specific 
+<em>code
+</em>
+ with the diagnostic.
 </p>
-
 <p>
-In the following example taken from the <em>DomainmodelJavaValidator</em> 
-the diagnostic&apos;s <em>code</em> is given by the third argument to the <em>warning()</em> method and it is a reference 
-to the static <em>String</em> field <em>INVALID_TYPE_NAME</em> in the validator class.
+In the following example taken from the 
+<em>DomainmodelJavaValidator
+</em>
+ 
+the diagnostic&apos;s 
+<em>code
+</em>
+ is given by the third argument to the 
+<em>warning()
+</em>
+ method and it is a reference 
+to the static 
+<em>String
+</em>
+ field 
+<em>INVALID_TYPE_NAME
+</em>
+ in the validator class.
 </p>
-
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-warning(<span class="string" >"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital"</span>,&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.TYPE__NAME,&nbsp;INVALID_TYPE_NAME,&nbsp;type.getName());
+warning(<span class="string">"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital"</span>,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.TYPE__NAME,&nbsp;INVALID_TYPE_NAME,&nbsp;type.getName());
 </p>
 </div>
 </div>
-
-
 </p>
-
 <p>
 Now that the validation has a unique code identifying the problem we can register quick fixes for it. 
 We start by adding the 
-
 <em>org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment</em>
  
-to our workflow and after regenerating the code we should find an empty class <em>MyDslQuickfixProvider</em> 
-in our DSL&apos;s UI project and new entries in the <em>plugin.xml_gen</em> file.
+to our workflow and after regenerating the code we should find an empty class 
+<em>MyDslQuickfixProvider
+</em>
+ 
+in our DSL&apos;s UI project and new entries in the 
+<em>plugin.xml_gen
+</em>
+ file.
 </p>
-
 <p>
-Continuing with the <em>INVALID_TYPE_NAME</em> problem from the Domainmodel example we add a method with which 
-the problem can be fixed (have a look at the <em>DomainmodelQuickfixProvider</em> for details):
+Continuing with the 
+<em>INVALID_TYPE_NAME
+</em>
+ problem from the Domainmodel example we add a method with which 
+the problem can be fixed (have a look at the 
+<em>DomainmodelQuickfixProvider
+</em>
+ for details):
 </p>
-
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)<br />
-<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;fixName(<span class="keyword">final</span>&nbsp;Issue&nbsp;issue,&nbsp;IssueResolutionAcceptor&nbsp;acceptor)&nbsp;{<br />
-&nbsp;&nbsp;acceptor.accept(issue,&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >"Capitalize&nbsp;name"</span>,&nbsp;<span class="comment" >//&nbsp;quick&nbsp;fix&nbsp;label<br />
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >"Capitalize&nbsp;name&nbsp;&nbsp;of&nbsp;&apos;"</span>&nbsp;+&nbsp;issue.getData()[0]&nbsp;+&nbsp;<span class="string" >"&apos;"</span>,&nbsp;&nbsp;<span class="comment" >//&nbsp;description&nbsp;<br />
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >"upcase.png"</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" >//&nbsp;quick&nbsp;fix&nbsp;icon<br />
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;IModification()&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;apply(IModificationContext&nbsp;context)&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throws</span>&nbsp;BadLocationException&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IXtextDocument&nbsp;xtextDocument&nbsp;=&nbsp;context.getXtextDocument();<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;firstLetter&nbsp;=&nbsp;xtextDocument.get(issue.getOffset(),&nbsp;1);<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtextDocument.replace(issue.getOffset(),&nbsp;1,&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings.toFirstUpper(firstLetter));<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
-&nbsp;&nbsp;&nbsp;&nbsp;}<br />
-&nbsp;&nbsp;);<br />
-}
+@Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)</br><span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;fixName(<span class="keyword">final</span>&nbsp;Issue&nbsp;issue,&nbsp;IssueResolutionAcceptor&nbsp;acceptor)&nbsp;{</br>&nbsp;&nbsp;acceptor.accept(issue,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Capitalize&nbsp;name"</span>,&nbsp;<span class="comment">//&nbsp;quick&nbsp;fix&nbsp;label</br></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Capitalize&nbsp;name&nbsp;&nbsp;of&nbsp;'"</span>&nbsp;+&nbsp;issue.getData()[0]&nbsp;+&nbsp;<span class="string">"'"</span>,&nbsp;&nbsp;<span class="comment">//&nbsp;description&nbsp;</br></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"upcase.png"</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;quick&nbsp;fix&nbsp;icon</br></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;IModification()&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;apply(IModificationContext&nbsp;context)&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throws</span>&nbsp;BadLocationException&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IXtextDocument&nbsp;xtextDocument&nbsp;=&nbsp;context.getXtextDocument();</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;firstLetter&nbsp;=&nbsp;xtextDocument.get(issue.getOffset(),&nbsp;1);</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtextDocument.replace(issue.getOffset(),&nbsp;1,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings.toFirstUpper(firstLetter));</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br>&nbsp;&nbsp;);</br>}
 </p>
 </div>
 </div>
-
-
 </p>
-
 <p>
-By using the correct signature (see below) and annotating the method with the <em>@Fix</em> annotation 
+By using the correct signature (see below) and annotating the method with the 
+<em>@Fix
+</em>
+ annotation 
 referencing the previously specified issue code from the validator, Xtext knows that this method 
 implements a fix for the problem. This also allows us to annotate multiple methods as fixes for the 
 same problem.
 </p>
-
 <p>
 The first three parameters given to the 
-
 <em>org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor</em>
  define the 
 UI representation of the quick fix. As the document is not necessarily loaded when the quick fix is 
 offered, we need to provide any additional data from the model that we want to refer to in the UI 
 when creating the issue in the validator above. In this case, we provided the existing type name. 
-The additional data is available as <em>Issue.getData()</em>. As it is persisted in markers, only strings 
+The additional data is available as 
+<em>Issue.getData()
+</em>
+. As it is persisted in markers, only strings 
 are allowed. 
 </p>
-
 <p>
 The actual model modification is implemented in the 
-
 <em>org.eclipse.xtext.ui.editor.model.edit.IModification</em>
 . 
 The 
 <em>org.eclipse.xtext.ui.editor.model.edit.IModificationContext</em>
  provides 
-access to the erroneous document. In this case, we&apos;re using Eclipse&apos;s <em>IDocument</em> API to replace a 
+access to the erroneous document. In this case, we&apos;re using Eclipse&apos;s 
+<em>IDocument
+</em>
+ API to replace a 
 text region.    
 </p>
-
 <p>
 If you prefer to implement the quick fix in terms of the semantic model use a 
-
 <em>org.eclipse.xtext.ui.editor.model.edit.ISemanticModification</em>
  instead. 
-Its <em>apply(EObject, IModificationContext)</em> method will be invoked inside a modify-transaction and the 
+Its 
+<em>apply(EObject, IModificationContext)
+</em>
+ method will be invoked inside a modify-transaction and the 
 first argument will be the erroneous semantic element. This makes it very easy for the fix method to 
 modify the model as necessary. After the method returns the model as well as the Xtext editor&apos;s content 
 will be updated accordingly. If the method fails (throws an exception) the change will not be committed. 
 The following snippet shows a semantic quick fix for a similar problem.
 </p>
-
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Fix(DomainmodelJavaValidator.INVALID_FEATURE_NAME)<br />
-<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;fixFeatureName(<span class="keyword">final</span>&nbsp;Issue&nbsp;issue,&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IssueResolutionAcceptor&nbsp;acceptor)&nbsp;{<br />
-&nbsp;&nbsp;acceptor.accept(issue,&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >"Uncapitalize&nbsp;name"</span>,&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" >//&nbsp;label<br />
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >"Uncapitalize&nbsp;name&nbsp;of&nbsp;&apos;"</span>&nbsp;+&nbsp;issue.getData()[0]&nbsp;+&nbsp;<span class="string" >"&apos;"</span>,&nbsp;<span class="comment" >//&nbsp;description<br />
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >"upcase.png"</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" >//&nbsp;icon&nbsp;<br />
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;ISemanticModification()&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;apply(EObject&nbsp;element,&nbsp;IModificationContext&nbsp;context)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((Feature)&nbsp;element).setName(<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings.toFirstLower(issue.getData()[0]));<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
-&nbsp;&nbsp;&nbsp;&nbsp;}<br />
-&nbsp;&nbsp;);<br />
-}
+@Fix(DomainmodelJavaValidator.INVALID_FEATURE_NAME)</br><span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;fixFeatureName(<span class="keyword">final</span>&nbsp;Issue&nbsp;issue,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IssueResolutionAcceptor&nbsp;acceptor)&nbsp;{</br>&nbsp;&nbsp;acceptor.accept(issue,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Uncapitalize&nbsp;name"</span>,&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;label</br></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Uncapitalize&nbsp;name&nbsp;of&nbsp;'"</span>&nbsp;+&nbsp;issue.getData()[0]&nbsp;+&nbsp;<span class="string">"'"</span>,&nbsp;<span class="comment">//&nbsp;description</br></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"upcase.png"</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;icon&nbsp;</br></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;ISemanticModification()&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;apply(EObject&nbsp;element,&nbsp;IModificationContext&nbsp;context)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((Feature)&nbsp;element).setName(</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strings.toFirstLower(issue.getData()[0]));</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br>&nbsp;&nbsp;);</br>}
 </p>
 </div>
 </div>
-
-
 </p>
-
-
-
-
 <a name="quickfixes-12"></a>
-<div class="section" title="Quickfixes for Linking Errors and Syntax Errors">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Quickfixes for Linking Errors and Syntax Errors
-</h3>
-</div>
-</div>
-</div>
-
-
-
+<h3>Quickfixes for Linking Errors and Syntax Errors</h3>
 <p>
 You can even define quick fixes for linking errors. The issue codes are assigned by the 
 <em>org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider</em>
 . Have a look at the domain model example how to add quick fixes for these errors.
 </p>
-
 <p>
 Analogously, there is the 
 <em>org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider</em>
  to assign issue codes to syntactical errors.
 </p>
-
-
-</div>
-
-</div>
-
-
-
 <a name="ide_concepts-6"></a>
-<div class="section" title="Template Proposals">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title">
-Template Proposals
-</h2>
-</div>
-</div>
-</div>
-
-
-
+<h2>Template Proposals</h2>
 <p>
 Xtext-based editors automatically support code templates. That means that you get the corresponding 
 preference page where users can add and change template proposals. If you want to ship a couple of 
-default templates, you have to put a file named <em>templates.xml</em> inside the <em>templates</em> directory of 
+default templates, you have to put a file named 
+<em>templates.xml
+</em>
+ inside the 
+<em>templates
+</em>
+ directory of 
 the generated UI-plug-in. This file contains templates in a format as described in the 
-<a href="http://help.eclipse.org/ganymede/topic/org.eclipse.cdt.doc.user/tasks/cdt_t_imp_code_temp.htm">Eclipse online help</a> .
+<a href="http://help.eclipse.org/ganymede/topic/org.eclipse.cdt.doc.user/tasks/cdt_t_imp_code_temp.htm">Eclipse online help</a>
+ .
 </p>
-
 <p>
 <div class="image" >
-<img src="images/preferences_templates.png" class=" "  style=" " />
- 
+<img src="images/preferences_templates.png" class=" " 
+ style=" " />
 </div>
 </p>
-
 <p>
-By default Xtext registers <em>ContextTypes</em> for each rule (<em>[languageName].[RuleName]</em>) and for each 
-keyword (<em>[languageName].kw_[keyword]</em>). If you don&apos;t 
+By default Xtext registers 
+<em>ContextTypes
+</em>
+ for each rule (
+<em>[languageName].[RuleName]
+</em>
+) and for each 
+keyword (
+<em>[languageName].kw_[keyword]
+</em>
+). If you don&apos;t 
 like these defaults you&apos;ll have to subclass 
-
 <em>org.eclipse.xtext.ui.editor.templates.XtextTemplateContextTypeRegistry</em>
  
 and configure it via 
-<a href="040-dependency-injection.xdoc.html#guicemodules">Guice</a>. 
+<a href="050-heading-runtime.xdoc.html#guicemodules">
+Guice
+</a>
+. 
 </p>
-
 <p>
 In addition to the standard template proposal extension mechanism, Xtext ships with a predefined set 
-of <em>TemplateVariableResolvers</em> to resolve special variable types inside a given template 
-(i.e. <em>TemplateContext</em>). Besides the standard template variables available in 
-<em>org.eclipse.jface.text.templates.GlobalTemplateVariables</em> like <em>${user}</em>, <em>${date}</em>, <em>${time}</em>, 
-<em>${cursor}</em>, etc., these <em>TemplateVariableResolver</em> support the automatic resolving of 
-CrossReferences (type <em>CrossReferences</em>) and Enumerations (type <em>Enum</em>) like it is explained in the 
+of 
+<em>TemplateVariableResolvers
+</em>
+ to resolve special variable types inside a given template 
+(i.e. 
+<em>TemplateContext
+</em>
+). Besides the standard template variables available in 
+<em>org.eclipse.jface.text.templates.GlobalTemplateVariables
+</em>
+ like 
+<em>${user}
+</em>
+, 
+<em>${date}
+</em>
+, 
+<em>${time}
+</em>
+, 
+<em>${cursor}
+</em>
+, etc., these 
+<em>TemplateVariableResolver
+</em>
+ support the automatic resolving of 
+CrossReferences (type 
+<em>CrossReferences
+</em>
+) and Enumerations (type 
+<em>Enum
+</em>
+) like it is explained in the 
 following sections.
 </p>
-
 <p>
 It is best practice to edit the templates in the preferences page, export them into the 
-<em>templates.xml</em>-file and put this one into the <em>templates</em> folder of your UI-plug-in. However, these 
+<em>templates.xml
+</em>
+-file and put this one into the 
+<em>templates
+</em>
+ folder of your UI-plug-in. However, these 
 templates will not be visible by default. To fix it, you have to manually edit the xml-file and insert 
 an ID attribute for each template element.
 </p>
-
-
-
-
 <a name="templates-6"></a>
-<div class="section" title="CrossReference TemplateVariableResolver">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-CrossReference TemplateVariableResolver
-</h3>
-</div>
-</div>
-</div>
-
-
-
+<h3>CrossReference TemplateVariableResolver</h3>
 <p>
-Xtext comes with a specific template variable resolver <em>TemplateVariableResolver</em> called 
-
+Xtext comes with a specific template variable resolver 
+<em>TemplateVariableResolver
+</em>
+ called 
 <em>org.eclipse.xtext.ui.editor.templates.CrossReferenceTemplateVariableResolver</em>
 , 
 which can be used to place cross-references within a template.
 </p>
-
 <p>
 The syntax is as follows:
 </p>
-
 <p>
-<span class="inlinecode">${&lt;displayText&gt;:CrossReference([&lt;MyPackageName&gt;.]&lt;MyType&gt;.&lt;myRef&gt;)}</span>
-
+<span class="inlinecode">${<displayText>:CrossReference([<MyPackageName>.]<MyType>.<myRef>)}</span>
 </p>
-
 <p>
 For example the following template:
 </p>
-
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-&lt;template&nbsp;name=<span class="string" >"transition"</span>&nbsp;description=<span class="string" >"event&nbsp;transition"</span>&nbsp;id=<span class="string" >"transition"</span><br />
-&nbsp;&nbsp;context=<span class="string" >"org.eclipse.xtext.example.FowlerDsl.Transition"</span>&nbsp;enabled=<span class="string" >"true"</span>&gt;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;${event:CrossReference(<span class="string" >&apos;Transition.event&apos;</span>)}&nbsp;=&gt;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${state:CrossReference(<span class="string" >&apos;Transition.state&apos;</span>)<br />
-&lt;/template&gt;
+<template&nbsp;name=<span class="string">"transition"</span>&nbsp;description=<span class="string">"event&nbsp;transition"</span>&nbsp;id=<span class="string">"transition"</span></br>&nbsp;&nbsp;context=<span class="string">"org.eclipse.xtext.example.FowlerDsl.Transition"</span>&nbsp;enabled=<span class="string">"true"</span>></br>&nbsp;&nbsp;&nbsp;&nbsp;${event:CrossReference(<span class="string">'Transition.event'</span>)}&nbsp;=>&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${state:CrossReference(<span class="string">'Transition.state'</span>)</br></template>
 </p>
 </div>
 </div>
-
-
 </p>
-
 <p>
-yields the text <em>event =&gt; state</em> and allows selecting any events and states using a drop down.
+yields the text 
+<em>event =&gt; state
+</em>
+ and allows selecting any events and states using a drop down.
 </p>
-
 <p>
 <div class="image" >
-<img src="images/templates_crossref.png" class=" "  style=" " />
- 
+<img src="images/templates_crossref.png" class=" " 
+ style=" " />
 </div>
 </p>
-
-
-</div>
-
-
-
 <a name="templates-7"></a>
-<div class="section" title="Enumeration TemplateVariableResolver">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Enumeration TemplateVariableResolver
-</h3>
-</div>
-</div>
-</div>
-
-
-
+<h3>Enumeration TemplateVariableResolver</h3>
 <p>
 The 
 <em>org.eclipse.xtext.ui.editor.templates.EnumTemplateVariableResolver</em>
  
-resolves a template variable to <em>EEnumLiteral</em> literals
-which are assignment-compatible to the enumeration type declared as the first parameter of the the <em>Enum</em> <em>TemplateVariable</em>. 
+resolves a template variable to 
+<em>EEnumLiteral
+</em>
+ literals
+which are assignment-compatible to the enumeration type declared as the first parameter of the the 
+<em>Enum
+</em>
+<em>TemplateVariable
+</em>
+. 
 </p>
-
 <p>
 The syntax is as follows:   
 </p>
-
 <p>
-<span class="inlinecode">${&lt;displayText&gt;:Enum([&lt;MyPackage&gt;.]&lt;EnumType&gt;)</span>
-
+<span class="inlinecode">${<displayText>:Enum([<MyPackage>.]<EnumType>)</span>
 </p>
-
 <p>
 For example the following template (taken from the domainmodel example):
 </p>
-
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-&lt;template&nbsp;name=<span class="string" >"Operation"</span>&nbsp;description=<span class="string" >"template&nbsp;for&nbsp;an&nbsp;Operation"</span><br />
-&nbsp;&nbsp;id=<span class="string" >"org.eclipse.xtext.example.Domainmodel.Operation"</span><br />
-&nbsp;&nbsp;context=<span class="string" >"org.eclipse.xtext.example.Domainmodel.Operation"</span><br />
-&nbsp;&nbsp;enabled=<span class="string" >"true"</span>&gt;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;${visibility:Enum(<span class="string" >&apos;Visibility&apos;</span>)}&nbsp;op&nbsp;${name}(${cursor}):<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${type:CrossReference(<span class="string" >&apos;Operation.type&apos;</span>)}<br />
-&lt;/template&gt;
+<template&nbsp;name=<span class="string">"Operation"</span>&nbsp;description=<span class="string">"template&nbsp;for&nbsp;an&nbsp;Operation"</span></br>&nbsp;&nbsp;id=<span class="string">"org.eclipse.xtext.example.Domainmodel.Operation"</span></br>&nbsp;&nbsp;context=<span class="string">"org.eclipse.xtext.example.Domainmodel.Operation"</span></br>&nbsp;&nbsp;enabled=<span class="string">"true"</span>></br>&nbsp;&nbsp;&nbsp;&nbsp;${visibility:Enum(<span class="string">'Visibility'</span>)}&nbsp;op&nbsp;${name}(${cursor}):</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${type:CrossReference(<span class="string">'Operation.type'</span>)}</br></template>
 </p>
 </div>
 </div>
-
-
 </p>
-
 <p>
-yields the text <em>public op name(): type</em> where the display text &apos;public&apos; is replaced with a drop 
-down filled with the literal values as defined in the <em>EEnum</em> <em>Visibility</em>. Also, <em>name</em> and <em>type</em> 
+yields the text 
+<em>public op name(): type
+</em>
+ where the display text &apos;public&apos; is replaced with a drop 
+down filled with the literal values as defined in the 
+<em>EEnum
+</em>
+<em>Visibility
+</em>
+. Also, 
+<em>name
+</em>
+ and 
+<em>type
+</em>
+ 
 are template variables.
 </p>
-
 <p>
 <div class="image" >
-<img src="images/templates_enum.png" class=" "  style=" " />
- 
+<img src="images/templates_enum.png" class=" " 
+ style=" " />
 </div>
 </p>
-
-
-</div>
-
-</div>
-
-
-
 <a name="ide_concepts-7"></a>
-<div class="section" title="Outline View">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title">
-Outline View
-</h2>
-</div>
-</div>
-</div>
-
-
-
-
-
-
-<a name="outline-1"></a>
-<div class="section" title="We redesigned the outline in 2.0. The following no longer reflects the current state of implementation.">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-We redesigned the outline in 2.0. The following no longer reflects the current state of implementation.
-</h3>
-</div>
-</div>
-</div>
-
-
-
-<p>
-
-</p>
-
+<h2>Outline View</h2>
 <p>
 Xtext provides an outline view to help you navigate your models. By default, it provides a hierarchical 
 view on your model and allows you to sort tree elements alphabetically. Selecting an element in the 
 outline will highlight the corresponding element in the text editor. Users can choose to synchronize 
-the outline with the editor selection by clicking the <em>Link with Editor</em> button.
+the outline with the editor selection by clicking the 
+<em>Link with Editor
+</em>
+ button.
 </p>
-
 <p>
 <div class="image" >
-<img src="images/sample_outline.png" class=" "  style=" " />
- 
+<img src="images/sample_outline.png" class=" " 
+ style=" " />
 </div>
 </p>
-
-<p>
-You can customize various aspects of the outline by providing implementation for its various interfaces. 
-The following sections show how to do this.
-</p>
-
-
-</div>
-
-
-
-<a name="outline-2"></a>
-<div class="section" title="Influencing the Outline Structure">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Influencing the Outline Structure
-</h3>
-</div>
-</div>
-</div>
-
-
-
-<p>
-<em>outdated</em> 
-</p>
-
 <p>
 In its default implementation, the outline view shows the containment hierarchy of your model. 
 This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e., 
-by omitting a certain kind of node or by introducing additional even virtual nodes, you customize 
-the outline by implementing 
+by omitting a certain kind of node or by introducing additional nodes, you can customize 
+the outline by implementing your own 
+<em>org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider</em>
 .
 </p>
-
 <p>
-The Xtext wizard creates an empty transformer class (_MyDslTransformer_) for your convenience. To 
-transform the semantic model delivered by the Xtext parser, you need to provide transformation methods 
-for each of the EClasses that are of interest:
+If your workflow defines the 
+<em>org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment</em>
+, 
+Xtext generates a stub for your own 
+<em>org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider</em>
+
+that allows you to customize every aspect of the outline by inheriting the powerful customization methods
+of 
+<em>org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider</em>
+. The following sections 
+show how to do fill this stub with life.
 </p>
-
+<a name="outline-5"></a>
+<h3>Influencing the outline structure</h3>
 <p>
-
+Each node the outline tree is an instance of 
+<em>org.eclipse.xtext.ui.editor.outline.IOutlineNode</em>
+.
+The outline tree is always rooted in a 
+<em>org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode</em>
+.
+This node is automatically created for you. Its children are the root nodes in the displayed view.
+</p>
+<p>
+An 
+<em>org.eclipse.xtext.ui.editor.outline.impl.EObjectNode</em>
+ represents a model element. By default, Xtext
+creates an 
+<em>org.eclipse.xtext.ui.editor.outline.impl.EObjectNode</em>
+ for each model element in the
+node of its container. Nodes are created by calling the method 
+<em>createNode(parentNode, modelElement)
+</em>
+ which
+delegates to 
+<em>createEObjectNode(...)
+</em>
+ if not specified differently.
+</p>
+<p>
+To change the children of specific nodes, you have to implement the method 
+<em>_createChildren(parentNode,
+parentModelElement)
+</em>
+ with the appropriate types. The following snippet shows you how to skip the root model element
+of type 
+<em>DomainModel
+</em>
+ in the outline of our domain model example:
+</p>
+<p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslTransformer&nbsp;<span class="keyword">extends</span>&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;AbstractDeclarativeSemanticModelTransformer&nbsp;{&nbsp;<br />
-&nbsp;&nbsp;<span class="comment" >/**<br />
-&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;method&nbsp;will&nbsp;be&nbsp;called&nbsp;by&nbsp;naming&nbsp;convention:<br />
-&nbsp;&nbsp;&nbsp;*&nbsp;-&nbsp;method&nbsp;name&nbsp;must&nbsp;be&nbsp;createNode<br />
-&nbsp;&nbsp;&nbsp;*&nbsp;-&nbsp;first&nbsp;param:&nbsp;subclass&nbsp;of&nbsp;EObject<br />
-&nbsp;&nbsp;&nbsp;*&nbsp;-&nbsp;second&nbsp;param:&nbsp;ContentOutlineNode&nbsp;<br />
-&nbsp;&nbsp;&nbsp;*/</span><br />
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;ContentOutlineNode&nbsp;createNode(<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Attribute&nbsp;semanticNode,&nbsp;ContentOutlineNode&nbsp;parentNode)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;ContentOutlineNode&nbsp;node&nbsp;=&nbsp;<span class="keyword">super</span>.newOutlineNode(semanticNode,&nbsp;parentNode);<br />
-&nbsp;&nbsp;&nbsp;&nbsp;node.setLabel(<span class="string" >"special&nbsp;"</span>&nbsp;+&nbsp;node.getLabel());<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;node;<br />
-&nbsp;&nbsp;}<br />
-&nbsp;&nbsp;<br />
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;ContentOutlineNode&nbsp;createNode(<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Property&nbsp;semanticNode,&nbsp;ContentOutlineNode&nbsp;parentNode)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;ContentOutlineNode&nbsp;node&nbsp;=&nbsp;<span class="keyword">super</span>.newOutlineNode(semanticNode,&nbsp;parentNode);<br />
-&nbsp;&nbsp;&nbsp;&nbsp;node.setLabel(<span class="string" >"pimped&nbsp;"</span>&nbsp;+&nbsp;node.getLabel());<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;node;<br />
-&nbsp;&nbsp;}<br />
-<br />
-&nbsp;&nbsp;<span class="comment" >/**<br />
-&nbsp;&nbsp;&nbsp;*&nbsp;This&nbsp;method&nbsp;will&nbsp;be&nbsp;called&nbsp;by&nbsp;naming&nbsp;convention:<br />
-&nbsp;&nbsp;&nbsp;*&nbsp;-&nbsp;method&nbsp;name&nbsp;must&nbsp;be&nbsp;getChildren<br />
-&nbsp;&nbsp;&nbsp;*&nbsp;-&nbsp;first&nbsp;param:&nbsp;subclass&nbsp;of&nbsp;EObject<br />
-&nbsp;&nbsp;&nbsp;*/</span><br />
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;List&lt;EObject&gt;&nbsp;getChildren(Attribute&nbsp;attribute)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;attribute.eContents();<br />
-&nbsp;&nbsp;}<br />
-<br />
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;List&lt;EObject&gt;&nbsp;getChildren(Property&nbsp;property)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;NO_CHILDREN;<br />
-&nbsp;&nbsp;}<br />
-}
+<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;_createChildren(DocumentRootNode&nbsp;parentNode,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainModel&nbsp;domainModel)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(AbstractElement&nbsp;element&nbsp;:&nbsp;domainModel.getElements())&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;createNode(parentNode,&nbsp;element);</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br>}
 </p>
 </div>
 </div>
-
-
 </p>
-
 <p>
-To make sure Xtext picks up your new outline transformer, you have to register your implementation 
-with your UI module. This binding is usually added by the respective generator fragment.
+You can choose not to create any node in the 
+<em>_createChildren()
+</em>
+ method. Because the outline nodes are 
+calculated on demand, the UI will show you an expandable node that doesn&apos;t reveal any children if expanded.
+This might be confuse your users a bit. To overcome this shortcoming, you have to implement the method 
+<em>_isLeaf(modelElement)
+</em>
+ with the appropriate argument type, e.g.
 </p>
-
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslUiModule&nbsp;<span class="keyword">extends</span>&nbsp;AbstractMyDslUiModule&nbsp;{<br />
-<br />
-&nbsp;&nbsp;@Override<br />
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;ISemanticModelTransformer&gt;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bindISemanticModelTransformer()&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyDslTransformer.<span class="keyword">class</span>;<br />
-&nbsp;&nbsp;}<br />
-&nbsp;&nbsp;...<br />
-}
+<span class="comment">//&nbsp;feature&nbsp;nodes&nbsp;are&nbsp;leafs&nbsp;and&nbsp;not&nbsp;expandable</br></span><span class="keyword">protected</span>&nbsp;<span class="keyword">boolean</span>&nbsp;_isLeaf(Feature&nbsp;feature)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;true;</br>}
 </p>
 </div>
 </div>
-
-
 </p>
-
-
-</div>
-
-
-
-<a name="outline-3"></a>
-<div class="section" title="Filtering">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Filtering
-</h3>
-</div>
-</div>
-</div>
-
-
-
 <p>
-<em>outdated</em> 
+Xtext provides a third type of node: 
+<em>org.eclipse.xtext.ui.editor.outline.impl.EStructuralFeatureNode</em>
+.
+It is used to represent a feature of a model element rather than element itself. The following simplified
+snippet from Xtend2 illustrates how to use it: 
 </p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;_createChildren(DocumentRootNode&nbsp;parentNode,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XtendFile&nbsp;xtendFile)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;show&nbsp;a&nbsp;node&nbsp;for&nbsp;the&nbsp;attribute&nbsp;XtendFile.package</br></span>&nbsp;&nbsp;&nbsp;&nbsp;createEStructuralFeatureNode(parentNode,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtendFile,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Xtend2Package.Literals.XTEND_FILE__PACKAGE,</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getImageForPackage(),&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtendFile.getPackage(),&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;true);</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;show&nbsp;a&nbsp;container&nbsp;node&nbsp;for&nbsp;the&nbsp;list&nbsp;reference&nbsp;XtendFile.imports</br></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;the&nbsp;imports&nbsp;will&nbsp;be&nbsp;shown&nbsp;as&nbsp;individual&nbsp;child&nbsp;nodes&nbsp;automatically&nbsp;</br></span>&nbsp;&nbsp;&nbsp;&nbsp;createEStructuralFeatureNode(parentNode,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtendFile,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Xtend2Package.Literals.XTEND_FILE__IMPORTS,</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getImageForImportContainer(),&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"import&nbsp;declarations"</span>,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;false);</br>&nbsp;&nbsp;&nbsp;&nbsp;createEObjectNode(parentNode,&nbsp;xtendFile.getXtendClass());</br>}
+</p>
+</div>
+</div>
+</p>
+<p>
+Of course you can add further custom types of nodes. For consistency, make sure to inherit from 
+<em>org.eclipse.xtext.ui.editor.outline.impl.AbstractOutlineNode</em>
+. To instantiate these, you have
+to implement 
+<em>_createNode(parentNode, semanticElement)
+</em>
+ with the appropriate parameter types. 
+</p>
+<a name="outline-6"></a>
+<h3>Styling the outline</h3>
+<p>
+You can also customize the icons and texts for an outline node. By default, Xtext uses the 
+<a href="120-heading-UI.xdoc.html#labelProvider">
+label
+provider
+</a>
+ of your language. If you want the labels to be specific to the outline, you can override the methods 
+<em>_text(modelElement)
+</em>
+ and 
+<em>_image(modelElement)
+</em>
+ in your 
+<em>org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider</em>
+. 
+</p>
+<p>
+Note that the method 
+<em>_text(modelElement)
+</em>
+ can return a 
+<em>java.lang.String</em>
+ or a 
+<em>org.eclipse.jface.viewers.StyledString</em>
+. The 
+<em>org.eclipse.xtext.ui.label.StylerFactory</em>
 
+can be used to create 
+<em>org.eclipse.jface.viewers.StyledString</em>
+s, like in the follwoing example: 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Inject&nbsp;</br><span class="keyword">private</span>&nbsp;StylerFactory&nbsp;stylerFactory;</br></br><span class="keyword">public</span>&nbsp;Object&nbsp;_text(Entity&nbsp;entity)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(entity.isAbstract())&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;StyledString(entity.getName(),&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stylerFactory</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.createXtextStyleAdapterStyler(getTypeTextStyle())));</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span></br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;entity.getName();</br>}</br></br><span class="keyword">protected</span>&nbsp;TextStyle&nbsp;getTypeTextStyle()&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;TextStyle&nbsp;textStyle&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;TextStyle();</br>&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setColor(<span class="keyword">new</span>&nbsp;RGB(149,&nbsp;125,&nbsp;71));</br>&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setStyle(SWT.ITALIC);</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;textStyle;</br>}
+</p>
+</div>
+</div>
+</p>
+<p>
+To access images we recommend to use the 
+<em>org.eclipse.xtext.ui.PluginImageHelper</em>
+.
+</p>
+<a name="outline-7"></a>
+<h3>Filtering actions</h3>
 <p>
 Often, you want to allow users to filter the contents of the outline to make it easier to concentrate 
 on the relevant aspects of the model. To add filtering capabilities to your outline, you need to add 
-s to the 
-outline. Actions can be contributed by implementing and registering a 
-.
+a filter action to your outline. Filter actions must extend 
+<em>org.eclipse.xtext.ui.editor.outline.actions.AbstractFilterOutlineContribution</em>
+
+to ensure that the action toggle state is handled correctly. Here is an example form our domain model
+example:
 </p>
-
 <p>
-To register a <em>DeclarativeActionBarContributor</em>, add the following lines to your <em>MyDslUiModule</em> class:
-</p>
-
-<p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslUiModule&nbsp;<span class="keyword">extends</span>&nbsp;AbstractMyDslUiModule&nbsp;{<br />
-<br />
-&nbsp;&nbsp;@Override<br />
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IActionBarContributor&gt;&nbsp;bindIActionBarContributor()&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyDslActionBarContributor.<span class="keyword">class</span>;<br />
-&nbsp;&nbsp;}<br />
-&nbsp;&nbsp;...<br />
-}
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;FilterOperationsContribution&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractFilterOutlineContribution&nbsp;{</br></br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;String&nbsp;PREFERENCE_KEY&nbsp;=&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"ui.outline.filterOperations"</span>;</br></br>&nbsp;&nbsp;&nbsp;&nbsp;@Inject</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;PluginImageHelper&nbsp;imageHelper;</br>&nbsp;&nbsp;&nbsp;&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;@Override</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">boolean</span>&nbsp;apply(IOutlineNode&nbsp;node)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;!(node&nbsp;<span class="keyword">instanceof</span>&nbsp;EObjectNode)</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||&nbsp;!((EObjectNode)&nbsp;node).getEClass()</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.equals(DomainmodelPackage.Literals.OPERATION);</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br></br>&nbsp;&nbsp;&nbsp;&nbsp;@Override</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getPreferenceKey()&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;PREFERENCE_KEY;</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br></br>&nbsp;&nbsp;&nbsp;&nbsp;@Override</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;configureAction(Action&nbsp;action)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;action.setText(<span class="string">"Hide&nbsp;operations"</span>);</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;action.setDescription(<span class="string">"Hide&nbsp;operations"</span>);</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;action.setToolTipText(<span class="string">"Hide&nbsp;operations"</span>);</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;action.setImageDescriptor(getImageDescriptor());</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br></br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;ImageDescriptor&nbsp;getImageDescriptor(String&nbsp;imagePath)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;ImageDescriptor.createFromImage(</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;imageHelper.getImage(<span class="string">"Operation.gif"</span>));</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br></br>&nbsp;&nbsp;&nbsp;&nbsp;</br>}
 </p>
 </div>
 </div>
-
-
 </p>
-
 <p>
-The action bar contributor will look like this:
+The contribution must be bound in the 
+<em>MyDslUiModule
+</em>
+ like this
 </p>
-
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslActionBarContributor&nbsp;<span class="keyword">extends</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;DeclarativeActionBarContributor&nbsp;{<br />
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;Action&nbsp;addFilterParserRulesToolbarAction(<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XtextContentOutlinePage&nbsp;page)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;FilterFooAction(page);<br />
-&nbsp;&nbsp;}<br />
-}
+<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configureFilterOperationsContribution(Binder&nbsp;binder)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;binder</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.bind(IOutlineContribution.<span class="keyword">class</span>).annotatedWith(</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Names.named(<span class="string">"FilterOperationsContribution"</span>))</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to(FilterOperationsContribution.<span class="keyword">class</span>);</br>}
 </p>
 </div>
 </div>
-
-
 </p>
-
+<a name="outline-8"></a>
+<h3>Sorting actions</h3>
 <p>
-Filter actions must extend <em>AbstractFilterAction</em> (this ensures that the action toggle state is 
-handled correctly):
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;FilterFooAction&nbsp;<span class="keyword">extends</span>&nbsp;AbstractFilterAction&nbsp;{<br />
-<br />
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;FilterFooAction(XtextContentOutlinePage&nbsp;outlinePage)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>(<span class="string" >"Filter&nbsp;Foo"</span>,&nbsp;outlinePage);<br />
-&nbsp;&nbsp;&nbsp;&nbsp;setToolTipText(<span class="string" >"Show&nbsp;/&nbsp;hide&nbsp;foo"</span>);<br />
-&nbsp;&nbsp;&nbsp;&nbsp;setDescription(<span class="string" >"Show&nbsp;/&nbsp;hide&nbsp;foo"</span>);<br />
-&nbsp;&nbsp;&nbsp;&nbsp;setImageDescriptor(Activator.getImageDescriptor(<span class="string" >"icons/foo.gif"</span>));<br />
-&nbsp;&nbsp;&nbsp;&nbsp;setDisabledImageDescriptor(<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Activator.getImageDescriptor(<span class="string" >"icons/foo.gif"</span>));<br />
-&nbsp;&nbsp;}<br />
-<br />
-&nbsp;&nbsp;@Override<br />
-&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;getToggleId()&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string" >"FilterFooAction.isChecked"</span>;<br />
-&nbsp;&nbsp;}<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;@Override<br />
-&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;ViewerFilter&nbsp;createFilter()&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;FooOutlineFilter();<br />
-&nbsp;&nbsp;}<br />
-<br />
-}
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-The filtering itself will be performed by <em>FooOutlineFilter</em>:
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;FooOutlineFilter&nbsp;<span class="keyword">extends</span>&nbsp;ViewerFilter&nbsp;{<br />
-<br />
-&nbsp;&nbsp;@Override<br />
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">boolean</span>&nbsp;select(<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Viewer&nbsp;viewer,&nbsp;Object&nbsp;parentElement,&nbsp;Object&nbsp;element)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;((parentElement&nbsp;!=&nbsp;null)&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp;&nbsp;(parentElement&nbsp;<span class="keyword">instanceof</span>&nbsp;ContentOutlineNode))&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ContentOutlineNode&nbsp;parentNode&nbsp;=&nbsp;(ContentOutlineNode)&nbsp;parentElement;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EClass&nbsp;clazz&nbsp;=&nbsp;parentNode.getClazz();<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(clazz.equals(MyDslPackage.Literals.ATTRIBUTE))&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;false;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
-&nbsp;&nbsp;&nbsp;&nbsp;}<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;true;<br />
-&nbsp;&nbsp;}<br />
-<br />
-}
-</p>
-</div>
-</div>
-
-
-</p>
-
-
-</div>
-
-
-
-<a name="outline-4"></a>
-<div class="section" title="Context menus">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Context menus
-</h3>
-</div>
-</div>
-</div>
-
-
-
-<p>
-<em>outdated</em> 
-</p>
-
-<p>
-You might want to register context menu actions for specific elements in the outline, e.g. to allow 
-users of your DSL to invoke a generator or to validate the selected element. As all elements in the 
-outline are s, you 
-cannot easily register an <a href="http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.platform.doc.isv/guide/workbench_basicext_popupMenus.htm.">Object contribution</a> 
-(Besides, using the extension point <em>org.eclipse.ui.popupMenus</em> is regarded somewhat old school - 
-you should rather use the new command and expression framework, as depicted below).
-</p>
-
-<p>
-To register context menus for specific node types of your Ecore model, we need to:
-</p>
-
-<p>
-
-
-<ul>
-
-<li>
-
-<p>
-implement  which will translate s to their underlying node type
-</p>
-
-</li>
-
-<li>
-
-<p>
-register a menu contribution to add a command / handler pair to the context menu for the specific node types you&apos;re interested in.
-</p>
-
-</li>
-
-</ul>
-
-</p>
-
-
-
-
-<a name="outline-4-5"></a>
-<div class="section" title="Registering an IContentOutlineNodeAdapterFactory">
-<div class="titlepage">
-<div>
-<div>
-<h4 class="title">
-Registering an <em>IContentOutlineNodeAdapterFactory</em>
-</h4>
-</div>
-</div>
-</div>
-
-
-
-<p>
-The Xtext code generator creates a subclass of 
+Xtext already adds a sorting action to your outline. By default, nodes are sorted lexically by their
+text. You can change this behavior by binding your own 
+<em>org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter$IComparator</em>
 . 
-All we need to do is specify a list of types that we later want to bind context menu contributions to. 
 </p>
-
 <p>
-
+A very common use case is to group the children by categories first, e.g. show the imports before the types
+in a package declaration, and sort the categories separately. That is why the 
+<em>org.eclipse.xtext.ui.editor.outline.actions.SortOutlineContribution$DefaultComparator</em>
+ has a
+method 
+<em>getCategory(IOutlineNode)
+</em>
+ that allows to specify such categories. The example shows how to
+use such categories:
+</p>
+<p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslContentOutlineNodeAdapterFactory&nbsp;<span class="keyword">extends</span>&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;DefaultContentOutlineNodeAdapterFactory&nbsp;{<br />
-&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;Class&lt;?&gt;[]&nbsp;types&nbsp;=&nbsp;{&nbsp;Attribute.<span class="keyword">class</span>&nbsp;};<br />
-<br />
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;Class&lt;?&gt;[]&nbsp;getAdapterList()&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;types;<br />
-&nbsp;&nbsp;}<br />
-}
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MydslOutlineNodeComparator&nbsp;<span class="keyword">extends</span>&nbsp;DefaultComparator&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;@Override</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">int</span>&nbsp;getCategory(IOutlineNode&nbsp;node)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(node&nbsp;<span class="keyword">instanceof</span>&nbsp;EObjectNode)&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">switch</span>((EObjectNode)&nbsp;node).getEClass().getClassifierID()))&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;MydslPackage.TYPE0:&nbsp;&nbsp;&nbsp;&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;-10;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;MydslPackage.TYPE1:&nbsp;&nbsp;&nbsp;&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;-20;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;Integer.MIN_VALUE;</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br>}
 </p>
 </div>
 </div>
-
-
 </p>
-
 <p>
-If you want to bind context menu actions to nodes representing <em>Attribute</em> and <em>Entity</em>, you need to 
-change the declaration of <em>types</em> as follows:
+As always, you have to declare a binding for your custom implementation in your 
+<em>MydslUiModule
+</em>
+:
 </p>
-
 <p>
-<span class="inlinecode"><span class="keyword">private</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;Class&lt;?&gt;[]&nbsp;types&nbsp;=&nbsp;{&nbsp;Attribute.<span class="keyword">class</span>,&nbsp;Entity.<span class="keyword">class</span>&nbsp;};</span>
-
-</p>
-
-
-</div>
-
-
-
-<a name="outline-4-6"></a>
-<div class="section" title="Registering a Menu Contribution">
-<div class="titlepage">
-<div>
-<div>
-<h4 class="title">
-Registering a Menu Contribution
-</h4>
-</div>
-</div>
-</div>
-
-
-
-<p>
-<em>outdated</em> 
-</p>
-
-<p>
-You can now add command / handler pairs to the context menu.
-</p>
-
-<p>
-First, you need to define a command - it will serve as a handle to glue together the handler 
-and the menu contribution:
-</p>
-
-<p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-&lt;extension&nbsp;point=<span class="string" >"org.eclipse.ui.commands"</span>&gt;<br />
-&nbsp;&nbsp;&lt;command<br />
-&nbsp;&nbsp;&nbsp;&nbsp;id=<span class="string" >"org.example.mydsl.ui.editor.outline.SampleOutlineCommand"</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;name=<span class="string" >"Sample&nbsp;Command"</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;description=<span class="string" >"Just&nbsp;a&nbsp;sample&nbsp;command"</span>&gt;<br />
-&nbsp;&nbsp;&lt;/command&gt;<br />
-&lt;/extension&gt;
+@Override</br><span class="keyword">public</span>&nbsp;Class<?&nbsp;<span class="keyword">extends</span>&nbsp;IComparator>&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;bindOutlineFilterAndSorter$IComparator()&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MydslOutlineNodeComparator.<span class="keyword">class</span>;</br>}
 </p>
 </div>
 </div>
-
-
 </p>
-
-<p>
-Next, you need to define a handler which will eventually execute the code to operate on the 
-selected node. Please pay special attention to the attribute <em>commandId</em> - it must match the <em>id</em> 
-attribute of your command. 
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-&lt;extension<br />
-&nbsp;&nbsp;point=<span class="string" >"org.eclipse.ui.handlers"</span>&gt;<br />
-&nbsp;&nbsp;&lt;handler<br />
-&nbsp;&nbsp;&nbsp;&nbsp;class=<span class="string" >"org.example.mydsl.ui.editor.outline.SampleOutlineNodeHandler"</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;commandId=<span class="string" >"org.example.mydsl.ui.editor.outline.SampleOutlineCommand"</span>&gt;<br />
-&nbsp;&nbsp;&lt;/handler&gt;<br />
-&lt;/extension&gt;
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-Finally, define a <em>menuContribution</em> to add the command to the context menu:
-</p>
-
-<p>
-
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-&lt;extension&nbsp;point=<span class="string" >"org.eclipse.ui.menus"</span>&gt;<br />
-&nbsp;&nbsp;&lt;menuContribution<br />
-&nbsp;&nbsp;&nbsp;&nbsp;locationURI=<span class="string" >"popup:org.eclipse.xtext.ui.outline?after=additions"</span>&gt;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;command<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commandId=<span class="string" >"org.example.mydsl.ui.editor.outline.SampleOutlineCommand"</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label=<span class="string" >"Sample&nbsp;action&nbsp;registered&nbsp;for&nbsp;Attributes"</span>&gt;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;visibleWhen&nbsp;checkEnabled=<span class="string" >"false"</span>&gt;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;iterate&gt;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;adapt&nbsp;type=<span class="string" >"org.example.mydsl.Attribute"</span>&nbsp;/&gt;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/iterate&gt;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/visibleWhen&gt;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/command&gt;<br />
-&nbsp;&nbsp;&lt;/menuContribution&gt;<br />
-&lt;/extension&gt;
-</p>
-</div>
-</div>
-
-
-</p>
-
-<p>
-Again, pay attention to the <em>commandId</em> attribute. The connection between your node type(s) and 
-the menu contribution is made by the part <em>&lt;adapt type="org.example.mydsl.Attribute" /&gt;</em>. 
-</p>
-
-
-</div>
-
-</div>
-
 <a name="quick_outline"></a>
-
-<a name="quick_outline"></a>
-<div class="section" title="Quick Outline">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Quick Outline
-</h3>
-</div>
-</div>
-</div>
-
-
-
-<p>
-<em>outdated</em> 
-</p>
-
+<h3>Quick Outline</h3>
 <p>
 Xtext also provides a quick outline: If you press CTRL-O in an Xtext editor, the outline of the model is shown 
 in a popup window. The quick outline also supports drill-down search with wildcards. To enable the quick outline,
@@ -1472,28 +971,8 @@ you have to put the
  
 into your workflow.
 </p>
-
-
-</div>
-
-</div>
-
-
-
 <a name="ide_concepts-8"></a>
-<div class="section" title="Hyperlinking">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title">
-Hyperlinking
-</h2>
-</div>
-</div>
-</div>
-
-
-
+<h2>Hyperlinking</h2>
 <p>
 The Xtext editor provides hyperlinking support for any tokens corresponding to cross-references in your 
 grammar definition. You can either CTRL-click on any of these tokens or hit F3 
@@ -1502,28 +981,11 @@ element. As you&apos;d expect this works for references to elements in the same 
 references to elements in other resources. In the latter case the referenced resource will first be 
 opened using the corresponding editor.
 </p>
-
-
 <a name="locationProvider"></a>
-
-<a name="locationProvider"></a>
-<div class="section" title="Location Provider">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Location Provider
-</h3>
-</div>
-</div>
-</div>
-
-
-
+<h3>Location Provider</h3>
 <p>
 When navigating a hyperlink, Xtext will also select the text region corresponding to the referenced model 
 element. Determining this text region is the responsibility of the 
-
 <em>org.eclipse.xtext.resource.ILocationInFileProvider</em>
 . The default implementation 
 (
@@ -1531,146 +993,93 @@ element. Determining this text region is the responsibility of the
 ) implements a best 
 effort strategy which can be summarized as:
 </p>
-
 <p>
-
+<div class="todo" >
+revise indentation levels
+</div>
 
 <ol>
-
-<li>
-
-<p>
-If the model element&apos;s type (i.e. <em>EClass</em>) declares a feature <em>name</em> then return the region of the corresponding token(s). As a fallback also check for a feature <em>id</em>.
-</p>
-
-</li>
-
-<li>
-
-<p>
-If the model element&apos;s parse tree contains any top-level tokens corresponding to <em>ID</em> rule calls in the grammar then return a region spanning all those tokens.
-</p>
-
-</li>
-
-<li>
-
-<p>
-As a last resort return the region corresponding to the first keyword token of the referenced model element.
-</p>
-
-</li>
-
+	<li>
+		If the model element&apos;s type (i.e. 
+		<em>EClass
+		</em>
+		) declares a feature 
+		<em>name
+		</em>
+		 then return the region of the corresponding token(s). As a fallback also check for a feature 
+		<em>id
+		</em>
+		.
+	</li>
+	<li>
+		If the model element&apos;s parse tree contains any top-level tokens corresponding to 
+		<em>ID
+		</em>
+		 rule calls in the grammar then return a region spanning all those tokens.
+	</li>
+	<li>
+		As a last resort return the region corresponding to the first keyword token of the referenced model element.
+	</li>
 </ol>
-
 </p>
-
-
-
-
 <a name="locationProvider-3"></a>
-<div class="section" title="Customized Location Provider">
-<div class="titlepage">
-<div>
-<div>
-<h4 class="title">
-Customized Location Provider
-</h4>
-</div>
-</div>
-</div>
-
-
-
+<h4>Customized Location Provider</h4>
 <p>
 As the default strategy is a best effort it may not always result in the selection you want. If that&apos;s 
 the case you can 
-<a href="040-dependency-injection.xdoc.html#guicemodules">override</a> the <em>ILocationInFileProvider</em> binding in the UI module as 
+<a href="050-heading-runtime.xdoc.html#guicemodules">
+override
+</a>
+ the 
+<em>ILocationInFileProvider
+</em>
+ binding in the UI module as 
 in the following example:
 </p>
-
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslUiModule&nbsp;<span class="keyword">extends</span>&nbsp;AbstractMyDslUiModule&nbsp;{<br />
-<br />
-&nbsp;&nbsp;@Override<br />
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;ILocationInFileProvider&gt;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bindILocationInFileProvider()&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyDslLocationInFileProvider.<span class="keyword">class</span>;<br />
-&nbsp;&nbsp;}<br />
-&nbsp;&nbsp;...<br />
-}
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslUiModule&nbsp;<span class="keyword">extends</span>&nbsp;AbstractMyDslUiModule&nbsp;{</br></br>&nbsp;&nbsp;@Override</br>&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;Class<?&nbsp;<span class="keyword">extends</span>&nbsp;ILocationInFileProvider>&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bindILocationInFileProvider()&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyDslLocationInFileProvider.<span class="keyword">class</span>;</br>&nbsp;&nbsp;}</br>&nbsp;&nbsp;...</br>}
 </p>
 </div>
 </div>
-
-
 </p>
-
 <p>
 Often the default strategy only needs some guidance (e.g. selecting the text corresponding to another 
-feature than <em>name</em>). In that case you can simply subclass <em>DefaultLocationInFileProvider</em> and override 
-the methods <em>getIdentifierFeature()</em> and / or <em>useKeyword()</em> to guide the first and last steps of the strategy 
+feature than 
+<em>name
+</em>
+). In that case you can simply subclass 
+<em>DefaultLocationInFileProvider
+</em>
+ and override 
+the methods 
+<em>getIdentifierFeature()
+</em>
+ and / or 
+<em>useKeyword()
+</em>
+ to guide the first and last steps of the strategy 
 as described above (see 
 <em>org.eclipse.xtext.xtext.XtextLocationInFileProvider</em>
  
 for an example).
 </p>
-
-
-</div>
-
-</div>
-
-
-
 <a name="hyperlinking-3"></a>
-<div class="section" title="Customizing Available Hyperlinks">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Customizing Available Hyperlinks
-</h3>
-</div>
-</div>
-</div>
-
-
-
+<h3>Customizing Available Hyperlinks</h3>
 <p>
 The hyperlinks are provided by the 
 <em>org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper</em>
 
 which will create links for cross-referenced objects by default. Clients may want to override 
-<em>createHyperlinksByOffset(XtextResource, int, IHyperlinkAcceptor)</em> to provide additional links or 
+<em>createHyperlinksByOffset(XtextResource, int, IHyperlinkAcceptor)
+</em>
+ to provide additional links or 
 supersede the default implementation. 
 </p>
-
-
-</div>
-
-</div>
-
-
-
 <a name="ide_concepts-9"></a>
-<div class="section" title="Syntax Coloring">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title">
-Syntax Coloring
-</h2>
-</div>
-</div>
-</div>
-
-
-
+<h2>Syntax Coloring</h2>
 <p>
 Besides the already mentioned advanced features like content assist and code formatting the powerful 
 editor for your DSL is capable to mark up your model-code to improve the overall readability. It is 
@@ -1680,155 +1089,92 @@ keywords and strings should be colored differently to make it easier to distingu
 This kind of text decorating markup does not influence the semantics of the various sections but 
 helps to understand the meaning and to find errors in the source code.
 </p>
-
 <p>
 <div class="image" >
-<img src="images/highlighting.png" class=" "  style=" width:100%" />
- 
+<img src="images/highlighting.png" class=" " 
+ style=" width:100%" />
 </div>
 </p>
-
 <p>
 The highlighting is done in two stages. This allows for sophisticated algorithms that are executed 
 asynchronously to provide advanced coloring while simple pattern matching may be used to highlight 
 parts of the text instantaneously. The latter is called lexical highlighting while the first is based 
 on the meaning of your different model elements and therefore called semantic highlighting.
 </p>
-
 <p>
 When you introduce new highlighting styles, the preference page for your DSL is automatically 
 configured and allows the customization of any registered highlighting setting. They are automatically 
 persisted and reloaded on startup.
 </p>
-
 <p>
 <div class="image" >
-<img src="images/preferences_syntax.png" class=" "  style="width:50% " />
- 
+<img src="images/preferences_syntax.png" class=" " 
+ style="width:50% " />
 </div>
 </p>
-
-
-
-
 <a name="highlighting-6"></a>
-<div class="section" title="Lexical Highlighting">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Lexical Highlighting
-</h3>
-</div>
-</div>
-</div>
-
-
-
+<h3>Lexical Highlighting</h3>
 <p>
 The lexical highlighting can be customized by providing implementations of the interface 
-
 <em>org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration</em>
  and 
 the abstract class 
 <em>org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractTokenScanner</em>
 . 
-The latter fulfills the interface <em>ITokenScanner</em> from the underlying JFace Framework, which may be 
+The latter fulfills the interface 
+<em>ITokenScanner
+</em>
+ from the underlying JFace Framework, which may be 
 implemented by clients directly.
 </p>
-
 <p>
 The 
 <em>org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration</em>
  is used
 to register any default style without a specific binding to 
 a pattern in the model file. It is used to populate the preferences page and to initialize the 
-<em>ITextAttributeProvider</em>, which in turn is the component that is used to obtain the actual settings 
+<em>ITextAttributeProvider
+</em>
+, which in turn is the component that is used to obtain the actual settings 
 for a style&apos;s id. An implementation will usually be very similar to the 
-
 <em>org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration</em>
  and read like this: 
 </p>
-
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;DefaultHighlightingConfiguration&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;IHighlightingConfiguration&nbsp;{<br />
-<br />
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;String&nbsp;KEYWORD_ID&nbsp;=&nbsp;<span class="string" >"keyword"</span>;<br />
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;String&nbsp;COMMENT_ID&nbsp;=&nbsp;<span class="string" >"comment"</span>;<br />
-<br />
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(IHighlightingConfigurationAcceptor&nbsp;acceptor)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(KEYWORD_ID,&nbsp;<span class="string" >"Keyword"</span>,&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keywordTextStyle());<br />
-&nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(COMMENT_ID,&nbsp;<span class="string" >"Comment"</span>,&nbsp;<span class="comment" >//&nbsp;...<br />
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" >//&nbsp;...<br />
-</span>&nbsp;&nbsp;}<br />
-&nbsp;&nbsp;<br />
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;TextStyle&nbsp;keywordTextStyle()&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;TextStyle&nbsp;textStyle&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;TextStyle();<br />
-&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setColor(<span class="keyword">new</span>&nbsp;RGB(127,&nbsp;0,&nbsp;85));<br />
-&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setStyle(SWT.BOLD);<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;textStyle;<br />
-&nbsp;&nbsp;}<br />
-&nbsp;&nbsp;<br />
-&nbsp;&nbsp;<span class="comment" >//&nbsp;...<br />
-</span>}
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;DefaultHighlightingConfiguration&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;IHighlightingConfiguration&nbsp;{</br></br>&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;String&nbsp;KEYWORD_ID&nbsp;=&nbsp;<span class="string">"keyword"</span>;</br>&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;String&nbsp;COMMENT_ID&nbsp;=&nbsp;<span class="string">"comment"</span>;</br></br>&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(IHighlightingConfigurationAcceptor&nbsp;acceptor)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(KEYWORD_ID,&nbsp;<span class="string">"Keyword"</span>,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keywordTextStyle());</br>&nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(COMMENT_ID,&nbsp;<span class="string">"Comment"</span>,&nbsp;<span class="comment">//&nbsp;...</br></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;...</br></span>&nbsp;&nbsp;}</br>&nbsp;&nbsp;</br>&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;TextStyle&nbsp;keywordTextStyle()&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;TextStyle&nbsp;textStyle&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;TextStyle();</br>&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setColor(<span class="keyword">new</span>&nbsp;RGB(127,&nbsp;0,&nbsp;85));</br>&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setStyle(SWT.BOLD);</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;textStyle;</br>&nbsp;&nbsp;}</br>&nbsp;&nbsp;</br>&nbsp;&nbsp;<span class="comment">//&nbsp;...</br></span>}
 </p>
 </div>
 </div>
-
-
 </p>
-
 <p>
-Implementations of the <em>ITokenScanner</em> are responsible for splitting the content of a document into 
+Implementations of the 
+<em>ITokenScanner
+</em>
+ are responsible for splitting the content of a document into 
 various parts, the so called tokens, and return the highlighting information for each identified range. 
 It is critical that this is done very fast because this component is used on each keystroke. Xtext 
 ships with a default implementation that is based on the lexer that is generated by ANTLR which is very 
 lightweight and fast. This default implementation can be customized by clients easily. They simply have 
 to bind another implementation of the 
-
 <em>org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper</em>
 . 
 To get an idea about it, have a look at the 
-
 <em>org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper</em>
 .
 </p>
-
-
-</div>
-
-
-
 <a name="highlighting-7"></a>
-<div class="section" title="Semantic Highlighting">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Semantic Highlighting
-</h3>
-</div>
-</div>
-</div>
-
-
-
+<h3>Semantic Highlighting</h3>
 <p>
 The semantic highlighting stage is executed asynchronously in the background and can be used to calculated 
 highlighting states based on the meaning of the different model elements. Users of the editor will 
 notice a very short delay after they have edited the text until the styles are actually applied to the 
 document. This keeps the editor responsive while providing aid when reading and writing your model.
 </p>
-
 <p>
 As for the lexical highlighting the interface to register the available styles is the 
-
 <em>org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration</em>
 . 
 The 
@@ -1837,84 +1183,51 @@ The
 is the primary hook to implement the logic that will compute to-be-highlighted ranges based on the model 
 elements. 
 </p>
-
 <p>
 The framework will pass the current XtextResource and an 
-
 <em>org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor</em>
  to 
 the calculator. It is ensured, that the resource will not be altered externally until the called method 
-<em>provideHighlightingFor()</em> returns. However, the resource may be null. The implementor&apos;s task is to 
+<em>provideHighlightingFor()
+</em>
+ returns. However, the resource may be null. The implementor&apos;s task is to 
 navigate your semantic model and compute various ranges based on the attached node information and 
 associate styles with them. This may read similar to the following snippet:
 </p>
-
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;provideHighlightingFor(XtextResource&nbsp;resource,&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;IHighlightedPositionAcceptor&nbsp;acceptor)&nbsp;{<br />
-&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(resource&nbsp;==&nbsp;null)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;Iterable&lt;AbstractNode&gt;&nbsp;allNodes&nbsp;=&nbsp;NodeUtil.getAllContents(<br />
-&nbsp;&nbsp;&nbsp;&nbsp;resource.getParseResult().getRootNode());<br />
-&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(AbstractNode&nbsp;node&nbsp;:&nbsp;allNodes)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(node.getGrammarElement()&nbsp;<span class="keyword">instanceof</span>&nbsp;CrossReference)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;acceptor.addPosition(node.getOffset(),&nbsp;node.getLength(),&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyHighlightingConfiguration.CROSS_REF);<br />
-&nbsp;&nbsp;&nbsp;&nbsp;}<br />
-&nbsp;&nbsp;}<br />
-}
+<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;provideHighlightingFor(XtextResource&nbsp;resource,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;IHighlightedPositionAcceptor&nbsp;acceptor)&nbsp;{</br>&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(resource&nbsp;==&nbsp;<span class="keyword">null</span>)</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>;</br>&nbsp;&nbsp;&nbsp;&nbsp;</br>&nbsp;&nbsp;Iterable<AbstractNode>&nbsp;allNodes&nbsp;=&nbsp;NodeUtil.getAllContents(</br>&nbsp;&nbsp;&nbsp;&nbsp;resource.getParseResult().getRootNode());</br>&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(AbstractNode&nbsp;node&nbsp;:&nbsp;allNodes)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(node.getGrammarElement()&nbsp;<span class="keyword">instanceof</span>&nbsp;CrossReference)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;acceptor.addPosition(node.getOffset(),&nbsp;node.getLength(),&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyHighlightingConfiguration.CROSS_REF);</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br>&nbsp;&nbsp;}</br>}
 </p>
 </div>
 </div>
-
-
 </p>
-
 <p>
-This example refers to an implementation of the <em>IHighlightingConfiguration</em> that registers a style 
+This example refers to an implementation of the 
+<em>IHighlightingConfiguration
+</em>
+ that registers a style 
 for a cross-reference. It is pretty much the same implementation as for the previously mentioned sample 
-of a lexical <em>IHighlightingConfiguration</em>.
+of a lexical 
+<em>IHighlightingConfiguration
+</em>
+.
 </p>
-
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;HighlightingConfiguration&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;IHighlightingConfiguration&nbsp;{<br />
-&nbsp;&nbsp;<br />
-&nbsp;&nbsp;<span class="comment" >//&nbsp;lexical&nbsp;stuff&nbsp;goes&nbsp;here&nbsp;<br />
-</span>&nbsp;&nbsp;<span class="comment" >//&nbsp;..<br />
-</span>&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">final</span>&nbsp;<span class="keyword">static</span>&nbsp;String&nbsp;CROSS_REF&nbsp;=&nbsp;<span class="string" >"CrossReference"</span>;&nbsp;<br />
-<br />
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(IHighlightingConfigurationAcceptor&nbsp;acceptor)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" >//&nbsp;lexical&nbsp;stuff&nbsp;goes&nbsp;here&nbsp;<br />
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" >//&nbsp;..<br />
-</span>&nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(CROSS_REF,&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >"Cross-References"</span>,&nbsp;crossReferenceTextStyle());<br />
-&nbsp;&nbsp;}<br />
-&nbsp;&nbsp;<br />
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;TextStyle&nbsp;crossReferenceTextStyle()&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;TextStyle&nbsp;textStyle&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;TextStyle();<br />
-&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setStyle(SWT.ITALIC);<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;textStyle;<br />
-&nbsp;&nbsp;}<br />
-}
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;HighlightingConfiguration&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;IHighlightingConfiguration&nbsp;{</br>&nbsp;&nbsp;</br>&nbsp;&nbsp;<span class="comment">//&nbsp;lexical&nbsp;stuff&nbsp;goes&nbsp;here&nbsp;</br></span>&nbsp;&nbsp;<span class="comment">//&nbsp;..</br></span>&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">final</span>&nbsp;<span class="keyword">static</span>&nbsp;String&nbsp;CROSS_REF&nbsp;=&nbsp;<span class="string">"CrossReference"</span>;&nbsp;</br></br>&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(IHighlightingConfigurationAcceptor&nbsp;acceptor)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;lexical&nbsp;stuff&nbsp;goes&nbsp;here&nbsp;</br></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;..</br></span>&nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(CROSS_REF,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Cross-References"</span>,&nbsp;crossReferenceTextStyle());</br>&nbsp;&nbsp;}</br>&nbsp;&nbsp;</br>&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;TextStyle&nbsp;crossReferenceTextStyle()&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;TextStyle&nbsp;textStyle&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;TextStyle();</br>&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setStyle(SWT.ITALIC);</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;textStyle;</br>&nbsp;&nbsp;}</br>}
 </p>
 </div>
 </div>
-
-
 </p>
-
 <p>
-The implementor of an <em>IHighlightingCalculator</em> should be aware of performance to ensure a good user 
+The implementor of an 
+<em>IHighlightingCalculator
+</em>
+ should be aware of performance to ensure a good user 
 experience. It is probably not a good idea to traverse everything of your model when you will only 
 register a few highlighted ranges that can be found easier with some typed method calls. It is strongly 
 advised to use purposeful ways to navigate your model. The parts of Xtext&apos;s core that are responsible 
@@ -1923,146 +1236,154 @@ update the ranges that actually have been altered, for example. This speeds up t
 will even move, shrink or enlarge previously announced regions based on a best guess before the next 
 semantic highlighting pass has been triggered after the user has changed the document.
 </p>
-
-
-</div>
-
-</div>
-
-
-
 <a name="ide_concepts-10"></a>
-<div class="section" title="Project Wizard">
-<div class="titlepage">
-<div>
-<div>
-<h2 class="title">
-Project Wizard
-</h2>
-</div>
-</div>
-</div>
-
-
-
+<h2>Project Wizard</h2>
 <p>
-Optionally, Xtext can generate a <em>New Project Wizard</em> for your DSL. Using this wizard a user can create a new 
+Optionally, Xtext can generate a 
+<em>New Project Wizard
+</em>
+ for your DSL. Using this wizard a user can create a new 
 project with only a few clicks that is configured with the right dependencies and natures. By default 
 it contains a sample model file and workflow that serve as a scaffold for the user. Furthermore it 
 has the Xtext nature and thereby the builder assigned. You enable the generation of the project wizard by adding the 
-<em>SimpleProjectWizardFragment</em> fragment to the 
-<a href="030-generator.xdoc.html#generator_fragment">workflow</a>:
+<em>SimpleProjectWizardFragment
+</em>
+ fragment to the 
+<a href="030-generator.xdoc.html#generator_fragment">
+workflow
+</a>
+:
 </p>
-
 <p>
-
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">import</span>&nbsp;org.eclipse.xtext.ui.generator.*&nbsp;<br />
-<br />
-<span class="comment" >//&nbsp;project&nbsp;wizard&nbsp;fragment<br />
-</span>fragment&nbsp;=&nbsp;projectWizard.SimpleProjectWizardFragment&nbsp;{<br />
-&nbsp;&nbsp;generatorProjectName&nbsp;=&nbsp;<span class="string" >"${projectName}.generator"</span><br />
-&nbsp;&nbsp;modelFileExtension&nbsp;=&nbsp;file.extensions<br />
-}
+<span class="keyword">import</span>&nbsp;org.eclipse.xtext.ui.generator.*&nbsp;</br></br><span class="comment">//&nbsp;project&nbsp;wizard&nbsp;fragment</br></span>fragment&nbsp;=&nbsp;projectWizard.SimpleProjectWizardFragment&nbsp;{</br>&nbsp;&nbsp;generatorProjectName&nbsp;=&nbsp;<span class="string">"${projectName}.generator"</span></br>&nbsp;&nbsp;modelFileExtension&nbsp;=&nbsp;file.extensions</br>}
 </p>
 </div>
 </div>
-
-
 </p>
-
 <p>
 Here
 </p>
-
 <p>
-
+<div class="todo" >
+revise indentation levels
+</div>
 
 <ul>
-
-<li>
-
-<p>
-the <em>generatorProjectName</em> is used to specify the project that contains the workflows and templates used to generate artifacts from your DSL. The generated project wizard uses this to add a corresponding dependency to the created project.
-</p>
-
-</li>
-
-<li>
-
-<p>
-and the <em>modelFileExtension</em> specifies the default file extension associated with your DSL. When the user clicks the <em>Finish</em> button the project wizard will look for a file with the given extension in the created project and open a editor. 
-</p>
-
-</li>
-
+	<li>
+		the 
+		<em>generatorProjectName
+		</em>
+		 is used to specify the project that contains the workflows and templates used to generate artifacts from your DSL. The generated project wizard uses this to add a corresponding dependency to the created project.
+	</li>
+	<li>
+		and the 
+		<em>modelFileExtension
+		</em>
+		 specifies the default file extension associated with your DSL. When the user clicks the 
+		<em>Finish
+		</em>
+		 button the project wizard will look for a file with the given extension in the created project and open a editor. 
+	</li>
 </ul>
-
 </p>
-
 <p>
 After running the Xtext generator, the DSL&apos;s UI project will contain a new Xpand template 
-<em>MyDslNewProject.xpt</em> in the <em>src</em> folder in the package <em>[base-package].ui.wizard</em>. 
-Note: It may be necessary to manually merge the new entry in the <em>plugin.xml_gen</em> into your 
-<em>plugin.xml</em> of the UI project to enable the wizard contribution.
+<em>MyDslNewProject.xpt
+</em>
+ in the 
+<em>src
+</em>
+ folder in the package 
+<em>[base-package].ui.wizard
+</em>
+. 
+Note: It may be necessary to manually merge the new entry in the 
+<em>plugin.xml_gen
+</em>
+ into your 
+<em>plugin.xml
+</em>
+ of the UI project to enable the wizard contribution.
 </p>
-
 <p>
-The generated Xpand template will be expanded by the project wizard when the user clicks the <em>Finish</em> button 
+The generated Xpand template will be expanded by the project wizard when the user clicks the 
+<em>Finish
+</em>
+ button 
 and it is responsible for initializing the project with some sample content. When finishing the wizard 
 the template will be used to create a sample model file and a simple workflow to run the 
-model through the generator project&apos;s <em>MyDslGenerator.mwe</em> workflow. However, this is only a pragmatic default.
-As the Xpand template is in the <em>src</em> source folder you may of course modify it to generate whatever 
-initial content you want for a new project. Just make sure to leave the top-level <em>main</em> definition 
+model through the generator project&apos;s 
+<em>MyDslGenerator.mwe
+</em>
+ workflow. However, this is only a pragmatic default.
+As the Xpand template is in the 
+<em>src
+</em>
+ source folder you may of course modify it to generate whatever 
+initial content you want for a new project. Just make sure to leave the top-level 
+<em>main
+</em>
+ definition 
 in place, as that is the interface for the project wizard.
 </p>
-
 <p>
-<em>Note:</em> To edit the generated Xpand template you should check that the <em>JavaBeans meta model contributor</em> 
-is enabled under <em>Preferences &gt; Xtend/Xpand</em>. Further you should also configure the UI project with the 
-Xpand/Xtend nature using <em>Configure &gt; Add Xpand/Xtend Nature</em> in the context menu.
+<em>Note:
+</em>
+ To edit the generated Xpand template you should check that the 
+<em>JavaBeans meta model contributor
+</em>
+ 
+is enabled under 
+<em>Preferences &gt; Xtend/Xpand
+</em>
+. Further you should also configure the UI project with the 
+Xpand/Xtend nature using 
+<em>Configure &gt; Add Xpand/Xtend Nature
+</em>
+ in the context menu.
 </p>
-
-
-
-
 <a name="projectwizard-8"></a>
-<div class="section" title="Customizing the Project Wizard">
-<div class="titlepage">
-<div>
-<div>
-<h3 class="title">
-Customizing the Project Wizard
-</h3>
-</div>
-</div>
-</div>
-
-
-
+<h3>Customizing the Project Wizard</h3>
 <p>
-To further customize the creation of the project you can implement your own <em>project creator</em>. 
-The default project creator is represented by the generated class <em>MyDslProjectCreator</em> in the
-<em>src-gen</em> folder. It is highly extensible. Without any changes it will simply create a new plug-in project 
-with the Xtext nature assigned. Afterwards it will execute the <em>main</em> definition of the Xpand template 
+To further customize the creation of the project you can implement your own 
+<em>project creator
+</em>
+. 
+The default project creator is represented by the generated class 
+<em>MyDslProjectCreator
+</em>
+ in the
+<em>src-gen
+</em>
+ folder. It is highly extensible. Without any changes it will simply create a new plug-in project 
+with the Xtext nature assigned. Afterwards it will execute the 
+<em>main
+</em>
+ definition of the Xpand template 
 as described above.
 </p>
-
 <p>
 To add more pages or input fields to the project wizard you should subclass the class 
-<em>MyDslNewProjectWizard</em> as appropriate. Don&apos;t forget to register the subclass in the UI project&apos;s 
-<em>MyDslUiModule</em>. You may also want to make additionally entered user data available to the Xpand template. 
-In this case you should enhance the <em>MyDslProjectInfo</em> to allow that one to hold the information. This is the 
+<em>MyDslNewProjectWizard
+</em>
+ as appropriate. Don&apos;t forget to register the subclass in the UI project&apos;s 
+<em>MyDslUiModule
+</em>
+. You may also want to make additionally entered user data available to the Xpand template. 
+In this case you should enhance the 
+<em>MyDslProjectInfo
+</em>
+ to allow that one to hold the information. This is the 
 context object which gets passed to the template when it&apos;s executed. Don&apos;t forget that your specialized 
-<em>MyDslNewProjectWizard</em> has to populate the data fields of your <em>MyDslProjectInfo</em>.
+<em>MyDslNewProjectWizard
+</em>
+ has to populate the data fields of your 
+<em>MyDslProjectInfo
+</em>
+.
 </p>
-
-
-</div>
-
-</div>
-
 </body>
 </html>
