@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.analysis;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -81,8 +80,16 @@ public class NfaToGrammar {
 		public abstract String toString(boolean isNested);
 	}
 
-	public static class ALternativeAlias<T> extends AbstractElementAlias<T> {
+	public static class AlternativeAlias<T> extends AbstractElementAlias<T> {
 		protected Set<AbstractElementAlias<T>> children = Sets.newHashSet();
+
+		public AlternativeAlias() {
+			super();
+		}
+		public AlternativeAlias(boolean optional, boolean many, AbstractElementAlias<T>... children) {
+			super(optional, many);
+			Collections.addAll(this.children, children);
+		}
 
 		public void addChild(AbstractElementAlias<T> child) {
 			if (child == this)
@@ -98,7 +105,7 @@ public class NfaToGrammar {
 				return false;
 			if (getClass() != obj.getClass())
 				return false;
-			ALternativeAlias<?> other = (ALternativeAlias<?>) obj;
+			AlternativeAlias<?> other = (AlternativeAlias<?>) obj;
 			return children.equals(other.children) && many == other.many && optional == other.optional;
 		}
 
@@ -342,7 +349,7 @@ public class NfaToGrammar {
 								alternative.put(target, candidate2);
 							}
 		for (StateAlias<T> target : alternative.keySet()) {
-			ALternativeAlias<T> alt = new ALternativeAlias<T>();
+			AlternativeAlias<T> alt = new AlternativeAlias<T>();
 			StateAlias<T> altState = new StateAlias<T>(alt);
 			for (StateAlias<T> candidate : alternative.get(target)) {
 				alt.addChild(candidate.getElement());
