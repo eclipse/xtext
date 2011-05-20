@@ -324,47 +324,6 @@ ruleParens returns [EObject current=null]
 
 
 
-// Entry rule entryRuleTrickyA1
-entryRuleTrickyA1 returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getTrickyA1Rule()); }
-	 iv_ruleTrickyA1=ruleTrickyA1 
-	 { $current=$iv_ruleTrickyA1.current; } 
-	 EOF 
-;
-
-// Rule TrickyA1
-ruleTrickyA1 returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-(
-		lv_name_0_0=RULE_ID
-		{
-			newLeafNode(lv_name_0_0, grammarAccess.getTrickyA1Access().getNameIDTerminalRuleCall_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getTrickyA1Rule());
-	        }
-       		addWithLastConsumed(
-       			$current, 
-       			"name",
-        		lv_name_0_0, 
-        		"ID");
-	    }
-
-)
-)
-;
-
-
-
-
-
-
-
 
 
 

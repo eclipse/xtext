@@ -10,7 +10,7 @@
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.12"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Op">
@@ -73,47 +73,6 @@
         <elements xsi:type="xtext:Assignment" cardinality="?" feature="em" operator="=">
           <terminal xsi:type="xtext:Keyword" value="!"/>
         </elements>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="TrickyA">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//TypeA1"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Keyword" value="TA"/>
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
-        <elements xsi:type="xtext:Assignment" cardinality="*" feature="name" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </elements>
-        <elements xsi:type="xtext:Alternatives" cardinality="?">
-          <elements xsi:type="xtext:Group">
-            <elements xsi:type="xtext:Action" feature="x" operator="=">
-              <type metamodel="/0/@metamodelDeclarations.0">
-                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//TypeB"/>
-              </type>
-            </elements>
-            <elements xsi:type="xtext:Keyword" value="x"/>
-          </elements>
-          <elements xsi:type="xtext:Group">
-            <elements xsi:type="xtext:Action" feature="x" operator="=">
-              <type metamodel="/0/@metamodelDeclarations.0">
-                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//TypeC"/>
-              </type>
-            </elements>
-            <elements xsi:type="xtext:Keyword" value="y"/>
-          </elements>
-        </elements>
-        <elements xsi:type="xtext:Assignment" feature="name" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
-        </elements>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="TrickyA1">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//TypeD"/>
-      </type>
-      <alternatives xsi:type="xtext:Assignment" feature="name" operator="+=">
-        <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="TrickyB">
@@ -259,7 +218,7 @@
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Keyword" value="TG"/>
         <elements xsi:type="xtext:Assignment" feature="tree" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
         </elements>
       </alternatives>
     </rules>
@@ -271,12 +230,12 @@
         <elements xsi:type="xtext:Keyword" value="["/>
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Assignment" feature="vals" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.12"/>
           </elements>
           <elements xsi:type="xtext:Group" cardinality="*">
             <elements xsi:type="xtext:Keyword" value=","/>
             <elements xsi:type="xtext:Assignment" feature="vals" operator="+=">
-              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.12"/>
             </elements>
           </elements>
         </elements>
@@ -288,7 +247,7 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/complexrewritetest#//TrickyG2"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
         <elements xsi:type="xtext:Assignment" feature="val" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
         </elements>

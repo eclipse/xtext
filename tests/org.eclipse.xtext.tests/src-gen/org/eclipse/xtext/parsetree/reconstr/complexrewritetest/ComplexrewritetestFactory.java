@@ -53,24 +53,6 @@ public interface ComplexrewritetestFactory extends EFactory
   Atom createAtom();
 
   /**
-   * Returns a new object of class '<em>Type A1</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Type A1</em>'.
-   * @generated
-   */
-  TypeA1 createTypeA1();
-
-  /**
-   * Returns a new object of class '<em>Type D</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Type D</em>'.
-   * @generated
-   */
-  TypeD createTypeD();
-
-  /**
    * Returns a new object of class '<em>Tricky B</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -159,24 +141,6 @@ public interface ComplexrewritetestFactory extends EFactory
    * @generated
    */
   Minus createMinus();
-
-  /**
-   * Returns a new object of class '<em>Type B</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Type B</em>'.
-   * @generated
-   */
-  TypeB createTypeB();
-
-  /**
-   * Returns a new object of class '<em>Type C</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Type C</em>'.
-   * @generated
-   */
-  TypeC createTypeC();
 
   /**
    * Returns a new object of class '<em>C1</em>'.

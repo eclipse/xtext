@@ -70,8 +70,6 @@ public class ComplexrewritetestFactoryImpl extends EFactoryImpl implements Compl
       case ComplexrewritetestPackage.ROOT: return createRoot();
       case ComplexrewritetestPackage.EXPRESSION: return createExpression();
       case ComplexrewritetestPackage.ATOM: return createAtom();
-      case ComplexrewritetestPackage.TYPE_A1: return createTypeA1();
-      case ComplexrewritetestPackage.TYPE_D: return createTypeD();
       case ComplexrewritetestPackage.TRICKY_B: return createTrickyB();
       case ComplexrewritetestPackage.TRICKY_C: return createTrickyC();
       case ComplexrewritetestPackage.TRICKY_D: return createTrickyD();
@@ -82,8 +80,6 @@ public class ComplexrewritetestFactoryImpl extends EFactoryImpl implements Compl
       case ComplexrewritetestPackage.TRICKY_G2: return createTrickyG2();
       case ComplexrewritetestPackage.ADD: return createAdd();
       case ComplexrewritetestPackage.MINUS: return createMinus();
-      case ComplexrewritetestPackage.TYPE_B: return createTypeB();
-      case ComplexrewritetestPackage.TYPE_C: return createTypeC();
       case ComplexrewritetestPackage.C1: return createC1();
       case ComplexrewritetestPackage.C2: return createC2();
       case ComplexrewritetestPackage.C3: return createC3();
@@ -123,28 +119,6 @@ public class ComplexrewritetestFactoryImpl extends EFactoryImpl implements Compl
   {
     AtomImpl atom = new AtomImpl();
     return atom;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TypeA1 createTypeA1()
-  {
-    TypeA1Impl typeA1 = new TypeA1Impl();
-    return typeA1;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TypeD createTypeD()
-  {
-    TypeDImpl typeD = new TypeDImpl();
-    return typeD;
   }
 
   /**
@@ -255,28 +229,6 @@ public class ComplexrewritetestFactoryImpl extends EFactoryImpl implements Compl
   {
     MinusImpl minus = new MinusImpl();
     return minus;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TypeB createTypeB()
-  {
-    TypeBImpl typeB = new TypeBImpl();
-    return typeB;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public TypeC createTypeC()
-  {
-    TypeCImpl typeC = new TypeCImpl();
-    return typeC;
   }
 
   /**

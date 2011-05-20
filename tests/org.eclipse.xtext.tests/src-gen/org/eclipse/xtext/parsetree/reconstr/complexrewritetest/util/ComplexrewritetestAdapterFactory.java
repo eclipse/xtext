@@ -93,16 +93,6 @@ public class ComplexrewritetestAdapterFactory extends AdapterFactoryImpl
         return createAtomAdapter();
       }
       @Override
-      public Adapter caseTypeA1(TypeA1 object)
-      {
-        return createTypeA1Adapter();
-      }
-      @Override
-      public Adapter caseTypeD(TypeD object)
-      {
-        return createTypeDAdapter();
-      }
-      @Override
       public Adapter caseTrickyB(TrickyB object)
       {
         return createTrickyBAdapter();
@@ -151,16 +141,6 @@ public class ComplexrewritetestAdapterFactory extends AdapterFactoryImpl
       public Adapter caseMinus(Minus object)
       {
         return createMinusAdapter();
-      }
-      @Override
-      public Adapter caseTypeB(TypeB object)
-      {
-        return createTypeBAdapter();
-      }
-      @Override
-      public Adapter caseTypeC(TypeC object)
-      {
-        return createTypeCAdapter();
       }
       @Override
       public Adapter caseC1(C1 object)
@@ -240,36 +220,6 @@ public class ComplexrewritetestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAtomAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeA1 <em>Type A1</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeA1
-   * @generated
-   */
-  public Adapter createTypeA1Adapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeD <em>Type D</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeD
-   * @generated
-   */
-  public Adapter createTypeDAdapter()
   {
     return null;
   }
@@ -420,36 +370,6 @@ public class ComplexrewritetestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createMinusAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeB <em>Type B</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeB
-   * @generated
-   */
-  public Adapter createTypeBAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeC <em>Type C</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeC
-   * @generated
-   */
-  public Adapter createTypeCAdapter()
   {
     return null;
   }

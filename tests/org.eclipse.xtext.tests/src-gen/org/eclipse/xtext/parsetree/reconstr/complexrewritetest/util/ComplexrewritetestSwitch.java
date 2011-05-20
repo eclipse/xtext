@@ -119,21 +119,6 @@ public class ComplexrewritetestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case ComplexrewritetestPackage.TYPE_A1:
-      {
-        TypeA1 typeA1 = (TypeA1)theEObject;
-        T result = caseTypeA1(typeA1);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case ComplexrewritetestPackage.TYPE_D:
-      {
-        TypeD typeD = (TypeD)theEObject;
-        T result = caseTypeD(typeD);
-        if (result == null) result = caseTypeA1(typeD);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case ComplexrewritetestPackage.TRICKY_B:
       {
         TrickyB trickyB = (TrickyB)theEObject;
@@ -210,22 +195,6 @@ public class ComplexrewritetestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case ComplexrewritetestPackage.TYPE_B:
-      {
-        TypeB typeB = (TypeB)theEObject;
-        T result = caseTypeB(typeB);
-        if (result == null) result = caseTypeA1(typeB);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case ComplexrewritetestPackage.TYPE_C:
-      {
-        TypeC typeC = (TypeC)theEObject;
-        T result = caseTypeC(typeC);
-        if (result == null) result = caseTypeA1(typeC);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case ComplexrewritetestPackage.C1:
       {
         C1 c1 = (C1)theEObject;
@@ -298,38 +267,6 @@ public class ComplexrewritetestSwitch<T>
    * @generated
    */
   public T caseAtom(Atom object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Type A1</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Type A1</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTypeA1(TypeA1 object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Type D</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Type D</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTypeD(TypeD object)
   {
     return null;
   }
@@ -490,38 +427,6 @@ public class ComplexrewritetestSwitch<T>
    * @generated
    */
   public T caseMinus(Minus object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Type B</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Type B</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTypeB(TypeB object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Type C</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Type C</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseTypeC(TypeC object)
   {
     return null;
   }

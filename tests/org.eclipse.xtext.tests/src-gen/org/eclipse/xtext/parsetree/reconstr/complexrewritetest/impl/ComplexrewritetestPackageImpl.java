@@ -27,10 +27,6 @@ import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TrickyF;
 import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TrickyG;
 import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TrickyG1;
 import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TrickyG2;
-import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeA1;
-import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeB;
-import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeC;
-import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeD;
 
 /**
  * <!-- begin-user-doc -->
@@ -60,20 +56,6 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * @generated
    */
   private EClass atomEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass typeA1EClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass typeDEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -144,20 +126,6 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * @generated
    */
   private EClass minusEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass typeBEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass typeCEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -291,36 +259,6 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
   public EAttribute getAtom_Name()
   {
     return (EAttribute)atomEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getTypeA1()
-  {
-    return typeA1EClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getTypeD()
-  {
-    return typeDEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getTypeD_Name()
-  {
-    return (EAttribute)typeDEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -588,46 +526,6 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getTypeB()
-  {
-    return typeBEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getTypeB_X()
-  {
-    return (EReference)typeBEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getTypeC()
-  {
-    return typeCEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getTypeC_X()
-  {
-    return (EReference)typeCEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getC1()
   {
     return c1EClass;
@@ -721,11 +619,6 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
     atomEClass = createEClass(ATOM);
     createEAttribute(atomEClass, ATOM__NAME);
 
-    typeA1EClass = createEClass(TYPE_A1);
-
-    typeDEClass = createEClass(TYPE_D);
-    createEAttribute(typeDEClass, TYPE_D__NAME);
-
     trickyBEClass = createEClass(TRICKY_B);
     createEAttribute(trickyBEClass, TRICKY_B__NAME);
     createEAttribute(trickyBEClass, TRICKY_B__TYPE);
@@ -761,12 +654,6 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
 
     minusEClass = createEClass(MINUS);
     createEReference(minusEClass, MINUS__MINUS_OPERANDS);
-
-    typeBEClass = createEClass(TYPE_B);
-    createEReference(typeBEClass, TYPE_B__X);
-
-    typeCEClass = createEClass(TYPE_C);
-    createEReference(typeCEClass, TYPE_C__X);
 
     c1EClass = createEClass(C1);
     createEReference(c1EClass, C1__X);
@@ -809,13 +696,10 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
     // Add supertypes to classes
     expressionEClass.getESuperTypes().add(this.getRoot());
     atomEClass.getESuperTypes().add(this.getExpression());
-    typeDEClass.getESuperTypes().add(this.getTypeA1());
     trickyGEClass.getESuperTypes().add(this.getRoot());
     trickyG1EClass.getESuperTypes().add(this.getTrickyG2());
     addEClass.getESuperTypes().add(this.getExpression());
     minusEClass.getESuperTypes().add(this.getExpression());
-    typeBEClass.getESuperTypes().add(this.getTypeA1());
-    typeCEClass.getESuperTypes().add(this.getTypeA1());
     c1EClass.getESuperTypes().add(this.getTrickyC());
     c2EClass.getESuperTypes().add(this.getTrickyC());
     c3EClass.getESuperTypes().add(this.getTrickyC());
@@ -828,11 +712,6 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
 
     initEClass(atomEClass, Atom.class, "Atom", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAtom_Name(), ecorePackage.getEString(), "name", null, 0, 1, Atom.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(typeA1EClass, TypeA1.class, "TypeA1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(typeDEClass, TypeD.class, "TypeD", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getTypeD_Name(), ecorePackage.getEString(), "name", null, 0, -1, TypeD.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(trickyBEClass, TrickyB.class, "TrickyB", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getTrickyB_Name(), ecorePackage.getEString(), "name", null, 0, 1, TrickyB.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -869,12 +748,6 @@ public class ComplexrewritetestPackageImpl extends EPackageImpl implements Compl
 
     initEClass(minusEClass, Minus.class, "Minus", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getMinus_MinusOperands(), this.getExpression(), null, "minusOperands", null, 0, -1, Minus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(typeBEClass, TypeB.class, "TypeB", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getTypeB_X(), this.getTypeD(), null, "x", null, 0, 1, TypeB.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(typeCEClass, TypeC.class, "TypeC", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getTypeC_X(), this.getTypeD(), null, "x", null, 0, 1, TypeC.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(c1EClass, org.eclipse.xtext.parsetree.reconstr.complexrewritetest.C1.class, "C1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getC1_X(), this.getTrickyC(), null, "x", null, 0, 1, org.eclipse.xtext.parsetree.reconstr.complexrewritetest.C1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

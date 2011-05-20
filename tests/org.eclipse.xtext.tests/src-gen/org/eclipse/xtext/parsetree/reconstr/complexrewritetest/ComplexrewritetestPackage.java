@@ -144,53 +144,6 @@ public interface ComplexrewritetestPackage extends EPackage
   int ATOM_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TypeA1Impl <em>Type A1</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TypeA1Impl
-   * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.ComplexrewritetestPackageImpl#getTypeA1()
-   * @generated
-   */
-  int TYPE_A1 = 3;
-
-  /**
-   * The number of structural features of the '<em>Type A1</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE_A1_FEATURE_COUNT = 0;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TypeDImpl <em>Type D</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TypeDImpl
-   * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.ComplexrewritetestPackageImpl#getTypeD()
-   * @generated
-   */
-  int TYPE_D = 4;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE_D__NAME = TYPE_A1_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Type D</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE_D_FEATURE_COUNT = TYPE_A1_FEATURE_COUNT + 1;
-
-  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TrickyBImpl <em>Tricky B</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -198,7 +151,7 @@ public interface ComplexrewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.ComplexrewritetestPackageImpl#getTrickyB()
    * @generated
    */
-  int TRICKY_B = 5;
+  int TRICKY_B = 3;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -235,7 +188,7 @@ public interface ComplexrewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.ComplexrewritetestPackageImpl#getTrickyC()
    * @generated
    */
-  int TRICKY_C = 6;
+  int TRICKY_C = 4;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -263,7 +216,7 @@ public interface ComplexrewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.ComplexrewritetestPackageImpl#getTrickyD()
    * @generated
    */
-  int TRICKY_D = 7;
+  int TRICKY_D = 5;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute list.
@@ -309,7 +262,7 @@ public interface ComplexrewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.ComplexrewritetestPackageImpl#getTrickyE()
    * @generated
    */
-  int TRICKY_E = 8;
+  int TRICKY_E = 6;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute list.
@@ -355,7 +308,7 @@ public interface ComplexrewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.ComplexrewritetestPackageImpl#getTrickyF()
    * @generated
    */
-  int TRICKY_F = 9;
+  int TRICKY_F = 7;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute list.
@@ -392,7 +345,7 @@ public interface ComplexrewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.ComplexrewritetestPackageImpl#getTrickyG()
    * @generated
    */
-  int TRICKY_G = 10;
+  int TRICKY_G = 8;
 
   /**
    * The feature id for the '<em><b>Tree</b></em>' containment reference.
@@ -420,7 +373,7 @@ public interface ComplexrewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.ComplexrewritetestPackageImpl#getTrickyG2()
    * @generated
    */
-  int TRICKY_G2 = 12;
+  int TRICKY_G2 = 10;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' attribute.
@@ -448,7 +401,7 @@ public interface ComplexrewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.ComplexrewritetestPackageImpl#getTrickyG1()
    * @generated
    */
-  int TRICKY_G1 = 11;
+  int TRICKY_G1 = 9;
 
   /**
    * The feature id for the '<em><b>Val</b></em>' attribute.
@@ -485,7 +438,7 @@ public interface ComplexrewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.ComplexrewritetestPackageImpl#getAdd()
    * @generated
    */
-  int ADD = 13;
+  int ADD = 11;
 
   /**
    * The feature id for the '<em><b>Em</b></em>' attribute.
@@ -522,7 +475,7 @@ public interface ComplexrewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.ComplexrewritetestPackageImpl#getMinus()
    * @generated
    */
-  int MINUS = 14;
+  int MINUS = 12;
 
   /**
    * The feature id for the '<em><b>Em</b></em>' attribute.
@@ -552,62 +505,6 @@ public interface ComplexrewritetestPackage extends EPackage
   int MINUS_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TypeBImpl <em>Type B</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TypeBImpl
-   * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.ComplexrewritetestPackageImpl#getTypeB()
-   * @generated
-   */
-  int TYPE_B = 15;
-
-  /**
-   * The feature id for the '<em><b>X</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE_B__X = TYPE_A1_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Type B</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE_B_FEATURE_COUNT = TYPE_A1_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TypeCImpl <em>Type C</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TypeCImpl
-   * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.ComplexrewritetestPackageImpl#getTypeC()
-   * @generated
-   */
-  int TYPE_C = 16;
-
-  /**
-   * The feature id for the '<em><b>X</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE_C__X = TYPE_A1_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Type C</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE_C_FEATURE_COUNT = TYPE_A1_FEATURE_COUNT + 1;
-
-  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.C1Impl <em>C1</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -615,7 +512,7 @@ public interface ComplexrewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.ComplexrewritetestPackageImpl#getC1()
    * @generated
    */
-  int C1 = 17;
+  int C1 = 13;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -652,7 +549,7 @@ public interface ComplexrewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.ComplexrewritetestPackageImpl#getC2()
    * @generated
    */
-  int C2 = 18;
+  int C2 = 14;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -689,7 +586,7 @@ public interface ComplexrewritetestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.ComplexrewritetestPackageImpl#getC3()
    * @generated
    */
-  int C3 = 19;
+  int C3 = 15;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -770,37 +667,6 @@ public interface ComplexrewritetestPackage extends EPackage
    * @generated
    */
   EAttribute getAtom_Name();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeA1 <em>Type A1</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Type A1</em>'.
-   * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeA1
-   * @generated
-   */
-  EClass getTypeA1();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeD <em>Type D</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Type D</em>'.
-   * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeD
-   * @generated
-   */
-  EClass getTypeD();
-
-  /**
-   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeD#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Name</em>'.
-   * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeD#getName()
-   * @see #getTypeD()
-   * @generated
-   */
-  EAttribute getTypeD_Name();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TrickyB <em>Tricky B</em>}'.
@@ -1079,48 +945,6 @@ public interface ComplexrewritetestPackage extends EPackage
   EReference getMinus_MinusOperands();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeB <em>Type B</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Type B</em>'.
-   * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeB
-   * @generated
-   */
-  EClass getTypeB();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeB#getX <em>X</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>X</em>'.
-   * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeB#getX()
-   * @see #getTypeB()
-   * @generated
-   */
-  EReference getTypeB_X();
-
-  /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeC <em>Type C</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Type C</em>'.
-   * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeC
-   * @generated
-   */
-  EClass getTypeC();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeC#getX <em>X</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>X</em>'.
-   * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.TypeC#getX()
-   * @see #getTypeC()
-   * @generated
-   */
-  EReference getTypeC_X();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.C1 <em>C1</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1251,34 +1075,6 @@ public interface ComplexrewritetestPackage extends EPackage
      * @generated
      */
     EAttribute ATOM__NAME = eINSTANCE.getAtom_Name();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TypeA1Impl <em>Type A1</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TypeA1Impl
-     * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.ComplexrewritetestPackageImpl#getTypeA1()
-     * @generated
-     */
-    EClass TYPE_A1 = eINSTANCE.getTypeA1();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TypeDImpl <em>Type D</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TypeDImpl
-     * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.ComplexrewritetestPackageImpl#getTypeD()
-     * @generated
-     */
-    EClass TYPE_D = eINSTANCE.getTypeD();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute TYPE_D__NAME = eINSTANCE.getTypeD_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TrickyBImpl <em>Tricky B</em>}' class.
@@ -1507,42 +1303,6 @@ public interface ComplexrewritetestPackage extends EPackage
      * @generated
      */
     EReference MINUS__MINUS_OPERANDS = eINSTANCE.getMinus_MinusOperands();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TypeBImpl <em>Type B</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TypeBImpl
-     * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.ComplexrewritetestPackageImpl#getTypeB()
-     * @generated
-     */
-    EClass TYPE_B = eINSTANCE.getTypeB();
-
-    /**
-     * The meta object literal for the '<em><b>X</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TYPE_B__X = eINSTANCE.getTypeB_X();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TypeCImpl <em>Type C</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.TypeCImpl
-     * @see org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.ComplexrewritetestPackageImpl#getTypeC()
-     * @generated
-     */
-    EClass TYPE_C = eINSTANCE.getTypeC();
-
-    /**
-     * The meta object literal for the '<em><b>X</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference TYPE_C__X = eINSTANCE.getTypeC_X();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.complexrewritetest.impl.C1Impl <em>C1</em>}' class.

@@ -165,89 +165,6 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		public Keyword getEmExclamationMarkKeyword_3_0() { return cEmExclamationMarkKeyword_3_0; }
 	}
 
-	public class TrickyAElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrickyA");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cTAKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cTrickyA1ParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
-		private final Group cGroup_3_0 = (Group)cAlternatives_3.eContents().get(0);
-		private final Action cTypeBXAction_3_0_0 = (Action)cGroup_3_0.eContents().get(0);
-		private final Keyword cXKeyword_3_0_1 = (Keyword)cGroup_3_0.eContents().get(1);
-		private final Group cGroup_3_1 = (Group)cAlternatives_3.eContents().get(1);
-		private final Action cTypeCXAction_3_1_0 = (Action)cGroup_3_1.eContents().get(0);
-		private final Keyword cYKeyword_3_1_1 = (Keyword)cGroup_3_1.eContents().get(1);
-		private final Assignment cNameAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cNameSTRINGTerminalRuleCall_4_0 = (RuleCall)cNameAssignment_4.eContents().get(0);
-		
-		/// * TODO not working yet
-		//StrangeStuff :
-		//	'->' (foo=ID)? ({OtherStuff.strangeStuff=current} ',' bla=ID)? ({OtherStuff2.stuff=current} ',' bla2=ID)?;
-		// * / TrickyA returns TypeA1:
-		//	"TA" TrickyA1 name+=ID* ({TypeB.x=current} "x" | {TypeC.x=current} "y")? name+=STRING;
-		public ParserRule getRule() { return rule; }
-
-		//"TA" TrickyA1 name+=ID* ({TypeB.x=current} "x" | {TypeC.x=current} "y")? name+=STRING
-		public Group getGroup() { return cGroup; }
-
-		//"TA"
-		public Keyword getTAKeyword_0() { return cTAKeyword_0; }
-
-		//TrickyA1
-		public RuleCall getTrickyA1ParserRuleCall_1() { return cTrickyA1ParserRuleCall_1; }
-
-		//name+=ID*
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
-
-		//({TypeB.x=current} "x" | {TypeC.x=current} "y")?
-		public Alternatives getAlternatives_3() { return cAlternatives_3; }
-
-		//{TypeB.x=current} "x"
-		public Group getGroup_3_0() { return cGroup_3_0; }
-
-		//{TypeB.x=current}
-		public Action getTypeBXAction_3_0_0() { return cTypeBXAction_3_0_0; }
-
-		//"x"
-		public Keyword getXKeyword_3_0_1() { return cXKeyword_3_0_1; }
-
-		//{TypeC.x=current} "y"
-		public Group getGroup_3_1() { return cGroup_3_1; }
-
-		//{TypeC.x=current}
-		public Action getTypeCXAction_3_1_0() { return cTypeCXAction_3_1_0; }
-
-		//"y"
-		public Keyword getYKeyword_3_1_1() { return cYKeyword_3_1_1; }
-
-		//name+=STRING
-		public Assignment getNameAssignment_4() { return cNameAssignment_4; }
-
-		//STRING
-		public RuleCall getNameSTRINGTerminalRuleCall_4_0() { return cNameSTRINGTerminalRuleCall_4_0; }
-	}
-
-	public class TrickyA1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrickyA1");
-		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
-		
-		//TrickyA1 returns TypeD:
-		//	name+=ID;
-		public ParserRule getRule() { return rule; }
-
-		//name+=ID
-		public Assignment getNameAssignment() { return cNameAssignment; }
-
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
-	}
-
 	public class TrickyBElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrickyB");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -260,6 +177,12 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Assignment cTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cTypeINTTerminalRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
 		
+		/// * TODO not working yet
+		//StrangeStuff :
+		//	'->' (foo=ID)? ({OtherStuff.strangeStuff=current} ',' bla=ID)? ({OtherStuff2.stuff=current} ',' bla2=ID)?;
+		// * / // disabled, because of https://bugs.eclipse.org/bugs/show_bug.cgi?id=346685
+		////TrickyA returns TypeA1: 'TA' TrickyA1 (name += ID)* ({TypeB.x=current} 'x' | {TypeC.x=current} 'y')? name+=STRING;
+		////TrickyA1 returns TypeD: name+=ID;
 		//TrickyB:
 		//	"TB" (name=ID type+=INT)? type+=INT*;
 		public ParserRule getRule() { return rule; }
@@ -672,8 +595,6 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	private TermElements pTerm;
 	private AtomElements pAtom;
 	private ParensElements pParens;
-	private TrickyAElements pTrickyA;
-	private TrickyA1Elements pTrickyA1;
 	private TrickyBElements pTrickyB;
 	private TrickyCElements pTrickyC;
 	private TrickyDElements pTrickyD;
@@ -757,26 +678,9 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	/// * TODO not working yet
 	//StrangeStuff :
 	//	'->' (foo=ID)? ({OtherStuff.strangeStuff=current} ',' bla=ID)? ({OtherStuff2.stuff=current} ',' bla2=ID)?;
-	// * / TrickyA returns TypeA1:
-	//	"TA" TrickyA1 name+=ID* ({TypeB.x=current} "x" | {TypeC.x=current} "y")? name+=STRING;
-	public TrickyAElements getTrickyAAccess() {
-		return (pTrickyA != null) ? pTrickyA : (pTrickyA = new TrickyAElements());
-	}
-	
-	public ParserRule getTrickyARule() {
-		return getTrickyAAccess().getRule();
-	}
-
-	//TrickyA1 returns TypeD:
-	//	name+=ID;
-	public TrickyA1Elements getTrickyA1Access() {
-		return (pTrickyA1 != null) ? pTrickyA1 : (pTrickyA1 = new TrickyA1Elements());
-	}
-	
-	public ParserRule getTrickyA1Rule() {
-		return getTrickyA1Access().getRule();
-	}
-
+	// * / // disabled, because of https://bugs.eclipse.org/bugs/show_bug.cgi?id=346685
+	////TrickyA returns TypeA1: 'TA' TrickyA1 (name += ID)* ({TypeB.x=current} 'x' | {TypeC.x=current} 'y')? name+=STRING;
+	////TrickyA1 returns TypeD: name+=ID;
 	//TrickyB:
 	//	"TB" (name=ID type+=INT)? type+=INT*;
 	public TrickyBElements getTrickyBAccess() {
