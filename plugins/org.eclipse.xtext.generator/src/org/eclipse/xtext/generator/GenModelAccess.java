@@ -96,12 +96,13 @@ public class GenModelAccess {
 		if (genModelResource == null)
 			throw new RuntimeException("Error loading GenModel " + genModelURI);
 		for (EObject model : genModelResource.getContents())
-			if (model instanceof GenModel)
-				for (GenPackage genPkg : ((GenModel) model).getGenPackages())
-					if (pkg.getNsURI().equals(genPkg.getEcorePackage().getNsURI())) {
-						genPkg.getEcorePackage().getEClassifiers();
-						return genPkg;
-					}
+			if (model instanceof GenModel) {
+				GenPackage genPkg = ((GenModel) model).findGenPackage(pkg);
+				if (genPkg != null) {
+					genPkg.getEcorePackage().getEClassifiers();
+					return genPkg;
+				}
+			}
 		throw new RuntimeException("No GenPackage for NsURI " + pkg.getNsURI() + " found in " + genModelURI);
 	}
 
