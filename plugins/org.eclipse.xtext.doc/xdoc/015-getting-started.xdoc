@@ -93,7 +93,7 @@ kind of model processors e[interpreters].
 
 section2[Build Your Own Grammar]
 
-e[_Please note_]: If you encounter strange errors while copying and pasting
+e[Please note]: If you encounter strange errors while copying and pasting
 a snippet from this document to your Eclipse editor, your documentation
 viewer most likely has inserted characters different from {space} into your 
 clipboard. Reenter the "whitespace" or type the text by hand to be sure everything
@@ -116,7 +116,7 @@ needs to reflect the location of the file within the Java classpath. In our
 case the grammar file is located in 
 e[/org/eclipse/xtext/example/Domainmodel.xtext] therefore the name of the 
 grammar is e[org.eclipse.xtext.example.Domainmodel]. The second part of that 
-statement (_with org.eclipse.xtext.common.Terminals_) states, that this grammar 
+statement e[(with org.eclipse.xtext.common.Terminals)] states, that this grammar 
 reuses and overrides rules from the specified grammar. The 
 e[org.eclipse.xtext.common.Terminals] is a library grammar shipped with Xtext 
 and predefines the most common terminal rules, such as e[ID], e[STRING] and e[INT]. 
@@ -160,7 +160,7 @@ in a grammar and interprets it as the entry rule.
 
 As a e[DomainModel] consists of one or more e[Entity] entries, this rule delegates 
 to another rule named e[Entity], which will be defined later on. As we can have an 
-arbitrary number of entities within a model, the cardinality is '_*_'. There are 
+arbitrary number of entities within a model, the cardinality is e['*']. There are 
 four different cardinalities available.
 
 table[
@@ -198,10 +198,10 @@ code[Xtext][DomainModel :
   (elements+=Entity)*;
 ]
 
-The assignment with the '_+=_' operator adds every object returned by the 
-e[Entity] rule to the e[elements] referenced of the AST type e[Model]. If you use '_+=_' 
-as opposed to '_=_' the feature needs to be a list - the upperBound has to be -1. In addition to the 
-two mentioned assignment operators there is a third one '_?=_' which is called boolean 
+The assignment with the e['+='] operator adds every object returned by the 
+e[Entity] rule to the e[elements] referenced of the AST type e[Model]. If you use e['+='] 
+as opposed to e['='] the feature needs to be a list - the upperBound has to be -1. In addition to the 
+two mentioned assignment operators there is a third one e['?='] which is called boolean 
 assignment and which sets a certain feature to true, if the part on the right hand 
 side was parsed successfully. Here's the list of available assignment operators:
 
@@ -229,11 +229,11 @@ The e[ID] rule is a so called terminal rule which always returns simple data typ
 such as e[String], e[Date], or e[Integer]. Actually any Java class can be a simple 
 EMF e[EDataType]. The e[ID] rule recognizes alphanumeric words similar to identifiers 
 in Java and returns the value as a e[String]. You can navigate to its declaration 
-using e[F3]. As mentioned before the assignment operator '_=_' denotes a single
+using e[F3]. As mentioned before the assignment operator e['='] denotes a single
 valued feature.
 
 We want to allow inheritance for entities and therefore now add an optional 
-'_extends_' part.
+e[extends] part.
 
 code[Xtext][Entity :
   'entity' name=ID ('extends' superType=\[Entity\])? '{'
@@ -251,7 +251,7 @@ e[\[TypeName|RuleCall\]] where e[RuleCall] defaults to e[ID]. This means that
 e[('extends' superType=\[Entity|ID\])?] would work equally well. The parser only parses 
 the name of the cross-referenced element using the e[ID] rule and stores it 
 internally. Later on the linker establishes the cross-reference using the name, the 
-defined cross-reference's type (_Entity_ in this case) and the defined scoping rules. 
+defined cross-reference's type (e[Entity]in this case) and the defined scoping rules. 
 Scoping is not covered in this tutorial since the domain model DSL works with 
 the default scoping semantics. By default a namespace-based scoping is applied, which 
 means that all entities living in the same namespace are possible candidates for a 
@@ -274,7 +274,7 @@ DataType:
  ]
 
 A e[DomainModel] now consists of types where a e[Type] can either be a e[DataType] or 
-an e[Entity]. Our rule e[Type] will just delegate to either of them, using the '_|_' 
+an e[Entity]. Our rule e[Type] will just delegate to either of them, using the e['|'] 
 alternatives operator. Now that we have a common super type for e[Entity] and e[DataType] 
 we are able to refer to both types of elements with a single cross-reference.
 
@@ -299,7 +299,7 @@ As the type reference has an additional property for the multiplicity (many or o
 we make it a separate model element and parser rule e[TypeRef]. The presence of the 
 postfix '*' in an input file should set the boolean flag to 'true' that indicates a multi-value
 type reference in the AST model. 
-This is the purpose of the assignment operator '_?=_'. The parser rule looks like this:
+This is the purpose of the assignment operator e['?=']. The parser rule looks like this:
 
 code[Xtext][TypeRef :
   referenced=\[Type\] (multi?='*')?;
@@ -365,10 +365,10 @@ Right-click on the Xtext project and choose
 
 This will spawn a new Eclipse workbench with your projects as plug-ins installed. 
 In the new workbench, create a new project 
-(_File -> New -> Project...  -> General -> Project_) and therein a new file 
-with the file extension you chose in the beginning (_*.dmodel_). This will open
+(File -> New -> Project...  -> General -> Project) and therein a new file 
+with the file extension you chose in the beginning (*.dmodel). This will open
 the generated entity editor. Try it a bit and discover the default 
-functionality for code completion (_CTRL SPACE_ even for cross-references), 
+functionality for code completion (e[CTRL SPACE] even for cross-references), 
 syntax highlighting, syntactic validation, linking errors, outline, find
 references etc.
 
@@ -387,7 +387,7 @@ Our languages's definition of a e[Package] is as follows: A package has a name a
 contains other named elements and namespace-imports. A named element is either another 
 e[Package] or a e[Type]. Within a package, elements must have unique names. The 
 e[fully qualified name] (FQN) of a named element consists of the FQN of its package, 
-a separator '_._' and its own simple name. Elements refer to each other using their 
+a separator e['.'] and its own simple name. Elements refer to each other using their 
 e[qualified names] which may be relative to their common namespaces or absolute. By means 
 of import statements, these names can be further abbreviated. 
 
@@ -476,9 +476,9 @@ Having qualified names at hand, we want to specify cross-references that
 way, too. As mentioned by default, Xtext assumes the rule e[ID] as the syntax 
 for cross-references, which has been fully sufficient so far. But now we want 
 to allow fully qualified names as well, so we explicitly specify the syntax rule 
-after a delimiter '_|_':
+after a delimiter e['|']:
 
-fn.. Note, that the '_|_' has nothing to do with the previously introduced 
+fn.. Note, that the e['|'] has nothing to do with the previously introduced 
 alternative operator. In the context of a cross-reference it is simply a delimiter.  
 
 code[Xtext][Entity:
@@ -502,7 +502,7 @@ code[Xtext][AbstractElement:
 ]
 
 An imported namespace is not just a qualified name but it also allows an 
-optional wildcard character '_*_' at the end, so that multiple names can be 
+optional wildcard character e['*'] at the end, so that multiple names can be 
 imported with one statement. That requires a new data type rule which we 
 name e[QualifiedNameWithWildCard]:
 
@@ -524,7 +524,7 @@ and concatenates the two names separated by a dot. The computation of qualified
 names can be arbitrarily changed by implementing an e[IQualifedNameProvider]. 
 The other naming convention is that if some element has an EAttribute 
 'importedNamespace' that value is used as a namespace import and is automatically 
-prefixed to any simple names used within that namespace. Also the asterisk '_*_' 
+prefixed to any simple names used within that namespace. Also the asterisk e['*'] 
 is used as a wildcard by default.
 
 That's all for the grammar. It should now read as 

@@ -1,6 +1,4 @@
-section2:fragmentProvider[Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)]
-
-todo[Revert to section2 when we allow Section2Refs]
+section:fragmentProvider[Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)]
 
 Although inter-Xtext linking is not done by URIs, you may want to be able to reference your e[EObject] 
 from non-Xtext models. In those cases URIs are used, which are made up of a part identifying the resource 

@@ -76,11 +76,13 @@ If you have the
 <em>org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment</em> in the 
 list of generator fragments in the MWE2 workflow for your language, it will automatically create 
 stubs and bindings for an <a href="120-heading-UI.xdoc.html#EObjectLabelProvider">
-_{MyLang}EObjectLabelProvider_
+<em>{MyLang}EObjectLabelProvider
+</em>
 </a>
  and an 
 <a href="120-heading-UI.xdoc.html#DescriptionLabelProvider">
-_{MyLang}DescriptionLabelProvider_
+<em>{MyLang}DescriptionLabelProvider
+</em>
 </a>
  which you can implement by manually. 
 </p>
@@ -209,21 +211,19 @@ To have a custom description label provider, make sure it is bound in your UI mo
 The Xtext generator, amongst other things, generates the following two content assist (CA) related artifacts:
 </p>
 <p>
-<div class="todo" >
-revise indentation levels
-</div>
-
 <ul>
 	<li>
 		an abstract proposal provider class named <em>Abstract[Language]ProposalProvider
-		</em> generated into the <em>src-gen
+		</em> generated 
+				into the <em>src-gen
 		</em> folder within the <em>ui
 		</em> project
 	</li>
 	<li>
 		a concrete sub-class in the <em>src
 		</em>-folder of the <em>ui
-		</em> project called <em>[Language]ProposalProvider
+		</em> project called 
+				<em>[Language]ProposalProvider
 		</em>
 	</li>
 </ul>
@@ -751,23 +751,22 @@ element. Determining this text region is the responsibility of the
 effort strategy which can be summarized as:
 </p>
 <p>
-<div class="todo" >
-revise indentation levels
-</div>
-
 <ol>
 	<li>
 		If the model element&apos;s type (i.e. <em>EClass
 		</em>) declares a feature <em>name
-		</em> then return the region of the corresponding token(s). As a fallback also check for a feature <em>id
+		</em> then return the 
+				region of the corresponding token(s). As a fallback also check for a feature <em>id
 		</em>.
 	</li>
 	<li>
 		If the model element&apos;s parse tree contains any top-level tokens corresponding to <em>ID
-		</em> rule calls in the grammar then return a region spanning all those tokens.
+		</em> 
+				rule calls in the grammar then return a region spanning all those tokens.
 	</li>
 	<li>
-		As a last resort return the region corresponding to the first keyword token of the referenced model element.
+		As a last resort return the region corresponding to the first keyword token of the referenced
+				model element.
 	</li>
 </ol>
 </p>
@@ -972,19 +971,19 @@ workflow
 Here
 </p>
 <p>
-<div class="todo" >
-revise indentation levels
-</div>
-
 <ul>
 	<li>
 		the <em>generatorProjectName
-		</em> is used to specify the project that contains the workflows and templates used to generate artifacts from your DSL. The generated project wizard uses this to add a corresponding dependency to the created project.
+		</em> is used to specify the project that contains the workflows and 
+				templates used to generate artifacts from your DSL. The generated project wizard uses this 
+				to add a corresponding dependency to the created project.
 	</li>
 	<li>
 		and the <em>modelFileExtension
-		</em> specifies the default file extension associated with your DSL. When the user clicks the <em>Finish
-		</em> button the project wizard will look for a file with the given extension in the created project and open a editor. 
+		</em> specifies the default file extension associated with your DSL. 
+				When the user clicks the <em>Finish
+		</em> button the project wizard will look for a file with the 
+				given extension in the created project and open a editor.
 	</li>
 </ul>
 </p>

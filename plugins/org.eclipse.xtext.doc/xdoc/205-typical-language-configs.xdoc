@@ -56,7 +56,8 @@ section:java_independent_languages[Languages Independent of JDT]
 
 The following section describes how you make your language independent of Eclipse's Java Development Toolkit (JDT).
 
-In the e[UIModule] of your language you have to overwrite some bindings. First, remove the bindings to components with support for the '_classpath:_' URI protocol, i.e. 
+In the e[UIModule] of your language you have to overwrite some bindings. First, remove the bindings to components 
+with support for the e['classpath:'] URI protocol, i.e. 
 
 code[Java][@Override
 public Class<? extends IResourceForEditorInputFactory>

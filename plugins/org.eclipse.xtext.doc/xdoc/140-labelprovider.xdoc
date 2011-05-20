@@ -26,8 +26,8 @@ customizing possibilities.
 If you have the 
 codeRef[org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment] in the 
 list of generator fragments in the MWE2 workflow for your language, it will automatically create 
-stubs and bindings for an ref:EObjectLabelProvider[_{MyLang}EObjectLabelProvider_] and an 
-ref:DescriptionLabelProvider[_{MyLang}DescriptionLabelProvider_] which you can implement by manually. 
+stubs and bindings for an ref:EObjectLabelProvider[e[{MyLang}EObjectLabelProvider]] and an 
+ref:DescriptionLabelProvider[e[{MyLang}DescriptionLabelProvider]] which you can implement by manually. 
 
 
 section2:EObjectLabelProvider[Label Providers For EObjects]

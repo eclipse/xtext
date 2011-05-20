@@ -206,7 +206,7 @@ public class «name» «IF superType != null» extends «superType.name»«ENDIF»{
 «ENDDEFINE»
 ]
 
-You might get a couple of error markers, because the Xpand file references another file (_Extensions.ext_ (4)) which has not yet been updated. 
+You might get a couple of error markers, because the Xpand file references another file (e[Extensions.ext] (4)) which has not yet been updated. 
 Let's ignore this for a moment and have a look at the general structure of an Xpand template file. In the first line we import the namespace (i.e. Java package)
 of the generated AST classes, that is Entity and Feature, we want to refer to in the generator. Next up the previously mentioned Xtend file is imported. An Xtend file defines 
 functions which can be used in Xpand. 

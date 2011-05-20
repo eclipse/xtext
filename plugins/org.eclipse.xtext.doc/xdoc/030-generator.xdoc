@@ -203,7 +203,7 @@ Also have a look at what the Xtext wizard provides and how the workflow configur
 example languages look like.
 
 table[
-tr[td[_.Class]td[_.Generated Artifacts]td[_.Related Documentation]]
+tr[td[e[Class]]td[e[Generated Artifacts]]td[e[Related Documentation]]]
 tr[td[codeRef[org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment]]td[EMF code for generated models]td[ref:metamodelInference[Model inference]]]
 tr[td[codeRef[org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment]]td[ANTLR grammar, parser, lexer and related services]td[ ]]
 tr[td[codeRef[org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment]]td[Access to the grammar]td[ ]]
