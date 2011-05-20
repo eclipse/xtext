@@ -15,9 +15,7 @@ In order to be able to parse models written in your language, Xtext needs to pro
 for it. The parser is generated from the self defined language grammar. 
 </p>
 <p>
-It is recommended to use the 
-<a href="http://www.antlr.org">ANTLR</a>
- -based parser.
+It is recommended to use the <a href="http://www.antlr.org">ANTLR</a> -based parser.
 ANTLR is a very sophisticated parser generator framework which implements a so called LL(*) algorithm.
 It is fast, simple and at the same time has some very nice and sophisticated features. Especially its 
 support for error recovery is much better than what other parser generators provide.
@@ -30,8 +28,7 @@ However the ANTLR parser generator is unfortunately still implemented in an olde
 code originated. Therefore ANTLR 2 didn&apos;t get the required IP approval. Eclipse has a strict IP policy, 
 which makes sure that everything provided by Eclipse can be consumed under the terms of the Eclipse 
 Public License. The details are described in 
-<a href="http://www.eclipse.org/org/documents/Eclipse_IP_Policy.pdf.">this document</a>
- That is why we are not 
+<a href="http://www.eclipse.org/org/documents/Eclipse_IP_Policy.pdf.">this document</a> That is why we are not 
 allowed to ship Xtext with the ANTLR generator but only with the IP approvied runtime components. We 
 have to provide it separately and for your convenience you&apos;ll be asked to download the ANTLR generator 
 when you run your language generator for the first time. You can even download it directly or install 
@@ -47,8 +44,7 @@ revise indentation levels
 		<a href="http://download.itemis.com/antlr-generator-3.0.1.jar">http://download.itemis.com/antlr-generator-3.0.1.jar</a>
 	</li>
 	<li>
-		or use the update site at 
-		<a href="http://download.itemis.com/updates">http://download.itemis.com/updates</a>
+		or use the update site at <a href="http://download.itemis.com/updates">http://download.itemis.com/updates</a>
 	</li>
 </ul>
 </p>
@@ -58,8 +54,7 @@ in your project&apos;s root directory and can thereby be reused during the next 
 </p>
 <p>
 <em>IMPORTANT
-</em>
- :
+</em> :
 <em>Although if you use the non-IP approved ANTLR generator, you can still ship any languages and the IDEs you&apos;ve developed with Xtext without any worrying, because it is not needed at runtime
 </em>
 </p>

@@ -13,11 +13,8 @@
 <a name="case_insensitive_languages"></a>
 <h2>Case Insensitive Languages</h2>
 <p>
-In some cases, e.g. if your 
-<em>SHIFT
-</em>
- key is broken, you might want to design a case insensitive language. Xtext offers separate 
-<a href="030-generator.xdoc.html#generator_fragment">
+In some cases, e.g. if your <em>SHIFT
+</em> key is broken, you might want to design a case insensitive language. Xtext offers separate <a href="030-generator.xdoc.html#generator_fragment">
 generator fragments
 </a>
  for this purpose. 
@@ -47,10 +44,8 @@ with
 </div>
 </p>
 <p>
-For case insensitve element names, use the 
-<em>ignoreCase
-</em>
- option in your scope fragment, i.e.
+For case insensitve element names, use the <em>ignoreCase
+</em> option in your scope fragment, i.e.
 </p>
 <p>
 <div class="literallayout">
@@ -62,8 +57,7 @@ fragment&nbsp;=&nbsp;scoping.ImportNamespacesScopingFragment&nbsp;{</br>&nbsp;&n
 </div>
 </p>
 <p>
-or if you are using 
-<a href="050-heading-runtime.xdoc.html#import_uri">
+or if you are using <a href="050-heading-runtime.xdoc.html#import_uri">
 importURI based global scopes
 </a>
 </p>
@@ -82,10 +76,8 @@ fragment&nbsp;=&nbsp;scoping.ImportURIScopingFragment&nbsp;{</br>&nbsp;&nbsp;&nb
 The following section describes how you make your language independent of Eclipse&apos;s Java Development Toolkit (JDT).
 </p>
 <p>
-In the 
-<em>UIModule
-</em>
- of your language you have to overwrite some bindings. First, remove the bindings to components with support for the &apos;_classpath:_&apos; URI protocol, i.e. 
+In the <em>UIModule
+</em> of your language you have to overwrite some bindings. First, remove the bindings to components with support for the &apos;_classpath:_&apos; URI protocol, i.e. 
 </p>
 <p>
 <div class="literallayout">
@@ -116,19 +108,12 @@ project wizard
  for your language, if you have generated one.
 The best way to do this is to create a new subclass of the generated 
 <em>IProjectCreator
-</em>
- in the 
-<em>src/
-</em>
- folder of the 
-<em>ui
-</em>
- project and 
+</em> in the <em>src/
+</em> folder of the <em>ui
+</em> project and 
 apply the necessary changes there. First, remove the JDT project configuration 
-by overriding 
-<em>configureProject
-</em>
- with an empty body. 
+by overriding <em>configureProject
+</em> with an empty body. 
 </p>
 <p>
 The next thing is to redefine the project natures and builders that should be
@@ -147,8 +132,7 @@ In in this case just remove the JDT stuff in this way:
 </div>
 </p>
 <p>
-After that you have to bind the new 
-<em>IProjectCreator
+After that you have to bind the new <em>IProjectCreator
 </em>
 </p>
 <p>

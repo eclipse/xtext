@@ -20,7 +20,7 @@ validation rules that mark inconsistencies in your grammar. If you get any warni
 </p>
 <p>
 <em>Tip: You&apos;ll learn something about the new features if you compare a freshly created Xtext project based on 0.7.x with a new Xtext project based on 1.0. Especially the new fragments in the workflow are a good indicator for useful new features.
-</em>
+</em> 
 </p>
 <a name="migrating_from_0_7-4"></a>
 <h2>Take the Shortcut</h2>
@@ -40,32 +40,16 @@ do no longer exist.
 <a name="migrating_from_0_7-5-3"></a>
 <h3>Update the Plug-in Dependencies and Import Statements</h3>
 <p>
-You should update the constraints from version 
-<em>0.7.x
-</em>
- to 
-<em>[1.0.0,2.0.0)
-</em>
- in your manifest files if you specified any concrete versions.
-Make sure that your 
-<em>dsl.ui
-</em>
--projects do not refer to the plug-in 
-<em>org.eclipse.xtext.ui.common
-</em>
- or 
-<em>org.eclipse.xtext.ui.core
-</em>
- but to 
-<em>org.eclipse.xtext.ui
-</em>
- instead. The arguably easiest way is a global text-based search and replace across the manifest files. The bundle 
-<em>org.eclipse.xtext.log4j
-</em>
- is obsolete as well. The generator will create 
-<em>import-package
-</em>
- entries in the manifests later on.
+You should update the constraints from version <em>0.7.x
+</em> to <em>[1.0.0,2.0.0)
+</em> in your manifest files if you specified any concrete versions.
+Make sure that your <em>dsl.ui
+</em>-projects do not refer to the plug-in <em>org.eclipse.xtext.ui.common
+</em> or <em>org.eclipse.xtext.ui.core
+</em> but to <em>org.eclipse.xtext.ui
+</em> instead. The arguably easiest way is a global text-based search and replace across the manifest files. The bundle <em>org.eclipse.xtext.log4j
+</em> is obsolete as well. The generator will create <em>import-package
+</em> entries in the manifests later on.
 </p>
 <p>
 The next step is to fix the import statements in your classes to match the refactored naming scheme in Xtext. Perform a global search for "_import org.eclipse.xtext.ui.common._" and 
@@ -74,37 +58,21 @@ The next step is to fix the import statements in your classes to match the refac
 <a name="migrating_from_0_7-5-4"></a>
 <h3>Rename the Packages in the dsl.ui-Plug-in</h3>
 <p>
-We changed the naming pattern for artifacts in the 
-<em>dsl.ui
-</em>
--plug-in to match the OSGI conventions. The easiest way to update your existing projects is to apply a 
-"Rename Package" refactoring on the packages in the 
-<em>src
-</em>
-- and 
-<em>src-gen
-</em>
- folder 
-<em>before
-</em>
- you re-run the workflow that regenerates your language. Make sure you ticked "Rename sub-packages" in the dialog. It is error-prone to enable the search in non-Java files as this will perform incompatible changes in the manifest files. Furthermore, it is important to perform the rename operation in the 
-<em>src-gen
-</em>
- folder, too. This ensures that the references in your manually written code are properly updated.
+We changed the naming pattern for artifacts in the <em>dsl.ui
+</em>-plug-in to match the OSGI conventions. The easiest way to update your existing projects is to apply a 
+"Rename Package" refactoring on the packages in the <em>src
+</em>- and <em>src-gen
+</em> folder <em>before
+</em> you re-run the workflow that regenerates your language. Make sure you ticked "Rename sub-packages" in the dialog. It is error-prone to enable the search in non-Java files as this will perform incompatible changes in the manifest files. Furthermore, it is important to perform the rename operation in the <em>src-gen
+</em> folder, too. This ensures that the references in your manually written code are properly updated.
 </p>
 <a name="migrating_from_0_7-5-5"></a>
 <h3>Update the Workflow</h3>
 <p>
-The 
-<em>JavaScopingFragment
-</em>
- does no longer exist. It has been superseded by the 
-<em>ImportURIScopingFragment
-</em>
- in combination with the 
-<em>SimpleNamesFragment
-</em>
-.
+The <em>JavaScopingFragment
+</em> does no longer exist. It has been superseded by the <em>ImportURIScopingFragment
+</em> in combination with the <em>SimpleNamesFragment
+</em>.
 Please replace  
 </p>
 <p>
@@ -129,24 +97,16 @@ with
 </div>
 </p>
 <p>
-The 
-<em>PackratParserFragment
-</em>
- has been abandoned as well. It is save to remove the reference to that one if it is activated in your workflow. After you&apos;ve changed your workflow, it should be possible to regenerate your language without any errors in the console. It is ok to have compilation errors prior to executing the workflow.
+The <em>PackratParserFragment
+</em> has been abandoned as well. It is save to remove the reference to that one if it is activated in your workflow. After you&apos;ve changed your workflow, it should be possible to regenerate your language without any errors in the console. It is ok to have compilation errors prior to executing the workflow.
 </p>
 <a name="migrating_from_0_7-5-6"></a>
 <h3>MANIFEST.MF and plugin.xml</h3>
 <p>
-The previous rename package refactoring updated most of the entries in the 
-<em>MANIFEST.MF
-</em>
- and and some entries in the 
-<em>plugin.xml
-</em>
-. Others have to be fixed manually. The Eclipse compiler will point to many of the remaining problems in the manifest files but it is unlikely that it will spot the erroneous references in the 
-<em>plugin.xml
-</em>
-.
+The previous rename package refactoring updated most of the entries in the <em>MANIFEST.MF
+</em> and and some entries in the <em>plugin.xml
+</em>. Others have to be fixed manually. The Eclipse compiler will point to many of the remaining problems in the manifest files but it is unlikely that it will spot the erroneous references in the <em>plugin.xml
+</em>.
 </p>
 <p>
 <div class="todo" >
@@ -155,122 +115,64 @@ revise indentation levels
 
 <ul>
 	<li>
-		In the generated UI plug-in&apos;s 
-		<em>MANIFEST.MF
-		</em>
-		, remove the package exports of no longer existing packages and make sure the bundle activator points to the newly generated one (with 
-		<em>.ui.
-		</em>
-		 in its package name).  
+		In the generated UI plug-in&apos;s <em>MANIFEST.MF
+		</em>, remove the package exports of no longer existing packages and make sure the bundle activator points to the newly generated one (with <em>.ui.
+		</em> in its package name).  
 	</li>
 	<li>
-		It was already mentioned that the plug-ins 
-		<em>org.eclipse.xtext.ui.core
-		</em>
-		 and 
-		<em>org.eclipse.xtext.ui.common
-		</em>
-		 have been merged into a new single plug-in 
-		<em>org.eclipse.xtext.ui
-		</em>
-		. The same happened to the respective Java packages. Change eventually remaining bundle-dependencies in all manifests. 
+		It was already mentioned that the plug-ins <em>org.eclipse.xtext.ui.core
+		</em> and <em>org.eclipse.xtext.ui.common
+		</em> have been merged into a new single plug-in <em>org.eclipse.xtext.ui
+		</em>. The same happened to the respective Java packages. Change eventually remaining bundle-dependencies in all manifests. 
 	</li>
 	<li>
-		The plug-in 
-		<em>org.eclipse.xtext.log4j
-		</em>
-		 no longer exists. We use a package import of 
-		<em>org.apache.log4j
-		</em>
-		 instead. Also remove the buddy registration. 
+		The plug-in <em>org.eclipse.xtext.log4j
+		</em> no longer exists. We use a package import of <em>org.apache.log4j
+		</em> instead. Also remove the buddy registration. 
 	</li>
 	<li>
-		Due to renamed packages, you have to fix all references to classes therein in the 
-		<em>plugin.xml
-		</em>
-		. A diff with the 
-		<em>plugin.xml_gen
-		</em>
-		 will be a great help. If you haven&apos;t added a lot manually, consider merging these into the generated version instead of going the other way around. Note that warnings in the 
-		<em>plugin.xml
-		</em>
-		 can be considered to be real errors most of the time. Make sure
+		Due to renamed packages, you have to fix all references to classes therein in the <em>plugin.xml
+		</em>. A diff with the <em>plugin.xml_gen
+		</em> will be a great help. If you haven&apos;t added a lot manually, consider merging these into the generated version instead of going the other way around. Note that warnings in the <em>plugin.xml
+		</em> can be considered to be real errors most of the time. Make sure
 	</li>
 	<li>
-		the 
-		<em>[MyDsl]ExecutableExtensionFactory
-		</em>
-		 has the 
-		<em>.ui.
-		</em>
-		 package prefix
+		the <em>[MyDsl]ExecutableExtensionFactory
+		</em> has the <em>.ui.
+		</em> package prefix
 	</li>
 	<li>
-		classes from 
-		<em>org.eclipse.xtext.ui.common
-		</em>
-		 and 
-		<em>org.eclipse.xtext.ui.core
-		</em>
-		 are now usually somewhere in 
-		<em>org.eclipse.xtext.ui
-		</em>
-		. They are also referenced by the 
-		<em>[MyDsl]ExecutableExtensionFactory
-		</em>
-		 and thus not covered by the editor&apos;s validation. 
+		classes from <em>org.eclipse.xtext.ui.common
+		</em> and <em>org.eclipse.xtext.ui.core
+		</em> are now usually somewhere in <em>org.eclipse.xtext.ui
+		</em>. They are also referenced by the <em>[MyDsl]ExecutableExtensionFactory
+		</em> and thus not covered by the editor&apos;s validation. 
 	</li>
 	<li>
-		A number of new features are being registered in the 
-		<em>plugin.xml
-		</em>
-		, e.g. 
-		<em>Find references
-		</em>
-		, 
-		<em>Quick Outline
-		</em>
-		, and 
-		<em>Quick Fixes
-		</em>
-		. You can enable them by manually copying the respective entries from 
-		<em>plugin.xml
-		</em>
-		__gen_ to  
-		<em>plugin.xml
-		</em>
-		.
+		A number of new features are being registered in the <em>plugin.xml
+		</em>, e.g. <em>Find references
+		</em>, <em>Quick Outline
+		</em>, and <em>Quick Fixes
+		</em>. You can enable them by manually copying the respective entries from <em>plugin.xml
+		</em>__gen_ to  <em>plugin.xml
+		</em>.
 	</li>
 	<li>
-		To run MWE2 workflows later on, you must change the plug-in dependencies from 
-		<em>org.eclipse.emf.mwe.core
-		</em>
-		 to 
-		<em>org.eclipse.emf.mwe2.launch
-		</em>
-		 in your manifest. Optional resolution is fine.
+		To run MWE2 workflows later on, you must change the plug-in dependencies from <em>org.eclipse.emf.mwe.core
+		</em> to <em>org.eclipse.emf.mwe2.launch
+		</em> in your manifest. Optional resolution is fine.
 	</li>
 </ul>
 </p>
 <a name="migrating_from_0_7-5-7"></a>
 <h3>Noteworthy API Changes</h3>
 <p>
-The 
-<em>src
-</em>
- folders are generated once, so existing code will not be overwritten but has to be updated manually. At least one new class has appeared in your 
-<em>src
-</em>
--folder of the 
-<em>ui
-</em>
- plug-in. there will now be a 
-<em>[MyDsl]StandaloneSetup
-</em>
- inheriting form the generated 
-<em>[MyDsl]StandaloneSetupGenerated
-</em>
- to allow customization.
+The <em>src
+</em> folders are generated once, so existing code will not be overwritten but has to be updated manually. At least one new class has appeared in your <em>src
+</em>-folder of the <em>ui
+</em> plug-in. there will now be a <em>[MyDsl]StandaloneSetup
+</em> inheriting form the generated <em>[MyDsl]StandaloneSetupGenerated
+</em> to allow customization.
 </p>
 <p>
 You will face a couple of compilation problems due to changes in the API. Here&apos;s a list of the most prominent changes. It is usually only necessary to change your code, if you face any compilation problems.
@@ -280,64 +182,37 @@ revise indentation levels
 
 <ul>
 	<li>
-		The method 
-		<em>IScopeProvider.getScope(EObject,EClass)
-		</em>
-		 has been removed. Use  
-		<em>IScopeProvider.getScope(EObject,EReference)
-		</em>
-		 instead. 
+		The method <em>IScopeProvider.getScope(EObject,EClass)
+		</em> has been removed. Use  <em>IScopeProvider.getScope(EObject,EReference)
+		</em> instead. 
 	</li>
 	<li>
-		Renamed 
-		<em>DefaultScopeProvider
-		</em>
-		 to 
-		<em>SimpleNameScopeProvider
-		</em>
-		. There have been further significant changes in the scoping API that allow for optimized implementations. Consult the 
-		<a href="050-heading-runtime.xdoc.html#scoping">
+		Renamed <em>DefaultScopeProvider
+		</em> to <em>SimpleNameScopeProvider
+		</em>. There have been further significant changes in the scoping API that allow for optimized implementations. Consult the <a href="050-heading-runtime.xdoc.html#scoping">
 		section on scoping
 		</a>
 		 for details.
 	</li>
 	<li>
-		The return type of 
-		<em>AbstractInjectableValidator.getEPackages()
-		</em>
-		 was changed from 
-		<em>List&lt;? extends EPackage&gt;
-		</em>
-		 to 
-		<em>List&amp;lt;EPackage&gt;
-		</em>
-		.
+		The return type of <em>AbstractInjectableValidator.getEPackages()
+		</em> was changed from <em>List&lt;? extends EPackage&gt;
+		</em> to <em>List&amp;lt;EPackage&gt;
+		</em>.
 	</li>
 	<li>
-		The parser interfaces now use 
-		<em>java.io.Reader
-		</em>
-		 instead of 
-		<em>java.io.InputStream
-		</em>
-		 to explicitly address encoding. Have a look at the 
-		<a href="050-heading-runtime.xdoc.html#encoding">
+		The parser interfaces now use <em>java.io.Reader
+		</em> instead of <em>java.io.InputStream
+		</em> to explicitly address encoding. Have a look at the <a href="050-heading-runtime.xdoc.html#encoding">
 		section on encoding
 		</a>
 		 for details.
 	</li>
 	<li>
-		The handling of 
-		<em>ILabelProvider
-		</em>
-		 in various contexts has been refactored. The former base class 
-		<em>DefaultLabelProvider
-		</em>
-		 no longer exists. Use the 
-		<em>DefaultEObjectLabelProvider
-		</em>
-		 instead. See the 
-		<a href="120-heading-UI.xdoc.html#labelProvider">
+		The handling of <em>ILabelProvider
+		</em> in various contexts has been refactored. The former base class <em>DefaultLabelProvider
+		</em> no longer exists. Use the <em>DefaultEObjectLabelProvider
+		</em> instead. See the <a href="120-heading-UI.xdoc.html#labelProvider">
 		section on label providers
 		</a>
 		 for details. 
@@ -346,204 +221,105 @@ revise indentation levels
 		We have introduced a couple of new packages to better separate concerns. Most classes should be easy to relocate. 
 	</li>
 	<li>
-		The runtime and UI modules have separate base classes 
-		<em>DefaultRuntimeModule
-		</em>
-		 and 
-		<em>DefaultUiModule
-		</em>
-		 now. We use Guice&apos;s module overrides to combine them with the newly introduced 
-		<em>SharedModule
-		</em>
-		.  You have to add a constructor the your 
-		<em>[MyDsl]UiModule
-		</em>
-		 that takes an 
-		<em>AbstractUiPlugin
-		</em>
-		 as argument and pass that one to the super constructor. 
-		<em>Tip: There is an Eclipse quick fix available for that one.
+		The runtime and UI modules have separate base classes <em>DefaultRuntimeModule
+		</em> and <em>DefaultUiModule
+		</em> now. We use Guice&apos;s module overrides to combine them with the newly introduced <em>SharedModule
+		</em>.  You have to add a constructor the your <em>[MyDsl]UiModule
+		</em> that takes an <em>AbstractUiPlugin
+		</em> as argument and pass that one to the super constructor. <em>Tip: There is an Eclipse quick fix available for that one.
 		</em>
 	</li>
 	<li>
-		The interfaces 
-		<em>ILexicalHighlightigConfiguration
-		</em>
-		 and 
-		<em>ISemanticHighlightingConfiguration
-		</em>
-		 have been merged into 
-		<em>IHighlightingConfiguration
-		</em>
-		.
+		The interfaces <em>ILexicalHighlightigConfiguration
+		</em> and <em>ISemanticHighlightingConfiguration
+		</em> have been merged into <em>IHighlightingConfiguration
+		</em>.
 	</li>
 	<li>
-		The 
-		<em>DefaultTemplateProposalProvider
-		</em>
-		 takes an additional, injectable constructor parameter of type 
-		<em>ContextTypeIdHelper
-		</em>
-		.
+		The <em>DefaultTemplateProposalProvider
+		</em> takes an additional, injectable constructor parameter of type <em>ContextTypeIdHelper
+		</em>.
 	</li>
 	<li>
-		The 
-		<em>HyperlinkHelper
-		</em>
-		 uses field injection instead of constructor injection. The method 
-		<em>createHyperlinksByOffset
-		</em>
-		 should be overridden instead of the former 
-		<em>findCrossLinkedEObject
-		</em>
-		.
+		The <em>HyperlinkHelper
+		</em> uses field injection instead of constructor injection. The method <em>createHyperlinksByOffset
+		</em> should be overridden instead of the former <em>findCrossLinkedEObject
+		</em>.
 	</li>
 	<li>
-		The API to skip a node in the outline has changed. Instead of returning the 
-		<em>HIDDEN_NODE
-		</em>
-		 you&apos;ll have to implement 
-		<em>boolean consumeNode(MyType)
-		</em>
-		 and return 
-		<em>false
-		</em>
-		.
+		The API to skip a node in the outline has changed. Instead of returning the <em>HIDDEN_NODE
+		</em> you&apos;ll have to implement <em>boolean consumeNode(MyType)
+		</em> and return <em>false
+		</em>.
 	</li>
 	<li>
-		The 
-		<em>Readonly*Storage
-		</em>
-		 implementations have been removed. There is a new API to open editors for objects with a given URI. Please use the 
-		<em>IURIEditorOpener
-		</em>
-		 to create an editor or the 
-		<em>IStorage2UriMapper
-		</em>
-		 to obtain an 
-		<em>IStorage
-		</em>
-		 for a given URI.
+		The <em>Readonly*Storage
+		</em> implementations have been removed. There is a new API to open editors for objects with a given URI. Please use the <em>IURIEditorOpener
+		</em> to create an editor or the <em>IStorage2UriMapper
+		</em> to obtain an <em>IStorage
+		</em> for a given URI.
 	</li>
 	<li>
-		The interfaces 
-		<em>IStateAccess
-		</em>
-		 and 
-		<em>IEObjectHandle
-		</em>
-		 have been moved along with the 
-		<em>IUnitOfWork
-		</em>
-		 to the package 
-		<em>org.eclipse.xtext.util.concurrent
-		</em>
-		.
+		The interfaces <em>IStateAccess
+		</em> and <em>IEObjectHandle
+		</em> have been moved along with the <em>IUnitOfWork
+		</em> to the package <em>org.eclipse.xtext.util.concurrent
+		</em>.
 	</li>
 	<li>
-		The 
-		<em>ValidationJobFactory
-		</em>
-		 is gone. Please implement a custom 
-		<em>IResourceValidator
-		</em>
-		 instead.
+		The <em>ValidationJobFactory
+		</em> is gone. Please implement a custom <em>IResourceValidator
+		</em> instead.
 	</li>
 	<li>
-		The grammar elements 
-		<em>Alternatives
-		</em>
-		 and 
-		<em>Group
-		</em>
-		 have a new common super type 
-		<em>CompoundElement
-		</em>
-		. The methods 
-		<em>getGroups
-		</em>
-		 and 
-		<em>getTokens
-		</em>
-		 have been refactored to 
-		<em>getElements
-		</em>
-		.
+		The grammar elements <em>Alternatives
+		</em> and <em>Group
+		</em> have a new common super type <em>CompoundElement
+		</em>. The methods <em>getGroups
+		</em> and <em>getTokens
+		</em> have been refactored to <em>getElements
+		</em>.
 	</li>
 	<li>
-		Completion proposals take a 
-		<em>StyledString
-		</em>
-		 instead of a plain string as display string.
+		Completion proposals take a <em>StyledString
+		</em> instead of a plain string as display string.
 	</li>
 	<li>
-		The 
-		<em>AbstractLabelProvider
-		</em>
-		 does no longer expose its 
-		<em>IImageHelper
-		</em>
-		. Use 
-		<em>convertToImage
-		</em>
-		 instead or inject your own 
-		<em>IImageHelper
-		</em>
-		.
+		The <em>AbstractLabelProvider
+		</em> does no longer expose its <em>IImageHelper
+		</em>. Use <em>convertToImage
+		</em> instead or inject your own <em>IImageHelper
+		</em>.
 	</li>
 	<li>
-		The implementation-classes from 
-		<em>org.eclipse.xtext.index
-		</em>
-		 were superseded by the builder infrastructure. Use the 
-		<em>QualifiedNamesFragment
-		</em>
-		 and the 
-		<em>ImportNamespacesScopingFragment
-		</em>
-		 instead of the 
-		<em>ImportedNamespacesScopingFragment
-		</em>
-		. Please refer to the section about the builder infrastructure for details.
+		The implementation-classes from <em>org.eclipse.xtext.index
+		</em> were superseded by the builder infrastructure. Use the <em>QualifiedNamesFragment
+		</em> and the <em>ImportNamespacesScopingFragment
+		</em> instead of the <em>ImportedNamespacesScopingFragment
+		</em>. Please refer to the section about the builder infrastructure for details.
 	</li>
 	<li>
 		All the Xtend-based fragments were removed. 
 	</li>
 	<li>
-		_ILinkingService.getLinkText_ was removed. Have a look at the 
-		<em>LinkingHelper
-		</em>
-		 and the 
-		<em>CrossReferenceSerializer
-		</em>
-		 if you relied on this method.
+		_ILinkingService.getLinkText_ was removed. Have a look at the <em>LinkingHelper
+		</em> and the <em>CrossReferenceSerializer
+		</em> if you relied on this method.
 	</li>
 	<li>
-		The 
-		<em>SerializerUtil
-		</em>
-		 was renamed to 
-		<em>Serializer
-		</em>
-		. There were other heavy refactorings that involved the serializer and its components (like e.g. the 
-		<em>ITransientValueService
-		</em>
-		) but it should be pretty straight forward to migrate existing client code.
+		The <em>SerializerUtil
+		</em> was renamed to <em>Serializer
+		</em>. There were other heavy refactorings that involved the serializer and its components (like e.g. the <em>ITransientValueService
+		</em>) but it should be pretty straight forward to migrate existing client code.
 	</li>
 	<li>
-		The method-signatures of the 
-		<em>IFragmentProvider
-		</em>
-		 have changed. The documentation will give a clue on how to update existing implementations.
+		The method-signatures of the <em>IFragmentProvider
+		</em> have changed. The documentation will give a clue on how to update existing implementations.
 	</li>
 	<li>
-		Some static methods were removed from utility classes such as 
-		<em>EcoreUtil2
-		</em>
-		 and 
-		<em>ParsetreeUtil
-		</em>
-		 in favor of more sophisticated implementations.
+		Some static methods were removed from utility classes such as <em>EcoreUtil2
+		</em> and <em>ParsetreeUtil
+		</em> in favor of more sophisticated implementations.
 	</li>
 </ul>
 </p>
@@ -594,9 +370,7 @@ revise indentation levels
 	</li>
 </ul>
 
-For an overview over the new features consult our 
-<a href="http://www.eclipse.org/Xtext/documentation/helios/new_and_noteworthy.php">New and Noteworthy</a>
- online. 
+For an overview over the new features consult our <a href="http://www.eclipse.org/Xtext/documentation/helios/new_and_noteworthy.php">New and Noteworthy</a> online. 
 </p>
 </body>
 </html>
