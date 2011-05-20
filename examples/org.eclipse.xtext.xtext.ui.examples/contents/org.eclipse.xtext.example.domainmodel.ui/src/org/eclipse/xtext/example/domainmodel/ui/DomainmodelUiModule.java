@@ -7,9 +7,14 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.example.domainmodel.ui.autoedit.FantasticEditStrategyProvider;
 import org.eclipse.xtext.example.domainmodel.ui.linking.DomainmodelLinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.example.domainmodel.ui.navigation.DomainmodelHyperlinkHelper;
+import org.eclipse.xtext.example.domainmodel.ui.outline.FilterOperationsContribution;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper;
+import org.eclipse.xtext.ui.editor.outline.actions.IOutlineContribution;
+
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -33,5 +38,9 @@ public class DomainmodelUiModule extends AbstractDomainmodelUiModule {
 	public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
 		return FantasticEditStrategyProvider.class;
 	}
+	
+	public void configureFilterOperationsOutlineContribution(Binder binder) {
+		binder.bind(IOutlineContribution.class).annotatedWith(Names.named("FilterOperationsContribution")).to(FilterOperationsContribution.class);
+	} 
 
 }

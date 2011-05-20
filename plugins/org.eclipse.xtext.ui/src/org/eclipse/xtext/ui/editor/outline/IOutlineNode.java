@@ -33,8 +33,15 @@ public interface IOutlineNode extends IAdaptable, IReadAccess<EObject> {
 
 	boolean hasChildren();
 
+	/**
+	 * The region that triggers selection of this node when "Link with Editor" is enabled.
+	 */
 	ITextRegion getFullTextRegion();
 
+	/**
+	 * The region that is selected in the editor when this node is double clicked or selected in "Link with Editor"
+	 * mode.
+	 */
 	ITextRegion getSignificantTextRegion();
-	
+
 }
