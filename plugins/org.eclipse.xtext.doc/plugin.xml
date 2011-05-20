@@ -4,16 +4,17 @@
    <extension
          point="org.eclipse.help.toc">
       <toc
-            file="toc.xml"
+            file="contents/toc.xml"
             primary="true">
       </toc>
    </extension>
-
+  
+  <!--
    <extension
          point="org.eclipse.help.index">
       <index
             file="help/index.xml">
       </index>
    </extension>
-
+	-->
 </plugin>
