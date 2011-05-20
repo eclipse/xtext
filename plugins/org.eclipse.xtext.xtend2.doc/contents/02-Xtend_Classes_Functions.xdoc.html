@@ -27,29 +27,37 @@ Here is an example:
 <a name="packageDecl"></a>
 <h2>Package Declaration</h2>
 <p>
-Package declarations are like in Java, with the small difference, that an identifier can be escaped with a  
-<em>^
-</em>
- in case it conflicts with a keyword.
+Package declarations are like in Java, with the small difference, that an identifier can be escaped with a  <em>^
+</em> in case it conflicts with a keyword.
 Also you don&apos;t terminate a package declaration with a semicolon.
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">package</span>&nbsp;org.eclipse.xtext</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">package</span>&nbsp;org.eclipse.xtext
+</p>
+</div>
+</div>
 
 <div class="todo" >
 Would be interesting to document how the following example translates to java
 </div>
  
-<span class="inlinecode"><span class="keyword">package</span>&nbsp;my.^public.^package</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">package</span>&nbsp;my.^public.^package
+</p>
+</div>
+</div>
 </p>
 <a name="imports"></a>
 <h2>Imports</h2>
 <p>
 The ordinary imports of type names are equivalent to the imports known from Java. 
-Again one can escape any names conflicting with keywords using the 
-<em>^
-</em>
-. In constrast to Java, the import statement is never
+Again one can escape any names conflicting with keywords using the <em>^
+</em>. In constrast to Java, the import statement is never
 terminated with a semicolon. Xtend also features static imports but allows only a wildcard at the end.
 So far you cannot import single members using a static import.
 </p>
@@ -67,29 +75,36 @@ As in Java the package &apos;java.lang.*&apos; is implicitly imported.
 </p>
 <p>
 Xtend supports extension methods, which allows to add functions to existing classes without modifying
-them. Static extension functions are just one possibility - simply put the keyword 
-<span class="inlinecode"><span class="keyword">extension</span></span>
- after
-the 
-<span class="inlinecode"><span class="keyword">static</span></span>
- keyword and the static functions will be made available as member functions on their first
+them. Static extension functions are just one possibility - simply put the keyword <span class="inlinecode"><span class="keyword">extension</span></span> after
+the <span class="inlinecode"><span class="keyword">static</span></span> keyword and the static functions will be made available as member functions on their first
 parameter&apos;s type.
 </p>
 <p>
 That is the following import declaration 
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*
+</p>
+</div>
+</div>
 </p>
 <p>
 allows to use its methods for example like this :
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">new</span>&nbsp;Foo().singletonList()</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">new</span>&nbsp;Foo().singletonList()
+</p>
+</div>
+</div>
 </p>
 <p>
-Although this is supported it is generally much nicer to use 
-<a href="02-Xtend_Classes_Functions.xdoc.html#fields">
+Although this is supported it is generally much nicer to use <a href="02-Xtend_Classes_Functions.xdoc.html#fields">
 injected extensions
 </a>
 , because
@@ -99,23 +114,12 @@ they don&apos;t bind you to the actual implementation.
 <h2>Class Declaration</h2>
 <p>
 The class declaration reuses a lot of Java&apos;s syntax but still is a bit different in some aspects.
-Firstly the default visibility of any class is 
-<span class="inlinecode"><span class="keyword">public</span></span>
-. It is possible to write it explicitly but if not specified it defaults to public.
-You can change the visibility to 
-<span class="inlinecode"><span class="keyword">private</span></span>
- or 
-<span class="inlinecode"><span class="keyword">protected</span></span>
-. Java&apos;s default "package private" visibility does not exist.
+Firstly the default visibility of any class is <span class="inlinecode"><span class="keyword">public</span></span>. It is possible to write it explicitly but if not specified it defaults to public.
+You can change the visibility to <span class="inlinecode"><span class="keyword">private</span></span> or <span class="inlinecode"><span class="keyword">protected</span></span>. Java&apos;s default "package private" visibility does not exist.
 </p>
 <p>
 <em>To be implemented: 
-</em>
-The 
-<span class="inlinecode"><span class="keyword">abstract</span></span>
- as well as the 
-<span class="inlinecode"><span class="keyword">final</span></span>
- modifiers are directly translated to Java and have the exact same meaning.
+</em>The <span class="inlinecode"><span class="keyword">abstract</span></span> as well as the <span class="inlinecode"><span class="keyword">final</span></span> modifiers are directly translated to Java and have the exact same meaning.
 </p>
 <a name="Xtend_ClassDeclaration-3"></a>
 <h3>Inheritance</h3>
@@ -158,7 +162,13 @@ Fields in Xtend are always private and are usually used together with an annotat
 injection container. Example:
 </p>
 <p>
-<span class="inlinecode">@Inject&nbsp;MyService&nbsp;myService</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Inject&nbsp;MyService&nbsp;myService
+</p>
+</div>
+</div>
 </p>
 <p>
 This will translate to the following Java field: 
@@ -173,18 +183,14 @@ This will translate to the following Java field:
 </div>
 </p>
 <p>
-Note that the visibility is always 
-<span class="inlinecode"><span class="keyword">private</span></span>
-, is you want to provide access to an injected object
+Note that the visibility is always <span class="inlinecode"><span class="keyword">private</span></span>, is you want to provide access to an injected object
 you need to write an accessor function. 
 </p>
 <a name="fields-6"></a>
 <h3>Extension Methods</h3>
 <p>
 You can make the instance methods provided by the field available as extension
-methods, by adding the keyword 
-<span class="inlinecode"><span class="keyword">extension</span></span>
- to the field declaration.
+methods, by adding the keyword <span class="inlinecode"><span class="keyword">extension</span></span> to the field declaration.
 </p>
 <p>
 Imagine you want to add a method &apos;fullName&apos; to a closed type &apos;Entity&apos;. With extension methods, you could declare the following class
@@ -202,30 +208,53 @@ Imagine you want to add a method &apos;fullName&apos; to a closed type &apos;Ent
 And if you have an instance of this class injected as extension like this:
 </p>
 <p>
-<span class="inlinecode">@Inject&nbsp;<span class="keyword">extension</span>&nbsp;PersonExtensions&nbsp;personExtensions</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Inject&nbsp;<span class="keyword">extension</span>&nbsp;PersonExtensions&nbsp;personExtensions
+</p>
+</div>
+</div>
 </p>
 <p>
 The method is being put on the member scope of Person.
 So you can write the following
 </p>
 <p>
-<span class="inlinecode">myPerson.getFullName()</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myPerson.getFullName()
+</p>
+</div>
+</div>
 </p>
 <p>
 which is the a shorthand for 
 </p>
 <p>
-<span class="inlinecode">personExtensions.getFullName(myPerson)</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+personExtensions.getFullName(myPerson)
+</p>
+</div>
+</div>
 </p>
 <p>
 Of course the property shorthand is also available
 </p>
 <p>
-<span class="inlinecode">myPerson.fullName</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+myPerson.fullName
+</p>
+</div>
+</div>
 </p>
 <p>
-The nice thing with using dependency injection in combination with the extension modifier as opposed to 
-<a href="02-Xtend_Classes_Functions.xdoc.html#imports">
+The nice thing with using dependency injection in combination with the extension modifier as opposed to <a href="02-Xtend_Classes_Functions.xdoc.html#imports">
 static extensions
 </a>
  is, that in case there is a bug in the extension or it is implemented inefficiently or you 
@@ -237,8 +266,7 @@ or allows you to write against an SPI, where the concrete implementation can be 
 <h2>Functions</h2>
 <p>
 Xtend functions are declared within a class and are translated to a corresponding Java method with the exact same signature. 
-(The only exceptions are dispatch methods, which are explained 
-<a href="02-Xtend_Classes_Functions.xdoc.html#polymorphicDispatch">
+(The only exceptions are dispatch methods, which are explained <a href="02-Xtend_Classes_Functions.xdoc.html#polymorphicDispatch">
 here
 </a>
 ). 
@@ -258,29 +286,15 @@ Let&apos;s start with a simple example
 <a name="Functions-4"></a>
 <h3>Visibility</h3>
 <p>
-So far the visibility of any function is 
-<span class="inlinecode"><span class="keyword">public</span></span>
-. 
-It is planned to add support for 
-<span class="inlinecode"><span class="keyword">protected</span></span>
- and 
-<span class="inlinecode"><span class="keyword">private</span></span>
-.
+So far the visibility of any function is <span class="inlinecode"><span class="keyword">public</span></span>. 
+It is planned to add support for <span class="inlinecode"><span class="keyword">protected</span></span> and <span class="inlinecode"><span class="keyword">private</span></span>.
 </p>
 <a name="Functions-5"></a>
 <h3>Overriding Functions</h3>
 <p>
-Functions can override a function/method from the super class or implemented interfaces using the keyword 
-<span class="inlinecode"><span class="keyword">override</span></span>
-.
-If a function is annotated with the keyword 
-<span class="inlinecode"><span class="keyword">final</span></span>
-, it cannot be overridden.
-IF a function overrides a function (or method) from a super type, the 
-<span class="inlinecode">override</span>
- keyword is mandatory and replaces the keyword 
-<span class="inlinecode">def</span>
-.
+Functions can override a function/method from the super class or implemented interfaces using the keyword <span class="inlinecode"><span class="keyword">override</span></span>.
+If a function is annotated with the keyword <span class="inlinecode"><span class="keyword">final</span></span>, it cannot be overridden.
+IF a function overrides a function (or method) from a super type, the <span class="inlinecode">override</span> keyword is mandatory and replaces the keyword <span class="inlinecode">def</span>.
 </p>
 <p>
 Example:
@@ -363,9 +377,7 @@ Dispatch functions make a set of overloaded functions polymorphic. That is the r
 used to decide which of the overloaded methods is being invoked. This essentially removes the need for the quite invasive visitor pattern.
 </p>
 <p>
-A dispatch function is marked using the keyword 
-<span class="inlinecode"><span class="keyword">dispatch</span></span>
-.
+A dispatch function is marked using the keyword <span class="inlinecode"><span class="keyword">dispatch</span></span>.
 </p>
 <p>
 <div class="literallayout">
@@ -424,9 +436,7 @@ generates the following Java code :
 </div>
 </p>
 <p>
-As you can see a null reference is never a match. If you want to fetch null you can declare a parameter using the type 
-<span class="inlinecode">java.lang.Void</span>
-.
+As you can see a null reference is never a match. If you want to fetch null you can declare a parameter using the type <span class="inlinecode">java.lang.Void</span>.
 </p>
 <p>
 <div class="literallayout">
@@ -553,9 +563,7 @@ It is even possible to define the return type of a create function by means of
 <a name="CreateFunctions-10"></a>
 <h4>How it works</h4>
 <p>
-In addition to the keyword 
-<span class="inlinecode"><span class="keyword">create</span></span>
- one specifies two expressions.
+In addition to the keyword <span class="inlinecode"><span class="keyword">create</span></span> one specifies two expressions.
 The first expression is the factory to create an instance while the second will initialize it further.
 Prior to invoking the factory expression, a cache lookup is performed to find a previously created instance
 for the very same arguments. If there is no such instance, the factory expression is evaluated and the

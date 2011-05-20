@@ -1,5 +1,6 @@
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
 <title>Expressions</title>
 
 <link href="book.css" rel="stylesheet" type="text/css">
@@ -8,7 +9,7 @@
 </head>
 <body>
 <a name="Xbase Language Reference-5"></a>
-<h2>Expressions</h2>
+<h1>Expressions</h1>
 <p>
 Expressions are the main language constructs which are used to express behavior and computation of values. The concept of 
 statements is not supported, but instead powerful expressions are used to handle situations in which the imperative nature of statements would
@@ -25,26 +26,22 @@ null and Java types are supported.
 <a name="Xbase_Expressions_StringLiterals"></a>
 <h3>String Literals</h3>
 <p>
-A string literal as syntactically defined in 
-<a href="02-Lexical%20Structure.xdoc.html#Xbase_Syntax_StringLiteral">section Xbase_Syntax_StringLiteral</a>
- is a valid expression and returns an instance of 
-<span class="inlinecode">java.lang.String</span>
- of the given value.
+A string literal as syntactically defined in <a href="02-Lexical%20Structure.xdoc.html#Xbase_Syntax_StringLiteral">section Xbase_Syntax_StringLiteral</a>
+ is a valid expression and returns an instance of <span class="inlinecode">java.lang.String</span> of the given value.
 </p>
 <p>
 <ul>
 	<li>
-		<span class="inlinecode">&apos;Hello&nbsp;World&nbsp;!&apos;</span>
+		<span class="inlinecode"><span class="string">'Hello&nbsp;World&nbsp;!'</span></span>
 	</li>
 	<li>
-		<span class="inlinecode">"Hello&nbsp;World&nbsp;!"</span>
+		<span class="inlinecode"><span class="string">"Hello&nbsp;World&nbsp;!"</span></span>
 	</li>
 	<li>
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		"Hello&nbsp;<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;World&nbsp;!"
+		<span class="string">"Hello&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;World&nbsp;!"</span>
 		</p>
 		</div>
 		</div>
@@ -54,11 +51,8 @@ A string literal as syntactically defined in
 <a name="Xbase_Expressions_IntegerLiterals"></a>
 <h3>Integer Literals</h3>
 <p>
-An integer literal as defined in 
-<a href="02-Lexical%20Structure.xdoc.html#Xbase_Syntax_IntegerLiteral">section Xbase_Syntax_IntegerLiteral</a>
- creates an 
-<span class="inlinecode">int</span>
-.
+An integer literal as defined in <a href="02-Lexical%20Structure.xdoc.html#Xbase_Syntax_IntegerLiteral">section Xbase_Syntax_IntegerLiteral</a>
+ creates an <span class="inlinecode">int</span>.
 There is no signed int. If you put a minus operator in front of an int literal it is taken as a UnaryOperator
 with one argument (the positive int literal).
 </p>
@@ -75,14 +69,8 @@ with one argument (the positive int literal).
 <a name="Xbase_Expressions_BooleanLiteral"></a>
 <h3>Boolean Literals</h3>
 <p>
-There are two boolean literals, 
-<span class="inlinecode">true</span>
- and 
-<span class="inlinecode">false</span>
- which correspond to their Java counterpart of type 
-<em>boolean
-</em>
-. 
+There are two boolean literals, <span class="inlinecode">true</span> and <span class="inlinecode">false</span> which correspond to their Java counterpart of type <em>boolean
+</em>. 
 </p>
 <p>
 <ul>
@@ -97,9 +85,7 @@ There are two boolean literals,
 <a name="Xbase_Expressions_NullLiteral"></a>
 <h3>Null Literal</h3>
 <p>
-The null pointer literal is, like in Java, 
-<span class="inlinecode">null</span>
-. 
+The null pointer literal is, like in Java, <span class="inlinecode">null</span>. 
 It is a member of any reference type.
 </p>
 <p>
@@ -112,16 +98,13 @@ It is a member of any reference type.
 <a name="Xbase_Expressions_TypeLiteral"></a>
 <h3>Type Literals</h3>
 <p>
-Type literals are specified using the keyword 
-<em>typeof
-</em>
- :
+Type literals are specified using the keyword <em>typeof
+</em> :
 </p>
 <p>
 <ul>
 	<li>
-		<span class="inlinecode"><span class="keyword">typeof</span>(java.lang.String)</span>
-		 which yields java.lang.String.class
+		<span class="inlinecode"><span class="keyword">typeof</span>(java.lang.String)</span> which yields java.lang.String.class
 	</li>
 </ul>
 </p>
@@ -132,9 +115,7 @@ Type cast behave like casts in Java, but have a slightly more readable syntax.
 Type casts bind stronger than any other operator but weaker than feature calls.
 </p>
 <p>
-The conformance rules for casts are defined in the 
-<a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html#5.5">Java Language Specification</a>
-.
+The conformance rules for casts are defined in the <a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html#5.5">Java Language Specification</a>.
 </p>
 <a name="Xbase_Expressions_TypeCasts-3"></a>
 <h3>Syntax</h3>
@@ -142,8 +123,7 @@ The conformance rules for casts are defined in the
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XCastedExpression:<br />
-&nbsp;&nbsp;&nbsp;&nbsp;Expression&nbsp;<span class="string" >&apos;as&apos;</span>&nbsp;JvmTypeReference;
+XCastedExpression:</br>&nbsp;&nbsp;&nbsp;&nbsp;Expression&nbsp;<span class="string">'as'</span>&nbsp;JvmTypeReference;
 </p>
 </div>
 </div>
@@ -204,7 +184,7 @@ The following defines the operators and the corresponding Java method signatures
 </tr>
 <tr>
 <td>
-<span class="inlinecode">e1&nbsp;&amp;&amp;&nbsp;e2</span>
+<span class="inlinecode">e1&nbsp;&&&nbsp;e2</span>
 </td>
 <td>
 <span class="inlinecode">e1._operator_and(e2)</span>
@@ -236,7 +216,7 @@ The following defines the operators and the corresponding Java method signatures
 </tr>
 <tr>
 <td>
-<span class="inlinecode">e1&nbsp;&lt;&nbsp;e2</span>
+<span class="inlinecode">e1&nbsp;<&nbsp;e2</span>
 </td>
 <td>
 <span class="inlinecode">e1._operator_lessThan(e2)</span>
@@ -244,7 +224,7 @@ The following defines the operators and the corresponding Java method signatures
 </tr>
 <tr>
 <td>
-<span class="inlinecode">e1&nbsp;&gt;&nbsp;e2</span>
+<span class="inlinecode">e1&nbsp;>&nbsp;e2</span>
 </td>
 <td>
 <span class="inlinecode">e1._operator_greaterThan(e2)</span>
@@ -252,7 +232,7 @@ The following defines the operators and the corresponding Java method signatures
 </tr>
 <tr>
 <td>
-<span class="inlinecode">e1&nbsp;&lt;=&nbsp;e2</span>
+<span class="inlinecode">e1&nbsp;<=&nbsp;e2</span>
 </td>
 <td>
 <span class="inlinecode">e1._operator_lessEqualsThan(e2)</span>
@@ -260,7 +240,7 @@ The following defines the operators and the corresponding Java method signatures
 </tr>
 <tr>
 <td>
-<span class="inlinecode">e1&nbsp;&gt;=&nbsp;e2</span>
+<span class="inlinecode">e1&nbsp;>=&nbsp;e2</span>
 </td>
 <td>
 <span class="inlinecode">e1._operator_greaterEqualsThan(e2)</span>
@@ -276,7 +256,7 @@ The following defines the operators and the corresponding Java method signatures
 </tr>
 <tr>
 <td>
-<span class="inlinecode">e1&nbsp;-&gt;&nbsp;e2</span>
+<span class="inlinecode">e1&nbsp;->&nbsp;e2</span>
 </td>
 <td>
 <span class="inlinecode">e1._operator_mappedTo(e2)</span>
@@ -390,37 +370,21 @@ The following defines the operators and the corresponding Java method signatures
 
 		
 The table above also defines the operator precedence in ascending order. The blank lines separate precedence levels. 
-The assignment operator 
-<span class="inlinecode">+=</span>
- is right-to-left associative in the same way as the plain assignment
-operator 
-<span class="inlinecode">=</span>
- is. That is a = b = c is executed as a = (b = c), all other
+The assignment operator <span class="inlinecode">+=</span> is right-to-left associative in the same way as the plain assignment
+operator <span class="inlinecode">=</span> is. That is a = b = c is executed as a = (b = c), all other
 operators are left-to-right associative. Parenthesis can be used to adjust the default precedence and associativity. 
 </p>
 <a name="Xbase_Expressions_Operators-3"></a>
 <h3>Short-Circuit Boolean Operators</h3>
 <p>
-If the operators 
-<span class="inlinecode">||</span>
- and 
-<span class="inlinecode">&amp;&amp;</span>
- are used in a context where the left hand operand is of type boolean, the operation is evaluated
+If the operators <span class="inlinecode">||</span> and <span class="inlinecode">&&</span> are used in a context where the left hand operand is of type boolean, the operation is evaluated
 in short circuit mode, which means that the right hand operand might not be evaluated at all in the following cases: 
 <ol>
 	<li>
-		in the case of 
-		<span class="inlinecode">||</span>
-		 the operand on the right hand side is not evaluated if the left operand evaluates to 
-		<span class="inlinecode"><span class="keyword">true</span></span>
-		.
+		in the case of <span class="inlinecode">||</span> the operand on the right hand side is not evaluated if the left operand evaluates to <span class="inlinecode"><span class="keyword">true</span></span>.
 	</li>
 	<li>
-		in the case of 
-		<span class="inlinecode">&amp;&amp;</span>
-		 the operand on the right hand side is not evaluated if the left operand evaluates to 
-		<span class="inlinecode"><span class="keyword">false</span></span>
-		.
+		in the case of <span class="inlinecode">&&</span> the operand on the right hand side is not evaluated if the left operand evaluates to <span class="inlinecode"><span class="keyword">false</span></span>.
 	</li>
 </ol>
 </p>
@@ -435,10 +399,10 @@ in short circuit mode, which means that the right hand operand might not be eval
 		<span class="inlinecode">myList&nbsp;+=&nbsp;23</span>
 	</li>
 	<li>
-		<span class="inlinecode">x&nbsp;&gt;&nbsp;23&nbsp;&amp;&amp;&nbsp;y&nbsp;&lt;&nbsp;23</span>
+		<span class="inlinecode">x&nbsp;>&nbsp;23&nbsp;&&&nbsp;y&nbsp;<&nbsp;23</span>
 	</li>
 	<li>
-		<span class="inlinecode">x&nbsp;&amp;&amp;&nbsp;y&nbsp;||&nbsp;z</span>
+		<span class="inlinecode">x&nbsp;&&&nbsp;y&nbsp;||&nbsp;z</span>
 	</li>
 	<li>
 		<span class="inlinecode">1&nbsp;+&nbsp;3&nbsp;*&nbsp;5&nbsp;*&nbsp;(-&nbsp;23)</span>
@@ -460,9 +424,7 @@ in short circuit mode, which means that the right hand operand might not be eval
 <a href="04-Expressions.xdoc.html#Xbase_Expressions_VariableDeclaration">
 Local variables
 </a>
- can be reassigned using the 
-<span class="inlinecode">=</span>
- operator. Also properties can be set using 
+ can be reassigned using the <span class="inlinecode">=</span> operator. Also properties can be set using 
 that operator:
 Given the expression 
 </p>
@@ -470,24 +432,20 @@ Given the expression
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myObj.myProperty&nbsp;=&nbsp;<span class="string" >"foo"</span>
+myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span>
 </p>
 </div>
 </div>
 </p>
 <p>
-The compiler first looks up whether there is an accessible Java Field called 
-<span class="inlinecode">myProperty</span>
- on the type of 
-<span class="inlinecode">myObj</span>
-. If there is one it translates to
+The compiler first looks up whether there is an accessible Java Field called <span class="inlinecode">myProperty</span> on the type of <span class="inlinecode">myObj</span>. If there is one it translates to
 the following Java expression :
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myObj.myProperty&nbsp;=&nbsp;<span class="string" >"foo"</span>;
+myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span>;
 </p>
 </div>
 </div>
@@ -497,20 +455,16 @@ Remember in Xbase everything is an expression and has to return something. In th
 Java expression, which is the assigned value.
 </p>
 <p>
-If there is no accessible field on the left operand&apos;s type, a method called 
-<span class="inlinecode">setMyProperty(OneArg)</span>
- (JavaBeans
+If there is no accessible field on the left operand&apos;s type, a method called <span class="inlinecode">setMyProperty(OneArg)</span> (JavaBeans
 setter method) is looked up. It has to take one argument of the type (or a super type) of the right hand operand. The return value will be whatever the 
-setter method returns (which usually is 
-<span class="inlinecode">null</span>
-). 
+setter method returns (which usually is <span class="inlinecode">null</span>). 
 As a result the compiler translates to :
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myObj.setMyProperty(<span class="string" >"foo"</span>)
+myObj.setMyProperty(<span class="string">"foo"</span>)
 </p>
 </div>
 </div>
@@ -528,9 +482,7 @@ The following snippet is a simplification of the real Xtext rules, which cover m
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-FeatureCall&nbsp;:<br />
-&nbsp;&nbsp;&nbsp;&nbsp;ID&nbsp;|<br />
-&nbsp;&nbsp;&nbsp;&nbsp;Expression&nbsp;(<span class="string" >&apos;.&apos;</span>&nbsp;ID&nbsp;(<span class="string" >&apos;(&apos;</span>&nbsp;Expression&nbsp;(<span class="string" >&apos;,&apos;</span>&nbsp;Expression)*&nbsp;<span class="string" >&apos;)&apos;</span>)?)*
+FeatureCall&nbsp;:</br>&nbsp;&nbsp;&nbsp;&nbsp;ID&nbsp;|</br>&nbsp;&nbsp;&nbsp;&nbsp;Expression&nbsp;(<span class="string">'.'</span>&nbsp;ID&nbsp;(<span class="string">'('</span>&nbsp;Expression&nbsp;(<span class="string">','</span>&nbsp;Expression)*&nbsp;<span class="string">')'</span>)?)*
 </p>
 </div>
 </div>
@@ -539,8 +491,7 @@ FeatureCall&nbsp;:<br />
 <h3>Property Access</h3>
 <p>
 Feature calls are directly translated to their Java equivalent with the exception, that for calls to properties an equivalent rule as 
-described in 
-<a href="04-Expressions.xdoc.html#Xbase_Expressions_PropertyAssignment">section Xbase_Expressions_PropertyAssignment</a>
+described in <a href="04-Expressions.xdoc.html#Xbase_Expressions_PropertyAssignment">section Xbase_Expressions_PropertyAssignment</a>
  applies. 
 That is, for the following expression
 </p>
@@ -554,21 +505,13 @@ myObj.myProperty
 </div>
 </p>
 <p>
-the compiler first looks for an accessible field in the type of 
-<span class="inlinecode">myObj</span>
-. If no such field exists it looks for a method called 
-<span class="inlinecode">myProperty()</span>
- before it looks 
-for the getter methods 
-<span class="inlinecode">getMyProperty()</span>
-. If none of these members can be found the expression is unbound and a compiliation error is thrown.
+the compiler first looks for an accessible field in the type of <span class="inlinecode">myObj</span>. If no such field exists it looks for a method called <span class="inlinecode">myProperty()</span> before it looks 
+for the getter methods <span class="inlinecode">getMyProperty()</span>. If none of these members can be found the expression is unbound and a compiliation error is thrown.
 </p>
 <a name="Xbase_Expressions_ImplicitThis"></a>
 <h3>Implicit 'this' variable</h3>
 <p>
-If the current scope contains a variable named 
-<span class="inlinecode"><span class="keyword">this</span></span>
-, the compiler will make all its members available to the scope. 
+If the current scope contains a variable named <span class="inlinecode"><span class="keyword">this</span></span>, the compiler will make all its members available to the scope. 
 That is if 
 <div class="literallayout">
 <div class="incode">
@@ -594,9 +537,7 @@ which would have higher precedence.
 <h3>Null-Safe Feature Call</h3>
 <p>
 Checking for null references can make code very unreadable. In many situations it is ok for an expression to return null if a receiver was null.
-Xbase supports the safe navigation operator 
-<span class="inlinecode">?.</span>
- to make such code more readable.
+Xbase supports the safe navigation operator <span class="inlinecode">?.</span> to make such code more readable.
 </p>
 <p>
 Instead of writing 
@@ -633,7 +574,7 @@ Construction of objects is done by invoking Java constructors. The syntax is exa
 <ul>
 	<li>
 		
-		<div class="literallayout">
+				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">new</span>&nbsp;String()
@@ -644,10 +585,10 @@ Construction of objects is done by invoking Java constructors. The syntax is exa
 	</li>
 	<li>
 		
-		<div class="literallayout">
+				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">new</span>&nbsp;java.util.ArrayList&lt;java.math.BigDecimal&gt;()
+		<span class="keyword">new</span>&nbsp;java.util.ArrayList<java.math.BigDecimal>()
 		</p>
 		</div>
 		</div>
@@ -661,10 +602,7 @@ Construction of objects is done by invoking Java constructors. The syntax is exa
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XConstructorCall:<br />
-&nbsp;&nbsp;<span class="string" >&apos;new&apos;</span>&nbsp;QualifiedName&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string" >&apos;&lt;&apos;</span>&nbsp;JvmTypeArgument&nbsp;(<span class="string" >&apos;,&apos;</span>&nbsp;JvmTypeArgument)*&nbsp;<span class="string" >&apos;&gt;&apos;</span>)?&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string" >&apos;(&apos;</span>(XExpression&nbsp;(<span class="string" >&apos;,&apos;</span>&nbsp;XExpression)*)?<span class="string" >&apos;)&apos;</span>)?;
+XConstructorCall:</br>&nbsp;&nbsp;<span class="string">'new'</span>&nbsp;QualifiedName&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">'<'</span>&nbsp;JvmTypeArgument&nbsp;(<span class="string">','</span>&nbsp;JvmTypeArgument)*&nbsp;<span class="string">'>'</span>)?&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">'('</span>(XExpression&nbsp;(<span class="string">','</span>&nbsp;XExpression)*)?<span class="string">')'</span>)?;
 </p>
 </div>
 </div>
@@ -681,9 +619,7 @@ so that any final variables and parameters visible at construction time can be r
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XClosure:<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >&apos;[&apos;</span>&nbsp;(&nbsp;JvmFormalParameter&nbsp;(<span class="string" >&apos;,&apos;</span>&nbsp;JvmFormalParameter)*&nbsp;)?&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >&apos;|&apos;</span>&nbsp;XExpression&nbsp;<span class="string" >&apos;]&apos;</span>;
+XClosure:</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'['</span>&nbsp;(&nbsp;JvmFormalParameter&nbsp;(<span class="string">','</span>&nbsp;JvmFormalParameter)*&nbsp;)?&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'|'</span>&nbsp;XExpression&nbsp;<span class="string">']'</span>;
 </p>
 </div>
 </div>
@@ -720,7 +656,7 @@ But in all other cases the square brackets are mandatory:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">val</span>&nbsp;func&nbsp;=&nbsp;[String&nbsp;s|&nbsp;s.length&gt;3]
+<span class="keyword">val</span>&nbsp;func&nbsp;=&nbsp;[String&nbsp;s|&nbsp;s.length>3]
 </p>
 </div>
 </div>
@@ -728,8 +664,7 @@ But in all other cases the square brackets are mandatory:
 <a name="Xbase_Expressions_ClosuresTypeInference"></a>
 <h3>Typing</h3>
 <p>
-Closures are expressions which produce function objects. The type is a 
-<a href="03-Types.xdoc.html#Xbase_Types_FunctionTypes">
+Closures are expressions which produce function objects. The type is a <a href="03-Types.xdoc.html#Xbase_Types_FunctionTypes">
 function type
 </a>
 , consisting of the types of the 
@@ -741,7 +676,7 @@ For instance, given the following Java method signature:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;T&nbsp;&lt;T&gt;getFirst(List&lt;T&gt;&nbsp;list,&nbsp;Function0&lt;T,Boolean&gt;&nbsp;predicate)
+<span class="keyword">public</span>&nbsp;T&nbsp;<T>getFirst(List<T>&nbsp;list,&nbsp;Function0<T,Boolean>&nbsp;predicate)
 </p>
 </div>
 </div>
@@ -751,7 +686,7 @@ the type of the parameter can be inferred. Which allows users to write:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-arrayList(&nbsp;<span class="string" >"Foo"</span>,&nbsp;<span class="string" >"Bar"</span>&nbsp;).findFirst(&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string" >"Bar"</span>&nbsp;)
+arrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>&nbsp;).findFirst(&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string">"Bar"</span>&nbsp;)
 </p>
 </div>
 </div>
@@ -760,7 +695,7 @@ instead of
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-arrayList(&nbsp;<span class="string" >"Foo"</span>,&nbsp;<span class="string" >"Bar"</span>&nbsp;).findFirst(&nbsp;String&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string" >"Bar"</span>&nbsp;)
+arrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>&nbsp;).findFirst(&nbsp;String&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string">"Bar"</span>&nbsp;)
 </p>
 </div>
 </div>
@@ -768,34 +703,28 @@ arrayList(&nbsp;<span class="string" >"Foo"</span>,&nbsp;<span class="string" >"
 <a name="Xbase_Expressions_FunctionMapping"></a>
 <h3>Function Mapping</h3>
 <p>
-An Xbase closure is a Java object of one of the 
-<em>Function
-</em>
- interfaces shipped with the runtime library of Xbase. There is an interface 
+An Xbase closure is a Java object of one of the <em>Function
+</em> interfaces shipped with the runtime library of Xbase. There is an interface 
 for each number of parameters (current maximum is six parameters). The names of the interfaces are 
 <ul>
 	<li>
 		<em>Function0&lt;ReturnType&gt;
-		</em>
-		 for zero parameters, 
+		</em> for zero parameters, 
 	</li>
 	<li>
 		<em>Function1&lt;Param1Type, ReturnType&gt;
-		</em>
-		 for one parameters, 
+		</em> for one parameters, 
 	</li>
 	<li>
 		<em>Function2&lt;Param1Type, Param2Type, ReturnType&gt;
-		</em>
-		 for two parameters, 
+		</em> for two parameters, 
 	</li>
 	<li>
 		... 
 	</li>
 	<li>
 		<em>Function6&lt;Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType&gt;
-		</em>
-		 for six parameters, 
+		</em> for six parameters, 
 	</li>
 </ul>
 </p>
@@ -805,23 +734,14 @@ are auto coerced to expected types if those types declare only one method (metho
 don&apos;t count).
 </p>
 <p>
-As a result given the method 
-<span class="inlinecode">java.util.Collections.sort(List&lt;T&gt;,&nbsp;Comparator&lt;?&nbsp;super&nbsp;T&gt;)</span>
- is available
+As a result given the method <span class="inlinecode">java.util.Collections.sort(List<T>,&nbsp;Comparator<?&nbsp;super&nbsp;T>)</span> is available
 as an extension method, it can be invoked like this
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-newArrayList(&nbsp;<span class="string" >&apos;aaa&apos;</span>,&nbsp;<span class="string" >&apos;bb&apos;</span>,&nbsp;<span class="string" >&apos;c&apos;</span>&nbsp;).sort(<br />
-&nbsp;&nbsp;&nbsp;&nbsp;e1,&nbsp;e2&nbsp;|&nbsp;<span class="keyword">if</span>&nbsp;(&nbsp;e1.length&nbsp;&gt;&nbsp;e2.length&nbsp;)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(&nbsp;e1.length&nbsp;&lt;&nbsp;e2.length&nbsp;)&nbsp;{&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})
+newArrayList(&nbsp;<span class="string">'aaa'</span>,&nbsp;<span class="string">'bb'</span>,&nbsp;<span class="string">'c'</span>&nbsp;).sort(</br>&nbsp;&nbsp;&nbsp;&nbsp;e1,&nbsp;e2&nbsp;|&nbsp;<span class="keyword">if</span>&nbsp;(&nbsp;e1.length&nbsp;>&nbsp;e2.length&nbsp;)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-1&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(&nbsp;e1.length&nbsp;<&nbsp;e2.length&nbsp;)&nbsp;{&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})
 </p>
 </div>
 </div>
@@ -831,13 +751,13 @@ newArrayList(&nbsp;<span class="string" >&apos;aaa&apos;</span>,&nbsp;<span clas
 <p>
 <ul>
 	<li>
-		<span class="inlinecode">[&nbsp;|&nbsp;<span class="string" >"foo"</span>&nbsp;]&nbsp;&nbsp;&nbsp;<span class="comment" >//&nbsp;closure&nbsp;without&nbsp;parameters</span></span>
+		<span class="inlinecode">[&nbsp;|&nbsp;<span class="string">"foo"</span>&nbsp;]&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;closure&nbsp;without&nbsp;parameters</span></span>
 	</li>
 	<li>
-		<span class="inlinecode">[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.toUpperCase()&nbsp;]&nbsp;<span class="comment" >//&nbsp;explicit&nbsp;argument&nbsp;type</span></span>
+		<span class="inlinecode">[&nbsp;String&nbsp;s&nbsp;|&nbsp;s.toUpperCase()&nbsp;]&nbsp;<span class="comment">//&nbsp;explicit&nbsp;argument&nbsp;type</span></span>
 	</li>
 	<li>
-		<span class="inlinecode">[&nbsp;a,b,a&nbsp;|&nbsp;a+b+c&nbsp;]&nbsp;<span class="comment" >//&nbsp;inferred&nbsp;argument&nbsp;types</span></span>
+		<span class="inlinecode">[&nbsp;a,b,a&nbsp;|&nbsp;a+b+c&nbsp;]&nbsp;<span class="comment">//&nbsp;inferred&nbsp;argument&nbsp;types</span></span>
 	</li>
 </ul>
 </p>
@@ -845,9 +765,7 @@ newArrayList(&nbsp;<span class="string" >&apos;aaa&apos;</span>,&nbsp;<span clas
 <h2>If Expression</h2>
 <p>
 An if expression is used to choose two different values based on a predicate. While it has the syntax of Java&apos;s if statement it behaves  
-like Java&apos;s ternary operator (
-<span class="inlinecode">predicate&nbsp;?&nbsp;thenPart&nbsp;:&nbsp;elsePart</span>
-), i.e. it is an expression that returns a value. Consequently, you can use 
+like Java&apos;s ternary operator (<span class="inlinecode">predicate&nbsp;?&nbsp;thenPart&nbsp;:&nbsp;elsePart</span>), i.e. it is an expression that returns a value. Consequently, you can use 
 if expressions deeply nested within expressions.
 </p>
 <a name="Xbase_Expressions_IfExpression-2"></a>
@@ -856,31 +774,14 @@ if expressions deeply nested within expressions.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XIfExpression:<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >&apos;if&apos;</span>&nbsp;<span class="string" >&apos;(&apos;</span>&nbsp;XExpression&nbsp;<span class="string" >&apos;)&apos;</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XExpression<br />
-&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string" >&apos;else&apos;</span>&nbsp;XExpression)?;
+XIfExpression:</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'if'</span>&nbsp;<span class="string">'('</span>&nbsp;XExpression&nbsp;<span class="string">')'</span></br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XExpression</br>&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">'else'</span>&nbsp;XExpression)?;
 </p>
 </div>
 </div>
 </p>
 <p>
-An expression 
-<span class="inlinecode"><span class="keyword">if</span>&nbsp;(p)&nbsp;e1&nbsp;<span class="keyword">else</span>&nbsp;e2</span>
- results in either the value 
-<span class="inlinecode">e1</span>
- or 
-<span class="inlinecode">e2</span>
- depending on whether the predicate 
-<span class="inlinecode">p</span>
- 
-evaluates to 
-<span class="inlinecode"><span class="keyword">true</span></span>
- or 
-<span class="inlinecode"><span class="keyword">false</span></span>
-. The else part is optional which is a shorthand for 
-<span class="inlinecode"><span class="keyword">else</span>&nbsp;<span class="keyword">null</span></span>
-.
+An expression <span class="inlinecode"><span class="keyword">if</span>&nbsp;(p)&nbsp;e1&nbsp;<span class="keyword">else</span>&nbsp;e2</span> results in either the value <span class="inlinecode">e1</span> or <span class="inlinecode">e2</span> depending on whether the predicate <span class="inlinecode">p</span> 
+evaluates to <span class="inlinecode"><span class="keyword">true</span></span> or <span class="inlinecode"><span class="keyword">false</span></span>. The else part is optional which is a shorthand for <span class="inlinecode"><span class="keyword">else</span>&nbsp;<span class="keyword">null</span></span>.
 That means 
 </p>
 <p>
@@ -907,17 +808,8 @@ is the a short hand for
 <a name="Xbase_Expressions_IfTypeInference"></a>
 <h3>Typing</h3>
 <p>
-The type of an if expression is calculated by the return types 
-<span class="inlinecode">T1</span>
- and 
-<span class="inlinecode">T2</span>
- of the two expression 
-<span class="inlinecode">e1</span>
- and 
-<span class="inlinecode">e2</span>
-.
-It uses the rules defined in 
-<a href="03-Types.xdoc.html#Xbase_Types_CommonSuperType">section Xbase_Types_CommonSuperType</a>
+The type of an if expression is calculated by the return types <span class="inlinecode">T1</span> and <span class="inlinecode">T2</span> of the two expression <span class="inlinecode">e1</span> and <span class="inlinecode">e2</span>.
+It uses the rules defined in <a href="03-Types.xdoc.html#Xbase_Types_CommonSuperType">section Xbase_Types_CommonSuperType</a>
 .
 </p>
 <a name="Xbase_Expressions_IfExpression-4"></a>
@@ -945,41 +837,24 @@ For a switch expression
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">switch</span>&nbsp;e&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;e1&nbsp;:&nbsp;er1<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;e2&nbsp;:&nbsp;er2<br />
-&nbsp;&nbsp;&nbsp;&nbsp;...<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;en&nbsp;:&nbsp;ern<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;er<br />
-}
+<span class="keyword">switch</span>&nbsp;e&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;e1&nbsp;:&nbsp;er1</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;e2&nbsp;:&nbsp;er2</br>&nbsp;&nbsp;&nbsp;&nbsp;...</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;en&nbsp;:&nbsp;ern</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;er</br>}
 </p>
 </div>
 </div>
 </p>
 <p>
-the main expression 
-<span class="inlinecode">e</span>
- is evaluated first and then each case sequentially. If the switch expression
-contains a variable declaration using the syntax known from 
-<a href="04-Expressions.xdoc.html#Xbase_Expressions_ForLoop">section Xbase_Expressions_ForLoop</a>
+the main expression <span class="inlinecode">e</span> is evaluated first and then each case sequentially. If the switch expression
+contains a variable declaration using the syntax known from <a href="04-Expressions.xdoc.html#Xbase_Expressions_ForLoop">section Xbase_Expressions_ForLoop</a>
 , the value is bound to the given name.
-Expressions of type 
-<span class="inlinecode">java.lang.Boolean</span>
- or 
-<span class="inlinecode">boolean</span>
- are not allowed in a switch expression.
+Expressions of type <span class="inlinecode">java.lang.Boolean</span> or <span class="inlinecode">boolean</span> are not allowed in a switch expression.
 </p>
 <p>
-The guard of each case clause is evaluated until the switch value equals the result of the case&apos;s guard expression or if the case&apos;s guard expression evaluates to 
-<span class="inlinecode">true</span>
-.
+The guard of each case clause is evaluated until the switch value equals the result of the case&apos;s guard expression or if the case&apos;s guard expression evaluates to <span class="inlinecode">true</span>.
 Then the right hand expression of the case evaluated and the result is returned.
 </p>
 <p>
 If none of the guards matches the default expression is evaluated an returned. If no default expression
-is specified the expression evaluates to 
-<span class="inlinecode"><span class="keyword">null</span></span>
-.
+is specified the expression evaluates to <span class="inlinecode"><span class="keyword">null</span></span>.
 </p>
 <p>
 Example:
@@ -988,11 +863,7 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">switch</span>&nbsp;myString&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;myString.length&gt;5&nbsp;:&nbsp;<span class="string" >&apos;a&nbsp;long&nbsp;string.&apos;</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string" >&apos;foo&apos;</span>&nbsp;:&nbsp;<span class="string" >&apos;It&apos;</span>s&nbsp;a&nbsp;foo.<span class="string" >&apos;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;:&nbsp;&apos;</span>It<span class="string" >&apos;s&nbsp;a&nbsp;short&nbsp;non-foo&nbsp;string.&apos;</span><br />
-}
+<span class="keyword">switch</span>&nbsp;myString&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;myString.length>5&nbsp;:&nbsp;<span class="string">'a&nbsp;long&nbsp;string.'</span></br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">'foo'</span>&nbsp;:&nbsp;<span class="string">'It'</span>s&nbsp;a&nbsp;foo.<span class="string">'</br>&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;:&nbsp;'</span>It<span class="string">'s&nbsp;a&nbsp;short&nbsp;non-foo&nbsp;string.'</span></br>}
 </p>
 </div>
 </div>
@@ -1000,11 +871,8 @@ Example:
 <a name="Xbase_Expressions_SwitchExpression-7"></a>
 <h3>Type guards</h3>
 <p>
-In addition to the case guards one can add a so called 
-<em>Type Guard
-</em>
- which is syntactically just a 
-<a href="03-Types.xdoc.html#Xbase_Types_TypeReferences">
+In addition to the case guards one can add a so called <em>Type Guard
+</em> which is syntactically just a <a href="03-Types.xdoc.html#Xbase_Types_TypeReferences">
 type reference
 </a>
  preceding
@@ -1013,20 +881,13 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">var</span>&nbsp;Object&nbsp;x&nbsp;=&nbsp;...;<br />
-<span class="keyword">switch</span>&nbsp;x&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;<span class="keyword">case</span>&nbsp;x.length()&gt;0&nbsp;:&nbsp;x.length()<br />
-&nbsp;&nbsp;&nbsp;&nbsp;List&lt;?&gt;&nbsp;:&nbsp;x.size()<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;-1<br />
-}
+<span class="keyword">var</span>&nbsp;Object&nbsp;x&nbsp;=&nbsp;...;</br><span class="keyword">switch</span>&nbsp;x&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;<span class="keyword">case</span>&nbsp;x.length()>0&nbsp;:&nbsp;x.length()</br>&nbsp;&nbsp;&nbsp;&nbsp;List<?>&nbsp;:&nbsp;x.size()</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;-1</br>}
 </p>
 </div>
 </div>
 </p>
 <p>
-Only if the switch value passes a type guard, i.e. an instanceof operation returns 
-<span class="inlinecode">true</span>
-, the case&apos;s guard expression is executed using the same semantics explained in
+Only if the switch value passes a type guard, i.e. an instanceof operation returns <span class="inlinecode">true</span>, the case&apos;s guard expression is executed using the same semantics explained in
 previously. 
 If the switch expression contains an explicit declaration of a local variable or the expression references a local variable,
 the type guard acts like a cast, that is all references to the switch value will be of the type specified in the type guard.
@@ -1034,8 +895,7 @@ the type guard acts like a cast, that is all references to the switch value will
 <a name="Xbase_Expressions_SwitchExpression-8"></a>
 <h3>Typing</h3>
 <p>
-The return type of a switch expression is computed using the rules defined in 
-<a href="03-Types.xdoc.html#Xbase_Types_CommonSuperType">section Xbase_Types_CommonSuperType</a>
+The return type of a switch expression is computed using the rules defined in <a href="03-Types.xdoc.html#Xbase_Types_CommonSuperType">section Xbase_Types_CommonSuperType</a>
 . The set of types from which the common super type is 
 computed corresponds to the types of each case&apos;s result expression. In case a switch expression&apos;s type is
 computed using the expected type from the context, it is sufficient to return the expected type if all case branches types conform to the expected type.
@@ -1046,14 +906,10 @@ computed using the expected type from the context, it is sufficient to return th
 <ul>
 	<li>
 		
-		<div class="literallayout">
+				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">switch</span>&nbsp;foo&nbsp;{<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;Entity&nbsp;:&nbsp;foo.superType.name<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;Datatype&nbsp;:&nbsp;foo.name<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalStateException<br />
-		}
+		<span class="keyword">switch</span>&nbsp;foo&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;Entity&nbsp;:&nbsp;foo.superType.name</br>&nbsp;&nbsp;&nbsp;&nbsp;Datatype&nbsp;:&nbsp;foo.name</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalStateException</br>}
 		</p>
 		</div>
 		</div>
@@ -1061,14 +917,10 @@ computed using the expected type from the context, it is sufficient to return th
 	</li>
 	<li>
 		
-		<div class="literallayout">
+				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">switch</span>&nbsp;x&nbsp;:&nbsp;foo.bar.complicated(<span class="string" >&apos;hello&apos;</span>,42)&nbsp;{<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string" >"hello42"</span>&nbsp;:&nbsp;...<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;x.length&lt;2&nbsp;:&nbsp;...<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;....<br />
-		}
+		<span class="keyword">switch</span>&nbsp;x&nbsp;:&nbsp;foo.bar.complicated(<span class="string">'hello'</span>,42)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">"hello42"</span>&nbsp;:&nbsp;...</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;x.length<2&nbsp;:&nbsp;...</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;....</br>}
 		</p>
 		</div>
 		</div>
@@ -1082,15 +934,7 @@ computed using the expected type from the context, it is sufficient to return th
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XSwitchExpression:<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >&apos;switch&apos;</span>&nbsp;(ID&nbsp;<span class="string" >&apos;:&apos;</span>)?&nbsp;XExpression&nbsp;<span class="string" >&apos;{&apos;</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCasePart+<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string" >&apos;default&apos;</span>&nbsp;<span class="string" >&apos;:&apos;</span>&nbsp;XExpression))?<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >&apos;}&apos;</span>;<br />
-<br />
-XCasePart:<br />
-&nbsp;&nbsp;&nbsp;&nbsp;JvmTypeReference?&nbsp;(<span class="string" >&apos;case&apos;</span>&nbsp;XExpression)?&nbsp;<span class="string" >&apos;:&apos;</span>&nbsp;XExpression&nbsp;);<br />
-}
+XSwitchExpression:</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'switch'</span>&nbsp;(ID&nbsp;<span class="string">':'</span>)?&nbsp;XExpression&nbsp;<span class="string">'{'</span></br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCasePart+</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">'default'</span>&nbsp;<span class="string">':'</span>&nbsp;XExpression))?</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'}'</span>;</br></br>XCasePart:</br>&nbsp;&nbsp;&nbsp;&nbsp;JvmTypeReference?&nbsp;(<span class="string">'case'</span>&nbsp;XExpression)?&nbsp;<span class="string">':'</span>&nbsp;XExpression&nbsp;);</br>}
 </p>
 </div>
 </div>
@@ -1098,8 +942,7 @@ XCasePart:<br />
 <a name="Xbase_Expressions_VariableDeclaration"></a>
 <h2>Variable Declarations</h2>
 <p>
-Variable declarations are only allowed within 
-<a href="04-Expressions.xdoc.html#Xbase_Expressions_Blocks">
+Variable declarations are only allowed within <a href="04-Expressions.xdoc.html#Xbase_Expressions_Blocks">
 blocks
 </a>
 . They are visible in any subsequent expressions in
@@ -1108,36 +951,21 @@ used to overload the variable name &apos;this&apos;, in order to subsequently ac
 unqualified manner.
 </p>
 <p>
-A variable declaration starting with the keyword 
-<span class="inlinecode"><span class="keyword">val</span></span>
- denotes a so called value, which is essentially a final (i.e. unsettable) variable. In rare cases, one
-needs to update the value of a reference. In such situations the variable needs to be declared with the keyword 
-<span class="inlinecode"><span class="keyword">var</span></span>
-, which stands for &apos;variable&apos;.
+A variable declaration starting with the keyword <span class="inlinecode"><span class="keyword">val</span></span> denotes a so called value, which is essentially a final (i.e. unsettable) variable. In rare cases, one
+needs to update the value of a reference. In such situations the variable needs to be declared with the keyword <span class="inlinecode"><span class="keyword">var</span></span>, which stands for &apos;variable&apos;.
 </p>
 <p>
-A typical example for using 
-<span class="inlinecode"><span class="keyword">var</span></span>
- is a counter in a loop. 
+A typical example for using <span class="inlinecode"><span class="keyword">var</span></span> is a counter in a loop. 
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;max&nbsp;=&nbsp;100<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;i&nbsp;=&nbsp;0<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>&nbsp;(i&nbsp;&gt;&nbsp;max)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string" >"Hi&nbsp;there!"</span>)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;=&nbsp;i&nbsp;+1<br />
-&nbsp;&nbsp;&nbsp;&nbsp;}<br />
-}
+{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;max&nbsp;=&nbsp;100</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;i&nbsp;=&nbsp;0</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>&nbsp;(i&nbsp;>&nbsp;max)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hi&nbsp;there!"</span>)</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;=&nbsp;i&nbsp;+1</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br>}
 </p>
 </div>
 </div>
 </p>
 <p>
-Variables declared outside a closure using the 
-<span class="inlinecode">var</span>
- keyword are not accessible from within a
+Variables declared outside a closure using the <span class="inlinecode">var</span> keyword are not accessible from within a
 closure.
 </p>
 <a name="Xbase_Expressions_VariableDeclaration-5"></a>
@@ -1146,8 +974,7 @@ closure.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XVariableDeclaration:<br />
-&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string" >&apos;val&apos;</span>&nbsp;|&nbsp;<span class="string" >&apos;var&apos;</span>)&nbsp;JvmTypeReference?&nbsp;ID&nbsp;<span class="string" >&apos;=&apos;</span>&nbsp;XExpression;
+XVariableDeclaration:</br>&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">'val'</span>&nbsp;|&nbsp;<span class="string">'var'</span>)&nbsp;JvmTypeReference?&nbsp;ID&nbsp;<span class="string">'='</span>&nbsp;XExpression;
 </p>
 </div>
 </div>
@@ -1155,21 +982,18 @@ XVariableDeclaration:<br />
 <a name="Xbase_Expressions_VariableDeclaration-6"></a>
 <h3>Typing</h3>
 <p>
-The return type of a variable declaration expression is always 
-<span class="inlinecode">void</span>
-. 
+The return type of a variable declaration expression is always <span class="inlinecode">void</span>. 
 The type of the variable itself can either be explicitly declared or be inferred from the right hand side expression.
 Here is an example for an explicitly declared type:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">var</span>&nbsp;List&lt;String&gt;&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();
+<span class="keyword">var</span>&nbsp;List<String>&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList<String>();
 </p>
 </div>
 </div>
 
-In such cases, the right hand expression&apos;s type must 
-<a href="03-Types.xdoc.html#Xbase_Types_ConformanceRules">
+In such cases, the right hand expression&apos;s type must <a href="03-Types.xdoc.html#Xbase_Types_ConformanceRules">
 conform
 </a>
  to the type on the left hand side. 
@@ -1179,7 +1003,7 @@ Alternatively the type can be left out and will be inferred from the initializat
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">var</span>&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();&nbsp;<span class="comment" >//&nbsp;-&gt;&nbsp;type&nbsp;ArrayList&lt;String&gt;</span>
+<span class="keyword">var</span>&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList<String>();&nbsp;<span class="comment">//&nbsp;->&nbsp;type&nbsp;ArrayList<String></span>
 </p>
 </div>
 </div>
@@ -1188,9 +1012,7 @@ Alternatively the type can be left out and will be inferred from the initializat
 <h2>Blocks</h2>
 <p>
 The block expression allows to have imperative code sequences. It consists of a sequence of expressions, and returns the value of the last expression.
-The return type of a block is also the type of the last expression. Empty blocks return 
-<span class="inlinecode">null</span>
-. 
+The return type of a block is also the type of the last expression. Empty blocks return <span class="inlinecode">null</span>. 
 <a href="04-Expressions.xdoc.html#Xbase_Expressions_VariableDeclaration">
 Variable declarations
 </a>
@@ -1206,10 +1028,7 @@ It can optionally be terminated by a semicolon.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string" >"foo"</span>)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;result<br />
-}
+{</br>&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)</br>&nbsp;&nbsp;&nbsp;&nbsp;result</br>}
 </p>
 </div>
 </div>
@@ -1217,14 +1036,7 @@ It can optionally be terminated by a semicolon.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;x&nbsp;=&nbsp;greeting();<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x.equals(<span class="string" >"Hello&nbsp;"</span>))&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x+<span class="string" >"World!"</span>;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;}<br />
-}
+{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span>&nbsp;x&nbsp;=&nbsp;greeting();</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x.equals(<span class="string">"Hello&nbsp;"</span>))&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x+<span class="string">"World!"</span>;&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x;</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br>}
 </p>
 </div>
 </div>
@@ -1235,10 +1047,7 @@ It can optionally be terminated by a semicolon.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XBlockExpression:<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >&apos;{&apos;</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(XExpressionInsideBlock&nbsp;<span class="string" >&apos;;&apos;</span>?)*<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >&apos;}&apos;</span>;
+XBlockExpression:</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'{'</span></br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(XExpressionInsideBlock&nbsp;<span class="string">';'</span>?)*</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'}'</span>;
 </p>
 </div>
 </div>
@@ -1246,35 +1055,23 @@ XBlockExpression:<br />
 <a name="Xbase_Expressions_ForLoop"></a>
 <h2>For Loop</h2>
 <p>
-The for loop 
-<span class="inlinecode"><span class="keyword">for</span>&nbsp;(T1&nbsp;variable&nbsp;:&nbsp;iterableOfT1)&nbsp;expression</span>
- is used to execute a certain expression for each element of an
-array of an instance of 
-<span class="inlinecode">java.lang.Iterable</span>
-.
-The local 
-<span class="inlinecode">variable</span>
- is final, hence canot be updated. 
+The for loop <span class="inlinecode"><span class="keyword">for</span>&nbsp;(T1&nbsp;variable&nbsp;:&nbsp;iterableOfT1)&nbsp;expression</span> is used to execute a certain expression for each element of an
+array of an instance of <span class="inlinecode">java.lang.Iterable</span>.
+The local <span class="inlinecode">variable</span> is final, hence canot be updated. 
 </p>
 <p>
-The return type of a for loop is 
-<span class="inlinecode"><span class="keyword">void</span></span>
-.
+The return type of a for loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 The type of the local variable can be left out. In that case it is inferred from the type of the array
-or 
-<span class="inlinecode">java.lang.Iterable</span>
- returned by the iterable expression.
+or <span class="inlinecode">java.lang.Iterable</span> returned by the iterable expression.
 </p>
 <p>
 <ul>
 	<li>
 		
-		<div class="literallayout">
+				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">for</span>&nbsp;(String&nbsp;s&nbsp;:&nbsp;myStrings)&nbsp;{<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s);<br />
-		}
+		<span class="keyword">for</span>&nbsp;(String&nbsp;s&nbsp;:&nbsp;myStrings)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s);</br>}
 		</p>
 		</div>
 		</div>
@@ -1282,11 +1079,10 @@ or
 	</li>
 	<li>
 		
-		<div class="literallayout">
+				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">for</span>&nbsp;(s&nbsp;:&nbsp;myStrings)<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s)
+		<span class="keyword">for</span>&nbsp;(s&nbsp;:&nbsp;myStrings)</br>&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s)
 		</p>
 		</div>
 		</div>
@@ -1300,10 +1096,7 @@ or
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XForExpression:<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >&apos;for&apos;</span>&nbsp;<span class="string" >&apos;(&apos;</span>&nbsp;JvmFormalParameter&nbsp;<span class="string" >&apos;:&apos;</span>&nbsp;XExpression&nbsp;<span class="string" >&apos;)&apos;</span>&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XExpression<br />
-&nbsp;&nbsp;&nbsp;&nbsp;;
+XForExpression:</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'for'</span>&nbsp;<span class="string">'('</span>&nbsp;JvmFormalParameter&nbsp;<span class="string">':'</span>&nbsp;XExpression&nbsp;<span class="string">')'</span>&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XExpression</br>&nbsp;&nbsp;&nbsp;&nbsp;;
 </p>
 </div>
 </div>
@@ -1311,14 +1104,8 @@ XForExpression:<br />
 <a name="Xbase_Expressions_WhileExpression"></a>
 <h2>While Loop</h2>
 <p>
-A while loop 
-<span class="inlinecode"><span class="keyword">while</span>&nbsp;(predicate)&nbsp;expression</span>
- is used to execute a certain expression unless the predicate is evaluated to 
-<span class="inlinecode"><span class="keyword">false</span></span>
-.
-The return type of a while loop is 
-<span class="inlinecode"><span class="keyword">void</span></span>
-.
+A while loop <span class="inlinecode"><span class="keyword">while</span>&nbsp;(predicate)&nbsp;expression</span> is used to execute a certain expression unless the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>.
+The return type of a while loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 </p>
 <a name="Xbase_Expressions_WhileExpression-2"></a>
 <h3>Syntax</h3>
@@ -1326,9 +1113,7 @@ The return type of a while loop is
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XWhileExpression:<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >&apos;while&apos;</span>&nbsp;<span class="string" >&apos;(&apos;</span>&nbsp;predicate=XExpression&nbsp;<span class="string" >&apos;)&apos;</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XExpression;
+XWhileExpression:</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'while'</span>&nbsp;<span class="string">'('</span>&nbsp;predicate=XExpression&nbsp;<span class="string">')'</span></br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XExpression;
 </p>
 </div>
 </div>
@@ -1341,9 +1126,7 @@ XWhileExpression:<br />
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)&nbsp;{<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string" >"foo"</span>);<br />
-		}
+		<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);</br>}
 		</p>
 		</div>
 		</div>
@@ -1352,8 +1135,7 @@ XWhileExpression:<br />
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">while</span>&nbsp;(&nbsp;(&nbsp;i&nbsp;=&nbsp;i&nbsp;+&nbsp;1&nbsp;)&nbsp;&lt;&nbsp;max&nbsp;)&nbsp;<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(&nbsp;<span class="string" >"foo"</span>&nbsp;)
+		<span class="keyword">while</span>&nbsp;(&nbsp;(&nbsp;i&nbsp;=&nbsp;i&nbsp;+&nbsp;1&nbsp;)&nbsp;<&nbsp;max&nbsp;)&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(&nbsp;<span class="string">"foo"</span>&nbsp;)
 		</p>
 		</div>
 		</div>
@@ -1363,19 +1145,12 @@ XWhileExpression:<br />
 <a name="Xbase_Expressions_DoWhileExpression"></a>
 <h2>Do-While Loop</h2>
 <p>
-A do-while loop 
-<span class="inlinecode"><span class="keyword">do</span>&nbsp;expression&nbsp;<span class="keyword">while</span>&nbsp;(predicate)</span>
- is used to execute a certain expression unless the predicate is evaluated to 
-<span class="inlinecode"><span class="keyword">false</span></span>
-.
-The difference to the 
-<a href="04-Expressions.xdoc.html#Xbase_Expressions_WhileExpression">
+A do-while loop <span class="inlinecode"><span class="keyword">do</span>&nbsp;expression&nbsp;<span class="keyword">while</span>&nbsp;(predicate)</span> is used to execute a certain expression unless the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>.
+The difference to the <a href="04-Expressions.xdoc.html#Xbase_Expressions_WhileExpression">
 while loop
 </a>
  is that the execution starts by executing the block once before evaluating the predicate for the first time.
-The return type of a do-while loop is 
-<span class="inlinecode"><span class="keyword">void</span></span>
-.
+The return type of a do-while loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 </p>
 <a name="Xbase_Expressions_DoWhileExpression-2"></a>
 <h3>Syntax</h3>
@@ -1383,10 +1158,7 @@ The return type of a do-while loop is
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XDoWhileExpression:<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >&apos;do&apos;</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XExpression<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string" >&apos;while&apos;</span>&nbsp;<span class="string" >&apos;(&apos;</span>&nbsp;predicate=XExpression&nbsp;<span class="string" >&apos;)&apos;</span>;
+XDoWhileExpression:</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'do'</span></br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XExpression</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'while'</span>&nbsp;<span class="string">'('</span>&nbsp;predicate=XExpression&nbsp;<span class="string">')'</span>;
 </p>
 </div>
 </div>
@@ -1399,9 +1171,7 @@ XDoWhileExpression:<br />
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">do</span>&nbsp;{<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string" >"foo"</span>);<br />
-		}&nbsp;<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)
+		<span class="keyword">do</span>&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);</br>}&nbsp;<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)
 		</p>
 		</div>
 		</div>
@@ -1410,7 +1180,7 @@ XDoWhileExpression:<br />
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">do</span>&nbsp;doSideEffect(<span class="string" >"foo"</span>)&nbsp;<span class="keyword">while</span>&nbsp;((i=i+1)&lt;max)
+		<span class="keyword">do</span>&nbsp;doSideEffect(<span class="string">"foo"</span>)&nbsp;<span class="keyword">while</span>&nbsp;((i=i+1)<max)
 		</p>
 		</div>
 		</div>
@@ -1422,18 +1192,13 @@ XDoWhileExpression:<br />
 <p>
 Although an explicit return is often not necessary, it is supported.
 In a closure for instance a return expression is always implied if the expression itself is not of type
-<span class="inlinecode"><span class="keyword">void</span></span>
-. Anyway you can make it explicit:
+<span class="inlinecode"><span class="keyword">void</span></span>. Anyway you can make it explicit:
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-listOfStrings.map(e|&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(e==<span class="keyword">null</span>)&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string" >"NULL"</span><br />
-&nbsp;&nbsp;&nbsp;&nbsp;e.toUpperCase<br />
-})
+listOfStrings.map(e|&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(e==<span class="keyword">null</span>)&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"NULL"</span></br>&nbsp;&nbsp;&nbsp;&nbsp;e.toUpperCase</br>})
 </p>
 </div>
 </div>
@@ -1441,20 +1206,13 @@ listOfStrings.map(e|&nbsp;{<br />
 <a name="Xbase_Expressions_Throw"></a>
 <h2>Throwing Exceptions</h2>
 <p>
-Like in Java it is possible to throw 
-<span class="inlinecode">java.lang.Throwable</span>
-. The syntax is exactly the same as in Java.
+Like in Java it is possible to throw <span class="inlinecode">java.lang.Throwable</span>. The syntax is exactly the same as in Java.
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;...<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(myList.isEmpty)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string" >"the&nbsp;list&nbsp;must&nbsp;not&nbsp;be&nbsp;empty"</span>)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;...<br />
-}
+{</br>&nbsp;&nbsp;&nbsp;&nbsp;...</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(myList.isEmpty)</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"the&nbsp;list&nbsp;must&nbsp;not&nbsp;be&nbsp;empty"</span>)</br>&nbsp;&nbsp;&nbsp;&nbsp;...</br>}
 </p>
 </div>
 </div>
@@ -1471,13 +1229,7 @@ Other than that the syntax again is like the one known from Java.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">try</span>&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;RuntimeException()<br />
-}&nbsp;<span class="keyword">catch</span>&nbsp;(NullPointerException&nbsp;e)&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" >//&nbsp;handle&nbsp;e<br />
-</span>}&nbsp;<span class="keyword">finally</span>&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" >//&nbsp;do&nbsp;stuff<br />
-</span>}
+<span class="keyword">try</span>&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;RuntimeException()</br>}&nbsp;<span class="keyword">catch</span>&nbsp;(NullPointerException&nbsp;e)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;handle&nbsp;e</br></span>}&nbsp;<span class="keyword">finally</span>&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;do&nbsp;stuff</br></span>}
 </p>
 </div>
 </div>
