@@ -26,7 +26,7 @@ DONE SE 030-generator.xdoc
 150-contentassist.xdoc
 155-quickfix.xdoc
 160-templates.xdoc
-170-outline.xdoc
+DONE JK 170-outline.xdoc
 180-hyperlinking.xdoc
 195-highlighting.xdoc
 198-wizards.xdoc

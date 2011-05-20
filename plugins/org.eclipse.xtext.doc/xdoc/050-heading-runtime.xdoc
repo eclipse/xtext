@@ -16,18 +16,22 @@ to do the initialization of the language infrastructure. This class is intended 
 runtime and for unit testing, only.
 
 The setup method returns an e[Injector], which can further be used to obtain a parser, etc. It also 
-registers the ResourceFactory and generated e[EPackages] at the respective global registries provided 
-by EMF. So basically you can just run the setup and start using EMF API to load and store models of 
-your language.
+registers the codeRef[org.eclipse.emf.ecore.resource.Resource$Factory] and generated 
+codeRef[org.eclipse.emf.ecore.EPackage]s to the respective global registries provided 
+by EMF. So basically after having run the setup and you can start using EMF API to load and store models
+of your language.
 
 
 section[Setup within Eclipse-Equinox (OSGi)]
 
-Within Eclipse we have a generated e[Activator], which creates a Guice injector using the ref:guicemodules[modules].
-In addition an e[IExecutableExtensionFactory] is generated for each language, which is used to create e[ExecutableExtensions].
-This means that everything which is created via extension points is managed by Guice as well, i.e. you can declare dependencies and get them injected upon creation. 
+Within Eclipse we have a generated e[Activator], which creates a Guice codeRef[com.google.inject.Injector]
+using the ref:guicemodules[modules]. In addition an codeRef[org.eclipse.core.runtime.IExecutableExtensionFactory] 
+is generated for each language, which is used to create codeRef[org.eclipse.core.runtime.IExecutableExtension]s.
+This means that everything which is created via extension points is managed by Guice as well, i.e. you can 
+declare dependencies and get them injected upon creation. 
 
-The only thing you have to do in order to use this factory is to prefix the class with the factory e[\[MyLanguageName\]ExecutableExtensionFactory] name followed by a colon.
+The only thing you have to do in order to use this factory is to prefix the class with the factory 
+e[\[MyLanguageName\]ExecutableExtensionFactory] name followed by a colon.
 
 code[XML][<extension
   point="org.eclipse.ui.editors">
@@ -46,9 +50,13 @@ code[XML][<extension
 
 section[Logging]
 
-Xtext uses Apache's log4j for logging. It is configured using the so called e[log4j.properties], which is looked up in the root of the Java classpath. If you want to change or provide configuration at runtime (i.e. non-OSGI), all you have to do is putting such a e[log4j.properties] in place and make sure that it is not overridden by other e[log4j.properties] in previous classpath entries.
+Xtext uses Apache's log4j for logging. It is configured using files named e[log4j.properties], which are looked up 
+in the root of the Java classpath. If you want to change or provide configuration at runtime (i.e. non-OSGI), all 
+you have to do is putting such a e[log4j.properties] in place and make sure that it is not overridden by other 
+e[log4j.properties] in previous classpath entries.
 
-In OSGi you provide configuration by creating a fragment for e[org.apache.log4j]. In this case you need to make sure that there's no second fragment contributing a e[log4j.properties] file.
+In OSGi you provide configuration by creating a fragment for e[org.apache.log4j]. In this case you need to make 
+sure that there is not any second fragment contributing a e[log4j.properties] file.
 
 section-ref[validation]
 
