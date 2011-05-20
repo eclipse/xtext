@@ -275,7 +275,8 @@ you can specify additional constraints specific for your Ecore model. We leverag
 Basically all you need to do is to make sure that an <em>org.eclipse.emf.ecore.EValidator</em> is 
 registered for your <em>org.eclipse.emf.ecore.EPackage</em>. The registry for <em>EValidators
 </em> 
-(_EValidator.Registry.INSTANCE_) can only be filled programmatically. That means contrary to the 
+<em>(EValidator.Registry.INSTANCE)
+</em> can only be filled programmatically. That means contrary to the 
 EPackage and <em>Resource.Factory
 </em> registries there is no Equinox extension point to populate the 
 validator registry.
@@ -915,7 +916,8 @@ the actual qualified names of the referenceable <em>EObjects
 and either keep holding them in memory or remembering all information which is needed for the 
 resolution of cross-references. In Xtext that information is provided by a so called 
 <a href="050-heading-runtime.xdoc.html#resourcedescriptions">
-_IEObjectDescription_
+<em>IEObjectDescription
+</em>
 </a>
 . 
 </p>
@@ -1694,7 +1696,7 @@ If there are calls of data type rules or terminal rules that do not reside in an
 the serializer by default doesn&apos;t know which value to use for serialization.  
 </p>
 <p>
-. Example:
+Example:
 </p>
 <p>
 <div class="literallayout">

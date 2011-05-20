@@ -174,7 +174,7 @@ section2:unassignedtext[Unassigned Text]
 If there are calls of data type rules or terminal rules that do not reside in an assignment, 
 the serializer by default doesn't know which value to use for serialization.  
 
-. Example:
+Example:
 
 code[Xtext][PluralRule:
   'contents:' count=INT Plural;

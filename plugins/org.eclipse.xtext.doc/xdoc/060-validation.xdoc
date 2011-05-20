@@ -106,7 +106,7 @@ you can specify additional constraints specific for your Ecore model. We leverag
 (mainly codeRef[org.eclipse.emf.ecore.EValidator]) and have put some convenience stuff on top. 
 Basically all you need to do is to make sure that an codeRef[org.eclipse.emf.ecore.EValidator] is 
 registered for your codeRef[org.eclipse.emf.ecore.EPackage]. The registry for e[EValidators] 
-(_EValidator.Registry.INSTANCE_) can only be filled programmatically. That means contrary to the 
+e[(EValidator.Registry.INSTANCE)] can only be filled programmatically. That means contrary to the 
 EPackage and e[Resource.Factory] registries there is no Equinox extension point to populate the 
 validator registry.
 

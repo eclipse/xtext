@@ -229,7 +229,7 @@ e[EReference]. If you don't want to force users to have a folder and file name s
 the actual qualified names of the referenceable e[EObjects], you'll have to load all resources up front 
 and either keep holding them in memory or remembering all information which is needed for the 
 resolution of cross-references. In Xtext that information is provided by a so called 
-ref:resourcedescriptions[_IEObjectDescription_]. 
+ref:resourcedescriptions[e[IEObjectDescription]]. 
 
 
 section4:containers[About the Index, Containers and Their Manager]
