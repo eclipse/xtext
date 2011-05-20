@@ -86,7 +86,10 @@ The interpreter will basically do the same as the following <em>main
 </div>
 </p>
 <p>
-!{width:50%}images/family_tree.png! 
+<div class="image" >
+<img src="images/family_tree.png" 
+ style="width=50%" />
+</div>
 </p>
 <p>
 And this is how it works:
@@ -148,8 +151,8 @@ the outline view, etc.
 </p>
 <p>
 <div class="image" >
-<img src="images/generator-structure.png" class=" " 
- style="width:50% " />
+<img src="images/generator-structure.png" 
+ style="width:50%" />
 </div>
 </p>
 <a name="generator_fragment"></a>
@@ -398,12 +401,14 @@ Project wizard
 <a name="configuration-2"></a>
 <h2>Dependency Injection in Xtext with Google Guice</h2>
 <p>
-All Xtext components are assembled by means of Dependency Injection (DI). This means basically that whenever some code is in need for functionality (or state) 
-from another component, one just declares the dependency rather then stating how to resolve it, i.e. obtaining that component.
+All Xtext components are assembled by means of Dependency Injection (DI). This means basically that
+whenever some code is in need for functionality (or state) from another component, one just declares
+the dependency rather then stating how to resolve it, i.e. obtaining that component.
 </p>
 <p>
-For instance when some code wants to use a scope provider, it just declares a field (or method or constructor) and 
-adds the @Inject annotation: 
+For instance when some code wants to use a scope provider, it just declares a field (or method or 
+constructor) and adds the <em>@Inject
+</em> annotation: 
 </p>
 <p>
 <div class="literallayout">
@@ -415,44 +420,46 @@ adds the @Inject annotation:
 </div>
 </p>
 <p>
-It is not the duty of the code to care about where the <em>IScopeProvider
-</em> comes from or how it is created. When above&apos;s
-class is instantiated, Guice sees that it requires an instance of IScopeProvider and assigns it to the specified field or method parameter.
-This of course only works, if the object itself is created by Guice. In Xtext almost every instance is created that way 
+It is not the duty of the client code to care about where the <em>IScopeProvider
+</em> comes from or how it 
+is created. When above&apos;s class is instantiated, Guice sees that it requires an instance of 
+IScopeProvider and assigns it to the specified field or method parameter. This of course only works,
+if the object itself is created by Guice. In Xtext almost every instance is created that way 
 and therefore the whole dependency net is controlled and configured by the means of Google Guice.
 </p>
 <p>
-Guice of course needs to know how to instantiate real objects for declared dependencies. This is done in so called <em>Modules
-</em>.
-A <em>Module
-</em> defines a set of mappings from types to either existing instances, instance providers or concrete
-classes. Modules are implemented in Java. Here&apos;s an example:
+Guice of course needs to know how to instantiate real objects for declared dependencies. This is done 
+in so called <em>com.google.inject.Module</em>s. A <em>com.google.inject.Module</em> defines a set of 
+mappings from types to either existing instances, instance providers or concrete classes. Modules are
+implemented in Java. Here&apos;s an example:
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslRuntimeModule&nbsp;<span class="keyword">extends</span>&nbsp;AbstractMyDslRuntimeModule&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;@Override</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(Binder&nbsp;binder)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>.configure(binder);</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;binder.bind(IScopeProvider.<span class="keyword">class</span>).to(MyConcreteScopeProvider.<span class="keyword">class</span>);</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br>}
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslRuntimeModule&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractMyDslRuntimeModule&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;@Override</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(Binder&nbsp;binder)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>.configure(binder);</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;binder</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.bind(IScopeProvider.<span class="keyword">class</span>)</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to(MyConcreteScopeProvider.<span class="keyword">class</span>);</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br>}
 </p>
 </div>
 </div>
 </p>
 <p>
-With plain Guice modules one implements a method called configure and gets a so called <em>Binder
-</em> passed in.
-That binder provides a fluent API to define the mentioned mappings. This was just a very brief and simplified description.
-We highly recommend to have a look at <a href="http://code.google.com/p/google-guice/">the website Google Guice</a> to learn more.  
+With plain Guice modules one implements a method called configure and gets a <em>com.google.inject.Binder</em> 
+passed in. That binder provides a fluent API to define the mentioned mappings. This was just a very 
+brief and simplified description. We highly recommend to have a look at 
+<a href="http://code.google.com/p/google-guice/">the website Google Guice</a> to learn more.  
 </p>
 <a name="guicemodules"></a>
 <h3>The Module API</h3>
 <p>
-Xtext comes with a slightly enhanced module API. For your language you get two different modules: One for the runtime bundle
-which is used when executing your language infrastructure outside of Eclipse such as on the build server. The other is
-located in the UI bundle and adds or overrides bindings when Xtext is used within an Eclipse environment. 
+Xtext comes with a slightly enhanced module API. For your language you get two different modules: One 
+for the runtime bundle which is used when executing your language infrastructure outside of Eclipse such 
+as on the build server. The other is located in the UI bundle and adds or overrides bindings when Xtext 
+is used within an Eclipse environment. 
 </p>
 <p>
-The enhancement we added to Guice&apos;s Module API is that we provide an abstract base class, which reflectively looks for certain 
-methods in order to find declared bindings. The most common kind of method is :
+The enhancement we added to Guice&apos;s Module API is that we provide an abstract base class, which 
+reflectively looks for certain methods in order to find declared bindings. The most common kind of 
+method is :
 </p>
 <p>
 <div class="literallayout">
@@ -465,21 +472,22 @@ methods in order to find declared bindings. The most common kind of method is :
 </p>
 <p>
 which would do the same as the code snippet above. It simply declares a binding from <em>IScopeProvider
-</em> to <em>MyConcreteScopeProvider
-</em>.
-That binding will make Guice instantiate and inject a new instance of <em>MyConcreteScopeProvider
-</em> whenever a dependency 
-to <em>IScopeProvider
+</em> to
+<em>MyConcreteScopeProvider
+</em>. That binding will make Guice instantiate and inject a new instance of 
+<em>MyConcreteScopeProvider
+</em> whenever a dependency to <em>IScopeProvider
 </em> is declared.
 </p>
 <p>
-Having a method per binding allows to deactivate individual bindings by overriding the corresponding methods and either change 
-the binding by returning a different target type or removing that binding completely by returning null.
+Having a method per binding allows to deactivate individual bindings by overriding the corresponding 
+methods and either change the binding by returning a different target type or removing that binding 
+completely by returning null.
 </p>
 <p>
-There are two additional kinds of binding-methods supported. The first one allows to configure a provider. A <em>Provider
-</em> is
-an interface with just one method : 
+There are two additional kinds of binding-methods supported. The first one allows to configure a provider. 
+A <em>Provider
+</em> is an interface with just one method : 
 </p>
 <p>
 <div class="literallayout">
@@ -491,32 +499,32 @@ an interface with just one method :
 </div>
 </p>
 <p>
-This one can be used if you need a hook whenever an instance of a certain type is created. For instance if you want to 
-provide lazy access to a singleton or you need to do some computation each time an instance is created (i.e. factory). If you want 
-to point to a provider rather than to a concrete class you can use the following binding method.
+This one can be used if you need a hook whenever an instance of a certain type is created. For instance 
+if you want to provide lazy access to a singleton or you need to do some computation each time an instance 
+is created (i.e. factory). If you want to point to a provider rather than to a concrete class you can use
+the following binding method.
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;Class<?&nbsp;<span class="keyword">extends</span>&nbsp;Provider<IScopeProvider>>&nbsp;provideIScopeProvider()&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyConcreteScopeProviderFactory.<span class="keyword">class</span>;</br>}
+<span class="keyword">public</span>&nbsp;Class<?&nbsp;<span class="keyword">extends</span>&nbsp;Provider<IScopeProvider>>&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;provideIScopeProvider()&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyConcreteScopeProviderFactory.<span class="keyword">class</span>;</br>}
 </p>
 </div>
 </div>
 </p>
 <p>
-<em>(Please forgive us the overuse of the term
-</em> provider. <em>The IScopeProvider is not a Guice
-</em> provider <em>.)
-</em>
+Note: Please forgive us the overuse of the term <em>provider
+</em>. The IScopeProvider is not a Guice <em>provider
+</em>.
 </p>
 <p>
 That binding tells Guice to instantiate <em>MyConcreteScopeProviderFactory
-</em> and invoke get() in order to obtain an instance of 
-<em>IScopeProvider
-</em> 
-for clients having declared a dependency to that type. Both mentioned methods are allowed to return an instance instead of a type. This
-may be useful if some global state should be shared in the application:
+</em> and invoke get() in order to 
+obtain an instance of <em>IScopeProvider
+</em> for clients having declared a dependency to that type. Both mentioned 
+methods are allowed to return an instance instead of a type. This may be useful if some global state should 
+be shared in the application:
 </p>
 <p>
 <div class="literallayout">
@@ -543,10 +551,10 @@ or
 respectively.
 </p>
 <p>
-The last binding method provided by Xtext allows to do anything you can do with Guice&apos;s binding API, since it allows you to 
-use it directly. If your method&apos;s name starts with the name &apos;configure&apos;, has a return type <em>void
-</em> and accepts one argument of 
-type <em>Binder
+The last binding method provided by Xtext allows to do anything you can do with Guice&apos;s binding API, since
+it allows you to use the <em>com.google.inject.Binder</em> directly. If your method&apos;s name starts with the
+name &apos;configure&apos;, has a return type <em>void
+</em> and accepts one argument of type <em>Binder
 </em>
 </p>
 <p>
@@ -561,30 +569,29 @@ type <em>Binder
 <a name="dependencyInjection-9"></a>
 <h3>Obtaining an Injector</h3>
 <p>
-In every application wired up with Guice there is usually one point where you initialize a so called <em>Injector
-</em> using the 
-modules declared and after that using that injector to create the root instance of the whole application. In plain Java environments
-this is something that&apos;s done in the main method. It could look like this:
+In every application wired up with Guice there is usually one point where you initialize an 
+<em>com.google.inject.Injector</em> using the modules declared. That injector is used to create the root 
+instance of the whole application. In plain Java environments this is something that&apos;s done in the main 
+method. It could look like this:
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;Injector&nbsp;injector&nbsp;=&nbsp;Guice.createInjector(<span class="keyword">new</span>&nbsp;MyDslRuntimeModule());</br>&nbsp;&nbsp;&nbsp;&nbsp;MyApplication&nbsp;application&nbsp;=&nbsp;injector.getInstance(MyApplication.<span class="keyword">class</span>);</br>&nbsp;&nbsp;&nbsp;&nbsp;application.run();</br>}
+<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;Injector&nbsp;injector&nbsp;=&nbsp;Guice.createInjector(</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;MyDslRuntimeModule());</br>&nbsp;&nbsp;&nbsp;&nbsp;MyApplication&nbsp;application&nbsp;=&nbsp;injector.getInstance(</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyApplication.<span class="keyword">class</span>);</br>&nbsp;&nbsp;&nbsp;&nbsp;application.run();</br>}
 </p>
 </div>
 </div>
 </p>
 <p>
-Xtext uses EMF which makes use of a couple of global registries, which have to be configured on startup. Because we
-of course want to leverage Guice also for all factories, etc. that we put into those registries, we have introduced a so called
-<em>ISetup
-</em> which provides a method called <em>Injector createInjectorAndDoEMFRegistration()
-</em>. So instead of using the plain Guice
-code shown above you rather use the <em>ISetup
-</em> class generated for your language, which, as the method name suggests, creates
-an <em>Injector
-</em> and uses it to initialize a couple of EMF objects and register them in the corresponding registries.
+Xtext uses EMF which makes use of a couple of global registries, which have to be configured on startup. 
+Because we want to leverage Guice also for everything that we put into those registries, we have introduced
+a so called <em>org.eclipse.xtext.ISetup</em> which provides a method <em>Injector createInjectorAndDoEMFRegistration()
+</em>. 
+So instead of using the plain Guice code shown above you rather use the <em>org.eclipse.xtext.ISetup</em> 
+class generated for your language, which, as the method name suggests, creates an <em>Injector
+</em> and uses it to 
+initialize a couple of EMF objects and registers them in the corresponding registries.
 </p>
 <p>
 <div class="literallayout">
@@ -597,7 +604,8 @@ Injector&nbsp;injector&nbsp;=&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="key
 </p>
 <p>
 These are the basic ideas around Guice and the small extension Xtext provides on top. For more information we 
-strongly encourage you to read through the documentation on <a href="http://code.google.com/p/google-guice/.">the website of Google Guice</a>
+strongly encourage you to read through the documentation on 
+<a href="http://code.google.com/p/google-guice/.">the website of Google Guice</a>
 </p>
 </body>
 </html>

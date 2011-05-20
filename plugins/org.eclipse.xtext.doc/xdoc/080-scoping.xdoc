@@ -87,6 +87,7 @@ contains information about the e[URI] to the actual e[EObject] and the qualified
 as well as the corresponding e[EClass]. In addition one can export arbitrary information using the 
 e[user data] map. The following diagram gives an overview on the description classes and their relationships.
 
+todo[fix image]
 img[images/index_datamodel.png][(Descriptions)][ ][ ]
 
 

@@ -9,7 +9,7 @@
 # 017-getting-started-xpand.xdoc
 DONE SZ 020-grammar-language.xdoc
 DONE SE 030-generator.xdoc
-040-dependency-injection.xdoc
+DONE JK 040-dependency-injection.xdoc
 050-heading-runtime.xdoc
 060-validation.xdoc
 070-linking.xdoc

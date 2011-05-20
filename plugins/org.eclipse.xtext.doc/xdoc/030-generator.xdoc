@@ -75,7 +75,7 @@ public class CreatePersons {
 }
 ]
 
-!{width:50%}images/family_tree.png! 
+img[images/family_tree.png][][][width=50%] 
 
 And this is how it works:
 The root element is a plain Java class name. As the module is a sibling to the class
@@ -119,7 +119,8 @@ In addition, a language is configured with a list of codeRef[org.eclipse.xtext.g
 The whole generator is composed of theses fragments. We have fragments for generating parsers, the serializer, the EMF code, 
 the outline view, etc.
 
-img[images/generator-structure.png][ ][ ][width:50% ]
+img[images/generator-structure.png][][][width:50%] 
+
 
 section3:generator_fragment[Generator Fragments]
 
