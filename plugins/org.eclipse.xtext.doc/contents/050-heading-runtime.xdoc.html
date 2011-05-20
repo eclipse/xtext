@@ -166,16 +166,12 @@ MyRule:</br>&nbsp;&nbsp;({MySubRule}&nbsp;<span class="string">"sub"</span>)?&nb
 </p>
 <p>
 This implies several constraints:
-<div class="todo" >
-revise indentation levels
-</div>
-
 <ol>
 	<li>
 		Types: only instances of <em>MyRule
 		</em> and <em>MySubRule
 		</em> are allowed for this rule. Sub-types are 
-			prohibited, since the parser never instantiates unknown sub-types.
+				prohibited, since the parser never instantiates unknown sub-types.
 	</li>
 	<li>
 		Features: In case the <em>MyRule
@@ -183,7 +179,7 @@ revise indentation levels
 		</em> have <em>EStructuralFeatures
 		</em> besides <em>strVal
 		</em> 
-			and <em>intVal
+				and <em>intVal
 		</em>, only <em>strVal
 		</em> and <em>intVal
 		</em> may have <a href="050-heading-runtime.xdoc.html#transientvalues">
@@ -200,7 +196,7 @@ revise indentation levels
 		convert all values
 		</a>
 		 to valid tokens for 
-			terminal rule <em>STRING
+				terminal rule <em>STRING
 		</em>.  The same is true for <em>intVal
 		</em> and <em>INT
 		</em>.
@@ -1396,28 +1392,28 @@ serialization complements parsing and lexing.
 In Xtext, the process of serialization is split into the following steps:
 </p>
 <p>
-<div class="todo" >
-revise indentation levels
-</div>
-
 <ol>
 	<li>
-		Validating the semantic model. This is optional, enabled by default, done by the <a href="050-heading-runtime.xdoc.html#concrete_syntax_validation">
+		Validating the semantic model. This is optional, enabled by default, done by the 
+				 <a href="050-heading-runtime.xdoc.html#concrete_syntax_validation">
 		concrete syntax validator
 		</a>
-		 and can be turned off in the <a href="050-heading-runtime.xdoc.html#saveoptions">
+		 and can be turned off in 
+				 the <a href="050-heading-runtime.xdoc.html#saveoptions">
 		save options
 		</a>
-		. 
+		.
 	</li>
 	<li>
-		Matching the model elements with the grammar rules and creating a stream of tokens. This is done by the <a href="050-heading-runtime.xdoc.html#parsetreeconstructor">
+		Matching the model elements with the grammar rules and creating a stream of tokens. 
+				 This is done by the <a href="050-heading-runtime.xdoc.html#parsetreeconstructor">
 		parse tree constructor
 		</a>
 		.
 	</li>
 	<li>
-		Associating comments with semantic objects. This is done by the <a href="050-heading-runtime.xdoc.html#commentassociater">
+		Associating comments with semantic objects. This is done by the
+				 <a href="050-heading-runtime.xdoc.html#commentassociater">
 		comment associator
 		</a>
 		.
@@ -1429,13 +1425,14 @@ revise indentation levels
 		<a href="050-heading-runtime.xdoc.html#hiddentokenmerger">
 		Merging existing whitespace
 		</a>
-		 and line-wraps into to token stream. 
+		 and line-wraps into to token stream.
 	</li>
 	<li>
-		Adding further needed whitespace or replacing all whitespace using a <a href="050-heading-runtime.xdoc.html#formatting">
+		Adding further needed whitespace or replacing all whitespace using a 
+				<a href="050-heading-runtime.xdoc.html#formatting">
 		formatter
 		</a>
-		.  
+		.
 	</li>
 </ol>
 </p>
@@ -1486,10 +1483,6 @@ in the same list - which may require wrapping the <em>ID
 <h3>Roles of the Semantic Model and the Node Model During Serialization</h3>
 <p>
 A serialized document represents the state of the semantic model. However, if there is a node model available (i.e. the semantic model has been created by the parser), the serializer
-<div class="todo" >
-revise indentation levels
-</div>
-
 <ul>
 	<li>
 		preserves <a href="050-heading-runtime.xdoc.html#hiddentokenmerger">
@@ -1504,13 +1497,18 @@ revise indentation levels
 		 from the node model.
 	</li>
 	<li>
-		preserves the representation of cross-references: If a cross-referenced object can be identified by multiple names (i.e. scoping returns multiple EObjectDescriptions for the same object), the serializer tries to keep the previously used name. 
+		preserves the representation of cross-references: If a cross-referenced object can be 
+				 identified by multiple names (i.e. scoping returns multiple EObjectDescriptions for the 
+				 same object), the serializer tries to keep the previously used name.
 	</li>
 	<li>
-		preserves the representation of values: For values handled by the <a href="015-getting-started.xdoc.html#valueconverter">
+		preserves the representation of values: For values handled by the 
+				<a href="015-getting-started.xdoc.html#valueconverter">
 		value converter
 		</a>
-		, the serializer checks whether the textual representation converted to a value equals the value from the semantic model. If that is true, the textual representation is kept.  
+		, the serializer checks whether the textual representation 
+				converted to a value equals the value from the semantic model. If that is true, the textual 
+				representation is kept.
 	</li>
 </ul>
 </p>
@@ -1542,47 +1540,58 @@ If a model can not be serialized, an
 Possible reasons are listed below:
 </p>
 <p>
-<div class="todo" >
-revise indentation levels
-</div>
-
 <ul>
 	<li>
 		A model element can not be consumed. This can have the following reasons/solutions:
+				<ul>
+			<li>
+				The model element should not be stored in the model.
+			</li>
+			<li>
+				The grammar needs an assignment which would consume the model element.
+			</li>
+			<li>
+				The <a href="050-heading-runtime.xdoc.html#transientvalues">
+				transient value service
+				</a>
+				 can be used to indicate that this model 
+							element should not be consumed.
+			</li>
+		</ul>
+		
 	</li>
 	<li>
-		The model element should not be stored in the model.
+		An assignment in the grammar has no corresponding model element. The default transient 
+				value service considers a model element to be transient if it is <em>unset
+		</em> or equals its 
+				default value. However, the parse tree constructor may serialize default values if 
+				this is required by a grammar constraint to be able to serialize another model element.
+				The following solution may help to solve such a scenario:
+				<ul>
+			<li>
+				A model element should be added to the model.
+			</li>
+			<li>
+				The assignment in the grammar should be made optional.
+			</li>
+		</ul>
+		
 	</li>
 	<li>
-		The grammar needs an assignment which would consume the model element.
-	</li>
-	<li>
-		The <a href="050-heading-runtime.xdoc.html#transientvalues">
-		transient value service
-		</a>
-		 can be used to indicate that this model element should not be consumed. 
-	</li>
-	<li>
-		An assignment in the grammar has no corresponding model element. The default transient value service considers a model element to be transient if it is <em>unset
-		</em> or equals its default value. However, the parse tree constructor may serialize default values if this is required by a grammar constraint to be able to serialize another model element. The following solution may help to solve such a scenario:
-	</li>
-	<li>
-		A model element should be added to the model.
-	</li>
-	<li>
-		The assignment in the grammar should be made optional.
-	</li>
-	<li>
-		The type of the model element differs from the type in the grammar. The type of the model element must be identical to the return type of the grammar rule or the action&apos;s type. Sub-types are not allowed.
+		The type of the model element differs from the type in the grammar. The type of the model 
+				element must be identical to the return type of the grammar rule or the action&apos;s type. 
+				Sub-types are not allowed.
 	</li>
 	<li>
 		<a href="015-getting-started.xdoc.html#valueconverter">
 		Value conversion
 		</a>
-		 fails. The value converter can indicate that a value is not serializeable by throwing a <em>org.eclipse.xtext.conversion.ValueConverterException</em>.
+		 fails. The value converter can indicate that a value 
+				is not serializeable by throwing a <em>org.eclipse.xtext.conversion.ValueConverterException</em>.
 	</li>
 	<li>
-		An enum literal is not allowed at this position. This can happen if the referenced enum rule only lists a subset of the literals of the actual enumeration.
+		An enum literal is not allowed at this position. This can happen if the referenced enum 
+				rule only lists a subset of the literals of the actual enumeration.
 	</li>
 </ul>
 </p>
@@ -1596,16 +1605,17 @@ strategy is to take the most promising branch first (the one that would consume 
 If the branch leads to a dead end (for example, if a model element needs to be consumed that is not 
 present in the model), the parse tree constructor goes back the path until a different branch can be 
 taken. This behavior has two consequences:
-<div class="todo" >
-revise indentation levels
-</div>
-
 <ul>
 	<li>
-		In case of an error, the parse tree constructor has found only dead ends but no leaf. It cannot tell which dead end is actually erroneous. Therefore, the error message lists dead ends of the longest paths, a fragment of their serialization and the reason why the path could not be continued at this point. The developer has to judge on his own which reason is the actual error.
+		In case of an error, the parse tree constructor has found only dead ends but no leaf. It cannot
+				tell which dead end is actually erroneous. Therefore, the error message lists dead ends of the 
+				longest paths, a fragment of their serialization and the reason why the path could not be continued 
+				at this point. The developer has to judge on his own which reason is the actual error.
 	</li>
 	<li>
-		 For reasons of performance, it is critical that the parse tree constructor takes the most promising branch first and detects wrong branches early. One way to achieve this is to avoid having many rules which return the same type and which are called from within the same alternative in the grammar.
+		For reasons of performance, it is critical that the parse tree constructor takes the most promising
+				branch first and detects wrong branches early. One way to achieve this is to avoid having many rules 
+				which return the same type and which are called from within the same alternative in the grammar.
 	</li>
 </ul>
 </p>
@@ -1616,24 +1626,26 @@ revise indentation levels
 <em>org.eclipse.xtext.resource.XtextResource</em>.save(options) and to 
 <em>org.eclipse.xtext.parsetree.reconstr.Serializer</em>.serialize(..). 
 Available options are:
-<div class="todo" >
-revise indentation levels
-</div>
-
 <ul>
 	<li>
-		*Formatting*. Default: <em>false
+		<em>Formatting
+		</em>. Default: <em>false
 		</em>. If enabled, it is the <a href="050-heading-runtime.xdoc.html#formatting">
 		formatters
 		</a>
-		 job to determine all whitespace information during serialization. If disabled, the formatter only defines whitespace information for the places in which no whitespace information can be preserved from the node model. E.g. When new model elements are inserted or there is no node model.
+		 job to determine
+		 		all whitespace information during serialization. If disabled, the formatter only defines whitespace 
+		 		information for the places in which no whitespace information can be preserved from the node model. 
+		 		E.g. When new model elements are inserted or there is no node model.
 	</li>
 	<li>
-		*Validating*. Default: <em>true
+		<em>Validating
+		</em>. Default: <em>true
 		</em>: Run the <a href="050-heading-runtime.xdoc.html#concrete_syntax_validation">
 		concrete syntax validator
 		</a>
-		 before serializing the model.
+		 
+				before serializing the model.
 	</li>
 </ul>
 </p>
@@ -1649,16 +1661,14 @@ new position in the document as well.
 Which comment belongs to which semantic object is surely a very subjective issue. The default 
 implementation (<em>org.eclipse.xtext.parsetree.reconstr.impl.DefaultCommentAssociater</em>) 
 behaves as follows, but can be customized:
-<div class="todo" >
-revise indentation levels
-</div>
-
 <ul>
 	<li>
-		If there is a semantic token before a comment and in the same line, the comment is associated with this token&apos;s semantic object.
+		If there is a semantic token before a comment and in the same line, the comment is associated 
+				with this token&apos;s semantic object.
 	</li>
 	<li>
-		In all other cases, the comment is associated with the semantic object of the next following object.
+		In all other cases, the comment is associated with the semantic object of the next following 
+				object.
 	</li>
 </ul>
 </p>
@@ -1789,16 +1799,15 @@ formatting in the editor (for example, using the CTRL+SHIFT+F shortcut).
 </p>
 <p>
 Xtext ships with two formatters:
-<div class="todo" >
-revise indentation levels
-</div>
-
 <ul>
 	<li>
-		The <em>org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter</em> simply writes one whitespace between all tokens.
+		The <em>org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter</em> simply writes one 
+				whitespace between all tokens.
 	</li>
 	<li>
-		The <em>org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter</em> allows advanced configuration using a <em>org.eclipse.xtext.formatting.impl.FormattingConfig</em>. Both are explained in the <a href="050-heading-runtime.xdoc.html#declarativeformatter">
+		The <em>org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter</em> allows advanced 
+				configuration using a <em>org.eclipse.xtext.formatting.impl.FormattingConfig</em>. Both are 
+				explained in the <a href="050-heading-runtime.xdoc.html#declarativeformatter">
 		next chapter
 		</a>
 		.
@@ -1833,16 +1842,16 @@ settings and a set of formatting instructions:
 <a name="declarativeformatter-5"></a>
 <h4>General FormattingConfig Settings</h4>
 <p>
-<div class="todo" >
-revise indentation levels
-</div>
-
 <ul>
 	<li>
-		_setAutoLinewrap(int)_ defines the amount of characters after which a line-break should be dynamically inserted between two tokens. The instructions <em>setNoLinewrap().???()
-		</em>,  <em>setNoSpace().???()
+		<em>setAutoLinewrap(int)
+		</em> defines the amount of characters after which a line-break should 
+				be dynamically inserted between two tokens. The instructions <em>setNoLinewrap().???()
+		</em>, 
+				<em>setNoSpace().???()
 		</em> and <em>setSpace(space).???()
-		</em> suppress this behavior locally. The default is 80.
+		</em> suppress this behavior locally. 
+				The default is 80.
 	</li>
 </ul>
 </p>
@@ -1863,40 +1872,49 @@ To understand <em>when
 </em> an instruction is applied think of a stream of tokens whereas each token is 
 associated with the corresponding grammar element. The instructions are matched against these grammar 
 elements. The following matching criteria exist:
-<div class="todo" >
-revise indentation levels
-</div>
-
 <ul>
 	<li>
-		_after(ele)_: The instruction is applied after the grammar element <em>ele
-		</em> has been matched. For example, if your grammar uses the keyword ";" to end lines, this can instruct the formatter to insert a line break after the semicolon.  
+		<em>after(ele)
+		</em>: The instruction is applied after the grammar element <em>ele
+		</em> has been matched. 
+				For example, if your grammar uses the keyword ";" to end lines, this can instruct the formatter 
+				to insert a line break after the semicolon.
 	</li>
 	<li>
-		_before(ele)_: The instruction is executed before the matched element. For example, if your grammar contains lists which separate their values with the keyword ",", you can instruct the formatter to suppress the whitespace before the comma.
+		<em>before(ele)
+		</em>: The instruction is executed before the matched element. For example, if your 
+				grammar contains lists which separate their values with the keyword ",", you can instruct the 
+				formatter to suppress the whitespace before the comma.
 	</li>
 	<li>
-		_around(ele)_: This is the same as <em>before(ele)
+		<em>around(ele)
+		</em>: This is the same as <em>before(ele)
 		</em> combined with  <em>after(ele)
-		</em>.  
+		</em>.
 	</li>
 	<li>
-		_between(ele1, ele2)_: This matches if <em>ele2
+		<em>between(ele1, ele2)
+		</em>: This matches if <em>ele2
 		</em> directly follows <em>ele1
-		</em> in the document. There may be no other tokens in between <em>ele1
+		</em> in the document. 
+				There may be no other tokens in between <em>ele1
 		</em> and <em>ele2
 		</em>.
 	</li>
 	<li>
-		_bounds(ele1, ele2)_: This is the same as <em>after(ele1)
+		<em>bounds(ele1, ele2)
+		</em>: This is the same as <em>after(ele1)
 		</em> combined with  <em>before(ele2)
 		</em>.
 	</li>
 	<li>
-		_range(ele1, ele2)_: The rule is enabled when <em>ele1
+		<em>range(ele1, ele2)
+		</em>: The rule is enabled when <em>ele1
 		</em> is matched, and disabled when <em>ele2
-		</em> is matched. Thereby, the rule is active for the complete region which is surrounded by <em>ele1
-		</em> and <em>ele2
+		</em> 
+				is matched. Thereby, the rule is active for the complete region which is surrounded by <em>ele1
+		</em> 
+				and <em>ele2
 		</em>.
 	</li>
 </ul>
@@ -1919,10 +1937,6 @@ and alternatives. The semantic of <em>before(ele)
 identical to when the parser would "pass" this part of the grammar. The stack of called rules is taken 
 into account. The following abstract elements can <em>not
 </em> have assigned formatting instructions:
-<div class="todo" >
-revise indentation levels
-</div>
-
 <ul>
 	<li>
 		Actions. E.g. <em>{MyAction}
@@ -1930,7 +1944,9 @@ revise indentation levels
 		</em>.
 	</li>
 	<li>
-		Grammar elements nested in data type rules. This is due to to the fact that tokens matched by a data type rule are treated as atomic by the serializer. To format these tokens, please implement a <a href="015-getting-started.xdoc.html#valueconverter">
+		Grammar elements nested in data type rules. This is due to to the fact that tokens matched 
+				by a data type rule are treated as atomic by the serializer. To format these tokens, please 
+				implement a <a href="015-getting-started.xdoc.html#valueconverter">
 		ValueConverter
 		</a>
 		. 
@@ -1943,40 +1959,56 @@ revise indentation levels
 </p>
 <p>
 After having explained how rules can be activated, this is what they can do:
-<div class="todo" >
-revise indentation levels
-</div>
-
 <ul>
 	<li>
-		_setIndentationIncrement()_ increments indentation by one unit at this position. Whether one unit consists of one tab-character or spaces is defined by <em>org.eclipse.xtext.formatting.IIndentationInformation</em>. The default implementation consults Eclipse&apos;s <em>PreferenceStore
+		<em>setIndentationIncrement()
+		</em> increments indentation by one unit at this position. Whether 
+				one unit consists of one tab-character or spaces is defined by 
+				<em>org.eclipse.xtext.formatting.IIndentationInformation</em>. The default implementation 
+				consults Eclipse&apos;s <em>PreferenceStore
 		</em>.
 	</li>
 	<li>
-		_setIndentationDecrement()_ decrements indentation by one unit.
+		<em>setIndentationDecrement()
+		</em> decrements indentation by one unit.
 	</li>
 	<li>
-		_setLinewrap()_: Inserts a line-wrap at this position.
+		<em>setLinewrap()
+		</em>: Inserts a line-wrap at this position.
 	</li>
 	<li>
-		_setLinewrap(int count)_: Inserts <em>count
+		<em>setLinewrap(int count)
+		</em>: Inserts <em>count
 		</em> numbers of line-wrap at this position.
 	</li>
 	<li>
-		_setLinewrap(int min, int default, int max)_: If the amount of line-wraps that have been at this position before formatting can be determined (i.g. when a node model is present), then the amount of of line-wraps is adjusted to be within the interval [_min_, <em>max
-		</em>] and is then reused. In all other cases <em>default
-		</em> line-wraps are inserted. Example: <em>setLinewrap(0, 0, 1)
-		</em> will preserve existing line-wraps, but won&apos;t allow more than one line-wrap between two tokens.    
+		<em>setLinewrap(int min, int default, int max)
+		</em>: If the amount of line-wraps that have been 
+				at this position before formatting can be determined (i.g. when a node model is present), 
+				then the amount of of line-wraps is adjusted to be within the interval [_min_, <em>max
+		</em>] 
+				and is then reused. In all other cases <em>default
+		</em> line-wraps are inserted. Example: 
+				<em>setLinewrap(0, 0, 1)
+		</em> will preserve existing line-wraps, but won&apos;t allow more than one 
+				line-wrap between two tokens.
 	</li>
 	<li>
-		_setNoLinewrap()_: Suppresses automatic line wrap, which may occur when the line&apos;s length exceeds the defined limit.
+		<em>setNoLinewrap()
+		</em>: Suppresses automatic line wrap, which may occur when the line&apos;s length 
+				exceeds the defined limit.
 	</li>
 	<li>
-		_setSpace(String space)_: Inserts the string <em>space
-		</em> at this position. If you use this to insert something else than whitespace, tabs or newlines, a small puppy will die somewhere in this world.
+		<em>setSpace(String space)
+		</em>: Inserts the string <em>space
+		</em> at this position. If you use this 
+				to insert something else than whitespace, tabs or newlines, a small puppy will die somewhere 
+				in this world.
 	</li>
 	<li>
-		_setNoSpace()_: Suppresses the whitespace between tokens at this position. Be aware that between some tokens a whitespace is required to maintain a valid concrete syntax. 
+		<em>setNoSpace()
+		</em>: Suppresses the whitespace between tokens at this position. Be aware that 
+				between some tokens a whitespace is required to maintain a valid concrete syntax.
 	</li>
 </ul>
 </p>
@@ -1989,17 +2021,17 @@ to apply, it can be tedious to specify them for each grammar element individuall
 find methods are available for the grammar and for each parser rule.
 </p>
 <p>
-<div class="todo" >
-revise indentation levels
-</div>
-
 <ul>
 	<li>
-		_findKeywords(String... keywords)_ returns all keywords that equal one of the parameters.
+		<em>findKeywords(String... keywords)
+		</em> returns all keywords that equal one of the parameters.
 	</li>
 	<li>
-		_findKeywordPairs(String leftKw, String rightKw)_: returns tuples of keywords from the same grammar rule. Pairs are matched nested and sequentially.  Example: for <em>Rule: &apos;(&apos; name=ID (&apos;(&apos; foo=ID &apos;)&apos;) &apos;)&apos; | &apos;(&apos; bar=ID &apos;)&apos;
-		</em> <em>findKeywordPairs("(", ")")
+		<em>findKeywordPairs(String leftKw, String rightKw)
+		</em>: returns tuples of keywords from the same 
+				grammar rule. Pairs are matched nested and sequentially.  Example: for <em>Rule: &apos;(&apos; name=ID (&apos;(&apos; foo=ID &apos;)&apos;) &apos;)&apos; | &apos;(&apos; bar=ID &apos;)&apos;
+		</em> 
+				<em>findKeywordPairs("(", ")")
 		</em> returns three pairs.
 	</li>
 </ul>

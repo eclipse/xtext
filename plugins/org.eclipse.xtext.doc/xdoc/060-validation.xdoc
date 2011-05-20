@@ -51,15 +51,14 @@ code[Xtext][MyRule:
 	]
 
 This implies several constraints:
-todo[revise indentation levels]
 ol[
-item[Types: only instances of e[MyRule] and e[MySubRule] are allowed for this rule. Sub-types are 
-	prohibited, since the parser never instantiates unknown sub-types.]
-item[Features: In case the e[MyRule] and e[MySubRule] have e[EStructuralFeatures] besides e[strVal] 
-	and e[intVal], only e[strVal] and e[intVal] may have ref:transientvalues[non-transient values].]
-item[Quantities: The following condition must be true: e[strVal.size() == intVal.size()].]
-item[Values: It must be possible to ref:valueconverter[convert all values] to valid tokens for 
-	terminal rule e[STRING].  The same is true for e[intVal] and e[INT].]
+	item[Types: only instances of e[MyRule] and e[MySubRule] are allowed for this rule. Sub-types are 
+		prohibited, since the parser never instantiates unknown sub-types.]
+	item[Features: In case the e[MyRule] and e[MySubRule] have e[EStructuralFeatures] besides e[strVal] 
+		and e[intVal], only e[strVal] and e[intVal] may have ref:transientvalues[non-transient values].]
+	item[Quantities: The following condition must be true: e[strVal.size() == intVal.size()].]
+	item[Values: It must be possible to ref:valueconverter[convert all values] to valid tokens for 
+		terminal rule e[STRING].  The same is true for e[intVal] and e[INT].]
 ]
 
 The typical use case for the concrete syntax validator is validation in non-Xtext-editors that, 

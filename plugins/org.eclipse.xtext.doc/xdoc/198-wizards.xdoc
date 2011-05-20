@@ -17,10 +17,13 @@ fragment = projectWizard.SimpleProjectWizardFragment {
 
 Here
 
-todo[revise indentation levels]
 ul[
-item[the e[generatorProjectName] is used to specify the project that contains the workflows and templates used to generate artifacts from your DSL. The generated project wizard uses this to add a corresponding dependency to the created project.]
-item[and the e[modelFileExtension] specifies the default file extension associated with your DSL. When the user clicks the e[Finish] button the project wizard will look for a file with the given extension in the created project and open a editor. ]
+	item[the e[generatorProjectName] is used to specify the project that contains the workflows and 
+		templates used to generate artifacts from your DSL. The generated project wizard uses this 
+		to add a corresponding dependency to the created project.]
+	item[and the e[modelFileExtension] specifies the default file extension associated with your DSL. 
+		When the user clicks the e[Finish] button the project wizard will look for a file with the 
+		given extension in the created project and open a editor.]
 ]
 
 After running the Xtext generator, the DSL's UI project will contain a new Xpand template 

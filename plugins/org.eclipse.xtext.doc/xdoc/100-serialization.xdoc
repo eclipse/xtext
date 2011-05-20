@@ -5,14 +5,18 @@ serialization complements parsing and lexing.
 
 In Xtext, the process of serialization is split into the following steps:
 
-todo[revise indentation levels]
 ol[
-item[Validating the semantic model. This is optional, enabled by default, done by the ref:concrete_syntax_validation[concrete syntax validator] and can be turned off in the ref:saveoptions[save options]. ]
-item[Matching the model elements with the grammar rules and creating a stream of tokens. This is done by the ref:parsetreeconstructor[parse tree constructor].]
-item[Associating comments with semantic objects. This is done by the ref:commentassociater[comment associator].]
-item[Associating existing nodes from the node model with tokens from the token stream.]
-item[ref:hiddentokenmerger[Merging existing whitespace] and line-wraps into to token stream. ]
-item[Adding further needed whitespace or replacing all whitespace using a ref:formatting[formatter].  ]
+	item[Validating the semantic model. This is optional, enabled by default, done by the 
+		 ref:concrete_syntax_validation[concrete syntax validator] and can be turned off in 
+		 the ref:saveoptions[save options].]
+	item[Matching the model elements with the grammar rules and creating a stream of tokens. 
+		 This is done by the ref:parsetreeconstructor[parse tree constructor].]
+	item[Associating comments with semantic objects. This is done by the
+		 ref:commentassociater[comment associator].]
+	item[Associating existing nodes from the node model with tokens from the token stream.]
+	item[ref:hiddentokenmerger[Merging existing whitespace] and line-wraps into to token stream.]
+	item[Adding further needed whitespace or replacing all whitespace using a 
+		ref:formatting[formatter].]
 ]
 
 Serialization is invoked when calling 
@@ -43,12 +47,16 @@ in the same list - which may require wrapping the e[ID]- and e[INT]-elements int
 section2[Roles of the Semantic Model and the Node Model During Serialization]
 
 A serialized document represents the state of the semantic model. However, if there is a node model available (i.e. the semantic model has been created by the parser), the serializer
-todo[revise indentation levels]
 ul[
-item[preserves ref:hiddentokenmerger[existing whitespaces] from the node model.]
-item[preserves ref:commentassociater[existing comments] from the node model.]
-item[preserves the representation of cross-references: If a cross-referenced object can be identified by multiple names (i.e. scoping returns multiple EObjectDescriptions for the same object), the serializer tries to keep the previously used name. ]
-item[preserves the representation of values: For values handled by the ref:valueconverter[value converter], the serializer checks whether the textual representation converted to a value equals the value from the semantic model. If that is true, the textual representation is kept.  ]
+	item[preserves ref:hiddentokenmerger[existing whitespaces] from the node model.]	
+	item[preserves ref:commentassociater[existing comments] from the node model.]
+	item[preserves the representation of cross-references: If a cross-referenced object can be 
+		 identified by multiple names (i.e. scoping returns multiple EObjectDescriptions for the 
+		 same object), the serializer tries to keep the previously used name.]
+	item[preserves the representation of values: For values handled by the 
+		ref:valueconverter[value converter], the serializer checks whether the textual representation 
+		converted to a value equals the value from the semantic model. If that is true, the textual 
+		representation is kept.]
 ]
 
 
@@ -68,18 +76,32 @@ If a model can not be serialized, an
 codeRef[org.eclipse.xtext.parsetree.reconstr.XtextSerializationException] is thrown. 
 Possible reasons are listed below:
 
-todo[revise indentation levels]
 ul[
-item[A model element can not be consumed. This can have the following reasons/solutions:]
-item[The model element should not be stored in the model.]
-item[The grammar needs an assignment which would consume the model element.]
-item[The ref:transientvalues[transient value service] can be used to indicate that this model element should not be consumed. ]
-item[An assignment in the grammar has no corresponding model element. The default transient value service considers a model element to be transient if it is e[unset] or equals its default value. However, the parse tree constructor may serialize default values if this is required by a grammar constraint to be able to serialize another model element. The following solution may help to solve such a scenario:]
-item[A model element should be added to the model.]
-item[The assignment in the grammar should be made optional.]
-item[The type of the model element differs from the type in the grammar. The type of the model element must be identical to the return type of the grammar rule or the action's type. Sub-types are not allowed.]
-item[ref:valueconverter[Value conversion] fails. The value converter can indicate that a value is not serializeable by throwing a codeRef[org.eclipse.xtext.conversion.ValueConverterException].]
-item[An enum literal is not allowed at this position. This can happen if the referenced enum rule only lists a subset of the literals of the actual enumeration.]
+	item[A model element can not be consumed. This can have the following reasons/solutions:
+		ul[
+		item[The model element should not be stored in the model.]
+		item[The grammar needs an assignment which would consume the model element.]
+		item[The ref:transientvalues[transient value service] can be used to indicate that this model 
+			element should not be consumed.]
+		]
+	]
+	item[An assignment in the grammar has no corresponding model element. The default transient 
+		value service considers a model element to be transient if it is e[unset] or equals its 
+		default value. However, the parse tree constructor may serialize default values if 
+		this is required by a grammar constraint to be able to serialize another model element.
+		The following solution may help to solve such a scenario:
+		ul[
+			item[A model element should be added to the model.]
+			item[The assignment in the grammar should be made optional.]
+		]
+	]
+	item[The type of the model element differs from the type in the grammar. The type of the model 
+		element must be identical to the return type of the grammar rule or the action's type. 
+		Sub-types are not allowed.]
+	item[ref:valueconverter[Value conversion] fails. The value converter can indicate that a value 
+		is not serializeable by throwing a codeRef[org.eclipse.xtext.conversion.ValueConverterException].]
+	item[An enum literal is not allowed at this position. This can happen if the referenced enum 
+		rule only lists a subset of the literals of the actual enumeration.]
 ]
 
 To understand error messages and performance issues of the parse tree constructor it is important to 
@@ -91,10 +113,14 @@ strategy is to take the most promising branch first (the one that would consume 
 If the branch leads to a dead end (for example, if a model element needs to be consumed that is not 
 present in the model), the parse tree constructor goes back the path until a different branch can be 
 taken. This behavior has two consequences:
-todo[revise indentation levels]
 ul[
-item[In case of an error, the parse tree constructor has found only dead ends but no leaf. It cannot tell which dead end is actually erroneous. Therefore, the error message lists dead ends of the longest paths, a fragment of their serialization and the reason why the path could not be continued at this point. The developer has to judge on his own which reason is the actual error.]
-item[ For reasons of performance, it is critical that the parse tree constructor takes the most promising branch first and detects wrong branches early. One way to achieve this is to avoid having many rules which return the same type and which are called from within the same alternative in the grammar.]
+	item[In case of an error, the parse tree constructor has found only dead ends but no leaf. It cannot
+		tell which dead end is actually erroneous. Therefore, the error message lists dead ends of the 
+		longest paths, a fragment of their serialization and the reason why the path could not be continued 
+		at this point. The developer has to judge on his own which reason is the actual error.]
+	item[For reasons of performance, it is critical that the parse tree constructor takes the most promising
+		branch first and detects wrong branches early. One way to achieve this is to avoid having many rules 
+		which return the same type and which are called from within the same alternative in the grammar.]
 ]
 
 
@@ -104,10 +130,13 @@ codeRef[org.eclipse.xtext.resource.SaveOptions] can be passed to
 codeRef[org.eclipse.xtext.resource.XtextResource].save(options) and to 
 codeRef[org.eclipse.xtext.parsetree.reconstr.Serializer].serialize(..). 
 Available options are:
-todo[revise indentation levels]
 ul[
-item[*Formatting*. Default: e[false]. If enabled, it is the ref:formatting[formatters] job to determine all whitespace information during serialization. If disabled, the formatter only defines whitespace information for the places in which no whitespace information can be preserved from the node model. E.g. When new model elements are inserted or there is no node model.]
-item[*Validating*. Default: e[true]: Run the ref:concrete_syntax_validation[concrete syntax validator] before serializing the model.]
+	item[e[Formatting]. Default: e[false]. If enabled, it is the ref:formatting[formatters] job to determine
+ 		all whitespace information during serialization. If disabled, the formatter only defines whitespace 
+ 		information for the places in which no whitespace information can be preserved from the node model. 
+ 		E.g. When new model elements are inserted or there is no node model.]
+	item[e[Validating]. Default: e[true]: Run the ref:concrete_syntax_validation[concrete syntax validator] 
+		before serializing the model.]
 ]
 
 
@@ -121,10 +150,11 @@ new position in the document as well.
 Which comment belongs to which semantic object is surely a very subjective issue. The default 
 implementation (codeRef[org.eclipse.xtext.parsetree.reconstr.impl.DefaultCommentAssociater]) 
 behaves as follows, but can be customized:
-todo[revise indentation levels]
 ul[
-item[If there is a semantic token before a comment and in the same line, the comment is associated with this token's semantic object.]
-item[In all other cases, the comment is associated with the semantic object of the next following object.]
+	item[If there is a semantic token before a comment and in the same line, the comment is associated 
+		with this token's semantic object.]
+	item[In all other cases, the comment is associated with the semantic object of the next following 
+		object.]
 ]
 
 

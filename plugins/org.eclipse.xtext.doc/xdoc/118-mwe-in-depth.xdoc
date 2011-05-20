@@ -254,11 +254,11 @@ MWE2 has a few well defined concepts which can be combined to
 assemble arbitrary object graphs in a compact and declarative 
 manner.
 
-todo[revise indentation levels]
 ul[
-item[A MWE2 file defines a e[module] which exposes its root e[component] as reusable artifact.]
-item[_Properties_ can be used to extract reusable, configurable parts of the workflow.]
-item[Components are mapped to plain vanilla e[Java objects]. Arbitrary e[set- and add-methods] are used to configure them.]
+	item[A MWE2 file defines a e[module] which exposes its root e[component] as reusable artifact.]
+	item[e[Properties] can be used to extract reusable, configurable parts of the workflow.]
+	item[Components are mapped to plain vanilla e[Java objects]. Arbitrary e[set] and e[add] methods 
+		are used to configure them.]
 ]
 
 Let's consider the follow short example module and e[SampleClass] to 

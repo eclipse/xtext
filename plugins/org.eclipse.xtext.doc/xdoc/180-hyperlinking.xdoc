@@ -16,11 +16,13 @@ codeRef[org.eclipse.xtext.resource.ILocationInFileProvider]. The default impleme
 (codeRef[org.eclipse.xtext.resource.DefaultLocationInFileProvider]) implements a best 
 effort strategy which can be summarized as:
 
-todo[revise indentation levels]
 ol[
-item[If the model element's type (i.e. e[EClass]) declares a feature e[name] then return the region of the corresponding token(s). As a fallback also check for a feature e[id].]
-item[If the model element's parse tree contains any top-level tokens corresponding to e[ID] rule calls in the grammar then return a region spanning all those tokens.]
-item[As a last resort return the region corresponding to the first keyword token of the referenced model element.]
+	item[If the model element's type (i.e. e[EClass]) declares a feature e[name] then return the 
+		region of the corresponding token(s). As a fallback also check for a feature e[id].]
+	item[If the model element's parse tree contains any top-level tokens corresponding to e[ID] 
+		rule calls in the grammar then return a region spanning all those tokens.]
+	item[As a last resort return the region corresponding to the first keyword token of the referenced
+		model element.]
 ]
 
 

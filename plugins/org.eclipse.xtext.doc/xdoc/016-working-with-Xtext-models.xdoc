@@ -119,9 +119,9 @@ System.out.println(text);
 
 In addition to the text e[LeafNodes] also hold information about the line, the offset and the length of that token.
 
-The other node type is called e[CompositeNode] and is created for almost each grammar element. A composite node can contain other composite nodes and leaf nodes.
-The super type of both node types is e[AbstractNode]. One can find a couple of convenience methods in e[org.eclipse.xtext.parsetree.NodeUtil]todo[fix
-link] and e[org.eclipse.xtext.parsetree.ParseTreeUtil]todo[fix link].
+The other node type is called e[CompositeNode] and is created for almost each grammar element. A 
+composite node can contain other composite nodes and leaf nodes. The super type of both node types is 
+e[AbstractNode]. One can find a couple of convenience methods in codeRef[org.eclipse.xtext.nodemodel.util.NodeModelUtils].
 
 
 section2:working_with_grammar_model[Working with the Grammar]

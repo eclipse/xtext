@@ -48,13 +48,17 @@ EMF also ships with a code generator that generates Java classes from your Ecore
 The generated classes are based on the EMF runtime library, which offers a lot of infrastructure and tools to work with your models, such as persistence, reflection, referential integrity, lazy loading etc.
 
 Among other things, the code generator will generate
-todo[revise indentation levels]
 ul[
-item[A Java interface and a Java class for each EClassifier in your Ecore model. By default, all classes will implement the interface e[org.eclipse.emf.ecore.EObject], linking a lot of runtime functionality. ]
-item[A Java bean property for each EStructuralFeature (member variable, accessor methods)]
-item[A package interface and class, holding singleton objects for all elements of your Ecore model, allowing reflection. EPackages are also registered to the e[EPackage.Registry] to be usable at runtime.]
-item[A factory interface and class for creating instances]
-item[An abstract switch class implementing a visitor pattern to avoid if-instanceof cascades in your code.]
+	item[A Java interface and a Java class for each EClassifier in your Ecore model. By default, 
+		all classes will implement the interface e[org.eclipse.emf.ecore.EObject], linking a lot
+		of runtime functionality. ]
+	item[A Java bean property for each EStructuralFeature (member variable, accessor methods)]
+	item[A package interface and class, holding singleton objects for all elements of your Ecore 
+		model, allowing reflection. EPackages are also registered to the e[EPackage.Registry] to 
+		be usable at runtime.]
+	item[A factory interface and class for creating instances]
+	item[An abstract switch class implementing a visitor pattern to avoid if-instanceof cascades
+		in your code.]
 ]
 
 
@@ -68,43 +72,45 @@ img[images/emf-integration.png][ ][ ][ ]
 The generator fragment codeRef[org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment] registers a factory for the codeRef[org.eclipse.xtext.resource.XtextResource] to EMF's resource factory registry, such that all tools using the default mechanism to resolve a resource implementation will automatically get that resource implementation.   
 
 Using a self-defined textual syntax as the primary storage format has a number of advantages over the default XMI serialization, e.g.
-todo[revise indentation levels]
 ul[
-item[You can use well-known and easy-to-use tools and techniques for manipulation, such as text editors, regular expressions, or stream editors.]
-item[You can use the same tools for version control as you use for source code. Merging and diffing is performed in a syntax the developer is familiar with. ]
-item[It is impossible to break the model such that it cannot be reopened in the editor again. ]
-item[Models can be fixed using the same tools, even if they have become incompatible with a new version of the Ecore model.]
+	item[You can use well-known and easy-to-use tools and techniques for manipulation, such as text
+		editors, regular expressions, or stream editors.]
+	item[You can use the same tools for version control as you use for source code. Merging and 
+		diffing is performed in a syntax the developer is familiar with.]
+	item[It is impossible to break the model such that it cannot be reopened in the editor again.]
+	item[Models can be fixed using the same tools, even if they have become incompatible with a 
+		new version of the Ecore model.]
 ]
 
 Xtext targets easy to use and naturally feeling languages. It focuses on the lexical aspects of a language a bit more than on the semantic ones. As a consequence, a referenced Ecore model can contain more concepts than are actually covered by the Xtext grammar. As a result, not everything that is possibly expressed in the EMF model can be serialized back into a textual representation with regards to the grammar. So if you want to use Xtext to serialize your models as described above, it is good to have a couple of things in mind:
 
-todo[revise indentation levels]
 ul[
-item[Prefer optional rule calls (cardinality e[?] or e[*]) to mandatory ones (cardinality e[+] or default), such that missing references will not obstruct serialization. ]
-item[You should not use an Xtext-Editor on the same model instance as a self-synchronizing other editor, e.g. a canonical GMF editor (see ref:gmf_integration_stage_1 for details). The Xtext parser replaces re-parsed subtrees of the AST rather than modifying it, so elements will become stale. As the Xtext editor continuously re-parses the model on changes, this will happen rather often. It is safer to synchronize editors more loosely, e.g. on file changes. ]
-item[Implement an ref:fragmentProvider[e[IFragmentProvider]] to make 
-	the XtextResource return stable fragments for its contained
-	elements, e.g. based on composite names rather than order of 
-	appearance.
-]
-item[Implement an e[IQualifiedNameProvider] and an 
-	ref:scoping[e[IScopeProvider]] to make the names of all linkable 
-	elements in cross-references unique.
-]
-item[Provide an ref:formatting[e[IFormatter]] to improve the readability 
-	of the generated textual models.
-]
-item[Register an e[IReferableElementsUnloader] to turn 
-	deleted/replaced model elements into EMF proxies. Design the rest 
-	of your application such that it does never keep references to 
-	e[EObjects] or to cope with proxies. That will improve the 
-	stability of your application drastically.
-]
-item[Xtext will register an EMF e[ResourceFactory], so resources with 
-	the file extension you entered when generating the Xtext plug-ins 
-	will be automatically loaded in an e[XtextResource] when you use 
-	EMF's e[ResourceSet] API to load it.
-]
+	item[Prefer optional rule calls (cardinality e[?] or e[*]) to mandatory ones 
+		(cardinality e[+] or default), such that missing references will not obstruct 
+		serialization.]
+	item[You should not use an Xtext-Editor on the same model instance as a self-synchronizing 
+		other editor, e.g. a canonical GMF editor (see ref:gmf_integration_stage_1 for details). 
+		The Xtext parser replaces re-parsed subtrees of the AST rather than modifying it, so 
+		elements will become stale. As the Xtext editor continuously re-parses the model on changes, 
+		this will happen rather often. It is safer to synchronize editors more loosely, e.g. on 
+		file changes.]
+	item[Implement an ref:fragmentProvider[e[IFragmentProvider]] to make 
+		the XtextResource return stable fragments for its contained
+		elements, e.g. based on composite names rather than order of 
+		appearance.]
+	item[Implement an e[IQualifiedNameProvider] and an ref:scoping[e[IScopeProvider]] to make the 
+		names of all linkable elements in cross-references unique.]
+	item[Provide an ref:formatting[e[IFormatter]] to improve the readability 
+		of the generated textual models.]
+	item[Register an e[IReferableElementsUnloader] to turn 
+		deleted/replaced model elements into EMF proxies. Design the rest 
+		of your application such that it does never keep references to 
+		e[EObjects] or to cope with proxies. That will improve the 
+		stability of your application drastically.]
+	item[Xtext will register an EMF e[ResourceFactory], so resources with 
+		the file extension you entered when generating the Xtext plug-ins 
+		will be automatically loaded in an e[XtextResource] when you use 
+		EMF's e[ResourceSet] API to load it.]
 ]
 
 

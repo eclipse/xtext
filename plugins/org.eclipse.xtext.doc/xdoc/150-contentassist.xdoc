@@ -2,10 +2,11 @@ section:contentAssist[Content Assist]
 
 The Xtext generator, amongst other things, generates the following two content assist (CA) related artifacts:
 
-todo[revise indentation levels]
 ul[
-item[an abstract proposal provider class named e[Abstract\[Language\]ProposalProvider] generated into the e[src-gen] folder within the e[ui] project]
-item[a concrete sub-class in the e[src]-folder of the e[ui] project called e[\[Language\]ProposalProvider]]
+	item[an abstract proposal provider class named e[Abstract\[Language\]ProposalProvider] generated 
+		into the e[src-gen] folder within the e[ui] project]
+	item[a concrete sub-class in the e[src]-folder of the e[ui] project called 
+		e[\[Language\]ProposalProvider]]
 ]
 
 First we will investigate the generated e[Abstract\[Language\]ProposalProvider] with methods that look like this:
