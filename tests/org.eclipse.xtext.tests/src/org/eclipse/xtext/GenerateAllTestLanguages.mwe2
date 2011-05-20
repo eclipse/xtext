@@ -18,6 +18,7 @@ Workflow {
 	bean = StandaloneSetup {
 		platformUri = "${runtimeProject}/../.."
 		registerGenModelFile = "platform:/resource/${projectName}/src/org/eclipse/xtext/grammarinheritance/ametamodel.genmodel"
+		registerGenModelFile = "platform:/resource/${projectName}/src/org/eclipse/xtext/generator/grammarAccess/ametamodel.genmodel"
 		registerGenModelFile = "platform:/resource/${projectName}/src/org/eclipse/xtext/enumrules/enums.genmodel"
 		registerGenModelFile = "platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.genmodel" 
 	}
