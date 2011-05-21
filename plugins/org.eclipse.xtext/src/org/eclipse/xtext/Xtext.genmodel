@@ -4,8 +4,10 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext/emf-gen"
     editDirectory="/org.eclipse.xtext.edit/src" editorDirectory="/org.eclipse.xtext.editor/src"
     modelPluginID="org.eclipse.xtext" forceOverwrite="true" modelName="Xtext" updateClasspath="false"
-    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="5.0"
-    copyrightFields="false" editPluginID="org.eclipse.xtext.edit" editorPluginID="org.eclipse.xtext.editor">
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.edit"
+    editorPluginID="org.eclipse.xtext.editor">
+  <foreignModel>Xtext.ecore</foreignModel>
   <genPackages prefix="Xtext" basePackage="org.eclipse" disposableProviderFactory="true"
       ecorePackage="Xtext.ecore#/">
     <genClasses ecoreClass="Xtext.ecore#//Grammar">
@@ -39,6 +41,7 @@
     </genClasses>
     <genClasses ecoreClass="Xtext.ecore#//AbstractElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//AbstractElement/cardinality"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//AbstractElement/predicated"/>
     </genClasses>
     <genClasses ecoreClass="Xtext.ecore#//Action">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//Action/type"/>
@@ -60,7 +63,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//CrossReference/type"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//CrossReference/terminal"/>
     </genClasses>
-    <genClasses ecoreClass="Xtext.ecore#//TerminalRule"/>
+    <genClasses ecoreClass="Xtext.ecore#//TerminalRule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//TerminalRule/fragment"/>
+    </genClasses>
     <genClasses ecoreClass="Xtext.ecore#//AbstractNegatedToken">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//AbstractNegatedToken/terminal"/>
     </genClasses>
@@ -82,5 +87,6 @@
     <genClasses ecoreClass="Xtext.ecore#//CompoundElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//CompoundElement/elements"/>
     </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//EOF"/>
   </genPackages>
 </genmodel:GenModel>
