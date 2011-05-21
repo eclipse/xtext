@@ -318,6 +318,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 				semanticObject.eClass()), node);
 		contexts.push(acceptor);
 		delegate = sequenceAcceptor;
+		this.errorAcceptor = errorAcceptor;
 	}
 
 	public void leaveAssignedAction(Action action, EObject semanticChild) {
