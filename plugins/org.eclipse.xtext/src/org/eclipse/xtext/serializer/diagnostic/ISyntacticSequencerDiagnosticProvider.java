@@ -9,6 +9,7 @@ package org.eclipse.xtext.serializer.diagnostic;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
@@ -25,7 +26,8 @@ public interface ISyntacticSequencerDiagnosticProvider {
 	ISerializationDiagnostic createInvalidFollowingAbsorberDiagnostic(EObject context, EObject semanticObject,
 			ISynAbsorberState from, AbstractElement to);
 
-	ISerializationDiagnostic createUnexpectedStackStateDiagnostic(ISynState toConsume, RuleCallStack stack);
+	ISerializationDiagnostic createUnexpectedStackStateDiagnostic(EObject semanticObject, RuleCallStack stack,
+			RuleCall popped, ISynState toConsume);
 
 	ISerializationDiagnostic createUnexpectedEmitterDiagnostic(ISynNavigable currentState, AbstractElement target,
 			RuleCallStack stack);

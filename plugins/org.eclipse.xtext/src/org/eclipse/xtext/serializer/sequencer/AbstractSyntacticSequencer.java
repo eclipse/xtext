@@ -110,7 +110,8 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 				RuleCall lastRc = stack.pop();
 				if (lastRc != rc2) {
 					if (errorAcceptor != null)
-						errorAcceptor.accept(diagnosticProvider.createUnexpectedStackStateDiagnostic(emitter, stack));
+						errorAcceptor.accept(diagnosticProvider.createUnexpectedStackStateDiagnostic(
+								contexts.get(contexts.size() - 1).semanticObject, stack, lastRc, emitter));
 				}
 				return;
 			case UNASSIGEND_ACTION_CALL:
