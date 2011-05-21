@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementFullTitleSwitch;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
@@ -26,8 +27,15 @@ import com.google.inject.internal.Join;
  */
 public class SyntacticSequencerDiagnosticProvider implements ISyntacticSequencerDiagnosticProvider {
 
-	public ISerializationDiagnostic createUnexpectedStackStateDiagnostic(ISynState toConsume, RuleCallStack stack) {
-		return null;
+	public ISerializationDiagnostic createUnexpectedStackStateDiagnostic(EObject semanticObject, RuleCallStack stack,
+			RuleCall popped, ISynState toConsume) {
+		String poppedStr = popped == null ? "null" : new GrammarElementFullTitleSwitch().doSwitch(popped);
+		StringBuilder buf = new StringBuilder();
+		buf.append("Unexpected stack state.\n");
+		buf.append("Found on top of the stack: " + poppedStr + "\n");
+		buf.append("Expected: " + toConsume + "\n");
+		buf.append("Rest of the stack: " + stack + "\n");
+		return new SerializationDiagnostic(semanticObject, toConsume.getContext(), buf.toString());
 	}
 
 	public ISerializationDiagnostic createUnexpectedEmitterDiagnostic(ISynNavigable currentState,
