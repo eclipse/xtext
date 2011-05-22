@@ -18,6 +18,7 @@ import org.eclipse.jdt.core.Signature;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -100,27 +101,7 @@ public class JavaElementFinder implements IJavaElementFinder {
 					for(IMethod method: type.getMethods()) {
 						if (!method.isConstructor()) {
 							if (object.getSimpleName().equals(method.getElementName()) && object.getParameters().size() == method.getNumberOfParameters()) {
-								int numberOfParameters = method.getNumberOfParameters();
-								String[] parameterTypes = method.getParameterTypes();
-								boolean match = true;
-								for (int i = 0; i < numberOfParameters && match; i++) {
-									JvmFormalParameter formalParameter = object.getParameters().get(i);
-									String parameterType = parameterTypes[i];
-									String readable = Signature.toString(parameterType);
-									if (parameterType.startsWith("Q")) {
-										String[][] resolved = type.resolveType(readable);
-										if (resolved != null && resolved.length == 1) {
-											readable = resolved[0][0];
-											if (readable != null && readable.length() >= 1) {
-												readable = readable + '.' + resolved[0][1];
-											} else {
-												readable = resolved[0][1];
-											}
-										}
-									}
-									if (!readable.equals(formalParameter.getParameterType().getQualifiedName('.')))
-										match = false;
-								}
+								boolean match = doParametersMatch(object, method, type);
 								if (match)
 									return method;
 							}
@@ -133,6 +114,58 @@ public class JavaElementFinder implements IJavaElementFinder {
 			}
 			return parent;
 		}
+
+		private boolean doParametersMatch(JvmExecutable object, IMethod method, IType declaringType)
+				throws JavaModelException {
+			int numberOfParameters = method.getNumberOfParameters();
+			String[] parameterTypes = method.getParameterTypes();
+			boolean match = true;
+			for (int i = 0; i < numberOfParameters && match; i++) {
+				JvmFormalParameter formalParameter = object.getParameters().get(i);
+				String parameterType = parameterTypes[i];
+				String readable = toQualifiedRawTypeName(parameterType, declaringType);
+				String qualifiedParameterType = formalParameter.getParameterType().getType().getQualifiedName('.');
+				if (!readable.equals(qualifiedParameterType))
+					match = false;
+			}
+			return match;
+		}
+		
+		private String toQualifiedRawTypeName(String parameterType, IType context) throws JavaModelException {
+			StringBuilder resultBuilder = new StringBuilder();
+			toQualifiedTypeName(Signature.getTypeErasure(parameterType), context, resultBuilder);
+			String result = resultBuilder.toString();
+			return result;
+		}
+		
+		private void toQualifiedTypeName(String signature, IType context, StringBuilder result) throws JavaModelException {
+			switch(Signature.getTypeSignatureKind(signature)) {
+				case Signature.ARRAY_TYPE_SIGNATURE:
+					toQualifiedTypeName(Signature.getElementType(signature), context, result);
+					for(int i = 0; i < Signature.getArrayCount(signature); i++) {
+						result.append("[]");
+					}
+					return;
+				case Signature.CLASS_TYPE_SIGNATURE:
+					if (signature.charAt(0) == Signature.C_UNRESOLVED) {
+						String[][] resolved = context.resolveType(Signature.toString(signature));
+						if (resolved != null && resolved.length == 1) {
+							if (resolved[0][0] != null)
+								result.append(resolved[0][0]);
+							if (result.length() > 0)
+								result.append('.');
+							result.append(resolved[0][1]);
+						} else {
+							result.append(Signature.toString(signature));
+						}
+					} else {
+						result.append(Signature.toString(signature));
+					}
+					return;
+				default:
+					result.append(Signature.toString(signature));
+			}
+		}
 		
 		@Override
 		public IJavaElement caseJvmConstructor(JvmConstructor object) {
@@ -142,16 +175,7 @@ public class JavaElementFinder implements IJavaElementFinder {
 				try {
 					for(IMethod method: type.getMethods()) {
 						if (method.isConstructor() && object.getParameters().size() == method.getNumberOfParameters()) {
-							int numberOfParameters = method.getNumberOfParameters();
-							String[] parameterTypes = method.getParameterTypes();
-							boolean match = true;
-							for (int i = 0; i < numberOfParameters && match; i++) {
-								JvmFormalParameter formalParameter = object.getParameters().get(i);
-								String parameterType = parameterTypes[i];
-								String readable = Signature.toString(parameterType);
-								if (!readable.equals(formalParameter.getParameterType().getIdentifier()))
-									match = false;
-							}
+							boolean match = doParametersMatch(object, method, type);
 							if (match)
 								return method;
 						}
@@ -167,7 +191,7 @@ public class JavaElementFinder implements IJavaElementFinder {
 		@Override
 		public IJavaElement caseJvmDeclaredType(JvmDeclaredType object) {
 			try {
-				String canonicalName = object.getIdentifier();
+				String canonicalName = object.getQualifiedName('.');
 				IType result = javaProject.findType(canonicalName);
 				return result;
 			}
