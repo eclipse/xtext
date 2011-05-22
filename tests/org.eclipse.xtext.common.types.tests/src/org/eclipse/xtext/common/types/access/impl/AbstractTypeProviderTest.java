@@ -372,7 +372,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(Object.class.getName(),type.getSuperTypes().get(0).getIdentifier());
 	}
 
-	private JvmOperation getMethodFromParameterizedMethods(String method) {
+	protected JvmOperation getMethodFromParameterizedMethods(String method) {
 		String typeName = ParameterizedMethods.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
@@ -888,7 +888,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("void", operation.getReturnType().getIdentifier());
 	}
 
-	private JvmOperation getMethodFromType(EObject context, Class<?> type, String method) {
+	protected JvmOperation getMethodFromType(EObject context, Class<?> type, String method) {
 		String methodName = type.getName() + "." + method;
 		assertNotNull(context);
 		JvmOperation result = (JvmOperation) context.eResource().getEObject(methodName);
@@ -896,7 +896,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		return result;
 	}
 	
-	private JvmConstructor getConstructorFromType(EObject context, Class<?> type, String constructor) {
+	protected JvmConstructor getConstructorFromType(EObject context, Class<?> type, String constructor) {
 		String methodName = type.getName() + "." + constructor;
 		assertNotNull(context);
 		JvmConstructor result = (JvmConstructor) context.eResource().getEObject(methodName);
