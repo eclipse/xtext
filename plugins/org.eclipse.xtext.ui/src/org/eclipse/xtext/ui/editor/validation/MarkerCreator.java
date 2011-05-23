@@ -20,6 +20,13 @@ public class MarkerCreator {
 	
 	public void createMarker(Issue issue, IResource resource, String markerType) throws CoreException {
 		IMarker marker = resource.createMarker(markerType);
+		setMarkerAttributes(issue, resource, marker);
+	}
+
+	/**
+	 * @since 2.0
+	 */
+	protected void setMarkerAttributes(Issue issue, IResource resource, IMarker marker) throws CoreException {
 		String lineNR = "";
 		if (issue.getLineNumber() != null) {
 			lineNR = "line: " + issue.getLineNumber() + " ";
