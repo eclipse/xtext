@@ -52,7 +52,7 @@
 			</cs:actorProperties>
 			<cs:properties>
 				<cs:property key="content.ius" value="org.eclipse.xtext.sdk.feature.group" />
-				<cs:property key="target.platform.ius" value="com.google.inject,org.antlr.runtime,org.apache.log4j,org.apache.log4j.source" />
+				<cs:property key="target.platform.ius" value="com.google.inject,com.google.inject.source,com.google.collect,com.google.collect.source,org.antlr.runtime,org.apache.log4j,org.apache.log4j.source" />
 				<cs:property key="package.name" value="tmf-xtext-SDK" />
 			</cs:properties>
 			<cs:prerequisites>
