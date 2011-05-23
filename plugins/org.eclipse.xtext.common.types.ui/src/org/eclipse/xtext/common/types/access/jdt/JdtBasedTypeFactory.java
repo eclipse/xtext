@@ -165,13 +165,12 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	public JvmAnnotationValue createArrayAnnotationValue(IMemberValuePairBinding memberValuePair,
 			JvmAnnotationValue result) {
 		Object value = memberValuePair.getValue();
-		if (value != null) {
-			createArrayAnnotationValue(value, result);
-		}
-		return result;
+		return createArrayAnnotationValue(value, result);
 	}
 
 	private JvmAnnotationValue createArrayAnnotationValue(Object value, JvmAnnotationValue result) {
+		if (value == null)
+			return result;
 		boolean valueIsArray = value.getClass().isArray();
 		int length = valueIsArray ? Array.getLength(value) : 1;
 		if (length > 0) {
@@ -237,6 +236,8 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	}
 
 	private JvmAnnotationValue createAnnotationValue(Object value, JvmAnnotationValue result) {
+		if (value == null)
+			return result;
 		if (result instanceof JvmTypeAnnotationValue) {
 			ITypeBinding referencedType = (ITypeBinding) value;
 			JvmTypeReference typeReference = createTypeReference(referencedType);
@@ -248,7 +249,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			IVariableBinding variableBinding = (IVariableBinding) value;
 			JvmEnumerationLiteral proxy = createEnumLiteralProxy(variableBinding);
 			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(proxy));
-		} else if (value != null){
+		} else {
 			EStructuralFeature structuralFeature = result.eClass().getEStructuralFeature("values");
 			Object convertedValue = EcoreFactory.eINSTANCE.createFromString((EDataType) structuralFeature.getEType(),
 					value.toString());
