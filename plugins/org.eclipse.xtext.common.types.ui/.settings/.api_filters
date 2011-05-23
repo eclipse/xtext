@@ -1,19 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.common.types.ui" version="2">
-<resource path="META-INF/MANIFEST.MF">
-<filter comment="Added feature to JvmOperation" id="924844039">
-<message_arguments>
-<message_argument value="2.0.0.qualifier"/>
-<message_argument value="2.0.0.v201105041334"/>
-</message_arguments>
-</filter>
-</resource>
-<resource path="src/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.java" type="org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider$Filter">
-<filter comment="It's assumed that only a few implementations of the filter interface exist out there." id="403804204">
-<message_arguments>
-<message_argument value="org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider.Filter"/>
-<message_argument value="getSearchFor()"/>
-</message_arguments>
-</filter>
-</resource>
+    <resource path="META-INF/MANIFEST.MF">
+        <filter id="924844039">
+            <message_arguments>
+                <message_argument value="2.0.0"/>
+                <message_argument value="2.0.0"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Added feature to JvmOperation" id="924844039">
+            <message_arguments>
+                <message_argument value="2.0.0.qualifier"/>
+                <message_argument value="2.0.0.v201105041334"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.java" type="org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider$Filter">
+        <filter comment="It's assumed that only a few implementations of the filter interface exist out there." id="403804204">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider.Filter"/>
+                <message_argument value="getSearchFor()"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>
