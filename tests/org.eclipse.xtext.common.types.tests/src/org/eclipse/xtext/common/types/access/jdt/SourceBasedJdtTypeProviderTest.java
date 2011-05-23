@@ -7,17 +7,30 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.jdt;
 
+import java.util.List;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest;
+import org.eclipse.xtext.common.types.testSetups.EmptyAbstractClass;
 import org.eclipse.xtext.common.types.util.jdt.JavaElementFinder;
+import org.eclipse.xtext.util.Files;
+import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -100,6 +113,31 @@ public class SourceBasedJdtTypeProviderTest extends AbstractTypeProviderTest {
 	protected void checkDefaultAnnotationValuesAnnotatedExternalClass(JvmAnnotationReference annotationReference) {
 		// SKIP (see https://bugs.eclipse.org/bugs/show_bug.cgi?id=334863)
 		// TODO fix as soon as source types expose annotation defaults reliably
+	}
+	
+	public void testClassAnnotationValue_07() throws Exception {
+		IJavaProject project = projectProvider.getJavaProject(null);
+		String typeName = EmptyAbstractClass.class.getName();
+		IFile javaFile = (IFile) project.getProject().findMember(new Path("src/" + typeName.replace('.', '/') + ".java"));
+		assertNotNull(javaFile);
+		String content = Files.readStreamIntoString(javaFile.getContents());
+		try {
+			String newContent = content.replace(
+					"public abstract ", 
+					"@SimpleAnnotation( type = DoesNotExist.class ) public abstract ");
+			javaFile.setContents(new StringInputStream(newContent), IResource.NONE, new NullProgressMonitor());
+			
+			JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
+			List<JvmAnnotationReference> annotations = type.getAnnotations();
+			assertEquals(1, annotations.size());
+			JvmAnnotationReference annotation = annotations.get(0);
+			assertEquals(1, annotation.getValues().size());
+			JvmAnnotationValue value = annotation.getValues().get(0);
+			assertTrue(value instanceof JvmTypeAnnotationValue);
+			assertTrue(((JvmTypeAnnotationValue) value).getValues().isEmpty());
+		} finally {
+			javaFile.setContents(new StringInputStream(content), IResource.NONE, new NullProgressMonitor());
+		}
 	}
 	
 }
