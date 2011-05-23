@@ -275,7 +275,7 @@
 
 			// project wizard (optional) 
 			// fragment = projectWizard.SimpleProjectWizardFragment {
-			// 		generatorProjectName = "${projectName}.generator" 
+			// 		generatorProjectName = "${projectName}"
 			//		modelFileExtension = file.extensions
 			// }
 
@@ -406,7 +406,7 @@
 
             // project wizard (optional)
             // fragment = projectWizard.SimpleProjectWizardFragment {
-            //      generatorProjectName = "${projectName}.generator"
+            //      generatorProjectName = "${projectName}"
             //      modelFileExtension = file.extensions
             // }
 
