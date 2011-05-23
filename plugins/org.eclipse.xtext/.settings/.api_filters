@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter id="924844039">
+            <message_arguments>
+                <message_argument value="2.0.0"/>
+                <message_argument value="2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/xtext/GrammarUtil.java" type="org.eclipse.xtext.GrammarUtil">
         <filter id="1143996420">
             <message_arguments>
