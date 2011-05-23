@@ -3,7 +3,7 @@ section:quickfixes[Quick Fixes]
 For validations written using the ref:custom_validation[AbstractDeclarativeValidator] 
 it is possible to provide corresponding quick fixes in the editor. To be able to implement a quick fix 
 for a given diagnostic (a warning or error) the underlying e[cause] of the diagnostic must be known 
-(i.e. what actual problem does the diagnostic represent?), otherwise the fix doesn't know what needs 
+(i.e. what actual problem does the diagnostic represent), otherwise the fix doesn't know what needs 
 to be done. As we don't want to deduce this from the diagnostic's error message we associate a problem 
 specific e[code] with the diagnostic.
 
@@ -16,23 +16,24 @@ code[Java][warning("Name should start with a capital",
 ]
 
 Now that the validation has a unique code identifying the problem we can register quick fixes for it. 
-We start by adding the 
-codeRef[org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment] 
+We start by adding the codeRef[org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment] 
 to our workflow and after regenerating the code we should find an empty class e[MyDslQuickfixProvider] 
 in our DSL's UI project and new entries in the e[plugin.xml_gen] file.
 
-Continuing with the e[INVALID_TYPE_NAME] problem from the Domainmodel example we add a method with which 
+Continuing with the e[INVALID_TYPE_NAME] problem from the domain model example we add a method with which 
 the problem can be fixed (have a look at the e[DomainmodelQuickfixProvider] for details):
 
 code[Java][@Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)
-public void fixName(final Issue issue, IssueResolutionAcceptor acceptor) {
+public void fixName(final Issue issue, 
+	IssueResolutionAcceptor acceptor) {
   acceptor.accept(issue, 
     "Capitalize name", // quick fix label
-    "Capitalize name  of '" + issue.getData()\[0\] + "'",  // description 
+    "Capitalize name  of '" + issue.getData()\[0\] + "'", 
+                       // description
     "upcase.png",      // quick fix icon
     new IModification() {
       public void apply(IModificationContext context) 
-                                             throws BadLocationException {
+		throws BadLocationException {
         IXtextDocument xtextDocument = context.getXtextDocument();
         String firstLetter = xtextDocument.get(issue.getOffset(), 1);
         xtextDocument.replace(issue.getOffset(), 1, 
@@ -43,10 +44,10 @@ public void fixName(final Issue issue, IssueResolutionAcceptor acceptor) {
 }
 ]
 
-By using the correct signature (see below) and annotating the method with the e[@Fix] annotation 
-referencing the previously specified issue code from the validator, Xtext knows that this method 
-implements a fix for the problem. This also allows us to annotate multiple methods as fixes for the 
-same problem.
+By using the correct signature (see below) and annotating the method with the 
+@codeRef[org.eclipse.xtext.ui.editor.quickfix.Fix] annotation referencing the previously specified 
+issue code from the validator, Xtext knows that this method implements a fix for the problem. This 
+also allows us to annotate multiple methods as fixes for the same problem.
 
 The first three parameters given to the 
 codeRef[org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor] define the 
@@ -89,6 +90,9 @@ public void fixFeatureName(final Issue issue,
 
 section2[Quickfixes for Linking Errors and Syntax Errors]
 
-You can even define quick fixes for linking errors. The issue codes are assigned by the codeRef[org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider]. Have a look at the domain model example how to add quick fixes for these errors.
+You can even define quick fixes for linking errors. The issue codes are assigned by the 
+codeRef[org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider]. Have a look at the domain model 
+example how to add quick fixes for these errors.
 
-Analogously, there is the codeRef[org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider] to assign issue codes to syntactical errors.
+Analogously, there is the codeRef[org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider] to assign 
+issue codes to syntactical errors.

@@ -24,7 +24,7 @@ DONE JK 080-scoping.xdoc
 130-managing-concurrency.xdoc
 140-labelprovider.xdoc
 150-contentassist.xdoc
-155-quickfix.xdoc
+DONE JK 155-quickfix.xdoc
 160-templates.xdoc
 DONE JK 170-outline.xdoc
 180-hyperlinking.xdoc

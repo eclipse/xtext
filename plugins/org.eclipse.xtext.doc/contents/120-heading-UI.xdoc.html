@@ -326,7 +326,7 @@ AbstractDeclarativeValidator</a>
  
 it is possible to provide corresponding quick fixes in the editor. To be able to implement a quick fix 
 for a given diagnostic (a warning or error) the underlying <em>cause</em> of the diagnostic must be known 
-(i.e. what actual problem does the diagnostic represent?), otherwise the fix doesn&apos;t know what needs 
+(i.e. what actual problem does the diagnostic represent), otherwise the fix doesn&apos;t know what needs 
 to be done. As we don&apos;t want to deduce this from the diagnostic&apos;s error message we associate a problem 
 specific <em>code</em> with the diagnostic.
 </p>
@@ -347,13 +347,12 @@ warning(<span class="string">"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;
 </p>
 <p>
 Now that the validation has a unique code identifying the problem we can register quick fixes for it. 
-We start by adding the 
-<em>org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment</em> 
+We start by adding the <em>org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment</em> 
 to our workflow and after regenerating the code we should find an empty class <em>MyDslQuickfixProvider</em> 
 in our DSL&apos;s UI project and new entries in the <em>plugin.xml_gen</em> file.
 </p>
 <p>
-Continuing with the <em>INVALID_TYPE_NAME</em> problem from the Domainmodel example we add a method with which 
+Continuing with the <em>INVALID_TYPE_NAME</em> problem from the domain model example we add a method with which 
 the problem can be fixed (have a look at the <em>DomainmodelQuickfixProvider</em> for details):
 </p>
 <p>
@@ -361,14 +360,16 @@ the problem can be fixed (have a look at the <em>DomainmodelQuickfixProvider</em
 <div class="incode">
 <p class="code">
 @Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)</br>
-<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;fixName(<span class="keyword">final</span>&nbsp;Issue&nbsp;issue,&nbsp;IssueResolutionAcceptor&nbsp;acceptor)&nbsp;{</br>
+<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;fixName(<span class="keyword">final</span>&nbsp;Issue&nbsp;issue,&nbsp;</br>
+&nbsp;&nbsp;&nbsp;&nbsp;IssueResolutionAcceptor&nbsp;acceptor)&nbsp;{</br>
 &nbsp;&nbsp;acceptor.accept(issue,&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Capitalize&nbsp;name"</span>,&nbsp;<span class="comment">//&nbsp;quick&nbsp;fix&nbsp;label</br>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Capitalize&nbsp;name&nbsp;&nbsp;of&nbsp;&apos;"</span>&nbsp;+&nbsp;issue.getData()[0]&nbsp;+&nbsp;<span class="string">"&apos;"</span>,&nbsp;&nbsp;<span class="comment">//&nbsp;description&nbsp;</br>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Capitalize&nbsp;name&nbsp;&nbsp;of&nbsp;&apos;"</span>&nbsp;+&nbsp;issue.getData()[0]&nbsp;+&nbsp;<span class="string">"&apos;"</span>,&nbsp;</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;description</br>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"upcase.png"</span>,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;quick&nbsp;fix&nbsp;icon</br>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;IModification()&nbsp;{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;apply(IModificationContext&nbsp;context)&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throws</span>&nbsp;BadLocationException&nbsp;{</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throws</span>&nbsp;BadLocationException&nbsp;{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IXtextDocument&nbsp;xtextDocument&nbsp;=&nbsp;context.getXtextDocument();</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;firstLetter&nbsp;=&nbsp;xtextDocument.get(issue.getOffset(),&nbsp;1);</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtextDocument.replace(issue.getOffset(),&nbsp;1,&nbsp;</br>
@@ -382,10 +383,10 @@ the problem can be fixed (have a look at the <em>DomainmodelQuickfixProvider</em
 </div>
 </p>
 <p>
-By using the correct signature (see below) and annotating the method with the <em>@Fix</em> annotation 
-referencing the previously specified issue code from the validator, Xtext knows that this method 
-implements a fix for the problem. This also allows us to annotate multiple methods as fixes for the 
-same problem.
+By using the correct signature (see below) and annotating the method with the 
+@<em>org.eclipse.xtext.ui.editor.quickfix.Fix</em> annotation referencing the previously specified 
+issue code from the validator, Xtext knows that this method implements a fix for the problem. This 
+also allows us to annotate multiple methods as fixes for the same problem.
 </p>
 <p>
 The first three parameters given to the 
@@ -438,10 +439,13 @@ The following snippet shows a semantic quick fix for a similar problem.
 <a name="quickfixes-12"></a>
 <h3>Quickfixes for Linking Errors and Syntax Errors</h3>
 <p>
-You can even define quick fixes for linking errors. The issue codes are assigned by the <em>org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider</em>. Have a look at the domain model example how to add quick fixes for these errors.
+You can even define quick fixes for linking errors. The issue codes are assigned by the 
+<em>org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider</em>. Have a look at the domain model 
+example how to add quick fixes for these errors.
 </p>
 <p>
-Analogously, there is the <em>org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider</em> to assign issue codes to syntactical errors.
+Analogously, there is the <em>org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider</em> to assign 
+issue codes to syntactical errors.
 </p>
 <a name="ide_concepts-6"></a>
 <h2>Template Proposals</h2>
