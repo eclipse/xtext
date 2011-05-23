@@ -85,7 +85,9 @@ public class HighlightingHelper implements IHighlightingHelper, IPropertyChangeL
 
 	public void uninstall() {
 		disable();
-		preferenceStore.removePropertyChangeListener(this);
+		if (preferenceStore != null) {
+			preferenceStore.removePropertyChangeListener(this);
+		}
 		fEditor= null;
 		fSourceViewer= null;
 		fConfiguration= null;
