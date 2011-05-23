@@ -526,7 +526,7 @@ In the grammar a cross-reference is specified using square brackets.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-CrossReference&nbsp;:</br>&nbsp;&nbsp;<span class="string">'['</span>&nbsp;type=ReferencedEClass&nbsp;(<span class="string">'|'</span>&nbsp;<span class="keyword">terminal</span>=CrossReferenceableTerminal)?&nbsp;<span class="string">']'</span></br>;
+CrossReference&nbsp;:</br>&nbsp;&nbsp;<span class="string">'['</span>&nbsp;type=ReferencedEClass&nbsp;(<span class="string">'|'</span>&nbsp;<span class="keyword">terminal</span>=CrossReferenceTerminal)?&nbsp;<span class="string">']'</span></br>;
 </p>
 </div>
 </div>
@@ -1345,7 +1345,7 @@ To do so override the corresponding binding in your runtime module like shown in
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Override</br><span class="keyword">public</span>&nbsp;Class<?&nbsp;<span class="keyword">extends</span>&nbsp;IValueConverterService>&nbsp;bindIValueConverterService()&nbsp;{</br>&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MySpecialValueConverterService.<span class="keyword">class</span>;</br>}
+@Override</br><span class="keyword">public</span>&nbsp;Class<?&nbsp;<span class="keyword">extends</span>&nbsp;IValueConverterService>&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bindIValueConverterService()&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MySpecialValueConverterService.<span class="keyword">class</span>;</br>}
 </p>
 </div>
 </div>
@@ -2078,16 +2078,13 @@ per language. It has two methods: <em>getFragment(EObject, Fallback)
 interface allows to delegate to the default strategy - usually the fragment paths described above. 
 </p>
 <p>
-The following snippet from the <a href="210-emf-integration.xdoc.html#gmf_integration">
-GMF Example
-</a>
- shows how to use qualified names as fragments:   
+The following snippet shows how to use qualified names as fragments:   
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;QualifiedNameFragmentProvider&nbsp;<span class="keyword">implements</span>&nbsp;IFragmentProvider&nbsp;{</br></br>&nbsp;&nbsp;@Inject</br>&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;IQualifiedNameProvider&nbsp;qualifiedNameProvider;</br></br>&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getFragment(EObject&nbsp;obj,&nbsp;Fallback&nbsp;fallback)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;qualifiedName&nbsp;=&nbsp;qualifiedNameProvider.getQualifiedName(obj);</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;qualifiedName&nbsp;!=&nbsp;<span class="keyword">null</span>&nbsp;?&nbsp;qualifiedName&nbsp;:&nbsp;fallback.getFragment(obj);</br>&nbsp;&nbsp;}</br></br>&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;EObject&nbsp;getEObject(Resource&nbsp;resource,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;fragment,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fallback&nbsp;fallback)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(fragment&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterator<EObject>&nbsp;i&nbsp;=&nbsp;EcoreUtil.getAllContents(resource,&nbsp;false);</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>(i.hasNext())&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EObject&nbsp;eObject&nbsp;=&nbsp;i.next();</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;candidateFragment&nbsp;=&nbsp;(eObject.eIsProxy())&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&nbsp;((InternalEObject)&nbsp;eObject).eProxyURI().fragment()</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;getFragment(eObject,&nbsp;fallback);</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(fragment.equals(candidateFragment))&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;eObject;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;fallback.getEObject(fragment);</br>&nbsp;&nbsp;}</br>}
+<span class="keyword">public</span>&nbsp;QualifiedNameFragmentProvider&nbsp;<span class="keyword">implements</span>&nbsp;IFragmentProvider&nbsp;{</br></br>&nbsp;&nbsp;@Inject</br>&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;IQualifiedNameProvider&nbsp;qualifiedNameProvider;</br></br>&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getFragment(EObject&nbsp;obj,&nbsp;Fallback&nbsp;fallback)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;qName&nbsp;=&nbsp;qualifiedNameProvider.getQualifiedName(obj);</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;qName&nbsp;!=&nbsp;<span class="keyword">null</span>&nbsp;?&nbsp;qName&nbsp;:&nbsp;fallback.getFragment(obj);</br>&nbsp;&nbsp;}</br></br>&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;EObject&nbsp;getEObject(Resource&nbsp;resource,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;fragment,&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fallback&nbsp;fallback)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(fragment&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterator<EObject>&nbsp;i&nbsp;=&nbsp;EcoreUtil.getAllContents(resource,&nbsp;false);</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>(i.hasNext())&nbsp;{</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EObject&nbsp;eObject&nbsp;=&nbsp;i.next();</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;candidateFragment&nbsp;=&nbsp;(eObject.eIsProxy())&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&nbsp;((InternalEObject)&nbsp;eObject).eProxyURI().fragment()</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;getFragment(eObject,&nbsp;fallback);</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(fragment.equals(candidateFragment))&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;eObject;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>&nbsp;&nbsp;&nbsp;&nbsp;}</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;fallback.getEObject(fragment);</br>&nbsp;&nbsp;}</br>}
 </p>
 </div>
 </div>

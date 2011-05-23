@@ -34,7 +34,7 @@ DONE JK 170-outline.xdoc
 200-Appendix.xdoc
 205-typical-language-configs.xdoc
 206-expressions-in-xtext.xdoc
-210-emf-integration.xdoc
+DONE JK 210-emf-integration.xdoc
 215-migrating-from-0.7.xdoc
 220-deploying-dsls.xdoc
 230-antlr-ip-issue.xdoc

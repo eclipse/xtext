@@ -6,8 +6,9 @@ and the concrete implementation can be registered via the runtime ref:guicemodul
 To do so override the corresponding binding in your runtime module like shown in this example:
 
 code[Java][@Override
-public Class<? extends IValueConverterService> bindIValueConverterService() {
-  return MySpecialValueConverterService.class;
+public Class<? extends IValueConverterService> 
+		bindIValueConverterService() {
+  	return MySpecialValueConverterService.class;
 }
 ]
 

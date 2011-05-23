@@ -14,7 +14,7 @@ section2[Declaration of Crosslinks]
 In the grammar a cross-reference is specified using square brackets.
 
 code[Xtext][CrossReference :
-  '\[' type=ReferencedEClass ('|' terminal=CrossReferenceableTerminal)? '\]'
+  '\[' type=ReferencedEClass ('|' terminal=CrossReferenceTerminal)? '\]'
 ;
 ]
 
