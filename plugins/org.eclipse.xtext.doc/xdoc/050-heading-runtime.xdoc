@@ -18,8 +18,8 @@ e[Caveat]: The codeRef[org.eclipse.xtext.ISetup] class is intended to be used fo
 testing, only. if you use it in a Equinox scenario, you will very likely break the running application 
 because entries to the global registries will be overwritten.
 
-The setup method returns an e[Injector], which can further be used to obtain a parser, etc. It also 
-registers the codeRef[org.eclipse.emf.ecore.resource.Resource$Factory] and generated 
+The setup method returns an codeRef[com.google.inject.Injector], which can further be used to obtain a 
+parser, etc. It also registers the codeRef[org.eclipse.emf.ecore.resource.Resource$Factory] and generated 
 codeRef[org.eclipse.emf.ecore.EPackage]s to the respective global registries provided 
 by EMF. So basically after having run the setup and you can start using EMF API to load and store models
 of your language.

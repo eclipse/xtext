@@ -14,18 +14,18 @@ also called e[document object graph (DOM)], e[semantic model], or simply e[model
 interchangeably. Given the example model from the ref:getting_started_xtext[introduction], the AST 
 looks similar to this
 
-img[images/ast.png][ (Sample AST)][ ][ width:50%]
+img[images/ast.png][Sample AST][ ][width:50%]
 
 
 The e[AST] should contain the essence of your textual models. It abstracts over syntactical information. 
 It is used by later processing steps, such as validation, compilation or interpretation. In EMF a model 
-is made up of instances of e[EObjects] which are connected and an e[EObject] is an instance of an e[EClass]. 
-A set of e[EClasses] if contained in a so called e[EPackage], which are both concepts of e[Ecore] 
+is made up of instances of e[EObjects] which are connected and an codeRef[org.eclipse.emf.ecore.EObject] is an instance of an codeRef[org.eclipse.emf.ecore.EClass]. 
+A set of e[EClasses] if contained in a so called codeRef[org.eclipse.emf.ecore.EPackage], which are both concepts of e[Ecore] 
 In Xtext, meta models are either inferred from the grammar or predefined by the user 
 (see the section on ref:package_declarations[package declarations] for details). The next diagram shows 
 the meta model of our example:
 
-!images/metamodel.png(Sample meta model)! 
+img[images/metamodel.png][Sample meta model][][] 
 
 The language in which the meta model is defined is called e[Ecore]. In other words, the meta model is 
 the Ecore model of your language. Ecore an essential part of EMF. Your models instantiate the meta model, 
@@ -61,12 +61,12 @@ e[eOpposite] of each other and owned by either end of the associations.
 The superclass of EAttibutes and EReferences is e[EStructuralFeature] and allows to define a name and a 
 cardinality by setting e[lowerBound] and e[upperBound]. Setting the latter to -1 means 'unbounded'. 
 
-The common supertype of EDataType and EClass is e[EClassifier]. An e[EPackage] acts as a namespace and 
+The common supertype of EDataType and EClass is e[EClassifier]. An codeRef[org.eclipse.emf.ecore.EPackage] acts as a namespace and 
 container of EClassifiers. 
 
 We have summarized these most relevant concepts of Ecore in the following diagram:  
 
-img[images/ecore.png][(Ecore concepts)][ ][ ]
+img[images/ecore.png][Ecore concepts][ ][ ]
 
 
 section:emf_codegen[EMF Code Generation]
@@ -83,12 +83,12 @@ tools to work with your models, such as persistence, reflection, referential int
 Among other things, the code generator will generate
 ul[
 	item[A Java interface and a Java class for each EClassifier in your Ecore model. By default, 
-		all classes will implement the interface e[org.eclipse.emf.ecore.EObject], linking a lot
+		all classes will implement the interface codeRef[org.eclipse.emf.ecore.EObject], linking a lot
 		of runtime functionality. ]
 	item[A Java bean property for each EStructuralFeature (member variable, accessor methods)]
 	item[A package interface and class, holding singleton objects for all elements of your Ecore 
-		model, allowing reflection. EPackages are also registered to the e[EPackage.Registry] to 
-		be usable at runtime.]
+		model, allowing reflection. EPackages are also registered to the 
+		codeRef[org.eclipse.emf.ecore.EPackage$Registry] to be usable at runtime.]
 	item[A factory interface and class for creating instances]
 	item[An abstract switch class implementing a visitor pattern to avoid if-instanceof-cascades
 		in your code.]
@@ -142,23 +142,24 @@ ul[
 		elements will become stale. As the Xtext editor continuously re-parses the model on changes, 
 		this will happen rather often. It is safer to synchronize editors more loosely, e.g. on 
 		file changes.]
-	item[Implement an ref:fragmentProvider[e[IFragmentProvider]] to make 
+	item[Implement an ref:fragmentProvider[codeRef[org.eclipse.xtext.resource.IFragmentProvider]] to make 
 		the XtextResource return stable fragments for its contained
 		elements, e.g. based on composite names rather than order of 
 		appearance.]
-	item[Implement an e[IQualifiedNameProvider] and an ref:scoping[e[IScopeProvider]] to make the 
+	item[Implement an codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider] and an 
+		ref:scoping[codeRef[org.eclipse.xtext.scoping.IScopeProvider]] to make the 
 		names of all linkable elements in cross-references unique.]
-	item[Provide an ref:formatting[e[IFormatter]] to improve the readability 
+	item[Provide an ref:formatting[codeRef[org.eclipse.xtext.formatting.IFormatter]] to improve the readability 
 		of the generated textual models.]
-	item[Register an e[IReferableElementsUnloader] to turn 
+	item[Register an codeRef[org.eclipse.xtext.parser.antlr.IReferableElementsUnloader] to turn 
 		deleted/replaced model elements into EMF proxies. Design the rest 
 		of your application such that it does never keep references to 
-		e[EObjects] or to cope with proxies. That will improve the 
+		codeRef[org.eclipse.emf.ecore.EObject]s or to cope with proxies. That will improve the 
 		stability of your application drastically.]
-	item[Xtext will register an EMF e[ResourceFactory], so resources with 
+	item[Xtext will register an EMF codeRef[org.eclipse.emf.ecore.resource.Resource$Factory], so resources with 
 		the file extension you entered when generating the Xtext plug-ins 
-		will be automatically loaded in an e[XtextResource] when you use 
-		EMF's e[ResourceSet] API to load it.]
+		will be automatically loaded in an codeRef[org.eclipse.xtext.resource.XtextResource] when you use 
+		EMF's codeRef[org.eclipse.emf.ecore.resource.ResourceSet] API to load it.]
 ]
 
 
@@ -171,7 +172,7 @@ code repository].
 
 The link[http://www.eclipse.org/modeling/gmp/?project=gmf][Graphical Modeling Framework (GMF)] allows 
 to create graphical diagram editors for Ecore models. To illustrate how to build a GMF on top of an
-e[XtextResource] we have provided an example. You must have the Helios version 2.3 of GMF Notation, 
+codeRef[org.eclipse.xtext.resource.XtextResource] we have provided an example. You must have the Helios version 2.3 of GMF Notation, 
 Runtime and Tooling and their dependencies installed in your workbench to run the example. With other 
 versions of GMF it might work to regenerate the diagram code. 
 
@@ -209,8 +210,9 @@ elements when their semantic counterparts change, are added or are removed. Some
 can be derived from the semantic model by some default mapping, but usually there is a lot of graphical 
 stuff that the user wants to change to make the diagram look better.   
 
-In an Xtext editor, changes in the text are transfered to the underlying e[XtextResource] by a call to 
-the method e[org.eclipse.xtext.resource.XtextResource.update(int, int, String)], which will trigger a
+In an Xtext editor, changes in the text are transfered to the underlying 
+codeRef[org.eclipse.xtext.resource.XtextResource] by a call to the method 
+codeRef[org.eclipse.xtext.resource.XtextResource]e[.update(int, int, String)], which will trigger a
 partial parsing of the dirty text region and a replacement of the corresponding subtree in the AST model 
 (semantic model). 
 
@@ -245,10 +247,10 @@ section3[Stage 2: Calling the Xtext Parser to Parse GMF Labels]
 GMF's generated parser for the labels is a bit poor: It will work on attributes only, and will fail for 
 cross-references, e.g. an attibute's type. So why not use the Xtext parser to process the user's input? 
 
-An e[XtextResource] keeps track of it's concrete syntax representation by means of a so called node model 
-(see ref:parser_rules for a more detailed description). The node model represents the parse tree and 
-provides information on the offset, length and text that has been parsed to create a semantic model element.
-The nodes are attached to their semantic elements by means of a node adapter.    
+An codeRef[org.eclipse.xtext.resource.XtextResource] keeps track of it's concrete syntax representation by 
+means of a so called node model (see ref:parser_rules for a more detailed description). The node model 
+represents the parse tree and provides information on the offset, length and text that has been parsed to 
+create a semantic model element. The nodes are attached to their semantic elements by means of a node adapter.    
 
 We can use the node adapter to access the text block that represents an attribute, and call the Xtext 
 parser to parse the user input. The example code is contained in

@@ -15,8 +15,8 @@ code[Java][public class MyLanguageLinker extends Linker {
 }
 ]
 
-It is not the duty of the client code to care about where the e[IScopeProvider] comes from or how it 
-is created. When above's class is instantiated, Guice sees that it requires an instance of 
+It is not the duty of the client code to care about where the codeRef[org.eclipse.xtext.scoping.IScopeProvider] 
+comes from or how it is created. When above's class is instantiated, Guice sees that it requires an instance of 
 IScopeProvider and assigns it to the specified field or method parameter. This of course only works,
 if the object itself is created by Guice. In Xtext almost every instance is created that way 
 and therefore the whole dependency net is controlled and configured by the means of Google Guice.
@@ -62,9 +62,10 @@ code[Java][public Class<? extends IScopeProvider> bindIScopeProvider() {
 }
 ]
 
-which would do the same as the code snippet above. It simply declares a binding from e[IScopeProvider] to
-e[MyConcreteScopeProvider]. That binding will make Guice instantiate and inject a new instance of 
-e[MyConcreteScopeProvider] whenever a dependency to e[IScopeProvider] is declared.
+which would do the same as the code snippet above. It simply declares a binding from 
+codeRef[org.eclipse.xtext.scoping.IScopeProvider] to e[MyConcreteScopeProvider]. That binding will make 
+Guice instantiate and inject a new instance of e[MyConcreteScopeProvider] whenever a dependency to 
+codeRef[org.eclipse.xtext.scoping.IScopeProvider] is declared.
 
 Having a method per binding allows to deactivate individual bindings by overriding the corresponding 
 methods and either change the binding by returning a different target type or removing that binding 
@@ -94,12 +95,13 @@ code[Java][public Class<? extends Provider<IScopeProvider>>
 }
 ]
 
-Note: Please forgive us the overuse of the term e[provider]. The IScopeProvider is not a Guice e[provider].
+Note: Please forgive us the overuse of the term e[provider]. The codeRef[org.eclipse.xtext.scoping.IScopeProvider] 
+is not a Guice codeRef[com.google.inject.Provider].
 
 That binding tells Guice to instantiate e[MyConcreteScopeProviderFactory] and invoke get() in order to 
-obtain an instance of e[IScopeProvider] for clients having declared a dependency to that type. Both mentioned 
-methods are allowed to return an instance instead of a type. This may be useful if some global state should 
-be shared in the application:
+obtain an instance of codeRef[org.eclipse.xtext.scoping.IScopeProvider] for clients having declared a dependency
+to that type. Both mentioned methods are allowed to return an instance instead of a type. This may be useful 
+if some global state should be shared in the application:
 
 code[Java][
 public Provider<IScopeProvider> provideIScopeProvider() {
@@ -119,7 +121,7 @@ respectively.
 
 The last binding method provided by Xtext allows to do anything you can do with Guice's binding API, since
 it allows you to use the codeRef[com.google.inject.Binder] directly. If your method's name starts with the
-name 'configure', has a return type e[void] and accepts one argument of type e[Binder]
+name 'configure', has a return type e[void] and accepts one argument of type codeRef[com.google.inject.Binder]:
 
 code[Java][
 public void configureIScopeProvider(Binder binder) {

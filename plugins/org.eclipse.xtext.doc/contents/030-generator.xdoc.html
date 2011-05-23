@@ -471,8 +471,8 @@ constructor) and adds the <em>@Inject</em> annotation:
 </div>
 </p>
 <p>
-It is not the duty of the client code to care about where the <em>IScopeProvider</em> comes from or how it 
-is created. When above&apos;s class is instantiated, Guice sees that it requires an instance of 
+It is not the duty of the client code to care about where the <em>org.eclipse.xtext.scoping.IScopeProvider</em> 
+comes from or how it is created. When above&apos;s class is instantiated, Guice sees that it requires an instance of 
 IScopeProvider and assigns it to the specified field or method parameter. This of course only works,
 if the object itself is created by Guice. In Xtext almost every instance is created that way 
 and therefore the whole dependency net is controlled and configured by the means of Google Guice.
@@ -533,9 +533,10 @@ method is :
 </div>
 </p>
 <p>
-which would do the same as the code snippet above. It simply declares a binding from <em>IScopeProvider</em> to
-<em>MyConcreteScopeProvider</em>. That binding will make Guice instantiate and inject a new instance of 
-<em>MyConcreteScopeProvider</em> whenever a dependency to <em>IScopeProvider</em> is declared.
+which would do the same as the code snippet above. It simply declares a binding from 
+<em>org.eclipse.xtext.scoping.IScopeProvider</em> to <em>MyConcreteScopeProvider</em>. That binding will make 
+Guice instantiate and inject a new instance of <em>MyConcreteScopeProvider</em> whenever a dependency to 
+<em>org.eclipse.xtext.scoping.IScopeProvider</em> is declared.
 </p>
 <p>
 Having a method per binding allows to deactivate individual bindings by overriding the corresponding 
@@ -580,13 +581,14 @@ the following binding method.
 </div>
 </p>
 <p>
-Note: Please forgive us the overuse of the term <em>provider</em>. The IScopeProvider is not a Guice <em>provider</em>.
+Note: Please forgive us the overuse of the term <em>provider</em>. The <em>org.eclipse.xtext.scoping.IScopeProvider</em> 
+is not a Guice <em>com.google.inject.Provider</em>.
 </p>
 <p>
 That binding tells Guice to instantiate <em>MyConcreteScopeProviderFactory</em> and invoke get() in order to 
-obtain an instance of <em>IScopeProvider</em> for clients having declared a dependency to that type. Both mentioned 
-methods are allowed to return an instance instead of a type. This may be useful if some global state should 
-be shared in the application:
+obtain an instance of <em>org.eclipse.xtext.scoping.IScopeProvider</em> for clients having declared a dependency
+to that type. Both mentioned methods are allowed to return an instance instead of a type. This may be useful 
+if some global state should be shared in the application:
 </p>
 <p>
 <div class="literallayout">
@@ -619,7 +621,7 @@ respectively.
 <p>
 The last binding method provided by Xtext allows to do anything you can do with Guice&apos;s binding API, since
 it allows you to use the <em>com.google.inject.Binder</em> directly. If your method&apos;s name starts with the
-name &apos;configure&apos;, has a return type <em>void</em> and accepts one argument of type <em>Binder</em>
+name &apos;configure&apos;, has a return type <em>void</em> and accepts one argument of type <em>com.google.inject.Binder</em>:
 </p>
 <p>
 <div class="literallayout">

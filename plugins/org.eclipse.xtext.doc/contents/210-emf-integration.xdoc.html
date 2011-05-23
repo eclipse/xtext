@@ -30,15 +30,15 @@ looks similar to this
 <p>
 <div class="image" >
 <img src="images/ast.png" class=" " 
- style=" width:50%" />
- (Sample AST)
+ style="width:50%" />
+Sample AST
 </div>
 </p>
 <p>
 The <em>AST</em> should contain the essence of your textual models. It abstracts over syntactical information. 
 It is used by later processing steps, such as validation, compilation or interpretation. In EMF a model 
-is made up of instances of <em>EObjects</em> which are connected and an <em>EObject</em> is an instance of an <em>EClass</em>. 
-A set of <em>EClasses</em> if contained in a so called <em>EPackage</em>, which are both concepts of <em>Ecore</em> 
+is made up of instances of <em>EObjects</em> which are connected and an <em>org.eclipse.emf.ecore.EObject</em> is an instance of an <em>org.eclipse.emf.ecore.EClass</em>. 
+A set of <em>EClasses</em> if contained in a so called <em>org.eclipse.emf.ecore.EPackage</em>, which are both concepts of <em>Ecore</em> 
 In Xtext, meta models are either inferred from the grammar or predefined by the user 
 (see the section on <a href="020-grammar-language.xdoc.html#package_declarations">
 package declarations</a>
@@ -46,7 +46,11 @@ package declarations</a>
 the meta model of our example:
 </p>
 <p>
-!images/metamodel.png(Sample meta model)! 
+<div class="image" >
+<img src="images/metamodel.png" 
+/>
+Sample meta model
+</div>
 </p>
 <p>
 The language in which the meta model is defined is called <em>Ecore</em>. In other words, the meta model is 
@@ -89,7 +93,7 @@ The superclass of EAttibutes and EReferences is <em>EStructuralFeature</em> and 
 cardinality by setting <em>lowerBound</em> and <em>upperBound</em>. Setting the latter to -1 means &apos;unbounded&apos;. 
 </p>
 <p>
-The common supertype of EDataType and EClass is <em>EClassifier</em>. An <em>EPackage</em> acts as a namespace and 
+The common supertype of EDataType and EClass is <em>EClassifier</em>. An <em>org.eclipse.emf.ecore.EPackage</em> acts as a namespace and 
 container of EClassifiers. 
 </p>
 <p>
@@ -99,7 +103,7 @@ We have summarized these most relevant concepts of Ecore in the following diagra
 <div class="image" >
 <img src="images/ecore.png" class=" " 
  style=" " />
-(Ecore concepts)
+Ecore concepts
 </div>
 </p>
 <a name="emf_codegen"></a>
@@ -128,8 +132,8 @@ Among other things, the code generator will generate
 	</li>
 	<li>
 		A package interface and class, holding singleton objects for all elements of your Ecore 
-				model, allowing reflection. EPackages are also registered to the <em>EPackage.Registry</em> to 
-				be usable at runtime.
+				model, allowing reflection. EPackages are also registered to the 
+				<em>org.eclipse.emf.ecore.EPackage$Registry</em> to be usable at runtime.
 	</li>
 	<li>
 		A factory interface and class for creating instances
@@ -212,36 +216,37 @@ want to use Xtext to serialize your models as described above, it is good to hav
 	</li>
 	<li>
 		Implement an <a href="050-heading-runtime.xdoc.html#fragmentProvider">
-		<em>IFragmentProvider</em></a>
+		<em>org.eclipse.xtext.resource.IFragmentProvider</em></a>
 		 to make 
 				the XtextResource return stable fragments for its contained
 				elements, e.g. based on composite names rather than order of 
 				appearance.
 	</li>
 	<li>
-		Implement an <em>IQualifiedNameProvider</em> and an <a href="050-heading-runtime.xdoc.html#scoping">
-		<em>IScopeProvider</em></a>
+		Implement an <em>org.eclipse.xtext.naming.IQualifiedNameProvider</em> and an 
+				<a href="050-heading-runtime.xdoc.html#scoping">
+		<em>org.eclipse.xtext.scoping.IScopeProvider</em></a>
 		 to make the 
 				names of all linkable elements in cross-references unique.
 	</li>
 	<li>
 		Provide an <a href="050-heading-runtime.xdoc.html#formatting">
-		<em>IFormatter</em></a>
+		<em>org.eclipse.xtext.formatting.IFormatter</em></a>
 		 to improve the readability 
 				of the generated textual models.
 	</li>
 	<li>
-		Register an <em>IReferableElementsUnloader</em> to turn 
+		Register an <em>org.eclipse.xtext.parser.antlr.IReferableElementsUnloader</em> to turn 
 				deleted/replaced model elements into EMF proxies. Design the rest 
 				of your application such that it does never keep references to 
-				<em>EObjects</em> or to cope with proxies. That will improve the 
+				<em>org.eclipse.emf.ecore.EObject</em>s or to cope with proxies. That will improve the 
 				stability of your application drastically.
 	</li>
 	<li>
-		Xtext will register an EMF <em>ResourceFactory</em>, so resources with 
+		Xtext will register an EMF <em>org.eclipse.emf.ecore.resource.Resource$Factory</em>, so resources with 
 				the file extension you entered when generating the Xtext plug-ins 
-				will be automatically loaded in an <em>XtextResource</em> when you use 
-				EMF&apos;s <em>ResourceSet</em> API to load it.
+				will be automatically loaded in an <em>org.eclipse.xtext.resource.XtextResource</em> when you use 
+				EMF&apos;s <em>org.eclipse.emf.ecore.resource.ResourceSet</em> API to load it.
 	</li>
 </ul>
 </p>
@@ -256,7 +261,7 @@ code repository</a>.
 <p>
 The <a href="http://www.eclipse.org/modeling/gmp/?project=gmf">Graphical Modeling Framework (GMF)</a> allows 
 to create graphical diagram editors for Ecore models. To illustrate how to build a GMF on top of an
-<em>XtextResource</em> we have provided an example. You must have the Helios version 2.3 of GMF Notation, 
+<em>org.eclipse.xtext.resource.XtextResource</em> we have provided an example. You must have the Helios version 2.3 of GMF Notation, 
 Runtime and Tooling and their dependencies installed in your workbench to run the example. With other 
 versions of GMF it might work to regenerate the diagram code. 
 </p>
@@ -403,8 +408,9 @@ can be derived from the semantic model by some default mapping, but usually ther
 stuff that the user wants to change to make the diagram look better.   
 </p>
 <p>
-In an Xtext editor, changes in the text are transfered to the underlying <em>XtextResource</em> by a call to 
-the method <em>org.eclipse.xtext.resource.XtextResource.update(int, int, String)</em>, which will trigger a
+In an Xtext editor, changes in the text are transfered to the underlying 
+<em>org.eclipse.xtext.resource.XtextResource</em> by a call to the method 
+<em>org.eclipse.xtext.resource.XtextResource</em><em>.update(int, int, String)</em>, which will trigger a
 partial parsing of the dirty text region and a replacement of the corresponding subtree in the AST model 
 (semantic model). 
 </p>
@@ -445,11 +451,11 @@ GMF&apos;s generated parser for the labels is a bit poor: It will work on attrib
 cross-references, e.g. an attibute&apos;s type. So why not use the Xtext parser to process the user&apos;s input? 
 </p>
 <p>
-An <em>XtextResource</em> keeps track of it&apos;s concrete syntax representation by means of a so called node model 
-(see <a href="020-grammar-language.xdoc.html#parser_rules">section parser_rules</a>
- for a more detailed description). The node model represents the parse tree and 
-provides information on the offset, length and text that has been parsed to create a semantic model element.
-The nodes are attached to their semantic elements by means of a node adapter.    
+An <em>org.eclipse.xtext.resource.XtextResource</em> keeps track of it&apos;s concrete syntax representation by 
+means of a so called node model (see <a href="020-grammar-language.xdoc.html#parser_rules">section parser_rules</a>
+ for a more detailed description). The node model 
+represents the parse tree and provides information on the offset, length and text that has been parsed to 
+create a semantic model element. The nodes are attached to their semantic elements by means of a node adapter.    
 </p>
 <p>
 We can use the node adapter to access the text block that represents an attribute, and call the Xtext 

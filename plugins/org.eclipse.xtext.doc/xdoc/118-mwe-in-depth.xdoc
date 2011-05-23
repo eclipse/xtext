@@ -588,7 +588,7 @@ The core of a component is the list of assignments between the curly
 braces. An arbitrary number of values can be set on the component by
 means of feature-to-value pairs. 
 
-!{width:50%}images/mwe2/assignment.png! 
+img[images/mwe2/assignment.png][][][width:50%] 
 
 The available constructs on the right hand side of the assignment
 are the same as for default values for properties. 

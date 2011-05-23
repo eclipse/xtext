@@ -297,7 +297,7 @@ Outside Eclipse, you can provide a set of file system paths to be scanned for mo
 differ in the bound instance of codeRef[org.eclipse.xtext.resource.containers.IAllContainersState] 
 of the referring language. These will be described in detail in the following sections.
 
-img[images/index_container.png][(IContainer Management)][ ][]
+img[images/index_container.png][IContainer Management][][]
 
 
 section4:jdt_based_containers[JDT-Based Container Manager]

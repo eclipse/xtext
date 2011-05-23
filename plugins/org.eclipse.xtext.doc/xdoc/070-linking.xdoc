@@ -25,13 +25,13 @@ code[Xtext][ReferringType :
 ;
 ]
 
-The ref:metamodelInference[Ecore model inference] would create an e[EClass] e[ReferringType] with an 
-e[EReference] e[referencedObject] of type e[Entity] e[(containment=false)]. The referenced object would 
-be identified either by a e[STRING] and the surrounding information in the current context 
-(see ref:scoping[scoping]). If you do not use e[generate] but e[import] an existing Ecore model, 
-the class e[ReferringType] (or one of its super types) would need to have an e[EReference] of type 
-e[Entity] (or one of its super types) declared. Also the e[EReference]'s containment and container 
-properties needs to be set to e[false]. 
+The ref:metamodelInference[Ecore model inference] would create an codeRef[org.eclipse.emf.ecore.EClass] 
+e[ReferringType] with an codeRef[org.eclipse.emf.ecore.EReference] e[referencedObject] of type e[Entity]
+e[(containment=false)]. The referenced object would be identified either by a e[STRING] and the surrounding
+information in the current context (see ref:scoping[scoping]). If you do not use e[generate] but e[import] 
+an existing Ecore model, the class e[ReferringType] (or one of its super types) would need to have an 
+codeRef[org.eclipse.emf.ecore.EReference] of type e[Entity] (or one of its super types) declared. Also the 
+codeRef[org.eclipse.emf.ecore.EReference]'s containment and container properties needs to be set to e[false]. 
 
 
 section2[Default Runtime Behavior (Lazy Linking)]
@@ -47,18 +47,21 @@ When parsing a given input string, say
 code[LinkingExample][ref Entity01]
 
 the codeRef[org.eclipse.xtext.linking.lazy.LazyLinker] first creates an EMF proxy and 
-assigns it to the corresponding e[EReference]. In EMF a proxy is described by a URI, which points to the 
-real e[EObject]. In the case of lazy linking the stored URI comprises of the context information given 
-at parse time, which is the e[EObject] containing the cross-reference, the actual e[EReference], the 
-index (in case it's a multi-valued cross-reference) and the string which represented the crosslink 
-in the concrete syntax. The latter usually corresponds to the name of the referenced e[EObject]. 
-In EMF a URI consists of information about the resource the e[EObject] is contained in as well as a so 
-called fragment part, which is used to find the e[EObject] within that resource. When an  EMF proxy 
-is resolved, the current e[ResourceSet] is asked. The resource set uses the first part to obtain 
-(i.e. load if it is not already loaded) the resource. Then the resource is asked to return the 
-e[EObject] based on the fragment in the URI. The actual cross-reference resolution is done by 
-e[LazyLinkingResource.getEObject(String)] which receives the fragment and delegates to the implementation 
-of the e[ILinkingService]. The default implementation in turn delegates to the ref:scoping[scoping API].
+assigns it to the corresponding codeRef[org.eclipse.emf.ecore.EReference]. In EMF a proxy is described by a 
+codeRef[org.eclipse.emf.common.util.URI], which points to the real codeRef[org.eclipse.emf.ecore.EObject]. 
+In the case of lazy linking the stored codeRef[org.eclipse.emf.common.util.URI] comprises of the context 
+information given at parse time, which is the codeRef[org.eclipse.emf.ecore.EObject] containing the cross-reference, 
+the actual codeRef[org.eclipse.emf.ecore.EReference], the index (in case it's a multi-valued cross-reference) 
+and the string which represented the crosslink in the concrete syntax. The latter usually corresponds to 
+the name of the referenced codeRef[org.eclipse.emf.ecore.EObject]. In EMF a codeRef[org.eclipse.emf.common.util.URI]
+consists of information about the resource the codeRef[org.eclipse.emf.ecore.EObject] is contained in as well as a so 
+called fragment part, which is used to find the codeRef[org.eclipse.emf.ecore.EObject] within that resource. When an  
+EMF proxy is resolved, the current codeRef[org.eclipse.emf.ecore.resource.ResourceSet] is asked. The resource set 
+uses the first part to obtain (i.e. load if it is not already loaded) the resource. Then the resource is asked to 
+return the codeRef[org.eclipse.emf.ecore.EObject] based on the fragment in the URI. The actual cross-reference resolution 
+is done by codeRef[org.eclipse.xtext.linking.lazy.LazyLinkingResource]e[.getEObject(String)] which receives the 
+fragment and delegates to the implementation of the codeRef[org.eclipse.xtext.linking.ILinkingService]. The default 
+implementation in turn delegates to the ref:scoping[scoping API].
 
 A simple implementation of the linking service (the 
 codeRef[org.eclipse.xtext.linking.impl.DefaultLinkingService]) is shipped with Xtext 
