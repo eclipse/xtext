@@ -297,7 +297,7 @@
             // }
 
             // Serializer 2.0
-            // serializer.SerializerFragment {}
+            // fragment = serializer.SerializerFragment {}
 		}
 	}]]>
          </MweSnippet>
