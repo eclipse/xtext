@@ -21,8 +21,7 @@ literals as well.
 </p>
 <p>
 The implementation will be selected transparently to the client code depending on where the code is 
-executed. If the environment is a plain stand-alone Java or OSGi environment, the <em>java.lang.reflect
-</em> 
+executed. If the environment is a plain stand-alone Java or OSGi environment, the <em>java.lang.reflect</em> 
 API will be used to deduce the necessary data. On the contrary, the type-model will be created from the 
 live data of the JDT in an interactive Eclipse environment. All this happens behind the scenes via different
 implementations that are bound to specific interfaces with Google Guice. 
@@ -30,8 +29,7 @@ implementations that are bound to specific interfaces with Google Guice.
 <a name="jvmtypes-3"></a>
 <h2>How to Use Java Types</h2>
 <p>
-Using the JVM types model is very simple. First of all, the grammar has to import the <em>JavaVMTypes
-</em> Ecore model. 
+Using the JVM types model is very simple. First of all, the grammar has to import the <em>JavaVMTypes</em> Ecore model. 
 Thanks to content assist this is easy to spot in the list of proposals.  
 </p>
 <p>
@@ -52,7 +50,8 @@ as one got already used to when dealing with references in Xtext.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Type:</br>&nbsp;&nbsp;<span class="string">'type'</span>&nbsp;name=ID&nbsp;<span class="string">'mapped-to'</span>&nbsp;javaType=[types::JvmType|FQN];
+Type:</br>
+&nbsp;&nbsp;<span class="string">&apos;type&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;mapped-to&apos;</span>&nbsp;javaType=[types::JvmType|FQN];
 </p>
 </div>
 </div>
@@ -60,25 +59,29 @@ Type:</br>&nbsp;&nbsp;<span class="string">'type'</span>&nbsp;name=ID&nbsp;<span
 <p>
 Last but not least, the <em>org.eclipse.xtext.generator.types.TypesGeneratorFragment</em> 
 has to be added to the workflow. The safest way is 
-to add it after the actually used scoping fragments as a specialized version of the <em>IGlobalScopeProvider
-</em> 
-will be configured. Don&apos;t forget to refer to the <em>genmodel
-</em> of the Java VM types. The shortest possible
+to add it after the actually used scoping fragments as a specialized version of the <em>IGlobalScopeProvider</em> 
+will be configured. Don&apos;t forget to refer to the <em>genmodel</em> of the Java VM types. The shortest possible
 URI is a classpath-URI.    
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-fragment&nbsp;=&nbsp;ecore.EcoreGeneratorFragment&nbsp;{</br>&nbsp;&nbsp;referencedGenModels=<span class="string">"classpath:/model/JavaVMTypes.genmodel"</span></br>}</br></br>...</br><span class="comment">//&nbsp;scoping&nbsp;and&nbsp;exporting&nbsp;API&nbsp;</br></span>...</br></br>fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}
+fragment&nbsp;=&nbsp;ecore.EcoreGeneratorFragment&nbsp;{</br>
+&nbsp;&nbsp;referencedGenModels=<span class="string">"classpath:/model/JavaVMTypes.genmodel"</span></br>
+}</br>
+</br>
+...</br>
+<span class="comment">//&nbsp;scoping&nbsp;and&nbsp;exporting&nbsp;API&nbsp;</br>
+</span>...</br>
+</br>
+fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}
 </p>
 </div>
 </div>
 </p>
 <p>
-After regenerating your language, it will be allowed to define a type <em>Date
-</em> that maps to the <em>java.util.Date
-</em>
+After regenerating your language, it will be allowed to define a type <em>Date</em> that maps to the <em>java.util.Date</em>
 like this:
 </p>
 <p>
@@ -91,10 +94,8 @@ like this:
 </div>
 </p>
 <p>
-These two steps will provide a nice integration into the Eclipse JDT. There is <em>Find References
-</em> on Java methods, 
-fields and types that will reveal results in your language files. <em>Go To Declaration
-</em> works as expected
+These two steps will provide a nice integration into the Eclipse JDT. There is <em>Find References</em> on Java methods, 
+fields and types that will reveal results in your language files. <em>Go To Declaration</em> works as expected
 and content assist will propose the list of available types. 
 </p>
 <a name="jvmtypes-4"></a>
@@ -115,8 +116,7 @@ available annotations or enumeration literals, it is very easy to define constra
 <p>
 The <em>org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider</em> can be
 used to provide optimized proposals based on various filter criteria. 
-The most common selector can be used directly via <em>createSubTypeProposals
-</em>. The implementation is optimized
+The most common selector can be used directly via <em>createSubTypeProposals</em>. The implementation is optimized
 and uses the JDT Index directly to minimize the effort for object instantiation. The class 
 <em>org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters</em>
 provides a comprehensive set of reusable filters that can be easily combined to reduce the list of proposals
@@ -126,27 +126,42 @@ to a smaller number of valid entries.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters.*;&nbsp;</br>..</br>..</br></br>&nbsp;&nbsp;proposalProvider.createSubTypeProposals(factory,&nbsp;context,</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and(not(canInstantiate()),&nbsp;isPublic()),&nbsp;acceptor);
+<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters.*;&nbsp;</br>
+..</br>
+..</br>
+</br>
+&nbsp;&nbsp;proposalProvider.createSubTypeProposals(factory,&nbsp;context,</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and(not(canInstantiate()),&nbsp;isPublic()),&nbsp;acceptor);
 </p>
 </div>
 </div>
 </p>
 <p>
-<em>Since Xtext 1.0.1:
-</em>
+<em>Since Xtext 1.0.1:</em>
 </p>
 <p>
 Proposals can be created by means of a scoped proposal provider that is actually aware of existing import 
 statements and scoping rules while still leveraging the JDT index for faster proposal creation. Use the 
-<em>ITypesProposalProvider.IScopableTypesProposalProvider
-</em> to create a scoped proposal provider and use this 
+<em>ITypesProposalProvider.IScopableTypesProposalProvider</em> to create a scoped proposal provider and use this 
 one instead of the plain implementation.
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Override</br><span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;complete<TypeName>_<ReferenceName>(</br>&nbsp;&nbsp;&nbsp;&nbsp;EObject&nbsp;model,</br>&nbsp;&nbsp;&nbsp;&nbsp;Assignment&nbsp;assignment,</br>&nbsp;&nbsp;&nbsp;&nbsp;ContentAssistContext&nbsp;context,</br>&nbsp;&nbsp;&nbsp;&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{</br>&nbsp;&nbsp;IScope&nbsp;scope&nbsp;=&nbsp;getScopeProvider().getScope(</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;model,</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<MyDsl>Package.Literals.<POINTER_TO_REFERENCE>);</br>&nbsp;&nbsp;ITypesProposalProvider&nbsp;scopedProposalProvider&nbsp;=</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scopableProposalProvider.getScopedProposalProvider(model,&nbsp;scope);</br>&nbsp;&nbsp;scopedProposalProvider.create...</br>}
+@Override</br>
+<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;complete&lt;TypeName&gt;_&lt;ReferenceName&gt;(</br>
+&nbsp;&nbsp;&nbsp;&nbsp;EObject&nbsp;model,</br>
+&nbsp;&nbsp;&nbsp;&nbsp;Assignment&nbsp;assignment,</br>
+&nbsp;&nbsp;&nbsp;&nbsp;ContentAssistContext&nbsp;context,</br>
+&nbsp;&nbsp;&nbsp;&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{</br>
+&nbsp;&nbsp;IScope&nbsp;scope&nbsp;=&nbsp;getScopeProvider().getScope(</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;model,</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;MyDsl&gt;Package.Literals.&lt;POINTER_TO_REFERENCE&gt;);</br>
+&nbsp;&nbsp;ITypesProposalProvider&nbsp;scopedProposalProvider&nbsp;=</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scopableProposalProvider.getScopedProposalProvider(model,&nbsp;scope);</br>
+&nbsp;&nbsp;scopedProposalProvider.create...</br>
+}
 </p>
 </div>
 </div>
