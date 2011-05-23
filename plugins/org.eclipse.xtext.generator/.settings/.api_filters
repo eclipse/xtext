@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component id="org.eclipse.xtext.generator" version="2">
-<resource path="META-INF/MANIFEST.MF">
-<filter id="924844039">
-<message_arguments>
-<message_argument value="2.0.0.qualifier"/>
-<message_argument value="2.0.0.v201105041334"/>
-</message_arguments>
-</filter>
-</resource>
+
 <resource path="src/org/eclipse/xtext/generator/GenModelAccess.java">
 <filter id="0"/>
 </resource>
@@ -142,12 +135,36 @@
 </message_arguments>
 </filter>
 </resource>
-<resource path="src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java" type="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment">
-<filter id="338792546">
-<message_arguments>
-<message_argument value="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
-<message_argument value="registerGenmodel(GenModel)"/>
-</message_arguments>
-</filter>
-</resource>
+	<resource path="src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java" type="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment">
+		<filter id="338792546">
+			<message_arguments>
+			<message_argument value="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
+			<message_argument value="registerGenmodel(GenModel)"/>
+			</message_arguments>
+		</filter>
+	</resource>
+    <resource path="META-INF/MANIFEST.MF">
+        <filter id="924844039">
+            <message_arguments>
+                <message_argument value="2.0.0"/>
+                <message_argument value="2.0.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/generator/Xtend2ExecutionContext.java" type="org.eclipse.xtext.generator.Xtend2ExecutionContext">
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.Xtend2ExecutionContext"/>
+                <message_argument value="writeFile(String, String, String)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java" type="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment">
+        <filter id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
+                <message_argument value="registerGenmodel(GenModel)"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>
