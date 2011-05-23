@@ -110,7 +110,7 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 	
 	def unassignedCalledTokenRuleName(AbstractRule rule) '''get«rule.name»Token'''
 	
-	def defaultValue(AbstractElement ele, Set<AbstractElement> visited) {
+	def String defaultValue(AbstractElement ele, Set<AbstractElement> visited) {
 		switch(ele) {
 			case !visited.add(ele): ""
 			case ele.isOptionalCardinality(): ""

@@ -78,6 +78,10 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		grammar.getGrammarConstraints()
 	}
 	
+	def getResourceSet() {
+		grammar.eResource.resourceSet
+	}
+	
 	def getGrammars(IGrammarConstraintProvider$IConstraintElement ele) {
 		val result = <Grammar>newHashSet();
 		if(ele != null && ele.grammarElement != null) result.add(ele.grammarElement.grammar);
@@ -161,13 +165,13 @@ class AbstractSemanticSequencer extends GeneratedFile {
 		public void createSequence(EObject context, EObject semanticObject) {
 			«var pkgi = 0 »
 			«FOR pkg:accessedPackages /* ITERATOR i */»
-			«IF (pkgi = pkgi + 1) > 1 /*!i.firstIteration */»else «ENDIF»if(semanticObject.eClass().getEPackage() == «file.imported(pkg.getGenPackage().qualifiedPackageInterfaceName)».eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+			«IF (pkgi = pkgi + 1) > 1 /*!i.firstIteration */»else «ENDIF»if(semanticObject.eClass().getEPackage() == «file.imported(pkg.getGenPackage(resourceSet).qualifiedPackageInterfaceName)».eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 				«FOR type:pkg.accessedClasses»
-				case «type.genIntLiteral»:
+				case «type.getGenIntLiteral(resourceSet)»:
 					«var ctxi = 0»
 					«FOR ctx: type.accessedConstraints.entrySet /* ITERATOR j-  */»
 						«IF (ctxi = ctxi + 1) > 1 /*!j.firstIteration  */»else «ENDIF»if(«FOR c:ctx.value SEPARATOR " ||\n   "»context == grammarAccess.«c.gaAccessor»«ENDFOR») {
-							sequence_«ctx.key.name»(context, («file.imported(type.getGenClass().qualifiedInterfaceName)») semanticObject); 
+							sequence_«ctx.key.name»(context, («file.imported(type.getGenClass(resourceSet).qualifiedInterfaceName)») semanticObject); 
 							return; 
 						}
 					«ENDFOR»
@@ -189,21 +193,21 @@ class AbstractSemanticSequencer extends GeneratedFile {
 			«" *    "»«f.toString().replaceAll("\\n","\n *     ")»
 		«ENDFOR»
 		 */
-		protected void sequence_«c.name»(EObject context, «file.imported(c.type.getGenClass().qualifiedInterfaceName)» semanticObject) {
+		protected void sequence_«c.name»(EObject context, «file.imported(c.type.getGenClass(resourceSet).qualifiedInterfaceName)» semanticObject) {
 			«IF !newHashSet(grammar, null).contains(c.mostConcreteGrammar)»
 				superSequencer.createSequence(context, semanticObject);
 			«ELSEIF c.canGenerate()»
 				if(errorAcceptor != null) {
 					«FOR f:c.features.filter(e|e != null)»
-						if(transientValues.isValueTransient(semanticObject, «f.feature.genTypeLiteral») == «file.imported(typeof(ITransientValueService$ValueTransient))».YES)
-							errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, «f.feature.genTypeLiteral»));
+						if(transientValues.isValueTransient(semanticObject, «f.feature.getGenTypeLiteral(resourceSet)») == «file.imported(typeof(ITransientValueService$ValueTransient))».YES)
+							errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, «f.feature.getGenTypeLiteral(resourceSet)»));
 					«ENDFOR»
 				}
 				«file.imported(typeof(ISemanticNodeProvider$INodesForEObjectProvider))» nodes = createNodeProvider(semanticObject);
 				«file.imported(typeof(SequenceFeeder))» feeder = createSequencerFeeder(semanticObject, nodes);
 				«FOR f: if(c.body.featureInfo != null) newArrayList(c.body.featureInfo) else c.body.children.filter(e|e.featureInfo != null).map(e|e.featureInfo)»
 					«val assignment=f.assignments.get(0)»
-					feeder.accept(grammarAccess.«assignment.grammarElement.gaAccessor()», semanticObject.«f.feature.getGenFeature().getAccessor»());
+					feeder.accept(grammarAccess.«assignment.grammarElement.gaAccessor()», semanticObject.«f.feature.getGenFeature(resourceSet).getAccessor»());
 				«ENDFOR»
 				feeder.finish();
 			«ELSE»
