@@ -33,12 +33,12 @@ import org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment;
  */
 public class GenModelAccess {
 
-	public static GenClass getGenClass(EClass cls) {
-		return (GenClass) getGenClassifier(cls);
+	public static GenClass getGenClass(EClass cls, ResourceSet resourceSet) {
+		return (GenClass) getGenClassifier(cls, resourceSet);
 	}
 
-	public static GenClassifier getGenClassifier(EClassifier cls) {
-		GenPackage genPackage = getGenPackage(cls.getEPackage());
+	public static GenClassifier getGenClassifier(EClassifier cls, ResourceSet resourceSet) {
+		GenPackage genPackage = getGenPackage(cls.getEPackage(), resourceSet);
 		for (GenClassifier genCls : genPackage.getGenClassifiers())
 			if (cls.getName().equals(genCls.getEcoreClassifier().getName())) {
 				return genCls;
@@ -47,16 +47,16 @@ public class GenModelAccess {
 				+ genPackage.eResource().getURI());
 	}
 
-	public static GenDataType getGenDataType(EDataType dt) {
-		return (GenDataType) getGenClassifier(dt);
+	public static GenDataType getGenDataType(EDataType dt, ResourceSet resourceSet) {
+		return (GenDataType) getGenClassifier(dt, resourceSet);
 	}
 
-	public static GenEnum getGenEnum(EEnum en) {
-		return (GenEnum) getGenClassifier(en);
+	public static GenEnum getGenEnum(EEnum en, ResourceSet resourceSet) {
+		return (GenEnum) getGenClassifier(en, resourceSet);
 	}
 
-	public static GenFeature getGenFeature(EStructuralFeature feature) {
-		GenClass genCls = (GenClass) getGenClassifier(feature.getEContainingClass());
+	public static GenFeature getGenFeature(EStructuralFeature feature, ResourceSet resourceSet) {
+		GenClass genCls = (GenClass) getGenClassifier(feature.getEContainingClass(), resourceSet);
 		for (GenFeature genFeat : genCls.getGenFeatures())
 			if (feature.getName().equals(genFeat.getEcoreFeature().getName())) {
 				return genFeat;
@@ -65,18 +65,18 @@ public class GenModelAccess {
 				+ "' from GenModel" + genCls.eResource().getURI());
 	}
 
-	public static String getGenIntLiteral(EClass clazz, EStructuralFeature feature) {
-		GenFeature genFeature = getGenFeature(feature);
-		GenClass genClass = getGenClass(clazz);
+	public static String getGenIntLiteral(EClass clazz, EStructuralFeature feature, ResourceSet resourceSet) {
+		GenFeature genFeature = getGenFeature(feature, resourceSet);
+		GenClass genClass = getGenClass(clazz, resourceSet);
 		return genClass.getGenPackage().getPackageInterfaceName() + "." + genClass.getFeatureID(genFeature);
 	}
 
-	public static String getGenIntLiteral(EClassifier classifier) {
-		GenClassifier genClassifier = getGenClassifier(classifier);
+	public static String getGenIntLiteral(EClassifier classifier, ResourceSet resourceSet) {
+		GenClassifier genClassifier = getGenClassifier(classifier, resourceSet);
 		return genClassifier.getGenPackage().getPackageInterfaceName() + "." + genClassifier.getClassifierID();
 	}
 
-	public static GenPackage getGenPackage(EPackage pkg) {
+	public static GenPackage getGenPackage(EPackage pkg, ResourceSet resourceSet) {
 		URI genModelURI = EcorePlugin.getEPackageNsURIToGenModelLocationMap().get(pkg.getNsURI());
 		if (genModelURI == null) {
 			String from = pkg.eResource() != null ? " from " + pkg.eResource().getURI() : "";
@@ -87,7 +87,6 @@ public class GenModelAccess {
 			buf.append("If you have a *.genmodel-file, make sure to register it via StandaloneSetup.registerGenModelFile(String)");
 			throw new RuntimeException(buf.toString());
 		}
-		ResourceSet resourceSet = pkg.eResource().getResourceSet();
 		if (resourceSet == null)
 			throw new RuntimeException("There is no ResourceSet for EPackage '" + pkg.getNsURI() + "'. "
 					+ "Please make sure the EPackage has been loaded from a .ecore file "
@@ -106,19 +105,19 @@ public class GenModelAccess {
 		throw new RuntimeException("No GenPackage for NsURI " + pkg.getNsURI() + " found in " + genModelURI);
 	}
 
-	public static String getGenTypeLiteral(EClassifier classifier) {
-		GenClassifier genClassifier = getGenClassifier(classifier);
+	public static String getGenTypeLiteral(EClassifier classifier, ResourceSet resourceSet) {
+		GenClassifier genClassifier = getGenClassifier(classifier, resourceSet);
 		String pkg = genClassifier.getGenPackage().getPackageInterfaceName();
 		String id = genClassifier.getClassifierID();
 		return pkg + ".Literals." + id;
 	}
 
-	public static String getGenTypeLiteral(EPackage pkg) {
-		return getGenPackage(pkg).getPackageInterfaceName() + ".eINSTANCE";
+	public static String getGenTypeLiteral(EPackage pkg, ResourceSet resourceSet) {
+		return getGenPackage(pkg, resourceSet).getPackageInterfaceName() + ".eINSTANCE";
 	}
 
-	public static String getGenTypeLiteral(EStructuralFeature feature) {
-		GenFeature genFeature = getGenFeature(feature);
+	public static String getGenTypeLiteral(EStructuralFeature feature, ResourceSet resourceSet) {
+		GenFeature genFeature = getGenFeature(feature, resourceSet);
 		String pkg = genFeature.getGenPackage().getPackageInterfaceName();
 		String id = genFeature.getGenClass().getFeatureID(genFeature);
 		return pkg + ".Literals." + id;

@@ -279,7 +279,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 						&& gp.getEcorePackage().getNsURI().equals(pkg.getNsURI()))
 					found = true;
 			if (!found)
-				result.add(GenModelAccess.getGenPackage(pkg));
+				result.add(GenModelAccess.getGenPackage(pkg, existingGenModel.eResource().getResourceSet()));
 		}
 		Collections.sort(result, new Comparator<GenPackage>() {
 			public int compare(GenPackage o1, GenPackage o2) {

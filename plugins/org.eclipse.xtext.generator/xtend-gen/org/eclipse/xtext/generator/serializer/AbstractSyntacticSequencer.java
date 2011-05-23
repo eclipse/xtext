@@ -22,6 +22,7 @@ import org.eclipse.xtext.generator.serializer.SyntacticSequencerUtil;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.analysis.NfaToGrammar.AbstractElementAlias;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -262,8 +263,8 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
           }
         };
       List<AbstractRule> _sort = IterableExtensions.<AbstractRule>sort(_set, new Comparator<AbstractRule>() {
-          public int compare(AbstractRule arg0,AbstractRule arg1) {
-            return _function_4.apply(arg0,arg1);
+          public int compare(AbstractRule o1,AbstractRule o2) {
+            return _function_4.apply(o1,o2);
           }
       });
       _xblockexpression = (_sort);
@@ -280,8 +281,8 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     return _builder;
   }
   
-  public Object defaultValue(final AbstractElement ele, final Set<AbstractElement> visited) {
-    Object _switchResult = null;
+  public String defaultValue(final AbstractElement ele, final Set<AbstractElement> visited) {
+    String _switchResult = null;
     final AbstractElement ele_1 = ele;
     boolean matched = false;
     if (!matched) {
@@ -305,7 +306,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         matched=true;
         EList<AbstractElement> _elements = ele_2.getElements();
         AbstractElement _head = IterableExtensions.<AbstractElement>head(_elements);
-        Object _defaultValue = this.defaultValue(_head, visited);
+        String _defaultValue = this.defaultValue(_head, visited);
         _switchResult = _defaultValue;
       }
     }
@@ -314,13 +315,13 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         final Group ele_3 = (Group) ele_1;
         matched=true;
         EList<AbstractElement> _elements_1 = ele_3.getElements();
-        final Function1<AbstractElement,Object> _function = new Function1<AbstractElement,Object>() {
-            public Object apply(final AbstractElement e) {
-              Object _defaultValue_1 = AbstractSyntacticSequencer.this.defaultValue(e, visited);
+        final Function1<AbstractElement,String> _function = new Function1<AbstractElement,String>() {
+            public String apply(final AbstractElement e) {
+              String _defaultValue_1 = AbstractSyntacticSequencer.this.defaultValue(e, visited);
               return _defaultValue_1;
             }
           };
-        List<Object> _map = ListExtensions.<AbstractElement, Object>map(_elements_1, _function);
+        List<String> _map = ListExtensions.<AbstractElement, String>map(_elements_1, _function);
         String _join = IterableExtensions.join(_map);
         _switchResult = _join;
       }
@@ -339,7 +340,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
         matched=true;
         AbstractRule _rule = ele_5.getRule();
         AbstractElement _alternatives = _rule.getAlternatives();
-        Object _defaultValue_2 = this.defaultValue(_alternatives, visited);
+        String _defaultValue_2 = this.defaultValue(_alternatives, visited);
         _switchResult = _defaultValue_2;
       }
     }
@@ -400,11 +401,18 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     _builder.append("(RuleCall ruleCall, INode node) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
+    _builder.append("if (node != null)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return getTokenText(node);");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.append("return \"");
     AbstractElement _alternatives = rule.getAlternatives();
     HashSet<AbstractElement> _newHashSet = CollectionLiterals.<AbstractElement>newHashSet();
-    Object _defaultValue = this.defaultValue(_alternatives, _newHashSet);
-    _builder.append(_defaultValue, "	");
+    String _defaultValue = this.defaultValue(_alternatives, _newHashSet);
+    String _convertToJavaString = Strings.convertToJavaString(_defaultValue);
+    _builder.append(_convertToJavaString, "	");
     _builder.append("\";");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
