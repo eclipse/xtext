@@ -8,7 +8,7 @@
  *******************************************************************************/
 grammar org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage with org.eclipse.xtext.common.Terminals
 
-import "platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.ecore" as xtext
+import "http://www.eclipse.org/2008/Xtext" as xtext
 generate anotherSimpleTest "http://eclipse.org/xtext/tests/AnotherSimpleTest"
 
 Foo : 
