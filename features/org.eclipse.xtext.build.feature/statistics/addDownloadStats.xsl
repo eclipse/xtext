@@ -4,9 +4,7 @@
 	<xsl:param name="qualifier" />
 
 	<xsl:template match="/">
-		<xsl:processing-instruction name="artifactRepository">
-			version='1.1.0'
-		</xsl:processing-instruction>
+		<xsl:processing-instruction name="artifactRepository">version='1.1.0'</xsl:processing-instruction>
 		<xsl:apply-templates />
 	</xsl:template>
 
