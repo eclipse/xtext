@@ -243,10 +243,13 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	
 	@Override
 	public boolean isSynchronized(Object element) {
-		FileInfo info = (FileInfo) getElementInfo(element);
-		long modificationStamp = getModificationStamp(element);
-		if (info.fModificationStamp != modificationStamp) {
-			return false;
+		ElementInfo info2 = getElementInfo(element);
+		if (info2 instanceof FileInfo) {
+			FileInfo info = (FileInfo) getElementInfo(element);
+			long modificationStamp = getModificationStamp(element);
+			if (info.fModificationStamp != modificationStamp) {
+				return false;
+			}
 		}
 		return super.isSynchronized(element);
 	}
