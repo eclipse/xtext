@@ -17,5 +17,6 @@
 		<condition property="build.stable" value="true">
 			<matches string="${build.id}" pattern="[S|R](d)*" />
 		</condition>
+		<ant antfile="statistics/statistics.ant" target="addStatistic" inheritall="true" />
 	</target>
 </project>

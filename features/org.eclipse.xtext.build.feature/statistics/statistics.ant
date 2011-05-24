@@ -1,7 +1,7 @@
 <project name="P2 Download Statistics" default="addStatistic">
 	<target name="addStatistic">
 		<property name="repository.root" value="." />
-		<property name="qualifier" value="2.0.0" />
+		<property name="qualifier" value="-2.0.0" />
 		<echo>Append statistic for ${qualifier} information in ${repository.root}</echo>
 		<copy file="${repository.root}/artifacts.jar" tofile="artifacts.jar.backup" />
 		<unjar src="${repository.root}/artifacts.jar" dest="." />
