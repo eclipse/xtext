@@ -19,7 +19,7 @@ public class RichTextStartValueConverter extends AbstractRichTextValueConverter 
 
 	@Override
 	protected String getTrailingTerminal() {
-		return "«";
+		return "\u00AB";
 	}
 
 }

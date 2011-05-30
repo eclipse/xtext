@@ -63,7 +63,7 @@ public class Xtend2ProposalProvider extends AbstractXtend2ProposalProvider {
 	}
 	
 	protected void addGuillemotsProposal(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		acceptor.accept(new ConfigurableCompletionProposal("«»", context.getOffset(), context.getSelectedText().length(), 1));
+		acceptor.accept(new ConfigurableCompletionProposal("\u00AB\u00BB", context.getOffset(), context.getSelectedText().length(), 1));
 	}
 
 	public void completeInRichString(EObject model, RuleCall ruleCall, ContentAssistContext context,
@@ -72,7 +72,7 @@ public class Xtend2ProposalProvider extends AbstractXtend2ProposalProvider {
 		int offset = node.getOffset();
 		int length = node.getLength();
 		String currentNodeText = node.getText();
-		if (currentNodeText.startsWith("»") && offset + 1 <= context.getOffset()
+		if (currentNodeText.startsWith("\u00BB") && offset + 1 <= context.getOffset()
 				|| currentNodeText.startsWith("'''") && offset + 3 <= context.getOffset()) {
 			if (context.getOffset() > offset && context.getOffset() < offset+length)
 				addGuillemotsProposal(context, acceptor);

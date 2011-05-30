@@ -14,12 +14,12 @@ public class RichTextInBetweenValueConverter extends AbstractRichTextValueConver
 
 	@Override
 	protected String getLeadingTerminal() {
-		return "»";
+		return "\u00BB";
 	}
 
 	@Override
 	protected String getTrailingTerminal() {
-		return "«";
+		return "\u00AB";
 	}
 
 }
