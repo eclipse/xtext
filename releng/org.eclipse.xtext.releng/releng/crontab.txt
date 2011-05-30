@@ -1,0 +1,9 @@
+### Head ###
+## Mwe
+7 2 * * * ant -Dbuild.root=/shared/jobs/MWE-nightly-HEAD/lastSuccessful/ -f /shared/jobs/MWE-nightly-HEAD/lastSuccessful/archive/promoter.ant &> logs/mwe-promo.txt
+## Xpand
+38 2 * * * ant -Dbuild.root=/shared/jobs/Xpand-nightly-HEAD/lastSuccessful/ -f /shared/jobs/Xpand-nightly-HEAD/lastSuccessful/archive/promoter.ant &> logs/xpand-promo.txt
+## Xtext
+9 3 * * * ant -Dbuild.root=/shared/jobs/Xtext-nightly-HEAD/lastSuccessful/ -f /shared/jobs/Xtext-nightly-HEAD/lastSuccessful/archive/promoter.ant &> logs/xtext-promo.txt
+## MWE2 Lang
+37 3 * * * ant -Dbuild.root=/shared/jobs/MWE-Language-nightly-HEAD/lastSuccessful/ -f /shared/jobs/MWE-Language-nightly-HEAD/lastSuccessful/archive/promoter.ant &> logs/mwe2lang-promo.txt
