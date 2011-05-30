@@ -14,11 +14,11 @@ DONE JK 050-heading-runtime.xdoc
 DONE JK 060-validation.xdoc
 DONE JK 070-linking.xdoc
 DONE JK 080-scoping.xdoc
-SZ 090-valueconverter.xdoc
-SZ 100-serialization.xdoc
-SZ 105-formatting.xdoc
-SZ 110-fragmentprovider.xdoc
-SZ 115-encoding.xdoc
+DONE SZ 090-valueconverter.xdoc
+DONE SZ 100-serialization.xdoc
+DONE SZ 105-formatting.xdoc
+DONE SZ 110-fragmentprovider.xdoc
+DONE SZ 115-encoding.xdoc
 118-mwe-in-depth.xdoc
 120-heading-UI.xdoc
 130-managing-concurrency.xdoc

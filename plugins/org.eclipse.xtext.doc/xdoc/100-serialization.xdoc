@@ -14,45 +14,46 @@ ol[
 	item[Associating comments with semantic objects. This is done by the
 		 ref:commentassociater[comment associator].]
 	item[Associating existing nodes from the node model with tokens from the token stream.]
-	item[ref:hiddentokenmerger[Merging existing whitespace] and line-wraps into to token stream.]
+	item[ref:hiddentokenmerger[Merging existing whitespace] and line-wraps into the token stream.]
 	item[Adding further needed whitespace or replacing all whitespace using a 
 		ref:formatting[formatter].]
 ]
 
 Serialization is invoked when calling 
-codeRef[org.eclipse.xtext.resource.XtextResource].save(...). Furthermore, 
+codeRef[org.eclipse.xtext.resource.XtextResource].save(...). Furthermore, the
 codeRef[org.eclipse.xtext.parsetree.reconstr.Serializer] provides resource-independent 
-support for serialization. Serialization is e[not] called when a textual editors contents is saved to disk. 
-Another situation that triggers serialization is applying ref:quickfixes[Quick Fixes] with semantic modifications.
-
+support for serialization. Another situation that triggers serialization is applying ref:quickfixes[Quick Fixes] 
+with semantic modifications. Serialization is e[not] called when a textual editors contents is saved to disk.
 
 section2:serializationcontract[The Contract]
 
-The contract of serialization says that a model that is serialized to its textual representation 
-and then loaded (parsed) again should yield a loaded model that equals the original model. Please be 
+The contract of serialization says that a model which is saved (serialized) to its textual representation 
+and then loaded (parsed) again yields a new model that is equal to the original model. Please be 
 aware that this does e[not] imply, that loading a textual representation and serializing it back produces 
-identical textual representations. For example, this is the case when a default value is used in a 
-textual representation and the assignment is optional. Another example is:
+identical textual representations. However, the serialization algorithm tries to restore as much information
+as possible. That is, if the parsed model was not modified in-memory, the serialized output will usually
+be equal to the previous input. Unfortunately, this cannot be ensured for each and every case. A use
+case where is is hardly possible, is shown in the following example:
 
 code[Xtext][MyRule:
   (xval+=ID | yval+=INT)*;
-  ]
+]
 
-e[MyRule] in this example reads e[ID]- and e[INT]-elements which may occur in an arbitrary order in 
+The given e[MyRule] reads e[ID]- and e[INT]-elements which may occur in an arbitrary order in 
 the textual representation. However, when serializing the model all e[ID]-elements will be written 
 first and then all e[INT]-elements. If the order is important it can be preserved by storing all elements 
-in the same list - which may require wrapping the e[ID]- and e[INT]-elements into objects.
-
+in the same list - which may require wrapping the e[ID]- and e[INT]-elements into other objects.
 
 section2[Roles of the Semantic Model and the Node Model During Serialization]
 
-A serialized document represents the state of the semantic model. However, if there is a node model available (i.e. the semantic model has been created by the parser), the serializer
+A serialized document represents the state of the semantic model. However, if there is a node model 
+available (i.e. the semantic model has been created by the parser), the serializer
 ul[
 	item[preserves ref:hiddentokenmerger[existing whitespaces] from the node model.]	
 	item[preserves ref:commentassociater[existing comments] from the node model.]
 	item[preserves the representation of cross-references: If a cross-referenced object can be 
-		 identified by multiple names (i.e. scoping returns multiple EObjectDescriptions for the 
-		 same object), the serializer tries to keep the previously used name.]
+		 identified by multiple names (i.e. scoping returns multiple codeRef[org.eclipse.xtext.resource.IEObjectDescription]s for the 
+		 same object), the serializer tries to keep the name that was used in the input file.]
 	item[preserves the representation of values: For values handled by the 
 		ref:valueconverter[value converter], the serializer checks whether the textual representation 
 		converted to a value equals the value from the semantic model. If that is true, the textual 
@@ -187,19 +188,18 @@ Valid models for this example are e[contents 1 item] or e[contents 5 items]. How
 in the semantic model whether the keyword e[item] or e[items] has been parsed. This is due to the fact 
 that the rule call e[Plural] is unassigned. However, the ref:parsetreeconstructor[parse tree constructor] 
 needs to decide which value to write during serialization. This decision can be be made by customizing 
-the e[IValueSerializer.serializeUnassignedValue(EObject, RuleCall, AbstractNode)].  
-
+the codeRef[org.eclipse.xtext.parsetree.reconstr.ITokenSerializer$IValueSerializer]code[Java][.serializeUnassignedValue(EObject, RuleCall, AbstractNode)].
 
 section2:crossreferenceserializer[Cross-Reference Serializer]
 
 The cross-reference serializer specifies which values are to be written to the textual representation 
 for cross-references. This behavior can be customized by implementing 
-e[ICrossReferenceSerializer]. 
-The default implementation delegates to various other services such as the e[IScopeProvider] or the 
-e[LinkingHelper] each of which may be the better place for customization.
+codeRef[org.eclipse.xtext.parsetree.reconstr.ITokenSerializer$ICrossReferenceSerializer]. 
+The default implementation delegates to various other services such as the codeRef[org.eclipse.xtext.scoping.IScopeProvider] or the 
+codeRef[org.eclipse.xtext.linking.impl.LinkingHelper] each of which may be the better place for customization.
 
 
-section2:hiddentokenmerger[Merge Whitespaces]
+section2:hiddentokenmerger[Merge Whitespace]
 
 After the ref:parsetreeconstructor[parse tree constructor] has done its job to create a stream of 
 tokens which are to be written to the textual representation, and the ref:commentassociater[comment associator] 
@@ -214,13 +214,15 @@ section2:tokenstream[Token Stream]
 
 The ref:parsetreeconstructor[parse tree constructor] and the ref:formatting[formatter] use an 
 codeRef[org.eclipse.xtext.parsetree.reconstr.ITokenStream] for their output, and the 
-latter for its input as well. This makes them chainable. Token streams can be converted to a e[String] 
+latter for its input as well. This allows for chaining the two components. Token streams can be converted to a codeRef[java.lang.String] 
 using the codeRef[org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer] and to 
-a e[Writer] using the codeRef[org.eclipse.xtext.parsetree.reconstr.impl.WriterTokenStream].
+a codeRef[java.io.Writer] using the codeRef[org.eclipse.xtext.parsetree.reconstr.impl.WriterTokenStream].
 
-code[Java][public interface ITokenStream {]
+code[Java][
+public interface ITokenStream {
 
   void flush() throws IOException;
-  void writeHidden(EObject grammarElement, String value) throws IOException;
-  void writeSemantic(EObject grammarElement, String value) throws IOException;
+  void writeHidden(EObject grammarElement, String value);
+  void writeSemantic(EObject grammarElement, String value);
 }
+]

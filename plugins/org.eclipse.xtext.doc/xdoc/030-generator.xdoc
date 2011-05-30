@@ -211,7 +211,7 @@ tr[td[codeRef[org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragmen
 tr[td[codeRef[org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment]]td[Model-to-text serialization]td[ref:serialization[Serialization]]]
 tr[td[codeRef[org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment]]td[Index-based scoping]td[ref:index_based[Index-based namespace scoping]]]
 tr[td[codeRef[org.eclipse.xtext.generator.validation.JavaValidatorFragment]]td[Model validation]td[ref:custom_validation[Model validation]]]
-tr[td[codeRef[org.eclipse.xtext.generator.formatting.FormatterFragment]]td[Code formatter]td[ref:declarativeformatter[Declarative formatter]]]
+tr[td[codeRef[org.eclipse.xtext.generator.formatting.FormatterFragment]]td[Code formatter]td[ref:formatting[Code formatter]]]
 tr[td[codeRef[org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment]]td[Label provider]td[ref:labelProvider[Label provider]]]
 tr[td[codeRef[org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment]]td[Outline view configuration]td[ref:outline[Outline]]]
 tr[td[codeRef[org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment]]td[Java-based content assist]td[ref:contentAssist[Content assist]]]

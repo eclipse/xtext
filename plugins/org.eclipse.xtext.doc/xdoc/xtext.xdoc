@@ -30,7 +30,8 @@ codelanguage-def[MWE2][module, var, auto-inject, import, true, false]
 
 codelanguage-def[Xpand][
 	IMPORT, EXTENSION, FILE, ENDFILE, DEFINE, ENDDEFINE, FOR, ENDFOR,
-	FOREACH, ENDFOREACH, AS, SEPARATOR, ITERATOR, EXPAND, REM, ENDREM, PROTECT, ENDPROTECT, this
+	FOREACH, ENDFOREACH, AS, SEPARATOR, ITERATOR, EXPAND, REM, ENDREM, PROTECT, ENDPROTECT, this,
+	IF, ENDIF, ELSE, null
 ]
 
 codelanguage-def[Xtend][

@@ -12,18 +12,16 @@ ul[
 	item[The codeRef[org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter] simply writes one 
 		whitespace between all tokens.]
 	item[The codeRef[org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter] allows advanced 
-		configuration using a codeRef[org.eclipse.xtext.formatting.impl.FormattingConfig]. Both are 
-		explained in the ref:declarativeformatter[next chapter].]
+		configuration using a codeRef[org.eclipse.xtext.formatting.impl.FormattingConfig]. Both are explained
+		below.]
 ]
-
-
-section2:declarativeformatter[Declarative Formatter]
 
 A declarative formatter can be implemented by sub-classing 
 codeRef[org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter], as shown in 
 the following example:
 
-code[Java][public class ExampleFormatter extends AbstractDeclarativeFormatter {
+code[Java][
+public class ExampleFormatter extends AbstractDeclarativeFormatter {
 
   @Override
   protected void configureFormatting(FormattingConfig c) {
@@ -66,26 +64,23 @@ code[Java][public class ExampleFormatter extends AbstractDeclarativeFormatter {
 }
 ]
 
-The formatter has to implement the method e[configureFormatting(...)] which declaratively sets up 
+The formatter has to implement the method code[Java][configureFormatting(...)] which declaratively sets up 
 a codeRef[org.eclipse.xtext.formatting.impl.FormattingConfig].
 
 The codeRef[org.eclipse.xtext.formatting.impl.FormattingConfig] consist of general 
 settings and a set of formatting instructions:
 
 
-section3[General FormattingConfig Settings]
+section2[General FormattingConfig Settings]
 
-ul[
-	item[e[setAutoLinewrap(int)] defines the amount of characters after which a line-break should 
-		be dynamically inserted between two tokens. The instructions e[setNoLinewrap().???()], 
-		e[setNoSpace().???()] and e[setSpace(space).???()] suppress this behavior locally. 
-		The default is 80.]
-]
+code[Java][setAutoLinewrap(int)] defines the amount of characters after which a line-break should 
+be dynamically inserted between two tokens. The instructions code[Java][setNoLinewrap().???()], 
+code[Java][setNoSpace().???()] and code[Java][setSpace(space).???()] suppress this behavior locally. 
+The default is 80.
 
+section2[FormattingConfig Instructions]
 
-section3[FormattingConfig Instructions]
-
-Per default, the ref:declarativeformatter[declarative formatter] inserts one whitespace between two 
+Per default, the declarative formatter inserts one whitespace between two 
 tokens. Instructions can be used to specify a different behavior. They consist of two parts: e[When] 
 to apply the instruction and e[what] to do.
 
@@ -93,17 +88,17 @@ To understand e[when] an instruction is applied think of a stream of tokens wher
 associated with the corresponding grammar element. The instructions are matched against these grammar 
 elements. The following matching criteria exist:
 ul[
-	item[e[after(ele)]: The instruction is applied after the grammar element e[ele] has been matched. 
-		For example, if your grammar uses the keyword ";" to end lines, this can instruct the formatter 
+	item[code[Java][after(ele)]: The instruction is applied after the grammar element e[ele] has been matched. 
+		For example, if your grammar uses the keyword code[Xtext][";"] to end lines, this can instruct the formatter 
 		to insert a line break after the semicolon.]
-	item[e[before(ele)]: The instruction is executed before the matched element. For example, if your 
-		grammar contains lists which separate their values with the keyword ",", you can instruct the 
+	item[code[Java][before(ele)]: The instruction is executed before the matched element. For example, if your 
+		grammar contains lists which separate their values with the keyword code[Xtext][","], you can instruct the 
 		formatter to suppress the whitespace before the comma.]
-	item[e[around(ele)]: This is the same as e[before(ele)] combined with  e[after(ele)].]
-	item[e[between(ele1, ele2)]: This matches if e[ele2] directly follows e[ele1] in the document. 
+	item[code[Java][around(ele)]: This is the same as code[Java][before(ele)] combined with code[Java][after(ele)].]
+	item[code[Java][between(ele1, ele2)]: This matches if e[ele2] directly follows e[ele1] in the document. 
 		There may be no other tokens in between e[ele1] and e[ele2].]
-	item[e[bounds(ele1, ele2)]: This is the same as e[after(ele1)] combined with  e[before(ele2)].]
-	item[e[range(ele1, ele2)]: The rule is enabled when e[ele1] is matched, and disabled when e[ele2] 
+	item[code[Java][bounds(ele1, ele2)]: This is the same as code[Java][after(ele1)] combined with  code[Java][before(ele2)].]
+	item[code[Java][range(ele1, ele2)]: The rule is enabled when e[ele1] is matched, and disabled when e[ele2] 
 		is matched. Thereby, the rule is active for the complete region which is surrounded by e[ele1] 
 		and e[ele2].]
 ]
@@ -112,45 +107,46 @@ The term e[tokens] is used slightly different here compared to the parser/lexer.
 keyword or the string that is matched by a terminal rule, data type rule or cross-reference. In the 
 terminology of the lexer a data type rule can match a composition of multiple tokens.
 
-The parameter e[ele] can be a grammar's e[AbstractElement] or a grammar's e[AbstractRule]. All grammar 
+The parameter e[ele] can be a grammar's codeRef[org.eclipse.xtext.AbstractElement] or a grammar's 
+codeRef[org.eclipse.xtext.AbstractRule]. All grammar 
 rules and almost all abstract elements can be matched. This includes rule calls, parser rules, groups 
-and alternatives. The semantic of e[before(ele)], e[after(ele)], etc. for rule calls and parser rules is 
+and alternatives. The semantic of code[Java][before(ele)], code[Java][after(ele)], etc. for rule calls and parser rules is 
 identical to when the parser would "pass" this part of the grammar. The stack of called rules is taken 
 into account. The following abstract elements can e[not] have assigned formatting instructions:
 ul[
-	item[Actions. E.g. e[{MyAction}] or e[{MyAction.myFeature=current}].]
+	item[Actions. E.g. code[Xtext][{MyAction}] or code[Xtext][{MyAction.myFeature=current}].]
 	item[Grammar elements nested in data type rules. This is due to to the fact that tokens matched 
 		by a data type rule are treated as atomic by the serializer. To format these tokens, please 
 		implement a ref:valueconverter[ValueConverter]. ]
-	item[Grammar elements nested in e[CrossReferences].]
+	item[Grammar elements nested in codeRef[org.eclipse.xtext.CrossReference].]
 ]
 
 After having explained how rules can be activated, this is what they can do:
 ul[
-	item[e[setIndentationIncrement()] increments indentation by one unit at this position. Whether 
+	item[code[Java][setIndentationIncrement()] increments indentation by one unit at this position. Whether 
 		one unit consists of one tab-character or spaces is defined by 
 		codeRef[org.eclipse.xtext.formatting.IIndentationInformation]. The default implementation 
 		consults Eclipse's e[PreferenceStore].]
-	item[e[setIndentationDecrement()] decrements indentation by one unit.]
-	item[e[setLinewrap()]: Inserts a line-wrap at this position.]
-	item[e[setLinewrap(int count)]: Inserts e[count] numbers of line-wrap at this position.]
-	item[e[setLinewrap(int min, int default, int max)]: If the amount of line-wraps that have been 
+	item[code[Java][setIndentationDecrement()] decrements indentation by one unit.]
+	item[code[Java][setLinewrap()]: Inserts a line-wrap at this position.]
+	item[code[Java][setLinewrap(int count)]: Inserts e[count] numbers of line-wrap at this position.]
+	item[code[Java][setLinewrap(int min, int default, int max)]: If the amount of line-wraps that have been 
 		at this position before formatting can be determined (i.g. when a node model is present), 
-		then the amount of of line-wraps is adjusted to be within the interval \[_min_, e[max]\] 
+		then the amount of of line-wraps is adjusted to be within the interval e[min], e[max] 
 		and is then reused. In all other cases e[default] line-wraps are inserted. Example: 
-		e[setLinewrap(0, 0, 1)] will preserve existing line-wraps, but won't allow more than one 
+		code[Java][setLinewrap(0, 0, 1)] will preserve existing line-wraps, but won't allow more than one 
 		line-wrap between two tokens.]
-	item[e[setNoLinewrap()]: Suppresses automatic line wrap, which may occur when the line's length 
+	item[code[Java][setNoLinewrap()]: Suppresses automatic line wrap, which may occur when the line's length 
 		exceeds the defined limit.]
-	item[e[setSpace(String space)]: Inserts the string e[space] at this position. If you use this 
+	item[code[Java][setSpace(String space)]: Inserts the string e[space] at this position. If you use this 
 		to insert something else than whitespace, tabs or newlines, a small puppy will die somewhere 
 		in this world.]
-	item[e[setNoSpace()]: Suppresses the whitespace between tokens at this position. Be aware that 
+	item[code[Java][setNoSpace()]: Suppresses the whitespace between tokens at this position. Be aware that 
 		between some tokens a whitespace is required to maintain a valid concrete syntax.]
 ]
 
 
-section3[Grammar Element Finders]
+section2[Grammar Element Finders]
 
 Sometimes, if a grammar contains many similar elements for which the same formatting instructions ought 
 to apply, it can be tedious to specify them for each grammar element individually. The 
@@ -158,8 +154,8 @@ codeRef[org.eclipse.xtext.IGrammarAccess] provides convenience methods for this.
 find methods are available for the grammar and for each parser rule.
 
 ul[
-	item[e[findKeywords(String... keywords)] returns all keywords that equal one of the parameters.]
-	item[e[findKeywordPairs(String leftKw, String rightKw)]: returns tuples of keywords from the same 
-		grammar rule. Pairs are matched nested and sequentially.  Example: for e[Rule: '(' name=ID ('(' foo=ID ')') ')' | '(' bar=ID ')'] 
-		e[findKeywordPairs("(", ")")] returns three pairs.]
+	item[code[Java][findKeywords(String... keywords)] returns all keywords that equal one of the parameters.]
+	item[code[Java][findKeywordPairs(String leftKw, String rightKw)]: returns tuples of keywords from the same 
+		grammar rule. Pairs are matched nested and sequentially.  Example: for code[Xtext][Rule: '(' name=ID ('(' foo=ID ')') ')' | '(' bar=ID ')'] 
+		code[Java][findKeywordPairs("(", ")")] returns three pairs.]
 ]

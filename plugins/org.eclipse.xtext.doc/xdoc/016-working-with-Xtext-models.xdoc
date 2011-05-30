@@ -17,10 +17,12 @@ section2:resource[Loading a e[Resource]]
 EMF models can be persisted by the means of a so called e[Resource]. Xtext languages implement the e[Resource] interface which is why you can use the EMF API to
 load a model into memory (and also save them):
 
-code[Java][new DomainmodelStandaloneSetup().createInjectorAndDoEMFRegistration();
+code[Java][
+new DomainmodelStandaloneSetup().createInjectorAndDoEMFRegistration();
 
 ResourceSet rs = new ResourceSetImpl();
-Resource resource = rs.getResource(URI.createURI("./mymodel.dmodel"), true);
+Resource resource = rs.getResource(
+  URI.createURI("./mymodel.dmodel"), true);
 EObject eobject = resource.getContents().get(0);
  ]
 
@@ -42,7 +44,9 @@ This is done by appending a so called e[URI fragment] to the URI.
 
 The second parameter denotes whether the resource should automatically be loaded if it wasn't already before. Alternatively we could have written
 
-code[Java][ Resource resource = rs.getResource(URI.createURI("./mymodel.dmodel"), false);
+code[Java][
+Resource resource = rs.getResource(
+  URI.createURI("./mymodel.dmodel"), false);
 resource.load(null);
 ]
 
