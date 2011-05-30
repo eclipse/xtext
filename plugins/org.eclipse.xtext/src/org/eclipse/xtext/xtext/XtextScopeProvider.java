@@ -114,7 +114,7 @@ public class XtextScopeProvider extends AbstractScopeProvider {
 					+ resource.getContents().size() + " but expected: >= 1");
 		final EObject firstContent = resource.getContents().get(0);
 		if (!(firstContent instanceof Grammar))
-			throw new IllegalArgumentException("resource does not contain a grammar, but: " + firstContent);
+			return IScope.NULLSCOPE;
 		return createScope((Grammar) firstContent, type);
 	}
 

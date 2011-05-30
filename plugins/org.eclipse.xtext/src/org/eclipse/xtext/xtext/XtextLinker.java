@@ -209,19 +209,23 @@ public class XtextLinker extends Linker {
 
 	@Override
 	public void linkModel(EObject model, IDiagnosticConsumer consumer) {
-		final Xtext2EcoreTransformer transformer = createTransformer((Grammar) model, consumer);
-		//TODO duplicate
-		transformer.removeGeneratedPackages();
-		super.linkModel(model, consumer);
-		updateOverriddenRules((Grammar) model);
-		try {
-			transformer.transform();
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-			consumer.consume(new ExceptionDiagnostic(e), Severity.ERROR);
+		if (model instanceof Grammar) {
+			final Xtext2EcoreTransformer transformer = createTransformer((Grammar) model, consumer);
+			//TODO duplicate
+			transformer.removeGeneratedPackages();
+			super.linkModel(model, consumer);
+			updateOverriddenRules((Grammar) model);
+			try {
+				transformer.transform();
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+				consumer.consume(new ExceptionDiagnostic(e), Severity.ERROR);
+			}
+			if (!model.eResource().eAdapters().contains(packageRemover))
+				model.eResource().eAdapters().add(packageRemover);
+		} else {
+			super.linkModel(model, consumer);
 		}
-		if (!model.eResource().eAdapters().contains(packageRemover))
-			model.eResource().eAdapters().add(packageRemover);
 	}
 
 	@Inject
