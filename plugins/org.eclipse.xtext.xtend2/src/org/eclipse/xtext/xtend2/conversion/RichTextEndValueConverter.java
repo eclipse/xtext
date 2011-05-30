@@ -14,7 +14,7 @@ public class RichTextEndValueConverter extends AbstractRichTextValueConverter {
 
 	@Override
 	protected String getLeadingTerminal() {
-		return "»";
+		return "\u00BB";
 	}
 
 	@Override

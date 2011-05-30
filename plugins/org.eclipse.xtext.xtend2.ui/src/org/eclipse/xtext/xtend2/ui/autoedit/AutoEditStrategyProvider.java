@@ -46,9 +46,9 @@ public class AutoEditStrategyProvider extends DefaultAutoEditStrategyProvider {
 		acceptor.accept(partitionInsert.newInstance("'''", "'''"), IDocument.DEFAULT_CONTENT_TYPE);
 		acceptor.accept(richStringPartitionEndSkippingEditStrategy.get(), TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION);
 		acceptor.accept(partitionInsert.newInstance("\"","\""), TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION);
-		acceptor.accept(partitionInsert.newInstance("«","»"), TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION);
-		acceptor.accept(partitionDeletion.newInstance("«","»"), TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION);
-		acceptor.accept(singleLineTerminals.newInstance("«","»"), IDocument.DEFAULT_CONTENT_TYPE);
+		acceptor.accept(partitionInsert.newInstance("\u00AB","\u00BB"), TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION);
+		acceptor.accept(partitionDeletion.newInstance("\u00AB","\u00BB"), TokenTypeToPartitionMapper.RICH_STRING_LITERAL_PARTITION);
+		acceptor.accept(singleLineTerminals.newInstance("\u00AB","\u00BB"), IDocument.DEFAULT_CONTENT_TYPE);
 		super.configureStringLiteral(acceptor);
 	}
 	

@@ -43,7 +43,7 @@ public class Xtend2DoubleClickStrategyProvider extends DoubleClickStrategyProvid
 						trimRight = 3;
 					} else if (content.endsWith("''")) {
 						trimRight = 2;
-					} else if (content.endsWith("'") || content.endsWith("«")) {
+					} else if (content.endsWith("'") || content.endsWith("\u00AB")) {
 						trimRight = 1;
 					}
 					return new Region(completePartition.getOffset() + trimLeft, completePartition.getLength() - trimLeft - trimRight);

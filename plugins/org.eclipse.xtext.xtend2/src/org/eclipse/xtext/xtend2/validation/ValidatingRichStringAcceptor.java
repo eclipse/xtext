@@ -66,7 +66,7 @@ public class ValidatingRichStringAcceptor extends AbstractRichStringPartAcceptor
 					lastOffsetOfLiteral = currentOffset + node.getLength() - 3;
 				} else if (nodeText.endsWith("''")) {
 					lastOffsetOfLiteral = currentOffset + node.getLength() - 2;
-				} else if (nodeText.endsWith("'") || nodeText.endsWith("«")) {
+				} else if (nodeText.endsWith("'") || nodeText.endsWith("\u00AB")) {
 					lastOffsetOfLiteral = currentOffset + node.getLength() - 1;
 				}
 				if (nodeText.charAt(0) == '\'') {

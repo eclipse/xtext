@@ -40,8 +40,8 @@ public abstract class AbstractRichTextValueConverter extends AbstractLexerBasedC
 	@Override
 	protected void assertValidValue(String value) {
 		super.assertValidValue(value);
-		if (value.indexOf('«') >= 0) {
-			throw new ValueConverterException("Rich string may not contain \"«\".", null, null);
+		if (value.indexOf('\u00AB') >= 0) {
+			throw new ValueConverterException("Rich string may not contain \"\u00AB\".", null, null);
 		}
 		if (value.indexOf("'''") >= 0) {
 			throw new ValueConverterException("Rich string may not contain \"'''\".", null, null);
