@@ -7,47 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.codetemplates.generator;
 
-import java.util.Set;
-
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.generator.AbstractGeneratorFragment;
-import org.eclipse.xtext.generator.BindFactory;
-import org.eclipse.xtext.generator.Binding;
-import org.eclipse.xtext.generator.Naming;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @deprecated use {@link org.eclipse.xtext.ui.generator.templates.CodetemplatesGeneratorFragment} instead.
  */
-public class CodetemplatesGeneratorFragment extends AbstractGeneratorFragment {
+@Deprecated
+public class CodetemplatesGeneratorFragment extends org.eclipse.xtext.ui.generator.templates.CodetemplatesGeneratorFragment {
 	
 	@Override
-	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
-		return new BindFactory()
-			.addTypeToProviderInstance("org.eclipse.xtext.ui.codetemplates.ui.preferences.TemplatesLanguageConfiguration", 
-				"org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator.getTemplatesLanguageConfigurationProvider()")
-			.addTypeToProviderInstance("org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistry", 
-				"org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator.getLanguageRegistry()")
-			.addTypeToTypeEagerSingleton("org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistrar",
-				"org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistrar")
-			.addTypeToType("org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage", 
-				"org.eclipse.xtext.ui.codetemplates.ui.preferences.AdvancedTemplatesPreferencePage")
-			.addTypeToType("org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialContentAssistParser",
-				getPartialContentAssistParser(grammar, getNaming()))
-			.getBindings();
-	}
-	
-	@Override
-	public String[] getRequiredBundlesUi(Grammar grammar) {
-		return new String[] { "org.eclipse.xtext.ui.codetemplates.ui" };
-	}
-	
-	public static String getPartialContentAssistParser(Grammar grammar, Naming naming) {
-		return naming.basePackageUi(grammar) + ".contentassist.antlr.Partial" + GrammarUtil.getName(grammar) + "ContentAssistParser";
-	}
-	
-	public static String getContentAssistParser(Grammar grammar, Naming naming) {
-		return naming.basePackageUi(grammar) + ".contentassist.antlr." + GrammarUtil.getName(grammar) + "Parser";
+	protected String getTemplate() {
+		return org.eclipse.xtext.ui.generator.templates.CodetemplatesGeneratorFragment.class.getName().replaceAll("\\.", "::");
 	}
 	
 }

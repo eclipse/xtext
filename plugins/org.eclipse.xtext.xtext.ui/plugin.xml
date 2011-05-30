@@ -286,7 +286,7 @@
 			fragment = xbase.XbaseGeneratorFragment {}
 			
 			// provides a preference page for template proposals 
-			fragment = org.eclipse.xtext.ui.codetemplates.generator.CodetemplatesGeneratorFragment {}
+			fragment = templates.CodetemplatesGeneratorFragment {}
 
 			// rename refactoring
             // fragment = refactoring.RefactorElementNameFragment {}
@@ -417,7 +417,7 @@
             fragment = xbase.XbaseGeneratorFragment {}
 
             // provides a preference page for template proposals
-            fragment = org.eclipse.xtext.ui.codetemplates.generator.CodetemplatesGeneratorFragment {}
+            fragment = templates.CodetemplatesGeneratorFragment {}
 
             // rename refactoring
             fragment = refactoring.RefactorElementNameFragment {}
