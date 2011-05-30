@@ -247,7 +247,21 @@ public class Xtend2Compiler extends XbaseCompiler {
 			a.decreaseIndentation().append("\n} else ");
 		}
 		a.append("{").increaseIndentation();
-		a.append("\nthrow new IllegalArgumentException();");
+		// TODO use import for java.util.Arrays
+		a.append("\n");
+		a.increaseIndentation();
+		a.append("throw new IllegalArgumentException(\"Unhandled parameter types: \" +\njava.util.Arrays.<Object>asList(");
+		Iterator<JvmFormalParameter> iterator = dispatchOperation.getParameters().iterator();
+		while(iterator.hasNext()) {
+			JvmFormalParameter parameter = iterator.next();
+			final String name = getVarName(parameter, a);
+			a.append(name);
+			if (iterator.hasNext()) {
+				a.append(", ");
+			}
+		}
+		a.append(").toString());");
+		a.decreaseIndentation();
 		a.decreaseIndentation().append("\n}");
 		a.decreaseIndentation().append("\n}");
 		a.closeScope();
