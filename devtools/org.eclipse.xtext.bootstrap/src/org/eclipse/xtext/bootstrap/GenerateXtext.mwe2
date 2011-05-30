@@ -58,7 +58,8 @@ Workflow {
 			fragment = compare.CompareFragment {
 				fileExtensions = file.extensions
 			}
-			fragment= refactoring.RefactorElementNameFragment {} 
+			fragment = refactoring.RefactorElementNameFragment {}
+			fragment = templates.CodetemplatesGeneratorFragment {} 
 		}
 	}
 

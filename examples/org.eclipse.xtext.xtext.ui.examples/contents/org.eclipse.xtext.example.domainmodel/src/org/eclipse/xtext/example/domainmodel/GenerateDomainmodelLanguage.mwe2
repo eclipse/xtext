@@ -118,7 +118,7 @@ Workflow {
 				generateMwe = false
 			}
 			
-			fragment = org.eclipse.xtext.ui.codetemplates.generator.CodetemplatesGeneratorFragment {}
+			fragment = templates.CodetemplatesGeneratorFragment {}
 		}
 	}
 }

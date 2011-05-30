@@ -173,8 +173,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 				"org.eclipse.xtext.generator;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.emf.codegen.ecore;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.emf.mwe.utils;resolution:=optional", //$NON-NLS-1$
-				"org.eclipse.emf.mwe2.launch;resolution:=optional", //$NON-NLS-1$
-				"org.eclipse.xtext.ui.codetemplates;resolution:=optional"); //$NON-NLS-1$
+				"org.eclipse.emf.mwe2.launch;resolution:=optional"); //$NON-NLS-1$
 
 		String[] bundles = getXtextProjectInfo().getWizardContribution().getRequiredBundles();
 		for (String bundleId : bundles) {

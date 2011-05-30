@@ -113,27 +113,27 @@ public abstract class AbstractCodetemplatesUiModule extends DefaultUiModule {
 		binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.ui.codetemplates.ui.contentassist.CodetemplatesContentAssistLexer.class);
 	}
 
-	// contributed by org.eclipse.xtext.ui.codetemplates.generator.CodetemplatesGeneratorFragment
+	// contributed by org.eclipse.xtext.ui.generator.templates.CodetemplatesGeneratorFragment
 	public com.google.inject.Provider<org.eclipse.xtext.ui.codetemplates.ui.preferences.TemplatesLanguageConfiguration> provideTemplatesLanguageConfiguration() {
 		return org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator.getTemplatesLanguageConfigurationProvider();
 	}
 
-	// contributed by org.eclipse.xtext.ui.codetemplates.generator.CodetemplatesGeneratorFragment
+	// contributed by org.eclipse.xtext.ui.generator.templates.CodetemplatesGeneratorFragment
 	public com.google.inject.Provider<org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistry> provideLanguageRegistry() {
 		return org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator.getLanguageRegistry();
 	}
 
-	// contributed by org.eclipse.xtext.ui.codetemplates.generator.CodetemplatesGeneratorFragment
+	// contributed by org.eclipse.xtext.ui.generator.templates.CodetemplatesGeneratorFragment
 	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistrar> bindLanguageRegistrar() {
 		return org.eclipse.xtext.ui.codetemplates.ui.registry.LanguageRegistrar.class;
 	}
 
-	// contributed by org.eclipse.xtext.ui.codetemplates.generator.CodetemplatesGeneratorFragment
+	// contributed by org.eclipse.xtext.ui.generator.templates.CodetemplatesGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage> bindXtextTemplatePreferencePage() {
 		return org.eclipse.xtext.ui.codetemplates.ui.preferences.AdvancedTemplatesPreferencePage.class;
 	}
 
-	// contributed by org.eclipse.xtext.ui.codetemplates.generator.CodetemplatesGeneratorFragment
+	// contributed by org.eclipse.xtext.ui.generator.templates.CodetemplatesGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.codetemplates.ui.partialEditing.IPartialContentAssistParser> bindIPartialContentAssistParser() {
 		return org.eclipse.xtext.ui.codetemplates.ui.contentassist.antlr.PartialCodetemplatesContentAssistParser.class;
 	}
