@@ -6,6 +6,7 @@
 		<cs:dependency name="com.google.inject" componentType="osgi.bundle" />
 		<cs:dependency name="org.aopalliance" componentType="osgi.bundle" />
 		<cs:dependency name="org.easymock" componentType="osgi.bundle" />
+		<cs:dependency name="org.antlr.runtime.source" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.draw2d" componentType="eclipse.feature" />
 		<cs:dependency name="org.eclipse.emf.ecore.editor" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.emf.mwe.ui" componentType="eclipse.feature" />
