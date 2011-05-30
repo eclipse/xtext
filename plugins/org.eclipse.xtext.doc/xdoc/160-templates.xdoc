@@ -59,7 +59,6 @@ The codeRef[org.eclipse.xtext.ui.editor.templates.EnumTemplateVariableResolver]
 resolves a template variable to e[EEnumLiteral] literals
 which are assignment-compatible to the enumeration type declared as the first parameter of the the e[Enum] e[TemplateVariable]. 
 
-
 The syntax is as follows:   
 
 code[Java][${<displayText>:Enum(\[<MyPackage>.\]<EnumType>)]

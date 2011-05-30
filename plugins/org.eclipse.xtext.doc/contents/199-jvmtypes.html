@@ -8,7 +8,6 @@
 <link rel="home" href="index.html" title="">
 </head>
 <body>
-<a name="Xtext Documentation-7"></a>
 <h1>Referring to Java Types</h1>
 <p>
 A common use case when developing languages is the requirement to refer to existing concepts of other 
@@ -26,7 +25,7 @@ API will be used to deduce the necessary data. On the contrary, the type-model w
 live data of the JDT in an interactive Eclipse environment. All this happens behind the scenes via different
 implementations that are bound to specific interfaces with Google Guice. 
 </p>
-<a name="jvmtypes-3"></a>
+<a name="0"></a>
 <h2>How to Use Java Types</h2>
 <p>
 Using the JVM types model is very simple. First of all, the grammar has to import the <em>JavaVMTypes</em> Ecore model. 
@@ -57,7 +56,7 @@ Type:</br>
 </div>
 </p>
 <p>
-Last but not least, the <em>org.eclipse.xtext.generator.types.TypesGeneratorFragment</em> 
+Last but not least, the <abbr title="org.eclipse.xtext.generator.types.TypesGeneratorFragment" >TypesGeneratorFragment</abbr> 
 has to be added to the workflow. The safest way is 
 to add it after the actually used scoping fragments as a specialized version of the <em>IGlobalScopeProvider</em> 
 will be configured. Don&apos;t forget to refer to the <em>genmodel</em> of the Java VM types. The shortest possible
@@ -98,13 +97,13 @@ These two steps will provide a nice integration into the Eclipse JDT. There is <
 fields and types that will reveal results in your language files. <em>Go To Declaration</em> works as expected
 and content assist will propose the list of available types. 
 </p>
-<a name="jvmtypes-4"></a>
+<a name="1"></a>
 <h2>Customization Points</h2>
 <p>
 There are several customization hooks in the runtime layer and on the editor side as well:
 </p>
 <p>
-The <em>org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider</em> 
+The <abbr title="org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider" >AbstractTypeScopeProvider</abbr> 
 can be used to create scopes for members with respect to
 the override semantics of the Java language. Of course it is possible to use this implementation to
 create scopes for types as well.
@@ -114,11 +113,11 @@ As the Java VM types expose a lot of information about visibility, parameter- an
 available annotations or enumeration literals, it is very easy to define constraints for the referred types.
 </p>
 <p>
-The <em>org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider</em> can be
+The <abbr title="org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider" >ITypesProposalProvider</abbr> can be
 used to provide optimized proposals based on various filter criteria. 
 The most common selector can be used directly via <em>createSubTypeProposals</em>. The implementation is optimized
 and uses the JDT Index directly to minimize the effort for object instantiation. The class 
-<em>org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters</em>
+<abbr title="org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters" >TypeMatchFilters</abbr>
 provides a comprehensive set of reusable filters that can be easily combined to reduce the list of proposals
 to a smaller number of valid entries.
 </p>

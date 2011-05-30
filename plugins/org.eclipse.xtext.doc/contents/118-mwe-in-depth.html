@@ -8,7 +8,6 @@
 <link rel="home" href="index.html" title="">
 </head>
 <body>
-<a name="Xtext Documentation-5"></a>
 <h1>MWE2</h1>
 <p>
 The Modeling Workflow Engine 2 (MWE2) is a rewritten backwards 
@@ -26,7 +25,7 @@ typically executed in a single JVM. However there are no constraints
 the prevent implementors to provide components that spawn multiple 
 threads or new processes.
 </p>
-<a name="MWE2Exampe"></a>
+<a name="0"></a>
 <h2>Examples</h2>
 <p>
 Let&apos;s start with a couple of examples to demonstrate some usage 
@@ -37,7 +36,7 @@ file, transform the contained classifier-names to upper-case and
 serialize the resource back to a new file. The last examples uses 
 the life-cycle methods to print the execution time of the workflow.
 </p>
-<a name="MWE2HelloWorld"></a>
+<a name="0-0"></a>
 <h3>The Simplest Workflow</h3>
 <p>
 The arguably shortest MWE2 module may look like the following 
@@ -131,7 +130,7 @@ after a quick <em>Run As .. -&gt; MWE2 Workflow</em> in the console as
 <p>
 <span class="inlinecode">Hello&nbsp;World!</span>
 </p>
-<a name="MWE2SimpleTransformation"></a>
+<a name="0-1"></a>
 <h3>A Simple Transformation</h3>
 <p>
 The following workflow solves the exemplary task to rename every <em>EClassifier</em> in an <em>*.ecore</em> file.
@@ -285,7 +284,7 @@ Each of the mentioned implementations is rather simple and can be done in a coup
 This is true for many tedious tasks that developers face in their daily work. MWE2 can be used to
 automize these tasks with minimum effort.
 </p>
-<a name="MWE2Stopwatch"></a>
+<a name="0-2"></a>
 <h3>A Stopwatch</h3>
 <p>
 The last example demonstrates how to combine the MWE2 concepts to create a simple stopwatch that
@@ -340,7 +339,7 @@ Workflow&nbsp;{</br>
 </div>
 </div>
 </p>
-<a name="MWE2LanguageReference"></a>
+<a name="1"></a>
 <h2>Language Reference</h2>
 <p>
 MWE2 has a few well defined concepts which can be combined to 
@@ -399,7 +398,7 @@ SampleClass&nbsp;{</br>
 </div>
 </div>
 </p>
-<a name="MWE2JavaReferences"></a>
+<a name="1-0"></a>
 <h3>Mapping to Java Classes</h3>
 <p>
 The module <em>com.mycompany.Example</em> defines a root component of 
@@ -434,7 +433,7 @@ content assist for the allowed types and highlight incompatible
 assignments. The available properties for Java classes will be 
 proposed as well.
 </p>
-<a name="MWE2Module"></a>
+<a name="1-1"></a>
 <h3>Module</h3>
 <p>
 As MWE2 modules have a fully qualified name, it is possible to refer
@@ -472,7 +471,7 @@ As the same rules apply in MWE2 like in Java, the module
 for other modules is the same as for classes. The import statement
 allows to refer to <em>com.mycompany.Example</em> with a shortened name.
 </p>
-<a name="MWE2Properties"></a>
+<a name="1-2"></a>
 <h3>Properties</h3>
 <p>
 MWE2 allows to extract arbitrary information into properties to 
@@ -541,7 +540,7 @@ This is especially useful for file paths in workflows as one would
 usually want to define some common root directories only ones in the
 workflow and reuse this fragment across certain other file locations.
 </p>
-<a name="MWE2Mandatory"></a>
+<a name="1-3"></a>
 <h3>Mandatory Properties</h3>
 <p>
 It is not always feasible to define default values for properties. 
@@ -604,7 +603,7 @@ modules but for classes as well. Therefore MWE2 ships with the
 <em>mandatory</em>, the module validation will fail if no value was assigned
 to that feature.
 </p>
-<a name="MWE2NamedComponents"></a>
+<a name="1-4"></a>
 <h3>Named Components</h3>
 <p>
 Properties are not the only way to define something that can be reused.
@@ -635,7 +634,7 @@ SampleClass&nbsp;:&nbsp;self&nbsp;{</br>
 A named component can be referenced immediately after its creation but
 it is not possible to define forward references in a MWE2 file.
 </p>
-<a name="MWE2AutoInject"></a>
+<a name="1-5"></a>
 <h3>Auto Injection</h3>
 <p>
 Existing modules or classes often expose a set of properties that 
@@ -672,7 +671,7 @@ The <em>auto-inject</em> modifier can be used for a subset of the available
 features as well. It will suppressed for the explicitly set values
 of a component.        
 </p>
-<a name="MWE2SyntaxReference"></a>
+<a name="2"></a>
 <h2>Syntax Reference</h2>
 <p>
 The following chapter serves as a reference for the concrete syntax of 
@@ -717,7 +716,7 @@ ID:&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;
 <p>
 MWE2 does not use a semicolon as statement delimiter at any place.
 </p>
-<a name="MWE2ModuleSyntax"></a>
+<a name="2-0"></a>
 <h3>Module</h3>
 <p>
 <div class="image" >
@@ -748,7 +747,7 @@ wild-card notation:
 </div>
 </div>
 </p>
-<a name="MWE2PropertySyntax"></a>
+<a name="2-1"></a>
 <h3>Property</h3>
 <p>
 The list of declared properties follows the optional import section.
@@ -774,7 +773,7 @@ There are four types of values available in MWE2. One may either
 define a string, boolean or component literal or a reference to a
 previously defined property. 
 </p>
-<a name="MWE2ComponentSyntax"></a>
+<a name="2-2"></a>
 <h3>Component</h3>
 <p>
 The last part of a module is the root component. It defines the externally
@@ -822,7 +821,7 @@ means of feature-to-value pairs.
 The available constructs on the right hand side of the assignment
 are the same as for default values for properties. 
 </p>
-<a name="MWE2StringLiteralsSyntax"></a>
+<a name="2-3"></a>
 <h3>String Literals</h3>
 <p>
 String values are likely to be the most used literals in MWE2. There 
@@ -870,7 +869,7 @@ escape sequences are:
 \&apos;&nbsp;&nbsp;..&nbsp;single-quote&nbsp;(can&nbsp;be&nbsp;omitted&nbsp;in&nbsp;double-quoted&nbsp;strings)</br>
 \"&nbsp;&nbsp;..&nbsp;double-quote&nbsp;(can&nbsp;be&nbsp;omitted&nbsp;in&nbsp;single-quoted&nbsp;strings)</br>
 \${&nbsp;..&nbsp;escape&nbsp;the&nbsp;substitution&nbsp;variable&nbsp;start&nbsp;${</br>
-\\&nbsp;&nbsp;..&nbsp;the&nbsp;back-slash&nbsp;itself
+\&nbsp;&nbsp;..&nbsp;the&nbsp;back-slash&nbsp;itself
 </p>
 </div>
 </div>
@@ -878,12 +877,12 @@ escape sequences are:
 <p>
 Other escape sequence are illegal in MWE2 strings.
 </p>
-<a name="MWE2BooleanLiterals"></a>
+<a name="2-4"></a>
 <h3>Boolean Literals</h3>
 <p>
 MWE2 has native support for the boolean type. The literals are <em>true</em> and <em>false</em>.
 </p>
-<a name="MWE2References"></a>
+<a name="2-5"></a>
 <h3>References</h3>
 <p>
 Each assigned value in MWE2 either as default for properties or in a

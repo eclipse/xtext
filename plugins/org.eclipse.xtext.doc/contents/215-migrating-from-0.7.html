@@ -8,7 +8,6 @@
 <link rel="home" href="index.html" title="">
 </head>
 <body>
-<a name="Xtext Documentation-10"></a>
 <h1>Migrating from Xtext 0.7.x to 1.0</h1>
 <p>
 Most of the tasks when migrating to Xtext 1.0 can be automated. Some changes will be necessary in the manually written code where you have to carefully
@@ -21,12 +20,12 @@ validation rules that mark inconsistencies in your grammar. If you get any warni
 <p>
 <em>Tip: You&apos;ll learn something about the new features if you compare a freshly created Xtext project based on 0.7.x with a new Xtext project based on 1.0. Especially the new fragments in the workflow are a good indicator for useful new features.</em> 
 </p>
-<a name="migrating_from_0_7-4"></a>
+<a name="0"></a>
 <h2>Take the Shortcut</h2>
 <p>
 If you haven&apos;t made too many customizations to the generated defaults and if you&apos;re not referencing many classes of your Xtext language from the outside, you might consider starting with a new Xtext project, copying your grammar and then manually restoring your changes step by step. If that does not work for you, go on reading!
 </p>
-<a name="migrating_from_0_7-5"></a>
+<a name="1"></a>
 <h2>Migrating Step By Step</h2>
 <p>
 Before you start the migration to Xtext 1.0, you should make sure that no old plug-ins are in your target platform. Some plug-ins from Xtext 0.7.x have been merged and 
@@ -35,7 +34,7 @@ do no longer exist.
 <p>
 <em>Tip: The following steps try to use the Eclipse compiler to spot any source-incompatible changes while fixing them with only a few well described user actions. Doing these steps in another order causes most likely a higher effort.</em>
 </p>
-<a name="migrating_from_0_7-5-3"></a>
+<a name="1-0"></a>
 <h3>Update the Plug-in Dependencies and Import Statements</h3>
 <p>
 You should update the constraints from version <em>0.7.x</em> to <em>[1.0.0,2.0.0)</em> in your manifest files if you specified any concrete versions.
@@ -45,13 +44,13 @@ Make sure that your <em>dsl.ui</em>-projects do not refer to the plug-in <em>org
 The next step is to fix the import statements in your classes to match the refactored naming scheme in Xtext. Perform a global search for "_import org.eclipse.xtext.ui.common._" and 
 "_import org.eclipse.xtext.ui.core._" and replace the matches with "_import org.eclipse.xtext.ui._". This fixes most of the problems in the manually written code. 
 </p>
-<a name="migrating_from_0_7-5-4"></a>
+<a name="1-1"></a>
 <h3>Rename the Packages in the dsl.ui-Plug-in</h3>
 <p>
 We changed the naming pattern for artifacts in the <em>dsl.ui</em>-plug-in to match the OSGI conventions. The easiest way to update your existing projects is to apply a 
 "Rename Package" refactoring on the packages in the <em>src</em>- and <em>src-gen</em> folder <em>before</em> you re-run the workflow that regenerates your language. Make sure you ticked "Rename sub-packages" in the dialog. It is error-prone to enable the search in non-Java files as this will perform incompatible changes in the manifest files. Furthermore, it is important to perform the rename operation in the <em>src-gen</em> folder, too. This ensures that the references in your manually written code are properly updated.
 </p>
-<a name="migrating_from_0_7-5-5"></a>
+<a name="1-2"></a>
 <h3>Update the Workflow</h3>
 <p>
 The <em>JavaScopingFragment</em> does no longer exist. It has been superseded by the <em>ImportURIScopingFragment</em> in combination with the <em>SimpleNamesFragment</em>.
@@ -85,7 +84,7 @@ with
 <p>
 The <em>PackratParserFragment</em> has been abandoned as well. It is save to remove the reference to that one if it is activated in your workflow. After you&apos;ve changed your workflow, it should be possible to regenerate your language without any errors in the console. It is ok to have compilation errors prior to executing the workflow.
 </p>
-<a name="migrating_from_0_7-5-6"></a>
+<a name="1-3"></a>
 <h3>MANIFEST.MF and plugin.xml</h3>
 <p>
 The previous rename package refactoring updated most of the entries in the <em>MANIFEST.MF</em> and and some entries in the <em>plugin.xml</em>. Others have to be fixed manually. The Eclipse compiler will point to many of the remaining problems in the manifest files but it is unlikely that it will spot the erroneous references in the <em>plugin.xml</em>.
@@ -122,7 +121,7 @@ revise indentation levels
 	</li>
 </ul>
 </p>
-<a name="migrating_from_0_7-5-7"></a>
+<a name="1-4"></a>
 <h3>Noteworthy API Changes</h3>
 <p>
 The <em>src</em> folders are generated once, so existing code will not be overwritten but has to be updated manually. At least one new class has appeared in your <em>src</em>-folder of the <em>ui</em> plug-in. there will now be a <em>[MyDsl]StandaloneSetup</em> inheriting form the generated <em>[MyDsl]StandaloneSetupGenerated</em> to allow customization.
@@ -138,21 +137,18 @@ revise indentation levels
 		The method <em>IScopeProvider.getScope(EObject,EClass)</em> has been removed. Use  <em>IScopeProvider.getScope(EObject,EReference)</em> instead. 
 	</li>
 	<li>
-		Renamed <em>DefaultScopeProvider</em> to <em>SimpleNameScopeProvider</em>. There have been further significant changes in the scoping API that allow for optimized implementations. Consult the <a href="050-heading-runtime.xdoc.html#scoping">
-		section on scoping</a>
+		Renamed <em>DefaultScopeProvider</em> to <em>SimpleNameScopeProvider</em>. There have been further significant changes in the scoping API that allow for optimized implementations. Consult the <a href="050-heading-runtime.html#5">section on scoping</a>
 		 for details.
 	</li>
 	<li>
 		The return type of <em>AbstractInjectableValidator.getEPackages()</em> was changed from <em>List&lt;? extends EPackage&gt;</em> to <em>List&amp;lt;EPackage&gt;</em>.
 	</li>
 	<li>
-		The parser interfaces now use <em>java.io.Reader</em> instead of <em>java.io.InputStream</em> to explicitly address encoding. Have a look at the <a href="050-heading-runtime.xdoc.html#encoding">
-		section on encoding</a>
+		The parser interfaces now use <em>java.io.Reader</em> instead of <em>java.io.InputStream</em> to explicitly address encoding. Have a look at the <a href="050-heading-runtime.html#10">section on encoding</a>
 		 for details.
 	</li>
 	<li>
-		The handling of <em>ILabelProvider</em> in various contexts has been refactored. The former base class <em>DefaultLabelProvider</em> no longer exists. Use the <em>DefaultEObjectLabelProvider</em> instead. See the <a href="120-heading-UI.xdoc.html#labelProvider">
-		section on label providers</a>
+		The handling of <em>ILabelProvider</em> in various contexts has been refactored. The former base class <em>DefaultLabelProvider</em> no longer exists. Use the <em>DefaultEObjectLabelProvider</em> instead. See the <a href="120-heading-UI.html#0">section on label providers</a>
 		 for details. 
 	</li>
 	<li>
@@ -211,7 +207,7 @@ revise indentation levels
 	</li>
 </ul>
 </p>
-<a name="migrating_from_0_7-6"></a>
+<a name="2"></a>
 <h2>Now Go For The New Features</h2>
 <p>
 After migrating, some of the new features in Xtext 1.0 will be automatically available. Others require further configuration.
@@ -222,32 +218,25 @@ revise indentation levels
 
 <ul>
 	<li>
-		<a href="050-heading-runtime.xdoc.html#index_based">
-		qualified names and namespace imports</a>
+		<a href="050-heading-runtime.html#5-0-2">qualified names and namespace imports</a>
 	</li>
 	<li>
-		<a href="050-heading-runtime.xdoc.html#containers">
-		the builder infrastructure</a>
+		<a href="050-heading-runtime.html#5-0-2-0">the builder infrastructure</a>
 	</li>
 	<li>
-		<a href="120-heading-UI.xdoc.html#quickfixes">
-		quick fixes</a>
+		<a href="120-heading-UI.html#2">quick fixes</a>
 	</li>
 	<li>
-		<a href="020-grammar-language.xdoc.html#unordered_groups">
-		unordered groups</a>
+		<a href="020-grammar-language.html#1-3-0-2">unordered groups</a>
 	</li>
 	<li>
-		<a href="120-heading-UI.xdoc.html#quick_outline">
-		quick outline</a>
+		<a href="120-heading-UI.html#4-4">quick outline</a>
 	</li>
 	<li>
-		<a href="118-mwe-in-depth.xdoc.html#MWE2">
-		MWE2</a>
+		<a href="118-mwe-in-depth.html">MWE2</a>
 	</li>
 	<li>
-		<a href="199-jvmtypes.xdoc.html#jvmtypes">
-		refering to Java elements</a>
+		<a href="199-jvmtypes.html">refering to Java elements</a>
 	</li>
 </ul>
 

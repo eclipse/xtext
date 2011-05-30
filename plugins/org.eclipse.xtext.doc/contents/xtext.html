@@ -1,0 +1,399 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Xtext Documentation</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="xtext.html" title="">
+</head>
+<body>
+<h1>Xtext Documentation</h1>
+<ol><li><a href="000-introduction.html">Overview</a>
+<ol>	<li><a href="000-introduction.html#0">What is Xtext?</a>
+	</li>
+	<li><a href="000-introduction.html#1">How Does It Work?</a>
+	</li>
+	<li><a href="000-introduction.html#2">Xtext is Highly Configurable</a>
+	</li>
+	<li><a href="000-introduction.html#3">Who Uses Xtext?</a>
+	</li>
+	<li><a href="000-introduction.html#4">Who is Behind Xtext?</a>
+	</li>
+	<li><a href="000-introduction.html#5">What is a Domain-Specific Language</a>
+	</li>
+</ol></li>
+<li><a href="020-grammar-language.html">The Grammar Language</a>
+<ol>	<li><a href="020-grammar-language.html#0">A First Example</a>
+	</li>
+	<li><a href="020-grammar-language.html#1">The Syntax</a>
+	<ol>	<li><a href="020-grammar-language.html#1-0">Language Declaration</a>
+		</li>
+		<li><a href="020-grammar-language.html#1-1">EPackage Declarations</a>
+		<ol>	<li><a href="020-grammar-language.html#1-1-0">EPackage Generation</a>
+			</li>
+			<li><a href="020-grammar-language.html#1-1-1">EPackage Import</a>
+			<ol>	<li><a href="020-grammar-language.html#1-1-1-0">Using Resource URIs to Import Existing EPackages</a>
+				</li>
+				<li><a href="020-grammar-language.html#1-1-1-1">Using Classpath URIs to Import Existing EPackages</a>
+				</li>
+				<li><a href="020-grammar-language.html#1-1-1-2">Using Namespace URIs to Import Existing EPackages</a>
+				</li>
+			</ol></li>
+			<li><a href="020-grammar-language.html#1-1-2">Ecore Model Aliases for EPackages</a>
+			</li>
+		</ol></li>
+		<li><a href="020-grammar-language.html#1-2">Rules</a>
+		<ol>	<li><a href="020-grammar-language.html#1-2-0">Terminal Rules</a>
+			<ol>	<li><a href="020-grammar-language.html#1-2-0-0">Return Types</a>
+				</li>
+			</ol></li>
+			<li><a href="020-grammar-language.html#1-2-1">Extended Backus-Naur Form Expressions</a>
+			<ol>	<li><a href="020-grammar-language.html#1-2-1-0">Keywords / Characters</a>
+				</li>
+				<li><a href="020-grammar-language.html#1-2-1-1">Character Ranges</a>
+				</li>
+				<li><a href="020-grammar-language.html#1-2-1-2">Wildcard</a>
+				</li>
+				<li><a href="020-grammar-language.html#1-2-1-3">Until Token</a>
+				</li>
+				<li><a href="020-grammar-language.html#1-2-1-4">Negated Token</a>
+				</li>
+				<li><a href="020-grammar-language.html#1-2-1-5">Rule Calls</a>
+				</li>
+				<li><a href="020-grammar-language.html#1-2-1-6">Alternatives</a>
+				</li>
+				<li><a href="020-grammar-language.html#1-2-1-7">Groups</a>
+				</li>
+			</ol></li>
+			<li><a href="020-grammar-language.html#1-2-2">Terminal Fragments</a>
+			</li>
+			<li><a href="020-grammar-language.html#1-2-3">EOF - End Of File</a>
+			</li>
+		</ol></li>
+		<li><a href="020-grammar-language.html#1-3">Parser Rules</a>
+		<ol>	<li><a href="020-grammar-language.html#1-3-0">Extended Backus-Naur Form Expressions</a>
+			<ol>	<li><a href="020-grammar-language.html#1-3-0-0">Assignments</a>
+				</li>
+				<li><a href="020-grammar-language.html#1-3-0-1">Cross-References</a>
+				</li>
+				<li><a href="020-grammar-language.html#1-3-0-2">Unordered Groups</a>
+				</li>
+				<li><a href="020-grammar-language.html#1-3-0-3">Simple Actions</a>
+				</li>
+				<li><a href="020-grammar-language.html#1-3-0-4">Unassigned Rule Calls</a>
+				</li>
+				<li><a href="020-grammar-language.html#1-3-0-5">Assigned Actions</a>
+				</li>
+			</ol></li>
+		</ol></li>
+		<li><a href="020-grammar-language.html#1-4">Hidden Terminal Symbols</a>
+		</li>
+		<li><a href="020-grammar-language.html#1-5">Data Type Rules</a>
+		</li>
+		<li><a href="020-grammar-language.html#1-6">Enum Rules</a>
+		</li>
+		<li><a href="020-grammar-language.html#1-7">Syntactic Predicates</a>
+		</li>
+	</ol></li>
+	<li><a href="020-grammar-language.html#2">Ecore Model Inference</a>
+	<ol>	<li><a href="020-grammar-language.html#2-0">Type and Package Generation</a>
+		</li>
+		<li><a href="020-grammar-language.html#2-1">Feature and Type Hierarchy Generation</a>
+		</li>
+		<li><a href="020-grammar-language.html#2-2">Enum Literal Generation</a>
+		</li>
+		<li><a href="020-grammar-language.html#2-3">Feature Normalization</a>
+		</li>
+		<li><a href="020-grammar-language.html#2-4">Customized Post Processing</a>
+		</li>
+		<li><a href="020-grammar-language.html#2-5">Error Conditions</a>
+		</li>
+	</ol></li>
+	<li><a href="020-grammar-language.html#3">Grammar Mixins</a>
+	</li>
+	<li><a href="020-grammar-language.html#4">Common Terminals</a>
+	</li>
+</ol></li>
+<li><a href="030-generator.html">Configuration</a>
+<ol>	<li><a href="030-generator.html#0">The Language Generator</a>
+	<ol>	<li><a href="030-generator.html#0-0">A Short Introduction to MWE2</a>
+		</li>
+		<li><a href="030-generator.html#0-1">General Architecture</a>
+		<ol>	<li><a href="030-generator.html#0-1-0">Generator Fragments</a>
+			</li>
+			<li><a href="030-generator.html#0-1-1">Configuration</a>
+			</li>
+		</ol></li>
+		<li><a href="030-generator.html#0-2">Standard Generator Fragments</a>
+		</li>
+	</ol></li>
+	<li><a href="030-generator.html#1">Dependency Injection in Xtext with Google Guice</a>
+	<ol>	<li><a href="030-generator.html#1-0">The Module API</a>
+		</li>
+		<li><a href="030-generator.html#1-1">Obtaining an Injector</a>
+		</li>
+	</ol></li>
+</ol></li>
+<li><a href="050-heading-runtime.html">Runtime Concepts</a>
+<ol>	<li><a href="050-heading-runtime.html#0">Runtime Setup (ISetup)</a>
+	</li>
+	<li><a href="050-heading-runtime.html#1">Setup within Eclipse-Equinox (OSGi)</a>
+	</li>
+	<li><a href="050-heading-runtime.html#2">Logging</a>
+	</li>
+	<li><a href="050-heading-runtime.html#3">Validation</a>
+	<ol>	<li><a href="050-heading-runtime.html#3-0">Automatic Validation</a>
+		<ol>	<li><a href="050-heading-runtime.html#3-0-0">Lexer/Parser: Syntactical Validation</a>
+			</li>
+			<li><a href="050-heading-runtime.html#3-0-1">Linker: Crosslink Validation</a>
+			</li>
+			<li><a href="050-heading-runtime.html#3-0-2">Serializer: Concrete Syntax Validation</a>
+			</li>
+		</ol></li>
+		<li><a href="050-heading-runtime.html#3-1">Custom Validation</a>
+		</li>
+		<li><a href="050-heading-runtime.html#3-2">Validating Manually</a>
+		</li>
+		<li><a href="050-heading-runtime.html#3-3">Test Validators</a>
+		</li>
+	</ol></li>
+	<li><a href="050-heading-runtime.html#4">Linking</a>
+	<ol>	<li><a href="050-heading-runtime.html#4-0">Declaration of Crosslinks</a>
+		</li>
+		<li><a href="050-heading-runtime.html#4-1">Default Runtime Behavior (Lazy Linking)</a>
+		</li>
+	</ol></li>
+	<li><a href="050-heading-runtime.html#5">Scoping</a>
+	<ol>	<li><a href="050-heading-runtime.html#5-0">Global Scopes and IResourceDescriptions</a>
+		<ol>	<li><a href="050-heading-runtime.html#5-0-0">Resource and EObject Descriptions (IResourceDescription, IEObjectDescription)</a>
+			</li>
+			<li><a href="050-heading-runtime.html#5-0-1">Global Scopes Based On Explicit Imports (ImportURI Mechanism)</a>
+			</li>
+			<li><a href="050-heading-runtime.html#5-0-2">Global Scopes Based On External Configuration (e.g. Classpath-Based)</a>
+			<ol>	<li><a href="050-heading-runtime.html#5-0-2-0">About the Index, Containers and Their Manager</a>
+				</li>
+				<li><a href="050-heading-runtime.html#5-0-2-1">JDT-Based Container Manager</a>
+				</li>
+				<li><a href="050-heading-runtime.html#5-0-2-2">Eclipse Project-Based Containers</a>
+				</li>
+				<li><a href="050-heading-runtime.html#5-0-2-3">ResourceSet-Based Containers</a>
+				</li>
+			</ol></li>
+		</ol></li>
+		<li><a href="050-heading-runtime.html#5-1">Local Scoping</a>
+		<ol>	<li><a href="050-heading-runtime.html#5-1-0">Declarative Scoping</a>
+			</li>
+		</ol></li>
+		<li><a href="050-heading-runtime.html#5-2">Imported Namespace-Aware Scoping</a>
+		<ol>	<li><a href="050-heading-runtime.html#5-2-0">org.eclipse.xtext.naming.IQualifiedNameProvider</a>
+			</li>
+			<li><a href="050-heading-runtime.html#5-2-1">Importing Namespaces</a>
+			</li>
+		</ol></li>
+	</ol></li>
+	<li><a href="050-heading-runtime.html#6">Value Converter</a>
+	</li>
+	<li><a href="050-heading-runtime.html#7">Serialization</a>
+	<ol>	<li><a href="050-heading-runtime.html#7-0">The Contract</a>
+		</li>
+		<li><a href="050-heading-runtime.html#7-1">Roles of the Semantic Model and the Node Model During Serialization</a>
+		</li>
+		<li><a href="050-heading-runtime.html#7-2">Parse Tree Constructor</a>
+		</li>
+		<li><a href="050-heading-runtime.html#7-3">Options</a>
+		</li>
+		<li><a href="050-heading-runtime.html#7-4">Preserving Comments from the Node Model</a>
+		</li>
+		<li><a href="050-heading-runtime.html#7-5">Transient Values</a>
+		</li>
+		<li><a href="050-heading-runtime.html#7-6">Unassigned Text</a>
+		</li>
+		<li><a href="050-heading-runtime.html#7-7">Cross-Reference Serializer</a>
+		</li>
+		<li><a href="050-heading-runtime.html#7-8">Merge Whitespace</a>
+		</li>
+		<li><a href="050-heading-runtime.html#7-9">Token Stream</a>
+		</li>
+	</ol></li>
+	<li><a href="050-heading-runtime.html#8">Formatting (Pretty Printing)</a>
+	<ol>	<li><a href="050-heading-runtime.html#8-0">General FormattingConfig Settings</a>
+		</li>
+		<li><a href="050-heading-runtime.html#8-1">FormattingConfig Instructions</a>
+		</li>
+		<li><a href="050-heading-runtime.html#8-2">Grammar Element Finders</a>
+		</li>
+	</ol></li>
+	<li><a href="050-heading-runtime.html#9">Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)</a>
+	</li>
+	<li><a href="050-heading-runtime.html#10">Encoding in Xtext</a>
+	<ol>	<li><a href="050-heading-runtime.html#10-0">Encoding at Language Design Time</a>
+		</li>
+		<li><a href="050-heading-runtime.html#10-1">Encoding at Language Runtime</a>
+		</li>
+		<li><a href="050-heading-runtime.html#10-2">Encoding of an XtextResource</a>
+		</li>
+		<li><a href="050-heading-runtime.html#10-3">Encoding in New Model Projects</a>
+		</li>
+		<li><a href="050-heading-runtime.html#10-4">Encoding of Xtext Source Code</a>
+		</li>
+	</ol></li>
+</ol></li>
+<li><a href="118-mwe-in-depth.html">MWE2</a>
+<ol>	<li><a href="118-mwe-in-depth.html#0">Examples</a>
+	<ol>	<li><a href="118-mwe-in-depth.html#0-0">The Simplest Workflow</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#0-1">A Simple Transformation</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#0-2">A Stopwatch</a>
+		</li>
+	</ol></li>
+	<li><a href="118-mwe-in-depth.html#1">Language Reference</a>
+	<ol>	<li><a href="118-mwe-in-depth.html#1-0">Mapping to Java Classes</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#1-1">Module</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#1-2">Properties</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#1-3">Mandatory Properties</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#1-4">Named Components</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#1-5">Auto Injection</a>
+		</li>
+	</ol></li>
+	<li><a href="118-mwe-in-depth.html#2">Syntax Reference</a>
+	<ol>	<li><a href="118-mwe-in-depth.html#2-0">Module</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#2-1">Property</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#2-2">Component</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#2-3">String Literals</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#2-4">Boolean Literals</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#2-5">References</a>
+		</li>
+	</ol></li>
+</ol></li>
+<li><a href="120-heading-UI.html">IDE Concepts</a>
+<ol>	<li><a href="120-heading-UI.html#0">Label Provider</a>
+	<ol>	<li><a href="120-heading-UI.html#0-0">Label Providers For EObjects</a>
+		<ol>	<li><a href="120-heading-UI.html#0-0-0">DefaultEObjectLabelProvider</a>
+			</li>
+		</ol></li>
+		<li><a href="120-heading-UI.html#0-1">Label Providers For Index Entries</a>
+		</li>
+	</ol></li>
+	<li><a href="120-heading-UI.html#1">Content Assist</a>
+	<ol>	<li><a href="120-heading-UI.html#1-0">ProposalProvider</a>
+		</li>
+		<li><a href="120-heading-UI.html#1-1">Sample Implementation</a>
+		</li>
+	</ol></li>
+	<li><a href="120-heading-UI.html#2">Quick Fixes</a>
+	<ol>	<li><a href="120-heading-UI.html#2-0">Quickfixes for Linking Errors and Syntax Errors</a>
+		</li>
+	</ol></li>
+	<li><a href="120-heading-UI.html#3">Template Proposals</a>
+	<ol>	<li><a href="120-heading-UI.html#3-0">CrossReference TemplateVariableResolver</a>
+		</li>
+		<li><a href="120-heading-UI.html#3-1">Enumeration TemplateVariableResolver</a>
+		</li>
+	</ol></li>
+	<li><a href="120-heading-UI.html#4">Outline View</a>
+	<ol>	<li><a href="120-heading-UI.html#4-0">Influencing the outline structure</a>
+		</li>
+		<li><a href="120-heading-UI.html#4-1">Styling the outline</a>
+		</li>
+		<li><a href="120-heading-UI.html#4-2">Filtering actions</a>
+		</li>
+		<li><a href="120-heading-UI.html#4-3">Sorting actions</a>
+		</li>
+		<li><a href="120-heading-UI.html#4-4">Quick Outline</a>
+		</li>
+	</ol></li>
+	<li><a href="120-heading-UI.html#5">Hyperlinking</a>
+	<ol>	<li><a href="120-heading-UI.html#5-0">Location Provider</a>
+		<ol>	<li><a href="120-heading-UI.html#5-0-0">Customized Location Provider</a>
+			</li>
+		</ol></li>
+		<li><a href="120-heading-UI.html#5-1">Customizing Available Hyperlinks</a>
+		</li>
+	</ol></li>
+	<li><a href="120-heading-UI.html#6">Syntax Coloring</a>
+	<ol>	<li><a href="120-heading-UI.html#6-0">Lexical Highlighting</a>
+		</li>
+		<li><a href="120-heading-UI.html#6-1">Semantic Highlighting</a>
+		</li>
+	</ol></li>
+	<li><a href="120-heading-UI.html#7">Project Wizard</a>
+	<ol>	<li><a href="120-heading-UI.html#7-0">Customizing the Project Wizard</a>
+		</li>
+	</ol></li>
+</ol></li>
+<li><a href="199-jvmtypes.html">Referring to Java Types</a>
+<ol>	<li><a href="199-jvmtypes.html#0">How to Use Java Types</a>
+	</li>
+	<li><a href="199-jvmtypes.html#1">Customization Points</a>
+	</li>
+</ol></li>
+<li><a href="205-typical-language-configs.html">Typical Language Configurations</a>
+<ol>	<li><a href="205-typical-language-configs.html#0">Case Insensitive Languages</a>
+	</li>
+	<li><a href="205-typical-language-configs.html#1">Languages Independent of JDT</a>
+	</li>
+	<li><a href="205-typical-language-configs.html#2">Parsing Expressions with Xtext</a>
+	<ol>	<li><a href="205-typical-language-configs.html#2-0">Construction of an AST</a>
+		</li>
+		<li><a href="205-typical-language-configs.html#2-1">Associativity</a>
+		</li>
+	</ol></li>
+</ol></li>
+<li><a href="210-emf-integration.html">Integration with EMF and Other EMF Editors</a>
+<ol>	<li><a href="210-emf-integration.html#0">Model, Ecore Model, and Ecore</a>
+	</li>
+	<li><a href="210-emf-integration.html#1">EMF Code Generation</a>
+	</li>
+	<li><a href="210-emf-integration.html#2">XtextResource Implementation</a>
+	</li>
+	<li><a href="210-emf-integration.html#3">Integration with GMF Editors</a>
+	<ol>	<li><a href="210-emf-integration.html#3-0">Stage 1: Make GMF Read and Write the Semantic Model As Text</a>
+		<ol>	<li><a href="210-emf-integration.html#3-0-0">Stage 2: Calling the Xtext Parser to Parse GMF Labels</a>
+			</li>
+			<li><a href="210-emf-integration.html#3-0-1">Stage 3: A Popup Xtext Editor (experimental)</a>
+			</li>
+		</ol></li>
+	</ol></li>
+</ol></li>
+<li><a href="215-migrating-from-0.7.html">Migrating from Xtext 0.7.x to 1.0</a>
+<ol>	<li><a href="215-migrating-from-0.7.html#0">Take the Shortcut</a>
+	</li>
+	<li><a href="215-migrating-from-0.7.html#1">Migrating Step By Step</a>
+	<ol>	<li><a href="215-migrating-from-0.7.html#1-0">Update the Plug-in Dependencies and Import Statements</a>
+		</li>
+		<li><a href="215-migrating-from-0.7.html#1-1">Rename the Packages in the dsl.ui-Plug-in</a>
+		</li>
+		<li><a href="215-migrating-from-0.7.html#1-2">Update the Workflow</a>
+		</li>
+		<li><a href="215-migrating-from-0.7.html#1-3">MANIFEST.MF and plugin.xml</a>
+		</li>
+		<li><a href="215-migrating-from-0.7.html#1-4">Noteworthy API Changes</a>
+		</li>
+	</ol></li>
+	<li><a href="215-migrating-from-0.7.html#2">Now Go For The New Features</a>
+	</li>
+</ol></li>
+<li><a href="220-deploying-dsls.html">Deploying DSLs</a>
+<ol>	<li><a href="220-deploying-dsls.html#0">Prepare Your DSL Projects</a>
+	</li>
+	<li><a href="220-deploying-dsls.html#1">Creating a Feature For Your DSL</a>
+	</li>
+	<li><a href="220-deploying-dsls.html#2">Creating an Update Site For Your DSL</a>
+	</li>
+</ol></li>
+<li><a href="230-antlr-ip-issue.html">The ANTLR IP Issue (Or Which Parser To Use?)</a>
+</li>
+</ol></body>
+</html>
