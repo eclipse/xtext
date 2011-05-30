@@ -191,10 +191,12 @@ public class XtextLinkingService extends DefaultLinkingService {
 
 	private boolean isReferencedByUsedGrammar(GeneratedMetamodel generatedMetamodel, String nsURI) {
 		final Grammar grammar = GrammarUtil.getGrammar(generatedMetamodel);
-		final Set<Grammar> visitedGrammars = Sets.newHashSet(grammar);
-		for (Grammar usedGrammar: grammar.getUsedGrammars()) {
-			if (isReferencedByUsedGrammar(usedGrammar, nsURI, visitedGrammars))
-				return true;
+		if (grammar != null) {
+			final Set<Grammar> visitedGrammars = Sets.newHashSet(grammar);
+			for (Grammar usedGrammar: grammar.getUsedGrammars()) {
+				if (isReferencedByUsedGrammar(usedGrammar, nsURI, visitedGrammars))
+					return true;
+			}
 		}
 		return false;
 	}

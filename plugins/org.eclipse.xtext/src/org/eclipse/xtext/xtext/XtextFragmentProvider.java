@@ -53,7 +53,7 @@ public class XtextFragmentProvider implements IFragmentProvider {
 	public String getFragment(EObject obj, IFragmentProvider.Fallback fallback) {
 		if (obj instanceof Grammar) {
 			return caseGrammar((Grammar)obj);
-		} else if (obj instanceof AbstractRule) {
+		} else if (obj instanceof AbstractRule && obj.eContainer() != null) {
 			return caseAbstractRule((AbstractRule)obj, fallback);
 		}
 		return fallback.getFragment(obj);
