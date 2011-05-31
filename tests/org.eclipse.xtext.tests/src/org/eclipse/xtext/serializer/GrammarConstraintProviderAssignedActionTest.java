@@ -271,8 +271,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		expected.append("    (left+=Addition_Bin_1_0 op='+' right=Multiplication) | \n");
 		expected.append("    (left+=Multiplication_Bin_1_0 op='*' right=Prim) | \n");
 		expected.append("    (left+=Assignment_Bin_1_0 op='=' right=Addition)\n");
-		expected.append(")\n");
-		expected.append(";\n");
+		expected.append(");\n");
 		expected.append("  Prim_Val returns Val: name=ID;\n");
 		expected.append("Assignment_Bin_1_0: Addition_Bin | Prim_Val;\n");
 		expected.append("Addition: Addition_Bin | Prim_Val;\n");
