@@ -5,15 +5,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.serializer;
+package org.eclipse.xtext.util.logic;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.serializer.analysis.NfaToGrammar;
-import org.eclipse.xtext.serializer.analysis.NfaToGrammar.AbstractElementAlias;
+import org.eclipse.xtext.util.logic.GrammarStringFactory;
+import org.eclipse.xtext.util.logic.INfaAdapter;
+import org.eclipse.xtext.util.logic.NfaToGrammar;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 /**
@@ -42,16 +43,49 @@ public class NfaToGrammarTest extends AbstractXtextTests {
 		}
 	}
 
-	private static class SFollowers implements Function<S, Iterable<S>> {
-		public Iterable<S> apply(S from) {
-			return from.followers;
+	private static class NFA implements INfaAdapter<S>, ITokenAdapter<S, String> {
+		private Iterable<S> starts;
+		private Iterable<S> stops;
+
+		public NFA(Iterable<S> starts, Iterable<S> stops) {
+			super();
+			this.starts = starts;
+			this.stops = stops;
 		}
+
+		public String getToken(S owner) {
+			return owner.name;
+		}
+
+		public Iterable<S> getStartStates() {
+			return starts;
+		}
+
+		public Iterable<S> getFollowers(S node) {
+			return node.followers;
+		}
+
+		public Iterable<S> getFinalStates() {
+			return stops;
+		}
+
 	}
 
-	private String nfa2g(S start, S stop) {
+	private String nfa2g(S starts, S stops) {
+		return nfa2g(Collections.singleton(starts), Collections.singleton(stops));
+	}
+
+	private String nfa2g(Iterable<S> starts, S stops) {
+		return nfa2g(starts, Collections.singleton(stops));
+	}
+
+	private String nfa2g(S starts, Iterable<S> stops) {
+		return nfa2g(Collections.singleton(starts), stops);
+	}
+
+	private String nfa2g(Iterable<S> starts, Iterable<S> stops) {
 		NfaToGrammar nfa2g = new NfaToGrammar();
-		AbstractElementAlias<S> grammar = nfa2g.nfaToGtammar(start, stop, new SFollowers());
-		return grammar.toString();
+		return nfa2g.nfaToGrammar(new NFA(starts, stops), new GrammarStringFactory<String>());
 	}
 
 	public void testSimple() {
@@ -163,7 +197,7 @@ public class NfaToGrammarTest extends AbstractXtextTests {
 		w.add(b);
 		a.add(stop);
 		b.add(stop);
-		assertEquals("start (((v | w) b) | ((x | y | z) a)) stop", nfa2g(start, stop));
+		assertEquals("start ((v | w) b | (x | y | z) a) stop", nfa2g(start, stop));
 	}
 
 	public void testAlternative4() {
@@ -232,5 +266,23 @@ public class NfaToGrammarTest extends AbstractXtextTests {
 		y.add(z, stop);
 		z.add(stop);
 		assertEquals("start x? y? z? stop", nfa2g(start, stop));
+	}
+
+	public void testAmbiguousStart() {
+		S start1 = new S("start1");
+		S start2 = new S("start2");
+		S stop = new S("stop");
+		start1.add(stop);
+		start2.add(stop);
+		assertEquals("(start1 | start2) stop", nfa2g(Lists.newArrayList(start1, start2), stop));
+	}
+
+	public void testAmbiguousStop() {
+		S start = new S("start");
+		S stop1 = new S("stop");
+		S stop2 = new S("stop");
+		start.add(stop1);
+		start.add(stop2);
+		assertEquals("start (stop | stop)", nfa2g(start, Lists.newArrayList(stop1, stop2)));
 	}
 }
