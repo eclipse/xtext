@@ -170,8 +170,7 @@ public class GrammarConstraintProviderTest extends AbstractXtextTests {
 		expected.append("    a2=STRING | \n");
 		expected.append("    a2='bar' | \n");
 		expected.append("    (a3+=ID | a3+=STRING | a3+='bar')*\n");
-		expected.append(")\n");
-		expected.append(";");
+		expected.append(");");
 		assertEquals(expected.toString(), actual);
 	}
 
