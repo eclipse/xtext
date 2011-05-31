@@ -87,7 +87,8 @@ public class EMFBasedPersister implements PersistedStateProvider {
 					workspace.addSaveParticipant(Activator.getDefault(), new ISaveParticipant() {
 	
 						public void saving(ISaveContext context) throws CoreException {
-							save(builderState.getAllResourceDescriptions());
+							if (context.getKind() == ISaveContext.FULL_SAVE)
+								save(builderState.getAllResourceDescriptions());
 						}
 	
 						public void rollback(ISaveContext context) {
