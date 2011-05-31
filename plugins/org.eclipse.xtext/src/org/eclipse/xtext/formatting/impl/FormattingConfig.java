@@ -137,6 +137,25 @@ public class FormattingConfig extends AbstractFormattingConfig {
 
 	protected IIndentationInformation indentInfo;
 
+	/**
+	 * @since 2.0
+	 */
+	protected int wrappedLineIndentation = 0;
+	
+	/**
+	 * @since 2.0
+	 */
+	public int getWrappedLineIndentation() {
+		return wrappedLineIndentation;
+	}
+	
+	/**
+	 * @since 2.0
+	 */
+	public void setWrappedLineIndentation(int wrapIndent) {
+		this.wrappedLineIndentation = wrapIndent;
+	}
+	
 	//TODO remove deprecated code and fix usages
 	
 	@Deprecated
