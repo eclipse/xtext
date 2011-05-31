@@ -35,11 +35,13 @@ public class JavaIoFileSystemAccess extends AbstractFileSystemAccess {
 
 	protected void createFolder(File parent) {
 		if (parent != null && !parent.exists()) {
+			// TODO check return value
 			parent.mkdirs();
 		}
 	}
 
 	public void deleteFile(String fileName) {
+		// TODO check return value
 		new File(toSystemFileName(fileName)).delete();
 	}
 

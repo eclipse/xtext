@@ -155,7 +155,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 					}
 				}
 				result = ImmutableList.copyOf(missingElements);
-				missingElements = result;
+				missingMandatoryElements = result;
 			}
 			return result;
 		}

@@ -168,7 +168,7 @@ public class NamesAreUniqueValidationHelper implements INamesAreUniqueValidation
 	}
 
 	protected boolean isContainerInformationHelpful(IEObjectDescription description, String shortName) {
-		return !description.getName().equals(shortName);
+		return true;
 	}
 
 	protected EObject getContainerForErrorMessage(EObject object) {
