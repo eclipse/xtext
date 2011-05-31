@@ -90,13 +90,20 @@ public class AntlrToolFacade {
 			}
 			log.info("downloading file from '"+downloadURL+"' ...");
 			BufferedInputStream in = new BufferedInputStream(new URL(downloadURL).openStream());
-			FileOutputStream out = new FileOutputStream(file());
-			byte[] buffer = new byte[2048];
-			int readBytes = -1;
-			while ((readBytes = in.read(buffer)) != -1) {
-				out.write(buffer, 0, readBytes);
+			try {
+				FileOutputStream out = new FileOutputStream(file());
+				try {
+					byte[] buffer = new byte[2048];
+					int readBytes = -1;
+					while ((readBytes = in.read(buffer)) != -1) {
+						out.write(buffer, 0, readBytes);
+					}
+				} finally {
+					out.close();
+				}
+			} finally {
+				in.close();
 			}
-			out.close();
 			log.info("finished downloading.");
 		} catch (Exception e) {
 			log.error(e.getMessage(),e);

@@ -375,7 +375,7 @@ public class TypeConformanceComputer {
 	}
 	
 	protected Boolean _isConformant(JvmDeclaredType leftType, JvmArrayType rightType, JvmTypeReference left, JvmTypeReference right, boolean ignoreGenerics) {
-		return Object.class.equals(leftType.getIdentifier());
+		return Object.class.getCanonicalName().equals(leftType.getIdentifier());
 	}
 
 	protected boolean areArgumentsAssignableFrom(JvmParameterizedTypeReference left, JvmParameterizedTypeReference right) {

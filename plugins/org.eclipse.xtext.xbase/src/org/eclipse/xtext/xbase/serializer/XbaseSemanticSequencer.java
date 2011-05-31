@@ -196,7 +196,7 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 			return false;
 		INode node = nodes.getNodeForMultiValue(reference, 0, 0, values.get(0));
 		if (node != null && node.getGrammarElement() instanceof RuleCall)
-			return ((RuleCall) node.getGrammarElement()).getRule() == grammarAccess.getXShortClosureAccess().getXClosureAction_0_0_0();
+			return ((RuleCall) node.getGrammarElement()).getRule() == grammarAccess.getXShortClosureRule();
 		return true;
 	}
 	
