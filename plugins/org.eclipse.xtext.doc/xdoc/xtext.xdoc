@@ -8,7 +8,7 @@ codelanguage-def[Java][
 	catch,extends,int,short,try,
 	char,final,interface,static,void,
 	class,finally,long,strictfp,volatile,
-	const,float,native,super,while,null
+	const,float,native,super,while,null,true,false
 ]
 
 codelanguage-def[Xtext][
@@ -26,7 +26,7 @@ codelanguage-def[Xtext][
 	EOF
 ]
 
-codelanguage-def[MWE2][module, var, auto-inject, import, true, false]
+codelanguage-def[MWE2][module, var, auto-inject, auto, inject, import, true, false]
 
 codelanguage-def[Xpand][
 	IMPORT, EXTENSION, FILE, ENDFILE, DEFINE, ENDDEFINE, FOR, ENDFOR,

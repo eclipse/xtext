@@ -20,7 +20,7 @@ Any syntax errors can be retrieved from the Resource using the common EMF API:
 
 ul[
 item[codeRef[org.eclipse.emf.ecore.resource.Resource]e[.getErrors()]]
-item[codeRef[org.eclipse.emf.ecore.resource.Resource]e[getWarnings()]]
+item[codeRef[org.eclipse.emf.ecore.resource.Resource]e[.getWarnings()]]
 ]
 
 
@@ -35,7 +35,7 @@ Similar to syntax errors, any unresolvable crosslinks will be reported and can b
 
 ul[
 item[codeRef[org.eclipse.emf.ecore.resource.Resource]e[.getErrors()]]
-item[codeRef[org.eclipse.emf.ecore.resource.Resource]e[getWarnings()]]
+item[codeRef[org.eclipse.emf.ecore.resource.Resource]e[.getWarnings()]]
 ]
 
 

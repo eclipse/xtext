@@ -20,7 +20,7 @@ of the UI more clearly. The used example grammar is as follows:
 <span class="keyword">grammar</span>&nbsp;org.eclipse.text.documentation.Sample&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals</br>
 </br>
-<span class="keyword">generate</span>&nbsp;gen&nbsp;<span class="string">&apos;http://www.eclipse.org/xtext/documentation/Sample&apos;</span></br>
+<span class="keyword">generate</span>&nbsp;sample&nbsp;<span class="string">&apos;http://www.eclipse.org/xtext/documentation/Sample&apos;</span></br>
 </br>
 Model&nbsp;:</br>
 &nbsp;&nbsp;<span class="string">"model"</span>&nbsp;intAttribute=INT&nbsp;(stringDescription=STRING)?&nbsp;<span class="string">"{"</span>&nbsp;</br>
@@ -35,7 +35,7 @@ AbstractRule:</br>
 RuleA&nbsp;:</br>
 &nbsp;&nbsp;&nbsp;<span class="string">"RuleA"</span>&nbsp;<span class="string">"("</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">")"</span>&nbsp;;</br>
 </br>
-RuleB&nbsp;return&nbsp;gen::CustomType:</br>
+RuleB&nbsp;return&nbsp;sample::CustomType:</br>
 &nbsp;&nbsp;&nbsp;<span class="string">"RuleB"</span>&nbsp;<span class="string">"("</span>&nbsp;ruleA&nbsp;=&nbsp;[RuleA]&nbsp;<span class="string">")"</span>&nbsp;;
 </p>
 </div>
@@ -55,27 +55,27 @@ find dialogs etc. Xtext allows to customize each of these appearances by individ
 An <em>ILabelProvider</em> has two methods: <em>getText(Object)</em> returns the text in an object&apos;s label, 
 while <em>getImage(Object)</em> returns the icon. In addition, the Eclipse UI framework offers the 
 <em>IStyledLabelProvider</em>, which returns a styled string (i.e. with custom fonts, colors etc.) in the 
-<em>getStyledText(Object)</em> method. 
+<em>getStyledText(Object)</em> method.
 </p>
 <p>
 Almost all label providers in the Xtext framework inherit from the base class 
-<abbr title="org.eclipse.xtext.ui.label.AbstractLabelProvider" >AbstractLabelProvider</abbr> which unifies both 
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/label/AbstractLabelProvider.html" ><abbr title="org.eclipse.xtext.ui.label.AbstractLabelProvider" >AbstractLabelProvider</abbr></a> which unifies both 
 approaches. Subclasses can either return a styled string or a string in the <em>doGetText(Object)</em> method. 
 The framework will automatically convert it to a styled text (with default styles) or to a plain text 
 in the respective methods. 
 </p>
 <p>
 Dealing with images can be cumbersome, too, as image handles tend to be scarce system resources. 
-The <abbr title="org.eclipse.xtext.ui.label.AbstractLabelProvider" >AbstractLabelProvider</abbr> helps you managing 
+The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/label/AbstractLabelProvider.html" ><abbr title="org.eclipse.xtext.ui.label.AbstractLabelProvider" >AbstractLabelProvider</abbr></a> helps you managing 
 the images: In your implementation of <em>doGetImage(Object)</em> you can as well return an <em>Image</em> or a string, 
 representing a path in the <em>icons/</em> folder of the containing plug-in. This path is actually 
 configurable by Google Guice. Have a look at the 
-<abbr title="org.eclipse.xtext.ui.PluginImageHelper" >PluginImageHelper</abbr> to learn about the 
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/PluginImageHelper.html" ><abbr title="org.eclipse.xtext.ui.PluginImageHelper" >PluginImageHelper</abbr></a> to learn about the 
 customizing possibilities.
 </p>
 <p>
 If you have the 
-<abbr title="org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment" >LabelProviderFragment</abbr> in the 
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.html" ><abbr title="org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment" >LabelProviderFragment</abbr></a> in the 
 list of generator fragments in the MWE2 workflow for your language, it will automatically create 
 stubs and bindings for an <a href="120-heading-UI.html#0-0"><em>{MyLang}EObjectLabelProvider</em></a>
  and an 
@@ -184,7 +184,7 @@ index, i.e. <em>IResourceDescription</em>, <em>IEObjectDescription</em>, and <em
 </p>
 <p>
 The default implementation of this service is the 
-<abbr title="org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider" >DefaultDescriptionLabelProvider</abbr>. It employs the 
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/label/DefaultDescriptionLabelProvider.html" ><abbr title="org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider" >DefaultDescriptionLabelProvider</abbr></a>. It employs the 
 same polymorphic dispatch mechanism as the <a href="120-heading-UI.html#0-0-0">DefaultEObjectLabelProvider</a>
 . 
 The default text of an <em>EObjectDescription</em> is its indexed name. The image is resolved by dispatching 
@@ -196,13 +196,18 @@ your language&apos;s editor.
 To have a custom description label provider, make sure it is bound in your UI module:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configureResourceUIServiceLabelProvider(Binder&nbsp;binder)&nbsp;{</span>
-</p>
-<p>
-  binder.bind(ILabelProvider.class)
-    .annotatedWith(ResourceServiceDescriptionLabelProvider.class)
-    .to(MyCustomDefaultDescriptionLabelProvider.class);
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configureResourceUIServiceLabelProvider(Binder&nbsp;binder)&nbsp;{</br>
+</br>
+&nbsp;&nbsp;binder.bind(ILabelProvider.<span class="keyword">class</span>)</br>
+&nbsp;&nbsp;&nbsp;&nbsp;.annotatedWith(ResourceServiceDescriptionLabelProvider.<span class="keyword">class</span>)</br>
+&nbsp;&nbsp;&nbsp;&nbsp;.to(MyCustomDefaultDescriptionLabelProvider.<span class="keyword">class</span>);</br>
 }
+</p>
+</div>
+</div>
 </p>
 <a name="1"></a>
 <h2>Content Assist</h2>
@@ -338,7 +343,7 @@ warning(<span class="string">"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;
 </p>
 <p>
 Now that the validation has a unique code identifying the problem we can register quick fixes for it. 
-We start by adding the <abbr title="org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment" >QuickfixProviderFragment</abbr> 
+We start by adding the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/quickfix/QuickfixProviderFragment.html" ><abbr title="org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment" >QuickfixProviderFragment</abbr></a> 
 to our workflow and after regenerating the code we should find an empty class <em>MyDslQuickfixProvider</em> 
 in our DSL&apos;s UI project and new entries in the <em>plugin.xml_gen</em> file.
 </p>
@@ -375,13 +380,13 @@ the problem can be fixed (have a look at the <em>DomainmodelQuickfixProvider</em
 </p>
 <p>
 By using the correct signature (see below) and annotating the method with the 
-@<abbr title="org.eclipse.xtext.ui.editor.quickfix.Fix" >Fix</abbr> annotation referencing the previously specified 
+@<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/quickfix/Fix.html" ><abbr title="org.eclipse.xtext.ui.editor.quickfix.Fix" >Fix</abbr></a> annotation referencing the previously specified 
 issue code from the validator, Xtext knows that this method implements a fix for the problem. This 
 also allows us to annotate multiple methods as fixes for the same problem.
 </p>
 <p>
 The first three parameters given to the 
-<abbr title="org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor" >IssueResolutionAcceptor</abbr> define the 
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/quickfix/IssueResolutionAcceptor.html" ><abbr title="org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor" >IssueResolutionAcceptor</abbr></a> define the 
 UI representation of the quick fix. As the document is not necessarily loaded when the quick fix is 
 offered, we need to provide any additional data from the model that we want to refer to in the UI 
 when creating the issue in the validator above. In this case, we provided the existing type name. 
@@ -390,14 +395,14 @@ are allowed.
 </p>
 <p>
 The actual model modification is implemented in the 
-<abbr title="org.eclipse.xtext.ui.editor.model.edit.IModification" >IModification</abbr>. 
-The <abbr title="org.eclipse.xtext.ui.editor.model.edit.IModificationContext" >IModificationContext</abbr> provides 
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/model/edit/IModification.html" ><abbr title="org.eclipse.xtext.ui.editor.model.edit.IModification" >IModification</abbr></a>. 
+The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/model/edit/IModificationContext.html" ><abbr title="org.eclipse.xtext.ui.editor.model.edit.IModificationContext" >IModificationContext</abbr></a> provides 
 access to the erroneous document. In this case, we&apos;re using Eclipse&apos;s <em>IDocument</em> API to replace a 
 text region.    
 </p>
 <p>
 If you prefer to implement the quick fix in terms of the semantic model use a 
-<abbr title="org.eclipse.xtext.ui.editor.model.edit.ISemanticModification" >ISemanticModification</abbr> instead. 
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/model/edit/ISemanticModification.html" ><abbr title="org.eclipse.xtext.ui.editor.model.edit.ISemanticModification" >ISemanticModification</abbr></a> instead. 
 Its <em>apply(EObject, IModificationContext)</em> method will be invoked inside a modify-transaction and the 
 first argument will be the erroneous semantic element. This makes it very easy for the fix method to 
 modify the model as necessary. After the method returns the model as well as the Xtext editor&apos;s content 
@@ -431,11 +436,11 @@ The following snippet shows a semantic quick fix for a similar problem.
 <h3>Quickfixes for Linking Errors and Syntax Errors</h3>
 <p>
 You can even define quick fixes for linking errors. The issue codes are assigned by the 
-<abbr title="org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider" >ILinkingDiagnosticMessageProvider</abbr>. Have a look at the domain model 
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/linking/ILinkingDiagnosticMessageProvider.html" ><abbr title="org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider" >ILinkingDiagnosticMessageProvider</abbr></a>. Have a look at the domain model 
 example how to add quick fixes for these errors.
 </p>
 <p>
-Analogously, there is the <abbr title="org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider" >ISyntaxErrorMessageProvider</abbr> to assign 
+Analogously, there is the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parser/antlr/ISyntaxErrorMessageProvider.html" ><abbr title="org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider" >ISyntaxErrorMessageProvider</abbr></a> to assign 
 issue codes to syntactical errors.
 </p>
 <a name="3"></a>
@@ -457,7 +462,7 @@ the generated UI-plug-in. This file contains templates in a format as described 
 By default Xtext registers <em>ContextTypes</em> for each rule (<em>[languageName].[RuleName]</em>) and for each 
 keyword (<em>[languageName].kw_[keyword]</em>). If you don&apos;t 
 like these defaults you&apos;ll have to subclass 
-<abbr title="org.eclipse.xtext.ui.editor.templates.XtextTemplateContextTypeRegistry" >XtextTemplateContextTypeRegistry</abbr> 
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/templates/XtextTemplateContextTypeRegistry.html" ><abbr title="org.eclipse.xtext.ui.editor.templates.XtextTemplateContextTypeRegistry" >XtextTemplateContextTypeRegistry</abbr></a> 
 and configure it via <a href="030-generator.html#1-0">Guice</a>
 . 
 </p>
@@ -480,7 +485,7 @@ an ID attribute for each template element.
 <h3>CrossReference TemplateVariableResolver</h3>
 <p>
 Xtext comes with a specific template variable resolver <em>TemplateVariableResolver</em> called 
-<abbr title="org.eclipse.xtext.ui.editor.templates.CrossReferenceTemplateVariableResolver" >CrossReferenceTemplateVariableResolver</abbr>, 
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/templates/CrossReferenceTemplateVariableResolver.html" ><abbr title="org.eclipse.xtext.ui.editor.templates.CrossReferenceTemplateVariableResolver" >CrossReferenceTemplateVariableResolver</abbr></a>, 
 which can be used to place cross-references within a template.
 </p>
 <p>
@@ -517,7 +522,7 @@ yields the text <em>event =&gt; state</em> and allows selecting any events and s
 <a name="3-1"></a>
 <h3>Enumeration TemplateVariableResolver</h3>
 <p>
-The <abbr title="org.eclipse.xtext.ui.editor.templates.EnumTemplateVariableResolver" >EnumTemplateVariableResolver</abbr> 
+The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.html" ><abbr title="org.eclipse.xtext.ui.editor.templates.EnumTemplateVariableResolver" >EnumTemplateVariableResolver</abbr></a> 
 resolves a template variable to <em>EEnumLiteral</em> literals
 which are assignment-compatible to the enumeration type declared as the first parameter of the the <em>Enum</em> <em>TemplateVariable</em>. 
 </p>
@@ -574,25 +579,25 @@ the outline with the editor selection by clicking the <em>Link with Editor</em> 
 In its default implementation, the outline view shows the containment hierarchy of your model. 
 This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e., 
 by omitting a certain kind of node or by introducing additional nodes, you can customize 
-the outline by implementing your own <abbr title="org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider" >IOutlineTreeProvider</abbr>.
+the outline by implementing your own <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/outline/IOutlineTreeProvider.html" ><abbr title="org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider" >IOutlineTreeProvider</abbr></a>.
 </p>
 <p>
-If your workflow defines the <abbr title="org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment" >OutlineTreeProviderFragment</abbr>, 
-Xtext generates a stub for your own <abbr title="org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider" >IOutlineTreeProvider</abbr>
+If your workflow defines the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/outline/OutlineTreeProviderFragment.html" ><abbr title="org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment" >OutlineTreeProviderFragment</abbr></a>, 
+Xtext generates a stub for your own <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/outline/IOutlineTreeProvider.html" ><abbr title="org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider" >IOutlineTreeProvider</abbr></a>
 that allows you to customize every aspect of the outline by inheriting the powerful customization methods
-of <abbr title="org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider" >DefaultOutlineTreeProvider</abbr>. The following sections 
+of <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/outline/impl/DefaultOutlineTreeProvider.html" ><abbr title="org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider" >DefaultOutlineTreeProvider</abbr></a>. The following sections 
 show how to do fill this stub with life.
 </p>
 <a name="4-0"></a>
 <h3>Influencing the outline structure</h3>
 <p>
-Each node the outline tree is an instance of <abbr title="org.eclipse.xtext.ui.editor.outline.IOutlineNode" >IOutlineNode</abbr>.
-The outline tree is always rooted in a <abbr title="org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode" >DocumentRootNode</abbr>.
+Each node the outline tree is an instance of <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/outline/IOutlineNode.html" ><abbr title="org.eclipse.xtext.ui.editor.outline.IOutlineNode" >IOutlineNode</abbr></a>.
+The outline tree is always rooted in a <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/outline/impl/DocumentRootNode.html" ><abbr title="org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode" >DocumentRootNode</abbr></a>.
 This node is automatically created for you. Its children are the root nodes in the displayed view.
 </p>
 <p>
-An <abbr title="org.eclipse.xtext.ui.editor.outline.impl.EObjectNode" >EObjectNode</abbr> represents a model element. By default, Xtext
-creates an <abbr title="org.eclipse.xtext.ui.editor.outline.impl.EObjectNode" >EObjectNode</abbr> for each model element in the
+An <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/outline/impl/EObjectNode.html" ><abbr title="org.eclipse.xtext.ui.editor.outline.impl.EObjectNode" >EObjectNode</abbr></a> represents a model element. By default, Xtext
+creates an <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/outline/impl/EObjectNode.html" ><abbr title="org.eclipse.xtext.ui.editor.outline.impl.EObjectNode" >EObjectNode</abbr></a> for each model element in the
 node of its container. Nodes are created by calling the method <em>createNode(parentNode, modelElement)</em> which
 delegates to <em>createEObjectNode(...)</em> if not specified differently.
 </p>
@@ -627,14 +632,14 @@ This might be confuse your users a bit. To overcome this shortcoming, you have t
 <p class="code">
 <span class="comment">//&nbsp;feature&nbsp;nodes&nbsp;are&nbsp;leafs&nbsp;and&nbsp;not&nbsp;expandable</br>
 </span><span class="keyword">protected</span>&nbsp;<span class="keyword">boolean</span>&nbsp;_isLeaf(Feature&nbsp;feature)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;true;</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">true</span>;</br>
 }
 </p>
 </div>
 </div>
 </p>
 <p>
-Xtext provides a third type of node: <abbr title="org.eclipse.xtext.ui.editor.outline.impl.EStructuralFeatureNode" >EStructuralFeatureNode</abbr>.
+Xtext provides a third type of node: <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/outline/impl/EStructuralFeatureNode.html" ><abbr title="org.eclipse.xtext.ui.editor.outline.impl.EStructuralFeatureNode" >EStructuralFeatureNode</abbr></a>.
 It is used to represent a feature of a model element rather than element itself. The following simplified
 snippet from Xtend2 illustrates how to use it: 
 </p>
@@ -650,7 +655,7 @@ snippet from Xtend2 illustrates how to use it:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Xtend2Package.Literals.XTEND_FILE__PACKAGE,</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getImageForPackage(),&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xtendFile.getPackage(),&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;true);</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">true</span>);</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;show&nbsp;a&nbsp;container&nbsp;node&nbsp;for&nbsp;the&nbsp;list&nbsp;reference&nbsp;XtendFile.imports</br>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;the&nbsp;imports&nbsp;will&nbsp;be&nbsp;shown&nbsp;as&nbsp;individual&nbsp;child&nbsp;nodes&nbsp;automatically&nbsp;</br>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;createEStructuralFeatureNode(parentNode,&nbsp;</br>
@@ -658,7 +663,7 @@ snippet from Xtend2 illustrates how to use it:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Xtend2Package.Literals.XTEND_FILE__IMPORTS,</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getImageForImportContainer(),&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"import&nbsp;declarations"</span>,&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;false);</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">false</span>);</br>
 &nbsp;&nbsp;&nbsp;&nbsp;createEObjectNode(parentNode,&nbsp;xtendFile.getXtendClass());</br>
 }
 </p>
@@ -667,7 +672,7 @@ snippet from Xtend2 illustrates how to use it:
 </p>
 <p>
 Of course you can add further custom types of nodes. For consistency, make sure to inherit from 
-<abbr title="org.eclipse.xtext.ui.editor.outline.impl.AbstractOutlineNode" >AbstractOutlineNode</abbr>. To instantiate these, you have
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/outline/impl/AbstractOutlineNode.html" ><abbr title="org.eclipse.xtext.ui.editor.outline.impl.AbstractOutlineNode" >AbstractOutlineNode</abbr></a>. To instantiate these, you have
 to implement <em>_createNode(parentNode, semanticElement)</em> with the appropriate parameter types. 
 </p>
 <a name="4-1"></a>
@@ -677,12 +682,12 @@ You can also customize the icons and texts for an outline node. By default, Xtex
 provider</a>
  of your language. If you want the labels to be specific to the outline, you can override the methods 
 <em>_text(modelElement)</em> and <em>_image(modelElement)</em> in your 
-<abbr title="org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider" >DefaultOutlineTreeProvider</abbr>. 
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/outline/impl/DefaultOutlineTreeProvider.html" ><abbr title="org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider" >DefaultOutlineTreeProvider</abbr></a>. 
 </p>
 <p>
-Note that the method <em>_text(modelElement)</em> can return a <abbr title="java.lang.String" >String</abbr> or a 
-<abbr title="org.eclipse.jface.viewers.StyledString" >StyledString</abbr>. The <abbr title="org.eclipse.xtext.ui.label.StylerFactory" >StylerFactory</abbr>
-can be used to create <abbr title="org.eclipse.jface.viewers.StyledString" >StyledString</abbr>s, like in the follwoing example: 
+Note that the method <em>_text(modelElement)</em> can return a <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" ><abbr title="java.lang.String" >String</abbr></a> or a 
+<a href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/StyledString.html" ><abbr title="org.eclipse.jface.viewers.StyledString" >StyledString</abbr></a>. The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/label/StylerFactory.html" ><abbr title="org.eclipse.xtext.ui.label.StylerFactory" >StylerFactory</abbr></a>
+can be used to create <a href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/StyledString.html" ><abbr title="org.eclipse.jface.viewers.StyledString" >StyledString</abbr></a>s, like in the follwoing example: 
 </p>
 <p>
 <div class="literallayout">
@@ -711,7 +716,7 @@ can be used to create <abbr title="org.eclipse.jface.viewers.StyledString" >Styl
 </div>
 </p>
 <p>
-To access images we recommend to use the <abbr title="org.eclipse.xtext.ui.PluginImageHelper" >PluginImageHelper</abbr>.
+To access images we recommend to use the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/PluginImageHelper.html" ><abbr title="org.eclipse.xtext.ui.PluginImageHelper" >PluginImageHelper</abbr></a>.
 </p>
 <a name="4-2"></a>
 <h3>Filtering actions</h3>
@@ -719,7 +724,7 @@ To access images we recommend to use the <abbr title="org.eclipse.xtext.ui.Plugi
 Often, you want to allow users to filter the contents of the outline to make it easier to concentrate 
 on the relevant aspects of the model. To add filtering capabilities to your outline, you need to add 
 a filter action to your outline. Filter actions must extend 
-<abbr title="org.eclipse.xtext.ui.editor.outline.actions.AbstractFilterOutlineContribution" >AbstractFilterOutlineContribution</abbr>
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/outline/actions/AbstractFilterOutlineContribution.html" ><abbr title="org.eclipse.xtext.ui.editor.outline.actions.AbstractFilterOutlineContribution" >AbstractFilterOutlineContribution</abbr></a>
 to ensure that the action toggle state is handled correctly. Here is an example form our domain model
 example:
 </p>
@@ -789,12 +794,12 @@ The contribution must be bound in the <em>MyDslUiModule</em> like this
 <p>
 Xtext already adds a sorting action to your outline. By default, nodes are sorted lexically by their
 text. You can change this behavior by binding your own 
-<abbr title="org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter$IComparator" >IComparator</abbr>. 
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/outline/impl/OutlineFilterAndSorter.IComparator.html" ><abbr title="org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter$IComparator" >IComparator</abbr></a>. 
 </p>
 <p>
 A very common use case is to group the children by categories first, e.g. show the imports before the types
 in a package declaration, and sort the categories separately. That is why the 
-<abbr title="org.eclipse.xtext.ui.editor.outline.actions.SortOutlineContribution$DefaultComparator" >DefaultComparator</abbr> has a
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/outline/actions/SortOutlineContribution.DefaultComparator.html" ><abbr title="org.eclipse.xtext.ui.editor.outline.actions.SortOutlineContribution$DefaultComparator" >DefaultComparator</abbr></a> has a
 method <em>getCategory(IOutlineNode)</em> that allows to specify such categories. The example shows how to
 use such categories:
 </p>
@@ -840,7 +845,7 @@ As always, you have to declare a binding for your custom implementation in your 
 <p>
 Xtext also provides a quick outline: If you press CTRL-O in an Xtext editor, the outline of the model is shown 
 in a popup window. The quick outline also supports drill-down search with wildcards. To enable the quick outline,
-you have to put the <abbr title="org.eclipse.xtext.ui.generator.outline.QuickOutlineFragment" >QuickOutlineFragment</abbr> 
+you have to put the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/outline/QuickOutlineFragment.html" ><abbr title="org.eclipse.xtext.ui.generator.outline.QuickOutlineFragment" >QuickOutlineFragment</abbr></a> 
 into your workflow.
 </p>
 <a name="5"></a>
@@ -858,8 +863,8 @@ opened using the corresponding editor.
 <p>
 When navigating a hyperlink, Xtext will also select the text region corresponding to the referenced model 
 element. Determining this text region is the responsibility of the 
-<abbr title="org.eclipse.xtext.resource.ILocationInFileProvider" >ILocationInFileProvider</abbr>. The default implementation 
-(<abbr title="org.eclipse.xtext.resource.DefaultLocationInFileProvider" >DefaultLocationInFileProvider</abbr>) implements a best 
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/ILocationInFileProvider.html" ><abbr title="org.eclipse.xtext.resource.ILocationInFileProvider" >ILocationInFileProvider</abbr></a>. The default implementation 
+(<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/DefaultLocationInFileProvider.html" ><abbr title="org.eclipse.xtext.resource.DefaultLocationInFileProvider" >DefaultLocationInFileProvider</abbr></a>) implements a best 
 effort strategy which can be summarized as:
 </p>
 <p>
@@ -907,13 +912,13 @@ in the following example:
 Often the default strategy only needs some guidance (e.g. selecting the text corresponding to another 
 feature than <em>name</em>). In that case you can simply subclass <em>DefaultLocationInFileProvider</em> and override 
 the methods <em>getIdentifierFeature()</em> and / or <em>useKeyword()</em> to guide the first and last steps of the strategy 
-as described above (see <abbr title="org.eclipse.xtext.xtext.XtextLocationInFileProvider" >XtextLocationInFileProvider</abbr> 
+as described above (see <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xtext/XtextLocationInFileProvider.html" ><abbr title="org.eclipse.xtext.xtext.XtextLocationInFileProvider" >XtextLocationInFileProvider</abbr></a> 
 for an example).
 </p>
 <a name="5-1"></a>
 <h3>Customizing Available Hyperlinks</h3>
 <p>
-The hyperlinks are provided by the <abbr title="org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper" >HyperlinkHelper</abbr>
+The hyperlinks are provided by the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/hyperlinking/HyperlinkHelper.html" ><abbr title="org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper" >HyperlinkHelper</abbr></a>
 which will create links for cross-referenced objects by default. Clients may want to override 
 <em>createHyperlinksByOffset(XtextResource, int, IHyperlinkAcceptor)</em> to provide additional links or 
 supersede the default implementation. 
@@ -956,18 +961,18 @@ persisted and reloaded on startup.
 <h3>Lexical Highlighting</h3>
 <p>
 The lexical highlighting can be customized by providing implementations of the interface 
-<abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration" >IHighlightingConfiguration</abbr> and 
-the abstract class <abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractTokenScanner" >AbstractTokenScanner</abbr>. 
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.html" ><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration" >IHighlightingConfiguration</abbr></a> and 
+the abstract class <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/AbstractTokenScanner.html" ><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractTokenScanner" >AbstractTokenScanner</abbr></a>. 
 The latter fulfills the interface <em>ITokenScanner</em> from the underlying JFace Framework, which may be 
 implemented by clients directly.
 </p>
 <p>
-The <abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration" >IHighlightingConfiguration</abbr> is used
+The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.html" ><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration" >IHighlightingConfiguration</abbr></a> is used
 to register any default style without a specific binding to 
 a pattern in the model file. It is used to populate the preferences page and to initialize the 
 <em>ITextAttributeProvider</em>, which in turn is the component that is used to obtain the actual settings 
 for a style&apos;s id. An implementation will usually be very similar to the 
-<abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration" >DefaultHighlightingConfiguration</abbr> and read like this: 
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/DefaultHighlightingConfiguration.html" ><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration" >DefaultHighlightingConfiguration</abbr></a> and read like this: 
 </p>
 <p>
 <div class="literallayout">
@@ -1006,9 +1011,9 @@ It is critical that this is done very fast because this component is used on eac
 ships with a default implementation that is based on the lexer that is generated by ANTLR which is very 
 lightweight and fast. This default implementation can be customized by clients easily. They simply have 
 to bind another implementation of the 
-<abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper" >AbstractAntlrTokenToAttributeIdMapper</abbr>. 
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/AbstractAntlrTokenToAttributeIdMapper.html" ><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper" >AbstractAntlrTokenToAttributeIdMapper</abbr></a>. 
 To get an idea about it, have a look at the 
-<abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper" >DefaultAntlrTokenToAttributeIdMapper</abbr>.
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/DefaultAntlrTokenToAttributeIdMapper.html" ><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper" >DefaultAntlrTokenToAttributeIdMapper</abbr></a>.
 </p>
 <a name="6-1"></a>
 <h3>Semantic Highlighting</h3>
@@ -1020,14 +1025,14 @@ document. This keeps the editor responsive while providing aid when reading and 
 </p>
 <p>
 As for the lexical highlighting the interface to register the available styles is the 
-<abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration" >IHighlightingConfiguration</abbr>. 
-The <abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator" >ISemanticHighlightingCalculator</abbr> 
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.html" ><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration" >IHighlightingConfiguration</abbr></a>. 
+The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/ISemanticHighlightingCalculator.html" ><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator" >ISemanticHighlightingCalculator</abbr></a> 
 is the primary hook to implement the logic that will compute to-be-highlighted ranges based on the model 
 elements. 
 </p>
 <p>
 The framework will pass the current XtextResource and an 
-<abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor" >IHighlightedPositionAcceptor</abbr> to 
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightedPositionAcceptor.html" ><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor" >IHighlightedPositionAcceptor</abbr></a> to 
 the calculator. It is ensured, that the resource will not be altered externally until the called method 
 <em>provideHighlightingFor()</em> returns. However, the resource may be null. The implementor&apos;s task is to 
 navigate your semantic model and compute various ranges based on the attached node information and 

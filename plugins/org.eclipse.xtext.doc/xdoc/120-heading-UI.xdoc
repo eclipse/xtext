@@ -6,7 +6,7 @@ of the UI more clearly. The used example grammar is as follows:
 code[Xtext][grammar org.eclipse.text.documentation.Sample 
     with org.eclipse.xtext.common.Terminals
 
-generate gen 'http://www.eclipse.org/xtext/documentation/Sample'
+generate sample 'http://www.eclipse.org/xtext/documentation/Sample'
 
 Model :
   "model" intAttribute=INT (stringDescription=STRING)? "{" 
@@ -21,7 +21,7 @@ AbstractRule:
 RuleA :
    "RuleA" "(" name = ID ")" ;
 
-RuleB return gen::CustomType:
+RuleB return sample::CustomType:
    "RuleB" "(" ruleA = \[RuleA\] ")" ;
 ]
 

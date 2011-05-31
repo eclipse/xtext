@@ -2,7 +2,7 @@
 (Please remove the entries you have reviewed, please add your initials to an entry you are working on)
 
 # temporarily removed from the document
-# 000-introduction.xdoc
+000-introduction.xdoc
 # 010-concepts.xdoc
 # 015-getting-started.xdoc
 # 016-working-with-Xtext-models.xdoc
@@ -19,11 +19,11 @@ DONE SZ 100-serialization.xdoc
 DONE SZ 105-formatting.xdoc
 DONE SZ 110-fragmentprovider.xdoc
 DONE SZ 115-encoding.xdoc
-118-mwe-in-depth.xdoc
-120-heading-UI.xdoc
-130-managing-concurrency.xdoc
-140-labelprovider.xdoc
-150-contentassist.xdoc
+SZ 118-mwe-in-depth.xdoc
+SZ 120-heading-UI.xdoc
+# 130-managing-concurrency.xdoc <- is empty
+SZ 140-labelprovider.xdoc
+SZ 150-contentassist.xdoc
 DONE JK 155-quickfix.xdoc
 160-templates.xdoc
 DONE JK 170-outline.xdoc

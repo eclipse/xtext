@@ -8,47 +8,41 @@
 <link rel="home" href="index.html" title="">
 </head>
 <body>
-<a name="Xbase Language Reference-3"></a>
 <h1>Lexical Syntax</h1>
 <p>
 Xbase comes with a small set of lexer rules, which can be overridden and hence changed by users. However the default implementation is carefully 
 chosen and it is recommended to stick with the lexical syntax described in the following.
 </p>
-<a name="Xbase_Syntax_Identifiers"></a>
+<a name="0"></a>
 <h2>Identifiers</h2>
 <p>
 Identifiers are used to name all constructs, such as types, methods and variables. Xbase uses the default
 Identifier-Syntax from Xtext - compared to Java, they are slightly simplified to match the common cases
-while having less ambiguities. They start with a letter <em>a
-</em>-<em>z
-</em>, <em>A
-</em>-<em>Z
-</em> or an underscore followed
-by more of these characters or a digit <em>0
-</em>-<em>9
-</em>. 
+while having less ambiguities. They start with a letter <em>a</em>-<em>z</em>, <em>A</em>-<em>Z</em> or an underscore followed
+by more of these characters or a digit <em>0</em>-<em>9</em>. 
 </p>
-<a name="Xbase_Syntax_EscapedIdentifiers"></a>
+<a name="0-0"></a>
 <h3>Escaped Identifiers</h3>
 <p>
 Identifiers may not have the same spelling as any reserved keyword. 
 However, identifiers starting with a <span class="inlinecode">^</span> are so called escaped identifiers. Escaped identifiers are used in cases when there is a 
-conflict with a reserved keyword. Imagine you have introduced a keyword <span class="inlinecode">service</span> in your language but want to call a Java property <em>service
-</em> at some point. 
+conflict with a reserved keyword. Imagine you have introduced a keyword <span class="inlinecode">service</span> in your language but want to call a Java property <em>service</em> at some point. 
 In such cases you use an escaped identifier <span class="inlinecode">^service</span> to reference the Java property.
 </p>
-<a name="Xbase_Syntax_Identifiers-3"></a>
+<a name="0-1"></a>
 <h3>Syntax</h3>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">terminal</span>&nbsp;ID:&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'^'</span>?&nbsp;(<span class="string">'a'</span>..<span class="string">'z'</span>|<span class="string">'A'</span>..<span class="string">'Z'</span>|<span class="string">'_'</span>)&nbsp;(<span class="string">'a'</span>..<span class="string">'z'</span>|<span class="string">'A'</span>..<span class="string">'Z'</span>|<span class="string">'_'</span>|<span class="string">'0'</span>..<span class="string">'9'</span>)*</br>;
+<span class="keyword">terminal</span>&nbsp;ID:&nbsp;</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;^&apos;</span>?&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>)&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>|<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)*</br>
+;
 </p>
 </div>
 </div>
 </p>
-<a name="Xbase_Syntax_Identifiers-4"></a>
+<a name="0-2"></a>
 <h3>Examples</h3>
 <p>
 <ul>
@@ -72,7 +66,7 @@ In such cases you use an escaped identifier <span class="inlinecode">^service</s
 	</li>
 </ul>
 </p>
-<a name="Xbase_Syntax_StringLiteral"></a>
+<a name="1"></a>
 <h2>String Literals</h2>
 <p>
 String literals can either use single quotes (&apos;) or double quotes (") as their terminals. When using double quotes all literals allowed by Java string literals are
@@ -85,7 +79,7 @@ See <a href="http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#
 <p>
 In contrast to Java, equal string literals within the same class do not neccessarily refer to the same instance at runtime.
 </p>
-<a name="Xbase_Syntax_StringLiteral-4"></a>
+<a name="1-0"></a>
 <h3>Syntax</h3>
 <p>
 <div class="literallayout">
@@ -96,12 +90,12 @@ In contrast to Java, equal string literals within the same class do not neccessa
 </div>
 </div>
 </p>
-<a name="Xbase_Syntax_StringLiteral-5"></a>
+<a name="1-1"></a>
 <h3>Examples</h3>
 <p>
 <ul>
 	<li>
-		<span class="inlinecode"><span class="string">'Foo&nbsp;Bar&nbsp;Baz'</span></span>
+		<span class="inlinecode"><span class="string">&apos;Foo&nbsp;Bar&nbsp;Baz&apos;</span></span>
 	</li>
 	<li>
 		<span class="inlinecode"><span class="string">"Foo&nbsp;Bar&nbsp;Baz"</span></span>
@@ -110,68 +104,73 @@ In contrast to Java, equal string literals within the same class do not neccessa
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="string">"&nbsp;the&nbsp;quick&nbsp;brown&nbsp;fox&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jumps&nbsp;over&nbsp;the&nbsp;lazy&nbsp;dog."</span>
+		<span class="string">"&nbsp;the&nbsp;quick&nbsp;brown&nbsp;fox&nbsp;</br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jumps&nbsp;over&nbsp;the&nbsp;lazy&nbsp;dog."</span>
 		</p>
 		</div>
 		</div>
 	</li>
 	<li>
-		<span class="inlinecode"><span class="string">'Escapes&nbsp;:&nbsp;\'&nbsp;'</span></span>
+		<span class="inlinecode"><span class="string">&apos;Escapes&nbsp;:&nbsp;\&apos;&nbsp;&apos;</span></span>
 	</li>
 	<li>
 		<span class="inlinecode"><span class="string">"Escapes&nbsp;:&nbsp;\"&nbsp;"</span></span>
 	</li>
 </ul>
 </p>
-<a name="Xbase_Syntax_IntegerLiteral"></a>
+<a name="2"></a>
 <h2>Integer Literals</h2>
 <p>
 Integer literals consist of one or more digits. 
 Only decimal literals are supported and they always result in a value of type <span class="inlinecode">java.lang.Integer</span> 
-(it might result in native type <span class="inlinecode">int</span> when translated to Java, see <a href="03-Types.xdoc.html#Xbase_Types">
-Types
-</a>
+(it might result in native type <span class="inlinecode">int</span> when translated to Java, see <a href="03-Types.html">Types</a>
 ).
-The compiler makes sure that only numbers between 0 and <em>Integer.MAX
-</em> (0x7fffffff) are used.
+The compiler makes sure that only numbers between 0 and <em>Integer.MAX</em> (0x7fffffff) are used.
 </p>
 <p>
 There is no negative integer literal, instead the expression <span class="inlinecode">-23</span> is parsed as the prefix operator <span class="inlinecode">-</span> applied to an integer literal.
 </p>
-<a name="Xbase_Syntax_IntegerLiteral-3"></a>
+<a name="2-0"></a>
 <h3>Syntax</h3>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">terminal</span>&nbsp;INT&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EInt:&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">'0'</span>..<span class="string">'9'</span>)+</br>;
+<span class="keyword">terminal</span>&nbsp;INT&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EInt:&nbsp;</br>
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)+</br>
+;
 </p>
 </div>
 </div>
 </p>
-<a name="Xbase_Syntax_Comments"></a>
+<a name="3"></a>
 <h2>Comments</h2>
 <p>
 Xbase comes with two different kinds of comments: Single-line comments and multi-line comments.
 The syntax is the same as the one known from Java (see <a href="http://java.sun.com/docs/books/jls/third_edition/html/lexical.html#3.7">§ 3.7 Comments</a>).
 </p>
-<a name="Xbase_Syntax_Comments-2"></a>
+<a name="3-0"></a>
 <h3>Syntax</h3>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">terminal</span>&nbsp;ML_COMMENT&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'/*'</span>&nbsp;->&nbsp;<span class="string">'*/'</span></br>;</br><span class="keyword">terminal</span>&nbsp;SL_COMMENT&nbsp;:&nbsp;</br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">'//'</span>&nbsp;!(<span class="string">'\n'</span>|<span class="string">'\r'</span>)*&nbsp;(<span class="string">'\r'</span>?&nbsp;<span class="string">'\n'</span>)?</br>;
+<span class="keyword">terminal</span>&nbsp;ML_COMMENT&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;/*&apos;</span>&nbsp;-&gt;&nbsp;<span class="string">&apos;*/&apos;</span></br>
+;</br>
+<span class="keyword">terminal</span>&nbsp;SL_COMMENT&nbsp;:&nbsp;</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;//&apos;</span>&nbsp;!(<span class="string">&apos;\n&apos;</span>|<span class="string">&apos;\r&apos;</span>)*&nbsp;(<span class="string">&apos;\r&apos;</span>?&nbsp;<span class="string">&apos;\n&apos;</span>)?</br>
+;
 </p>
 </div>
 </div>
 </p>
-<a name="Xbase_Syntax_Whitespace"></a>
+<a name="4"></a>
 <h2>White Space</h2>
 <p>
-The white space characters <span class="inlinecode"><span class="string">'&nbsp;'</span></span>, <span class="inlinecode"><span class="string">'\t'</span></span>, <span class="inlinecode"><span class="string">'\n'</span></span>, and <span class="inlinecode"><span class="string">'\r</span></span> are allowed to occur anywhere between the other syntactic elements. 
+The white space characters <span class="inlinecode"><span class="string">&apos;&nbsp;&apos;</span></span>, <span class="inlinecode"><span class="string">&apos;\t&apos;</span></span>, <span class="inlinecode"><span class="string">&apos;\n&apos;</span></span>, and <span class="inlinecode"><span class="string">&apos;\r</span></span> are allowed to occur anywhere between the other syntactic elements. 
 </p>
-<a name="Xbase_Syntax_Keywords"></a>
+<a name="5"></a>
 <h2>Reserved Keywords</h2>
 <p>
 The following list of words are reserved keywords, thus reducing the set of possible identifiers:
@@ -248,9 +247,7 @@ The following list of words are reserved keywords, thus reducing the set of poss
 </ol>
 </p>
 <p>
-However, in case some of the keywords have to be used as identifiers, the escape character for <a href="02-Lexical%20Structure.xdoc.html#Xbase_Syntax_EscapedIdentifiers">
-identifiers
-</a>
+However, in case some of the keywords have to be used as identifiers, the escape character for <a href="02-Lexical%20Structure.html#0-0">identifiers</a>
  comes in handy. 
 </p>
 </body>

@@ -7,7 +7,7 @@ find dialogs etc. Xtext allows to customize each of these appearances by individ
 An e[ILabelProvider] has two methods: e[getText(Object)] returns the text in an object's label, 
 while e[getImage(Object)] returns the icon. In addition, the Eclipse UI framework offers the 
 e[IStyledLabelProvider], which returns a styled string (i.e. with custom fonts, colors etc.) in the 
-e[getStyledText(Object)] method. 
+e[getStyledText(Object)] method.
 
 Almost all label providers in the Xtext framework inherit from the base class 
 codeRef[org.eclipse.xtext.ui.label.AbstractLabelProvider] which unifies both 
@@ -116,9 +116,10 @@ your language's editor.
 
 To have a custom description label provider, make sure it is bound in your UI module:
 
-code[Java][public void configureResourceUIServiceLabelProvider(Binder binder) {]
+code[Java][public void configureResourceUIServiceLabelProvider(Binder binder) {
 
   binder.bind(ILabelProvider.class)
     .annotatedWith(ResourceServiceDescriptionLabelProvider.class)
     .to(MyCustomDefaultDescriptionLabelProvider.class);
 }
+]

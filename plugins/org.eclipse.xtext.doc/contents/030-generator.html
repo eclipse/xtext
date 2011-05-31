@@ -169,7 +169,7 @@ We will now have a look at the component model used to configure the Language Ge
 <p>
 A language generator is composed of so called language configurations. 
 For each language configuration a URI pointing to its grammar file and the file extensions for the DSL must be provided. 
-In addition, a language is configured with a list of <abbr title="org.eclipse.xtext.generator.IGeneratorFragment" >IGeneratorFragment</abbr>s.
+In addition, a language is configured with a list of <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/IGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.IGeneratorFragment" >IGeneratorFragment</abbr></a>s.
 The whole generator is composed of theses fragments. We have fragments for generating parsers, the serializer, the EMF code, 
 the outline view, etc.
 </p>
@@ -186,7 +186,7 @@ The list of grammar fragments forms a chain of responsibility, that is they each
 to the generation of langauge infrastructure components and are called in the declared order.
 Each fragment gets the grammar of the language as an EMF model passed in and is able to generate code in one 
 of the configured locations and contribute to several shared artifacts. A generator fragment must implement
-the interface <abbr title="org.eclipse.xtext.generator.IGeneratorFragment" >IGeneratorFragment</abbr>.
+the interface <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/IGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.IGeneratorFragment" >IGeneratorFragment</abbr></a>.
 </p>
 <p>
 There is usually no need to write your own generator fragments and only rarely you might want to extend an
@@ -287,7 +287,7 @@ example languages look like.
 </tr>
 <tr>
 <td>
-<abbr title="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" >EcoreGeneratorFragment</abbr>
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" >EcoreGeneratorFragment</abbr></a>
 </td>
 <td>
 EMF code for generated models
@@ -298,7 +298,7 @@ EMF code for generated models
 </tr>
 <tr>
 <td>
-<abbr title="org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment" >XtextAntlrGeneratorFragment</abbr>
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment" >XtextAntlrGeneratorFragment</abbr></a>
 </td>
 <td>
 ANTLR grammar, parser, lexer and related services
@@ -308,7 +308,7 @@ ANTLR grammar, parser, lexer and related services
 </tr>
 <tr>
 <td>
-<abbr title="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment" >GrammarAccessFragment</abbr>
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.html" ><abbr title="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment" >GrammarAccessFragment</abbr></a>
 </td>
 <td>
 Access to the grammar
@@ -318,7 +318,7 @@ Access to the grammar
 </tr>
 <tr>
 <td>
-<abbr title="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" >ResourceFactoryFragment</abbr>
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.html" ><abbr title="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" >ResourceFactoryFragment</abbr></a>
 </td>
 <td>
 EMF resource factory
@@ -329,7 +329,7 @@ EMF resource factory
 </tr>
 <tr>
 <td>
-<abbr title="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment" >ParseTreeConstructorFragment</abbr>
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.html" ><abbr title="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment" >ParseTreeConstructorFragment</abbr></a>
 </td>
 <td>
 Model-to-text serialization
@@ -340,7 +340,7 @@ Model-to-text serialization
 </tr>
 <tr>
 <td>
-<abbr title="org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment" >ImportNamespacesScopingFragment</abbr>
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.html" ><abbr title="org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment" >ImportNamespacesScopingFragment</abbr></a>
 </td>
 <td>
 Index-based scoping
@@ -351,7 +351,7 @@ Index-based scoping
 </tr>
 <tr>
 <td>
-<abbr title="org.eclipse.xtext.generator.validation.JavaValidatorFragment" >JavaValidatorFragment</abbr>
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/validation/JavaValidatorFragment.html" ><abbr title="org.eclipse.xtext.generator.validation.JavaValidatorFragment" >JavaValidatorFragment</abbr></a>
 </td>
 <td>
 Model validation
@@ -362,7 +362,7 @@ Model validation
 </tr>
 <tr>
 <td>
-<abbr title="org.eclipse.xtext.generator.formatting.FormatterFragment" >FormatterFragment</abbr>
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/formatting/FormatterFragment.html" ><abbr title="org.eclipse.xtext.generator.formatting.FormatterFragment" >FormatterFragment</abbr></a>
 </td>
 <td>
 Code formatter
@@ -373,7 +373,7 @@ Code formatter
 </tr>
 <tr>
 <td>
-<abbr title="org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment" >LabelProviderFragment</abbr>
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.html" ><abbr title="org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment" >LabelProviderFragment</abbr></a>
 </td>
 <td>
 Label provider
@@ -384,7 +384,7 @@ Label provider
 </tr>
 <tr>
 <td>
-<abbr title="org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment" >OutlineTreeProviderFragment</abbr>
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/outline/OutlineTreeProviderFragment.html" ><abbr title="org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment" >OutlineTreeProviderFragment</abbr></a>
 </td>
 <td>
 Outline view configuration
@@ -395,7 +395,7 @@ Outline view configuration
 </tr>
 <tr>
 <td>
-<abbr title="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment" >JavaBasedContentAssistFragment</abbr>
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.html" ><abbr title="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment" >JavaBasedContentAssistFragment</abbr></a>
 </td>
 <td>
 Java-based content assist
@@ -406,7 +406,7 @@ Java-based content assist
 </tr>
 <tr>
 <td>
-<abbr title="org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment" >XtextAntlrUiGeneratorFragment</abbr>
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/parser/antlr/XtextAntlrUiGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment" >XtextAntlrUiGeneratorFragment</abbr></a>
 </td>
 <td>
 Content assist helper based on ANTLR
@@ -417,7 +417,7 @@ Content assist helper based on ANTLR
 </tr>
 <tr>
 <td>
-<abbr title="org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment" >SimpleProjectWizardFragment</abbr>
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.html" ><abbr title="org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment" >SimpleProjectWizardFragment</abbr></a>
 </td>
 <td>
 New project wizard
@@ -454,7 +454,7 @@ constructor) and adds the <em>@Inject</em> annotation:
 </div>
 </p>
 <p>
-It is not the duty of the client code to care about where the <abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr> 
+It is not the duty of the client code to care about where the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" ><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> 
 comes from or how it is created. When above&apos;s class is instantiated, Guice sees that it requires an instance of 
 IScopeProvider and assigns it to the specified field or method parameter. This of course only works,
 if the object itself is created by Guice. In Xtext almost every instance is created that way 
@@ -462,7 +462,7 @@ and therefore the whole dependency net is controlled and configured by the means
 </p>
 <p>
 Guice of course needs to know how to instantiate real objects for declared dependencies. This is done 
-in so called <abbr title="com.google.inject.Module" >Module</abbr>s. A <abbr title="com.google.inject.Module" >Module</abbr> defines a set of 
+in so called <a href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Module.html" ><abbr title="com.google.inject.Module" >Module</abbr></a>s. A <a href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Module.html" ><abbr title="com.google.inject.Module" >Module</abbr></a> defines a set of 
 mappings from types to either existing instances, instance providers or concrete classes. Modules are
 implemented in Java. Here&apos;s an example:
 </p>
@@ -486,7 +486,7 @@ implemented in Java. Here&apos;s an example:
 </div>
 </p>
 <p>
-With plain Guice modules one implements a method called configure and gets a <abbr title="com.google.inject.Binder" >Binder</abbr> 
+With plain Guice modules one implements a method called configure and gets a <a href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Binder.html" ><abbr title="com.google.inject.Binder" >Binder</abbr></a> 
 passed in. That binder provides a fluent API to define the mentioned mappings. This was just a very 
 brief and simplified description. We highly recommend to have a look at 
 <a href="http://code.google.com/p/google-guice/">the website Google Guice</a> to learn more.  
@@ -517,9 +517,9 @@ method is :
 </p>
 <p>
 which would do the same as the code snippet above. It simply declares a binding from 
-<abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr> to <em>MyConcreteScopeProvider</em>. That binding will make 
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" ><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> to <em>MyConcreteScopeProvider</em>. That binding will make 
 Guice instantiate and inject a new instance of <em>MyConcreteScopeProvider</em> whenever a dependency to 
-<abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr> is declared.
+<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" ><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> is declared.
 </p>
 <p>
 Having a method per binding allows to deactivate individual bindings by overriding the corresponding 
@@ -564,12 +564,12 @@ the following binding method.
 </div>
 </p>
 <p>
-Note: Please forgive us the overuse of the term <em>provider</em>. The <abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr> 
-is not a Guice <abbr title="com.google.inject.Provider" >Provider</abbr>.
+Note: Please forgive us the overuse of the term <em>provider</em>. The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" ><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> 
+is not a Guice <a href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Provider.html" ><abbr title="com.google.inject.Provider" >Provider</abbr></a>.
 </p>
 <p>
 That binding tells Guice to instantiate <em>MyConcreteScopeProviderFactory</em> and invoke get() in order to 
-obtain an instance of <abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr> for clients having declared a dependency
+obtain an instance of <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" ><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> for clients having declared a dependency
 to that type. Both mentioned methods are allowed to return an instance instead of a type. This may be useful 
 if some global state should be shared in the application:
 </p>
@@ -603,8 +603,8 @@ respectively.
 </p>
 <p>
 The last binding method provided by Xtext allows to do anything you can do with Guice&apos;s binding API, since
-it allows you to use the <abbr title="com.google.inject.Binder" >Binder</abbr> directly. If your method&apos;s name starts with the
-name &apos;configure&apos;, has a return type <em>void</em> and accepts one argument of type <abbr title="com.google.inject.Binder" >Binder</abbr>:
+it allows you to use the <a href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Binder.html" ><abbr title="com.google.inject.Binder" >Binder</abbr></a> directly. If your method&apos;s name starts with the
+name &apos;configure&apos;, has a return type <em>void</em> and accepts one argument of type <a href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Binder.html" ><abbr title="com.google.inject.Binder" >Binder</abbr></a>:
 </p>
 <p>
 <div class="literallayout">
@@ -621,7 +621,7 @@ name &apos;configure&apos;, has a return type <em>void</em> and accepts one argu
 <h3>Obtaining an Injector</h3>
 <p>
 In every application wired up with Guice there is usually one point where you initialize an 
-<abbr title="com.google.inject.Injector" >Injector</abbr> using the modules declared. That injector is used to create the root 
+<a href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html" ><abbr title="com.google.inject.Injector" >Injector</abbr></a> using the modules declared. That injector is used to create the root 
 instance of the whole application. In plain Java environments this is something that&apos;s done in the main 
 method. It could look like this:
 </p>
