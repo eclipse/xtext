@@ -11,7 +11,10 @@ public class FormatterTestConfig extends AbstractDeclarativeFormatter {
 		FormatterTestLanguageGrammarAccess f = (FormatterTestLanguageGrammarAccess) getGrammarAccess();
 
 		c.setAutoLinewrap(30);
-
+		
+		// indent wrapped lines (lines exceeding autoLineWrap setting above) by one tab stop
+		c.setWrappedLineIndentation(1);
+		
 		// TestLinewrap
 		c.setLinewrap().after(f.getTestLinewrapAccess().getLinewrapKeyword_0());
 

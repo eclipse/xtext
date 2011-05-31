@@ -99,8 +99,11 @@ public class FormattingConfigBasedStream extends BaseTokenStream {
 				lastBreakableEntryIndex = entries.size() - 1;
 				return flushLine();
 			}
-			if (totalLength > cfg.getCharsPerLine() && lastBreakableEntryIndex > 0)
+			if (totalLength > cfg.getCharsPerLine() && lastBreakableEntryIndex > 0) {
+				LineEntry lastEntry = entries.get(lastBreakableEntryIndex);
+				lastEntry.indent = lastEntry.indent + cfg.getWrappedLineIndentation();
 				return flushLine();
+			}
 			return null;
 		}
 

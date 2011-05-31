@@ -134,7 +134,7 @@ public class FormatterTest extends AbstractXtextTests {
 
 	public void testIndentationAndLineWrap() throws Exception {
 		final String model = "test indentation { void func(x:int,y:int,s:javalangString, foo:javasqlDate, blupp:mylongtype,  msads:adshdjkhsakdasdkslajdlsask, x:x, a:b, c:d ); }";
-		final String expected = "test indentation {\n	void func(x:int, y:int,\n		s:javalangString,\n		foo:javasqlDate,\n		blupp:mylongtype,\n		msads:adshdjkhsakdasdkslajdlsask,\n		x:x, a:b, c:d);\n}";
+		final String expected = "test indentation {\n	void func(x:int, y:int,\n\t		s:javalangString,\n\t		foo:javasqlDate,\n\t		blupp:mylongtype,\n\t		msads:adshdjkhsakdasdkslajdlsask,\n\t		x:x, a:b, c:d);\n}";
 		assertFormattedPTC(expected, model);
 		assertFormattedNM(expected, model, 0, model.length());
 		assertEqualTokenStreams(model);
@@ -223,7 +223,7 @@ public class FormatterTest extends AbstractXtextTests {
 
 	public void testLinewrapDatatypeRuleComments() throws Exception {
 		final String model = "test linewrap/* 1 */fqn/* 2 */ab.cd.ef/* 3 */;/* 4 */fqnref/* 5 */ab.cd.ef/* 6 */;/* 7 */";
-		final String expected = "test linewrap /* 1 */ fqn\n/* 2 */\nab.cd.ef /* 3 */; /* 4 */\nfqnref /* 5 */ ab.cd.ef\n/* 6 */; /* 7 */";
+		final String expected = "test linewrap /* 1 */ fqn\n\t/* 2 */\nab.cd.ef /* 3 */; /* 4 */\n\tfqnref /* 5 */ ab.cd.ef\n\t/* 6 */; /* 7 */";
 		assertFormattedPTC(expected, model);
 		assertFormattedNM(expected, model, 0, model.length());
 		assertEqualTokenStreams(model);
@@ -250,9 +250,9 @@ public class FormatterTest extends AbstractXtextTests {
 	}
 
 	public void testSuppressedLinewrap() throws Exception {
-		final String model = "test linewrap\n`foo%abcd%foo%< b\n>%abcd%foo%abcd%foo%abcd%"
+		final String model = "test linewrap\n`foo%abcd%foo%< b\n\t>%abcd%foo%abcd%foo%abcd%"
 				+ "foo%abcd%foo%abcd%foo%abcd%foo%abcd%foo%abcd%foo%xx%foo%abcd%foo%abcd%"
-				+ "foo%abcd%foo%<\nb >%foo%abcd` post;";
+				+ "foo%abcd%foo%<\n\tb >%foo%abcd` post;";
 		assertFormattedPTC(model, model);
 		assertFormattedNM(model, model, 0, model.length());
 		assertEqualTokenStreams(model);
