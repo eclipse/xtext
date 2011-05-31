@@ -5,30 +5,28 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.serializer.analysis;
+package org.eclipse.xtext.util.logic;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.util.GraphvizDotBuilder;
 
-import com.google.common.base.Function;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
-import com.google.inject.internal.Join;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class NfaToGrammar {
 
-	public static abstract class AbstractElementAlias<T> {
+	protected static abstract class AbstractElementAlias<T> {
 		protected boolean many = false;
 
 		protected boolean optional = false;
@@ -40,16 +38,6 @@ public class NfaToGrammar {
 			super();
 			this.optional = optional;
 			this.many = many;
-		}
-
-		public String getCardinality() {
-			if (optional && many)
-				return "*";
-			if (many)
-				return "+";
-			if (optional)
-				return "?";
-			return "";
 		}
 
 		public boolean isMany() {
@@ -74,18 +62,49 @@ public class NfaToGrammar {
 
 		@Override
 		public String toString() {
-			return toString(false);
+			return GrammarFormatter.newFormatter(new AliasGrammarProvider<T>()).format(this);
 		}
 
-		public abstract String toString(boolean isNested);
 	}
 
-	public static class AlternativeAlias<T> extends AbstractElementAlias<T> {
+	protected static class AliasGrammarProvider<TOKEN> implements IGrammarAdapter<AbstractElementAlias<TOKEN>, TOKEN> {
+
+		public Iterable<AbstractElementAlias<TOKEN>> getAlternativeChildren(AbstractElementAlias<TOKEN> ele) {
+			return ele instanceof AlternativeAlias ? ((AlternativeAlias<TOKEN>) ele).getChildren() : null;
+		}
+
+		public AbstractElementAlias<TOKEN> getParent(AbstractElementAlias<TOKEN> ele) {
+			return null;
+		}
+
+		public Iterable<AbstractElementAlias<TOKEN>> getSequentialChildren(AbstractElementAlias<TOKEN> ele) {
+			return ele instanceof GroupAlias ? ((GroupAlias<TOKEN>) ele).getChildren() : null;
+		}
+
+		public TOKEN getToken(AbstractElementAlias<TOKEN> owner) {
+			return owner instanceof ElementAlias ? ((ElementAlias<TOKEN>) owner).getElement() : null;
+		}
+
+		public Iterable<AbstractElementAlias<TOKEN>> getUnorderedChildren(AbstractElementAlias<TOKEN> ele) {
+			return null;
+		}
+
+		public boolean isMany(AbstractElementAlias<TOKEN> ele) {
+			return ele.isMany();
+		}
+
+		public boolean isOptional(AbstractElementAlias<TOKEN> ele) {
+			return ele.isOptional();
+		}
+	}
+
+	protected static class AlternativeAlias<T> extends AbstractElementAlias<T> {
 		protected Set<AbstractElementAlias<T>> children = Sets.newHashSet();
 
 		public AlternativeAlias() {
 			super();
 		}
+
 		public AlternativeAlias(boolean optional, boolean many, AbstractElementAlias<T>... children) {
 			super(optional, many);
 			Collections.addAll(this.children, children);
@@ -97,47 +116,13 @@ public class NfaToGrammar {
 			children.add(child);
 		}
 
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			AlternativeAlias<?> other = (AlternativeAlias<?>) obj;
-			return children.equals(other.children) && many == other.many && optional == other.optional;
-		}
-
 		public Set<AbstractElementAlias<T>> getChildren() {
 			return children;
 		}
 
-		@Override
-		public int hashCode() {
-			int result = children.hashCode();
-			if (many)
-				result *= 3;
-			if (optional)
-				result *= 7;
-			return result;
-		}
-
-		@Override
-		public String toString(boolean isNested) {
-			List<String> result = Lists.newArrayList();
-			for (AbstractElementAlias<T> child : children)
-				result.add(child.toString(true));
-			Collections.sort(result);
-			String body = Join.join(" | ", result);
-			if (isOne() && !isNested)
-				return body;
-			return "(" + body + ")" + getCardinality();
-		}
-
 	}
 
-	public static class ElementAlias<T> extends AbstractElementAlias<T> {
+	protected static class ElementAlias<T> extends AbstractElementAlias<T> {
 		protected T element;
 
 		public ElementAlias(boolean optional, boolean many, T element) {
@@ -150,46 +135,13 @@ public class NfaToGrammar {
 			this.element = element;
 		}
 
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			ElementAlias<?> other = (ElementAlias<?>) obj;
-			if (many != other.many || optional != other.optional)
-				return false;
-			// FIXME: don't cast down to ISynState
-			Object e1 = element instanceof ISynState ? ((ISynState) element).getGrammarElement() : element;
-			Object e2 = other.element instanceof ISynState ? ((ISynState) other.element).getGrammarElement()
-					: other.element;
-			return e1 == e2;
-		}
-
 		public T getElement() {
 			return element;
 		}
 
-		@Override
-		public int hashCode() {
-			int result = element instanceof ISynState ? ((ISynState) element).getGrammarElement().hashCode() : element
-					.hashCode();
-			if (many)
-				result *= 3;
-			if (optional)
-				result *= 7;
-			return result;
-		}
-
-		@Override
-		public String toString(boolean isNested) {
-			return element.toString() + getCardinality();
-		}
 	}
 
-	public static class GroupAlias<T> extends AbstractElementAlias<T> {
+	protected static class GroupAlias<T> extends AbstractElementAlias<T> {
 		protected List<AbstractElementAlias<T>> children = Lists.newArrayList();
 
 		public GroupAlias() {
@@ -207,85 +159,52 @@ public class NfaToGrammar {
 			children.add(child);
 		}
 
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			GroupAlias<?> other = (GroupAlias<?>) obj;
-			return children.equals(other.children) && many == other.many && optional == other.optional;
-		}
-
 		public List<AbstractElementAlias<T>> getChildren() {
 			return children;
 		}
 
-		@Override
-		public int hashCode() {
-			int result = children.hashCode();
-			if (many)
-				result *= 3;
-			if (optional)
-				result *= 7;
-			return result;
-		}
-
-		@Override
-		public String toString(boolean isNested) {
-			List<String> result = Lists.newArrayList();
-			for (AbstractElementAlias<T> child : children)
-				result.add(child.toString(true));
-			String body = Join.join(" ", result);
-			if (isOne() && !isNested)
-				return body;
-			return "(" + body + ")" + getCardinality();
-		}
-
 	}
 
-	public static class StateAlias<T> {
-		protected AbstractElementAlias<T> element;
-		protected Set<StateAlias<T>> incoming = Sets.newHashSet();
-		protected Set<StateAlias<T>> outgoing = Sets.newHashSet();
+	protected static class StateAlias<TOKEN> {
+		protected AbstractElementAlias<TOKEN> element;
+		protected Set<StateAlias<TOKEN>> incoming = Sets.newHashSet();
+		protected Set<StateAlias<TOKEN>> outgoing = Sets.newHashSet();
 
-		protected StateAlias(AbstractElementAlias<T> element) {
+		protected StateAlias(AbstractElementAlias<TOKEN> element) {
 			super();
 			this.element = element;
 		}
 
-		public void absorbIncoming(StateAlias<T> state) {
-			for (StateAlias<T> in : state.incoming) {
+		public void absorbIncoming(StateAlias<TOKEN> state) {
+			for (StateAlias<TOKEN> in : state.incoming) {
 				in.outgoing.remove(state);
 				in.outgoing.add(this);
 				incoming.add(in);
 			}
 		}
 
-		public void absorbOutgoing(StateAlias<T> state) {
-			for (StateAlias<T> out : state.outgoing) {
+		public void absorbOutgoing(StateAlias<TOKEN> state) {
+			for (StateAlias<TOKEN> out : state.outgoing) {
 				out.incoming.remove(state);
 				out.incoming.add(this);
 				outgoing.add(out);
 			}
 		}
 
-		public void addOutgoing(StateAlias<T> state) {
+		public void addOutgoing(StateAlias<TOKEN> state) {
 			outgoing.add(state);
 			state.incoming.add(this);
 		}
 
-		protected AbstractElementAlias<T> getElement() {
+		protected AbstractElementAlias<TOKEN> getElement() {
 			return element;
 		}
 
-		protected Set<StateAlias<T>> getIncoming() {
+		protected Set<StateAlias<TOKEN>> getIncoming() {
 			return incoming;
 		}
 
-		protected Set<StateAlias<T>> getOutgoing() {
+		protected Set<StateAlias<TOKEN>> getOutgoing() {
 			return outgoing;
 		}
 
@@ -507,20 +426,28 @@ public class NfaToGrammar {
 		return visited;
 	}
 
-	public <T> AbstractElementAlias<T> nfaToGtammar(T startT, T stopT, Function<T, Iterable<T>> followers) {
-		StateAlias<T> stop = new StateAlias<T>(new ElementAlias<T>(stopT));
-		StateAlias<T> start = toAlias(startT, stop, followers, Maps.<T, StateAlias<T>> newHashMap());
+	public <ELEMENT, STATE, TOKEN, NFA extends INfaAdapter<STATE> & ITokenAdapter<STATE, TOKEN>> ELEMENT nfaToGrammar(
+			NFA nfa, IGrammarFactory<ELEMENT, TOKEN> grammarFactory) {
+		StateAlias<TOKEN> stop = new StateAlias<TOKEN>(new ElementAlias<TOKEN>(null));
+		StateAlias<TOKEN> start = new StateAlias<TOKEN>(new ElementAlias<TOKEN>(null));
+		Set<STATE> stops = Sets.newHashSet(nfa.getFinalStates());
+		HashMap<STATE, StateAlias<TOKEN>> cache = Maps.<STATE, StateAlias<TOKEN>> newHashMap();
+		for (STATE state : nfa.getStartStates()) {
+			StateAlias<TOKEN> stateAlias = toAlias(nfa, state, stops, stop, cache);
+			start.getOutgoing().add(stateAlias);
+			stateAlias.getIncoming().add(start);
+		}
 		boolean changed = true;
 		while (!start.getOutgoing().isEmpty() && changed) {
-			changed = createMany(start, Sets.<StateAlias<T>> newHashSet());
+			changed = createMany(start, Sets.<StateAlias<TOKEN>> newHashSet());
 			//			System.out.println("after Many: " + Join.join(" ", getAllStates(start)));
-			changed |= createGroups(start, Sets.<StateAlias<T>> newHashSet());
+			changed |= createGroups(start, Sets.<StateAlias<TOKEN>> newHashSet());
 			//			System.out.println("after Groups: " + Join.join(" ", getAllStates(start)));
-			changed |= createAlternative(start, Sets.<StateAlias<T>> newHashSet());
+			changed |= createAlternative(start, Sets.<StateAlias<TOKEN>> newHashSet());
 			//			System.out.println("after Alternative: " + Join.join(" ", getAllStates(start)));
-			changed |= createOptional(start, Sets.<StateAlias<T>> newHashSet());
+			changed |= createOptional(start, Sets.<StateAlias<TOKEN>> newHashSet());
 			//			System.out.println("after Optional: " + Join.join(" ", getAllStates(start)));
-			changed |= createCycle(start, Sets.<StateAlias<T>> newHashSet());
+			changed |= createCycle(start, Sets.<StateAlias<TOKEN>> newHashSet());
 			//			System.out.println("after Cycle: " + Join.join(" ", getAllStates(start)));
 		}
 		//		if (!start.getOutgoing().isEmpty()) {
@@ -532,18 +459,30 @@ public class NfaToGrammar {
 		//				e.printStackTrace();
 		//			}
 		//		}
-		return start.getElement();
+		if (start.getElement() instanceof GroupAlias<?>) {
+			GroupAlias<TOKEN> result = (GroupAlias<TOKEN>) start.getElement();
+			result.getChildren().remove(0);
+			result.getChildren().remove(result.getChildren().size() - 1);
+			GrammarUtil2<AbstractElementAlias<TOKEN>, TOKEN> util = GrammarUtil2
+					.newUtil(new AliasGrammarProvider<TOKEN>());
+			return util.clone(start.getElement(), grammarFactory);
+		}
+		return null;
 	}
 
-	protected <T> StateAlias<T> toAlias(T state, StateAlias<T> stop, Function<T, Iterable<T>> followers,
-			Map<T, StateAlias<T>> cache) {
-		StateAlias<T> result = cache.get(state);
+	protected <STATE, TOKEN, NFA extends INfaAdapter<STATE> & ITokenAdapter<STATE, TOKEN>> StateAlias<TOKEN> toAlias(
+			NFA nfa, STATE state, Set<STATE> stops, StateAlias<TOKEN> stop, Map<STATE, StateAlias<TOKEN>> cache) {
+		StateAlias<TOKEN> result = cache.get(state);
 		if (result != null)
 			return result;
-		result = new StateAlias<T>(new ElementAlias<T>(state));
+		result = new StateAlias<TOKEN>(new ElementAlias<TOKEN>(nfa.getToken(state)));
 		cache.put(state, result);
-		for (T follower : followers.apply(state)) {
-			StateAlias<T> followerState = toAlias(follower, stop, followers, cache);
+		if (stops.contains(state)) {
+			stop.getIncoming().add(result);
+			result.getOutgoing().add(stop);
+		}
+		for (STATE follower : nfa.getFollowers(state)) {
+			StateAlias<TOKEN> followerState = toAlias(nfa, follower, stops, stop, cache);
 			result.getOutgoing().add(followerState);
 			followerState.getIncoming().add(result);
 		}

@@ -7,11 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
+import java.util.Iterator;
 import java.util.List;
 
 import com.google.common.collect.Lists;
 
-public abstract class AbstractLinkedStack<THIS extends AbstractLinkedStack<?, ELEMENT>, ELEMENT> {
+public abstract class AbstractLinkedStack<THIS extends AbstractLinkedStack<?, ELEMENT>, ELEMENT> implements
+		Iterable<ELEMENT> {
 
 	protected static class Element<T> {
 		protected Element<T> parent;
@@ -21,6 +23,29 @@ public abstract class AbstractLinkedStack<THIS extends AbstractLinkedStack<?, EL
 			super();
 			this.parent = parent;
 			this.value = value;
+		}
+	}
+
+	private final class ElementIterator implements Iterator<ELEMENT> {
+		protected Element<ELEMENT> ele;
+
+		public ElementIterator(Element<ELEMENT> ele) {
+			super();
+			this.ele = ele;
+		}
+
+		public boolean hasNext() {
+			return ele != null;
+		}
+
+		public ELEMENT next() {
+			Element<ELEMENT> prev = ele;
+			ele = ele.parent;
+			return prev.value;
+		}
+
+		public void remove() {
+			throw new UnsupportedOperationException();
 		}
 	}
 
@@ -100,6 +125,13 @@ public abstract class AbstractLinkedStack<THIS extends AbstractLinkedStack<?, EL
 
 	public boolean isEmpty() {
 		return top == null;
+	}
+
+	/**
+	 * @since 2.0
+	 */
+	public Iterator<ELEMENT> iterator() {
+		return new ElementIterator(top);
 	}
 
 	public ELEMENT peek() {
