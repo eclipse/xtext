@@ -190,15 +190,15 @@ public class PdaUtilTest extends TestCase {
 	//		assertEquals("[A]", util.shortestStackpruningPathTo(pda, newStack(), "A"));
 	//	}
 
-	public void testShortestStackemptyingPathLoops1() {
-		PDA pda = newPDA();
-		pda.state("A").start().to("B");
-		pda.state("B").to("C").pop("X");
-		pda.state("C").to("D", "C").pop("Y");
-		pda.state("D").stop();
-		assertEquals("[A, B, C, D]", util.shortestStackpruningPathTo(pda, newStack(), "D"));
-		assertEquals("[A, B, C, C, D]", util.shortestStackpruningPathTo(pda, newStack("Y"), "D"));
-		assertEquals("[A, B, C, C, C, D]", util.shortestStackpruningPathTo(pda, newStack("Y", "Y"), "D"));
-	}
+	//	public void testShortestStackemptyingPathLoops1() {
+	//		PDA pda = newPDA();
+	//		pda.state("A").start().to("B");
+	//		pda.state("B").to("C").pop("X");
+	//		pda.state("C").to("D", "C").pop("Y");
+	//		pda.state("D").stop();
+	//		assertEquals("[A, B, C, D]", util.shortestStackpruningPathTo(pda, newStack(), "D"));
+	//		assertEquals("[A, B, C, C, D]", util.shortestStackpruningPathTo(pda, newStack("Y"), "D"));
+	//		assertEquals("[A, B, C, C, C, D]", util.shortestStackpruningPathTo(pda, newStack("Y", "Y"), "D"));
+	//	}
 
 }
