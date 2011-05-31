@@ -33,11 +33,13 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
+import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider.ActionFilterState;
 import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider.ActionFilterTransition;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.util.logic.GrammarFormatter;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -102,8 +104,8 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 		protected Action actionContext;
 
-		public ActionConstraint(Action context, EClass type, ConstraintElement body, Context2NameFunction context2Name) {
-			super(type, body, context2Name);
+		public ActionConstraint(Action context, EClass type, ConstraintElement body, GrammarConstraintProvider provider) {
+			super(type, body, provider);
 			this.actionContext = context;
 		}
 
@@ -139,7 +141,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 		protected ConstraintElement body;
 
-		protected Context2NameFunction context2Name;
+		protected GrammarConstraintProvider provider;
 
 		protected IConstraintElement[] elements;
 
@@ -151,13 +153,12 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 		protected EClass type;
 
-		public Constraint(EClass type, ConstraintElement body, Context2NameFunction context2Name) {
+		public Constraint(EClass type, ConstraintElement body, GrammarConstraintProvider provider) {
 			super();
 			this.type = type;
 			this.body = body;
 			if (this.body != null)
 				this.body.setContainingConstraint(this);
-			this.context2Name = context2Name;
 		}
 
 		protected void collectElements(ConstraintElement ele, List<IConstraintElement> elements,
@@ -219,10 +220,6 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 		protected Object getCacheKey() {
 			return Tuples.create(body.getContext(), type);
-		}
-
-		protected Context2NameFunction getContext2Name() {
-			return context2Name;
 		}
 
 		public IConstraintElement[] getElements() {
@@ -440,7 +437,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		}
 
 		protected String context2Name(EObject context) {
-			return ((Constraint) getContainingConstraint()).getContext2Name().apply(context);
+			return ((Constraint) getContainingConstraint()).provider.context2Name.apply(context);
 		}
 
 		@Override
@@ -720,62 +717,10 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				return "TYPEMATCH";
 			if (type == null)
 				return "error(type is null)";
-			switch (type) {
-				case ALTERNATIVE:
-					List<String> childStrs = Lists.newArrayList();
-					int width = 0;
-					boolean mustWrap = false;
-					for (IConstraintElement child : getChildren()) {
-						String childStr = child.toString();
-						childStrs.add(childStr);
-						width += childStr.length();
-						if (childStr.contains("\n"))
-							mustWrap = true;
-					}
-					if (mustWrap || width > 140 || children.size() > 5) {
-						for (int i = 0; i < childStrs.size(); i++)
-							childStrs.set(i, childStrs.get(i).replaceAll("\\n", "\n    "));
-						return "(\n    " + Joiner.on(" | \n    ").join(childStrs) + "\n)\n" + getCardinality();
-					} else
-						return "(" + Joiner.on(" | ").join(childStrs) + ")" + getCardinality();
-				case GROUP:
-					List<String> childStrs2 = Lists.newArrayList();
-					int width2 = 0;
-					boolean mustWrap2 = false;
-					for (IConstraintElement child : getChildren()) {
-						String childStr = child.toString();
-						childStrs2.add(childStr);
-						width2 += childStr.length();
-						if (childStr.contains("\n"))
-							mustWrap2 = true;
-					}
-					if (mustWrap2 || (width2 > 140 && children.size() > 2)) {
-						for (int i = 0; i < childStrs2.size(); i++)
-							childStrs2.set(i, childStrs2.get(i).replaceAll("\\n", "\n    "));
-						return "(\n    " + Joiner.on("\n    ").join(childStrs2) + "\n)\n" + getCardinality();
-					} else
-						return "(" + Joiner.on(' ').join(childStrs2) + ")" + getCardinality();
-				case ASSIGNED_ACTION_CALL:
-					return getFeatureName() + getAssignmentOperator() + context2Name(getAction()) + getCardinality();
-				case ASSIGNED_PARSER_RULE_CALL:
-					return getFeatureName() + getAssignmentOperator() + context2Name(getRuleCall().getRule())
-							+ getCardinality();
-				case ASSIGNED_CROSSREF_DATATYPE_RULE_CALL:
-				case ASSIGNED_CROSSREF_TERMINAL_RULE_CALL:
-				case ASSIGNED_CROSSREF_ENUM_RULE_CALL:
-					return getFeatureName() + getAssignmentOperator() + "[" + getCrossReferenceType().getName() + "|"
-							+ getRuleCall().getRule().getName() + "]" + getCardinality();
-				case ASSIGNED_TERMINAL_RULE_CALL:
-				case ASSIGNED_DATATYPE_RULE_CALL:
-				case ASSIGNED_ENUM_RULE_CALL:
-					return getFeatureName() + getAssignmentOperator() + getRuleCall().getRule().getName()
-							+ getCardinality();
-				case ASSIGNED_KEYWORD:
-				case ASSIGNED_BOOLEAN_KEYWORD:
-					return getFeatureName() + getAssignmentOperator() + "'" + getKeyword().getValue() + "'"
-							+ getCardinality();
-			}
-			return "error";
+			GrammarFormatter<IConstraintElement, AbstractElement> formatter = GrammarFormatter.newFormatter(
+					IConstraintElement.ADAPTER, new GrammarElementTitleSwitch().hideCardinality()
+							.showActionsAsRuleCalls().showAssignments());
+			return formatter.format(this, true);
 		}
 
 		protected void typeMatch() {
@@ -913,8 +858,9 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 		protected ParserRule context;
 
-		public RuleConstraint(ParserRule context, EClass type, ConstraintElement body, Context2NameFunction context2Name) {
-			super(type, body, context2Name);
+		public RuleConstraint(ParserRule context, EClass type, ConstraintElement body,
+				GrammarConstraintProvider provider) {
+			super(type, body, provider);
 			this.context = context;
 		}
 
@@ -1286,15 +1232,15 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		Set<EClass> types = contextProvider.getTypesForContext(context);
 		for (EClass type : types) {
 			if (type == null) {
-				Constraint constraint = new ActionConstraint(context, null, null, context2Name);
+				Constraint constraint = new ActionConstraint(context, null, null, this);
 				result.addConstraint(constraint);
 			} else {
 				ConstraintElement ce = createConstraintElement(context, start, type, false, Sets.newHashSet());
 				if (ce == TYPEMATCH) {
-					Constraint constraint = new ActionConstraint(context, type, null, context2Name);
+					Constraint constraint = new ActionConstraint(context, type, null, this);
 					result.addConstraint(constraint);
 				} else if (ce != null && ce != INVALID) {
-					Constraint constraint = new ActionConstraint(context, type, ce, context2Name);
+					Constraint constraint = new ActionConstraint(context, type, ce, this);
 					result.addConstraint(constraint);
 				} else
 					System.err.println("constraint is " + ce + " for context " + context2Name.getContextName(context)
@@ -1327,15 +1273,15 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		Set<EClass> types = contextProvider.getTypesForContext(context);
 		for (EClass type : types) {
 			if (type == null) {
-				Constraint constraint = new RuleConstraint(context, null, null, context2Name);
+				Constraint constraint = new RuleConstraint(context, null, null, this);
 				result.addConstraint(constraint);
 			} else {
 				ConstraintElement ce = createConstraintElement(context, type, Sets.newHashSet());
 				if (ce == TYPEMATCH) {
-					Constraint constraint = new RuleConstraint(context, type, null, context2Name);
+					Constraint constraint = new RuleConstraint(context, type, null, this);
 					result.addConstraint(constraint);
 				} else if (ce != null && ce != INVALID) {
-					Constraint constraint = new RuleConstraint(context, type, ce, context2Name);
+					Constraint constraint = new RuleConstraint(context, type, ce, this);
 					result.addConstraint(constraint);
 				} else
 					System.err.println("constraint is " + ce + " for context " + context2Name.getContextName(context)

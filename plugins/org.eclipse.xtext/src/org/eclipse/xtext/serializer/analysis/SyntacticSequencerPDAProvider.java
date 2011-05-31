@@ -9,6 +9,7 @@ package org.eclipse.xtext.serializer.analysis;
 
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,15 +37,18 @@ import org.eclipse.xtext.grammaranalysis.impl.AbstractNFAProvider;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractNFAState;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractNFATransition;
 import org.eclipse.xtext.grammaranalysis.impl.AbstractPDAProvider;
-import org.eclipse.xtext.grammaranalysis.impl.GrammarElementFullTitleSwitch;
-import org.eclipse.xtext.serializer.analysis.NfaToGrammar.AbstractElementAlias;
-import org.eclipse.xtext.serializer.analysis.NfaToGrammar.ElementAlias;
-import org.eclipse.xtext.serializer.analysis.NfaToGrammar.GroupAlias;
+import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
-import org.eclipse.xtext.util.LinkedStack;
+import org.eclipse.xtext.util.logic.ITokenPdaAdapter;
+import org.eclipse.xtext.util.logic.NfaToGrammar;
+import org.eclipse.xtext.util.logic.NfaUtil;
+import org.eclipse.xtext.util.logic.PdaUtil;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -55,6 +59,50 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProvider {
+
+	protected static class NavigablePDA implements ITokenPdaAdapter<ISynState, RuleCall, AbstractElement> {
+
+		protected ISynNavigable navigable;
+
+		public NavigablePDA(ISynNavigable navigable) {
+			super();
+			this.navigable = navigable;
+		}
+
+		public Iterable<ISynState> getFinalStates() {
+			return Collections.<ISynState> singleton(navigable.getTarget());
+		}
+
+		public Iterable<ISynState> getFollowers(ISynState node) {
+			if (node instanceof ISynAbsorberState) {
+				if (navigable instanceof ISynTransition && ((ISynTransition) navigable).getSource() == node)
+					return navigable.getFollowers();
+				return Collections.emptyList();
+			}
+			return node.getFollowers();
+		}
+
+		public RuleCall getPop(ISynState state) {
+			return state.getType().getSimpleType() == PDAStateType.RULECALL_EXIT ? (RuleCall) state.getGrammarElement()
+					: null;
+		}
+
+		public RuleCall getPush(ISynState state) {
+			return state.getType().getSimpleType() == PDAStateType.RULECALL_ENTER ? (RuleCall) state
+					.getGrammarElement() : null;
+		}
+
+		public Iterable<ISynState> getStartStates() {
+			if (navigable instanceof ISynTransition)
+				return Collections.<ISynState> singleton(((ISynTransition) navigable).getSource());
+			return Collections.singleton((ISynState) navigable);
+		}
+
+		public AbstractElement getToken(ISynState owner) {
+			return owner.getGrammarElement();
+		}
+
+	}
 
 	public static class SequencerNFAProvider extends AbstractNFAProvider<SequencerNFAState, SequencerNFATransition> {
 		public class SequencerNFABuilder extends AbstractCachingNFABuilder<SequencerNFAState, SequencerNFATransition> {
@@ -133,11 +181,6 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		}
 
 		@Override
-		public int hashCode() {
-			return context.hashCode() + (type == null ? 0 : type.hashCode());
-		}
-
-		@Override
 		public boolean equals(Object obj) {
 			if (this == obj)
 				return true;
@@ -155,6 +198,11 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 		public EClass getType() {
 			return type;
+		}
+
+		@Override
+		public int hashCode() {
+			return context.hashCode() + (type == null ? 0 : type.hashCode());
 		}
 	}
 
@@ -175,6 +223,18 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			if (!(rc.getRule() instanceof ParserRule && rc.getRule().getType().getClassifier() instanceof EClass))
 				return false;
 			return GrammarUtil.containingAssignment(rc) == null;
+		}
+
+		@Override
+		protected boolean canPass(SequencerPDAContext context, INFAState<?, ?> state, EClass constructedType) {
+			AbstractElement ele = state.getGrammarElement();
+			if (ele instanceof Action)
+				return ((Action) ele).getType().getClassifier() == context.getType();
+			if (constructedType != null)
+				return true;
+			if (GrammarUtil.containingAssignment(ele) != null)
+				return GrammarUtil.containingRule(ele).getType().getClassifier() == context.getType();
+			return true;
 		}
 
 		protected boolean canReachElement(INFAState<?, ?> from, AbstractElement to, Set<Object> visited) {
@@ -268,18 +328,6 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			return false;
 
 		}
-
-		@Override
-		protected boolean canPass(SequencerPDAContext context, INFAState<?, ?> state, EClass constructedType) {
-			AbstractElement ele = state.getGrammarElement();
-			if (ele instanceof Action)
-				return ((Action) ele).getType().getClassifier() == context.getType();
-			if (constructedType != null)
-				return true;
-			if (GrammarUtil.containingAssignment(ele) != null)
-				return GrammarUtil.containingRule(ele).getType().getClassifier() == context.getType();
-			return true;
-		}
 	}
 
 	protected static class SynAbsorberState extends SynState implements ISynAbsorberState {
@@ -325,6 +373,14 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 		}
 
+		public EObject getContext() {
+			return context;
+		}
+
+		public EClass getEClass() {
+			return eClass;
+		}
+
 		public List<ISynTransition> getOutTransitions() {
 			List<ISynTransition> result = Lists.newArrayList();
 			result.addAll(outTransitionsByElement.values());
@@ -345,14 +401,6 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			return outTransitionsByRuleCallExit;
 		}
 
-		public EClass getEClass() {
-			return eClass;
-		}
-
-		public EObject getContext() {
-			return context;
-		}
-
 	}
 
 	protected static class SynEmitterState extends SynNavigable implements ISynEmitterState {
@@ -366,8 +414,6 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 	protected static class SynNavigable extends SynState implements ISynNavigable {
 
 		protected final static List<ISynState> RULE_EXIT_DEPENDENT = Lists.newArrayList();
-
-		protected final static int UNREACHABLE = Integer.MAX_VALUE;
 
 		protected int distanceToAbsorber = -1;
 
@@ -386,146 +432,50 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			this.target = target;
 		}
 
-		protected int distanceTo(ISynState state, Predicate<ISynState> matches, Predicate<ISynState> bounds,
-				RuleCallStack stack, LinkedStack<ISynState> visited) {
-			if (matches.apply(state))
-				return 0;
-			if (bounds.apply(state))
-				return UNREACHABLE;
-			if (visited.contains(state))
-				return UNREACHABLE;
-			else
-				visited = visited.cloneAndPush(state);
-			if (state.getType().isRuleCallExit()) {
-				if (!stack.isEmpty()) {
-					if (stack.peek() != state.getGrammarElement())
-						return UNREACHABLE;
-					else
-						stack = stack.cloneAndPop();
+		public EObject getContext() {
+			return target.getContext();
+		}
+
+		public EClass getEClass() {
+			return target.getEClass();
+		}
+
+		public ITokenPdaAdapter<ISynState, RuleCall, AbstractElement> getPathToTarget() {
+			return new NavigablePDA(this);
+		}
+
+		public List<ISynState> getShortestPathTo(final AbstractElement ele, RuleCallStack stack) {
+			return shortestPathTo(stack.iterator(), new Predicate<ISynState>() {
+				public boolean apply(ISynState input) {
+					return input.getGrammarElement() == ele;
 				}
-			} else if (state.getType().isRuleCallEnter())
-				stack = stack.cloneAndPush((RuleCall) state.getGrammarElement());
-			int dist = UNREACHABLE;
-			for (ISynState follower : state.getFollowers())
-				dist = Math.min(dist, distanceTo(follower, matches, bounds, stack, visited));
-			if (dist != UNREACHABLE && state.getType() != SynStateType.TRANSITION)
-				dist = dist + 1;
-			return dist;
-		}
-
-		public int getDistanceTo(Predicate<ISynState> matches, Predicate<ISynState> bounds, RuleCallStack stack) {
-			return distanceTo(this, matches, bounds, stack, new LinkedStack<ISynState>());
-		}
-
-		public int getDistanceWithStackToAbsorber(RuleCallStack stack) {
-			if (involvesRuleExit()) {
-				return getDistanceWithStackToElement(SynPredicates.absorber(), stack);
-			}
-			if (distanceToAbsorber < 0)
-				distanceToAbsorber = getDistanceTo(SynPredicates.absorber(), SynPredicates.absorber(), stack);
-			return distanceToAbsorber;
-		}
-
-		public int getDistanceWithStackToElement(Predicate<ISynState> matches, RuleCallStack stack) {
-			int result = 0;
-			if (involvesRuleExit()) {
-				while (!stack.isEmpty()) {
-					int r = getDistanceTo(SynPredicates.ruleCallExit(stack.peek()), SynPredicates.ruleCallExits(),
-							stack);
-					if (r != UNREACHABLE) {
-						result += r;
-						stack = stack.cloneAndPop();
-					} else
-						break;
-				}
-			}
-			return result + getDistanceTo(matches, SynPredicates.absorber(), stack);
-		}
-
-		public List<ISynState> getShortestPathTo(AbstractElement ele, RuleCallStack stack, boolean addMatch) {
-			return getShortestPathTo(SynPredicates.emitter(ele), SynPredicates.absorber(), stack, addMatch);
-		}
-
-		public List<ISynState> getShortestPathTo(Predicate<ISynState> matches, Predicate<ISynState> bounds,
-				RuleCallStack stack, boolean addMatch) {
-			List<ISynState> routes;
-			//			if (getType() == SynStateType.TRANSITION)
-			routes = getFollowers();
-			//			else
-			//				routes = Collections.<ISynState> singletonList(this);
-			List<ISynState> result = Lists.newArrayList();
-			Set<ISynState> visited = Sets.newHashSet();
-			ISynState next;
-			while (true) {
-				if (routes.size() == 1) {
-					next = routes.get(0);
-					if (matches.apply(next)) {
-						if (addMatch)
-							result.add(next);
-						return result;
-					}
-					if (bounds.apply(next))
-						return null;
-				} else {
-					next = null;
-					int minDist = UNREACHABLE;
-					for (ISynState follower : routes) {
-						if (matches.apply(follower)) {
-							if (addMatch)
-								result.add(follower);
-							return result;
-						}
-						if (!bounds.apply(follower) && follower instanceof ISynEmitterState) {
-							ISynEmitterState navFolower = (ISynEmitterState) follower;
-							int dist = navFolower.getDistanceTo(matches, bounds, stack);
-							if (dist < minDist) {
-								next = follower;
-								minDist = dist;
-							}
-						}
-					}
-				}
-				if (next == null || next instanceof ISynAbsorberState)
-					return null;
-				if (next.getType().isRuleCallExit())
-					stack = stack.cloneAndPop();
-				else if (next.getType().isRuleCallEnter())
-					stack = stack.cloneAndPush((RuleCall) next.getGrammarElement());
-				routes = next.getFollowers();
-				visited.add(next);
-				result.add(next);
-			}
+			}, true);
 		}
 
 		public List<ISynState> getShortestPathToAbsorber(RuleCallStack stack) {
 			if (involvesRuleExit())
-				return getShortestPathToElement(SynPredicates.absorber(), stack);
+				return shortestPathTo(stack.iterator(), Predicates.<ISynState> equalTo(getTarget()), false);
 			if (shortestPathToAbsorber == null)
-				shortestPathToAbsorber = getShortestPathTo(SynPredicates.absorber(), SynPredicates.absorber(), stack,
+				shortestPathToAbsorber = shortestPathTo(stack.iterator(), Predicates.<ISynState> equalTo(getTarget()),
 						false);
 			return shortestPathToAbsorber;
 		}
 
-		protected List<ISynState> getShortestPathToElement(Predicate<ISynState> matches, RuleCallStack stack) {
-			List<ISynState> result = Lists.newArrayList();
-			ISynNavigable current = this;
-			if (involvesRuleExit()) {
-				while (!stack.isEmpty()) {
-					List<ISynState> r = current.getShortestPathTo(SynPredicates.ruleCallExit(stack.peek()),
-							SynPredicates.ruleCallExitsOrAbsorber(), stack, true);
-					if (r != null) {
-						result.addAll(r);
-						stack = stack.cloneAndPop();
-						current = (ISynNavigable) r.get(r.size() - 1);
-					} else
-						break;
+		public List<ISynState> getShortestStackpruningPathTo(final AbstractElement ele, RuleCallStack stack) {
+			return shortestStackpruningPathTo(stack.iterator(), new Predicate<ISynState>() {
+				public boolean apply(ISynState input) {
+					return input.getGrammarElement() == ele;
 				}
-			}
-			//			List<ISynState> r = current.getShortestPathTo(matches, SynPredicates.ruleCallExitsOrAbsorber(), stack,
-			List<ISynState> r = current.getShortestPathTo(matches, SynPredicates.absorber(), stack, false);
-			if (r != null)
-				result.addAll(r);
-			return result;
+			}, true);
+		}
+
+		public List<ISynState> getShortestStackpruningPathToAbsorber(RuleCallStack stack) {
+			if (involvesRuleExit())
+				return shortestStackpruningPathTo(stack.iterator(), Predicates.<ISynState> equalTo(getTarget()), false);
+			if (shortestPathToAbsorber == null)
+				shortestPathToAbsorber = shortestPathTo(stack.iterator(), Predicates.<ISynState> equalTo(getTarget()),
+						false);
+			return shortestPathToAbsorber;
 		}
 
 		public ISynAbsorberState getTarget() {
@@ -624,13 +574,22 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			return results.size() != Sets.newHashSet(results).size();
 		}
 
-		public EClass getEClass() {
-			return target.getEClass();
+		protected List<ISynState> shortestPathTo(Iterator<RuleCall> stack, Predicate<ISynState> matches,
+				boolean includeMatch) {
+			List<ISynState> pathTo = new PdaUtil().shortestPathTo(getPathToTarget(), stack, matches);
+			if (pathTo != null)
+				return pathTo.subList(1, pathTo.size() - (includeMatch ? 0 : 1));
+			return null;
 		}
 
-		public EObject getContext() {
-			return target.getContext();
+		protected List<ISynState> shortestStackpruningPathTo(Iterator<RuleCall> stack, Predicate<ISynState> matches,
+				boolean includeMatch) {
+			List<ISynState> pathTo = new PdaUtil().shortestStackpruningPathTo(getPathToTarget(), stack, matches);
+			if (pathTo != null)
+				return pathTo.subList(1, pathTo.size() - (includeMatch ? 0 : 1));
+			return null;
 		}
+
 	}
 
 	protected abstract static class SynState implements ISynState {
@@ -680,7 +639,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		public String toString() {
 			if (type == null)
 				return "(type is null)";
-			GrammarElementFullTitleSwitch titles = new GrammarElementFullTitleSwitch();
+			GrammarElementTitleSwitch titles = new GrammarElementTitleSwitch().showAssignments();
 			switch (type.getSimpleType()) {
 				case ELEMENT:
 					return element == null ? "(null)" : titles.doSwitch(element);
@@ -700,6 +659,18 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 	protected static class SynTransition extends SynNavigable implements ISynTransition {
 
+		private final class Filter implements Predicate<ISynState> {
+			public boolean apply(ISynState input) {
+				AbstractElement ge = input.getGrammarElement();
+				return ge instanceof Keyword || GrammarUtil.isDatatypeRuleCall(ge) || GrammarUtil.isEnumRuleCall(ge)
+						|| GrammarUtil.isTerminalRuleCall(ge);
+			}
+		}
+
+		protected static final AbstractElementAlias UNINITIALIZED = new TokenAlias(false, false, null);
+
+		protected AbstractElementAlias ambiguousSyntax = UNINITIALIZED;
+
 		protected ISynAbsorberState source;
 
 		public SynTransition(ISynAbsorberState source, ISynAbsorberState target) {
@@ -707,85 +678,47 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			this.source = source;
 		}
 
-		public ISynAbsorberState getSource() {
-			return source;
-		}
-
-		@Override
-		public String toString() {
-			return getSyntax().toString();
-		}
-
-		public AbstractElementAlias<ISynState> getSyntax() {
-			return new NfaToGrammar().nfaToGtammar(source, target, new Function<ISynState, Iterable<ISynState>>() {
-				public Iterable<ISynState> apply(ISynState from) {
-					if (from == source)
-						return getFollowers();
-					if (from == target)
-						return Collections.emptyList();
-					return from.getFollowers();
-				}
-			});
-		}
-
-		public AbstractElementAlias<ISynState> getShortSyntax() {
-			return new NfaToGrammar().nfaToGtammar(source, target, new Function<ISynState, Iterable<ISynState>>() {
-				public Iterable<ISynState> apply(ISynState from) {
-					if (from == target)
-						return Collections.emptyList();
-					ISynFollowerOwner owner = from == source ? SynTransition.this : from;
-					Set<ISynState> followers = Sets.newHashSet();
-					collectFollowers(owner, followers, Sets.<ISynState> newHashSet(), new Predicate<ISynState>() {
-						public boolean apply(ISynState input) {
-							if (input instanceof ISynAbsorberState)
-								return true;
-							AbstractElement ge = input.getGrammarElement();
-							return ge instanceof Keyword || GrammarUtil.isDatatypeRuleCall(ge)
-									|| GrammarUtil.isEnumRuleCall(ge) || GrammarUtil.isTerminalRuleCall(ge);
-						}
-					});
-					return followers;
-				}
-			});
-		}
-
-		protected void collectFollowers(ISynFollowerOwner owner, Set<ISynState> result, Set<ISynState> visited,
-				Predicate<ISynState> filter) {
-			for (ISynState follower : owner.getFollowers())
-				if (visited.add(follower)) {
-					if (filter.apply(follower))
-						result.add(follower);
-					else
-						collectFollowers(follower, result, visited, filter);
-				}
-		}
-
-		protected AbstractElementAlias<ISynState> ambiguousSyntax = UNINITIALIZED;
-
-		protected static final AbstractElementAlias<ISynState> UNINITIALIZED = new ElementAlias<ISynState>(null);
-
-		public AbstractElementAlias<ISynState> getAmbiguousSyntax() {
+		public AbstractElementAlias getAmbiguousSyntax() {
 			if (ambiguousSyntax != UNINITIALIZED)
 				return ambiguousSyntax;
 			ambiguousSyntax = getShortSyntax();
 			if (ambiguousSyntax instanceof GroupAlias) {
-				GroupAlias<ISynState> group = (GroupAlias<ISynState>) ambiguousSyntax;
-				List<AbstractElementAlias<ISynState>> children = group.getChildren();
+				GroupAlias group = (GroupAlias) ambiguousSyntax;
+				List<AbstractElementAlias> children = group.getChildren();
 				int start = 0;
-				while (start < children.size() && children.get(start) instanceof ElementAlias<?>
-						&& children.get(start).isOne())
+				while (start < children.size() && children.get(start) instanceof TokenAlias
+						&& !children.get(start).isMany() && !children.get(start).isOptional())
 					start++;
 				int end = children.size() - 1;
-				while (end >= 0 && children.get(end) instanceof ElementAlias<?> && children.get(end).isOne())
+				while (end >= 0 && children.get(end) instanceof TokenAlias && !children.get(end).isMany()
+						&& !children.get(end).isOptional())
 					end--;
 				if (start <= end) {
-					group.children = children.subList(start, end + 1);
+					ambiguousSyntax = group = new GroupAlias(false, false, children.subList(start, end + 1));
 					if (group.children.size() == 1)
 						ambiguousSyntax = group.children.get(0);
 				} else
 					ambiguousSyntax = null;
 			}
 			return ambiguousSyntax;
+		}
+
+		public AbstractElementAlias getShortSyntax() {
+			return new NfaToGrammar().nfaToGrammar(new NfaUtil().filter(getPathToTarget(), new Filter()),
+					new GrammarAlias.GrammarAliasFactory());
+		}
+
+		public ISynAbsorberState getSource() {
+			return source;
+		}
+
+		public AbstractElementAlias getSyntax() {
+			return new NfaToGrammar().nfaToGrammar(getPathToTarget(), new GrammarAlias.GrammarAliasFactory());
+		}
+
+		@Override
+		public String toString() {
+			return getSyntax().toString();
 		}
 
 	}
@@ -884,7 +817,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 	public ISynAbsorberState getPDA(EObject context, EClass type) {
 		SequencerPDAContext ctx = new SequencerPDAContext(context, type);
-		ISynAbsorberState result = cache.get(context);
+		ISynAbsorberState result = cache.get(ctx);
 		if (result == null) {
 			Map<IPDAState, SynAbsorberState> absorbers = Maps.newHashMap();
 			Map<SynAbsorberState, Map<IPDAState, SynState>> emitters = Maps.newHashMap();

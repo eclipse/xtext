@@ -214,7 +214,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		EmitterNodeIterator ni = new EmitterNodeIterator(fromNode, toNode, false, false);
 		while (ni.hasNext()) {
 			INode next = ni.next();
-			List<ISynState> path = fromState.getShortestPathTo((AbstractElement) next.getGrammarElement(), stack, true);
+			List<ISynState> path = fromState.getShortestPathTo((AbstractElement) next.getGrammarElement(), stack);
 			if (path != null) {
 				if (path.get(path.size() - 1) instanceof ISynEmitterState)
 					fromState = (ISynEmitterState) path.get(path.size() - 1);
@@ -347,7 +347,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 			ISynNavigable fromEmitter = (ISynNavigable) fromState;
 			//			RCStack back = stack.clone();
 			if (fromEmitter.hasEmitters())
-				accept(fromNode, fromEmitter.getShortestPathToAbsorber(stack), stack);
+				accept(fromNode, fromEmitter.getShortestStackpruningPathToAbsorber(stack), stack);
 			return fromEmitter.getTarget();
 		}
 		return null;
@@ -367,7 +367,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 			ISynNavigable fromEmitter = (ISynNavigable) fromState;
 			if (!fromEmitter.hasEmitters())
 				return fromEmitter.getTarget();
-			List<ISynState> pathAndElement = fromEmitter.getShortestPathTo(toEle, stack, true);
+			List<ISynState> pathAndElement = fromEmitter.getShortestPathTo(toEle, stack);
 			if (pathAndElement == null) {
 				if (errorAcceptor != null)
 					errorAcceptor.accept(diagnosticProvider
