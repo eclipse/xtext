@@ -38,10 +38,11 @@ public class EObjectAtOffsetHelper {
 	protected EObject internalResolveElementAt(XtextResource resource, int offset, boolean isContainment) {
 		IParseResult parseResult = resource.getParseResult();
 		if (parseResult != null && parseResult.getRootNode() != null) {
-			INode node = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset);
-			if(node instanceof ILeafNode && ((ILeafNode) node).isHidden() && node.getOffset() == offset) {
-				node = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset - 1);
+			ILeafNode leaf = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset);
+			if(leaf.isHidden() && leaf.getOffset() == offset) {
+				leaf = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset - 1);
 			}
+			INode node = leaf;
 			while (node != null) {
 				if (node.getGrammarElement() instanceof CrossReference) {
 					return resolveCrossReferencedElement(node);

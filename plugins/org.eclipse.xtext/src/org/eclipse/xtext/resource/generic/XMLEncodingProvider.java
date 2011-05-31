@@ -8,6 +8,7 @@
 package org.eclipse.xtext.resource.generic;
 
 import java.io.InputStream;
+import java.nio.charset.Charset;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
@@ -27,13 +28,39 @@ public class XMLEncodingProvider implements IEncodingProvider {
 
 	public String getEncoding(URI uri) {
 		try {
+			byte[] buffer = null;
 			InputStream inputStream = URIConverter.INSTANCE.createInputStream(uri);
-			byte[] buffer = new byte[BUFFER_SIZE];
-			inputStream.read(buffer);
-			return XMLHandler.getXMLEncoding(buffer);
+			// Adopted from XMLLoadImpl
+			try {
+				if (inputStream.available() == 0) {
+					buffer = new byte[0];
+				} else {
+					buffer = new byte[BUFFER_SIZE];
+					int bytesRead = inputStream.read(buffer, 0, BUFFER_SIZE);
+					int totalBytesRead = bytesRead;
+					while (bytesRead != -1 && (totalBytesRead < BUFFER_SIZE)) {
+						bytesRead = inputStream.read(buffer, totalBytesRead, BUFFER_SIZE - totalBytesRead);
+						if (bytesRead != -1)
+							totalBytesRead += bytesRead;
+					}
+					if (totalBytesRead < 0) {
+						buffer = new byte[0];
+					} else if (totalBytesRead < BUFFER_SIZE) {
+						byte[] smallerBuffer = new byte[totalBytesRead];
+						System.arraycopy(buffer, 0, smallerBuffer, 0, totalBytesRead);
+						buffer = smallerBuffer;
+					}
+				}
+			} finally {
+				inputStream.close();
+			}
+			String result = XMLHandler.getXMLEncoding(buffer);
+			if (result == null)
+				return Charset.defaultCharset().name();
+			return result;
 		} catch (Exception e) {
 			LOG.error("Error detecting encoding for " + Strings.notNull(uri), e);
-			return null;
+			return Charset.defaultCharset().name();
 		}
 	}
 }

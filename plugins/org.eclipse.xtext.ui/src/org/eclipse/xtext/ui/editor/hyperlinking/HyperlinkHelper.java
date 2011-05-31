@@ -78,8 +78,8 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 	public void createHyperlinksByOffset(XtextResource resource, int offset, IHyperlinkAcceptor acceptor) {
 		EObject crossLinkedEObject = eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, offset);
 		if (crossLinkedEObject != null && !crossLinkedEObject.eIsProxy()) {
-			INode leafNode = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
-			if (leafNode instanceof ILeafNode && ((ILeafNode) leafNode).isHidden() && leafNode.getOffset() == offset) {
+			ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset);
+			if (leafNode.isHidden() && leafNode.getOffset() == offset) {
 				leafNode = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), offset-1);
 			}
 			INode crossRefNode = getParentNodeWithCrossReference(leafNode);

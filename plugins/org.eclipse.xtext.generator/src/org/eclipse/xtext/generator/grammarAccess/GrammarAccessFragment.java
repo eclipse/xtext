@@ -116,7 +116,7 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 		for (AbstractMetamodelDeclaration metamodelDecl : grammar.getMetamodelDeclarations()) {
 			EPackage pack = metamodelDecl.getEPackage();
 			Resource packResource = pack.eResource();
-			if (!packResource.getURI().equals(pack.getNsURI())) {
+			if (!packResource.getURI().toString().equals(pack.getNsURI())) {
 				ResourceSet packResourceSet = packResource.getResourceSet();
 				if (packResourceSet != null && packResourceSet.equals(set)) {
 					EPackage topMost = pack;

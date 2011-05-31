@@ -83,21 +83,23 @@ public class EMFBasedPersister implements PersistedStateProvider {
 			throw new WrappedException(e);
 		} finally {
 			try {
-				workspace.addSaveParticipant(Activator.getDefault(), new ISaveParticipant() {
-
-					public void saving(ISaveContext context) throws CoreException {
-						save(builderState.getAllResourceDescriptions());
-					}
-
-					public void rollback(ISaveContext context) {
-					}
-
-					public void prepareToSave(ISaveContext context) throws CoreException {
-					}
-
-					public void doneSaving(ISaveContext context) {
-					}
-				});
+				if (workspace != null) {
+					workspace.addSaveParticipant(Activator.getDefault(), new ISaveParticipant() {
+	
+						public void saving(ISaveContext context) throws CoreException {
+							save(builderState.getAllResourceDescriptions());
+						}
+	
+						public void rollback(ISaveContext context) {
+						}
+	
+						public void prepareToSave(ISaveContext context) throws CoreException {
+						}
+	
+						public void doneSaving(ISaveContext context) {
+						}
+					});
+				}
 			} catch (CoreException e) {
 				log.error("Error adding builder state save participant", e);
 			}

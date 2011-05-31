@@ -566,6 +566,12 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 		assertFalse(getComputer().isConformant(array(ref(String.class), 2), array(ref(String.class), 1)));
 		assertFalse(getComputer().isConformant(array(ref(String.class), 1), array(ref(String.class), 2)));
 	}
+	
+	public void testArrayTypeToObject() throws Exception {
+		assertTrue(getComputer().isConformant(ref(Object.class), array(ref(String.class), 1)));
+		assertTrue(getComputer().isConformant(ref(Object.class), array(ref(String.class), 3)));
+		assertFalse(getComputer().isConformant(array(ref(String.class), 1), ref(Object.class)));
+	}
 
 	protected void assertCommonSuperType(Class<?> expected, Class<?> ...types) {
 		List<JvmTypeReference> refs = Lists.newArrayList();

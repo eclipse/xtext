@@ -102,7 +102,7 @@ public class KeywordHelper implements Adapter {
 			public int compare(String o1, String o2) {
 				if (o1.length() == o2.length())
 					return o1.compareTo(o2);
-				return new Integer(o1.length()).compareTo(new Integer(o2.length()));
+				return Integer.valueOf(o1.length()).compareTo(Integer.valueOf(o2.length()));
 			}
 		});
 		Iterators.addAll(treeSet, transformed);

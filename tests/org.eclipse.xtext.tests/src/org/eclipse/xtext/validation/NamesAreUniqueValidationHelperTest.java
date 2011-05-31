@@ -235,7 +235,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractValidationMessag
 		EAttribute attribute = EcoreFactory.eINSTANCE.createEAttribute();
 		attribute.setName("Attribute");
 		eClass.getEStructuralFeatures().add(attribute);
-		IEObjectDescription description = EObjectDescription.create(QualifiedName.create((eClass.getName() + "." + attribute.getName())), attribute);
+		IEObjectDescription description = EObjectDescription.create(QualifiedName.create(eClass.getName(), attribute.getName()), attribute);
 		String errorMessage = helper.getDuplicateNameErrorMessage(description, EcorePackage.Literals.EATTRIBUTE, EcorePackage.Literals.ENAMED_ELEMENT__NAME);
 		assertEquals("Duplicate EAttribute 'Attribute' in EClass 'EClassName'", errorMessage);
 	}
