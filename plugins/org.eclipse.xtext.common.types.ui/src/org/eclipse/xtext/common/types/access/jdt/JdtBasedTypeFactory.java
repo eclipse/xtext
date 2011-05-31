@@ -560,7 +560,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			try {
 				if (javaMethod instanceof org.eclipse.jdt.internal.core.JavaElement) {
 					org.eclipse.jdt.internal.core.JavaElement casted = (org.eclipse.jdt.internal.core.JavaElement) javaMethod;
-					if (casted.getSourceMapper() != null || casted instanceof org.eclipse.jdt.internal.core.SourceMethod) {
+					if (casted instanceof org.eclipse.jdt.internal.core.SourceMethod || canProvideFastParameterNames(javaMethod, casted)) {
 						parameterNames = javaMethod.getParameterNames();		
 					}
 				}
@@ -573,6 +573,27 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			}
 		}
 		return parameterNames;
+	}
+
+	@SuppressWarnings("restriction")
+	private boolean canProvideFastParameterNames(IMethod javaMethod, org.eclipse.jdt.internal.core.JavaElement casted) {
+		org.eclipse.jdt.internal.core.SourceMapper mapper = casted.getSourceMapper();
+		if (mapper == null)
+			return false;
+		if (mapper.getMethodParameterNames(javaMethod) != null)
+			return true;
+		try {
+			IType type = (IType) javaMethod.getParent();
+			org.eclipse.jdt.internal.compiler.env.IBinaryType info = (org.eclipse.jdt.internal.compiler.env.IBinaryType) 
+				((org.eclipse.jdt.internal.core.BinaryType) javaMethod.getDeclaringType()).getElementInfo();
+			char[] source = mapper.findSource(type, info);
+			if (source != null){
+				mapper.mapSource(type, source, info);
+			}
+			return mapper.getMethodParameterNames(javaMethod) != null;
+		} catch(JavaModelException e) {
+			return false;
+		}
 	}
 
 	public void enhanceGenericDeclaration(JvmExecutable result, ITypeBinding[] parameters) {
