@@ -1,0 +1,177 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Xbase Language Reference</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="00-Language%20Specification.html" title="">
+</head>
+<body>
+<h1>Xbase Language Reference</h1>
+<ol><li><a href="01-Introduction.html">Preface</a>
+</li>
+<li><a href="02-Lexical%20Structure.html">Lexical Syntax</a>
+<ol>	<li><a href="02-Lexical%20Structure.html#0">Identifiers</a>
+	<ol>	<li><a href="02-Lexical%20Structure.html#0-0">Escaped Identifiers</a>
+		</li>
+		<li><a href="02-Lexical%20Structure.html#0-1">Syntax</a>
+		</li>
+		<li><a href="02-Lexical%20Structure.html#0-2">Examples</a>
+		</li>
+	</ol></li>
+	<li><a href="02-Lexical%20Structure.html#1">String Literals</a>
+	<ol>	<li><a href="02-Lexical%20Structure.html#1-0">Syntax</a>
+		</li>
+		<li><a href="02-Lexical%20Structure.html#1-1">Examples</a>
+		</li>
+	</ol></li>
+	<li><a href="02-Lexical%20Structure.html#2">Integer Literals</a>
+	<ol>	<li><a href="02-Lexical%20Structure.html#2-0">Syntax</a>
+		</li>
+	</ol></li>
+	<li><a href="02-Lexical%20Structure.html#3">Comments</a>
+	<ol>	<li><a href="02-Lexical%20Structure.html#3-0">Syntax</a>
+		</li>
+	</ol></li>
+	<li><a href="02-Lexical%20Structure.html#4">White Space</a>
+	</li>
+	<li><a href="02-Lexical%20Structure.html#5">Reserved Keywords</a>
+	</li>
+</ol></li>
+<li><a href="03-Types.html">Types</a>
+<ol>	<li><a href="03-Types.html#0">Arrays</a>
+	</li>
+	<li><a href="03-Types.html#1">Simple Type References</a>
+	<ol>	<li><a href="03-Types.html#1-0">Syntax</a>
+		</li>
+		<li><a href="03-Types.html#1-1">Examples</a>
+		</li>
+	</ol></li>
+	<li><a href="03-Types.html#2">Function Types</a>
+	<ol>	<li><a href="03-Types.html#2-0">Syntax</a>
+		</li>
+		<li><a href="03-Types.html#2-1">Examples</a>
+		</li>
+	</ol></li>
+	<li><a href="03-Types.html#3">Parameterized Type References</a>
+	<ol>	<li><a href="03-Types.html#3-0">Syntax</a>
+		</li>
+		<li><a href="03-Types.html#3-1">Examples</a>
+		</li>
+	</ol></li>
+	<li><a href="03-Types.html#4">Primitives</a>
+	</li>
+	<li><a href="03-Types.html#5">Conformance and Conversion</a>
+	<ol>	<li><a href="03-Types.html#5-0">Common Super Type</a>
+		</li>
+	</ol></li>
+</ol></li>
+<li><a href="04-Expressions.html">Expressions</a>
+<ol>	<li><a href="04-Expressions.html#0">Literals</a>
+	<ol>	<li><a href="04-Expressions.html#0-0">String Literals</a>
+		</li>
+		<li><a href="04-Expressions.html#0-1">Integer Literals</a>
+		</li>
+		<li><a href="04-Expressions.html#0-2">Boolean Literals</a>
+		</li>
+		<li><a href="04-Expressions.html#0-3">Null Literal</a>
+		</li>
+		<li><a href="04-Expressions.html#0-4">Type Literals</a>
+		</li>
+	</ol></li>
+	<li><a href="04-Expressions.html#1">Type Casts</a>
+	<ol>	<li><a href="04-Expressions.html#1-0">Syntax</a>
+		</li>
+		<li><a href="04-Expressions.html#1-1">Examples</a>
+		</li>
+	</ol></li>
+	<li><a href="04-Expressions.html#2">Infix Operators / Operator Overloading</a>
+	<ol>	<li><a href="04-Expressions.html#2-0">Short-Circuit Boolean Operators</a>
+		</li>
+		<li><a href="04-Expressions.html#2-1">Examples</a>
+		</li>
+		<li><a href="04-Expressions.html#2-2">Assignments</a>
+		</li>
+	</ol></li>
+	<li><a href="04-Expressions.html#3">Feature Calls</a>
+	<ol>	<li><a href="04-Expressions.html#3-0">Syntax</a>
+		</li>
+		<li><a href="04-Expressions.html#3-1">Property Access</a>
+		</li>
+		<li><a href="04-Expressions.html#3-2">Implicit 'this' variable</a>
+		</li>
+		<li><a href="04-Expressions.html#3-3">Null-Safe Feature Call</a>
+		</li>
+	</ol></li>
+	<li><a href="04-Expressions.html#4">Constructor Call</a>
+	<ol>	<li><a href="04-Expressions.html#4-0">Examples</a>
+		</li>
+		<li><a href="04-Expressions.html#4-1">Syntax</a>
+		</li>
+	</ol></li>
+	<li><a href="04-Expressions.html#5">Closures</a>
+	<ol>	<li><a href="04-Expressions.html#5-0">Syntax</a>
+		</li>
+		<li><a href="04-Expressions.html#5-1">Typing</a>
+		</li>
+		<li><a href="04-Expressions.html#5-2">Function Mapping</a>
+		</li>
+		<li><a href="04-Expressions.html#5-3">Examples</a>
+		</li>
+	</ol></li>
+	<li><a href="04-Expressions.html#6">If Expression</a>
+	<ol>	<li><a href="04-Expressions.html#6-0">Syntax</a>
+		</li>
+		<li><a href="04-Expressions.html#6-1">Typing</a>
+		</li>
+		<li><a href="04-Expressions.html#6-2">Examples</a>
+		</li>
+	</ol></li>
+	<li><a href="04-Expressions.html#7">Switch Expression</a>
+	<ol>	<li><a href="04-Expressions.html#7-0">Type guards</a>
+		</li>
+		<li><a href="04-Expressions.html#7-1">Typing</a>
+		</li>
+		<li><a href="04-Expressions.html#7-2">Examples</a>
+		</li>
+		<li><a href="04-Expressions.html#7-3">Syntax</a>
+		</li>
+	</ol></li>
+	<li><a href="04-Expressions.html#8">Variable Declarations</a>
+	<ol>	<li><a href="04-Expressions.html#8-0">Syntax</a>
+		</li>
+		<li><a href="04-Expressions.html#8-1">Typing</a>
+		</li>
+	</ol></li>
+	<li><a href="04-Expressions.html#9">Blocks</a>
+	<ol>	<li><a href="04-Expressions.html#9-0">Examples</a>
+		</li>
+		<li><a href="04-Expressions.html#9-1">Syntax</a>
+		</li>
+	</ol></li>
+	<li><a href="04-Expressions.html#10">For Loop</a>
+	<ol>	<li><a href="04-Expressions.html#10-0">Syntax</a>
+		</li>
+	</ol></li>
+	<li><a href="04-Expressions.html#11">While Loop</a>
+	<ol>	<li><a href="04-Expressions.html#11-0">Syntax</a>
+		</li>
+		<li><a href="04-Expressions.html#11-1">Examples</a>
+		</li>
+	</ol></li>
+	<li><a href="04-Expressions.html#12">Do-While Loop</a>
+	<ol>	<li><a href="04-Expressions.html#12-0">Syntax</a>
+		</li>
+		<li><a href="04-Expressions.html#12-1">Examples</a>
+		</li>
+	</ol></li>
+	<li><a href="04-Expressions.html#13">Return Expression</a>
+	</li>
+	<li><a href="04-Expressions.html#14">Throwing Exceptions</a>
+	</li>
+	<li><a href="04-Expressions.html#15">Try, Catch, Finally</a>
+	</li>
+</ol></li>
+</ol></body>
+</html>
