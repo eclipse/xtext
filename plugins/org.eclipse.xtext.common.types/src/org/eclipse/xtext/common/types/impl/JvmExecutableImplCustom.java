@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 
 /**
@@ -14,6 +15,16 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
  */
 public class JvmExecutableImplCustom extends JvmExecutableImpl {
 
+	@Override
+	public void internalSetIdentifier(String identifier) {
+		if (this.identifier != null && identifier == null) {
+			if (eResource() != null) {
+				EcoreUtil.resolveAll(this);
+			}
+		}
+		super.internalSetIdentifier(identifier);
+	}
+	
 	@Override
 	protected String computeIdentifier() {
 		String result = super.computeIdentifier();

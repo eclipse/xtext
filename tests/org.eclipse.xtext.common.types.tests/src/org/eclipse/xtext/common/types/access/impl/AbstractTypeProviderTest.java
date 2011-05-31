@@ -73,6 +73,11 @@ import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.common.types.testSetups.AbstractMethods;
 import org.eclipse.xtext.common.types.testSetups.AnnotatedClassWithStringDefault;
 import org.eclipse.xtext.common.types.testSetups.AnnotatedInterfaceWithStringDefault;
+import org.eclipse.xtext.common.types.testSetups.Bug347739;
+import org.eclipse.xtext.common.types.testSetups.Bug347739OneTypeParam;
+import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParams;
+import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuper;
+import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper;
 import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs;
 import org.eclipse.xtext.common.types.testSetups.EmptyAbstractClass;
 import org.eclipse.xtext.common.types.testSetups.Fields;
@@ -2286,5 +2291,59 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 			getTypeProvider().findTypeByName(ParameterizedTypes.class.getName());
 		}
 //		fail();
+	}
+	
+	public void testBug347739_01() {
+		String typeName = Bug347739.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
+		diagnose(type);
+	}
+	
+	public void testBug347739_02() {
+		String typeName = Bug347739OneTypeParam.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
+		diagnose(type);
+	}
+	
+	public void testBug347739_03() {
+		String typeName = Bug347739ThreeTypeParams.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
+		diagnose(type);
+	}
+	
+	public void testBug347739_04() {
+		String typeName = Bug347739ThreeTypeParamsSuper.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
+		diagnose(type);
+	}
+	
+	public void testBug347739_05() {
+		String typeName = Bug347739ThreeTypeParamsSuperSuper.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
+		diagnose(type);
+	}
+	
+	public void testBug347739_06() {
+		String typeNameList = List.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeNameList);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
+		diagnose(type);
 	}
 }

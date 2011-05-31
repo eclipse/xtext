@@ -1,6 +1,11 @@
 AbstractMethods.java.txt
 AnnotatedClassWithStringDefault.java.txt
 AnnotatedInterfaceWithStringDefault.java.txt
+Bug347739.java.txt
+Bug347739OneTypeParam.java.txt
+Bug347739ThreeTypeParams.java.txt
+Bug347739ThreeTypeParamsSuper.java.txt
+Bug347739ThreeTypeParamsSuperSuper.java.txt
 ClassWithVarArgs.java.txt
 EmptyAbstractClass.java.txt
 Fields.java.txt
