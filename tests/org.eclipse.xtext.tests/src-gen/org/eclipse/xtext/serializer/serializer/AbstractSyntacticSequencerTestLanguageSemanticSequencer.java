@@ -330,7 +330,6 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	 *         x7=UnassignedDatatype | 
 	 *         x8=AmbiguousTransition
 	 *     )
-	 *     
 	 *
 	 * Features:
 	 *    x1[0, 1]
@@ -486,13 +485,12 @@ public class AbstractSyntacticSequencerTestLanguageSemanticSequencer extends Abs
 	/**
 	 * Constraint:
 	 *     (
-	 *         (name=TerminalID | name=ID)
-	 *         ref1=[SingleCrossReference|TerminalID]?
-	 *         ref2=[SingleCrossReference|DatatypeID]?
-	 *         ref3=[SingleCrossReference|ID]?
+	 *         (name=TerminalID | name=ID) 
+	 *         ref1=[SingleCrossReference|TerminalID]? 
+	 *         ref2=[SingleCrossReference|DatatypeID]? 
+	 *         ref3=[SingleCrossReference|ID]? 
 	 *         ref4=[SingleCrossReference|ID]?
 	 *     )
-	 *     
 	 *
 	 * Features:
 	 *    name[0, 2]

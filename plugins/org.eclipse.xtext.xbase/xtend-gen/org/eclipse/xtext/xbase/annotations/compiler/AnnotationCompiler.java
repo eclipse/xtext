@@ -25,7 +25,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 @SuppressWarnings("all")
 public class AnnotationCompiler {
   
-  public void _generate(final XAnnotation annotation, final IAppendable a) {
+  protected void _generate(final XAnnotation annotation, final IAppendable a) {
     {
       IAppendable _append = a.append("@");
       JvmAnnotationType _annotationType = annotation.getAnnotationType();
@@ -70,7 +70,7 @@ public class AnnotationCompiler {
     }
   }
   
-  public void _generate(final XAnnotationElementValuePair binaryOp, final IAppendable a) {
+  protected void _generate(final XAnnotationElementValuePair binaryOp, final IAppendable a) {
     {
       JvmOperation _element = binaryOp.getElement();
       String _simpleName = _element.getSimpleName();
@@ -81,7 +81,7 @@ public class AnnotationCompiler {
     }
   }
   
-  public void _generate(final XAnnotationElementValueBinaryOperation binaryOp, final IAppendable a) {
+  protected void _generate(final XAnnotationElementValueBinaryOperation binaryOp, final IAppendable a) {
     {
       XExpression _leftOperand = binaryOp.getLeftOperand();
       this.generate(_leftOperand, a);
@@ -91,7 +91,7 @@ public class AnnotationCompiler {
     }
   }
   
-  public void _generate(final XAnnotationValueArray array, final IAppendable a) {
+  protected void _generate(final XAnnotationValueArray array, final IAppendable a) {
     {
       a.append("{");
       EList<XExpression> _values = array.getValues();
@@ -115,7 +115,7 @@ public class AnnotationCompiler {
     }
   }
   
-  public void _generate(final XFeatureCall featureCall, final IAppendable a) {
+  protected void _generate(final XFeatureCall featureCall, final IAppendable a) {
     JvmDeclaredType _declaringType = featureCall.getDeclaringType();
     boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_declaringType, null);
     if (_operator_notEquals) {
@@ -127,7 +127,7 @@ public class AnnotationCompiler {
     }
   }
   
-  public void _generate(final XStringLiteral stringLiteral, final IAppendable a) {
+  protected void _generate(final XStringLiteral stringLiteral, final IAppendable a) {
     IAppendable _append = a.append("\"");
     String _value = stringLiteral.getValue();
     String _convertToJavaString = Strings.convertToJavaString(_value);
@@ -135,17 +135,17 @@ public class AnnotationCompiler {
     _append_1.append("\"");
   }
   
-  public void _generate(final XBooleanLiteral booleanLiteral, final IAppendable a) {
+  protected void _generate(final XBooleanLiteral booleanLiteral, final IAppendable a) {
     boolean _isIsTrue = booleanLiteral.isIsTrue();
     a.append(((Boolean)_isIsTrue));
   }
   
-  public void _generate(final XIntLiteral intLiteral, final IAppendable a) {
+  protected void _generate(final XIntLiteral intLiteral, final IAppendable a) {
     int _value = intLiteral.getValue();
     a.append(((Integer)_value));
   }
   
-  public void _generate(final XTypeLiteral typeLiteral, final IAppendable a) {
+  protected void _generate(final XTypeLiteral typeLiteral, final IAppendable a) {
     JvmType _type = typeLiteral.getType();
     IAppendable _append = a.append(_type);
     _append.append(".class");

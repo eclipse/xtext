@@ -2,13 +2,12 @@ package org.eclipse.xtext.serializer.serializer;
 
 import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
-import org.eclipse.xtext.serializer.analysis.NfaToGrammar.AbstractElementAlias;
-import org.eclipse.xtext.serializer.analysis.NfaToGrammar.ElementAlias;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.eclipse.xtext.serializer.services.SyntacticSequencerTestLanguageGrammarAccess;
 
@@ -16,20 +15,20 @@ import org.eclipse.xtext.serializer.services.SyntacticSequencerTestLanguageGramm
 public class AbstractSyntacticSequencerTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected SyntacticSequencerTestLanguageGrammarAccess grammarAccess;
-	protected AbstractElementAlias<AbstractElement> match_AmbiguousTransition_Kw1Keyword_1_q;
-	protected AbstractElementAlias<AbstractElement> match_Prim1_LeftParenthesisKeyword_1_0_a;
-	protected AbstractElementAlias<AbstractElement> match_Prim1_LeftParenthesisKeyword_1_0_p;
-	protected AbstractElementAlias<AbstractElement> match_Prim2_LeftParenthesisKeyword_1_0_a;
-	protected AbstractElementAlias<AbstractElement> match_Prim2_LeftParenthesisKeyword_1_0_p;
+	protected AbstractElementAlias match_AmbiguousTransition_Kw1Keyword_1_q;
+	protected AbstractElementAlias match_Prim1_LeftParenthesisKeyword_1_0_a;
+	protected AbstractElementAlias match_Prim1_LeftParenthesisKeyword_1_0_p;
+	protected AbstractElementAlias match_Prim2_LeftParenthesisKeyword_1_0_a;
+	protected AbstractElementAlias match_Prim2_LeftParenthesisKeyword_1_0_p;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (SyntacticSequencerTestLanguageGrammarAccess) access;
-		match_AmbiguousTransition_Kw1Keyword_1_q = new ElementAlias<AbstractElement>(true, false, grammarAccess.getAmbiguousTransitionAccess().getKw1Keyword_1());
-		match_Prim1_LeftParenthesisKeyword_1_0_a = new ElementAlias<AbstractElement>(true, true, grammarAccess.getPrim1Access().getLeftParenthesisKeyword_1_0());
-		match_Prim1_LeftParenthesisKeyword_1_0_p = new ElementAlias<AbstractElement>(false, true, grammarAccess.getPrim1Access().getLeftParenthesisKeyword_1_0());
-		match_Prim2_LeftParenthesisKeyword_1_0_a = new ElementAlias<AbstractElement>(true, true, grammarAccess.getPrim2Access().getLeftParenthesisKeyword_1_0());
-		match_Prim2_LeftParenthesisKeyword_1_0_p = new ElementAlias<AbstractElement>(false, true, grammarAccess.getPrim2Access().getLeftParenthesisKeyword_1_0());
+		match_AmbiguousTransition_Kw1Keyword_1_q = new TokenAlias(true, false, grammarAccess.getAmbiguousTransitionAccess().getKw1Keyword_1());
+		match_Prim1_LeftParenthesisKeyword_1_0_a = new TokenAlias(true, true, grammarAccess.getPrim1Access().getLeftParenthesisKeyword_1_0());
+		match_Prim1_LeftParenthesisKeyword_1_0_p = new TokenAlias(false, true, grammarAccess.getPrim1Access().getLeftParenthesisKeyword_1_0());
+		match_Prim2_LeftParenthesisKeyword_1_0_a = new TokenAlias(true, true, grammarAccess.getPrim2Access().getLeftParenthesisKeyword_1_0());
+		match_Prim2_LeftParenthesisKeyword_1_0_p = new TokenAlias(false, true, grammarAccess.getPrim2Access().getLeftParenthesisKeyword_1_0());
 	}
 	
 	@Override
@@ -40,6 +39,8 @@ public class AbstractSyntacticSequencerTestLanguageSyntacticSequencer extends Ab
 	}
 	
 	protected String getUnassignedDatatypeRuleToken(RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
 		return "kw1";
 	}
 	
@@ -62,7 +63,7 @@ public class AbstractSyntacticSequencerTestLanguageSyntacticSequencer extends Ab
 
 	/**
 	 * Syntax:
-	 *     'kw1'??
+	 *     'kw1'?
 	 */
 	protected void emit_AmbiguousTransition_Kw1Keyword_1_q(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
 		acceptNodes(transition, fromNode, toNode);

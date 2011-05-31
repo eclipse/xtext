@@ -970,7 +970,7 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 	 *     (name=ValidID ((constraints+=JvmUpperBound constraints+=JvmUpperBoundAnded*) | constraints+=JvmLowerBound)?)
 	 *
 	 * Features:
-	 *    arrayType[1, *]
+	 *    constraints[1, *]
 	 *    name[1, 1]
 	 */
 	protected void sequence_JvmTypeParameter_JvmTypeParameter(EObject context, JvmTypeParameter semanticObject) {
@@ -1026,7 +1026,6 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 	 *         (leftOperand=XOrExpression_XBinaryOperation_1_0_0_0 feature=[JvmIdentifiableElement|OpOr] rightOperand=XAndExpression) | 
 	 *         (leftOperand=XAssignment_XBinaryOperation_1_1_0_0_0 feature=[JvmIdentifiableElement|OpMultiAssign] rightOperand=XAssignment)
 	 *     )
-	 *     
 	 *
 	 * Features:
 	 *    feature[8, 8]
@@ -1044,7 +1043,6 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 	 *         (feature=[JvmIdentifiableElement|ValidID] value=XAssignment) | 
 	 *         (assignable=XMemberFeatureCall_XAssignment_1_0_0_0_0 feature=[JvmIdentifiableElement|ValidID] value=XAssignment)
 	 *     )
-	 *     
 	 *
 	 * Features:
 	 *    feature[2, 2]
@@ -1162,11 +1160,10 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (
-	 *         constructor=[JvmConstructor|QualifiedName]
-	 *         (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)?
+	 *         constructor=[JvmConstructor|QualifiedName] 
+	 *         (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)? 
 	 *         (arguments+=XShortClosure | (arguments+=XExpression arguments+=XExpression*))?
 	 *     )
-	 *     
 	 *
 	 * Features:
 	 *    constructor[1, 1]
@@ -1215,12 +1212,11 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (
-	 *         declaringType=[JvmDeclaredType|StaticQualifier]?
-	 *         (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)?
-	 *         feature=[JvmIdentifiableElement|IdOrSuper]
+	 *         declaringType=[JvmDeclaredType|StaticQualifier]? 
+	 *         (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)? 
+	 *         feature=[JvmIdentifiableElement|IdOrSuper] 
 	 *         (explicitOperationCall?='(' (featureCallArguments+=XShortClosure | (featureCallArguments+=XExpression featureCallArguments+=XExpression*))?)?
 	 *     )
-	 *     
 	 *
 	 * Features:
 	 *    feature[1, 1]
@@ -1315,13 +1311,12 @@ public class AbstractXbaseSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (
-	 *         memberCallTarget=XMemberFeatureCall_XMemberFeatureCall_1_1_0_0_0
-	 *         (nullSafe?='?.' | spreading?='*.')?
-	 *         (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)?
-	 *         feature=[JvmIdentifiableElement|ValidID]
+	 *         memberCallTarget=XMemberFeatureCall_XMemberFeatureCall_1_1_0_0_0 
+	 *         (nullSafe?='?.' | spreading?='*.')? 
+	 *         (typeArguments+=JvmArgumentTypeReference typeArguments+=JvmArgumentTypeReference*)? 
+	 *         feature=[JvmIdentifiableElement|ValidID] 
 	 *         (explicitOperationCall?='(' (memberCallArguments+=XShortClosure | (memberCallArguments+=XExpression memberCallArguments+=XExpression*))?)?
 	 *     )
-	 *     
 	 *
 	 * Features:
 	 *    feature[1, 1]

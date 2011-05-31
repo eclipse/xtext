@@ -424,7 +424,6 @@ public class AbstractSequencerTestLanguageSemanticSequencer extends AbstractSema
 	 *         x21=Optional | 
 	 *         x22=Float
 	 *     )
-	 *     
 	 *
 	 * Features:
 	 *    x1[0, 1]
