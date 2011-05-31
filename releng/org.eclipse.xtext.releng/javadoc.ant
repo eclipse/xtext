@@ -30,6 +30,7 @@
 			<fileset dir="${sourcesLocation}" defaultexcludes="true">
 				<include name="**/*.java" />
 				<exclude name="**/testdata/**" />
+				<exclude name="**/org/antlr/**" />
 				<exclude name="**/packrat/**" />
 			</fileset>
 
