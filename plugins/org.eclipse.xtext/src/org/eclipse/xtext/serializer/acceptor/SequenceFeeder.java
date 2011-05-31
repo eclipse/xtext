@@ -334,7 +334,7 @@ public class SequenceFeeder {
 
 	protected void assertAction(Action action) {
 		if (action.getFeature() == null)
-			new RuntimeException("Only assigned actions are allowed.");
+			throw new RuntimeException("Only assigned actions are allowed.");
 	}
 
 	protected void assertIndex(EStructuralFeature feature) {

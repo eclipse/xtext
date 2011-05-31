@@ -15,18 +15,54 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.UnorderedGroup;
+import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.util.XtextSwitch;
+
+import com.google.common.base.Function;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class GrammarElementTitleSwitch extends XtextSwitch<String> {
+public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Function<AbstractElement, String> {
+
+	protected boolean showActionAsRuleCall = false;
+
+	protected boolean showAssignment = false;
+
+	protected boolean showCardinality = true;
+
+	protected String addAssignemnt(String result, AbstractElement ele) {
+		if (!showAssignment)
+			return result;
+		Assignment ass = GrammarUtil.containingAssignment(ele);
+		return ass != null ? ass.getFeature() + ass.getOperator() + result : result;
+	}
+
+	protected String addCrossRef(String result, AbstractElement ele) {
+		if (!showAssignment)
+			return result;
+		CrossReference cr = GrammarUtil.containingCrossReference(ele);
+		return cr != null ? "[" + cr.getType().getClassifier().getName() + "|" + result + "]" : result;
+	}
+
+	protected String addCrossRefOrAssignemnt(String result, AbstractElement ele) {
+		if (!showAssignment)
+			return result;
+		return addAssignemnt(addCrossRef(result, ele), ele);
+	}
+
+	public String apply(AbstractElement from) {
+		return doSwitch(from);
+	}
 
 	protected String card(AbstractElement ele) {
+		if (!showCardinality)
+			return "";
 		return ele.getCardinality() == null ? "" : ele.getCardinality();
 	}
 
@@ -45,13 +81,17 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> {
 
 	@Override
 	public String caseAction(Action object) {
-		String o = object.getOperator();
-		String t = object.getType().getClassifier().getName();
 		String f = object.getFeature();
+		String o = object.getOperator();
 		o = (o == null) ? "" : o;
-		t = (t == null) ? "" : t;
-		f = (f == null) ? "" : "." + f;
-		return "{" + t + f + o + "}" + card(object);
+		if (showActionAsRuleCall && f != null) {
+			return f + o + new Context2NameFunction().apply(object) + card(object);
+		} else {
+			String t = object.getType().getClassifier().getName();
+			t = (t == null) ? "" : t;
+			f = (f == null) ? "" : "." + f;
+			return "{" + t + f + o + "}" + card(object);
+		}
 	}
 
 	@Override
@@ -66,7 +106,8 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> {
 
 	@Override
 	public String caseCrossReference(CrossReference object) {
-		return "[" + object.getType().getClassifier().getName() + "]" + card(object);
+		String cr = "[" + object.getType().getClassifier().getName() + "]";
+		return addAssignemnt(cr, object) + card(object);
 	}
 
 	@Override
@@ -76,12 +117,12 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> {
 
 	@Override
 	public String caseKeyword(Keyword object) {
-		return "'" + object.getValue() + "'" + card(object);
+		return addCrossRefOrAssignemnt("'" + object.getValue() + "'", object) + card(object);
 	}
 
 	@Override
 	public String caseRuleCall(RuleCall object) {
-		return "=>" + object.getRule().getName() + card(object);
+		return addCrossRefOrAssignemnt(object.getRule().getName(), object) + card(object);
 	}
 
 	@Override
@@ -92,6 +133,21 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> {
 	@Override
 	public String defaultCase(EObject object) {
 		return object.eClass().getName();
+	}
+
+	public GrammarElementTitleSwitch hideCardinality() {
+		showCardinality = false;
+		return this;
+	}
+
+	public GrammarElementTitleSwitch showActionsAsRuleCalls() {
+		showActionAsRuleCall = true;
+		return this;
+	}
+
+	public GrammarElementTitleSwitch showAssignments() {
+		showAssignment = true;
+		return this;
 	}
 
 }

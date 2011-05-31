@@ -525,8 +525,8 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 	@Inject
 	protected IKeywordSerializer keywordSerializer;
 
-	@Inject
-	protected ISemanticNodeProvider nodeProvider;
+	//	@Inject
+	//	protected ISemanticNodeProvider nodeProvider;
 
 	@Inject
 	protected ITransientValueService transientValueService;

@@ -88,7 +88,7 @@ public abstract class AbstractPDAProvider<CTX> implements IPDAProvider<CTX> {
 		public String toString() {
 			if (type == null)
 				return "(type is null)";
-			GrammarElementFullTitleSwitch title = new GrammarElementFullTitleSwitch();
+			GrammarElementTitleSwitch title = new GrammarElementTitleSwitch().showAssignments();
 			switch (type) {
 				case ELEMENT:
 					return title.doSwitch(element);

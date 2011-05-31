@@ -13,16 +13,15 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynEmitterState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynFollowerOwner;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
+import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
 
 import com.google.common.collect.Sets;
@@ -111,7 +110,7 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		ISynTransition trans = findTransition(start, "a1=ID", "a2=ID");
 		assertFalse(trans.involvesUnassignedTokenRuleCalls());
 		assertFalse(trans.isSyntacticallyAmbiguous());
-		assertEquals(1, trans.getDistanceWithStackToAbsorber(newStack()));
+		//		assertEquals(1, trans.getDistanceWithStackToAbsorber(newStack()));
 		assertEquals("['kw1']", trans.getShortestPathToAbsorber(newStack()).toString());
 	}
 
@@ -120,7 +119,7 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		ISynTransition trans = findTransition(start, "a1=ID", "a2=ID");
 		assertTrue(trans.involvesUnassignedTokenRuleCalls());
 		assertFalse(trans.isSyntacticallyAmbiguous());
-		assertEquals(1, trans.getDistanceWithStackToAbsorber(newStack()));
+		//		assertEquals(1, trans.getDistanceWithStackToAbsorber(newStack()));
 		assertEquals("[FOO]", trans.getShortestPathToAbsorber(newStack()).toString());
 	}
 
@@ -129,7 +128,7 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		ISynTransition trans = findTransition(start, "a1=ID", "a2=ID");
 		assertTrue(trans.involvesUnassignedTokenRuleCalls());
 		assertFalse(trans.isSyntacticallyAmbiguous());
-		assertEquals(1, trans.getDistanceWithStackToAbsorber(newStack()));
+		//		assertEquals(1, trans.getDistanceWithStackToAbsorber(newStack()));
 		assertEquals("[Foo]", trans.getShortestPathToAbsorber(newStack()).toString());
 	}
 
@@ -138,7 +137,7 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		ISynTransition trans = findTransition(start, "a1=ID", "a2=ID");
 		assertFalse(trans.involvesUnassignedTokenRuleCalls());
 		assertTrue(trans.isSyntacticallyAmbiguous());
-		assertEquals(1, trans.getDistanceWithStackToAbsorber(newStack()));
+		//		assertEquals(1, trans.getDistanceWithStackToAbsorber(newStack()));
 		assertEquals("['kw1']", trans.getShortestPathToAbsorber(newStack()).toString());
 	}
 
@@ -147,7 +146,7 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		ISynTransition trans = findTransition(start, "a1=ID", "a2=ID");
 		assertFalse(trans.involvesUnassignedTokenRuleCalls());
 		assertTrue(trans.isSyntacticallyAmbiguous());
-		assertEquals(2, trans.getDistanceWithStackToAbsorber(newStack()));
+		//		assertEquals(2, trans.getDistanceWithStackToAbsorber(newStack()));
 		assertEquals("['kw1', 'kw2'+]", trans.getShortestPathToAbsorber(newStack()).toString());
 	}
 
@@ -156,7 +155,7 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		ISynTransition trans = findTransition(start, "a1=ID", "a2=ID");
 		assertFalse(trans.involvesUnassignedTokenRuleCalls());
 		assertTrue(trans.isSyntacticallyAmbiguous());
-		assertEquals(1, trans.getDistanceWithStackToAbsorber(newStack()));
+		//		assertEquals(1, trans.getDistanceWithStackToAbsorber(newStack()));
 		assertEquals("['kw1']", trans.getShortestPathToAbsorber(newStack()).toString());
 	}
 
@@ -165,7 +164,7 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		ISynTransition trans = findTransition(start, "a1=ID", "a2=ID");
 		assertFalse(trans.involvesUnassignedTokenRuleCalls());
 		assertTrue(trans.isSyntacticallyAmbiguous());
-		assertEquals(1, trans.getDistanceWithStackToAbsorber(newStack()));
+		//		assertEquals(1, trans.getDistanceWithStackToAbsorber(newStack()));
 		assertEquals("['kw3']", trans.getShortestPathToAbsorber(newStack()).toString());
 	}
 
@@ -178,14 +177,14 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		ISynTransition trans1 = findTransition(start, "start", "name=ID");
 		assertFalse(trans1.involvesUnassignedTokenRuleCalls());
 		assertTrue(trans1.isSyntacticallyAmbiguous());
-		assertEquals(1, trans1.getDistanceWithStackToAbsorber(newStack()));
+		//		assertEquals(1, trans1.getDistanceWithStackToAbsorber(newStack()));
 		assertEquals("[{Val}]", trans1.getShortestPathToAbsorber(newStack()).toString());
 
 		RuleCallStack stack2 = newStack();
 		ISynTransition trans2 = findTransition(start, "name=ID", "stop");
 		assertFalse(trans2.involvesUnassignedTokenRuleCalls());
 		assertFalse(trans2.isSyntacticallyAmbiguous());
-		assertEquals(0, trans2.getDistanceWithStackToAbsorber(stack2));
+		//		assertEquals(0, trans2.getDistanceWithStackToAbsorber(stack2));
 		assertEquals("[]", trans2.getShortestPathToAbsorber(stack2).toString());
 
 		RuleCallStack stack3 = newStack(trans1, ">>Addition", ">>Prim");
@@ -193,6 +192,6 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		assertFalse(trans3.involvesUnassignedTokenRuleCalls());
 		assertFalse(trans3.isSyntacticallyAmbiguous());
 		//		assertEquals(3, trans3.getDistanceWithStackToAbsorber(stack3));
-		assertEquals("[<<Prim, <<Addition, ')']", trans3.getShortestPathToAbsorber(stack3).toString());
+		assertEquals("[<<Prim, <<Addition, ')']", trans3.getShortestStackpruningPathToAbsorber(stack3).toString());
 	}
 }

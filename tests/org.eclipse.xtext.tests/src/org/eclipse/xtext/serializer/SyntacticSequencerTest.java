@@ -13,7 +13,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.grammaranalysis.impl.GrammarElementFullTitleSwitch;
+import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.junit.serializer.DebugSequenceAcceptor;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -127,7 +127,7 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 
 	private List<String> getNodeSequence(EObject model) {
 		List<String> result = Lists.newArrayList();
-		GrammarElementFullTitleSwitch titleSwitch = new GrammarElementFullTitleSwitch();
+		GrammarElementTitleSwitch titleSwitch = new GrammarElementTitleSwitch().showAssignments();
 		EmitterNodeIterator ni = new EmitterNodeIterator(NodeModelUtils.findActualNodeFor(model));
 		while (ni.hasNext()) {
 			INode next = ni.next();

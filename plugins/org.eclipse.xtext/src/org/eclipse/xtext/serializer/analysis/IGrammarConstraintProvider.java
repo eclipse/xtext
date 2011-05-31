@@ -12,6 +12,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.logic.IGrammarAdapter;
 
 import com.google.inject.ImplementedBy;
 
@@ -124,7 +125,7 @@ public interface IGrammarConstraintProvider {
 		 * @return an AssignedAction or ParserRule
 		 */
 		EObject getContext();
-		
+
 		String getName();
 	}
 
@@ -132,6 +133,42 @@ public interface IGrammarConstraintProvider {
 	 * IConstraintElements form a tree that is in fact a view on the grammar's AbstractElements.
 	 */
 	public interface IConstraintElement {
+
+		static IGrammarAdapter<IConstraintElement, AbstractElement> ADAPTER = new IGrammarAdapter<IConstraintElement, AbstractElement>() {
+			public Iterable<IConstraintElement> getAlternativeChildren(IConstraintElement ele) {
+				if (ele.getType() == ConstraintElementType.ALTERNATIVE)
+					return ele.getChildren();
+				return null;
+			}
+
+			public Iterable<IConstraintElement> getSequentialChildren(IConstraintElement ele) {
+				if (ele.getType() == ConstraintElementType.GROUP)
+					return ele.getChildren();
+				return null;
+			}
+
+			public AbstractElement getToken(IConstraintElement ele) {
+				if (ele.getType() != ConstraintElementType.ALTERNATIVE && ele.getType() != ConstraintElementType.GROUP)
+					return ele.getGrammarElement();
+				return null;
+			}
+
+			public Iterable<IConstraintElement> getUnorderedChildren(IConstraintElement ele) {
+				return null;
+			}
+
+			public boolean isMany(IConstraintElement ele) {
+				return ele.isMany();
+			}
+
+			public boolean isOptional(IConstraintElement ele) {
+				return ele.isOptional();
+			}
+
+			public IConstraintElement getParent(IConstraintElement ele) {
+				return ele.getContainer();
+			}
+		};
 
 		// valid for *_ACTION_CALL
 		Action getAction();

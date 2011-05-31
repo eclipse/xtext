@@ -16,8 +16,9 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.IPDAState;
 import org.eclipse.xtext.grammaranalysis.IPDAState.PDAStateType;
-import org.eclipse.xtext.serializer.analysis.NfaToGrammar.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
+import org.eclipse.xtext.util.logic.ITokenPdaAdapter;
 
 import com.google.common.base.Predicate;
 import com.google.inject.ImplementedBy;
@@ -52,16 +53,15 @@ public interface ISyntacticSequencerPDAProvider {
 	public interface ISynNavigable extends ISynFollowerOwner {
 		ISynAbsorberState getTarget();
 
-		int getDistanceTo(Predicate<ISynState> matches, Predicate<ISynState> bounds, RuleCallStack stack);
+		ITokenPdaAdapter<ISynState, RuleCall, AbstractElement> getPathToTarget();
 
-		int getDistanceWithStackToAbsorber(RuleCallStack stack);
+		List<ISynState> getShortestPathTo(AbstractElement ele, RuleCallStack stack);
 
-		List<ISynState> getShortestPathTo(Predicate<ISynState> matches, Predicate<ISynState> bounds,
-				RuleCallStack stack, boolean addMatch);
-
-		List<ISynState> getShortestPathTo(AbstractElement ele, RuleCallStack stack, boolean addMatch);
+		List<ISynState> getShortestStackpruningPathTo(AbstractElement ele, RuleCallStack stack);
 
 		List<ISynState> getShortestPathToAbsorber(RuleCallStack stack);
+
+		List<ISynState> getShortestStackpruningPathToAbsorber(RuleCallStack stack);
 
 		boolean involvesUnassignedTokenRuleCalls();
 
@@ -81,7 +81,7 @@ public interface ISyntacticSequencerPDAProvider {
 
 		ISynAbsorberState getSource();
 
-		AbstractElementAlias<ISynState> getAmbiguousSyntax();
+		AbstractElementAlias getAmbiguousSyntax();
 	}
 
 	public class SynPredicates {

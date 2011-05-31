@@ -15,7 +15,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.grammaranalysis.impl.GrammarElementFullTitleSwitch;
+import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -41,7 +41,7 @@ public class DebugSequenceAcceptor implements ISequenceAcceptor {
 
 	protected List<List<String>> table = Lists.newArrayList();
 
-	protected GrammarElementFullTitleSwitch titles = new GrammarElementFullTitleSwitch();
+	protected GrammarElementTitleSwitch titles = new GrammarElementTitleSwitch().showAssignments();
 
 	public DebugSequenceAcceptor() {
 		this(false);

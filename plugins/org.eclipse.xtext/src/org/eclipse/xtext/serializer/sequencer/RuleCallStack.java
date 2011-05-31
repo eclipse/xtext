@@ -8,7 +8,7 @@
 package org.eclipse.xtext.serializer.sequencer;
 
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.grammaranalysis.impl.GrammarElementFullTitleSwitch;
+import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.util.AbstractLinkedStack;
 
 public class RuleCallStack extends AbstractLinkedStack<RuleCallStack, RuleCall> {
@@ -22,7 +22,7 @@ public class RuleCallStack extends AbstractLinkedStack<RuleCallStack, RuleCall> 
 	public String elementToStr(RuleCall value) {
 		if (value == null)
 			return "(null)";
-		return new GrammarElementFullTitleSwitch().doSwitch(value);
+		return new GrammarElementTitleSwitch().showAssignments().doSwitch(value);
 	}
 
 }

@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.grammaranalysis.impl.GrammarElementFullTitleSwitch;
+import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.junit.serializer.DebugSequenceAcceptor;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -123,7 +123,7 @@ public class HiddenTokenSequencerTest extends AbstractXtextTests {
 
 	private List<String> getNodeSequence(EObject model) {
 		List<String> result = Lists.newArrayList();
-		GrammarElementFullTitleSwitch titleSwitch = new GrammarElementFullTitleSwitch();
+		GrammarElementTitleSwitch titleSwitch = new GrammarElementTitleSwitch().showAssignments();
 		//		System.out.println(NodeModelUtils.compactDump(NodeModelUtils.findActualNodeFor(model), true));
 		EmitterNodeIterator ni = new EmitterNodeIterator(NodeModelUtils.findActualNodeFor(model), null, true, true);
 		while (ni.hasNext()) {

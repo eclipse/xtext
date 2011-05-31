@@ -15,21 +15,20 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.IContextProvider;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynFollowerOwner;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
-import org.eclipse.xtext.serializer.analysis.NfaToGrammar.AlternativeAlias;
-import org.eclipse.xtext.serializer.analysis.NfaToGrammar.AbstractElementAlias;
-import org.eclipse.xtext.serializer.analysis.NfaToGrammar.ElementAlias;
-import org.eclipse.xtext.serializer.analysis.NfaToGrammar.GroupAlias;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 
@@ -111,14 +110,14 @@ public class SyntacticSequencerUtil {
 		return result;
 	}
 
-	protected List<Triple<String, AbstractElementAlias<ISynState>, List<ISynTransition>>> ambiguousTransitions;
+	protected List<Triple<String, AbstractElementAlias, List<ISynTransition>>> ambiguousTransitions;
 
-	public List<Triple<String, AbstractElementAlias<ISynState>, List<ISynTransition>>> getAllAmbiguousTransitionsBySyntax() {
+	public List<Triple<String, AbstractElementAlias, List<ISynTransition>>> getAllAmbiguousTransitionsBySyntax() {
 		if (ambiguousTransitions != null)
 			return ambiguousTransitions;
-		Map<AbstractElementAlias<ISynState>, List<ISynTransition>> result = Maps.newHashMap();
+		Map<AbstractElementAlias, List<ISynTransition>> result = Maps.newHashMap();
 		for (ISynTransition transition : getAllAmbiguousTransitions()) {
-			AbstractElementAlias<ISynState> syntax = transition.getAmbiguousSyntax();
+			AbstractElementAlias syntax = transition.getAmbiguousSyntax();
 			if (syntax != null) {
 				List<ISynTransition> list = result.get(syntax);
 				if (list == null)
@@ -127,19 +126,19 @@ public class SyntacticSequencerUtil {
 			}
 		}
 		ambiguousTransitions = Lists.newArrayList();
-		for (Map.Entry<AbstractElementAlias<ISynState>, List<ISynTransition>> e : result.entrySet())
+		for (Map.Entry<AbstractElementAlias, List<ISynTransition>> e : result.entrySet())
 			ambiguousTransitions.add(Tuples.create(elementAliasToIdentifyer(e.getKey()), e.getKey(), e.getValue()));
 		Collections.sort(ambiguousTransitions,
-				new Comparator<Triple<String, AbstractElementAlias<ISynState>, List<ISynTransition>>>() {
-					public int compare(Triple<String, AbstractElementAlias<ISynState>, List<ISynTransition>> o1,
-							Triple<String, AbstractElementAlias<ISynState>, List<ISynTransition>> o2) {
+				new Comparator<Triple<String, AbstractElementAlias, List<ISynTransition>>>() {
+					public int compare(Triple<String, AbstractElementAlias, List<ISynTransition>> o1,
+							Triple<String, AbstractElementAlias, List<ISynTransition>> o2) {
 						return o1.getFirst().compareTo(o2.getFirst());
 					}
 				});
 		return ambiguousTransitions;
 	}
 
-	protected String elementAliasToIdentifyer(AbstractElementAlias<ISynState> alias, Set<String> rules, boolean isNested) {
+	protected String elementAliasToIdentifyer(AbstractElementAlias alias, Set<String> rules, boolean isNested) {
 		String card = null;
 		if (alias.isMany() && alias.isOptional())
 			card = "a";
@@ -147,14 +146,14 @@ public class SyntacticSequencerUtil {
 			card = "p";
 		else if (alias.isOptional())
 			card = "q";
-		if (alias instanceof ElementAlias<?>) {
-			ElementAlias<ISynState> ele = (ElementAlias<ISynState>) alias;
-			rules.add(GrammarUtil.containingRule(ele.getElement().getGrammarElement()).getName());
+		if (alias instanceof TokenAlias) {
+			TokenAlias ele = (TokenAlias) alias;
+			rules.add(GrammarUtil.containingRule(ele.getToken()).getName());
 			card = card == null ? "" : "_" + card;
-			return GrammarAccessUtil.getUniqueElementName(ele.getElement().getGrammarElement()) + card;
-		} else if (alias instanceof GroupAlias<?>) {
+			return GrammarAccessUtil.getUniqueElementName(ele.getToken()) + card;
+		} else if (alias instanceof GroupAlias) {
 			List<String> children = Lists.newArrayList();
-			for (AbstractElementAlias<ISynState> child : ((GroupAlias<ISynState>) alias).getChildren())
+			for (AbstractElementAlias child : ((GroupAlias) alias).getChildren())
 				children.add(elementAliasToIdentifyer(child, rules, true));
 			String body = Join.join("_", children);
 			if (isNested || card != null) {
@@ -162,9 +161,9 @@ public class SyntacticSequencerUtil {
 				return "__" + body + "__" + card;
 			} else
 				return body;
-		} else if (alias instanceof AlternativeAlias<?>) {
+		} else if (alias instanceof AlternativeAlias) {
 			List<String> children = Lists.newArrayList();
-			for (AbstractElementAlias<ISynState> child : ((AlternativeAlias<ISynState>) alias).getChildren())
+			for (AbstractElementAlias child : ((AlternativeAlias) alias).getChildren())
 				children.add(elementAliasToIdentifyer(child, rules, true));
 			Collections.sort(children);
 			String body = Join.join("_or_", children);
@@ -180,35 +179,35 @@ public class SyntacticSequencerUtil {
 	@Inject
 	protected GrammarAccess grammarAccess;
 
-	public String elementAliasToConstructor(AbstractElementAlias<ISynState> alias, JavaFile file) {
+	public String elementAliasToConstructor(AbstractElementAlias alias, JavaFile file) {
 		String many = String.valueOf(alias.isMany());
 		String optional = String.valueOf(alias.isOptional());
-		String absEle = file.imported(AbstractElement.class);
-		if (alias instanceof ElementAlias<?>) {
-			ElementAlias<ISynState> ele = (ElementAlias<ISynState>) alias;
-			String eleAlias = file.imported(ElementAlias.class);
-			String eleAcc = "grammarAccess." + grammarAccess.gaAccessor(ele.getElement().getGrammarElement());
-			return "new " + eleAlias + "<" + absEle + ">(" + optional + ", " + many + ", " + eleAcc + ")";
-		} else if (alias instanceof GroupAlias<?>) {
+		//		String absEle = file.imported(AbstractElement.class);
+		if (alias instanceof TokenAlias) {
+			TokenAlias ele = (TokenAlias) alias;
+			String eleAlias = file.imported(TokenAlias.class);
+			String eleAcc = "grammarAccess." + grammarAccess.gaAccessor(ele.getToken());
+			return "new " + eleAlias + "(" + optional + ", " + many + ", " + eleAcc + ")";
+		} else if (alias instanceof GroupAlias) {
 			List<String> children = Lists.newArrayList();
-			for (AbstractElementAlias<ISynState> child : ((GroupAlias<ISynState>) alias).getChildren())
+			for (AbstractElementAlias child : ((GroupAlias) alias).getChildren())
 				children.add(elementAliasToConstructor(child, file));
 			String body = Join.join(", ", children);
 			String grpAlias = file.imported(GroupAlias.class);
-			return "new " + grpAlias + "<" + absEle + ">(" + optional + ", " + many + ", " + body + ")";
-		} else if (alias instanceof AlternativeAlias<?>) {
+			return "new " + grpAlias + "(" + optional + ", " + many + ", " + body + ")";
+		} else if (alias instanceof AlternativeAlias) {
 			List<String> children = Lists.newArrayList();
-			for (AbstractElementAlias<ISynState> child : ((AlternativeAlias<ISynState>) alias).getChildren())
+			for (AbstractElementAlias child : ((AlternativeAlias) alias).getChildren())
 				children.add(elementAliasToConstructor(child, file));
 			Collections.sort(children);
 			String body = Join.join(", ", children);
 			String altAlias = file.imported(AlternativeAlias.class);
-			return "new " + altAlias + "<" + absEle + ">(" + optional + ", " + many + ", " + body + ")";
+			return "new " + altAlias + "(" + optional + ", " + many + ", " + body + ")";
 		}
 		throw new RuntimeException("unknown element");
 	}
 
-	protected String elementAliasToIdentifyer(AbstractElementAlias<ISynState> alias) {
+	protected String elementAliasToIdentifyer(AbstractElementAlias alias) {
 		Set<String> rulesSet = Sets.newHashSet();
 		String body = elementAliasToIdentifyer(alias, rulesSet, false);
 		List<String> rulesList = Lists.newArrayList(rulesSet);

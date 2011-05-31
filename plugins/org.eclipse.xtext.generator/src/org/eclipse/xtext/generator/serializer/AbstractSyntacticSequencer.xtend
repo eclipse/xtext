@@ -21,14 +21,12 @@ import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.AbstractElement
 import java.util.Set
 import org.eclipse.xtext.RuleCall
-import org.eclipse.xtext.grammaranalysis.impl.GrammarElementFullTitleSwitch
 import org.eclipse.xtext.nodemodel.INode
-import org.eclipse.xtext.serializer.analysis.NfaToGrammar
-import org.eclipse.xtext.serializer.analysis.NfaToGrammar$NfaToGrammar$AbstractElementAlias
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.IGrammarAccess
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider$ISynTransition
 import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.serializer.analysis.GrammarAlias$AbstractElementAlias
 
 class AbstractSyntacticSequencer extends GeneratedFile {
 	
@@ -61,7 +59,7 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 			
 				protected «file.imported(grammar.gaFQName)» grammarAccess;
 				«FOR group:util.allAmbiguousTransitionsBySyntax»
-					protected «file.imported("org.eclipse.xtext.serializer.analysis.NfaToGrammar.AbstractElementAlias")»<«file.imported(typeof(AbstractElement))»> match_«group.first»;
+					protected «file.imported("org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias")» match_«group.first»;
 				«ENDFOR»
 				
 				@Inject
@@ -156,4 +154,3 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 		}
 	'''
 }
-
