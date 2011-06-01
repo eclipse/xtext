@@ -5,15 +5,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.util.logic;
+package org.eclipse.xtext.util.formallang;
 
 import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.util.logic.GrammarStringFactory;
-import org.eclipse.xtext.util.logic.INfaAdapter;
-import org.eclipse.xtext.util.logic.NfaToGrammar;
+import org.eclipse.xtext.util.formallang.GrammarStringFactory;
+import org.eclipse.xtext.util.formallang.INfaAdapter;
+import org.eclipse.xtext.util.formallang.ITokenAdapter;
+import org.eclipse.xtext.util.formallang.NfaToGrammar;
 
 import com.google.common.collect.Lists;
 
