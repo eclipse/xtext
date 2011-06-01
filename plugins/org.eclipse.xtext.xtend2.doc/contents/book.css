@@ -127,6 +127,10 @@ a:visited {
 	text-decoration: underline
 }
 
+.image {
+	text-align:center;
+}
+
 ul {
 	margin-top: 0;
 	margin-bottom: 10
