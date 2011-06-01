@@ -13,7 +13,7 @@ import xtend.tutorial.util.Shape;
 @SuppressWarnings("all")
 public class Xtend09_DispatchMethods extends TestCase {
   
-  public StringConcatenation _toLabel(final Rectangle rectangle) {
+  protected StringConcatenation _toLabel(final Rectangle rectangle) {
     StringConcatenation _xifexpression = null;
     boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)rectangle.height), ((Integer)rectangle.width));
     if (_operator_equals) {
@@ -34,7 +34,7 @@ public class Xtend09_DispatchMethods extends TestCase {
     return _xifexpression;
   }
   
-  public StringConcatenation _toLabel(final Circle circle) {
+  protected StringConcatenation _toLabel(final Circle circle) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("It\'s a circle (diameter : ");
     _builder.append(circle.diameter, "");

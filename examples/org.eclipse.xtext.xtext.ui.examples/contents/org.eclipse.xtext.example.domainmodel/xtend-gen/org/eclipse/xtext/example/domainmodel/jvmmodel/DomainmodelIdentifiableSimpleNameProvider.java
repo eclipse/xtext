@@ -7,11 +7,11 @@ import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 @SuppressWarnings("all")
 public class DomainmodelIdentifiableSimpleNameProvider extends IdentifiableSimpleNameProvider {
   
-  public String _getSimpleName(final JvmType element) {
+  protected String _getSimpleName(final JvmType element) {
     return "this";
   }
   
-  public String _getSimpleName(final JvmIdentifiableElement element) {
+  protected String _getSimpleName(final JvmIdentifiableElement element) {
     String _simpleName = super.getSimpleName(element);
     return _simpleName;
   }

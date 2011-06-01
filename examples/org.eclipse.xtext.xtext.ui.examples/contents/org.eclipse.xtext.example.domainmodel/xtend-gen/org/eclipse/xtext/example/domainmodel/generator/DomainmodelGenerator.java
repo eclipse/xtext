@@ -125,7 +125,7 @@ public class DomainmodelGenerator implements IGenerator {
     return _xifexpression;
   }
   
-  public StringConcatenation _feature(final Property p, final ImportManager importManager) {
+  protected StringConcatenation _feature(final Property p, final ImportManager importManager) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("private ");
     JvmParameterizedTypeReference _type = p.getType();
@@ -184,7 +184,7 @@ public class DomainmodelGenerator implements IGenerator {
     return _builder;
   }
   
-  public StringConcatenation _feature(final Operation o, final ImportManager importManager) {
+  protected StringConcatenation _feature(final Operation o, final ImportManager importManager) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public ");
     JvmParameterizedTypeReference _type = o.getType();

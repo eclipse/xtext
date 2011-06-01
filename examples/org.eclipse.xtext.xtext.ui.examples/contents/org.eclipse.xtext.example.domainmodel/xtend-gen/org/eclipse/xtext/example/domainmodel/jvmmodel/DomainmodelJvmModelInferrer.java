@@ -61,7 +61,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
     return _xblockexpression;
   }
   
-  public Iterable<JvmDeclaredType> _transform(final DomainModel model) {
+  protected Iterable<JvmDeclaredType> _transform(final DomainModel model) {
     EList<AbstractElement> _elements = model.getElements();
     final Function1<AbstractElement,Iterable<JvmDeclaredType>> _function = new Function1<AbstractElement,Iterable<JvmDeclaredType>>() {
         public Iterable<JvmDeclaredType> apply(final AbstractElement e) {
@@ -74,7 +74,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
     return _flatten;
   }
   
-  public Iterable<JvmDeclaredType> _transform(final PackageDeclaration packageDecl) {
+  protected Iterable<JvmDeclaredType> _transform(final PackageDeclaration packageDecl) {
     EList<AbstractElement> _elements = packageDecl.getElements();
     final Function1<AbstractElement,Iterable<JvmDeclaredType>> _function = new Function1<AbstractElement,Iterable<JvmDeclaredType>>() {
         public Iterable<JvmDeclaredType> apply(final AbstractElement e) {
@@ -87,7 +87,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
     return _flatten;
   }
   
-  public Iterable<JvmDeclaredType> _transform(final Entity entity) {
+  protected Iterable<JvmDeclaredType> _transform(final Entity entity) {
     ArrayList<JvmDeclaredType> _xblockexpression = null;
     {
       JvmGenericType _createJvmGenericType = this.typesFactory.createJvmGenericType();
@@ -116,12 +116,12 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
     return _xblockexpression;
   }
   
-  public Iterable<JvmDeclaredType> _transform(final Import importDecl) {
+  protected Iterable<JvmDeclaredType> _transform(final Import importDecl) {
     List<JvmDeclaredType> _emptyList = CollectionLiterals.<JvmDeclaredType>emptyList();
     return _emptyList;
   }
   
-  public void _transform(final Property property, final JvmGenericType type) {
+  protected void _transform(final Property property, final JvmGenericType type) {
     {
       JvmField _createJvmField = this.typesFactory.createJvmField();
       final JvmField jvmField = _createJvmField;
@@ -170,7 +170,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
     }
   }
   
-  public void _transform(final Operation operation, final JvmGenericType type) {
+  protected void _transform(final Operation operation, final JvmGenericType type) {
     {
       JvmOperation _createJvmOperation = this.typesFactory.createJvmOperation();
       final JvmOperation jvmOperation = _createJvmOperation;
