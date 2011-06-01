@@ -39,7 +39,7 @@ import org.eclipse.xtext.serializer.analysis.ActionFilterNFAProvider.ActionFilte
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.util.logic.GrammarFormatter;
+import org.eclipse.xtext.util.formallang.GrammarFormatter;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;

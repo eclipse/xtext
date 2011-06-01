@@ -5,13 +5,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.util.logic;
+package org.eclipse.xtext.util.formallang;
 
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import org.eclipse.xtext.util.formallang.IPdaAdapter;
+import org.eclipse.xtext.util.formallang.PdaUtil;
 
 import junit.framework.TestCase;
 

@@ -18,7 +18,7 @@ import org.eclipse.xtext.grammaranalysis.IPDAState;
 import org.eclipse.xtext.grammaranalysis.IPDAState.PDAStateType;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
-import org.eclipse.xtext.util.logic.ITokenPdaAdapter;
+import org.eclipse.xtext.util.formallang.ITokenPdaAdapter;
 
 import com.google.common.base.Predicate;
 import com.google.inject.ImplementedBy;

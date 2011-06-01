@@ -12,7 +12,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.logic.IGrammarAdapter;
+import org.eclipse.xtext.util.formallang.IGrammarAdapter;
 
 import com.google.inject.ImplementedBy;
 
