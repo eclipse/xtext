@@ -42,10 +42,10 @@ import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
-import org.eclipse.xtext.util.logic.ITokenPdaAdapter;
-import org.eclipse.xtext.util.logic.NfaToGrammar;
-import org.eclipse.xtext.util.logic.NfaUtil;
-import org.eclipse.xtext.util.logic.PdaUtil;
+import org.eclipse.xtext.util.formallang.ITokenPdaAdapter;
+import org.eclipse.xtext.util.formallang.NfaToGrammar;
+import org.eclipse.xtext.util.formallang.NfaUtil;
+import org.eclipse.xtext.util.formallang.PdaUtil;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;

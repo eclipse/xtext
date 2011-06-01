@@ -5,11 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.util.logic;
+package org.eclipse.xtext.util.formallang;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface ITokenAdapter<OWNER, TOKEN> {
-	TOKEN getToken(OWNER owner);
+public interface IGrammarFactory<ELEMENT, TOKEN> {
+
+	ELEMENT createForAlternativeChildren(boolean many, boolean optional, Iterable<ELEMENT> children);
+
+	ELEMENT createForSequentialChildren(boolean many, boolean optional, Iterable<ELEMENT> children);
+
+	ELEMENT createForToken(boolean many, boolean optional, TOKEN token);
+
+	ELEMENT createForUnordertedChildren(boolean many, boolean optional, Iterable<ELEMENT> children);
 }

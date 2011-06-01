@@ -13,9 +13,9 @@ import java.util.Set;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
-import org.eclipse.xtext.util.logic.GrammarFormatter;
-import org.eclipse.xtext.util.logic.IGrammarAdapter;
-import org.eclipse.xtext.util.logic.IGrammarFactory;
+import org.eclipse.xtext.util.formallang.GrammarFormatter;
+import org.eclipse.xtext.util.formallang.IGrammarAdapter;
+import org.eclipse.xtext.util.formallang.IGrammarFactory;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
