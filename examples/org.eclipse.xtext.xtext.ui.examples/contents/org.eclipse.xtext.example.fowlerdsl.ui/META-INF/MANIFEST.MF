@@ -1,17 +1,24 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xtext DSL Example UI
-Bundle-SymbolicName: org.eclipse.xtext.example.fowlerdsl.ui;singleton:=true
-Bundle-Vendor: Eclipse Modeling Project
-Bundle-Version: 2.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.xtext.example.fowlerdsl;bundle-version="2.0.0",
- org.eclipse.xtext.ui;bundle-version="2.0.0",
- org.eclipse.ui.editors,
- org.eclipse.ui,
- org.eclipse.xtext.ui.shared;bundle-version="2.0.0",
- org.antlr.runtime
-Bundle-Activator: org.eclipse.xtext.example.FowlerDslActivator
+Bundle-Name: org.eclipse.xtext.example.fowlerdsl.ui
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0
+Bundle-SymbolicName: org.eclipse.xtext.example.fowlerdsl.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
-Import-Package: org.apache.log4j
-Export-Package: org.eclipse.xtext.example.ui.contentassist.antlr
+Require-Bundle: org.eclipse.xtext.example.fowlerdsl;visibility:=reexport,
+ org.eclipse.xtext.ui,
+ org.eclipse.ui.editors;bundle-version="3.5.0",
+ org.eclipse.ui.ide;bundle-version="3.5.0",
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.ui,
+ org.eclipse.xtext.builder,
+ org.antlr.runtime,
+ org.eclipse.xtext.common.types.ui,
+ org.eclipse.xtext.ui.codetemplates.ui,
+ org.eclipse.compare
+Import-Package: org.apache.log4j,
+ org.apache.commons.logging
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.xtext.example.fowlerdsl.ui.contentassist.antlr,
+ org.eclipse.xtext.example.fowlerdsl.ui.internal
+Bundle-Activator: org.eclipse.xtext.example.fowlerdsl.ui.internal.StatemachineActivator

@@ -1,0 +1,36 @@
+grammar org.eclipse.xtext.example.fowlerdsl.Statemachine with org.eclipse.xtext.common.Terminals
+
+generate statemachine "http://www.eclipse.org/xtext/example/fowlerdsl/Statemachine"
+
+Statemachine :
+     {Statemachine}
+	('events' 
+		events+=Event+ 
+	'end')?
+	('resetEvents' 
+		resetEvents+=[Event]+ 
+	'end')?
+	('commands' 
+		commands+=Command+ 
+	'end')?
+	states+=State*
+;
+
+Event:
+	name=ID code=ID
+;
+
+Command:
+	name=ID code=ID
+;
+
+State:
+	'state' name=ID
+		('actions' '{' actions+=[Command]+ '}')?
+		transitions+=Transition*
+	'end'
+;
+
+Transition:
+	event=[Event] '=>' state=[State]
+;
