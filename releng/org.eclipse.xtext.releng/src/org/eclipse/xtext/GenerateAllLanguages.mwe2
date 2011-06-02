@@ -19,5 +19,5 @@ Workflow {
 	component = @example.arithmetics.Arithmetics {}
 	component = @example.GenerateEcoreDsl {}
 	component = @example.domainmodel.GenerateDomainmodelLanguage {}
-	component = @example.GenerateFowlerDsl {}
+	component = @example.fowlerdsl.GenerateStatemachine {}
 }

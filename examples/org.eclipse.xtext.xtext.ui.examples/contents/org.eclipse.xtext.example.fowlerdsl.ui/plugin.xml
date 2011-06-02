@@ -6,42 +6,42 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="org.eclipse.xtext.example.ui.FowlerDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
-            extensions="fowlerdsl"
-            id="org.eclipse.xtext.example.FowlerDsl"
-            name="FowlerDsl Editor">
+            extensions="statemachine"
+            id="org.eclipse.xtext.example.fowlerdsl.Statemachine"
+            name="Statemachine Editor">
         </editor>
     </extension>
     <extension
         point="org.eclipse.ui.handlers">
         <handler
-            class="org.eclipse.xtext.example.ui.FowlerDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
             commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
             <activeWhen>
                 <reference
-                    definitionId="org.eclipse.xtext.example.FowlerDsl.Editor.opened">
+                    definitionId="org.eclipse.xtext.example.fowlerdsl.Statemachine.Editor.opened">
                 </reference>
             </activeWhen>
         </handler>
         <handler
-            class="org.eclipse.xtext.example.ui.FowlerDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
-            commandId="org.eclipse.xtext.example.FowlerDsl.validate">
+            class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.example.fowlerdsl.Statemachine.validate">
          <activeWhen>
             <reference
-                    definitionId="org.eclipse.xtext.example.FowlerDsl.Editor.opened">
+                    definitionId="org.eclipse.xtext.example.fowlerdsl.Statemachine.Editor.opened">
             </reference>
          </activeWhen>
       </handler>
     </extension>
     <extension point="org.eclipse.core.expressions.definitions">
-        <definition id="org.eclipse.xtext.example.FowlerDsl.Editor.opened">
+        <definition id="org.eclipse.xtext.example.fowlerdsl.Statemachine.Editor.opened">
             <and>
                 <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
                 <with variable="activeEditor">
                     <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-                        value="org.eclipse.xtext.example.FowlerDsl" 
+                        value="org.eclipse.xtext.example.fowlerdsl.Statemachine" 
                         forcePluginActivation="true"/>
                 </with>        
             </and>
@@ -50,37 +50,37 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
-            class="org.eclipse.xtext.example.ui.FowlerDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-            id="org.eclipse.xtext.example.FowlerDsl"
-            name="FowlerDsl">
-            <keywordReference id="org.eclipse.xtext.example.ui.keyword_FowlerDsl"/>
+            class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.example.fowlerdsl.Statemachine"
+            name="Statemachine">
+            <keywordReference id="org.eclipse.xtext.example.fowlerdsl.ui.keyword_Statemachine"/>
         </page>
         <page
-            category="org.eclipse.xtext.example.FowlerDsl"
-            class="org.eclipse.xtext.example.ui.FowlerDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-            id="org.eclipse.xtext.example.FowlerDsl.coloring"
+            category="org.eclipse.xtext.example.fowlerdsl.Statemachine"
+            class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtext.example.fowlerdsl.Statemachine.coloring"
             name="Syntax Coloring">
-            <keywordReference id="org.eclipse.xtext.example.ui.keyword_FowlerDsl"/>
+            <keywordReference id="org.eclipse.xtext.example.fowlerdsl.ui.keyword_Statemachine"/>
         </page>
         <page
-            category="org.eclipse.xtext.example.FowlerDsl"
-            class="org.eclipse.xtext.example.ui.FowlerDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
-            id="org.eclipse.xtext.example.FowlerDsl.templates"
+            category="org.eclipse.xtext.example.fowlerdsl.Statemachine"
+            class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.xtext.example.fowlerdsl.Statemachine.templates"
             name="Templates">
-            <keywordReference id="org.eclipse.xtext.example.ui.keyword_FowlerDsl"/>
+            <keywordReference id="org.eclipse.xtext.example.fowlerdsl.ui.keyword_Statemachine"/>
         </page>
     </extension>
     <extension
         point="org.eclipse.ui.keywords">
         <keyword
-            id="org.eclipse.xtext.example.ui.keyword_FowlerDsl"
-            label="FowlerDsl"/>
+            id="org.eclipse.xtext.example.fowlerdsl.ui.keyword_Statemachine"
+            label="Statemachine"/>
     </extension>
     <extension
          point="org.eclipse.ui.commands">
       <command
             description="Trigger expensive validation"
-            id="org.eclipse.xtext.example.FowlerDsl.validate"
+            id="org.eclipse.xtext.example.fowlerdsl.Statemachine.validate"
             name="Validate">
       </command>
     </extension>
@@ -88,12 +88,12 @@
         <menuContribution
             locationURI="popup:#TextEditorContext?after=group.edit">
              <command
-                 commandId="org.eclipse.xtext.example.FowlerDsl.validate"
+                 commandId="org.eclipse.xtext.example.fowlerdsl.Statemachine.validate"
                  style="push"
                  tooltip="Trigger expensive validation">
             <visibleWhen checkEnabled="false">
                 <reference
-                    definitionId="org.eclipse.xtext.example.FowlerDsl.Editor.opened">
+                    definitionId="org.eclipse.xtext.example.fowlerdsl.Statemachine.Editor.opened">
                 </reference>
             </visibleWhen>
          </command>  
@@ -103,7 +103,7 @@
 		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
 			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
 				<visibleWhen checkEnabled="false">
-                	<reference definitionId="org.eclipse.xtext.example.FowlerDsl.Editor.opened">
+                	<reference definitionId="org.eclipse.xtext.example.fowlerdsl.Statemachine.Editor.opened">
                 	</reference>
             	</visibleWhen>
 			</command>
@@ -111,11 +111,11 @@
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 	    <handler
-            class="org.eclipse.xtext.example.ui.FowlerDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
             commandId="org.eclipse.xtext.ui.editor.FindReferences">
             <activeWhen>
                 <reference
-                    definitionId="org.eclipse.xtext.example.FowlerDsl.Editor.opened">
+                    definitionId="org.eclipse.xtext.example.fowlerdsl.Statemachine.Editor.opened">
                 </reference>
             </activeWhen>
         </handler>
@@ -126,16 +126,110 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.example.ui.FowlerDslExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-			type="fowlerdsl">
+			class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="statemachine">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-            class="org.eclipse.xtext.example.ui.FowlerDslExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-            uriExtension="fowlerdsl">
+            class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="statemachine">
         </resourceServiceProvider>
     </extension>
 
+
+
+   <extension
+         point="org.eclipse.xtext.builder.participant">
+      <participant
+            class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+      </participant>
+   </extension>
+
+	<!-- Quick Outline -->
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler 
+			class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtext.example.fowlerdsl.Statemachine.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			description="Open the quick outline."
+			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+			name="Quick Outline">
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+				style="push"
+				tooltip="Open Quick Outline">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="org.eclipse.xtext.example.fowlerdsl.Statemachine.Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+   <!-- quickfix marker resolution generator -->
+   <extension
+         point="org.eclipse.ui.ide.markerResolution">
+      <markerResolutionGenerator
+            class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
+      </markerResolutionGenerator>
+   </extension>
+
+   	<!-- Rename Refactoring -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler 
+			class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RenameElementHandler"
+			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipse.xtext.example.fowlerdsl.Statemachine.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+    <extension point="org.eclipse.ui.menus">
+         <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+         <command commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+               style="push">
+            <visibleWhen checkEnabled="false">
+               <reference
+                     definitionId="org.eclipse.xtext.example.fowlerdsl.Statemachine.Editor.opened">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+
+  <extension point="org.eclipse.compare.contentViewers">
+    <viewer id="org.eclipse.xtext.example.fowlerdsl.Statemachine.compare.contentViewers"
+            class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="statemachine">
+    </viewer>
+  </extension>
+  <extension point="org.eclipse.compare.contentMergeViewers">
+    <viewer id="org.eclipse.xtext.example.fowlerdsl.Statemachine.compare.contentMergeViewers"
+            class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="statemachine" label="Statemachine Compare">
+     </viewer>
+  </extension>
+  <extension point="org.eclipse.ui.editors.documentProviders">
+    <provider id="org.eclipse.xtext.example.fowlerdsl.Statemachine.editors.documentProviders"
+            class="org.eclipse.xtext.example.fowlerdsl.ui.StatemachineExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+            extensions="statemachine">
+    </provider>
+  </extension>
 
 </plugin>
