@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <toc topic="contents/00-Xtend%20Language%20Reference.html" label="Xtend Language Reference" >
 	<topic href="contents/01-Xtend_Introduction.html" label="Introduction" >
+		<topic href="contents/01-Xtend_Introduction.html#0" label="Getting Started" >
+		</topic>
 	</topic>
 	<topic href="contents/02-Xtend_Classes_Functions.html" label="Classes and Functions" >
 		<topic href="contents/02-Xtend_Classes_Functions.html#0" label="Package Declaration" >

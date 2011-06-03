@@ -1,5 +1,7 @@
 chapter:Xtend_Preface[Introduction]
 
+img[../images/Xtend-Logo.png][][][]
+
 This document specifies the language Xtend. Xtend is a modern statically-typed programming language which is
 tightly integrated with and runs on the Java Virtual Machine. It has its roots in the Java programming
 language but improves on a couple of concepts:   
@@ -22,4 +24,13 @@ It is not aiming at replacing Java all together but meant to be used to write Gu
 thin layer over the Java Development Kit (JDK) and interacts with Java exactly the same as it interacts with Xtend code. Also Java can call Xtend functions
 in a completely transparent way. And of course, it provides a modern Eclipse-based IDE closely integrated with the Java Development Tools (JDT).
 
-%% img[../images/Xtend_and_Java.png][Xtend and Java Vis-a-Vis][][]
+
+section:Getting_Started[Getting Started]
+
+The best way to get started is to materialize the e[Xtend Tutorial] example project in your workspace.
+You'll find it in the new project wizard dialog.
+
+The project contains a couple of sample Xtend files, which show the different language concepts in action.
+You should also have a look into the e[xtend-gen] folder which contains the generated Java-version of them.
+
+img[../images/Xtend_and_Java.png][Xtend and Java Vis-a-Vis][][]
