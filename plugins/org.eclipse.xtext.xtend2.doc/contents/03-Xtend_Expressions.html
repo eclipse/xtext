@@ -36,7 +36,7 @@ It can optionally be terminated by a semicolon.
 {</br>
 &nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;result</br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -51,7 +51,7 @@ It can optionally be terminated by a semicolon.
 &nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;}</br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -65,7 +65,7 @@ It can optionally be terminated by a semicolon.
 XBlockExpression:</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;{&apos;</span></br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(XExpressionInsideBlock&nbsp;<span class="string">&apos;;&apos;</span>?)*</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;</br>
 </p>
 </div>
 </div>
@@ -95,7 +95,7 @@ A string literal as syntactically defined in <a href="">section Xbase_Syntax_Str
 		<div class="incode">
 		<p class="code">
 		<span class="string">"Hello&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;World&nbsp;!"</span>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;World&nbsp;!"</span></br>
 		</p>
 		</div>
 		</div>
@@ -450,7 +450,7 @@ Given the expression
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span>
+myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span></br>
 </p>
 </div>
 </div>
@@ -463,7 +463,7 @@ the following Java expression :
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span>;
+myObj.myProperty&nbsp;=&nbsp;<span class="string">"foo"</span>;</br>
 </p>
 </div>
 </div>
@@ -482,7 +482,7 @@ As a result the compiler translates to :
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myObj.setMyProperty(<span class="string">"foo"</span>)
+myObj.setMyProperty(<span class="string">"foo"</span>)</br>
 </p>
 </div>
 </div>
@@ -502,7 +502,7 @@ The following snippet is a simplification of the real Xtext rules, which cover m
 <p class="code">
 FeatureCall&nbsp;:</br>
 &nbsp;&nbsp;&nbsp;&nbsp;ID&nbsp;|</br>
-&nbsp;&nbsp;&nbsp;&nbsp;Expression&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID&nbsp;(<span class="string">&apos;(&apos;</span>&nbsp;Expression&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;Expression)*&nbsp;<span class="string">&apos;)&apos;</span>)?)*
+&nbsp;&nbsp;&nbsp;&nbsp;Expression&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID&nbsp;(<span class="string">&apos;(&apos;</span>&nbsp;Expression&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;Expression)*&nbsp;<span class="string">&apos;)&apos;</span>)?)*</br>
 </p>
 </div>
 </div>
@@ -519,7 +519,7 @@ That is, for the following expression
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myObj.myProperty
+myObj.myProperty</br>
 </p>
 </div>
 </div>
@@ -536,7 +536,7 @@ That is if
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">this</span>.myProperty
+<span class="keyword">this</span>.myProperty</br>
 </p>
 </div>
 </div>
@@ -545,7 +545,7 @@ is a valid expression
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myProperty
+myProperty</br>
 </p>
 </div>
 </div>
@@ -566,7 +566,7 @@ Instead of writing
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">if</span>&nbsp;(&nbsp;myRef&nbsp;!=&nbsp;<span class="keyword">null</span>&nbsp;)&nbsp;myRef.doStuff()
+<span class="keyword">if</span>&nbsp;(&nbsp;myRef&nbsp;!=&nbsp;<span class="keyword">null</span>&nbsp;)&nbsp;myRef.doStuff()</br>
 </p>
 </div>
 </div>
@@ -578,7 +578,7 @@ one can write
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myRef?.doStuff()
+myRef?.doStuff()</br>
 </p>
 </div>
 </div>
@@ -597,7 +597,7 @@ Construction of objects is done by invoking Java constructors. The syntax is exa
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">new</span>&nbsp;String()
+		<span class="keyword">new</span>&nbsp;String()</br>
 		</p>
 		</div>
 		</div>
@@ -608,7 +608,7 @@ Construction of objects is done by invoking Java constructors. The syntax is exa
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">new</span>&nbsp;java.util.ArrayList&lt;java.math.BigDecimal&gt;()
+		<span class="keyword">new</span>&nbsp;java.util.ArrayList&lt;java.math.BigDecimal&gt;()</br>
 		</p>
 		</div>
 		</div>
@@ -625,7 +625,7 @@ Construction of objects is done by invoking Java constructors. The syntax is exa
 XConstructorCall:</br>
 &nbsp;&nbsp;<span class="string">&apos;new&apos;</span>&nbsp;QualifiedName&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;&lt;&apos;</span>&nbsp;JvmTypeArgument&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmTypeArgument)*&nbsp;<span class="string">&apos;&gt;&apos;</span>)?&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;(&apos;</span>(XExpression&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;XExpression)*)?<span class="string">&apos;)&apos;</span>)?;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;(&apos;</span>(XExpression&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;XExpression)*)?<span class="string">&apos;)&apos;</span>)?;</br>
 </p>
 </div>
 </div>
@@ -646,7 +646,7 @@ if expressions deeply nested within expressions.
 XIfExpression:</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;if&apos;</span>&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;XExpression&nbsp;<span class="string">&apos;)&apos;</span></br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XExpression</br>
-&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;else&apos;</span>&nbsp;XExpression)?;
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;else&apos;</span>&nbsp;XExpression)?;</br>
 </p>
 </div>
 </div>
@@ -660,7 +660,7 @@ That means
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">if</span>&nbsp;(foo)&nbsp;x
+<span class="keyword">if</span>&nbsp;(foo)&nbsp;x&nbsp;</br>
 </p>
 </div>
 </div>
@@ -672,7 +672,7 @@ is the a short hand for
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">if</span>&nbsp;(foo)&nbsp;x&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">null</span>
+<span class="keyword">if</span>&nbsp;(foo)&nbsp;x&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">null</span></br>
 </p>
 </div>
 </div>
@@ -720,7 +720,7 @@ or <span class="inlinecode">java.lang.Iterable</span> returned by the iterable e
 		<p class="code">
 		<span class="keyword">for</span>&nbsp;(String&nbsp;s&nbsp;:&nbsp;myStrings)&nbsp;{</br>
 		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s);</br>
-		}
+		}</br>
 		</p>
 		</div>
 		</div>
@@ -732,7 +732,7 @@ or <span class="inlinecode">java.lang.Iterable</span> returned by the iterable e
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">for</span>&nbsp;(s&nbsp;:&nbsp;myStrings)</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s)
+		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(s)</br>
 		</p>
 		</div>
 		</div>
@@ -749,7 +749,7 @@ or <span class="inlinecode">java.lang.Iterable</span> returned by the iterable e
 XForExpression:</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;for&apos;</span>&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;JvmFormalParameter&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;XExpression&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XExpression</br>
-&nbsp;&nbsp;&nbsp;&nbsp;;
+&nbsp;&nbsp;&nbsp;&nbsp;;</br>
 </p>
 </div>
 </div>
@@ -768,7 +768,7 @@ The return type of a while loop is <span class="inlinecode"><span class="keyword
 <p class="code">
 XWhileExpression:</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;while&apos;</span>&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;predicate=XExpression&nbsp;<span class="string">&apos;)&apos;</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XExpression;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XExpression;</br>
 </p>
 </div>
 </div>
@@ -783,7 +783,7 @@ XWhileExpression:</br>
 		<p class="code">
 		<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)&nbsp;{</br>
 		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);</br>
-		}
+		}</br>
 		</p>
 		</div>
 		</div>
@@ -793,7 +793,7 @@ XWhileExpression:</br>
 		<div class="incode">
 		<p class="code">
 		<span class="keyword">while</span>&nbsp;(&nbsp;(&nbsp;i&nbsp;=&nbsp;i&nbsp;+&nbsp;1&nbsp;)&nbsp;&lt;&nbsp;max&nbsp;)&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(&nbsp;<span class="string">"foo"</span>&nbsp;)
+		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(&nbsp;<span class="string">"foo"</span>&nbsp;)</br>
 		</p>
 		</div>
 		</div>
@@ -817,7 +817,7 @@ The return type of a do-while loop is <span class="inlinecode"><span class="keyw
 XDoWhileExpression:</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;do&apos;</span></br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XExpression</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;while&apos;</span>&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;predicate=XExpression&nbsp;<span class="string">&apos;)&apos;</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;while&apos;</span>&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;predicate=XExpression&nbsp;<span class="string">&apos;)&apos;</span>;</br>
 </p>
 </div>
 </div>
@@ -832,7 +832,7 @@ XDoWhileExpression:</br>
 		<p class="code">
 		<span class="keyword">do</span>&nbsp;{</br>
 		&nbsp;&nbsp;&nbsp;&nbsp;doSideEffect(<span class="string">"foo"</span>);</br>
-		}&nbsp;<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)
+		}&nbsp;<span class="keyword">while</span>&nbsp;(<span class="keyword">true</span>)</br>
 		</p>
 		</div>
 		</div>
@@ -841,7 +841,7 @@ XDoWhileExpression:</br>
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">do</span>&nbsp;doSideEffect(<span class="string">"foo"</span>)&nbsp;<span class="keyword">while</span>&nbsp;((i=i+1)&lt;max)
+		<span class="keyword">do</span>&nbsp;doSideEffect(<span class="string">"foo"</span>)&nbsp;<span class="keyword">while</span>&nbsp;((i=i+1)&lt;max)</br>
 		</p>
 		</div>
 		</div>
@@ -873,7 +873,7 @@ A typical example for using <span class="inlinecode"><span class="keyword">var</
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="string">"Hi&nbsp;there!"</span>)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i&nbsp;=&nbsp;i&nbsp;+1</br>
 &nbsp;&nbsp;&nbsp;&nbsp;}</br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -889,7 +889,7 @@ closure.
 <div class="incode">
 <p class="code">
 XVariableDeclaration:</br>
-&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;val&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;var&apos;</span>)&nbsp;JvmTypeReference?&nbsp;ID&nbsp;<span class="string">&apos;=&apos;</span>&nbsp;XExpression;
+&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;val&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;var&apos;</span>)&nbsp;JvmTypeReference?&nbsp;ID&nbsp;<span class="string">&apos;=&apos;</span>&nbsp;XExpression;</br>
 </p>
 </div>
 </div>
@@ -903,7 +903,7 @@ Here is an example for an explicitly declared type:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">var</span>&nbsp;List&lt;String&gt;&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();
+<span class="keyword">var</span>&nbsp;List&lt;String&gt;&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();&nbsp;</br>
 </p>
 </div>
 </div>
@@ -916,7 +916,8 @@ Alternatively the type can be left out and will be inferred from the initializat
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">var</span>&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();&nbsp;<span class="comment">//&nbsp;-&gt;&nbsp;type&nbsp;ArrayList&lt;String&gt;</span>
+<span class="keyword">var</span>&nbsp;msg&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ArrayList&lt;String&gt;();&nbsp;<span class="comment">//&nbsp;-&gt;&nbsp;type&nbsp;ArrayList&lt;String&gt;&nbsp;&nbsp;</br>
+</span>
 </p>
 </div>
 </div>
@@ -935,7 +936,7 @@ so that any final variables and parameters visible at construction time can be r
 <p class="code">
 XClosure:</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;[&apos;</span>&nbsp;(&nbsp;JvmFormalParameter&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmFormalParameter)*&nbsp;)?&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;|&apos;</span>&nbsp;XExpression&nbsp;<span class="string">&apos;]&apos;</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;|&apos;</span>&nbsp;XExpression&nbsp;<span class="string">&apos;]&apos;</span>;</br>
 </p>
 </div>
 </div>
@@ -948,7 +949,7 @@ That is you can write
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myList.find(e|e.name==<span class="keyword">null</span>)
+myList.find(e|e.name==<span class="keyword">null</span>)</br>
 </p>
 </div>
 </div>
@@ -960,7 +961,7 @@ instead of
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myList.find([e|e.name==<span class="keyword">null</span>])
+myList.find([e|e.name==<span class="keyword">null</span>])</br>
 </p>
 </div>
 </div>
@@ -972,7 +973,7 @@ But in all other cases the square brackets are mandatory:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">val</span>&nbsp;func&nbsp;=&nbsp;[String&nbsp;s|&nbsp;s.length&gt;3]
+<span class="keyword">val</span>&nbsp;func&nbsp;=&nbsp;[String&nbsp;s|&nbsp;s.length&gt;3]</br>
 </p>
 </div>
 </div>
@@ -990,7 +991,7 @@ For instance, given the following Java method signature:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;T&nbsp;&lt;T&gt;getFirst(List&lt;T&gt;&nbsp;list,&nbsp;Function0&lt;T,Boolean&gt;&nbsp;predicate)
+<span class="keyword">public</span>&nbsp;T&nbsp;&lt;T&gt;getFirst(List&lt;T&gt;&nbsp;list,&nbsp;Function0&lt;T,Boolean&gt;&nbsp;predicate)&nbsp;</br>
 </p>
 </div>
 </div>
@@ -1000,7 +1001,7 @@ the type of the parameter can be inferred. Which allows users to write:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-arrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>&nbsp;).findFirst(&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string">"Bar"</span>&nbsp;)
+arrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>&nbsp;).findFirst(&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string">"Bar"</span>&nbsp;)</br>
 </p>
 </div>
 </div>
@@ -1009,7 +1010,7 @@ instead of
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-arrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>&nbsp;).findFirst(&nbsp;String&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string">"Bar"</span>&nbsp;)
+arrayList(&nbsp;<span class="string">"Foo"</span>,&nbsp;<span class="string">"Bar"</span>&nbsp;).findFirst(&nbsp;String&nbsp;e&nbsp;|&nbsp;e&nbsp;==&nbsp;<span class="string">"Bar"</span>&nbsp;)</br>
 </p>
 </div>
 </div>
@@ -1057,7 +1058,7 @@ newArrayList(&nbsp;<span class="string">&apos;aaa&apos;</span>,&nbsp;<span class
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})</br>
 </p>
 </div>
 </div>
@@ -1093,7 +1094,7 @@ For a switch expression
 &nbsp;&nbsp;&nbsp;&nbsp;...</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;en&nbsp;:&nbsp;ern</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;er</br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -1123,7 +1124,7 @@ Example:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;myString.length&gt;5&nbsp;:&nbsp;<span class="string">&apos;a&nbsp;long&nbsp;string.&apos;</span></br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;:&nbsp;<span class="string">&apos;It&apos;</span>s&nbsp;a&nbsp;foo.<span class="string">&apos;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;:&nbsp;&apos;</span>It<span class="string">&apos;s&nbsp;a&nbsp;short&nbsp;non-foo&nbsp;string.&apos;</span></br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -1143,7 +1144,7 @@ Example:
 &nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;<span class="keyword">case</span>&nbsp;x.length()&gt;0&nbsp;:&nbsp;x.length()</br>
 &nbsp;&nbsp;&nbsp;&nbsp;List&lt;?&gt;&nbsp;:&nbsp;x.size()</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;-1</br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -1175,7 +1176,7 @@ computed using the expected type from the context, it is sufficient to return th
 		&nbsp;&nbsp;&nbsp;&nbsp;Entity&nbsp;:&nbsp;foo.superType.name</br>
 		&nbsp;&nbsp;&nbsp;&nbsp;Datatype&nbsp;:&nbsp;foo.name</br>
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalStateException</br>
-		}
+		}</br>
 		</p>
 		</div>
 		</div>
@@ -1190,7 +1191,7 @@ computed using the expected type from the context, it is sufficient to return th
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">"hello42"</span>&nbsp;:&nbsp;...</br>
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;x.length&lt;2&nbsp;:&nbsp;...</br>
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;....</br>
-		}
+		}</br>
 		</p>
 		</div>
 		</div>
@@ -1212,7 +1213,7 @@ XSwitchExpression:</br>
 </br>
 XCasePart:</br>
 &nbsp;&nbsp;&nbsp;&nbsp;JvmTypeReference?&nbsp;(<span class="string">&apos;case&apos;</span>&nbsp;XExpression)?&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;XExpression&nbsp;);</br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -1233,7 +1234,7 @@ The conformance rules for casts are defined in the <a href="http://java.sun.com/
 <div class="incode">
 <p class="code">
 XCastedExpression:</br>
-&nbsp;&nbsp;&nbsp;&nbsp;Expression&nbsp;<span class="string">&apos;as&apos;</span>&nbsp;JvmTypeReference;
+&nbsp;&nbsp;&nbsp;&nbsp;Expression&nbsp;<span class="string">&apos;as&apos;</span>&nbsp;JvmTypeReference;</br>
 </p>
 </div>
 </div>
@@ -1270,7 +1271,7 @@ toClass(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class=
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«member.toMember»</br>
 &nbsp;&nbsp;&nbsp;&nbsp;«ENDFOREACH»</br>
 &nbsp;&nbsp;}</br>
-&apos;</span><span class="string">&apos;&apos;</span>
+&apos;</span><span class="string">&apos;&apos;</span></br>
 </p>
 </div>
 </div>
@@ -1290,7 +1291,7 @@ toMember(Member&nbsp;m)&nbsp;{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;<span class="keyword">case</span>&nbsp;isAbstract&nbsp;:&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;abstract&nbsp;«...&apos;</span><span class="string">&apos;&apos;</span></br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Method&nbsp;:&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;.....&nbsp;&apos;</span><span class="string">&apos;&apos;</span></br>
 &nbsp;&nbsp;&nbsp;&nbsp;}</br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -1314,7 +1315,7 @@ Consequently <span class="inlinecode"><span class="keyword">AFTER</span></span> 
 <h3>Typing</h3>
 <p>
 The rich string is translated to an efficient string concatenation and the return type of a rich string
-is <a href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/CharSequence.html" ><abbr title="java.lang.CharSequence" >CharSequence</abbr></a> which allows room for efficient implementation.
+is <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/CharSequence.html" ><abbr title="java.lang.CharSequence" >CharSequence</abbr></a> which allows room for efficient implementation.
 </p>
 <a name="13-3"></a>
 <h3>Whitespace Handling</h3>
@@ -1364,7 +1365,7 @@ nested nodes.
 &nbsp;&nbsp;&nbsp;&nbsp;print(Node&nbsp;n)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;«n.name»&nbsp;{}</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span></br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -1375,7 +1376,7 @@ nested nodes.
 			<div class="literallayout">
 <div class="incode">
 <p class="code">
-node&nbsp;NodeName{}
+node&nbsp;NodeName{}</br>
 </p>
 </div>
 </div>
@@ -1405,7 +1406,7 @@ for readability of the template itself.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«ENDIF»</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span></br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -1423,7 +1424,7 @@ node&nbsp;Parent{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;Leaf&nbsp;{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
 &nbsp;&nbsp;&nbsp;&nbsp;}</br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -1457,7 +1458,7 @@ listOfStrings.map(e|&nbsp;{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(e==<span class="keyword">null</span>)&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"NULL"</span></br>
 &nbsp;&nbsp;&nbsp;&nbsp;e.toUpperCase</br>
-})
+})&nbsp;</br>
 </p>
 </div>
 </div>
@@ -1476,7 +1477,7 @@ Like in Java it is possible to throw <span class="inlinecode">java.lang.Throwabl
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(myList.isEmpty)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<span class="string">"the&nbsp;list&nbsp;must&nbsp;not&nbsp;be&nbsp;empty"</span>)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;...</br>
-}
+}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</br>
 </p>
 </div>
 </div>
@@ -1499,7 +1500,7 @@ Other than that the syntax again is like the one known from Java.
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;handle&nbsp;e</br>
 </span>}&nbsp;<span class="keyword">finally</span>&nbsp;{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;do&nbsp;stuff</br>
-</span>}
+</span>}</br>
 </p>
 </div>
 </div>
