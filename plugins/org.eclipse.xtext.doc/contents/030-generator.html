@@ -164,11 +164,7 @@ We will now have a look at the component model used to configure the Language Ge
 <p>
 A language generator is composed of so called language configurations. 
 For each language configuration a URI pointing to its grammar file and the file extensions for the DSL must be provided. 
-<<<<<<< HEAD
-In addition, a language is configured with a list of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/IGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.IGeneratorFragment" >IGeneratorFragment</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java" >src</a>)s.
-=======
 In addition, a language is configured with a list of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/IGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.IGeneratorFragment" >IGeneratorFragment</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java" title="show source code" >(src)</a>s.
->>>>>>> [docs] Revised migration guide and recompiled xdoc
 The whole generator is composed of theses fragments. We have fragments for generating parsers, the serializer, the EMF code, 
 the outline view, etc.
 </p>
@@ -185,11 +181,7 @@ The list of grammar fragments forms a chain of responsibility, that is they each
 to the generation of langauge infrastructure components and are called in the declared order.
 Each fragment gets the grammar of the language as an EMF model passed in and is able to generate code in one 
 of the configured locations and contribute to several shared artifacts. A generator fragment must implement
-<<<<<<< HEAD
-the interface <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/IGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.IGeneratorFragment" >IGeneratorFragment</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java" >src</a>).
-=======
 the interface <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/IGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.IGeneratorFragment" >IGeneratorFragment</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java" title="show source code" >(src)</a>.
->>>>>>> [docs] Revised migration guide and recompiled xdoc
 </p>
 <p>
 There is usually no need to write your own generator fragments and only rarely you might want to extend an
@@ -290,11 +282,7 @@ example languages look like.
 </tr>
 <tr>
 <td>
-<<<<<<< HEAD
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" >EcoreGeneratorFragment</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java" >src</a>)
-=======
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" >EcoreGeneratorFragment</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java" title="show source code" >(src)</a>
->>>>>>> [docs] Revised migration guide and recompiled xdoc
 </td>
 <td>
 EMF code for generated models
@@ -305,11 +293,7 @@ EMF code for generated models
 </tr>
 <tr>
 <td>
-<<<<<<< HEAD
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment" >XtextAntlrGeneratorFragment</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment.java" >src</a>)
-=======
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment" >XtextAntlrGeneratorFragment</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrGeneratorFragment.java" title="show source code" >(src)</a>
->>>>>>> [docs] Revised migration guide and recompiled xdoc
 </td>
 <td>
 ANTLR grammar, parser, lexer and related services
@@ -319,11 +303,7 @@ ANTLR grammar, parser, lexer and related services
 </tr>
 <tr>
 <td>
-<<<<<<< HEAD
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.html" ><abbr title="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment" >GrammarAccessFragment</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.java" >src</a>)
-=======
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.html" ><abbr title="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment" >GrammarAccessFragment</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/grammarAccess/GrammarAccessFragment.java" title="show source code" >(src)</a>
->>>>>>> [docs] Revised migration guide and recompiled xdoc
 </td>
 <td>
 Access to the grammar
@@ -333,11 +313,7 @@ Access to the grammar
 </tr>
 <tr>
 <td>
-<<<<<<< HEAD
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.html" ><abbr title="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" >ResourceFactoryFragment</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java" >src</a>)
-=======
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.html" ><abbr title="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" >ResourceFactoryFragment</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/resourceFactory/ResourceFactoryFragment.java" title="show source code" >(src)</a>
->>>>>>> [docs] Revised migration guide and recompiled xdoc
 </td>
 <td>
 EMF resource factory
@@ -348,11 +324,7 @@ EMF resource factory
 </tr>
 <tr>
 <td>
-<<<<<<< HEAD
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.html" ><abbr title="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment" >ParseTreeConstructorFragment</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.java" >src</a>)
-=======
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.html" ><abbr title="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment" >ParseTreeConstructorFragment</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parseTreeConstructor/ParseTreeConstructorFragment.java" title="show source code" >(src)</a>
->>>>>>> [docs] Revised migration guide and recompiled xdoc
 </td>
 <td>
 Model-to-text serialization
@@ -363,11 +335,7 @@ Model-to-text serialization
 </tr>
 <tr>
 <td>
-<<<<<<< HEAD
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.html" ><abbr title="org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment" >ImportNamespacesScopingFragment</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.java" >src</a>)
-=======
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.html" ><abbr title="org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment" >ImportNamespacesScopingFragment</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.java" title="show source code" >(src)</a>
->>>>>>> [docs] Revised migration guide and recompiled xdoc
 </td>
 <td>
 Index-based scoping
@@ -378,11 +346,7 @@ Index-based scoping
 </tr>
 <tr>
 <td>
-<<<<<<< HEAD
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/validation/JavaValidatorFragment.html" ><abbr title="org.eclipse.xtext.generator.validation.JavaValidatorFragment" >JavaValidatorFragment</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/JavaValidatorFragment.java" >src</a>)
-=======
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/validation/JavaValidatorFragment.html" ><abbr title="org.eclipse.xtext.generator.validation.JavaValidatorFragment" >JavaValidatorFragment</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/validation/JavaValidatorFragment.java" title="show source code" >(src)</a>
->>>>>>> [docs] Revised migration guide and recompiled xdoc
 </td>
 <td>
 Model validation
@@ -393,11 +357,7 @@ Model validation
 </tr>
 <tr>
 <td>
-<<<<<<< HEAD
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/formatting/FormatterFragment.html" ><abbr title="org.eclipse.xtext.generator.formatting.FormatterFragment" >FormatterFragment</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/formatting/FormatterFragment.java" >src</a>)
-=======
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/formatting/FormatterFragment.html" ><abbr title="org.eclipse.xtext.generator.formatting.FormatterFragment" >FormatterFragment</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/formatting/FormatterFragment.java" title="show source code" >(src)</a>
->>>>>>> [docs] Revised migration guide and recompiled xdoc
 </td>
 <td>
 Code formatter
@@ -408,11 +368,7 @@ Code formatter
 </tr>
 <tr>
 <td>
-<<<<<<< HEAD
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.html" ><abbr title="org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment" >LabelProviderFragment</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java" >src</a>)
-=======
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.html" ><abbr title="org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment" >LabelProviderFragment</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/labeling/LabelProviderFragment.java" title="show source code" >(src)</a>
->>>>>>> [docs] Revised migration guide and recompiled xdoc
 </td>
 <td>
 Label provider
@@ -423,11 +379,7 @@ Label provider
 </tr>
 <tr>
 <td>
-<<<<<<< HEAD
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/outline/OutlineTreeProviderFragment.html" ><abbr title="org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment" >OutlineTreeProviderFragment</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/OutlineTreeProviderFragment.java" >src</a>)
-=======
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/outline/OutlineTreeProviderFragment.html" ><abbr title="org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment" >OutlineTreeProviderFragment</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/outline/OutlineTreeProviderFragment.java" title="show source code" >(src)</a>
->>>>>>> [docs] Revised migration guide and recompiled xdoc
 </td>
 <td>
 Outline view configuration
@@ -438,11 +390,7 @@ Outline view configuration
 </tr>
 <tr>
 <td>
-<<<<<<< HEAD
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.html" ><abbr title="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment" >JavaBasedContentAssistFragment</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.java" >src</a>)
-=======
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.html" ><abbr title="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment" >JavaBasedContentAssistFragment</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/contentAssist/JavaBasedContentAssistFragment.java" title="show source code" >(src)</a>
->>>>>>> [docs] Revised migration guide and recompiled xdoc
 </td>
 <td>
 Java-based content assist
@@ -453,11 +401,7 @@ Java-based content assist
 </tr>
 <tr>
 <td>
-<<<<<<< HEAD
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/parser/antlr/XtextAntlrUiGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment" >XtextAntlrUiGeneratorFragment</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrUiGeneratorFragment.java" >src</a>)
-=======
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/parser/antlr/XtextAntlrUiGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment" >XtextAntlrUiGeneratorFragment</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/parser/antlr/XtextAntlrUiGeneratorFragment.java" title="show source code" >(src)</a>
->>>>>>> [docs] Revised migration guide and recompiled xdoc
 </td>
 <td>
 Content assist helper based on ANTLR
@@ -468,11 +412,7 @@ Content assist helper based on ANTLR
 </tr>
 <tr>
 <td>
-<<<<<<< HEAD
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.html" ><abbr title="org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment" >SimpleProjectWizardFragment</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.java" >src</a>)
-=======
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.html" ><abbr title="org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment" >SimpleProjectWizardFragment</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.java" title="show source code" >(src)</a>
->>>>>>> [docs] Revised migration guide and recompiled xdoc
 </td>
 <td>
 New project wizard
@@ -509,11 +449,7 @@ constructor) and adds the <em>@Inject</em> annotation:
 </div>
 </p>
 <p>
-<<<<<<< HEAD
-It is not the duty of the client code to care about where the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" ><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" >src</a>) 
-=======
 It is not the duty of the client code to care about where the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" ><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="show source code" >(src)</a> 
->>>>>>> [docs] Revised migration guide and recompiled xdoc
 comes from or how it is created. When above&apos;s class is instantiated, Guice sees that it requires an instance of 
 IScopeProvider and assigns it to the specified field or method parameter. This of course only works,
 if the object itself is created by Guice. In Xtext almost every instance is created that way 
@@ -576,15 +512,9 @@ method is :
 </p>
 <p>
 which would do the same as the code snippet above. It simply declares a binding from 
-<<<<<<< HEAD
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" ><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" >src</a>) to <em>MyConcreteScopeProvider</em>. That binding will make 
-Guice instantiate and inject a new instance of <em>MyConcreteScopeProvider</em> whenever a dependency to 
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" ><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" >src</a>) is declared.
-=======
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" ><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="show source code" >(src)</a> to <em>MyConcreteScopeProvider</em>. That binding will make 
 Guice instantiate and inject a new instance of <em>MyConcreteScopeProvider</em> whenever a dependency to 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" ><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="show source code" >(src)</a> is declared.
->>>>>>> [docs] Revised migration guide and recompiled xdoc
 </p>
 <p>
 Having a method per binding allows to deactivate individual bindings by overriding the corresponding 
@@ -629,20 +559,12 @@ the following binding method.
 </div>
 </p>
 <p>
-<<<<<<< HEAD
-Note: Please forgive us the overuse of the term <em>provider</em>. The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" ><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" >src</a>) 
-=======
 Note: Please forgive us the overuse of the term <em>provider</em>. The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" ><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="show source code" >(src)</a> 
->>>>>>> [docs] Revised migration guide and recompiled xdoc
 is not a Guice <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Provider.html" ><abbr title="com.google.inject.Provider" >Provider</abbr></a>.
 </p>
 <p>
 That binding tells Guice to instantiate <em>MyConcreteScopeProviderFactory</em> and invoke get() in order to 
-<<<<<<< HEAD
-obtain an instance of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" ><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" >src</a>) for clients having declared a dependency
-=======
 obtain an instance of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" ><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="show source code" >(src)</a> for clients having declared a dependency
->>>>>>> [docs] Revised migration guide and recompiled xdoc
 to that type. Both mentioned methods are allowed to return an instance instead of a type. This may be useful 
 if some global state should be shared in the application:
 </p>

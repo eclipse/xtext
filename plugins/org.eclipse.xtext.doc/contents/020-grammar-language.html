@@ -211,14 +211,8 @@ An import statement referring to an Ecore file by a <em>platform:/resource/</em>
 <p>
 If you want to mix generated and imported Ecore models you&apos;ll have to configure the generator fragment 
 in your MWE file responsible for generating the Ecore classes 
-<<<<<<< HEAD
-(<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" >EcoreGeneratorFragment</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java" >src</a>)) 
-with resource URIs that point to the <a href="210-emf-integration.html#1">generator models</a>
- of the referenced Ecore models.
-=======
 (<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" >EcoreGeneratorFragment</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java" title="show source code" >(src)</a>) 
 with resource URIs that point to the <a href="210-emf-integration.html#1" title="go to &quot;EMF Code Generation&quot;">generator models</a> of the referenced Ecore models.
->>>>>>> [docs] Revised migration guide and recompiled xdoc
 </p>
 <p>
 The <em>*.genmodel</em> provides all kind of generator configuration used by EMF&apos;s code generator. Xtext will automatically create
@@ -414,14 +408,8 @@ However, if you want to provide a different type you can specify it. For instanc
 This means that the terminal rule <em>INT</em> returns instances of <em>ecore::EInt</em>. It is possible to define any 
 kind of data type here, which just needs to be an instance of <em>ecore::EDataType</em>. In order to tell the framework 
 how to convert the parsed string to a value of the declared data type, you need to provide your own 
-<<<<<<< HEAD
-implementation of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/conversion/IValueConverterService.html" ><abbr title="org.eclipse.xtext.conversion.IValueConverterService" >IValueConverterService</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java" >src</a>) (cf. 
-<a href="050-heading-runtime.html#6">value converters</a>
-). The value converter is also the service that allows to remove escape
-=======
 implementation of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/conversion/IValueConverterService.html" ><abbr title="org.eclipse.xtext.conversion.IValueConverterService" >IValueConverterService</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java" title="show source code" >(src)</a> (cf. 
 <a href="050-heading-runtime.html#6" title="go to &quot;Value Converter&quot;">value converters</a>). The value converter is also the service that allows to remove escape
->>>>>>> [docs] Revised migration guide and recompiled xdoc
 sequences or semantically unnecessary character like quotes from string literals or the caret (&apos;^&apos;) from identifiers.
  Its implementation needs to be registered as a service (cf. <a href="030-generator.html#1" title="go to &quot;Dependency Injection in Xtext with Google Guice&quot;">Service Framework</a>).
 </p>
