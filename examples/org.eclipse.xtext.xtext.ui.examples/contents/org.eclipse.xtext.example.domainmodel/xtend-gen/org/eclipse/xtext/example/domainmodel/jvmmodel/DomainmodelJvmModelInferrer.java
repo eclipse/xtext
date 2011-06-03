@@ -206,7 +206,8 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
     } else if ((entity instanceof DomainModel)) {
       return _transform((DomainModel)entity);
     } else {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        java.util.Arrays.<Object>asList(entity).toString());
     }
   }
   
@@ -218,7 +219,8 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
          && (type instanceof JvmGenericType)) {
       _transform((Property)operation, (JvmGenericType)type);
     } else {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        java.util.Arrays.<Object>asList(operation, type).toString());
     }
   }
 }

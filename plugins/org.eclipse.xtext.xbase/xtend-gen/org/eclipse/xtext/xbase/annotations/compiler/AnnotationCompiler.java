@@ -180,7 +180,8 @@ public class AnnotationCompiler {
          && (a instanceof IAppendable)) {
       _generate((XAnnotationElementValuePair)featureCall, (IAppendable)a);
     } else {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        java.util.Arrays.<Object>asList(featureCall, a).toString());
     }
   }
 }

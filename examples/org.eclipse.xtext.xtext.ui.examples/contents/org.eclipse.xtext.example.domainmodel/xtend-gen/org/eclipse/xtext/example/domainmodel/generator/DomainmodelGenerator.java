@@ -216,7 +216,8 @@ public class DomainmodelGenerator implements IGenerator {
          && (importManager instanceof ImportManager)) {
       return _feature((Property)o, (ImportManager)importManager);
     } else {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        java.util.Arrays.<Object>asList(o, importManager).toString());
     }
   }
 }

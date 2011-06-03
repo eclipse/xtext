@@ -22,7 +22,8 @@ public class DomainmodelIdentifiableSimpleNameProvider extends IdentifiableSimpl
     } else if ((element instanceof JvmIdentifiableElement)) {
       return _getSimpleName((JvmIdentifiableElement)element);
     } else {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        java.util.Arrays.<Object>asList(element).toString());
     }
   }
 }
