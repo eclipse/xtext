@@ -49,11 +49,11 @@ The codeRef[org.eclipse.xtext.naming.IQualifiedNameConverter] converts qualified
 representation. This is also where you specify the separator and wildcard strings. If you already know the segments of a 
 qualified name, you can also create it using e[QualifiedName.create(String ...)]. 
 
-codeRef[org.eclipse.xtext.naming.QualifiedName]s is the new type of the 'name' properties in codeRef[org.eclipse.xtext.resource.IEObjectDescription]. 
+codeRef[org.eclipse.xtext.naming.QualifiedName] is the new type of the 'name' properties in codeRef[org.eclipse.xtext.resource.IEObjectDescription]. 
 So if you have customized indexing, e.g. implemented your own codeRef[org.eclipse.xtext.resource.IResourceDescription$Manager],
-you will have to create e[org.eclipse.xtext.naming.QualifiedName]s instead of codeRef[java.lang.String]s.
-codeRef[org.eclipse.xtext.resource.IEObjectDescription]s are also used in other places such as ref:scoping[scoping], ref:linking[linking],
-ref:serialization[serialization], ref:contentAssist[content assist]...
+you will have to create codeRef[org.eclipse.xtext.naming.QualifiedName][QualifiedNames] instead of codeRef[java.lang.String][Strings].
+codeRef[org.eclipse.xtext.resource.IEObjectDescription][IEObjectDescriptions] are also used in other places such as ref:scoping[scoping], 
+ref:linking[linking], ref:serialization[serialization], ref:contentAssist[content assist]...
 
 Furthermore, the method e[IQualifiedNameProvider.getQualifiedName(EObject)] has been renamed to e[IQualifiedNameProvider.getFullyQualifiedName(EObject)].
 
@@ -70,8 +70,8 @@ has changed. Only cross-references pointing to elements outside the current reso
 the codeRef[org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager] can now be easier customized
 with an codeRef[org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy]. 
 
-For Ecore files only codeRef[org.eclipse.emf.ecore.EPackage]s, codeRef[org.eclipse.emf.ecore.EClassifier]s
-and codeRef[org.eclipse.emf.ecore.EStructuralFeature]s are indexed, each with both, the e[nsURI] and
+For Ecore files only codeRef[org.eclipse.emf.ecore.EPackage][EPackages], codeRef[org.eclipse.emf.ecore.EClassifier][EClassifiers]
+and codeRef[org.eclipse.emf.ecore.EStructuralFeature][EStructuralFeatures] are indexed, each with both, the e[nsURI] and
 the e[name] of the container codeRef[org.eclipse.emf.ecore.EPackage] in their qualified name.
 
 There is a new interface to find references to Xtext elements codeRef[org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder].
@@ -82,7 +82,7 @@ strategy.
 section2[Complete re-implementation of nodemodel]
 
 To reduce memory consumption, ref:node_model[node model] has been redesigned in Xtext 2.0. We no longer
-use EMF, but a as chained list of compressed nodes instead.  
+use EMF, but a chained list of compressed nodes instead.  
 
 The package e[org.eclipse.xtext.nodemodel] now contains the relevant interfaces to program against. The 
 new interfaces are now prefixed with an 'I'. That way, most of the migration will be done by adding an 'I' 
@@ -90,7 +90,7 @@ in front of your used interfaces from the nodemodel an use the organize imports 
 to program against concrete or abstract classes.
 
 If you used the node model a lot, you should have a closer look at the new APIs. The codeRef[org.eclipse.emf.ecore.EObject] 
-API is no longer available on the nodes. Instead, you we offer a couple of codeRef[java.lang.Iterable]s
+API is no longer available on the nodes. Instead, you we offer a couple of codeRef[java.lang.Iterable][Iterables]
 for traversing the tree. Where appropriate, helper methods of the former e[ParseTreeUtil] and e[NodeUtil]
 have become members of the the nodes, e.g. e[NodeUtils.getAllContents(AbstractNode)] has become 
 codeRef[org.eclipse.xtext.nodemodel.INode]e[.getAsTreeIterable()] The remaining methods have been converted 
