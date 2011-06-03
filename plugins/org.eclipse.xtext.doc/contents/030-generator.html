@@ -164,7 +164,8 @@ We will now have a look at the component model used to configure the Language Ge
 <p>
 A language generator is composed of so called language configurations. 
 For each language configuration a URI pointing to its grammar file and the file extensions for the DSL must be provided. 
-In addition, a language is configured with a list of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/IGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.IGeneratorFragment" >IGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java" title="View Source Code" >(src)</a>s.
+In addition, a language is configured with a list of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/IGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.IGeneratorFragment" >generator
+fragments</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGeneratorFragment.java" title="View Source Code" >(src)</a>.
 The whole generator is composed of theses fragments. We have fragments for generating parsers, the serializer, the EMF code, 
 the outline view, etc.
 </p>
@@ -244,21 +245,22 @@ Workflow&nbsp;{</br>
 </div>
 </p>
 <p>
-Here the root element is <em>Workflow</em> and is part of the very slim runtime model shipped with MWE2. It accepts 
-<em>bean</em>s and <em>component</em>s. A <em>var</em> declaration is a first class concept of MWE2&apos;s configuration language 
-and defines a variable whic can be reset from outside, i.e. when calling the module. It allows to externalize some common configuration parameters. 
-Note that you can refer to the variables using the <em>${variable-name}</em> notation. 
+Here the root element is <abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow</abbr> and is part of the very slim runtime 
+model shipped with MWE2. It accepts 
+<span class="inlinecode">bean</span>s and <span class="inlinecode">component</span>s. A <span class="inlinecode"><span class="keyword">var</span></span> declaration is a first class concept of MWE2&apos;s configuration language 
+and defines a variable which can be reset from outside, i.e. when calling the module. It allows to externalize some common configuration parameters. 
+Note that you can refer to the variables using the <span class="inlinecode">${variable-name}</span> notation. 
 </p>
 <p>
-The method <em>Workflow.addBean(Object)</em> does nothing but provides a means to apply global side-effects, which 
+The method <abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow.addBean(Object)</abbr> does nothing but provides a means to apply global side-effects, which 
 unfortunately is required sometimes. In this example we do a so called <em>EMF stand-alone setup</em>. This class 
 initializes a bunch of things for a non-OSGi environment that are otherwise configured by means of extension points, 
-e.g. it allows to populate EMF&apos;s singletons like the <em>EPackage.Registry</em>.
+e.g. it allows to populate EMF&apos;s singletons like the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.Registry.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage.Registry" >EPackage.Registry</abbr></a>.
 </p>
 <p>
-Following the <em>bean</em> assignment there are three <em>component</em> elements. The <em>Workflow.addComponent()</em> method 
-accepts instances of <em>IWorkflowComponent</em>, which is the primary concept of MWE2&apos;s workflow model. The
-language generator component itself is an instance of <em>IWorkflowComponent</em> and can therefore be used within MWE2 workflows. 
+Following the <span class="inlinecode">bean</span> assignment there are three <span class="inlinecode">component</span> elements. The <abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow.addComponent()</abbr> method 
+accepts instances of <abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr>, which is the primary concept of MWE2&apos;s workflow model. The
+language generator component itself is an instance of <abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr> and can therefore be used within MWE2 workflows. 
 </p>
 <a name="0-2"></a>
 <h3>Standard Generator Fragments</h3>
@@ -421,7 +423,7 @@ the dependency rather then stating how to resolve it, i.e. obtaining that compon
 </p>
 <p>
 For instance when some code wants to use a scope provider, it just declares a field (or method or 
-constructor) and adds the <em>@Inject</em> annotation: 
+constructor) and adds the <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Inject.html" title="View JavaDoc"><abbr title="com.google.inject.Inject" >@Inject</abbr></a> annotation: 
 </p>
 <p>
 <div class="literallayout">
@@ -446,7 +448,7 @@ and therefore the whole dependency net is controlled and configured by the means
 </p>
 <p>
 Guice of course needs to know how to instantiate real objects for declared dependencies. This is done 
-in so called <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Module.html" title="View JavaDoc"><abbr title="com.google.inject.Module" >Module</abbr></a>s. A <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Module.html" title="View JavaDoc"><abbr title="com.google.inject.Module" >Module</abbr></a> defines a set of 
+in so called <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Module.html" title="View JavaDoc"><abbr title="com.google.inject.Module" >Modules</abbr></a>. A <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Module.html" title="View JavaDoc"><abbr title="com.google.inject.Module" >Module</abbr></a> defines a set of 
 mappings from types to either existing instances, instance providers or concrete classes. Modules are
 implemented in Java. Here&apos;s an example:
 </p>
@@ -512,7 +514,7 @@ completely by returning null.
 </p>
 <p>
 There are two additional kinds of binding-methods supported. The first one allows to configure a provider. 
-A <em>Provider</em> is an interface with just one method : 
+A <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Provider.html" title="View JavaDoc"><abbr title="com.google.inject.Provider" >Provider</abbr></a> is an interface with just one method : 
 </p>
 <p>
 <div class="literallayout">
@@ -588,7 +590,7 @@ respectively.
 <p>
 The last binding method provided by Xtext allows to do anything you can do with Guice&apos;s binding API, since
 it allows you to use the <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Binder.html" title="View JavaDoc"><abbr title="com.google.inject.Binder" >Binder</abbr></a> directly. If your method&apos;s name starts with the
-name &apos;configure&apos;, has a return type <em>void</em> and accepts one argument of type <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Binder.html" title="View JavaDoc"><abbr title="com.google.inject.Binder" >Binder</abbr></a>:
+name &apos;configure&apos;, has a return type <span class="inlinecode"><span class="keyword">void</span></span> and accepts one argument of type <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Binder.html" title="View JavaDoc"><abbr title="com.google.inject.Binder" >Binder</abbr></a>:
 </p>
 <p>
 <div class="literallayout">

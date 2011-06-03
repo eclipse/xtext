@@ -16,7 +16,7 @@ are usually binary and technical, so you don't want to deal with them in human r
 
 However with a textual concrete syntax we want to be able to compute fragments out of the human readable 
 information. We don't want to force people to use UUIDs (i.e. synthetic identifiers) or fragile, relative, generic 
-paths in order to refer to codeRef[org.eclipse.emf.ecore.EObject]s.
+paths in order to refer to codeRef[org.eclipse.emf.ecore.EObject][EObjects].
 
 Therefore one can contribute an codeRef[org.eclipse.xtext.resource.IFragmentProvider] 
 per language. It has two methods: code[Java][getFragment(EObject, Fallback)] to calculate the fragment of an 

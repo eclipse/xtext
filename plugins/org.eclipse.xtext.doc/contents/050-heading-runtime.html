@@ -21,7 +21,7 @@ extension mechanism when it should be configured in an OSGi environment.
 <h2>Runtime Setup (ISetup)</h2>
 <p>
 For each language there is an implementation of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ISetup.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ISetup" >ISetup</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java" title="View Source Code" >(src)</a> 
-generated. It implements a method called <em>createInjectorAndDoEMFRegistration()</em>, which can be called 
+generated. It implements a method called <span class="inlinecode">createInjectorAndDoEMFRegistration()</span>, which can be called 
 to do the initialization of the language infrastructure. 
 </p>
 <p>
@@ -32,7 +32,7 @@ because entries to the global registries will be overwritten.
 <p>
 The setup method returns an <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html" title="View JavaDoc"><abbr title="com.google.inject.Injector" >Injector</abbr></a>, which can further be used to obtain a 
 parser, etc. It also registers the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.Factory.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.resource.Resource.Factory" >Resource.Factory</abbr></a> and generated 
-<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a>s to the respective global registries provided 
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackages</abbr></a> to the respective global registries provided 
 by EMF. So basically after having run the setup and you can start using EMF API to load and store models
 of your language.
 </p>
@@ -41,13 +41,13 @@ of your language.
 <p>
 Within Eclipse we have a generated <em>Activator</em>, which creates a Guice <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html" title="View JavaDoc"><abbr title="com.google.inject.Injector" >Injector</abbr></a>
 using the <a href="030-generator.html#1-0" title="Go to &quot;The Module API&quot;">modules</a>. In addition an <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IExecutableExtensionFactory.html" title="View JavaDoc"><abbr title="org.eclipse.core.runtime.IExecutableExtensionFactory" >IExecutableExtensionFactory</abbr></a> 
-is generated for each language, which is used to create <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IExecutableExtension.html" title="View JavaDoc"><abbr title="org.eclipse.core.runtime.IExecutableExtension" >IExecutableExtension</abbr></a>s.
+is generated for each language, which is used to create <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IExecutableExtension.html" title="View JavaDoc"><abbr title="org.eclipse.core.runtime.IExecutableExtension" >IExecutableExtensions</abbr></a>.
 This means that everything which is created via extension points is managed by Guice as well, i.e. you can 
 declare dependencies and get them injected upon creation. 
 </p>
 <p>
 The only thing you have to do in order to use this factory is to prefix the class with the factory 
-<em>[MyLanguageName]ExecutableExtensionFactory</em> name followed by a colon.
+<em>{MyDsl}ExecutableExtensionFactory</em> name followed by a colon.
 </p>
 <p>
 <div class="literallayout">
@@ -55,14 +55,14 @@ The only thing you have to do in order to use this factory is to prefix the clas
 <p class="code">
 &lt;extension&nbsp;point=<span class="string">"org.eclipse.ui.editors"</span>&gt;</br>
 &nbsp;&nbsp;&lt;editor</br>
-&nbsp;&nbsp;&nbsp;&nbsp;class=<span class="string">"&lt;MyLanguageName&gt;ExecutableExtensionFactory:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;class=<span class="string">"&lt;MyDsl&gt;ExecutableExtensionFactory:</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.ui.editor.XtextEditor"</span></br>
 &nbsp;&nbsp;&nbsp;&nbsp;contributorClass=</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"org.eclipse.ui.editors.text.TextEditorActionContributor"</span></br>
 &nbsp;&nbsp;&nbsp;&nbsp;default=<span class="string">"true"</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;extensions=<span class="string">"ecoredsl"</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;id=<span class="string">"org.eclipse.xtext.example.EcoreDsl"</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;name=<span class="string">"EcoreDsl&nbsp;Editor"</span>&gt;</br>
+&nbsp;&nbsp;&nbsp;&nbsp;extensions=<span class="string">"mydsl"</span></br>
+&nbsp;&nbsp;&nbsp;&nbsp;id=<span class="string">"org.eclipse.xtext.example.MyDsl"</span></br>
+&nbsp;&nbsp;&nbsp;&nbsp;name=<span class="string">"MyDsl&nbsp;Editor"</span>&gt;</br>
 &nbsp;&nbsp;&lt;/editor&gt;</br>
 &lt;/extension&gt;</br>
 </p>
@@ -105,10 +105,10 @@ Any syntax errors can be retrieved from the Resource using the common EMF API:
 <p>
 <ul>
 	<li>
-		<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.resource.Resource" >Resource</abbr></a><em>.getErrors()</em>
+		<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.resource.Resource" >Resource.getErrors()</abbr></a>
 	</li>
 	<li>
-		<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.resource.Resource" >Resource</abbr></a><em>.getWarnings()</em>
+		<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.resource.Resource" >Resource.getWarnings()</abbr></a>
 	</li>
 </ul>
 </p>
@@ -126,10 +126,10 @@ Similar to syntax errors, any unresolvable crosslinks will be reported and can b
 <p>
 <ul>
 	<li>
-		<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.resource.Resource" >Resource</abbr></a><em>.getErrors()</em>
+		<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.resource.Resource" >Resource.getErrors()</abbr></a>
 	</li>
 	<li>
-		<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.resource.Resource" >Resource</abbr></a><em>.getWarnings()</em>
+		<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.resource.Resource" >Resource.getWarnings()</abbr></a>
 	</li>
 </ul>
 </p>
@@ -160,12 +160,12 @@ This implies several constraints:
 				prohibited, since the parser never instantiates unknown sub-types.
 	</li>
 	<li>
-		Features: In case the <em>MyRule</em> and <em>MySubRule</em> have <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EStructuralFeature.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EStructuralFeature" >EStructuralFeature</abbr></a>s 
+		Features: In case the <em>MyRule</em> and <em>MySubRule</em> have <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EStructuralFeature.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EStructuralFeature" >EStructuralFeatures</abbr></a> 
 				besides <em>strVal</em> and <em>intVal</em>, only <em>strVal</em> and <em>intVal</em> may have 
 				<a href="050-heading-runtime.html#7-5" title="Go to &quot;Transient Values&quot;">non-transient values</a>.
 	</li>
 	<li>
-		Quantities: The following condition must be true: <em>strVal.size() == intVal.size()</em>.
+		Quantities: The following condition must be true: <span class="inlinecode">strVal.size()&nbsp;==&nbsp;intVal.size()</span>.
 	</li>
 	<li>
 		Values: It must be possible to <a href="050-heading-runtime.html#6" title="Go to &quot;Value Converter&quot;">convert all values</a> to valid tokens for 
@@ -190,15 +190,15 @@ the grammar as declarative, which is something the parser doesn&apos;t always do
 <p>
 <ul>
 	<li>
-		Grammar rules containing assigned actions (e.g. <em>{MyType.myFeature=current}</em> are ignored. 
-			Unassigned actions (e.g. <em>{MyType}</em>), however, are supported. 
+		Grammar rules containing assigned actions (e.g. <span class="inlinecode">{MyType.myFeature=<span class="keyword">current</span>}</span> are ignored. 
+			Unassigned actions (e.g. <span class="inlinecode">{MyType}</span>), however, are supported. 
 	</li>
 	<li>
 		Grammar rules that delegate to one or more rules containing assigned actions via unassigned rule 
 			calls are ignored.
 	</li>
 	<li>
-		Orders within list-features can not be validated. e.g. <em>Rule: (foo+=R1 foo+=R2)*</em> implies 
+		Orders within list-features can not be validated. e.g. <span class="inlinecode">Rule:&nbsp;(foo+=R1&nbsp;foo+=R2)*</span> implies 
 			that <em>foo</em> is expected to contain instances of <em>R1</em> and <em>R2</em> in an alternating order.
 	</li>
 </ul>
@@ -206,8 +206,8 @@ the grammar as declarative, which is something the parser doesn&apos;t always do
 <p>
 To use concrete syntax validation you can let Guice inject an instance of 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/validation/IConcreteSyntaxValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.IConcreteSyntaxValidator" >IConcreteSyntaxValidator</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/IConcreteSyntaxValidator.java" title="View Source Code" >(src)</a> and use it directly. 
-Furthermore, there is an adapter (<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/validation/impl/ConcreteSyntaxEValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.impl.ConcreteSyntaxEValidator" >ConcreteSyntaxEValidator</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/impl/ConcreteSyntaxEValidator.java" title="View Source Code" >(src)</a>) 
-allows integrating of the concrete syntax validator as an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EValidator.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EValidator" >EValidator</abbr></a>. 
+Furthermore, there is an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/validation/impl/ConcreteSyntaxEValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.impl.ConcreteSyntaxEValidator" >adapter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/impl/ConcreteSyntaxEValidator.java" title="View Source Code" >(src)</a> which
+allows to use the concrete syntax validator as an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EValidator.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EValidator" >EValidator</abbr></a>. 
 You can, for example, enable it in your runtime module, by adding:
 </p>
 <p>
@@ -232,13 +232,13 @@ To customize error messages please see
 <h3>Custom Validation</h3>
 <p>
 In addition to the afore mentioned kinds of validation, which are more or less done automatically, 
-you can specify additional constraints specific for your Ecore model. We leverage existing EMF API 
-(mainly <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EValidator.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EValidator" >EValidator</abbr></a>) and have put some convenience stuff on top. 
+you can specify additional constraints specific for your Ecore model. We leverage existing 
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EValidator.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EValidator" >EMF API</abbr></a> and have put some convenience stuff on top. 
 Basically all you need to do is to make sure that an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EValidator.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EValidator" >EValidator</abbr></a> is 
-registered for your <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a>. The registry for 
-<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EValidator.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EValidator" >EValidator</abbr></a>s <em>(EValidator.Registry.INSTANCE)</em> can only be filled 
-programmatically. That means contrary to the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a> and 
-<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.Factory.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.resource.Resource.Factory" >Resource.Factory</abbr></a> registries there is no Equinox extension 
+registered for your <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a>. The  
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EValidator.Registry.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EValidator.Registry" >EValidator.Registry</abbr></a> can only be filled 
+programmatically. That means contrary to the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.Registry.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage.Registry" >EPackage.Registry</abbr></a> and the 
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.Factory.Registry.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.resource.Resource.Factory.Registry" >Resource.Factory.Registry</abbr></a> there is no Equinox extension 
 point to populate the validator registry.
 </p>
 <p>
@@ -259,7 +259,7 @@ fragment&nbsp;=&nbsp;</br>
 <p>
 The generator will provide you with two Java classes. An abstract class generated to <em>src-gen/</em> which 
 extends the library class <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/validation/AbstractDeclarativeValidator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.AbstractDeclarativeValidator" >AbstractDeclarativeValidator</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/AbstractDeclarativeValidator.java" title="View Source Code" >(src)</a>. This 
-one just registers the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a>s for which this validator introduces constraints.
+one just registers the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackages</abbr></a> for which this validator introduces constraints.
 The other class is a subclass of that abstract class and is generated to the <em>src/</em> folder in order 
 to be edited by you. That is where you put the constraints in.
 </p>
@@ -336,22 +336,22 @@ Testing validators typically works as follows:
 		The test creates some models which intentionally violate some constraints.
 	</li>
 	<li>
-		The test runs some choosen @<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/validation/Check.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.Check" >@Check</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java" title="View Source Code" >(src)</a>-methods from the validator.
+		The test runs some choosen <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/validation/Check.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.Check" >@Check-methods</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java" title="View Source Code" >(src)</a> from the validator.
 	</li>
 	<li>
-		The test asserts whether the @<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/validation/Check.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.Check" >@Check</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java" title="View Source Code" >(src)</a>-methods have raised the expected warnings and errors.
+		The test asserts whether the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/validation/Check.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.Check" >@Check-methods</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java" title="View Source Code" >(src)</a> have raised the expected warnings and errors.
 	</li>
 </ol>
 </p>
 <p>
 To create models, you can either use EMF&apos;s <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/ResourceSet.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.resource.ResourceSet" >ResourceSet</abbr></a> to 
-load models from your hard disk or you can utilize the <em>[MyLanguage]Factory</em> (which EMF generates 
-for each <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a>) to construct the needed model elements manually. 
+load models from your hard disk or you can utilize the <em>{MyDsl}Factory</em> that EMF generates 
+for each <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a>, to construct the tested model elements manually. 
 While the fist option has the advantages that you can edit your models in your textual concrete syntax, 
 the second option has the advantage that you can create partial models.
 </p>
 <p>
-To run the @<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/validation/Check.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.Check" >@Check</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java" title="View Source Code" >(src)</a>-methods and ensure they raise the intended errors and warnings, you can utilize 
+To run the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/validation/Check.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.Check" >@Check-methods</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java" title="View Source Code" >(src)</a> and ensure they raise the intended errors and warnings, you can utilize 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/junit/validation/ValidatorTester.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit.validation.ValidatorTester" >ValidatorTester</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.junit/src/org/eclipse/xtext/junit/validation/ValidatorTester.java" title="View Source Code" >(src)</a> as shown by the following example:
 </p>
 <p>
@@ -412,59 +412,59 @@ JUnit-Test:
 </p>
 <p>
 This example uses JUnit 3, but since the involved classes from Xtext have no dependency on JUnit 
-whatsoever, JUnit 4 and other testing frameworks will work as well.  JUnit runs the <em>setUp()</em>-method 
+whatsoever, JUnit 4 and other testing frameworks will work as well.  JUnit runs the <span class="inlinecode">setUp()</span>-method 
 before each test case and thereby helps to create some common state. In this example, the validator 
 is instantiated by means of Google Guice. As we inherit from the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/junit/AbstractXtextTests.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit.AbstractXtextTests" >AbstractXtextTests</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.junit/src/org/eclipse/xtext/junit/AbstractXtextTests.java" title="View Source Code" >(src)</a>
 there are a plenty of useful methods available and the state of the global EMF singletons will be restored in the
-method <em>tearDown()</em>. Afterwards, the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/junit/validation/ValidatorTester.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit.validation.ValidatorTester" >ValidatorTester</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.junit/src/org/eclipse/xtext/junit/validation/ValidatorTester.java" title="View Source Code" >(src)</a> 
+method <span class="inlinecode">tearDown()</span>. Afterwards, the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/junit/validation/ValidatorTester.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit.validation.ValidatorTester" >ValidatorTester</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.junit/src/org/eclipse/xtext/junit/validation/ValidatorTester.java" title="View Source Code" >(src)</a> 
 is created and parameterized with the actual validator. It acts as a wrapper for the validator, 
 ensures that the validator has a valid state and provides convenient access to the validator itself 
-<em>(tester.validator())</em> as well as to the utility classes which assert diagnostics created by the validator 
-<em>(tester.diagnose())</em>. Please be aware that you have to call <em>validator()</em> before you can call <em>diagnose()</em>. 
-However, you can call <em>validator()</em> multiple times in a row.
+(<span class="inlinecode">tester.validator()</span>) as well as to the utility classes which assert diagnostics created by the validator 
+(<span class="inlinecode">tester.diagnose()</span>). Please be aware that you have to call <span class="inlinecode">validator()</span> before you can call <span class="inlinecode">diagnose()</span>. 
+However, you can call <span class="inlinecode">validator()</span> multiple times in a row.
 </p>
 <p>
-While <em>validator()</em> allows to call the validator&apos;s @<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/validation/Check.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.Check" >@Check</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java" title="View Source Code" >(src)</a>-methods directly, 
-<em>validate(model)</em> leaves it to the framework to call the applicable @<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/validation/Check.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.Check" >@Check</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java" title="View Source Code" >(src)</a>-methods. However, to avoid 
-side-effects between tests, it is recommended to call the @<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/validation/Check.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.Check" >@Check</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java" title="View Source Code" >(src)</a>-methods directly.
+While <span class="inlinecode">validator()</span> allows to call the validator&apos;s <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/validation/Check.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.Check" >@Check-methods</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java" title="View Source Code" >(src)</a> directly, 
+<span class="inlinecode">validate(model)</span> leaves it to the framework to call the applicable <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/validation/Check.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.Check" >@Check-methods</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java" title="View Source Code" >(src)</a>. However, to avoid 
+side-effects between tests, it is recommended to call the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/validation/Check.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.Check" >@Check-methods</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java" title="View Source Code" >(src)</a> directly.
 </p>
 <p>
-<em>diagnose()</em> and <em>validate(model)</em> return an object of type 
+<span class="inlinecode">diagnose()</span> and <span class="inlinecode">validate(model)</span> return an object of type 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/junit/validation/AssertableDiagnostics.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit.validation.AssertableDiagnostics" >AssertableDiagnostics</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.junit/src/org/eclipse/xtext/junit/validation/AssertableDiagnostics.java" title="View Source Code" >(src)</a> which provides 
 several <em>assert</em>-methods to verify whether the expected diagnostics are present:
 </p>
 <p>
 <ul>
 	<li>
-		<em>assertError(int code)</em>: There must be one diagnostic with severity ERROR and the supplied error code.
+		<span class="inlinecode">assertError(<span class="keyword">int</span>&nbsp;code)</span>: There must be one diagnostic with severity ERROR and the supplied error code.
 	</li>
 	<li>
-		<em>assertErrorContains(String messageFragment)</em>: There must be one diagnostic with severity ERROR and 
+		<span class="inlinecode">assertErrorContains(String&nbsp;messageFragment)</span>: There must be one diagnostic with severity ERROR and 
 				its message must contain <em>messageFragment</em>.
 	</li>
 	<li>
-		<em>assertError(int code, String messageFragment)</em>: Verifies severity, error code and messageFragment.
+		<span class="inlinecode">assertError(<span class="keyword">int</span>&nbsp;code,&nbsp;String&nbsp;messageFragment)</span>: Verifies severity, error code and messageFragment.
 	</li>
 	<li>
-		<em>assertWarning(...)</em>: This method is available for the same combination of parameters as <em>assertError()</em>.
+		<span class="inlinecode">assertWarning(...)</span>: This method is available for the same combination of parameters as <span class="inlinecode">assertError()</span>.
 	</li>
 	<li>
-		<em>assertOK()</em>: Expects that no diagnostics (errors, warnings etc.) have been raised.   
+		<span class="inlinecode">assertOK()</span>: Expects that no diagnostics (errors, warnings etc.) have been raised.   
 	</li>
 	<li>
-		<em>assertDiagnostics(int severity, int code, String messageFragment)</em>: Verifies severity, 
+		<span class="inlinecode">assertDiagnostics(<span class="keyword">int</span>&nbsp;severity,&nbsp;<span class="keyword">int</span>&nbsp;code,&nbsp;String&nbsp;messageFragment)</span>: Verifies severity, 
 				error code and messageFragment.
 	</li>
 	<li>
-		<em>assertAll(DiagnosticPredicate... predicates)</em>: Allows to describe multiple diagnostics at the 
+		<span class="inlinecode">assertAll(DiagnosticPredicate...&nbsp;predicates)</span>: Allows to describe multiple diagnostics at the 
 				same time and verifies that all of them are present. Class 
-				<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/junit/validation/AssertableDiagnostics.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit.validation.AssertableDiagnostics" >AssertableDiagnostics</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.junit/src/org/eclipse/xtext/junit/validation/AssertableDiagnostics.java" title="View Source Code" >(src)</a> contains static <em>error()</em> and 
-				<em>warning()</em> methods which help to create the needed 
+				<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/junit/validation/AssertableDiagnostics.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit.validation.AssertableDiagnostics" >AssertableDiagnostics</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.junit/src/org/eclipse/xtext/junit/validation/AssertableDiagnostics.java" title="View Source Code" >(src)</a> contains static <span class="inlinecode">error()</span> and 
+				<span class="inlinecode">warning()</span> methods which help to create the needed 
 				<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/junit/validation/AssertableDiagnostics.DiagnosticPredicate.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit.validation.AssertableDiagnostics.DiagnosticPredicate" >AssertableDiagnostics.DiagnosticPredicate</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.junit/src/org/eclipse/xtext/junit/validation/AssertableDiagnostics.java" title="View Source Code" >(src)</a>. Example: 
-				<em>assertAll(error(123), warning("some part of the message"))</em>. 
+				<span class="inlinecode">assertAll(error(123),&nbsp;warning(<span class="string">"some&nbsp;part&nbsp;of&nbsp;the&nbsp;message"</span>))</span>. 
 	</li>
 	<li>
-		<em>assertAny(DiagnosticPredicate predicate)</em>: Asserts that a diagnostic exists which matches the predicate.
+		<span class="inlinecode">assertAny(DiagnosticPredicate&nbsp;predicate)</span>: Asserts that a diagnostic exists which matches the predicate.
 	</li>
 </ul>
 </p>
@@ -517,11 +517,12 @@ ReferringType&nbsp;:</br>
 <p>
 The <a href="020-grammar-language.html#2" title="Go to &quot;Ecore Model Inference&quot;">Ecore model inference</a> would create an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a> 
 <em>ReferringType</em> with an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReference</abbr></a> <em>referencedObject</em> of type <em>Entity</em>
-<em>(containment=false)</em>. The referenced object would be identified either by a <em>STRING</em> and the surrounding
-information in the current context (see <a href="050-heading-runtime.html#5" title="Go to &quot;Scoping&quot;">scoping</a>). If you do not use <em>generate</em> but <em>import</em> 
+with its containment property set to <span class="inlinecode"><span class="keyword">false</span></span>. The referenced object would be identified 
+either by a <em>STRING</em> and the surrounding
+information in the current context (see <a href="050-heading-runtime.html#5" title="Go to &quot;Scoping&quot;">scoping</a>). If you do not use <span class="inlinecode"><span class="keyword">generate</span></span> but <span class="inlinecode"><span class="keyword">import</span></span> 
 an existing Ecore model, the class <em>ReferringType</em> (or one of its super types) would need to have an 
 <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReference</abbr></a> of type <em>Entity</em> (or one of its super types) declared. Also the 
-<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReference</abbr></a>&apos;s containment and container properties needs to be set to <em>false</em>. 
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReference&apos;s</abbr></a> containment and container properties needs to be set to <span class="inlinecode"><span class="keyword">false</span></span>. 
 </p>
 <a name="4-1"></a>
 <h3>Default Runtime Behavior (Lazy Linking)</h3>
@@ -552,13 +553,12 @@ called fragment part, which is used to find the <a class="jdoc" href="http://dow
 EMF proxy is resolved, the current <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/ResourceSet.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.resource.ResourceSet" >ResourceSet</abbr></a> is asked. The resource set 
 uses the first part to obtain (i.e. load if it is not already loaded) the resource. Then the resource is asked to 
 return the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> based on the fragment in the URI. The actual cross-reference resolution 
-is done by <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/linking/lazy/LazyLinkingResource.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.linking.lazy.LazyLinkingResource" >LazyLinkingResource</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/lazy/LazyLinkingResource.java" title="View Source Code" >(src)</a><em>.getEObject(String)</em> which receives the 
+is done by <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/linking/lazy/LazyLinkingResource.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.linking.lazy.LazyLinkingResource" >LazyLinkingResource.getEObject(String)</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/lazy/LazyLinkingResource.java" title="View Source Code" >(src)</a> which receives the 
 fragment and delegates to the implementation of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/linking/ILinkingService.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.linking.ILinkingService" >ILinkingService</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/ILinkingService.java" title="View Source Code" >(src)</a>. The default 
 implementation in turn delegates to the <a href="050-heading-runtime.html#5" title="Go to &quot;Scoping&quot;">scoping API</a>.
 </p>
 <p>
-A simple implementation of the linking service (the 
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/linking/impl/DefaultLinkingService.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.linking.impl.DefaultLinkingService" >DefaultLinkingService</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/DefaultLinkingService.java" title="View Source Code" >(src)</a>) is shipped with Xtext 
+A <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/linking/impl/DefaultLinkingService.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.linking.impl.DefaultLinkingService" >simple implementation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/linking/impl/DefaultLinkingService.java" title="View Source Code" >(src)</a> of the linking service is shipped with Xtext 
 and used for any grammar per default. Usually any necessary customization of the linking behavior 
 can best be described using the <a href="050-heading-runtime.html#5" title="Go to &quot;Scoping&quot;">scoping API</a>.
 </p>
@@ -646,7 +646,7 @@ map where the keys are strings and the values are so called <a class="jdoc" href
 which is effectively an abstract description of a real <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a>. 
 </p>
 <a name="5-0"></a>
-<h3>Global Scopes and IResourceDescriptions</h3>
+<h3>Global Scopes and Resource Descriptions</h3>
 <p>
 In the state machine example we don&apos;t have references across model files. Neither is there a concept like 
 a namespace which would make scoping a bit more complicated. Basically, every <em>State</em> and every <em>Event</em> 
@@ -662,16 +662,16 @@ As the name suggests, global scopes are provided by instances of the
 store its elements are described in the next section.
 </p>
 <a name="5-0-0"></a>
-<h4>Resource and EObject Descriptions (IResourceDescription, IEObjectDescription)</h4>
+<h4>Resource and EObject Descriptions</h4>
 <p>
 In order to make states and events of one file referable from another file you need to export them as 
 part of a so called <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription" >IResourceDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a>. 
 </p>
 <p>
 A <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription" >IResourceDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a> contains information about the resource itself 
-(primarily its <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a>), a list 
-of exported <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a>s (in the form of 
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a>) 
+which primarily its <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a>, a list 
+of exported <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObjects</abbr></a> in the form of 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a>
 as well as information about outgoing cross-references and qualified names it references. The cross 
 references contain only resolved references, while the list of imported qualified names also contain 
 those names, which couldn&apos;t be resolved. This information is leveraged by Xtext&apos;s indexing infrastructure
@@ -679,7 +679,7 @@ in order to compute the transitive hull of dependent resources.
 </p>
 <p>
 For users and especially in the context of scoping the most important information is the list of 
-exported <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a>s. An <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> 
+exported <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObjects</abbr></a>. An <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> 
 stores the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a> of the actual <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a>,
 its <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/QualifiedName.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.QualifiedName" >QualifiedName</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java" title="View Source Code" >(src)</a>, as well as its <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a>. 
 In addition one can export arbitrary information using the <em>user data</em> map. The following diagram gives 
@@ -694,8 +694,8 @@ The datamodel of Xtext&apos;s index
 </p>
 <p>
 A language is configured with a default implementation of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription.Manager" >IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a> 
-which computes the list of exported <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a>s by iterating 
-the whole EMF model and applying the <em>getQualifiedName(EObject obj)</em> from 
+which computes the list of exported <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> by iterating 
+the whole EMF model and applying the <span class="inlinecode">getQualifiedName(EObject&nbsp;obj)</span> from 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider" >IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a> 
 on each <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a>. If the object has a qualified name an 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> is created and exported 
@@ -779,15 +779,15 @@ If you don&apos;t run in a Guice enabled context you will likely have to directl
 <p>
 However, we strongly encourage you to use dependency injection. Now, that we know how to export elements to be 
 referable from other resources, we need to learn how those exported 
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a>s can be made available to the referencing resources. That is 
-the responsibility of global scoping (i.e. <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IGlobalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IGlobalScopeProvider" >IGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java" title="View Source Code" >(src)</a>) which is 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> can be made available to the referencing resources. That is 
+the responsibility of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IGlobalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IGlobalScopeProvider" >global scoping</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java" title="View Source Code" >(src)</a> which is 
 described in the following chapter.
 </p>
 <a name="5-0-1"></a>
 <h4>Global Scopes Based On Explicit Imports (ImportURI Mechanism)</h4>
 <p>
 A simple and straight forward solution is to have explicit references to other resources in your 
-file by explicitly listing pathes (or <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a>s) to all referenced resources 
+file by explicitly listing pathes or <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URIs</abbr></a> to all referenced resources 
 in your model file. That is for instance what most include mechanisms use. In Xtext we provide a handy 
 implementation of an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IGlobalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IGlobalScopeProvider" >IGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java" title="View Source Code" >(src)</a> which is based on a naming convention 
 and makes this semantics very easy to use. Talking of the introductory example and given you would want to add 
@@ -823,11 +823,11 @@ This effectively allows import statements to be declared before the events secti
 you will have to make sure that you have bound the 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/ImportUriGlobalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider" >ImportUriGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportUriGlobalScopeProvider.java" title="View Source Code" >(src)</a> for the type 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IGlobalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IGlobalScopeProvider" >IGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java" title="View Source Code" >(src)</a> by the means of <a href="030-generator.html#1" title="Go to &quot;Dependency Injection in Xtext with Google Guice&quot;">Guice</a>. 
-That implementation looks up any <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttribute</abbr></a>s named &apos;importURI&apos; in your
+That implementation looks up any <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttributes</abbr></a> named &apos;importURI&apos; in your
 model and interprets their values as URIs that point to imported resources. That is it adds the corresponding 
 resources to the current resource&apos;s resource set. In addition the scope provider uses the 
-<a href="050-heading-runtime.html#5-0-0" title="Go to &quot;Resource and EObject Descriptions (IResourceDescription, IEObjectDescription)&quot;"><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription.Manager" >IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a></a> of that 
-imported resource to compute all the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a>s returned 
+<a href="050-heading-runtime.html#5-0-0" title="Go to &quot;Resource and EObject Descriptions&quot;"><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription.Manager" >IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a></a> of that 
+imported resource to compute all the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> returned 
 by the <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/preferences/IScope.html" title="View JavaDoc"><abbr title="org.eclipse.core.runtime.preferences.IScope" >IScope</abbr></a>.  
 </p>
 <p>
@@ -859,10 +859,10 @@ and independent from the JDT.
 In order to know what is available in the "world" a global scope provider which relies on external 
 configuration needs to read that configuration in and be able to find all candidates for a certain 
 <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReference</abbr></a>. If you don&apos;t want to force users to have a folder and file name 
-structure reflecting the actual qualified names of the referenceable <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a>s, 
+structure reflecting the actual qualified names of the referenceable <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObjects</abbr></a>, 
 you&apos;ll have to load all resources up front and either keep holding them in memory or remembering all information 
 which is needed for the resolution of cross-references. In Xtext that information is provided by a so called 
-<a href="050-heading-runtime.html#5-0-0" title="Go to &quot;Resource and EObject Descriptions (IResourceDescription, IEObjectDescription)&quot;"><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a></a>. 
+<a href="050-heading-runtime.html#5-0-0" title="Go to &quot;Resource and EObject Descriptions&quot;"><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a></a>. 
 </p>
 <a name="5-0-2-0"></a>
 <h5>About the Index, Containers and Their Manager</h5>
@@ -880,8 +880,8 @@ Guice configuration of the global index in the UI scenario in
 <p>
 The index is basically a flat list of instances of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription" >IResourceDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a>. 
 The index itself doesn&apos;t know about visibility constraints due to classpath restriction. Rather than that, 
-they are defined by the referencing language by means of so called <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IContainer" >IContainer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a>s: 
-While Java might load a resource via <em>ClassLoader.loadResource()</em> (i.e. using the classpath mechanism), another 
+they are defined by the referencing language by means of so called <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IContainer" >IContainers</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a>: 
+While Java might load a resource via <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/ClassLoader.html" title="View JavaDoc"><abbr title="java.lang.ClassLoader" >ClassLoader.loadResource()</abbr></a> (i.e. using the classpath mechanism), another 
 language could load the same resource using the file system paths. 
 </p>
 <p>
@@ -890,9 +890,9 @@ context. Therefore an <a class="jdoc" href="http://download.eclipse.org/modeling
 service, which is called <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IContainer.Manager" >IContainer.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a>. For a given 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription" >IResourceDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a>, the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IContainer.Manager" >IContainer.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a> 
 provides you with the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IContainer" >IContainer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a> as well as with a list of all 
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IContainer" >IContainer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a>s which are visible from there. Note that the index 
-(<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescriptions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescriptions" >IResourceDescriptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescriptions.java" title="View Source Code" >(src)</a>) is globally 
-shared between all languages while the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IContainer.Manager" >IContainer.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a> that adds the semantics of containers can 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IContainer" >IContainers</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a> which are visible from there. Note that the  
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescriptions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescriptions" >index</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescriptions.java" title="View Source Code" >(src)</a> is globally 
+shared between all languages while the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IContainer.Manager" >IContainer.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a> which adds the semantics of containers, can 
 be very different depending on the language. The following method lists all resources visible from a 
 given <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.resource.Resource" >Resource</abbr></a>:  
 </p>
@@ -947,7 +947,7 @@ IContainer Management
 <h5>JDT-Based Container Manager</h5>
 <p>
 As JDT is an Eclipse feature, this JDT-based container management is only available in the UI scenario. 
-It assumes so called <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/IPackageFragmentRoot.html" title="View JavaDoc"><abbr title="org.eclipse.jdt.core.IPackageFragmentRoot" >IPackageFragmentRoot</abbr></a>s as containers. An 
+It assumes so called <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/IPackageFragmentRoot.html" title="View JavaDoc"><abbr title="org.eclipse.jdt.core.IPackageFragmentRoot" >IPackageFragmentRoots</abbr></a> as containers. An 
 <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/IPackageFragmentRoot.html" title="View JavaDoc"><abbr title="org.eclipse.jdt.core.IPackageFragmentRoot" >IPackageFragmentRoot</abbr></a> in JDT is the root of a tree of Java model elements. 
 It usually refers to 
 <ul>
@@ -1041,7 +1041,7 @@ and the UI module should bind
 </div>
 </p>
 <a name="5-0-2-3"></a>
-<h5><em>ResourceSet</em>-Based Containers</h5>
+<h5>ResourceSet-Based Containers</h5>
 <p>
 If you need an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IContainer.Manager" >IContainer.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a> that is independent of 
 Eclipse projects, you can use the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/containers/ResourceSetBasedAllContainersState.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.containers.ResourceSetBasedAllContainersState" >ResourceSetBasedAllContainersState</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/ResourceSetBasedAllContainersState.java" title="View Source Code" >(src)</a>. 
@@ -1220,11 +1220,11 @@ extends <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/jav
 <p>
 The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider" >ImportedNamespaceAwareLocalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java" title="View Source Code" >(src)</a> 
 makes use of the so called <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider" >IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a> 
-service. It computes <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/QualifiedName.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.QualifiedName" >QualifiedName</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java" title="View Source Code" >(src)</a>s for 
-<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a>s. A qualified name consists of several segments
+service. It computes <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/QualifiedName.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.QualifiedName" >QualifiedNames</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java" title="View Source Code" >(src)</a> for 
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObjects</abbr></a>. A qualified name consists of several segments
 </p>
 <p>
-The default implementation (<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider" >DefaultDeclarativeQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.java" title="View Source Code" >(src)</a>) uses 
+The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider" >default implementation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.java" title="View Source Code" >(src)</a> uses 
 a simple name look up composes the qualified name of the simple names of all containers and the object
 itself. 
 </p>
@@ -1255,7 +1255,7 @@ FowlerDslQualifiedNameProvider&nbsp;</br>
 <h4>Importing Namespaces</h4>
 <p>
 The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider" >ImportedNamespaceAwareLocalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java" title="View Source Code" >(src)</a> looks up 
-<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttribute</abbr></a>s with name &apos;importedNamespace&apos; and 
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttributes</abbr></a> with name &apos;importedNamespace&apos; and 
 interprets them as import statements. By default qualified names with or without a wildcard at the end 
 are supported. For an import of a qualified name the simple name is made available as we know from e.g. 
 Java, where
@@ -1359,11 +1359,11 @@ by means of an annotated method.
 </div>
 </p>
 <p>
-If you use the common terminals grammar <em>org.eclipse.xtext.common.Terminals</em> you should extend the 
+If you use the common terminals grammar <span class="inlinecode">org.eclipse.xtext.common.Terminals</span> you should extend the 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/services/DefaultTerminalConverters.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.services.DefaultTerminalConverters" >DefaultTerminalConverters</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/services/DefaultTerminalConverters.java" title="View Source Code" >(src)</a> and override or 
 add value converters by adding the respective methods. In addition to the explicitly 
 defined converters in the default implementation, a delegating converter is registered for each 
-available <em>EDataType</em>. The delegating converter reuses the functionality of the corresponding EMF 
+available <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EDataType.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EDataType" >EDataType</abbr></a>. The delegating converter reuses the functionality of the corresponding EMF 
 <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EFactory.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EFactory" >EFactory</abbr></a>.
 </p>
 <p>
@@ -1421,7 +1421,7 @@ In Xtext, the process of serialization is split into the following steps:
 </p>
 <p>
 Serialization is invoked when calling 
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/XtextResource.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.XtextResource" >XtextResource</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a>.save(...). Furthermore, the
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/XtextResource.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.XtextResource" >XtextResource.save(..)</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a>. Furthermore, the
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/Serializer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.parsetree.reconstr.Serializer" >Serializer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/Serializer.java" title="View Source Code" >(src)</a> provides resource-independent 
 support for serialization. Another situation that triggers serialization is applying <a href="120-heading-UI.html#2" title="Go to &quot;Quick Fixes&quot;">Quick Fixes</a> 
 with semantic modifications. Serialization is <em>not</em> called when a textual editors contents is saved to disk.
@@ -1467,7 +1467,8 @@ available (i.e. the semantic model has been created by the parser), the serializ
 	</li>
 	<li>
 		preserves the representation of cross-references: If a cross-referenced object can be 
-				 identified by multiple names (i.e. scoping returns multiple <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a>s for the 
+				 identified by multiple names (i.e. scoping returns multiple 
+				 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> for the 
 				 same object), the serializer tries to keep the name that was used in the input file.
 	</li>
 	<li>
@@ -1517,7 +1518,7 @@ Possible reasons are listed below:
 	</li>
 	<li>
 		An assignment in the grammar has no corresponding model element. The default transient 
-				value service considers a model element to be transient if it is <em>unset</em> or equals its 
+				value service considers a model element to be transient if it is <em>unset</em> or <em>equals</em> its 
 				default value. However, the parse tree constructor may serialize default values if 
 				this is required by a grammar constraint to be able to serialize another model element.
 				The following solution may help to solve such a scenario:
@@ -1574,18 +1575,18 @@ taken. This behavior has two consequences:
 <h3>Options</h3>
 <p>
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/SaveOptions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.SaveOptions" >SaveOptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/SaveOptions.java" title="View Source Code" >(src)</a> can be passed to 
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/XtextResource.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.XtextResource" >XtextResource</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a>.save(options) and to 
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/Serializer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.parsetree.reconstr.Serializer" >Serializer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/Serializer.java" title="View Source Code" >(src)</a>.serialize(..). 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/XtextResource.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.XtextResource" >XtextResource.save(options)</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a> and to 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/Serializer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.parsetree.reconstr.Serializer" >Serializer.serialize(..)</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/Serializer.java" title="View Source Code" >(src)</a>. 
 Available options are:
 <ul>
 	<li>
-		<em>Formatting</em>. Default: <em>false</em>. If enabled, it is the <a href="050-heading-runtime.html#8" title="Go to &quot;Formatting (Pretty Printing)&quot;">formatters</a> job to determine
+		<em>Formatting</em>. Default: <span class="inlinecode"><span class="keyword">false</span></span>. If enabled, it is the <a href="050-heading-runtime.html#8" title="Go to &quot;Formatting (Pretty Printing)&quot;">formatters</a> job to determine
 		 		all whitespace information during serialization. If disabled, the formatter only defines whitespace 
 		 		information for the places in which no whitespace information can be preserved from the node model. 
 		 		E.g. When new model elements are inserted or there is no node model.
 	</li>
 	<li>
-		<em>Validating</em>. Default: <em>true</em>: Run the <a href="050-heading-runtime.html#3-0-2" title="Go to &quot;Serializer: Concrete Syntax Validation&quot;">concrete syntax validator</a> 
+		<em>Validating</em>. Default: <span class="inlinecode"><span class="keyword">true</span></span>: Run the <a href="050-heading-runtime.html#3-0-2" title="Go to &quot;Serializer: Concrete Syntax Validation&quot;">concrete syntax validator</a> 
 				before serializing the model.
 	</li>
 </ul>
@@ -1599,8 +1600,9 @@ to a different position and the model is serialized, one expects the comments to
 new position in the document as well.
 </p>
 <p>
-Which comment belongs to which semantic object is surely a very subjective issue. The default 
-implementation (<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/impl/DefaultCommentAssociater.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.parsetree.reconstr.impl.DefaultCommentAssociater" >DefaultCommentAssociater</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/DefaultCommentAssociater.java" title="View Source Code" >(src)</a>) 
+Which comment belongs to which semantic object is surely a very subjective issue. The 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/impl/DefaultCommentAssociater.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.parsetree.reconstr.impl.DefaultCommentAssociater" >default 
+implementation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/impl/DefaultCommentAssociater.java" title="View Source Code" >(src)</a>
 behaves as follows, but can be customized:
 <ul>
 	<li>
@@ -1620,8 +1622,8 @@ Transient values are values or model elements which are not persisted (written t
 representation in the serialization phase). If a model contains model elements which can not be serialized 
 with the current grammar, it is critical to mark them transient using the 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/ITransientValueService.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.parsetree.reconstr.ITransientValueService" >ITransientValueService</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITransientValueService.java" title="View Source Code" >(src)</a>, or serialization 
-will fail. The default implementation marks all model elements transient, which are <em>eStructuralFeature.isTransient()</em> 
-or not <em>eObject.eIsSet(eStructuralFeature)</em>. By default, EMF returns <em>false</em> for <em>eIsSet(...)</em> if the 
+will fail. The default implementation marks all model elements transient, which are <span class="inlinecode">eStructuralFeature.isTransient()</span> 
+or not <span class="inlinecode">eObject.eIsSet(eStructuralFeature)</span>. By default, EMF returns <span class="inlinecode"><span class="keyword">false</span></span> for <span class="inlinecode">eIsSet(..)</span> if the 
 value equals the default value.    
 </p>
 <a name="7-6"></a>
@@ -1651,7 +1653,7 @@ Valid models for this example are <em>contents 1 item</em> or <em>contents 5 ite
 in the semantic model whether the keyword <em>item</em> or <em>items</em> has been parsed. This is due to the fact 
 that the rule call <em>Plural</em> is unassigned. However, the <a href="050-heading-runtime.html#7-2" title="Go to &quot;Parse Tree Constructor&quot;">parse tree constructor</a> 
 needs to decide which value to write during serialization. This decision can be be made by customizing 
-the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/ITokenSerializer.IValueSerializer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer" >ITokenSerializer.IValueSerializer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenSerializer.java" title="View Source Code" >(src)</a><span class="inlinecode">.serializeUnassignedValue(EObject,&nbsp;RuleCall,&nbsp;AbstractNode)</span>.
+the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parsetree/reconstr/ITokenSerializer.IValueSerializer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer" >IValueSerializer.serializeUnassignedValue(EObject, RuleCall, AbstractNode)</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parsetree/reconstr/ITokenSerializer.java" title="View Source Code" >(src)</a>.
 </p>
 <a name="7-7"></a>
 <h3>Cross-Reference Serializer</h3>
@@ -1805,29 +1807,29 @@ associated with the corresponding grammar element. The instructions are matched 
 elements. The following matching criteria exist:
 <ul>
 	<li>
-		<span class="inlinecode">after(ele)</span>: The instruction is applied after the grammar element <em>ele</em> has been matched. 
+		<span class="inlinecode">after(element)</span>: The instruction is applied after the grammar element has been matched. 
 				For example, if your grammar uses the keyword <span class="inlinecode"><span class="string">";"</span></span> to end lines, this can instruct the formatter 
 				to insert a line break after the semicolon.
 	</li>
 	<li>
-		<span class="inlinecode">before(ele)</span>: The instruction is executed before the matched element. For example, if your 
+		<span class="inlinecode">before(element)</span>: The instruction is executed before the matched element. For example, if your 
 				grammar contains lists which separate their values with the keyword <span class="inlinecode"><span class="string">","</span></span>, you can instruct the 
 				formatter to suppress the whitespace before the comma.
 	</li>
 	<li>
-		<span class="inlinecode">around(ele)</span>: This is the same as <span class="inlinecode">before(ele)</span> combined with <span class="inlinecode">after(ele)</span>.
+		<span class="inlinecode">around(element)</span>: This is the same as <span class="inlinecode">before(element)</span> combined with <span class="inlinecode">after(element)</span>.
 	</li>
 	<li>
-		<span class="inlinecode">between(ele1,&nbsp;ele2)</span>: This matches if <em>ele2</em> directly follows <em>ele1</em> in the document. 
-				There may be no other tokens in between <em>ele1</em> and <em>ele2</em>.
+		<span class="inlinecode">between(left,&nbsp;right)</span>: This matches if <em>left</em> directly follows <em>right</em> in the document. 
+				There may be no other tokens in between <em>left</em> and <em>right</em>.
 	</li>
 	<li>
-		<span class="inlinecode">bounds(ele1,&nbsp;ele2)</span>: This is the same as <span class="inlinecode">after(ele1)</span> combined with  <span class="inlinecode">before(ele2)</span>.
+		<span class="inlinecode">bounds(left,&nbsp;right)</span>: This is the same as <span class="inlinecode">after(left)</span> combined with  <span class="inlinecode">before(right)</span>.
 	</li>
 	<li>
-		<span class="inlinecode">range(ele1,&nbsp;ele2)</span>: The rule is enabled when <em>ele1</em> is matched, and disabled when <em>ele2</em> 
-				is matched. Thereby, the rule is active for the complete region which is surrounded by <em>ele1</em> 
-				and <em>ele2</em>.
+		<span class="inlinecode">range(start,&nbsp;end)</span>: The rule is enabled when <em>start</em> is matched, and disabled when <em>end</em> 
+				is matched. Thereby, the rule is active for the complete region which is surrounded by <em>start</em> 
+				and <em>end</em>.
 	</li>
 </ul>
 </p>
@@ -1837,10 +1839,10 @@ keyword or the string that is matched by a terminal rule, data type rule or cros
 terminology of the lexer a data type rule can match a composition of multiple tokens.
 </p>
 <p>
-The parameter <em>ele</em> can be a grammar&apos;s <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/AbstractElement.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.AbstractElement" >AbstractElement</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/AbstractElement.java" title="View Source Code" >(src)</a> or a grammar&apos;s 
+The parameter <em>element</em> can be a grammar&apos;s <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/AbstractElement.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.AbstractElement" >AbstractElement</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/AbstractElement.java" title="View Source Code" >(src)</a> or a grammar&apos;s 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/AbstractRule.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.AbstractRule" >AbstractRule</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/AbstractRule.java" title="View Source Code" >(src)</a>. All grammar 
 rules and almost all abstract elements can be matched. This includes rule calls, parser rules, groups 
-and alternatives. The semantic of <span class="inlinecode">before(ele)</span>, <span class="inlinecode">after(ele)</span>, etc. for rule calls and parser rules is 
+and alternatives. The semantic of <span class="inlinecode">before(element)</span>, <span class="inlinecode">after(element)</span>, etc. for rule calls and parser rules is 
 identical to when the parser would "pass" this part of the grammar. The stack of called rules is taken 
 into account. The following abstract elements can <em>not</em> have assigned formatting instructions:
 <ul>
@@ -1864,7 +1866,7 @@ After having explained how rules can be activated, this is what they can do:
 		<span class="inlinecode">setIndentationIncrement()</span> increments indentation by one unit at this position. Whether 
 				one unit consists of one tab-character or spaces is defined by 
 				<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/IIndentationInformation.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.formatting.IIndentationInformation" >IIndentationInformation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IIndentationInformation.java" title="View Source Code" >(src)</a>. The default implementation 
-				consults Eclipse&apos;s <em>PreferenceStore</em>.
+				consults Eclipse&apos;s <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/preference/IPreferenceStore.html" title="View JavaDoc"><abbr title="org.eclipse.jface.preference.IPreferenceStore" >IPreferenceStore</abbr></a>.
 	</li>
 	<li>
 		<span class="inlinecode">setIndentationDecrement()</span> decrements indentation by one unit.
@@ -1876,10 +1878,10 @@ After having explained how rules can be activated, this is what they can do:
 		<span class="inlinecode">setLinewrap(<span class="keyword">int</span>&nbsp;count)</span>: Inserts <em>count</em> numbers of line-wrap at this position.
 	</li>
 	<li>
-		<span class="inlinecode">setLinewrap(<span class="keyword">int</span>&nbsp;min,&nbsp;<span class="keyword">int</span>&nbsp;<span class="keyword">default</span>,&nbsp;<span class="keyword">int</span>&nbsp;max)</span>: If the amount of line-wraps that have been 
+		<span class="inlinecode">setLinewrap(<span class="keyword">int</span>&nbsp;min,&nbsp;<span class="keyword">int</span>&nbsp;def,&nbsp;<span class="keyword">int</span>&nbsp;max)</span>: If the amount of line-wraps that have been 
 				at this position before formatting can be determined (i.g. when a node model is present), 
 				then the amount of of line-wraps is adjusted to be within the interval <em>min</em>, <em>max</em> 
-				and is then reused. In all other cases <em>default</em> line-wraps are inserted. Example: 
+				and is then reused. In all other cases <em>def</em> line-wraps are inserted. Example: 
 				<span class="inlinecode">setLinewrap(0,&nbsp;0,&nbsp;1)</span> will preserve existing line-wraps, but won&apos;t allow more than one 
 				line-wrap between two tokens.
 	</li>
@@ -1941,7 +1943,7 @@ are usually binary and technical, so you don&apos;t want to deal with them in hu
 <p>
 However with a textual concrete syntax we want to be able to compute fragments out of the human readable 
 information. We don&apos;t want to force people to use UUIDs (i.e. synthetic identifiers) or fragile, relative, generic 
-paths in order to refer to <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a>s.
+paths in order to refer to <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObjects</abbr></a>.
 </p>
 <p>
 Therefore one can contribute an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IFragmentProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IFragmentProvider" >IFragmentProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java" title="View Source Code" >(src)</a> 
@@ -2002,9 +2004,9 @@ name as entities.
 <a name="10"></a>
 <h2>Encoding in Xtext</h2>
 <p>
-<em>Encoding</em>, AKA <em>character set</em>, describes the way characters are encoded into bytes and vice versa. 
+Encoding, AKA <em>character set</em>, describes the way characters are encoded into bytes and vice versa. 
 Famous standard encodings are <em>UTF-8</em> or <em>ISO-8859-1</em>. The list of available encodings can be determined
-by calling <span class="inlinecode">java.nio.Charset.availableCharsets()</span>. There is also a list of encodings and their 
+by calling <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/nio/charset/Charset.html" title="View JavaDoc"><abbr title="java.nio.charset.Charset" >Charset.availableCharsets()</abbr></a>. There is also a list of encodings and their 
 canonical Java names in the <a href="http://download.oracle.com/javase/1.5.0/docs/guide/intl/encoding.doc.html">API docs</a>.
 </p>
 <p>
@@ -2076,7 +2078,7 @@ project.
 <p>
 Unless you want to enforce a uniform encoding for all models of your language, we advise to 
 override the runtime service only. It is bound in the runtime module using the binding annotation 
-<em>@Runtime</em> (<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/service/DispatchingProvider.Runtime.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.service.DispatchingProvider.Runtime" >@DispatchingProvider.Runtime</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/DispatchingProvider.java" title="View Source Code" >(src)</a>):
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/service/DispatchingProvider.Runtime.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.service.DispatchingProvider.Runtime" >@Runtime</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/DispatchingProvider.java" title="View Source Code" >(src)</a>:
 </p>
 <p>
 <div class="literallayout">

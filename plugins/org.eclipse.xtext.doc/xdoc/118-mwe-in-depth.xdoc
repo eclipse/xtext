@@ -19,7 +19,7 @@ threads or new processes.
 section:MWE2Exampe[Examples]
 
 Let's start with a couple of examples to demonstrate some usage 
-scenarios for MWE2. The first example is a simple e[HelloWorld] 
+scenarios for MWE2. The first example is a simple code[MWE2][HelloWorld] 
 module that does nothing but print a message to standard out. The 
 second module is assembled of three components that read an Ecore 
 file, transform the contained classifier-names to upper-case and 
@@ -270,9 +270,9 @@ assemble arbitrary object graphs in a compact and declarative
 manner.
 
 ul[
-	item[A MWE2 file defines a e[module] which exposes its root e[component] as reusable artifact.]
-	item[e[Properties] can be used to extract reusable, configurable parts of the workflow.]
-	item[Components are mapped to plain vanilla e[Java objects]. Arbitrary e[set] and e[add] methods 
+	item[A MWE2 file defines a code[MWE2][module] which exposes its root code[MWE2][component] as reusable artifact.]
+	item[code[MWE2][Properties] can be used to extract reusable, configurable parts of the workflow.]
+	item[Components are mapped to plain vanilla e[Java objects]. Arbitrary code[Java][setABC(..)] and code[Java][addXYZ(..)] methods 
 		are used to configure them.]
 ]
 

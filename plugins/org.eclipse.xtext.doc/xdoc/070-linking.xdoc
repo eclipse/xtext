@@ -27,11 +27,12 @@ code[Xtext][ReferringType :
 
 The ref:metamodelInference[Ecore model inference] would create an codeRef[org.eclipse.emf.ecore.EClass] 
 e[ReferringType] with an codeRef[org.eclipse.emf.ecore.EReference] e[referencedObject] of type e[Entity]
-e[(containment=false)]. The referenced object would be identified either by a e[STRING] and the surrounding
-information in the current context (see ref:scoping[scoping]). If you do not use e[generate] but e[import] 
+with its containment property set to code[Java][false]. The referenced object would be identified 
+either by a e[STRING] and the surrounding
+information in the current context (see ref:scoping[scoping]). If you do not use code[Xtext][generate] but code[Xtext][import] 
 an existing Ecore model, the class e[ReferringType] (or one of its super types) would need to have an 
 codeRef[org.eclipse.emf.ecore.EReference] of type e[Entity] (or one of its super types) declared. Also the 
-codeRef[org.eclipse.emf.ecore.EReference]'s containment and container properties needs to be set to e[false]. 
+codeRef[org.eclipse.emf.ecore.EReference][EReference's] containment and container properties needs to be set to code[Java][false]. 
 
 
 section2[Default Runtime Behavior (Lazy Linking)]
@@ -59,11 +60,10 @@ called fragment part, which is used to find the codeRef[org.eclipse.emf.ecore.EO
 EMF proxy is resolved, the current codeRef[org.eclipse.emf.ecore.resource.ResourceSet] is asked. The resource set 
 uses the first part to obtain (i.e. load if it is not already loaded) the resource. Then the resource is asked to 
 return the codeRef[org.eclipse.emf.ecore.EObject] based on the fragment in the URI. The actual cross-reference resolution 
-is done by codeRef[org.eclipse.xtext.linking.lazy.LazyLinkingResource]e[.getEObject(String)] which receives the 
+is done by codeRef[org.eclipse.xtext.linking.lazy.LazyLinkingResource][LazyLinkingResource.getEObject(String)] which receives the 
 fragment and delegates to the implementation of the codeRef[org.eclipse.xtext.linking.ILinkingService]. The default 
 implementation in turn delegates to the ref:scoping[scoping API].
 
-A simple implementation of the linking service (the 
-codeRef[org.eclipse.xtext.linking.impl.DefaultLinkingService]) is shipped with Xtext 
+A codeRef[org.eclipse.xtext.linking.impl.DefaultLinkingService][simple implementation] of the linking service is shipped with Xtext 
 and used for any grammar per default. Usually any necessary customization of the linking behavior 
 can best be described using the ref:scoping[scoping API].

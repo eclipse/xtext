@@ -59,7 +59,7 @@ map where the keys are strings and the values are so called codeRef[org.eclipse.
 which is effectively an abstract description of a real codeRef[org.eclipse.emf.ecore.EObject]. 
 
 
-section2:global_scopes[Global Scopes and e[IResourceDescriptions]]
+section2:global_scopes[Global Scopes and Resource Descriptions]
 
 In the state machine example we don't have references across model files. Neither is there a concept like 
 a namespace which would make scoping a bit more complicated. Basically, every e[State] and every e[Event] 
@@ -74,22 +74,22 @@ codeRef[org.eclipse.xtext.scoping.IGlobalScopeProvider]. The data structures use
 store its elements are described in the next section.
 
 
-section3:resourcedescriptions[e[Resource] and e[EObject] Descriptions e[(IResourceDescription, IEObjectDescription)]]
+section3:resourcedescriptions[Resource and EObject Descriptions]
 
 In order to make states and events of one file referable from another file you need to export them as 
 part of a so called codeRef[org.eclipse.xtext.resource.IResourceDescription]. 
 
 A codeRef[org.eclipse.xtext.resource.IResourceDescription] contains information about the resource itself 
-(primarily its codeRef[org.eclipse.emf.common.util.URI]), a list 
-of exported codeRef[org.eclipse.emf.ecore.EObject]s (in the form of 
-codeRef[org.eclipse.xtext.resource.IEObjectDescription]) 
+which primarily its codeRef[org.eclipse.emf.common.util.URI], a list 
+of exported codeRef[org.eclipse.emf.ecore.EObject][EObjects] in the form of 
+codeRef[org.eclipse.xtext.resource.IEObjectDescription][IEObjectDescriptions]
 as well as information about outgoing cross-references and qualified names it references. The cross 
 references contain only resolved references, while the list of imported qualified names also contain 
 those names, which couldn't be resolved. This information is leveraged by Xtext's indexing infrastructure
 in order to compute the transitive hull of dependent resources. 
 
 For users and especially in the context of scoping the most important information is the list of 
-exported codeRef[org.eclipse.emf.ecore.EObject]s. An codeRef[org.eclipse.xtext.resource.IEObjectDescription] 
+exported codeRef[org.eclipse.emf.ecore.EObject][EObjects]. An codeRef[org.eclipse.xtext.resource.IEObjectDescription] 
 stores the codeRef[org.eclipse.emf.common.util.URI] of the actual codeRef[org.eclipse.emf.ecore.EObject],
 its codeRef[org.eclipse.xtext.naming.QualifiedName], as well as its codeRef[org.eclipse.emf.ecore.EClass]. 
 In addition one can export arbitrary information using the e[user data] map. The following diagram gives 
@@ -98,8 +98,8 @@ an overview on the description classes and their relationships.
 img[images/index_datamodel.png][The datamodel of Xtext's index][ ][ ]
 
 A language is configured with a default implementation of codeRef[org.eclipse.xtext.resource.IResourceDescription$Manager] 
-which computes the list of exported codeRef[org.eclipse.xtext.resource.IEObjectDescription]s by iterating 
-the whole EMF model and applying the e[getQualifiedName(EObject obj)] from 
+which computes the list of exported codeRef[org.eclipse.xtext.resource.IEObjectDescription][IEObjectDescriptions] by iterating 
+the whole EMF model and applying the code[Java][getQualifiedName(EObject obj)] from 
 codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider] 
 on each codeRef[org.eclipse.emf.ecore.EObject]. If the object has a qualified name an 
 codeRef[org.eclipse.xtext.resource.IEObjectDescription] is created and exported 
@@ -162,14 +162,14 @@ private IResourceServiceProvider.Registry rspr =
 
 However, we strongly encourage you to use dependency injection. Now, that we know how to export elements to be 
 referable from other resources, we need to learn how those exported 
-codeRef[org.eclipse.xtext.resource.IEObjectDescription]s can be made available to the referencing resources. That is 
-the responsibility of global scoping (i.e. codeRef[org.eclipse.xtext.scoping.IGlobalScopeProvider]) which is 
+codeRef[org.eclipse.xtext.resource.IEObjectDescription][IEObjectDescriptions] can be made available to the referencing resources. That is 
+the responsibility of codeRef[org.eclipse.xtext.scoping.IGlobalScopeProvider][global scoping] which is 
 described in the following chapter.
 
 section3:import_uri[Global Scopes Based On Explicit Imports (ImportURI Mechanism)]
 
 A simple and straight forward solution is to have explicit references to other resources in your 
-file by explicitly listing pathes (or codeRef[org.eclipse.emf.common.util.URI]s) to all referenced resources 
+file by explicitly listing pathes or codeRef[org.eclipse.emf.common.util.URI][URIs] to all referenced resources 
 in your model file. That is for instance what most include mechanisms use. In Xtext we provide a handy 
 implementation of an codeRef[org.eclipse.xtext.scoping.IGlobalScopeProvider] which is based on a naming convention 
 and makes this semantics very easy to use. Talking of the introductory example and given you would want to add 
@@ -198,11 +198,11 @@ This effectively allows import statements to be declared before the events secti
 you will have to make sure that you have bound the 
 codeRef[org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider] for the type 
 codeRef[org.eclipse.xtext.scoping.IGlobalScopeProvider] by the means of ref:dependencyInjection[Guice]. 
-That implementation looks up any codeRef[org.eclipse.emf.ecore.EAttribute]s named 'importURI' in your
+That implementation looks up any codeRef[org.eclipse.emf.ecore.EAttribute][EAttributes] named 'importURI' in your
 model and interprets their values as URIs that point to imported resources. That is it adds the corresponding 
 resources to the current resource's resource set. In addition the scope provider uses the 
 ref:resourcedescriptions[codeRef[org.eclipse.xtext.resource.IResourceDescription$Manager]] of that 
-imported resource to compute all the codeRef[org.eclipse.xtext.resource.IEObjectDescription]s returned 
+imported resource to compute all the codeRef[org.eclipse.xtext.resource.IEObjectDescription][IEObjectDescriptions] returned 
 by the codeRef[org.eclipse.core.runtime.preferences.IScope].  
 
 Global scopes based on import URIs are available if you use the 
@@ -230,7 +230,7 @@ and independent from the JDT.
 In order to know what is available in the "world" a global scope provider which relies on external 
 configuration needs to read that configuration in and be able to find all candidates for a certain 
 codeRef[org.eclipse.emf.ecore.EReference]. If you don't want to force users to have a folder and file name 
-structure reflecting the actual qualified names of the referenceable codeRef[org.eclipse.emf.ecore.EObject]s, 
+structure reflecting the actual qualified names of the referenceable codeRef[org.eclipse.emf.ecore.EObject][EObjects], 
 you'll have to load all resources up front and either keep holding them in memory or remembering all information 
 which is needed for the resolution of cross-references. In Xtext that information is provided by a so called 
 ref:resourcedescriptions[codeRef[org.eclipse.xtext.resource.IEObjectDescription]]. 
@@ -250,8 +250,8 @@ codeRef[org.eclipse.xtext.ui.shared.internal.SharedModule].
 
 The index is basically a flat list of instances of codeRef[org.eclipse.xtext.resource.IResourceDescription]. 
 The index itself doesn't know about visibility constraints due to classpath restriction. Rather than that, 
-they are defined by the referencing language by means of so called codeRef[org.eclipse.xtext.resource.IContainer]s: 
-While Java might load a resource via e[ClassLoader.loadResource()] (i.e. using the classpath mechanism), another 
+they are defined by the referencing language by means of so called codeRef[org.eclipse.xtext.resource.IContainer][IContainers]: 
+While Java might load a resource via codeRef[java.lang.ClassLoader][ClassLoader.loadResource()] (i.e. using the classpath mechanism), another 
 language could load the same resource using the file system paths. 
 
 Consequently, the information which container a resource belongs to depends on the referencing 
@@ -259,9 +259,9 @@ context. Therefore an codeRef[org.eclipse.xtext.resource.IResourceServiceProvide
 service, which is called codeRef[org.eclipse.xtext.resource.IContainer$Manager]. For a given 
 codeRef[org.eclipse.xtext.resource.IResourceDescription], the codeRef[org.eclipse.xtext.resource.IContainer$Manager] 
 provides you with the codeRef[org.eclipse.xtext.resource.IContainer] as well as with a list of all 
-codeRef[org.eclipse.xtext.resource.IContainer]s which are visible from there. Note that the index 
-(codeRef[org.eclipse.xtext.resource.IResourceDescriptions]) is globally 
-shared between all languages while the codeRef[org.eclipse.xtext.resource.IContainer$Manager] that adds the semantics of containers can 
+codeRef[org.eclipse.xtext.resource.IContainer][IContainers] which are visible from there. Note that the  
+codeRef[org.eclipse.xtext.resource.IResourceDescriptions][index] is globally 
+shared between all languages while the codeRef[org.eclipse.xtext.resource.IContainer$Manager] which adds the semantics of containers, can 
 be very different depending on the language. The following method lists all resources visible from a 
 given codeRef[org.eclipse.emf.ecore.resource.Resource]:  
 
@@ -303,7 +303,7 @@ img[images/index_container.png][IContainer Management][][]
 section4:jdt_based_containers[JDT-Based Container Manager]
 
 As JDT is an Eclipse feature, this JDT-based container management is only available in the UI scenario. 
-It assumes so called codeRef[org.eclipse.jdt.core.IPackageFragmentRoot]s as containers. An 
+It assumes so called codeRef[org.eclipse.jdt.core.IPackageFragmentRoot][IPackageFragmentRoots] as containers. An 
 codeRef[org.eclipse.jdt.core.IPackageFragmentRoot] in JDT is the root of a tree of Java model elements. 
 It usually refers to 
 ul[
@@ -354,12 +354,13 @@ code[public Class<? extends IContainer.Manager> bindIContainer$Manager() {
 ]
 and the UI module should bind 
 
-code[Java][public Provider<IAllContainersState> provideIAllContainersState() {
+code[Java][
+public Provider<IAllContainersState> provideIAllContainersState() {
   return org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();
 }
 ]
 
-section4:resource_set_containers[e[ResourceSet]-Based Containers]
+section4:resource_set_containers[ResourceSet-Based Containers]
 
 If you need an codeRef[org.eclipse.xtext.resource.IContainer$Manager] that is independent of 
 Eclipse projects, you can use the codeRef[org.eclipse.xtext.resource.containers.ResourceSetBasedAllContainersState]. 
@@ -499,10 +500,10 @@ section3[codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider]]
 
 The codeRef[org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider] 
 makes use of the so called codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider] 
-service. It computes codeRef[org.eclipse.xtext.naming.QualifiedName]s for 
-codeRef[org.eclipse.emf.ecore.EObject]s. A qualified name consists of several segments
+service. It computes codeRef[org.eclipse.xtext.naming.QualifiedName][QualifiedNames] for 
+codeRef[org.eclipse.emf.ecore.EObject][EObjects]. A qualified name consists of several segments
 
-The default implementation (codeRef[org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider]) uses 
+The codeRef[org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider][default implementation] uses 
 a simple name look up composes the qualified name of the simple names of all containers and the object
 itself. 
 
@@ -525,7 +526,7 @@ code[Java][FowlerDslQualifiedNameProvider
 section3[Importing Namespaces]
 
 The codeRef[org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider] looks up 
-codeRef[org.eclipse.emf.ecore.EAttribute]s with name 'importedNamespace' and 
+codeRef[org.eclipse.emf.ecore.EAttribute][EAttributes] with name 'importedNamespace' and 
 interprets them as import statements. By default qualified names with or without a wildcard at the end 
 are supported. For an import of a qualified name the simple name is made available as we know from e.g. 
 Java, where

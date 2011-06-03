@@ -88,29 +88,29 @@ To understand e[when] an instruction is applied think of a stream of tokens wher
 associated with the corresponding grammar element. The instructions are matched against these grammar 
 elements. The following matching criteria exist:
 ul[
-	item[code[Java][after(ele)]: The instruction is applied after the grammar element e[ele] has been matched. 
+	item[code[Java][after(element)]: The instruction is applied after the grammar element has been matched. 
 		For example, if your grammar uses the keyword code[Xtext][";"] to end lines, this can instruct the formatter 
 		to insert a line break after the semicolon.]
-	item[code[Java][before(ele)]: The instruction is executed before the matched element. For example, if your 
+	item[code[Java][before(element)]: The instruction is executed before the matched element. For example, if your 
 		grammar contains lists which separate their values with the keyword code[Xtext][","], you can instruct the 
 		formatter to suppress the whitespace before the comma.]
-	item[code[Java][around(ele)]: This is the same as code[Java][before(ele)] combined with code[Java][after(ele)].]
-	item[code[Java][between(ele1, ele2)]: This matches if e[ele2] directly follows e[ele1] in the document. 
-		There may be no other tokens in between e[ele1] and e[ele2].]
-	item[code[Java][bounds(ele1, ele2)]: This is the same as code[Java][after(ele1)] combined with  code[Java][before(ele2)].]
-	item[code[Java][range(ele1, ele2)]: The rule is enabled when e[ele1] is matched, and disabled when e[ele2] 
-		is matched. Thereby, the rule is active for the complete region which is surrounded by e[ele1] 
-		and e[ele2].]
+	item[code[Java][around(element)]: This is the same as code[Java][before(element)] combined with code[Java][after(element)].]
+	item[code[Java][between(left, right)]: This matches if e[left] directly follows e[right] in the document. 
+		There may be no other tokens in between e[left] and e[right].]
+	item[code[Java][bounds(left, right)]: This is the same as code[Java][after(left)] combined with  code[Java][before(right)].]
+	item[code[Java][range(start, end)]: The rule is enabled when e[start] is matched, and disabled when e[end] 
+		is matched. Thereby, the rule is active for the complete region which is surrounded by e[start] 
+		and e[end].]
 ]
 
 The term e[tokens] is used slightly different here compared to the parser/lexer. Here, a token is a 
 keyword or the string that is matched by a terminal rule, data type rule or cross-reference. In the 
 terminology of the lexer a data type rule can match a composition of multiple tokens.
 
-The parameter e[ele] can be a grammar's codeRef[org.eclipse.xtext.AbstractElement] or a grammar's 
+The parameter e[element] can be a grammar's codeRef[org.eclipse.xtext.AbstractElement] or a grammar's 
 codeRef[org.eclipse.xtext.AbstractRule]. All grammar 
 rules and almost all abstract elements can be matched. This includes rule calls, parser rules, groups 
-and alternatives. The semantic of code[Java][before(ele)], code[Java][after(ele)], etc. for rule calls and parser rules is 
+and alternatives. The semantic of code[Java][before(element)], code[Java][after(element)], etc. for rule calls and parser rules is 
 identical to when the parser would "pass" this part of the grammar. The stack of called rules is taken 
 into account. The following abstract elements can e[not] have assigned formatting instructions:
 ul[
@@ -126,14 +126,14 @@ ul[
 	item[code[Java][setIndentationIncrement()] increments indentation by one unit at this position. Whether 
 		one unit consists of one tab-character or spaces is defined by 
 		codeRef[org.eclipse.xtext.formatting.IIndentationInformation]. The default implementation 
-		consults Eclipse's e[PreferenceStore].]
+		consults Eclipse's codeRef[org.eclipse.jface.preference.IPreferenceStore].]
 	item[code[Java][setIndentationDecrement()] decrements indentation by one unit.]
 	item[code[Java][setLinewrap()]: Inserts a line-wrap at this position.]
 	item[code[Java][setLinewrap(int count)]: Inserts e[count] numbers of line-wrap at this position.]
-	item[code[Java][setLinewrap(int min, int default, int max)]: If the amount of line-wraps that have been 
+	item[code[Java][setLinewrap(int min, int def, int max)]: If the amount of line-wraps that have been 
 		at this position before formatting can be determined (i.g. when a node model is present), 
 		then the amount of of line-wraps is adjusted to be within the interval e[min], e[max] 
-		and is then reused. In all other cases e[default] line-wraps are inserted. Example: 
+		and is then reused. In all other cases e[def] line-wraps are inserted. Example: 
 		code[Java][setLinewrap(0, 0, 1)] will preserve existing line-wraps, but won't allow more than one 
 		line-wrap between two tokens.]
 	item[code[Java][setNoLinewrap()]: Suppresses automatic line wrap, which may occur when the line's length 

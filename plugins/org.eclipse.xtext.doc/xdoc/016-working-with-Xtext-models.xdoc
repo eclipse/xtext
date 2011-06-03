@@ -111,10 +111,11 @@ e[LeafNodes] as the name suggests represent the leafs of the parse tree. Each le
 token. If you go through all leaf nodes of a parse tree and concatenate all the tokens to one string, you'll end up with the whole textual representation 
 of the model, including all hidden tokens such as whitespace and comments. The following code does exactly that:
 
-code[Java][CompositeNode node = NodeUtil.getNode(domainModel);
-Iterable<AbstractNode> contents = NodeUtil.getAllContents(node);
+code[Java][
+ICompositeNode node = NodeUtil.getNode(domainModel);
+Iterable<INode> contents = NodeUtil.getAllContents(node);
 StringBuffer text = new StringBuffer();
-for (AbstractNode abstractNode : contents) {
+for (INode noe : contents) {
   if (abstractNode instanceof LeafNode)
     text.append(((LeafNode)abstractNode).getText());
 }
@@ -145,7 +146,13 @@ In a running Xtext Workbench, there are a number of components which access the 
 
 Many of the prominent locations where users can hook in their own code in Xtext are already called from within a thread safe context, e.g. the API for ref:quickfixes[quick fixes]. Consequently, the following usually applies only if you add additional functionality on top of Xtext, e.g. custom UI actions.
 
-Each codeRef[org.eclipse.xtext.ui.editor.XtextEditor] uses an codeRef[org.eclipse.xtext.ui.editor.model.IXtextDocument] to store its model. To avoid synchronization trouble, neither of them provides direct access to the codeRef[org.eclipse.xtext.resource.XtextResource] storing the semantic model. Instead, the e[IXtextDocument] has two methods e[readOnly()] and e[modify()]. Both take an argument of type codeRef[org.eclipse.xtext.util.concurrent.IUnitOfWork]_(==&lt;T&gt;==, IXtextResource)_ which defines a method e[==&lt;T&gt;== exec(IXtextResource)] that contains what you want to do with the model and allows to deliver a result of arbitrary type.
+Each codeRef[org.eclipse.xtext.ui.editor.XtextEditor] uses an codeRef[org.eclipse.xtext.ui.editor.model.IXtextDocument] 
+to store its model. To avoid synchronization trouble, neither of them provides direct access to the 
+codeRef[org.eclipse.xtext.resource.XtextResource] storing the semantic model. Instead, the e[IXtextDocument] has 
+two methods code[Java][readOnly()] and code[Java][modify()]. Both take an argument of type 
+codeRef[org.eclipse.xtext.util.concurrent.IUnitOfWork][IUnitOfWork<IXtextResource>] which defines a method 
+code[Java][<T> exec(IXtextResource)] that contains what you want to do with the model and allows to deliver a result 
+of arbitrary type.
 
 So here is an example of safely reading a model:
 
@@ -159,7 +166,10 @@ String rootElementName =  myDocument.readOnly(
   });
 ]
 
-Direct write-access on the document is usually only performed inside the framework. If you want to change a document by means of its semantic model, you should rather use an e[org.eclipse.xtext.ui.editor.model.edit.IDocumentEditor]todo[rewrite as class no longer exists] which uses the e[modify()] method internally but takes care of synchronizing the ref:node_model[node model], too:
+Direct write-access on the document is usually only performed inside the framework. If you want to change 
+a document by means of its semantic model, you should rather use an 
+e[org.eclipse.xtext.ui.editor.model.edit.IDocumentEditor]todo[rewrite as class no longer exists] 
+which uses the code[Java][modify()] method internally but takes care of synchronizing the ref:node_model[node model], too:
 
 code[Java][@Inject
 private IDocumentEditor documentEditor;

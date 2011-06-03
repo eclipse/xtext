@@ -160,8 +160,10 @@ languages. An Xtext grammar can declare another existing grammar to be reused. T
 <h3>EPackage Declarations</h3>
 <p>
 Xtext parsers create in-memory object graphs while consuming text. Such object-graphs are 
-instances of EMF Ecore models. An Ecore model basically consists of an <em>EPackage</em> containing <em>EClasses</em>, 
-<em>EDataTypes</em> and <em>EEnums</em> (See the <a href="210-emf-integration.html#0" title="Go to &quot;Model, Ecore Model, and Ecore&quot;">section on EMF</a> for more details) and describes
+instances of EMF Ecore models. An Ecore model basically consists of an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a> containing 
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClasses</abbr></a>, 
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EDataType.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EDataType" >EDataTypes</abbr></a> and <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnum.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EEnum" >EEnums</abbr></a> 
+(see the <a href="210-emf-integration.html#0" title="Go to &quot;Model, Ecore Model, and Ecore&quot;">section on EMF</a> for more details) and describes
 the structure of the instantiated objects. Xtext can infer Ecore models from a grammar 
 (see <a href="020-grammar-language.html#2" title="Go to &quot;Ecore Model Inference&quot;">Ecore model inference</a>) but it is also 
 possible to import existing Ecore models. You can even mix both approaches and use multiple existing Ecore models and 
@@ -179,16 +181,19 @@ to do so:
 <span class="inlinecode"><span class="keyword">generate</span>&nbsp;secrets&nbsp;<span class="string">&apos;http://www.eclipse.org/secretcompartment&apos;</span></span>
 </p>
 <p>
-That statement could actually be read as: generate an <em>EPackage</em> with the <em>name</em> <span class="inlinecode">secrets</span> and the <em>nsURI</em> 
+That statement could actually be read as: generate an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a> with the 
+<em>name</em> <span class="inlinecode">secrets</span> and the <em>nsURI</em> 
 <span class="inlinecode"><span class="string">"http://www.eclipse.org/secretcompartment"</span></span>. 
-Actually these are the mandatory properties that are necessary to create an empty <em>EPackage</em>.
-Xtext will then add <em>EClasses</em> with features (<em>EAttributes</em> and <em>EReferences</em>) for the different parser
+Actually these are the mandatory properties that are necessary to create an empty <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a>.
+Xtext will then add <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClasses</abbr></a> with 
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttributes</abbr></a> and <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReferences</abbr></a> for the 
+different parser
 rules in your grammar, as described in <a href="020-grammar-language.html#2" title="Go to &quot;Ecore Model Inference&quot;">Ecore model inference</a>. 
 </p>
 <a name="1-1-1"></a>
 <h4>EPackage Import</h4>
 <p>
-If you already have an existing <em>EPackage</em>, you can import it using either a namespace URI or a resource URI. 
+If you already have an existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a>, you can import it using either a namespace URI or a resource URI. 
 An <a href="http://www.ietf.org/rfc/rfc2396.txt">URI</a> (Uniform Resource Identifier) provides a simple and extensible 
 means for identifying an abstract or physical resource. For all the nifty details about EMF URIs 
 please refer to its <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >documentation</abbr></a>.
@@ -196,7 +201,8 @@ please refer to its <a class="jdoc" href="http://download.eclipse.org/modeling/e
 <a name="1-1-1-0"></a>
 <h5>Using Resource URIs to Import Existing EPackages</h5>
 <p>
-In order to import an existing Ecore model, you&apos;ll have to have the *.ecore file describing the <em>EPackage</em> you want to 
+In order to import an existing Ecore model, you&apos;ll have to have the *.ecore file describing the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a> 
+you want to 
 use somewhere in your workspace. To refer to that file you make use of the <em>platform:/resource</em> scheme.
 Platform URIs are a special EMF concept which allow to reference elements in the workspace 
 independent of the physical location of the workspace. It is an abstraction that uses the Eclipse workspace
@@ -210,13 +216,12 @@ An import statement referring to an Ecore file by a <em>platform:/resource/</em>
 </p>
 <p>
 If you want to mix generated and imported Ecore models you&apos;ll have to configure the generator fragment 
-in your MWE file responsible for generating the Ecore classes 
-(<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" >EcoreGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java" title="View Source Code" >(src)</a>) 
+in your MWE file responsible for <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" >generating the Ecore classes</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java" title="View Source Code" >(src)</a> 
 with resource URIs that point to the <a href="210-emf-integration.html#1" title="Go to &quot;EMF Code Generation&quot;">generator models</a> of the referenced Ecore models.
 </p>
 <p>
 The <em>*.genmodel</em> provides all kind of generator configuration used by EMF&apos;s code generator. Xtext will automatically create
-a generator model for derived <em>EPackages</em>, but if it references an existing, imported Ecore
+a generator model for derived <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackages</abbr></a>, but if it references an existing, imported Ecore
 model, the code generator needs to know how that code was generated in order to generate valid Java code. 
 </p>
 <p>
@@ -270,7 +275,7 @@ See the section on <a href="199-jvmtypes.html" title="Go to &quot;Referring to J
 <a name="1-1-1-2"></a>
 <h5>Using Namespace URIs to Import Existing EPackages</h5>
 <p>
-You can also use nsURI in order to import existing <em>EPackage</em>. Note that this is generally not
+You can also use nsURI in order to import existing <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a>. Note that this is generally not
 preferrable, because you&apos;ll have to have the corresponding EPackage installed in the workbench.
 There&apos;s mainly just one exception, that is Ecore itself. So if you refer to Ecore it is best
 to use its nsURI :
@@ -281,7 +286,7 @@ to use its nsURI :
 <a name="1-1-2"></a>
 <h4>Ecore Model Aliases for EPackages</h4>
 <p>
-If you want to use multiple <em>EPackages</em> you need to specify aliases in the following way:
+If you want to use multiple <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackages</abbr></a> you need to specify aliases in the following way:
 </p>
 <p>
 <div class="literallayout">
@@ -295,18 +300,19 @@ If you want to use multiple <em>EPackages</em> you need to specify aliases in th
 </p>
 <p>
 When referring to a type somewhere in the grammar you need to qualify the reference using that 
-alias (example <em>another::SomeType</em>). We&apos;ll see later where such type references occur.
+alias (example <span class="inlinecode">another::SomeType</span>). We&apos;ll see later where such type references occur.
 </p>
 <p>
-It is also supported to put multiple <em>EPackage</em> imports into one alias. This is no problem as 
-long as there are not any two <em>EClassifiers</em> with the same name. In that case none of them can be referenced. 
-It is even possible to <em>import</em> multiple and <em>generate</em> one Ecore model and declare all of them with 
-same alias. If you do so, for a reference to an <em>EClassifier</em> first the imported <em>EPackages</em> are 
+It is also supported to put multiple <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a> imports into one alias. This is no problem as 
+long as there are not any two <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClassifier" >EClassifiers</abbr></a> with the same name. 
+In that case none of them can be referenced. 
+It is even possible to <span class="inlinecode"><span class="keyword">import</span></span> multiple and <span class="inlinecode"><span class="keyword">generate</span></span> one Ecore model and declare all of them with 
+same alias. If you do so, for a reference to an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClassifier" >EClassifier</abbr></a> first the imported <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackages</abbr></a> are 
 scanned before it is assumed that a type needs to be generated into the inferred package. 
 </p>
 <p>
 Note, that using this feature is not recommended, because it might cause problems, which are hard to track down.
-For instance, a reference to <em>classA</em> would as well be linked to a newly created <em>EClass</em>, because the 
+For instance, a reference to <em>classA</em> would as well be linked to a newly created <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a>, because the 
 corresponding type in <em>http://www.eclipse.org/packContainingClassA</em> is spelled with a capital letter.
 </p>
 <a name="1-2"></a>
@@ -341,7 +347,7 @@ names of terminal rules are all upper-case.
 </p>
 <p>
 In the secret compartments example there are no explicitly defined terminal rules, since it only uses the <em>ID</em> rule 
-which is inherited from the grammar <em>org.eclipse.xtext.common.Terminals</em> (cf. <a href="020-grammar-language.html#3" title="Go to &quot;Grammar Mixins&quot;">Grammar Mixins</a>).
+which is inherited from the grammar <span class="inlinecode">org.eclipse.xtext.common.Terminals</span> (cf. <a href="020-grammar-language.html#3" title="Go to &quot;Grammar Mixins&quot;">Grammar Mixins</a>).
 Therein the <em>ID</em> rule is defined as follows:
 </p>
 <p>
@@ -391,7 +397,7 @@ It&apos;s almost in any case recommended to use data type rules instead. Let&apo
 <h5>Return Types</h5>
 <p>
 Each terminal rule returns an atomic value (an <span class="inlinecode">Ecore&nbsp;EDataType</span>). By default, it&apos;s assumed that
-an instance of <em>ecore::EString</em>) should be returned.
+an instance of <span class="inlinecode">ecore::EString</span>) should be returned.
 However, if you want to provide a different type you can specify it. For instance, the rule <em>INT</em> is defined as:
 </p>
 <p>
@@ -405,12 +411,12 @@ However, if you want to provide a different type you can specify it. For instanc
 </div>
 </p>
 <p>
-This means that the terminal rule <em>INT</em> returns instances of <em>ecore::EInt</em>. It is possible to define any 
-kind of data type here, which just needs to be an instance of <em>ecore::EDataType</em>. In order to tell the framework 
+This means that the terminal rule <em>INT</em> returns instances of <span class="inlinecode">ecore::EInt</span>. It is possible to define any 
+kind of data type here, which just needs to be an instance of <span class="inlinecode">ecore::EDataType</span>. In order to tell the framework 
 how to convert the parsed string to a value of the declared data type, you need to provide your own 
 implementation of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/conversion/IValueConverterService.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.conversion.IValueConverterService" >IValueConverterService</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java" title="View Source Code" >(src)</a> (cf. 
 <a href="050-heading-runtime.html#6" title="Go to &quot;Value Converter&quot;">value converters</a>). The value converter is also the service that allows to remove escape
-sequences or semantically unnecessary character like quotes from string literals or the caret (&apos;^&apos;) from identifiers.
+sequences or semantically unnecessary character like quotes from string literals or the caret <span class="inlinecode"><span class="string">&apos;^&apos;</span></span> from identifiers.
  Its implementation needs to be registered as a service (cf. <a href="030-generator.html#1" title="Go to &quot;Dependency Injection in Xtext with Google Guice&quot;">Service Framework</a>).
 </p>
 <a name="1-2-1"></a>
@@ -440,7 +446,7 @@ There are four different possible cardinalities:
 <h5>Keywords / Characters</h5>
 <p>
 Keywords are a kind of terminal rule literals. 
-The <em>ID</em> rule in <em>org.eclipse.xtext.common.Terminals</em> for instance starts with a keyword:
+The <em>ID</em> rule in <span class="inlinecode">org.eclipse.xtext.common.Terminals</span> for instance starts with a keyword:
 </p>
 <p>
 <span class="inlinecode"><span class="keyword">terminal</span>&nbsp;ID&nbsp;:&nbsp;<span class="string">&apos;^&apos;</span>?&nbsp;....&nbsp;;</span>
@@ -467,8 +473,8 @@ Example:
 <span class="inlinecode"><span class="keyword">terminal</span>&nbsp;INT&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EInt:&nbsp;(<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)+;</span>
 </p>
 <p>
-In this case an <em>INT</em> is comprised of one or more (note the <em>+</em> operator) characters 
-between (and including) <em>&apos;0&apos;</em> and <em>&apos;9&apos;</em>.
+In this case an <em>INT</em> is comprised of one or more (note the <span class="inlinecode">+</span> operator) characters 
+between (and including) <span class="inlinecode"><span class="string">&apos;0&apos;</span></span> and <span class="inlinecode"><span class="string">&apos;9&apos;</span></span>.
 </p>
 <a name="1-2-1-2"></a>
 <h5>Wildcard</h5>
@@ -580,7 +586,7 @@ The parser is fed with a sequence of terminals and walks through the so called p
 contrary to a terminal rule - does not produce a single atomic terminal token but a tree of non-terminal 
 and terminal tokens. They lead to a so called <a href="" title="Go to &quot;Working with the Parse Tree (aka Node Model)&quot;">parse tree</a> (in Xtext it is also referred 
 as node model). Furthermore, parser rules are handled as kind of a building plan for the creation of 
-the <em>EObjects</em> that form the semantic model (the linked abstract syntax graph or AST). Due to this 
+the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObjects</abbr></a> that form the semantic model (the linked abstract syntax graph or AST). Due to this 
 fact, parser rules are even called production or EObject rules. Different constructs like actions and 
 assignments are used to derive types and initialize the semantic objects accordingly. 
 </p>
@@ -617,7 +623,7 @@ is constructed. They are listed and explained in the following.
 <h5>Assignments</h5>
 <p>
 Assignments are used to assign the consumed information to a feature of the currently produced object. 
-The type of the current object, its <em>EClass</em>, is specified by the return type of the parser 
+The type of the current object, its <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a>, is specified by the return type of the parser 
 rule. If it is not explicitly stated it is implied that the type&apos;s name equals the rule&apos;s name. 
 The type of the assigned feature is inferred from the right hand side of the assignment.
 </p>
@@ -645,11 +651,11 @@ The syntactic declaration for states in the state machine example starts with a 
 <span class="inlinecode">name=ID</span>
 </p>
 <p>
-The left hand side refers to a feature <em>name</em> of the current object (which has the <em>EClass</em> <em>State</em> in this case). 
+The left hand side refers to a feature <em>name</em> of the current object (which has the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a> <em>State</em> in this case). 
 The right hand side can be a rule call, a keyword, a <a href="020-grammar-language.html#1-3-0-1" title="Go to &quot;Cross-References&quot;">cross-reference</a> or an alternative
 comprised by the former. The type of the feature 
 needs to be compatible with the type of the expression on the right. As <em>ID</em> returns an <em>EString</em> in this case, 
-the feature <em>name</em> needs to be of type <em>EString</em> as well.
+the feature <em>name</em> needs to be of type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >EString</abbr></a> as well.
 </p>
 <p>
 <em>Assignment Operators</em>
@@ -666,7 +672,8 @@ There are three different assignment operators, each with different semantics.
 		The <span class="inlinecode">+=</span> sign (the add operator) expects a multi-valued feature and adds the value on the right hand to that feature, which is a list feature.
 	</li>
 	<li>
-		The <span class="inlinecode">?=</span> sign (boolean assignment operator) expects a feature of type <em>EBoolean</em> and sets it to true if the right hand side was consumed independently from the concrete value of the right hand side.
+		The <span class="inlinecode">?=</span> sign (boolean assignment operator) expects a feature of type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Boolean.html" title="View JavaDoc"><abbr title="java.lang.Boolean" >EBoolean</abbr></a> and sets it 
+		to true if the right hand side was consumed independently from the concrete value of the right hand side.
 	</li>
 </ol>
 </p>
@@ -708,7 +715,7 @@ Transition&nbsp;:</br>
 </p>
 <p>
 It is important to understand that the text between the square brackets does not refer to another rule, but to an
-<em>EClass</em> - which is a type and not a parser rule!
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a> - which is a type and not a parser rule!
 This is sometimes confusing, because one usually uses the same name for the rules and the returned types.
 That is if we had named the type for events differently like in the following the cross-reference needs 
 to be adapted as well:
@@ -835,7 +842,7 @@ The object to be returned by a parser rule is usually created lazily on the firs
 of the rule which may have been inferred from the rule&apos;s name if no explicit return type is specified.
 </p>
 <p>
-With Actions however, the creation of returned <em>EObject</em> can be made explicit. Xtext supports two kinds of Actions:
+With Actions however, the creation of returned <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> can be made explicit. Xtext supports two kinds of Actions:
 </p>
 <p>
 <ol>
@@ -889,7 +896,7 @@ MyRule&nbsp;<span class="keyword">returns</span>&nbsp;TypeA&nbsp;:</br>
 </p>
 <p>
 Generally speaking, the instance is created as soon as the parser hits the first assignment. However, actions 
-allow to explicitly instantiate any <em>EObject</em>. The notation <em>{TypeB}</em> will create an instance of TypeB and assign 
+allow to explicitly instantiate any <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a>. The notation <em>{TypeB}</em> will create an instance of TypeB and assign 
 it to the result of the parser rule. This allows to define parser rules without any assignment and to
 create objects without the need to introduce unnecessary delegate rules.
 </p>
@@ -901,8 +908,8 @@ detects this situation and will raise a warning for the parser rules in question
 <a name="1-3-0-4"></a>
 <h5>Unassigned Rule Calls</h5>
 <p>
-We previously explained, that the <em>EObject</em> to be returned is created lazily when the first assignment occurs or 
-as soon as a simple action is evaluated. There is another to "find" the <em>EObject</em> to be returned. The
+We previously explained, that the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> to be returned is created lazily when the first assignment occurs or 
+as soon as a simple action is evaluated. There is another to <em>find</em> the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> to be returned. The
 concept is called <em>Unassigned Rule Call</em>.
 </p>
 <p>
@@ -927,7 +934,7 @@ AbstractToken&nbsp;:</br>
 </div>
 </p>
 <p>
-As <em>AbstractToken</em> could possibly return an instance of <em>TokenA</em>, <em>TokenB</em> or <em>TokenC</em> its type must be a 
+As <span class="inlinecode">AbstractToken</span> could possibly return an instance of <em>TokenA</em>, <em>TokenB</em> or <em>TokenC</em> its type must be a 
 super type for all these types. Since the return value of the called rule becomes the result of the current
 rule, it is possible to further change the state of the AST 
 element by assigning additional features.
@@ -962,7 +969,7 @@ but always return the instance that has been created by the invoked <em>TokenX</
 Xtext leverages the powerful Antlr parser which implements an <span class="inlinecode">LL(*)</span> algorithm. Even though <span class="inlinecode">LL</span>
 parsers have many advantages with respect to readability, debuggability and error recovery, there are
 also some drawbacks. The most important one is that it does not allow left recursive grammars.
-For instance, the following rule is not allowed in LL-based grammars, because <em>Expression &apos;+&apos; Expression</em> is left recursive:
+For instance, the following rule is not allowed in LL-based grammars, because <span class="inlinecode">Expression&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;Expression</span> is left recursive:
 </p>
 <p>
 <div class="literallayout">
@@ -1018,7 +1025,7 @@ TerminalExpression&nbsp;<span class="keyword">returns</span>&nbsp;Expression:</b
 </p>
 <p>
 ... would result in unwanted elements in the AST.
-For instance the expression <em>(42)</em> would result in a tree like this:
+For instance the expression <span class="inlinecode">(42)</span> would result in a tree like this:
 </p>
 <p>
 <div class="literallayout">
@@ -1059,8 +1066,9 @@ TerminalExpression&nbsp;<span class="keyword">returns</span>&nbsp;Expression:</b
 </div>
 </p>
 <p>
-In the example above <em>{Operation.left=current}</em> is a so called tree rewrite action, which creates a new instance of the stated <em>EClass
-Operation</em> and assigns the element currently to-be-returned (the <span class="inlinecode"><span class="keyword">current</span></span> variable) to a feature of the newly created object.
+In the example above <span class="inlinecode">{Operation.left=<span class="keyword">current</span>}</span> is a so called tree rewrite action, which creates a new instance of the stated 
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a>
+<em>Operation</em> and assigns the element currently to-be-returned (the <span class="inlinecode"><span class="keyword">current</span></span> variable) to a feature of the newly created object.
 The example uses the feature <em>left</em> of the <em>Operation</em> instance to store the previously returned <em>Expression</em>.
 In Java these semantics could be expressed as:
 </p>
@@ -1079,15 +1087,15 @@ current&nbsp;=&nbsp;temp;</br>
 <h3>Hidden Terminal Symbols</h3>
 <p>
 Because parser rules describe not a single token, but a sequence of patterns in the input, it is necessary to define
- the interesting parts of the input. Xtext introduces the concept of hidden tokens to handle semantically unimportant
-  things like whitespaces, comments, etc. in the input sequence gracefully. It is possible to define a set of terminal 
-  symbols, that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they 
-  are transparently woven into the node model, but not relevant for the semantic model. 
+the interesting parts of the input. Xtext introduces the concept of hidden tokens to handle semantically unimportant
+things like whitespaces, comments, etc. in the input sequence gracefully. It is possible to define a set of terminal 
+symbols, that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they 
+are transparently woven into the node model, but not relevant for the semantic model. 
 </p>
 <p>
 Hidden terminals may optionally appear between any other terminals in any cardinality. They can be described per rule 
 or for the whole grammar. When <a href="020-grammar-language.html#3" title="Go to &quot;Grammar Mixins&quot;">reusing a single grammar</a> its definition of hidden tokens is reused,
-too. The grammar <em>org.eclipse.xtext.common.Terminals</em> comes with a reasonable default and hides all comments and whitespace from the parser rules.
+too. The grammar <span class="inlinecode">org.eclipse.xtext.common.Terminals</span> comes with a reasonable default and hides all comments and whitespace from the parser rules.
 </p>
 <p>
 If a rule defines hidden symbols, you can think of a kind of scope that is automatically introduced. Any rule that is
@@ -1109,7 +1117,7 @@ Fullname:&nbsp;</br>
 </div>
 </p>
 <p>
-The sample rule "Person" defines multiline comments (<em>ML_COMMENT</em>), single-line comments (<em>SL_COMMENT</em>), and whitespace (<em>WS</em>) to be allowed between
+The sample rule <em>Person</em> defines multiline comments (<span class="inlinecode">ML_COMMENT</span>), single-line comments (<span class="inlinecode">SL_COMMENT</span>), and whitespace (<span class="inlinecode">WS</span>) to be allowed between
  the <em>name</em> and the <em>age</em>. Because the rule <em>Fullname</em> does not introduce an own set of hidden terminals, it allows the same symbols to appear 
  between <em>firstname</em> and <em>lastname</em> as the calling rule <em>Person</em>. Thus, the following input is perfectly valid for the given grammar snippet:
 </p>
@@ -1126,12 +1134,12 @@ John&nbsp;<span class="comment">/*&nbsp;comment&nbsp;*/</span>&nbsp;Smith&nbsp;<
 </div>
 </p>
 <p>
-A list of all default terminals like <em>WS</em> can be found in section <a href="020-grammar-language.html#3" title="Go to &quot;Grammar Mixins&quot;">Grammar Mixins</a>.
+A list of all default terminals like <span class="inlinecode">WS</span> can be found in section <a href="020-grammar-language.html#3" title="Go to &quot;Grammar Mixins&quot;">Grammar Mixins</a>.
 </p>
 <a name="1-5"></a>
 <h3>Data Type Rules</h3>
 <p>
-Data type rules are parsing-phase rules, which create instances of <em>EDataType</em> instead of <em>EClass</em>. Thinking about it, one may discover 
+Data type rules are parsing-phase rules, which create instances of <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EDataType.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EDataType" >EDataType</abbr></a> instead of <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EDataType.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EDataType" >EDataType</abbr></a>. Thinking about it, one may discover 
 that they are quite similar to terminal rules.
 However, the nice thing about data type rules is that they are actually parser rules and are therefore 
 </p>
@@ -1184,7 +1192,7 @@ QualifiedName&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EString&nbsp
 </p>
 <p>
 Note that rules that do not call other parser rules and do neither contain any actions nor <a href="020-grammar-language.html#1-3-0-0" title="Go to &quot;Assignments&quot;">assignments</a>, are
- considered to be data type rules and the data type <em>EString</em> is implied if none has been explicitly declared.
+ considered to be data type rules and the data type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >EString</abbr></a> is implied if none has been explicitly declared.
 </p>
 <p>
 <a href="050-heading-runtime.html#6" title="Go to &quot;Value Converter&quot;">Value converters</a> are used to transform the parsed string to the actually returned
@@ -1198,7 +1206,7 @@ The main advantage of enum rules is their simplicity, type safety and therefore 
  to infer enums and their respective literals during the Ecore model transformation.
 </p>
 <p>
-If you want to define a <em>ChangeKind</em> <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/change/package-summary.html">org.eclipse.emf.ecore.change/model/Change.ecore</a> with <em>ADD</em>, <em>MOVE</em> and <em>REMOVE</em> you could write:
+If you want to define a <span class="inlinecode">ChangeKind</span> from <a href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/change/package-summary.html">org.eclipse.emf.ecore.change/model/Change.ecore</a> with <em>ADD</em>, <em>MOVE</em> and <em>REMOVE</em> you could write:
 </p>
 <p>
 <div class="literallayout">
@@ -1241,7 +1249,7 @@ with the input of
 </p>
 <p>
 the resulting value of the element <em>Foo</em> will hold the enum value with the internal representation of <span class="inlinecode">0</span> (zero). 
-When generating the <em>EPackage</em> from your grammar this will be the first literal you define. As a workaround 
+When generating the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a> from your grammar this will be the first literal you define. As a workaround 
 you could introduce a dedicated none-value or order the enums accordingly. Note that it is not possible to define 
 an enum literal with an empty textual representation.
 </p>
@@ -1316,8 +1324,8 @@ The problems becomes more obvious as soon as nested conditions are used:
 </div>
 </p>
 <p>
-Where does the <span class="inlinecode">else</span> branch belong to? This question can be answered by a quick look into the language
-specication which tells that the <span class="inlinecode">else</span> branch is part of the inner condition. However, the parser
+Where does the <span class="inlinecode"><span class="keyword">else</span></span> branch belong to? This question can be answered by a quick look into the language
+specication which tells that the <span class="inlinecode"><span class="keyword">else</span></span> branch is part of the inner condition. However, the parser
 generator cannot be convinced that easy. We have to guide it to this decision point by means of syntactic
 predicates which are expressed by a leading <span class="inlinecode">=&gt;</span> operator.
 </p>
@@ -1347,9 +1355,9 @@ Well choosen predicates allow to solve most ambiguities and backtracking can oft
 The Ecore model (or meta model) of a textual language describes the structure of its abstract syntax trees (AST). 
 </p>
 <p>
-Xtext uses Ecore&apos;s <em>EPackages</em> to define Ecore models. Ecore models are declared to be either inferred (generated) 
+Xtext uses Ecore&apos;s <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackages</abbr></a> to define Ecore models. Ecore models are declared to be either inferred (generated) 
 from the grammar or imported. 
-By using the <em>generate</em> directive, one tells Xtext to derive an <em>EPackage</em> from the grammar. 
+By using the <span class="inlinecode"><span class="keyword">generate</span></span> directive, one tells Xtext to derive an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a> from the grammar. 
 </p>
 <a name="2-0"></a>
 <h3>Type and Package Generation</h3>
@@ -1359,16 +1367,21 @@ Xtext creates
 <p>
 <ul>
 	<li>
-		an <em>EPackage</em> <ul>
+		an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a> <ul>
 			<li>
-				for each generate-package declaration. After the directive <em>generate</em> a list of parameters follows. The <em>name</em> of the <em>EPackage</em> will be set to the first parameter, its <em>nsURI</em> to the second parameter. An optional alias as the third parameter allows to distinguish generated <em>EPackages</em> later. Only one generated package declaration per alias is allowed.
+				for each generate-package declaration. After the directive <span class="inlinecode"><span class="keyword">generate</span></span> a list of parameters follows. The <em>name</em> of the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a> 
+					will be set to the first parameter, its <em>nsURI</em> to the second parameter. An optional alias as the third parameter allows 
+					to distinguish generated <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackages</abbr></a> later. Only one generated package declaration 
+					per alias is allowed.
 			</li>
 		</ul>
 	</li>
 	<li>
-		an <em>EClass</em> <ul>
+		an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a> <ul>
 			<li>
-				for each return type of a parser rule. If a parser rule does not define a return type, an implicit one with the same name as the rule itself is assumed. You can specify more than one rule that return the same type but only one <em>EClass</em> will be generated.
+				for each return type of a parser rule. If a parser rule does not define a return type, an implicit one with the same 
+					name as the rule itself is assumed. You can specify more than one rule that return the same type but only one <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a> 
+					will be generated.
 			</li>
 			<li>
 				for each type defined in an action or a cross-reference.
@@ -1376,14 +1389,14 @@ Xtext creates
 		</ul>
 	</li>
 	<li>
-		an <em>EEnum</em> <ul>
+		an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnum.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EEnum" >EEnum</abbr></a> <ul>
 			<li>
 				for each return type of an enum rule.
 			</li>
 		</ul>
 	</li>
 	<li>
-		an <em>EDataType</em> <ul>
+		an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EDataType.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EDataType" >EDataType</abbr></a> <ul>
 			<li>
 				for each return type of a terminal rule or a data type rule.
 			</li>
@@ -1392,7 +1405,9 @@ Xtext creates
 </ul>
 </p>
 <p>
-All <em>EClasses</em>, <em>EEnums</em>, and <em>EDataTypes</em> are added to the <em>EPackage</em> referred to by the alias provided in the type reference they were created from.
+All <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClasses</abbr></a>, <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnum.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EEnum" >EEnums</abbr></a>, and 
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EDataType.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EDataType" >EDataTypes</abbr></a> are added to the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a> referred to 
+by the alias provided in the type reference they were created from.
 </p>
 <a name="2-1"></a>
 <h3>Feature and Type Hierarchy Generation</h3>
@@ -1403,7 +1418,8 @@ While walking through the grammar, the algorithm keeps track of a set of the cur
 		Entering a parser rule the set contains only the return type of the rule. 
 	</li>
 	<li>
-		Entering an element of an alternative the set is reset to the same state it was in when entering the first option of the alternative. 
+		Entering an element of an alternative the set is reset to the same state it was in when entering the first option of 
+		the alternative. 
 	</li>
 	<li>
 		Leaving an alternative the set contains the union of all types at the end of each of its paths.
@@ -1412,7 +1428,8 @@ While walking through the grammar, the algorithm keeps track of a set of the cur
 		After an optional element, the set is reset to the same state it was before entering it. 
 	</li>
 	<li>
-		After a mandatory (non-optional) rule call or mandatory action the set contains only the return type of the called rule or action.
+		After a mandatory (non-optional) rule call or mandatory action the set contains only the return type of the called 
+		rule or action.
 	</li>
 	<li>
 		An optional rule call does not modify the set.
@@ -1426,9 +1443,10 @@ While walking through the grammar, the algorithm keeps track of a set of the cur
 While iterating the parser rules Xtext creates
 <ul>
 	<li>
-		an <em>EAttribute</em> in each current return type <ul>
+		an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttribute</abbr></a> in each current return type <ul>
 			<li>
-				of type <em>EBoolean</em> for each feature assignment using the <span class="inlinecode">?=</span> operator. No further <em>EReferences</em> or <em>EAttributes</em> will be generated from this assignment.
+				of type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/Boolean.html" title="View JavaDoc"><abbr title="java.lang.Boolean" >EBoolean</abbr></a> for each feature assignment using the <span class="inlinecode">?=</span> operator. 
+					No further <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReferences</abbr></a> or <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttributes</abbr></a> will be generated from this assignment.
 			</li>
 			<li>
 				for each assignment with the <span class="inlinecode">=</span> or <span class="inlinecode">+=</span> operator calling a terminal rule. Its type will be the return type of the called rule.
@@ -1436,9 +1454,10 @@ While iterating the parser rules Xtext creates
 		</ul>
 	</li>
 	<li>
-		an <em>EReference</em> in each current return type <ul>
+		an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReference</abbr></a> in each current return type <ul>
 			<li>
-				for each assignment with the <span class="inlinecode">=</span> or <span class="inlinecode">+=</span> operator in a parser rule calling a parser rule. The <em>EReference</em>&apos;s type will be the return type of the called parser rule.
+				for each assignment with the <span class="inlinecode">=</span> or <span class="inlinecode">+=</span> operator in a parser rule calling a parser rule. 
+					The <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReference&apos;s</abbr></a> type will be the return type of the called parser rule.
 			</li>
 			<li>
 				for each assigned action. The reference&apos;s type will be set to the return type of the current calling rule. 
@@ -1448,10 +1467,13 @@ While iterating the parser rules Xtext creates
 </ul>
 </p>
 <p>
-Each <em>EAttribute</em> or <em>EReference</em> takes its name from the assignment or action that caused it. Multiplicities will be <em>0..1</em> for assignments with the <span class="inlinecode">=</span> operator and <span class="inlinecode">0..*</span> for assignments with the <span class="inlinecode">+=</span> operator. 
+Each <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttribute</abbr></a> or <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReference</abbr></a> takes its name from the assignment 
+or action that caused it. Multiplicities will be <em>0..1</em> for assignments with the <span class="inlinecode">=</span> operator and <span class="inlinecode">0..*</span> for assignments 
+with the <span class="inlinecode">+=</span> operator. 
 </p>
 <p>
-Furthermore, each type that is added to the currently possible return types automatically extends the current return type of the parser rule. You can specify additional common super types by means of "artificial" parser rules, that are never called, e.g.
+Furthermore, each type that is added to the currently possible return types automatically extends the current return type 
+of the parser rule. You can specify additional common super types by means of "artificial" parser rules, that are never called, e.g.
 </p>
 <p>
 <div class="literallayout">
@@ -1483,7 +1505,7 @@ it is omitted, an enum literal with equal <em>name</em> and <em>literal</em> att
 <a name="2-3"></a>
 <h3>Feature Normalization</h3>
 <p>
-In the next step the generator examines all generated <em>EClasses</em> and lifts up similar features to super types
+In the next step the generator examines all generated <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClasses</abbr></a> and lifts up similar features to super types
  if there is more than one subtype and the feature is defined in every subtypes. This does even work for multiple super types.
 </p>
 <a name="2-4"></a>
@@ -1492,7 +1514,7 @@ In the next step the generator examines all generated <em>EClasses</em> and lift
 As a last step, the generator invokes the post processor for every generated Ecore model. The post processor expects an 
 Xtend1 file with name <em>MyDslPostProcessor.ext</em> (if the name of the grammar file is <em>MyDsl.xtext</em>) in the same 
 folder as the grammar file. Further, for a successful invocation, the Xtend file must declare an extension 
-with signature <em>process(xtext::GeneratedMetamodel)</em>. E.g.
+with signature <span class="inlinecode">process(xtext::GeneratedMetamodel)</span>. E.g.
 </p>
 <p>
 <div class="literallayout">
@@ -1537,19 +1559,19 @@ consider to use imported packages instead of generated packages.</em>
 The following conditions cause an error
 <ul>
 	<li>
-		An <em>EAttribute</em> or <em>EReference</em> has two different types or different cardinality.
+		An <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttribute</abbr></a> or <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReference</abbr></a> has two different types or different cardinality.
 	</li>
 	<li>
-		There is an <em>EAttribute</em> and an <em>EReference</em> with the same name in the same <em>EClass</em>.
+		There is an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttribute</abbr></a> and an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReference</abbr></a> with the same name in the same <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a>.
 	</li>
 	<li>
 		There is a cycle in the type hierarchy.
 	</li>
 	<li>
-		An new <em>EAttribute</em>, <em>EReference</em> or super type is added to an imported type.
+		An new <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttribute</abbr></a>, <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReference</abbr></a> or super type is added to an imported type.
 	</li>
 	<li>
-		An <em>EClass</em> is added to an imported <em>EPackage</em>.
+		An <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a> is added to an imported <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EPackage" >EPackage</abbr></a>.
 	</li>
 	<li>
 		An undeclared alias is used. 
@@ -1562,8 +1584,9 @@ The following conditions cause an error
 <a name="3"></a>
 <h2>Grammar Mixins</h2>
 <p>
-Xtext supports the reuse of existing grammars. Grammars that are created via the Xtext wizard use <em>org.eclipse.xtext.common.Terminals</em>
- by default which introduces a common set of terminal rules and defines reasonable defaults for hidden terminals.
+Xtext supports the reuse of existing grammars. Grammars that are created via the Xtext wizard use 
+<span class="inlinecode">org.eclipse.xtext.common.Terminals</span>
+by default which introduces a common set of terminal rules and defines reasonable defaults for hidden terminals.
 </p>
 <p>
 <div class="literallayout">

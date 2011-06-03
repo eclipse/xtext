@@ -225,8 +225,8 @@ code[Xpand][ «DEFINE name(ArgType1 arg1, ArgType2 arg2) FOR MainArgType»
 Where e[MainArgType] is bound to the variable name e[this] which can like in Java be omitted when referring to.
 
 The first definition e[main] is defined for e[Entity] and is the one invoked from the previously discussed MWE2 file (2). 
-The first thing the definition does is opening a file using the e[qualifiedName()] of the given e[Entity]. 
-The function e[qualifiedName()] should be declared in the referenced Xtend file (4). To do so open that file and replace its
+The first thing the definition does is opening a file using the code[Java][qualifiedName()] of the given e[Entity]. 
+The function code[Java][qualifiedName()] should be declared in the referenced Xtend file (4). To do so open that file and replace its
 current contents by the following snippet:
 
 code[Xtend][import org::eclipse::xtext::example::domainmodel;
@@ -247,8 +247,8 @@ String qualifiedName(PackageDeclaration this) :
 		else qualifiedName(eContainer())+'.'+name;
 ]
 
-It defines the e[qualifiedName()] function not only for e[Entity] but also generally for types. Note how it computes the qualified name by calling
-e[qualifiedName()] recursively on its e[eContainer()]. Both Xpand and Xtend are based on the same expression language, which is statically typed and 
+It defines the code[Java][qualifiedName()] function not only for e[Entity] but also generally for types. Note how it computes the qualified name by calling
+code[Java][qualifiedName()] recursively on its code[Java][eContainer()]. Both Xpand and Xtend are based on the same expression language, which is statically typed and 
 allows for very convenient navigation over object graphs and collections.
 
 Back to the Xpand file (3) we see some static text which goes directly into the opened file. The e[EXPAND] statement calls the other definition defined in this file.

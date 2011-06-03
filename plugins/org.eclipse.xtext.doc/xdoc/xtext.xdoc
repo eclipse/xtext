@@ -44,7 +44,7 @@ codelanguage-def[Check][import, extension, this, create, cached, this, true, fal
 
 codelanguage-def[XML][]
 
-codelanguage-def[DomainExample][package, entity, datatype, import, extends]
+codelanguage-def[DomainExample][package, entity, datatype, import, extends, public]
 
 codelanguage-def[JavaTypesExample][type, mapped-to]
 

@@ -272,8 +272,8 @@ specific <em>code</em> with the diagnostic.
 </p>
 <p>
 In the following example taken from the <em>DomainmodelJavaValidator</em> 
-the diagnostic&apos;s <em>code</em> is given by the third argument to the <em>warning()</em> method and it is a reference 
-to the static <em>String</em> field <em>INVALID_TYPE_NAME</em> in the validator class.
+the diagnostic&apos;s <em>code</em> is given by the third argument to the <span class="inlinecode">warning()</span> method and it is a reference 
+to the static <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a> field <span class="inlinecode">INVALID_TYPE_NAME</span> in the validator class.
 </p>
 <p>
 <div class="literallayout">
@@ -288,11 +288,11 @@ warning(<span class="string">"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;
 <p>
 Now that the validation has a unique code identifying the problem we can register quick fixes for it. 
 We start by adding the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/quickfix/QuickfixProviderFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment" >QuickfixProviderFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/quickfix/QuickfixProviderFragment.java" title="View Source Code" >(src)</a> 
-to our workflow and after regenerating the code we should find an empty class <em>MyDslQuickfixProvider</em> 
+to our workflow and after regenerating the code we should find an empty class <em>{MyDsl}QuickfixProvider</em> 
 in our DSL&apos;s UI project and new entries in the <em>plugin.xml_gen</em> file.
 </p>
 <p>
-Continuing with the <em>INVALID_TYPE_NAME</em> problem from the domain model example we add a method with which 
+Continuing with the <span class="inlinecode">INVALID_TYPE_NAME</span> problem from the domain model example we add a method with which 
 the problem can be fixed (have a look at the <em>DomainmodelQuickfixProvider</em> for details):
 </p>
 <p>
@@ -334,20 +334,20 @@ The first three parameters given to the
 UI representation of the quick fix. As the document is not necessarily loaded when the quick fix is 
 offered, we need to provide any additional data from the model that we want to refer to in the UI 
 when creating the issue in the validator above. In this case, we provided the existing type name. 
-The additional data is available as <em>Issue.getData()</em>. As it is persisted in markers, only strings 
+The additional data is available as <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/validation/Issue.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.validation.Issue" >Issue.getData()</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Issue.java" title="View Source Code" >(src)</a>. As it is persisted in markers, only strings 
 are allowed. 
 </p>
 <p>
 The actual model modification is implemented in the 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/model/edit/IModification.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.model.edit.IModification" >IModification</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModification.java" title="View Source Code" >(src)</a>. 
 The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/model/edit/IModificationContext.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.model.edit.IModificationContext" >IModificationContext</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/IModificationContext.java" title="View Source Code" >(src)</a> provides 
-access to the erroneous document. In this case, we&apos;re using Eclipse&apos;s <em>IDocument</em> API to replace a 
+access to the erroneous document. In this case, we&apos;re using Eclipse&apos;s <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/IDocument.html" title="View JavaDoc"><abbr title="org.eclipse.jface.text.IDocument" >IDocument</abbr></a> API to replace a 
 text region.    
 </p>
 <p>
 If you prefer to implement the quick fix in terms of the semantic model use a 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/model/edit/ISemanticModification.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.model.edit.ISemanticModification" >ISemanticModification</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/model/edit/ISemanticModification.java" title="View Source Code" >(src)</a> instead. 
-Its <em>apply(EObject, IModificationContext)</em> method will be invoked inside a modify-transaction and the 
+Its <span class="inlinecode">apply(EObject,&nbsp;IModificationContext)</span> method will be invoked inside a modify-transaction and the 
 first argument will be the erroneous semantic element. This makes it very easy for the fix method to 
 modify the model as necessary. After the method returns the model as well as the Xtext editor&apos;s content 
 will be updated accordingly. If the method fails (throws an exception) the change will not be committed. 
@@ -403,18 +403,26 @@ the generated UI-plug-in. This file contains templates in a format as described 
 </div>
 </p>
 <p>
-By default Xtext registers <em>ContextTypes</em> for each rule (<span class="inlinecode">{languageName}.{RuleName}</span>) and for each 
-keyword (<span class="inlinecode">{languageName}.kw_{keyword}</span>). If you don&apos;t 
-like these defaults you&apos;ll have to subclass 
+By default Xtext registers <em>context types</em> that follow certain patterns. A context type will be created
+<ol>
+	<li>
+		for each rule (<span class="inlinecode">{languageName}.{RuleName}</span>) and
+	</li>
+	<li>
+		for each keyword (<span class="inlinecode">{languageName}.kw_{keyword}</span>).
+	</li>
+</ol>
+
+If you don&apos;t like these defaults you&apos;ll have to subclass 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/templates/XtextTemplateContextTypeRegistry.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.templates.XtextTemplateContextTypeRegistry" >XtextTemplateContextTypeRegistry</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/XtextTemplateContextTypeRegistry.java" title="View Source Code" >(src)</a> 
 and configure it via <a href="030-generator.html#1-0" title="Go to &quot;The Module API&quot;">Guice</a>. 
 </p>
 <p>
 In addition to the standard template proposal extension mechanism, Xtext ships with a predefined set 
-of <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/templates/TemplateVariableResolver.html" title="View JavaDoc"><abbr title="org.eclipse.jface.text.templates.TemplateVariableResolver" >TemplateVariableResolver</abbr></a>s to resolve special variable types in templates. 
+of <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/templates/TemplateVariableResolver.html" title="View JavaDoc"><abbr title="org.eclipse.jface.text.templates.TemplateVariableResolver" >TemplateVariableResolvers</abbr></a> to resolve special variable types in templates. 
 Besides the standard template variables available in 
 <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/templates/GlobalTemplateVariables.html" title="View JavaDoc"><abbr title="org.eclipse.jface.text.templates.GlobalTemplateVariables" >GlobalTemplateVariables</abbr></a> like <span class="inlinecode">${user}</span>, <span class="inlinecode">${date}</span>, <span class="inlinecode">${time}</span>, 
-<span class="inlinecode">${cursor}</span>, etc., these <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/templates/TemplateVariableResolver.html" title="View JavaDoc"><abbr title="org.eclipse.jface.text.templates.TemplateVariableResolver" >TemplateVariableResolver</abbr></a>s support the automatic resolving of 
+<span class="inlinecode">${cursor}</span>, etc., these <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/templates/TemplateVariableResolver.html" title="View JavaDoc"><abbr title="org.eclipse.jface.text.templates.TemplateVariableResolver" >TemplateVariableResolvers</abbr></a> support the automatic resolving of 
 cross references enumeration values. Both resolvers are explained in the 
 following sections.
 </p>
@@ -429,16 +437,14 @@ an <span class="inlinecode">id</span> attribute for each template element. Note 
 <p>
 Xtext comes with a specific template variable resolver called 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/templates/CrossReferenceTemplateVariableResolver.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.templates.CrossReferenceTemplateVariableResolver" >CrossReferenceTemplateVariableResolver</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/CrossReferenceTemplateVariableResolver.java" title="View Source Code" >(src)</a>, 
-which can be used to place cross-references within a template.
-</p>
-<p>
-The syntax is as follows:
+which can be used to pre-populate placeholders for cross-references within a template. The respective
+template variable is called <em>CrossReference</em> and its syntax is as follows:
 </p>
 <p>
 <span class="inlinecode">${&lt;displayText&gt;:CrossReference([&lt;MyPackageName&gt;.]&lt;MyType&gt;.&lt;myRef&gt;)}</span>
 </p>
 <p>
-For example the following template:
+This small example yields the text <em>event =&gt; state</em> and allows selecting any events and states using a drop down:
 </p>
 <p>
 <div class="literallayout">
@@ -458,9 +464,6 @@ ${event:CrossReference(<span class="string">&apos;Transition.event&apos;</span>)
 </div>
 </p>
 <p>
-yields the text <em>event =&gt; state</em> and allows selecting any events and states using a drop down.
-</p>
-<p>
 <div class="image" >
 <img src="images/templates_crossref.png" class=" " 
  style=" " />
@@ -470,8 +473,9 @@ yields the text <em>event =&gt; state</em> and allows selecting any events and s
 <h3>Enumeration Template Variable Resolver</h3>
 <p>
 The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.templates.EnumTemplateVariableResolver" >EnumTemplateVariableResolver</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.java" title="View Source Code" >(src)</a> 
-resolves a template variable to <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnumLiteral.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EEnumLiteral" >EEnumLiteral</abbr></a>s
-which are assignment-compatible to the enumeration type declared as the first parameter of the the <em>Enum</em> <em>TemplateVariable</em>. 
+resolves a template variable to <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnumLiteral.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EEnumLiteral" >EEnumLiterals</abbr></a>
+which are assignment-compatible to the enumeration type declared as the first parameter of the the <em>Enum</em>
+template variable. 
 </p>
 <p>
 The syntax is as follows:   
@@ -492,7 +496,7 @@ For example the following template (taken from another example):
 &nbsp;&nbsp;&nbsp;&nbsp;id=<span class="string">"entity"</span></br>
 &nbsp;&nbsp;&nbsp;&nbsp;context=<span class="string">"org.eclipse.xtext.example.Domainmodel.Entity"</span></br>
 &nbsp;&nbsp;&nbsp;&nbsp;enabled=<span class="string">"true"</span>&gt;</br>
-${visibility:Enum(<span class="string">&apos;Visibility&apos;</span>)}&nbsp;entity&nbsp;${Name}&nbsp;{</br>
+${<span class="keyword">public</span>:Enum(<span class="string">&apos;Visibility&apos;</span>)}&nbsp;<span class="keyword">entity</span>&nbsp;${Name}&nbsp;{</br>
 &nbsp;&nbsp;${cursor}</br>
 }</br>
 &lt;/template&gt;</br>
@@ -501,7 +505,7 @@ ${visibility:Enum(<span class="string">&apos;Visibility&apos;</span>)}&nbsp;enti
 </div>
 </p>
 <p>
-yields the text <span class="inlinecode">public&nbsp;<span class="keyword">entity</span>&nbsp;Name&nbsp;{}</span> where the text <em>public</em> is the default value of the <span class="inlinecode">Visibility</span>.
+yields the text <span class="inlinecode"><span class="keyword">public</span>&nbsp;<span class="keyword">entity</span>&nbsp;Name&nbsp;{}</span> where the text <span class="inlinecode"><span class="keyword">public</span></span> is the default value of the <span class="inlinecode">Visibility</span>.
 The editor provides a drop down that is populated with the other literal values as defined in the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnum.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EEnum" >EEnum</abbr></a>. 
 </p>
 <a name="4"></a>
@@ -541,13 +545,20 @@ This node is automatically created for you. Its children are the root nodes in t
 <p>
 An <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/outline/impl/EObjectNode.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.outline.impl.EObjectNode" >EObjectNode</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/EObjectNode.java" title="View Source Code" >(src)</a> represents a model element. By default, Xtext
 creates an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/outline/impl/EObjectNode.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.outline.impl.EObjectNode" >EObjectNode</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/EObjectNode.java" title="View Source Code" >(src)</a> for each model element in the
-node of its container. Nodes are created by calling the method <em>createNode(parentNode, modelElement)</em> which
-delegates to <em>createEObjectNode(...)</em> if not specified differently.
+node of its container. Nodes are created by calling the method <span class="inlinecode">createNode(parentNode,&nbsp;modelElement)</span> which
+delegates to <span class="inlinecode">createEObjectNode(..)</span> if not specified differently.
 </p>
 <p>
-To change the children of specific nodes, you have to implement the method <em>_createChildren(parentNode,
-parentModelElement)</em> with the appropriate types. The following snippet shows you how to skip the root model element
-of type <em>DomainModel</em> in the outline of our domain model example:
+To change the children of specific nodes, you have to implement the method <div class="literallayout">
+<div class="incode">
+<p class="code">
+_createChildren(parentNode,</br>
+parentModelElement)
+</p>
+</div>
+</div>
+ with the appropriate types. The following snippet shows you how to skip the root model element
+of type <span class="inlinecode">DomainModel</span> in the outline of our domain model example:
 </p>
 <p>
 <div class="literallayout">
@@ -564,10 +575,10 @@ of type <em>DomainModel</em> in the outline of our domain model example:
 </div>
 </p>
 <p>
-You can choose not to create any node in the <em>_createChildren()</em> method. Because the outline nodes are 
+You can choose not to create any node in the <span class="inlinecode">_createChildren()</span> method. Because the outline nodes are 
 calculated on demand, the UI will show you an expandable node that doesn&apos;t reveal any children if expanded.
 This might be confuse your users a bit. To overcome this shortcoming, you have to implement the method 
-<em>_isLeaf(modelElement)</em> with the appropriate argument type, e.g.
+<span class="inlinecode">_isLeaf(modelElement)</span> with the appropriate argument type, e.g.
 </p>
 <p>
 <div class="literallayout">
@@ -616,20 +627,20 @@ snippet from Xtend2 illustrates how to use it:
 <p>
 Of course you can add further custom types of nodes. For consistency, make sure to inherit from 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/outline/impl/AbstractOutlineNode.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.outline.impl.AbstractOutlineNode" >AbstractOutlineNode</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/AbstractOutlineNode.java" title="View Source Code" >(src)</a>. To instantiate these, you have
-to implement <em>_createNode(parentNode, semanticElement)</em> with the appropriate parameter types. 
+to implement <span class="inlinecode">_createNode(parentNode,&nbsp;semanticElement)</span> with the appropriate parameter types. 
 </p>
 <a name="4-1"></a>
 <h3>Styling the outline</h3>
 <p>
 You can also customize the icons and texts for an outline node. By default, Xtext uses the <a href="120-heading-UI.html#0" title="Go to &quot;Label Provider&quot;">label
 provider</a> of your language. If you want the labels to be specific to the outline, you can override the methods 
-<em>_text(modelElement)</em> and <em>_image(modelElement)</em> in your 
+<span class="inlinecode">_text(modelElement)</span> and <span class="inlinecode">_image(modelElement)</span> in your 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/outline/impl/DefaultOutlineTreeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider" >DefaultOutlineTreeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/impl/DefaultOutlineTreeProvider.java" title="View Source Code" >(src)</a>. 
 </p>
 <p>
-Note that the method <em>_text(modelElement)</em> can return a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a> or a 
+Note that the method <span class="inlinecode">_text(modelElement)</span> can return a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a> or a 
 <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/StyledString.html" title="View JavaDoc"><abbr title="org.eclipse.jface.viewers.StyledString" >StyledString</abbr></a>. The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/label/StylerFactory.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.label.StylerFactory" >StylerFactory</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/StylerFactory.java" title="View Source Code" >(src)</a>
-can be used to create <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/StyledString.html" title="View JavaDoc"><abbr title="org.eclipse.jface.viewers.StyledString" >StyledString</abbr></a>s, like in the follwoing example: 
+can be used to create <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/StyledString.html" title="View JavaDoc"><abbr title="org.eclipse.jface.viewers.StyledString" >StyledStrings</abbr></a>, like in the follwoing example: 
 </p>
 <p>
 <div class="literallayout">
@@ -742,7 +753,7 @@ text. You can change this behavior by binding your own
 A very common use case is to group the children by categories first, e.g. show the imports before the types
 in a package declaration, and sort the categories separately. That is why the 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/outline/actions/SortOutlineContribution.DefaultComparator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.outline.actions.SortOutlineContribution.DefaultComparator" >SortOutlineContribution.DefaultComparator</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/actions/SortOutlineContribution.java" title="View Source Code" >(src)</a> has a
-method <em>getCategory(IOutlineNode)</em> that allows to specify such categories. The example shows how to
+method <span class="inlinecode">getCategory(IOutlineNode)</span> that allows to specify such categories. The example shows how to
 use such categories:
 </p>
 <p>
@@ -813,7 +824,7 @@ effort strategy which can be summarized as:
 <ol>
 	<li>
 		
-				If the model element&apos;s type (i.e. <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a>) declares a feature <em>name</em> then return the 
+				If the model element&apos;s <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >type</abbr></a> declares a feature <em>name</em> then return the 
 				region of the corresponding token(s). As a fallback also check for a feature <em>id</em>.
 	</li>
 	<li>

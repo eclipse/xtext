@@ -1,6 +1,5 @@
 chapter:Overview[Overview]
 
-
 section[What is Xtext?]
 
 No matter if you want to create a small textual domain-specific language (DSL) or you want to implement 

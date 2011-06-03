@@ -115,7 +115,8 @@ section2[General Architecture]
 
 A language generator is composed of so called language configurations. 
 For each language configuration a URI pointing to its grammar file and the file extensions for the DSL must be provided. 
-In addition, a language is configured with a list of codeRef[org.eclipse.xtext.generator.IGeneratorFragment]s.
+In addition, a language is configured with a list of codeRef[org.eclipse.xtext.generator.IGeneratorFragment][generator
+fragments].
 The whole generator is composed of theses fragments. We have fragments for generating parsers, the serializer, the EMF code, 
 the outline view, etc.
 
@@ -182,19 +183,20 @@ Workflow {
 }
 ]
 
-Here the root element is e[Workflow] and is part of the very slim runtime model shipped with MWE2. It accepts 
-e[bean]s and e[component]s. A e[var] declaration is a first class concept of MWE2's configuration language 
-and defines a variable whic can be reset from outside, i.e. when calling the module. It allows to externalize some common configuration parameters. 
-Note that you can refer to the variables using the e[${variable-name}] notation. 
+Here the root element is codeRef[org.eclipse.emf.mwe2.runtime.workflow.Workflow] and is part of the very slim runtime 
+model shipped with MWE2. It accepts 
+code[Java][bean]s and code[Java][component]s. A code[MWE2][var] declaration is a first class concept of MWE2's configuration language 
+and defines a variable which can be reset from outside, i.e. when calling the module. It allows to externalize some common configuration parameters. 
+Note that you can refer to the variables using the code[MWE2][${variable-name}] notation. 
 
-The method e[Workflow.addBean(Object)] does nothing but provides a means to apply global side-effects, which 
+The method codeRef[org.eclipse.emf.mwe2.runtime.workflow.Workflow][Workflow.addBean(Object)] does nothing but provides a means to apply global side-effects, which 
 unfortunately is required sometimes. In this example we do a so called e[EMF stand-alone setup]. This class 
 initializes a bunch of things for a non-OSGi environment that are otherwise configured by means of extension points, 
-e.g. it allows to populate EMF's singletons like the e[EPackage.Registry].
+e.g. it allows to populate EMF's singletons like the codeRef[org.eclipse.emf.ecore.EPackage$Registry].
 
-Following the e[bean] assignment there are three e[component] elements. The e[Workflow.addComponent()] method 
-accepts instances of e[IWorkflowComponent], which is the primary concept of MWE2's workflow model. The
-language generator component itself is an instance of e[IWorkflowComponent] and can therefore be used within MWE2 workflows. 
+Following the code[Java][bean] assignment there are three code[Java][component] elements. The codeRef[org.eclipse.emf.mwe2.runtime.workflow.Workflow][Workflow.addComponent()] method 
+accepts instances of codeRef[org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent], which is the primary concept of MWE2's workflow model. The
+language generator component itself is an instance of codeRef[org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent] and can therefore be used within MWE2 workflows. 
 
 section2[Standard Generator Fragments]
 

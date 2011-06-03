@@ -11,7 +11,7 @@ extension mechanism when it should be configured in an OSGi environment.
 section:runtimeSetup[Runtime Setup (ISetup)]
 
 For each language there is an implementation of codeRef[org.eclipse.xtext.ISetup] 
-generated. It implements a method called e[createInjectorAndDoEMFRegistration()], which can be called 
+generated. It implements a method called code[Java][createInjectorAndDoEMFRegistration()], which can be called 
 to do the initialization of the language infrastructure. 
 
 e[Caveat]: The codeRef[org.eclipse.xtext.ISetup] class is intended to be used for runtime and for unit 
@@ -20,7 +20,7 @@ because entries to the global registries will be overwritten.
 
 The setup method returns an codeRef[com.google.inject.Injector], which can further be used to obtain a 
 parser, etc. It also registers the codeRef[org.eclipse.emf.ecore.resource.Resource$Factory] and generated 
-codeRef[org.eclipse.emf.ecore.EPackage]s to the respective global registries provided 
+codeRef[org.eclipse.emf.ecore.EPackage][EPackages] to the respective global registries provided 
 by EMF. So basically after having run the setup and you can start using EMF API to load and store models
 of your language.
 
@@ -29,24 +29,24 @@ section:equinoxSetup[Setup within Eclipse-Equinox (OSGi)]
 
 Within Eclipse we have a generated e[Activator], which creates a Guice codeRef[com.google.inject.Injector]
 using the ref:guicemodules[modules]. In addition an codeRef[org.eclipse.core.runtime.IExecutableExtensionFactory] 
-is generated for each language, which is used to create codeRef[org.eclipse.core.runtime.IExecutableExtension]s.
+is generated for each language, which is used to create codeRef[org.eclipse.core.runtime.IExecutableExtension][IExecutableExtensions].
 This means that everything which is created via extension points is managed by Guice as well, i.e. you can 
 declare dependencies and get them injected upon creation. 
 
 The only thing you have to do in order to use this factory is to prefix the class with the factory 
-e[\[MyLanguageName\]ExecutableExtensionFactory] name followed by a colon.
+e[{MyDsl}ExecutableExtensionFactory] name followed by a colon.
 
 code[XML][
 <extension point="org.eclipse.ui.editors">
   <editor
-    class="<MyLanguageName>ExecutableExtensionFactory:
+    class="<MyDsl>ExecutableExtensionFactory:
       org.eclipse.xtext.ui.editor.XtextEditor"
     contributorClass=
       "org.eclipse.ui.editors.text.TextEditorActionContributor"
     default="true"
-    extensions="ecoredsl"
-    id="org.eclipse.xtext.example.EcoreDsl"
-    name="EcoreDsl Editor">
+    extensions="mydsl"
+    id="org.eclipse.xtext.example.MyDsl"
+    name="MyDsl Editor">
   </editor>
 </extension>
 ]

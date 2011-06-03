@@ -20,7 +20,7 @@ ol[
 ]
 
 Serialization is invoked when calling 
-codeRef[org.eclipse.xtext.resource.XtextResource].save(...). Furthermore, the
+codeRef[org.eclipse.xtext.resource.XtextResource][XtextResource.save(..)]. Furthermore, the
 codeRef[org.eclipse.xtext.parsetree.reconstr.Serializer] provides resource-independent 
 support for serialization. Another situation that triggers serialization is applying ref:quickfixes[Quick Fixes] 
 with semantic modifications. Serialization is e[not] called when a textual editors contents is saved to disk.
@@ -52,7 +52,8 @@ ul[
 	item[preserves ref:hiddentokenmerger[existing whitespaces] from the node model.]	
 	item[preserves ref:commentassociater[existing comments] from the node model.]
 	item[preserves the representation of cross-references: If a cross-referenced object can be 
-		 identified by multiple names (i.e. scoping returns multiple codeRef[org.eclipse.xtext.resource.IEObjectDescription]s for the 
+		 identified by multiple names (i.e. scoping returns multiple 
+		 codeRef[org.eclipse.xtext.resource.IEObjectDescription][IEObjectDescriptions] for the 
 		 same object), the serializer tries to keep the name that was used in the input file.]
 	item[preserves the representation of values: For values handled by the 
 		ref:valueconverter[value converter], the serializer checks whether the textual representation 
@@ -87,7 +88,7 @@ ul[
 		]
 	]
 	item[An assignment in the grammar has no corresponding model element. The default transient 
-		value service considers a model element to be transient if it is e[unset] or equals its 
+		value service considers a model element to be transient if it is e[unset] or e[equals] its 
 		default value. However, the parse tree constructor may serialize default values if 
 		this is required by a grammar constraint to be able to serialize another model element.
 		The following solution may help to solve such a scenario:
@@ -128,15 +129,15 @@ ul[
 section2:saveoptions[Options]
 
 codeRef[org.eclipse.xtext.resource.SaveOptions] can be passed to 
-codeRef[org.eclipse.xtext.resource.XtextResource].save(options) and to 
-codeRef[org.eclipse.xtext.parsetree.reconstr.Serializer].serialize(..). 
+codeRef[org.eclipse.xtext.resource.XtextResource][XtextResource.save(options)] and to 
+codeRef[org.eclipse.xtext.parsetree.reconstr.Serializer][Serializer.serialize(..)]. 
 Available options are:
 ul[
-	item[e[Formatting]. Default: e[false]. If enabled, it is the ref:formatting[formatters] job to determine
+	item[e[Formatting]. Default: code[Java][false]. If enabled, it is the ref:formatting[formatters] job to determine
  		all whitespace information during serialization. If disabled, the formatter only defines whitespace 
  		information for the places in which no whitespace information can be preserved from the node model. 
  		E.g. When new model elements are inserted or there is no node model.]
-	item[e[Validating]. Default: e[true]: Run the ref:concrete_syntax_validation[concrete syntax validator] 
+	item[e[Validating]. Default: code[Java][true]: Run the ref:concrete_syntax_validation[concrete syntax validator] 
 		before serializing the model.]
 ]
 
@@ -148,8 +149,9 @@ comments with semantic objects. This is important in case an element in the sema
 to a different position and the model is serialized, one expects the comments to be moved to the 
 new position in the document as well.
 
-Which comment belongs to which semantic object is surely a very subjective issue. The default 
-implementation (codeRef[org.eclipse.xtext.parsetree.reconstr.impl.DefaultCommentAssociater]) 
+Which comment belongs to which semantic object is surely a very subjective issue. The 
+codeRef[org.eclipse.xtext.parsetree.reconstr.impl.DefaultCommentAssociater][default 
+implementation]
 behaves as follows, but can be customized:
 ul[
 	item[If there is a semantic token before a comment and in the same line, the comment is associated 
@@ -165,8 +167,8 @@ Transient values are values or model elements which are not persisted (written t
 representation in the serialization phase). If a model contains model elements which can not be serialized 
 with the current grammar, it is critical to mark them transient using the 
 codeRef[org.eclipse.xtext.parsetree.reconstr.ITransientValueService], or serialization 
-will fail. The default implementation marks all model elements transient, which are e[eStructuralFeature.isTransient()] 
-or not e[eObject.eIsSet(eStructuralFeature)]. By default, EMF returns e[false] for e[eIsSet(...)] if the 
+will fail. The default implementation marks all model elements transient, which are code[Java][eStructuralFeature.isTransient()] 
+or not code[Java][eObject.eIsSet(eStructuralFeature)]. By default, EMF returns code[Java][false] for code[Java][eIsSet(..)] if the 
 value equals the default value.    
 
 
@@ -188,7 +190,7 @@ Valid models for this example are e[contents 1 item] or e[contents 5 items]. How
 in the semantic model whether the keyword e[item] or e[items] has been parsed. This is due to the fact 
 that the rule call e[Plural] is unassigned. However, the ref:parsetreeconstructor[parse tree constructor] 
 needs to decide which value to write during serialization. This decision can be be made by customizing 
-the codeRef[org.eclipse.xtext.parsetree.reconstr.ITokenSerializer$IValueSerializer]code[Java][.serializeUnassignedValue(EObject, RuleCall, AbstractNode)].
+the codeRef[org.eclipse.xtext.parsetree.reconstr.ITokenSerializer$IValueSerializer][IValueSerializer.serializeUnassignedValue(EObject, RuleCall, AbstractNode)].
 
 section2:crossreferenceserializer[Cross-Reference Serializer]
 

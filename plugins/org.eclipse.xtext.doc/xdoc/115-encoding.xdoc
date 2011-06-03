@@ -1,8 +1,8 @@
 section:encoding[Encoding in Xtext]
 
-e[Encoding], AKA e[character set], describes the way characters are encoded into bytes and vice versa. 
+Encoding, AKA e[character set], describes the way characters are encoded into bytes and vice versa. 
 Famous standard encodings are e[UTF-8] or e[ISO-8859-1]. The list of available encodings can be determined
-by calling code[Java][java.nio.Charset.availableCharsets()]. There is also a list of encodings and their 
+by calling codeRef[java.nio.charset.Charset][Charset.availableCharsets()]. There is also a list of encodings and their 
 canonical Java names in the link[http://download.oracle.com/javase/1.5.0/docs/guide/intl/encoding.doc.html][API docs].
 
 Unfortunately, each platform and/or spoken language tends to define its own native encoding, 
@@ -60,7 +60,7 @@ project.
 
 Unless you want to enforce a uniform encoding for all models of your language, we advise to 
 override the runtime service only. It is bound in the runtime module using the binding annotation 
-e[@Runtime] (codeRef[org.eclipse.xtext.service.DispatchingProvider$Runtime]):
+codeRef[org.eclipse.xtext.service.DispatchingProvider$Runtime][@Runtime]:
 
 code[Java][
 @Override

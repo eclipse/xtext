@@ -24,11 +24,11 @@ public IValueConverter<MyDataType> getMyRuleNameConverter() {
 }
 ]
 
-If you use the common terminals grammar e[org.eclipse.xtext.common.Terminals] you should extend the 
+If you use the common terminals grammar code[Xtext][org.eclipse.xtext.common.Terminals] you should extend the 
 codeRef[org.eclipse.xtext.common.services.DefaultTerminalConverters] and override or 
 add value converters by adding the respective methods. In addition to the explicitly 
 defined converters in the default implementation, a delegating converter is registered for each 
-available e[EDataType]. The delegating converter reuses the functionality of the corresponding EMF 
+available codeRef[org.eclipse.emf.ecore.EDataType]. The delegating converter reuses the functionality of the corresponding EMF 
 codeRef[org.eclipse.emf.ecore.EFactory].
 
 Many languages introduce a concept for qualified names, i.e. names composed of namespaces separated by

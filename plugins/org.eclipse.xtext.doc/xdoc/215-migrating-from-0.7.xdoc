@@ -119,8 +119,8 @@ It is usually only necessary to change your code, if you face any compilation pr
 
 ul[
 	item[
-		The method codeRef[org.eclipse.xtext.scoping.IScopeProvider]code[Java][.getScope(EObject,EClass)] has been 
-		removed. Use  codeRef[org.eclipse.xtext.scoping.IScopeProvider]code[Java][.getScope(EObject,EReference)] instead. 
+		The method codeRef[org.eclipse.xtext.scoping.IScopeProvider][IScopeProvider.getScope(EObject,EClass)] has been 
+		removed. Use code[Java][getScope(EObject,EReference)] instead. 
 	]
 	item[
 		Renamed e[DefaultScopeProvider] to codeRef[org.eclipse.xtext.scoping.impl.SimpleLocalScopeProvider]. There have been 
@@ -128,7 +128,7 @@ ul[
 		ref:scoping[section on scoping] for details.
 	]
 	item[
-		The return type of codeRef[org.eclipse.xtext.validation.AbstractInjectableValidator]code[Java][.getEPackages()] was 
+		The return type of codeRef[org.eclipse.xtext.validation.AbstractInjectableValidator][AbstractInjectableValidator.getEPackages()] was 
 		changed from code[Java][List<? extends EPackage>] to code[Java][List<EPackage>].
 	]
 	item[
@@ -166,7 +166,7 @@ ul[
 	]
 	item[
 		The API to skip a node in the outline has changed. Instead of returning the e[HIDDEN_NODE] you'll have to implement 
-		e[boolean consumeNode(MyType)] and return e[false].
+		code[Java][boolean consumeNode(MyType)] and return e[false].
 		
 		e[Note: The outline has been re-implemented in Xtext 2.0].
 	]
@@ -206,7 +206,7 @@ ul[
 		All the Xtend-based fragments were removed.
 	]
 	item[
-		codeRef[org.eclipse.xtext.linking.ILinkingService]code[Java][.getLinkText] was removed. Have a look at the 
+		codeRef[org.eclipse.xtext.linking.ILinkingService][ILinkingService.getLinkText] was removed. Have a look at the 
 		codeRef[org.eclipse.xtext.linking.impl.LinkingHelper] and the 
 		codeRef[org.eclipse.xtext.parsetree.reconstr.impl.CrossReferenceSerializer] if you relied on this method.
 	]

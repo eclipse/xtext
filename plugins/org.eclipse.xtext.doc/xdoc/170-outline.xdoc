@@ -27,12 +27,12 @@ This node is automatically created for you. Its children are the root nodes in t
 
 An codeRef[org.eclipse.xtext.ui.editor.outline.impl.EObjectNode] represents a model element. By default, Xtext
 creates an codeRef[org.eclipse.xtext.ui.editor.outline.impl.EObjectNode] for each model element in the
-node of its container. Nodes are created by calling the method e[createNode(parentNode, modelElement)] which
-delegates to e[createEObjectNode(...)] if not specified differently.
+node of its container. Nodes are created by calling the method code[Java][createNode(parentNode, modelElement)] which
+delegates to code[Java][createEObjectNode(..)] if not specified differently.
 
-To change the children of specific nodes, you have to implement the method e[_createChildren(parentNode,
+To change the children of specific nodes, you have to implement the method code[Java][_createChildren(parentNode,
 parentModelElement)] with the appropriate types. The following snippet shows you how to skip the root model element
-of type e[DomainModel] in the outline of our domain model example:
+of type code[Java][DomainModel] in the outline of our domain model example:
 
 code[Java][
 protected void _createChildren(DocumentRootNode parentNode, 
@@ -43,10 +43,10 @@ protected void _createChildren(DocumentRootNode parentNode,
 }
 ]
 
-You can choose not to create any node in the e[_createChildren()] method. Because the outline nodes are 
+You can choose not to create any node in the code[Java][_createChildren()] method. Because the outline nodes are 
 calculated on demand, the UI will show you an expandable node that doesn't reveal any children if expanded.
 This might be confuse your users a bit. To overcome this shortcoming, you have to implement the method 
-e[_isLeaf(modelElement)] with the appropriate argument type, e.g.
+code[Java][_isLeaf(modelElement)] with the appropriate argument type, e.g.
 
 code[Java][
 // feature nodes are leafs and not expandable
@@ -83,19 +83,19 @@ protected void _createChildren(DocumentRootNode parentNode,
 
 Of course you can add further custom types of nodes. For consistency, make sure to inherit from 
 codeRef[org.eclipse.xtext.ui.editor.outline.impl.AbstractOutlineNode]. To instantiate these, you have
-to implement e[_createNode(parentNode, semanticElement)] with the appropriate parameter types. 
+to implement code[Java][_createNode(parentNode, semanticElement)] with the appropriate parameter types. 
 
 
 section2[Styling the outline]
 
 You can also customize the icons and texts for an outline node. By default, Xtext uses the ref:labelProvider[label
 provider] of your language. If you want the labels to be specific to the outline, you can override the methods 
-e[_text(modelElement)] and e[_image(modelElement)] in your 
+code[Java][_text(modelElement)] and code[Java][_image(modelElement)] in your 
 codeRef[org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider]. 
 
-Note that the method e[_text(modelElement)] can return a codeRef[java.lang.String] or a 
+Note that the method code[Java][_text(modelElement)] can return a codeRef[java.lang.String] or a 
 codeRef[org.eclipse.jface.viewers.StyledString]. The codeRef[org.eclipse.xtext.ui.label.StylerFactory]
-can be used to create codeRef[org.eclipse.jface.viewers.StyledString]s, like in the follwoing example: 
+can be used to create codeRef[org.eclipse.jface.viewers.StyledString][StyledStrings], like in the follwoing example: 
 
 code[Java][
 @Inject 
@@ -188,7 +188,7 @@ codeRef[org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter$ICompara
 A very common use case is to group the children by categories first, e.g. show the imports before the types
 in a package declaration, and sort the categories separately. That is why the 
 codeRef[org.eclipse.xtext.ui.editor.outline.actions.SortOutlineContribution$DefaultComparator] has a
-method e[getCategory(IOutlineNode)] that allows to specify such categories. The example shows how to
+method code[Java][getCategory(IOutlineNode)] that allows to specify such categories. The example shows how to
 use such categories:
 
 code[Java][

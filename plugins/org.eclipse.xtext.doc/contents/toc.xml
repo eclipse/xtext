@@ -156,8 +156,8 @@
 			</topic>
 		</topic>
 		<topic href="contents/050-heading-runtime.html#5" label="Scoping" >
-			<topic href="contents/050-heading-runtime.html#5-0" label="Global Scopes and IResourceDescriptions" >
-				<topic href="contents/050-heading-runtime.html#5-0-0" label="Resource and EObject Descriptions (IResourceDescription, IEObjectDescription)" >
+			<topic href="contents/050-heading-runtime.html#5-0" label="Global Scopes and Resource Descriptions" >
+				<topic href="contents/050-heading-runtime.html#5-0-0" label="Resource and EObject Descriptions" >
 				</topic>
 				<topic href="contents/050-heading-runtime.html#5-0-1" label="Global Scopes Based On Explicit Imports (ImportURI Mechanism)" >
 				</topic>
@@ -342,13 +342,13 @@
 		<topic href="contents/213-migrating-from-1.0.html#1" label="Migrating Step By Step" >
 			<topic href="contents/213-migrating-from-1.0.html#1-0" label="Update the Plug-in Dependencies and Import Statements" >
 			</topic>
-			<topic href="contents/213-migrating-from-1.0.html#1-1" label="Introduction of QualifiedName" >
+			<topic href="contents/213-migrating-from-1.0.html#1-1" label="Introduction of the Qualified Name" >
 			</topic>
 			<topic href="contents/213-migrating-from-1.0.html#1-2" label="Changes in the index and in find references" >
 			</topic>
-			<topic href="contents/213-migrating-from-1.0.html#1-3" label="Complete re-implementation of nodemodel" >
+			<topic href="contents/213-migrating-from-1.0.html#1-3" label="Rewritten Node Model" >
 			</topic>
-			<topic href="contents/213-migrating-from-1.0.html#1-4" label="New outline" >
+			<topic href="contents/213-migrating-from-1.0.html#1-4" label="New Outline" >
 			</topic>
 			<topic href="contents/213-migrating-from-1.0.html#1-5" label="AutoEditStrategy" >
 			</topic>

@@ -17,7 +17,7 @@ effort strategy which can be summarized as:
 
 ol[
 	item[
-		If the model element's type (i.e. codeRef[org.eclipse.emf.ecore.EClass]) declares a feature e[name] then return the 
+		If the model element's codeRef[org.eclipse.emf.ecore.EClass][type] declares a feature e[name] then return the 
 		region of the corresponding token(s). As a fallback also check for a feature e[id].
 	]
 	item[

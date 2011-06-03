@@ -115,8 +115,8 @@ In Xtext each grammar has a unique name, which like public Java classes
 needs to reflect the location of the file within the Java classpath. In our 
 case the grammar file is located in 
 e[/org/eclipse/xtext/example/Domainmodel.xtext] therefore the name of the 
-grammar is e[org.eclipse.xtext.example.Domainmodel]. The second part of that 
-statement e[(with org.eclipse.xtext.common.Terminals)] states, that this grammar 
+grammar is code[Xtext][org.eclipse.xtext.example.Domainmodel]. The second part of that 
+statement code[Xtext][with org.eclipse.xtext.common.Terminals] states, that this grammar 
 reuses and overrides rules from the specified grammar. The 
 e[org.eclipse.xtext.common.Terminals] is a library grammar shipped with Xtext 
 and predefines the most common terminal rules, such as e[ID], e[STRING] and e[INT]. 
@@ -129,7 +129,7 @@ Also you can use the grammar inheritance mechanism for your own grammar librarie
 of course.
 
 
-The next statement declares an EMF Ecore package, aka e[EPackage], to be derived from the grammar:
+The next statement declares an EMF Ecore package, aka codeRef[org.eclipse.emf.ecore.EPackage], to be derived from the grammar:
 
 code[Xtext][generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"
 ]
@@ -206,9 +206,9 @@ assignment and which sets a certain feature to true, if the part on the right ha
 side was parsed successfully. Here's the list of available assignment operators:
 
 table[
-tr[td[ ]td[e[feature=...]]td[corresponds to e[setFeature(...)]]]
-tr[td[ ]td[e[list+=...]]td[corresponds to e[getList().add(...)]]]
-tr[td[ ]td[e[condition?=...]]td[corresponds to e[setCondition(true)]]]
+tr[td[ ]td[e[feature=...]]td[corresponds to code[Java][setFeature(...)]]]
+tr[td[ ]td[e[list+=...]]td[corresponds to code[Java][getList().add(...)]]]
+tr[td[ ]td[e[condition?=...]]td[corresponds to code[Java][setCondition(true)]]]
 ]
 
 The next rule on our list is the rule e[Entity]. Looking at our target syntax, 

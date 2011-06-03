@@ -154,7 +154,7 @@ ul[
 	item[Register an codeRef[org.eclipse.xtext.parser.antlr.IReferableElementsUnloader] to turn 
 		deleted/replaced model elements into EMF proxies. Design the rest 
 		of your application such that it does never keep references to 
-		codeRef[org.eclipse.emf.ecore.EObject]s or to cope with proxies. That will improve the 
+		codeRef[org.eclipse.emf.ecore.EObject][EObjects] or to cope with proxies. That will improve the 
 		stability of your application drastically.]
 	item[Xtext will register an EMF codeRef[org.eclipse.emf.ecore.resource.Resource$Factory], so resources with 
 		the file extension you entered when generating the Xtext plug-ins 
@@ -212,7 +212,7 @@ stuff that the user wants to change to make the diagram look better.
 
 In an Xtext editor, changes in the text are transfered to the underlying 
 codeRef[org.eclipse.xtext.resource.XtextResource] by a call to the method 
-codeRef[org.eclipse.xtext.resource.XtextResource]e[.update(int, int, String)], which will trigger a
+codeRef[org.eclipse.xtext.resource.XtextResource][XtextResource.update(int, int, String)], which will trigger a
 partial parsing of the dirty text region and a replacement of the corresponding subtree in the AST model 
 (semantic model). 
 
@@ -268,7 +268,7 @@ have to add a line
 code[Java][XtextNodeModelReconciler.adapt(editingDomain);
 ]
 
-in the method e[createEditingDomain()] of the generated e[EntitiesDocumentProvider]. To avoid changing the 
+in the method code[Java][createEditingDomain()] of the generated e[EntitiesDocumentProvider]. To avoid changing the 
 generated code, you can modify the code generation template for that class by setting
 
 code[Java][Dynamic Templates -> true

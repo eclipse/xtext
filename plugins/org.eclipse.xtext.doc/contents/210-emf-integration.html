@@ -225,7 +225,7 @@ want to use Xtext to serialize your models as described above, it is good to hav
 		Register an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parser/antlr/IReferableElementsUnloader.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.parser.antlr.IReferableElementsUnloader" >IReferableElementsUnloader</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/antlr/IReferableElementsUnloader.java" title="View Source Code" >(src)</a> to turn 
 				deleted/replaced model elements into EMF proxies. Design the rest 
 				of your application such that it does never keep references to 
-				<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a>s or to cope with proxies. That will improve the 
+				<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObjects</abbr></a> or to cope with proxies. That will improve the 
 				stability of your application drastically.
 	</li>
 	<li>
@@ -396,7 +396,7 @@ stuff that the user wants to change to make the diagram look better.
 <p>
 In an Xtext editor, changes in the text are transfered to the underlying 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/XtextResource.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.XtextResource" >XtextResource</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a> by a call to the method 
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/XtextResource.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.XtextResource" >XtextResource</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a><em>.update(int, int, String)</em>, which will trigger a
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/XtextResource.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.XtextResource" >XtextResource.update(int, int, String)</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a>, which will trigger a
 partial parsing of the dirty text region and a replacement of the corresponding subtree in the AST model 
 (semantic model). 
 </p>
@@ -467,7 +467,7 @@ XtextNodeModelReconciler.adapt(editingDomain);</br>
 </div>
 </p>
 <p>
-in the method <em>createEditingDomain()</em> of the generated <em>EntitiesDocumentProvider</em>. To avoid changing the 
+in the method <span class="inlinecode">createEditingDomain()</span> of the generated <em>EntitiesDocumentProvider</em>. To avoid changing the 
 generated code, you can modify the code generation template for that class by setting
 </p>
 <p>

@@ -5,7 +5,7 @@ whenever some code is in need for functionality (or state) from another componen
 the dependency rather then stating how to resolve it, i.e. obtaining that component.
 
 For instance when some code wants to use a scope provider, it just declares a field (or method or 
-constructor) and adds the e[@Inject] annotation: 
+constructor) and adds the codeRef[com.google.inject.Inject] annotation: 
 
 code[Java][public class MyLanguageLinker extends Linker {
 
@@ -22,7 +22,7 @@ if the object itself is created by Guice. In Xtext almost every instance is crea
 and therefore the whole dependency net is controlled and configured by the means of Google Guice.
 
 Guice of course needs to know how to instantiate real objects for declared dependencies. This is done 
-in so called codeRef[com.google.inject.Module]s. A codeRef[com.google.inject.Module] defines a set of 
+in so called codeRef[com.google.inject.Module][Modules]. A codeRef[com.google.inject.Module] defines a set of 
 mappings from types to either existing instances, instance providers or concrete classes. Modules are
 implemented in Java. Here's an example:
 
@@ -72,7 +72,7 @@ methods and either change the binding by returning a different target type or re
 completely by returning null.
 
 There are two additional kinds of binding-methods supported. The first one allows to configure a provider. 
-A e[Provider] is an interface with just one method : 
+A codeRef[com.google.inject.Provider] is an interface with just one method : 
 
 code[Java][
 public interface Provider<T> {
@@ -121,7 +121,7 @@ respectively.
 
 The last binding method provided by Xtext allows to do anything you can do with Guice's binding API, since
 it allows you to use the codeRef[com.google.inject.Binder] directly. If your method's name starts with the
-name 'configure', has a return type e[void] and accepts one argument of type codeRef[com.google.inject.Binder]:
+name 'configure', has a return type code[Java][void] and accepts one argument of type codeRef[com.google.inject.Binder]:
 
 code[Java][
 public void configureIScopeProvider(Binder binder) {
@@ -129,7 +129,7 @@ public void configureIScopeProvider(Binder binder) {
 } 
 ]
 
-section2[Obtaining an e[Injector]]
+section2[Obtaining an Injector]
 
 In every application wired up with Guice there is usually one point where you initialize an 
 codeRef[com.google.inject.Injector] using the modules declared. That injector is used to create the root 

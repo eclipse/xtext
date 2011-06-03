@@ -122,8 +122,10 @@ languages. An Xtext grammar can declare another existing grammar to be reused. T
 section2:package_declarations[EPackage Declarations]
 
 Xtext parsers create in-memory object graphs while consuming text. Such object-graphs are 
-instances of EMF Ecore models. An Ecore model basically consists of an e[EPackage] containing e[EClasses], 
-e[EDataTypes] and e[EEnums] (See the ref:model_metamodel[section on EMF] for more details) and describes
+instances of EMF Ecore models. An Ecore model basically consists of an codeRef[org.eclipse.emf.ecore.EPackage] containing 
+codeRef[org.eclipse.emf.ecore.EClass][EClasses], 
+codeRef[org.eclipse.emf.ecore.EDataType][EDataTypes] and codeRef[org.eclipse.emf.ecore.EEnum][EEnums] 
+(see the ref:model_metamodel[section on EMF] for more details) and describes
 the structure of the instantiated objects. Xtext can infer Ecore models from a grammar 
 (see ref:metamodelInference[Ecore model inference]) but it is also 
 possible to import existing Ecore models. You can even mix both approaches and use multiple existing Ecore models and 
@@ -139,22 +141,26 @@ to do so:
 
 code[Xtext][generate secrets 'http://www.eclipse.org/secretcompartment']
 
-That statement could actually be read as: generate an e[EPackage] with the e[name] code[secrets] and the e[nsURI] 
-code["http://www.eclipse.org/secretcompartment"]. 
-Actually these are the mandatory properties that are necessary to create an empty e[EPackage].
-Xtext will then add e[EClasses] with features (e[EAttributes] and e[EReferences]) for the different parser
+That statement could actually be read as: generate an codeRef[org.eclipse.emf.ecore.EPackage] with the 
+e[name] code[Xtext][secrets] and the e[nsURI] 
+code[Xtext]["http://www.eclipse.org/secretcompartment"]. 
+Actually these are the mandatory properties that are necessary to create an empty codeRef[org.eclipse.emf.ecore.EPackage].
+Xtext will then add codeRef[org.eclipse.emf.ecore.EClass][EClasses] with 
+codeRef[org.eclipse.emf.ecore.EAttribute][EAttributes] and codeRef[org.eclipse.emf.ecore.EReference][EReferences] for the 
+different parser
 rules in your grammar, as described in ref:metamodelInference[Ecore model inference]. 
 
 section3[EPackage Import]
 
-If you already have an existing e[EPackage], you can import it using either a namespace URI or a resource URI. 
+If you already have an existing codeRef[org.eclipse.emf.ecore.EPackage], you can import it using either a namespace URI or a resource URI. 
 An link[http://www.ietf.org/rfc/rfc2396.txt][URI] (Uniform Resource Identifier) provides a simple and extensible 
 means for identifying an abstract or physical resource. For all the nifty details about EMF URIs 
 please refer to its codeRef[org.eclipse.emf.common.util.URI][documentation].
 
 section4[Using Resource URIs to Import Existing EPackages]
 
-In order to import an existing Ecore model, you'll have to have the *.ecore file describing the e[EPackage] you want to 
+In order to import an existing Ecore model, you'll have to have the *.ecore file describing the codeRef[org.eclipse.emf.ecore.EPackage] 
+you want to 
 use somewhere in your workspace. To refer to that file you make use of the e[platform:/resource] scheme.
 Platform URIs are a special EMF concept which allow to reference elements in the workspace 
 independent of the physical location of the workspace. It is an abstraction that uses the Eclipse workspace
@@ -165,12 +171,11 @@ An import statement referring to an Ecore file by a e[platform:/resource/]-URI l
 code[Xtext][import 'platform:/resource/my.project/model/SecretCompartments.ecore']
 
 If you want to mix generated and imported Ecore models you'll have to configure the generator fragment 
-in your MWE file responsible for generating the Ecore classes 
-(codeRef[org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment]) 
+in your MWE file responsible for codeRef[org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment][generating the Ecore classes] 
 with resource URIs that point to the ref:emf_codegen[generator models] of the referenced Ecore models.
 
 The e[*.genmodel] provides all kind of generator configuration used by EMF's code generator. Xtext will automatically create
-a generator model for derived e[EPackages], but if it references an existing, imported Ecore
+a generator model for derived codeRef[org.eclipse.emf.ecore.EPackage][EPackages], but if it references an existing, imported Ecore
 model, the code generator needs to know how that code was generated in order to generate valid Java code. 
 
 Example:
@@ -205,7 +210,7 @@ See the section on ref:jvmtypes[Referring Java Types] for a full explanation of 
 
 section4[Using Namespace URIs to Import Existing EPackages]
 
-You can also use nsURI in order to import existing e[EPackage]. Note that this is generally not
+You can also use nsURI in order to import existing codeRef[org.eclipse.emf.ecore.EPackage]. Note that this is generally not
 preferrable, because you'll have to have the corresponding EPackage installed in the workbench.
 There's mainly just one exception, that is Ecore itself. So if you refer to Ecore it is best
 to use its nsURI :
@@ -214,23 +219,24 @@ code[Xtext][import "http://www.eclipse.org/emf/2002/Ecore" as ecore]
 
 section3[Ecore Model Aliases for EPackages]
 
-If you want to use multiple e[EPackages] you need to specify aliases in the following way:
+If you want to use multiple codeRef[org.eclipse.emf.ecore.EPackage][EPackages] you need to specify aliases in the following way:
 
 code[Xtext][generate secrets 'http://www.eclipse.org/secretcompartment'
 import 'http://www.eclipse.org/anotherPackage' as another
 ]
 
 When referring to a type somewhere in the grammar you need to qualify the reference using that 
-alias (example e[another::SomeType]). We'll see later where such type references occur.
+alias (example code[Xtext][another::SomeType]). We'll see later where such type references occur.
 
-It is also supported to put multiple e[EPackage] imports into one alias. This is no problem as 
-long as there are not any two e[EClassifiers] with the same name. In that case none of them can be referenced. 
-It is even possible to e[import] multiple and e[generate] one Ecore model and declare all of them with 
-same alias. If you do so, for a reference to an e[EClassifier] first the imported e[EPackages] are 
+It is also supported to put multiple codeRef[org.eclipse.emf.ecore.EPackage] imports into one alias. This is no problem as 
+long as there are not any two codeRef[org.eclipse.emf.ecore.EClassifier][EClassifiers] with the same name. 
+In that case none of them can be referenced. 
+It is even possible to code[Xtext][import] multiple and code[Xtext][generate] one Ecore model and declare all of them with 
+same alias. If you do so, for a reference to an codeRef[org.eclipse.emf.ecore.EClassifier] first the imported codeRef[org.eclipse.emf.ecore.EPackage][EPackages] are 
 scanned before it is assumed that a type needs to be generated into the inferred package. 
 
 Note, that using this feature is not recommended, because it might cause problems, which are hard to track down.
-For instance, a reference to e[classA] would as well be linked to a newly created e[EClass], because the 
+For instance, a reference to e[classA] would as well be linked to a newly created codeRef[org.eclipse.emf.ecore.EClass], because the 
 corresponding type in e[http://www.eclipse.org/packContainingClassA] is spelled with a capital letter.
 
 section2[Rules]
@@ -253,7 +259,7 @@ Terminal rules are also referred to as e[token rules] or e[lexer rules]. There i
 names of terminal rules are all upper-case.
 
 In the secret compartments example there are no explicitly defined terminal rules, since it only uses the e[ID] rule 
-which is inherited from the grammar e[org.eclipse.xtext.common.Terminals] (cf. ref:grammarMixins[Grammar Mixins]).
+which is inherited from the grammar code[Xtext][org.eclipse.xtext.common.Terminals] (cf. ref:grammarMixins[Grammar Mixins]).
 Therein the e[ID] rule is defined as follows:
 
 code[Xtext][terminal ID : 
@@ -285,19 +291,19 @@ It's almost in any case recommended to use data type rules instead. Let's assume
 section4[Return Types]
 
 Each terminal rule returns an atomic value (an code[Ecore EDataType]). By default, it's assumed that
-an instance of e[ecore::EString]) should be returned.
+an instance of code[Xtext][ecore::EString]) should be returned.
 However, if you want to provide a different type you can specify it. For instance, the rule e[INT] is defined as:
 
 code[Xtext][terminal INT returns ecore::EInt : 
   ('0'..'9')+;
 ]
 
-This means that the terminal rule e[INT] returns instances of e[ecore::EInt]. It is possible to define any 
-kind of data type here, which just needs to be an instance of e[ecore::EDataType]. In order to tell the framework 
+This means that the terminal rule e[INT] returns instances of code[Xtext][ecore::EInt]. It is possible to define any 
+kind of data type here, which just needs to be an instance of code[Xtext][ecore::EDataType]. In order to tell the framework 
 how to convert the parsed string to a value of the declared data type, you need to provide your own 
 implementation of codeRef[org.eclipse.xtext.conversion.IValueConverterService] (cf. 
 ref:valueconverter[value converters]). The value converter is also the service that allows to remove escape
-sequences or semantically unnecessary character like quotes from string literals or the caret ('^') from identifiers.
+sequences or semantically unnecessary character like quotes from string literals or the caret code[Xtext]['^'] from identifiers.
  Its implementation needs to be registered as a service (cf. ref:dependencyInjection[Service Framework]).
 
 section3[Extended Backus-Naur Form Expressions]
@@ -316,7 +322,7 @@ item[one or more (operator e[+])]
 section4:Keywords[Keywords / Characters]
 
 Keywords are a kind of terminal rule literals. 
-The e[ID] rule in e[org.eclipse.xtext.common.Terminals] for instance starts with a keyword:
+The e[ID] rule in code[Xtext][org.eclipse.xtext.common.Terminals] for instance starts with a keyword:
 
 code[Xtext][terminal ID : '^'? .... ;]
 
@@ -336,8 +342,8 @@ Example:
 
 code[Xtext][terminal INT returns ecore::EInt: ('0'..'9')+;]
 
-In this case an e[INT] is comprised of one or more (note the e[+] operator) characters 
-between (and including) e['0'] and e['9'].
+In this case an e[INT] is comprised of one or more (note the code[Xtext][+] operator) characters 
+between (and including) code[Xtext]['0'] and code[Xtext]['9'].
 
 
 section4[Wildcard]
@@ -423,7 +429,7 @@ The parser is fed with a sequence of terminals and walks through the so called p
 contrary to a terminal rule - does not produce a single atomic terminal token but a tree of non-terminal 
 and terminal tokens. They lead to a so called ref:node_model[parse tree] (in Xtext it is also referred 
 as node model). Furthermore, parser rules are handled as kind of a building plan for the creation of 
-the e[EObjects] that form the semantic model (the linked abstract syntax graph or AST). Due to this 
+the codeRef[org.eclipse.emf.ecore.EObject][EObjects] that form the semantic model (the linked abstract syntax graph or AST). Due to this 
 fact, parser rules are even called production or EObject rules. Different constructs like actions and 
 assignments are used to derive types and initialize the semantic objects accordingly. 
 
@@ -447,7 +453,7 @@ is constructed. They are listed and explained in the following.
 section4:assignments[Assignments]
 
 Assignments are used to assign the consumed information to a feature of the currently produced object. 
-The type of the current object, its e[EClass], is specified by the return type of the parser 
+The type of the current object, its codeRef[org.eclipse.emf.ecore.EClass], is specified by the return type of the parser 
 rule. If it is not explicitly stated it is implied that the type's name equals the rule's name. 
 The type of the assigned feature is inferred from the right hand side of the assignment.
 
@@ -465,11 +471,11 @@ The syntactic declaration for states in the state machine example starts with a 
 
 code[Xtext][name=ID]
 
-The left hand side refers to a feature e[name] of the current object (which has the e[EClass] e[State] in this case). 
+The left hand side refers to a feature e[name] of the current object (which has the codeRef[org.eclipse.emf.ecore.EClass] e[State] in this case). 
 The right hand side can be a rule call, a keyword, a ref:cross_reference[cross-reference] or an alternative
 comprised by the former. The type of the feature 
 needs to be compatible with the type of the expression on the right. As e[ID] returns an e[EString] in this case, 
-the feature e[name] needs to be of type e[EString] as well.
+the feature e[name] needs to be of type codeRef[java.lang.String][EString] as well.
 
 e[Assignment Operators]
 
@@ -478,7 +484,8 @@ There are three different assignment operators, each with different semantics.
 ol[
 item[The simple equal sign code[Xtext][=] is the straight forward assignment, and used for features which take only one element.]
 item[The code[Xtext][+=] sign (the add operator) expects a multi-valued feature and adds the value on the right hand to that feature, which is a list feature.]
-item[The code[Xtext][?=] sign (boolean assignment operator) expects a feature of type e[EBoolean] and sets it to true if the right hand side was consumed independently from the concrete value of the right hand side.]
+item[The code[Xtext][?=] sign (boolean assignment operator) expects a feature of type codeRef[java.lang.Boolean][EBoolean] and sets it 
+to true if the right hand side was consumed independently from the concrete value of the right hand side.]
 ]
 
 The used assignment operator does not influence the cardinality of the expected symbols on the right hand side. 
@@ -503,7 +510,7 @@ code[Xtext][Transition :
 ]
 
 It is important to understand that the text between the square brackets does not refer to another rule, but to an
-e[EClass] - which is a type and not a parser rule!
+codeRef[org.eclipse.emf.ecore.EClass] - which is a type and not a parser rule!
 This is sometimes confusing, because one usually uses the same name for the rules and the returned types.
 That is if we had named the type for events differently like in the following the cross-reference needs 
 to be adapted as well:
@@ -526,7 +533,7 @@ Have a look at the ref:linking[linking section] in order to understand how linki
 section4:unordered_groups[Unordered Groups]
 
 The elements of an unordered group can occur in any order but each element must appear once. Unordered 
-groups are separated by code[Xtext][&]. The following rule code[Modifier] allows to parse simplified
+groups are separated by code[Xtext][&]. The following rule code[Xtext][Modifier] allows to parse simplified
 modifiers of the Java language:
 
 code[Xtext][Modifier: 
@@ -544,7 +551,7 @@ final private static
 public
 ]
 
-However, since no unordered groups are used in the rule code[Modifier], the parser refuses to accept
+However, since no unordered groups are used in the rule code[Xtext][Modifier], the parser refuses to accept
 this input lines:
 
 code[Java][static final static // ERROR: static appears twice
@@ -577,7 +584,7 @@ section4[Simple Actions]
 The object to be returned by a parser rule is usually created lazily on the first assignment. Its type is determined from the specified return type
 of the rule which may have been inferred from the rule's name if no explicit return type is specified.
 
-With Actions however, the creation of returned e[EObject] can be made explicit. Xtext supports two kinds of Actions:
+With Actions however, the creation of returned codeRef[org.eclipse.emf.ecore.EObject] can be made explicit. Xtext supports two kinds of Actions:
 
 ol[
 item[e[Simple] Actions, and]
@@ -610,7 +617,7 @@ code[Xtext][MyRule returns TypeA :
 ]
 
 Generally speaking, the instance is created as soon as the parser hits the first assignment. However, actions 
-allow to explicitly instantiate any e[EObject]. The notation e[{TypeB}] will create an instance of TypeB and assign 
+allow to explicitly instantiate any codeRef[org.eclipse.emf.ecore.EObject]. The notation e[{TypeB}] will create an instance of TypeB and assign 
 it to the result of the parser rule. This allows to define parser rules without any assignment and to
 create objects without the need to introduce unnecessary delegate rules.
 
@@ -620,8 +627,8 @@ detects this situation and will raise a warning for the parser rules in question
 
 section4[Unassigned Rule Calls]
 
-We previously explained, that the e[EObject] to be returned is created lazily when the first assignment occurs or 
-as soon as a simple action is evaluated. There is another to "find" the e[EObject] to be returned. The
+We previously explained, that the codeRef[org.eclipse.emf.ecore.EObject] to be returned is created lazily when the first assignment occurs or 
+as soon as a simple action is evaluated. There is another to e[find] the codeRef[org.eclipse.emf.ecore.EObject] to be returned. The
 concept is called e[Unassigned Rule Call].
 
 Unassigned rule calls (the name suggests it) are rule calls to other parser rules, which are not used within an 
@@ -637,7 +644,7 @@ code[Xtext][AbstractToken :
 ;
 ]
 
-As e[AbstractToken] could possibly return an instance of e[TokenA], e[TokenB] or e[TokenC] its type must be a 
+As code[Xtext][AbstractToken] could possibly return an instance of e[TokenA], e[TokenB] or e[TokenC] its type must be a 
 super type for all these types. Since the return value of the called rule becomes the result of the current
 rule, it is possible to further change the state of the AST 
 element by assigning additional features.
@@ -664,7 +671,7 @@ section4:grammarActions[Assigned Actions]
 Xtext leverages the powerful Antlr parser which implements an code[LL(*)] algorithm. Even though code[LL]
 parsers have many advantages with respect to readability, debuggability and error recovery, there are
 also some drawbacks. The most important one is that it does not allow left recursive grammars.
-For instance, the following rule is not allowed in LL-based grammars, because e[Expression '+' Expression] is left recursive:
+For instance, the following rule is not allowed in LL-based grammars, because code[Xtext][Expression '+' Expression] is left recursive:
 
 code[Xtext][Expression :
   Expression '+' Expression |
@@ -699,9 +706,9 @@ TerminalExpression returns Expression:
 ]
 
 ... would result in unwanted elements in the AST.
-For instance the expression e[(42)] would result in a tree like this:
+For instance the expression code[Java][(42)] would result in a tree like this:
 
-code[Java][Operation {
+code[MWE2][Operation {
   left=Operation {
     left=IntLiteral {
       value=42
@@ -725,8 +732,9 @@ TerminalExpression returns Expression:
 ;
 ]
 
-In the example above e[{Operation.left=current}] is a so called tree rewrite action, which creates a new instance of the stated e[EClass
-Operation] and assigns the element currently to-be-returned (the code[Xtext][current] variable) to a feature of the newly created object.
+In the example above code[Xtext][{Operation.left=current}] is a so called tree rewrite action, which creates a new instance of the stated 
+codeRef[org.eclipse.emf.ecore.EClass]
+e[Operation] and assigns the element currently to-be-returned (the code[Xtext][current] variable) to a feature of the newly created object.
 The example uses the feature e[left] of the e[Operation] instance to store the previously returned e[Expression].
 In Java these semantics could be expressed as:
 
@@ -738,14 +746,14 @@ current = temp;
 section2:hidden_terminals[Hidden Terminal Symbols]
 
 Because parser rules describe not a single token, but a sequence of patterns in the input, it is necessary to define
- the interesting parts of the input. Xtext introduces the concept of hidden tokens to handle semantically unimportant
-  things like whitespaces, comments, etc. in the input sequence gracefully. It is possible to define a set of terminal 
-  symbols, that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they 
-  are transparently woven into the node model, but not relevant for the semantic model. 
+the interesting parts of the input. Xtext introduces the concept of hidden tokens to handle semantically unimportant
+things like whitespaces, comments, etc. in the input sequence gracefully. It is possible to define a set of terminal 
+symbols, that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they 
+are transparently woven into the node model, but not relevant for the semantic model. 
 
 Hidden terminals may optionally appear between any other terminals in any cardinality. They can be described per rule 
 or for the whole grammar. When ref:grammarMixins[reusing a single grammar] its definition of hidden tokens is reused,
-too. The grammar e[org.eclipse.xtext.common.Terminals] comes with a reasonable default and hides all comments and whitespace from the parser rules.
+too. The grammar code[Xtext][org.eclipse.xtext.common.Terminals] comes with a reasonable default and hides all comments and whitespace from the parser rules.
 
 If a rule defines hidden symbols, you can think of a kind of scope that is automatically introduced. Any rule that is
  called transitively by the declaring rule uses the same hidden terminals as the calling rule, unless it defines hidden tokens itself.
@@ -759,7 +767,7 @@ Fullname:
 ;
 ]
 
-The sample rule "Person" defines multiline comments (e[ML_COMMENT]), single-line comments (e[SL_COMMENT]), and whitespace (e[WS]) to be allowed between
+The sample rule e[Person] defines multiline comments (code[Xtext][ML_COMMENT]), single-line comments (code[Xtext][SL_COMMENT]), and whitespace (code[Xtext][WS]) to be allowed between
  the e[name] and the e[age]. Because the rule e[Fullname] does not introduce an own set of hidden terminals, it allows the same symbols to appear 
  between e[firstname] and e[lastname] as the calling rule e[Person]. Thus, the following input is perfectly valid for the given grammar snippet:
 
@@ -768,11 +776,11 @@ code[Java][John /* comment */ Smith // line comment
       42      ; // line comment
 ]
 
-A list of all default terminals like e[WS] can be found in section ref:grammarMixins[Grammar Mixins].
+A list of all default terminals like code[Xtext][WS] can be found in section ref:grammarMixins[Grammar Mixins].
 
 section2:datatypeRules[Data Type Rules]
 
-Data type rules are parsing-phase rules, which create instances of e[EDataType] instead of e[EClass]. Thinking about it, one may discover 
+Data type rules are parsing-phase rules, which create instances of codeRef[org.eclipse.emf.ecore.EDataType] instead of codeRef[org.eclipse.emf.ecore.EDataType]. Thinking about it, one may discover 
 that they are quite similar to terminal rules.
 However, the nice thing about data type rules is that they are actually parser rules and are therefore 
 
@@ -793,7 +801,7 @@ In contrast to a terminal rule this is only valid in certain contexts, i.e. it w
 If you had defined it as a terminal rule, it would possibly hide the simple e[ID] rule.
 
 In addition when the e[QualifiedName] been defined as a data type rule, it is allowed to use hidden 
-tokens (e.g. code[/* comment */] between the segment IDs and dots (e.g. code[foo/* comment */. bar . Baz]).
+tokens (e.g. code[Java][/* comment */] between the segment IDs and dots (e.g. code[Java][foo/* comment */. bar . Baz]).
 
 Return types can be specified in the same way as for terminal rules:
 
@@ -803,7 +811,7 @@ code[Xtext][QualifiedName returns ecore::EString :
 ]
 
 Note that rules that do not call other parser rules and do neither contain any actions nor ref:assignments[assignments], are
- considered to be data type rules and the data type e[EString] is implied if none has been explicitly declared.
+ considered to be data type rules and the data type codeRef[java.lang.String][EString] is implied if none has been explicitly declared.
 
 ref:valueconverter[Value converters] are used to transform the parsed string to the actually returned
 data type value.
@@ -814,7 +822,7 @@ Enum rules return enumeration literals from strings. They can be seen as a short
 The main advantage of enum rules is their simplicity, type safety and therefore nice validation. Furthermore it is possible
  to infer enums and their respective literals during the Ecore model transformation.
 
-If you want to define a e[ChangeKind] link[http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/change/package-summary.html][org.eclipse.emf.ecore.change/model/Change.ecore] with e[ADD], e[MOVE] and e[REMOVE] you could write:
+If you want to define a code[Xtext][ChangeKind] from link[http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/change/package-summary.html][org.eclipse.emf.ecore.change/model/Change.ecore] with e[ADD], e[MOVE] and e[REMOVE] you could write:
 
 code[Xtext][enum ChangeKind :
   ADD | MOVE | REMOVE
@@ -839,7 +847,7 @@ with the input of
 code[Java][element Foo]
 
 the resulting value of the element e[Foo] will hold the enum value with the internal representation of code[0] (zero). 
-When generating the e[EPackage] from your grammar this will be the first literal you define. As a workaround 
+When generating the codeRef[org.eclipse.emf.ecore.EPackage] from your grammar this will be the first literal you define. As a workaround 
 you could introduce a dedicated none-value or order the enums accordingly. Note that it is not possible to define 
 an enum literal with an empty textual representation.
 
@@ -888,8 +896,8 @@ if (isTrue())
 		dontDoStuff(); 
 ]
 
-Where does the code[else] branch belong to? This question can be answered by a quick look into the language
-specication which tells that the code[else] branch is part of the inner condition. However, the parser
+Where does the code[Java][else] branch belong to? This question can be answered by a quick look into the language
+specication which tells that the code[Java][else] branch is part of the inner condition. However, the parser
 generator cannot be convinced that easy. We have to guide it to this decision point by means of syntactic
 predicates which are expressed by a leading code[=>] operator.
 
@@ -909,31 +917,38 @@ section:metamodelInference[Ecore Model Inference]
 
 The Ecore model (or meta model) of a textual language describes the structure of its abstract syntax trees (AST). 
 
-Xtext uses Ecore's e[EPackages] to define Ecore models. Ecore models are declared to be either inferred (generated) 
+Xtext uses Ecore's codeRef[org.eclipse.emf.ecore.EPackage][EPackages] to define Ecore models. Ecore models are declared to be either inferred (generated) 
 from the grammar or imported. 
-By using the e[generate] directive, one tells Xtext to derive an e[EPackage] from the grammar. 
+By using the code[Xtext][generate] directive, one tells Xtext to derive an codeRef[org.eclipse.emf.ecore.EPackage] from the grammar. 
 
 section2[Type and Package Generation]
 
 Xtext creates
 
 ul[
-item[an e[EPackage] ul[
-	item[for each generate-package declaration. After the directive e[generate] a list of parameters follows. The e[name] of the e[EPackage] will be set to the first parameter, its e[nsURI] to the second parameter. An optional alias as the third parameter allows to distinguish generated e[EPackages] later. Only one generated package declaration per alias is allowed.]
+item[an codeRef[org.eclipse.emf.ecore.EPackage] ul[
+	item[for each generate-package declaration. After the directive code[Xtext][generate] a list of parameters follows. The e[name] of the codeRef[org.eclipse.emf.ecore.EPackage] 
+	will be set to the first parameter, its e[nsURI] to the second parameter. An optional alias as the third parameter allows 
+	to distinguish generated codeRef[org.eclipse.emf.ecore.EPackage][EPackages] later. Only one generated package declaration 
+	per alias is allowed.]
 ]]
-item[an e[EClass] ul[
-	item[for each return type of a parser rule. If a parser rule does not define a return type, an implicit one with the same name as the rule itself is assumed. You can specify more than one rule that return the same type but only one e[EClass] will be generated.]
+item[an codeRef[org.eclipse.emf.ecore.EClass] ul[
+	item[for each return type of a parser rule. If a parser rule does not define a return type, an implicit one with the same 
+	name as the rule itself is assumed. You can specify more than one rule that return the same type but only one codeRef[org.eclipse.emf.ecore.EClass] 
+	will be generated.]
 	item[for each type defined in an action or a cross-reference.]
 ]]
-item[an e[EEnum] ul[
+item[an codeRef[org.eclipse.emf.ecore.EEnum] ul[
 	item[for each return type of an enum rule.]
 ]]
-item[an e[EDataType] ul[
+item[an codeRef[org.eclipse.emf.ecore.EDataType] ul[
 	item[for each return type of a terminal rule or a data type rule.]
 ]]
 ]
 
-All e[EClasses], e[EEnums], and e[EDataTypes] are added to the e[EPackage] referred to by the alias provided in the type reference they were created from.
+All codeRef[org.eclipse.emf.ecore.EClass][EClasses], codeRef[org.eclipse.emf.ecore.EEnum][EEnums], and 
+codeRef[org.eclipse.emf.ecore.EDataType][EDataTypes] are added to the codeRef[org.eclipse.emf.ecore.EPackage] referred to 
+by the alias provided in the type reference they were created from.
 
 
 section2[Feature and Type Hierarchy Generation]
@@ -941,29 +956,36 @@ section2[Feature and Type Hierarchy Generation]
 While walking through the grammar, the algorithm keeps track of a set of the currently possible return types to add features to. 
 ul[
 item[Entering a parser rule the set contains only the return type of the rule. ]
-item[Entering an element of an alternative the set is reset to the same state it was in when entering the first option of the alternative. ]
+item[Entering an element of an alternative the set is reset to the same state it was in when entering the first option of 
+the alternative. ]
 item[Leaving an alternative the set contains the union of all types at the end of each of its paths.]
 item[After an optional element, the set is reset to the same state it was before entering it. ]
-item[After a mandatory (non-optional) rule call or mandatory action the set contains only the return type of the called rule or action.]
+item[After a mandatory (non-optional) rule call or mandatory action the set contains only the return type of the called 
+rule or action.]
 item[An optional rule call does not modify the set.]
 item[A rule call is optional, if its cardinality is code[?] or code[*].]
 ]
 
 While iterating the parser rules Xtext creates
 ul[
-item[an e[EAttribute] in each current return type ul[
-	item[of type e[EBoolean] for each feature assignment using the code[?=] operator. No further e[EReferences] or e[EAttributes] will be generated from this assignment.]
+item[an codeRef[org.eclipse.emf.ecore.EAttribute] in each current return type ul[
+	item[of type codeRef[java.lang.Boolean][EBoolean] for each feature assignment using the code[?=] operator. 
+	No further codeRef[org.eclipse.emf.ecore.EReference][EReferences] or codeRef[org.eclipse.emf.ecore.EAttribute][EAttributes] will be generated from this assignment.]
 	item[for each assignment with the code[=] or code[+=] operator calling a terminal rule. Its type will be the return type of the called rule.]
 ]]
-item[an e[EReference] in each current return type ul[
-	item[for each assignment with the code[=] or code[+=] operator in a parser rule calling a parser rule. The e[EReference]'s type will be the return type of the called parser rule.]
+item[an codeRef[org.eclipse.emf.ecore.EReference] in each current return type ul[
+	item[for each assignment with the code[=] or code[+=] operator in a parser rule calling a parser rule. 
+	The codeRef[org.eclipse.emf.ecore.EReference][EReference's] type will be the return type of the called parser rule.]
 	item[for each assigned action. The reference's type will be set to the return type of the current calling rule. ]
 ]]
 ]
 
-Each e[EAttribute] or e[EReference] takes its name from the assignment or action that caused it. Multiplicities will be e[0..1] for assignments with the code[=] operator and code[0..*] for assignments with the code[+=] operator. 
+Each codeRef[org.eclipse.emf.ecore.EAttribute] or codeRef[org.eclipse.emf.ecore.EReference] takes its name from the assignment 
+or action that caused it. Multiplicities will be e[0..1] for assignments with the code[=] operator and code[0..*] for assignments 
+with the code[+=] operator. 
 
-Furthermore, each type that is added to the currently possible return types automatically extends the current return type of the parser rule. You can specify additional common super types by means of "artificial" parser rules, that are never called, e.g.
+Furthermore, each type that is added to the currently possible return types automatically extends the current return type 
+of the parser rule. You can specify additional common super types by means of "artificial" parser rules, that are never called, e.g.
 
 code[Xtext][CommonSuperType:
   SubTypeA | SubTypeB | SubTypeC;
@@ -981,7 +1003,7 @@ code[Xtext][enum MyGeneratedEnum:
 
 section2[Feature Normalization]
 
-In the next step the generator examines all generated e[EClasses] and lifts up similar features to super types
+In the next step the generator examines all generated codeRef[org.eclipse.emf.ecore.EClass][EClasses] and lifts up similar features to super types
  if there is more than one subtype and the feature is defined in every subtypes. This does even work for multiple super types.
 
 
@@ -990,7 +1012,7 @@ section2:customPostProcessing[Customized Post Processing]
 As a last step, the generator invokes the post processor for every generated Ecore model. The post processor expects an 
 Xtend1 file with name e[MyDslPostProcessor.ext] (if the name of the grammar file is e[MyDsl.xtext]) in the same 
 folder as the grammar file. Further, for a successful invocation, the Xtend file must declare an extension 
-with signature e[process(xtext::GeneratedMetamodel)]. E.g.
+with signature code[Xtend][process(xtext::GeneratedMetamodel)]. E.g.
 
 code[Xtend][process(xtext::GeneratedMetamodel this) :
   process(ePackage)
@@ -1018,11 +1040,11 @@ section2[Error Conditions]
 
 The following conditions cause an error
 ul[
-item[An e[EAttribute] or e[EReference] has two different types or different cardinality.]
-item[There is an e[EAttribute] and an e[EReference] with the same name in the same e[EClass].]
+item[An codeRef[org.eclipse.emf.ecore.EAttribute] or codeRef[org.eclipse.emf.ecore.EReference] has two different types or different cardinality.]
+item[There is an codeRef[org.eclipse.emf.ecore.EAttribute] and an codeRef[org.eclipse.emf.ecore.EReference] with the same name in the same codeRef[org.eclipse.emf.ecore.EClass].]
 item[There is a cycle in the type hierarchy.]
-item[An new e[EAttribute], e[EReference] or super type is added to an imported type.]
-item[An e[EClass] is added to an imported e[EPackage].]
+item[An new codeRef[org.eclipse.emf.ecore.EAttribute], codeRef[org.eclipse.emf.ecore.EReference] or super type is added to an imported type.]
+item[An codeRef[org.eclipse.emf.ecore.EClass] is added to an imported codeRef[org.eclipse.emf.ecore.EPackage].]
 item[An undeclared alias is used. ]
 item[An imported Ecore model cannot be loaded.]
 ]
@@ -1030,8 +1052,9 @@ item[An imported Ecore model cannot be loaded.]
 
 section:grammarMixins[Grammar Mixins]
 
-Xtext supports the reuse of existing grammars. Grammars that are created via the Xtext wizard use e[org.eclipse.xtext.common.Terminals]
- by default which introduces a common set of terminal rules and defines reasonable defaults for hidden terminals.
+Xtext supports the reuse of existing grammars. Grammars that are created via the Xtext wizard use 
+code[Xtext][org.eclipse.xtext.common.Terminals]
+by default which introduces a common set of terminal rules and defines reasonable defaults for hidden terminals.
 
 code[Xtext][grammar org.xtext.example.SecretCompartments 
    with org.eclipse.xtext.common.Terminals
