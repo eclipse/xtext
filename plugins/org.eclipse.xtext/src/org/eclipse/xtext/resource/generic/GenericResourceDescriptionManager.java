@@ -24,12 +24,14 @@ import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.util.IResourceScopeCache;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * An {@link IResourceDescription.Manager} for non-Xtext resources. 
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Singleton
 public class GenericResourceDescriptionManager implements IResourceDescription.Manager {
 
 	@Inject
