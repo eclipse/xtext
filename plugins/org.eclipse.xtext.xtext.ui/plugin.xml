@@ -178,7 +178,7 @@
 	
 	<extension
          point="org.eclipse.xtext.xtext.ui.wizardContribution">
-      <generatorConfiguration name="Standard (i.e. stable API only)">
+      <generatorConfiguration name="Use Stable API only">
          <MweSnippet>
 <![CDATA[
 	bean = StandaloneSetup {
@@ -306,7 +306,7 @@
 
    <extension
          point="org.eclipse.xtext.xtext.ui.wizardContribution">
-      <generatorConfiguration name="With experimental 2.0 Features (Compare,Refactoring and new Serializer)">
+      <generatorConfiguration name="Use Experimental 2.0 Features (Compare,Refactoring and new Serializer)">
         <MweSnippet>
 <![CDATA[
     bean = StandaloneSetup {
