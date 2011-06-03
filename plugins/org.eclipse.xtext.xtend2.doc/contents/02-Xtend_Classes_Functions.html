@@ -111,8 +111,7 @@ allows to use its methods for example like this :
 </div>
 </p>
 <p>
-Although this is supported it is generally much nicer to use <a href="02-Xtend_Classes_Functions.html#3">injected extensions</a>
-, because
+Although this is supported it is generally much nicer to use <a href="02-Xtend_Classes_Functions.html#3" title="go to &quot;Fields&quot;">injected extensions</a>, because
 they don&apos;t bind you to the actual implementation.
 </p>
 <a name="2"></a>
@@ -268,8 +267,7 @@ myPerson.fullName</br>
 </div>
 </p>
 <p>
-The nice thing with using dependency injection in combination with the extension modifier as opposed to <a href="02-Xtend_Classes_Functions.html#1">static extensions</a>
- is, that in case there is a bug in the extension or it is implemented inefficiently or you 
+The nice thing with using dependency injection in combination with the extension modifier as opposed to <a href="02-Xtend_Classes_Functions.html#1" title="go to &quot;Imports&quot;">static extensions</a> is, that in case there is a bug in the extension or it is implemented inefficiently or you 
 just need a different strategy, you can simply exchange the component with another implementation. You do this without modifying the library nor the client code. 
 You&apos;ll only have to change the binding in your guice module. Also this gives you a general hook for any AOP-like thing you would want to do, 
 or allows you to write against an SPI, where the concrete implementation can be provided by a third party.
@@ -278,8 +276,7 @@ or allows you to write against an SPI, where the concrete implementation can be 
 <h2>Functions</h2>
 <p>
 Xtend functions are declared within a class and are translated to a corresponding Java method with the exact same signature. 
-(The only exceptions are dispatch methods, which are explained <a href="02-Xtend_Classes_Functions.html#4-5">here</a>
-). 
+(The only exceptions are dispatch methods, which are explained <a href="02-Xtend_Classes_Functions.html#4-5" title="go to &quot;Dispatch Functions&quot;">here</a>). 
 </p>
 <p>
 Let&apos;s start with a simple example
