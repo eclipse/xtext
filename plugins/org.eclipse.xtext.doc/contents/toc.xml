@@ -384,14 +384,6 @@
 			</topic>
 		</topic>
 	</topic>
-	<topic href="contents/220-deploying-dsls.html" label="Deploying DSLs" >
-		<topic href="contents/220-deploying-dsls.html#0" label="Prepare Your DSL Projects" >
-		</topic>
-		<topic href="contents/220-deploying-dsls.html#1" label="Creating a Feature For Your DSL" >
-		</topic>
-		<topic href="contents/220-deploying-dsls.html#2" label="Creating an Update Site For Your DSL" >
-		</topic>
-	</topic>
 	<topic href="contents/230-antlr-ip-issue.html" label="The ANTLR IP Issue (Or Which Parser To Use?)" >
 	</topic>
 </toc>
