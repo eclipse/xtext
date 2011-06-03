@@ -20,7 +20,7 @@
 
 «DEFINE workflow FOR XtextProjectInfo»
 «FILE basePackagePath+"/Generate"+languageNameAbbreviation+".mwe2" -»
-module «(basePackagePath+"/"+languageNameAbbreviation).replaceAll("/", ".")»
+module «(basePackagePath+"/Generate"+languageNameAbbreviation).replaceAll("/", ".")»
 
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
