@@ -320,18 +320,6 @@
 		<topic href="contents/199-jvmtypes.html#1" label="Customization Points" >
 		</topic>
 	</topic>
-	<topic href="contents/205-typical-language-configs.html" label="Typical Language Configurations" >
-		<topic href="contents/205-typical-language-configs.html#0" label="Case Insensitive Languages" >
-		</topic>
-		<topic href="contents/205-typical-language-configs.html#1" label="Languages Independent of JDT" >
-		</topic>
-		<topic href="contents/205-typical-language-configs.html#2" label="Parsing Expressions with Xtext" >
-			<topic href="contents/205-typical-language-configs.html#2-0" label="Construction of an AST" >
-			</topic>
-			<topic href="contents/205-typical-language-configs.html#2-1" label="Associativity" >
-			</topic>
-		</topic>
-	</topic>
 	<topic href="contents/210-emf-integration.html" label="Integration with EMF and Other EMF Editors" >
 		<topic href="contents/210-emf-integration.html#0" label="Model, Ecore Model, and Ecore" >
 		</topic>
@@ -383,7 +371,5 @@
 			<topic href="contents/215-migrating-from-0.7.html#0-4" label="Noteworthy API Changes" >
 			</topic>
 		</topic>
-	</topic>
-	<topic href="contents/230-antlr-ip-issue.html" label="The ANTLR IP Issue (Or Which Parser To Use?)" >
 	</topic>
 </toc>

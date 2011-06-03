@@ -141,16 +141,16 @@ revise indentation levels
 		The method <em>IScopeProvider.getScope(EObject,EClass)</em> has been removed. Use  <em>IScopeProvider.getScope(EObject,EReference)</em> instead. 
 	</li>
 	<li>
-		Renamed <em>DefaultScopeProvider</em> to <em>SimpleNameScopeProvider</em>. There have been further significant changes in the scoping API that allow for optimized implementations. Consult the <a href="050-heading-runtime.html#5" title="go to &quot;Scoping&quot;">section on scoping</a> for details.
+		Renamed <em>DefaultScopeProvider</em> to <em>SimpleNameScopeProvider</em>. There have been further significant changes in the scoping API that allow for optimized implementations. Consult the <a href="050-heading-runtime.html#5" title="Go to &quot;Scoping&quot;">section on scoping</a> for details.
 	</li>
 	<li>
 		The return type of <em>AbstractInjectableValidator.getEPackages()</em> was changed from <em>List&lt;? extends EPackage&gt;</em> to <em>List&amp;lt;EPackage&gt;</em>.
 	</li>
 	<li>
-		The parser interfaces now use <em>java.io.Reader</em> instead of <em>java.io.InputStream</em> to explicitly address encoding. Have a look at the <a href="050-heading-runtime.html#10" title="go to &quot;Encoding in Xtext&quot;">section on encoding</a> for details.
+		The parser interfaces now use <em>java.io.Reader</em> instead of <em>java.io.InputStream</em> to explicitly address encoding. Have a look at the <a href="050-heading-runtime.html#10" title="Go to &quot;Encoding in Xtext&quot;">section on encoding</a> for details.
 	</li>
 	<li>
-		The handling of <em>ILabelProvider</em> in various contexts has been refactored. The former base class <em>DefaultLabelProvider</em> no longer exists. Use the <em>DefaultEObjectLabelProvider</em> instead. See the <a href="120-heading-UI.html#0" title="go to &quot;Label Provider&quot;">section on label providers</a> for details. 
+		The handling of <em>ILabelProvider</em> in various contexts has been refactored. The former base class <em>DefaultLabelProvider</em> no longer exists. Use the <em>DefaultEObjectLabelProvider</em> instead. See the <a href="120-heading-UI.html#0" title="Go to &quot;Label Provider&quot;">section on label providers</a> for details. 
 	</li>
 	<li>
 		We have introduced a couple of new packages to better separate concerns. Most classes should be easy to relocate. 

@@ -67,12 +67,11 @@ chapter-ref[ide_concepts]
 
 chapter-ref[jvmtypes]
 
-chapter-ref[special_languages]
-
+%% chapter-ref[special_languages]
 chapter-ref[emf_integration]
 
 chapter-ref[migrating_from_1_0_x]
 
 chapter-ref[migrating_from_0_7]
 
-chapter-ref[antlr_ip_issue]
+%% chapter-ref[antlr_ip_issue]

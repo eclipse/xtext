@@ -135,7 +135,7 @@ after a quick <em>Run As .. -&gt; MWE2 Workflow</em> in the console as
 <h3>A Simple Transformation</h3>
 <p>
 The following workflow solves the exemplary task to rename every 
-<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" ><abbr title="org.eclipse.emf.ecore.EClassifier" >EClassifier</abbr></a> in an <em>*.ecore</em> file.
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClassifier" >EClassifier</abbr></a> in an <em>*.ecore</em> file.
 It consists of three components that read, modify and write the model file:
 </p>
 <p>
@@ -162,7 +162,7 @@ own components even for minor operations to automate a process.
 </p>
 <p>
 The <span class="inlinecode">ResourceReader</span> simply reads the file with the given 
-<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" ><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a> and stores it in a so called
+<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a> and stores it in a so called
 <em>slot</em> of the workflow context. A slot can be understood as a dictionary or map-entry.
 </p>
 <p>
@@ -191,7 +191,7 @@ The <span class="inlinecode">ResourceReader</span> simply reads the file with th
 </p>
 <p>
 The actual transformer takes the model from the slot and modifies it. It simply iterates the content
-of the resource, identifies each <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" ><abbr title="org.eclipse.emf.ecore.EClassifier" >EClassifier</abbr></a> and sets its name. 
+of the resource, identifies each <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClassifier" >EClassifier</abbr></a> and sets its name. 
 </p>
 <p>
 <div class="literallayout">
@@ -227,7 +227,7 @@ of the resource, identifies each <a class="jdoc" href="http://download.eclipse.o
 <p>
 After the model has been modified it should be written to a new file. That&apos;s what the 
 <span class="inlinecode">ResourceWriter</span> does. It actually takes the resource from the given <em>slot</em> and saves it with
-the configured <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" ><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a>:
+the configured <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a>:
 </p>
 <p>
 <div class="literallayout">
@@ -501,7 +501,7 @@ SampleClass&nbsp;{</br>
 <p>
 The type of the property will be derived from the default value 
 similar to the mechanism that is already known from <span class="inlinecode">set</span>- and 
-<span class="inlinecode">add</span>-methods. If no default value is given, <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" ><abbr title="java.lang.String" >String</abbr></a> will
+<span class="inlinecode">add</span>-methods. If no default value is given, <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a> will
 be assumed. However, properties are not limited to strings. The 
 second built in type is boolean via the familiar literals <span class="inlinecode"><span class="keyword">true</span></span> and
 <span class="inlinecode"><span class="keyword">false</span></span>. More flexibility is available via actual component literals.
@@ -768,8 +768,8 @@ furthermore defines an assignable feature of the module in case one
 refers to it from another module. Properties may either have a 
 default value or they are considered to be <em>mandatory</em>. If the type
 of property is omitted it will be inferred from the default value. The
-default type of a property is <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" ><abbr title="java.lang.String" >String</abbr></a>. That is, if no
- default value is available, the property is <em>mandatory</em> and of type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" ><abbr title="java.lang.String" >String</abbr></a>.
+default type of a property is <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a>. That is, if no
+ default value is available, the property is <em>mandatory</em> and of type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a>.
 </p>
 <p>
 There are four types of values available in MWE2. One may either

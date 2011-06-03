@@ -154,16 +154,16 @@ has to reside in a Java source folder to be valid.
 </p>
 <p>
 The second aspect that can be deduced from the first line of the grammar is its relationship to other
-languages. An Xtext grammar can declare another existing grammar to be reused. The mechanism is called <a href="020-grammar-language.html#3" title="go to &quot;Grammar Mixins&quot;">grammar mixin</a>).
+languages. An Xtext grammar can declare another existing grammar to be reused. The mechanism is called <a href="020-grammar-language.html#3" title="Go to &quot;Grammar Mixins&quot;">grammar mixin</a>).
 </p>
 <a name="1-1"></a>
 <h3>EPackage Declarations</h3>
 <p>
 Xtext parsers create in-memory object graphs while consuming text. Such object-graphs are 
 instances of EMF Ecore models. An Ecore model basically consists of an <em>EPackage</em> containing <em>EClasses</em>, 
-<em>EDataTypes</em> and <em>EEnums</em> (See the <a href="210-emf-integration.html#0" title="go to &quot;Model, Ecore Model, and Ecore&quot;">section on EMF</a> for more details) and describes
+<em>EDataTypes</em> and <em>EEnums</em> (See the <a href="210-emf-integration.html#0" title="Go to &quot;Model, Ecore Model, and Ecore&quot;">section on EMF</a> for more details) and describes
 the structure of the instantiated objects. Xtext can infer Ecore models from a grammar 
-(see <a href="020-grammar-language.html#2" title="go to &quot;Ecore Model Inference&quot;">Ecore model inference</a>) but it is also 
+(see <a href="020-grammar-language.html#2" title="Go to &quot;Ecore Model Inference&quot;">Ecore model inference</a>) but it is also 
 possible to import existing Ecore models. You can even mix both approaches and use multiple existing Ecore models and 
 infer some others from a single grammar. This allows for easy reuse of existing abstractions while still
 having the advantage of short turn arounds with derived Ecore models. 
@@ -183,7 +183,7 @@ That statement could actually be read as: generate an <em>EPackage</em> with the
 <span class="inlinecode"><span class="string">"http://www.eclipse.org/secretcompartment"</span></span>. 
 Actually these are the mandatory properties that are necessary to create an empty <em>EPackage</em>.
 Xtext will then add <em>EClasses</em> with features (<em>EAttributes</em> and <em>EReferences</em>) for the different parser
-rules in your grammar, as described in <a href="020-grammar-language.html#2" title="go to &quot;Ecore Model Inference&quot;">Ecore model inference</a>. 
+rules in your grammar, as described in <a href="020-grammar-language.html#2" title="Go to &quot;Ecore Model Inference&quot;">Ecore model inference</a>. 
 </p>
 <a name="1-1-1"></a>
 <h4>EPackage Import</h4>
@@ -191,7 +191,7 @@ rules in your grammar, as described in <a href="020-grammar-language.html#2" tit
 If you already have an existing <em>EPackage</em>, you can import it using either a namespace URI or a resource URI. 
 An <a href="http://www.ietf.org/rfc/rfc2396.txt">URI</a> (Uniform Resource Identifier) provides a simple and extensible 
 means for identifying an abstract or physical resource. For all the nifty details about EMF URIs 
-please refer to its <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" ><abbr title="org.eclipse.emf.common.util.URI" >documentation</abbr></a>.
+please refer to its <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >documentation</abbr></a>.
 </p>
 <a name="1-1-1-0"></a>
 <h5>Using Resource URIs to Import Existing EPackages</h5>
@@ -211,8 +211,8 @@ An import statement referring to an Ecore file by a <em>platform:/resource/</em>
 <p>
 If you want to mix generated and imported Ecore models you&apos;ll have to configure the generator fragment 
 in your MWE file responsible for generating the Ecore classes 
-(<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" >EcoreGeneratorFragment</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java" title="show source code" >(src)</a>) 
-with resource URIs that point to the <a href="210-emf-integration.html#1" title="go to &quot;EMF Code Generation&quot;">generator models</a> of the referenced Ecore models.
+(<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" >EcoreGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java" title="View Source Code" >(src)</a>) 
+with resource URIs that point to the <a href="210-emf-integration.html#1" title="Go to &quot;EMF Code Generation&quot;">generator models</a> of the referenced Ecore models.
 </p>
 <p>
 The <em>*.genmodel</em> provides all kind of generator configuration used by EMF&apos;s code generator. Xtext will automatically create
@@ -265,7 +265,7 @@ fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&nb
 </div>
 </p>
 <p>
-See the section on <a href="199-jvmtypes.html" title="go to &quot;Referring to Java Types&quot;">Referring Java Types</a> for a full explanation of this useful feature.
+See the section on <a href="199-jvmtypes.html" title="Go to &quot;Referring to Java Types&quot;">Referring Java Types</a> for a full explanation of this useful feature.
 </p>
 <a name="1-1-1-2"></a>
 <h5>Using Namespace URIs to Import Existing EPackages</h5>
@@ -341,7 +341,7 @@ names of terminal rules are all upper-case.
 </p>
 <p>
 In the secret compartments example there are no explicitly defined terminal rules, since it only uses the <em>ID</em> rule 
-which is inherited from the grammar <em>org.eclipse.xtext.common.Terminals</em> (cf. <a href="020-grammar-language.html#3" title="go to &quot;Grammar Mixins&quot;">Grammar Mixins</a>).
+which is inherited from the grammar <em>org.eclipse.xtext.common.Terminals</em> (cf. <a href="020-grammar-language.html#3" title="Go to &quot;Grammar Mixins&quot;">Grammar Mixins</a>).
 Therein the <em>ID</em> rule is defined as follows:
 </p>
 <p>
@@ -360,7 +360,7 @@ or underscore <span class="inlinecode"><span class="string">&apos;_&apos;</span>
 </p>
 <p>
 The caret is used to escape an identifier if there are conflicts with existing keywords. It is removed 
-by the <em>ID</em> rule&apos;s <a href="050-heading-runtime.html#6" title="go to &quot;Value Converter&quot;">ValueConverter</a>. 
+by the <em>ID</em> rule&apos;s <a href="050-heading-runtime.html#6" title="Go to &quot;Value Converter&quot;">ValueConverter</a>. 
 </p>
 <p>
 This is the simplified formal definition of terminal rules:
@@ -384,7 +384,7 @@ This is especially important for newly introduced rules in connection with impor
 <p>
 It&apos;s almost in any case recommended to use data type rules instead. Let&apos;s assume you want to add a rule
  to allow fully qualified names in addition to simple IDs. Since a qualified name with only one segment
- looks like a plain ID, you should implement it as a <a href="020-grammar-language.html#1-5" title="go to &quot;Data Type Rules&quot;">data type rule</a>, instead of adding 
+ looks like a plain ID, you should implement it as a <a href="020-grammar-language.html#1-5" title="Go to &quot;Data Type Rules&quot;">data type rule</a>, instead of adding 
  another terminal rule. The same rule of thumb applies to floating point literals, too.
 </p>
 <a name="1-2-0-0"></a>
@@ -408,10 +408,10 @@ However, if you want to provide a different type you can specify it. For instanc
 This means that the terminal rule <em>INT</em> returns instances of <em>ecore::EInt</em>. It is possible to define any 
 kind of data type here, which just needs to be an instance of <em>ecore::EDataType</em>. In order to tell the framework 
 how to convert the parsed string to a value of the declared data type, you need to provide your own 
-implementation of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/conversion/IValueConverterService.html" ><abbr title="org.eclipse.xtext.conversion.IValueConverterService" >IValueConverterService</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java" title="show source code" >(src)</a> (cf. 
-<a href="050-heading-runtime.html#6" title="go to &quot;Value Converter&quot;">value converters</a>). The value converter is also the service that allows to remove escape
+implementation of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/conversion/IValueConverterService.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.conversion.IValueConverterService" >IValueConverterService</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java" title="View Source Code" >(src)</a> (cf. 
+<a href="050-heading-runtime.html#6" title="Go to &quot;Value Converter&quot;">value converters</a>). The value converter is also the service that allows to remove escape
 sequences or semantically unnecessary character like quotes from string literals or the caret (&apos;^&apos;) from identifiers.
- Its implementation needs to be registered as a service (cf. <a href="030-generator.html#1" title="go to &quot;Dependency Injection in Xtext with Google Guice&quot;">Service Framework</a>).
+ Its implementation needs to be registered as a service (cf. <a href="030-generator.html#1" title="Go to &quot;Dependency Injection in Xtext with Google Guice&quot;">Service Framework</a>).
 </p>
 <a name="1-2-1"></a>
 <h4>Extended Backus-Naur Form Expressions</h4>
@@ -578,7 +578,7 @@ starting with a special delimiter.
 <p>
 The parser is fed with a sequence of terminals and walks through the so called parser rules. Hence a parser rule - 
 contrary to a terminal rule - does not produce a single atomic terminal token but a tree of non-terminal 
-and terminal tokens. They lead to a so called <a href="" title="go to &quot;Working with the Parse Tree (aka Node Model)&quot;">parse tree</a> (in Xtext it is also referred 
+and terminal tokens. They lead to a so called <a href="" title="Go to &quot;Working with the Parse Tree (aka Node Model)&quot;">parse tree</a> (in Xtext it is also referred 
 as node model). Furthermore, parser rules are handled as kind of a building plan for the creation of 
 the <em>EObjects</em> that form the semantic model (the linked abstract syntax graph or AST). Due to this 
 fact, parser rules are even called production or EObject rules. Different constructs like actions and 
@@ -596,16 +596,16 @@ The elements that are available in parser rules as well as in terminal rules are
 <p>
 <ol>
 	<li>
-		<a href="020-grammar-language.html#1-2-1-7" title="go to &quot;Groups&quot;">Groups</a>, 
+		<a href="020-grammar-language.html#1-2-1-7" title="Go to &quot;Groups&quot;">Groups</a>, 
 	</li>
 	<li>
-		<a href="020-grammar-language.html#1-2-1-6" title="go to &quot;Alternatives&quot;">Alternatives</a>, 
+		<a href="020-grammar-language.html#1-2-1-6" title="Go to &quot;Alternatives&quot;">Alternatives</a>, 
 	</li>
 	<li>
-		<a href="020-grammar-language.html#1-2-1-0" title="go to &quot;Keywords / Characters&quot;">Keywords</a> and 
+		<a href="020-grammar-language.html#1-2-1-0" title="Go to &quot;Keywords / Characters&quot;">Keywords</a> and 
 	</li>
 	<li>
-		<a href="020-grammar-language.html#1-2-1-5" title="go to &quot;Rule Calls&quot;">Rule Calls</a>.
+		<a href="020-grammar-language.html#1-2-1-5" title="Go to &quot;Rule Calls&quot;">Rule Calls</a>.
 	</li>
 </ol>
 </p>
@@ -646,7 +646,7 @@ The syntactic declaration for states in the state machine example starts with a 
 </p>
 <p>
 The left hand side refers to a feature <em>name</em> of the current object (which has the <em>EClass</em> <em>State</em> in this case). 
-The right hand side can be a rule call, a keyword, a <a href="020-grammar-language.html#1-3-0-1" title="go to &quot;Cross-References&quot;">cross-reference</a> or an alternative
+The right hand side can be a rule call, a keyword, a <a href="020-grammar-language.html#1-3-0-1" title="Go to &quot;Cross-References&quot;">cross-reference</a> or an alternative
 comprised by the former. The type of the feature 
 needs to be compatible with the type of the expression on the right. As <em>ID</em> returns an <em>EString</em> in this case, 
 the feature <em>name</em> needs to be of type <em>EString</em> as well.
@@ -733,7 +733,7 @@ which the crosslink later should be established. If the terminal is omitted, it 
 with the name <em>ID</em> - if one can be found. The terminal is mandatory for languages that do not define a rule with the name <em>ID</em>.
 </p>
 <p>
-Have a look at the <a href="050-heading-runtime.html#4" title="go to &quot;Linking&quot;">linking section</a> in order to understand how linking is done.
+Have a look at the <a href="050-heading-runtime.html#4" title="Go to &quot;Linking&quot;">linking section</a> in order to understand how linking is done.
 </p>
 <a name="1-3-0-2"></a>
 <h5>Unordered Groups</h5>
@@ -1086,7 +1086,7 @@ Because parser rules describe not a single token, but a sequence of patterns in 
 </p>
 <p>
 Hidden terminals may optionally appear between any other terminals in any cardinality. They can be described per rule 
-or for the whole grammar. When <a href="020-grammar-language.html#3" title="go to &quot;Grammar Mixins&quot;">reusing a single grammar</a> its definition of hidden tokens is reused,
+or for the whole grammar. When <a href="020-grammar-language.html#3" title="Go to &quot;Grammar Mixins&quot;">reusing a single grammar</a> its definition of hidden tokens is reused,
 too. The grammar <em>org.eclipse.xtext.common.Terminals</em> comes with a reasonable default and hides all comments and whitespace from the parser rules.
 </p>
 <p>
@@ -1126,7 +1126,7 @@ John&nbsp;<span class="comment">/*&nbsp;comment&nbsp;*/</span>&nbsp;Smith&nbsp;<
 </div>
 </p>
 <p>
-A list of all default terminals like <em>WS</em> can be found in section <a href="020-grammar-language.html#3" title="go to &quot;Grammar Mixins&quot;">Grammar Mixins</a>.
+A list of all default terminals like <em>WS</em> can be found in section <a href="020-grammar-language.html#3" title="Go to &quot;Grammar Mixins&quot;">Grammar Mixins</a>.
 </p>
 <a name="1-5"></a>
 <h3>Data Type Rules</h3>
@@ -1183,11 +1183,11 @@ QualifiedName&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EString&nbsp
 </div>
 </p>
 <p>
-Note that rules that do not call other parser rules and do neither contain any actions nor <a href="020-grammar-language.html#1-3-0-0" title="go to &quot;Assignments&quot;">assignments</a>, are
+Note that rules that do not call other parser rules and do neither contain any actions nor <a href="020-grammar-language.html#1-3-0-0" title="Go to &quot;Assignments&quot;">assignments</a>, are
  considered to be data type rules and the data type <em>EString</em> is implied if none has been explicitly declared.
 </p>
 <p>
-<a href="050-heading-runtime.html#6" title="go to &quot;Value Converter&quot;">Value converters</a> are used to transform the parsed string to the actually returned
+<a href="050-heading-runtime.html#6" title="Go to &quot;Value Converter&quot;">Value converters</a> are used to transform the parsed string to the actually returned
 data type value.
 </p>
 <a name="1-6"></a>
@@ -1257,7 +1257,7 @@ an enum literal with an empty textual representation.
 </div>
 </p>
 <p>
-You can overcome this by modifying the infered Ecore model through a <a href="020-grammar-language.html#2-4" title="go to &quot;Customized Post Processing&quot;">model to model transformation</a>.
+You can overcome this by modifying the infered Ecore model through a <a href="020-grammar-language.html#2-4" title="Go to &quot;Customized Post Processing&quot;">model to model transformation</a>.
 However, instead of post processing, an explicitly imported metamodel is recommend.
 </p>
 <a name="1-7"></a>
