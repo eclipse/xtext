@@ -278,19 +278,15 @@
 			</topic>
 		</topic>
 		<topic href="contents/120-heading-UI.html#1" label="Content Assist" >
-			<topic href="contents/120-heading-UI.html#1-0" label="ProposalProvider" >
-			</topic>
-			<topic href="contents/120-heading-UI.html#1-1" label="Sample Implementation" >
-			</topic>
 		</topic>
 		<topic href="contents/120-heading-UI.html#2" label="Quick Fixes" >
 			<topic href="contents/120-heading-UI.html#2-0" label="Quickfixes for Linking Errors and Syntax Errors" >
 			</topic>
 		</topic>
 		<topic href="contents/120-heading-UI.html#3" label="Template Proposals" >
-			<topic href="contents/120-heading-UI.html#3-0" label="CrossReference TemplateVariableResolver" >
+			<topic href="contents/120-heading-UI.html#3-0" label="Cross Reference Template Variable Resolver" >
 			</topic>
-			<topic href="contents/120-heading-UI.html#3-1" label="Enumeration TemplateVariableResolver" >
+			<topic href="contents/120-heading-UI.html#3-1" label="Enumeration Template Variable Resolver" >
 			</topic>
 		</topic>
 		<topic href="contents/120-heading-UI.html#4" label="Outline View" >

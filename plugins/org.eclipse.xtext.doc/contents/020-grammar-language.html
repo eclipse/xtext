@@ -65,7 +65,7 @@ could look like this:
 <span class="keyword">state</span>&nbsp;unlockedPanel</br>
 &nbsp;&nbsp;<span class="keyword">actions</span>&nbsp;{unlockPanel&nbsp;lockDoor}</br>
 &nbsp;&nbsp;panelClosed&nbsp;=&gt;&nbsp;idle</br>
-<span class="keyword">end</span>
+<span class="keyword">end</span></br>
 </p>
 </div>
 </div>
@@ -113,7 +113,7 @@ State&nbsp;:</br>
 &nbsp;&nbsp;<span class="string">&apos;end&apos;</span>;</br>
 &nbsp;</br>
 Transition&nbsp;:</br>
-&nbsp;&nbsp;event=[Event]&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;state=[State];
+&nbsp;&nbsp;event=[Event]&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;state=[State];</br>
 </p>
 </div>
 </div>
@@ -215,7 +215,7 @@ An import statement referring to an Ecore file by a <em>platform:/resource/</em>
 <p>
 If you want to mix generated and imported Ecore models you&apos;ll have to configure the generator fragment 
 in your MWE file responsible for generating the Ecore classes 
-(<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" >EcoreGeneratorFragment</abbr></a>) 
+(<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" >EcoreGeneratorFragment</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/ecore/EcoreGeneratorFragment.java" >src</a>)) 
 with resource URIs that point to the <a href="210-emf-integration.html#1">generator models</a>
  of the referenced Ecore models.
 </p>
@@ -234,7 +234,7 @@ Example:
 fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&nbsp;{</br>
 &nbsp;&nbsp;referencedGenModels&nbsp;=</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"platform:/resource/my.project/model/SecretCompartments.genmodel"</span></br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -264,7 +264,7 @@ As with platform resource URIs you&apos;ll also have to tell the generator where
 fragment&nbsp;=&nbsp;org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment&nbsp;{</br>
 &nbsp;&nbsp;referencedGenModels&nbsp;=</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"classpath:/model/JvmTypes.genmodel"</span></br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -294,7 +294,7 @@ If you want to use multiple <em>EPackages</em> you need to specify aliases in th
 <div class="incode">
 <p class="code">
 <span class="keyword">generate</span>&nbsp;secrets&nbsp;<span class="string">&apos;http://www.eclipse.org/secretcompartment&apos;</span></br>
-<span class="keyword">import</span>&nbsp;<span class="string">&apos;http://www.eclipse.org/anotherPackage&apos;</span>&nbsp;<span class="keyword">as</span>&nbsp;another
+<span class="keyword">import</span>&nbsp;<span class="string">&apos;http://www.eclipse.org/anotherPackage&apos;</span>&nbsp;<span class="keyword">as</span>&nbsp;another</br>
 </p>
 </div>
 </div>
@@ -356,7 +356,7 @@ Therein the <em>ID</em> rule is defined as follows:
 <div class="incode">
 <p class="code">
 <span class="keyword">terminal</span>&nbsp;ID&nbsp;:&nbsp;</br>
-&nbsp;&nbsp;(<span class="string">&apos;^&apos;</span>)?(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>)&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>|<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)*;
+&nbsp;&nbsp;(<span class="string">&apos;^&apos;</span>)?(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>)&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>|<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)*;&nbsp;</br>
 </p>
 </div>
 </div>
@@ -380,7 +380,7 @@ This is the simplified formal definition of terminal rules:
 TerminalRule&nbsp;:</br>
 &nbsp;&nbsp;<span class="string">&apos;terminal&apos;</span>&nbsp;name=ID&nbsp;(<span class="string">&apos;returns&apos;</span>&nbsp;type=TypeRef)?&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;alternatives=TerminalAlternatives&nbsp;<span class="string">&apos;;&apos;</span></br>
-;
+;</br>
 </p>
 </div>
 </div>
@@ -408,7 +408,7 @@ However, if you want to provide a different type you can specify it. For instanc
 <div class="incode">
 <p class="code">
 <span class="keyword">terminal</span>&nbsp;INT&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EInt&nbsp;:&nbsp;</br>
-&nbsp;&nbsp;(<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)+;
+&nbsp;&nbsp;(<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)+;</br>
 </p>
 </div>
 </div>
@@ -417,7 +417,7 @@ However, if you want to provide a different type you can specify it. For instanc
 This means that the terminal rule <em>INT</em> returns instances of <em>ecore::EInt</em>. It is possible to define any 
 kind of data type here, which just needs to be an instance of <em>ecore::EDataType</em>. In order to tell the framework 
 how to convert the parsed string to a value of the declared data type, you need to provide your own 
-implementation of <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/conversion/IValueConverterService.html" ><abbr title="org.eclipse.xtext.conversion.IValueConverterService" >IValueConverterService</abbr></a> (cf. 
+implementation of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/conversion/IValueConverterService.html" ><abbr title="org.eclipse.xtext.conversion.IValueConverterService" >IValueConverterService</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/conversion/IValueConverterService.java" >src</a>) (cf. 
 <a href="050-heading-runtime.html#6">value converters</a>
 ). The value converter is also the service that allows to remove escape
 sequences or semantically unnecessary character like quotes from string literals or the caret (&apos;^&apos;) from identifiers.
@@ -565,11 +565,11 @@ to extract repeating parts of a definition:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">terminal</span>&nbsp;<span class="keyword">fragment</span>&nbsp;ESCAPED_CHAR&nbsp;:&nbsp;<span class="string">&apos;\&apos;&nbsp;(&apos;</span>n<span class="string">&apos;|&apos;</span>t<span class="string">&apos;|&apos;</span>r<span class="string">&apos;|&apos;</span>\<span class="string">&apos;);</br>
-terminal&nbsp;STRING&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">"&apos;&nbsp;(&nbsp;ESCAPED_CHAR&nbsp;|&nbsp;!(&apos;\&apos;|&apos;"</span><span class="string">&apos;)&nbsp;)*&nbsp;&apos;</span><span class="string">"&apos;&nbsp;|</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"</span><span class="string">&apos;"&nbsp;(&nbsp;ESCAPED_CHAR&nbsp;|&nbsp;!(&apos;</span>\<span class="string">&apos;|"&apos;</span><span class="string">")&nbsp;)*&nbsp;"</span><span class="string">&apos;"</br>
-;</span>
+<span class="keyword">terminal</span>&nbsp;<span class="keyword">fragment</span>&nbsp;ESCAPED_CHAR&nbsp;:&nbsp;<span class="string">&apos;\\&apos;</span>&nbsp;(<span class="string">&apos;n&apos;</span>|<span class="string">&apos;t&apos;</span>|<span class="string">&apos;r&apos;</span>|<span class="string">&apos;\\&apos;</span>);</br>
+<span class="keyword">terminal</span>&nbsp;STRING&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;"&apos;</span>&nbsp;(&nbsp;ESCAPED_CHAR&nbsp;|&nbsp;!(<span class="string">&apos;\\&apos;</span>|<span class="string">&apos;"&apos;</span>)&nbsp;)*&nbsp;<span class="string">&apos;"&apos;</span>&nbsp;|</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"&apos;"</span>&nbsp;(&nbsp;ESCAPED_CHAR&nbsp;|&nbsp;!(<span class="string">&apos;\\&apos;</span>|<span class="string">"&apos;"</span>)&nbsp;)*&nbsp;<span class="string">"&apos;"</span></br>
+;</br>
 </p>
 </div>
 </div>
@@ -649,7 +649,7 @@ State&nbsp;:</br>
 &nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;actions&apos;</span>&nbsp;<span class="string">&apos;{&apos;</span>&nbsp;(actions+=[Command])+&nbsp;<span class="string">&apos;}&apos;</span>)?</br>
 &nbsp;&nbsp;&nbsp;&nbsp;(transitions+=Transition)*</br>
 &nbsp;&nbsp;<span class="string">&apos;end&apos;</span></br>
-;
+;</br>
 </p>
 </div>
 </div>
@@ -704,7 +704,7 @@ The syntax for crosslinks is:
 <p class="code">
 CrossReference&nbsp;:</br>
 &nbsp;&nbsp;<span class="string">&apos;[&apos;</span>&nbsp;type=TypeRef&nbsp;(<span class="string">&apos;|&apos;</span>&nbsp;^terminal=CrossReferenceableTerminal&nbsp;)?&nbsp;<span class="string">&apos;]&apos;</span></br>
-;
+;</br>
 </p>
 </div>
 </div>
@@ -718,7 +718,7 @@ For example, the transition is made up of two cross-references, pointing to an e
 <p class="code">
 Transition&nbsp;:</br>
 &nbsp;&nbsp;event=[Event]&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;state=[State]</br>
-;
+;</br>
 </p>
 </div>
 </div>
@@ -738,7 +738,7 @@ Transition&nbsp;:</br>
 &nbsp;&nbsp;event=[MyEvent]&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;state=[State]</br>
 ;</br>
 &nbsp;</br>
-Event&nbsp;<span class="keyword">returns</span>&nbsp;MyEvent&nbsp;:&nbsp;....;
+Event&nbsp;<span class="keyword">returns</span>&nbsp;MyEvent&nbsp;:&nbsp;....;</br>
 </p>
 </div>
 </div>
@@ -768,7 +768,7 @@ Modifier:&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;static?=<span class="string">&apos;static&apos;</span>?&nbsp;&amp;&nbsp;final?=<span class="string">&apos;final&apos;</span>?&nbsp;&amp;&nbsp;visibility=Visibility;</br>
 </br>
 <span class="keyword">enum</span>&nbsp;Visibility:</br>
-&nbsp;&nbsp;&nbsp;&nbsp;PUBLIC=<span class="string">&apos;public&apos;</span>&nbsp;|&nbsp;PRIVATE=<span class="string">&apos;private&apos;</span>&nbsp;|&nbsp;PROTECTED=<span class="string">&apos;protected&apos;</span>;
+&nbsp;&nbsp;&nbsp;&nbsp;PUBLIC=<span class="string">&apos;public&apos;</span>&nbsp;|&nbsp;PRIVATE=<span class="string">&apos;private&apos;</span>&nbsp;|&nbsp;PROTECTED=<span class="string">&apos;protected&apos;</span>;</br>
 </p>
 </div>
 </div>
@@ -783,7 +783,7 @@ Therefore, the following sequences of tokens are valid:
 <span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span></br>
 <span class="keyword">static</span>&nbsp;<span class="keyword">protected</span>&nbsp;</br>
 <span class="keyword">final</span>&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">static</span></br>
-<span class="keyword">public</span>
+<span class="keyword">public</span></br>
 </p>
 </div>
 </div>
@@ -798,7 +798,8 @@ this input lines:
 <p class="code">
 <span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="comment">//&nbsp;ERROR:&nbsp;static&nbsp;appears&nbsp;twice</br>
 </span><span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;<span class="keyword">private</span>&nbsp;<span class="comment">//&nbsp;ERROR:&nbsp;visibility&nbsp;appears&nbsp;twice</br>
-</span><span class="keyword">final</span>&nbsp;<span class="comment">//&nbsp;ERROR:&nbsp;visibility&nbsp;is&nbsp;missing</span>
+</span><span class="keyword">final</span>&nbsp;<span class="comment">//&nbsp;ERROR:&nbsp;visibility&nbsp;is&nbsp;missing</br>
+</span>
 </p>
 </div>
 </div>
@@ -814,7 +815,7 @@ have to appear continuously without interruption, i.e.
 <div class="incode">
 <p class="code">
 Rule:</br>
-&nbsp;&nbsp;&nbsp;&nbsp;values+=INT*&nbsp;&amp;&nbsp;name=ID;
+&nbsp;&nbsp;&nbsp;&nbsp;values+=INT*&nbsp;&amp;&nbsp;name=ID;</br>
 </p>
 </div>
 </div>
@@ -827,7 +828,7 @@ will parse these lines
 <div class="incode">
 <p class="code">
 0&nbsp;8&nbsp;15&nbsp;x</br>
-x&nbsp;0&nbsp;8&nbsp;15
+x&nbsp;0&nbsp;8&nbsp;15&nbsp;</br>
 </p>
 </div>
 </div>
@@ -839,7 +840,8 @@ but not does not consume the following sequence without raising an error
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-0&nbsp;x&nbsp;8&nbsp;15&nbsp;<span class="comment">//&nbsp;wrong,&nbsp;as&nbsp;values&nbsp;may&nbsp;be&nbsp;interrupted&nbsp;by&nbsp;a&nbsp;name&nbsp;(ID)</span>
+0&nbsp;x&nbsp;8&nbsp;15&nbsp;<span class="comment">//&nbsp;wrong,&nbsp;as&nbsp;values&nbsp;may&nbsp;be&nbsp;interrupted&nbsp;by&nbsp;a&nbsp;name&nbsp;(ID)</br>
+</span>
 </p>
 </div>
 </div>
@@ -883,7 +885,7 @@ MyRule&nbsp;<span class="keyword">returns</span>&nbsp;TypeA&nbsp;:</br>
 &nbsp;</br>
 MyOtherRule&nbsp;<span class="keyword">returns</span>&nbsp;TypeB&nbsp;:</br>
 &nbsp;&nbsp;<span class="string">"B"</span>&nbsp;name&nbsp;=&nbsp;ID</br>
-;
+;</br>
 </p>
 </div>
 </div>
@@ -898,7 +900,7 @@ Actions however allow to make this explicit. Thereby they can improve the readab
 MyRule&nbsp;<span class="keyword">returns</span>&nbsp;TypeA&nbsp;:</br>
 &nbsp;&nbsp;<span class="string">"A"</span>&nbsp;name=ID&nbsp;|</br>
 &nbsp;&nbsp;<span class="string">"B"</span>&nbsp;{TypeB}&nbsp;name=ID</br>
-;
+;&nbsp;</br>
 </p>
 </div>
 </div>
@@ -937,7 +939,7 @@ AbstractToken&nbsp;:</br>
 &nbsp;&nbsp;TokenA&nbsp;|</br>
 &nbsp;&nbsp;TokenB&nbsp;|</br>
 &nbsp;&nbsp;TokenC</br>
-;
+;</br>
 </p>
 </div>
 </div>
@@ -959,7 +961,7 @@ AbstractToken&nbsp;:</br>
 &nbsp;&nbsp;(&nbsp;TokenA&nbsp;|</br>
 &nbsp;&nbsp;&nbsp;&nbsp;TokenB&nbsp;|</br>
 &nbsp;&nbsp;&nbsp;&nbsp;TokenC&nbsp;)&nbsp;(cardinality=(<span class="string">&apos;?&apos;</span>|<span class="string">&apos;+&apos;</span>|<span class="string">&apos;*&apos;</span>))?</br>
-;
+;</br>
 </p>
 </div>
 </div>
@@ -988,7 +990,7 @@ Expression&nbsp;:</br>
 &nbsp;&nbsp;Expression&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;Expression&nbsp;|</br>
 &nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Expression&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;|</br>
 &nbsp;&nbsp;INT</br>
-;
+;</br>
 </p>
 </div>
 </div>
@@ -1007,7 +1009,7 @@ Expression&nbsp;:</br>
 TerminalExpression&nbsp;:</br>
 &nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Expression&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;|</br>
 &nbsp;&nbsp;INT</br>
-;
+;</br>
 </p>
 </div>
 </div>
@@ -1027,7 +1029,7 @@ Expression&nbsp;:</br>
 TerminalExpression&nbsp;<span class="keyword">returns</span>&nbsp;Expression:</br>
 &nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Expression&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;|</br>
 &nbsp;&nbsp;{IntLiteral}&nbsp;value=INT</br>
-;
+;</br>
 </p>
 </div>
 </div>
@@ -1046,7 +1048,7 @@ Operation&nbsp;{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value=42</br>
 &nbsp;&nbsp;&nbsp;&nbsp;}</br>
 &nbsp;&nbsp;}</br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -1069,7 +1071,7 @@ Expression&nbsp;:</br>
 TerminalExpression&nbsp;<span class="keyword">returns</span>&nbsp;Expression:</br>
 &nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Expression&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;|</br>
 &nbsp;&nbsp;{IntLiteral}&nbsp;value=INT</br>
-;
+;</br>
 </p>
 </div>
 </div>
@@ -1086,7 +1088,7 @@ In Java these semantics could be expressed as:
 <p class="code">
 Operation&nbsp;temp&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Operation();</br>
 temp.setLeft(current);</br>
-current&nbsp;=&nbsp;temp;
+current&nbsp;=&nbsp;temp;</br>
 </p>
 </div>
 </div>
@@ -1120,7 +1122,7 @@ Person&nbsp;<span class="keyword">hidden</span>(WS,&nbsp;ML_COMMENT,&nbsp;SL_COM
 </br>
 Fullname:&nbsp;</br>
 &nbsp;&nbsp;(firstname=ID)?&nbsp;lastname=ID</br>
-;
+;</br>
 </p>
 </div>
 </div>
@@ -1136,7 +1138,8 @@ The sample rule "Person" defines multiline comments (<em>ML_COMMENT</em>), singl
 <p class="code">
 John&nbsp;<span class="comment">/*&nbsp;comment&nbsp;*/</span>&nbsp;Smith&nbsp;<span class="comment">//&nbsp;line&nbsp;comment</br>
 </span><span class="comment">/*&nbsp;comment&nbsp;*/</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;42&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;<span class="comment">//&nbsp;line&nbsp;comment</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;42&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;<span class="comment">//&nbsp;line&nbsp;comment</br>
+</span>
 </p>
 </div>
 </div>
@@ -1172,7 +1175,7 @@ you could write:
 <p class="code">
 QualifiedName&nbsp;:</br>
 &nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*</br>
-;
+;</br>
 </p>
 </div>
 </div>
@@ -1194,7 +1197,7 @@ Return types can be specified in the same way as for terminal rules:
 <p class="code">
 QualifiedName&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EString&nbsp;:&nbsp;</br>
 &nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*</br>
-;
+;</br>
 </p>
 </div>
 </div>
@@ -1225,7 +1228,7 @@ If you want to define a <em>ChangeKind</em> <a href="http://help.eclipse.org/sta
 <p class="code">
 <span class="keyword">enum</span>&nbsp;ChangeKind&nbsp;:</br>
 &nbsp;&nbsp;ADD&nbsp;|&nbsp;MOVE&nbsp;|&nbsp;REMOVE</br>
-;
+;</br>
 </p>
 </div>
 </div>
@@ -1241,7 +1244,7 @@ It is even possible to use alternative literals for your enums or reference an e
 &nbsp;&nbsp;ADD&nbsp;=&nbsp;<span class="string">&apos;add&apos;</span>&nbsp;|&nbsp;ADD&nbsp;=&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;|&nbsp;</br>
 &nbsp;&nbsp;MOVE&nbsp;=&nbsp;<span class="string">&apos;move&apos;</span>&nbsp;|&nbsp;MOVE&nbsp;=&nbsp;<span class="string">&apos;-&gt;&apos;</span>&nbsp;|&nbsp;</br>
 &nbsp;&nbsp;REMOVE&nbsp;=&nbsp;<span class="string">&apos;remove&apos;</span>&nbsp;|&nbsp;REMOVE&nbsp;=&nbsp;<span class="string">&apos;-&apos;</span></br>
-;
+;</br>
 </p>
 </div>
 </div>
@@ -1270,7 +1273,7 @@ an enum literal with an empty textual representation.
 <p class="code">
 <span class="keyword">enum</span>&nbsp;Visibility:&nbsp;</br>
 &nbsp;&nbsp;package&nbsp;|&nbsp;private&nbsp;|&nbsp;protected&nbsp;|&nbsp;public</br>
-;
+;</br>
 </p>
 </div>
 </div>
@@ -1314,7 +1317,7 @@ a programming language usually looks like this:
 <span class="keyword">if</span>&nbsp;(isTrue())&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;doStuff();&nbsp;</br>
 <span class="keyword">else</span>&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;dontDoStuff();
+&nbsp;&nbsp;&nbsp;&nbsp;dontDoStuff();&nbsp;</br>
 </p>
 </div>
 </div>
@@ -1330,7 +1333,7 @@ The problems becomes more obvious as soon as nested conditions are used:
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(isTrueAsWell())&nbsp;&nbsp;&nbsp;&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;doStuff();&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span>&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dontDoStuff();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dontDoStuff();&nbsp;</br>
 </p>
 </div>
 </div>
@@ -1348,7 +1351,7 @@ predicates which are expressed by a leading <span class="inlinecode">=&gt;</span
 Condition:&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;if&apos;</span>&nbsp;condition=Expression&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;then&apos;</span>&nbsp;then=Expression&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(=&gt;<span class="string">&apos;else&apos;</span>&nbsp;else=Expression)?
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(=&gt;<span class="string">&apos;else&apos;</span>&nbsp;else=Expression)?</br>
 </p>
 </div>
 </div>
@@ -1478,7 +1481,7 @@ Furthermore, each type that is added to the currently possible return types auto
 <div class="incode">
 <p class="code">
 CommonSuperType:</br>
-&nbsp;&nbsp;SubTypeA&nbsp;|&nbsp;SubTypeB&nbsp;|&nbsp;SubTypeC;
+&nbsp;&nbsp;SubTypeA&nbsp;|&nbsp;SubTypeB&nbsp;|&nbsp;SubTypeC;</br>
 </p>
 </div>
 </div>
@@ -1495,7 +1498,7 @@ it is omitted, an enum literal with equal <em>name</em> and <em>literal</em> att
 <div class="incode">
 <p class="code">
 <span class="keyword">enum</span>&nbsp;MyGeneratedEnum:</br>
-&nbsp;&nbsp;NAME&nbsp;=&nbsp;<span class="string">&apos;literal&apos;</span>&nbsp;|&nbsp;EQUAL_NAME_AND_LITERAL;
+&nbsp;&nbsp;NAME&nbsp;=&nbsp;<span class="string">&apos;literal&apos;</span>&nbsp;|&nbsp;EQUAL_NAME_AND_LITERAL;</br>
 </p>
 </div>
 </div>
@@ -1524,7 +1527,7 @@ process(xtext::GeneratedMetamodel&nbsp;<span class="keyword">this</span>)&nbsp;:
 &nbsp;</br>
 process(ecore::EPackage&nbsp;<span class="keyword">this</span>)&nbsp;:</br>
 &nbsp;&nbsp;...&nbsp;do&nbsp;something</br>
-;
+;</br>
 </p>
 </div>
 </div>
@@ -1594,7 +1597,7 @@ Xtext supports the reuse of existing grammars. Grammars that are created via the
 </br>
 <span class="keyword">generate</span>&nbsp;secrets&nbsp;<span class="string">"http://www.eclipse.org/secretcompartment"</span></br>
 &nbsp;</br>
-Statemachine:&nbsp;..
+Statemachine:&nbsp;..</br>
 </p>
 </div>
 </div>
@@ -1619,7 +1622,7 @@ RuleB&nbsp;:&nbsp;<span class="string">"{"</span>&nbsp;name=ID&nbsp;<span class=
 Model&nbsp;:&nbsp;(ruleAs+=RuleA)*;</br>
 </br>
 <span class="comment">//&nbsp;overrides&nbsp;my.SuperGrammar.RuleB</br>
-</span>RuleB&nbsp;:&nbsp;<span class="string">&apos;[&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;]&apos;</span>;
+</span>RuleB&nbsp;:&nbsp;<span class="string">&apos;[&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;]&apos;</span>;</br>
 </p>
 </div>
 </div>
@@ -1637,7 +1640,7 @@ for these common terminal rules is defined as follows:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;org.eclipse.xtext.common.Terminals&nbsp;</br>
+&nbsp;<span class="keyword">grammar</span>&nbsp;org.eclipse.xtext.common.Terminals&nbsp;</br>
 &nbsp;<span class="keyword">hidden</span>(WS,&nbsp;ML_COMMENT,&nbsp;SL_COMMENT)</br>
 <span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/emf/2002/Ecore"</span>&nbsp;<span class="keyword">as</span>&nbsp;ecore</br>
 <span class="keyword">terminal</span>&nbsp;ID&nbsp;:&nbsp;</br>
@@ -1645,16 +1648,16 @@ for these common terminal rules is defined as follows:
 <span class="keyword">terminal</span>&nbsp;INT&nbsp;<span class="keyword">returns</span>&nbsp;ecore::EInt:&nbsp;</br>
 &nbsp;(<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)+;</br>
 <span class="keyword">terminal</span>&nbsp;STRING&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;</br>
-&nbsp;<span class="string">&apos;"&apos;</span>&nbsp;(&nbsp;<span class="string">&apos;\&apos;(&apos;</span>b<span class="string">&apos;|&apos;</span>t<span class="string">&apos;|&apos;</span>n<span class="string">&apos;|&apos;</span>f<span class="string">&apos;|&apos;</span>r<span class="string">&apos;|&apos;</span>u<span class="string">&apos;|&apos;</span><span class="string">"&apos;|"</span><span class="string">&apos;"|&apos;</span>\<span class="string">&apos;)&nbsp;|&nbsp;!(&apos;</span>\<span class="string">&apos;|&apos;</span><span class="string">"&apos;)&nbsp;)*&nbsp;&apos;"</span><span class="string">&apos;&nbsp;|</br>
-&nbsp;"&apos;</span><span class="string">"&nbsp;(&nbsp;&apos;\&apos;(&apos;b&apos;|&apos;t&apos;|&apos;n&apos;|&apos;f&apos;|&apos;r&apos;|&apos;u&apos;|&apos;"</span><span class="string">&apos;|"&apos;</span><span class="string">"|&apos;\&apos;)&nbsp;|&nbsp;!(&apos;\&apos;|"</span><span class="string">&apos;")&nbsp;)*&nbsp;"&apos;</span>";&nbsp;</br>
-terminal&nbsp;ML_COMMENT&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;</br>
-&nbsp;&apos;/*&apos;&nbsp;-&gt;&nbsp;&apos;*/&apos;;</br>
-terminal&nbsp;SL_COMMENT&nbsp;:&nbsp;</br>
-&nbsp;&apos;//&apos;&nbsp;!(&apos;\n&apos;|&apos;\r&apos;)*&nbsp;(&apos;\r&apos;?&nbsp;&apos;\n&apos;)?;</br>
-terminal&nbsp;WS&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;</br>
-&nbsp;(&apos;&nbsp;&apos;|&apos;\t&apos;|&apos;\r&apos;|&apos;\n&apos;)+;</br>
-terminal&nbsp;ANY_OTHER:&nbsp;</br>
-&nbsp;.;
+&nbsp;<span class="string">&apos;"&apos;</span>&nbsp;(&nbsp;<span class="string">&apos;\\&apos;</span>(<span class="string">&apos;b&apos;</span>|<span class="string">&apos;t&apos;</span>|<span class="string">&apos;n&apos;</span>|<span class="string">&apos;f&apos;</span>|<span class="string">&apos;r&apos;</span>|<span class="string">&apos;u&apos;</span>|<span class="string">&apos;"&apos;</span>|<span class="string">"&apos;"</span>|<span class="string">&apos;\\&apos;</span>)&nbsp;|&nbsp;!(<span class="string">&apos;\\&apos;</span>|<span class="string">&apos;"&apos;</span>)&nbsp;)*&nbsp;<span class="string">&apos;"&apos;</span>&nbsp;|</br>
+&nbsp;<span class="string">"&apos;"</span>&nbsp;(&nbsp;<span class="string">&apos;\\&apos;</span>(<span class="string">&apos;b&apos;</span>|<span class="string">&apos;t&apos;</span>|<span class="string">&apos;n&apos;</span>|<span class="string">&apos;f&apos;</span>|<span class="string">&apos;r&apos;</span>|<span class="string">&apos;u&apos;</span>|<span class="string">&apos;"&apos;</span>|<span class="string">"&apos;"</span>|<span class="string">&apos;\\&apos;</span>)&nbsp;|&nbsp;!(<span class="string">&apos;\\&apos;</span>|<span class="string">"&apos;"</span>)&nbsp;)*&nbsp;<span class="string">"&apos;"</span>;&nbsp;</br>
+<span class="keyword">terminal</span>&nbsp;ML_COMMENT&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;</br>
+&nbsp;<span class="string">&apos;/*&apos;</span>&nbsp;-&gt;&nbsp;<span class="string">&apos;*/&apos;</span>;</br>
+<span class="keyword">terminal</span>&nbsp;SL_COMMENT&nbsp;:&nbsp;</br>
+&nbsp;<span class="string">&apos;//&apos;</span>&nbsp;!(<span class="string">&apos;\n&apos;</span>|<span class="string">&apos;\r&apos;</span>)*&nbsp;(<span class="string">&apos;\r&apos;</span>?&nbsp;<span class="string">&apos;\n&apos;</span>)?;</br>
+<span class="keyword">terminal</span>&nbsp;WS&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;</br>
+&nbsp;(<span class="string">&apos;&nbsp;&apos;</span>|<span class="string">&apos;\t&apos;</span>|<span class="string">&apos;\r&apos;</span>|<span class="string">&apos;\n&apos;</span>)+;</br>
+<span class="keyword">terminal</span>&nbsp;ANY_OTHER:&nbsp;</br>
+&nbsp;.;</br>
 </p>
 </div>
 </div>

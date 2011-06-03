@@ -19,18 +19,18 @@ DONE SZ 100-serialization.xdoc
 DONE SZ 105-formatting.xdoc
 DONE SZ 110-fragmentprovider.xdoc
 DONE SZ 115-encoding.xdoc
-SZ 118-mwe-in-depth.xdoc
-SZ 120-heading-UI.xdoc
+DONE SZ 118-mwe-in-depth.xdoc
+DONE SZ 120-heading-UI.xdoc
 # 130-managing-concurrency.xdoc <- is empty
-SZ 140-labelprovider.xdoc
-SZ 150-contentassist.xdoc
+DONE SZ 140-labelprovider.xdoc
+DONE SZ 150-contentassist.xdoc
 DONE JK 155-quickfix.xdoc
-160-templates.xdoc
+DONE SZ 160-templates.xdoc
 DONE JK 170-outline.xdoc
-180-hyperlinking.xdoc
-195-highlighting.xdoc
-198-wizards.xdoc
-199-jvmtypes.xdoc
+SZ 180-hyperlinking.xdoc
+SZ 195-highlighting.xdoc
+SZ 198-wizards.xdoc
+SZ 199-jvmtypes.xdoc
 200-Appendix.xdoc
 205-typical-language-configs.xdoc
 206-expressions-in-xtext.xdoc

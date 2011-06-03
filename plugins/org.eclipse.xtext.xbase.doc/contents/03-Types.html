@@ -38,7 +38,7 @@ A simple type reference only consists of a <em>qualified name</em>. A qualified 
 <p class="code">
 QualifiedName:</br>
 &nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*</br>
-;
+;&nbsp;&nbsp;&nbsp;&nbsp;</br>
 </p>
 </div>
 </div>
@@ -82,7 +82,7 @@ For more information on closures see <a href="04-Expressions.html#5">section Xba
 <p class="code">
 XFunctionTypeRef:</br>
 &nbsp;&nbsp;(<span class="string">&apos;(&apos;</span>JvmTypeReference&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmTypeReference)*<span class="string">&apos;)&apos;</span>)?&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;JvmTypeReference;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;JvmTypeReference;</br>
 </p>
 </div>
 </div>
@@ -146,7 +146,8 @@ JvmLowerBound&nbsp;:</br>
 &nbsp;<span class="string">&apos;super&apos;</span>&nbsp;JvmTypeReference;</br>
 </br>
 JvmUpperBound&nbsp;:&nbsp;</br>
-&nbsp;<span class="string">&apos;extends&apos;</span>&nbsp;JvmTypeReference;
+&nbsp;<span class="string">&apos;extends&apos;</span>&nbsp;JvmTypeReference;</br>
+</br>
 </p>
 </div>
 </div>

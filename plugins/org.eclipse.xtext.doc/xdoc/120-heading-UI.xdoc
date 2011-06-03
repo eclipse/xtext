@@ -1,31 +1,7 @@
 chapter:ide_concepts[IDE Concepts]
 
-For the following part we will refer to a concrete example grammar in order to explain certain aspect 
-of the UI more clearly. The used example grammar is as follows:
-
-code[Xtext][grammar org.eclipse.text.documentation.Sample 
-    with org.eclipse.xtext.common.Terminals
-
-generate sample 'http://www.eclipse.org/xtext/documentation/Sample'
-
-Model :
-  "model" intAttribute=INT (stringDescription=STRING)? "{" 
-     (rules += AbstractRule)* 
-  "}" 
-;
-
-AbstractRule:
-  RuleA | RuleB
-;
-
-RuleA :
-   "RuleA" "(" name = ID ")" ;
-
-RuleB return sample::CustomType:
-   "RuleB" "(" ruleA = \[RuleA\] ")" ;
-]
-
-
+For the following part we will refer to the ref:statemachine[state machine example] to describe the different
+aspects of Xtext's UI features.
 
 section-ref[labelProvider]
 

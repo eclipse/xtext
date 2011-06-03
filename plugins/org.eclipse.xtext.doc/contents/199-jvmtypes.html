@@ -35,7 +35,7 @@ Thanks to content assist this is easy to spot in the list of proposals.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/common/JavaVMTypes"</span>&nbsp;<span class="keyword">as</span>&nbsp;types
+<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/common/JavaVMTypes"</span>&nbsp;<span class="keyword">as</span>&nbsp;types</br>
 </p>
 </div>
 </div>
@@ -50,13 +50,13 @@ as one got already used to when dealing with references in Xtext.
 <div class="incode">
 <p class="code">
 Type:</br>
-&nbsp;&nbsp;<span class="string">&apos;type&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;mapped-to&apos;</span>&nbsp;javaType=[types::JvmType|FQN];
+&nbsp;&nbsp;<span class="string">&apos;type&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;mapped-to&apos;</span>&nbsp;javaType=[types::JvmType|FQN];</br>
 </p>
 </div>
 </div>
 </p>
 <p>
-Last but not least, the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/types/TypesGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.types.TypesGeneratorFragment" >TypesGeneratorFragment</abbr></a> 
+Last but not least, the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/types/TypesGeneratorFragment.html" ><abbr title="org.eclipse.xtext.generator.types.TypesGeneratorFragment" >TypesGeneratorFragment</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/types/TypesGeneratorFragment.java" >src</a>) 
 has to be added to the workflow. The safest way is 
 to add it after the actually used scoping fragments as a specialized version of the <em>IGlobalScopeProvider</em> 
 will be configured. Don&apos;t forget to refer to the <em>genmodel</em> of the Java VM types. The shortest possible
@@ -74,7 +74,7 @@ fragment&nbsp;=&nbsp;ecore.EcoreGeneratorFragment&nbsp;{</br>
 <span class="comment">//&nbsp;scoping&nbsp;and&nbsp;exporting&nbsp;API&nbsp;</br>
 </span>...</br>
 </br>
-fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}
+fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}</br>
 </p>
 </div>
 </div>
@@ -87,7 +87,7 @@ like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">type</span>&nbsp;Date&nbsp;mapped-to&nbsp;java.util.Date
+<span class="keyword">type</span>&nbsp;Date&nbsp;<span class="keyword">mapped-to</span>&nbsp;java.util.Date</br>
 </p>
 </div>
 </div>
@@ -103,7 +103,7 @@ and content assist will propose the list of available types.
 There are several customization hooks in the runtime layer and on the editor side as well:
 </p>
 <p>
-The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/xtext/AbstractTypeScopeProvider.html" ><abbr title="org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider" >AbstractTypeScopeProvider</abbr></a> 
+The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/xtext/AbstractTypeScopeProvider.html" ><abbr title="org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider" >AbstractTypeScopeProvider</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/xtext/AbstractTypeScopeProvider.java" >src</a>) 
 can be used to create scopes for members with respect to
 the override semantics of the Java language. Of course it is possible to use this implementation to
 create scopes for types as well.
@@ -113,11 +113,11 @@ As the Java VM types expose a lot of information about visibility, parameter- an
 available annotations or enumeration literals, it is very easy to define constraints for the referred types.
 </p>
 <p>
-The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.html" ><abbr title="org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider" >ITypesProposalProvider</abbr></a> can be
+The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.html" ><abbr title="org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider" >ITypesProposalProvider</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.java" >src</a>) can be
 used to provide optimized proposals based on various filter criteria. 
 The most common selector can be used directly via <em>createSubTypeProposals</em>. The implementation is optimized
 and uses the JDT Index directly to minimize the effort for object instantiation. The class 
-<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/xtext/ui/TypeMatchFilters.html" ><abbr title="org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters" >TypeMatchFilters</abbr></a>
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/xtext/ui/TypeMatchFilters.html" ><abbr title="org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters" >TypeMatchFilters</abbr></a> (<a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/TypeMatchFilters.java" >src</a>)
 provides a comprehensive set of reusable filters that can be easily combined to reduce the list of proposals
 to a smaller number of valid entries.
 </p>
@@ -130,7 +130,8 @@ to a smaller number of valid entries.
 ..</br>
 </br>
 &nbsp;&nbsp;proposalProvider.createSubTypeProposals(factory,&nbsp;context,</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and(not(canInstantiate()),&nbsp;isPublic()),&nbsp;acceptor);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and(not(canInstantiate()),&nbsp;isPublic()),&nbsp;acceptor);</br>
+&nbsp;</br>
 </p>
 </div>
 </div>

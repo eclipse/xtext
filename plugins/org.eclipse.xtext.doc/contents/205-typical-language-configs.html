@@ -32,7 +32,7 @@ For case insensitive keywords, open your MWE workflow and replace the Antlr rela
 </br>
 <span class="comment">//&nbsp;generates&nbsp;a&nbsp;more&nbsp;lightweight&nbsp;Antlr&nbsp;parser&nbsp;and&nbsp;lexer&nbsp;tailored&nbsp;...</br>
 </span>fragment&nbsp;=&nbsp;parser.antlr.XtextAntlrUiGeneratorFragment&nbsp;{</br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -57,7 +57,7 @@ with
 &nbsp;&nbsp;&nbsp;&nbsp;options&nbsp;=&nbsp;{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ignoreCase&nbsp;=&nbsp;<span class="keyword">true</span></br>
 &nbsp;&nbsp;&nbsp;&nbsp;}</br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -71,7 +71,7 @@ For case insensitve element names, use the <em>ignoreCase</em> option in your sc
 <p class="code">
 fragment&nbsp;=&nbsp;scoping.ImportNamespacesScopingFragment&nbsp;{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;ignoreCase&nbsp;=&nbsp;<span class="keyword">true</span></br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -85,7 +85,7 @@ or if you are using <a href="050-heading-runtime.html#5-0-1">importURI based glo
 <p class="code">
 fragment&nbsp;=&nbsp;scoping.ImportURIScopingFragment&nbsp;{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;ignoreCase&nbsp;=&nbsp;<span class="keyword">true</span></br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -112,7 +112,7 @@ with support for the <em>&apos;classpath:&apos;</em> URI protocol, i.e.
 @Override</br>
 <span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IResourceSetProvider&gt;&nbsp;bindIResourceSetProvider()&nbsp;{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;SimpleResourceSetProvider.<span class="keyword">class</span>;</br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -129,7 +129,7 @@ Second, configure the global scope provider to scan project root folders instead
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;org.eclipse.xtext.resource.containers.IAllContainersState&gt;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;provideIAllContainersState()&nbsp;{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();</br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -166,7 +166,7 @@ In in this case just remove the JDT stuff in this way:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"org.eclipse.pde.ManifestBuilder"</span>,&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"org.eclipse.pde.SchemaBuilder"</span></br>
 &nbsp;&nbsp;&nbsp;&nbsp;};</br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -181,7 +181,7 @@ After that you have to bind the new <em>IProjectCreator</em>
 @Override</br>
 <span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IProjectCreator&gt;&nbsp;bindIProjectCreator()&nbsp;{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;JDTFreeMyDslProjectCreator.<span class="keyword">class</span>;</br>
-}
+}</br>
 </p>
 </div>
 </div>
@@ -210,7 +210,7 @@ If you know EBNF a bit and wouldn&apos;t think about avoiding left recursion, op
 Expression&nbsp;:</br>
 &nbsp;&nbsp;Expression&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;Expression&nbsp;|</br>
 &nbsp;&nbsp;Expression&nbsp;<span class="string">&apos;*&apos;</span>&nbsp;Expression&nbsp;|</br>
-&nbsp;&nbsp;INT;
+&nbsp;&nbsp;INT;</br>
 </p>
 </div>
 </div>
@@ -235,7 +235,7 @@ Multiplication:</br>
 &nbsp;&nbsp;NumberLiteral&nbsp;(<span class="string">&apos;*&apos;</span>&nbsp;NumberLiteral)*;</br>
 </br>
 NumberLiteral:</br>
-&nbsp;&nbsp;INT;
+&nbsp;&nbsp;INT;</br>
 </p>
 </div>
 </div>
@@ -262,7 +262,7 @@ Primary&nbsp;:</br>
 &nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Addition&nbsp;<span class="string">&apos;)&apos;</span>;</br>
 </br>
 NumberLiteral:</br>
-&nbsp;&nbsp;INT;
+&nbsp;&nbsp;INT;</br>
 </p>
 </div>
 </div>
@@ -285,7 +285,7 @@ That is
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-NumberLiteral&nbsp;:&nbsp;...&nbsp;;
+NumberLiteral&nbsp;:&nbsp;...&nbsp;;</br>
 </p>
 </div>
 </div>
@@ -297,7 +297,7 @@ is a short form of
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-NumberLiteral&nbsp;<span class="keyword">returns</span>&nbsp;NumberLiteral&nbsp;:&nbsp;...&nbsp;;
+NumberLiteral&nbsp;<span class="keyword">returns</span>&nbsp;NumberLiteral&nbsp;:&nbsp;...&nbsp;;</br>
 </p>
 </div>
 </div>
@@ -320,7 +320,7 @@ Primary&nbsp;<span class="keyword">returns</span>&nbsp;Expression:</br>
 &nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Addition&nbsp;<span class="string">&apos;)&apos;</span>;</br>
 &nbsp;&nbsp;</br>
 NumberLiteral:</br>
-&nbsp;&nbsp;INT;
+&nbsp;&nbsp;INT;</br>
 </p>
 </div>
 </div>
@@ -346,7 +346,7 @@ Primary&nbsp;<span class="keyword">returns</span>&nbsp;Expression:</br>
 &nbsp;&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;Addition&nbsp;<span class="string">&apos;)&apos;</span>;</br>
 &nbsp;&nbsp;</br>
 NumberLiteral:</br>
-&nbsp;&nbsp;value=INT;
+&nbsp;&nbsp;value=INT;</br>
 </p>
 </div>
 </div>
@@ -358,7 +358,7 @@ Let&apos;s go through the grammar as the parser would do it for the expression
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-(1&nbsp;+&nbsp;20)&nbsp;*&nbsp;2
+(1&nbsp;+&nbsp;20)&nbsp;*&nbsp;2</br>
 </p>
 </div>
 </div>
@@ -380,7 +380,7 @@ As soon as the parser hits an assignment it checks whether an AST node for the c
 </span><span class="keyword">if</span>&nbsp;(current&nbsp;==&nbsp;<span class="keyword">null</span>)</br>
 &nbsp;current&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;NumberLiteral();</br>
 current.setValue(ruleINT());</br>
-...
+...</br>
 </p>
 </div>
 </div>
@@ -402,7 +402,7 @@ The first element in the group is a so called action. As Xtext grammars are high
 </span>Addition&nbsp;temp&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Addition();</br>
 temp.setLeft(current);</br>
 current&nbsp;=&nbsp;temp;</br>
-...
+...</br>
 </p>
 </div>
 </div>
@@ -443,7 +443,7 @@ We already know the most important form which is left associativity:
 <div class="incode">
 <p class="code">
 Addition&nbsp;returns&nbsp;Expression:</br>
-&nbsp;&nbsp;Multiplication&nbsp;({Addition.left=current}&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;right=Multiplication)*;
+&nbsp;&nbsp;Multiplication&nbsp;({Addition.left=current}&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;right=Multiplication)*;</br>
 </p>
 </div>
 </div>
@@ -455,7 +455,7 @@ Right associativity is done using the following pattern (note the quantity opera
 <div class="incode">
 <p class="code">
 Addition&nbsp;<span class="keyword">returns</span>&nbsp;Expression:</br>
-&nbsp;&nbsp;Multiplication&nbsp;({Addition.left=<span class="keyword">current</span>}&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;right=Addition)?;
+&nbsp;&nbsp;Multiplication&nbsp;({Addition.left=<span class="keyword">current</span>}&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;right=Addition)?;</br>
 </p>
 </div>
 </div>
@@ -468,7 +468,7 @@ And if you don&apos;t want to allow multiple usages of the same expression in a 
 <div class="incode">
 <p class="code">
 Addition&nbsp;<span class="keyword">returns</span>&nbsp;Expression:</br>
-&nbsp;&nbsp;Multiplication&nbsp;({Addition.left=<span class="keyword">current</span>}&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;right=Multiplication)?;
+&nbsp;&nbsp;Multiplication&nbsp;({Addition.left=<span class="keyword">current</span>}&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;right=Multiplication)?;</br>
 </p>
 </div>
 </div>

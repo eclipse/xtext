@@ -11,7 +11,7 @@
 	background-color: #F0F0F0;
 	padding-left: 3pt;
 	padding-right: 3pt;
-	font-family: "Courier New";
+	font-family: "Lucida Console", Monaco, monospace;
 	color: #000000 !important;
 }
 
@@ -49,5 +49,5 @@ P.Code {
 	text-decoration: none;
 	vertical-align: baseline;
 	text-transform: none;
-	font-family: "Courier New";
+	font-family: "Lucida Console", Monaco, monospace;
 }
