@@ -156,7 +156,7 @@ item[The Interface e[IAntlrParser] has been renamed to codeRef[org.eclipse.xtext
 item[In the methods e[error, warning] from the codeRef[org.eclipse.xtext.validation.AbstractDeclarativeValidator] the
 	integer parameter representing the codeRef[org.eclipse.emf.ecore.EStructuralFeature] has been replaced
 	by the feature itself, e.g. from e[error(String message, Integer feature)] to e[error(String message, EStructuralFeature feature)]. 
-	Use the generated codeRef[org.eclipse.emf.ecore.EPackage]e[.Literals] to access the codeRef[org.eclipse.emf.ecore.EStructuralFeature]s.]
+	Use the generated codeRef[org.eclipse.emf.ecore.EPackage]e[.Literals] to access the codeRef[org.eclipse.emf.ecore.EStructuralFeature][EStructuralFeatures].]
 item[The enum e[org.eclipse.xtext.diagnostics.DiagnosticSeverity] has been renamed to codeRef[org.eclipse.xtext.diagnostics.Severity].]
 item[The class e[TextLocation] has been replaced by the interface codeRef[org.eclipse.xtext.util.ITextRegion]
 	with an immutable implementation codeRef[org.eclipse.xtext.util.TextRegion].]
