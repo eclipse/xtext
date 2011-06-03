@@ -15,7 +15,7 @@ However the ANTLR parser generator is unfortunately still implemented in an olde
 code originated. Therefore ANTLR 2 didn't get the required IP approval. Eclipse has a strict IP policy, 
 which makes sure that everything provided by Eclipse can be consumed under the terms of the Eclipse 
 Public License. The details are described in 
-link[http://www.eclipse.org/org/documents/Eclipse_IP_Policy.pdf.][this document] That is why we are not 
+link[http://www.eclipse.org/org/documents/Eclipse_IP_Policy.pdf][this document]. That is why we are not 
 allowed to ship Xtext with the ANTLR generator but only with the IP approvied runtime components. We 
 have to provide it separately and for your convenience you'll be asked to download the ANTLR generator 
 when you run your language generator for the first time. You can even download it directly or install 
@@ -23,7 +23,7 @@ an additional plug-in into Eclipse:
 
 ul[
 	item[link[http://download.itemis.com/antlr-generator-3.0.1.jar][http://download.itemis.com/antlr-generator-3.0.1.jar]]
-	item[or use the update site at link[http://download.itemis.com/updates][http://download.itemis.com/updates]]
+	item[or use the update site at link[http://download.itemis.com/updates/][http://download.itemis.com/updates/]]
 ]
 
 The workflow will not bother you with this issue on subsequent executions as the archive will be stored

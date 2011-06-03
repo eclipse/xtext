@@ -152,4 +152,4 @@ different scenarios.
 
 These are the basic ideas around Guice and the small extension Xtext provides on top. For more information we 
 strongly encourage you to read through the documentation on 
-link[http://code.google.com/p/google-guice/.][the website of Google Guice]
+link[http://code.google.com/p/google-guice/][the website of Google Guice].

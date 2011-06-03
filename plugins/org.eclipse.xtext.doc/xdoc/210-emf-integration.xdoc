@@ -2,8 +2,8 @@ chapter:emf_integration[Integration with EMF and Other EMF Editors]
 
 Xtext relies heavily on EMF internally, but it can also be used as the serialization back-end of 
 other EMF-based tools. In this section we introduce the basic concepts of the 
-link[http://www.eclipse.org/emf][Eclipse Modeling Framework (EMF)] in the context of Xtext.  
-If you want to learn more about EMF, we recommend reading the link[http://www.eclipse.org/emf.][EMF book]
+link[http://www.eclipse.org/modeling/emf/][Eclipse Modeling Framework (EMF)] in the context of Xtext.  
+If you want to learn more about EMF, we recommend reading the link[http://www.eclipse.org/modeling/emf/][EMF book].
 
 
 section:model_metamodel[Model, Ecore Model, and Ecore]
