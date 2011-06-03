@@ -26,6 +26,8 @@ import org.eclipse.xtext.util.IAcceptor;
 import com.google.inject.Inject;
 
 /**
+ * By default, all elements with a not null <code>name</code> feature and all cross-resource crossrefs are indexed.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class DefaultResourceDescriptionStrategy implements IDefaultResourceDescriptionStrategy {
@@ -41,21 +43,21 @@ public class DefaultResourceDescriptionStrategy implements IDefaultResourceDescr
 	public void setQualifiedNameProvider(IQualifiedNameProvider qualifiedNameProvider) {
 		this.qualifiedNameProvider = qualifiedNameProvider;
 	}
-	
+
 	public IQualifiedNameProvider getQualifiedNameProvider() {
 		return qualifiedNameProvider;
 	}
-	
+
 	/** @since 2.0 */
 	public void setLazyURIEncoder(LazyURIEncoder uriEncoder) {
 		this.uriEncoder = uriEncoder;
 	}
-	
+
 	/** @since 2.0 */
 	public LazyURIEncoder getLazyURIEncoder() {
 		return uriEncoder;
 	}
-	
+
 	public boolean createEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
 		if (getQualifiedNameProvider() == null)
 			return false;
@@ -71,7 +73,8 @@ public class DefaultResourceDescriptionStrategy implements IDefaultResourceDescr
 	}
 
 	@SuppressWarnings("unchecked")
-	public boolean createReferenceDescriptions(EObject from, URI exportedContainerURI, IAcceptor<IReferenceDescription> acceptor) {
+	public boolean createReferenceDescriptions(EObject from, URI exportedContainerURI,
+			IAcceptor<IReferenceDescription> acceptor) {
 		EList<EReference> references = from.eClass().getEAllReferences();
 		for (EReference eReference : references) {
 			if (isIndexable(eReference) && from.eIsSet(eReference)) {
@@ -82,7 +85,8 @@ public class DefaultResourceDescriptionStrategy implements IDefaultResourceDescr
 						for (int i = 0; i < list.size(); i++) {
 							EObject to = list.basicGet(i);
 							if (isResolvedAndExternal(from, to)) {
-								acceptor.accept(createReferenceDescription(from, exportedContainerURI, eReference, i, to));
+								acceptor.accept(createReferenceDescription(from, exportedContainerURI, eReference, i,
+										to));
 							}
 						}
 					} else {
@@ -103,18 +107,19 @@ public class DefaultResourceDescriptionStrategy implements IDefaultResourceDescr
 		return new DefaultReferenceDescription(owner, target, eReference, indexInList, exportedContainerURI);
 	}
 
-
 	protected boolean isIndexable(EReference eReference) {
-		return !eReference.isContainment() && !eReference.isDerived() && !eReference.isVolatile() && !eReference.isTransient();
+		return !eReference.isContainment() && !eReference.isDerived() && !eReference.isVolatile()
+				&& !eReference.isTransient();
 	}
-	
+
 	protected boolean isResolvedAndExternal(EObject from, EObject to) {
 		if (to == null)
 			return false;
 		if (!to.eIsProxy())
 			return from.eResource() != to.eResource();
 
-		return !getLazyURIEncoder().isCrossLinkFragment(from.eResource(), ((InternalEObject) to).eProxyURI().fragment());
+		return !getLazyURIEncoder()
+				.isCrossLinkFragment(from.eResource(), ((InternalEObject) to).eProxyURI().fragment());
 	}
-	
+
 }

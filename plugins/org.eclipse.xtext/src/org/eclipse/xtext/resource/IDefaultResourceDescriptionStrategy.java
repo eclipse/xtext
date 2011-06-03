@@ -15,7 +15,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import com.google.inject.ImplementedBy;
 
 /**
- * Allows easy customization of what is indexed, i.e. put into a
+ * Allows easy way to customize of what is indexed, i.e. put into a
  * {@link org.eclipse.xtext.resource.impl.DefaultReferenceDescription}.
  * 
  * @author Jan Koehnlein - Initial contribution and API
