@@ -27,10 +27,10 @@ DONE SZ 150-contentassist.xdoc
 DONE JK 155-quickfix.xdoc
 DONE SZ 160-templates.xdoc
 DONE JK 170-outline.xdoc
-SZ 180-hyperlinking.xdoc
-SZ 195-highlighting.xdoc
-SZ 198-wizards.xdoc
-SZ 199-jvmtypes.xdoc
+DONE SZ 180-hyperlinking.xdoc
+DONE SZ 195-highlighting.xdoc
+# 198-wizards.xdoc
+DONE SZ 199-jvmtypes.xdoc
 200-Appendix.xdoc
 205-typical-language-configs.xdoc
 206-expressions-in-xtext.xdoc

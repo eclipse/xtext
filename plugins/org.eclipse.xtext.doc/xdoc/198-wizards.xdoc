@@ -1,12 +1,13 @@
 section:projectwizard[Project Wizard]
 
 Optionally, Xtext can generate a e[New Project Wizard] for your DSL. Using this wizard a user can create a new 
-project with only a few clicks that is configured with the right dependencies and natures. By default 
-it contains a sample model file and workflow that serve as a scaffold for the user. Furthermore it 
+project with only a few clicks. This project will be configured with the right dependencies and natures. By default 
+it contains a sample model file and a sample workflow. Both serve as a scaffold for the user. Furthermore it 
 has the Xtext nature and thereby the builder assigned. You enable the generation of the project wizard by adding the 
-e[SimpleProjectWizardFragment] fragment to the ref:generator_fragment[workflow]:
+codeRef[org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment] fragment to the ref:generator_fragment[workflow]:
 
-code[MWE2][import org.eclipse.xtext.ui.generator.* 
+code[MWE2][
+import org.eclipse.xtext.ui.generator.* 
 
 // project wizard fragment
 fragment = projectWizard.SimpleProjectWizardFragment {

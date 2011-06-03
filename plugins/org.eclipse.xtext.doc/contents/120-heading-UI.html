@@ -794,7 +794,7 @@ into your workflow.
 <h2>Hyperlinking</h2>
 <p>
 The Xtext editor provides hyperlinking support for any tokens corresponding to cross-references in your 
-grammar definition. You can either CTRL-click on any of these tokens or hit F3 
+grammar definition. You can either <em>CTRL-click</em> on any of these tokens or hit <em>F3</em> 
 while the cursor position is at the token in question and this will take you to the referenced model 
 element. As you&apos;d expect this works for references to elements in the same resource as well as for 
 references to elements in other resources. In the latter case the referenced resource will first be 
@@ -805,45 +805,51 @@ opened using the corresponding editor.
 <p>
 When navigating a hyperlink, Xtext will also select the text region corresponding to the referenced model 
 element. Determining this text region is the responsibility of the 
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/ILocationInFileProvider.html" ><abbr title="org.eclipse.xtext.resource.ILocationInFileProvider" >ILocationInFileProvider</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java" title="show source code" >(src)</a>. The default implementation 
-(<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/DefaultLocationInFileProvider.html" ><abbr title="org.eclipse.xtext.resource.DefaultLocationInFileProvider" >DefaultLocationInFileProvider</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/DefaultLocationInFileProvider.java" title="show source code" >(src)</a>) implements a best 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/ILocationInFileProvider.html" ><abbr title="org.eclipse.xtext.resource.ILocationInFileProvider" >ILocationInFileProvider</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java" title="show source code" >(src)</a>. The 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/DefaultLocationInFileProvider.html" ><abbr title="org.eclipse.xtext.resource.DefaultLocationInFileProvider" >default implementation</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/DefaultLocationInFileProvider.java" title="show source code" >(src)</a> implements a best 
 effort strategy which can be summarized as:
 </p>
 <p>
 <ol>
 	<li>
-		If the model element&apos;s type (i.e. <em>EClass</em>) declares a feature <em>name</em> then return the 
+		
+				If the model element&apos;s type (i.e. <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" ><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a>) declares a feature <em>name</em> then return the 
 				region of the corresponding token(s). As a fallback also check for a feature <em>id</em>.
 	</li>
 	<li>
-		If the model element&apos;s parse tree contains any top-level tokens corresponding to <em>ID</em> 
-				rule calls in the grammar then return a region spanning all those tokens.
+		
+				If the model element&apos;s node model contains any top-level tokens corresponding to invocations
+				of the rule <em>ID</em> in the grammar then return a region spanning all those tokens.
 	</li>
 	<li>
-		As a last resort return the region corresponding to the first keyword token of the referenced
+		
+				As a last resort return the region corresponding to the first keyword token of the referenced
 				model element.
 	</li>
 </ol>
 </p>
-<a name="5-0-0"></a>
-<h4>Customized Location Provider</h4>
+<p>
+The location service offers different methods to obtain the region of interest for special use cases.
+You can either obtain the complete region for an object or only the identifying string which is usually
+the name of the instance (see <span class="inlinecode">getSignificantTextRegion(EObject)</span>). You can also query for
+the text region of a specific <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EStructuralFeature.html" ><abbr title="org.eclipse.emf.ecore.EStructuralFeature" >EStructuralFeature</abbr></a> by means of 
+<span class="inlinecode">getFullTextRegion(EObject,&nbsp;EStructuralFeature,&nbsp;<span class="keyword">int</span>)</span>.
+</p>
 <p>
 As the default strategy is a best effort it may not always result in the selection you want. If that&apos;s 
-the case you can <a href="030-generator.html#1-0" title="go to &quot;The Module API&quot;">override</a> the <em>ILocationInFileProvider</em> binding in the UI module as 
-in the following example:
+the case you can <a href="030-generator.html#1-0" title="go to &quot;The Module API&quot;">override</a> the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/ILocationInFileProvider.html" ><abbr title="org.eclipse.xtext.resource.ILocationInFileProvider" >ILocationInFileProvider</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java" title="show source code" >(src)</a> binding in 
+the UI module as in the following example:
 </p>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
 <span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslUiModule&nbsp;<span class="keyword">extends</span>&nbsp;AbstractMyDslUiModule&nbsp;{</br>
-</br>
 &nbsp;&nbsp;@Override</br>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;ILocationInFileProvider&gt;&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bindILocationInFileProvider()&nbsp;{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyDslLocationInFileProvider.<span class="keyword">class</span>;</br>
 &nbsp;&nbsp;}</br>
-&nbsp;&nbsp;...</br>
 }</br>
 </p>
 </div>
@@ -851,9 +857,9 @@ in the following example:
 </p>
 <p>
 Often the default strategy only needs some guidance (e.g. selecting the text corresponding to another 
-feature than <em>name</em>). In that case you can simply subclass <em>DefaultLocationInFileProvider</em> and override 
-the methods <em>getIdentifierFeature()</em> and / or <em>useKeyword()</em> to guide the first and last steps of the strategy 
-as described above (see <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xtext/XtextLocationInFileProvider.html" ><abbr title="org.eclipse.xtext.xtext.XtextLocationInFileProvider" >XtextLocationInFileProvider</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.xtext/src/org/eclipse/xtext/xtext/XtextLocationInFileProvider.java" title="show source code" >(src)</a> 
+feature than <em>name</em>). In that case you can simply subclass the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/DefaultLocationInFileProvider.html" ><abbr title="org.eclipse.xtext.resource.DefaultLocationInFileProvider" >DefaultLocationInFileProvider</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/DefaultLocationInFileProvider.java" title="show source code" >(src)</a>
+and override the methods <span class="inlinecode">getIdentifierFeature()</span> or <span class="inlinecode">useKeyword()</span> to guide the first and 
+last steps of the strategy as described above (see <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xtext/XtextLocationInFileProvider.html" ><abbr title="org.eclipse.xtext.xtext.XtextLocationInFileProvider" >XtextLocationInFileProvider</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.xtext/src/org/eclipse/xtext/xtext/XtextLocationInFileProvider.java" title="show source code" >(src)</a> 
 for an example).
 </p>
 <a name="5-1"></a>
@@ -861,16 +867,17 @@ for an example).
 <p>
 The hyperlinks are provided by the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/hyperlinking/HyperlinkHelper.html" ><abbr title="org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper" >HyperlinkHelper</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/hyperlinking/HyperlinkHelper.java" title="show source code" >(src)</a>
 which will create links for cross-referenced objects by default. Clients may want to override 
-<em>createHyperlinksByOffset(XtextResource, int, IHyperlinkAcceptor)</em> to provide additional links or 
+<span class="inlinecode">createHyperlinksByOffset(XtextResource,&nbsp;<span class="keyword">int</span>,&nbsp;IHyperlinkAcceptor)</span> to provide additional links or 
 supersede the default implementation. 
 </p>
 <a name="6"></a>
 <h2>Syntax Coloring</h2>
 <p>
-Besides the already mentioned advanced features like content assist and code formatting the powerful 
+Besides the already mentioned advanced features like <a href="120-heading-UI.html#1" title="go to &quot;Content Assist&quot;">content assist</a>  and 
+<a href="050-heading-runtime.html#8" title="go to &quot;Formatting (Pretty Printing)&quot;">code formatting</a> the powerful 
 editor for your DSL is capable to mark up your model-code to improve the overall readability. It is 
 possible to use different colors and fonts according to the meaning of the different parts of your 
-input file. One may want to use some decent colors for large blocks of comments while identifiers, 
+input file. One may want to use some unintrusive colors for large blocks of comments while identifiers, 
 keywords and strings should be colored differently to make it easier to distinguish between them. 
 This kind of text decorating markup does not influence the semantics of the various sections but 
 helps to understand the meaning and to find errors in the source code.
@@ -878,7 +885,7 @@ helps to understand the meaning and to find errors in the source code.
 <p>
 <div class="image" >
 <img src="images/highlighting.png" class=" " 
- style=" width:100%" />
+ style=" " />
 </div>
 </p>
 <p>
@@ -895,7 +902,7 @@ persisted and reloaded on startup.
 <p>
 <div class="image" >
 <img src="images/preferences_syntax.png" class=" " 
- style="width:50% " />
+ style=" " />
 </div>
 </p>
 <a name="6-0"></a>
@@ -904,16 +911,17 @@ persisted and reloaded on startup.
 The lexical highlighting can be customized by providing implementations of the interface 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.html" ><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration" >IHighlightingConfiguration</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java" title="show source code" >(src)</a> and 
 the abstract class <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/AbstractTokenScanner.html" ><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractTokenScanner" >AbstractTokenScanner</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/AbstractTokenScanner.java" title="show source code" >(src)</a>. 
-The latter fulfills the interface <em>ITokenScanner</em> from the underlying JFace Framework, which may be 
-implemented by clients directly.
+The latter fulfills the interface <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/rules/ITokenScanner.html" ><abbr title="org.eclipse.jface.text.rules.ITokenScanner" >ITokenScanner</abbr></a> 
+from the underlying JFace Framework, which may be implemented by clients directly.
 </p>
 <p>
 The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.html" ><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration" >IHighlightingConfiguration</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java" title="show source code" >(src)</a> is used
 to register any default style without a specific binding to 
 a pattern in the model file. It is used to populate the preferences page and to initialize the 
-<em>ITextAttributeProvider</em>, which in turn is the component that is used to obtain the actual settings 
-for a style&apos;s id. An implementation will usually be very similar to the 
-<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/DefaultHighlightingConfiguration.html" ><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration" >DefaultHighlightingConfiguration</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/DefaultHighlightingConfiguration.java" title="show source code" >(src)</a> and read like this: 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/ITextAttributeProvider.html" ><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.ITextAttributeProvider" >ITextAttributeProvider</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/ITextAttributeProvider.java" title="show source code" >(src)</a>, which in turn is the 
+component that is used to obtain the actual settings for a style&apos;s id. An implementation 
+will usually be very similar to the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/DefaultHighlightingConfiguration.html" ><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration" >DefaultHighlightingConfiguration</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/DefaultHighlightingConfiguration.java" title="show source code" >(src)</a> 
+and read like this: 
 </p>
 <p>
 <div class="literallayout">
@@ -926,10 +934,9 @@ for a style&apos;s id. An implementation will usually be very similar to the
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;String&nbsp;COMMENT_ID&nbsp;=&nbsp;<span class="string">"comment"</span>;</br>
 </br>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(IHighlightingConfigurationAcceptor&nbsp;acceptor)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(KEYWORD_ID,&nbsp;<span class="string">"Keyword"</span>,&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keywordTextStyle());</br>
+&nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KEYWORD_ID,&nbsp;<span class="string">"Keyword"</span>,&nbsp;keywordTextStyle());</br>
 &nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(COMMENT_ID,&nbsp;<span class="string">"Comment"</span>,&nbsp;<span class="comment">//&nbsp;...</br>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;...</br>
 </span>&nbsp;&nbsp;}</br>
 &nbsp;&nbsp;</br>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;TextStyle&nbsp;keywordTextStyle()&nbsp;{</br>
@@ -938,15 +945,14 @@ for a style&apos;s id. An implementation will usually be very similar to the
 &nbsp;&nbsp;&nbsp;&nbsp;textStyle.setStyle(SWT.BOLD);</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;textStyle;</br>
 &nbsp;&nbsp;}</br>
-&nbsp;&nbsp;</br>
-&nbsp;&nbsp;<span class="comment">//&nbsp;...</br>
-</span>}</br>
+}</br>
 </p>
 </div>
 </div>
 </p>
 <p>
-Implementations of the <em>ITokenScanner</em> are responsible for splitting the content of a document into 
+Implementations of the <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/rules/ITokenScanner.html" ><abbr title="org.eclipse.jface.text.rules.ITokenScanner" >ITokenScanner</abbr></a> are responsible 
+for splitting the content of a document into 
 various parts, the so called tokens, and return the highlighting information for each identified range. 
 It is critical that this is done very fast because this component is used on each keystroke. Xtext 
 ships with a default implementation that is based on the lexer that is generated by ANTLR which is very 
@@ -959,7 +965,7 @@ To get an idea about it, have a look at the
 <a name="6-1"></a>
 <h3>Semantic Highlighting</h3>
 <p>
-The semantic highlighting stage is executed asynchronously in the background and can be used to calculated 
+The semantic highlighting stage is executed asynchronously in the background and can be used to calculate
 highlighting states based on the meaning of the different model elements. Users of the editor will 
 notice a very short delay after they have edited the text until the styles are actually applied to the 
 document. This keeps the editor responsive while providing aid when reading and writing your model.
@@ -972,11 +978,12 @@ is the primary hook to implement the logic that will compute to-be-highlighted r
 elements. 
 </p>
 <p>
-The framework will pass the current XtextResource and an 
+The framework will pass the current <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/XtextResource.html" ><abbr title="org.eclipse.xtext.resource.XtextResource" >XtextResource</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="show source code" >(src)</a> and an 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightedPositionAcceptor.html" ><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor" >IHighlightedPositionAcceptor</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightedPositionAcceptor.java" title="show source code" >(src)</a> to 
 the calculator. It is ensured, that the resource will not be altered externally until the called method 
-<em>provideHighlightingFor()</em> returns. However, the resource may be null. The implementor&apos;s task is to 
-navigate your semantic model and compute various ranges based on the attached node information and 
+<span class="inlinecode">provideHighlightingFor()</span> returns. However, the resource may be <span class="inlinecode"><span class="keyword">null</span></span> in case of
+errors in the model. The implementor&apos;s task is to 
+navigate the semantic model and compute various ranges based on the attached node information and 
 associate styles with them. This may read similar to the following snippet:
 </p>
 <p>
@@ -985,12 +992,11 @@ associate styles with them. This may read similar to the following snippet:
 <p class="code">
 <span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;provideHighlightingFor(XtextResource&nbsp;resource,&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;IHighlightedPositionAcceptor&nbsp;acceptor)&nbsp;{</br>
-&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(resource&nbsp;==&nbsp;<span class="keyword">null</span>)</br>
+&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(resource&nbsp;==&nbsp;<span class="keyword">null</span>&nbsp;||&nbsp;resource.getParseResult()&nbsp;==&nbsp;<span class="keyword">null</span>)</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;Iterable&lt;AbstractNode&gt;&nbsp;allNodes&nbsp;=&nbsp;NodeUtil.getAllContents(</br>
-&nbsp;&nbsp;&nbsp;&nbsp;resource.getParseResult().getRootNode());</br>
-&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(AbstractNode&nbsp;node&nbsp;:&nbsp;allNodes)&nbsp;{</br>
+&nbsp;&nbsp;INode&nbsp;root&nbsp;=&nbsp;resource.getParseResult().getRootNode();</br>
+&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(INode&nbsp;node&nbsp;:&nbsp;root.getAsTreeIterable())&nbsp;{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(node.getGrammarElement()&nbsp;<span class="keyword">instanceof</span>&nbsp;CrossReference)&nbsp;{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;acceptor.addPosition(node.getOffset(),&nbsp;node.getLength(),&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyHighlightingConfiguration.CROSS_REF);</br>
@@ -1002,9 +1008,9 @@ associate styles with them. This may read similar to the following snippet:
 </div>
 </p>
 <p>
-This example refers to an implementation of the <em>IHighlightingConfiguration</em> that registers a style 
-for a cross-reference. It is pretty much the same implementation as for the previously mentioned sample 
-of a lexical <em>IHighlightingConfiguration</em>.
+This example refers to an implementation of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.html" ><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration" >IHighlightingConfiguration</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java" title="show source code" >(src)</a> 
+that registers an own style for each cross-reference. It is pretty much the same implementation as for the previously 
+mentioned sample of a lexical <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.html" ><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration" >IHighlightingConfiguration</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java" title="show source code" >(src)</a>.
 </p>
 <p>
 <div class="literallayout">
@@ -1035,7 +1041,8 @@ of a lexical <em>IHighlightingConfiguration</em>.
 </div>
 </p>
 <p>
-The implementor of an <em>IHighlightingCalculator</em> should be aware of performance to ensure a good user 
+The implementor of an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/ISemanticHighlightingCalculator.html" ><abbr title="org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator" >ISemanticHighlightingCalculator</abbr></a> <a class="srcLink" href="http://git.eclipse.org/c/tmf/org.eclipse.xtext.git/tree/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/ISemanticHighlightingCalculator.java" title="show source code" >(src)</a> 
+should be aware of performance to ensure a good user 
 experience. It is probably not a good idea to traverse everything of your model when you will only 
 register a few highlighted ranges that can be found easier with some typed method calls. It is strongly 
 advised to use purposeful ways to navigate your model. The parts of Xtext&apos;s core that are responsible 
@@ -1043,84 +1050,6 @@ for the semantic highlighting are pretty optimized in this regard as well. The f
 update the ranges that actually have been altered, for example. This speeds up the redraw process. It 
 will even move, shrink or enlarge previously announced regions based on a best guess before the next 
 semantic highlighting pass has been triggered after the user has changed the document.
-</p>
-<a name="7"></a>
-<h2>Project Wizard</h2>
-<p>
-Optionally, Xtext can generate a <em>New Project Wizard</em> for your DSL. Using this wizard a user can create a new 
-project with only a few clicks that is configured with the right dependencies and natures. By default 
-it contains a sample model file and workflow that serve as a scaffold for the user. Furthermore it 
-has the Xtext nature and thereby the builder assigned. You enable the generation of the project wizard by adding the 
-<em>SimpleProjectWizardFragment</em> fragment to the <a href="030-generator.html#0-1-0" title="go to &quot;Generator Fragments&quot;">workflow</a>:
-</p>
-<p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">import</span>&nbsp;org.eclipse.xtext.ui.generator.*&nbsp;</br>
-</br>
-<span class="comment">//&nbsp;project&nbsp;wizard&nbsp;fragment</br>
-</span>fragment&nbsp;=&nbsp;projectWizard.SimpleProjectWizardFragment&nbsp;{</br>
-&nbsp;&nbsp;generatorProjectName&nbsp;=&nbsp;<span class="string">"${projectName}.generator"</span></br>
-&nbsp;&nbsp;modelFileExtension&nbsp;=&nbsp;file.extensions</br>
-}</br>
-</p>
-</div>
-</div>
-</p>
-<p>
-Here
-</p>
-<p>
-<ul>
-	<li>
-		the <em>generatorProjectName</em> is used to specify the project that contains the workflows and 
-				templates used to generate artifacts from your DSL. The generated project wizard uses this 
-				to add a corresponding dependency to the created project.
-	</li>
-	<li>
-		and the <em>modelFileExtension</em> specifies the default file extension associated with your DSL. 
-				When the user clicks the <em>Finish</em> button the project wizard will look for a file with the 
-				given extension in the created project and open a editor.
-	</li>
-</ul>
-</p>
-<p>
-After running the Xtext generator, the DSL&apos;s UI project will contain a new Xpand template 
-<em>MyDslNewProject.xpt</em> in the <em>src</em> folder in the package <em>[base-package].ui.wizard</em>. 
-Note: It may be necessary to manually merge the new entry in the <em>plugin.xml_gen</em> into your 
-<em>plugin.xml</em> of the UI project to enable the wizard contribution.
-</p>
-<p>
-The generated Xpand template will be expanded by the project wizard when the user clicks the <em>Finish</em> button 
-and it is responsible for initializing the project with some sample content. When finishing the wizard 
-the template will be used to create a sample model file and a simple workflow to run the 
-model through the generator project&apos;s <em>MyDslGenerator.mwe</em> workflow. However, this is only a pragmatic default.
-As the Xpand template is in the <em>src</em> source folder you may of course modify it to generate whatever 
-initial content you want for a new project. Just make sure to leave the top-level <em>main</em> definition 
-in place, as that is the interface for the project wizard.
-</p>
-<p>
-<em>Note:</em> To edit the generated Xpand template you should check that the <em>JavaBeans meta model contributor</em> 
-is enabled under <em>Preferences &gt; Xtend/Xpand</em>. Further you should also configure the UI project with the 
-Xpand/Xtend nature using <em>Configure &gt; Add Xpand/Xtend Nature</em> in the context menu.
-</p>
-<a name="7-0"></a>
-<h3>Customizing the Project Wizard</h3>
-<p>
-To further customize the creation of the project you can implement your own <em>project creator</em>. 
-The default project creator is represented by the generated class <em>MyDslProjectCreator</em> in the
-<em>src-gen</em> folder. It is highly extensible. Without any changes it will simply create a new plug-in project 
-with the Xtext nature assigned. Afterwards it will execute the <em>main</em> definition of the Xpand template 
-as described above.
-</p>
-<p>
-To add more pages or input fields to the project wizard you should subclass the class 
-<em>MyDslNewProjectWizard</em> as appropriate. Don&apos;t forget to register the subclass in the UI project&apos;s 
-<em>MyDslUiModule</em>. You may also want to make additionally entered user data available to the Xpand template. 
-In this case you should enhance the <em>MyDslProjectInfo</em> to allow that one to hold the information. This is the 
-context object which gets passed to the template when it&apos;s executed. Don&apos;t forget that your specialized 
-<em>MyDslNewProjectWizard</em> has to populate the data fields of your <em>MyDslProjectInfo</em>.
 </p>
 </body>
 </html>

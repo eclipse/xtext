@@ -216,7 +216,7 @@ tr[td[codeRef[org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment]]td[
 tr[td[codeRef[org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment]]td[Outline view configuration]td[ref:outline[Outline]]]
 tr[td[codeRef[org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment]]td[Java-based content assist]td[ref:contentAssist[Content assist]]]
 tr[td[codeRef[org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment]]td[Content assist helper based on ANTLR]td[ref:contentAssist[Content assist]]]
-tr[td[codeRef[org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment]]td[New project wizard]td[ref:projectwizard[Project wizard]]]
+%%tr[td[codeRef[org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment]]td[New project wizard]td[ref:projectwizard[Project wizard]]]
 ]
 
 section-ref[dependencyInjection]

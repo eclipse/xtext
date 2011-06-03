@@ -303,8 +303,6 @@
 		</topic>
 		<topic href="contents/120-heading-UI.html#5" label="Hyperlinking" >
 			<topic href="contents/120-heading-UI.html#5-0" label="Location Provider" >
-				<topic href="contents/120-heading-UI.html#5-0-0" label="Customized Location Provider" >
-				</topic>
 			</topic>
 			<topic href="contents/120-heading-UI.html#5-1" label="Customizing Available Hyperlinks" >
 			</topic>
@@ -313,10 +311,6 @@
 			<topic href="contents/120-heading-UI.html#6-0" label="Lexical Highlighting" >
 			</topic>
 			<topic href="contents/120-heading-UI.html#6-1" label="Semantic Highlighting" >
-			</topic>
-		</topic>
-		<topic href="contents/120-heading-UI.html#7" label="Project Wizard" >
-			<topic href="contents/120-heading-UI.html#7-0" label="Customizing the Project Wizard" >
 			</topic>
 		</topic>
 	</topic>
