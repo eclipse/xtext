@@ -25,7 +25,7 @@ null and Java types are supported.
 <a name="0-0"></a>
 <h3>String Literals</h3>
 <p>
-A string literal as syntactically defined in <a href="02-Lexical%20Structure.html#1" title="go to &quot;String Literals&quot;" >section Xbase_Syntax_StringLiteral</a> is a valid expression and returns an instance of <span class="inlinecode">java.lang.String</span> of the given value.
+A string literal as syntactically defined in <a href="02-Lexical%20Structure.html#1" title="Go to &quot;String Literals&quot;" >section Xbase_Syntax_StringLiteral</a> is a valid expression and returns an instance of <span class="inlinecode">java.lang.String</span> of the given value.
 </p>
 <p>
 <ul>
@@ -50,7 +50,7 @@ A string literal as syntactically defined in <a href="02-Lexical%20Structure.htm
 <a name="0-1"></a>
 <h3>Integer Literals</h3>
 <p>
-An integer literal as defined in <a href="02-Lexical%20Structure.html#2" title="go to &quot;Integer Literals&quot;" >section Xbase_Syntax_IntegerLiteral</a> creates an <span class="inlinecode">int</span>.
+An integer literal as defined in <a href="02-Lexical%20Structure.html#2" title="Go to &quot;Integer Literals&quot;" >section Xbase_Syntax_IntegerLiteral</a> creates an <span class="inlinecode">int</span>.
 There is no signed int. If you put a minus operator in front of an int literal it is taken as a UnaryOperator
 with one argument (the positive int literal).
 </p>
@@ -418,7 +418,7 @@ in short circuit mode, which means that the right hand operand might not be eval
 <a name="2-2"></a>
 <h3>Assignments</h3>
 <p>
-<a href="04-Expressions.html#8" title="go to &quot;Variable Declarations&quot;">Local variables</a> can be reassigned using the <span class="inlinecode">=</span> operator. Also properties can be set using 
+<a href="04-Expressions.html#8" title="Go to &quot;Variable Declarations&quot;">Local variables</a> can be reassigned using the <span class="inlinecode">=</span> operator. Also properties can be set using 
 that operator:
 Given the expression 
 </p>
@@ -487,7 +487,7 @@ FeatureCall&nbsp;:</br>
 <h3>Property Access</h3>
 <p>
 Feature calls are directly translated to their Java equivalent with the exception, that for calls to properties an equivalent rule as 
-described in <a href="04-Expressions.html#2-2" title="go to &quot;Assignments&quot;" >section Xbase_Expressions_PropertyAssignment</a> applies. 
+described in <a href="04-Expressions.html#2-2" title="Go to &quot;Assignments&quot;" >section Xbase_Expressions_PropertyAssignment</a> applies. 
 That is, for the following expression
 </p>
 <p>
@@ -664,7 +664,7 @@ But in all other cases the square brackets are mandatory:
 <a name="5-1"></a>
 <h3>Typing</h3>
 <p>
-Closures are expressions which produce function objects. The type is a <a href="03-Types.html#2" title="go to &quot;Function Types&quot;">function type</a>, consisting of the types of the 
+Closures are expressions which produce function objects. The type is a <a href="03-Types.html#2" title="Go to &quot;Function Types&quot;">function type</a>, consisting of the types of the 
 parameters as well as the return type. The return type is never specified explicitly but is always inferred from the expression. 
 The parameter types can be inferred if the closure is used in a context where this is possible.
 </p>
@@ -811,7 +811,7 @@ is the a short hand for
 <h3>Typing</h3>
 <p>
 The type of an if expression is calculated by the return types <span class="inlinecode">T1</span> and <span class="inlinecode">T2</span> of the two expression <span class="inlinecode">e1</span> and <span class="inlinecode">e2</span>.
-It uses the rules defined in <a href="03-Types.html#5-0" title="go to &quot;Common Super Type&quot;" >section Xbase_Types_CommonSuperType</a>.
+It uses the rules defined in <a href="03-Types.html#5-0" title="Go to &quot;Common Super Type&quot;" >section Xbase_Types_CommonSuperType</a>.
 </p>
 <a name="6-2"></a>
 <h3>Examples</h3>
@@ -851,7 +851,7 @@ For a switch expression
 </p>
 <p>
 the main expression <span class="inlinecode">e</span> is evaluated first and then each case sequentially. If the switch expression
-contains a variable declaration using the syntax known from <a href="04-Expressions.html#10" title="go to &quot;For Loop&quot;" >section Xbase_Expressions_ForLoop</a>, the value is bound to the given name.
+contains a variable declaration using the syntax known from <a href="04-Expressions.html#10" title="Go to &quot;For Loop&quot;" >section Xbase_Expressions_ForLoop</a>, the value is bound to the given name.
 Expressions of type <span class="inlinecode">java.lang.Boolean</span> or <span class="inlinecode">boolean</span> are not allowed in a switch expression.
 </p>
 <p>
@@ -881,7 +881,7 @@ Example:
 <a name="7-0"></a>
 <h3>Type guards</h3>
 <p>
-In addition to the case guards one can add a so called <em>Type Guard</em> which is syntactically just a <a href="03-Types.html#1" title="go to &quot;Simple Type References&quot;">type reference</a> preceding
+In addition to the case guards one can add a so called <em>Type Guard</em> which is syntactically just a <a href="03-Types.html#1" title="Go to &quot;Simple Type References&quot;">type reference</a> preceding
 the than optional case keyword. The compiler will use that type for the switch expression in subsequent expressions.
 Example:
 <div class="literallayout">
@@ -906,7 +906,7 @@ the type guard acts like a cast, that is all references to the switch value will
 <a name="7-1"></a>
 <h3>Typing</h3>
 <p>
-The return type of a switch expression is computed using the rules defined in <a href="03-Types.html#5-0" title="go to &quot;Common Super Type&quot;" >section Xbase_Types_CommonSuperType</a>. The set of types from which the common super type is 
+The return type of a switch expression is computed using the rules defined in <a href="03-Types.html#5-0" title="Go to &quot;Common Super Type&quot;" >section Xbase_Types_CommonSuperType</a>. The set of types from which the common super type is 
 computed corresponds to the types of each case&apos;s result expression. In case a switch expression&apos;s type is
 computed using the expected type from the context, it is sufficient to return the expected type if all case branches types conform to the expected type.
 </p>
@@ -968,7 +968,7 @@ XCasePart:</br>
 <a name="8"></a>
 <h2>Variable Declarations</h2>
 <p>
-Variable declarations are only allowed within <a href="04-Expressions.html#9" title="go to &quot;Blocks&quot;">blocks</a>. They are visible in any subsequent expressions in
+Variable declarations are only allowed within <a href="04-Expressions.html#9" title="Go to &quot;Blocks&quot;">blocks</a>. They are visible in any subsequent expressions in
 the block. Although overriding or shadowing variables from outer scopes is allowed, it is usually only
 used to overload the variable name &apos;this&apos;, in order to subsequently access an object&apos;s features in an
 unqualified manner.
@@ -1024,7 +1024,7 @@ Here is an example for an explicitly declared type:
 </div>
 </div>
 
-In such cases, the right hand expression&apos;s type must <a href="03-Types.html#5" title="go to &quot;Conformance and Conversion&quot;">conform</a> to the type on the left hand side. 
+In such cases, the right hand expression&apos;s type must <a href="03-Types.html#5" title="Go to &quot;Conformance and Conversion&quot;">conform</a> to the type on the left hand side. 
 </p>
 <p>
 Alternatively the type can be left out and will be inferred from the initialization expression:  
@@ -1042,7 +1042,7 @@ Alternatively the type can be left out and will be inferred from the initializat
 <p>
 The block expression allows to have imperative code sequences. It consists of a sequence of expressions, and returns the value of the last expression.
 The return type of a block is also the type of the last expression. Empty blocks return <span class="inlinecode">null</span>. 
-<a href="04-Expressions.html#8" title="go to &quot;Variable Declarations&quot;">Variable declarations</a> are only allowed within blocks and cannot be used as a block&apos;s last expression.
+<a href="04-Expressions.html#8" title="Go to &quot;Variable Declarations&quot;">Variable declarations</a> are only allowed within blocks and cannot be used as a block&apos;s last expression.
 </p>
 <p>
 A block expression is surrounded by curly braces and contains at least one expression.
@@ -1196,7 +1196,7 @@ XWhileExpression:</br>
 <h2>Do-While Loop</h2>
 <p>
 A do-while loop <span class="inlinecode"><span class="keyword">do</span>&nbsp;expression&nbsp;<span class="keyword">while</span>&nbsp;(predicate)</span> is used to execute a certain expression unless the predicate is evaluated to <span class="inlinecode"><span class="keyword">false</span></span>.
-The difference to the <a href="04-Expressions.html#11" title="go to &quot;While Loop&quot;">while loop</a> is that the execution starts by executing the block once before evaluating the predicate for the first time.
+The difference to the <a href="04-Expressions.html#11" title="Go to &quot;While Loop&quot;">while loop</a> is that the execution starts by executing the block once before evaluating the predicate for the first time.
 The return type of a do-while loop is <span class="inlinecode"><span class="keyword">void</span></span>.
 </p>
 <a name="12-0"></a>
