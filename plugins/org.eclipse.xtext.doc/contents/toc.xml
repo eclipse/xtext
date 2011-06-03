@@ -278,15 +278,28 @@
 			</topic>
 		</topic>
 		<topic href="contents/120-heading-UI.html#1" label="Content Assist" >
+<<<<<<< HEAD
+=======
+			<topic href="contents/120-heading-UI.html#1-0" label="ProposalProvider" >
+			</topic>
+			<topic href="contents/120-heading-UI.html#1-1" label="Sample Implementation" >
+			</topic>
+>>>>>>> [docs] revised migration guide
 		</topic>
 		<topic href="contents/120-heading-UI.html#2" label="Quick Fixes" >
 			<topic href="contents/120-heading-UI.html#2-0" label="Quickfixes for Linking Errors and Syntax Errors" >
 			</topic>
 		</topic>
 		<topic href="contents/120-heading-UI.html#3" label="Template Proposals" >
+<<<<<<< HEAD
 			<topic href="contents/120-heading-UI.html#3-0" label="Cross Reference Template Variable Resolver" >
 			</topic>
 			<topic href="contents/120-heading-UI.html#3-1" label="Enumeration Template Variable Resolver" >
+=======
+			<topic href="contents/120-heading-UI.html#3-0" label="CrossReference TemplateVariableResolver" >
+			</topic>
+			<topic href="contents/120-heading-UI.html#3-1" label="Enumeration TemplateVariableResolver" >
+>>>>>>> [docs] revised migration guide
 			</topic>
 		</topic>
 		<topic href="contents/120-heading-UI.html#4" label="Outline View" >
@@ -354,6 +367,7 @@
 			</topic>
 		</topic>
 	</topic>
+<<<<<<< HEAD
 	<topic href="contents/215-migrating-from-1.0.html" label="Migrating from Xtext 1.0.x to 2.0.0" >
 		<topic href="contents/215-migrating-from-1.0.html#0" label="Take the Shortcut" >
 		</topic>
@@ -372,6 +386,42 @@
 			</topic>
 		</topic>
 		<topic href="contents/215-migrating-from-1.0.html#2" label="Now go for then new features" >
+=======
+	<topic href="contents/213-migrating-from-1.0.html" label="Migrating from Xtext 1.0.x to 2.0" >
+		<topic href="contents/213-migrating-from-1.0.html#0" label="Take the Shortcut" >
+		</topic>
+		<topic href="contents/213-migrating-from-1.0.html#1" label="Migrating Step By Step" >
+			<topic href="contents/213-migrating-from-1.0.html#1-0" label="Update the Plug-in Dependencies and Import Statements" >
+			</topic>
+			<topic href="contents/213-migrating-from-1.0.html#1-1" label="Introduction of QualifiedName" >
+			</topic>
+			<topic href="contents/213-migrating-from-1.0.html#1-2" label="Changes in the index and in find references" >
+			</topic>
+			<topic href="contents/213-migrating-from-1.0.html#1-3" label="Complete re-implementation of nodemodel" >
+			</topic>
+			<topic href="contents/213-migrating-from-1.0.html#1-4" label="New outline" >
+			</topic>
+			<topic href="contents/213-migrating-from-1.0.html#1-5" label="AutoEditStrategy" >
+			</topic>
+			<topic href="contents/213-migrating-from-1.0.html#1-6" label="Other Noteworthy API Changes" >
+			</topic>
+		</topic>
+		<topic href="contents/213-migrating-from-1.0.html#2" label="Now go for then new features" >
+		</topic>
+	</topic>
+	<topic href="contents/215-migrating-from-0.7.html" label="Migrating from Xtext 0.7.x to 1.0" >
+		<topic href="contents/215-migrating-from-0.7.html#0" label="Migrating Step By Step" >
+			<topic href="contents/215-migrating-from-0.7.html#0-0" label="Update the Plug-in Dependencies and Import Statements" >
+			</topic>
+			<topic href="contents/215-migrating-from-0.7.html#0-1" label="Rename the Packages in the dsl.ui-Plug-in" >
+			</topic>
+			<topic href="contents/215-migrating-from-0.7.html#0-2" label="Update the Workflow" >
+			</topic>
+			<topic href="contents/215-migrating-from-0.7.html#0-3" label="MANIFEST.MF and plugin.xml" >
+			</topic>
+			<topic href="contents/215-migrating-from-0.7.html#0-4" label="Noteworthy API Changes" >
+			</topic>
+>>>>>>> [docs] revised migration guide
 		</topic>
 	</topic>
 	<topic href="contents/220-deploying-dsls.html" label="Deploying DSLs" >
