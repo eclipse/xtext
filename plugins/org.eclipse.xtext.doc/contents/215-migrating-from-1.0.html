@@ -1,0 +1,232 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Migrating from Xtext 1.0.x to 2.0.0</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="index.html" title="">
+</head>
+<body>
+<h1>Migrating from Xtext 1.0.x to 2.0.0</h1>
+<p>
+Most of the tasks when migrating to Xtext 2.0 can be automated. Some changes will be necessary in the manually written code where you have to carefully
+verify that your implementation is still working with Xtext 2.0.0. A reliable test-suite helps a lot. 
+</p>
+<p>
+The grammar language is fully backward compatible. You should not have to apply any changes in the primary artifact. However, we introduced some additional
+validation rules that mark inconsistencies in your grammar. If you get any warnings in the grammar editor, it should be straight forward to fix them.
+</p>
+<p>
+<em>Tip: You&apos;ll learn something about the new features if you compare a freshly created Xtext project based on 1.0.x with a new Xtext project based on 2.0. Especially the new fragments in the workflow are a good indicator for useful new features.</em> 
+</p>
+<a name="0"></a>
+<h2>Take the Shortcut</h2>
+<p>
+If you haven&apos;t made too many customizations to the generated defaults and if you&apos;re not referencing many classes of your Xtext language from the outside, you might consider starting with a new Xtext project, copying your grammar and then manually restoring your changes step by step. If that does not work for you, go on reading!
+</p>
+<a name="1"></a>
+<h2>Migrating Step By Step</h2>
+<p>
+Before you start the migration to Xtext 2.0, you should make sure that no old plug-ins are in your target platform.
+</p>
+<p>
+<em>Tip: The following steps try to use the Eclipse compiler to spot any source-incompatible changes while fixing them with only a few well described user actions. Doing these steps in another order causes most likely a higher effort.</em>
+</p>
+<a name="1-0"></a>
+<h3>Update the Plug-in Dependencies and Import Statements</h3>
+<p>
+You should update the constraints from version <em>1.0.x</em> to <em>2.0.0</em> in your manifest files if you specified any concrete versions.
+Also the constraint of org.antlr.runtime must be updated from <em>[3.0.0,3.0.2)</em> to <em>3.2.0</em>.
+</p>
+<p>
+The next step is to fix the import statements in your classes to match the refactored naming scheme in Xtext. This fixes most of the problems in the manually written code. 
+</p>
+<a name="1-1"></a>
+<h3>Introduction of QualifiedName object</h3>
+<p>
+With Xtext 2.0 an object for dealing with qualifiedNames has been introduced (<em>org.eclipse.xtext.naming.QualifiedName</em>. The qualifedName
+is now splitted into segments which can be queried. The lower-case-version of the qualifiedName is cached
+so that the performance of case insensitive languages is improved.
+The signature of the methods used by the DeclarativeQualifiedNameProvider changed to <em>QualifiedName
+qualifiedName(MyObject myObject)</em>. There are several ways to Create a QualifiedName-Object. A common
+one is to use <em>QualifiedName.create(String ...)</em>.
+</p>
+<a name="1-2"></a>
+<h3>Complete reimplementation of nodemodel</h3>
+<p>
+As you may know the nodemodel in Xtext 1.0.x was designed as EMF-Model which caused in some cases memory
+problems. In Xtext 2.0.0 the whole nodemodel has been redesigned as chained list of nodes. The package
+<em>org.eclipse.xtext.nodemodel</em> now contains the relevant interface to program against. In case of EMF
+names did not start with an I. Because of that it is necessary to put an I in front of
+your used interfaces from the nodemodel an use the organize imports tool. Please make sure not to program
+against concrete or abstract classes.
+</p>
+<a name="1-3"></a>
+<h3>New outline</h3>
+<p>
+The Outline has been completely reimplemented. To use the new one remove the follwing fragments from
+your workflow 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+fragment&nbsp;=&nbsp;outline.TransformerFragment{}</br>
+fragment&nbsp;=&nbsp;outline.OutlineNodeAdapterFactoryFragment{}
+</p>
+</div>
+</div>
+
+and add the following.
+<span class="inlinecode">fragment&nbsp;=&nbsp;outline.OutlineTreeProviderFragment&nbsp;{}</span>
+</p>
+<p>
+After generating a new class named YourDslOutlineTreeProvider gets generated. The API changed completely.
+For that reason you should take a closer look at the outline-doc.<div class="todo" >
+ref to Outline
+</div>
+
+The old ones named YourDslTransformer and YourDslOutlineNodeAdapterFactory can be removed after you migrated your code to the new API.
+</p>
+<a name="1-4"></a>
+<h3>AutoEditStrategy</h3>
+<p>
+In Xtext 1.0.x your AutoEditStrategy extends the class <em>DefaultAutoEditStrategy</em> which implements the
+interface <em>IAutoEditStrategy</em>. In Xtext 2.0.0 the interface is not responsible any more for the configuration
+of AutoEditStrategies. Instead the class <em>DefaultAutoEditStrategyProvider</em> should be extended
+to configure AutoEditStrategies. The only thing you have to so is to change the superclass from <em>DefaultAutoEditStrategy</em>
+to <em>DefaultAutoEditStrategyProvider</em>.
+The interface <em>IEditStategyAcceptor</em> changed from <em>accept(IAutoEditStrategy)</em> to <em>accept(IAutoEditStrategy, String)</em>. The last parameter represents the contentType for the document. Constants
+could be found in <em>org.eclipse.jface.text.IDocument</em>. 
+</p>
+<p>
+As a example the configure method could look like this one:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Override</br>
+protected&nbsp;void&nbsp;configure(IEditStrategyAcceptor&nbsp;acceptor)&nbsp;{</br>
+&nbsp;&nbsp;&nbsp;&nbsp;super.configure(acceptor);</br>
+&nbsp;&nbsp;&nbsp;&nbsp;acceptor.accept(new&nbsp;YourAutoEditStrategy(),IDocument.DEFAULT_CONTENT_TYPE);</br>
+}</br>
+</p>
+</div>
+</div>
+
+The last thing you have to do is to change the binding of your AutoEditStategy in the UIModule of your
+dsl from <em>public Class&lt;? extends IAutoEditStrategy&gt; bindIAutoEditStrategy()</em> to <em>public Class&lt;? extends AbstractEditStrategyProvider&gt; bindAbstractEditStrategyProvider()</em>.
+</p>
+<a name="1-5"></a>
+<h3>Noteworthy API Changes</h3>
+<p>
+The <em>src</em> folders are generated once, so existing code will not be overwritten but has to be updated manually.
+</p>
+<p>
+You will face a couple of compilation problems due to changes in the API. Here&apos;s a list of the most prominent changes. It is usually only necessary to change your code, if you face any compilation problems.
+<ul>
+	<li>
+		The method <em>IGlobalScopeProvider.getScope(EObject,EReference)</em> has been removed. Use  <em>IGlobalScopeScopeProvider.getScope(Resource, EReference, Predicate&lt;IEObjectDescription&gt;)</em> instead. 
+	</li>
+	<li>
+		The Interface <em>IAntlrParser</em> has been renamed to <em>IParser</em>.
+	</li>
+	<li>
+		The methods <em>error, warning</em> from the validation API changed for example from <em>error(String message, Integer feature)</em>
+		to <em>error(String message, EStructuralFeature feature)</em>. For that reason you have to use the generated
+		EMF-EPackage to get the right EStructuralFeature.
+	</li>
+	<li>
+		The class <em>NodeUtil</em> was renamed to <em>NodeModelUtils</em> and can be found in the package <em>org.eclipse.xtext.nodemodel.util</em>.
+	</li>
+	<li>
+		In Xtext 1.0.x <em>NodeUtils.getAllContents(AbstractNode)</em> was used to get all nested nodes of
+		a node. In Xtext 2.0.0 the interface <em>org.eclipse.xtext.nodemodel.INode</em> provides a method to fulfill this usecase <em>org.eclipse.xtext.nodemodel.INode.getAsTreeIterable()</em>.
+	</li>
+	<li>
+		The enum <em>org.eclipse.xtext.diagnostics.DiagnosticSeverity</em> has been renamed to <em>org.eclipse.xtext.diagnostics.Severity</em>. 
+	</li>
+	<li>
+		The method <em>IQualifiedNameProvider.getQualifiedName(EObject)</em> has been renamed to <em>IQualifiedNameProvider.getFullyQualifiedName(EObject)</em> and the returnType changed from <em>String</em> to <em>QualifiedName</em>.
+	</li>
+	<li>
+		In Xtext 1.0.x the class <em>EObjectAtOffsetHelper</em> had several static method to resolve elements. in
+		Xtext 2.0.0 these methods aren&apos;t static anymore. For
+		that reason you could create an instance of this class of let guice do the job: <div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		@Inject&nbsp;</br>
+		private&nbsp;EObjectAtOffsetHelper&nbsp;eObjectAtOffsetHelper;</br>
+		</p>
+		</div>
+		</div>
+		
+	</li>
+	<li>
+		The method <em>EObjectAtOffsetHelper.resolveElementAt(XtextResource, int, TextLocation)</em> changed to
+		<em>org.eclipse.xtext.resource.EObjectAtOffsetHelper.resolveElementAt(XtextResource, int)</em>.
+	</li>
+	<li>
+		In Xtext 1.0.x the interfaces <em>IResourceDesctiptions, IResourceDescription and IContainer</em> have several
+		methods to query them for contained elements. In Xtext 2.0.0 there is a common interface <em>ISelectable</em>
+		for this usecase with is extended by the interfaces mentioned about. For further questions have a look
+		at the interface <em>ISelectable</em>.
+	</li>
+</ul>
+</p>
+<a name="2"></a>
+<h2>Now go for then new features</h2>
+<p>
+After migrating, some of the new features in Xtext 2.0.0 will be automatically available. Others require further configuration.
+We recommend reading the sections about
+<div class="todo" >
+Ref to new features
+</div>
+
+<ul>
+	<li>
+		Compare View
+	</li>
+	<li>
+		Xbase
+	</li>
+	<li>
+		Xtend 2
+	</li>
+	<li>
+		Rename Refactorings
+	</li>
+	<li>
+		Support for syntactic predicates
+	</li>
+	<li>
+		Rich Hovers
+	</li>
+	<li>
+		Terminal Fragments
+	</li>
+	<li>
+		Xtext Syntax Graph
+	</li>
+	<li>
+		Action-free Antlr Grammar
+	</li>
+	<li>
+		Support for abbreviated type names in content assist
+	</li>
+	<li>
+		Document Partitions and Auto Editing
+	</li>
+	<li>
+		Redesign of the Content Outline
+	</li>
+	<li>
+		QuickFixes for the Xtext Grammar Language
+	</li>
+	<li>
+		Clustered Builder
+	</li>
+</ul>
+
+For an overview over the new features consult our <a href="http://www.eclipse.org/Xtext/documentation/indigo/new_and_noteworthy.php">New and Noteworthy</a> online. 
+</p>
+</body>
+</html>
