@@ -30,8 +30,12 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 /**
+ * Default implementation of the {@link IResourceDescription.Manager}. Customize by binding another
+ * {@link IDefaultResourceDescriptionStrategy}.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
+ * @author Jan Koehnlein
  */
 @Singleton
 public class DefaultResourceDescriptionManager implements IResourceDescription.Manager {
