@@ -12,8 +12,7 @@
 <a name="0"></a>
 <h2>Case Insensitive Languages</h2>
 <p>
-In some cases, e.g. if your <em>SHIFT</em> key is broken, you might want to design a case insensitive language. Xtext offers separate <a href="030-generator.html#0-1-0">generator fragments</a>
- for this purpose. 
+In some cases, e.g. if your <em>SHIFT</em> key is broken, you might want to design a case insensitive language. Xtext offers separate <a href="030-generator.html#0-1-0" title="go to &quot;Generator Fragments&quot;">generator fragments</a> for this purpose. 
 </p>
 <p>
 For case insensitive keywords, open your MWE workflow and replace the Antlr related fragments: 
@@ -77,7 +76,7 @@ fragment&nbsp;=&nbsp;scoping.ImportNamespacesScopingFragment&nbsp;{</br>
 </div>
 </p>
 <p>
-or if you are using <a href="050-heading-runtime.html#5-0-1">importURI based global scopes</a>
+or if you are using <a href="050-heading-runtime.html#5-0-1" title="go to &quot;Global Scopes Based On Explicit Imports (ImportURI Mechanism)&quot;">importURI based global scopes</a>
 </p>
 <p>
 <div class="literallayout">
@@ -136,8 +135,7 @@ Second, configure the global scope provider to scan project root folders instead
 </p>
 <p>
 The remaining steps show you how to adapt the  
-<a href="120-heading-UI.html#7">project wizard</a>
- for your language, if you have generated one.
+<a href="120-heading-UI.html#7" title="go to &quot;Project Wizard&quot;">project wizard</a> for your language, if you have generated one.
 The best way to do this is to create a new subclass of the generated 
 <em>IProjectCreator</em> in the <em>src/</em> folder of the <em>ui</em> project and 
 apply the necessary changes there. First, remove the JDT project configuration 
