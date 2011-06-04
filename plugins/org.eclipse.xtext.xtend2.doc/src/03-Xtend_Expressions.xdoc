@@ -80,10 +80,10 @@ section2:RichStringType[Typing]
 The rich string is translated to an efficient string concatenation and the return type of a rich string
 is codeRef[java.lang.CharSequence] which allows room for efficient implementation.
 
-section2:WhitespaceHandling[Whitespace Handling]
+section2:WhitespaceHandling[White Space Handling]
 
-One of the key features of rich strings is the smart handling of whitespace in the template output. The
-whitespace is not written into the output data structure as is but preprocessed. This allows for readable
+One of the key features of rich strings is the smart handling of white space in the template output. The
+white space is not written into the output data structure as is but preprocessed. This allows for readable
 templates as well as nicely formatted output. This can be achieved by applying three simple rules
 when the rich string is evaluated.
 
@@ -98,11 +98,11 @@ ol[
 		as the opening and closing marks of the rich string itself.
 		
 		The indentation is considered to be relative to such a control structure if the previous line
-		ends with a control structure followed by optional white space. The amount of whitespace is not
+		ends with a control structure followed by optional white space. The amount of white space is not
 		taken into account but the delta to the other lines.
 	]
 	item[
-		Lines that do not contain any static text which is not whitespace but do contain control structures
+		Lines that do not contain any static text which is not white space but do contain control structures
 		or invocations of other templates which evaluate to an empty string, will not appear in the output.
 	]		
 ]
