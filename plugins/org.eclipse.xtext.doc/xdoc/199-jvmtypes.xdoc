@@ -50,7 +50,9 @@ fragment = types.TypesGeneratorFragment {}
 After regenerating your language, it will be allowed to define a type code[DomainExample][Date] that maps to the codeRef[java.util.Date]
 like this:
 
-code[JavaTypesExample][type Date mapped-to java.util.Date]
+code[JavaTypesExample][
+	type Date mapped-to java.util.Date
+]
 
 These two steps will provide a nice integration into the Eclipse JDT. There is e[Find References] on Java methods, 
 fields and types that will reveal results in your language files. e[Go To Declaration] works as expected
