@@ -45,10 +45,10 @@ This fixes most of the problems in the manually written code.
 <a name="0-1"></a>
 <h3>Rename the Packages in the dsl.ui-Plug-in</h3>
 <p>
-We changed the naming pattern for artifacts in the <em>dsl.ui</em>-plug-in to match the OSGI conventions. 
+We changed the naming pattern for artifacts in the <em>dsl.ui</em>-plug-in to match the OSGi conventions. 
 The easiest way to update your existing projects is to apply a "Rename Package" refactoring on the 
 packages in the <em>src</em>- and <em>src-gen</em> folder <em>before</em> you re-run the workflow that regenerates your 
-language. Make sure you ticked "Rename sub-packages" in the rename dialog. It is error-prone to enable the 
+language. Make sure you ticked "Rename subpackages" in the rename dialog. It is error-prone to enable the 
 search in non-Java files as this will perform incompatible changes in the manifest files. Furthermore, 
 it is important to perform the rename operation in the <em>src-gen</em> folder, too. This ensures that the 
 references in your manually written code are properly updated.
@@ -120,13 +120,13 @@ in the manifest files but it is unlikely that it will spot the erroneous referen
 	<li>
 		
 				Due to renamed packages, you have to fix all references to classes therein in the <em>plugin.xml</em>. 
-				A diff with the <em>plugin.xml_gen</em> will be a great help. If you haven&apos;t added a lot manually, 
+				A comparison with the <em>plugin.xml_gen</em> will be a great help. If you haven&apos;t added a lot manually, 
 				consider merging these into the generated version instead of going the other way around. Note that 
 				warnings in the <em>plugin.xml</em> can be considered to be real errors most of the time.
-				Make sure the <em>{MyDsl}ExecutableExtensionFactory</em> has the <em>.ui.</em> package prefix.
+				Make sure the <em>MyDslExecutableExtensionFactory</em> has the <em>.ui.</em> package prefix.
 				Classes from <em>org.eclipse.xtext.ui.common</em> and <em>org.eclipse.xtext.ui.core</em> are now usually 
 				somewhere in <em>org.eclipse.xtext.ui</em>. They are also referenced by the 
-				<em>{MyDsl}ExecutableExtensionFactory</em> and thus not covered by the validation of the <em>plugin.xml</em>.
+				<em>MyDslExecutableExtensionFactory</em> and thus not covered by the validation of the <em>plugin.xml</em>.
 	</li>
 	<li>
 		
@@ -145,7 +145,7 @@ in the manifest files but it is unlikely that it will spot the erroneous referen
 <p>
 The <em>src</em> folders are generated once, so existing code will not be overwritten but has to be updated manually. 
 At least one new class has appeared in your <em>src</em>-folder of the <em>ui</em> plug-in. there will now be a 
-<em>{MyDsl}StandaloneSetup</em> inheriting form the generated <em>{MyDsl}StandaloneSetupGenerated</em> to allow customization.
+<em>MyDslStandaloneSetup</em> inheriting form the generated <em>MyDslStandaloneSetupGenerated</em> to allow customization.
 </p>
 <p>
 You will face a couple of compilation problems due to changes in the API. Here&apos;s a list of the most prominent changes. 
@@ -190,7 +190,7 @@ It is usually only necessary to change your code, if you face any compilation pr
 				The runtime and UI modules have separate base classes <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/service/DefaultRuntimeModule.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.service.DefaultRuntimeModule" >DefaultRuntimeModule</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/DefaultRuntimeModule.java" title="View Source Code" >(src)</a> and 
 				<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/DefaultUiModule.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.DefaultUiModule" >DefaultUiModule</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/DefaultUiModule.java" title="View Source Code" >(src)</a> now. We use Guice&apos;s module overrides to combine them with the newly 
 				introduced <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/shared/internal/SharedModule.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.shared.internal.SharedModule" >SharedModule</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui.shared/src/org/eclipse/xtext/ui/shared/internal/SharedModule.java" title="View Source Code" >(src)</a>. You have to add a constructor the your 
-				<em>{MyDsl}UiModule</em> that takes an <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/ui/plugin/AbstractUIPlugin.html" title="View JavaDoc"><abbr title="org.eclipse.ui.plugin.AbstractUIPlugin" >AbstractUIPlugin</abbr></a> as argument and pass that one to 
+				<em>MyDslUiModule</em> that takes an <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/ui/plugin/AbstractUIPlugin.html" title="View JavaDoc"><abbr title="org.eclipse.ui.plugin.AbstractUIPlugin" >AbstractUIPlugin</abbr></a> as argument and pass that one to 
 				the super constructor. <em>Tip: There is an Eclipse quick fix available for that one.</em>
 	</li>
 	<li>

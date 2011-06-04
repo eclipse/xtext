@@ -96,7 +96,7 @@ section2[Build Your Own Grammar]
 e[Please note]: If you encounter strange errors while copying and pasting
 a snippet from this document to your Eclipse editor, your documentation
 viewer most likely has inserted characters different from {space} into your 
-clipboard. Reenter the "whitespace" or type the text by hand to be sure everything
+clipboard. Reenter the "white space" or type the text by hand to be sure everything
 works fine. 
 
 The wizard will automatically open the example grammar file 
@@ -121,7 +121,7 @@ reuses and overrides rules from the specified grammar. The
 e[org.eclipse.xtext.common.Terminals] is a library grammar shipped with Xtext 
 and predefines the most common terminal rules, such as e[ID], e[STRING] and e[INT]. 
 It also introduces single-line and multi-line comments as well as rules for 
-whitespace, which may occur everywhere by default. You can open that grammar in the 
+white space, which may occur everywhere by default. You can open that grammar in the 
 editor to have a look at these rules. It turns out that these set of rules are often 
 the same and often used, so that most Xtext languages extend this grammar. 
 However, it is just a library, so you won't use it if it doesn't fit your needs. 

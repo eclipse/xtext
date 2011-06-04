@@ -14,8 +14,8 @@ ol[
 	item[Associating comments with semantic objects. This is done by the
 		 ref:commentassociater[comment associator].]
 	item[Associating existing nodes from the node model with tokens from the token stream.]
-	item[ref:hiddentokenmerger[Merging existing whitespace] and line-wraps into the token stream.]
-	item[Adding further needed whitespace or replacing all whitespace using a 
+	item[ref:hiddentokenmerger[Merging existing white space] and line-wraps into the token stream.]
+	item[Adding further needed white space or replacing all white space using a 
 		ref:formatting[formatter].]
 ]
 
@@ -49,7 +49,7 @@ section2[Roles of the Semantic Model and the Node Model During Serialization]
 A serialized document represents the state of the semantic model. However, if there is a node model 
 available (i.e. the semantic model has been created by the parser), the serializer
 ul[
-	item[preserves ref:hiddentokenmerger[existing whitespaces] from the node model.]	
+	item[preserves ref:hiddentokenmerger[existing white spaces] from the node model.]	
 	item[preserves ref:commentassociater[existing comments] from the node model.]
 	item[preserves the representation of cross-references: If a cross-referenced object can be 
 		 identified by multiple names (i.e. scoping returns multiple 
@@ -99,7 +99,7 @@ ul[
 	]
 	item[The type of the model element differs from the type in the grammar. The type of the model 
 		element must be identical to the return type of the grammar rule or the action's type. 
-		Sub-types are not allowed.]
+		Subtypes are not allowed.]
 	item[ref:valueconverter[Value conversion] fails. The value converter can indicate that a value 
 		is not serializeable by throwing a codeRef[org.eclipse.xtext.conversion.ValueConverterException].]
 	item[An enum literal is not allowed at this position. This can happen if the referenced enum 
@@ -134,8 +134,9 @@ codeRef[org.eclipse.xtext.parsetree.reconstr.Serializer][Serializer.serialize(..
 Available options are:
 ul[
 	item[e[Formatting]. Default: code[Java][false]. If enabled, it is the ref:formatting[formatters] job to determine
- 		all whitespace information during serialization. If disabled, the formatter only defines whitespace 
- 		information for the places in which no whitespace information can be preserved from the node model. 
+ 		all white space information during serialization. If disabled, the formatter only defines white
+ 		space 
+ 		information for the places in which no white space information can be preserved from the node model. 
  		E.g. When new model elements are inserted or there is no node model.]
 	item[e[Validating]. Default: code[Java][true]: Run the ref:concrete_syntax_validation[concrete syntax validator] 
 		before serializing the model.]
@@ -190,7 +191,7 @@ Valid models for this example are e[contents 1 item] or e[contents 5 items]. How
 in the semantic model whether the keyword e[item] or e[items] has been parsed. This is due to the fact 
 that the rule call e[Plural] is unassigned. However, the ref:parsetreeconstructor[parse tree constructor] 
 needs to decide which value to write during serialization. This decision can be be made by customizing 
-the codeRef[org.eclipse.xtext.parsetree.reconstr.ITokenSerializer$IValueSerializer][IValueSerializer.serializeUnassignedValue(EObject, RuleCall, AbstractNode)].
+the codeRef[org.eclipse.xtext.parsetree.reconstr.ITokenSerializer$IValueSerializer][IValueSerializer.serializeUnassignedValue(EObject, RuleCall, INode)].
 
 section2:crossreferenceserializer[Cross-Reference Serializer]
 
@@ -201,15 +202,15 @@ The default implementation delegates to various other services such as the codeR
 codeRef[org.eclipse.xtext.linking.impl.LinkingHelper] each of which may be the better place for customization.
 
 
-section2:hiddentokenmerger[Merge Whitespace]
+section2:hiddentokenmerger[Merge White Space]
 
 After the ref:parsetreeconstructor[parse tree constructor] has done its job to create a stream of 
 tokens which are to be written to the textual representation, and the ref:commentassociater[comment associator] 
-has done its work, existing whitespace form the node model is merged into the stream. 
+has done its work, existing white space form the node model is merged into the stream. 
 
 The strategy is as follows: If two tokens follow each other in the stream and the corresponding 
-nodes in the node model follow each other as well, then the whitespace information in between is kept. 
-In all other cases it is up to the ref:formatting[formatter] to calculate new whitespace information. 
+nodes in the node model follow each other as well, then the white space information in between is kept. 
+In all other cases it is up to the ref:formatting[formatter] to calculate new white space information. 
 
 
 section2:tokenstream[Token Stream]

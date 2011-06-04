@@ -34,7 +34,7 @@ codeRef[org.eclipse.emf.ecore.EFactory].
 Many languages introduce a concept for qualified names, i.e. names composed of namespaces separated by
 a delimiter. Since this is such a common use case, Xtext provides an extensible converter implementation
 for qualified names. The codeRef[org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter] handles
-comments and whitespace gracefully and is capable to use the appropriate value converter for each segment of
+comments and white space gracefully and is capable to use the appropriate value converter for each segment of
 a qualified name. This allows for individually quoted segments. The domainmodel example shows how to use it. 
 
 The protocol of an codeRef[org.eclipse.xtext.conversion.IValueConverter] allows to throw a 

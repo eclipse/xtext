@@ -32,10 +32,10 @@ This fixes most of the problems in the manually written code.
 
 section2[Rename the Packages in the dsl.ui-Plug-in]
 
-We changed the naming pattern for artifacts in the e[dsl.ui]-plug-in to match the OSGI conventions. 
+We changed the naming pattern for artifacts in the e[dsl.ui]-plug-in to match the OSGi conventions. 
 The easiest way to update your existing projects is to apply a "Rename Package" refactoring on the 
 packages in the e[src]- and e[src-gen] folder e[before] you re-run the workflow that regenerates your 
-language. Make sure you ticked "Rename sub-packages" in the rename dialog. It is error-prone to enable the 
+language. Make sure you ticked "Rename subpackages" in the rename dialog. It is error-prone to enable the 
 search in non-Java files as this will perform incompatible changes in the manifest files. Furthermore, 
 it is important to perform the rename operation in the e[src-gen] folder, too. This ensures that the 
 references in your manually written code are properly updated.
@@ -89,13 +89,13 @@ ul[
 	]
 	item[
 		Due to renamed packages, you have to fix all references to classes therein in the e[plugin.xml]. 
-		A diff with the e[plugin.xml_gen] will be a great help. If you haven't added a lot manually, 
+		A comparison with the e[plugin.xml_gen] will be a great help. If you haven't added a lot manually, 
 		consider merging these into the generated version instead of going the other way around. Note that 
 		warnings in the e[plugin.xml] can be considered to be real errors most of the time.
-		Make sure the e[{MyDsl}ExecutableExtensionFactory] has the e[.ui.] package prefix.
+		Make sure the e[MyDslExecutableExtensionFactory] has the e[.ui.] package prefix.
 		Classes from e[org.eclipse.xtext.ui.common] and e[org.eclipse.xtext.ui.core] are now usually 
 		somewhere in e[org.eclipse.xtext.ui]. They are also referenced by the 
-		e[{MyDsl}ExecutableExtensionFactory] and thus not covered by the validation of the e[plugin.xml].
+		e[MyDslExecutableExtensionFactory] and thus not covered by the validation of the e[plugin.xml].
 	]
 	item[
 		A number of new features are being registered in the e[plugin.xml], e.g. e[Find references], e[Quick Outline], 
@@ -112,7 +112,7 @@ section2[Noteworthy API Changes]
 
 The e[src] folders are generated once, so existing code will not be overwritten but has to be updated manually. 
 At least one new class has appeared in your e[src]-folder of the e[ui] plug-in. there will now be a 
-e[{MyDsl}StandaloneSetup] inheriting form the generated e[{MyDsl}StandaloneSetupGenerated] to allow customization.
+e[MyDslStandaloneSetup] inheriting form the generated e[MyDslStandaloneSetupGenerated] to allow customization.
 
 You will face a couple of compilation problems due to changes in the API. Here's a list of the most prominent changes. 
 It is usually only necessary to change your code, if you face any compilation problems.
@@ -148,7 +148,7 @@ ul[
 		The runtime and UI modules have separate base classes codeRef[org.eclipse.xtext.service.DefaultRuntimeModule] and 
 		codeRef[org.eclipse.xtext.ui.DefaultUiModule] now. We use Guice's module overrides to combine them with the newly 
 		introduced codeRef[org.eclipse.xtext.ui.shared.internal.SharedModule]. You have to add a constructor the your 
-		e[{MyDsl}UiModule] that takes an codeRef[org.eclipse.ui.plugin.AbstractUIPlugin] as argument and pass that one to 
+		e[MyDslUiModule] that takes an codeRef[org.eclipse.ui.plugin.AbstractUIPlugin] as argument and pass that one to 
 		the super constructor. e[Tip: There is an Eclipse quick fix available for that one.]
 	]
 	item[

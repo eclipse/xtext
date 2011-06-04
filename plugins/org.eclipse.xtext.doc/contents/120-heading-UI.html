@@ -17,7 +17,7 @@ aspects of Xtext&apos;s UI features.
 <h2>Label Provider</h2>
 <p>
 There are various places in the UI in which model elements have to be presented to the user: In the 
-<a href="120-heading-UI.html#4" title="Go to &quot;Outline View&quot;">outline view</a>, in <a href="120-heading-UI.html#5" title="Go to &quot;Hyperlinking&quot;">hyper links</a>, in <a href="120-heading-UI.html#1" title="Go to &quot;Content Assist&quot;">content proposals</a>, 
+<a href="120-heading-UI.html#4" title="Go to &quot;Outline View&quot;">outline view</a>, in <a href="120-heading-UI.html#5" title="Go to &quot;Hyperlinking&quot;">hyperlinks</a>, in <a href="120-heading-UI.html#1" title="Go to &quot;Content Assist&quot;">content proposals</a>, 
 find dialogs etc. Xtext allows to customize each of these appearances by individual implementation of
 the <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/ILabelProvider.html" title="View JavaDoc"><abbr title="org.eclipse.jface.viewers.ILabelProvider" >ILabelProvider</abbr></a> interface. 
 </p>
@@ -59,7 +59,7 @@ By default, Xtext binds the <a class="jdoc" href="http://download.eclipse.org/mo
 but you can change the binding individually for the Outline, Content Assist or other places. For that purpose, 
 there is a so called <em>binding annotation</em> for each use case. For example, to use a custom 
 <em>MyContentAssistLabelProvider</em> to display elements in the content assist, you have to override 
-<span class="inlinecode">configureContentProposalLabelProvider(..)</span> p.in your language&apos;s UI module:
+<span class="inlinecode">configureContentProposalLabelProvider(..)</span> in your language&apos;s UI module:
 </p>
 <p>
 <div class="literallayout">
@@ -187,7 +187,7 @@ The Xtext generator, amongst other things, generates the following two content a
 				into the <em>src-gen</em> folder within the <em>ui</em> project, and
 	</li>
 	<li>
-		a concrete sub-class in the <em>src</em>-folder of the <em>ui</em> project called 
+		a concrete subclass in the <em>src</em>-folder of the <em>ui</em> project called 
 				<span class="inlinecode">{MyLang}ProposalProvider</span>
 	</li>
 </ul>
@@ -288,7 +288,7 @@ warning(<span class="string">"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;
 <p>
 Now that the validation has a unique code identifying the problem we can register quick fixes for it. 
 We start by adding the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/quickfix/QuickfixProviderFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment" >QuickfixProviderFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/quickfix/QuickfixProviderFragment.java" title="View Source Code" >(src)</a> 
-to our workflow and after regenerating the code we should find an empty class <em>{MyDsl}QuickfixProvider</em> 
+to our workflow and after regenerating the code we should find an empty class <em>MyDslQuickfixProvider</em> 
 in our DSL&apos;s UI project and new entries in the <em>plugin.xml_gen</em> file.
 </p>
 <p>
@@ -384,7 +384,7 @@ You can even define quick fixes for linking errors. The issue codes are assigned
 example how to add quick fixes for these errors.
 </p>
 <p>
-Analogously, there is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parser/antlr/ISyntaxErrorMessageProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider" >ISyntaxErrorMessageProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/antlr/ISyntaxErrorMessageProvider.java" title="View Source Code" >(src)</a> to assign 
+Hence, there is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parser/antlr/ISyntaxErrorMessageProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider" >ISyntaxErrorMessageProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/antlr/ISyntaxErrorMessageProvider.java" title="View Source Code" >(src)</a> to assign 
 issue codes to syntactical errors.
 </p>
 <a name="3"></a>
@@ -524,7 +524,7 @@ the outline with the editor selection by clicking the <em>Link with Editor</em> 
 </p>
 <p>
 In its default implementation, the outline view shows the containment hierarchy of your model. 
-This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e., 
+This should be sufficient in most cases. If you want to adjust the structure of the outline, i.e. 
 by omitting a certain kind of node or by introducing additional nodes, you can customize 
 the outline by implementing your own <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/outline/IOutlineTreeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider" >IOutlineTreeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/outline/IOutlineTreeProvider.java" title="View Source Code" >(src)</a>.
 </p>
@@ -640,7 +640,7 @@ provider</a> of your language. If you want the labels to be specific to the outl
 <p>
 Note that the method <span class="inlinecode">_text(modelElement)</span> can return a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a> or a 
 <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/StyledString.html" title="View JavaDoc"><abbr title="org.eclipse.jface.viewers.StyledString" >StyledString</abbr></a>. The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/label/StylerFactory.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.label.StylerFactory" >StylerFactory</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/StylerFactory.java" title="View Source Code" >(src)</a>
-can be used to create <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/StyledString.html" title="View JavaDoc"><abbr title="org.eclipse.jface.viewers.StyledString" >StyledStrings</abbr></a>, like in the follwoing example: 
+can be used to create <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/StyledString.html" title="View JavaDoc"><abbr title="org.eclipse.jface.viewers.StyledString" >StyledStrings</abbr></a>, like in the following example: 
 </p>
 <p>
 <div class="literallayout">
@@ -778,7 +778,7 @@ use such categories:
 </div>
 </p>
 <p>
-As always, you have to declare a binding for your custom implementation in your <em>MydslUiModule</em>:
+As always, you have to declare a binding for your custom implementation in your <em>MyDslUiModule</em>:
 </p>
 <p>
 <div class="literallayout">

@@ -25,7 +25,7 @@ use Xtext together with other EMF frameworks like for instance the Graphical Mod
 In addition to this nice runtime architecture, you will get a full blown Eclipse-IDE specifically tailored 
 for your language. It already provides great default functionality for 
 all aspects and again comes with DSLs and APIs that allow to configure or change the most common things 
-very easily. And if that's not flexible enough there is Guice to replace the default behaviour with
+very easily. And if that's not flexible enough there is Guice to replace the default behavior with
 your own implementations.
 
 

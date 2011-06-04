@@ -1,6 +1,6 @@
 section:encoding[Encoding in Xtext]
 
-Encoding, AKA e[character set], describes the way characters are encoded into bytes and vice versa. 
+Encoding, aka e[character set], describes the way characters are encoded into bytes and vice versa. 
 Famous standard encodings are e[UTF-8] or e[ISO-8859-1]. The list of available encodings can be determined
 by calling codeRef[java.nio.charset.Charset][Charset.availableCharsets()]. There is also a list of encodings and their 
 canonical Java names in the link[http://download.oracle.com/javase/1.5.0/docs/guide/intl/encoding.doc.html][API docs].

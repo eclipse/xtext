@@ -1303,10 +1303,10 @@ The rich string is translated to an efficient string concatenation and the retur
 is <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/CharSequence.html" title="View JavaDoc"><abbr title="java.lang.CharSequence" >CharSequence</abbr></a> which allows room for efficient implementation.
 </p>
 <a name="13-3"></a>
-<h3>Whitespace Handling</h3>
+<h3>White Space Handling</h3>
 <p>
-One of the key features of rich strings is the smart handling of whitespace in the template output. The
-whitespace is not written into the output data structure as is but preprocessed. This allows for readable
+One of the key features of rich strings is the smart handling of white space in the template output. The
+white space is not written into the output data structure as is but preprocessed. This allows for readable
 templates as well as nicely formatted output. This can be achieved by applying three simple rules
 when the rich string is evaluated.
 </p>
@@ -1324,12 +1324,12 @@ when the rich string is evaluated.
 				as the opening and closing marks of the rich string itself.
 				
 				The indentation is considered to be relative to such a control structure if the previous line
-				ends with a control structure followed by optional white space. The amount of whitespace is not
+				ends with a control structure followed by optional white space. The amount of white space is not
 				taken into account but the delta to the other lines.
 	</li>
 	<li>
 		
-				Lines that do not contain any static text which is not whitespace but do contain control structures
+				Lines that do not contain any static text which is not white space but do contain control structures
 				or invocations of other templates which evaluate to an empty string, will not appear in the output.
 	</li>
 </ol>

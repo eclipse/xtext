@@ -84,7 +84,7 @@ direction form the owner to the type. Bi-directional associations must be modele
 <em>eOpposite</em> of each other and owned by either end of the associations.
 </p>
 <p>
-The superclass of EAttibutes and EReferences is <em>EStructuralFeature</em> and allows to define a name and a 
+The superclass of EAttributes and EReferences is <em>EStructuralFeature</em> and allows to define a name and a 
 cardinality by setting <em>lowerBound</em> and <em>upperBound</em>. Setting the latter to -1 means &apos;unbounded&apos;. 
 </p>
 <p>
@@ -172,8 +172,8 @@ default XMI serialization, e.g.
 				editors, regular expressions, or stream editors.
 	</li>
 	<li>
-		You can use the same tools for version control as you use for source code. Merging and 
-				diffing is performed in a syntax the developer is familiar with.
+		You can use the same tools for version control as you use for source code. Comparing and 
+				merging is performed in a syntax the developer is familiar with.
 	</li>
 	<li>
 		It is impossible to break the model such that it cannot be reopened in the editor again.
@@ -380,7 +380,7 @@ We will elaborate the example in three stages.
 <p>
 A diagram editor in GMF by default manages two resources: One for the semantic model, that is the 
 model we&apos;re actually interested in for further processing. In our example it is a model representing 
-entities and datatypes. The second resource holds the notation model. It represents the shapes you 
+entities and data types. The second resource holds the notation model. It represents the shapes you 
 see in the diagram and their graphical properties. Notation elements reference their semantic 
 counterparts. An entity&apos;s name would be in the semantic model, while the font to draw it in the 
 diagram would be stored the notation model. Note that in the integration example we&apos;re only trying 
@@ -434,7 +434,7 @@ validator from Xtext is already integrated in the diagram editor via the menu ba
 <h4>Stage 2: Calling the Xtext Parser to Parse GMF Labels</h4>
 <p>
 GMF&apos;s generated parser for the labels is a bit poor: It will work on attributes only, and will fail for 
-cross-references, e.g. an attibute&apos;s type. So why not use the Xtext parser to process the user&apos;s input? 
+cross-references, e.g. an attribute&apos;s type. So why not use the Xtext parser to process the user&apos;s input? 
 </p>
 <p>
 An <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/XtextResource.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.XtextResource" >XtextResource</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a> keeps track of it&apos;s concrete syntax representation by 

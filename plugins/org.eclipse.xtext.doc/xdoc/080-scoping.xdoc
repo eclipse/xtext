@@ -95,7 +95,7 @@ its codeRef[org.eclipse.xtext.naming.QualifiedName], as well as its codeRef[org.
 In addition one can export arbitrary information using the e[user data] map. The following diagram gives 
 an overview on the description classes and their relationships.
 
-img[images/index_datamodel.png][The datamodel of Xtext's index][ ][ ]
+img[images/index_datamodel.png][The data model of Xtext's index][ ][ ]
 
 A language is configured with a default implementation of codeRef[org.eclipse.xtext.resource.IResourceDescription$Manager] 
 which computes the list of exported codeRef[org.eclipse.xtext.resource.IEObjectDescription][IEObjectDescriptions] by iterating 
@@ -533,7 +533,7 @@ Java, where
 
 code[Java][import java.util.Set;]
 
-makes it possible to refer to 'java.util.Set' by its simple name 'Set'.
+makes it possible to refer to codeRef[java.util.Set][java.util.Set] by its simple name codeRef[java.util.Set].
 Contrary to Java the import is not active for the whole file but only for the namespace it is declared 
 in and its child namespaces. That is why you can write the following in the example DSL:
 

@@ -17,7 +17,7 @@ code[Java][warning("Name should start with a capital",
 
 Now that the validation has a unique code identifying the problem we can register quick fixes for it. 
 We start by adding the codeRef[org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment] 
-to our workflow and after regenerating the code we should find an empty class e[{MyDsl}QuickfixProvider] 
+to our workflow and after regenerating the code we should find an empty class e[MyDslQuickfixProvider] 
 in our DSL's UI project and new entries in the e[plugin.xml_gen] file.
 
 Continuing with the code[Java][INVALID_TYPE_NAME] problem from the domain model example we add a method with which 
@@ -94,5 +94,5 @@ You can even define quick fixes for linking errors. The issue codes are assigned
 codeRef[org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider]. Have a look at the domain model 
 example how to add quick fixes for these errors.
 
-Analogously, there is the codeRef[org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider] to assign 
+Hence, there is the codeRef[org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider] to assign 
 issue codes to syntactical errors.

@@ -5,7 +5,7 @@ section:case_insensitive_languages[Case Insensitive Languages]
 
 In some cases, e.g. if your e[SHIFT] key is broken, you might want to design a case insensitive language. Xtext offers separate ref:generator_fragment[generator fragments] for this purpose. 
 
-For case insensitive keywords, open your MWE workflow and replace the Antlr related fragments: 
+For case insensitive keywords, open your MWE workflow and replace the ANTLR related fragments: 
 
 code[MWE2][// The antlr parser generator fragment.
 fragment = parser.antlr.XtextAntlrGeneratorFragment {
@@ -15,7 +15,7 @@ fragment = parser.antlr.XtextAntlrGeneratorFragment {
 }
 ...
 
-// generates a more lightweight Antlr parser and lexer tailored ...
+// generates a more lightweight ANTLR parser and lexer tailored ...
 fragment = parser.antlr.XtextAntlrUiGeneratorFragment {
 }
 ]
@@ -30,7 +30,7 @@ fragment = parser.antlr.ex.rt.AntlrGeneratorFragment {
 }
 ...
 
-// generates a more lightweight Antlr parser and lexer tailored ...
+// generates a more lightweight ANTLR parser and lexer tailored ...
 fragment = parser.antlr.ex.ca.ContentAssistParserGeneratorFragment {
     options = {
         ignoreCase = true

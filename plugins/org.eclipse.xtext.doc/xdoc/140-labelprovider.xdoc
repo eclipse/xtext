@@ -1,7 +1,7 @@
 section:labelProvider[Label Provider]
 
 There are various places in the UI in which model elements have to be presented to the user: In the 
-ref:outline[outline view], in ref:hyperlinking[hyper links], in ref:contentAssist[content proposals], 
+ref:outline[outline view], in ref:hyperlinking[hyperlinks], in ref:contentAssist[content proposals], 
 find dialogs etc. Xtext allows to customize each of these appearances by individual implementation of
 the codeRef[org.eclipse.jface.viewers.ILabelProvider] interface. 
 
@@ -38,7 +38,7 @@ By default, Xtext binds the codeRef[org.eclipse.xtext.ui.label.DefaultEObjectLab
 but you can change the binding individually for the Outline, Content Assist or other places. For that purpose, 
 there is a so called e[binding annotation] for each use case. For example, to use a custom 
 e[MyContentAssistLabelProvider] to display elements in the content assist, you have to override 
-code[Java][configureContentProposalLabelProvider(..)] p.in your language's UI module:
+code[Java][configureContentProposalLabelProvider(..)] in your language's UI module:
 
 code[Java][
 @Override

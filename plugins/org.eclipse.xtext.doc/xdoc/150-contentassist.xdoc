@@ -5,7 +5,7 @@ The Xtext generator, amongst other things, generates the following two content a
 ul[
 	item[An abstract proposal provider class named code[Java][Abstract{MyLang}ProposalProvider] generated 
 		into the e[src-gen] folder within the e[ui] project, and]
-	item[a concrete sub-class in the e[src]-folder of the e[ui] project called 
+	item[a concrete subclass in the e[src]-folder of the e[ui] project called 
 		code[Java][{MyLang}ProposalProvider]]
 ]
 

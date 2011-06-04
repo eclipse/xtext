@@ -13,7 +13,7 @@ ul[
 	item[Operator overloading - make your libraries even more expressive]
 	item[Powerful switch expressions - type based switching with implicit casts]
 	item[No statements - Everything is an expression]
-	item[First class support for template syntax, with intelligent whitespace handling]
+	item[First class support for template syntax, with intelligent white space handling]
 	item[Extension methods - Enhance closed types with new functionality optionally injected via JSR-330]
 	item[property access syntax - shorthands for getter and setter access]
 	item[multiple dispatch aka polymorphic method invocation]

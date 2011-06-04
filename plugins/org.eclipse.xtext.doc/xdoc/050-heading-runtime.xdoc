@@ -34,7 +34,7 @@ This means that everything which is created via extension points is managed by G
 declare dependencies and get them injected upon creation. 
 
 The only thing you have to do in order to use this factory is to prefix the class with the factory 
-e[{MyDsl}ExecutableExtensionFactory] name followed by a colon.
+e[MyDslExecutableExtensionFactory] name followed by a colon.
 
 code[XML][
 <extension point="org.eclipse.ui.editors">
@@ -54,7 +54,7 @@ code[XML][
 section[Logging]
 
 Xtext uses Apache's log4j for logging. It is configured using files named e[log4j.properties], which are looked up 
-in the root of the Java classpath. If you want to change or provide configuration at runtime (i.e. non-OSGI), all 
+in the root of the Java classpath. If you want to change or provide configuration at runtime (i.e. non-OSGi), all 
 you have to do is putting such a e[log4j.properties] in place and make sure that it is not overridden by other 
 e[log4j.properties] in previous classpath entries.
 

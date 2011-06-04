@@ -101,7 +101,7 @@ for (AbstractElement abstractElement : elements) {
 Note that you'll find a lot of convenience API in EMF's e[EcoreUtil] and Xtext's codeRef[org.eclipse.xtext.EcoreUtil2]. 
 
 
-section2:node_model[Working with the Parse Tree (aka Node Model)]
+section2:node_model[Working with the Node Model]
 
 In many situations the information from the e[AST] is sufficient, but in some situations you need additional syntactical information. In Xtext not only
 an e[AST] is constructed while parsing but also a so called e[parse tree], which contains all the textual information chunked in so called tokens. The e[parse tree], also 
@@ -109,8 +109,9 @@ called e[node model], consists of two different kinds of nodes.
 
 e[LeafNodes] as the name suggests represent the leafs of the parse tree. Each leaf node represents one 
 token. If you go through all leaf nodes of a parse tree and concatenate all the tokens to one string, you'll end up with the whole textual representation 
-of the model, including all hidden tokens such as whitespace and comments. The following code does exactly that:
+of the model, including all hidden tokens such as white space and comments. The following code does exactly that:
 
+todo[Code is outdated]
 code[Java][
 ICompositeNode node = NodeUtil.getNode(domainModel);
 Iterable<INode> contents = NodeUtil.getAllContents(node);
@@ -122,11 +123,11 @@ for (INode noe : contents) {
 System.out.println(text);
 ]
 
-In addition to the text e[LeafNodes] also hold information about the line, the offset and the length of that token.
+In addition to the text e[ILeafNodes] also hold information about the line, the offset and the length of that token.
 
-The other node type is called e[CompositeNode] and is created for almost each grammar element. A 
+The other node type is called e[ICompositeNode] and is created for almost each grammar element. A 
 composite node can contain other composite nodes and leaf nodes. The super type of both node types is 
-e[AbstractNode]. One can find a couple of convenience methods in codeRef[org.eclipse.xtext.nodemodel.util.NodeModelUtils].
+e[INode]. One can find a couple of convenience methods in codeRef[org.eclipse.xtext.nodemodel.util.NodeModelUtils].
 
 
 section2:working_with_grammar_model[Working with the Grammar]

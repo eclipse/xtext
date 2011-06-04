@@ -58,7 +58,7 @@ Other than associations in UML, EReferences in Ecore are always owned by one ECl
 direction form the owner to the type. Bi-directional associations must be modeled as two references, being 
 e[eOpposite] of each other and owned by either end of the associations.
 
-The superclass of EAttibutes and EReferences is e[EStructuralFeature] and allows to define a name and a 
+The superclass of EAttributes and EReferences is e[EStructuralFeature] and allows to define a name and a 
 cardinality by setting e[lowerBound] and e[upperBound]. Setting the latter to -1 means 'unbounded'. 
 
 The common supertype of EDataType and EClass is e[EClassifier]. An codeRef[org.eclipse.emf.ecore.EPackage] acts as a namespace and 
@@ -119,8 +119,8 @@ default XMI serialization, e.g.
 ul[
 	item[You can use well-known and easy-to-use tools and techniques for manipulation, such as text
 		editors, regular expressions, or stream editors.]
-	item[You can use the same tools for version control as you use for source code. Merging and 
-		diffing is performed in a syntax the developer is familiar with.]
+	item[You can use the same tools for version control as you use for source code. Comparing and 
+		merging is performed in a syntax the developer is familiar with.]
 	item[It is impossible to break the model such that it cannot be reopened in the editor again.]
 	item[Models can be fixed using the same tools, even if they have become incompatible with a 
 		new version of the Ecore model.]
@@ -198,7 +198,7 @@ section2:gmf_integration_stage_1[Stage 1: Make GMF Read and Write the Semantic M
 
 A diagram editor in GMF by default manages two resources: One for the semantic model, that is the 
 model we're actually interested in for further processing. In our example it is a model representing 
-entities and datatypes. The second resource holds the notation model. It represents the shapes you 
+entities and data types. The second resource holds the notation model. It represents the shapes you 
 see in the diagram and their graphical properties. Notation elements reference their semantic 
 counterparts. An entity's name would be in the semantic model, while the font to draw it in the 
 diagram would be stored the notation model. Note that in the integration example we're only trying 
@@ -245,7 +245,7 @@ validator from Xtext is already integrated in the diagram editor via the menu ba
 section3[Stage 2: Calling the Xtext Parser to Parse GMF Labels]
 
 GMF's generated parser for the labels is a bit poor: It will work on attributes only, and will fail for 
-cross-references, e.g. an attibute's type. So why not use the Xtext parser to process the user's input? 
+cross-references, e.g. an attribute's type. So why not use the Xtext parser to process the user's input? 
 
 An codeRef[org.eclipse.xtext.resource.XtextResource] keeps track of it's concrete syntax representation by 
 means of a so called node model (see ref:parser_rules for a more detailed description). The node model 

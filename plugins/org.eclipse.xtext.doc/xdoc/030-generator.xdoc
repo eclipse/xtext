@@ -126,7 +126,7 @@ img[images/generator-structure.png][][][width:50%]
 section3:generator_fragment[Generator Fragments]
 
 The list of grammar fragments forms a chain of responsibility, that is they each get the chance to contribute
-to the generation of langauge infrastructure components and are called in the declared order.
+to the generation of language infrastructure components and are called in the declared order.
 Each fragment gets the grammar of the language as an EMF model passed in and is able to generate code in one 
 of the configured locations and contribute to several shared artifacts. A generator fragment must implement
 the interface codeRef[org.eclipse.xtext.generator.IGeneratorFragment].

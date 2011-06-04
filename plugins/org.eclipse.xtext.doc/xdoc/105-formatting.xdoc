@@ -2,7 +2,7 @@ section:formatting[Formatting (Pretty Printing)]
 
 A formatter can be implemented via the codeRef[org.eclipse.xtext.formatting.IFormatter] 
 service. Technically speaking, a formatter is a ref:tokenstream[Token Stream] which 
-inserts/removes/modifies hidden tokens (whitespace, line-breaks, comments).
+inserts/removes/modifies hidden tokens (white space, line-breaks, comments).
 
 The formatter is invoked during the ref:serialization[serialization phase] and when the user triggers 
 formatting in the editor (for example, using the CTRL+SHIFT+F shortcut).
@@ -10,13 +10,13 @@ formatting in the editor (for example, using the CTRL+SHIFT+F shortcut).
 Xtext ships with two formatters:
 ul[
 	item[The codeRef[org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter] simply writes one 
-		whitespace between all tokens.]
+		white space between all tokens.]
 	item[The codeRef[org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter] allows advanced 
 		configuration using a codeRef[org.eclipse.xtext.formatting.impl.FormattingConfig]. Both are explained
 		below.]
 ]
 
-A declarative formatter can be implemented by sub-classing 
+A declarative formatter can be implemented by subclassing 
 codeRef[org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter], as shown in 
 the following example:
 
@@ -80,7 +80,7 @@ The default is 80.
 
 section2[FormattingConfig Instructions]
 
-Per default, the declarative formatter inserts one whitespace between two 
+Per default, the declarative formatter inserts one white space between two 
 tokens. Instructions can be used to specify a different behavior. They consist of two parts: e[When] 
 to apply the instruction and e[what] to do.
 
@@ -93,7 +93,7 @@ ul[
 		to insert a line break after the semicolon.]
 	item[code[Java][before(element)]: The instruction is executed before the matched element. For example, if your 
 		grammar contains lists which separate their values with the keyword code[Xtext][","], you can instruct the 
-		formatter to suppress the whitespace before the comma.]
+		formatter to suppress the white space before the comma.]
 	item[code[Java][around(element)]: This is the same as code[Java][before(element)] combined with code[Java][after(element)].]
 	item[code[Java][between(left, right)]: This matches if e[left] directly follows e[right] in the document. 
 		There may be no other tokens in between e[left] and e[right].]
@@ -131,7 +131,7 @@ ul[
 	item[code[Java][setLinewrap()]: Inserts a line-wrap at this position.]
 	item[code[Java][setLinewrap(int count)]: Inserts e[count] numbers of line-wrap at this position.]
 	item[code[Java][setLinewrap(int min, int def, int max)]: If the amount of line-wraps that have been 
-		at this position before formatting can be determined (i.g. when a node model is present), 
+		at this position before formatting can be determined (i.e. when a node model is present), 
 		then the amount of of line-wraps is adjusted to be within the interval e[min], e[max] 
 		and is then reused. In all other cases e[def] line-wraps are inserted. Example: 
 		code[Java][setLinewrap(0, 0, 1)] will preserve existing line-wraps, but won't allow more than one 
@@ -139,10 +139,10 @@ ul[
 	item[code[Java][setNoLinewrap()]: Suppresses automatic line wrap, which may occur when the line's length 
 		exceeds the defined limit.]
 	item[code[Java][setSpace(String space)]: Inserts the string e[space] at this position. If you use this 
-		to insert something else than whitespace, tabs or newlines, a small puppy will die somewhere 
+		to insert something else than white space, tabs or newlines, a small puppy will die somewhere 
 		in this world.]
-	item[code[Java][setNoSpace()]: Suppresses the whitespace between tokens at this position. Be aware that 
-		between some tokens a whitespace is required to maintain a valid concrete syntax.]
+	item[code[Java][setNoSpace()]: Suppresses the white space between tokens at this position. Be aware that 
+		between some tokens a white space is required to maintain a valid concrete syntax.]
 ]
 
 

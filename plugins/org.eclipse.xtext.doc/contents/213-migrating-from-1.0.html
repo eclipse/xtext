@@ -152,9 +152,9 @@ fragment&nbsp;=&nbsp;outline.OutlineTreeProviderFragment&nbsp;{}</br>
 </div>
 </p>
 <p>
-After generating a new class named <em>{MyDsl}OutlineTreeProvider</em> is generated. The API changed completely.
+After generating a new class named <em>MyDslOutlineTreeProvider</em> is generated. The API changed completely.
 For that reason you should take a closer look at the <a href="120-heading-UI.html#4" title="Go to &quot;Outline View&quot;">chapter on the outline</a>. 
-The old classes named <em>{MyDsl}Transformer</em> and <em>{MyDsl}OutlineNodeAdapterFactory</em> have become obsolete
+The old classes named <em>MyDslTransformer</em> and <em>MyDslOutlineNodeAdapterFactory</em> have become obsolete
 and should be removed after having migrated your code to the new API.
 </p>
 <a name="1-5"></a>
@@ -187,7 +187,7 @@ As a example the configure method could look like this one:
 </div>
 
 The last thing you have to do is to change the binding of the <em>IAutoEditStrategy</em> 
-in the <em>{MyDsl}UIModule</em> from
+in the <em>MyDslUIModule</em> from
 </p>
 <p>
 <div class="literallayout">
@@ -222,7 +222,7 @@ changes. It is usually only necessary to change your code, if you face any compi
 				has been removed. Use <span class="inlinecode">getScope(Resource,&nbsp;EReference,&nbsp;Predicate&lt;IEObjectDescription&gt;)</span> instead.
 	</li>
 	<li>
-		The Interface <em>IAntlrParser</em> has been removed. Use the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parser/IParser.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.parser.IParser" >IParser</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IParser.java" title="View Source Code" >(src)</a> instead.
+		The interface <em>IAntlrParser</em> has been removed. Use the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parser/IParser.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.parser.IParser" >IParser</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IParser.java" title="View Source Code" >(src)</a> instead.
 	</li>
 	<li>
 		The methods <span class="inlinecode">error(..)</span> and <span class="inlinecode">warning(..)</span> in the 
@@ -263,7 +263,7 @@ changes. It is usually only necessary to change your code, if you face any compi
 	<li>
 		The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/ILocationInFileProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.ILocationInFileProvider" >ILocationInFileProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java" title="View Source Code" >(src)</a> now offers methods <span class="inlinecode">getSignificantTextRegion()</span>
 				and <span class="inlinecode">getFullTextRegion()</span> to make the distinction between the name and the full region of an element.
-				The old <span class="inlinecode">getLocation()</span> methods was removed.
+				The old <span class="inlinecode">getLocation()</span> method was removed.
 	</li>
 </ul>
 </p>

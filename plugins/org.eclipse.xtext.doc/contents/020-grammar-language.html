@@ -168,7 +168,7 @@ the structure of the instantiated objects. Xtext can infer Ecore models from a g
 (see <a href="020-grammar-language.html#2" title="Go to &quot;Ecore Model Inference&quot;">Ecore model inference</a>) but it is also 
 possible to import existing Ecore models. You can even mix both approaches and use multiple existing Ecore models and 
 infer some others from a single grammar. This allows for easy reuse of existing abstractions while still
-having the advantage of short turn arounds with derived Ecore models. 
+having the advantage of short turnarounds with derived Ecore models. 
 </p>
 <a name="1-1-0"></a>
 <h4>EPackage Generation</h4>
@@ -528,13 +528,13 @@ should use data type rules instead for the above mentioned reasons.</em>
 <h5>Alternatives</h5>
 <p>
 Alternatives allow to define multiple valid options in the input file. 
-For instance, the whitespace rule uses alternatives like this:
+For instance, the white space rule uses alternatives like this:
 </p>
 <p>
 <span class="inlinecode"><span class="keyword">terminal</span>&nbsp;WS&nbsp;:&nbsp;(<span class="string">&apos;&nbsp;&apos;</span>|<span class="string">&apos;\t&apos;</span>|<span class="string">&apos;\r&apos;</span>|<span class="string">&apos;\n&apos;</span>)+;</span>
 </p>
 <p>
-That is a WS can be made of one or more whitespace characters (including <span class="inlinecode"><span class="string">&apos;&nbsp;&apos;</span>,&nbsp;<span class="string">&apos;\t&apos;</span>,&nbsp;<span class="string">&apos;\r&apos;</span>,&nbsp;<span class="string">&apos;\n&apos;</span></span>).
+That is a WS can be made of one or more white space characters (including <span class="inlinecode"><span class="string">&apos;&nbsp;&apos;</span>,&nbsp;<span class="string">&apos;\t&apos;</span>,&nbsp;<span class="string">&apos;\r&apos;</span>,&nbsp;<span class="string">&apos;\n&apos;</span></span>).
 </p>
 <a name="1-2-1-7"></a>
 <h5>Groups</h5>
@@ -573,7 +573,7 @@ to extract repeating parts of a definition:
 <h4>EOF - End Of File</h4>
 <p>
 The EOF (End Of File) token may be used to describe that the end of the input stream is a valid situation
-at a certail point in a terminal rule. This allows to consume the complete remaining input of a file
+at a certain point in a terminal rule. This allows to consume the complete remaining input of a file
 starting with a special delimiter.
 </p>
 <p>
@@ -584,7 +584,7 @@ starting with a special delimiter.
 <p>
 The parser is fed with a sequence of terminals and walks through the so called parser rules. Hence a parser rule - 
 contrary to a terminal rule - does not produce a single atomic terminal token but a tree of non-terminal 
-and terminal tokens. They lead to a so called <a href="" title="Go to &quot;Working with the Parse Tree (aka Node Model)&quot;">parse tree</a> (in Xtext it is also referred 
+and terminal tokens. They lead to a so called <a href="" title="Go to &quot;Working with the Node Model&quot;">parse tree</a> (in Xtext it is also referred 
 as node model). Furthermore, parser rules are handled as kind of a building plan for the creation of 
 the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObjects</abbr></a> that form the semantic model (the linked abstract syntax graph or AST). Due to this 
 fact, parser rules are even called production or EObject rules. Different constructs like actions and 
@@ -966,7 +966,7 @@ but always return the instance that has been created by the invoked <em>TokenX</
 <h5>Assigned Actions</h5>
 <p>
 
-Xtext leverages the powerful Antlr parser which implements an <span class="inlinecode">LL(*)</span> algorithm. Even though <span class="inlinecode">LL</span>
+Xtext leverages the powerful ANTLR parser which implements an <span class="inlinecode">LL(*)</span> algorithm. Even though <span class="inlinecode">LL</span>
 parsers have many advantages with respect to readability, debuggability and error recovery, there are
 also some drawbacks. The most important one is that it does not allow left recursive grammars.
 For instance, the following rule is not allowed in LL-based grammars, because <span class="inlinecode">Expression&nbsp;<span class="string">&apos;+&apos;</span>&nbsp;Expression</span> is left recursive:
@@ -1088,14 +1088,15 @@ current&nbsp;=&nbsp;temp;</br>
 <p>
 Because parser rules describe not a single token, but a sequence of patterns in the input, it is necessary to define
 the interesting parts of the input. Xtext introduces the concept of hidden tokens to handle semantically unimportant
-things like whitespaces, comments, etc. in the input sequence gracefully. It is possible to define a set of terminal 
+things like white spaces, comments, etc. in the input sequence gracefully. It is possible to define a set of terminal 
 symbols, that are hidden from the parser rules and automatically skipped when they are recognized. Nevertheless, they 
 are transparently woven into the node model, but not relevant for the semantic model. 
 </p>
 <p>
 Hidden terminals may optionally appear between any other terminals in any cardinality. They can be described per rule 
 or for the whole grammar. When <a href="020-grammar-language.html#3" title="Go to &quot;Grammar Mixins&quot;">reusing a single grammar</a> its definition of hidden tokens is reused,
-too. The grammar <span class="inlinecode">org.eclipse.xtext.common.Terminals</span> comes with a reasonable default and hides all comments and whitespace from the parser rules.
+too. The grammar <span class="inlinecode">org.eclipse.xtext.common.Terminals</span> comes with a reasonable default and hides all comments and white
+space from the parser rules.
 </p>
 <p>
 If a rule defines hidden symbols, you can think of a kind of scope that is automatically introduced. Any rule that is
@@ -1117,7 +1118,8 @@ Fullname:&nbsp;</br>
 </div>
 </p>
 <p>
-The sample rule <em>Person</em> defines multiline comments (<span class="inlinecode">ML_COMMENT</span>), single-line comments (<span class="inlinecode">SL_COMMENT</span>), and whitespace (<span class="inlinecode">WS</span>) to be allowed between
+The sample rule <em>Person</em> defines multiline comments (<span class="inlinecode">ML_COMMENT</span>), single-line comments (<span class="inlinecode">SL_COMMENT</span>), and white
+space (<span class="inlinecode">WS</span>) to be allowed between
  the <em>name</em> and the <em>age</em>. Because the rule <em>Fullname</em> does not introduce an own set of hidden terminals, it allows the same symbols to appear 
  between <em>firstname</em> and <em>lastname</em> as the calling rule <em>Person</em>. Thus, the following input is perfectly valid for the given grammar snippet:
 </p>
@@ -1279,14 +1281,14 @@ that allow to deal with this problem:
 <p>
 <ul>
 	<li>
-		Enable Backtracking: Xtext allows to enable backtracking for the Antlr parser generator. This
+		Enable Backtracking: Xtext allows to enable backtracking for the ANTLR parser generator. This
 			is usually not recommended since it influences error message strategies at runtime and shadows actually
 			existing problems in the grammar.
 	</li>
 	<li>
 		Syntactic Predicates: The grammar language enables users to guide the parser in case of ambiguities.
 			This mechanism is achieved by syntactic predicates. Since they affect only a very small part of the
-			grammar, syntactic predicates are the recommended approach to handle Antlr error messages during
+			grammar, syntactic predicates are the recommended approach to handle ANTLR error messages during
 			the parser generation.
 	</li>
 </ul>
@@ -1325,7 +1327,7 @@ The problems becomes more obvious as soon as nested conditions are used:
 </p>
 <p>
 Where does the <span class="inlinecode"><span class="keyword">else</span></span> branch belong to? This question can be answered by a quick look into the language
-specication which tells that the <span class="inlinecode"><span class="keyword">else</span></span> branch is part of the inner condition. However, the parser
+specification which tells that the <span class="inlinecode"><span class="keyword">else</span></span> branch is part of the inner condition. However, the parser
 generator cannot be convinced that easy. We have to guide it to this decision point by means of syntactic
 predicates which are expressed by a leading <span class="inlinecode">=&gt;</span> operator.
 </p>
@@ -1347,7 +1349,7 @@ and you don&apos;t know what to do, look for the <span class="inlinecode"><span 
 choose the other option that would start with an <span class="inlinecode"><span class="keyword">else</span></span> keyword, too.
 </p>
 <p>
-Well choosen predicates allow to solve most ambiguities and backtracking can often be disabled. 
+Well chosen predicates allow to solve most ambiguities and backtracking can often be disabled. 
 </p>
 <a name="2"></a>
 <h2>Ecore Model Inference</h2>
@@ -1532,7 +1534,7 @@ process(ecore::EPackage&nbsp;<span class="keyword">this</span>)&nbsp;:</br>
 </div>
 </p>
 <p>
-The invoked extension can then augment the generated Ecore model inplace. Some typical use cases are to:
+The invoked extension can then augment the generated Ecore model in place. Some typical use cases are to:
 <ul>
 	<li>
 		set default values for attributes,
@@ -1603,7 +1605,7 @@ Statemachine:&nbsp;..</br>
 </div>
 </p>
 <p>
-Mixing another grammar into a langauge makes the rules defined in that grammar referable. It is also possible to overwrite rules from the used grammar. 
+Mixing another grammar into a language makes the rules defined in that grammar referable. It is also possible to overwrite rules from the used grammar. 
 </p>
 <p>
 Example :

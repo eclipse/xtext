@@ -114,9 +114,9 @@ code[MWE2][
 fragment = outline.OutlineTreeProviderFragment {}
 ]
 
-After generating a new class named e[{MyDsl}OutlineTreeProvider] is generated. The API changed completely.
+After generating a new class named e[MyDslOutlineTreeProvider] is generated. The API changed completely.
 For that reason you should take a closer look at the ref:outline[chapter on the outline]. 
-The old classes named e[{MyDsl}Transformer] and e[{MyDsl}OutlineNodeAdapterFactory] have become obsolete
+The old classes named e[MyDslTransformer] and e[MyDslOutlineNodeAdapterFactory] have become obsolete
 and should be removed after having migrated your code to the new API.
 
 section2[AutoEditStrategy]
@@ -142,7 +142,7 @@ code[Java][
 	}
 ]
 The last thing you have to do is to change the binding of the e[IAutoEditStrategy] 
-in the e[{MyDsl}UIModule] from
+in the e[MyDslUIModule] from
 
 code[Java][
 public Class<? extends IAutoEditStrategy> bindIAutoEditStrategy()
@@ -163,7 +163,7 @@ ul[
 	item[In the interface codeRef[org.eclipse.xtext.scoping.IGlobalScopeProvider] the method code[Java][getScope(EObject,EReference)] 
 		has been removed. Use code[Java][getScope(Resource, EReference, Predicate<IEObjectDescription>)] instead.
 	]
-	item[The Interface e[IAntlrParser] has been removed. Use the codeRef[org.eclipse.xtext.parser.IParser] instead.]
+	item[The interface e[IAntlrParser] has been removed. Use the codeRef[org.eclipse.xtext.parser.IParser] instead.]
 	item[The methods code[Java][error(..)] and code[Java][warning(..)] in the 
 		codeRef[org.eclipse.xtext.validation.AbstractDeclarativeValidator] used to accept 
 		integer constants representing the codeRef[org.eclipse.emf.ecore.EStructuralFeature] which caused
@@ -189,7 +189,7 @@ ul[
 		codeRef[org.eclipse.xtext.util.TextRegion].]
 	item[The codeRef[org.eclipse.xtext.resource.ILocationInFileProvider] now offers methods code[Java][getSignificantTextRegion()]
 		and code[Java][getFullTextRegion()] to make the distinction between the name and the full region of an element.
-		The old code[Java][getLocation()] methods was removed.
+		The old code[Java][getLocation()] method was removed.
 	]
 ]
 
