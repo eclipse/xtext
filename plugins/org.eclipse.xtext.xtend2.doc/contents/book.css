@@ -131,6 +131,20 @@ a:visited {
 	text-align:center;
 }
 
+.jdoc {
+	text-decoration: none !important;
+	color: #000000 !important;
+}
+
+a.srcLink {
+	text-decoration: none;
+	color: #7f7f7f !important;
+}
+
+abbr {
+	border-bottom: 1px dotted;
+}
+
 ul {
 	margin-top: 0;
 	margin-bottom: 10
