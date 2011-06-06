@@ -6,7 +6,7 @@ Add new source folder called "src-gen/" and put the following statemachine into 
 events
 	doorClosed	D1CL
 	drawOpened	D2OP
-	lightOn		 L1ON
+	lightOn		L1ON
 	doorOpened	D1OP
 	panelClosed PNCL
 end
@@ -17,19 +17,18 @@ end
 
 commands
 	unlockPanel PNUL
-	lockPanel	 PNLK
-	lockDoor		D1LK
+	lockPanel	PNLK
+	lockDoor	D1LK
 	unlockDoor	D1UL
-	foo	D1UL
 end
 
 state idle
-	actions {foo unlockDoor lockPanel}
+	actions {unlockDoor lockPanel}
 	doorClosed => active
 end
 
 state active
-	drawOpened => waitingForLight
+	drawOpened 	=> waitingForLight
 	lightOn		=> waitingForDraw
 end
 
