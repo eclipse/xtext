@@ -9,6 +9,7 @@ package org.eclipse.xtext.util;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import com.google.common.collect.Lists;
 
@@ -39,6 +40,8 @@ public abstract class AbstractLinkedStack<THIS extends AbstractLinkedStack<?, EL
 		}
 
 		public ELEMENT next() {
+			if (!hasNext())
+				throw new NoSuchElementException();
 			Element<ELEMENT> prev = ele;
 			ele = ele.parent;
 			return prev.value;
