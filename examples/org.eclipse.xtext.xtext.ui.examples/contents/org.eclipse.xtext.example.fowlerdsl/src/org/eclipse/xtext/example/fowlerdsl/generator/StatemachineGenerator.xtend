@@ -19,54 +19,54 @@ class StatemachineGenerator implements IGenerator {
 	
 	def className(Resource res) {
 		var name = res.URI.lastSegment
-		name = name.substring(0, name.indexOf('.'))
+		return name.substring(0, name.indexOf('.'))
 	}
 	
 	def toJavaCode(Statemachine sm) '''
-	import java.io.BufferedReader;
-	import java.io.IOException;
-	import java.io.InputStreamReader;
-	
-	public class «sm.eResource.className» {
+		import java.io.BufferedReader;
+		import java.io.IOException;
+		import java.io.InputStreamReader;
 		
-		public static void main(String[] args) {
-			new «sm.eResource.className»().run();
-		}
-		
-		«FOR c : sm.commands»
-			«c.declareCommand»
-		«ENDFOR»
-		
-		protected void run() {
-			boolean executeActions = true;
-			String currentState = "«sm.states.head.name»";
-			String lastEvent = null;
-			while (true) {
-				«FOR state : sm.states»
-					«state.generateCode»
-				«ENDFOR»
-				«FOR resetEvent : sm.resetEvents»
-					if ("«resetEvent.name»".equals(lastEvent)) {
-						System.out.println("Resetting state machine.");
-						currentState = "«sm.states.head.name»";
-						executeActions = true;
-					}
-				«ENDFOR»
-				
+		public class «sm.eResource.className» {
+			
+			public static void main(String[] args) {
+				new «sm.eResource.className»().run();
+			}
+			
+			«FOR c : sm.commands»
+				«c.declareCommand»
+			«ENDFOR»
+			
+			protected void run() {
+				boolean executeActions = true;
+				String currentState = "«sm.states.head.name»";
+				String lastEvent = null;
+				while (true) {
+					«FOR state : sm.states»
+						«state.generateCode»
+					«ENDFOR»
+					«FOR resetEvent : sm.resetEvents»
+						if ("«resetEvent.name»".equals(lastEvent)) {
+							System.out.println("Resetting state machine.");
+							currentState = "«sm.states.head.name»";
+							executeActions = true;
+						}
+					«ENDFOR»
+					
+				}
+			}
+			
+			private String receiveEvent() {
+				System.out.flush();
+				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+				try {
+					return br.readLine();
+				} catch (IOException ioe) {
+					System.out.println("Problem reading input");
+					return "";
+				}
 			}
 		}
-		
-		private String receiveEvent() {
-			System.out.flush();
-			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-			try {
-				return br.readLine();
-			} catch (IOException ioe) {
-				System.out.println("Problem reading input");
-				return "";
-			}
-		}
-	}
 	'''
 	
 	def declareCommand(Command command) '''

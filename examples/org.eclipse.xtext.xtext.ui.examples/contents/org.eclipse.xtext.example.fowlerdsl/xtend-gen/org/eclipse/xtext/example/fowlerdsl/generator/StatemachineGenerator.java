@@ -31,17 +31,14 @@ public class StatemachineGenerator implements IGenerator {
   }
   
   public String className(final Resource res) {
-    String _xblockexpression = null;
     {
       URI _uRI = res.getURI();
       String _lastSegment = _uRI.lastSegment();
       String name = _lastSegment;
       int _indexOf = name.indexOf(".");
       String _substring = name.substring(0, _indexOf);
-      String _name = name = _substring;
-      _xblockexpression = (_name);
+      return _substring;
     }
-    return _xblockexpression;
   }
   
   public StringConcatenation toJavaCode(final Statemachine sm) {
