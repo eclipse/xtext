@@ -237,7 +237,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected void _toJavaStatement(XForLoopExpression expr, IAppendable b, boolean isReferenced) {
 		internalToJavaStatement(expr.getForExpression(), b, true);
-		b.append("\nfor (");
+		b.append("\nfor (final ");
 		JvmTypeReference paramType = getTypeProvider().getTypeForIdentifiable(expr.getDeclaredParam());
 		serialize(paramType,expr,b);
 		b.append(" ");
