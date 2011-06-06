@@ -62,7 +62,8 @@ public class Xtend09_DispatchMethods extends TestCase {
     } else if ((circle instanceof Rectangle)) {
       return _toLabel((Rectangle)circle);
     } else {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        java.util.Arrays.<Object>asList(circle).toString());
     }
   }
 }
