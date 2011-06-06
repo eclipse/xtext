@@ -48,29 +48,6 @@
         </definition>
     </extension>
     <extension
-            point="org.eclipse.ui.preferencePages">
-        <page
-            class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-            id="org.eclipse.xtext.purexbase.PureXbase"
-            name="PureXbase">
-            <keywordReference id="org.eclipse.xtext.purexbase.ui.keyword_PureXbase"/>
-        </page>
-        <page
-            category="org.eclipse.xtext.purexbase.PureXbase"
-            class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-            id="org.eclipse.xtext.purexbase.PureXbase.coloring"
-            name="Syntax Coloring">
-            <keywordReference id="org.eclipse.xtext.purexbase.ui.keyword_PureXbase"/>
-        </page>
-        <page
-            category="org.eclipse.xtext.purexbase.PureXbase"
-            class="org.eclipse.xtext.purexbase.ui.PureXbaseExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
-            id="org.eclipse.xtext.purexbase.PureXbase.templates"
-            name="Templates">
-            <keywordReference id="org.eclipse.xtext.purexbase.ui.keyword_PureXbase"/>
-        </page>
-    </extension>
-    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.purexbase.ui.keyword_PureXbase"
