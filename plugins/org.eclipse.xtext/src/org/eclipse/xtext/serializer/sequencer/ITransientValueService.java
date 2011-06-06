@@ -14,10 +14,10 @@ import com.google.inject.ImplementedBy;
  * 
  * Optional Values should not be serialized, but the serializer may decide to serialize them anyway, if needed. The use
  * case for this is that if a features holds its default value, this values doesn't need to be serialized. However, the
- * grammar may require the grammar to be serialized. Example: (x=INT y=INT)?; For x=1 and y=0 with 0 being y's default
+ * grammar may require the feature to be serialized. Example: (x=INT y=INT)?; For x=1 and y=0 with 0 being y's default
  * value, 0 needs to be serialized since otherwise x can not be serialized.
  * 
- * Multi-Value-Features don't have this "optional" status, because even if their list holds a default-value, this valu
+ * Multi-Value-Features don't have this "optional" status, because even if their list holds a default-value, this value
  * needs to be serialized to be preserved.
  * 
  * @author Moritz Eysholdt - Initial contribution and API

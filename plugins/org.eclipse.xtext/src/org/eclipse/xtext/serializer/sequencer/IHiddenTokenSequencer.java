@@ -16,21 +16,6 @@ public interface IHiddenTokenSequencer {
 		void setHiddenTokenSequencer(IHiddenTokenSequencer sequencer);
 	}
 
-	//	public class PassThroughHiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSequencerOwner {
-	//
-	//		protected ISyntacticSequencer sequencer;
-	//
-	//		public void createSequence(EObject context, EObject semanticObject, INode previousNode,
-	//				IEObjectSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-	//			sequencer.createSequence(context, semanticObject, previousNode, sequenceAcceptor, errorAcceptor);
-	//		}
-	//
-	//		@Inject
-	//		public void setSyntacticSequencer(ISyntacticSequencer sequencer) {
-	//			this.sequencer = sequencer;
-	//		}
-	//	}
-
 	void init(EObject context, EObject semanticObject, ISequenceAcceptor sequenceAcceptor,
 			ISerializationDiagnostic.Acceptor errorAcceptor);
 }
