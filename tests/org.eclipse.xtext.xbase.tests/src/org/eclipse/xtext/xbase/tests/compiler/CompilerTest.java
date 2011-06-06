@@ -70,15 +70,35 @@ public class CompilerTest extends AbstractXbaseTestCase {
 				, "if (true) 42 else 21");
 	}
 
-	public void testForEach() throws Exception {
+	public void testForEach_01() throws Exception {
 		assertCompilesTo(
 				"\njava.util.ArrayList<String> _arrayList = new java.util.ArrayList<String>();\n" + 
-				"for (String s : _arrayList) {\n" +
+				"for (final String s : _arrayList) {\n" +
 				"  s.length();\n" +
 				"}"
 				, "for (String s : new java.util.ArrayList<String>())" +
 						"s.length");
 	}
+	
+	public void testForEach_02() throws Exception {
+		assertCompilesTo(
+				"\njava.util.ArrayList<String> _arrayList = new java.util.ArrayList<String>();\n" + 
+				"for (final String s : _arrayList) {\n" +
+				"  s.length();\n" +
+				"}"
+				, "for (s : new java.util.ArrayList<String>())" +
+						"s.length");
+	}
+	
+//	public void testForEach_03() throws Exception {	
+//		assertCompilesTo(
+//				"\njava.util.ArrayList<String> _arrayList = new java.util.ArrayList<String>();\n" + 
+//				"for (final String s : _arrayList) {\n" +
+//				"  s.length();\n" +
+//				"}"
+//				, "for (String s : new java.util.ArrayList())" +
+//						"s.length");
+//	}
 	
 	protected void assertCompilesTo(final String expectedJavaCode, final String xbaseCode) throws Exception {
 		XExpression model = expression(xbaseCode,true);
