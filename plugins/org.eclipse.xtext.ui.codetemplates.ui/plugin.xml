@@ -48,29 +48,6 @@
         </definition>
     </extension>
     <extension
-            point="org.eclipse.ui.preferencePages">
-        <page
-            class="org.eclipse.xtext.ui.codetemplates.ui.CodetemplatesExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-            id="org.eclipse.xtext.ui.codetemplates.Codetemplates"
-            name="Codetemplates">
-            <keywordReference id="org.eclipse.xtext.ui.codetemplates.ui.keyword_Codetemplates"/>
-        </page>
-        <page
-            category="org.eclipse.xtext.ui.codetemplates.Codetemplates"
-            class="org.eclipse.xtext.ui.codetemplates.ui.CodetemplatesExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-            id="org.eclipse.xtext.ui.codetemplates.Codetemplates.coloring"
-            name="Syntax Coloring">
-            <keywordReference id="org.eclipse.xtext.ui.codetemplates.ui.keyword_Codetemplates"/>
-        </page>
-        <page
-            category="org.eclipse.xtext.ui.codetemplates.Codetemplates"
-            class="org.eclipse.xtext.ui.codetemplates.ui.CodetemplatesExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
-            id="org.eclipse.xtext.ui.codetemplates.Codetemplates.templates"
-            name="Templates">
-            <keywordReference id="org.eclipse.xtext.ui.codetemplates.ui.keyword_Codetemplates"/>
-        </page>
-    </extension>
-    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.eclipse.xtext.ui.codetemplates.ui.keyword_Codetemplates"
@@ -223,29 +200,6 @@
                 </with>        
             </and>
         </definition>
-    </extension>
-    <extension
-            point="org.eclipse.ui.preferencePages">
-        <page
-            class="org.eclipse.xtext.ui.codetemplates.ui.SingleCodetemplateExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-            id="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate"
-            name="SingleCodetemplate">
-            <keywordReference id="org.eclipse.xtext.ui.codetemplates.ui.keyword_SingleCodetemplate"/>
-        </page>
-        <page
-            category="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate"
-            class="org.eclipse.xtext.ui.codetemplates.ui.SingleCodetemplateExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-            id="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.coloring"
-            name="Syntax Coloring">
-            <keywordReference id="org.eclipse.xtext.ui.codetemplates.ui.keyword_SingleCodetemplate"/>
-        </page>
-        <page
-            category="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate"
-            class="org.eclipse.xtext.ui.codetemplates.ui.SingleCodetemplateExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
-            id="org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.templates"
-            name="Templates">
-            <keywordReference id="org.eclipse.xtext.ui.codetemplates.ui.keyword_SingleCodetemplate"/>
-        </page>
     </extension>
     <extension
         point="org.eclipse.ui.keywords">

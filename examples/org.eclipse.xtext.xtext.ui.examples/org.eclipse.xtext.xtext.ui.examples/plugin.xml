@@ -69,7 +69,7 @@
 	  </example>
    </extension>
    
-	<!-- ========= org.eclipse.xtext.example.arithmetics ========= -->
+	<!-- ========= org.eclipse.xtext.example.arithmetics ========= 
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.xtext.examples.NewArithmeticsExampleWizard" 
 			name="%ArithmeticsExample_name" 
@@ -96,7 +96,7 @@
 		 <projectDescriptor name="org.eclipse.xtext.example.arithmetics.tests" contentURI="contents/org.eclipse.xtext.example.arithmetics.tests.zip" description="The test bundle for the language"/>
 		 <projectDescriptor name="org.eclipse.xtext.example.arithmetics.ui" contentURI="contents/org.eclipse.xtext.example.arithmetics.ui.zip"  description="Contains Eclipse IDE integration (i.e. editor)"/>
 	  </example>
-   </extension>
+   </extension>-->
    
    <!-- ========= org.eclipse.xtext.example.xbase.tutorial ========= -->
 	<extension point="org.eclipse.ui.newWizards">
