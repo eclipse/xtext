@@ -54,7 +54,7 @@ public class DefaultFoldingRegionAcceptor implements IFoldingRegionAcceptor<ITex
 				position = new Region(start, end - start);
 			}
 		} catch (BadLocationException e) {
-			log.error(e);
+			log.error(e.getMessage(), e);
 		}
 		return position;
 	}
