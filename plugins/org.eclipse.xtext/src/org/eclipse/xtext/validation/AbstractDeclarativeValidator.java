@@ -50,6 +50,8 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 
 	private static final Logger log = Logger.getLogger(AbstractDeclarativeValidator.class);
 	
+	private static final GuardException guardException = new GuardException();
+	
 	public static class StateAccess {
 		
 		private AbstractDeclarativeValidator validator;
@@ -380,12 +382,12 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	
 	protected void guard(boolean guardExpression) {
 		if (!guardExpression) {
-			throw new GuardException();
+			throw guardException;
 		}
 	}
 
 	protected void checkDone() {
-		throw new GuardException();
+		throw guardException;
 	}
 
 	//////////////////////////////////////////////////////////
