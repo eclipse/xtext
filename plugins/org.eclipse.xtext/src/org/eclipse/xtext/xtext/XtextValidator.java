@@ -429,7 +429,8 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 
 	@Check
 	public void checkMetamodelUris(final AbstractMetamodelDeclaration declaration) {
-		guard(declaration.getEPackage()!=null && declaration.getEPackage().getNsURI() != null);
+		if (!(declaration.getEPackage()!=null && declaration.getEPackage().getNsURI() != null))
+			return;
 
 		Grammar grammar = GrammarUtil.getGrammar(declaration);
 		Iterable<String> nsUris = Iterables.transform(grammar.getMetamodelDeclarations(),
@@ -886,10 +887,12 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		EnumRule rule = GrammarUtil.containingEnumRule(decl);
 		List<EnumLiteralDeclaration> declarations = EcoreUtil2.getAllContentsOfType(rule, EnumLiteralDeclaration.class);
 		String literal = decl.getLiteral().getValue();
-		for (EnumLiteralDeclaration otherDecl : declarations) {
-			if (otherDecl != decl && literal.equals(otherDecl.getLiteral().getValue())) {
-				error("Enum literal '" + literal + "' is used multiple times in enum rule '" + rule.getName() + "'.",
-						XtextPackage.Literals.ENUM_LITERAL_DECLARATION__LITERAL);
+		if (literal != null) {
+			for (EnumLiteralDeclaration otherDecl : declarations) {
+				if (otherDecl != decl && literal.equals(otherDecl.getLiteral().getValue())) {
+					error("Enum literal '" + literal + "' is used multiple times in enum rule '" + rule.getName() + "'.",
+							XtextPackage.Literals.ENUM_LITERAL_DECLARATION__LITERAL);
+				}
 			}
 		}
 	}
@@ -897,10 +900,14 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	@Check
 	public void checkGeneratedEnumIsValid(EnumLiteralDeclaration decl) {
 		EnumRule rule = GrammarUtil.containingEnumRule(decl);
-		guard(rule.getType().getMetamodel() instanceof GeneratedMetamodel);
-		List<EnumLiteralDeclaration> declarations = EcoreUtil2.getAllContentsOfType(rule, EnumLiteralDeclaration.class);
+		if (!(rule.getType().getMetamodel() instanceof GeneratedMetamodel))
+			return;
+		if (!(rule.getType().getClassifier() instanceof EEnum))
+			return;
 		EEnum eEnum = (EEnum) rule.getType().getClassifier();
-		guard(declarations.size() != eEnum.getELiterals().size());
+		List<EnumLiteralDeclaration> declarations = EcoreUtil2.getAllContentsOfType(rule, EnumLiteralDeclaration.class);
+		if (declarations.size() == eEnum.getELiterals().size())
+			return;
 		for (EnumLiteralDeclaration otherDecl : declarations) {
 			if (decl == otherDecl) {
 				return;

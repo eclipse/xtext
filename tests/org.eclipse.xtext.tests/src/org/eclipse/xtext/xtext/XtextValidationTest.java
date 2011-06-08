@@ -428,6 +428,21 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
+	public void testEnumRuleReturnsEClass() throws Exception {
+		XtextResource resource = getResourceFromStringAndExpect(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate testLanguage 'http://www.eclipse.org/2011/xtext/bug348749'\n" +
+				"Model: element=Enum;\n" +
+				"enum Enum returns Model: A | B;", 1);
+		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 0, diag.getChildren().size());
+		assertEquals("diag.isOk", diag.getSeverity(), Diagnostic.OK);
+	}
+	
 	public void testBug_280413_01() throws Exception {
 		XtextResource resource = getResourceFromStringAndExpect(
 				"grammar org.foo.Bar with org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage\n" +
