@@ -355,8 +355,9 @@ public class RenameRefactoringPopup implements IWidgetTokenKeeper, IWidgetTokenK
 	}
 
 	private void updatePopupLocation() {
-		Point loc = computePopupLocation();
 		packPopup();
+		Point loc = computePopupLocation();
+
 		if (loc != null && !loc.equals(popup.getLocation())) {
 			popup.setLocation(loc);
 		}
