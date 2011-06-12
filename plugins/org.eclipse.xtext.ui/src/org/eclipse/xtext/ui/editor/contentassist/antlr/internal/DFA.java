@@ -8,7 +8,10 @@
 package org.eclipse.xtext.ui.editor.contentassist.antlr.internal;
 
 import org.antlr.runtime.IntStream;
+import org.antlr.runtime.NoViableAltException;
 import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.Token;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -27,6 +30,17 @@ public class DFA extends org.antlr.runtime.DFA {
 	
 	protected AbstractInternalContentAssistParser getRecognizer() {
 		return (AbstractInternalContentAssistParser) recognizer;
+	}
+	
+	@Override
+	protected void error(NoViableAltException nvae) {
+		if (nvae.token == Token.EOF_TOKEN) {
+			int lookAheadAddOn = getRecognizer().lookAheadAddOn;
+			int lookAhead = ((XtextTokenStream)nvae.input).getCurrentLookAhead();
+			if ((lookAhead >= lookAheadAddOn && lookAheadAddOn > 0) || (lookAhead == 0 && lookAheadAddOn > 0) || lookAhead == -1)
+				getRecognizer().failedPredicateAtEOF = true;
+		}
+		super.error(nvae);
 	}
 
 }

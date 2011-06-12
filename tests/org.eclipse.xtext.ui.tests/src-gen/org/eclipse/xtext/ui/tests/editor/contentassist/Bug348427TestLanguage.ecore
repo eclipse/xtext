@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bug348427TestLanguage"
+    nsURI="http://www.eclipse.org/xtext/ui/common/tests/2011/bug348427TestLanguage"
+    nsPrefix="bug348427TestLanguage">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug348427TestLanguage.ecore#//Scenario1"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element2" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug348427TestLanguage.ecore#//Scenario2"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Scenario1">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="child" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug348427TestLanguage.ecore#//Child1"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Child1">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bool" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enumType" eType="ecore:EEnum platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug348427TestLanguage.ecore#//EnumType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EnumType">
+    <eLiterals name="a" literal="a"/>
+    <eLiterals name="b" value="1" literal="b"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Scenario2">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="child" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/Bug348427TestLanguage.ecore#//Child2"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Child2">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bool" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="string" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>
