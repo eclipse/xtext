@@ -1,0 +1,219 @@
+/*******************************************************************************
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+grammar org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage
+ 	with org.eclipse.xtext.common.Terminals
+
+generate bug348427TestLanguage "http://www.eclipse.org/xtext/ui/common/tests/2011/bug348427TestLanguage"
+
+Model :
+	  element1=Scenario1_1
+	| element1=Scenario1_2
+	| element1=Scenario1_3
+	| element1=Scenario1_4
+	| element2=Scenario2_1
+	| element2=Scenario2_2
+	| element2=Scenario2_3
+	| element2=Scenario2_4
+	| element2=Scenario2_5
+	| element2=Scenario2_6
+	| element2=Scenario2_7
+	| element2=Scenario2_8
+;
+
+Scenario1_1 returns Scenario1:
+	'1.1'  
+	(  
+	      child+=Child1_1 
+	  |   child+=Child1_2
+	  |   child+=Child1_3
+	)
+	'next'  
+;
+
+Scenario1_2 returns Scenario1:
+	'1.2'  
+	(  
+	      child+=Child1_1 
+	  |   child+=Child1_2
+	  |   child+=Child1_3
+	)+
+	'next'  
+;
+
+Scenario1_3 returns Scenario1:
+	{Scenario1}
+	'1.3'
+	(  
+	      child+=Child1_1 
+	  |   child+=Child1_2
+	  |   child+=Child1_3
+	)*
+	'next'  
+;
+
+Scenario1_4 returns Scenario1:
+	{Scenario1}
+	'1.4'  
+	(  
+	      child+=Child1_1 
+	  |   child+=Child1_2
+	  |   child+=Child1_3
+	)?
+	'next'  
+;
+
+Child1_1 returns Child1:
+	name=ID ':' 
+	(bool?='bool' 'keyword')?
+	enumType=EnumType // this is not ok
+	'child1' 'end' 
+;
+
+Child1_2 returns Child1:
+	name=ID ':' 
+	(bool?='bool' 'keyword')?
+	enumType=EnumType // this is not ok
+	'child2' 'end' 
+;
+
+Child1_3 returns Child1:
+	name=ID ':' 
+	(bool?='bool' 'keyword')?
+	enumType=EnumType // this is not ok
+	'child3' 'end' 
+;
+
+enum EnumType: a | b;
+
+Scenario2_1 returns Scenario2:
+	'2.1'  
+	(  
+	      child+=Child2_1 
+	  |   child+=Child2_2
+	  |   child+=Child2_3
+	)
+	'next'  
+;
+
+Scenario2_2 returns Scenario2:
+	'2.2'  
+	(  
+	      child+=Child2_1 
+	  |   child+=Child2_2
+	  |   child+=Child2_3
+	)+
+	'next'  
+;
+
+Scenario2_3 returns Scenario2:
+	'2.3'  
+	(  
+	      child+=Child2_4 
+	  |   child+=Child2_5
+	  |   child+=Child2_6
+	)
+	'next'  
+;
+
+Scenario2_4 returns Scenario2:
+	'2.4'  
+	(  
+	      child+=Child2_4 
+	  |   child+=Child2_5
+	  |   child+=Child2_6
+	)+
+	'next'  
+;
+
+Scenario2_5 returns Scenario2:
+	{Scenario2}
+	'2.5'  
+	(  
+	      child+=Child2_1 
+	  |   child+=Child2_2
+	  |   child+=Child2_3
+	)?
+	'next'  
+;
+
+Scenario2_6 returns Scenario2:
+	{Scenario2}
+	'2.6'  
+	(  
+	      child+=Child2_1 
+	  |   child+=Child2_2
+	  |   child+=Child2_3
+	)*
+	'next'  
+;
+
+Scenario2_7 returns Scenario2:
+	{Scenario2}
+	'2.7'  
+	(  
+	      child+=Child2_4 
+	  |   child+=Child2_5
+	  |   child+=Child2_6
+	)?
+	'next'  
+;
+
+Scenario2_8 returns Scenario2:
+	{Scenario2}
+	'2.8'  
+	(  
+	      child+=Child2_4 
+	  |   child+=Child2_5
+	  |   child+=Child2_6
+	)*
+	'next'  
+;
+
+
+Child2_1 returns Child2:
+	name=ID ':' 
+	(bool?='bool' 'keyword')?
+	string=('a' | 'b')
+	'child1' 'end' 
+;
+
+Child2_2 returns Child2:
+	name=ID ':' 
+	(bool?='bool' 'keyword')?
+	string=('a' | 'b')
+	'child2' 'end' 
+;
+
+Child2_3 returns Child2:
+	name=ID ':' 
+	(bool?='bool' 'keyword')?
+	string=('a' | 'b')
+	'child3' 'end' 
+;
+
+Child2_4 returns Child2:
+	name=ID ':' 
+	(bool?='bool' 'keyword')?
+	(string='a' | string='b')
+	'child1' 'end' 
+;
+
+Child2_5 returns Child2:
+	name=ID ':' 
+	(bool?='bool' 'keyword')?
+	(string='a' | string='b')
+	'child2' 'end' 
+;
+
+Child2_6 returns Child2:
+	name=ID ':' 
+	(bool?='bool' 'keyword')?
+	(string='a' | string='b')
+	'child3' 'end' 
+;
+	
