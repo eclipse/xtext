@@ -2,8 +2,8 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xcss Test Bundle
 Bundle-SymbolicName: org.eclipse.xtext.example.css.tests
-Bundle-Version: 1.1.0.qualifier
-Bundle-Vendor: itemis AG
+Bundle-Version: 1.1.1.qualifier
+Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.5.0",
  org.junit;bundle-version="3.8.2",
