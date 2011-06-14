@@ -234,6 +234,40 @@ public class NfaToGrammarTest extends AbstractXtextTests {
 		assertEquals("start (x+ | y)? stop", nfa2g(start, stop));
 	}
 
+	public void testAlternative7() {
+		S start = new S("start");
+		S stop = new S("stop");
+		S a = new S("a");
+		S b = new S("b");
+		S x = new S("x");
+		S y = new S("y");
+		start.add(a, b);
+		a.add(x, y);
+		b.add(x, y);
+		x.add(stop);
+		y.add(stop);
+		assertEquals("start (a | b) (x | y) stop", nfa2g(start, stop));
+	}
+
+	public void testAlternative8() {
+		S start = new S("start");
+		S stop = new S("stop");
+		S a = new S("a");
+		S b = new S("b");
+		S c = new S("c");
+		S d = new S("d");
+		S x = new S("x");
+		S y = new S("y");
+		start.add(a, b);
+		a.add(c, d);
+		b.add(c, d);
+		c.add(x, y);
+		d.add(x, y);
+		x.add(stop);
+		y.add(stop);
+		assertEquals("start (a | b) (c | d) (x | y) stop", nfa2g(start, stop));
+	}
+
 	public void testCycle() {
 		S start = new S("start");
 		S stop = new S("stop");
