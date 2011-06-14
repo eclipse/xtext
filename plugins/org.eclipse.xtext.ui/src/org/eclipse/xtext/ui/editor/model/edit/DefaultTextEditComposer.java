@@ -33,7 +33,6 @@ import com.google.inject.Inject;
  * @author Knut Wannheden - Initial contribution and API
  * @author Jan Koehnlein
  */
-@SuppressWarnings("restriction")
 public class DefaultTextEditComposer extends EContentAdapter implements ITextEditComposer {
 
 	@Inject

@@ -1,102 +1,27 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <component id="org.eclipse.xtext.ui" version="2">
-    <resource path="META-INF/MANIFEST.MF">
-        <filter id="924844039">
-            <message_arguments>
-                <message_argument value="2.0.0"/>
-                <message_argument value="2.0.0"/>
-            </message_arguments>
-        </filter>
-        <filter id="924844039">
-            <message_arguments>
-                <message_argument value="2.0.0.qualifier"/>
-                <message_argument value="2.0.0.v201105041334"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/ui/compare/AbstractContentViewer.java" type="org.eclipse.xtext.ui.compare.AbstractContentViewer">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.compare.AbstractContentViewer"/>
-                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/ui/compare/DefaultContentViewer.java" type="org.eclipse.xtext.ui.compare.DefaultContentViewer">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.compare.DefaultContentViewer"/>
-                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/ui/compare/DefaultMergeEditor.java" type="org.eclipse.xtext.ui.compare.DefaultMergeEditor">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.compare.DefaultMergeEditor"/>
-                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/ui/compare/DefaultMergeViewer.java" type="org.eclipse.xtext.ui.compare.DefaultMergeViewer">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.compare.DefaultMergeViewer"/>
-                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/ui/compare/DefaultViewerCreator.java" type="org.eclipse.xtext.ui.compare.DefaultViewerCreator">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.compare.DefaultViewerCreator"/>
-                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/ui/compare/InjectableViewerCreator.java" type="org.eclipse.xtext.ui.compare.InjectableViewerCreator">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.compare.InjectableViewerCreator"/>
-                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/ui/compare/StreamContentDocumentProvider.java" type="org.eclipse.xtext.ui.compare.StreamContentDocumentProvider">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.ui.compare.StreamContentDocumentProvider"/>
-                <message_argument value="org.eclipse.xtext.ui_2.0.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/ui/editor/XtextSourceViewer.java" type="org.eclipse.xtext.ui.editor.XtextSourceViewer">
-        <filter id="571473929">
-            <message_arguments>
-                <message_argument value="ProjectionViewer"/>
-                <message_argument value="XtextSourceViewer"/>
-            </message_arguments>
-        </filter>
-        <filter comment="Restored method used by GMF example" id="1143996420">
-            <message_arguments>
-                <message_argument value="getContentAssistant()"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/ui/editor/info/ResourceWorkingCopyFileEditorInput.java" type="org.eclipse.xtext.ui.editor.info.ResourceWorkingCopyFileEditorInput">
-        <filter id="571473929">
-            <message_arguments>
-                <message_argument value="FileEditorInput"/>
-                <message_argument value="ResourceWorkingCopyFileEditorInput"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/ui/editor/quickfix/XtextResourceMarkerAnnotationModel.java" type="org.eclipse.xtext.ui.editor.quickfix.XtextResourceMarkerAnnotationModel">
-        <filter id="571473929">
-            <message_arguments>
-                <message_argument value="ResourceMarkerAnnotationModel"/>
-                <message_argument value="XtextResourceMarkerAnnotationModel"/>
-            </message_arguments>
-        </filter>
-    </resource>
+<resource path="src/org/eclipse/xtext/ui/editor/XtextSourceViewer.java" type="org.eclipse.xtext.ui.editor.XtextSourceViewer">
+<filter id="571473929">
+<message_arguments>
+<message_argument value="ProjectionViewer"/>
+<message_argument value="XtextSourceViewer"/>
+</message_arguments>
+</filter>
+</resource>
+<resource path="src/org/eclipse/xtext/ui/editor/info/ResourceWorkingCopyFileEditorInput.java" type="org.eclipse.xtext.ui.editor.info.ResourceWorkingCopyFileEditorInput">
+<filter id="571473929">
+<message_arguments>
+<message_argument value="FileEditorInput"/>
+<message_argument value="ResourceWorkingCopyFileEditorInput"/>
+</message_arguments>
+</filter>
+</resource>
+<resource path="src/org/eclipse/xtext/ui/editor/quickfix/XtextResourceMarkerAnnotationModel.java" type="org.eclipse.xtext.ui.editor.quickfix.XtextResourceMarkerAnnotationModel">
+<filter id="571473929">
+<message_arguments>
+<message_argument value="ResourceMarkerAnnotationModel"/>
+<message_argument value="XtextResourceMarkerAnnotationModel"/>
+</message_arguments>
+</filter>
+</resource>
 </component>
