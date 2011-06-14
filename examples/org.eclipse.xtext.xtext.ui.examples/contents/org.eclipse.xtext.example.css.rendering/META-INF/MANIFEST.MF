@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.example.css.rendering
 Bundle-SymbolicName: org.eclipse.xtext.example.css.rendering
-Bundle-Version: 1.1.0.qualifier
+Bundle-Version: 1.1.1.qualifier
 Bundle-Vendor: Eclipse Modeling Project
 Require-Bundle: org.eclipse.swt,
  org.eclipse.xtext.example.css;bundle-version="1.0.0",
