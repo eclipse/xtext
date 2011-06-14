@@ -257,28 +257,31 @@ public class NfaToGrammar {
 		if (!visited.add(state))
 			return false;
 		boolean created = false;
-		Multimap<StateAlias<T>, StateAlias<T>> alternative = HashMultimap.create();
-		for (StateAlias<T> candidate1 : state.getOutgoing())
-			if (candidate1.getOutgoing().size() == 1 && candidate1.getIncoming().size() == 1)
-				for (StateAlias<T> candidate2 : state.getOutgoing())
-					if (candidate2.getOutgoing().size() == 1 && candidate2.getIncoming().size() == 1)
-						for (StateAlias<T> target : candidate1.getOutgoing())
-							if (candidate1 != candidate2 && candidate2.getOutgoing().contains(target)) {
-								alternative.put(target, candidate1);
-								alternative.put(target, candidate2);
-							}
-		for (StateAlias<T> target : alternative.keySet()) {
+		Multimap<Set<StateAlias<T>>, StateAlias<T>> alternative = HashMultimap.create();
+		if (state.getOutgoing().size() >= 2)
+			for (StateAlias<T> candidate1 : state.getOutgoing())
+				if (candidate1.getOutgoing().size() >= 1 && candidate1.getIncoming().size() == 1)
+					for (StateAlias<T> candidate2 : state.getOutgoing())
+						if (candidate1 != candidate2 && candidate1.getOutgoing().equals(candidate2.getOutgoing())
+								&& candidate2.getIncoming().size() == 1) {
+							alternative.put(candidate1.getOutgoing(), candidate1);
+							alternative.put(candidate1.getOutgoing(), candidate2);
+						}
+		for (Set<StateAlias<T>> targets : alternative.keySet()) {
 			AlternativeAlias<T> alt = new AlternativeAlias<T>();
 			StateAlias<T> altState = new StateAlias<T>(alt);
-			for (StateAlias<T> candidate : alternative.get(target)) {
+			for (StateAlias<T> candidate : alternative.get(targets)) {
 				alt.addChild(candidate.getElement());
 				state.getOutgoing().remove(candidate);
-				target.getIncoming().remove(candidate);
+				for (StateAlias<T> target : targets)
+					target.getIncoming().remove(candidate);
 			}
 			altState.getIncoming().add(state);
-			altState.getOutgoing().add(target);
+			for (StateAlias<T> target : targets) {
+				altState.getOutgoing().add(target);
+				target.getIncoming().add(altState);
+			}
 			state.getOutgoing().add(altState);
-			target.getIncoming().add(altState);
 			created = true;
 		}
 
