@@ -17,6 +17,7 @@ import com.google.inject.Inject;
 /**
  * Encapsulates the model changes of a rename refactoring.  
  */
+@SuppressWarnings("restriction")
 public class PureXbaseRenameStrategy extends AbstractJvmModelRenameStrategy {
 
 	public static class Provider extends DefaultRenameStrategy.Provider {
