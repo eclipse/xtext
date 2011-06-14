@@ -22,7 +22,6 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class SerializerTest extends AbstractXbaseTestCase {
 	
 	public void testSerialize_01() throws IOException {
