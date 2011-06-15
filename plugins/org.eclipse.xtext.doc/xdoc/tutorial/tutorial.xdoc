@@ -1,0 +1,42 @@
+document[Getting Started With Xtext]
+
+%% KEEP KEYWORDS IN SYNC WITH xtext.xdoc
+codelanguage-def[Java][
+	abstract,continue,for,new,switch,assert,default,goto,package,synchronized,
+	boolean,do,if,private,this,break,double,implements,protected,throw,
+	byte,else,import,public,throws,
+	case,enum,instanceof,return,transient,
+	catch,extends,int,short,try,
+	char,final,interface,static,void,
+	class,finally,long,strictfp,volatile,
+	const,float,native,super,while,null,true,false
+]
+
+codelanguage-def[Xtext][
+	grammar,
+	import,
+	generate,
+	terminal,
+	enum,
+	returns,
+	with,
+	hidden,
+	as,
+	current,
+	fragment,
+	EOF
+]
+
+codelanguage-def[MWE2][module, var, auto-inject, auto, inject, import, true, false]
+
+codelanguage-def[DomainExample][package, entity, datatype, import, extends, public]
+
+codelanguage-def[MyDsl][Hello]
+
+chapter-ref[TutorialIntro]
+
+chapter-ref[Installation]
+
+chapter-ref[FirstFiveMinutes]
+
+chapter-ref[DomainmodelWalkThrough]

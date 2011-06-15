@@ -1,5 +1,6 @@
 document[Xtext Documentation]
 
+%% KEEP KEYWORDS IN SYNC WITH tutorial.xdoc
 codelanguage-def[Java][
 	abstract,continue,for,new,switch,assert,default,goto,package,synchronized,
 	boolean,do,if,private,this,break,double,implements,protected,throw,
