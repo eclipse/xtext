@@ -162,22 +162,27 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjects() {
+		ensureLoaded();
 		return resourceDescriptionData.getExportedObjects();
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjects(EClass type, QualifiedName name, boolean ignoreCase) {
+		ensureLoaded();
 		return resourceDescriptionData.getExportedObjects(type, name, ignoreCase);
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjectsByType(EClass type) {
+		ensureLoaded();
 		return resourceDescriptionData.getExportedObjectsByType(type);
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjectsByObject(EObject object) {
+		ensureLoaded();
 		return resourceDescriptionData.getExportedObjectsByObject(object);
 	}
 
 	public boolean isEmpty() {
+		ensureLoaded();
 		return resourceDescriptionData.isEmpty();
 	}
 
