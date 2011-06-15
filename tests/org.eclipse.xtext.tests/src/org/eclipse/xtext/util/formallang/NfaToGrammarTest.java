@@ -291,7 +291,7 @@ public class NfaToGrammarTest extends AbstractXtextTests {
 		c.add(e);
 		d.add(stop);
 		e.add(stop);
-		assertEquals("start ((b | c) e | b d) stop", nfa2g(start, stop));
+		assertEquals("start (b (d | e) | c e) stop", nfa2g(start, stop));
 	}
 
 	public void testSplitStateAlternatives2() {
@@ -312,7 +312,7 @@ public class NfaToGrammarTest extends AbstractXtextTests {
 		e.add(g);
 		f.add(stop);
 		g.add(stop);
-		assertEquals("start (((a | b) d | a c) f | ((a | b) d | b e) g) stop", nfa2g(start, stop));
+		assertEquals("start ((a c f | b e g) | (a | b) d (f | g)) stop", nfa2g(start, stop));
 	}
 
 	public void testOptionalChain1() {

@@ -413,7 +413,7 @@ public class NfaToGrammar {
 			return null;
 		Pair<Integer, StateAlias<T>> result;
 		if (state.getOutgoing().size() > 0 && state.getIncoming().size() > 0
-				&& state.getOutgoing().size() + state.getOutgoing().size() > 2)
+				&& state.getOutgoing().size() + state.getIncoming().size() > 2)
 			result = Tuples.create(depth, state);
 		else
 			result = null;
@@ -440,7 +440,7 @@ public class NfaToGrammar {
 		int size2 = state2.getSecond().getOutgoing().size() + state2.getSecond().getIncoming().size();
 		if (size1 != size2)
 			return size1 < size2;
-		return state1.getFirst() < state2.getFirst();
+		return state1.getFirst() > state2.getFirst();
 	}
 
 	public <ELEMENT, STATE, TOKEN, NFA extends INfaAdapter<STATE> & ITokenAdapter<STATE, TOKEN>> ELEMENT nfaToGrammar(
@@ -458,21 +458,23 @@ public class NfaToGrammar {
 		while (!start.getOutgoing().isEmpty() && changed) {
 			while (!start.getOutgoing().isEmpty() && changed) {
 				changed = createMany(start, Sets.<StateAlias<TOKEN>> newHashSet());
-				//			System.out.println("after Many: " + Join.join(" ", getAllStates(start)));
+				//				System.out.println("after Many: " + Joiner.on(" ").join(getAllStates(start)));
 				changed |= createGroups(start, Sets.<StateAlias<TOKEN>> newHashSet());
-				//			System.out.println("after Groups: " + Join.join(" ", getAllStates(start)));
+				//				System.out.println("after Groups: " + Joiner.on(" ").join(getAllStates(start)));
 				changed |= createAlternative(start, Sets.<StateAlias<TOKEN>> newHashSet());
-				//			System.out.println("after Alternative: " + Join.join(" ", getAllStates(start)));
+				//				System.out.println("after Alternative: " + Joiner.on(" ").join(getAllStates(start)));
 				changed |= createOptional(start, Sets.<StateAlias<TOKEN>> newHashSet());
-				//			System.out.println("after Optional: " + Join.join(" ", getAllStates(start)));
+				//				System.out.println("after Optional: " + Joiner.on(" ").join(getAllStates(start)));
 			}
 			if (!start.getOutgoing().isEmpty()) {
 				Pair<Integer, StateAlias<TOKEN>> splitState = findSplitState(start, 0,
 						Sets.<StateAlias<TOKEN>> newHashSet());
 				if (splitState != null) {
 					changed = true;
+					//					System.out.println("Splitting " + splitState);
 					splitState(splitState.getSecond());
 				}
+				//				System.out.println("after Split: " + Joiner.on(" ").join(getAllStates(start)));
 			}
 		}
 		//		if (!start.getOutgoing().isEmpty()) {
