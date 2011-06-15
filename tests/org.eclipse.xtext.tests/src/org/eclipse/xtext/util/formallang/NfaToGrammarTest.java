@@ -268,7 +268,7 @@ public class NfaToGrammarTest extends AbstractXtextTests {
 		assertEquals("start (a | b) (c | d) (x | y) stop", nfa2g(start, stop));
 	}
 
-	public void testCycle() {
+	public void testSplitStateCycle1() {
 		S start = new S("start");
 		S stop = new S("stop");
 		S x = new S("x");
@@ -277,6 +277,42 @@ public class NfaToGrammarTest extends AbstractXtextTests {
 		x.add(y, stop);
 		y.add(x);
 		assertEquals("start x (y x)* stop", nfa2g(start, stop));
+	}
+
+	public void testSplitStateAlternatives1() {
+		S start = new S("start");
+		S stop = new S("stop");
+		S b = new S("b");
+		S c = new S("c");
+		S d = new S("d");
+		S e = new S("e");
+		start.add(b, c);
+		b.add(d, e);
+		c.add(e);
+		d.add(stop);
+		e.add(stop);
+		assertEquals("start ((b | c) e | b d) stop", nfa2g(start, stop));
+	}
+
+	public void testSplitStateAlternatives2() {
+		S start = new S("start");
+		S stop = new S("stop");
+		S a = new S("a");
+		S b = new S("b");
+		S c = new S("c");
+		S d = new S("d");
+		S e = new S("e");
+		S f = new S("f");
+		S g = new S("g");
+		start.add(a, b);
+		a.add(c, d);
+		b.add(d, e);
+		c.add(f);
+		d.add(f, g);
+		e.add(g);
+		f.add(stop);
+		g.add(stop);
+		assertEquals("start (((a | b) d | a c) f | ((a | b) d | b e) g) stop", nfa2g(start, stop));
 	}
 
 	public void testOptionalChain1() {
