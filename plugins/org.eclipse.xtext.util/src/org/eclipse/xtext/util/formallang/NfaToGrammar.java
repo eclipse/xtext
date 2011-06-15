@@ -14,6 +14,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.xtext.util.GraphvizDotBuilder;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Lists;
@@ -39,6 +41,8 @@ public class NfaToGrammar {
 			this.optional = optional;
 			this.many = many;
 		}
+
+		protected abstract int getElementCount();
 
 		public boolean isMany() {
 			return many;
@@ -120,6 +124,14 @@ public class NfaToGrammar {
 			return children;
 		}
 
+		@Override
+		protected int getElementCount() {
+			int result = 1;
+			for (AbstractElementAlias<T> child : children)
+				result += child.getElementCount();
+			return result;
+		}
+
 	}
 
 	protected static class ElementAlias<T> extends AbstractElementAlias<T> {
@@ -137,6 +149,11 @@ public class NfaToGrammar {
 
 		public T getElement() {
 			return element;
+		}
+
+		@Override
+		protected int getElementCount() {
+			return 1;
 		}
 
 	}
@@ -163,6 +180,13 @@ public class NfaToGrammar {
 			return children;
 		}
 
+		@Override
+		protected int getElementCount() {
+			int result = 1;
+			for (AbstractElementAlias<T> child : children)
+				result += child.getElementCount();
+			return result;
+		}
 	}
 
 	protected static class StateAlias<TOKEN> {
@@ -292,46 +316,6 @@ public class NfaToGrammar {
 		return created;
 	}
 
-	protected <T> boolean createCycle(StateAlias<T> state, Set<StateAlias<T>> visited) {
-		if (!visited.add(state))
-			return false;
-		if (state.getOutgoing().size() == 1 && state.getIncoming().size() == 1) {
-			StateAlias<T> center = state.getOutgoing().iterator().next();
-			if (center != state && center == state.getIncoming().iterator().next()) {
-				GroupAlias<T> cycle;
-				//				if (state.getElement().isOne() && state.getElement() instanceof GroupAlias) {
-				//					cycle = (GroupAlias) state.getElement();
-				//					cycle.addChild(center.getElement());
-				//				} else {
-				cycle = new GroupAlias<T>();
-				cycle.addChild(state.getElement());
-				cycle.addChild(center.getElement());
-				//				}
-				cycle.setMany(true);
-				cycle.setOptional(true);
-				GroupAlias<T> group;
-				//				if (center.getElement().isOne() && center.getElement() instanceof GroupAlias) {
-				//					group = (GroupAlias) center.getElement();
-				//					group.addChild(cycle);
-				//				} else {
-				group = new GroupAlias<T>();
-				group.addChild(center.getElement());
-				group.addChild(cycle);
-				center.element = group;
-				//				}
-				center.getOutgoing().remove(state);
-				center.getIncoming().remove(state);
-				return true;
-			}
-		}
-		boolean created = false;
-		for (StateAlias<T> out : Lists.newArrayList(state.getOutgoing())) {
-			if (createCycle(out, visited))
-				created = true;
-		}
-		return created;
-	}
-
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected <T> void createGroup(StateAlias<T> first, StateAlias<T> second) {
 		GroupAlias<T> group = new GroupAlias<T>();
@@ -423,10 +407,40 @@ public class NfaToGrammar {
 		return created;
 	}
 
+	protected <T> Pair<Integer, StateAlias<T>> findSplitState(StateAlias<T> state, Integer depth,
+			Set<StateAlias<T>> visited) {
+		if (!visited.add(state))
+			return null;
+		Pair<Integer, StateAlias<T>> result;
+		if (state.getOutgoing().size() > 0 && state.getIncoming().size() > 0
+				&& state.getOutgoing().size() + state.getOutgoing().size() > 2)
+			result = Tuples.create(depth, state);
+		else
+			result = null;
+		for (StateAlias<T> out : state.getOutgoing()) {
+			Pair<Integer, StateAlias<T>> cand = findSplitState(out, depth + 1, visited);
+			if (cand != null && (result == null || isPreferredSplitState(cand, result)))
+				result = cand;
+		}
+		return result;
+	}
+
 	protected <T> Set<StateAlias<T>> getAllStates(StateAlias<T> state) {
 		Set<StateAlias<T>> visited = Sets.<StateAlias<T>> newHashSet();
 		collectStates(state, visited);
 		return visited;
+	}
+
+	protected <T> boolean isPreferredSplitState(Pair<Integer, StateAlias<T>> state1, Pair<Integer, StateAlias<T>> state2) {
+		int count1 = state1.getSecond().getElement().getElementCount();
+		int count2 = state2.getSecond().getElement().getElementCount();
+		if (count1 != count2)
+			return count1 < count2;
+		int size1 = state1.getSecond().getOutgoing().size() + state1.getSecond().getIncoming().size();
+		int size2 = state2.getSecond().getOutgoing().size() + state2.getSecond().getIncoming().size();
+		if (size1 != size2)
+			return size1 < size2;
+		return state1.getFirst() < state2.getFirst();
 	}
 
 	public <ELEMENT, STATE, TOKEN, NFA extends INfaAdapter<STATE> & ITokenAdapter<STATE, TOKEN>> ELEMENT nfaToGrammar(
@@ -442,16 +456,24 @@ public class NfaToGrammar {
 		}
 		boolean changed = true;
 		while (!start.getOutgoing().isEmpty() && changed) {
-			changed = createMany(start, Sets.<StateAlias<TOKEN>> newHashSet());
-			//			System.out.println("after Many: " + Join.join(" ", getAllStates(start)));
-			changed |= createGroups(start, Sets.<StateAlias<TOKEN>> newHashSet());
-			//			System.out.println("after Groups: " + Join.join(" ", getAllStates(start)));
-			changed |= createAlternative(start, Sets.<StateAlias<TOKEN>> newHashSet());
-			//			System.out.println("after Alternative: " + Join.join(" ", getAllStates(start)));
-			changed |= createOptional(start, Sets.<StateAlias<TOKEN>> newHashSet());
-			//			System.out.println("after Optional: " + Join.join(" ", getAllStates(start)));
-			changed |= createCycle(start, Sets.<StateAlias<TOKEN>> newHashSet());
-			//			System.out.println("after Cycle: " + Join.join(" ", getAllStates(start)));
+			while (!start.getOutgoing().isEmpty() && changed) {
+				changed = createMany(start, Sets.<StateAlias<TOKEN>> newHashSet());
+				//			System.out.println("after Many: " + Join.join(" ", getAllStates(start)));
+				changed |= createGroups(start, Sets.<StateAlias<TOKEN>> newHashSet());
+				//			System.out.println("after Groups: " + Join.join(" ", getAllStates(start)));
+				changed |= createAlternative(start, Sets.<StateAlias<TOKEN>> newHashSet());
+				//			System.out.println("after Alternative: " + Join.join(" ", getAllStates(start)));
+				changed |= createOptional(start, Sets.<StateAlias<TOKEN>> newHashSet());
+				//			System.out.println("after Optional: " + Join.join(" ", getAllStates(start)));
+			}
+			if (!start.getOutgoing().isEmpty()) {
+				Pair<Integer, StateAlias<TOKEN>> splitState = findSplitState(start, 0,
+						Sets.<StateAlias<TOKEN>> newHashSet());
+				if (splitState != null) {
+					changed = true;
+					splitState(splitState.getSecond());
+				}
+			}
 		}
 		//		if (!start.getOutgoing().isEmpty()) {
 		//			System.err.println("error creating grammar for nfa: " + Join.join(" ", getAllStates(start)));
@@ -471,6 +493,36 @@ public class NfaToGrammar {
 			return util.clone(start.getElement(), grammarFactory);
 		}
 		return null;
+	}
+
+	protected <T> void splitState(StateAlias<T> state) {
+		if (state.getIncoming().size() >= state.getOutgoing().size()) {
+			for (StateAlias<T> in : state.getIncoming()) {
+				StateAlias<T> rep = new StateAlias<T>(state.getElement());
+				rep.getIncoming().add(in);
+				rep.getOutgoing().addAll(state.getOutgoing());
+				in.getOutgoing().add(rep);
+				in.getOutgoing().remove(state);
+				for (StateAlias<T> out : state.getOutgoing())
+					out.getIncoming().add(rep);
+			}
+			for (StateAlias<T> out : state.getOutgoing())
+				out.getIncoming().remove(state);
+		} else {
+			for (StateAlias<T> out : state.getOutgoing()) {
+				StateAlias<T> rep = new StateAlias<T>(state.getElement());
+				rep.getOutgoing().add(out);
+				rep.getIncoming().addAll(state.getIncoming());
+				out.getIncoming().add(rep);
+				out.getIncoming().remove(state);
+				for (StateAlias<T> in : state.getIncoming())
+					in.getOutgoing().add(rep);
+			}
+			for (StateAlias<T> in : state.getIncoming())
+				in.getOutgoing().remove(state);
+		}
+		state.getOutgoing().clear();
+		state.getIncoming().clear();
 	}
 
 	protected <STATE, TOKEN, NFA extends INfaAdapter<STATE> & ITokenAdapter<STATE, TOKEN>> StateAlias<TOKEN> toAlias(
