@@ -1,0 +1,299 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Enhancing The Domain Model</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="index.html" title="">
+</head>
+<body>
+<h1>Enhancing The Domain Model</h1>
+<a name="0"></a>
+<h2>Adding a Namespace Concept</h2>
+<p>
+At the current stage, our language puts all types into the same scope. As 
+cross-references are specified by means of names, this can easily yield collisions 
+as the model size increases. Avoiding such name clashes is why most programming 
+languages invent concepts like namespaces or modules. We will now introduce the 
+concept of a <em>Package</em>, which effectively is a namespace. 
+</p>
+<p>
+Our languages&apos;s definition of a <em>Package</em> is as follows: A package has a name and 
+contains other named elements and namespace-imports. A named element is either another 
+<em>Package</em> or a <em>Type</em>. Within a package, elements must have unique names. The 
+<em>fully qualified name</em> (FQN) of a named element consists of the FQN of its package, 
+a separator <em>&apos;.&apos;</em> and its own simple name. Elements refer to each other using their 
+<em>qualified names</em> which may be relative to their common namespaces or absolute. By means 
+of import statements, these names can be further abbreviated. 
+</p>
+<p>
+That might sound a bit complicated at first but the good thing is that Xtext 
+comes with exactly such a default semantic for namespaces, which feels very 
+natural in practice. Although all aspects of this semantic are adaptable, we 
+will stick to the defaults within this tutorial.
+</p>
+<p>
+Before we extend the grammar, let&apos;s have a look how an example model would
+look like when using the newly introduced concepts:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">package</span>&nbsp;my.types&nbsp;{</br>
+&nbsp;&nbsp;<span class="keyword">datatype</span>&nbsp;String</br>
+&nbsp;&nbsp;<span class="keyword">datatype</span>&nbsp;Boolean</br>
+}</br>
+</br>
+<span class="keyword">package</span>&nbsp;my.entities&nbsp;{</br>
+&nbsp;&nbsp;</br>
+&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;my.types.*</br>
+&nbsp;&nbsp;</br>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Session&nbsp;{</br>
+&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String</br>
+&nbsp;&nbsp;&nbsp;&nbsp;isTutorial&nbsp;:&nbsp;Boolean</br>
+&nbsp;&nbsp;}</br>
+</br>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Conference&nbsp;{</br>
+&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;:&nbsp;String</br>
+&nbsp;&nbsp;&nbsp;&nbsp;attendees&nbsp;:&nbsp;Person*</br>
+&nbsp;&nbsp;&nbsp;&nbsp;speakers&nbsp;:&nbsp;Speaker*</br>
+&nbsp;&nbsp;}</br>
+</br>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Person&nbsp;{</br>
+&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;:&nbsp;String</br>
+&nbsp;&nbsp;}</br>
+</br>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Speaker&nbsp;<span class="keyword">extends</span>&nbsp;Person&nbsp;{</br>
+&nbsp;&nbsp;&nbsp;&nbsp;sessions&nbsp;:&nbsp;Session*</br>
+&nbsp;&nbsp;}</br>
+}</br>
+</p>
+</div>
+</div>
+</p>
+<p>
+Let&apos;s start to modify our grammar now. First we introduce the rule <em>AbstractElement</em>:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+AbstractElement:</br>
+&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Type;</br>
+</p>
+</div>
+</div>
+</p>
+<p>
+<em>DomainModel</em> should now call <em>AbstractElement</em> instead of <em>Type</em>:  
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+DomainModel:</br>
+&nbsp;&nbsp;(elements+=AbstractElement)*;</br>
+</p>
+</div>
+</div>
+</p>
+<p>
+To allow qualified names, we need a new rule <em>QualifiedName</em>. This rule 
+returns a string. But we do not want this to be a <em>terminal rule</em>, as terminal 
+rules have special semantics (they are used context-less in the lexer, which 
+often causes problems). Instead we want it to be a parser rule, but one which
+doesn&apos;t return an instance of an <em>EClass</em> from the referenced <em>EPackage</em> but 
+just a plain String. Such rules are called <em>data type rules</em>, because they return 
+instances of <em>EDataType</em> as opposed to instances of <em>EClass</em>. String is the most 
+often used <em>EDataType</em> in this context and is therefore the default return 
+type for data type rules. The rule looks like this:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+QualifiedName:</br>
+&nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*;</br>
+</p>
+</div>
+</div>
+</p>
+<p>
+Note, that Xtext automatically figures out that the rule is a <em>data type rule</em> 
+rather then a normal parser rule, because it doesn&apos;t contain any assignments 
+and all rule calls go to either other <em>data type rules</em> or <em>terminal rules</em>. 
+For a <em>data type rule</em> the parser simply concatenates the consumed text and returns 
+it as a string. The transformation to a user defined data type is done by so 
+called <a href="" title="Go to &quot;Value Converter&quot;">ValueConverters</a>. But as we use strings we don&apos;t need to care about 
+<em>ValueConverters</em> here.
+</p>
+<p>
+Next up we need to define the syntax of <em>PackageDeclarations</em>, which makes use of 
+the <em>QualifiedName</em> rule but doesn&apos;t make use of anything we haven&apos;t yet talked about.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+PackageDeclaration:</br>
+&nbsp;&nbsp;<span class="string">&apos;package&apos;</span>&nbsp;name=QualifiedName&nbsp;<span class="string">&apos;{&apos;</span></br>
+&nbsp;&nbsp;&nbsp;&nbsp;(elements+=AbstractElement)*</br>
+&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;</br>
+</p>
+</div>
+</div>
+</p>
+<p>
+Having qualified names at hand, we want to specify cross-references that 
+way, too. As mentioned by default, Xtext assumes the rule <em>ID</em> as the syntax 
+for cross-references, which has been fully sufficient so far. But now we want 
+to allow fully qualified names as well, so we explicitly specify the syntax rule 
+after a delimiter <em>&apos;|&apos;</em>:
+</p>
+<p>
+fn.. Note, that the <em>&apos;|&apos;</em> has nothing to do with the previously introduced 
+alternative operator. In the context of a cross-reference it is simply a delimiter.  
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Entity:</br>
+&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name=ID&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType=[Entity|QualifiedName])?&nbsp;<span class="string">&apos;{&apos;</span></br>
+&nbsp;&nbsp;&nbsp;&nbsp;(features+=Feature)*</br>
+&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;</br>
+</p>
+</div>
+</div>
+</p>
+<p>
+and
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+TypeRef:</br>
+&nbsp;&nbsp;referenced=[Type|QualifiedName]&nbsp;(multi?=<span class="string">&apos;*&apos;</span>)?;</br>
+</p>
+</div>
+</div>
+</p>
+<p>
+As the last step, we introduce imports. An <em>Import</em> is an instance of 
+<em>AbstractElement</em>, too, so that it can occur as a child of <em>DomainModel</em> as 
+well as of <em>PackageDeclaration</em>.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+AbstractElement:</br>
+&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Type&nbsp;|&nbsp;Import;</br>
+</p>
+</div>
+</div>
+</p>
+<p>
+An imported namespace is not just a qualified name but it also allows an 
+optional wildcard character <em>&apos;*&apos;</em> at the end, so that multiple names can be 
+imported with one statement. That requires a new data type rule which we 
+name <em>QualifiedNameWithWildCard</em>:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+QualifiedNameWithWildCard:</br>
+&nbsp;&nbsp;QualifiedName&nbsp;<span class="string">&apos;.*&apos;</span>?;</br>
+</p>
+</div>
+</div>
+</p>
+<p>
+The declaration of the <em>Import</em> rule should look familiar by now:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Import:</br>
+&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importedNamespace=QualifiedNameWithWildCard;</br>
+</p>
+</div>
+</div>
+</p>
+<p>
+The default scoping implementation is based on naming conventions. First 
+everything which has a name is referenceable. By default something has a name 
+if it has a property <em>&apos;name&apos;</em>. If such an <em>EAttribute</em> is available, the default 
+implementation computes a qualified name by asking the container for its name 
+and concatenates the two names separated by a dot. The computation of qualified
+names can be arbitrarily changed by implementing an <em>IQualifedNameProvider</em>. 
+The other naming convention is that if some element has an EAttribute 
+&apos;importedNamespace&apos; that value is used as a namespace import and is automatically 
+prefixed to any simple names used within that namespace. Also the asterisk <em>&apos;*&apos;</em> 
+is used as a wildcard by default.
+</p>
+<p>
+That&apos;s all for the grammar. It should now read as 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">grammar</span>&nbsp;org.eclipse.xtext.example.Domainmodel&nbsp;</br>
+&nbsp;&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.common.Terminals</br>
+</br>
+<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.eclipse.org/xtext/example/Domainmodel"</span></br>
+</br>
+DomainModel:</br>
+&nbsp;&nbsp;(elements+=AbstractElement)*;</br>
+</br>
+AbstractElement:</br>
+&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Type&nbsp;|&nbsp;Import;</br>
+&nbsp;&nbsp;</br>
+Import:</br>
+&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importedNamespace=QualifiedNameWithWildCard;</br>
+</br>
+PackageDeclaration:</br>
+&nbsp;&nbsp;<span class="string">&apos;package&apos;</span>&nbsp;name=QualifiedName&nbsp;<span class="string">&apos;{&apos;</span></br>
+&nbsp;&nbsp;&nbsp;&nbsp;(elements+=AbstractElement)*</br>
+&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;</br>
+</br>
+Type:</br>
+&nbsp;&nbsp;Entity&nbsp;|&nbsp;DataType;</br>
+</br>
+DataType:</br>
+&nbsp;&nbsp;<span class="string">&apos;datatype&apos;</span>&nbsp;name=ID;</br>
+</br>
+Entity:</br>
+&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name=ID&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType=[Entity|QualifiedName])?&nbsp;<span class="string">&apos;{&apos;</span></br>
+&nbsp;&nbsp;&nbsp;&nbsp;(features+=Feature)*</br>
+&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;</br>
+</br>
+Feature:</br>
+&nbsp;&nbsp;name=ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=TypeRef;</br>
+</br>
+TypeRef:</br>
+&nbsp;&nbsp;referenced=[Type|QualifiedName]&nbsp;(multi?=<span class="string">&apos;*&apos;</span>)?;</br>
+</br>
+QualifiedName:</br>
+&nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*;</br>
+&nbsp;&nbsp;</br>
+QualifiedNameWithWildCard:</br>
+&nbsp;&nbsp;QualifiedName&nbsp;<span class="string">&apos;.*&apos;</span>?;</br>
+</p>
+</div>
+</div>
+</p>
+<p>
+Now you should regenerate the language infrastructure as described in the 
+previous section, and give the editor a try. You can even split up your model 
+into smaller parts and have cross-references across file boundaries, as long 
+as the referenced models are on the classpath.
+</p>
+</body>
+</html>

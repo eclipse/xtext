@@ -29,7 +29,7 @@ codelanguage-def[Xtext][
 
 codelanguage-def[MWE2][module, var, auto-inject, auto, inject, import, true, false]
 
-codelanguage-def[DomainExample][package, entity, datatype, import, extends, public]
+codelanguage-def[DomainExample][package, entity, datatype, import, extends, public, many]
 
 codelanguage-def[MyDsl][Hello]
 
@@ -40,3 +40,5 @@ chapter-ref[Installation]
 chapter-ref[FirstFiveMinutes]
 
 chapter-ref[DomainmodelWalkThrough]
+
+chapter-ref[DomainmodelNextSteps]

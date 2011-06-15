@@ -1,1 +1,260 @@
 chapter:DomainmodelWalkThrough[A Domain Model Language]
+
+In this tutorial we will implement a small domain-specific language to model entities and properties
+similar to what you may know from Rails, Grails or Spring Roo. The syntax is very suggestive
+and looks like this small sample:
+
+code[DomainExample][
+datatype String
+
+entity Blog {
+  title: String
+  many posts: Post
+}
+
+entity HasAuthor {
+  author: String
+}
+
+entity Post extends HasAuthor {
+  title: String
+  content: String
+  many comments: Comment
+}
+
+entity Comment extends HasAuthor {
+  content: String
+}
+]
+
+After you've ref:Installation[installed] Xtext on your machine, start Eclipse and set up a fresh workspace.
+Let's get started with the tutorial!
+
+section[Create A New Xtext Project]
+
+In order to get started we first need to create some Eclipse projects. Use the Eclipse wizard to do so:
+
+  e[File -> New -> Project...  -> Xtext -> Xtext project]
+
+Choose a meaningful project name, language name and file extension, e.g.
+
+table[
+tr[td[e[Main project name:]]td[org.eclipse.xtext.example.domainmodel]]
+tr[td[e[Language name:]]td[org.eclipse.xtext.example.Domainmodel]]
+tr[td[e[DSL-File extension:]]td[dmodel]]
+]
+
+Click on e[Finish] to create the projects. 
+
+img[../images/getting-started-wizard.png][ ][ ][ ]
+
+After you've successfully finished the wizard, you'll find three new projects in your workspace.
+
+table[
+	tr[
+		td[org.eclipse.xtext.example.domainmodel]td[The runtime components for your language.]
+	]
+	tr[
+		td[org.eclipse.xtext.example.domainmodel.tests]td[The infrastructure for unit tests.]
+	]
+	tr[
+		td[org.eclipse.xtext.example.domainmodel.ui]td[The Eclipse integration.]
+	]
+]
+
+img[../images/getting-started-project-layout.png][ ][ ][ ]
+
+todo[Render following section as expandable element?]
+
+section2[Project Layout]
+
+In the Package Explorer you can spot the following three projects.
+
+ul[
+	item[
+		e[org.eclipse.xtext.example.domainmodel] contains the grammar and all runtime 
+		components, e.g. for linking, scoping and validation. 
+	]
+	item[
+		The IDE-aspects such as the editor and all additional views are developed in 
+		e[org.eclipse.xtext.example.domainmodel.ui]. 
+	]
+	item[
+		The third project, e[org.eclipse.xtext.example.domainmodel.tests] will contain the necessary infrastructure
+		to write unit tests for your language in a convenient way.
+	]
+] 
+
+%% Although Xtext makes use of code generation, most of the code is actually written as 
+%% libraries, which are referenced by the means of OSGi using the Manifest.MF. 
+
+All these projects will contain generated 
+code which will be derived from the grammar and manually written code such as the grammar itself and 
+additional customizations, e.g. implementations that allow to adapt the default behavior.
+
+It is good to be clear and unambiguous whether the code is generated or is to 
+be manipulated by the developer. Thus, the generated code should be held 
+separately from the manually written code. We follow this pattern by having a 
+folder e[src/] and a folder e[src-gen/] in each project. Keep in mind not to 
+make changes in the e[src-gen/] folder. They will be overwritten by the generator 
+without any further warning.
+
+section[Write Your Own Grammar]
+
+%% e[Please note]: If you encounter strange errors while copying and pasting
+%% a snippet from this document to your Eclipse editor, your documentation
+%% viewer most likely has inserted characters different from {space} into your 
+%% clipboard. Reenter the "white space" or type the text by hand to be sure everything
+%% works fine. 
+
+The wizard will automatically open the example grammar file 
+e[Domainmodel.xtext] in the editor. This is the main artifact that we'll work with in the next minutes.
+
+code[Xtext][
+grammar org.eclipse.xtext.example.Domainmodel with
+                                      org.eclipse.xtext.common.Terminals
+
+generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"
+
+Model:
+	greetings+=Greeting*;
+	
+Greeting:
+	'Hello' name=ID '!';
+]
+
+The e[Hello World] grammar that was created by the wizard, contains a short header and two parser rules
+e[Model] and e[Greeting]. Leaving the header as is, we want to write the necessary rule for parsing the
+sample syntax defined above.
+
+ol[
+	item[
+		Ignore and delete the rule stubs and start by 
+		declaring the entry rule for your language:
+		
+		code[Xtext][
+		Domainmodel :
+		   (elements += Entity)*
+		;
+		]
+		
+		There is nothing special here:
+		A e[Domainmodel] contains an arbitrary number (code[Xtext][*]) of e[Entities] which will be added (code[Xtext][+=])
+		to a list code[Xtext][elements].
+	]
+	item[
+		Next up we'll have to define the parser rule for an e[Entity]:
+		
+		code[Xtext][
+		Entity :
+		  'entity' name = ID ('extends' superType = \[Entity\])? '{'
+		    (features += Feature)*
+		  '}'
+		;
+		]
+		
+		This rule illustrates some interesting features of the Xtext grammar language. Since an e[Entity]
+		optionally (code[Xtext][?]) extends another e[Entity], a so called cross reference was used. Furthermore
+		you learned that keywords are written as string literals and a simple assignment uses a plain
+		equal sign (code[Xtext][=]) where the multi value assignment used a plus-equals (code[Xtext][+=]).
+	]
+	item[
+		Since the introductory example not only used entities, but also a data type, another option has
+		to be added to the e[Domainmodel].
+		
+		code[Xtext][
+		Domainmodel :
+		  (elements += Type)*
+		;
+		
+		Type:
+		  DataType | Entity
+		;
+		  
+		DataType:
+		  'datatype' name=ID
+		;
+		]
+		
+		The only new element that you can spot here is the alternative in the rule e[Type]: The bar (code[Xtext][|])
+		is used to describe alternatives in the syntax.  
+	]
+	item[
+		Last but not least, a rule e[Feature] has to be defined:
+		
+		code[Xtext][
+		Feature:
+		  (many ?= 'many')? name = ID ':' type = \[Type\] 
+		;
+		]
+		
+		The keyword code[DomainExample][many] is used to model a multi valued feature in the domain model
+		DSL. Therefore, the boolean assignment (code[Xtext][?=]) is used. You are already familiar with
+		the other syntax elements in this parser rule. 
+	]
+
+]
+
+In the end the grammar should look like this:
+
+code[Xtext][
+grammar org.eclipse.xtext.example.Domainmodel with
+                                      org.eclipse.xtext.common.Terminals
+
+generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"
+
+Domainmodel :
+  (elements += Type)*
+;
+  
+Type:
+  DataType | Entity
+;
+  
+DataType:
+  'datatype' name=ID
+;
+ 
+Entity:
+  'entity' name = ID ('extends' superType = \[Entity\])? '{'
+    (features += Feature)*
+  '}'
+;
+ 
+Feature:
+  (many ?= 'many')? name = ID ':' type = \[Type\]
+;
+
+]
+
+section[Generate Language Artifacts]
+
+Now that we have the grammar in place and defined we need to execute the code generator that will derive the
+various language components. 
+To do so locate the file e[GenerateDomainmodel.mwe2] file next to the grammar 
+file in the package explorer view. From its context menu, choose
+
+  e[Run As -> MWE2 Workflow].
+
+This will trigger the Xtext language generator. It generates the parser and 
+serializer and some additional infrastructure code. You will see its logging 
+messages in the Console View. 
+
+section[Run the Generated IDE Plug-in]
+
+If the code generation succeeded, we are now able to test the IDE integration. 
+Right-click on the Xtext project and choose
+
+  e[Run As -> Eclipse Application].
+
+
+This will spawn a new Eclipse workbench with your newly developed plug-ins installed. 
+In the new workbench, create a new project of your choice, e.g.
+e[File -> New -> Project...  -> Java Project] and therein a new file 
+with the file extension you chose in the beginning (e[*.dmodel]). This will open
+the generated entity editor. Try it and discover the default 
+functionality for code completion, syntax highlighting, syntactic validation, linking errors, 
+the outline view, find references etc.
+
+img[../images/getting-started-editor.png][][][]
+

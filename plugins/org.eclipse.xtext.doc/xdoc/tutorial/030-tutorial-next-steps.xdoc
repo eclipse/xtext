@@ -1,0 +1,203 @@
+chapter:DomainmodelNextSteps[Enhancing The Domain Model]
+
+section[Adding a Namespace Concept]
+
+At the current stage, our language puts all types into the same scope. As 
+cross-references are specified by means of names, this can easily yield collisions 
+as the model size increases. Avoiding such name clashes is why most programming 
+languages invent concepts like namespaces or modules. We will now introduce the 
+concept of a e[Package], which effectively is a namespace. 
+
+Our languages's definition of a e[Package] is as follows: A package has a name and 
+contains other named elements and namespace-imports. A named element is either another 
+e[Package] or a e[Type]. Within a package, elements must have unique names. The 
+e[fully qualified name] (FQN) of a named element consists of the FQN of its package, 
+a separator e['.'] and its own simple name. Elements refer to each other using their 
+e[qualified names] which may be relative to their common namespaces or absolute. By means 
+of import statements, these names can be further abbreviated. 
+
+That might sound a bit complicated at first but the good thing is that Xtext 
+comes with exactly such a default semantic for namespaces, which feels very 
+natural in practice. Although all aspects of this semantic are adaptable, we 
+will stick to the defaults within this tutorial.
+
+Before we extend the grammar, let's have a look how an example model would
+look like when using the newly introduced concepts:
+
+code[DomainExample][package my.types {
+  datatype String
+  datatype Boolean
+}
+
+package my.entities {
+  
+  import my.types.*
+  
+  entity Session {
+    title: String
+    isTutorial : Boolean
+  }
+
+  entity Conference {
+    name : String
+    attendees : Person*
+    speakers : Speaker*
+  }
+
+  entity Person {
+    name : String
+  }
+
+  entity Speaker extends Person {
+    sessions : Session*
+  }
+}
+]
+
+Let's start to modify our grammar now. First we introduce the rule e[AbstractElement]:
+
+code[Xtext][AbstractElement:
+  PackageDeclaration | Type;
+]
+
+e[DomainModel] should now call e[AbstractElement] instead of e[Type]:  
+
+code[Xtext][DomainModel:
+  (elements+=AbstractElement)*;
+]
+
+To allow qualified names, we need a new rule e[QualifiedName]. This rule 
+returns a string. But we do not want this to be a e[terminal rule], as terminal 
+rules have special semantics (they are used context-less in the lexer, which 
+often causes problems). Instead we want it to be a parser rule, but one which
+doesn't return an instance of an e[EClass] from the referenced e[EPackage] but 
+just a plain String. Such rules are called e[data type rules], because they return 
+instances of e[EDataType] as opposed to instances of e[EClass]. String is the most 
+often used e[EDataType] in this context and is therefore the default return 
+type for data type rules. The rule looks like this:
+
+code[Xtext][QualifiedName:
+  ID ('.' ID)*;
+]
+
+Note, that Xtext automatically figures out that the rule is a e[data type rule] 
+rather then a normal parser rule, because it doesn't contain any assignments 
+and all rule calls go to either other e[data type rules] or e[terminal rules]. 
+For a e[data type rule] the parser simply concatenates the consumed text and returns 
+it as a string. The transformation to a user defined data type is done by so 
+called ref:valueconverter[ValueConverters]. But as we use strings we don't need to care about 
+e[ValueConverters] here.
+
+Next up we need to define the syntax of e[PackageDeclarations], which makes use of 
+the e[QualifiedName] rule but doesn't make use of anything we haven't yet talked about.
+
+code[Xtext][PackageDeclaration:
+  'package' name=QualifiedName '{'
+    (elements+=AbstractElement)*
+  '}';
+  ]
+
+Having qualified names at hand, we want to specify cross-references that 
+way, too. As mentioned by default, Xtext assumes the rule e[ID] as the syntax 
+for cross-references, which has been fully sufficient so far. But now we want 
+to allow fully qualified names as well, so we explicitly specify the syntax rule 
+after a delimiter e['|']:
+
+fn.. Note, that the e['|'] has nothing to do with the previously introduced 
+alternative operator. In the context of a cross-reference it is simply a delimiter.  
+
+code[Xtext][Entity:
+  'entity' name=ID ('extends' superType=\[Entity|QualifiedName\])? '{'
+    (features+=Feature)*
+  '}';
+]
+
+and
+
+code[Xtext][TypeRef:
+  referenced=\[Type|QualifiedName\] (multi?='*')?;
+]
+
+As the last step, we introduce imports. An e[Import] is an instance of 
+e[AbstractElement], too, so that it can occur as a child of e[DomainModel] as 
+well as of e[PackageDeclaration].
+
+code[Xtext][AbstractElement:
+  PackageDeclaration | Type | Import;
+]
+
+An imported namespace is not just a qualified name but it also allows an 
+optional wildcard character e['*'] at the end, so that multiple names can be 
+imported with one statement. That requires a new data type rule which we 
+name e[QualifiedNameWithWildCard]:
+
+code[Xtext][QualifiedNameWithWildCard:
+  QualifiedName '.*'?;
+]
+
+The declaration of the e[Import] rule should look familiar by now:
+
+code[Xtext][Import:
+  'import' importedNamespace=QualifiedNameWithWildCard;
+]
+
+The default scoping implementation is based on naming conventions. First 
+everything which has a name is referenceable. By default something has a name 
+if it has a property e['name']. If such an e[EAttribute] is available, the default 
+implementation computes a qualified name by asking the container for its name 
+and concatenates the two names separated by a dot. The computation of qualified
+names can be arbitrarily changed by implementing an e[IQualifedNameProvider]. 
+The other naming convention is that if some element has an EAttribute 
+'importedNamespace' that value is used as a namespace import and is automatically 
+prefixed to any simple names used within that namespace. Also the asterisk e['*'] 
+is used as a wildcard by default.
+
+That's all for the grammar. It should now read as 
+
+code[Xtext][grammar org.eclipse.xtext.example.Domainmodel 
+   with org.eclipse.xtext.common.Terminals
+
+generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"
+
+DomainModel:
+  (elements+=AbstractElement)*;
+
+AbstractElement:
+  PackageDeclaration | Type | Import;
+  
+Import:
+  'import' importedNamespace=QualifiedNameWithWildCard;
+
+PackageDeclaration:
+  'package' name=QualifiedName '{'
+    (elements+=AbstractElement)*
+  '}';
+
+Type:
+  Entity | DataType;
+
+DataType:
+  'datatype' name=ID;
+
+Entity:
+  'entity' name=ID ('extends' superType=\[Entity|QualifiedName\])? '{'
+    (features+=Feature)*
+  '}';
+
+Feature:
+  name=ID ':' type=TypeRef;
+
+TypeRef:
+  referenced=\[Type|QualifiedName\] (multi?='*')?;
+
+QualifiedName:
+  ID ('.' ID)*;
+  
+QualifiedNameWithWildCard:
+  QualifiedName '.*'?;
+]
+
+Now you should regenerate the language infrastructure as described in the 
+previous section, and give the editor a try. You can even split up your model 
+into smaller parts and have cross-references across file boundaries, as long 
+as the referenced models are on the classpath.
