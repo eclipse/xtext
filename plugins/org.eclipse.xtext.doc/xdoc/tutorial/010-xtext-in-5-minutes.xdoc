@@ -1,15 +1,16 @@
 chapter:FirstFiveMinutes[The 5 Minute Test]
 
-First, make sure you have Eclipse Xtext properly installed. If you are not sure about that, you should follow 
-the ref:Installation[installation instructions]. After that, start Eclipse and prepare to get in touch
-with an awesome technology.
+In this chapter you'll learn how to create a new Xtext project, generate a fully working language infrastructure
+and how to start a new Eclipse instance in order to test the editor. But before we get started, make sure you have 
+Eclipse Xtext properly installed. If you are not sure about that, you should follow the 
+ref:Installation[installation instructions].
 
 section:NewProject[Create A New Xtext Project]
 
 The first step is to create a new Xtext project by choosing e[File -> New -> Project...]. The dialog
 offers a couple of different project types. Select e[New Xtext Project] from the category e[Xtext] and
 finish the wizard with the default settings. You'll find 3 new projects in your workspace which are mostly
-empty and the Xtext grammar editor will be opened and show your first e[Hello World] language.
+empty and the Xtext grammar editor will be opened and show the definition of a very simple e[Hello World] language.
 
 code[Xtext][
 grammar org.xtext.example.mydsl.MyDsl with 
@@ -24,17 +25,22 @@ Greeting:
 	'Hello' name=ID '!';
 ]
 
-The grammar describes a very simple syntax that allows to write a list of greetings like code[MyDsl][Hello Xtext!
-Hello World!]
+The only thing the language does, is to allow to write down a list of greetings. The following would
+be proper input: 
+code[MyDsl][
+	Hello Xtext!
+	Hello World!
+]
+
+img[images/FiveMinTutorial_FreshProject.png][ ][ ][ ]
 
 section:RunWorkflow[Generating the Language Infrastructure]
 
 In order to test drive this language, you'll have to generate the respective language infrastructure.
 Therefore, choose e[Run As -> Generate Xtext Artifacts] from the context menu of the grammar editor.
 A new Java process will be spawned and afterwards you'll find a couple of new files in the projects that
-were created in the first step. What you see now is a runnable language with a powerful Eclipse editor
-- although we have to admit that the e[Hello World!] syntax is not necessarly complex enough to demonstrate
-all the features.
+were created in the first step. What you see now is a runnable language infrastructure with a powerful Eclipse editor
+for a brain-dead language :-).
 
 section:TestingTheEditor[Try The Editor]
 
@@ -44,24 +50,24 @@ one. Choose a meaningful name and go to the tab e[Arguments] where you add the V
 -Xmx512m] to make sure that the memory settings are sufficient for a new Eclipse instance. Now you can
 hit e[Run] to create a new process.
 
-todo[Screenshot]
+img[images/FiveMinTutorial_LaunchConfig.png][ ][ ][ ]
 
 A new project is necessary to create a file for the sample language. Select e[File -> New -> Project...]
 and choose a project type of your choice, e.g. e[Java Project], name it e[Sample] and create a new file
 in the e[src] folder of the project: From the context menu of the folder choose e[New -> File], name
-it e[Sample.mydsl] hit e[Finish]. The newly created editor will open for you language and you can test-drive
-it, e.g. use content assist (e[Ctrl+Space]) to insert the keyword code[MyDsl][Hello] and see how the
-input is validated immediately.
+it e[Sample.mydsl] hit e[Finish]. The newly created editor will open for you language and ask you in
+a dialog, whether you want to add the Xtext nature to your project, which is a good idea. You can now
+test-drive the editor, e.g. use content assist (e[Ctrl+Space]) to insert the keyword code[MyDsl][Hello] 
+and see how the input is validated immediately.
 
-todo[Screenshot]
+img[images/FiveMinTutorial_Editor.png][ ][ ][ ]
 
 section:Conclusion[What Did I Do?]
 
-In your first five minutes with Xtext, you learned how the basic workflow looks like when you want to
-create new language. Starting with a grammar definition, you'll derive a couple of services from it by
-means of Code generation, the e[plugin.xml] files will be populated with some configuration for the Eclipse
-integration and afterwards you can play around with the editor for your language.
+In your first five minutes with Xtext, you've learned how to create a new set of projects. You've run
+Xtext's code generation in order to get a fully working language infrastructure, and finally learned
+how to test the generated editor.
 
-If you are keen on more Xtext features you should definitely try the more comprehensive ref:DomainmodelWalkThrough[Domain
+Next up you should go through the more comprehensive ref:DomainmodelWalkThrough[Domain
 Model Example]. It explains the different concepts of the Xtext grammar language and illustrates how
 to customize various aspects of the language.
