@@ -120,9 +120,13 @@ public class PreferenceStoreAccessTest extends TestCase implements IPreferenceSt
 					keys.add(event.getProperty());
 				}
 			});
-			getWritable().setValue("newValue", true);
+			getWritable().setValue("newValue", 1);
+			assertEquals(0, keys.size());
+			preferenceStoreAccess.getWritablePreferenceStore(project).setValue("newValue", 2);
 			assertEquals(1, keys.size());
 			assertEquals("newValue", keys.get(0));
+			assertEquals(1, getReadable().getInt("newValue"));
+			assertEquals(2, preferenceStoreAccess.getContextPreferenceStore(project).getInt("newValue"));
 		} finally {
 			IResourcesSetupUtil.cleanWorkspace();
 		}

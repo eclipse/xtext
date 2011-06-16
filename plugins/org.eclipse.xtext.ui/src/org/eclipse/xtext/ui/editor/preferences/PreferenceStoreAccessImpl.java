@@ -69,6 +69,7 @@ public class PreferenceStoreAccessImpl implements IPreferenceStoreAccess {
 				new InstanceScope(),
 				new ConfigurationScope()
 			});
+			return result;
 		}
 		return getWritablePreferenceStore();
 	}
