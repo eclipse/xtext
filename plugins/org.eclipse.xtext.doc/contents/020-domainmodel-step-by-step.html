@@ -21,22 +21,22 @@ and looks like this small sample:
 <span class="keyword">datatype</span>&nbsp;String</br>
 </br>
 <span class="keyword">entity</span>&nbsp;Blog&nbsp;{</br>
-&nbsp;&nbsp;title:&nbsp;String</br>
-&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;posts:&nbsp;Post</br>
+&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;posts:&nbsp;Post</br>
 }</br>
 </br>
 <span class="keyword">entity</span>&nbsp;HasAuthor&nbsp;{</br>
-&nbsp;&nbsp;author:&nbsp;String</br>
+&nbsp;&nbsp;&nbsp;&nbsp;author:&nbsp;String</br>
 }</br>
 </br>
 <span class="keyword">entity</span>&nbsp;Post&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{</br>
-&nbsp;&nbsp;title:&nbsp;String</br>
-&nbsp;&nbsp;content:&nbsp;String</br>
-&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;comments:&nbsp;Comment</br>
+&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String</br>
+&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;comments:&nbsp;Comment</br>
 }</br>
 </br>
 <span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{</br>
-&nbsp;&nbsp;content:&nbsp;String</br>
+&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String</br>
 }</br>
 </p>
 </div>
@@ -333,7 +333,6 @@ Entity:</br>
 Feature:</br>
 &nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type]</br>
 ;</br>
-</br>
 </p>
 </div>
 </div>
@@ -379,6 +378,232 @@ the outline view, find references etc.
 <div class="caption">
 </div>
 </div>
+</p>
+<a name="4"></a>
+<h2>Packages and Imports</h2>
+<p>
+After you&apos;ve created the your first DSL and had a look at the editor, the language should be refined
+and incrementally enhanced. The Domain Model should support a namespace concept. Therefore, a new concept
+will be introduced: A <em>Package</em> may contain <em>Types</em> and other packages. Along with the namespaces,
+the need for imports arises.  
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;FirstFile.dmodel</br>
+</span><span class="keyword">package</span>&nbsp;my.company.common&nbsp;{</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">datatype</span>&nbsp;String</br>
+&nbsp;&nbsp;&nbsp;&nbsp;</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;HasAuthor&nbsp;{</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author:&nbsp;String</br>
+&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+}</br>
+</p>
+</div>
+</div>
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="comment">//&nbsp;SecondFile.dmodel</br>
+</span><span class="keyword">package</span>&nbsp;my.company.blog&nbsp;{</br>
+&nbsp;&nbsp;</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;my.company.common.*</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Blog&nbsp;{</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;posts:&nbsp;Post</br>
+&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+&nbsp;&nbsp;&nbsp;&nbsp;</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Post&nbsp;<span class="keyword">extends</span>&nbsp;my.company.common.HasAuthor&nbsp;{</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;comments:&nbsp;Comment</br>
+&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+&nbsp;&nbsp;&nbsp;&nbsp;</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String</br>
+&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+}</br>
+</p>
+</div>
+</div>
+</p>
+<p>
+Let&apos;s start to enhance the grammar. 
+</p>
+<p>
+<ol>
+	<li>
+		
+				Since a <em>Domainmodel</em> no longer contains types but packages, too,
+				the entry rule has to be modified. Furthermore, a common super type for <em>Packages</em> and <em>Types</em>
+				should be introduced: the <em>AbstractElement</em>.
+						
+				<div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		Domainmodel:</br>
+		&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*</br>
+		;</br>
+		</br>
+		AbstractElement:</br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Type</br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;</br>
+		</p>
+		</div>
+		</div>
+		
+	</li>
+	<li>
+		
+				A <span class="inlinecode">PackageDeclaration</span> in turn looks pretty much as expected. It contains a number
+				of <em>Imports</em> and <em>AbstractElements</em>. Since <em>Imports</em> should be allowed for the root-Domainmodel,
+				too, we add them as an alternative to the rule <span class="inlinecode">AbstractElement</span>.
+				
+				<div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		PackageDeclaration:</br>
+		&nbsp;&nbsp;<span class="string">&apos;package&apos;</span>&nbsp;name&nbsp;=&nbsp;QualifiedName&nbsp;<span class="string">&apos;{&apos;</span></br>
+		&nbsp;&nbsp;&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*</br>
+		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span></br>
+		;</br>
+		</br>
+		AbstractElement:</br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Type&nbsp;|&nbsp;Import</br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;</br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;QualifiedName:</br>
+		&nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*</br>
+		;</br>
+		</p>
+		</div>
+		</div>
+		
+				
+				The <span class="inlinecode">QualifiedName</span> is a little special. It does not contain any assignments. Therefore,
+				it serves as a data type rule. The <em>name</em> of a <em>Package</em> is still a string.
+	</li>
+	<li>
+		
+				Imports can be defined in a very convenient way with Xtext. If you use the name <em>importedNamespace</em>
+				in a parser rule, the framework will treat the value as an import:
+				
+				<div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		Import:</br>
+		&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importedNamespace&nbsp;=&nbsp;QualifiedNameWithWildCard</br>
+		;</br>
+		</br>
+		QualifiedNameWithWildcard:</br>
+		&nbsp;&nbsp;QualifiedName&nbsp;<span class="string">&apos;.*&apos;</span>?</br>
+		;</br>
+		</p>
+		</div>
+		</div>
+		
+				
+				Similar to the rule <span class="inlinecode">QualifiedName</span>, <span class="inlinecode">QualifiedNameWithWildcard</span> returns
+				a plain string. 
+	</li>
+	<li>
+		
+				The last step is to allow fully qualified names in cross references, too. Otherwise one could
+				not refer to an entity without adding an import statement.
+				
+				<div class="literallayout">
+		<div class="incode">
+		<p class="code">
+		Entity:</br>
+		&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;</br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType&nbsp;=&nbsp;[Entity&nbsp;|&nbsp;QualifiedName])?</br>
+		&nbsp;&nbsp;<span class="string">&apos;{&apos;</span></br>
+		&nbsp;&nbsp;&nbsp;&nbsp;(features&nbsp;+=&nbsp;Feature)*</br>
+		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span></br>
+		;</br>
+		&nbsp;</br>
+		Feature:</br>
+		&nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type&nbsp;|&nbsp;QualifiedName]</br>
+		;</br>
+		</p>
+		</div>
+		</div>
+		
+				
+				<em>Please note that the bar (<span class="inlinecode">|</span>) is not an alternative in the context of a cross reference,
+				but used to specify the syntax of the parsed string.</em> 
+	</li>
+</ol>
+</p>
+<p>
+That&apos;s all for the grammar. It should now read as 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">grammar</span>&nbsp;org.eclipse.xtext.example.Domainmodel&nbsp;<span class="keyword">with</span></br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals</br>
+</br>
+<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.eclipse.org/xtext/example/Domainmodel"</span></br>
+</br>
+DomainModel:</br>
+&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*</br>
+;</br>
+</br>
+PackageDeclaration:</br>
+&nbsp;&nbsp;<span class="string">&apos;package&apos;</span>&nbsp;name&nbsp;=&nbsp;QualifiedName&nbsp;<span class="string">&apos;{&apos;</span></br>
+&nbsp;&nbsp;&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*</br>
+&nbsp;&nbsp;<span class="string">&apos;}&apos;</span></br>
+;</br>
+</br>
+AbstractElement:</br>
+&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Type&nbsp;|&nbsp;Import</br>
+;</br>
+</br>
+QualifiedName:</br>
+&nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*</br>
+;</br>
+</br>
+Import:</br>
+&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importedNamespace&nbsp;=&nbsp;QualifiedNameWithWildCard</br>
+;</br>
+&nbsp;&nbsp;</br>
+QualifiedNameWithWildcard:</br>
+&nbsp;&nbsp;QualifiedName&nbsp;<span class="string">&apos;.*&apos;</span>?</br>
+;</br>
+&nbsp;&nbsp;</br>
+Type:</br>
+&nbsp;&nbsp;DataType&nbsp;|&nbsp;Entity</br>
+;</br>
+&nbsp;&nbsp;</br>
+DataType:</br>
+&nbsp;&nbsp;<span class="string">&apos;datatype&apos;</span>&nbsp;name=ID</br>
+;</br>
+&nbsp;</br>
+Entity:</br>
+&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType&nbsp;=&nbsp;[Entity&nbsp;|&nbsp;QualifiedName])?</br>
+&nbsp;&nbsp;<span class="string">&apos;{&apos;</span></br>
+&nbsp;&nbsp;&nbsp;&nbsp;(features&nbsp;+=&nbsp;Feature)*</br>
+&nbsp;&nbsp;<span class="string">&apos;}&apos;</span></br>
+;</br>
+&nbsp;</br>
+Feature:</br>
+&nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type&nbsp;|&nbsp;QualifiedName]</br>
+;</br>
+</p>
+</div>
+</div>
+</p>
+<p>
+You should regenerate the language infrastructure as described in the 
+previous section, and give the editor another try. You can even split up your model 
+into smaller parts and have cross-references across file boundaries.
 </p>
 </body>
 </html>

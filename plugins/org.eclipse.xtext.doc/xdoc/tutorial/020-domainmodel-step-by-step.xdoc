@@ -8,22 +8,22 @@ code[DomainExample][
 datatype String
 
 entity Blog {
-  title: String
-  many posts: Post
+	title: String
+	many posts: Post
 }
 
 entity HasAuthor {
-  author: String
+	author: String
 }
 
 entity Post extends HasAuthor {
-  title: String
-  content: String
-  many comments: Comment
+	title: String
+	content: String
+	many comments: Comment
 }
 
 entity Comment extends HasAuthor {
-  content: String
+	content: String
 }
 ]
 
@@ -224,7 +224,6 @@ Entity:
 Feature:
   (many ?= 'many')? name = ID ':' type = \[Type\]
 ;
-
 ]
 
 section[Generate Language Artifacts]
@@ -257,4 +256,186 @@ functionality for code completion, syntax highlighting, syntactic validation, li
 the outline view, find references etc.
 
 img[../images/getting-started-editor.png][][][]
+
+section[Packages and Imports]
+
+After you've created the your first DSL and had a look at the editor, the language should be refined
+and incrementally enhanced. The Domain Model should support a namespace concept. Therefore, a new concept
+will be introduced: A e[Package] may contain e[Types] and other packages. Along with the namespaces,
+the need for imports arises.  
+
+code[DomainExample][
+// FirstFile.dmodel
+package my.company.common {
+	datatype String
+	
+	entity HasAuthor {
+		author: String
+	}
+}
+]
+
+code[DomainExample][
+// SecondFile.dmodel
+package my.company.blog {
+  
+	import my.company.common.*
+	  
+	entity Blog {
+		title: String
+		many posts: Post
+	}
+	
+	entity Post extends my.company.common.HasAuthor {
+		title: String
+		content: String
+		many comments: Comment
+	}
+	
+	entity Comment extends HasAuthor {
+		content: String
+	}
+}
+]
+
+Let's start to enhance the grammar. 
+
+ol[
+	item[
+		Since a e[Domainmodel] no longer contains types but packages, too,
+		the entry rule has to be modified. Furthermore, a common super type for e[Packages] and e[Types]
+		should be introduced: the e[AbstractElement].
+				
+		code[Xtext][
+		Domainmodel:
+		  (elements += AbstractElement)*
+		;
+		
+		AbstractElement:
+  		  PackageDeclaration | Type
+  		;
+		]
+	]
+	item[
+		A code[Xtext][PackageDeclaration] in turn looks pretty much as expected. It contains a number
+		of e[Imports] and e[AbstractElements]. Since e[Imports] should be allowed for the root-Domainmodel,
+		too, we add them as an alternative to the rule code[Xtext][AbstractElement].
+		
+		code[Xtext][
+		PackageDeclaration:
+		  'package' name = QualifiedName '{'
+		    (elements += AbstractElement)*
+		  '}'
+		;
+		
+		AbstractElement:
+  		  PackageDeclaration | Type | Import
+  		;
+  		
+  		QualifiedName:
+		  ID ('.' ID)*
+		;
+		]
+		
+		The code[Xtext][QualifiedName] is a little special. It does not contain any assignments. Therefore,
+		it serves as a data type rule. The e[name] of a e[Package] is still a string.
+	]
+	item[
+		Imports can be defined in a very convenient way with Xtext. If you use the name e[importedNamespace]
+		in a parser rule, the framework will treat the value as an import:
+		
+		code[Xtext][
+		Import:
+		  'import' importedNamespace = QualifiedNameWithWildCard
+		;
+  
+		QualifiedNameWithWildcard:
+		  QualifiedName '.*'?
+		;
+		]
+		
+		Similar to the rule code[Xtext][QualifiedName], code[Xtext][QualifiedNameWithWildcard] returns
+		a plain string. 
+	]
+	item[
+		The last step is to allow fully qualified names in cross references, too. Otherwise one could
+		not refer to an entity without adding an import statement.
+		
+		code[Xtext][
+		Entity:
+		  'entity' name = ID 
+		              ('extends' superType = \[Entity | QualifiedName\])?
+		  '{'
+		    (features += Feature)*
+		  '}'
+		;
+		 
+		Feature:
+		  (many ?= 'many')? name = ID ':' type = \[Type | QualifiedName\]
+		;
+		]
+		
+		e[Please note that the bar (code[|]) is not an alternative in the context of a cross reference,
+		but used to specify the syntax of the parsed string.] 
+	]
+]
+
+That's all for the grammar. It should now read as 
+
+code[Xtext][
+grammar org.eclipse.xtext.example.Domainmodel with
+                                      org.eclipse.xtext.common.Terminals
+
+generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"
+
+DomainModel:
+  (elements += AbstractElement)*
+;
+
+PackageDeclaration:
+  'package' name = QualifiedName '{'
+    (elements += AbstractElement)*
+  '}'
+;
+
+AbstractElement:
+  PackageDeclaration | Type | Import
+;
+
+QualifiedName:
+  ID ('.' ID)*
+;
+
+Import:
+  'import' importedNamespace = QualifiedNameWithWildCard
+;
+  
+QualifiedNameWithWildcard:
+  QualifiedName '.*'?
+;
+  
+Type:
+  DataType | Entity
+;
+  
+DataType:
+  'datatype' name=ID
+;
+ 
+Entity:
+  'entity' name = ID 
+              ('extends' superType = \[Entity | QualifiedName\])?
+  '{'
+    (features += Feature)*
+  '}'
+;
+ 
+Feature:
+  (many ?= 'many')? name = ID ':' type = \[Type | QualifiedName\]
+;
+]
+
+You should regenerate the language infrastructure as described in the 
+previous section, and give the editor another try. You can even split up your model 
+into smaller parts and have cross-references across file boundaries.
 
