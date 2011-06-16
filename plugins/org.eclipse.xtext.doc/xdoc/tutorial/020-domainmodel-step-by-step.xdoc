@@ -346,7 +346,7 @@ ol[
 		
 		code[Xtext][
 		Import:
-		  'import' importedNamespace = QualifiedNameWithWildCard
+		  'import' importedNamespace = QualifiedNameWithWildcard
 		;
   
 		QualifiedNameWithWildcard:
@@ -388,7 +388,7 @@ grammar org.eclipse.xtext.example.Domainmodel with
 
 generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"
 
-DomainModel:
+Domainmodel:
   (elements += AbstractElement)*
 ;
 
@@ -407,7 +407,7 @@ QualifiedName:
 ;
 
 Import:
-  'import' importedNamespace = QualifiedNameWithWildCard
+  'import' importedNamespace = QualifiedNameWithWildcard
 ;
   
 QualifiedNameWithWildcard:

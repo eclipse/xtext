@@ -27,6 +27,18 @@ codelanguage-def[Xtext][
 	EOF
 ]
 
+codelanguage-def[Xtend][
+	abstract,continue,def,override,for,new,switch,assert,default,goto,package,synchronized,
+	boolean,do,if,private,this,break,double,implements,protected,throw,
+	byte,else,import,public,throws,
+	case,enum,instanceof,return,
+	catch,extends,int,short,try,
+	char,final,static,void,
+	class,finally,long,
+	float,super,while,create,dispatch,extension,typeof,as,
+	IF, ELSE, ELSEIF, ENDIF, FOR, ENDFOR, BEFORE, AFTER, SEPARATOR
+]
+
 codelanguage-def[MWE2][module, var, auto-inject, auto, inject, import, true, false]
 
 codelanguage-def[DomainExample][package, entity, datatype, import, extends, public, many]

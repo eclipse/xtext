@@ -10,21 +10,21 @@ was build in the first ref:DomainmodelWalkThrough[domain model tutorial].
 That is, the syntax and the grammar for the language look like this:
 
 code[DomainExample][
-package my.company.common {
+package java.lang {
 	datatype String
-	
-	entity HasAuthor {
-		author: String
-	}
 }
 
 package my.company.blog {
-  
+	import java.lang.*
 	import my.company.common.*
 	  
 	entity Blog {
 		title: String
 		many posts: Post
+	}
+	
+	entity HasAuthor {
+		author: String
 	}
 	
 	entity Post extends HasAuthor {
@@ -45,7 +45,7 @@ grammar org.eclipse.xtext.example.Domainmodel with
 
 generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"
 
-DomainModel:
+Domainmodel:
   (elements += AbstractElement)*
 ;
 
@@ -64,7 +64,7 @@ QualifiedName:
 ;
 
 Import:
-  'import' importedNamespace = QualifiedNameWithWildCard
+  'import' importedNamespace = QualifiedNameWithWildcard
 ;
   
 QualifiedNameWithWildcard:
