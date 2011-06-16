@@ -26,6 +26,12 @@ public class EObjectAtOffsetTest extends AbstractXtextTests {
 		eObjectAtOffsetHelper = new EObjectAtOffsetHelper();
 	}
 
+	public void testBug349626() throws Exception {
+		String modelAsString = "foo foo0";
+		XtextResource resource = getResourceFromString(modelAsString);
+		assertNull(eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, modelAsString.length()));
+	}
+
 	public void testElements() throws Exception {
 		String modelAsString = "foo foo0 bar bar0 foo0 bar bar1 foo0";
 		XtextResource resource = getResourceFromString(modelAsString);
