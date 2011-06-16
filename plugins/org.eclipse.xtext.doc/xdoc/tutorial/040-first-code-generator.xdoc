@@ -240,4 +240,5 @@ class DomainmodelGenerator implements IGenerator {
 
 If you want to play around with Xtend, you can try to use the Xtend tutorial which can be materialized
 into your workspace. Simply choose e[New -> Example -> Xtend Tutorial] and have a look at Xtend's features.
-As a small exercise, you could implement support for the e[many] attribute of a e[Feature]. 
+As a small exercise, you could implement support for the e[many] attribute of a e[Feature] or enforce
+naming conventions, e.g. field names should start with an underscore.
