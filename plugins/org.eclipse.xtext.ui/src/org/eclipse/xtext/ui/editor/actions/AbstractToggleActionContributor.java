@@ -7,7 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.actions;
 
+import java.io.IOException;
+
+import org.apache.log4j.Logger;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
@@ -38,6 +42,8 @@ public abstract class AbstractToggleActionContributor {
 		}
 	}
 
+	private static final Logger logger = Logger.getLogger(AbstractToggleActionContributor.class);
+	
 	@Inject
 	private IPreferenceStoreAccess preferenceStoreAccess;
 
@@ -61,7 +67,15 @@ public abstract class AbstractToggleActionContributor {
 	
 	protected void toggle() {
 		boolean newState = !isPropertySet();
-		preferenceStoreAccess.getWritablePreferenceStore().setValue(getPreferenceKey(), newState);
+		IPreferenceStore store = preferenceStoreAccess.getWritablePreferenceStore();
+		store.setValue(getPreferenceKey(), newState);
+		if (store instanceof IPersistentPreferenceStore)
+			try {
+				((IPersistentPreferenceStore) store).save();
+			} catch (IOException e) {
+				// log and ignore
+				logger.debug(e.getMessage(), e);
+			}
 		stateChanged(newState);
 	}
 
