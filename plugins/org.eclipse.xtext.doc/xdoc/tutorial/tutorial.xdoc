@@ -27,7 +27,7 @@ codelanguage-def[Xtext][
 	EOF
 ]
 
-codelanguage-def[Xtend][
+codelanguage-def[Xtend2][
 	abstract,continue,def,override,for,new,switch,assert,default,goto,package,synchronized,
 	boolean,do,if,private,this,break,double,implements,protected,throw,
 	byte,else,import,public,throws,

@@ -29,7 +29,7 @@ First of all, locate the file e[DomainmodelGenerator.xtend] in the package e[org
 This Xtend class is used to generate code for your models in the standalone scenario and in the interactive
 Eclipse environment.
 
-code[Xtend][
+code[Xtend2][
 package org.eclipse.xtext.example.generator
 
 import org.eclipse.emf.ecore.resource.Resource
@@ -54,7 +54,7 @@ ol[
 		provides the useful function code[Java][allContentsIterable()] which we want to import as a static
 		extension.
 		
-		code[Xtend][
+		code[Xtend2][
 		import static extension org.eclipse.xtext.xtend2.lib.ResourceExtensions.*
 		
 		class DomainmodelGenerator implements IGenerator {
@@ -64,7 +64,7 @@ ol[
 		
 		Afterwards we can iterate all the objects and filter them by their type to find all e[Entities].
 		
-		code[Xtend][
+		code[Xtend2][
 		override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 			for(e: resource.allContentsIterable.filter(typeof(Entity))) {
 			}
@@ -78,14 +78,14 @@ ol[
 		that is available for each language. Fortunately, Xtend allows to reuse that one easily. We simply
 		inject the codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider] into the generator.
 		
-		code[Xtend][
+		code[Xtend2][
 		@Inject extension IQualifiedNameProvider nameProvider
 		]
 		
 		This allows to ask for the name of an entity. It is straight forward to convert the name into
 		a file name:
 		
-		code[Xtend][
+		code[Xtend2][
 		override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 			for(e: resource.allContentsIterable.filter(typeof(Entity))) {
 				fsa.generateFile(
@@ -96,10 +96,10 @@ ol[
 		]
 	]
 	item[
-		The next step is to write the actual template code for an entity. For now, the function code[Xtend][Entity.compile]
+		The next step is to write the actual template code for an entity. For now, the function code[Xtend2][Entity.compile]
 		does not exist, but it's easy to create it:
 		
-		code[Xtend][
+		code[Xtend2][
 		def compile(Entity e) '''
 			package «e.eContainer.fullyQualifiedName»;
 			
@@ -111,9 +111,9 @@ ol[
 	item[
 		This small template is basically the first shot at a Java Beans generator. However, it's currently
 		rather incomplete and will fail, if the e[Entity] is not contained in a package. A small modification
-		fixes this. The code[Java][package]-declaration has to be wrapped in an code[Xtend][IF] expression:
+		fixes this. The code[Java][package]-declaration has to be wrapped in an code[Xtend2][IF] expression:
 		
-		code[Xtend][
+		code[Xtend2][
 		def compile(Entity e) '''
 			«IF e.eContainer != null»
 				package «e.eContainer.fullyQualifiedName»;
@@ -124,9 +124,9 @@ ol[
 		'''
 		]
 
-		Let's handle the e[superType] of an e[Entity] gracefully, too by using another code[Xtend][IF] expression:
+		Let's handle the e[superType] of an e[Entity] gracefully, too by using another code[Xtend2][IF] expression:
 		
-		code[Xtend][
+		code[Xtend2][
 		def compile(Entity e) ''' 
 			«IF e.eContainer != null»
 				package «e.eContainer.fullyQualifiedName»;
@@ -145,7 +145,7 @@ ol[
 		For that purpose, you'd have to create another Xtend function that compiles a single feature
 		to the respective Java code.
 		
-		code[Xtend][
+		code[Xtend2][
 		def compile(Feature f) '''
 			private «f.type.fullyQualifiedName» «f.name»;
 			
@@ -162,7 +162,7 @@ ol[
 		As you can see, there's nothing fancy about this one. Last but not least, we have to make sure
 		that the function is actually used.
 		
-		code[Xtend][
+		code[Xtend2][
 		def compile(Entity e) ''' 
 			«IF e.eContainer != null»
 				package «e.eContainer.fullyQualifiedName»;
@@ -184,7 +184,7 @@ Launch a new Eclipse Application (e[Run As -> Eclipse Application] on the Xtext 
 e[dmodel] file in a Java Project. Now simply create a new source folder e[src-gen] in the that project
 and see how the compiler will pick up your sample e[Entities] and generate Java code for them. 
 
-code[Xtend][
+code[Xtend2][
 package org.eclipse.xtext.example.generator
 
 import org.eclipse.emf.ecore.resource.Resource
