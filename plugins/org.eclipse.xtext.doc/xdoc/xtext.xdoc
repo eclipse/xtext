@@ -29,6 +29,18 @@ codelanguage-def[Xtext][
 
 codelanguage-def[MWE2][module, var, auto-inject, auto, inject, import, true, false]
 
+codelanguage-def[Xtend2][
+	abstract,continue,def,override,for,new,switch,assert,default,goto,package,synchronized,
+	boolean,do,if,private,this,break,double,implements,protected,throw,
+	byte,else,import,public,throws,
+	case,enum,instanceof,return,
+	catch,extends,int,short,try,
+	char,final,static,void,
+	class,finally,long,
+	float,super,while,create,dispatch,extension,typeof,as,
+	IF, ELSE, ELSEIF, ENDIF, FOR, ENDFOR, BEFORE, AFTER, SEPARATOR
+]
+
 codelanguage-def[Xpand][
 	IMPORT, EXTENSION, FILE, ENDFILE, DEFINE, ENDDEFINE, FOR, ENDFOR,
 	FOREACH, ENDFOREACH, AS, SEPARATOR, ITERATOR, EXPAND, REM, ENDREM, PROTECT, ENDPROTECT, this,
@@ -43,6 +55,8 @@ codelanguage-def[Xtend][
 codelanguage-def[Check][import, extension, this, create, cached, this, true, false, let, switch,
 	case, if, then, else, context, WARNING, ERROR]
 
+codelanguage-def[MyDsl][Hello]
+
 codelanguage-def[XML][]
 
 codelanguage-def[DomainExample][package, entity, datatype, import, extends, public]
@@ -53,9 +67,16 @@ codelanguage-def[FowlerExample][events, commands, state, actions, end, resetting
 
 codelanguage-def[LinkingExample][ref]
 
+chapter-ref[Installation]
+
+chapter-ref[FirstFiveMinutes]
+
+chapter-ref[DomainmodelWalkThrough]
+
+chapter-ref[DomainmodelNextSteps]
+
 chapter-ref[Overview]
 
-%%chapter-ref[getting_started]
 chapter-ref[grammarLanguage]
 
 chapter-ref[configuration]

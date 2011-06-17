@@ -8,6 +8,7 @@
 <link rel="home" href="index.html" title="">
 </head>
 <body>
+<a name="migrating_from_0_7"></a>
 <h1>Migrating from Xtext 0.7.x to 1.0</h1>
 <p>
 For the sake of completeness, here is how you migrate from Xtext 0.7.x to Xtext 1.0, so you might do
@@ -15,7 +16,7 @@ a migration to 2.0 in two steps. Nevertheless, there have been so many new featu
 it probably makes more sense to just copy the grammar and start with a new Xtext 2.0 project. The grammar 
 language is fully backward compatible. 
 </p>
-<a name="0"></a>
+<a name="migrating_from_0_7_2"></a>
 <h2>Migrating Step By Step</h2>
 <p>
 Once again, you should make sure that no old plug-ins are in your target platform. Some plug-ins from 
@@ -26,7 +27,7 @@ Xtext 0.7.x have been merged and do no longer exist.
 while fixing them with only a few well described user actions. Doing these steps in another order 
 causes most likely a higher effort.</em>
 </p>
-<a name="0-0"></a>
+<a name="migrating_from_0_7_2_3"></a>
 <h3>Update the Plug-in Dependencies and Import Statements</h3>
 <p>
 You should update the constraints from version <em>0.7.x</em> to <em>[1.0.0,2.0.0)</em> in your manifest files 
@@ -42,7 +43,7 @@ in Xtext. Perform a global search for <span class="inlinecode"><span class="keyw
 <span class="inlinecode">org.eclipse.xtext.ui.core.</span> and replace the matches with <span class="inlinecode"><span class="keyword">import</span>&nbsp;org.eclipse.xtext.ui.</span>. 
 This fixes most of the problems in the manually written code. 
 </p>
-<a name="0-1"></a>
+<a name="migrating_from_0_7_2_4"></a>
 <h3>Rename the Packages in the dsl.ui-Plug-in</h3>
 <p>
 We changed the naming pattern for artifacts in the <em>dsl.ui</em>-plug-in to match the OSGi conventions. 
@@ -53,7 +54,7 @@ search in non-Java files as this will perform incompatible changes in the manife
 it is important to perform the rename operation in the <em>src-gen</em> folder, too. This ensures that the 
 references in your manually written code are properly updated.
 </p>
-<a name="0-2"></a>
+<a name="migrating_from_0_7_2_5"></a>
 <h3>Update the Workflow</h3>
 <p>
 The <em>JavaScopingFragment</em> does no longer exist. It has been superseded by the 
@@ -91,7 +92,7 @@ The <em>PackratParserFragment</em> has been abandoned as well. It is save to rem
 in your workflow. After you&apos;ve changed your workflow, it should be possible to regenerate your language without any 
 errors in the console. It is ok to have compilation errors prior to executing the workflow.
 </p>
-<a name="0-3"></a>
+<a name="migrating_from_0_7_2_6"></a>
 <h3>MANIFEST.MF and plugin.xml</h3>
 <p>
 The previous rename package refactoring updated most of the entries in the <em>MANIFEST.MF</em> and and some entries in 
@@ -140,7 +141,7 @@ in the manifest files but it is unlikely that it will spot the erroneous referen
 	</li>
 </ul>
 </p>
-<a name="0-4"></a>
+<a name="migrating_from_0_7_2_7"></a>
 <h3>Noteworthy API Changes</h3>
 <p>
 The <em>src</em> folders are generated once, so existing code will not be overwritten but has to be updated manually. 
@@ -162,7 +163,7 @@ It is usually only necessary to change your code, if you face any compilation pr
 		
 				Renamed <em>DefaultScopeProvider</em> to <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/SimpleLocalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.impl.SimpleLocalScopeProvider" >SimpleLocalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/SimpleLocalScopeProvider.java" title="View Source Code" >(src)</a>. There have been 
 				further significant changes in the scoping API that allow for optimized implementations. Consult the 
-				<a href="050-heading-runtime.html#5" title="Go to &quot;Scoping&quot;">section on scoping</a> for details.
+				<a href="080-scoping.html" title="Go to &quot;Scoping&quot;">section on scoping</a> for details.
 	</li>
 	<li>
 		
@@ -172,14 +173,14 @@ It is usually only necessary to change your code, if you face any compilation pr
 	<li>
 		
 				The parser interfaces now use <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/io/Reader.html" title="View JavaDoc"><abbr title="java.io.Reader" >Reader</abbr></a> instead of <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/io/InputStream.html" title="View JavaDoc"><abbr title="java.io.InputStream" >InputStream</abbr></a> to explicitly address 
-				encoding. Have a look at the <a href="050-heading-runtime.html#10" title="Go to &quot;Encoding in Xtext&quot;">section on encoding</a> for details.
+				encoding. Have a look at the <a href="115-encoding.html" title="Go to &quot;Encoding in Xtext&quot;">section on encoding</a> for details.
 	</li>
 	<li>
 		
 				The handling of <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/viewers/ILabelProvider.html" title="View JavaDoc"><abbr title="org.eclipse.jface.viewers.ILabelProvider" >ILabelProvider</abbr></a> in various contexts has been refactored. 
 				The former base class <em>DefaultLabelProvider</em> no longer exists. Use the 
 				<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/label/DefaultEObjectLabelProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider" >DefaultEObjectLabelProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/label/DefaultEObjectLabelProvider.java" title="View Source Code" >(src)</a> instead. 
-				See the <a href="120-heading-UI.html#0" title="Go to &quot;Label Provider&quot;">section on label providers</a> for details.
+				See the <a href="140-labelprovider.html" title="Go to &quot;Label Provider&quot;">section on label providers</a> for details.
 	</li>
 	<li>
 		
@@ -253,7 +254,7 @@ It is usually only necessary to change your code, if you face any compilation pr
 		
 				The implementation-classes from <em>org.eclipse.xtext.index</em> were superseded by the builder infrastructure. Use the 
 				<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/exporting/QualifiedNamesFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.exporting.QualifiedNamesFragment" >QualifiedNamesFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/exporting/QualifiedNamesFragment.java" title="View Source Code" >(src)</a> and the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment" >ImportNamespacesScopingFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportNamespacesScopingFragment.java" title="View Source Code" >(src)</a> 
-				instead of the <em>ImportedNamespacesScopingFragment</em>. Please refer to the <a href="050-heading-runtime.html#5-0-2" title="Go to &quot;Global Scopes Based On External Configuration (e.g. Classpath-Based)&quot;">section about the builder infrastructure</a> for details.
+				instead of the <em>ImportedNamespacesScopingFragment</em>. Please refer to the <a href="080-scoping.html#index_based" title="Go to &quot;Global Scopes Based On External Configuration (e.g. Classpath-Based)&quot;">section about the builder infrastructure</a> for details.
 	</li>
 	<li>
 		
@@ -274,7 +275,7 @@ It is usually only necessary to change your code, if you face any compilation pr
 	</li>
 	<li>
 		
-				The method-signatures of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IFragmentProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IFragmentProvider" >IFragmentProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java" title="View Source Code" >(src)</a> have changed. The <a href="050-heading-runtime.html#9" title="Go to &quot;Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)&quot;">documentation</a> 
+				The method-signatures of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IFragmentProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IFragmentProvider" >IFragmentProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java" title="View Source Code" >(src)</a> have changed. The <a href="110-fragmentprovider.html" title="Go to &quot;Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)&quot;">documentation</a> 
 				will give a clue on how to update existing implementations.
 	</li>
 	<li>

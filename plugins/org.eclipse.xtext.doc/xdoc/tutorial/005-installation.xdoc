@@ -1,4 +1,4 @@
-chapter:Installation[Install Eclipse Xtext]
+chapter:Installation[Installation]
 
 e[Eclipse Xtext is implemented in Java, so you must have a link[http://www.oracle.com/technetwork/java/index.html][Java
 Runtime Environment] installed in order to proceed.]

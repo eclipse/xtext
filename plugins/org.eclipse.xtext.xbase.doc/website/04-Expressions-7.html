@@ -1,0 +1,332 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Switch Expression</title>
+    <link href="book.css" rel="stylesheet" type="text/css">
+    <link href="code.css" rel="stylesheet" type="text/css">
+    <link href="http://www.eclipse.org/eclipse.org-common/yui/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="http://www.eclipse.org/eclipse.org-common/yui/2.6.0/build/menu/assets/skins/sam/menu.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/reset.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/layout.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/header.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/footer.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/visual.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/print.css" rel="stylesheet" type="text/css" media="print">
+    <link rel="stylesheet" type="text/css" href="http://www.eclipse.org/Xtext/style.css"/>
+    <link rel="stylesheet" type="text/css" href="http://www.eclipse.org/style2.css"/>
+     <script type="text/javascript"> 
+    	function initTocMenu(ActiveSubTocElementId){
+    		var menu = document.getElementById("leftnav");
+    		
+    		var chapters = menu.children;
+    		addHideSubsectionFunction(chapters);
+    		
+    		document.getElementById(ActiveSubTocElementId).style.display = "block";
+    	}
+    
+    	function addHideSubsectionFunction(items){
+    		for (var i = 0; i < items.length; i++) {
+    			if (items[i].firstElementChild ){
+    				items[i].firstElementChild.onclick = function(){toc_toggle_subsections(this.parentNode);};
+    				items[i].firstElementChild.style.cursor = "pointer";
+    			}
+    		}
+    	}
+    	function toc_toggle_subsections(chap){
+    		if ( chap.children[1].style.display != "none" ) {
+    			chap.children[1].style.display = "none"
+    		} else {
+    			chap.children[1].style.display = "block"
+    			
+    		}
+    	}
+    	
+    	function highlightCurrentSection(sec) {
+    		document.getElementById(sec).style.backgroundColor= "#D0D0D0"
+    	}
+    </script>
+  </head>
+
+<body onload="initTocMenu('subToc_04-Expressions.html');highlightCurrentSection(document.URL.substring(document.URL.lastIndexOf('/')+1));">
+<div id="novaWrapper">		<div id="clearHeader">
+		<div id="logo">
+				<div id="promotion"><a href="/indigo/friends.php">
+	<img src="/home/promotions/indigo/indigo.png" alt="Indigo Is Coming!"/>
+</a>
+
+</div>
+
+		</div>
+		<div id="otherSites">
+			<div id="sites">
+			<ul id="sitesUL">
+				<li><a href='http://marketplace.eclipse.org'><img alt="Eclipse Marketplace" src="http://dev.eclipse.org/custom_icons/marketplace.png"/>&nbsp;<div>Eclipse Marketplace</div></a></li>
+				<li><a href='http://live.eclipse.org'><img alt="Eclipse Live" src="http://dev.eclipse.org/custom_icons/audio-input-microphone-bw.png"/>&nbsp;<div>Eclipse Live</div></a></li>
+
+	    		<li><a href='https://bugs.eclipse.org/bugs/'><img alt="Bugzilla" src="http://dev.eclipse.org/custom_icons/system-search-bw.png"/>&nbsp;<div>Bugzilla</div></a></li>
+	    		<li><a href='http://www.eclipse.org/forums/'><img alt="Forums" src="http://dev.eclipse.org/large_icons/apps/internet-group-chat.png"/>&nbsp;<div>Eclipse Forums</div></a></li>
+	    		<li><a href='http://www.planeteclipse.org/'><img alt="Planet Eclipse" src="http://dev.eclipse.org/large_icons/devices/audio-card.png"/>&nbsp;<div>Planet Eclipse</div></a></li>
+	    		<li><a href='http://wiki.eclipse.org/'><img alt="Eclipse Wiki" src="http://dev.eclipse.org/custom_icons/accessories-text-editor-bw.png"/>&nbsp;<div>Eclipse Wiki</div></a></li>
+	    		<li><a href='http://portal.eclipse.org'><img alt="MyFoundation Portal" src="http://dev.eclipse.org/custom_icons/preferences-system-network-proxy-bw.png"/><div>My Foundation Portal</div></a></li>
+	    	</ul>
+
+	    	</div>
+		</div>		
+	</div>
+
+<div id="header">			
+	<div id="menu">
+		<ul>
+		<li><a href="/Xtext" target="_self">Home</a></li> 
+		<li><a href="/Xtext/download" target="_self">Download</a></li> 
+		<li><a href="index.html" target="_self">Documentation</a></li> 
+		<li><a href="/Xtext/support" target="_self">Support</a></li> 
+		<li><a href="/Xtext/community" target="_self">Community</a></li> 
+		<li><a href="/Xtext/developers" target="_self">Developers</a></li> 
+			</ul>
+
+	</div>
+
+	<div id="search">
+			<form action="http://www.google.com/cse" id="searchbox_017941334893793413703:sqfrdtd112s">
+		 	<input type="hidden" name="cx" value="017941334893793413703:sqfrdtd112s" />
+	  		<input id="searchBox" type="text" name="q" size="25" />
+	  		<input id="searchButton" type="submit" name="sa" value="Search" />
+			</form>
+		<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=searchbox_017941334893793413703%3Asqfrdtd112s&lang=en"></script>			
+	</div>
+
+</div>
+<div id="novaContent" class="faux">
+	<br style="clear:both;height:1em;">
+	<div id="leftcol">
+		<div class="nav-logo">
+			<a href="index.html"><img src="http://wiki.eclipse.org/images/thumb/d/db/Xtext_logo.png/450px-Xtext_logo.png" style="margin-left:30px; width:125px"/></a>
+		</div>
+		<ul id="leftnav">
+		<li class="separator"><div class="separator">Preface</div>
+			</li>
+		<li class="separator"><div class="separator">Lexical Syntax</div>
+			<ul style="display: none;" id="subToc_02-Lexical%20Structure.html">
+			<li id="02-Lexical%20Structure-0.html" ><a href="02-Lexical%20Structure-0.html" >Identifiers</a></li>
+			<li id="02-Lexical%20Structure-1.html" ><a href="02-Lexical%20Structure-1.html" >String Literals</a></li>
+			<li id="02-Lexical%20Structure-2.html" ><a href="02-Lexical%20Structure-2.html" >Integer Literals</a></li>
+			<li id="02-Lexical%20Structure-3.html" ><a href="02-Lexical%20Structure-3.html" >Comments</a></li>
+			<li id="02-Lexical%20Structure-4.html" ><a href="02-Lexical%20Structure-4.html" >White Space</a></li>
+			<li id="02-Lexical%20Structure-5.html" ><a href="02-Lexical%20Structure-5.html" >Reserved Keywords</a></li>
+			</ul>
+			</li>
+		<li class="separator"><div class="separator">Types</div>
+			<ul style="display: none;" id="subToc_03-Types.html">
+			<li id="03-Types-0.html" ><a href="03-Types-0.html" >Arrays</a></li>
+			<li id="03-Types-1.html" ><a href="03-Types-1.html" >Simple Type References</a></li>
+			<li id="03-Types-2.html" ><a href="03-Types-2.html" >Function Types</a></li>
+			<li id="03-Types-3.html" ><a href="03-Types-3.html" >Parameterized Type References</a></li>
+			<li id="03-Types-4.html" ><a href="03-Types-4.html" >Primitives</a></li>
+			<li id="03-Types-5.html" ><a href="03-Types-5.html" >Conformance and Conversion</a></li>
+			</ul>
+			</li>
+		<li class="separator"><div class="separator">Expressions</div>
+			<ul style="display: none;" id="subToc_04-Expressions.html">
+			<li id="04-Expressions-0.html" ><a href="04-Expressions-0.html" >Literals</a></li>
+			<li id="04-Expressions-1.html" ><a href="04-Expressions-1.html" >Type Casts</a></li>
+			<li id="04-Expressions-2.html" ><a href="04-Expressions-2.html" >Infix Operators / Operator Overloading</a></li>
+			<li id="04-Expressions-3.html" ><a href="04-Expressions-3.html" >Feature Calls</a></li>
+			<li id="04-Expressions-4.html" ><a href="04-Expressions-4.html" >Constructor Call</a></li>
+			<li id="04-Expressions-5.html" ><a href="04-Expressions-5.html" >Closures</a></li>
+			<li id="04-Expressions-6.html" ><a href="04-Expressions-6.html" >If Expression</a></li>
+			<li id="04-Expressions-7.html" ><a href="04-Expressions-7.html" >Switch Expression</a></li>
+			<li id="04-Expressions-8.html" ><a href="04-Expressions-8.html" >Variable Declarations</a></li>
+			<li id="04-Expressions-9.html" ><a href="04-Expressions-9.html" >Blocks</a></li>
+			<li id="04-Expressions-10.html" ><a href="04-Expressions-10.html" >For Loop</a></li>
+			<li id="04-Expressions-11.html" ><a href="04-Expressions-11.html" >While Loop</a></li>
+			<li id="04-Expressions-12.html" ><a href="04-Expressions-12.html" >Do-While Loop</a></li>
+			<li id="04-Expressions-13.html" ><a href="04-Expressions-13.html" >Return Expression</a></li>
+			<li id="04-Expressions-14.html" ><a href="04-Expressions-14.html" >Throwing Exceptions</a></li>
+			<li id="04-Expressions-15.html" ><a href="04-Expressions-15.html" >Try, Catch, Finally</a></li>
+			</ul>
+			</li>
+		</ul>
+	</div>
+	<div id="midcolumn">
+		<div class="buttonbar">
+		<span class="prev_button">
+		<a href="04-Expressions-6.html" >Previous</a>
+		</span>
+		<a href="04-Expressions.html" >Top</a><span class="next_button">
+		<a href="04-Expressions-8.html" >Next</a>
+		</span>
+		</div>
+		<div style="clear:both;margin-bottom:1em"></div>
+		
+<a name="" ></a>
+<h1>Switch Expression</h1>
+	<div class="toc">
+	  <ul>
+	    <li><a href="04-Expressions-7.html#0" >Type guards</a></li>
+	    <li><a href="04-Expressions-7.html#1" >Typing</a></li>
+	    <li><a href="04-Expressions-7.html#2" >Examples</a></li>
+	    <li><a href="04-Expressions-7.html#3" >Syntax</a></li>
+	  </ul>
+	</div>
+<p>
+The switch expression is a bit different from Java's. First, there is no fall through which means only one case is evaluated at most.
+Second, the use of switch is not limited to certain values but can be used for any object reference instead.
+ 
+For a switch expression 
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">switch</span>&nbsp;e&nbsp;{</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;e1&nbsp;:&nbsp;er1</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;e2&nbsp;:&nbsp;er2</br>
+&nbsp;&nbsp;&nbsp;&nbsp;...</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;en&nbsp;:&nbsp;ern</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;er</br>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+the main expression <span class="inlinecode">e</span> is evaluated first and then each case sequentially. If the switch expression
+contains a variable declaration using the syntax known from <a href="04-Expressions-10.html" title="Go to &quot;For Loop&quot;" >section Xbase_Expressions_ForLoop</a>, the value is bound to the given name.
+Expressions of type <span class="inlinecode">java.lang.Boolean</span> or <span class="inlinecode">boolean</span> are not allowed in a switch expression.
+</p>
+<p>
+The guard of each case clause is evaluated until the switch value equals the result of the case's guard expression or if the case's guard expression evaluates to <span class="inlinecode">true</span>.
+Then the right hand expression of the case evaluated and the result is returned.
+</p>
+<p>
+If none of the guards matches the default expression is evaluated an returned. If no default expression
+is specified the expression evaluates to <span class="inlinecode"><span class="keyword">null</span></span>.
+</p>
+<p>
+Example:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">switch</span>&nbsp;myString&nbsp;{</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;myString.length&gt;5&nbsp;:&nbsp;<span class="string">&apos;a&nbsp;long&nbsp;string.&apos;</span></br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">&apos;foo&apos;</span>&nbsp;:&nbsp;<span class="string">&apos;It&apos;</span>s&nbsp;a&nbsp;foo.<span class="string">&apos;</br>
+&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;:&nbsp;&apos;</span>It<span class="string">&apos;s&nbsp;a&nbsp;short&nbsp;non-foo&nbsp;string.&apos;</span></br>
+}
+</p>
+</div>
+</div>
+</p>
+<a name="0" ></a>
+<h2>Type guards</h2>
+<p>
+In addition to the case guards one can add a so called <em>Type Guard</em> which is syntactically just a <a href="03-Types-1.html" title="Go to &quot;Simple Type References&quot;">type reference</a> preceding
+the than optional case keyword. The compiler will use that type for the switch expression in subsequent expressions.
+Example:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">var</span>&nbsp;Object&nbsp;x&nbsp;=&nbsp;...;</br>
+<span class="keyword">switch</span>&nbsp;x&nbsp;{</br>
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;<span class="keyword">case</span>&nbsp;x.length()&gt;0&nbsp;:&nbsp;x.length()</br>
+&nbsp;&nbsp;&nbsp;&nbsp;List&lt;?&gt;&nbsp;:&nbsp;x.size()</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;-1</br>
+}
+</p>
+</div>
+</div>
+</p>
+<p>
+Only if the switch value passes a type guard, i.e. an instanceof operation returns <span class="inlinecode">true</span>, the case's guard expression is executed using the same semantics explained in
+previously. 
+If the switch expression contains an explicit declaration of a local variable or the expression references a local variable,
+the type guard acts like a cast, that is all references to the switch value will be of the type specified in the type guard.
+</p>
+<a name="1" ></a>
+<h2>Typing</h2>
+<p>
+The return type of a switch expression is computed using the rules defined in <a href="03-Types-5.html#0" title="Go to &quot;Common Super Type&quot;" >section Xbase_Types_CommonSuperType</a>. The set of types from which the common super type is 
+computed corresponds to the types of each case's result expression. In case a switch expression's type is
+computed using the expected type from the context, it is sufficient to return the expected type if all case branches types conform to the expected type.
+</p>
+<a name="2" ></a>
+<h2>Examples</h2>
+<p>
+<ul>
+  <li>
+  		<div class="literallayout">
+  <div class="incode">
+  <p class="code">
+  <span class="keyword">switch</span>&nbsp;foo&nbsp;{</br>
+  &nbsp;&nbsp;&nbsp;&nbsp;Entity&nbsp;:&nbsp;foo.superType.name</br>
+  &nbsp;&nbsp;&nbsp;&nbsp;Datatype&nbsp;:&nbsp;foo.name</br>
+  &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalStateException</br>
+  }
+  </p>
+  </div>
+  </div>
+  
+  </li>
+  <li>
+  		<div class="literallayout">
+  <div class="incode">
+  <p class="code">
+  <span class="keyword">switch</span>&nbsp;x&nbsp;:&nbsp;foo.bar.complicated(<span class="string">&apos;hello&apos;</span>,42)&nbsp;{</br>
+  &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;<span class="string">"hello42"</span>&nbsp;:&nbsp;...</br>
+  &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;x.length&lt;2&nbsp;:&nbsp;...</br>
+  &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">default</span>&nbsp;:&nbsp;....</br>
+  }
+  </p>
+  </div>
+  </div>
+  
+  </li>
+</ul>
+</p>
+<a name="3" ></a>
+<h2>Syntax</h2>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+XSwitchExpression:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;switch&apos;</span>&nbsp;(ID&nbsp;<span class="string">&apos;:&apos;</span>)?&nbsp;XExpression&nbsp;<span class="string">&apos;{&apos;</span></br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XCasePart+</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;default&apos;</span>&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;XExpression))?</br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;}&apos;</span>;</br>
+</br>
+XCasePart:</br>
+&nbsp;&nbsp;&nbsp;&nbsp;JvmTypeReference?&nbsp;(<span class="string">&apos;case&apos;</span>&nbsp;XExpression)?&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;XExpression&nbsp;);</br>
+}
+</p>
+</div>
+</div>
+</p>
+		<div class="buttonbar">
+		<span class="prev_button">
+		<a href="04-Expressions-6.html" >Previous</a>
+		</span>
+		<a href="04-Expressions.html" >Top</a><span class="next_button">
+		<a href="04-Expressions-8.html" >Next</a>
+		</span>
+		</div>
+		<div style="clear:both;"></div>
+	</div>
+	<br style="clear:both;height:1em;">
+</div>
+<div id="clearFooter"></div>
+<div id="footer">
+<ul id="footernav">
+	<li><a href="/">Home</a></li>
+
+	<li><a href="/legal/privacy.php">Privacy Policy</a></li>
+	<li><a href="/legal/termsofuse.php">Terms of Use</a></li>
+	<li><a href="/legal/copyright.php">Copyright Agent</a></li>
+	<li><a href="/legal/">Legal</a></li>
+	<li><a href="/org/foundation/contact.php">Contact Us</a></li>
+</ul>
+
+<span id="copyright">Copyright &copy; 2011 The Eclipse Foundation. All Rights Reserved.</span>
+</div>
+</body>
+</html>

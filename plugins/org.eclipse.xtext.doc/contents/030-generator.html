@@ -8,8 +8,9 @@
 <link rel="home" href="index.html" title="">
 </head>
 <body>
+<a name="configuration"></a>
 <h1>Configuration</h1>
-<a name="0"></a>
+<a name="generator"></a>
 <h2>The Language Generator</h2>
 <p>
 Xtext provides a lot of generic implementations for your language&apos;s
@@ -20,12 +21,12 @@ content assist, etc.
 </p>
 <p>
 The generator also contributes to shared project resources such as the 
-<em>plugin.xml</em>, <em>MANIFEST.MF</em> and the <a href="030-generator.html#1-0" title="Go to &quot;The Module API&quot;">Guice modules</a>.
+<em>plugin.xml</em>, <em>MANIFEST.MF</em> and the <a href="040-dependency-injection.html#guicemodules" title="Go to &quot;The Module API&quot;">Guice modules</a>.
 </p>
 <p>
 Xtext&apos;s generator uses a special DSL called <a href="118-mwe-in-depth.html" title="Go to &quot;MWE2&quot;">MWE2 - the modeling workflow engine</a> to configure the generator.
 </p>
-<a name="0-0"></a>
+<a name="short_intro_to_mwe"></a>
 <h3>A Short Introduction to MWE2</h3>
 <p>
 MWE2 allows to compose object graphs declaratively in a very compact manner. The nice thing about it is that it just 
@@ -161,7 +162,7 @@ language and we also have not yet talked about the runtime workflow model. Pleas
 <a href="118-mwe-in-depth.html" title="Go to &quot;MWE2&quot;">reference documentation</a> for additional information.
 We will now have a look at the component model used to configure the Language Generator.
 </p>
-<a name="0-1"></a>
+<a name="generator_5"></a>
 <h3>General Architecture</h3>
 <p>
 A language generator is composed of so called language configurations. 
@@ -179,7 +180,7 @@ the outline view, etc.
 </div>
 </div>
 </p>
-<a name="0-1-0"></a>
+<a name="generator_fragment"></a>
 <h4>Generator Fragments</h4>
 <p>
 The list of grammar fragments forms a chain of responsibility, that is they each get the chance to contribute
@@ -192,7 +193,7 @@ the interface <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xte
 There is usually no need to write your own generator fragments and only rarely you might want to extend an
 existing one.
 </p>
-<a name="0-1-1"></a>
+<a name="generator_5_4"></a>
 <h4>Configuration</h4>
 <p>
 As already explained we use MWE2 from EMFT in order to instantiate, configure and execute this structure of components. 
@@ -266,7 +267,7 @@ Following the <span class="inlinecode">bean</span> assignment there are three <s
 accepts instances of <abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr>, which is the primary concept of MWE2&apos;s workflow model. The
 language generator component itself is an instance of <abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr> and can therefore be used within MWE2 workflows. 
 </p>
-<a name="0-2"></a>
+<a name="generator_6"></a>
 <h3>Standard Generator Fragments</h3>
 <p>
 In the following table the most important standard generator fragments are listed. Please refer to the Javadocs for more detailed documentation.
@@ -294,7 +295,7 @@ example languages look like.
 EMF code for generated models
 </td>
 <td>
-<a href="020-grammar-language.html#2" title="Go to &quot;Ecore Model Inference&quot;">Model inference</a>
+<a href="020-grammar-language.html#metamodelInference" title="Go to &quot;Ecore Model Inference&quot;">Model inference</a>
 </td>
 </tr>
 <tr>
@@ -325,7 +326,7 @@ Access to the grammar
 EMF resource factory
 </td>
 <td>
-<a href="210-emf-integration.html#2" title="Go to &quot;XtextResource Implementation&quot;">Xtext Resource</a>
+<a href="210-emf-integration.html#xtext_resource" title="Go to &quot;XtextResource Implementation&quot;">Xtext Resource</a>
 </td>
 </tr>
 <tr>
@@ -336,7 +337,7 @@ EMF resource factory
 Model-to-text serialization
 </td>
 <td>
-<a href="050-heading-runtime.html#7" title="Go to &quot;Serialization&quot;">Serialization</a>
+<a href="100-serialization.html" title="Go to &quot;Serialization&quot;">Serialization</a>
 </td>
 </tr>
 <tr>
@@ -347,7 +348,7 @@ Model-to-text serialization
 Index-based scoping
 </td>
 <td>
-<a href="050-heading-runtime.html#5-0-2" title="Go to &quot;Global Scopes Based On External Configuration (e.g. Classpath-Based)&quot;">Index-based namespace scoping</a>
+<a href="080-scoping.html#index_based" title="Go to &quot;Global Scopes Based On External Configuration (e.g. Classpath-Based)&quot;">Index-based namespace scoping</a>
 </td>
 </tr>
 <tr>
@@ -358,7 +359,7 @@ Index-based scoping
 Model validation
 </td>
 <td>
-<a href="050-heading-runtime.html#3-1" title="Go to &quot;Custom Validation&quot;">Model validation</a>
+<a href="060-validation.html#custom_validation" title="Go to &quot;Custom Validation&quot;">Model validation</a>
 </td>
 </tr>
 <tr>
@@ -369,7 +370,7 @@ Model validation
 Code formatter
 </td>
 <td>
-<a href="050-heading-runtime.html#8" title="Go to &quot;Formatting (Pretty Printing)&quot;">Code formatter</a>
+<a href="105-formatting.html" title="Go to &quot;Formatting (Pretty Printing)&quot;">Code formatter</a>
 </td>
 </tr>
 <tr>
@@ -380,7 +381,7 @@ Code formatter
 Label provider
 </td>
 <td>
-<a href="120-heading-UI.html#0" title="Go to &quot;Label Provider&quot;">Label provider</a>
+<a href="140-labelprovider.html" title="Go to &quot;Label Provider&quot;">Label provider</a>
 </td>
 </tr>
 <tr>
@@ -391,7 +392,7 @@ Label provider
 Outline view configuration
 </td>
 <td>
-<a href="120-heading-UI.html#4" title="Go to &quot;Outline View&quot;">Outline</a>
+<a href="170-outline.html" title="Go to &quot;Outline View&quot;">Outline</a>
 </td>
 </tr>
 <tr>
@@ -402,7 +403,7 @@ Outline view configuration
 Java-based content assist
 </td>
 <td>
-<a href="120-heading-UI.html#1" title="Go to &quot;Content Assist&quot;">Content assist</a>
+<a href="150-contentassist.html" title="Go to &quot;Content Assist&quot;">Content assist</a>
 </td>
 </tr>
 <tr>
@@ -413,12 +414,12 @@ Java-based content assist
 Content assist helper based on ANTLR
 </td>
 <td>
-<a href="120-heading-UI.html#1" title="Go to &quot;Content Assist&quot;">Content assist</a>
+<a href="150-contentassist.html" title="Go to &quot;Content Assist&quot;">Content assist</a>
 </td>
 </tr>
 </table>
 </p>
-<a name="1"></a>
+<a name="dependencyInjection"></a>
 <h2>Dependency Injection in Xtext with Google Guice</h2>
 <p>
 All Xtext components are assembled by means of Dependency Injection (DI). This means basically that
@@ -481,7 +482,7 @@ passed in. That binder provides a fluent API to define the mentioned mappings. T
 brief and simplified description. We highly recommend to have a look at 
 <a href="http://code.google.com/p/google-guice/">the website Google Guice</a> to learn more.  
 </p>
-<a name="1-0"></a>
+<a name="guicemodules"></a>
 <h3>The Module API</h3>
 <p>
 Xtext comes with a slightly enhanced module API. For your language you get two different modules: One 
@@ -607,7 +608,7 @@ name &apos;configure&apos;, has a return type <span class="inlinecode"><span cla
 </div>
 </div>
 </p>
-<a name="1-1"></a>
+<a name="dependencyInjection_9"></a>
 <h3>Obtaining an Injector</h3>
 <p>
 In every application wired up with Guice there is usually one point where you initialize an 
@@ -632,7 +633,7 @@ method. It could look like this:
 </p>
 <p>
 In Xtext, you should never instantiate the injector of your language yourself. The sections
-<a href="050-heading-runtime.html#0" title="Go to &quot;Runtime Setup (ISetup)&quot;">Runtime Setup</a> and <a href="050-heading-runtime.html#1" title="Go to &quot;Setup within Eclipse-Equinox (OSGi)&quot;">Equinox Setup</a> explain how to access it in 
+<a href="050-heading-runtime.html#runtimeSetup" title="Go to &quot;Runtime Setup (ISetup)&quot;">Runtime Setup</a> and <a href="050-heading-runtime.html#equinoxSetup" title="Go to &quot;Setup within Eclipse-Equinox (OSGi)&quot;">Equinox Setup</a> explain how to access it in 
 different scenarios. 
 </p>
 <p>

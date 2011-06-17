@@ -1,14 +1,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
-<title>A Domain Model Language</title>
+<title>30 Minutes Tutorial</title>
 
 <link href="book.css" rel="stylesheet" type="text/css">
 <link href="code.css" rel="stylesheet" type="text/css">
 <link rel="home" href="index.html" title="">
 </head>
 <body>
-<h1>A Domain Model Language</h1>
+<a name="DomainmodelWalkThrough"></a>
+<h1>30 Minutes Tutorial</h1>
 <p>
 In this tutorial we will implement a small domain-specific language to model entities and properties
 similar to what you may know from Rails, Grails or Spring Roo. The syntax is very suggestive
@@ -22,7 +23,7 @@ and looks like this small sample:
 </br>
 <span class="keyword">entity</span>&nbsp;Blog&nbsp;{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;posts:&nbsp;Post</br>
+&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;posts:&nbsp;Post</br>
 }</br>
 </br>
 <span class="keyword">entity</span>&nbsp;HasAuthor&nbsp;{</br>
@@ -32,7 +33,7 @@ and looks like this small sample:
 <span class="keyword">entity</span>&nbsp;Post&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String</br>
 &nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;comments:&nbsp;Comment</br>
+&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;comments:&nbsp;Comment</br>
 }</br>
 </br>
 <span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{</br>
@@ -43,10 +44,10 @@ and looks like this small sample:
 </div>
 </p>
 <p>
-After you&apos;ve <a href="005-installation.html" title="Go to &quot;Install Eclipse Xtext&quot;">installed</a> Xtext on your machine, start Eclipse and set up a fresh workspace.
+After you&apos;ve <a href="005-installation.html" title="Go to &quot;Installation&quot;">installed</a> Xtext on your machine, start Eclipse and set up a fresh workspace.
 Let&apos;s get started with the tutorial!
 </p>
-<a name="0"></a>
+<a name="DomainmodelWalkThrough_4"></a>
 <h2>Create A New Xtext Project</h2>
 <p>
 In order to get started we first need to create some Eclipse projects. Use the Eclipse wizard to do so:
@@ -140,7 +141,7 @@ The Eclipse integration.
 Render following section as expandable element?
 </div>
 </p>
-<a name="0-0"></a>
+<a name="DomainmodelWalkThrough_4_11"></a>
 <h3>Project Layout</h3>
 <p>
 In the Package Explorer you can spot the following three projects.
@@ -178,7 +179,7 @@ folder <em>src/</em> and a folder <em>src-gen/</em> in each project. Keep in min
 make changes in the <em>src-gen/</em> folder. They will be overwritten by the generator 
 without any further warning.
 </p>
-<a name="1"></a>
+<a name="DomainmodelWalkThrough_5"></a>
 <h2>Write Your Own Grammar</h2>
 <p>
 
@@ -294,7 +295,7 @@ sample syntax defined above.
 		</div>
 		
 				
-				The keyword <span class="inlinecode"><span class="keyword">many</span></span> is used to model a multi valued feature in the domain model
+				The keyword <span class="inlinecode">many</span> is used to model a multi valued feature in the domain model
 				DSL. Therefore, the boolean assignment (<span class="inlinecode">?=</span>) is used. You are already familiar with
 				the other syntax elements in this parser rule. 
 	</li>
@@ -337,7 +338,7 @@ Feature:</br>
 </div>
 </div>
 </p>
-<a name="2"></a>
+<a name="DomainmodelWalkThrough_6"></a>
 <h2>Generate Language Artifacts</h2>
 <p>
 Now that we have the grammar in place and defined we need to execute the code generator that will derive the
@@ -353,7 +354,7 @@ This will trigger the Xtext language generator. It generates the parser and
 serializer and some additional infrastructure code. You will see its logging 
 messages in the Console View. 
 </p>
-<a name="3"></a>
+<a name="DomainmodelWalkThrough_7"></a>
 <h2>Run the Generated IDE Plug-in</h2>
 <p>
 If the code generation succeeded, we are now able to test the IDE integration. 
@@ -379,7 +380,7 @@ the outline view, find references etc.
 </div>
 </div>
 </p>
-<a name="4"></a>
+<a name="DomainmodelWalkThrough_8"></a>
 <h2>Packages and Imports</h2>
 <p>
 After you&apos;ve created the your first DSL and had a look at the editor, the language should be refined
@@ -414,13 +415,13 @@ the need for imports arises.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Blog&nbsp;{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;posts:&nbsp;Post</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;posts:&nbsp;Post</br>
 &nbsp;&nbsp;&nbsp;&nbsp;}</br>
 &nbsp;&nbsp;&nbsp;&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Post&nbsp;<span class="keyword">extends</span>&nbsp;my.company.common.HasAuthor&nbsp;{</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String</br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">many</span>&nbsp;comments:&nbsp;Comment</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;comments:&nbsp;Comment</br>
 &nbsp;&nbsp;&nbsp;&nbsp;}</br>
 &nbsp;&nbsp;&nbsp;&nbsp;</br>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{</br>
@@ -496,7 +497,7 @@ Let&apos;s start to enhance the grammar.
 		<div class="incode">
 		<p class="code">
 		Import:</br>
-		&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importedNamespace&nbsp;=&nbsp;QualifiedNameWithWildCard</br>
+		&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importedNamespace&nbsp;=&nbsp;QualifiedNameWithWildcard</br>
 		;</br>
 		</br>
 		QualifiedNameWithWildcard:</br>
@@ -551,7 +552,7 @@ That&apos;s all for the grammar. It should now read as
 </br>
 <span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.eclipse.org/xtext/example/Domainmodel"</span></br>
 </br>
-DomainModel:</br>
+Domainmodel:</br>
 &nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*</br>
 ;</br>
 </br>
@@ -570,7 +571,7 @@ QualifiedName:</br>
 ;</br>
 </br>
 Import:</br>
-&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importedNamespace&nbsp;=&nbsp;QualifiedNameWithWildCard</br>
+&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importedNamespace&nbsp;=&nbsp;QualifiedNameWithWildcard</br>
 ;</br>
 &nbsp;&nbsp;</br>
 QualifiedNameWithWildcard:</br>

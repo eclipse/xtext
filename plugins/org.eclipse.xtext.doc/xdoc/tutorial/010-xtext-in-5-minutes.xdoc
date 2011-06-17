@@ -1,11 +1,11 @@
-chapter:FirstFiveMinutes[The 5 Minute Test]
+chapter:FirstFiveMinutes[5 Minutes Tutorial]
 
 In this chapter you'll learn how to create a new Xtext project, generate a fully working language infrastructure
 and how to start a new Eclipse instance in order to test the editor. But before we get started, make sure you have 
 Eclipse Xtext properly installed. If you are not sure about that, you should follow the 
 ref:Installation[installation instructions].
 
-section:NewProject[Create A New Xtext Project]
+section:NewProject[Creating A New Xtext Project]
 
 The first step is to create a new Xtext project by choosing e[File -> New -> Project...]. The dialog
 offers a couple of different project types. Select e[New Xtext Project] from the category e[Xtext] and
@@ -34,7 +34,7 @@ code[MyDsl][
 
 img[images/FiveMinTutorial_FreshProject.png][ ][ ][ ]
 
-section:RunWorkflow[Generating the Language Infrastructure]
+section:RunWorkflow[Generating The Language Infrastructure]
 
 In order to test drive this language, you'll have to generate the respective language infrastructure.
 Therefore, choose e[Run As -> Generate Xtext Artifacts] from the context menu of the grammar editor.
@@ -62,7 +62,7 @@ and see how the input is validated immediately.
 
 img[images/FiveMinTutorial_Editor.png][ ][ ][ ]
 
-section:Conclusion[What Did I Do?]
+section:Conclusion[Conclusion]
 
 In your first five minutes with Xtext, you've learned how to create a new set of projects. You've run
 Xtext's code generation in order to get a fully working language infrastructure, and finally learned

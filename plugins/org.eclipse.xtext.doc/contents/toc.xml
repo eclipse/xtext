@@ -1,374 +1,412 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <toc topic="contents/xtext.html" label="Xtext Documentation" >
+	<topic href="contents/005-installation.html" label="Installation" >
+		<topic href="contents/005-installation.html#InstallDistro" label="Install Pre-Configured Eclipse With Xtext" >
+		</topic>
+		<topic href="contents/005-installation.html#InstallXtext" label="Install Xtext From Update Site" >
+		</topic>
+	</topic>
+	<topic href="contents/010-xtext-in-5-minutes.html" label="5 Minutes Tutorial" >
+		<topic href="contents/010-xtext-in-5-minutes.html#NewProject" label="Creating A New Xtext Project" >
+		</topic>
+		<topic href="contents/010-xtext-in-5-minutes.html#RunWorkflow" label="Generating The Language Infrastructure" >
+		</topic>
+		<topic href="contents/010-xtext-in-5-minutes.html#TestingTheEditor" label="Try The Editor" >
+		</topic>
+		<topic href="contents/010-xtext-in-5-minutes.html#Conclusion" label="Conclusion" >
+		</topic>
+	</topic>
+	<topic href="contents/020-domainmodel-step-by-step.html" label="30 Minutes Tutorial" >
+		<topic href="contents/020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" label="Create A New Xtext Project" >
+			<topic href="contents/020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4_11" label="Project Layout" >
+			</topic>
+		</topic>
+		<topic href="contents/020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" label="Write Your Own Grammar" >
+		</topic>
+		<topic href="contents/020-domainmodel-step-by-step.html#DomainmodelWalkThrough_6" label="Generate Language Artifacts" >
+		</topic>
+		<topic href="contents/020-domainmodel-step-by-step.html#DomainmodelWalkThrough_7" label="Run the Generated IDE Plug-in" >
+		</topic>
+		<topic href="contents/020-domainmodel-step-by-step.html#DomainmodelWalkThrough_8" label="Packages and Imports" >
+		</topic>
+	</topic>
+	<topic href="contents/030-tutorial-next-steps.html" label="30 Minutes Tutorial - Extended" >
+		<topic href="contents/040-first-code-generator.html" label="Writing a Code Generator With Xtend" >
+		</topic>
+		<topic href="contents/060-unit-tests.html" label="Unit Testing the Language" >
+		</topic>
+		<topic href="contents/050-validation.html" label="Creating Custom Validation Rules" >
+		</topic>
+	</topic>
 	<topic href="contents/000-introduction.html" label="Overview" >
-		<topic href="contents/000-introduction.html#0" label="What is Xtext?" >
+		<topic href="contents/000-introduction.html#Overview_1" label="What is Xtext?" >
 		</topic>
-		<topic href="contents/000-introduction.html#1" label="How Does It Work?" >
+		<topic href="contents/000-introduction.html#Overview_2" label="How Does It Work?" >
 		</topic>
-		<topic href="contents/000-introduction.html#2" label="Xtext is Highly Configurable" >
+		<topic href="contents/000-introduction.html#Overview_3" label="Xtext is Highly Configurable" >
 		</topic>
-		<topic href="contents/000-introduction.html#3" label="Who Uses Xtext?" >
+		<topic href="contents/000-introduction.html#Overview_4" label="Who Uses Xtext?" >
 		</topic>
-		<topic href="contents/000-introduction.html#4" label="Who is Behind Xtext?" >
+		<topic href="contents/000-introduction.html#Overview_5" label="Who is Behind Xtext?" >
 		</topic>
-		<topic href="contents/000-introduction.html#5" label="What is a Domain-Specific Language" >
+		<topic href="contents/000-introduction.html#DSL" label="What is a Domain-Specific Language" >
 		</topic>
 	</topic>
 	<topic href="contents/020-grammar-language.html" label="The Grammar Language" >
-		<topic href="contents/020-grammar-language.html#0" label="A First Example" >
+		<topic href="contents/020-grammar-language.html#statemachine" label="A First Example" >
 		</topic>
-		<topic href="contents/020-grammar-language.html#1" label="The Syntax" >
-			<topic href="contents/020-grammar-language.html#1-0" label="Language Declaration" >
+		<topic href="contents/020-grammar-language.html#syntax" label="The Syntax" >
+			<topic href="contents/020-grammar-language.html#syntax_2" label="Language Declaration" >
 			</topic>
-			<topic href="contents/020-grammar-language.html#1-1" label="EPackage Declarations" >
-				<topic href="contents/020-grammar-language.html#1-1-0" label="EPackage Generation" >
+			<topic href="contents/020-grammar-language.html#package_declarations" label="EPackage Declarations" >
+				<topic href="contents/020-grammar-language.html#package_declarations_2" label="EPackage Generation" >
 				</topic>
-				<topic href="contents/020-grammar-language.html#1-1-1" label="EPackage Import" >
-					<topic href="contents/020-grammar-language.html#1-1-1-0" label="Using Resource URIs to Import Existing EPackages" >
+				<topic href="contents/020-grammar-language.html#package_declarations_3" label="EPackage Import" >
+					<topic href="contents/020-grammar-language.html#package_declarations_3_2" label="Using Resource URIs to Import Existing EPackages" >
 					</topic>
-					<topic href="contents/020-grammar-language.html#1-1-1-1" label="Using Classpath URIs to Import Existing EPackages" >
+					<topic href="contents/020-grammar-language.html#package_declarations_3_3" label="Using Classpath URIs to Import Existing EPackages" >
 					</topic>
-					<topic href="contents/020-grammar-language.html#1-1-1-2" label="Using Namespace URIs to Import Existing EPackages" >
-					</topic>
-				</topic>
-				<topic href="contents/020-grammar-language.html#1-1-2" label="Ecore Model Aliases for EPackages" >
-				</topic>
-			</topic>
-			<topic href="contents/020-grammar-language.html#1-2" label="Rules" >
-				<topic href="contents/020-grammar-language.html#1-2-0" label="Terminal Rules" >
-					<topic href="contents/020-grammar-language.html#1-2-0-0" label="Return Types" >
+					<topic href="contents/020-grammar-language.html#package_declarations_3_4" label="Using Namespace URIs to Import Existing EPackages" >
 					</topic>
 				</topic>
-				<topic href="contents/020-grammar-language.html#1-2-1" label="Extended Backus-Naur Form Expressions" >
-					<topic href="contents/020-grammar-language.html#1-2-1-0" label="Keywords / Characters" >
-					</topic>
-					<topic href="contents/020-grammar-language.html#1-2-1-1" label="Character Ranges" >
-					</topic>
-					<topic href="contents/020-grammar-language.html#1-2-1-2" label="Wildcard" >
-					</topic>
-					<topic href="contents/020-grammar-language.html#1-2-1-3" label="Until Token" >
-					</topic>
-					<topic href="contents/020-grammar-language.html#1-2-1-4" label="Negated Token" >
-					</topic>
-					<topic href="contents/020-grammar-language.html#1-2-1-5" label="Rule Calls" >
-					</topic>
-					<topic href="contents/020-grammar-language.html#1-2-1-6" label="Alternatives" >
-					</topic>
-					<topic href="contents/020-grammar-language.html#1-2-1-7" label="Groups" >
-					</topic>
-				</topic>
-				<topic href="contents/020-grammar-language.html#1-2-2" label="Terminal Fragments" >
-				</topic>
-				<topic href="contents/020-grammar-language.html#1-2-3" label="EOF - End Of File" >
+				<topic href="contents/020-grammar-language.html#package_declarations_4" label="Ecore Model Aliases for EPackages" >
 				</topic>
 			</topic>
-			<topic href="contents/020-grammar-language.html#1-3" label="Parser Rules" >
-				<topic href="contents/020-grammar-language.html#1-3-0" label="Extended Backus-Naur Form Expressions" >
-					<topic href="contents/020-grammar-language.html#1-3-0-0" label="Assignments" >
+			<topic href="contents/020-grammar-language.html#syntax_4" label="Rules" >
+				<topic href="contents/020-grammar-language.html#syntax_4_3" label="Terminal Rules" >
+					<topic href="contents/020-grammar-language.html#syntax_4_3_10" label="Return Types" >
 					</topic>
-					<topic href="contents/020-grammar-language.html#1-3-0-1" label="Cross-References" >
+				</topic>
+				<topic href="contents/020-grammar-language.html#syntax_4_4" label="Extended Backus-Naur Form Expressions" >
+					<topic href="contents/020-grammar-language.html#Keywords" label="Keywords / Characters" >
 					</topic>
-					<topic href="contents/020-grammar-language.html#1-3-0-2" label="Unordered Groups" >
+					<topic href="contents/020-grammar-language.html#syntax_4_4_4" label="Character Ranges" >
 					</topic>
-					<topic href="contents/020-grammar-language.html#1-3-0-3" label="Simple Actions" >
+					<topic href="contents/020-grammar-language.html#syntax_4_4_5" label="Wildcard" >
 					</topic>
-					<topic href="contents/020-grammar-language.html#1-3-0-4" label="Unassigned Rule Calls" >
+					<topic href="contents/020-grammar-language.html#syntax_4_4_6" label="Until Token" >
 					</topic>
-					<topic href="contents/020-grammar-language.html#1-3-0-5" label="Assigned Actions" >
+					<topic href="contents/020-grammar-language.html#syntax_4_4_7" label="Negated Token" >
+					</topic>
+					<topic href="contents/020-grammar-language.html#rule_calls" label="Rule Calls" >
+					</topic>
+					<topic href="contents/020-grammar-language.html#Alternatives" label="Alternatives" >
+					</topic>
+					<topic href="contents/020-grammar-language.html#Groups" label="Groups" >
+					</topic>
+				</topic>
+				<topic href="contents/020-grammar-language.html#terminal_fragment" label="Terminal Fragments" >
+				</topic>
+				<topic href="contents/020-grammar-language.html#eof" label="EOF - End Of File" >
+				</topic>
+			</topic>
+			<topic href="contents/020-grammar-language.html#parser_rules" label="Parser Rules" >
+				<topic href="contents/020-grammar-language.html#parser_rules_2" label="Extended Backus-Naur Form Expressions" >
+					<topic href="contents/020-grammar-language.html#assignments" label="Assignments" >
+					</topic>
+					<topic href="contents/020-grammar-language.html#cross_reference" label="Cross-References" >
+					</topic>
+					<topic href="contents/020-grammar-language.html#unordered_groups" label="Unordered Groups" >
+					</topic>
+					<topic href="contents/020-grammar-language.html#parser_rules_2_8" label="Simple Actions" >
+					</topic>
+					<topic href="contents/020-grammar-language.html#parser_rules_2_9" label="Unassigned Rule Calls" >
+					</topic>
+					<topic href="contents/020-grammar-language.html#grammarActions" label="Assigned Actions" >
 					</topic>
 				</topic>
 			</topic>
-			<topic href="contents/020-grammar-language.html#1-4" label="Hidden Terminal Symbols" >
+			<topic href="contents/020-grammar-language.html#hidden_terminals" label="Hidden Terminal Symbols" >
 			</topic>
-			<topic href="contents/020-grammar-language.html#1-5" label="Data Type Rules" >
+			<topic href="contents/020-grammar-language.html#datatypeRules" label="Data Type Rules" >
 			</topic>
-			<topic href="contents/020-grammar-language.html#1-6" label="Enum Rules" >
+			<topic href="contents/020-grammar-language.html#syntax_8" label="Enum Rules" >
 			</topic>
-			<topic href="contents/020-grammar-language.html#1-7" label="Syntactic Predicates" >
-			</topic>
-		</topic>
-		<topic href="contents/020-grammar-language.html#2" label="Ecore Model Inference" >
-			<topic href="contents/020-grammar-language.html#2-0" label="Type and Package Generation" >
-			</topic>
-			<topic href="contents/020-grammar-language.html#2-1" label="Feature and Type Hierarchy Generation" >
-			</topic>
-			<topic href="contents/020-grammar-language.html#2-2" label="Enum Literal Generation" >
-			</topic>
-			<topic href="contents/020-grammar-language.html#2-3" label="Feature Normalization" >
-			</topic>
-			<topic href="contents/020-grammar-language.html#2-4" label="Customized Post Processing" >
-			</topic>
-			<topic href="contents/020-grammar-language.html#2-5" label="Error Conditions" >
+			<topic href="contents/020-grammar-language.html#antlr_errors" label="Syntactic Predicates" >
 			</topic>
 		</topic>
-		<topic href="contents/020-grammar-language.html#3" label="Grammar Mixins" >
+		<topic href="contents/020-grammar-language.html#metamodelInference" label="Ecore Model Inference" >
+			<topic href="contents/020-grammar-language.html#metamodelInference_3" label="Type and Package Generation" >
+			</topic>
+			<topic href="contents/020-grammar-language.html#metamodelInference_4" label="Feature and Type Hierarchy Generation" >
+			</topic>
+			<topic href="contents/020-grammar-language.html#metamodelInference_5" label="Enum Literal Generation" >
+			</topic>
+			<topic href="contents/020-grammar-language.html#metamodelInference_6" label="Feature Normalization" >
+			</topic>
+			<topic href="contents/020-grammar-language.html#customPostProcessing" label="Customized Post Processing" >
+			</topic>
+			<topic href="contents/020-grammar-language.html#metamodelInference_8" label="Error Conditions" >
+			</topic>
 		</topic>
-		<topic href="contents/020-grammar-language.html#4" label="Common Terminals" >
+		<topic href="contents/020-grammar-language.html#grammarMixins" label="Grammar Mixins" >
+		</topic>
+		<topic href="contents/020-grammar-language.html#grammarLanguage_6" label="Common Terminals" >
 		</topic>
 	</topic>
 	<topic href="contents/030-generator.html" label="Configuration" >
-		<topic href="contents/030-generator.html#0" label="The Language Generator" >
-			<topic href="contents/030-generator.html#0-0" label="A Short Introduction to MWE2" >
+		<topic href="contents/030-generator.html#generator" label="The Language Generator" >
+			<topic href="contents/030-generator.html#short_intro_to_mwe" label="A Short Introduction to MWE2" >
 			</topic>
-			<topic href="contents/030-generator.html#0-1" label="General Architecture" >
-				<topic href="contents/030-generator.html#0-1-0" label="Generator Fragments" >
+			<topic href="contents/030-generator.html#generator_5" label="General Architecture" >
+				<topic href="contents/030-generator.html#generator_fragment" label="Generator Fragments" >
 				</topic>
-				<topic href="contents/030-generator.html#0-1-1" label="Configuration" >
+				<topic href="contents/030-generator.html#generator_5_4" label="Configuration" >
 				</topic>
 			</topic>
-			<topic href="contents/030-generator.html#0-2" label="Standard Generator Fragments" >
+			<topic href="contents/030-generator.html#generator_6" label="Standard Generator Fragments" >
 			</topic>
 		</topic>
-		<topic href="contents/030-generator.html#1" label="Dependency Injection in Xtext with Google Guice" >
-			<topic href="contents/030-generator.html#1-0" label="The Module API" >
+		<topic href="contents/040-dependency-injection.html" label="Dependency Injection in Xtext with Google Guice" >
+			<topic href="contents/040-dependency-injection.html#guicemodules" label="The Module API" >
 			</topic>
-			<topic href="contents/030-generator.html#1-1" label="Obtaining an Injector" >
+			<topic href="contents/040-dependency-injection.html#dependencyInjection_9" label="Obtaining an Injector" >
 			</topic>
 		</topic>
 	</topic>
 	<topic href="contents/050-heading-runtime.html" label="Runtime Concepts" >
-		<topic href="contents/050-heading-runtime.html#0" label="Runtime Setup (ISetup)" >
+		<topic href="contents/050-heading-runtime.html#runtimeSetup" label="Runtime Setup (ISetup)" >
 		</topic>
-		<topic href="contents/050-heading-runtime.html#1" label="Setup within Eclipse-Equinox (OSGi)" >
+		<topic href="contents/050-heading-runtime.html#equinoxSetup" label="Setup within Eclipse-Equinox (OSGi)" >
 		</topic>
-		<topic href="contents/050-heading-runtime.html#2" label="Logging" >
+		<topic href="contents/050-heading-runtime.html#runtime_concepts_4" label="Logging" >
 		</topic>
-		<topic href="contents/050-heading-runtime.html#3" label="Validation" >
-			<topic href="contents/050-heading-runtime.html#3-0" label="Automatic Validation" >
-				<topic href="contents/050-heading-runtime.html#3-0-0" label="Lexer/Parser: Syntactical Validation" >
+		<topic href="contents/060-validation.html" label="Validation" >
+			<topic href="contents/060-validation.html#validation_2" label="Automatic Validation" >
+				<topic href="contents/060-validation.html#syntactical_validation" label="Lexer/Parser: Syntactical Validation" >
 				</topic>
-				<topic href="contents/050-heading-runtime.html#3-0-1" label="Linker: Crosslink Validation" >
+				<topic href="contents/060-validation.html#linking_validation" label="Linker: Crosslink Validation" >
 				</topic>
-				<topic href="contents/050-heading-runtime.html#3-0-2" label="Serializer: Concrete Syntax Validation" >
+				<topic href="contents/060-validation.html#concrete_syntax_validation" label="Serializer: Concrete Syntax Validation" >
 				</topic>
 			</topic>
-			<topic href="contents/050-heading-runtime.html#3-1" label="Custom Validation" >
+			<topic href="contents/060-validation.html#custom_validation" label="Custom Validation" >
 			</topic>
-			<topic href="contents/050-heading-runtime.html#3-2" label="Validating Manually" >
+			<topic href="contents/060-validation.html#validation_4" label="Validating Manually" >
 			</topic>
-			<topic href="contents/050-heading-runtime.html#3-3" label="Test Validators" >
-			</topic>
-		</topic>
-		<topic href="contents/050-heading-runtime.html#4" label="Linking" >
-			<topic href="contents/050-heading-runtime.html#4-0" label="Declaration of Crosslinks" >
-			</topic>
-			<topic href="contents/050-heading-runtime.html#4-1" label="Default Runtime Behavior (Lazy Linking)" >
+			<topic href="contents/060-validation.html#test_validators" label="Test Validators" >
 			</topic>
 		</topic>
-		<topic href="contents/050-heading-runtime.html#5" label="Scoping" >
-			<topic href="contents/050-heading-runtime.html#5-0" label="Global Scopes and Resource Descriptions" >
-				<topic href="contents/050-heading-runtime.html#5-0-0" label="Resource and EObject Descriptions" >
+		<topic href="contents/070-linking.html" label="Linking" >
+			<topic href="contents/070-linking.html#linking_3" label="Declaration of Crosslinks" >
+			</topic>
+			<topic href="contents/070-linking.html#linking_4" label="Default Runtime Behavior (Lazy Linking)" >
+			</topic>
+		</topic>
+		<topic href="contents/080-scoping.html" label="Scoping" >
+			<topic href="contents/080-scoping.html#global_scopes" label="Global Scopes and Resource Descriptions" >
+				<topic href="contents/080-scoping.html#resourcedescriptions" label="Resource and EObject Descriptions" >
 				</topic>
-				<topic href="contents/050-heading-runtime.html#5-0-1" label="Global Scopes Based On Explicit Imports (ImportURI Mechanism)" >
+				<topic href="contents/080-scoping.html#import_uri" label="Global Scopes Based On Explicit Imports (ImportURI Mechanism)" >
 				</topic>
-				<topic href="contents/050-heading-runtime.html#5-0-2" label="Global Scopes Based On External Configuration (e.g. Classpath-Based)" >
-					<topic href="contents/050-heading-runtime.html#5-0-2-0" label="About the Index, Containers and Their Manager" >
+				<topic href="contents/080-scoping.html#index_based" label="Global Scopes Based On External Configuration (e.g. Classpath-Based)" >
+					<topic href="contents/080-scoping.html#containers" label="About the Index, Containers and Their Manager" >
 					</topic>
-					<topic href="contents/050-heading-runtime.html#5-0-2-1" label="JDT-Based Container Manager" >
+					<topic href="contents/080-scoping.html#jdt_based_containers" label="JDT-Based Container Manager" >
 					</topic>
-					<topic href="contents/050-heading-runtime.html#5-0-2-2" label="Eclipse Project-Based Containers" >
+					<topic href="contents/080-scoping.html#project_based_containers" label="Eclipse Project-Based Containers" >
 					</topic>
-					<topic href="contents/050-heading-runtime.html#5-0-2-3" label="ResourceSet-Based Containers" >
+					<topic href="contents/080-scoping.html#resource_set_containers" label="ResourceSet-Based Containers" >
 					</topic>
 				</topic>
 			</topic>
-			<topic href="contents/050-heading-runtime.html#5-1" label="Local Scoping" >
-				<topic href="contents/050-heading-runtime.html#5-1-0" label="Declarative Scoping" >
+			<topic href="contents/080-scoping.html#local_scoping" label="Local Scoping" >
+				<topic href="contents/080-scoping.html#local_scoping_7" label="Declarative Scoping" >
 				</topic>
 			</topic>
-			<topic href="contents/050-heading-runtime.html#5-2" label="Imported Namespace-Aware Scoping" >
-				<topic href="contents/050-heading-runtime.html#5-2-0" label="org.eclipse.xtext.naming.IQualifiedNameProvider" >
+			<topic href="contents/080-scoping.html#scoping_12" label="Imported Namespace-Aware Scoping" >
+				<topic href="contents/080-scoping.html#scoping_12_2" label="org.eclipse.xtext.naming.IQualifiedNameProvider" >
 				</topic>
-				<topic href="contents/050-heading-runtime.html#5-2-1" label="Importing Namespaces" >
+				<topic href="contents/080-scoping.html#scoping_12_3" label="Importing Namespaces" >
 				</topic>
 			</topic>
 		</topic>
-		<topic href="contents/050-heading-runtime.html#6" label="Value Converter" >
+		<topic href="contents/090-valueconverter.html" label="Value Converter" >
 		</topic>
-		<topic href="contents/050-heading-runtime.html#7" label="Serialization" >
-			<topic href="contents/050-heading-runtime.html#7-0" label="The Contract" >
+		<topic href="contents/100-serialization.html" label="Serialization" >
+			<topic href="contents/100-serialization.html#serializationcontract" label="The Contract" >
 			</topic>
-			<topic href="contents/050-heading-runtime.html#7-1" label="Roles of the Semantic Model and the Node Model During Serialization" >
+			<topic href="contents/100-serialization.html#serialization_6" label="Roles of the Semantic Model and the Node Model During Serialization" >
 			</topic>
-			<topic href="contents/050-heading-runtime.html#7-2" label="Parse Tree Constructor" >
+			<topic href="contents/100-serialization.html#parsetreeconstructor" label="Parse Tree Constructor" >
 			</topic>
-			<topic href="contents/050-heading-runtime.html#7-3" label="Options" >
+			<topic href="contents/100-serialization.html#saveoptions" label="Options" >
 			</topic>
-			<topic href="contents/050-heading-runtime.html#7-4" label="Preserving Comments from the Node Model" >
+			<topic href="contents/100-serialization.html#commentassociater" label="Preserving Comments from the Node Model" >
 			</topic>
-			<topic href="contents/050-heading-runtime.html#7-5" label="Transient Values" >
+			<topic href="contents/100-serialization.html#transientvalues" label="Transient Values" >
 			</topic>
-			<topic href="contents/050-heading-runtime.html#7-6" label="Unassigned Text" >
+			<topic href="contents/100-serialization.html#unassignedtext" label="Unassigned Text" >
 			</topic>
-			<topic href="contents/050-heading-runtime.html#7-7" label="Cross-Reference Serializer" >
+			<topic href="contents/100-serialization.html#crossreferenceserializer" label="Cross-Reference Serializer" >
 			</topic>
-			<topic href="contents/050-heading-runtime.html#7-8" label="Merge White Space" >
+			<topic href="contents/100-serialization.html#hiddentokenmerger" label="Merge White Space" >
 			</topic>
-			<topic href="contents/050-heading-runtime.html#7-9" label="Token Stream" >
-			</topic>
-		</topic>
-		<topic href="contents/050-heading-runtime.html#8" label="Formatting (Pretty Printing)" >
-			<topic href="contents/050-heading-runtime.html#8-0" label="General FormattingConfig Settings" >
-			</topic>
-			<topic href="contents/050-heading-runtime.html#8-1" label="FormattingConfig Instructions" >
-			</topic>
-			<topic href="contents/050-heading-runtime.html#8-2" label="Grammar Element Finders" >
+			<topic href="contents/100-serialization.html#tokenstream" label="Token Stream" >
 			</topic>
 		</topic>
-		<topic href="contents/050-heading-runtime.html#9" label="Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)" >
+		<topic href="contents/105-formatting.html" label="Formatting (Pretty Printing)" >
+			<topic href="contents/105-formatting.html#formatting_8" label="General FormattingConfig Settings" >
+			</topic>
+			<topic href="contents/105-formatting.html#formatting_9" label="FormattingConfig Instructions" >
+			</topic>
+			<topic href="contents/105-formatting.html#formatting_10" label="Grammar Element Finders" >
+			</topic>
 		</topic>
-		<topic href="contents/050-heading-runtime.html#10" label="Encoding in Xtext" >
-			<topic href="contents/050-heading-runtime.html#10-0" label="Encoding at Language Design Time" >
+		<topic href="contents/110-fragmentprovider.html" label="Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)" >
+		</topic>
+		<topic href="contents/115-encoding.html" label="Encoding in Xtext" >
+			<topic href="contents/115-encoding.html#encoding_6" label="Encoding at Language Design Time" >
 			</topic>
-			<topic href="contents/050-heading-runtime.html#10-1" label="Encoding at Language Runtime" >
+			<topic href="contents/115-encoding.html#encoding_7" label="Encoding at Language Runtime" >
 			</topic>
-			<topic href="contents/050-heading-runtime.html#10-2" label="Encoding of an XtextResource" >
+			<topic href="contents/115-encoding.html#encoding_8" label="Encoding of an XtextResource" >
 			</topic>
-			<topic href="contents/050-heading-runtime.html#10-3" label="Encoding in New Model Projects" >
+			<topic href="contents/115-encoding.html#encoding_9" label="Encoding in New Model Projects" >
 			</topic>
-			<topic href="contents/050-heading-runtime.html#10-4" label="Encoding of Xtext Source Code" >
+			<topic href="contents/115-encoding.html#encoding_10" label="Encoding of Xtext Source Code" >
 			</topic>
 		</topic>
 	</topic>
 	<topic href="contents/118-mwe-in-depth.html" label="MWE2" >
-		<topic href="contents/118-mwe-in-depth.html#0" label="Examples" >
-			<topic href="contents/118-mwe-in-depth.html#0-0" label="The Simplest Workflow" >
+		<topic href="contents/118-mwe-in-depth.html#MWE2Exampe" label="Examples" >
+			<topic href="contents/118-mwe-in-depth.html#MWE2HelloWorld" label="The Simplest Workflow" >
 			</topic>
-			<topic href="contents/118-mwe-in-depth.html#0-1" label="A Simple Transformation" >
+			<topic href="contents/118-mwe-in-depth.html#MWE2SimpleTransformation" label="A Simple Transformation" >
 			</topic>
-			<topic href="contents/118-mwe-in-depth.html#0-2" label="A Stop-Watch" >
-			</topic>
-		</topic>
-		<topic href="contents/118-mwe-in-depth.html#1" label="Language Reference" >
-			<topic href="contents/118-mwe-in-depth.html#1-0" label="Mapping to Java Classes" >
-			</topic>
-			<topic href="contents/118-mwe-in-depth.html#1-1" label="Module" >
-			</topic>
-			<topic href="contents/118-mwe-in-depth.html#1-2" label="Properties" >
-			</topic>
-			<topic href="contents/118-mwe-in-depth.html#1-3" label="Mandatory Properties" >
-			</topic>
-			<topic href="contents/118-mwe-in-depth.html#1-4" label="Named Components" >
-			</topic>
-			<topic href="contents/118-mwe-in-depth.html#1-5" label="Auto Injection" >
+			<topic href="contents/118-mwe-in-depth.html#MWE2Stopwatch" label="A Stop-Watch" >
 			</topic>
 		</topic>
-		<topic href="contents/118-mwe-in-depth.html#2" label="Syntax Reference" >
-			<topic href="contents/118-mwe-in-depth.html#2-0" label="Module" >
+		<topic href="contents/118-mwe-in-depth.html#MWE2LanguageReference" label="Language Reference" >
+			<topic href="contents/118-mwe-in-depth.html#MWE2JavaReferences" label="Mapping to Java Classes" >
 			</topic>
-			<topic href="contents/118-mwe-in-depth.html#2-1" label="Property" >
+			<topic href="contents/118-mwe-in-depth.html#MWE2Module" label="Module" >
 			</topic>
-			<topic href="contents/118-mwe-in-depth.html#2-2" label="Component" >
+			<topic href="contents/118-mwe-in-depth.html#MWE2Properties" label="Properties" >
 			</topic>
-			<topic href="contents/118-mwe-in-depth.html#2-3" label="String Literals" >
+			<topic href="contents/118-mwe-in-depth.html#MWE2Mandatory" label="Mandatory Properties" >
 			</topic>
-			<topic href="contents/118-mwe-in-depth.html#2-4" label="Boolean Literals" >
+			<topic href="contents/118-mwe-in-depth.html#MWE2NamedComponents" label="Named Components" >
 			</topic>
-			<topic href="contents/118-mwe-in-depth.html#2-5" label="References" >
+			<topic href="contents/118-mwe-in-depth.html#MWE2AutoInject" label="Auto Injection" >
+			</topic>
+		</topic>
+		<topic href="contents/118-mwe-in-depth.html#MWE2SyntaxReference" label="Syntax Reference" >
+			<topic href="contents/118-mwe-in-depth.html#MWE2ModuleSyntax" label="Module" >
+			</topic>
+			<topic href="contents/118-mwe-in-depth.html#MWE2PropertySyntax" label="Property" >
+			</topic>
+			<topic href="contents/118-mwe-in-depth.html#MWE2ComponentSyntax" label="Component" >
+			</topic>
+			<topic href="contents/118-mwe-in-depth.html#MWE2StringLiteralsSyntax" label="String Literals" >
+			</topic>
+			<topic href="contents/118-mwe-in-depth.html#MWE2BooleanLiterals" label="Boolean Literals" >
+			</topic>
+			<topic href="contents/118-mwe-in-depth.html#MWE2References" label="References" >
 			</topic>
 		</topic>
 	</topic>
 	<topic href="contents/120-heading-UI.html" label="IDE Concepts" >
-		<topic href="contents/120-heading-UI.html#0" label="Label Provider" >
-			<topic href="contents/120-heading-UI.html#0-0" label="Label Providers For EObjects" >
-				<topic href="contents/120-heading-UI.html#0-0-0" label="DefaultEObjectLabelProvider" >
+		<topic href="contents/140-labelprovider.html" label="Label Provider" >
+			<topic href="contents/140-labelprovider.html#EObjectLabelProvider" label="Label Providers For EObjects" >
+				<topic href="contents/140-labelprovider.html#DefaultEObjectLabelProvider" label="DefaultEObjectLabelProvider" >
 				</topic>
 			</topic>
-			<topic href="contents/120-heading-UI.html#0-1" label="Label Providers For Index Entries" >
+			<topic href="contents/140-labelprovider.html#DescriptionLabelProvider" label="Label Providers For Index Entries" >
 			</topic>
 		</topic>
-		<topic href="contents/120-heading-UI.html#1" label="Content Assist" >
+		<topic href="contents/150-contentassist.html" label="Content Assist" >
 		</topic>
-		<topic href="contents/120-heading-UI.html#2" label="Quick Fixes" >
-			<topic href="contents/120-heading-UI.html#2-0" label="Quickfixes for Linking Errors and Syntax Errors" >
-			</topic>
-		</topic>
-		<topic href="contents/120-heading-UI.html#3" label="Template Proposals" >
-			<topic href="contents/120-heading-UI.html#3-0" label="Cross Reference Template Variable Resolver" >
-			</topic>
-			<topic href="contents/120-heading-UI.html#3-1" label="Enumeration Template Variable Resolver" >
+		<topic href="contents/155-quickfix.html" label="Quick Fixes" >
+			<topic href="contents/155-quickfix.html#quickfixes_12" label="Quickfixes for Linking Errors and Syntax Errors" >
 			</topic>
 		</topic>
-		<topic href="contents/120-heading-UI.html#4" label="Outline View" >
-			<topic href="contents/120-heading-UI.html#4-0" label="Influencing the outline structure" >
+		<topic href="contents/160-templates.html" label="Template Proposals" >
+			<topic href="contents/160-templates.html#templates_6" label="Cross Reference Template Variable Resolver" >
 			</topic>
-			<topic href="contents/120-heading-UI.html#4-1" label="Styling the outline" >
-			</topic>
-			<topic href="contents/120-heading-UI.html#4-2" label="Filtering actions" >
-			</topic>
-			<topic href="contents/120-heading-UI.html#4-3" label="Sorting actions" >
-			</topic>
-			<topic href="contents/120-heading-UI.html#4-4" label="Quick Outline" >
+			<topic href="contents/160-templates.html#templates_7" label="Enumeration Template Variable Resolver" >
 			</topic>
 		</topic>
-		<topic href="contents/120-heading-UI.html#5" label="Hyperlinking" >
-			<topic href="contents/120-heading-UI.html#5-0" label="Location Provider" >
+		<topic href="contents/170-outline.html" label="Outline View" >
+			<topic href="contents/170-outline.html#outline_5" label="Influencing the outline structure" >
 			</topic>
-			<topic href="contents/120-heading-UI.html#5-1" label="Customizing Available Hyperlinks" >
+			<topic href="contents/170-outline.html#outline_6" label="Styling the outline" >
+			</topic>
+			<topic href="contents/170-outline.html#outline_7" label="Filtering actions" >
+			</topic>
+			<topic href="contents/170-outline.html#outline_8" label="Sorting actions" >
+			</topic>
+			<topic href="contents/170-outline.html#quick_outline" label="Quick Outline" >
 			</topic>
 		</topic>
-		<topic href="contents/120-heading-UI.html#6" label="Syntax Coloring" >
-			<topic href="contents/120-heading-UI.html#6-0" label="Lexical Highlighting" >
+		<topic href="contents/180-hyperlinking.html" label="Hyperlinking" >
+			<topic href="contents/180-hyperlinking.html#locationProvider" label="Location Provider" >
 			</topic>
-			<topic href="contents/120-heading-UI.html#6-1" label="Semantic Highlighting" >
+			<topic href="contents/180-hyperlinking.html#hyperlinking_3" label="Customizing Available Hyperlinks" >
+			</topic>
+		</topic>
+		<topic href="contents/195-highlighting.html" label="Syntax Coloring" >
+			<topic href="contents/195-highlighting.html#highlighting_6" label="Lexical Highlighting" >
+			</topic>
+			<topic href="contents/195-highlighting.html#highlighting_7" label="Semantic Highlighting" >
 			</topic>
 		</topic>
 	</topic>
 	<topic href="contents/199-jvmtypes.html" label="Referring to Java Types" >
-		<topic href="contents/199-jvmtypes.html#0" label="How to Use Java Types" >
+		<topic href="contents/199-jvmtypes.html#jvmtypes_3" label="How to Use Java Types" >
 		</topic>
-		<topic href="contents/199-jvmtypes.html#1" label="Customization Points" >
+		<topic href="contents/199-jvmtypes.html#jvmtypes_4" label="Customization Points" >
 		</topic>
 	</topic>
 	<topic href="contents/210-emf-integration.html" label="Integration with EMF and Other EMF Editors" >
-		<topic href="contents/210-emf-integration.html#0" label="Model, Ecore Model, and Ecore" >
+		<topic href="contents/210-emf-integration.html#model_metamodel" label="Model, Ecore Model, and Ecore" >
 		</topic>
-		<topic href="contents/210-emf-integration.html#1" label="EMF Code Generation" >
+		<topic href="contents/210-emf-integration.html#emf_codegen" label="EMF Code Generation" >
 		</topic>
-		<topic href="contents/210-emf-integration.html#2" label="XtextResource Implementation" >
+		<topic href="contents/210-emf-integration.html#xtext_resource" label="XtextResource Implementation" >
 		</topic>
-		<topic href="contents/210-emf-integration.html#3" label="Integration with GMF Editors" >
-			<topic href="contents/210-emf-integration.html#3-0" label="Stage 1: Make GMF Read and Write the Semantic Model As Text" >
-				<topic href="contents/210-emf-integration.html#3-0-0" label="Stage 2: Calling the Xtext Parser to Parse GMF Labels" >
+		<topic href="contents/210-emf-integration.html#gmf_integration" label="Integration with GMF Editors" >
+			<topic href="contents/210-emf-integration.html#gmf_integration_stage_1" label="Stage 1: Make GMF Read and Write the Semantic Model As Text" >
+				<topic href="contents/210-emf-integration.html#gmf_integration_stage_1_9" label="Stage 2: Calling the Xtext Parser to Parse GMF Labels" >
 				</topic>
-				<topic href="contents/210-emf-integration.html#3-0-1" label="Stage 3: A Popup Xtext Editor (experimental)" >
+				<topic href="contents/210-emf-integration.html#gmf_integration_stage_1_10" label="Stage 3: A Popup Xtext Editor (experimental)" >
 				</topic>
 			</topic>
 		</topic>
 	</topic>
 	<topic href="contents/213-migrating-from-1.0.html" label="Migrating from Xtext 1.0.x to 2.0" >
-		<topic href="contents/213-migrating-from-1.0.html#0" label="Take the Shortcut" >
+		<topic href="contents/213-migrating-from-1.0.html#migrating_from_1_0_x_4" label="Take the Shortcut" >
 		</topic>
-		<topic href="contents/213-migrating-from-1.0.html#1" label="Migrating Step By Step" >
-			<topic href="contents/213-migrating-from-1.0.html#1-0" label="Update the Plug-in Dependencies and Import Statements" >
+		<topic href="contents/213-migrating-from-1.0.html#migrating_from_1_0_x_5" label="Migrating Step By Step" >
+			<topic href="contents/213-migrating-from-1.0.html#migrating_from_1_0_x_5_3" label="Update the Plug-in Dependencies and Import Statements" >
 			</topic>
-			<topic href="contents/213-migrating-from-1.0.html#1-1" label="Introduction of the Qualified Name" >
+			<topic href="contents/213-migrating-from-1.0.html#migrating_from_1_0_x_5_4" label="Introduction of the Qualified Name" >
 			</topic>
-			<topic href="contents/213-migrating-from-1.0.html#1-2" label="Changes in the index and in find references" >
+			<topic href="contents/213-migrating-from-1.0.html#migrating_from_1_0_x_5_5" label="Changes in the index and in find references" >
 			</topic>
-			<topic href="contents/213-migrating-from-1.0.html#1-3" label="Rewritten Node Model" >
+			<topic href="contents/213-migrating-from-1.0.html#migrating_from_1_0_x_5_6" label="Rewritten Node Model" >
 			</topic>
-			<topic href="contents/213-migrating-from-1.0.html#1-4" label="New Outline" >
+			<topic href="contents/213-migrating-from-1.0.html#migrating_from_1_0_x_5_7" label="New Outline" >
 			</topic>
-			<topic href="contents/213-migrating-from-1.0.html#1-5" label="AutoEditStrategy" >
+			<topic href="contents/213-migrating-from-1.0.html#migrating_from_1_0_x_5_8" label="AutoEditStrategy" >
 			</topic>
-			<topic href="contents/213-migrating-from-1.0.html#1-6" label="Other Noteworthy API Changes" >
+			<topic href="contents/213-migrating-from-1.0.html#migrating_from_1_0_x_5_9" label="Other Noteworthy API Changes" >
 			</topic>
 		</topic>
-		<topic href="contents/213-migrating-from-1.0.html#2" label="Now go for then new features" >
+		<topic href="contents/213-migrating-from-1.0.html#migrating_from_1_0_x_6" label="Now go for then new features" >
 		</topic>
 	</topic>
 	<topic href="contents/215-migrating-from-0.7.html" label="Migrating from Xtext 0.7.x to 1.0" >
-		<topic href="contents/215-migrating-from-0.7.html#0" label="Migrating Step By Step" >
-			<topic href="contents/215-migrating-from-0.7.html#0-0" label="Update the Plug-in Dependencies and Import Statements" >
+		<topic href="contents/215-migrating-from-0.7.html#migrating_from_0_7_2" label="Migrating Step By Step" >
+			<topic href="contents/215-migrating-from-0.7.html#migrating_from_0_7_2_3" label="Update the Plug-in Dependencies and Import Statements" >
 			</topic>
-			<topic href="contents/215-migrating-from-0.7.html#0-1" label="Rename the Packages in the dsl.ui-Plug-in" >
+			<topic href="contents/215-migrating-from-0.7.html#migrating_from_0_7_2_4" label="Rename the Packages in the dsl.ui-Plug-in" >
 			</topic>
-			<topic href="contents/215-migrating-from-0.7.html#0-2" label="Update the Workflow" >
+			<topic href="contents/215-migrating-from-0.7.html#migrating_from_0_7_2_5" label="Update the Workflow" >
 			</topic>
-			<topic href="contents/215-migrating-from-0.7.html#0-3" label="MANIFEST.MF and plugin.xml" >
+			<topic href="contents/215-migrating-from-0.7.html#migrating_from_0_7_2_6" label="MANIFEST.MF and plugin.xml" >
 			</topic>
-			<topic href="contents/215-migrating-from-0.7.html#0-4" label="Noteworthy API Changes" >
+			<topic href="contents/215-migrating-from-0.7.html#migrating_from_0_7_2_7" label="Noteworthy API Changes" >
 			</topic>
 		</topic>
 	</topic>
