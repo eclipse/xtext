@@ -1,0 +1,223 @@
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Preface</title>
+    <link href="book.css" rel="stylesheet" type="text/css">
+    <link href="code.css" rel="stylesheet" type="text/css">
+    <link href="http://www.eclipse.org/eclipse.org-common/yui/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="http://www.eclipse.org/eclipse.org-common/yui/2.6.0/build/menu/assets/skins/sam/menu.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/reset.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/layout.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/header.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/footer.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/visual.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/print.css" rel="stylesheet" type="text/css" media="print">
+    <link rel="stylesheet" type="text/css" href="http://www.eclipse.org/Xtext/style.css"/>
+    <link rel="stylesheet" type="text/css" href="http://www.eclipse.org/style2.css"/>
+     <script type="text/javascript"> 
+    	function initTocMenu(ActiveSubTocElementId){
+    		var menu = document.getElementById("leftnav");
+    		
+    		var chapters = menu.children;
+    		addHideSubsectionFunction(chapters);
+    		
+    		document.getElementById(ActiveSubTocElementId).style.display = "block";
+    	}
+    
+    	function addHideSubsectionFunction(items){
+    		for (var i = 0; i < items.length; i++) {
+    			if (items[i].firstElementChild ){
+    				items[i].firstElementChild.onclick = function(){toc_toggle_subsections(this.parentNode);};
+    				items[i].firstElementChild.style.cursor = "pointer";
+    			}
+    		}
+    	}
+    	function toc_toggle_subsections(chap){
+    		if ( chap.children[1].style.display != "none" ) {
+    			chap.children[1].style.display = "none"
+    		} else {
+    			chap.children[1].style.display = "block"
+    			
+    		}
+    	}
+    	
+    	function highlightCurrentSection(sec) {
+    		document.getElementById(sec).style.backgroundColor= "#D0D0D0"
+    	}
+    </script>
+  </head>
+
+<body onload="initTocMenu('subToc_01-Introduction.html');highlightCurrentSection(document.URL.substring(document.URL.lastIndexOf('/')+1));">
+<div id="novaWrapper">		<div id="clearHeader">
+		<div id="logo">
+				<div id="promotion"><a href="/indigo/friends.php">
+	<img src="/home/promotions/indigo/indigo.png" alt="Indigo Is Coming!"/>
+</a>
+
+</div>
+
+		</div>
+		<div id="otherSites">
+			<div id="sites">
+			<ul id="sitesUL">
+				<li><a href='http://marketplace.eclipse.org'><img alt="Eclipse Marketplace" src="http://dev.eclipse.org/custom_icons/marketplace.png"/>&nbsp;<div>Eclipse Marketplace</div></a></li>
+				<li><a href='http://live.eclipse.org'><img alt="Eclipse Live" src="http://dev.eclipse.org/custom_icons/audio-input-microphone-bw.png"/>&nbsp;<div>Eclipse Live</div></a></li>
+
+	    		<li><a href='https://bugs.eclipse.org/bugs/'><img alt="Bugzilla" src="http://dev.eclipse.org/custom_icons/system-search-bw.png"/>&nbsp;<div>Bugzilla</div></a></li>
+	    		<li><a href='http://www.eclipse.org/forums/'><img alt="Forums" src="http://dev.eclipse.org/large_icons/apps/internet-group-chat.png"/>&nbsp;<div>Eclipse Forums</div></a></li>
+	    		<li><a href='http://www.planeteclipse.org/'><img alt="Planet Eclipse" src="http://dev.eclipse.org/large_icons/devices/audio-card.png"/>&nbsp;<div>Planet Eclipse</div></a></li>
+	    		<li><a href='http://wiki.eclipse.org/'><img alt="Eclipse Wiki" src="http://dev.eclipse.org/custom_icons/accessories-text-editor-bw.png"/>&nbsp;<div>Eclipse Wiki</div></a></li>
+	    		<li><a href='http://portal.eclipse.org'><img alt="MyFoundation Portal" src="http://dev.eclipse.org/custom_icons/preferences-system-network-proxy-bw.png"/><div>My Foundation Portal</div></a></li>
+	    	</ul>
+
+	    	</div>
+		</div>		
+	</div>
+
+<div id="header">			
+	<div id="menu">
+		<ul>
+		<li><a href="/Xtext" target="_self">Home</a></li> 
+		<li><a href="/Xtext/download" target="_self">Download</a></li> 
+		<li><a href="index.html" target="_self">Documentation</a></li> 
+		<li><a href="/Xtext/support" target="_self">Support</a></li> 
+		<li><a href="/Xtext/community" target="_self">Community</a></li> 
+		<li><a href="/Xtext/developers" target="_self">Developers</a></li> 
+			</ul>
+
+	</div>
+
+	<div id="search">
+			<form action="http://www.google.com/cse" id="searchbox_017941334893793413703:sqfrdtd112s">
+		 	<input type="hidden" name="cx" value="017941334893793413703:sqfrdtd112s" />
+	  		<input id="searchBox" type="text" name="q" size="25" />
+	  		<input id="searchButton" type="submit" name="sa" value="Search" />
+			</form>
+		<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=searchbox_017941334893793413703%3Asqfrdtd112s&lang=en"></script>			
+	</div>
+
+</div>
+<div id="novaContent" class="faux">
+	<br style="clear:both;height:1em;">
+	<div id="leftcol">
+		<div class="nav-logo">
+			<a href="index.html"><img src="http://wiki.eclipse.org/images/thumb/d/db/Xtext_logo.png/450px-Xtext_logo.png" style="margin-left:30px; width:125px"/></a>
+		</div>
+		<ul id="leftnav">
+		<li class="separator"><div class="separator">Preface</div>
+			</li>
+		<li class="separator"><div class="separator">Lexical Syntax</div>
+			<ul style="display: none;" id="subToc_02-Lexical%20Structure.html">
+			<li id="02-Lexical%20Structure-0.html" ><a href="02-Lexical%20Structure-0.html" >Identifiers</a></li>
+			<li id="02-Lexical%20Structure-1.html" ><a href="02-Lexical%20Structure-1.html" >String Literals</a></li>
+			<li id="02-Lexical%20Structure-2.html" ><a href="02-Lexical%20Structure-2.html" >Integer Literals</a></li>
+			<li id="02-Lexical%20Structure-3.html" ><a href="02-Lexical%20Structure-3.html" >Comments</a></li>
+			<li id="02-Lexical%20Structure-4.html" ><a href="02-Lexical%20Structure-4.html" >White Space</a></li>
+			<li id="02-Lexical%20Structure-5.html" ><a href="02-Lexical%20Structure-5.html" >Reserved Keywords</a></li>
+			</ul>
+			</li>
+		<li class="separator"><div class="separator">Types</div>
+			<ul style="display: none;" id="subToc_03-Types.html">
+			<li id="03-Types-0.html" ><a href="03-Types-0.html" >Arrays</a></li>
+			<li id="03-Types-1.html" ><a href="03-Types-1.html" >Simple Type References</a></li>
+			<li id="03-Types-2.html" ><a href="03-Types-2.html" >Function Types</a></li>
+			<li id="03-Types-3.html" ><a href="03-Types-3.html" >Parameterized Type References</a></li>
+			<li id="03-Types-4.html" ><a href="03-Types-4.html" >Primitives</a></li>
+			<li id="03-Types-5.html" ><a href="03-Types-5.html" >Conformance and Conversion</a></li>
+			</ul>
+			</li>
+		<li class="separator"><div class="separator">Expressions</div>
+			<ul style="display: none;" id="subToc_04-Expressions.html">
+			<li id="04-Expressions-0.html" ><a href="04-Expressions-0.html" >Literals</a></li>
+			<li id="04-Expressions-1.html" ><a href="04-Expressions-1.html" >Type Casts</a></li>
+			<li id="04-Expressions-2.html" ><a href="04-Expressions-2.html" >Infix Operators / Operator Overloading</a></li>
+			<li id="04-Expressions-3.html" ><a href="04-Expressions-3.html" >Feature Calls</a></li>
+			<li id="04-Expressions-4.html" ><a href="04-Expressions-4.html" >Constructor Call</a></li>
+			<li id="04-Expressions-5.html" ><a href="04-Expressions-5.html" >Closures</a></li>
+			<li id="04-Expressions-6.html" ><a href="04-Expressions-6.html" >If Expression</a></li>
+			<li id="04-Expressions-7.html" ><a href="04-Expressions-7.html" >Switch Expression</a></li>
+			<li id="04-Expressions-8.html" ><a href="04-Expressions-8.html" >Variable Declarations</a></li>
+			<li id="04-Expressions-9.html" ><a href="04-Expressions-9.html" >Blocks</a></li>
+			<li id="04-Expressions-10.html" ><a href="04-Expressions-10.html" >For Loop</a></li>
+			<li id="04-Expressions-11.html" ><a href="04-Expressions-11.html" >While Loop</a></li>
+			<li id="04-Expressions-12.html" ><a href="04-Expressions-12.html" >Do-While Loop</a></li>
+			<li id="04-Expressions-13.html" ><a href="04-Expressions-13.html" >Return Expression</a></li>
+			<li id="04-Expressions-14.html" ><a href="04-Expressions-14.html" >Throwing Exceptions</a></li>
+			<li id="04-Expressions-15.html" ><a href="04-Expressions-15.html" >Try, Catch, Finally</a></li>
+			</ul>
+			</li>
+		</ul>
+	</div>
+	<div id="midcolumn">
+		<div class="buttonbar">
+		<span class="next_button">
+		<a href="" >Next</a>
+		</span>
+		</div>
+		<div style="clear:both;margin-bottom:1em"></div>
+		
+<h1>Preface</h1>
+		
+<p>
+This document describes the expression language library Xbase. Xbase is a partial programming language implemented in Xtext and is meant to be embedded and extended
+within other programming languages and domain-specific languages (DSL) written in Xtext. Xtext is a highly extendable language development framework 
+covering all aspects of language infrastructure such as parsers, linkers, compilers, interpreters and even full-blown IDE support based on Eclipse.  
+</p>
+<p>
+Developing DSLs has become incredibly easy with Xtext. Structural languages which introduce new coarse-grained concepts, such as services, entities, value objects or 
+state-machines can be developed in minutes. However, software systems do not consist of structures solely. At some point a system needs to have some behavior, 
+which is usually specified using so called <em>expressions</em>. Expressions are the heart of every programming language and are not easy to get right.
+On the other hand, expressions are well understood and many programming languages share a common set
+and understanding of expressions.
+That is why most people do not add support for expressions in their DSL, but try to solve this differently. The most often used workaround is to define only the structural information in the DSL 
+and add behavior by modifying or extending the generated code. It is not only unpleasant to write, read and maintain information which closely belongs together in two different places, abstraction levels 
+and languages. Also, modifying the generated source code comes with a lot of additional problems. But as of today this is the preferred solution since adding support for expressions (and
+a corresponding execution environment) for your language is hard - even with Xtext.
+</p>
+<p>
+Xbase serves as a language library providing a common expression language bound to the Java platform (i.e. Java Virtual Machine). It consists
+of an Xtext grammar, as well as 
+reusable and adaptable implementations for the different aspects of a language infrastructure such as an AST structure, a compiler, an interpreter, a linker, and a static analyzer.
+In addition it comes with implementations to integrate the expression language within an Xtext-based Eclipse IDE. Default implementations for aspects like content assistance, syntax coloring, 
+hovering, folding and navigation can be easily integrated and reused within any Xtext based language. 
+</p>
+<p>
+Conceptually and syntactically, Xbase is very close to Java statements and expressions, but with a few differences:
+<ul>
+  <li>Runs on the JVM</li>
+  <li>No checked exceptions</li>
+  <li>Object-oriented</li>
+  <li>Everything is an expression, there are no statements</li>
+  <li>Closures</li>
+  <li>Type inference</li>
+  <li>Properties</li>
+  <li>Simple operator overloading</li>
+  <li>Powerful switch expressions</li>
+</ul>
+
+</p>
+		<div class="buttonbar">
+		<span class="next_button">
+		<a href="" >Next</a>
+		</span>
+		</div>
+		<div style="clear:both;"></div>
+	</div>
+	<br style="clear:both;height:1em;">
+</div>
+<div id="clearFooter"></div>
+<div id="footer">
+<ul id="footernav">
+	<li><a href="/">Home</a></li>
+
+	<li><a href="/legal/privacy.php">Privacy Policy</a></li>
+	<li><a href="/legal/termsofuse.php">Terms of Use</a></li>
+	<li><a href="/legal/copyright.php">Copyright Agent</a></li>
+	<li><a href="/legal/">Legal</a></li>
+	<li><a href="/org/foundation/contact.php">Contact Us</a></li>
+</ul>
+
+<span id="copyright">Copyright &copy; 2011 The Eclipse Foundation. All Rights Reserved.</span>
+</div>
+</body>
+</html>
