@@ -1,0 +1,55 @@
+.literallayout .code {
+	display: block;
+	border: 1px solid gray;
+	margin: 1em;
+	padding: 1em;
+	background-color: #F0F0F0;
+	color: #000000 !important;
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 12px;
+}
+
+.inlinecode{
+	padding-left: 3pt;
+	padding-right: 3pt;
+	font-size: 9.000000pt;
+	font-family: "Lucida Console", Monaco, monospace;
+	color: #000000 !important;
+}
+
+.keyword {
+	font-weight: bold;
+	color: #7F0055;
+}
+
+.string {
+	font-weight: normal !important;
+	color: #2A00FF;
+}
+
+.comment {
+	font-style: italic;
+	color: #3F7F5F;
+}
+
+.incode {
+	display: inline;
+}
+
+P.Code {
+	display: block;
+	text-align: left;
+	text-indent: 0.00pt;
+	margin-top: 0.000000pt;
+	margin-bottom: 0.000000pt;
+	margin-right: 0.000000pt;
+	margin-left: 15pt;
+	font-size: 9.000000pt;
+	font-weight: normal; 
+	font-style: Regular;
+	color: #000000 !important;
+	text-decoration: none;
+	vertical-align: baseline;
+	text-transform: none;
+	font-family: "Lucida Console", Monaco, monospace;
+}
