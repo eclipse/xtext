@@ -199,6 +199,7 @@ class AbstractSemanticSequencer extends GeneratedFile {
 			«ELSEIF c.canGenerate()»
 				if(errorAcceptor != null) {
 					«FOR f:c.features.filter(e|e != null)»
+						«val x = file.imported(f.feature.EContainingClass.EPackage.getGenPackage(resourceSet).qualifiedPackageInterfaceName)»
 						if(transientValues.isValueTransient(semanticObject, «f.feature.getGenTypeLiteral(resourceSet)») == «file.imported(typeof(ITransientValueService$ValueTransient))».YES)
 							errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, «f.feature.getGenTypeLiteral(resourceSet)»));
 					«ENDFOR»
