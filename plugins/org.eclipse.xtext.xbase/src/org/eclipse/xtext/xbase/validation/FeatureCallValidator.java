@@ -71,6 +71,8 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 					+ " with parentheses";
 		} else if (METHOD_ACCESS_WITHOUT_PARENTHESES.equals(issueCode)) {
 			message = "Missing parentheses for calling method " + featureCall.getFeature().getIdentifier();
+		} else if (INVALID_MUTABLE_VARIABLE_ACCESS.equals(issueCode)) {
+			message = "Cannot refer to a non-final variable "+ featureCall.getFeature().getIdentifier() + " from within a closure";
 		} else {
 			message = "Missig error message for " + issueCode;
 		}
