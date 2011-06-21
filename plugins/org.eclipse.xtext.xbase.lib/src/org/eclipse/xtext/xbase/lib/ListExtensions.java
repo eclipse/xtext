@@ -74,7 +74,7 @@ public class ListExtensions {
 	 * @return the sorted list itself.
 	 * @see Collections#sort(List)
 	 */
-	public static <T, C extends Comparable<? super C>> List<T> sortInplaceBy(List<T> list, final Functions.Function1<T, C> key) {
+	public static <T, C extends Comparable<? super C>> List<T> sortInplaceBy(List<T> list, final Functions.Function1<? super T, C> key) {
 		if (key == null)
 			throw new NullPointerException("key");
 		Comparator<T> comparator = new Comparator<T>() {

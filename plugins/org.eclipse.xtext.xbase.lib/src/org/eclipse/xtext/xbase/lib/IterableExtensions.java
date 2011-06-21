@@ -683,7 +683,7 @@ public class IterableExtensions {
 	 * @see #sort(Iterable, Comparator)
 	 * @see ListExtensions#sortInplaceBy(List, Function1)
 	 */
-	public static <T, C extends Comparable<? super C>> List<T> sortBy(Iterable<T> iterable, final Functions.Function1<T, C> key) {
+	public static <T, C extends Comparable<? super C>> List<T> sortBy(Iterable<T> iterable, final Functions.Function1<? super T, C> key) {
 		return ListExtensions.sortInplaceBy(Lists.newArrayList(iterable), key);
 	}
 
