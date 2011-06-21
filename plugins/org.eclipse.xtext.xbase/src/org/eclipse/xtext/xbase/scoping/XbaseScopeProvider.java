@@ -59,6 +59,7 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentDescriptionProvid
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentSugarDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
@@ -237,11 +238,17 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		}
 		DelegatingScope implicitThis = new DelegatingScope(IScope.NULLSCOPE);
 		IScope staticScope = createStaticScope(context, resource, implicitThis);
-		IScope localVariableScope = createLocalVarScope(context, reference, staticScope, includeCurrentBlock, idx);
+		LocalVariableScopeContext scopeContext = createLocalVariableScopeContext(context, reference, includeCurrentBlock, idx);
+		IScope localVariableScope = createLocalVarScope(staticScope, scopeContext);
 		IScope featureScopeForThis = createImplicitFeatureCallScope(context, localVariableScope);
 		if (featureScopeForThis != null)
 			implicitThis.setDelegate(featureScopeForThis);
 		return localVariableScope;
+	}
+
+	protected LocalVariableScopeContext createLocalVariableScopeContext(final EObject context, EReference reference,
+			boolean includeCurrentBlock, int idx) {
+		return new LocalVariableScopeContext(context, reference, includeCurrentBlock, idx, false);
 	}
 
 	protected IScope createStaticScope(EObject context, Resource resource, IScope parent) {
@@ -313,15 +320,16 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 			return null;
 		return EcoreUtil2.getContainerOfType(call, JvmDeclaredType.class);
 	}
-
-	protected IScope createLocalVarScope(EObject context, EReference reference, IScope parentScope, boolean includeCurrentBlock, int idx) {
-		if (context == null)
+	
+	protected IScope createLocalVarScope(IScope parentScope, LocalVariableScopeContext scopeContext) {
+		if (scopeContext == null || scopeContext.context == null)
 			return parentScope;
-		if (context.eContainer() != null)
-			parentScope = createLocalVarScope(context.eContainer(), reference, parentScope, false, -1);
+		if (scopeContext.canSpawnForContainer())
+			parentScope = createLocalVarScope(parentScope, scopeContext.spawnForContainer());
+		EObject context = scopeContext.context;
 		if (context.eContainer() instanceof XBlockExpression) {
 			XBlockExpression block = (XBlockExpression) context.eContainer();
-			parentScope = createLocalVarScopeForBlock(block, block.getExpressions().indexOf(context), parentScope);
+			parentScope = createLocalVarScopeForBlock(block, block.getExpressions().indexOf(context), scopeContext.referredFromClosure, parentScope);
 		}
 		if (context.eContainer() instanceof XForLoopExpression && context.eContainingFeature() == XbasePackage.Literals.XFOR_LOOP_EXPRESSION__EACH_EXPRESSION) {
 			XForLoopExpression loop = (XForLoopExpression) context.eContainer();
@@ -340,11 +348,11 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		if (context instanceof XSwitchExpression) {
 			parentScope = createLocalVarScopeForSwitchExpression((XSwitchExpression) context, parentScope);
 		}
-		if (includeCurrentBlock) {
+		if (scopeContext.includeCurrentBlock) {
 			if (context instanceof XBlockExpression) {
 				XBlockExpression block = (XBlockExpression) context;
 				if (!block.getExpressions().isEmpty()) {
-					parentScope = createLocalVarScopeForBlock(block, idx, parentScope);
+					parentScope = createLocalVarScopeForBlock(block, scopeContext.idx, scopeContext.referredFromClosure, parentScope);
 				}
 			}
 			if (context instanceof XForLoopExpression) {
@@ -382,8 +390,9 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 		return createLocalScopeForParameter(catchClause.getDeclaredParam(), parentScope);
 	}
 
-	protected IScope createLocalVarScopeForBlock(XBlockExpression block, int indexOfContextExpressionInBlock,
-			IScope parentScope) {
+	protected IScope createLocalVarScopeForBlock(
+			XBlockExpression block, int indexOfContextExpressionInBlock,
+			boolean referredFromClosure, IScope parentScope) {
 		List<IValidatedEObjectDescription> descriptions = Lists.newArrayList();
 		for (int i = 0; i < indexOfContextExpressionInBlock; i++) {
 			XExpression expression = block.getExpressions().get(i);
@@ -391,6 +400,8 @@ public class XbaseScopeProvider extends XtypeScopeProvider {
 				XVariableDeclaration varDecl = (XVariableDeclaration) expression;
 				if (varDecl.getName() != null) {
 					IValidatedEObjectDescription desc = createLocalVarDescription(varDecl);
+					if (referredFromClosure && varDecl.isWriteable())
+						desc.setIssueCode(IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS);
 					descriptions.add(desc);
 				}
 			}

@@ -38,7 +38,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.RepeatedContentAssistProcessor;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
+import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -169,18 +169,18 @@ public class XbaseReferenceProposalCreator extends TypeAwareReferenceProposalCre
 			Iterable<IEObjectDescription> allDescriptions =	super.queryScope(scope, model, reference, filter);
 			for(IEObjectDescription description: allDescriptions) {
 				if (filter.apply(description)) {
-					if (description instanceof JvmFeatureDescription) {
-						JvmFeatureDescription featureDescription = (JvmFeatureDescription) description;
+					if (description instanceof IValidatedEObjectDescription) {
+						IValidatedEObjectDescription featureDescription = (IValidatedEObjectDescription) description;
 						if (filteredDescriptions.containsKey(featureDescription.getEObjectOrProxy())) {
 							if (isShowShortestSugar() || isShowSmartProposals()) {
 								IEObjectDescription previousDescription = filteredDescriptions.get(featureDescription.getEObjectOrProxy());
-								JvmFeatureDescription previousFeatureDescription = null;
+								IValidatedEObjectDescription previousFeatureDescription = null;
 								MultiNameDescription multiNameDescription = null;
-								if (previousDescription instanceof JvmFeatureDescription) {
-									previousFeatureDescription = (JvmFeatureDescription) previousDescription;
+								if (previousDescription instanceof IValidatedEObjectDescription) {
+									previousFeatureDescription = (IValidatedEObjectDescription) previousDescription;
 								} else if (previousDescription instanceof MultiNameDescription) {
 									multiNameDescription = (MultiNameDescription) previousDescription;
-									previousFeatureDescription = (JvmFeatureDescription) multiNameDescription.getDelegate();
+									previousFeatureDescription = (IValidatedEObjectDescription) multiNameDescription.getDelegate();
 								}
 								if (previousFeatureDescription == null)
 									continue;

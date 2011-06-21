@@ -104,7 +104,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		for (XCatchClause catchClause : expr.getCatchClauses()) {
 			JvmTypeReference type = catchClause.getDeclaredParam().getParameterType();
 			final String name = declareNameInVariableScope(catchClause.getDeclaredParam(), b);
-			b.append(" catch (");
+			b.append(" catch (final ");
 			serialize(type,expr,b);
 			b.append(" ").append(name).append(") { ");
 			b.increaseIndentation();

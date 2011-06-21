@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -24,6 +23,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.scoping.LocalVariableScopeContext;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 
 @SuppressWarnings("all")
@@ -32,16 +32,17 @@ public class DomainmodelScopeProvider extends XbaseScopeProvider {
   @Inject
   private IJvmModelAssociations associations;
   
-  public IScope createLocalVarScope(final EObject context, final EReference reference, final IScope parent, final boolean includeCurrentBlock, final int idx) {
+  public IScope createLocalVarScope(final IScope parent, final LocalVariableScopeContext scopeContext) {
     {
-      final EObject context_1 = context;
+      EObject _context = scopeContext.getContext();
+      final EObject context = _context;
       boolean matched = false;
       if (!matched) {
-        if (context_1 instanceof Entity) {
-          final Entity context_2 = (Entity) context_1;
+        if (context instanceof Entity) {
+          final Entity context_1 = (Entity) context;
           matched=true;
           {
-            JvmType _jvmType = this.getJvmType(context_2);
+            JvmType _jvmType = this.getJvmType(context_1);
             final JvmType jvmType = _jvmType;
             boolean _operator_notEquals = ObjectExtensions.operator_notEquals(jvmType, null);
             if (_operator_notEquals) {
@@ -54,11 +55,11 @@ public class DomainmodelScopeProvider extends XbaseScopeProvider {
         }
       }
       if (!matched) {
-        if (context_1 instanceof Operation) {
-          final Operation context_3 = (Operation) context_1;
+        if (context instanceof Operation) {
+          final Operation context_2 = (Operation) context;
           matched=true;
           {
-            EList<JvmFormalParameter> _params = context_3.getParams();
+            EList<JvmFormalParameter> _params = context_2.getParams();
             final Function1<JvmFormalParameter,IEObjectDescription> _function = new Function1<JvmFormalParameter,IEObjectDescription>() {
                 public IEObjectDescription apply(final JvmFormalParameter e) {
                   IEObjectDescription _createIEObjectDescription = DomainmodelScopeProvider.this.createIEObjectDescription(e);
@@ -67,13 +68,13 @@ public class DomainmodelScopeProvider extends XbaseScopeProvider {
               };
             List<IEObjectDescription> _map = ListExtensions.<JvmFormalParameter, IEObjectDescription>map(_params, _function);
             final List<IEObjectDescription> descriptions = _map;
-            IScope _createLocalVarScope = super.createLocalVarScope(context_3, reference, parent, includeCurrentBlock, idx);
+            IScope _createLocalVarScope = super.createLocalVarScope(parent, scopeContext);
             IScope _createScope = MapBasedScope.createScope(_createLocalVarScope, descriptions);
             return _createScope;
           }
         }
       }
-      IScope _createLocalVarScope_1 = super.createLocalVarScope(context, reference, parent, includeCurrentBlock, idx);
+      IScope _createLocalVarScope_1 = super.createLocalVarScope(parent, scopeContext);
       return _createLocalVarScope_1;
     }
   }
