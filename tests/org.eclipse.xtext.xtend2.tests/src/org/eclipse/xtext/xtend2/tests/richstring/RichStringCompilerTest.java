@@ -55,4 +55,13 @@ public class RichStringCompilerTest extends AbstractRichStringEvaluationTest {
 		assertOutput(" zonk a\n\n zonk b\n\n zonk c",
 				"'''«newArrayList('a','b','c').join('\n\n',[e|''' zonk «e»'''])»'''");
 	}
+	
+	public void testBug349762() throws Exception {
+		assertOutput("1,2\n2,4\n",
+				"''' \n" + 
+				"        «FOR i:1..2»\n" + 
+				"            «FOR j:(1..2).map(k | k*i) SEPARATOR ','»«j»«ENDFOR»\n" + 
+				"        «ENDFOR»\n" + 
+				"'''");
+	}
 }

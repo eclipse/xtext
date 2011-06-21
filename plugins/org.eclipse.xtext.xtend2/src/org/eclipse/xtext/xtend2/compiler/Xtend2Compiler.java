@@ -372,7 +372,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 		appendable.append(");");
 		// declare result variable
 		JvmTypeReference returnType = getTypeProvider().getType(info.getCreateExpression());
-		appendable.append("\n");
+		appendable.append("\nfinal ");
 		serialize(returnType,info.getCreateExpression(),appendable);
 		String varName = declareNameInVariableScope(info, appendable);
 		appendable.append(" ").append(varName).append(";");
@@ -626,7 +626,7 @@ public class Xtend2Compiler extends XbaseCompiler {
 				appendable.append(" = false;");
 			}
 			appendable.append("\n");
-			appendable.append("for(");
+			appendable.append("for(final ");
 			JvmTypeReference paramType = getTypeProvider().getTypeForIdentifiable(parameter);
 			serialize(paramType, parameter, appendable);
 			appendable.append(" ");

@@ -32,6 +32,7 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.annotations.scoping.XbaseWithAnnotationsScopeProvider;
+import org.eclipse.xtext.xbase.scoping.LocalVariableScopeContext;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IFeaturesForTypeProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
@@ -102,8 +103,9 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 	}
 
 	@Override
-	protected IScope createLocalVarScope(EObject context, EReference reference, IScope parent,
-			boolean includeCurrentBlock, int idx) {
+	protected IScope createLocalVarScope(IScope parent,
+			LocalVariableScopeContext scopeContext) {
+		EObject context = scopeContext.getContext();
 		if (context instanceof XtendClass) {
 			return getScopeForXtendClass((XtendClass) context, parent);
 		} else if (context instanceof XtendFunction) {
@@ -122,10 +124,10 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 				}
 			}
 			return new JvmFeatureScope(
-					super.createLocalVarScope(context, reference, parent, includeCurrentBlock, idx), 
+					super.createLocalVarScope(parent, scopeContext), 
 					"XtendFunction", descriptions);
 		}
-		return super.createLocalVarScope(context, reference, parent, includeCurrentBlock, idx);
+		return super.createLocalVarScope(parent, scopeContext);
 	}
 
 	protected JvmFeatureScope getScopeForXtendClass(XtendClass context, IScope parent) {
