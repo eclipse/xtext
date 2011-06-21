@@ -51,7 +51,7 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.conversion.StaticQualifierValueConverter;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
-import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
+import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 
@@ -111,8 +111,8 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		private OperatorMapping operatorMapping;
 		
 		public boolean apply(IEObjectDescription input) {
-			if (input instanceof JvmFeatureDescription) {
-				if (!((JvmFeatureDescription) input).isValid())
+			if (input instanceof IValidatedEObjectDescription) {
+				if (!((IValidatedEObjectDescription) input).isValid())
 					return false;
 				// filter operator method names from CA
 				return operatorMapping.getOperator(input.getName()) == null;
@@ -477,9 +477,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 						}
 					}).toContext();
 				}
-				if (myCandidate instanceof JvmFeatureDescription && (isIdRule(ruleName))) {
+				if (myCandidate instanceof IValidatedEObjectDescription && (isIdRule(ruleName))) {
 					ICompletionProposal result = null;
-					String key = ((JvmFeatureDescription) myCandidate).getKey();
+					String key = ((IValidatedEObjectDescription) myCandidate).getKey();
 					boolean withParenths = key.endsWith(")");
 					String proposal = getQualifiedNameConverter().toString(myCandidate.getName());
 					if (ruleName != null) {

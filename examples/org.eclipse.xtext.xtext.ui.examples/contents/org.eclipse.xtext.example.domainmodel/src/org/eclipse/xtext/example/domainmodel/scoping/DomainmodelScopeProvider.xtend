@@ -19,14 +19,14 @@ import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.EcoreUtil2
 import com.google.inject.Inject
+import org.eclipse.xtext.xbase.scoping.LocalVariableScopeContext
 
 class DomainmodelScopeProvider extends XbaseScopeProvider {
 
 	@Inject extension IJvmModelAssociations associations
 	
-	override IScope createLocalVarScope(EObject context, EReference reference, IScope parent,
-			boolean includeCurrentBlock, int idx) {
-		switch (context) {
+	override IScope createLocalVarScope(IScope parent, LocalVariableScopeContext scopeContext) {
+		switch context: scopeContext.context {
 			Entity : {
 				val jvmType = getJvmType(context)
 				if(jvmType != null)
@@ -35,10 +35,10 @@ class DomainmodelScopeProvider extends XbaseScopeProvider {
 			Operation : {
 				val descriptions = context.params.map(e | e.createIEObjectDescription())
 				return MapBasedScope::createScope(
-						super.createLocalVarScope(context, reference, parent, includeCurrentBlock, idx), descriptions);	
+						super.createLocalVarScope(parent, scopeContext), descriptions);	
 			}
 		}
-		return super.createLocalVarScope(context, reference, parent, includeCurrentBlock, idx)
+		return super.createLocalVarScope(parent, scopeContext)
 	}
 	
 	def createIEObjectDescription(JvmFormalParameter jvmFormalParameter) {

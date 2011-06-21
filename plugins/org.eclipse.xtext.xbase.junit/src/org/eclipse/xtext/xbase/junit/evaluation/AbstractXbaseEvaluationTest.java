@@ -1384,6 +1384,21 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 			"}");
 	}
 	
+	@Test public void testBug349762_01() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, 
+			"try {\n" + 
+			"    throw new NullPointerException()\n" +
+			"} catch(Exception e) {\n" +
+			"    [Exception e2 | e==e2].apply(e)\n" + 
+			"}");
+	}
+	
+	@Test public void testBug349762_02() throws Exception {
+		assertEvaluatesTo("a", 
+				"switch s: 'abc' as CharSequence {\n" +
+				"  String: [Integer a, Integer b| s.substring(a, b)].apply(0, 1)\n" +
+				"}");
+	}
 	
 	protected void assertEvaluatesTo(Object object, String string) throws Exception {
 		assertEquals(object, invokeXbaseExpression(string));
