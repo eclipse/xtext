@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.lib;
 
+import static com.google.common.collect.Lists.*;
+
 import java.util.List;
 import java.util.Set;
 
@@ -45,4 +47,14 @@ public class IterableExtensionsTest extends TestCase {
 		assertEquals("a,null,c", string);
 	}
 	
+	public void testSortBy() throws Exception {
+		List<? extends CharSequence> list = newArrayList("foo","bar","baz");
+		List<? extends CharSequence> sorted = IterableExtensions.sortBy(list, new Functions.Function1<CharSequence, String>() {
+			public String apply(CharSequence p) {
+				return p.toString();
+			}
+		});
+		assertNotSame(list, sorted);
+		assertEquals(sorted, newArrayList("bar","baz","foo"));
+	}
 }
