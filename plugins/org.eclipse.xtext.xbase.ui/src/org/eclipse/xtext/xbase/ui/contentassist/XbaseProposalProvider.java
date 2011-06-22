@@ -494,10 +494,12 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 						proposal = proposal + "()";
 					}
 					EObject objectOrProxy = myCandidate.getEObjectOrProxy();
-					StyledString displayString = getStyledDisplayString((JvmFeature)objectOrProxy,
+					StyledString displayString = objectOrProxy instanceof JvmFeature ? getStyledDisplayString((JvmFeature)objectOrProxy,
 							withParenths,
 							getQualifiedNameConverter().toString(myCandidate.getQualifiedName()),
-							getQualifiedNameConverter().toString(myCandidate.getName()));
+							getQualifiedNameConverter().toString(myCandidate.getName()))
+							: getStyledDisplayString(objectOrProxy, getQualifiedNameConverter().toString(myCandidate.getQualifiedName()), 
+									getQualifiedNameConverter().toString(myCandidate.getName()));
 					result = createCompletionProposal(proposal, displayString, null, myContentAssistContext);
 					if (result instanceof ConfigurableCompletionProposal) {
 						ConfigurableCompletionProposal casted = (ConfigurableCompletionProposal) result;
