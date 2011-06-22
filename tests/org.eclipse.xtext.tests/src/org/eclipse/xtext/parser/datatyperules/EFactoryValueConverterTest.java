@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.datatyperules;
 
+import java.math.BigDecimal;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.conversion.ValueConverterException;
@@ -29,6 +31,13 @@ public class EFactoryValueConverterTest extends AbstractXtextTests{
 		Object value = eDoubleConverter.toValue(doubleAsString, null);
 		assertTrue(value instanceof Double);
 		assertEquals(((Double)value).doubleValue(), TEST_DOUBLE_VALUE);
+	}
+	
+	public void testEBigDecimalConversion() throws Exception {
+		EFactoryValueConverter converter = new EFactoryValueConverter(EcorePackage.Literals.EBIG_DECIMAL);
+		BigDecimal value = (BigDecimal) converter.toValue(".5", null);
+		assertNotNull(value);
+		assertEquals(new BigDecimal("0.5"), value);
 	}
 	
 	public void testImplicitEFactoryValueConverter() throws Exception {
