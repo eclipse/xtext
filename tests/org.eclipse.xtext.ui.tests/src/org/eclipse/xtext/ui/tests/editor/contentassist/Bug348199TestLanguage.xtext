@@ -1,0 +1,117 @@
+/*******************************************************************************
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+grammar org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage
+ 	with org.eclipse.xtext.common.Terminals
+
+generate bug348199TestLanguage "http://www.eclipse.org/xtext/ui/common/tests/2011/bug348199TestLanguage"
+
+Timeperiod:
+    {Timeperiod}
+    'define' 'timeperiod'
+    ( 
+	    '1'
+	    '{'
+		    (NL+ time+=TimeDef1)*
+		    ( 
+		    (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* ) &
+		    (NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*)?
+		
+		    )
+	    	NL+ 
+	    '}'
+	|
+	    '2'
+	    '{'
+		    (NL+ time+=TimeDef1)*
+		    ( 
+		    (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* ) |
+		    (NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*)?
+		    )
+	    	NL+ 
+	    '}'
+	|
+	    '3'
+	    '{'
+		    (NL+ time+=TimeDef1)*
+		    ( 
+		    (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* ) |
+		    (NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*)
+		    )+
+	    	NL+ 
+	    '}'
+	|
+	    '4'
+	    '{'
+		    (NL+ time+=TimeDef1)*
+		    ( 
+		    (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* ) |
+		    (NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*)
+		    )*
+	    	NL+ 
+	    '}'
+	|	
+		'5'
+	    '{'
+	    	NL+
+		    (time+=TimeDef1 NL+)*
+		    ( 
+		    ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* ) &
+		    ('otherelement' alias+=ID NL+ (time+=TimeDef3 NL+ )*)?
+		    )
+	    '}'
+	|
+	    '6'
+	    '{'
+	    	NL+
+		    (time+=TimeDef1 NL+)*
+		    ( 
+		    ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* ) |
+		    ('otherelement' alias+=ID NL+ (time+=TimeDef3 NL+ )*)?
+		    )
+	    '}'
+	|
+	    '7'
+	    '{'
+	    	NL+
+		    (time+=TimeDef1 NL+)*
+		    ( 
+		    ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* ) |
+		    ('otherelement' alias+=ID NL+ (time+=TimeDef3 NL+ )*)
+		    )+
+	    '}'
+	|
+	    '8'
+	    '{'
+	    	NL+
+		    (time+=TimeDef1 NL+)*
+		    ( 
+		    ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* ) |
+		    ('otherelement' alias+=ID NL+ (time+=TimeDef3 NL+ )*)
+		    )*
+	    '}'
+	);
+
+TimeDef1 returns TimeDef:
+    'july' day=INT
+;
+
+TimeDef2 returns TimeDef:
+    'august' day=INT
+;
+
+TimeDef3 returns TimeDef:
+    'september' day=INT
+;
+
+terminal NL:
+	'\n'
+;
+
+terminal WS:
+	' ' | '\t'
+;

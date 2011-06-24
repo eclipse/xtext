@@ -13258,7 +13258,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             else if ( LA36_0 ==33 && getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 3) ) {
                 alt36=4;
             }
-            else if ( LA36_0 >=26 && LA36_0 <=27 && getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {
+            else if ( LA36_0 >=26 && LA36_0<=27 && getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {
                 alt36=5;
             }
             else {
