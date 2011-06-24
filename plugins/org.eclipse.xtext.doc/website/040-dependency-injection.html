@@ -1,223 +1,151 @@
-<html>
-  <head>
-    <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Dependency Injection in Xtext with Google Guice</title>
-    <link href="book.css" rel="stylesheet" type="text/css">
-    <link href="code.css" rel="stylesheet" type="text/css">
-    <link href="http://www.eclipse.org/eclipse.org-common/yui/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/yui/2.6.0/build/menu/assets/skins/sam/menu.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/reset.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/layout.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/header.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/footer.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/visual.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/print.css" rel="stylesheet" type="text/css" media="print">
-    <link rel="stylesheet" type="text/css" href="http://www.eclipse.org/Xtext/style.css"/>
-    <link rel="stylesheet" type="text/css" href="http://www.eclipse.org/style2.css"/>
-     <script type="text/javascript"> 
-    	function initTocMenu(ActiveSubTocElementId){
-    		var menu = document.getElementById("leftnav");
-    		
-    		var chapters = menu.children;
-    		addHideSubsectionFunction(chapters);
-    		
-    		document.getElementById(ActiveSubTocElementId).style.display = "block";
-    	}
-    
-    	function addHideSubsectionFunction(items){
-    		for (var i = 0; i < items.length; i++) {
-    			if (items[i].firstElementChild ){
-    				items[i].firstElementChild.onclick = function(){toc_toggle_subsections(this.parentNode);};
-    				items[i].firstElementChild.style.cursor = "pointer";
-    			}
-    		}
-    	}
-    	function toc_toggle_subsections(chap){
-    		if ( chap.children[1].style.display != "none" ) {
-    			chap.children[1].style.display = "none"
-    		} else {
-    			chap.children[1].style.display = "block"
-    			
-    		}
-    	}
-    	
-    	function highlightCurrentSection(sec) {
-    		document.getElementById(sec).style.backgroundColor= "#D0D0D0"
-    	}
-    </script>
-  </head>
-
-<body onload="initTocMenu('040-dependency-injection.html');highlightCurrentSection(document.URL.substring(document.URL.lastIndexOf('/')+1));">
-<div id="novaWrapper">		<div id="clearHeader">
-		<div id="logo">
-				<div id="promotion"><a href="/indigo/friends.php">
-	<img src="http://www.eclipse.org/home/promotions/indigo/indigo.png" alt="Indigo Is Coming!"/>
-</a>
-
-</div>
-
-		</div>
-		<div id="otherSites">
-			<div id="sites">
-			<ul id="sitesUL">
-				<li><a href='http://marketplace.eclipse.org'><img alt="Eclipse Marketplace" src="http://dev.eclipse.org/custom_icons/marketplace.png"/>&nbsp;<div>Eclipse Marketplace</div></a></li>
-				<li><a href='http://live.eclipse.org'><img alt="Eclipse Live" src="http://dev.eclipse.org/custom_icons/audio-input-microphone-bw.png"/>&nbsp;<div>Eclipse Live</div></a></li>
-
-	    		<li><a href='https://bugs.eclipse.org/bugs/'><img alt="Bugzilla" src="http://dev.eclipse.org/custom_icons/system-search-bw.png"/>&nbsp;<div>Bugzilla</div></a></li>
-	    		<li><a href='http://www.eclipse.org/forums/'><img alt="Forums" src="http://dev.eclipse.org/large_icons/apps/internet-group-chat.png"/>&nbsp;<div>Eclipse Forums</div></a></li>
-	    		<li><a href='http://www.planeteclipse.org/'><img alt="Planet Eclipse" src="http://dev.eclipse.org/large_icons/devices/audio-card.png"/>&nbsp;<div>Planet Eclipse</div></a></li>
-	    		<li><a href='http://wiki.eclipse.org/'><img alt="Eclipse Wiki" src="http://dev.eclipse.org/custom_icons/accessories-text-editor-bw.png"/>&nbsp;<div>Eclipse Wiki</div></a></li>
-	    		<li><a href='http://portal.eclipse.org'><img alt="MyFoundation Portal" src="http://dev.eclipse.org/custom_icons/preferences-system-network-proxy-bw.png"/><div>My Foundation Portal</div></a></li>
-	    	</ul>
-
-	    	</div>
-		</div>		
-	</div>
-
-<div id="header">			
-	<div id="menu">
-		<ul>
-		<li><a href="/Xtext" target="_self">Home</a></li> 
-		<li><a href="/Xtext/download" target="_self">Download</a></li> 
-		<li><a href="index.html" target="_self">Documentation</a></li> 
-		<li><a href="/Xtext/support" target="_self">Support</a></li> 
-		<li><a href="/Xtext/community" target="_self">Community</a></li> 
-		<li><a href="/Xtext/developers" target="_self">Developers</a></li> 
-			</ul>
-
-	</div>
-
-	<div id="search">
-			<form action="http://www.google.com/cse" id="searchbox_017941334893793413703:sqfrdtd112s">
-		 	<input type="hidden" name="cx" value="017941334893793413703:sqfrdtd112s" />
-	  		<input id="searchBox" type="text" name="q" size="25" />
-	  		<input id="searchButton" type="submit" name="sa" value="Search" />
-			</form>
-		<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=searchbox_017941334893793413703%3Asqfrdtd112s&lang=en"></script>			
-	</div>
-
-</div>
-<div id="novaContent" class="faux">
-	<br style="clear:both;height:1em;">
+<br style="clear:both;height:1em;">
 	<div id="leftcol">
 		<div class="nav-logo">
-			<a href="index.html"><img src="http://wiki.eclipse.org/images/thumb/d/db/Xtext_logo.png/450px-Xtext_logo.png" style="margin-left:30px; width:125px"/></a>
+			<a href="index.php"><img src="http://wiki.eclipse.org/images/thumb/d/db/Xtext_logo.png/450px-Xtext_logo.png" style="margin-left:30px; width:125px"/></a>
 		</div>
 		<ul id="leftnav">
-		<li class="separator"><div class="separator">Installation</div>
-			<ul style="display: none;" id="subToc_005-installation.html">
-			<li id="005-installation.html#InstallDistro" ><a href="005-installation.html#InstallDistro" >Install Pre-Configured Eclipse With Xtext</a></li>
-			<li id="005-installation.html#InstallXtext" ><a href="005-installation.html#InstallXtext" >Install Xtext From Update Site</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">5 Minutes Tutorial</div>
-			<ul style="display: none;" id="subToc_010-xtext-in-5-minutes.html">
-			<li id="010-xtext-in-5-minutes.html#NewProject" ><a href="010-xtext-in-5-minutes.html#NewProject" >Creating A New Xtext Project</a></li>
-			<li id="010-xtext-in-5-minutes.html#RunWorkflow" ><a href="010-xtext-in-5-minutes.html#RunWorkflow" >Generating The Language Infrastructure</a></li>
-			<li id="010-xtext-in-5-minutes.html#TestingTheEditor" ><a href="010-xtext-in-5-minutes.html#TestingTheEditor" >Try The Editor</a></li>
-			<li id="010-xtext-in-5-minutes.html#Conclusion" ><a href="010-xtext-in-5-minutes.html#Conclusion" >Conclusion</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">30 Minutes Tutorial</div>
-			<ul style="display: none;" id="subToc_020-domainmodel-step-by-step.html">
-			<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" ><a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" >Create A New Xtext Project</a></li>
-			<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" ><a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" >Write Your Own Grammar</a></li>
-			<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_6" ><a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_6" >Generate Language Artifacts</a></li>
-			<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_7" ><a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_7" >Run the Generated IDE Plug-in</a></li>
-			<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_8" ><a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_8" >Second Iteration : Adding Packages and Imports</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">30 Minutes Tutorial - Extended</div>
-			<ul style="display: none;" id="subToc_030-tutorial-next-steps.html">
-			<li id="040-first-code-generator.html" ><a href="040-first-code-generator.html" >Writing a Code Generator With Xtend</a></li>
-			<li id="060-unit-tests.html" ><a href="060-unit-tests.html" >Unit Testing the Language</a></li>
-			<li id="050-validation.html" ><a href="050-validation.html" >Creating Custom Validation Rules</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Overview</div>
-			<ul style="display: none;" id="subToc_000-introduction.html">
-			<li id="000-introduction.html#Overview_1" ><a href="000-introduction.html#Overview_1" >What is Xtext?</a></li>
-			<li id="000-introduction.html#Overview_2" ><a href="000-introduction.html#Overview_2" >How Does It Work?</a></li>
-			<li id="000-introduction.html#Overview_3" ><a href="000-introduction.html#Overview_3" >Xtext is Highly Configurable</a></li>
-			<li id="000-introduction.html#Overview_4" ><a href="000-introduction.html#Overview_4" >Who Uses Xtext?</a></li>
-			<li id="000-introduction.html#Overview_5" ><a href="000-introduction.html#Overview_5" >Who is Behind Xtext?</a></li>
-			<li id="000-introduction.html#DSL" ><a href="000-introduction.html#DSL" >What is a Domain-Specific Language</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">The Grammar Language</div>
-			<ul style="display: none;" id="subToc_020-grammar-language.html">
-			<li id="020-grammar-language.html#statemachine" ><a href="020-grammar-language.html#statemachine" >A First Example</a></li>
-			<li id="020-grammar-language.html#syntax" ><a href="020-grammar-language.html#syntax" >The Syntax</a></li>
-			<li id="020-grammar-language.html#metamodelInference" ><a href="020-grammar-language.html#metamodelInference" >Ecore Model Inference</a></li>
-			<li id="020-grammar-language.html#grammarMixins" ><a href="020-grammar-language.html#grammarMixins" >Grammar Mixins</a></li>
-			<li id="020-grammar-language.html#grammarLanguage_6" ><a href="020-grammar-language.html#grammarLanguage_6" >Common Terminals</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Configuration</div>
-			<ul style="display: none;" id="subToc_030-generator.html">
-			<li id="030-generator.html#generator" ><a href="030-generator.html#generator" >The Language Generator</a></li>
-			<li id="040-dependency-injection.html" ><a href="040-dependency-injection.html" >Dependency Injection in Xtext with Google Guice</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Runtime Concepts</div>
-			<ul style="display: none;" id="subToc_050-heading-runtime.html">
-			<li id="050-heading-runtime.html#runtimeSetup" ><a href="050-heading-runtime.html#runtimeSetup" >Runtime Setup (ISetup)</a></li>
-			<li id="050-heading-runtime.html#equinoxSetup" ><a href="050-heading-runtime.html#equinoxSetup" >Setup within Eclipse-Equinox (OSGi)</a></li>
-			<li id="050-heading-runtime.html#runtime_concepts_4" ><a href="050-heading-runtime.html#runtime_concepts_4" >Logging</a></li>
-			<li id="060-validation.html" ><a href="060-validation.html" >Validation</a></li>
-			<li id="070-linking.html" ><a href="070-linking.html" >Linking</a></li>
-			<li id="080-scoping.html" ><a href="080-scoping.html" >Scoping</a></li>
-			<li id="090-valueconverter.html" ><a href="090-valueconverter.html" >Value Converter</a></li>
-			<li id="100-serialization.html" ><a href="100-serialization.html" >Serialization</a></li>
-			<li id="105-formatting.html" ><a href="105-formatting.html" >Formatting (Pretty Printing)</a></li>
-			<li id="110-fragmentprovider.html" ><a href="110-fragmentprovider.html" >Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)</a></li>
-			<li id="115-encoding.html" ><a href="115-encoding.html" >Encoding in Xtext</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">MWE2</div>
-			<ul style="display: none;" id="subToc_118-mwe-in-depth.html">
-			<li id="118-mwe-in-depth.html#MWE2Exampe" ><a href="118-mwe-in-depth.html#MWE2Exampe" >Examples</a></li>
-			<li id="118-mwe-in-depth.html#MWE2LanguageReference" ><a href="118-mwe-in-depth.html#MWE2LanguageReference" >Language Reference</a></li>
-			<li id="118-mwe-in-depth.html#MWE2SyntaxReference" ><a href="118-mwe-in-depth.html#MWE2SyntaxReference" >Syntax Reference</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">IDE Concepts</div>
-			<ul style="display: none;" id="subToc_120-heading-UI.html">
-			<li id="140-labelprovider.html" ><a href="140-labelprovider.html" >Label Provider</a></li>
-			<li id="150-contentassist.html" ><a href="150-contentassist.html" >Content Assist</a></li>
-			<li id="155-quickfix.html" ><a href="155-quickfix.html" >Quick Fixes</a></li>
-			<li id="160-templates.html" ><a href="160-templates.html" >Template Proposals</a></li>
-			<li id="170-outline.html" ><a href="170-outline.html" >Outline View</a></li>
-			<li id="180-hyperlinking.html" ><a href="180-hyperlinking.html" >Hyperlinking</a></li>
-			<li id="195-highlighting.html" ><a href="195-highlighting.html" >Syntax Coloring</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Referring to Java Types</div>
-			<ul style="display: none;" id="subToc_199-jvmtypes.html">
-			<li id="199-jvmtypes.html#jvmtypes_3" ><a href="199-jvmtypes.html#jvmtypes_3" >How to Use Java Types</a></li>
-			<li id="199-jvmtypes.html#jvmtypes_4" ><a href="199-jvmtypes.html#jvmtypes_4" >Customization Points</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Integration with EMF and Other EMF Editors</div>
-			<ul style="display: none;" id="subToc_210-emf-integration.html">
-			<li id="210-emf-integration.html#model_metamodel" ><a href="210-emf-integration.html#model_metamodel" >Model, Ecore Model, and Ecore</a></li>
-			<li id="210-emf-integration.html#emf_codegen" ><a href="210-emf-integration.html#emf_codegen" >EMF Code Generation</a></li>
-			<li id="210-emf-integration.html#xtext_resource" ><a href="210-emf-integration.html#xtext_resource" >XtextResource Implementation</a></li>
-			<li id="210-emf-integration.html#gmf_integration" ><a href="210-emf-integration.html#gmf_integration" >Integration with GMF Editors</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Migrating from Xtext 1.0.x to 2.0</div>
-			<ul style="display: none;" id="subToc_213-migrating-from-1.0.html">
-			<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_4" ><a href="213-migrating-from-1.0.html#migrating_from_1_0_x_4" >Take the Shortcut</a></li>
-			<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_5" ><a href="213-migrating-from-1.0.html#migrating_from_1_0_x_5" >Migrating Step By Step</a></li>
-			<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_6" ><a href="213-migrating-from-1.0.html#migrating_from_1_0_x_6" >Now go for then new features</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Migrating from Xtext 0.7.x to 1.0</div>
-			<ul style="display: none;" id="subToc_215-migrating-from-0.7.html">
-			<li id="215-migrating-from-0.7.html#migrating_from_0_7_2" ><a href="215-migrating-from-0.7.html#migrating_from_0_7_2" >Migrating Step By Step</a></li>
-			</ul>
-			</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="005-installation.php">Installation</a></div>
+		<ul style="display: none;" id="subToc_005-installation.html">
+		<li id="005-installation.html#InstallDistro" ><a href="005-installation.php#InstallDistro" >Install Pre-Configured Eclipse With Xtext</a></li>
+		<li id="005-installation.html#InstallXtext" ><a href="005-installation.php#InstallXtext" >Install Xtext From Update Site</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="010-xtext-in-5-minutes.php">5 Minutes Tutorial</a></div>
+		<ul style="display: none;" id="subToc_010-xtext-in-5-minutes.html">
+		<li id="010-xtext-in-5-minutes.html#NewProject" ><a href="010-xtext-in-5-minutes.php#NewProject" >Creating A New Xtext Project</a></li>
+		<li id="010-xtext-in-5-minutes.html#RunWorkflow" ><a href="010-xtext-in-5-minutes.php#RunWorkflow" >Generating The Language Infrastructure</a></li>
+		<li id="010-xtext-in-5-minutes.html#TestingTheEditor" ><a href="010-xtext-in-5-minutes.php#TestingTheEditor" >Try The Editor</a></li>
+		<li id="010-xtext-in-5-minutes.html#Conclusion" ><a href="010-xtext-in-5-minutes.php#Conclusion" >Conclusion</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="020-domainmodel-step-by-step.php">15 Minutes Tutorial</a></div>
+		<ul style="display: none;" id="subToc_020-domainmodel-step-by-step.html">
+		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_4" >Create A New Xtext Project</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_5" >Write Your Own Grammar</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_6" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_6" >Generate Language Artifacts</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_7" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_7" >Run the Generated IDE Plug-in</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_8" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_8" >Second Iteration : Adding Packages and Imports</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="030-tutorial-next-steps.php">15 Minutes Tutorial - Extended</a></div>
+		<ul style="display: none;" id="subToc_030-tutorial-next-steps.html">
+		<li id="040-first-code-generator.html" ><a href="040-first-code-generator.php" >Writing a Code Generator With Xtend</a></li>
+		<li id="060-unit-tests.html" ><a href="060-unit-tests.php" >Unit Testing the Language</a></li>
+		<li id="050-validation.html" ><a href="050-validation.php" >Creating Custom Validation Rules</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="000-introduction.php">Overview</a></div>
+		<ul style="display: none;" id="subToc_000-introduction.html">
+		<li id="000-introduction.html#Overview_1" ><a href="000-introduction.php#Overview_1" >What is Xtext?</a></li>
+		<li id="000-introduction.html#Overview_2" ><a href="000-introduction.php#Overview_2" >How Does It Work?</a></li>
+		<li id="000-introduction.html#Overview_3" ><a href="000-introduction.php#Overview_3" >Xtext is Highly Configurable</a></li>
+		<li id="000-introduction.html#Overview_4" ><a href="000-introduction.php#Overview_4" >Who Uses Xtext?</a></li>
+		<li id="000-introduction.html#Overview_5" ><a href="000-introduction.php#Overview_5" >Who is Behind Xtext?</a></li>
+		<li id="000-introduction.html#DSL" ><a href="000-introduction.php#DSL" >What is a Domain-Specific Language</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="020-grammar-language.php">The Grammar Language</a></div>
+		<ul style="display: none;" id="subToc_020-grammar-language.html">
+		<li id="020-grammar-language.html#statemachine" ><a href="020-grammar-language.php#statemachine" >A First Example</a></li>
+		<li id="020-grammar-language.html#syntax" ><a href="020-grammar-language.php#syntax" >The Syntax</a></li>
+		<li id="020-grammar-language.html#metamodelInference" ><a href="020-grammar-language.php#metamodelInference" >Ecore Model Inference</a></li>
+		<li id="020-grammar-language.html#grammarMixins" ><a href="020-grammar-language.php#grammarMixins" >Grammar Mixins</a></li>
+		<li id="020-grammar-language.html#grammarLanguage_6" ><a href="020-grammar-language.php#grammarLanguage_6" >Common Terminals</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="030-generator.php">Configuration</a></div>
+		<ul style="display: none;" id="subToc_030-generator.html">
+		<li id="030-generator.html#generator" ><a href="030-generator.php#generator" >The Language Generator</a></li>
+		<li id="040-dependency-injection.html" ><a href="040-dependency-injection.php" >Dependency Injection in Xtext with Google Guice</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="050-heading-runtime.php">Runtime Concepts</a></div>
+		<ul style="display: none;" id="subToc_050-heading-runtime.html">
+		<li id="050-heading-runtime.html#runtimeSetup" ><a href="050-heading-runtime.php#runtimeSetup" >Runtime Setup (ISetup)</a></li>
+		<li id="050-heading-runtime.html#equinoxSetup" ><a href="050-heading-runtime.php#equinoxSetup" >Setup within Eclipse-Equinox (OSGi)</a></li>
+		<li id="050-heading-runtime.html#runtime_concepts_4" ><a href="050-heading-runtime.php#runtime_concepts_4" >Logging</a></li>
+		<li id="060-validation.html" ><a href="060-validation.php" >Validation</a></li>
+		<li id="070-linking.html" ><a href="070-linking.php" >Linking</a></li>
+		<li id="080-scoping.html" ><a href="080-scoping.php" >Scoping</a></li>
+		<li id="090-valueconverter.html" ><a href="090-valueconverter.php" >Value Converter</a></li>
+		<li id="100-serialization.html" ><a href="100-serialization.php" >Serialization</a></li>
+		<li id="105-formatting.html" ><a href="105-formatting.php" >Formatting (Pretty Printing)</a></li>
+		<li id="110-fragmentprovider.html" ><a href="110-fragmentprovider.php" >Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)</a></li>
+		<li id="115-encoding.html" ><a href="115-encoding.php" >Encoding in Xtext</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="118-mwe-in-depth.php">MWE2</a></div>
+		<ul style="display: none;" id="subToc_118-mwe-in-depth.html">
+		<li id="118-mwe-in-depth.html#MWE2Exampe" ><a href="118-mwe-in-depth.php#MWE2Exampe" >Examples</a></li>
+		<li id="118-mwe-in-depth.html#MWE2LanguageReference" ><a href="118-mwe-in-depth.php#MWE2LanguageReference" >Language Reference</a></li>
+		<li id="118-mwe-in-depth.html#MWE2SyntaxReference" ><a href="118-mwe-in-depth.php#MWE2SyntaxReference" >Syntax Reference</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="120-heading-UI.php">IDE Concepts</a></div>
+		<ul style="display: none;" id="subToc_120-heading-UI.html">
+		<li id="140-labelprovider.html" ><a href="140-labelprovider.php" >Label Provider</a></li>
+		<li id="150-contentassist.html" ><a href="150-contentassist.php" >Content Assist</a></li>
+		<li id="155-quickfix.html" ><a href="155-quickfix.php" >Quick Fixes</a></li>
+		<li id="160-templates.html" ><a href="160-templates.php" >Template Proposals</a></li>
+		<li id="170-outline.html" ><a href="170-outline.php" >Outline View</a></li>
+		<li id="180-hyperlinking.html" ><a href="180-hyperlinking.php" >Hyperlinking</a></li>
+		<li id="195-highlighting.html" ><a href="195-highlighting.php" >Syntax Coloring</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="199-jvmtypes.php">Referring to Java Types</a></div>
+		<ul style="display: none;" id="subToc_199-jvmtypes.html">
+		<li id="199-jvmtypes.html#jvmtypes_3" ><a href="199-jvmtypes.php#jvmtypes_3" >How to Use Java Types</a></li>
+		<li id="199-jvmtypes.html#jvmtypes_4" ><a href="199-jvmtypes.php#jvmtypes_4" >Customization Points</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="210-emf-integration.php">Integration with EMF and Other EMF Editors</a></div>
+		<ul style="display: none;" id="subToc_210-emf-integration.html">
+		<li id="210-emf-integration.html#model_metamodel" ><a href="210-emf-integration.php#model_metamodel" >Model, Ecore Model, and Ecore</a></li>
+		<li id="210-emf-integration.html#emf_codegen" ><a href="210-emf-integration.php#emf_codegen" >EMF Code Generation</a></li>
+		<li id="210-emf-integration.html#xtext_resource" ><a href="210-emf-integration.php#xtext_resource" >XtextResource Implementation</a></li>
+		<li id="210-emf-integration.html#gmf_integration" ><a href="210-emf-integration.php#gmf_integration" >Integration with GMF Editors</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="213-migrating-from-1.0.php">Migrating from Xtext 1.0.x to 2.0</a></div>
+		<ul style="display: none;" id="subToc_213-migrating-from-1.0.html">
+		<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_4" ><a href="213-migrating-from-1.0.php#migrating_from_1_0_x_4" >Take the Shortcut</a></li>
+		<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_5" ><a href="213-migrating-from-1.0.php#migrating_from_1_0_x_5" >Migrating Step By Step</a></li>
+		<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_6" ><a href="213-migrating-from-1.0.php#migrating_from_1_0_x_6" >Now go for then new features</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="215-migrating-from-0.7.php">Migrating from Xtext 0.7.x to 1.0</a></div>
+		<ul style="display: none;" id="subToc_215-migrating-from-0.7.html">
+		<li id="215-migrating-from-0.7.html#migrating_from_0_7_2" ><a href="215-migrating-from-0.7.php#migrating_from_0_7_2" >Migrating Step By Step</a></li>
+		</ul>
+		</li>
 		</ul>
 	</div>
 	<div id="midcolumn">
@@ -225,8 +153,8 @@
 		<h1>Dependency Injection in Xtext with Google Guice</h1>
 			<div class="toc">
 			  <ul>
-			    <li><a href="040-dependency-injection.html#guicemodules" >The Module API</a></li>
-			    <li><a href="040-dependency-injection.html#dependencyInjection_9" >Obtaining an Injector</a></li>
+			    <li><a href="040-dependency-injection.php#guicemodules" >The Module API</a></li>
+			    <li><a href="040-dependency-injection.php#dependencyInjection_9" >Obtaining an Injector</a></li>
 			  </ul>
 			</div>
 		<p>
@@ -236,24 +164,24 @@
 		</p>
 		<p>
 		For instance when some code wants to use a scope provider, it just declares a field (or method or 
-		constructor) and adds the <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Inject.html" title="View JavaDoc"><abbr title="com.google.inject.Inject" >@Inject</abbr></a> annotation: 
+		constructor) and adds the <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Inject.html" title="com.google.inject.Inject">@Inject</abbr></a> annotation: 
 		</p>
 		<p>
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyLanguageLinker&nbsp;<span class="keyword">extends</span>&nbsp;Linker&nbsp;{</br>
-		</br>
-		&nbsp;&nbsp;@Inject</br>
-		&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;IScopeProvider&nbsp;scopeProvider;</br>
-		</br>
+		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyLanguageLinker&nbsp;<span class="keyword">extends</span>&nbsp;Linker&nbsp;{<br/>
+		<br/>
+		&nbsp;&nbsp;@Inject<br/>
+		&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;IScopeProvider&nbsp;scopeProvider;<br/>
+		<br/>
 		}
 		</p>
 		</div>
 		</div>
 		</p>
 		<p>
-		It is not the duty of the client code to care about where the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> 
+		It is not the duty of the client code to care about where the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" title="org.eclipse.xtext.scoping.IScopeProvider">IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> 
 		comes from or how it is created. When above's class is instantiated, Guice sees that it requires an instance of 
 		IScopeProvider and assigns it to the specified field or method parameter. This of course only works,
 		if the object itself is created by Guice. In Xtext almost every instance is created that way 
@@ -261,7 +189,7 @@
 		</p>
 		<p>
 		Guice of course needs to know how to instantiate real objects for declared dependencies. This is done 
-		in so called <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Module.html" title="View JavaDoc"><abbr title="com.google.inject.Module" >Modules</abbr></a>. A <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Module.html" title="View JavaDoc"><abbr title="com.google.inject.Module" >Module</abbr></a> defines a set of 
+		in so called <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Module.html" title="com.google.inject.Module">Modules</abbr></a>. A <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Module.html" title="com.google.inject.Module">Module</abbr></a> defines a set of 
 		mappings from types to either existing instances, instance providers or concrete classes. Modules are
 		implemented in Java. Here's an example:
 		</p>
@@ -269,23 +197,23 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslRuntimeModule&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractMyDslRuntimeModule&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;@Override</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(Binder&nbsp;binder)&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>.configure(binder);</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;binder</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.bind(IScopeProvider.<span class="keyword">class</span>)</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to(MyConcreteScopeProvider.<span class="keyword">class</span>);</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslRuntimeModule&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractMyDslRuntimeModule&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;@Override<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(Binder&nbsp;binder)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>.configure(binder);<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;binder<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.bind(IScopeProvider.<span class="keyword">class</span>)<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to(MyConcreteScopeProvider.<span class="keyword">class</span>);<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 		}
 		</p>
 		</div>
 		</div>
 		</p>
 		<p>
-		With plain Guice modules one implements a method called configure and gets a <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Binder.html" title="View JavaDoc"><abbr title="com.google.inject.Binder" >Binder</abbr></a> 
+		With plain Guice modules one implements a method called configure and gets a <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Binder.html" title="com.google.inject.Binder">Binder</abbr></a> 
 		passed in. That binder provides a fluent API to define the mentioned mappings. This was just a very 
 		brief and simplified description. We highly recommend to have a look at 
 		<a href="http://code.google.com/p/google-guice/" >the website Google Guice</a> to learn more.  
@@ -307,8 +235,8 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IScopeProvider&gt;&nbsp;bindIScopeProvider()&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyConcreteScopeProvider.<span class="keyword">class</span>;</br>
+		<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IScopeProvider&gt;&nbsp;bindIScopeProvider()&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyConcreteScopeProvider.<span class="keyword">class</span>;<br/>
 		}
 		</p>
 		</div>
@@ -316,9 +244,9 @@
 		</p>
 		<p>
 		which would do the same as the code snippet above. It simply declares a binding from 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> to <em>MyConcreteScopeProvider</em>. That binding will make 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" title="org.eclipse.xtext.scoping.IScopeProvider">IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> to <em>MyConcreteScopeProvider</em>. That binding will make 
 		Guice instantiate and inject a new instance of <em>MyConcreteScopeProvider</em> whenever a dependency to 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> is declared.
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" title="org.eclipse.xtext.scoping.IScopeProvider">IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> is declared.
 		</p>
 		<p>
 		Having a method per binding allows to deactivate individual bindings by overriding the corresponding 
@@ -327,18 +255,18 @@
 		</p>
 		<p>
 		There are two additional kinds of binding-methods supported. The first one allows to configure a provider. 
-		A <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Provider.html" title="View JavaDoc"><abbr title="com.google.inject.Provider" >Provider</abbr></a> is an interface with just one method : 
+		A <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Provider.html" title="com.google.inject.Provider">Provider</abbr></a> is an interface with just one method : 
 		</p>
 		<p>
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">public</span>&nbsp;<span class="keyword">interface</span>&nbsp;Provider&lt;T&gt;&nbsp;{</br>
-		</br>
-		&nbsp;&nbsp;<span class="comment">/**</br>
-		&nbsp;&nbsp;&nbsp;*&nbsp;Provides&nbsp;an&nbsp;instance&nbsp;of&nbsp;{@code&nbsp;T}.&nbsp;Must&nbsp;never&nbsp;return&nbsp;{@code&nbsp;null}.</br>
-		&nbsp;&nbsp;&nbsp;*/</span></br>
-		&nbsp;&nbsp;T&nbsp;get();</br>
+		<span class="keyword">public</span>&nbsp;<span class="keyword">interface</span>&nbsp;Provider&lt;T&gt;&nbsp;{<br/>
+		<br/>
+		&nbsp;&nbsp;<span class="comment">/**<br/>
+		&nbsp;&nbsp;&nbsp;*&nbsp;Provides&nbsp;an&nbsp;instance&nbsp;of&nbsp;{@code&nbsp;T}.&nbsp;Must&nbsp;never&nbsp;return&nbsp;{@code&nbsp;null}.<br/>
+		&nbsp;&nbsp;&nbsp;*/</span><br/>
+		&nbsp;&nbsp;T&nbsp;get();<br/>
 		}
 		</p>
 		</div>
@@ -354,21 +282,21 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;Provider&lt;IScopeProvider&gt;&gt;&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;provideIScopeProvider()&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyConcreteScopeProviderFactory.<span class="keyword">class</span>;</br>
+		<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;Provider&lt;IScopeProvider&gt;&gt;&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;provideIScopeProvider()&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyConcreteScopeProviderFactory.<span class="keyword">class</span>;<br/>
 		}
 		</p>
 		</div>
 		</div>
 		</p>
 		<p>
-		Note: Please forgive us the overuse of the term <em>provider</em>. The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> 
-		is not a Guice <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Provider.html" title="View JavaDoc"><abbr title="com.google.inject.Provider" >Provider</abbr></a>.
+		Note: Please forgive us the overuse of the term <em>provider</em>. The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" title="org.eclipse.xtext.scoping.IScopeProvider">IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> 
+		is not a Guice <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Provider.html" title="com.google.inject.Provider">Provider</abbr></a>.
 		</p>
 		<p>
 		That binding tells Guice to instantiate <em>MyConcreteScopeProviderFactory</em> and invoke get() in order to 
-		obtain an instance of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> for clients having declared a dependency
+		obtain an instance of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" title="org.eclipse.xtext.scoping.IScopeProvider">IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> for clients having declared a dependency
 		to that type. Both mentioned methods are allowed to return an instance instead of a type. This may be useful 
 		if some global state should be shared in the application:
 		</p>
@@ -376,8 +304,8 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">public</span>&nbsp;Provider&lt;IScopeProvider&gt;&nbsp;provideIScopeProvider()&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;MyConcreteScopeProviderFactory();</br>
+		<span class="keyword">public</span>&nbsp;Provider&lt;IScopeProvider&gt;&nbsp;provideIScopeProvider()&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;MyConcreteScopeProviderFactory();<br/>
 		}
 		</p>
 		</div>
@@ -390,8 +318,8 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">public</span>&nbsp;IScopeProvider&nbsp;bindIScopeProvider()&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;MyConcreteScopeProvider();</br>
+		<span class="keyword">public</span>&nbsp;IScopeProvider&nbsp;bindIScopeProvider()&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;MyConcreteScopeProvider();<br/>
 		}
 		</p>
 		</div>
@@ -402,15 +330,15 @@
 		</p>
 		<p>
 		The last binding method provided by Xtext allows to do anything you can do with Guice's binding API, since
-		it allows you to use the <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Binder.html" title="View JavaDoc"><abbr title="com.google.inject.Binder" >Binder</abbr></a> directly. If your method's name starts with the
-		name 'configure', has a return type <span class="inlinecode"><span class="keyword">void</span></span> and accepts one argument of type <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Binder.html" title="View JavaDoc"><abbr title="com.google.inject.Binder" >Binder</abbr></a>:
+		it allows you to use the <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Binder.html" title="com.google.inject.Binder">Binder</abbr></a> directly. If your method's name starts with the
+		name 'configure', has a return type <span class="inlinecode"><span class="keyword">void</span></span> and accepts one argument of type <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Binder.html" title="com.google.inject.Binder">Binder</abbr></a>:
 		</p>
 		<p>
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configureIScopeProvider(Binder&nbsp;binder)&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;binder.bind(IScopeProvider.<span class="keyword">class</span>).to(MyConcreteScopeProvider.<span class="keyword">class</span>);</br>
+		<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configureIScopeProvider(Binder&nbsp;binder)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;binder.bind(IScopeProvider.<span class="keyword">class</span>).to(MyConcreteScopeProvider.<span class="keyword">class</span>);<br/>
 		}
 		</p>
 		</div>
@@ -420,7 +348,7 @@
 		<h2>Obtaining an Injector</h2>
 		<p>
 		In every application wired up with Guice there is usually one point where you initialize an 
-		<a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html" title="View JavaDoc"><abbr title="com.google.inject.Injector" >Injector</abbr></a> using the modules declared. That injector is used to create the root 
+		<a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html" title="com.google.inject.Injector">Injector</abbr></a> using the modules declared. That injector is used to create the root 
 		instance of the whole application. In plain Java environments this is something that's done in the main 
 		method. It could look like this:
 		</p>
@@ -428,12 +356,12 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;Injector&nbsp;injector&nbsp;=&nbsp;Guice.createInjector(</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;MyDslRuntimeModule());</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;MyApplication&nbsp;application&nbsp;=&nbsp;injector.getInstance(</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyApplication.<span class="keyword">class</span>);</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;application.run();</br>
+		<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">void</span>&nbsp;main(String[]&nbsp;args)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;Injector&nbsp;injector&nbsp;=&nbsp;Guice.createInjector(<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;MyDslRuntimeModule());<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;MyApplication&nbsp;application&nbsp;=&nbsp;injector.getInstance(<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyApplication.<span class="keyword">class</span>);<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;application.run();<br/>
 		}
 		</p>
 		</div>
@@ -441,7 +369,7 @@
 		</p>
 		<p>
 		In Xtext, you should never instantiate the injector of your language yourself. The sections
-		<a href="050-heading-runtime.html#runtimeSetup" title="Go to &quot;Runtime Setup (ISetup)&quot;">Runtime Setup</a> and <a href="050-heading-runtime.html#equinoxSetup" title="Go to &quot;Setup within Eclipse-Equinox (OSGi)&quot;">Equinox Setup</a> explain how to access it in 
+		<a href="050-heading-runtime.php#runtimeSetup" title="Go to &quot;Runtime Setup (ISetup)&quot;">Runtime Setup</a> and <a href="050-heading-runtime.php#equinoxSetup" title="Go to &quot;Setup within Eclipse-Equinox (OSGi)&quot;">Equinox Setup</a> explain how to access it in 
 		different scenarios. 
 		</p>
 		<p>
@@ -451,20 +379,3 @@
 		</p>
 	</div>
 	<br style="clear:both;height:1em;">
-</div>
-<div id="clearFooter"></div>
-<div id="footer">
-<ul id="footernav">
-	<li><a href="/">Home</a></li>
-
-	<li><a href="/legal/privacy.php">Privacy Policy</a></li>
-	<li><a href="/legal/termsofuse.php">Terms of Use</a></li>
-	<li><a href="/legal/copyright.php">Copyright Agent</a></li>
-	<li><a href="/legal/">Legal</a></li>
-	<li><a href="/org/foundation/contact.php">Contact Us</a></li>
-</ul>
-
-<span id="copyright">Copyright &copy; 2011 The Eclipse Foundation. All Rights Reserved.</span>
-</div>
-</body>
-</html>

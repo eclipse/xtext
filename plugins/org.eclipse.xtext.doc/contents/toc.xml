@@ -16,7 +16,7 @@
 		<topic href="contents/010-xtext-in-5-minutes.html#Conclusion" label="Conclusion" >
 		</topic>
 	</topic>
-	<topic href="contents/020-domainmodel-step-by-step.html" label="30 Minutes Tutorial" >
+	<topic href="contents/020-domainmodel-step-by-step.html" label="15 Minutes Tutorial" >
 		<topic href="contents/020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" label="Create A New Xtext Project" >
 		</topic>
 		<topic href="contents/020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" label="Write Your Own Grammar" >
@@ -28,7 +28,7 @@
 		<topic href="contents/020-domainmodel-step-by-step.html#DomainmodelWalkThrough_8" label="Second Iteration : Adding Packages and Imports" >
 		</topic>
 	</topic>
-	<topic href="contents/030-tutorial-next-steps.html" label="30 Minutes Tutorial - Extended" >
+	<topic href="contents/030-tutorial-next-steps.html" label="15 Minutes Tutorial - Extended" >
 		<topic href="contents/040-first-code-generator.html" label="Writing a Code Generator With Xtend" >
 		</topic>
 		<topic href="contents/060-unit-tests.html" label="Unit Testing the Language" >

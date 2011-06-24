@@ -1,4 +1,4 @@
-chapter:DomainmodelWalkThrough[30 Minutes Tutorial]
+chapter:DomainmodelWalkThrough[15 Minutes Tutorial]
 
 In this tutorial we will implement a small domain-specific language to model entities and properties
 similar to what you may know from Rails, Grails or Spring Roo. The syntax is very suggestive :
@@ -292,8 +292,8 @@ ol[
 		;
 		
 		AbstractElement:
-  		  PackageDeclaration | Type
-  		;
+		  PackageDeclaration | Type
+		;
 		]
 	]
 	item[
@@ -309,10 +309,10 @@ ol[
 		;
 		
 		AbstractElement:
-  		  PackageDeclaration | Type | Import
-  		;
-  		
-  		QualifiedName:
+		  PackageDeclaration | Type | Import
+		;
+		
+		QualifiedName:
 		  ID ('.' ID)*
 		;
 		]

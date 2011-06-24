@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
-<title>30 Minutes Tutorial</title>
+<title>15 Minutes Tutorial</title>
 
 <link href="book.css" rel="stylesheet" type="text/css">
 <link href="code.css" rel="stylesheet" type="text/css">
@@ -9,7 +9,7 @@
 </head>
 <body>
 <a name="DomainmodelWalkThrough"></a>
-<h1>30 Minutes Tutorial</h1>
+<h1>15 Minutes Tutorial</h1>
 <p>
 In this tutorial we will implement a small domain-specific language to model entities and properties
 similar to what you may know from Rails, Grails or Spring Roo. The syntax is very suggestive :
@@ -18,26 +18,26 @@ similar to what you may know from Rails, Grails or Spring Roo. The syntax is ver
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">datatype</span>&nbsp;String</br>
-</br>
-<span class="keyword">entity</span>&nbsp;Blog&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String</br>
-&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;posts:&nbsp;Post</br>
-}</br>
-</br>
-<span class="keyword">entity</span>&nbsp;HasAuthor&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;author:&nbsp;String</br>
-}</br>
-</br>
-<span class="keyword">entity</span>&nbsp;Post&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String</br>
-&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String</br>
-&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;comments:&nbsp;Comment</br>
-}</br>
-</br>
-<span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String</br>
-}</br>
+<span class="keyword">datatype</span>&nbsp;String<br/>
+<br/>
+<span class="keyword">entity</span>&nbsp;Blog&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;posts:&nbsp;Post<br/>
+}<br/>
+<br/>
+<span class="keyword">entity</span>&nbsp;HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;author:&nbsp;String<br/>
+}<br/>
+<br/>
+<span class="keyword">entity</span>&nbsp;Post&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;comments:&nbsp;Comment<br/>
+}<br/>
+<br/>
+<span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -145,16 +145,16 @@ The wizard will automatically open the grammar file
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.Domainmodel&nbsp;<span class="keyword">with</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals</br>
-</br>
-<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span></br>
-</br>
-Model:</br>
-&nbsp;&nbsp;&nbsp;&nbsp;greetings+=Greeting*;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-Greeting:</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;Hello&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;!&apos;</span>;</br>
+<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.Domainmodel&nbsp;<span class="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals<br/>
+<br/>
+<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span><br/>
+<br/>
+Model:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;greetings+=Greeting*;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+Greeting:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;Hello&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;!&apos;</span>;<br/>
 </p>
 </div>
 </div>
@@ -166,32 +166,32 @@ Let&apos;s now just replace that grammar definition with the one for our domain 
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.DomainModel&nbsp;<span class="keyword">with</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals</br>
-</br>
-<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span></br>
-</br>
-Domainmodel&nbsp;:</br>
-&nbsp;&nbsp;elements&nbsp;+=&nbsp;Type*</br>
-;</br>
-&nbsp;&nbsp;</br>
-Type:</br>
-&nbsp;&nbsp;DataType&nbsp;|&nbsp;Entity</br>
-;</br>
-&nbsp;&nbsp;</br>
-DataType:</br>
-&nbsp;&nbsp;<span class="string">&apos;datatype&apos;</span>&nbsp;name&nbsp;=&nbsp;ID</br>
-;</br>
-&nbsp;</br>
-Entity:</br>
-&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType&nbsp;=&nbsp;[Entity])?&nbsp;<span class="string">&apos;{&apos;</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;features&nbsp;+=&nbsp;Feature*</br>
-&nbsp;&nbsp;<span class="string">&apos;}&apos;</span></br>
-;</br>
-&nbsp;</br>
-Feature:</br>
-&nbsp;&nbsp;many?=<span class="string">&apos;many&apos;</span>?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type]</br>
-;</br>
+<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.DomainModel&nbsp;<span class="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals<br/>
+<br/>
+<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span><br/>
+<br/>
+Domainmodel&nbsp;:<br/>
+&nbsp;&nbsp;elements&nbsp;+=&nbsp;Type*<br/>
+;<br/>
+&nbsp;&nbsp;<br/>
+Type:<br/>
+&nbsp;&nbsp;DataType&nbsp;|&nbsp;Entity<br/>
+;<br/>
+&nbsp;&nbsp;<br/>
+DataType:<br/>
+&nbsp;&nbsp;<span class="string">&apos;datatype&apos;</span>&nbsp;name&nbsp;=&nbsp;ID<br/>
+;<br/>
+&nbsp;<br/>
+Entity:<br/>
+&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType&nbsp;=&nbsp;[Entity])?&nbsp;<span class="string">&apos;{&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;features&nbsp;+=&nbsp;Feature*<br/>
+&nbsp;&nbsp;<span class="string">&apos;}&apos;</span><br/>
+;<br/>
+&nbsp;<br/>
+Feature:<br/>
+&nbsp;&nbsp;many?=<span class="string">&apos;many&apos;</span>?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type]<br/>
+;<br/>
 </p>
 </div>
 </div>
@@ -207,9 +207,9 @@ Let&apos;s have a more detailed look at what the different grammar rules mean:
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		Domainmodel&nbsp;:</br>
-		&nbsp;&nbsp;elements&nbsp;+=&nbsp;Type*</br>
-		;</br>
+		Domainmodel&nbsp;:<br/>
+		&nbsp;&nbsp;elements&nbsp;+=&nbsp;Type*<br/>
+		;<br/>
 		</p>
 		</div>
 		</div>
@@ -225,9 +225,9 @@ Let&apos;s have a more detailed look at what the different grammar rules mean:
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		Type:</br>
-		&nbsp;&nbsp;DataType&nbsp;|&nbsp;Entity</br>
-		;</br>
+		Type:<br/>
+		&nbsp;&nbsp;DataType&nbsp;|&nbsp;Entity<br/>
+		;<br/>
 		</p>
 		</div>
 		</div>
@@ -244,9 +244,9 @@ Let&apos;s have a more detailed look at what the different grammar rules mean:
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		DataType:</br>
-		&nbsp;&nbsp;<span class="string">&apos;datatype&apos;</span>&nbsp;name&nbsp;=&nbsp;ID</br>
-		;</br>
+		DataType:<br/>
+		&nbsp;&nbsp;<span class="string">&apos;datatype&apos;</span>&nbsp;name&nbsp;=&nbsp;ID<br/>
+		;<br/>
 		</p>
 		</div>
 		</div>
@@ -259,11 +259,11 @@ Let&apos;s have a more detailed look at what the different grammar rules mean:
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		Entity&nbsp;:</br>
-		&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType&nbsp;=&nbsp;[Entity])?&nbsp;<span class="string">&apos;{&apos;</span></br>
-		&nbsp;&nbsp;&nbsp;&nbsp;features&nbsp;+=&nbsp;Feature*</br>
-		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span></br>
-		;</br>
+		Entity&nbsp;:<br/>
+		&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType&nbsp;=&nbsp;[Entity])?&nbsp;<span class="string">&apos;{&apos;</span><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;features&nbsp;+=&nbsp;Feature*<br/>
+		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span><br/>
+		;<br/>
 		</p>
 		</div>
 		</div>
@@ -282,9 +282,9 @@ Let&apos;s have a more detailed look at what the different grammar rules mean:
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		Feature:</br>
-		&nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type]&nbsp;</br>
-		;</br>
+		Feature:<br/>
+		&nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type]&nbsp;<br/>
+		;<br/>
 		</p>
 		</div>
 		</div>
@@ -336,7 +336,7 @@ create a new Eclipse Application. Select the node <em>Eclipse Application</em> i
 one. Choose a meaningful name and go to the tab <em>Arguments</em> where you add the VM arguments <div class="literallayout">
 <div class="incode">
 <p class="code">
--XX:MaxPermSize=128m</br>
+-XX:MaxPermSize=128m<br/>
 -Xmx512m
 </p>
 </div>
@@ -384,9 +384,9 @@ In the end we want to be able to split the previously used model into to distinc
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="comment">//&nbsp;datatypes.dmodel</br>
-</span></br>
-<span class="keyword">datatype</span>&nbsp;String</br>
+<span class="comment">//&nbsp;datatypes.dmodel<br/>
+</span><br/>
+<span class="keyword">datatype</span>&nbsp;String<br/>
 </p>
 </div>
 </div>
@@ -395,14 +395,14 @@ In the end we want to be able to split the previously used model into to distinc
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="comment">//&nbsp;commons.dmodel</br>
-</span></br>
-<span class="keyword">package</span>&nbsp;my.company.common&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;HasAuthor&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author:&nbsp;String</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-}</br>
+<span class="comment">//&nbsp;commons.dmodel<br/>
+</span><br/>
+<span class="keyword">package</span>&nbsp;my.company.common&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -411,27 +411,27 @@ In the end we want to be able to split the previously used model into to distinc
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="comment">//&nbsp;blogs.dmodel</br>
-</span></br>
-<span class="keyword">package</span>&nbsp;my.company.blog&nbsp;{</br>
-&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;my.company.common.*</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Blog&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;posts:&nbsp;Post</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Post&nbsp;<span class="keyword">extends</span>&nbsp;my.company.common.HasAuthor&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;comments:&nbsp;Comment</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-}</br>
+<span class="comment">//&nbsp;blogs.dmodel<br/>
+</span><br/>
+<span class="keyword">package</span>&nbsp;my.company.blog&nbsp;{<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;my.company.common.*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Blog&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;posts:&nbsp;Post<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Post&nbsp;<span class="keyword">extends</span>&nbsp;my.company.common.HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;comments:&nbsp;Comment<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -450,13 +450,13 @@ Let&apos;s start enhancing the grammar.
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		Domainmodel:</br>
-		&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*</br>
-		;</br>
-		</br>
-		AbstractElement:</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Type</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;</br>
+		Domainmodel:<br/>
+		&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*<br/>
+		;<br/>
+		<br/>
+		AbstractElement:<br/>
+		&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Type<br/>
+		;<br/>
 		</p>
 		</div>
 		</div>
@@ -471,19 +471,19 @@ Let&apos;s start enhancing the grammar.
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		PackageDeclaration:</br>
-		&nbsp;&nbsp;<span class="string">&apos;package&apos;</span>&nbsp;name&nbsp;=&nbsp;QualifiedName&nbsp;<span class="string">&apos;{&apos;</span></br>
-		&nbsp;&nbsp;&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*</br>
-		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span></br>
-		;</br>
-		</br>
-		AbstractElement:</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Type&nbsp;|&nbsp;Import</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;QualifiedName:</br>
-		&nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*</br>
-		;</br>
+		PackageDeclaration:<br/>
+		&nbsp;&nbsp;<span class="string">&apos;package&apos;</span>&nbsp;name&nbsp;=&nbsp;QualifiedName&nbsp;<span class="string">&apos;{&apos;</span><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*<br/>
+		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span><br/>
+		;<br/>
+		<br/>
+		AbstractElement:<br/>
+		&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Type&nbsp;|&nbsp;Import<br/>
+		;<br/>
+		<br/>
+		QualifiedName:<br/>
+		&nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*<br/>
+		;<br/>
 		</p>
 		</div>
 		</div>
@@ -502,13 +502,13 @@ Let&apos;s start enhancing the grammar.
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		Import:</br>
-		&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importedNamespace&nbsp;=&nbsp;QualifiedNameWithWildcard</br>
-		;</br>
-		</br>
-		QualifiedNameWithWildcard:</br>
-		&nbsp;&nbsp;QualifiedName&nbsp;<span class="string">&apos;.*&apos;</span>?</br>
-		;</br>
+		Import:<br/>
+		&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importedNamespace&nbsp;=&nbsp;QualifiedNameWithWildcard<br/>
+		;<br/>
+		<br/>
+		QualifiedNameWithWildcard:<br/>
+		&nbsp;&nbsp;QualifiedName&nbsp;<span class="string">&apos;.*&apos;</span>?<br/>
+		;<br/>
 		</p>
 		</div>
 		</div>
@@ -525,17 +525,17 @@ Let&apos;s start enhancing the grammar.
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		Entity:</br>
-		&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType&nbsp;=&nbsp;[Entity&nbsp;|&nbsp;QualifiedName])?</br>
-		&nbsp;&nbsp;<span class="string">&apos;{&apos;</span></br>
-		&nbsp;&nbsp;&nbsp;&nbsp;(features&nbsp;+=&nbsp;Feature)*</br>
-		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span></br>
-		;</br>
-		&nbsp;</br>
-		Feature:</br>
-		&nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type&nbsp;|&nbsp;QualifiedName]</br>
-		;</br>
+		Entity:<br/>
+		&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType&nbsp;=&nbsp;[Entity&nbsp;|&nbsp;QualifiedName])?<br/>
+		&nbsp;&nbsp;<span class="string">&apos;{&apos;</span><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;(features&nbsp;+=&nbsp;Feature)*<br/>
+		&nbsp;&nbsp;<span class="string">&apos;}&apos;</span><br/>
+		;<br/>
+		&nbsp;<br/>
+		Feature:<br/>
+		&nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type&nbsp;|&nbsp;QualifiedName]<br/>
+		;<br/>
 		</p>
 		</div>
 		</div>
@@ -553,56 +553,56 @@ That&apos;s all for the grammar. It should now read as
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.Domainmodel&nbsp;<span class="keyword">with</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals</br>
-</br>
-<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span></br>
-</br>
-Domainmodel:</br>
-&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*</br>
-;</br>
-</br>
-PackageDeclaration:</br>
-&nbsp;&nbsp;<span class="string">&apos;package&apos;</span>&nbsp;name&nbsp;=&nbsp;QualifiedName&nbsp;<span class="string">&apos;{&apos;</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*</br>
-&nbsp;&nbsp;<span class="string">&apos;}&apos;</span></br>
-;</br>
-</br>
-AbstractElement:</br>
-&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Type&nbsp;|&nbsp;Import</br>
-;</br>
-</br>
-QualifiedName:</br>
-&nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*</br>
-;</br>
-</br>
-Import:</br>
-&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importedNamespace&nbsp;=&nbsp;QualifiedNameWithWildcard</br>
-;</br>
-&nbsp;&nbsp;</br>
-QualifiedNameWithWildcard:</br>
-&nbsp;&nbsp;QualifiedName&nbsp;<span class="string">&apos;.*&apos;</span>?</br>
-;</br>
-&nbsp;&nbsp;</br>
-Type:</br>
-&nbsp;&nbsp;DataType&nbsp;|&nbsp;Entity</br>
-;</br>
-&nbsp;&nbsp;</br>
-DataType:</br>
-&nbsp;&nbsp;<span class="string">&apos;datatype&apos;</span>&nbsp;name=ID</br>
-;</br>
-&nbsp;</br>
-Entity:</br>
-&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType&nbsp;=&nbsp;[Entity&nbsp;|&nbsp;QualifiedName])?</br>
-&nbsp;&nbsp;<span class="string">&apos;{&apos;</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;(features&nbsp;+=&nbsp;Feature)*</br>
-&nbsp;&nbsp;<span class="string">&apos;}&apos;</span></br>
-;</br>
-&nbsp;</br>
-Feature:</br>
-&nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type&nbsp;|&nbsp;QualifiedName]</br>
-;</br>
+<span class="keyword">grammar</span>&nbsp;org.example.domainmodel.Domainmodel&nbsp;<span class="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals<br/>
+<br/>
+<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.example.org/domainmodel/Domainmodel"</span><br/>
+<br/>
+Domainmodel:<br/>
+&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*<br/>
+;<br/>
+<br/>
+PackageDeclaration:<br/>
+&nbsp;&nbsp;<span class="string">&apos;package&apos;</span>&nbsp;name&nbsp;=&nbsp;QualifiedName&nbsp;<span class="string">&apos;{&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*<br/>
+&nbsp;&nbsp;<span class="string">&apos;}&apos;</span><br/>
+;<br/>
+<br/>
+AbstractElement:<br/>
+&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Type&nbsp;|&nbsp;Import<br/>
+;<br/>
+<br/>
+QualifiedName:<br/>
+&nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*<br/>
+;<br/>
+<br/>
+Import:<br/>
+&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importedNamespace&nbsp;=&nbsp;QualifiedNameWithWildcard<br/>
+;<br/>
+&nbsp;&nbsp;<br/>
+QualifiedNameWithWildcard:<br/>
+&nbsp;&nbsp;QualifiedName&nbsp;<span class="string">&apos;.*&apos;</span>?<br/>
+;<br/>
+&nbsp;&nbsp;<br/>
+Type:<br/>
+&nbsp;&nbsp;DataType&nbsp;|&nbsp;Entity<br/>
+;<br/>
+&nbsp;&nbsp;<br/>
+DataType:<br/>
+&nbsp;&nbsp;<span class="string">&apos;datatype&apos;</span>&nbsp;name=ID<br/>
+;<br/>
+&nbsp;<br/>
+Entity:<br/>
+&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType&nbsp;=&nbsp;[Entity&nbsp;|&nbsp;QualifiedName])?<br/>
+&nbsp;&nbsp;<span class="string">&apos;{&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(features&nbsp;+=&nbsp;Feature)*<br/>
+&nbsp;&nbsp;<span class="string">&apos;}&apos;</span><br/>
+;<br/>
+&nbsp;<br/>
+Feature:<br/>
+&nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type&nbsp;|&nbsp;QualifiedName]<br/>
+;<br/>
 </p>
 </div>
 </div>

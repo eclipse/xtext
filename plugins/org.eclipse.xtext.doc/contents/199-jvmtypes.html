@@ -37,7 +37,7 @@ Thanks to content assist this is easy to spot in the list of proposals.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/common/JavaVMTypes"</span>&nbsp;<span class="keyword">as</span>&nbsp;types</br>
+<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/common/JavaVMTypes"</span>&nbsp;<span class="keyword">as</span>&nbsp;types<br/>
 </p>
 </div>
 </div>
@@ -51,8 +51,8 @@ as one got already used to when dealing with references in Xtext.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Type:</br>
-&nbsp;&nbsp;<span class="string">&apos;type&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;mapped-to&apos;</span>&nbsp;javaType=[types::JvmType&nbsp;|&nbsp;FQN];</br>
+Type:<br/>
+&nbsp;&nbsp;<span class="string">&apos;type&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;mapped-to&apos;</span>&nbsp;javaType=[types::JvmType&nbsp;|&nbsp;FQN];<br/>
 </p>
 </div>
 </div>
@@ -68,11 +68,11 @@ the <em>genmodel</em> of the Java VM types.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-fragment&nbsp;=&nbsp;ecore.EcoreGeneratorFragment&nbsp;{</br>
-&nbsp;&nbsp;referencedGenModels=<span class="string">"classpath:/model/JavaVMTypes.genmodel"</span></br>
-}</br>
-</br>
-fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}</br>
+fragment&nbsp;=&nbsp;ecore.EcoreGeneratorFragment&nbsp;{<br/>
+&nbsp;&nbsp;referencedGenModels=<span class="string">"classpath:/model/JavaVMTypes.genmodel"</span><br/>
+}<br/>
+<br/>
+fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br/>
 </p>
 </div>
 </div>
@@ -85,7 +85,7 @@ like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">type</span>&nbsp;Date&nbsp;<span class="keyword">mapped-to</span>&nbsp;java.util.Date</br>
+<span class="keyword">type</span>&nbsp;Date&nbsp;<span class="keyword">mapped-to</span>&nbsp;java.util.Date<br/>
 </p>
 </div>
 </div>
@@ -123,19 +123,19 @@ to a smaller number of valid entries.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters;&nbsp;</br>
-</br>
-&nbsp;&nbsp;<span class="comment">//&nbsp;..</br>
-</span>&nbsp;&nbsp;proposalProvider.createSubTypeProposals(</br>
-&nbsp;&nbsp;&nbsp;&nbsp;superType,&nbsp;factory,&nbsp;context,</br>
-&nbsp;&nbsp;&nbsp;&nbsp;MyDslPackage.Literals.TYPE__MAPPED_TO,</br>
-&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.and(</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.not(</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.canInstantiate()</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.isPublic()</br>
-&nbsp;&nbsp;&nbsp;&nbsp;),&nbsp;acceptor);</br>
-&nbsp;</br>
+<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters;&nbsp;<br/>
+<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;..<br/>
+</span>&nbsp;&nbsp;proposalProvider.createSubTypeProposals(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;superType,&nbsp;factory,&nbsp;context,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;MyDslPackage.Literals.TYPE__MAPPED_TO,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.and(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.not(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.canInstantiate()<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.isPublic()<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;),&nbsp;acceptor);<br/>
+&nbsp;<br/>
 </p>
 </div>
 </div>

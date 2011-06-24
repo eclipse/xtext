@@ -137,8 +137,8 @@ your workflow
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-fragment&nbsp;=&nbsp;outline.TransformerFragment{}</br>
-fragment&nbsp;=&nbsp;outline.OutlineNodeAdapterFactoryFragment{}</br>
+fragment&nbsp;=&nbsp;outline.TransformerFragment{}<br/>
+fragment&nbsp;=&nbsp;outline.OutlineNodeAdapterFactoryFragment{}<br/>
 </p>
 </div>
 </div>
@@ -147,7 +147,7 @@ and add
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-fragment&nbsp;=&nbsp;outline.OutlineTreeProviderFragment&nbsp;{}</br>
+fragment&nbsp;=&nbsp;outline.OutlineTreeProviderFragment&nbsp;{}<br/>
 </p>
 </div>
 </div>
@@ -177,12 +177,12 @@ As a example the configure method could look like this one:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Override</br>
-<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(IEditStrategyAcceptor&nbsp;acceptor)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>.configure(acceptor);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;acceptor.accept(<span class="keyword">new</span>&nbsp;YourAutoEditStrategy(),</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IDocument.DEFAULT_CONTENT_TYPE);</br>
-}</br>
+@Override<br/>
+<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(IEditStrategyAcceptor&nbsp;acceptor)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>.configure(acceptor);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;acceptor.accept(<span class="keyword">new</span>&nbsp;YourAutoEditStrategy(),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IDocument.DEFAULT_CONTENT_TYPE);<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -194,7 +194,7 @@ in the <em>MyDslUIModule</em> from
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IAutoEditStrategy&gt;&nbsp;bindIAutoEditStrategy()</br>
+<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IAutoEditStrategy&gt;&nbsp;bindIAutoEditStrategy()<br/>
 </p>
 </div>
 </div>
@@ -203,8 +203,8 @@ to
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;AbstractEditStrategyProvider&gt;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;bindAbstractEditStrategyProvider()&nbsp;{&nbsp;..&nbsp;}</br>
+<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;AbstractEditStrategyProvider&gt;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;bindAbstractEditStrategyProvider()&nbsp;{&nbsp;..&nbsp;}<br/>
 </p>
 </div>
 </div>
@@ -249,7 +249,7 @@ changes. It is usually only necessary to change your code, if you face any compi
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		@Inject&nbsp;<span class="keyword">private</span>&nbsp;EObjectAtOffsetHelper&nbsp;eObjectAtOffsetHelper;</br>
+		@Inject&nbsp;<span class="keyword">private</span>&nbsp;EObjectAtOffsetHelper&nbsp;eObjectAtOffsetHelper;<br/>
 		</p>
 		</div>
 		</div>

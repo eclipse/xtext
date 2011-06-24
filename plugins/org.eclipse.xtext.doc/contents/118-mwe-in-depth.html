@@ -48,11 +48,11 @@ snippet:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">module</span>&nbsp;HelloWorld&nbsp;</br>
-</br>
-SayHello&nbsp;{</br>
-&nbsp;&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span></br>
-}</br>
+<span class="keyword">module</span>&nbsp;HelloWorld&nbsp;<br/>
+<br/>
+SayHello&nbsp;{<br/>
+&nbsp;&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span><br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -76,26 +76,26 @@ of the class <span class="inlinecode">SayHello</span> looks straight forward:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">import</span>&nbsp;org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent;</br>
-<span class="keyword">import</span>&nbsp;org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;</br>
-</br>
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;SayHello&nbsp;<span class="keyword">implements</span>&nbsp;IWorkflowComponent&nbsp;{</br>
-</br>
-&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span>;</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setMessage(String&nbsp;message)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.message&nbsp;=&nbsp;message;</br>
-&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getMessage()&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;message;</br>
-&nbsp;&nbsp;}</br>
-</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(getMessage());</br>
-&nbsp;&nbsp;}</br>
-</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;postInvoke()&nbsp;{}</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;preInvoke()&nbsp;{}</br>
-}</br>
+<span class="keyword">import</span>&nbsp;org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent;<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;<br/>
+<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;SayHello&nbsp;<span class="keyword">implements</span>&nbsp;IWorkflowComponent&nbsp;{<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span>;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setMessage(String&nbsp;message)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.message&nbsp;=&nbsp;message;<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getMessage()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;message;<br/>
+&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(getMessage());<br/>
+&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;postInvoke()&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;preInvoke()&nbsp;{}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -112,13 +112,13 @@ workflow:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">module</span>&nbsp;HelloWorld&nbsp;</br>
-</br>
-Workflow&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;SayHello&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-}</br>
+<span class="keyword">module</span>&nbsp;HelloWorld&nbsp;<br/>
+<br/>
+Workflow&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;SayHello&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -143,15 +143,15 @@ It consists of three components that read, modify and write the model file:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">module</span>&nbsp;Renamer</br>
-Workflow&nbsp;{</br>
-&nbsp;&nbsp;component&nbsp;=&nbsp;ResourceReader&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;<span class="string">"model.ecore"</span></br>
-&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;component&nbsp;=&nbsp;RenamingTransformer&nbsp;{}</br>
-&nbsp;&nbsp;component&nbsp;=&nbsp;ResourceWriter&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;<span class="string">"uppercaseModel.ecore"</span></br>
-&nbsp;&nbsp;}</br>
+<span class="keyword">module</span>&nbsp;Renamer<br/>
+Workflow&nbsp;{<br/>
+&nbsp;&nbsp;component&nbsp;=&nbsp;ResourceReader&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;<span class="string">"model.ecore"</span><br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;component&nbsp;=&nbsp;RenamingTransformer&nbsp;{}<br/>
+&nbsp;&nbsp;component&nbsp;=&nbsp;ResourceWriter&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;<span class="string">"uppercaseModel.ecore"</span><br/>
+&nbsp;&nbsp;}<br/>
 }
 </p>
 </div>
@@ -170,22 +170,22 @@ The <span class="inlinecode">ResourceReader</span> simply reads the file with th
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ResourceReader&nbsp;<span class="keyword">extends</span>&nbsp;WorkflowComponentWithSlot&nbsp;{</br>
-&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;uri;</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;ResourceSet&nbsp;resourceSet&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ResourceSetImpl();</br>
-&nbsp;&nbsp;&nbsp;&nbsp;URI&nbsp;fileURI&nbsp;=&nbsp;URI.createFileURI(uri);&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;resourceSet.getResource(fileURI,&nbsp;<span class="keyword">true</span>);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;ctx.put(getSlot(),&nbsp;resource);</br>
-&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setUri(String&nbsp;uri)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.uri&nbsp;=&nbsp;uri;</br>
-&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getUri()&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;uri;</br>
-&nbsp;&nbsp;}</br>
-}</br>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ResourceReader&nbsp;<span class="keyword">extends</span>&nbsp;WorkflowComponentWithSlot&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;uri;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;ResourceSet&nbsp;resourceSet&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ResourceSetImpl();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;URI&nbsp;fileURI&nbsp;=&nbsp;URI.createFileURI(uri);&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;resourceSet.getResource(fileURI,&nbsp;<span class="keyword">true</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;ctx.put(getSlot(),&nbsp;resource);<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setUri(String&nbsp;uri)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.uri&nbsp;=&nbsp;uri;<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getUri()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;uri;<br/>
+&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -198,29 +198,29 @@ of the resource, identifies each <a class="jdoc" href="http://download.eclipse.o
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;RenamingTransformer&nbsp;<span class="keyword">extends</span>&nbsp;WorkflowComponentWithSlot&nbsp;{</br>
-&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">boolean</span>&nbsp;toLowerCase&nbsp;=&nbsp;<span class="keyword">false</span>;</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;(Resource)&nbsp;ctx.get(getSlot());</br>
-&nbsp;&nbsp;&nbsp;&nbsp;EcoreUtil.resolveAll(resource);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;Iterator&lt;Object&gt;&nbsp;contents&nbsp;=&nbsp;EcoreUtil.getAllContents(resource,&nbsp;<span class="keyword">true</span>);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;Iterator&lt;EClassifier&gt;&nbsp;iter&nbsp;=&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterators.filter(contents,&nbsp;EClassifier.<span class="keyword">class</span>);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>(iter.hasNext())&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EClassifier&nbsp;classifier&nbsp;=&nbsp;(EClassifier)&nbsp;iter.next();</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;classifier.setName(isToLowerCase()&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&nbsp;classifier.getName().toLowerCase()</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;classifier.getName().toUpperCase());</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;}</br>
-</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setToLowerCase(<span class="keyword">boolean</span>&nbsp;toLowerCase)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.toLowerCase&nbsp;=&nbsp;toLowerCase;</br>
-&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">boolean</span>&nbsp;isToLowerCase()&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;toLowerCase;</br>
-&nbsp;&nbsp;}</br>
-}</br>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;RenamingTransformer&nbsp;<span class="keyword">extends</span>&nbsp;WorkflowComponentWithSlot&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">boolean</span>&nbsp;toLowerCase&nbsp;=&nbsp;<span class="keyword">false</span>;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;(Resource)&nbsp;ctx.get(getSlot());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;EcoreUtil.resolveAll(resource);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Iterator&lt;Object&gt;&nbsp;contents&nbsp;=&nbsp;EcoreUtil.getAllContents(resource,&nbsp;<span class="keyword">true</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Iterator&lt;EClassifier&gt;&nbsp;iter&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterators.filter(contents,&nbsp;EClassifier.<span class="keyword">class</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>(iter.hasNext())&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EClassifier&nbsp;classifier&nbsp;=&nbsp;(EClassifier)&nbsp;iter.next();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;classifier.setName(isToLowerCase()&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&nbsp;classifier.getName().toLowerCase()<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;classifier.getName().toUpperCase());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setToLowerCase(<span class="keyword">boolean</span>&nbsp;toLowerCase)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.toLowerCase&nbsp;=&nbsp;toLowerCase;<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">boolean</span>&nbsp;isToLowerCase()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;toLowerCase;<br/>
+&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -234,27 +234,27 @@ the configured <a class="jdoc" href="http://download.eclipse.org/modeling/emf/em
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ResourceWriter&nbsp;<span class="keyword">extends</span>&nbsp;WorkflowComponentWithSlot&nbsp;{</br>
-&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;uri;</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;(Resource)&nbsp;ctx.get(getSlot());</br>
-&nbsp;&nbsp;&nbsp;&nbsp;URI&nbsp;uri&nbsp;=&nbsp;URI.createFileURI(getUri());</br>
-&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;resource.getResourceSet().getURIConverter().normalize(uri);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;resource.setURI(uri);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">try</span>&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource.save(<span class="keyword">null</span>);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">catch</span>&nbsp;(IOException&nbsp;e)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;WrappedException(e);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;}</br>
-</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setUri(String&nbsp;uri)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.uri&nbsp;=&nbsp;uri;</br>
-&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getUri()&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;uri;</br>
-&nbsp;&nbsp;}</br>
-}</br>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ResourceWriter&nbsp;<span class="keyword">extends</span>&nbsp;WorkflowComponentWithSlot&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;uri;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;(Resource)&nbsp;ctx.get(getSlot());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;URI&nbsp;uri&nbsp;=&nbsp;URI.createFileURI(getUri());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;resource.getResourceSet().getURIConverter().normalize(uri);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;resource.setURI(uri);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">try</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource.save(<span class="keyword">null</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">catch</span>&nbsp;(IOException&nbsp;e)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;WrappedException(e);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setUri(String&nbsp;uri)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.uri&nbsp;=&nbsp;uri;<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getUri()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;uri;<br/>
+&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -266,19 +266,19 @@ Last but not least, the common supertype for those components looks like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">abstract</span>&nbsp;<span class="keyword">class</span>&nbsp;WorkflowComponentWithSlot&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;IWorkflowComponent&nbsp;{</br>
-&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;slot&nbsp;=&nbsp;<span class="string">"model"</span>;</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setSlot(String&nbsp;slot)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.slot&nbsp;=&nbsp;slot;</br>
-&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getSlot()&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;slot;</br>
-&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;postInvoke()&nbsp;{}</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;preInvoke()&nbsp;{}</br>
-}</br>
+<span class="keyword">public</span>&nbsp;<span class="keyword">abstract</span>&nbsp;<span class="keyword">class</span>&nbsp;WorkflowComponentWithSlot&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;IWorkflowComponent&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;slot&nbsp;=&nbsp;<span class="string">"model"</span>;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setSlot(String&nbsp;slot)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.slot&nbsp;=&nbsp;slot;<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getSlot()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;slot;<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;postInvoke()&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;preInvoke()&nbsp;{}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -300,22 +300,22 @@ post-invoke event and print the elapsed milliseconds to the console.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;StopWatch&nbsp;<span class="keyword">implements</span>&nbsp;IWorkflowComponent&nbsp;{</br>
-&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">long</span>&nbsp;start;</br>
-&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">boolean</span>&nbsp;shouldStop&nbsp;=&nbsp;<span class="keyword">false</span>;</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{}</br>
-</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;postInvoke()&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(shouldStop)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">long</span>&nbsp;elapsed&nbsp;=&nbsp;System.currentTimeMillis()&nbsp;-&nbsp;start;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"Time&nbsp;elapsed:&nbsp;"</span>&nbsp;+&nbsp;elapsed&nbsp;+&nbsp;<span class="string">"&nbsp;ms"</span>);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;shouldStop&nbsp;=&nbsp;<span class="keyword">true</span>;</br>
-&nbsp;&nbsp;}</br>
-</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;preInvoke()&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;=&nbsp;System.currentTimeMillis();</br>
-&nbsp;&nbsp;}</br>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;StopWatch&nbsp;<span class="keyword">implements</span>&nbsp;IWorkflowComponent&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">long</span>&nbsp;start;<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">boolean</span>&nbsp;shouldStop&nbsp;=&nbsp;<span class="keyword">false</span>;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{}<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;postInvoke()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(shouldStop)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">long</span>&nbsp;elapsed&nbsp;=&nbsp;System.currentTimeMillis()&nbsp;-&nbsp;start;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"Time&nbsp;elapsed:&nbsp;"</span>&nbsp;+&nbsp;elapsed&nbsp;+&nbsp;<span class="string">"&nbsp;ms"</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;shouldStop&nbsp;=&nbsp;<span class="keyword">true</span>;<br/>
+&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;preInvoke()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;=&nbsp;System.currentTimeMillis();<br/>
+&nbsp;&nbsp;}<br/>
 }
 </p>
 </div>
@@ -332,13 +332,13 @@ and reuse this one at the end to receive the post-invoke life-cycle event twice.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">module</span>&nbsp;MeasuredWorkflow</br>
-</br>
-Workflow&nbsp;{</br>
-&nbsp;&nbsp;component&nbsp;=&nbsp;StopWatch:&nbsp;stopWatch&nbsp;{}</br>
-&nbsp;&nbsp;component&nbsp;=&nbsp;@OtherWorkflow&nbsp;{}</br>
-&nbsp;&nbsp;component&nbsp;=&nbsp;stopWatch</br>
-}</br>
+<span class="keyword">module</span>&nbsp;MeasuredWorkflow<br/>
+<br/>
+Workflow&nbsp;{<br/>
+&nbsp;&nbsp;component&nbsp;=&nbsp;StopWatch:&nbsp;stopWatch&nbsp;{}<br/>
+&nbsp;&nbsp;component&nbsp;=&nbsp;@OtherWorkflow&nbsp;{}<br/>
+&nbsp;&nbsp;component&nbsp;=&nbsp;stopWatch<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -372,15 +372,15 @@ explain these concepts.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">module</span>&nbsp;com.mycompany.Example</br>
-</br>
-<span class="keyword">import</span>&nbsp;java.util.*</br>
-</br>
-SampleClass&nbsp;{</br>
-&nbsp;&nbsp;singleValue&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;string&apos;</span></br>
-&nbsp;&nbsp;multiValue&nbsp;=&nbsp;ArrayList&nbsp;{}</br>
-&nbsp;&nbsp;child&nbsp;=&nbsp;{}</br>
-}&nbsp;</br>
+<span class="keyword">module</span>&nbsp;com.mycompany.Example<br/>
+<br/>
+<span class="keyword">import</span>&nbsp;java.util.*<br/>
+<br/>
+SampleClass&nbsp;{<br/>
+&nbsp;&nbsp;singleValue&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;string&apos;</span><br/>
+&nbsp;&nbsp;multiValue&nbsp;=&nbsp;ArrayList&nbsp;{}<br/>
+&nbsp;&nbsp;child&nbsp;=&nbsp;{}<br/>
+}&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -389,15 +389,15 @@ SampleClass&nbsp;{</br>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">package</span>&nbsp;com.mycompany;</br>
-</br>
-<span class="keyword">import</span>&nbsp;java.util.List;</br>
-</br>
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;SampleClass&nbsp;{</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setSingleValue(String&nbsp;value)&nbsp;{..}</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addMultiValue(List&lt;?&gt;&nbsp;value)&nbsp;{..}</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addChild(SampleClass&nbsp;value)&nbsp;{..}</br>
-}</br>
+<span class="keyword">package</span>&nbsp;com.mycompany;<br/>
+<br/>
+<span class="keyword">import</span>&nbsp;java.util.List;<br/>
+<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;SampleClass&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setSingleValue(String&nbsp;value)&nbsp;{..}<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addMultiValue(List&lt;?&gt;&nbsp;value)&nbsp;{..}<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addChild(SampleClass&nbsp;value)&nbsp;{..}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -452,12 +452,12 @@ Let&apos;s create a second module <span class="inlinecode">com.mycompany.Second<
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">module</span>&nbsp;com.mycompany.sub.Second</br>
-</br>
-<span class="keyword">import</span>&nbsp;com.mycompany.*</br>
-</br>
-SampleClass&nbsp;{</br>
-&nbsp;&nbsp;child&nbsp;=&nbsp;@Example&nbsp;{}</br>
+<span class="keyword">module</span>&nbsp;com.mycompany.sub.Second<br/>
+<br/>
+<span class="keyword">import</span>&nbsp;com.mycompany.*<br/>
+<br/>
+SampleClass&nbsp;{<br/>
+&nbsp;&nbsp;child&nbsp;=&nbsp;@Example&nbsp;{}<br/>
 }&nbsp;
 </p>
 </div>
@@ -488,12 +488,12 @@ definition was only changed slightly by introducing a property
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">module</span>&nbsp;com.mycompany.Example</br>
-</br>
-<span class="keyword">var</span>&nbsp;value&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;string&apos;</span></br>
-</br>
-SampleClass&nbsp;{</br>
-&nbsp;&nbsp;singleValue&nbsp;=&nbsp;value</br>
+<span class="keyword">module</span>&nbsp;com.mycompany.Example<br/>
+<br/>
+<span class="keyword">var</span>&nbsp;value&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;string&apos;</span><br/>
+<br/>
+SampleClass&nbsp;{<br/>
+&nbsp;&nbsp;singleValue&nbsp;=&nbsp;value<br/>
 }
 </p>
 </div>
@@ -511,15 +511,15 @@ second built in type is boolean via the familiar literals <span class="inlinecod
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">module</span>&nbsp;com.mycompany.Example</br>
-</br>
-<span class="keyword">var</span>&nbsp;childInstance&nbsp;=&nbsp;SampleClass&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;singleValue&nbsp;=&nbsp;<span class="string">"child"</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-</br>
-SampleClass&nbsp;{</br>
-&nbsp;&nbsp;child&nbsp;=&nbsp;childInstance</br>
-}</br>
+<span class="keyword">module</span>&nbsp;com.mycompany.Example<br/>
+<br/>
+<span class="keyword">var</span>&nbsp;childInstance&nbsp;=&nbsp;SampleClass&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;singleValue&nbsp;=&nbsp;<span class="string">"child"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+SampleClass&nbsp;{<br/>
+&nbsp;&nbsp;child&nbsp;=&nbsp;childInstance<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -533,7 +533,7 @@ literals like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">var</span>&nbsp;aString&nbsp;=&nbsp;<span class="string">"part"</span></br>
+<span class="keyword">var</span>&nbsp;aString&nbsp;=&nbsp;<span class="string">"part"</span><br/>
 <span class="keyword">var</span>&nbsp;anotherString&nbsp;=&nbsp;<span class="string">"reuse&nbsp;the&nbsp;${part}&nbsp;here"</span>
 </p>
 </div>
@@ -556,16 +556,16 @@ root component but also by means of the defined properties.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">module</span>&nbsp;com.mycompany.Example</br>
-</br>
-<span class="keyword">var</span>&nbsp;optional&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;string&apos;</span></br>
-<span class="keyword">var</span>&nbsp;mandatory</br>
-</br>
-SampleClass&nbsp;{</br>
-&nbsp;&nbsp;singleValue&nbsp;=&nbsp;optional</br>
-&nbsp;&nbsp;child&nbsp;=&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;singleValue&nbsp;=&nbsp;mandatory</br>
-&nbsp;&nbsp;}</br>
+<span class="keyword">module</span>&nbsp;com.mycompany.Example<br/>
+<br/>
+<span class="keyword">var</span>&nbsp;optional&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;string&apos;</span><br/>
+<span class="keyword">var</span>&nbsp;mandatory<br/>
+<br/>
+SampleClass&nbsp;{<br/>
+&nbsp;&nbsp;singleValue&nbsp;=&nbsp;optional<br/>
+&nbsp;&nbsp;child&nbsp;=&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;singleValue&nbsp;=&nbsp;mandatory<br/>
+&nbsp;&nbsp;}<br/>
 }
 </p>
 </div>
@@ -581,13 +581,13 @@ if we reuse <span class="inlinecode">org.mycompany.Example</span> in another mod
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">module</span>&nbsp;com.mycompany.Second</br>
-</br>
-<span class="keyword">var</span>&nbsp;newMandatory</br>
-</br>
-@Example&nbsp;{</br>
-&nbsp;&nbsp;mandatory&nbsp;=&nbsp;<span class="string">"mandatoryValue"</span></br>
-&nbsp;&nbsp;optional&nbsp;=&nbsp;newMandatory</br>
+<span class="keyword">module</span>&nbsp;com.mycompany.Second<br/>
+<br/>
+<span class="keyword">var</span>&nbsp;newMandatory<br/>
+<br/>
+@Example&nbsp;{<br/>
+&nbsp;&nbsp;mandatory&nbsp;=&nbsp;<span class="string">"mandatoryValue"</span><br/>
+&nbsp;&nbsp;optional&nbsp;=&nbsp;newMandatory<br/>
 }&nbsp;
 </p>
 </div>
@@ -625,10 +625,10 @@ we could use the following syntax:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">module</span>&nbsp;com.mycompany.Example</br>
-</br>
-SampleClass&nbsp;:&nbsp;self&nbsp;{</br>
-&nbsp;&nbsp;child&nbsp;=&nbsp;self</br>
+<span class="keyword">module</span>&nbsp;com.mycompany.Example<br/>
+<br/>
+SampleClass&nbsp;:&nbsp;self&nbsp;{<br/>
+&nbsp;&nbsp;child&nbsp;=&nbsp;self<br/>
 }
 </p>
 </div>
@@ -654,11 +654,11 @@ literal:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">module</span>&nbsp;com.mycompany.Example</br>
-</br>
-<span class="keyword">var</span>&nbsp;child&nbsp;=&nbsp;SampleClass&nbsp;{}</br>
-</br>
-SampleClass&nbsp;<span class="keyword">auto-inject</span>&nbsp;{</br>
+<span class="keyword">module</span>&nbsp;com.mycompany.Example<br/>
+<br/>
+<span class="keyword">var</span>&nbsp;child&nbsp;=&nbsp;SampleClass&nbsp;{}<br/>
+<br/>
+SampleClass&nbsp;<span class="keyword">auto-inject</span>&nbsp;{<br/>
 }
 </p>
 </div>
@@ -690,9 +690,9 @@ to from the Java language:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="comment">//&nbsp;This&nbsp;is&nbsp;a&nbsp;comment</br>
-</span><span class="comment">/*&nbsp;</br>
-&nbsp;&nbsp;This&nbsp;is&nbsp;another&nbsp;one.</br>
+<span class="comment">//&nbsp;This&nbsp;is&nbsp;a&nbsp;comment<br/>
+</span><span class="comment">/*&nbsp;<br/>
+&nbsp;&nbsp;This&nbsp;is&nbsp;another&nbsp;one.<br/>
 */</span>
 </p>
 </div>
@@ -711,7 +711,7 @@ by a &apos;.&apos; dot.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Name:&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*;</br>
+Name:&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*;<br/>
 ID:&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>)&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>|<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)*;&nbsp;
 </p>
 </div>
@@ -748,7 +748,7 @@ wildcard notation:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="string">&apos;import&apos;</span>&nbsp;name&nbsp;<span class="string">&apos;.*&apos;</span>?&nbsp;&nbsp;&nbsp;</br>
+<span class="string">&apos;import&apos;</span>&nbsp;name&nbsp;<span class="string">&apos;.*&apos;</span>?&nbsp;&nbsp;&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -846,9 +846,9 @@ several parts.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">var</span>&nbsp;aString&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;value&apos;</span></br>
-<span class="keyword">var</span>&nbsp;anotherString&nbsp;=&nbsp;<span class="string">&apos;It&nbsp;is&nbsp;possible&nbsp;to&nbsp;embed&nbsp;${aString}&nbsp;into</br>
-&nbsp;a&nbsp;multi-line&nbsp;string&apos;</span></br>
+<span class="keyword">var</span>&nbsp;aString&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;value&apos;</span><br/>
+<span class="keyword">var</span>&nbsp;anotherString&nbsp;=&nbsp;<span class="string">&apos;It&nbsp;is&nbsp;possible&nbsp;to&nbsp;embed&nbsp;${aString}&nbsp;into<br/>
+&nbsp;a&nbsp;multi-line&nbsp;string&apos;</span><br/>
 </p>
 </div>
 </div>

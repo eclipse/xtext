@@ -1,223 +1,151 @@
-<html>
-  <head>
-    <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>MWE2</title>
-    <link href="book.css" rel="stylesheet" type="text/css">
-    <link href="code.css" rel="stylesheet" type="text/css">
-    <link href="http://www.eclipse.org/eclipse.org-common/yui/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/yui/2.6.0/build/menu/assets/skins/sam/menu.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/reset.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/layout.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/header.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/footer.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/visual.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/print.css" rel="stylesheet" type="text/css" media="print">
-    <link rel="stylesheet" type="text/css" href="http://www.eclipse.org/Xtext/style.css"/>
-    <link rel="stylesheet" type="text/css" href="http://www.eclipse.org/style2.css"/>
-     <script type="text/javascript"> 
-    	function initTocMenu(ActiveSubTocElementId){
-    		var menu = document.getElementById("leftnav");
-    		
-    		var chapters = menu.children;
-    		addHideSubsectionFunction(chapters);
-    		
-    		document.getElementById(ActiveSubTocElementId).style.display = "block";
-    	}
-    
-    	function addHideSubsectionFunction(items){
-    		for (var i = 0; i < items.length; i++) {
-    			if (items[i].firstElementChild ){
-    				items[i].firstElementChild.onclick = function(){toc_toggle_subsections(this.parentNode);};
-    				items[i].firstElementChild.style.cursor = "pointer";
-    			}
-    		}
-    	}
-    	function toc_toggle_subsections(chap){
-    		if ( chap.children[1].style.display != "none" ) {
-    			chap.children[1].style.display = "none"
-    		} else {
-    			chap.children[1].style.display = "block"
-    			
-    		}
-    	}
-    	
-    	function highlightCurrentSection(sec) {
-    		document.getElementById(sec).style.backgroundColor= "#D0D0D0"
-    	}
-    </script>
-  </head>
-
-<body onload="initTocMenu('118-mwe-in-depth.html');highlightCurrentSection(document.URL.substring(document.URL.lastIndexOf('/')+1));">
-<div id="novaWrapper">		<div id="clearHeader">
-		<div id="logo">
-				<div id="promotion"><a href="/indigo/friends.php">
-	<img src="http://www.eclipse.org/home/promotions/indigo/indigo.png" alt="Indigo Is Coming!"/>
-</a>
-
-</div>
-
-		</div>
-		<div id="otherSites">
-			<div id="sites">
-			<ul id="sitesUL">
-				<li><a href='http://marketplace.eclipse.org'><img alt="Eclipse Marketplace" src="http://dev.eclipse.org/custom_icons/marketplace.png"/>&nbsp;<div>Eclipse Marketplace</div></a></li>
-				<li><a href='http://live.eclipse.org'><img alt="Eclipse Live" src="http://dev.eclipse.org/custom_icons/audio-input-microphone-bw.png"/>&nbsp;<div>Eclipse Live</div></a></li>
-
-	    		<li><a href='https://bugs.eclipse.org/bugs/'><img alt="Bugzilla" src="http://dev.eclipse.org/custom_icons/system-search-bw.png"/>&nbsp;<div>Bugzilla</div></a></li>
-	    		<li><a href='http://www.eclipse.org/forums/'><img alt="Forums" src="http://dev.eclipse.org/large_icons/apps/internet-group-chat.png"/>&nbsp;<div>Eclipse Forums</div></a></li>
-	    		<li><a href='http://www.planeteclipse.org/'><img alt="Planet Eclipse" src="http://dev.eclipse.org/large_icons/devices/audio-card.png"/>&nbsp;<div>Planet Eclipse</div></a></li>
-	    		<li><a href='http://wiki.eclipse.org/'><img alt="Eclipse Wiki" src="http://dev.eclipse.org/custom_icons/accessories-text-editor-bw.png"/>&nbsp;<div>Eclipse Wiki</div></a></li>
-	    		<li><a href='http://portal.eclipse.org'><img alt="MyFoundation Portal" src="http://dev.eclipse.org/custom_icons/preferences-system-network-proxy-bw.png"/><div>My Foundation Portal</div></a></li>
-	    	</ul>
-
-	    	</div>
-		</div>		
-	</div>
-
-<div id="header">			
-	<div id="menu">
-		<ul>
-		<li><a href="/Xtext" target="_self">Home</a></li> 
-		<li><a href="/Xtext/download" target="_self">Download</a></li> 
-		<li><a href="index.html" target="_self">Documentation</a></li> 
-		<li><a href="/Xtext/support" target="_self">Support</a></li> 
-		<li><a href="/Xtext/community" target="_self">Community</a></li> 
-		<li><a href="/Xtext/developers" target="_self">Developers</a></li> 
-			</ul>
-
-	</div>
-
-	<div id="search">
-			<form action="http://www.google.com/cse" id="searchbox_017941334893793413703:sqfrdtd112s">
-		 	<input type="hidden" name="cx" value="017941334893793413703:sqfrdtd112s" />
-	  		<input id="searchBox" type="text" name="q" size="25" />
-	  		<input id="searchButton" type="submit" name="sa" value="Search" />
-			</form>
-		<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=searchbox_017941334893793413703%3Asqfrdtd112s&lang=en"></script>			
-	</div>
-
-</div>
-<div id="novaContent" class="faux">
-	<br style="clear:both;height:1em;">
+<br style="clear:both;height:1em;">
 	<div id="leftcol">
 		<div class="nav-logo">
-			<a href="index.html"><img src="http://wiki.eclipse.org/images/thumb/d/db/Xtext_logo.png/450px-Xtext_logo.png" style="margin-left:30px; width:125px"/></a>
+			<a href="index.php"><img src="http://wiki.eclipse.org/images/thumb/d/db/Xtext_logo.png/450px-Xtext_logo.png" style="margin-left:30px; width:125px"/></a>
 		</div>
 		<ul id="leftnav">
-		<li class="separator"><div class="separator">Installation</div>
-			<ul style="display: none;" id="subToc_005-installation.html">
-			<li id="005-installation.html#InstallDistro" ><a href="005-installation.html#InstallDistro" >Install Pre-Configured Eclipse With Xtext</a></li>
-			<li id="005-installation.html#InstallXtext" ><a href="005-installation.html#InstallXtext" >Install Xtext From Update Site</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">5 Minutes Tutorial</div>
-			<ul style="display: none;" id="subToc_010-xtext-in-5-minutes.html">
-			<li id="010-xtext-in-5-minutes.html#NewProject" ><a href="010-xtext-in-5-minutes.html#NewProject" >Creating A New Xtext Project</a></li>
-			<li id="010-xtext-in-5-minutes.html#RunWorkflow" ><a href="010-xtext-in-5-minutes.html#RunWorkflow" >Generating The Language Infrastructure</a></li>
-			<li id="010-xtext-in-5-minutes.html#TestingTheEditor" ><a href="010-xtext-in-5-minutes.html#TestingTheEditor" >Try The Editor</a></li>
-			<li id="010-xtext-in-5-minutes.html#Conclusion" ><a href="010-xtext-in-5-minutes.html#Conclusion" >Conclusion</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">30 Minutes Tutorial</div>
-			<ul style="display: none;" id="subToc_020-domainmodel-step-by-step.html">
-			<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" ><a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" >Create A New Xtext Project</a></li>
-			<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" ><a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" >Write Your Own Grammar</a></li>
-			<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_6" ><a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_6" >Generate Language Artifacts</a></li>
-			<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_7" ><a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_7" >Run the Generated IDE Plug-in</a></li>
-			<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_8" ><a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_8" >Second Iteration : Adding Packages and Imports</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">30 Minutes Tutorial - Extended</div>
-			<ul style="display: none;" id="subToc_030-tutorial-next-steps.html">
-			<li id="040-first-code-generator.html" ><a href="040-first-code-generator.html" >Writing a Code Generator With Xtend</a></li>
-			<li id="060-unit-tests.html" ><a href="060-unit-tests.html" >Unit Testing the Language</a></li>
-			<li id="050-validation.html" ><a href="050-validation.html" >Creating Custom Validation Rules</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Overview</div>
-			<ul style="display: none;" id="subToc_000-introduction.html">
-			<li id="000-introduction.html#Overview_1" ><a href="000-introduction.html#Overview_1" >What is Xtext?</a></li>
-			<li id="000-introduction.html#Overview_2" ><a href="000-introduction.html#Overview_2" >How Does It Work?</a></li>
-			<li id="000-introduction.html#Overview_3" ><a href="000-introduction.html#Overview_3" >Xtext is Highly Configurable</a></li>
-			<li id="000-introduction.html#Overview_4" ><a href="000-introduction.html#Overview_4" >Who Uses Xtext?</a></li>
-			<li id="000-introduction.html#Overview_5" ><a href="000-introduction.html#Overview_5" >Who is Behind Xtext?</a></li>
-			<li id="000-introduction.html#DSL" ><a href="000-introduction.html#DSL" >What is a Domain-Specific Language</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">The Grammar Language</div>
-			<ul style="display: none;" id="subToc_020-grammar-language.html">
-			<li id="020-grammar-language.html#statemachine" ><a href="020-grammar-language.html#statemachine" >A First Example</a></li>
-			<li id="020-grammar-language.html#syntax" ><a href="020-grammar-language.html#syntax" >The Syntax</a></li>
-			<li id="020-grammar-language.html#metamodelInference" ><a href="020-grammar-language.html#metamodelInference" >Ecore Model Inference</a></li>
-			<li id="020-grammar-language.html#grammarMixins" ><a href="020-grammar-language.html#grammarMixins" >Grammar Mixins</a></li>
-			<li id="020-grammar-language.html#grammarLanguage_6" ><a href="020-grammar-language.html#grammarLanguage_6" >Common Terminals</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Configuration</div>
-			<ul style="display: none;" id="subToc_030-generator.html">
-			<li id="030-generator.html#generator" ><a href="030-generator.html#generator" >The Language Generator</a></li>
-			<li id="040-dependency-injection.html" ><a href="040-dependency-injection.html" >Dependency Injection in Xtext with Google Guice</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Runtime Concepts</div>
-			<ul style="display: none;" id="subToc_050-heading-runtime.html">
-			<li id="050-heading-runtime.html#runtimeSetup" ><a href="050-heading-runtime.html#runtimeSetup" >Runtime Setup (ISetup)</a></li>
-			<li id="050-heading-runtime.html#equinoxSetup" ><a href="050-heading-runtime.html#equinoxSetup" >Setup within Eclipse-Equinox (OSGi)</a></li>
-			<li id="050-heading-runtime.html#runtime_concepts_4" ><a href="050-heading-runtime.html#runtime_concepts_4" >Logging</a></li>
-			<li id="060-validation.html" ><a href="060-validation.html" >Validation</a></li>
-			<li id="070-linking.html" ><a href="070-linking.html" >Linking</a></li>
-			<li id="080-scoping.html" ><a href="080-scoping.html" >Scoping</a></li>
-			<li id="090-valueconverter.html" ><a href="090-valueconverter.html" >Value Converter</a></li>
-			<li id="100-serialization.html" ><a href="100-serialization.html" >Serialization</a></li>
-			<li id="105-formatting.html" ><a href="105-formatting.html" >Formatting (Pretty Printing)</a></li>
-			<li id="110-fragmentprovider.html" ><a href="110-fragmentprovider.html" >Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)</a></li>
-			<li id="115-encoding.html" ><a href="115-encoding.html" >Encoding in Xtext</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">MWE2</div>
-			<ul style="display: none;" id="subToc_118-mwe-in-depth.html">
-			<li id="118-mwe-in-depth.html#MWE2Exampe" ><a href="118-mwe-in-depth.html#MWE2Exampe" >Examples</a></li>
-			<li id="118-mwe-in-depth.html#MWE2LanguageReference" ><a href="118-mwe-in-depth.html#MWE2LanguageReference" >Language Reference</a></li>
-			<li id="118-mwe-in-depth.html#MWE2SyntaxReference" ><a href="118-mwe-in-depth.html#MWE2SyntaxReference" >Syntax Reference</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">IDE Concepts</div>
-			<ul style="display: none;" id="subToc_120-heading-UI.html">
-			<li id="140-labelprovider.html" ><a href="140-labelprovider.html" >Label Provider</a></li>
-			<li id="150-contentassist.html" ><a href="150-contentassist.html" >Content Assist</a></li>
-			<li id="155-quickfix.html" ><a href="155-quickfix.html" >Quick Fixes</a></li>
-			<li id="160-templates.html" ><a href="160-templates.html" >Template Proposals</a></li>
-			<li id="170-outline.html" ><a href="170-outline.html" >Outline View</a></li>
-			<li id="180-hyperlinking.html" ><a href="180-hyperlinking.html" >Hyperlinking</a></li>
-			<li id="195-highlighting.html" ><a href="195-highlighting.html" >Syntax Coloring</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Referring to Java Types</div>
-			<ul style="display: none;" id="subToc_199-jvmtypes.html">
-			<li id="199-jvmtypes.html#jvmtypes_3" ><a href="199-jvmtypes.html#jvmtypes_3" >How to Use Java Types</a></li>
-			<li id="199-jvmtypes.html#jvmtypes_4" ><a href="199-jvmtypes.html#jvmtypes_4" >Customization Points</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Integration with EMF and Other EMF Editors</div>
-			<ul style="display: none;" id="subToc_210-emf-integration.html">
-			<li id="210-emf-integration.html#model_metamodel" ><a href="210-emf-integration.html#model_metamodel" >Model, Ecore Model, and Ecore</a></li>
-			<li id="210-emf-integration.html#emf_codegen" ><a href="210-emf-integration.html#emf_codegen" >EMF Code Generation</a></li>
-			<li id="210-emf-integration.html#xtext_resource" ><a href="210-emf-integration.html#xtext_resource" >XtextResource Implementation</a></li>
-			<li id="210-emf-integration.html#gmf_integration" ><a href="210-emf-integration.html#gmf_integration" >Integration with GMF Editors</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Migrating from Xtext 1.0.x to 2.0</div>
-			<ul style="display: none;" id="subToc_213-migrating-from-1.0.html">
-			<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_4" ><a href="213-migrating-from-1.0.html#migrating_from_1_0_x_4" >Take the Shortcut</a></li>
-			<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_5" ><a href="213-migrating-from-1.0.html#migrating_from_1_0_x_5" >Migrating Step By Step</a></li>
-			<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_6" ><a href="213-migrating-from-1.0.html#migrating_from_1_0_x_6" >Now go for then new features</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Migrating from Xtext 0.7.x to 1.0</div>
-			<ul style="display: none;" id="subToc_215-migrating-from-0.7.html">
-			<li id="215-migrating-from-0.7.html#migrating_from_0_7_2" ><a href="215-migrating-from-0.7.html#migrating_from_0_7_2" >Migrating Step By Step</a></li>
-			</ul>
-			</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="005-installation.php">Installation</a></div>
+		<ul style="display: none;" id="subToc_005-installation.html">
+		<li id="005-installation.html#InstallDistro" ><a href="005-installation.php#InstallDistro" >Install Pre-Configured Eclipse With Xtext</a></li>
+		<li id="005-installation.html#InstallXtext" ><a href="005-installation.php#InstallXtext" >Install Xtext From Update Site</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="010-xtext-in-5-minutes.php">5 Minutes Tutorial</a></div>
+		<ul style="display: none;" id="subToc_010-xtext-in-5-minutes.html">
+		<li id="010-xtext-in-5-minutes.html#NewProject" ><a href="010-xtext-in-5-minutes.php#NewProject" >Creating A New Xtext Project</a></li>
+		<li id="010-xtext-in-5-minutes.html#RunWorkflow" ><a href="010-xtext-in-5-minutes.php#RunWorkflow" >Generating The Language Infrastructure</a></li>
+		<li id="010-xtext-in-5-minutes.html#TestingTheEditor" ><a href="010-xtext-in-5-minutes.php#TestingTheEditor" >Try The Editor</a></li>
+		<li id="010-xtext-in-5-minutes.html#Conclusion" ><a href="010-xtext-in-5-minutes.php#Conclusion" >Conclusion</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="020-domainmodel-step-by-step.php">15 Minutes Tutorial</a></div>
+		<ul style="display: none;" id="subToc_020-domainmodel-step-by-step.html">
+		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_4" >Create A New Xtext Project</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_5" >Write Your Own Grammar</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_6" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_6" >Generate Language Artifacts</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_7" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_7" >Run the Generated IDE Plug-in</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_8" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_8" >Second Iteration : Adding Packages and Imports</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="030-tutorial-next-steps.php">15 Minutes Tutorial - Extended</a></div>
+		<ul style="display: none;" id="subToc_030-tutorial-next-steps.html">
+		<li id="040-first-code-generator.html" ><a href="040-first-code-generator.php" >Writing a Code Generator With Xtend</a></li>
+		<li id="060-unit-tests.html" ><a href="060-unit-tests.php" >Unit Testing the Language</a></li>
+		<li id="050-validation.html" ><a href="050-validation.php" >Creating Custom Validation Rules</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="000-introduction.php">Overview</a></div>
+		<ul style="display: none;" id="subToc_000-introduction.html">
+		<li id="000-introduction.html#Overview_1" ><a href="000-introduction.php#Overview_1" >What is Xtext?</a></li>
+		<li id="000-introduction.html#Overview_2" ><a href="000-introduction.php#Overview_2" >How Does It Work?</a></li>
+		<li id="000-introduction.html#Overview_3" ><a href="000-introduction.php#Overview_3" >Xtext is Highly Configurable</a></li>
+		<li id="000-introduction.html#Overview_4" ><a href="000-introduction.php#Overview_4" >Who Uses Xtext?</a></li>
+		<li id="000-introduction.html#Overview_5" ><a href="000-introduction.php#Overview_5" >Who is Behind Xtext?</a></li>
+		<li id="000-introduction.html#DSL" ><a href="000-introduction.php#DSL" >What is a Domain-Specific Language</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="020-grammar-language.php">The Grammar Language</a></div>
+		<ul style="display: none;" id="subToc_020-grammar-language.html">
+		<li id="020-grammar-language.html#statemachine" ><a href="020-grammar-language.php#statemachine" >A First Example</a></li>
+		<li id="020-grammar-language.html#syntax" ><a href="020-grammar-language.php#syntax" >The Syntax</a></li>
+		<li id="020-grammar-language.html#metamodelInference" ><a href="020-grammar-language.php#metamodelInference" >Ecore Model Inference</a></li>
+		<li id="020-grammar-language.html#grammarMixins" ><a href="020-grammar-language.php#grammarMixins" >Grammar Mixins</a></li>
+		<li id="020-grammar-language.html#grammarLanguage_6" ><a href="020-grammar-language.php#grammarLanguage_6" >Common Terminals</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="030-generator.php">Configuration</a></div>
+		<ul style="display: none;" id="subToc_030-generator.html">
+		<li id="030-generator.html#generator" ><a href="030-generator.php#generator" >The Language Generator</a></li>
+		<li id="040-dependency-injection.html" ><a href="040-dependency-injection.php" >Dependency Injection in Xtext with Google Guice</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="050-heading-runtime.php">Runtime Concepts</a></div>
+		<ul style="display: none;" id="subToc_050-heading-runtime.html">
+		<li id="050-heading-runtime.html#runtimeSetup" ><a href="050-heading-runtime.php#runtimeSetup" >Runtime Setup (ISetup)</a></li>
+		<li id="050-heading-runtime.html#equinoxSetup" ><a href="050-heading-runtime.php#equinoxSetup" >Setup within Eclipse-Equinox (OSGi)</a></li>
+		<li id="050-heading-runtime.html#runtime_concepts_4" ><a href="050-heading-runtime.php#runtime_concepts_4" >Logging</a></li>
+		<li id="060-validation.html" ><a href="060-validation.php" >Validation</a></li>
+		<li id="070-linking.html" ><a href="070-linking.php" >Linking</a></li>
+		<li id="080-scoping.html" ><a href="080-scoping.php" >Scoping</a></li>
+		<li id="090-valueconverter.html" ><a href="090-valueconverter.php" >Value Converter</a></li>
+		<li id="100-serialization.html" ><a href="100-serialization.php" >Serialization</a></li>
+		<li id="105-formatting.html" ><a href="105-formatting.php" >Formatting (Pretty Printing)</a></li>
+		<li id="110-fragmentprovider.html" ><a href="110-fragmentprovider.php" >Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)</a></li>
+		<li id="115-encoding.html" ><a href="115-encoding.php" >Encoding in Xtext</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="118-mwe-in-depth.php">MWE2</a></div>
+		<ul style="display: none;" id="subToc_118-mwe-in-depth.html">
+		<li id="118-mwe-in-depth.html#MWE2Exampe" ><a href="118-mwe-in-depth.php#MWE2Exampe" >Examples</a></li>
+		<li id="118-mwe-in-depth.html#MWE2LanguageReference" ><a href="118-mwe-in-depth.php#MWE2LanguageReference" >Language Reference</a></li>
+		<li id="118-mwe-in-depth.html#MWE2SyntaxReference" ><a href="118-mwe-in-depth.php#MWE2SyntaxReference" >Syntax Reference</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="120-heading-UI.php">IDE Concepts</a></div>
+		<ul style="display: none;" id="subToc_120-heading-UI.html">
+		<li id="140-labelprovider.html" ><a href="140-labelprovider.php" >Label Provider</a></li>
+		<li id="150-contentassist.html" ><a href="150-contentassist.php" >Content Assist</a></li>
+		<li id="155-quickfix.html" ><a href="155-quickfix.php" >Quick Fixes</a></li>
+		<li id="160-templates.html" ><a href="160-templates.php" >Template Proposals</a></li>
+		<li id="170-outline.html" ><a href="170-outline.php" >Outline View</a></li>
+		<li id="180-hyperlinking.html" ><a href="180-hyperlinking.php" >Hyperlinking</a></li>
+		<li id="195-highlighting.html" ><a href="195-highlighting.php" >Syntax Coloring</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="199-jvmtypes.php">Referring to Java Types</a></div>
+		<ul style="display: none;" id="subToc_199-jvmtypes.html">
+		<li id="199-jvmtypes.html#jvmtypes_3" ><a href="199-jvmtypes.php#jvmtypes_3" >How to Use Java Types</a></li>
+		<li id="199-jvmtypes.html#jvmtypes_4" ><a href="199-jvmtypes.php#jvmtypes_4" >Customization Points</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="210-emf-integration.php">Integration with EMF and Other EMF Editors</a></div>
+		<ul style="display: none;" id="subToc_210-emf-integration.html">
+		<li id="210-emf-integration.html#model_metamodel" ><a href="210-emf-integration.php#model_metamodel" >Model, Ecore Model, and Ecore</a></li>
+		<li id="210-emf-integration.html#emf_codegen" ><a href="210-emf-integration.php#emf_codegen" >EMF Code Generation</a></li>
+		<li id="210-emf-integration.html#xtext_resource" ><a href="210-emf-integration.php#xtext_resource" >XtextResource Implementation</a></li>
+		<li id="210-emf-integration.html#gmf_integration" ><a href="210-emf-integration.php#gmf_integration" >Integration with GMF Editors</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="213-migrating-from-1.0.php">Migrating from Xtext 1.0.x to 2.0</a></div>
+		<ul style="display: none;" id="subToc_213-migrating-from-1.0.html">
+		<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_4" ><a href="213-migrating-from-1.0.php#migrating_from_1_0_x_4" >Take the Shortcut</a></li>
+		<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_5" ><a href="213-migrating-from-1.0.php#migrating_from_1_0_x_5" >Migrating Step By Step</a></li>
+		<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_6" ><a href="213-migrating-from-1.0.php#migrating_from_1_0_x_6" >Now go for then new features</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="215-migrating-from-0.7.php">Migrating from Xtext 0.7.x to 1.0</a></div>
+		<ul style="display: none;" id="subToc_215-migrating-from-0.7.html">
+		<li id="215-migrating-from-0.7.html#migrating_from_0_7_2" ><a href="215-migrating-from-0.7.php#migrating_from_0_7_2" >Migrating Step By Step</a></li>
+		</ul>
+		</li>
 		</ul>
 	</div>
 	<div id="midcolumn">
@@ -225,9 +153,9 @@
 		<h1>MWE2</h1>
 				<div class="toc">
 				  <ul>
-				    <li><a href="118-mwe-in-depth.html#MWE2Exampe" >Examples</a></li>
-				    <li><a href="118-mwe-in-depth.html#MWE2LanguageReference" >Language Reference</a></li>
-				    <li><a href="118-mwe-in-depth.html#MWE2SyntaxReference" >Syntax Reference</a></li>
+				    <li><a href="118-mwe-in-depth.php#MWE2Exampe" >Examples</a></li>
+				    <li><a href="118-mwe-in-depth.php#MWE2LanguageReference" >Language Reference</a></li>
+				    <li><a href="118-mwe-in-depth.php#MWE2SyntaxReference" >Syntax Reference</a></li>
 				  </ul>
 				</div>
 				
@@ -251,9 +179,9 @@
 		<h1>Examples</h1>
 			<div class="toc">
 			  <ul>
-			    <li><a href="118-mwe-in-depth.html#MWE2HelloWorld" >The Simplest Workflow</a></li>
-			    <li><a href="118-mwe-in-depth.html#MWE2SimpleTransformation" >A Simple Transformation</a></li>
-			    <li><a href="118-mwe-in-depth.html#MWE2Stopwatch" >A Stop-Watch</a></li>
+			    <li><a href="118-mwe-in-depth.php#MWE2HelloWorld" >The Simplest Workflow</a></li>
+			    <li><a href="118-mwe-in-depth.php#MWE2SimpleTransformation" >A Simple Transformation</a></li>
+			    <li><a href="118-mwe-in-depth.php#MWE2Stopwatch" >A Stop-Watch</a></li>
 			  </ul>
 			</div>
 		<p>
@@ -276,10 +204,10 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">module</span>&nbsp;HelloWorld&nbsp;</br>
-		</br>
-		SayHello&nbsp;{</br>
-		&nbsp;&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span></br>
+		<span class="keyword">module</span>&nbsp;HelloWorld&nbsp;<br/>
+		<br/>
+		SayHello&nbsp;{<br/>
+		&nbsp;&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span><br/>
 		}
 		</p>
 		</div>
@@ -304,25 +232,25 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">import</span>&nbsp;org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent;</br>
-		<span class="keyword">import</span>&nbsp;org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;</br>
-		</br>
-		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;SayHello&nbsp;<span class="keyword">implements</span>&nbsp;IWorkflowComponent&nbsp;{</br>
-		</br>
-		&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span>;</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setMessage(String&nbsp;message)&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.message&nbsp;=&nbsp;message;</br>
-		&nbsp;&nbsp;}</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getMessage()&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;message;</br>
-		&nbsp;&nbsp;}</br>
-		</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(getMessage());</br>
-		&nbsp;&nbsp;}</br>
-		</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;postInvoke()&nbsp;{}</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;preInvoke()&nbsp;{}</br>
+		<span class="keyword">import</span>&nbsp;org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent;<br/>
+		<span class="keyword">import</span>&nbsp;org.eclipse.emf.mwe2.runtime.workflow.IWorkflowContext;<br/>
+		<br/>
+		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;SayHello&nbsp;<span class="keyword">implements</span>&nbsp;IWorkflowComponent&nbsp;{<br/>
+		<br/>
+		&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span>;<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setMessage(String&nbsp;message)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.message&nbsp;=&nbsp;message;<br/>
+		&nbsp;&nbsp;}<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getMessage()&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;message;<br/>
+		&nbsp;&nbsp;}<br/>
+		<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(getMessage());<br/>
+		&nbsp;&nbsp;}<br/>
+		<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;postInvoke()&nbsp;{}<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;preInvoke()&nbsp;{}<br/>
 		}
 		</p>
 		</div>
@@ -340,12 +268,12 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">module</span>&nbsp;HelloWorld&nbsp;</br>
-		</br>
-		Workflow&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;SayHello&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span></br>
-		&nbsp;&nbsp;&nbsp;&nbsp;}</br>
+		<span class="keyword">module</span>&nbsp;HelloWorld&nbsp;<br/>
+		<br/>
+		Workflow&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;component&nbsp;=&nbsp;SayHello&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 		}
 		</p>
 		</div>
@@ -364,22 +292,22 @@
 		<h2>A Simple Transformation</h2>
 		<p>
 		The following workflow solves the exemplary task to rename every 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClassifier" >EClassifier</abbr></a> in an <em>*.ecore</em> file.
+		<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" title="org.eclipse.emf.ecore.EClassifier">EClassifier</abbr></a> in an <em>*.ecore</em> file.
 		It consists of three components that read, modify and write the model file:
 		</p>
 		<p>
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">module</span>&nbsp;Renamer</br>
-		Workflow&nbsp;{</br>
-		&nbsp;&nbsp;component&nbsp;=&nbsp;ResourceReader&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;<span class="string">"model.ecore"</span></br>
-		&nbsp;&nbsp;}</br>
-		&nbsp;&nbsp;component&nbsp;=&nbsp;RenamingTransformer&nbsp;{}</br>
-		&nbsp;&nbsp;component&nbsp;=&nbsp;ResourceWriter&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;<span class="string">"uppercaseModel.ecore"</span></br>
-		&nbsp;&nbsp;}</br>
+		<span class="keyword">module</span>&nbsp;Renamer<br/>
+		Workflow&nbsp;{<br/>
+		&nbsp;&nbsp;component&nbsp;=&nbsp;ResourceReader&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;<span class="string">"model.ecore"</span><br/>
+		&nbsp;&nbsp;}<br/>
+		&nbsp;&nbsp;component&nbsp;=&nbsp;RenamingTransformer&nbsp;{}<br/>
+		&nbsp;&nbsp;component&nbsp;=&nbsp;ResourceWriter&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;<span class="string">"uppercaseModel.ecore"</span><br/>
+		&nbsp;&nbsp;}<br/>
 		}
 		</p>
 		</div>
@@ -391,28 +319,28 @@
 		</p>
 		<p>
 		The <span class="inlinecode">ResourceReader</span> simply reads the file with the given 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a> and stores it in a so called
+		<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="org.eclipse.emf.common.util.URI">URI</abbr></a> and stores it in a so called
 		<em>slot</em> of the workflow context. A slot can be understood as a dictionary or map-entry.
 		</p>
 		<p>
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ResourceReader&nbsp;<span class="keyword">extends</span>&nbsp;WorkflowComponentWithSlot&nbsp;{</br>
-		&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;uri;</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;ResourceSet&nbsp;resourceSet&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ResourceSetImpl();</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;URI&nbsp;fileURI&nbsp;=&nbsp;URI.createFileURI(uri);&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;resourceSet.getResource(fileURI,&nbsp;<span class="keyword">true</span>);</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;ctx.put(getSlot(),&nbsp;resource);</br>
-		&nbsp;&nbsp;}</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setUri(String&nbsp;uri)&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.uri&nbsp;=&nbsp;uri;</br>
-		&nbsp;&nbsp;}</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getUri()&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;uri;</br>
-		&nbsp;&nbsp;}</br>
+		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ResourceReader&nbsp;<span class="keyword">extends</span>&nbsp;WorkflowComponentWithSlot&nbsp;{<br/>
+		&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;uri;<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;ResourceSet&nbsp;resourceSet&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ResourceSetImpl();<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;URI&nbsp;fileURI&nbsp;=&nbsp;URI.createFileURI(uri);&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;resourceSet.getResource(fileURI,&nbsp;<span class="keyword">true</span>);<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;ctx.put(getSlot(),&nbsp;resource);<br/>
+		&nbsp;&nbsp;}<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setUri(String&nbsp;uri)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.uri&nbsp;=&nbsp;uri;<br/>
+		&nbsp;&nbsp;}<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getUri()&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;uri;<br/>
+		&nbsp;&nbsp;}<br/>
 		}
 		</p>
 		</div>
@@ -420,34 +348,34 @@
 		</p>
 		<p>
 		The actual transformer takes the model from the slot and modifies it. It simply iterates the content
-		of the resource, identifies each <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClassifier" >EClassifier</abbr></a> and sets its name. 
+		of the resource, identifies each <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" title="org.eclipse.emf.ecore.EClassifier">EClassifier</abbr></a> and sets its name. 
 		</p>
 		<p>
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;RenamingTransformer&nbsp;<span class="keyword">extends</span>&nbsp;WorkflowComponentWithSlot&nbsp;{</br>
-		&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">boolean</span>&nbsp;toLowerCase&nbsp;=&nbsp;<span class="keyword">false</span>;</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;(Resource)&nbsp;ctx.get(getSlot());</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;EcoreUtil.resolveAll(resource);</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;Iterator&lt;Object&gt;&nbsp;contents&nbsp;=&nbsp;EcoreUtil.getAllContents(resource,&nbsp;<span class="keyword">true</span>);</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;Iterator&lt;EClassifier&gt;&nbsp;iter&nbsp;=&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterators.filter(contents,&nbsp;EClassifier.<span class="keyword">class</span>);</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>(iter.hasNext())&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EClassifier&nbsp;classifier&nbsp;=&nbsp;(EClassifier)&nbsp;iter.next();</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;classifier.setName(isToLowerCase()&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&nbsp;classifier.getName().toLowerCase()</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;classifier.getName().toUpperCase());</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-		&nbsp;&nbsp;}</br>
-		</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setToLowerCase(<span class="keyword">boolean</span>&nbsp;toLowerCase)&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.toLowerCase&nbsp;=&nbsp;toLowerCase;</br>
-		&nbsp;&nbsp;}</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">boolean</span>&nbsp;isToLowerCase()&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;toLowerCase;</br>
-		&nbsp;&nbsp;}</br>
+		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;RenamingTransformer&nbsp;<span class="keyword">extends</span>&nbsp;WorkflowComponentWithSlot&nbsp;{<br/>
+		&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">boolean</span>&nbsp;toLowerCase&nbsp;=&nbsp;<span class="keyword">false</span>;<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;(Resource)&nbsp;ctx.get(getSlot());<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;EcoreUtil.resolveAll(resource);<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;Iterator&lt;Object&gt;&nbsp;contents&nbsp;=&nbsp;EcoreUtil.getAllContents(resource,&nbsp;<span class="keyword">true</span>);<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;Iterator&lt;EClassifier&gt;&nbsp;iter&nbsp;=&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterators.filter(contents,&nbsp;EClassifier.<span class="keyword">class</span>);<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>(iter.hasNext())&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EClassifier&nbsp;classifier&nbsp;=&nbsp;(EClassifier)&nbsp;iter.next();<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;classifier.setName(isToLowerCase()&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&nbsp;classifier.getName().toLowerCase()<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;classifier.getName().toUpperCase());<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+		&nbsp;&nbsp;}<br/>
+		<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setToLowerCase(<span class="keyword">boolean</span>&nbsp;toLowerCase)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.toLowerCase&nbsp;=&nbsp;toLowerCase;<br/>
+		&nbsp;&nbsp;}<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">boolean</span>&nbsp;isToLowerCase()&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;toLowerCase;<br/>
+		&nbsp;&nbsp;}<br/>
 		}
 		</p>
 		</div>
@@ -456,32 +384,32 @@
 		<p>
 		After the model has been modified it should be written to a new file. That's what the 
 		<span class="inlinecode">ResourceWriter</span> does. It actually takes the resource from the given <em>slot</em> and saves it with
-		the configured <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a>:
+		the configured <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="org.eclipse.emf.common.util.URI">URI</abbr></a>:
 		</p>
 		<p>
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ResourceWriter&nbsp;<span class="keyword">extends</span>&nbsp;WorkflowComponentWithSlot&nbsp;{</br>
-		&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;uri;</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;(Resource)&nbsp;ctx.get(getSlot());</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;URI&nbsp;uri&nbsp;=&nbsp;URI.createFileURI(getUri());</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;resource.getResourceSet().getURIConverter().normalize(uri);</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;resource.setURI(uri);</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">try</span>&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource.save(<span class="keyword">null</span>);</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">catch</span>&nbsp;(IOException&nbsp;e)&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;WrappedException(e);</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-		&nbsp;&nbsp;}</br>
-		</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setUri(String&nbsp;uri)&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.uri&nbsp;=&nbsp;uri;</br>
-		&nbsp;&nbsp;}</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getUri()&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;uri;</br>
-		&nbsp;&nbsp;}</br>
+		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ResourceWriter&nbsp;<span class="keyword">extends</span>&nbsp;WorkflowComponentWithSlot&nbsp;{<br/>
+		&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;uri;<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;resource&nbsp;=&nbsp;(Resource)&nbsp;ctx.get(getSlot());<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;URI&nbsp;uri&nbsp;=&nbsp;URI.createFileURI(getUri());<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;uri&nbsp;=&nbsp;resource.getResourceSet().getURIConverter().normalize(uri);<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;resource.setURI(uri);<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">try</span>&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resource.save(<span class="keyword">null</span>);<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">catch</span>&nbsp;(IOException&nbsp;e)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;WrappedException(e);<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+		&nbsp;&nbsp;}<br/>
+		<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setUri(String&nbsp;uri)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.uri&nbsp;=&nbsp;uri;<br/>
+		&nbsp;&nbsp;}<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getUri()&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;uri;<br/>
+		&nbsp;&nbsp;}<br/>
 		}
 		</p>
 		</div>
@@ -494,18 +422,18 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">public</span>&nbsp;<span class="keyword">abstract</span>&nbsp;<span class="keyword">class</span>&nbsp;WorkflowComponentWithSlot&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;IWorkflowComponent&nbsp;{</br>
-		&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;slot&nbsp;=&nbsp;<span class="string">"model"</span>;</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setSlot(String&nbsp;slot)&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.slot&nbsp;=&nbsp;slot;</br>
-		&nbsp;&nbsp;}</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getSlot()&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;slot;</br>
-		&nbsp;&nbsp;}</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;postInvoke()&nbsp;{}</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;preInvoke()&nbsp;{}</br>
+		<span class="keyword">public</span>&nbsp;<span class="keyword">abstract</span>&nbsp;<span class="keyword">class</span>&nbsp;WorkflowComponentWithSlot&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;IWorkflowComponent&nbsp;{<br/>
+		&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;String&nbsp;slot&nbsp;=&nbsp;<span class="string">"model"</span>;<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setSlot(String&nbsp;slot)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.slot&nbsp;=&nbsp;slot;<br/>
+		&nbsp;&nbsp;}<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getSlot()&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;slot;<br/>
+		&nbsp;&nbsp;}<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;postInvoke()&nbsp;{}<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;preInvoke()&nbsp;{}<br/>
 		}
 		</p>
 		</div>
@@ -528,22 +456,22 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;StopWatch&nbsp;<span class="keyword">implements</span>&nbsp;IWorkflowComponent&nbsp;{</br>
-		&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">long</span>&nbsp;start;</br>
-		&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">boolean</span>&nbsp;shouldStop&nbsp;=&nbsp;<span class="keyword">false</span>;</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{}</br>
-		</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;postInvoke()&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(shouldStop)&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">long</span>&nbsp;elapsed&nbsp;=&nbsp;System.currentTimeMillis()&nbsp;-&nbsp;start;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"Time&nbsp;elapsed:&nbsp;"</span>&nbsp;+&nbsp;elapsed&nbsp;+&nbsp;<span class="string">"&nbsp;ms"</span>);</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;shouldStop&nbsp;=&nbsp;<span class="keyword">true</span>;</br>
-		&nbsp;&nbsp;}</br>
-		</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;preInvoke()&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;=&nbsp;System.currentTimeMillis();</br>
-		&nbsp;&nbsp;}</br>
+		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;StopWatch&nbsp;<span class="keyword">implements</span>&nbsp;IWorkflowComponent&nbsp;{<br/>
+		&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">long</span>&nbsp;start;<br/>
+		&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">boolean</span>&nbsp;shouldStop&nbsp;=&nbsp;<span class="keyword">false</span>;<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;invoke(IWorkflowContext&nbsp;ctx)&nbsp;{}<br/>
+		<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;postInvoke()&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(shouldStop)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">long</span>&nbsp;elapsed&nbsp;=&nbsp;System.currentTimeMillis()&nbsp;-&nbsp;start;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="string">"Time&nbsp;elapsed:&nbsp;"</span>&nbsp;+&nbsp;elapsed&nbsp;+&nbsp;<span class="string">"&nbsp;ms"</span>);<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;shouldStop&nbsp;=&nbsp;<span class="keyword">true</span>;<br/>
+		&nbsp;&nbsp;}<br/>
+		<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;preInvoke()&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;start&nbsp;=&nbsp;System.currentTimeMillis();<br/>
+		&nbsp;&nbsp;}<br/>
 		}
 		</p>
 		</div>
@@ -560,12 +488,12 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">module</span>&nbsp;MeasuredWorkflow</br>
-		</br>
-		Workflow&nbsp;{</br>
-		&nbsp;&nbsp;component&nbsp;=&nbsp;StopWatch:&nbsp;stopWatch&nbsp;{}</br>
-		&nbsp;&nbsp;component&nbsp;=&nbsp;@OtherWorkflow&nbsp;{}</br>
-		&nbsp;&nbsp;component&nbsp;=&nbsp;stopWatch</br>
+		<span class="keyword">module</span>&nbsp;MeasuredWorkflow<br/>
+		<br/>
+		Workflow&nbsp;{<br/>
+		&nbsp;&nbsp;component&nbsp;=&nbsp;StopWatch:&nbsp;stopWatch&nbsp;{}<br/>
+		&nbsp;&nbsp;component&nbsp;=&nbsp;@OtherWorkflow&nbsp;{}<br/>
+		&nbsp;&nbsp;component&nbsp;=&nbsp;stopWatch<br/>
 		}
 		</p>
 		</div>
@@ -575,12 +503,12 @@
 		<h1>Language Reference</h1>
 			<div class="toc">
 			  <ul>
-			    <li><a href="118-mwe-in-depth.html#MWE2JavaReferences" >Mapping to Java Classes</a></li>
-			    <li><a href="118-mwe-in-depth.html#MWE2Module" >Module</a></li>
-			    <li><a href="118-mwe-in-depth.html#MWE2Properties" >Properties</a></li>
-			    <li><a href="118-mwe-in-depth.html#MWE2Mandatory" >Mandatory Properties</a></li>
-			    <li><a href="118-mwe-in-depth.html#MWE2NamedComponents" >Named Components</a></li>
-			    <li><a href="118-mwe-in-depth.html#MWE2AutoInject" >Auto Injection</a></li>
+			    <li><a href="118-mwe-in-depth.php#MWE2JavaReferences" >Mapping to Java Classes</a></li>
+			    <li><a href="118-mwe-in-depth.php#MWE2Module" >Module</a></li>
+			    <li><a href="118-mwe-in-depth.php#MWE2Properties" >Properties</a></li>
+			    <li><a href="118-mwe-in-depth.php#MWE2Mandatory" >Mandatory Properties</a></li>
+			    <li><a href="118-mwe-in-depth.php#MWE2NamedComponents" >Named Components</a></li>
+			    <li><a href="118-mwe-in-depth.php#MWE2AutoInject" >Auto Injection</a></li>
 			  </ul>
 			</div>
 		<p>
@@ -604,14 +532,14 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">module</span>&nbsp;com.mycompany.Example</br>
-		</br>
-		<span class="keyword">import</span>&nbsp;java.util.*</br>
-		</br>
-		SampleClass&nbsp;{</br>
-		&nbsp;&nbsp;singleValue&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;string&apos;</span></br>
-		&nbsp;&nbsp;multiValue&nbsp;=&nbsp;ArrayList&nbsp;{}</br>
-		&nbsp;&nbsp;child&nbsp;=&nbsp;{}</br>
+		<span class="keyword">module</span>&nbsp;com.mycompany.Example<br/>
+		<br/>
+		<span class="keyword">import</span>&nbsp;java.util.*<br/>
+		<br/>
+		SampleClass&nbsp;{<br/>
+		&nbsp;&nbsp;singleValue&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;string&apos;</span><br/>
+		&nbsp;&nbsp;multiValue&nbsp;=&nbsp;ArrayList&nbsp;{}<br/>
+		&nbsp;&nbsp;child&nbsp;=&nbsp;{}<br/>
 		}
 		</p>
 		</div>
@@ -621,14 +549,14 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">package</span>&nbsp;com.mycompany;</br>
-		</br>
-		<span class="keyword">import</span>&nbsp;java.util.List;</br>
-		</br>
-		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;SampleClass&nbsp;{</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setSingleValue(String&nbsp;value)&nbsp;{..}</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addMultiValue(List&lt;?&gt;&nbsp;value)&nbsp;{..}</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addChild(SampleClass&nbsp;value)&nbsp;{..}</br>
+		<span class="keyword">package</span>&nbsp;com.mycompany;<br/>
+		<br/>
+		<span class="keyword">import</span>&nbsp;java.util.List;<br/>
+		<br/>
+		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;SampleClass&nbsp;{<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setSingleValue(String&nbsp;value)&nbsp;{..}<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addMultiValue(List&lt;?&gt;&nbsp;value)&nbsp;{..}<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addChild(SampleClass&nbsp;value)&nbsp;{..}<br/>
 		}
 		</p>
 		</div>
@@ -684,12 +612,12 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">module</span>&nbsp;com.mycompany.sub.Second</br>
-		</br>
-		<span class="keyword">import</span>&nbsp;com.mycompany.*</br>
-		</br>
-		SampleClass&nbsp;{</br>
-		&nbsp;&nbsp;child&nbsp;=&nbsp;@Example&nbsp;{}</br>
+		<span class="keyword">module</span>&nbsp;com.mycompany.sub.Second<br/>
+		<br/>
+		<span class="keyword">import</span>&nbsp;com.mycompany.*<br/>
+		<br/>
+		SampleClass&nbsp;{<br/>
+		&nbsp;&nbsp;child&nbsp;=&nbsp;@Example&nbsp;{}<br/>
 		}
 		</p>
 		</div>
@@ -720,12 +648,12 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">module</span>&nbsp;com.mycompany.Example</br>
-		</br>
-		<span class="keyword">var</span>&nbsp;value&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;string&apos;</span></br>
-		</br>
-		SampleClass&nbsp;{</br>
-		&nbsp;&nbsp;singleValue&nbsp;=&nbsp;value</br>
+		<span class="keyword">module</span>&nbsp;com.mycompany.Example<br/>
+		<br/>
+		<span class="keyword">var</span>&nbsp;value&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;string&apos;</span><br/>
+		<br/>
+		SampleClass&nbsp;{<br/>
+		&nbsp;&nbsp;singleValue&nbsp;=&nbsp;value<br/>
 		}
 		</p>
 		</div>
@@ -734,7 +662,7 @@
 		<p>
 		The type of the property will be derived from the default value 
 		similar to the mechanism that is already known from <span class="inlinecode">set</span>- and 
-		<span class="inlinecode">add</span>-methods. If no default value is given, <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a> will
+		<span class="inlinecode">add</span>-methods. If no default value is given, <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="java.lang.String">String</abbr></a> will
 		be assumed. However, properties are not limited to strings. The 
 		second built in type is boolean via the familiar literals <span class="inlinecode"><span class="keyword">true</span></span> and
 		<span class="inlinecode"><span class="keyword">false</span></span>. More flexibility is available via actual component literals.
@@ -743,14 +671,14 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">module</span>&nbsp;com.mycompany.Example</br>
-		</br>
-		<span class="keyword">var</span>&nbsp;childInstance&nbsp;=&nbsp;SampleClass&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;singleValue&nbsp;=&nbsp;<span class="string">"child"</span></br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-		</br>
-		SampleClass&nbsp;{</br>
-		&nbsp;&nbsp;child&nbsp;=&nbsp;childInstance</br>
+		<span class="keyword">module</span>&nbsp;com.mycompany.Example<br/>
+		<br/>
+		<span class="keyword">var</span>&nbsp;childInstance&nbsp;=&nbsp;SampleClass&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;singleValue&nbsp;=&nbsp;<span class="string">"child"</span><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+		<br/>
+		SampleClass&nbsp;{<br/>
+		&nbsp;&nbsp;child&nbsp;=&nbsp;childInstance<br/>
 		}
 		</p>
 		</div>
@@ -765,7 +693,7 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">var</span>&nbsp;aString&nbsp;=&nbsp;<span class="string">"part"</span></br>
+		<span class="keyword">var</span>&nbsp;aString&nbsp;=&nbsp;<span class="string">"part"</span><br/>
 		<span class="keyword">var</span>&nbsp;anotherString&nbsp;=&nbsp;<span class="string">"reuse&nbsp;the&nbsp;${part}&nbsp;here"</span>
 		</p>
 		</div>
@@ -788,16 +716,16 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">module</span>&nbsp;com.mycompany.Example</br>
-		</br>
-		<span class="keyword">var</span>&nbsp;optional&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;string&apos;</span></br>
-		<span class="keyword">var</span>&nbsp;mandatory</br>
-		</br>
-		SampleClass&nbsp;{</br>
-		&nbsp;&nbsp;singleValue&nbsp;=&nbsp;optional</br>
-		&nbsp;&nbsp;child&nbsp;=&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;singleValue&nbsp;=&nbsp;mandatory</br>
-		&nbsp;&nbsp;}</br>
+		<span class="keyword">module</span>&nbsp;com.mycompany.Example<br/>
+		<br/>
+		<span class="keyword">var</span>&nbsp;optional&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;string&apos;</span><br/>
+		<span class="keyword">var</span>&nbsp;mandatory<br/>
+		<br/>
+		SampleClass&nbsp;{<br/>
+		&nbsp;&nbsp;singleValue&nbsp;=&nbsp;optional<br/>
+		&nbsp;&nbsp;child&nbsp;=&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;singleValue&nbsp;=&nbsp;mandatory<br/>
+		&nbsp;&nbsp;}<br/>
 		}
 		</p>
 		</div>
@@ -813,13 +741,13 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">module</span>&nbsp;com.mycompany.Second</br>
-		</br>
-		<span class="keyword">var</span>&nbsp;newMandatory</br>
-		</br>
-		@Example&nbsp;{</br>
-		&nbsp;&nbsp;mandatory&nbsp;=&nbsp;<span class="string">"mandatoryValue"</span></br>
-		&nbsp;&nbsp;optional&nbsp;=&nbsp;newMandatory</br>
+		<span class="keyword">module</span>&nbsp;com.mycompany.Second<br/>
+		<br/>
+		<span class="keyword">var</span>&nbsp;newMandatory<br/>
+		<br/>
+		@Example&nbsp;{<br/>
+		&nbsp;&nbsp;mandatory&nbsp;=&nbsp;<span class="string">"mandatoryValue"</span><br/>
+		&nbsp;&nbsp;optional&nbsp;=&nbsp;newMandatory<br/>
 		}
 		</p>
 		</div>
@@ -857,10 +785,10 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">module</span>&nbsp;com.mycompany.Example</br>
-		</br>
-		SampleClass&nbsp;:&nbsp;self&nbsp;{</br>
-		&nbsp;&nbsp;child&nbsp;=&nbsp;self</br>
+		<span class="keyword">module</span>&nbsp;com.mycompany.Example<br/>
+		<br/>
+		SampleClass&nbsp;:&nbsp;self&nbsp;{<br/>
+		&nbsp;&nbsp;child&nbsp;=&nbsp;self<br/>
 		}
 		</p>
 		</div>
@@ -886,11 +814,11 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">module</span>&nbsp;com.mycompany.Example</br>
-		</br>
-		<span class="keyword">var</span>&nbsp;child&nbsp;=&nbsp;SampleClass&nbsp;{}</br>
-		</br>
-		SampleClass&nbsp;<span class="keyword">auto-inject</span>&nbsp;{</br>
+		<span class="keyword">module</span>&nbsp;com.mycompany.Example<br/>
+		<br/>
+		<span class="keyword">var</span>&nbsp;child&nbsp;=&nbsp;SampleClass&nbsp;{}<br/>
+		<br/>
+		SampleClass&nbsp;<span class="keyword">auto-inject</span>&nbsp;{<br/>
 		}
 		</p>
 		</div>
@@ -911,12 +839,12 @@
 		<h1>Syntax Reference</h1>
 			<div class="toc">
 			  <ul>
-			    <li><a href="118-mwe-in-depth.html#MWE2ModuleSyntax" >Module</a></li>
-			    <li><a href="118-mwe-in-depth.html#MWE2PropertySyntax" >Property</a></li>
-			    <li><a href="118-mwe-in-depth.html#MWE2ComponentSyntax" >Component</a></li>
-			    <li><a href="118-mwe-in-depth.html#MWE2StringLiteralsSyntax" >String Literals</a></li>
-			    <li><a href="118-mwe-in-depth.html#MWE2BooleanLiterals" >Boolean Literals</a></li>
-			    <li><a href="118-mwe-in-depth.html#MWE2References" >References</a></li>
+			    <li><a href="118-mwe-in-depth.php#MWE2ModuleSyntax" >Module</a></li>
+			    <li><a href="118-mwe-in-depth.php#MWE2PropertySyntax" >Property</a></li>
+			    <li><a href="118-mwe-in-depth.php#MWE2ComponentSyntax" >Component</a></li>
+			    <li><a href="118-mwe-in-depth.php#MWE2StringLiteralsSyntax" >String Literals</a></li>
+			    <li><a href="118-mwe-in-depth.php#MWE2BooleanLiterals" >Boolean Literals</a></li>
+			    <li><a href="118-mwe-in-depth.php#MWE2References" >References</a></li>
 			  </ul>
 			</div>
 		<p>
@@ -932,9 +860,9 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="comment">//&nbsp;This&nbsp;is&nbsp;a&nbsp;comment</br>
-		</span><span class="comment">/*&nbsp;</br>
-		&nbsp;&nbsp;This&nbsp;is&nbsp;another&nbsp;one.</br>
+		<span class="comment">//&nbsp;This&nbsp;is&nbsp;a&nbsp;comment<br/>
+		</span><span class="comment">/*&nbsp;<br/>
+		&nbsp;&nbsp;This&nbsp;is&nbsp;another&nbsp;one.<br/>
 		*/</span>
 		</p>
 		</div>
@@ -953,7 +881,7 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		Name:&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*;</br>
+		Name:&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*;<br/>
 		ID:&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>)&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>|<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)*;
 		</p>
 		</div>
@@ -1017,8 +945,8 @@
 		refers to it from another module. Properties may either have a 
 		default value or they are considered to be <em>mandatory</em>. If the type
 		of property is omitted it will be inferred from the default value. The
-		default type of a property is <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a>. That is, if no
-		 default value is available, the property is <em>mandatory</em> and of type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a>.
+		default type of a property is <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="java.lang.String">String</abbr></a>. That is, if no
+		 default value is available, the property is <em>mandatory</em> and of type <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="java.lang.String">String</abbr></a>.
 		</p>
 		<p>
 		There are four types of values available in MWE2. One may either
@@ -1092,8 +1020,8 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">var</span>&nbsp;aString&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;value&apos;</span></br>
-		<span class="keyword">var</span>&nbsp;anotherString&nbsp;=&nbsp;<span class="string">&apos;It&nbsp;is&nbsp;possible&nbsp;to&nbsp;embed&nbsp;${aString}&nbsp;into</br>
+		<span class="keyword">var</span>&nbsp;aString&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;value&apos;</span><br/>
+		<span class="keyword">var</span>&nbsp;anotherString&nbsp;=&nbsp;<span class="string">&apos;It&nbsp;is&nbsp;possible&nbsp;to&nbsp;embed&nbsp;${aString}&nbsp;into<br/>
 		&nbsp;a&nbsp;multi-line&nbsp;string&apos;</span>
 		</p>
 		</div>
@@ -1173,20 +1101,3 @@
 		</p>
 	</div>
 	<br style="clear:both;height:1em;">
-</div>
-<div id="clearFooter"></div>
-<div id="footer">
-<ul id="footernav">
-	<li><a href="/">Home</a></li>
-
-	<li><a href="/legal/privacy.php">Privacy Policy</a></li>
-	<li><a href="/legal/termsofuse.php">Terms of Use</a></li>
-	<li><a href="/legal/copyright.php">Copyright Agent</a></li>
-	<li><a href="/legal/">Legal</a></li>
-	<li><a href="/org/foundation/contact.php">Contact Us</a></li>
-</ul>
-
-<span id="copyright">Copyright &copy; 2011 The Eclipse Foundation. All Rights Reserved.</span>
-</div>
-</body>
-</html>

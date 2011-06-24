@@ -1,223 +1,151 @@
-<html>
-  <head>
-    <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Scoping</title>
-    <link href="book.css" rel="stylesheet" type="text/css">
-    <link href="code.css" rel="stylesheet" type="text/css">
-    <link href="http://www.eclipse.org/eclipse.org-common/yui/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/yui/2.6.0/build/menu/assets/skins/sam/menu.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/reset.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/layout.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/header.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/footer.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/visual.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/print.css" rel="stylesheet" type="text/css" media="print">
-    <link rel="stylesheet" type="text/css" href="http://www.eclipse.org/Xtext/style.css"/>
-    <link rel="stylesheet" type="text/css" href="http://www.eclipse.org/style2.css"/>
-     <script type="text/javascript"> 
-    	function initTocMenu(ActiveSubTocElementId){
-    		var menu = document.getElementById("leftnav");
-    		
-    		var chapters = menu.children;
-    		addHideSubsectionFunction(chapters);
-    		
-    		document.getElementById(ActiveSubTocElementId).style.display = "block";
-    	}
-    
-    	function addHideSubsectionFunction(items){
-    		for (var i = 0; i < items.length; i++) {
-    			if (items[i].firstElementChild ){
-    				items[i].firstElementChild.onclick = function(){toc_toggle_subsections(this.parentNode);};
-    				items[i].firstElementChild.style.cursor = "pointer";
-    			}
-    		}
-    	}
-    	function toc_toggle_subsections(chap){
-    		if ( chap.children[1].style.display != "none" ) {
-    			chap.children[1].style.display = "none"
-    		} else {
-    			chap.children[1].style.display = "block"
-    			
-    		}
-    	}
-    	
-    	function highlightCurrentSection(sec) {
-    		document.getElementById(sec).style.backgroundColor= "#D0D0D0"
-    	}
-    </script>
-  </head>
-
-<body onload="initTocMenu('080-scoping.html');highlightCurrentSection(document.URL.substring(document.URL.lastIndexOf('/')+1));">
-<div id="novaWrapper">		<div id="clearHeader">
-		<div id="logo">
-				<div id="promotion"><a href="/indigo/friends.php">
-	<img src="http://www.eclipse.org/home/promotions/indigo/indigo.png" alt="Indigo Is Coming!"/>
-</a>
-
-</div>
-
-		</div>
-		<div id="otherSites">
-			<div id="sites">
-			<ul id="sitesUL">
-				<li><a href='http://marketplace.eclipse.org'><img alt="Eclipse Marketplace" src="http://dev.eclipse.org/custom_icons/marketplace.png"/>&nbsp;<div>Eclipse Marketplace</div></a></li>
-				<li><a href='http://live.eclipse.org'><img alt="Eclipse Live" src="http://dev.eclipse.org/custom_icons/audio-input-microphone-bw.png"/>&nbsp;<div>Eclipse Live</div></a></li>
-
-	    		<li><a href='https://bugs.eclipse.org/bugs/'><img alt="Bugzilla" src="http://dev.eclipse.org/custom_icons/system-search-bw.png"/>&nbsp;<div>Bugzilla</div></a></li>
-	    		<li><a href='http://www.eclipse.org/forums/'><img alt="Forums" src="http://dev.eclipse.org/large_icons/apps/internet-group-chat.png"/>&nbsp;<div>Eclipse Forums</div></a></li>
-	    		<li><a href='http://www.planeteclipse.org/'><img alt="Planet Eclipse" src="http://dev.eclipse.org/large_icons/devices/audio-card.png"/>&nbsp;<div>Planet Eclipse</div></a></li>
-	    		<li><a href='http://wiki.eclipse.org/'><img alt="Eclipse Wiki" src="http://dev.eclipse.org/custom_icons/accessories-text-editor-bw.png"/>&nbsp;<div>Eclipse Wiki</div></a></li>
-	    		<li><a href='http://portal.eclipse.org'><img alt="MyFoundation Portal" src="http://dev.eclipse.org/custom_icons/preferences-system-network-proxy-bw.png"/><div>My Foundation Portal</div></a></li>
-	    	</ul>
-
-	    	</div>
-		</div>		
-	</div>
-
-<div id="header">			
-	<div id="menu">
-		<ul>
-		<li><a href="/Xtext" target="_self">Home</a></li> 
-		<li><a href="/Xtext/download" target="_self">Download</a></li> 
-		<li><a href="index.html" target="_self">Documentation</a></li> 
-		<li><a href="/Xtext/support" target="_self">Support</a></li> 
-		<li><a href="/Xtext/community" target="_self">Community</a></li> 
-		<li><a href="/Xtext/developers" target="_self">Developers</a></li> 
-			</ul>
-
-	</div>
-
-	<div id="search">
-			<form action="http://www.google.com/cse" id="searchbox_017941334893793413703:sqfrdtd112s">
-		 	<input type="hidden" name="cx" value="017941334893793413703:sqfrdtd112s" />
-	  		<input id="searchBox" type="text" name="q" size="25" />
-	  		<input id="searchButton" type="submit" name="sa" value="Search" />
-			</form>
-		<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=searchbox_017941334893793413703%3Asqfrdtd112s&lang=en"></script>			
-	</div>
-
-</div>
-<div id="novaContent" class="faux">
-	<br style="clear:both;height:1em;">
+<br style="clear:both;height:1em;">
 	<div id="leftcol">
 		<div class="nav-logo">
-			<a href="index.html"><img src="http://wiki.eclipse.org/images/thumb/d/db/Xtext_logo.png/450px-Xtext_logo.png" style="margin-left:30px; width:125px"/></a>
+			<a href="index.php"><img src="http://wiki.eclipse.org/images/thumb/d/db/Xtext_logo.png/450px-Xtext_logo.png" style="margin-left:30px; width:125px"/></a>
 		</div>
 		<ul id="leftnav">
-		<li class="separator"><div class="separator">Installation</div>
-			<ul style="display: none;" id="subToc_005-installation.html">
-			<li id="005-installation.html#InstallDistro" ><a href="005-installation.html#InstallDistro" >Install Pre-Configured Eclipse With Xtext</a></li>
-			<li id="005-installation.html#InstallXtext" ><a href="005-installation.html#InstallXtext" >Install Xtext From Update Site</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">5 Minutes Tutorial</div>
-			<ul style="display: none;" id="subToc_010-xtext-in-5-minutes.html">
-			<li id="010-xtext-in-5-minutes.html#NewProject" ><a href="010-xtext-in-5-minutes.html#NewProject" >Creating A New Xtext Project</a></li>
-			<li id="010-xtext-in-5-minutes.html#RunWorkflow" ><a href="010-xtext-in-5-minutes.html#RunWorkflow" >Generating The Language Infrastructure</a></li>
-			<li id="010-xtext-in-5-minutes.html#TestingTheEditor" ><a href="010-xtext-in-5-minutes.html#TestingTheEditor" >Try The Editor</a></li>
-			<li id="010-xtext-in-5-minutes.html#Conclusion" ><a href="010-xtext-in-5-minutes.html#Conclusion" >Conclusion</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">30 Minutes Tutorial</div>
-			<ul style="display: none;" id="subToc_020-domainmodel-step-by-step.html">
-			<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" ><a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" >Create A New Xtext Project</a></li>
-			<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" ><a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" >Write Your Own Grammar</a></li>
-			<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_6" ><a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_6" >Generate Language Artifacts</a></li>
-			<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_7" ><a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_7" >Run the Generated IDE Plug-in</a></li>
-			<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_8" ><a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_8" >Second Iteration : Adding Packages and Imports</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">30 Minutes Tutorial - Extended</div>
-			<ul style="display: none;" id="subToc_030-tutorial-next-steps.html">
-			<li id="040-first-code-generator.html" ><a href="040-first-code-generator.html" >Writing a Code Generator With Xtend</a></li>
-			<li id="060-unit-tests.html" ><a href="060-unit-tests.html" >Unit Testing the Language</a></li>
-			<li id="050-validation.html" ><a href="050-validation.html" >Creating Custom Validation Rules</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Overview</div>
-			<ul style="display: none;" id="subToc_000-introduction.html">
-			<li id="000-introduction.html#Overview_1" ><a href="000-introduction.html#Overview_1" >What is Xtext?</a></li>
-			<li id="000-introduction.html#Overview_2" ><a href="000-introduction.html#Overview_2" >How Does It Work?</a></li>
-			<li id="000-introduction.html#Overview_3" ><a href="000-introduction.html#Overview_3" >Xtext is Highly Configurable</a></li>
-			<li id="000-introduction.html#Overview_4" ><a href="000-introduction.html#Overview_4" >Who Uses Xtext?</a></li>
-			<li id="000-introduction.html#Overview_5" ><a href="000-introduction.html#Overview_5" >Who is Behind Xtext?</a></li>
-			<li id="000-introduction.html#DSL" ><a href="000-introduction.html#DSL" >What is a Domain-Specific Language</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">The Grammar Language</div>
-			<ul style="display: none;" id="subToc_020-grammar-language.html">
-			<li id="020-grammar-language.html#statemachine" ><a href="020-grammar-language.html#statemachine" >A First Example</a></li>
-			<li id="020-grammar-language.html#syntax" ><a href="020-grammar-language.html#syntax" >The Syntax</a></li>
-			<li id="020-grammar-language.html#metamodelInference" ><a href="020-grammar-language.html#metamodelInference" >Ecore Model Inference</a></li>
-			<li id="020-grammar-language.html#grammarMixins" ><a href="020-grammar-language.html#grammarMixins" >Grammar Mixins</a></li>
-			<li id="020-grammar-language.html#grammarLanguage_6" ><a href="020-grammar-language.html#grammarLanguage_6" >Common Terminals</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Configuration</div>
-			<ul style="display: none;" id="subToc_030-generator.html">
-			<li id="030-generator.html#generator" ><a href="030-generator.html#generator" >The Language Generator</a></li>
-			<li id="040-dependency-injection.html" ><a href="040-dependency-injection.html" >Dependency Injection in Xtext with Google Guice</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Runtime Concepts</div>
-			<ul style="display: none;" id="subToc_050-heading-runtime.html">
-			<li id="050-heading-runtime.html#runtimeSetup" ><a href="050-heading-runtime.html#runtimeSetup" >Runtime Setup (ISetup)</a></li>
-			<li id="050-heading-runtime.html#equinoxSetup" ><a href="050-heading-runtime.html#equinoxSetup" >Setup within Eclipse-Equinox (OSGi)</a></li>
-			<li id="050-heading-runtime.html#runtime_concepts_4" ><a href="050-heading-runtime.html#runtime_concepts_4" >Logging</a></li>
-			<li id="060-validation.html" ><a href="060-validation.html" >Validation</a></li>
-			<li id="070-linking.html" ><a href="070-linking.html" >Linking</a></li>
-			<li id="080-scoping.html" ><a href="080-scoping.html" >Scoping</a></li>
-			<li id="090-valueconverter.html" ><a href="090-valueconverter.html" >Value Converter</a></li>
-			<li id="100-serialization.html" ><a href="100-serialization.html" >Serialization</a></li>
-			<li id="105-formatting.html" ><a href="105-formatting.html" >Formatting (Pretty Printing)</a></li>
-			<li id="110-fragmentprovider.html" ><a href="110-fragmentprovider.html" >Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)</a></li>
-			<li id="115-encoding.html" ><a href="115-encoding.html" >Encoding in Xtext</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">MWE2</div>
-			<ul style="display: none;" id="subToc_118-mwe-in-depth.html">
-			<li id="118-mwe-in-depth.html#MWE2Exampe" ><a href="118-mwe-in-depth.html#MWE2Exampe" >Examples</a></li>
-			<li id="118-mwe-in-depth.html#MWE2LanguageReference" ><a href="118-mwe-in-depth.html#MWE2LanguageReference" >Language Reference</a></li>
-			<li id="118-mwe-in-depth.html#MWE2SyntaxReference" ><a href="118-mwe-in-depth.html#MWE2SyntaxReference" >Syntax Reference</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">IDE Concepts</div>
-			<ul style="display: none;" id="subToc_120-heading-UI.html">
-			<li id="140-labelprovider.html" ><a href="140-labelprovider.html" >Label Provider</a></li>
-			<li id="150-contentassist.html" ><a href="150-contentassist.html" >Content Assist</a></li>
-			<li id="155-quickfix.html" ><a href="155-quickfix.html" >Quick Fixes</a></li>
-			<li id="160-templates.html" ><a href="160-templates.html" >Template Proposals</a></li>
-			<li id="170-outline.html" ><a href="170-outline.html" >Outline View</a></li>
-			<li id="180-hyperlinking.html" ><a href="180-hyperlinking.html" >Hyperlinking</a></li>
-			<li id="195-highlighting.html" ><a href="195-highlighting.html" >Syntax Coloring</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Referring to Java Types</div>
-			<ul style="display: none;" id="subToc_199-jvmtypes.html">
-			<li id="199-jvmtypes.html#jvmtypes_3" ><a href="199-jvmtypes.html#jvmtypes_3" >How to Use Java Types</a></li>
-			<li id="199-jvmtypes.html#jvmtypes_4" ><a href="199-jvmtypes.html#jvmtypes_4" >Customization Points</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Integration with EMF and Other EMF Editors</div>
-			<ul style="display: none;" id="subToc_210-emf-integration.html">
-			<li id="210-emf-integration.html#model_metamodel" ><a href="210-emf-integration.html#model_metamodel" >Model, Ecore Model, and Ecore</a></li>
-			<li id="210-emf-integration.html#emf_codegen" ><a href="210-emf-integration.html#emf_codegen" >EMF Code Generation</a></li>
-			<li id="210-emf-integration.html#xtext_resource" ><a href="210-emf-integration.html#xtext_resource" >XtextResource Implementation</a></li>
-			<li id="210-emf-integration.html#gmf_integration" ><a href="210-emf-integration.html#gmf_integration" >Integration with GMF Editors</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Migrating from Xtext 1.0.x to 2.0</div>
-			<ul style="display: none;" id="subToc_213-migrating-from-1.0.html">
-			<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_4" ><a href="213-migrating-from-1.0.html#migrating_from_1_0_x_4" >Take the Shortcut</a></li>
-			<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_5" ><a href="213-migrating-from-1.0.html#migrating_from_1_0_x_5" >Migrating Step By Step</a></li>
-			<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_6" ><a href="213-migrating-from-1.0.html#migrating_from_1_0_x_6" >Now go for then new features</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Migrating from Xtext 0.7.x to 1.0</div>
-			<ul style="display: none;" id="subToc_215-migrating-from-0.7.html">
-			<li id="215-migrating-from-0.7.html#migrating_from_0_7_2" ><a href="215-migrating-from-0.7.html#migrating_from_0_7_2" >Migrating Step By Step</a></li>
-			</ul>
-			</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="005-installation.php">Installation</a></div>
+		<ul style="display: none;" id="subToc_005-installation.html">
+		<li id="005-installation.html#InstallDistro" ><a href="005-installation.php#InstallDistro" >Install Pre-Configured Eclipse With Xtext</a></li>
+		<li id="005-installation.html#InstallXtext" ><a href="005-installation.php#InstallXtext" >Install Xtext From Update Site</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="010-xtext-in-5-minutes.php">5 Minutes Tutorial</a></div>
+		<ul style="display: none;" id="subToc_010-xtext-in-5-minutes.html">
+		<li id="010-xtext-in-5-minutes.html#NewProject" ><a href="010-xtext-in-5-minutes.php#NewProject" >Creating A New Xtext Project</a></li>
+		<li id="010-xtext-in-5-minutes.html#RunWorkflow" ><a href="010-xtext-in-5-minutes.php#RunWorkflow" >Generating The Language Infrastructure</a></li>
+		<li id="010-xtext-in-5-minutes.html#TestingTheEditor" ><a href="010-xtext-in-5-minutes.php#TestingTheEditor" >Try The Editor</a></li>
+		<li id="010-xtext-in-5-minutes.html#Conclusion" ><a href="010-xtext-in-5-minutes.php#Conclusion" >Conclusion</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="020-domainmodel-step-by-step.php">15 Minutes Tutorial</a></div>
+		<ul style="display: none;" id="subToc_020-domainmodel-step-by-step.html">
+		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_4" >Create A New Xtext Project</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_5" >Write Your Own Grammar</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_6" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_6" >Generate Language Artifacts</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_7" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_7" >Run the Generated IDE Plug-in</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_8" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_8" >Second Iteration : Adding Packages and Imports</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="030-tutorial-next-steps.php">15 Minutes Tutorial - Extended</a></div>
+		<ul style="display: none;" id="subToc_030-tutorial-next-steps.html">
+		<li id="040-first-code-generator.html" ><a href="040-first-code-generator.php" >Writing a Code Generator With Xtend</a></li>
+		<li id="060-unit-tests.html" ><a href="060-unit-tests.php" >Unit Testing the Language</a></li>
+		<li id="050-validation.html" ><a href="050-validation.php" >Creating Custom Validation Rules</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="000-introduction.php">Overview</a></div>
+		<ul style="display: none;" id="subToc_000-introduction.html">
+		<li id="000-introduction.html#Overview_1" ><a href="000-introduction.php#Overview_1" >What is Xtext?</a></li>
+		<li id="000-introduction.html#Overview_2" ><a href="000-introduction.php#Overview_2" >How Does It Work?</a></li>
+		<li id="000-introduction.html#Overview_3" ><a href="000-introduction.php#Overview_3" >Xtext is Highly Configurable</a></li>
+		<li id="000-introduction.html#Overview_4" ><a href="000-introduction.php#Overview_4" >Who Uses Xtext?</a></li>
+		<li id="000-introduction.html#Overview_5" ><a href="000-introduction.php#Overview_5" >Who is Behind Xtext?</a></li>
+		<li id="000-introduction.html#DSL" ><a href="000-introduction.php#DSL" >What is a Domain-Specific Language</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="020-grammar-language.php">The Grammar Language</a></div>
+		<ul style="display: none;" id="subToc_020-grammar-language.html">
+		<li id="020-grammar-language.html#statemachine" ><a href="020-grammar-language.php#statemachine" >A First Example</a></li>
+		<li id="020-grammar-language.html#syntax" ><a href="020-grammar-language.php#syntax" >The Syntax</a></li>
+		<li id="020-grammar-language.html#metamodelInference" ><a href="020-grammar-language.php#metamodelInference" >Ecore Model Inference</a></li>
+		<li id="020-grammar-language.html#grammarMixins" ><a href="020-grammar-language.php#grammarMixins" >Grammar Mixins</a></li>
+		<li id="020-grammar-language.html#grammarLanguage_6" ><a href="020-grammar-language.php#grammarLanguage_6" >Common Terminals</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="030-generator.php">Configuration</a></div>
+		<ul style="display: none;" id="subToc_030-generator.html">
+		<li id="030-generator.html#generator" ><a href="030-generator.php#generator" >The Language Generator</a></li>
+		<li id="040-dependency-injection.html" ><a href="040-dependency-injection.php" >Dependency Injection in Xtext with Google Guice</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="050-heading-runtime.php">Runtime Concepts</a></div>
+		<ul style="display: none;" id="subToc_050-heading-runtime.html">
+		<li id="050-heading-runtime.html#runtimeSetup" ><a href="050-heading-runtime.php#runtimeSetup" >Runtime Setup (ISetup)</a></li>
+		<li id="050-heading-runtime.html#equinoxSetup" ><a href="050-heading-runtime.php#equinoxSetup" >Setup within Eclipse-Equinox (OSGi)</a></li>
+		<li id="050-heading-runtime.html#runtime_concepts_4" ><a href="050-heading-runtime.php#runtime_concepts_4" >Logging</a></li>
+		<li id="060-validation.html" ><a href="060-validation.php" >Validation</a></li>
+		<li id="070-linking.html" ><a href="070-linking.php" >Linking</a></li>
+		<li id="080-scoping.html" ><a href="080-scoping.php" >Scoping</a></li>
+		<li id="090-valueconverter.html" ><a href="090-valueconverter.php" >Value Converter</a></li>
+		<li id="100-serialization.html" ><a href="100-serialization.php" >Serialization</a></li>
+		<li id="105-formatting.html" ><a href="105-formatting.php" >Formatting (Pretty Printing)</a></li>
+		<li id="110-fragmentprovider.html" ><a href="110-fragmentprovider.php" >Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)</a></li>
+		<li id="115-encoding.html" ><a href="115-encoding.php" >Encoding in Xtext</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="118-mwe-in-depth.php">MWE2</a></div>
+		<ul style="display: none;" id="subToc_118-mwe-in-depth.html">
+		<li id="118-mwe-in-depth.html#MWE2Exampe" ><a href="118-mwe-in-depth.php#MWE2Exampe" >Examples</a></li>
+		<li id="118-mwe-in-depth.html#MWE2LanguageReference" ><a href="118-mwe-in-depth.php#MWE2LanguageReference" >Language Reference</a></li>
+		<li id="118-mwe-in-depth.html#MWE2SyntaxReference" ><a href="118-mwe-in-depth.php#MWE2SyntaxReference" >Syntax Reference</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="120-heading-UI.php">IDE Concepts</a></div>
+		<ul style="display: none;" id="subToc_120-heading-UI.html">
+		<li id="140-labelprovider.html" ><a href="140-labelprovider.php" >Label Provider</a></li>
+		<li id="150-contentassist.html" ><a href="150-contentassist.php" >Content Assist</a></li>
+		<li id="155-quickfix.html" ><a href="155-quickfix.php" >Quick Fixes</a></li>
+		<li id="160-templates.html" ><a href="160-templates.php" >Template Proposals</a></li>
+		<li id="170-outline.html" ><a href="170-outline.php" >Outline View</a></li>
+		<li id="180-hyperlinking.html" ><a href="180-hyperlinking.php" >Hyperlinking</a></li>
+		<li id="195-highlighting.html" ><a href="195-highlighting.php" >Syntax Coloring</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="199-jvmtypes.php">Referring to Java Types</a></div>
+		<ul style="display: none;" id="subToc_199-jvmtypes.html">
+		<li id="199-jvmtypes.html#jvmtypes_3" ><a href="199-jvmtypes.php#jvmtypes_3" >How to Use Java Types</a></li>
+		<li id="199-jvmtypes.html#jvmtypes_4" ><a href="199-jvmtypes.php#jvmtypes_4" >Customization Points</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="210-emf-integration.php">Integration with EMF and Other EMF Editors</a></div>
+		<ul style="display: none;" id="subToc_210-emf-integration.html">
+		<li id="210-emf-integration.html#model_metamodel" ><a href="210-emf-integration.php#model_metamodel" >Model, Ecore Model, and Ecore</a></li>
+		<li id="210-emf-integration.html#emf_codegen" ><a href="210-emf-integration.php#emf_codegen" >EMF Code Generation</a></li>
+		<li id="210-emf-integration.html#xtext_resource" ><a href="210-emf-integration.php#xtext_resource" >XtextResource Implementation</a></li>
+		<li id="210-emf-integration.html#gmf_integration" ><a href="210-emf-integration.php#gmf_integration" >Integration with GMF Editors</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="213-migrating-from-1.0.php">Migrating from Xtext 1.0.x to 2.0</a></div>
+		<ul style="display: none;" id="subToc_213-migrating-from-1.0.html">
+		<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_4" ><a href="213-migrating-from-1.0.php#migrating_from_1_0_x_4" >Take the Shortcut</a></li>
+		<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_5" ><a href="213-migrating-from-1.0.php#migrating_from_1_0_x_5" >Migrating Step By Step</a></li>
+		<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_6" ><a href="213-migrating-from-1.0.php#migrating_from_1_0_x_6" >Now go for then new features</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="215-migrating-from-0.7.php">Migrating from Xtext 0.7.x to 1.0</a></div>
+		<ul style="display: none;" id="subToc_215-migrating-from-0.7.html">
+		<li id="215-migrating-from-0.7.html#migrating_from_0_7_2" ><a href="215-migrating-from-0.7.php#migrating_from_0_7_2" >Migrating Step By Step</a></li>
+		</ul>
+		</li>
 		</ul>
 	</div>
 	<div id="midcolumn">
@@ -225,9 +153,9 @@
 		<h1>Scoping</h1>
 			<div class="toc">
 			  <ul>
-			    <li><a href="080-scoping.html#global_scopes" >Global Scopes and Resource Descriptions</a></li>
-			    <li><a href="080-scoping.html#local_scoping" >Local Scoping</a></li>
-			    <li><a href="080-scoping.html#scoping_12" >Imported Namespace-Aware Scoping</a></li>
+			    <li><a href="080-scoping.php#global_scopes" >Global Scopes and Resource Descriptions</a></li>
+			    <li><a href="080-scoping.php#local_scoping" >Local Scoping</a></li>
+			    <li><a href="080-scoping.php#scoping_12" >Imported Namespace-Aware Scoping</a></li>
 			  </ul>
 			</div>
 		<p>
@@ -242,12 +170,12 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">events</span></br>
-		&nbsp;&nbsp;nothingImportant&nbsp;&nbsp;MYEV</br>
-		<span class="keyword">end</span></br>
-		&nbsp;</br>
-		<span class="keyword">state</span>&nbsp;idle</br>
-		&nbsp;&nbsp;nothingImportant&nbsp;=&gt;&nbsp;idle</br>
+		<span class="keyword">events</span><br/>
+		&nbsp;&nbsp;nothingImportant&nbsp;&nbsp;MYEV<br/>
+		<span class="keyword">end</span><br/>
+		&nbsp;<br/>
+		<span class="keyword">state</span>&nbsp;idle<br/>
+		&nbsp;&nbsp;nothingImportant&nbsp;=&gt;&nbsp;idle<br/>
 		<span class="keyword">end</span>
 		</p>
 		</div>
@@ -260,7 +188,7 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		Transition&nbsp;:</br>
+		Transition&nbsp;:<br/>
 		&nbsp;&nbsp;event=[Event]&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;state=[State];
 		</p>
 		</div>
@@ -272,44 +200,44 @@
 		declaration doesn't say anything about where to find the states or events. That is the duty of scopes.  
 		</p>
 		<p>
-		An <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScopeProvider" >IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> is responsible for providing 
-		an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScope.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScope" >IScope</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScope.java" title="View Source Code" >(src)</a> for a given context <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> and 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReference</abbr></a>. The returned <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScope.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScope" >IScope</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScope.java" title="View Source Code" >(src)</a> should 
+		An <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScopeProvider.html" title="org.eclipse.xtext.scoping.IScopeProvider">IScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScopeProvider.java" title="View Source Code" >(src)</a> is responsible for providing 
+		an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScope.html" title="org.eclipse.xtext.scoping.IScope">IScope</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScope.java" title="View Source Code" >(src)</a> for a given context <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> and 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="org.eclipse.emf.ecore.EReference">EReference</abbr></a>. The returned <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScope.html" title="org.eclipse.xtext.scoping.IScope">IScope</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScope.java" title="View Source Code" >(src)</a> should 
 		contain all target candidates for the given object and cross-reference.
 		</p>
 		<p>
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">public</span>&nbsp;<span class="keyword">interface</span>&nbsp;IScopeProvider&nbsp;{</br>
-		</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;scope&nbsp;for&nbsp;the&nbsp;given&nbsp;context.&nbsp;The&nbsp;scope&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;provides&nbsp;access&nbsp;to&nbsp;the&nbsp;compatible&nbsp;visible&nbsp;EObjects&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;for&nbsp;a&nbsp;given&nbsp;reference.</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;context&nbsp;the&nbsp;element&nbsp;from&nbsp;which&nbsp;an&nbsp;element&nbsp;shall&nbsp;be&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;referenced</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;reference&nbsp;the&nbsp;reference&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;filter&nbsp;the&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elements.</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;{@link&nbsp;IScope}&nbsp;representing&nbsp;the&nbsp;inner&nbsp;most&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{@link&nbsp;IScope}&nbsp;for&nbsp;the&nbsp;passed&nbsp;context&nbsp;and&nbsp;reference.&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;for&nbsp;implementors:&nbsp;The&nbsp;result&nbsp;may&nbsp;not&nbsp;be&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;code&gt;null&lt;/code&gt;.&nbsp;Return&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;code&gt;IScope.NULLSCOPE&lt;/code&gt;&nbsp;instead.</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></br>
-		&nbsp;&nbsp;&nbsp;&nbsp;IScope&nbsp;getScope(EObject&nbsp;context,&nbsp;EReference&nbsp;reference);</br>
-		</br>
+		<span class="keyword">public</span>&nbsp;<span class="keyword">interface</span>&nbsp;IScopeProvider&nbsp;{<br/>
+		<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;scope&nbsp;for&nbsp;the&nbsp;given&nbsp;context.&nbsp;The&nbsp;scope&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;provides&nbsp;access&nbsp;to&nbsp;the&nbsp;compatible&nbsp;visible&nbsp;EObjects&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;for&nbsp;a&nbsp;given&nbsp;reference.<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;context&nbsp;the&nbsp;element&nbsp;from&nbsp;which&nbsp;an&nbsp;element&nbsp;shall&nbsp;be&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;referenced<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;reference&nbsp;the&nbsp;reference&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;filter&nbsp;the&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elements.<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;{@link&nbsp;IScope}&nbsp;representing&nbsp;the&nbsp;inner&nbsp;most&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{@link&nbsp;IScope}&nbsp;for&nbsp;the&nbsp;passed&nbsp;context&nbsp;and&nbsp;reference.&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;for&nbsp;implementors:&nbsp;The&nbsp;result&nbsp;may&nbsp;not&nbsp;be&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;code&gt;null&lt;/code&gt;.&nbsp;Return&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;code&gt;IScope.NULLSCOPE&lt;/code&gt;&nbsp;instead.<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;IScope&nbsp;getScope(EObject&nbsp;context,&nbsp;EReference&nbsp;reference);<br/>
+		<br/>
 		}
 		</p>
 		</div>
 		</div>
 		</p>
 		<p>
-		A single <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScope.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IScope" >IScope</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScope.java" title="View Source Code" >(src)</a> represents an element of a linked list of scopes. 
+		A single <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IScope.html" title="org.eclipse.xtext.scoping.IScope">IScope</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IScope.java" title="View Source Code" >(src)</a> represents an element of a linked list of scopes. 
 		That means that a scope can be nested within an outer scope. Each scope works like a symbol table or a 
-		map where the keys are strings and the values are so called <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a>, 
-		which is effectively an abstract description of a real <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a>. 
+		map where the keys are strings and the values are so called <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="org.eclipse.xtext.resource.IEObjectDescription">IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a>, 
+		which is effectively an abstract description of a real <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a>. 
 		</p>
 		<a name="global_scopes" ></a>
 		<h2>Global Scopes and Resource Descriptions</h2>
@@ -324,20 +252,20 @@
 		<p>
 		Defining what is visible from outside the current resource is the responsibility of global scopes. 
 		As the name suggests, global scopes are provided by instances of the 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IGlobalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IGlobalScopeProvider" >IGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java" title="View Source Code" >(src)</a>. The data structures used to 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IGlobalScopeProvider.html" title="org.eclipse.xtext.scoping.IGlobalScopeProvider">IGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java" title="View Source Code" >(src)</a>. The data structures used to 
 		store its elements are described in the next section.
 		</p>
 		<a name="resourcedescriptions" ></a>
 		<h3>Resource and EObject Descriptions</h3>
 		<p>
 		In order to make states and events of one file referable from another file you need to export them as 
-		part of a so called <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription" >IResourceDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a>. 
+		part of a so called <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.html" title="org.eclipse.xtext.resource.IResourceDescription">IResourceDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a>. 
 		</p>
 		<p>
-		A <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription" >IResourceDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a> contains information about the resource itself 
-		which primarily its <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a>, a list 
-		of exported <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObjects</abbr></a> in the form of 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a>
+		A <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.html" title="org.eclipse.xtext.resource.IResourceDescription">IResourceDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a> contains information about the resource itself 
+		which primarily its <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="org.eclipse.emf.common.util.URI">URI</abbr></a>, a list 
+		of exported <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObjects</abbr></a> in the form of 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="org.eclipse.xtext.resource.IEObjectDescription">IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a>
 		as well as information about outgoing cross-references and qualified names it references. The cross 
 		references contain only resolved references, while the list of imported qualified names also contain 
 		those names, which couldn't be resolved. This information is leveraged by Xtext's indexing infrastructure
@@ -345,9 +273,9 @@
 		</p>
 		<p>
 		For users and especially in the context of scoping the most important information is the list of 
-		exported <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObjects</abbr></a>. An <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> 
-		stores the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URI</abbr></a> of the actual <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a>,
-		its <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/QualifiedName.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.QualifiedName" >QualifiedName</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java" title="View Source Code" >(src)</a>, as well as its <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClass" >EClass</abbr></a>. 
+		exported <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObjects</abbr></a>. An <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="org.eclipse.xtext.resource.IEObjectDescription">IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> 
+		stores the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="org.eclipse.emf.common.util.URI">URI</abbr></a> of the actual <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a>,
+		its <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/QualifiedName.html" title="org.eclipse.xtext.naming.QualifiedName">QualifiedName</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java" title="View Source Code" >(src)</a>, as well as its <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">EClass</abbr></a>. 
 		In addition one can export arbitrary information using the <em>user data</em> map. The following diagram gives 
 		an overview on the description classes and their relationships.
 		</p>
@@ -362,56 +290,56 @@
 		</div>
 		</p>
 		<p>
-		A language is configured with a default implementation of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription.Manager" >IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a> 
-		which computes the list of exported <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> by iterating 
+		A language is configured with a default implementation of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="org.eclipse.xtext.resource.IResourceDescription.Manager">IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a> 
+		which computes the list of exported <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="org.eclipse.xtext.resource.IEObjectDescription">IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> by iterating 
 		the whole EMF model and applying the <span class="inlinecode">getQualifiedName(EObject&nbsp;obj)</span> from 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider" >IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a> 
-		on each <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a>. If the object has a qualified name an 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> is created and exported 
-		(i.e. added to the list). If an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a> doesn't have a qualified name, the 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a> 
+		on each <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a>. If the object has a qualified name an 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="org.eclipse.xtext.resource.IEObjectDescription">IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> is created and exported 
+		(i.e. added to the list). If an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> doesn't have a qualified name, the 
 		element is considered to be not referable from outside the resource and consequently not indexed. If you 
 		don't like this behavior, you can implement and bind your own implementation of 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription.Manager" >IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a>.  
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="org.eclipse.xtext.resource.IResourceDescription.Manager">IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a>.  
 		</p>
 		<p>
-		There are also two different default implementations of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider" >IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a>. 
-		Both work by looking up an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttribute</abbr></a> 'name'. The
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/SimpleNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.SimpleNameProvider" >SimpleNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/SimpleNameProvider.java" title="View Source Code" >(src)</a> simply returns the plain value, while the 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider" >DefaultDeclarativeQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.java" title="View Source Code" >(src)</a> concatenates 
-		the simple name with the qualified name of its parent exported <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObject</abbr></a>. This
+		There are also two different default implementations of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a>. 
+		Both work by looking up an <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="org.eclipse.emf.ecore.EAttribute">EAttribute</abbr></a> 'name'. The
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/SimpleNameProvider.html" title="org.eclipse.xtext.naming.SimpleNameProvider">SimpleNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/SimpleNameProvider.java" title="View Source Code" >(src)</a> simply returns the plain value, while the 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.html" title="org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider">DefaultDeclarativeQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.java" title="View Source Code" >(src)</a> concatenates 
+		the simple name with the qualified name of its parent exported <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a>. This
 		effectively simulates the qualified name computation of most namespace-based languages (like e.g. Java). 
 		</p>
 		<p>
-		As mentioned above, in order to calculate an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription" >IResourceDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a> for a 
-		resource the framework asks the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription.Manager" >IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a>. To convert 
-		between a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/QualifiedName.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.QualifiedName" >QualifiedName</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java" title="View Source Code" >(src)</a> and its <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="View JavaDoc"><abbr title="java.lang.String" >String</abbr></a> representation you 
-		can use the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/IQualifiedNameConverter.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.IQualifiedNameConverter" >IQualifiedNameConverter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameConverter.java" title="View Source Code" >(src)</a>. Here is some Java code showing how to do 
+		As mentioned above, in order to calculate an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.html" title="org.eclipse.xtext.resource.IResourceDescription">IResourceDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a> for a 
+		resource the framework asks the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="org.eclipse.xtext.resource.IResourceDescription.Manager">IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a>. To convert 
+		between a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/QualifiedName.html" title="org.eclipse.xtext.naming.QualifiedName">QualifiedName</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java" title="View Source Code" >(src)</a> and its <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/String.html" title="java.lang.String">String</abbr></a> representation you 
+		can use the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/IQualifiedNameConverter.html" title="org.eclipse.xtext.naming.IQualifiedNameConverter">IQualifiedNameConverter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameConverter.java" title="View Source Code" >(src)</a>. Here is some Java code showing how to do 
 		that:
 		</p>
 		<p>
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		@Inject&nbsp;IQualifiedNameConverter&nbsp;converter;</br>
-		</br>
-		Manager&nbsp;manager&nbsp;=&nbsp;<span class="comment">//&nbsp;obtain&nbsp;an&nbsp;instance&nbsp;of&nbsp;IResourceDescription.Manager</br>
-		</span>IResourceDescription&nbsp;description&nbsp;=</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;manager.getResourceDescription(resource);</br>
-		<span class="keyword">for</span>&nbsp;(IEObjectDescription&nbsp;eod&nbsp;:&nbsp;description.getExportedObjects())&nbsp;{</br>
-		&nbsp;&nbsp;System.out.println(converter.toString(eod.getQualifiedName()));</br>
+		@Inject&nbsp;IQualifiedNameConverter&nbsp;converter;<br/>
+		<br/>
+		Manager&nbsp;manager&nbsp;=&nbsp;<span class="comment">//&nbsp;obtain&nbsp;an&nbsp;instance&nbsp;of&nbsp;IResourceDescription.Manager<br/>
+		</span>IResourceDescription&nbsp;description&nbsp;=<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;manager.getResourceDescription(resource);<br/>
+		<span class="keyword">for</span>&nbsp;(IEObjectDescription&nbsp;eod&nbsp;:&nbsp;description.getExportedObjects())&nbsp;{<br/>
+		&nbsp;&nbsp;System.out.println(converter.toString(eod.getQualifiedName()));<br/>
 		}
 		</p>
 		</div>
 		</div>
 		</p>
 		<p>
-		In order to obtain an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription.Manager" >IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a> it is best to ask the 
-		corresponding <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceServiceProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceServiceProvider" >IResourceServiceProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java" title="View Source Code" >(src)</a>. That is because each 
+		In order to obtain an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="org.eclipse.xtext.resource.IResourceDescription.Manager">IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a> it is best to ask the 
+		corresponding <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceServiceProvider.html" title="org.eclipse.xtext.resource.IResourceServiceProvider">IResourceServiceProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java" title="View Source Code" >(src)</a>. That is because each 
 		language might have a totally different implementation and as you might refer from your language to a 
-		different language you cannot reuse your language's <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription.Manager" >IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a>. 
-		One basically asks the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceServiceProvider.Registry.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceServiceProvider.Registry" >IResourceServiceProvider.Registry</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java" title="View Source Code" >(src)</a> (there is usually 
-		one global instance) for an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceServiceProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceServiceProvider" >IResourceServiceProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java" title="View Source Code" >(src)</a>, which in turn provides 
-		an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription.Manager" >IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a> along other useful services.
+		different language you cannot reuse your language's <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="org.eclipse.xtext.resource.IResourceDescription.Manager">IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a>. 
+		One basically asks the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceServiceProvider.Registry.html" title="org.eclipse.xtext.resource.IResourceServiceProvider.Registry">IResourceServiceProvider.Registry</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java" title="View Source Code" >(src)</a> (there is usually 
+		one global instance) for an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceServiceProvider.html" title="org.eclipse.xtext.resource.IResourceServiceProvider">IResourceServiceProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java" title="View Source Code" >(src)</a>, which in turn provides 
+		an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="org.eclipse.xtext.resource.IResourceDescription.Manager">IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a> along other useful services.
 		</p>
 		<p>
 		If you are running in a Guice enabled scenario, the code looks like this:
@@ -420,13 +348,13 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		@Inject&nbsp;</br>
-		<span class="keyword">private</span>&nbsp;IResourceServiceProvider.Registry&nbsp;rspr;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;</br>
-		<span class="keyword">private</span>&nbsp;IResourceDescription.Manager&nbsp;getManager(Resource&nbsp;res)&nbsp;{</br>
-		&nbsp;&nbsp;IResourceServiceProvider&nbsp;resourceServiceProvider&nbsp;=&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;rspr.getResourceServiceProvider(res.getURI());</br>
-		&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;resourceServiceProvider.getResourceDescriptionManager();</br>
+		@Inject&nbsp;<br/>
+		<span class="keyword">private</span>&nbsp;IResourceServiceProvider.Registry&nbsp;rspr;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+		<span class="keyword">private</span>&nbsp;IResourceDescription.Manager&nbsp;getManager(Resource&nbsp;res)&nbsp;{<br/>
+		&nbsp;&nbsp;IResourceServiceProvider&nbsp;resourceServiceProvider&nbsp;=&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;rspr.getResourceServiceProvider(res.getURI());<br/>
+		&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;resourceServiceProvider.getResourceDescriptionManager();<br/>
 		}
 		</p>
 		</div>
@@ -439,7 +367,7 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">private</span>&nbsp;IResourceServiceProvider.Registry&nbsp;rspr&nbsp;=&nbsp;</br>
+		<span class="keyword">private</span>&nbsp;IResourceServiceProvider.Registry&nbsp;rspr&nbsp;=&nbsp;<br/>
 		&nbsp;&nbsp;IResourceServiceProvider.Registry.INSTANCE;
 		</p>
 		</div>
@@ -448,17 +376,17 @@
 		<p>
 		However, we strongly encourage you to use dependency injection. Now, that we know how to export elements to be 
 		referable from other resources, we need to learn how those exported 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> can be made available to the referencing resources. That is 
-		the responsibility of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IGlobalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IGlobalScopeProvider" >global scoping</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java" title="View Source Code" >(src)</a> which is 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="org.eclipse.xtext.resource.IEObjectDescription">IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> can be made available to the referencing resources. That is 
+		the responsibility of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IGlobalScopeProvider.html" title="org.eclipse.xtext.scoping.IGlobalScopeProvider">global scoping</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java" title="View Source Code" >(src)</a> which is 
 		described in the following chapter.
 		</p>
 		<a name="import_uri" ></a>
 		<h3>Global Scopes Based On Explicit Imports (ImportURI Mechanism)</h3>
 		<p>
 		A simple and straight forward solution is to have explicit references to other resources in your 
-		file by explicitly listing pathes or <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="View JavaDoc"><abbr title="org.eclipse.emf.common.util.URI" >URIs</abbr></a> to all referenced resources 
+		file by explicitly listing pathes or <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/common/util/URI.html" title="org.eclipse.emf.common.util.URI">URIs</abbr></a> to all referenced resources 
 		in your model file. That is for instance what most include mechanisms use. In Xtext we provide a handy 
-		implementation of an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IGlobalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IGlobalScopeProvider" >IGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java" title="View Source Code" >(src)</a> which is based on a naming convention 
+		implementation of an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IGlobalScopeProvider.html" title="org.eclipse.xtext.scoping.IGlobalScopeProvider">IGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java" title="View Source Code" >(src)</a> which is based on a naming convention 
 		and makes this semantics very easy to use. Talking of the introductory example and given you would want to add 
 		support for referencing external <em>States</em> and <em>Events</em> from within your state machine, all you had to do is 
 		add something like the following to the grammar definition:
@@ -467,20 +395,20 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		Statemachine&nbsp;:</br>
-		&nbsp;&nbsp;(imports+=Import)*&nbsp;<span class="comment">//&nbsp;allow&nbsp;imports</br>
-		</span>&nbsp;&nbsp;<span class="string">&apos;events&apos;</span></br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(events+=Event)+</br>
-		&nbsp;&nbsp;<span class="string">&apos;end&apos;</span></br>
-		&nbsp;&nbsp;(<span class="string">&apos;resetEvents&apos;</span></br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(resetEvents+=[Event])+</br>
-		&nbsp;&nbsp;<span class="string">&apos;end&apos;</span>)?</br>
-		&nbsp;&nbsp;<span class="string">&apos;commands&apos;</span></br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(commands+=Command)+</br>
-		&nbsp;&nbsp;<span class="string">&apos;end&apos;</span></br>
-		&nbsp;&nbsp;(states+=State)+;</br>
-		</br>
-		Import&nbsp;:&nbsp;</br>
+		Statemachine&nbsp;:<br/>
+		&nbsp;&nbsp;(imports+=Import)*&nbsp;<span class="comment">//&nbsp;allow&nbsp;imports<br/>
+		</span>&nbsp;&nbsp;<span class="string">&apos;events&apos;</span><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(events+=Event)+<br/>
+		&nbsp;&nbsp;<span class="string">&apos;end&apos;</span><br/>
+		&nbsp;&nbsp;(<span class="string">&apos;resetEvents&apos;</span><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(resetEvents+=[Event])+<br/>
+		&nbsp;&nbsp;<span class="string">&apos;end&apos;</span>)?<br/>
+		&nbsp;&nbsp;<span class="string">&apos;commands&apos;</span><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(commands+=Command)+<br/>
+		&nbsp;&nbsp;<span class="string">&apos;end&apos;</span><br/>
+		&nbsp;&nbsp;(states+=State)+;<br/>
+		<br/>
+		Import&nbsp;:&nbsp;<br/>
 		&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importURI=STRING;&nbsp;<span class="comment">//&nbsp;feature&nbsp;must&nbsp;be&nbsp;named&nbsp;importURI</span>
 		</p>
 		</div>
@@ -489,19 +417,19 @@
 		<p>
 		This effectively allows import statements to be declared before the events section. In addition 
 		you will have to make sure that you have bound the 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/ImportUriGlobalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider" >ImportUriGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportUriGlobalScopeProvider.java" title="View Source Code" >(src)</a> for the type 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IGlobalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IGlobalScopeProvider" >IGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java" title="View Source Code" >(src)</a> by the means of <a href="040-dependency-injection.html" title="Go to &quot;Dependency Injection in Xtext with Google Guice&quot;">Guice</a>. 
-		That implementation looks up any <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttributes</abbr></a> named 'importURI' in your
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/ImportUriGlobalScopeProvider.html" title="org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider">ImportUriGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportUriGlobalScopeProvider.java" title="View Source Code" >(src)</a> for the type 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IGlobalScopeProvider.html" title="org.eclipse.xtext.scoping.IGlobalScopeProvider">IGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java" title="View Source Code" >(src)</a> by the means of <a href="040-dependency-injection.php" title="Go to &quot;Dependency Injection in Xtext with Google Guice&quot;">Guice</a>. 
+		That implementation looks up any <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="org.eclipse.emf.ecore.EAttribute">EAttributes</abbr></a> named 'importURI' in your
 		model and interprets their values as URIs that point to imported resources. That is it adds the corresponding 
 		resources to the current resource's resource set. In addition the scope provider uses the 
-		<a href="080-scoping.html#resourcedescriptions" title="Go to &quot;Resource and EObject Descriptions&quot;"><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription.Manager" >IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a></a> of that 
-		imported resource to compute all the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> returned 
-		by the <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/preferences/IScope.html" title="View JavaDoc"><abbr title="org.eclipse.core.runtime.preferences.IScope" >IScope</abbr></a>.  
+		<a href="080-scoping.php#resourcedescriptions" title="Go to &quot;Resource and EObject Descriptions&quot;"><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="org.eclipse.xtext.resource.IResourceDescription.Manager">IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a></a> of that 
+		imported resource to compute all the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="org.eclipse.xtext.resource.IEObjectDescription">IEObjectDescriptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> returned 
+		by the <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/preferences/IScope.html" title="org.eclipse.core.runtime.preferences.IScope">IScope</abbr></a>.  
 		</p>
 		<p>
 		Global scopes based on import URIs are available if you use the 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/scoping/ImportURIScopingFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.scoping.ImportURIScopingFragment" >ImportURIScopingFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportURIScopingFragment.java" title="View Source Code" >(src)</a> in the workflow of your language.
-		It will bind an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/ImportUriGlobalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider" >ImportUriGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportUriGlobalScopeProvider.java" title="View Source Code" >(src)</a> that handles 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/scoping/ImportURIScopingFragment.html" title="org.eclipse.xtext.generator.scoping.ImportURIScopingFragment">ImportURIScopingFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/scoping/ImportURIScopingFragment.java" title="View Source Code" >(src)</a> in the workflow of your language.
+		It will bind an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/ImportUriGlobalScopeProvider.html" title="org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider">ImportUriGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportUriGlobalScopeProvider.java" title="View Source Code" >(src)</a> that handles 
 		<em>importURI</em> features.
 		</p>
 		<a name="index_based" ></a>
@@ -514,8 +442,8 @@
 		</p>
 		<p>
 		Since version 1.0.0 Xtext provides support for this kind of global scoping. To enable it, a 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/DefaultGlobalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider" >DefaultGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/DefaultGlobalScopeProvider.java" title="View Source Code" >(src)</a> has to be bound to 
-		the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IGlobalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IGlobalScopeProvider" >IGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java" title="View Source Code" >(src)</a> interface. 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/DefaultGlobalScopeProvider.html" title="org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider">DefaultGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/DefaultGlobalScopeProvider.java" title="View Source Code" >(src)</a> has to be bound to 
+		the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IGlobalScopeProvider.html" title="org.eclipse.xtext.scoping.IGlobalScopeProvider">IGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java" title="View Source Code" >(src)</a> interface. 
 		</p>
 		<p>
 		By default Xtext leverages the classpath mechanism since it is well designed and already understood 
@@ -526,11 +454,11 @@
 		<p>
 		In order to know what is available in the "world" a global scope provider which relies on external 
 		configuration needs to read that configuration in and be able to find all candidates for a certain 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EReference" >EReference</abbr></a>. If you don't want to force users to have a folder and file name 
-		structure reflecting the actual qualified names of the referenceable <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObjects</abbr></a>, 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EReference.html" title="org.eclipse.emf.ecore.EReference">EReference</abbr></a>. If you don't want to force users to have a folder and file name 
+		structure reflecting the actual qualified names of the referenceable <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObjects</abbr></a>, 
 		you'll have to load all resources up front and either keep holding them in memory or remembering all information 
 		which is needed for the resolution of cross-references. In Xtext that information is provided by a so called 
-		<a href="080-scoping.html#resourcedescriptions" title="Go to &quot;Resource and EObject Descriptions&quot;"><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a></a>. 
+		<a href="080-scoping.php#resourcedescriptions" title="Go to &quot;Resource and EObject Descriptions&quot;"><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="org.eclipse.xtext.resource.IEObjectDescription">IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a></a>. 
 		</p>
 		<a name="containers" ></a>
 		<h4><p>
@@ -538,73 +466,73 @@
 		</p>
 		</h4>
 		<p>
-		Xtext ships with an index which remembers all <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription" >IResourceDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a> and 
-		their <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IEObjectDescription" >IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> objects. In the IDE-context (i.e. when running 
+		Xtext ships with an index which remembers all <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.html" title="org.eclipse.xtext.resource.IResourceDescription">IResourceDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a> and 
+		their <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IEObjectDescription.html" title="org.eclipse.xtext.resource.IEObjectDescription">IEObjectDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IEObjectDescription.java" title="View Source Code" >(src)</a> objects. In the IDE-context (i.e. when running 
 		the editor, etc.) the index is updated by an incremental project builder. As opposed to that, in a non-UI 
 		context you typically do not have to deal with changes such that the infrastructure can be much simpler. In 
-		both situations the global index state is held by an implementation of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescriptions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescriptions" >IResourceDescriptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescriptions.java" title="View Source Code" >(src)</a> 
+		both situations the global index state is held by an implementation of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescriptions.html" title="org.eclipse.xtext.resource.IResourceDescriptions">IResourceDescriptions</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescriptions.java" title="View Source Code" >(src)</a> 
 		(Note the plural form!). The bound singleton in the UI scenario is even aware of unsaved editor changes, 
 		such that all linking happens to the latest maybe unsaved version of the resources. You will find the 
 		Guice configuration of the global index in the UI scenario in 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/shared/internal/SharedModule.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.shared.internal.SharedModule" >SharedModule</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui.shared/src/org/eclipse/xtext/ui/shared/internal/SharedModule.java" title="View Source Code" >(src)</a>.
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/shared/internal/SharedModule.html" title="org.eclipse.xtext.ui.shared.internal.SharedModule">SharedModule</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui.shared/src/org/eclipse/xtext/ui/shared/internal/SharedModule.java" title="View Source Code" >(src)</a>.
 		</p>
 		<p>
-		The index is basically a flat list of instances of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription" >IResourceDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a>. 
+		The index is basically a flat list of instances of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.html" title="org.eclipse.xtext.resource.IResourceDescription">IResourceDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a>. 
 		The index itself doesn't know about visibility constraints due to classpath restriction. Rather than that, 
-		they are defined by the referencing language by means of so called <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IContainer" >IContainers</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a>: 
-		While Java might load a resource via <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/ClassLoader.html" title="View JavaDoc"><abbr title="java.lang.ClassLoader" >ClassLoader.loadResource()</abbr></a> (i.e. using the classpath mechanism), another 
+		they are defined by the referencing language by means of so called <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.html" title="org.eclipse.xtext.resource.IContainer">IContainers</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a>: 
+		While Java might load a resource via <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/ClassLoader.html" title="java.lang.ClassLoader">ClassLoader.loadResource()</abbr></a> (i.e. using the classpath mechanism), another 
 		language could load the same resource using the file system paths. 
 		</p>
 		<p>
 		Consequently, the information which container a resource belongs to depends on the referencing 
-		context. Therefore an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceServiceProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceServiceProvider" >IResourceServiceProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java" title="View Source Code" >(src)</a> provides another interesting 
-		service, which is called <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IContainer.Manager" >IContainer.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a>. For a given 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription" >IResourceDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a>, the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IContainer.Manager" >IContainer.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a> 
-		provides you with the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IContainer" >IContainer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a> as well as with a list of all 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IContainer" >IContainers</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a> which are visible from there. Note that the  
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescriptions.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescriptions" >index</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescriptions.java" title="View Source Code" >(src)</a> is globally 
-		shared between all languages while the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IContainer.Manager" >IContainer.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a> which adds the semantics of containers, can 
+		context. Therefore an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceServiceProvider.html" title="org.eclipse.xtext.resource.IResourceServiceProvider">IResourceServiceProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceServiceProvider.java" title="View Source Code" >(src)</a> provides another interesting 
+		service, which is called <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.Manager.html" title="org.eclipse.xtext.resource.IContainer.Manager">IContainer.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a>. For a given 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.html" title="org.eclipse.xtext.resource.IResourceDescription">IResourceDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a>, the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.Manager.html" title="org.eclipse.xtext.resource.IContainer.Manager">IContainer.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a> 
+		provides you with the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.html" title="org.eclipse.xtext.resource.IContainer">IContainer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a> as well as with a list of all 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.html" title="org.eclipse.xtext.resource.IContainer">IContainers</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a> which are visible from there. Note that the  
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescriptions.html" title="org.eclipse.xtext.resource.IResourceDescriptions">index</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescriptions.java" title="View Source Code" >(src)</a> is globally 
+		shared between all languages while the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.Manager.html" title="org.eclipse.xtext.resource.IContainer.Manager">IContainer.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a> which adds the semantics of containers, can 
 		be very different depending on the language. The following method lists all resources visible from a 
-		given <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.resource.Resource" >Resource</abbr></a>:  
+		given <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.html" title="org.eclipse.emf.ecore.resource.Resource">Resource</abbr></a>:  
 		</p>
 		<p>
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		@Inject</br>
-		IContainer.Manager&nbsp;manager;</br>
-		</br>
-		<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;listVisibleResources(</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;myResource,&nbsp;IResourceDescriptions&nbsp;index)&nbsp;{</br>
-		&nbsp;&nbsp;IResourceDescription&nbsp;descr&nbsp;=&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index.getResourceDescription(myResource.getURI());</br>
-		&nbsp;&nbsp;<span class="keyword">for</span>(IContainer&nbsp;visibleContainer:&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;manager.getVisibleContainers(descr,&nbsp;index))&nbsp;{&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(IResourceDescription&nbsp;visibleResourceDesc:</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visibleContainer.getResourceDescription())&nbsp;{&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(visibleResourceDesc.getURI());</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-		&nbsp;&nbsp;}</br>
+		@Inject<br/>
+		IContainer.Manager&nbsp;manager;<br/>
+		<br/>
+		<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;listVisibleResources(<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;myResource,&nbsp;IResourceDescriptions&nbsp;index)&nbsp;{<br/>
+		&nbsp;&nbsp;IResourceDescription&nbsp;descr&nbsp;=&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index.getResourceDescription(myResource.getURI());<br/>
+		&nbsp;&nbsp;<span class="keyword">for</span>(IContainer&nbsp;visibleContainer:&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;manager.getVisibleContainers(descr,&nbsp;index))&nbsp;{&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(IResourceDescription&nbsp;visibleResourceDesc:<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visibleContainer.getResourceDescription())&nbsp;{&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(visibleResourceDesc.getURI());<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+		&nbsp;&nbsp;}<br/>
 		}
 		</p>
 		</div>
 		</div>
 		</p>
 		<p>
-		Xtext ships two implementations of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IContainer.Manager" >IContainer.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a> which are 
+		Xtext ships two implementations of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.Manager.html" title="org.eclipse.xtext.resource.IContainer.Manager">IContainer.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a> which are 
 		as usual bound with Guice: The default binding is to 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/impl/SimpleResourceDescriptionsBasedContainerManager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager" >SimpleResourceDescriptionsBasedContainerManager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/impl/SimpleResourceDescriptionsBasedContainerManager.java" title="View Source Code" >(src)</a>, 
-		which assumes all <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription" >IResourceDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a> to be in a single common
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/impl/SimpleResourceDescriptionsBasedContainerManager.html" title="org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager">SimpleResourceDescriptionsBasedContainerManager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/impl/SimpleResourceDescriptionsBasedContainerManager.java" title="View Source Code" >(src)</a>, 
+		which assumes all <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.html" title="org.eclipse.xtext.resource.IResourceDescription">IResourceDescription</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a> to be in a single common
 		container. If you don't care about container support, you'll be fine with this one. Alternatively, 
-		you can bind <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/containers/StateBasedContainerManager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.containers.StateBasedContainerManager" >StateBasedContainerManager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/StateBasedContainerManager.java" title="View Source Code" >(src)</a> and an 
-		additional <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/containers/IAllContainersState.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.containers.IAllContainersState" >IAllContainersState</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/IAllContainersState.java" title="View Source Code" >(src)</a> which 
+		you can bind <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/containers/StateBasedContainerManager.html" title="org.eclipse.xtext.resource.containers.StateBasedContainerManager">StateBasedContainerManager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/StateBasedContainerManager.java" title="View Source Code" >(src)</a> and an 
+		additional <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/containers/IAllContainersState.html" title="org.eclipse.xtext.resource.containers.IAllContainersState">IAllContainersState</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/IAllContainersState.java" title="View Source Code" >(src)</a> which 
 		keeps track of the set of available containers and their visibility relationships.  
 		</p>
 		<p>
 		Xtext offers a couple of strategies for managing containers: If you're running an Eclipse workbench, 
 		you can define containers based on Java projects and their classpaths or based on plain Eclipse projects. 
 		Outside Eclipse, you can provide a set of file system paths to be scanned for models. All of these only 
-		differ in the bound instance of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/containers/IAllContainersState.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.containers.IAllContainersState" >IAllContainersState</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/IAllContainersState.java" title="View Source Code" >(src)</a> 
+		differ in the bound instance of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/containers/IAllContainersState.html" title="org.eclipse.xtext.resource.containers.IAllContainersState">IAllContainersState</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/IAllContainersState.java" title="View Source Code" >(src)</a> 
 		of the referring language. These will be described in detail in the following sections.
 		</p>
 		<p>
@@ -624,8 +552,8 @@
 		</h4>
 		<p>
 		As JDT is an Eclipse feature, this JDT-based container management is only available in the UI scenario. 
-		It assumes so called <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/IPackageFragmentRoot.html" title="View JavaDoc"><abbr title="org.eclipse.jdt.core.IPackageFragmentRoot" >IPackageFragmentRoots</abbr></a> as containers. An 
-		<a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/IPackageFragmentRoot.html" title="View JavaDoc"><abbr title="org.eclipse.jdt.core.IPackageFragmentRoot" >IPackageFragmentRoot</abbr></a> in JDT is the root of a tree of Java model elements. 
+		It assumes so called <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/IPackageFragmentRoot.html" title="org.eclipse.jdt.core.IPackageFragmentRoot">IPackageFragmentRoots</abbr></a> as containers. An 
+		<a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.jdt.doc.isv/reference/api/org/eclipse/jdt/core/IPackageFragmentRoot.html" title="org.eclipse.jdt.core.IPackageFragmentRoot">IPackageFragmentRoot</abbr></a> in JDT is the root of a tree of Java model elements. 
 		It usually refers to 
 		<ul>
 		  <li>a source folder of a Java project,</li>
@@ -647,8 +575,8 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IContainer.Manager&gt;&nbsp;bindIContainer$Manager()&nbsp;{</br>
-		&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;StateBasedContainerManager.<span class="keyword">class</span>;</br>
+		<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IContainer.Manager&gt;&nbsp;bindIContainer$Manager()&nbsp;{<br/>
+		&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;StateBasedContainerManager.<span class="keyword">class</span>;<br/>
 		}
 		</p>
 		</div>
@@ -661,8 +589,8 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">public</span>&nbsp;Provider&lt;IAllContainersState&gt;&nbsp;provideIAllContainersState()&nbsp;{</br>
-		&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();</br>
+		<span class="keyword">public</span>&nbsp;Provider&lt;IAllContainersState&gt;&nbsp;provideIAllContainersState()&nbsp;{<br/>
+		&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();<br/>
 		}
 		</p>
 		</div>
@@ -671,8 +599,8 @@
 		<p>
 		in the UI module of the referencing language. The latter looks a bit more difficult than a common 
 		binding, as we have to bind a global singleton to a Guice provider. A 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/containers/StrictJavaProjectsState.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.containers.StrictJavaProjectsState" >StrictJavaProjectsState</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/containers/StrictJavaProjectsState.java" title="View Source Code" >(src)</a> requires all elements to be on the 
-		classpath, while the default <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/containers/JavaProjectsState.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.containers.JavaProjectsState" >JavaProjectsState</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/containers/JavaProjectsState.java" title="View Source Code" >(src)</a> also allows 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/containers/StrictJavaProjectsState.html" title="org.eclipse.xtext.ui.containers.StrictJavaProjectsState">StrictJavaProjectsState</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/containers/StrictJavaProjectsState.java" title="View Source Code" >(src)</a> requires all elements to be on the 
+		classpath, while the default <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/containers/JavaProjectsState.html" title="org.eclipse.xtext.ui.containers.JavaProjectsState">JavaProjectsState</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/containers/JavaProjectsState.java" title="View Source Code" >(src)</a> also allows 
 		models in non-source folders. 
 		</p>
 		<a name="project_based_containers" ></a>
@@ -692,8 +620,8 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		public&nbsp;Class&lt;?&nbsp;extends&nbsp;IContainer.Manager&gt;&nbsp;bindIContainer$Manager()&nbsp;{</br>
-		&nbsp;&nbsp;return&nbsp;StateBasedContainerManager.class;</br>
+		public&nbsp;Class&lt;?&nbsp;extends&nbsp;IContainer.Manager&gt;&nbsp;bindIContainer$Manager()&nbsp;{<br/>
+		&nbsp;&nbsp;return&nbsp;StateBasedContainerManager.class;<br/>
 		}
 		</p>
 		</div>
@@ -705,8 +633,8 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">public</span>&nbsp;Provider&lt;IAllContainersState&gt;&nbsp;provideIAllContainersState()&nbsp;{</br>
-		&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();</br>
+		<span class="keyword">public</span>&nbsp;Provider&lt;IAllContainersState&gt;&nbsp;provideIAllContainersState()&nbsp;{<br/>
+		&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();<br/>
 		}
 		</p>
 		</div>
@@ -718,31 +646,31 @@
 		</p>
 		</h4>
 		<p>
-		If you need an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IContainer.Manager" >IContainer.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a> that is independent of 
-		Eclipse projects, you can use the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/containers/ResourceSetBasedAllContainersState.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.containers.ResourceSetBasedAllContainersState" >ResourceSetBasedAllContainersState</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/ResourceSetBasedAllContainersState.java" title="View Source Code" >(src)</a>. 
+		If you need an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.Manager.html" title="org.eclipse.xtext.resource.IContainer.Manager">IContainer.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a> that is independent of 
+		Eclipse projects, you can use the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/containers/ResourceSetBasedAllContainersState.html" title="org.eclipse.xtext.resource.containers.ResourceSetBasedAllContainersState">ResourceSetBasedAllContainersState</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/containers/ResourceSetBasedAllContainersState.java" title="View Source Code" >(src)</a>. 
 		This one can be configured with a mapping of container handles to resource URIs.
 		</p>
 		<p>
 		It is unlikely you want to use this strategy directly in your own code, but it is used in the back-end 
-		of the MWE2 workflow component <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/mwe/Reader.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.mwe.Reader" >Reader</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/mwe/Reader.java" title="View Source Code" >(src)</a>. This is responsible 
+		of the MWE2 workflow component <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/mwe/Reader.html" title="org.eclipse.xtext.mwe.Reader">Reader</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/mwe/Reader.java" title="View Source Code" >(src)</a>. This is responsible 
 		for reading in models in a workflow, e.g. for later code generation. The 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/mwe/Reader.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.mwe.Reader" >Reader</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/mwe/Reader.java" title="View Source Code" >(src)</a> allows to either scan the whole classpath or a set of paths 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/mwe/Reader.html" title="org.eclipse.xtext.mwe.Reader">Reader</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/mwe/Reader.java" title="View Source Code" >(src)</a> allows to either scan the whole classpath or a set of paths 
 		for all models therein. When paths are given, each path entry becomes an 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IContainer" >IContainer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a> of its own. In the following snippet,
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IContainer.html" title="org.eclipse.xtext.resource.IContainer">IContainer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IContainer.java" title="View Source Code" >(src)</a> of its own. In the following snippet,
 		</p>
 		<p>
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		component&nbsp;=&nbsp;org.eclipse.xtext.mwe.Reader&nbsp;{</br>
-		&nbsp;&nbsp;<span class="comment">//&nbsp;lookup&nbsp;all&nbsp;resources&nbsp;on&nbsp;the&nbsp;classpath</br>
-		</span>&nbsp;&nbsp;<span class="comment">//&nbsp;useJavaClassPath&nbsp;=&nbsp;true</br>
-		</span>&nbsp;&nbsp;&nbsp;&nbsp;</br>
-		&nbsp;&nbsp;<span class="comment">//&nbsp;or&nbsp;define&nbsp;search&nbsp;scope&nbsp;explicitly</br>
-		</span>&nbsp;&nbsp;path&nbsp;=&nbsp;<span class="string">"src/models"</span></br>
-		&nbsp;&nbsp;path&nbsp;=&nbsp;<span class="string">"src/further-models"</span></br>
-		</br>
-		&nbsp;&nbsp;...</br>
+		component&nbsp;=&nbsp;org.eclipse.xtext.mwe.Reader&nbsp;{<br/>
+		&nbsp;&nbsp;<span class="comment">//&nbsp;lookup&nbsp;all&nbsp;resources&nbsp;on&nbsp;the&nbsp;classpath<br/>
+		</span>&nbsp;&nbsp;<span class="comment">//&nbsp;useJavaClassPath&nbsp;=&nbsp;true<br/>
+		</span>&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+		&nbsp;&nbsp;<span class="comment">//&nbsp;or&nbsp;define&nbsp;search&nbsp;scope&nbsp;explicitly<br/>
+		</span>&nbsp;&nbsp;path&nbsp;=&nbsp;<span class="string">"src/models"</span><br/>
+		&nbsp;&nbsp;path&nbsp;=&nbsp;<span class="string">"src/further-models"</span><br/>
+		<br/>
+		&nbsp;&nbsp;...<br/>
 		}
 		</p>
 		</div>
@@ -766,29 +694,29 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="comment">//&nbsp;file&nbsp;contents&nbsp;scope</br>
-		</span><span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;my.Constants.STATIC;</br>
-		</br>
-		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ScopeExample&nbsp;{&nbsp;<span class="comment">//&nbsp;class&nbsp;body&nbsp;scope</br>
-		</span>&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;Object&nbsp;field&nbsp;=&nbsp;STATIC;</br>
-		</br>
-		&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">void</span>&nbsp;method(String&nbsp;param)&nbsp;{&nbsp;<span class="comment">//&nbsp;method&nbsp;body&nbsp;scope</br>
-		</span>&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;localVar&nbsp;=&nbsp;<span class="string">"bar"</span>;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;innerBlock:&nbsp;{&nbsp;<span class="comment">//&nbsp;block&nbsp;scope</br>
-		</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;innerScopeVar&nbsp;=&nbsp;<span class="string">"foo"</span>;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object&nbsp;field&nbsp;=&nbsp;innerScopeVar;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;the&nbsp;scope&nbsp;hierarchy&nbsp;at&nbsp;this&nbsp;point&nbsp;would&nbsp;look&nbsp;like&nbsp;this:</br>
-		</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;blockScope{field,innerScopeVar}-&gt;</br>
-		</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;methodScope{localVar,&nbsp;param}-&gt;</br>
-		</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;classScope{field}-&gt;&nbsp;(&apos;field&apos;&nbsp;is&nbsp;shadowed)</br>
-		</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;fileScope{STATIC}-&gt;</br>
-		</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;classpathScope{</br>
-		</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&apos;all&nbsp;qualified&nbsp;names&nbsp;of&nbsp;accessible&nbsp;static&nbsp;fields&apos;}&nbsp;-&gt;</br>
-		</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;NULLSCOPE{}</br>
-		</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//</br>
-		</span>&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;field.add(localVar);</br>
-		&nbsp;&nbsp;}</br>
+		<span class="comment">//&nbsp;file&nbsp;contents&nbsp;scope<br/>
+		</span><span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;my.Constants.STATIC;<br/>
+		<br/>
+		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ScopeExample&nbsp;{&nbsp;<span class="comment">//&nbsp;class&nbsp;body&nbsp;scope<br/>
+		</span>&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;Object&nbsp;field&nbsp;=&nbsp;STATIC;<br/>
+		<br/>
+		&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">void</span>&nbsp;method(String&nbsp;param)&nbsp;{&nbsp;<span class="comment">//&nbsp;method&nbsp;body&nbsp;scope<br/>
+		</span>&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;localVar&nbsp;=&nbsp;<span class="string">"bar"</span>;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;innerBlock:&nbsp;{&nbsp;<span class="comment">//&nbsp;block&nbsp;scope<br/>
+		</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;innerScopeVar&nbsp;=&nbsp;<span class="string">"foo"</span>;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object&nbsp;field&nbsp;=&nbsp;innerScopeVar;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;the&nbsp;scope&nbsp;hierarchy&nbsp;at&nbsp;this&nbsp;point&nbsp;would&nbsp;look&nbsp;like&nbsp;this:<br/>
+		</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;blockScope{field,innerScopeVar}-&gt;<br/>
+		</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;methodScope{localVar,&nbsp;param}-&gt;<br/>
+		</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;classScope{field}-&gt;&nbsp;(&apos;field&apos;&nbsp;is&nbsp;shadowed)<br/>
+		</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;fileScope{STATIC}-&gt;<br/>
+		</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;classpathScope{<br/>
+		</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&apos;all&nbsp;qualified&nbsp;names&nbsp;of&nbsp;accessible&nbsp;static&nbsp;fields&apos;}&nbsp;-&gt;<br/>
+		</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;NULLSCOPE{}<br/>
+		</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//<br/>
+		</span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;field.add(localVar);<br/>
+		&nbsp;&nbsp;}<br/>
 		}
 		</p>
 		</div>
@@ -802,10 +730,10 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		classpathScope{stuff&nbsp;from&nbsp;bin/}</br>
-		-&gt;&nbsp;classpathScope{stuff&nbsp;from&nbsp;foo.jar/}</br>
-		-&gt;&nbsp;...</br>
-		-&gt;&nbsp;classpathScope{stuff&nbsp;from&nbsp;JRE&nbsp;System&nbsp;Library}</br>
+		classpathScope{stuff&nbsp;from&nbsp;bin/}<br/>
+		-&gt;&nbsp;classpathScope{stuff&nbsp;from&nbsp;foo.jar/}<br/>
+		-&gt;&nbsp;...<br/>
+		-&gt;&nbsp;classpathScope{stuff&nbsp;from&nbsp;JRE&nbsp;System&nbsp;Library}<br/>
 		-&gt;&nbsp;NULLSCOPE{}
 		</p>
 		</div>
@@ -819,16 +747,16 @@
 		<h3>Declarative Scoping</h3>
 		<p>
 		If you have to define scopes for certain contexts, the base class 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/AbstractDeclarativeScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider" >AbstractDeclarativeScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/AbstractDeclarativeScopeProvider.java" title="View Source Code" >(src)</a> allows to do 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/AbstractDeclarativeScopeProvider.html" title="org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider">AbstractDeclarativeScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/AbstractDeclarativeScopeProvider.java" title="View Source Code" >(src)</a> allows to do 
 		that in a declarative way. It looks up methods which have either of the following two signatures:
 		</p>
 		<p>
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		IScope&nbsp;scope_&lt;RefDeclaringEClass&gt;_&lt;Reference&gt;(</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)</br>
-		</br>
+		IScope&nbsp;scope_&lt;RefDeclaringEClass&gt;_&lt;Reference&gt;(<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)<br/>
+		<br/>
 		IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)
 		</p>
 		</div>
@@ -888,18 +816,18 @@
 		support to your language, which is comparable and similar to the one in Scala and C#. Scala and C# both 
 		allow to have multiple nested packages within one file and you can put imports per namespace, so that 
 		imported names are only visible within that namespace. See the domain model example: its scope provider 
-		extends <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider" >ImportedNamespaceAwareLocalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java" title="View Source Code" >(src)</a>.
+		extends <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.html" title="org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider">ImportedNamespaceAwareLocalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java" title="View Source Code" >(src)</a>.
 		</p>
 		<a name="scoping_12_2" ></a>
-		<h3><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider" >IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a></h3>
+		<h3><a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a></h3>
 		<p>
-		The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider" >ImportedNamespaceAwareLocalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java" title="View Source Code" >(src)</a> 
-		makes use of the so called <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider" >IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a> 
-		service. It computes <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/QualifiedName.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.QualifiedName" >QualifiedNames</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java" title="View Source Code" >(src)</a> for 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EObject" >EObjects</abbr></a>. A qualified name consists of several segments
+		The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.html" title="org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider">ImportedNamespaceAwareLocalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java" title="View Source Code" >(src)</a> 
+		makes use of the so called <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a> 
+		service. It computes <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/QualifiedName.html" title="org.eclipse.xtext.naming.QualifiedName">QualifiedNames</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/QualifiedName.java" title="View Source Code" >(src)</a> for 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObjects</abbr></a>. A qualified name consists of several segments
 		</p>
 		<p>
-		The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider" >default implementation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.java" title="View Source Code" >(src)</a> uses 
+		The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.html" title="org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider">default implementation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/DefaultDeclarativeQualifiedNameProvider.java" title="View Source Code" >(src)</a> uses 
 		a simple name look up composes the qualified name of the simple names of all containers and the object
 		itself. 
 		</p>
@@ -912,15 +840,15 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		FowlerDslQualifiedNameProvider&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;DefaultDeclarativeQualifiedNameProvider&nbsp;{</br>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;QualifiedName&nbsp;qualifiedName(Transition&nbsp;t)&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(t.getEvent()&nbsp;==&nbsp;<span class="keyword">null</span>&nbsp;|| !(t.eContainer()&nbsp;<span class="keyword">instanceof</span>&nbsp;State))&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">null</span>;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span>&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;QualifiedName.create((State)t.eContainer()).getName(),&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.getEvent().getName());</br>
-		&nbsp;&nbsp;}</br>
+		FowlerDslQualifiedNameProvider&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;DefaultDeclarativeQualifiedNameProvider&nbsp;{<br/>
+		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;QualifiedName&nbsp;qualifiedName(Transition&nbsp;t)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(t.getEvent()&nbsp;==&nbsp;<span class="keyword">null</span>&nbsp;|| !(t.eContainer()&nbsp;<span class="keyword">instanceof</span>&nbsp;State))&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">null</span>;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span>&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;QualifiedName.create((State)t.eContainer()).getName(),&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.getEvent().getName());<br/>
+		&nbsp;&nbsp;}<br/>
 		}
 		</p>
 		</div>
@@ -929,8 +857,8 @@
 		<a name="scoping_12_3" ></a>
 		<h3>Importing Namespaces</h3>
 		<p>
-		The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider" >ImportedNamespaceAwareLocalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java" title="View Source Code" >(src)</a> looks up 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EAttribute" >EAttributes</abbr></a> with name 'importedNamespace' and 
+		The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.html" title="org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider">ImportedNamespaceAwareLocalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/impl/ImportedNamespaceAwareLocalScopeProvider.java" title="View Source Code" >(src)</a> looks up 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EAttribute.html" title="org.eclipse.emf.ecore.EAttribute">EAttributes</abbr></a> with name 'importedNamespace' and 
 		interprets them as import statements. By default qualified names with or without a wildcard at the end 
 		are supported. For an import of a qualified name the simple name is made available as we know from e.g. 
 		Java, where
@@ -939,7 +867,7 @@
 		<span class="inlinecode"><span class="keyword">import</span>&nbsp;java.util.Set;</span>
 		</p>
 		<p>
-		makes it possible to refer to <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Set.html" title="View JavaDoc"><abbr title="java.util.Set" >java.util.Set</abbr></a> by its simple name <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Set.html" title="View JavaDoc"><abbr title="java.util.Set" >Set</abbr></a>.
+		makes it possible to refer to <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Set.html" title="java.util.Set">java.util.Set</abbr></a> by its simple name <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Set.html" title="java.util.Set">Set</abbr></a>.
 		Contrary to Java the import is not active for the whole file but only for the namespace it is declared 
 		in and its child namespaces. That is why you can write the following in the example DSL:
 		</p>
@@ -947,14 +875,14 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">package</span>&nbsp;foo&nbsp;{</br>
-		&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;bar.Foo</br>
-		&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Bar&nbsp;<span class="keyword">extends</span>&nbsp;Foo&nbsp;{</br>
-		&nbsp;&nbsp;}</br>
-		}</br>
-		</br>
-		<span class="keyword">package</span>&nbsp;bar&nbsp;{</br>
-		&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Foo&nbsp;{}</br>
+		<span class="keyword">package</span>&nbsp;foo&nbsp;{<br/>
+		&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;bar.Foo<br/>
+		&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Bar&nbsp;<span class="keyword">extends</span>&nbsp;Foo&nbsp;{<br/>
+		&nbsp;&nbsp;}<br/>
+		}<br/>
+		<br/>
+		<span class="keyword">package</span>&nbsp;bar&nbsp;{<br/>
+		&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Foo&nbsp;{}<br/>
 		}
 		</p>
 		</div>
@@ -967,9 +895,9 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">package</span>&nbsp;bar&nbsp;{</br>
-		&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Bar&nbsp;<span class="keyword">extends</span>&nbsp;Foo&nbsp;{}</br>
-		&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Foo&nbsp;{}</br>
+		<span class="keyword">package</span>&nbsp;bar&nbsp;{<br/>
+		&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Bar&nbsp;<span class="keyword">extends</span>&nbsp;Foo&nbsp;{}<br/>
+		&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Foo&nbsp;{}<br/>
 		}
 		</p>
 		</div>
@@ -982,9 +910,9 @@
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">package</span>&nbsp;bar&nbsp;{</br>
-		&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Bar&nbsp;<span class="keyword">extends</span>&nbsp;bar.Foo&nbsp;{}</br>
-		&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Foo&nbsp;{}</br>
+		<span class="keyword">package</span>&nbsp;bar&nbsp;{<br/>
+		&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Bar&nbsp;<span class="keyword">extends</span>&nbsp;bar.Foo&nbsp;{}<br/>
+		&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Foo&nbsp;{}<br/>
 		}
 		</p>
 		</div>
@@ -996,20 +924,3 @@
 		</p>
 	</div>
 	<br style="clear:both;height:1em;">
-</div>
-<div id="clearFooter"></div>
-<div id="footer">
-<ul id="footernav">
-	<li><a href="/">Home</a></li>
-
-	<li><a href="/legal/privacy.php">Privacy Policy</a></li>
-	<li><a href="/legal/termsofuse.php">Terms of Use</a></li>
-	<li><a href="/legal/copyright.php">Copyright Agent</a></li>
-	<li><a href="/legal/">Legal</a></li>
-	<li><a href="/org/foundation/contact.php">Contact Us</a></li>
-</ul>
-
-<span id="copyright">Copyright &copy; 2011 The Eclipse Foundation. All Rights Reserved.</span>
-</div>
-</body>
-</html>

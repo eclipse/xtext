@@ -1,223 +1,151 @@
-<html>
-  <head>
-    <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Formatting (Pretty Printing)</title>
-    <link href="book.css" rel="stylesheet" type="text/css">
-    <link href="code.css" rel="stylesheet" type="text/css">
-    <link href="http://www.eclipse.org/eclipse.org-common/yui/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/yui/2.6.0/build/menu/assets/skins/sam/menu.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/reset.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/layout.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/header.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/footer.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/visual.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/print.css" rel="stylesheet" type="text/css" media="print">
-    <link rel="stylesheet" type="text/css" href="http://www.eclipse.org/Xtext/style.css"/>
-    <link rel="stylesheet" type="text/css" href="http://www.eclipse.org/style2.css"/>
-     <script type="text/javascript"> 
-    	function initTocMenu(ActiveSubTocElementId){
-    		var menu = document.getElementById("leftnav");
-    		
-    		var chapters = menu.children;
-    		addHideSubsectionFunction(chapters);
-    		
-    		document.getElementById(ActiveSubTocElementId).style.display = "block";
-    	}
-    
-    	function addHideSubsectionFunction(items){
-    		for (var i = 0; i < items.length; i++) {
-    			if (items[i].firstElementChild ){
-    				items[i].firstElementChild.onclick = function(){toc_toggle_subsections(this.parentNode);};
-    				items[i].firstElementChild.style.cursor = "pointer";
-    			}
-    		}
-    	}
-    	function toc_toggle_subsections(chap){
-    		if ( chap.children[1].style.display != "none" ) {
-    			chap.children[1].style.display = "none"
-    		} else {
-    			chap.children[1].style.display = "block"
-    			
-    		}
-    	}
-    	
-    	function highlightCurrentSection(sec) {
-    		document.getElementById(sec).style.backgroundColor= "#D0D0D0"
-    	}
-    </script>
-  </head>
-
-<body onload="initTocMenu('105-formatting.html');highlightCurrentSection(document.URL.substring(document.URL.lastIndexOf('/')+1));">
-<div id="novaWrapper">		<div id="clearHeader">
-		<div id="logo">
-				<div id="promotion"><a href="/indigo/friends.php">
-	<img src="http://www.eclipse.org/home/promotions/indigo/indigo.png" alt="Indigo Is Coming!"/>
-</a>
-
-</div>
-
-		</div>
-		<div id="otherSites">
-			<div id="sites">
-			<ul id="sitesUL">
-				<li><a href='http://marketplace.eclipse.org'><img alt="Eclipse Marketplace" src="http://dev.eclipse.org/custom_icons/marketplace.png"/>&nbsp;<div>Eclipse Marketplace</div></a></li>
-				<li><a href='http://live.eclipse.org'><img alt="Eclipse Live" src="http://dev.eclipse.org/custom_icons/audio-input-microphone-bw.png"/>&nbsp;<div>Eclipse Live</div></a></li>
-
-	    		<li><a href='https://bugs.eclipse.org/bugs/'><img alt="Bugzilla" src="http://dev.eclipse.org/custom_icons/system-search-bw.png"/>&nbsp;<div>Bugzilla</div></a></li>
-	    		<li><a href='http://www.eclipse.org/forums/'><img alt="Forums" src="http://dev.eclipse.org/large_icons/apps/internet-group-chat.png"/>&nbsp;<div>Eclipse Forums</div></a></li>
-	    		<li><a href='http://www.planeteclipse.org/'><img alt="Planet Eclipse" src="http://dev.eclipse.org/large_icons/devices/audio-card.png"/>&nbsp;<div>Planet Eclipse</div></a></li>
-	    		<li><a href='http://wiki.eclipse.org/'><img alt="Eclipse Wiki" src="http://dev.eclipse.org/custom_icons/accessories-text-editor-bw.png"/>&nbsp;<div>Eclipse Wiki</div></a></li>
-	    		<li><a href='http://portal.eclipse.org'><img alt="MyFoundation Portal" src="http://dev.eclipse.org/custom_icons/preferences-system-network-proxy-bw.png"/><div>My Foundation Portal</div></a></li>
-	    	</ul>
-
-	    	</div>
-		</div>		
-	</div>
-
-<div id="header">			
-	<div id="menu">
-		<ul>
-		<li><a href="/Xtext" target="_self">Home</a></li> 
-		<li><a href="/Xtext/download" target="_self">Download</a></li> 
-		<li><a href="index.html" target="_self">Documentation</a></li> 
-		<li><a href="/Xtext/support" target="_self">Support</a></li> 
-		<li><a href="/Xtext/community" target="_self">Community</a></li> 
-		<li><a href="/Xtext/developers" target="_self">Developers</a></li> 
-			</ul>
-
-	</div>
-
-	<div id="search">
-			<form action="http://www.google.com/cse" id="searchbox_017941334893793413703:sqfrdtd112s">
-		 	<input type="hidden" name="cx" value="017941334893793413703:sqfrdtd112s" />
-	  		<input id="searchBox" type="text" name="q" size="25" />
-	  		<input id="searchButton" type="submit" name="sa" value="Search" />
-			</form>
-		<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=searchbox_017941334893793413703%3Asqfrdtd112s&lang=en"></script>			
-	</div>
-
-</div>
-<div id="novaContent" class="faux">
-	<br style="clear:both;height:1em;">
+<br style="clear:both;height:1em;">
 	<div id="leftcol">
 		<div class="nav-logo">
-			<a href="index.html"><img src="http://wiki.eclipse.org/images/thumb/d/db/Xtext_logo.png/450px-Xtext_logo.png" style="margin-left:30px; width:125px"/></a>
+			<a href="index.php"><img src="http://wiki.eclipse.org/images/thumb/d/db/Xtext_logo.png/450px-Xtext_logo.png" style="margin-left:30px; width:125px"/></a>
 		</div>
 		<ul id="leftnav">
-		<li class="separator"><div class="separator">Installation</div>
-			<ul style="display: none;" id="subToc_005-installation.html">
-			<li id="005-installation.html#InstallDistro" ><a href="005-installation.html#InstallDistro" >Install Pre-Configured Eclipse With Xtext</a></li>
-			<li id="005-installation.html#InstallXtext" ><a href="005-installation.html#InstallXtext" >Install Xtext From Update Site</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">5 Minutes Tutorial</div>
-			<ul style="display: none;" id="subToc_010-xtext-in-5-minutes.html">
-			<li id="010-xtext-in-5-minutes.html#NewProject" ><a href="010-xtext-in-5-minutes.html#NewProject" >Creating A New Xtext Project</a></li>
-			<li id="010-xtext-in-5-minutes.html#RunWorkflow" ><a href="010-xtext-in-5-minutes.html#RunWorkflow" >Generating The Language Infrastructure</a></li>
-			<li id="010-xtext-in-5-minutes.html#TestingTheEditor" ><a href="010-xtext-in-5-minutes.html#TestingTheEditor" >Try The Editor</a></li>
-			<li id="010-xtext-in-5-minutes.html#Conclusion" ><a href="010-xtext-in-5-minutes.html#Conclusion" >Conclusion</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">30 Minutes Tutorial</div>
-			<ul style="display: none;" id="subToc_020-domainmodel-step-by-step.html">
-			<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" ><a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" >Create A New Xtext Project</a></li>
-			<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" ><a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" >Write Your Own Grammar</a></li>
-			<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_6" ><a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_6" >Generate Language Artifacts</a></li>
-			<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_7" ><a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_7" >Run the Generated IDE Plug-in</a></li>
-			<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_8" ><a href="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_8" >Second Iteration : Adding Packages and Imports</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">30 Minutes Tutorial - Extended</div>
-			<ul style="display: none;" id="subToc_030-tutorial-next-steps.html">
-			<li id="040-first-code-generator.html" ><a href="040-first-code-generator.html" >Writing a Code Generator With Xtend</a></li>
-			<li id="060-unit-tests.html" ><a href="060-unit-tests.html" >Unit Testing the Language</a></li>
-			<li id="050-validation.html" ><a href="050-validation.html" >Creating Custom Validation Rules</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Overview</div>
-			<ul style="display: none;" id="subToc_000-introduction.html">
-			<li id="000-introduction.html#Overview_1" ><a href="000-introduction.html#Overview_1" >What is Xtext?</a></li>
-			<li id="000-introduction.html#Overview_2" ><a href="000-introduction.html#Overview_2" >How Does It Work?</a></li>
-			<li id="000-introduction.html#Overview_3" ><a href="000-introduction.html#Overview_3" >Xtext is Highly Configurable</a></li>
-			<li id="000-introduction.html#Overview_4" ><a href="000-introduction.html#Overview_4" >Who Uses Xtext?</a></li>
-			<li id="000-introduction.html#Overview_5" ><a href="000-introduction.html#Overview_5" >Who is Behind Xtext?</a></li>
-			<li id="000-introduction.html#DSL" ><a href="000-introduction.html#DSL" >What is a Domain-Specific Language</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">The Grammar Language</div>
-			<ul style="display: none;" id="subToc_020-grammar-language.html">
-			<li id="020-grammar-language.html#statemachine" ><a href="020-grammar-language.html#statemachine" >A First Example</a></li>
-			<li id="020-grammar-language.html#syntax" ><a href="020-grammar-language.html#syntax" >The Syntax</a></li>
-			<li id="020-grammar-language.html#metamodelInference" ><a href="020-grammar-language.html#metamodelInference" >Ecore Model Inference</a></li>
-			<li id="020-grammar-language.html#grammarMixins" ><a href="020-grammar-language.html#grammarMixins" >Grammar Mixins</a></li>
-			<li id="020-grammar-language.html#grammarLanguage_6" ><a href="020-grammar-language.html#grammarLanguage_6" >Common Terminals</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Configuration</div>
-			<ul style="display: none;" id="subToc_030-generator.html">
-			<li id="030-generator.html#generator" ><a href="030-generator.html#generator" >The Language Generator</a></li>
-			<li id="040-dependency-injection.html" ><a href="040-dependency-injection.html" >Dependency Injection in Xtext with Google Guice</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Runtime Concepts</div>
-			<ul style="display: none;" id="subToc_050-heading-runtime.html">
-			<li id="050-heading-runtime.html#runtimeSetup" ><a href="050-heading-runtime.html#runtimeSetup" >Runtime Setup (ISetup)</a></li>
-			<li id="050-heading-runtime.html#equinoxSetup" ><a href="050-heading-runtime.html#equinoxSetup" >Setup within Eclipse-Equinox (OSGi)</a></li>
-			<li id="050-heading-runtime.html#runtime_concepts_4" ><a href="050-heading-runtime.html#runtime_concepts_4" >Logging</a></li>
-			<li id="060-validation.html" ><a href="060-validation.html" >Validation</a></li>
-			<li id="070-linking.html" ><a href="070-linking.html" >Linking</a></li>
-			<li id="080-scoping.html" ><a href="080-scoping.html" >Scoping</a></li>
-			<li id="090-valueconverter.html" ><a href="090-valueconverter.html" >Value Converter</a></li>
-			<li id="100-serialization.html" ><a href="100-serialization.html" >Serialization</a></li>
-			<li id="105-formatting.html" ><a href="105-formatting.html" >Formatting (Pretty Printing)</a></li>
-			<li id="110-fragmentprovider.html" ><a href="110-fragmentprovider.html" >Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)</a></li>
-			<li id="115-encoding.html" ><a href="115-encoding.html" >Encoding in Xtext</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">MWE2</div>
-			<ul style="display: none;" id="subToc_118-mwe-in-depth.html">
-			<li id="118-mwe-in-depth.html#MWE2Exampe" ><a href="118-mwe-in-depth.html#MWE2Exampe" >Examples</a></li>
-			<li id="118-mwe-in-depth.html#MWE2LanguageReference" ><a href="118-mwe-in-depth.html#MWE2LanguageReference" >Language Reference</a></li>
-			<li id="118-mwe-in-depth.html#MWE2SyntaxReference" ><a href="118-mwe-in-depth.html#MWE2SyntaxReference" >Syntax Reference</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">IDE Concepts</div>
-			<ul style="display: none;" id="subToc_120-heading-UI.html">
-			<li id="140-labelprovider.html" ><a href="140-labelprovider.html" >Label Provider</a></li>
-			<li id="150-contentassist.html" ><a href="150-contentassist.html" >Content Assist</a></li>
-			<li id="155-quickfix.html" ><a href="155-quickfix.html" >Quick Fixes</a></li>
-			<li id="160-templates.html" ><a href="160-templates.html" >Template Proposals</a></li>
-			<li id="170-outline.html" ><a href="170-outline.html" >Outline View</a></li>
-			<li id="180-hyperlinking.html" ><a href="180-hyperlinking.html" >Hyperlinking</a></li>
-			<li id="195-highlighting.html" ><a href="195-highlighting.html" >Syntax Coloring</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Referring to Java Types</div>
-			<ul style="display: none;" id="subToc_199-jvmtypes.html">
-			<li id="199-jvmtypes.html#jvmtypes_3" ><a href="199-jvmtypes.html#jvmtypes_3" >How to Use Java Types</a></li>
-			<li id="199-jvmtypes.html#jvmtypes_4" ><a href="199-jvmtypes.html#jvmtypes_4" >Customization Points</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Integration with EMF and Other EMF Editors</div>
-			<ul style="display: none;" id="subToc_210-emf-integration.html">
-			<li id="210-emf-integration.html#model_metamodel" ><a href="210-emf-integration.html#model_metamodel" >Model, Ecore Model, and Ecore</a></li>
-			<li id="210-emf-integration.html#emf_codegen" ><a href="210-emf-integration.html#emf_codegen" >EMF Code Generation</a></li>
-			<li id="210-emf-integration.html#xtext_resource" ><a href="210-emf-integration.html#xtext_resource" >XtextResource Implementation</a></li>
-			<li id="210-emf-integration.html#gmf_integration" ><a href="210-emf-integration.html#gmf_integration" >Integration with GMF Editors</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Migrating from Xtext 1.0.x to 2.0</div>
-			<ul style="display: none;" id="subToc_213-migrating-from-1.0.html">
-			<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_4" ><a href="213-migrating-from-1.0.html#migrating_from_1_0_x_4" >Take the Shortcut</a></li>
-			<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_5" ><a href="213-migrating-from-1.0.html#migrating_from_1_0_x_5" >Migrating Step By Step</a></li>
-			<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_6" ><a href="213-migrating-from-1.0.html#migrating_from_1_0_x_6" >Now go for then new features</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Migrating from Xtext 0.7.x to 1.0</div>
-			<ul style="display: none;" id="subToc_215-migrating-from-0.7.html">
-			<li id="215-migrating-from-0.7.html#migrating_from_0_7_2" ><a href="215-migrating-from-0.7.html#migrating_from_0_7_2" >Migrating Step By Step</a></li>
-			</ul>
-			</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="005-installation.php">Installation</a></div>
+		<ul style="display: none;" id="subToc_005-installation.html">
+		<li id="005-installation.html#InstallDistro" ><a href="005-installation.php#InstallDistro" >Install Pre-Configured Eclipse With Xtext</a></li>
+		<li id="005-installation.html#InstallXtext" ><a href="005-installation.php#InstallXtext" >Install Xtext From Update Site</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="010-xtext-in-5-minutes.php">5 Minutes Tutorial</a></div>
+		<ul style="display: none;" id="subToc_010-xtext-in-5-minutes.html">
+		<li id="010-xtext-in-5-minutes.html#NewProject" ><a href="010-xtext-in-5-minutes.php#NewProject" >Creating A New Xtext Project</a></li>
+		<li id="010-xtext-in-5-minutes.html#RunWorkflow" ><a href="010-xtext-in-5-minutes.php#RunWorkflow" >Generating The Language Infrastructure</a></li>
+		<li id="010-xtext-in-5-minutes.html#TestingTheEditor" ><a href="010-xtext-in-5-minutes.php#TestingTheEditor" >Try The Editor</a></li>
+		<li id="010-xtext-in-5-minutes.html#Conclusion" ><a href="010-xtext-in-5-minutes.php#Conclusion" >Conclusion</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="020-domainmodel-step-by-step.php">15 Minutes Tutorial</a></div>
+		<ul style="display: none;" id="subToc_020-domainmodel-step-by-step.html">
+		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_4" >Create A New Xtext Project</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_5" >Write Your Own Grammar</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_6" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_6" >Generate Language Artifacts</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_7" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_7" >Run the Generated IDE Plug-in</a></li>
+		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_8" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_8" >Second Iteration : Adding Packages and Imports</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="030-tutorial-next-steps.php">15 Minutes Tutorial - Extended</a></div>
+		<ul style="display: none;" id="subToc_030-tutorial-next-steps.html">
+		<li id="040-first-code-generator.html" ><a href="040-first-code-generator.php" >Writing a Code Generator With Xtend</a></li>
+		<li id="060-unit-tests.html" ><a href="060-unit-tests.php" >Unit Testing the Language</a></li>
+		<li id="050-validation.html" ><a href="050-validation.php" >Creating Custom Validation Rules</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="000-introduction.php">Overview</a></div>
+		<ul style="display: none;" id="subToc_000-introduction.html">
+		<li id="000-introduction.html#Overview_1" ><a href="000-introduction.php#Overview_1" >What is Xtext?</a></li>
+		<li id="000-introduction.html#Overview_2" ><a href="000-introduction.php#Overview_2" >How Does It Work?</a></li>
+		<li id="000-introduction.html#Overview_3" ><a href="000-introduction.php#Overview_3" >Xtext is Highly Configurable</a></li>
+		<li id="000-introduction.html#Overview_4" ><a href="000-introduction.php#Overview_4" >Who Uses Xtext?</a></li>
+		<li id="000-introduction.html#Overview_5" ><a href="000-introduction.php#Overview_5" >Who is Behind Xtext?</a></li>
+		<li id="000-introduction.html#DSL" ><a href="000-introduction.php#DSL" >What is a Domain-Specific Language</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="020-grammar-language.php">The Grammar Language</a></div>
+		<ul style="display: none;" id="subToc_020-grammar-language.html">
+		<li id="020-grammar-language.html#statemachine" ><a href="020-grammar-language.php#statemachine" >A First Example</a></li>
+		<li id="020-grammar-language.html#syntax" ><a href="020-grammar-language.php#syntax" >The Syntax</a></li>
+		<li id="020-grammar-language.html#metamodelInference" ><a href="020-grammar-language.php#metamodelInference" >Ecore Model Inference</a></li>
+		<li id="020-grammar-language.html#grammarMixins" ><a href="020-grammar-language.php#grammarMixins" >Grammar Mixins</a></li>
+		<li id="020-grammar-language.html#grammarLanguage_6" ><a href="020-grammar-language.php#grammarLanguage_6" >Common Terminals</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="030-generator.php">Configuration</a></div>
+		<ul style="display: none;" id="subToc_030-generator.html">
+		<li id="030-generator.html#generator" ><a href="030-generator.php#generator" >The Language Generator</a></li>
+		<li id="040-dependency-injection.html" ><a href="040-dependency-injection.php" >Dependency Injection in Xtext with Google Guice</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="050-heading-runtime.php">Runtime Concepts</a></div>
+		<ul style="display: none;" id="subToc_050-heading-runtime.html">
+		<li id="050-heading-runtime.html#runtimeSetup" ><a href="050-heading-runtime.php#runtimeSetup" >Runtime Setup (ISetup)</a></li>
+		<li id="050-heading-runtime.html#equinoxSetup" ><a href="050-heading-runtime.php#equinoxSetup" >Setup within Eclipse-Equinox (OSGi)</a></li>
+		<li id="050-heading-runtime.html#runtime_concepts_4" ><a href="050-heading-runtime.php#runtime_concepts_4" >Logging</a></li>
+		<li id="060-validation.html" ><a href="060-validation.php" >Validation</a></li>
+		<li id="070-linking.html" ><a href="070-linking.php" >Linking</a></li>
+		<li id="080-scoping.html" ><a href="080-scoping.php" >Scoping</a></li>
+		<li id="090-valueconverter.html" ><a href="090-valueconverter.php" >Value Converter</a></li>
+		<li id="100-serialization.html" ><a href="100-serialization.php" >Serialization</a></li>
+		<li id="105-formatting.html" ><a href="105-formatting.php" >Formatting (Pretty Printing)</a></li>
+		<li id="110-fragmentprovider.html" ><a href="110-fragmentprovider.php" >Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)</a></li>
+		<li id="115-encoding.html" ><a href="115-encoding.php" >Encoding in Xtext</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="118-mwe-in-depth.php">MWE2</a></div>
+		<ul style="display: none;" id="subToc_118-mwe-in-depth.html">
+		<li id="118-mwe-in-depth.html#MWE2Exampe" ><a href="118-mwe-in-depth.php#MWE2Exampe" >Examples</a></li>
+		<li id="118-mwe-in-depth.html#MWE2LanguageReference" ><a href="118-mwe-in-depth.php#MWE2LanguageReference" >Language Reference</a></li>
+		<li id="118-mwe-in-depth.html#MWE2SyntaxReference" ><a href="118-mwe-in-depth.php#MWE2SyntaxReference" >Syntax Reference</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="120-heading-UI.php">IDE Concepts</a></div>
+		<ul style="display: none;" id="subToc_120-heading-UI.html">
+		<li id="140-labelprovider.html" ><a href="140-labelprovider.php" >Label Provider</a></li>
+		<li id="150-contentassist.html" ><a href="150-contentassist.php" >Content Assist</a></li>
+		<li id="155-quickfix.html" ><a href="155-quickfix.php" >Quick Fixes</a></li>
+		<li id="160-templates.html" ><a href="160-templates.php" >Template Proposals</a></li>
+		<li id="170-outline.html" ><a href="170-outline.php" >Outline View</a></li>
+		<li id="180-hyperlinking.html" ><a href="180-hyperlinking.php" >Hyperlinking</a></li>
+		<li id="195-highlighting.html" ><a href="195-highlighting.php" >Syntax Coloring</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="199-jvmtypes.php">Referring to Java Types</a></div>
+		<ul style="display: none;" id="subToc_199-jvmtypes.html">
+		<li id="199-jvmtypes.html#jvmtypes_3" ><a href="199-jvmtypes.php#jvmtypes_3" >How to Use Java Types</a></li>
+		<li id="199-jvmtypes.html#jvmtypes_4" ><a href="199-jvmtypes.php#jvmtypes_4" >Customization Points</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="210-emf-integration.php">Integration with EMF and Other EMF Editors</a></div>
+		<ul style="display: none;" id="subToc_210-emf-integration.html">
+		<li id="210-emf-integration.html#model_metamodel" ><a href="210-emf-integration.php#model_metamodel" >Model, Ecore Model, and Ecore</a></li>
+		<li id="210-emf-integration.html#emf_codegen" ><a href="210-emf-integration.php#emf_codegen" >EMF Code Generation</a></li>
+		<li id="210-emf-integration.html#xtext_resource" ><a href="210-emf-integration.php#xtext_resource" >XtextResource Implementation</a></li>
+		<li id="210-emf-integration.html#gmf_integration" ><a href="210-emf-integration.php#gmf_integration" >Integration with GMF Editors</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="213-migrating-from-1.0.php">Migrating from Xtext 1.0.x to 2.0</a></div>
+		<ul style="display: none;" id="subToc_213-migrating-from-1.0.html">
+		<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_4" ><a href="213-migrating-from-1.0.php#migrating_from_1_0_x_4" >Take the Shortcut</a></li>
+		<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_5" ><a href="213-migrating-from-1.0.php#migrating_from_1_0_x_5" >Migrating Step By Step</a></li>
+		<li id="213-migrating-from-1.0.html#migrating_from_1_0_x_6" ><a href="213-migrating-from-1.0.php#migrating_from_1_0_x_6" >Now go for then new features</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="215-migrating-from-0.7.php">Migrating from Xtext 0.7.x to 1.0</a></div>
+		<ul style="display: none;" id="subToc_215-migrating-from-0.7.html">
+		<li id="215-migrating-from-0.7.html#migrating_from_0_7_2" ><a href="215-migrating-from-0.7.php#migrating_from_0_7_2" >Migrating Step By Step</a></li>
+		</ul>
+		</li>
 		</ul>
 	</div>
 	<div id="midcolumn">
@@ -225,79 +153,79 @@
 		<h1>Formatting (Pretty Printing)</h1>
 			<div class="toc">
 			  <ul>
-			    <li><a href="105-formatting.html#formatting_8" >General FormattingConfig Settings</a></li>
-			    <li><a href="105-formatting.html#formatting_9" >FormattingConfig Instructions</a></li>
-			    <li><a href="105-formatting.html#formatting_10" >Grammar Element Finders</a></li>
+			    <li><a href="105-formatting.php#formatting_8" >General FormattingConfig Settings</a></li>
+			    <li><a href="105-formatting.php#formatting_9" >FormattingConfig Instructions</a></li>
+			    <li><a href="105-formatting.php#formatting_10" >Grammar Element Finders</a></li>
 			  </ul>
 			</div>
 		<p>
-		A formatter can be implemented via the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/IFormatter.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.formatting.IFormatter" >IFormatter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java" title="View Source Code" >(src)</a> 
-		service. Technically speaking, a formatter is a <a href="100-serialization.html#tokenstream" title="Go to &quot;Token Stream&quot;">Token Stream</a> which 
+		A formatter can be implemented via the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/IFormatter.html" title="org.eclipse.xtext.formatting.IFormatter">IFormatter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IFormatter.java" title="View Source Code" >(src)</a> 
+		service. Technically speaking, a formatter is a <a href="100-serialization.php#tokenstream" title="Go to &quot;Token Stream&quot;">Token Stream</a> which 
 		inserts/removes/modifies hidden tokens (white space, line-breaks, comments).
 		</p>
 		<p>
-		The formatter is invoked during the <a href="100-serialization.html" title="Go to &quot;Serialization&quot;">serialization phase</a> and when the user triggers 
+		The formatter is invoked during the <a href="100-serialization.php" title="Go to &quot;Serialization&quot;">serialization phase</a> and when the user triggers 
 		formatting in the editor (for example, using the CTRL+SHIFT+F shortcut).
 		</p>
 		<p>
 		Xtext ships with two formatters:
 		<ul>
-		  <li>The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter" >OneWhitespaceFormatter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.java" title="View Source Code" >(src)</a> simply writes one 
+		  <li>The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.html" title="org.eclipse.xtext.formatting.impl.OneWhitespaceFormatter">OneWhitespaceFormatter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/OneWhitespaceFormatter.java" title="View Source Code" >(src)</a> simply writes one 
 		  		white space between all tokens.</li>
-		  <li>The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter" >AbstractDeclarativeFormatter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.java" title="View Source Code" >(src)</a> allows advanced 
-		  		configuration using a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/impl/FormattingConfig.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.formatting.impl.FormattingConfig" >FormattingConfig</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java" title="View Source Code" >(src)</a>. Both are explained
+		  <li>The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.html" title="org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter">AbstractDeclarativeFormatter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.java" title="View Source Code" >(src)</a> allows advanced 
+		  		configuration using a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/impl/FormattingConfig.html" title="org.eclipse.xtext.formatting.impl.FormattingConfig">FormattingConfig</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java" title="View Source Code" >(src)</a>. Both are explained
 		  		below.</li>
 		</ul>
 		</p>
 		<p>
 		A declarative formatter can be implemented by subclassing 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter" >AbstractDeclarativeFormatter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.java" title="View Source Code" >(src)</a>, as shown in 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.html" title="org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter">AbstractDeclarativeFormatter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/AbstractDeclarativeFormatter.java" title="View Source Code" >(src)</a>, as shown in 
 		the following example:
 		</p>
 		<p>
 		<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ExampleFormatter&nbsp;<span class="keyword">extends</span>&nbsp;AbstractDeclarativeFormatter&nbsp;{</br>
-		</br>
-		&nbsp;&nbsp;@Override</br>
-		&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;configureFormatting(FormattingConfig&nbsp;c)&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;ExampleLanguageGrammarAccess&nbsp;f&nbsp;=&nbsp;getGrammarAccess();</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;c.setAutoLinewrap(120);</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;find&nbsp;common&nbsp;keywords&nbsp;an&nbsp;specify&nbsp;formatting&nbsp;for&nbsp;them</br>
-		</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(Pair&lt;Keyword,&nbsp;Keyword&gt;&nbsp;pair&nbsp;:&nbsp;f.findKeywordPairs(<span class="string">"("</span>,&nbsp;<span class="string">")"</span>))&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().after(pair.getFirst());</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(pair.getSecond());</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(Keyword&nbsp;comma&nbsp;:&nbsp;f.findKeywords(<span class="string">","</span>))&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(comma);</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-		</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;formatting&nbsp;for&nbsp;grammar&nbsp;rule&nbsp;Line</br>
-		</span>&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap(2).after(f.getLineAccess().getSemicolonKeyword_1());</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(f.getLineAccess().getSemicolonKeyword_1());</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;formatting&nbsp;for&nbsp;grammar&nbsp;rule&nbsp;TestIndentation</br>
-		</span>&nbsp;&nbsp;&nbsp;&nbsp;c.setIndentationIncrement().after(</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;c.setIndentationDecrement().before(</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap().after(</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap().after(</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;formatting&nbsp;for&nbsp;grammar&nbsp;rule&nbsp;Param</br>
-		</span>&nbsp;&nbsp;&nbsp;&nbsp;c.setNoLinewrap().around(f.getParamAccess().getColonKeyword_1());</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().around(f.getParamAccess().getColonKeyword_1());</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;formatting&nbsp;for&nbsp;Comments&nbsp;</br>
-		</span>&nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;2).before(g.getSL_COMMENTRule());</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;2).before(g.getML_COMMENTRule());</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;1).after(g.getML_COMMENTRule());</br>
-		&nbsp;&nbsp;}</br>
+		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ExampleFormatter&nbsp;<span class="keyword">extends</span>&nbsp;AbstractDeclarativeFormatter&nbsp;{<br/>
+		<br/>
+		&nbsp;&nbsp;@Override<br/>
+		&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;configureFormatting(FormattingConfig&nbsp;c)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;ExampleLanguageGrammarAccess&nbsp;f&nbsp;=&nbsp;getGrammarAccess();<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;c.setAutoLinewrap(120);<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;find&nbsp;common&nbsp;keywords&nbsp;an&nbsp;specify&nbsp;formatting&nbsp;for&nbsp;them<br/>
+		</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(Pair&lt;Keyword,&nbsp;Keyword&gt;&nbsp;pair&nbsp;:&nbsp;f.findKeywordPairs(<span class="string">"("</span>,&nbsp;<span class="string">")"</span>))&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().after(pair.getFirst());<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(pair.getSecond());<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(Keyword&nbsp;comma&nbsp;:&nbsp;f.findKeywords(<span class="string">","</span>))&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(comma);<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+		<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;formatting&nbsp;for&nbsp;grammar&nbsp;rule&nbsp;Line<br/>
+		</span>&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap(2).after(f.getLineAccess().getSemicolonKeyword_1());<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(f.getLineAccess().getSemicolonKeyword_1());<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;formatting&nbsp;for&nbsp;grammar&nbsp;rule&nbsp;TestIndentation<br/>
+		</span>&nbsp;&nbsp;&nbsp;&nbsp;c.setIndentationIncrement().after(<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;c.setIndentationDecrement().before(<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap().after(<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap().after(<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;formatting&nbsp;for&nbsp;grammar&nbsp;rule&nbsp;Param<br/>
+		</span>&nbsp;&nbsp;&nbsp;&nbsp;c.setNoLinewrap().around(f.getParamAccess().getColonKeyword_1());<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().around(f.getParamAccess().getColonKeyword_1());<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;formatting&nbsp;for&nbsp;Comments&nbsp;<br/>
+		</span>&nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;2).before(g.getSL_COMMENTRule());<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;2).before(g.getML_COMMENTRule());<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;1).after(g.getML_COMMENTRule());<br/>
+		&nbsp;&nbsp;}<br/>
 		}
 		</p>
 		</div>
@@ -305,10 +233,10 @@
 		</p>
 		<p>
 		The formatter has to implement the method <span class="inlinecode">configureFormatting(...)</span> which declaratively sets up 
-		a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/impl/FormattingConfig.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.formatting.impl.FormattingConfig" >FormattingConfig</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java" title="View Source Code" >(src)</a>.
+		a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/impl/FormattingConfig.html" title="org.eclipse.xtext.formatting.impl.FormattingConfig">FormattingConfig</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java" title="View Source Code" >(src)</a>.
 		</p>
 		<p>
-		The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/impl/FormattingConfig.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.formatting.impl.FormattingConfig" >FormattingConfig</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java" title="View Source Code" >(src)</a> consist of general 
+		The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/impl/FormattingConfig.html" title="org.eclipse.xtext.formatting.impl.FormattingConfig">FormattingConfig</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/impl/FormattingConfig.java" title="View Source Code" >(src)</a> consist of general 
 		settings and a set of formatting instructions:
 		</p>
 		<a name="formatting_8" ></a>
@@ -352,8 +280,8 @@
 		terminology of the lexer a data type rule can match a composition of multiple tokens.
 		</p>
 		<p>
-		The parameter <em>element</em> can be a grammar's <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/AbstractElement.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.AbstractElement" >AbstractElement</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/AbstractElement.java" title="View Source Code" >(src)</a> or a grammar's 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/AbstractRule.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.AbstractRule" >AbstractRule</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/AbstractRule.java" title="View Source Code" >(src)</a>. All grammar 
+		The parameter <em>element</em> can be a grammar's <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/AbstractElement.html" title="org.eclipse.xtext.AbstractElement">AbstractElement</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/AbstractElement.java" title="View Source Code" >(src)</a> or a grammar's 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/AbstractRule.html" title="org.eclipse.xtext.AbstractRule">AbstractRule</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/AbstractRule.java" title="View Source Code" >(src)</a>. All grammar 
 		rules and almost all abstract elements can be matched. This includes rule calls, parser rules, groups 
 		and alternatives. The semantic of <span class="inlinecode">before(element)</span>, <span class="inlinecode">after(element)</span>, etc. for rule calls and parser rules is 
 		identical to when the parser would "pass" this part of the grammar. The stack of called rules is taken 
@@ -362,8 +290,8 @@
 		  <li>Actions. E.g. <span class="inlinecode">{MyAction}</span> or <span class="inlinecode">{MyAction.myFeature=<span class="keyword">current</span>}</span>.</li>
 		  <li>Grammar elements nested in data type rules. This is due to to the fact that tokens matched 
 		  		by a data type rule are treated as atomic by the serializer. To format these tokens, please 
-		  		implement a <a href="090-valueconverter.html" title="Go to &quot;Value Converter&quot;">ValueConverter</a>. </li>
-		  <li>Grammar elements nested in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/CrossReference.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.CrossReference" >CrossReference</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/CrossReference.java" title="View Source Code" >(src)</a>.</li>
+		  		implement a <a href="090-valueconverter.php" title="Go to &quot;Value Converter&quot;">ValueConverter</a>. </li>
+		  <li>Grammar elements nested in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/CrossReference.html" title="org.eclipse.xtext.CrossReference">CrossReference</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/CrossReference.java" title="View Source Code" >(src)</a>.</li>
 		</ul>
 		</p>
 		<p>
@@ -371,8 +299,8 @@
 		<ul>
 		  <li><span class="inlinecode">setIndentationIncrement()</span> increments indentation by one unit at this position. Whether 
 		  		one unit consists of one tab-character or spaces is defined by 
-		  		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/IIndentationInformation.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.formatting.IIndentationInformation" >IIndentationInformation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IIndentationInformation.java" title="View Source Code" >(src)</a>. The default implementation 
-		  		consults Eclipse's <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/preference/IPreferenceStore.html" title="View JavaDoc"><abbr title="org.eclipse.jface.preference.IPreferenceStore" >IPreferenceStore</abbr></a>.</li>
+		  		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/formatting/IIndentationInformation.html" title="org.eclipse.xtext.formatting.IIndentationInformation">IIndentationInformation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/formatting/IIndentationInformation.java" title="View Source Code" >(src)</a>. The default implementation 
+		  		consults Eclipse's <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/preference/IPreferenceStore.html" title="org.eclipse.jface.preference.IPreferenceStore">IPreferenceStore</abbr></a>.</li>
 		  <li><span class="inlinecode">setIndentationDecrement()</span> decrements indentation by one unit.</li>
 		  <li><span class="inlinecode">setLinewrap()</span>: Inserts a line-wrap at this position.</li>
 		  <li><span class="inlinecode">setLinewrap(<span class="keyword">int</span>&nbsp;count)</span>: Inserts <em>count</em> numbers of line-wrap at this position.</li>
@@ -396,7 +324,7 @@
 		<p>
 		Sometimes, if a grammar contains many similar elements for which the same formatting instructions ought 
 		to apply, it can be tedious to specify them for each grammar element individually. The 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/IGrammarAccess.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.IGrammarAccess" >IGrammarAccess</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/IGrammarAccess.java" title="View Source Code" >(src)</a> provides convenience methods for this. The 
+		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/IGrammarAccess.html" title="org.eclipse.xtext.IGrammarAccess">IGrammarAccess</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/IGrammarAccess.java" title="View Source Code" >(src)</a> provides convenience methods for this. The 
 		find methods are available for the grammar and for each parser rule.
 		</p>
 		<p>
@@ -409,20 +337,3 @@
 		</p>
 	</div>
 	<br style="clear:both;height:1em;">
-</div>
-<div id="clearFooter"></div>
-<div id="footer">
-<ul id="footernav">
-	<li><a href="/">Home</a></li>
-
-	<li><a href="/legal/privacy.php">Privacy Policy</a></li>
-	<li><a href="/legal/termsofuse.php">Terms of Use</a></li>
-	<li><a href="/legal/copyright.php">Copyright Agent</a></li>
-	<li><a href="/legal/">Legal</a></li>
-	<li><a href="/org/foundation/contact.php">Contact Us</a></li>
-</ul>
-
-<span id="copyright">Copyright &copy; 2011 The Eclipse Foundation. All Rights Reserved.</span>
-</div>
-</body>
-</html>

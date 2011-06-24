@@ -28,16 +28,16 @@ empty and the Xtext grammar editor will be opened and show the definition of a v
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;org.xtext.example.mydsl.MyDsl&nbsp;<span class="keyword">with</span>&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals</br>
-</br>
-<span class="keyword">generate</span>&nbsp;myDsl&nbsp;<span class="string">"http://www.xtext.org/example/mydsl/MyDsl"</span></br>
-</br>
-Model:</br>
-&nbsp;&nbsp;&nbsp;&nbsp;greetings+=Greeting*;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-Greeting:</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;Hello&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;!&apos;</span>;</br>
+<span class="keyword">grammar</span>&nbsp;org.xtext.example.mydsl.MyDsl&nbsp;<span class="keyword">with</span>&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals<br/>
+<br/>
+<span class="keyword">generate</span>&nbsp;myDsl&nbsp;<span class="string">"http://www.xtext.org/example/mydsl/MyDsl"</span><br/>
+<br/>
+Model:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;greetings+=Greeting*;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+Greeting:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;Hello&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;!&apos;</span>;<br/>
 </p>
 </div>
 </div>
@@ -48,8 +48,8 @@ be proper input:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">Hello</span>&nbsp;Xtext!</br>
-<span class="keyword">Hello</span>&nbsp;World!</br>
+<span class="keyword">Hello</span>&nbsp;Xtext!<br/>
+<span class="keyword">Hello</span>&nbsp;World!<br/>
 </p>
 </div>
 </div>
@@ -79,7 +79,7 @@ create a new Eclipse Application. Select the node <em>Eclipse Application</em> i
 one. Choose a meaningful name and go to the tab <em>Arguments</em> where you add the VM arguments <div class="literallayout">
 <div class="incode">
 <p class="code">
--XX:MaxPermSize=128m</br>
+-XX:MaxPermSize=128m<br/>
 -Xmx512m
 </p>
 </div>
@@ -120,7 +120,7 @@ Xtext&apos;s code generation in order to get a fully working language infrastruc
 how to test the generated editor.
 </p>
 <p>
-Next up you should go through the more comprehensive <a href="020-domainmodel-step-by-step.html" title="Go to &quot;30 Minutes Tutorial&quot;">Domain
+Next up you should go through the more comprehensive <a href="020-domainmodel-step-by-step.html" title="Go to &quot;15 Minutes Tutorial&quot;">Domain
 Model Example</a>. It explains the different concepts of the Xtext grammar language and illustrates how
 to customize various aspects of the language.
 </p>

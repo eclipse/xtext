@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
-<title>30 Minutes Tutorial - Extended</title>
+<title>15 Minutes Tutorial - Extended</title>
 
 <link href="book.css" rel="stylesheet" type="text/css">
 <link href="code.css" rel="stylesheet" type="text/css">
@@ -9,7 +9,7 @@
 </head>
 <body>
 <a name="DomainmodelNextSteps"></a>
-<h1>30 Minutes Tutorial - Extended</h1>
+<h1>15 Minutes Tutorial - Extended</h1>
 <p>
 After you&apos;ve developed you first own DSL, the question arises, how the behavior and the semantics of
 the language can be customized. Therefore a couple of mini-tutorials are available, that illustrate common
@@ -17,7 +17,7 @@ use cases when crafting an own DSL.
 </p>
 <p>
 These lessons are independent from each other. Each of them will be based on the language that
-was build in the first <a href="020-domainmodel-step-by-step.html" title="Go to &quot;30 Minutes Tutorial&quot;">domain model tutorial</a>.
+was build in the first <a href="020-domainmodel-step-by-step.html" title="Go to &quot;15 Minutes Tutorial&quot;">domain model tutorial</a>.
 </p>
 <p>
 That is, the syntax and the grammar for the language look like this:
@@ -26,33 +26,33 @@ That is, the syntax and the grammar for the language look like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">package</span>&nbsp;java.lang&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">datatype</span>&nbsp;String</br>
-}</br>
-</br>
-<span class="keyword">package</span>&nbsp;my.company.blog&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;java.lang.*</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;my.company.common.*</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Blog&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;posts:&nbsp;Post</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;HasAuthor&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author:&nbsp;String</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Post&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;comments:&nbsp;Comment</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-}</br>
+<span class="keyword">package</span>&nbsp;java.lang&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">datatype</span>&nbsp;String<br/>
+}<br/>
+<br/>
+<span class="keyword">package</span>&nbsp;my.company.blog&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;java.lang.*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;my.company.common.*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Blog&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;posts:&nbsp;Post<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;author:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Post&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;comments:&nbsp;Comment<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Comment&nbsp;<span class="keyword">extends</span>&nbsp;HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content:&nbsp;String<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -61,56 +61,56 @@ That is, the syntax and the grammar for the language look like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">grammar</span>&nbsp;org.eclipse.xtext.example.Domainmodel&nbsp;<span class="keyword">with</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals</br>
-</br>
-<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.eclipse.org/xtext/example/Domainmodel"</span></br>
-</br>
-Domainmodel:</br>
-&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*</br>
-;</br>
-</br>
-PackageDeclaration:</br>
-&nbsp;&nbsp;<span class="string">&apos;package&apos;</span>&nbsp;name&nbsp;=&nbsp;QualifiedName&nbsp;<span class="string">&apos;{&apos;</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*</br>
-&nbsp;&nbsp;<span class="string">&apos;}&apos;</span></br>
-;</br>
-</br>
-AbstractElement:</br>
-&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Type&nbsp;|&nbsp;Import</br>
-;</br>
-</br>
-QualifiedName:</br>
-&nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*</br>
-;</br>
-</br>
-Import:</br>
-&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importedNamespace&nbsp;=&nbsp;QualifiedNameWithWildcard</br>
-;</br>
-&nbsp;&nbsp;</br>
-QualifiedNameWithWildcard:</br>
-&nbsp;&nbsp;QualifiedName&nbsp;<span class="string">&apos;.*&apos;</span>?</br>
-;</br>
-&nbsp;&nbsp;</br>
-Type:</br>
-&nbsp;&nbsp;DataType&nbsp;|&nbsp;Entity</br>
-;</br>
-&nbsp;&nbsp;</br>
-DataType:</br>
-&nbsp;&nbsp;<span class="string">&apos;datatype&apos;</span>&nbsp;name=ID</br>
-;</br>
-&nbsp;</br>
-Entity:</br>
-&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType&nbsp;=&nbsp;[Entity&nbsp;|&nbsp;QualifiedName])?</br>
-&nbsp;&nbsp;<span class="string">&apos;{&apos;</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;(features&nbsp;+=&nbsp;Feature)*</br>
-&nbsp;&nbsp;<span class="string">&apos;}&apos;</span></br>
-;</br>
-&nbsp;</br>
-Feature:</br>
-&nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type&nbsp;|&nbsp;QualifiedName]</br>
-;</br>
+<span class="keyword">grammar</span>&nbsp;org.eclipse.xtext.example.Domainmodel&nbsp;<span class="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.common.Terminals<br/>
+<br/>
+<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.eclipse.org/xtext/example/Domainmodel"</span><br/>
+<br/>
+Domainmodel:<br/>
+&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*<br/>
+;<br/>
+<br/>
+PackageDeclaration:<br/>
+&nbsp;&nbsp;<span class="string">&apos;package&apos;</span>&nbsp;name&nbsp;=&nbsp;QualifiedName&nbsp;<span class="string">&apos;{&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*<br/>
+&nbsp;&nbsp;<span class="string">&apos;}&apos;</span><br/>
+;<br/>
+<br/>
+AbstractElement:<br/>
+&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Type&nbsp;|&nbsp;Import<br/>
+;<br/>
+<br/>
+QualifiedName:<br/>
+&nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*<br/>
+;<br/>
+<br/>
+Import:<br/>
+&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importedNamespace&nbsp;=&nbsp;QualifiedNameWithWildcard<br/>
+;<br/>
+&nbsp;&nbsp;<br/>
+QualifiedNameWithWildcard:<br/>
+&nbsp;&nbsp;QualifiedName&nbsp;<span class="string">&apos;.*&apos;</span>?<br/>
+;<br/>
+&nbsp;&nbsp;<br/>
+Type:<br/>
+&nbsp;&nbsp;DataType&nbsp;|&nbsp;Entity<br/>
+;<br/>
+&nbsp;&nbsp;<br/>
+DataType:<br/>
+&nbsp;&nbsp;<span class="string">&apos;datatype&apos;</span>&nbsp;name=ID<br/>
+;<br/>
+&nbsp;<br/>
+Entity:<br/>
+&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType&nbsp;=&nbsp;[Entity&nbsp;|&nbsp;QualifiedName])?<br/>
+&nbsp;&nbsp;<span class="string">&apos;{&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(features&nbsp;+=&nbsp;Feature)*<br/>
+&nbsp;&nbsp;<span class="string">&apos;}&apos;</span><br/>
+;<br/>
+&nbsp;<br/>
+Feature:<br/>
+&nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;[Type&nbsp;|&nbsp;QualifiedName]<br/>
+;<br/>
 </p>
 </div>
 </div>
@@ -132,19 +132,19 @@ the generated code.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">package</span>&nbsp;my.company.blog;</br>
-</br>
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;HasAuthor&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;java.lang.String&nbsp;author;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;java.lang.String&nbsp;getAuthor()&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;author;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setAuthor(java.lang.String&nbsp;author)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.author&nbsp;=&nbsp;author;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-}</br>
+<span class="keyword">package</span>&nbsp;my.company.blog;<br/>
+<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;HasAuthor&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;java.lang.String&nbsp;author;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;java.lang.String&nbsp;getAuthor()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;author;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setAuthor(java.lang.String&nbsp;author)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span>.author&nbsp;=&nbsp;author;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -158,16 +158,16 @@ Eclipse environment.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">package</span>&nbsp;org.eclipse.xtext.example.generator</br>
-</br>
-<span class="keyword">import</span>&nbsp;org.eclipse.emf.ecore.resource.Resource</br>
-<span class="keyword">import</span>&nbsp;org.eclipse.xtext.generator.IGenerator</br>
-<span class="keyword">import</span>&nbsp;org.eclipse.xtext.generator.IFileSystemAccess</br>
-</br>
-<span class="keyword">class</span>&nbsp;DomainmodelGenerator&nbsp;<span class="keyword">implements</span>&nbsp;IGenerator&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-}</br>
+<span class="keyword">package</span>&nbsp;org.eclipse.xtext.example.generator<br/>
+<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.emf.ecore.resource.Resource<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.xtext.generator.IGenerator<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.xtext.generator.IFileSystemAccess<br/>
+<br/>
+<span class="keyword">class</span>&nbsp;DomainmodelGenerator&nbsp;<span class="keyword">implements</span>&nbsp;IGenerator&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -190,11 +190,11 @@ all entities with a resource and trigger code generation for each one.
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;org.eclipse.xtext.xtend2.lib.ResourceExtensions.*</br>
-		</br>
-		<span class="keyword">class</span>&nbsp;DomainmodelGenerator&nbsp;<span class="keyword">implements</span>&nbsp;IGenerator&nbsp;{</br>
-		..</br>
-		}</br>
+		<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;org.eclipse.xtext.xtend2.lib.ResourceExtensions.*<br/>
+		<br/>
+		<span class="keyword">class</span>&nbsp;DomainmodelGenerator&nbsp;<span class="keyword">implements</span>&nbsp;IGenerator&nbsp;{<br/>
+		..<br/>
+		}<br/>
 		</p>
 		</div>
 		</div>
@@ -205,10 +205,10 @@ all entities with a resource and trigger code generation for each one.
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContentsIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-		}</br>
+		<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContentsIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+		}<br/>
 		</p>
 		</div>
 		</div>
@@ -225,7 +225,7 @@ all entities with a resource and trigger code generation for each one.
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider&nbsp;nameProvider</br>
+		@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider&nbsp;nameProvider<br/>
 		</p>
 		</div>
 		</div>
@@ -237,13 +237,13 @@ all entities with a resource and trigger code generation for each one.
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContentsIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fsa.generateFile(</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.fullyQualifiedName.toString.replace(<span class="string">"."</span>,&nbsp;<span class="string">"/"</span>)&nbsp;+&nbsp;<span class="string">".java"</span>,</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.compile)</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-		}</br>
+		<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContentsIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fsa.generateFile(<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.fullyQualifiedName.toString.replace(<span class="string">"."</span>,&nbsp;<span class="string">"/"</span>)&nbsp;+&nbsp;<span class="string">".java"</span>,<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.compile)<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+		}<br/>
 		</p>
 		</div>
 		</div>
@@ -257,12 +257,12 @@ all entities with a resource and trigger code generation for each one.
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;«e.eContainer.fullyQualifiedName»;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;«e.name»&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-		&apos;</span><span class="string">&apos;&apos;</span></br>
+		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;e.eContainer.fullyQualifiedName&raquo;;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;e.name&raquo;&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+		&apos;</span><span class="string">&apos;&apos;</span><br/>
 		</p>
 		</div>
 		</div>
@@ -277,14 +277,14 @@ all entities with a resource and trigger code generation for each one.
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;«IF&nbsp;e.eContainer&nbsp;!=&nbsp;null»</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;«e.eContainer.fullyQualifiedName»;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;«ENDIF»</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;«e.name»&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-		&apos;</span><span class="string">&apos;&apos;</span></br>
+		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;e.eContainer&nbsp;!=&nbsp;null&raquo;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;e.eContainer.fullyQualifiedName&raquo;;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDIF&raquo;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;e.name&raquo;&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+		&apos;</span><span class="string">&apos;&apos;</span><br/>
 		</p>
 		</div>
 		</div>
@@ -293,15 +293,15 @@ all entities with a resource and trigger code generation for each one.
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;«IF&nbsp;e.eContainer&nbsp;!=&nbsp;null»</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;«e.eContainer.fullyQualifiedName»;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;«ENDIF»</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;«e.name»&nbsp;«IF&nbsp;e.superType&nbsp;!=&nbsp;null</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;»extends&nbsp;«e.superType.fullyQualifiedName»&nbsp;«ENDIF»{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-		&apos;</span><span class="string">&apos;&apos;</span></br>
+		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;e.eContainer&nbsp;!=&nbsp;null&raquo;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;e.eContainer.fullyQualifiedName&raquo;;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDIF&raquo;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;e.name&raquo;&nbsp;&laquo;IF&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&raquo;extends&nbsp;&laquo;e.superType.fullyQualifiedName&raquo;&nbsp;&laquo;ENDIF&raquo;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+		&apos;</span><span class="string">&apos;&apos;</span><br/>
 		</p>
 		</div>
 		</div>
@@ -318,17 +318,17 @@ all entities with a resource and trigger code generation for each one.
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">def</span>&nbsp;compile(Feature&nbsp;f)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;«f.type.fullyQualifiedName»&nbsp;«f.name»;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;«f.type.fullyQualifiedName»&nbsp;get«f.name.toFirstUpper»()&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;«f.name»;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;set«f.name.toFirstUpper»(«f.type.fullyQualifiedName»&nbsp;«f.name»)&nbsp;{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.«f.name»&nbsp;=&nbsp;«f.name»;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-		&apos;</span><span class="string">&apos;&apos;</span></br>
+		<span class="keyword">def</span>&nbsp;compile(Feature&nbsp;f)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;&laquo;f.type.fullyQualifiedName&raquo;&nbsp;&laquo;f.name&raquo;;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;&laquo;f.type.fullyQualifiedName&raquo;&nbsp;get&laquo;f.name.toFirstUpper&raquo;()&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;f.name&raquo;;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;f.name.toFirstUpper&raquo;(&laquo;f.type.fullyQualifiedName&raquo;&nbsp;&laquo;f.name&raquo;)&nbsp;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;f.name&raquo;&nbsp;=&nbsp;&laquo;f.name&raquo;;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+		&apos;</span><span class="string">&apos;&apos;</span><br/>
 		</p>
 		</div>
 		</div>
@@ -340,18 +340,18 @@ all entities with a resource and trigger code generation for each one.
 				<div class="literallayout">
 		<div class="incode">
 		<p class="code">
-		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;«IF&nbsp;e.eContainer&nbsp;!=&nbsp;null»</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;«e.eContainer.fullyQualifiedName»;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;«ENDIF»</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;«e.name»&nbsp;«IF&nbsp;e.superType&nbsp;!=&nbsp;null</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;»extends&nbsp;«e.superType.fullyQualifiedName»&nbsp;«ENDIF»{</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«FOR&nbsp;f:e.features»</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«f.compile»</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«ENDFOR»</br>
-		&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-		&apos;</span><span class="string">&apos;&apos;</span></br>
+		<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;e.eContainer&nbsp;!=&nbsp;null&raquo;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;e.eContainer.fullyQualifiedName&raquo;;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDIF&raquo;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;e.name&raquo;&nbsp;&laquo;IF&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&raquo;extends&nbsp;&laquo;e.superType.fullyQualifiedName&raquo;&nbsp;&laquo;ENDIF&raquo;{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;FOR&nbsp;f:e.features&raquo;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;f.compile&raquo;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDFOR&raquo;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+		&apos;</span><span class="string">&apos;&apos;</span><br/>
 		</p>
 		</div>
 		</div>
@@ -369,57 +369,57 @@ and see how the compiler will pick up your sample <em>Entities</em> and generate
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">package</span>&nbsp;org.eclipse.xtext.example.generator</br>
-</br>
-<span class="keyword">import</span>&nbsp;org.eclipse.emf.ecore.resource.Resource</br>
-<span class="keyword">import</span>&nbsp;org.eclipse.xtext.generator.IGenerator</br>
-<span class="keyword">import</span>&nbsp;org.eclipse.xtext.generator.IFileSystemAccess</br>
-</br>
-<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;org.eclipse.xtext.xtend2.lib.ResourceExtensions.*</br>
-</br>
-<span class="keyword">import</span>&nbsp;org.eclipse.xtext.example.domainmodel.*</br>
-</br>
-<span class="keyword">import</span>&nbsp;org.eclipse.xtext.naming.IQualifiedNameProvider</br>
-</br>
-<span class="keyword">import</span>&nbsp;com.google.inject.Inject</br>
-</br>
-<span class="keyword">class</span>&nbsp;DomainmodelGenerator&nbsp;<span class="keyword">implements</span>&nbsp;IGenerator&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider&nbsp;nameProvider</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContentsIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fsa.generateFile(</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.fullyQualifiedName.toString.replace(<span class="string">"."</span>,&nbsp;<span class="string">"/"</span>)&nbsp;+&nbsp;<span class="string">".java"</span>,</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.compile)</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«IF&nbsp;e.eContainer&nbsp;!=&nbsp;null»</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;«e.eContainer.fullyQualifiedName»;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«ENDIF»</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;«e.name»&nbsp;«IF&nbsp;e.superType&nbsp;!=&nbsp;null</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;»extends&nbsp;«e.superType.fullyQualifiedName»&nbsp;«ENDIF»{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«FOR&nbsp;f:e.features»</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«f.compile»</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;«ENDFOR»</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Feature&nbsp;f)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;«f.type.fullyQualifiedName»&nbsp;«f.name»;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;«f.type.fullyQualifiedName»&nbsp;get«f.name.toFirstUpper»()&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;«f.name»;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;set«f.name.toFirstUpper»(«f.type.fullyQualifiedName»&nbsp;«f.name»)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.«f.name»&nbsp;=&nbsp;«f.name»;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span></br>
-}</br>
+<span class="keyword">package</span>&nbsp;org.eclipse.xtext.example.generator<br/>
+<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.emf.ecore.resource.Resource<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.xtext.generator.IGenerator<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.xtext.generator.IFileSystemAccess<br/>
+<br/>
+<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;org.eclipse.xtext.xtend2.lib.ResourceExtensions.*<br/>
+<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.xtext.example.domainmodel.*<br/>
+<br/>
+<span class="keyword">import</span>&nbsp;org.eclipse.xtext.naming.IQualifiedNameProvider<br/>
+<br/>
+<span class="keyword">import</span>&nbsp;com.google.inject.Inject<br/>
+<br/>
+<span class="keyword">class</span>&nbsp;DomainmodelGenerator&nbsp;<span class="keyword">implements</span>&nbsp;IGenerator&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider&nbsp;nameProvider<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContentsIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fsa.generateFile(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.fullyQualifiedName.toString.replace(<span class="string">"."</span>,&nbsp;<span class="string">"/"</span>)&nbsp;+&nbsp;<span class="string">".java"</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.compile)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;e.eContainer&nbsp;!=&nbsp;null&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;e.eContainer.fullyQualifiedName&raquo;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDIF&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;e.name&raquo;&nbsp;&laquo;IF&nbsp;e.superType&nbsp;!=&nbsp;null<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&raquo;extends&nbsp;&laquo;e.superType.fullyQualifiedName&raquo;&nbsp;&laquo;ENDIF&raquo;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;FOR&nbsp;f:e.features&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;f.compile&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDFOR&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Feature&nbsp;f)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;&laquo;f.type.fullyQualifiedName&raquo;&nbsp;&laquo;f.name&raquo;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;&laquo;f.type.fullyQualifiedName&raquo;&nbsp;get&laquo;f.name.toFirstUpper&raquo;()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;f.name&raquo;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;f.name.toFirstUpper&raquo;(&laquo;f.type.fullyQualifiedName&raquo;&nbsp;&laquo;f.name&raquo;)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;f.name&raquo;&nbsp;=&nbsp;&laquo;f.name&raquo;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -450,13 +450,13 @@ of code:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Check</br>
-<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;checkNameStartsWithCapital(Entity&nbsp;entity)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(!Character.isUpperCase(entity.getName().charAt(0)))&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warning(<span class="string">"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital"</span>,&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.Literals.TYPE__NAME);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-}</br>
+@Check<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;checkNameStartsWithCapital(Entity&nbsp;entity)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(!Character.isUpperCase(entity.getName().charAt(0)))&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warning(<span class="string">"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital"</span>,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.Literals.TYPE__NAME);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -474,20 +474,20 @@ and look for features with equal names.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Check</br>
-<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;checkFeatureNameIsUnique(Feature&nbsp;f)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;Entity&nbsp;superEntity&nbsp;=&nbsp;((Entity)&nbsp;f.eContainer()).getSuperType();</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>(superEntity&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(Feature&nbsp;other:&nbsp;superEntity.getFeatures())&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(f.getName().equals(other.getName()))&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(<span class="string">"Feature&nbsp;names&nbsp;have&nbsp;to&nbsp;be&nbsp;unique"</span>,</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyDslPackage.Literals.FEATURE__NAME);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;superEntity&nbsp;=&nbsp;superEntity.getSuperType();</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-}</br>
+@Check<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;checkFeatureNameIsUnique(Feature&nbsp;f)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Entity&nbsp;superEntity&nbsp;=&nbsp;((Entity)&nbsp;f.eContainer()).getSuperType();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>(superEntity&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(Feature&nbsp;other:&nbsp;superEntity.getFeatures())&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(f.getName().equals(other.getName()))&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(<span class="string">"Feature&nbsp;names&nbsp;have&nbsp;to&nbsp;be&nbsp;unique"</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyDslPackage.Literals.FEATURE__NAME);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;superEntity&nbsp;=&nbsp;superEntity.getSuperType();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>

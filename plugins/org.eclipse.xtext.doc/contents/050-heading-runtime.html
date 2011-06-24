@@ -54,18 +54,18 @@ The only thing you have to do in order to use this factory is to prefix the clas
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-&lt;extension&nbsp;point=<span class="string">"org.eclipse.ui.editors"</span>&gt;</br>
-&nbsp;&nbsp;&lt;editor</br>
-&nbsp;&nbsp;&nbsp;&nbsp;class=<span class="string">"&lt;MyDsl&gt;ExecutableExtensionFactory:</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.ui.editor.XtextEditor"</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;contributorClass=</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"org.eclipse.ui.editors.text.TextEditorActionContributor"</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;default=<span class="string">"true"</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;extensions=<span class="string">"mydsl"</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;id=<span class="string">"org.eclipse.xtext.example.MyDsl"</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;name=<span class="string">"MyDsl&nbsp;Editor"</span>&gt;</br>
-&nbsp;&nbsp;&lt;/editor&gt;</br>
-&lt;/extension&gt;</br>
+&lt;extension&nbsp;point=<span class="string">"org.eclipse.ui.editors"</span>&gt;<br/>
+&nbsp;&nbsp;&lt;editor<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;class=<span class="string">"&lt;MyDsl&gt;ExecutableExtensionFactory:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.ui.editor.XtextEditor"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;contributorClass=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"org.eclipse.ui.editors.text.TextEditorActionContributor"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;default=<span class="string">"true"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;extensions=<span class="string">"mydsl"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;id=<span class="string">"org.eclipse.xtext.example.MyDsl"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;name=<span class="string">"MyDsl&nbsp;Editor"</span>&gt;<br/>
+&nbsp;&nbsp;&lt;/editor&gt;<br/>
+&lt;/extension&gt;<br/>
 </p>
 </div>
 </div>
@@ -147,8 +147,8 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-MyRule:</br>
-&nbsp;&nbsp;({MySubRule}&nbsp;<span class="string">"sub"</span>)?&nbsp;(strVal+=ID&nbsp;intVal+=INT)*;</br>
+MyRule:<br/>
+&nbsp;&nbsp;({MySubRule}&nbsp;<span class="string">"sub"</span>)?&nbsp;(strVal+=ID&nbsp;intVal+=INT)*;<br/>
 </p>
 </div>
 </div>
@@ -215,10 +215,10 @@ You can, for example, enable it in your runtime module, by adding:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@SingletonBinding(eager&nbsp;=&nbsp;<span class="keyword">true</span>)</br>
-<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;ConcreteSyntaxEValidator&gt;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bindConcreteSyntaxEValidator()&nbsp;{</br>
-&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;ConcreteSyntaxEValidator.<span class="keyword">class</span>;</br>
+@SingletonBinding(eager&nbsp;=&nbsp;<span class="keyword">true</span>)<br/>
+<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;ConcreteSyntaxEValidator&gt;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bindConcreteSyntaxEValidator()&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;ConcreteSyntaxEValidator.<span class="keyword">class</span>;<br/>
 }
 </p>
 </div>
@@ -251,8 +251,8 @@ configuration and you are good to go:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-fragment&nbsp;=&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.generator.validation.JavaValidatorFragment&nbsp;{}</br>
+fragment&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.generator.validation.JavaValidatorFragment&nbsp;{}<br/>
 </p>
 </div>
 </div>
@@ -281,16 +281,16 @@ All in all this is very similar to how JUnit 4 works. Here is an example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;DomainmodelJavaValidator&nbsp;</br>
-&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractDomainmodelJavaValidator&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;@Check</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;checkTypeNameStartsWithCapital(Type&nbsp;type)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(!Character.isUpperCase(type.getName().charAt(0)))</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warning(<span class="string">"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital"</span>,&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.TYPE__NAME);</br>
-&nbsp;&nbsp;}</br>
-}</br>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;DomainmodelJavaValidator&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractDomainmodelJavaValidator&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;@Check<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;checkTypeNameStartsWithCapital(Type&nbsp;type)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(!Character.isUpperCase(type.getName().charAt(0)))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warning(<span class="string">"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital"</span>,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.TYPE__NAME);<br/>
+&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -310,15 +310,15 @@ You can run the validators on your model programmatically using EMF&apos;s
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-EObject&nbsp;myModel&nbsp;=&nbsp;myResource.getContents().get(0);</br>
-Diagnostic&nbsp;diagnostic&nbsp;=&nbsp;Diagnostician.INSTANCE.validate(myModel);</br>
-<span class="keyword">switch</span>&nbsp;(diagnostic.getSeverity())&nbsp;{</br>
-&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;Diagnostic.ERROR:</br>
-&nbsp;&nbsp;&nbsp;&nbsp;System.err.println(<span class="string">"Model&nbsp;has&nbsp;errors:&nbsp;"</span>,diagnostic);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;</br>
-&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;Diagnostic.WARNING:</br>
-&nbsp;&nbsp;&nbsp;&nbsp;System.err.println(<span class="string">"Model&nbsp;has&nbsp;warnings:&nbsp;"</span>,diagnostic);</br>
-}</br>
+EObject&nbsp;myModel&nbsp;=&nbsp;myResource.getContents().get(0);<br/>
+Diagnostic&nbsp;diagnostic&nbsp;=&nbsp;Diagnostician.INSTANCE.validate(myModel);<br/>
+<span class="keyword">switch</span>&nbsp;(diagnostic.getSeverity())&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;Diagnostic.ERROR:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;System.err.println(<span class="string">"Model&nbsp;has&nbsp;errors:&nbsp;"</span>,diagnostic);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span>;<br/>
+&nbsp;&nbsp;<span class="keyword">case</span>&nbsp;Diagnostic.WARNING:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;System.err.println(<span class="string">"Model&nbsp;has&nbsp;warnings:&nbsp;"</span>,diagnostic);<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -362,14 +362,14 @@ Validator:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyLanguageValidator&nbsp;<span class="keyword">extends</span>&nbsp;AbstractDeclarativeValidator&nbsp;{</br>
-&nbsp;&nbsp;@Check</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;checkFooElement(FooElement&nbsp;element)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(element.getBarAttribute().contains(<span class="string">"foo"</span>))</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(<span class="string">"Only&nbsp;Foos&nbsp;allowed"</span>,&nbsp;element,&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyLanguagePackage.FOO_ELEMENT__BAR_ATTRIBUTE,&nbsp;101);</br>
-&nbsp;&nbsp;}</br>
-}</br>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyLanguageValidator&nbsp;<span class="keyword">extends</span>&nbsp;AbstractDeclarativeValidator&nbsp;{<br/>
+&nbsp;&nbsp;@Check<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;checkFooElement(FooElement&nbsp;element)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(element.getBarAttribute().contains(<span class="string">"foo"</span>))<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(<span class="string">"Only&nbsp;Foos&nbsp;allowed"</span>,&nbsp;element,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyLanguagePackage.FOO_ELEMENT__BAR_ATTRIBUTE,&nbsp;101);<br/>
+&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -381,32 +381,32 @@ JUnit-Test:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyLanguageValidatorTest&nbsp;<span class="keyword">extends</span>&nbsp;AbstractXtextTests&nbsp;{</br>
-</br>
-&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;ValidatorTester&lt;MyLanguageValidator&gt;&nbsp;tester;</br>
-</br>
-&nbsp;&nbsp;@Override</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setUp()&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;with(MyLanguageStandaloneSetup.<span class="keyword">class</span>);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;MyLanguageValidator&nbsp;validator&nbsp;=&nbsp;get(MyLanguageValidator.<span class="keyword">class</span>);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;tester&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ValidatorTester&lt;TestingValidator&gt;(validator);</br>
-&nbsp;&nbsp;}</br>
-</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;testError()&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;FooElement&nbsp;model&nbsp;=&nbsp;MyLanguageFactory.eINSTANCE.createFooElement()</br>
-&nbsp;&nbsp;&nbsp;&nbsp;model.setBarAttribute(<span class="string">"barbarbarbarfoo"</span>);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;tester.validator().checkFooElement(model);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;tester.diagnose().assertError(101);</br>
-&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;testError2()&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;FooElement&nbsp;model&nbsp;=&nbsp;MyLanguageFactory.eINSTANCE.createFooElement()</br>
-&nbsp;&nbsp;&nbsp;&nbsp;model.setBarAttribute(<span class="string">"barbarbarbarfoo"</span>);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;tester.validate(model).assertError(101);</br>
-&nbsp;&nbsp;}</br>
-}</br>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyLanguageValidatorTest&nbsp;<span class="keyword">extends</span>&nbsp;AbstractXtextTests&nbsp;{<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;ValidatorTester&lt;MyLanguageValidator&gt;&nbsp;tester;<br/>
+<br/>
+&nbsp;&nbsp;@Override<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setUp()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;with(MyLanguageStandaloneSetup.<span class="keyword">class</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;MyLanguageValidator&nbsp;validator&nbsp;=&nbsp;get(MyLanguageValidator.<span class="keyword">class</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;tester&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;ValidatorTester&lt;TestingValidator&gt;(validator);<br/>
+&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;testError()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;FooElement&nbsp;model&nbsp;=&nbsp;MyLanguageFactory.eINSTANCE.createFooElement()<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;model.setBarAttribute(<span class="string">"barbarbarbarfoo"</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;tester.validator().checkFooElement(model);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;tester.diagnose().assertError(101);<br/>
+&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;testError2()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;FooElement&nbsp;model&nbsp;=&nbsp;MyLanguageFactory.eINSTANCE.createFooElement()<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;model.setBarAttribute(<span class="string">"barbarbarbarfoo"</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;tester.validate(model).assertError(101);<br/>
+&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -494,9 +494,9 @@ In the grammar a cross-reference is specified using square brackets.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-CrossReference&nbsp;:</br>
-&nbsp;&nbsp;<span class="string">&apos;[&apos;</span>&nbsp;type=ReferencedEClass&nbsp;(<span class="string">&apos;|&apos;</span>&nbsp;<span class="keyword">terminal</span>=CrossReferenceTerminal)?&nbsp;<span class="string">&apos;]&apos;</span></br>
-;</br>
+CrossReference&nbsp;:<br/>
+&nbsp;&nbsp;<span class="string">&apos;[&apos;</span>&nbsp;type=ReferencedEClass&nbsp;(<span class="string">&apos;|&apos;</span>&nbsp;<span class="keyword">terminal</span>=CrossReferenceTerminal)?&nbsp;<span class="string">&apos;]&apos;</span><br/>
+;<br/>
 </p>
 </div>
 </div>
@@ -508,9 +508,9 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-ReferringType&nbsp;:</br>
-&nbsp;&nbsp;<span class="string">&apos;ref&apos;</span>&nbsp;referencedObject=[Entity|STRING]</br>
-;</br>
+ReferringType&nbsp;:<br/>
+&nbsp;&nbsp;<span class="string">&apos;ref&apos;</span>&nbsp;referencedObject=[Entity|STRING]<br/>
+;<br/>
 </p>
 </div>
 </div>
@@ -577,13 +577,13 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">events</span></br>
-&nbsp;&nbsp;nothingImportant&nbsp;&nbsp;MYEV</br>
-<span class="keyword">end</span></br>
-&nbsp;</br>
-<span class="keyword">state</span>&nbsp;idle</br>
-&nbsp;&nbsp;nothingImportant&nbsp;=&gt;&nbsp;idle</br>
-<span class="keyword">end</span></br>
+<span class="keyword">events</span><br/>
+&nbsp;&nbsp;nothingImportant&nbsp;&nbsp;MYEV<br/>
+<span class="keyword">end</span><br/>
+&nbsp;<br/>
+<span class="keyword">state</span>&nbsp;idle<br/>
+&nbsp;&nbsp;nothingImportant&nbsp;=&gt;&nbsp;idle<br/>
+<span class="keyword">end</span><br/>
 </p>
 </div>
 </div>
@@ -595,8 +595,8 @@ The grammar rule for transitions looks like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Transition&nbsp;:</br>
-&nbsp;&nbsp;event=[Event]&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;state=[State];</br>
+Transition&nbsp;:<br/>
+&nbsp;&nbsp;event=[Event]&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;state=[State];<br/>
 </p>
 </div>
 </div>
@@ -616,26 +616,26 @@ contain all target candidates for the given object and cross-reference.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">interface</span>&nbsp;IScopeProvider&nbsp;{</br>
-</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;scope&nbsp;for&nbsp;the&nbsp;given&nbsp;context.&nbsp;The&nbsp;scope&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;provides&nbsp;access&nbsp;to&nbsp;the&nbsp;compatible&nbsp;visible&nbsp;EObjects&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;for&nbsp;a&nbsp;given&nbsp;reference.</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;context&nbsp;the&nbsp;element&nbsp;from&nbsp;which&nbsp;an&nbsp;element&nbsp;shall&nbsp;be&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;referenced</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;reference&nbsp;the&nbsp;reference&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;filter&nbsp;the&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elements.</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;{@link&nbsp;IScope}&nbsp;representing&nbsp;the&nbsp;inner&nbsp;most&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{@link&nbsp;IScope}&nbsp;for&nbsp;the&nbsp;passed&nbsp;context&nbsp;and&nbsp;reference.&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;for&nbsp;implementors:&nbsp;The&nbsp;result&nbsp;may&nbsp;not&nbsp;be&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;code&gt;null&lt;/code&gt;.&nbsp;Return&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;code&gt;IScope.NULLSCOPE&lt;/code&gt;&nbsp;instead.</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;IScope&nbsp;getScope(EObject&nbsp;context,&nbsp;EReference&nbsp;reference);</br>
-</br>
-}</br>
+<span class="keyword">public</span>&nbsp;<span class="keyword">interface</span>&nbsp;IScopeProvider&nbsp;{<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">/**<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Returns&nbsp;a&nbsp;scope&nbsp;for&nbsp;the&nbsp;given&nbsp;context.&nbsp;The&nbsp;scope&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;provides&nbsp;access&nbsp;to&nbsp;the&nbsp;compatible&nbsp;visible&nbsp;EObjects&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;for&nbsp;a&nbsp;given&nbsp;reference.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;context&nbsp;the&nbsp;element&nbsp;from&nbsp;which&nbsp;an&nbsp;element&nbsp;shall&nbsp;be&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;referenced<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@param&nbsp;reference&nbsp;the&nbsp;reference&nbsp;to&nbsp;be&nbsp;used&nbsp;to&nbsp;filter&nbsp;the&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elements.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;@return&nbsp;{@link&nbsp;IScope}&nbsp;representing&nbsp;the&nbsp;inner&nbsp;most&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{@link&nbsp;IScope}&nbsp;for&nbsp;the&nbsp;passed&nbsp;context&nbsp;and&nbsp;reference.&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note&nbsp;for&nbsp;implementors:&nbsp;The&nbsp;result&nbsp;may&nbsp;not&nbsp;be&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;code&gt;null&lt;/code&gt;.&nbsp;Return&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;code&gt;IScope.NULLSCOPE&lt;/code&gt;&nbsp;instead.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;IScope&nbsp;getScope(EObject&nbsp;context,&nbsp;EReference&nbsp;reference);<br/>
+<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -726,14 +726,14 @@ that:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Inject&nbsp;IQualifiedNameConverter&nbsp;converter;</br>
-</br>
-Manager&nbsp;manager&nbsp;=&nbsp;<span class="comment">//&nbsp;obtain&nbsp;an&nbsp;instance&nbsp;of&nbsp;IResourceDescription.Manager</br>
-</span>IResourceDescription&nbsp;description&nbsp;=</br>
-&nbsp;&nbsp;&nbsp;&nbsp;manager.getResourceDescription(resource);</br>
-<span class="keyword">for</span>&nbsp;(IEObjectDescription&nbsp;eod&nbsp;:&nbsp;description.getExportedObjects())&nbsp;{</br>
-&nbsp;&nbsp;System.out.println(converter.toString(eod.getQualifiedName()));</br>
-}&nbsp;</br>
+@Inject&nbsp;IQualifiedNameConverter&nbsp;converter;<br/>
+<br/>
+Manager&nbsp;manager&nbsp;=&nbsp;<span class="comment">//&nbsp;obtain&nbsp;an&nbsp;instance&nbsp;of&nbsp;IResourceDescription.Manager<br/>
+</span>IResourceDescription&nbsp;description&nbsp;=<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;manager.getResourceDescription(resource);<br/>
+<span class="keyword">for</span>&nbsp;(IEObjectDescription&nbsp;eod&nbsp;:&nbsp;description.getExportedObjects())&nbsp;{<br/>
+&nbsp;&nbsp;System.out.println(converter.toString(eod.getQualifiedName()));<br/>
+}&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -754,14 +754,14 @@ If you are running in a Guice enabled scenario, the code looks like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Inject&nbsp;</br>
-<span class="keyword">private</span>&nbsp;IResourceServiceProvider.Registry&nbsp;rspr;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-<span class="keyword">private</span>&nbsp;IResourceDescription.Manager&nbsp;getManager(Resource&nbsp;res)&nbsp;{</br>
-&nbsp;&nbsp;IResourceServiceProvider&nbsp;resourceServiceProvider&nbsp;=&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;rspr.getResourceServiceProvider(res.getURI());</br>
-&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;resourceServiceProvider.getResourceDescriptionManager();</br>
-}</br>
+@Inject&nbsp;<br/>
+<span class="keyword">private</span>&nbsp;IResourceServiceProvider.Registry&nbsp;rspr;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+<span class="keyword">private</span>&nbsp;IResourceDescription.Manager&nbsp;getManager(Resource&nbsp;res)&nbsp;{<br/>
+&nbsp;&nbsp;IResourceServiceProvider&nbsp;resourceServiceProvider&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rspr.getResourceServiceProvider(res.getURI());<br/>
+&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;resourceServiceProvider.getResourceDescriptionManager();<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -773,8 +773,8 @@ If you don&apos;t run in a Guice enabled context you will likely have to directl
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">private</span>&nbsp;IResourceServiceProvider.Registry&nbsp;rspr&nbsp;=&nbsp;</br>
-&nbsp;&nbsp;IResourceServiceProvider.Registry.INSTANCE;</br>
+<span class="keyword">private</span>&nbsp;IResourceServiceProvider.Registry&nbsp;rspr&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;IResourceServiceProvider.Registry.INSTANCE;<br/>
 </p>
 </div>
 </div>
@@ -801,21 +801,21 @@ add something like the following to the grammar definition:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Statemachine&nbsp;:</br>
-&nbsp;&nbsp;(imports+=Import)*&nbsp;<span class="comment">//&nbsp;allow&nbsp;imports</br>
-</span>&nbsp;&nbsp;<span class="string">&apos;events&apos;</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(events+=Event)+</br>
-&nbsp;&nbsp;<span class="string">&apos;end&apos;</span></br>
-&nbsp;&nbsp;(<span class="string">&apos;resetEvents&apos;</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(resetEvents+=[Event])+</br>
-&nbsp;&nbsp;<span class="string">&apos;end&apos;</span>)?</br>
-&nbsp;&nbsp;<span class="string">&apos;commands&apos;</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(commands+=Command)+</br>
-&nbsp;&nbsp;<span class="string">&apos;end&apos;</span></br>
-&nbsp;&nbsp;(states+=State)+;</br>
-</br>
-Import&nbsp;:&nbsp;</br>
-&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importURI=STRING;&nbsp;<span class="comment">//&nbsp;feature&nbsp;must&nbsp;be&nbsp;named&nbsp;importURI</br>
+Statemachine&nbsp;:<br/>
+&nbsp;&nbsp;(imports+=Import)*&nbsp;<span class="comment">//&nbsp;allow&nbsp;imports<br/>
+</span>&nbsp;&nbsp;<span class="string">&apos;events&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(events+=Event)+<br/>
+&nbsp;&nbsp;<span class="string">&apos;end&apos;</span><br/>
+&nbsp;&nbsp;(<span class="string">&apos;resetEvents&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(resetEvents+=[Event])+<br/>
+&nbsp;&nbsp;<span class="string">&apos;end&apos;</span>)?<br/>
+&nbsp;&nbsp;<span class="string">&apos;commands&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(commands+=Command)+<br/>
+&nbsp;&nbsp;<span class="string">&apos;end&apos;</span><br/>
+&nbsp;&nbsp;(states+=State)+;<br/>
+<br/>
+Import&nbsp;:&nbsp;<br/>
+&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importURI=STRING;&nbsp;<span class="comment">//&nbsp;feature&nbsp;must&nbsp;be&nbsp;named&nbsp;importURI<br/>
 </span>
 </p>
 </div>
@@ -903,21 +903,21 @@ given <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Inject</br>
-IContainer.Manager&nbsp;manager;</br>
-</br>
-<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;listVisibleResources(</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;myResource,&nbsp;IResourceDescriptions&nbsp;index)&nbsp;{</br>
-&nbsp;&nbsp;IResourceDescription&nbsp;descr&nbsp;=&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index.getResourceDescription(myResource.getURI());</br>
-&nbsp;&nbsp;<span class="keyword">for</span>(IContainer&nbsp;visibleContainer:&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;manager.getVisibleContainers(descr,&nbsp;index))&nbsp;{&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(IResourceDescription&nbsp;visibleResourceDesc:</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visibleContainer.getResourceDescription())&nbsp;{&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(visibleResourceDesc.getURI());</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;}</br>
-}</br>
+@Inject<br/>
+IContainer.Manager&nbsp;manager;<br/>
+<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;listVisibleResources(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resource&nbsp;myResource,&nbsp;IResourceDescriptions&nbsp;index)&nbsp;{<br/>
+&nbsp;&nbsp;IResourceDescription&nbsp;descr&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index.getResourceDescription(myResource.getURI());<br/>
+&nbsp;&nbsp;<span class="keyword">for</span>(IContainer&nbsp;visibleContainer:&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;manager.getVisibleContainers(descr,&nbsp;index))&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(IResourceDescription&nbsp;visibleResourceDesc:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visibleContainer.getResourceDescription())&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(visibleResourceDesc.getURI());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -983,9 +983,9 @@ something up, make sure you bind
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IContainer.Manager&gt;&nbsp;bindIContainer$Manager()&nbsp;{</br>
-&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;StateBasedContainerManager.<span class="keyword">class</span>;</br>
-}</br>
+<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IContainer.Manager&gt;&nbsp;bindIContainer$Manager()&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;StateBasedContainerManager.<span class="keyword">class</span>;<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -997,9 +997,9 @@ in the runtime module and
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;Provider&lt;IAllContainersState&gt;&nbsp;provideIAllContainersState()&nbsp;{</br>
-&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();</br>
-}</br>
+<span class="keyword">public</span>&nbsp;Provider&lt;IAllContainersState&gt;&nbsp;provideIAllContainersState()&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -1025,9 +1025,9 @@ In this case, your runtime module should define
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-public&nbsp;Class&lt;?&nbsp;extends&nbsp;IContainer.Manager&gt;&nbsp;bindIContainer$Manager()&nbsp;{</br>
-&nbsp;&nbsp;return&nbsp;StateBasedContainerManager.class;</br>
-}</br>
+public&nbsp;Class&lt;?&nbsp;extends&nbsp;IContainer.Manager&gt;&nbsp;bindIContainer$Manager()&nbsp;{<br/>
+&nbsp;&nbsp;return&nbsp;StateBasedContainerManager.class;<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -1038,9 +1038,9 @@ and the UI module should bind
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;Provider&lt;IAllContainersState&gt;&nbsp;provideIAllContainersState()&nbsp;{</br>
-&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();</br>
-}</br>
+<span class="keyword">public</span>&nbsp;Provider&lt;IAllContainersState&gt;&nbsp;provideIAllContainersState()&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;org.eclipse.xtext.ui.shared.Access.getWorkspaceProjectsState();<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -1064,16 +1064,16 @@ for all models therein. When paths are given, each path entry becomes an
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-component&nbsp;=&nbsp;org.eclipse.xtext.mwe.Reader&nbsp;{</br>
-&nbsp;&nbsp;<span class="comment">//&nbsp;lookup&nbsp;all&nbsp;resources&nbsp;on&nbsp;the&nbsp;classpath</br>
-</span>&nbsp;&nbsp;<span class="comment">//&nbsp;useJavaClassPath&nbsp;=&nbsp;true</br>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;<span class="comment">//&nbsp;or&nbsp;define&nbsp;search&nbsp;scope&nbsp;explicitly</br>
-</span>&nbsp;&nbsp;path&nbsp;=&nbsp;<span class="string">"src/models"</span></br>
-&nbsp;&nbsp;path&nbsp;=&nbsp;<span class="string">"src/further-models"</span></br>
-</br>
-&nbsp;&nbsp;...</br>
-}</br>
+component&nbsp;=&nbsp;org.eclipse.xtext.mwe.Reader&nbsp;{<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;lookup&nbsp;all&nbsp;resources&nbsp;on&nbsp;the&nbsp;classpath<br/>
+</span>&nbsp;&nbsp;<span class="comment">//&nbsp;useJavaClassPath&nbsp;=&nbsp;true<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;or&nbsp;define&nbsp;search&nbsp;scope&nbsp;explicitly<br/>
+</span>&nbsp;&nbsp;path&nbsp;=&nbsp;<span class="string">"src/models"</span><br/>
+&nbsp;&nbsp;path&nbsp;=&nbsp;<span class="string">"src/further-models"</span><br/>
+<br/>
+&nbsp;&nbsp;...<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -1096,30 +1096,30 @@ following example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="comment">//&nbsp;file&nbsp;contents&nbsp;scope</br>
-</span><span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;my.Constants.STATIC;</br>
-</br>
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ScopeExample&nbsp;{&nbsp;<span class="comment">//&nbsp;class&nbsp;body&nbsp;scope</br>
-</span>&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;Object&nbsp;field&nbsp;=&nbsp;STATIC;</br>
-</br>
-&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">void</span>&nbsp;method(String&nbsp;param)&nbsp;{&nbsp;<span class="comment">//&nbsp;method&nbsp;body&nbsp;scope</br>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;localVar&nbsp;=&nbsp;<span class="string">"bar"</span>;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;innerBlock:&nbsp;{&nbsp;<span class="comment">//&nbsp;block&nbsp;scope</br>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;innerScopeVar&nbsp;=&nbsp;<span class="string">"foo"</span>;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object&nbsp;field&nbsp;=&nbsp;innerScopeVar;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;the&nbsp;scope&nbsp;hierarchy&nbsp;at&nbsp;this&nbsp;point&nbsp;would&nbsp;look&nbsp;like&nbsp;this:</br>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;blockScope{field,innerScopeVar}-&gt;</br>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;methodScope{localVar,&nbsp;param}-&gt;</br>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;classScope{field}-&gt;&nbsp;(&apos;field&apos;&nbsp;is&nbsp;shadowed)</br>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;fileScope{STATIC}-&gt;</br>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;classpathScope{</br>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&apos;all&nbsp;qualified&nbsp;names&nbsp;of&nbsp;accessible&nbsp;static&nbsp;fields&apos;}&nbsp;-&gt;</br>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;NULLSCOPE{}</br>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//</br>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;field.add(localVar);</br>
-&nbsp;&nbsp;}</br>
-}</br>
+<span class="comment">//&nbsp;file&nbsp;contents&nbsp;scope<br/>
+</span><span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;my.Constants.STATIC;<br/>
+<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ScopeExample&nbsp;{&nbsp;<span class="comment">//&nbsp;class&nbsp;body&nbsp;scope<br/>
+</span>&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;Object&nbsp;field&nbsp;=&nbsp;STATIC;<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;<span class="keyword">void</span>&nbsp;method(String&nbsp;param)&nbsp;{&nbsp;<span class="comment">//&nbsp;method&nbsp;body&nbsp;scope<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;localVar&nbsp;=&nbsp;<span class="string">"bar"</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;innerBlock:&nbsp;{&nbsp;<span class="comment">//&nbsp;block&nbsp;scope<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;innerScopeVar&nbsp;=&nbsp;<span class="string">"foo"</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object&nbsp;field&nbsp;=&nbsp;innerScopeVar;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;the&nbsp;scope&nbsp;hierarchy&nbsp;at&nbsp;this&nbsp;point&nbsp;would&nbsp;look&nbsp;like&nbsp;this:<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;blockScope{field,innerScopeVar}-&gt;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;methodScope{localVar,&nbsp;param}-&gt;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;classScope{field}-&gt;&nbsp;(&apos;field&apos;&nbsp;is&nbsp;shadowed)<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;fileScope{STATIC}-&gt;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;classpathScope{<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&apos;all&nbsp;qualified&nbsp;names&nbsp;of&nbsp;accessible&nbsp;static&nbsp;fields&apos;}&nbsp;-&gt;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;&nbsp;NULLSCOPE{}<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;field.add(localVar);<br/>
+&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -1132,11 +1132,11 @@ For instance:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-classpathScope{stuff&nbsp;from&nbsp;bin/}</br>
--&gt;&nbsp;classpathScope{stuff&nbsp;from&nbsp;foo.jar/}</br>
--&gt;&nbsp;...</br>
--&gt;&nbsp;classpathScope{stuff&nbsp;from&nbsp;JRE&nbsp;System&nbsp;Library}</br>
--&gt;&nbsp;NULLSCOPE{}</br>
+classpathScope{stuff&nbsp;from&nbsp;bin/}<br/>
+-&gt;&nbsp;classpathScope{stuff&nbsp;from&nbsp;foo.jar/}<br/>
+-&gt;&nbsp;...<br/>
+-&gt;&nbsp;classpathScope{stuff&nbsp;from&nbsp;JRE&nbsp;System&nbsp;Library}<br/>
+-&gt;&nbsp;NULLSCOPE{}<br/>
 </p>
 </div>
 </div>
@@ -1156,10 +1156,10 @@ that in a declarative way. It looks up methods which have either of the followin
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-IScope&nbsp;scope_&lt;RefDeclaringEClass&gt;_&lt;Reference&gt;(</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)</br>
-</br>
-IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)</br>
+IScope&nbsp;scope_&lt;RefDeclaringEClass&gt;_&lt;Reference&gt;(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)<br/>
+<br/>
+IScope&nbsp;scope_&lt;TypeToReturn&gt;(&lt;ContextType&gt;&nbsp;ctx,&nbsp;EReference&nbsp;ref)<br/>
 </p>
 </div>
 </div>
@@ -1242,16 +1242,16 @@ your implementation in your runtime module.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-FowlerDslQualifiedNameProvider&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;DefaultDeclarativeQualifiedNameProvider&nbsp;{</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;QualifiedName&nbsp;qualifiedName(Transition&nbsp;t)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(t.getEvent()&nbsp;==&nbsp;<span class="keyword">null</span>&nbsp;|| !(t.eContainer()&nbsp;<span class="keyword">instanceof</span>&nbsp;State))&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">null</span>;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span>&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;QualifiedName.create((State)t.eContainer()).getName(),&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.getEvent().getName());</br>
-&nbsp;&nbsp;}</br>
-}</br>
+FowlerDslQualifiedNameProvider&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;DefaultDeclarativeQualifiedNameProvider&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;QualifiedName&nbsp;qualifiedName(Transition&nbsp;t)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(t.getEvent()&nbsp;==&nbsp;<span class="keyword">null</span>&nbsp;|| !(t.eContainer()&nbsp;<span class="keyword">instanceof</span>&nbsp;State))&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">null</span>;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span>&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;QualifiedName.create((State)t.eContainer()).getName(),&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.getEvent().getName());<br/>
+&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -1277,15 +1277,15 @@ in and its child namespaces. That is why you can write the following in the exam
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">package</span>&nbsp;foo&nbsp;{</br>
-&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;bar.Foo</br>
-&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Bar&nbsp;<span class="keyword">extends</span>&nbsp;Foo&nbsp;{</br>
-&nbsp;&nbsp;}</br>
-}</br>
-</br>
-<span class="keyword">package</span>&nbsp;bar&nbsp;{</br>
-&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Foo&nbsp;{}</br>
-}</br>
+<span class="keyword">package</span>&nbsp;foo&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">import</span>&nbsp;bar.Foo<br/>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Bar&nbsp;<span class="keyword">extends</span>&nbsp;Foo&nbsp;{<br/>
+&nbsp;&nbsp;}<br/>
+}<br/>
+<br/>
+<span class="keyword">package</span>&nbsp;bar&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Foo&nbsp;{}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -1297,10 +1297,10 @@ Of course the declared elements within a package are as well referable by their 
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">package</span>&nbsp;bar&nbsp;{</br>
-&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Bar&nbsp;<span class="keyword">extends</span>&nbsp;Foo&nbsp;{}</br>
-&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Foo&nbsp;{}</br>
-}</br>
+<span class="keyword">package</span>&nbsp;bar&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Bar&nbsp;<span class="keyword">extends</span>&nbsp;Foo&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Foo&nbsp;{}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -1312,10 +1312,10 @@ The following would as well be ok:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">package</span>&nbsp;bar&nbsp;{</br>
-&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Bar&nbsp;<span class="keyword">extends</span>&nbsp;bar.Foo&nbsp;{}</br>
-&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Foo&nbsp;{}</br>
-}</br>
+<span class="keyword">package</span>&nbsp;bar&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Bar&nbsp;<span class="keyword">extends</span>&nbsp;bar.Foo&nbsp;{}<br/>
+&nbsp;&nbsp;<span class="keyword">entity</span>&nbsp;Foo&nbsp;{}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -1336,11 +1336,11 @@ Simply override the corresponding binding in your runtime module like shown in t
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Override</br>
-<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IValueConverterService&gt;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bindIValueConverterService()&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MySpecialValueConverterService.<span class="keyword">class</span>;</br>
-}</br>
+@Override<br/>
+<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IValueConverterService&gt;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bindIValueConverterService()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MySpecialValueConverterService.<span class="keyword">class</span>;<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -1355,10 +1355,10 @@ by means of an annotated method.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@ValueConverter(rule&nbsp;=&nbsp;<span class="string">"MyRuleName"</span>)</br>
-<span class="keyword">public</span>&nbsp;IValueConverter&lt;MyDataType&gt;&nbsp;getMyRuleNameConverter()&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;MyValueConverterImplementation();</br>
-}</br>
+@ValueConverter(rule&nbsp;=&nbsp;<span class="string">"MyRuleName"</span>)<br/>
+<span class="keyword">public</span>&nbsp;IValueConverter&lt;MyDataType&gt;&nbsp;getMyRuleNameConverter()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;MyValueConverterImplementation();<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -1446,8 +1446,8 @@ case where is is hardly possible, is shown in the following example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-MyRule:</br>
-&nbsp;&nbsp;(xval+=ID&nbsp;|&nbsp;yval+=INT)*;</br>
+MyRule:<br/>
+&nbsp;&nbsp;(xval+=ID&nbsp;|&nbsp;yval+=INT)*;<br/>
 </p>
 </div>
 </div>
@@ -1645,11 +1645,11 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-PluralRule:</br>
-&nbsp;&nbsp;<span class="string">&apos;contents:&apos;</span>&nbsp;count=INT&nbsp;Plural;</br>
-&nbsp;&nbsp;</br>
-<span class="keyword">terminal</span>&nbsp;Plural:&nbsp;</br>
-&nbsp;&nbsp;<span class="string">&apos;item&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;items&apos;</span>;</br>
+PluralRule:<br/>
+&nbsp;&nbsp;<span class="string">&apos;contents:&apos;</span>&nbsp;count=INT&nbsp;Plural;<br/>
+&nbsp;&nbsp;<br/>
+<span class="keyword">terminal</span>&nbsp;Plural:&nbsp;<br/>
+&nbsp;&nbsp;<span class="string">&apos;item&apos;</span>&nbsp;|&nbsp;<span class="string">&apos;items&apos;</span>;<br/>
 </p>
 </div>
 </div>
@@ -1695,12 +1695,12 @@ a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/io
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">interface</span>&nbsp;ITokenStream&nbsp;{</br>
-</br>
-&nbsp;&nbsp;<span class="keyword">void</span>&nbsp;flush()&nbsp;<span class="keyword">throws</span>&nbsp;IOException;</br>
-&nbsp;&nbsp;<span class="keyword">void</span>&nbsp;writeHidden(EObject&nbsp;grammarElement,&nbsp;String&nbsp;value);</br>
-&nbsp;&nbsp;<span class="keyword">void</span>&nbsp;writeSemantic(EObject&nbsp;grammarElement,&nbsp;String&nbsp;value);</br>
-}</br>
+<span class="keyword">public</span>&nbsp;<span class="keyword">interface</span>&nbsp;ITokenStream&nbsp;{<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">void</span>&nbsp;flush()&nbsp;<span class="keyword">throws</span>&nbsp;IOException;<br/>
+&nbsp;&nbsp;<span class="keyword">void</span>&nbsp;writeHidden(EObject&nbsp;grammarElement,&nbsp;String&nbsp;value);<br/>
+&nbsp;&nbsp;<span class="keyword">void</span>&nbsp;writeSemantic(EObject&nbsp;grammarElement,&nbsp;String&nbsp;value);<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -1739,47 +1739,47 @@ the following example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ExampleFormatter&nbsp;<span class="keyword">extends</span>&nbsp;AbstractDeclarativeFormatter&nbsp;{</br>
-</br>
-&nbsp;&nbsp;@Override</br>
-&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;configureFormatting(FormattingConfig&nbsp;c)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;ExampleLanguageGrammarAccess&nbsp;f&nbsp;=&nbsp;getGrammarAccess();</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;c.setAutoLinewrap(120);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;find&nbsp;common&nbsp;keywords&nbsp;an&nbsp;specify&nbsp;formatting&nbsp;for&nbsp;them</br>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(Pair&lt;Keyword,&nbsp;Keyword&gt;&nbsp;pair&nbsp;:&nbsp;f.findKeywordPairs(<span class="string">"("</span>,&nbsp;<span class="string">")"</span>))&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().after(pair.getFirst());</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(pair.getSecond());</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(Keyword&nbsp;comma&nbsp;:&nbsp;f.findKeywords(<span class="string">","</span>))&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(comma);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;formatting&nbsp;for&nbsp;grammar&nbsp;rule&nbsp;Line</br>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap(2).after(f.getLineAccess().getSemicolonKeyword_1());</br>
-&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(f.getLineAccess().getSemicolonKeyword_1());</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;formatting&nbsp;for&nbsp;grammar&nbsp;rule&nbsp;TestIndentation</br>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;c.setIndentationIncrement().after(</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());</br>
-&nbsp;&nbsp;&nbsp;&nbsp;c.setIndentationDecrement().before(</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());</br>
-&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap().after(</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());</br>
-&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap().after(</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;formatting&nbsp;for&nbsp;grammar&nbsp;rule&nbsp;Param</br>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;c.setNoLinewrap().around(f.getParamAccess().getColonKeyword_1());</br>
-&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().around(f.getParamAccess().getColonKeyword_1());</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;formatting&nbsp;for&nbsp;Comments&nbsp;</br>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;2).before(g.getSL_COMMENTRule());</br>
-&nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;2).before(g.getML_COMMENTRule());</br>
-&nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;1).after(g.getML_COMMENTRule());</br>
-&nbsp;&nbsp;}</br>
-}</br>
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;ExampleFormatter&nbsp;<span class="keyword">extends</span>&nbsp;AbstractDeclarativeFormatter&nbsp;{<br/>
+<br/>
+&nbsp;&nbsp;@Override<br/>
+&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;configureFormatting(FormattingConfig&nbsp;c)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;ExampleLanguageGrammarAccess&nbsp;f&nbsp;=&nbsp;getGrammarAccess();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;c.setAutoLinewrap(120);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;find&nbsp;common&nbsp;keywords&nbsp;an&nbsp;specify&nbsp;formatting&nbsp;for&nbsp;them<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(Pair&lt;Keyword,&nbsp;Keyword&gt;&nbsp;pair&nbsp;:&nbsp;f.findKeywordPairs(<span class="string">"("</span>,&nbsp;<span class="string">")"</span>))&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().after(pair.getFirst());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(pair.getSecond());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(Keyword&nbsp;comma&nbsp;:&nbsp;f.findKeywords(<span class="string">","</span>))&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(comma);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;formatting&nbsp;for&nbsp;grammar&nbsp;rule&nbsp;Line<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap(2).after(f.getLineAccess().getSemicolonKeyword_1());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().before(f.getLineAccess().getSemicolonKeyword_1());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;formatting&nbsp;for&nbsp;grammar&nbsp;rule&nbsp;TestIndentation<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;c.setIndentationIncrement().after(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;c.setIndentationDecrement().before(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap().after(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getLeftCurlyBracketKeyword_1());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;c.setLinewrap().after(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.getTestIndentationAccess().getRightCurlyBracketKeyword_3());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;formatting&nbsp;for&nbsp;grammar&nbsp;rule&nbsp;Param<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;c.setNoLinewrap().around(f.getParamAccess().getColonKeyword_1());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;c.setNoSpace().around(f.getParamAccess().getColonKeyword_1());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;formatting&nbsp;for&nbsp;Comments&nbsp;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;2).before(g.getSL_COMMENTRule());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;2).before(g.getML_COMMENTRule());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;cfg.setLinewrap(0,&nbsp;1,&nbsp;1).after(g.getML_COMMENTRule());<br/>
+&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -1965,33 +1965,33 @@ The following snippet shows how to use qualified names as fragments:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;QualifiedNameFragmentProvider&nbsp;<span class="keyword">implements</span>&nbsp;IFragmentProvider&nbsp;{</br>
-</br>
-&nbsp;&nbsp;@Inject</br>
-&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;IQualifiedNameProvider&nbsp;qualifiedNameProvider;</br>
-</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getFragment(EObject&nbsp;obj,&nbsp;Fallback&nbsp;fallback)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;qName&nbsp;=&nbsp;qualifiedNameProvider.getQualifiedName(obj);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;qName&nbsp;!=&nbsp;<span class="keyword">null</span>&nbsp;?&nbsp;qName&nbsp;:&nbsp;fallback.getFragment(obj);</br>
-&nbsp;&nbsp;}</br>
-</br>
-&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;EObject&nbsp;getEObject(Resource&nbsp;resource,&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;fragment,&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fallback&nbsp;fallback)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(fragment&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterator&lt;EObject&gt;&nbsp;i&nbsp;=&nbsp;EcoreUtil.getAllContents(resource,&nbsp;<span class="keyword">false</span>);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>(i.hasNext())&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EObject&nbsp;eObject&nbsp;=&nbsp;i.next();</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;candidateFragment&nbsp;=&nbsp;(eObject.eIsProxy())&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&nbsp;((InternalEObject)&nbsp;eObject).eProxyURI().fragment()</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;getFragment(eObject,&nbsp;fallback);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(fragment.equals(candidateFragment))&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;eObject;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;fallback.getEObject(fragment);</br>
-&nbsp;&nbsp;}</br>
-}</br>
+<span class="keyword">public</span>&nbsp;QualifiedNameFragmentProvider&nbsp;<span class="keyword">implements</span>&nbsp;IFragmentProvider&nbsp;{<br/>
+<br/>
+&nbsp;&nbsp;@Inject<br/>
+&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;IQualifiedNameProvider&nbsp;qualifiedNameProvider;<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getFragment(EObject&nbsp;obj,&nbsp;Fallback&nbsp;fallback)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;qName&nbsp;=&nbsp;qualifiedNameProvider.getQualifiedName(obj);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;qName&nbsp;!=&nbsp;<span class="keyword">null</span>&nbsp;?&nbsp;qName&nbsp;:&nbsp;fallback.getFragment(obj);<br/>
+&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;EObject&nbsp;getEObject(Resource&nbsp;resource,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;fragment,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fallback&nbsp;fallback)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(fragment&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterator&lt;EObject&gt;&nbsp;i&nbsp;=&nbsp;EcoreUtil.getAllContents(resource,&nbsp;<span class="keyword">false</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>(i.hasNext())&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EObject&nbsp;eObject&nbsp;=&nbsp;i.next();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;candidateFragment&nbsp;=&nbsp;(eObject.eIsProxy())&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&nbsp;((InternalEObject)&nbsp;eObject).eProxyURI().fragment()<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;getFragment(eObject,&nbsp;fallback);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(fragment.equals(candidateFragment))&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;eObject;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;fallback.getEObject(fragment);<br/>
+&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -2054,9 +2054,9 @@ property in the workflow next to your grammar, e.g.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Generator&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;encoding&nbsp;=<span class="string">"UTF-8"</span></br>
-&nbsp;&nbsp;&nbsp;&nbsp;...</br>
+Generator&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;encoding&nbsp;=<span class="string">"UTF-8"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 </p>
 </div>
 </div>
@@ -2090,12 +2090,12 @@ override the runtime service only. It is bound in the runtime module using the b
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Override</br>
-<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configureRuntimeEncodingProvider(Binder&nbsp;binder)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;binder.bind(IEncodingProvider.<span class="keyword">class</span>)</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.annotatedWith(DispatchingProvider.Runtime.<span class="keyword">class</span>)</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to(MyEncodingProvider.<span class="keyword">class</span>);</br>
-}</br>
+@Override<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configureRuntimeEncodingProvider(Binder&nbsp;binder)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;binder.bind(IEncodingProvider.<span class="keyword">class</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.annotatedWith(DispatchingProvider.Runtime.<span class="keyword">class</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to(MyEncodingProvider.<span class="keyword">class</span>);<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -2108,10 +2108,10 @@ implementation in both modules:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Override</br>
-<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IEncodingProvider&gt;&nbsp;bindIEncodingProvider()&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyEncodingProvider.<span class="keyword">class</span>;</br>
-}</br>
+@Override<br/>
+<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IEncodingProvider&gt;&nbsp;bindIEncodingProvider()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyEncodingProvider.<span class="keyword">class</span>;<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -2126,12 +2126,12 @@ of your language by default. You can override that by passing an option on load 
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Map&lt;?,?&gt;&nbsp;options&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;HashMap();</br>
-options.put(XtextResource.OPTION_ENCODING,&nbsp;<span class="string">"UTF-8"</span>);</br>
-myXtextResource.load(options);</br>
-</br>
-options.put(XtextResource.OPTION_ENCODING,&nbsp;<span class="string">"ISO-8859-1"</span>);</br>
-myXtextResource.save(options);</br>
+Map&lt;?,?&gt;&nbsp;options&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;HashMap();<br/>
+options.put(XtextResource.OPTION_ENCODING,&nbsp;<span class="string">"UTF-8"</span>);<br/>
+myXtextResource.load(options);<br/>
+<br/>
+options.put(XtextResource.OPTION_ENCODING,&nbsp;<span class="string">"ISO-8859-1"</span>);<br/>
+myXtextResource.save(options);<br/>
 </p>
 </div>
 </div>
