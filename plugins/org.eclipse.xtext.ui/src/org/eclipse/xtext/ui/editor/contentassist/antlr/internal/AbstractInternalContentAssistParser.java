@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.editor.contentassist.antlr.internal;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -86,6 +87,8 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 					int index = grammarElements.lastIndexOf(current);
 					List<AbstractElement> alreadyHandled = Lists.newArrayList(Iterators.filter(indexToHandledElements.get(index).iterator(), AbstractElement.class));
 					result.setHandledUnorderedGroupElements(alreadyHandled);
+				} else {
+					result.setHandledUnorderedGroupElements(Collections.<AbstractElement>emptyList());
 				}
 			}
 			if (logger.isDebugEnabled()) {
@@ -514,6 +517,9 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	}
 
 	public Set<FollowElement> getFollowElements() {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getFollowElements()");
+		}
 		return followElements;
 	}
 	
