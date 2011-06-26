@@ -160,10 +160,6 @@ public class XtextProjectInfo implements IProjectInfo {
 		return projectLocation.removeLastSegments(1).append(getUiProjectName());
 	}
 
-	public IPath getGeneratorProjectLocation() {
-		return projectLocation.removeLastSegments(1).append(getGeneratorProjectName());
-	}
-
 	public IPath getTestProjectLocation() {
 		return projectLocation.removeLastSegments(1).append(getTestProjectName());
 	}
