@@ -219,7 +219,7 @@ public class XtextProjectCreator extends AbstractProjectCreator {
 		factory.setProjectName(getXtextProjectInfo().getTestProjectName());
 		factory.addProjectNatures(getTestProjectNatures());
 		factory.addRequiredBundles(requiredBundles);
-		factory.setLocation(getXtextProjectInfo().getGeneratorProjectLocation());
+		factory.setLocation(getXtextProjectInfo().getTestProjectLocation());
 	}
 
 	protected List<String> getTestProjectRequiredBundles() {
