@@ -49,69 +49,30 @@
 		</ul>
 	</div>
 	<div id="midcolumn">
-		<a name="Xtend_Preface" ></a>
-		<h1>Introduction</h1>
-				<div class="toc">
-				  <ul>
-				    <li><a href="01-Xtend_Introduction.php#Getting_Started" >Getting Started</a></li>
-				  </ul>
-				</div>
-				
-		<p>
-		<div class="image" >
-		<img src="images/Xtend-Logo.png" 
-			width="600px"
-		/>
-		<div class="caption">
-		</div>
-		</div>
-		</p>
-		<p>
-		This document specifies the language Xtend. Xtend is a modern statically-typed programming language which is
-		tightly integrated with and runs on the Java Virtual Machine. It has its roots in the Java programming
-		language but improves on a couple of concepts:   
-		</p>
-		<p>
-		<ul>
-		  <li>Advanced Type Inference - You rarely need to write down type signatures</li>
-		  <li>Full support for Java Generics - Including all conformance and conversion rules</li>
-		  <li>Closures - concise syntax for anonymous function literals</li>
-		  <li>Operator overloading - make your libraries even more expressive</li>
-		  <li>Powerful switch expressions - type based switching with implicit casts</li>
-		  <li>No statements - Everything is an expression</li>
-		  <li>First class support for template syntax, with intelligent white space handling</li>
-		  <li>Extension methods - Enhance closed types with new functionality optionally injected via JSR-330</li>
-		  <li>property access syntax - shorthands for getter and setter access</li>
-		  <li>multiple dispatch aka polymorphic method invocation</li>
-		  <li>translates to Java not bytecode - understand what's going on and use your code for platforms such as Android or GWT</li>
-		</ul>
-		</p>
-		<p>
-		It is not aiming at replacing Java all together but meant to be used to write Guice-injected component implementations. Therefore its library is just a 
-		thin layer over the Java Development Kit (JDK) and interacts with Java exactly the same as it interacts with Xtend code. Also Java can call Xtend functions
-		in a completely transparent way. And of course, it provides a modern Eclipse-based IDE closely integrated with the Java Development Tools (JDT).
-		</p>
-			<a name="Getting_Started" ></a>
+			<a name="Xbase_Expressions_TryCatch" ></a>
 			<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
 		padding: 5px 0;
 		padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
 		<br style="clear:both" />
-			<h1>Getting Started</h1>
+			<h1>Try, Catch, Finally</h1>
 			<p>
-			The best way to get started is to materialize the <em>Xtend Tutorial</em> example project in your workspace.
-			You'll find it in the new project wizard dialog.
+			The try-catch-finally expression is used to handle exceptional situations.
+			You are not forced to declare checked exceptions, if you don't catch checked exceptions they are rethrown
+			in a wrapping runtime exception. 
+			Other than that the syntax again is like the one known from Java.
 			</p>
 			<p>
-			The project contains a couple of sample Xtend files, which show the different language concepts in action.
-			You should also have a look into the <em>xtend-gen</em> folder which contains the generated Java-version of them.
+			<div class="literallayout">
+			<div class="incode">
+			<p class="code">
+			<span class="keyword">try</span>&nbsp;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;RuntimeException()<br/>
+			}&nbsp;<span class="keyword">catch</span>&nbsp;(NullPointerException&nbsp;e)&nbsp;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;handle&nbsp;e<br/>
+			</span>}&nbsp;<span class="keyword">finally</span>&nbsp;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;do&nbsp;stuff<br/>
+			</span>}
 			</p>
-			<p>
-			<div class="image" >
-			<img src="images/Xtend_and_Java.png" 
-				width="600px"
-			/>
-			<div class="caption">
-			Xtend and Java Vis-a-Vis
 			</div>
 			</div>
 			
