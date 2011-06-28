@@ -24,8 +24,6 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 	
 	@Inject extension IJvmModelAssociator jvmModelAssociator
 		
-	@Inject extension JvmVisibilityExtension jvmVisibilityExtension
-	
 	@Inject extension DomainmodelExtensions domainmodelExtensions
 
 	override List<JvmDeclaredType> inferJvmModel(EObject sourceObject) {
@@ -46,7 +44,7 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 		jvmClass.simpleName = entity.name
 		jvmClass.packageName = entity.packageName
 		entity.associatePrimary(jvmClass)
-		jvmClass.makePublic
+		jvmClass.visibility = JvmVisibility::PUBLIC
 		if (entity.superType != null)
 			jvmClass.superTypes += cloneWithProxies(entity.superType)
 		for(f : entity.features) {
@@ -63,14 +61,14 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 		val jvmField = typesFactory.createJvmField
 		jvmField.simpleName = property.name
 		jvmField.type = cloneWithProxies(property.type)
-		jvmField.makePrivate
+		jvmField.visibility = JvmVisibility::PRIVATE
 		type.members += jvmField
 		property.associatePrimary(jvmField)
 		
 		val jvmGetter = typesFactory.createJvmOperation
 		jvmGetter.simpleName = "get" + property.name.toFirstUpper
 		jvmGetter.returnType = cloneWithProxies(property.type)
-		jvmGetter.makePublic
+		jvmGetter.visibility = JvmVisibility::PUBLIC
 		type.members += jvmGetter
 		property.associatePrimary(jvmGetter)
 		
@@ -79,7 +77,7 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 		val parameter = typesFactory.createJvmFormalParameter
 		parameter.name = property.name.toFirstUpper
 		parameter.parameterType = cloneWithProxies(property.type)
-		jvmSetter.makePublic
+		jvmSetter.visibility = JvmVisibility::PUBLIC
 		jvmSetter.parameters += parameter
 		type.members += jvmSetter
 		property.associatePrimary(jvmSetter)
@@ -90,7 +88,7 @@ class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
 		jvmOperation.simpleName = operation.name
 		jvmOperation.returnType = cloneWithProxies(operation.type)
 		jvmOperation.parameters.addAll(operation.params.map(p|cloneWithProxies(p))) 
-		jvmOperation.makePublic
+		jvmOperation.visibility = JvmVisibility::PUBLIC
 		type.members += jvmOperation
 		operation.associatePrimary(jvmOperation)
 	}
