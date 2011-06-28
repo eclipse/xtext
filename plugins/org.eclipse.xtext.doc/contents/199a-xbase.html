@@ -40,13 +40,7 @@ To leverage Xbase, your DSL&apos;s grammar must inherit from the Xbase grammar. 
 clause of our grammar to 
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">grammar</span>&nbsp;&lt;myLangugaeName&gt;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.xbase.Xbase<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode"><span class="keyword">grammar</span>&nbsp;&lt;myLangugaeName&gt;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.xbase.Xbase</span>
 </p>
 <p>
 The Xbase grammar inherits from <em>org.eclipse.xtext.xbase.Xtype</em>, a language that defines a concrete 
@@ -63,7 +57,7 @@ to import it first. The same holds for the common types model:
 <div class="incode">
 <p class="code">
 <span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/xbase/Xbase"</span>&nbsp;<span class="keyword">as</span>&nbsp;xbase<br/>
-<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/common/JavaVMTypes"</span>&nbsp;<span class="keyword">as</span>&nbsp;jvmTypes<br/>
+<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/common/JavaVMTypes"</span>&nbsp;<span class="keyword">as</span>&nbsp;jvmTypes
 </p>
 </div>
 </div>
@@ -79,7 +73,7 @@ can refer to a Java <em>superType</em>, so we call the rule <em>JvmTypeReference
 <p class="code">
 Entity:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name=ValidID&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType=JvmTypeReference)?&nbsp;<span class="string">&apos;{&apos;</span><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;...
 </p>
 </div>
 </div>
@@ -96,7 +90,7 @@ Operation:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;visibility=Visibility?&nbsp;<span class="string">&apos;op&apos;</span>&nbsp;name=ValidID&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;(params+=JvmFormalParameter&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=JvmFormalParameter)*)?&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;
 </p>
 </div>
 </div>
@@ -120,7 +114,7 @@ bean&nbsp;=&nbsp;StandaloneSetup&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;registerGenModelFile&nbsp;=&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"</span><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;registerGenModelFile&nbsp;=&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"</span>
 </p>
 </div>
 </div>
@@ -134,7 +128,7 @@ Also make sure you have the <a class="jdoc" href="http://download.eclipse.org/mo
 <div class="incode">
 <p class="code">
 fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br/>
-fragment&nbsp;=&nbsp;xbase.XbaseGeneratorFragment&nbsp;{}<br/>
+fragment&nbsp;=&nbsp;xbase.XbaseGeneratorFragment&nbsp;{}
 </p>
 </div>
 </div>
@@ -202,7 +196,7 @@ become a Java class and should be usable as such. In the domainmodel example, yo
 <p class="code">
 <span class="keyword">entity</span>&nbsp;Person&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;friends:&nbsp;List&lt;Person&gt;<br/>
-...<br/>
+...
 </p>
 </div>
 </div>
@@ -233,7 +227,7 @@ the containment hierarchy of the source model and generate JVM elements on the w
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmOperation.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmOperation" >JvmOperation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmOperation.java" title="View Source Code" >(src)</a> for each <em>Operation</em> and a 
 <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmField.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmField" >JvmField</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmField.java" title="View Source Code" >(src)</a> plus access methods for each <em>Property</em>. Whenever
 we have to copy a subtree, e.g. for setting the supertype of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmGenericType.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmGenericType" >JvmGenericType</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmGenericType.java" title="View Source Code" >(src)</a>,
-we use <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/EcoreUtil2.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.EcoreUtil2" >EcoreUtil2</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/EcoreUtil2.java" title="View Source Code" >(src)</a> .<em>cloneWithProxies()</em> to avoid eager resolution of referenced
+we use <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/EcoreUtil2.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.EcoreUtil2" >EcoreUtil2</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/EcoreUtil2.java" title="View Source Code" >(src)</a><em>.cloneWithProxies()</em> to avoid eager resolution of referenced
 types. 
 </p>
 <p>

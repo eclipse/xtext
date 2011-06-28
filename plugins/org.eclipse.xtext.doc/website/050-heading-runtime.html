@@ -1,11 +1,7 @@
 <br style="clear:both;height:1em;">
 	<div id="leftcol">
 		<div class="nav-logo">
-<<<<<<< HEAD
-			<a href="index.php"><img src="http://wiki.eclipse.org/images/thumb/d/db/Xtext_logo.png/450px-Xtext_logo.png" style="margin-left:30px; width:125px"/></a>
-=======
 			<a href="index.php"><img src="logo.png" style="margin-left:10px; width:155px"/></a>
->>>>>>> [docs] first shot at xbase integration doc
 		</div>
 		<ul id="leftnav">
 		<li class="separator"><div class="separator">
@@ -28,11 +24,7 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-<<<<<<< HEAD
 		<a href="020-domainmodel-step-by-step.php">15 Minutes Tutorial</a></div>
-=======
-		<a href="020-domainmodel-step-by-step.php">30 Minutes Tutorial</a></div>
->>>>>>> [docs] first shot at xbase integration doc
 		<ul style="display: none;" id="subToc_020-domainmodel-step-by-step.html">
 		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_4" >Create A New Xtext Project</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_5" >Write Your Own Grammar</a></li>
@@ -43,11 +35,7 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-<<<<<<< HEAD
 		<a href="030-tutorial-next-steps.php">15 Minutes Tutorial - Extended</a></div>
-=======
-		<a href="030-tutorial-next-steps.php">30 Minutes Tutorial - Extended</a></div>
->>>>>>> [docs] first shot at xbase integration doc
 		<ul style="display: none;" id="subToc_030-tutorial-next-steps.html">
 		<li id="040-first-code-generator.html" ><a href="040-first-code-generator.php" >Writing a Code Generator With Xtend</a></li>
 		<li id="060-unit-tests.html" ><a href="060-unit-tests.php" >Unit Testing the Language</a></li>
@@ -134,8 +122,6 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-<<<<<<< HEAD
-=======
 		<a href="199a-xbase.php">Integrating Xbase Into Your DSLs</a></div>
 		<ul style="display: none;" id="subToc_199a-xbase.html">
 		<li id="199a-xbase.html#xbase_2" ><a href="199a-xbase.php#xbase_2" >Configuring a language for Xbase</a></li>
@@ -145,7 +131,6 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
->>>>>>> [docs] first shot at xbase integration doc
 		<a href="210-emf-integration.php">Integration with EMF and Other EMF Editors</a></div>
 		<ul style="display: none;" id="subToc_210-emf-integration.html">
 		<li id="210-emf-integration.html#model_metamodel" ><a href="210-emf-integration.php#model_metamodel" >Model, Ecore Model, and Ecore</a></li>
@@ -199,72 +184,6 @@
 		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ISetup.html" title="org.eclipse.xtext.ISetup">ISetup</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java" title="View Source Code" >(src)</a>-implementations in normal mode and uses Eclipse's 
 		extension mechanism when it should be configured in an OSGi environment.   
 		</p>
-<<<<<<< HEAD
-		<a name="runtimeSetup" ></a>
-		<h1>Runtime Setup (ISetup)</h1>
-		<p>
-		For each language there is an implementation of <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ISetup.html" title="org.eclipse.xtext.ISetup">ISetup</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java" title="View Source Code" >(src)</a> 
-		generated. It implements a method called <span class="inlinecode">createInjectorAndDoEMFRegistration()</span>, which can be called 
-		to do the initialization of the language infrastructure. 
-		</p>
-		<p>
-		<em>Caveat</em>: The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ISetup.html" title="org.eclipse.xtext.ISetup">ISetup</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/ISetup.java" title="View Source Code" >(src)</a> class is intended to be used for runtime and for unit 
-		testing, only. if you use it in a Equinox scenario, you will very likely break the running application 
-		because entries to the global registries will be overwritten.
-		</p>
-		<p>
-		The setup method returns an <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html" title="com.google.inject.Injector">Injector</abbr></a>, which can further be used to obtain a 
-		parser, etc. It also registers the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/resource/Resource.Factory.html" title="org.eclipse.emf.ecore.resource.Resource.Factory">Resource.Factory</abbr></a> and generated 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EPackage.html" title="org.eclipse.emf.ecore.EPackage">EPackages</abbr></a> to the respective global registries provided 
-		by EMF. So basically after having run the setup and you can start using EMF API to load and store models
-		of your language.
-		</p>
-		<a name="equinoxSetup" ></a>
-		<h1>Setup within Eclipse-Equinox (OSGi)</h1>
-		<p>
-		Within Eclipse we have a generated <em>Activator</em>, which creates a Guice <a class="jdoc" href="http://google-guice.googlecode.com/svn/trunk/javadoc/com/google/inject/Injector.html" title="com.google.inject.Injector">Injector</abbr></a>
-		using the <a href="040-dependency-injection.php#guicemodules" title="Go to &quot;The Module API&quot;">modules</a>. In addition an <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IExecutableExtensionFactory.html" title="org.eclipse.core.runtime.IExecutableExtensionFactory">IExecutableExtensionFactory</abbr></a> 
-		is generated for each language, which is used to create <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IExecutableExtension.html" title="org.eclipse.core.runtime.IExecutableExtension">IExecutableExtensions</abbr></a>.
-		This means that everything which is created via extension points is managed by Guice as well, i.e. you can 
-		declare dependencies and get them injected upon creation. 
-		</p>
-		<p>
-		The only thing you have to do in order to use this factory is to prefix the class with the factory 
-		<em>MyDslExecutableExtensionFactory</em> name followed by a colon.
-		</p>
-		<p>
-		<div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		&lt;extension&nbsp;point=<span class="string">"org.eclipse.ui.editors"</span>&gt;<br/>
-		&nbsp;&nbsp;&lt;editor<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;class=<span class="string">"&lt;MyDsl&gt;ExecutableExtensionFactory:<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.ui.editor.XtextEditor"</span><br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;contributorClass=<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"org.eclipse.ui.editors.text.TextEditorActionContributor"</span><br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;default=<span class="string">"true"</span><br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;extensions=<span class="string">"mydsl"</span><br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;id=<span class="string">"org.eclipse.xtext.example.MyDsl"</span><br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;name=<span class="string">"MyDsl&nbsp;Editor"</span>&gt;<br/>
-		&nbsp;&nbsp;&lt;/editor&gt;<br/>
-		&lt;/extension&gt;
-		</p>
-		</div>
-		</div>
-		</p>
-		<a name="runtime_concepts_4" ></a>
-		<h1>Logging</h1>
-		<p>
-		Xtext uses Apache's log4j for logging. It is configured using files named <em>log4j.properties</em>, which are looked up 
-		in the root of the Java classpath. If you want to change or provide configuration at runtime (i.e. non-OSGi), all 
-		you have to do is putting such a <em>log4j.properties</em> in place and make sure that it is not overridden by other 
-		<em>log4j.properties</em> in previous classpath entries.
-		</p>
-		<p>
-		In OSGi you provide configuration by creating a fragment for <em>org.apache.log4j</em>. In this case you need to make 
-		sure that there is not any second fragment contributing a <em>log4j.properties</em> file.
-		</p>
-=======
 			<a name="runtimeSetup" ></a>
 			<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
 		padding: 5px 0;
@@ -341,7 +260,6 @@
 			In OSGi you provide configuration by creating a fragment for <em>org.apache.log4j</em>. In this case you need to make 
 			sure that there is not any second fragment contributing a <em>log4j.properties</em> file.
 			</p>
->>>>>>> [docs] first shot at xbase integration doc
 		<a href="060-validation.html"><h1></h1></a>
 		<a href="070-linking.html"><h1></h1></a>
 		<a href="080-scoping.html"><h1></h1></a>

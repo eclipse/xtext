@@ -1,10 +1,6 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/app.class.php");	require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/nav.class.php"); 	require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/menu.class.php"); 	$App 	= new App();	$Nav	= new Nav();	$Menu 	= new Menu();		include($App->getProjectCommon());    # All on the same line to unclutter the user's desktop'
 	include("include.php");
-<<<<<<< HEAD
 	$pageTitle 		= "15 Minutes Tutorial";
-=======
-	$pageTitle 		= "30 Minutes Tutorial";
->>>>>>> [docs] first shot at xbase integration doc
 	
 	$html = file_get_contents('020-domainmodel-step-by-step.html');
 
@@ -37,11 +33,7 @@
 	
 	function addHideSubsectionFunction(items){
 		for (var i = 0; i < items.length; i++) {
-<<<<<<< HEAD
-			if (items[i].firstElementChild != null){
-=======
 			if (items[i].firstElementChild != null && items[i].className == "separator"){
->>>>>>> [docs] first shot at xbase integration doc
 				if(items[i].firstElementChild.firstElementChild != null){
 					items[i].firstElementChild.firstElementChild.onclick = function(){this.nextElementSibling.style.display="inline";this.style.display = "none"; toc_toggle_subsections(this.parentNode.parentNode);};
 					items[i].firstElementChild.firstElementChild.nextElementSibling.onclick = function(){this.previousElementSibling.style.display="inline";this.style.display = "none"; toc_toggle_subsections(this.parentNode.parentNode);};

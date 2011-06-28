@@ -1,11 +1,7 @@
 <br style="clear:both;height:1em;">
 	<div id="leftcol">
 		<div class="nav-logo">
-<<<<<<< HEAD
-			<a href="index.php"><img src="http://wiki.eclipse.org/images/thumb/d/db/Xtext_logo.png/450px-Xtext_logo.png" style="margin-left:30px; width:125px"/></a>
-=======
 			<a href="index.php"><img src="logo.png" style="margin-left:10px; width:155px"/></a>
->>>>>>> [docs] first shot at xbase integration doc
 		</div>
 		<ul id="leftnav">
 		<li class="separator"><div class="separator">
@@ -28,11 +24,7 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-<<<<<<< HEAD
 		<a href="020-domainmodel-step-by-step.php">15 Minutes Tutorial</a></div>
-=======
-		<a href="020-domainmodel-step-by-step.php">30 Minutes Tutorial</a></div>
->>>>>>> [docs] first shot at xbase integration doc
 		<ul style="display: none;" id="subToc_020-domainmodel-step-by-step.html">
 		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_4" >Create A New Xtext Project</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_5" >Write Your Own Grammar</a></li>
@@ -43,11 +35,7 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-<<<<<<< HEAD
 		<a href="030-tutorial-next-steps.php">15 Minutes Tutorial - Extended</a></div>
-=======
-		<a href="030-tutorial-next-steps.php">30 Minutes Tutorial - Extended</a></div>
->>>>>>> [docs] first shot at xbase integration doc
 		<ul style="display: none;" id="subToc_030-tutorial-next-steps.html">
 		<li id="040-first-code-generator.html" ><a href="040-first-code-generator.php" >Writing a Code Generator With Xtend</a></li>
 		<li id="060-unit-tests.html" ><a href="060-unit-tests.php" >Unit Testing the Language</a></li>
@@ -134,8 +122,6 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-<<<<<<< HEAD
-=======
 		<a href="199a-xbase.php">Integrating Xbase Into Your DSLs</a></div>
 		<ul style="display: none;" id="subToc_199a-xbase.html">
 		<li id="199a-xbase.html#xbase_2" ><a href="199a-xbase.php#xbase_2" >Configuring a language for Xbase</a></li>
@@ -145,7 +131,6 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
->>>>>>> [docs] first shot at xbase integration doc
 		<a href="210-emf-integration.php">Integration with EMF and Other EMF Editors</a></div>
 		<ul style="display: none;" id="subToc_210-emf-integration.html">
 		<li id="210-emf-integration.html#model_metamodel" ><a href="210-emf-integration.php#model_metamodel" >Model, Ecore Model, and Ecore</a></li>
@@ -173,91 +158,6 @@
 		</ul>
 	</div>
 	<div id="midcolumn">
-<<<<<<< HEAD
-		<a name="hyperlinking" ></a>
-		<h1>Hyperlinking</h1>
-			<div class="toc">
-			  <ul>
-			    <li><a href="180-hyperlinking.php#locationProvider" >Location Provider</a></li>
-			    <li><a href="180-hyperlinking.php#hyperlinking_3" >Customizing Available Hyperlinks</a></li>
-			  </ul>
-			</div>
-		<p>
-		The Xtext editor provides hyperlinking support for any tokens corresponding to cross-references in your 
-		grammar definition. You can either <em>CTRL-click</em> on any of these tokens or hit <em>F3</em> 
-		while the cursor position is at the token in question and this will take you to the referenced model 
-		element. As you'd expect this works for references to elements in the same resource as well as for 
-		references to elements in other resources. In the latter case the referenced resource will first be 
-		opened using the corresponding editor.
-		</p>
-		<a name="locationProvider" ></a>
-		<h2>Location Provider</h2>
-		<p>
-		When navigating a hyperlink, Xtext will also select the text region corresponding to the referenced model 
-		element. Determining this text region is the responsibility of the 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/ILocationInFileProvider.html" title="org.eclipse.xtext.resource.ILocationInFileProvider">ILocationInFileProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java" title="View Source Code" >(src)</a>. The 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/DefaultLocationInFileProvider.html" title="org.eclipse.xtext.resource.DefaultLocationInFileProvider">default implementation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/DefaultLocationInFileProvider.java" title="View Source Code" >(src)</a> implements a best 
-		effort strategy which can be summarized as:
-		</p>
-		<p>
-		<ol>
-		  <li>
-		  		If the model element's <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClass.html" title="org.eclipse.emf.ecore.EClass">type</abbr></a> declares a feature <em>name</em> then return the 
-		  		region of the corresponding token(s). As a fallback also check for a feature <em>id</em>.
-		  </li>
-		  <li>
-		  		If the model element's node model contains any top-level tokens corresponding to invocations
-		  		of the rule <em>ID</em> in the grammar then return a region spanning all those tokens.
-		  </li>
-		  <li>
-		  		As a last resort return the region corresponding to the first keyword token of the referenced
-		  		model element.
-		  </li>
-		</ol>
-		</p>
-		<p>
-		The location service offers different methods to obtain the region of interest for special use cases.
-		You can either obtain the complete region for an object or only the identifying string which is usually
-		the name of the instance (see <span class="inlinecode">getSignificantTextRegion(EObject)</span>). You can also query for
-		the text region of a specific <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EStructuralFeature.html" title="org.eclipse.emf.ecore.EStructuralFeature">EStructuralFeature</abbr></a> by means of 
-		<span class="inlinecode">getFullTextRegion(EObject,&nbsp;EStructuralFeature,&nbsp;<span class="keyword">int</span>)</span>.
-		</p>
-		<p>
-		As the default strategy is a best effort it may not always result in the selection you want. If that's 
-		the case you can <a href="040-dependency-injection.php#guicemodules" title="Go to &quot;The Module API&quot;">override</a> the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/ILocationInFileProvider.html" title="org.eclipse.xtext.resource.ILocationInFileProvider">ILocationInFileProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/ILocationInFileProvider.java" title="View Source Code" >(src)</a> binding in 
-		the UI module as in the following example:
-		</p>
-		<p>
-		<div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;MyDslUiModule&nbsp;<span class="keyword">extends</span>&nbsp;AbstractMyDslUiModule&nbsp;{<br/>
-		&nbsp;&nbsp;@Override<br/>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;ILocationInFileProvider&gt;&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bindILocationInFileProvider()&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyDslLocationInFileProvider.<span class="keyword">class</span>;<br/>
-		&nbsp;&nbsp;}<br/>
-		}
-		</p>
-		</div>
-		</div>
-		</p>
-		<p>
-		Often the default strategy only needs some guidance (e.g. selecting the text corresponding to another 
-		feature than <em>name</em>). In that case you can simply subclass the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/DefaultLocationInFileProvider.html" title="org.eclipse.xtext.resource.DefaultLocationInFileProvider">DefaultLocationInFileProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/DefaultLocationInFileProvider.java" title="View Source Code" >(src)</a>
-		and override the methods <span class="inlinecode">getIdentifierFeature()</span> or <span class="inlinecode">useKeyword()</span> to guide the first and 
-		last steps of the strategy as described above (see <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xtext/XtextLocationInFileProvider.html" title="org.eclipse.xtext.xtext.XtextLocationInFileProvider">XtextLocationInFileProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xtext/src/org/eclipse/xtext/xtext/XtextLocationInFileProvider.java" title="View Source Code" >(src)</a> 
-		for an example).
-		</p>
-		<a name="hyperlinking_3" ></a>
-		<h2>Customizing Available Hyperlinks</h2>
-		<p>
-		The hyperlinks are provided by the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/hyperlinking/HyperlinkHelper.html" title="org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper">HyperlinkHelper</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/hyperlinking/HyperlinkHelper.java" title="View Source Code" >(src)</a>
-		which will create links for cross-referenced objects by default. Clients may want to override 
-		<span class="inlinecode">createHyperlinksByOffset(XtextResource,&nbsp;<span class="keyword">int</span>,&nbsp;IHyperlinkAcceptor)</span> to provide additional links or 
-		supersede the default implementation. 
-		</p>
-=======
 			<a name="hyperlinking" ></a>
 			<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
 		padding: 5px 0;
@@ -345,6 +245,5 @@
 			<span class="inlinecode">createHyperlinksByOffset(XtextResource,&nbsp;<span class="keyword">int</span>,&nbsp;IHyperlinkAcceptor)</span> to provide additional links or 
 			supersede the default implementation. 
 			</p>
->>>>>>> [docs] first shot at xbase integration doc
 	</div>
 	<br style="clear:both;height:1em;">

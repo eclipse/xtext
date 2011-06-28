@@ -1,11 +1,7 @@
 <br style="clear:both;height:1em;">
 	<div id="leftcol">
 		<div class="nav-logo">
-<<<<<<< HEAD
-			<a href="index.php"><img src="http://wiki.eclipse.org/images/thumb/d/db/Xtext_logo.png/450px-Xtext_logo.png" style="margin-left:30px; width:125px"/></a>
-=======
 			<a href="index.php"><img src="logo.png" style="margin-left:10px; width:155px"/></a>
->>>>>>> [docs] first shot at xbase integration doc
 		</div>
 		<ul id="leftnav">
 		<li class="separator"><div class="separator">
@@ -28,11 +24,7 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-<<<<<<< HEAD
 		<a href="020-domainmodel-step-by-step.php">15 Minutes Tutorial</a></div>
-=======
-		<a href="020-domainmodel-step-by-step.php">30 Minutes Tutorial</a></div>
->>>>>>> [docs] first shot at xbase integration doc
 		<ul style="display: none;" id="subToc_020-domainmodel-step-by-step.html">
 		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_4" >Create A New Xtext Project</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_5" >Write Your Own Grammar</a></li>
@@ -43,11 +35,7 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-<<<<<<< HEAD
 		<a href="030-tutorial-next-steps.php">15 Minutes Tutorial - Extended</a></div>
-=======
-		<a href="030-tutorial-next-steps.php">30 Minutes Tutorial - Extended</a></div>
->>>>>>> [docs] first shot at xbase integration doc
 		<ul style="display: none;" id="subToc_030-tutorial-next-steps.html">
 		<li id="040-first-code-generator.html" ><a href="040-first-code-generator.php" >Writing a Code Generator With Xtend</a></li>
 		<li id="060-unit-tests.html" ><a href="060-unit-tests.php" >Unit Testing the Language</a></li>
@@ -134,8 +122,6 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-<<<<<<< HEAD
-=======
 		<a href="199a-xbase.php">Integrating Xbase Into Your DSLs</a></div>
 		<ul style="display: none;" id="subToc_199a-xbase.html">
 		<li id="199a-xbase.html#xbase_2" ><a href="199a-xbase.php#xbase_2" >Configuring a language for Xbase</a></li>
@@ -145,7 +131,6 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
->>>>>>> [docs] first shot at xbase integration doc
 		<a href="210-emf-integration.php">Integration with EMF and Other EMF Editors</a></div>
 		<ul style="display: none;" id="subToc_210-emf-integration.html">
 		<li id="210-emf-integration.html#model_metamodel" ><a href="210-emf-integration.php#model_metamodel" >Model, Ecore Model, and Ecore</a></li>
@@ -173,201 +158,6 @@
 		</ul>
 	</div>
 	<div id="midcolumn">
-<<<<<<< HEAD
-		<a name="highlighting" ></a>
-		<h1>Syntax Coloring</h1>
-			<div class="toc">
-			  <ul>
-			    <li><a href="195-highlighting.php#highlighting_6" >Lexical Highlighting</a></li>
-			    <li><a href="195-highlighting.php#highlighting_7" >Semantic Highlighting</a></li>
-			  </ul>
-			</div>
-		<p>
-		Besides the already mentioned advanced features like <a href="150-contentassist.php" title="Go to &quot;Content Assist&quot;">content assist</a>  and 
-		<a href="105-formatting.php" title="Go to &quot;Formatting (Pretty Printing)&quot;">code formatting</a> the powerful 
-		editor for your DSL is capable to mark up your model-code to improve the overall readability. It is 
-		possible to use different colors and fonts according to the meaning of the different parts of your 
-		input file. One may want to use some unintrusive colors for large blocks of comments while identifiers, 
-		keywords and strings should be colored differently to make it easier to distinguish between them. 
-		This kind of text decorating markup does not influence the semantics of the various sections but 
-		helps to understand the meaning and to find errors in the source code.
-		</p>
-		<p>
-		<div class="image" >
-		<img src="images/highlighting.png" 
-			width="600px"
-		/>
-		<div class="caption">
-		</div>
-		</div>
-		</p>
-		<p>
-		The highlighting is done in two stages. This allows for sophisticated algorithms that are executed 
-		asynchronously to provide advanced coloring while simple pattern matching may be used to highlight 
-		parts of the text instantaneously. The latter is called lexical highlighting while the first is based 
-		on the meaning of your different model elements and therefore called semantic highlighting.
-		</p>
-		<p>
-		When you introduce new highlighting styles, the preference page for your DSL is automatically 
-		configured and allows the customization of any registered highlighting setting. They are automatically 
-		persisted and reloaded on startup.
-		</p>
-		<p>
-		<div class="image" >
-		<img src="images/preferences_syntax.png" 
-			width="600px"
-		/>
-		<div class="caption">
-		</div>
-		</div>
-		</p>
-		<a name="highlighting_6" ></a>
-		<h2>Lexical Highlighting</h2>
-		<p>
-		The lexical highlighting can be customized by providing implementations of the interface 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.html" title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration">IHighlightingConfiguration</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java" title="View Source Code" >(src)</a> and 
-		the abstract class <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/AbstractTokenScanner.html" title="org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractTokenScanner">AbstractTokenScanner</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/AbstractTokenScanner.java" title="View Source Code" >(src)</a>. 
-		The latter fulfills the interface <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/rules/ITokenScanner.html" title="org.eclipse.jface.text.rules.ITokenScanner">ITokenScanner</abbr></a> 
-		from the underlying JFace Framework, which may be implemented by clients directly.
-		</p>
-		<p>
-		The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.html" title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration">IHighlightingConfiguration</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java" title="View Source Code" >(src)</a> is used
-		to register any default style without a specific binding to 
-		a pattern in the model file. It is used to populate the preferences page and to initialize the 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/ITextAttributeProvider.html" title="org.eclipse.xtext.ui.editor.syntaxcoloring.ITextAttributeProvider">ITextAttributeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/ITextAttributeProvider.java" title="View Source Code" >(src)</a>, which in turn is the 
-		component that is used to obtain the actual settings for a style's id. An implementation 
-		will usually be very similar to the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/DefaultHighlightingConfiguration.html" title="org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration">DefaultHighlightingConfiguration</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/DefaultHighlightingConfiguration.java" title="View Source Code" >(src)</a> 
-		and read like this: 
-		</p>
-		<p>
-		<div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;DefaultHighlightingConfiguration&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;IHighlightingConfiguration&nbsp;{<br/>
-		<br/>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;String&nbsp;KEYWORD_ID&nbsp;=&nbsp;<span class="string">"keyword"</span>;<br/>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">final</span>&nbsp;String&nbsp;COMMENT_ID&nbsp;=&nbsp;<span class="string">"comment"</span>;<br/>
-		<br/>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(IHighlightingConfigurationAcceptor&nbsp;acceptor)&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KEYWORD_ID,&nbsp;<span class="string">"Keyword"</span>,&nbsp;keywordTextStyle());<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(COMMENT_ID,&nbsp;<span class="string">"Comment"</span>,&nbsp;<span class="comment">//&nbsp;...<br/>
-		</span>&nbsp;&nbsp;}<br/>
-		&nbsp;&nbsp;<br/>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;TextStyle&nbsp;keywordTextStyle()&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;TextStyle&nbsp;textStyle&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;TextStyle();<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setColor(<span class="keyword">new</span>&nbsp;RGB(127,&nbsp;0,&nbsp;85));<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setStyle(SWT.BOLD);<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;textStyle;<br/>
-		&nbsp;&nbsp;}<br/>
-		}
-		</p>
-		</div>
-		</div>
-		</p>
-		<p>
-		Implementations of the <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/rules/ITokenScanner.html" title="org.eclipse.jface.text.rules.ITokenScanner">ITokenScanner</abbr></a> are responsible 
-		for splitting the content of a document into 
-		various parts, the so called tokens, and return the highlighting information for each identified range. 
-		It is critical that this is done very fast because this component is used on each keystroke. Xtext 
-		ships with a default implementation that is based on the lexer that is generated by ANTLR which is very 
-		lightweight and fast. This default implementation can be customized by clients easily. They simply have 
-		to bind another implementation of the 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/AbstractAntlrTokenToAttributeIdMapper.html" title="org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper">AbstractAntlrTokenToAttributeIdMapper</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/AbstractAntlrTokenToAttributeIdMapper.java" title="View Source Code" >(src)</a>. 
-		To get an idea about it, have a look at the 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/DefaultAntlrTokenToAttributeIdMapper.html" title="org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper">DefaultAntlrTokenToAttributeIdMapper</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/DefaultAntlrTokenToAttributeIdMapper.java" title="View Source Code" >(src)</a>.
-		</p>
-		<a name="highlighting_7" ></a>
-		<h2>Semantic Highlighting</h2>
-		<p>
-		The semantic highlighting stage is executed asynchronously in the background and can be used to calculate
-		highlighting states based on the meaning of the different model elements. Users of the editor will 
-		notice a very short delay after they have edited the text until the styles are actually applied to the 
-		document. This keeps the editor responsive while providing aid when reading and writing your model.
-		</p>
-		<p>
-		As for the lexical highlighting the interface to register the available styles is the 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.html" title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration">IHighlightingConfiguration</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java" title="View Source Code" >(src)</a>. 
-		The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/ISemanticHighlightingCalculator.html" title="org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator">ISemanticHighlightingCalculator</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/ISemanticHighlightingCalculator.java" title="View Source Code" >(src)</a> 
-		is the primary hook to implement the logic that will compute to-be-highlighted ranges based on the model 
-		elements. 
-		</p>
-		<p>
-		The framework will pass the current <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/XtextResource.html" title="org.eclipse.xtext.resource.XtextResource">XtextResource</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a> and an 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightedPositionAcceptor.html" title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor">IHighlightedPositionAcceptor</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightedPositionAcceptor.java" title="View Source Code" >(src)</a> to 
-		the calculator. It is ensured, that the resource will not be altered externally until the called method 
-		<span class="inlinecode">provideHighlightingFor()</span> returns. However, the resource may be <span class="inlinecode"><span class="keyword">null</span></span> in case of
-		errors in the model. The implementor's task is to 
-		navigate the semantic model and compute various ranges based on the attached node information and 
-		associate styles with them. This may read similar to the following snippet:
-		</p>
-		<p>
-		<div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;provideHighlightingFor(XtextResource&nbsp;resource,&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;IHighlightedPositionAcceptor&nbsp;acceptor)&nbsp;{<br/>
-		&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(resource&nbsp;==&nbsp;<span class="keyword">null</span>&nbsp;||&nbsp;resource.getParseResult()&nbsp;==&nbsp;<span class="keyword">null</span>)<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-		&nbsp;&nbsp;INode&nbsp;root&nbsp;=&nbsp;resource.getParseResult().getRootNode();<br/>
-		&nbsp;&nbsp;<span class="keyword">for</span>&nbsp;(INode&nbsp;node&nbsp;:&nbsp;root.getAsTreeIterable())&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(node.getGrammarElement()&nbsp;<span class="keyword">instanceof</span>&nbsp;CrossReference)&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;acceptor.addPosition(node.getOffset(),&nbsp;node.getLength(),&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyHighlightingConfiguration.CROSS_REF);<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-		&nbsp;&nbsp;}<br/>
-		}
-		</p>
-		</div>
-		</div>
-		</p>
-		<p>
-		This example refers to an implementation of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.html" title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration">IHighlightingConfiguration</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java" title="View Source Code" >(src)</a> 
-		that registers an own style for each cross-reference. It is pretty much the same implementation as for the previously 
-		mentioned sample of a lexical <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.html" title="org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration">IHighlightingConfiguration</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/IHighlightingConfiguration.java" title="View Source Code" >(src)</a>.
-		</p>
-		<p>
-		<div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;HighlightingConfiguration&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;IHighlightingConfiguration&nbsp;{<br/>
-		&nbsp;&nbsp;<br/>
-		&nbsp;&nbsp;<span class="comment">//&nbsp;lexical&nbsp;stuff&nbsp;goes&nbsp;here&nbsp;<br/>
-		</span>&nbsp;&nbsp;<span class="comment">//&nbsp;..<br/>
-		</span>&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">final</span>&nbsp;<span class="keyword">static</span>&nbsp;String&nbsp;CROSS_REF&nbsp;=&nbsp;<span class="string">"CrossReference"</span>;&nbsp;<br/>
-		<br/>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configure(IHighlightingConfigurationAcceptor&nbsp;acceptor)&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;lexical&nbsp;stuff&nbsp;goes&nbsp;here&nbsp;<br/>
-		</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;..<br/>
-		</span>&nbsp;&nbsp;&nbsp;&nbsp;acceptor.acceptDefaultHighlighting(CROSS_REF,&nbsp;<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Cross-References"</span>,&nbsp;crossReferenceTextStyle());<br/>
-		&nbsp;&nbsp;}<br/>
-		&nbsp;&nbsp;<br/>
-		&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;TextStyle&nbsp;crossReferenceTextStyle()&nbsp;{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;TextStyle&nbsp;textStyle&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;TextStyle();<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;textStyle.setStyle(SWT.ITALIC);<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;textStyle;<br/>
-		&nbsp;&nbsp;}<br/>
-		}
-		</p>
-		</div>
-		</div>
-		</p>
-		<p>
-		The implementor of an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/syntaxcoloring/ISemanticHighlightingCalculator.html" title="org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator">ISemanticHighlightingCalculator</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/syntaxcoloring/ISemanticHighlightingCalculator.java" title="View Source Code" >(src)</a> 
-		should be aware of performance to ensure a good user 
-		experience. It is probably not a good idea to traverse everything of your model when you will only 
-		register a few highlighted ranges that can be found easier with some typed method calls. It is strongly 
-		advised to use purposeful ways to navigate your model. The parts of Xtext's core that are responsible 
-		for the semantic highlighting are pretty optimized in this regard as well. The framework will only 
-		update the ranges that actually have been altered, for example. This speeds up the redraw process. It 
-		will even move, shrink or enlarge previously announced regions based on a best guess before the next 
-		semantic highlighting pass has been triggered after the user has changed the document.
-		</p>
-=======
 			<a name="highlighting" ></a>
 			<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
 		padding: 5px 0;
@@ -565,6 +355,5 @@
 			will even move, shrink or enlarge previously announced regions based on a best guess before the next 
 			semantic highlighting pass has been triggered after the user has changed the document.
 			</p>
->>>>>>> [docs] first shot at xbase integration doc
 	</div>
 	<br style="clear:both;height:1em;">

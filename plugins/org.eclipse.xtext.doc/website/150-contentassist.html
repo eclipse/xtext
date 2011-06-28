@@ -1,11 +1,7 @@
 <br style="clear:both;height:1em;">
 	<div id="leftcol">
 		<div class="nav-logo">
-<<<<<<< HEAD
-			<a href="index.php"><img src="http://wiki.eclipse.org/images/thumb/d/db/Xtext_logo.png/450px-Xtext_logo.png" style="margin-left:30px; width:125px"/></a>
-=======
 			<a href="index.php"><img src="logo.png" style="margin-left:10px; width:155px"/></a>
->>>>>>> [docs] first shot at xbase integration doc
 		</div>
 		<ul id="leftnav">
 		<li class="separator"><div class="separator">
@@ -28,11 +24,7 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-<<<<<<< HEAD
 		<a href="020-domainmodel-step-by-step.php">15 Minutes Tutorial</a></div>
-=======
-		<a href="020-domainmodel-step-by-step.php">30 Minutes Tutorial</a></div>
->>>>>>> [docs] first shot at xbase integration doc
 		<ul style="display: none;" id="subToc_020-domainmodel-step-by-step.html">
 		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_4" >Create A New Xtext Project</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_5" >Write Your Own Grammar</a></li>
@@ -43,11 +35,7 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-<<<<<<< HEAD
 		<a href="030-tutorial-next-steps.php">15 Minutes Tutorial - Extended</a></div>
-=======
-		<a href="030-tutorial-next-steps.php">30 Minutes Tutorial - Extended</a></div>
->>>>>>> [docs] first shot at xbase integration doc
 		<ul style="display: none;" id="subToc_030-tutorial-next-steps.html">
 		<li id="040-first-code-generator.html" ><a href="040-first-code-generator.php" >Writing a Code Generator With Xtend</a></li>
 		<li id="060-unit-tests.html" ><a href="060-unit-tests.php" >Unit Testing the Language</a></li>
@@ -134,8 +122,6 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-<<<<<<< HEAD
-=======
 		<a href="199a-xbase.php">Integrating Xbase Into Your DSLs</a></div>
 		<ul style="display: none;" id="subToc_199a-xbase.html">
 		<li id="199a-xbase.html#xbase_2" ><a href="199a-xbase.php#xbase_2" >Configuring a language for Xbase</a></li>
@@ -145,7 +131,6 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
->>>>>>> [docs] first shot at xbase integration doc
 		<a href="210-emf-integration.php">Integration with EMF and Other EMF Editors</a></div>
 		<ul style="display: none;" id="subToc_210-emf-integration.html">
 		<li id="210-emf-integration.html#model_metamodel" ><a href="210-emf-integration.php#model_metamodel" >Model, Ecore Model, and Ecore</a></li>
@@ -173,89 +158,6 @@
 		</ul>
 	</div>
 	<div id="midcolumn">
-<<<<<<< HEAD
-		<a name="contentAssist" ></a>
-		<h1>Content Assist</h1>
-		<p>
-		The Xtext generator, amongst other things, generates the following two content assist related artifacts:
-		</p>
-		<p>
-		<ul>
-		  <li>An abstract proposal provider class named <span class="inlinecode">Abstract{MyLang}ProposalProvider</span> generated 
-		  		into the <em>src-gen</em> folder within the <em>ui</em> project, and</li>
-		  <li>a concrete subclass in the <em>src</em>-folder of the <em>ui</em> project called 
-		  		<span class="inlinecode">{MyLang}ProposalProvider</span></li>
-		</ul>
-		</p>
-		<p>
-		First we will investigate the generated <span class="inlinecode">Abstract{MyLang}ProposalProvider</span> with methods that look like this:
-		</p>
-		<p>
-		<div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;complete{TypeName}_{FeatureName}(<br/>
-		&nbsp;&nbsp;EObject&nbsp;model,&nbsp;Assignment&nbsp;assignment,&nbsp;<br/>
-		&nbsp;&nbsp;ContentAssistContext&nbsp;context,&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{<br/>
-		&nbsp;&nbsp;<span class="comment">//&nbsp;clients&nbsp;may&nbsp;override<br/>
-		</span>}<br/>
-		<br/>
-		<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;complete_{RuleName}(<br/>
-		&nbsp;&nbsp;EObject&nbsp;model,&nbsp;RuleCall&nbsp;ruleCall,&nbsp;<br/>
-		&nbsp;&nbsp;ContentAssistContext&nbsp;context,&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{<br/>
-		&nbsp;&nbsp;<span class="comment">//&nbsp;clients&nbsp;may&nbsp;override<br/>
-		</span>}
-		</p>
-		</div>
-		</div>
-		</p>
-		<p>
-		The snippet above indicates that the generated class contains a <em>complete*</em>-method 
-		for each assigned feature in the grammar and for each rule. The braces in the snippet are place-holders that should 
-		give a clue about the naming scheme used to create the various entry points for implementors. The generated 
-		proposal provider falls back to some default behavior for cross-references and keywords. Furthermore 
-		it inherits the logic that was introduced in grammars that were mixed into the current language. 
-		</p>
-		<p>
-		Clients who want to customize the behavior may override the methods from the 
-		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/contentassist/AbstractJavaBasedContentProposalProvider.html" title="org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider">AbstractJavaBasedContentProposalProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/contentassist/AbstractJavaBasedContentProposalProvider.java" title="View Source Code" >(src)</a> or introduce new
-		 methods with a specialized first parameter. The framework inspects the type of the model object and 
-		dispatches method calls to the most concrete implementation, that can be found.
-		</p>
-		<p>
-		It is important to know, that for a given offset in a model file, many possible grammar elements exist. 
-		The framework dispatches to the method declarations for any valid element. That means, that a bunch 
-		of <em>complete*</em> methods may be called.
-		</p>
-		<p>
-		To provide a dummy proposal for the code of an <span class="inlinecode">event</span> instance, you may introduce a specialization 
-		of the generated method and implement it as follows. This will propose <span class="inlinecode">ZonkID</span> for an 
-		event with the name <span class="inlinecode">Zonk</span>.
-		</p>
-		<p>
-		<div class="literallayout">
-		<div class="incode">
-		<p class="code">
-		<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;completeEvent_Code(<br/>
-		&nbsp;&nbsp;Event&nbsp;event,&nbsp;Assignment&nbsp;assignment,&nbsp;<br/>
-		&nbsp;&nbsp;ContentAssistContext&nbsp;context,&nbsp;ICompletionProposalAcceptor&nbsp;acceptor)&nbsp;{<br/>
-		&nbsp;&nbsp;<span class="comment">//&nbsp;call&nbsp;implementation&nbsp;of&nbsp;superclass<br/>
-		</span>&nbsp;&nbsp;<span class="keyword">super</span>.completeEvent_Code(model,&nbsp;assignment,&nbsp;context,&nbsp;acceptor);<br/>
-		<br/>
-		&nbsp;&nbsp;<span class="comment">//&nbsp;compute&nbsp;the&nbsp;plain&nbsp;proposal<br/>
-		</span>&nbsp;&nbsp;String&nbsp;proposal&nbsp;=&nbsp;event.getName()&nbsp;+&nbsp;<span class="string">"ID"</span>;<br/>
-		<br/>
-		&nbsp;&nbsp;<span class="comment">//&nbsp;Create&nbsp;and&nbsp;register&nbsp;the&nbsp;completion&nbsp;proposal:<br/>
-		</span>&nbsp;&nbsp;<span class="comment">//&nbsp;The&nbsp;proposal&nbsp;may&nbsp;be&nbsp;null&nbsp;as&nbsp;the&nbsp;createCompletionProposal(..)&nbsp;<br/>
-		</span>&nbsp;&nbsp;<span class="comment">//&nbsp;methods&nbsp;check&nbsp;for&nbsp;valid&nbsp;prefixes&nbsp;and&nbsp;terminal&nbsp;token&nbsp;conflicts.<br/>
-		</span>&nbsp;&nbsp;<span class="comment">//&nbsp;The&nbsp;acceptor&nbsp;handles&nbsp;null-values&nbsp;gracefully.<br/>
-		</span>&nbsp;&nbsp;acceptor.accept(createCompletionProposal(proposal,&nbsp;context));<br/>
-		}
-		</p>
-		</div>
-		</div>
-		</p>
-=======
 			<a name="contentAssist" ></a>
 			<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
 		padding: 5px 0;
@@ -341,6 +243,5 @@
 			</div>
 			</div>
 			</p>
->>>>>>> [docs] first shot at xbase integration doc
 	</div>
 	<br style="clear:both;height:1em;">

@@ -1,11 +1,7 @@
 <br style="clear:both;height:1em;">
 	<div id="leftcol">
 		<div class="nav-logo">
-<<<<<<< HEAD
-			<a href="index.php"><img src="http://wiki.eclipse.org/images/thumb/d/db/Xtext_logo.png/450px-Xtext_logo.png" style="margin-left:30px; width:125px"/></a>
-=======
 			<a href="index.php"><img src="logo.png" style="margin-left:10px; width:155px"/></a>
->>>>>>> [docs] first shot at xbase integration doc
 		</div>
 		<ul id="leftnav">
 		<li class="separator"><div class="separator">
@@ -28,11 +24,7 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-<<<<<<< HEAD
 		<a href="020-domainmodel-step-by-step.php">15 Minutes Tutorial</a></div>
-=======
-		<a href="020-domainmodel-step-by-step.php">30 Minutes Tutorial</a></div>
->>>>>>> [docs] first shot at xbase integration doc
 		<ul style="display: none;" id="subToc_020-domainmodel-step-by-step.html">
 		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_4" >Create A New Xtext Project</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_5" >Write Your Own Grammar</a></li>
@@ -43,11 +35,7 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-<<<<<<< HEAD
 		<a href="030-tutorial-next-steps.php">15 Minutes Tutorial - Extended</a></div>
-=======
-		<a href="030-tutorial-next-steps.php">30 Minutes Tutorial - Extended</a></div>
->>>>>>> [docs] first shot at xbase integration doc
 		<ul style="display: none;" id="subToc_030-tutorial-next-steps.html">
 		<li id="040-first-code-generator.html" ><a href="040-first-code-generator.php" >Writing a Code Generator With Xtend</a></li>
 		<li id="060-unit-tests.html" ><a href="060-unit-tests.php" >Unit Testing the Language</a></li>
@@ -134,8 +122,6 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-<<<<<<< HEAD
-=======
 		<a href="199a-xbase.php">Integrating Xbase Into Your DSLs</a></div>
 		<ul style="display: none;" id="subToc_199a-xbase.html">
 		<li id="199a-xbase.html#xbase_2" ><a href="199a-xbase.php#xbase_2" >Configuring a language for Xbase</a></li>
@@ -145,7 +131,6 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
->>>>>>> [docs] first shot at xbase integration doc
 		<a href="210-emf-integration.php">Integration with EMF and Other EMF Editors</a></div>
 		<ul style="display: none;" id="subToc_210-emf-integration.html">
 		<li id="210-emf-integration.html#model_metamodel" ><a href="210-emf-integration.php#model_metamodel" >Model, Ecore Model, and Ecore</a></li>
@@ -173,81 +158,76 @@
 		</ul>
 	</div>
 	<div id="midcolumn">
-<<<<<<< HEAD
-		<a name="TutorialUnitTests" ></a>
-		<h1>Unit Testing the Language</h1>
-		<p>
-		Automated tests are crucial for the maintainability and the quality of a software product. That's why
-		it is strongly recommended to write unit tests for your language, too. The Xtext project wizard creates
-		a test project for that purpose. It simplifies the setup procedure both for the eclipse agnostic tests and the ui
-		tests for Junit4.
-		</p>
-		<p>
-		This tutorial is about testing the parser and the linker for the <em>Domainmodel</em>. It leverages Xtend to
-		write the testcase.
-		</p>
-		<p>
-		<ol>
-		  <li>
-		  		First of all, a new Xtend class has to be created. Therefore, choose the src folder of the test
-		  		plugin, and select <em>New -> Xtend Class</em> from the context menu. Provide a meaningful name and
-		  		enter the package before you hit finish.
-		  		
-		  		The core of the test infrastructure is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/junit4/XtextRunner.html" title="org.eclipse.xtext.junit4.XtextRunner">XtextRunner</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.junit/src/org/eclipse/xtext/junit4/XtextRunner.java" title="View Source Code" >(src)</a> and
-		  		the language specific <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/junit4/IInjectorProvider.html" title="org.eclipse.xtext.junit4.IInjectorProvider">IInjectorProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.junit/src/org/eclipse/xtext/junit4/IInjectorProvider.java" title="View Source Code" >(src)</a>. Both have to be provided
-		  		by means of class annotations:  
-		   
-		  		<div class="literallayout">
-		  <div class="incode">
-		  <p class="code">
-		  @InjectWith(<span class="keyword">typeof</span>(DomainmodelInjectorProvider))<br/>
-		  @RunWith(<span class="keyword">typeof</span>(XtextRunner))<br/>
-		  <span class="keyword">class</span>&nbsp;ParserTest&nbsp;{<br/>
-		  }
-		  </p>
-		  </div>
-		  </div>
-		  
-		  </li>
-		  <li>
-		  		The actual test case is pretty straight forward with Xtend. The utility class 
-		  		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/junit4/util/ParseHelper.html" title="org.eclipse.xtext.junit4.util.ParseHelper">ParseHelper</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.junit/src/org/eclipse/xtext/junit4/util/ParseHelper.java" title="View Source Code" >(src)</a> allows to parse an arbitrary string into a
-		  		<em>Domainmodel</em>. The model itself can be traversed and checked afterwards. A static import of
-		  		<abbr title="junit.framework.Assert" >Assert</abbr> leads to concise a readable test cases.
-		  		
-		  		<div class="literallayout">
-		  <div class="incode">
-		  <p class="code">
-		  @Inject<br/>
-		  ParseHelper&lt;Domainmodel&gt;&nbsp;parser<br/>
-		  <br/>
-		  @Test&nbsp;<br/>
-		  <span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;parseDomainmodel()&nbsp;{<br/>
-		  &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;model&nbsp;=&nbsp;parser.parse(<br/>
-		  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"entity&nbsp;MyEntity&nbsp;{<br/>
-		  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent:&nbsp;MyEntity<br/>
-		  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}"</span>)<br/>
-		  &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;entity&nbsp;=&nbsp;model.elements.head&nbsp;<span class="keyword">as</span>&nbsp;Entity<br/>
-		  &nbsp;&nbsp;&nbsp;&nbsp;assertSame(entity,&nbsp;entity.features.head.type)<br/>
-		  }
-		  </p>
-		  </div>
-		  </div>
-		  
-		  </li>
-		  <li>
-		  		After saving the Xtend file, it is time to run the test. Please locate the generated java class
-		  		in the <em>xtend-gen</em> folder and select <em>Run As -> JUnit Test</em> from the context menu.
-		  </li>
-		</ol>
-		</p>
-=======
 			<a name="TutorialUnitTests" ></a>
 			<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
 		padding: 5px 0;
 		padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
 		<br style="clear:both" />
 			<h1>Unit Testing the Language</h1>
->>>>>>> [docs] first shot at xbase integration doc
+			<p>
+			Automated tests are crucial for the maintainability and the quality of a software product. That's why
+			it is strongly recommended to write unit tests for your language, too. The Xtext project wizard creates
+			a test project for that purpose. It simplifies the setup procedure both for the eclipse agnostic tests and the ui
+			tests for Junit4.
+			</p>
+			<p>
+			This tutorial is about testing the parser and the linker for the <em>Domainmodel</em>. It leverages Xtend to
+			write the testcase.
+			</p>
+			<p>
+			<ol>
+			  <li>
+			  		First of all, a new Xtend class has to be created. Therefore, choose the src folder of the test
+			  		plugin, and select <em>New -> Xtend Class</em> from the context menu. Provide a meaningful name and
+			  		enter the package before you hit finish.
+			  		
+			  		The core of the test infrastructure is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/junit4/XtextRunner.html" title="org.eclipse.xtext.junit4.XtextRunner">XtextRunner</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.junit/src/org/eclipse/xtext/junit4/XtextRunner.java" title="View Source Code" >(src)</a> and
+			  		the language specific <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/junit4/IInjectorProvider.html" title="org.eclipse.xtext.junit4.IInjectorProvider">IInjectorProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.junit/src/org/eclipse/xtext/junit4/IInjectorProvider.java" title="View Source Code" >(src)</a>. Both have to be provided
+			  		by means of class annotations:  
+			   
+			  		<div class="literallayout">
+			  <div class="incode">
+			  <p class="code">
+			  @InjectWith(<span class="keyword">typeof</span>(DomainmodelInjectorProvider))<br/>
+			  @RunWith(<span class="keyword">typeof</span>(XtextRunner))<br/>
+			  <span class="keyword">class</span>&nbsp;ParserTest&nbsp;{<br/>
+			  }
+			  </p>
+			  </div>
+			  </div>
+			  
+			  </li>
+			  <li>
+			  		The actual test case is pretty straight forward with Xtend. The utility class 
+			  		<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/junit4/util/ParseHelper.html" title="org.eclipse.xtext.junit4.util.ParseHelper">ParseHelper</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.junit/src/org/eclipse/xtext/junit4/util/ParseHelper.java" title="View Source Code" >(src)</a> allows to parse an arbitrary string into a
+			  		<em>Domainmodel</em>. The model itself can be traversed and checked afterwards. A static import of
+			  		<abbr title="junit.framework.Assert" >Assert</abbr> leads to concise a readable test cases.
+			  		
+			  		<div class="literallayout">
+			  <div class="incode">
+			  <p class="code">
+			  @Inject<br/>
+			  ParseHelper&lt;Domainmodel&gt;&nbsp;parser<br/>
+			  <br/>
+			  @Test&nbsp;<br/>
+			  <span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;parseDomainmodel()&nbsp;{<br/>
+			  &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;model&nbsp;=&nbsp;parser.parse(<br/>
+			  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"entity&nbsp;MyEntity&nbsp;{<br/>
+			  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parent:&nbsp;MyEntity<br/>
+			  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}"</span>)<br/>
+			  &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;entity&nbsp;=&nbsp;model.elements.head&nbsp;<span class="keyword">as</span>&nbsp;Entity<br/>
+			  &nbsp;&nbsp;&nbsp;&nbsp;assertSame(entity,&nbsp;entity.features.head.type)<br/>
+			  }
+			  </p>
+			  </div>
+			  </div>
+			  
+			  </li>
+			  <li>
+			  		After saving the Xtend file, it is time to run the test. Please locate the generated java class
+			  		in the <em>xtend-gen</em> folder and select <em>Run As -> JUnit Test</em> from the context menu.
+			  </li>
+			</ol>
+			</p>
 	</div>
 	<br style="clear:both;height:1em;">

@@ -24,7 +24,7 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="020-domainmodel-step-by-step.php">30 Minutes Tutorial</a></div>
+		<a href="020-domainmodel-step-by-step.php">15 Minutes Tutorial</a></div>
 		<ul style="display: none;" id="subToc_020-domainmodel-step-by-step.html">
 		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_4" >Create A New Xtext Project</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_5" >Write Your Own Grammar</a></li>
@@ -35,7 +35,7 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
-		<a href="030-tutorial-next-steps.php">30 Minutes Tutorial - Extended</a></div>
+		<a href="030-tutorial-next-steps.php">15 Minutes Tutorial - Extended</a></div>
 		<ul style="display: none;" id="subToc_030-tutorial-next-steps.html">
 		<li id="040-first-code-generator.html" ><a href="040-first-code-generator.php" >Writing a Code Generator With Xtend</a></li>
 		<li id="060-unit-tests.html" ><a href="060-unit-tests.php" >Unit Testing the Language</a></li>
@@ -209,13 +209,7 @@
 			clause of our grammar to 
 			</p>
 			<p>
-			<div class="literallayout">
-			<div class="incode">
-			<p class="code">
-			<span class="keyword">grammar</span>&nbsp;&lt;myLangugaeName&gt;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.xbase.Xbase
-			</p>
-			</div>
-			</div>
+			<span class="inlinecode"><span class="keyword">grammar</span>&nbsp;&lt;myLangugaeName&gt;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.xbase.Xbase</span>
 			</p>
 			<p>
 			The Xbase grammar inherits from <em>org.eclipse.xtext.xbase.Xtype</em>, a language that defines a concrete 
@@ -394,7 +388,7 @@
 			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmOperation.html" title="org.eclipse.xtext.common.types.JvmOperation">JvmOperation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmOperation.java" title="View Source Code" >(src)</a> for each <em>Operation</em> and a 
 			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmField.html" title="org.eclipse.xtext.common.types.JvmField">JvmField</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmField.java" title="View Source Code" >(src)</a> plus access methods for each <em>Property</em>. Whenever
 			we have to copy a subtree, e.g. for setting the supertype of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmGenericType.html" title="org.eclipse.xtext.common.types.JvmGenericType">JvmGenericType</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmGenericType.java" title="View Source Code" >(src)</a>,
-			we use <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/EcoreUtil2.html" title="org.eclipse.xtext.EcoreUtil2">EcoreUtil2</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/EcoreUtil2.java" title="View Source Code" >(src)</a> .<em>cloneWithProxies()</em> to avoid eager resolution of referenced
+			we use <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/EcoreUtil2.html" title="org.eclipse.xtext.EcoreUtil2">EcoreUtil2</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/EcoreUtil2.java" title="View Source Code" >(src)</a><em>.cloneWithProxies()</em> to avoid eager resolution of referenced
 			types. 
 			</p>
 			<p>

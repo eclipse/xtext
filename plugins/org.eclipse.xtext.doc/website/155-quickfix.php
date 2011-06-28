@@ -33,11 +33,7 @@
 	
 	function addHideSubsectionFunction(items){
 		for (var i = 0; i < items.length; i++) {
-<<<<<<< HEAD
-			if (items[i].firstElementChild != null){
-=======
 			if (items[i].firstElementChild != null && items[i].className == "separator"){
->>>>>>> [docs] first shot at xbase integration doc
 				if(items[i].firstElementChild.firstElementChild != null){
 					items[i].firstElementChild.firstElementChild.onclick = function(){this.nextElementSibling.style.display="inline";this.style.display = "none"; toc_toggle_subsections(this.parentNode.parentNode);};
 					items[i].firstElementChild.firstElementChild.nextElementSibling.onclick = function(){this.previousElementSibling.style.display="inline";this.style.display = "none"; toc_toggle_subsections(this.parentNode.parentNode);};
