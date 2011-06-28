@@ -14,6 +14,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.example.domainmodel.DomainmodelExtensions;
 import org.eclipse.xtext.example.domainmodel.domainmodel.AbstractElement;
@@ -26,7 +27,6 @@ import org.eclipse.xtext.example.domainmodel.domainmodel.PackageDeclaration;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Property;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
-import org.eclipse.xtext.xbase.jvmmodel.JvmVisibilityExtension;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -43,9 +43,6 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
   
   @Inject
   private IJvmModelAssociator jvmModelAssociator;
-  
-  @Inject
-  private JvmVisibilityExtension jvmVisibilityExtension;
   
   @Inject
   private DomainmodelExtensions domainmodelExtensions;
@@ -97,7 +94,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       String _packageName = this.domainmodelExtensions.packageName(entity);
       jvmClass.setPackageName(_packageName);
       this.jvmModelAssociator.associatePrimary(entity, jvmClass);
-      this.jvmVisibilityExtension.makePublic(jvmClass);
+      jvmClass.setVisibility(JvmVisibility.PUBLIC);
       JvmParameterizedTypeReference _superType = entity.getSuperType();
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_superType, null);
       if (_operator_notEquals) {
@@ -130,7 +127,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       JvmParameterizedTypeReference _type = property.getType();
       JvmParameterizedTypeReference _cloneWithProxies = EcoreUtil2.<JvmParameterizedTypeReference>cloneWithProxies(_type);
       jvmField.setType(_cloneWithProxies);
-      this.jvmVisibilityExtension.makePrivate(jvmField);
+      jvmField.setVisibility(JvmVisibility.PRIVATE);
       EList<JvmMember> _members = type.getMembers();
       CollectionExtensions.<JvmField>operator_add(_members, jvmField);
       this.jvmModelAssociator.associatePrimary(property, jvmField);
@@ -143,7 +140,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       JvmParameterizedTypeReference _type_1 = property.getType();
       JvmParameterizedTypeReference _cloneWithProxies_1 = EcoreUtil2.<JvmParameterizedTypeReference>cloneWithProxies(_type_1);
       jvmGetter.setReturnType(_cloneWithProxies_1);
-      this.jvmVisibilityExtension.makePublic(jvmGetter);
+      jvmGetter.setVisibility(JvmVisibility.PUBLIC);
       EList<JvmMember> _members_1 = type.getMembers();
       CollectionExtensions.<JvmOperation>operator_add(_members_1, jvmGetter);
       this.jvmModelAssociator.associatePrimary(property, jvmGetter);
@@ -161,7 +158,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
       JvmParameterizedTypeReference _type_2 = property.getType();
       JvmParameterizedTypeReference _cloneWithProxies_2 = EcoreUtil2.<JvmParameterizedTypeReference>cloneWithProxies(_type_2);
       parameter.setParameterType(_cloneWithProxies_2);
-      this.jvmVisibilityExtension.makePublic(jvmSetter);
+      jvmSetter.setVisibility(JvmVisibility.PUBLIC);
       EList<JvmFormalParameter> _parameters = jvmSetter.getParameters();
       CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, parameter);
       EList<JvmMember> _members_2 = type.getMembers();
@@ -189,7 +186,7 @@ public class DomainmodelJvmModelInferrer implements IJvmModelInferrer {
         };
       List<JvmFormalParameter> _map = ListExtensions.<JvmFormalParameter, JvmFormalParameter>map(_params, _function);
       _parameters.addAll(_map);
-      this.jvmVisibilityExtension.makePublic(jvmOperation);
+      jvmOperation.setVisibility(JvmVisibility.PUBLIC);
       EList<JvmMember> _members = type.getMembers();
       CollectionExtensions.<JvmOperation>operator_add(_members, jvmOperation);
       this.jvmModelAssociator.associatePrimary(operation, jvmOperation);
