@@ -27,7 +27,7 @@ Here is an example:
 &nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;elements.get(0)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -39,25 +39,12 @@ Package declarations are like in Java, with the small difference, that an identi
 Also you don&apos;t terminate a package declaration with a semicolon.
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">package</span>&nbsp;org.eclipse.xtext<br/>
-</p>
-</div>
-</div>
-
+<span class="inlinecode"><span class="keyword">package</span>&nbsp;org.eclipse.xtext</span>
 <div class="todo" >
 Would be interesting to document how the following example translates to java
 </div>
  
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">package</span>&nbsp;my.^public.^package<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode"><span class="keyword">package</span>&nbsp;my.^public.^package</span>
 </p>
 <a name="imports"></a>
 <h2>Imports</h2>
@@ -76,7 +63,7 @@ As in Java the package &apos;java.lang.*&apos; is implicitly imported.
 <p class="code">
 <span class="keyword">import</span>&nbsp;java.math.BigDecimal<br/>
 <span class="keyword">import</span>&nbsp;java.math.*<br/>
-<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;java.util.Collections.*<br/>
+<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;java.util.Collections.*
 </p>
 </div>
 </div>
@@ -91,25 +78,13 @@ parameter&apos;s type.
 That is the following import declaration 
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*</span>
 </p>
 <p>
 allows to use its methods for example like this :
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="keyword">new</span>&nbsp;Foo().singletonList()<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode"><span class="keyword">new</span>&nbsp;Foo().singletonList()</span>
 </p>
 <p>
 Although this is supported it is generally much nicer to use <a href="02-Xtend_Classes_Functions.html#fields" title="Go to &quot;Fields&quot;">injected extensions</a>, because
@@ -145,7 +120,7 @@ The most simple class :
 <div class="incode">
 <p class="code">
 <span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -159,7 +134,7 @@ A more advanced class declaration in Xtend :
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;List&lt;E&gt;,&nbsp;RandomAccess,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cloneable,&nbsp;java.io.Serializable&nbsp;{<br/>
 &nbsp;&nbsp;...<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -171,13 +146,7 @@ Fields in Xtend are always private and are usually used together with an annotat
 injection container. Example:
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-@Inject&nbsp;MyService&nbsp;myService<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode">@Inject&nbsp;MyService&nbsp;myService</span>
 </p>
 <p>
 This will translate to the following Java field: 
@@ -187,7 +156,7 @@ This will translate to the following Java field:
 <div class="incode">
 <p class="code">
 @Inject&nbsp;&nbsp;&nbsp;&nbsp;<br/>
-<span class="keyword">private</span>&nbsp;MyService&nbsp;myService;<br/>
+<span class="keyword">private</span>&nbsp;MyService&nbsp;myService;
 </p>
 </div>
 </div>
@@ -213,7 +182,7 @@ Imagine you want to add a method &apos;fullName&apos; to a closed type &apos;Ent
 &nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;getFullName(Person&nbsp;p)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p.forename&nbsp;+&nbsp;<span class="string">"&nbsp;"</span>&nbsp;+&nbsp;p.name<br/>
 &nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -222,50 +191,26 @@ Imagine you want to add a method &apos;fullName&apos; to a closed type &apos;Ent
 And if you have an instance of this class injected as extension like this:
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-@Inject&nbsp;<span class="keyword">extension</span>&nbsp;PersonExtensions&nbsp;personExtensions<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode">@Inject&nbsp;<span class="keyword">extension</span>&nbsp;PersonExtensions&nbsp;personExtensions</span>  
 </p>
 <p>
 The method is being put on the member scope of Person.
 So you can write the following
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-myPerson.getFullName()<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode">myPerson.getFullName()</span>
 </p>
 <p>
 which is the a shorthand for 
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-personExtensions.getFullName(myPerson)<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode">personExtensions.getFullName(myPerson)</span>
 </p>
 <p>
 Of course the property shorthand is also available
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-myPerson.fullName<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode">myPerson.fullName</span>
 </p>
 <p>
 The nice thing with using dependency injection in combination with the extension modifier as opposed to <a href="02-Xtend_Classes_Functions.html#imports" title="Go to &quot;Imports&quot;">static extensions</a> is, that in case there is a bug in the extension or it is implemented inefficiently or you 
@@ -287,7 +232,7 @@ Let&apos;s start with a simple example
 <div class="incode">
 <p class="code">
 <span class="keyword">def</span>&nbsp;<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,&nbsp;String&nbsp;s2)&nbsp;:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();
 </p>
 </div>
 </div>
@@ -311,7 +256,7 @@ Example:
 <div class="incode">
 <p class="code">
 <span class="keyword">override</span>&nbsp;<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();
 </p>
 </div>
 </div>
@@ -344,7 +289,7 @@ A declared checked exception will not be wrapped automatically.
 &nbsp;*/</span><br/>
 <span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;throwWrappedException()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IOException()<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -360,7 +305,7 @@ That is the function
 <div class="incode">
 <p class="code">
 <span class="keyword">def</span>&nbsp;<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();
 </p>
 </div>
 </div>
@@ -373,7 +318,7 @@ could be declared like this:
 <div class="incode">
 <p class="code">
 <span class="keyword">def</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();
 </p>
 </div>
 </div>
@@ -407,7 +352,7 @@ A dispatch function is marked using the keyword <span class="inlinecode"><span c
 <div class="incode">
 <p class="code">
 <span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Number&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;a&nbsp;number"</span>&nbsp;}<br/>
-<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;}<br/>
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;}
 </p>
 </div>
 </div>
@@ -442,7 +387,7 @@ For the two dispatch methods in the example above the following Java code would 
 <br/>
 <span class="keyword">protected</span>&nbsp;String&nbsp;_foo(Number&nbsp;x)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"It&apos;s&nbsp;a&nbsp;number"</span>;<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -460,7 +405,7 @@ Example:
 <div class="incode">
 <p class="code">
 <span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;int"</span>&nbsp;}<br/>
-<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x,&nbsp;Number&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number"</span>&nbsp;}<br/>
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x,&nbsp;Number&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number"</span>&nbsp;}
 </p>
 </div>
 </div>
@@ -483,7 +428,7 @@ generates the following Java code :
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Couldn&apos;t&nbsp;handle&nbsp;argument&nbsp;x:"</span>+x+<span class="string">",&nbsp;argument&nbsp;y:"</span>+y);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}&nbsp;<br/>
+}
 </p>
 </div>
 </div>
@@ -497,7 +442,7 @@ As you can see a null reference is never a match. If you want to fetch null you 
 <p class="code">
 <span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Number&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;some&nbsp;number"</span>&nbsp;}<br/>
 <span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;}<br/>
-<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Void&nbsp;x)&nbsp;{&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;NullPointerException(<span class="string">"x"</span>)&nbsp;}<br/>
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Void&nbsp;x)&nbsp;{&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;NullPointerException(<span class="string">"x"</span>)&nbsp;}
 </p>
 </div>
 </div>
@@ -520,7 +465,7 @@ Which compiles to the following Java code:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Couldn&apos;t&nbsp;handle&nbsp;argument&nbsp;x:"</span>+x);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}&nbsp;<br/>
+}
 </p>
 </div>
 </div>
@@ -540,7 +485,7 @@ For example, consider the following Java class :
 &nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;_label(Object&nbsp;o)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;some&nbsp;generic&nbsp;implementation<br/>
 </span>&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -564,7 +509,7 @@ and the following Xtend class which extends the Java class :
 &nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Field&nbsp;<span class="keyword">this</span>)&nbsp;{&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name+type<br/>
 &nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -589,7 +534,7 @@ The resulting dispatch method in the generated Java class &apos;MyLabelProvider&
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Couldn&apos;t&nbsp;handle&nbsp;argument&nbsp;o:"</span>+o);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -618,7 +563,7 @@ Willma&nbsp;Flintstone&nbsp;{<br/>
 }<br/>
 Barny&nbsp;Rubble&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;friendWith&nbsp;Fred&nbsp;Flintstone<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -640,7 +585,7 @@ A function like the following could do the trick :
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;The&nbsp;following&nbsp;is&nbsp;wrong&nbsp;and&nbsp;results&nbsp;in&nbsp;a&nbsp;stack&nbsp;overflow<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;result.friendWith&nbsp;=&nbsp;p.friendWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;result.marriedWith&nbsp;=&nbsp;p.marriedWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -662,7 +607,7 @@ object and a second one to initialize it.
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;now&nbsp;it&nbsp;works&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 </span>&nbsp;&nbsp;&nbsp;&nbsp;result.friendWith&nbsp;=&nbsp;p.friendWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;result.marriedWith&nbsp;=&nbsp;p.marriedWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;<br/>
-}&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+}
 </p>
 </div>
 </div>
@@ -678,7 +623,7 @@ It is even possible to define the return type of a create function by means of
 &nbsp;&nbsp;&nbsp;&nbsp;r.name&nbsp;=&nbsp;p.name<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;r.friendWith&nbsp;=&nbsp;p.friendWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;r.marriedWith&nbsp;=&nbsp;p.marriedWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;<br/>
-}&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+}
 </p>
 </div>
 </div>
@@ -721,7 +666,7 @@ Example:
 &nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;myMethod(@ParameterAnnotation&nbsp;String&nbsp;param)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//...<br/>
 </span>&nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
