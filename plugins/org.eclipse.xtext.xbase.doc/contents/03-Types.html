@@ -8,11 +8,12 @@
 <link rel="home" href="index.html" title="">
 </head>
 <body>
+<a name="Xbase_Types"></a>
 <h1>Types</h1>
 <p>
 Basically all kinds of JVM types are available and referable. 
 </p>
-<a name="0"></a>
+<a name="Xbase_Types_Arrays"></a>
 <h2>Arrays</h2>
 <p>
 Arrays cannot be declared explicitly,
@@ -24,21 +25,21 @@ a variable of type <em>java.util.List&lt;java.lang.Integer&gt;</em> (in short <e
 you can also defer the conversion. The conversion is bi-directional so any method, that takes an array as argument can be invoked with a <em>List</em>
 instead.
 </p>
-<a name="1"></a>
+<a name="Xbase_Types_TypeReferences"></a>
 <h2>Simple Type References</h2>
 <p>
 A simple type reference only consists of a <em>qualified name</em>. A qualified name is a name made up of identifiers which are separated by a dot 
 (like in Java).
 </p>
-<a name="1-0"></a>
+<a name="Xbase_Types_TypeReferences_2"></a>
 <h3>Syntax</h3>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-QualifiedName:</br>
-&nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*</br>
-;&nbsp;&nbsp;&nbsp;&nbsp;</br>
+QualifiedName:<br/>
+&nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*<br/>
+;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -46,7 +47,7 @@ QualifiedName:</br>
 <p>
 There is no parser rule for a simple type reference, as it is expressed as a parameterized type references without parameters.
 </p>
-<a name="1-1"></a>
+<a name="Xbase_Types_TypeReferences_3"></a>
 <h3>Examples</h3>
 <p>
 <ul>
@@ -58,7 +59,7 @@ There is no parser rule for a simple type reference, as it is expressed as a par
 	</li>
 </ul>
 </p>
-<a name="2"></a>
+<a name="Xbase_Types_FunctionTypes"></a>
 <h2>Function Types</h2>
 <p>
 Xbase introduces <em>closures</em>, and therefore an additional function type signature. On the JVM-Level a closure (or more
@@ -71,22 +72,22 @@ So instead of writing <span class="inlinecode">Function1&lt;String,Boolean&gt;</
 Primitives cannot be used in function types.
 </p>
 <p>
-For more information on closures see <a href="04-Expressions.html#5" title="Go to &quot;Closures&quot;" >section Xbase_Expressions_Closures</a>.
+For more information on closures see <a href="04-Expressions.html#Xbase_Expressions_Closures" title="Go to &quot;Closures&quot;" >section Xbase_Expressions_Closures</a>.
 </p>
-<a name="2-0"></a>
+<a name="Xbase_Types_FunctionTypes_4"></a>
 <h3>Syntax</h3>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-XFunctionTypeRef:</br>
-&nbsp;&nbsp;(<span class="string">&apos;(&apos;</span>JvmTypeReference&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmTypeReference)*<span class="string">&apos;)&apos;</span>)?&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;JvmTypeReference;</br>
+XFunctionTypeRef:<br/>
+&nbsp;&nbsp;(<span class="string">&apos;(&apos;</span>JvmTypeReference&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmTypeReference)*<span class="string">&apos;)&apos;</span>)?&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;JvmTypeReference;<br/>
 </p>
 </div>
 </div>
 </p>
-<a name="2-1"></a>
+<a name="Xbase_Types_FunctionTypes_5"></a>
 <h3>Examples</h3>
 <p>
 <ul>
@@ -104,7 +105,7 @@ XFunctionTypeRef:</br>
 	</li>
 </ul>
 </p>
-<a name="3"></a>
+<a name="Xbase_Types_ParameterizedTypeReference"></a>
 <h2>Parameterized Type References</h2>
 <p>
 The general syntax for type references allows to take any number of type arguments. The semantics as well as the syntax is almost the same as in Java, so please 
@@ -114,44 +115,44 @@ refer to the third edition of the  <a href="http://java.sun.com/docs/books/jls/t
 The only difference is that in Xbase a type reference can also be a function type. In the following the full syntax of type references is shown, including function types and
 type arguments.
 </p>
-<a name="3-0"></a>
+<a name="Xbase_Types_ParameterizedTypeReference_3"></a>
 <h3>Syntax</h3>
 <p>
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-JvmTypeReference:</br>
-&nbsp;&nbsp;JvmParameterizedTypeReference&nbsp;|&nbsp;</br>
-&nbsp;&nbsp;XFunctionTypeRef;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;</br>
-XFunctionTypeRef:</br>
-&nbsp;&nbsp;(<span class="string">&apos;(&apos;</span>&nbsp;JvmTypeReference&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmTypeReference)*&nbsp;<span class="string">&apos;)&apos;</span>)?&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;JvmTypeReference;</br>
-</br>
-JvmParameterizedTypeReference:</br>
-&nbsp;&nbsp;type=QualifiedName&nbsp;(<span class="string">&apos;&lt;&apos;</span>&nbsp;JvmTypeArgument&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmTypeArgument)*&nbsp;<span class="string">&apos;&gt;&apos;</span>)?;</br>
-</br>
-JvmTypeArgument:</br>
-&nbsp;&nbsp;JvmReferenceTypeArgument&nbsp;|&nbsp;</br>
-&nbsp;&nbsp;JvmWildcardTypeArgument;</br>
-&nbsp;&nbsp;</br>
-JvmReferenceTypeArgument&nbsp;:</br>
-&nbsp;&nbsp;JvmTypeReference;</br>
-</br>
-JvmWildcardTypeArgument:</br>
-&nbsp;&nbsp;<span class="string">&apos;?&apos;</span>&nbsp;(JvmUpperBound&nbsp;|&nbsp;JvmLowerBound)?;</br>
-</br>
-JvmLowerBound&nbsp;:</br>
-&nbsp;<span class="string">&apos;super&apos;</span>&nbsp;JvmTypeReference;</br>
-</br>
-JvmUpperBound&nbsp;:&nbsp;</br>
-&nbsp;<span class="string">&apos;extends&apos;</span>&nbsp;JvmTypeReference;</br>
-</br>
+JvmTypeReference:<br/>
+&nbsp;&nbsp;JvmParameterizedTypeReference&nbsp;|&nbsp;<br/>
+&nbsp;&nbsp;XFunctionTypeRef;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+XFunctionTypeRef:<br/>
+&nbsp;&nbsp;(<span class="string">&apos;(&apos;</span>&nbsp;JvmTypeReference&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmTypeReference)*&nbsp;<span class="string">&apos;)&apos;</span>)?&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;JvmTypeReference;<br/>
+<br/>
+JvmParameterizedTypeReference:<br/>
+&nbsp;&nbsp;type=QualifiedName&nbsp;(<span class="string">&apos;&lt;&apos;</span>&nbsp;JvmTypeArgument&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmTypeArgument)*&nbsp;<span class="string">&apos;&gt;&apos;</span>)?;<br/>
+<br/>
+JvmTypeArgument:<br/>
+&nbsp;&nbsp;JvmReferenceTypeArgument&nbsp;|&nbsp;<br/>
+&nbsp;&nbsp;JvmWildcardTypeArgument;<br/>
+&nbsp;&nbsp;<br/>
+JvmReferenceTypeArgument&nbsp;:<br/>
+&nbsp;&nbsp;JvmTypeReference;<br/>
+<br/>
+JvmWildcardTypeArgument:<br/>
+&nbsp;&nbsp;<span class="string">&apos;?&apos;</span>&nbsp;(JvmUpperBound&nbsp;|&nbsp;JvmLowerBound)?;<br/>
+<br/>
+JvmLowerBound&nbsp;:<br/>
+&nbsp;<span class="string">&apos;super&apos;</span>&nbsp;JvmTypeReference;<br/>
+<br/>
+JvmUpperBound&nbsp;:&nbsp;<br/>
+&nbsp;<span class="string">&apos;extends&apos;</span>&nbsp;JvmTypeReference;<br/>
+<br/>
 </p>
 </div>
 </div>
 </p>
-<a name="3-1"></a>
+<a name="Xbase_Types_ParameterizedTypeReference_4"></a>
 <h3>Examples</h3>
 <p>
 <ul>
@@ -175,13 +176,13 @@ JvmUpperBound&nbsp;:&nbsp;</br>
 	</li>
 </ul>
 </p>
-<a name="4"></a>
+<a name="Xbase_Types_Primitives"></a>
 <h2>Primitives</h2>
 <p>
 Xbase supports all Java primitives. The conformance rules (e.g. boxing unboxing) are also exactly like defined
 in the Java Language Specification.
 </p>
-<a name="5"></a>
+<a name="Xbase_Types_ConformanceRules"></a>
 <h2>Conformance and Conversion</h2>
 <p>
 Conformance is used in order to find out whether some expression can be used in a certain situation. For instance when assigning a value to a variable, 
@@ -191,7 +192,7 @@ the type of the right hand expression needs to conform to the type of the variab
 As Xbase implements the unchanegd type system of Java it also fully supports the conformance rules defined
 in <a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html">The Java Language Specification</a>.
 </p>
-<a name="5-0"></a>
+<a name="Xbase_Types_CommonSuperType"></a>
 <h3>Common Super Type</h3>
 <p>
 Because of type inference Xbase sometimes needs to compute the most common super type of a given set

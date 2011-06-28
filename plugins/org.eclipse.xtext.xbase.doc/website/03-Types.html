@@ -1,204 +1,294 @@
-<html>
-  <head>
-    <META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Types</title>
-    <link href="book.css" rel="stylesheet" type="text/css">
-    <link href="code.css" rel="stylesheet" type="text/css">
-    <link href="http://www.eclipse.org/eclipse.org-common/yui/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/yui/2.6.0/build/menu/assets/skins/sam/menu.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/reset.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/layout.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/header.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/footer.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/visual.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="http://www.eclipse.org/eclipse.org-common/themes/Nova/css/print.css" rel="stylesheet" type="text/css" media="print">
-    <link rel="stylesheet" type="text/css" href="http://www.eclipse.org/Xtext/style.css"/>
-    <link rel="stylesheet" type="text/css" href="http://www.eclipse.org/style2.css"/>
-     <script type="text/javascript"> 
-    	function initTocMenu(ActiveSubTocElementId){
-    		var menu = document.getElementById("leftnav");
-    		
-    		var chapters = menu.children;
-    		addHideSubsectionFunction(chapters);
-    		
-    		document.getElementById(ActiveSubTocElementId).style.display = "block";
-    	}
-    
-    	function addHideSubsectionFunction(items){
-    		for (var i = 0; i < items.length; i++) {
-    			if (items[i].firstElementChild ){
-    				items[i].firstElementChild.onclick = function(){toc_toggle_subsections(this.parentNode);};
-    				items[i].firstElementChild.style.cursor = "pointer";
-    			}
-    		}
-    	}
-    	function toc_toggle_subsections(chap){
-    		if ( chap.children[1].style.display != "none" ) {
-    			chap.children[1].style.display = "none"
-    		} else {
-    			chap.children[1].style.display = "block"
-    			
-    		}
-    	}
-    	
-    	function highlightCurrentSection(sec) {
-    		document.getElementById(sec).style.backgroundColor= "#D0D0D0"
-    	}
-    </script>
-  </head>
-
-<body onload="initTocMenu('subToc_03-Types.html');highlightCurrentSection(document.URL.substring(document.URL.lastIndexOf('/')+1));">
-<div id="novaWrapper">		<div id="clearHeader">
-		<div id="logo">
-				<div id="promotion"><a href="/indigo/friends.php">
-	<img src="/home/promotions/indigo/indigo.png" alt="Indigo Is Coming!"/>
-</a>
-
-</div>
-
-		</div>
-		<div id="otherSites">
-			<div id="sites">
-			<ul id="sitesUL">
-				<li><a href='http://marketplace.eclipse.org'><img alt="Eclipse Marketplace" src="http://dev.eclipse.org/custom_icons/marketplace.png"/>&nbsp;<div>Eclipse Marketplace</div></a></li>
-				<li><a href='http://live.eclipse.org'><img alt="Eclipse Live" src="http://dev.eclipse.org/custom_icons/audio-input-microphone-bw.png"/>&nbsp;<div>Eclipse Live</div></a></li>
-
-	    		<li><a href='https://bugs.eclipse.org/bugs/'><img alt="Bugzilla" src="http://dev.eclipse.org/custom_icons/system-search-bw.png"/>&nbsp;<div>Bugzilla</div></a></li>
-	    		<li><a href='http://www.eclipse.org/forums/'><img alt="Forums" src="http://dev.eclipse.org/large_icons/apps/internet-group-chat.png"/>&nbsp;<div>Eclipse Forums</div></a></li>
-	    		<li><a href='http://www.planeteclipse.org/'><img alt="Planet Eclipse" src="http://dev.eclipse.org/large_icons/devices/audio-card.png"/>&nbsp;<div>Planet Eclipse</div></a></li>
-	    		<li><a href='http://wiki.eclipse.org/'><img alt="Eclipse Wiki" src="http://dev.eclipse.org/custom_icons/accessories-text-editor-bw.png"/>&nbsp;<div>Eclipse Wiki</div></a></li>
-	    		<li><a href='http://portal.eclipse.org'><img alt="MyFoundation Portal" src="http://dev.eclipse.org/custom_icons/preferences-system-network-proxy-bw.png"/><div>My Foundation Portal</div></a></li>
-	    	</ul>
-
-	    	</div>
-		</div>		
-	</div>
-
-<div id="header">			
-	<div id="menu">
-		<ul>
-		<li><a href="/Xtext" target="_self">Home</a></li> 
-		<li><a href="/Xtext/download" target="_self">Download</a></li> 
-		<li><a href="index.html" target="_self">Documentation</a></li> 
-		<li><a href="/Xtext/support" target="_self">Support</a></li> 
-		<li><a href="/Xtext/community" target="_self">Community</a></li> 
-		<li><a href="/Xtext/developers" target="_self">Developers</a></li> 
-			</ul>
-
-	</div>
-
-	<div id="search">
-			<form action="http://www.google.com/cse" id="searchbox_017941334893793413703:sqfrdtd112s">
-		 	<input type="hidden" name="cx" value="017941334893793413703:sqfrdtd112s" />
-	  		<input id="searchBox" type="text" name="q" size="25" />
-	  		<input id="searchButton" type="submit" name="sa" value="Search" />
-			</form>
-		<script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=searchbox_017941334893793413703%3Asqfrdtd112s&lang=en"></script>			
-	</div>
-
-</div>
-<div id="novaContent" class="faux">
-	<br style="clear:both;height:1em;">
+<br style="clear:both;height:1em;">
 	<div id="leftcol">
 		<div class="nav-logo">
-			<a href="index.html"><img src="http://wiki.eclipse.org/images/thumb/d/db/Xtext_logo.png/450px-Xtext_logo.png" style="margin-left:30px; width:125px"/></a>
+			<a href="index.php"><img src="logo.png" style="margin-left:10px; width:155px"/></a>
 		</div>
 		<ul id="leftnav">
-		<li class="separator"><div class="separator">Preface</div>
-			</li>
-		<li class="separator"><div class="separator">Lexical Syntax</div>
-			<ul style="display: none;" id="subToc_02-Lexical%20Structure.html">
-			<li id="02-Lexical%20Structure-0.html" ><a href="02-Lexical%20Structure-0.html" >Identifiers</a></li>
-			<li id="02-Lexical%20Structure-1.html" ><a href="02-Lexical%20Structure-1.html" >String Literals</a></li>
-			<li id="02-Lexical%20Structure-2.html" ><a href="02-Lexical%20Structure-2.html" >Integer Literals</a></li>
-			<li id="02-Lexical%20Structure-3.html" ><a href="02-Lexical%20Structure-3.html" >Comments</a></li>
-			<li id="02-Lexical%20Structure-4.html" ><a href="02-Lexical%20Structure-4.html" >White Space</a></li>
-			<li id="02-Lexical%20Structure-5.html" ><a href="02-Lexical%20Structure-5.html" >Reserved Keywords</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Types</div>
-			<ul style="display: none;" id="subToc_03-Types.html">
-			<li id="03-Types-0.html" ><a href="03-Types-0.html" >Arrays</a></li>
-			<li id="03-Types-1.html" ><a href="03-Types-1.html" >Simple Type References</a></li>
-			<li id="03-Types-2.html" ><a href="03-Types-2.html" >Function Types</a></li>
-			<li id="03-Types-3.html" ><a href="03-Types-3.html" >Parameterized Type References</a></li>
-			<li id="03-Types-4.html" ><a href="03-Types-4.html" >Primitives</a></li>
-			<li id="03-Types-5.html" ><a href="03-Types-5.html" >Conformance and Conversion</a></li>
-			</ul>
-			</li>
-		<li class="separator"><div class="separator">Expressions</div>
-			<ul style="display: none;" id="subToc_04-Expressions.html">
-			<li id="04-Expressions-0.html" ><a href="04-Expressions-0.html" >Literals</a></li>
-			<li id="04-Expressions-1.html" ><a href="04-Expressions-1.html" >Type Casts</a></li>
-			<li id="04-Expressions-2.html" ><a href="04-Expressions-2.html" >Infix Operators / Operator Overloading</a></li>
-			<li id="04-Expressions-3.html" ><a href="04-Expressions-3.html" >Feature Calls</a></li>
-			<li id="04-Expressions-4.html" ><a href="04-Expressions-4.html" >Constructor Call</a></li>
-			<li id="04-Expressions-5.html" ><a href="04-Expressions-5.html" >Closures</a></li>
-			<li id="04-Expressions-6.html" ><a href="04-Expressions-6.html" >If Expression</a></li>
-			<li id="04-Expressions-7.html" ><a href="04-Expressions-7.html" >Switch Expression</a></li>
-			<li id="04-Expressions-8.html" ><a href="04-Expressions-8.html" >Variable Declarations</a></li>
-			<li id="04-Expressions-9.html" ><a href="04-Expressions-9.html" >Blocks</a></li>
-			<li id="04-Expressions-10.html" ><a href="04-Expressions-10.html" >For Loop</a></li>
-			<li id="04-Expressions-11.html" ><a href="04-Expressions-11.html" >While Loop</a></li>
-			<li id="04-Expressions-12.html" ><a href="04-Expressions-12.html" >Do-While Loop</a></li>
-			<li id="04-Expressions-13.html" ><a href="04-Expressions-13.html" >Return Expression</a></li>
-			<li id="04-Expressions-14.html" ><a href="04-Expressions-14.html" >Throwing Exceptions</a></li>
-			<li id="04-Expressions-15.html" ><a href="04-Expressions-15.html" >Try, Catch, Finally</a></li>
-			</ul>
-			</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; display:none"  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="01-Introduction.php">Preface</a></div>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="02-Lexical%20Structure.php">Lexical Syntax</a></div>
+		<ul style="display: none;" id="subToc_02-Lexical%20Structure.html">
+		<li id="02-Lexical%20Structure.html#Xbase_Syntax_Identifiers" ><a href="02-Lexical%20Structure.php#Xbase_Syntax_Identifiers" >Identifiers</a></li>
+		<li id="02-Lexical%20Structure.html#Xbase_Syntax_StringLiteral" ><a href="02-Lexical%20Structure.php#Xbase_Syntax_StringLiteral" >String Literals</a></li>
+		<li id="02-Lexical%20Structure.html#Xbase_Syntax_IntegerLiteral" ><a href="02-Lexical%20Structure.php#Xbase_Syntax_IntegerLiteral" >Integer Literals</a></li>
+		<li id="02-Lexical%20Structure.html#Xbase_Syntax_Comments" ><a href="02-Lexical%20Structure.php#Xbase_Syntax_Comments" >Comments</a></li>
+		<li id="02-Lexical%20Structure.html#Xbase_Syntax_Whitespace" ><a href="02-Lexical%20Structure.php#Xbase_Syntax_Whitespace" >White Space</a></li>
+		<li id="02-Lexical%20Structure.html#Xbase_Syntax_Keywords" ><a href="02-Lexical%20Structure.php#Xbase_Syntax_Keywords" >Reserved Keywords</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="03-Types.php">Types</a></div>
+		<ul style="display: none;" id="subToc_03-Types.html">
+		<li id="03-Types.html#Xbase_Types_Arrays" ><a href="03-Types.php#Xbase_Types_Arrays" >Arrays</a></li>
+		<li id="03-Types.html#Xbase_Types_TypeReferences" ><a href="03-Types.php#Xbase_Types_TypeReferences" >Simple Type References</a></li>
+		<li id="03-Types.html#Xbase_Types_FunctionTypes" ><a href="03-Types.php#Xbase_Types_FunctionTypes" >Function Types</a></li>
+		<li id="03-Types.html#Xbase_Types_ParameterizedTypeReference" ><a href="03-Types.php#Xbase_Types_ParameterizedTypeReference" >Parameterized Type References</a></li>
+		<li id="03-Types.html#Xbase_Types_Primitives" ><a href="03-Types.php#Xbase_Types_Primitives" >Primitives</a></li>
+		<li id="03-Types.html#Xbase_Types_ConformanceRules" ><a href="03-Types.php#Xbase_Types_ConformanceRules" >Conformance and Conversion</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+		<a href="04-Expressions.php">Expressions</a></div>
+		<ul style="display: none;" id="subToc_04-Expressions.html">
+		<li id="04-Expressions.html#Xbase_Expressions_Literals" ><a href="04-Expressions.php#Xbase_Expressions_Literals" >Literals</a></li>
+		<li id="04-Expressions.html#Xbase_Expressions_TypeCasts" ><a href="04-Expressions.php#Xbase_Expressions_TypeCasts" >Type Casts</a></li>
+		<li id="04-Expressions.html#Xbase_Expressions_Operators" ><a href="04-Expressions.php#Xbase_Expressions_Operators" >Infix Operators / Operator Overloading</a></li>
+		<li id="04-Expressions.html#Xbase_Expressions_FeatureCalls" ><a href="04-Expressions.php#Xbase_Expressions_FeatureCalls" >Feature Calls</a></li>
+		<li id="04-Expressions.html#Xbase_Expressions_ConstructorCall" ><a href="04-Expressions.php#Xbase_Expressions_ConstructorCall" >Constructor Call</a></li>
+		<li id="04-Expressions.html#Xbase_Expressions_Closures" ><a href="04-Expressions.php#Xbase_Expressions_Closures" >Closures</a></li>
+		<li id="04-Expressions.html#Xbase_Expressions_IfExpression" ><a href="04-Expressions.php#Xbase_Expressions_IfExpression" >If Expression</a></li>
+		<li id="04-Expressions.html#Xbase_Expressions_SwitchExpression" ><a href="04-Expressions.php#Xbase_Expressions_SwitchExpression" >Switch Expression</a></li>
+		<li id="04-Expressions.html#Xbase_Expressions_VariableDeclaration" ><a href="04-Expressions.php#Xbase_Expressions_VariableDeclaration" >Variable Declarations</a></li>
+		<li id="04-Expressions.html#Xbase_Expressions_Blocks" ><a href="04-Expressions.php#Xbase_Expressions_Blocks" >Blocks</a></li>
+		<li id="04-Expressions.html#Xbase_Expressions_ForLoop" ><a href="04-Expressions.php#Xbase_Expressions_ForLoop" >For Loop</a></li>
+		<li id="04-Expressions.html#Xbase_Expressions_WhileExpression" ><a href="04-Expressions.php#Xbase_Expressions_WhileExpression" >While Loop</a></li>
+		<li id="04-Expressions.html#Xbase_Expressions_DoWhileExpression" ><a href="04-Expressions.php#Xbase_Expressions_DoWhileExpression" >Do-While Loop</a></li>
+		<li id="04-Expressions.html#Xbase_Expressions_Return" ><a href="04-Expressions.php#Xbase_Expressions_Return" >Return Expression</a></li>
+		<li id="04-Expressions.html#Xbase_Expressions_Throw" ><a href="04-Expressions.php#Xbase_Expressions_Throw" >Throwing Exceptions</a></li>
+		<li id="04-Expressions.html#Xbase_Expressions_TryCatch" ><a href="04-Expressions.php#Xbase_Expressions_TryCatch" >Try, Catch, Finally</a></li>
+		</ul>
+		</li>
 		</ul>
 	</div>
 	<div id="midcolumn">
-		<div class="buttonbar">
-		<span class="prev_button">
-		<a href="02-Lexical%20Structure-5.html" >Previous</a>
-		</span>
-		<span class="next_button">
-		<a href="03-Types-0.html" >Next</a>
-		</span>
-		</div>
-		<div style="clear:both;margin-bottom:1em"></div>
-		
-<h1>Types</h1>
-		<div class="toc">
-		  <ul>
-		    <li><a href="03-Types-0.html" >Arrays</a></li>
-		    <li><a href="03-Types-1.html" >Simple Type References</a></li>
-		    <li><a href="03-Types-2.html" >Function Types</a></li>
-		    <li><a href="03-Types-3.html" >Parameterized Type References</a></li>
-		    <li><a href="03-Types-4.html" >Primitives</a></li>
-		    <li><a href="03-Types-5.html" >Conformance and Conversion</a></li>
-		  </ul>
-		</div>
-		
-<p>
-Basically all kinds of JVM types are available and referable. 
-</p>
-		<div class="buttonbar">
-		<span class="prev_button">
-		<a href="02-Lexical%20Structure-5.html" >Previous</a>
-		</span>
-		<span class="next_button">
-		<a href="03-Types-0.html" >Next</a>
-		</span>
-		</div>
-		<div style="clear:both;"></div>
+		<a name="Xbase_Types" ></a>
+		<h1>Types</h1>
+				<div class="toc">
+				  <ul>
+				    <li><a href="03-Types.php#Xbase_Types_Arrays" >Arrays</a></li>
+				    <li><a href="03-Types.php#Xbase_Types_TypeReferences" >Simple Type References</a></li>
+				    <li><a href="03-Types.php#Xbase_Types_FunctionTypes" >Function Types</a></li>
+				    <li><a href="03-Types.php#Xbase_Types_ParameterizedTypeReference" >Parameterized Type References</a></li>
+				    <li><a href="03-Types.php#Xbase_Types_Primitives" >Primitives</a></li>
+				    <li><a href="03-Types.php#Xbase_Types_ConformanceRules" >Conformance and Conversion</a></li>
+				  </ul>
+				</div>
+				
+		<p>
+		Basically all kinds of JVM types are available and referable. 
+		</p>
+			<a name="Xbase_Types_Arrays" ></a>
+			<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
+		padding: 5px 0;
+		padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
+		<br style="clear:both" />
+			<h1>Arrays</h1>
+			<p>
+			Arrays cannot be declared explicitly,
+			but they can be passed around and if needed are transparently converted to a List of the compound type.
+			</p>
+			<p>
+			In other words, the return type of a Java method that returns an array of ints (<em>int[]</em>) can be directly assigned to 
+			a variable of type <em>java.util.List<java.lang.Integer></em> (in short <em>List<Integer></em>). Due to type inference
+			you can also defer the conversion. The conversion is bi-directional so any method, that takes an array as argument can be invoked with a <em>List</em>
+			instead.
+			</p>
+			<a name="Xbase_Types_TypeReferences" ></a>
+			<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
+		padding: 5px 0;
+		padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
+		<br style="clear:both" />
+			<h1>Simple Type References</h1>
+				<div class="toc">
+				  <ul>
+				    <li><a href="03-Types.php#Xbase_Types_TypeReferences_2" >Syntax</a></li>
+				    <li><a href="03-Types.php#Xbase_Types_TypeReferences_3" >Examples</a></li>
+				  </ul>
+				</div>
+			<p>
+			A simple type reference only consists of a <em>qualified name</em>. A qualified name is a name made up of identifiers which are separated by a dot 
+			(like in Java).
+			</p>
+			<a name="Xbase_Types_TypeReferences_2" ></a>
+			<h2>Syntax</h2>
+			<p>
+			<div class="literallayout">
+			<div class="incode">
+			<p class="code">
+			QualifiedName:<br/>
+			&nbsp;&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*<br/>
+			;
+			</p>
+			</div>
+			</div>
+			</p>
+			<p>
+			There is no parser rule for a simple type reference, as it is expressed as a parameterized type references without parameters.
+			</p>
+			<a name="Xbase_Types_TypeReferences_3" ></a>
+			<h2>Examples</h2>
+			<p>
+			<ul>
+			  <li><span class="inlinecode">java.lang.String</span></li>
+			  <li><span class="inlinecode">String</span></li>
+			</ul>
+			</p>
+			<a name="Xbase_Types_FunctionTypes" ></a>
+			<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
+		padding: 5px 0;
+		padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
+		<br style="clear:both" />
+			<h1>Function Types</h1>
+				<div class="toc">
+				  <ul>
+				    <li><a href="03-Types.php#Xbase_Types_FunctionTypes_4" >Syntax</a></li>
+				    <li><a href="03-Types.php#Xbase_Types_FunctionTypes_5" >Examples</a></li>
+				  </ul>
+				</div>
+			<p>
+			Xbase introduces <em>closures</em>, and therefore an additional function type signature. On the JVM-Level a closure (or more
+			generally any function object) is just an instance of one of the types in <span class="inlinecode">org.eclipse.xtext.xbase.lib.Function*</span>, 
+			depending on the number of arguments. However, as closures are a very important language feature, 
+			a special sugared syntax for function types has been introduced.  
+			So instead of writing <span class="inlinecode">Function1&lt;String,Boolean&gt;</span> one can write <span class="inlinecode">(String)=&gt;Boolean</span>.
+			</p>
+			<p>
+			Primitives cannot be used in function types.
+			</p>
+			<p>
+			For more information on closures see <a href="04-Expressions.php#Xbase_Expressions_Closures" title="Go to &quot;Closures&quot;" >section Xbase_Expressions_Closures</a>.
+			</p>
+			<a name="Xbase_Types_FunctionTypes_4" ></a>
+			<h2>Syntax</h2>
+			<p>
+			<div class="literallayout">
+			<div class="incode">
+			<p class="code">
+			XFunctionTypeRef:<br/>
+			&nbsp;&nbsp;(<span class="string">&apos;(&apos;</span>JvmTypeReference&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmTypeReference)*<span class="string">&apos;)&apos;</span>)?&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;JvmTypeReference;
+			</p>
+			</div>
+			</div>
+			</p>
+			<a name="Xbase_Types_FunctionTypes_5" ></a>
+			<h2>Examples</h2>
+			<p>
+			<ul>
+			  <li><span class="inlinecode">=&gt;Boolean&nbsp;<span class="comment">//&nbsp;predicate&nbsp;without&nbsp;parameters</span></span></li>
+			  <li><span class="inlinecode">(String)=&gt;Boolean&nbsp;<span class="comment">//&nbsp;One&nbsp;argument&nbsp;predicate</span></span></li>
+			  <li><span class="inlinecode">(Mutable)=&gt;Void&nbsp;<span class="comment">//&nbsp;A&nbsp;method&nbsp;doing&nbsp;side&nbsp;effects&nbsp;only&nbsp;-&nbsp;returns&nbsp;null</span></span></li>
+			  <li><span class="inlinecode">(List&lt;String&gt;,&nbsp;Integer)=&gt;String</span></li>
+			</ul>
+			</p>
+			<a name="Xbase_Types_ParameterizedTypeReference" ></a>
+			<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
+		padding: 5px 0;
+		padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
+		<br style="clear:both" />
+			<h1>Parameterized Type References</h1>
+				<div class="toc">
+				  <ul>
+				    <li><a href="03-Types.php#Xbase_Types_ParameterizedTypeReference_3" >Syntax</a></li>
+				    <li><a href="03-Types.php#Xbase_Types_ParameterizedTypeReference_4" >Examples</a></li>
+				  </ul>
+				</div>
+			<p>
+			The general syntax for type references allows to take any number of type arguments. The semantics as well as the syntax is almost the same as in Java, so please 
+			refer to the third edition of the  <a href="http://java.sun.com/docs/books/jls/third_edition/html/j3TOC.html" >Java Language Specification</a>.
+			</p>
+			<p>
+			The only difference is that in Xbase a type reference can also be a function type. In the following the full syntax of type references is shown, including function types and
+			type arguments.
+			</p>
+			<a name="Xbase_Types_ParameterizedTypeReference_3" ></a>
+			<h2>Syntax</h2>
+			<p>
+			<div class="literallayout">
+			<div class="incode">
+			<p class="code">
+			JvmTypeReference:<br/>
+			&nbsp;&nbsp;JvmParameterizedTypeReference&nbsp;|&nbsp;<br/>
+			&nbsp;&nbsp;XFunctionTypeRef;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+			XFunctionTypeRef:<br/>
+			&nbsp;&nbsp;(<span class="string">&apos;(&apos;</span>&nbsp;JvmTypeReference&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmTypeReference)*&nbsp;<span class="string">&apos;)&apos;</span>)?&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;=&gt;&apos;</span>&nbsp;JvmTypeReference;<br/>
+			<br/>
+			JvmParameterizedTypeReference:<br/>
+			&nbsp;&nbsp;type=QualifiedName&nbsp;(<span class="string">&apos;&lt;&apos;</span>&nbsp;JvmTypeArgument&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;JvmTypeArgument)*&nbsp;<span class="string">&apos;&gt;&apos;</span>)?;<br/>
+			<br/>
+			JvmTypeArgument:<br/>
+			&nbsp;&nbsp;JvmReferenceTypeArgument&nbsp;|&nbsp;<br/>
+			&nbsp;&nbsp;JvmWildcardTypeArgument;<br/>
+			&nbsp;&nbsp;<br/>
+			JvmReferenceTypeArgument&nbsp;:<br/>
+			&nbsp;&nbsp;JvmTypeReference;<br/>
+			<br/>
+			JvmWildcardTypeArgument:<br/>
+			&nbsp;&nbsp;<span class="string">&apos;?&apos;</span>&nbsp;(JvmUpperBound&nbsp;|&nbsp;JvmLowerBound)?;<br/>
+			<br/>
+			JvmLowerBound&nbsp;:<br/>
+			&nbsp;<span class="string">&apos;super&apos;</span>&nbsp;JvmTypeReference;<br/>
+			<br/>
+			JvmUpperBound&nbsp;:&nbsp;<br/>
+			&nbsp;<span class="string">&apos;extends&apos;</span>&nbsp;JvmTypeReference;
+			</p>
+			</div>
+			</div>
+			</p>
+			<a name="Xbase_Types_ParameterizedTypeReference_4" ></a>
+			<h2>Examples</h2>
+			<p>
+			<ul>
+			  <li><span class="inlinecode">String</span></li>
+			  <li><span class="inlinecode">java.lang.String</span></li>
+			  <li><span class="inlinecode">List&lt;?&gt;</span></li>
+			  <li><span class="inlinecode">List&lt;?&nbsp;extends&nbsp;Comparable&lt;?&nbsp;extends&nbsp;FooBar&gt;</span></li>
+			  <li><span class="inlinecode">List&lt;?&nbsp;super&nbsp;MyLowerBound&gt;</span></li>
+			  <li><span class="inlinecode">List&lt;?&nbsp;extends&nbsp;=&gt;Boolean&gt;</span></li>
+			</ul>
+			</p>
+			<a name="Xbase_Types_Primitives" ></a>
+			<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
+		padding: 5px 0;
+		padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
+		<br style="clear:both" />
+			<h1>Primitives</h1>
+			<p>
+			Xbase supports all Java primitives. The conformance rules (e.g. boxing unboxing) are also exactly like defined
+			in the Java Language Specification.
+			</p>
+			<a name="Xbase_Types_ConformanceRules" ></a>
+			<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
+		padding: 5px 0;
+		padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
+		<br style="clear:both" />
+			<h1>Conformance and Conversion</h1>
+				<div class="toc">
+				  <ul>
+				    <li><a href="03-Types.php#Xbase_Types_CommonSuperType" >Common Super Type</a></li>
+				  </ul>
+				</div>
+			<p>
+			Conformance is used in order to find out whether some expression can be used in a certain situation. For instance when assigning a value to a variable, 
+			the type of the right hand expression needs to conform to the type of the variable.
+			</p>
+			<p>
+			As Xbase implements the unchanegd type system of Java it also fully supports the conformance rules defined
+			in <a href="http://java.sun.com/docs/books/jls/third_edition/html/conversions.html" >The Java Language Specification</a>.
+			</p>
+			<a name="Xbase_Types_CommonSuperType" ></a>
+			<h2>Common Super Type</h2>
+			<p>
+			Because of type inference Xbase sometimes needs to compute the most common super type of a given set
+			of types. 
+			</p>
+			<p>
+			For a set <em>[T1,T2,...Tn]</em> of types the common super type is computed by using the linear type inheritance sequence of <em>T1</em> and is iterated until one type
+			conforms to each <em>T2,..,Tn</em>. The linear type inheritance sequence of <em>T1</em> is computed by ordering all types which are part if the type hierarchy of <em>T1</em>
+			by their specificity. A type <em>T1</em> is considered more specific than <em>T2</em> if <em>T1</em> is a subtype of <em>T2</em>. Any types with equal specificity will be sorted by
+			the maximal distance to the originating subtype. <em>CharSequence</em> has distance 2 to <em>StringBuilder</em> because
+			the supertype <em>AbstractStringBuilder</em> implements the interface, too. Even if <em>StringBuilder</em> implements
+			<em>CharSequence</em> directly, the interface gets distance 2 in the ordering because it is not the most general class
+			in the type hierarchy that implements the interface. If the distances for two classes are the same in
+			the hierarchy, their qualified name is used as the compare-key to ensure deterministic results. 
+			</p>
 	</div>
 	<br style="clear:both;height:1em;">
-</div>
-<div id="clearFooter"></div>
-<div id="footer">
-<ul id="footernav">
-	<li><a href="/">Home</a></li>
-
-	<li><a href="/legal/privacy.php">Privacy Policy</a></li>
-	<li><a href="/legal/termsofuse.php">Terms of Use</a></li>
-	<li><a href="/legal/copyright.php">Copyright Agent</a></li>
-	<li><a href="/legal/">Legal</a></li>
-	<li><a href="/org/foundation/contact.php">Contact Us</a></li>
-</ul>
-
-<span id="copyright">Copyright &copy; 2011 The Eclipse Foundation. All Rights Reserved.</span>
-</div>
-</body>
-</html>

@@ -8,6 +8,7 @@
 <link rel="home" href="index.html" title="">
 </head>
 <body>
+<a name="Xtend_Classes_Functions"></a>
 <h1>Classes and Functions</h1>
 <p>
 On a first glance an Xtend file pretty much looks like a Java file. It starts with a package declaration followed by an import section, and after that comes the class definition.
@@ -18,20 +19,20 @@ Here is an example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">package</span>&nbsp;com.acme</br>
-</br>
-<span class="keyword">import</span>&nbsp;java.util.List</br>
-</br>
-<span class="keyword">class</span>&nbsp;MyClass&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;elements.get(0)</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-}</br>
+<span class="keyword">package</span>&nbsp;com.acme<br/>
+<br/>
+<span class="keyword">import</span>&nbsp;java.util.List<br/>
+<br/>
+<span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;first(List&lt;String&gt;&nbsp;elements)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;elements.get(0)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
 </p>
-<a name="0"></a>
+<a name="packageDecl"></a>
 <h2>Package Declaration</h2>
 <p>
 Package declarations are like in Java, with the small difference, that an identifier can be escaped with a  <em>^</em> in case it conflicts with a keyword.
@@ -41,7 +42,7 @@ Also you don&apos;t terminate a package declaration with a semicolon.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">package</span>&nbsp;org.eclipse.xtext</br>
+<span class="keyword">package</span>&nbsp;org.eclipse.xtext<br/>
 </p>
 </div>
 </div>
@@ -53,12 +54,12 @@ Would be interesting to document how the following example translates to java
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">package</span>&nbsp;my.^public.^package</br>
+<span class="keyword">package</span>&nbsp;my.^public.^package<br/>
 </p>
 </div>
 </div>
 </p>
-<a name="1"></a>
+<a name="imports"></a>
 <h2>Imports</h2>
 <p>
 The ordinary imports of type names are equivalent to the imports known from Java. 
@@ -73,9 +74,9 @@ As in Java the package &apos;java.lang.*&apos; is implicitly imported.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">import</span>&nbsp;java.math.BigDecimal</br>
-<span class="keyword">import</span>&nbsp;java.math.*</br>
-<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;java.util.Collections.*</br>
+<span class="keyword">import</span>&nbsp;java.math.BigDecimal<br/>
+<span class="keyword">import</span>&nbsp;java.math.*<br/>
+<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;java.util.Collections.*<br/>
 </p>
 </div>
 </div>
@@ -93,7 +94,7 @@ That is the following import declaration
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*</br>
+<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;<span class="keyword">extension</span>&nbsp;java.util.Collections.*<br/>
 </p>
 </div>
 </div>
@@ -105,16 +106,16 @@ allows to use its methods for example like this :
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">new</span>&nbsp;Foo().singletonList()</br>
+<span class="keyword">new</span>&nbsp;Foo().singletonList()<br/>
 </p>
 </div>
 </div>
 </p>
 <p>
-Although this is supported it is generally much nicer to use <a href="02-Xtend_Classes_Functions.html#3" title="Go to &quot;Fields&quot;">injected extensions</a>, because
+Although this is supported it is generally much nicer to use <a href="02-Xtend_Classes_Functions.html#fields" title="Go to &quot;Fields&quot;">injected extensions</a>, because
 they don&apos;t bind you to the actual implementation.
 </p>
-<a name="2"></a>
+<a name="Xtend_ClassDeclaration"></a>
 <h2>Class Declaration</h2>
 <p>
 The class declaration reuses a lot of Java&apos;s syntax but still is a bit different in some aspects.
@@ -124,27 +125,27 @@ You can change the visibility to <span class="inlinecode"><span class="keyword">
 <p>
 <em>To be implemented: </em>The <span class="inlinecode"><span class="keyword">abstract</span></span> as well as the <span class="inlinecode"><span class="keyword">final</span></span> modifiers are directly translated to Java and have the exact same meaning.
 </p>
-<a name="2-0"></a>
+<a name="Xtend_ClassDeclaration_3"></a>
 <h3>Inheritance</h3>
 <p>
 Also inheritance is directly reused from Java. Single inheritance of Java classes as well as implementing multiple Java interfaces
 is supported.
 </p>
-<a name="2-1"></a>
+<a name="Xtend_ClassDeclaration_4"></a>
 <h3>Generics</h3>
 <p>
 Full Java Generics with the exact same syntax and semantics are supported. That is you can declare type
 parameters just as in Java and provide type arguments to types you refer to (i.e. extend or implement).
 </p>
-<a name="2-2"></a>
+<a name="Xtend_ClassDeclaration_5"></a>
 <h3>Examples</h3>
 <p>
 The most simple class :
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">class</span>&nbsp;MyClass&nbsp;{</br>
-}</br>
+<span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -154,16 +155,16 @@ A more advanced class declaration in Xtend :
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">class</span>&nbsp;ArrayList&lt;E&gt;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractList&lt;E&gt;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;List&lt;E&gt;,&nbsp;RandomAccess,&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cloneable,&nbsp;java.io.Serializable&nbsp;{</br>
-&nbsp;&nbsp;...</br>
-}</br>
+<span class="keyword">class</span>&nbsp;ArrayList&lt;E&gt;&nbsp;<span class="keyword">extends</span>&nbsp;AbstractList&lt;E&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">implements</span>&nbsp;List&lt;E&gt;,&nbsp;RandomAccess,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cloneable,&nbsp;java.io.Serializable&nbsp;{<br/>
+&nbsp;&nbsp;...<br/>
+}<br/>
 </p>
 </div>
 </div>
 </p>
-<a name="3"></a>
+<a name="fields"></a>
 <h2>Fields</h2>
 <p>
 Fields in Xtend are always private and are usually used together with an annotation for a dependency
@@ -173,7 +174,7 @@ injection container. Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Inject&nbsp;MyService&nbsp;myService</br>
+@Inject&nbsp;MyService&nbsp;myService<br/>
 </p>
 </div>
 </div>
@@ -185,8 +186,8 @@ This will translate to the following Java field:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Inject&nbsp;&nbsp;&nbsp;&nbsp;</br>
-<span class="keyword">private</span>&nbsp;MyService&nbsp;myService;</br>
+@Inject&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+<span class="keyword">private</span>&nbsp;MyService&nbsp;myService;<br/>
 </p>
 </div>
 </div>
@@ -195,7 +196,7 @@ This will translate to the following Java field:
 Note that the visibility is always <span class="inlinecode"><span class="keyword">private</span></span>, is you want to provide access to an injected object
 you need to write an accessor function. 
 </p>
-<a name="3-0"></a>
+<a name="fields_6"></a>
 <h3>Extension Methods</h3>
 <p>
 You can make the instance methods provided by the field available as extension
@@ -208,11 +209,11 @@ Imagine you want to add a method &apos;fullName&apos; to a closed type &apos;Ent
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">class</span>&nbsp;PersonExtensions&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;getFullName(Person&nbsp;p)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p.forename&nbsp;+&nbsp;<span class="string">"&nbsp;"</span>&nbsp;+&nbsp;p.name</br>
-&nbsp;&nbsp;&nbsp;}</br>
-}</br>
+<span class="keyword">class</span>&nbsp;PersonExtensions&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;getFullName(Person&nbsp;p)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p.forename&nbsp;+&nbsp;<span class="string">"&nbsp;"</span>&nbsp;+&nbsp;p.name<br/>
+&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -224,7 +225,7 @@ And if you have an instance of this class injected as extension like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@Inject&nbsp;<span class="keyword">extension</span>&nbsp;PersonExtensions&nbsp;personExtensions</br>
+@Inject&nbsp;<span class="keyword">extension</span>&nbsp;PersonExtensions&nbsp;personExtensions<br/>
 </p>
 </div>
 </div>
@@ -237,7 +238,7 @@ So you can write the following
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myPerson.getFullName()</br>
+myPerson.getFullName()<br/>
 </p>
 </div>
 </div>
@@ -249,7 +250,7 @@ which is the a shorthand for
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-personExtensions.getFullName(myPerson)</br>
+personExtensions.getFullName(myPerson)<br/>
 </p>
 </div>
 </div>
@@ -261,22 +262,22 @@ Of course the property shorthand is also available
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-myPerson.fullName</br>
+myPerson.fullName<br/>
 </p>
 </div>
 </div>
 </p>
 <p>
-The nice thing with using dependency injection in combination with the extension modifier as opposed to <a href="02-Xtend_Classes_Functions.html#1" title="Go to &quot;Imports&quot;">static extensions</a> is, that in case there is a bug in the extension or it is implemented inefficiently or you 
+The nice thing with using dependency injection in combination with the extension modifier as opposed to <a href="02-Xtend_Classes_Functions.html#imports" title="Go to &quot;Imports&quot;">static extensions</a> is, that in case there is a bug in the extension or it is implemented inefficiently or you 
 just need a different strategy, you can simply exchange the component with another implementation. You do this without modifying the library nor the client code. 
 You&apos;ll only have to change the binding in your guice module. Also this gives you a general hook for any AOP-like thing you would want to do, 
 or allows you to write against an SPI, where the concrete implementation can be provided by a third party.
 </p>
-<a name="4"></a>
+<a name="Functions"></a>
 <h2>Functions</h2>
 <p>
 Xtend functions are declared within a class and are translated to a corresponding Java method with the exact same signature. 
-(The only exceptions are dispatch methods, which are explained <a href="02-Xtend_Classes_Functions.html#4-5" title="Go to &quot;Dispatch Functions&quot;">here</a>). 
+(The only exceptions are dispatch methods, which are explained <a href="02-Xtend_Classes_Functions.html#polymorphicDispatch" title="Go to &quot;Dispatch Functions&quot;">here</a>). 
 </p>
 <p>
 Let&apos;s start with a simple example
@@ -285,19 +286,19 @@ Let&apos;s start with a simple example
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">def</span>&nbsp;<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,&nbsp;String&nbsp;s2)&nbsp;:</br>
-&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();</br>
+<span class="keyword">def</span>&nbsp;<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,&nbsp;String&nbsp;s2)&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();<br/>
 </p>
 </div>
 </div>
 </p>
-<a name="4-0"></a>
+<a name="Functions_4"></a>
 <h3>Visibility</h3>
 <p>
 So far the visibility of any function is <span class="inlinecode"><span class="keyword">public</span></span>. 
 It is planned to add support for <span class="inlinecode"><span class="keyword">protected</span></span> and <span class="inlinecode"><span class="keyword">private</span></span>.
 </p>
-<a name="4-1"></a>
+<a name="Functions_5"></a>
 <h3>Overriding Functions</h3>
 <p>
 Functions can override a function/method from the super class or implemented interfaces using the keyword <span class="inlinecode"><span class="keyword">override</span></span>.
@@ -309,13 +310,13 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">override</span>&nbsp;<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:</br>
-&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();</br>
+<span class="keyword">override</span>&nbsp;<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();<br/>
 </p>
 </div>
 </div>
 </p>
-<a name="4-2"></a>
+<a name="declaredExceptions"></a>
 <h3>Declared Exceptions</h3>
 <p>
 <em>To be implemented: </em>
@@ -331,24 +332,24 @@ A declared checked exception will not be wrapped automatically.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="comment">/*</br>
-&nbsp;*&nbsp;throws&nbsp;an&nbsp;IOException</br>
-&nbsp;*/</span></br>
-<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;throwIOException()&nbsp;<span class="keyword">throws</span>&nbsp;IOException&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IOException()</br>
-}</br>
-</br>
-<span class="comment">/*</br>
-&nbsp;*&nbsp;throws&nbsp;a&nbsp;WrappedException</br>
-&nbsp;*/</span></br>
-<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;throwWrappedException()&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IOException()</br>
-}</br>
+<span class="comment">/*<br/>
+&nbsp;*&nbsp;throws&nbsp;an&nbsp;IOException<br/>
+&nbsp;*/</span><br/>
+<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;throwIOException()&nbsp;<span class="keyword">throws</span>&nbsp;IOException&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IOException()<br/>
+}<br/>
+<br/>
+<span class="comment">/*<br/>
+&nbsp;*&nbsp;throws&nbsp;a&nbsp;WrappedException<br/>
+&nbsp;*/</span><br/>
+<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;throwWrappedException()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IOException()<br/>
+}<br/>
 </p>
 </div>
 </div>
 </p>
-<a name="4-3"></a>
+<a name="inferredReturnTypes"></a>
 <h3>Inferred Return Types</h3>
 <p>
 If the return type of a function can be inferred it does not need to be declared.
@@ -358,8 +359,8 @@ That is the function
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">def</span>&nbsp;<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:</br>
-&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();</br>
+<span class="keyword">def</span>&nbsp;<span class="keyword">boolean</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();<br/>
 </p>
 </div>
 </div>
@@ -371,8 +372,8 @@ could be declared like this:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">def</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:</br>
-&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();</br>
+<span class="keyword">def</span>&nbsp;equalsIgnoreCase(String&nbsp;s1,String&nbsp;s2)&nbsp;:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;s1.toLowerCase()&nbsp;==&nbsp;s2.toLowerCase();<br/>
 </p>
 </div>
 </div>
@@ -382,12 +383,12 @@ This doesn&apos;t work for abstract function declarations as well as if the
 return type of a function depends on a recursive call of the same function.
 The compiler tells the user when it needs to be specified.
 </p>
-<a name="4-4"></a>
+<a name="Functions_8"></a>
 <h3>Generics</h3>
 <p>
 Full Java Generics with the exact same syntax and semantics as in Java are supported.
 </p>
-<a name="4-5"></a>
+<a name="polymorphicDispatch"></a>
 <h3>Dispatch Functions</h3>
 <p>
 Generally function binding works just like method binding in Java. That is function calls are bound based
@@ -405,8 +406,8 @@ A dispatch function is marked using the keyword <span class="inlinecode"><span c
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Number&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;a&nbsp;number"</span>&nbsp;}</br>
-<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;}</br>
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Number&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;a&nbsp;number"</span>&nbsp;}<br/>
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;}<br/>
 </p>
 </div>
 </div>
@@ -424,24 +425,24 @@ For the two dispatch methods in the example above the following Java code would 
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Integer)x);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Number)x);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Couldn&apos;t&nbsp;handle&nbsp;argument&nbsp;x:"</span>+x);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-}&nbsp;</br>
-</br>
-<span class="keyword">protected</span>&nbsp;String&nbsp;_foo(Integer&nbsp;x)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"It&apos;s&nbsp;an&nbsp;int"</span>;</br>
-}</br>
-</br>
-<span class="keyword">protected</span>&nbsp;String&nbsp;_foo(Number&nbsp;x)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"It&apos;s&nbsp;a&nbsp;number"</span>;</br>
-}</br>
+<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Integer)x);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Number)x);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Couldn&apos;t&nbsp;handle&nbsp;argument&nbsp;x:"</span>+x);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}&nbsp;<br/>
+<br/>
+<span class="keyword">protected</span>&nbsp;String&nbsp;_foo(Integer&nbsp;x)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"It&apos;s&nbsp;an&nbsp;int"</span>;<br/>
+}<br/>
+<br/>
+<span class="keyword">protected</span>&nbsp;String&nbsp;_foo(Number&nbsp;x)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="string">"It&apos;s&nbsp;a&nbsp;number"</span>;<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -458,8 +459,8 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;int"</span>&nbsp;}</br>
-<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x,&nbsp;Number&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number"</span>&nbsp;}</br>
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Number&nbsp;x,&nbsp;Integer&nbsp;y)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;some&nbsp;number&nbsp;and&nbsp;an&nbsp;int"</span>&nbsp;}<br/>
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x,&nbsp;Number&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int&nbsp;and&nbsp;a&nbsp;number"</span>&nbsp;}<br/>
 </p>
 </div>
 </div>
@@ -471,18 +472,18 @@ generates the following Java code :
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x,&nbsp;Number&nbsp;y)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;((x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp;&nbsp;(y&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer))&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Number)x,(Integer)y);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;((x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp;&nbsp;(y&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)){</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Integer)x,(Number)y);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Couldn&apos;t&nbsp;handle&nbsp;argument&nbsp;x:"</span>+x+<span class="string">",&nbsp;argument&nbsp;y:"</span>+y);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-}&nbsp;</br>
+<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x,&nbsp;Number&nbsp;y)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;((x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp;&nbsp;(y&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer))&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Number)x,(Integer)y);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;((x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp;&nbsp;(y&nbsp;<span class="keyword">instanceof</span>&nbsp;Number)){<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Integer)x,(Number)y);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Couldn&apos;t&nbsp;handle&nbsp;argument&nbsp;x:"</span>+x+<span class="string">",&nbsp;argument&nbsp;y:"</span>+y);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -494,9 +495,9 @@ As you can see a null reference is never a match. If you want to fetch null you 
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Number&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;some&nbsp;number"</span>&nbsp;}</br>
-<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;}</br>
-<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Void&nbsp;x)&nbsp;{&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;NullPointerException(<span class="string">"x"</span>)&nbsp;}</br>
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Number&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;some&nbsp;number"</span>&nbsp;}<br/>
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Integer&nbsp;x)&nbsp;{&nbsp;<span class="string">"it&apos;s&nbsp;an&nbsp;int"</span>&nbsp;}<br/>
+<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;foo(Void&nbsp;x)&nbsp;{&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;NullPointerException(<span class="string">"x"</span>)&nbsp;}<br/>
 </p>
 </div>
 </div>
@@ -508,23 +509,23 @@ Which compiles to the following Java code:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Integer)x);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number){</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Number)x);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;==&nbsp;<span class="keyword">null</span>)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Void)<span class="keyword">null</span>);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Couldn&apos;t&nbsp;handle&nbsp;argument&nbsp;x:"</span>+x);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-}&nbsp;</br>
+<span class="keyword">public</span>&nbsp;String&nbsp;foo(Number&nbsp;x)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Integer)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Integer)x);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;<span class="keyword">instanceof</span>&nbsp;Number){<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Number)x);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(x&nbsp;==&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Void)<span class="keyword">null</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Couldn&apos;t&nbsp;handle&nbsp;argument&nbsp;x:"</span>+x);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}&nbsp;<br/>
 </p>
 </div>
 </div>
 </p>
-<a name="4-5-0"></a>
+<a name="polymorphicDispatch_17"></a>
 <h4>Overloading Functions from Super Types</h4>
 <p>
 Any visible Java methods from super types conforming to the compiled form of a dispatch method are also included in the
@@ -535,11 +536,11 @@ For example, consider the following Java class :
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;<span class="keyword">abstract</span>&nbsp;<span class="keyword">class</span>&nbsp;AbstractLabelProvider&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;_label(Object&nbsp;o)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;some&nbsp;generic&nbsp;implementation</br>
-</span>&nbsp;&nbsp;&nbsp;}</br>
-}</br>
+<span class="keyword">public</span>&nbsp;<span class="keyword">abstract</span>&nbsp;<span class="keyword">class</span>&nbsp;AbstractLabelProvider&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;String&nbsp;_label(Object&nbsp;o)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;some&nbsp;generic&nbsp;implementation<br/>
+</span>&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -551,19 +552,19 @@ and the following Xtend class which extends the Java class :
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">class</span>&nbsp;MyLabelProvider&nbsp;<span class="keyword">extends</span>&nbsp;AbstractLabelProvider&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Entity&nbsp;<span class="keyword">this</span>)&nbsp;&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name</br>
-&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Method&nbsp;<span class="keyword">this</span>)&nbsp;{&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name+<span class="string">"("</span>+params.toString(<span class="string">","</span>)+<span class="string">"):"</span>+type</br>
-&nbsp;&nbsp;&nbsp;}</br>
-&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Field&nbsp;<span class="keyword">this</span>)&nbsp;{&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name+type</br>
-&nbsp;&nbsp;&nbsp;}</br>
-}</br>
+<span class="keyword">class</span>&nbsp;MyLabelProvider&nbsp;<span class="keyword">extends</span>&nbsp;AbstractLabelProvider&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Entity&nbsp;<span class="keyword">this</span>)&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name<br/>
+&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Method&nbsp;<span class="keyword">this</span>)&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name+<span class="string">"("</span>+params.toString(<span class="string">","</span>)+<span class="string">"):"</span>+type<br/>
+&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;label(Field&nbsp;<span class="keyword">this</span>)&nbsp;{&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name+type<br/>
+&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -575,25 +576,25 @@ The resulting dispatch method in the generated Java class &apos;MyLabelProvider&
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">public</span>&nbsp;String&nbsp;label(Object&nbsp;o)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(o&nbsp;<span class="keyword">instanceof</span>&nbsp;Field)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_label((Field)o);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(o&nbsp;<span class="keyword">instanceof</span>&nbsp;Method){</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Method)o);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(o&nbsp;<span class="keyword">instanceof</span>&nbsp;Entity){</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Entity)o);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(o&nbsp;<span class="keyword">instanceof</span>&nbsp;Object){</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Object)o);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Couldn&apos;t&nbsp;handle&nbsp;argument&nbsp;o:"</span>+o);</br>
-&nbsp;&nbsp;&nbsp;&nbsp;}</br>
-}</br>
+<span class="keyword">public</span>&nbsp;String&nbsp;label(Object&nbsp;o)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(o&nbsp;<span class="keyword">instanceof</span>&nbsp;Field)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_label((Field)o);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(o&nbsp;<span class="keyword">instanceof</span>&nbsp;Method){<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Method)o);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(o&nbsp;<span class="keyword">instanceof</span>&nbsp;Entity){<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Entity)o);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;<span class="keyword">if</span>&nbsp;(o&nbsp;<span class="keyword">instanceof</span>&nbsp;Object){<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;_foo((Object)o);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="keyword">else</span>&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">throw</span>&nbsp;<span class="keyword">new</span>&nbsp;IllegalArgumentException(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Couldn&apos;t&nbsp;handle&nbsp;argument&nbsp;o:"</span>+o);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>
 </p>
-<a name="4-6"></a>
+<a name="CreateFunctions"></a>
 <h3>Create Functions</h3>
 <p>
 Create functions in Xtend allow to do graph transformation in one pass where it usually needs two passes.
@@ -608,16 +609,16 @@ Consider you want to create a copy of the following list of persons into a :
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-Fred&nbsp;Flintstone&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;marriedTo&nbsp;Willma&nbsp;Flintstone</br>
-&nbsp;&nbsp;&nbsp;&nbsp;friendWith&nbsp;Barny&nbsp;Rubble</br>
-}</br>
-Willma&nbsp;Flintstone&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;marriedTo&nbsp;Fred&nbsp;Flintstone</br>
-}</br>
-Barny&nbsp;Rubble&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;friendWith&nbsp;Fred&nbsp;Flintstone</br>
-}</br>
+Fred&nbsp;Flintstone&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;marriedTo&nbsp;Willma&nbsp;Flintstone<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;friendWith&nbsp;Barny&nbsp;Rubble<br/>
+}<br/>
+Willma&nbsp;Flintstone&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;marriedTo&nbsp;Fred&nbsp;Flintstone<br/>
+}<br/>
+Barny&nbsp;Rubble&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;friendWith&nbsp;Fred&nbsp;Flintstone<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -629,17 +630,17 @@ A function like the following could do the trick :
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">def</span>&nbsp;List&lt;Person&gt;&nbsp;copyPersons(List&lt;Person&gt;&nbsp;persons)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;persons.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)</br>
-}</br>
-</br>
-<span class="keyword">def</span>&nbsp;copy(Person&nbsp;p)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;result&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person()</br>
-&nbsp;&nbsp;&nbsp;&nbsp;result.name&nbsp;=&nbsp;p.name</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;The&nbsp;following&nbsp;is&nbsp;wrong&nbsp;and&nbsp;results&nbsp;in&nbsp;a&nbsp;stack&nbsp;overflow</br>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;result.friendWith&nbsp;=&nbsp;p.friendWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;result.marriedWith&nbsp;=&nbsp;p.marriedWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;</br>
-}</br>
+<span class="keyword">def</span>&nbsp;List&lt;Person&gt;&nbsp;copyPersons(List&lt;Person&gt;&nbsp;persons)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;persons.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)<br/>
+}<br/>
+<br/>
+<span class="keyword">def</span>&nbsp;copy(Person&nbsp;p)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;result&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;Person()<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result.name&nbsp;=&nbsp;p.name<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;The&nbsp;following&nbsp;is&nbsp;wrong&nbsp;and&nbsp;results&nbsp;in&nbsp;a&nbsp;stack&nbsp;overflow<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;result.friendWith&nbsp;=&nbsp;p.friendWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result.marriedWith&nbsp;=&nbsp;p.marriedWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;<br/>
+}<br/>
 </p>
 </div>
 </div>
@@ -656,12 +657,12 @@ object and a second one to initialize it.
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">def</span>&nbsp;<span class="keyword">create</span>&nbsp;result:&nbsp;<span class="keyword">new</span>&nbsp;Person()&nbsp;copy(Person&nbsp;p)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;result.name&nbsp;=&nbsp;p.name</br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;now&nbsp;it&nbsp;works&nbsp;&nbsp;&nbsp;&nbsp;</br>
-</span>&nbsp;&nbsp;&nbsp;&nbsp;result.friendWith&nbsp;=&nbsp;p.friendWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;result.marriedWith&nbsp;=&nbsp;p.marriedWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;</br>
-}&nbsp;&nbsp;&nbsp;&nbsp;</br>
+<span class="keyword">def</span>&nbsp;<span class="keyword">create</span>&nbsp;result:&nbsp;<span class="keyword">new</span>&nbsp;Person()&nbsp;copy(Person&nbsp;p)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result.name&nbsp;=&nbsp;p.name<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;now&nbsp;it&nbsp;works&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;result.friendWith&nbsp;=&nbsp;p.friendWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;result.marriedWith&nbsp;=&nbsp;p.marriedWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;<br/>
+}&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 </p>
 </div>
 </div>
@@ -673,16 +674,16 @@ It is even possible to define the return type of a create function by means of
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-<span class="keyword">def</span>&nbsp;Person&nbsp;<span class="keyword">create</span>&nbsp;r:&nbsp;<span class="keyword">new</span>&nbsp;PersonImpl()&nbsp;copy(Person&nbsp;p)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;r.name&nbsp;=&nbsp;p.name</br>
-&nbsp;&nbsp;&nbsp;&nbsp;r.friendWith&nbsp;=&nbsp;p.friendWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;&nbsp;&nbsp;</br>
-&nbsp;&nbsp;&nbsp;&nbsp;r.marriedWith&nbsp;=&nbsp;p.marriedWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;</br>
-}&nbsp;&nbsp;&nbsp;&nbsp;</br>
+<span class="keyword">def</span>&nbsp;Person&nbsp;<span class="keyword">create</span>&nbsp;r:&nbsp;<span class="keyword">new</span>&nbsp;PersonImpl()&nbsp;copy(Person&nbsp;p)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;r.name&nbsp;=&nbsp;p.name<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;r.friendWith&nbsp;=&nbsp;p.friendWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;r.marriedWith&nbsp;=&nbsp;p.marriedWith.map(&nbsp;p&nbsp;|&nbsp;p.copy&nbsp;)&nbsp;<br/>
+}&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 </p>
 </div>
 </div>
 </p>
-<a name="4-6-0"></a>
+<a name="CreateFunctions_10"></a>
 <h4>How it works</h4>
 <p>
 In addition to the keyword <span class="inlinecode"><span class="keyword">create</span></span> one specifies two expressions.
@@ -698,7 +699,7 @@ Note that the object is probably currently initialized. That is, its internal st
 The lifecycle of the cache is attached to the instance of the declaring Xtend class. That is you can control
 how long the cache lives by means of Guice.
 </p>
-<a name="5"></a>
+<a name="Annotations"></a>
 <h2>Annotations</h2>
 <p>
 Xtend supports Java annotations. The syntax is exactly like defined in the Java Language Specification.
@@ -711,16 +712,16 @@ Example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-@TypeAnnotation(<span class="keyword">typeof</span>(String))</br>
-<span class="keyword">class</span>&nbsp;MyClass&nbsp;{</br>
-&nbsp;&nbsp;@FieldAnnotation(children&nbsp;=&nbsp;{@MyAnno(true),&nbsp;@MyAnnot(false)}</br>
-&nbsp;&nbsp;String&nbsp;myField</br>
-&nbsp;&nbsp;</br>
-&nbsp;&nbsp;@MethodAnnotation(children&nbsp;=&nbsp;{@MyAnno(true),&nbsp;@MyAnnot}</br>
-&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;myMethod(@ParameterAnnotation&nbsp;String&nbsp;param)&nbsp;{</br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//...</br>
-</span>&nbsp;&nbsp;}</br>
-}</br>
+@TypeAnnotation(<span class="keyword">typeof</span>(String))<br/>
+<span class="keyword">class</span>&nbsp;MyClass&nbsp;{<br/>
+&nbsp;&nbsp;@FieldAnnotation(children&nbsp;=&nbsp;{@MyAnno(true),&nbsp;@MyAnnot(false)}<br/>
+&nbsp;&nbsp;String&nbsp;myField<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;@MethodAnnotation(children&nbsp;=&nbsp;{@MyAnno(true),&nbsp;@MyAnnot}<br/>
+&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;String&nbsp;myMethod(@ParameterAnnotation&nbsp;String&nbsp;param)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//...<br/>
+</span>&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 </div>
 </div>

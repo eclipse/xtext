@@ -3,165 +3,165 @@
 	<topic href="contents/01-Introduction.html" label="Preface" >
 	</topic>
 	<topic href="contents/02-Lexical%20Structure.html" label="Lexical Syntax" >
-		<topic href="contents/02-Lexical%20Structure.html#0" label="Identifiers" >
-			<topic href="contents/02-Lexical%20Structure.html#0-0" label="Escaped Identifiers" >
+		<topic href="contents/02-Lexical%20Structure.html#Xbase_Syntax_Identifiers" label="Identifiers" >
+			<topic href="contents/02-Lexical%20Structure.html#Xbase_Syntax_EscapedIdentifiers" label="Escaped Identifiers" >
 			</topic>
-			<topic href="contents/02-Lexical%20Structure.html#0-1" label="Syntax" >
+			<topic href="contents/02-Lexical%20Structure.html#Xbase_Syntax_Identifiers_3" label="Syntax" >
 			</topic>
-			<topic href="contents/02-Lexical%20Structure.html#0-2" label="Examples" >
-			</topic>
-		</topic>
-		<topic href="contents/02-Lexical%20Structure.html#1" label="String Literals" >
-			<topic href="contents/02-Lexical%20Structure.html#1-0" label="Syntax" >
-			</topic>
-			<topic href="contents/02-Lexical%20Structure.html#1-1" label="Examples" >
+			<topic href="contents/02-Lexical%20Structure.html#Xbase_Syntax_Identifiers_4" label="Examples" >
 			</topic>
 		</topic>
-		<topic href="contents/02-Lexical%20Structure.html#2" label="Integer Literals" >
-			<topic href="contents/02-Lexical%20Structure.html#2-0" label="Syntax" >
+		<topic href="contents/02-Lexical%20Structure.html#Xbase_Syntax_StringLiteral" label="String Literals" >
+			<topic href="contents/02-Lexical%20Structure.html#Xbase_Syntax_StringLiteral_4" label="Syntax" >
+			</topic>
+			<topic href="contents/02-Lexical%20Structure.html#Xbase_Syntax_StringLiteral_5" label="Examples" >
 			</topic>
 		</topic>
-		<topic href="contents/02-Lexical%20Structure.html#3" label="Comments" >
-			<topic href="contents/02-Lexical%20Structure.html#3-0" label="Syntax" >
+		<topic href="contents/02-Lexical%20Structure.html#Xbase_Syntax_IntegerLiteral" label="Integer Literals" >
+			<topic href="contents/02-Lexical%20Structure.html#Xbase_Syntax_IntegerLiteral_3" label="Syntax" >
 			</topic>
 		</topic>
-		<topic href="contents/02-Lexical%20Structure.html#4" label="White Space" >
+		<topic href="contents/02-Lexical%20Structure.html#Xbase_Syntax_Comments" label="Comments" >
+			<topic href="contents/02-Lexical%20Structure.html#Xbase_Syntax_Comments_2" label="Syntax" >
+			</topic>
 		</topic>
-		<topic href="contents/02-Lexical%20Structure.html#5" label="Reserved Keywords" >
+		<topic href="contents/02-Lexical%20Structure.html#Xbase_Syntax_Whitespace" label="White Space" >
+		</topic>
+		<topic href="contents/02-Lexical%20Structure.html#Xbase_Syntax_Keywords" label="Reserved Keywords" >
 		</topic>
 	</topic>
 	<topic href="contents/03-Types.html" label="Types" >
-		<topic href="contents/03-Types.html#0" label="Arrays" >
+		<topic href="contents/03-Types.html#Xbase_Types_Arrays" label="Arrays" >
 		</topic>
-		<topic href="contents/03-Types.html#1" label="Simple Type References" >
-			<topic href="contents/03-Types.html#1-0" label="Syntax" >
+		<topic href="contents/03-Types.html#Xbase_Types_TypeReferences" label="Simple Type References" >
+			<topic href="contents/03-Types.html#Xbase_Types_TypeReferences_2" label="Syntax" >
 			</topic>
-			<topic href="contents/03-Types.html#1-1" label="Examples" >
-			</topic>
-		</topic>
-		<topic href="contents/03-Types.html#2" label="Function Types" >
-			<topic href="contents/03-Types.html#2-0" label="Syntax" >
-			</topic>
-			<topic href="contents/03-Types.html#2-1" label="Examples" >
+			<topic href="contents/03-Types.html#Xbase_Types_TypeReferences_3" label="Examples" >
 			</topic>
 		</topic>
-		<topic href="contents/03-Types.html#3" label="Parameterized Type References" >
-			<topic href="contents/03-Types.html#3-0" label="Syntax" >
+		<topic href="contents/03-Types.html#Xbase_Types_FunctionTypes" label="Function Types" >
+			<topic href="contents/03-Types.html#Xbase_Types_FunctionTypes_4" label="Syntax" >
 			</topic>
-			<topic href="contents/03-Types.html#3-1" label="Examples" >
+			<topic href="contents/03-Types.html#Xbase_Types_FunctionTypes_5" label="Examples" >
 			</topic>
 		</topic>
-		<topic href="contents/03-Types.html#4" label="Primitives" >
+		<topic href="contents/03-Types.html#Xbase_Types_ParameterizedTypeReference" label="Parameterized Type References" >
+			<topic href="contents/03-Types.html#Xbase_Types_ParameterizedTypeReference_3" label="Syntax" >
+			</topic>
+			<topic href="contents/03-Types.html#Xbase_Types_ParameterizedTypeReference_4" label="Examples" >
+			</topic>
 		</topic>
-		<topic href="contents/03-Types.html#5" label="Conformance and Conversion" >
-			<topic href="contents/03-Types.html#5-0" label="Common Super Type" >
+		<topic href="contents/03-Types.html#Xbase_Types_Primitives" label="Primitives" >
+		</topic>
+		<topic href="contents/03-Types.html#Xbase_Types_ConformanceRules" label="Conformance and Conversion" >
+			<topic href="contents/03-Types.html#Xbase_Types_CommonSuperType" label="Common Super Type" >
 			</topic>
 		</topic>
 	</topic>
 	<topic href="contents/04-Expressions.html" label="Expressions" >
-		<topic href="contents/04-Expressions.html#0" label="Literals" >
-			<topic href="contents/04-Expressions.html#0-0" label="String Literals" >
+		<topic href="contents/04-Expressions.html#Xbase_Expressions_Literals" label="Literals" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_StringLiterals" label="String Literals" >
 			</topic>
-			<topic href="contents/04-Expressions.html#0-1" label="Integer Literals" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_IntegerLiterals" label="Integer Literals" >
 			</topic>
-			<topic href="contents/04-Expressions.html#0-2" label="Boolean Literals" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_BooleanLiteral" label="Boolean Literals" >
 			</topic>
-			<topic href="contents/04-Expressions.html#0-3" label="Null Literal" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_NullLiteral" label="Null Literal" >
 			</topic>
-			<topic href="contents/04-Expressions.html#0-4" label="Type Literals" >
-			</topic>
-		</topic>
-		<topic href="contents/04-Expressions.html#1" label="Type Casts" >
-			<topic href="contents/04-Expressions.html#1-0" label="Syntax" >
-			</topic>
-			<topic href="contents/04-Expressions.html#1-1" label="Examples" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_TypeLiteral" label="Type Literals" >
 			</topic>
 		</topic>
-		<topic href="contents/04-Expressions.html#2" label="Infix Operators / Operator Overloading" >
-			<topic href="contents/04-Expressions.html#2-0" label="Short-Circuit Boolean Operators" >
+		<topic href="contents/04-Expressions.html#Xbase_Expressions_TypeCasts" label="Type Casts" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_TypeCasts_3" label="Syntax" >
 			</topic>
-			<topic href="contents/04-Expressions.html#2-1" label="Examples" >
-			</topic>
-			<topic href="contents/04-Expressions.html#2-2" label="Assignments" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_TypeCasts_4" label="Examples" >
 			</topic>
 		</topic>
-		<topic href="contents/04-Expressions.html#3" label="Feature Calls" >
-			<topic href="contents/04-Expressions.html#3-0" label="Syntax" >
+		<topic href="contents/04-Expressions.html#Xbase_Expressions_Operators" label="Infix Operators / Operator Overloading" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_Operators_3" label="Short-Circuit Boolean Operators" >
 			</topic>
-			<topic href="contents/04-Expressions.html#3-1" label="Property Access" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_Operators_4" label="Examples" >
 			</topic>
-			<topic href="contents/04-Expressions.html#3-2" label="Implicit 'this' variable" >
-			</topic>
-			<topic href="contents/04-Expressions.html#3-3" label="Null-Safe Feature Call" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_PropertyAssignment" label="Assignments" >
 			</topic>
 		</topic>
-		<topic href="contents/04-Expressions.html#4" label="Constructor Call" >
-			<topic href="contents/04-Expressions.html#4-0" label="Examples" >
+		<topic href="contents/04-Expressions.html#Xbase_Expressions_FeatureCalls" label="Feature Calls" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_FeatureCalls_2" label="Syntax" >
 			</topic>
-			<topic href="contents/04-Expressions.html#4-1" label="Syntax" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_PropertyAccess" label="Property Access" >
 			</topic>
-		</topic>
-		<topic href="contents/04-Expressions.html#5" label="Closures" >
-			<topic href="contents/04-Expressions.html#5-0" label="Syntax" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_ImplicitThis" label="Implicit 'this' variable" >
 			</topic>
-			<topic href="contents/04-Expressions.html#5-1" label="Typing" >
-			</topic>
-			<topic href="contents/04-Expressions.html#5-2" label="Function Mapping" >
-			</topic>
-			<topic href="contents/04-Expressions.html#5-3" label="Examples" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_NullSafeFeatureCalls" label="Null-Safe Feature Call" >
 			</topic>
 		</topic>
-		<topic href="contents/04-Expressions.html#6" label="If Expression" >
-			<topic href="contents/04-Expressions.html#6-0" label="Syntax" >
+		<topic href="contents/04-Expressions.html#Xbase_Expressions_ConstructorCall" label="Constructor Call" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_ConstructorCall_2" label="Examples" >
 			</topic>
-			<topic href="contents/04-Expressions.html#6-1" label="Typing" >
-			</topic>
-			<topic href="contents/04-Expressions.html#6-2" label="Examples" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_ConstructorCall_3" label="Syntax" >
 			</topic>
 		</topic>
-		<topic href="contents/04-Expressions.html#7" label="Switch Expression" >
-			<topic href="contents/04-Expressions.html#7-0" label="Type guards" >
+		<topic href="contents/04-Expressions.html#Xbase_Expressions_Closures" label="Closures" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_Closures_2" label="Syntax" >
 			</topic>
-			<topic href="contents/04-Expressions.html#7-1" label="Typing" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_ClosuresTypeInference" label="Typing" >
 			</topic>
-			<topic href="contents/04-Expressions.html#7-2" label="Examples" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_FunctionMapping" label="Function Mapping" >
 			</topic>
-			<topic href="contents/04-Expressions.html#7-3" label="Syntax" >
-			</topic>
-		</topic>
-		<topic href="contents/04-Expressions.html#8" label="Variable Declarations" >
-			<topic href="contents/04-Expressions.html#8-0" label="Syntax" >
-			</topic>
-			<topic href="contents/04-Expressions.html#8-1" label="Typing" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_Closures_5" label="Examples" >
 			</topic>
 		</topic>
-		<topic href="contents/04-Expressions.html#9" label="Blocks" >
-			<topic href="contents/04-Expressions.html#9-0" label="Examples" >
+		<topic href="contents/04-Expressions.html#Xbase_Expressions_IfExpression" label="If Expression" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_IfExpression_2" label="Syntax" >
 			</topic>
-			<topic href="contents/04-Expressions.html#9-1" label="Syntax" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_IfTypeInference" label="Typing" >
 			</topic>
-		</topic>
-		<topic href="contents/04-Expressions.html#10" label="For Loop" >
-			<topic href="contents/04-Expressions.html#10-0" label="Syntax" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_IfExpression_4" label="Examples" >
 			</topic>
 		</topic>
-		<topic href="contents/04-Expressions.html#11" label="While Loop" >
-			<topic href="contents/04-Expressions.html#11-0" label="Syntax" >
+		<topic href="contents/04-Expressions.html#Xbase_Expressions_SwitchExpression" label="Switch Expression" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_SwitchExpression_7" label="Type guards" >
 			</topic>
-			<topic href="contents/04-Expressions.html#11-1" label="Examples" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_SwitchExpression_8" label="Typing" >
 			</topic>
-		</topic>
-		<topic href="contents/04-Expressions.html#12" label="Do-While Loop" >
-			<topic href="contents/04-Expressions.html#12-0" label="Syntax" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_SwitchExpression_9" label="Examples" >
 			</topic>
-			<topic href="contents/04-Expressions.html#12-1" label="Examples" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_SwitchExpression_10" label="Syntax" >
 			</topic>
 		</topic>
-		<topic href="contents/04-Expressions.html#13" label="Return Expression" >
+		<topic href="contents/04-Expressions.html#Xbase_Expressions_VariableDeclaration" label="Variable Declarations" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_VariableDeclaration_5" label="Syntax" >
+			</topic>
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_VariableDeclaration_6" label="Typing" >
+			</topic>
 		</topic>
-		<topic href="contents/04-Expressions.html#14" label="Throwing Exceptions" >
+		<topic href="contents/04-Expressions.html#Xbase_Expressions_Blocks" label="Blocks" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_Blocks_3" label="Examples" >
+			</topic>
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_Blocks_4" label="Syntax" >
+			</topic>
 		</topic>
-		<topic href="contents/04-Expressions.html#15" label="Try, Catch, Finally" >
+		<topic href="contents/04-Expressions.html#Xbase_Expressions_ForLoop" label="For Loop" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_ForLoop_4" label="Syntax" >
+			</topic>
+		</topic>
+		<topic href="contents/04-Expressions.html#Xbase_Expressions_WhileExpression" label="While Loop" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_WhileExpression_2" label="Syntax" >
+			</topic>
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_WhileExpression_3" label="Examples" >
+			</topic>
+		</topic>
+		<topic href="contents/04-Expressions.html#Xbase_Expressions_DoWhileExpression" label="Do-While Loop" >
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_DoWhileExpression_2" label="Syntax" >
+			</topic>
+			<topic href="contents/04-Expressions.html#Xbase_Expressions_DoWhileExpression_3" label="Examples" >
+			</topic>
+		</topic>
+		<topic href="contents/04-Expressions.html#Xbase_Expressions_Return" label="Return Expression" >
+		</topic>
+		<topic href="contents/04-Expressions.html#Xbase_Expressions_Throw" label="Throwing Exceptions" >
+		</topic>
+		<topic href="contents/04-Expressions.html#Xbase_Expressions_TryCatch" label="Try, Catch, Finally" >
 		</topic>
 	</topic>
 </toc>

@@ -1,7 +1,11 @@
 <br style="clear:both;height:1em;">
 	<div id="leftcol">
 		<div class="nav-logo">
+<<<<<<< HEAD
 			<a href="index.php"><img src="http://wiki.eclipse.org/images/thumb/d/db/Xtext_logo.png/450px-Xtext_logo.png" style="margin-left:30px; width:125px"/></a>
+=======
+			<a href="index.php"><img src="logo.png" style="margin-left:10px; width:155px"/></a>
+>>>>>>> [docs] first shot at xbase integration doc
 		</div>
 		<ul id="leftnav">
 		<li class="separator"><div class="separator">
@@ -24,7 +28,11 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+<<<<<<< HEAD
 		<a href="020-domainmodel-step-by-step.php">15 Minutes Tutorial</a></div>
+=======
+		<a href="020-domainmodel-step-by-step.php">30 Minutes Tutorial</a></div>
+>>>>>>> [docs] first shot at xbase integration doc
 		<ul style="display: none;" id="subToc_020-domainmodel-step-by-step.html">
 		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_4" >Create A New Xtext Project</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_5" >Write Your Own Grammar</a></li>
@@ -35,7 +43,11 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+<<<<<<< HEAD
 		<a href="030-tutorial-next-steps.php">15 Minutes Tutorial - Extended</a></div>
+=======
+		<a href="030-tutorial-next-steps.php">30 Minutes Tutorial - Extended</a></div>
+>>>>>>> [docs] first shot at xbase integration doc
 		<ul style="display: none;" id="subToc_030-tutorial-next-steps.html">
 		<li id="040-first-code-generator.html" ><a href="040-first-code-generator.php" >Writing a Code Generator With Xtend</a></li>
 		<li id="060-unit-tests.html" ><a href="060-unit-tests.php" >Unit Testing the Language</a></li>
@@ -122,6 +134,18 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+<<<<<<< HEAD
+=======
+		<a href="199a-xbase.php">Integrating Xbase Into Your DSLs</a></div>
+		<ul style="display: none;" id="subToc_199a-xbase.html">
+		<li id="199a-xbase.html#xbase_2" ><a href="199a-xbase.php#xbase_2" >Configuring a language for Xbase</a></li>
+		<li id="199a-xbase.html#xbase_3" ><a href="199a-xbase.php#xbase_3" >Integrating Into the Typesystem</a></li>
+		<li id="199a-xbase.html#xbase_4" ><a href="199a-xbase.php#xbase_4" >Writing a Code Generator</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+>>>>>>> [docs] first shot at xbase integration doc
 		<a href="210-emf-integration.php">Integration with EMF and Other EMF Editors</a></div>
 		<ul style="display: none;" id="subToc_210-emf-integration.html">
 		<li id="210-emf-integration.html#model_metamodel" ><a href="210-emf-integration.php#model_metamodel" >Model, Ecore Model, and Ecore</a></li>
@@ -149,6 +173,7 @@
 		</ul>
 	</div>
 	<div id="midcolumn">
+<<<<<<< HEAD
 		<a name="fragmentProvider" ></a>
 		<h1>Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)</h1>
 		<p>
@@ -230,5 +255,92 @@
 		between equally named elements that actually are different, e.g. properties may have the very same qualified
 		name as entities. 
 		</p>
+=======
+			<a name="fragmentProvider" ></a>
+			<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
+		padding: 5px 0;
+		padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
+		<br style="clear:both" />
+			<h1>Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)</h1>
+			<p>
+			Although inter-Xtext linking is not done by URIs, you may want to be able to reference your <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> 
+			from non-Xtext models. In those cases URIs are used, which are made up of a part identifying the resource 
+			and a second part that points to an object. 
+			Each <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> contained in a resource can be identified by a so called <em>fragment</em>.
+			</p>
+			<p>
+			A fragment is a part of an EMF URI and needs to be unique per resource.
+			</p>
+			<p>
+			The generic resource shipped with EMF provides a generic path-like computation of fragments. These 
+			fragment paths are unique by default and do not have to be serialized. On the other hand, they can be 
+			easily broken by reordering the elements in a resource. 
+			</p>
+			<p>
+			With an XMI or other binary-like serialization it is also common and possible to use UUIDs. UUIDs 
+			are usually binary and technical, so you don't want to deal with them in human readable representations.
+			</p>
+			<p>
+			However with a textual concrete syntax we want to be able to compute fragments out of the human readable 
+			information. We don't want to force people to use UUIDs (i.e. synthetic identifiers) or fragile, relative, generic 
+			paths in order to refer to <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObjects</abbr></a>.
+			</p>
+			<p>
+			Therefore one can contribute an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IFragmentProvider.html" title="org.eclipse.xtext.resource.IFragmentProvider">IFragmentProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java" title="View Source Code" >(src)</a> 
+			per language. It has two methods: <span class="inlinecode">getFragment(EObject,&nbsp;Fallback)</span> to calculate the fragment of an 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EObject.html" title="org.eclipse.emf.ecore.EObject">EObject</abbr></a> and <span class="inlinecode">getEObject(Resource,&nbsp;String,&nbsp;Fallback)</span> to go the opposite direction. 
+			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IFragmentProvider.Fallback.html" title="org.eclipse.xtext.resource.IFragmentProvider.Fallback">IFragmentProvider.Fallback</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IFragmentProvider.java" title="View Source Code" >(src)</a> interface allows to delegate to the default strategy - 
+			which usually uses the fragment paths described above. 
+			</p>
+			<p>
+			The following snippet shows how to use qualified names as fragments:   
+			</p>
+			<p>
+			<div class="literallayout">
+			<div class="incode">
+			<p class="code">
+			<span class="keyword">public</span>&nbsp;QualifiedNameFragmentProvider&nbsp;<span class="keyword">implements</span>&nbsp;IFragmentProvider&nbsp;{<br/>
+			<br/>
+			&nbsp;&nbsp;@Inject<br/>
+			&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;IQualifiedNameProvider&nbsp;qualifiedNameProvider;<br/>
+			<br/>
+			&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getFragment(EObject&nbsp;obj,&nbsp;Fallback&nbsp;fallback)&nbsp;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;qName&nbsp;=&nbsp;qualifiedNameProvider.getQualifiedName(obj);<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;qName&nbsp;!=&nbsp;<span class="keyword">null</span>&nbsp;?&nbsp;qName&nbsp;:&nbsp;fallback.getFragment(obj);<br/>
+			&nbsp;&nbsp;}<br/>
+			<br/>
+			&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;EObject&nbsp;getEObject(Resource&nbsp;resource,&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;fragment,&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fallback&nbsp;fallback)&nbsp;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(fragment&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterator&lt;EObject&gt;&nbsp;i&nbsp;=&nbsp;EcoreUtil.getAllContents(resource,&nbsp;<span class="keyword">false</span>);<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>(i.hasNext())&nbsp;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EObject&nbsp;eObject&nbsp;=&nbsp;i.next();<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;candidateFragment&nbsp;=&nbsp;(eObject.eIsProxy())&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?&nbsp;((InternalEObject)&nbsp;eObject).eProxyURI().fragment()<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;getFragment(eObject,&nbsp;fallback);<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(fragment.equals(candidateFragment))&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;eObject;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;fallback.getEObject(fragment);<br/>
+			&nbsp;&nbsp;}<br/>
+			}
+			</p>
+			</div>
+			</div>
+			</p>
+			<p>
+			For performance reasons it is usually a good idea to navigate the resource based on the fragment 
+			information instead of traversing it completely. If you know that your fragment is computed from 
+			qualified names and your model contains something like <em>NamedElements</em>, you should split your fragment
+			into those parts and query the root elements, the children of the best match and so on.
+			</p>
+			<p>
+			Furthermore it's a good idea to have some kind of conflict resolution strategy to be able to distinguish
+			between equally named elements that actually are different, e.g. properties may have the very same qualified
+			name as entities. 
+			</p>
+>>>>>>> [docs] first shot at xbase integration doc
 	</div>
 	<br style="clear:both;height:1em;">

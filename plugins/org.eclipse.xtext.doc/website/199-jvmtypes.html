@@ -1,7 +1,11 @@
 <br style="clear:both;height:1em;">
 	<div id="leftcol">
 		<div class="nav-logo">
+<<<<<<< HEAD
 			<a href="index.php"><img src="http://wiki.eclipse.org/images/thumb/d/db/Xtext_logo.png/450px-Xtext_logo.png" style="margin-left:30px; width:125px"/></a>
+=======
+			<a href="index.php"><img src="logo.png" style="margin-left:10px; width:155px"/></a>
+>>>>>>> [docs] first shot at xbase integration doc
 		</div>
 		<ul id="leftnav">
 		<li class="separator"><div class="separator">
@@ -24,7 +28,11 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+<<<<<<< HEAD
 		<a href="020-domainmodel-step-by-step.php">15 Minutes Tutorial</a></div>
+=======
+		<a href="020-domainmodel-step-by-step.php">30 Minutes Tutorial</a></div>
+>>>>>>> [docs] first shot at xbase integration doc
 		<ul style="display: none;" id="subToc_020-domainmodel-step-by-step.html">
 		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_4" >Create A New Xtext Project</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_5" >Write Your Own Grammar</a></li>
@@ -35,7 +43,11 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+<<<<<<< HEAD
 		<a href="030-tutorial-next-steps.php">15 Minutes Tutorial - Extended</a></div>
+=======
+		<a href="030-tutorial-next-steps.php">30 Minutes Tutorial - Extended</a></div>
+>>>>>>> [docs] first shot at xbase integration doc
 		<ul style="display: none;" id="subToc_030-tutorial-next-steps.html">
 		<li id="040-first-code-generator.html" ><a href="040-first-code-generator.php" >Writing a Code Generator With Xtend</a></li>
 		<li id="060-unit-tests.html" ><a href="060-unit-tests.php" >Unit Testing the Language</a></li>
@@ -122,6 +134,18 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+<<<<<<< HEAD
+=======
+		<a href="199a-xbase.php">Integrating Xbase Into Your DSLs</a></div>
+		<ul style="display: none;" id="subToc_199a-xbase.html">
+		<li id="199a-xbase.html#xbase_2" ><a href="199a-xbase.php#xbase_2" >Configuring a language for Xbase</a></li>
+		<li id="199a-xbase.html#xbase_3" ><a href="199a-xbase.php#xbase_3" >Integrating Into the Typesystem</a></li>
+		<li id="199a-xbase.html#xbase_4" ><a href="199a-xbase.php#xbase_4" >Writing a Code Generator</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+>>>>>>> [docs] first shot at xbase integration doc
 		<a href="210-emf-integration.php">Integration with EMF and Other EMF Editors</a></div>
 		<ul style="display: none;" id="subToc_210-emf-integration.html">
 		<li id="210-emf-integration.html#model_metamodel" ><a href="210-emf-integration.php#model_metamodel" >Model, Ecore Model, and Ecore</a></li>
@@ -175,6 +199,7 @@
 		behind the scenes via different
 		implementations that are bound to specific interfaces by means of Google Guice. 
 		</p>
+<<<<<<< HEAD
 		<a name="jvmtypes_3" ></a>
 		<h1>How to Use Java Types</h1>
 		<p>
@@ -288,5 +313,128 @@
 		</div>
 		
 		</p>
+=======
+			<a name="jvmtypes_3" ></a>
+			<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
+		padding: 5px 0;
+		padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
+		<br style="clear:both" />
+			<h1>How to Use Java Types</h1>
+			<p>
+			Using the JVM types model is very simple. First of all, the grammar has to import the <em>JavaVMTypes</em> Ecore model. 
+			Thanks to content assist this is easy to spot in the list of proposals.  
+			</p>
+			<p>
+			<div class="literallayout">
+			<div class="incode">
+			<p class="code">
+			<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/common/JavaVMTypes"</span>&nbsp;<span class="keyword">as</span>&nbsp;types
+			</p>
+			</div>
+			</div>
+			</p>
+			<p>
+			The next step is to actually refer to an imported concept. Let's define a mapping to available
+			Java types for the simple data types in the self defined language. By means of cross-references this works
+			as one got already used to when dealing with references in Xtext.
+			</p>
+			<p>
+			<div class="literallayout">
+			<div class="incode">
+			<p class="code">
+			Type:<br/>
+			&nbsp;&nbsp;<span class="string">&apos;type&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;mapped-to&apos;</span>&nbsp;javaType=[types::JvmType&nbsp;|&nbsp;FQN];
+			</p>
+			</div>
+			</div>
+			</p>
+			<p>
+			Last but not least, the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/types/TypesGeneratorFragment.html" title="org.eclipse.xtext.generator.types.TypesGeneratorFragment">TypesGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/types/TypesGeneratorFragment.java" title="View Source Code" >(src)</a> 
+			has to be added to the workflow. The safest way is 
+			to add it after the actually used scoping fragments as a specialized version of the 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IGlobalScopeProvider.html" title="org.eclipse.xtext.scoping.IGlobalScopeProvider">IGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java" title="View Source Code" >(src)</a> will be configured. Don't forget to refer to 
+			the <em>genmodel</em> of the Java VM types. 
+			</p>
+			<p>
+			<div class="literallayout">
+			<div class="incode">
+			<p class="code">
+			fragment&nbsp;=&nbsp;ecore.EcoreGeneratorFragment&nbsp;{<br/>
+			&nbsp;&nbsp;referencedGenModels=<span class="string">"classpath:/model/JavaVMTypes.genmodel"</span><br/>
+			}<br/>
+			<br/>
+			fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}
+			</p>
+			</div>
+			</div>
+			</p>
+			<p>
+			After regenerating your language, it will be allowed to define a type <span class="inlinecode">Date</span> that maps to the <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Date.html" title="java.util.Date">Date</abbr></a>
+			like this:
+			</p>
+			<p>
+			<div class="literallayout">
+			<div class="incode">
+			<p class="code">
+			<span class="keyword">type</span>&nbsp;Date&nbsp;<span class="keyword">mapped-to</span>&nbsp;java.util.Date
+			</p>
+			</div>
+			</div>
+			</p>
+			<p>
+			These two steps will provide a nice integration into the Eclipse JDT. There is <em>Find References</em> on Java methods, 
+			fields and types that will reveal results in your language files. <em>Go To Declaration</em> works as expected
+			and content assist will propose the list of available types. 
+			</p>
+			<a name="jvmtypes_4" ></a>
+			<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
+		padding: 5px 0;
+		padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
+		<br style="clear:both" />
+			<h1>Customization Points</h1>
+			<p>
+			There are several customization hooks in the runtime layer and on the editor side as well:
+			</p>
+			<p>
+			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/xtext/AbstractTypeScopeProvider.html" title="org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider">AbstractTypeScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/xtext/AbstractTypeScopeProvider.java" title="View Source Code" >(src)</a> 
+			can be used to create scopes for members with respect to
+			the override semantics of the Java language. Of course it is possible to use this implementation to
+			create scopes for types as well.
+			</p>
+			<p>
+			As the Java VM types expose a lot of information about visibility, parameter- and return types, generics,
+			available annotations or enumeration literals, it is very easy to define constraints for the referred types.
+			</p>
+			<p>
+			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.html" title="org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider">ITypesProposalProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.java" title="View Source Code" >(src)</a> can be
+			used to provide optimized proposals based on various filter criteria. 
+			The most common selector can be used directly via <span class="inlinecode">createSubTypeProposals(..)</span>. The implementation is optimized
+			and uses the JDT Index directly to minimize the effort for object instantiation. The class 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/xtext/ui/TypeMatchFilters.html" title="org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters">TypeMatchFilters</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/TypeMatchFilters.java" title="View Source Code" >(src)</a>
+			provides a comprehensive set of reusable filters that can be easily combined to reduce the list of proposals
+			to a smaller number of valid entries.
+			</p>
+			<p>
+			<div class="literallayout">
+			<div class="incode">
+			<p class="code">
+			<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters;&nbsp;<br/>
+			<br/>
+			&nbsp;&nbsp;<span class="comment">//&nbsp;..<br/>
+			</span>&nbsp;&nbsp;proposalProvider.createSubTypeProposals(<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;superType,&nbsp;factory,&nbsp;context,<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;MyDslPackage.Literals.TYPE__MAPPED_TO,<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.and(<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.not(<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.canInstantiate()<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.isPublic()<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;),&nbsp;acceptor);
+			</p>
+			</div>
+			</div>
+			
+			</p>
+>>>>>>> [docs] first shot at xbase integration doc
 	</div>
 	<br style="clear:both;height:1em;">

@@ -1,7 +1,11 @@
 <br style="clear:both;height:1em;">
 	<div id="leftcol">
 		<div class="nav-logo">
+<<<<<<< HEAD
 			<a href="index.php"><img src="http://wiki.eclipse.org/images/thumb/d/db/Xtext_logo.png/450px-Xtext_logo.png" style="margin-left:30px; width:125px"/></a>
+=======
+			<a href="index.php"><img src="logo.png" style="margin-left:10px; width:155px"/></a>
+>>>>>>> [docs] first shot at xbase integration doc
 		</div>
 		<ul id="leftnav">
 		<li class="separator"><div class="separator">
@@ -24,7 +28,11 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+<<<<<<< HEAD
 		<a href="020-domainmodel-step-by-step.php">15 Minutes Tutorial</a></div>
+=======
+		<a href="020-domainmodel-step-by-step.php">30 Minutes Tutorial</a></div>
+>>>>>>> [docs] first shot at xbase integration doc
 		<ul style="display: none;" id="subToc_020-domainmodel-step-by-step.html">
 		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_4" >Create A New Xtext Project</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_5" >Write Your Own Grammar</a></li>
@@ -35,7 +43,11 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+<<<<<<< HEAD
 		<a href="030-tutorial-next-steps.php">15 Minutes Tutorial - Extended</a></div>
+=======
+		<a href="030-tutorial-next-steps.php">30 Minutes Tutorial - Extended</a></div>
+>>>>>>> [docs] first shot at xbase integration doc
 		<ul style="display: none;" id="subToc_030-tutorial-next-steps.html">
 		<li id="040-first-code-generator.html" ><a href="040-first-code-generator.php" >Writing a Code Generator With Xtend</a></li>
 		<li id="060-unit-tests.html" ><a href="060-unit-tests.php" >Unit Testing the Language</a></li>
@@ -122,6 +134,18 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+<<<<<<< HEAD
+=======
+		<a href="199a-xbase.php">Integrating Xbase Into Your DSLs</a></div>
+		<ul style="display: none;" id="subToc_199a-xbase.html">
+		<li id="199a-xbase.html#xbase_2" ><a href="199a-xbase.php#xbase_2" >Configuring a language for Xbase</a></li>
+		<li id="199a-xbase.html#xbase_3" ><a href="199a-xbase.php#xbase_3" >Integrating Into the Typesystem</a></li>
+		<li id="199a-xbase.html#xbase_4" ><a href="199a-xbase.php#xbase_4" >Writing a Code Generator</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+>>>>>>> [docs] first shot at xbase integration doc
 		<a href="210-emf-integration.php">Integration with EMF and Other EMF Editors</a></div>
 		<ul style="display: none;" id="subToc_210-emf-integration.html">
 		<li id="210-emf-integration.html#model_metamodel" ><a href="210-emf-integration.php#model_metamodel" >Model, Ecore Model, and Ecore</a></li>
@@ -149,6 +173,7 @@
 		</ul>
 	</div>
 	<div id="midcolumn">
+<<<<<<< HEAD
 		<a name="TutorialValidation" ></a>
 		<h1>Creating Custom Validation Rules</h1>
 		<p>
@@ -213,5 +238,75 @@
 		The sibling features, that are defined in the same entity, are automatically validated by the Xtext framework.
 		Therefore, they do not have to be checked twice.
 		</p>
+=======
+			<a name="TutorialValidation" ></a>
+			<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
+		padding: 5px 0;
+		padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
+		<br style="clear:both" />
+			<h1>Creating Custom Validation Rules</h1>
+			<p>
+			One of the main advantages of DSLs is the possibility to statically validate domain specific constraints.
+			This can be achieved by means of static analysis. Because this is a common use case,
+			Xtext provides a dedicated hook for this kind of validation rules. In this lesson, we want to ensure
+			that the name of an <em>Entity</em> starts with an upper-case letter and that all features have distinct names
+			across the inheritance relationship of an <em>Entity</em>.
+			</p>
+			<p>
+			Try to locate the class <em>DomainmodelJavaValidator</em> in the package <em>org.eclipse.xtext.example.validation</em>.
+			It can be found in the language plug-in. Defining the constraint itself is only a matter of a few lines
+			of code:
+			</p>
+			<p>
+			<div class="literallayout">
+			<div class="incode">
+			<p class="code">
+			@Check<br/>
+			<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;checkNameStartsWithCapital(Entity&nbsp;entity)&nbsp;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(!Character.isUpperCase(entity.getName().charAt(0)))&nbsp;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;warning(<span class="string">"Name&nbsp;should&nbsp;start&nbsp;with&nbsp;a&nbsp;capital"</span>,&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.Literals.TYPE__NAME);<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+			}
+			</p>
+			</div>
+			</div>
+			</p>
+			<p>
+			Any name for the method will do. The important thing is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/validation/Check.html" title="org.eclipse.xtext.validation.Check">@Check</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/validation/Check.java" title="View Source Code" >(src)</a>
+			annotation that advises the framework to use the method as a validation rule. If the name starts with
+			a lower case letter, a warning will be attached to the name of the <em>Entity</em>.
+			</p>
+			<p>
+			The second validation rule is straight-forward, too. We traverse the inheritance hierarchy of the <em>Entity</em>
+			and look for features with equal names.
+			</p>
+			<p>
+			<div class="literallayout">
+			<div class="incode">
+			<p class="code">
+			@Check<br/>
+			<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;checkFeatureNameIsUnique(Feature&nbsp;f)&nbsp;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;Entity&nbsp;superEntity&nbsp;=&nbsp;((Entity)&nbsp;f.eContainer()).getSuperType();<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span>(superEntity&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(Feature&nbsp;other:&nbsp;superEntity.getFeatures())&nbsp;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(f.getName().equals(other.getName()))&nbsp;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(<span class="string">"Feature&nbsp;names&nbsp;have&nbsp;to&nbsp;be&nbsp;unique"</span>,<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyDslPackage.Literals.FEATURE__NAME);<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;superEntity&nbsp;=&nbsp;superEntity.getSuperType();<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+			}
+			</p>
+			</div>
+			</div>
+			</p>
+			<p>
+			The sibling features, that are defined in the same entity, are automatically validated by the Xtext framework.
+			Therefore, they do not have to be checked twice.
+			</p>
+>>>>>>> [docs] first shot at xbase integration doc
 	</div>
 	<br style="clear:both;height:1em;">

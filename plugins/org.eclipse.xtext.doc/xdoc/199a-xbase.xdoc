@@ -1,0 +1,171 @@
+chapter:xbase[Integrating Xbase Into Your DSLs]
+
+Xbase is an expression language that can be embedded in Xtext languages. Its syntax is close to Java,
+but it additionally offers type inferrence, closures, a rich switch statement and a lot more. For details
+on the Xbase langugae itself, please consult the Xbase documentation and the Xbase tutorial. Xbase ships 
+with an interpreter and a compiler to Java code. Thus it is easy to add executable behavior to your DSLs.
+As Xbase integrates tightly with Java, there is usually no additional code needed to run your DSL as
+part of a Java application. 
+
+section[Configuring a language for Xbase]
+
+The following section describes how to enable Xbase expressions and references to Java types in your own DSL.
+We will refer to the domainmodel example all through this section.
+
+section2[Setup Plug-in Dependencies]
+
+Your language plug-ins have to have a dependency to the appropriate Xbase plug-in. Add e[org.eclipse.xtext.xbase] 
+to your runtime plug-in and e[org.eclipse.xbase.ui] to the UI plug-in. Into the bargain,
+Xbase uses the common types model to define its types, so it is likely you need dependencies to 
+e[org.eclipse.xtext.common.types] and e[org.eclipse.xtext.common.types.ui]. To use Xtend-based components,
+you will furthermore need e[org.eclipse.xtext.xtend2.lib] on the classpath of the runtime plug-in. 
+
+section2[Making Your Grammar Refer To Xbase]
+
+To leverage Xbase, your DSL's grammar must inherit from the Xbase grammar. You have to change the e[with]
+clause of our grammar to 
+
+code[Xtext][
+grammar <myLangugaeName> with org.eclipse.xtext.xbase.Xbase
+]
+
+The Xbase grammar inherits from e[org.eclipse.xtext.xbase.Xtype], a language that defines a concrete 
+syntax for type references. Xtype inherits from the default e[org.eclipse.xtext.common.Terminals] 
+language. So if your language is not based on the common terminals, you might have to have to insert an
+additional language to the hierarchy.
+
+If you want to refer to codeRef[org.eclipse.emf.ecore.EClassifier][EClassifiers] from the Xbase model, you need
+to import it first. The same holds for the common types model:
+
+code[Xtext][
+import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
+import "http://www.eclipse.org/xtext/common/JavaVMTypes" as jvmTypes
+]
+
+Now identify the location in your grammar, where you want references to Java types and Xbase expression to appear
+and call the appropriate rules of the super grammar. Have a look at the domainmodel example: An e[Entity]
+can refer to a Java e[superType], so we call the rule e[JvmTypeReference] in the declaration:
+
+code[Xtext][
+Entity:
+	'entity' name=ValidID ('extends' superType=JvmTypeReference)? '{'
+	...
+]  
+
+An e[Operation]'s parameters are e[JvmFormalParamters], its return type refers to a Java type and its e[body] is
+an e[XBlockExpression], so its parser rule reads as
+
+code[Xtext][
+Operation:
+	visibility=Visibility? 'op' name=ValidID '(' 
+	(params+=JvmFormalParameter (',' params+=JvmFormalParameter)*)? ')' 
+	':' type=JvmTypeReference 
+		body=XBlockExpression;
+]
+
+If you're unsure which entry point to choose for your expressions, consider the root e[XExpression].
+e[JvmTypeReference] offers the full Java syntax to refer to generic types.  
+
+
+section2[Generating your language with Xbase support]
+
+You have to register the EMF genmodels of Xbase and common types to the codeRef[org.eclipse.emf.mwe.utils.StandaloneSetup]
+of your MWE2 workflow
+
+code[MWE2][
+bean = StandaloneSetup {
+	...
+	registerGenModelFile = 
+		"platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+	registerGenModelFile = 
+		"platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+]
+
+Also make sure you have the codeRef[org.eclipse.xtext.generator.types.TypesGeneratorFragment] and the
+codeRef[org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment] in place
+
+code[MWE2][
+	fragment = types.TypesGeneratorFragment {}
+	fragment = xbase.XbaseGeneratorFragment {}
+]
+
+Several MWE generator fragments have additional properties for the ref:jvmModelInferrence[JVM model inferrence]:
+table[
+	tr[
+		td[codeRef[org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment]]
+		td[e[useInferredJvmModel]]
+		td[Generate a codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer] stub and hooks for an inferred JVM model]
+	]
+	tr[
+		td[codeRef[org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment]]
+		td[e[generateXtendInferrer]]
+		td[Generate the codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer] stub in Xtend instead of Java]
+	]
+	tr[
+		td[codeRef[org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment]]
+		td[e[useJdtRefactoring]]
+		td[Always trigger JDT refactoring and register element rename refactoring as a participant thereof]
+	]
+]
+
+To avoid running out of memory when regenerating, you increase the maximum heap size and the permanent generation
+space in the run configuration of your workflow. We recommend at least 
+
+code[-Xmx512m -XX:MaxPermSize=128m] 
+
+in the e[VM Arguments] section of the e[Arguments] tab. If you are experiencing ambiguity warnings from Antlr,
+the ref:antlr_errors[usual measurements].
+
+section[Integrating Into the Typesystem]
+
+section2:jvmModelInferrence[Inferring a JVM Model]
+
+In many cases, you will want your DSLs concepts to be usable as Java elements. E.g. an e[Entity] will
+become a Java class and should be usable as such. In the domainmodel example, you can write  
+
+code[DomainExample][
+entity Person {
+	friends: List<Person>
+...
+]
+
+i.e. use entities instead of Java types or even mix Java types as codeRef[java.util.List] with entities such as e[Person].
+One way to achieve this is to let your concepts inherit from a corresponding JVM type, e.g. let e[Entity]
+inherit from e[JvmGenericType]. This usually results in a lot of accidentally inherited properties in
+your domain model. In Xbase there is an alternative: You can define how to derive a JVM model from your
+model and link against this e[inferred JVM model]. 
+
+The main component for the inferred JVM model is the codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer].
+It has a single method that gets a model element passed in and returns a list of 
+codeRef[org.eclipse.xtext.common.types.JvmGenericType][JvmGenericTypes]. As Xbase cannot guess how you
+would like to map your concepts to JVM elements, you have to implement this component yourself. This
+usually boils down to use an injected codeRef[org.eclipse.xtext.common.types.TypesFactory] to create
+a hierarchy of JVM elements, initialize that with values from the input model, and eventually use an injected
+codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator] to associate the model elements with the
+JVM elements. As this kind of transformation can be elegantly implemented using polymorphic dispatch
+functions and extension methods, it is a good choice to write the 
+codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer] in Xtend.
+
+In the domain model example, we call a recursive polymorphic dispatch function e[transform] to traverse
+the containment hierarchy of the source model and generate JVM elements on the way. We transform each
+e[Entity] to a codeRef[org.eclipse.xtext.common.types.JvmGenericType] that holds a 
+codeRef[org.eclipse.xtext.common.types.JvmOperation] for each e[Operation] and a 
+codeRef[org.eclipse.xtext.common.types.JvmField] plus access methods for each e[Property]. Whenever
+we have to copy a subtree, e.g. for setting the supertype of the codeRef[org.eclipse.xtext.common.types.JvmGenericType],
+we use codeRef[org.eclipse.xtext.EcoreUtil2] .e[cloneWithProxies()] to avoid eager resolution of referenced
+types. 
+
+The framework will automatically switch between the JVM element or the DSL element when needed, e.g. when 
+following hyperlinks. The component allowing to navigate between the source model and the JVM model is
+called codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations].  
+
+section2[Populating Scopes]
+
+Xbase expressions are usually referring to a context. 
+
+
+section[Writing a Code Generator]
+
+
+ 
+

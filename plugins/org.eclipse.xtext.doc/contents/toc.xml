@@ -356,6 +356,24 @@
 		<topic href="contents/199-jvmtypes.html#jvmtypes_4" label="Customization Points" >
 		</topic>
 	</topic>
+	<topic href="contents/199a-xbase.html" label="Integrating Xbase Into Your DSLs" >
+		<topic href="contents/199a-xbase.html#xbase_2" label="Configuring a language for Xbase" >
+			<topic href="contents/199a-xbase.html#xbase_2_2" label="Setup Plug-in Dependencies" >
+			</topic>
+			<topic href="contents/199a-xbase.html#xbase_2_3" label="Making Your Grammar Refer To Xbase" >
+			</topic>
+			<topic href="contents/199a-xbase.html#xbase_2_4" label="Generating your language with Xbase support" >
+			</topic>
+		</topic>
+		<topic href="contents/199a-xbase.html#xbase_3" label="Integrating Into the Typesystem" >
+			<topic href="contents/199a-xbase.html#jvmModelInferrence" label="Inferring a JVM Model" >
+			</topic>
+			<topic href="contents/199a-xbase.html#xbase_3_2" label="Populating Scopes" >
+			</topic>
+		</topic>
+		<topic href="contents/199a-xbase.html#xbase_4" label="Writing a Code Generator" >
+		</topic>
+	</topic>
 	<topic href="contents/210-emf-integration.html" label="Integration with EMF and Other EMF Editors" >
 		<topic href="contents/210-emf-integration.html#model_metamodel" label="Model, Ecore Model, and Ecore" >
 		</topic>

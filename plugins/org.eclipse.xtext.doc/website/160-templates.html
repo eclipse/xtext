@@ -1,7 +1,11 @@
 <br style="clear:both;height:1em;">
 	<div id="leftcol">
 		<div class="nav-logo">
+<<<<<<< HEAD
 			<a href="index.php"><img src="http://wiki.eclipse.org/images/thumb/d/db/Xtext_logo.png/450px-Xtext_logo.png" style="margin-left:30px; width:125px"/></a>
+=======
+			<a href="index.php"><img src="logo.png" style="margin-left:10px; width:155px"/></a>
+>>>>>>> [docs] first shot at xbase integration doc
 		</div>
 		<ul id="leftnav">
 		<li class="separator"><div class="separator">
@@ -24,7 +28,11 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+<<<<<<< HEAD
 		<a href="020-domainmodel-step-by-step.php">15 Minutes Tutorial</a></div>
+=======
+		<a href="020-domainmodel-step-by-step.php">30 Minutes Tutorial</a></div>
+>>>>>>> [docs] first shot at xbase integration doc
 		<ul style="display: none;" id="subToc_020-domainmodel-step-by-step.html">
 		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_4" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_4" >Create A New Xtext Project</a></li>
 		<li id="020-domainmodel-step-by-step.html#DomainmodelWalkThrough_5" ><a href="020-domainmodel-step-by-step.php#DomainmodelWalkThrough_5" >Write Your Own Grammar</a></li>
@@ -35,7 +43,11 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+<<<<<<< HEAD
 		<a href="030-tutorial-next-steps.php">15 Minutes Tutorial - Extended</a></div>
+=======
+		<a href="030-tutorial-next-steps.php">30 Minutes Tutorial - Extended</a></div>
+>>>>>>> [docs] first shot at xbase integration doc
 		<ul style="display: none;" id="subToc_030-tutorial-next-steps.html">
 		<li id="040-first-code-generator.html" ><a href="040-first-code-generator.php" >Writing a Code Generator With Xtend</a></li>
 		<li id="060-unit-tests.html" ><a href="060-unit-tests.php" >Unit Testing the Language</a></li>
@@ -122,6 +134,18 @@
 		</li>
 		<li class="separator"><div class="separator">
 		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+<<<<<<< HEAD
+=======
+		<a href="199a-xbase.php">Integrating Xbase Into Your DSLs</a></div>
+		<ul style="display: none;" id="subToc_199a-xbase.html">
+		<li id="199a-xbase.html#xbase_2" ><a href="199a-xbase.php#xbase_2" >Configuring a language for Xbase</a></li>
+		<li id="199a-xbase.html#xbase_3" ><a href="199a-xbase.php#xbase_3" >Integrating Into the Typesystem</a></li>
+		<li id="199a-xbase.html#xbase_4" ><a href="199a-xbase.php#xbase_4" >Writing a Code Generator</a></li>
+		</ul>
+		</li>
+		<li class="separator"><div class="separator">
+		<img src="triangle.gif" style="height:12px; margin-right: 2px; "  /><img src="triangle-90.gif" style="display:none; margin-right: 2px" height="12px" />
+>>>>>>> [docs] first shot at xbase integration doc
 		<a href="210-emf-integration.php">Integration with EMF and Other EMF Editors</a></div>
 		<ul style="display: none;" id="subToc_210-emf-integration.html">
 		<li id="210-emf-integration.html#model_metamodel" ><a href="210-emf-integration.php#model_metamodel" >Model, Ecore Model, and Ecore</a></li>
@@ -149,6 +173,7 @@
 		</ul>
 	</div>
 	<div id="midcolumn">
+<<<<<<< HEAD
 		<a name="templates" ></a>
 		<h1>Template Proposals</h1>
 			<div class="toc">
@@ -278,5 +303,140 @@
 		yields the text <span class="inlinecode"><span class="keyword">public</span>&nbsp;<span class="keyword">entity</span>&nbsp;Name&nbsp;{}</span> where the text <span class="inlinecode"><span class="keyword">public</span></span> is the default value of the <span class="inlinecode">Visibility</span>.
 		The editor provides a drop down that is populated with the other literal values as defined in the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnum.html" title="org.eclipse.emf.ecore.EEnum">EEnum</abbr></a>. 
 		</p>
+=======
+			<a name="templates" ></a>
+			<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
+		padding: 5px 0;
+		padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
+		<br style="clear:both" />
+			<h1>Template Proposals</h1>
+				<div class="toc">
+				  <ul>
+				    <li><a href="160-templates.php#templates_6" >Cross Reference Template Variable Resolver</a></li>
+				    <li><a href="160-templates.php#templates_7" >Enumeration Template Variable Resolver</a></li>
+				  </ul>
+				</div>
+			<p>
+			Xtext-based editors automatically support code templates. That means that you get the corresponding 
+			preference page where users can add and change template proposals. If you want to ship a couple of 
+			default templates, you have to put a file named <em>templates.xml</em> inside the <em>templates</em> directory of 
+			the generated UI-plug-in. This file contains templates in a format as described in the 
+			<a href="http://help.eclipse.org/ganymede/topic/org.eclipse.cdt.doc.user/tasks/cdt_t_imp_code_temp.htm" >Eclipse online help</a> .
+			</p>
+			<p>
+			<div class="image" >
+			<img src="images/preferences_templates.png" 
+				width="600px"
+			/>
+			<div class="caption">
+			</div>
+			</div>
+			</p>
+			<p>
+			By default Xtext registers <em>context types</em> that follow certain patterns. A context type will be created
+			<ol>
+			  <li>for each rule (<span class="inlinecode">{languageName}.{RuleName}</span>) and</li>
+			  <li>for each keyword (<span class="inlinecode">{languageName}.kw_{keyword}</span>).</li>
+			</ol>
+			
+			If you don't like these defaults you'll have to subclass 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/templates/XtextTemplateContextTypeRegistry.html" title="org.eclipse.xtext.ui.editor.templates.XtextTemplateContextTypeRegistry">XtextTemplateContextTypeRegistry</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/XtextTemplateContextTypeRegistry.java" title="View Source Code" >(src)</a> 
+			and configure it via <a href="040-dependency-injection.php#guicemodules" title="Go to &quot;The Module API&quot;">Guice</a>. 
+			</p>
+			<p>
+			In addition to the standard template proposal extension mechanism, Xtext ships with a predefined set 
+			of <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/templates/TemplateVariableResolver.html" title="org.eclipse.jface.text.templates.TemplateVariableResolver">TemplateVariableResolvers</abbr></a> to resolve special variable types in templates. 
+			Besides the standard template variables available in 
+			<a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/templates/GlobalTemplateVariables.html" title="org.eclipse.jface.text.templates.GlobalTemplateVariables">GlobalTemplateVariables</abbr></a> like <span class="inlinecode">${user}</span>, <span class="inlinecode">${date}</span>, <span class="inlinecode">${time}</span>, 
+			<span class="inlinecode">${cursor}</span>, etc., these <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/jface/text/templates/TemplateVariableResolver.html" title="org.eclipse.jface.text.templates.TemplateVariableResolver">TemplateVariableResolvers</abbr></a> support the automatic resolving of 
+			cross references enumeration values. Both resolvers are explained in the 
+			following sections.
+			</p>
+			<p>
+			It is best practice to edit the templates in the preferences page, export them into the 
+			<em>templates.xml</em>-file and put this one into the <em>templates</em> folder of your UI-plug-in. However, these 
+			templates will not be visible by default. To fix it, you have to manually edit the xml-file and insert 
+			an <span class="inlinecode">id</span> attribute for each template element. Note that the attribute name is case sensitive.
+			</p>
+			<a name="templates_6" ></a>
+			<h2>Cross Reference Template Variable Resolver</h2>
+			<p>
+			Xtext comes with a specific template variable resolver called 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/templates/CrossReferenceTemplateVariableResolver.html" title="org.eclipse.xtext.ui.editor.templates.CrossReferenceTemplateVariableResolver">CrossReferenceTemplateVariableResolver</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/CrossReferenceTemplateVariableResolver.java" title="View Source Code" >(src)</a>, 
+			which can be used to pre-populate placeholders for cross-references within a template. The respective
+			template variable is called <em>CrossReference</em> and its syntax is as follows:
+			</p>
+			<p>
+			<span class="inlinecode">${&lt;displayText&gt;:CrossReference([&lt;MyPackageName&gt;.]&lt;MyType&gt;.&lt;myRef&gt;)}</span>
+			</p>
+			<p>
+			This small example yields the text <em>event => state</em> and allows selecting any events and states using a drop down:
+			</p>
+			<p>
+			<div class="literallayout">
+			<div class="incode">
+			<p class="code">
+			&lt;template&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;name=<span class="string">"transition"</span>&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;description=<span class="string">"event&nbsp;transition"</span>&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;id=<span class="string">"transition"</span><br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context=<span class="string">"org.xtext.example.SecretCompartments.Transition"</span>&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled=<span class="string">"true"</span>&gt;<br/>
+			${event:CrossReference(<span class="string">&apos;Transition.event&apos;</span>)}&nbsp;=&gt;<br/>
+			&nbsp;&nbsp;${state:CrossReference(<span class="string">&apos;Transition.state&apos;</span>)<br/>
+			&lt;/template&gt;
+			</p>
+			</div>
+			</div>
+			</p>
+			<p>
+			<div class="image" >
+			<img src="images/templates_crossref.png" 
+				width="600px"
+			/>
+			<div class="caption">
+			</div>
+			</div>
+			</p>
+			<a name="templates_7" ></a>
+			<h2>Enumeration Template Variable Resolver</h2>
+			<p>
+			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.html" title="org.eclipse.xtext.ui.editor.templates.EnumTemplateVariableResolver">EnumTemplateVariableResolver</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.ui/src/org/eclipse/xtext/ui/editor/templates/EnumTemplateVariableResolver.java" title="View Source Code" >(src)</a> 
+			resolves a template variable to <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnumLiteral.html" title="org.eclipse.emf.ecore.EEnumLiteral">EEnumLiterals</abbr></a>
+			which are assignment-compatible to the enumeration type declared as the first parameter of the the <em>Enum</em>
+			template variable. 
+			</p>
+			<p>
+			The syntax is as follows:   
+			</p>
+			<p>
+			<span class="inlinecode">${&lt;displayText&gt;:Enum([&lt;MyPackage&gt;.]&lt;EnumType&gt;)</span>
+			</p>
+			<p>
+			For example the following template (taken from another example):
+			</p>
+			<p>
+			<div class="literallayout">
+			<div class="incode">
+			<p class="code">
+			&lt;template&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;name=<span class="string">"Entity"</span>&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;description=<span class="string">"template&nbsp;for&nbsp;an&nbsp;Entity"</span><br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;id=<span class="string">"entity"</span><br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;context=<span class="string">"org.eclipse.xtext.example.Domainmodel.Entity"</span><br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;enabled=<span class="string">"true"</span>&gt;<br/>
+			${<span class="keyword">public</span>:Enum(<span class="string">&apos;Visibility&apos;</span>)}&nbsp;<span class="keyword">entity</span>&nbsp;${Name}&nbsp;{<br/>
+			&nbsp;&nbsp;${cursor}<br/>
+			}<br/>
+			&lt;/template&gt;
+			</p>
+			</div>
+			</div>
+			</p>
+			<p>
+			yields the text <span class="inlinecode"><span class="keyword">public</span>&nbsp;<span class="keyword">entity</span>&nbsp;Name&nbsp;{}</span> where the text <span class="inlinecode"><span class="keyword">public</span></span> is the default value of the <span class="inlinecode">Visibility</span>.
+			The editor provides a drop down that is populated with the other literal values as defined in the <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EEnum.html" title="org.eclipse.emf.ecore.EEnum">EEnum</abbr></a>. 
+			</p>
+>>>>>>> [docs] first shot at xbase integration doc
 	</div>
 	<br style="clear:both;height:1em;">

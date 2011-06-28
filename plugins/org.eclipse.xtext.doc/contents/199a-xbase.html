@@ -1,0 +1,254 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Integrating Xbase Into Your DSLs</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="index.html" title="">
+</head>
+<body>
+<a name="xbase"></a>
+<h1>Integrating Xbase Into Your DSLs</h1>
+<p>
+Xbase is an expression language that can be embedded in Xtext languages. Its syntax is close to Java,
+but it additionally offers type inferrence, closures, a rich switch statement and a lot more. For details
+on the Xbase langugae itself, please consult the Xbase documentation and the Xbase tutorial. Xbase ships 
+with an interpreter and a compiler to Java code. Thus it is easy to add executable behavior to your DSLs.
+As Xbase integrates tightly with Java, there is usually no additional code needed to run your DSL as
+part of a Java application. 
+</p>
+<a name="xbase_2"></a>
+<h2>Configuring a language for Xbase</h2>
+<p>
+The following section describes how to enable Xbase expressions and references to Java types in your own DSL.
+We will refer to the domainmodel example all through this section.
+</p>
+<a name="xbase_2_2"></a>
+<h3>Setup Plug-in Dependencies</h3>
+<p>
+Your language plug-ins have to have a dependency to the appropriate Xbase plug-in. Add <em>org.eclipse.xtext.xbase</em> 
+to your runtime plug-in and <em>org.eclipse.xbase.ui</em> to the UI plug-in. Into the bargain,
+Xbase uses the common types model to define its types, so it is likely you need dependencies to 
+<em>org.eclipse.xtext.common.types</em> and <em>org.eclipse.xtext.common.types.ui</em>. To use Xtend-based components,
+you will furthermore need <em>org.eclipse.xtext.xtend2.lib</em> on the classpath of the runtime plug-in. 
+</p>
+<a name="xbase_2_3"></a>
+<h3>Making Your Grammar Refer To Xbase</h3>
+<p>
+To leverage Xbase, your DSL&apos;s grammar must inherit from the Xbase grammar. You have to change the <em>with</em>
+clause of our grammar to 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">grammar</span>&nbsp;&lt;myLangugaeName&gt;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.xbase.Xbase<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+The Xbase grammar inherits from <em>org.eclipse.xtext.xbase.Xtype</em>, a language that defines a concrete 
+syntax for type references. Xtype inherits from the default <em>org.eclipse.xtext.common.Terminals</em> 
+language. So if your language is not based on the common terminals, you might have to have to insert an
+additional language to the hierarchy.
+</p>
+<p>
+If you want to refer to <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClassifier" >EClassifiers</abbr></a> from the Xbase model, you need
+to import it first. The same holds for the common types model:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/xbase/Xbase"</span>&nbsp;<span class="keyword">as</span>&nbsp;xbase<br/>
+<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/common/JavaVMTypes"</span>&nbsp;<span class="keyword">as</span>&nbsp;jvmTypes<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Now identify the location in your grammar, where you want references to Java types and Xbase expression to appear
+and call the appropriate rules of the super grammar. Have a look at the domainmodel example: An <em>Entity</em>
+can refer to a Java <em>superType</em>, so we call the rule <em>JvmTypeReference</em> in the declaration:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Entity:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name=ValidID&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType=JvmTypeReference)?&nbsp;<span class="string">&apos;{&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+An <em>Operation</em>&apos;s parameters are <em>JvmFormalParamters</em>, its return type refers to a Java type and its <em>body</em> is
+an <em>XBlockExpression</em>, so its parser rule reads as
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Operation:<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;visibility=Visibility?&nbsp;<span class="string">&apos;op&apos;</span>&nbsp;name=ValidID&nbsp;<span class="string">&apos;(&apos;</span>&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;(params+=JvmFormalParameter&nbsp;(<span class="string">&apos;,&apos;</span>&nbsp;params+=JvmFormalParameter)*)?&nbsp;<span class="string">&apos;)&apos;</span>&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type=JvmTypeReference&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body=XBlockExpression;<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+If you&apos;re unsure which entry point to choose for your expressions, consider the root <em>XExpression</em>.
+<em>JvmTypeReference</em> offers the full Java syntax to refer to generic types.  
+</p>
+<a name="xbase_2_4"></a>
+<h3>Generating your language with Xbase support</h3>
+<p>
+You have to register the EMF genmodels of Xbase and common types to the <abbr title="org.eclipse.emf.mwe.utils.StandaloneSetup" >StandaloneSetup</abbr>
+of your MWE2 workflow
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+bean&nbsp;=&nbsp;StandaloneSetup&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;registerGenModelFile&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;registerGenModelFile&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"</span><br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Also make sure you have the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/types/TypesGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.types.TypesGeneratorFragment" >TypesGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/types/TypesGeneratorFragment.java" title="View Source Code" >(src)</a> and the
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment" >XbaseGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.java" title="View Source Code" >(src)</a> in place
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br/>
+fragment&nbsp;=&nbsp;xbase.XbaseGeneratorFragment&nbsp;{}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Several MWE generator fragments have additional properties for the <a href="199a-xbase.html#jvmModelInferrence" title="Go to &quot;Inferring a JVM Model&quot;">JVM model inferrence</a>:
+<table>
+<tr>
+<td>
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment" >XbaseGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.java" title="View Source Code" >(src)</a>
+</td>
+<td>
+<em>useInferredJvmModel</em>
+</td>
+<td>
+Generate a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer" >IJvmModelInferrer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java" title="View Source Code" >(src)</a> stub and hooks for an inferred JVM model
+</td>
+</tr>
+<tr>
+<td>
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment" >XbaseGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.java" title="View Source Code" >(src)</a>
+</td>
+<td>
+<em>generateXtendInferrer</em>
+</td>
+<td>
+Generate the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer" >IJvmModelInferrer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java" title="View Source Code" >(src)</a> stub in Xtend instead of Java
+</td>
+</tr>
+<tr>
+<td>
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/refactoring/RefactorElementNameFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment" >RefactorElementNameFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/refactoring/RefactorElementNameFragment.java" title="View Source Code" >(src)</a>
+</td>
+<td>
+<em>useJdtRefactoring</em>
+</td>
+<td>
+Always trigger JDT refactoring and register element rename refactoring as a participant thereof
+</td>
+</tr>
+</table>
+</p>
+<p>
+To avoid running out of memory when regenerating, you increase the maximum heap size and the permanent generation
+space in the run configuration of your workflow. We recommend at least 
+</p>
+<p>
+<span class="inlinecode">-Xmx512m&nbsp;-XX:MaxPermSize=128m</span> 
+</p>
+<p>
+in the <em>VM Arguments</em> section of the <em>Arguments</em> tab. If you are experiencing ambiguity warnings from Antlr,
+the <a href="020-grammar-language.html#antlr_errors" title="Go to &quot;Syntactic Predicates&quot;">usual measurements</a>.
+</p>
+<a name="xbase_3"></a>
+<h2>Integrating Into the Typesystem</h2>
+<a name="jvmModelInferrence"></a>
+<h3>Inferring a JVM Model</h3>
+<p>
+In many cases, you will want your DSLs concepts to be usable as Java elements. E.g. an <em>Entity</em> will
+become a Java class and should be usable as such. In the domainmodel example, you can write  
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">entity</span>&nbsp;Person&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;friends:&nbsp;List&lt;Person&gt;<br/>
+...<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+i.e. use entities instead of Java types or even mix Java types as <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html" title="View JavaDoc"><abbr title="java.util.List" >List</abbr></a> with entities such as <em>Person</em>.
+One way to achieve this is to let your concepts inherit from a corresponding JVM type, e.g. let <em>Entity</em>
+inherit from <em>JvmGenericType</em>. This usually results in a lot of accidentally inherited properties in
+your domain model. In Xbase there is an alternative: You can define how to derive a JVM model from your
+model and link against this <em>inferred JVM model</em>. 
+</p>
+<p>
+The main component for the inferred JVM model is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer" >IJvmModelInferrer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java" title="View Source Code" >(src)</a>.
+It has a single method that gets a model element passed in and returns a list of 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmGenericType.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmGenericType" >JvmGenericTypes</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmGenericType.java" title="View Source Code" >(src)</a>. As Xbase cannot guess how you
+would like to map your concepts to JVM elements, you have to implement this component yourself. This
+usually boils down to use an injected <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/TypesFactory.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.TypesFactory" >TypesFactory</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/TypesFactory.java" title="View Source Code" >(src)</a> to create
+a hierarchy of JVM elements, initialize that with values from the input model, and eventually use an injected
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociator.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator" >IJvmModelAssociator</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociator.java" title="View Source Code" >(src)</a> to associate the model elements with the
+JVM elements. As this kind of transformation can be elegantly implemented using polymorphic dispatch
+functions and extension methods, it is a good choice to write the 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer" >IJvmModelInferrer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java" title="View Source Code" >(src)</a> in Xtend.
+</p>
+<p>
+In the domain model example, we call a recursive polymorphic dispatch function <em>transform</em> to traverse
+the containment hierarchy of the source model and generate JVM elements on the way. We transform each
+<em>Entity</em> to a <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmGenericType.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmGenericType" >JvmGenericType</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmGenericType.java" title="View Source Code" >(src)</a> that holds a 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmOperation.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmOperation" >JvmOperation</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmOperation.java" title="View Source Code" >(src)</a> for each <em>Operation</em> and a 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmField.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmField" >JvmField</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmField.java" title="View Source Code" >(src)</a> plus access methods for each <em>Property</em>. Whenever
+we have to copy a subtree, e.g. for setting the supertype of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmGenericType.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmGenericType" >JvmGenericType</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmGenericType.java" title="View Source Code" >(src)</a>,
+we use <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/EcoreUtil2.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.EcoreUtil2" >EcoreUtil2</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/EcoreUtil2.java" title="View Source Code" >(src)</a> .<em>cloneWithProxies()</em> to avoid eager resolution of referenced
+types. 
+</p>
+<p>
+The framework will automatically switch between the JVM element or the DSL element when needed, e.g. when 
+following hyperlinks. The component allowing to navigate between the source model and the JVM model is
+called <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations" >IJvmModelAssociations</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelAssociations.java" title="View Source Code" >(src)</a>.  
+</p>
+<a name="xbase_3_2"></a>
+<h3>Populating Scopes</h3>
+<p>
+Xbase expressions are usually referring to a context. 
+</p>
+<a name="xbase_4"></a>
+<h2>Writing a Code Generator</h2>
+<p>
+</p>
+</body>
+</html>
