@@ -356,22 +356,24 @@
 		<topic href="contents/199-jvmtypes.html#jvmtypes_4" label="Customization Points" >
 		</topic>
 	</topic>
-	<topic href="contents/199a-xbase.html" label="Integrating Xbase Into Your DSLs" >
+	<topic href="contents/199a-xbase.html" label="Using Xbase Expressions In Your DSLs" >
 		<topic href="contents/199a-xbase.html#xbase_2" label="Configuring a language for Xbase" >
 			<topic href="contents/199a-xbase.html#xbase_2_2" label="Setup Plug-in Dependencies" >
 			</topic>
 			<topic href="contents/199a-xbase.html#xbase_2_3" label="Making Your Grammar Refer To Xbase" >
 			</topic>
-			<topic href="contents/199a-xbase.html#xbase_2_4" label="Generating your language with Xbase support" >
+			<topic href="contents/199a-xbase.html#xbase_2_4" label="Generating Your Language With Xbase Support" >
 			</topic>
 		</topic>
 		<topic href="contents/199a-xbase.html#xbase_3" label="Integrating Into the Typesystem" >
 			<topic href="contents/199a-xbase.html#jvmModelInferrence" label="Inferring a JVM Model" >
 			</topic>
-			<topic href="contents/199a-xbase.html#xbase_3_2" label="Populating Scopes" >
+			<topic href="contents/199a-xbase.html#xbase_3_3" label="Populating Scopes" >
+			</topic>
+			<topic href="contents/199a-xbase.html#xbase_3_4" label="TypeProvider" >
 			</topic>
 		</topic>
-		<topic href="contents/199a-xbase.html#xbase_4" label="Writing a Code Generator" >
+		<topic href="contents/199a-xbase.html#xbase_4" label="Generating Java Code using the Xbase Compiler" >
 		</topic>
 	</topic>
 	<topic href="contents/210-emf-integration.html" label="Integration with EMF and Other EMF Editors" >

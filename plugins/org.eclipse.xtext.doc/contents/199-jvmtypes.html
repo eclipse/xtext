@@ -34,7 +34,13 @@ Using the JVM types model is very simple. First of all, the grammar has to impor
 Thanks to content assist this is easy to spot in the list of proposals.  
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/common/JavaVMTypes"</span>&nbsp;<span class="keyword">as</span>&nbsp;types</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/common/JavaVMTypes"</span>&nbsp;<span class="keyword">as</span>&nbsp;types<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 The next step is to actually refer to an imported concept. Let&apos;s define a mapping to available
@@ -46,7 +52,7 @@ as one got already used to when dealing with references in Xtext.
 <div class="incode">
 <p class="code">
 Type:<br/>
-&nbsp;&nbsp;<span class="string">&apos;type&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;mapped-to&apos;</span>&nbsp;javaType=[types::JvmType&nbsp;|&nbsp;FQN];
+&nbsp;&nbsp;<span class="string">&apos;type&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;mapped-to&apos;</span>&nbsp;javaType=[types::JvmType&nbsp;|&nbsp;FQN];<br/>
 </p>
 </div>
 </div>
@@ -66,7 +72,7 @@ fragment&nbsp;=&nbsp;ecore.EcoreGeneratorFragment&nbsp;{<br/>
 &nbsp;&nbsp;referencedGenModels=<span class="string">"classpath:/model/JavaVMTypes.genmodel"</span><br/>
 }<br/>
 <br/>
-fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}
+fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br/>
 </p>
 </div>
 </div>
@@ -76,7 +82,13 @@ After regenerating your language, it will be allowed to define a type <span clas
 like this:
 </p>
 <p>
-<span class="inlinecode"><span class="keyword">type</span>&nbsp;Date&nbsp;<span class="keyword">mapped-to</span>&nbsp;java.util.Date</span>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">type</span>&nbsp;Date&nbsp;<span class="keyword">mapped-to</span>&nbsp;java.util.Date<br/>
+</p>
+</div>
+</div>
 </p>
 <p>
 These two steps will provide a nice integration into the Eclipse JDT. There is <em>Find References</em> on Java methods, 
@@ -122,7 +134,8 @@ to a smaller number of valid entries.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.canInstantiate()<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.isPublic()<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;),&nbsp;acceptor);
+&nbsp;&nbsp;&nbsp;&nbsp;),&nbsp;acceptor);<br/>
+&nbsp;<br/>
 </p>
 </div>
 </div>

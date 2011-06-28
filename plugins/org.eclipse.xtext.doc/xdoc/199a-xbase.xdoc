@@ -1,4 +1,4 @@
-chapter:xbase[Integrating Xbase Into Your DSLs]
+chapter:xbase[Using Xbase Expressions In Your DSLs]
 
 Xbase is an expression language that can be embedded in Xtext languages. Its syntax is close to Java,
 but it additionally offers type inferrence, closures, a rich switch statement and a lot more. For details
@@ -7,10 +7,12 @@ with an interpreter and a compiler to Java code. Thus it is easy to add executab
 As Xbase integrates tightly with Java, there is usually no additional code needed to run your DSL as
 part of a Java application. 
 
+
 section[Configuring a language for Xbase]
 
 The following section describes how to enable Xbase expressions and references to Java types in your own DSL.
 We will refer to the domainmodel example all through this section.
+
 
 section2[Setup Plug-in Dependencies]
 
@@ -19,6 +21,7 @@ to your runtime plug-in and e[org.eclipse.xbase.ui] to the UI plug-in. Into the 
 Xbase uses the common types model to define its types, so it is likely you need dependencies to 
 e[org.eclipse.xtext.common.types] and e[org.eclipse.xtext.common.types.ui]. To use Xtend-based components,
 you will furthermore need e[org.eclipse.xtext.xtend2.lib] on the classpath of the runtime plug-in. 
+
 
 section2[Making Your Grammar Refer To Xbase]
 
@@ -67,7 +70,7 @@ If you're unsure which entry point to choose for your expressions, consider the 
 e[JvmTypeReference] offers the full Java syntax to refer to generic types.  
 
 
-section2[Generating your language with Xbase support]
+section2[Generating Your Language With Xbase Support]
 
 You have to register the EMF genmodels of Xbase and common types to the codeRef[org.eclipse.emf.mwe.utils.StandaloneSetup]
 of your MWE2 workflow
@@ -116,12 +119,17 @@ code[-Xmx512m -XX:MaxPermSize=128m]
 in the e[VM Arguments] section of the e[Arguments] tab. If you are experiencing ambiguity warnings from Antlr,
 the ref:antlr_errors[usual measurements].
 
+
 section[Integrating Into the Typesystem]
+
+Xbase is statically typed. To integrate your DSL concepts into its typesystem, we offer a couple of hooks,
+which will be described in the following. 
+
 
 section2:jvmModelInferrence[Inferring a JVM Model]
 
 In many cases, you will want your DSLs concepts to be usable as Java elements. E.g. an e[Entity] will
-become a Java class and should be usable as such. In the domainmodel example, you can write  
+become a Java class and should be usable as such. In the domain model example, you can write  
 
 code[DomainExample][
 entity Person {
@@ -161,10 +169,97 @@ called codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations].
 
 section2[Populating Scopes]
 
-Xbase expressions are usually referring to a context. 
+If you're not familiar with Xtext's concept of scopes yet, it would be a good idea to ref:scoping[learn about
+scopes] before you go on reading this section. 
+
+The codeRef[org.eclipse.xtext.xbase.scoping.XbaseScopeProvider] already builds a complex hierarchy of
+scopes that is necessary to link your expressions. There are a few points you may want to customize.
+ 
+Xbase expressions usually refer to some local context that contains some variables. Suggestively, you
+should be able to refer to the e[Entity] itself from within its operations as e[this], as Xbase offers
+syntactic sugar to access the features of the element bound to the variable e[this]. The 
+codeRef[org.eclipse.xtext.xbase.scoping.XbaseScopeProvider] offers a template method e[createLocalVarScope]
+to populate this scope of local variables. Have a look at the following implementation (in Xtend) from
+the domain model example:
+
+code[Xtend][
+class DomainmodelScopeProvider extends XbaseScopeProvider {
+
+	@Inject extension IJvmModelAssociations associations
+	
+	override IScope createLocalVarScope(IScope parent, 
+			LocalVariableScopeContext scopeContext) {
+		switch context: scopeContext.context {
+			Entity : {
+				val jvmType = getJvmType(context)
+				if(jvmType != null)
+					return new SimpleScope(parent, 
+						Collections::singleton(
+						EObjectDescription::^create(
+							XbaseScopeProvider::THIS, jvmType)))
+			}
+			Operation : {
+				val descriptions = context.params.map(
+					e | e.createIEObjectDescription())
+				return MapBasedScope::createScope(
+					super.createLocalVarScope(parent, scopeContext), 
+						descriptions);	
+			}
+		}
+		return super.createLocalVarScope(parent, scopeContext)
+	}
+	...
+] 
+
+It binds the variable e[this] within an e[Entity] to the ref:jvmModelInferrence[inferred JVM type] of the
+e[Entity]. Additionally, the e[Parameters] of an e[Operation] are available as local variables inside the 
+operation body. This way, the Xbase typesystem knows the types of these variables and can put their methods
+and fields on the scope.   
+
+section2[TypeProvider]
+
+Xbase is statically typed. To make static analysis work, the framework has to compare expected types with
+the actual types returned by an expression. For example, the condition of an codeRef[org.eclipse.xtext.xbase.XIfExpression]
+is expected to be a boolean, so any expression used as condition should conform to the boolean type.
+The component the defines these types is the codeRef[org.eclipse.xtext.xbase.typing.ITypeProvider]. It
+has several responsibilities
+
+table[
+	tr[td[getType()]td[returns the type of an expression]]
+	tr[td[getExpectedType()]td[returns the expected type of an expression]]
+	tr[td[getTypeForIdentifiable()]td[returns the expected type of an element that is referenced]]
+	tr[td[getCommonReturnType()]td[returns the common supertype of all types used in return expression
+	inside this expression]]
+	tr[td[getThrownExceptions()]td[returns the types of all declared exceptions thrown inside this expression]]
+]
+
+The codeRef[org.eclipse.xtext.xbase.typing.XbaseTypeProvider] implements polymorphic dispatch methods
+for the first three of these. In the domain model example, we expect the return type of the body of an e[Operation]
+to conform to the declared return type. We can do so by specializing the default 
+codeRef[org.eclipse.xtext.xbase.typing.XbaseTypeProvider] as
+
+code[Java][
+@Singleton
+public class DomainmodelTypeProvider extends XbaseTypeProvider {
+
+	protected JvmTypeReference _expectedType(Operation operation, 
+			EReference reference, int index, boolean rawType) {
+		if(reference == DomainmodelPackage.Literals.OPERATION__BODY) {
+			return operation.getType();
+		}				
+		return null; 
+	}
+}
+]
+
+and of course binding this new implementation in the languge's module. 
 
 
-section[Writing a Code Generator]
+section[Generating Java Code using the Xbase Compiler]
+
+
+
+
 
 
  
