@@ -356,7 +356,7 @@
 		<topic href="contents/199-jvmtypes.html#jvmtypes_4" label="Customization Points" >
 		</topic>
 	</topic>
-	<topic href="contents/199a-xbase.html" label="Using Xbase Expressions In Your DSLs" >
+	<topic href="contents/199a-xbase.html" label="Leveraging Xbase Expressions In Your DSLs" >
 		<topic href="contents/199a-xbase.html#xbase_2" label="Configuring a language for Xbase" >
 			<topic href="contents/199a-xbase.html#xbase_2_2" label="Setup Plug-in Dependencies" >
 			</topic>
@@ -374,6 +374,8 @@
 			</topic>
 		</topic>
 		<topic href="contents/199a-xbase.html#xbase_4" label="Generating Java Code using the Xbase Compiler" >
+		</topic>
+		<topic href="contents/199a-xbase.html#xbase_5" label="Adding Default Extensions and Literal Functions" >
 		</topic>
 	</topic>
 	<topic href="contents/210-emf-integration.html" label="Integration with EMF and Other EMF Editors" >

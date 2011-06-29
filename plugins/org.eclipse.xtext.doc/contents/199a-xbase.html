@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
-<title>Using Xbase Expressions In Your DSLs</title>
+<title>Leveraging Xbase Expressions In Your DSLs</title>
 
 <link href="book.css" rel="stylesheet" type="text/css">
 <link href="code.css" rel="stylesheet" type="text/css">
@@ -9,12 +9,12 @@
 </head>
 <body>
 <a name="xbase"></a>
-<h1>Using Xbase Expressions In Your DSLs</h1>
+<h1>Leveraging Xbase Expressions In Your DSLs</h1>
 <p>
 Xbase is an expression language that can be embedded in Xtext languages. Its syntax is close to Java,
 but it additionally offers type inferrence, closures, a rich switch statement and a lot more. For details
 on the Xbase langugae itself, please consult the Xbase documentation and the Xbase tutorial. Xbase ships 
-with an interpreter and a compiler to Java code. Thus it is easy to add executable behavior to your DSLs.
+with an interpreter and a compiler to Java code. Thus, it is easy to add executable behavior to your DSLs.
 As Xbase integrates tightly with Java, there is usually no additional code needed to run your DSL as
 part of a Java application. 
 </p>
@@ -51,8 +51,8 @@ clause of our grammar to
 <p>
 The Xbase grammar inherits from <em>org.eclipse.xtext.xbase.Xtype</em>, a language that defines a concrete 
 syntax for type references. Xtype inherits from the default <em>org.eclipse.xtext.common.Terminals</em> 
-language. So if your language is not based on the common terminals, you might have to have to insert an
-additional language to the hierarchy.
+language. So if your language is not based on the common terminals, your terminal rules might need 
+special treatment.
 </p>
 <p>
 If you want to refer to <a class="jdoc" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.6.0/org/eclipse/emf/ecore/EClassifier.html" title="View JavaDoc"><abbr title="org.eclipse.emf.ecore.EClassifier" >EClassifiers</abbr></a> from the Xbase model, you need
@@ -186,12 +186,12 @@ space in the run configuration of your workflow. We recommend at least
 </p>
 <p>
 in the <em>VM Arguments</em> section of the <em>Arguments</em> tab. If you are experiencing ambiguity warnings from Antlr,
-the <a href="020-grammar-language.html#antlr_errors" title="Go to &quot;Syntactic Predicates&quot;">usual measurements</a>.
+the <a href="020-grammar-language.html#antlr_errors" title="Go to &quot;Syntactic Predicates&quot;">usual countermeasures</a> apply.
 </p>
 <a name="xbase_3"></a>
 <h2>Integrating Into the Typesystem</h2>
 <p>
-Xbase is statically typed. To integrate your DSL concepts into its typesystem, we offer a couple of hooks,
+Xbase is statically typed. To integrate your DSL concepts into its typesystem, we offer a couple of hooks
 which will be described in the following. 
 </p>
 <a name="jvmModelInferrence"></a>
@@ -204,6 +204,9 @@ become a Java class and should be usable as such. In the domain model example, y
 <div class="literallayout">
 <div class="incode">
 <p class="code">
+<span class="keyword">entity</span>&nbsp;Employee&nbsp;<span class="keyword">extends</span>&nbsp;Person&nbsp;{<br/>
+...<br/>
+<br/>
 <span class="keyword">entity</span>&nbsp;Person&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;friends:&nbsp;List&lt;Person&gt;<br/>
 ...<br/>
@@ -214,9 +217,9 @@ become a Java class and should be usable as such. In the domain model example, y
 <p>
 i.e. use entities instead of Java types or even mix Java types as <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/List.html" title="View JavaDoc"><abbr title="java.util.List" >List</abbr></a> with entities such as <em>Person</em>.
 One way to achieve this is to let your concepts inherit from a corresponding JVM type, e.g. let <em>Entity</em>
-inherit from <em>JvmGenericType</em>. This usually results in a lot of accidentally inherited properties in
-your domain model. In Xbase there is an alternative: You can define how to derive a JVM model from your
-model and link against this <em>inferred JVM model</em>. 
+inherit from <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmGenericType.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.JvmGenericType" >JvmGenericType</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmGenericType.java" title="View Source Code" >(src)</a>. This usually results in a lot of 
+accidentally inherited properties in your domain model. In Xbase there is an alternative: You can define how
+to derive a JVM model from your model and link against this <em>inferred JVM model</em>. 
 </p>
 <p>
 The main component for the inferred JVM model is the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer" >IJvmModelInferrer</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/jvmmodel/IJvmModelInferrer.java" title="View Source Code" >(src)</a>.
@@ -266,30 +269,30 @@ the domain model example:
 <div class="literallayout">
 <div class="incode">
 <p class="code">
-class&nbsp;DomainmodelScopeProvider&nbsp;extends&nbsp;XbaseScopeProvider&nbsp;{<br/>
+<span class="keyword">class</span>&nbsp;DomainmodelScopeProvider&nbsp;<span class="keyword">extends</span>&nbsp;XbaseScopeProvider&nbsp;{<br/>
 <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IJvmModelAssociations&nbsp;associations<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;override&nbsp;IScope&nbsp;createLocalVarScope(IScope&nbsp;parent,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;IScope&nbsp;createLocalVarScope(IScope&nbsp;parent,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LocalVariableScopeContext&nbsp;scopeContext)&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">switch</span>&nbsp;context:&nbsp;scopeContext.context&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Entity&nbsp;:&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;jvmType&nbsp;=&nbsp;getJvmType(context)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;jvmType&nbsp;=&nbsp;getJvmType(context)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(jvmType&nbsp;!=&nbsp;null)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;new&nbsp;SimpleScope(parent,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">new</span>&nbsp;SimpleScope(parent,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Collections::singleton(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EObjectDescription::^create(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;XbaseScopeProvider::THIS,&nbsp;jvmType)))<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Operation&nbsp;:&nbsp;{<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;descriptions&nbsp;=&nbsp;context.params.map(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;descriptions&nbsp;=&nbsp;context.params.map(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e&nbsp;|&nbsp;e.createIEObjectDescription())<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;MapBasedScope::createScope(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super.createLocalVarScope(parent,&nbsp;scopeContext),&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MapBasedScope::createScope(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>.createLocalVarScope(parent,&nbsp;scopeContext),&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;descriptions);&nbsp;&nbsp;&nbsp;&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;super.createLocalVarScope(parent,&nbsp;scopeContext)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">super</span>.createLocalVarScope(parent,&nbsp;scopeContext)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;...<br/>
 </p>
@@ -300,7 +303,33 @@ class&nbsp;DomainmodelScopeProvider&nbsp;extends&nbsp;XbaseScopeProvider&nbsp;{<
 It binds the variable <em>this</em> within an <em>Entity</em> to the <a href="199a-xbase.html#jvmModelInferrence" title="Go to &quot;Inferring a JVM Model&quot;">inferred JVM type</a> of the
 <em>Entity</em>. Additionally, the <em>Parameters</em> of an <em>Operation</em> are available as local variables inside the 
 operation body. This way, the Xbase typesystem knows the types of these variables and can put their methods
-and fields on the scope.   
+and fields on the scope.
+</p>
+<p>
+If you want the inferred model to be cross-referrable from other resources, you have do make sure
+it is indexed. Make sure your <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/naming/IQualifiedNameProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider" >IQualifiedNameProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java" title="View Source Code" >(src)</a> returns a qualified
+name for these elements, e.g.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;DomainmodelQualifiedNameProvider&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">extends</span>&nbsp;DefaultDeclarativeQualifiedNameProvider&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@Inject<br/>
+<span class="keyword">private</span>&nbsp;IQualifiedNameConverter&nbsp;converter;<br/>
+<br/>
+QualifiedName&nbsp;qualifiedName(JvmGenericType&nbsp;type)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;converter.toQualifiedName(type.getQualifiedName());<br/>
+}<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+and that your <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/IResourceDescription.Manager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.resource.IResourceDescription.Manager" >IResourceDescription.Manager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/IResourceDescription.java" title="View Source Code" >(src)</a> creates descriptions these elements
+(see <a href="080-scoping.html#resourcedescriptions" title="Go to &quot;Resource and EObject Descriptions&quot;">section on resource descriptions</a> for details).
 </p>
 <a name="xbase_3_4"></a>
 <h3>TypeProvider</h3>
@@ -357,6 +386,9 @@ returns the types of all declared exceptions thrown inside this expression
 </table>
 </p>
 <p>
+An additional flag <em>rawType</em> signals a raw type without resolved type parameters is enough. This is
+needed to avoid cycles in the type inferrence while linking.
+ 
 The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/typing/XbaseTypeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.typing.XbaseTypeProvider" >XbaseTypeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/typing/XbaseTypeProvider.java" title="View Source Code" >(src)</a> implements polymorphic dispatch methods
 for the first three of these. In the domain model example, we expect the return type of the body of an <em>Operation</em>
 to conform to the declared return type. We can do so by specializing the default 
@@ -386,6 +418,109 @@ and of course binding this new implementation in the languge&apos;s module.
 </p>
 <a name="xbase_4"></a>
 <h2>Generating Java Code using the Xbase Compiler</h2>
+<p>
+The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/XbaseCompiler.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.compiler.XbaseCompiler" >XbaseCompiler</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java" title="View Source Code" >(src)</a> compiles Xbase expressions to Java code.
+You will now learn how to integrate it in the code generator of your DSL. 
+</p>
+<p>
+Two components are responsible for managing the state of the compilation: The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/ImportManager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.compiler.ImportManager" >ImportManager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/ImportManager.java" title="View Source Code" >(src)</a>
+and an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/IAppendable.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.compiler.IAppendable" >IAppendable</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/IAppendable.java" title="View Source Code" >(src)</a>.
+</p>
+<p>
+The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/ImportManager.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.compiler.ImportManager" >ImportManager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/ImportManager.java" title="View Source Code" >(src)</a> serializes references to Java types and 
+collects namespaces to import on the way. You should use a new instance for each generated Java file, 
+use it when generating the code into a string and finally query
+the gathered imports to create the import section of the file. 
+</p>
+<p>
+The following snippet shows how the import manager is used in the domain model example:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;DomainmodelGenerator&nbsp;<span class="keyword">implements</span>&nbsp;IGenerator&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;DomainmodelCompiler&nbsp;domainmodelCompiler<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(entity:&nbsp;resource.allContentsIterable<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fsa.generateFile(entity.fileName,&nbsp;entity.compile)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;val&nbsp;importManager&nbsp;=&nbsp;new&nbsp;ImportManager(true)&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;/*&nbsp;first&nbsp;evaluate&nbsp;the&nbsp;body&nbsp;in&nbsp;order&nbsp;to&nbsp;collect&nbsp;the&nbsp;used&nbsp;types<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;the&nbsp;import&nbsp;section&nbsp;*/<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;body&nbsp;=&nbsp;body(e,&nbsp;importManager)&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;!(e.packageName.isNullOrEmpty)&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;e.packageName&raquo;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDIF&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;FOR&nbsp;i:importManager.imports&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;&laquo;i&raquo;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDFOR&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;body&raquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+...<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">dispatch</span>&nbsp;feature(Operation&nbsp;o,&nbsp;ImportManager&nbsp;importManager)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;&laquo;o.type.shortName(importManager)&raquo;&nbsp;&laquo;o.name&raquo;(&laquo;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o.parameterList(importManager)&raquo;)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;domainmodelCompiler.compile(o,&nbsp;importManager)&raquo;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+An <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/IAppendable.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.compiler.IAppendable" >IAppendable</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/IAppendable.java" title="View Source Code" >(src)</a> keeps track of the indentation, of local variables, 
+and of the generated code. Use an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/StringBuilderBasedAppendable.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable" >StringBuilderBasedAppendable</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/StringBuilderBasedAppendable.java" title="View Source Code" >(src)</a>
+to generate the code of an XbaseExpression into a <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/lang/StringBuilder.html" title="View JavaDoc"><abbr title="java.lang.StringBuilder" >StringBuilder</abbr></a>. Here is how the 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/IAppendable.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.compiler.IAppendable" >IAppendable</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/IAppendable.java" title="View Source Code" >(src)</a> is initialized and the 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/XbaseCompiler.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.compiler.XbaseCompiler" >XbaseCompiler</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/XbaseCompiler.java" title="View Source Code" >(src)</a> is called in the domain model example
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">public</span>&nbsp;<span class="keyword">class</span>&nbsp;DomainmodelCompiler&nbsp;<span class="keyword">extends</span>&nbsp;XbaseCompiler&nbsp;{<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;@Inject<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private</span>&nbsp;IJvmModelAssociations&nbsp;associations;<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;compile(Operation&nbsp;operation,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ImportManager&nbsp;importManager)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StringBuilderBasedAppendable&nbsp;appendable&nbsp;=&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">new</span>&nbsp;StringBuilderBasedAppendable(importManager);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;registerThis(operation,&nbsp;appendable);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(JvmFormalParameter&nbsp;param:&nbsp;operation.getParams())&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;appendable.declareVariable(param,&nbsp;param.getName());<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;compile(operation.getBody(),&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;appendable,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;operation.getType()).toString();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">protected</span>&nbsp;<span class="keyword">void</span>&nbsp;registerThis(Operation&nbsp;operation,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StringBuilderBasedAppendable&nbsp;appendable)&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set&lt;EObject&gt;&nbsp;elements&nbsp;=&nbsp;associations.getJvmElements(operation);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JvmOperation&nbsp;jvmOp&nbsp;=&nbsp;(JvmOperation)&nbsp;elements.iterator().next();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;appendable.declareVariable(jvmOp.getDeclaringType(),&nbsp;<span class="string">"this"</span>);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+</p>
+</div>
+</div>
+</p>
+<a name="xbase_5"></a>
+<h2>Adding Default Extensions and Literal Functions</h2>
 <p>
 </p>
 </body>

@@ -1,9 +1,9 @@
-chapter:xbase[Using Xbase Expressions In Your DSLs]
+chapter:xbase[Leveraging Xbase Expressions In Your DSLs]
 
 Xbase is an expression language that can be embedded in Xtext languages. Its syntax is close to Java,
 but it additionally offers type inferrence, closures, a rich switch statement and a lot more. For details
 on the Xbase langugae itself, please consult the Xbase documentation and the Xbase tutorial. Xbase ships 
-with an interpreter and a compiler to Java code. Thus it is easy to add executable behavior to your DSLs.
+with an interpreter and a compiler to Java code. Thus, it is easy to add executable behavior to your DSLs.
 As Xbase integrates tightly with Java, there is usually no additional code needed to run your DSL as
 part of a Java application. 
 
@@ -34,8 +34,8 @@ grammar <myLangugaeName> with org.eclipse.xtext.xbase.Xbase
 
 The Xbase grammar inherits from e[org.eclipse.xtext.xbase.Xtype], a language that defines a concrete 
 syntax for type references. Xtype inherits from the default e[org.eclipse.xtext.common.Terminals] 
-language. So if your language is not based on the common terminals, you might have to have to insert an
-additional language to the hierarchy.
+language. So if your language is not based on the common terminals, your terminal rules might need 
+special treatment.
 
 If you want to refer to codeRef[org.eclipse.emf.ecore.EClassifier][EClassifiers] from the Xbase model, you need
 to import it first. The same holds for the common types model:
@@ -117,12 +117,12 @@ space in the run configuration of your workflow. We recommend at least
 code[-Xmx512m -XX:MaxPermSize=128m] 
 
 in the e[VM Arguments] section of the e[Arguments] tab. If you are experiencing ambiguity warnings from Antlr,
-the ref:antlr_errors[usual measurements].
+the ref:antlr_errors[usual countermeasures] apply.
 
 
 section[Integrating Into the Typesystem]
 
-Xbase is statically typed. To integrate your DSL concepts into its typesystem, we offer a couple of hooks,
+Xbase is statically typed. To integrate your DSL concepts into its typesystem, we offer a couple of hooks
 which will be described in the following. 
 
 
@@ -132,6 +132,9 @@ In many cases, you will want your DSLs concepts to be usable as Java elements. E
 become a Java class and should be usable as such. In the domain model example, you can write  
 
 code[DomainExample][
+entity Employee extends Person {
+...
+
 entity Person {
 	friends: List<Person>
 ...
@@ -139,9 +142,9 @@ entity Person {
 
 i.e. use entities instead of Java types or even mix Java types as codeRef[java.util.List] with entities such as e[Person].
 One way to achieve this is to let your concepts inherit from a corresponding JVM type, e.g. let e[Entity]
-inherit from e[JvmGenericType]. This usually results in a lot of accidentally inherited properties in
-your domain model. In Xbase there is an alternative: You can define how to derive a JVM model from your
-model and link against this e[inferred JVM model]. 
+inherit from codeRef[org.eclipse.xtext.common.types.JvmGenericType]. This usually results in a lot of 
+accidentally inherited properties in your domain model. In Xbase there is an alternative: You can define how
+to derive a JVM model from your model and link against this e[inferred JVM model]. 
 
 The main component for the inferred JVM model is the codeRef[org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer].
 It has a single method that gets a model element passed in and returns a list of 
@@ -182,7 +185,7 @@ codeRef[org.eclipse.xtext.xbase.scoping.XbaseScopeProvider] offers a template me
 to populate this scope of local variables. Have a look at the following implementation (in Xtend) from
 the domain model example:
 
-code[Xtend][
+code[Xtend2][
 class DomainmodelScopeProvider extends XbaseScopeProvider {
 
 	@Inject extension IJvmModelAssociations associations
@@ -214,7 +217,27 @@ class DomainmodelScopeProvider extends XbaseScopeProvider {
 It binds the variable e[this] within an e[Entity] to the ref:jvmModelInferrence[inferred JVM type] of the
 e[Entity]. Additionally, the e[Parameters] of an e[Operation] are available as local variables inside the 
 operation body. This way, the Xbase typesystem knows the types of these variables and can put their methods
-and fields on the scope.   
+and fields on the scope.
+
+If you want the inferred model to be cross-referrable from other resources, you have do make sure
+it is indexed. Make sure your codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider] returns a qualified
+name for these elements, e.g.
+
+code[Java][
+	public class DomainmodelQualifiedNameProvider 
+		extends DefaultDeclarativeQualifiedNameProvider {
+
+	@Inject
+	private IQualifiedNameConverter converter;
+	
+	QualifiedName qualifiedName(JvmGenericType type) {
+		return converter.toQualifiedName(type.getQualifiedName());
+	}
+}
+]
+
+and that your codeRef[org.eclipse.xtext.resource.IResourceDescription$Manager] creates descriptions these elements
+(see ref:resourcedescriptions[section on resource descriptions] for details).
 
 section2[TypeProvider]
 
@@ -233,6 +256,9 @@ table[
 	tr[td[getThrownExceptions()]td[returns the types of all declared exceptions thrown inside this expression]]
 ]
 
+An additional flag e[rawType] signals a raw type without resolved type parameters is enough. This is
+needed to avoid cycles in the type inferrence while linking.
+ 
 The codeRef[org.eclipse.xtext.xbase.typing.XbaseTypeProvider] implements polymorphic dispatch methods
 for the first three of these. In the domain model example, we expect the return type of the body of an e[Operation]
 to conform to the declared return type. We can do so by specializing the default 
@@ -256,6 +282,96 @@ and of course binding this new implementation in the languge's module.
 
 
 section[Generating Java Code using the Xbase Compiler]
+
+The codeRef[org.eclipse.xtext.xbase.compiler.XbaseCompiler] compiles Xbase expressions to Java code.
+You will now learn how to integrate it in the code generator of your DSL. 
+
+Two components are responsible for managing the state of the compilation: The codeRef[org.eclipse.xtext.xbase.compiler.ImportManager]
+and an codeRef[org.eclipse.xtext.xbase.compiler.IAppendable].
+
+The codeRef[org.eclipse.xtext.xbase.compiler.ImportManager] serializes references to Java types and 
+collects namespaces to import on the way. You should use a new instance for each generated Java file, 
+use it when generating the code into a string and finally query
+the gathered imports to create the import section of the file. 
+
+The following snippet shows how the import manager is used in the domain model example:
+
+code[Xtend2][
+class DomainmodelGenerator implements IGenerator {
+	
+	@Inject DomainmodelCompiler domainmodelCompiler
+	
+	override void doGenerate(Resource resource, 
+	                         IFileSystemAccess fsa) {
+		for(entity: resource.allContentsIterable
+		                    .filter(typeof(Entity))) {
+			fsa.generateFile(entity.fileName, entity.compile)
+		}
+	}
+	
+	def compile(Entity e) ''' 
+		«val importManager = new ImportManager(true)»
+		«/* first evaluate the body in order to collect the used types
+			for the import section */
+		val body = body(e, importManager)»
+		«IF !(e.packageName.isNullOrEmpty)»
+			package «e.packageName»;
+			
+		«ENDIF»
+		«FOR i:importManager.imports»
+			import «i»;
+		«ENDFOR»
+		
+		«body»
+	'''
+		
+...
+
+	def dispatch feature(Operation o, ImportManager importManager) '''
+		public «o.type.shortName(importManager)» «o.name»(«
+			o.parameterList(importManager)») {
+			«domainmodelCompiler.compile(o, importManager)» 
+		}
+	'''
+] 
+
+An codeRef[org.eclipse.xtext.xbase.compiler.IAppendable] keeps track of the indentation, of local variables, 
+and of the generated code. Use an codeRef[org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable]
+to generate the code of an XbaseExpression into a codeRef[java.lang.StringBuilder]. Here is how the 
+codeRef[org.eclipse.xtext.xbase.compiler.IAppendable] is initialized and the 
+codeRef[org.eclipse.xtext.xbase.compiler.XbaseCompiler] is called in the domain model example
+
+code[Java][
+public class DomainmodelCompiler extends XbaseCompiler {
+
+	@Inject
+	private IJvmModelAssociations associations;
+
+	public String compile(Operation operation, 
+	                      ImportManager importManager) {
+		StringBuilderBasedAppendable appendable = 
+			new StringBuilderBasedAppendable(importManager);
+		registerThis(operation, appendable);
+		for(JvmFormalParameter param: operation.getParams()) {
+			appendable.declareVariable(param, param.getName());
+		}
+		return compile(operation.getBody(), 
+		               appendable, 
+		               operation.getType()).toString();
+	}
+
+	protected void registerThis(Operation operation, 
+	                            StringBuilderBasedAppendable appendable) 
+	{
+		Set<EObject> elements = associations.getJvmElements(operation);
+		JvmOperation jvmOp = (JvmOperation) elements.iterator().next();
+		appendable.declareVariable(jvmOp.getDeclaringType(), "this");
+	}
+] 
+
+
+section[Adding Default Extensions and Literal Functions]
+
 
 
 
