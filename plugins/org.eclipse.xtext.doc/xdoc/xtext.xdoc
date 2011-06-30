@@ -62,7 +62,7 @@ codelanguage-def[XML][]
 
 codelanguage-def[DomainExample][package, entity, datatype, import, extends, public]
 
-codelanguage-def[JavaTypesExample][type, mapped-to]
+codelanguage-def[JavaTypesExample][datatype, mapped-to]
 
 codelanguage-def[FowlerExample][events, commands, state, actions, end, resetting]
 
@@ -88,9 +88,7 @@ chapter-ref[MWE2]
 
 chapter-ref[ide_concepts]
 
-chapter-ref[jvmtypes]
-
-chapter-ref[xbase]
+chapter-ref[xtextAndJava]
 
 %% chapter-ref[special_languages]
 chapter-ref[emf_integration]

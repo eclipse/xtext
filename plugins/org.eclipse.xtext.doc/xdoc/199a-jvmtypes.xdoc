@@ -1,4 +1,4 @@
-chapter:jvmtypes[Referring to Java Types]
+section:jvmtypes[Referring to Java Elements using JVM Types]
 
 A common use case when developing languages is the requirement to refer to existing concepts of other 
 languages. Xtext makes this very easy for other self defined DSLs. However, it is often very useful
@@ -8,59 +8,43 @@ fields and methods. Basically every information about the structural concepts of
 is available via the JVM types. This includes annotations and their specific values and enumeration 
 literals as well.
 
-The implementation will be selected transparently depending on where the client code is 
+The implementation will be selected transparently depending on how the client code is 
 executed. If the environment is a plain stand-alone Java or OSGi environment, the e[java.lang.reflect] 
 API will be used to deduce the necessary data. On the contrary, the type-model will be created from the 
 live data of the JDT in an interactive Eclipse environment. All this happens transparently for the clients
-behind the scenes via different
-implementations that are bound to specific interfaces by means of Google Guice. 
-
-
-section[How to Use Java Types]
+behind the scenes via different implementations that are bound to specific interfaces by means of Google Guice. 
 
 Using the JVM types model is very simple. First of all, the grammar has to import the e[JavaVMTypes] Ecore model. 
 Thanks to content assist this is easy to spot in the list of proposals.  
 
 code[Xtext][
-import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
+import "http://www.eclipse.org/xtext/common/JavaVMTypes" as jvmTypes
 ]
 
 The next step is to actually refer to an imported concept. Let's define a mapping to available
-Java types for the simple data types in the self defined language. By means of cross-references this works
-as one got already used to when dealing with references in Xtext.
+Java types for the simple data types in the domain model language. This can be done with a simple cross-reference:
 
-code[Xtext][Type:
-  'type' name=ID 'mapped-to' javaType=\[types::JvmType | FQN\];
-]
-
-Last but not least, the codeRef[org.eclipse.xtext.generator.types.TypesGeneratorFragment] 
-has to be added to the workflow. The safest way is 
-to add it after the actually used scoping fragments as a specialized version of the 
-codeRef[org.eclipse.xtext.scoping.IGlobalScopeProvider] will be configured. Don't forget to refer to 
-the e[genmodel] of the Java VM types. 
-
-code[MWE2][
-fragment = ecore.EcoreGeneratorFragment {
-  referencedGenModels="classpath:/model/JavaVMTypes.genmodel"
-}
-
-fragment = types.TypesGeneratorFragment {}
+code[Xtext][// simple cross reference to a Java type
+DataType:
+  'datatype' name=ID 
+  'mapped-to' javaType=\[jvmTypes::JvmType|QualifiedName\];
 ]
 
 After regenerating your language, it will be allowed to define a type code[DomainExample][Date] that maps to the codeRef[java.util.Date]
 like this:
 
 code[JavaTypesExample][
-	type Date mapped-to java.util.Date
+	datatype Date mapped-to java.util.Date
 ]
 
 These two steps will provide a nice integration into the Eclipse JDT. There is e[Find References] on Java methods, 
 fields and types that will reveal results in your language files. e[Go To Declaration] works as expected
-and content assist will propose the list of available types. 
+and content assist will propose the list of available types. Even the e[import] statements will also
+apply for Java types. 
 
-section[Customization Points]
+section2[Customization Points]
 
-There are several customization hooks in the runtime layer and on the editor side as well:
+There are several customization hooks in the runtime layer of the JVM tpes and on the editor side as well:
 
 The codeRef[org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider] 
 can be used to create scopes for members with respect to
@@ -79,7 +63,6 @@ provides a comprehensive set of reusable filters that can be easily combined to 
 to a smaller number of valid entries.
 
 code[Java][
-
 import static org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters; 
 
   // ..
@@ -92,5 +75,4 @@ import static org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters;
       ),
       TypeMatchFilters.isPublic()
     ), acceptor);
- 
- ]
+]

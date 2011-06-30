@@ -1,15 +1,15 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/app.class.php");	require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/nav.class.php"); 	require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/menu.class.php"); 	$App 	= new App();	$Nav	= new Nav();	$Menu 	= new Menu();		include($App->getProjectCommon());    # All on the same line to unclutter the user's desktop'
 	include("include.php");
-	$pageTitle 		= "Referring to Java Types";
+	$pageTitle 		= "Xtext and Java";
 	
-	$html = file_get_contents('199-jvmtypes.html');
+	$html = file_get_contents('199-xtext-and-java.html');
 
 	$Nav->setLinkList(array());
 	
 	$App->AddExtraHtmlHeader('
 	<script type="text/javascript">
 	function init() {
-		var docName = "199-jvmtypes.html";
+		var docName = "199-xtext-and-java.html";
 	    initTocMenu(docName);
 		highlightCurrentSection(docName);
 	}

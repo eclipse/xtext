@@ -152,164 +152,166 @@
 		</ul>
 	</div>
 	<div id="midcolumn">
-			<a name="encoding" ></a>
+			<a name="xbaseJavaReferences" ></a>
 			<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
 		padding: 5px 0;
 		padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
 		<br style="clear:both" />
-			<h1>Encoding in Xtext</h1>
-				<div class="toc">
-				  <ul>
-				    <li><a href="115-encoding.php#encoding_6" >Encoding at Language Design Time</a></li>
-				    <li><a href="115-encoding.php#encoding_7" >Encoding at Language Runtime</a></li>
-				    <li><a href="115-encoding.php#encoding_8" >Encoding of an XtextResource</a></li>
-				    <li><a href="115-encoding.php#encoding_9" >Encoding in New Model Projects</a></li>
-				    <li><a href="115-encoding.php#encoding_10" >Encoding of Xtext Source Code</a></li>
-				  </ul>
-				</div>
+			<h1>Referring to Java Types Using Xbase</h1>
 			<p>
-			Encoding, aka <em>character set</em>, describes the way characters are encoded into bytes and vice versa. 
-			Famous standard encodings are <em>UTF-8</em> or <em>ISO-8859-1</em>. The list of available encodings can be determined
-			by calling <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/nio/charset/Charset.html" title="java.nio.charset.Charset">Charset.availableCharsets()</abbr></a>. There is also a list of encodings and their 
-			canonical Java names in the <a href="http://download.oracle.com/javase/1.5.0/docs/guide/intl/encoding.doc.html" >API docs</a>.
+			While the JVM types approach from the last chapter allow to refer to any Java element, it has its drawbacks
+			when it comes to generics. Usually, a type reference in Java can have type arguments which can also include
+			wildcards, upper and lower bounds etc. A simple cross-reference using a qualified name is not enough
+			to express neither the syntax nor the structure of such a type reference. 
 			</p>
 			<p>
-			Unfortunately, each platform and/or spoken language tends to define its own native encoding, 
-			e.g. <em>Cp1258</em> on Windows in Vietnamese or <em>MacIceland</em> on Mac OS X in Icelandic. 
-			</p>
-			<p>
-			In an Eclipse workspace, files, folders, projects can have individual encodings, which are stored
-			in the hidden file <em>.settings/org.eclipse.core.resources.prefs</em> in each project. If a resource does not have an 
-			explicit encoding, it inherits the one from its parent recursively. Eclipse chooses the native
-			platform encoding as the default for the workspace root. You can change the default workspace 
-			encoding in the Eclipse preferences <em>Preferences->Workspace->Default text encoding</em>. If you develop on
-			different platforms, you should consider choosing an explicit common encoding for your text or code
-			files, especially if you use special characters. 
-			</p>
-			<p>
-			While Eclipse allows to define and inspect the encoding of a file, your file system usually doesn't. 
-			Given an arbitrary text file there is no general strategy to tell how it was encoded. If you deploy 
-			an Eclipse project as a jar (even a plug-in), any encoding information not stored in the file itself 
-			is lost, too. Some languages define the encoding of a file explicitly, as in the first processing 
-			instruction of an XML file. Most languages don't. Others imply a fixed encoding or offer enhanced 
-			syntax for character literals, e.g. the unicode escape sequences <em>\uXXXX</em> in Java. 
-			</p>
-			<p>
-			As Xtext is about textual modeling, it allows to tweak the encoding in various places.
-			</p>
-			<a name="encoding_6" ></a>
-			<h2>Encoding at Language Design Time</h2>
-			<p>
-			The plug-ins created by the <em>New Xtext Project</em> wizard are by default encoded in the workspace's standard
-			encoding. The same holds for all files that Xtext generates in there.
-			If you want to change that, e.g. because your grammar uses/allows special characters, you should manually 
-			set the encoding in the properties of these projects after their creation. Do this before 
-			adding special characters to your grammar or at least make sure the grammar reads correctly after the 
-			encoding change. To tell the Xtext generator to generate files in the same encoding, set the encoding 
-			property in the workflow next to your grammar, e.g.
+			Xbase offers a parser rule <em>JvmTypeReference</em> which supports the full syntax of a Java type reference
+			and instantiates an JVM element of type <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmTypeReference.html" title="org.eclipse.xtext.common.types.JvmTypeReference">JvmTypeReference</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmTypeReference.java" title="View Source Code" >(src)</a>. So
+			lets start by letting our language inherit from Xbase
 			</p>
 			<p>
 			<div class="literallayout">
 			<div class="incode">
 			<p class="code">
-			Generator&nbsp;{<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;encoding&nbsp;=<span class="string">"UTF-8"</span><br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;...
+			<span class="keyword">grammar</span>&nbsp;org.eclipse.xtext.example.Domainmodel&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;<span class="keyword">with</span>&nbsp;org.eclipse.xtext.xbase.Xbase
 			</p>
 			</div>
 			</div>
 			</p>
-			<a name="encoding_7" ></a>
-			<h2>Encoding at Language Runtime</h2>
 			<p>
-			As each language could handle the encoding problem differently, Xtext offers a service here. 
-			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parser/IEncodingProvider.html" title="org.eclipse.xtext.parser.IEncodingProvider">IEncodingProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java" title="View Source Code" >(src)</a> has a single method 
-			<span class="inlinecode">getEncoding(URI)</span> to define the encoding of the resource with the given URI. Users can implement 
-			their own strategy but keep in mind that this is not intended to be a long running method. If the 
-			encoding is stored within the model file itself, it should be extractable in an easy way, like from 
-			the first line in an XML file. The default implementation returns the default Java character set 
-			in the runtime scenario. 
-			</p>
-			<p>
-			In the UI scenario, when there is a workspace, users will expect the encoding of the model files 
-			to be settable the same way as for other files in the workspace. The default implementation 
-			of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parser/IEncodingProvider.html" title="org.eclipse.xtext.parser.IEncodingProvider">IEncodingProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java" title="View Source Code" >(src)</a> in the UI scenario therefore returns 
-			the file's workspace encoding for files in the workspace and delegates to the runtime implementation 
-			for all other resources, e.g. models in a jar or from a deployed plug-in. Keep in mind that you are 
-			going to loose the workspace encoding information as soon as you leave this workspace, e.g. deploy your 
-			project.
-			</p>
-			<p>
-			Unless you want to enforce a uniform encoding for all models of your language, we advise to 
-			override the runtime service only. It is bound in the runtime module using the binding annotation 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/service/DispatchingProvider.Runtime.html" title="org.eclipse.xtext.service.DispatchingProvider.Runtime">@Runtime</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/DispatchingProvider.java" title="View Source Code" >(src)</a>:
+			As we can express all kinds of Java type references directly now, the indirection for <em>DataTypes</em> 
+			no longer makes sense. Let us turn all cross-references to <em>Types</em> to calls to the <em>JvmTypeReferences</em>
+			rule. The rules <em>DataType</em>, <em>Type</em>, and <em>QualifiedName</em> become obsolete (the latter is already defined
+			in Xbase), and the <em>Type</em> in <em>AbstractEntity</em> must be changed to <em>Entity</em>. The whole grammar now reads
+			as
 			</p>
 			<p>
 			<div class="literallayout">
 			<div class="incode">
 			<p class="code">
-			@Override<br/>
-			<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configureRuntimeEncodingProvider(Binder&nbsp;binder)&nbsp;{<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;binder.bind(IEncodingProvider.<span class="keyword">class</span>)<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.annotatedWith(DispatchingProvider.Runtime.<span class="keyword">class</span>)<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to(MyEncodingProvider.<span class="keyword">class</span>);<br/>
-			}
-			</p>
-			</div>
-			</div>
-			</p>
-			<p>
-			For the uniform encoding, bind the plain <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parser/IEncodingProvider.html" title="org.eclipse.xtext.parser.IEncodingProvider">IEncodingProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java" title="View Source Code" >(src)</a> to the same
-			implementation in both modules:
-			</p>
-			<p>
-			<div class="literallayout">
-			<div class="incode">
-			<p class="code">
-			@Override<br/>
-			<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IEncodingProvider&gt;&nbsp;bindIEncodingProvider()&nbsp;{<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyEncodingProvider.<span class="keyword">class</span>;<br/>
-			}
-			</p>
-			</div>
-			</div>
-			</p>
-			<a name="encoding_8" ></a>
-			<h2>Encoding of an XtextResource</h2>
-			<p>
-			An <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/XtextResource.html" title="org.eclipse.xtext.resource.XtextResource">XtextResource</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a> uses the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parser/IEncodingProvider.html" title="org.eclipse.xtext.parser.IEncodingProvider">IEncodingProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java" title="View Source Code" >(src)</a> 
-			of your language by default. You can override that by passing an option on load and save, e.g.
-			</p>
-			<p>
-			<div class="literallayout">
-			<div class="incode">
-			<p class="code">
-			Map&lt;?,?&gt;&nbsp;options&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;HashMap();<br/>
-			options.put(XtextResource.OPTION_ENCODING,&nbsp;<span class="string">"UTF-8"</span>);<br/>
-			myXtextResource.load(options);<br/>
+			<span class="keyword">grammar</span>&nbsp;org.eclipse.xtext.example.Domainmodel&nbsp;<span class="keyword">with</span><br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.eclipse.xtext.xbase.Xbase<br/>
 			<br/>
-			options.put(XtextResource.OPTION_ENCODING,&nbsp;<span class="string">"ISO-8859-1"</span>);<br/>
-			myXtextResource.save(options);
+			<span class="keyword">generate</span>&nbsp;domainmodel&nbsp;<span class="string">"http://www.eclipse.org/xtext/example/Domainmodel"</span><br/>
+			<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/common/JavaVMTypes"</span>&nbsp;<span class="keyword">as</span>&nbsp;jvmTypes<br/>
+			<br/>
+			Domainmodel:<br/>
+			&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*<br/>
+			;<br/>
+			<br/>
+			PackageDeclaration:<br/>
+			&nbsp;&nbsp;<span class="string">&apos;package&apos;</span>&nbsp;name&nbsp;=&nbsp;QualifiedName&nbsp;<span class="string">&apos;{&apos;</span><br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;(elements&nbsp;+=&nbsp;AbstractElement)*<br/>
+			&nbsp;&nbsp;<span class="string">&apos;}&apos;</span><br/>
+			;<br/>
+			<br/>
+			AbstractElement:<br/>
+			&nbsp;&nbsp;PackageDeclaration&nbsp;|&nbsp;Entity&nbsp;|&nbsp;Import<br/>
+			;<br/>
+			<br/>
+			Import:<br/>
+			&nbsp;&nbsp;<span class="string">&apos;import&apos;</span>&nbsp;importedNamespace&nbsp;=&nbsp;QualifiedNameWithWildcard<br/>
+			;<br/>
+			&nbsp;&nbsp;<br/>
+			QualifiedNameWithWildcard:<br/>
+			&nbsp;&nbsp;QualifiedName&nbsp;<span class="string">&apos;.*&apos;</span>?<br/>
+			;<br/>
+			&nbsp;&nbsp;<br/>
+			Entity:<br/>
+			&nbsp;&nbsp;<span class="string">&apos;entity&apos;</span>&nbsp;name&nbsp;=&nbsp;ID&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">&apos;extends&apos;</span>&nbsp;superType&nbsp;=&nbsp;JvmTypeReference)?<br/>
+			&nbsp;&nbsp;<span class="string">&apos;{&apos;</span><br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;(features&nbsp;+=&nbsp;Feature)*<br/>
+			&nbsp;&nbsp;<span class="string">&apos;}&apos;</span><br/>
+			;<br/>
+			&nbsp;<br/>
+			Feature:<br/>
+			&nbsp;&nbsp;(many&nbsp;?=&nbsp;<span class="string">&apos;many&apos;</span>)?&nbsp;name&nbsp;=&nbsp;ID&nbsp;<span class="string">&apos;:&apos;</span>&nbsp;type&nbsp;=&nbsp;JvmTypeReference<br/>
+			;
 			</p>
 			</div>
 			</div>
 			</p>
-			<a name="encoding_9" ></a>
-			<h2>Encoding in New Model Projects</h2>
 			<p>
-			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.html" title="org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment">SimpleProjectWizardFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.java" title="View Source Code" >(src)</a> 
-			generates a wizard that clients of your language can use to create model 
-			projects. This wizard expects its templates to be in the encoding of the Generator that created it 
-			(see above). As for every new project wizard, its output will be encoded in the default encoding of the 
-			target workspace. If your language enforces a special encoding that ignores the workspace settings, you'll
-			have to make sure that your wizard uses the right encoding by yourself.
+			As we changed the grammar, we have to regenerate the language now.
 			</p>
-			<a name="encoding_10" ></a>
-			<h2>Encoding of Xtext Source Code</h2>
 			<p>
-			The source code of the Xtext framework itself is completely encoded in <em>ISO 8859-1</em>, which is necessary 
-			to make the Xpand templates work everywhere (they use french quotation markup). That encoding is hard 
-			coded into the Xtext generator code. You are likely never going to change that. 
+			Being able to parse a Java type reference is good, but we also have to write them back to their string
+			representation when we generate Java code. Into the bargain, a generic type reference with fully qualified
+			class names can become a bit bulky. The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/ImportManager.html" title="org.eclipse.xtext.xbase.compiler.ImportManager">ImportManager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/ImportManager.java" title="View Source Code" >(src)</a> shortens
+			fully qualified names, keeps track of imported namespaces, avoids name collisions, and serializes
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/JvmTypeReference.html" title="org.eclipse.xtext.common.types.JvmTypeReference">JvmTypeReferences</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/JvmTypeReference.java" title="View Source Code" >(src)</a>.
+			</p>
+			<p>
+			The following snippet shows our code generator using an <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/compiler/ImportManager.html" title="org.eclipse.xtext.xbase.compiler.ImportManager">ImportManager</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/ImportManager.java" title="View Source Code" >(src)</a>.
+			We create a new instance and pass it through the generation functions, collecting types on the way. As
+			the import section in a Java file precedes the class body, we create the body into a String variable
+			and assemble the whole file's content in a second step.
+			</p>
+			<p>
+			<div class="literallayout">
+			<div class="incode">
+			<p class="code">
+			<span class="keyword">class</span>&nbsp;DomainmodelGenerator&nbsp;<span class="keyword">implements</span>&nbsp;IGenerator&nbsp;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;@Inject&nbsp;<span class="keyword">extension</span>&nbsp;IQualifiedNameProvider&nbsp;nameProvider<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;<span class="keyword">void</span>&nbsp;doGenerate(Resource&nbsp;resource,&nbsp;IFileSystemAccess&nbsp;fsa)&nbsp;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(e:&nbsp;resource.allContentsIterable.filter(<span class="keyword">typeof</span>(Entity)))&nbsp;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fsa.generateFile(<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.fullyQualifiedName.toString.replace(<span class="string">"."</span>,&nbsp;<span class="string">"/"</span>)&nbsp;+&nbsp;<span class="string">".java"</span>,<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.compile)<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Entity&nbsp;e)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;val&nbsp;importManager&nbsp;=&nbsp;new&nbsp;ImportManager(true)&raquo;&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;val&nbsp;body&nbsp;=&nbsp;body(e,&nbsp;importManager)&raquo;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;IF&nbsp;e.eContainer&nbsp;!=&nbsp;null&raquo;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;package&nbsp;&laquo;e.eContainer.fullyQualifiedName&raquo;;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDIF&raquo;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;FOR&nbsp;i:importManager.imports&raquo;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;&laquo;i&raquo;;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDFOR&raquo;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;body&raquo;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;body(Entity&nbsp;e,&nbsp;ImportManager&nbsp;importManager)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;e.name&raquo;&nbsp;&laquo;IF&nbsp;e.superType&nbsp;!=&nbsp;null&raquo;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;&laquo;e.superType.shortName(importManager)&raquo;&nbsp;&laquo;ENDIF&raquo;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;FOR&nbsp;f:e.features&raquo;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;f.compile(importManager)&raquo;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;ENDFOR&raquo;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;compile(Feature&nbsp;f,&nbsp;ImportManager&nbsp;importManager)&nbsp;<span class="string">&apos;&apos;</span><span class="string">&apos;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;&laquo;f.type.shortName(importManager)&raquo;&nbsp;&laquo;f.name&raquo;;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;&laquo;f.type.shortName(importManager)&raquo;&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get&laquo;f.name.toFirstUpper&raquo;()&nbsp;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&laquo;f.name&raquo;;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;f.name.toFirstUpper&raquo;(<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;f.type.shortName(importManager)&raquo;&nbsp;&laquo;f.name&raquo;)&nbsp;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;f.name&raquo;&nbsp;=&nbsp;&laquo;f.name&raquo;;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&apos;</span><span class="string">&apos;&apos;</span><br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span>&nbsp;shortName(JvmTypeReference&nbsp;typeRef,&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ImportManager&nbsp;importManager)&nbsp;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">val</span>&nbsp;result&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;StringBuilder()<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;importManager.appendTypeRef(typeRef,&nbsp;result)<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result.toString<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+			}
+			</p>
+			</div>
+			</div>
 			</p>
 	</div>
 	<br style="clear:both;height:1em;">

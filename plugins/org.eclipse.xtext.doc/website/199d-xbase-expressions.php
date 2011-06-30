@@ -1,15 +1,15 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/app.class.php");	require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/nav.class.php"); 	require_once($_SERVER['DOCUMENT_ROOT'] . "/eclipse.org-common/system/menu.class.php"); 	$App 	= new App();	$Nav	= new Nav();	$Menu 	= new Menu();		include($App->getProjectCommon());    # All on the same line to unclutter the user's desktop'
 	include("include.php");
-	$pageTitle 		= "Leveraging Xbase Expressions In Your DSLs";
+	$pageTitle 		= "Leveraging Xbase Expressions In Your DSL";
 	
-	$html = file_get_contents('199a-xbase.html');
+	$html = file_get_contents('199d-xbase-expressions.html');
 
 	$Nav->setLinkList(array());
 	
 	$App->AddExtraHtmlHeader('
 	<script type="text/javascript">
 	function init() {
-		var docName = "199a-xbase.html";
+		var docName = "199d-xbase-expressions.html";
 	    initTocMenu(docName);
 		highlightCurrentSection(docName);
 	}
@@ -19,7 +19,7 @@
 	
 		var chapters = menu.children;
 		addHideSubsectionFunction(chapters);
-		var subToc = document.getElementById(\'subToc_\' + ActiveSubTocElementId);
+		var subToc = document.getElementById(ActiveSubTocElementId).parentNode;
 		if(subToc) {
 			subToc.style.display = "block";
 			subToc.previousElementSibling.children[0].style.display = "none"

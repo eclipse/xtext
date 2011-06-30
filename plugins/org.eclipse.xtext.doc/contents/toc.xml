@@ -350,32 +350,30 @@
 			</topic>
 		</topic>
 	</topic>
-	<topic href="contents/199-jvmtypes.html" label="Referring to Java Types" >
-		<topic href="contents/199-jvmtypes.html#jvmtypes_3" label="How to Use Java Types" >
+	<topic href="contents/199-xtext-and-java.html" label="Xtext and Java" >
+		<topic href="contents/199-xtext-and-java.html#xtextAndJava_3" label="Plug-in Setup" >
 		</topic>
-		<topic href="contents/199-jvmtypes.html#jvmtypes_4" label="Customization Points" >
-		</topic>
-	</topic>
-	<topic href="contents/199a-xbase.html" label="Leveraging Xbase Expressions In Your DSLs" >
-		<topic href="contents/199a-xbase.html#xbase_2" label="Configuring a language for Xbase" >
-			<topic href="contents/199a-xbase.html#xbase_2_2" label="Setup Plug-in Dependencies" >
-			</topic>
-			<topic href="contents/199a-xbase.html#xbase_2_3" label="Making Your Grammar Refer To Xbase" >
-			</topic>
-			<topic href="contents/199a-xbase.html#xbase_2_4" label="Generating Your Language With Xbase Support" >
+		<topic href="contents/199a-jvmtypes.html" label="Referring to Java Elements using JVM Types" >
+			<topic href="contents/199a-jvmtypes.html#jvmtypes_10" label="Customization Points" >
 			</topic>
 		</topic>
-		<topic href="contents/199a-xbase.html#xbase_3" label="Integrating Into the Typesystem" >
-			<topic href="contents/199a-xbase.html#jvmModelInferrence" label="Inferring a JVM Model" >
+		<topic href="contents/199b-xbase-java-references.html" label="Referring to Java Types Using Xbase" >
+		</topic>
+		<topic href="contents/199c-xbase-inferred-type.html" label="Inferring a JVM Model" >
+			<topic href="contents/199c-xbase-inferred-type.html#xbaseInferredType_7" label="Linking and Indexing" >
 			</topic>
-			<topic href="contents/199a-xbase.html#xbase_3_3" label="Populating Scopes" >
-			</topic>
-			<topic href="contents/199a-xbase.html#xbase_3_4" label="TypeProvider" >
+			<topic href="contents/199c-xbase-inferred-type.html#xbaseInferredType_8" label="Generation Parameters For Inferred JVM Types" >
 			</topic>
 		</topic>
-		<topic href="contents/199a-xbase.html#xbase_4" label="Generating Java Code using the Xbase Compiler" >
-		</topic>
-		<topic href="contents/199a-xbase.html#xbase_5" label="Adding Default Extensions and Literal Functions" >
+		<topic href="contents/199d-xbase-expressions.html" label="Leveraging Xbase Expressions In Your DSL" >
+			<topic href="contents/199d-xbase-expressions.html#xbaseExpressions_2" label="Making Your Grammar Refer To Xbase" >
+			</topic>
+			<topic href="contents/199d-xbase-expressions.html#xbaseScopeProvider" label="Populating the Scopes" >
+			</topic>
+			<topic href="contents/199d-xbase-expressions.html#xbaseExpressions_4" label="Type Checking at the Boundaries" >
+			</topic>
+			<topic href="contents/199d-xbase-expressions.html#xbaseExpressions_5" label="Generating Java Code using the Xbase Compiler" >
+			</topic>
 		</topic>
 	</topic>
 	<topic href="contents/210-emf-integration.html" label="Integration with EMF and Other EMF Editors" >

@@ -1,0 +1,135 @@
+section:xbaseJavaReferences[Referring to Java Types Using Xbase]
+
+While the JVM types approach from the last chapter allow to refer to any Java element, it has its drawbacks
+when it comes to generics. Usually, a type reference in Java can have type arguments which can also include
+wildcards, upper and lower bounds etc. A simple cross-reference using a qualified name is not enough
+to express neither the syntax nor the structure of such a type reference. 
+
+Xbase offers a parser rule e[JvmTypeReference] which supports the full syntax of a Java type reference
+and instantiates an JVM element of type codeRef[org.eclipse.xtext.common.types.JvmTypeReference]. So
+lets start by letting our language inherit from Xbase
+
+code[Xtext][
+grammar org.eclipse.xtext.example.Domainmodel 
+   with org.eclipse.xtext.xbase.Xbase
+]
+
+As we can express all kinds of Java type references directly now, the indirection for e[DataTypes] 
+no longer makes sense. Let us turn all cross-references to e[Types] to calls to the e[JvmTypeReferences]
+rule. The rules e[DataType], e[Type], and e[QualifiedName] become obsolete (the latter is already defined
+in Xbase), and the e[Type] in e[AbstractEntity] must be changed to e[Entity]. The whole grammar now reads
+as
+
+code[Xtext][
+grammar org.eclipse.xtext.example.Domainmodel with
+                                      org.eclipse.xtext.xbase.Xbase
+
+generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"
+import "http://www.eclipse.org/xtext/common/JavaVMTypes" as jvmTypes
+
+Domainmodel:
+  (elements += AbstractElement)*
+;
+
+PackageDeclaration:
+  'package' name = QualifiedName '{'
+    (elements += AbstractElement)*
+  '}'
+;
+
+AbstractElement:
+  PackageDeclaration | Entity | Import
+;
+
+Import:
+  'import' importedNamespace = QualifiedNameWithWildcard
+;
+  
+QualifiedNameWithWildcard:
+  QualifiedName '.*'?
+;
+  
+Entity:
+  'entity' name = ID 
+              ('extends' superType = JvmTypeReference)?
+  '{'
+    (features += Feature)*
+  '}'
+;
+ 
+Feature:
+  (many ?= 'many')? name = ID ':' type = JvmTypeReference
+; 
+]
+
+As we changed the grammar, we have to regenerate the language now.
+
+Being able to parse a Java type reference is good, but we also have to write them back to their string
+representation when we generate Java code. Into the bargain, a generic type reference with fully qualified
+class names can become a bit bulky. The codeRef[org.eclipse.xtext.xbase.compiler.ImportManager] shortens
+fully qualified names, keeps track of imported namespaces, avoids name collisions, and serializes
+codeRef[org.eclipse.xtext.common.types.JvmTypeReference][JvmTypeReferences].
+
+The following snippet shows our code generator using an codeRef[org.eclipse.xtext.xbase.compiler.ImportManager].
+We create a new instance and pass it through the generation functions, collecting types on the way. As
+the import section in a Java file precedes the class body, we create the body into a String variable
+and assemble the whole file's content in a second step.
+
+code[Xtend2][
+class DomainmodelGenerator implements IGenerator {
+	
+	@Inject extension IQualifiedNameProvider nameProvider
+	
+	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+		for(e: resource.allContentsIterable.filter(typeof(Entity))) {
+			fsa.generateFile(
+			  e.fullyQualifiedName.toString.replace(".", "/") + ".java",
+			  e.compile)
+		}
+	}
+	
+	def compile(Entity e) '''
+		«val importManager = new ImportManager(true)» 
+		«val body = body(e, importManager)»
+		«IF e.eContainer != null»
+			package «e.eContainer.fullyQualifiedName»;
+		«ENDIF»
+		
+		«FOR i:importManager.imports»
+			import «i»;
+		«ENDFOR»
+		
+		«body»
+	'''
+	
+	def body(Entity e, ImportManager importManager) '''
+		public class «e.name» «IF e.superType != null»
+			extends «e.superType.shortName(importManager)» «ENDIF»{
+			«FOR f:e.features»
+				«f.compile(importManager)»
+			«ENDFOR»
+		}
+	'''
+		
+	def compile(Feature f, ImportManager importManager) '''
+		private «f.type.shortName(importManager)» «f.name»;
+		
+		public «f.type.shortName(importManager)» 
+			get«f.name.toFirstUpper»() {
+			return «f.name»;
+		}
+		
+		public void set«f.name.toFirstUpper»(
+			«f.type.shortName(importManager)» «f.name») {
+			this.«f.name» = «f.name»;
+		}
+	'''
+	
+	def shortName(JvmTypeReference typeRef, 
+				  ImportManager importManager) {
+		val result = new StringBuilder()
+		importManager.appendTypeRef(typeRef, result)
+		result.toString
+	}
+}
+]

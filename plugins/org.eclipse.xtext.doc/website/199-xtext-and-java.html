@@ -152,164 +152,87 @@
 		</ul>
 	</div>
 	<div id="midcolumn">
-			<a name="encoding" ></a>
+		<a name="xtextAndJava" ></a>
+		<h1>Xtext and Java</h1>
+				<div class="toc">
+				  <ul>
+				    <li><a href="199-xtext-and-java.php#xtextAndJava_3" >Plug-in Setup</a></li>
+				    <li><a href="199a-jvmtypes.php" >Referring to Java Elements using JVM Types</a></li>
+				    <li><a href="199b-xbase-java-references.php" >Referring to Java Types Using Xbase</a></li>
+				    <li><a href="199c-xbase-inferred-type.php" >Inferring a JVM Model</a></li>
+				    <li><a href="199d-xbase-expressions.php" >Leveraging Xbase Expressions In Your DSL</a></li>
+				  </ul>
+				</div>
+				
+		<p>
+		The following chapter demonstrates how to integrate your own DSL with Java. We will do this in four
+		stages: First, you will learn how to refer to existing Java elements from within your language. Then
+		you will use Xbase to refer to generic types. In the third stap, you will map your own DSL's concepts 
+		to Java concepts. Last but not least, you will use both Java types and your concepts within Xbase 
+		expressions and generate executable Java code from this. 
+		</p>
+		<p>
+		Throughout this chapter, we will step by step improve the <a href="030-tutorial-next-steps.php" title="Go to &quot;15 Minutes Tutorial - Extended&quot;">domain model example from the tutorial</a>.  
+		</p>
+			<a name="xtextAndJava_3" ></a>
 			<span style="float:left; border-top: 1px dotted #d4d4dd; margin-left: 0; margin-top: 5px;
 		padding: 5px 0;
 		padding-top: 5px;"></span><a style="float: right" href="#">Top</a>
 		<br style="clear:both" />
-			<h1>Encoding in Xtext</h1>
-				<div class="toc">
-				  <ul>
-				    <li><a href="115-encoding.php#encoding_6" >Encoding at Language Design Time</a></li>
-				    <li><a href="115-encoding.php#encoding_7" >Encoding at Language Runtime</a></li>
-				    <li><a href="115-encoding.php#encoding_8" >Encoding of an XtextResource</a></li>
-				    <li><a href="115-encoding.php#encoding_9" >Encoding in New Model Projects</a></li>
-				    <li><a href="115-encoding.php#encoding_10" >Encoding of Xtext Source Code</a></li>
-				  </ul>
-				</div>
+			<h1>Plug-in Setup</h1>
 			<p>
-			Encoding, aka <em>character set</em>, describes the way characters are encoded into bytes and vice versa. 
-			Famous standard encodings are <em>UTF-8</em> or <em>ISO-8859-1</em>. The list of available encodings can be determined
-			by calling <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/nio/charset/Charset.html" title="java.nio.charset.Charset">Charset.availableCharsets()</abbr></a>. There is also a list of encodings and their 
-			canonical Java names in the <a href="http://download.oracle.com/javase/1.5.0/docs/guide/intl/encoding.doc.html" >API docs</a>.
+			In the following, we are going to use the JVM types model and the Xbase language library. To make these
+			available to your language, you have to add a couple of dependencies. In the runtime plug-in of your
+			language, add dependencies to   
 			</p>
 			<p>
-			Unfortunately, each platform and/or spoken language tends to define its own native encoding, 
-			e.g. <em>Cp1258</em> on Windows in Vietnamese or <em>MacIceland</em> on Mac OS X in Icelandic. 
+			<ul>
+			  <li><em>org.eclipse.xtext.common.types</em></li>
+			  <li><em>org.eclipse.xtext.xbase</em> and</li>
+			  <li><em>org.eclipse.xtext.xtend2.lib</em> if you are using Xtend to implement components.</li>
+			</ul>
 			</p>
 			<p>
-			In an Eclipse workspace, files, folders, projects can have individual encodings, which are stored
-			in the hidden file <em>.settings/org.eclipse.core.resources.prefs</em> in each project. If a resource does not have an 
-			explicit encoding, it inherits the one from its parent recursively. Eclipse chooses the native
-			platform encoding as the default for the workspace root. You can change the default workspace 
-			encoding in the Eclipse preferences <em>Preferences->Workspace->Default text encoding</em>. If you develop on
-			different platforms, you should consider choosing an explicit common encoding for your text or code
-			files, especially if you use special characters. 
+			Your UI plug-in needs dependencies to
+			<ul>
+			  <li><em>org.eclipse.xbase.ui</em></li>
+			  <li><em>org.eclipse.xtext.common.types.ui</em></li>
+			</ul>
 			</p>
 			<p>
-			While Eclipse allows to define and inspect the encoding of a file, your file system usually doesn't. 
-			Given an arbitrary text file there is no general strategy to tell how it was encoded. If you deploy 
-			an Eclipse project as a jar (even a plug-in), any encoding information not stored in the file itself 
-			is lost, too. Some languages define the encoding of a file explicitly, as in the first processing 
-			instruction of an XML file. Most languages don't. Others imply a fixed encoding or offer enhanced 
-			syntax for character literals, e.g. the unicode escape sequences <em>\uXXXX</em> in Java. 
-			</p>
-			<p>
-			As Xtext is about textual modeling, it allows to tweak the encoding in various places.
-			</p>
-			<a name="encoding_6" ></a>
-			<h2>Encoding at Language Design Time</h2>
-			<p>
-			The plug-ins created by the <em>New Xtext Project</em> wizard are by default encoded in the workspace's standard
-			encoding. The same holds for all files that Xtext generates in there.
-			If you want to change that, e.g. because your grammar uses/allows special characters, you should manually 
-			set the encoding in the properties of these projects after their creation. Do this before 
-			adding special characters to your grammar or at least make sure the grammar reads correctly after the 
-			encoding change. To tell the Xtext generator to generate files in the same encoding, set the encoding 
-			property in the workflow next to your grammar, e.g.
+			Additionally, you have to register the <em>genmodel</em> of Xbase to the standalone setup of your MWE2 workflow
+			and make sure the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/types/TypesGeneratorFragment.html" title="org.eclipse.xtext.generator.types.TypesGeneratorFragment">TypesGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/types/TypesGeneratorFragment.java" title="View Source Code" >(src)</a> and the 
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.html" title="org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment">XbaseGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/xbase/XbaseGeneratorFragment.java" title="View Source Code" >(src)</a> are included:
 			</p>
 			<p>
 			<div class="literallayout">
 			<div class="incode">
 			<p class="code">
-			Generator&nbsp;{<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;encoding&nbsp;=<span class="string">"UTF-8"</span><br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;...
-			</p>
-			</div>
-			</div>
-			</p>
-			<a name="encoding_7" ></a>
-			<h2>Encoding at Language Runtime</h2>
-			<p>
-			As each language could handle the encoding problem differently, Xtext offers a service here. 
-			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parser/IEncodingProvider.html" title="org.eclipse.xtext.parser.IEncodingProvider">IEncodingProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java" title="View Source Code" >(src)</a> has a single method 
-			<span class="inlinecode">getEncoding(URI)</span> to define the encoding of the resource with the given URI. Users can implement 
-			their own strategy but keep in mind that this is not intended to be a long running method. If the 
-			encoding is stored within the model file itself, it should be extractable in an easy way, like from 
-			the first line in an XML file. The default implementation returns the default Java character set 
-			in the runtime scenario. 
-			</p>
-			<p>
-			In the UI scenario, when there is a workspace, users will expect the encoding of the model files 
-			to be settable the same way as for other files in the workspace. The default implementation 
-			of the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parser/IEncodingProvider.html" title="org.eclipse.xtext.parser.IEncodingProvider">IEncodingProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java" title="View Source Code" >(src)</a> in the UI scenario therefore returns 
-			the file's workspace encoding for files in the workspace and delegates to the runtime implementation 
-			for all other resources, e.g. models in a jar or from a deployed plug-in. Keep in mind that you are 
-			going to loose the workspace encoding information as soon as you leave this workspace, e.g. deploy your 
-			project.
-			</p>
-			<p>
-			Unless you want to enforce a uniform encoding for all models of your language, we advise to 
-			override the runtime service only. It is bound in the runtime module using the binding annotation 
-			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/service/DispatchingProvider.Runtime.html" title="org.eclipse.xtext.service.DispatchingProvider.Runtime">@Runtime</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/service/DispatchingProvider.java" title="View Source Code" >(src)</a>:
-			</p>
-			<p>
-			<div class="literallayout">
-			<div class="incode">
-			<p class="code">
-			@Override<br/>
-			<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;configureRuntimeEncodingProvider(Binder&nbsp;binder)&nbsp;{<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;binder.bind(IEncodingProvider.<span class="keyword">class</span>)<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.annotatedWith(DispatchingProvider.Runtime.<span class="keyword">class</span>)<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.to(MyEncodingProvider.<span class="keyword">class</span>);<br/>
-			}
+			bean&nbsp;=&nbsp;StandaloneSetup&nbsp;{<br/>
+			&nbsp;&nbsp;registerGenModelFile&nbsp;=&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"</span><br/>
+			}<br/>
+			...<br/>
+			fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}<br/>
+			fragment&nbsp;=&nbsp;xbase.XbaseGeneratorFragment&nbsp;{}
 			</p>
 			</div>
 			</div>
 			</p>
 			<p>
-			For the uniform encoding, bind the plain <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parser/IEncodingProvider.html" title="org.eclipse.xtext.parser.IEncodingProvider">IEncodingProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java" title="View Source Code" >(src)</a> to the same
-			implementation in both modules:
+			To avoid running out of memory when regenerating, you increase the maximum heap size and the permanent generation
+			space in the run configuration of your workflow. We recommend at least 
 			</p>
 			<p>
-			<div class="literallayout">
-			<div class="incode">
-			<p class="code">
-			@Override<br/>
-			<span class="keyword">public</span>&nbsp;Class&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;IEncodingProvider&gt;&nbsp;bindIEncodingProvider()&nbsp;{<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;MyEncodingProvider.<span class="keyword">class</span>;<br/>
-			}
-			</p>
-			</div>
-			</div>
-			</p>
-			<a name="encoding_8" ></a>
-			<h2>Encoding of an XtextResource</h2>
-			<p>
-			An <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/resource/XtextResource.html" title="org.eclipse.xtext.resource.XtextResource">XtextResource</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/resource/XtextResource.java" title="View Source Code" >(src)</a> uses the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/parser/IEncodingProvider.html" title="org.eclipse.xtext.parser.IEncodingProvider">IEncodingProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/parser/IEncodingProvider.java" title="View Source Code" >(src)</a> 
-			of your language by default. You can override that by passing an option on load and save, e.g.
+			<span class="inlinecode">-Xmx512m&nbsp;-XX:MaxPermSize=128m</span> 
 			</p>
 			<p>
-			<div class="literallayout">
-			<div class="incode">
-			<p class="code">
-			Map&lt;?,?&gt;&nbsp;options&nbsp;=&nbsp;<span class="keyword">new</span>&nbsp;HashMap();<br/>
-			options.put(XtextResource.OPTION_ENCODING,&nbsp;<span class="string">"UTF-8"</span>);<br/>
-			myXtextResource.load(options);<br/>
-			<br/>
-			options.put(XtextResource.OPTION_ENCODING,&nbsp;<span class="string">"ISO-8859-1"</span>);<br/>
-			myXtextResource.save(options);
+			in the <em>VM Arguments</em> section of the <em>Arguments</em> tab. If you are experiencing ambiguity warnings from Antlr,
+			the <a href="020-grammar-language.php#antlr_errors" title="Go to &quot;Syntactic Predicates&quot;">usual countermeasures</a> apply.
 			</p>
-			</div>
-			</div>
-			</p>
-			<a name="encoding_9" ></a>
-			<h2>Encoding in New Model Projects</h2>
-			<p>
-			The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.html" title="org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment">SimpleProjectWizardFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/ui/generator/projectWizard/SimpleProjectWizardFragment.java" title="View Source Code" >(src)</a> 
-			generates a wizard that clients of your language can use to create model 
-			projects. This wizard expects its templates to be in the encoding of the Generator that created it 
-			(see above). As for every new project wizard, its output will be encoded in the default encoding of the 
-			target workspace. If your language enforces a special encoding that ignores the workspace settings, you'll
-			have to make sure that your wizard uses the right encoding by yourself.
-			</p>
-			<a name="encoding_10" ></a>
-			<h2>Encoding of Xtext Source Code</h2>
-			<p>
-			The source code of the Xtext framework itself is completely encoded in <em>ISO 8859-1</em>, which is necessary 
-			to make the Xpand templates work everywhere (they use french quotation markup). That encoding is hard 
-			coded into the Xtext generator code. You are likely never going to change that. 
-			</p>
+		<a href="199a-jvmtypes.html"><h1></h1></a>
+		<a href="199b-xbase-java-references.html"><h1></h1></a>
+		<a href="199c-xbase-inferred-type.html"><h1></h1></a>
+		<a href="199d-xbase-expressions.html"><h1></h1></a>
 	</div>
 	<br style="clear:both;height:1em;">
