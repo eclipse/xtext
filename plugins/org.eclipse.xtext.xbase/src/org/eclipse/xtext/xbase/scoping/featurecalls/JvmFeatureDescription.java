@@ -18,13 +18,16 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.xbase.XExpression;
 
+import com.google.inject.Provider;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class JvmFeatureDescription extends EObjectDescription implements IValidatedEObjectDescription {
 
 	private final TypeArgumentContext context;
-	private final String shadowingString;
+	private String shadowingString;
+	private Provider<String> shadowingStringProvider;
 	private final boolean isValid;
 	private XExpression implicitReceiver;
 	private int numberOfIrrelevantArguments = 0;
@@ -36,6 +39,18 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 		super(qualifiedName, element, Collections.<String, String> emptyMap());
 		this.context = context;
 		this.shadowingString = shadowingString;
+		this.shadowingStringProvider = null;
+		this.isValid = isValid;
+		this.implicitReceiver = implicitReceiver;
+		this.numberOfIrrelevantArguments = numberOfIrrelevantArguments;
+	}
+	
+	public JvmFeatureDescription(QualifiedName qualifiedName, JvmFeature element, TypeArgumentContext context,
+			Provider<String> shadowingStringProvider, boolean isValid, XExpression implicitReceiver,
+			int numberOfIrrelevantArguments) {
+		super(qualifiedName, element, Collections.<String, String> emptyMap());
+		this.context = context;
+		this.shadowingStringProvider = shadowingStringProvider;
 		this.isValid = isValid;
 		this.implicitReceiver = implicitReceiver;
 		this.numberOfIrrelevantArguments = numberOfIrrelevantArguments;
@@ -55,6 +70,10 @@ public class JvmFeatureDescription extends EObjectDescription implements IValida
 	}
 
 	public String getKey() {
+		if (shadowingString == null && shadowingStringProvider != null) {
+			shadowingString = shadowingStringProvider.get();
+			shadowingStringProvider = null;
+		}
 		return shadowingString;
 	}
 

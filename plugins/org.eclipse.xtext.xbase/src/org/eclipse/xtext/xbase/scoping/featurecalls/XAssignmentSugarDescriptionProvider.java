@@ -15,6 +15,8 @@ import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.IAcceptor;
 
+import com.google.inject.Provider;
+
 /**
  * creates assignment feature descriptions for setter methods.
  * 
@@ -28,11 +30,17 @@ public class XAssignmentSugarDescriptionProvider extends DefaultJvmFeatureDescri
 		if (feature instanceof JvmOperation) {
 			final JvmOperation jvmOperation = (JvmOperation) feature;
 			if (isSetterMethod(jvmOperation)) {
-				String propertyName = getPropertyNameForSetter(jvmOperation.getSimpleName());
-				String shadowingString = getSignature(jvmOperation, context);
-				shadowingString = propertyName + "=" + shadowingString.substring(jvmOperation.getSimpleName().length());
+				final String propertyName = getPropertyNameForSetter(jvmOperation.getSimpleName());
+				final Provider<String> originalSignatureProvider = getSignature(jvmOperation, context);
+				Provider<String> signatureProvider = new Provider<String>() {
+					public String get() {
+						String shadowingString = originalSignatureProvider.get();
+						shadowingString = propertyName + "=" + shadowingString.substring(jvmOperation.getSimpleName().length());
+						return shadowingString;
+					}
+				};
 				JvmFeatureDescription description = createJvmFeatureDescription(QualifiedName.create(propertyName), 
-						jvmOperation, context, shadowingString, isValid(feature));
+						jvmOperation, context, signatureProvider, isValid(feature));
 				acceptor.accept(description);
 			}
 		}
