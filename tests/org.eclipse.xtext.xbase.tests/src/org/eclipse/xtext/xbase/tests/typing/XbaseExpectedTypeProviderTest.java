@@ -197,7 +197,7 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 
 		assertExpected("java.lang.String", exp.getExpression());
 		for (XCatchClause cc : exp.getCatchClauses()) {
-			assertExpected(null, cc.getExpression());
+			assertExpected("java.lang.String", cc.getExpression());
 		}
 		assertExpected(null, exp.getFinallyExpression());
 	}

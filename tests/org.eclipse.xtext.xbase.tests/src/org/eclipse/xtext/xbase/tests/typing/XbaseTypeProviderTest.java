@@ -334,6 +334,10 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	public void testMethodTypeParamInference_01() throws Exception {
 		assertResolvedType("java.lang.String", "new java.util.ArrayList<String>().findFirst(e|e == 'foo')");
 	}
+	
+	public void testInstanceof() throws Exception {
+		assertResolvedType("boolean", "null instanceof java.lang.String");
+	}
 
 	@Inject
 	private ITypeProvider typeProvider;
