@@ -52,7 +52,8 @@ public class Xtext2RailroadFactory {
 	public ISegmentFigure createNodeSegment(Keyword keyword) {
 		NodeSegment nodeSegment = new NodeSegment(keyword, NodeType.RECTANGLE, keyword.getValue(), primitiveFactory,
 				getTextRegion(keyword));
-		return wrapCardinalitySegments(keyword, nodeSegment);
+		Assignment containingAssignment = GrammarUtil.containingAssignment(keyword);
+		return wrapCardinalitySegments(containingAssignment != null ? containingAssignment :keyword, nodeSegment);
 	}
 
 	public ISegmentFigure createNodeSegment(RuleCall ruleCall) {
