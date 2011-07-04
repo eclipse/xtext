@@ -165,6 +165,14 @@ public class TransformationTest {
 				.child(2).isType(ParallelSegment.class);
 	}
 
+	@Test
+	public void testKeywordAssignment() throws Exception {
+		getBuilder("Foo: bar='foo'?;").hasChildren(1)
+		.child(0).isType(RailroadTrack.class).hasChildren(5)
+			.child(0).isType(LabelNode.class).as("label").parent()
+			.child(1).isType(BypassSegment.class);
+	}
+
 	protected TreeVerificationBuilder getBuilder(String rules) throws IOException {
 		Grammar grammar = parser.parse(rules);
 		ISegmentFigure figure = transformer.transform(grammar);
