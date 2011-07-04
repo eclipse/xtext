@@ -316,7 +316,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			JvmTypeReference parameterType = parameter.getParameterType();
 			return typeArgumentContext.getLowerBound(parameterType);
 		}
-		return getExpectedType(expr, rawType);
+		return null;
+//		return getExpectedType(expr, rawType);
 	}
 
 	protected JvmTypeReference getExpectedVarArgType(JvmExecutable feature, TypeArgumentContext typeArgumentContext,
@@ -370,6 +371,9 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		if (reference == XbasePackage.Literals.XTRY_CATCH_FINALLY_EXPRESSION__EXPRESSION) {
 			return getExpectedType(expr, rawType);
 		}
+		if (reference == XbasePackage.Literals.XTRY_CATCH_FINALLY_EXPRESSION__CATCH_CLAUSES) {
+			return getExpectedType(expr, rawType);
+		}
 		return null; // no other expectations
 	}
 
@@ -377,7 +381,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		if (reference == XbasePackage.Literals.XCATCH_CLAUSE__DECLARED_PARAM) {
 			return getTypeReferences().getTypeForName(Throwable.class, expr);
 		}
-		return null; // no other expectations
+		return getExpectedType((XExpression) expr.eContainer(), rawType);
 	}
 
 	protected JvmTypeReference _expectedType(XCastedExpression expr, EReference reference, int index, boolean rawType) {
@@ -647,7 +651,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	}
 
 	protected JvmTypeReference _type(XInstanceOfExpression object, boolean rawType) {
-		return getTypeReferences().getTypeForName(Boolean.class, object);
+		return getTypeReferences().getTypeForName(Boolean.TYPE, object);
 	}
 
 	protected JvmTypeReference _type(XThrowExpression object, boolean rawType) {
