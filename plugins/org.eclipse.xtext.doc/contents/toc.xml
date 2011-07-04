@@ -374,6 +374,8 @@
 			</topic>
 			<topic href="contents/199d-xbase-expressions.html#xbaseExpressions_5" label="Generating Java Code using the Xbase Compiler" >
 			</topic>
+			<topic href="contents/199d-xbase-expressions.html#xbaseExpressions_6" label="Using the Xbase Interpreter" >
+			</topic>
 		</topic>
 	</topic>
 	<topic href="contents/210-emf-integration.html" label="Integration with EMF and Other EMF Editors" >

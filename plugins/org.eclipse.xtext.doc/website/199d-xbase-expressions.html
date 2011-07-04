@@ -164,6 +164,7 @@
 				    <li><a href="199d-xbase-expressions.php#xbaseScopeProvider" >Populating the Scopes</a></li>
 				    <li><a href="199d-xbase-expressions.php#xbaseExpressions_4" >Type Checking at the Boundaries</a></li>
 				    <li><a href="199d-xbase-expressions.php#xbaseExpressions_5" >Generating Java Code using the Xbase Compiler</a></li>
+				    <li><a href="199d-xbase-expressions.php#xbaseExpressions_6" >Using the Xbase Interpreter</a></li>
 				  </ul>
 				</div>
 			<p>
@@ -329,7 +330,7 @@
 			  </tr>
 			  <tr>
 			    <td>getExpectedType()</td>
-			    <td>returns the expected type of an expression</td>
+			    <td>returns the expected type of an expression in a given context</td>
 			  </tr>
 			  <tr>
 			    <td>getTypeForIdentifiable()</td>
@@ -337,7 +338,7 @@
 			  </tr>
 			  <tr>
 			    <td>getCommonReturnType()</td>
-			    <td>returns the common supertype of all types used in return expression
+			    <td>returns the common supertype of all types used in return expressions
 			    	inside this expression</td>
 			  </tr>
 			  <tr>
@@ -400,7 +401,7 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.getCommonReturnType(op.getBody(),&nbsp;<span class="keyword">true</span>);<br/>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(!typeConformanceComputer.isConformant(expectedType,&nbsp;<br/>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commonReturnType))<br/>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(<span class="string">"Type&nbsp;is&nbsp;not&nbsp;conform&nbsp;to&nbsp;expected&nbsp;type!"</span>,<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(<span class="string">"Type&nbsp;does&nbsp;not&nbsp;conform&nbsp;to&nbsp;expected&nbsp;type!"</span>,<br/>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.Literals.OPERATION__BODY);<br/>
 			&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 			}
@@ -523,7 +524,58 @@
 			</div>
 			</div>
 			</p>
+			<a name="xbaseExpressions_6" ></a>
+			<h2>Using the Xbase Interpreter</h2>
 			<p>
+			Sometimes it is more convenient to interpret a model that uses Xbase than to generate code from it.  
+			Xbase ships with the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html" title="org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter">XbaseInterpreter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java" title="View Source Code" >(src)</a> which makes this
+			rather easy.
+			</p>
+			<p>
+			An interpreter is essentially an external visitor, that recursively processes a model based on the model
+			element's types. By now you should be aware that polymorphic dispatch is exactly the technology needed
+			here. In the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html" title="org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter">XbaseInterpreter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java" title="View Source Code" >(src)</a>, the dispatch method
+			is called <em>_evaluate<ElementTypeWithoutX></em> ant takes two parameters, e.g. 
+			</p>
+			<p>
+			<div class="literallayout">
+			<div class="incode">
+			<p class="code">
+			<span class="keyword">protected</span>&nbsp;Object&nbsp;_evaluateBlockExpression(XBlockExpression&nbsp;literal,&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IEvaluationContext&nbsp;context,&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CancelIndicator&nbsp;indicator)
+			</p>
+			</div>
+			</div>
+			</p>
+			<p>
+			The <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/expressions/IEvaluationContext.html" title="org.eclipse.core.expressions.IEvaluationContext">IEvaluationContext</abbr></a> keeps the state of the running application,
+			i.e. the local variables and their values. Additionally, it can be <em>fork</em>ed, thus allowing to shadow the 
+			elements of the original context. Here is an example code snippet how to call the
+			<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html" title="org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter">XbaseInterpreter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java" title="View Source Code" >(src)</a>:
+			</p>
+			<p>
+			<div class="literallayout">
+			<div class="incode">
+			<p class="code">
+			@Inject&nbsp;<span class="keyword">private</span>&nbsp;XbaseInterpreter&nbsp;xbaseInterpreter;<br/>
+			<br/>
+			@Inject&nbsp;<span class="keyword">private</span>&nbsp;Provider&lt;IEvaluationContext&gt;&nbsp;contextProvider;<br/>
+			<br/>
+			...<br/>
+			<span class="keyword">public</span>&nbsp;Object&nbsp;evaluate(XExpression&nbsp;expression,&nbsp;Object&nbsp;thisElement)&nbsp;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;IEvaluationContext&nbsp;evaluationContext&nbsp;=&nbsp;contextProvider.get();<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;evaluationContext.newValue(XbaseScopeProvider.THIS,&nbsp;thisElement);<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;IEvaluationResult&nbsp;result&nbsp;=&nbsp;xbaseInterpreter.evaluate(expression,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;evaluationContext,&nbsp;CancelIndicator.NullImpl);<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(result.getException()&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;handle&nbsp;exception<br/>
+			</span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br/>
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;result.getResult();<br/>
+			}
+			</p>
+			</div>
+			</div>
 			</p>
 	</div>
 	<br style="clear:both;height:1em;">

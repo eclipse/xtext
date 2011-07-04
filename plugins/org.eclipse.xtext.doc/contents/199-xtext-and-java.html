@@ -13,9 +13,9 @@
 <p>
 The following chapter demonstrates how to integrate your own DSL with Java. We will do this in four
 stages: First, you will learn how to refer to existing Java elements from within your language. Then
-you will use Xbase to refer to generic types. In the third stap, you will map your own DSL&apos;s concepts 
+you will use Xbase to refer to generic types. In the third step, you will map your own DSL&apos;s concepts 
 to Java concepts. Last but not least, you will use both Java types and your concepts within Xbase 
-expressions and generate executable Java code from this. 
+expressions and execute it. 
 </p>
 <p>
 Throughout this chapter, we will step by step improve the <a href="030-tutorial-next-steps.html" title="Go to &quot;15 Minutes Tutorial - Extended&quot;">domain model example from the tutorial</a>.  
@@ -151,7 +151,7 @@ apply for Java types.
 <a name="jvmtypes_10"></a>
 <h3>Customization Points</h3>
 <p>
-There are several customization hooks in the runtime layer of the JVM tpes and on the editor side as well:
+There are several customization hooks in the runtime layer of the JVM types and on the editor side as well:
 </p>
 <p>
 The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/xtext/AbstractTypeScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider" >AbstractTypeScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/xtext/AbstractTypeScopeProvider.java" title="View Source Code" >(src)</a> 
@@ -747,7 +747,7 @@ returns the type of an expression
 getExpectedType()
 </td>
 <td>
-returns the expected type of an expression
+returns the expected type of an expression in a given context
 </td>
 </tr>
 <tr>
@@ -763,7 +763,7 @@ returns the expected type of an element that is referenced
 getCommonReturnType()
 </td>
 <td>
-returns the common supertype of all types used in return expression
+returns the common supertype of all types used in return expressions
 	inside this expression
 </td>
 </tr>
@@ -831,7 +831,7 @@ to add a <a href="060-validation.html" title="Go to &quot;Validation&quot;">vali
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.getCommonReturnType(op.getBody(),&nbsp;<span class="keyword">true</span>);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>(!typeConformanceComputer.isConformant(expectedType,&nbsp;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commonReturnType))<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(<span class="string">"Type&nbsp;is&nbsp;not&nbsp;conform&nbsp;to&nbsp;expected&nbsp;type!"</span>,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(<span class="string">"Type&nbsp;does&nbsp;not&nbsp;conform&nbsp;to&nbsp;expected&nbsp;type!"</span>,<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.Literals.OPERATION__BODY);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 }<br/>
@@ -954,7 +954,58 @@ Here&apos;s the complete code for the customized compiler:
 </div>
 </div>
 </p>
+<a name="xbaseExpressions_6"></a>
+<h3>Using the Xbase Interpreter</h3>
 <p>
+Sometimes it is more convenient to interpret a model that uses Xbase than to generate code from it.  
+Xbase ships with the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter" >XbaseInterpreter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java" title="View Source Code" >(src)</a> which makes this
+rather easy.
+</p>
+<p>
+An interpreter is essentially an external visitor, that recursively processes a model based on the model
+element&apos;s types. By now you should be aware that polymorphic dispatch is exactly the technology needed
+here. In the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter" >XbaseInterpreter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java" title="View Source Code" >(src)</a>, the dispatch method
+is called <em>_evaluate&lt;ElementTypeWithoutX&gt;</em> ant takes two parameters, e.g. 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">protected</span>&nbsp;Object&nbsp;_evaluateBlockExpression(XBlockExpression&nbsp;literal,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IEvaluationContext&nbsp;context,&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CancelIndicator&nbsp;indicator)<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+The <a class="jdoc" href="http://help.eclipse.org/helios/topic/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/expressions/IEvaluationContext.html" title="View JavaDoc"><abbr title="org.eclipse.core.expressions.IEvaluationContext" >IEvaluationContext</abbr></a> keeps the state of the running application,
+i.e. the local variables and their values. Additionally, it can be <em>fork</em>ed, thus allowing to shadow the 
+elements of the original context. Here is an example code snippet how to call the
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter" >XbaseInterpreter</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java" title="View Source Code" >(src)</a>:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Inject&nbsp;<span class="keyword">private</span>&nbsp;XbaseInterpreter&nbsp;xbaseInterpreter;<br/>
+<br/>
+@Inject&nbsp;<span class="keyword">private</span>&nbsp;Provider&lt;IEvaluationContext&gt;&nbsp;contextProvider;<br/>
+<br/>
+...<br/>
+<span class="keyword">public</span>&nbsp;Object&nbsp;evaluate(XExpression&nbsp;expression,&nbsp;Object&nbsp;thisElement)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;IEvaluationContext&nbsp;evaluationContext&nbsp;=&nbsp;contextProvider.get();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;evaluationContext.newValue(XbaseScopeProvider.THIS,&nbsp;thisElement);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;IEvaluationResult&nbsp;result&nbsp;=&nbsp;xbaseInterpreter.evaluate(expression,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;evaluationContext,&nbsp;CancelIndicator.NullImpl);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(result.getException()&nbsp;!=&nbsp;<span class="keyword">null</span>)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;handle&nbsp;exception<br/>
+</span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;result.getResult();<br/>
+}<br/>
+</p>
+</div>
+</div>
 </p>
 </body>
 </html>

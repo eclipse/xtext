@@ -44,7 +44,7 @@ apply for Java types.
 
 section2[Customization Points]
 
-There are several customization hooks in the runtime layer of the JVM tpes and on the editor side as well:
+There are several customization hooks in the runtime layer of the JVM types and on the editor side as well:
 
 The codeRef[org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider] 
 can be used to create scopes for members with respect to

@@ -3,9 +3,9 @@ chapter:xtextAndJava[Xtext and Java]
 
 The following chapter demonstrates how to integrate your own DSL with Java. We will do this in four
 stages: First, you will learn how to refer to existing Java elements from within your language. Then
-you will use Xbase to refer to generic types. In the third stap, you will map your own DSL's concepts 
+you will use Xbase to refer to generic types. In the third step, you will map your own DSL's concepts 
 to Java concepts. Last but not least, you will use both Java types and your concepts within Xbase 
-expressions and generate executable Java code from this. 
+expressions and execute it. 
 
 Throughout this chapter, we will step by step improve the ref:DomainmodelNextSteps[domain model example from the tutorial].  
 

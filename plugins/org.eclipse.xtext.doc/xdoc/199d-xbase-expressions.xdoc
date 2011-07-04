@@ -125,9 +125,9 @@ It has several responsibilities
 
 table[
 	tr[td[getType()]td[returns the type of an expression]]
-	tr[td[getExpectedType()]td[returns the expected type of an expression]]
+	tr[td[getExpectedType()]td[returns the expected type of an expression in a given context]]
 	tr[td[getTypeForIdentifiable()]td[returns the expected type of an element that is referenced]]
-	tr[td[getCommonReturnType()]td[returns the common supertype of all types used in return expression
+	tr[td[getCommonReturnType()]td[returns the common supertype of all types used in return expressions
 	inside this expression]]
 	tr[td[getThrownExceptions()]td[returns the types of all declared exceptions thrown inside this expression]]
 ]
@@ -176,7 +176,7 @@ public class DomainmodelJavaValidator
 			.getCommonReturnType(op.getBody(), true);
 		if(!typeConformanceComputer.isConformant(expectedType, 
 			commonReturnType))
-			error("Type is not conform to expected type!",
+			error("Type does not conform to expected type!",
 				DomainmodelPackage.Literals.OPERATION__BODY);
 	}
 }
@@ -278,11 +278,43 @@ class DomainmodelIdentifiableSimpleNameProvider extends
 }
 ]
 
+section2[Using the Xbase Interpreter]
 
+Sometimes it is more convenient to interpret a model that uses Xbase than to generate code from it.  
+Xbase ships with the codeRef[org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter] which makes this
+rather easy.
 
+An interpreter is essentially an external visitor, that recursively processes a model based on the model
+element's types. By now you should be aware that polymorphic dispatch is exactly the technology needed
+here. In the codeRef[org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter], the dispatch method
+is called e[_evaluate<ElementTypeWithoutX>] ant takes two parameters, e.g. 
 
+code[Java][
+protected Object _evaluateBlockExpression(XBlockExpression literal, 
+										  IEvaluationContext context, 
+										  CancelIndicator indicator)
+]
 
+The codeRef[org.eclipse.core.expressions.IEvaluationContext] keeps the state of the running application,
+i.e. the local variables and their values. Additionally, it can be e[fork]ed, thus allowing to shadow the 
+elements of the original context. Here is an example code snippet how to call the
+codeRef[org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter]:
 
+code[Java][
+@Inject private XbaseInterpreter xbaseInterpreter;
 
- 
+@Inject private Provider<IEvaluationContext> contextProvider;
+
+...
+public Object evaluate(XExpression expression, Object thisElement) {
+	IEvaluationContext evaluationContext = contextProvider.get();
+	evaluationContext.newValue(XbaseScopeProvider.THIS, thisElement);
+	IEvaluationResult result = xbaseInterpreter.evaluate(expression, 	
+		evaluationContext, CancelIndicator.NullImpl);
+	if (result.getException() != null) {
+		// handle exception
+	} 
+	return result.getResult();
+}
+]
 
