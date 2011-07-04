@@ -18,6 +18,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XExpression;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -61,6 +62,11 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 		return new JvmFeatureDescription(name, jvmFeature, ctx, shadowingString, isValid, implicitReceiver, getNumberOfIrrelevantArguments());
 	}
 	
+	protected JvmFeatureDescription createJvmFeatureDescription(QualifiedName name, JvmFeature jvmFeature,
+			TypeArgumentContext ctx, Provider<String> shadowingStringProvider, boolean isValid) {
+		return new JvmFeatureDescription(name, jvmFeature, ctx, shadowingStringProvider, isValid, implicitReceiver, getNumberOfIrrelevantArguments());
+	}
+	
 	private int getNumberOfIrrelevantArguments() {
 		if (isExtensionProvider())
 			return 1;
@@ -72,18 +78,23 @@ public class DefaultJvmFeatureDescriptionProvider implements IJvmFeatureDescript
 	}
 
 	protected JvmFeatureDescription createJvmFeatureDescription(JvmFeature jvmFeature, TypeArgumentContext ctx,
-			String shadowingString, boolean isValid) {
-		return createJvmFeatureDescription(QualifiedName.create(jvmFeature.getSimpleName()), jvmFeature, ctx,
-				shadowingString, isValid);
+			Provider<String> shadowingStringProvider, boolean isValid) {
+		return createJvmFeatureDescription(
+				QualifiedName.create(jvmFeature.getSimpleName()), 
+				jvmFeature, ctx, shadowingStringProvider, isValid);
 	}
 
 	public void addFeatureDescriptions(JvmFeature feature, TypeArgumentContext context, IAcceptor<JvmFeatureDescription> acceptor) {
-		String signature = getSignature(feature, context);
-		acceptor.accept(createJvmFeatureDescription(feature, context, signature, isValid(feature)));
+		Provider<String> signatureProvider = getSignature(feature, context);
+		acceptor.accept(createJvmFeatureDescription(feature, context, signatureProvider, isValid(feature)));
 	}
 
-	protected String getSignature(JvmFeature feature, TypeArgumentContext context) {
-		return signatureProvider.getSignature(feature, context, getNumberOfIrrelevantArguments());
+	protected Provider<String> getSignature(final JvmFeature feature, final TypeArgumentContext context) {
+		return new Provider<String>() {
+			public String get() {
+				return signatureProvider.getSignature(feature, context, getNumberOfIrrelevantArguments());
+			}
+		};
 	}
 
 	protected boolean isValid(JvmFeature feature) {

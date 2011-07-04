@@ -16,6 +16,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.IAcceptor;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * 
@@ -41,21 +42,31 @@ public class XFeatureCallSugarDescriptionProvider extends DefaultJvmFeatureDescr
 	public void addFeatureDescriptions(JvmFeature feature, final TypeArgumentContext context,
 			IAcceptor<JvmFeatureDescription> acceptor) {
 		if (feature instanceof JvmOperation) {
-			JvmOperation op = (JvmOperation) feature;
+			final JvmOperation op = (JvmOperation) feature;
 			// handle operator mapping
 			final int syntacticalNumberOfArguments = getSyntacticalNumberOfArguments(op);
 			if (syntacticalNumberOfArguments<=1) {
-				QualifiedName operator = operatorMapping.getOperator(QualifiedName.create(op.getSimpleName()));
+				final QualifiedName operator = operatorMapping.getOperator(QualifiedName.create(op.getSimpleName()));
 				if (operator != null) {
-					
-					final String shadowingString = operator.toString() + getSignature(op, context).substring(op.getSimpleName().length());
-					acceptor.accept(createJvmFeatureDescription(operator, op, context, shadowingString,
+					final Provider<String> originalShadowingStringProvider = getSignature(feature, context);
+					Provider<String> shadowingStringProvider = new Provider<String>() {
+						public String get() {
+							final String result = operator.toString() + 
+								originalShadowingStringProvider.get().substring(op.getSimpleName().length());
+							return result;
+						}
+					};
+					acceptor.accept(createJvmFeatureDescription(operator, op, context, shadowingStringProvider,
 							isValid(feature)));
 				}
 			}
 			if (syntacticalNumberOfArguments==0) {
 				// allow invocation without parenthesis
-				acceptor.accept(createJvmFeatureDescription(op, context, op.getSimpleName(), isValid(feature)));
+				acceptor.accept(createJvmFeatureDescription(op, context, new Provider<String>() {
+					public String get() {
+						return op.getSimpleName();
+					}
+				}, isValid(feature)));
 				// handle property access for getter
 				if (isGetterMethod(op)) {
 					String propertyName = getPropertyNameForGetterMethod(op.getSimpleName());
