@@ -7,10 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.jvmmodel.refactoring;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
 /**
@@ -21,8 +23,9 @@ public abstract class AbstractJvmModelRenameStrategy extends DefaultRenameStrate
 
 	private IJvmModelAssociations jvmModelAssociations;
 
-	protected AbstractJvmModelRenameStrategy(EObject targetElement, ILocationInFileProvider locationInFileProvider, IJvmModelAssociations xtend2jvmAssociations) {
-		super(targetElement, locationInFileProvider);
+	protected AbstractJvmModelRenameStrategy(EObject targetElement, EAttribute nameAttribute, ITextRegion originalNameRegion,
+			String nameRuleName, IValueConverterService valueConverterService, IJvmModelAssociations xtend2jvmAssociations) {
+		super(targetElement, nameAttribute, originalNameRegion, nameRuleName, valueConverterService);
 		this.jvmModelAssociations = xtend2jvmAssociations;
 	}
 
@@ -35,11 +38,11 @@ public abstract class AbstractJvmModelRenameStrategy extends DefaultRenameStrate
 	@Override
 	public void revertDeclarationChange(ResourceSet resourceSet) {
 		super.revertDeclarationChange(resourceSet);
-		setInferredJvmElementName(originalName, resourceSet);
+		setInferredJvmElementName(getOriginalName(), resourceSet);
 	}
 
 	protected void setInferredJvmElementName(String newName, ResourceSet resourceSet) {
-		EObject renamedElement = resourceSet.getEObject(targetElementNewURI, false);
+		EObject renamedElement = resourceSet.getEObject(getTargetElementNewURI(), false);
 		setInferredJvmElementName(newName, renamedElement);
 	}
 

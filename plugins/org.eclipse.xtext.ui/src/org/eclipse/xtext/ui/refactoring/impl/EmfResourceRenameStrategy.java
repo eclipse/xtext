@@ -11,6 +11,7 @@ import java.io.IOException;
 
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
@@ -41,13 +42,13 @@ public class EmfResourceRenameStrategy extends AbstractRenameStrategy {
 	private EmfResourceChangeUtil changeUtil;
 
 	protected EmfResourceRenameStrategy(ENamedElement targetEObject, EmfResourceChangeUtil changeUtil) {
-		super(targetEObject);
+		super(targetEObject, EcorePackage.Literals.ENAMED_ELEMENT__NAME);
 		this.changeUtil = changeUtil;
 	}
 
 	public void createDeclarationUpdates(String newName, ResourceSet resourceSet, IRefactoringUpdateAcceptor updateAcceptor) {
 		applyDeclarationChange(newName, resourceSet);
-		Resource targetResource = resourceSet.getResource(targetElementOriginalURI.trimFragment(), false);
+		Resource targetResource = resourceSet.getResource(getTargetElementOriginalURI().trimFragment(), false);
 		try {
 			changeUtil.addSaveAsUpdate(targetResource, updateAcceptor);
 		} catch(IOException exc) {
