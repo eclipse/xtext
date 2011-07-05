@@ -5,15 +5,17 @@ package org.eclipse.xtext.example.domainmodel.ui.refactoring;
 
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.example.domainmodel.domainmodel.Property;
-import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.AbstractJvmModelRenameStrategy;
@@ -32,13 +34,18 @@ public class DomainmodelRenameStrategy extends AbstractJvmModelRenameStrategy {
 
 		@Override
 		public IRenameStrategy get(EObject targetElement, IRenameElementContext renameElementContext) {
-			return new DomainmodelRenameStrategy(targetElement, getLocationInFileProvider(), jvmModelAssociations);
+			EAttribute nameAttribute = getNameAttribute(targetElement);
+			return new DomainmodelRenameStrategy(targetElement, nameAttribute, getOriginalNameRegion(targetElement,
+					nameAttribute), getNameRuleName(targetElement, nameAttribute), getValueConverterService(),
+					jvmModelAssociations);
 		}
 	}
 
-	protected DomainmodelRenameStrategy(EObject targetElement, ILocationInFileProvider locationInFileProvider,
+	protected DomainmodelRenameStrategy(EObject targetElement, EAttribute nameAttribute,
+			ITextRegion originalNameRegion, String nameRuleName, IValueConverterService valueConverterService,
 			IJvmModelAssociations jvmModelAssociations) {
-		super(targetElement, locationInFileProvider, jvmModelAssociations);
+		super(targetElement, nameAttribute, originalNameRegion, nameRuleName, valueConverterService,
+				jvmModelAssociations);
 	}
 
 	@Override
@@ -50,8 +57,7 @@ public class DomainmodelRenameStrategy extends AbstractJvmModelRenameStrategy {
 					((JvmField) jvmElement).setSimpleName(name);
 				} else if (jvmElement instanceof JvmOperation) {
 					JvmOperation operation = (JvmOperation) jvmElement;
-					operation.setSimpleName(
-							operation.getSimpleName().substring(0, 3) + Strings.toFirstUpper(name));
+					operation.setSimpleName(operation.getSimpleName().substring(0, 3) + Strings.toFirstUpper(name));
 				}
 			} else {
 				if (jvmElement instanceof JvmMember) {

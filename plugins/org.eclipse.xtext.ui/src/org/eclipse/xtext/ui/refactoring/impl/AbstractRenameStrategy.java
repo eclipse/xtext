@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
-import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.Strings;
 
 /**
@@ -22,13 +21,14 @@ import org.eclipse.xtext.util.Strings;
  */
 public abstract class AbstractRenameStrategy implements IRenameStrategy {
 
-	protected String originalName;
-	protected URI targetElementOriginalURI;
-	protected URI targetElementNewURI;
+	private String originalName;
+	private URI targetElementOriginalURI;
+	private URI targetElementNewURI;
+	private EAttribute nameAttribute;
 
-	protected AbstractRenameStrategy(EObject targetElement) {
+	protected AbstractRenameStrategy(EObject targetElement, EAttribute nameAttribute) {
+		this.nameAttribute = nameAttribute;
 		this.targetElementOriginalURI = EcoreUtil.getURI(targetElement);
-		EAttribute nameAttribute = getNameAttribute(targetElement);
 		this.originalName = targetElement.eGet(nameAttribute).toString();
 		if (Strings.isEmpty(originalName))
 			throw new RefactoringStatusException("Target element does not have a name", false);
@@ -62,13 +62,20 @@ public abstract class AbstractRenameStrategy implements IRenameStrategy {
 		if(targetElement == null) {
 			throw new RefactoringStatusException("Target element not loaded.", true);
 		}
-		EAttribute nameAttribute = getNameAttribute(targetElement);
-		targetElement.eSet(nameAttribute, newName);
+		targetElement.eSet(getNameAttribute(), newName);
 		return targetElement;
 	}
 	
-	protected EAttribute getNameAttribute(EObject eObject) {
-		return SimpleAttributeResolver.NAME_RESOLVER.getAttribute(eObject);
+	protected URI getTargetElementOriginalURI() {
+		return targetElementOriginalURI;
+	}
+
+	protected URI getTargetElementNewURI() {
+		return targetElementNewURI;
+	}
+
+	protected EAttribute getNameAttribute() {
+		return nameAttribute;
 	}
 
 }

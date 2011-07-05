@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext.ui.refactoring;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
@@ -29,27 +30,25 @@ import org.eclipse.xtext.util.XtextSwitch;
 public class XtextRenameStrategyProvider extends DefaultRenameStrategy.Provider {
 
 	@Override
-	public IRenameStrategy get(EObject targetElement, IRenameElementContext renameElementContext) {
+	public IRenameStrategy get(EObject targetElement, final IRenameElementContext renameElementContext) {
 		return new XtextSwitch<IRenameStrategy>() {
+
 			@Override
-			public IRenameStrategy caseAbstractMetamodelDeclaration(AbstractMetamodelDeclaration targetElement) {
-				return new DefaultRenameStrategy(targetElement, getLocationInFileProvider()) {
-					@Override
-					protected org.eclipse.emf.ecore.EAttribute getNameAttribute(EObject eObject) {
-						return XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__ALIAS;
-					}
-				};
+			public IRenameStrategy caseAbstractMetamodelDeclaration(AbstractMetamodelDeclaration metamodelDeclaration) {
+				return XtextRenameStrategyProvider.super.get(metamodelDeclaration, renameElementContext);
 			}
 
 			@Override
 			public IRenameStrategy caseParserRule(ParserRule parserRule) {
-				return new DefaultRenameStrategy(parserRule, getLocationInFileProvider()) {
+				EAttribute nameAttribute = getNameAttribute(parserRule);
+				return new DefaultRenameStrategy(parserRule, nameAttribute, getOriginalNameRegion(parserRule,
+						nameAttribute), getNameRuleName(parserRule, nameAttribute), getValueConverterService()) {
 					@Override
 					protected EObject setName(URI targetElementURI, String newName, ResourceSet resourceSet) {
 						renameReturnType(targetElementURI, newName, resourceSet);
 						return super.setName(targetElementURI, newName, resourceSet);
 					}
-					
+
 					@Override
 					public void createDeclarationUpdates(String newName, ResourceSet resourceSet,
 							IRefactoringUpdateAcceptor updateAcceptor) {
@@ -59,18 +58,26 @@ public class XtextRenameStrategyProvider extends DefaultRenameStrategy.Provider 
 					protected void renameReturnType(URI targetElementURI, String newName, ResourceSet resourceSet) {
 						ParserRule parserRule = (ParserRule) resourceSet.getEObject(targetElementURI, false);
 						TypeRef parserRuleType = parserRule.getType();
-						if(parserRule.getName().equals(parserRuleType.getClassifier().getName())
+						if (parserRule.getName().equals(parserRuleType.getClassifier().getName())
 								&& parserRuleType.getMetamodel() instanceof GeneratedMetamodel) {
-								parserRuleType.getClassifier().setName(newName);
+							parserRuleType.getClassifier().setName(newName);
 						}
 					}
 				};
 			}
-			
+
 			@Override
 			public IRenameStrategy caseGrammar(Grammar grammar) {
-				return new DefaultRenameStrategy(grammar, getLocationInFileProvider()) {};
+				return XtextRenameStrategyProvider.super.get(grammar, renameElementContext);
 			}
 		}.doSwitch(targetElement);
+	}
+
+	@Override
+	protected EAttribute getNameAttribute(EObject targetElement) {
+		if (targetElement instanceof AbstractMetamodelDeclaration) {
+			return XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__ALIAS;
+		}
+		return super.getNameAttribute(targetElement);
 	}
 }
