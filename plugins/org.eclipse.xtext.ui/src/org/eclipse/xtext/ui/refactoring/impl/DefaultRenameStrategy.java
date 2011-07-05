@@ -67,11 +67,8 @@ public class DefaultRenameStrategy extends AbstractRenameStrategy {
 
 		protected String getNameRuleName(EObject targetElement, EAttribute nameAttribute) {
 			List<INode> nameNodes = NodeModelUtils.findNodesForFeature(targetElement, nameAttribute);
-			if (nameNodes.size() != 1) {
-				throw new RefactoringStatusException("Multiple nodes for the name of the rename target", true);
-			}
-			if (!(nameNodes.get(0).getGrammarElement() instanceof RuleCall)) {
-				throw new RefactoringStatusException("Node for the name must be a rule call", true);
+			if (nameNodes.size() != 1 || !(nameNodes.get(0).getGrammarElement() instanceof RuleCall)) {
+				return null;
 			}
 			return ((RuleCall) nameNodes.get(0).getGrammarElement()).getRule().getName();
 		}
@@ -98,12 +95,25 @@ public class DefaultRenameStrategy extends AbstractRenameStrategy {
 	}
 
 	protected TextEdit getDeclarationTextEdit(String newName) {
-		String text = getNameAsText(newName);
+		String text = newName;
 		return new ReplaceEdit(originalNameRegion.getOffset(), originalNameRegion.getLength(), text);
 	}
 
-	protected String getNameAsText(String name) {
-		return (nameRuleName != null) ? valueConverterService.toString(name, nameRuleName) : name;
+	protected String getNameAsText(String nameAsValue) {
+		return (nameRuleName != null) ? valueConverterService.toString(nameAsValue, nameRuleName) : nameAsValue;
+	}
+	
+	protected String getNameAsValue(String nameAsText) {
+		return (nameRuleName != null) ? valueConverterService.toValue(nameAsText, nameRuleName, null).toString() : nameAsText;
+	}
+	
+	@Override
+	public String getOriginalName() {
+		return getNameAsText(super.getOriginalName());
 	}
 
+	@Override
+	public void applyDeclarationChange(String newName, ResourceSet resourceSet) {
+		super.applyDeclarationChange(getNameAsValue(newName), resourceSet);
+	}
 }
