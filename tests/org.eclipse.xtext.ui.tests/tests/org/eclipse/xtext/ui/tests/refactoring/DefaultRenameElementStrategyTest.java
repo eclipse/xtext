@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
+import org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 
@@ -72,6 +74,30 @@ public class DefaultRenameElementStrategyTest extends AbstractXtextTests impleme
 		assertEquals("D", renameEdit.getText());
 	}
 
+	public void testValueConversion() throws Exception {
+		DefaultRenameStrategy.Provider strategyProvider = new DefaultRenameStrategy.Provider() {
+			@Override
+			protected String getNameRuleName(EObject targetElement, EAttribute nameAttribute) {
+				return "STRING";
+			}
+		};
+		getInjector().injectMembers(strategyProvider);
+		final XtextResource resource = getResourceFromString("foo { }");
+		Element targetElement = (Element) resource.getContents().get(0).eContents().get(0);
+		assertEquals("foo", targetElement.getName());
+		IRenameStrategy strategy = strategyProvider.get(targetElement, null);
+		assertEquals("\"foo\"", strategy.getOriginalName());
+		strategy.createDeclarationUpdates("\"bar\"", resource.getResourceSet(), this);
+		assertEquals(1, textEdits.size());
+		assertEquals(0, textEdits.get(0).getOffset());
+		assertEquals(3, textEdits.get(0).getLength());
+		assertEquals("\"bar\"", ((ReplaceEdit)textEdits.get(0)).getText());
+		strategy.applyDeclarationChange("\"bar\"", resource.getResourceSet());
+		assertEquals("bar", targetElement.getName());
+		strategy.revertDeclarationChange(resource.getResourceSet());
+		assertEquals("foo", targetElement.getName());
+	}
+	
 	public void accept(URI resourceURI, TextEdit textEdit) {
 		textEdits.add(textEdit);		
 	}
