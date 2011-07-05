@@ -139,6 +139,8 @@ public abstract class AbstractXbaseContentAssistTest extends TestCase implements
 			if (method.getParameterTypes().length == 0) {
 				if (method.getName().startsWith("get") && method.getParameterTypes().length == 0) {
 					features.add(Strings.toFirstLower(method.getName().substring(3)));
+				} else if (method.getName().startsWith("is") && method.getParameterTypes().length == 0) {
+					features.add(Strings.toFirstLower(method.getName().substring(2)));
 				} else {
 					features.add(method.getName());
 				}
