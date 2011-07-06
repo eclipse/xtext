@@ -39,4 +39,5 @@ public final class IssueCodes {
 	public static final String CLASS_MUST_BE_ABSTRACT = ISSUE_CODE_PREFIX + "class_must_be_defined_abstract";
 	public static final String DUPLICATE_PARAMETER_NAME = ISSUE_CODE_PREFIX + "duplicate_parameter_name";
 
+	public static final String OVERRIDDEN_FINAL = ISSUE_CODE_PREFIX + "overridden_final";
 }

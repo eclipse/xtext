@@ -275,6 +275,8 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 			if (!(superClass.getType() instanceof JvmGenericType)
 					|| ((JvmGenericType) superClass.getType()).isInterface()) {
 				error("Superclass must be a class", XTEND_CLASS__EXTENDS, CLASS_EXPECTED);
+			} else if(((JvmGenericType)superClass.getType()).isFinal()) {
+				error("Attempt to override final class", XTEND_CLASS__EXTENDS, OVERRIDDEN_FINAL);
 			}
 		}
 		for (int i = 0; i < xtendClass.getImplements().size(); ++i) {
@@ -382,6 +384,9 @@ public class Xtend2JavaValidator extends XbaseWithAnnotationsJavaValidator {
 		if (!function.isOverride())
 			error("Missing 'override'. Function overrides " + canonicalName(overriddenOperation), function,
 					XTEND_FUNCTION__NAME, MISSING_OVERRIDE);
+		if(overriddenOperation.isFinal())
+			error("Attempt to override final method " + canonicalName(overriddenOperation), function, 
+					XTEND_FUNCTION__NAME, OVERRIDDEN_FINAL);
 		if (function.getReturnType()==null)
 			return;
 		TypeArgumentContext typeArgumentContext = typeArgumentContextProvider.getReceiverContext(getTypeRefs()
