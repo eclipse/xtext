@@ -154,4 +154,14 @@ public class OverrideValidationTest extends AbstractXtend2TestCase {
 		helper.assertError(xtendClass, XTEND_CLASS, CLASS_MUST_BE_ABSTRACT, "abstract", "not", "implement");
 	}
 	
+	public void testOverrideFinalClass() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends String { }");
+		helper.assertError(xtendClass, XTEND_CLASS, OVERRIDDEN_FINAL, "override", "final");		
+	}
+	
+	public void testOverrideFinalMethod() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.ClassWithFinalMembers { def foo() {} }");
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OVERRIDDEN_FINAL, "override", "final");		
+	}
+	
 }
