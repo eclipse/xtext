@@ -13,14 +13,16 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.xtext.ui.graph.figures.ISegmentFigure;
@@ -58,9 +60,12 @@ public class Xtext2RailroadTransformer {
 		return diagram;
 	}
 
-	protected ISegmentFigure transformInternal(ParserRule parserRule) {
-		ISegmentFigure body = transform(parserRule.getAlternatives());
-		ISegmentFigure track = factory.createTrack(parserRule, body);
+	protected ISegmentFigure transformInternal(AbstractRule rule) {
+		if (rule instanceof TerminalRule) {
+			return null;
+		}
+		ISegmentFigure body = transform(rule.getAlternatives());
+		ISegmentFigure track = factory.createTrack(rule, body);
 		return track;
 	}
 
@@ -97,6 +102,10 @@ public class Xtext2RailroadTransformer {
 
 	protected ISegmentFigure transformInternal(CrossReference crossReference) {
 		return transform(crossReference.getTerminal());
+	}
+
+	protected ISegmentFigure transformInternal(EnumLiteralDeclaration enumLiteralDeclaration) {
+		return factory.createNodeSegment(enumLiteralDeclaration);
 	}
 
 	private List<ISegmentFigure> transformChildren(List<? extends EObject> children) {

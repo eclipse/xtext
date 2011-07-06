@@ -110,6 +110,27 @@ public class TransformationTest {
 				.child(4).connects("bar", "exit");
 	}
 	
+	@Test
+	public void testAlternative() throws Exception {
+		getBuilder("Foo: 'foo' | 'bar';").hasChildren(1)
+			.child(0).isType(RailroadTrack.class).as("t").hasChildren(5)
+				.child(0).isType(LabelNode.class).as("label").parent()
+				.child(1).isType(ParallelSegment.class).as("parallel").hasChildren(8)
+					.child(0).isType(CrossPoint.class).as("p_entry").hasChildren(0).parent()
+					.child(1).isType(CrossPoint.class).as("p_exit").hasChildren(0).parent()
+					.child(2).isType(NodeSegment.class).hasChildren(1)
+						.child(0).isType(RectangleNode.class).as("foo").parent().parent()
+					.child(3).connects("p_entry", "foo").parent()
+					.child(4).connects("foo", "p_exit").parent()
+					.child(5).isType(NodeSegment.class).hasChildren(1)
+						.child(0).isType(RectangleNode.class).as("bar").parent().parent()
+					.child(6).connects("p_entry", "bar").parent()
+					.child(7).connects("bar", "p_exit").parent().parent()
+				.child(2).isType(CrossPoint.class).as("exit").parent()
+				.child(3).connects("label", "p_entry").parent()
+				.child(4).connects("p_exit", "exit");
+	}
+	
 	
 	@Test
 	public void testAction() throws Exception {
@@ -171,6 +192,18 @@ public class TransformationTest {
 		.child(0).isType(RailroadTrack.class).hasChildren(5)
 			.child(0).isType(LabelNode.class).as("label").parent()
 			.child(1).isType(BypassSegment.class);
+	}
+
+	@Test
+	public void testEnumRule() throws Exception {
+		getBuilder("enum Foo: bar='foo' | fooBar;").hasChildren(1)
+		.child(0).isType(RailroadTrack.class).hasChildren(5)
+			.child(0).isType(LabelNode.class).as("label").parent()
+			.child(1).isType(ParallelSegment.class).hasChildren(8)
+				.child(0).isType(CrossPoint.class).parent()
+				.child(1).isType(CrossPoint.class).parent()
+				.child(2).isType(NodeSegment.class).parent()
+				.child(5).isType(NodeSegment.class);
 	}
 
 	protected TreeVerificationBuilder getBuilder(String rules) throws IOException {
