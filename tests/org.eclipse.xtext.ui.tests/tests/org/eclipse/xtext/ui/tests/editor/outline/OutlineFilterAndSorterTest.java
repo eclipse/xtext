@@ -51,7 +51,7 @@ public class OutlineFilterAndSorterTest extends AbstractXtextTests {
 
 	public void testFilter() throws Exception{
 		assertTextsEqual(filterAndSorter.filterAndSort(nodes), "one", "two", "three");
-		TestFilter testFilter = new TestFilter();
+		TestFilter testFilter = new TestFilter("three");
 		filterAndSorter.addFilter(testFilter);
 		assertTextsEqual(filterAndSorter.filterAndSort(nodes), "one", "two", "three");
 		testFilter.setEnabled(true);
@@ -69,7 +69,7 @@ public class OutlineFilterAndSorterTest extends AbstractXtextTests {
 
 	public void testFilterAndSort() {
 		TestComparator testComparator = new TestComparator();
-		TestFilter testFilter = new TestFilter();
+		TestFilter testFilter = new TestFilter("three");
 		filterAndSorter.setComparator(testComparator);
 		filterAndSorter.addFilter(testFilter);
 		assertTextsEqual(filterAndSorter.filterAndSort(nodes), "one", "two", "three");
@@ -81,6 +81,20 @@ public class OutlineFilterAndSorterTest extends AbstractXtextTests {
 		assertTextsEqual(filterAndSorter.filterAndSort(nodes), "one", "two");
 	}
 	
+	public void testMulitpleFilters() {
+		TestFilter testFilter0 = new TestFilter("three");
+		filterAndSorter.addFilter(testFilter0);
+		TestFilter testFilter1 = new TestFilter("one");
+		filterAndSorter.addFilter(testFilter1);
+		assertTextsEqual(filterAndSorter.filterAndSort(nodes), "one", "two", "three");
+		testFilter0.setEnabled(true);
+		assertTextsEqual(filterAndSorter.filterAndSort(nodes), "one", "two");
+		testFilter1.setEnabled(true);
+		assertTextsEqual(filterAndSorter.filterAndSort(nodes), "two");
+		testFilter0.setEnabled(false);
+		assertTextsEqual(filterAndSorter.filterAndSort(nodes), "two", "three");
+	}
+	
 	protected void assertTextsEqual(IOutlineNode[] nodes, String...texts) {
 		assertEquals(nodes.length, texts.length);
 		for(int i=0; i<nodes.length; ++i) 
@@ -88,11 +102,17 @@ public class OutlineFilterAndSorterTest extends AbstractXtextTests {
 	}
 	
 	protected static class TestFilter implements IFilter {
-
+		
 		private boolean isEnabled = false;
 
+		private String rejected;
+		
+		public TestFilter(String rejected) {
+			this.rejected = rejected;
+		}
+		
 		public boolean apply(IOutlineNode input) {
-			return input.getText().toString().length() == 3;
+			return !rejected.equals(input.getText().toString());
 		}
 
 		public boolean isEnabled() {

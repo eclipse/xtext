@@ -37,14 +37,14 @@ public class OutlineFilterAndSorter {
 	private IComparator comparator;
 
 	public IOutlineNode[] filterAndSort(Iterable<IOutlineNode> nodes) {
-		Iterable<IFilter> enabledFilters = getEnabledFilters();
+		final Iterable<IFilter> enabledFilters = getEnabledFilters();
 		Iterable<IOutlineNode> filteredNodes = null;
 		if (Iterables.isEmpty(enabledFilters)) {
 			filteredNodes = nodes;
 		} else {
 			filteredNodes = Iterables.filter(nodes, new Predicate<IOutlineNode>() {
 				public boolean apply(final IOutlineNode node) {
-					return Iterables.all(filters, new Predicate<IFilter>() {
+					return Iterables.all(enabledFilters, new Predicate<IFilter>() {
 						public boolean apply(IFilter filter) {
 							return filter.apply(node);
 						}
