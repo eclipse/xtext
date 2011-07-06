@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.osgi.framework.internal.core.FrameworkProperties;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.TypeRef;
@@ -33,10 +34,17 @@ import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Holger Schill
  */
 @SuppressWarnings("restriction")
 public class EcoreRefactoringParticipant extends AbstractProcessorBasedRenameParticipant {
 
+	/**
+	 * Option-flag to disable warnings in this participant
+	 */
+	public static final String ECORE_REFACTORING_PARTICIPANT_SHOW_WARNING_OPTION = "org.eclipse.xtext.xtext.ui.refactoring.EcoreRefactoringParticipant.show.warning.option";
+
+	
 	@Inject
 	private IResourceDescriptions resourceDescriptions;
 
@@ -67,9 +75,12 @@ public class EcoreRefactoringParticipant extends AbstractProcessorBasedRenamePar
 				} else {
 					EObject classifierProxy = EcoreFactory.eINSTANCE.create(returnType.getClassifier().eClass());
 					((InternalEObject) classifierProxy).eSetProxyURI(platformResourceURI);
-					getStatus().addWarning(
-							"Renaming EClass '" + returnType.getClassifier().getName()
-									+ "' in ecore file. Please rerun the Ecore generator.");
+					String optionFlag = FrameworkProperties.getProperty(ECORE_REFACTORING_PARTICIPANT_SHOW_WARNING_OPTION, "true");
+					if(optionFlag == null || "true".equalsIgnoreCase(optionFlag))
+						getStatus().addWarning(
+								"Renaming EClass '" + returnType.getClassifier().getName()
+										+ "' in ecore file. Please rerun the Ecore generator.");
+					
 					return singletonList(classifierProxy);
 				}
 			}

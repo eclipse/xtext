@@ -23,14 +23,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.text.TextSelection;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Event;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.junit.editor.AbstractEditorTest;
+import org.eclipse.xtext.ui.junit.refactoring.AbstractLinkedEditingIntegrationTest;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.ui.refactoring.ui.RefactoringType;
 import org.eclipse.xtext.ui.refactoring.ui.RenameRefactoringController;
@@ -44,7 +40,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @SuppressWarnings("restriction")
-public class LinkedEditingRefactoringIntegrationTest extends AbstractEditorTest {
+public class LinkedEditingRefactoringIntegrationTest extends AbstractLinkedEditingIntegrationTest {
 
 	private static final String TEST_CLASS = "TestClass";
 	private static final String TEST_PROJECT = "test";
@@ -111,36 +107,5 @@ public class LinkedEditingRefactoringIntegrationTest extends AbstractEditorTest 
 		assertEquals("NewTestClass", ((EPackage)ecoreResource.getContents().get(0)).getEClassifiers().get(0).getName());
 	}
 
-	protected void waitForReconciler(final XtextEditor editor) {
-		editor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
-			@Override
-			public void process(XtextResource state) throws Exception {
-				// do nothing
-			}
-		});
-	}
 	
-	protected void waitForDisplay() {
-		while(Display.getDefault().readAndDispatch()) {
-		}
-	}
-	
-	protected void pressKeys(XtextEditor editor, String string) throws Exception {
-		for(int i = 0; i < string.length(); i++) {
-			pressKey(editor, string.charAt(i));
-		}
-	}
-
-	protected void pressKey(XtextEditor editor, char c) throws Exception {
-		StyledText textWidget = editor.getInternalSourceViewer().getTextWidget();
-		Event e = new Event();
-		e.character = c;
-		e.type = SWT.KeyDown;
-		e.doit = true;
-		//XXX Hack!
-		if (c == SWT.ESC) {
-			e.keyCode = 27;
-		}
-		textWidget.notifyListeners(SWT.KeyDown, e);
-	}
 }

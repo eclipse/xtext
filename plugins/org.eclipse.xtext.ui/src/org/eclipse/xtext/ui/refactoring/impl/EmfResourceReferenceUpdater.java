@@ -11,6 +11,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -28,6 +31,7 @@ import com.google.inject.Inject;
  * serializes the sections of the document that contain the cross-references.
  * 
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Holger Schill
  */
 public class EmfResourceReferenceUpdater extends AbstractReferenceUpdater {
 
@@ -45,6 +49,14 @@ public class EmfResourceReferenceUpdater extends AbstractReferenceUpdater {
 				if (progress.isCanceled())
 					break;
 				Resource referringResource = resourceSet.getResource(referringResourceURI, false);
+				EObject refactoredElement = resourceSet.getEObject(elementRenameArguments.getNewElementURI(elementRenameArguments.getTargetElementURI()), true);
+				if(refactoredElement != null && refactoredElement instanceof EClassifier){
+					for(IReferenceDescription reference : resource2references.get(referringResourceURI)){
+						EObject referringEReference = referringResource.getEObject(reference.getSourceEObjectUri().fragment()).eContainer();
+						if(referringEReference != null && referringEReference instanceof EReference)
+						((EReference)referringEReference).setEType((EClassifier)refactoredElement);
+					}
+				}
 				changeUtil.addSaveAsUpdate(referringResource, updateAcceptor);
 				progress.worked(1);
 			} catch (Exception exc) {

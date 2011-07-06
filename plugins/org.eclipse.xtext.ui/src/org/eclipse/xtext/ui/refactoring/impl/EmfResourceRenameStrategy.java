@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
@@ -22,6 +23,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Holger Schill
  * @since 2.0
  */
 public class EmfResourceRenameStrategy extends AbstractRenameStrategy {
@@ -47,8 +49,9 @@ public class EmfResourceRenameStrategy extends AbstractRenameStrategy {
 	}
 
 	public void createDeclarationUpdates(String newName, ResourceSet resourceSet, IRefactoringUpdateAcceptor updateAcceptor) {
-		applyDeclarationChange(newName, resourceSet);
 		Resource targetResource = resourceSet.getResource(getTargetElementOriginalURI().trimFragment(), false);
+		EcoreUtil.resolveAll(targetResource);
+		applyDeclarationChange(newName, resourceSet);
 		try {
 			changeUtil.addSaveAsUpdate(targetResource, updateAcceptor);
 		} catch(IOException exc) {

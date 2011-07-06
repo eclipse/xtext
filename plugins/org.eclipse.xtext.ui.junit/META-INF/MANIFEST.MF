@@ -18,4 +18,5 @@ Export-Package: org.eclipse.xtext.ui.junit.editor,
  org.eclipse.xtext.ui.junit.editor.autoedit,
  org.eclipse.xtext.ui.junit.editor.contentassist,
  org.eclipse.xtext.ui.junit.editor.cursorHandling,
+ org.eclipse.xtext.ui.junit.refactoring,
  org.eclipse.xtext.ui.junit.util
