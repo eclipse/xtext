@@ -71,6 +71,12 @@ class DomainmodelScopeProvider extends XbaseScopeProvider {
 	override IScope createLocalVarScope(EObject context, 
 			EReference reference, IScope parent,
 			boolean includeCurrentBlock, int idx) {
+		if (context instanceof Entity) {
+			val type = (context as Entity).jvmType
+			return new SimpleScope(parent, newImmutableList(
+				EObjectDescription::create(XbaseScopeProvider::THIS, 
+				type)))
+		}
 		if(context instanceof Operation){
 				val descriptions = (context as Operation)
 					.params.map(e | e.createIEObjectDescription())
