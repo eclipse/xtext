@@ -14,7 +14,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 
@@ -312,6 +314,11 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		XExpression expression = expression("new String() instanceof Boolean");
 		helper.assertError(expression, XINSTANCE_OF_EXPRESSION, INVALID_INSTANCEOF, "incompatible", "type");
 		helper.assertNoError(expression, OBSOLETE_INSTANCEOF);
+	}
+	
+	public void testPrimitiveAsTypeGuard() throws Exception {
+		XCasePart expression = ((XSwitchExpression) expression("switch(new Object()) { int: 1 }")).getCases().get(0);
+		helper.assertError(expression, XCASE_PART, INVALID_USE_OF_TYPE, "primitive", "not", "allowed", "type", "guard");
 	}
 
 }
