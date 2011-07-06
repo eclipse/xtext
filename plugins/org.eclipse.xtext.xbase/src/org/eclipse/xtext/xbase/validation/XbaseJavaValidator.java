@@ -456,8 +456,10 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public void checkTypeGuards(XCasePart casePart) {
 		if (casePart.getTypeGuard()==null)
 			return;
-		JvmTypeReference targetTypeRef = typeProvider.getType(((XSwitchExpression) casePart.eContainer()).getSwitch());
 		JvmTypeReference typeGuard = casePart.getTypeGuard();
+		if(primitives.isPrimitive(typeGuard)) 
+			error("Primitives are not allowed as type guards", Literals.XCASE_PART__TYPE_GUARD, INVALID_USE_OF_TYPE);
+		JvmTypeReference targetTypeRef = typeProvider.getType(((XSwitchExpression) casePart.eContainer()).getSwitch());
 		checkCast(typeGuard, targetTypeRef);
 	}
 
