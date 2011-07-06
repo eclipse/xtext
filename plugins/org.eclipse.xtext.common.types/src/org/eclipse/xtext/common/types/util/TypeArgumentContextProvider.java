@@ -422,6 +422,9 @@ public class TypeArgumentContextProvider {
 				JvmWildcardTypeReference wildcardInformation = (JvmWildcardTypeReference) information;
 				JvmTypeReference informationUpperBound = getSingleUpperBoundOrNull(wildcardInformation);
 				resolve(parameterizedDeclaration, informationUpperBound, existing, returnTypeContext);
+			} else if(information instanceof JvmGenericArrayTypeReference) {
+				JvmGenericArrayTypeReference arrayInformation = (JvmGenericArrayTypeReference)information;
+				resolve(declArgs.get(0), arrayInformation.getComponentType(), existing, returnTypeContext);
 			}
 		} else if (declaration instanceof JvmWildcardTypeReference) {
 			JvmWildcardTypeReference wildcardDeclaration = (JvmWildcardTypeReference) declaration;
