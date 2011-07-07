@@ -1,5 +1,10 @@
 #novaContent {
-	padding-top: 210px;
+/* 	padding-top: 210px; */
+    background: none !important;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    border: none;
+    border-width: 0px !important;
 }
 
 #midcolumn {
@@ -28,6 +33,7 @@ a strong {
 /* indigo */
 body {
 	background: url("images/subpage_header_top.png") top repeat-x;
+	height: auto !important;
 }
 
 #header {

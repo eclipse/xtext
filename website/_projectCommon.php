@@ -12,13 +12,13 @@
 	# Define your project-wide Nav bars here.
 	# Format is Link text, link URL (can be http://www.someothersite.com/), target (_self, _blank), level (1, 2 or 3)
 	# these are optional
-	$Nav->setLinkList(array());
-	$Nav->addNavSeparator("Xtext", 	"/Xtext");
-	$Nav->addCustomNav("Download", "/Xtext/download", "_self", 3);
-	$Nav->addCustomNav("Documentation", "/Xtext/documentation", "_self", 3);
-	$Nav->addCustomNav("Support", "/Xtext/support", "_self", 3);
-	$Nav->addCustomNav("Community", "/Xtext/community", "_self", 3);
-	$Nav->addCustomNav("Developers", "/Xtext/developers", "_self", 3);
+#	$Nav->setLinkList(array());#
+#	$Nav->addNavSeparator("Xtext", 	"/Xtext");
+#	$Nav->addCustomNav("Download", "/Xtext/download", "_self", 3);
+#	$Nav->addCustomNav("Documentation", "/Xtext/documentation", "_self", 3);
+#	$Nav->addCustomNav("Support", "/Xtext/support", "_self", 3);
+#	$Nav->addCustomNav("Community", "/Xtext/community", "_self", 3);
+#	$Nav->addCustomNav("Developers", "/Xtext/developers", "_self", 3);
 #	$Nav->addCustomNav("Partners", "/Xtext/partners", "_self", 3);
 	
 	$pageKeywords	= "xtext, dsl, modeling, domain specific language, textual";

@@ -14,3 +14,15 @@ tbody tr.even {
 #itemisDisclaimer {
 	
 }
+
+#body {
+}
+
+#novaContent {
+    background: none !important;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    border-left-style: none;
+    border-left-width: 0px !important;
+    margin: 20px;
+}
