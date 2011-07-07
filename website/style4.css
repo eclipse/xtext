@@ -515,6 +515,29 @@ a {
 	width: 30%;
 }
 
+.style1of4content {
+	float: left;
+	margin-right: 20px;
+	width: 22%;
+}
+.style2of4content {
+	float: left;
+	margin-left: 20px;
+	margin-right: 20px;
+	width: 22%;
+}
+.style3of4content {
+	float: left;
+	margin-left: 20px;
+	margin-right: 20px;
+	width: 22%;
+}
+.style4of4content {
+	float: right;
+	margin-left: 20px;
+	width: 22%;
+}
+
 
 /*
 	Adjust Nova-Theme
