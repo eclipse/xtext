@@ -166,4 +166,9 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 		XExpression expression = expression("''.valueOf('')");
 		helper.assertError(expression, XABSTRACT_FEATURE_CALL, INSTANCE_ACCESS_TO_STATIC_MEMBER);
 	}
+	
+	public void testNullSafeOnPrimitiveReveiver() throws Exception {
+		XExpression expression = expression("1?.toString()");
+		helper.assertError(expression, XABSTRACT_FEATURE_CALL, NULL_SAFE_FEATURE_CALL_ON_PRIMITIVE);
+	}
 }

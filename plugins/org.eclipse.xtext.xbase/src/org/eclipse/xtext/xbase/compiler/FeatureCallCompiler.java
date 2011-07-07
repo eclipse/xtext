@@ -10,14 +10,17 @@ package org.eclipse.xtext.xbase.compiler;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -49,6 +52,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	
 	@Inject
 	private JvmOnlyTypeConformanceComputer jvmConformance;
+	
+	@Inject
+	private Primitives primitives; 
 
 	protected void _toJavaStatement(final XAbstractFeatureCall expr, final IAppendable b, boolean isReferenced) {
 		if (isSpreadingMemberFeatureCall(expr)) {
@@ -272,11 +278,9 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			if (expr.isNullSafe()) {
 				internalToJavaExpression(receiver, b);
 				b.append("==null?");
-				b.append("(");
 				JvmTypeReference type = getTypeProvider().getType(call);
-				serialize(type,call,b);
-				b.append(")");
-				b.append("null:");
+				appendNullValue(type,call,b);
+				b.append(":");
 				internalToJavaExpression(receiver, b);
 				return true;
 			} else if (expr.isSpreading()) {
@@ -290,6 +294,48 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			return false;
 		}
 	}
+		
+	protected void appendNullValue(JvmTypeReference type, EObject context, IAppendable b) {
+		if(!primitives.isPrimitive(type)) {
+			b.append("(");
+			serialize(type, context,b);
+			b.append(")");
+			b.append("null");
+		} else {
+			b.append(getDefaultLiteral((JvmPrimitiveType)type.getType()));
+		}
+	}
+	
+	protected String getDefaultLiteral(JvmPrimitiveType primitiveType) {
+		final String name = primitiveType.getIdentifier();
+		if (Boolean.TYPE.getName().equals(name)) {
+			return "false";
+		}
+		if (Integer.TYPE.getName().equals(name)) {
+			return "0";
+		}
+		if (Byte.TYPE.getName().equals(name)) {
+			return "(byte) 0";
+		}
+		if (Short.TYPE.getName().equals(name)) {
+			return "(short) 0";
+		}
+		if (Character.TYPE.getName().equals(name)) {
+			return "(char) 0";
+		}
+		if (Long.TYPE.getName().equals(name)) {
+			return "0l";
+		}
+		if (Float.TYPE.getName().equals(name)) {
+			return "0f";
+		}
+		if (Double.TYPE.getName().equals(name)) {
+			return "0.0";
+		}
+		throw new IllegalArgumentException("Unkown primitive "+name);
+	}
+
+
 	
 	protected boolean isMemberCall(XAbstractFeatureCall call) {
 		return featureCallToJavaMapping.isTargetsMemberSyntaxCall(call, call.getFeature(), call.getImplicitReceiver());
