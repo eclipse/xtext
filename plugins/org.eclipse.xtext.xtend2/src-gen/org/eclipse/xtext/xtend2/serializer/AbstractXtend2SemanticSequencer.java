@@ -368,11 +368,7 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				}
 				else break;
 			case XbasePackage.XCLOSURE:
-				if(context == grammarAccess.getXShortClosureRule()) {
-					sequence_XShortClosure_XClosure(context, (XClosure) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getRichStringPartRule() ||
+				if(context == grammarAccess.getRichStringPartRule() ||
 				   context == grammarAccess.getXExpressionRule() ||
 				   context == grammarAccess.getXAssignmentRule() ||
 				   context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
@@ -403,6 +399,10 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				   context == grammarAccess.getXParenthesizedExpressionRule() ||
 				   context == grammarAccess.getXExpressionInsideBlockRule()) {
 					sequence_XClosure_XClosure(context, (XClosure) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getXShortClosureRule()) {
+					sequence_XShortClosure_XClosure(context, (XClosure) semanticObject); 
 					return; 
 				}
 				else break;
@@ -475,7 +475,14 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				}
 				else break;
 			case XbasePackage.XFEATURE_CALL:
-				if(context == grammarAccess.getRichStringPartRule() ||
+				if(context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
+				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
+				   context == grammarAccess.getXAnnotationElementValueRule() ||
+				   context == grammarAccess.getXAnnotationValueFieldReferenceRule()) {
+					sequence_XAnnotationValueFieldReference_XFeatureCall(context, (XFeatureCall) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getRichStringPartRule() ||
 				   context == grammarAccess.getXExpressionRule() ||
 				   context == grammarAccess.getXAssignmentRule() ||
 				   context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
@@ -505,13 +512,6 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				   context == grammarAccess.getXExpressionInsideBlockRule() ||
 				   context == grammarAccess.getXFeatureCallRule()) {
 					sequence_XFeatureCall_XFeatureCall(context, (XFeatureCall) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
-				   context == grammarAccess.getXAnnotationElementValueRule() ||
-				   context == grammarAccess.getXAnnotationValueFieldReferenceRule()) {
-					sequence_XAnnotationValueFieldReference_XFeatureCall(context, (XFeatureCall) semanticObject); 
 					return; 
 				}
 				else break;
@@ -1019,7 +1019,11 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 				}
 				else break;
 			case Xtend2Package.RICH_STRING:
-				if(context == grammarAccess.getXStringLiteralRule() ||
+				if(context == grammarAccess.getInternalRichStringRule()) {
+					sequence_InternalRichString_RichString(context, (RichString) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getXStringLiteralRule() ||
 				   context == grammarAccess.getRichStringRule() ||
 				   context == grammarAccess.getRichStringPartRule() ||
 				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
@@ -1056,10 +1060,6 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 					sequence_RichString_RichString(context, (RichString) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getInternalRichStringRule()) {
-					sequence_InternalRichString_RichString(context, (RichString) semanticObject); 
-					return; 
-				}
 				else break;
 			case Xtend2Package.RICH_STRING_ELSE_IF:
 				if(context == grammarAccess.getRichStringElseIfRule()) {
@@ -1086,12 +1086,12 @@ public class AbstractXtend2SemanticSequencer extends AbstractSemanticSequencer {
 					sequence_RichStringLiteralEnd_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getInternalRichStringLiteralRule()) {
-					sequence_InternalRichStringLiteral_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
-					return; 
-				}
 				else if(context == grammarAccess.getRichStringLiteralStartRule()) {
 					sequence_RichStringLiteralStart_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getInternalRichStringLiteralRule()) {
+					sequence_InternalRichStringLiteral_RichStringLiteral(context, (RichStringLiteral) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getRichStringLiteralRule()) {
