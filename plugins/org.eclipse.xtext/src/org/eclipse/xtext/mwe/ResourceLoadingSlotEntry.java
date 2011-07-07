@@ -8,7 +8,7 @@
 package org.eclipse.xtext.mwe;
 
 import static com.google.common.collect.Lists.*;
-import static java.util.Collections.*;
+import static com.google.common.collect.Sets.*;
 
 import java.util.List;
 import java.util.Set;
@@ -34,7 +34,7 @@ public class ResourceLoadingSlotEntry implements ISlotEntry {
 		this.slot = slot;
 	}
 	
-	private Set<Pattern> uris = emptySet();
+	private Set<Pattern> uris = newHashSet();
 	
 	/**
 	 * a regular expression matching against the {@link Resource}'s URIs.
