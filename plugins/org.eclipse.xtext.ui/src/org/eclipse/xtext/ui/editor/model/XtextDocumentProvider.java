@@ -148,10 +148,12 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	protected ElementInfo createElementInfo(Object element) throws CoreException {
 		ElementInfo info = super.createElementInfo(element);
 		XtextDocument doc = (XtextDocument) info.fDocument;
-		AnnotationIssueProcessor annotationIssueProcessor = new AnnotationIssueProcessor(doc, info.fModel,
+		if(info.fModel != null) {
+			AnnotationIssueProcessor annotationIssueProcessor = new AnnotationIssueProcessor(doc, info.fModel,
 				issueResolutionProvider);
-		ValidationJob job = new ValidationJob(resourceValidator, doc, annotationIssueProcessor, CheckMode.FAST_ONLY);
-		doc.setValidationJob(job);
+			ValidationJob job = new ValidationJob(resourceValidator, doc, annotationIssueProcessor, CheckMode.FAST_ONLY);
+			doc.setValidationJob(job);
+		}
 		return info;
 	}
 

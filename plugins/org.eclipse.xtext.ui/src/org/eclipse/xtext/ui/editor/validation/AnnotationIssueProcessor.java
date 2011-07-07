@@ -58,8 +58,9 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 			IssueResolutionProvider issueResolutionProvider) {
 		super();
 		this.annotationModel = annotationModel;
-		if (annotationModel != null)
-			annotationModel.addAnnotationModelListener(this);
+		if(annotationModel == null) 
+			throw new IllegalArgumentException("Annotation model cannot be null");
+		annotationModel.addAnnotationModelListener(this);
 		this.xtextDocument = xtextDocument;
 		this.issueResolutionProvider = issueResolutionProvider;
 	}
