@@ -27,7 +27,7 @@ ol[
 	]
 	item[
 		The actual test case is pretty straight forward with Xtend. The utility class 
-		codeRef[org.eclipse.xtext.junit4.util.ParseHelper] allows to parse an arbitrary string into a
+		e[org.eclipse.xtext.junit4.util.ParseHelper] allows to parse an arbitrary string into a
 		e[Domainmodel]. The model itself can be traversed and checked afterwards. A static import of
 		codeRef[junit.framework.Assert] leads to concise a readable test cases.
 		

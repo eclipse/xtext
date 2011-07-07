@@ -1,4 +1,4 @@
-section:xbaseExpressions[Leveraging Xbase Expressions In Your DSL]
+section:xbaseExpressions[Using Xbase Expressions]
 
 Xbase is an expression language that can be embedded in Xtext languages. Its syntax is close to Java,
 but it additionally offers type inferrence, closures, a rich switch statement and a lot more. For details

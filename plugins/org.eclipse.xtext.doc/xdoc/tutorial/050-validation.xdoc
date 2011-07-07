@@ -35,7 +35,7 @@ public void checkFeatureNameIsUnique(Feature f) {
 		for(Feature other: superEntity.getFeatures()) {
 			if (f.getName().equals(other.getName())) {
 				error("Feature names have to be unique",
-						MyDslPackage.Literals.FEATURE__NAME);
+						DomainmodelPackage.Literals.FEATURE__NAME);
 				return;
 			}
 		}

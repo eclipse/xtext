@@ -27,6 +27,43 @@ codelanguage-def[Xtext][
 	EOF
 ]
 
+codelanguage-def[Xbase][
+	extends,
+	super,
+	instanceof,
+	as,
+	new,
+	null,
+	false,
+	true,
+	val,
+	var,
+	if,
+	else,
+	switch,
+	case,
+	default,
+	do,
+	while,
+	for,
+	typeof,
+	throw,
+	try,
+	catch,
+	finally,
+	this, 
+	int, 
+	boolean, 
+	short, 
+	char, 
+	double, 
+	float, 
+	long, 
+	byte, 
+	void,
+	return
+]
+
 codelanguage-def[MWE2][module, var, auto-inject, auto, inject, import, true, false]
 
 codelanguage-def[Xtend2][
@@ -68,6 +105,8 @@ codelanguage-def[FowlerExample][events, commands, state, actions, end, resetting
 
 codelanguage-def[LinkingExample][ref]
 
+part[Getting Started]
+
 chapter-ref[Installation]
 
 chapter-ref[FirstFiveMinutes]
@@ -75,6 +114,8 @@ chapter-ref[FirstFiveMinutes]
 chapter-ref[DomainmodelWalkThrough]
 
 chapter-ref[DomainmodelNextSteps]
+
+part[Reference Documentation]
 
 chapter-ref[Overview]
 
@@ -84,14 +125,18 @@ chapter-ref[configuration]
 
 chapter-ref[runtime_concepts]
 
-chapter-ref[MWE2]
-
 chapter-ref[ide_concepts]
 
-chapter-ref[xtextAndJava]
+chapter-ref[Xbase]
+
+chapter-ref[MWE2]
+
+chapter-ref[Xtend]
 
 %% chapter-ref[special_languages]
 chapter-ref[emf_integration]
+
+part[Appendix]
 
 chapter-ref[migrating_from_1_0_x]
 

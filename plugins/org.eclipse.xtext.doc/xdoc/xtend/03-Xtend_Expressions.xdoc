@@ -1,0 +1,900 @@
+section:Xtend_Expressions[Expressions]
+
+The most important part of a function is of course its implementation, which in Xtend is either a single
+ref:Xtend_Expressions_Blocks[block expression] or a ref:Xtend_RichStrings[rich string expression]. 
+
+section2:Xtend_Expressions_Literals[Literals]
+
+A literal denotes a fixed unchangeable value. Literals for string, integers, booleans,
+null and Java types are supported.
+
+section3:Xtend_Expressions_StringLiterals[String Literals]
+
+A string literal is a valid expression and returns an instance of code[java.lang.String] of the given value.
+
+ul[
+	item[code['Hello World !']]
+	item[code["Hello World !"]]
+	item[code["Hello 
+		World !"
+	]]
+]
+
+section3:Xtend_Expressions_IntegerLiterals[Integer Literals]
+
+An integer literal creates an code[int].
+There is no signed int. If you put a minus operator in front of an int literal it is taken as a UnaryOperator
+with one argument (the positive int literal).
+
+ul[
+	item[code[42]]
+	item[code[234254]]
+]
+
+section3:Xtend_Expressions_BooleanLiteral[Boolean Literals]
+
+There are two boolean literals, code[true] and code[false] which correspond to their Java counterpart of type e[boolean]. 
+
+ul[
+	item[code[Xtend][true]]
+	item[code[Xtend][false]]
+]
+
+section3:Xtend_Expressions_NullLiteral[Null Literal]
+
+The null pointer literal is, like in Java, code[null]. 
+It is a member of any reference type.
+
+ul[
+	item[code[Xtend][null]]
+]
+
+section3:Xtend_Expressions_TypeLiteral[Type Literals]
+
+Type literals are specified using the keyword e[typeof] :
+
+ul[
+  item[code[Xtend][typeof(java.lang.String)] which yields java.lang.String.class]
+]
+
+section2:Xtend_Expressions_TypeCasts[Type Casts]
+
+Type cast behave like casts in Java, but have a slightly more readable syntax.
+Type casts bind stronger than any other operator but weaker than feature calls.
+
+The conformance rules for casts are defined in the link[http://java.sun.com/docs/books/jls/third_edition/html/conversions.html#5.5][Java Language Specification].
+
+section3[Syntax]
+
+code[Xtext][
+XCastedExpression:
+	Expression 'as' JvmTypeReference;
+]
+
+section3[Examples]
+
+ul[
+	item[code[Xtend][my.foo as MyType]]
+	item[code[Xtend][(1 + 3 * 5 * (- 23)) as BigInteger]]
+]
+
+section2:Xtend_Expressions_Operators[Infix Operators / Operator Overloading]
+
+There are a couple of common predefined infix operators. In contrast to Java, the operators are not limited
+to operations on certain types. Instead an operator-to-method mapping allows users to redefine the 
+operators for any type just by implementing the corresponding method signature.
+The following defines the operators and the corresponding Java method signatures / expressions.
+
+table[
+	tr[td[code[e1 += e2]]				td[code[e1._operator_add(e2)]]]
+	tr[td[code[ ]]						td[code[ ]]]
+	
+	tr[td[code[e1 || e2]]				td[code[e1._operator_or(e2)]]]
+	tr[td[code[ ]]						td[code[ ]]]
+	
+	tr[td[code[e1 && e2]]				td[code[e1._operator_and(e2)]]]
+	tr[td[code[ ]]						td[code[ ]]]
+	
+	tr[td[code[e1 == e2]]				td[code[e1._operator_equals(e2)]]]
+	tr[td[code[e1 != e2]]				td[code[e1._operator_notEquals(e2)]]]
+	tr[td[code[e1 < e2]]				td[code[e1._operator_lessThan(e2)]]]
+	tr[td[code[e1 > e2]]				td[code[e1._operator_greaterThan(e2)]]]
+	tr[td[code[e1 <= e2]]				td[code[e1._operator_lessEqualsThan(e2)]]]
+	tr[td[code[e1 >= e2]]				td[code[e1._operator_greaterEqualsThan(e2)]]]
+	tr[td[code[ ]]						td[code[ ]]]
+	
+	tr[td[code[e1 -> e2]]				td[code[e1._operator_mappedTo(e2)]]]
+	tr[td[code[e1 .. e2]]				td[code[e1._operator_upTo(e2)]]]
+	tr[td[code[ ]]						td[code[ ]]]
+	
+	tr[td[code[e1 + e2]]				td[code[e1._operator_plus(e2)]]]
+	tr[td[code[e1 - e2]]				td[code[e1._operator_minus(e2)]]]
+	tr[td[code[ ]]						td[code[ ]]]
+	
+	tr[td[code[e1 * e2]]				td[code[e1._operator_multiply(e2)]]]
+	tr[td[code[e1 / e2]]				td[code[e1._operator_divide(e2)]]]
+	tr[td[code[e1 % e2]]				td[code[e1._operator_modulo(e2)]]]
+	tr[td[code[e1 ** e2]]				td[code[e1._operator_power(e2)]]]
+	tr[td[code[ ]]						td[code[ ]]]
+	
+	tr[td[code[! e1]]					td[code[e1._operator_not()]]]
+	tr[td[code[- e1]]					td[code[e1._operator_minus()]]]
+	tr[td[code[ ]]						td[code[ ]]]
+]
+		
+The table above also defines the operator precedence in ascending order. The blank lines separate precedence levels. 
+The assignment operator code[+=] is right-to-left associative in the same way as the plain assignment
+operator code[=] is. That is a = b = c is executed as a = (b = c), all other
+operators are left-to-right associative. Parenthesis can be used to adjust the default precedence and associativity. 
+
+section3[Short-Circuit Boolean Operators]
+
+If the operators code[||] and code[&&] are used in a context where the left hand operand is of type boolean, the operation is evaluated
+in short circuit mode, which means that the right hand operand might not be evaluated at all in the following cases: 
+ol[
+	item[in the case of code[||] the operand on the right hand side is not evaluated if the left operand evaluates to code[Xtend][true].]
+	item[in the case of code[&&] the operand on the right hand side is not evaluated if the left operand evaluates to code[Xtend][false].]
+] 
+
+section3[Examples]
+
+ul[
+	item[code[my.foo = 23]]
+	item[code[myList += 23]]
+	item[code[x > 23 && y < 23]]
+	item[code[x && y || z]]
+	item[code[1 + 3 * 5 * (- 23)]]
+	item[code[!(x)]]
+	item[code[my.foo = 23]]
+	item[code[my.foo = 23]]
+]
+
+section3:Xtend_Expressions_PropertyAssignment[Assignments]
+
+ref:Xtend_Expressions_VariableDeclaration[Local variables] can be reassigned using the code[=] operator. Also properties can be set using 
+that operator:
+Given the expression 
+
+code[Xtend][
+	myObj.myProperty = "foo"
+]
+
+The compiler first looks up whether there is an accessible Java Field called code[myProperty] on the type of code[myObj]. If there is one it translates to
+the following Java expression :
+
+code[Java][
+	myObj.myProperty = "foo";
+]
+
+Remember in Xtend everything is an expression and has to return something. In the case of simple assignments the return value is the value returned from the corresponding
+Java expression, which is the assigned value.
+
+If there is no accessible field on the left operand's type, a method called code[setMyProperty(OneArg)] (JavaBeans
+setter method) is looked up. It has to take one argument of the type (or a super type) of the right hand operand. The return value will be whatever the 
+setter method returns (which usually is code[null]). 
+As a result the compiler translates to :
+
+code[Java][
+	myObj.setMyProperty("foo")
+]
+
+section2:Xtend_Expressions_FeatureCalls[Feature Calls]
+
+A feature call is used to invoke members of objects, such as fields and methods, but also can refer to local variables and parameters, 
+which are made available for the current expression's scope. 
+
+section3[Syntax]
+
+The following snippet is a simplification of the real Xtext rules, which cover more than the concrete syntax.
+code[Xtext][
+FeatureCall :
+	ID |
+	Expression ('.' ID ('(' Expression (',' Expression)* ')')?)*
+]
+
+section3:Xtend_Expressions_PropertyAccess[Property Access]
+
+Feature calls are directly translated to their Java equivalent with the exception, that for calls to properties an equivalent rule as 
+described in ref:Xtend_Expressions_PropertyAssignment applies. 
+That is, for the following expression
+
+code[Xtend][
+	myObj.myProperty
+]
+
+the compiler first looks for an accessible field in the type of code[Xtend][myObj]. If no such field exists it looks for a method called code[Java][myProperty()] before it looks 
+for the getter methods code[Java][getMyProperty()]. If none of these members can be found the expression is unbound and a compiliation error is thrown.
+
+section3:Xtend_Expressions_ImplicitThis[Implicit 'this' variable]
+
+If the current scope contains a variable named code[Xtend][this], the compiler will make all its members available to the scope. 
+That is if 
+code[Xtend][
+	this.myProperty
+]
+is a valid expression
+code[Xtend][
+	myProperty
+]
+is valid as well and is equivalent, as long as there is no local variable 'myProperty' on the scope,
+which would have higher precedence.
+
+%%section2:spreadOperator[Spread Operator]
+%%
+%%Xtend provides a special sugared notation to invoke a certain feature on each element of an iterable
+%%and obtain the results as a list. This is essentially a short cut notation for a higher order function on code[java.lang.Iterable].
+%%If you for instance want the names of all persons in a code[List] you could write the following using a higher order function and a closures:
+%%
+%%code[
+%%	listOfPersons.collect(e|e.name)
+%%]
+%%
+%%However because this situation is so common Xtend provides a special sugared expression for that.
+%%So alternatively to the code above you can write:
+%%
+%%code[
+%%	listOfPersons*.name
+%%]
+%%
+%%Note that we decided to come up with an explicit operator (*.) because overloading the '.' operator as it is the case in Xpand,
+%%has caused a lot of surprises in the past. With an explicit operator the tooling as well as the user always can distinguish whether you
+%%invoke a feature on the iterables elements or on the iterable itself.
+%%Also note that this really is just a shortcut for collect. It doesn't do any flattening, when you invoke it on iterables containing iterables.
+%%
+%%The operator works on all members of code[java.lang.Iterable]. the return type is always an code[java.util.List<T>] where code[T]
+%%is the return type of the called feature.
+%%
+%%e[TODO: Discuss, whether we want do an eager transformation of the iterable (and thereby provide a suiteable return type such as list if 
+%%'this' is a list or 'collection' if this is a collection). Otherwise we'll have to restrict the parameters of the spread operation
+%%to final values (capture context as we do for closures). ]
+%%
+%%section3[Syntax]
+%%
+%%code[
+%%XIterableFeatureCall:
+%%	PrimaryExpression ('*.') FeatureCall;
+%%]
+%%
+%%section3[Examples]
+%%
+%%ul[
+%%	item[code[myListOfPersons*.name]]
+%%]
+%%
+section3:Xtend_Expressions_NullSafeFeatureCalls[Null-Safe Feature Call]
+
+Checking for null references can make code very unreadable. In many situations it is ok for an expression to return null if a receiver was null.
+Xtend supports the safe navigation operator code[?.] to make such code more readable.
+
+Instead of writing 
+
+code[Java][
+	if ( myRef != null ) myRef.doStuff()
+]
+
+one can write
+
+code[Xtend][
+	myRef?.doStuff()
+]
+
+section2:Xtend_Expressions_ConstructorCall[Constructor Call]
+
+Construction of objects is done by invoking Java constructors. The syntax is exactly as in Java.
+
+section3[Examples]
+
+ul[
+	item[
+		code[Xtend][
+			new String()
+		]
+	]
+	item[
+		code[Xtend][
+			new java.util.ArrayList<java.math.BigDecimal>()
+		]
+	]
+]
+
+section3[Syntax]
+
+code[Xtext][
+XConstructorCall:
+  'new' QualifiedName 
+  		('<' JvmTypeArgument (',' JvmTypeArgument)* '>')? 
+  		('('(XExpression (',' XExpression)*)?')')?;
+]
+
+section2:Xtend_Expressions_Closures[Closures]
+
+A closure is a literal that defines an anonymous function. A closure also captures the current scope,
+so that any final variables and parameters visible at construction time can be referred to in the closure's expression. 
+
+section3[Syntax]
+
+code[Xtext][
+XClosure:
+	'\[' ( JvmFormalParameter (',' JvmFormalParameter)* )? 
+		'|' XExpression '\]';
+]
+
+The surrounding square brackets are optional if the closure is the single argument of a method invocation.
+That is you can write
+
+code[Xtend][
+	myList.find(e|e.name==null)
+]
+
+instead of
+
+code[Xtend][
+	myList.find(\[e|e.name==null\])
+]
+
+But in all other cases the square brackets are mandatory:
+
+code[Xtend][
+	val func = \[String s| s.length>3\]
+]
+
+section3:Xtend_Expressions_ClosuresTypeInference[Typing]
+
+Closures are expressions which produce function objects. The type is a ref:Xbase_Types_FunctionTypes[function type], consisting of the types of the 
+parameters as well as the return type. The return type is never specified explicitly but is always inferred from the expression. 
+The parameter types can be inferred if the closure is used in a context where this is possible.
+
+For instance, given the following Java method signature:
+code[Java][
+	public T <T>getFirst(List<T> list, Function0<T,Boolean> predicate) 
+] 
+
+the type of the parameter can be inferred. Which allows users to write:
+code[Xtend][
+	arrayList( "Foo", "Bar" ).findFirst( e | e == "Bar" )
+]
+instead of 
+code[Xtend][
+	arrayList( "Foo", "Bar" ).findFirst( String e | e == "Bar" )
+]
+
+section3:Xtend_Expressions_FunctionMapping[Function Mapping]
+
+An Xtend closure is a Java object of one of the e[Function] interfaces shipped with the runtime library of Xtend. There is an interface 
+for each number of parameters (current maximum is six parameters). The names of the interfaces are 
+ul[
+	item[e[Function0<ReturnType>] for zero parameters, ]
+	item[e[Function1<Param1Type, ReturnType>] for one parameters, ]
+	item[e[Function2<Param1Type, Param2Type, ReturnType>] for two parameters, ]
+	item[... ]
+	item[e[Function6<Param1Type, Param2Type, Param3Type, Param4Type, Param5Type, Param6Type, ReturnType>] for six parameters, ]
+]
+
+In order to allow seamless integration with existing Java libraries such as the JDK or Google Guava (formerly known as Google Collect) closures
+are auto coerced to expected types if those types declare only one method (methods from java.lang.Object
+don't count).
+
+As a result given the method code[java.util.Collections.sort(List<T>, Comparator<? super T>)] is available
+as an extension method, it can be invoked like this
+
+code[Xtend][
+newArrayList( 'aaa', 'bb', 'c' ).sort(
+	e1, e2 | if ( e1.length > e2.length ) {
+				-1 
+			 } else if ( e1.length < e2.length ) { 
+				1
+			 } else { 
+				0
+			 })
+]
+
+section3[Examples]
+
+ul[
+	item[code[Xtend][\[ | "foo" \]   // closure without parameters]]
+	item[code[Xtend][\[ String s | s.toUpperCase() \] // explicit argument type]]
+	item[code[Xtend][\[ a,b,a | a+b+c \] // inferred argument types]]
+]
+
+section2:Xtend_Expressions_IfExpression[If Expression]
+
+An if expression is used to choose two different values based on a predicate. While it has the syntax of Java's if statement it behaves  
+like Java's ternary operator (code[Java][predicate ? thenPart : elsePart]), i.e. it is an expression that returns a value. Consequently, you can use 
+if expressions deeply nested within expressions.
+
+section3[Syntax]
+
+code[Xtext][
+XIfExpression:
+	'if' '(' XExpression ')'
+		XExpression
+	('else' XExpression)?;
+]
+
+An expression code[Xtend][if (p) e1 else e2] results in either the value code[e1] or code[e2] depending on whether the predicate code[p] 
+evaluates to code[Xtend][true] or code[Xtend][false]. The else part is optional which is a shorthand for code[Xtend][else null].
+That means 
+
+code[Xtend][
+	if (foo) x 
+]
+
+is the a short hand for
+
+code[Xtend][
+	if (foo) x else null
+]
+
+section3:Xtend_Expressions_IfTypeInference[Typing]
+
+The type of an if expression is calculated by the return types code[T1] and code[T2] of the two expression code[e1] and code[e2].
+It uses the rules defined in ref:Xbase_Types_CommonSuperType.
+
+section3[Examples]
+
+ul[
+	item[code[Xtend][if (isFoo) this else that]]
+	item[code[Xtend][if (isFoo) { this } else if (thatFoo) { that } else { other }]]
+	item[code[Xtend][if (isFoo) this]]
+]
+
+section2:Xtend_Expressions_SwitchExpression[Switch Expression]
+
+The switch expression is a bit different from Java's. First, there is no fall through which means only one case is evaluated at most.
+Second, the use of switch is not limited to certain values but can be used for any object reference instead.
+ 
+For a switch expression 
+code[Xtend][
+switch e {
+	case e1 : er1
+	case e2 : er2
+	...
+	case en : ern
+	default : er
+}
+]
+
+the main expression code[e] is evaluated first and then each case sequentially. If the switch expression
+contains a variable declaration using the syntax known from ref:Xtend_Expressions_ForLoop, the value is bound to the given name.
+Expressions of type code[java.lang.Boolean] or code[boolean] are not allowed in a switch expression.
+
+The guard of each case clause is evaluated until the switch value equals the result of the case's guard expression or if the case's guard expression evaluates to code[true].
+Then the right hand expression of the case evaluated and the result is returned.
+
+If none of the guards matches the default expression is evaluated an returned. If no default expression
+is specified the expression evaluates to code[Xtend][null].
+
+Example:
+
+code[Xtend][
+switch myString {
+	case myString.length>5 : 'a long string.'
+	case 'foo' : 'It's a foo.'
+	default : 'It's a short non-foo string.'
+}
+]
+
+section3[Type guards]
+
+In addition to the case guards one can add a so called e[Type Guard] which is syntactically just a ref:Xbase_Types_TypeReferences[type reference] preceding
+the than optional case keyword. The compiler will use that type for the switch expression in subsequent expressions.
+Example:
+code[Xtend][
+var Object x = ...;
+switch x {
+	String case x.length()>0 : x.length()
+	List<?> : x.size()
+	default : -1
+}
+]
+
+Only if the switch value passes a type guard, i.e. an instanceof operation returns code[true], the case's guard expression is executed using the same semantics explained in
+previously. 
+If the switch expression contains an explicit declaration of a local variable or the expression references a local variable,
+the type guard acts like a cast, that is all references to the switch value will be of the type specified in the type guard.
+
+section3[Typing]
+
+The return type of a switch expression is computed using the rules defined in ref:Xbase_Types_CommonSuperType. The set of types from which the common super type is 
+computed corresponds to the types of each case's result expression. In case a switch expression's type is
+computed using the expected type from the context, it is sufficient to return the expected type if all case branches types conform to the expected type.
+
+section3[Examples]
+
+ul[
+	item[
+		code[Xtend][
+			switch foo {
+				Entity : foo.superType.name
+				Datatype : foo.name
+				default : throw new IllegalStateException
+			}
+		]
+	]
+	item[
+		code[Xtend][
+			switch x : foo.bar.complicated('hello',42) {
+				case "hello42" : ...
+				case x.length<2 : ...
+				default : ....
+			}
+		]
+	]
+]
+
+section3[Syntax]
+
+code[Xtext][
+XSwitchExpression:
+	'switch' (ID ':')? XExpression '{'
+		XCasePart+
+		('default' ':' XExpression))?
+	'}';
+
+XCasePart:
+	JvmTypeReference? ('case' XExpression)? ':' XExpression );
+}
+]
+
+section2:Xtend_Expressions_VariableDeclaration[Variable Declarations]
+
+Variable declarations are only allowed within ref:Xtend_Expressions_Blocks[blocks]. They are visible in any subsequent expressions in
+the block. Although overriding or shadowing variables from outer scopes is allowed, it is usually only
+used to overload the variable name 'this', in order to subsequently access an object's features in an
+unqualified manner.
+
+A variable declaration starting with the keyword code[Xtend][val] denotes a so called value, which is essentially a final (i.e. unsettable) variable. In rare cases, one
+needs to update the value of a reference. In such situations the variable needs to be declared with the keyword code[Xtend][var], which stands for 'variable'.
+
+A typical example for using code[Xtend][var] is a counter in a loop. 
+code[Xtend][
+{
+	val max = 100
+	var i = 0
+	while (i > max) {
+		println("Hi there!")
+		i = i +1
+	}
+}
+]
+
+Variables declared outside a closure using the code[var] keyword are not accessible from within a
+closure.
+
+section3[Syntax]
+
+code[Xtext][
+XVariableDeclaration:
+	('val' | 'var') JvmTypeReference? ID '=' XExpression;
+]
+
+section3[Typing]
+
+The return type of a variable declaration expression is always code[void]. 
+The type of the variable itself can either be explicitly declared or be inferred from the right hand side expression.
+Here is an example for an explicitly declared type:
+code[Xtend][
+	var List<String> msg = new ArrayList<String>(); 
+]
+In such cases, the right hand expression's type must ref:Xbase_Types_ConformanceRules[conform] to the type on the left hand side. 
+
+Alternatively the type can be left out and will be inferred from the initialization expression:  
+code[Xtend][
+	var msg = new ArrayList<String>(); // -> type ArrayList<String>  
+]
+
+section2:Xtend_Expressions_Blocks[Blocks]
+
+The block expression allows to have imperative code sequences. It consists of a sequence of expressions, and returns the value of the last expression.
+The return type of a block is also the type of the last expression. Empty blocks return code[null]. 
+ref:Xtend_Expressions_VariableDeclaration[Variable declarations] are only allowed within blocks and cannot be used as a block's last expression.
+
+A block expression is surrounded by curly braces and contains at least one expression.
+It can optionally be terminated by a semicolon.
+
+section3[Examples]
+
+code[Xtend][
+{
+	doSideEffect("foo")
+	result
+}
+]
+code[Xtend][
+{
+	var x = greeting();
+	if (x.equals("Hello ")) {
+		x+"World!"; 
+	} else {
+		x;
+	}
+}
+]
+
+section3[Syntax]
+
+code[Xtext][
+XBlockExpression:
+	'{'
+		(XExpressionInsideBlock ';'?)*
+	'}';
+]
+
+section2:Xtend_Expressions_ForLoop[For Loop]
+
+The for loop code[Xtend][for (T1 variable : iterableOfT1) expression] is used to execute a certain expression for each element of an
+array of an instance of code[java.lang.Iterable].
+The local code[variable] is final, hence canot be updated. 
+
+The return type of a for loop is code[Xtend][void].
+The type of the local variable can be left out. In that case it is inferred from the type of the array
+or code[java.lang.Iterable] returned by the iterable expression.
+
+ul[
+	item[
+		code[Xtend][
+			for (String s : myStrings) {
+				doSideEffect(s);
+			}
+		]
+	]
+	item[
+		code[Xtend][
+			for (s : myStrings)
+				doSideEffect(s)
+		]
+	]
+]
+
+section3[Syntax]
+
+code[Xtext][
+XForExpression:
+	'for' '(' JvmFormalParameter ':' XExpression ')' 
+		XExpression
+	;
+]
+
+section2:Xtend_Expressions_WhileExpression[While Loop]
+
+A while loop code[Xtend][while (predicate) expression] is used to execute a certain expression unless the predicate is evaluated to code[Xtend][false].
+The return type of a while loop is code[Xtend][void].
+
+section3[Syntax]
+
+code[Xtext][
+XWhileExpression:
+	'while' '(' predicate=XExpression ')'
+		body=XExpression;
+] 
+
+section3[Examples]
+
+ul[
+	item[code[Xtend][
+		while (true) {
+			doSideEffect("foo");
+		}
+	]]
+	item[code[Xtend][
+		while ( ( i = i + 1 ) < max ) 
+			doSideEffect( "foo" )
+	]]
+]
+
+section2:Xtend_Expressions_DoWhileExpression[Do-While Loop]
+
+A do-while loop code[Xtend][do expression while (predicate)] is used to execute a certain expression unless the predicate is evaluated to code[Xtend][false].
+The difference to the ref:Xtend_Expressions_WhileExpression[while loop] is that the execution starts by executing the block once before evaluating the predicate for the first time.
+The return type of a do-while loop is code[Xtend][void].
+
+section3[Syntax]
+
+code[Xtext][
+XDoWhileExpression:
+	'do'
+		body=XExpression
+	'while' '(' predicate=XExpression ')';
+] 
+
+section3[Examples]
+
+ul[
+	item[code[Xtend][
+		do {
+			doSideEffect("foo");
+		} while (true)
+	]]
+	item[code[Xtend][
+		do doSideEffect("foo") while ((i=i+1)<max)
+	]]
+]
+
+section2:Xtend_Expressions_Return[Return Expression]
+
+Although an explicit return is often not necessary, it is supported.
+In a closure for instance a return expression is always implied if the expression itself is not of type
+code[Xtend][void]. Anyway you can make it explicit:
+
+code[Xtend][
+	listOfStrings.map(e| {
+		if (e==null) 
+			return "NULL"
+		e.toUpperCase
+	}) 
+]
+
+section2:Xtend_Expressions_Throw[Throwing Exceptions]
+
+Like in Java it is possible to throw code[java.lang.Throwable]. The syntax is exactly the same as in Java.
+
+code[Xtend][
+{
+	...
+	if (myList.isEmpty)
+		throw new IllegalArgumentException("the list must not be empty")
+	...
+} 	
+]
+
+section2:Xtend_Expressions_TryCatch[Try, Catch, Finally]
+
+The try-catch-finally expression is used to handle exceptional situations.
+You are not forced to declare checked exceptions, if you don't catch checked exceptions they are rethrown
+in a wrapping runtime exception. 
+Other than that the syntax again is like the one known from Java.
+
+code[Xtend][
+	try {
+		throw new RuntimeException()
+	} catch (NullPointerException e) {
+		// handle e
+	} finally {
+		// do stuff
+	}
+]
+
+
+section2:Xtend_RichStrings[Rich Strings]
+
+Rich Strings allow for readable string concatenation, which is the main thing you do when writing a code generator. 
+Let's have a look at an example of how a typical function with template expressions looks like:
+
+code[Xtend][
+toClass(Entity e) '''
+  package «e.packageName»;
+
+  «placeImports»
+
+  public class «e.name» «IF e.extends!=null»extends «e.extends»«ENDIF» {
+    «FOR e.members»
+      «member.toMember»
+    «ENDFOR»
+  }
+'''
+]
+
+If you are familiar with Xpand, you'll notice that it is exactly the same syntax. The difference is, that
+the template syntax is actually an expression, which means it can occur everywhere where an expression is
+expected. For instance in conjunction the powerful ref:Xtend_Expressions_SwitchExpression[switch expression]:
+
+code[Xtend][
+toMember(Member m) {
+	switch m {
+		Field : '''private «m.type» «m.name» ;'''
+		Method case isAbstract : ''' abstract «...'''
+		Method : ''' ..... '''
+	}
+}
+]
+
+section2:RichStringIF[Conditions in Rich Strings]
+
+There is a special code[Xtend][IF] to be used within rich strings which is identical in syntax and meaning to the
+old code[Xtend][IF] from Xpand. Note that you could also use the if expression, but since it has not an explicit
+terminal token, it is not as readable in that context.
+
+section2:RichStringFOREACH[Loops in Rich Strings]
+
+Also the code[Xtend][FOR] statement is available and can only be used in the context of a rich string.
+It also supports the code[Xtend][SEPARATOR] from Xpand. In addition, a code[Xtend][BEFORE] expression
+can be defined that is only evaluated if the loop is at least evaluated once before the very first iteration.
+Consequently code[Xtend][AFTER] is evaluated after the last iteration if there is any element.
+
+section2:RichStringType[Typing]
+
+The rich string is translated to an efficient string concatenation and the return type of a rich string
+is codeRef[java.lang.CharSequence] which allows room for efficient implementation.
+
+section2:WhitespaceHandling[White Space Handling]
+
+One of the key features of rich strings is the smart handling of white space in the template output. The
+white space is not written into the output data structure as is but preprocessed. This allows for readable
+templates as well as nicely formatted output. This can be achieved by applying three simple rules
+when the rich string is evaluated.
+
+ol[
+	item[
+		An evaluated rich string as part of another string will be prefixed with the current indentation
+		of the caller before it is inserted into the result.
+	]
+	item[
+		Indentation in the template that is relative to a control structure will not be propagated to
+		the output string. A control structure is a code[Xtend][FOR]-loop or a condition (code[Xtend][IF]) as well
+		as the opening and closing marks of the rich string itself.
+		
+		The indentation is considered to be relative to such a control structure if the previous line
+		ends with a control structure followed by optional white space. The amount of white space is not
+		taken into account but the delta to the other lines.
+	]
+	item[
+		Lines that do not contain any static text which is not white space but do contain control structures
+		or invocations of other templates which evaluate to an empty string, will not appear in the output.
+	]		
+]
+
+The behavior is best described with a set of examples. The following table assumes a data structure of
+nested nodes.
+
+table[
+	tr[
+		td[
+			code[Xtend][
+class Template {
+	print(Node n) '''
+		node «n.name» {}
+	'''
+}
+			]
+		]
+		td[
+			code[
+				node NodeName{}
+			]
+		]
+	]
+]
+
+The indentation before code[node «n.name»] will be skipped as it is relative to the opening
+mark of the rich string and thereby not considered to be relevant for the output but only
+for readability of the template itself.
+
+table[
+	tr[
+		td[
+			code[Xtend][
+class Template {
+	print(Node n) '''
+		node «n.name» {
+			«IF hasChildren»
+				«n.children*.print»
+			«ENDIF»
+		}
+	'''
+}
+			]
+		]
+		td[
+			code[
+node Parent{
+	node FirstChild {
+	}
+	node SecondChild {
+		node Leaf {
+		}
+	}
+}
+			]
+		]
+	]
+]
+
+As in the previous example, there is no indentation on the root level for the same reason.
+The first nesting level has only one indentation level in the output. This is derived from
+the indentation of the code[Xtend][IF hasChildren] condition in the template which is nested in
+the node. The additional nesting of the recursive invocation code[Xtend][children*.print] is not
+visible in the output as it is relative the the surrounding control structure. The line with
+code[Xtend][IF] and code[Xtend][ENDIF] contain only control structures thus they are skipped in the output.
+Note the additional indentation of the node e[Leaf] which happens due to the first rule:
+Indentation is propagated to called templates.
+

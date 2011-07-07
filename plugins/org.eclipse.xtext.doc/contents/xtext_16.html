@@ -1,0 +1,700 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Reference Documentation</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="index.html" title="">
+</head>
+<body>
+<a name="Xtext Documentation_16"></a>
+<h1>Reference Documentation</h1>
+<ol><li><a href="000-introduction.html">Overview</a>
+<ol>	<li><a href="000-introduction.html#Overview_1">What is Xtext?</a>
+	</li>
+	<li><a href="000-introduction.html#Overview_2">How Does It Work?</a>
+	</li>
+	<li><a href="000-introduction.html#Overview_3">Xtext is Highly Configurable</a>
+	</li>
+	<li><a href="000-introduction.html#Overview_4">Who Uses Xtext?</a>
+	</li>
+	<li><a href="000-introduction.html#Overview_5">Who is Behind Xtext?</a>
+	</li>
+	<li><a href="000-introduction.html#DSL">What is a Domain-Specific Language</a>
+	</li>
+</ol></li>
+<li><a href="020-grammar-language.html">The Grammar Language</a>
+<ol>	<li><a href="020-grammar-language.html#statemachine">A First Example</a>
+	</li>
+	<li><a href="020-grammar-language.html#syntax">The Syntax</a>
+	<ol>	<li><a href="020-grammar-language.html#syntax_2">Language Declaration</a>
+		</li>
+		<li><a href="020-grammar-language.html#package_declarations">EPackage Declarations</a>
+		<ol>	<li><a href="020-grammar-language.html#package_declarations_2">EPackage Generation</a>
+			</li>
+			<li><a href="020-grammar-language.html#package_declarations_3">EPackage Import</a>
+			<ol>	<li><a href="020-grammar-language.html#package_declarations_3_2">Using Resource URIs to Import Existing EPackages</a>
+				</li>
+				<li><a href="020-grammar-language.html#package_declarations_3_3">Using Classpath URIs to Import Existing EPackages</a>
+				</li>
+				<li><a href="020-grammar-language.html#package_declarations_3_4">Using Namespace URIs to Import Existing EPackages</a>
+				</li>
+			</ol></li>
+			<li><a href="020-grammar-language.html#package_declarations_4">Ecore Model Aliases for EPackages</a>
+			</li>
+		</ol></li>
+		<li><a href="020-grammar-language.html#syntax_4">Rules</a>
+		<ol>	<li><a href="020-grammar-language.html#syntax_4_3">Terminal Rules</a>
+			<ol>	<li><a href="020-grammar-language.html#syntax_4_3_10">Return Types</a>
+				</li>
+			</ol></li>
+			<li><a href="020-grammar-language.html#syntax_4_4">Extended Backus-Naur Form Expressions</a>
+			<ol>	<li><a href="020-grammar-language.html#Keywords">Keywords / Characters</a>
+				</li>
+				<li><a href="020-grammar-language.html#syntax_4_4_4">Character Ranges</a>
+				</li>
+				<li><a href="020-grammar-language.html#syntax_4_4_5">Wildcard</a>
+				</li>
+				<li><a href="020-grammar-language.html#syntax_4_4_6">Until Token</a>
+				</li>
+				<li><a href="020-grammar-language.html#syntax_4_4_7">Negated Token</a>
+				</li>
+				<li><a href="020-grammar-language.html#rule_calls">Rule Calls</a>
+				</li>
+				<li><a href="020-grammar-language.html#Alternatives">Alternatives</a>
+				</li>
+				<li><a href="020-grammar-language.html#Groups">Groups</a>
+				</li>
+			</ol></li>
+			<li><a href="020-grammar-language.html#terminal_fragment">Terminal Fragments</a>
+			</li>
+			<li><a href="020-grammar-language.html#eof">EOF - End Of File</a>
+			</li>
+		</ol></li>
+		<li><a href="020-grammar-language.html#parser_rules">Parser Rules</a>
+		<ol>	<li><a href="020-grammar-language.html#parser_rules_2">Extended Backus-Naur Form Expressions</a>
+			<ol>	<li><a href="020-grammar-language.html#assignments">Assignments</a>
+				</li>
+				<li><a href="020-grammar-language.html#cross_reference">Cross-References</a>
+				</li>
+				<li><a href="020-grammar-language.html#unordered_groups">Unordered Groups</a>
+				</li>
+				<li><a href="020-grammar-language.html#parser_rules_2_8">Simple Actions</a>
+				</li>
+				<li><a href="020-grammar-language.html#parser_rules_2_9">Unassigned Rule Calls</a>
+				</li>
+				<li><a href="020-grammar-language.html#grammarActions">Assigned Actions</a>
+				</li>
+			</ol></li>
+		</ol></li>
+		<li><a href="020-grammar-language.html#hidden_terminals">Hidden Terminal Symbols</a>
+		</li>
+		<li><a href="020-grammar-language.html#datatypeRules">Data Type Rules</a>
+		</li>
+		<li><a href="020-grammar-language.html#syntax_8">Enum Rules</a>
+		</li>
+		<li><a href="020-grammar-language.html#antlr_errors">Syntactic Predicates</a>
+		</li>
+	</ol></li>
+	<li><a href="020-grammar-language.html#metamodelInference">Ecore Model Inference</a>
+	<ol>	<li><a href="020-grammar-language.html#metamodelInference_3">Type and Package Generation</a>
+		</li>
+		<li><a href="020-grammar-language.html#metamodelInference_4">Feature and Type Hierarchy Generation</a>
+		</li>
+		<li><a href="020-grammar-language.html#metamodelInference_5">Enum Literal Generation</a>
+		</li>
+		<li><a href="020-grammar-language.html#metamodelInference_6">Feature Normalization</a>
+		</li>
+		<li><a href="020-grammar-language.html#customPostProcessing">Customized Post Processing</a>
+		</li>
+		<li><a href="020-grammar-language.html#metamodelInference_8">Error Conditions</a>
+		</li>
+	</ol></li>
+	<li><a href="020-grammar-language.html#grammarMixins">Grammar Mixins</a>
+	</li>
+	<li><a href="020-grammar-language.html#grammarLanguage_6">Common Terminals</a>
+	</li>
+</ol></li>
+<li><a href="030-generator.html">Configuration</a>
+<ol>	<li><a href="030-generator.html#generator">The Language Generator</a>
+	<ol>	<li><a href="030-generator.html#short_intro_to_mwe">A Short Introduction to MWE2</a>
+		</li>
+		<li><a href="030-generator.html#generator_5">General Architecture</a>
+		<ol>	<li><a href="030-generator.html#generator_fragment">Generator Fragments</a>
+			</li>
+			<li><a href="030-generator.html#generator_5_4">Configuration</a>
+			</li>
+		</ol></li>
+		<li><a href="030-generator.html#generator_6">Standard Generator Fragments</a>
+		</li>
+	</ol></li>
+	<li><a href="040-dependency-injection.html">Dependency Injection in Xtext with Google Guice</a>
+	<ol>	<li><a href="040-dependency-injection.html#guicemodules">The Module API</a>
+		</li>
+		<li><a href="040-dependency-injection.html#dependencyInjection_9">Obtaining an Injector</a>
+		</li>
+	</ol></li>
+</ol></li>
+<li><a href="050-heading-runtime.html">Runtime Concepts</a>
+<ol>	<li><a href="050-heading-runtime.html#runtimeSetup">Runtime Setup (ISetup)</a>
+	</li>
+	<li><a href="050-heading-runtime.html#equinoxSetup">Setup within Eclipse-Equinox (OSGi)</a>
+	</li>
+	<li><a href="050-heading-runtime.html#runtime_concepts_4">Logging</a>
+	</li>
+	<li><a href="060-validation.html">Validation</a>
+	<ol>	<li><a href="060-validation.html#validation_2">Automatic Validation</a>
+		<ol>	<li><a href="060-validation.html#syntactical_validation">Lexer/Parser: Syntactical Validation</a>
+			</li>
+			<li><a href="060-validation.html#linking_validation">Linker: Crosslink Validation</a>
+			</li>
+			<li><a href="060-validation.html#concrete_syntax_validation">Serializer: Concrete Syntax Validation</a>
+			</li>
+		</ol></li>
+		<li><a href="060-validation.html#custom_validation">Custom Validation</a>
+		</li>
+		<li><a href="060-validation.html#validation_4">Validating Manually</a>
+		</li>
+		<li><a href="060-validation.html#test_validators">Test Validators</a>
+		</li>
+	</ol></li>
+	<li><a href="070-linking.html">Linking</a>
+	<ol>	<li><a href="070-linking.html#linking_3">Declaration of Crosslinks</a>
+		</li>
+		<li><a href="070-linking.html#linking_4">Default Runtime Behavior (Lazy Linking)</a>
+		</li>
+	</ol></li>
+	<li><a href="080-scoping.html">Scoping</a>
+	<ol>	<li><a href="080-scoping.html#global_scopes">Global Scopes and Resource Descriptions</a>
+		<ol>	<li><a href="080-scoping.html#resourcedescriptions">Resource and EObject Descriptions</a>
+			</li>
+			<li><a href="080-scoping.html#import_uri">Global Scopes Based On Explicit Imports (ImportURI Mechanism)</a>
+			</li>
+			<li><a href="080-scoping.html#index_based">Global Scopes Based On External Configuration (e.g. Classpath-Based)</a>
+			<ol>	<li><a href="080-scoping.html#containers">About the Index, Containers and Their Manager</a>
+				</li>
+				<li><a href="080-scoping.html#jdt_based_containers">JDT-Based Container Manager</a>
+				</li>
+				<li><a href="080-scoping.html#project_based_containers">Eclipse Project-Based Containers</a>
+				</li>
+				<li><a href="080-scoping.html#resource_set_containers">ResourceSet-Based Containers</a>
+				</li>
+			</ol></li>
+		</ol></li>
+		<li><a href="080-scoping.html#local_scoping">Local Scoping</a>
+		<ol>	<li><a href="080-scoping.html#local_scoping_7">Declarative Scoping</a>
+			</li>
+		</ol></li>
+		<li><a href="080-scoping.html#scoping_12">Imported Namespace-Aware Scoping</a>
+		<ol>	<li><a href="080-scoping.html#scoping_12_2">org.eclipse.xtext.naming.IQualifiedNameProvider</a>
+			</li>
+			<li><a href="080-scoping.html#scoping_12_3">Importing Namespaces</a>
+			</li>
+		</ol></li>
+	</ol></li>
+	<li><a href="090-valueconverter.html">Value Converter</a>
+	</li>
+	<li><a href="100-serialization.html">Serialization</a>
+	<ol>	<li><a href="100-serialization.html#serializationcontract">The Contract</a>
+		</li>
+		<li><a href="100-serialization.html#serialization_6">Roles of the Semantic Model and the Node Model During Serialization</a>
+		</li>
+		<li><a href="100-serialization.html#parsetreeconstructor">Parse Tree Constructor</a>
+		</li>
+		<li><a href="100-serialization.html#saveoptions">Options</a>
+		</li>
+		<li><a href="100-serialization.html#commentassociater">Preserving Comments from the Node Model</a>
+		</li>
+		<li><a href="100-serialization.html#transientvalues">Transient Values</a>
+		</li>
+		<li><a href="100-serialization.html#unassignedtext">Unassigned Text</a>
+		</li>
+		<li><a href="100-serialization.html#crossreferenceserializer">Cross-Reference Serializer</a>
+		</li>
+		<li><a href="100-serialization.html#hiddentokenmerger">Merge White Space</a>
+		</li>
+		<li><a href="100-serialization.html#tokenstream">Token Stream</a>
+		</li>
+	</ol></li>
+	<li><a href="105-formatting.html">Formatting (Pretty Printing)</a>
+	<ol>	<li><a href="105-formatting.html#formatting_8">General FormattingConfig Settings</a>
+		</li>
+		<li><a href="105-formatting.html#formatting_9">FormattingConfig Instructions</a>
+		</li>
+		<li><a href="105-formatting.html#formatting_10">Grammar Element Finders</a>
+		</li>
+	</ol></li>
+	<li><a href="110-fragmentprovider.html">Fragment Provider (Referencing Xtext Models From Other EMF Artifacts)</a>
+	</li>
+	<li><a href="115-encoding.html">Encoding in Xtext</a>
+	<ol>	<li><a href="115-encoding.html#encoding_6">Encoding at Language Design Time</a>
+		</li>
+		<li><a href="115-encoding.html#encoding_7">Encoding at Language Runtime</a>
+		</li>
+		<li><a href="115-encoding.html#encoding_8">Encoding of an XtextResource</a>
+		</li>
+		<li><a href="115-encoding.html#encoding_9">Encoding in New Model Projects</a>
+		</li>
+		<li><a href="115-encoding.html#encoding_10">Encoding of Xtext Source Code</a>
+		</li>
+	</ol></li>
+</ol></li>
+<li><a href="120-heading-UI.html">IDE Concepts</a>
+<ol>	<li><a href="140-labelprovider.html">Label Provider</a>
+	<ol>	<li><a href="140-labelprovider.html#EObjectLabelProvider">Label Providers For EObjects</a>
+		<ol>	<li><a href="140-labelprovider.html#DefaultEObjectLabelProvider">DefaultEObjectLabelProvider</a>
+			</li>
+		</ol></li>
+		<li><a href="140-labelprovider.html#DescriptionLabelProvider">Label Providers For Index Entries</a>
+		</li>
+	</ol></li>
+	<li><a href="150-contentassist.html">Content Assist</a>
+	</li>
+	<li><a href="155-quickfix.html">Quick Fixes</a>
+	<ol>	<li><a href="155-quickfix.html#quickfixes_12">Quickfixes for Linking Errors and Syntax Errors</a>
+		</li>
+	</ol></li>
+	<li><a href="160-templates.html">Template Proposals</a>
+	<ol>	<li><a href="160-templates.html#templates_6">Cross Reference Template Variable Resolver</a>
+		</li>
+		<li><a href="160-templates.html#templates_7">Enumeration Template Variable Resolver</a>
+		</li>
+	</ol></li>
+	<li><a href="170-outline.html">Outline View</a>
+	<ol>	<li><a href="170-outline.html#outline_5">Influencing the outline structure</a>
+		</li>
+		<li><a href="170-outline.html#outline_6">Styling the outline</a>
+		</li>
+		<li><a href="170-outline.html#outline_7">Filtering actions</a>
+		</li>
+		<li><a href="170-outline.html#outline_8">Sorting actions</a>
+		</li>
+		<li><a href="170-outline.html#quick_outline">Quick Outline</a>
+		</li>
+	</ol></li>
+	<li><a href="180-hyperlinking.html">Hyperlinking</a>
+	<ol>	<li><a href="180-hyperlinking.html#locationProvider">Location Provider</a>
+		</li>
+		<li><a href="180-hyperlinking.html#hyperlinking_3">Customizing Available Hyperlinks</a>
+		</li>
+	</ol></li>
+	<li><a href="195-highlighting.html">Syntax Coloring</a>
+	<ol>	<li><a href="195-highlighting.html#highlighting_6">Lexical Highlighting</a>
+		</li>
+		<li><a href="195-highlighting.html#highlighting_7">Semantic Highlighting</a>
+		</li>
+	</ol></li>
+</ol></li>
+<li><a href="199-xtext-and-java.html">Xtext and Java</a>
+<ol>	<li><a href="199-xtext-and-java.html#Xbase_3">Plug-in Setup</a>
+	</li>
+	<li><a href="199a-jvmtypes.html">Referring to Java Elements using JVM Types</a>
+	<ol>	<li><a href="199a-jvmtypes.html#jvmtypes_10">Customization Points</a>
+		</li>
+	</ol></li>
+	<li><a href="199b-xbase-java-references.html">Referring to Java Types Using Xbase</a>
+	</li>
+	<li><a href="199c-xbase-inferred-type.html">Inferring a JVM Model</a>
+	<ol>	<li><a href="199c-xbase-inferred-type.html#xbaseInferredType_7">Linking and Indexing</a>
+		</li>
+		<li><a href="199c-xbase-inferred-type.html#xbaseInferredType_8">Generation Parameters For Inferred JVM Types</a>
+		</li>
+	</ol></li>
+	<li><a href="199d-xbase-expressions.html">Using Xbase Expressions</a>
+	<ol>	<li><a href="199d-xbase-expressions.html#xbaseExpressions_2">Making Your Grammar Refer To Xbase</a>
+		</li>
+		<li><a href="199d-xbase-expressions.html#xbaseScopeProvider">Populating the Scopes</a>
+		</li>
+		<li><a href="199d-xbase-expressions.html#xbaseExpressions_4">Type Checking at the Boundaries</a>
+		</li>
+		<li><a href="199d-xbase-expressions.html#xbaseExpressions_5">Generating Java Code using the Xbase Compiler</a>
+		</li>
+		<li><a href="199d-xbase-expressions.html#xbaseExpressions_6">Using the Xbase Interpreter</a>
+		</li>
+	</ol></li>
+	<li><a href="199e-xbase-language-reference.html">Xbase Language Reference</a>
+	</li>
+	<li><a href="199f-xbase-language-reference-syntax.html">Lexical Syntax</a>
+	<ol>	<li><a href="199f-xbase-language-reference-syntax.html#Xbase_Syntax_Identifiers">Identifiers</a>
+		</li>
+		<li><a href="199f-xbase-language-reference-syntax.html#Xbase_Syntax_EscapedIdentifiers">Escaped Identifiers</a>
+		<ol>	<li><a href="199f-xbase-language-reference-syntax.html#Xbase_Syntax_EscapedIdentifiers_2">Syntax</a>
+			</li>
+			<li><a href="199f-xbase-language-reference-syntax.html#Xbase_Syntax_EscapedIdentifiers_3">Examples</a>
+			</li>
+		</ol></li>
+		<li><a href="199f-xbase-language-reference-syntax.html#Xbase_Syntax_StringLiteral">String Literals</a>
+		<ol>	<li><a href="199f-xbase-language-reference-syntax.html#Xbase_Syntax_StringLiteral_4">Syntax</a>
+			</li>
+			<li><a href="199f-xbase-language-reference-syntax.html#Xbase_Syntax_StringLiteral_5">Examples</a>
+			</li>
+		</ol></li>
+		<li><a href="199f-xbase-language-reference-syntax.html#Xbase_Syntax_IntegerLiteral">Integer Literals</a>
+		<ol>	<li><a href="199f-xbase-language-reference-syntax.html#Xbase_Syntax_IntegerLiteral_3">Syntax</a>
+			</li>
+			<li><a href="199f-xbase-language-reference-syntax.html#Xbase_Syntax_Comments">Comments</a>
+			</li>
+			<li><a href="199f-xbase-language-reference-syntax.html#Xbase_Syntax_IntegerLiteral_5">Syntax</a>
+			</li>
+		</ol></li>
+		<li><a href="199f-xbase-language-reference-syntax.html#Xbase_Syntax_Whitespace">White Space</a>
+		</li>
+		<li><a href="199f-xbase-language-reference-syntax.html#Xbase_Syntax_Keywords">Reserved Keywords</a>
+		</li>
+	</ol></li>
+	<li><a href="199g-xbase-language-reference-types.html">Types</a>
+	<ol>	<li><a href="199g-xbase-language-reference-types.html#Xbase_Types_Arrays">Arrays</a>
+		</li>
+		<li><a href="199g-xbase-language-reference-types.html#Xbase_Types_TypeReferences">Simple Type References</a>
+		<ol>	<li><a href="199g-xbase-language-reference-types.html#Xbase_Types_TypeReferences_2">Syntax</a>
+			</li>
+			<li><a href="199g-xbase-language-reference-types.html#Xbase_Types_TypeReferences_3">Examples</a>
+			</li>
+		</ol></li>
+		<li><a href="199g-xbase-language-reference-types.html#Xbase_Types_FunctionTypes">Function Types</a>
+		<ol>	<li><a href="199g-xbase-language-reference-types.html#Xbase_Types_FunctionTypes_4">Syntax</a>
+			</li>
+			<li><a href="199g-xbase-language-reference-types.html#Xbase_Types_FunctionTypes_5">Examples</a>
+			</li>
+		</ol></li>
+		<li><a href="199g-xbase-language-reference-types.html#Xbase_Types_ParameterizedTypeReference">Parameterized Type References</a>
+		<ol>	<li><a href="199g-xbase-language-reference-types.html#Xbase_Types_ParameterizedTypeReference_3">Syntax</a>
+			</li>
+			<li><a href="199g-xbase-language-reference-types.html#Xbase_Types_ParameterizedTypeReference_4">Examples</a>
+			</li>
+		</ol></li>
+		<li><a href="199g-xbase-language-reference-types.html#Xbase_Types_Primitives">Primitives</a>
+		</li>
+		<li><a href="199g-xbase-language-reference-types.html#Xbase_Types_ConformanceRules">Conformance and Conversion</a>
+		</li>
+		<li><a href="199g-xbase-language-reference-types.html#Xbase_Types_CommonSuperType">Common Super Type</a>
+		</li>
+	</ol></li>
+	<li><a href="199h-xbase-language-reference-expressions.html">Expressions</a>
+	<ol>	<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_Literals">Literals</a>
+		<ol>	<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_StringLiterals">String Literals</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_IntegerLiterals">Integer Literals</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_BooleanLiteral">Boolean Literals</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_NullLiteral">Null Literal</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_TypeLiteral">Type Literals</a>
+			</li>
+		</ol></li>
+		<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_TypeCasts">Type Casts</a>
+		<ol>	<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_TypeCasts_3">Syntax</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_TypeCasts_4">Examples</a>
+			</li>
+		</ol></li>
+		<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_Operators">Infix Operators / Operator Overloading</a>
+		<ol>	<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_Operators_3">Short-Circuit Boolean Operators</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_Operators_4">Examples</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_PropertyAssignment">Assignments</a>
+			</li>
+		</ol></li>
+		<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_FeatureCalls">Feature Calls</a>
+		<ol>	<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_FeatureCalls_2">Syntax</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_PropertyAccess">Property Access</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_ImplicitThis">Implicit 'this' variable</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_NullSafeFeatureCalls">Null-Safe Feature Call</a>
+			</li>
+		</ol></li>
+		<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_ConstructorCall">Constructor Call</a>
+		<ol>	<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_ConstructorCall_2">Examples</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_ConstructorCall_3">Syntax</a>
+			</li>
+		</ol></li>
+		<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_Closures">Closures</a>
+		<ol>	<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_Closures_2">Syntax</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_ClosuresTypeInference">Typing</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_FunctionMapping">Function Mapping</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_Closures_5">Examples</a>
+			</li>
+		</ol></li>
+		<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_IfExpression">If Expression</a>
+		<ol>	<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_IfExpression_2">Syntax</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_IfTypeInference">Typing</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_IfExpression_4">Examples</a>
+			</li>
+		</ol></li>
+		<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_SwitchExpression">Switch Expression</a>
+		<ol>	<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_SwitchExpression_7">Type guards</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_SwitchExpression_8">Typing</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_SwitchExpression_9">Examples</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_SwitchExpression_10">Syntax</a>
+			</li>
+		</ol></li>
+		<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_VariableDeclaration">Variable Declarations</a>
+		<ol>	<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_VariableDeclaration_5">Syntax</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_VariableDeclaration_6">Typing</a>
+			</li>
+		</ol></li>
+		<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_Blocks">Blocks</a>
+		<ol>	<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_Blocks_3">Examples</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_Blocks_4">Syntax</a>
+			</li>
+		</ol></li>
+		<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_ForLoop">For Loop</a>
+		<ol>	<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_ForLoop_4">Syntax</a>
+			</li>
+		</ol></li>
+		<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_WhileExpression">While Loop</a>
+		<ol>	<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_WhileExpression_2">Syntax</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_WhileExpression_3">Examples</a>
+			</li>
+		</ol></li>
+		<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_DoWhileExpression">Do-While Loop</a>
+		<ol>	<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_DoWhileExpression_2">Syntax</a>
+			</li>
+			<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_DoWhileExpression_3">Examples</a>
+			</li>
+		</ol></li>
+		<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_Return">Return Expression</a>
+		</li>
+		<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_Throw">Throwing Exceptions</a>
+		</li>
+		<li><a href="199h-xbase-language-reference-expressions.html#Xbase_Expressions_TryCatch">Try, Catch, Finally</a>
+		</li>
+	</ol></li>
+	<li><a href="199i-xbase-language-reference-libraries.html">Extension Methods</a>
+	<ol>	<li><a href="199i-xbase-language-reference-libraries.html#xbaseLanguageRef_LibraryExtension_6">Examples</a>
+		</li>
+	</ol></li>
+</ol></li>
+<li><a href="118-mwe-in-depth.html">MWE2</a>
+<ol>	<li><a href="118-mwe-in-depth.html#MWE2Exampe">Examples</a>
+	<ol>	<li><a href="118-mwe-in-depth.html#MWE2HelloWorld">The Simplest Workflow</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#MWE2SimpleTransformation">A Simple Transformation</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#MWE2Stopwatch">A Stop-Watch</a>
+		</li>
+	</ol></li>
+	<li><a href="118-mwe-in-depth.html#MWE2LanguageReference">Language Reference</a>
+	<ol>	<li><a href="118-mwe-in-depth.html#MWE2JavaReferences">Mapping to Java Classes</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#MWE2Module">Module</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#MWE2Properties">Properties</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#MWE2Mandatory">Mandatory Properties</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#MWE2NamedComponents">Named Components</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#MWE2AutoInject">Auto Injection</a>
+		</li>
+	</ol></li>
+	<li><a href="118-mwe-in-depth.html#MWE2SyntaxReference">Syntax Reference</a>
+	<ol>	<li><a href="118-mwe-in-depth.html#MWE2ModuleSyntax">Module</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#MWE2PropertySyntax">Property</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#MWE2ComponentSyntax">Component</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#MWE2StringLiteralsSyntax">String Literals</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#MWE2BooleanLiterals">Boolean Literals</a>
+		</li>
+		<li><a href="118-mwe-in-depth.html#MWE2References">References</a>
+		</li>
+	</ol></li>
+</ol></li>
+<li><a href="01-Xtend_Introduction.html">Xtend</a>
+<ol>	<li><a href="01-Xtend_Introduction.html#Getting_Started">Getting Started</a>
+	</li>
+	<li><a href="02-Xtend_Classes_Functions.html">Classes and Functions</a>
+	<ol>	<li><a href="02-Xtend_Classes_Functions.html#packageDecl">Package Declaration</a>
+		</li>
+		<li><a href="02-Xtend_Classes_Functions.html#imports">Imports</a>
+		</li>
+		<li><a href="02-Xtend_Classes_Functions.html#Xtend_ClassDeclaration">Class Declaration</a>
+		<ol>	<li><a href="02-Xtend_Classes_Functions.html#Xtend_ClassDeclaration_3">Inheritance</a>
+			</li>
+			<li><a href="02-Xtend_Classes_Functions.html#Xtend_ClassDeclaration_4">Generics</a>
+			</li>
+			<li><a href="02-Xtend_Classes_Functions.html#Xtend_ClassDeclaration_5">Examples</a>
+			</li>
+		</ol></li>
+		<li><a href="02-Xtend_Classes_Functions.html#fields">Fields</a>
+		<ol>	<li><a href="02-Xtend_Classes_Functions.html#fields_6">Extension Methods</a>
+			</li>
+		</ol></li>
+		<li><a href="02-Xtend_Classes_Functions.html#Functions">Functions</a>
+		<ol>	<li><a href="02-Xtend_Classes_Functions.html#Functions_4">Visibility</a>
+			</li>
+		</ol></li>
+		<li><a href="02-Xtend_Classes_Functions.html#Xtend_Classes_Functions_8">Overriding Functions</a>
+		<ol>	<li><a href="02-Xtend_Classes_Functions.html#declaredExceptions">Declared Exceptions</a>
+			</li>
+			<li><a href="02-Xtend_Classes_Functions.html#inferredReturnTypes">Inferred Return Types</a>
+			</li>
+			<li><a href="02-Xtend_Classes_Functions.html#Xtend_Classes_Functions_8_5">Generics</a>
+			</li>
+			<li><a href="02-Xtend_Classes_Functions.html#polymorphicDispatch">Dispatch Functions</a>
+			</li>
+			<li><a href="02-Xtend_Classes_Functions.html#Xtend_Classes_Functions_8_7">Overloading Functions from Super Types</a>
+			</li>
+		</ol></li>
+		<li><a href="02-Xtend_Classes_Functions.html#CreateFunctions">Create Functions</a>
+		<ol>	<li><a href="02-Xtend_Classes_Functions.html#CreateFunctions_10">How it works</a>
+			</li>
+		</ol></li>
+		<li><a href="02-Xtend_Classes_Functions.html#Annotations">Annotations</a>
+		</li>
+	</ol></li>
+	<li><a href="03-Xtend_Expressions.html">Expressions</a>
+	<ol>	<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_Literals">Literals</a>
+		<ol>	<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_StringLiterals">String Literals</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_IntegerLiterals">Integer Literals</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_BooleanLiteral">Boolean Literals</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_NullLiteral">Null Literal</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_TypeLiteral">Type Literals</a>
+			</li>
+		</ol></li>
+		<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_TypeCasts">Type Casts</a>
+		<ol>	<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_TypeCasts_3">Syntax</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_TypeCasts_4">Examples</a>
+			</li>
+		</ol></li>
+		<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_Operators">Infix Operators / Operator Overloading</a>
+		<ol>	<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_Operators_3">Short-Circuit Boolean Operators</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_Operators_4">Examples</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_PropertyAssignment">Assignments</a>
+			</li>
+		</ol></li>
+		<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_FeatureCalls">Feature Calls</a>
+		<ol>	<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_FeatureCalls_2">Syntax</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_PropertyAccess">Property Access</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_ImplicitThis">Implicit 'this' variable</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_NullSafeFeatureCalls">Null-Safe Feature Call</a>
+			</li>
+		</ol></li>
+		<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_ConstructorCall">Constructor Call</a>
+		<ol>	<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_ConstructorCall_2">Examples</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_ConstructorCall_3">Syntax</a>
+			</li>
+		</ol></li>
+		<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_Closures">Closures</a>
+		<ol>	<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_Closures_2">Syntax</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_ClosuresTypeInference">Typing</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_FunctionMapping">Function Mapping</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_Closures_5">Examples</a>
+			</li>
+		</ol></li>
+		<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_IfExpression">If Expression</a>
+		<ol>	<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_IfExpression_2">Syntax</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_IfTypeInference">Typing</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_IfExpression_4">Examples</a>
+			</li>
+		</ol></li>
+		<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_SwitchExpression">Switch Expression</a>
+		<ol>	<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_SwitchExpression_7">Type guards</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_SwitchExpression_8">Typing</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_SwitchExpression_9">Examples</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_SwitchExpression_10">Syntax</a>
+			</li>
+		</ol></li>
+		<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_VariableDeclaration">Variable Declarations</a>
+		<ol>	<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_VariableDeclaration_5">Syntax</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_VariableDeclaration_6">Typing</a>
+			</li>
+		</ol></li>
+		<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_Blocks">Blocks</a>
+		<ol>	<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_Blocks_3">Examples</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_Blocks_4">Syntax</a>
+			</li>
+		</ol></li>
+		<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_ForLoop">For Loop</a>
+		<ol>	<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_ForLoop_4">Syntax</a>
+			</li>
+		</ol></li>
+		<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_WhileExpression">While Loop</a>
+		<ol>	<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_WhileExpression_2">Syntax</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_WhileExpression_3">Examples</a>
+			</li>
+		</ol></li>
+		<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_DoWhileExpression">Do-While Loop</a>
+		<ol>	<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_DoWhileExpression_2">Syntax</a>
+			</li>
+			<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_DoWhileExpression_3">Examples</a>
+			</li>
+		</ol></li>
+		<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_Return">Return Expression</a>
+		</li>
+		<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_Throw">Throwing Exceptions</a>
+		</li>
+		<li><a href="03-Xtend_Expressions.html#Xtend_Expressions_TryCatch">Try, Catch, Finally</a>
+		</li>
+		<li><a href="03-Xtend_Expressions.html#Xtend_RichStrings">Rich Strings</a>
+		</li>
+		<li><a href="03-Xtend_Expressions.html#RichStringIF">Conditions in Rich Strings</a>
+		</li>
+		<li><a href="03-Xtend_Expressions.html#RichStringFOREACH">Loops in Rich Strings</a>
+		</li>
+		<li><a href="03-Xtend_Expressions.html#RichStringType">Typing</a>
+		</li>
+		<li><a href="03-Xtend_Expressions.html#WhitespaceHandling">White Space Handling</a>
+		</li>
+	</ol></li>
+</ol></li>
+<li><a href="210-emf-integration.html">Integration with EMF and Other EMF Editors</a>
+<ol>	<li><a href="210-emf-integration.html#model_metamodel">Model, Ecore Model, and Ecore</a>
+	</li>
+	<li><a href="210-emf-integration.html#emf_codegen">EMF Code Generation</a>
+	</li>
+	<li><a href="210-emf-integration.html#xtext_resource">XtextResource Implementation</a>
+	</li>
+	<li><a href="210-emf-integration.html#gmf_integration">Integration with GMF Editors</a>
+	<ol>	<li><a href="210-emf-integration.html#gmf_integration_stage_1">Stage 1: Make GMF Read and Write the Semantic Model As Text</a>
+		<ol>	<li><a href="210-emf-integration.html#gmf_integration_stage_1_9">Stage 2: Calling the Xtext Parser to Parse GMF Labels</a>
+			</li>
+			<li><a href="210-emf-integration.html#gmf_integration_stage_1_10">Stage 3: A Popup Xtext Editor (experimental)</a>
+			</li>
+		</ol></li>
+	</ol></li>
+</ol></li>
+</ol></body>
+</html>

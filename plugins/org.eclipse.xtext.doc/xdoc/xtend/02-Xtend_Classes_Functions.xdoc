@@ -1,0 +1,490 @@
+section:Xtend_Classes_Functions[Classes and Functions]
+
+On a first glance an Xtend file pretty much looks like a Java file. It starts with a package declaration followed by an import section, and after that comes the class definition.
+That class in fact is directly translated to a Java class in the corresponding Java package.
+
+Here is an example:
+code[Xtend][
+package com.acme
+
+import java.util.List
+
+class MyClass {
+	String first(List<String> elements) {
+		return elements.get(0)
+	}
+}
+]
+
+section2:packageDecl[Package Declaration]
+
+Package declarations are like in Java, with the small difference, that an identifier can be escaped with a  e[^] in case it conflicts with a keyword.
+Also you don't terminate a package declaration with a semicolon.
+
+code[Xtend][
+package org.eclipse.xtext
+]
+todo[Would be interesting to document how the following example translates to java] 
+code[Xtend][
+package my.^public.^package
+]
+
+section2:imports[Imports]
+
+The ordinary imports of type names are equivalent to the imports known from Java. 
+Again one can escape any names conflicting with keywords using the e[^]. In constrast to Java, the import statement is never
+terminated with a semicolon. Xtend also features static imports but allows only a wildcard at the end.
+So far you cannot import single members using a static import.
+
+As in Java the package 'java.lang.*' is implicitly imported.
+
+code[Xtend][
+import java.math.BigDecimal
+import java.math.*
+import static java.util.Collections.*
+]
+
+Xtend supports extension methods, which allows to add functions to existing classes without modifying
+them. Static extension functions are just one possibility - simply put the keyword code[Xtend][extension] after
+the code[Xtend][static] keyword and the static functions will be made available as member functions on their first
+parameter's type.
+
+That is the following import declaration 
+
+code[Xtend][
+import static extension java.util.Collections.*
+]
+
+allows to use its methods for example like this :
+
+code[Xtend][
+new Foo().singletonList()
+]
+
+Although this is supported it is generally much nicer to use ref:fields[injected extensions], because
+they don't bind you to the actual implementation.
+
+section2:Xtend_ClassDeclaration[Class Declaration]
+
+The class declaration reuses a lot of Java's syntax but still is a bit different in some aspects.
+Firstly the default visibility of any class is code[Xtend][public]. It is possible to write it explicitly but if not specified it defaults to public.
+You can change the visibility to code[Xtend][private] or code[Xtend][protected]. Java's default "package private" visibility does not exist.
+
+e[To be implemented: ]The code[Xtend][abstract] as well as the code[Xtend][final] modifiers are directly translated to Java and have the exact same meaning.
+
+section3[Inheritance]
+
+Also inheritance is directly reused from Java. Single inheritance of Java classes as well as implementing multiple Java interfaces
+is supported.
+
+section3[Generics]
+
+Full Java Generics with the exact same syntax and semantics are supported. That is you can declare type
+parameters just as in Java and provide type arguments to types you refer to (i.e. extend or implement).
+
+section3[Examples]
+
+The most simple class :
+code[Xtend][
+class MyClass {
+}
+]
+
+A more advanced class declaration in Xtend :
+code[Xtend][
+class ArrayList<E> extends AbstractList<E>
+        implements List<E>, RandomAccess, 
+                   Cloneable, java.io.Serializable {
+  ...
+}
+]
+
+section2:fields[Fields]
+
+Fields in Xtend are always private and are usually used together with an annotation for a dependency
+injection container. Example:
+
+code[Xtend][
+	@Inject MyService myService
+]
+
+This will translate to the following Java field: 
+
+code[Java][
+	@Inject	
+	private MyService myService;
+]
+
+Note that the visibility is always code[Xtend][private], is you want to provide access to an injected object
+you need to write an accessor function. 
+
+section3[Extension Methods]
+
+You can make the instance methods provided by the field available as extension
+methods, by adding the keyword code[Xtend][extension] to the field declaration.
+
+Imagine you want to add a method 'fullName' to a closed type 'Entity'. With extension methods, you could declare the following class
+
+code[Xtend][
+class PersonExtensions {
+   def getFullName(Person p) {
+     p.forename + " " + p.name
+   }
+}
+]
+
+And if you have an instance of this class injected as extension like this:
+
+code[Xtend][
+@Inject extension PersonExtensions personExtensions
+]  
+
+The method is being put on the member scope of Person.
+So you can write the following
+
+code[Xtend][
+myPerson.getFullName()
+]
+
+which is the a shorthand for 
+
+code[Xtend][
+personExtensions.getFullName(myPerson)
+]
+
+Of course the property shorthand is also available
+
+code[Xtend][
+myPerson.fullName
+]
+
+The nice thing with using dependency injection in combination with the extension modifier as opposed to ref:imports[static extensions] is, that in case there is a bug in the extension or it is implemented inefficiently or you 
+just need a different strategy, you can simply exchange the component with another implementation. You do this without modifying the library nor the client code. 
+You'll only have to change the binding in your guice module. Also this gives you a general hook for any AOP-like thing you would want to do, 
+or allows you to write against an SPI, where the concrete implementation can be provided by a third party.
+
+section2:Functions[Functions]
+
+Xtend functions are declared within a class and are translated to a corresponding Java method with the exact same signature. 
+(The only exceptions are dispatch methods, which are explained ref:polymorphicDispatch[here]). 
+
+Let's start with a simple example
+
+code[Xtend][
+def boolean equalsIgnoreCase(String s1, String s2) :
+	s1.toLowerCase() == s2.toLowerCase();
+]
+
+section3[Visibility]
+
+So far the visibility of any function is code[Xtend][public]. 
+It is planned to add support for code[Xtend][protected] and code[Xtend][private].
+
+section2[Overriding Functions]
+
+Functions can override a function/method from the super class or implemented interfaces using the keyword code[Xtend][override].
+If a function is annotated with the keyword code[Xtend][final], it cannot be overridden.
+IF a function overrides a function (or method) from a super type, the code[override] keyword is mandatory and replaces the keyword code[def].
+
+Example:
+code[Xtend][
+override boolean equalsIgnoreCase(String s1,String s2) :
+	s1.toLowerCase() == s2.toLowerCase();
+]
+
+section3:declaredExceptions[Declared Exceptions]
+
+e[To be implemented: ]
+
+Xtend doesn't force you to catch checked exceptions. If a called method throws a checked exception and
+it is not catched or explicitly declared to be rethrown it will be wrapped in a runtime exception and rethrown.
+
+A declared checked exception will not be wrapped automatically.
+
+code[Xtend][
+/*
+ * throws an IOException
+ */
+def void throwIOException() throws IOException {
+   throw new IOException()
+}
+
+/*
+ * throws a WrappedException
+ */
+def void throwWrappedException() {
+   throw new IOException()
+}
+]
+
+section3:inferredReturnTypes[Inferred Return Types]
+
+If the return type of a function can be inferred it does not need to be declared.
+That is the function
+
+code[Xtend][
+def boolean equalsIgnoreCase(String s1,String s2) :
+	s1.toLowerCase() == s2.toLowerCase();
+]
+
+could be declared like this:
+
+code[Xtend][
+def equalsIgnoreCase(String s1,String s2) :
+	s1.toLowerCase() == s2.toLowerCase();
+]
+
+This doesn't work for abstract function declarations as well as if the 
+return type of a function depends on a recursive call of the same function.
+The compiler tells the user when it needs to be specified.
+
+section3[Generics]
+
+Full Java Generics with the exact same syntax and semantics as in Java are supported.
+
+section3:polymorphicDispatch[Dispatch Functions]
+
+Generally function binding works just like method binding in Java. That is function calls are bound based
+on the static types of arguments. Sometimes this is not what you want. Especially in the context of extension
+methods one would like to have polymorphic behavior.
+
+Dispatch functions make a set of overloaded functions polymorphic. That is the runtime types of all given arguments are 
+used to decide which of the overloaded methods is being invoked. This essentially removes the need for the quite invasive visitor pattern.
+
+A dispatch function is marked using the keyword code[Xtend][dispatch].
+
+code[Xtend][
+def dispatch foo(Number x) { "it's a number" }
+def dispatch foo(Integer x) { "it's an int" }
+] 
+
+For a set of visible dispatch functions in the current type hierarchy, the compiler infers a common
+signature using the common super type of all declared arguments and generates a Java method made up of if-else cascades. It dispatches to the 
+different available functions. The actually declared methods are all compiled to a Java method that is
+prefixed with an underscore.
+
+For the two dispatch methods in the example above the following Java code would be generated:
+
+code[Java][
+public String foo(Number x) {
+	if (x instanceof Integer) {
+		return _foo((Integer)x);
+	} else if (x instanceof Number) {
+		return _foo((Number)x);
+	} else {
+		throw new IllegalArgumentException(
+			"Couldn't handle argument x:"+x);
+	}
+} 
+
+protected String _foo(Integer x) {
+	return "It's an int";
+}
+
+protected String _foo(Number x) {
+	return "It's a number";
+}
+]
+
+Note that the instanceof cascade is ordered by how specific a type is. More specific types come first.
+
+In case there is no single most general signature, one is computed and the
+different overloaded methods are matched in the order they are declared within the class file.
+Example:
+
+code[Xtend][
+def dispatch foo(Number x, Integer y) { "it's some number and an int" }
+def dispatch foo(Integer x, Number x) { "it's an int and a number" }
+]
+
+generates the following Java code :
+
+code[Java][
+public String foo(Number x, Number y) {
+	if ((x instanceof Number) 
+		&& (y instanceof Integer)) {
+		return _foo((Number)x,(Integer)y);
+	} else if ((x instanceof Integer) 
+		&& (y instanceof Number)){
+		return _foo((Integer)x,(Number)y);
+	} else {
+		throw new IllegalArgumentException(
+			"Couldn't handle argument x:"+x+", argument y:"+y);
+	}
+} 
+]
+
+As you can see a null reference is never a match. If you want to fetch null you can declare a parameter using the type code[java.lang.Void].
+
+code[Xtend][
+def dispatch foo(Number x) { "it's some number" }
+def dispatch foo(Integer x) { "it's an int" }
+def dispatch foo(Void x) { throw new NullPointerException("x") }
+]
+
+Which compiles to the following Java code:
+
+code[Java][
+public String foo(Number x) {
+	if (x instanceof Integer) {
+		return _foo((Integer)x);
+	} else if (x instanceof Number){
+		return _foo((Number)x);
+	} else if (x == null) {
+	    return _foo((Void)null);
+	} else {
+		throw new IllegalArgumentException(
+			"Couldn't handle argument x:"+x);
+	}
+} 
+]
+
+section3[Overloading Functions from Super Types]
+
+Any visible Java methods from super types conforming to the compiled form of a dispatch method are also included in the
+dispatch. Conforming means they have the right number of arguments and have the same name (starting with an underscore).
+
+For example, consider the following Java class :
+code[Java][
+public abstract class AbstractLabelProvider {
+   protected String _label(Object o) {
+   	 // some generic implementation
+   }
+}
+]
+
+and the following Xtend class which extends the Java class :
+
+code[Xtend][
+class MyLabelProvider extends AbstractLabelProvider {
+   def dispatch label(Entity this)  {
+     name
+   }
+     
+   def dispatch label(Method this) { 
+     name+"("+params.toString(",")+"):"+type
+   }
+   
+   def dispatch label(Field this) { 
+     name+type
+   }
+}
+]
+
+The resulting dispatch method in the generated Java class 'MyLabelProvider' would then look like this:
+
+code[Java][
+public String label(Object o) {
+	if (o instanceof Field) {
+		return _label((Field)o);
+	} else if (o instanceof Method){
+		return _foo((Method)o);
+	} else if (o instanceof Entity){
+		return _foo((Entity)o);
+	} else if (o instanceof Object){
+		return _foo((Object)o);
+	} else {
+		throw new IllegalArgumentException(
+			"Couldn't handle argument o:"+o);
+	}
+}
+]
+
+section2:CreateFunctions[Create Functions]
+
+Create functions in Xtend allow to do graph transformation in one pass where it usually needs two passes.
+That means you don't need to separate a translation from one graph to another in the typical two phases:
+tree construction and interlinking the tree nodes. You basically just need to write the whole transformation using
+create functions and the built-in identity preservation will take care of the rest.
+
+Consider you want to create a copy of the following list of persons into a :
+
+code[
+	Fred Flintstone {
+		marriedTo Willma Flintstone
+		friendWith Barny Rubble
+	}
+	Willma Flintstone {
+		marriedTo Fred Flintstone
+	}
+	Barny Rubble {
+		friendWith Fred Flintstone
+	}
+] 
+
+A function like the following could do the trick :
+
+code[Xtend][
+def List<Person> copyPersons(List<Person> persons) {
+	persons.map( p | p.copy )
+}
+
+def copy(Person p) {
+	val result = new Person()
+	result.name = p.name
+	// The following is wrong and results in a stack overflow
+	result.friendWith = p.friendWith.map( p | p.copy )   
+	result.marriedWith = p.marriedWith.map( p | p.copy ) 
+}
+]
+
+The problem with that code is that we don't track the origins of the created copies. This is the
+main problem with model transformations. The classic solution is to run the copying in two passes.
+First we create all instances and then we establish the links. Although it works it results in cluttered
+and non coherent code. Xtend's create functions handle this problem by introducing identity perservation by
+tracking the origin of each created instance. Therefore, a create function takes two expressions. One to instantiate the actual
+object and a second one to initialize it. 
+
+code[Xtend][
+def create result: new Person() copy(Person p) {
+	result.name = p.name
+	// now it works	
+	result.friendWith = p.friendWith.map( p | p.copy )   
+	result.marriedWith = p.marriedWith.map( p | p.copy ) 
+}	
+]
+
+It is even possible to define the return type of a create function by means of
+
+code[Xtend][
+def Person create r: new PersonImpl() copy(Person p) {
+	r.name = p.name
+	r.friendWith = p.friendWith.map( p | p.copy )   
+	r.marriedWith = p.marriedWith.map( p | p.copy ) 
+}	
+]
+
+section3[How it works]
+
+In addition to the keyword code[Xtend][create] one specifies two expressions.
+The first expression is the factory to create an instance while the second will initialize it further.
+Prior to invoking the factory expression, a cache lookup is performed to find a previously created instance
+for the very same arguments. If there is no such instance, the factory expression is evaluated and the
+result is stored in the cache. Subsequently the main expression (also called the initializer expression) is evaluated.
+This happens only if there was no previously created instance available in the cache. If that expression
+in turn calls the create function transitively using the same set of arguments the previously instantiated and cached object is returned.
+Note that the object is probably currently initialized. That is, its internal state may not yet be available.
+
+The lifecycle of the cache is attached to the instance of the declaring Xtend class. That is you can control
+how long the cache lives by means of Guice.
+
+section2:Annotations[Annotations]
+
+Xtend supports Java annotations. The syntax is exactly like defined in the Java Language Specification.
+Annotations are available on classes, fields, functions and parameters.
+
+Example:
+
+code[Xtend][
+@TypeAnnotation(typeof(String))
+class MyClass {
+  @FieldAnnotation(children = {@MyAnno(true), @MyAnnot(false)}
+  String myField
+  
+  @MethodAnnotation(children = {@MyAnno(true), @MyAnnot}
+  def String myMethod(@ParameterAnnotation String param) {
+  	//...
+  }
+}
+]
+

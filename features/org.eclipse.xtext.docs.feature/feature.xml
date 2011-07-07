@@ -19,7 +19,7 @@ v1.0 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html Description here.
    </copyright>
 
-  <license url="%licenseURL">
+   <license url="%licenseURL">
       %license
    </license>
 
@@ -28,14 +28,5 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          download-size="0"
          install-size="0"
          version="0.0.0"/>
-	<plugin
-         id="org.eclipse.xtext.xbase.doc"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-	<plugin
-         id="org.eclipse.xtext.xtend2.doc"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
+
 </feature>

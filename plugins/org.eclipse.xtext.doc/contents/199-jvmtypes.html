@@ -1,0 +1,144 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Referring to Java Types</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="index.html" title="">
+</head>
+<body>
+<h1>Referring to Java Types</h1>
+<p>
+A common use case when developing languages is the requirement to refer to existing concepts of other 
+languages. Xtext makes this very easy for other self defined DSLs. However, it is often very useful
+to have access to the available types of the Java Virtual Machine. The JVM types Ecore model enables
+clients to do exactly this. It is possible to create cross-references to classes, interfaces, and their 
+fields and methods. Basically every information about the structural concepts of the Java type system
+is available via the JVM types. This includes annotations and their specific values and enumeration 
+literals as well.
+</p>
+<p>
+The implementation will be selected transparently depending on where the client code is 
+executed. If the environment is a plain stand-alone Java or OSGi environment, the <em>java.lang.reflect</em> 
+API will be used to deduce the necessary data. On the contrary, the type-model will be created from the 
+live data of the JDT in an interactive Eclipse environment. All this happens transparently for the clients
+behind the scenes via different
+implementations that are bound to specific interfaces by means of Google Guice. 
+</p>
+<a name="0"></a>
+<h2>How to Use Java Types</h2>
+<p>
+Using the JVM types model is very simple. First of all, the grammar has to import the <em>JavaVMTypes</em> Ecore model. 
+Thanks to content assist this is easy to spot in the list of proposals.  
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">import</span>&nbsp;<span class="string">"http://www.eclipse.org/xtext/common/JavaVMTypes"</span>&nbsp;<span class="keyword">as</span>&nbsp;types</br>
+</p>
+</div>
+</div>
+</p>
+<p>
+The next step is to actually refer to an imported concept. Let&apos;s define a mapping to available
+Java types for the simple data types in the self defined language. By means of cross-references this works
+as one got already used to when dealing with references in Xtext.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+Type:</br>
+&nbsp;&nbsp;<span class="string">&apos;type&apos;</span>&nbsp;name=ID&nbsp;<span class="string">&apos;mapped-to&apos;</span>&nbsp;javaType=[types::JvmType&nbsp;|&nbsp;FQN];</br>
+</p>
+</div>
+</div>
+</p>
+<p>
+Last but not least, the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/generator/types/TypesGeneratorFragment.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.generator.types.TypesGeneratorFragment" >TypesGeneratorFragment</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/types/TypesGeneratorFragment.java" title="View Source Code" >(src)</a> 
+has to be added to the workflow. The safest way is 
+to add it after the actually used scoping fragments as a specialized version of the 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/scoping/IGlobalScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.scoping.IGlobalScopeProvider" >IGlobalScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/scoping/IGlobalScopeProvider.java" title="View Source Code" >(src)</a> will be configured. Don&apos;t forget to refer to 
+the <em>genmodel</em> of the Java VM types. 
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+fragment&nbsp;=&nbsp;ecore.EcoreGeneratorFragment&nbsp;{</br>
+&nbsp;&nbsp;referencedGenModels=<span class="string">"classpath:/model/JavaVMTypes.genmodel"</span></br>
+}</br>
+</br>
+fragment&nbsp;=&nbsp;types.TypesGeneratorFragment&nbsp;{}</br>
+</p>
+</div>
+</div>
+</p>
+<p>
+After regenerating your language, it will be allowed to define a type <span class="inlinecode">Date</span> that maps to the <a class="jdoc" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/Date.html" title="View JavaDoc"><abbr title="java.util.Date" >Date</abbr></a>
+like this:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">type</span>&nbsp;Date&nbsp;<span class="keyword">mapped-to</span>&nbsp;java.util.Date</br>
+</p>
+</div>
+</div>
+</p>
+<p>
+These two steps will provide a nice integration into the Eclipse JDT. There is <em>Find References</em> on Java methods, 
+fields and types that will reveal results in your language files. <em>Go To Declaration</em> works as expected
+and content assist will propose the list of available types. 
+</p>
+<a name="1"></a>
+<h2>Customization Points</h2>
+<p>
+There are several customization hooks in the runtime layer and on the editor side as well:
+</p>
+<p>
+The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/xtext/AbstractTypeScopeProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider" >AbstractTypeScopeProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext/src/org/eclipse/xtext/common/types/xtext/AbstractTypeScopeProvider.java" title="View Source Code" >(src)</a> 
+can be used to create scopes for members with respect to
+the override semantics of the Java language. Of course it is possible to use this implementation to
+create scopes for types as well.
+</p>
+<p>
+As the Java VM types expose a lot of information about visibility, parameter- and return types, generics,
+available annotations or enumeration literals, it is very easy to define constraints for the referred types.
+</p>
+<p>
+The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider" >ITypesProposalProvider</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/ITypesProposalProvider.java" title="View Source Code" >(src)</a> can be
+used to provide optimized proposals based on various filter criteria. 
+The most common selector can be used directly via <span class="inlinecode">createSubTypeProposals(..)</span>. The implementation is optimized
+and uses the JDT Index directly to minimize the effort for object instantiation. The class 
+<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/common/types/xtext/ui/TypeMatchFilters.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters" >TypeMatchFilters</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.common.types.ui/src/org/eclipse/xtext/common/types/xtext/ui/TypeMatchFilters.java" title="View Source Code" >(src)</a>
+provides a comprehensive set of reusable filters that can be easily combined to reduce the list of proposals
+to a smaller number of valid entries.
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">import</span>&nbsp;<span class="keyword">static</span>&nbsp;org.eclipse.xtext.common.types.xtext.ui.TypeMatchFilters;&nbsp;</br>
+</br>
+&nbsp;&nbsp;<span class="comment">//&nbsp;..</br>
+</span>&nbsp;&nbsp;proposalProvider.createSubTypeProposals(</br>
+&nbsp;&nbsp;&nbsp;&nbsp;superType,&nbsp;factory,&nbsp;context,</br>
+&nbsp;&nbsp;&nbsp;&nbsp;MyDslPackage.Literals.TYPE__MAPPED_TO,</br>
+&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.and(</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.not(</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.canInstantiate()</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TypeMatchFilters.isPublic()</br>
+&nbsp;&nbsp;&nbsp;&nbsp;),&nbsp;acceptor);</br>
+&nbsp;</br>
+</p>
+</div>
+</div>
+
+</p>
+</body>
+</html>

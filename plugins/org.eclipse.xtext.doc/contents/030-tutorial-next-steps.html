@@ -469,7 +469,7 @@ write the testcase.
 	<li>
 		
 				The actual test case is pretty straight forward with Xtend. The utility class 
-				<a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.0.0/org/eclipse/xtext/junit4/util/ParseHelper.html" title="View JavaDoc"><abbr title="org.eclipse.xtext.junit4.util.ParseHelper" >ParseHelper</abbr></a> <a class="srcLink" href="https://github.com/svenefftinge/Xtext-2.0-released-source-code/tree/master/plugins/org.eclipse.xtext.junit/src/org/eclipse/xtext/junit4/util/ParseHelper.java" title="View Source Code" >(src)</a> allows to parse an arbitrary string into a
+				<em>org.eclipse.xtext.junit4.util.ParseHelper</em> allows to parse an arbitrary string into a
 				<em>Domainmodel</em>. The model itself can be traversed and checked afterwards. A static import of
 				<abbr title="junit.framework.Assert" >Assert</abbr> leads to concise a readable test cases.
 				
@@ -549,7 +549,7 @@ and look for features with equal names.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span>(Feature&nbsp;other:&nbsp;superEntity.getFeatures())&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(f.getName().equals(other.getName()))&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error(<span class="string">"Feature&nbsp;names&nbsp;have&nbsp;to&nbsp;be&nbsp;unique"</span>,<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyDslPackage.Literals.FEATURE__NAME);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DomainmodelPackage.Literals.FEATURE__NAME);<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>

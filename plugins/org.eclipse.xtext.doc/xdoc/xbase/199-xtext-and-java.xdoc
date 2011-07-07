@@ -1,5 +1,4 @@
-chapter:xtextAndJava[Xtext and Java]
-
+chapter:Xbase[Xtext and Java]
 
 The following chapter demonstrates how to integrate your own DSL with Java. We will do this in four
 stages: First, you will learn how to refer to existing Java elements from within your language. Then
@@ -56,3 +55,14 @@ section-ref[xbaseJavaReferences]
 section-ref[xbaseInferredType]
 
 section-ref[xbaseExpressions]
+
+section-ref[xbaseLanguageRef_Introduction]
+
+section-ref[xbaseLanguageRef_Syntax]
+
+section-ref[xbaseLanguageRef_Types]
+
+section-ref[xbaseLanguageRef_Expressions]
+
+section-ref[xbaseLanguageRef_LibraryExtension]
+

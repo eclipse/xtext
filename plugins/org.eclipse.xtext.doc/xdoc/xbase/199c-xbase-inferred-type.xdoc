@@ -37,7 +37,7 @@ e[Entity] to a codeRef[org.eclipse.xtext.common.types.JvmGenericType] that holds
 codeRef[org.eclipse.xtext.common.types.JvmOperation] for each e[Operation] and a 
 codeRef[org.eclipse.xtext.common.types.JvmField] plus access methods for each e[Property]. Whenever
 we have to copy a subtree, e.g. for setting the supertype of the codeRef[org.eclipse.xtext.common.types.JvmGenericType],
-we use codeRef[org.eclipse.xtext.EcoreUtil2]e[.cloneWithProxies()] to avoid eager resolution of referenced
+we use codeRef[org.eclipse.xtext.EcoreUtil2] e[.cloneWithProxies()] to avoid eager resolution of referenced
 types. The resulting e[DomainmodelJvmModelInferrer] looks like this:
 
 code[Xtend2][
