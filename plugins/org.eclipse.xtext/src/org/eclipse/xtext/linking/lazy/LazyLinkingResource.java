@@ -10,6 +10,7 @@ package org.eclipse.xtext.linking.lazy;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -277,18 +278,17 @@ public class LazyLinkingResource extends XtextResource {
 	}
 
 	protected List<Diagnostic> getDiagnosticList(DiagnosticMessage message) throws AssertionError {
-		List<Diagnostic> list = null;
-		switch (message.getSeverity()) {
-			case ERROR:
-				list = getErrors();
-				break;
-			case WARNING:
-				list = getWarnings();
-				break;
-			default:
-				throw new AssertionError("Unexpected severity: " + message.getSeverity());
+		if(message != null) {
+			switch (message.getSeverity()) {
+				case ERROR:
+					return getErrors();
+				case WARNING:
+					return getWarnings();
+				default:
+					throw new AssertionError("Unexpected severity: " + message.getSeverity());
+			}
 		}
-		return list;
+		return Collections.emptyList();
 	}
 
 	protected DiagnosticMessage createDiagnosticMessage(Triple<EObject, EReference, INode> triple) {
