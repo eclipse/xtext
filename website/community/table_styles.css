@@ -1,5 +1,5 @@
 #novaContent {
-	background: url("backgroundCommunity.jpg") no-repeat white;
+	background: url("backgroundCommunity.jpg") no-repeat !important;
 	padding-top: 170px;
 }
 
@@ -28,7 +28,6 @@ text-align: left;
 vertical-align: top;
 font-weight: normal;
 color: #404040;
-background-color: #fafafa;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 0px;
