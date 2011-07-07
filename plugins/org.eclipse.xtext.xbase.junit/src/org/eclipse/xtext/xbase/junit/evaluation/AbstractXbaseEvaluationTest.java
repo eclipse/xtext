@@ -1400,6 +1400,17 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 				"}");
 	}
 	
+	@Test public void testBug347175() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, "(null as Boolean)?.booleanValue()");
+		assertEvaluatesTo(Byte.valueOf((byte)0), "(null as Byte)?.byteValue()");
+		assertEvaluatesTo(Character.valueOf((char)0), "(null as Character)?.charValue()");
+		assertEvaluatesTo(Short.valueOf((short)0), "(null as Short)?.shortValue()");
+		assertEvaluatesTo(Integer.valueOf(0), "(null as Integer)?.intValue()");
+		assertEvaluatesTo(Long.valueOf(0l), "(null as Long)?.longValue()");
+		assertEvaluatesTo(Float.valueOf(0f), "(null as Float)?.floatValue()");
+		assertEvaluatesTo(Double.valueOf(0.), "(null as Double)?.doubleValue()");
+	}
+	
 	protected void assertEvaluatesTo(Object object, String string) throws Exception {
 		assertEquals(object, invokeXbaseExpression(string));
 	}
