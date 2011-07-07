@@ -275,7 +275,7 @@ public void listVisibleResources(
   for(IContainer visibleContainer: 
   	    manager.getVisibleContainers(descr, index)) { 
     for(IResourceDescription visibleResourceDesc:
-            visibleContainer.getResourceDescription()) { 
+            visibleContainer.getResourceDescriptions()) { 
       System.out.println(visibleResourceDesc.getURI());
     }
   }
