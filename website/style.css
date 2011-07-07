@@ -1,0 +1,67 @@
+#novaContent {
+	padding-top: 210px;
+}
+
+#midcolumn {
+	width: 640px;
+	padding: 0 10px 10px 10px;
+}
+
+#rightcolumn {
+	width: 260px;
+}
+
+
+h3 {
+	clear: both;
+}
+
+h7 {
+	font-weight: bold;
+	padding: 5px;
+}
+
+a strong {
+	text-decoration: underline;
+}
+
+/* indigo */
+body {
+	background: url("images/subpage_header_top.png") top repeat-x;
+}
+
+#header {
+	background-image: none;
+}
+
+#header #menu ul li a {
+	color: white;
+	font-size: 15px;
+}
+
+#header #search {
+	top: 6px;
+}
+
+#novaWrapper #clearFooter {
+	background-color: #00416a;
+}
+
+#novaWrapper #footer {
+	background: none;	
+}
+
+#novaWrapper #footer a {
+	font-weight: normal;
+}
+
+#novaWrapper #copyright {
+	color: white;
+	font-weight: normal;
+}
+
+div, span, p, blockquote, pre, code, em, sub, sup, dl, dt, dd, ol, ul, li, fieldset, form, legend, table, caption, tbody, tfoot, thead, tr, th, td
+{
+    font-size: 14px;
+    line-height: 22px;
+}

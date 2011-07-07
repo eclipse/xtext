@@ -1,0 +1,2 @@
+
+redirect 302 /latest/ http://www.eclipse.org/Xtext/documentation/0_7_0/ 

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="http://www.eclipse.org/projects/project-plan.xsl"?>
+<plan plan-format="1.0" xmlns="http://www.eclipse.org/project/plan" xmlns:html="http://www.w3.org/1999/xhtml" name="Xtext">
+  <release projectid="modeling.tmf.xtext" version="2.0.0"/>
+  <introduction>
+    <html:div>
+      <html:p>
+     This document lays out the feature and API set for the Indigo version of the Xtext (version 2.0.0).  
+      </html:p>
+    </html:div>
+  </introduction>
+  <release_deliverables>
+    <html:div>
+The release deliverables have the same form as is found in most Eclipse projects, namely:
+      <html:p>
+        <html:ul>
+         <html:li>Xtext SDK (includes runtime and tooling components, with sources, examples, and documentation) (downloadable and update site).</html:li>
+		 <html:li>Xtext runtime binary distribution (downloadable and update site).</html:li>
+		 <html:li>Xtext tests (downloadable and update site)</html:li>
+         <html:li>Xbase SDK (includes a reusable expression langauge implemented in Xtext, with sources, examples, and documentation) (downloadable and update site).</html:li>
+		 <html:li>Xbase runtime binary distribution (downloadable and update site).</html:li>
+		 <html:li>Xbase tests (downloadable and update site)</html:li>
+         <html:li>Xtend2 SDK (a domein-specific language for customizing all aspects of Xtext. Built with Xtext and based on Xbase. Includes runtime and tooling components, with sources, examples, and documentation) (downloadable and update site).</html:li>
+		 <html:li>Xtend2 runtime binary distribution (downloadable and update site).</html:li>
+		 <html:li>Xtend2 tests (downloadable and update site)</html:li>
+        </html:ul>
+      </html:p>
+    </html:div>
+  </release_deliverables>
+  <release_milestones>
+    <preamble>
+      <html:div>
+      Release milestone occurring at roughly 6 week intervals and follow the Platform milestone releases by approximately 2 weeks; 
+      that is, until the final 3.7 release of the Platform, upon which Xtext and other projects will release simultaneously. 
+      Xtext delivers milestones synchronized with the Indigo release schedule.
+      </html:div>
+    </preamble>
+      <milestone date="08/17/2010" milestone="M2">
+      	<html:a href="https://bugs.eclipse.org/bugs/buglist.cgi?query_format=advanced&amp;classification=Modeling&amp;product=TMF&amp;component=Xtext&amp;field0-0-0=flagtypes.name&amp;type0-0-0=substring&amp;value0-0-0=indigo&amp;target_milestone=M2">
+      	bugzillas
+      	</html:a>
+      </milestone>
+      <milestone date="09/28/2010" milestone="M3">
+      	<html:a href="https://bugs.eclipse.org/bugs/buglist.cgi?query_format=advanced&amp;classification=Modeling&amp;product=TMF&amp;component=Xtext&amp;field0-0-0=flagtypes.name&amp;type0-0-0=substring&amp;value0-0-0=indigo&amp;target_milestone=M3">
+      	bugzillas
+      	</html:a>
+      </milestone>
+      <milestone date="12/14/2010" milestone="M4">
+      	<html:a href="https://bugs.eclipse.org/bugs/buglist.cgi?query_format=advanced&amp;classification=Modeling&amp;product=TMF&amp;component=Xtext&amp;field0-0-0=flagtypes.name&amp;type0-0-0=substring&amp;value0-0-0=indigo&amp;target_milestone=M4">
+      	bugzillas
+      	</html:a>
+      </milestone>
+      <milestone date="02/08/2011" milestone="M5">
+      	<html:a href="https://bugs.eclipse.org/bugs/buglist.cgi?query_format=advanced&amp;classification=Modeling&amp;product=TMF&amp;component=Xtext&amp;field0-0-0=flagtypes.name&amp;type0-0-0=substring&amp;value0-0-0=indigo&amp;target_milestone=M5">
+      	bugzillas
+      	</html:a>
+      </milestone>
+      <milestone date="03/15/2011" milestone="M6">
+      	<html:p>API freeze</html:p>
+      	<html:a href="https://bugs.eclipse.org/bugs/buglist.cgi?query_format=advanced&amp;classification=Modeling&amp;product=TMF&amp;component=Xtext&amp;field0-0-0=flagtypes.name&amp;type0-0-0=substring&amp;value0-0-0=indigo&amp;target_milestone=M6">
+      	bugzillas
+      	</html:a>
+      </milestone>
+      <milestone date="05/03/2011" milestone="M7">
+      	<html:p>Feature freeze</html:p>
+      	<html:a href="https://bugs.eclipse.org/bugs/buglist.cgi?query_format=advanced&amp;classification=Modeling&amp;product=TMF&amp;component=Xtext&amp;field0-0-0=flagtypes.name&amp;type0-0-0=substring&amp;value0-0-0=indigo&amp;target_milestone=M7">
+      	bugzillas
+      	</html:a>
+      </milestone>
+      <milestone date="05/17/2011" milestone="RC1">
+      	<html:a href="https://bugs.eclipse.org/bugs/buglist.cgi?query_format=advanced&amp;classification=Modeling&amp;product=TMF&amp;component=Xtext&amp;field0-0-0=flagtypes.name&amp;type0-0-0=substring&amp;value0-0-0=indigo&amp;target_milestone=RC1">
+      	bugzillas
+      	</html:a>
+      </milestone>
+      <milestone date="05/24/2011" milestone="RC2">
+      	<html:a href="https://bugs.eclipse.org/bugs/buglist.cgi?query_format=advanced&amp;classification=Modeling&amp;product=TMF&amp;component=Xtext&amp;field0-0-0=flagtypes.name&amp;type0-0-0=substring&amp;value0-0-0=indigo&amp;target_milestone=RC2">
+      	bugzillas
+      	</html:a>
+      </milestone>
+      <milestone date="05/31/2011" milestone="RC3">
+      	<html:a href="https://bugs.eclipse.org/bugs/buglist.cgi?query_format=advanced&amp;classification=Modeling&amp;product=TMF&amp;component=Xtext&amp;field0-0-0=flagtypes.name&amp;type0-0-0=substring&amp;value0-0-0=indigo&amp;target_milestone=RC3">
+      	bugzillas
+      	</html:a>
+      </milestone>
+      <milestone date="06/07/2011" milestone="RC4">
+      	<html:a href="https://bugs.eclipse.org/bugs/buglist.cgi?query_format=advanced&amp;classification=Modeling&amp;product=TMF&amp;component=Xtext&amp;field0-0-0=flagtypes.name&amp;type0-0-0=substring&amp;value0-0-0=indigo&amp;target_milestone=RC4">
+      	bugzillas
+      	</html:a>
+      </milestone>
+      <milestone date="06/22/2010" milestone="2.0.0 Final"></milestone>
+  </release_milestones>
+  <target_environments>
+    <html:div>
+In order to remain current, each Eclipse release targets reasonably current versions of the underlying operating environments.
+The Xtext project depends upon on the 3.5 (Galileo) release of the Eclipse Platform and other projects, and targets to run on 
+version 1.5 of the Java Runtime Environment, Standard Edition. 
+    </html:div>
+  </target_environments>
+  <compatibility_with_previous_releases>
+    <html:div>
+Version 2.0 will not be compatible with the Xtext version 1.0. 
+However there will be a migration guide available by end of June.
+    </html:div>
+  </compatibility_with_previous_releases>
+  <themes_and_priorities>
+    <preamble>
+      <html:div>
+A list of project requirements and agreed upon implementation time frames is 
+found in this document. For the milestones listed in this document, a set of 
+overall themes is used to indicate what major set of functionalities is to be 
+concentrated on for each. These themes are presented below, while the 
+requirements document and associated Bugzilla entries are left to those wanting 
+more detailed information on each.
+      </html:div>
+    </preamble>
+    <theme name="Reusability">
+    <description>
+        <html:div>
+          Xbase is a sophisticated language library, providing the power of full-blown expressions to any
+          Xtext-based langauge targeting the Java platform.
+          Xtext eats its own dog-food and comes with a new compiler language called Xtend2, which is itself implmentd in Xtext
+          and based on Xbase.
+        </html:div>
+    </description>
+    </theme>
+    <theme name="Increase Applicability">
+      <description>
+        <html:div>
+          One of our guiding principles is "make common things easier and rare things possible" suggests that we focus on extensibility as well as
+          on simplicity with regards to all kinds of API. In Helios we want to allow Xtext to be used in more situations by providing an easy to reuse base language. 
+        </html:div>
+      </description>
+    </theme>
+    <theme name="Performance and Scalability">
+    <description>
+        <html:div>
+          Performance and scalability needs to be further enforced.
+        </html:div>
+    </description>
+    </theme>
+    <theme name="Clean Code">
+      <description>
+        <html:div>
+          Keeping the quality of code high is key for long lasting software systems.
+          We want to further keep our code clean, which means doing things like removing dead code, cleaning up / rewriting code we do no longer understand, 
+          avoiding redundancy, etc..
+        </html:div>
+    </description>
+    </theme>
+    <theme name="Eclipse 4.1">
+      <description>
+        <html:div>
+          We do not explicitly test against 4.1.
+        </html:div>
+    </description>
+    </theme>
+  </themes_and_priorities>
+  <appendix name="Legal Notices">
+    <html:div>
+      <html:ul>
+        <html:li>Java is a trademark or a registered trademark of Sun Microsystems, Inc.</html:li>
+        <html:li>All other products or company names are mentioned for identification purposes only, and may be trademarks or service marks of their respective owners.</html:li>
+      </html:ul>
+    </html:div>
+  </appendix>
+</plan>
