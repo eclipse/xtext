@@ -509,9 +509,39 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			XExpression receiver = callToJavaMapping.getActualReceiver(featureCall, featureCall.getFeature(), featureCall.getImplicitReceiver());
 			Object receiverObj = receiver==null?null:internalEvaluate(receiver, context, indicator);
 			if (featureCall.isNullSafe() && receiverObj==null) {
-				return null;
+				return getDefaultObjectValue(typeProvider.getType(featureCall));
 			}
 			return internalFeatureCallDispatch(featureCall, receiverObj, context, indicator);
+		}
+	}
+
+	protected Object getDefaultObjectValue(JvmTypeReference type) {
+		if(!primitives.isPrimitive(type))
+			return null;
+		else {
+			JvmPrimitiveType primitive = (JvmPrimitiveType) type.getType();
+			switch (primitives.primitiveKind(primitive)) {
+				case Byte :
+					return Byte.valueOf((byte)0);
+				case Short :
+					return Short.valueOf((short)0);
+				case Char :
+					return Character.valueOf((char)0);
+				case Int :
+					return Integer.valueOf(0);
+				case Long :
+					return Long.valueOf(0l);
+				case Float :
+					return Float.valueOf(0f);
+				case Double :
+					return Double.valueOf("0.");
+				case Boolean :
+					return Boolean.FALSE;
+				case Void :
+					return null;
+				default :
+					throw new IllegalArgumentException("Not a primitive : "+primitive);
+			}
 		}
 	}
 

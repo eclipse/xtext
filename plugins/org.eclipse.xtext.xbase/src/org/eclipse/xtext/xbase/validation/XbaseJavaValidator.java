@@ -515,6 +515,13 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			error("The spreading operator is not yet supported.", featureCall, Literals.XMEMBER_FEATURE_CALL__SPREADING, "unssupported_spread_operator");
 		}
 	}
+	
+	@Check void checkNullSafeFeatureCallWithPrimitives(XMemberFeatureCall featureCall) {
+		if(featureCall.isNullSafe() && primitives.isPrimitive(typeProvider.getType(featureCall.getMemberCallTarget()))) {
+			error("Cannot use null safe feature call on primitive receiver", featureCall, Literals.XMEMBER_FEATURE_CALL__NULL_SAFE, 
+					NULL_SAFE_FEATURE_CALL_ON_PRIMITIVE);
+		}
+	}
 
 	@Override
 	protected List<EPackage> getEPackages() {
