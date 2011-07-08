@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -47,6 +48,16 @@ public class RailroadSynchronizer implements IPartListener, IXtextModelListener 
 
 	private Font font;
 
+	public void start(IWorkbenchPartSite site) {
+		updateView(site.getPage().getActiveEditor());
+		site.getWorkbenchWindow().getPartService().addPartListener(this);
+	}
+	
+	public void stop(IWorkbenchPartSite site) {
+		site.getWorkbenchWindow().getPartService().removePartListener(this);
+		lastActiveDocument = null;
+	}
+	
 	public void partActivated(IWorkbenchPart part) {
 		updateView(part);
 	}
