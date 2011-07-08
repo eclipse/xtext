@@ -37,7 +37,10 @@
 
 	<div id="overview" class="panel">
 	<h2>Domain-Specific Languages unleashed!</h2>
-	<img style="margin-bottom: 16px; " src="images/screenshot-title2.png"></img>
+		<a class="inversealphahover gallery" rel="prettyPhoto[all]" title="Xtext in less than a minute" href="http://vimeo.com/8260921">
+			<img style="margin-bottom: 16px; " src="images/screenshot-title2.png"></img>
+			<div class="overlay"></div>
+		</a>
 	<p>
 	With Xtext you can easily create your own programming languages and domain-specific languages (DSLs). The framework supports the development of 
 language infrastructures including compilers and interpreters as well as full blown Eclipse-based IDE integration. While Xtext equips you with 
@@ -94,15 +97,52 @@ trainings, consulting or support contracts delivered directly by the committers.
 	</div>
 	
 	<div id="xbase" class="panel">
-		<h2>Embedding Expressions</h2>
+		<h2>Xbase - Expression Language Library</h2>
+		<div class="left3content">
+			<h3>Modern Expressions at your Finger Tips</h3>
+			<p>
+				Software systems are not only made up of structure. At some point you'll have to define behavior and computations.
+				These aspects are implemented using expressions. Defining domain-specific languages with Xtext is very easy and comparable with
+				defining APIs but without any restrictions and much better tooling. However when it comes to defining expressions things used to become
+				more complicated. That's a thing of the past!
+			</p>
+			<p>	
+				Xbase is a predefined set of expressions, which can easily be embedded into any language developed with Xtext. It not only provides you with the 
+				necessary grammar, but also comes with a reusable compiler, an interpreter, and of course the top-notch Eclipse tooling you would expect form any 
+				language developed with Xtext.
+			</p>
+		</div>
+		
+		<div class="mid3content">
+			<h3>Modern expressions ... </h3>
+			<a class="inversealphahover gallery" rel="prettyPhoto[all]" title="Xbase Expression Library" href="http://vimeo.com/26150650"> 
+				<img src="images/feature2_quick_fix.png"/>
+			</a>
+			<p> 
+				Xbase supports everything you'd expect from a modern expression language. Static typing, Type Inference, Closure and Operator Overloading
+				are just the tip of the ice berg. You can of course extend the language and add further expressions. E.g. date or color literals might be a good idea 
+				in your specific case. No Problem!
+			</p>
+			<p>
+				Have a look at the <a href="documentation/2_0_0/199h-xbase-language-reference-expressions.php">language reference</a> to learn what's already there.
+			</p>
+		</div>
+		
+		<div class="right3content">
+			<h3> ... right within your DSL</h3>
+			<a class="inversealphahover gallery" rel="prettyPhoto[all]" title="Xbase embedded in a DSL" href="http://vimeo.com/26150627"> 
+				<img src="images/feature2_quick_fix.png"/>
+			</a>
+			<p> Have a look at how Xbase looks when it is embedded in a DSL. It's seamless!
+			This screencast shows the example domain model language, which is shipped as part of Xtext.
+			You can materialize the respective projects it into your worksapce using the examples-wizard. 
+			In the <a href="documentation/2_0_0/199d-xbase-expressions.php">documentation</a> you can find a detailed description of what needs to be done to emebed Xbase into your DSL.</p>
+		</div>
 	</div>
 
 	<div id="xtend2" class="panel">
 <!-- 		<h2>Writing Code Generators with Pleasure!</h2> -->
-		<div class="left2_3content">
-			<img src="images/Xtend-screenshot.png"></img>			
-		</div>
-		<div class="right1_3content">
+		<div class="left3content">
 			<img width="100%" src="images/Xtend-farbig-800.png"></img>
 			<p>
 				Xtend is a <b>statically-typed template language</b>, which eases the development and maintenance of <b>code generators</b> and
@@ -112,6 +152,28 @@ trainings, consulting or support contracts delivered directly by the committers.
 			<p>
 				Read about it in the <a href="documentation/2_0_0/01-Xtend_Introduction.php">documentation</a>.
 			</p>
+		</div>
+		<div class="mid3content">
+			<h3>Template Expressions</h3>
+			<a class="inversealphahover gallery" rel="prettyPhoto[all]" title="Xtend - Template Expressions" href="http://vimeo.com/26150668"> 
+				<img src="images/xtend-templates.png"/>
+			</a>
+			<p> 
+				Code generators make heavy use of string concatenation. Therefore they are usually implmented using a 
+				template language. So far people tend to reuse a template language used in web development, which lack
+				static typing and easy resue of template snippets. Xtend's template expressions allows you to write
+				readabel and maintainable code generators. Find out more in the <a href="documentation/2_0_0/199d-xbase-expressions.php">documentation</a>.
+			</p>
+		</div>
+		
+		<div class="right3content">
+			<h3>Polymorphic Dispatch</h3>
+			<a class="inversealphahover gallery" rel="prettyPhoto[all]" title="Xtend - Dispatch Methods" href="http://vimeo.com/26150791"> 
+				<img src="images/xtend-dispatch.png"/>
+			</a>
+			<p> When processing an in memory model in order to generate text out of it, you always have to do things based on the current models state or types.
+			Traditionaly people either wrote long instance-of cascades or added a cumbersome and invasive visitor API to their model.
+			Xtend's dispatch methods solve these problems. Find out more in the <a href="documentation/2_0_0/199d-xbase-expressions.php">documentation</a>. 
 		</div>
 		<div class="clear"></div>
 		<div class="style1of4content">
@@ -162,32 +224,41 @@ trainings, consulting or support contracts delivered directly by the committers.
 	<div id="integration" class="panel">
 		<h2>Tight Integration with other Languages and Technologies</h2>
 		<div class="left3content">
-			<h3>Advanced Workbench Integration</h3>
-			<a class="inversealphahover gallery" rel="prettyPhoto[all]" title="Screencast on syntax highlighting" href="http://vimeo.com/12824833">
-				<img src="images/feature_advanced_workbench.png"/>
+			<h3>Integration with Java and JDT</h3>
+			<a class="inversealphahover gallery" rel="prettyPhoto[all]" title="Screencast on Java and JDT integration" href="http://vimeo.com/26150627"> 
+				<img src="images/feature2_quick_fix.png"/>
 			</a>
-			<p> Xtext's advanced Eclipse integration goes far beyond the editor. 
-				You will not feel any difference between your language and Java.</p>
+			<p>
+				DSLs are often used within a regular sofwtare development project. It's a good idea to
+				have your languages integrated with the rest of the software artifacts. With Xtext a tight 
+				interaction between your DSLs and your programming language is possible. Xtext comes with 
+				exceptional support for integrating with the Java Development Tools of Eclipse. 
+			</p>
 		</div>
 		
 		<div class="mid3content">
 			<h3>Integration with EMF</h3>
 			<a class="inversealphahover gallery" rel="prettyPhoto[all]"
 				title="Screencast on EMF integration" href="http://vimeo.com/12824804">
-				<img src="images/feature_emf_integration.png"/>
+				<img src="images/feature2_emf_integration.png"/>
 			</a>
-			<p> Xtext tightly integrates with EMF: You can combine it with every other 
-				EMF-based tool, e.g. for mixed graphical and textual modeling.</p>
+			<p> Xtext implements the Resource API of EMF, which
+				renders your language compatible to any other EMF-based editors out there.
+				You could for instance open all your Xtext files with EMF's structural editor, or
+				diff your files using EMF-Compare if you want to. 
+				Developing different graphical and structural editors in addition to the textual editor 
+				is made comparably easy.
+			</p>
 		</div>
 		
 		<div class="right3content">
-			<h3>Foo!</h3>
-			<a class="inversealphahover gallery" rel="prettyPhoto[all]" title="Screencast on validation and quick fixes" href="http://vimeo.com/12824853"> 
-				<img src="images/feature2_quick_fix.png"/>
+			<h3>Advanced Workbench Integration</h3>
+			<a class="inversealphahover gallery" rel="prettyPhoto[all]"
+					title="Screencast on IDE integration" href="http://vimeo.com/12824746">
+				<img src="images/feature2_advanced_workbench.png"/>
 			</a>
-			<p>
-				Upsy Dupsy Hupsy
-			</p>
+			<p> Xtext's advanced Eclipse integration goes far beyond the editor. 
+				You will not feel any difference between your language and Java.</p>
 		</div>
 	</div>
 

@@ -67,8 +67,16 @@ body {
 	font-weight: normal;
 }
 
+a {
+	color: #00314f;
+}
+
+
 div, span, p, blockquote, pre, code, em, sub, sup, dl, dt, dd, ol, ul, li, fieldset, form, legend, table, caption, tbody, tfoot, thead, tr, th, td
 {
-    font-size: 14px;
+	font-weight: 50;
+    font-size: 16px;
     line-height: 22px;
+    font-family: 'Helvetica Neue', Helvetica, Arial;
+    color: #444444;
 }
