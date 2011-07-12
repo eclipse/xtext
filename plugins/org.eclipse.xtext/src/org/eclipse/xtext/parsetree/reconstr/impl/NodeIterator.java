@@ -7,14 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
@@ -42,16 +40,14 @@ public class NodeIterator implements TreeIterator<INode> {
 		if (parent == null) {
 			return null;
 		}
-		List<INode> siblings = Lists.newArrayList(parent.getChildren());
-		int index = siblings.indexOf(node);
-		if (index > 0) {
-			INode predecessor = siblings.get(index - 1);
+		INode predecessor = node.getPreviousSibling();
+		if (predecessor != null) {
 			while (predecessor instanceof ICompositeNode && !prunedComposites.contains(predecessor)) {
-				List<INode> predecessorChildren = Lists.newArrayList(((ICompositeNode) predecessor).getChildren());
-				if (predecessorChildren.isEmpty()) {
+				INode lastChild = ((ICompositeNode) predecessor).getLastChild();
+				if (lastChild == null) {
 					return predecessor;
 				}
-				predecessor = predecessorChildren.get(predecessorChildren.size() - 1);
+				predecessor = lastChild;
 			}
 			return predecessor;
 		}
@@ -60,9 +56,9 @@ public class NodeIterator implements TreeIterator<INode> {
 
 	private INode findNext(INode node) {
 		if (node instanceof ICompositeNode && ! prunedComposites.contains(node)) {
-			List<INode> children = Lists.newArrayList(((ICompositeNode) node).getChildren());
-			if (!children.isEmpty()) {
-				return children.get(0);
+			INode firstChild = ((ICompositeNode) node).getFirstChild();
+			if (firstChild != null) {
+				return firstChild;
 			}
 		}
 		return findNextSibling(node);
@@ -73,10 +69,9 @@ public class NodeIterator implements TreeIterator<INode> {
 		if (parent == null) {
 			return null;
 		}
-		List<INode> siblings = Lists.newArrayList(parent.getChildren());
-		int index = siblings.indexOf(node);
-		if (index < siblings.size() - 1) {
-			return siblings.get(index + 1);
+		INode successor = node.getNextSibling();
+		if (successor != null) {
+			return successor;
 		}
 		return findNextSibling(parent);
 	}
