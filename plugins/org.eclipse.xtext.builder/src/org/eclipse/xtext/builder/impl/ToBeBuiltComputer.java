@@ -45,6 +45,10 @@ public class ToBeBuiltComputer {
 	private UriValidator uriValidator;
 
 	public ToBeBuilt removeProject(IProject project, IProgressMonitor monitor) {
+		return doRemoveProject(project, monitor);
+	}
+
+	protected ToBeBuilt doRemoveProject(IProject project, IProgressMonitor monitor) {
 		SubMonitor progress = SubMonitor.convert(monitor, Iterables.size(builderState.getAllResourceDescriptions()));
 		ToBeBuilt result = new ToBeBuilt();
 		Iterable<IResourceDescription> allResourceDescriptions = builderState.getAllResourceDescriptions();
@@ -86,12 +90,11 @@ public class ToBeBuiltComputer {
 		final SubMonitor progress = SubMonitor.convert(monitor, Messages.ToBeBuiltComputer_CollectingReosurces, 1);
 		progress.subTask(Messages.ToBeBuiltComputer_CollectingReosurces);
 
-		final ToBeBuilt toBeBuilt = removeProject(project, progress.newChild(1));
+		final ToBeBuilt toBeBuilt = doRemoveProject(project, progress.newChild(1));
 		if (!project.isAccessible())
 			return toBeBuilt;
 		if (progress.isCanceled())
 			throw new OperationCanceledException();
-
 		project.accept(new IResourceVisitor() {
 			public boolean visit(IResource resource) throws CoreException {
 				if (progress.isCanceled())
@@ -136,6 +139,10 @@ public class ToBeBuiltComputer {
 
 	protected boolean isValid(URI uri, IStorage storage) {
 		return uriValidator.isValid(uri, storage);
+	}
+	
+	protected IStorage2UriMapper getMapper() {
+		return mapper;
 	}
 
 }
