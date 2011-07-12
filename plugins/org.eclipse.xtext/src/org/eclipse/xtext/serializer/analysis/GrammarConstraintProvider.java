@@ -336,8 +336,9 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		}
 
 		protected ConstraintElement(EObject context, ConstraintElementType type, AbstractElement element) {
-			this(context, type, element, GrammarUtil.isMultipleCardinality(element), GrammarUtil
-					.isOptionalCardinality(element));
+			this(context, type, element, type != ConstraintElementType.ASSIGNED_ACTION_CALL
+					&& GrammarUtil.isMultipleCardinality(element), type != ConstraintElementType.ASSIGNED_ACTION_CALL
+					&& GrammarUtil.isOptionalCardinality(element));
 		}
 
 		protected ConstraintElement(EObject context, ConstraintElementType type, AbstractElement element, boolean many,
@@ -1045,7 +1046,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		List<ConstraintElement> followers = Lists.newArrayList();
 		boolean allInvalid = true, containsOne = false, typematch = false;
 		for (ActionFilterTransition t : state.getAllOutgoing())
-			if (!t.isRuleCall() && t.getTarget() != state) {
+			if (!t.isRuleCall() /* && t.getTarget() != state */) {
 				containsOne = true;
 				ConstraintElement f = createConstraintElement(context, t.getTarget(), requiredType, true, visited);
 				if (f == TYPEMATCH) {
@@ -1164,11 +1165,11 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		// strategy 2: use the names of all actions
 		List<String> actions = Lists.newArrayList();
 		for (IConstraint c : equalConstraints)
-			actions.add(context2Name.getUniqueActionName((Action) ((ConstraintElement) c.getBody()).getContext()));
+			actions.add(context2Name.getUniqueActionName(((ActionConstraint) c).actionContext));
 		Set<ParserRule> visited = Sets.newHashSet();
 		List<String> rules = Lists.newArrayList();
 		for (IConstraint c : equalConstraints) {
-			ParserRule pr = GrammarUtil.containingParserRule(((ConstraintElement) c.getBody()).getContext());
+			ParserRule pr = GrammarUtil.containingParserRule(((Constraint) c).getMostSpecificContext());
 			if (visited.add(pr))
 				rules.add(pr.getName());
 		}
