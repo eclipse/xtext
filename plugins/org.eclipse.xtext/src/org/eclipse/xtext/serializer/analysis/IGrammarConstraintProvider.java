@@ -242,6 +242,8 @@ public interface IGrammarConstraintProvider {
 
 		IConstraintElement[] getAssignments();
 
+		List<EObject> getCalledContexts();
+
 		IConstraint getContainingConstraint();
 
 		EStructuralFeature getFeature();

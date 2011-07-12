@@ -834,6 +834,15 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			return b.toString();
 		}
 
+		public List<EObject> getCalledContexts() {
+			List<EObject> result = Lists.newArrayList();
+			for (IConstraintElement ass : getAssignments()) {
+				EObject ctx = ass.getCallContext();
+				if (ctx != null)
+					result.add(ctx);
+			}
+			return result;
+		}
 	}
 
 	protected static class ParserRuleConstraintContext extends AbstractConstraintContext {

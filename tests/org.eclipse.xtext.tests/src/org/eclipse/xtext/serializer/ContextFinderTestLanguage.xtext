@@ -1,0 +1,29 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+grammar org.eclipse.xtext.serializer.ContextFinderTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate contextFinderTest "http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage"
+
+Model:
+	("#1" attributeExclusion=(AttributeExclusionTest1|AttributeExclusionTest2)) | 
+	("#2" nestedType=(NestedTypeTest1|NestedTypeTest2)) | 
+	("#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1|NestedTypeRecursiveTest2))
+	;
+	
+AttributeExclusionTest1 returns AttributeExclusionTest: "kw1" attr1=ID;
+AttributeExclusionTest2 returns AttributeExclusionTest: "kw2" attr2=ID;
+
+NestedTypeTest1 returns NestedTypeTest:	nested=NestedTypeChild1;
+NestedTypeTest2 returns NestedTypeTest:	nested=NestedTypeChild2;
+NestedTypeChild: NestedTypeChild1| NestedTypeChild2;
+NestedTypeChild1: "kw1" val=ID;
+NestedTypeChild2: "kw2" val=ID;
+
+NestedTypeRecursiveTest1 returns NestedTypeRecursiveTest: {NestedTypeRecursiveTest1} "kw1" ({NestedTypeRecursiveTest.left=current} ".")+;
+NestedTypeRecursiveTest2 returns NestedTypeRecursiveTest: {NestedTypeRecursiveTest2} "kw2" ({NestedTypeRecursiveTest.left=current} ".")+;
