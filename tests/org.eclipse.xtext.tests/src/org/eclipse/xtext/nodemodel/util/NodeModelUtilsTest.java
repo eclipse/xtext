@@ -179,4 +179,55 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		assertTrue(object instanceof ParserRule);
 	}
 	
+	public void testCompactDump_1() throws Exception {
+		String grammarString = "grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model:name=ID;";
+		Grammar grammar = (Grammar) getModel(grammarString);
+		String actual = NodeModelUtils.compactDump(NodeModelUtils.getNode(grammar.getMetamodelDeclarations().get(0)), true);
+		StringBuilder expected = new StringBuilder();
+		expected.append("GeneratedMetamodel {\n");
+		expected.append("  hidden WS returns EString: => ' '\n");
+		expected.append("  'generate' => 'generate'\n");
+		expected.append("  hidden WS returns EString: => ' '\n");
+		expected.append("  ID => 'foo'\n");
+		expected.append("  hidden WS returns EString: => ' '\n");
+		expected.append("  [EPackage] => ''bar''\n");
+		expected.append("}");
+		assertEquals(expected.toString(), actual);
+	}
+	
+	public void testCompactDump_2() throws Exception {
+		String grammarString = "grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo x 'bar' Model:name=ID;";
+		Grammar grammar = (Grammar) getModelAndExpect(getAsStream(grammarString), 1);
+		String actual = NodeModelUtils.compactDump(NodeModelUtils.getNode(grammar.getMetamodelDeclarations().get(0)), true);
+		StringBuilder expected = new StringBuilder();
+		expected.append("GeneratedMetamodel {\n");
+		expected.append("  hidden WS returns EString: => ' '\n");
+		expected.append("  'generate' => 'generate'\n");
+		expected.append("  hidden WS returns EString: => ' '\n");
+		expected.append("  ID => 'foo'\n");
+		expected.append("  hidden WS returns EString: => ' '\n");
+		expected.append("  ID returns EString: => 'x' SyntaxError: [org.eclipse.xtext.diagnostics.Diagnostic.Syntax] extraneous input 'x' expecting RULE_STRING\n");
+		expected.append("  hidden WS returns EString: => ' '\n");
+		expected.append("  [EPackage] => ''bar''\n");
+		expected.append("}");
+		assertEquals(expected.toString(), actual);
+	}
+	
+	public void testCompactDump_3() throws Exception {
+		String grammarString = "grammar 1 2";
+		Grammar grammar = (Grammar) getModelAndExpect(getAsStream(grammarString), UNKNOWN_EXPECTATION);
+		String actual = NodeModelUtils.compactDump(NodeModelUtils.getNode(grammar), true);
+		StringBuilder expected = new StringBuilder();
+		expected.append("Grammar: {\n");
+		expected.append("  'grammar' => 'grammar'\n");
+		expected.append("  GrammarID {\n");
+		expected.append("    hidden WS returns EString: => ' '\n");
+		expected.append("    INT returns EInt: => '1' SyntaxError: [org.eclipse.xtext.diagnostics.Diagnostic.Syntax] mismatched input '1' expecting RULE_ID\n");
+		expected.append("    hidden WS returns EString: => ' '\n");
+		expected.append("    INT returns EInt: => '2' SyntaxError: [org.eclipse.xtext.diagnostics.Diagnostic.Syntax] required (...)+ loop did not match anything at input '<EOF>'\n");
+		expected.append("  }\n");
+		expected.append("}");
+		assertEquals(expected.toString(), actual);
+	}
+
 }
