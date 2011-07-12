@@ -8,11 +8,14 @@
 package org.eclipse.xtext.builder.impl.javasupport;
 
 import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.resources.IWorkspace.ProjectOrder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
@@ -32,10 +35,15 @@ import org.eclipse.xtext.common.types.ui.notification.TypeResourceDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.JarEntryLocator;
 import org.eclipse.xtext.ui.resource.PackageFragmentRootWalker;
+import org.eclipse.xtext.util.Pair;
 
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 	
@@ -47,8 +55,25 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 	@Inject
 	private QueuedBuildData queuedBuildData;
 	
+	@Inject
+	private ModificationStampCache modificationStampCache;
+	
+	@Singleton
+	public static class ModificationStampCache {
+		protected Map<String, Long> projectToModificationStamp = Maps.newHashMap();
+	}
+	
 	@Override
-	public ToBeBuilt updateProject(IProject project, IProgressMonitor monitor) throws CoreException {
+	public ToBeBuilt removeProject(IProject project, IProgressMonitor monitor) {
+		ToBeBuilt toBeBuilt = super.removeProject(project, monitor);
+		if (toBeBuilt.getToBeDeleted().isEmpty() && toBeBuilt.getToBeUpdated().isEmpty())
+			return toBeBuilt;
+		modificationStampCache.projectToModificationStamp.clear();
+		return toBeBuilt;
+	}
+	
+	@Override
+	public ToBeBuilt updateProject(final IProject project, IProgressMonitor monitor) throws CoreException {
 		SubMonitor progress = SubMonitor.convert(monitor, 2);
 		final ToBeBuilt toBeBuilt = super.updateProject(project, progress.newChild(1));
 		if (!project.isAccessible() || progress.isCanceled())
@@ -57,23 +82,72 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 		if (javaProject.exists()) {
 			IPackageFragmentRoot[] roots = javaProject.getPackageFragmentRoots();
 			progress.setWorkRemaining(roots.length);
+			final Set<String> previouslyBuilt = Sets.newHashSet();
+			final Set<String> subsequentlyBuilt = Sets.newHashSet();
 			final JarEntryLocator locator = new JarEntryLocator();
 			for (final IPackageFragmentRoot root : roots) {
 				if (progress.isCanceled())
 					return toBeBuilt;
 				if (shouldHandle(root)) {
 					try {
-						new PackageFragmentRootWalker<Void>() {
+						final Map<String, Long> updated = Maps.newHashMap();
+						new PackageFragmentRootWalker<Boolean>() {
 							@Override
-							protected Void handle(IJarEntryResource jarEntry, TraversalState state) {
+							protected Boolean handle(IJarEntryResource jarEntry, TraversalState state) {
 								URI uri = locator.getURI(root, jarEntry, state);
 								if (isValid(uri, jarEntry)) {
+									if (wasFragmentRootAlreadyProcessed(uri))
+										return Boolean.TRUE; // abort traversal
+									if (log.isDebugEnabled())
+										log.debug("Scheduling: " + project.getName() + " - " + uri);
 									toBeBuilt.getToBeDeleted().add(uri);
 									toBeBuilt.getToBeUpdated().add(uri);
 								}
 								return null;
 							}
-						}.traverse(root,false);
+							
+							protected boolean wasFragmentRootAlreadyProcessed(URI uri) {
+								Iterable<Pair<IStorage, IProject>> storages = getMapper().getStorages(uri);
+								for(Pair<IStorage, IProject> pair: storages) {
+									IProject otherProject = pair.getSecond();
+									if (!pair.getSecond().equals(project)) {
+										if (previouslyBuilt.contains(otherProject.getName()))
+											return true;
+										if (!subsequentlyBuilt.contains(otherProject.getName())) {
+											boolean process = XtextProjectHelper.hasNature(otherProject);
+											String otherName = otherProject.getName();
+											if (!process) {
+												process = otherProject.isAccessible() && otherProject.isHidden();
+												if (process) {
+													Long previousStamp = modificationStampCache.projectToModificationStamp.get(otherName);
+													if (previousStamp == null || otherProject.getModificationStamp() > previousStamp.longValue()) {
+														process = false;
+														updated.put(otherName, otherProject.getModificationStamp());
+													}
+												}
+											}
+											if (process) {
+												ProjectOrder projectOrder = project.getWorkspace().computeProjectOrder(new IProject[] {project, otherProject});
+												if (!projectOrder.hasCycles) {
+													if (projectOrder.projects[0] == otherProject) {
+														previouslyBuilt.add(otherName);
+														return true; 
+													} else {
+														subsequentlyBuilt.add(otherName);
+													}
+												} else {
+													subsequentlyBuilt.add(otherName);
+												}
+											}
+										}
+									}
+								}
+								return false;
+							}
+						}.traverse(root,true);
+						synchronized (modificationStampCache) {
+							modificationStampCache.projectToModificationStamp.putAll(updated);
+						}
 					} catch (JavaModelException ex) {
 						if (!ex.isDoesNotExist())
 							log.error(ex.getMessage(), ex);
@@ -87,8 +161,9 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 
 	private boolean shouldHandle(IPackageFragmentRoot root) {
 		try {
-			return (!"org.eclipse.jdt.launching.JRE_CONTAINER".equals(root.getRawClasspathEntry().getPath().toString()) && 
+			boolean result = (!"org.eclipse.jdt.launching.JRE_CONTAINER".equals(root.getRawClasspathEntry().getPath().toString()) && 
 					(root.isArchive() || root.isExternal()));
+			return result;
 		} catch (JavaModelException ex) {
 			if (!ex.isDoesNotExist())
 				log.error(ex.getMessage(), ex);
