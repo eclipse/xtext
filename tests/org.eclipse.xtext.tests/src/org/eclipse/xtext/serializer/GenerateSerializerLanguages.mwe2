@@ -44,10 +44,10 @@ Workflow {
 				// generateDebugData = true
 			}
 		}
-//		language = {
-//			uri = "classpath:/org/eclipse/xtext/serializer/SerializerFragmentTestLanguage.xtext"
-//			fragment = @ TestLanguagesFragments auto-inject {}
-//			fragment = serializer.SerializerFragment {}
-//		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/serializer/ContextFinderTestLanguage.xtext"
+			fragment = @ TestLanguagesFragments auto-inject {}
+			fragment = serializer.SerializerFragment {}
+		}
 	}
 }
