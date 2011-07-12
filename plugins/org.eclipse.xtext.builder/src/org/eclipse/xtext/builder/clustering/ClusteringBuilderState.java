@@ -184,11 +184,6 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                     	changedDeltas.add(newDelta);
                     // Make the new resource description known and update the map.
                     newState.register(newDelta);
-                    if (newDelta.getNew() == null) {
-                        newData.removeDescription(changedURI);
-                    } else {
-                    	newData.addDescription(changedURI, newDelta.getNew());
-                    }
                 }
                 subProgress.worked(1);
                 index++;
