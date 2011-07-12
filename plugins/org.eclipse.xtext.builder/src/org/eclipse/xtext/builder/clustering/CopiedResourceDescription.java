@@ -65,14 +65,14 @@ public class CopiedResourceDescription extends AbstractResourceDescription {
 
     public Iterable<QualifiedName> getImportedNames() {
     	// TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=344373
-    	return Collections.emptyList();
-//        throw new UnsupportedOperationException("getImportedNames()");
+//    	return Collections.emptyList();
+        throw new UnsupportedOperationException("getImportedNames()");
     }
 
     public Iterable<IReferenceDescription> getReferenceDescriptions() {
     	// TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=344373
-    	return Collections.emptyList();
-//        throw new UnsupportedOperationException("getReferenceDescriptions()");
+//    	return Collections.emptyList();
+        throw new UnsupportedOperationException("getReferenceDescriptions()");
     }
 
     public URI getURI() {
