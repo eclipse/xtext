@@ -330,6 +330,18 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		assertEquals(expected.toString(), actual);
 	}
 
+	public void testActionSequence4() throws Exception {
+		StringBuilder grammar = new StringBuilder();
+		grammar.append("Rule: {A1} ({A2.left=current})+;\n");
+		String actual = getParserRule(grammar.toString());
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule: Rule_A2;\n");
+		expected.append("  Rule_A2 returns A2: left=Rule_A2_1;\n");
+		expected.append("Rule_A2_1: Rule_A2 | Rule_A2_1_A1;\n");
+		expected.append("  Rule_A2_1_A1 returns A1: {A1};");
+		assertEquals(expected.toString(), actual);
+	}
+
 	public void testActionAlternative1() throws Exception {
 		StringBuilder grammar = new StringBuilder();
 		grammar.append("Rule: root=ID (val1=ID | {A.a1=current} a2=ID | {B.b1=current} b2=ID | {C.c1=current} c2=ID);\n");
