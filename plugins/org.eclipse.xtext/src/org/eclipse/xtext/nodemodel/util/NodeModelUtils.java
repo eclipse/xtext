@@ -26,6 +26,7 @@ import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.nodemodel.impl.AbstractNode;
 
 import com.google.common.collect.Lists;
@@ -264,7 +265,10 @@ public class NodeModelUtils {
 			result.append(prefix);
 		}
 		if (node instanceof ICompositeNode) {
-			result.append(new GrammarElementTitleSwitch().doSwitch(node.getGrammarElement()));
+			if (node.getGrammarElement() != null)
+				result.append(new GrammarElementTitleSwitch().doSwitch(node.getGrammarElement()));
+			else
+				result.append("(unknown)");
 			String newPrefix = prefix + "  ";
 			result.append(" {");
 			BidiIterator<INode> children = ((ICompositeNode) node).getChildren().iterator();
@@ -275,13 +279,22 @@ public class NodeModelUtils {
 			result.append("\n");
 			result.append(prefix);
 			result.append("}");
+			SyntaxErrorMessage error = node.getSyntaxErrorMessage();
+			if (error != null)
+				result.append(" SyntaxError: [" + error.getIssueCode() + "] " + error.getMessage());
 		} else if (node instanceof ILeafNode) {
 			if (((ILeafNode) node).isHidden())
 				result.append("hidden ");
-			result.append(new GrammarElementTitleSwitch().doSwitch(node.getGrammarElement()));
+			if (node.getGrammarElement() != null)
+				result.append(new GrammarElementTitleSwitch().doSwitch(node.getGrammarElement()));
+			else
+				result.append("(unknown)");
 			result.append(" => '");
 			result.append(node.getText());
 			result.append("'");
+			SyntaxErrorMessage error = node.getSyntaxErrorMessage();
+			if (error != null)
+				result.append(" SyntaxError: [" + error.getIssueCode() + "] " + error.getMessage());
 		} else if (node == null) {
 			result.append("(null)");
 		} else {
