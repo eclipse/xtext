@@ -72,6 +72,7 @@ class AnnotationCompiler {
 			a.append(featureCall.declaringType)
 			a.append('.')			
 		}
+		a.append(featureCall.feature.simpleName)
 	}
 	
 	def dispatch void generate(XStringLiteral stringLiteral, IAppendable a) {

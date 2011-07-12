@@ -10,11 +10,14 @@ package org.eclipse.xtext.xtend2.tests.annotations;
 import java.io.StringWriter;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.junit.util.ParseHelper;
 import org.eclipse.xtext.junit.validation.ValidationTestHelper;
+import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -24,6 +27,8 @@ import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.Xtend2Package;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 
+import testdata.Annotation1;
+import testdata.Annotation2;
 import testdata.Properties1;
 
 import com.google.common.base.Function;
@@ -70,7 +75,34 @@ public class AnnotationsCompilerTest extends AbstractXtend2TestCase {
 		Inject inject = getAnnotationOnField(text, Inject.class);
 		assertNotNull(inject);
 	}
+	
+	public void testBug351554_01() throws Exception {
+		final String text = 
+			"class Foo {\n" +
+			"	@org.eclipse.xtext.validation.Check(org::eclipse::xtext::validation::CheckType::NORMAL)\n" +
+			"	def void checkSomething(Object o) {}\n" +
+			"}";
+		Check check = getAnnotationOnMethod(text, Check.class);
+		assertNotNull(check);
+		assertEquals(CheckType.NORMAL, check.value());
+	}
 
+	public void testBug351554_02() throws Exception {
+		final String text = 
+			"@testdata.Annotation1(children = @testdata.Annotation2({'a', 'b'}), value=true)\n" +
+			"class Foo {}";
+		Annotation1 annotation = getAnnotationOnClass(text, Annotation1.class);
+		assertNotNull(annotation);
+		assertNotNull(annotation.children());
+		assertEquals(1, annotation.children().length);
+		Annotation2 nestedAnnotation = annotation.children()[0];
+		assertNotNull(nestedAnnotation);
+		assertNotNull(nestedAnnotation.value());
+		assertEquals(2, nestedAnnotation.value().length);
+		assertEquals("a", nestedAnnotation.value()[0]);
+		assertEquals("b", nestedAnnotation.value()[1]);
+	}
+	
 	protected <T extends Annotation> T getAnnotationOnClass(final String text, Class<T> annotation) throws Exception {
 		Class<?> class1 = compileToClass(text);
 		return class1.getAnnotation(annotation);
@@ -80,6 +112,12 @@ public class AnnotationsCompilerTest extends AbstractXtend2TestCase {
 		Class<?> class1 = compileToClass(text);
 		Field field = class1.getDeclaredFields()[0];
 		return field.getAnnotation(annotation);
+	}
+	
+	protected <T extends Annotation> T getAnnotationOnMethod(final String text, Class<T> annotation) throws Exception {
+		Class<?> class1 = compileToClass(text);
+		Method method = class1.getDeclaredMethods()[0];
+		return method.getAnnotation(annotation);
 	}
 
 	protected Class<?> compileToClass(final String text) throws Exception {
@@ -107,6 +145,7 @@ public class AnnotationsCompilerTest extends AbstractXtend2TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		javaCompiler.addClassPathOfClass(getClass());
+		javaCompiler.addClassPathOfClass(Check.class);
 		javaCompiler.addClassPathOfClass(StringExtensions.class);
 		javaCompiler.addClassPathOfClass(Notifier.class);
 		javaCompiler.addClassPathOfClass(EcorePackage.class);

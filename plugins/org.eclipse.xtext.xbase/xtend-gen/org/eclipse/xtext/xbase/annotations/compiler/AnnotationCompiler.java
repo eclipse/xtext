@@ -5,6 +5,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.util.Strings;
@@ -116,14 +117,19 @@ public class AnnotationCompiler {
   }
   
   protected void _generate(final XFeatureCall featureCall, final IAppendable a) {
-    JvmDeclaredType _declaringType = featureCall.getDeclaringType();
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_declaringType, null);
-    if (_operator_notEquals) {
-      {
-        JvmDeclaredType _declaringType_1 = featureCall.getDeclaringType();
-        a.append(_declaringType_1);
-        a.append(".");
+    {
+      JvmDeclaredType _declaringType = featureCall.getDeclaringType();
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_declaringType, null);
+      if (_operator_notEquals) {
+        {
+          JvmDeclaredType _declaringType_1 = featureCall.getDeclaringType();
+          a.append(_declaringType_1);
+          a.append(".");
+        }
       }
+      JvmIdentifiableElement _feature = featureCall.getFeature();
+      String _simpleName = _feature.getSimpleName();
+      a.append(_simpleName);
     }
   }
   
