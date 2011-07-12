@@ -14,9 +14,13 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.util.Pair;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
@@ -56,23 +60,25 @@ public class QueuedBuildData {
 	}
 	
 	@Inject
-	IStorage2UriMapper mapper;
+	private IStorage2UriMapper mapper;
 	
 	public void queueURI(URI uri) {
-		if (uri.isPlatformResource()) {
-			String projectName = uri.segment(1);
-			// hidden project for linked bundles from host workspace
-			if (".org.eclipse.jdt.core.external.folders".equals(projectName)) {
-				this.uris.add(uri);
-			} else {
+		Iterable<Pair<IStorage, IProject>> iterable = mapper.getStorages(uri);
+		boolean associatedWithProject = false;
+		for(Pair<IStorage, IProject> pair: iterable) {
+			IProject project = pair.getSecond();
+			if (XtextProjectHelper.hasNature(project)) {
+				String projectName = project.getName();
 				LinkedList<URI> list = projectNameToChangedResource.get(projectName);
 				if (list == null) {
 					list = Lists.newLinkedList();
 					projectNameToChangedResource.put(projectName, list);
 				}
 				list.add(uri);
+				associatedWithProject = true;
 			}
-		} else {
+		}
+		if (!associatedWithProject) {
 			this.uris.add(uri);
 		}
 	}
@@ -125,4 +131,19 @@ public class QueuedBuildData {
 		return Iterables.concat(uris, Iterables.concat(projectNameToChangedResource.values()));
 	}
 
+	protected IStorage2UriMapper getMapper() {
+		return mapper;
+	}
+	
+	protected Collection<IResourceDescription.Delta> getDeltas() {
+		return deltas;
+	}
+	
+	protected Map<String, LinkedList<URI>> getProjectNameToChangedResource() {
+		return projectNameToChangedResource;
+	}
+	
+	protected LinkedList<URI> getUris() {
+		return uris;
+	}
 }

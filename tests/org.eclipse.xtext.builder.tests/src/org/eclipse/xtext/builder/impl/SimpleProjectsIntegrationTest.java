@@ -292,6 +292,13 @@ public class SimpleProjectsIntegrationTest extends AbstractBuilderTest {
 		assertNotNull(getEvents().get(1).getDeltas().get(0).getNew());
 	}
 	
+	public void testProjectNameWithSpace() throws Exception {
+		createSimpleProjectWithXtextNature("foo bar");
+		IFile file = createFile("foo bar/foo"+F_EXT, "objekt Foo ");
+		waitForAutoBuild();
+		assertEquals(1, countMarkers(file));
+	}
+	
 //	public void testReexportedSource() throws Exception {
 //		IProject foo = createSimpleProject("foo");
 //		IProject bar = createSimpleProject("bar");
