@@ -306,6 +306,37 @@ h1 {
 	color: white;
 }
 
+#mainvideo img {
+	opacity: 1;
+	filter: alpha(opacity=100);
+ 	-webkit-transition: opacity 0.5s;
+ 	-moz-transition: opacity 0.5;
+}
+
+#mainvideo:hover img {
+	opacity: 0.6;
+	filter: alpha(opacity=60);
+ 	-webkit-transition: opacity 0.2s;
+ 	-moz-transition: opacity 0.2;
+}
+
+#mainvideo .overlay {
+    background: url("images/videoOverlay.png") no-repeat center;
+    position:absolute;
+    width:100%;    
+    opacity: 0.1;
+    filter: alpha(opacity=10);
+    -webkit-transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+}
+
+#mainvideo .overlay:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
+	-webkit-transition: opacity 0.2s;
+	-moz-transition: opacity 0.2s;
+} 
+
 /* section 1 */
 
 
