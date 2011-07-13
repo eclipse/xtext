@@ -40,7 +40,7 @@ public class OperatorMapping {
 	public static final QualifiedName UP_TO = create("..");
 	public static final QualifiedName NOT = create("!");
 	
-	private BiMap<QualifiedName, QualifiedName> map = HashBiMap.create();
+	protected BiMap<QualifiedName, QualifiedName> map = HashBiMap.create();
 	
 	{
 		initializeMapping();
