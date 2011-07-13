@@ -47,6 +47,7 @@ import org.eclipse.xtext.util.formallang.NfaToGrammar;
 import org.eclipse.xtext.util.formallang.NfaUtil;
 import org.eclipse.xtext.util.formallang.PdaUtil;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
@@ -637,16 +638,19 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 		@Override
 		public String toString() {
+			return toString(new GrammarElementTitleSwitch().showAssignments());
+		}
+
+		public String toString(Function<AbstractElement, String> elementFormatter) {
 			if (type == null)
 				return "(type is null)";
-			GrammarElementTitleSwitch titles = new GrammarElementTitleSwitch().showAssignments();
 			switch (type.getSimpleType()) {
 				case ELEMENT:
-					return element == null ? "(null)" : titles.doSwitch(element);
+					return element == null ? "(null)" : elementFormatter.apply(element);
 				case RULECALL_ENTER:
-					return ">>" + (element == null ? "(null)" : titles.doSwitch(element));
+					return ">>" + (element == null ? "(null)" : elementFormatter.apply(element));
 				case RULECALL_EXIT:
-					return "<<" + (element == null ? "(null)" : titles.doSwitch(element));
+					return "<<" + (element == null ? "(null)" : elementFormatter.apply(element));
 				case START:
 					return "start";
 				case STOP:
