@@ -89,6 +89,33 @@ public interface ContextFinderTestFactory extends EFactory
   NestedTypeRecursiveTest createNestedTypeRecursiveTest();
 
   /**
+   * Returns a new object of class '<em>Parent Ref Test1</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Parent Ref Test1</em>'.
+   * @generated
+   */
+  ParentRefTest1 createParentRefTest1();
+
+  /**
+   * Returns a new object of class '<em>Parent Ref Test2</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Parent Ref Test2</em>'.
+   * @generated
+   */
+  ParentRefTest2 createParentRefTest2();
+
+  /**
+   * Returns a new object of class '<em>Parent Ref Test Child</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Parent Ref Test Child</em>'.
+   * @generated
+   */
+  ParentRefTestChild createParentRefTestChild();
+
+  /**
    * Returns a new object of class '<em>Nested Type Recursive Test1</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

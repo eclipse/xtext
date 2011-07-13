@@ -10,9 +10,11 @@
   <genPackages prefix="ContextFinderTest" basePackage="org.eclipse.xtext.serializer"
       disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#/">
     <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//Model/model"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//Model/attributeExclusion"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//Model/nestedType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//Model/nestedTypeRecursiveTest2"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//Model/parentRef"/>
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//AttributeExclusionTest">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//AttributeExclusionTest/attr1"/>
@@ -28,6 +30,15 @@
     <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//NestedTypeChild2"/>
     <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//NestedTypeRecursiveTest">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//NestedTypeRecursiveTest/left"/>
+    </genClasses>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//ParentRefTest1">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//ParentRefTest1/child1"/>
+    </genClasses>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//ParentRefTest2">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//ParentRefTest2/child2"/>
+    </genClasses>
+    <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//ParentRefTestChild">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//ParentRefTestChild/child"/>
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//NestedTypeRecursiveTest1"/>
     <genClasses ecoreClass="platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/ContextFinderTestLanguage.ecore#//NestedTypeRecursiveTest2"/>

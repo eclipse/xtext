@@ -15,9 +15,11 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
+ *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getModel <em>Model</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getAttributeExclusion <em>Attribute Exclusion</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getNestedType <em>Nested Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getNestedTypeRecursiveTest2 <em>Nested Type Recursive Test2</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getParentRef <em>Parent Ref</em>}</li>
  * </ul>
  * </p>
  *
@@ -27,6 +29,32 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Model extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Model</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Model</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Model</em>' containment reference.
+   * @see #setModel(Model)
+   * @see org.eclipse.xtext.serializer.contextFinderTest.ContextFinderTestPackage#getModel_Model()
+   * @model containment="true"
+   * @generated
+   */
+  Model getModel();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getModel <em>Model</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Model</em>' containment reference.
+   * @see #getModel()
+   * @generated
+   */
+  void setModel(Model value);
+
   /**
    * Returns the value of the '<em><b>Attribute Exclusion</b></em>' containment reference.
    * <!-- begin-user-doc -->
@@ -104,5 +132,31 @@ public interface Model extends EObject
    * @generated
    */
   void setNestedTypeRecursiveTest2(NestedTypeRecursiveTest value);
+
+  /**
+   * Returns the value of the '<em><b>Parent Ref</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Parent Ref</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Parent Ref</em>' containment reference.
+   * @see #setParentRef(EObject)
+   * @see org.eclipse.xtext.serializer.contextFinderTest.ContextFinderTestPackage#getModel_ParentRef()
+   * @model containment="true"
+   * @generated
+   */
+  EObject getParentRef();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getParentRef <em>Parent Ref</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Parent Ref</em>' containment reference.
+   * @see #getParentRef()
+   * @generated
+   */
+  void setParentRef(EObject value);
 
 } // Model

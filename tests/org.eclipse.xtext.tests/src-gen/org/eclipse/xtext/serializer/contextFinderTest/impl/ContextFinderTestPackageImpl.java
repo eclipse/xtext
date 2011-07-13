@@ -23,6 +23,9 @@ import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeRecursiveTest;
 import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeRecursiveTest1;
 import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeRecursiveTest2;
 import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeTest;
+import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest1;
+import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest2;
+import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTestChild;
 
 /**
  * <!-- begin-user-doc -->
@@ -80,6 +83,27 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * @generated
    */
   private EClass nestedTypeRecursiveTestEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass parentRefTest1EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass parentRefTest2EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass parentRefTestChildEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -173,7 +197,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_AttributeExclusion()
+  public EReference getModel_Model()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -183,7 +207,7 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_NestedType()
+  public EReference getModel_AttributeExclusion()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
   }
@@ -193,9 +217,29 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_NestedTypeRecursiveTest2()
+  public EReference getModel_NestedType()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_NestedTypeRecursiveTest2()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_ParentRef()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -313,6 +357,66 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getParentRefTest1()
+  {
+    return parentRefTest1EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getParentRefTest1_Child1()
+  {
+    return (EReference)parentRefTest1EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getParentRefTest2()
+  {
+    return parentRefTest2EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getParentRefTest2_Child2()
+  {
+    return (EReference)parentRefTest2EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getParentRefTestChild()
+  {
+    return parentRefTestChildEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getParentRefTestChild_Child()
+  {
+    return (EReference)parentRefTestChildEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getNestedTypeRecursiveTest1()
   {
     return nestedTypeRecursiveTest1EClass;
@@ -359,9 +463,11 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
 
     // Create classes and their features
     modelEClass = createEClass(MODEL);
+    createEReference(modelEClass, MODEL__MODEL);
     createEReference(modelEClass, MODEL__ATTRIBUTE_EXCLUSION);
     createEReference(modelEClass, MODEL__NESTED_TYPE);
     createEReference(modelEClass, MODEL__NESTED_TYPE_RECURSIVE_TEST2);
+    createEReference(modelEClass, MODEL__PARENT_REF);
 
     attributeExclusionTestEClass = createEClass(ATTRIBUTE_EXCLUSION_TEST);
     createEAttribute(attributeExclusionTestEClass, ATTRIBUTE_EXCLUSION_TEST__ATTR1);
@@ -379,6 +485,15 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
 
     nestedTypeRecursiveTestEClass = createEClass(NESTED_TYPE_RECURSIVE_TEST);
     createEReference(nestedTypeRecursiveTestEClass, NESTED_TYPE_RECURSIVE_TEST__LEFT);
+
+    parentRefTest1EClass = createEClass(PARENT_REF_TEST1);
+    createEReference(parentRefTest1EClass, PARENT_REF_TEST1__CHILD1);
+
+    parentRefTest2EClass = createEClass(PARENT_REF_TEST2);
+    createEReference(parentRefTest2EClass, PARENT_REF_TEST2__CHILD2);
+
+    parentRefTestChildEClass = createEClass(PARENT_REF_TEST_CHILD);
+    createEReference(parentRefTestChildEClass, PARENT_REF_TEST_CHILD__CHILD);
 
     nestedTypeRecursiveTest1EClass = createEClass(NESTED_TYPE_RECURSIVE_TEST1);
 
@@ -421,9 +536,11 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getModel_Model(), this.getModel(), null, "model", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_AttributeExclusion(), this.getAttributeExclusionTest(), null, "attributeExclusion", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_NestedType(), this.getNestedTypeTest(), null, "nestedType", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_NestedTypeRecursiveTest2(), this.getNestedTypeRecursiveTest(), null, "nestedTypeRecursiveTest2", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_ParentRef(), ecorePackage.getEObject(), null, "parentRef", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(attributeExclusionTestEClass, AttributeExclusionTest.class, "AttributeExclusionTest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAttributeExclusionTest_Attr1(), ecorePackage.getEString(), "attr1", null, 0, 1, AttributeExclusionTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -441,6 +558,15 @@ public class ContextFinderTestPackageImpl extends EPackageImpl implements Contex
 
     initEClass(nestedTypeRecursiveTestEClass, NestedTypeRecursiveTest.class, "NestedTypeRecursiveTest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getNestedTypeRecursiveTest_Left(), this.getNestedTypeRecursiveTest(), null, "left", null, 0, 1, NestedTypeRecursiveTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(parentRefTest1EClass, ParentRefTest1.class, "ParentRefTest1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getParentRefTest1_Child1(), this.getParentRefTestChild(), null, "child1", null, 0, 1, ParentRefTest1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(parentRefTest2EClass, ParentRefTest2.class, "ParentRefTest2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getParentRefTest2_Child2(), this.getParentRefTestChild(), null, "child2", null, 0, 1, ParentRefTest2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(parentRefTestChildEClass, ParentRefTestChild.class, "ParentRefTestChild", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getParentRefTestChild_Child(), this.getParentRefTestChild(), null, "child", null, 0, 1, ParentRefTestChild.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(nestedTypeRecursiveTest1EClass, NestedTypeRecursiveTest1.class, "NestedTypeRecursiveTest1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -146,6 +146,27 @@ public class ContextFinderTestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case ContextFinderTestPackage.PARENT_REF_TEST1:
+      {
+        ParentRefTest1 parentRefTest1 = (ParentRefTest1)theEObject;
+        T result = caseParentRefTest1(parentRefTest1);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ContextFinderTestPackage.PARENT_REF_TEST2:
+      {
+        ParentRefTest2 parentRefTest2 = (ParentRefTest2)theEObject;
+        T result = caseParentRefTest2(parentRefTest2);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case ContextFinderTestPackage.PARENT_REF_TEST_CHILD:
+      {
+        ParentRefTestChild parentRefTestChild = (ParentRefTestChild)theEObject;
+        T result = caseParentRefTestChild(parentRefTestChild);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case ContextFinderTestPackage.NESTED_TYPE_RECURSIVE_TEST1:
       {
         NestedTypeRecursiveTest1 nestedTypeRecursiveTest1 = (NestedTypeRecursiveTest1)theEObject;
@@ -274,6 +295,54 @@ public class ContextFinderTestSwitch<T>
    * @generated
    */
   public T caseNestedTypeRecursiveTest(NestedTypeRecursiveTest object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Parent Ref Test1</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Parent Ref Test1</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParentRefTest1(ParentRefTest1 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Parent Ref Test2</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Parent Ref Test2</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParentRefTest2(ParentRefTest2 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Parent Ref Test Child</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Parent Ref Test Child</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParentRefTestChild(ParentRefTestChild object)
   {
     return null;
   }
