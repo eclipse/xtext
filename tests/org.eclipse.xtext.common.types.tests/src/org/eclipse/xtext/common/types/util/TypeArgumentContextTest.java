@@ -47,6 +47,7 @@ public class TypeArgumentContextTest extends TestCase {
 
 	private IJvmTypeProvider typeProvider;
 	private JvmTypeReferences typeRefs;
+	
 	@Inject
 	private TypeArgumentContextProvider typeArgCtxProvider;
 	
@@ -125,10 +126,13 @@ public class TypeArgumentContextTest extends TestCase {
 		JvmTypeReference expectation = typeRefs.typeReference("java.lang.Object").create();
 		
 		Map<JvmTypeParameter, JvmTypeReference> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, operation.getReturnType(), expectation, actualArg);
-		assertEquals(1,map.size());
-		// TODO discuss changed behavior due to recent modifications in typeArgumentContextProvider
-//		assertEquals("? extends java.lang.String",map.values().iterator().next().getIdentifier());
-		assertEquals("java.lang.String",map.values().iterator().next().getIdentifier());
+		assertEquals(map.toString(), 3, map.size());
+		for(Map.Entry<JvmTypeParameter, JvmTypeReference> entry: map.entrySet()) {
+			if (entry.getKey().getName().equals("E"))
+				assertEquals("java.lang.Object", entry.getValue().getIdentifier());
+			else
+				assertEquals("java.lang.String", entry.getValue().getIdentifier());
+		}
 	}
 	
 	/**
