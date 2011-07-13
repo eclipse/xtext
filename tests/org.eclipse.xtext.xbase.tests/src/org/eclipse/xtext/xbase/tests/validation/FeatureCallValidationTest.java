@@ -171,4 +171,28 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 		XExpression expression = expression("1?.toString()");
 		helper.assertError(expression, XABSTRACT_FEATURE_CALL, NULL_SAFE_FEATURE_CALL_ON_PRIMITIVE);
 	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=350934
+	 */
+	public void testBug_350934_01() throws Exception {
+		XExpression expression = expression("'3'>3");
+		helper.assertError(expression, XINT_LITERAL, INCOMPATIBLE_TYPES);
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=350934
+	 */
+	public void testBug_350934_02() throws Exception {
+		XExpression expression = expression("'true'<false");
+		helper.assertError(expression, XBOOLEAN_LITERAL, INCOMPATIBLE_TYPES);
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=350934
+	 */
+	public void testBug_350934_03() throws Exception {
+		XExpression expression = expression("true>=0"); 
+		helper.assertError(expression, XINT_LITERAL, INCOMPATIBLE_TYPES);
+	}
 }
