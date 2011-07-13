@@ -139,7 +139,7 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 			Set<Pair<IStorage, IProject>> storages) {
 		if (project.exists()) {
 			try {
-				IPackageFragmentRoot[] fragmentRoots = project.getAllPackageFragmentRoots();
+				IPackageFragmentRoot[] fragmentRoots = project.getPackageFragmentRoots();
 				for (IPackageFragmentRoot fragRoot : fragmentRoots) {
 					if (!"org.eclipse.jdt.launching.JRE_CONTAINER".equals(fragRoot.getRawClasspathEntry().getPath()
 							.toString())) {
