@@ -10,11 +10,17 @@
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value="#0"/>
+          <elements xsi:type="xtext:Assignment" feature="model" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Group">
           <elements xsi:type="xtext:Keyword" value="#1"/>
           <elements xsi:type="xtext:Assignment" feature="attributeExclusion" operator="=">
             <terminal xsi:type="xtext:Alternatives">
-              <elements xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
               <elements xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+              <elements xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
             </terminal>
           </elements>
         </elements>
@@ -22,8 +28,8 @@
           <elements xsi:type="xtext:Keyword" value="#2"/>
           <elements xsi:type="xtext:Assignment" feature="nestedType" operator="=">
             <terminal xsi:type="xtext:Alternatives">
-              <elements xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
               <elements xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
+              <elements xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
             </terminal>
           </elements>
         </elements>
@@ -31,11 +37,33 @@
           <elements xsi:type="xtext:Keyword" value="#3"/>
           <elements xsi:type="xtext:Assignment" feature="nestedTypeRecursiveTest2" operator="=">
             <terminal xsi:type="xtext:Alternatives">
-              <elements xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
               <elements xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
+              <elements xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
             </terminal>
           </elements>
         </elements>
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value="#4"/>
+          <elements xsi:type="xtext:Assignment" feature="parentRef" operator="=">
+            <terminal xsi:type="xtext:Alternatives">
+              <elements xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
+              <elements xsi:type="xtext:RuleCall" rule="/0/@rules.12"/>
+            </terminal>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Model2">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage#//Model"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage#//Model"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="model"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="AttributeExclusionTest1">
@@ -65,7 +93,7 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage#//NestedTypeTest"/>
       </type>
       <alternatives xsi:type="xtext:Assignment" feature="nested" operator="=">
-        <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
+        <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="NestedTypeTest2">
@@ -73,7 +101,7 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage#//NestedTypeTest"/>
       </type>
       <alternatives xsi:type="xtext:Assignment" feature="nested" operator="=">
-        <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
+        <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="NestedTypeChild">
@@ -81,8 +109,8 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage#//NestedTypeChild"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
         <elements xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="NestedTypeChild1">
@@ -146,6 +174,60 @@
             </type>
           </elements>
           <elements xsi:type="xtext:Keyword" value="."/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ParentRefTest1">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage#//ParentRefTest1"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="kw1"/>
+        <elements xsi:type="xtext:Assignment" feature="child1" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ParentRefTest2">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage#//ParentRefTest2"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="kw2"/>
+        <elements xsi:type="xtext:Assignment" feature="child2" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ParentRefTestChild1">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage#//ParentRefTestChild"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage#//ParentRefTestChild"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="foo"/>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="child" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ParentRefTestChild2">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage#//ParentRefTestChild"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage#//ParentRefTestChild"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="foo"/>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="child" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
         </elements>
       </alternatives>
     </rules>

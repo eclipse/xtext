@@ -9,6 +9,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -27,9 +28,11 @@ import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeTest;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getModel <em>Model</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getAttributeExclusion <em>Attribute Exclusion</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getNestedType <em>Nested Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getNestedTypeRecursiveTest2 <em>Nested Type Recursive Test2</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ModelImpl#getParentRef <em>Parent Ref</em>}</li>
  * </ul>
  * </p>
  *
@@ -37,6 +40,16 @@ import org.eclipse.xtext.serializer.contextFinderTest.NestedTypeTest;
  */
 public class ModelImpl extends MinimalEObjectImpl.Container implements Model
 {
+  /**
+   * The cached value of the '{@link #getModel() <em>Model</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getModel()
+   * @generated
+   * @ordered
+   */
+  protected Model model;
+
   /**
    * The cached value of the '{@link #getAttributeExclusion() <em>Attribute Exclusion</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -68,6 +81,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   protected NestedTypeRecursiveTest nestedTypeRecursiveTest2;
 
   /**
+   * The cached value of the '{@link #getParentRef() <em>Parent Ref</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getParentRef()
+   * @generated
+   * @ordered
+   */
+  protected EObject parentRef;
+
+  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -86,6 +109,54 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   protected EClass eStaticClass()
   {
     return ContextFinderTestPackage.Literals.MODEL;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Model getModel()
+  {
+    return model;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetModel(Model newModel, NotificationChain msgs)
+  {
+    Model oldModel = model;
+    model = newModel;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ContextFinderTestPackage.MODEL__MODEL, oldModel, newModel);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setModel(Model newModel)
+  {
+    if (newModel != model)
+    {
+      NotificationChain msgs = null;
+      if (model != null)
+        msgs = ((InternalEObject)model).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ContextFinderTestPackage.MODEL__MODEL, null, msgs);
+      if (newModel != null)
+        msgs = ((InternalEObject)newModel).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ContextFinderTestPackage.MODEL__MODEL, null, msgs);
+      msgs = basicSetModel(newModel, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ContextFinderTestPackage.MODEL__MODEL, newModel, newModel));
   }
 
   /**
@@ -237,17 +308,69 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public EObject getParentRef()
+  {
+    return parentRef;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetParentRef(EObject newParentRef, NotificationChain msgs)
+  {
+    EObject oldParentRef = parentRef;
+    parentRef = newParentRef;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ContextFinderTestPackage.MODEL__PARENT_REF, oldParentRef, newParentRef);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setParentRef(EObject newParentRef)
+  {
+    if (newParentRef != parentRef)
+    {
+      NotificationChain msgs = null;
+      if (parentRef != null)
+        msgs = ((InternalEObject)parentRef).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ContextFinderTestPackage.MODEL__PARENT_REF, null, msgs);
+      if (newParentRef != null)
+        msgs = ((InternalEObject)newParentRef).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ContextFinderTestPackage.MODEL__PARENT_REF, null, msgs);
+      msgs = basicSetParentRef(newParentRef, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, ContextFinderTestPackage.MODEL__PARENT_REF, newParentRef, newParentRef));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
     {
+      case ContextFinderTestPackage.MODEL__MODEL:
+        return basicSetModel(null, msgs);
       case ContextFinderTestPackage.MODEL__ATTRIBUTE_EXCLUSION:
         return basicSetAttributeExclusion(null, msgs);
       case ContextFinderTestPackage.MODEL__NESTED_TYPE:
         return basicSetNestedType(null, msgs);
       case ContextFinderTestPackage.MODEL__NESTED_TYPE_RECURSIVE_TEST2:
         return basicSetNestedTypeRecursiveTest2(null, msgs);
+      case ContextFinderTestPackage.MODEL__PARENT_REF:
+        return basicSetParentRef(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -262,12 +385,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
+      case ContextFinderTestPackage.MODEL__MODEL:
+        return getModel();
       case ContextFinderTestPackage.MODEL__ATTRIBUTE_EXCLUSION:
         return getAttributeExclusion();
       case ContextFinderTestPackage.MODEL__NESTED_TYPE:
         return getNestedType();
       case ContextFinderTestPackage.MODEL__NESTED_TYPE_RECURSIVE_TEST2:
         return getNestedTypeRecursiveTest2();
+      case ContextFinderTestPackage.MODEL__PARENT_REF:
+        return getParentRef();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -282,6 +409,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
+      case ContextFinderTestPackage.MODEL__MODEL:
+        setModel((Model)newValue);
+        return;
       case ContextFinderTestPackage.MODEL__ATTRIBUTE_EXCLUSION:
         setAttributeExclusion((AttributeExclusionTest)newValue);
         return;
@@ -290,6 +420,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return;
       case ContextFinderTestPackage.MODEL__NESTED_TYPE_RECURSIVE_TEST2:
         setNestedTypeRecursiveTest2((NestedTypeRecursiveTest)newValue);
+        return;
+      case ContextFinderTestPackage.MODEL__PARENT_REF:
+        setParentRef((EObject)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -305,6 +438,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
+      case ContextFinderTestPackage.MODEL__MODEL:
+        setModel((Model)null);
+        return;
       case ContextFinderTestPackage.MODEL__ATTRIBUTE_EXCLUSION:
         setAttributeExclusion((AttributeExclusionTest)null);
         return;
@@ -313,6 +449,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return;
       case ContextFinderTestPackage.MODEL__NESTED_TYPE_RECURSIVE_TEST2:
         setNestedTypeRecursiveTest2((NestedTypeRecursiveTest)null);
+        return;
+      case ContextFinderTestPackage.MODEL__PARENT_REF:
+        setParentRef((EObject)null);
         return;
     }
     super.eUnset(featureID);
@@ -328,12 +467,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
+      case ContextFinderTestPackage.MODEL__MODEL:
+        return model != null;
       case ContextFinderTestPackage.MODEL__ATTRIBUTE_EXCLUSION:
         return attributeExclusion != null;
       case ContextFinderTestPackage.MODEL__NESTED_TYPE:
         return nestedType != null;
       case ContextFinderTestPackage.MODEL__NESTED_TYPE_RECURSIVE_TEST2:
         return nestedTypeRecursiveTest2 != null;
+      case ContextFinderTestPackage.MODEL__PARENT_REF:
+        return parentRef != null;
     }
     return super.eIsSet(featureID);
   }

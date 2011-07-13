@@ -70,13 +70,22 @@ public interface ContextFinderTestPackage extends EPackage
   int MODEL = 0;
 
   /**
+   * The feature id for the '<em><b>Model</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__MODEL = 0;
+
+  /**
    * The feature id for the '<em><b>Attribute Exclusion</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL__ATTRIBUTE_EXCLUSION = 0;
+  int MODEL__ATTRIBUTE_EXCLUSION = 1;
 
   /**
    * The feature id for the '<em><b>Nested Type</b></em>' containment reference.
@@ -85,7 +94,7 @@ public interface ContextFinderTestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL__NESTED_TYPE = 1;
+  int MODEL__NESTED_TYPE = 2;
 
   /**
    * The feature id for the '<em><b>Nested Type Recursive Test2</b></em>' containment reference.
@@ -94,7 +103,16 @@ public interface ContextFinderTestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL__NESTED_TYPE_RECURSIVE_TEST2 = 2;
+  int MODEL__NESTED_TYPE_RECURSIVE_TEST2 = 3;
+
+  /**
+   * The feature id for the '<em><b>Parent Ref</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__PARENT_REF = 4;
 
   /**
    * The number of structural features of the '<em>Model</em>' class.
@@ -103,7 +121,7 @@ public interface ContextFinderTestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 3;
+  int MODEL_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.AttributeExclusionTestImpl <em>Attribute Exclusion Test</em>}' class.
@@ -283,6 +301,90 @@ public interface ContextFinderTestPackage extends EPackage
   int NESTED_TYPE_RECURSIVE_TEST_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ParentRefTest1Impl <em>Parent Ref Test1</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ParentRefTest1Impl
+   * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getParentRefTest1()
+   * @generated
+   */
+  int PARENT_REF_TEST1 = 7;
+
+  /**
+   * The feature id for the '<em><b>Child1</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARENT_REF_TEST1__CHILD1 = 0;
+
+  /**
+   * The number of structural features of the '<em>Parent Ref Test1</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARENT_REF_TEST1_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ParentRefTest2Impl <em>Parent Ref Test2</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ParentRefTest2Impl
+   * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getParentRefTest2()
+   * @generated
+   */
+  int PARENT_REF_TEST2 = 8;
+
+  /**
+   * The feature id for the '<em><b>Child2</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARENT_REF_TEST2__CHILD2 = 0;
+
+  /**
+   * The number of structural features of the '<em>Parent Ref Test2</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARENT_REF_TEST2_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ParentRefTestChildImpl <em>Parent Ref Test Child</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ParentRefTestChildImpl
+   * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getParentRefTestChild()
+   * @generated
+   */
+  int PARENT_REF_TEST_CHILD = 9;
+
+  /**
+   * The feature id for the '<em><b>Child</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARENT_REF_TEST_CHILD__CHILD = 0;
+
+  /**
+   * The number of structural features of the '<em>Parent Ref Test Child</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARENT_REF_TEST_CHILD_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.NestedTypeRecursiveTest1Impl <em>Nested Type Recursive Test1</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -290,7 +392,7 @@ public interface ContextFinderTestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getNestedTypeRecursiveTest1()
    * @generated
    */
-  int NESTED_TYPE_RECURSIVE_TEST1 = 7;
+  int NESTED_TYPE_RECURSIVE_TEST1 = 10;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -318,7 +420,7 @@ public interface ContextFinderTestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getNestedTypeRecursiveTest2()
    * @generated
    */
-  int NESTED_TYPE_RECURSIVE_TEST2 = 8;
+  int NESTED_TYPE_RECURSIVE_TEST2 = 11;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -348,6 +450,17 @@ public interface ContextFinderTestPackage extends EPackage
    * @generated
    */
   EClass getModel();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getModel <em>Model</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Model</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.Model#getModel()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_Model();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getAttributeExclusion <em>Attribute Exclusion</em>}'.
@@ -381,6 +494,17 @@ public interface ContextFinderTestPackage extends EPackage
    * @generated
    */
   EReference getModel_NestedTypeRecursiveTest2();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.contextFinderTest.Model#getParentRef <em>Parent Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Parent Ref</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.Model#getParentRef()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_ParentRef();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.contextFinderTest.AttributeExclusionTest <em>Attribute Exclusion Test</em>}'.
@@ -498,6 +622,69 @@ public interface ContextFinderTestPackage extends EPackage
   EReference getNestedTypeRecursiveTest_Left();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest1 <em>Parent Ref Test1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Parent Ref Test1</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest1
+   * @generated
+   */
+  EClass getParentRefTest1();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest1#getChild1 <em>Child1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Child1</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest1#getChild1()
+   * @see #getParentRefTest1()
+   * @generated
+   */
+  EReference getParentRefTest1_Child1();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest2 <em>Parent Ref Test2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Parent Ref Test2</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest2
+   * @generated
+   */
+  EClass getParentRefTest2();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest2#getChild2 <em>Child2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Child2</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest2#getChild2()
+   * @see #getParentRefTest2()
+   * @generated
+   */
+  EReference getParentRefTest2_Child2();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.contextFinderTest.ParentRefTestChild <em>Parent Ref Test Child</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Parent Ref Test Child</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.ParentRefTestChild
+   * @generated
+   */
+  EClass getParentRefTestChild();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.contextFinderTest.ParentRefTestChild#getChild <em>Child</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Child</em>'.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.ParentRefTestChild#getChild()
+   * @see #getParentRefTestChild()
+   * @generated
+   */
+  EReference getParentRefTestChild_Child();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.contextFinderTest.NestedTypeRecursiveTest1 <em>Nested Type Recursive Test1</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -551,6 +738,14 @@ public interface ContextFinderTestPackage extends EPackage
     EClass MODEL = eINSTANCE.getModel();
 
     /**
+     * The meta object literal for the '<em><b>Model</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__MODEL = eINSTANCE.getModel_Model();
+
+    /**
      * The meta object literal for the '<em><b>Attribute Exclusion</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -573,6 +768,14 @@ public interface ContextFinderTestPackage extends EPackage
      * @generated
      */
     EReference MODEL__NESTED_TYPE_RECURSIVE_TEST2 = eINSTANCE.getModel_NestedTypeRecursiveTest2();
+
+    /**
+     * The meta object literal for the '<em><b>Parent Ref</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__PARENT_REF = eINSTANCE.getModel_ParentRef();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.AttributeExclusionTestImpl <em>Attribute Exclusion Test</em>}' class.
@@ -673,6 +876,60 @@ public interface ContextFinderTestPackage extends EPackage
      * @generated
      */
     EReference NESTED_TYPE_RECURSIVE_TEST__LEFT = eINSTANCE.getNestedTypeRecursiveTest_Left();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ParentRefTest1Impl <em>Parent Ref Test1</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ParentRefTest1Impl
+     * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getParentRefTest1()
+     * @generated
+     */
+    EClass PARENT_REF_TEST1 = eINSTANCE.getParentRefTest1();
+
+    /**
+     * The meta object literal for the '<em><b>Child1</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PARENT_REF_TEST1__CHILD1 = eINSTANCE.getParentRefTest1_Child1();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ParentRefTest2Impl <em>Parent Ref Test2</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ParentRefTest2Impl
+     * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getParentRefTest2()
+     * @generated
+     */
+    EClass PARENT_REF_TEST2 = eINSTANCE.getParentRefTest2();
+
+    /**
+     * The meta object literal for the '<em><b>Child2</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PARENT_REF_TEST2__CHILD2 = eINSTANCE.getParentRefTest2_Child2();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.ParentRefTestChildImpl <em>Parent Ref Test Child</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ParentRefTestChildImpl
+     * @see org.eclipse.xtext.serializer.contextFinderTest.impl.ContextFinderTestPackageImpl#getParentRefTestChild()
+     * @generated
+     */
+    EClass PARENT_REF_TEST_CHILD = eINSTANCE.getParentRefTestChild();
+
+    /**
+     * The meta object literal for the '<em><b>Child</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PARENT_REF_TEST_CHILD__CHILD = eINSTANCE.getParentRefTestChild_Child();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.contextFinderTest.impl.NestedTypeRecursiveTest1Impl <em>Nested Type Recursive Test1</em>}' class.

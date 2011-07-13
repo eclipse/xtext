@@ -74,6 +74,9 @@ public class ContextFinderTestFactoryImpl extends EFactoryImpl implements Contex
       case ContextFinderTestPackage.NESTED_TYPE_CHILD1: return createNestedTypeChild1();
       case ContextFinderTestPackage.NESTED_TYPE_CHILD2: return createNestedTypeChild2();
       case ContextFinderTestPackage.NESTED_TYPE_RECURSIVE_TEST: return createNestedTypeRecursiveTest();
+      case ContextFinderTestPackage.PARENT_REF_TEST1: return createParentRefTest1();
+      case ContextFinderTestPackage.PARENT_REF_TEST2: return createParentRefTest2();
+      case ContextFinderTestPackage.PARENT_REF_TEST_CHILD: return createParentRefTestChild();
       case ContextFinderTestPackage.NESTED_TYPE_RECURSIVE_TEST1: return createNestedTypeRecursiveTest1();
       case ContextFinderTestPackage.NESTED_TYPE_RECURSIVE_TEST2: return createNestedTypeRecursiveTest2();
       default:
@@ -156,6 +159,39 @@ public class ContextFinderTestFactoryImpl extends EFactoryImpl implements Contex
   {
     NestedTypeRecursiveTestImpl nestedTypeRecursiveTest = new NestedTypeRecursiveTestImpl();
     return nestedTypeRecursiveTest;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ParentRefTest1 createParentRefTest1()
+  {
+    ParentRefTest1Impl parentRefTest1 = new ParentRefTest1Impl();
+    return parentRefTest1;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ParentRefTest2 createParentRefTest2()
+  {
+    ParentRefTest2Impl parentRefTest2 = new ParentRefTest2Impl();
+    return parentRefTest2;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ParentRefTestChild createParentRefTestChild()
+  {
+    ParentRefTestChildImpl parentRefTestChild = new ParentRefTestChildImpl();
+    return parentRefTestChild;
   }
 
   /**

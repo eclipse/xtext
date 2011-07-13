@@ -77,39 +77,62 @@ ruleModel returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-((	otherlv_0='#1' 
+((	otherlv_0='#0' 
     {
-    	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getNumberSignDigitOneKeyword_0_0());
+    	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getNumberSignDigitZeroKeyword_0_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getModelModel2ParserRuleCall_0_1_0()); 
+	    }
+		lv_model_1_0=ruleModel2		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"model",
+        		lv_model_1_0, 
+        		"Model2");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+    |(	otherlv_2='#1' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getNumberSignDigitOneKeyword_1_0());
     }
 (
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getModelAccess().getAttributeExclusionAttributeExclusionTest1ParserRuleCall_0_1_0_0()); 
+	        newCompositeNode(grammarAccess.getModelAccess().getAttributeExclusionAttributeExclusionTest1ParserRuleCall_1_1_0_0()); 
 	    }
-		lv_attributeExclusion_1_1=ruleAttributeExclusionTest1		{
+		lv_attributeExclusion_3_1=ruleAttributeExclusionTest1		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
        		set(
        			$current, 
        			"attributeExclusion",
-        		lv_attributeExclusion_1_1, 
+        		lv_attributeExclusion_3_1, 
         		"AttributeExclusionTest1");
 	        afterParserOrEnumRuleCall();
 	    }
 
     |		{ 
-	        newCompositeNode(grammarAccess.getModelAccess().getAttributeExclusionAttributeExclusionTest2ParserRuleCall_0_1_0_1()); 
+	        newCompositeNode(grammarAccess.getModelAccess().getAttributeExclusionAttributeExclusionTest2ParserRuleCall_1_1_0_1()); 
 	    }
-		lv_attributeExclusion_1_2=ruleAttributeExclusionTest2		{
+		lv_attributeExclusion_3_2=ruleAttributeExclusionTest2		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
        		set(
        			$current, 
        			"attributeExclusion",
-        		lv_attributeExclusion_1_2, 
+        		lv_attributeExclusion_3_2, 
         		"AttributeExclusionTest2");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -118,39 +141,39 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	otherlv_2='#2' 
+    |(	otherlv_4='#2' 
     {
-    	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getNumberSignDigitTwoKeyword_1_0());
+    	newLeafNode(otherlv_4, grammarAccess.getModelAccess().getNumberSignDigitTwoKeyword_2_0());
     }
 (
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getModelAccess().getNestedTypeNestedTypeTest1ParserRuleCall_1_1_0_0()); 
+	        newCompositeNode(grammarAccess.getModelAccess().getNestedTypeNestedTypeTest1ParserRuleCall_2_1_0_0()); 
 	    }
-		lv_nestedType_3_1=ruleNestedTypeTest1		{
+		lv_nestedType_5_1=ruleNestedTypeTest1		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
        		set(
        			$current, 
        			"nestedType",
-        		lv_nestedType_3_1, 
+        		lv_nestedType_5_1, 
         		"NestedTypeTest1");
 	        afterParserOrEnumRuleCall();
 	    }
 
     |		{ 
-	        newCompositeNode(grammarAccess.getModelAccess().getNestedTypeNestedTypeTest2ParserRuleCall_1_1_0_1()); 
+	        newCompositeNode(grammarAccess.getModelAccess().getNestedTypeNestedTypeTest2ParserRuleCall_2_1_0_1()); 
 	    }
-		lv_nestedType_3_2=ruleNestedTypeTest2		{
+		lv_nestedType_5_2=ruleNestedTypeTest2		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
        		set(
        			$current, 
        			"nestedType",
-        		lv_nestedType_3_2, 
+        		lv_nestedType_5_2, 
         		"NestedTypeTest2");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -159,39 +182,39 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	otherlv_4='#3' 
+    |(	otherlv_6='#3' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getModelAccess().getNumberSignDigitThreeKeyword_2_0());
+    	newLeafNode(otherlv_6, grammarAccess.getModelAccess().getNumberSignDigitThreeKeyword_3_0());
     }
 (
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getModelAccess().getNestedTypeRecursiveTest2NestedTypeRecursiveTest1ParserRuleCall_2_1_0_0()); 
+	        newCompositeNode(grammarAccess.getModelAccess().getNestedTypeRecursiveTest2NestedTypeRecursiveTest1ParserRuleCall_3_1_0_0()); 
 	    }
-		lv_nestedTypeRecursiveTest2_5_1=ruleNestedTypeRecursiveTest1		{
+		lv_nestedTypeRecursiveTest2_7_1=ruleNestedTypeRecursiveTest1		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
        		set(
        			$current, 
        			"nestedTypeRecursiveTest2",
-        		lv_nestedTypeRecursiveTest2_5_1, 
+        		lv_nestedTypeRecursiveTest2_7_1, 
         		"NestedTypeRecursiveTest1");
 	        afterParserOrEnumRuleCall();
 	    }
 
     |		{ 
-	        newCompositeNode(grammarAccess.getModelAccess().getNestedTypeRecursiveTest2NestedTypeRecursiveTest2ParserRuleCall_2_1_0_1()); 
+	        newCompositeNode(grammarAccess.getModelAccess().getNestedTypeRecursiveTest2NestedTypeRecursiveTest2ParserRuleCall_3_1_0_1()); 
 	    }
-		lv_nestedTypeRecursiveTest2_5_2=ruleNestedTypeRecursiveTest2		{
+		lv_nestedTypeRecursiveTest2_7_2=ruleNestedTypeRecursiveTest2		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
        		set(
        			$current, 
        			"nestedTypeRecursiveTest2",
-        		lv_nestedTypeRecursiveTest2_5_2, 
+        		lv_nestedTypeRecursiveTest2_7_2, 
         		"NestedTypeRecursiveTest2");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -199,7 +222,79 @@ ruleModel returns [EObject current=null]
 )
 
 )
+))
+    |(	otherlv_8='#4' 
+    {
+    	newLeafNode(otherlv_8, grammarAccess.getModelAccess().getNumberSignDigitFourKeyword_4_0());
+    }
+(
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getParentRefParentRefTest1ParserRuleCall_4_1_0_0()); 
+	    }
+		lv_parentRef_9_1=ruleParentRefTest1		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"parentRef",
+        		lv_parentRef_9_1, 
+        		"ParentRefTest1");
+	        afterParserOrEnumRuleCall();
+	    }
+
+    |		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getParentRefParentRefTest2ParserRuleCall_4_1_0_1()); 
+	    }
+		lv_parentRef_9_2=ruleParentRefTest2		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"parentRef",
+        		lv_parentRef_9_2, 
+        		"ParentRefTest2");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+
+)
 )))
+;
+
+
+
+
+
+// Entry rule entryRuleModel2
+entryRuleModel2 returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getModel2Rule()); }
+	 iv_ruleModel2=ruleModel2 
+	 { $current=$iv_ruleModel2.current; } 
+	 EOF 
+;
+
+// Rule Model2
+ruleModel2 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getModel2Access().getModelAction_0(),
+            $current);
+    }
+)	otherlv_1='model' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getModel2Access().getModelKeyword_1());
+    }
+)
 ;
 
 
@@ -534,6 +629,190 @@ ruleNestedTypeRecursiveTest2 returns [EObject current=null]
     	newLeafNode(otherlv_3, grammarAccess.getNestedTypeRecursiveTest2Access().getFullStopKeyword_2_1());
     }
 )+)
+;
+
+
+
+
+
+// Entry rule entryRuleParentRefTest1
+entryRuleParentRefTest1 returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getParentRefTest1Rule()); }
+	 iv_ruleParentRefTest1=ruleParentRefTest1 
+	 { $current=$iv_ruleParentRefTest1.current; } 
+	 EOF 
+;
+
+// Rule ParentRefTest1
+ruleParentRefTest1 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='kw1' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getParentRefTest1Access().getKw1Keyword_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getParentRefTest1Access().getChild1ParentRefTestChild1ParserRuleCall_1_0()); 
+	    }
+		lv_child1_1_0=ruleParentRefTestChild1		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getParentRefTest1Rule());
+	        }
+       		set(
+       			$current, 
+       			"child1",
+        		lv_child1_1_0, 
+        		"ParentRefTestChild1");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+;
+
+
+
+
+
+// Entry rule entryRuleParentRefTest2
+entryRuleParentRefTest2 returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getParentRefTest2Rule()); }
+	 iv_ruleParentRefTest2=ruleParentRefTest2 
+	 { $current=$iv_ruleParentRefTest2.current; } 
+	 EOF 
+;
+
+// Rule ParentRefTest2
+ruleParentRefTest2 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='kw2' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getParentRefTest2Access().getKw2Keyword_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getParentRefTest2Access().getChild2ParentRefTestChild2ParserRuleCall_1_0()); 
+	    }
+		lv_child2_1_0=ruleParentRefTestChild2		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getParentRefTest2Rule());
+	        }
+       		set(
+       			$current, 
+       			"child2",
+        		lv_child2_1_0, 
+        		"ParentRefTestChild2");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+;
+
+
+
+
+
+// Entry rule entryRuleParentRefTestChild1
+entryRuleParentRefTestChild1 returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getParentRefTestChild1Rule()); }
+	 iv_ruleParentRefTestChild1=ruleParentRefTestChild1 
+	 { $current=$iv_ruleParentRefTestChild1.current; } 
+	 EOF 
+;
+
+// Rule ParentRefTestChild1
+ruleParentRefTestChild1 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getParentRefTestChild1Access().getParentRefTestChildAction_0(),
+            $current);
+    }
+)	otherlv_1='foo' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getParentRefTestChild1Access().getFooKeyword_1());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getParentRefTestChild1Access().getChildParentRefTestChild1ParserRuleCall_2_0()); 
+	    }
+		lv_child_2_0=ruleParentRefTestChild1		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getParentRefTestChild1Rule());
+	        }
+       		set(
+       			$current, 
+       			"child",
+        		lv_child_2_0, 
+        		"ParentRefTestChild1");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)?)
+;
+
+
+
+
+
+// Entry rule entryRuleParentRefTestChild2
+entryRuleParentRefTestChild2 returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getParentRefTestChild2Rule()); }
+	 iv_ruleParentRefTestChild2=ruleParentRefTestChild2 
+	 { $current=$iv_ruleParentRefTestChild2.current; } 
+	 EOF 
+;
+
+// Rule ParentRefTestChild2
+ruleParentRefTestChild2 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getParentRefTestChild2Access().getParentRefTestChildAction_0(),
+            $current);
+    }
+)	otherlv_1='foo' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getParentRefTestChild2Access().getFooKeyword_1());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getParentRefTestChild2Access().getChildParentRefTestChild2ParserRuleCall_2_0()); 
+	    }
+		lv_child_2_0=ruleParentRefTestChild2		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getParentRefTestChild2Rule());
+	        }
+       		set(
+       			$current, 
+       			"child",
+        		lv_child_2_0, 
+        		"ParentRefTestChild2");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)?)
 ;
 
 

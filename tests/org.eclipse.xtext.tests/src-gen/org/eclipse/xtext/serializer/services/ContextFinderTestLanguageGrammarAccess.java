@@ -21,86 +21,148 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final Keyword cNumberSignDigitOneKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
-		private final Assignment cAttributeExclusionAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final Alternatives cAttributeExclusionAlternatives_0_1_0 = (Alternatives)cAttributeExclusionAssignment_0_1.eContents().get(0);
-		private final RuleCall cAttributeExclusionAttributeExclusionTest1ParserRuleCall_0_1_0_0 = (RuleCall)cAttributeExclusionAlternatives_0_1_0.eContents().get(0);
-		private final RuleCall cAttributeExclusionAttributeExclusionTest2ParserRuleCall_0_1_0_1 = (RuleCall)cAttributeExclusionAlternatives_0_1_0.eContents().get(1);
+		private final Keyword cNumberSignDigitZeroKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Assignment cModelAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cModelModel2ParserRuleCall_0_1_0 = (RuleCall)cModelAssignment_0_1.eContents().get(0);
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final Keyword cNumberSignDigitTwoKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Assignment cNestedTypeAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final Alternatives cNestedTypeAlternatives_1_1_0 = (Alternatives)cNestedTypeAssignment_1_1.eContents().get(0);
-		private final RuleCall cNestedTypeNestedTypeTest1ParserRuleCall_1_1_0_0 = (RuleCall)cNestedTypeAlternatives_1_1_0.eContents().get(0);
-		private final RuleCall cNestedTypeNestedTypeTest2ParserRuleCall_1_1_0_1 = (RuleCall)cNestedTypeAlternatives_1_1_0.eContents().get(1);
+		private final Keyword cNumberSignDigitOneKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cAttributeExclusionAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final Alternatives cAttributeExclusionAlternatives_1_1_0 = (Alternatives)cAttributeExclusionAssignment_1_1.eContents().get(0);
+		private final RuleCall cAttributeExclusionAttributeExclusionTest1ParserRuleCall_1_1_0_0 = (RuleCall)cAttributeExclusionAlternatives_1_1_0.eContents().get(0);
+		private final RuleCall cAttributeExclusionAttributeExclusionTest2ParserRuleCall_1_1_0_1 = (RuleCall)cAttributeExclusionAlternatives_1_1_0.eContents().get(1);
 		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
-		private final Keyword cNumberSignDigitThreeKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cNestedTypeRecursiveTest2Assignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final Alternatives cNestedTypeRecursiveTest2Alternatives_2_1_0 = (Alternatives)cNestedTypeRecursiveTest2Assignment_2_1.eContents().get(0);
-		private final RuleCall cNestedTypeRecursiveTest2NestedTypeRecursiveTest1ParserRuleCall_2_1_0_0 = (RuleCall)cNestedTypeRecursiveTest2Alternatives_2_1_0.eContents().get(0);
-		private final RuleCall cNestedTypeRecursiveTest2NestedTypeRecursiveTest2ParserRuleCall_2_1_0_1 = (RuleCall)cNestedTypeRecursiveTest2Alternatives_2_1_0.eContents().get(1);
+		private final Keyword cNumberSignDigitTwoKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cNestedTypeAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final Alternatives cNestedTypeAlternatives_2_1_0 = (Alternatives)cNestedTypeAssignment_2_1.eContents().get(0);
+		private final RuleCall cNestedTypeNestedTypeTest1ParserRuleCall_2_1_0_0 = (RuleCall)cNestedTypeAlternatives_2_1_0.eContents().get(0);
+		private final RuleCall cNestedTypeNestedTypeTest2ParserRuleCall_2_1_0_1 = (RuleCall)cNestedTypeAlternatives_2_1_0.eContents().get(1);
+		private final Group cGroup_3 = (Group)cAlternatives.eContents().get(3);
+		private final Keyword cNumberSignDigitThreeKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cNestedTypeRecursiveTest2Assignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final Alternatives cNestedTypeRecursiveTest2Alternatives_3_1_0 = (Alternatives)cNestedTypeRecursiveTest2Assignment_3_1.eContents().get(0);
+		private final RuleCall cNestedTypeRecursiveTest2NestedTypeRecursiveTest1ParserRuleCall_3_1_0_0 = (RuleCall)cNestedTypeRecursiveTest2Alternatives_3_1_0.eContents().get(0);
+		private final RuleCall cNestedTypeRecursiveTest2NestedTypeRecursiveTest2ParserRuleCall_3_1_0_1 = (RuleCall)cNestedTypeRecursiveTest2Alternatives_3_1_0.eContents().get(1);
+		private final Group cGroup_4 = (Group)cAlternatives.eContents().get(4);
+		private final Keyword cNumberSignDigitFourKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cParentRefAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final Alternatives cParentRefAlternatives_4_1_0 = (Alternatives)cParentRefAssignment_4_1.eContents().get(0);
+		private final RuleCall cParentRefParentRefTest1ParserRuleCall_4_1_0_0 = (RuleCall)cParentRefAlternatives_4_1_0.eContents().get(0);
+		private final RuleCall cParentRefParentRefTest2ParserRuleCall_4_1_0_1 = (RuleCall)cParentRefAlternatives_4_1_0.eContents().get(1);
 		
 		//Model:
-		//	"#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2" nestedType=(NestedTypeTest1 |
-		//	NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 | NestedTypeRecursiveTest2);
+		//	"#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2"
+		//	nestedType=(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 |
+		//	NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2);
 		public ParserRule getRule() { return rule; }
 
-		//"#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2" nestedType=(NestedTypeTest1 |
-		//NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 | NestedTypeRecursiveTest2)
+		//"#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2"
+		//nestedType=(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 |
+		//NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2)
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2)
+		//"#0" model=Model2
 		public Group getGroup_0() { return cGroup_0; }
 
-		//"#1"
-		public Keyword getNumberSignDigitOneKeyword_0_0() { return cNumberSignDigitOneKeyword_0_0; }
+		//"#0"
+		public Keyword getNumberSignDigitZeroKeyword_0_0() { return cNumberSignDigitZeroKeyword_0_0; }
 
-		//attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2)
-		public Assignment getAttributeExclusionAssignment_0_1() { return cAttributeExclusionAssignment_0_1; }
+		//model=Model2
+		public Assignment getModelAssignment_0_1() { return cModelAssignment_0_1; }
 
-		//AttributeExclusionTest1 | AttributeExclusionTest2
-		public Alternatives getAttributeExclusionAlternatives_0_1_0() { return cAttributeExclusionAlternatives_0_1_0; }
+		//Model2
+		public RuleCall getModelModel2ParserRuleCall_0_1_0() { return cModelModel2ParserRuleCall_0_1_0; }
 
-		//AttributeExclusionTest1
-		public RuleCall getAttributeExclusionAttributeExclusionTest1ParserRuleCall_0_1_0_0() { return cAttributeExclusionAttributeExclusionTest1ParserRuleCall_0_1_0_0; }
-
-		//AttributeExclusionTest2
-		public RuleCall getAttributeExclusionAttributeExclusionTest2ParserRuleCall_0_1_0_1() { return cAttributeExclusionAttributeExclusionTest2ParserRuleCall_0_1_0_1; }
-
-		//"#2" nestedType=(NestedTypeTest1 | NestedTypeTest2)
+		//"#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2)
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"#2"
-		public Keyword getNumberSignDigitTwoKeyword_1_0() { return cNumberSignDigitTwoKeyword_1_0; }
+		//"#1"
+		public Keyword getNumberSignDigitOneKeyword_1_0() { return cNumberSignDigitOneKeyword_1_0; }
 
-		//nestedType=(NestedTypeTest1 | NestedTypeTest2)
-		public Assignment getNestedTypeAssignment_1_1() { return cNestedTypeAssignment_1_1; }
+		//attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2)
+		public Assignment getAttributeExclusionAssignment_1_1() { return cAttributeExclusionAssignment_1_1; }
 
-		//NestedTypeTest1 | NestedTypeTest2
-		public Alternatives getNestedTypeAlternatives_1_1_0() { return cNestedTypeAlternatives_1_1_0; }
+		//AttributeExclusionTest1 | AttributeExclusionTest2
+		public Alternatives getAttributeExclusionAlternatives_1_1_0() { return cAttributeExclusionAlternatives_1_1_0; }
 
-		//NestedTypeTest1
-		public RuleCall getNestedTypeNestedTypeTest1ParserRuleCall_1_1_0_0() { return cNestedTypeNestedTypeTest1ParserRuleCall_1_1_0_0; }
+		//AttributeExclusionTest1
+		public RuleCall getAttributeExclusionAttributeExclusionTest1ParserRuleCall_1_1_0_0() { return cAttributeExclusionAttributeExclusionTest1ParserRuleCall_1_1_0_0; }
 
-		//NestedTypeTest2
-		public RuleCall getNestedTypeNestedTypeTest2ParserRuleCall_1_1_0_1() { return cNestedTypeNestedTypeTest2ParserRuleCall_1_1_0_1; }
+		//AttributeExclusionTest2
+		public RuleCall getAttributeExclusionAttributeExclusionTest2ParserRuleCall_1_1_0_1() { return cAttributeExclusionAttributeExclusionTest2ParserRuleCall_1_1_0_1; }
 
-		//"#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 | NestedTypeRecursiveTest2)
+		//"#2" nestedType=(NestedTypeTest1 | NestedTypeTest2)
 		public Group getGroup_2() { return cGroup_2; }
 
+		//"#2"
+		public Keyword getNumberSignDigitTwoKeyword_2_0() { return cNumberSignDigitTwoKeyword_2_0; }
+
+		//nestedType=(NestedTypeTest1 | NestedTypeTest2)
+		public Assignment getNestedTypeAssignment_2_1() { return cNestedTypeAssignment_2_1; }
+
+		//NestedTypeTest1 | NestedTypeTest2
+		public Alternatives getNestedTypeAlternatives_2_1_0() { return cNestedTypeAlternatives_2_1_0; }
+
+		//NestedTypeTest1
+		public RuleCall getNestedTypeNestedTypeTest1ParserRuleCall_2_1_0_0() { return cNestedTypeNestedTypeTest1ParserRuleCall_2_1_0_0; }
+
+		//NestedTypeTest2
+		public RuleCall getNestedTypeNestedTypeTest2ParserRuleCall_2_1_0_1() { return cNestedTypeNestedTypeTest2ParserRuleCall_2_1_0_1; }
+
+		//"#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 | NestedTypeRecursiveTest2)
+		public Group getGroup_3() { return cGroup_3; }
+
 		//"#3"
-		public Keyword getNumberSignDigitThreeKeyword_2_0() { return cNumberSignDigitThreeKeyword_2_0; }
+		public Keyword getNumberSignDigitThreeKeyword_3_0() { return cNumberSignDigitThreeKeyword_3_0; }
 
 		//nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 | NestedTypeRecursiveTest2)
-		public Assignment getNestedTypeRecursiveTest2Assignment_2_1() { return cNestedTypeRecursiveTest2Assignment_2_1; }
+		public Assignment getNestedTypeRecursiveTest2Assignment_3_1() { return cNestedTypeRecursiveTest2Assignment_3_1; }
 
 		//NestedTypeRecursiveTest1 | NestedTypeRecursiveTest2
-		public Alternatives getNestedTypeRecursiveTest2Alternatives_2_1_0() { return cNestedTypeRecursiveTest2Alternatives_2_1_0; }
+		public Alternatives getNestedTypeRecursiveTest2Alternatives_3_1_0() { return cNestedTypeRecursiveTest2Alternatives_3_1_0; }
 
 		//NestedTypeRecursiveTest1
-		public RuleCall getNestedTypeRecursiveTest2NestedTypeRecursiveTest1ParserRuleCall_2_1_0_0() { return cNestedTypeRecursiveTest2NestedTypeRecursiveTest1ParserRuleCall_2_1_0_0; }
+		public RuleCall getNestedTypeRecursiveTest2NestedTypeRecursiveTest1ParserRuleCall_3_1_0_0() { return cNestedTypeRecursiveTest2NestedTypeRecursiveTest1ParserRuleCall_3_1_0_0; }
 
 		//NestedTypeRecursiveTest2
-		public RuleCall getNestedTypeRecursiveTest2NestedTypeRecursiveTest2ParserRuleCall_2_1_0_1() { return cNestedTypeRecursiveTest2NestedTypeRecursiveTest2ParserRuleCall_2_1_0_1; }
+		public RuleCall getNestedTypeRecursiveTest2NestedTypeRecursiveTest2ParserRuleCall_3_1_0_1() { return cNestedTypeRecursiveTest2NestedTypeRecursiveTest2ParserRuleCall_3_1_0_1; }
+
+		//"#4" parentRef=(ParentRefTest1 | ParentRefTest2)
+		public Group getGroup_4() { return cGroup_4; }
+
+		//"#4"
+		public Keyword getNumberSignDigitFourKeyword_4_0() { return cNumberSignDigitFourKeyword_4_0; }
+
+		//parentRef=(ParentRefTest1 | ParentRefTest2)
+		public Assignment getParentRefAssignment_4_1() { return cParentRefAssignment_4_1; }
+
+		//ParentRefTest1 | ParentRefTest2
+		public Alternatives getParentRefAlternatives_4_1_0() { return cParentRefAlternatives_4_1_0; }
+
+		//ParentRefTest1
+		public RuleCall getParentRefParentRefTest1ParserRuleCall_4_1_0_0() { return cParentRefParentRefTest1ParserRuleCall_4_1_0_0; }
+
+		//ParentRefTest2
+		public RuleCall getParentRefParentRefTest2ParserRuleCall_4_1_0_1() { return cParentRefParentRefTest2ParserRuleCall_4_1_0_1; }
+	}
+
+	public class Model2Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model2");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cModelAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cModelKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//Model2 returns Model:
+		//	{Model} "model";
+		public ParserRule getRule() { return rule; }
+
+		//{Model} "model"
+		public Group getGroup() { return cGroup; }
+
+		//{Model}
+		public Action getModelAction_0() { return cModelAction_0; }
+
+		//"model"
+		public Keyword getModelKeyword_1() { return cModelKeyword_1; }
 	}
 
 	public class AttributeExclusionTest1Elements extends AbstractParserRuleElementFinder {
@@ -314,9 +376,114 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//"."
 		public Keyword getFullStopKeyword_2_1() { return cFullStopKeyword_2_1; }
 	}
+
+	public class ParentRefTest1Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ParentRefTest1");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cKw1Keyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cChild1Assignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cChild1ParentRefTestChild1ParserRuleCall_1_0 = (RuleCall)cChild1Assignment_1.eContents().get(0);
+		
+		//ParentRefTest1:
+		//	"kw1" child1=ParentRefTestChild1;
+		public ParserRule getRule() { return rule; }
+
+		//"kw1" child1=ParentRefTestChild1
+		public Group getGroup() { return cGroup; }
+
+		//"kw1"
+		public Keyword getKw1Keyword_0() { return cKw1Keyword_0; }
+
+		//child1=ParentRefTestChild1
+		public Assignment getChild1Assignment_1() { return cChild1Assignment_1; }
+
+		//ParentRefTestChild1
+		public RuleCall getChild1ParentRefTestChild1ParserRuleCall_1_0() { return cChild1ParentRefTestChild1ParserRuleCall_1_0; }
+	}
+
+	public class ParentRefTest2Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ParentRefTest2");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cKw2Keyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cChild2Assignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cChild2ParentRefTestChild2ParserRuleCall_1_0 = (RuleCall)cChild2Assignment_1.eContents().get(0);
+		
+		//ParentRefTest2:
+		//	"kw2" child2=ParentRefTestChild2;
+		public ParserRule getRule() { return rule; }
+
+		//"kw2" child2=ParentRefTestChild2
+		public Group getGroup() { return cGroup; }
+
+		//"kw2"
+		public Keyword getKw2Keyword_0() { return cKw2Keyword_0; }
+
+		//child2=ParentRefTestChild2
+		public Assignment getChild2Assignment_1() { return cChild2Assignment_1; }
+
+		//ParentRefTestChild2
+		public RuleCall getChild2ParentRefTestChild2ParserRuleCall_1_0() { return cChild2ParentRefTestChild2ParserRuleCall_1_0; }
+	}
+
+	public class ParentRefTestChild1Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ParentRefTestChild1");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cParentRefTestChildAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cFooKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cChildAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cChildParentRefTestChild1ParserRuleCall_2_0 = (RuleCall)cChildAssignment_2.eContents().get(0);
+		
+		//ParentRefTestChild1 returns ParentRefTestChild:
+		//	{ParentRefTestChild} "foo" child=ParentRefTestChild1?;
+		public ParserRule getRule() { return rule; }
+
+		//{ParentRefTestChild} "foo" child=ParentRefTestChild1?
+		public Group getGroup() { return cGroup; }
+
+		//{ParentRefTestChild}
+		public Action getParentRefTestChildAction_0() { return cParentRefTestChildAction_0; }
+
+		//"foo"
+		public Keyword getFooKeyword_1() { return cFooKeyword_1; }
+
+		//child=ParentRefTestChild1?
+		public Assignment getChildAssignment_2() { return cChildAssignment_2; }
+
+		//ParentRefTestChild1
+		public RuleCall getChildParentRefTestChild1ParserRuleCall_2_0() { return cChildParentRefTestChild1ParserRuleCall_2_0; }
+	}
+
+	public class ParentRefTestChild2Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ParentRefTestChild2");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cParentRefTestChildAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cFooKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cChildAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cChildParentRefTestChild2ParserRuleCall_2_0 = (RuleCall)cChildAssignment_2.eContents().get(0);
+		
+		//ParentRefTestChild2 returns ParentRefTestChild:
+		//	{ParentRefTestChild} "foo" child=ParentRefTestChild2?;
+		public ParserRule getRule() { return rule; }
+
+		//{ParentRefTestChild} "foo" child=ParentRefTestChild2?
+		public Group getGroup() { return cGroup; }
+
+		//{ParentRefTestChild}
+		public Action getParentRefTestChildAction_0() { return cParentRefTestChildAction_0; }
+
+		//"foo"
+		public Keyword getFooKeyword_1() { return cFooKeyword_1; }
+
+		//child=ParentRefTestChild2?
+		public Assignment getChildAssignment_2() { return cChildAssignment_2; }
+
+		//ParentRefTestChild2
+		public RuleCall getChildParentRefTestChild2ParserRuleCall_2_0() { return cChildParentRefTestChild2ParserRuleCall_2_0; }
+	}
 	
 	
 	private ModelElements pModel;
+	private Model2Elements pModel2;
 	private AttributeExclusionTest1Elements pAttributeExclusionTest1;
 	private AttributeExclusionTest2Elements pAttributeExclusionTest2;
 	private NestedTypeTest1Elements pNestedTypeTest1;
@@ -326,6 +493,10 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	private NestedTypeChild2Elements pNestedTypeChild2;
 	private NestedTypeRecursiveTest1Elements pNestedTypeRecursiveTest1;
 	private NestedTypeRecursiveTest2Elements pNestedTypeRecursiveTest2;
+	private ParentRefTest1Elements pParentRefTest1;
+	private ParentRefTest2Elements pParentRefTest2;
+	private ParentRefTestChild1Elements pParentRefTestChild1;
+	private ParentRefTestChild2Elements pParentRefTestChild2;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -349,14 +520,25 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 
 	
 	//Model:
-	//	"#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2" nestedType=(NestedTypeTest1 |
-	//	NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 | NestedTypeRecursiveTest2);
+	//	"#0" model=Model2 | "#1" attributeExclusion=(AttributeExclusionTest1 | AttributeExclusionTest2) | "#2"
+	//	nestedType=(NestedTypeTest1 | NestedTypeTest2) | "#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1 |
+	//	NestedTypeRecursiveTest2) | "#4" parentRef=(ParentRefTest1 | ParentRefTest2);
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
 	
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
+	}
+
+	//Model2 returns Model:
+	//	{Model} "model";
+	public Model2Elements getModel2Access() {
+		return (pModel2 != null) ? pModel2 : (pModel2 = new Model2Elements());
+	}
+	
+	public ParserRule getModel2Rule() {
+		return getModel2Access().getRule();
 	}
 
 	//AttributeExclusionTest1 returns AttributeExclusionTest:
@@ -447,6 +629,46 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	
 	public ParserRule getNestedTypeRecursiveTest2Rule() {
 		return getNestedTypeRecursiveTest2Access().getRule();
+	}
+
+	//ParentRefTest1:
+	//	"kw1" child1=ParentRefTestChild1;
+	public ParentRefTest1Elements getParentRefTest1Access() {
+		return (pParentRefTest1 != null) ? pParentRefTest1 : (pParentRefTest1 = new ParentRefTest1Elements());
+	}
+	
+	public ParserRule getParentRefTest1Rule() {
+		return getParentRefTest1Access().getRule();
+	}
+
+	//ParentRefTest2:
+	//	"kw2" child2=ParentRefTestChild2;
+	public ParentRefTest2Elements getParentRefTest2Access() {
+		return (pParentRefTest2 != null) ? pParentRefTest2 : (pParentRefTest2 = new ParentRefTest2Elements());
+	}
+	
+	public ParserRule getParentRefTest2Rule() {
+		return getParentRefTest2Access().getRule();
+	}
+
+	//ParentRefTestChild1 returns ParentRefTestChild:
+	//	{ParentRefTestChild} "foo" child=ParentRefTestChild1?;
+	public ParentRefTestChild1Elements getParentRefTestChild1Access() {
+		return (pParentRefTestChild1 != null) ? pParentRefTestChild1 : (pParentRefTestChild1 = new ParentRefTestChild1Elements());
+	}
+	
+	public ParserRule getParentRefTestChild1Rule() {
+		return getParentRefTestChild1Access().getRule();
+	}
+
+	//ParentRefTestChild2 returns ParentRefTestChild:
+	//	{ParentRefTestChild} "foo" child=ParentRefTestChild2?;
+	public ParentRefTestChild2Elements getParentRefTestChild2Access() {
+		return (pParentRefTestChild2 != null) ? pParentRefTestChild2 : (pParentRefTestChild2 = new ParentRefTestChild2Elements());
+	}
+	
+	public ParserRule getParentRefTestChild2Rule() {
+		return getParentRefTestChild2Access().getRule();
 	}
 
 	//terminal ID:

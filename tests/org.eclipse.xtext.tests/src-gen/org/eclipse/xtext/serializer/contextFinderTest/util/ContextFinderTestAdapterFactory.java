@@ -113,6 +113,21 @@ public class ContextFinderTestAdapterFactory extends AdapterFactoryImpl
         return createNestedTypeRecursiveTestAdapter();
       }
       @Override
+      public Adapter caseParentRefTest1(ParentRefTest1 object)
+      {
+        return createParentRefTest1Adapter();
+      }
+      @Override
+      public Adapter caseParentRefTest2(ParentRefTest2 object)
+      {
+        return createParentRefTest2Adapter();
+      }
+      @Override
+      public Adapter caseParentRefTestChild(ParentRefTestChild object)
+      {
+        return createParentRefTestChildAdapter();
+      }
+      @Override
       public Adapter caseNestedTypeRecursiveTest1(NestedTypeRecursiveTest1 object)
       {
         return createNestedTypeRecursiveTest1Adapter();
@@ -245,6 +260,51 @@ public class ContextFinderTestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createNestedTypeRecursiveTestAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest1 <em>Parent Ref Test1</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest1
+   * @generated
+   */
+  public Adapter createParentRefTest1Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest2 <em>Parent Ref Test2</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest2
+   * @generated
+   */
+  public Adapter createParentRefTest2Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.contextFinderTest.ParentRefTestChild <em>Parent Ref Test Child</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.contextFinderTest.ParentRefTestChild
+   * @generated
+   */
+  public Adapter createParentRefTestChildAdapter()
   {
     return null;
   }
