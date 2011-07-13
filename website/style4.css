@@ -246,13 +246,6 @@ h1 {
 	slider
 */
 
-/*
-.coda-slider {
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-*/
-
 /* TODO: real sliding */
 
 .panel p {
@@ -265,10 +258,6 @@ h1 {
 .feature_left {
 	clear: both;
 	padding-top: 20px;
-}
-
-.feature_left a {
-	float: left;
 }
 
 .feature_left div { 
