@@ -246,10 +246,12 @@ h1 {
 	slider
 */
 
+/*
 .coda-slider {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
+*/
 
 /* TODO: real sliding */
 
@@ -291,15 +293,18 @@ h1 {
 	background: #00416a;
 	*/
 	background: #00314f;
-	color: white;
 	padding-top: 1.5em;
 	padding-bottom: 1.5em;
 }
 
+.section_splitter * {
+    color: white;
+}
+
 .section_content {
 	background: url("images/gray_background.jpg") repeat-x;
-	padding-top: 0.5em;
-	padding-bottom: 0.5em;
+	padding-top: 1.2em;
+	padding-bottom: 1em;
 }
 
 .section_splitter a {
