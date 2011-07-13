@@ -89,8 +89,6 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 	}
 
 	protected String addCrossRefOrAssignemnt(String result, AbstractElement ele) {
-		if (!showAssignment)
-			return result;
 		return addAssignemnt(addCrossRef(result, ele), ele);
 	}
 
@@ -108,14 +106,15 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 			return rule.getName() + ":" + result;
 		Map<CompoundElement, Node> nodes = Maps.newHashMap();
 		for (AbstractElement collision : elementsWithSameName) {
-			EObject current = collision;
+			EObject current = EcoreUtil2.getContainerOfType(collision, CompoundElement.class);
 			Node node = new Node(null, collision == ele ? result : "");
-			while (current.eContainer() instanceof CompoundElement) {
-				CompoundElement container = (CompoundElement) current.eContainer();
+			while (current instanceof CompoundElement) {
+				CompoundElement container = (CompoundElement) current;
 				Node cntNode = nodes.get(container);
 				if (cntNode == null)
 					nodes.put(container, cntNode = new Node(container, null));
-				cntNode.children.add(node);
+				if (!cntNode.children.contains(node))
+					cntNode.children.add(node);
 				node = cntNode;
 				current = current.eContainer();
 			}
