@@ -64,6 +64,9 @@ public class TypeArgumentContextProvider {
 	@Inject
 	private Primitives primitives;
 	
+	@Inject
+	private SuperTypeCollector superTypeCollector;
+	
 	public void setTypeProviderFactory(IJvmTypeProvider.Factory typeProviderFactory) {
 		this.typeProviderFactory = typeProviderFactory;
 	}
@@ -413,16 +416,30 @@ public class TypeArgumentContextProvider {
 			JvmParameterizedTypeReference parameterizedDeclaration = (JvmParameterizedTypeReference) declaration;
 			EList<JvmTypeReference> declArgs = parameterizedDeclaration.getArguments();
 			if (information instanceof JvmParameterizedTypeReference) {
-				JvmParameterizedTypeReference parameterizedInformation = (JvmParameterizedTypeReference) information;
-				EList<JvmTypeReference> infoArgs = parameterizedInformation.getArguments();
-				for (int i = 0; i < declArgs.size() && i < infoArgs.size(); i++) {
-					resolve(declArgs.get(i), infoArgs.get(i), existing, returnTypeContext);
+				/*
+				 * We need to walk the inheritance hierarchy up to resolve all type parameters,
+				 * e.g. the declared type may be Comparable<? super C> and the information
+				 * may be java.lang.String. String itself does not define type arguments
+				 * but it implements java.lang.Comparable<String> thus the type argument
+				 * C can be resolved to java.lang.String
+				 */
+				Iterable<JvmTypeReference> allTypes = Iterables.concat(
+						Collections.singleton(information), 
+						superTypeCollector.collectSuperTypes(information));
+				for(JvmTypeReference localInformation: allTypes) {
+					JvmParameterizedTypeReference parameterizedInformation = (JvmParameterizedTypeReference) localInformation;
+					EList<JvmTypeReference> infoArgs = parameterizedInformation.getArguments();
+					for (int i = 0; i < declArgs.size() && i < infoArgs.size(); i++) {
+						resolve(declArgs.get(i), infoArgs.get(i), existing, returnTypeContext);
+					}
 				}
 			} else if (information instanceof JvmWildcardTypeReference) {
 				JvmWildcardTypeReference wildcardInformation = (JvmWildcardTypeReference) information;
 				JvmTypeReference informationUpperBound = getSingleUpperBoundOrNull(wildcardInformation);
 				resolve(parameterizedDeclaration, informationUpperBound, existing, returnTypeContext);
-			} else if(information instanceof JvmGenericArrayTypeReference) {
+			} else if (information instanceof JvmGenericArrayTypeReference) {
+				// TODO only for declaration == Iterable?
+				// or should we use synonym types for the information instead?
 				JvmGenericArrayTypeReference arrayInformation = (JvmGenericArrayTypeReference)information;
 				resolve(declArgs.get(0), arrayInformation.getComponentType(), existing, returnTypeContext);
 			}
