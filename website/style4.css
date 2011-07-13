@@ -418,10 +418,8 @@ h1 {
 }
 
 h2 {
-	border-bottom-color: rgba(0, 0, 0, 0.0585938);
-	border-bottom-style: solid;
-	border-bottom-width: 1px;
-	margin-bottom: 16px;
+    border-bottom: none;
+	margin-bottom: 6px;
 	font-size: 30px;
 	font-weight: 300;
 	height: 31px;
@@ -435,6 +433,13 @@ h3 {
 	font-size: 18px;
 	border: none;
 	margin-bottom: 10px;
+}
+
+hr {
+    border: none;
+	border-bottom-color: rgba(0, 0, 0, 0.0585938);
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
 }
 
 #novaContent li {
