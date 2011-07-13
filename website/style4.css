@@ -381,7 +381,7 @@ h1 {
 
 /* footer */
 #xtext_footer {
-	padding-bottom: 1em;
+	padding-bottom: 0;
 	margin-bottom: 0;
 
 }
@@ -405,6 +405,12 @@ h1 {
 }
 
 #xtext_footer #_copyright {
+	display: block;
+	float:right;
+}
+
+#xtext_footer #_inspiration {
+    margin-top: 1em;
 	display: block;
 	float:right;
 }
