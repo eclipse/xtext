@@ -12,16 +12,24 @@ import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IResourceValidator;
+import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -380,5 +388,59 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		XBlockExpression block = (XBlockExpression) function.getExpression();
 		XFeatureCall featureCall = (XFeatureCall) block.getExpressions().get(0);
 		assertSame(associator.getDirectlyInferredOperation(function), featureCall.getFeature());
+	}
+	
+	public void testBug345433_01() throws Exception {
+		String classAsString = 
+			"import static extension org.eclipse.xtext.GrammarUtil.*\n" +
+			"class Foo {" +
+			"	org.eclipse.xtext.Grammar grammar\n" +
+			"	def function1() {\n" + 
+			"		grammar.containedRuleCalls.filter(e | " +
+			"			!e.isAssigned() && !e.isEObjectRuleCall()" +
+			"		).map(e | e.rule)\n" + 
+			"	}\n" +
+			"	def function2() {\n" +
+			"		newArrayList(function1().head())\n" +
+			"	}\n" +
+			"}";
+		XtendClass clazz = clazz(classAsString);
+		IResourceValidator validator = ((XtextResource) clazz.eResource()).getResourceServiceProvider().getResourceValidator();
+		List<Issue> issues = validator.validate(clazz.eResource(), CheckMode.ALL, CancelIndicator.NullImpl);
+		assertTrue("Resource contained errors : " + issues.toString(), issues.isEmpty());
+		XtendFunction function1 = (XtendFunction) clazz.getMembers().get(1);
+		JvmOperation operation1 = associator.getDirectlyInferredOperation(function1);
+		assertEquals("java.lang.Iterable<org.eclipse.xtext.AbstractRule>", operation1.getReturnType().getIdentifier());
+		XtendFunction function2 = (XtendFunction) clazz.getMembers().get(2);
+		JvmOperation operation2 = associator.getDirectlyInferredOperation(function2);
+		assertEquals("java.util.ArrayList<org.eclipse.xtext.AbstractRule>", operation2.getReturnType().getIdentifier());
+	}
+	
+	public void testBug345433_02() throws Exception {
+		String classAsString = 
+			"import static extension org.eclipse.xtext.GrammarUtil.*\n" +
+			"class Foo {" +
+			"	org.eclipse.xtext.Grammar grammar\n" +
+			"	def function1() {\n" + 
+			"		grammar.containedRuleCalls.filter(e0 | " +
+			"			!e0.isAssigned() && !e0.isEObjectRuleCall()" +
+			"		).map(e1 | e1.rule)\n" + 
+			"	}\n" +
+			"}";
+		XtendClass clazz = clazz(classAsString);
+		IResourceValidator validator = ((XtextResource) clazz.eResource()).getResourceServiceProvider().getResourceValidator();
+		List<Issue> issues = validator.validate(clazz.eResource(), CheckMode.ALL, CancelIndicator.NullImpl);
+		assertTrue("Resource contained errors : " + issues.toString(), issues.isEmpty());
+		XtendFunction function = (XtendFunction) clazz.getMembers().get(1);
+		XExpression body = function.getExpression();
+		ITypeProvider typeProvider = get(ITypeProvider.class);
+		JvmTypeReference bodyType = typeProvider.getType(body);
+		assertEquals("java.lang.Iterable<org.eclipse.xtext.AbstractRule>", bodyType.getIdentifier());
+		XBlockExpression block = (XBlockExpression) body;
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) block.getExpressions().get(0);
+		XClosure closure = (XClosure) featureCall.getMemberCallArguments().get(0);
+		JvmFormalParameter e1 = closure.getFormalParameters().get(0);
+		assertEquals("e1", e1.getSimpleName());
+		assertEquals("org.eclipse.xtext.RuleCall", typeProvider.getTypeForIdentifiable(e1).getIdentifier());
 	}
 }
