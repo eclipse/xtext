@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentScene</key>
-	<string>D4F23D53-80C9-4190-8D80-85F720432FDD-8546-0000B95DA041577B</string>
+	<string>F4A1029C-2CD8-4AC7-8D32-394248FABEE5-8546-0000B6A8D4AF2DB2</string>
 	<key>documentVersion</key>
 	<string>58</string>
 	<key>drawSceneBackgrounds</key>
@@ -11,7 +11,7 @@
 	<key>layout</key>
 	<dict>
 		<key>mainWindowFrame</key>
-		<string>17 130 1549 1046 0 0 1600 1178 </string>
+		<string>124 130 1549 1046 0 0 1920 1178 </string>
 		<key>openTabs</key>
 		<array/>
 		<key>selectedTabIndex</key>
@@ -279,6 +279,70 @@
 			<key>resourceName</key>
 			<string>mac-1.png</string>
 		</dict>
+		<dict>
+			<key>bookmark</key>
+			<data>
+			Ym9va0gDAAAAAAEQEAAAAHwCAAAFAAAAAQEAAFVzZXJzAAAABwAA
+			AAEBAABiZWhyZW5zAAkAAAABAQAARG9jdW1lbnRzAAAACAAAAAEB
+			AABwcm9qZWN0cxEAAAABAQAAb3JnLmVjbGlwc2UueHRleHQAAAAH
+			AAAAAQEAAHdlYnNpdGUABgAAAAEBAABpbWFnZXMAABEAAAABAQAA
+			cG9wb3Zlcl9SZXNvdXJjZXMAAAATAAAAAQEAAGluc3RhbGxidXR0
+			b24tMS5wbmcAJAAAAAEGAAAEAAAAFAAAACQAAAA4AAAASAAAAGQA
+			AAB0AAAAhAAAAKAAAAAIAAAABAMAADmYAAAAAAAACAAAAAQDAADc
+			7AkAAAAAAAgAAAAEAwAAaPAKAAAAAAAIAAAABAMAAP+yDwAAAAAA
+			CAAAAAQDAAA7JXIAAAAAAAgAAAAEAwAA3l1yAAAAAAAIAAAABAMA
+			AK1fcgAAAAAACAAAAAQDAADtYXIAAAAAAAgAAAAEAwAAbX9yAAAA
+			AAAkAAAAAQYAAOgAAAD4AAAACAEAABgBAAAoAQAAOAEAAEgBAABY
+			AQAAaAEAABgAAAABAgAAAQAAAAAAAAAPAAAAAAAAAAAAAAAAAAAA
+			BAAAAAMDAAAHAAAABAAAAAMDAAD2AQAADAAAAAEBAABNYWNpbnRv
+			c2ggSEQIAAAABAMAAABgRlw6AAAACAAAAAAEAABBszIOTwAAACQA
+			AAABAQAAMzQxN0Y4NEItM0ZDRC0zMTNBLTlCNDgtNzY0RDcwNzI1
+			QUQ3GAAAAAECAACBAAAAAQAIAO8/AAABAAgAAAAAAAAAAAABAAAA
+			AQEAAC8AAAAAAAAAAQUAAAQAAAADAwAAAAEAALQAAAD+////AQAA
+			AAAAAAAOAAAABBAAALwAAAAAAAAABRAAAHgBAAAAAAAAEBAAAKQB
+			AAAAAAAAAiAAAFwCAAAAAAAAECAAANwBAAAAAAAAESAAABACAAAA
+			AAAAEiAAAPABAAAAAAAAEyAAAAACAAAAAAAAICAAADwCAAAAAAAA
+			MCAAAGgCAAAAAAAAAcAAAMQBAAAAAAAAEcAAABQAAAAAAAAAEsAA
+			ANABAAAAAAAAENAAAHACAAAAAAAA
+			</data>
+			<key>md5</key>
+			<string>5131F9F41371347847FC512C04E61395</string>
+			<key>notifyOnBookmarkChange</key>
+			<true/>
+			<key>originalPath</key>
+			<string>/Users/behrens/Documents/projects/org.eclipse.xtext/website/images/popover_Resources/installbutton-1.png</string>
+			<key>resourceName</key>
+			<string>installbutton-1-1.png</string>
+		</dict>
+		<dict>
+			<key>bookmark</key>
+			<data>
+			Ym9va2QCAAAAAAEQEAAAAJgBAAAFAAAAAQEAAFVzZXJzAAAABwAA
+			AAEBAABiZWhyZW5zAAcAAAABAQAARGVza3RvcAARAAAAAQEAAGlu
+			c3RhbGxidXR0b24ucG5nAAAAEAAAAAEGAAAEAAAAFAAAACQAAAA0
+			AAAACAAAAAQDAAA5mAAAAAAAAAgAAAAEAwAA3OwJAAAAAAAIAAAA
+			BAMAAPV2CgAAAAAACAAAAAQDAABEgHIAAAAAABAAAAABBgAAaAAA
+			AHgAAACIAAAAmAAAABgAAAABAgAAAQAAAAAAAAAPAAAAAAAAAAAA
+			AAAAAAAABAAAAAMDAAACAAAABAAAAAMDAAD2AQAADAAAAAEBAABN
+			YWNpbnRvc2ggSEQIAAAABAMAAABgRlw6AAAACAAAAAAEAABBszIO
+			TwAAACQAAAABAQAAMzQxN0Y4NEItM0ZDRC0zMTNBLTlCNDgtNzY0
+			RDcwNzI1QUQ3GAAAAAECAACBAAAAAQAIAO8/AAABAAgAAAAAAAAA
+			AAABAAAAAQEAAC8AAAAAAAAAAQUAAAQAAAADAwAAAAEAALQAAAD+
+			////AQAAAAAAAAAOAAAABBAAAFAAAAAAAAAABRAAAKgAAAAAAAAA
+			EBAAAMAAAAAAAAAAAiAAAHgBAAAAAAAAECAAAPgAAAAAAAAAESAA
+			ACwBAAAAAAAAEiAAAAwBAAAAAAAAEyAAABwBAAAAAAAAICAAAFgB
+			AAAAAAAAMCAAAIQBAAAAAAAAAcAAAOAAAAAAAAAAEcAAABQAAAAA
+			AAAAEsAAAOwAAAAAAAAAENAAAIwBAAAAAAAA
+			</data>
+			<key>md5</key>
+			<string>5131F9F41371347847FC512C04E61395</string>
+			<key>notifyOnBookmarkChange</key>
+			<true/>
+			<key>originalPath</key>
+			<string>/Users/behrens/Desktop/installbutton.png</string>
+			<key>resourceName</key>
+			<string>installbutton.png</string>
+		</dict>
 	</array>
 	<key>sceneSize</key>
 	<string>{673, 249}</string>
@@ -359,7 +423,7 @@
 				<key>timeCursors</key>
 				<dict>
 					<key>kTimelineDefaultIdentifier</key>
-					<real>8.3999996185302734</real>
+					<real>3.7333333492279053</real>
 				</dict>
 				<key>timescale</key>
 				<integer>120</integer>
@@ -429,7 +493,13 @@
 							<key>identifier</key>
 							<string>BackgroundImage</string>
 							<key>objectValue</key>
-							<string>installbutton-1.png</string>
+							<string>installbutton.png</string>
+						</dict>
+						<dict>
+							<key>identifier</key>
+							<string>BackgroundRepeat</string>
+							<key>objectValue</key>
+							<string>no-repeat</string>
 						</dict>
 						<dict>
 							<key>identifier</key>
@@ -6352,7 +6422,9 @@
 			<key>scrollViewOffset</key>
 			<string>{0, 0}</string>
 			<key>selectedObjects</key>
-			<array/>
+			<array>
+				<string>0914E8C7-228B-412E-8450-2E51F303AE3A-8546-0000B487B85BA505</string>
+			</array>
 			<key>splitHeight</key>
 			<real>403</real>
 		</dict>
@@ -6447,7 +6519,7 @@
 				<integer>120</integer>
 			</dict>
 			<key>canvasSize</key>
-			<string>{1802, 403}</string>
+			<string>{1632, 403}</string>
 			<key>context</key>
 			<dict>
 				<key>OnSceneAnimationCompleteAction</key>
@@ -6467,57 +6539,9 @@
 					<array>
 						<dict>
 							<key>identifier</key>
-							<string>DisplayName</string>
-							<key>objectValue</key>
-							<string>installbutton-1</string>
-						</dict>
-						<dict>
-							<key>identifier</key>
-							<string>Position</string>
-							<key>objectValue</key>
-							<string>absolute</string>
-						</dict>
-						<dict>
-							<key>identifier</key>
-							<string>BackgroundOrigin</string>
-							<key>objectValue</key>
-							<string>content-box</string>
-						</dict>
-						<dict>
-							<key>identifier</key>
 							<string>OriginalWidth</string>
 							<key>objectValue</key>
 							<string>221px</string>
-						</dict>
-						<dict>
-							<key>identifier</key>
-							<string>SizeRatio</string>
-							<key>objectValue</key>
-							<string>3.74576</string>
-						</dict>
-						<dict>
-							<key>identifier</key>
-							<string>Left</string>
-							<key>objectValue</key>
-							<string>225px</string>
-						</dict>
-						<dict>
-							<key>identifier</key>
-							<string>OriginalHeight</string>
-							<key>objectValue</key>
-							<string>59px</string>
-						</dict>
-						<dict>
-							<key>identifier</key>
-							<string>Display</string>
-							<key>objectValue</key>
-							<string>inline</string>
-						</dict>
-						<dict>
-							<key>identifier</key>
-							<string>BackgroundImage</string>
-							<key>objectValue</key>
-							<string>installbutton-1.png</string>
 						</dict>
 						<dict>
 							<key>identifier</key>
@@ -6527,39 +6551,9 @@
 						</dict>
 						<dict>
 							<key>identifier</key>
-							<string>Height</string>
+							<string>Display</string>
 							<key>objectValue</key>
-							<string>59px</string>
-						</dict>
-						<dict>
-							<key>identifier</key>
-							<string>Overflow</string>
-							<key>objectValue</key>
-							<string>visible</string>
-						</dict>
-						<dict>
-							<key>identifier</key>
-							<string>Width</string>
-							<key>objectValue</key>
-							<string>221px</string>
-						</dict>
-						<dict>
-							<key>identifier</key>
-							<string>Top</string>
-							<key>objectValue</key>
-							<string>138px</string>
-						</dict>
-						<dict>
-							<key>identifier</key>
-							<string>BackgroundSize</string>
-							<key>objectValue</key>
-							<string>100% 100%</string>
-						</dict>
-						<dict>
-							<key>identifier</key>
-							<string>ZIndex</string>
-							<key>objectValue</key>
-							<string>1</string>
+							<string>inline</string>
 						</dict>
 						<dict>
 							<key>identifier</key>
@@ -6569,15 +6563,99 @@
 						</dict>
 						<dict>
 							<key>identifier</key>
-							<string>TagName</string>
-							<key>objectValue</key>
-							<string>div</string>
-						</dict>
-						<dict>
-							<key>identifier</key>
 							<string>ClassType</string>
 							<key>objectValue</key>
 							<string>Image</string>
+						</dict>
+						<dict>
+							<key>identifier</key>
+							<string>Top</string>
+							<key>objectValue</key>
+							<string>138px</string>
+						</dict>
+						<dict>
+							<key>identifier</key>
+							<string>BackgroundImage</string>
+							<key>objectValue</key>
+							<string>installbutton.png</string>
+						</dict>
+						<dict>
+							<key>identifier</key>
+							<string>BackgroundRepeat</string>
+							<key>objectValue</key>
+							<string>no-repeat</string>
+						</dict>
+						<dict>
+							<key>identifier</key>
+							<string>Position</string>
+							<key>objectValue</key>
+							<string>absolute</string>
+						</dict>
+						<dict>
+							<key>identifier</key>
+							<string>Height</string>
+							<key>objectValue</key>
+							<string>59px</string>
+						</dict>
+						<dict>
+							<key>identifier</key>
+							<string>Left</string>
+							<key>objectValue</key>
+							<string>225px</string>
+						</dict>
+						<dict>
+							<key>identifier</key>
+							<string>SizeRatio</string>
+							<key>objectValue</key>
+							<string>3.74576</string>
+						</dict>
+						<dict>
+							<key>identifier</key>
+							<string>BackgroundOrigin</string>
+							<key>objectValue</key>
+							<string>content-box</string>
+						</dict>
+						<dict>
+							<key>identifier</key>
+							<string>Width</string>
+							<key>objectValue</key>
+							<string>221px</string>
+						</dict>
+						<dict>
+							<key>identifier</key>
+							<string>ZIndex</string>
+							<key>objectValue</key>
+							<string>1</string>
+						</dict>
+						<dict>
+							<key>identifier</key>
+							<string>BackgroundSize</string>
+							<key>objectValue</key>
+							<string>100% 100%</string>
+						</dict>
+						<dict>
+							<key>identifier</key>
+							<string>Overflow</string>
+							<key>objectValue</key>
+							<string>visible</string>
+						</dict>
+						<dict>
+							<key>identifier</key>
+							<string>DisplayName</string>
+							<key>objectValue</key>
+							<string>installbutton-1</string>
+						</dict>
+						<dict>
+							<key>identifier</key>
+							<string>OriginalHeight</string>
+							<key>objectValue</key>
+							<string>59px</string>
+						</dict>
+						<dict>
+							<key>identifier</key>
+							<string>TagName</string>
+							<key>objectValue</key>
+							<string>div</string>
 						</dict>
 					</array>
 					<key>4C4C5C87-DA5B-4FDE-BBAF-22159DE019E8-8546-0000B7ECA3C2C280</key>
@@ -10190,10 +10268,7 @@
 			<string>{78, 0}</string>
 			<key>selectedObjects</key>
 			<array>
-				<string>E0F99AC5-0AAF-4F2F-BCEE-78BB8A9D4B90-8546-0000B7EEB1CBD187</string>
-				<string>8ECFB3E2-1E51-4530-878E-06225337E478-8546-0000B7ED99E04F05</string>
-				<string>4C4C5C87-DA5B-4FDE-BBAF-22159DE019E8-8546-0000B7ECA3C2C280</string>
-				<string>BD08E67D-A12E-4BC5-ABBF-B7AF1CB029B6-8546-0000B7EB6E93AC60</string>
+				<string>1670161B-9E31-410B-9D75-AE8FE0324AD1-8546-0000B6B06F9BA73D</string>
 			</array>
 			<key>splitHeight</key>
 			<real>403</real>
@@ -10214,7 +10289,7 @@
 				<integer>60</integer>
 			</dict>
 			<key>canvasSize</key>
-			<string>{1235, 403}</string>
+			<string>{1549, 403}</string>
 			<key>context</key>
 			<dict>
 				<key>currentTimelineIdentifier</key>
@@ -10252,6 +10327,8 @@
 			<string>6803D2DB-EF04-40E7-9E9F-553A7313868D-8546-0000BA23AB0087F1</string>
 			<key>scrollViewOffset</key>
 			<string>{0, 0}</string>
+			<key>selectedObjects</key>
+			<array/>
 			<key>splitHeight</key>
 			<real>403</real>
 		</dict>
