@@ -569,6 +569,12 @@ a {
 	width: 22%;
 }
 
+img.new_feature {
+    float: none;
+    padding-left: 0.3em;
+    vertical-align: -4px;
+}
+
 
 /*
 	Adjust Nova-Theme
