@@ -8,13 +8,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.grammaranalysis.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
@@ -24,11 +29,41 @@ import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.util.XtextSwitch;
 
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Function<AbstractElement, String> {
+
+	protected static class Node {
+		protected List<Node> children = Lists.newArrayList();
+		protected CompoundElement compound;
+		protected String text;
+
+		public Node(CompoundElement compound, String text) {
+			super();
+			this.compound = compound;
+			this.text = text;
+		}
+
+		@Override
+		public String toString() {
+			if (text != null)
+				return text;
+			if (children.size() == 1)
+				return children.get(0).toString();
+			if (compound instanceof Group)
+				return "(" + Joiner.on(" ").join(children) + ")";
+			if (compound instanceof UnorderedGroup)
+				return "(" + Joiner.on("&").join(children) + ")";
+			if (compound instanceof Alternatives)
+				return "(" + Joiner.on("|").join(children) + ")";
+			return "";
+		}
+	}
 
 	protected boolean showActionAsRuleCall = false;
 
@@ -36,11 +71,14 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 
 	protected boolean showCardinality = true;
 
+	protected boolean showQualified = false;
+
 	protected String addAssignemnt(String result, AbstractElement ele) {
 		if (!showAssignment)
 			return result;
 		Assignment ass = GrammarUtil.containingAssignment(ele);
-		return ass != null ? ass.getFeature() + ass.getOperator() + result : result;
+		result = ass != null ? ass.getFeature() + ass.getOperator() + result : result;
+		return addQualified(result, ele);
 	}
 
 	protected String addCrossRef(String result, AbstractElement ele) {
@@ -54,6 +92,35 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 		if (!showAssignment)
 			return result;
 		return addAssignemnt(addCrossRef(result, ele), ele);
+	}
+
+	protected String addQualified(String result, AbstractElement ele) {
+		if (!showQualified)
+			return result;
+		AbstractRule rule = GrammarUtil.containingRule(ele);
+		GrammarElementTitleSwitch others = clone();
+		others.showQualified = false;
+		List<AbstractElement> elementsWithSameName = Lists.newArrayList();
+		for (AbstractElement candidate : EcoreUtil2.getAllContentsOfType(rule, ele.getClass()))
+			if (candidate == ele || result.equals(others.doSwitch(candidate)))
+				elementsWithSameName.add(candidate);
+		if (elementsWithSameName.size() < 2)
+			return rule.getName() + ":" + result;
+		Map<CompoundElement, Node> nodes = Maps.newHashMap();
+		for (AbstractElement collision : elementsWithSameName) {
+			EObject current = collision;
+			Node node = new Node(null, collision == ele ? result : "");
+			while (current.eContainer() instanceof CompoundElement) {
+				CompoundElement container = (CompoundElement) current.eContainer();
+				Node cntNode = nodes.get(container);
+				if (cntNode == null)
+					nodes.put(container, cntNode = new Node(container, null));
+				cntNode.children.add(node);
+				node = cntNode;
+				current = current.eContainer();
+			}
+		}
+		return rule.getName() + ":" + nodes.get(rule.getAlternatives());
 	}
 
 	public String apply(AbstractElement from) {
@@ -84,14 +151,16 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 		String f = object.getFeature();
 		String o = object.getOperator();
 		o = (o == null) ? "" : o;
+		String result;
 		if (showActionAsRuleCall && f != null) {
-			return f + o + new Context2NameFunction().apply(object) + card(object);
+			result = f + o + new Context2NameFunction().apply(object) + card(object);
 		} else {
 			String t = object.getType().getClassifier().getName();
 			t = (t == null) ? "" : t;
 			f = (f == null) ? "" : "." + f;
-			return "{" + t + f + o + "}" + card(object);
+			result = "{" + t + f + o + "}" + card(object);
 		}
+		return addQualified(result, object);
 	}
 
 	@Override
@@ -101,7 +170,8 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 
 	@Override
 	public String caseAssignment(Assignment object) {
-		return object.getFeature() + object.getOperator() + " " + card(object);
+		String result = object.getFeature() + object.getOperator() + " " + card(object);
+		return addQualified(result, object);
 	}
 
 	@Override
@@ -131,6 +201,16 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 	}
 
 	@Override
+	protected GrammarElementTitleSwitch clone() {
+		GrammarElementTitleSwitch result = new GrammarElementTitleSwitch();
+		result.showActionAsRuleCall = showActionAsRuleCall;
+		result.showAssignment = showAssignment;
+		result.showCardinality = showCardinality;
+		result.showQualified = showQualified;
+		return result;
+	}
+
+	@Override
 	public String defaultCase(EObject object) {
 		return object.eClass().getName();
 	}
@@ -147,6 +227,11 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 
 	public GrammarElementTitleSwitch showAssignments() {
 		showAssignment = true;
+		return this;
+	}
+
+	public GrammarElementTitleSwitch showQualified() {
+		showQualified = true;
 		return this;
 	}
 

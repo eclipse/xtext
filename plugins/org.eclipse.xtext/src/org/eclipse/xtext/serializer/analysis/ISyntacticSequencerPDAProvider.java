@@ -20,6 +20,7 @@ import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
 import org.eclipse.xtext.util.formallang.ITokenPdaAdapter;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.inject.ImplementedBy;
 
@@ -75,6 +76,8 @@ public interface ISyntacticSequencerPDAProvider {
 		AbstractElement getGrammarElement();
 
 		SynStateType getType();
+
+		String toString(Function<AbstractElement, String> elementFormatter);
 	}
 
 	public interface ISynTransition extends ISynNavigable {
