@@ -8,11 +8,13 @@
 package org.eclipse.xtext.xbase.scoping.featurecalls;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypesSwitch;
@@ -39,20 +41,18 @@ public class JvmFeatureSignatureProvider {
 		
 		@Override
 		public String caseJvmOperation(JvmOperation object) {
-			StringBuilder builder = new StringBuilder();
+			StringBuilder builder = new StringBuilder(32);
 			builder.append(object.getSimpleName());
 			builder.append("(");
-			Iterator<JvmFormalParameter> params = object.getParameters().iterator();
-			for (int i=0;i<numberOfIrrelevantArguments && params.hasNext();i++)
-				params.next(); // skip irrelevantArguments
-			while (params.hasNext()){
-				JvmTypeReference resolvedParameterType = ctx.getLowerBound(params.next().getParameterType());
+			List<JvmFormalParameter> params = object.getParameters();
+			for (int i = numberOfIrrelevantArguments; i < params.size(); i++) {
+				if (i != numberOfIrrelevantArguments)
+					builder.append(",");
+				JvmTypeReference resolvedParameterType = ctx.getLowerBound(params.get(i).getParameterType());
 				if (resolvedParameterType != null)
 					builder.append(resolvedParameterType.getIdentifier());
 				else
 					builder.append("null");
-				if (params.hasNext())
-					builder.append(",");
 			}
 			builder.append(")");
 			return builder.toString();
