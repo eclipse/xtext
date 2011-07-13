@@ -17,6 +17,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
@@ -76,6 +78,9 @@ public class ContextFinder implements IContextFinder {
 	}
 
 	public Iterable<EObject> findContextsByContents(EObject semanitcObject, Iterable<EObject> contextCandidates) {
+		if (semanitcObject == null)
+			throw new NullPointerException();
+
 		initConstraints();
 
 		Map<IConstraint, List<EObject>> constraints;
@@ -94,16 +99,72 @@ public class ContextFinder implements IContextFinder {
 		if (constraints.size() < 2)
 			return Iterables.concat(constraints.values());
 
-		for (EReference ref : semanitcObject.eClass().getEAllContainments()) {
-			constraints.keySet().retainAll(findContextsByConstraints(semanitcObject, ref, constraints.keySet()));
-			if (constraints.size() < 2)
-				return Iterables.concat(constraints.values());
-		}
+		for (EReference ref : semanitcObject.eClass().getEAllContainments())
+			if (!isTransient(semanitcObject, ref)) {
+				constraints.keySet().retainAll(findContextsByConstraints(semanitcObject, ref, constraints.keySet()));
+				if (constraints.size() < 2)
+					return Iterables.concat(constraints.values());
+			}
 		return Iterables.concat(constraints.values());
+	}
+
+	@Inject
+	protected IGrammarAccess grammar;
+
+	protected EObject getRootContext() {
+		for (AbstractRule rule : grammar.getGrammar().getRules())
+			if (GrammarUtil.isEObjectRule(rule))
+				return rule;
+		throw new RuntimeException("There is no parser rule in the grammar.");
+	}
+
+	protected Iterable<EObject> findContextsByContainer(EObject semanitcObject, Iterable<EObject> contextCandidates) {
+		if (semanitcObject.eResource().getContents().contains(semanitcObject))
+			return Collections.singleton(getRootContext());
+		EReference ref = semanitcObject.eContainmentFeature();
+		if (ref == null || (contextCandidates != null && Iterables.size(contextCandidates) < 2))
+			return contextCandidates;
+		Map<IConstraint, List<EObject>> containerConstraints = getConstraints(semanitcObject.eContainer().eClass());
+		int refID = semanitcObject.eContainer().eClass().getFeatureID(ref);
+		Set<EObject> childContexts = Sets.newHashSet();
+		for (IConstraint constraint : Lists.newArrayList(containerConstraints.keySet()))
+			if (constraint.getFeatures()[refID] == null)
+				containerConstraints.remove(constraint);
+			else
+				childContexts.addAll(constraint.getFeatures()[refID].getCalledContexts());
+
+		Set<EObject> result;
+		if (contextCandidates != null) {
+			result = Sets.newHashSet(contextCandidates);
+			result.retainAll(childContexts);
+		} else
+			result = childContexts;
+		if (result.size() < 2)
+			return result;
+		Iterable<EObject> filteredContexts = findContextsByContainer(semanitcObject.eContainer(),
+				Iterables.concat(containerConstraints.values()));
+		childContexts = Sets.newHashSet();
+		for (Map.Entry<IConstraint, List<EObject>> e : Lists.newArrayList(containerConstraints.entrySet()))
+			if (intersect(filteredContexts, e.getValue()))
+				childContexts.addAll(e.getKey().getFeatures()[refID].getCalledContexts());
+		result.retainAll(childContexts);
+		return result;
+	}
+
+	protected boolean intersect(Iterable<EObject> it1, Iterable<EObject> it2) {
+		for (EObject i1 : it1)
+			for (EObject i2 : it2)
+				if (i1 == i2)
+					return true;
+		return false;
 	}
 
 	public Iterable<EObject> findContextsByContentsAndContainer(EObject semanitcObject,
 			Iterable<EObject> contextCandidates) {
+		initConstraints();
+		contextCandidates = findContextsByContainer(semanitcObject, contextCandidates);
+		if (Iterables.size(contextCandidates) < 2)
+			return contextCandidates;
 		return findContextsByContents(semanitcObject, contextCandidates);
 	}
 
