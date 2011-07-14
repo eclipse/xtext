@@ -159,13 +159,13 @@ public class ContextFinder implements IContextFinder {
 		return false;
 	}
 
-	public Iterable<EObject> findContextsByContentsAndContainer(EObject semanitcObject,
+	public Iterable<EObject> findContextsByContentsAndContainer(EObject semanticObject,
 			Iterable<EObject> contextCandidates) {
 		initConstraints();
-		contextCandidates = findContextsByContainer(semanitcObject, contextCandidates);
+		contextCandidates = findContextsByContainer(semanticObject, contextCandidates);
 		if (Iterables.size(contextCandidates) < 2)
 			return contextCandidates;
-		return findContextsByContents(semanitcObject, contextCandidates);
+		return findContextsByContents(semanticObject, contextCandidates);
 	}
 
 	protected Iterable<EObject> findContextsByReference(EObject semanicObj, EReference ref,
