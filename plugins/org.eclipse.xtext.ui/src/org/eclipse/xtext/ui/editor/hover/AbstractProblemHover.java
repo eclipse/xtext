@@ -23,6 +23,8 @@ import org.eclipse.jface.text.source.ILineDiffInfo;
 
 import com.google.common.collect.Lists;
 
+import org.eclipse.xtext.ui.editor.*;
+
 /**
  * Base class for all hovers showing annotations and problems. 
  * 
@@ -68,7 +70,7 @@ public abstract class AbstractProblemHover extends AbstractHover {
 		List<Annotation> result = Lists.newArrayList();
 		while (iterator.hasNext()) {
 			final Annotation annotation = (Annotation) iterator.next();
-			if (!annotation.isMarkedDeleted()) {
+			if (isHandled(annotation)) {
 				Position position = getAnnotationModel().getPosition(annotation);
 				if (position != null) {
 					final int start = position.getOffset();
@@ -97,4 +99,15 @@ public abstract class AbstractProblemHover extends AbstractHover {
 	protected boolean isLineDiffInfo(Annotation annotation) {
 		return annotation instanceof ILineDiffInfo;
 	}
+
+	/**
+	 * todo: should be protected instead of private
+	 */
+	private boolean isHandled(Annotation annotation) {
+		return null != annotation
+				&& !annotation.isMarkedDeleted()
+				&& (XtextEditor.ERROR_ANNOTATION_TYPE.equals(annotation.getType()) || XtextEditor.WARNING_ANNOTATION_TYPE
+						.equals(annotation.getType()));
+	}
+
 }
