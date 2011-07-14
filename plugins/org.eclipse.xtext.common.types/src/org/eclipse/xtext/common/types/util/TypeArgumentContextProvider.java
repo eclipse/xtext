@@ -37,6 +37,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 
@@ -67,6 +68,67 @@ public class TypeArgumentContextProvider {
 	@Inject
 	private SuperTypeCollector superTypeCollector;
 	
+	public static class ResolveInfo {
+		public JvmTypeReference reference;
+		protected boolean exactMatch;
+		protected boolean preferSubtypes;
+		protected boolean superTypeAllowed;
+		
+		public ResolveInfo(JvmTypeReference reference) {
+			this.reference = reference;
+		}
+
+		protected ResolveInfo copyIfDifferent(JvmTypeReference reference) {
+			if (reference == this.reference)
+				return this;
+			ResolveInfo result = new ResolveInfo(reference);
+			result.exactMatch = exactMatch;
+			result.preferSubtypes = preferSubtypes;
+			result.superTypeAllowed = superTypeAllowed;
+			return result;
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + (exactMatch ? 1231 : 1237);
+			result = prime * result + (preferSubtypes ? 1231 : 1237);
+			result = prime * result + ((reference == null) ? 0 : reference.hashCode());
+			result = prime * result + (superTypeAllowed ? 1231 : 1237);
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			ResolveInfo other = (ResolveInfo) obj;
+			if (exactMatch != other.exactMatch)
+				return false;
+			if (preferSubtypes != other.preferSubtypes)
+				return false;
+			if (reference == null) {
+				if (other.reference != null)
+					return false;
+			} else if (!reference.equals(other.reference))
+				return false;
+			if (superTypeAllowed != other.superTypeAllowed)
+				return false;
+			return true;
+		}
+		
+		@Override
+		public String toString() {
+			return reference.toString();
+		}
+		
+	}
+	
 	public void setTypeProviderFactory(IJvmTypeProvider.Factory typeProviderFactory) {
 		this.typeProviderFactory = typeProviderFactory;
 	}
@@ -80,36 +142,38 @@ public class TypeArgumentContextProvider {
 	}
 	 
 	public final TypeArgumentContext getNullContext() {
-		return get(Collections.<JvmTypeParameter,JvmTypeReference>emptyMap());
+		return get(Collections.<JvmTypeParameter,ResolveInfo>emptyMap());
 	}
 	
-	public TypeArgumentContext get(Map<JvmTypeParameter,JvmTypeReference> context) {
-		final Map<JvmTypeParameter, JvmTypeReference> resolved = resolveTypeParametersReferencedInTypeParameters(context, false);
+	public TypeArgumentContext get(Map<JvmTypeParameter, ResolveInfo> context) {
+		final Map<JvmTypeParameter, ResolveInfo> resolved = resolveTypeParametersReferencedInTypeParameters(context, false);
 		return new TypeArgumentContext(resolved, typeProviderFactory, typeReferences);
 	}
 	
 	public TypeArgumentContext getReceiverContext(JvmTypeReference receiver) {
-		Map<JvmTypeParameter, JvmTypeReference> map = resolveReceiver(receiver);
+		Map<JvmTypeParameter, ResolveInfo> map = resolveReceiver(receiver);
 		return get(map);
 	}
 	
 	public TypeArgumentContext getReceiverContext(JvmTypeReference receiverType, JvmTypeReference featureType, JvmTypeReference expectedType) {
-		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
+		Multimap<JvmTypeParameter, ResolveInfo> map = LinkedHashMultimap.create();
 		if (receiverType!=null) {
 			map.putAll(Multimaps.forMap(resolveReceiver(receiverType)));
 		}
 		map.putAll(Multimaps.forMap(resolveInferredTypeArgContext(featureType, expectedType, false)));
-		Map<JvmTypeParameter, JvmTypeReference> result = findBestMatches(map);
+		Map<JvmTypeParameter, ResolveInfo> result = internalFindBestMatches(map);
 		return get(result);
 	}
 	
-	protected Map<JvmTypeParameter,JvmTypeReference> resolveInferredTypeArgContext(JvmTypeReference featureType, JvmTypeReference expectation, 
+	protected Map<JvmTypeParameter,ResolveInfo> resolveInferredTypeArgContext(JvmTypeReference featureType, JvmTypeReference expectation, 
 			boolean ignoreOperationTypeParameters) {
-		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
+		Multimap<JvmTypeParameter, ResolveInfo> map = LinkedHashMultimap.create();
 		if (expectation != null) {
-			resolve(featureType, expectation, map, ignoreOperationTypeParameters);
+			ResolveInfo info = new ResolveInfo(expectation);
+			info.preferSubtypes = true;
+			resolve(featureType, info, map, ignoreOperationTypeParameters);
 		}
-		return findBestMatches(map);
+		return internalFindBestMatches(map);
 	}
 	
 	/**
@@ -122,107 +186,109 @@ public class TypeArgumentContextProvider {
 	 */
 	public TypeArgumentContext getExplicitMethodInvocationContext(JvmTypeParameterDeclarator parameterDeclarator, JvmTypeReference receiverType,
 			List<JvmTypeReference> typeArguments) {
-		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
+		Multimap<JvmTypeParameter, ResolveInfo> map = LinkedHashMultimap.create();
 		if (receiverType!=null) {
 			map.putAll(Multimaps.forMap(resolveReceiver(receiverType)));
 		}
-		Map<JvmTypeParameter, JvmTypeReference> explicitArguments = Maps.newHashMap();
+		Map<JvmTypeParameter, ResolveInfo> explicitArguments = Maps.newHashMap();
 		List<JvmTypeParameter> typeParameters = parameterDeclarator.getTypeParameters();
 		int max = Math.min(typeParameters.size(), typeArguments.size());
 		for(int i = 0; i < max; i++) {
-			explicitArguments.put(typeParameters.get(i), typeArguments.get(i));
+			ResolveInfo info = new ResolveInfo(typeArguments.get(i));
+			info.exactMatch = true;
+			explicitArguments.put(typeParameters.get(i), info);
 		}
 		map.putAll(Multimaps.forMap(resolveTypeParametersReferencedInTypeParameters(explicitArguments, false)));
-		Map<JvmTypeParameter, JvmTypeReference> result = findBestMatches(map);
+		Map<JvmTypeParameter, ResolveInfo> result = internalFindBestMatches(map);
 		return get(result);
 	}
 	
 	public TypeArgumentContext injectReceiverContext(TypeArgumentContext context, JvmTypeReference receiverType) {
 		if (receiverType == null)
 			return context;
-		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
+		Multimap<JvmTypeParameter, ResolveInfo> map = LinkedHashMultimap.create();
 		map.putAll(Multimaps.forMap(context.getContextMap()));
 		map.putAll(Multimaps.forMap(resolveReceiver(receiverType)));
-		Map<JvmTypeParameter, JvmTypeReference> result = findBestMatches(map);
+		Map<JvmTypeParameter, ResolveInfo> result = internalFindBestMatches(map);
 		return get(result);
 	}
 	
 	public TypeArgumentContext injectArgumentTypeContext(TypeArgumentContext context, JvmOperation operation, boolean ignoreEmptyVarArgs, JvmTypeReference ... actualArgumentTypes) {
 		if (actualArgumentTypes.length == 0 && (!operation.isVarArgs() || ignoreEmptyVarArgs))
 			return context;
-		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
+		Multimap<JvmTypeParameter, ResolveInfo> map = LinkedHashMultimap.create();
 		map.putAll(Multimaps.forMap(context.getContextMap()));
 		map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(operation, operation.getReturnType(), null, ignoreEmptyVarArgs, actualArgumentTypes)));
-		Map<JvmTypeParameter, JvmTypeReference> result = findBestMatches(map);
+		Map<JvmTypeParameter, ResolveInfo> result = internalFindBestMatches(map);
 		return get(result);
 	}
 	
 	public TypeArgumentContext injectArgumentTypeContext(TypeArgumentContext context, JvmConstructor operation, JvmTypeReference createdResult, boolean ignoreEmptyVarArgs, JvmTypeReference ... actualArgumentTypes) {
 		if (actualArgumentTypes.length == 0 && (!operation.isVarArgs() || ignoreEmptyVarArgs))
 			return context;
-		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
+		Multimap<JvmTypeParameter, ResolveInfo> map = LinkedHashMultimap.create();
 		map.putAll(Multimaps.forMap(context.getContextMap()));
 		map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(operation, createdResult, null, ignoreEmptyVarArgs, actualArgumentTypes)));
-		Map<JvmTypeParameter, JvmTypeReference> result = findBestMatches(map);
+		Map<JvmTypeParameter, ResolveInfo> result = internalFindBestMatches(map);
 		return get(result);
 	}
 	
 	public TypeArgumentContext injectExpectedTypeContext(TypeArgumentContext context, JvmOperation operation, JvmTypeReference expectedType) {
 		if (expectedType == null)
 			return context;
-		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
+		Multimap<JvmTypeParameter, ResolveInfo> map = LinkedHashMultimap.create();
 		map.putAll(Multimaps.forMap(context.getContextMap()));
 		map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(operation, operation.getReturnType(), expectedType, (JvmTypeReference[]) null)));
-		Map<JvmTypeParameter, JvmTypeReference> result = findBestMatches(map);
+		Map<JvmTypeParameter, ResolveInfo> result = internalFindBestMatches(map);
 		return get(result);
 	}
 	
 	public TypeArgumentContext injectExpectedTypeContext(TypeArgumentContext context, JvmConstructor constructor, JvmTypeReference createdResult, JvmTypeReference expectedType) {
 		if (expectedType == null)
 			return context;
-		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
+		Multimap<JvmTypeParameter, ResolveInfo> map = LinkedHashMultimap.create();
 		map.putAll(Multimaps.forMap(context.getContextMap()));
 		map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(constructor, createdResult, expectedType, (JvmTypeReference[]) null)));
-		Map<JvmTypeParameter, JvmTypeReference> result = findBestMatches(map);
+		Map<JvmTypeParameter, ResolveInfo> result = internalFindBestMatches(map);
 		return get(result);
 	}
 	
 	public TypeArgumentContext getInferredMethodInvocationContext(JvmOperation op, JvmTypeReference receiverType, JvmTypeReference expectedReturnType, JvmTypeReference ... actualArgumentTypes) {
-		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
+		Multimap<JvmTypeParameter, ResolveInfo> map = LinkedHashMultimap.create();
 		if (receiverType!=null) {
 			map.putAll(Multimaps.forMap(resolveReceiver(receiverType)));
 		}
 		map.putAll(Multimaps.forMap(resolveInferredMethodTypeArgContext(op, op.getReturnType(), expectedReturnType, actualArgumentTypes)));
-		Map<JvmTypeParameter, JvmTypeReference> result = findBestMatches(map);
+		Map<JvmTypeParameter, ResolveInfo> result = internalFindBestMatches(map);
 		return get(result);
 	}
 	
-	protected Map<JvmTypeParameter, JvmTypeReference> resolveTypeParametersReferencedInTypeParameters(Map<JvmTypeParameter, JvmTypeReference> context, boolean ignoreOperationArguments) {
-		Multimap<JvmTypeParameter, JvmTypeReference> result = LinkedHashMultimap.create(Multimaps.forMap(context));
-		for (Entry<JvmTypeParameter, JvmTypeReference> entry : context.entrySet()) {
-			EList<JvmTypeConstraint> constraints = entry.getKey().getConstraints();
+	protected Map<JvmTypeParameter, ResolveInfo> resolveTypeParametersReferencedInTypeParameters(Map<JvmTypeParameter, ResolveInfo> context, boolean ignoreOperationArguments) {
+		Multimap<JvmTypeParameter, ResolveInfo> result = LinkedHashMultimap.create(Multimaps.forMap(context));
+		for (Entry<JvmTypeParameter, ResolveInfo> entry : context.entrySet()) {
+			List<JvmTypeConstraint> constraints = entry.getKey().getConstraints();
 			if (!constraints.isEmpty()) {
-				resolve(entry.getKey(),entry.getValue(),result, ignoreOperationArguments);
+				resolve(entry.getKey(), entry.getValue(), result, ignoreOperationArguments);
 			}
 		}
-		return findBestMatches(result);
+		return internalFindBestMatches(result);
 	}
 	
-	public Map<JvmTypeParameter,JvmTypeReference> resolveReceiver(JvmTypeReference contextRef) {
+	protected Map<JvmTypeParameter, ResolveInfo> resolveReceiver(JvmTypeReference contextRef) {
 		if (contextRef==null || contextRef.getType() instanceof JvmPrimitiveType) {
 			return emptyMap();
 		}
-		Multimap<JvmTypeParameter, JvmTypeReference> context = LinkedHashMultimap.create();
+		Multimap<JvmTypeParameter, ResolveInfo> context = LinkedHashMultimap.create();
 		internalComputeContext(contextRef, context, Sets.<JvmType>newHashSet(contextRef.getType()));
-		return findBestMatches(context);
+		return internalFindBestMatches(context);
 	}
 	
-	public Map<JvmTypeParameter,JvmTypeReference> resolveInferredMethodTypeArgContext(JvmFeature feature, JvmTypeReference returnType, JvmTypeReference expectation, JvmTypeReference... argumentTypes) {
+	public Map<JvmTypeParameter, ResolveInfo> resolveInferredMethodTypeArgContext(JvmFeature feature, JvmTypeReference returnType, JvmTypeReference expectation, JvmTypeReference... argumentTypes) {
 		return resolveInferredMethodTypeArgContext(feature, returnType, expectation, false, argumentTypes);
 	}
 	
-	public Map<JvmTypeParameter,JvmTypeReference> resolveInferredMethodTypeArgContext(JvmFeature feature, JvmTypeReference returnType, JvmTypeReference expectation, boolean ignoreEmptyVarArgs, JvmTypeReference... argumentTypes) {
-		Multimap<JvmTypeParameter, JvmTypeReference> map = LinkedHashMultimap.create();
+	public Map<JvmTypeParameter, ResolveInfo> resolveInferredMethodTypeArgContext(JvmFeature feature, JvmTypeReference returnType, JvmTypeReference expectation, boolean ignoreEmptyVarArgs, JvmTypeReference... argumentTypes) {
+		Multimap<JvmTypeParameter, ResolveInfo> map = LinkedHashMultimap.create();
 		if (feature instanceof JvmExecutable) {
 			JvmExecutable op = (JvmExecutable) feature;
 			if (argumentTypes != null) {
@@ -235,7 +301,9 @@ public class TypeArgumentContextProvider {
 					JvmTypeReference actualArgumentType = argumentTypes[i];
 					if (actualArgumentType != null) {
 						final JvmTypeReference declaredParameterType = op.getParameters().get(i).getParameterType();
-						resolve(declaredParameterType, actualArgumentType, map, false);
+						ResolveInfo info = new ResolveInfo(actualArgumentType);
+						info.superTypeAllowed = true;
+						resolve(declaredParameterType, info, map, false);
 					}
 				}
 				if (op.isVarArgs()) {
@@ -257,19 +325,26 @@ public class TypeArgumentContextProvider {
 							}
 						}
 						JvmTypeReference commonVarArgType = conformanceComputer.getCommonSuperType(varArgTypes);
-						resolve(componentType, commonVarArgType, map, false);
+						ResolveInfo info = new ResolveInfo(commonVarArgType);
+						info.superTypeAllowed = true;
+						resolve(componentType, info, map, false);
 					} else if (!ignoreEmptyVarArgs) {
 						JvmTypeReference information = computeVarArgTypeInformation(feature, componentType.getType());
-						resolve(componentType, information, map, false);
+						ResolveInfo info = new ResolveInfo(information);
+						info.superTypeAllowed = true;
+						info.preferSubtypes = true;
+						resolve(componentType, info, map, false);
 					}
 				}
 			}
 			//try infer from the context type
 			if (expectation != null && returnType != null) {
-				resolve(returnType, expectation, map, true);
+				ResolveInfo info = new ResolveInfo(expectation);
+				info.preferSubtypes = true;
+				resolve(returnType, info, map, true);
 			}
 		}
-		return findBestMatches(map);
+		return internalFindBestMatches(map);
 	}
 
 	protected JvmTypeReference computeVarArgTypeInformation(JvmFeature feature, JvmType type) {
@@ -300,44 +375,60 @@ public class TypeArgumentContextProvider {
 		}
 	}
 
-	protected Map<JvmTypeParameter, JvmTypeReference> findBestMatches(Multimap<JvmTypeParameter, JvmTypeReference> map) {
-		Map<JvmTypeParameter, JvmTypeReference> result = newHashMap();
+	protected Map<JvmTypeParameter, ResolveInfo> internalFindBestMatches(Multimap<JvmTypeParameter, ResolveInfo> map) {
+		Map<JvmTypeParameter, ResolveInfo> result = newHashMap();
 		for (JvmTypeParameter param : map.keySet()) {
-			Collection<JvmTypeReference> references = map.get(param);
-			for (JvmTypeReference jvmTypeReference : references) {
+			Collection<ResolveInfo> infos = map.get(param);
+			for (ResolveInfo info : infos) {
 				if (result.containsKey(param)) {
-					JvmTypeReference currentBestMatch = result.get(param);
-					if (isBetterMatch(currentBestMatch, jvmTypeReference)) {
-						result.put(param, jvmTypeReference);
-					}
+					ResolveInfo currentBestMatch = result.get(param);
+					ResolveInfo better = getBetterMatch(currentBestMatch, info);
+					result.put(param, better);
 				} else {
-					result.put(param, jvmTypeReference);
+					result.put(param, info);
 				}
 			}
 		}
 		return result;
 	}
 
-	protected boolean isBetterMatch(JvmTypeReference current, JvmTypeReference isBetter) {
-		if (!isResolved(current)) {
-			return isResolved(isBetter);
+	protected ResolveInfo getBetterMatch(ResolveInfo current, ResolveInfo isBetter) {
+		if (!isResolved(current.reference)) {
+			if (isResolved(isBetter.reference))
+				return isBetter;
+			return current;
 		}
-		if (current instanceof JvmAnyTypeReference) {
-			if (isBetter instanceof JvmAnyTypeReference)
-				return false;
-			return true;
+		if (current.reference instanceof JvmAnyTypeReference) {
+			if (isBetter.reference instanceof JvmAnyTypeReference)
+				return current;
+			return isBetter;
 		}
-		if (isBetter instanceof JvmAnyTypeReference)
-			return false;
-		if (isResolved(isBetter) && !EcoreUtil.equals(current, isBetter)) {
-			return this.conformanceComputer.isConformant(current, isBetter);
+		if (isBetter.reference instanceof JvmAnyTypeReference)
+			return current;
+		if (isResolved(isBetter.reference) && !EcoreUtil.equals(current.reference, isBetter.reference)) {
+			if (current.exactMatch && !(current.reference instanceof JvmWildcardTypeReference))
+				return current;
+			if (isBetter.exactMatch && !(isBetter.reference instanceof JvmWildcardTypeReference))
+				return isBetter;
+			if (current.preferSubtypes && this.conformanceComputer.isConformant(current.reference, isBetter.reference))
+				return isBetter;
+			if (isBetter.preferSubtypes && this.conformanceComputer.isConformant(isBetter.reference, current.reference) && !(current.reference instanceof JvmWildcardTypeReference))
+				return current;
+			if (current.superTypeAllowed && isBetter.superTypeAllowed)
+				return current.copyIfDifferent(conformanceComputer.getCommonSuperType(Lists.newArrayList(current.reference, isBetter.reference)));
+//			return this.conformanceComputer.isConformant(current.reference, isBetter.reference);
+			if (current.superTypeAllowed && this.conformanceComputer.isConformant(isBetter.reference, current.reference))
+				return isBetter;
+//			if (isBetter.superTypeAllowed && this.conformanceComputer.isConformant(current.reference, isBetter.reference))
+//				return current;
+//			return current;
 		}
-		return false;
+		return current;
 	}
 	
 	//TODO improve
 	protected boolean isResolved(JvmTypeReference type) {
-		if (type.getType() instanceof JvmTypeParameter) {
+		if (type.getType() instanceof JvmTypeParameter || type.getType() instanceof JvmVoid) {
 			return false;
 		}
 		if (type instanceof JvmWildcardTypeReference) {
@@ -353,7 +444,7 @@ public class TypeArgumentContextProvider {
 		return true;
 	}
 
-	protected void internalComputeContext(JvmTypeReference contextRef, Multimap<JvmTypeParameter, JvmTypeReference> context, Set<JvmType> computing) {
+	protected void internalComputeContext(JvmTypeReference contextRef, Multimap<JvmTypeParameter, ResolveInfo> context, Set<JvmType> computing) {
 		if (contextRef instanceof JvmParameterizedTypeReference) {
 			JvmParameterizedTypeReference typeRef = (JvmParameterizedTypeReference) contextRef;
 			if (typeRef.getType() instanceof JvmTypeParameterDeclarator) {
@@ -368,7 +459,12 @@ public class TypeArgumentContextProvider {
 							if (context.containsKey(argument.getType())) {
 								context.putAll(param, context.get((JvmTypeParameter) argument.getType()));
 							} else {
-								context.put(param, argument);
+								ResolveInfo info = new ResolveInfo(argument);
+								info.exactMatch = !(argument instanceof JvmWildcardTypeReference);
+								if (!info.exactMatch) {
+									info.preferSubtypes = true;
+								}
+								context.put(param, info);
 							}
 						}
 					}
@@ -388,19 +484,22 @@ public class TypeArgumentContextProvider {
 		}
 	}
 	
-	protected void resolve(JvmTypeReference declaration, JvmTypeReference information, Multimap<JvmTypeParameter, JvmTypeReference> existing, boolean returnTypeContext) {
+	protected void resolve(JvmTypeReference declaration, ResolveInfo information, Multimap<JvmTypeParameter, ResolveInfo> existing, boolean returnTypeContext) {
 		JvmTypeParameter typeParameter = getReferenceTypeParameter(declaration);
-		information = primitives.asWrapperTypeIfPrimitive(information);
+		if (information != null)
+			information = information.copyIfDifferent(primitives.asWrapperTypeIfPrimitive(information.reference));
+		else
+			information = new ResolveInfo(null);
 		if (typeParameter != null) {
-			if (isValidParameter(typeParameter, information, returnTypeContext)) {
-				if (information != null && !containsEntry(existing, typeParameter, information)) {
+			if (isValidParameter(typeParameter, information.reference, returnTypeContext)) {
+				if (!containsEntry(existing, typeParameter, information)) {
 					existing.put(typeParameter, information);
-					Collection<JvmTypeReference> resolveData = existing.get(typeParameter);
+					Collection<ResolveInfo> resolveData = existing.get(typeParameter);
 					List<JvmTypeParameter> transitiveParameters = Lists.newArrayListWithExpectedSize(2);
-					for(JvmTypeReference resolveDataItem: resolveData) {
-						if (resolveDataItem.getType() instanceof JvmTypeParameter) {
-							if (resolveDataItem != information)
-								transitiveParameters.add((JvmTypeParameter) resolveDataItem.getType());
+					for(ResolveInfo resolveDataItem: resolveData) {
+						if (resolveDataItem.reference.getType() instanceof JvmTypeParameter) {
+							if (resolveDataItem.reference != information.reference)
+								transitiveParameters.add((JvmTypeParameter) resolveDataItem.reference.getType());
 						}
 					}
 					for(JvmTypeParameter transitiveParameter: transitiveParameters) {
@@ -415,7 +514,7 @@ public class TypeArgumentContextProvider {
 		if (declaration instanceof JvmParameterizedTypeReference) {
 			JvmParameterizedTypeReference parameterizedDeclaration = (JvmParameterizedTypeReference) declaration;
 			EList<JvmTypeReference> declArgs = parameterizedDeclaration.getArguments();
-			if (information instanceof JvmParameterizedTypeReference) {
+			if (information.reference instanceof JvmParameterizedTypeReference) {
 				/*
 				 * We need to walk the inheritance hierarchy up to resolve all type parameters,
 				 * e.g. the declared type may be Comparable<? super C> and the information
@@ -424,34 +523,44 @@ public class TypeArgumentContextProvider {
 				 * C can be resolved to java.lang.String
 				 */
 				Iterable<JvmTypeReference> allTypes = Iterables.concat(
-						Collections.singleton(information), 
-						superTypeCollector.collectSuperTypes(information));
+						Collections.singleton(information.reference), 
+						superTypeCollector.collectSuperTypes(information.reference));
 				for(JvmTypeReference localInformation: allTypes) {
 					JvmParameterizedTypeReference parameterizedInformation = (JvmParameterizedTypeReference) localInformation;
 					EList<JvmTypeReference> infoArgs = parameterizedInformation.getArguments();
 					for (int i = 0; i < declArgs.size() && i < infoArgs.size(); i++) {
-						resolve(declArgs.get(i), infoArgs.get(i), existing, returnTypeContext);
+						ResolveInfo info = new ResolveInfo(infoArgs.get(i));
+						info.superTypeAllowed = infoArgs.get(i) instanceof JvmWildcardTypeReference;
+						info.preferSubtypes = information.preferSubtypes;
+						resolve(declArgs.get(i), info, existing, returnTypeContext);
 					}
 				}
-			} else if (information instanceof JvmWildcardTypeReference) {
-				JvmWildcardTypeReference wildcardInformation = (JvmWildcardTypeReference) information;
+			} else if (information.reference instanceof JvmWildcardTypeReference) {
+				JvmWildcardTypeReference wildcardInformation = (JvmWildcardTypeReference) information.reference;
 				JvmTypeReference informationUpperBound = getSingleUpperBoundOrNull(wildcardInformation);
-				resolve(parameterizedDeclaration, informationUpperBound, existing, returnTypeContext);
-			} else if (information instanceof JvmGenericArrayTypeReference) {
+				ResolveInfo info = new ResolveInfo(informationUpperBound);
+				info.exactMatch = !information.preferSubtypes;
+				info.preferSubtypes = information.preferSubtypes;
+				resolve(parameterizedDeclaration, info, existing, returnTypeContext);
+			} else if (information.reference instanceof JvmGenericArrayTypeReference) {
 				// TODO only for declaration == Iterable?
 				// or should we use synonym types for the information instead?
-				JvmGenericArrayTypeReference arrayInformation = (JvmGenericArrayTypeReference)information;
-				resolve(declArgs.get(0), arrayInformation.getComponentType(), existing, returnTypeContext);
+				JvmGenericArrayTypeReference arrayInformation = (JvmGenericArrayTypeReference)information.reference;
+				ResolveInfo info = new ResolveInfo(arrayInformation.getComponentType());
+				info.preferSubtypes = true;
+				resolve(declArgs.get(0), info, existing, returnTypeContext);
 			}
 		} else if (declaration instanceof JvmWildcardTypeReference) {
 			JvmWildcardTypeReference wildcardDeclaration = (JvmWildcardTypeReference) declaration;
 			JvmTypeReference wildcardUpperBound = getSingleUpperBoundOrNull(wildcardDeclaration);
-			if (information instanceof JvmParameterizedTypeReference) {
+			if (information.reference instanceof JvmParameterizedTypeReference) {
 				resolve(wildcardUpperBound, information, existing, returnTypeContext);
-			} else if (information instanceof JvmWildcardTypeReference) {
-				JvmWildcardTypeReference wildcardInformation = (JvmWildcardTypeReference) information;
+			} else if (information.reference instanceof JvmWildcardTypeReference) {
+				JvmWildcardTypeReference wildcardInformation = (JvmWildcardTypeReference) information.reference;
 				JvmTypeReference informationUpperBound = getSingleUpperBoundOrNull(wildcardInformation);
-				resolve(wildcardUpperBound, informationUpperBound, existing, returnTypeContext);
+				ResolveInfo info = new ResolveInfo(informationUpperBound);
+				info.preferSubtypes = true;
+				resolve(wildcardUpperBound, info, existing, returnTypeContext);
 			}
 		}
 	}
@@ -497,12 +606,12 @@ public class TypeArgumentContextProvider {
 		return true;
 	}
 
-	protected boolean containsEntry(Multimap<JvmTypeParameter, JvmTypeReference> existing,
-			JvmTypeParameter typeParameter, JvmTypeReference information) {
+	protected boolean containsEntry(Multimap<JvmTypeParameter, ResolveInfo> existing,
+			JvmTypeParameter typeParameter, ResolveInfo information) {
 		if (existing.containsKey(typeParameter)) {
-			Collection<JvmTypeReference> collection = existing.get(typeParameter);
-			for (JvmTypeReference jvmTypeReference : collection) {
-				if (EcoreUtil.equals(jvmTypeReference, information)) {
+			Collection<ResolveInfo> collection = existing.get(typeParameter);
+			for (ResolveInfo info : collection) {
+				if (EcoreUtil.equals(info.reference, information.reference)) {
 					return true;
 				}
 			}
@@ -527,10 +636,10 @@ public class TypeArgumentContextProvider {
 		return null;
 	}
 	
-	protected void resolve(JvmTypeParameter key, JvmTypeReference value, Multimap<JvmTypeParameter, JvmTypeReference> existing, boolean ignoreOperationArguments) {
+	protected void resolve(JvmTypeParameter key, ResolveInfo info, Multimap<JvmTypeParameter, ResolveInfo> existing, boolean ignoreOperationArguments) {
 		for (JvmTypeConstraint constrain : key.getConstraints()) {
 			JvmTypeReference reference = constrain.getTypeReference();
-			resolve(reference,value,existing, ignoreOperationArguments);
+			resolve(reference, info, existing, ignoreOperationArguments);
 		}
 	}
 
