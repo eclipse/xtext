@@ -32,6 +32,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.tests.ClasspathBasedModule;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider.ResolveInfo;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -87,11 +88,11 @@ public class TypeArgumentContextTest extends TestCase {
 		});
 		JvmTypeReference expected = typeRefs.typeReference("java.lang.Iterable").wildCardExtends("java.lang.String").create();
 		
-		Map<JvmTypeParameter, JvmTypeReference> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, operation.getReturnType(), expected);
+		Map<JvmTypeParameter, ResolveInfo> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, operation.getReturnType(), expected);
 		assertEquals(1,map.size());
 		// TODO discuss changed behavior due to recent modifications in typeArgumentContextProvider
 //		assertEquals("? extends java.lang.String",map.values().iterator().next().getIdentifier());
-		assertEquals("java.lang.String",map.values().iterator().next().getIdentifier());
+		assertEquals("java.lang.String",map.values().iterator().next().reference.getIdentifier());
 	}
 	
 	/**
@@ -106,9 +107,9 @@ public class TypeArgumentContextTest extends TestCase {
 		});
 		JvmTypeReference actualArg = typeRefs.typeReference("java.lang.String").create();
 		
-		Map<JvmTypeParameter, JvmTypeReference> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, operation.getReturnType(), null, actualArg);
+		Map<JvmTypeParameter, ResolveInfo> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, operation.getReturnType(), null, actualArg);
 		assertEquals(1,map.size());
-		assertEquals("java.lang.String",map.values().iterator().next().getIdentifier());
+		assertEquals("java.lang.String",map.values().iterator().next().reference.getIdentifier());
 	}
 	
 	/**
@@ -125,13 +126,13 @@ public class TypeArgumentContextTest extends TestCase {
 		JvmTypeReference actualArg = typeRefs.typeReference("java.util.List").wildCardExtends("java.lang.String").create();
 		JvmTypeReference expectation = typeRefs.typeReference("java.lang.Object").create();
 		
-		Map<JvmTypeParameter, JvmTypeReference> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, operation.getReturnType(), expectation, actualArg);
+		Map<JvmTypeParameter, ResolveInfo> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, operation.getReturnType(), expectation, actualArg);
 		assertEquals(map.toString(), 3, map.size());
-		for(Map.Entry<JvmTypeParameter, JvmTypeReference> entry: map.entrySet()) {
+		for(Map.Entry<JvmTypeParameter, ResolveInfo> entry: map.entrySet()) {
 			if (entry.getKey().getName().equals("E"))
-				assertEquals("java.lang.Object", entry.getValue().getIdentifier());
+				assertEquals("java.lang.Object", entry.getValue().reference.getIdentifier());
 			else
-				assertEquals("java.lang.String", entry.getValue().getIdentifier());
+				assertEquals("java.lang.String", entry.getValue().reference.getIdentifier());
 		}
 	}
 	
@@ -153,9 +154,9 @@ public class TypeArgumentContextTest extends TestCase {
 		actualArg.setType(arrayType);
 		JvmTypeReference expectation = typeRefs.typeReference("java.lang.String").create();
 		
-		Map<JvmTypeParameter, JvmTypeReference> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, null, expectation, actualArg);
+		Map<JvmTypeParameter, ResolveInfo> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, null, expectation, actualArg);
 		assertEquals(1,map.size());
-		assertEquals("java.lang.String", map.values().iterator().next().getIdentifier());
+		assertEquals("java.lang.String", map.values().iterator().next().reference.getIdentifier());
 	}
 	
 	public void testSimple() throws Exception {

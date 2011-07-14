@@ -782,6 +782,13 @@ public abstract class AbstractTypeConformanceComputerTest extends TestCase {
 				any());
 	}
 	
+	public void testCommonSuperType_26() throws Exception {
+		assertCommonSuperType(
+				"java.util.Collection<? extends java.lang.AbstractStringBuilder & java.io.Serializable>",
+				ref(List.class, ref(StringBuffer.class)),
+				ref(Set.class, ref(StringBuilder.class)));
+	}
+	
 	public void testBug343100_01() throws Exception {
 		assertCommonSuperType(
 				"java.lang.Class<? extends java.lang.Object>",
