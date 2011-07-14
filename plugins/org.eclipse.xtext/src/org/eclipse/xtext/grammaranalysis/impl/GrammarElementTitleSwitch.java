@@ -96,7 +96,7 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 		if (!showQualified)
 			return result;
 		AbstractRule rule = GrammarUtil.containingRule(ele);
-		GrammarElementTitleSwitch others = clone();
+		GrammarElementTitleSwitch others = copy();
 		others.showQualified = false;
 		List<AbstractElement> elementsWithSameName = Lists.newArrayList();
 		for (AbstractElement candidate : EcoreUtil2.getAllContentsOfType(rule, ele.getClass()))
@@ -199,8 +199,7 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 		return "\\&" + card(object);
 	}
 
-	@Override
-	protected GrammarElementTitleSwitch clone() {
+	protected GrammarElementTitleSwitch copy() {
 		GrammarElementTitleSwitch result = new GrammarElementTitleSwitch();
 		result.showActionAsRuleCall = showActionAsRuleCall;
 		result.showAssignment = showAssignment;
