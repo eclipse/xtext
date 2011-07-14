@@ -1411,6 +1411,13 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 		assertEvaluatesTo(Double.valueOf(0.), "(null as Double)?.doubleValue()");
 	}
 	
+	@Test public void test351809() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, "{\n" +
+			"  val l = new java.util.ArrayList<String>()\n" + 
+			"  new java.util.ArrayList<CharSequence>() += l\n" +
+			"}");
+	}
+	
 	protected void assertEvaluatesTo(Object object, String string) throws Exception {
 		assertEquals(object, invokeXbaseExpression(string));
 	}

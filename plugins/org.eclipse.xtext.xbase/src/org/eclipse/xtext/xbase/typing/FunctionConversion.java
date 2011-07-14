@@ -36,6 +36,7 @@ import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider.ResolveInfo;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Functions;
 
@@ -248,7 +249,7 @@ public class FunctionConversion {
 		TypeArgumentContext context = contextProvider.getReceiverContext(actualType);
 		JvmOperation from = findSingleMethod(actualType);
 		JvmOperation to = findSingleMethod(expectedType);
-		Map<JvmTypeParameter, JvmTypeReference> resolutions = newHashMap();
+		Map<JvmTypeParameter, ResolveInfo> resolutions = newHashMap();
 		EList<JvmTypeParameter> list = expectedTypeDeclaration.getTypeParameters();
 		JvmParameterizedTypeReference resultType = factory.createJvmParameterizedTypeReference();
 		resultType.setType(expectedTypeDeclaration);
@@ -258,11 +259,11 @@ public class FunctionConversion {
 			reference.setType(jvmTypeParameter);
 			resultType.getArguments().add(reference);
 			// fill with default values (wildcards)
-			resolutions.put(jvmTypeParameter, factory.createJvmWildcardTypeReference());
+			resolutions.put(jvmTypeParameter, new ResolveInfo(factory.createJvmWildcardTypeReference()));
 			JvmTypeReference result = findMatch(jvmTypeParameter, to.getReturnType(),
 					context.resolve(from.getReturnType()));
 			if (result != null)
-				resolutions.put(jvmTypeParameter, result);
+				resolutions.put(jvmTypeParameter, new ResolveInfo(result));
 			final EList<JvmFormalParameter> fromParams = from.getParameters();
 			final EList<JvmFormalParameter> toParams = to.getParameters();
 			for (int i = 0; i < fromParams.size(); i++) {
@@ -270,7 +271,7 @@ public class FunctionConversion {
 				final JvmTypeReference fromParamType = fromParams.get(i).getParameterType();
 				result = findMatch(jvmTypeParameter, toParamType, context.resolve(fromParamType));
 				if (result != null)
-					resolutions.put(jvmTypeParameter, result);
+					resolutions.put(jvmTypeParameter, new ResolveInfo(result));
 			}
 		}
 		TypeArgumentContext typeArgContext = contextProvider.get(resolutions);

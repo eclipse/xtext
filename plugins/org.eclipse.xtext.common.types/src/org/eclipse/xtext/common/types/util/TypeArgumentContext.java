@@ -29,6 +29,7 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider.Factory;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider.ResolveInfo;
 
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
@@ -42,11 +43,11 @@ public class TypeArgumentContext {
 	
 	private static final Logger logger = Logger.getLogger(TypeArgumentContext.class);
 
-	private Map<JvmTypeParameter, JvmTypeReference> context;
+	private Map<JvmTypeParameter, ResolveInfo> context;
 	private Factory typeProviderFactory;
 	private TypeReferences typeReferences;
 	
-	public TypeArgumentContext(Map<JvmTypeParameter, JvmTypeReference> context, IJvmTypeProvider.Factory typeProviderFactory, TypeReferences typeReferences) {
+	public TypeArgumentContext(Map<JvmTypeParameter, ResolveInfo> context, IJvmTypeProvider.Factory typeProviderFactory, TypeReferences typeReferences) {
 		if (context==null)
 			throw new NullPointerException("context");
 		if (typeProviderFactory==null)
@@ -59,8 +60,10 @@ public class TypeArgumentContext {
 	}
 
 	public JvmTypeReference getBoundArgument(JvmTypeParameter param) {
-		JvmTypeReference jvmTypeArgument = context.get(param);
-		return jvmTypeArgument;
+		ResolveInfo info = context.get(param);
+		if (info == null)
+			return null;
+		return info.reference;
 	}
 	
 	/**
@@ -248,7 +251,7 @@ public class TypeArgumentContext {
 		return context.toString();
 	}
 	
-	protected Map<JvmTypeParameter, JvmTypeReference> getContextMap() {
+	protected Map<JvmTypeParameter, ResolveInfo> getContextMap() {
 		return context;
 	}
 
