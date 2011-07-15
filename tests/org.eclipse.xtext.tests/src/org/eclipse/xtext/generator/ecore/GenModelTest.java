@@ -13,5 +13,5 @@ import org.eclipse.xtext.generator.ecore.genmodelaccess.root.AccessTest;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class GenModelTest extends AccessTest {
-
+	// test cases are in the super class
 }
