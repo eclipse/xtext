@@ -106,10 +106,13 @@ public class GenModelAccess {
 	}
 
 	public static String getGenTypeLiteral(EClassifier classifier, ResourceSet resourceSet) {
+		// inspired by org.eclipse.emf.codegen.ecore.genmodel.impl.GenClassifierImpl.getQualifiedClassifierAccessor()
 		GenClassifier genClassifier = getGenClassifier(classifier, resourceSet);
 		String pkg = genClassifier.getGenPackage().getPackageInterfaceName();
-		String id = genClassifier.getClassifierID();
-		return pkg + ".Literals." + id;
+		if (genClassifier.getGenPackage().isLiteralsInterface())
+			return pkg + ".Literals." + genClassifier.getClassifierID();
+		else
+			return pkg + ".eINSTANCE.get" + genClassifier.getClassifierAccessorName() + "()";
 	}
 
 	public static String getGenTypeLiteral(EPackage pkg, ResourceSet resourceSet) {
@@ -117,10 +120,13 @@ public class GenModelAccess {
 	}
 
 	public static String getGenTypeLiteral(EStructuralFeature feature, ResourceSet resourceSet) {
+		// inspired by org.eclipse.emf.codegen.ecore.genmodel.impl.GenFeatureImpl.getQualifiedFeatureAccessor()
 		GenFeature genFeature = getGenFeature(feature, resourceSet);
 		String pkg = genFeature.getGenPackage().getPackageInterfaceName();
-		String id = genFeature.getGenClass().getFeatureID(genFeature);
-		return pkg + ".Literals." + id;
+		if (genFeature.getGenPackage().isLiteralsInterface())
+			return pkg + ".Literals." + genFeature.getGenClass().getFeatureID(genFeature);
+		else
+			return pkg + ".eINSTANCE.get" + genFeature.getFeatureAccessorName() + "()";
 	}
 
 }
