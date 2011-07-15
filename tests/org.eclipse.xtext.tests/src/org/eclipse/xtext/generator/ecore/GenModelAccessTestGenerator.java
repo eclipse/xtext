@@ -33,7 +33,7 @@ public class GenModelAccessTestGenerator extends AbstractWorkflowComponent2 {
 
 	@Override
 	protected void invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
-		String java = "platform:/resource/org.eclipse.xtext.tests/emf-gen/org/eclipse/xtext/generator/ecore/genmodelaccess/root/AccessTest.java";
+		String java = "platform:/resource/org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/genmodelaccess/root/AccessTest.java";
 		String ecore = "platform:/resource/org.eclipse.xtext.tests/src/org/eclipse/xtext/generator/ecore/GenModelAccessTest.ecore";
 		ResourceSet rs = new XtextResourceSet();
 		EPackage root = (EPackage) rs.getResource(URI.createURI(ecore), true).getContents().get(0);
