@@ -29,12 +29,14 @@ import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
+import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 import com.google.inject.Inject;
@@ -442,5 +444,16 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		JvmFormalParameter e1 = closure.getFormalParameters().get(0);
 		assertEquals("e1", e1.getSimpleName());
 		assertEquals("org.eclipse.xtext.RuleCall", typeProvider.getTypeForIdentifiable(e1).getIdentifier());
+	}
+	
+	public void testBug342848() throws Exception {
+		String fileAsText= 
+				"import org.eclipse.xtext.xbase.lib.Functions\n" +
+				"class Clazz { def void method(Functions$Function0<Integer> f) { f.apply } }";
+		XtendFile file = file(fileAsText, true);
+		XtendFunction function = (XtendFunction) file.getXtendClass().getMembers().get(0);
+		XtendParameter parameter = function.getParameters().get(0);
+		String identifier = parameter.getParameterType().getIdentifier();
+		assertEquals(Functions.Function0.class.getName()+ "<java.lang.Integer>", identifier);
 	}
 }
