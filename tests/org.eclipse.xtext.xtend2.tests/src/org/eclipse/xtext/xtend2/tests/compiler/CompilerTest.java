@@ -278,6 +278,21 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	}
 	
 	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=351330
+	 */
+	public void testBug_351582_01() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  String s" +
+				"  def sorted(Iterable<Z> it){\n" + 
+				"    it.sortBy(z|z.s)\n" + 
+				"  }\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=345371
 	 */
 	public void testVoidInTryCatchCompiles_00() throws Exception {
