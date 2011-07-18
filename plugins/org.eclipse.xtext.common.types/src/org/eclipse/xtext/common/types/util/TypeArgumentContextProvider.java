@@ -579,6 +579,12 @@ public class TypeArgumentContextProvider {
 				info.preferSubtypes = true;
 				resolve(wildcardUpperBound, info, existing, returnTypeContext);
 			}
+		} else if (declaration instanceof JvmGenericArrayTypeReference) {
+			JvmTypeReference componentType = ((JvmGenericArrayTypeReference) declaration).getComponentType();
+			if (information.reference instanceof JvmGenericArrayTypeReference) {
+				ResolveInfo componentInfo = information.copyIfDifferent(((JvmGenericArrayTypeReference) information.reference).getComponentType());
+				resolve(componentType, componentInfo, existing, returnTypeContext);
+			}
 		}
 	}
 	
