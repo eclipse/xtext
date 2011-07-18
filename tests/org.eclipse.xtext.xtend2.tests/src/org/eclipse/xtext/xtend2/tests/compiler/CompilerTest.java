@@ -278,7 +278,177 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	}
 	
 	/**
-	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=351330
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=350932
+	 */
+	public void testBug_350932_01() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  def bug(){\n" + 
+				"    if (true) return false\n" + 
+				"  }\n" +
+				"  def invoke() {\n" +
+				"    val boolean b = bug\n" +
+				"  }\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=350932
+	 */
+	public void testBug_350932_02() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  def bug(){\n" + 
+				"    if (true) return false false\n" + 
+				"  }\n" +
+				"  def invoke() {\n" +
+				"    val boolean b = bug\n" +
+				"  }\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=350932
+	 */
+	public void testBug_350932_03() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  def bug(){\n" + 
+				"    if (true) return false else false\n" + 
+				"  }\n" +
+				"  def invoke() {\n" +
+				"    val boolean b = bug\n" +
+				"  }\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=350932
+	 */
+	public void testBug_350932_04() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  def bug(){\n" + 
+				"    if (true) return false return false\n" + 
+				"  }\n" +
+				"  def invoke() {\n" +
+				"    val boolean b = bug\n" +
+				"  }\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=350932
+	 */
+	public void testBug_350932_05() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  def bug(){\n" + 
+				"    if (true) return false else return false\n" + 
+				"  }\n" +
+				"  def invoke() {\n" +
+				"    val boolean b = bug\n" +
+				"  }\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=350932
+	 */
+	public void testBug_350932_06() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  def bug(){\n" + 
+				"    [|if (true) return false].apply\n" + 
+				"  }\n" +
+				"  def invoke() {\n" +
+				"    val boolean b = bug\n" +
+				"  }\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=350932
+	 */
+	public void testBug_350932_07() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  def bug(){\n" + 
+				"    [|{ if (true) return false false }].apply\n" + 
+				"  }\n" +
+				"  def invoke() {\n" +
+				"    val boolean b = bug\n" +
+				"  }\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=350932
+	 */
+	public void testBug_350932_08() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  def bug(){\n" + 
+				"    [|if (true) return false else false].apply\n" + 
+				"  }\n" +
+				"  def invoke() {\n" +
+				"    val boolean b = bug\n" +
+				"  }\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=350932
+	 */
+	public void testBug_350932_09() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  def bug(){\n" + 
+				"    [|{ if (true) return false return false }].apply\n" + 
+				"  }\n" +
+				"  def invoke() {\n" +
+				"    val boolean b = bug\n" +
+				"  }\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=350932
+	 */
+	public void testBug_350932_10() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  def bug(){\n" + 
+				"    [|if (true) return false else return false].apply\n" + 
+				"  }\n" +
+				"  def invoke() {\n" +
+				"    val boolean b = bug\n" +
+				"  }\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=351582
 	 */
 	public void testBug_351582_01() throws Exception {
 		String code = 
