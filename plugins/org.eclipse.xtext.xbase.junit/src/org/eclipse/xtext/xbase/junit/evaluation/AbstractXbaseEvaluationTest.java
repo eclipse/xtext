@@ -1355,16 +1355,15 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 			"}");
 	}
 	
-	// TODO fix type parameter resolution in array types 
-//	@Test public void testBug342434_02() throws Exception {
-//		assertEvaluatesTo("baz", 
-//				"{\n" + 
-//				"    val x = newArrayList('foo','bar','baz').toArray\n" + 
-//				"    val arrayAccess = new testdata.ArrayClient2(x)\n" + 
-//				"    arrayAccess.set(1,arrayAccess.get(0))\n" + 
-//				"    return arrayAccess.get(2)\n" + 
-//		"}");
-//	}
+	@Test public void testBug342434_02() throws Exception {
+		assertEvaluatesTo("baz", 
+			"{\n" + 
+			"    val x = newArrayList('foo','bar','baz').toArray\n" + 
+			"    val arrayAccess = new testdata.ArrayClient2(x)\n" + 
+			"    arrayAccess.set(1,arrayAccess.get(0))\n" + 
+			"    return arrayAccess.get(2)\n" + 
+			"}");
+	}
 	
 	@Test public void testBug342434_03() throws Exception {
 		assertEvaluatesTo("foo", 
@@ -1381,6 +1380,16 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 			"    val testdata.GenericType1<String> x = new testdata.GenericType1()\n" + 
 			"    x.set('foo')\n" + 
 			"    x.get\n" + 
+			"}");
+	}
+	
+	@Test public void testBug342434_05() throws Exception {
+		assertEvaluatesTo("baz", 
+			"{\n" + 
+			"    val x = newArrayList('foo','bar','baz').toArray\n" + 
+			"    val arrayAccess = testdata::ArrayClient2::access(x)\n" + 
+			"    arrayAccess.set(1,arrayAccess.get(0))\n" + 
+			"    return arrayAccess.get(2)\n" + 
 			"}");
 	}
 	
