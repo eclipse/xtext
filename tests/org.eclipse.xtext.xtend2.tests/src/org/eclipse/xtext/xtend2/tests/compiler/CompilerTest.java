@@ -73,6 +73,116 @@ public class CompilerTest extends AbstractXtend2TestCase {
 	}
 	
 	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=345828
+	 */
+	public void testBug_345828_01() throws Exception {
+		String code = 
+			"package x\n" +
+			"class Z {" +
+			"  def <T extends =>Integer> baz(T t) {\n" +
+			"    val int i = t.apply\n" +
+			"    if (i == 0)\n" +
+			"      t.apply\n" + 
+			"    t.apply\n" + 
+			"  }\n" +
+			"}\n";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=345828
+	 */
+	public void testBug_345828_02() throws Exception {
+		String code = 
+				"package x\n" +
+				"import org.eclipse.xtext.xbase.lib.Functions\n" +
+				"class Z {" +
+				"  def <T extends Functions$Function0<Integer>> bar(T t) {\n" +
+				"    val int i = t.apply\n" +
+				"    if (i == 0)\n" +
+				"      t.apply\n" + 
+				"    t.apply\n" + 
+				"  }\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=345828
+	 */
+	public void testBug_345828_03() throws Exception {
+		String code = 
+				"package x\n" +
+						"class Z {" +
+						"  def <MyParam extends =>Integer> baz(java.util.List<MyParam> t) {\n" +
+						"    val int i = t.head.apply\n" +
+						"    if (i == 0)\n" +
+						"      t.head.apply\n" + 
+						"    t.head.apply\n" + 
+						"  }\n" +
+						"}\n";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=345828
+	 */
+	public void testBug_345828_04() throws Exception {
+		String code = 
+				"package x\n" +
+						"import org.eclipse.xtext.xbase.lib.Functions\n" +
+						"class Z {" +
+						"  def <MyParam extends Functions$Function0<Integer>> bar(java.util.List<MyParam> t) {\n" +
+						"    val int i = t.head.apply\n" +
+						"    if (i == 0)\n" +
+						"      t.head.apply\n" + 
+						"    t.head.apply\n" + 
+						"  }\n" +
+						"}\n";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=345828
+	 */
+	public void testBug_345828_05() throws Exception {
+		String code = 
+				"package x\n" +
+						"class Z {" +
+						"  def <MyParam extends =>Integer> baz(java.util.List<MyParam> t) {\n" +
+						"    val int i = t.get(0).apply\n" +
+						"    if (i == 0)\n" +
+						"      t.iterator.next.apply\n" + 
+						"    t.get(0).apply\n" + 
+						"  }\n" +
+						"}\n";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=345828
+	 */
+	public void testBug_345828_06() throws Exception {
+		String code = 
+				"package x\n" +
+						"class Z {" +
+						"  def <MyParam extends =>Integer> baz(java.util.List<MyParam> t) {\n" +
+						"    val int i = t.<MyParam>head.apply + 1\n" +
+						"    if (i == 0)\n" +
+						"      t.<MyParam>head.apply + 1\n" + 
+						"    t.<MyParam>head.apply + 1\n" + 
+						"  }\n" +
+						"}\n";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=351330
 	 */
 	public void testBug_351330_01() throws Exception {
