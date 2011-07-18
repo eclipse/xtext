@@ -631,7 +631,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 						JvmTypeReference resultParam = parameterTypes.get(i);
 						if (resultParam == null) {
 							JvmFormalParameter p = getParam(singleMethod, i);
-							final JvmTypeReference resolved = context.resolve(p.getParameterType());
+							final JvmTypeReference resolved = context.getLowerBound(p.getParameterType());
 							parameterTypes.set(i, resolved);
 						}
 					}

@@ -127,13 +127,8 @@ public class TypeArgumentContextTest extends TestCase {
 		JvmTypeReference expectation = typeRefs.typeReference("java.lang.Object").create();
 		
 		Map<JvmTypeParameter, ResolveInfo> map = typeArgCtxProvider.resolveInferredMethodTypeArgContext(operation, operation.getReturnType(), expectation, actualArg);
-		assertEquals(map.toString(), 3, map.size());
-		for(Map.Entry<JvmTypeParameter, ResolveInfo> entry: map.entrySet()) {
-			if (entry.getKey().getName().equals("E"))
-				assertEquals("java.lang.Object", entry.getValue().reference.getIdentifier());
-			else
-				assertEquals("java.lang.String", entry.getValue().reference.getIdentifier());
-		}
+		assertEquals(map.toString(), 1, map.size());
+		assertEquals("java.lang.String", map.values().iterator().next().reference.getIdentifier());
 	}
 	
 	/**
