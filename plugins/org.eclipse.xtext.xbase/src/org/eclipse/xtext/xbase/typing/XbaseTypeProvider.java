@@ -162,6 +162,14 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 					final JvmTypeReference declaringType = getTypeReferences().createTypeRef(operation.getDeclaringType());
 					if (rawType)
 						return declaringType;
+					if (!rawType && argumentExpression != null) {
+						JvmTypeReference receiverType = getType(argumentExpression, rawType);
+						if (receiverType != null) {
+							JvmTypeReference result = context.getLowerBound(receiverType);
+							if (result != null && result.getType() instanceof JvmTypeParameter)
+								return result;
+						}
+					}
 					JvmTypeReference result = context.getLowerBound(declaringType);
 					return result;
 				}
@@ -517,7 +525,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		if (constructor == null || constructor.eIsProxy())
 			return null;
 		JvmTypeReference constructorResultType = getTypeForIdentifiable(constructor, rawType);
-		if (isResolved(constructorResultType, rawType)) {
+		JvmTypeParameterDeclarator nearestTypeParameterDeclarator = getNearestTypeParameterDeclarator(constructorCall);
+		if (isResolved(constructorResultType, nearestTypeParameterDeclarator, rawType)) {
 			return constructorResultType;
 		}
 		rawType = false;
@@ -529,7 +538,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			if (argumentTypes.length != 0 || constructor.isVarArgs()) {
 				context = getTypeArgumentContextProvider().injectArgumentTypeContext(context, constructor, constructorResultType, true, argumentTypes);
 				result = context.getUpperBound(constructorResultType, constructorCall);
-				if (isResolved(result, rawType)) {
+				if (isResolved(result, nearestTypeParameterDeclarator, rawType)) {
 					return result;
 				}
 			}
@@ -537,7 +546,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			if (expectedType != null) {
 				context = getTypeArgumentContextProvider().injectExpectedTypeContext(context, constructor, constructorResultType, expectedType);
 				result = context.getUpperBound(constructorResultType, constructorCall);
-				if (isResolved(result, rawType)) {
+				if (isResolved(result, nearestTypeParameterDeclarator, rawType)) {
 					return result;
 				}
 			}
@@ -545,11 +554,11 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			if (constructor.isVarArgs() && constructor.getParameters().size() > argumentTypes.length) {
 				context = getTypeArgumentContextProvider().injectArgumentTypeContext(context, constructor, constructorResultType, false, argumentTypes);
 				result = context.getUpperBound(constructorResultType, constructorCall);
-				if (isResolved(result, rawType)) {
+				if (isResolved(result, nearestTypeParameterDeclarator, rawType)) {
 					return result;
 				}
 			}
-			if (!isResolved(result, rawType)) {
+			if (!isResolved(result, nearestTypeParameterDeclarator, rawType)) {
 				if (result instanceof JvmTypeParameter) {
 					JvmTypeParameter type = (JvmTypeParameter) result.getType();
 					JvmTypeReference upperBound = null;
@@ -685,7 +694,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		if (feature == null || feature.eIsProxy())
 			return null;
 		JvmTypeReference featureType = getTypeForIdentifiable(feature, rawType);
-		if (isResolved(featureType, rawType)) {
+		JvmTypeParameterDeclarator nearestTypeParameterDeclarator = getNearestTypeParameterDeclarator(featureCall);
+		if (isResolved(featureType, nearestTypeParameterDeclarator, rawType)) {
 			return featureType;
 		} else {
 			// method was either already called with rawType==false or the featureType points directly to a JvmTypeParameter
@@ -701,7 +711,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				if (receiverType != null) {
 					context = getTypeArgumentContextProvider().injectReceiverContext(context, receiverType);
 					result = context.getUpperBound(featureType, featureCall);
-					if (isResolved(result, rawType)) {
+					if (isResolved(result, nearestTypeParameterDeclarator, rawType)) {
 						return result;
 					}
 				}
@@ -709,7 +719,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				if (argumentTypes.length != 0 || operation.isVarArgs()) {
 					context = getTypeArgumentContextProvider().injectArgumentTypeContext(context, operation, true, argumentTypes);
 					result = context.getUpperBound(featureType, featureCall);
-					if (isResolved(result, rawType)) {
+					if (isResolved(result, nearestTypeParameterDeclarator, rawType)) {
 						return result;
 					}
 				}
@@ -717,7 +727,7 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				if (expectedType != null) {
 					context = getTypeArgumentContextProvider().injectExpectedTypeContext(context, operation, expectedType);
 					result = context.getUpperBound(featureType, featureCall);
-					if (isResolved(result, rawType)) {
+					if (isResolved(result, nearestTypeParameterDeclarator, rawType)) {
 						return result;
 					}
 				}
@@ -725,26 +735,8 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 				if (operation.isVarArgs() && operation.getParameters().size() > argumentTypes.length) {
 					context = getTypeArgumentContextProvider().injectArgumentTypeContext(context, operation, false, argumentTypes);
 					result = context.getUpperBound(featureType, featureCall);
-					if (isResolved(result, rawType)) {
+					if (isResolved(result, nearestTypeParameterDeclarator, rawType)) {
 						return result;
-					}
-				}
-				if (!isResolved(result, rawType)) {
-					if (result instanceof JvmTypeParameter) {
-						JvmTypeParameter type = (JvmTypeParameter) result.getType();
-						JvmTypeReference upperBound = null;
-						for (JvmTypeConstraint constraint : type.getConstraints()) {
-							if (constraint instanceof JvmUpperBound) {
-								if (upperBound != null) {
-									return getType(featureCall, false);
-								}
-								JvmTypeReference reference = constraint.getTypeReference();
-								upperBound = context.getUpperBound(reference, featureCall);
-							}
-						}
-						if (upperBound != null && !(upperBound.getType() instanceof JvmTypeParameter))
-							return upperBound;
-						return getType(featureCall, false);
 					}
 				}
 				result = context.getUpperBound(featureType, operation);
@@ -752,13 +744,15 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			} else {
 				TypeArgumentContext context = getTypeArgumentContextProvider().getExplicitMethodInvocationContext(operation,
 						receiverType, featureCall.getTypeArguments());
-				return context.getUpperBound(featureType, featureCall);
+				JvmTypeReference result = context.getUpperBound(featureType, featureCall);
+				return result;
 			}
 		} else {
 			JvmTypeReference expectedType = rawType ? null : getExpectedType(featureCall, rawType);
 			TypeArgumentContext context = getTypeArgumentContextProvider()
 					.getReceiverContext(receiverType, featureType, expectedType);
-			return context.getUpperBound(featureType, featureCall);
+			JvmTypeReference result = context.getUpperBound(featureType, featureCall);
+			return result;
 		}
 	}
 

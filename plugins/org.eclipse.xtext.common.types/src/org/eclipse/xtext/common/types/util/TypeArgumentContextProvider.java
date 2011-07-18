@@ -416,12 +416,8 @@ public class TypeArgumentContextProvider {
 				return current;
 			if (current.superTypeAllowed && isBetter.superTypeAllowed)
 				return current.copyIfDifferent(conformanceComputer.getCommonSuperType(Lists.newArrayList(current.reference, isBetter.reference)));
-//			return this.conformanceComputer.isConformant(current.reference, isBetter.reference);
 			if (current.superTypeAllowed && this.conformanceComputer.isConformant(isBetter.reference, current.reference))
 				return isBetter;
-//			if (isBetter.superTypeAllowed && this.conformanceComputer.isConformant(current.reference, isBetter.reference))
-//				return current;
-//			return current;
 		}
 		return current;
 	}
@@ -481,6 +477,15 @@ public class TypeArgumentContextProvider {
 				if (computing.add(superType.getType()))
 					internalComputeContext(superType, context, computing);
 			}
+		} else if (type instanceof JvmTypeParameter) {
+			for(JvmTypeConstraint constraint: ((JvmTypeParameter) type).getConstraints()) {
+				if (constraint instanceof JvmUpperBound) {
+					JvmTypeReference upperBound = constraint.getTypeReference();
+					if (computing.add(upperBound.getType())) {
+						internalComputeContext(upperBound, context, computing);
+					}
+				}
+			}
 		}
 	}
 	
@@ -525,14 +530,26 @@ public class TypeArgumentContextProvider {
 				Iterable<JvmTypeReference> allTypes = Iterables.concat(
 						Collections.singleton(information.reference), 
 						superTypeCollector.collectSuperTypes(information.reference));
+				Set<JvmType> rawSuperTypes = superTypeCollector.collectSuperTypesAsRawTypes(information.reference);
+				rawSuperTypes.add(information.reference.getType());
 				for(JvmTypeReference localInformation: allTypes) {
 					JvmParameterizedTypeReference parameterizedInformation = (JvmParameterizedTypeReference) localInformation;
 					EList<JvmTypeReference> infoArgs = parameterizedInformation.getArguments();
 					for (int i = 0; i < declArgs.size() && i < infoArgs.size(); i++) {
-						ResolveInfo info = new ResolveInfo(infoArgs.get(i));
-						info.superTypeAllowed = infoArgs.get(i) instanceof JvmWildcardTypeReference;
-						info.preferSubtypes = information.preferSubtypes;
-						resolve(declArgs.get(i), info, existing, returnTypeContext);
+						JvmTypeReference infoArg = infoArgs.get(i);
+						JvmTypeReference declArg = declArgs.get(i);
+						boolean recurse = true;
+						if (infoArg.getType() instanceof JvmTypeParameter && declArg.getType() instanceof JvmTypeParameter) {
+							JvmTypeParameter infoParam = (JvmTypeParameter) infoArg.getType();
+							if (rawSuperTypes.contains(infoParam.getDeclarator()))
+								recurse = false;
+						}
+						if (recurse) {
+							ResolveInfo info = new ResolveInfo(infoArgs.get(i));
+							info.superTypeAllowed = infoArg instanceof JvmWildcardTypeReference;
+							info.preferSubtypes = information.preferSubtypes;
+							resolve(declArg, info, existing, returnTypeContext);
+						}
 					}
 				}
 			} else if (information.reference instanceof JvmWildcardTypeReference) {

@@ -20,11 +20,13 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
@@ -118,7 +120,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 			if (element==null) {
 				element = provider.get();
 				boolean rawType = (Boolean) ((Triple<?, ?, ?>) key).getThird();
-				if (element==null || (element instanceof JvmTypeReference && !isResolved((JvmTypeReference) element, rawType))) {
+				if (element==null || (element instanceof JvmTypeReference && !isResolved((JvmTypeReference) element, null, rawType))) {
 					if (logger.isDebugEnabled()) {
 						logger.debug(getDebugIndentation(rawType) + "cache skip: " + element);
 					}
@@ -134,27 +136,38 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	};
 	
 	// TODO improve / extract to a utility method if other clients are doing similar things
-	protected boolean isResolved(JvmTypeReference reference, boolean rawType) {
+	protected boolean isResolved(JvmTypeReference reference, JvmTypeParameterDeclarator declarator, boolean rawType) {
 		if (reference == null)
 			return false;
-		if (reference.getType() instanceof JvmTypeParameter)
+		if (reference.getType() instanceof JvmTypeParameter) {
+			if (isDeclaratorOf(declarator, (JvmTypeParameter) reference.getType()))
+				return true;
 			return false;
+		}
 		if (reference instanceof JvmParameterizedTypeReference) {
 			if (rawType)
 				return true;
 			JvmParameterizedTypeReference parameterized = (JvmParameterizedTypeReference) reference;
 			for(JvmTypeReference argument: parameterized.getArguments()) {
-				if (!isResolved(argument, rawType))
+				if (!isResolved(argument, declarator, rawType))
 					return false;
 			}
 		}
 		if (reference instanceof JvmWildcardTypeReference) {
 			for(JvmTypeConstraint constraint: ((JvmWildcardTypeReference) reference).getConstraints()) {
-				if (!isResolved(constraint.getTypeReference(), rawType))
+				if (!isResolved(constraint.getTypeReference(), declarator, rawType))
 					return false;
 			}
 		}
 		return true;
+	}
+	
+	protected JvmTypeParameterDeclarator getNearestTypeParameterDeclarator(EObject obj) {
+		return EcoreUtil2.getContainerOfType(obj, JvmTypeParameterDeclarator.class);
+	}
+	
+	protected boolean isDeclaratorOf(JvmTypeParameterDeclarator declarator, JvmTypeParameter param) {
+		return param.getDeclarator() == declarator;
 	}
 	
 	private final PolymorphicDispatcher<JvmTypeReference> typeDispatcher = PolymorphicDispatcher.createForSingleTarget(
