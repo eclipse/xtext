@@ -28,10 +28,12 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.annotations.typing.XbaseWithAnnotationsTypeProvider;
+import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xtend2.xtend2.CreateExtensionInfo;
@@ -66,11 +68,24 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 	@Inject
 	private XtendOverridesService overridesService;
 	
+	@Inject
+	private IEarlyExitComputer earlyExitComputer;
+	
+	@Inject
+	private Primitives primitives;
+	
 	protected JvmTypeReference _expectedType(XtendFunction function, EReference reference, int index, boolean rawType) {
 		if (reference == Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION) {
 			if (function.getCreateExtensionInfo()!=null)
 				return getTypeReferences().getTypeForName(Void.TYPE, function);
 			JvmTypeReference declaredOrInferredReturnType = getDeclaredOrOverriddenReturnType(function);
+			if (declaredOrInferredReturnType == null) {
+				declaredOrInferredReturnType = getCommonReturnType(function.getExpression(), false);
+				if (declaredOrInferredReturnType != null && !earlyExitComputer.isEarlyExit(function.getExpression())) {
+					if (!getTypeReferences().is(declaredOrInferredReturnType, Void.TYPE))
+						declaredOrInferredReturnType = primitives.asWrapperTypeIfPrimitive(declaredOrInferredReturnType);
+				}
+			}
 			if (declaredOrInferredReturnType == null || getTypeReferences().is(declaredOrInferredReturnType, Void.TYPE))
 				return null;
 			return declaredOrInferredReturnType;
@@ -100,7 +115,7 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 			if (EcoreUtil.isAncestor(function.getCreateExtensionInfo().getCreateExpression(), expr))
 				return getDeclaredOrOverriddenReturnType(function);
 		}
-		return _expectedType(function, Xtend2Package.Literals.XTEND_FUNCTION__EXPRESSION, 0, rawType);
+		return getExpectedType(function.getExpression(), rawType);
 	}
 	
 	protected JvmTypeReference _type(RichString richString, boolean rawType) {
