@@ -67,10 +67,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 
 		public abstract void accept(EObject semanticObj, IConstraintElement constraint);
 
-		public abstract int maxValues(IConstraintElement constraint);
-
-		public abstract int minValues(IConstraintElement constraint);
-
 		@Override
 		public String toString() {
 			return toString("");
@@ -107,16 +103,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		}
 
 		@Override
-		public int maxValues(IConstraintElement constraint) {
-			return 1;
-		}
-
-		@Override
-		public int minValues(IConstraintElement constraint) {
-			return 1;
-		}
-
-		@Override
 		public String toString(String prefix) {
 			return value instanceof EObject ? EmfFormatter.objPath((EObject) value) : value.toString();
 		}
@@ -140,16 +126,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		}
 
 		@Override
-		public int maxValues(IConstraintElement constraint) {
-			return 0;
-		}
-
-		@Override
-		public int minValues(IConstraintElement constraint) {
-			return 0;
-		}
-
-		@Override
 		public String toString(String prefix) {
 			String newPrefix = "  " + prefix;
 			return "Alt-Choice {\n" + newPrefix + child.toString(newPrefix) + "\n" + prefix + "}";
@@ -159,13 +135,9 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 	protected abstract class Feature2Assignment {
 		public abstract IFeatureInfo getFeature();
 
-		public abstract int getQuantity(IConstraintElement assignment);
-
 		public abstract List<AllocationValue> getValuesFor(IConstraintElement assignment);
 
 		public abstract boolean isAmbiguous();
-
-		public abstract void setQuantity(IConstraintElement assignment, int quantity);
 
 		@Override
 		public String toString() {
@@ -201,16 +173,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 
 		public List<Quantity> getChildren() {
 			return children;
-		}
-
-		@Override
-		public int maxValues(IConstraintElement constraint) {
-			return 0;
-		}
-
-		@Override
-		public int minValues(IConstraintElement constraint) {
-			return 0;
 		}
 
 		@Override
@@ -253,13 +215,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		}
 
 		@Override
-		public int getQuantity(IConstraintElement assignment) {
-			if (isAmbiguous())
-				return UNDEF;
-			return UNDEF; // TODO: implement
-		}
-
-		@Override
 		public List<AllocationValue> getValuesFor(IConstraintElement assignment) {
 			return assignments.contains(assignment) ? values : Collections.<AllocationValue> emptyList();
 		}
@@ -273,10 +228,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			return undefs > 1;
 		}
 
-		@Override
-		public void setQuantity(IConstraintElement assignment, int quantity) {
-			// TODO: implement			
-		}
 	}
 
 	protected class MVFeature2AssignmentUnambiguous extends Feature2Assignment {
@@ -297,11 +248,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		}
 
 		@Override
-		public int getQuantity(IConstraintElement assignment) {
-			return assignment == this.assignment ? values.size() : UNDEF;
-		}
-
-		@Override
 		public List<AllocationValue> getValuesFor(IConstraintElement assignment) {
 			return assignment == this.assignment ? values : Collections.<AllocationValue> emptyList();
 		}
@@ -309,10 +255,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		@Override
 		public boolean isAmbiguous() {
 			return false;
-		}
-
-		@Override
-		public void setQuantity(IConstraintElement assignment, int quantity) {
 		}
 
 	}
@@ -409,14 +351,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		}
 
 		@Override
-		public int getQuantity(IConstraintElement assignment) {
-			if (isAmbiguous() || !assignments.contains(assignment))
-				return UNDEF;
-			Boolean en = enabled[assignment.getFeatureAssignmentID()];
-			return en != null && en ? 1 : 0;
-		}
-
-		@Override
 		public List<AllocationValue> getValuesFor(IConstraintElement assignment) {
 			if (assignments.contains(assignment)) {
 				Boolean en = enabled[assignment.getFeatureAssignmentID()];
@@ -441,10 +375,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			return undefined > 1;
 		}
 
-		@Override
-		public void setQuantity(IConstraintElement assignment, int quantity) {
-			this.enabled[assignment.getFeatureAssignmentID()] = quantity != 0;
-		}
 	}
 
 	protected class SVFeature2AssignmentUnambiguous extends SVFeature2Assignment {
@@ -462,11 +392,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		}
 
 		@Override
-		public int getQuantity(IConstraintElement assignment) {
-			return 1;
-		}
-
-		@Override
 		public List<AllocationValue> getValuesFor(IConstraintElement assignment) {
 			if (assignment == this.assignment)
 				return Collections.singletonList(value);
@@ -478,9 +403,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 			return false;
 		}
 
-		@Override
-		public void setQuantity(IConstraintElement assignment, int quantity) {
-		}
 	}
 
 	public final static int MAX = Integer.MAX_VALUE;
