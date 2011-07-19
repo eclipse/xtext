@@ -14,6 +14,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer;
 
@@ -34,6 +35,8 @@ public class XExpressionHelper {
 	private TypeReferences typeReferences;
 
 	public boolean isLiteral(XExpression expr) {
+		if (expr.eClass().getEPackage() != XbasePackage.eINSTANCE)
+			return false;
 		switch(expr.eClass().getClassifierID()) {
 			case XCLOSURE:
 			case XBOOLEAN_LITERAL:
