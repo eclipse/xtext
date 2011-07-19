@@ -7,24 +7,28 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
+import java.util.Iterator;
+import java.util.List;
+
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.ISelectable;
-import org.eclipse.xtext.resource.IResourceDescription.Manager;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicates;
+import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Holger Schill
  */
 public class ResourceSetBasedResourceDescriptions extends AbstractCompoundSelectable implements IResourceDescriptions.IContextAware {
 
@@ -42,11 +46,23 @@ public class ResourceSetBasedResourceDescriptions extends AbstractCompoundSelect
 	}
 
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
-		return Iterables.filter(Iterables.transform(resourceSet.getResources(), new Function<Resource, IResourceDescription>() {
-			public IResourceDescription apply(Resource from) {
-				return getResourceDescription(from.getURI());
+		return Iterables.filter(new Iterable<IResourceDescription>() {
+			public Iterator<IResourceDescription> iterator() {
+				return new AbstractIterator<IResourceDescription>() {
+					int index = 0;
+					List<Resource> resources = resourceSet.getResources();
+					@Override
+					protected IResourceDescription computeNext() {
+						if (resources.size() <= index)
+							return endOfData();
+						Resource resource = resources.get(index);
+						index++;
+						return getResourceDescription(resource.getURI());
+					}
+				};
 			}
-		}), Predicates.notNull());
+		}, Predicates.notNull());
+
 	}
 	
 	@Override

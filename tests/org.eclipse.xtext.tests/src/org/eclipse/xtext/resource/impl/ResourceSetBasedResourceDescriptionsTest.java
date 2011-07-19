@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -28,6 +29,7 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.IResourceScopeCache;
@@ -39,6 +41,7 @@ import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Holger Schill
  */
 public class ResourceSetBasedResourceDescriptionsTest extends TestCase implements IResourceServiceProvider.Registry, Function<IEObjectDescription, EObject> {
 
@@ -46,6 +49,7 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 	private DefaultResourceDescriptionManager resourceDescriptionManager;
 	private IContainer container;
 	private int nameCount;
+	private ResourceSetBasedResourceDescriptions resDescs;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -68,7 +72,7 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 		DefaultResourceDescriptionStrategy strategy = new DefaultResourceDescriptionStrategy();
 		strategy.setQualifiedNameProvider(qualifiedNameProvider);
 		resourceDescriptionManager.setStrategy(strategy);
-		ResourceSetBasedResourceDescriptions resDescs = new ResourceSetBasedResourceDescriptions();
+		resDescs = new ResourceSetBasedResourceDescriptions();
 		resDescs.setContext(resourceSet);
 		resDescs.setRegistry(this);
 		container = new ResourceDescriptionsBasedContainer(resDescs);
@@ -214,6 +218,26 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 
 	public IResourceServiceProvider getResourceServiceProvider(URI uri) {
 		return getResourceServiceProvider(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
+	}
+	
+	public void testBug_352450 () throws Exception {
+		int resourceCount = 3;
+		int eClassCount = 1;
+		for(int i = 0; i < resourceCount; i++) {
+			Resource resource = createResource();
+			for(int j = 0; j < eClassCount; j++) {
+				createNamedElement(null, EcorePackage.Literals.ECLASS, resource);
+			}
+		}
+		int index = 0;
+		Iterator<IResourceDescription> iterator = resDescs.getAllResourceDescriptions().iterator();
+		while(iterator.hasNext()){
+			iterator.next();
+			if(index == 2)
+				createResource();
+			index++;
+		}
+		assertEquals(4, resourceSet.getResources().size());
 	}
 	
 }
