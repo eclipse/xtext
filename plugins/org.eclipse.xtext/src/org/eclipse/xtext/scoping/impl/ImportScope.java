@@ -144,7 +144,7 @@ public class ImportScope extends AbstractScope {
 	@Override
 	protected Iterable<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
 		List<IEObjectDescription> result = newArrayList();
-		ImportNormalizer foundForNormalizer = null;
+		QualifiedName resolvedQualifiedName = null;
 		ISelectable importFrom = getImportFrom();
 		for (ImportNormalizer normalizer : normalizers) {
 			final QualifiedName resolvedName = normalizer.resolve(name);
@@ -152,9 +152,9 @@ public class ImportScope extends AbstractScope {
 				Iterable<IEObjectDescription> resolvedElements = importFrom.getExportedObjects(type, resolvedName,
 						isIgnoreCase());
 				for (IEObjectDescription resolvedElement : resolvedElements) {
-					if (foundForNormalizer == null)
-						foundForNormalizer = normalizer;
-					else if (foundForNormalizer != normalizer)
+					if (resolvedQualifiedName == null)
+						resolvedQualifiedName = resolvedName;
+					else if (!resolvedQualifiedName.equals(resolvedName))
 						return emptyList();
 					QualifiedName alias = normalizer.deresolve(resolvedElement.getName());
 					if (alias == null)
