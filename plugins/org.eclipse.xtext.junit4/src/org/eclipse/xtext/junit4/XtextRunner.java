@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.junit4;
 
+import static org.eclipse.xtext.util.Exceptions.*;
+
 import java.util.Map;
 
 import org.junit.runners.BlockJUnit4ClassRunner;
@@ -41,13 +43,14 @@ public class XtextRunner extends BlockJUnit4ClassRunner {
 
 	@Override
 	protected Statement methodBlock(FrameworkMethod method) {
-		final Statement methodBlock = super.methodBlock(method);
-		if (getInjectorProvider() instanceof IRegistryConfigurator) {
+		IInjectorProvider injectorProvider = getOrCreateInjectorProvider();
+		if (injectorProvider instanceof IRegistryConfigurator) {
+			final IRegistryConfigurator registryConfigurator = (IRegistryConfigurator) injectorProvider;
+			registryConfigurator.setupRegistry();
+			final Statement methodBlock = super.methodBlock(method);
 			return new Statement() {
 				@Override
 				public void evaluate() throws Throwable {
-					IRegistryConfigurator registryConfigurator = (IRegistryConfigurator) getInjectorProvider();
-					registryConfigurator.setupRegistry();
 					try {
 						methodBlock.evaluate();
 					} finally {
@@ -55,11 +58,12 @@ public class XtextRunner extends BlockJUnit4ClassRunner {
 					}
 				}
 			};
+		}else{
+			return super.methodBlock(method);
 		}
-		return methodBlock;
 	}
 
-	protected IInjectorProvider getOrCreateInjectorProvider() throws Exception {
+	protected IInjectorProvider getOrCreateInjectorProvider() {
 		IInjectorProvider injectorProvider = getInjectorProvider();
 		if (injectorProvider == null) {
 			injectorProvider = createInjectorProvider();
@@ -72,11 +76,15 @@ public class XtextRunner extends BlockJUnit4ClassRunner {
 		return injectorProviderClassCache.get(getTestClass().getJavaClass());
 	}
 
-	protected IInjectorProvider createInjectorProvider() throws Exception {
+	protected IInjectorProvider createInjectorProvider() {
 		IInjectorProvider injectorProvider = null;
 		InjectWith injectWith = getTestClass().getJavaClass().getAnnotation(InjectWith.class);
 		if (injectWith != null) {
-			injectorProvider = injectWith.value().newInstance();
+			try {
+				injectorProvider = injectWith.value().newInstance();
+			} catch (Exception e) {
+				throwUncheckedException(e);
+			}
 		}
 		return injectorProvider;
 	}
