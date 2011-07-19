@@ -16,7 +16,7 @@ public class ArrayClient2<T> {
         return internal[index] = value;
     }
 
-    public <X> ArrayClient2<X> access(X[] val) {
+    public static <X> ArrayClient2<X> access(X[] val) {
         return new ArrayClient2<X>(val);
     }
 
