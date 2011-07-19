@@ -710,6 +710,19 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		assertEquals(singleton("foo"),apply(class1,"foo"));
 	}
 	
+	public void testImportNestedTypes() throws Exception {
+		String code = 
+				"package x " +
+				"import java.util.Map$Entry " +
+				"import java.util.Map " +
+				"class Z { " +
+				" def foo(Map$Entry e1, Entry e2, Map m) {" +
+				" }" +
+				"}";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
 	public void testInjectedExtensionMethod_01() throws Exception {
 		Class<?> class1 = compileJavaCode("x.Y",
 				"package x " +
