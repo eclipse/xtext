@@ -23,4 +23,5 @@ Import-Package: com.google.common.base,
  org.junit;version="4.5.0";resolution:=optional,
  org.junit.runners;version="4.5.0";resolution:=optional,
  org.junit.runners.model;version="4.5.0";resolution:=optional
-Require-Bundle: org.eclipse.xtext;bundle-version="2.0.1"
+Require-Bundle: org.eclipse.xtext;bundle-version="2.0.1",
+ org.junit4;bundle-version="4.8.1";resolution:=optional
