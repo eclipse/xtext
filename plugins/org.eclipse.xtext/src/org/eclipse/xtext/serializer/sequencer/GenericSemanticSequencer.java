@@ -14,16 +14,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
-import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
@@ -82,11 +76,14 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 
 		protected Object value;
 
-		public AllocationValue(Object value, int index, INode node) {
+		protected boolean optional;
+
+		public AllocationValue(Object value, int index, boolean optional, INode node) {
 			super();
 			this.value = value;
-			this.node = node;
 			this.index = index;
+			this.optional = optional;
+			this.node = node;
 		}
 
 		@Override
@@ -418,9 +415,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 	protected Map<Pair<EObject, EClass>, IConstraint> constraints;
 
 	@Inject
-	protected IContextFinder contextFinder;
-
-	@Inject
 	protected ICrossReferenceSerializer crossRefSerializer;
 
 	@Inject
@@ -704,7 +698,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 					INode node = nodes.getNodeForSingelValue(feature.getFeature(), value);
 					if (trans != ValueTransient.PREFERABLY || node != null) {
 						IConstraintElement ass = feature.getAssignments()[0];
-						AllocationValue alloc = new AllocationValue(value, -1, node);
+						AllocationValue alloc = new AllocationValue(value, -1, trans == ValueTransient.PREFERABLY, node);
 						result[ass.getAssignmentID()] = new SVFeature2AssignmentUnambiguous(ass,
 								trans == ValueTransient.PREFERABLY, alloc);
 					}
@@ -721,7 +715,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 				if (trans != ValueTransient.YES) {
 					Object value = semanticObject.eGet(feature.getFeature());
 					INode node = nodes.getNodeForSingelValue(feature.getFeature(), value);
-					AllocationValue alloc = new AllocationValue(value, -1, node);
+					AllocationValue alloc = new AllocationValue(value, -1, trans == ValueTransient.PREFERABLY, node);
 					createValues(semanticObject, feature, trans == ValueTransient.PREFERABLY, alloc, result);
 				}
 			}
@@ -834,24 +828,21 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		}
 	}
 
+	@Inject
+	protected IAssignmentFinder assignmentFinder;
+
 	protected List<IConstraintElement> findValidAssignments(EObject semanitcObj, IConstraintElement[] assignments,
 			AllocationValue value) {
-		EStructuralFeature feature = assignments[0].getFeature();
-		if (feature instanceof EAttribute) {
-			if (feature.getEType() instanceof EEnum)
-				return findValidAssignmentsForEnum(semanitcObj, assignments, value.getValue());
-			else
-				return findValidAssignmentsForDatatype(semanitcObj, assignments, value.getValue());
-		}
-		if (feature instanceof EReference) {
-			EReference ref = (EReference) feature;
-			if (ref.isContainment())
-				return findValidAssignmentsForContainmentRef(semanitcObj, assignments, (EObject) value.getValue());
-			else
-				return findValidAssignmentsForCrossRef(semanitcObj, assignments, (EObject) value.getValue(),
-						value.getNode());
-		}
-		throw new RuntimeException("unknown feature type");
+		List<AbstractElement> assignedElements = Lists.newArrayList();
+		for (IConstraintElement ass : assignments)
+			assignedElements.add(ass.getGrammarElement());
+		Set<AbstractElement> assignedElements2 = Sets.newHashSet(assignmentFinder.findAssignmentsByValue(semanitcObj,
+				assignedElements, value.getValue(), value.getNode()));
+		List<IConstraintElement> result = Lists.newArrayList();
+		for (IConstraintElement ass : assignments)
+			if (assignedElements2.contains(ass.getGrammarElement()))
+				result.add(ass);
+		return result;
 	}
 
 	protected List<IConstraintElement> findValidAssignments(EObject semanticObj, List<IConstraintElement> assignments,
@@ -868,71 +859,6 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		return result;
 	}
 
-	protected List<IConstraintElement> findValidAssignmentsForContainmentRef(EObject semanitcObj,
-			IConstraintElement[] assignments, EObject value) {
-		Set<EObject> contexts = Sets.newHashSet();
-		for (IConstraintElement ass : assignments)
-			contexts.add(ass.getCallContext());
-		contexts = Sets.newHashSet(contextFinder.findContextsByContents(value, contexts));
-		List<IConstraintElement> result = Lists.newArrayList();
-		for (IConstraintElement ass : assignments)
-			if (contexts.contains(ass.getCallContext()))
-				result.add(ass);
-		return result;
-	}
-
-	protected List<IConstraintElement> findValidAssignmentsForCrossRef(EObject semanitcObj,
-			IConstraintElement[] assignments, EObject value, INode node) {
-		Map<CrossReference, List<IConstraintElement>> candidates = Maps.newHashMap();
-		for (IConstraintElement ass : assignments) {
-			List<IConstraintElement> cand = candidates.get(ass.getCrossReference());
-			if (cand == null) {
-				if (EcoreUtil2.isAssignableFrom(ass.getCrossReferenceType(), value.eClass())
-						&& crossRefSerializer.isValid(semanitcObj, ass.getCrossReference(), value, node, null))
-					candidates.put(ass.getCrossReference(), Lists.newArrayList(ass));
-				else
-					candidates.put(ass.getCrossReference(), Collections.<IConstraintElement> emptyList());
-			} else if (cand != Collections.EMPTY_LIST)
-				cand.add(ass);
-		}
-		List<IConstraintElement> result = Lists.newArrayList();
-		for (List<IConstraintElement> l : candidates.values())
-			result.addAll(l);
-		return result;
-	}
-
-	// keywords have precedence over everything else
-	protected List<IConstraintElement> findValidAssignmentsForDatatype(EObject semanticObj,
-			IConstraintElement[] assignments, Object value) {
-		// keywords have precedence over everything else
-		for (int i = 0; i < assignments.length; i++) {
-			Keyword kw = assignments[i].getKeyword();
-			if (kw != null && keywordSerializer.isValid(semanticObj, kw, value, null))
-				return Collections.singletonList(assignments[i]);
-		}
-
-		// now check the remaining assignments
-		List<IConstraintElement> result = Lists.newArrayList();
-		for (int i = 0; i < assignments.length; i++) {
-			RuleCall rc = assignments[i].getRuleCall();
-			if (rc != null && valueSerializer.isValid(semanticObj, rc, value, null))
-				result.add(assignments[i]);
-		}
-		return result;
-	}
-
-	protected List<IConstraintElement> findValidAssignmentsForEnum(EObject semanticObj,
-			IConstraintElement[] assignments, Object value) {
-		List<IConstraintElement> result = Lists.newArrayList();
-		for (IConstraintElement ass : assignments)
-			if (ass.getRuleCall() != null && ass.getRuleCall().getRule() instanceof EnumRule) {
-				if (enumLiteralSerializer.isValid(semanticObj, ass.getRuleCall(), value, null))
-					result.add(ass);
-			}
-		return result;
-
-	}
-
 	protected IConstraint getConstraint(EObject context, EClass type) {
 		return constraints.get(Tuples.create(context, type));
 	}
@@ -946,7 +872,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 				for (int i = 0; i < values1.size(); i++) {
 					Object value = values1.get(i);
 					INode node = nodes.getNodeForMultiValue(feature.getFeature(), i, i, value);
-					allocs1.add(new AllocationValue(value, i, node));
+					allocs1.add(new AllocationValue(value, i, false, node));
 				}
 				return allocs1;
 			case SOME:
@@ -956,7 +882,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 					if (!transientValueService.isValueInListTransient(semanticObject, i, feature.getFeature())) {
 						Object value = values2.get(i);
 						INode node = nodes.getNodeForMultiValue(feature.getFeature(), i, j++, value);
-						allocs2.add(new AllocationValue(value, i, node));
+						allocs2.add(new AllocationValue(value, i, false, node));
 					}
 				return allocs2;
 			case YES:
