@@ -89,10 +89,13 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 					+ uiStrings.typeParameters(constructorCall.getConstructor()) + " but got "
 					+ uiStrings.typeArguments(constructorCall);
 		} else if (INVALID_ARGUMENT_TYPES.equals(issueCode)) {
-			message = "Invalid argument types. Expected " + uiStrings.parameters(constructorCall.getConstructor())
-					+ " but got " + uiStrings.arguments(constructorCall);
+			// Type conformance errors are checked in XbaseJavaValidator.
+			// We cannot rely on the types used during linking because, they might have been incomplete
+		} else {
+			message = "Missig error message for " + issueCode;
 		}
-		error(message, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, issueCode);
+		if (message != null)
+			error(message, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, issueCode);
 	}
 
 	@Override

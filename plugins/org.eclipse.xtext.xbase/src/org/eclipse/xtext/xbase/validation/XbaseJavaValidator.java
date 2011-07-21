@@ -110,6 +110,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			XbasePackage.Literals.XASSIGNMENT__ASSIGNABLE,
 			XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__PREDICATE,
 			XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS,
+			XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS,
 			XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS,
 //TODO these references might point to the receiver, which is the basis of why a certain feature was picked in scoping.
 // Should be checked in case of extension methods only (i.e. when they are arguments)
@@ -299,6 +300,41 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		} catch (WrappedException e) {
 			throw new WrappedException("XbaseJavaValidator#checkTypes for " + obj + " caused: "
 					+ e.getCause().getMessage(), e);
+		}
+	}
+	
+	@Check
+	public void checkReceiverOfStaticFeature(XMemberFeatureCall featureCall) {
+		doCheckReceiverOfStaticFeature(featureCall, featureCall.getMemberCallTarget());
+	}
+	
+	@Check
+	public void checkReceiverOfStaticFeature(XFeatureCall featureCall) {
+		doCheckReceiverOfStaticFeature(featureCall, featureCall.getImplicitReceiver());
+	}
+	
+	protected void doCheckReceiverOfStaticFeature(XAbstractFeatureCall featureCall, XExpression receiver) {
+		if (receiver != null && featureCall.getFeature() instanceof JvmOperation) {
+			JvmOperation operation = (JvmOperation) featureCall.getFeature();
+			if (operation.isStatic()) {
+				try {
+					JvmTypeReference expectedType = typeProvider.getExpectedType(receiver);
+					if (expectedType == null || expectedType.getType() == null)
+						return;
+					JvmTypeReference actualType = typeProvider.getType(receiver);
+					if (actualType == null || actualType.getType() == null)
+						return;
+					if (!conformanceComputer.isConformant(expectedType, actualType))
+						error("Incompatible receiver type. Expected " + getNameOfTypes(expectedType) + " but was "
+								+ canonicalName(actualType), featureCall, 
+								XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, 
+								ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+								INCOMPATIBLE_TYPES);
+				} catch (WrappedException e) {
+					throw new WrappedException("XbaseJavaValidator#checkTypes for " + receiver + " caused: "
+							+ e.getCause().getMessage(), e);
+				}
+			}
 		}
 	}
 	

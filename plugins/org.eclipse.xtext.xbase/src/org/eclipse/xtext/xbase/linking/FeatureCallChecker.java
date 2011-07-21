@@ -27,6 +27,7 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.TypeArgumentContext;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Strings;
@@ -135,7 +136,7 @@ public class FeatureCallChecker {
 				&& expectedTypeArguments != context.getTypeArguments().size())
 			return INVALID_NUMBER_OF_TYPE_ARGUMENTS;
 		// TODO check type parameter bounds against type arguments 
-		if (!areArgumentTypesValid(input, arguments))
+		if (!areArgumentTypesValid(input, arguments, jvmFeatureDescription.getContext()))
 			return INVALID_ARGUMENT_TYPES;
 		return null;
 	}
@@ -257,27 +258,30 @@ public class FeatureCallChecker {
 		if (!context.getTypeArguments().isEmpty() // raw type or type inference
 				&& input.getTypeParameters().size() != context.getTypeArguments().size())
 			return INVALID_NUMBER_OF_TYPE_ARGUMENTS;
-		// TODO check type parameter bounds against type arguments
-		if (!areArgumentTypesValid(input, actualArguments))
+		if (!areArgumentTypesValid(input, actualArguments, jvmFeatureDescription.getContext()))
 			return INVALID_ARGUMENT_TYPES;
 		return null;
 	}
 
-	protected boolean areArgumentTypesValid(JvmExecutable exectuable, List<XExpression> arguments) {
+	protected boolean areArgumentTypesValid(JvmExecutable exectuable, List<XExpression> arguments, TypeArgumentContext typeArgumentContext) {
 		int numberOfParameters = exectuable.getParameters().size();
 		int parametersToCheck = exectuable.isVarArgs() ? numberOfParameters - 1 : numberOfParameters;
 		for (int i = 0; i < parametersToCheck; i++) {
 			JvmTypeReference parameterType = exectuable.getParameters().get(i).getParameterType();
-			XExpression argument = arguments.get(i);
-			JvmTypeReference argumentType = getTypeProvider().getType(argument, true);
 			if (parameterType == null)
 				return true;
+			if (typeArgumentContext != null) {
+				parameterType = typeArgumentContext.getLowerBound(parameterType);
+			}
+			XExpression argument = arguments.get(i);
+			JvmTypeReference argumentType = getTypeProvider().getType(argument, true);
 			if (!isCompatibleArgument(parameterType, argumentType))
 				return false;
 		}
 		if (exectuable.isVarArgs()) {
 			int lastParamIndex = numberOfParameters - 1;
 			JvmTypeReference lastParameterType = exectuable.getParameters().get(lastParamIndex).getParameterType();
+			// TODO resolve array type's lower bound
 			if (!(lastParameterType.getType() instanceof JvmArrayType))
 				throw new IllegalStateException("Unexpected var arg type: " + lastParameterType);
 			JvmTypeReference varArgType = ((JvmArrayType) lastParameterType.getType()).getComponentType();

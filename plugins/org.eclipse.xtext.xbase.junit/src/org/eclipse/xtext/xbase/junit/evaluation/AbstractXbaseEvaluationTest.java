@@ -1280,11 +1280,15 @@ public abstract class AbstractXbaseEvaluationTest extends TestCase {
 	}
 	
 	@Test public void testMemberCallOnMultiType_01() throws Exception {
-		assertEvaluatesTo(Integer.valueOf(0), "(if (false) new Double('-10') else new Integer('1')).compareTo(1)");
+		assertEvaluatesTo("ClassB", "(if (false) new testdata.ClassA() else new testdata.ClassB()).getClassName()");
+		assertEvaluatesTo("CLASSB", "(if (false) new testdata.ClassA() else new testdata.ClassB()).getUpperCaseClassName()");
+		assertEvaluatesTo("ClassA", "(if (true) new testdata.ClassA() else new testdata.ClassB()).getClassName()");
+		assertEvaluatesTo("CLASSA", "(if (true) new testdata.ClassA() else new testdata.ClassB()).getUpperCaseClassName()");
 	}
 	
 	@Test public void testMemberCallOnMultiType_02() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(20), "(if (false) new Double('-20') else new Integer('20')).intValue");
+		assertEvaluatesTo(Integer.valueOf(-20), "(if (true) new Double('-20') else new Integer('20')).intValue");
 	}
 	
 	@Test public void testMemberCallOnMultiType_03() throws Exception {

@@ -32,7 +32,7 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 
 	public void testConstructorCall_1() throws Exception {
 		XExpression expression = expression("new testdata.Constructors(1)");
-		helper.assertError(expression, XCONSTRUCTOR_CALL, INVALID_ARGUMENT_TYPES);
+		helper.assertError(expression, XINT_LITERAL, INCOMPATIBLE_TYPES);
 	}
 
 	public void testConstructorCall_2() throws Exception {
@@ -150,6 +150,31 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	public void testOperationFeatureCall_5() throws Exception {
 		XExpression expression = expression("{ var o = new Object() o.clone() }");
 		helper.assertError(((XBlockExpression) expression).getExpressions().get(1), XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE);
+	}
+	
+	public void testOperationFeatureCall_6() throws Exception {
+		XExpression expression = expression("(null as Comparable<? extends Object>).compareTo(1)");
+		helper.assertError(expression, XINT_LITERAL, INCOMPATIBLE_TYPES, "null", "int");
+	}
+	
+	public void testOperationFeatureCall_7() throws Exception {
+		XExpression expression = expression("(null as Comparable<? extends Object>).compareTo(null)");
+		helper.assertNoErrors(expression);
+	}
+	
+	public void testOperationFeatureCall_8() throws Exception {
+		XExpression expression = expression("(if (true) null as Comparable<Double> else null as Comparable<Integer>).compareTo(null)");
+		helper.assertNoErrors(expression);
+	}
+	
+	public void testOperationFeatureCall_9() throws Exception {
+		XExpression expression = expression("'a,b'.split(',').flatten");
+		helper.assertError(expression, XMEMBER_FEATURE_CALL, INCOMPATIBLE_TYPES, "Iterable", "String[]", "receiver");
+	}
+	
+	public void testOperationFeatureCall_10() throws Exception {
+		XExpression expression = expression("{ var Iterable<String> x = newArrayList('a,b'.split(',')).flatten }");
+		helper.assertNoErrors(expression);
 	}
 	
 	public void testStaticFeatureAccess_0() throws Exception {
