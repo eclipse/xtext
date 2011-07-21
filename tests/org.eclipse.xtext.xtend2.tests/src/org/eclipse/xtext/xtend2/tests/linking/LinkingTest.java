@@ -31,9 +31,11 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
+import org.eclipse.xtext.xtend2.xtend2.XtendField;
 import org.eclipse.xtext.xtend2.xtend2.XtendFile;
 import org.eclipse.xtext.xtend2.xtend2.XtendFunction;
 import org.eclipse.xtext.xtend2.xtend2.XtendParameter;
@@ -455,5 +457,21 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		XtendParameter parameter = function.getParameters().get(0);
 		String identifier = parameter.getParameterType().getIdentifier();
 		assertEquals(Functions.Function0.class.getName()+ "<java.lang.Integer>", identifier);
+	}
+	
+	public void testRelativeImports() throws Exception {
+		XtendFile file = file (
+				"package annotation class X {\n" +
+				"  Annotation failed\n" +
+				"  java.lang.annotation.Annotation success\n" +
+				"  reflect.AccessibleObject failedToo\n" +
+				"}");
+		XtendClass xClass = file.getXtendClass();
+		XtendField failed  = (XtendField) xClass.getMembers().get(0);
+		assertTrue("Annotation", failed.getType().getType().eIsProxy());
+		XtendField success  = (XtendField) xClass.getMembers().get(1);
+		assertFalse("java.lang.annotation", success.getType().getType().eIsProxy());
+		XtendField failedToo  = (XtendField) xClass.getMembers().get(2);
+		assertTrue("reflect.AccessibleObject", failedToo.getType().getType().eIsProxy());
 	}
 }
