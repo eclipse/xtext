@@ -43,6 +43,11 @@ public abstract class AbstractArithmeticsUiModule extends DefaultUiModule {
 		return org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.exporting.QualifiedNamesFragment
+	public Class<? extends org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator> bindIDependentElementsCalculator() {
+		return org.eclipse.xtext.ui.refactoring.impl.DefaultDependentElementsCalculator.class;
+	}
+
 	// contributed by org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment
 	public Class<? extends org.eclipse.jface.viewers.ILabelProvider> bindILabelProvider() {
 		return org.eclipse.xtext.example.arithmetics.ui.labeling.ArithmeticsLabelProvider.class;

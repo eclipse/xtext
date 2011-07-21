@@ -6,7 +6,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Codetemplates">
     <eStructuralFeatures xsi:type="ecore:EReference" name="language" eType="ecore:EClass classpath:/org/eclipse/xtext/Xtext.ecore#//Grammar"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="templates" upperBound="-1"
-        eType="#//Codetemplate" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.codetemplates/src-gen/org/eclipse/xtext/ui/codetemplates/Codetemplates.ecore#//Codetemplate"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Codetemplate">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -14,24 +15,25 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="context" eType="ecore:EClass classpath:/org/eclipse/xtext/Xtext.ecore#//AbstractRule"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="keywordContext" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//TemplateBody"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.codetemplates/src-gen/org/eclipse/xtext/ui/codetemplates/Codetemplates.ecore#//TemplateBody"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TemplateBody">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parts" upperBound="-1"
-        eType="#//TemplatePart" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.ui.codetemplates/src-gen/org/eclipse/xtext/ui/codetemplates/Codetemplates.ecore#//TemplatePart"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TemplatePart"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//TemplatePart">
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.codetemplates/src-gen/org/eclipse/xtext/ui/codetemplates/Codetemplates.ecore#//TemplatePart">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameters" unique="false"
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Literal" eSuperTypes="#//TemplatePart">
+  <eClassifiers xsi:type="ecore:EClass" name="Literal" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.codetemplates/src-gen/org/eclipse/xtext/ui/codetemplates/Codetemplates.ecore#//TemplatePart">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Dollar" eSuperTypes="#//TemplatePart">
+  <eClassifiers xsi:type="ecore:EClass" name="Dollar" eSuperTypes="platform:/resource/org.eclipse.xtext.ui.codetemplates/src-gen/org/eclipse/xtext/ui/codetemplates/Codetemplates.ecore#//TemplatePart">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="escaped" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
 </ecore:EPackage>

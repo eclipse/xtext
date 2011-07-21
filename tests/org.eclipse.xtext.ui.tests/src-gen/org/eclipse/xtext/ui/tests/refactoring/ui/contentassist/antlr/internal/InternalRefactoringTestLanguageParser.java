@@ -4,7 +4,6 @@ import java.io.InputStream;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
 import org.eclipse.xtext.parser.impl.*;
-import org.eclipse.xtext.parsetree.*;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
@@ -78,11 +77,11 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleMain"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:61:1: entryRuleMain : ruleMain EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:60:1: entryRuleMain : ruleMain EOF ;
     public final void entryRuleMain() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:62:1: ( ruleMain EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:63:1: ruleMain EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:61:1: ( ruleMain EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:62:1: ruleMain EOF
             {
              before(grammarAccess.getMainRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleMain_in_entryRuleMain61);
@@ -108,20 +107,20 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleMain"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:70:1: ruleMain : ( ( rule__Main__ElementsAssignment )* ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:69:1: ruleMain : ( ( rule__Main__ElementsAssignment )* ) ;
     public final void ruleMain() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:74:2: ( ( ( rule__Main__ElementsAssignment )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:75:1: ( ( rule__Main__ElementsAssignment )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:73:2: ( ( ( rule__Main__ElementsAssignment )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:74:1: ( ( rule__Main__ElementsAssignment )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:75:1: ( ( rule__Main__ElementsAssignment )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:76:1: ( rule__Main__ElementsAssignment )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:74:1: ( ( rule__Main__ElementsAssignment )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:75:1: ( rule__Main__ElementsAssignment )*
             {
              before(grammarAccess.getMainAccess().getElementsAssignment()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:77:1: ( rule__Main__ElementsAssignment )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:76:1: ( rule__Main__ElementsAssignment )*
             loop1:
             do {
                 int alt1=2;
@@ -134,7 +133,7 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:77:2: rule__Main__ElementsAssignment
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:76:2: rule__Main__ElementsAssignment
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__Main__ElementsAssignment_in_ruleMain94);
             	    rule__Main__ElementsAssignment();
@@ -173,11 +172,11 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleAbstractElement"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:89:1: entryRuleAbstractElement : ruleAbstractElement EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:88:1: entryRuleAbstractElement : ruleAbstractElement EOF ;
     public final void entryRuleAbstractElement() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:90:1: ( ruleAbstractElement EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:91:1: ruleAbstractElement EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:89:1: ( ruleAbstractElement EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:90:1: ruleAbstractElement EOF
             {
              before(grammarAccess.getAbstractElementRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractElement_in_entryRuleAbstractElement122);
@@ -203,21 +202,21 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleAbstractElement"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:98:1: ruleAbstractElement : ( ( rule__AbstractElement__Alternatives ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:97:1: ruleAbstractElement : ( ( rule__AbstractElement__Alternatives ) ) ;
     public final void ruleAbstractElement() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:102:2: ( ( ( rule__AbstractElement__Alternatives ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:103:1: ( ( rule__AbstractElement__Alternatives ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:101:2: ( ( ( rule__AbstractElement__Alternatives ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:102:1: ( ( rule__AbstractElement__Alternatives ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:103:1: ( ( rule__AbstractElement__Alternatives ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:104:1: ( rule__AbstractElement__Alternatives )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:102:1: ( ( rule__AbstractElement__Alternatives ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:103:1: ( rule__AbstractElement__Alternatives )
             {
              before(grammarAccess.getAbstractElementAccess().getAlternatives()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:105:1: ( rule__AbstractElement__Alternatives )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:105:2: rule__AbstractElement__Alternatives
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:104:1: ( rule__AbstractElement__Alternatives )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:104:2: rule__AbstractElement__Alternatives
             {
             pushFollow(FollowSets000.FOLLOW_rule__AbstractElement__Alternatives_in_ruleAbstractElement155);
             rule__AbstractElement__Alternatives();
@@ -250,11 +249,11 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleImport"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:117:1: entryRuleImport : ruleImport EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:116:1: entryRuleImport : ruleImport EOF ;
     public final void entryRuleImport() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:118:1: ( ruleImport EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:119:1: ruleImport EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:117:1: ( ruleImport EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:118:1: ruleImport EOF
             {
              before(grammarAccess.getImportRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleImport_in_entryRuleImport182);
@@ -280,21 +279,21 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleImport"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:126:1: ruleImport : ( ( rule__Import__Group__0 ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:125:1: ruleImport : ( ( rule__Import__Group__0 ) ) ;
     public final void ruleImport() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:130:2: ( ( ( rule__Import__Group__0 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:131:1: ( ( rule__Import__Group__0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:129:2: ( ( ( rule__Import__Group__0 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:130:1: ( ( rule__Import__Group__0 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:131:1: ( ( rule__Import__Group__0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:132:1: ( rule__Import__Group__0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:130:1: ( ( rule__Import__Group__0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:131:1: ( rule__Import__Group__0 )
             {
              before(grammarAccess.getImportAccess().getGroup()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:133:1: ( rule__Import__Group__0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:133:2: rule__Import__Group__0
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:132:1: ( rule__Import__Group__0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:132:2: rule__Import__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_rule__Import__Group__0_in_ruleImport215);
             rule__Import__Group__0();
@@ -327,11 +326,11 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleElement"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:145:1: entryRuleElement : ruleElement EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:144:1: entryRuleElement : ruleElement EOF ;
     public final void entryRuleElement() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:146:1: ( ruleElement EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:147:1: ruleElement EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:145:1: ( ruleElement EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:146:1: ruleElement EOF
             {
              before(grammarAccess.getElementRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleElement_in_entryRuleElement242);
@@ -357,21 +356,21 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleElement"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:154:1: ruleElement : ( ( rule__Element__Group__0 ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:153:1: ruleElement : ( ( rule__Element__Group__0 ) ) ;
     public final void ruleElement() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:158:2: ( ( ( rule__Element__Group__0 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:159:1: ( ( rule__Element__Group__0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:157:2: ( ( ( rule__Element__Group__0 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:158:1: ( ( rule__Element__Group__0 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:159:1: ( ( rule__Element__Group__0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:160:1: ( rule__Element__Group__0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:158:1: ( ( rule__Element__Group__0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:159:1: ( rule__Element__Group__0 )
             {
              before(grammarAccess.getElementAccess().getGroup()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:161:1: ( rule__Element__Group__0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:161:2: rule__Element__Group__0
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:160:1: ( rule__Element__Group__0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:160:2: rule__Element__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group__0_in_ruleElement275);
             rule__Element__Group__0();
@@ -404,11 +403,11 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleFQN"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:173:1: entryRuleFQN : ruleFQN EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:172:1: entryRuleFQN : ruleFQN EOF ;
     public final void entryRuleFQN() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:174:1: ( ruleFQN EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:175:1: ruleFQN EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:173:1: ( ruleFQN EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:174:1: ruleFQN EOF
             {
              before(grammarAccess.getFQNRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleFQN_in_entryRuleFQN302);
@@ -434,21 +433,21 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleFQN"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:182:1: ruleFQN : ( ( rule__FQN__Group__0 ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:181:1: ruleFQN : ( ( rule__FQN__Group__0 ) ) ;
     public final void ruleFQN() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:186:2: ( ( ( rule__FQN__Group__0 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:187:1: ( ( rule__FQN__Group__0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:185:2: ( ( ( rule__FQN__Group__0 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:186:1: ( ( rule__FQN__Group__0 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:187:1: ( ( rule__FQN__Group__0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:188:1: ( rule__FQN__Group__0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:186:1: ( ( rule__FQN__Group__0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:187:1: ( rule__FQN__Group__0 )
             {
              before(grammarAccess.getFQNAccess().getGroup()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:189:1: ( rule__FQN__Group__0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:189:2: rule__FQN__Group__0
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:188:1: ( rule__FQN__Group__0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:188:2: rule__FQN__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_rule__FQN__Group__0_in_ruleFQN335);
             rule__FQN__Group__0();
@@ -481,11 +480,11 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleFQNWithWC"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:201:1: entryRuleFQNWithWC : ruleFQNWithWC EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:200:1: entryRuleFQNWithWC : ruleFQNWithWC EOF ;
     public final void entryRuleFQNWithWC() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:202:1: ( ruleFQNWithWC EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:203:1: ruleFQNWithWC EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:201:1: ( ruleFQNWithWC EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:202:1: ruleFQNWithWC EOF
             {
              before(grammarAccess.getFQNWithWCRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleFQNWithWC_in_entryRuleFQNWithWC362);
@@ -511,21 +510,21 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleFQNWithWC"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:210:1: ruleFQNWithWC : ( ( rule__FQNWithWC__Group__0 ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:209:1: ruleFQNWithWC : ( ( rule__FQNWithWC__Group__0 ) ) ;
     public final void ruleFQNWithWC() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:214:2: ( ( ( rule__FQNWithWC__Group__0 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:215:1: ( ( rule__FQNWithWC__Group__0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:213:2: ( ( ( rule__FQNWithWC__Group__0 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:214:1: ( ( rule__FQNWithWC__Group__0 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:215:1: ( ( rule__FQNWithWC__Group__0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:216:1: ( rule__FQNWithWC__Group__0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:214:1: ( ( rule__FQNWithWC__Group__0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:215:1: ( rule__FQNWithWC__Group__0 )
             {
              before(grammarAccess.getFQNWithWCAccess().getGroup()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:217:1: ( rule__FQNWithWC__Group__0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:217:2: rule__FQNWithWC__Group__0
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:216:1: ( rule__FQNWithWC__Group__0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:216:2: rule__FQNWithWC__Group__0
             {
             pushFollow(FollowSets000.FOLLOW_rule__FQNWithWC__Group__0_in_ruleFQNWithWC395);
             rule__FQNWithWC__Group__0();
@@ -558,13 +557,13 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__AbstractElement__Alternatives"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:229:1: rule__AbstractElement__Alternatives : ( ( ruleElement ) | ( ruleImport ) );
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:228:1: rule__AbstractElement__Alternatives : ( ( ruleElement ) | ( ruleImport ) );
     public final void rule__AbstractElement__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:233:1: ( ( ruleElement ) | ( ruleImport ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:232:1: ( ( ruleElement ) | ( ruleImport ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -582,10 +581,10 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:234:1: ( ruleElement )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:233:1: ( ruleElement )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:234:1: ( ruleElement )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:235:1: ruleElement
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:233:1: ( ruleElement )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:234:1: ruleElement
                     {
                      before(grammarAccess.getAbstractElementAccess().getElementParserRuleCall_0()); 
                     pushFollow(FollowSets000.FOLLOW_ruleElement_in_rule__AbstractElement__Alternatives431);
@@ -601,10 +600,10 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:240:6: ( ruleImport )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:239:6: ( ruleImport )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:240:6: ( ruleImport )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:241:1: ruleImport
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:239:6: ( ruleImport )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:240:1: ruleImport
                     {
                      before(grammarAccess.getAbstractElementAccess().getImportParserRuleCall_1()); 
                     pushFollow(FollowSets000.FOLLOW_ruleImport_in_rule__AbstractElement__Alternatives448);
@@ -637,13 +636,13 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Alternatives_1_1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:251:1: rule__Element__Alternatives_1_1 : ( ( ( rule__Element__ContainedAssignment_1_1_0 ) ) | ( ( rule__Element__Group_1_1_1__0 ) ) );
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:250:1: rule__Element__Alternatives_1_1 : ( ( ( rule__Element__ContainedAssignment_1_1_0 ) ) | ( ( rule__Element__Group_1_1_1__0 ) ) );
     public final void rule__Element__Alternatives_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:255:1: ( ( ( rule__Element__ContainedAssignment_1_1_0 ) ) | ( ( rule__Element__Group_1_1_1__0 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:254:1: ( ( ( rule__Element__ContainedAssignment_1_1_0 ) ) | ( ( rule__Element__Group_1_1_1__0 ) ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -661,14 +660,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:256:1: ( ( rule__Element__ContainedAssignment_1_1_0 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:255:1: ( ( rule__Element__ContainedAssignment_1_1_0 ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:256:1: ( ( rule__Element__ContainedAssignment_1_1_0 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:257:1: ( rule__Element__ContainedAssignment_1_1_0 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:255:1: ( ( rule__Element__ContainedAssignment_1_1_0 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:256:1: ( rule__Element__ContainedAssignment_1_1_0 )
                     {
                      before(grammarAccess.getElementAccess().getContainedAssignment_1_1_0()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:258:1: ( rule__Element__ContainedAssignment_1_1_0 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:258:2: rule__Element__ContainedAssignment_1_1_0
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:257:1: ( rule__Element__ContainedAssignment_1_1_0 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:257:2: rule__Element__ContainedAssignment_1_1_0
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Element__ContainedAssignment_1_1_0_in_rule__Element__Alternatives_1_1480);
                     rule__Element__ContainedAssignment_1_1_0();
@@ -686,14 +685,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:262:6: ( ( rule__Element__Group_1_1_1__0 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:261:6: ( ( rule__Element__Group_1_1_1__0 ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:262:6: ( ( rule__Element__Group_1_1_1__0 ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:263:1: ( rule__Element__Group_1_1_1__0 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:261:6: ( ( rule__Element__Group_1_1_1__0 ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:262:1: ( rule__Element__Group_1_1_1__0 )
                     {
                      before(grammarAccess.getElementAccess().getGroup_1_1_1()); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:264:1: ( rule__Element__Group_1_1_1__0 )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:264:2: rule__Element__Group_1_1_1__0
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:263:1: ( rule__Element__Group_1_1_1__0 )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:263:2: rule__Element__Group_1_1_1__0
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Element__Group_1_1_1__0_in_rule__Element__Alternatives_1_1498);
                     rule__Element__Group_1_1_1__0();
@@ -728,14 +727,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__Group__0"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:275:1: rule__Import__Group__0 : rule__Import__Group__0__Impl rule__Import__Group__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:274:1: rule__Import__Group__0 : rule__Import__Group__0__Impl rule__Import__Group__1 ;
     public final void rule__Import__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:279:1: ( rule__Import__Group__0__Impl rule__Import__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:280:2: rule__Import__Group__0__Impl rule__Import__Group__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:278:1: ( rule__Import__Group__0__Impl rule__Import__Group__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:279:2: rule__Import__Group__0__Impl rule__Import__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_rule__Import__Group__0__Impl_in_rule__Import__Group__0529);
             rule__Import__Group__0__Impl();
@@ -766,17 +765,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__Group__0__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:287:1: rule__Import__Group__0__Impl : ( 'import' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:286:1: rule__Import__Group__0__Impl : ( 'import' ) ;
     public final void rule__Import__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:291:1: ( ( 'import' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:292:1: ( 'import' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:290:1: ( ( 'import' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:291:1: ( 'import' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:292:1: ( 'import' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:293:1: 'import'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:291:1: ( 'import' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:292:1: 'import'
             {
              before(grammarAccess.getImportAccess().getImportKeyword_0()); 
             match(input,11,FollowSets000.FOLLOW_11_in_rule__Import__Group__0__Impl560); 
@@ -803,14 +802,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__Group__1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:306:1: rule__Import__Group__1 : rule__Import__Group__1__Impl ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:305:1: rule__Import__Group__1 : rule__Import__Group__1__Impl ;
     public final void rule__Import__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:310:1: ( rule__Import__Group__1__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:311:2: rule__Import__Group__1__Impl
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:309:1: ( rule__Import__Group__1__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:310:2: rule__Import__Group__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_rule__Import__Group__1__Impl_in_rule__Import__Group__1591);
             rule__Import__Group__1__Impl();
@@ -836,21 +835,21 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__Group__1__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:317:1: rule__Import__Group__1__Impl : ( ( rule__Import__ImportedNamespaceAssignment_1 ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:316:1: rule__Import__Group__1__Impl : ( ( rule__Import__ImportedNamespaceAssignment_1 ) ) ;
     public final void rule__Import__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:321:1: ( ( ( rule__Import__ImportedNamespaceAssignment_1 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:322:1: ( ( rule__Import__ImportedNamespaceAssignment_1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:320:1: ( ( ( rule__Import__ImportedNamespaceAssignment_1 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:321:1: ( ( rule__Import__ImportedNamespaceAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:322:1: ( ( rule__Import__ImportedNamespaceAssignment_1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:323:1: ( rule__Import__ImportedNamespaceAssignment_1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:321:1: ( ( rule__Import__ImportedNamespaceAssignment_1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:322:1: ( rule__Import__ImportedNamespaceAssignment_1 )
             {
              before(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:324:1: ( rule__Import__ImportedNamespaceAssignment_1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:324:2: rule__Import__ImportedNamespaceAssignment_1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:323:1: ( rule__Import__ImportedNamespaceAssignment_1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:323:2: rule__Import__ImportedNamespaceAssignment_1
             {
             pushFollow(FollowSets000.FOLLOW_rule__Import__ImportedNamespaceAssignment_1_in_rule__Import__Group__1__Impl618);
             rule__Import__ImportedNamespaceAssignment_1();
@@ -883,14 +882,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group__0"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:338:1: rule__Element__Group__0 : rule__Element__Group__0__Impl rule__Element__Group__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:337:1: rule__Element__Group__0 : rule__Element__Group__0__Impl rule__Element__Group__1 ;
     public final void rule__Element__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:342:1: ( rule__Element__Group__0__Impl rule__Element__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:343:2: rule__Element__Group__0__Impl rule__Element__Group__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:341:1: ( rule__Element__Group__0__Impl rule__Element__Group__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:342:2: rule__Element__Group__0__Impl rule__Element__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group__0__Impl_in_rule__Element__Group__0652);
             rule__Element__Group__0__Impl();
@@ -921,21 +920,21 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group__0__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:350:1: rule__Element__Group__0__Impl : ( ( rule__Element__NameAssignment_0 ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:349:1: rule__Element__Group__0__Impl : ( ( rule__Element__NameAssignment_0 ) ) ;
     public final void rule__Element__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:354:1: ( ( ( rule__Element__NameAssignment_0 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:355:1: ( ( rule__Element__NameAssignment_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:353:1: ( ( ( rule__Element__NameAssignment_0 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:354:1: ( ( rule__Element__NameAssignment_0 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:355:1: ( ( rule__Element__NameAssignment_0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:356:1: ( rule__Element__NameAssignment_0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:354:1: ( ( rule__Element__NameAssignment_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:355:1: ( rule__Element__NameAssignment_0 )
             {
              before(grammarAccess.getElementAccess().getNameAssignment_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:357:1: ( rule__Element__NameAssignment_0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:357:2: rule__Element__NameAssignment_0
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:356:1: ( rule__Element__NameAssignment_0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:356:2: rule__Element__NameAssignment_0
             {
             pushFollow(FollowSets000.FOLLOW_rule__Element__NameAssignment_0_in_rule__Element__Group__0__Impl682);
             rule__Element__NameAssignment_0();
@@ -968,14 +967,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group__1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:367:1: rule__Element__Group__1 : rule__Element__Group__1__Impl ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:366:1: rule__Element__Group__1 : rule__Element__Group__1__Impl ;
     public final void rule__Element__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:371:1: ( rule__Element__Group__1__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:372:2: rule__Element__Group__1__Impl
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:370:1: ( rule__Element__Group__1__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:371:2: rule__Element__Group__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group__1__Impl_in_rule__Element__Group__1712);
             rule__Element__Group__1__Impl();
@@ -1001,20 +1000,20 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group__1__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:378:1: rule__Element__Group__1__Impl : ( ( rule__Element__Group_1__0 )? ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:377:1: rule__Element__Group__1__Impl : ( ( rule__Element__Group_1__0 )? ) ;
     public final void rule__Element__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:382:1: ( ( ( rule__Element__Group_1__0 )? ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:383:1: ( ( rule__Element__Group_1__0 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:381:1: ( ( ( rule__Element__Group_1__0 )? ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:382:1: ( ( rule__Element__Group_1__0 )? )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:383:1: ( ( rule__Element__Group_1__0 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:384:1: ( rule__Element__Group_1__0 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:382:1: ( ( rule__Element__Group_1__0 )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:383:1: ( rule__Element__Group_1__0 )?
             {
              before(grammarAccess.getElementAccess().getGroup_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:385:1: ( rule__Element__Group_1__0 )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:384:1: ( rule__Element__Group_1__0 )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1023,7 +1022,7 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:385:2: rule__Element__Group_1__0
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:384:2: rule__Element__Group_1__0
                     {
                     pushFollow(FollowSets000.FOLLOW_rule__Element__Group_1__0_in_rule__Element__Group__1__Impl739);
                     rule__Element__Group_1__0();
@@ -1059,14 +1058,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group_1__0"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:399:1: rule__Element__Group_1__0 : rule__Element__Group_1__0__Impl rule__Element__Group_1__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:398:1: rule__Element__Group_1__0 : rule__Element__Group_1__0__Impl rule__Element__Group_1__1 ;
     public final void rule__Element__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:403:1: ( rule__Element__Group_1__0__Impl rule__Element__Group_1__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:404:2: rule__Element__Group_1__0__Impl rule__Element__Group_1__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:402:1: ( rule__Element__Group_1__0__Impl rule__Element__Group_1__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:403:2: rule__Element__Group_1__0__Impl rule__Element__Group_1__1
             {
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group_1__0__Impl_in_rule__Element__Group_1__0774);
             rule__Element__Group_1__0__Impl();
@@ -1097,17 +1096,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group_1__0__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:411:1: rule__Element__Group_1__0__Impl : ( '{' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:410:1: rule__Element__Group_1__0__Impl : ( '{' ) ;
     public final void rule__Element__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:415:1: ( ( '{' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:416:1: ( '{' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:414:1: ( ( '{' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:415:1: ( '{' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:416:1: ( '{' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:417:1: '{'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:415:1: ( '{' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:416:1: '{'
             {
              before(grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_1_0()); 
             match(input,12,FollowSets000.FOLLOW_12_in_rule__Element__Group_1__0__Impl805); 
@@ -1134,14 +1133,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group_1__1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:430:1: rule__Element__Group_1__1 : rule__Element__Group_1__1__Impl rule__Element__Group_1__2 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:429:1: rule__Element__Group_1__1 : rule__Element__Group_1__1__Impl rule__Element__Group_1__2 ;
     public final void rule__Element__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:434:1: ( rule__Element__Group_1__1__Impl rule__Element__Group_1__2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:435:2: rule__Element__Group_1__1__Impl rule__Element__Group_1__2
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:433:1: ( rule__Element__Group_1__1__Impl rule__Element__Group_1__2 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:434:2: rule__Element__Group_1__1__Impl rule__Element__Group_1__2
             {
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group_1__1__Impl_in_rule__Element__Group_1__1836);
             rule__Element__Group_1__1__Impl();
@@ -1172,20 +1171,20 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group_1__1__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:442:1: rule__Element__Group_1__1__Impl : ( ( rule__Element__Alternatives_1_1 )* ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:441:1: rule__Element__Group_1__1__Impl : ( ( rule__Element__Alternatives_1_1 )* ) ;
     public final void rule__Element__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:446:1: ( ( ( rule__Element__Alternatives_1_1 )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:447:1: ( ( rule__Element__Alternatives_1_1 )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:445:1: ( ( ( rule__Element__Alternatives_1_1 )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:446:1: ( ( rule__Element__Alternatives_1_1 )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:447:1: ( ( rule__Element__Alternatives_1_1 )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:448:1: ( rule__Element__Alternatives_1_1 )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:446:1: ( ( rule__Element__Alternatives_1_1 )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:447:1: ( rule__Element__Alternatives_1_1 )*
             {
              before(grammarAccess.getElementAccess().getAlternatives_1_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:449:1: ( rule__Element__Alternatives_1_1 )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:448:1: ( rule__Element__Alternatives_1_1 )*
             loop5:
             do {
                 int alt5=2;
@@ -1198,7 +1197,7 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
                 switch (alt5) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:449:2: rule__Element__Alternatives_1_1
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:448:2: rule__Element__Alternatives_1_1
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__Element__Alternatives_1_1_in_rule__Element__Group_1__1__Impl866);
             	    rule__Element__Alternatives_1_1();
@@ -1237,14 +1236,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group_1__2"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:459:1: rule__Element__Group_1__2 : rule__Element__Group_1__2__Impl ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:458:1: rule__Element__Group_1__2 : rule__Element__Group_1__2__Impl ;
     public final void rule__Element__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:463:1: ( rule__Element__Group_1__2__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:464:2: rule__Element__Group_1__2__Impl
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:462:1: ( rule__Element__Group_1__2__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:463:2: rule__Element__Group_1__2__Impl
             {
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group_1__2__Impl_in_rule__Element__Group_1__2897);
             rule__Element__Group_1__2__Impl();
@@ -1270,17 +1269,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group_1__2__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:470:1: rule__Element__Group_1__2__Impl : ( '}' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:469:1: rule__Element__Group_1__2__Impl : ( '}' ) ;
     public final void rule__Element__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:474:1: ( ( '}' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:475:1: ( '}' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:473:1: ( ( '}' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:474:1: ( '}' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:475:1: ( '}' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:476:1: '}'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:474:1: ( '}' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:475:1: '}'
             {
              before(grammarAccess.getElementAccess().getRightCurlyBracketKeyword_1_2()); 
             match(input,13,FollowSets000.FOLLOW_13_in_rule__Element__Group_1__2__Impl925); 
@@ -1307,14 +1306,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group_1_1_1__0"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:495:1: rule__Element__Group_1_1_1__0 : rule__Element__Group_1_1_1__0__Impl rule__Element__Group_1_1_1__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:494:1: rule__Element__Group_1_1_1__0 : rule__Element__Group_1_1_1__0__Impl rule__Element__Group_1_1_1__1 ;
     public final void rule__Element__Group_1_1_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:499:1: ( rule__Element__Group_1_1_1__0__Impl rule__Element__Group_1_1_1__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:500:2: rule__Element__Group_1_1_1__0__Impl rule__Element__Group_1_1_1__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:498:1: ( rule__Element__Group_1_1_1__0__Impl rule__Element__Group_1_1_1__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:499:2: rule__Element__Group_1_1_1__0__Impl rule__Element__Group_1_1_1__1
             {
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group_1_1_1__0__Impl_in_rule__Element__Group_1_1_1__0962);
             rule__Element__Group_1_1_1__0__Impl();
@@ -1345,17 +1344,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group_1_1_1__0__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:507:1: rule__Element__Group_1_1_1__0__Impl : ( 'ref' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:506:1: rule__Element__Group_1_1_1__0__Impl : ( 'ref' ) ;
     public final void rule__Element__Group_1_1_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:511:1: ( ( 'ref' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:512:1: ( 'ref' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:510:1: ( ( 'ref' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:511:1: ( 'ref' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:512:1: ( 'ref' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:513:1: 'ref'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:511:1: ( 'ref' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:512:1: 'ref'
             {
              before(grammarAccess.getElementAccess().getRefKeyword_1_1_1_0()); 
             match(input,14,FollowSets000.FOLLOW_14_in_rule__Element__Group_1_1_1__0__Impl993); 
@@ -1382,14 +1381,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group_1_1_1__1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:526:1: rule__Element__Group_1_1_1__1 : rule__Element__Group_1_1_1__1__Impl ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:525:1: rule__Element__Group_1_1_1__1 : rule__Element__Group_1_1_1__1__Impl ;
     public final void rule__Element__Group_1_1_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:530:1: ( rule__Element__Group_1_1_1__1__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:531:2: rule__Element__Group_1_1_1__1__Impl
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:529:1: ( rule__Element__Group_1_1_1__1__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:530:2: rule__Element__Group_1_1_1__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_rule__Element__Group_1_1_1__1__Impl_in_rule__Element__Group_1_1_1__11024);
             rule__Element__Group_1_1_1__1__Impl();
@@ -1415,21 +1414,21 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__Group_1_1_1__1__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:537:1: rule__Element__Group_1_1_1__1__Impl : ( ( rule__Element__ReferencedAssignment_1_1_1_1 ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:536:1: rule__Element__Group_1_1_1__1__Impl : ( ( rule__Element__ReferencedAssignment_1_1_1_1 ) ) ;
     public final void rule__Element__Group_1_1_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:541:1: ( ( ( rule__Element__ReferencedAssignment_1_1_1_1 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:542:1: ( ( rule__Element__ReferencedAssignment_1_1_1_1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:540:1: ( ( ( rule__Element__ReferencedAssignment_1_1_1_1 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:541:1: ( ( rule__Element__ReferencedAssignment_1_1_1_1 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:542:1: ( ( rule__Element__ReferencedAssignment_1_1_1_1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:543:1: ( rule__Element__ReferencedAssignment_1_1_1_1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:541:1: ( ( rule__Element__ReferencedAssignment_1_1_1_1 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:542:1: ( rule__Element__ReferencedAssignment_1_1_1_1 )
             {
              before(grammarAccess.getElementAccess().getReferencedAssignment_1_1_1_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:544:1: ( rule__Element__ReferencedAssignment_1_1_1_1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:544:2: rule__Element__ReferencedAssignment_1_1_1_1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:543:1: ( rule__Element__ReferencedAssignment_1_1_1_1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:543:2: rule__Element__ReferencedAssignment_1_1_1_1
             {
             pushFollow(FollowSets000.FOLLOW_rule__Element__ReferencedAssignment_1_1_1_1_in_rule__Element__Group_1_1_1__1__Impl1051);
             rule__Element__ReferencedAssignment_1_1_1_1();
@@ -1462,14 +1461,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQN__Group__0"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:558:1: rule__FQN__Group__0 : rule__FQN__Group__0__Impl rule__FQN__Group__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:557:1: rule__FQN__Group__0 : rule__FQN__Group__0__Impl rule__FQN__Group__1 ;
     public final void rule__FQN__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:562:1: ( rule__FQN__Group__0__Impl rule__FQN__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:563:2: rule__FQN__Group__0__Impl rule__FQN__Group__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:561:1: ( rule__FQN__Group__0__Impl rule__FQN__Group__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:562:2: rule__FQN__Group__0__Impl rule__FQN__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_rule__FQN__Group__0__Impl_in_rule__FQN__Group__01085);
             rule__FQN__Group__0__Impl();
@@ -1500,17 +1499,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQN__Group__0__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:570:1: rule__FQN__Group__0__Impl : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:569:1: rule__FQN__Group__0__Impl : ( RULE_ID ) ;
     public final void rule__FQN__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:574:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:575:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:573:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:574:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:575:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:576:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:574:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:575:1: RULE_ID
             {
              before(grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__FQN__Group__0__Impl1115); 
@@ -1537,14 +1536,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQN__Group__1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:587:1: rule__FQN__Group__1 : rule__FQN__Group__1__Impl ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:586:1: rule__FQN__Group__1 : rule__FQN__Group__1__Impl ;
     public final void rule__FQN__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:591:1: ( rule__FQN__Group__1__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:592:2: rule__FQN__Group__1__Impl
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:590:1: ( rule__FQN__Group__1__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:591:2: rule__FQN__Group__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_rule__FQN__Group__1__Impl_in_rule__FQN__Group__11144);
             rule__FQN__Group__1__Impl();
@@ -1570,20 +1569,20 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQN__Group__1__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:598:1: rule__FQN__Group__1__Impl : ( ( rule__FQN__Group_1__0 )* ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:597:1: rule__FQN__Group__1__Impl : ( ( rule__FQN__Group_1__0 )* ) ;
     public final void rule__FQN__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:602:1: ( ( ( rule__FQN__Group_1__0 )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:603:1: ( ( rule__FQN__Group_1__0 )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:601:1: ( ( ( rule__FQN__Group_1__0 )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:602:1: ( ( rule__FQN__Group_1__0 )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:603:1: ( ( rule__FQN__Group_1__0 )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:604:1: ( rule__FQN__Group_1__0 )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:602:1: ( ( rule__FQN__Group_1__0 )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:603:1: ( rule__FQN__Group_1__0 )*
             {
              before(grammarAccess.getFQNAccess().getGroup_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:605:1: ( rule__FQN__Group_1__0 )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:604:1: ( rule__FQN__Group_1__0 )*
             loop6:
             do {
                 int alt6=2;
@@ -1596,7 +1595,7 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
                 switch (alt6) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:605:2: rule__FQN__Group_1__0
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:604:2: rule__FQN__Group_1__0
             	    {
             	    pushFollow(FollowSets000.FOLLOW_rule__FQN__Group_1__0_in_rule__FQN__Group__1__Impl1171);
             	    rule__FQN__Group_1__0();
@@ -1635,14 +1634,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQN__Group_1__0"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:619:1: rule__FQN__Group_1__0 : rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:618:1: rule__FQN__Group_1__0 : rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 ;
     public final void rule__FQN__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:623:1: ( rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:624:2: rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:622:1: ( rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:623:2: rule__FQN__Group_1__0__Impl rule__FQN__Group_1__1
             {
             pushFollow(FollowSets000.FOLLOW_rule__FQN__Group_1__0__Impl_in_rule__FQN__Group_1__01206);
             rule__FQN__Group_1__0__Impl();
@@ -1673,17 +1672,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQN__Group_1__0__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:631:1: rule__FQN__Group_1__0__Impl : ( '.' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:630:1: rule__FQN__Group_1__0__Impl : ( '.' ) ;
     public final void rule__FQN__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:635:1: ( ( '.' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:636:1: ( '.' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:634:1: ( ( '.' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:635:1: ( '.' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:636:1: ( '.' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:637:1: '.'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:635:1: ( '.' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:636:1: '.'
             {
              before(grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
             match(input,15,FollowSets000.FOLLOW_15_in_rule__FQN__Group_1__0__Impl1237); 
@@ -1710,14 +1709,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQN__Group_1__1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:650:1: rule__FQN__Group_1__1 : rule__FQN__Group_1__1__Impl ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:649:1: rule__FQN__Group_1__1 : rule__FQN__Group_1__1__Impl ;
     public final void rule__FQN__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:654:1: ( rule__FQN__Group_1__1__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:655:2: rule__FQN__Group_1__1__Impl
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:653:1: ( rule__FQN__Group_1__1__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:654:2: rule__FQN__Group_1__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_rule__FQN__Group_1__1__Impl_in_rule__FQN__Group_1__11268);
             rule__FQN__Group_1__1__Impl();
@@ -1743,17 +1742,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQN__Group_1__1__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:661:1: rule__FQN__Group_1__1__Impl : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:660:1: rule__FQN__Group_1__1__Impl : ( RULE_ID ) ;
     public final void rule__FQN__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:665:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:666:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:664:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:665:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:666:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:667:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:665:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:666:1: RULE_ID
             {
              before(grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__FQN__Group_1__1__Impl1295); 
@@ -1780,14 +1779,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQNWithWC__Group__0"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:682:1: rule__FQNWithWC__Group__0 : rule__FQNWithWC__Group__0__Impl rule__FQNWithWC__Group__1 ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:681:1: rule__FQNWithWC__Group__0 : rule__FQNWithWC__Group__0__Impl rule__FQNWithWC__Group__1 ;
     public final void rule__FQNWithWC__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:686:1: ( rule__FQNWithWC__Group__0__Impl rule__FQNWithWC__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:687:2: rule__FQNWithWC__Group__0__Impl rule__FQNWithWC__Group__1
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:685:1: ( rule__FQNWithWC__Group__0__Impl rule__FQNWithWC__Group__1 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:686:2: rule__FQNWithWC__Group__0__Impl rule__FQNWithWC__Group__1
             {
             pushFollow(FollowSets000.FOLLOW_rule__FQNWithWC__Group__0__Impl_in_rule__FQNWithWC__Group__01328);
             rule__FQNWithWC__Group__0__Impl();
@@ -1818,17 +1817,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQNWithWC__Group__0__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:694:1: rule__FQNWithWC__Group__0__Impl : ( ruleFQN ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:693:1: rule__FQNWithWC__Group__0__Impl : ( ruleFQN ) ;
     public final void rule__FQNWithWC__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:698:1: ( ( ruleFQN ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:699:1: ( ruleFQN )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:697:1: ( ( ruleFQN ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:698:1: ( ruleFQN )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:699:1: ( ruleFQN )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:700:1: ruleFQN
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:698:1: ( ruleFQN )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:699:1: ruleFQN
             {
              before(grammarAccess.getFQNWithWCAccess().getFQNParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleFQN_in_rule__FQNWithWC__Group__0__Impl1358);
@@ -1859,14 +1858,14 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQNWithWC__Group__1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:711:1: rule__FQNWithWC__Group__1 : rule__FQNWithWC__Group__1__Impl ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:710:1: rule__FQNWithWC__Group__1 : rule__FQNWithWC__Group__1__Impl ;
     public final void rule__FQNWithWC__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:715:1: ( rule__FQNWithWC__Group__1__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:716:2: rule__FQNWithWC__Group__1__Impl
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:714:1: ( rule__FQNWithWC__Group__1__Impl )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:715:2: rule__FQNWithWC__Group__1__Impl
             {
             pushFollow(FollowSets000.FOLLOW_rule__FQNWithWC__Group__1__Impl_in_rule__FQNWithWC__Group__11387);
             rule__FQNWithWC__Group__1__Impl();
@@ -1892,20 +1891,20 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__FQNWithWC__Group__1__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:722:1: rule__FQNWithWC__Group__1__Impl : ( ( '.*' )? ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:721:1: rule__FQNWithWC__Group__1__Impl : ( ( '.*' )? ) ;
     public final void rule__FQNWithWC__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:726:1: ( ( ( '.*' )? ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:727:1: ( ( '.*' )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:725:1: ( ( ( '.*' )? ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:726:1: ( ( '.*' )? )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:727:1: ( ( '.*' )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:728:1: ( '.*' )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:726:1: ( ( '.*' )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:727:1: ( '.*' )?
             {
              before(grammarAccess.getFQNWithWCAccess().getFullStopAsteriskKeyword_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:729:1: ( '.*' )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:728:1: ( '.*' )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1914,7 +1913,7 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:730:2: '.*'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:729:2: '.*'
                     {
                     match(input,16,FollowSets000.FOLLOW_16_in_rule__FQNWithWC__Group__1__Impl1416); 
 
@@ -1946,17 +1945,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Main__ElementsAssignment"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:746:1: rule__Main__ElementsAssignment : ( ruleAbstractElement ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:745:1: rule__Main__ElementsAssignment : ( ruleAbstractElement ) ;
     public final void rule__Main__ElementsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:750:1: ( ( ruleAbstractElement ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:751:1: ( ruleAbstractElement )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:749:1: ( ( ruleAbstractElement ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:750:1: ( ruleAbstractElement )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:751:1: ( ruleAbstractElement )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:752:1: ruleAbstractElement
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:750:1: ( ruleAbstractElement )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:751:1: ruleAbstractElement
             {
              before(grammarAccess.getMainAccess().getElementsAbstractElementParserRuleCall_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleAbstractElement_in_rule__Main__ElementsAssignment1458);
@@ -1987,17 +1986,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__ImportedNamespaceAssignment_1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:761:1: rule__Import__ImportedNamespaceAssignment_1 : ( ruleFQNWithWC ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:760:1: rule__Import__ImportedNamespaceAssignment_1 : ( ruleFQNWithWC ) ;
     public final void rule__Import__ImportedNamespaceAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:765:1: ( ( ruleFQNWithWC ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:766:1: ( ruleFQNWithWC )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:764:1: ( ( ruleFQNWithWC ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:765:1: ( ruleFQNWithWC )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:766:1: ( ruleFQNWithWC )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:767:1: ruleFQNWithWC
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:765:1: ( ruleFQNWithWC )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:766:1: ruleFQNWithWC
             {
              before(grammarAccess.getImportAccess().getImportedNamespaceFQNWithWCParserRuleCall_1_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleFQNWithWC_in_rule__Import__ImportedNamespaceAssignment_11489);
@@ -2028,17 +2027,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__NameAssignment_0"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:776:1: rule__Element__NameAssignment_0 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:775:1: rule__Element__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__Element__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:780:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:781:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:779:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:780:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:781:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:782:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:780:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:781:1: RULE_ID
             {
              before(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_0_0()); 
             match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Element__NameAssignment_01520); 
@@ -2065,17 +2064,17 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__ContainedAssignment_1_1_0"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:791:1: rule__Element__ContainedAssignment_1_1_0 : ( ruleElement ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:790:1: rule__Element__ContainedAssignment_1_1_0 : ( ruleElement ) ;
     public final void rule__Element__ContainedAssignment_1_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:795:1: ( ( ruleElement ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:796:1: ( ruleElement )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:794:1: ( ( ruleElement ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:795:1: ( ruleElement )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:796:1: ( ruleElement )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:797:1: ruleElement
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:795:1: ( ruleElement )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:796:1: ruleElement
             {
              before(grammarAccess.getElementAccess().getContainedElementParserRuleCall_1_1_0_0()); 
             pushFollow(FollowSets000.FOLLOW_ruleElement_in_rule__Element__ContainedAssignment_1_1_01551);
@@ -2106,21 +2105,21 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Element__ReferencedAssignment_1_1_1_1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:806:1: rule__Element__ReferencedAssignment_1_1_1_1 : ( ( ruleFQN ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:805:1: rule__Element__ReferencedAssignment_1_1_1_1 : ( ( ruleFQN ) ) ;
     public final void rule__Element__ReferencedAssignment_1_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:810:1: ( ( ( ruleFQN ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:811:1: ( ( ruleFQN ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:809:1: ( ( ( ruleFQN ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:810:1: ( ( ruleFQN ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:811:1: ( ( ruleFQN ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:812:1: ( ruleFQN )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:810:1: ( ( ruleFQN ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:811:1: ( ruleFQN )
             {
              before(grammarAccess.getElementAccess().getReferencedElementCrossReference_1_1_1_1_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:813:1: ( ruleFQN )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:814:1: ruleFQN
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:812:1: ( ruleFQN )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/ui/contentassist/antlr/internal/InternalRefactoringTestLanguage.g:813:1: ruleFQN
             {
              before(grammarAccess.getElementAccess().getReferencedElementFQNParserRuleCall_1_1_1_1_0_1()); 
             pushFollow(FollowSets000.FOLLOW_ruleFQN_in_rule__Element__ReferencedAssignment_1_1_1_11586);

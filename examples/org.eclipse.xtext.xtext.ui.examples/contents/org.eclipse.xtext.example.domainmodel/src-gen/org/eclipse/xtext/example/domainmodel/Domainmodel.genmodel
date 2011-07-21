@@ -6,7 +6,7 @@
     modelPluginID="org.eclipse.xtext.example.domainmodel" forceOverwrite="true" modelName="Domainmodel"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.example.domainmodel.edit"
-    editorPluginID="org.eclipse.xtext.example.domainmodel.editor" usedGenPackages="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xAnnotations platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types">
+    editorPluginID="org.eclipse.xtext.example.domainmodel.editor" usedGenPackages="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
   <genPackages prefix="Domainmodel" basePackage="org.eclipse.xtext.example.domainmodel"
       disposableProviderFactory="true" ecorePackage="platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/Domainmodel.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.eclipse.xtext.example.domainmodel/src-gen/org/eclipse/xtext/example/domainmodel/Domainmodel.ecore#//Visibility">

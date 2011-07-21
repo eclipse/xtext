@@ -6,18 +6,20 @@
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Namespace" eSuperTypes="#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Namespace" eSuperTypes="platform:/resource/org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/BuilderTestLanguage.ecore#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
-        eType="#//Import" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/BuilderTestLanguage.ecore#//Import"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
-        eType="#//NamedElement" containment="true"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/BuilderTestLanguage.ecore#//NamedElement"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Import">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Element" eSuperTypes="#//NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="references" eType="#//Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Element" eSuperTypes="platform:/resource/org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/BuilderTestLanguage.ecore#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="references" eType="ecore:EClass platform:/resource/org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/BuilderTestLanguage.ecore#//Element"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="otherRefs" unique="false"
-        upperBound="-1" eType="#//Element"/>
+        upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/BuilderTestLanguage.ecore#//Element"/>
   </eClassifiers>
 </ecore:EPackage>

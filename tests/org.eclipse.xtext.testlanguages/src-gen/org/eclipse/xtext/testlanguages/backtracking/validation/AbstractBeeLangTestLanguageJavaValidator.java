@@ -8,7 +8,7 @@ import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 
 public class AbstractBeeLangTestLanguageJavaValidator extends AbstractDeclarativeValidator {
 
-@Override
+	@Override
 	protected List<EPackage> getEPackages() {
 	    List<EPackage> result = new ArrayList<EPackage>();
 	    result.add(org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.BeeLangTestLanguagePackage.eINSTANCE);

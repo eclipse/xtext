@@ -72,12 +72,12 @@ ruleCodetemplates returns [EObject current=null]
     }
     @after { leaveRule(); }:
 (
-	otherlv_0=KEYWORD_12 
+	otherlv_0=KEYWORD_12
     {
     	newLeafNode(otherlv_0, grammarAccess.getCodetemplatesAccess().getTemplatesKeyword_0());
     }
 
-	otherlv_1=KEYWORD_11 
+	otherlv_1=KEYWORD_11
     {
     	newLeafNode(otherlv_1, grammarAccess.getCodetemplatesAccess().getForKeyword_1());
     }
@@ -154,7 +154,7 @@ ruleCodetemplate returns [EObject current=null]
 
 )
 )
-	otherlv_1=KEYWORD_11 
+	otherlv_1=KEYWORD_11
     {
     	newLeafNode(otherlv_1, grammarAccess.getCodetemplateAccess().getForKeyword_1());
     }
@@ -239,7 +239,7 @@ ruleTemplateBodyWithQuotes returns [EObject current=null]
     }
     @after { leaveRule(); }:
 (
-	otherlv_0=KEYWORD_10 
+	otherlv_0=KEYWORD_10
     {
     	newLeafNode(otherlv_0, grammarAccess.getTemplateBodyWithQuotesAccess().getGreaterThanSignGreaterThanSignKeyword_0());
     }
@@ -482,7 +482,7 @@ ruleVariable returns [EObject current=null]
     }
     @after { leaveRule(); }:
 (
-	otherlv_0=KEYWORD_9 
+	otherlv_0=KEYWORD_9
     {
     	newLeafNode(otherlv_0, grammarAccess.getVariableAccess().getDollarSignLeftCurlyBracketKeyword_0());
     }
@@ -532,7 +532,7 @@ ruleVariable returns [EObject current=null]
     newLeafNode(this_WS_4, grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_0_1()); 
     }
 )*)?
-	otherlv_5=KEYWORD_6 
+	otherlv_5=KEYWORD_6
     {
     	newLeafNode(otherlv_5, grammarAccess.getVariableAccess().getColonKeyword_2_1_1());
     }
@@ -563,7 +563,7 @@ ruleVariable returns [EObject current=null]
     newLeafNode(this_WS_8, grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_0()); 
     }
 )*
-	otherlv_9=KEYWORD_2 
+	otherlv_9=KEYWORD_2
     {
     	newLeafNode(otherlv_9, grammarAccess.getVariableAccess().getLeftParenthesisKeyword_2_1_4_1());
     }
@@ -612,7 +612,7 @@ ruleVariable returns [EObject current=null]
     newLeafNode(this_WS_12, grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_4_0()); 
     }
 )*
-	otherlv_13=KEYWORD_4 
+	otherlv_13=KEYWORD_4
     {
     	newLeafNode(otherlv_13, grammarAccess.getVariableAccess().getCommaKeyword_2_1_4_4_1());
     }
@@ -661,7 +661,7 @@ ruleVariable returns [EObject current=null]
     newLeafNode(this_WS_16, grammarAccess.getVariableAccess().getWSTerminalRuleCall_2_1_4_5()); 
     }
 )*
-	otherlv_17=KEYWORD_3 
+	otherlv_17=KEYWORD_3
     {
     	newLeafNode(otherlv_17, grammarAccess.getVariableAccess().getRightParenthesisKeyword_2_1_4_6());
     }
@@ -670,7 +670,7 @@ ruleVariable returns [EObject current=null]
     newLeafNode(this_WS_18, grammarAccess.getVariableAccess().getWSTerminalRuleCall_3()); 
     }
 )*
-	otherlv_19=KEYWORD_7 
+	otherlv_19=KEYWORD_7
     {
     	newLeafNode(otherlv_19, grammarAccess.getVariableAccess().getRightCurlyBracketKeyword_4());
     }
@@ -876,11 +876,11 @@ ruleDollar returns [EObject current=null]
 )((
 (
 		lv_escaped_1_0=
-	KEYWORD_8 
+	KEYWORD_8
     {
         newLeafNode(lv_escaped_1_0, grammarAccess.getDollarAccess().getEscapedDollarSignDollarSignKeyword_1_0_0());
     }
- 
+
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getDollarRule());
@@ -891,7 +891,7 @@ ruleDollar returns [EObject current=null]
 )
 )
     |
-	otherlv_2=KEYWORD_1 
+	otherlv_2=KEYWORD_1
     {
     	newLeafNode(otherlv_2, grammarAccess.getDollarAccess().getDollarSignKeyword_1_1());
     }
