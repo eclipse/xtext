@@ -207,7 +207,7 @@ public class TypeArgumentContextTest extends TestCase {
 		TypeArgumentContext context = typeArgCtxProvider.getReceiverContext(reference);
 		JvmOperation jvmOperation = findOperation("java.util.List", "add(E)");
 		
-		assertEquals(null, context.getLowerBound(jvmOperation.getParameters().get(0).getParameterType()));
+		assertEquals("JvmAnyTypeReference", context.getLowerBound(jvmOperation.getParameters().get(0).getParameterType()).toString());
 		JvmOperation get = findOperation("java.util.List", "get(int)");
 		assertEquals("java.lang.CharSequence",context.getUpperBound(get.getReturnType(), resourceSet).getIdentifier());
 	}
