@@ -31,7 +31,6 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider;
 import org.eclipse.xtext.xtend2.jvmmodel.IXtend2JvmAssociations;
 import org.eclipse.xtext.xtend2.tests.AbstractXtend2TestCase;
 import org.eclipse.xtext.xtend2.xtend2.XtendClass;
@@ -147,7 +146,7 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		JvmTypeReference paramType = func.getParameters().get(0).getParameterType();
 		assertNotSame(typeParamDecl,paramType.getType());
 	}
-
+	
 	public void testFeatureScope_1() throws Exception {
 		XtendFile file = file ("class X { def String foo() {'hello world'} def String bar(String foo) {foo}}");
 		XtendClass xClass = file.getXtendClass();
