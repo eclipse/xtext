@@ -12,99 +12,99 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalXtend2Lexer extends Lexer {
-    public static final int RULE_ID=4;
-    public static final int T__29=29;
-    public static final int T__28=28;
-    public static final int T__27=27;
-    public static final int T__26=26;
-    public static final int T__25=25;
-    public static final int T__24=24;
-    public static final int T__23=23;
-    public static final int T__22=22;
-    public static final int RULE_ANY_OTHER=15;
-    public static final int T__21=21;
-    public static final int T__20=20;
-    public static final int EOF=-1;
-    public static final int T__93=93;
-    public static final int T__19=19;
-    public static final int T__94=94;
-    public static final int T__91=91;
-    public static final int T__92=92;
-    public static final int T__16=16;
-    public static final int T__90=90;
-    public static final int T__18=18;
-    public static final int T__17=17;
-    public static final int RULE_RICH_TEXT_END=9;
-    public static final int T__95=95;
-    public static final int T__80=80;
-    public static final int T__81=81;
-    public static final int T__82=82;
-    public static final int T__83=83;
-    public static final int T__85=85;
-    public static final int T__84=84;
-    public static final int T__87=87;
-    public static final int RULE_IN_RICH_STRING=11;
-    public static final int T__86=86;
-    public static final int T__89=89;
-    public static final int T__88=88;
-    public static final int RULE_ML_COMMENT=12;
+    public static final int T__42=42;
     public static final int RULE_STRING=5;
-    public static final int T__71=71;
+    public static final int T__47=47;
+    public static final int T__73=73;
+    public static final int T__21=21;
     public static final int T__72=72;
     public static final int T__70=70;
-    public static final int T__76=76;
-    public static final int T__75=75;
-    public static final int T__74=74;
-    public static final int T__73=73;
-    public static final int T__79=79;
-    public static final int RULE_RICH_TEXT_START=7;
-    public static final int T__78=78;
-    public static final int T__77=77;
-    public static final int T__68=68;
-    public static final int T__69=69;
-    public static final int T__66=66;
-    public static final int T__67=67;
-    public static final int T__64=64;
-    public static final int T__65=65;
-    public static final int T__62=62;
-    public static final int T__63=63;
+    public static final int T__39=39;
     public static final int RULE_RICH_TEXT=6;
-    public static final int T__61=61;
-    public static final int T__60=60;
-    public static final int T__55=55;
-    public static final int T__56=56;
-    public static final int T__57=57;
-    public static final int T__58=58;
-    public static final int T__51=51;
-    public static final int T__52=52;
-    public static final int T__53=53;
+    public static final int RULE_RICH_TEXT_START=7;
+    public static final int T__30=30;
+    public static final int T__46=46;
+    public static final int RULE_RICH_TEXT_INBETWEEN=8;
+    public static final int T__49=49;
     public static final int T__54=54;
-    public static final int T__59=59;
-    public static final int RULE_INT=10;
-    public static final int T__50=50;
-    public static final int T__42=42;
+    public static final int T__48=48;
+    public static final int T__89=89;
+    public static final int T__20=20;
+    public static final int T__79=79;
+    public static final int T__64=64;
+    public static final int T__44=44;
+    public static final int T__66=66;
+    public static final int T__92=92;
+    public static final int T__88=88;
+    public static final int T__22=22;
+    public static final int T__90=90;
+    public static final int T__63=63;
+    public static final int RULE_WS=14;
+    public static final int T__91=91;
     public static final int T__43=43;
     public static final int T__40=40;
-    public static final int T__41=41;
-    public static final int T__46=46;
-    public static final int T__47=47;
-    public static final int T__44=44;
-    public static final int T__45=45;
-    public static final int T__48=48;
-    public static final int T__49=49;
+    public static final int T__85=85;
+    public static final int T__26=26;
+    public static final int T__25=25;
     public static final int RULE_SL_COMMENT=13;
-    public static final int T__30=30;
-    public static final int T__31=31;
-    public static final int T__32=32;
-    public static final int T__33=33;
+    public static final int T__60=60;
+    public static final int T__41=41;
+    public static final int T__93=93;
+    public static final int T__86=86;
+    public static final int T__28=28;
+    public static final int T__23=23;
+    public static final int T__57=57;
+    public static final int T__94=94;
+    public static final int T__51=51;
+    public static final int T__80=80;
+    public static final int T__69=69;
+    public static final int T__95=95;
+    public static final int T__50=50;
+    public static final int T__19=19;
+    public static final int T__65=65;
+    public static final int T__67=67;
+    public static final int T__87=87;
+    public static final int T__74=74;
+    public static final int T__52=52;
+    public static final int T__68=68;
+    public static final int T__17=17;
+    public static final int T__62=62;
+    public static final int RULE_INT=10;
+    public static final int T__27=27;
+    public static final int T__24=24;
+    public static final int T__61=61;
+    public static final int T__59=59;
+    public static final int RULE_IN_RICH_STRING=11;
     public static final int T__34=34;
+    public static final int T__56=56;
+    public static final int RULE_ML_COMMENT=12;
     public static final int T__35=35;
+    public static final int RULE_ID=4;
+    public static final int T__78=78;
     public static final int T__36=36;
-    public static final int T__37=37;
+    public static final int T__58=58;
+    public static final int T__33=33;
+    public static final int T__77=77;
+    public static final int T__55=55;
+    public static final int T__45=45;
+    public static final int T__29=29;
+    public static final int T__84=84;
+    public static final int T__75=75;
+    public static final int T__31=31;
+    public static final int EOF=-1;
+    public static final int RULE_RICH_TEXT_END=9;
+    public static final int T__53=53;
+    public static final int T__32=32;
+    public static final int T__16=16;
     public static final int T__38=38;
-    public static final int T__39=39;
-    public static final int RULE_RICH_TEXT_INBETWEEN=8;
-    public static final int RULE_WS=14;
+    public static final int T__37=37;
+    public static final int T__76=76;
+    public static final int RULE_ANY_OTHER=15;
+    public static final int T__82=82;
+    public static final int T__81=81;
+    public static final int T__83=83;
+    public static final int T__71=71;
+    public static final int T__18=18;
 
     // delegates
     // delegators
@@ -3523,15 +3523,15 @@ public class InternalXtend2Lexer extends Lexer {
         "\3\65\7\uffff\2\65\1\u0096\1\65\4\uffff\6\65\1\u009e\22\uffff\1"+
         "\u009f\4\uffff\4\65\1\uffff\7\65\1\u0080\1\uffff\2\u0083\4\uffff"+
         "\3\65\1\uffff\11\65\1\u00be\1\65\1\uffff\1\65\1\u00c1\5\65\2\uffff"+
-        "\1\u00c8\3\65\1\u00cc\1\u00cd\1\u00ce\2\65\1\u00d1\3\65\1\u00d7"+
+        "\1\u00c8\3\65\1\u00cc\1\u00cd\1\u00ce\2\65\1\u00d1\3\65\1\u00d8"+
         "\2\u0083\10\65\1\u00e2\2\65\1\u00e5\2\65\1\uffff\2\65\1\uffff\5"+
         "\65\1\u00f0\1\uffff\3\65\3\uffff\1\u00f4\1\u00f5\1\uffff\3\65\2"+
-        "\u00d7\2\uffff\1\u0083\6\65\1\u0101\1\65\1\uffff\1\u0104\1\65\1"+
+        "\u00d8\2\uffff\1\u0083\6\65\1\u0101\1\65\1\uffff\1\u0104\1\65\1"+
         "\uffff\1\u0106\5\65\1\u010c\1\65\1\u010e\1\65\1\uffff\1\u0110\1"+
-        "\65\1\u0112\2\uffff\1\65\1\u0114\1\65\2\u00d7\1\65\1\u0118\2\65"+
+        "\65\1\u0112\2\uffff\1\65\1\u0114\1\65\2\u00d8\1\65\1\u0118\2\65"+
         "\1\u011b\1\u011c\1\uffff\2\65\1\uffff\1\u011f\1\uffff\3\65\1\u0123"+
         "\1\65\1\uffff\1\u0125\1\uffff\1\u0126\1\uffff\1\65\1\uffff\1\u0128"+
-        "\1\uffff\1\u0129\1\u00d7\1\u012a\1\uffff\2\65\2\uffff\1\65\1\u012e"+
+        "\1\uffff\1\u0129\1\u00d8\1\u012a\1\uffff\2\65\2\uffff\1\65\1\u012e"+
         "\1\uffff\1\u012f\2\65\1\uffff\1\65\2\uffff\1\u0133\3\uffff\3\65"+
         "\2\uffff\1\u0137\1\u0138\1\65\1\uffff\2\65\1\u013c\2\uffff\1\u013d"+
         "\1\u013e\1\u013f\4\uffff";
@@ -3598,16 +3598,16 @@ public class InternalXtend2Lexer extends Lexer {
         "\117\1\64\1\66\4\uffff\1\77\10\uffff\1\127\2\uffff\1\123\1\124\1"+
         "\126\1\132\3\uffff\1\67\13\uffff\1\76\7\uffff\1\33\1\61\36\uffff"+
         "\1\17\2\uffff\1\26\6\uffff\1\74\3\uffff\1\100\1\101\1\104\2\uffff"+
-        "\1\113\5\uffff\1\121\1\122\11\uffff\1\70\2\uffff\1\73\12\uffff\1"+
+        "\1\113\5\uffff\1\122\1\121\11\uffff\1\70\2\uffff\1\73\12\uffff\1"+
         "\34\3\uffff\1\107\1\106\13\uffff\1\102\2\uffff\1\7\1\uffff\1\115"+
         "\5\uffff\1\31\1\uffff\1\35\1\uffff\1\105\1\uffff\1\75\1\uffff\1"+
         "\111\3\uffff\1\2\2\uffff\1\3\1\71\2\uffff\1\24\3\uffff\1\27\1\uffff"+
         "\1\32\1\36\1\uffff\1\110\1\112\1\1\3\uffff\1\13\1\72\3\uffff\1\114"+
         "\3\uffff\1\21\1\20\3\uffff\1\4\1\30\1\14\1\47";
     static final String DFA27_specialS =
-        "\1\15\53\uffff\1\11\1\13\3\uffff\1\12\117\uffff\1\6\1\2\52\uffff"+
-        "\1\7\1\14\1\1\45\uffff\1\10\1\4\2\uffff\1\3\37\uffff\1\16\1\5\33"+
-        "\uffff\1\0\51\uffff}>";
+        "\1\16\53\uffff\1\6\1\13\3\uffff\1\7\117\uffff\1\14\1\1\52\uffff"+
+        "\1\11\1\2\1\10\45\uffff\1\0\1\12\2\uffff\1\15\37\uffff\1\3\1\4\33"+
+        "\uffff\1\5\51\uffff}>";
     static final String[] DFA27_transitionS = {
             "\11\63\2\62\2\63\1\62\22\63\1\62\1\35\1\61\1\63\1\57\1\40\1"+
             "\34\1\54\1\17\1\20\1\6\1\32\1\11\1\36\1\5\1\37\12\60\1\21\1"+
@@ -3798,7 +3798,7 @@ public class InternalXtend2Lexer extends Lexer {
             "\1\u00d2",
             "\1\u00d3",
             "\1\u00d4",
-            "\47\u00d6\1\u00d5\u0083\u00d6\1\u00d8\uff54\u00d6",
+            "\47\u00d6\1\u00d5\u0083\u00d6\1\u00d7\uff54\u00d6",
             "\47\u00d9\1\uffff\u0083\u00d9\1\u0084\uff54\u00d9",
             "\47\u0082\1\u0081\u0083\u0082\1\u0084\uff54\u0082",
             "\1\u00da",
@@ -3843,8 +3843,8 @@ public class InternalXtend2Lexer extends Lexer {
             "\1\u00f6",
             "\1\u00f7",
             "\1\u00f8",
-            "\47\u00fa\1\u00f9\u0083\u00fa\1\u00d8\uff54\u00fa",
-            "\47\u00d6\1\u00d5\u0083\u00d6\1\u00d8\uff54\u00d6",
+            "\47\u00fa\1\u00f9\u0083\u00fa\1\u00d7\uff54\u00fa",
+            "\47\u00d6\1\u00d5\u0083\u00d6\1\u00d7\uff54\u00d6",
             "",
             "",
             "\47\u0082\1\u0081\u0083\u0082\1\u0084\uff54\u0082",
@@ -3887,8 +3887,8 @@ public class InternalXtend2Lexer extends Lexer {
             "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
             "\65",
             "\1\u0115",
-            "\47\u0116\1\uffff\u0083\u0116\1\u00d8\uff54\u0116",
-            "\47\u00d6\1\u00d5\u0083\u00d6\1\u00d8\uff54\u00d6",
+            "\47\u0116\1\uffff\u0083\u0116\1\u00d7\uff54\u0116",
+            "\47\u00d6\1\u00d5\u0083\u00d6\1\u00d7\uff54\u00d6",
             "\1\u0117",
             "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
             "\65",
@@ -3925,7 +3925,7 @@ public class InternalXtend2Lexer extends Lexer {
             "",
             "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
             "\65",
-            "\47\u00d6\1\u00d5\u0083\u00d6\1\u00d8\uff54\u00d6",
+            "\47\u00d6\1\u00d5\u0083\u00d6\1\u00d7\uff54\u00d6",
             "\1\65\13\uffff\12\65\7\uffff\32\65\4\uffff\1\65\1\uffff\32"+
             "\65",
             "",
@@ -4016,118 +4016,6 @@ public class InternalXtend2Lexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA27_278 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA27_278=='\'') ) {s = 213;}
-
-                        else if ( (LA27_278=='\u00AB') ) {s = 216;}
-
-                        else if ( ((LA27_278>='\u0000' && LA27_278<='&')||(LA27_278>='(' && LA27_278<='\u00AA')||(LA27_278>='\u00AC' && LA27_278<='\uFFFF')) ) {s = 214;}
-
-                        else s = 215;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA27_175 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA27_175=='\'') ) {s = 129;}
-
-                        else if ( ((LA27_175>='\u0000' && LA27_175<='&')||(LA27_175>='(' && LA27_175<='\u00AA')||(LA27_175>='\u00AC' && LA27_175<='\uFFFF')) ) {s = 130;}
-
-                        else if ( (LA27_175=='\u00AB') ) {s = 132;}
-
-                        else s = 131;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA27_130 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA27_130=='\'') ) {s = 129;}
-
-                        else if ( ((LA27_130>='\u0000' && LA27_130<='&')||(LA27_130>='(' && LA27_130<='\u00AA')||(LA27_130>='\u00AC' && LA27_130<='\uFFFF')) ) {s = 130;}
-
-                        else if ( (LA27_130=='\u00AB') ) {s = 132;}
-
-                        else s = 131;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
-                        int LA27_217 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA27_217=='\'') ) {s = 129;}
-
-                        else if ( ((LA27_217>='\u0000' && LA27_217<='&')||(LA27_217>='(' && LA27_217<='\u00AA')||(LA27_217>='\u00AC' && LA27_217<='\uFFFF')) ) {s = 130;}
-
-                        else if ( (LA27_217=='\u00AB') ) {s = 132;}
-
-                        else s = 131;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
-                        int LA27_214 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA27_214=='\'') ) {s = 213;}
-
-                        else if ( ((LA27_214>='\u0000' && LA27_214<='&')||(LA27_214>='(' && LA27_214<='\u00AA')||(LA27_214>='\u00AC' && LA27_214<='\uFFFF')) ) {s = 214;}
-
-                        else if ( (LA27_214=='\u00AB') ) {s = 216;}
-
-                        else s = 215;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 5 : 
-                        int LA27_250 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA27_250=='\'') ) {s = 213;}
-
-                        else if ( (LA27_250=='\u00AB') ) {s = 216;}
-
-                        else if ( ((LA27_250>='\u0000' && LA27_250<='&')||(LA27_250>='(' && LA27_250<='\u00AA')||(LA27_250>='\u00AC' && LA27_250<='\uFFFF')) ) {s = 214;}
-
-                        else s = 215;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 6 : 
-                        int LA27_129 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA27_129=='\'') ) {s = 174;}
-
-                        else if ( ((LA27_129>='\u0000' && LA27_129<='&')||(LA27_129>='(' && LA27_129<='\u00AA')||(LA27_129>='\u00AC' && LA27_129<='\uFFFF')) ) {s = 175;}
-
-                        else if ( (LA27_129=='\u00AB') ) {s = 132;}
-
-                        else s = 131;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 7 : 
-                        int LA27_173 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA27_173=='\'') ) {s = 213;}
-
-                        else if ( ((LA27_173>='\u0000' && LA27_173<='&')||(LA27_173>='(' && LA27_173<='\u00AA')||(LA27_173>='\u00AC' && LA27_173<='\uFFFF')) ) {s = 214;}
-
-                        else if ( (LA27_173=='\u00AB') ) {s = 216;}
-
-                        else s = 215;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 8 : 
                         int LA27_213 = input.LA(1);
 
                         s = -1;
@@ -4135,13 +4023,79 @@ public class InternalXtend2Lexer extends Lexer {
 
                         else if ( ((LA27_213>='\u0000' && LA27_213<='&')||(LA27_213>='(' && LA27_213<='\u00AA')||(LA27_213>='\u00AC' && LA27_213<='\uFFFF')) ) {s = 250;}
 
-                        else if ( (LA27_213=='\u00AB') ) {s = 216;}
+                        else if ( (LA27_213=='\u00AB') ) {s = 215;}
 
-                        else s = 215;
+                        else s = 216;
 
                         if ( s>=0 ) return s;
                         break;
-                    case 9 : 
+                    case 1 : 
+                        int LA27_130 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA27_130=='\'') ) {s = 129;}
+
+                        else if ( (LA27_130=='\u00AB') ) {s = 132;}
+
+                        else if ( ((LA27_130>='\u0000' && LA27_130<='&')||(LA27_130>='(' && LA27_130<='\u00AA')||(LA27_130>='\u00AC' && LA27_130<='\uFFFF')) ) {s = 130;}
+
+                        else s = 131;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA27_174 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA27_174>='\u0000' && LA27_174<='&')||(LA27_174>='(' && LA27_174<='\u00AA')||(LA27_174>='\u00AC' && LA27_174<='\uFFFF')) ) {s = 217;}
+
+                        else if ( (LA27_174=='\u00AB') ) {s = 132;}
+
+                        else s = 131;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 3 : 
+                        int LA27_249 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA27_249>='\u0000' && LA27_249<='&')||(LA27_249>='(' && LA27_249<='\u00AA')||(LA27_249>='\u00AC' && LA27_249<='\uFFFF')) ) {s = 278;}
+
+                        else if ( (LA27_249=='\u00AB') ) {s = 215;}
+
+                        else s = 216;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 4 : 
+                        int LA27_250 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA27_250=='\'') ) {s = 213;}
+
+                        else if ( (LA27_250=='\u00AB') ) {s = 215;}
+
+                        else if ( ((LA27_250>='\u0000' && LA27_250<='&')||(LA27_250>='(' && LA27_250<='\u00AA')||(LA27_250>='\u00AC' && LA27_250<='\uFFFF')) ) {s = 214;}
+
+                        else s = 216;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
+                        int LA27_278 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA27_278=='\'') ) {s = 213;}
+
+                        else if ( ((LA27_278>='\u0000' && LA27_278<='&')||(LA27_278>='(' && LA27_278<='\u00AA')||(LA27_278>='\u00AC' && LA27_278<='\uFFFF')) ) {s = 214;}
+
+                        else if ( (LA27_278=='\u00AB') ) {s = 215;}
+
+                        else s = 216;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 6 : 
                         int LA27_44 = input.LA(1);
 
                         s = -1;
@@ -4153,13 +4107,55 @@ public class InternalXtend2Lexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 10 : 
+                    case 7 : 
                         int LA27_49 = input.LA(1);
 
                         s = -1;
                         if ( ((LA27_49>='\u0000' && LA27_49<='\uFFFF')) ) {s = 128;}
 
                         else s = 51;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 8 : 
+                        int LA27_175 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA27_175=='\'') ) {s = 129;}
+
+                        else if ( (LA27_175=='\u00AB') ) {s = 132;}
+
+                        else if ( ((LA27_175>='\u0000' && LA27_175<='&')||(LA27_175>='(' && LA27_175<='\u00AA')||(LA27_175>='\u00AC' && LA27_175<='\uFFFF')) ) {s = 130;}
+
+                        else s = 131;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 9 : 
+                        int LA27_173 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA27_173=='\'') ) {s = 213;}
+
+                        else if ( ((LA27_173>='\u0000' && LA27_173<='&')||(LA27_173>='(' && LA27_173<='\u00AA')||(LA27_173>='\u00AC' && LA27_173<='\uFFFF')) ) {s = 214;}
+
+                        else if ( (LA27_173=='\u00AB') ) {s = 215;}
+
+                        else s = 216;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 10 : 
+                        int LA27_214 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA27_214=='\'') ) {s = 213;}
+
+                        else if ( ((LA27_214>='\u0000' && LA27_214<='&')||(LA27_214>='(' && LA27_214<='\u00AA')||(LA27_214>='\u00AC' && LA27_214<='\uFFFF')) ) {s = 214;}
+
+                        else if ( (LA27_214=='\u00AB') ) {s = 215;}
+
+                        else s = 216;
 
                         if ( s>=0 ) return s;
                         break;
@@ -4178,18 +4174,34 @@ public class InternalXtend2Lexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 12 : 
-                        int LA27_174 = input.LA(1);
+                        int LA27_129 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA27_174>='\u0000' && LA27_174<='&')||(LA27_174>='(' && LA27_174<='\u00AA')||(LA27_174>='\u00AC' && LA27_174<='\uFFFF')) ) {s = 217;}
+                        if ( (LA27_129=='\'') ) {s = 174;}
 
-                        else if ( (LA27_174=='\u00AB') ) {s = 132;}
+                        else if ( ((LA27_129>='\u0000' && LA27_129<='&')||(LA27_129>='(' && LA27_129<='\u00AA')||(LA27_129>='\u00AC' && LA27_129<='\uFFFF')) ) {s = 175;}
+
+                        else if ( (LA27_129=='\u00AB') ) {s = 132;}
 
                         else s = 131;
 
                         if ( s>=0 ) return s;
                         break;
                     case 13 : 
+                        int LA27_217 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA27_217=='\'') ) {s = 129;}
+
+                        else if ( (LA27_217=='\u00AB') ) {s = 132;}
+
+                        else if ( ((LA27_217>='\u0000' && LA27_217<='&')||(LA27_217>='(' && LA27_217<='\u00AA')||(LA27_217>='\u00AC' && LA27_217<='\uFFFF')) ) {s = 130;}
+
+                        else s = 131;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 14 : 
                         int LA27_0 = input.LA(1);
 
                         s = -1;
@@ -4294,18 +4306,6 @@ public class InternalXtend2Lexer extends Lexer {
                         else if ( ((LA27_0>='\t' && LA27_0<='\n')||LA27_0=='\r'||LA27_0==' ') ) {s = 50;}
 
                         else if ( ((LA27_0>='\u0000' && LA27_0<='\b')||(LA27_0>='\u000B' && LA27_0<='\f')||(LA27_0>='\u000E' && LA27_0<='\u001F')||LA27_0=='#'||LA27_0=='\\'||LA27_0=='`'||(LA27_0>='~' && LA27_0<='\u00BA')||(LA27_0>='\u00BC' && LA27_0<='\uFFFF')) ) {s = 51;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 14 : 
-                        int LA27_249 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA27_249>='\u0000' && LA27_249<='&')||(LA27_249>='(' && LA27_249<='\u00AA')||(LA27_249>='\u00AC' && LA27_249<='\uFFFF')) ) {s = 278;}
-
-                        else if ( (LA27_249=='\u00AB') ) {s = 216;}
-
-                        else s = 215;
 
                         if ( s>=0 ) return s;
                         break;
