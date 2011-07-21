@@ -17,7 +17,7 @@ public class Xbase08_Loops {
 		  ArrayList<String> _arrayList = new ArrayList<String>();
 		  final ArrayList<String> result = _arrayList;
 		  List<String> _reverse = ListExtensions.<String>reverse(list);
-		  for (String x : _reverse) {
+		  for (final String x : _reverse) {
 		    String _upperCase = x.toUpperCase();
 		    CollectionExtensions.<String>operator_add(result, _upperCase);
 		  }

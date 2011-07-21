@@ -53,7 +53,7 @@ public class Xtend10_CreateFunctions extends TestCase {
   
   public NetNode copyNet(final NetNode toCopy) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(toCopy);
-    NetNode result;
+    final NetNode result;
     synchronized (_createCache_copyNet) {
       if (_createCache_copyNet.containsKey(_cacheKey)) {
         return _createCache_copyNet.get(_cacheKey);

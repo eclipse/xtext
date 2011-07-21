@@ -10,11 +10,11 @@ public class Xtend05_Loops {
   
   public void forLoop(final List<String> strings) {
     {
-      for (String s : strings) {
+      for (final String s : strings) {
         String _operator_plus = StringExtensions.operator_plus("Hi ", s);
         InputOutput.<String>println(_operator_plus);
       }
-      for (String s_1 : strings) {
+      for (final String s_1 : strings) {
         String _operator_plus_1 = StringExtensions.operator_plus("Hi ", s_1);
         InputOutput.<String>println(_operator_plus_1);
       }

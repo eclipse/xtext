@@ -49,7 +49,7 @@ public class Xtend09_DispatchMethods extends TestCase {
       Rectangle _rectangle_1 = new Rectangle(5, 5);
       ArrayList<Shape> _newArrayList = CollectionLiterals.<Shape>newArrayList(_rectangle, _circle, _rectangle_1);
       final ArrayList<Shape> list = _newArrayList;
-      for (Shape shape : list) {
+      for (final Shape shape : list) {
         StringConcatenation _label = this.toLabel(shape);
         InputOutput.<StringConcatenation>println(_label);
       }

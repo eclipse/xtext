@@ -34,7 +34,7 @@ public class DomainmodelGenerator implements IGenerator {
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
     Iterable<EObject> _allContentsIterable = ResourceExtensions.allContentsIterable(resource);
     Iterable<Entity> _filter = IterableExtensions.<Entity>filter(_allContentsIterable, org.eclipse.xtext.example.domainmodel.domainmodel.Entity.class);
-    for (Entity entity : _filter) {
+    for (final Entity entity : _filter) {
       String _fileName = this.generatorExtensions.fileName(entity);
       StringConcatenation _compile = this.compile(entity);
       fsa.generateFile(_fileName, _compile);
@@ -64,7 +64,7 @@ public class DomainmodelGenerator implements IGenerator {
     }
     {
       List<String> _imports = importManager.getImports();
-      for(String i : _imports) {
+      for(final String i : _imports) {
         _builder.append("import ");
         _builder.append(i, "");
         _builder.append(";");
@@ -89,7 +89,7 @@ public class DomainmodelGenerator implements IGenerator {
     _builder.newLineIfNotEmpty();
     {
       EList<Feature> _features = e.getFeatures();
-      for(Feature f : _features) {
+      for(final Feature f : _features) {
         _builder.append("\t");
         StringConcatenation _feature = this.feature(f, importManager);
         _builder.append(_feature, "	");

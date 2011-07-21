@@ -32,9 +32,9 @@ public class Xtend06_Closures {
     {
       ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
       final ArrayList<Object> result = _newArrayList;
-      for (Person p : persons) {
+      for (final Person p : persons) {
         String _apply = toString.apply(p);
-        CollectionExtensions.<String>operator_add(result, _apply);
+        CollectionExtensions.<Object>operator_add(result, _apply);
       }
       return result;
     }

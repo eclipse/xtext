@@ -75,7 +75,7 @@ public class StatemachineGenerator implements IGenerator {
     _builder.newLine();
     {
       EList<Command> _commands = sm.getCommands();
-      for(Command c : _commands) {
+      for(final Command c : _commands) {
         _builder.append("\t");
         StringConcatenation _declareCommand = this.declareCommand(c);
         _builder.append(_declareCommand, "	");
@@ -106,7 +106,7 @@ public class StatemachineGenerator implements IGenerator {
     _builder.newLine();
     {
       EList<State> _states_1 = sm.getStates();
-      for(State state : _states_1) {
+      for(final State state : _states_1) {
         _builder.append("\t\t\t");
         StringConcatenation _generateCode = this.generateCode(state);
         _builder.append(_generateCode, "			");
@@ -115,7 +115,7 @@ public class StatemachineGenerator implements IGenerator {
     }
     {
       EList<Event> _resetEvents = sm.getResetEvents();
-      for(Event resetEvent : _resetEvents) {
+      for(final Event resetEvent : _resetEvents) {
         _builder.append("\t\t\t");
         _builder.append("if (\"");
         String _name_1 = resetEvent.getName();
@@ -223,7 +223,7 @@ public class StatemachineGenerator implements IGenerator {
     _builder.newLine();
     {
       EList<Command> _actions = state.getActions();
-      for(Command c : _actions) {
+      for(final Command c : _actions) {
         _builder.append("\t\t");
         _builder.append("do");
         String _name_1 = c.getName();
@@ -262,7 +262,7 @@ public class StatemachineGenerator implements IGenerator {
     _builder.newLine();
     {
       EList<Transition> _transitions_1 = state.getTransitions();
-      for(Transition t_1 : _transitions_1) {
+      for(final Transition t_1 : _transitions_1) {
         _builder.append("\t");
         _builder.append("if (\"");
         Event _event_1 = t_1.getEvent();

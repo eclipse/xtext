@@ -84,7 +84,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.newLineIfNotEmpty();
       {
         List<Triple<String,AbstractElementAlias,List<ISynTransition>>> _allAmbiguousTransitionsBySyntax = this.util.getAllAmbiguousTransitionsBySyntax();
-        for(Triple<String,AbstractElementAlias,List<ISynTransition>> group : _allAmbiguousTransitionsBySyntax) {
+        for(final Triple<String,AbstractElementAlias,List<ISynTransition>> group : _allAmbiguousTransitionsBySyntax) {
           _builder.append("\t");
           _builder.append("protected ");
           String _imported_1 = file.imported("org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias");
@@ -114,7 +114,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.newLineIfNotEmpty();
       {
         List<Triple<String,AbstractElementAlias,List<ISynTransition>>> _allAmbiguousTransitionsBySyntax_1 = this.util.getAllAmbiguousTransitionsBySyntax();
-        for(Triple<String,AbstractElementAlias,List<ISynTransition>> group_1 : _allAmbiguousTransitionsBySyntax_1) {
+        for(final Triple<String,AbstractElementAlias,List<ISynTransition>> group_1 : _allAmbiguousTransitionsBySyntax_1) {
           _builder.append("\t\t");
           _builder.append("match_");
           final Triple<String,AbstractElementAlias,List<ISynTransition>> typeConverted_group_1 = (Triple<String,AbstractElementAlias,List<ISynTransition>>)group_1;
@@ -142,7 +142,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.newLine();
       {
         List<AbstractRule> _unassignedCalledTokenRules = this.unassignedCalledTokenRules();
-        for(AbstractRule rule : _unassignedCalledTokenRules) {
+        for(final AbstractRule rule : _unassignedCalledTokenRules) {
           _builder.append("\t");
           StringConcatenation _genGetUnassignedRuleCallToken = this.genGetUnassignedRuleCallToken(file, rule);
           _builder.append(_genGetUnassignedRuleCallToken, "	");
@@ -158,7 +158,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.newLine();
       {
         List<Triple<String,AbstractElementAlias,List<ISynTransition>>> _allAmbiguousTransitionsBySyntax_2 = this.util.getAllAmbiguousTransitionsBySyntax();
-        for(Triple<String,AbstractElementAlias,List<ISynTransition>> group_2 : _allAmbiguousTransitionsBySyntax_2) {
+        for(final Triple<String,AbstractElementAlias,List<ISynTransition>> group_2 : _allAmbiguousTransitionsBySyntax_2) {
           _builder.append("\t");
           _builder.append("/**");
           _builder.newLine();
@@ -357,7 +357,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     _builder.newLineIfNotEmpty();
     {
       List<AbstractRule> _unassignedCalledTokenRules = this.unassignedCalledTokenRules();
-      for(AbstractRule rule : _unassignedCalledTokenRules) {
+      for(final AbstractRule rule : _unassignedCalledTokenRules) {
         _builder.append("\t");
         {
           int _operator_plus = IntegerExtensions.operator_plus(((Integer)i), ((Integer)1));
@@ -433,7 +433,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
     _builder.newLineIfNotEmpty();
     {
       List<Triple<String,AbstractElementAlias,List<ISynTransition>>> _allAmbiguousTransitionsBySyntax = this.util.getAllAmbiguousTransitionsBySyntax();
-      for(Triple<String,AbstractElementAlias,List<ISynTransition>> group : _allAmbiguousTransitionsBySyntax) {
+      for(final Triple<String,AbstractElementAlias,List<ISynTransition>> group : _allAmbiguousTransitionsBySyntax) {
         _builder.append("\t");
         {
           int _operator_plus = IntegerExtensions.operator_plus(((Integer)i), ((Integer)1));
