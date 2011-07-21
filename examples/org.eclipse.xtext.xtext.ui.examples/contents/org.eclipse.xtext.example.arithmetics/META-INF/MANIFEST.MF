@@ -30,4 +30,4 @@ Export-Package: org.eclipse.xtext.example.arithmetics,
  org.eclipse.xtext.example.arithmetics.parseTreeConstruction,
  org.eclipse.xtext.example.arithmetics.parser.antlr,
  org.eclipse.xtext.example.arithmetics.parser.antlr.internal
-
+Import-Package: org.apache.log4j
