@@ -73,13 +73,19 @@ public class TypeArgumentContext {
 	public JvmTypeReference getLowerBound(JvmTypeReference element) {
 		JvmTypeReference copy = doGetResolvedCopy(element);
 		if (copy instanceof JvmWildcardTypeReference) {
+			EObject context = null;
 			for(JvmTypeConstraint constraint: ((JvmWildcardTypeReference) copy).getConstraints()) {
 				if (constraint instanceof JvmLowerBound) {
 					JvmTypeReference lowerBound = constraint.getTypeReference();
 					return lowerBound;
+				} else if (constraint.getTypeReference() != null) {
+					if (context == null)
+						context = constraint.getTypeReference().getType();
 				}
 			}
 			// only upper bounds set - no valid contravariant value
+			if (context != null)
+				return typeReferences.createAnyTypeReference(context);
 			return null;
 		}
 		removeObjectLowerBound(copy);

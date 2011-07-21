@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.linking;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -21,6 +22,7 @@ import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -133,8 +135,11 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	public void testGenerics_1() throws Exception {
+		expression("(null as testdata.GenericType1<? extends java.lang.String>) += null", true);
 		// linking is ok but should trigger a validation error
-		expression("(null as testdata.GenericType1<? extends java.lang.String>) += 'foo'", true);
+		XExpression expression = expression("(null as testdata.GenericType1<? extends java.lang.String>) += 'foo'", false);
+		EcoreUtil.resolveAll(expression);
+		assertTrue(expression.eResource().getErrors().isEmpty());
 	}
 	
 	public void testGenerics_2() throws Exception {
