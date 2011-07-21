@@ -447,6 +447,21 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		javaCompiler.compileToClass("x.Z", javaCode);
 	}
 	
+	public void testBug_350932_11() throws Exception {
+		String code = 
+				"package x class Z {" +
+				"  def bug(){\n" + 
+				"    if (true) return null\n" +
+				"    ''\n" + 
+				"  }\n" +
+				"  def invoke() {\n" +
+				"    val String s = bug\n" +
+				"  }\n" +
+				"}\n";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
 	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=351582
 	 */

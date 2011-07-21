@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstraintOwner;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -88,6 +89,9 @@ public class Xtend2TypeProvider extends XbaseWithAnnotationsTypeProvider {
 			}
 			if (declaredOrInferredReturnType == null || getTypeReferences().is(declaredOrInferredReturnType, Void.TYPE))
 				return null;
+			if (declaredOrInferredReturnType instanceof JvmAnyTypeReference) {
+				declaredOrInferredReturnType = getTypeReferences().getTypeForName(Object.class, function);
+			}
 			return declaredOrInferredReturnType;
 		}
 		return null;
