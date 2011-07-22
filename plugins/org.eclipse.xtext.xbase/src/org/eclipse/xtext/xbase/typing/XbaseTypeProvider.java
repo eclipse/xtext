@@ -855,6 +855,15 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		}
 		return parameter.getParameterType();
 	}
+	
+	@Override
+	protected JvmTypeReference handleCycleGetTypeForIdentifiable(JvmIdentifiableElement identifiableElement,
+			boolean rawType) {
+		if (identifiableElement instanceof JvmFormalParameter && identifiableElement.eContainer() instanceof XClosure) {
+			return _typeForIdentifiable((JvmFormalParameter) identifiableElement, rawType);
+		}
+		return super.handleCycleGetTypeForIdentifiable(identifiableElement, rawType);
+	}
 
 	protected JvmTypeReference _typeForIdentifiable(JvmConstructor constructor, boolean rawType) {
 		JvmParameterizedTypeReference reference = factory.createJvmParameterizedTypeReference();
