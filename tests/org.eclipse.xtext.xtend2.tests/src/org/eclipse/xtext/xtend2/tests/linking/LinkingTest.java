@@ -89,6 +89,47 @@ public class LinkingTest extends AbstractXtend2TestCase {
 		assertEquals("Foo.string", ((XMemberFeatureCall)call.getImplicitReceiver()).getFeature().getIdentifier());
 	}
 	
+	public void testExtensionMethodCall_Bug351827_01() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class Foo {" +
+				"  extension testdata.Properties1 p\n" +
+				"  def foo(String s) {\n" +
+				"    s.setProp1()\n" +
+				"  }\n" +
+				"  def setProp1(String s) { s }" +
+				"}");
+		XtendFunction func = (XtendFunction) clazz.getMembers().get(1);
+		final XMemberFeatureCall call = (XMemberFeatureCall)((XBlockExpression)func.getExpression()).getExpressions().get(0);
+		assertEquals("Foo.setProp1(java.lang.String)", call.getFeature().getIdentifier());
+	}
+	
+	public void testExtensionMethodCall_Bug351827_02() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class Foo {" +
+				"  extension testdata.Properties1 p\n" +
+				"  def foo(String s) {\n" +
+				"    s.setProp1\n" +
+				"  }\n" +
+				"  def setProp1(String s) { s }" +
+				"}");
+		XtendFunction func = (XtendFunction) clazz.getMembers().get(1);
+		final XMemberFeatureCall call = (XMemberFeatureCall)((XBlockExpression)func.getExpression()).getExpressions().get(0);
+		assertEquals("Foo.setProp1(java.lang.String)", call.getFeature().getIdentifier());
+	}
+	
+	public void testExtensionMethodCall_Bug351827_03() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class Foo {" +
+				"  extension testdata.Properties1 p\n" +
+				"  def foo(String s) {\n" +
+				"    s.setProp1\n" +
+				"  }\n" +
+				"}");
+		XtendFunction func = (XtendFunction) clazz.getMembers().get(1);
+		final XMemberFeatureCall call = (XMemberFeatureCall)((XBlockExpression)func.getExpression()).getExpressions().get(0);
+		assertEquals("testdata.Properties1.setProp1(java.lang.String)", call.getFeature().getIdentifier());
+	}
+	
 	public void testCaseFunction_00() throws Exception {
 		XtendFunction function = function("def dispatch String foo(String s) {_foo(s)}");
 		final XBlockExpression block = (XBlockExpression) function.getExpression();
