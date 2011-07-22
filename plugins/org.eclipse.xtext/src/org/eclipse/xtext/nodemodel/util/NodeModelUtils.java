@@ -43,12 +43,24 @@ public class NodeModelUtils {
 	 * Find the leaf node at the given offset. May return <code>null</code> if the given offset is not valid for the
 	 * node (sub-)tree.
 	 * 
+	 * A node matches the <code>leafNodeOffset</code> if it fulfills the following condition:
+	 * <pre>
+	 *  node.totalOffset <= leafNodeOffset &&
+	 *  node.totalEndOffset > leafNodeOffset 
+	 * </pre>
+	 * 
+	 * @param node the container node. May not be <code>null</code>.
+	 * @param leafNodeOffset the offset that is covered by the searched node.
 	 * @return the leaf node at the given offset or <code>null</code>.
 	 */
 	public static ILeafNode findLeafNodeAtOffset(INode node, int leafNodeOffset) {
-		int offset = node.getTotalOffset();
-		int length = node.getTotalLength();
-		BidiTreeIterator<AbstractNode> iterator = ((AbstractNode) node).basicIterator();
+		INode localNode = node;
+		while(!(localNode instanceof AbstractNode)) {
+			localNode = localNode.getParent();
+		}
+		int offset = localNode.getTotalOffset();
+		int length = localNode.getTotalLength();
+		BidiTreeIterator<AbstractNode> iterator = ((AbstractNode) localNode).basicIterator();
 		if (leafNodeOffset > (offset + length) / 2) {
 			while (iterator.hasPrevious()) {
 				AbstractNode previous = iterator.previous();
