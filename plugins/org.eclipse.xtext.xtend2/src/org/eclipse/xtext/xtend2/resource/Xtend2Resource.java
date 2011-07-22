@@ -20,6 +20,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmMultiTypeReference;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
@@ -158,7 +159,11 @@ public class Xtend2Resource extends XbaseResource {
 				references.add(apply);
 			}
 		}
-		return typeConformanceComputer.getCommonSuperType(references);
+		JvmTypeReference result = typeConformanceComputer.getCommonSuperType(references);
+		while(result instanceof JvmMultiTypeReference) {
+			result = typeConformanceComputer.getCommonSuperType(((JvmMultiTypeReference) result).getReferences());
+		}
+		return result;
 	}
 	
 }
