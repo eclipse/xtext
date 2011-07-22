@@ -9,6 +9,10 @@ package org.eclipse.xtext.junit4;
 
 import static org.junit.Assert.*;
 
+import org.eclipse.xtext.junit4.IInjectorProvider;
+import org.eclipse.xtext.junit4.IRegistryConfigurator;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

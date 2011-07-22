@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.xtext.junit4.tests
+Bundle-SymbolicName: org.eclipse.xtext.junit4.tests
+Bundle-Vendor: Eclipse Modeling Project
+Bundle-Version: 2.0.1.qualifier
+Require-Bundle: org.junit4,
+ org.eclipse.xtext.junit4,
+ com.google.inject;bundle-version="2.0.0"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
