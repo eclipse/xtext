@@ -346,6 +346,10 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if (expectedType == null || typeRefs.is(expectedType, Void.TYPE))
 			return;
 		JvmTypeReference type = typeProvider.getType(expr);
+		if (typeRefs.is(expectedType, Void.class) && EcoreUtil2.getContainerOfType(expr, XClosure.class) != null) {
+			if (typeRefs.is(type, Void.TYPE))
+				return;
+		}
 		if (!conformanceComputer.isConformant(expectedType, type)) {
 			error("Incompatible implicit return type. Expected " + getNameOfTypes(expectedType) + " but was "
 					+ canonicalName(type), expr, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,

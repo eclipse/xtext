@@ -30,6 +30,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
@@ -355,12 +356,15 @@ public class FunctionConversion {
 				result.getArguments().add(reference);
 			} else {
 				parameterType = primitives.asWrapperTypeIfPrimitive(parameterType);
-				result.getArguments().add(EcoreUtil2.clone(parameterType));
+				result.getArguments().add(EcoreUtil2.cloneIfContained(parameterType));
 			}
 		}
 		if (returnType != null) {
 			returnType = primitives.asWrapperTypeIfPrimitive(returnType);
-			result.getArguments().add(EcoreUtil2.clone(returnType));
+			if (returnType != null && returnType.getType() instanceof JvmVoid && !returnType.getType().eIsProxy()) {
+				returnType = typeRefs.getTypeForName(Void.class, context);
+			}
+			result.getArguments().add(EcoreUtil2.cloneIfContained(returnType));
 		} else {
 			JvmParameterizedTypeReference reference = factory.createJvmParameterizedTypeReference();
 			JvmTypeParameter typeParameter = getLast(functionType.getTypeParameters());
