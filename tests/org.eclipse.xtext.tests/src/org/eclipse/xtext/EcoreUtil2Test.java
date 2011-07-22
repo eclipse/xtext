@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Sets;
 
@@ -43,7 +44,6 @@ public class EcoreUtil2Test extends AbstractXtextTests {
 	}
 	
 	public void testSimple() throws Exception {
-		
 		ResourceSet rs = new ResourceSetImpl();
 		Resource foo = rs.createResource(URI.createURI("foo.xmi"), ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
@@ -199,6 +199,25 @@ public class EcoreUtil2Test extends AbstractXtextTests {
 				}
 			}
 		}
-		
+	}
+	
+	/**
+	 * This test assumes that an EPackage with indexed references is no longer available.
+	 */
+	public void testExternalFormOfEReferenceNoNPE() throws Exception {
+		EReference reference = EcorePackage.Literals.EATTRIBUTE__EATTRIBUTE_TYPE;
+		URI uri = EcoreUtil.getURI(reference);
+		String externalForm = uri.toString();
+		EReference foundReference = EcoreUtil2.getEReferenceFromExternalForm(EPackage.Registry.INSTANCE, externalForm);
+		assertSame(reference, foundReference);
+		String brokenExternalFrom = Strings.toFirstUpper(externalForm);
+		assertNull(EcoreUtil2.getEReferenceFromExternalForm(EPackage.Registry.INSTANCE, brokenExternalFrom));
+		String shortExternalForm = EcoreUtil2.toExternalForm(reference);
+		foundReference = EcoreUtil2.getEReferenceFromExternalForm(EPackage.Registry.INSTANCE, shortExternalForm);
+		assertSame(reference, foundReference);
+		String brokenShortExternalFrom = Strings.toFirstUpper(shortExternalForm);
+		assertNull(EcoreUtil2.getEReferenceFromExternalForm(EPackage.Registry.INSTANCE, brokenShortExternalFrom));
+		brokenShortExternalFrom = shortExternalForm.replace('A', 'a');
+		assertNull(EcoreUtil2.getEReferenceFromExternalForm(EPackage.Registry.INSTANCE, brokenShortExternalFrom));
 	}
 }
