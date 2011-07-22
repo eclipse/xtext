@@ -242,6 +242,43 @@ public class InferredJvmModelTest extends AbstractXtend2TestCase {
 		assertEquals("java.util.List<? extends java.lang.Object>", eStructuralFeatureParam.getReturnType().getIdentifier());
 	}
 	
+	public void testCaseFunction_04() throws Exception {
+		XtendFile xtendFile = file("class Foo { def dispatch foo(Integer x) {x} def dispatch foo(Double x) {x}}");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		
+		// one main dispatch
+		Iterable<JvmOperation> operations = inferredType.getDeclaredOperations();
+		JvmOperation dispatch = find(operations, new Predicate<JvmOperation>() {
+			public boolean apply(JvmOperation input) {
+				// parameter type is resolved multitype of Number and Comparable
+				return input.getSimpleName().equals("foo")
+				&& input.getParameters().get(0).getParameterType().getIdentifier()
+				.equals(Object.class.getName());
+			}
+		});
+		// return type is specialized
+		assertEquals("java.lang.Number & java.lang.Comparable<? extends java.lang.Object>", dispatch.getReturnType().getIdentifier());
+		
+		// two internal case methods
+		JvmOperation internal = find(operations, new Predicate<JvmOperation>() {
+			public boolean apply(JvmOperation input) {
+				return input.getSimpleName().equals("_foo")
+				&& input.getParameters().get(0).getParameterType().getIdentifier()
+				.equals(Double.class.getName());
+			}
+		});
+		assertEquals(dispatch.getReturnType().getIdentifier(), internal.getReturnType().getIdentifier());
+		
+		internal = find(operations, new Predicate<JvmOperation>() {
+			public boolean apply(JvmOperation input) {
+				return input.getSimpleName().equals("_foo")
+				&& input.getParameters().get(0).getParameterType().getIdentifier()
+				.equals(Integer.class.getName());
+			}
+		});
+		assertEquals(dispatch.getReturnType().getIdentifier(), internal.getReturnType().getIdentifier());
+	}
+	
 	public void testBug_340611() throws Exception {
 		XtendFile xtendFile = file(
 				"class Bug340611 {\n" + 

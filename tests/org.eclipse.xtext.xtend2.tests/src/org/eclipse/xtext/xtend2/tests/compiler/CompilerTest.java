@@ -557,6 +557,19 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		javaCompiler.compileToClass("x.Z", javaCode);
 	}
 	
+	public void testBug_350831_01() throws Exception {
+		String code =
+				"def callMe() {\n" + 
+				"  var testdata.InterfaceA a = new testdata.ClassA()\n" + 
+				"  var testdata.InterfaceB b = new testdata.ClassB()\n" + 
+				"  newArrayList(a.dispatched, b.dispatched)" + 
+				"}\n" + 
+				"def dispatch dispatched(testdata.ClassA param) {param.className}\n" + 
+				"def dispatch dispatched(testdata.ClassB param) {param.className}\n";
+		List<String> expectation = Lists.newArrayList("ClassA", "ClassB");
+		invokeAndExpect2(expectation, code, "callMe");
+	}
+	
 	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=345371
 	 */
