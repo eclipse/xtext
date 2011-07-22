@@ -166,13 +166,6 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 			final XtendClass xtendClass = ((XtendFile) expression.eResource().getContents().get(0)).getXtendClass();
 			XFeatureCall callToThis = XbaseFactory.eINSTANCE.createXFeatureCall();
 			callToThis.setFeature(xtendClass);
-			// extensions for this
-			JvmGenericType type2 = xtend2jvmAssociations.getInferredType(xtendClass);
-			JvmParameterizedTypeReference typeRef = typeReferences.createTypeRef(type2);
-			ExtensionMethodsFeaturesProvider featureProvider = extensionMethodsFeaturesProvider.get();
-			featureProvider.setContext(typeRef);
-			insertDescriptionProviders(featureProvider, currentContext, callToThis, result);
-
 			// injected extensions
 			Iterable<XtendField> iterable = getExtensionDependencies(xtendClass);
 			for (XtendField XtendField : iterable) {
@@ -181,12 +174,17 @@ public class Xtend2ScopeProvider extends XbaseWithAnnotationsScopeProvider {
 				callToDependency.setMemberCallTarget(EcoreUtil2.clone(callToThis));
 				callToDependency.setFeature(dependencyImplicitReceiver);
 				if (dependencyImplicitReceiver != null) {
-					featureProvider = extensionMethodsFeaturesProvider.get();
-					featureProvider.setContext(XtendField.getType());
-					insertDescriptionProviders(featureProvider, currentContext, callToDependency, result);
+					ExtensionMethodsFeaturesProvider extensionFeatureProvider = extensionMethodsFeaturesProvider.get();
+					extensionFeatureProvider.setContext(XtendField.getType());
+					insertDescriptionProviders(extensionFeatureProvider, currentContext, callToDependency, result);
 				}
 			}
-
+			// extensions for this
+			JvmGenericType type2 = xtend2jvmAssociations.getInferredType(xtendClass);
+			JvmParameterizedTypeReference typeRef = typeReferences.createTypeRef(type2);
+			ExtensionMethodsFeaturesProvider featureProvider = extensionMethodsFeaturesProvider.get();
+			featureProvider.setContext(typeRef);
+			insertDescriptionProviders(featureProvider, currentContext, callToThis, result);
 		}
 		return result;
 	}
