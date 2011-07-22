@@ -477,6 +477,52 @@ public class CompilerTest extends AbstractXtend2TestCase {
 		javaCompiler.compileToClass("x.Z", javaCode);
 	}
 	
+	public void testBug_352705_01() throws Exception {
+		String code =
+				"package x class Z {" +
+				"  def void forEachError(testdata.PropertiesHolder h) {\n" + 
+				"    {\n" + 
+				"      h.properties.forEach(p|{\n" + 
+				"        p.prop1=p.prop1.toFirstLower()\n" + 
+				"        true\n" + 
+				"      })\n" + 
+				"      h\n" + 
+				"    }\n" + 
+				"  }\n" +
+				"}";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	public void testBug_352705_02() throws Exception {
+		String code =
+				"package x class Z {" +
+				"  def void forEachError(testdata.PropertiesHolder h) {\n" + 
+				"    h.properties.forEach(p|{\n" + 
+				"      p.prop1=p.prop1.toFirstLower()\n" + 
+				"      true\n" + 
+				"    })\n" + 
+				"    h\n" + 
+				"  }\n" +
+				"}";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
+	public void testBug_352705_03() throws Exception {
+		String code =
+				"package x class Z {" +
+				"  def void forEachError(testdata.PropertiesHolder h) {\n" + 
+				"    h.properties.map(p|{\n" + 
+				"      p.prop1=p.prop1.toFirstLower()\n" + 
+				"      true\n" + 
+				"    })\n" + 
+				"  }\n" +
+				"}";
+		String javaCode = compileToJavaCode(code);
+		javaCompiler.compileToClass("x.Z", javaCode);
+	}
+	
 	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=345371
 	 */
