@@ -22,8 +22,10 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -230,4 +232,23 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		assertEquals(expected.toString(), actual);
 	}
 
+	public void testFindLeafNodeAtOffset_1() throws Exception {
+		String grammarText = "grammar foo.Bar with org.eclipse.xtext.common.Terminals generate foo 'bar' Model : (name=ID value=ID);";
+		Grammar grammar = (Grammar) getModel(grammarText);
+		int equalsSign = grammarText.indexOf('=');
+		ICompositeNode grammarNode = NodeModelUtils.getNode(grammar);
+		ILeafNode leafNodeAtOffset = NodeModelUtils.findLeafNodeAtOffset(grammarNode, equalsSign);
+		assertEquals("=", leafNodeAtOffset.getText());
+		boolean syntheticNodeSeen = false;
+		INode parent = leafNodeAtOffset.getParent();
+		while(parent != null) {
+			// walk up the tree to make sure we call #findLeafNodeAtOffset with synthetic nodes, too
+			ILeafNode otherLeafNode = NodeModelUtils.findLeafNodeAtOffset(parent, equalsSign);
+			assertSame(leafNodeAtOffset, otherLeafNode);
+			if (parent instanceof SyntheticCompositeNode)
+				syntheticNodeSeen = true;
+			parent = parent.getParent();
+		}
+		assertTrue(syntheticNodeSeen);
+	}
 }
