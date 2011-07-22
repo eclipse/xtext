@@ -477,11 +477,17 @@ public class EcoreUtil2 extends EcoreUtil {
 			URI uri = URI.createURI(externalForm);
 			URI packURI = uri.trimFragment();
 			EPackage ePackage = registry.getEPackage(packURI.toString());
+			if (ePackage == null)
+				return null;
 			EReference result = (EReference) ePackage.eResource().getEObject(uri.fragment());
 			return result;
 		}
 		EPackage ePackage = registry.getEPackage(split[0]);
+		if (ePackage == null)
+			return null;
 		EClass clazz = (EClass) ePackage.getEClassifier(split[1]);
+		if (clazz == null)
+			return null;
 		return (EReference) clazz.getEStructuralFeature(Integer.valueOf(split[2]));
 	}
 
