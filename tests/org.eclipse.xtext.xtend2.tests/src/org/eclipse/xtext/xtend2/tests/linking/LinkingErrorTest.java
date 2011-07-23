@@ -73,14 +73,14 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 				// error condition is empty class name
 				"class  {\n" + 
 				"\n" + 
-				"	aOrB(String a, String b) {\n" + 
+				"	def aOrB(String a, String b) {\n" + 
 				"		if (a.isNullOrEmpty()) \n" + 
 				"			b\n" + 
 				"		else\n" + 
 				"			a \n" + 
 				"	}\n" + 
 				"	\n" + 
-				"	returnInIf() {\n" + 
+				"	def returnInIf() {\n" + 
 				"		if ('x'!='x') return 'xx' else return 'yy'\n" + 
 				"	}\n" + 
 				"\n" + 
@@ -96,7 +96,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 				"class NoException {\n" + 
 				// error condition is tring
 				"	@Inject extension tring\n" + 
-				"	boolean something(int i) {\n" + 
+				"	def boolean something(int i) {\n" + 
 				"	  i.indexOf() == 0" +
 				"	}\n" + 
 				"}");
@@ -114,7 +114,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 				"	ArrayList as myList\n" + 
 				"	@Inject extension\n" + 
 				"	String\n" + 
-				"	boolean something(int i) {\n" + 
+				"	def boolean something(int i) {\n" + 
 				"	  if (i.indexOf() == 0) {\n" + 
 				"	    return myList.contains(i)\n" + 
 				"	  } \n" + 
@@ -129,7 +129,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 	public void testNoException_06() throws Exception {
 		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.linking\n" + 
 				"class NoException {\n" + 
-				"	String foo(String a,) {\n" + 
+				"	def String foo(String a,) {\n" + 
 				"		if (isUpper(a)) {\n" + 
 				"			another(a,b+'holla')\n" + 
 				"		}\n" + 
@@ -147,7 +147,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 				"	@Inject\n" + 
 				"	ArrayList as myList\n" + 
 				"	@Inject extension String\n" + 
-				"	boolean something(int i) {\n" + 
+				"	def boolean something(int i) {\n" + 
 				"	  if (i.indexOf() == 0) {\n" + 
 				"	    return myList.contains(i)\n" + 
 				"	  } \n" + 
@@ -168,7 +168,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 				"	@Inject\n" + 
 				"	ArrayList as myList\n" + 
 				"	@Inject extension String\n" + 
-				"	boolean something(int i) {\n" + 
+				"	def boolean something(int i) {\n" + 
 				"	  if (i.indexOf() == 0) {\n" + 
 				"	    return myList.contains(i)\n" + 
 				"	  } \n" + 
@@ -183,7 +183,7 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 	public void testNoException_09() throws Exception {
 		XtendFile file = file("package org.eclipse.xtext.xtend2.tests.linking\n" + 
 				"class NoException {\n" + 
-				"	String foo(String a, String b) {\n" + 
+				"	def String foo(String a, String b) {\n" + 
 				"		if (isUpper(a)) {\n" + 
 				"			another(a,b+'holla')\n" + 
 				"		} else {\n" + 
@@ -202,10 +202,34 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(file);
 	}
 	
+	public void testNoException_11() throws Exception {
+		XtendFile file = file("package foo\n" +
+				"import java.util.*\n" + 
+				"class MyClass {\n" + 
+				"  def <T> Collection<T> addAll2(Collection<T> collection, Iterable<? extends T> elements){\n" + 
+				"    collection.addAll(elements)\n" + 
+				"    collection\n" + 
+				"  }\n" + 
+				"}");
+		assertNoExceptions(file);
+	}
+	
 	public void testBug343585() throws Exception {
 		XtendFile file = file("class Test extends Test {}");
 		assertNoExceptions(file);
 	}
+	
+//	public void testBug343096() throws Exception {
+//		XtendFile file = file(
+//				"class Bug343096 {\n" +
+//				"    <T> test() {\n" + 
+//				"        [T t|switch t {\n" + 
+//				"            case t:test\n" + 
+//				"        }]\n" + 
+//				"    }" +
+//				"}");
+//		assertNoExceptions(file);
+//	}
 	
 	protected void assertNoExceptions(EObject object) {
 		Resource resource = object.eResource();
