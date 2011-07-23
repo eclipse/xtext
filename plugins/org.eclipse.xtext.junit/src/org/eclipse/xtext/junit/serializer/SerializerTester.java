@@ -111,7 +111,7 @@ public class SerializerTester {
 			String serialized = serializer.serialize(semanticObject);
 			String newtext = oldtext.substring(0, oldNode.getOffset()) + serialized
 					+ oldtext.substring(oldNode.getOffset() + oldNode.getLength());
-			System.out.println(newtext);
+//			System.out.println(newtext);
 			EObject newmodel = parseHelper.parse(newtext);
 			parsed = newmodel.eResource().getEObject(oldURI);
 			reattachNodes(nodes);
