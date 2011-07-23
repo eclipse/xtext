@@ -337,15 +337,16 @@ public class TypeConformanceComputer {
 	protected Boolean _isConformant(JvmTypeParameter leftType, JvmTypeParameter rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right, boolean ignoreGenerics) {
 		if (leftType == rightType)
 			return Boolean.TRUE;
-		return areConstraintsConformant(leftType.getConstraints(), rightType.getConstraints());
-		// TODO should more look like this
-//		for(JvmTypeConstraint constraint: rightType.getConstraints()) {
-//			if (constraint instanceof JvmUpperBound) {
-//				if (isConformant(left, constraint.getTypeReference(), ignoreGenerics))
-//					return true;
-//			}
-//		}
-//		return false;
+		boolean result = areConstraintsConformant(leftType.getConstraints(), rightType.getConstraints());
+		if (result)
+			return true;
+		for(JvmTypeConstraint constraint: rightType.getConstraints()) {
+			if (constraint instanceof JvmUpperBound) {
+				if (isConformant(left, constraint.getTypeReference(), ignoreGenerics))
+					return true;
+			}
+		}
+		return false;
 	}
 	
 	protected Boolean _isConformant(JvmTypeParameter leftType, JvmType rightType, JvmParameterizedTypeReference left, JvmParameterizedTypeReference right, boolean ignoreGenerics) {

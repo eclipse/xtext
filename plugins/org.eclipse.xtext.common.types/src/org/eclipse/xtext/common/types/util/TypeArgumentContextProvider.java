@@ -505,7 +505,7 @@ public class TypeArgumentContextProvider {
 			information = information.copyIfDifferent(primitives.asWrapperTypeIfPrimitive(information.reference));
 		else
 			information = new ResolveInfo(null);
-		if (typeParameter != null) {
+		if (typeParameter != null && information.reference != null) {
 			if (isValidParameter(typeParameter, information.reference, returnTypeContext)) {
 				if (!containsEntry(existing, typeParameter, information)) {
 					existing.put(typeParameter, information);
@@ -557,7 +557,9 @@ public class TypeArgumentContextProvider {
 						if (recurse) {
 							ResolveInfo info = new ResolveInfo(infoArgs.get(i));
 							info.superTypeAllowed = infoArg instanceof JvmWildcardTypeReference;
-							info.preferSubtypes = information.preferSubtypes;
+							info.preferSubtypes = information.preferSubtypes || 
+									(declArg instanceof JvmWildcardTypeReference 
+											&& getSingleUpperBoundOrNull((JvmWildcardTypeReference) declArg) == null);
 							resolve(declArg, info, existing, returnTypeContext);
 						}
 					}
@@ -643,6 +645,20 @@ public class TypeArgumentContextProvider {
 
 	protected boolean containsEntry(Multimap<JvmTypeParameter, ResolveInfo> existing,
 			JvmTypeParameter typeParameter, ResolveInfo information) {
+		if (information.reference instanceof JvmWildcardTypeReference) {
+			JvmWildcardTypeReference wildcard = (JvmWildcardTypeReference) information.reference;
+			boolean otherConstraintSeen = false;
+			boolean constraintIsTypeParam = false;
+			for(JvmTypeConstraint constraint: wildcard.getConstraints()) {
+				if (constraint instanceof JvmUpperBound && typeParameter == constraint.getTypeReference().getType()) {
+					constraintIsTypeParam = true;
+				} else {
+					otherConstraintSeen = true;
+				}
+			}
+			if (constraintIsTypeParam && !otherConstraintSeen)
+				return true;
+		}
 		if (existing.containsKey(typeParameter)) {
 			Collection<ResolveInfo> collection = existing.get(typeParameter);
 			for (ResolveInfo info : collection) {
