@@ -678,7 +678,7 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 		}
 		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(semanticObject, null);
 		Feature2Assignment[] values = createValues(semanticObject, constraint, nodes);
-		System.out.println("Values: " + f2aToStr(constraint.getBody(), values));
+//		System.out.println("Values: " + f2aToStr(constraint.getBody(), values));
 		//				System.out.println("Values (Disambiguated): " + f2aToStr(constraint.getBody(), values));
 		if (constraint.getBody() != null) {
 			Quantity quant = new Quantity(constraint.getBody(), createUnambiguousAllocation(constraint.getBody(),

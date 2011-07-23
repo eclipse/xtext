@@ -120,7 +120,7 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 				if (visited.add(c))
 					result.add("  " + c.toString());
 		}
-		System.out.println(Joiner.on("\n").join(result));
+//		System.out.println(Joiner.on("\n").join(result));
 	}
 
 	public void testAssignedActionMandatory1() throws Exception {
