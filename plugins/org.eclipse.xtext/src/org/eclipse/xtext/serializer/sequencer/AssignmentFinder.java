@@ -24,6 +24,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.serializer.impl.FeatureFinderUtil;
 import org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer;
 import org.eclipse.xtext.serializer.tokens.IEnumLiteralSerializer;
 import org.eclipse.xtext.serializer.tokens.IKeywordSerializer;
@@ -57,7 +58,7 @@ public class AssignmentFinder implements IAssignmentFinder {
 
 	public Iterable<AbstractElement> findAssignmentsByValue(EObject semanticObj,
 			Iterable<AbstractElement> assignedElements, Object value, INode node) {
-		EStructuralFeature feature = GrammarUtil.getFeature(assignedElements.iterator().next(), semanticObj.eClass());
+		EStructuralFeature feature = FeatureFinderUtil.getFeature(assignedElements.iterator().next(), semanticObj.eClass());
 		if (feature instanceof EAttribute) {
 			if (feature.getEType() instanceof EEnum)
 				return findValidAssignmentsForEnum(semanticObj, assignedElements, value);

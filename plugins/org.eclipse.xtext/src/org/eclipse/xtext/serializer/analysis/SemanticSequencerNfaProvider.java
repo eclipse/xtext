@@ -24,6 +24,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.SynAbsorberNfaAdapter;
+import org.eclipse.xtext.serializer.impl.FeatureFinderUtil;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.formallang.INfaAdapter;
@@ -89,7 +90,7 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 
 		public EStructuralFeature getFeature() {
 			if (feature == null && assignedGrammarElement != null)
-				feature = GrammarUtil.getFeature(assignedGrammarElement, type);
+				feature = FeatureFinderUtil.getFeature(assignedGrammarElement, type);
 			return feature;
 		}
 
