@@ -155,9 +155,9 @@ public class NodeModelSemanticSequencer extends AbstractSemanticSequencer {
 		throw new RuntimeException("no context found");
 	}
 
-	public Iterable<EObject> findContexts(EObject semanitcObject, boolean consultContainer,
+	public Iterable<EObject> findContexts(EObject semanticObject, boolean consultContainer,
 			Iterable<EObject> contextCandidates) {
-		EObject ctx = findContextNode(semanitcObject).getGrammarElement();
+		EObject ctx = findContextNode(semanticObject).getGrammarElement();
 		if (ctx instanceof RuleCall)
 			return Collections.singletonList((EObject) (((RuleCall) ctx).getRule()));
 		return Collections.singletonList(ctx);

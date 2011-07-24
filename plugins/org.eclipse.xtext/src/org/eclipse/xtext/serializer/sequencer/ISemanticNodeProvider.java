@@ -39,6 +39,6 @@ public interface ISemanticNodeProvider {
 
 	public INodesForEObjectProvider NULL_NODES_PROVIDER = new NullNodesForEObjectProvider();
 
-	INodesForEObjectProvider getNodesForSemanticObject(EObject semanitcObject, ICompositeNode suggestedComposite);
+	INodesForEObjectProvider getNodesForSemanticObject(EObject semanticObject, ICompositeNode suggestedComposite);
 
 }

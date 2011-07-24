@@ -79,14 +79,14 @@ public class ContextFinder implements IContextFinder {
 		return contexts.keySet();
 	}
 
-	protected Iterable<EObject> findContextsByContainer(EObject semanitcObject, Iterable<EObject> contextCandidates) {
-		if (semanitcObject.eResource().getContents().contains(semanitcObject))
+	protected Iterable<EObject> findContextsByContainer(EObject semanticObject, Iterable<EObject> contextCandidates) {
+		if (semanticObject.eResource().getContents().contains(semanticObject))
 			return Collections.singleton(getRootContext());
-		EReference ref = semanitcObject.eContainmentFeature();
+		EReference ref = semanticObject.eContainmentFeature();
 		if (ref == null || (contextCandidates != null && Iterables.size(contextCandidates) < 2))
 			return contextCandidates;
-		Map<IConstraint, List<EObject>> containerConstraints = getConstraints(semanitcObject.eContainer().eClass());
-		int refID = semanitcObject.eContainer().eClass().getFeatureID(ref);
+		Map<IConstraint, List<EObject>> containerConstraints = getConstraints(semanticObject.eContainer().eClass());
+		int refID = semanticObject.eContainer().eClass().getFeatureID(ref);
 		Set<EObject> childContexts = Sets.newHashSet();
 		for (IConstraint constraint : Lists.newArrayList(containerConstraints.keySet()))
 			if (constraint.getFeatures()[refID] == null)
@@ -102,7 +102,7 @@ public class ContextFinder implements IContextFinder {
 			result = childContexts;
 		if (result.size() < 2)
 			return result;
-		Iterable<EObject> filteredContexts = findContextsByContainer(semanitcObject.eContainer(),
+		Iterable<EObject> filteredContexts = findContextsByContainer(semanticObject.eContainer(),
 				Iterables.concat(containerConstraints.values()));
 		childContexts = Sets.newHashSet();
 		for (Map.Entry<IConstraint, List<EObject>> e : Lists.newArrayList(containerConstraints.entrySet()))
@@ -112,31 +112,31 @@ public class ContextFinder implements IContextFinder {
 		return result;
 	}
 
-	public Iterable<EObject> findContextsByContents(EObject semanitcObject, Iterable<EObject> contextCandidates) {
-		if (semanitcObject == null)
+	public Iterable<EObject> findContextsByContents(EObject semanticObject, Iterable<EObject> contextCandidates) {
+		if (semanticObject == null)
 			throw new NullPointerException();
 
 		initConstraints();
 
 		Map<IConstraint, List<EObject>> constraints;
 		if (contextCandidates != null)
-			constraints = getConstraints(semanitcObject, contextCandidates);
+			constraints = getConstraints(semanticObject, contextCandidates);
 		else
-			constraints = getConstraints(semanitcObject.eClass());
+			constraints = getConstraints(semanticObject.eClass());
 
 		if (constraints.size() < 2)
 			return Iterables.concat(constraints.values());
 
 		for (IConstraint cand : Lists.newArrayList(constraints.keySet()))
-			if (!allFeaturesHaveAssignments(cand, semanitcObject))
+			if (!allFeaturesHaveAssignments(cand, semanticObject))
 				constraints.remove(cand);
 
 		if (constraints.size() < 2)
 			return Iterables.concat(constraints.values());
 
-		for (EReference ref : semanitcObject.eClass().getEAllContainments())
-			if (!transientValueUtil.isTransient(semanitcObject, ref)) {
-				constraints.keySet().retainAll(findContextsByConstraints(semanitcObject, ref, constraints.keySet()));
+		for (EReference ref : semanticObject.eClass().getEAllContainments())
+			if (!transientValueUtil.isTransient(semanticObject, ref)) {
+				constraints.keySet().retainAll(findContextsByConstraints(semanticObject, ref, constraints.keySet()));
 				if (constraints.size() < 2)
 					return Iterables.concat(constraints.values());
 			}
@@ -178,10 +178,10 @@ public class ContextFinder implements IContextFinder {
 		return result;
 	}
 
-	protected Map<IConstraint, List<EObject>> getConstraints(EObject semanitcObject, Iterable<EObject> contextCandidates) {
+	protected Map<IConstraint, List<EObject>> getConstraints(EObject semanticObject, Iterable<EObject> contextCandidates) {
 		Map<IConstraint, List<EObject>> result = Maps.newHashMap();
 		for (EObject ctx : contextCandidates) {
-			IConstraint constraint = constraints.get(Tuples.create(ctx, semanitcObject.eClass()));
+			IConstraint constraint = constraints.get(Tuples.create(ctx, semanticObject.eClass()));
 			if (ctx == null)
 				continue;
 			List<EObject> ctxs = result.get(constraint);

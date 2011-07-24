@@ -25,8 +25,8 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
-import org.eclipse.xtext.serializer.analysis.ISemanitcSequencerNfaProvider;
-import org.eclipse.xtext.serializer.analysis.ISemanitcSequencerNfaProvider.ISemState;
+import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider;
+import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.util.EmfFormatter;
@@ -286,7 +286,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 	protected ISemanticNodeProvider nodeProvider;
 
 	@Inject
-	protected ISemanitcSequencerNfaProvider nfaProvider;
+	protected ISemanticSequencerNfaProvider nfaProvider;
 
 	@Inject
 	protected ITransientValueService transientValueService;

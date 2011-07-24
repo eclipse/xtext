@@ -22,7 +22,7 @@ import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
-import org.eclipse.xtext.serializer.analysis.ISemanitcSequencerNfaProvider.ISemState;
+import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
 import org.eclipse.xtext.serializer.sequencer.IContextFinder;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.formallang.GrammarStringFactory;

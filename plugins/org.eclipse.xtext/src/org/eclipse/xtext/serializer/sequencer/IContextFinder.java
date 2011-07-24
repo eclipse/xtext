@@ -16,7 +16,7 @@ import com.google.inject.ImplementedBy;
  */
 @ImplementedBy(ContextFinder.class)
 public interface IContextFinder {
-	Iterable<EObject> findContextsByContents(EObject semanitcObject, Iterable<EObject> contextCandidates);
+	Iterable<EObject> findContextsByContents(EObject semanticObject, Iterable<EObject> contextCandidates);
 
 	Iterable<EObject> findContextsByContentsAndContainer(EObject semanticObject, Iterable<EObject> contextCandidates);
 }
