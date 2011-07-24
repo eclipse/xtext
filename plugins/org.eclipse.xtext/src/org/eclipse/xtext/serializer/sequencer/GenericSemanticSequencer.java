@@ -831,12 +831,12 @@ public class GenericSemanticSequencer extends AbstractSemanticSequencer {
 	@Inject
 	protected IAssignmentFinder assignmentFinder;
 
-	protected List<IConstraintElement> findValidAssignments(EObject semanitcObj, IConstraintElement[] assignments,
+	protected List<IConstraintElement> findValidAssignments(EObject semanticObj, IConstraintElement[] assignments,
 			AllocationValue value) {
 		List<AbstractElement> assignedElements = Lists.newArrayList();
 		for (IConstraintElement ass : assignments)
 			assignedElements.add(ass.getGrammarElement());
-		Set<AbstractElement> assignedElements2 = Sets.newHashSet(assignmentFinder.findAssignmentsByValue(semanitcObj,
+		Set<AbstractElement> assignedElements2 = Sets.newHashSet(assignmentFinder.findAssignmentsByValue(semanticObj,
 				assignedElements, value.getValue(), value.getNode()));
 		List<IConstraintElement> result = Lists.newArrayList();
 		for (IConstraintElement ass : assignments)

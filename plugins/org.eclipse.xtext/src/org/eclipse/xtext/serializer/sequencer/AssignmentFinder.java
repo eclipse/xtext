@@ -55,26 +55,26 @@ public class AssignmentFinder implements IAssignmentFinder {
 	@Inject
 	protected IValueSerializer valueSerializer;
 
-	public Iterable<AbstractElement> findAssignmentsByValue(EObject semanitcObj,
+	public Iterable<AbstractElement> findAssignmentsByValue(EObject semanticObj,
 			Iterable<AbstractElement> assignedElements, Object value, INode node) {
-		EStructuralFeature feature = GrammarUtil.getFeature(assignedElements.iterator().next(), semanitcObj.eClass());
+		EStructuralFeature feature = GrammarUtil.getFeature(assignedElements.iterator().next(), semanticObj.eClass());
 		if (feature instanceof EAttribute) {
 			if (feature.getEType() instanceof EEnum)
-				return findValidAssignmentsForEnum(semanitcObj, assignedElements, value);
+				return findValidAssignmentsForEnum(semanticObj, assignedElements, value);
 			else
-				return findValidAssignmentsForDatatype(semanitcObj, assignedElements, value);
+				return findValidAssignmentsForDatatype(semanticObj, assignedElements, value);
 		}
 		if (feature instanceof EReference) {
 			EReference ref = (EReference) feature;
 			if (ref.isContainment())
-				return findValidAssignmentsForContainmentRef(semanitcObj, assignedElements, (EObject) value);
+				return findValidAssignmentsForContainmentRef(semanticObj, assignedElements, (EObject) value);
 			else
-				return findValidAssignmentsForCrossRef(semanitcObj, assignedElements, (EObject) value, node);
+				return findValidAssignmentsForCrossRef(semanticObj, assignedElements, (EObject) value, node);
 		}
 		throw new RuntimeException("unknown feature type");
 	}
 
-	protected Iterable<AbstractElement> findValidAssignmentsForContainmentRef(EObject semanitcObj,
+	protected Iterable<AbstractElement> findValidAssignmentsForContainmentRef(EObject semanticObj,
 			Iterable<AbstractElement> assignedElements, EObject value) {
 		Multimap<EObject, AbstractElement> candidates = HashMultimap.create();
 		for (AbstractElement ass : assignedElements)
@@ -89,14 +89,14 @@ public class AssignmentFinder implements IAssignmentFinder {
 		return result;
 	}
 
-	protected Iterable<AbstractElement> findValidAssignmentsForCrossRef(EObject semanitcObj,
+	protected Iterable<AbstractElement> findValidAssignmentsForCrossRef(EObject semanticObj,
 			Iterable<AbstractElement> assignedElements, EObject value, INode node) {
 		List<AbstractElement> result = Lists.newArrayList();
 		for (AbstractElement ass : assignedElements) {
 			CrossReference crossref = GrammarUtil.containingCrossReference(ass);
-			EReference eref = GrammarUtil.getReference(crossref, semanitcObj.eClass());
+			EReference eref = GrammarUtil.getReference(crossref, semanticObj.eClass());
 			if (EcoreUtil2.isAssignableFrom(eref.getEReferenceType(), value.eClass())
-					&& crossRefSerializer.isValid(semanitcObj, crossref, value, node, null))
+					&& crossRefSerializer.isValid(semanticObj, crossref, value, node, null))
 				result.add(ass);
 		}
 		return result;

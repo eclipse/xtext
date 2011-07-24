@@ -41,7 +41,7 @@ import com.google.inject.Singleton;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @Singleton
-public class SemanitcSequencerNfaProvider implements ISemanitcSequencerNfaProvider {
+public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvider {
 
 	protected static class SemNfa implements INfaAdapter<ISemState, List<ISemState>> {
 

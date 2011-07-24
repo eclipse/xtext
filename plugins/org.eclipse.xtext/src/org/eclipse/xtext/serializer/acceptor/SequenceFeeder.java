@@ -52,9 +52,9 @@ public class SequenceFeeder {
 		@Inject
 		protected IValueSerializer valueSerializer;
 
-		public SequenceFeeder create(EObject semanitcObject, INodesForEObjectProvider nodes,
+		public SequenceFeeder create(EObject semanticObject, INodesForEObjectProvider nodes,
 				ISemanticSequencer masterSequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
-			return new SequenceFeeder(this, semanitcObject, nodes, masterSequencer, sequenceAcceptor, errorAcceptor);
+			return new SequenceFeeder(this, semanticObject, nodes, masterSequencer, sequenceAcceptor, errorAcceptor);
 		}
 	}
 
@@ -70,13 +70,13 @@ public class SequenceFeeder {
 
 	protected ISemanticSequenceAcceptor sequenceAcceptor;
 
-	protected SequenceFeeder(Provider provider, EObject semanitcObject, INodesForEObjectProvider nodes,
+	protected SequenceFeeder(Provider provider, EObject semanticObject, INodesForEObjectProvider nodes,
 			ISemanticSequencer masterSequencer, ISemanticSequenceAcceptor sequenceAcceptor, Acceptor errorAcceptor) {
 		super();
-		if (semanitcObject == null || nodes == null || sequenceAcceptor == null)
+		if (semanticObject == null || nodes == null || sequenceAcceptor == null)
 			throw new NullPointerException();
 		this.provider = provider;
-		this.semanticObject = semanitcObject;
+		this.semanticObject = semanticObject;
 		this.nodes = nodes;
 		this.masterSequencer = masterSequencer;
 		this.sequenceAcceptor = sequenceAcceptor;

@@ -20,8 +20,8 @@ import com.google.inject.ImplementedBy;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@ImplementedBy(SemanitcSequencerNfaProvider.class)
-public interface ISemanitcSequencerNfaProvider {
+@ImplementedBy(SemanticSequencerNfaProvider.class)
+public interface ISemanticSequencerNfaProvider {
 
 	public interface ISemState {
 		AbstractElement getAssignedGrammarElement();

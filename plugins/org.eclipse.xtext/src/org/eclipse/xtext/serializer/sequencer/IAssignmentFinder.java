@@ -19,6 +19,6 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(AssignmentFinder.class)
 public interface IAssignmentFinder {
 
-	Iterable<AbstractElement> findAssignmentsByValue(EObject semanitcObject,
+	Iterable<AbstractElement> findAssignmentsByValue(EObject semanticObject,
 			Iterable<AbstractElement> assignedElements, Object value, INode node);
 }

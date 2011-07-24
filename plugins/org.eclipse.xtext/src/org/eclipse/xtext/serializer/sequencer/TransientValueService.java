@@ -39,20 +39,20 @@ public class TransientValueService implements ITransientValueService {
 		return false;
 	}
 
-	public ListTransient isListTransient(EObject semanitcObject, EStructuralFeature feature) {
-		if (feature.isTransient() || isContainerReferenceInSameResource(semanitcObject, feature))
+	public ListTransient isListTransient(EObject semanticObject, EStructuralFeature feature) {
+		if (feature.isTransient() || isContainerReferenceInSameResource(semanticObject, feature))
 			return ListTransient.YES;
 		else
 			return ListTransient.NO;
 	}
 
-	public boolean isValueInListTransient(EObject semanitcObject, int index, EStructuralFeature feature) {
+	public boolean isValueInListTransient(EObject semanticObject, int index, EStructuralFeature feature) {
 		return false;
 	}
 
-	public ValueTransient isValueTransient(EObject semanitcObject, EStructuralFeature feature) {
-		if (feature.isTransient() || !semanitcObject.eIsSet(feature)
-				|| isContainerReferenceInSameResource(semanitcObject, feature)) {
+	public ValueTransient isValueTransient(EObject semanticObject, EStructuralFeature feature) {
+		if (feature.isTransient() || !semanticObject.eIsSet(feature)
+				|| isContainerReferenceInSameResource(semanticObject, feature)) {
 			if (defaultValueIsSerializeable(feature))
 				return ValueTransient.PREFERABLY;
 			else

@@ -49,8 +49,8 @@ public class SemanticNodeProvider implements ISemanticNodeProvider {
 		}
 	}
 
-	protected NodesForEObjectProvider createNodesForEObjectProvider(EObject semanitcObject, ICompositeNode node) {
-		return new NodesForEObjectProvider(semanitcObject, node);
+	protected NodesForEObjectProvider createNodesForEObjectProvider(EObject semanticObject, ICompositeNode node) {
+		return new NodesForEObjectProvider(semanticObject, node);
 	}
 
 	public INodesForEObjectProvider getNodesForSemanticObject(EObject semanticObject, ICompositeNode suggestedComposite) {

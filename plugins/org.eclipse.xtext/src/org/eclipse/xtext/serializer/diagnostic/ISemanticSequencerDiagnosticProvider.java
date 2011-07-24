@@ -11,7 +11,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.serializer.analysis.ISemanitcSequencerNfaProvider.ISemState;
+import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
 import org.eclipse.xtext.util.formallang.INfaAdapter;
 
 import com.google.inject.ImplementedBy;
