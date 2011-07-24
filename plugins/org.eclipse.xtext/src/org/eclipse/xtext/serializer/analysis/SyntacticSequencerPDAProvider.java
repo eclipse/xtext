@@ -339,9 +339,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 		protected Map<AbstractElement, ISynTransition> outTransitionsByElement = Maps.newHashMap();
 
-		protected Map<AbstractElement, ISynTransition> outTransitionsByRuleCallEnter = Maps.newHashMap();
-
-		protected Map<AbstractElement, ISynTransition> outTransitionsByRuleCallExit = Maps.newHashMap();
+		protected List<ISynAbsorberState> outAbsorber = Lists.newArrayList();
 
 		public SynAbsorberState(SynStateType type, AbstractElement element, EObject context, EClass eClass) {
 			super(type, element);
@@ -351,6 +349,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 		protected void addTransition(ISynTransition transition) {
 			addFollower(transition.getFollowers());
+			outAbsorber.add(transition.getTarget());
 			switch (transition.getTarget().getType().getSimpleType()) {
 				case START:
 					throw new UnsupportedOperationException("StartStates can not have incoming transitions");
@@ -361,15 +360,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 					outTransitionsByElement.put(transition.getTarget().getGrammarElement(), transition);
 					break;
 				case RULECALL_ENTER:
-					if (outTransitionsByRuleCallEnter.isEmpty())
-						outTransitionsByRuleCallEnter = Maps.newHashMap();
-					outTransitionsByRuleCallEnter.put(transition.getTarget().getGrammarElement(), transition);
-					break;
 				case RULECALL_EXIT:
-					if (outTransitionsByRuleCallExit.isEmpty())
-						outTransitionsByRuleCallExit = Maps.newHashMap();
-					outTransitionsByRuleCallExit.put(transition.getTarget().getGrammarElement(), transition);
-					break;
 			}
 
 		}
@@ -385,8 +376,6 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 		public List<ISynTransition> getOutTransitions() {
 			List<ISynTransition> result = Lists.newArrayList();
 			result.addAll(outTransitionsByElement.values());
-			result.addAll(outTransitionsByRuleCallEnter.values());
-			result.addAll(outTransitionsByRuleCallExit.values());
 			return result;
 		}
 
@@ -394,12 +383,8 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 			return outTransitionsByElement;
 		}
 
-		public Map<AbstractElement, ISynTransition> getOutTransitionsByRuleCallEnter() {
-			return outTransitionsByRuleCallEnter;
-		}
-
-		public Map<AbstractElement, ISynTransition> getOutTransitionsByRuleCallExit() {
-			return outTransitionsByRuleCallExit;
+		public List<ISynAbsorberState> getOutAbsorbers() {
+			return outAbsorber;
 		}
 
 	}

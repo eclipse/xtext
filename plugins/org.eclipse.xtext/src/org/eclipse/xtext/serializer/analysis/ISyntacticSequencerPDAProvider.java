@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.analysis;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,9 @@ import org.eclipse.xtext.grammaranalysis.IPDAState;
 import org.eclipse.xtext.grammaranalysis.IPDAState.PDAStateType;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
+import org.eclipse.xtext.util.formallang.INfaAdapter;
 import org.eclipse.xtext.util.formallang.ITokenPdaAdapter;
+import org.eclipse.xtext.util.formallang.NfaUtil;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -31,44 +34,42 @@ import com.google.inject.ImplementedBy;
 public interface ISyntacticSequencerPDAProvider {
 
 	public interface ISynAbsorberState extends ISynState {
+		List<ISynAbsorberState> getOutAbsorbers();
+
 		List<ISynTransition> getOutTransitions();
 
 		Map<AbstractElement, ISynTransition> getOutTransitionsByElement();
-
-		Map<AbstractElement, ISynTransition> getOutTransitionsByRuleCallEnter();
-
-		Map<AbstractElement, ISynTransition> getOutTransitionsByRuleCallExit();
 	}
 
 	public interface ISynEmitterState extends ISynState, ISynNavigable {
 	}
 
 	public interface ISynFollowerOwner {
-		List<ISynState> getFollowers();
+		EObject getContext();
 
 		EClass getEClass();
 
-		EObject getContext();
+		List<ISynState> getFollowers();
 	}
 
 	public interface ISynNavigable extends ISynFollowerOwner {
-		ISynAbsorberState getTarget();
-
 		ITokenPdaAdapter<ISynState, RuleCall, AbstractElement> getPathToTarget();
 
 		List<ISynState> getShortestPathTo(AbstractElement ele, RuleCallStack stack);
 
-		List<ISynState> getShortestStackpruningPathTo(AbstractElement ele, RuleCallStack stack);
-
 		List<ISynState> getShortestPathToAbsorber(RuleCallStack stack);
 
+		List<ISynState> getShortestStackpruningPathTo(AbstractElement ele, RuleCallStack stack);
+
 		List<ISynState> getShortestStackpruningPathToAbsorber(RuleCallStack stack);
+
+		ISynAbsorberState getTarget();
+
+		boolean hasEmitters();
 
 		boolean involvesUnassignedTokenRuleCalls();
 
 		boolean isSyntacticallyAmbiguous();
-
-		boolean hasEmitters();
 	}
 
 	public interface ISynState extends ISynFollowerOwner {
@@ -82,12 +83,49 @@ public interface ISyntacticSequencerPDAProvider {
 
 	public interface ISynTransition extends ISynNavigable {
 
-		ISynAbsorberState getSource();
-
 		AbstractElementAlias getAmbiguousSyntax();
+
+		ISynAbsorberState getSource();
+	}
+
+	public class SynAbsorberNfaAdapter implements INfaAdapter<ISynAbsorberState, Iterable<ISynAbsorberState>> {
+
+		protected ISynAbsorberState start;
+		protected ISynAbsorberState stop;
+
+		public SynAbsorberNfaAdapter(ISynAbsorberState start) {
+			super();
+			this.start = start;
+			this.stop = new NfaUtil().find(this, new Predicate<ISynAbsorberState>() {
+				public boolean apply(ISynAbsorberState input) {
+					return input.getType().isStop();
+				}
+			});
+		}
+
+		public Iterable<ISynAbsorberState> getFinalStates() {
+			return Collections.singleton(stop);
+		}
+
+		public Iterable<ISynAbsorberState> getFollowers(ISynAbsorberState node) {
+			return node.getOutAbsorbers();
+		}
+
+		public Iterable<ISynAbsorberState> getStartStates() {
+			return Collections.singleton(start);
+		}
+
 	}
 
 	public class SynPredicates {
+		public static Predicate<ISynState> absorber() {
+			return new Predicate<ISynState>() {
+				public boolean apply(ISynState input) {
+					return input instanceof ISynAbsorberState;
+				}
+			};
+		}
+
 		public static Predicate<ISynState> absorber(final AbstractElement ele) {
 			return new Predicate<ISynState>() {
 				public boolean apply(ISynState input) {
@@ -140,14 +178,6 @@ public interface ISyntacticSequencerPDAProvider {
 			return new Predicate<ISynState>() {
 				public boolean apply(ISynState input) {
 					return input.getType().isRuleCallExit() || input instanceof ISynAbsorberState;
-				}
-			};
-		}
-
-		public static Predicate<ISynState> absorber() {
-			return new Predicate<ISynState>() {
-				public boolean apply(ISynState input) {
-					return input instanceof ISynAbsorberState;
 				}
 			};
 		}

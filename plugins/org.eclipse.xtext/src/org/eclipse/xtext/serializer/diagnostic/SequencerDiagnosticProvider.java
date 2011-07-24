@@ -15,12 +15,19 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
+import org.eclipse.xtext.serializer.analysis.ISemanitcSequencerNfaProvider.ISemState;
 import org.eclipse.xtext.serializer.sequencer.IContextFinder;
+import org.eclipse.xtext.util.EmfFormatter;
+import org.eclipse.xtext.util.formallang.GrammarStringFactory;
+import org.eclipse.xtext.util.formallang.INfaAdapter;
+import org.eclipse.xtext.util.formallang.NfaToGrammar;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -102,6 +109,19 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 				return result;
 			}
 		return Collections.emptyList();
+	}
+
+	public ISerializationDiagnostic createBacktrackingFailedDiagnostic(EObject semanticObject,
+			INfaAdapter<ISemState, List<ISemState>> nfa) {
+		String grammar = new NfaToGrammar().nfaToGrammar(nfa, new Function<ISemState, AbstractElement>() {
+			public AbstractElement apply(ISemState from) {
+				return from.getAssignedGrammarElement();
+			}
+		}, new GrammarStringFactory<AbstractElement>(new GrammarElementTitleSwitch().showAssignments()));
+		StringBuilder msg = new StringBuilder();
+		msg.append("Could not serialize EObject via backtracking.\n");
+		msg.append("Constraint: " + grammar);
+		return new SerializationDiagnostic(semanticObject, msg.toString());
 	}
 
 }

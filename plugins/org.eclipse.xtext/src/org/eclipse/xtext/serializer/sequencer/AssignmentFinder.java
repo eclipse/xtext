@@ -57,8 +57,7 @@ public class AssignmentFinder implements IAssignmentFinder {
 
 	public Iterable<AbstractElement> findAssignmentsByValue(EObject semanitcObj,
 			Iterable<AbstractElement> assignedElements, Object value, INode node) {
-		String featureName = GrammarUtil.containingAssignment(assignedElements.iterator().next()).getFeature();
-		EStructuralFeature feature = semanitcObj.eClass().getEStructuralFeature(featureName);
+		EStructuralFeature feature = GrammarUtil.getFeature(assignedElements.iterator().next(), semanitcObj.eClass());
 		if (feature instanceof EAttribute) {
 			if (feature.getEType() instanceof EEnum)
 				return findValidAssignmentsForEnum(semanitcObj, assignedElements, value);
