@@ -10,7 +10,7 @@ package org.eclipse.xtext.util.formallang;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IPdaAdapter<STATE, STACKITEM> extends INfaAdapter<STATE> {
+public interface IPdaAdapter<STATE, STACKITEM> extends INfaAdapter<STATE, Iterable<STATE>> {
 	STACKITEM getPop(STATE state);
 
 	STACKITEM getPush(STATE state);

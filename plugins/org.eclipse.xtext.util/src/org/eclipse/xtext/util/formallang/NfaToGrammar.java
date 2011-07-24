@@ -17,6 +17,7 @@ import org.eclipse.xtext.util.GraphvizDotBuilder;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
+import com.google.common.base.Function;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -443,14 +444,14 @@ public class NfaToGrammar {
 		return state1.getFirst() > state2.getFirst();
 	}
 
-	public <ELEMENT, STATE, TOKEN, NFA extends INfaAdapter<STATE> & ITokenAdapter<STATE, TOKEN>> ELEMENT nfaToGrammar(
-			NFA nfa, IGrammarFactory<ELEMENT, TOKEN> grammarFactory) {
+	public <ELEMENT, STATE, TOKEN, NFA extends INfaAdapter<STATE, ? extends Iterable<STATE>>> ELEMENT nfaToGrammar(
+			NFA nfa, Function<STATE, TOKEN> state2token, IGrammarFactory<ELEMENT, TOKEN> grammarFactory) {
 		StateAlias<TOKEN> stop = new StateAlias<TOKEN>(new ElementAlias<TOKEN>(null));
 		StateAlias<TOKEN> start = new StateAlias<TOKEN>(new ElementAlias<TOKEN>(null));
 		Set<STATE> stops = Sets.newHashSet(nfa.getFinalStates());
 		HashMap<STATE, StateAlias<TOKEN>> cache = Maps.<STATE, StateAlias<TOKEN>> newHashMap();
 		for (STATE state : nfa.getStartStates()) {
-			StateAlias<TOKEN> stateAlias = toAlias(nfa, state, stops, stop, cache);
+			StateAlias<TOKEN> stateAlias = toAlias(nfa, state2token, state, stops, stop, cache);
 			start.getOutgoing().add(stateAlias);
 			stateAlias.getIncoming().add(start);
 		}
@@ -497,6 +498,15 @@ public class NfaToGrammar {
 		return null;
 	}
 
+	public <ELEMENT, STATE, TOKEN, NFA extends INfaAdapter<STATE, Iterable<STATE>> & ITokenAdapter<STATE, TOKEN>> ELEMENT nfaToGrammar(
+			final NFA nfa, IGrammarFactory<ELEMENT, TOKEN> grammarFactory) {
+		return nfaToGrammar(nfa, new Function<STATE, TOKEN>() {
+			public TOKEN apply(STATE from) {
+				return nfa.getToken(from);
+			}
+		}, grammarFactory);
+	}
+
 	protected <T> void splitState(StateAlias<T> state) {
 		if (state.getIncoming().size() >= state.getOutgoing().size()) {
 			for (StateAlias<T> in : state.getIncoming()) {
@@ -527,19 +537,20 @@ public class NfaToGrammar {
 		state.getIncoming().clear();
 	}
 
-	protected <STATE, TOKEN, NFA extends INfaAdapter<STATE> & ITokenAdapter<STATE, TOKEN>> StateAlias<TOKEN> toAlias(
-			NFA nfa, STATE state, Set<STATE> stops, StateAlias<TOKEN> stop, Map<STATE, StateAlias<TOKEN>> cache) {
+	protected <STATE, TOKEN, NFA extends INfaAdapter<STATE, ? extends Iterable<STATE>>> StateAlias<TOKEN> toAlias(
+			NFA nfa, Function<STATE, TOKEN> state2token, STATE state, Set<STATE> stops, StateAlias<TOKEN> stop,
+			Map<STATE, StateAlias<TOKEN>> cache) {
 		StateAlias<TOKEN> result = cache.get(state);
 		if (result != null)
 			return result;
-		result = new StateAlias<TOKEN>(new ElementAlias<TOKEN>(nfa.getToken(state)));
+		result = new StateAlias<TOKEN>(new ElementAlias<TOKEN>(state2token.apply(state)));
 		cache.put(state, result);
 		if (stops.contains(state)) {
 			stop.getIncoming().add(result);
 			result.getOutgoing().add(stop);
 		}
 		for (STATE follower : nfa.getFollowers(state)) {
-			StateAlias<TOKEN> followerState = toAlias(nfa, follower, stops, stop, cache);
+			StateAlias<TOKEN> followerState = toAlias(nfa, state2token, follower, stops, stop, cache);
 			result.getOutgoing().add(followerState);
 			followerState.getIncoming().add(result);
 		}
