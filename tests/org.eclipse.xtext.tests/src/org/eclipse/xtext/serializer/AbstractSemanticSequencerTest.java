@@ -11,8 +11,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.junit.serializer.DebugSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
-import org.eclipse.xtext.serializer.sequencer.GenericSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.NodeModelSemanticSequencer;
 import org.eclipse.xtext.serializer.serializer.SequencerTestLanguageSemanticSequencer;
@@ -23,7 +21,7 @@ import com.google.inject.Provider;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class SemanticSequencerTest extends AbstractXtextTests {
+public abstract class AbstractSemanticSequencerTest extends AbstractXtextTests {
 
 	@Override
 	protected void setUp() throws Exception {
@@ -35,9 +33,7 @@ public class SemanticSequencerTest extends AbstractXtextTests {
 	@Inject
 	private Provider<ISemanticSequencer> generatedSequencerProvider;
 
-	@Inject
-	@GenericSequencer
-	private Provider<ISemanticSequencer> genericSequencerProvider;
+	protected abstract ISemanticSequencer getGenericSemanticSequencer();
 
 	private void testSequence(String stringModel) throws Exception {
 		DebugSequenceAcceptor genericActual = new DebugSequenceAcceptor();
@@ -45,10 +41,9 @@ public class SemanticSequencerTest extends AbstractXtextTests {
 		DebugSequenceAcceptor expected = new DebugSequenceAcceptor();
 
 		ISemanticSequencer generatedSequencer = generatedSequencerProvider.get();
-		ISemanticSequencer genericSequencer = genericSequencerProvider.get();
+		ISemanticSequencer genericSequencer = getGenericSemanticSequencer();
 		NodeModelSemanticSequencer nmSequencer = new NodeModelSemanticSequencer();
 
-		assertTrue(genericSequencer instanceof GenericSemanticSequencer);
 		assertTrue(generatedSequencer instanceof SequencerTestLanguageSemanticSequencer);
 
 		generatedSequencer.init(generatedActual, ISerializationDiagnostic.STDERR_ACCEPTOR);
