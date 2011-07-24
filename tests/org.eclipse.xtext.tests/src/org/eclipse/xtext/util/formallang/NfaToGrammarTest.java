@@ -44,7 +44,7 @@ public class NfaToGrammarTest extends AbstractXtextTests {
 		}
 	}
 
-	private static class NFA implements INfaAdapter<S>, ITokenAdapter<S, String> {
+	private static class NFA implements INfaAdapter<S, Iterable<S>>, ITokenAdapter<S, String> {
 		private Iterable<S> starts;
 		private Iterable<S> stops;
 

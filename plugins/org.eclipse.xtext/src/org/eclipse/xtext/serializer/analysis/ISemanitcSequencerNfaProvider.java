@@ -5,13 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.serializer.diagnostic;
+package org.eclipse.xtext.serializer.analysis;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.serializer.analysis.ISemanitcSequencerNfaProvider.ISemState;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.util.formallang.INfaAdapter;
 
 import com.google.inject.ImplementedBy;
@@ -19,13 +20,20 @@ import com.google.inject.ImplementedBy;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@ImplementedBy(SequencerDiagnosticProvider.class)
-public interface ISemanticSequencerDiagnosticProvider {
+@ImplementedBy(SemanitcSequencerNfaProvider.class)
+public interface ISemanitcSequencerNfaProvider {
 
-	ISerializationDiagnostic createInvalidContextOrTypeDiagnostic(EObject semanticObject, EObject context);
+	public interface ISemState {
+		AbstractElement getAssignedGrammarElement();
 
-	ISerializationDiagnostic createFeatureValueMissing(EObject semanticObject, EStructuralFeature feature);
+		EStructuralFeature getFeature();
 
-	ISerializationDiagnostic createBacktrackingFailedDiagnostic(EObject semanticObject,
-			INfaAdapter<ISemState, List<ISemState>> nfa);
+		int getFeatureID();
+
+		List<ISemState> getFollowers();
+
+		List<AbstractElement> getToBeValidatedAssignedElements();
+	}
+
+	INfaAdapter<ISemState, List<ISemState>> getNFA(EObject context, EClass type);
 }

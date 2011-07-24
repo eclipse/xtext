@@ -31,7 +31,7 @@ public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 	protected ISemanticSequenceAcceptor sequenceAcceptor;
 
 	@Inject
-	protected SequenceFeeder.Provider sequenceFeederProvider;
+	protected SequenceFeeder.Provider feederProvider;
 
 	protected INodesForEObjectProvider createNodeProvider(EObject semanticObject) {
 		return nodeProvider.getNodesForSemanticObject(semanticObject, null);
@@ -39,12 +39,12 @@ public abstract class AbstractSemanticSequencer implements ISemanticSequencer {
 
 	protected SequenceFeeder createSequencerFeeder(EObject semanticObject) {
 		INodesForEObjectProvider nodeProvider = createNodeProvider(semanticObject);
-		return sequenceFeederProvider.create(semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
+		return feederProvider.create(semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
 				errorAcceptor);
 	}
 
 	protected SequenceFeeder createSequencerFeeder(EObject semanticObject, INodesForEObjectProvider nodeProvider) {
-		return sequenceFeederProvider.create(semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
+		return feederProvider.create(semanticObject, nodeProvider, masterSequencer, sequenceAcceptor,
 				errorAcceptor);
 	}
 
