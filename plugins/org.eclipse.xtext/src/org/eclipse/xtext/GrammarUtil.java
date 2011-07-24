@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.nodemodel.BidiIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -417,6 +418,25 @@ public class GrammarUtil {
 			if (!reference.isContainment() && reference.getName().equals(feature))
 				return reference;
 		}
+		return null;
+	}
+	
+	/**
+	 * @since 2.0
+	 */
+	public static EStructuralFeature getFeature(EObject obj, EClass owner) {
+		if (obj == null)
+			return null;
+		String result = null;
+		if (obj instanceof Action)
+			result = ((Action) obj).getFeature();
+		else {
+			Assignment ass = containingAssignment(obj);
+			if (ass != null)
+				result = ass.getFeature();
+		}
+		if (result != null)
+			return owner.getEStructuralFeature(result);
 		return null;
 	}
 
