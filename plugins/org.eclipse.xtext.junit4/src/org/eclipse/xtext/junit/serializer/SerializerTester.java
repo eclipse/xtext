@@ -134,17 +134,17 @@ public class SerializerTester {
 			StringBuilder msg = new StringBuilder();
 			msg.append("One context is expected, but " + Iterables.size(contexts) + " have been found\n");
 			msg.append("Contexts: " + Joiner.on(", ").join(Iterables.transform(contexts, new Context2NameFunction())));
-			msg.append("Semanitc Object: " + EmfFormatter.objPath(semanticObject));
+			msg.append("Semantic Object: " + EmfFormatter.objPath(semanticObject));
 			Assert.fail(msg.toString());
 		}
 		return contexts.iterator().next();
 	}
 
-	protected String getTextFromNodeModel(EObject semanitcObject) {
-		Resource res = semanitcObject.eResource();
-		if (res instanceof XtextResource && res.getContents().contains(semanitcObject))
+	protected String getTextFromNodeModel(EObject semanticObject) {
+		Resource res = semanticObject.eResource();
+		if (res instanceof XtextResource && res.getContents().contains(semanticObject))
 			return ((XtextResource) res).getParseResult().getRootNode().getText();
-		INode node = NodeModelUtils.getNode(semanitcObject);
+		INode node = NodeModelUtils.getNode(semanticObject);
 		Assert.assertNotNull(node);
 		return node.getText();
 	}
