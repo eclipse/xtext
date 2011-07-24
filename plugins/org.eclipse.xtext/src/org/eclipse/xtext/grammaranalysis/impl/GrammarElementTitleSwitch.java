@@ -213,6 +213,13 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 		return object.eClass().getName();
 	}
 
+	@Override
+	public String doSwitch(EObject theEObject) {
+		if (theEObject == null)
+			return "(null)";
+		return super.doSwitch(theEObject);
+	}
+
 	public GrammarElementTitleSwitch hideCardinality() {
 		showCardinality = false;
 		return this;
