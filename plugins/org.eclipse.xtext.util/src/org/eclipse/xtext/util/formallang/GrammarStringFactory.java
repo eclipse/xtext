@@ -21,6 +21,14 @@ public class GrammarStringFactory<TOKEN> implements IGrammarFactory<String, TOKE
 
 	protected Function<TOKEN, String> token2String;
 
+	public GrammarStringFactory() {
+	}
+
+	public GrammarStringFactory(Function<TOKEN, String> token2String) {
+		super();
+		this.token2String = token2String;
+	}
+
 	protected String card(boolean many, boolean optional) {
 		return many ? (optional ? "*" : "+") : (optional ? "?" : "");
 	}

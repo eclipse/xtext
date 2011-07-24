@@ -10,6 +10,7 @@ package org.eclipse.xtext.util.formallang;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface ITokenNfaAdapter<STATE, TOKEN> extends INfaAdapter<STATE>, ITokenAdapter<STATE, TOKEN> {
+public interface ITokenNfaAdapter<STATE, TOKEN> extends INfaAdapter<STATE, Iterable<STATE>>,
+		ITokenAdapter<STATE, TOKEN> {
 
 }
