@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -64,10 +63,8 @@ public class AssignmentFinder implements IAssignmentFinder {
 			Class<?> clazz = feature.getEType().getInstanceClass();
 			if (clazz == Boolean.class || clazz == boolean.class)
 				return findValidBooleanAssignments(semanticObj, assignedElements, value);
-			else if (feature.getEType() instanceof EEnum)
-				return findValidAssignmentsForEnum(semanticObj, assignedElements, value);
 			else
-				return findValidAssignmentsForDatatype(semanticObj, assignedElements, value);
+				return findValidValueAssignments(semanticObj, assignedElements, value);
 		} else if (feature instanceof EReference) {
 			EReference ref = (EReference) feature;
 			if (ref.isContainment())
@@ -76,20 +73,6 @@ public class AssignmentFinder implements IAssignmentFinder {
 				return findValidAssignmentsForCrossRef(semanticObj, assignedElements, (EObject) value, node);
 		}
 		throw new RuntimeException("unknown feature type");
-	}
-
-	protected Iterable<AbstractElement> findValidBooleanAssignments(EObject semanticObj,
-			Iterable<AbstractElement> assignedElements, Object value) {
-		List<AbstractElement> result = Lists.newArrayList();
-		for (AbstractElement ele : assignedElements)
-			if (GrammarUtil.isBooleanAssignment(GrammarUtil.containingAssignment(ele))) {
-				if (Boolean.TRUE.equals(value))
-					result.add(ele);
-			} else {
-				if (ele instanceof RuleCall && valueSerializer.isValid(semanticObj, (RuleCall) ele, value, null))
-					result.add(ele);
-			}
-		return result;
 	}
 
 	protected Iterable<AbstractElement> findValidAssignmentsForContainmentRef(EObject semanticObj,
@@ -120,7 +103,21 @@ public class AssignmentFinder implements IAssignmentFinder {
 		return result;
 	}
 
-	protected Iterable<AbstractElement> findValidAssignmentsForDatatype(EObject semanticObj,
+	protected Iterable<AbstractElement> findValidBooleanAssignments(EObject semanticObj,
+			Iterable<AbstractElement> assignedElements, Object value) {
+		List<AbstractElement> result = Lists.newArrayList();
+		for (AbstractElement ele : assignedElements)
+			if (GrammarUtil.isBooleanAssignment(GrammarUtil.containingAssignment(ele))) {
+				if (Boolean.TRUE.equals(value))
+					result.add(ele);
+			} else {
+				if (ele instanceof RuleCall && valueSerializer.isValid(semanticObj, (RuleCall) ele, value, null))
+					result.add(ele);
+			}
+		return result;
+	}
+
+	protected Iterable<AbstractElement> findValidValueAssignments(EObject semanticObj,
 			Iterable<AbstractElement> assignedElements, Object value) {
 		// keywords have precedence over everything else
 		for (AbstractElement ass : assignedElements)
@@ -130,20 +127,15 @@ public class AssignmentFinder implements IAssignmentFinder {
 		// now check the remaining assignments
 		List<AbstractElement> result = Lists.newArrayList();
 		for (AbstractElement ass : assignedElements)
-			if (ass instanceof RuleCall && valueSerializer.isValid(semanticObj, (RuleCall) ass, value, null))
-				result.add(ass);
-		return result;
-	}
-
-	protected Iterable<AbstractElement> findValidAssignmentsForEnum(EObject semanticObj,
-			Iterable<AbstractElement> assignedElements, Object value) {
-		List<AbstractElement> result = Lists.newArrayList();
-		for (AbstractElement ass : assignedElements)
-			if (ass instanceof RuleCall && ((RuleCall) ass).getRule() instanceof EnumRule) {
-				if (enumLiteralSerializer.isValid(semanticObj, (RuleCall) ass, value, null))
+			if (ass instanceof RuleCall) {
+				RuleCall rc = (RuleCall) ass;
+				if (rc.getRule() instanceof EnumRule) {
+					if (enumLiteralSerializer.isValid(semanticObj, rc, value, null))
+						result.add(ass);
+				} else if (valueSerializer.isValid(semanticObj, rc, value, null))
 					result.add(ass);
 			}
 		return result;
-
 	}
+
 }
