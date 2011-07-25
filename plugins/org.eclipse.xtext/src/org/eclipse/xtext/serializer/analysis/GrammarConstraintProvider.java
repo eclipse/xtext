@@ -636,7 +636,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		}
 
 		public boolean isManyRecursive(IConstraintElement root) {
-			return isMany() || (getContainer() != root && getContainer().isMany());
+			return isMany() || (container != null && container != root && container.isManyRecursive(root));
 		}
 
 		public boolean isOptional() {
@@ -649,7 +649,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			if (getContainer() != root) {
 				if (getContainer().getType() == ConstraintElementType.ALTERNATIVE)
 					return true;
-				if (getContainer().isOptional())
+				if (getContainer().isOptionalRecursive(root))
 					return true;
 			}
 			return false;
