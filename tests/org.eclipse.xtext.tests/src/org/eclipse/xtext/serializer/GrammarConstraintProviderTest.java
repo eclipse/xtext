@@ -137,8 +137,9 @@ public class GrammarConstraintProviderTest extends AbstractXtextTests {
 	public void testInlineAlternatives() throws Exception {
 		String actual = getParserRule("Rule: (x1=ID | x2=ID) | (x3=ID | x4=ID)* | (x5=ID | x6=ID)? | (x7=ID | x8=ID)+;");
 		StringBuilder expected = new StringBuilder();
-		expected.append("Rule: Rule_Rule;\n");
-		expected.append("  Rule_Rule returns Rule: (x1=ID | x2=ID | (x3=ID | x4=ID)* | (x5=ID | x6=ID)? | (x7=ID | x8=ID)+);");
+		expected.append("Rule: Rule_Rule | Rule_null;\n");
+		expected.append("  Rule_Rule returns Rule: (x1=ID | x2=ID | (x3=ID | x4=ID)* | (x5=ID | x6=ID)? | (x7=ID | x8=ID)+);\n");
+		expected.append("  Rule_null returns null: {null};");
 		assertEquals(expected.toString(), actual);
 	}
 
@@ -162,7 +163,7 @@ public class GrammarConstraintProviderTest extends AbstractXtextTests {
 	public void testAssignedAlternatives2() throws Exception {
 		String actual = getParserRule("Rule: a1=(ID|'id') | a2=(ID|STRING|'bar') | a3+=(ID|STRING|'bar')*;");
 		StringBuilder expected = new StringBuilder();
-		expected.append("Rule: Rule_Rule;\n");
+		expected.append("Rule: Rule_Rule | Rule_null;\n");
 		expected.append("  Rule_Rule returns Rule: (\n");
 		expected.append("    a1=ID | \n");
 		expected.append("    a1='id' | \n");
@@ -170,7 +171,8 @@ public class GrammarConstraintProviderTest extends AbstractXtextTests {
 		expected.append("    a2=STRING | \n");
 		expected.append("    a2='bar' | \n");
 		expected.append("    (a3+=ID | a3+=STRING | a3+='bar')*\n");
-		expected.append(");");
+		expected.append(");\n");
+		expected.append("  Rule_null returns null: {null};");
 		assertEquals(expected.toString(), actual);
 	}
 
