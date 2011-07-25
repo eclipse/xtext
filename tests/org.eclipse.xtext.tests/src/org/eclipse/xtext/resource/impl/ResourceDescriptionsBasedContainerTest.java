@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -25,6 +26,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.ISelectable;
 
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 /**
@@ -33,14 +35,20 @@ import com.google.common.collect.Iterables;
 public class ResourceDescriptionsBasedContainerTest extends TestCase implements IResourceDescriptions {
 
 	private static final QualifiedName SOME_NAME = QualifiedName.create("SomeName");
-	private ResourceDescriptionsBasedContainer container;
-	private EClass eClass;
-	private URI uri;
-	private ResourceDescription resourceDescription;
-	private ISelectable selectableDelegate;
+	protected ResourceDescriptionsBasedContainer container;
+	protected EClass eClass;
+	protected URI uri;
+	protected ResourceDescription resourceDescription;
+	protected ISelectable selectableDelegate;
 	
 	private class ResourceDescription extends AbstractResourceDescription {
 
+		private URI uri;
+
+		protected ResourceDescription(URI uri) {
+			this.uri = uri;
+		}
+		
 		@Override
 		protected List<IEObjectDescription> computeExportedObjects() {
 			if (eClass != null)
@@ -68,8 +76,10 @@ public class ResourceDescriptionsBasedContainerTest extends TestCase implements 
 		super.setUp();
 		eClass = EcoreFactory.eINSTANCE.createEClass();
 		eClass.setName("SomeName");
-		resourceDescription = new ResourceDescription();
-		container = new ResourceDescriptionsBasedContainer(this);
+		uri = URI.createURI("myURI");
+		((InternalEObject)eClass).eSetProxyURI(uri.appendFragment("SomeName"));
+		resourceDescription = new ResourceDescription(uri);
+		container = createContainer();
 		selectableDelegate = new AbstractCompoundSelectable() {
 			@Override
 			protected Iterable<? extends ISelectable> getSelectables() {
@@ -77,9 +87,14 @@ public class ResourceDescriptionsBasedContainerTest extends TestCase implements 
 			}
 		};
 	}
+
+	protected ResourceDescriptionsBasedContainer createContainer() {
+		return new ResourceDescriptionsBasedContainer(this);
+	}
 	
 	public void testGetExportedObjectsByType_01() {
-		Iterable<IEObjectDescription> iterable = container.getExportedObjectsByType(EcorePackage.Literals.ECLASSIFIER);
+		EClass classifier = EcorePackage.Literals.ECLASSIFIER;
+		Iterable<IEObjectDescription> iterable = container.getExportedObjectsByType(classifier);
 		EObject eObject = Iterables.getOnlyElement(iterable).getEObjectOrProxy();
 		assertSame(eClass, eObject);
 	}
@@ -118,6 +133,17 @@ public class ResourceDescriptionsBasedContainerTest extends TestCase implements 
 		eClass = null;
 		Iterable<IEObjectDescription> iterable = container.getExportedObjects(EcorePackage.Literals.ECLASSIFIER, SOME_NAME, true);
 		assertTrue(Iterables.isEmpty(iterable));
+	}
+	
+	public void testBug352214() {
+		container.getResourceDescriptions(); // initialize uri map
+		ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(Collections.<IResourceDescription.Delta>singletonList(
+				new ChangedResourceDescriptionDelta(resourceDescription, null)), null);
+		container.descriptionsChanged(event);
+		assertEquals(0, container.getResourceDescriptionCount());
+		assertTrue(Iterables.all(container.getResourceDescriptions(), Predicates.notNull()));
+		assertTrue(container.hasResourceDescription(uri)); // broken invariant in implementation
+		assertNull(container.getResourceDescription(uri));
 	}
 
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
