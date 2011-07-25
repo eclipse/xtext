@@ -1,0 +1,48 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+grammar org.eclipse.xtext.serializer.AssignmentFinderTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate assignmentFinderTest "http://www.eclipse.org/2009/tmf/xtext/assignmentfindertestlanguage"
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+Model:
+	("#0" keywordVal=KeywordVal) | 
+	("#1" terminalVal=TerminalVal) | 
+	("#2" enumVal=EnumVal) |
+	("#3" keywordBool=KeywordBool) | 
+	("#4" terminalBool=TerminalBool) | 
+	("#5" enumBool=EnumBool) |
+	("#6" mixedBool=MixedBool) |
+	("#7" containmentRef=ContainmentRef) |  
+	("#8" crossRef=CrossRef);
+	
+KeywordVal: kw="kw1" | kw="kw2";
+	
+TerminalVal: term=Terminal1 | term=Terminal2 | term="%foo";
+terminal Terminal1: '%' ('A'..'Z')*;
+terminal Terminal2: '%' ('a'..'z')*;
+
+EnumVal: en=Enum1 | en=Enum2;
+enum Enum1 returns EnumN: lit1; 
+enum Enum2 returns EnumN: lit2;
+
+KeywordBool: kw?="kw1" | kw?="kw2";
+
+TerminalBool: term?=Terminal1 | term?=Terminal2 | term?="%foo";
+
+EnumBool: en?=Enum1 | en?=Enum2;
+
+MixedBool: val?="kw1" | val=Boolean;
+Boolean returns ecore::EBoolean: "true" | "false"; 
+
+ContainmentRef: ctx=ContainmentRef1 | ctx=ContainmentRef2;
+ContainmentRef1 returns ContainmentRefN: "kw1" val1=ID;
+ContainmentRef2 returns ContainmentRefN: "kw2" val2=ID;
+
+CrossRef: name=(Terminal1|Terminal2) (crossRef=[CrossRef|Terminal1] | crossRef=[CrossRef|Terminal2]);
