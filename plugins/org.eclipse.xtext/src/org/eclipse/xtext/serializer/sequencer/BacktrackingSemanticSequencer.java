@@ -333,7 +333,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 				if (ti.getState() != null && ti.getState().getFeature() != null)
 					accept(ti, feeder);
 		} else if (errorAcceptor != null)
-			errorAcceptor.accept(diagnosticProvider.createBacktrackingFailedDiagnostic(obj, nfa));
+			errorAcceptor.accept(diagnosticProvider.createBacktrackingFailedDiagnostic(obj, context, nfa));
 		feeder.finish();
 	}
 

@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
@@ -171,6 +172,8 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 		CrossReference firstRef = GrammarUtil.containingCrossReference(first);
 		while (it.hasNext()) {
 			AbstractElement next = it.next();
+			if (next instanceof Action)
+				return true;
 			if (!EcoreUtil.equals(first, next))
 				return true;
 			if (firstRef != null) {

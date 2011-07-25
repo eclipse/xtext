@@ -16,12 +16,16 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintElement;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IFeatureInfo;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
@@ -55,16 +59,6 @@ public class ContextFinder implements IContextFinder {
 
 	@Inject
 	protected TransientValueUtil transientValueUtil;
-
-	protected boolean allFeaturesHaveAssignments(IConstraint constraint, EObject semanicObj) {
-		if (constraint == null)
-			return false;
-		for (int featureID = 0; featureID < semanicObj.eClass().getFeatureCount(); featureID++)
-			if (!transientValueUtil.isTransient(semanicObj, semanicObj.eClass().getEStructuralFeature(featureID))
-					&& constraint.getFeatures()[featureID] == null)
-				return false;
-		return true;
-	}
 
 	protected Collection<IConstraint> findContextsByConstraints(EObject semanicObj, EReference ref,
 			Iterable<IConstraint> constraints) {
@@ -128,14 +122,14 @@ public class ContextFinder implements IContextFinder {
 			return Iterables.concat(constraints.values());
 
 		for (IConstraint cand : Lists.newArrayList(constraints.keySet()))
-			if (!allFeaturesHaveAssignments(cand, semanticObject))
+			if (!isValidValueQuantity(cand, semanticObject))
 				constraints.remove(cand);
 
 		if (constraints.size() < 2)
 			return Iterables.concat(constraints.values());
 
 		for (EReference ref : semanticObject.eClass().getEAllContainments())
-			if (!transientValueUtil.isTransient(semanticObject, ref)) {
+			if (transientValueUtil.isTransient(semanticObject, ref) != ValueTransient.YES) {
 				constraints.keySet().retainAll(findContextsByConstraints(semanticObject, ref, constraints.keySet()));
 				if (constraints.size() < 2)
 					return Iterables.concat(constraints.values());
@@ -216,6 +210,30 @@ public class ContextFinder implements IContextFinder {
 				if (i1 == i2)
 					return true;
 		return false;
+	}
+
+	protected boolean isMandatory(IFeatureInfo feature) {
+		if (feature == null)
+			return false;
+		for (IConstraintElement ce : feature.getAssignments())
+			if (!ce.isOptionalRecursive(null))
+				return true;
+		return false;
+	}
+
+	protected boolean isValidValueQuantity(IConstraint constraint, EObject semanicObj) {
+		if (constraint == null)
+			return false;
+		for (int featureID = 0; featureID < semanicObj.eClass().getFeatureCount(); featureID++) {
+			IFeatureInfo featureInfo = constraint.getFeatures()[featureID];
+			EStructuralFeature structuralFeature = semanicObj.eClass().getEStructuralFeature(featureID);
+			ValueTransient trans = transientValueUtil.isTransient(semanicObj, structuralFeature);
+			if (trans == ValueTransient.NO && featureInfo == null)
+				return false;
+			if (trans == ValueTransient.YES && isMandatory(featureInfo))
+				return false;
+		}
+		return true;
 	}
 
 }

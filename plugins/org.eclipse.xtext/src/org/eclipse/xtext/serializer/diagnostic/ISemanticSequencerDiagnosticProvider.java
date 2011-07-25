@@ -26,6 +26,6 @@ public interface ISemanticSequencerDiagnosticProvider {
 
 	ISerializationDiagnostic createFeatureValueMissing(EObject semanticObject, EStructuralFeature feature);
 
-	ISerializationDiagnostic createBacktrackingFailedDiagnostic(EObject semanticObject,
+	ISerializationDiagnostic createBacktrackingFailedDiagnostic(EObject semanticObject, EObject context,
 			INfaAdapter<ISemState, List<ISemState>> nfa);
 }

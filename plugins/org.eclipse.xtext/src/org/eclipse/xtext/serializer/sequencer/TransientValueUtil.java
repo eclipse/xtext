@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -60,30 +61,22 @@ public class TransientValueUtil {
 		return Collections.emptyList();
 	}
 
-	public boolean isTransient(EObject obj, EStructuralFeature feature) {
+	public ValueTransient isTransient(EObject obj, EStructuralFeature feature) {
 		if (feature.isMany())
 			switch (transientValues.isListTransient(obj, feature)) {
 				case NO:
-					return false;
+					return ValueTransient.NO;
 				case YES:
-					return true;
+					return ValueTransient.YES;
 				case SOME:
 					List<?> values = (List<?>) obj.eGet(feature);
 					for (int i = 0; i < values.size(); i++)
 						if (!transientValues.isValueInListTransient(obj, i, feature))
-							return false;
-					return true;
+							return ValueTransient.NO;
+				default:
+					return ValueTransient.YES;
 			}
 		else
-			switch (transientValues.isValueTransient(obj, feature)) {
-				case NO:
-					return false;
-				case YES:
-					return true;
-				case PREFERABLY:
-					return true;
-
-			}
-		return true;
+			return transientValues.isValueTransient(obj, feature);
 	}
 }
