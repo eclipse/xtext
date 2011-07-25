@@ -19,7 +19,6 @@ import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest1;
 import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest2;
 import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTestChild;
 import org.eclipse.xtext.serializer.sequencer.IContextFinder;
-import org.eclipse.xtext.util.EmfFormatter;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
@@ -122,4 +121,21 @@ public class ContextFinderTest extends AbstractXtextTests {
 		assertEquals("Model", findContextsByContentsAndContainer(model));
 		assertEquals("Model2", findContextsByContentsAndContainer(model.getModel()));
 	}
+
+	public void testQuantityExclusionTest1() throws Exception {
+		Model model = parseHelper.parse("#5 kw1 bar");
+		assertEquals("QuantityExclusionTest1", findContextsByContents(model.getQuantityExclusion()));
+	}
+
+	public void testQuantityExclusionTest2() throws Exception {
+		Model model = parseHelper.parse("#5 kw2 bar");
+		assertEquals("QuantityExclusionTest2", findContextsByContents(model.getQuantityExclusion()));
+	}
+
+	public void testQuantityExclusionTest3() throws Exception {
+		Model model = parseHelper.parse("#5 kw2 bar baz");
+		assertEquals("QuantityExclusionTest1, QuantityExclusionTest2",
+				findContextsByContents(model.getQuantityExclusion()));
+	}
+
 }
