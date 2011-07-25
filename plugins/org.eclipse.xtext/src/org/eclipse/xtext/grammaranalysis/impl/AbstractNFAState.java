@@ -132,10 +132,15 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 						collectOutgoingByContainer(element, visited, isRuleCall, loopCenter);
 					break;
 			}
-		} else if (element instanceof Alternatives)
-			for (AbstractElement e : ((Alternatives) element).getElements())
+		} else if (element instanceof Alternatives) {
+			boolean hasOptional = false;
+			for (AbstractElement e : ((Alternatives) element).getElements()) {
+				hasOptional |= GrammarUtil.isOptionalCardinality(e);
 				addOutgoing(e, visited, isRuleCall, loopCenter);
-		else if (element instanceof Assignment)
+			}
+			if (hasOptional)
+				collectOutgoingByContainer(element, visited, isRuleCall, loopCenter);
+		} else if (element instanceof Assignment)
 			addOutgoing(((Assignment) element).getTerminal(), visited, isRuleCall, loopCenter);
 		else if (element instanceof CrossReference)
 			addOutgoing(((CrossReference) element).getTerminal(), visited, isRuleCall, loopCenter);

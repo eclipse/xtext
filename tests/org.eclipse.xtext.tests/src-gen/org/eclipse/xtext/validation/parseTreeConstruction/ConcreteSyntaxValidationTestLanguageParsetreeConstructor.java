@@ -4729,6 +4729,7 @@ protected class Combination2_Alternatives_2 extends AlternativesToken {
 		switch(index) {
 			case 0: return new Combination2_Group_2_0(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new Combination2_Group_2_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Combination2_Val1Assignment_1(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
