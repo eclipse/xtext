@@ -219,6 +219,38 @@ public class LinkingErrorTest extends AbstractXtend2TestCase {
 		assertNoExceptions(file);
 	}
 	
+	public void testBug_350167_01() throws Exception {
+		XtendFunction fun = function("def fun(Object o) {\n" + 
+				"	switch(o) {\n" + 
+				"		String : concatPath(o, o)\n" + 
+				"		Number : .\n" + 
+				"		default: null\n" + 
+				"	}\n" + 
+				"}");
+		assertNoExceptions(fun);
+	}
+	
+	public void testBug_350167_02() throws Exception {
+		XtendFunction fun = function("def fun(Object o) {\n" + 
+				"	try { ''.toString } catch(NullPointerException e) { . }\n" + 
+				"}");
+		assertNoExceptions(fun);
+	}
+	
+	public void testBug_350167_03() throws Exception {
+		XtendFunction fun = function("def fun(Object o) {\n" + 
+				"	if (true) ''.toString != null else { . }\n" + 
+				"}");
+		assertNoExceptions(fun);
+	}
+	
+	public void testBug_350167_04() throws Exception {
+		XtendFunction fun = function("@Something({ ., String::Foo }) def fun(Object o) {\n" + 
+				"	null\n" + 
+				"}");
+		assertNoExceptions(fun);
+	}
+	
 //	public void testBug343096() throws Exception {
 //		XtendFile file = file(
 //				"class Bug343096 {\n" +

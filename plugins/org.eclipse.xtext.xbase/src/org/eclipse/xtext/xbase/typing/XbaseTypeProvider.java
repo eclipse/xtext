@@ -499,11 +499,13 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		EList<XCasePart> cases = object.getCases();
 		for (XCasePart xCasePart : cases) {
 			final JvmTypeReference unconverted = getType(xCasePart.getThen(), rawType);
-			returnTypes.add(unconverted);
+			if (unconverted != null)
+				returnTypes.add(unconverted);
 		}
 		if (object.getDefault() != null) {
 			final JvmTypeReference unconverted = getType(object.getDefault(), rawType);
-			returnTypes.add(unconverted);
+			if (unconverted != null)
+				returnTypes.add(unconverted);
 		}
 		return getCommonType(returnTypes);
 	}
