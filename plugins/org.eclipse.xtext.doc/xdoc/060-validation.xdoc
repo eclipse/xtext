@@ -130,7 +130,7 @@ to be edited by you. That is where you put the constraints in.
 The purpose of the codeRef[org.eclipse.xtext.validation.AbstractDeclarativeValidator] is to allow you to 
 write constraints in a declarative way - as the class name already suggests. That is instead of writing 
 exhaustive if-else constructs or extending the generated EMF switch you just have to add the 
-@codeRef[org.eclipse.xtext.validation.Check] annotation to any method and it will be invoked automatically
+codeRef[org.eclipse.xtext.validation.Check] annotation to any method and it will be invoked automatically
 when validation takes place. Moreover you can state for what type the respective constraint method is, just 
 by declaring a typed parameter. This also lets you avoid any type casts. In addition to the reflective 
 invocation of validation methods the codeRef[org.eclipse.xtext.validation.AbstractDeclarativeValidator] 

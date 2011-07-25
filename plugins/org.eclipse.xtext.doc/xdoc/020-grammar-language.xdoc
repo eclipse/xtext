@@ -782,7 +782,7 @@ A list of all default terminals like code[Xtext][WS] can be found in section ref
 
 section2:datatypeRules[Data Type Rules]
 
-Data type rules are parsing-phase rules, which create instances of codeRef[org.eclipse.emf.ecore.EDataType] instead of codeRef[org.eclipse.emf.ecore.EDataType]. Thinking about it, one may discover 
+Data type rules are parsing-phase rules, which create instances of codeRef[org.eclipse.emf.ecore.EDataType] instead of codeRef[org.eclipse.emf.ecore.EClass]. Thinking about it, one may discover 
 that they are quite similar to terminal rules.
 However, the nice thing about data type rules is that they are actually parser rules and are therefore 
 
