@@ -125,8 +125,12 @@ public class ResourceDescriptionsBasedContainer extends AbstractContainer implem
 	public void descriptionsChanged(IResourceDescription.Event event) {
 		if (uriToDescription != null) {
 			for(IResourceDescription.Delta delta: event.getDeltas()) {
-				if (uriToDescription.containsKey(delta.getUri())) {
-					uriToDescription.put(delta.getUri(), delta.getNew());
+				URI uri = delta.getUri();
+				if (hasResourceDescription(uri) || uriToDescription.get(uri) != null) {
+					if (delta.getNew() != null)
+						uriToDescription.put(uri, delta.getNew());
+					else
+						uriToDescription.remove(uri);
 				}
 			}
 		}
