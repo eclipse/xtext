@@ -69,8 +69,8 @@ public class AntlrOptions {
 	 * This method will become public API with 2.1
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
-	public void setFieldsPerClass(int fieldsPerClass) {
-		this.fieldsPerClass = fieldsPerClass;
+	public void setFieldsPerClass(String fieldsPerClass) {
+		this.fieldsPerClass = Integer.parseInt(fieldsPerClass);
 	}
 
 }
