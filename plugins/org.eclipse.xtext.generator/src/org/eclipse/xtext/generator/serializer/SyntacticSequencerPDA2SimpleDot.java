@@ -7,9 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.serializer;
 
+import java.io.IOException;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.grammaranalysis.IPDAState;
+import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
+import org.eclipse.xtext.serializer.analysis.IContextProvider;
 import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.SequencerNFAProvider;
 import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.SequencerPDAContext;
 import org.eclipse.xtext.serializer.analysis.SyntacticSequencerPDAProvider.SequencerPDAProvider;
@@ -20,17 +26,18 @@ import com.google.common.collect.Sets;
 public class SyntacticSequencerPDA2SimpleDot extends GraphvizDotBuilder {
 	protected SequencerPDAProvider pdaProvider = new SequencerPDAProvider(new SequencerNFAProvider());
 
-	//	public static void drawGrammar(String path, Grammar grammar) {
-	//		try {
-	//			for (ParserRule pr : GrammarUtil.allParserRules(grammar))
-	//				new SyntacticSequencerPDA2SimpleDot().draw(pr, path + "-" + pr.getName() + "-simple-PDA.pdf", "-T pdf");
-	//			for (Action a : GrammarUtil.containedActions(grammar))
-	//				if (a.getFeature() != null)
-	//					new SyntacticSequencerPDA2SimpleDot().draw(a, path + "-" + GrammarUtil.containingRule(a).getName() + "_"
-	//							+ a.getType().getClassifier().getName() + "_" + a.getFeature() + "-PDA.pdf", "-T pdf");
-	//		} catch (IOException e) {
-	//		}
-	//	}
+	public static void drawGrammar(IContextProvider contexts, String path, Grammar grammar) {
+		try {
+			for (EObject ctx : contexts.getAllContexts(grammar))
+				for (EClass type : contexts.getTypesForContext(ctx))
+					new SyntacticSequencerPDA2SimpleDot()
+							.draw(new SequencerPDAContext(ctx, type),
+									path + "-" + new Context2NameFunction().apply(ctx) + "_" + type.getName()
+											+ "-simplePDA.pdf", "-T pdf");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	protected Props drawObject(Object obj) {
