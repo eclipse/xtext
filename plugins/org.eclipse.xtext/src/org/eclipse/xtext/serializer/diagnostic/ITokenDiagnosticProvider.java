@@ -10,6 +10,7 @@ package org.eclipse.xtext.serializer.diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.scoping.IScope;
 
 import com.google.inject.ImplementedBy;
@@ -20,13 +21,15 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(TokenDiagnosticProvider.class)
 public interface ITokenDiagnosticProvider {
 
-	ISerializationDiagnostic getNullNotAllowedDiagnostic(EObject semanticObject, AbstractElement ele);
-
-	ISerializationDiagnostic getValueConversionExceptionDiagnostic(EObject semanticObject, AbstractElement element,
-			Object value, Throwable exception);
-
-	ISerializationDiagnostic getNoScopeFoundDiagnostic(EObject semanticObject, CrossReference element, EObject target);
+	ISerializationDiagnostic getInvalidEnumValueDiagnostic(EObject semanticObject, RuleCall rc, Object value);
 
 	ISerializationDiagnostic getNoEObjectDescriptionFoundDiagnostic(EObject semanticObject, CrossReference element,
 			EObject target, IScope scope);
+
+	ISerializationDiagnostic getNoScopeFoundDiagnostic(EObject semanticObject, CrossReference element, EObject target);
+
+	ISerializationDiagnostic getNullNotAllowedDiagnostic(EObject semanticObject, AbstractElement ele);
+	
+	ISerializationDiagnostic getValueConversionExceptionDiagnostic(EObject semanticObject, AbstractElement element,
+			Object value, Throwable exception);
 }
