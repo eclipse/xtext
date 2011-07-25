@@ -151,42 +151,44 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                 if (subProgress.isCanceled()) {
                     throw new OperationCanceledException();
                 }
-                subProgress.subTask("Updating resource description " + index + " of " + (index + queue.size()));
-                // Load the resource and create a new resource description
-                Resource resource = null;
-                Delta newDelta = null;
-                try {
-                    final IResourceDescription.Manager manager = getResourceDescriptionManager(changedURI);
-                    if (manager != null) {
-                        resource = resourceSet.getResource(changedURI, true);
-                        // Resolve links here!
-						EcoreUtil2.resolveLazyCrossReferences(resource, cancelMonitor);
-                        final IResourceDescription description = manager.getResourceDescription(resource);
-                        final IResourceDescription copiedDescription = BuilderStateUtil.create(description);
-                        newDelta = manager.createDelta(
-                                    this.getResourceDescription(changedURI), copiedDescription);
-                    }
-                } catch (final WrappedException ex) {
-                    if (resourceSet.getURIConverter().exists(changedURI, Collections.emptyMap())) {
-                        LOGGER.error("Error loading resource from: " + changedURI.toString(), ex); //$NON-NLS-1$
-                    }
-                    if (resource != null) {
-                        resourceSet.getResources().remove(resource);
-                    }
-                    final IResourceDescription oldDescription = this.getResourceDescription(changedURI);
-                    if (oldDescription != null) {
-                        newDelta = new DefaultResourceDescriptionDelta(oldDescription, null);
-                    }
+                if (!toBeDeleted.contains(changedURI)) {
+	                subProgress.subTask("Updating resource description " + index + " of " + (index + queue.size()));
+	                // Load the resource and create a new resource description
+	                Resource resource = null;
+	                Delta newDelta = null;
+	                try {
+	                    final IResourceDescription.Manager manager = getResourceDescriptionManager(changedURI);
+	                    if (manager != null) {
+	                        resource = resourceSet.getResource(changedURI, true);
+	                        // Resolve links here!
+							EcoreUtil2.resolveLazyCrossReferences(resource, cancelMonitor);
+	                        final IResourceDescription description = manager.getResourceDescription(resource);
+	                        final IResourceDescription copiedDescription = BuilderStateUtil.create(description);
+	                        newDelta = manager.createDelta(
+	                                    this.getResourceDescription(changedURI), copiedDescription);
+	                    }
+	                } catch (final WrappedException ex) {
+	                    if (resourceSet.getURIConverter().exists(changedURI, Collections.emptyMap())) {
+	                        LOGGER.error("Error loading resource from: " + changedURI.toString(), ex); //$NON-NLS-1$
+	                    }
+	                    if (resource != null) {
+	                        resourceSet.getResources().remove(resource);
+	                    }
+	                    final IResourceDescription oldDescription = this.getResourceDescription(changedURI);
+	                    if (oldDescription != null) {
+	                        newDelta = new DefaultResourceDescriptionDelta(oldDescription, null);
+	                    }
+	                }
+	                if (newDelta != null) {
+	                    newDeltas.add(newDelta);
+	                    if (newDelta.haveEObjectDescriptionsChanged())
+	                    	changedDeltas.add(newDelta);
+	                    // Make the new resource description known and update the map.
+	                    newState.register(newDelta);
+	                }
+	                subProgress.worked(1);
+	                index++;
                 }
-                if (newDelta != null) {
-                    newDeltas.add(newDelta);
-                    if (newDelta.haveEObjectDescriptionsChanged())
-                    	changedDeltas.add(newDelta);
-                    // Make the new resource description known and update the map.
-                    newState.register(newDelta);
-                }
-                subProgress.worked(1);
-                index++;
             }
             queueAffectedResources(allRemainingURIs, this, newState, changedDeltas, buildData, subProgress.newChild(1));
             // Validate now.
