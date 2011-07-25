@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser.antlr;
 
+import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrParserSplitter;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
@@ -18,6 +20,7 @@ public class AntlrOptions {
 	private int k = -1;
 	private boolean ignoreCase = false;
 	private boolean classSplitting = false;
+	private int fieldsPerClass = AntlrParserSplitter.FIELDS_PER_CLASS;
 
 	public boolean isBacktrack() {
 		return backtrack;
@@ -54,6 +57,20 @@ public class AntlrOptions {
 	}
 	public void setClassSplitting(boolean value) {
 		this.classSplitting = value;
+	}
+	/**
+	 * This method will become public API with 2.1
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	public int getFieldsPerClass() {
+		return fieldsPerClass;
+	}
+	/**
+	 * This method will become public API with 2.1
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	public void setFieldsPerClass(int fieldsPerClass) {
+		this.fieldsPerClass = fieldsPerClass;
 	}
 
 }

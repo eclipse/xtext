@@ -70,7 +70,7 @@ public class AntlrLexerSplitter {
 		}
 		copyTail();
 		String result = stringBuilder.toString();
-		result = new LexerSpecialStateTransitionSplitter().transform(result);
+		result = new LexerSpecialStateTransitionSplitter(false).transform(result);
 		return result;
 	}
 

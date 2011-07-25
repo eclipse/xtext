@@ -23,6 +23,8 @@ public class LexerSpecialStateTransitionSplitter {
 			"\\})" // end of nested class
 			, Pattern.DOTALL | Pattern.MULTILINE);
 	
+	public static final Pattern TOO_MANY_CASES_PATTERN = Pattern.compile("^\\s*case\\s+\\d\\d\\d", Pattern.MULTILINE);
+			
 	public static final Pattern CASE_PATTERN = Pattern.compile(
 			"(^\\s*case\\s+(\\d+)\\s*:(\\s*))" +// case # -> $1, $2, $3
 			"([^;]*;)" + // int .. = input.LA(..) -> $4
@@ -31,6 +33,16 @@ public class LexerSpecialStateTransitionSplitter {
 			"\\s*(if\\s*\\(\\s*s\\s*>=0\\s*\\)\\s*return\\s*s;\\s*" + // if ( s>=0 ) return s; $8
 			"^\\s*break;$)" // break, end case
 			, Pattern.DOTALL | Pattern.MULTILINE);
+
+	/**
+	 * Allow to disable the guard for large number of cases in switch statement.
+	 * This is for testing purpose.
+	 */
+	private final boolean ignoreCaseCountGuard;
+	
+	public LexerSpecialStateTransitionSplitter(boolean ignoreCaseCountGuard) {
+		this.ignoreCaseCountGuard = ignoreCaseCountGuard;
+	}
 	
 	public String transform(String input) {
 		Matcher dfaMatcher = DFA_PATTERN.matcher(input);
@@ -45,6 +57,9 @@ public class LexerSpecialStateTransitionSplitter {
 	}
 	
 	public String extractSpecialStateMethods(String specialStateTransition) {
+		if (!ignoreCaseCountGuard && !TOO_MANY_CASES_PATTERN.matcher(specialStateTransition).find()) {
+			return specialStateTransition.replace("\\", "\\\\").replace("$", "\\$");
+		}
 		Matcher caseMatcher = CASE_PATTERN.matcher(specialStateTransition);
 		StringBuffer result = new StringBuffer();
 		StringBuffer extractedMethods = new StringBuffer();
