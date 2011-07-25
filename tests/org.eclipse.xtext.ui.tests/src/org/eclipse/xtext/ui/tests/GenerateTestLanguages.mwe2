@@ -130,9 +130,7 @@ Workflow {
 		}
 		language = { 
 			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/UnorderedGroupsTestLanguage.xtext"
-			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {
-				backtrack = true
-			}
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
 			uri="classpath:/org/eclipse/xtext/ui/tests/editor/outline/OutlineTestLanguage.xtext"
