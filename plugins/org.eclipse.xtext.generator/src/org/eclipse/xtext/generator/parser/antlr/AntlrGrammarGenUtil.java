@@ -23,7 +23,7 @@ public class AntlrGrammarGenUtil {
 	}
 
 	public static String toStringInAntlrAction(String string) {
-		return Strings.convertToJavaString(string, true).replace("%", "\\%");
+		return Strings.convertToJavaString(string, true).replace("%", "\\%").replace("$", "\\$");
 	}
 
 	public static String toAntlrStringIgnoreCase(String string) {
