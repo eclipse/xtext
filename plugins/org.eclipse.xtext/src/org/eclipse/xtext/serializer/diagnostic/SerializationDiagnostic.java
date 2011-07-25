@@ -10,22 +10,12 @@ package org.eclipse.xtext.serializer.diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.serializer.impl.FeatureFinderUtil;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class SerializationDiagnostic implements ISerializationDiagnostic {
-
-	protected static EStructuralFeature getFeature(EObject semanticObject, AbstractElement element) {
-		if (semanticObject != null && element != null) {
-			Assignment ass = GrammarUtil.containingAssignment(element);
-			if (ass != null && ass.getFeature() != null)
-				return semanticObject.eClass().getEStructuralFeature(ass.getFeature());
-		}
-		return null;
-	}
 
 	protected EStructuralFeature feature;
 
@@ -36,7 +26,8 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 	protected EObject context;
 
 	public SerializationDiagnostic(EObject semanticObject, AbstractElement element, String message) {
-		this(semanticObject, getFeature(semanticObject, element), message);
+		this(semanticObject, semanticObject != null ? FeatureFinderUtil.getFeature(element, semanticObject.eClass())
+				: null, message);
 	}
 
 	public SerializationDiagnostic(EObject semanticObject, EStructuralFeature feature, String message) {
