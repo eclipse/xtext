@@ -15,7 +15,8 @@ Model:
 	("#1" attributeExclusion=(AttributeExclusionTest1|AttributeExclusionTest2)) | 
 	("#2" nestedType=(NestedTypeTest1|NestedTypeTest2)) | 
 	("#3" nestedTypeRecursiveTest2=(NestedTypeRecursiveTest1|NestedTypeRecursiveTest2)) | 
-	("#4" parentRef=(ParentRefTest1|ParentRefTest2))	
+	("#4" parentRef=(ParentRefTest1|ParentRefTest2)) | 
+	("#5" quantityExclusion=(QuantityExclusionTest1|QuantityExclusionTest2))	
 	;
 	
 Model2 returns Model: {Model} "model";
@@ -36,3 +37,6 @@ ParentRefTest1: "kw1" child1=ParentRefTestChild1;
 ParentRefTest2: "kw2" child2=ParentRefTestChild2;
 ParentRefTestChild1 returns ParentRefTestChild: {ParentRefTestChild} "foo" child=ParentRefTestChild1?;
 ParentRefTestChild2 returns ParentRefTestChild: {ParentRefTestChild} "foo" child=ParentRefTestChild2?;
+
+QuantityExclusionTest1 returns QuantityExclusionTest: "kw1" attr1=ID attr2=ID?;
+QuantityExclusionTest2 returns QuantityExclusionTest: "kw2" attr1=ID? attr2=ID;

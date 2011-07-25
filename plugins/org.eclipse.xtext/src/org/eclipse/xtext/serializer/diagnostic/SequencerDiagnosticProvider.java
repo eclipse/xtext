@@ -24,7 +24,6 @@ import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstra
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
 import org.eclipse.xtext.serializer.sequencer.IContextFinder;
-import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.formallang.GrammarStringFactory;
 import org.eclipse.xtext.util.formallang.INfaAdapter;
 import org.eclipse.xtext.util.formallang.NfaToGrammar;
@@ -111,7 +110,7 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 		return Collections.emptyList();
 	}
 
-	public ISerializationDiagnostic createBacktrackingFailedDiagnostic(EObject semanticObject,
+	public ISerializationDiagnostic createBacktrackingFailedDiagnostic(EObject semanticObject, EObject context,
 			INfaAdapter<ISemState, List<ISemState>> nfa) {
 		String grammar = new NfaToGrammar().nfaToGrammar(nfa, new Function<ISemState, AbstractElement>() {
 			public AbstractElement apply(ISemState from) {
@@ -121,7 +120,7 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 		StringBuilder msg = new StringBuilder();
 		msg.append("Could not serialize EObject via backtracking.\n");
 		msg.append("Constraint: " + grammar);
-		return new SerializationDiagnostic(semanticObject, msg.toString());
+		return new SerializationDiagnostic(semanticObject, context, msg.toString());
 	}
 
 }
