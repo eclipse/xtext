@@ -130,7 +130,7 @@ public class LexerSpecialStateTransitionSplitterTest extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		testMe = new LexerSpecialStateTransitionSplitter();
+		testMe = new LexerSpecialStateTransitionSplitter(true);
 	}
 	
 	@Override

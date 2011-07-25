@@ -19,12 +19,11 @@ import java.util.regex.Pattern;
 import com.google.common.base.Preconditions;
 
 /**
- *
  * @author Heiko Behrens - Initial contribution and API
  */
 public class AntlrParserSplitter {
 
-	public static final int FIELDS_PER_CLASS = 2500;
+	public static final int FIELDS_PER_CLASS = 1000;
 
 	public static final Pattern DECLARATION_PATTERN = Pattern.compile("public static final BitSet (FOLLOW_.*?)(\\s*=.*;)", 0);
 	public static final Pattern REFERENCE_PATTERN = Pattern.compile("(?<!BitSet )(FOLLOW_[\\w]+)", 0);
@@ -33,8 +32,18 @@ public class AntlrParserSplitter {
 	private Map<String, Integer> fields = new HashMap<String, Integer>();
 	private List<ExtractedClass> extractedClasses = new ArrayList<ExtractedClass>();
 
+	private final int fieldsPerClass;
+
 	public AntlrParserSplitter(String content) {
+		this(content, FIELDS_PER_CLASS);
+	}
+	/**
+	 * This method will become public API with 2.1
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	public AntlrParserSplitter(String content, int fieldsPerClass) {
 		this.content = content;
+		this.fieldsPerClass = fieldsPerClass;
 	}
 
 	public String transform() {
@@ -84,7 +93,7 @@ public class AntlrParserSplitter {
 
 	private String getTransformedReference(String field) {
 		int idx = fields.get(field);
-		return getExtractedClassName(idx / FIELDS_PER_CLASS) + "." + field;
+		return getExtractedClassName(idx / fieldsPerClass) + "." + field;
 	}
 
 	private String getExtractedClassName(int i) {
@@ -110,7 +119,7 @@ public class AntlrParserSplitter {
 		}
 
 		public boolean isFull() {
-			return declarationCount >= FIELDS_PER_CLASS;
+			return declarationCount >= fieldsPerClass;
 		}
 
 		public void addDeclaration(String declaration) {

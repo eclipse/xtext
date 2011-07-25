@@ -98,7 +98,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 
 	protected void splitParserClassFile(String filename) throws IOException {
 		String content = readFileIntoString(filename);
-		AntlrParserSplitter splitter = new AntlrParserSplitter(content);
+		AntlrParserSplitter splitter = new AntlrParserSplitter(content, getOptions().getFieldsPerClass());
 		writeStringIntoFile(filename, splitter.transform());
 	}
 
