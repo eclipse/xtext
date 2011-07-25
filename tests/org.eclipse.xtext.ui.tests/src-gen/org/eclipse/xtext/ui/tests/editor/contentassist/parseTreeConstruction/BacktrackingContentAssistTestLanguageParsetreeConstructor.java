@@ -3584,6 +3584,7 @@ protected class PropertyContextDecl_Alternatives_4 extends AlternativesToken {
 		switch(index) {
 			case 0: return new PropertyContextDecl_Group_4_0(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new PropertyContextDecl_Group_4_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new PropertyContextDecl_TypeAssignment_3(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}

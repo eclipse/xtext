@@ -999,6 +999,8 @@ protected class Timeperiod_Alternatives_3_1_3 extends AlternativesToken {
 		switch(index) {
 			case 0: return new Timeperiod_Group_3_1_3_0(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new Timeperiod_Group_3_1_3_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Timeperiod_Group_3_1_2(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Timeperiod_LeftCurlyBracketKeyword_3_1_1(lastRuleCallOrigin, this, 3, inst);
 			default: return null;
 		}	
 	}
@@ -3498,6 +3500,8 @@ protected class Timeperiod_Alternatives_3_5_4 extends AlternativesToken {
 		switch(index) {
 			case 0: return new Timeperiod_Group_3_5_4_0(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new Timeperiod_Group_3_5_4_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new Timeperiod_Group_3_5_3(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new Timeperiod_NLTerminalRuleCall_3_5_2(lastRuleCallOrigin, this, 3, inst);
 			default: return null;
 		}	
 	}

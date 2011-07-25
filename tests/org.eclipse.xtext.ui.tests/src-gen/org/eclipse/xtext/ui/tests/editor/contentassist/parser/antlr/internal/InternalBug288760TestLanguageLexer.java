@@ -782,7 +782,7 @@ public class InternalBug288760TestLanguageLexer extends Lexer {
         }
     }
 
-    class DFA9 extends DFA {
+    static class DFA9 extends DFA {
 
         public DFA9(BaseRecognizer recognizer) {
             this.recognizer = recognizer;

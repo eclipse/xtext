@@ -5,7 +5,6 @@ grammar InternalUnorderedGroupsTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	backtrack=true;
 	
 }
 
@@ -28,7 +27,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
-import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.UnorderedGroupsTestLanguageGrammarAccess;
 
@@ -36,11 +34,6 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.UnorderedGroupsT
 
 @parser::members {
 
-/*
-  This grammar contains a lot of empty actions to work around a bug in ANTLR.
-  Otherwise the ANTLR tool will create synpreds that cannot be compiled in some rare cases.
-*/
- 
  	private UnorderedGroupsTestLanguageGrammarAccess grammarAccess;
  	
     public InternalUnorderedGroupsTestLanguageParser(TokenStream input, UnorderedGroupsTestLanguageGrammarAccess grammarAccess) {
@@ -230,27 +223,16 @@ ruleModel returns [EObject current=null]
 
 // Entry rule entryRuleSimpleModel
 entryRuleSimpleModel returns [EObject current=null] 
-	@init { 
-		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
-			grammarAccess.getSimpleModelAccess().getUnorderedGroup_0()
-		);
-	}
 	:
 	{ newCompositeNode(grammarAccess.getSimpleModelRule()); }
 	 iv_ruleSimpleModel=ruleSimpleModel 
 	 { $current=$iv_ruleSimpleModel.current; } 
 	 EOF 
 ;
-finally {
-	myUnorderedGroupState.restore();
-}
 
 // Rule SimpleModel
 ruleSimpleModel returns [EObject current=null] 
     @init { enterRule(); 
-		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
-			grammarAccess.getSimpleModelAccess().getUnorderedGroup_0()
-		);
     }
     @after { leaveRule(); }:
 ((
@@ -452,9 +434,6 @@ ruleSimpleModel returns [EObject current=null]
     }
 )
 ;
-finally {
-	myUnorderedGroupState.restore();
-}
 
 
 
@@ -462,27 +441,16 @@ finally {
 
 // Entry rule entryRuleMandatoryModel
 entryRuleMandatoryModel returns [EObject current=null] 
-	@init { 
-		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
-			grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0()
-		);
-	}
 	:
 	{ newCompositeNode(grammarAccess.getMandatoryModelRule()); }
 	 iv_ruleMandatoryModel=ruleMandatoryModel 
 	 { $current=$iv_ruleMandatoryModel.current; } 
 	 EOF 
 ;
-finally {
-	myUnorderedGroupState.restore();
-}
 
 // Rule MandatoryModel
 ruleMandatoryModel returns [EObject current=null] 
     @init { enterRule(); 
-		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
-			grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0()
-		);
     }
     @after { leaveRule(); }:
 ((
@@ -685,9 +653,6 @@ ruleMandatoryModel returns [EObject current=null]
     }
 )
 ;
-finally {
-	myUnorderedGroupState.restore();
-}
 
 
 
@@ -695,27 +660,16 @@ finally {
 
 // Entry rule entryRuleLoopedModel
 entryRuleLoopedModel returns [EObject current=null] 
-	@init { 
-		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
-			grammarAccess.getLoopedModelAccess().getUnorderedGroup_0()
-		);
-	}
 	:
 	{ newCompositeNode(grammarAccess.getLoopedModelRule()); }
 	 iv_ruleLoopedModel=ruleLoopedModel 
 	 { $current=$iv_ruleLoopedModel.current; } 
 	 EOF 
 ;
-finally {
-	myUnorderedGroupState.restore();
-}
 
 // Rule LoopedModel
 ruleLoopedModel returns [EObject current=null] 
     @init { enterRule(); 
-		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
-			grammarAccess.getLoopedModelAccess().getUnorderedGroup_0()
-		);
     }
     @after { leaveRule(); }:
 ((
@@ -917,9 +871,6 @@ ruleLoopedModel returns [EObject current=null]
     }
 )
 ;
-finally {
-	myUnorderedGroupState.restore();
-}
 
 
 
@@ -927,27 +878,16 @@ finally {
 
 // Entry rule entryRuleGroupLoopedModel
 entryRuleGroupLoopedModel returns [EObject current=null] 
-	@init { 
-		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
-			grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0()
-		);
-	}
 	:
 	{ newCompositeNode(grammarAccess.getGroupLoopedModelRule()); }
 	 iv_ruleGroupLoopedModel=ruleGroupLoopedModel 
 	 { $current=$iv_ruleGroupLoopedModel.current; } 
 	 EOF 
 ;
-finally {
-	myUnorderedGroupState.restore();
-}
 
 // Rule GroupLoopedModel
 ruleGroupLoopedModel returns [EObject current=null] 
     @init { enterRule(); 
-		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
-			grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0()
-		);
     }
     @after { leaveRule(); }:
 ((
@@ -1150,9 +1090,6 @@ ruleGroupLoopedModel returns [EObject current=null]
     }
 )
 ;
-finally {
-	myUnorderedGroupState.restore();
-}
 
 
 
@@ -1326,33 +1263,19 @@ ruleLoopedAlternativeModel returns [EObject current=null]
 
 // Entry rule entryRuleBug304681Model
 entryRuleBug304681Model returns [EObject current=null] 
-	@init { 
-		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
-			grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2()
-		);
-	}
 	:
 	{ newCompositeNode(grammarAccess.getBug304681ModelRule()); }
 	 iv_ruleBug304681Model=ruleBug304681Model 
 	 { $current=$iv_ruleBug304681Model.current; } 
 	 EOF 
 ;
-finally {
-	myUnorderedGroupState.restore();
-}
 
 // Rule Bug304681Model
 ruleBug304681Model returns [EObject current=null] 
     @init { enterRule(); 
-		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
-			grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2()
-		);
     }
     @after { leaveRule(); }:
 ((
-	{ 
-	  /* */ 
-	}
     {
         $current = forceCreateModelElement(
             grammarAccess.getBug304681ModelAccess().getBug304681ModelAction_0(),
@@ -1559,9 +1482,6 @@ ruleBug304681Model returns [EObject current=null]
     }
 )
 ;
-finally {
-	myUnorderedGroupState.restore();
-}
 
 
 
@@ -1582,9 +1502,6 @@ ruleBug304681Feature returns [EObject current=null]
     }
     @after { leaveRule(); }:
 (
-	{ 
-	  /* */ 
-	}
     { 
         newCompositeNode(grammarAccess.getBug304681FeatureAccess().getBug304681AttributeParserRuleCall_0()); 
     }
@@ -1595,9 +1512,6 @@ ruleBug304681Feature returns [EObject current=null]
     }
 
     |
-	{ 
-	  /* */ 
-	}
     { 
         newCompositeNode(grammarAccess.getBug304681FeatureAccess().getBug304681ReferenceParserRuleCall_1()); 
     }

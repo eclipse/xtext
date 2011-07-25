@@ -12027,17 +12027,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object__UnorderedGroup_5__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4451:1: rule__Object__UnorderedGroup_5__Impl : ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4451:1: rule__Object__UnorderedGroup_5__Impl : ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) ) ) ;
     public final void rule__Object__UnorderedGroup_5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         		boolean selected = false;
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4456:1: ( ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4457:3: ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4456:1: ( ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4457:3: ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4457:3: ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4457:3: ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) ) )
             int alt23=8;
             alt23 = dfa23.predict(input);
             switch (alt23) {
@@ -12230,22 +12230,22 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 5 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4527:4: ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( rule__Object__FeaturesAssignment_5_4 )* ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4527:4: ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4527:4: ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( rule__Object__FeaturesAssignment_5_4 )* ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4528:5: {...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( rule__Object__FeaturesAssignment_5_4 )* ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4527:4: ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4528:5: {...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Object__UnorderedGroup_5__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4528:103: ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( rule__Object__FeaturesAssignment_5_4 )* ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4529:6: ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( rule__Object__FeaturesAssignment_5_4 )* ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4528:103: ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4529:6: ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4);
                     selected = true;
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4535:6: ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( rule__Object__FeaturesAssignment_5_4 )* ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4536:6: ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( rule__Object__FeaturesAssignment_5_4 )* )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4535:6: ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4536:6: ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* )
                     {
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4536:6: ( ( rule__Object__FeaturesAssignment_5_4 ) )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4537:7: ( rule__Object__FeaturesAssignment_5_4 )
@@ -12270,22 +12270,22 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4541:6: ( ( rule__Object__FeaturesAssignment_5_4 )* )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4542:7: ( rule__Object__FeaturesAssignment_5_4 )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4541:6: ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4542:7: ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )*
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getObjectAccess().getFeaturesAssignment_5_4()); 
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4543:7: ( rule__Object__FeaturesAssignment_5_4 )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4543:7: ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )*
                     loop22:
                     do {
                         int alt22=2;
                         alt22 = dfa22.predict(input);
                         switch (alt22) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4543:8: rule__Object__FeaturesAssignment_5_4
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4543:8: ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4
                     	    {
-                    	    pushFollow(FollowSets000.FOLLOW_rule__Object__FeaturesAssignment_5_4_in_rule__Object__UnorderedGroup_5__Impl9246);
+                    	    pushFollow(FollowSets000.FOLLOW_rule__Object__FeaturesAssignment_5_4_in_rule__Object__UnorderedGroup_5__Impl9250);
                     	    rule__Object__FeaturesAssignment_5_4();
 
                     	    state._fsp--;
@@ -12341,7 +12341,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4560:7: ( rule__Object__Group_5_5__0 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4560:8: rule__Object__Group_5_5__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Object__Group_5_5__0_in_rule__Object__UnorderedGroup_5__Impl9344);
+                    pushFollow(FollowSets000.FOLLOW_rule__Object__Group_5_5__0_in_rule__Object__UnorderedGroup_5__Impl9348);
                     rule__Object__Group_5_5__0();
 
                     state._fsp--;
@@ -12388,7 +12388,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4577:7: ( rule__Object__Group_5_6__0 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4577:8: rule__Object__Group_5_6__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Object__Group_5_6__0_in_rule__Object__UnorderedGroup_5__Impl9435);
+                    pushFollow(FollowSets000.FOLLOW_rule__Object__Group_5_6__0_in_rule__Object__UnorderedGroup_5__Impl9439);
                     rule__Object__Group_5_6__0();
 
                     state._fsp--;
@@ -12435,7 +12435,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4594:7: ( rule__Object__Group_5_7__0 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4594:8: rule__Object__Group_5_7__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Object__Group_5_7__0_in_rule__Object__UnorderedGroup_5__Impl9526);
+                    pushFollow(FollowSets000.FOLLOW_rule__Object__Group_5_7__0_in_rule__Object__UnorderedGroup_5__Impl9530);
                     rule__Object__Group_5_7__0();
 
                     state._fsp--;
@@ -12491,7 +12491,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4613:1: ( rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__1 )? )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4614:2: rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__1 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__09585);
+            pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__09589);
             rule__Object__UnorderedGroup_5__Impl();
 
             state._fsp--;
@@ -12503,7 +12503,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__Object__UnorderedGroup_5__1
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__1_in_rule__Object__UnorderedGroup_5__09588);
+                    pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__1_in_rule__Object__UnorderedGroup_5__09592);
                     rule__Object__UnorderedGroup_5__1();
 
                     state._fsp--;
@@ -12542,7 +12542,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4626:1: ( rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__2 )? )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4627:2: rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__2 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__19613);
+            pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__19617);
             rule__Object__UnorderedGroup_5__Impl();
 
             state._fsp--;
@@ -12554,7 +12554,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__Object__UnorderedGroup_5__2
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__2_in_rule__Object__UnorderedGroup_5__19616);
+                    pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__2_in_rule__Object__UnorderedGroup_5__19620);
                     rule__Object__UnorderedGroup_5__2();
 
                     state._fsp--;
@@ -12593,7 +12593,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4639:1: ( rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__3 )? )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4640:2: rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__3 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__29641);
+            pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__29645);
             rule__Object__UnorderedGroup_5__Impl();
 
             state._fsp--;
@@ -12605,7 +12605,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__Object__UnorderedGroup_5__3
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__3_in_rule__Object__UnorderedGroup_5__29644);
+                    pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__3_in_rule__Object__UnorderedGroup_5__29648);
                     rule__Object__UnorderedGroup_5__3();
 
                     state._fsp--;
@@ -12644,7 +12644,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4652:1: ( rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__4 )? )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4653:2: rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__4 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__39669);
+            pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__39673);
             rule__Object__UnorderedGroup_5__Impl();
 
             state._fsp--;
@@ -12656,7 +12656,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__Object__UnorderedGroup_5__4
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__4_in_rule__Object__UnorderedGroup_5__39672);
+                    pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__4_in_rule__Object__UnorderedGroup_5__39676);
                     rule__Object__UnorderedGroup_5__4();
 
                     state._fsp--;
@@ -12695,7 +12695,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4665:1: ( rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__5 )? )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4666:2: rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__5 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__49697);
+            pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__49701);
             rule__Object__UnorderedGroup_5__Impl();
 
             state._fsp--;
@@ -12707,7 +12707,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__Object__UnorderedGroup_5__5
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__5_in_rule__Object__UnorderedGroup_5__49700);
+                    pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__5_in_rule__Object__UnorderedGroup_5__49704);
                     rule__Object__UnorderedGroup_5__5();
 
                     state._fsp--;
@@ -12746,7 +12746,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4678:1: ( rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__6 )? )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4679:2: rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__6 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__59725);
+            pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__59729);
             rule__Object__UnorderedGroup_5__Impl();
 
             state._fsp--;
@@ -12758,7 +12758,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__Object__UnorderedGroup_5__6
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__6_in_rule__Object__UnorderedGroup_5__59728);
+                    pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__6_in_rule__Object__UnorderedGroup_5__59732);
                     rule__Object__UnorderedGroup_5__6();
 
                     state._fsp--;
@@ -12797,7 +12797,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4691:1: ( rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__7 )? )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4692:2: rule__Object__UnorderedGroup_5__Impl ( rule__Object__UnorderedGroup_5__7 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__69753);
+            pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__69757);
             rule__Object__UnorderedGroup_5__Impl();
 
             state._fsp--;
@@ -12809,7 +12809,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__Object__UnorderedGroup_5__7
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__7_in_rule__Object__UnorderedGroup_5__69756);
+                    pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__7_in_rule__Object__UnorderedGroup_5__69760);
                     rule__Object__UnorderedGroup_5__7();
 
                     state._fsp--;
@@ -12848,7 +12848,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4704:1: ( rule__Object__UnorderedGroup_5__Impl )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4705:2: rule__Object__UnorderedGroup_5__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__79781);
+            pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__79785);
             rule__Object__UnorderedGroup_5__Impl();
 
             state._fsp--;
@@ -12896,7 +12896,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__Reference__UnorderedGroup_4_0_1__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Reference__UnorderedGroup_4_0_1__0_in_rule__Reference__UnorderedGroup_4_0_19821);
+                    pushFollow(FollowSets000.FOLLOW_rule__Reference__UnorderedGroup_4_0_1__0_in_rule__Reference__UnorderedGroup_4_0_19825);
                     rule__Reference__UnorderedGroup_4_0_1__0();
 
                     state._fsp--;
@@ -12979,7 +12979,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4763:7: ( rule__Reference__Group_4_0_1_0__0 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4763:8: rule__Reference__Group_4_0_1_0__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Reference__Group_4_0_1_0__0_in_rule__Reference__UnorderedGroup_4_0_1__Impl9908);
+                    pushFollow(FollowSets000.FOLLOW_rule__Reference__Group_4_0_1_0__0_in_rule__Reference__UnorderedGroup_4_0_1__Impl9912);
                     rule__Reference__Group_4_0_1_0__0();
 
                     state._fsp--;
@@ -13026,7 +13026,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4780:7: ( rule__Reference__Group_4_0_1_1__0 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4780:8: rule__Reference__Group_4_0_1_1__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Reference__Group_4_0_1_1__0_in_rule__Reference__UnorderedGroup_4_0_1__Impl9999);
+                    pushFollow(FollowSets000.FOLLOW_rule__Reference__Group_4_0_1_1__0_in_rule__Reference__UnorderedGroup_4_0_1__Impl10003);
                     rule__Reference__Group_4_0_1_1__0();
 
                     state._fsp--;
@@ -13082,7 +13082,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4799:1: ( rule__Reference__UnorderedGroup_4_0_1__Impl ( rule__Reference__UnorderedGroup_4_0_1__1 )? )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4800:2: rule__Reference__UnorderedGroup_4_0_1__Impl ( rule__Reference__UnorderedGroup_4_0_1__1 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Reference__UnorderedGroup_4_0_1__Impl_in_rule__Reference__UnorderedGroup_4_0_1__010058);
+            pushFollow(FollowSets000.FOLLOW_rule__Reference__UnorderedGroup_4_0_1__Impl_in_rule__Reference__UnorderedGroup_4_0_1__010062);
             rule__Reference__UnorderedGroup_4_0_1__Impl();
 
             state._fsp--;
@@ -13101,7 +13101,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__Reference__UnorderedGroup_4_0_1__1
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Reference__UnorderedGroup_4_0_1__1_in_rule__Reference__UnorderedGroup_4_0_1__010061);
+                    pushFollow(FollowSets000.FOLLOW_rule__Reference__UnorderedGroup_4_0_1__1_in_rule__Reference__UnorderedGroup_4_0_1__010065);
                     rule__Reference__UnorderedGroup_4_0_1__1();
 
                     state._fsp--;
@@ -13140,7 +13140,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4812:1: ( rule__Reference__UnorderedGroup_4_0_1__Impl )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4813:2: rule__Reference__UnorderedGroup_4_0_1__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Reference__UnorderedGroup_4_0_1__Impl_in_rule__Reference__UnorderedGroup_4_0_1__110086);
+            pushFollow(FollowSets000.FOLLOW_rule__Reference__UnorderedGroup_4_0_1__Impl_in_rule__Reference__UnorderedGroup_4_0_1__110090);
             rule__Reference__UnorderedGroup_4_0_1__Impl();
 
             state._fsp--;
@@ -13200,7 +13200,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__Object2__UnorderedGroup_5__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__0_in_rule__Object2__UnorderedGroup_510114);
+                    pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__0_in_rule__Object2__UnorderedGroup_510118);
                     rule__Object2__UnorderedGroup_5__0();
 
                     state._fsp--;
@@ -13231,17 +13231,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Object2__UnorderedGroup_5__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4840:1: rule__Object2__UnorderedGroup_5__Impl : ( ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( rule__Object2__FeaturesAssignment_5_4 )* ) ) ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4840:1: rule__Object2__UnorderedGroup_5__Impl : ( ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) ) ) ) ;
     public final void rule__Object2__UnorderedGroup_5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         		boolean selected = false;
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4845:1: ( ( ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( rule__Object2__FeaturesAssignment_5_4 )* ) ) ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4846:3: ( ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( rule__Object2__FeaturesAssignment_5_4 )* ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4845:1: ( ( ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4846:3: ( ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4846:3: ( ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( rule__Object2__FeaturesAssignment_5_4 )* ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4846:3: ( ({...}? => ( ( ( rule__Object2__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object2__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) ) ) )
             int alt36=5;
             int LA36_0 = input.LA(1);
 
@@ -13292,7 +13292,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4859:7: ( rule__Object2__Group_5_0__0 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4859:8: rule__Object2__Group_5_0__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Object2__Group_5_0__0_in_rule__Object2__UnorderedGroup_5__Impl10201);
+                    pushFollow(FollowSets000.FOLLOW_rule__Object2__Group_5_0__0_in_rule__Object2__UnorderedGroup_5__Impl10205);
                     rule__Object2__Group_5_0__0();
 
                     state._fsp--;
@@ -13339,7 +13339,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4876:7: ( rule__Object2__Group_5_1__0 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4876:8: rule__Object2__Group_5_1__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Object2__Group_5_1__0_in_rule__Object2__UnorderedGroup_5__Impl10292);
+                    pushFollow(FollowSets000.FOLLOW_rule__Object2__Group_5_1__0_in_rule__Object2__UnorderedGroup_5__Impl10296);
                     rule__Object2__Group_5_1__0();
 
                     state._fsp--;
@@ -13386,7 +13386,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4893:7: ( rule__Object2__Group_5_2__0 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4893:8: rule__Object2__Group_5_2__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Object2__Group_5_2__0_in_rule__Object2__UnorderedGroup_5__Impl10383);
+                    pushFollow(FollowSets000.FOLLOW_rule__Object2__Group_5_2__0_in_rule__Object2__UnorderedGroup_5__Impl10387);
                     rule__Object2__Group_5_2__0();
 
                     state._fsp--;
@@ -13433,7 +13433,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4910:7: ( rule__Object2__Group_5_3__0 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4910:8: rule__Object2__Group_5_3__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Object2__Group_5_3__0_in_rule__Object2__UnorderedGroup_5__Impl10474);
+                    pushFollow(FollowSets000.FOLLOW_rule__Object2__Group_5_3__0_in_rule__Object2__UnorderedGroup_5__Impl10478);
                     rule__Object2__Group_5_3__0();
 
                     state._fsp--;
@@ -13457,22 +13457,22 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 5 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4916:4: ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( rule__Object2__FeaturesAssignment_5_4 )* ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4916:4: ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4916:4: ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( rule__Object2__FeaturesAssignment_5_4 )* ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4917:5: {...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( rule__Object2__FeaturesAssignment_5_4 )* ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4916:4: ({...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4917:5: {...}? => ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Object2__UnorderedGroup_5__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4917:104: ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( rule__Object2__FeaturesAssignment_5_4 )* ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4918:6: ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( rule__Object2__FeaturesAssignment_5_4 )* ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4917:104: ( ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4918:6: ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4);
                     selected = true;
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4924:6: ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( rule__Object2__FeaturesAssignment_5_4 )* ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4925:6: ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( rule__Object2__FeaturesAssignment_5_4 )* )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4924:6: ( ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4925:6: ( ( rule__Object2__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* )
                     {
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4925:6: ( ( rule__Object2__FeaturesAssignment_5_4 ) )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4926:7: ( rule__Object2__FeaturesAssignment_5_4 )
@@ -13483,7 +13483,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4927:7: ( rule__Object2__FeaturesAssignment_5_4 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4927:8: rule__Object2__FeaturesAssignment_5_4
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Object2__FeaturesAssignment_5_4_in_rule__Object2__UnorderedGroup_5__Impl10566);
+                    pushFollow(FollowSets000.FOLLOW_rule__Object2__FeaturesAssignment_5_4_in_rule__Object2__UnorderedGroup_5__Impl10570);
                     rule__Object2__FeaturesAssignment_5_4();
 
                     state._fsp--;
@@ -13497,22 +13497,22 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4930:6: ( ( rule__Object2__FeaturesAssignment_5_4 )* )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4931:7: ( rule__Object2__FeaturesAssignment_5_4 )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4930:6: ( ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )* )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4931:7: ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )*
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getObject2Access().getFeaturesAssignment_5_4()); 
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4932:7: ( rule__Object2__FeaturesAssignment_5_4 )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4932:7: ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )*
                     loop35:
                     do {
                         int alt35=2;
                         alt35 = dfa35.predict(input);
                         switch (alt35) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4932:8: rule__Object2__FeaturesAssignment_5_4
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4932:8: ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4
                     	    {
-                    	    pushFollow(FollowSets000.FOLLOW_rule__Object2__FeaturesAssignment_5_4_in_rule__Object2__UnorderedGroup_5__Impl10606);
+                    	    pushFollow(FollowSets000.FOLLOW_rule__Object2__FeaturesAssignment_5_4_in_rule__Object2__UnorderedGroup_5__Impl10614);
                     	    rule__Object2__FeaturesAssignment_5_4();
 
                     	    state._fsp--;
@@ -13577,7 +13577,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4951:1: ( rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__1 )? )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4952:2: rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__1 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__Impl_in_rule__Object2__UnorderedGroup_5__010672);
+            pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__Impl_in_rule__Object2__UnorderedGroup_5__010680);
             rule__Object2__UnorderedGroup_5__Impl();
 
             state._fsp--;
@@ -13608,7 +13608,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__Object2__UnorderedGroup_5__1
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__1_in_rule__Object2__UnorderedGroup_5__010675);
+                    pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__1_in_rule__Object2__UnorderedGroup_5__010683);
                     rule__Object2__UnorderedGroup_5__1();
 
                     state._fsp--;
@@ -13647,7 +13647,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4964:1: ( rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__2 )? )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4965:2: rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__2 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__Impl_in_rule__Object2__UnorderedGroup_5__110700);
+            pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__Impl_in_rule__Object2__UnorderedGroup_5__110708);
             rule__Object2__UnorderedGroup_5__Impl();
 
             state._fsp--;
@@ -13678,7 +13678,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__Object2__UnorderedGroup_5__2
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__2_in_rule__Object2__UnorderedGroup_5__110703);
+                    pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__2_in_rule__Object2__UnorderedGroup_5__110711);
                     rule__Object2__UnorderedGroup_5__2();
 
                     state._fsp--;
@@ -13717,7 +13717,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4977:1: ( rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__3 )? )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4978:2: rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__3 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__Impl_in_rule__Object2__UnorderedGroup_5__210728);
+            pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__Impl_in_rule__Object2__UnorderedGroup_5__210736);
             rule__Object2__UnorderedGroup_5__Impl();
 
             state._fsp--;
@@ -13748,7 +13748,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__Object2__UnorderedGroup_5__3
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__3_in_rule__Object2__UnorderedGroup_5__210731);
+                    pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__3_in_rule__Object2__UnorderedGroup_5__210739);
                     rule__Object2__UnorderedGroup_5__3();
 
                     state._fsp--;
@@ -13787,7 +13787,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4990:1: ( rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__4 )? )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4991:2: rule__Object2__UnorderedGroup_5__Impl ( rule__Object2__UnorderedGroup_5__4 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__Impl_in_rule__Object2__UnorderedGroup_5__310756);
+            pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__Impl_in_rule__Object2__UnorderedGroup_5__310764);
             rule__Object2__UnorderedGroup_5__Impl();
 
             state._fsp--;
@@ -13818,7 +13818,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__Object2__UnorderedGroup_5__4
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__4_in_rule__Object2__UnorderedGroup_5__310759);
+                    pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__4_in_rule__Object2__UnorderedGroup_5__310767);
                     rule__Object2__UnorderedGroup_5__4();
 
                     state._fsp--;
@@ -13857,7 +13857,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5003:1: ( rule__Object2__UnorderedGroup_5__Impl )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5004:2: rule__Object2__UnorderedGroup_5__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__Impl_in_rule__Object2__UnorderedGroup_5__410784);
+            pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__Impl_in_rule__Object2__UnorderedGroup_5__410792);
             rule__Object2__UnorderedGroup_5__Impl();
 
             state._fsp--;
@@ -13914,7 +13914,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__Attribute2__UnorderedGroup_3_0_1__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__0_in_rule__Attribute2__UnorderedGroup_3_0_110818);
+                    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__0_in_rule__Attribute2__UnorderedGroup_3_0_110826);
                     rule__Attribute2__UnorderedGroup_3_0_1__0();
 
                     state._fsp--;
@@ -13945,17 +13945,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start "rule__Attribute2__UnorderedGroup_3_0_1__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5037:1: rule__Attribute2__UnorderedGroup_3_0_1__Impl : ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) ) ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5037:1: rule__Attribute2__UnorderedGroup_3_0_1__Impl : ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) ) ) ) ;
     public final void rule__Attribute2__UnorderedGroup_3_0_1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         		boolean selected = false;
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5042:1: ( ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5043:3: ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5042:1: ( ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5043:3: ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5043:3: ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5043:3: ( ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_1__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_3__0 ) ) ) ) | ({...}? => ( ( ( rule__Attribute2__Group_3_0_1_4__0 ) ) ) ) )
             int alt43=5;
             int LA43_0 = input.LA(1);
 
@@ -14006,7 +14006,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5056:7: ( rule__Attribute2__Group_3_0_1_0__0 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5056:8: rule__Attribute2__Group_3_0_1_0__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__Group_3_0_1_0__0_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl10905);
+                    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__Group_3_0_1_0__0_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl10913);
                     rule__Attribute2__Group_3_0_1_0__0();
 
                     state._fsp--;
@@ -14053,7 +14053,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5073:7: ( rule__Attribute2__Group_3_0_1_1__0 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5073:8: rule__Attribute2__Group_3_0_1_1__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__Group_3_0_1_1__0_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl10996);
+                    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__Group_3_0_1_1__0_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl11004);
                     rule__Attribute2__Group_3_0_1_1__0();
 
                     state._fsp--;
@@ -14077,22 +14077,22 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5079:4: ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5079:4: ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5079:4: ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5080:5: {...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5079:4: ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5080:5: {...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) )
                     {
                     if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2) ) {
                         if (state.backtracking>0) {state.failed=true; return ;}
                         throw new FailedPredicateException(input, "rule__Attribute2__UnorderedGroup_3_0_1__Impl", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2)");
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5080:111: ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5081:6: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5080:111: ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5081:6: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) )
                     {
                     getUnorderedGroupHelper().select(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2);
                     selected = true;
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5087:6: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5088:6: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5087:6: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5088:6: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* )
                     {
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5088:6: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5089:7: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )
@@ -14103,7 +14103,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5090:7: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5090:8: rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl11088);
+                    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl11096);
                     rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2();
 
                     state._fsp--;
@@ -14117,22 +14117,22 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5093:6: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5094:7: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5093:6: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5094:7: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )*
                     {
                     if ( state.backtracking==0 ) {
                        before(grammarAccess.getAttribute2Access().getConstraintDefinitionsAssignment_3_0_1_2()); 
                     }
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5095:7: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5095:7: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )*
                     loop42:
                     do {
                         int alt42=2;
                         alt42 = dfa42.predict(input);
                         switch (alt42) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5095:8: rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5095:8: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2
                     	    {
-                    	    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl11128);
+                    	    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl11140);
                     	    rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2();
 
                     	    state._fsp--;
@@ -14188,7 +14188,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5112:7: ( rule__Attribute2__Group_3_0_1_3__0 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5112:8: rule__Attribute2__Group_3_0_1_3__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__Group_3_0_1_3__0_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl11226);
+                    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__Group_3_0_1_3__0_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl11238);
                     rule__Attribute2__Group_3_0_1_3__0();
 
                     state._fsp--;
@@ -14235,7 +14235,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5129:7: ( rule__Attribute2__Group_3_0_1_4__0 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5129:8: rule__Attribute2__Group_3_0_1_4__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__Group_3_0_1_4__0_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl11317);
+                    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__Group_3_0_1_4__0_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl11329);
                     rule__Attribute2__Group_3_0_1_4__0();
 
                     state._fsp--;
@@ -14291,7 +14291,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5148:1: ( rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__1 )? )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5149:2: rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__1 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__Impl_in_rule__Attribute2__UnorderedGroup_3_0_1__011376);
+            pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__Impl_in_rule__Attribute2__UnorderedGroup_3_0_1__011388);
             rule__Attribute2__UnorderedGroup_3_0_1__Impl();
 
             state._fsp--;
@@ -14319,7 +14319,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__Attribute2__UnorderedGroup_3_0_1__1
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__1_in_rule__Attribute2__UnorderedGroup_3_0_1__011379);
+                    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__1_in_rule__Attribute2__UnorderedGroup_3_0_1__011391);
                     rule__Attribute2__UnorderedGroup_3_0_1__1();
 
                     state._fsp--;
@@ -14358,7 +14358,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5161:1: ( rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__2 )? )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5162:2: rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__2 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__Impl_in_rule__Attribute2__UnorderedGroup_3_0_1__111404);
+            pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__Impl_in_rule__Attribute2__UnorderedGroup_3_0_1__111416);
             rule__Attribute2__UnorderedGroup_3_0_1__Impl();
 
             state._fsp--;
@@ -14386,7 +14386,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__Attribute2__UnorderedGroup_3_0_1__2
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__2_in_rule__Attribute2__UnorderedGroup_3_0_1__111407);
+                    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__2_in_rule__Attribute2__UnorderedGroup_3_0_1__111419);
                     rule__Attribute2__UnorderedGroup_3_0_1__2();
 
                     state._fsp--;
@@ -14425,7 +14425,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5174:1: ( rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__3 )? )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5175:2: rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__3 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__Impl_in_rule__Attribute2__UnorderedGroup_3_0_1__211432);
+            pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__Impl_in_rule__Attribute2__UnorderedGroup_3_0_1__211444);
             rule__Attribute2__UnorderedGroup_3_0_1__Impl();
 
             state._fsp--;
@@ -14453,7 +14453,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__Attribute2__UnorderedGroup_3_0_1__3
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__3_in_rule__Attribute2__UnorderedGroup_3_0_1__211435);
+                    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__3_in_rule__Attribute2__UnorderedGroup_3_0_1__211447);
                     rule__Attribute2__UnorderedGroup_3_0_1__3();
 
                     state._fsp--;
@@ -14492,7 +14492,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5187:1: ( rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__4 )? )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5188:2: rule__Attribute2__UnorderedGroup_3_0_1__Impl ( rule__Attribute2__UnorderedGroup_3_0_1__4 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__Impl_in_rule__Attribute2__UnorderedGroup_3_0_1__311460);
+            pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__Impl_in_rule__Attribute2__UnorderedGroup_3_0_1__311472);
             rule__Attribute2__UnorderedGroup_3_0_1__Impl();
 
             state._fsp--;
@@ -14520,7 +14520,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__Attribute2__UnorderedGroup_3_0_1__4
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__4_in_rule__Attribute2__UnorderedGroup_3_0_1__311463);
+                    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__4_in_rule__Attribute2__UnorderedGroup_3_0_1__311475);
                     rule__Attribute2__UnorderedGroup_3_0_1__4();
 
                     state._fsp--;
@@ -14559,7 +14559,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5200:1: ( rule__Attribute2__UnorderedGroup_3_0_1__Impl )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5201:2: rule__Attribute2__UnorderedGroup_3_0_1__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__Impl_in_rule__Attribute2__UnorderedGroup_3_0_1__411488);
+            pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__Impl_in_rule__Attribute2__UnorderedGroup_3_0_1__411500);
             rule__Attribute2__UnorderedGroup_3_0_1__Impl();
 
             state._fsp--;
@@ -14607,7 +14607,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__Reference2__UnorderedGroup_4_0_1__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__0_in_rule__Reference2__UnorderedGroup_4_0_111522);
+                    pushFollow(FollowSets000.FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__0_in_rule__Reference2__UnorderedGroup_4_0_111534);
                     rule__Reference2__UnorderedGroup_4_0_1__0();
 
                     state._fsp--;
@@ -14690,7 +14690,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5253:7: ( rule__Reference2__Group_4_0_1_0__0 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5253:8: rule__Reference2__Group_4_0_1_0__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Reference2__Group_4_0_1_0__0_in_rule__Reference2__UnorderedGroup_4_0_1__Impl11609);
+                    pushFollow(FollowSets000.FOLLOW_rule__Reference2__Group_4_0_1_0__0_in_rule__Reference2__UnorderedGroup_4_0_1__Impl11621);
                     rule__Reference2__Group_4_0_1_0__0();
 
                     state._fsp--;
@@ -14737,7 +14737,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5270:7: ( rule__Reference2__Group_4_0_1_1__0 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5270:8: rule__Reference2__Group_4_0_1_1__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Reference2__Group_4_0_1_1__0_in_rule__Reference2__UnorderedGroup_4_0_1__Impl11700);
+                    pushFollow(FollowSets000.FOLLOW_rule__Reference2__Group_4_0_1_1__0_in_rule__Reference2__UnorderedGroup_4_0_1__Impl11712);
                     rule__Reference2__Group_4_0_1_1__0();
 
                     state._fsp--;
@@ -14793,7 +14793,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5289:1: ( rule__Reference2__UnorderedGroup_4_0_1__Impl ( rule__Reference2__UnorderedGroup_4_0_1__1 )? )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5290:2: rule__Reference2__UnorderedGroup_4_0_1__Impl ( rule__Reference2__UnorderedGroup_4_0_1__1 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__Impl_in_rule__Reference2__UnorderedGroup_4_0_1__011759);
+            pushFollow(FollowSets000.FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__Impl_in_rule__Reference2__UnorderedGroup_4_0_1__011771);
             rule__Reference2__UnorderedGroup_4_0_1__Impl();
 
             state._fsp--;
@@ -14812,7 +14812,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__Reference2__UnorderedGroup_4_0_1__1
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__1_in_rule__Reference2__UnorderedGroup_4_0_1__011762);
+                    pushFollow(FollowSets000.FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__1_in_rule__Reference2__UnorderedGroup_4_0_1__011774);
                     rule__Reference2__UnorderedGroup_4_0_1__1();
 
                     state._fsp--;
@@ -14851,7 +14851,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5302:1: ( rule__Reference2__UnorderedGroup_4_0_1__Impl )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5303:2: rule__Reference2__UnorderedGroup_4_0_1__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__Impl_in_rule__Reference2__UnorderedGroup_4_0_1__111787);
+            pushFollow(FollowSets000.FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__Impl_in_rule__Reference2__UnorderedGroup_4_0_1__111799);
             rule__Reference2__UnorderedGroup_4_0_1__Impl();
 
             state._fsp--;
@@ -14885,7 +14885,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5319:1: ( rule__ConstraintDefinition__UnorderedGroup_3__0 {...}?)
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5320:2: rule__ConstraintDefinition__UnorderedGroup_3__0 {...}?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__ConstraintDefinition__UnorderedGroup_3__0_in_rule__ConstraintDefinition__UnorderedGroup_311815);
+            pushFollow(FollowSets000.FOLLOW_rule__ConstraintDefinition__UnorderedGroup_3__0_in_rule__ConstraintDefinition__UnorderedGroup_311827);
             rule__ConstraintDefinition__UnorderedGroup_3__0();
 
             state._fsp--;
@@ -14966,7 +14966,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5350:7: ( rule__ConstraintDefinition__Group_3_0__0 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5350:8: rule__ConstraintDefinition__Group_3_0__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__ConstraintDefinition__Group_3_0__0_in_rule__ConstraintDefinition__UnorderedGroup_3__Impl11904);
+                    pushFollow(FollowSets000.FOLLOW_rule__ConstraintDefinition__Group_3_0__0_in_rule__ConstraintDefinition__UnorderedGroup_3__Impl11916);
                     rule__ConstraintDefinition__Group_3_0__0();
 
                     state._fsp--;
@@ -15013,7 +15013,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5367:7: ( rule__ConstraintDefinition__Group_3_1__0 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5367:8: rule__ConstraintDefinition__Group_3_1__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__ConstraintDefinition__Group_3_1__0_in_rule__ConstraintDefinition__UnorderedGroup_3__Impl11995);
+                    pushFollow(FollowSets000.FOLLOW_rule__ConstraintDefinition__Group_3_1__0_in_rule__ConstraintDefinition__UnorderedGroup_3__Impl12007);
                     rule__ConstraintDefinition__Group_3_1__0();
 
                     state._fsp--;
@@ -15069,7 +15069,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5386:1: ( rule__ConstraintDefinition__UnorderedGroup_3__Impl ( rule__ConstraintDefinition__UnorderedGroup_3__1 )? )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5387:2: rule__ConstraintDefinition__UnorderedGroup_3__Impl ( rule__ConstraintDefinition__UnorderedGroup_3__1 )?
             {
-            pushFollow(FollowSets000.FOLLOW_rule__ConstraintDefinition__UnorderedGroup_3__Impl_in_rule__ConstraintDefinition__UnorderedGroup_3__012054);
+            pushFollow(FollowSets000.FOLLOW_rule__ConstraintDefinition__UnorderedGroup_3__Impl_in_rule__ConstraintDefinition__UnorderedGroup_3__012066);
             rule__ConstraintDefinition__UnorderedGroup_3__Impl();
 
             state._fsp--;
@@ -15088,7 +15088,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:0:0: rule__ConstraintDefinition__UnorderedGroup_3__1
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__ConstraintDefinition__UnorderedGroup_3__1_in_rule__ConstraintDefinition__UnorderedGroup_3__012057);
+                    pushFollow(FollowSets000.FOLLOW_rule__ConstraintDefinition__UnorderedGroup_3__1_in_rule__ConstraintDefinition__UnorderedGroup_3__012069);
                     rule__ConstraintDefinition__UnorderedGroup_3__1();
 
                     state._fsp--;
@@ -15127,7 +15127,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5399:1: ( rule__ConstraintDefinition__UnorderedGroup_3__Impl )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5400:2: rule__ConstraintDefinition__UnorderedGroup_3__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__ConstraintDefinition__UnorderedGroup_3__Impl_in_rule__ConstraintDefinition__UnorderedGroup_3__112082);
+            pushFollow(FollowSets000.FOLLOW_rule__ConstraintDefinition__UnorderedGroup_3__Impl_in_rule__ConstraintDefinition__UnorderedGroup_3__112094);
             rule__ConstraintDefinition__UnorderedGroup_3__Impl();
 
             state._fsp--;
@@ -15166,7 +15166,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getModelAccess().getDefinitionPackageDefinitionParserRuleCall_0_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePackageDefinition_in_rule__Model__DefinitionAssignment_0_112114);
+            pushFollow(FollowSets000.FOLLOW_rulePackageDefinition_in_rule__Model__DefinitionAssignment_0_112126);
             rulePackageDefinition();
 
             state._fsp--;
@@ -15211,7 +15211,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getModelAccess().getDefinitionPackageDefinition2ParserRuleCall_1_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePackageDefinition2_in_rule__Model__DefinitionAssignment_1_112145);
+            pushFollow(FollowSets000.FOLLOW_rulePackageDefinition2_in_rule__Model__DefinitionAssignment_1_112157);
             rulePackageDefinition2();
 
             state._fsp--;
@@ -15256,7 +15256,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinitionAccess().getNamespaceIDTerminalRuleCall_2_0()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__PackageDefinition__NamespaceAssignment_212176); if (state.failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__PackageDefinition__NamespaceAssignment_212188); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getPackageDefinitionAccess().getNamespaceIDTerminalRuleCall_2_0()); 
             }
@@ -15297,7 +15297,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinitionAccess().getContentsObjectParserRuleCall_4_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleObject_in_rule__PackageDefinition__ContentsAssignment_412207);
+            pushFollow(FollowSets000.FOLLOW_ruleObject_in_rule__PackageDefinition__ContentsAssignment_412219);
             ruleObject();
 
             state._fsp--;
@@ -15348,7 +15348,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getEnabledEnabledKeyword_0_0_0()); 
             }
-            match(input,31,FollowSets000.FOLLOW_31_in_rule__Object__EnabledAssignment_0_012243); if (state.failed) return ;
+            match(input,31,FollowSets000.FOLLOW_31_in_rule__Object__EnabledAssignment_0_012255); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getObjectAccess().getEnabledEnabledKeyword_0_0_0()); 
             }
@@ -15401,7 +15401,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getAbstractAbstractKeyword_0_1_0()); 
             }
-            match(input,32,FollowSets000.FOLLOW_32_in_rule__Object__AbstractAssignment_0_112287); if (state.failed) return ;
+            match(input,32,FollowSets000.FOLLOW_32_in_rule__Object__AbstractAssignment_0_112299); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getObjectAccess().getAbstractAbstractKeyword_0_1_0()); 
             }
@@ -15448,7 +15448,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getNameIDTerminalRuleCall_2_0()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Object__NameAssignment_212326); if (state.failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Object__NameAssignment_212338); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getObjectAccess().getNameIDTerminalRuleCall_2_0()); 
             }
@@ -15495,7 +15495,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getParentObjectIDTerminalRuleCall_3_1_0_1()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Object__ParentAssignment_3_112361); if (state.failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Object__ParentAssignment_3_112373); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getObjectAccess().getParentObjectIDTerminalRuleCall_3_1_0_1()); 
             }
@@ -15542,7 +15542,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getShortDescriptionSTRINGTerminalRuleCall_5_0_1_0()); 
             }
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Object__ShortDescriptionAssignment_5_0_112396); if (state.failed) return ;
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Object__ShortDescriptionAssignment_5_0_112408); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getObjectAccess().getShortDescriptionSTRINGTerminalRuleCall_5_0_1_0()); 
             }
@@ -15583,7 +15583,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getLongDescriptionSTRINGTerminalRuleCall_5_1_1_0()); 
             }
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Object__LongDescriptionAssignment_5_1_112427); if (state.failed) return ;
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Object__LongDescriptionAssignment_5_1_112439); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getObjectAccess().getLongDescriptionSTRINGTerminalRuleCall_5_1_1_0()); 
             }
@@ -15624,7 +15624,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getSerialVersionUIDINTTerminalRuleCall_5_2_1_0()); 
             }
-            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__Object__SerialVersionUIDAssignment_5_2_112458); if (state.failed) return ;
+            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__Object__SerialVersionUIDAssignment_5_2_112470); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getObjectAccess().getSerialVersionUIDINTTerminalRuleCall_5_2_1_0()); 
             }
@@ -15671,7 +15671,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getCloneableCloneableKeyword_5_3_0_0()); 
             }
-            match(input,33,FollowSets000.FOLLOW_33_in_rule__Object__CloneableAssignment_5_3_012494); if (state.failed) return ;
+            match(input,33,FollowSets000.FOLLOW_33_in_rule__Object__CloneableAssignment_5_3_012506); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getObjectAccess().getCloneableCloneableKeyword_5_3_0_0()); 
             }
@@ -15718,7 +15718,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getFeaturesFeatureParserRuleCall_5_4_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleFeature_in_rule__Object__FeaturesAssignment_5_412533);
+            pushFollow(FollowSets000.FOLLOW_ruleFeature_in_rule__Object__FeaturesAssignment_5_412545);
             ruleFeature();
 
             state._fsp--;
@@ -15763,7 +15763,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getFeaturesFeatureParserRuleCall_5_5_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleFeature_in_rule__Object__FeaturesAssignment_5_5_112564);
+            pushFollow(FollowSets000.FOLLOW_ruleFeature_in_rule__Object__FeaturesAssignment_5_5_112576);
             ruleFeature();
 
             state._fsp--;
@@ -15808,7 +15808,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getFeaturesFeatureParserRuleCall_5_6_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleFeature_in_rule__Object__FeaturesAssignment_5_6_112595);
+            pushFollow(FollowSets000.FOLLOW_ruleFeature_in_rule__Object__FeaturesAssignment_5_6_112607);
             ruleFeature();
 
             state._fsp--;
@@ -15853,7 +15853,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObjectAccess().getFeaturesFeatureParserRuleCall_5_7_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleFeature_in_rule__Object__FeaturesAssignment_5_7_112626);
+            pushFollow(FollowSets000.FOLLOW_ruleFeature_in_rule__Object__FeaturesAssignment_5_7_112638);
             ruleFeature();
 
             state._fsp--;
@@ -15898,7 +15898,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeAccess().getTypeIDTerminalRuleCall_1_0()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Attribute__TypeAssignment_112657); if (state.failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Attribute__TypeAssignment_112669); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeAccess().getTypeIDTerminalRuleCall_1_0()); 
             }
@@ -15939,7 +15939,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_2_0()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Attribute__NameAssignment_212688); if (state.failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Attribute__NameAssignment_212700); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_2_0()); 
             }
@@ -15986,7 +15986,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getTypeObjectIDTerminalRuleCall_1_0_1()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Reference__TypeAssignment_112723); if (state.failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Reference__TypeAssignment_112735); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceAccess().getTypeObjectIDTerminalRuleCall_1_0_1()); 
             }
@@ -16039,7 +16039,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getManyAsteriskKeyword_2_0()); 
             }
-            match(input,34,FollowSets000.FOLLOW_34_in_rule__Reference__ManyAssignment_212763); if (state.failed) return ;
+            match(input,34,FollowSets000.FOLLOW_34_in_rule__Reference__ManyAssignment_212775); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceAccess().getManyAsteriskKeyword_2_0()); 
             }
@@ -16086,7 +16086,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_3_0()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Reference__NameAssignment_312802); if (state.failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Reference__NameAssignment_312814); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_3_0()); 
             }
@@ -16127,7 +16127,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getShortDescriptionSTRINGTerminalRuleCall_4_0_1_0_1_0()); 
             }
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Reference__ShortDescriptionAssignment_4_0_1_0_112833); if (state.failed) return ;
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Reference__ShortDescriptionAssignment_4_0_1_0_112845); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceAccess().getShortDescriptionSTRINGTerminalRuleCall_4_0_1_0_1_0()); 
             }
@@ -16168,7 +16168,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getLongDescriptionSTRINGTerminalRuleCall_4_0_1_1_1_0()); 
             }
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Reference__LongDescriptionAssignment_4_0_1_1_112864); if (state.failed) return ;
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Reference__LongDescriptionAssignment_4_0_1_1_112876); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReferenceAccess().getLongDescriptionSTRINGTerminalRuleCall_4_0_1_1_1_0()); 
             }
@@ -16209,7 +16209,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinition2Access().getNamespaceIDTerminalRuleCall_2_0()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__PackageDefinition2__NamespaceAssignment_212895); if (state.failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__PackageDefinition2__NamespaceAssignment_212907); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getPackageDefinition2Access().getNamespaceIDTerminalRuleCall_2_0()); 
             }
@@ -16250,7 +16250,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDefinition2Access().getContentsObject2ParserRuleCall_4_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleObject2_in_rule__PackageDefinition2__ContentsAssignment_412926);
+            pushFollow(FollowSets000.FOLLOW_ruleObject2_in_rule__PackageDefinition2__ContentsAssignment_412938);
             ruleObject2();
 
             state._fsp--;
@@ -16301,7 +16301,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getEnabledEnabledKeyword_0_0_0()); 
             }
-            match(input,31,FollowSets000.FOLLOW_31_in_rule__Object2__EnabledAssignment_0_012962); if (state.failed) return ;
+            match(input,31,FollowSets000.FOLLOW_31_in_rule__Object2__EnabledAssignment_0_012974); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getObject2Access().getEnabledEnabledKeyword_0_0_0()); 
             }
@@ -16354,7 +16354,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getAbstractAbstractKeyword_0_1_0()); 
             }
-            match(input,32,FollowSets000.FOLLOW_32_in_rule__Object2__AbstractAssignment_0_113006); if (state.failed) return ;
+            match(input,32,FollowSets000.FOLLOW_32_in_rule__Object2__AbstractAssignment_0_113018); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getObject2Access().getAbstractAbstractKeyword_0_1_0()); 
             }
@@ -16401,7 +16401,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getNameIDTerminalRuleCall_2_0()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Object2__NameAssignment_213045); if (state.failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Object2__NameAssignment_213057); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getObject2Access().getNameIDTerminalRuleCall_2_0()); 
             }
@@ -16448,7 +16448,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getParentObjectIDTerminalRuleCall_3_1_0_1()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Object2__ParentAssignment_3_113080); if (state.failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Object2__ParentAssignment_3_113092); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getObject2Access().getParentObjectIDTerminalRuleCall_3_1_0_1()); 
             }
@@ -16495,7 +16495,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getShortDescriptionSTRINGTerminalRuleCall_5_0_1_0()); 
             }
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Object2__ShortDescriptionAssignment_5_0_113115); if (state.failed) return ;
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Object2__ShortDescriptionAssignment_5_0_113127); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getObject2Access().getShortDescriptionSTRINGTerminalRuleCall_5_0_1_0()); 
             }
@@ -16536,7 +16536,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getLongDescriptionSTRINGTerminalRuleCall_5_1_1_0()); 
             }
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Object2__LongDescriptionAssignment_5_1_113146); if (state.failed) return ;
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Object2__LongDescriptionAssignment_5_1_113158); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getObject2Access().getLongDescriptionSTRINGTerminalRuleCall_5_1_1_0()); 
             }
@@ -16577,7 +16577,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getSerialVersionUIDINTTerminalRuleCall_5_2_1_0()); 
             }
-            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__Object2__SerialVersionUIDAssignment_5_2_113177); if (state.failed) return ;
+            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__Object2__SerialVersionUIDAssignment_5_2_113189); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getObject2Access().getSerialVersionUIDINTTerminalRuleCall_5_2_1_0()); 
             }
@@ -16624,7 +16624,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getCloneableCloneableKeyword_5_3_0_0()); 
             }
-            match(input,33,FollowSets000.FOLLOW_33_in_rule__Object2__CloneableAssignment_5_3_013213); if (state.failed) return ;
+            match(input,33,FollowSets000.FOLLOW_33_in_rule__Object2__CloneableAssignment_5_3_013225); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getObject2Access().getCloneableCloneableKeyword_5_3_0_0()); 
             }
@@ -16671,7 +16671,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getObject2Access().getFeaturesFeature2ParserRuleCall_5_4_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleFeature2_in_rule__Object2__FeaturesAssignment_5_413252);
+            pushFollow(FollowSets000.FOLLOW_ruleFeature2_in_rule__Object2__FeaturesAssignment_5_413264);
             ruleFeature2();
 
             state._fsp--;
@@ -16716,7 +16716,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getTypeIDTerminalRuleCall_1_0()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Attribute2__TypeAssignment_113283); if (state.failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Attribute2__TypeAssignment_113295); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttribute2Access().getTypeIDTerminalRuleCall_1_0()); 
             }
@@ -16757,7 +16757,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getNameIDTerminalRuleCall_2_0()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Attribute2__NameAssignment_213314); if (state.failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Attribute2__NameAssignment_213326); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttribute2Access().getNameIDTerminalRuleCall_2_0()); 
             }
@@ -16798,7 +16798,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getShortDescriptionSTRINGTerminalRuleCall_3_0_1_0_1_0()); 
             }
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_113345); if (state.failed) return ;
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_113357); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttribute2Access().getShortDescriptionSTRINGTerminalRuleCall_3_0_1_0_1_0()); 
             }
@@ -16839,7 +16839,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getLongDescriptionSTRINGTerminalRuleCall_3_0_1_1_1_0()); 
             }
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Attribute2__LongDescriptionAssignment_3_0_1_1_113376); if (state.failed) return ;
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Attribute2__LongDescriptionAssignment_3_0_1_1_113388); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttribute2Access().getLongDescriptionSTRINGTerminalRuleCall_3_0_1_1_1_0()); 
             }
@@ -16880,7 +16880,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getConstraintDefinitionsConstraintDefinitionParserRuleCall_3_0_1_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleConstraintDefinition_in_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_213407);
+            pushFollow(FollowSets000.FOLLOW_ruleConstraintDefinition_in_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_213419);
             ruleConstraintDefinition();
 
             state._fsp--;
@@ -16931,7 +16931,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getRequiredRequiredKeyword_3_0_1_3_0_0()); 
             }
-            match(input,35,FollowSets000.FOLLOW_35_in_rule__Attribute2__RequiredAssignment_3_0_1_3_013443); if (state.failed) return ;
+            match(input,35,FollowSets000.FOLLOW_35_in_rule__Attribute2__RequiredAssignment_3_0_1_3_013455); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttribute2Access().getRequiredRequiredKeyword_3_0_1_3_0_0()); 
             }
@@ -16984,7 +16984,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAttribute2Access().getTechnicalTechnicalKeyword_3_0_1_4_0_0()); 
             }
-            match(input,36,FollowSets000.FOLLOW_36_in_rule__Attribute2__TechnicalAssignment_3_0_1_4_013487); if (state.failed) return ;
+            match(input,36,FollowSets000.FOLLOW_36_in_rule__Attribute2__TechnicalAssignment_3_0_1_4_013499); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAttribute2Access().getTechnicalTechnicalKeyword_3_0_1_4_0_0()); 
             }
@@ -17037,7 +17037,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getTypeObjectIDTerminalRuleCall_1_0_1()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Reference2__TypeAssignment_113530); if (state.failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Reference2__TypeAssignment_113542); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReference2Access().getTypeObjectIDTerminalRuleCall_1_0_1()); 
             }
@@ -17090,7 +17090,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getManyAsteriskKeyword_2_0()); 
             }
-            match(input,34,FollowSets000.FOLLOW_34_in_rule__Reference2__ManyAssignment_213570); if (state.failed) return ;
+            match(input,34,FollowSets000.FOLLOW_34_in_rule__Reference2__ManyAssignment_213582); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReference2Access().getManyAsteriskKeyword_2_0()); 
             }
@@ -17137,7 +17137,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getNameIDTerminalRuleCall_3_0()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Reference2__NameAssignment_313609); if (state.failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Reference2__NameAssignment_313621); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReference2Access().getNameIDTerminalRuleCall_3_0()); 
             }
@@ -17178,7 +17178,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getShortDescriptionSTRINGTerminalRuleCall_4_0_1_0_1_0()); 
             }
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Reference2__ShortDescriptionAssignment_4_0_1_0_113640); if (state.failed) return ;
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Reference2__ShortDescriptionAssignment_4_0_1_0_113652); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReference2Access().getShortDescriptionSTRINGTerminalRuleCall_4_0_1_0_1_0()); 
             }
@@ -17219,7 +17219,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getReference2Access().getLongDescriptionSTRINGTerminalRuleCall_4_0_1_1_1_0()); 
             }
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Reference2__LongDescriptionAssignment_4_0_1_1_113671); if (state.failed) return ;
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Reference2__LongDescriptionAssignment_4_0_1_1_113683); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getReference2Access().getLongDescriptionSTRINGTerminalRuleCall_4_0_1_1_1_0()); 
             }
@@ -17260,7 +17260,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstraintDefinitionAccess().getTypeIDTerminalRuleCall_1_0()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ConstraintDefinition__TypeAssignment_113702); if (state.failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ConstraintDefinition__TypeAssignment_113714); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getConstraintDefinitionAccess().getTypeIDTerminalRuleCall_1_0()); 
             }
@@ -17301,7 +17301,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstraintDefinitionAccess().getParametersSTRINGTerminalRuleCall_3_0_1_0()); 
             }
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__ConstraintDefinition__ParametersAssignment_3_0_113733); if (state.failed) return ;
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__ConstraintDefinition__ParametersAssignment_3_0_113745); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getConstraintDefinitionAccess().getParametersSTRINGTerminalRuleCall_3_0_1_0()); 
             }
@@ -17342,7 +17342,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             if ( state.backtracking==0 ) {
                before(grammarAccess.getConstraintDefinitionAccess().getMessageSTRINGTerminalRuleCall_3_1_1_0()); 
             }
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__ConstraintDefinition__MessageAssignment_3_1_113764); if (state.failed) return ;
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__ConstraintDefinition__MessageAssignment_3_1_113776); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getConstraintDefinitionAccess().getMessageSTRINGTerminalRuleCall_3_1_1_0()); 
             }
@@ -17602,9 +17602,9 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
     // $ANTLR start synpred26_InternalBug304681TestLanguage
     public final void synpred26_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4543:8: ( rule__Object__FeaturesAssignment_5_4 )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4543:8: rule__Object__FeaturesAssignment_5_4
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4543:9: rule__Object__FeaturesAssignment_5_4
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Object__FeaturesAssignment_5_4_in_synpred26_InternalBug304681TestLanguage9246);
+        pushFollow(FollowSets000.FOLLOW_rule__Object__FeaturesAssignment_5_4_in_synpred26_InternalBug304681TestLanguage9247);
         rule__Object__FeaturesAssignment_5_4();
 
         state._fsp--;
@@ -17616,22 +17616,22 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred27_InternalBug304681TestLanguage
     public final void synpred27_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4527:4: ( ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4527:4: ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( rule__Object__FeaturesAssignment_5_4 )* ) ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4527:4: ( ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4527:4: ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4527:4: ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( rule__Object__FeaturesAssignment_5_4 )* ) ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4528:5: {...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( rule__Object__FeaturesAssignment_5_4 )* ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4527:4: ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4528:5: {...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred27_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4)");
         }
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4528:103: ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( rule__Object__FeaturesAssignment_5_4 )* ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4529:6: ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( rule__Object__FeaturesAssignment_5_4 )* ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4528:103: ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4529:6: ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4);
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4535:6: ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( rule__Object__FeaturesAssignment_5_4 )* ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4536:6: ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( rule__Object__FeaturesAssignment_5_4 )* )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4535:6: ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4536:6: ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* )
         {
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4536:6: ( ( rule__Object__FeaturesAssignment_5_4 ) )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4537:7: ( rule__Object__FeaturesAssignment_5_4 )
@@ -17653,28 +17653,31 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
         }
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4541:6: ( ( rule__Object__FeaturesAssignment_5_4 )* )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4542:7: ( rule__Object__FeaturesAssignment_5_4 )*
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4541:6: ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4542:7: ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )*
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getObjectAccess().getFeaturesAssignment_5_4()); 
         }
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4543:7: ( rule__Object__FeaturesAssignment_5_4 )*
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4543:7: ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )*
         loop53:
         do {
             int alt53=2;
             int LA53_0 = input.LA(1);
 
-            if ( ((LA53_0>=26 && LA53_0<=27)) ) {
+            if ( (LA53_0==26) && (synpred26_InternalBug304681TestLanguage())) {
+                alt53=1;
+            }
+            else if ( (LA53_0==27) && (synpred26_InternalBug304681TestLanguage())) {
                 alt53=1;
             }
 
 
             switch (alt53) {
         	case 1 :
-        	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4543:8: rule__Object__FeaturesAssignment_5_4
+        	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4543:8: ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4
         	    {
-        	    pushFollow(FollowSets000.FOLLOW_rule__Object__FeaturesAssignment_5_4_in_synpred27_InternalBug304681TestLanguage9246);
+        	    pushFollow(FollowSets000.FOLLOW_rule__Object__FeaturesAssignment_5_4_in_synpred27_InternalBug304681TestLanguage9250);
         	    rule__Object__FeaturesAssignment_5_4();
 
         	    state._fsp--;
@@ -17730,7 +17733,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4560:7: ( rule__Object__Group_5_5__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4560:8: rule__Object__Group_5_5__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Object__Group_5_5__0_in_synpred28_InternalBug304681TestLanguage9344);
+        pushFollow(FollowSets000.FOLLOW_rule__Object__Group_5_5__0_in_synpred28_InternalBug304681TestLanguage9348);
         rule__Object__Group_5_5__0();
 
         state._fsp--;
@@ -17777,7 +17780,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4577:7: ( rule__Object__Group_5_6__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4577:8: rule__Object__Group_5_6__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Object__Group_5_6__0_in_synpred29_InternalBug304681TestLanguage9435);
+        pushFollow(FollowSets000.FOLLOW_rule__Object__Group_5_6__0_in_synpred29_InternalBug304681TestLanguage9439);
         rule__Object__Group_5_6__0();
 
         state._fsp--;
@@ -17804,7 +17807,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4615:2: ( rule__Object__UnorderedGroup_5__1 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4615:2: rule__Object__UnorderedGroup_5__1
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__1_in_synpred30_InternalBug304681TestLanguage9588);
+        pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__1_in_synpred30_InternalBug304681TestLanguage9592);
         rule__Object__UnorderedGroup_5__1();
 
         state._fsp--;
@@ -17819,7 +17822,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4628:2: ( rule__Object__UnorderedGroup_5__2 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4628:2: rule__Object__UnorderedGroup_5__2
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__2_in_synpred31_InternalBug304681TestLanguage9616);
+        pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__2_in_synpred31_InternalBug304681TestLanguage9620);
         rule__Object__UnorderedGroup_5__2();
 
         state._fsp--;
@@ -17834,7 +17837,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4641:2: ( rule__Object__UnorderedGroup_5__3 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4641:2: rule__Object__UnorderedGroup_5__3
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__3_in_synpred32_InternalBug304681TestLanguage9644);
+        pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__3_in_synpred32_InternalBug304681TestLanguage9648);
         rule__Object__UnorderedGroup_5__3();
 
         state._fsp--;
@@ -17849,7 +17852,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4654:2: ( rule__Object__UnorderedGroup_5__4 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4654:2: rule__Object__UnorderedGroup_5__4
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__4_in_synpred33_InternalBug304681TestLanguage9672);
+        pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__4_in_synpred33_InternalBug304681TestLanguage9676);
         rule__Object__UnorderedGroup_5__4();
 
         state._fsp--;
@@ -17864,7 +17867,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4667:2: ( rule__Object__UnorderedGroup_5__5 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4667:2: rule__Object__UnorderedGroup_5__5
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__5_in_synpred34_InternalBug304681TestLanguage9700);
+        pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__5_in_synpred34_InternalBug304681TestLanguage9704);
         rule__Object__UnorderedGroup_5__5();
 
         state._fsp--;
@@ -17879,7 +17882,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4680:2: ( rule__Object__UnorderedGroup_5__6 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4680:2: rule__Object__UnorderedGroup_5__6
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__6_in_synpred35_InternalBug304681TestLanguage9728);
+        pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__6_in_synpred35_InternalBug304681TestLanguage9732);
         rule__Object__UnorderedGroup_5__6();
 
         state._fsp--;
@@ -17894,7 +17897,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4693:2: ( rule__Object__UnorderedGroup_5__7 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4693:2: rule__Object__UnorderedGroup_5__7
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__7_in_synpred36_InternalBug304681TestLanguage9756);
+        pushFollow(FollowSets000.FOLLOW_rule__Object__UnorderedGroup_5__7_in_synpred36_InternalBug304681TestLanguage9760);
         rule__Object__UnorderedGroup_5__7();
 
         state._fsp--;
@@ -17909,7 +17912,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4734:2: ( rule__Reference__UnorderedGroup_4_0_1__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4734:2: rule__Reference__UnorderedGroup_4_0_1__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Reference__UnorderedGroup_4_0_1__0_in_synpred37_InternalBug304681TestLanguage9821);
+        pushFollow(FollowSets000.FOLLOW_rule__Reference__UnorderedGroup_4_0_1__0_in_synpred37_InternalBug304681TestLanguage9825);
         rule__Reference__UnorderedGroup_4_0_1__0();
 
         state._fsp--;
@@ -17944,7 +17947,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4763:7: ( rule__Reference__Group_4_0_1_0__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4763:8: rule__Reference__Group_4_0_1_0__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Reference__Group_4_0_1_0__0_in_synpred38_InternalBug304681TestLanguage9908);
+        pushFollow(FollowSets000.FOLLOW_rule__Reference__Group_4_0_1_0__0_in_synpred38_InternalBug304681TestLanguage9912);
         rule__Reference__Group_4_0_1_0__0();
 
         state._fsp--;
@@ -17971,7 +17974,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4801:2: ( rule__Reference__UnorderedGroup_4_0_1__1 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4801:2: rule__Reference__UnorderedGroup_4_0_1__1
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Reference__UnorderedGroup_4_0_1__1_in_synpred39_InternalBug304681TestLanguage10061);
+        pushFollow(FollowSets000.FOLLOW_rule__Reference__UnorderedGroup_4_0_1__1_in_synpred39_InternalBug304681TestLanguage10065);
         rule__Reference__UnorderedGroup_4_0_1__1();
 
         state._fsp--;
@@ -17986,7 +17989,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4830:2: ( rule__Object2__UnorderedGroup_5__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4830:2: rule__Object2__UnorderedGroup_5__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__0_in_synpred40_InternalBug304681TestLanguage10114);
+        pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__0_in_synpred40_InternalBug304681TestLanguage10118);
         rule__Object2__UnorderedGroup_5__0();
 
         state._fsp--;
@@ -18021,7 +18024,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4859:7: ( rule__Object2__Group_5_0__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4859:8: rule__Object2__Group_5_0__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Object2__Group_5_0__0_in_synpred41_InternalBug304681TestLanguage10201);
+        pushFollow(FollowSets000.FOLLOW_rule__Object2__Group_5_0__0_in_synpred41_InternalBug304681TestLanguage10205);
         rule__Object2__Group_5_0__0();
 
         state._fsp--;
@@ -18068,7 +18071,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4876:7: ( rule__Object2__Group_5_1__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4876:8: rule__Object2__Group_5_1__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Object2__Group_5_1__0_in_synpred42_InternalBug304681TestLanguage10292);
+        pushFollow(FollowSets000.FOLLOW_rule__Object2__Group_5_1__0_in_synpred42_InternalBug304681TestLanguage10296);
         rule__Object2__Group_5_1__0();
 
         state._fsp--;
@@ -18115,7 +18118,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4893:7: ( rule__Object2__Group_5_2__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4893:8: rule__Object2__Group_5_2__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Object2__Group_5_2__0_in_synpred43_InternalBug304681TestLanguage10383);
+        pushFollow(FollowSets000.FOLLOW_rule__Object2__Group_5_2__0_in_synpred43_InternalBug304681TestLanguage10387);
         rule__Object2__Group_5_2__0();
 
         state._fsp--;
@@ -18162,7 +18165,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4910:7: ( rule__Object2__Group_5_3__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4910:8: rule__Object2__Group_5_3__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Object2__Group_5_3__0_in_synpred44_InternalBug304681TestLanguage10474);
+        pushFollow(FollowSets000.FOLLOW_rule__Object2__Group_5_3__0_in_synpred44_InternalBug304681TestLanguage10478);
         rule__Object2__Group_5_3__0();
 
         state._fsp--;
@@ -18187,9 +18190,9 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
     // $ANTLR start synpred45_InternalBug304681TestLanguage
     public final void synpred45_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4932:8: ( rule__Object2__FeaturesAssignment_5_4 )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4932:8: rule__Object2__FeaturesAssignment_5_4
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4932:9: rule__Object2__FeaturesAssignment_5_4
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Object2__FeaturesAssignment_5_4_in_synpred45_InternalBug304681TestLanguage10606);
+        pushFollow(FollowSets000.FOLLOW_rule__Object2__FeaturesAssignment_5_4_in_synpred45_InternalBug304681TestLanguage10611);
         rule__Object2__FeaturesAssignment_5_4();
 
         state._fsp--;
@@ -18204,7 +18207,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4953:2: ( rule__Object2__UnorderedGroup_5__1 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4953:2: rule__Object2__UnorderedGroup_5__1
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__1_in_synpred46_InternalBug304681TestLanguage10675);
+        pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__1_in_synpred46_InternalBug304681TestLanguage10683);
         rule__Object2__UnorderedGroup_5__1();
 
         state._fsp--;
@@ -18219,7 +18222,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4966:2: ( rule__Object2__UnorderedGroup_5__2 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4966:2: rule__Object2__UnorderedGroup_5__2
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__2_in_synpred47_InternalBug304681TestLanguage10703);
+        pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__2_in_synpred47_InternalBug304681TestLanguage10711);
         rule__Object2__UnorderedGroup_5__2();
 
         state._fsp--;
@@ -18234,7 +18237,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4979:2: ( rule__Object2__UnorderedGroup_5__3 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4979:2: rule__Object2__UnorderedGroup_5__3
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__3_in_synpred48_InternalBug304681TestLanguage10731);
+        pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__3_in_synpred48_InternalBug304681TestLanguage10739);
         rule__Object2__UnorderedGroup_5__3();
 
         state._fsp--;
@@ -18249,7 +18252,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4992:2: ( rule__Object2__UnorderedGroup_5__4 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:4992:2: rule__Object2__UnorderedGroup_5__4
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__4_in_synpred49_InternalBug304681TestLanguage10759);
+        pushFollow(FollowSets000.FOLLOW_rule__Object2__UnorderedGroup_5__4_in_synpred49_InternalBug304681TestLanguage10767);
         rule__Object2__UnorderedGroup_5__4();
 
         state._fsp--;
@@ -18264,7 +18267,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5027:2: ( rule__Attribute2__UnorderedGroup_3_0_1__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5027:2: rule__Attribute2__UnorderedGroup_3_0_1__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__0_in_synpred50_InternalBug304681TestLanguage10818);
+        pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__0_in_synpred50_InternalBug304681TestLanguage10826);
         rule__Attribute2__UnorderedGroup_3_0_1__0();
 
         state._fsp--;
@@ -18299,7 +18302,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5056:7: ( rule__Attribute2__Group_3_0_1_0__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5056:8: rule__Attribute2__Group_3_0_1_0__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Attribute2__Group_3_0_1_0__0_in_synpred51_InternalBug304681TestLanguage10905);
+        pushFollow(FollowSets000.FOLLOW_rule__Attribute2__Group_3_0_1_0__0_in_synpred51_InternalBug304681TestLanguage10913);
         rule__Attribute2__Group_3_0_1_0__0();
 
         state._fsp--;
@@ -18346,7 +18349,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5073:7: ( rule__Attribute2__Group_3_0_1_1__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5073:8: rule__Attribute2__Group_3_0_1_1__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Attribute2__Group_3_0_1_1__0_in_synpred52_InternalBug304681TestLanguage10996);
+        pushFollow(FollowSets000.FOLLOW_rule__Attribute2__Group_3_0_1_1__0_in_synpred52_InternalBug304681TestLanguage11004);
         rule__Attribute2__Group_3_0_1_1__0();
 
         state._fsp--;
@@ -18371,9 +18374,9 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
     // $ANTLR start synpred53_InternalBug304681TestLanguage
     public final void synpred53_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5095:8: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5095:8: rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5095:9: rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2_in_synpred53_InternalBug304681TestLanguage11128);
+        pushFollow(FollowSets000.FOLLOW_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2_in_synpred53_InternalBug304681TestLanguage11137);
         rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2();
 
         state._fsp--;
@@ -18385,22 +18388,22 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
     // $ANTLR start synpred54_InternalBug304681TestLanguage
     public final void synpred54_InternalBug304681TestLanguage_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5079:4: ( ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5079:4: ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5079:4: ( ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5079:4: ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) )
         {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5079:4: ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5080:5: {...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5079:4: ({...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5080:5: {...}? => ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred54_InternalBug304681TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2)");
         }
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5080:111: ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5081:6: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5080:111: ( ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5081:6: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2);
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5087:6: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5088:6: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5087:6: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* ) )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5088:6: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) ) ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* )
         {
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5088:6: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 ) )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5089:7: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )
@@ -18411,7 +18414,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5090:7: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5090:8: rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2_in_synpred54_InternalBug304681TestLanguage11088);
+        pushFollow(FollowSets000.FOLLOW_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2_in_synpred54_InternalBug304681TestLanguage11096);
         rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2();
 
         state._fsp--;
@@ -18422,28 +18425,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
 
         }
 
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5093:6: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* )
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5094:7: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )*
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5093:6: ( ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )* )
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5094:7: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )*
         {
         if ( state.backtracking==0 ) {
            before(grammarAccess.getAttribute2Access().getConstraintDefinitionsAssignment_3_0_1_2()); 
         }
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5095:7: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )*
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5095:7: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )*
         loop54:
         do {
             int alt54=2;
             int LA54_0 = input.LA(1);
 
-            if ( (LA54_0==28) ) {
+            if ( (LA54_0==28) && (synpred53_InternalBug304681TestLanguage())) {
                 alt54=1;
             }
 
 
             switch (alt54) {
         	case 1 :
-        	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5095:8: rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2
+        	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5095:8: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2
         	    {
-        	    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2_in_synpred54_InternalBug304681TestLanguage11128);
+        	    pushFollow(FollowSets000.FOLLOW_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2_in_synpred54_InternalBug304681TestLanguage11140);
         	    rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2();
 
         	    state._fsp--;
@@ -18499,7 +18502,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5112:7: ( rule__Attribute2__Group_3_0_1_3__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5112:8: rule__Attribute2__Group_3_0_1_3__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Attribute2__Group_3_0_1_3__0_in_synpred55_InternalBug304681TestLanguage11226);
+        pushFollow(FollowSets000.FOLLOW_rule__Attribute2__Group_3_0_1_3__0_in_synpred55_InternalBug304681TestLanguage11238);
         rule__Attribute2__Group_3_0_1_3__0();
 
         state._fsp--;
@@ -18526,7 +18529,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5150:2: ( rule__Attribute2__UnorderedGroup_3_0_1__1 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5150:2: rule__Attribute2__UnorderedGroup_3_0_1__1
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__1_in_synpred56_InternalBug304681TestLanguage11379);
+        pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__1_in_synpred56_InternalBug304681TestLanguage11391);
         rule__Attribute2__UnorderedGroup_3_0_1__1();
 
         state._fsp--;
@@ -18541,7 +18544,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5163:2: ( rule__Attribute2__UnorderedGroup_3_0_1__2 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5163:2: rule__Attribute2__UnorderedGroup_3_0_1__2
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__2_in_synpred57_InternalBug304681TestLanguage11407);
+        pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__2_in_synpred57_InternalBug304681TestLanguage11419);
         rule__Attribute2__UnorderedGroup_3_0_1__2();
 
         state._fsp--;
@@ -18556,7 +18559,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5176:2: ( rule__Attribute2__UnorderedGroup_3_0_1__3 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5176:2: rule__Attribute2__UnorderedGroup_3_0_1__3
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__3_in_synpred58_InternalBug304681TestLanguage11435);
+        pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__3_in_synpred58_InternalBug304681TestLanguage11447);
         rule__Attribute2__UnorderedGroup_3_0_1__3();
 
         state._fsp--;
@@ -18571,7 +18574,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5189:2: ( rule__Attribute2__UnorderedGroup_3_0_1__4 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5189:2: rule__Attribute2__UnorderedGroup_3_0_1__4
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__4_in_synpred59_InternalBug304681TestLanguage11463);
+        pushFollow(FollowSets000.FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__4_in_synpred59_InternalBug304681TestLanguage11475);
         rule__Attribute2__UnorderedGroup_3_0_1__4();
 
         state._fsp--;
@@ -18586,7 +18589,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5224:2: ( rule__Reference2__UnorderedGroup_4_0_1__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5224:2: rule__Reference2__UnorderedGroup_4_0_1__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__0_in_synpred60_InternalBug304681TestLanguage11522);
+        pushFollow(FollowSets000.FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__0_in_synpred60_InternalBug304681TestLanguage11534);
         rule__Reference2__UnorderedGroup_4_0_1__0();
 
         state._fsp--;
@@ -18621,7 +18624,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5253:7: ( rule__Reference2__Group_4_0_1_0__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5253:8: rule__Reference2__Group_4_0_1_0__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Reference2__Group_4_0_1_0__0_in_synpred61_InternalBug304681TestLanguage11609);
+        pushFollow(FollowSets000.FOLLOW_rule__Reference2__Group_4_0_1_0__0_in_synpred61_InternalBug304681TestLanguage11621);
         rule__Reference2__Group_4_0_1_0__0();
 
         state._fsp--;
@@ -18648,7 +18651,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5291:2: ( rule__Reference2__UnorderedGroup_4_0_1__1 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5291:2: rule__Reference2__UnorderedGroup_4_0_1__1
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__1_in_synpred62_InternalBug304681TestLanguage11762);
+        pushFollow(FollowSets000.FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__1_in_synpred62_InternalBug304681TestLanguage11774);
         rule__Reference2__UnorderedGroup_4_0_1__1();
 
         state._fsp--;
@@ -18683,7 +18686,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5350:7: ( rule__ConstraintDefinition__Group_3_0__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5350:8: rule__ConstraintDefinition__Group_3_0__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__ConstraintDefinition__Group_3_0__0_in_synpred63_InternalBug304681TestLanguage11904);
+        pushFollow(FollowSets000.FOLLOW_rule__ConstraintDefinition__Group_3_0__0_in_synpred63_InternalBug304681TestLanguage11916);
         rule__ConstraintDefinition__Group_3_0__0();
 
         state._fsp--;
@@ -18710,7 +18713,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5388:2: ( rule__ConstraintDefinition__UnorderedGroup_3__1 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug304681TestLanguage.g:5388:2: rule__ConstraintDefinition__UnorderedGroup_3__1
         {
-        pushFollow(FollowSets000.FOLLOW_rule__ConstraintDefinition__UnorderedGroup_3__1_in_synpred64_InternalBug304681TestLanguage12057);
+        pushFollow(FollowSets000.FOLLOW_rule__ConstraintDefinition__UnorderedGroup_3__1_in_synpred64_InternalBug304681TestLanguage12069);
         rule__ConstraintDefinition__UnorderedGroup_3__1();
 
         state._fsp--;
@@ -19803,7 +19806,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             this.transition = DFA23_transition;
         }
         public String getDescription() {
-            return "4457:3: ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) ) )";
+            return "4457:3: ( ({...}? => ( ( ( rule__Object__Group_5_0__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_1__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_2__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_3__0 ) ) ) ) | ({...}? => ( ( ( ( rule__Object__FeaturesAssignment_5_4 ) ) ( ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )* ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_5__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_6__0 ) ) ) ) | ({...}? => ( ( ( rule__Object__Group_5_7__0 ) ) ) ) )";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -19919,7 +19922,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             this.transition = DFA22_transition;
         }
         public String getDescription() {
-            return "()* loopback of 4543:7: ( rule__Object__FeaturesAssignment_5_4 )*";
+            return "()* loopback of 4543:7: ( ( rule__Object__FeaturesAssignment_5_4 )=> rule__Object__FeaturesAssignment_5_4 )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -20693,615 +20696,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         }
     }
     static final String DFA35_eotS =
-        "\u01fa\uffff";
+        "\12\uffff";
     static final String DFA35_eofS =
-        "\1\1\u01f9\uffff";
+        "\1\1\11\uffff";
     static final String DFA35_minS =
-        "\1\21\1\uffff\4\4\1\13\1\4\1\13\1\21\1\0\1\21\1\0\2\5\1\4\2\13\1"+
-        "\0\1\uffff\2\5\1\0\2\13\1\20\2\21\2\13\2\21\1\35\2\5\1\4\2\13\2"+
-        "\21\2\5\2\13\1\20\2\21\3\5\1\21\1\13\2\21\1\35\2\5\1\4\4\13\2\5"+
-        "\2\21\2\5\2\13\1\20\4\21\1\5\1\21\1\13\1\4\1\5\1\21\1\13\2\21\1"+
-        "\35\2\5\1\4\2\13\1\21\1\20\2\5\2\21\2\5\2\13\1\20\2\21\1\35\1\5"+
-        "\1\21\1\13\1\4\1\5\1\21\1\13\2\21\1\35\2\5\1\4\2\13\2\5\1\21\1\20"+
-        "\2\5\2\21\2\5\2\13\1\20\2\21\1\5\1\21\1\13\1\35\1\5\1\21\1\13\1"+
-        "\4\1\5\1\21\1\13\2\21\1\35\2\5\2\21\2\5\1\21\1\20\2\5\2\21\3\5\1"+
-        "\21\1\13\2\5\1\4\2\13\1\5\1\21\1\13\1\35\1\5\1\21\1\13\1\4\1\5\1"+
-        "\21\1\13\1\21\2\13\1\20\2\21\2\5\2\21\2\5\1\21\1\20\2\5\4\21\1\35"+
-        "\2\5\1\4\2\13\1\5\1\21\1\13\1\4\1\5\1\21\1\13\1\35\1\5\1\21\1\13"+
-        "\1\4\2\5\2\13\1\20\3\21\1\20\2\5\2\21\2\5\1\21\1\20\1\5\1\21\1\13"+
-        "\2\21\1\35\2\5\1\4\2\13\1\35\1\5\1\21\1\13\1\4\1\5\1\21\1\13\1\35"+
-        "\2\5\2\21\2\5\2\13\1\20\2\21\2\5\1\21\1\20\2\5\2\21\3\5\1\21\1\13"+
-        "\2\5\1\4\2\13\1\5\1\21\1\13\2\21\1\35\1\5\1\21\1\13\1\35\1\5\1\21"+
-        "\1\13\1\4\1\5\1\21\1\13\1\21\2\13\1\20\2\21\2\5\2\21\4\5\2\21\2"+
-        "\5\1\21\1\20\2\5\4\21\1\35\2\5\1\4\2\13\1\5\1\21\1\13\1\5\1\21\1"+
-        "\13\1\5\1\21\1\13\1\4\1\5\1\21\1\13\1\35\1\5\1\21\1\13\2\5\2\13"+
-        "\1\20\3\21\2\5\3\21\1\20\2\5\2\21\2\5\1\21\1\5\1\21\1\13\2\21\1"+
-        "\35\1\5\1\21\1\13\1\35\1\5\1\21\1\13\1\4\1\5\1\21\1\13\2\5\2\21"+
-        "\2\5\1\21\2\5\1\21\1\20\2\5\2\21\1\5\1\21\1\13\2\5\1\4\2\13\1\5"+
-        "\1\21\1\13\1\5\1\21\1\13\1\35\1\5\1\21\1\13\1\21\2\13\1\20\2\21"+
-        "\2\5\2\21\2\5\2\21\2\5\3\21\1\35\1\5\1\21\1\13\1\5\1\21\1\13\1\4"+
-        "\1\5\1\21\1\13\2\5\2\21\1\20\2\5\2\21\1\5\1\21\1\13\1\35\1\5\1\21"+
-        "\1\13\2\5\2\21\2\5\1\21\1\5\1\21\1\13\1\4\1\5\1\21\1\13\1\21\1\20"+
-        "\2\5\2\21\1\35\1\5\1\21\1\13\2\5\1\21\1\5\1\21\1\13\2\5\2\21\1\5"+
-        "\1\21\1\13\1\21";
+        "\1\21\4\uffff\2\0\3\uffff";
     static final String DFA35_maxS =
-        "\1\41\1\uffff\3\4\1\42\1\20\1\4\1\20\1\44\1\0\1\24\1\0\2\5\1\4\2"+
-        "\13\1\0\1\uffff\2\5\1\0\2\13\1\20\2\44\2\13\2\44\1\36\2\5\1\4\2"+
-        "\13\2\24\1\13\1\5\2\13\1\20\2\44\2\5\1\13\1\36\1\13\2\44\1\36\2"+
-        "\5\1\4\5\13\1\5\1\44\1\36\1\13\1\5\2\13\1\20\2\44\2\21\1\13\1\21"+
-        "\1\13\1\4\1\13\1\36\1\13\2\44\1\36\2\5\1\4\2\13\1\21\1\20\1\13\1"+
-        "\5\1\44\1\36\1\13\1\5\2\13\1\20\2\44\1\36\1\13\1\21\1\13\1\4\1\13"+
-        "\1\36\1\13\2\44\1\36\2\5\1\4\3\13\1\5\1\21\1\20\1\13\1\5\1\44\1"+
-        "\36\1\13\1\5\2\13\1\20\2\21\1\13\1\36\1\13\1\36\1\13\1\21\1\13\1"+
-        "\4\1\13\1\36\1\13\2\21\1\36\1\13\1\5\1\44\1\36\1\13\1\5\1\21\1\20"+
-        "\1\13\1\5\1\44\1\36\1\13\1\5\1\13\1\21\1\13\2\5\1\4\3\13\1\36\1"+
-        "\13\1\36\1\13\1\21\1\13\1\4\1\13\1\36\1\13\1\21\2\13\1\20\2\44\1"+
-        "\13\1\5\1\44\1\36\1\13\1\5\1\21\1\20\1\13\1\5\1\34\1\36\2\44\1\36"+
-        "\2\5\1\4\3\13\1\21\1\13\1\4\1\13\1\36\1\13\1\36\1\13\1\21\1\13\1"+
-        "\4\1\13\1\5\2\13\1\20\2\44\1\21\1\20\1\13\1\5\1\44\1\36\1\13\1\5"+
-        "\1\21\1\20\1\13\1\36\1\13\2\44\1\36\2\5\1\4\2\13\1\36\1\13\1\21"+
-        "\1\13\1\4\1\13\1\36\1\13\1\36\1\13\1\5\1\44\1\36\1\13\1\5\2\13\1"+
-        "\20\2\44\1\13\1\5\1\21\1\20\1\13\1\5\1\44\1\36\1\13\1\5\1\13\1\21"+
-        "\1\13\2\5\1\4\3\13\1\36\1\13\2\44\1\36\1\13\1\36\1\13\1\36\1\13"+
-        "\1\21\1\13\1\4\1\13\1\36\1\13\1\21\2\13\1\20\2\44\1\13\1\5\1\44"+
-        "\1\36\1\13\1\5\1\13\1\5\1\44\1\36\1\13\1\5\1\21\1\20\1\13\1\5\1"+
-        "\34\1\36\2\44\1\36\2\5\1\4\3\13\1\21\2\13\1\36\2\13\1\21\1\13\1"+
-        "\4\1\13\1\36\1\13\1\36\1\13\1\21\2\13\1\5\2\13\1\20\2\44\1\21\1"+
-        "\13\1\5\1\44\1\36\1\21\1\20\1\13\1\5\1\44\1\36\1\13\1\5\1\21\1\13"+
-        "\1\36\1\13\2\44\1\36\1\13\1\21\1\13\1\36\1\13\1\21\1\13\1\4\1\13"+
-        "\1\36\2\13\1\5\1\44\1\36\1\13\1\5\1\21\1\13\1\5\1\21\1\20\1\13\1"+
-        "\5\1\44\1\36\1\13\1\21\1\13\2\5\1\4\3\13\1\36\2\13\1\36\1\13\1\36"+
-        "\1\13\1\21\1\13\1\21\2\13\1\20\2\44\1\13\1\5\1\44\1\36\1\13\1\5"+
-        "\1\44\1\36\1\13\1\5\1\21\2\44\1\36\1\13\1\21\2\13\1\21\1\13\1\4"+
-        "\1\13\1\36\2\13\1\5\2\21\1\20\1\13\1\5\1\44\1\36\1\13\1\36\1\13"+
-        "\1\36\1\13\1\21\2\13\1\5\1\44\1\36\1\13\1\5\1\21\1\13\1\21\1\13"+
-        "\1\4\1\13\1\36\1\13\1\21\1\20\1\13\1\5\1\44\2\36\1\13\1\21\2\13"+
-        "\1\5\1\21\1\13\1\36\2\13\1\5\1\44\1\36\1\13\1\21\1\13\1\21";
+        "\1\41\4\uffff\2\0\3\uffff";
     static final String DFA35_acceptS =
-        "\1\uffff\1\2\21\uffff\1\1\u01e6\uffff";
+        "\1\uffff\1\2\7\uffff\1\1";
     static final String DFA35_specialS =
-        "\12\uffff\1\1\1\uffff\1\0\5\uffff\1\3\3\uffff\1\2\u01e3\uffff}>";
+        "\5\uffff\1\0\1\1\3\uffff}>";
     static final String[] DFA35_transitionS = {
-            "\1\1\1\uffff\3\1\4\uffff\1\2\1\3\5\uffff\1\1",
+            "\1\1\1\uffff\3\1\4\uffff\1\5\1\6\5\uffff\1\1",
             "",
-            "\1\4",
-            "\1\5",
-            "\1\6",
-            "\1\10\35\uffff\1\7",
-            "\1\12\4\uffff\1\11",
-            "\1\10",
-            "\1\14\4\uffff\1\13",
-            "\1\22\1\uffff\1\15\1\16\7\uffff\1\17\6\uffff\1\20\1\21",
+            "",
+            "",
+            "",
             "\1\uffff",
-            "\1\26\1\uffff\1\24\1\25",
-            "\1\uffff",
-            "\1\27",
-            "\1\30",
-            "\1\31",
-            "\1\32",
-            "\1\33",
             "\1\uffff",
             "",
-            "\1\34",
-            "\1\35",
-            "\1\uffff",
-            "\1\36",
-            "\1\37",
-            "\1\40",
-            "\1\22\1\uffff\1\41\1\42\7\uffff\1\43\6\uffff\1\44\1\45",
-            "\1\22\1\uffff\1\41\1\42\7\uffff\1\43\6\uffff\1\44\1\45",
-            "\1\46",
-            "\1\47",
-            "\1\22\1\uffff\1\41\1\42\7\uffff\1\43\6\uffff\1\44\1\45",
-            "\1\22\1\uffff\1\41\1\42\7\uffff\1\43\6\uffff\1\44\1\45",
-            "\1\50\1\51",
-            "\1\52",
-            "\1\53",
-            "\1\54",
-            "\1\55",
-            "\1\56",
-            "\1\26\1\uffff\1\57\1\60",
-            "\1\26\1\uffff\1\57\1\60",
-            "\1\61\5\uffff\1\62",
-            "\1\63",
-            "\1\64",
-            "\1\65",
-            "\1\66",
-            "\1\22\1\uffff\1\67\1\70\7\uffff\1\71\6\uffff\1\72\1\73",
-            "\1\22\1\uffff\1\67\1\70\7\uffff\1\71\6\uffff\1\72\1\73",
-            "\1\74",
-            "\1\75",
-            "\1\61\5\uffff\1\62",
-            "\1\100\13\uffff\1\76\1\77",
-            "\1\101",
-            "\1\22\1\uffff\1\67\1\70\7\uffff\1\71\6\uffff\1\72\1\73",
-            "\1\22\1\uffff\1\67\1\70\7\uffff\1\71\6\uffff\1\72\1\73",
-            "\1\102\1\103",
-            "\1\104",
-            "\1\105",
-            "\1\106",
-            "\1\107",
-            "\1\110",
-            "\1\111",
-            "\1\112",
-            "\1\113\5\uffff\1\114",
-            "\1\115",
-            "\1\22\1\uffff\1\41\1\42\7\uffff\1\116\6\uffff\1\44\1\45",
-            "\1\100\13\uffff\1\76\1\77",
-            "\1\117\5\uffff\1\120",
-            "\1\121",
-            "\1\122",
-            "\1\123",
-            "\1\124",
-            "\1\22\1\uffff\1\125\1\126\7\uffff\1\127\6\uffff\1\130\1\131",
-            "\1\22\1\uffff\1\125\1\126\7\uffff\1\127\6\uffff\1\130\1\131",
-            "\1\26",
-            "\1\26",
-            "\1\113\5\uffff\1\114",
-            "\1\100",
-            "\1\132",
-            "\1\133",
-            "\1\117\5\uffff\1\120",
-            "\1\136\13\uffff\1\134\1\135",
-            "\1\137",
-            "\1\22\1\uffff\1\125\1\126\7\uffff\1\127\6\uffff\1\130\1\131",
-            "\1\22\1\uffff\1\125\1\126\7\uffff\1\127\6\uffff\1\130\1\131",
-            "\1\140\1\141",
-            "\1\142",
-            "\1\143",
-            "\1\144",
-            "\1\145",
-            "\1\146",
-            "\1\100",
-            "\1\147",
-            "\1\150\5\uffff\1\151",
-            "\1\152",
-            "\1\22\1\uffff\1\67\1\70\7\uffff\1\153\6\uffff\1\72\1\73",
-            "\1\136\13\uffff\1\134\1\135",
-            "\1\154\5\uffff\1\155",
-            "\1\156",
-            "\1\157",
-            "\1\160",
-            "\1\161",
-            "\1\22\1\uffff\1\162\1\163\7\uffff\1\164\6\uffff\1\165\1\166",
-            "\1\22\1\uffff\1\162\1\163\7\uffff\1\164\6\uffff\1\165\1\166",
-            "\1\167\1\170",
-            "\1\150\5\uffff\1\151",
-            "\1\136",
-            "\1\171",
-            "\1\172",
-            "\1\154\5\uffff\1\155",
-            "\1\175\13\uffff\1\173\1\174",
-            "\1\176",
-            "\1\22\1\uffff\1\162\1\163\7\uffff\1\164\6\uffff\1\165\1\166",
-            "\1\22\1\uffff\1\162\1\163\7\uffff\1\164\6\uffff\1\165\1\166",
-            "\1\177\1\u0080",
-            "\1\u0081",
-            "\1\u0082",
-            "\1\u0083",
-            "\1\u0084",
-            "\1\u0085",
-            "\1\u0086\5\uffff\1\u0087",
-            "\1\u0088",
-            "\1\136",
-            "\1\u0089",
-            "\1\u008a\5\uffff\1\u008b",
-            "\1\u008c",
-            "\1\22\1\uffff\1\125\1\126\7\uffff\1\u008d\6\uffff\1\130\1\131",
-            "\1\175\13\uffff\1\173\1\174",
-            "\1\u008e\5\uffff\1\u008f",
-            "\1\u0090",
-            "\1\u0091",
-            "\1\u0092",
-            "\1\u0093",
-            "\1\22",
-            "\1\22",
-            "\1\u0086\5\uffff\1\u0087",
-            "\1\u0096\13\uffff\1\u0094\1\u0095",
-            "\1\u0097",
-            "\1\u0098\1\u0099",
-            "\1\u008a\5\uffff\1\u008b",
-            "\1\175",
-            "\1\u009a",
-            "\1\u009b",
-            "\1\u008e\5\uffff\1\u008f",
-            "\1\u009e\13\uffff\1\u009c\1\u009d",
-            "\1\u009f",
-            "\1\22",
-            "\1\22",
-            "\1\u00a0\1\u00a1",
-            "\1\u00a2\5\uffff\1\u00a3",
-            "\1\u00a4",
-            "\1\22\1\uffff\1\u00a5\1\u00a6\7\uffff\1\u00a7\6\uffff\1\u00a8"+
-            "\1\u00a9",
-            "\1\u0096\13\uffff\1\u0094\1\u0095",
-            "\1\u00aa\5\uffff\1\u00ab",
-            "\1\u00ac",
-            "\1\175",
-            "\1\u00ad",
-            "\1\u00ae\5\uffff\1\u00af",
-            "\1\u00b0",
-            "\1\22\1\uffff\1\162\1\163\7\uffff\1\u00b1\6\uffff\1\165\1\166",
-            "\1\u009e\13\uffff\1\u009c\1\u009d",
-            "\1\u00b2\5\uffff\1\u00b3",
-            "\1\u00b4",
-            "\1\u00a2\5\uffff\1\u00a3",
-            "\1\u0096",
-            "\1\u00b5",
-            "\1\u00b6",
-            "\1\u00b7",
-            "\1\u00b8",
-            "\1\u00b9",
-            "\1\u00ba",
-            "\1\u00aa\5\uffff\1\u00ab",
-            "\1\u00bd\13\uffff\1\u00bb\1\u00bc",
-            "\1\u00be",
-            "\1\u00bf\1\u00c0",
-            "\1\u00ae\5\uffff\1\u00af",
-            "\1\u009e",
-            "\1\u00c1",
-            "\1\u00c2",
-            "\1\u00b2\5\uffff\1\u00b3",
-            "\1\u00c5\13\uffff\1\u00c3\1\u00c4",
-            "\1\u00c6",
-            "\1\u0096",
-            "\1\u00c7",
-            "\1\u00c8",
-            "\1\u00c9",
-            "\1\22\1\uffff\1\u00ca\1\u00cb\7\uffff\1\u00cc\6\uffff\1\u00cd"+
-            "\1\u00ce",
-            "\1\22\1\uffff\1\u00ca\1\u00cb\7\uffff\1\u00cc\6\uffff\1\u00cd"+
-            "\1\u00ce",
-            "\1\u00cf\5\uffff\1\u00d0",
-            "\1\u00d1",
-            "\1\22\1\uffff\1\u00ca\1\u00cb\7\uffff\1\u00d2\6\uffff\1\u00cd"+
-            "\1\u00ce",
-            "\1\u00bd\13\uffff\1\u00bb\1\u00bc",
-            "\1\u00d3\5\uffff\1\u00d4",
-            "\1\u00d5",
-            "\1\u009e",
-            "\1\u00d6",
-            "\1\u00d7\5\uffff\1\u00d8",
-            "\1\u00d9",
-            "\1\22\12\uffff\1\u00da",
-            "\1\u00c5\13\uffff\1\u00c3\1\u00c4",
-            "\1\22\1\uffff\1\u00ca\1\u00cb\7\uffff\1\u00cc\6\uffff\1\u00cd"+
-            "\1\u00ce",
-            "\1\22\1\uffff\1\u00ca\1\u00cb\7\uffff\1\u00cc\6\uffff\1\u00cd"+
-            "\1\u00ce",
-            "\1\u00db\1\u00dc",
-            "\1\u00dd",
-            "\1\u00de",
-            "\1\u00df",
-            "\1\u00e0",
-            "\1\u00e1",
-            "\1\u00cf\5\uffff\1\u00d0",
-            "\1\u00bd",
-            "\1\u00e2",
-            "\1\u00e3",
-            "\1\u00d3\5\uffff\1\u00d4",
-            "\1\u00e6\13\uffff\1\u00e4\1\u00e5",
-            "\1\u00e7",
-            "\1\u00e8\1\u00e9",
-            "\1\u00d7\5\uffff\1\u00d8",
-            "\1\u00c5",
-            "\1\u00ea",
-            "\1\u00eb",
-            "\1\u00ec\5\uffff\1\u00ed",
-            "\1\u00ee",
-            "\1\u00ef",
-            "\1\u00f0",
-            "\1\u00f1",
-            "\1\22\1\uffff\1\u00f2\1\u00f3\7\uffff\1\u00f4\6\uffff\1\u00f5"+
-            "\1\u00f6",
-            "\1\22\1\uffff\1\u00f2\1\u00f3\7\uffff\1\u00f4\6\uffff\1\u00f5"+
-            "\1\u00f6",
-            "\1\u00bd",
-            "\1\u00f7",
-            "\1\u00f8\5\uffff\1\u00f9",
-            "\1\u00fa",
-            "\1\22\1\uffff\1\u00f2\1\u00f3\7\uffff\1\u00fb\6\uffff\1\u00f5"+
-            "\1\u00f6",
-            "\1\u00e6\13\uffff\1\u00e4\1\u00e5",
-            "\1\u00fc\5\uffff\1\u00fd",
-            "\1\u00fe",
-            "\1\u00c5",
-            "\1\u00ff",
-            "\1\u00ec\5\uffff\1\u00ed",
-            "\1\u0102\13\uffff\1\u0100\1\u0101",
-            "\1\u0103",
-            "\1\22\1\uffff\1\u00f2\1\u00f3\7\uffff\1\u00f4\6\uffff\1\u00f5"+
-            "\1\u00f6",
-            "\1\22\1\uffff\1\u00f2\1\u00f3\7\uffff\1\u00f4\6\uffff\1\u00f5"+
-            "\1\u00f6",
-            "\1\u0104\1\u0105",
-            "\1\u0106",
-            "\1\u0107",
-            "\1\u0108",
-            "\1\u0109",
-            "\1\u010a",
-            "\1\u010b\1\u010c",
-            "\1\u00f8\5\uffff\1\u00f9",
-            "\1\u00e6",
-            "\1\u010d",
-            "\1\u010e",
-            "\1\u00fc\5\uffff\1\u00fd",
-            "\1\u0111\13\uffff\1\u010f\1\u0110",
-            "\1\u0112",
-            "\1\u0113\1\u0114",
-            "\1\u0115\5\uffff\1\u0116",
-            "\1\u0117",
-            "\1\22\1\uffff\1\u0118\1\u0119\7\uffff\1\u011a\6\uffff\1\u011b"+
-            "\1\u011c",
-            "\1\u0102\13\uffff\1\u0100\1\u0101",
-            "\1\u011d\5\uffff\1\u011e",
-            "\1\u011f",
-            "\1\u0120",
-            "\1\u0121",
-            "\1\u0122",
-            "\1\22\1\uffff\1\162\1\163\7\uffff\1\164\6\uffff\1\165\1\166",
-            "\1\22\1\uffff\1\162\1\163\7\uffff\1\164\6\uffff\1\165\1\166",
-            "\1\u0123\5\uffff\1\u0124",
-            "\1\u0125",
-            "\1\u00e6",
-            "\1\u0126",
-            "\1\u0127\5\uffff\1\u0128",
-            "\1\u0129",
-            "\1\22\1\uffff\1\162\1\163\7\uffff\1\u012a\6\uffff\1\165\1\166",
-            "\1\u0111\13\uffff\1\u010f\1\u0110",
-            "\1\u012b\5\uffff\1\u012c",
-            "\1\u012d",
-            "\1\u0115\5\uffff\1\u0116",
-            "\1\u0102",
-            "\1\u012e",
-            "\1\u012f",
-            "\1\u0130",
-            "\1\u0131",
-            "\1\u0132",
-            "\1\u0133",
-            "\1\u011d\5\uffff\1\u011e",
-            "\1\u0136\13\uffff\1\u0134\1\u0135",
-            "\1\u0137",
-            "\1\22\1\uffff\1\162\1\163\7\uffff\1\164\6\uffff\1\165\1\166",
-            "\1\22\1\uffff\1\162\1\163\7\uffff\1\164\6\uffff\1\165\1\166",
-            "\1\u0138\1\u0139",
-            "\1\u0123\5\uffff\1\u0124",
-            "\1\u013c\13\uffff\1\u013a\1\u013b",
-            "\1\u013d",
-            "\1\u013e\1\u013f",
-            "\1\u0127\5\uffff\1\u0128",
-            "\1\u0111",
-            "\1\u0140",
-            "\1\u0141",
-            "\1\u012b\5\uffff\1\u012c",
-            "\1\u0144\13\uffff\1\u0142\1\u0143",
-            "\1\u0145",
-            "\1\u0102",
-            "\1\u0146",
-            "\1\u0147",
-            "\1\u0148",
-            "\1\22\1\uffff\1\u0149\1\u014a\7\uffff\1\u014b\6\uffff\1\u014c"+
-            "\1\u014d",
-            "\1\22\1\uffff\1\u0149\1\u014a\7\uffff\1\u014b\6\uffff\1\u014c"+
-            "\1\u014d",
-            "\1\u014e\5\uffff\1\u014f",
-            "\1\u0150",
-            "\1\22\1\uffff\1\u00f2\1\u00f3\7\uffff\1\u00fb\6\uffff\1\u00f5"+
-            "\1\u00f6",
-            "\1\u0136\13\uffff\1\u0134\1\u0135",
-            "\1\u0151\5\uffff\1\u0152",
-            "\1\u0153",
-            "\1\u0154\5\uffff\1\u0155",
-            "\1\u0156",
-            "\1\22\1\uffff\1\u0149\1\u014a\7\uffff\1\u0157\6\uffff\1\u014c"+
-            "\1\u014d",
-            "\1\u013c\13\uffff\1\u013a\1\u013b",
-            "\1\u0158\5\uffff\1\u0159",
-            "\1\u015a",
-            "\1\u0111",
-            "\1\u015b",
-            "\1\u015c\5\uffff\1\u015d",
-            "\1\u015e",
-            "\1\22\12\uffff\1\u00da",
-            "\1\u0144\13\uffff\1\u0142\1\u0143",
-            "\1\22\1\uffff\1\u0149\1\u014a\7\uffff\1\u014b\6\uffff\1\u014c"+
-            "\1\u014d",
-            "\1\22\1\uffff\1\u0149\1\u014a\7\uffff\1\u014b\6\uffff\1\u014c"+
-            "\1\u014d",
-            "\1\u015f\1\u0160",
-            "\1\u0161",
-            "\1\u0162",
-            "\1\u0163",
-            "\1\u0164",
-            "\1\u0165",
-            "\1\u014e\5\uffff\1\u014f",
-            "\1\u0136",
-            "\1\u0166",
-            "\1\u0151\5\uffff\1\u0152",
-            "\1\u0169\13\uffff\1\u0167\1\u0168",
-            "\1\u016a",
-            "\1\u0154\5\uffff\1\u0155",
-            "\1\u013c",
-            "\1\u016b",
-            "\1\u016c",
-            "\1\u0158\5\uffff\1\u0159",
-            "\1\u016f\13\uffff\1\u016d\1\u016e",
-            "\1\u0170",
-            "\1\u0171\1\u0172",
-            "\1\u015c\5\uffff\1\u015d",
-            "\1\u0144",
-            "\1\u0173",
-            "\1\u0174\5\uffff\1\u0175",
-            "\1\u0176",
-            "\1\u0177",
-            "\1\u0178",
-            "\1\u0179",
-            "\1\22\1\uffff\1\u00f2\1\u00f3\7\uffff\1\u00f4\6\uffff\1\u00f5"+
-            "\1\u00f6",
-            "\1\22\1\uffff\1\u00f2\1\u00f3\7\uffff\1\u00f4\6\uffff\1\u00f5"+
-            "\1\u00f6",
-            "\1\u0136",
-            "\1\u017a\5\uffff\1\u017b",
-            "\1\u017c",
-            "\1\22\1\uffff\1\162\1\163\7\uffff\1\u012a\6\uffff\1\165\1\166",
-            "\1\u0169\13\uffff\1\u0167\1\u0168",
-            "\1\u013c",
-            "\1\u017d",
-            "\1\u017e\5\uffff\1\u017f",
-            "\1\u0180",
-            "\1\22\1\uffff\1\u00f2\1\u00f3\7\uffff\1\u0181\6\uffff\1\u00f5"+
-            "\1\u00f6",
-            "\1\u016f\13\uffff\1\u016d\1\u016e",
-            "\1\u0182\5\uffff\1\u0183",
-            "\1\u0184",
-            "\1\u0144",
-            "\1\u0174\5\uffff\1\u0175",
-            "\1\u0187\13\uffff\1\u0185\1\u0186",
-            "\1\u0188",
-            "\1\22\1\uffff\1\u00f2\1\u00f3\7\uffff\1\u00f4\6\uffff\1\u00f5"+
-            "\1\u00f6",
-            "\1\22\1\uffff\1\u00f2\1\u00f3\7\uffff\1\u00f4\6\uffff\1\u00f5"+
-            "\1\u00f6",
-            "\1\u0189\1\u018a",
-            "\1\u017a\5\uffff\1\u017b",
-            "\1\u0169",
-            "\1\u018b",
-            "\1\u018c\1\u018d",
-            "\1\u017e\5\uffff\1\u017f",
-            "\1\u016f",
-            "\1\u018e",
-            "\1\u018f",
-            "\1\u0182\5\uffff\1\u0183",
-            "\1\u0192\13\uffff\1\u0190\1\u0191",
-            "\1\u0193",
-            "\1\u0194\5\uffff\1\u0195",
-            "\1\u0196",
-            "\1\22\1\uffff\1\u0197\1\u0198\7\uffff\1\u0199\6\uffff\1\u019a"+
-            "\1\u019b",
-            "\1\u0187\13\uffff\1\u0185\1\u0186",
-            "\1\u019c\5\uffff\1\u019d",
-            "\1\u019e",
-            "\1\u0169",
-            "\1\u019f\5\uffff\1\u01a0",
-            "\1\u01a1",
-            "\1\u016f",
-            "\1\u01a2",
-            "\1\u01a3\5\uffff\1\u01a4",
-            "\1\u01a5",
-            "\1\22\1\uffff\1\162\1\163\7\uffff\1\u012a\6\uffff\1\165\1\166",
-            "\1\u0192\13\uffff\1\u0190\1\u0191",
-            "\1\u0194\5\uffff\1\u0195",
-            "\1\u0187",
-            "\1\u01a6",
-            "\1\u01a7",
-            "\1\u01a8",
-            "\1\u01a9",
-            "\1\u01aa",
-            "\1\u01ab",
-            "\1\u019c\5\uffff\1\u019d",
-            "\1\u01ae\13\uffff\1\u01ac\1\u01ad",
-            "\1\u01af",
-            "\1\u019f\5\uffff\1\u01a0",
-            "\1\u01b2\13\uffff\1\u01b0\1\u01b1",
-            "\1\u01b3",
-            "\1\u01b4\1\u01b5",
-            "\1\u01a3\5\uffff\1\u01a4",
-            "\1\u0192",
-            "\1\u01b6",
-            "\1\u0187",
-            "\1\u01b7",
-            "\1\u01b8",
-            "\1\u01b9",
-            "\1\22\1\uffff\1\u0149\1\u014a\7\uffff\1\u014b\6\uffff\1\u014c"+
-            "\1\u014d",
-            "\1\22\1\uffff\1\u0149\1\u014a\7\uffff\1\u014b\6\uffff\1\u014c"+
-            "\1\u014d",
-            "\1\u01ba\5\uffff\1\u01bb",
-            "\1\u01bc",
-            "\1\22\1\uffff\1\u00f2\1\u00f3\7\uffff\1\u0181\6\uffff\1\u00f5"+
-            "\1\u00f6",
-            "\1\u01ae\13\uffff\1\u01ac\1\u01ad",
-            "\1\u01bd\5\uffff\1\u01be",
-            "\1\u01bf",
-            "\1\22\1\uffff\1\u0149\1\u014a\7\uffff\1\u01c0\6\uffff\1\u014c"+
-            "\1\u014d",
-            "\1\u01b2\13\uffff\1\u01b0\1\u01b1",
-            "\1\u01c1\5\uffff\1\u01c2",
-            "\1\u01c3",
-            "\1\u0192",
-            "\1\22\1\uffff\1\u0149\1\u014a\7\uffff\1\u014b\6\uffff\1\u014c"+
-            "\1\u014d",
-            "\1\22\1\uffff\1\u0149\1\u014a\7\uffff\1\u014b\6\uffff\1\u014c"+
-            "\1\u014d",
-            "\1\u01c4\1\u01c5",
-            "\1\u01ba\5\uffff\1\u01bb",
-            "\1\u01ae",
-            "\1\u01c6",
-            "\1\u01bd\5\uffff\1\u01be",
-            "\1\u01b2",
-            "\1\u01c7",
-            "\1\u01c8",
-            "\1\u01c1\5\uffff\1\u01c2",
-            "\1\u01cb\13\uffff\1\u01c9\1\u01ca",
-            "\1\u01cc",
-            "\1\u01cd\5\uffff\1\u01ce",
-            "\1\u01cf",
-            "\1\u01ae",
-            "\1\u01b2",
-            "\1\u01d0",
-            "\1\u01d1\5\uffff\1\u01d2",
-            "\1\u01d3",
-            "\1\22\1\uffff\1\u00f2\1\u00f3\7\uffff\1\u0181\6\uffff\1\u00f5"+
-            "\1\u00f6",
-            "\1\u01cb\13\uffff\1\u01c9\1\u01ca",
-            "\1\u01cd\5\uffff\1\u01ce",
-            "\1\u01d6\13\uffff\1\u01d4\1\u01d5",
-            "\1\u01d7",
-            "\1\u01d8\1\u01d9",
-            "\1\u01d1\5\uffff\1\u01d2",
-            "\1\u01cb",
-            "\1\u01da",
-            "\1\u01db\5\uffff\1\u01dc",
-            "\1\u01dd",
-            "\1\22\1\uffff\1\u0197\1\u0198\7\uffff\1\u01de\6\uffff\1\u019a"+
-            "\1\u019b",
-            "\1\u01d6\13\uffff\1\u01d4\1\u01d5",
-            "\1\u01df\5\uffff\1\u01e0",
-            "\1\u01e1",
-            "\1\u01cb",
-            "\1\u01db\5\uffff\1\u01dc",
-            "\1\u01d6",
-            "\1\u01e2",
-            "\1\u01e3",
-            "\1\u01df\5\uffff\1\u01e0",
-            "\1\u01e6\13\uffff\1\u01e4\1\u01e5",
-            "\1\u01e7",
-            "\1\u01d6",
-            "\1\u01e8",
-            "\1\u01e9\5\uffff\1\u01ea",
-            "\1\u01eb",
-            "\1\22\1\uffff\1\u0149\1\u014a\7\uffff\1\u01c0\6\uffff\1\u014c"+
-            "\1\u014d",
-            "\1\u01e6\13\uffff\1\u01e4\1\u01e5",
-            "\1\u01ec\1\u01ed",
-            "\1\u01e9\5\uffff\1\u01ea",
-            "\1\u01e6",
-            "\1\u01ee",
-            "\1\u01ef\5\uffff\1\u01f0",
-            "\1\u01f1",
-            "\1\u01e6",
-            "\1\u01ef\5\uffff\1\u01f0",
-            "\1\u01f4\13\uffff\1\u01f2\1\u01f3",
-            "\1\u01f5",
-            "\1\u01f6\5\uffff\1\u01f7",
-            "\1\u01f8",
-            "\1\22\1\uffff\1\u0197\1\u0198\7\uffff\1\u01de\6\uffff\1\u019a"+
-            "\1\u019b",
-            "\1\u01f4\13\uffff\1\u01f2\1\u01f3",
-            "\1\u01f6\5\uffff\1\u01f7",
-            "\1\u01f4",
-            "\1\u01f9",
-            "\1\u01f4"
+            "",
+            ""
     };
 
     static final short[] DFA35_eot = DFA.unpackEncodedString(DFA35_eotS);
@@ -21334,70 +20750,40 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             this.transition = DFA35_transition;
         }
         public String getDescription() {
-            return "()* loopback of 4932:7: ( rule__Object2__FeaturesAssignment_5_4 )*";
+            return "()* loopback of 4932:7: ( ( rule__Object2__FeaturesAssignment_5_4 )=> rule__Object2__FeaturesAssignment_5_4 )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA35_12 = input.LA(1);
+                        int LA35_5 = input.LA(1);
 
                          
-                        int index35_12 = input.index();
+                        int index35_5 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred45_InternalBug304681TestLanguage()) ) {s = 19;}
+                        if ( (synpred45_InternalBug304681TestLanguage()) ) {s = 9;}
 
                         else if ( (true) ) {s = 1;}
 
                          
-                        input.seek(index35_12);
+                        input.seek(index35_5);
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA35_10 = input.LA(1);
+                        int LA35_6 = input.LA(1);
 
                          
-                        int index35_10 = input.index();
+                        int index35_6 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( (synpred45_InternalBug304681TestLanguage()) ) {s = 19;}
+                        if ( (synpred45_InternalBug304681TestLanguage()) ) {s = 9;}
 
                         else if ( (true) ) {s = 1;}
 
                          
-                        input.seek(index35_10);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA35_22 = input.LA(1);
-
-                         
-                        int index35_22 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred45_InternalBug304681TestLanguage()) ) {s = 19;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index35_22);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
-                        int LA35_18 = input.LA(1);
-
-                         
-                        int index35_18 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred45_InternalBug304681TestLanguage()) ) {s = 19;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index35_18);
+                        input.seek(index35_6);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -21474,7 +20860,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
             this.transition = DFA42_transition;
         }
         public String getDescription() {
-            return "()* loopback of 5095:7: ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )*";
+            return "()* loopback of 5095:7: ( ( rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )=> rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2 )*";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             TokenStream input = (TokenStream)_input;
@@ -21890,124 +21276,124 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         public static final BitSet FOLLOW_rule__Object__Group_5_2__0_in_rule__Object__UnorderedGroup_5__Impl9023 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Object__Group_5_3__0_in_rule__Object__UnorderedGroup_5__Impl9114 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Object__FeaturesAssignment_5_4_in_rule__Object__UnorderedGroup_5__Impl9206 = new BitSet(new long[]{0x000000000C000002L});
-        public static final BitSet FOLLOW_rule__Object__FeaturesAssignment_5_4_in_rule__Object__UnorderedGroup_5__Impl9246 = new BitSet(new long[]{0x000000000C000002L});
-        public static final BitSet FOLLOW_rule__Object__Group_5_5__0_in_rule__Object__UnorderedGroup_5__Impl9344 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object__Group_5_6__0_in_rule__Object__UnorderedGroup_5__Impl9435 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object__Group_5_7__0_in_rule__Object__UnorderedGroup_5__Impl9526 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__09585 = new BitSet(new long[]{0x000000020F780002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__1_in_rule__Object__UnorderedGroup_5__09588 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__19613 = new BitSet(new long[]{0x000000020F780002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__2_in_rule__Object__UnorderedGroup_5__19616 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__29641 = new BitSet(new long[]{0x000000020F780002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__3_in_rule__Object__UnorderedGroup_5__29644 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__39669 = new BitSet(new long[]{0x000000020F780002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__4_in_rule__Object__UnorderedGroup_5__39672 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__49697 = new BitSet(new long[]{0x000000020F780002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__5_in_rule__Object__UnorderedGroup_5__49700 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__59725 = new BitSet(new long[]{0x000000020F780002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__6_in_rule__Object__UnorderedGroup_5__59728 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__69753 = new BitSet(new long[]{0x000000020F780002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__7_in_rule__Object__UnorderedGroup_5__69756 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__79781 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference__UnorderedGroup_4_0_1__0_in_rule__Reference__UnorderedGroup_4_0_19821 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference__Group_4_0_1_0__0_in_rule__Reference__UnorderedGroup_4_0_1__Impl9908 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference__Group_4_0_1_1__0_in_rule__Reference__UnorderedGroup_4_0_1__Impl9999 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference__UnorderedGroup_4_0_1__Impl_in_rule__Reference__UnorderedGroup_4_0_1__010058 = new BitSet(new long[]{0x0000000000180002L});
-        public static final BitSet FOLLOW_rule__Reference__UnorderedGroup_4_0_1__1_in_rule__Reference__UnorderedGroup_4_0_1__010061 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference__UnorderedGroup_4_0_1__Impl_in_rule__Reference__UnorderedGroup_4_0_1__110086 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__0_in_rule__Object2__UnorderedGroup_510114 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object2__Group_5_0__0_in_rule__Object2__UnorderedGroup_5__Impl10201 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object2__Group_5_1__0_in_rule__Object2__UnorderedGroup_5__Impl10292 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object2__Group_5_2__0_in_rule__Object2__UnorderedGroup_5__Impl10383 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object2__Group_5_3__0_in_rule__Object2__UnorderedGroup_5__Impl10474 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object2__FeaturesAssignment_5_4_in_rule__Object2__UnorderedGroup_5__Impl10566 = new BitSet(new long[]{0x000000020C380002L});
-        public static final BitSet FOLLOW_rule__Object2__FeaturesAssignment_5_4_in_rule__Object2__UnorderedGroup_5__Impl10606 = new BitSet(new long[]{0x000000020C380002L});
-        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__Impl_in_rule__Object2__UnorderedGroup_5__010672 = new BitSet(new long[]{0x000000020C380002L});
-        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__1_in_rule__Object2__UnorderedGroup_5__010675 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__Impl_in_rule__Object2__UnorderedGroup_5__110700 = new BitSet(new long[]{0x000000020C380002L});
-        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__2_in_rule__Object2__UnorderedGroup_5__110703 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__Impl_in_rule__Object2__UnorderedGroup_5__210728 = new BitSet(new long[]{0x000000020C380002L});
-        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__3_in_rule__Object2__UnorderedGroup_5__210731 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__Impl_in_rule__Object2__UnorderedGroup_5__310756 = new BitSet(new long[]{0x000000020C380002L});
-        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__4_in_rule__Object2__UnorderedGroup_5__310759 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__Impl_in_rule__Object2__UnorderedGroup_5__410784 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__0_in_rule__Attribute2__UnorderedGroup_3_0_110818 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__Group_3_0_1_0__0_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl10905 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__Group_3_0_1_1__0_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl10996 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl11088 = new BitSet(new long[]{0x0000000010000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl11128 = new BitSet(new long[]{0x0000000010000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__Group_3_0_1_3__0_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl11226 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__Group_3_0_1_4__0_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl11317 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__Impl_in_rule__Attribute2__UnorderedGroup_3_0_1__011376 = new BitSet(new long[]{0x0000001810180002L});
-        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__1_in_rule__Attribute2__UnorderedGroup_3_0_1__011379 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__Impl_in_rule__Attribute2__UnorderedGroup_3_0_1__111404 = new BitSet(new long[]{0x0000001810180002L});
-        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__2_in_rule__Attribute2__UnorderedGroup_3_0_1__111407 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__Impl_in_rule__Attribute2__UnorderedGroup_3_0_1__211432 = new BitSet(new long[]{0x0000001810180002L});
-        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__3_in_rule__Attribute2__UnorderedGroup_3_0_1__211435 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__Impl_in_rule__Attribute2__UnorderedGroup_3_0_1__311460 = new BitSet(new long[]{0x0000001810180002L});
-        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__4_in_rule__Attribute2__UnorderedGroup_3_0_1__311463 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__Impl_in_rule__Attribute2__UnorderedGroup_3_0_1__411488 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__0_in_rule__Reference2__UnorderedGroup_4_0_111522 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference2__Group_4_0_1_0__0_in_rule__Reference2__UnorderedGroup_4_0_1__Impl11609 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference2__Group_4_0_1_1__0_in_rule__Reference2__UnorderedGroup_4_0_1__Impl11700 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__Impl_in_rule__Reference2__UnorderedGroup_4_0_1__011759 = new BitSet(new long[]{0x0000000000180002L});
-        public static final BitSet FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__1_in_rule__Reference2__UnorderedGroup_4_0_1__011762 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__Impl_in_rule__Reference2__UnorderedGroup_4_0_1__111787 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ConstraintDefinition__UnorderedGroup_3__0_in_rule__ConstraintDefinition__UnorderedGroup_311815 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ConstraintDefinition__Group_3_0__0_in_rule__ConstraintDefinition__UnorderedGroup_3__Impl11904 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ConstraintDefinition__Group_3_1__0_in_rule__ConstraintDefinition__UnorderedGroup_3__Impl11995 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ConstraintDefinition__UnorderedGroup_3__Impl_in_rule__ConstraintDefinition__UnorderedGroup_3__012054 = new BitSet(new long[]{0x0000000060000002L});
-        public static final BitSet FOLLOW_rule__ConstraintDefinition__UnorderedGroup_3__1_in_rule__ConstraintDefinition__UnorderedGroup_3__012057 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ConstraintDefinition__UnorderedGroup_3__Impl_in_rule__ConstraintDefinition__UnorderedGroup_3__112082 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePackageDefinition_in_rule__Model__DefinitionAssignment_0_112114 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePackageDefinition2_in_rule__Model__DefinitionAssignment_1_112145 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__PackageDefinition__NamespaceAssignment_212176 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleObject_in_rule__PackageDefinition__ContentsAssignment_412207 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_31_in_rule__Object__EnabledAssignment_0_012243 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_32_in_rule__Object__AbstractAssignment_0_112287 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Object__NameAssignment_212326 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Object__ParentAssignment_3_112361 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__Object__ShortDescriptionAssignment_5_0_112396 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__Object__LongDescriptionAssignment_5_1_112427 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_rule__Object__SerialVersionUIDAssignment_5_2_112458 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_33_in_rule__Object__CloneableAssignment_5_3_012494 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFeature_in_rule__Object__FeaturesAssignment_5_412533 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFeature_in_rule__Object__FeaturesAssignment_5_5_112564 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFeature_in_rule__Object__FeaturesAssignment_5_6_112595 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFeature_in_rule__Object__FeaturesAssignment_5_7_112626 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Attribute__TypeAssignment_112657 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Attribute__NameAssignment_212688 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Reference__TypeAssignment_112723 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_34_in_rule__Reference__ManyAssignment_212763 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Reference__NameAssignment_312802 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__Reference__ShortDescriptionAssignment_4_0_1_0_112833 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__Reference__LongDescriptionAssignment_4_0_1_1_112864 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__PackageDefinition2__NamespaceAssignment_212895 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleObject2_in_rule__PackageDefinition2__ContentsAssignment_412926 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_31_in_rule__Object2__EnabledAssignment_0_012962 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_32_in_rule__Object2__AbstractAssignment_0_113006 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Object2__NameAssignment_213045 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Object2__ParentAssignment_3_113080 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__Object2__ShortDescriptionAssignment_5_0_113115 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__Object2__LongDescriptionAssignment_5_1_113146 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_rule__Object2__SerialVersionUIDAssignment_5_2_113177 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_33_in_rule__Object2__CloneableAssignment_5_3_013213 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFeature2_in_rule__Object2__FeaturesAssignment_5_413252 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Attribute2__TypeAssignment_113283 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Attribute2__NameAssignment_213314 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_113345 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__Attribute2__LongDescriptionAssignment_3_0_1_1_113376 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleConstraintDefinition_in_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_213407 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_35_in_rule__Attribute2__RequiredAssignment_3_0_1_3_013443 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_36_in_rule__Attribute2__TechnicalAssignment_3_0_1_4_013487 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Reference2__TypeAssignment_113530 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_34_in_rule__Reference2__ManyAssignment_213570 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Reference2__NameAssignment_313609 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__Reference2__ShortDescriptionAssignment_4_0_1_0_113640 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__Reference2__LongDescriptionAssignment_4_0_1_1_113671 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__ConstraintDefinition__TypeAssignment_113702 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__ConstraintDefinition__ParametersAssignment_3_0_113733 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__ConstraintDefinition__MessageAssignment_3_1_113764 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object__FeaturesAssignment_5_4_in_rule__Object__UnorderedGroup_5__Impl9250 = new BitSet(new long[]{0x000000000C000002L});
+        public static final BitSet FOLLOW_rule__Object__Group_5_5__0_in_rule__Object__UnorderedGroup_5__Impl9348 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object__Group_5_6__0_in_rule__Object__UnorderedGroup_5__Impl9439 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object__Group_5_7__0_in_rule__Object__UnorderedGroup_5__Impl9530 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__09589 = new BitSet(new long[]{0x000000020F780002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__1_in_rule__Object__UnorderedGroup_5__09592 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__19617 = new BitSet(new long[]{0x000000020F780002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__2_in_rule__Object__UnorderedGroup_5__19620 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__29645 = new BitSet(new long[]{0x000000020F780002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__3_in_rule__Object__UnorderedGroup_5__29648 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__39673 = new BitSet(new long[]{0x000000020F780002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__4_in_rule__Object__UnorderedGroup_5__39676 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__49701 = new BitSet(new long[]{0x000000020F780002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__5_in_rule__Object__UnorderedGroup_5__49704 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__59729 = new BitSet(new long[]{0x000000020F780002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__6_in_rule__Object__UnorderedGroup_5__59732 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__69757 = new BitSet(new long[]{0x000000020F780002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__7_in_rule__Object__UnorderedGroup_5__69760 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__Impl_in_rule__Object__UnorderedGroup_5__79785 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Reference__UnorderedGroup_4_0_1__0_in_rule__Reference__UnorderedGroup_4_0_19825 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Reference__Group_4_0_1_0__0_in_rule__Reference__UnorderedGroup_4_0_1__Impl9912 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Reference__Group_4_0_1_1__0_in_rule__Reference__UnorderedGroup_4_0_1__Impl10003 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Reference__UnorderedGroup_4_0_1__Impl_in_rule__Reference__UnorderedGroup_4_0_1__010062 = new BitSet(new long[]{0x0000000000180002L});
+        public static final BitSet FOLLOW_rule__Reference__UnorderedGroup_4_0_1__1_in_rule__Reference__UnorderedGroup_4_0_1__010065 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Reference__UnorderedGroup_4_0_1__Impl_in_rule__Reference__UnorderedGroup_4_0_1__110090 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__0_in_rule__Object2__UnorderedGroup_510118 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object2__Group_5_0__0_in_rule__Object2__UnorderedGroup_5__Impl10205 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object2__Group_5_1__0_in_rule__Object2__UnorderedGroup_5__Impl10296 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object2__Group_5_2__0_in_rule__Object2__UnorderedGroup_5__Impl10387 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object2__Group_5_3__0_in_rule__Object2__UnorderedGroup_5__Impl10478 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object2__FeaturesAssignment_5_4_in_rule__Object2__UnorderedGroup_5__Impl10570 = new BitSet(new long[]{0x000000020C380002L});
+        public static final BitSet FOLLOW_rule__Object2__FeaturesAssignment_5_4_in_rule__Object2__UnorderedGroup_5__Impl10614 = new BitSet(new long[]{0x000000020C380002L});
+        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__Impl_in_rule__Object2__UnorderedGroup_5__010680 = new BitSet(new long[]{0x000000020C380002L});
+        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__1_in_rule__Object2__UnorderedGroup_5__010683 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__Impl_in_rule__Object2__UnorderedGroup_5__110708 = new BitSet(new long[]{0x000000020C380002L});
+        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__2_in_rule__Object2__UnorderedGroup_5__110711 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__Impl_in_rule__Object2__UnorderedGroup_5__210736 = new BitSet(new long[]{0x000000020C380002L});
+        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__3_in_rule__Object2__UnorderedGroup_5__210739 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__Impl_in_rule__Object2__UnorderedGroup_5__310764 = new BitSet(new long[]{0x000000020C380002L});
+        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__4_in_rule__Object2__UnorderedGroup_5__310767 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__Impl_in_rule__Object2__UnorderedGroup_5__410792 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__0_in_rule__Attribute2__UnorderedGroup_3_0_110826 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__Group_3_0_1_0__0_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl10913 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__Group_3_0_1_1__0_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl11004 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl11096 = new BitSet(new long[]{0x0000000010000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl11140 = new BitSet(new long[]{0x0000000010000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__Group_3_0_1_3__0_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl11238 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__Group_3_0_1_4__0_in_rule__Attribute2__UnorderedGroup_3_0_1__Impl11329 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__Impl_in_rule__Attribute2__UnorderedGroup_3_0_1__011388 = new BitSet(new long[]{0x0000001810180002L});
+        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__1_in_rule__Attribute2__UnorderedGroup_3_0_1__011391 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__Impl_in_rule__Attribute2__UnorderedGroup_3_0_1__111416 = new BitSet(new long[]{0x0000001810180002L});
+        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__2_in_rule__Attribute2__UnorderedGroup_3_0_1__111419 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__Impl_in_rule__Attribute2__UnorderedGroup_3_0_1__211444 = new BitSet(new long[]{0x0000001810180002L});
+        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__3_in_rule__Attribute2__UnorderedGroup_3_0_1__211447 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__Impl_in_rule__Attribute2__UnorderedGroup_3_0_1__311472 = new BitSet(new long[]{0x0000001810180002L});
+        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__4_in_rule__Attribute2__UnorderedGroup_3_0_1__311475 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__Impl_in_rule__Attribute2__UnorderedGroup_3_0_1__411500 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__0_in_rule__Reference2__UnorderedGroup_4_0_111534 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Reference2__Group_4_0_1_0__0_in_rule__Reference2__UnorderedGroup_4_0_1__Impl11621 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Reference2__Group_4_0_1_1__0_in_rule__Reference2__UnorderedGroup_4_0_1__Impl11712 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__Impl_in_rule__Reference2__UnorderedGroup_4_0_1__011771 = new BitSet(new long[]{0x0000000000180002L});
+        public static final BitSet FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__1_in_rule__Reference2__UnorderedGroup_4_0_1__011774 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__Impl_in_rule__Reference2__UnorderedGroup_4_0_1__111799 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ConstraintDefinition__UnorderedGroup_3__0_in_rule__ConstraintDefinition__UnorderedGroup_311827 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ConstraintDefinition__Group_3_0__0_in_rule__ConstraintDefinition__UnorderedGroup_3__Impl11916 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ConstraintDefinition__Group_3_1__0_in_rule__ConstraintDefinition__UnorderedGroup_3__Impl12007 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ConstraintDefinition__UnorderedGroup_3__Impl_in_rule__ConstraintDefinition__UnorderedGroup_3__012066 = new BitSet(new long[]{0x0000000060000002L});
+        public static final BitSet FOLLOW_rule__ConstraintDefinition__UnorderedGroup_3__1_in_rule__ConstraintDefinition__UnorderedGroup_3__012069 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ConstraintDefinition__UnorderedGroup_3__Impl_in_rule__ConstraintDefinition__UnorderedGroup_3__112094 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePackageDefinition_in_rule__Model__DefinitionAssignment_0_112126 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePackageDefinition2_in_rule__Model__DefinitionAssignment_1_112157 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__PackageDefinition__NamespaceAssignment_212188 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleObject_in_rule__PackageDefinition__ContentsAssignment_412219 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_31_in_rule__Object__EnabledAssignment_0_012255 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_32_in_rule__Object__AbstractAssignment_0_112299 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Object__NameAssignment_212338 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Object__ParentAssignment_3_112373 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__Object__ShortDescriptionAssignment_5_0_112408 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__Object__LongDescriptionAssignment_5_1_112439 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_rule__Object__SerialVersionUIDAssignment_5_2_112470 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_33_in_rule__Object__CloneableAssignment_5_3_012506 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFeature_in_rule__Object__FeaturesAssignment_5_412545 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFeature_in_rule__Object__FeaturesAssignment_5_5_112576 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFeature_in_rule__Object__FeaturesAssignment_5_6_112607 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFeature_in_rule__Object__FeaturesAssignment_5_7_112638 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Attribute__TypeAssignment_112669 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Attribute__NameAssignment_212700 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Reference__TypeAssignment_112735 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_34_in_rule__Reference__ManyAssignment_212775 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Reference__NameAssignment_312814 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__Reference__ShortDescriptionAssignment_4_0_1_0_112845 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__Reference__LongDescriptionAssignment_4_0_1_1_112876 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__PackageDefinition2__NamespaceAssignment_212907 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleObject2_in_rule__PackageDefinition2__ContentsAssignment_412938 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_31_in_rule__Object2__EnabledAssignment_0_012974 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_32_in_rule__Object2__AbstractAssignment_0_113018 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Object2__NameAssignment_213057 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Object2__ParentAssignment_3_113092 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__Object2__ShortDescriptionAssignment_5_0_113127 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__Object2__LongDescriptionAssignment_5_1_113158 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_rule__Object2__SerialVersionUIDAssignment_5_2_113189 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_33_in_rule__Object2__CloneableAssignment_5_3_013225 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFeature2_in_rule__Object2__FeaturesAssignment_5_413264 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Attribute2__TypeAssignment_113295 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Attribute2__NameAssignment_213326 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_113357 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__Attribute2__LongDescriptionAssignment_3_0_1_1_113388 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleConstraintDefinition_in_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_213419 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_35_in_rule__Attribute2__RequiredAssignment_3_0_1_3_013455 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_36_in_rule__Attribute2__TechnicalAssignment_3_0_1_4_013499 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Reference2__TypeAssignment_113542 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_34_in_rule__Reference2__ManyAssignment_213582 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Reference2__NameAssignment_313621 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__Reference2__ShortDescriptionAssignment_4_0_1_0_113652 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__Reference2__LongDescriptionAssignment_4_0_1_1_113683 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__ConstraintDefinition__TypeAssignment_113714 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__ConstraintDefinition__ParametersAssignment_3_0_113745 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__ConstraintDefinition__MessageAssignment_3_1_113776 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Object__FeaturesAssignment_5_6_1_in_synpred13_InternalBug304681TestLanguage3286 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Object__FeaturesAssignment_5_7_1_in_synpred14_InternalBug304681TestLanguage3424 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__0_in_synpred21_InternalBug304681TestLanguage8754 = new BitSet(new long[]{0x0000000000000002L});
@@ -22015,47 +21401,47 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalContent
         public static final BitSet FOLLOW_rule__Object__Group_5_1__0_in_synpred23_InternalBug304681TestLanguage8932 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Object__Group_5_2__0_in_synpred24_InternalBug304681TestLanguage9023 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Object__Group_5_3__0_in_synpred25_InternalBug304681TestLanguage9114 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object__FeaturesAssignment_5_4_in_synpred26_InternalBug304681TestLanguage9246 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object__FeaturesAssignment_5_4_in_synpred26_InternalBug304681TestLanguage9247 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Object__FeaturesAssignment_5_4_in_synpred27_InternalBug304681TestLanguage9206 = new BitSet(new long[]{0x000000000C000002L});
-        public static final BitSet FOLLOW_rule__Object__FeaturesAssignment_5_4_in_synpred27_InternalBug304681TestLanguage9246 = new BitSet(new long[]{0x000000000C000002L});
-        public static final BitSet FOLLOW_rule__Object__Group_5_5__0_in_synpred28_InternalBug304681TestLanguage9344 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object__Group_5_6__0_in_synpred29_InternalBug304681TestLanguage9435 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__1_in_synpred30_InternalBug304681TestLanguage9588 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__2_in_synpred31_InternalBug304681TestLanguage9616 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__3_in_synpred32_InternalBug304681TestLanguage9644 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__4_in_synpred33_InternalBug304681TestLanguage9672 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__5_in_synpred34_InternalBug304681TestLanguage9700 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__6_in_synpred35_InternalBug304681TestLanguage9728 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__7_in_synpred36_InternalBug304681TestLanguage9756 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference__UnorderedGroup_4_0_1__0_in_synpred37_InternalBug304681TestLanguage9821 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference__Group_4_0_1_0__0_in_synpred38_InternalBug304681TestLanguage9908 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference__UnorderedGroup_4_0_1__1_in_synpred39_InternalBug304681TestLanguage10061 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__0_in_synpred40_InternalBug304681TestLanguage10114 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object2__Group_5_0__0_in_synpred41_InternalBug304681TestLanguage10201 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object2__Group_5_1__0_in_synpred42_InternalBug304681TestLanguage10292 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object2__Group_5_2__0_in_synpred43_InternalBug304681TestLanguage10383 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object2__Group_5_3__0_in_synpred44_InternalBug304681TestLanguage10474 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object2__FeaturesAssignment_5_4_in_synpred45_InternalBug304681TestLanguage10606 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__1_in_synpred46_InternalBug304681TestLanguage10675 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__2_in_synpred47_InternalBug304681TestLanguage10703 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__3_in_synpred48_InternalBug304681TestLanguage10731 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__4_in_synpred49_InternalBug304681TestLanguage10759 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__0_in_synpred50_InternalBug304681TestLanguage10818 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__Group_3_0_1_0__0_in_synpred51_InternalBug304681TestLanguage10905 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__Group_3_0_1_1__0_in_synpred52_InternalBug304681TestLanguage10996 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2_in_synpred53_InternalBug304681TestLanguage11128 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2_in_synpred54_InternalBug304681TestLanguage11088 = new BitSet(new long[]{0x0000000010000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2_in_synpred54_InternalBug304681TestLanguage11128 = new BitSet(new long[]{0x0000000010000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__Group_3_0_1_3__0_in_synpred55_InternalBug304681TestLanguage11226 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__1_in_synpred56_InternalBug304681TestLanguage11379 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__2_in_synpred57_InternalBug304681TestLanguage11407 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__3_in_synpred58_InternalBug304681TestLanguage11435 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__4_in_synpred59_InternalBug304681TestLanguage11463 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__0_in_synpred60_InternalBug304681TestLanguage11522 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference2__Group_4_0_1_0__0_in_synpred61_InternalBug304681TestLanguage11609 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__1_in_synpred62_InternalBug304681TestLanguage11762 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ConstraintDefinition__Group_3_0__0_in_synpred63_InternalBug304681TestLanguage11904 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ConstraintDefinition__UnorderedGroup_3__1_in_synpred64_InternalBug304681TestLanguage12057 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object__FeaturesAssignment_5_4_in_synpred27_InternalBug304681TestLanguage9250 = new BitSet(new long[]{0x000000000C000002L});
+        public static final BitSet FOLLOW_rule__Object__Group_5_5__0_in_synpred28_InternalBug304681TestLanguage9348 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object__Group_5_6__0_in_synpred29_InternalBug304681TestLanguage9439 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__1_in_synpred30_InternalBug304681TestLanguage9592 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__2_in_synpred31_InternalBug304681TestLanguage9620 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__3_in_synpred32_InternalBug304681TestLanguage9648 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__4_in_synpred33_InternalBug304681TestLanguage9676 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__5_in_synpred34_InternalBug304681TestLanguage9704 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__6_in_synpred35_InternalBug304681TestLanguage9732 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object__UnorderedGroup_5__7_in_synpred36_InternalBug304681TestLanguage9760 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Reference__UnorderedGroup_4_0_1__0_in_synpred37_InternalBug304681TestLanguage9825 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Reference__Group_4_0_1_0__0_in_synpred38_InternalBug304681TestLanguage9912 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Reference__UnorderedGroup_4_0_1__1_in_synpred39_InternalBug304681TestLanguage10065 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__0_in_synpred40_InternalBug304681TestLanguage10118 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object2__Group_5_0__0_in_synpred41_InternalBug304681TestLanguage10205 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object2__Group_5_1__0_in_synpred42_InternalBug304681TestLanguage10296 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object2__Group_5_2__0_in_synpred43_InternalBug304681TestLanguage10387 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object2__Group_5_3__0_in_synpred44_InternalBug304681TestLanguage10478 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object2__FeaturesAssignment_5_4_in_synpred45_InternalBug304681TestLanguage10611 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__1_in_synpred46_InternalBug304681TestLanguage10683 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__2_in_synpred47_InternalBug304681TestLanguage10711 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__3_in_synpred48_InternalBug304681TestLanguage10739 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Object2__UnorderedGroup_5__4_in_synpred49_InternalBug304681TestLanguage10767 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__0_in_synpred50_InternalBug304681TestLanguage10826 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__Group_3_0_1_0__0_in_synpred51_InternalBug304681TestLanguage10913 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__Group_3_0_1_1__0_in_synpred52_InternalBug304681TestLanguage11004 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2_in_synpred53_InternalBug304681TestLanguage11137 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2_in_synpred54_InternalBug304681TestLanguage11096 = new BitSet(new long[]{0x0000000010000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2_in_synpred54_InternalBug304681TestLanguage11140 = new BitSet(new long[]{0x0000000010000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__Group_3_0_1_3__0_in_synpred55_InternalBug304681TestLanguage11238 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__1_in_synpred56_InternalBug304681TestLanguage11391 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__2_in_synpred57_InternalBug304681TestLanguage11419 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__3_in_synpred58_InternalBug304681TestLanguage11447 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute2__UnorderedGroup_3_0_1__4_in_synpred59_InternalBug304681TestLanguage11475 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__0_in_synpred60_InternalBug304681TestLanguage11534 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Reference2__Group_4_0_1_0__0_in_synpred61_InternalBug304681TestLanguage11621 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Reference2__UnorderedGroup_4_0_1__1_in_synpred62_InternalBug304681TestLanguage11774 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ConstraintDefinition__Group_3_0__0_in_synpred63_InternalBug304681TestLanguage11916 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ConstraintDefinition__UnorderedGroup_3__1_in_synpred64_InternalBug304681TestLanguage12069 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

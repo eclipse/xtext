@@ -68,7 +68,7 @@ import «gaFQName()»;
  	
  	{
 «FOREACH allParserRules().select(e|isCalled(this,e)).union(allEnumRules().select(e|isCalled(this,e))).allContents().typeSelect(Keyword).collect(e|e.value).toSet().sortBy(e|e).sortBy(e|e.length) AS kw-»
-		tokenNameToValue.put("«this.getKeywordRuleName(kw)»", "'«kw.toJavaStringImpl().replaceAll("\\$", "\\\\u0024")»'");
+		tokenNameToValue.put("«this.getKeywordRuleName(kw)»", "'«kw.toJavaStringImpl().replaceAll("\\\\\\$", "\\\\u0024")»'");
 «ENDFOREACH-»
  	}
  	
@@ -229,7 +229,7 @@ rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»__Impl
 					)
 					(
 						{ before(grammarAccess.«element.grammarElementAccess()»); }
-						(«EXPAND ebnf2 FOR element»)*
+						((«EXPAND ebnf2 FOR element»)=>«EXPAND ebnf2 FOR element»)*
 						{ after(grammarAccess.«element.grammarElementAccess()»); }
 					)«ENDIF-»
 					)

@@ -5,7 +5,6 @@ grammar InternalUnorderedGroupsTestLanguage;
 
 options {
 	superClass=AbstractInternalContentAssistParser;
-	backtrack=true;
 	
 }
 
@@ -3005,7 +3004,7 @@ rule__LoopedModel__UnorderedGroup_0__Impl
 					)
 					(
 						{ before(grammarAccess.getLoopedModelAccess().getVisibilityAssignment_0_0()); }
-						(rule__LoopedModel__VisibilityAssignment_0_0)*
+						((rule__LoopedModel__VisibilityAssignment_0_0)=>rule__LoopedModel__VisibilityAssignment_0_0)*
 						{ after(grammarAccess.getLoopedModelAccess().getVisibilityAssignment_0_0()); }
 					)					)
  				)
@@ -3027,7 +3026,7 @@ rule__LoopedModel__UnorderedGroup_0__Impl
 					)
 					(
 						{ before(grammarAccess.getLoopedModelAccess().getStaticAssignment_0_1()); }
-						(rule__LoopedModel__StaticAssignment_0_1)*
+						((rule__LoopedModel__StaticAssignment_0_1)=>rule__LoopedModel__StaticAssignment_0_1)*
 						{ after(grammarAccess.getLoopedModelAccess().getStaticAssignment_0_1()); }
 					)					)
  				)
@@ -3049,7 +3048,7 @@ rule__LoopedModel__UnorderedGroup_0__Impl
 					)
 					(
 						{ before(grammarAccess.getLoopedModelAccess().getSynchronizedAssignment_0_2()); }
-						(rule__LoopedModel__SynchronizedAssignment_0_2)*
+						((rule__LoopedModel__SynchronizedAssignment_0_2)=>rule__LoopedModel__SynchronizedAssignment_0_2)*
 						{ after(grammarAccess.getLoopedModelAccess().getSynchronizedAssignment_0_2()); }
 					)					)
  				)
@@ -3071,7 +3070,7 @@ rule__LoopedModel__UnorderedGroup_0__Impl
 					)
 					(
 						{ before(grammarAccess.getLoopedModelAccess().getAlternatives_0_3()); }
-						(rule__LoopedModel__Alternatives_0_3)*
+						((rule__LoopedModel__Alternatives_0_3)=>rule__LoopedModel__Alternatives_0_3)*
 						{ after(grammarAccess.getLoopedModelAccess().getAlternatives_0_3()); }
 					)					)
  				)
@@ -3414,7 +3413,7 @@ rule__Bug304681Model__UnorderedGroup_2__Impl
 					)
 					(
 						{ before(grammarAccess.getBug304681ModelAccess().getFeaturesAssignment_2_4()); }
-						(rule__Bug304681Model__FeaturesAssignment_2_4)*
+						((rule__Bug304681Model__FeaturesAssignment_2_4)=>rule__Bug304681Model__FeaturesAssignment_2_4)*
 						{ after(grammarAccess.getBug304681ModelAccess().getFeaturesAssignment_2_4()); }
 					)					)
  				)

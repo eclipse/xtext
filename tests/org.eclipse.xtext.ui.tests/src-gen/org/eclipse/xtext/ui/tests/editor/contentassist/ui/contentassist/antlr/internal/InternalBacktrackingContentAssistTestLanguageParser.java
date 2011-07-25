@@ -33611,7 +33611,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__Group__1_in_rule__SquareBracketExp__Group__023121);
+            pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__Group__1_in_rule__SquareBracketExp__Group__023121);
             rule__SquareBracketExp__Group__1();
 
             state._fsp--;
@@ -33653,7 +33653,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11412:1: ( rule__SquareBracketExp__NameAssignment_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11412:2: rule__SquareBracketExp__NameAssignment_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__NameAssignment_0_in_rule__SquareBracketExp__Group__0__Impl23148);
+            pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__NameAssignment_0_in_rule__SquareBracketExp__Group__0__Impl23148);
             rule__SquareBracketExp__NameAssignment_0();
 
             state._fsp--;
@@ -33695,12 +33695,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11426:1: ( rule__SquareBracketExp__Group__1__Impl rule__SquareBracketExp__Group__2 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11427:2: rule__SquareBracketExp__Group__1__Impl rule__SquareBracketExp__Group__2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__Group__1__Impl_in_rule__SquareBracketExp__Group__123178);
+            pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__Group__1__Impl_in_rule__SquareBracketExp__Group__123178);
             rule__SquareBracketExp__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__Group__2_in_rule__SquareBracketExp__Group__123181);
+            pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__Group__2_in_rule__SquareBracketExp__Group__123181);
             rule__SquareBracketExp__Group__2();
 
             state._fsp--;
@@ -33739,7 +33739,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSquareBracketExpAccess().getLeftSquareBracketKeyword_1()); 
             }
-            match(input,67,FollowSets000.FOLLOW_67_in_rule__SquareBracketExp__Group__1__Impl23209); if (state.failed) return ;
+            match(input,67,FollowSets001.FOLLOW_67_in_rule__SquareBracketExp__Group__1__Impl23209); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSquareBracketExpAccess().getLeftSquareBracketKeyword_1()); 
             }
@@ -33774,12 +33774,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11457:1: ( rule__SquareBracketExp__Group__2__Impl rule__SquareBracketExp__Group__3 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11458:2: rule__SquareBracketExp__Group__2__Impl rule__SquareBracketExp__Group__3
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__Group__2__Impl_in_rule__SquareBracketExp__Group__223240);
+            pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__Group__2__Impl_in_rule__SquareBracketExp__Group__223240);
             rule__SquareBracketExp__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__Group__3_in_rule__SquareBracketExp__Group__223243);
+            pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__Group__3_in_rule__SquareBracketExp__Group__223243);
             rule__SquareBracketExp__Group__3();
 
             state._fsp--;
@@ -33821,7 +33821,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11472:1: ( rule__SquareBracketExp__ArgumentsAssignment_2 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11472:2: rule__SquareBracketExp__ArgumentsAssignment_2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__ArgumentsAssignment_2_in_rule__SquareBracketExp__Group__2__Impl23270);
+            pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__ArgumentsAssignment_2_in_rule__SquareBracketExp__Group__2__Impl23270);
             rule__SquareBracketExp__ArgumentsAssignment_2();
 
             state._fsp--;
@@ -33863,12 +33863,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11486:1: ( rule__SquareBracketExp__Group__3__Impl rule__SquareBracketExp__Group__4 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11487:2: rule__SquareBracketExp__Group__3__Impl rule__SquareBracketExp__Group__4
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__Group__3__Impl_in_rule__SquareBracketExp__Group__323300);
+            pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__Group__3__Impl_in_rule__SquareBracketExp__Group__323300);
             rule__SquareBracketExp__Group__3__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__Group__4_in_rule__SquareBracketExp__Group__323303);
+            pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__Group__4_in_rule__SquareBracketExp__Group__323303);
             rule__SquareBracketExp__Group__4();
 
             state._fsp--;
@@ -33922,7 +33922,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	case 1 :
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11501:2: rule__SquareBracketExp__Group_3__0
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__Group_3__0_in_rule__SquareBracketExp__Group__3__Impl23330);
+            	    pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__Group_3__0_in_rule__SquareBracketExp__Group__3__Impl23330);
             	    rule__SquareBracketExp__Group_3__0();
 
             	    state._fsp--;
@@ -33970,12 +33970,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11515:1: ( rule__SquareBracketExp__Group__4__Impl rule__SquareBracketExp__Group__5 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11516:2: rule__SquareBracketExp__Group__4__Impl rule__SquareBracketExp__Group__5
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__Group__4__Impl_in_rule__SquareBracketExp__Group__423361);
+            pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__Group__4__Impl_in_rule__SquareBracketExp__Group__423361);
             rule__SquareBracketExp__Group__4__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__Group__5_in_rule__SquareBracketExp__Group__423364);
+            pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__Group__5_in_rule__SquareBracketExp__Group__423364);
             rule__SquareBracketExp__Group__5();
 
             state._fsp--;
@@ -34014,7 +34014,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSquareBracketExpAccess().getRightSquareBracketKeyword_4()); 
             }
-            match(input,68,FollowSets000.FOLLOW_68_in_rule__SquareBracketExp__Group__4__Impl23392); if (state.failed) return ;
+            match(input,68,FollowSets001.FOLLOW_68_in_rule__SquareBracketExp__Group__4__Impl23392); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSquareBracketExpAccess().getRightSquareBracketKeyword_4()); 
             }
@@ -34049,7 +34049,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11546:1: ( rule__SquareBracketExp__Group__5__Impl )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11547:2: rule__SquareBracketExp__Group__5__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__Group__5__Impl_in_rule__SquareBracketExp__Group__523423);
+            pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__Group__5__Impl_in_rule__SquareBracketExp__Group__523423);
             rule__SquareBracketExp__Group__5__Impl();
 
             state._fsp--;
@@ -34099,7 +34099,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11560:2: rule__SquareBracketExp__Group_5__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__Group_5__0_in_rule__SquareBracketExp__Group__5__Impl23450);
+                    pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__Group_5__0_in_rule__SquareBracketExp__Group__5__Impl23450);
                     rule__SquareBracketExp__Group_5__0();
 
                     state._fsp--;
@@ -34144,12 +34144,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11586:1: ( rule__SquareBracketExp__Group_3__0__Impl rule__SquareBracketExp__Group_3__1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11587:2: rule__SquareBracketExp__Group_3__0__Impl rule__SquareBracketExp__Group_3__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__Group_3__0__Impl_in_rule__SquareBracketExp__Group_3__023493);
+            pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__Group_3__0__Impl_in_rule__SquareBracketExp__Group_3__023493);
             rule__SquareBracketExp__Group_3__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__Group_3__1_in_rule__SquareBracketExp__Group_3__023496);
+            pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__Group_3__1_in_rule__SquareBracketExp__Group_3__023496);
             rule__SquareBracketExp__Group_3__1();
 
             state._fsp--;
@@ -34188,7 +34188,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSquareBracketExpAccess().getCommaKeyword_3_0()); 
             }
-            match(input,48,FollowSets000.FOLLOW_48_in_rule__SquareBracketExp__Group_3__0__Impl23524); if (state.failed) return ;
+            match(input,48,FollowSets001.FOLLOW_48_in_rule__SquareBracketExp__Group_3__0__Impl23524); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSquareBracketExpAccess().getCommaKeyword_3_0()); 
             }
@@ -34223,7 +34223,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11617:1: ( rule__SquareBracketExp__Group_3__1__Impl )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11618:2: rule__SquareBracketExp__Group_3__1__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__Group_3__1__Impl_in_rule__SquareBracketExp__Group_3__123555);
+            pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__Group_3__1__Impl_in_rule__SquareBracketExp__Group_3__123555);
             rule__SquareBracketExp__Group_3__1__Impl();
 
             state._fsp--;
@@ -34265,7 +34265,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11631:1: ( rule__SquareBracketExp__ArgumentsAssignment_3_1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11631:2: rule__SquareBracketExp__ArgumentsAssignment_3_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__ArgumentsAssignment_3_1_in_rule__SquareBracketExp__Group_3__1__Impl23582);
+            pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__ArgumentsAssignment_3_1_in_rule__SquareBracketExp__Group_3__1__Impl23582);
             rule__SquareBracketExp__ArgumentsAssignment_3_1();
 
             state._fsp--;
@@ -34307,12 +34307,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11649:1: ( rule__SquareBracketExp__Group_5__0__Impl rule__SquareBracketExp__Group_5__1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11650:2: rule__SquareBracketExp__Group_5__0__Impl rule__SquareBracketExp__Group_5__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__Group_5__0__Impl_in_rule__SquareBracketExp__Group_5__023616);
+            pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__Group_5__0__Impl_in_rule__SquareBracketExp__Group_5__023616);
             rule__SquareBracketExp__Group_5__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__Group_5__1_in_rule__SquareBracketExp__Group_5__023619);
+            pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__Group_5__1_in_rule__SquareBracketExp__Group_5__023619);
             rule__SquareBracketExp__Group_5__1();
 
             state._fsp--;
@@ -34351,7 +34351,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSquareBracketExpAccess().getCommercialAtKeyword_5_0()); 
             }
-            match(input,64,FollowSets000.FOLLOW_64_in_rule__SquareBracketExp__Group_5__0__Impl23647); if (state.failed) return ;
+            match(input,64,FollowSets001.FOLLOW_64_in_rule__SquareBracketExp__Group_5__0__Impl23647); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSquareBracketExpAccess().getCommercialAtKeyword_5_0()); 
             }
@@ -34386,7 +34386,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11680:1: ( rule__SquareBracketExp__Group_5__1__Impl )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11681:2: rule__SquareBracketExp__Group_5__1__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__Group_5__1__Impl_in_rule__SquareBracketExp__Group_5__123678);
+            pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__Group_5__1__Impl_in_rule__SquareBracketExp__Group_5__123678);
             rule__SquareBracketExp__Group_5__1__Impl();
 
             state._fsp--;
@@ -34428,7 +34428,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11694:1: ( rule__SquareBracketExp__PreAssignment_5_1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11694:2: rule__SquareBracketExp__PreAssignment_5_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SquareBracketExp__PreAssignment_5_1_in_rule__SquareBracketExp__Group_5__1__Impl23705);
+            pushFollow(FollowSets001.FOLLOW_rule__SquareBracketExp__PreAssignment_5_1_in_rule__SquareBracketExp__Group_5__1__Impl23705);
             rule__SquareBracketExp__PreAssignment_5_1();
 
             state._fsp--;
@@ -34470,12 +34470,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11712:1: ( rule__PreExp__Group__0__Impl rule__PreExp__Group__1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11713:2: rule__PreExp__Group__0__Impl rule__PreExp__Group__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__PreExp__Group__0__Impl_in_rule__PreExp__Group__023739);
+            pushFollow(FollowSets001.FOLLOW_rule__PreExp__Group__0__Impl_in_rule__PreExp__Group__023739);
             rule__PreExp__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__PreExp__Group__1_in_rule__PreExp__Group__023742);
+            pushFollow(FollowSets001.FOLLOW_rule__PreExp__Group__1_in_rule__PreExp__Group__023742);
             rule__PreExp__Group__1();
 
             state._fsp--;
@@ -34517,7 +34517,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11727:1: ( rule__PreExp__NameAssignment_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11727:2: rule__PreExp__NameAssignment_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__PreExp__NameAssignment_0_in_rule__PreExp__Group__0__Impl23769);
+            pushFollow(FollowSets001.FOLLOW_rule__PreExp__NameAssignment_0_in_rule__PreExp__Group__0__Impl23769);
             rule__PreExp__NameAssignment_0();
 
             state._fsp--;
@@ -34559,12 +34559,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11741:1: ( rule__PreExp__Group__1__Impl rule__PreExp__Group__2 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11742:2: rule__PreExp__Group__1__Impl rule__PreExp__Group__2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__PreExp__Group__1__Impl_in_rule__PreExp__Group__123799);
+            pushFollow(FollowSets001.FOLLOW_rule__PreExp__Group__1__Impl_in_rule__PreExp__Group__123799);
             rule__PreExp__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__PreExp__Group__2_in_rule__PreExp__Group__123802);
+            pushFollow(FollowSets001.FOLLOW_rule__PreExp__Group__2_in_rule__PreExp__Group__123802);
             rule__PreExp__Group__2();
 
             state._fsp--;
@@ -34603,7 +34603,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPreExpAccess().getCommercialAtKeyword_1()); 
             }
-            match(input,64,FollowSets000.FOLLOW_64_in_rule__PreExp__Group__1__Impl23830); if (state.failed) return ;
+            match(input,64,FollowSets001.FOLLOW_64_in_rule__PreExp__Group__1__Impl23830); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getPreExpAccess().getCommercialAtKeyword_1()); 
             }
@@ -34638,7 +34638,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11772:1: ( rule__PreExp__Group__2__Impl )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11773:2: rule__PreExp__Group__2__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__PreExp__Group__2__Impl_in_rule__PreExp__Group__223861);
+            pushFollow(FollowSets001.FOLLOW_rule__PreExp__Group__2__Impl_in_rule__PreExp__Group__223861);
             rule__PreExp__Group__2__Impl();
 
             state._fsp--;
@@ -34677,7 +34677,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPreExpAccess().getPreKeyword_2()); 
             }
-            match(input,55,FollowSets000.FOLLOW_55_in_rule__PreExp__Group__2__Impl23889); if (state.failed) return ;
+            match(input,55,FollowSets001.FOLLOW_55_in_rule__PreExp__Group__2__Impl23889); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getPreExpAccess().getPreKeyword_2()); 
             }
@@ -34712,12 +34712,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11808:1: ( rule__SelfExp__Group__0__Impl rule__SelfExp__Group__1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11809:2: rule__SelfExp__Group__0__Impl rule__SelfExp__Group__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SelfExp__Group__0__Impl_in_rule__SelfExp__Group__023926);
+            pushFollow(FollowSets001.FOLLOW_rule__SelfExp__Group__0__Impl_in_rule__SelfExp__Group__023926);
             rule__SelfExp__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__SelfExp__Group__1_in_rule__SelfExp__Group__023929);
+            pushFollow(FollowSets001.FOLLOW_rule__SelfExp__Group__1_in_rule__SelfExp__Group__023929);
             rule__SelfExp__Group__1();
 
             state._fsp--;
@@ -34791,7 +34791,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11839:1: ( rule__SelfExp__Group__1__Impl )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11840:2: rule__SelfExp__Group__1__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SelfExp__Group__1__Impl_in_rule__SelfExp__Group__123987);
+            pushFollow(FollowSets001.FOLLOW_rule__SelfExp__Group__1__Impl_in_rule__SelfExp__Group__123987);
             rule__SelfExp__Group__1__Impl();
 
             state._fsp--;
@@ -34830,7 +34830,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSelfExpAccess().getSelfKeyword_1()); 
             }
-            match(input,69,FollowSets000.FOLLOW_69_in_rule__SelfExp__Group__1__Impl24015); if (state.failed) return ;
+            match(input,69,FollowSets001.FOLLOW_69_in_rule__SelfExp__Group__1__Impl24015); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSelfExpAccess().getSelfKeyword_1()); 
             }
@@ -34865,12 +34865,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11873:1: ( rule__PathNameExp__Group__0__Impl rule__PathNameExp__Group__1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11874:2: rule__PathNameExp__Group__0__Impl rule__PathNameExp__Group__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__PathNameExp__Group__0__Impl_in_rule__PathNameExp__Group__024050);
+            pushFollow(FollowSets001.FOLLOW_rule__PathNameExp__Group__0__Impl_in_rule__PathNameExp__Group__024050);
             rule__PathNameExp__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__PathNameExp__Group__1_in_rule__PathNameExp__Group__024053);
+            pushFollow(FollowSets001.FOLLOW_rule__PathNameExp__Group__1_in_rule__PathNameExp__Group__024053);
             rule__PathNameExp__Group__1();
 
             state._fsp--;
@@ -34912,7 +34912,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11888:1: ( rule__PathNameExp__NamespaceAssignment_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11888:2: rule__PathNameExp__NamespaceAssignment_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__PathNameExp__NamespaceAssignment_0_in_rule__PathNameExp__Group__0__Impl24080);
+            pushFollow(FollowSets001.FOLLOW_rule__PathNameExp__NamespaceAssignment_0_in_rule__PathNameExp__Group__0__Impl24080);
             rule__PathNameExp__NamespaceAssignment_0();
 
             state._fsp--;
@@ -34954,12 +34954,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11902:1: ( rule__PathNameExp__Group__1__Impl rule__PathNameExp__Group__2 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11903:2: rule__PathNameExp__Group__1__Impl rule__PathNameExp__Group__2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__PathNameExp__Group__1__Impl_in_rule__PathNameExp__Group__124110);
+            pushFollow(FollowSets001.FOLLOW_rule__PathNameExp__Group__1__Impl_in_rule__PathNameExp__Group__124110);
             rule__PathNameExp__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__PathNameExp__Group__2_in_rule__PathNameExp__Group__124113);
+            pushFollow(FollowSets001.FOLLOW_rule__PathNameExp__Group__2_in_rule__PathNameExp__Group__124113);
             rule__PathNameExp__Group__2();
 
             state._fsp--;
@@ -34998,7 +34998,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPathNameExpAccess().getColonColonKeyword_1()); 
             }
-            match(input,56,FollowSets000.FOLLOW_56_in_rule__PathNameExp__Group__1__Impl24141); if (state.failed) return ;
+            match(input,56,FollowSets001.FOLLOW_56_in_rule__PathNameExp__Group__1__Impl24141); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getPathNameExpAccess().getColonColonKeyword_1()); 
             }
@@ -35033,7 +35033,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11933:1: ( rule__PathNameExp__Group__2__Impl )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11934:2: rule__PathNameExp__Group__2__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__PathNameExp__Group__2__Impl_in_rule__PathNameExp__Group__224172);
+            pushFollow(FollowSets001.FOLLOW_rule__PathNameExp__Group__2__Impl_in_rule__PathNameExp__Group__224172);
             rule__PathNameExp__Group__2__Impl();
 
             state._fsp--;
@@ -35075,7 +35075,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11947:1: ( rule__PathNameExp__ElementAssignment_2 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11947:2: rule__PathNameExp__ElementAssignment_2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__PathNameExp__ElementAssignment_2_in_rule__PathNameExp__Group__2__Impl24199);
+            pushFollow(FollowSets001.FOLLOW_rule__PathNameExp__ElementAssignment_2_in_rule__PathNameExp__Group__2__Impl24199);
             rule__PathNameExp__ElementAssignment_2();
 
             state._fsp--;
@@ -35117,12 +35117,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11967:1: ( rule__IfExp__Group__0__Impl rule__IfExp__Group__1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11968:2: rule__IfExp__Group__0__Impl rule__IfExp__Group__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__IfExp__Group__0__Impl_in_rule__IfExp__Group__024235);
+            pushFollow(FollowSets001.FOLLOW_rule__IfExp__Group__0__Impl_in_rule__IfExp__Group__024235);
             rule__IfExp__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__IfExp__Group__1_in_rule__IfExp__Group__024238);
+            pushFollow(FollowSets001.FOLLOW_rule__IfExp__Group__1_in_rule__IfExp__Group__024238);
             rule__IfExp__Group__1();
 
             state._fsp--;
@@ -35161,7 +35161,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfExpAccess().getIfKeyword_0()); 
             }
-            match(input,70,FollowSets000.FOLLOW_70_in_rule__IfExp__Group__0__Impl24266); if (state.failed) return ;
+            match(input,70,FollowSets001.FOLLOW_70_in_rule__IfExp__Group__0__Impl24266); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getIfExpAccess().getIfKeyword_0()); 
             }
@@ -35196,12 +35196,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11998:1: ( rule__IfExp__Group__1__Impl rule__IfExp__Group__2 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11999:2: rule__IfExp__Group__1__Impl rule__IfExp__Group__2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__IfExp__Group__1__Impl_in_rule__IfExp__Group__124297);
+            pushFollow(FollowSets001.FOLLOW_rule__IfExp__Group__1__Impl_in_rule__IfExp__Group__124297);
             rule__IfExp__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__IfExp__Group__2_in_rule__IfExp__Group__124300);
+            pushFollow(FollowSets001.FOLLOW_rule__IfExp__Group__2_in_rule__IfExp__Group__124300);
             rule__IfExp__Group__2();
 
             state._fsp--;
@@ -35243,7 +35243,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12013:1: ( rule__IfExp__ConditionAssignment_1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12013:2: rule__IfExp__ConditionAssignment_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__IfExp__ConditionAssignment_1_in_rule__IfExp__Group__1__Impl24327);
+            pushFollow(FollowSets001.FOLLOW_rule__IfExp__ConditionAssignment_1_in_rule__IfExp__Group__1__Impl24327);
             rule__IfExp__ConditionAssignment_1();
 
             state._fsp--;
@@ -35285,12 +35285,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12027:1: ( rule__IfExp__Group__2__Impl rule__IfExp__Group__3 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12028:2: rule__IfExp__Group__2__Impl rule__IfExp__Group__3
             {
-            pushFollow(FollowSets000.FOLLOW_rule__IfExp__Group__2__Impl_in_rule__IfExp__Group__224357);
+            pushFollow(FollowSets001.FOLLOW_rule__IfExp__Group__2__Impl_in_rule__IfExp__Group__224357);
             rule__IfExp__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__IfExp__Group__3_in_rule__IfExp__Group__224360);
+            pushFollow(FollowSets001.FOLLOW_rule__IfExp__Group__3_in_rule__IfExp__Group__224360);
             rule__IfExp__Group__3();
 
             state._fsp--;
@@ -35329,7 +35329,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfExpAccess().getThenKeyword_2()); 
             }
-            match(input,71,FollowSets000.FOLLOW_71_in_rule__IfExp__Group__2__Impl24388); if (state.failed) return ;
+            match(input,71,FollowSets001.FOLLOW_71_in_rule__IfExp__Group__2__Impl24388); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getIfExpAccess().getThenKeyword_2()); 
             }
@@ -35364,12 +35364,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12058:1: ( rule__IfExp__Group__3__Impl rule__IfExp__Group__4 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12059:2: rule__IfExp__Group__3__Impl rule__IfExp__Group__4
             {
-            pushFollow(FollowSets000.FOLLOW_rule__IfExp__Group__3__Impl_in_rule__IfExp__Group__324419);
+            pushFollow(FollowSets001.FOLLOW_rule__IfExp__Group__3__Impl_in_rule__IfExp__Group__324419);
             rule__IfExp__Group__3__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__IfExp__Group__4_in_rule__IfExp__Group__324422);
+            pushFollow(FollowSets001.FOLLOW_rule__IfExp__Group__4_in_rule__IfExp__Group__324422);
             rule__IfExp__Group__4();
 
             state._fsp--;
@@ -35411,7 +35411,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12073:1: ( rule__IfExp__ThenExpressionAssignment_3 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12073:2: rule__IfExp__ThenExpressionAssignment_3
             {
-            pushFollow(FollowSets000.FOLLOW_rule__IfExp__ThenExpressionAssignment_3_in_rule__IfExp__Group__3__Impl24449);
+            pushFollow(FollowSets001.FOLLOW_rule__IfExp__ThenExpressionAssignment_3_in_rule__IfExp__Group__3__Impl24449);
             rule__IfExp__ThenExpressionAssignment_3();
 
             state._fsp--;
@@ -35453,12 +35453,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12087:1: ( rule__IfExp__Group__4__Impl rule__IfExp__Group__5 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12088:2: rule__IfExp__Group__4__Impl rule__IfExp__Group__5
             {
-            pushFollow(FollowSets000.FOLLOW_rule__IfExp__Group__4__Impl_in_rule__IfExp__Group__424479);
+            pushFollow(FollowSets001.FOLLOW_rule__IfExp__Group__4__Impl_in_rule__IfExp__Group__424479);
             rule__IfExp__Group__4__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__IfExp__Group__5_in_rule__IfExp__Group__424482);
+            pushFollow(FollowSets001.FOLLOW_rule__IfExp__Group__5_in_rule__IfExp__Group__424482);
             rule__IfExp__Group__5();
 
             state._fsp--;
@@ -35497,7 +35497,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfExpAccess().getElseKeyword_4()); 
             }
-            match(input,72,FollowSets000.FOLLOW_72_in_rule__IfExp__Group__4__Impl24510); if (state.failed) return ;
+            match(input,72,FollowSets001.FOLLOW_72_in_rule__IfExp__Group__4__Impl24510); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getIfExpAccess().getElseKeyword_4()); 
             }
@@ -35532,12 +35532,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12118:1: ( rule__IfExp__Group__5__Impl rule__IfExp__Group__6 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12119:2: rule__IfExp__Group__5__Impl rule__IfExp__Group__6
             {
-            pushFollow(FollowSets000.FOLLOW_rule__IfExp__Group__5__Impl_in_rule__IfExp__Group__524541);
+            pushFollow(FollowSets001.FOLLOW_rule__IfExp__Group__5__Impl_in_rule__IfExp__Group__524541);
             rule__IfExp__Group__5__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__IfExp__Group__6_in_rule__IfExp__Group__524544);
+            pushFollow(FollowSets001.FOLLOW_rule__IfExp__Group__6_in_rule__IfExp__Group__524544);
             rule__IfExp__Group__6();
 
             state._fsp--;
@@ -35579,7 +35579,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12133:1: ( rule__IfExp__ElseExpressionAssignment_5 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12133:2: rule__IfExp__ElseExpressionAssignment_5
             {
-            pushFollow(FollowSets000.FOLLOW_rule__IfExp__ElseExpressionAssignment_5_in_rule__IfExp__Group__5__Impl24571);
+            pushFollow(FollowSets001.FOLLOW_rule__IfExp__ElseExpressionAssignment_5_in_rule__IfExp__Group__5__Impl24571);
             rule__IfExp__ElseExpressionAssignment_5();
 
             state._fsp--;
@@ -35621,7 +35621,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12147:1: ( rule__IfExp__Group__6__Impl )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12148:2: rule__IfExp__Group__6__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__IfExp__Group__6__Impl_in_rule__IfExp__Group__624601);
+            pushFollow(FollowSets001.FOLLOW_rule__IfExp__Group__6__Impl_in_rule__IfExp__Group__624601);
             rule__IfExp__Group__6__Impl();
 
             state._fsp--;
@@ -35660,7 +35660,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfExpAccess().getEndifKeyword_6()); 
             }
-            match(input,73,FollowSets000.FOLLOW_73_in_rule__IfExp__Group__6__Impl24629); if (state.failed) return ;
+            match(input,73,FollowSets001.FOLLOW_73_in_rule__IfExp__Group__6__Impl24629); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getIfExpAccess().getEndifKeyword_6()); 
             }
@@ -35695,12 +35695,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12191:1: ( rule__LetExp__Group__0__Impl rule__LetExp__Group__1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12192:2: rule__LetExp__Group__0__Impl rule__LetExp__Group__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LetExp__Group__0__Impl_in_rule__LetExp__Group__024674);
+            pushFollow(FollowSets001.FOLLOW_rule__LetExp__Group__0__Impl_in_rule__LetExp__Group__024674);
             rule__LetExp__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__LetExp__Group__1_in_rule__LetExp__Group__024677);
+            pushFollow(FollowSets001.FOLLOW_rule__LetExp__Group__1_in_rule__LetExp__Group__024677);
             rule__LetExp__Group__1();
 
             state._fsp--;
@@ -35739,7 +35739,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetExpAccess().getLetKeyword_0()); 
             }
-            match(input,74,FollowSets000.FOLLOW_74_in_rule__LetExp__Group__0__Impl24705); if (state.failed) return ;
+            match(input,74,FollowSets001.FOLLOW_74_in_rule__LetExp__Group__0__Impl24705); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getLetExpAccess().getLetKeyword_0()); 
             }
@@ -35774,12 +35774,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12222:1: ( rule__LetExp__Group__1__Impl rule__LetExp__Group__2 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12223:2: rule__LetExp__Group__1__Impl rule__LetExp__Group__2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LetExp__Group__1__Impl_in_rule__LetExp__Group__124736);
+            pushFollow(FollowSets001.FOLLOW_rule__LetExp__Group__1__Impl_in_rule__LetExp__Group__124736);
             rule__LetExp__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__LetExp__Group__2_in_rule__LetExp__Group__124739);
+            pushFollow(FollowSets001.FOLLOW_rule__LetExp__Group__2_in_rule__LetExp__Group__124739);
             rule__LetExp__Group__2();
 
             state._fsp--;
@@ -35821,7 +35821,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12237:1: ( rule__LetExp__VariableAssignment_1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12237:2: rule__LetExp__VariableAssignment_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LetExp__VariableAssignment_1_in_rule__LetExp__Group__1__Impl24766);
+            pushFollow(FollowSets001.FOLLOW_rule__LetExp__VariableAssignment_1_in_rule__LetExp__Group__1__Impl24766);
             rule__LetExp__VariableAssignment_1();
 
             state._fsp--;
@@ -35863,12 +35863,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12251:1: ( rule__LetExp__Group__2__Impl rule__LetExp__Group__3 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12252:2: rule__LetExp__Group__2__Impl rule__LetExp__Group__3
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LetExp__Group__2__Impl_in_rule__LetExp__Group__224796);
+            pushFollow(FollowSets001.FOLLOW_rule__LetExp__Group__2__Impl_in_rule__LetExp__Group__224796);
             rule__LetExp__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__LetExp__Group__3_in_rule__LetExp__Group__224799);
+            pushFollow(FollowSets001.FOLLOW_rule__LetExp__Group__3_in_rule__LetExp__Group__224799);
             rule__LetExp__Group__3();
 
             state._fsp--;
@@ -35922,7 +35922,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	case 1 :
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12266:2: rule__LetExp__Group_2__0
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__LetExp__Group_2__0_in_rule__LetExp__Group__2__Impl24826);
+            	    pushFollow(FollowSets001.FOLLOW_rule__LetExp__Group_2__0_in_rule__LetExp__Group__2__Impl24826);
             	    rule__LetExp__Group_2__0();
 
             	    state._fsp--;
@@ -35970,12 +35970,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12280:1: ( rule__LetExp__Group__3__Impl rule__LetExp__Group__4 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12281:2: rule__LetExp__Group__3__Impl rule__LetExp__Group__4
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LetExp__Group__3__Impl_in_rule__LetExp__Group__324857);
+            pushFollow(FollowSets001.FOLLOW_rule__LetExp__Group__3__Impl_in_rule__LetExp__Group__324857);
             rule__LetExp__Group__3__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__LetExp__Group__4_in_rule__LetExp__Group__324860);
+            pushFollow(FollowSets001.FOLLOW_rule__LetExp__Group__4_in_rule__LetExp__Group__324860);
             rule__LetExp__Group__4();
 
             state._fsp--;
@@ -36014,7 +36014,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetExpAccess().getInKeyword_3()); 
             }
-            match(input,75,FollowSets000.FOLLOW_75_in_rule__LetExp__Group__3__Impl24888); if (state.failed) return ;
+            match(input,75,FollowSets001.FOLLOW_75_in_rule__LetExp__Group__3__Impl24888); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getLetExpAccess().getInKeyword_3()); 
             }
@@ -36049,7 +36049,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12311:1: ( rule__LetExp__Group__4__Impl )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12312:2: rule__LetExp__Group__4__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LetExp__Group__4__Impl_in_rule__LetExp__Group__424919);
+            pushFollow(FollowSets001.FOLLOW_rule__LetExp__Group__4__Impl_in_rule__LetExp__Group__424919);
             rule__LetExp__Group__4__Impl();
 
             state._fsp--;
@@ -36091,7 +36091,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12325:1: ( rule__LetExp__InAssignment_4 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12325:2: rule__LetExp__InAssignment_4
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LetExp__InAssignment_4_in_rule__LetExp__Group__4__Impl24946);
+            pushFollow(FollowSets001.FOLLOW_rule__LetExp__InAssignment_4_in_rule__LetExp__Group__4__Impl24946);
             rule__LetExp__InAssignment_4();
 
             state._fsp--;
@@ -36133,12 +36133,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12349:1: ( rule__LetExp__Group_2__0__Impl rule__LetExp__Group_2__1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12350:2: rule__LetExp__Group_2__0__Impl rule__LetExp__Group_2__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LetExp__Group_2__0__Impl_in_rule__LetExp__Group_2__024986);
+            pushFollow(FollowSets001.FOLLOW_rule__LetExp__Group_2__0__Impl_in_rule__LetExp__Group_2__024986);
             rule__LetExp__Group_2__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__LetExp__Group_2__1_in_rule__LetExp__Group_2__024989);
+            pushFollow(FollowSets001.FOLLOW_rule__LetExp__Group_2__1_in_rule__LetExp__Group_2__024989);
             rule__LetExp__Group_2__1();
 
             state._fsp--;
@@ -36177,7 +36177,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetExpAccess().getCommaKeyword_2_0()); 
             }
-            match(input,48,FollowSets000.FOLLOW_48_in_rule__LetExp__Group_2__0__Impl25017); if (state.failed) return ;
+            match(input,48,FollowSets001.FOLLOW_48_in_rule__LetExp__Group_2__0__Impl25017); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getLetExpAccess().getCommaKeyword_2_0()); 
             }
@@ -36212,7 +36212,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12380:1: ( rule__LetExp__Group_2__1__Impl )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12381:2: rule__LetExp__Group_2__1__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LetExp__Group_2__1__Impl_in_rule__LetExp__Group_2__125048);
+            pushFollow(FollowSets001.FOLLOW_rule__LetExp__Group_2__1__Impl_in_rule__LetExp__Group_2__125048);
             rule__LetExp__Group_2__1__Impl();
 
             state._fsp--;
@@ -36254,7 +36254,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12394:1: ( rule__LetExp__VariableAssignment_2_1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12394:2: rule__LetExp__VariableAssignment_2_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LetExp__VariableAssignment_2_1_in_rule__LetExp__Group_2__1__Impl25075);
+            pushFollow(FollowSets001.FOLLOW_rule__LetExp__VariableAssignment_2_1_in_rule__LetExp__Group_2__1__Impl25075);
             rule__LetExp__VariableAssignment_2_1();
 
             state._fsp--;
@@ -36296,12 +36296,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12412:1: ( rule__LetVariable__Group__0__Impl rule__LetVariable__Group__1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12413:2: rule__LetVariable__Group__0__Impl rule__LetVariable__Group__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LetVariable__Group__0__Impl_in_rule__LetVariable__Group__025109);
+            pushFollow(FollowSets001.FOLLOW_rule__LetVariable__Group__0__Impl_in_rule__LetVariable__Group__025109);
             rule__LetVariable__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__LetVariable__Group__1_in_rule__LetVariable__Group__025112);
+            pushFollow(FollowSets001.FOLLOW_rule__LetVariable__Group__1_in_rule__LetVariable__Group__025112);
             rule__LetVariable__Group__1();
 
             state._fsp--;
@@ -36343,7 +36343,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12427:1: ( rule__LetVariable__NameAssignment_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12427:2: rule__LetVariable__NameAssignment_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LetVariable__NameAssignment_0_in_rule__LetVariable__Group__0__Impl25139);
+            pushFollow(FollowSets001.FOLLOW_rule__LetVariable__NameAssignment_0_in_rule__LetVariable__Group__0__Impl25139);
             rule__LetVariable__NameAssignment_0();
 
             state._fsp--;
@@ -36385,12 +36385,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12441:1: ( rule__LetVariable__Group__1__Impl rule__LetVariable__Group__2 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12442:2: rule__LetVariable__Group__1__Impl rule__LetVariable__Group__2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LetVariable__Group__1__Impl_in_rule__LetVariable__Group__125169);
+            pushFollow(FollowSets001.FOLLOW_rule__LetVariable__Group__1__Impl_in_rule__LetVariable__Group__125169);
             rule__LetVariable__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__LetVariable__Group__2_in_rule__LetVariable__Group__125172);
+            pushFollow(FollowSets001.FOLLOW_rule__LetVariable__Group__2_in_rule__LetVariable__Group__125172);
             rule__LetVariable__Group__2();
 
             state._fsp--;
@@ -36429,7 +36429,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetVariableAccess().getColonKeyword_1()); 
             }
-            match(input,43,FollowSets000.FOLLOW_43_in_rule__LetVariable__Group__1__Impl25200); if (state.failed) return ;
+            match(input,43,FollowSets001.FOLLOW_43_in_rule__LetVariable__Group__1__Impl25200); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getLetVariableAccess().getColonKeyword_1()); 
             }
@@ -36464,12 +36464,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12472:1: ( rule__LetVariable__Group__2__Impl rule__LetVariable__Group__3 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12473:2: rule__LetVariable__Group__2__Impl rule__LetVariable__Group__3
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LetVariable__Group__2__Impl_in_rule__LetVariable__Group__225231);
+            pushFollow(FollowSets001.FOLLOW_rule__LetVariable__Group__2__Impl_in_rule__LetVariable__Group__225231);
             rule__LetVariable__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__LetVariable__Group__3_in_rule__LetVariable__Group__225234);
+            pushFollow(FollowSets001.FOLLOW_rule__LetVariable__Group__3_in_rule__LetVariable__Group__225234);
             rule__LetVariable__Group__3();
 
             state._fsp--;
@@ -36511,7 +36511,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12487:1: ( rule__LetVariable__TypeAssignment_2 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12487:2: rule__LetVariable__TypeAssignment_2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LetVariable__TypeAssignment_2_in_rule__LetVariable__Group__2__Impl25261);
+            pushFollow(FollowSets001.FOLLOW_rule__LetVariable__TypeAssignment_2_in_rule__LetVariable__Group__2__Impl25261);
             rule__LetVariable__TypeAssignment_2();
 
             state._fsp--;
@@ -36553,12 +36553,12 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12501:1: ( rule__LetVariable__Group__3__Impl rule__LetVariable__Group__4 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12502:2: rule__LetVariable__Group__3__Impl rule__LetVariable__Group__4
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LetVariable__Group__3__Impl_in_rule__LetVariable__Group__325291);
+            pushFollow(FollowSets001.FOLLOW_rule__LetVariable__Group__3__Impl_in_rule__LetVariable__Group__325291);
             rule__LetVariable__Group__3__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets000.FOLLOW_rule__LetVariable__Group__4_in_rule__LetVariable__Group__325294);
+            pushFollow(FollowSets001.FOLLOW_rule__LetVariable__Group__4_in_rule__LetVariable__Group__325294);
             rule__LetVariable__Group__4();
 
             state._fsp--;
@@ -36597,7 +36597,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetVariableAccess().getEqualsSignKeyword_3()); 
             }
-            match(input,33,FollowSets000.FOLLOW_33_in_rule__LetVariable__Group__3__Impl25322); if (state.failed) return ;
+            match(input,33,FollowSets001.FOLLOW_33_in_rule__LetVariable__Group__3__Impl25322); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getLetVariableAccess().getEqualsSignKeyword_3()); 
             }
@@ -36632,7 +36632,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12532:1: ( rule__LetVariable__Group__4__Impl )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12533:2: rule__LetVariable__Group__4__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LetVariable__Group__4__Impl_in_rule__LetVariable__Group__425353);
+            pushFollow(FollowSets001.FOLLOW_rule__LetVariable__Group__4__Impl_in_rule__LetVariable__Group__425353);
             rule__LetVariable__Group__4__Impl();
 
             state._fsp--;
@@ -36674,7 +36674,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12546:1: ( rule__LetVariable__InitExpressionAssignment_4 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12546:2: rule__LetVariable__InitExpressionAssignment_4
             {
-            pushFollow(FollowSets000.FOLLOW_rule__LetVariable__InitExpressionAssignment_4_in_rule__LetVariable__Group__4__Impl25380);
+            pushFollow(FollowSets001.FOLLOW_rule__LetVariable__InitExpressionAssignment_4_in_rule__LetVariable__Group__4__Impl25380);
             rule__LetVariable__InitExpressionAssignment_4();
 
             state._fsp--;
@@ -36722,7 +36722,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDocumentAccess().getPackagesPackageDeclarationParserRuleCall_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePackageDeclaration_in_rule__Document__PackagesAssignment_025425);
+            pushFollow(FollowSets001.FOLLOW_rulePackageDeclaration_in_rule__Document__PackagesAssignment_025425);
             rulePackageDeclaration();
 
             state._fsp--;
@@ -36767,7 +36767,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDocumentAccess().getContextsContextDeclParserRuleCall_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleContextDecl_in_rule__Document__ContextsAssignment_125456);
+            pushFollow(FollowSets001.FOLLOW_ruleContextDecl_in_rule__Document__ContextsAssignment_125456);
             ruleContextDecl();
 
             state._fsp--;
@@ -36812,7 +36812,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBodyAccess().getConstraintNameIdentifierParserRuleCall_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__Body__ConstraintNameAssignment_125487);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__Body__ConstraintNameAssignment_125487);
             ruleIdentifier();
 
             state._fsp--;
@@ -36857,7 +36857,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBodyAccess().getExpressionExpressionParserRuleCall_3_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__Body__ExpressionAssignment_325518);
+            pushFollow(FollowSets001.FOLLOW_ruleExpression_in_rule__Body__ExpressionAssignment_325518);
             ruleExpression();
 
             state._fsp--;
@@ -36902,7 +36902,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getClassifierContextDeclAccess().getSelfNameIdentifierParserRuleCall_1_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__ClassifierContextDecl__SelfNameAssignment_1_025549);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__ClassifierContextDecl__SelfNameAssignment_1_025549);
             ruleIdentifier();
 
             state._fsp--;
@@ -36947,7 +36947,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getClassifierContextDeclAccess().getClassifierClassifierRefParserRuleCall_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleClassifierRef_in_rule__ClassifierContextDecl__ClassifierAssignment_225580);
+            pushFollow(FollowSets001.FOLLOW_ruleClassifierRef_in_rule__ClassifierContextDecl__ClassifierAssignment_225580);
             ruleClassifierRef();
 
             state._fsp--;
@@ -36992,7 +36992,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getClassifierContextDeclAccess().getInvariantsInvariantParserRuleCall_3_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleInvariant_in_rule__ClassifierContextDecl__InvariantsAssignment_3_025611);
+            pushFollow(FollowSets001.FOLLOW_ruleInvariant_in_rule__ClassifierContextDecl__InvariantsAssignment_3_025611);
             ruleInvariant();
 
             state._fsp--;
@@ -37037,7 +37037,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getClassifierContextDeclAccess().getDefinitionsDefinitionParserRuleCall_3_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleDefinition_in_rule__ClassifierContextDecl__DefinitionsAssignment_3_125642);
+            pushFollow(FollowSets001.FOLLOW_ruleDefinition_in_rule__ClassifierContextDecl__DefinitionsAssignment_3_125642);
             ruleDefinition();
 
             state._fsp--;
@@ -37088,7 +37088,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDefinitionAccess().getStaticStaticKeyword_0_0()); 
             }
-            match(input,76,FollowSets000.FOLLOW_76_in_rule__Definition__StaticAssignment_025678); if (state.failed) return ;
+            match(input,76,FollowSets001.FOLLOW_76_in_rule__Definition__StaticAssignment_025678); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getDefinitionAccess().getStaticStaticKeyword_0_0()); 
             }
@@ -37135,7 +37135,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDefinitionAccess().getConstraintNameIdentifierParserRuleCall_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__Definition__ConstraintNameAssignment_225717);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__Definition__ConstraintNameAssignment_225717);
             ruleIdentifier();
 
             state._fsp--;
@@ -37180,7 +37180,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDefinitionAccess().getConstrainedNameIdentifierParserRuleCall_4_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__Definition__ConstrainedNameAssignment_425748);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__Definition__ConstrainedNameAssignment_425748);
             ruleIdentifier();
 
             state._fsp--;
@@ -37225,7 +37225,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDefinitionAccess().getParametersParameterParserRuleCall_5_1_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleParameter_in_rule__Definition__ParametersAssignment_5_1_025779);
+            pushFollow(FollowSets001.FOLLOW_ruleParameter_in_rule__Definition__ParametersAssignment_5_1_025779);
             ruleParameter();
 
             state._fsp--;
@@ -37270,7 +37270,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDefinitionAccess().getParametersParameterParserRuleCall_5_1_1_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleParameter_in_rule__Definition__ParametersAssignment_5_1_1_125810);
+            pushFollow(FollowSets001.FOLLOW_ruleParameter_in_rule__Definition__ParametersAssignment_5_1_1_125810);
             ruleParameter();
 
             state._fsp--;
@@ -37315,7 +37315,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDefinitionAccess().getTypeTypeExpParserRuleCall_7_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeExp_in_rule__Definition__TypeAssignment_725841);
+            pushFollow(FollowSets001.FOLLOW_ruleTypeExp_in_rule__Definition__TypeAssignment_725841);
             ruleTypeExp();
 
             state._fsp--;
@@ -37360,7 +37360,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDefinitionAccess().getExpressionExpressionParserRuleCall_9_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__Definition__ExpressionAssignment_925872);
+            pushFollow(FollowSets001.FOLLOW_ruleExpression_in_rule__Definition__ExpressionAssignment_925872);
             ruleExpression();
 
             state._fsp--;
@@ -37405,7 +37405,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getDerAccess().getExpressionExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__Der__ExpressionAssignment_225903);
+            pushFollow(FollowSets001.FOLLOW_ruleExpression_in_rule__Der__ExpressionAssignment_225903);
             ruleExpression();
 
             state._fsp--;
@@ -37450,7 +37450,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getInitAccess().getExpressionExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__Init__ExpressionAssignment_225934);
+            pushFollow(FollowSets001.FOLLOW_ruleExpression_in_rule__Init__ExpressionAssignment_225934);
             ruleExpression();
 
             state._fsp--;
@@ -37495,7 +37495,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getInvariantAccess().getConstraintNameIdentifierParserRuleCall_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__Invariant__ConstraintNameAssignment_125965);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__Invariant__ConstraintNameAssignment_125965);
             ruleIdentifier();
 
             state._fsp--;
@@ -37540,7 +37540,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getInvariantAccess().getExpressionExpressionParserRuleCall_3_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__Invariant__ExpressionAssignment_325996);
+            pushFollow(FollowSets001.FOLLOW_ruleExpression_in_rule__Invariant__ExpressionAssignment_325996);
             ruleExpression();
 
             state._fsp--;
@@ -37585,7 +37585,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationContextDeclAccess().getOperationOperationRefParserRuleCall_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleOperationRef_in_rule__OperationContextDecl__OperationAssignment_126027);
+            pushFollow(FollowSets001.FOLLOW_ruleOperationRef_in_rule__OperationContextDecl__OperationAssignment_126027);
             ruleOperationRef();
 
             state._fsp--;
@@ -37630,7 +37630,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationContextDeclAccess().getParametersParameterParserRuleCall_3_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleParameter_in_rule__OperationContextDecl__ParametersAssignment_3_026058);
+            pushFollow(FollowSets001.FOLLOW_ruleParameter_in_rule__OperationContextDecl__ParametersAssignment_3_026058);
             ruleParameter();
 
             state._fsp--;
@@ -37675,7 +37675,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationContextDeclAccess().getParametersParameterParserRuleCall_3_1_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleParameter_in_rule__OperationContextDecl__ParametersAssignment_3_1_126089);
+            pushFollow(FollowSets001.FOLLOW_ruleParameter_in_rule__OperationContextDecl__ParametersAssignment_3_1_126089);
             ruleParameter();
 
             state._fsp--;
@@ -37720,7 +37720,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationContextDeclAccess().getTypeTypeExpParserRuleCall_6_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeExp_in_rule__OperationContextDecl__TypeAssignment_626120);
+            pushFollow(FollowSets001.FOLLOW_ruleTypeExp_in_rule__OperationContextDecl__TypeAssignment_626120);
             ruleTypeExp();
 
             state._fsp--;
@@ -37765,7 +37765,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationContextDeclAccess().getPresPreParserRuleCall_7_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePre_in_rule__OperationContextDecl__PresAssignment_7_026151);
+            pushFollow(FollowSets001.FOLLOW_rulePre_in_rule__OperationContextDecl__PresAssignment_7_026151);
             rulePre();
 
             state._fsp--;
@@ -37810,7 +37810,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationContextDeclAccess().getPostsPostParserRuleCall_7_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePost_in_rule__OperationContextDecl__PostsAssignment_7_126182);
+            pushFollow(FollowSets001.FOLLOW_rulePost_in_rule__OperationContextDecl__PostsAssignment_7_126182);
             rulePost();
 
             state._fsp--;
@@ -37855,7 +37855,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOperationContextDeclAccess().getBodiesBodyParserRuleCall_7_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleBody_in_rule__OperationContextDecl__BodiesAssignment_7_226213);
+            pushFollow(FollowSets001.FOLLOW_ruleBody_in_rule__OperationContextDecl__BodiesAssignment_7_226213);
             ruleBody();
 
             state._fsp--;
@@ -37900,7 +37900,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDeclarationAccess().getPackagePackageRefParserRuleCall_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePackageRef_in_rule__PackageDeclaration__PackageAssignment_126244);
+            pushFollow(FollowSets001.FOLLOW_rulePackageRef_in_rule__PackageDeclaration__PackageAssignment_126244);
             rulePackageRef();
 
             state._fsp--;
@@ -37945,7 +37945,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPackageDeclarationAccess().getContextsContextDeclParserRuleCall_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleContextDecl_in_rule__PackageDeclaration__ContextsAssignment_226275);
+            pushFollow(FollowSets001.FOLLOW_ruleContextDecl_in_rule__PackageDeclaration__ContextsAssignment_226275);
             ruleContextDecl();
 
             state._fsp--;
@@ -37990,7 +37990,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterAccess().getNameIdentifierParserRuleCall_0_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__Parameter__NameAssignment_0_026306);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__Parameter__NameAssignment_0_026306);
             ruleIdentifier();
 
             state._fsp--;
@@ -38035,7 +38035,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getParameterAccess().getTypeTypeExpParserRuleCall_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeExp_in_rule__Parameter__TypeAssignment_126337);
+            pushFollow(FollowSets001.FOLLOW_ruleTypeExp_in_rule__Parameter__TypeAssignment_126337);
             ruleTypeExp();
 
             state._fsp--;
@@ -38080,7 +38080,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPostAccess().getConstraintNameIdentifierParserRuleCall_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__Post__ConstraintNameAssignment_126368);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__Post__ConstraintNameAssignment_126368);
             ruleIdentifier();
 
             state._fsp--;
@@ -38125,7 +38125,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPostAccess().getExpressionExpressionParserRuleCall_3_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__Post__ExpressionAssignment_326399);
+            pushFollow(FollowSets001.FOLLOW_ruleExpression_in_rule__Post__ExpressionAssignment_326399);
             ruleExpression();
 
             state._fsp--;
@@ -38170,7 +38170,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPreAccess().getConstraintNameIdentifierParserRuleCall_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__Pre__ConstraintNameAssignment_126430);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__Pre__ConstraintNameAssignment_126430);
             ruleIdentifier();
 
             state._fsp--;
@@ -38215,7 +38215,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPreAccess().getExpressionExpressionParserRuleCall_3_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__Pre__ExpressionAssignment_326461);
+            pushFollow(FollowSets001.FOLLOW_ruleExpression_in_rule__Pre__ExpressionAssignment_326461);
             ruleExpression();
 
             state._fsp--;
@@ -38260,7 +38260,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPropertyContextDeclAccess().getPropertyPropertyRefParserRuleCall_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePropertyRef_in_rule__PropertyContextDecl__PropertyAssignment_126492);
+            pushFollow(FollowSets001.FOLLOW_rulePropertyRef_in_rule__PropertyContextDecl__PropertyAssignment_126492);
             rulePropertyRef();
 
             state._fsp--;
@@ -38305,7 +38305,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPropertyContextDeclAccess().getTypeTypeExpParserRuleCall_3_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeExp_in_rule__PropertyContextDecl__TypeAssignment_326523);
+            pushFollow(FollowSets001.FOLLOW_ruleTypeExp_in_rule__PropertyContextDecl__TypeAssignment_326523);
             ruleTypeExp();
 
             state._fsp--;
@@ -38350,7 +38350,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPropertyContextDeclAccess().getInitInitParserRuleCall_4_0_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleInit_in_rule__PropertyContextDecl__InitAssignment_4_0_026554);
+            pushFollow(FollowSets001.FOLLOW_ruleInit_in_rule__PropertyContextDecl__InitAssignment_4_0_026554);
             ruleInit();
 
             state._fsp--;
@@ -38395,7 +38395,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPropertyContextDeclAccess().getDerDerParserRuleCall_4_0_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleDer_in_rule__PropertyContextDecl__DerAssignment_4_0_126585);
+            pushFollow(FollowSets001.FOLLOW_ruleDer_in_rule__PropertyContextDecl__DerAssignment_4_0_126585);
             ruleDer();
 
             state._fsp--;
@@ -38440,7 +38440,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPropertyContextDeclAccess().getDerDerParserRuleCall_4_1_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleDer_in_rule__PropertyContextDecl__DerAssignment_4_1_026616);
+            pushFollow(FollowSets001.FOLLOW_ruleDer_in_rule__PropertyContextDecl__DerAssignment_4_1_026616);
             ruleDer();
 
             state._fsp--;
@@ -38485,7 +38485,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPropertyContextDeclAccess().getInitInitParserRuleCall_4_1_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleInit_in_rule__PropertyContextDecl__InitAssignment_4_1_126647);
+            pushFollow(FollowSets001.FOLLOW_ruleInit_in_rule__PropertyContextDecl__InitAssignment_4_1_126647);
             ruleInit();
 
             state._fsp--;
@@ -38530,7 +38530,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedClassifierRefAccess().getNamespaceIdentifierParserRuleCall_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__QualifiedClassifierRef__NamespaceAssignment_026678);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__QualifiedClassifierRef__NamespaceAssignment_026678);
             ruleIdentifier();
 
             state._fsp--;
@@ -38575,7 +38575,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedClassifierRefAccess().getElementClassifierRefParserRuleCall_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleClassifierRef_in_rule__QualifiedClassifierRef__ElementAssignment_226709);
+            pushFollow(FollowSets001.FOLLOW_ruleClassifierRef_in_rule__QualifiedClassifierRef__ElementAssignment_226709);
             ruleClassifierRef();
 
             state._fsp--;
@@ -38620,7 +38620,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedOperationRefAccess().getNamespaceIdentifierParserRuleCall_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__QualifiedOperationRef__NamespaceAssignment_026740);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__QualifiedOperationRef__NamespaceAssignment_026740);
             ruleIdentifier();
 
             state._fsp--;
@@ -38665,7 +38665,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedOperationRefAccess().getElementOperationRefParserRuleCall_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleOperationRef_in_rule__QualifiedOperationRef__ElementAssignment_226771);
+            pushFollow(FollowSets001.FOLLOW_ruleOperationRef_in_rule__QualifiedOperationRef__ElementAssignment_226771);
             ruleOperationRef();
 
             state._fsp--;
@@ -38710,7 +38710,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedPropertyRefAccess().getNamespaceIdentifierParserRuleCall_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__QualifiedPropertyRef__NamespaceAssignment_026802);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__QualifiedPropertyRef__NamespaceAssignment_026802);
             ruleIdentifier();
 
             state._fsp--;
@@ -38755,7 +38755,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedPropertyRefAccess().getElementPropertyRefParserRuleCall_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePropertyRef_in_rule__QualifiedPropertyRef__ElementAssignment_226833);
+            pushFollow(FollowSets001.FOLLOW_rulePropertyRef_in_rule__QualifiedPropertyRef__ElementAssignment_226833);
             rulePropertyRef();
 
             state._fsp--;
@@ -38800,7 +38800,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedPackageRefAccess().getNamespaceIdentifierParserRuleCall_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__QualifiedPackageRef__NamespaceAssignment_026864);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__QualifiedPackageRef__NamespaceAssignment_026864);
             ruleIdentifier();
 
             state._fsp--;
@@ -38845,7 +38845,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getQualifiedPackageRefAccess().getElementPackageRefParserRuleCall_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePackageRef_in_rule__QualifiedPackageRef__ElementAssignment_226895);
+            pushFollow(FollowSets001.FOLLOW_rulePackageRef_in_rule__QualifiedPackageRef__ElementAssignment_226895);
             rulePackageRef();
 
             state._fsp--;
@@ -38890,7 +38890,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSimpleClassifierRefAccess().getClassifierIdentifierParserRuleCall_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__SimpleClassifierRef__ClassifierAssignment26926);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__SimpleClassifierRef__ClassifierAssignment26926);
             ruleIdentifier();
 
             state._fsp--;
@@ -38935,7 +38935,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSimpleOperationRefAccess().getOperationIdentifierParserRuleCall_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__SimpleOperationRef__OperationAssignment26957);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__SimpleOperationRef__OperationAssignment26957);
             ruleIdentifier();
 
             state._fsp--;
@@ -38980,7 +38980,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSimplePackageRefAccess().getPackageIdentifierParserRuleCall_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__SimplePackageRef__PackageAssignment26988);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__SimplePackageRef__PackageAssignment26988);
             ruleIdentifier();
 
             state._fsp--;
@@ -39025,7 +39025,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSimplePropertyRefAccess().getFeatureIdentifierParserRuleCall_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__SimplePropertyRef__FeatureAssignment27019);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__SimplePropertyRef__FeatureAssignment27019);
             ruleIdentifier();
 
             state._fsp--;
@@ -39073,7 +39073,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:13362:1: ( rule__NavigationExp__OpAlternatives_1_0_1_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:13362:2: rule__NavigationExp__OpAlternatives_1_0_1_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__NavigationExp__OpAlternatives_1_0_1_0_in_rule__NavigationExp__OpAssignment_1_0_127050);
+            pushFollow(FollowSets001.FOLLOW_rule__NavigationExp__OpAlternatives_1_0_1_0_in_rule__NavigationExp__OpAssignment_1_0_127050);
             rule__NavigationExp__OpAlternatives_1_0_1_0();
 
             state._fsp--;
@@ -39121,7 +39121,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigationExpAccess().getArgumentNavigatingExpParserRuleCall_1_0_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigatingExp_in_rule__NavigationExp__ArgumentAssignment_1_0_227083);
+            pushFollow(FollowSets001.FOLLOW_ruleNavigatingExp_in_rule__NavigationExp__ArgumentAssignment_1_0_227083);
             ruleNavigatingExp();
 
             state._fsp--;
@@ -39169,7 +39169,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:13393:1: ( rule__NavigationExp__OpAlternatives_1_1_1_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:13393:2: rule__NavigationExp__OpAlternatives_1_1_1_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__NavigationExp__OpAlternatives_1_1_1_0_in_rule__NavigationExp__OpAssignment_1_1_127114);
+            pushFollow(FollowSets001.FOLLOW_rule__NavigationExp__OpAlternatives_1_1_1_0_in_rule__NavigationExp__OpAssignment_1_1_127114);
             rule__NavigationExp__OpAlternatives_1_1_1_0();
 
             state._fsp--;
@@ -39217,7 +39217,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigationExpAccess().getMessageNameIdentifierParserRuleCall_1_1_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__NavigationExp__MessageNameAssignment_1_1_227147);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__NavigationExp__MessageNameAssignment_1_1_227147);
             ruleIdentifier();
 
             state._fsp--;
@@ -39262,7 +39262,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigationExpAccess().getArgumentsOclMessageArgParserRuleCall_1_1_4_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleOclMessageArg_in_rule__NavigationExp__ArgumentsAssignment_1_1_4_027178);
+            pushFollow(FollowSets001.FOLLOW_ruleOclMessageArg_in_rule__NavigationExp__ArgumentsAssignment_1_1_4_027178);
             ruleOclMessageArg();
 
             state._fsp--;
@@ -39307,7 +39307,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigationExpAccess().getArgumentsOclMessageArgParserRuleCall_1_1_4_1_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleOclMessageArg_in_rule__NavigationExp__ArgumentsAssignment_1_1_4_1_127209);
+            pushFollow(FollowSets001.FOLLOW_ruleOclMessageArg_in_rule__NavigationExp__ArgumentsAssignment_1_1_4_1_127209);
             ruleOclMessageArg();
 
             state._fsp--;
@@ -39355,7 +39355,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:13454:1: ( rule__NavigatingExp__OpAlternatives_1_0_1_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:13454:2: rule__NavigatingExp__OpAlternatives_1_0_1_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__NavigatingExp__OpAlternatives_1_0_1_0_in_rule__NavigatingExp__OpAssignment_1_0_127240);
+            pushFollow(FollowSets001.FOLLOW_rule__NavigatingExp__OpAlternatives_1_0_1_0_in_rule__NavigatingExp__OpAssignment_1_0_127240);
             rule__NavigatingExp__OpAlternatives_1_0_1_0();
 
             state._fsp--;
@@ -39403,7 +39403,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingExpAccess().getArgumentNavigatingExpParserRuleCall_1_0_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNavigatingExp_in_rule__NavigatingExp__ArgumentAssignment_1_0_227273);
+            pushFollow(FollowSets001.FOLLOW_ruleNavigatingExp_in_rule__NavigatingExp__ArgumentAssignment_1_0_227273);
             ruleNavigatingExp();
 
             state._fsp--;
@@ -39451,7 +39451,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:13485:1: ( rule__NavigatingExp__OpAlternatives_1_1_1_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:13485:2: rule__NavigatingExp__OpAlternatives_1_1_1_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__NavigatingExp__OpAlternatives_1_1_1_0_in_rule__NavigatingExp__OpAssignment_1_1_127304);
+            pushFollow(FollowSets001.FOLLOW_rule__NavigatingExp__OpAlternatives_1_1_1_0_in_rule__NavigatingExp__OpAssignment_1_1_127304);
             rule__NavigatingExp__OpAlternatives_1_1_1_0();
 
             state._fsp--;
@@ -39499,7 +39499,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingExpAccess().getMessageNameIdentifierParserRuleCall_1_1_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__NavigatingExp__MessageNameAssignment_1_1_227337);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__NavigatingExp__MessageNameAssignment_1_1_227337);
             ruleIdentifier();
 
             state._fsp--;
@@ -39544,7 +39544,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingExpAccess().getArgumentsOclMessageArgParserRuleCall_1_1_4_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleOclMessageArg_in_rule__NavigatingExp__ArgumentsAssignment_1_1_4_027368);
+            pushFollow(FollowSets001.FOLLOW_ruleOclMessageArg_in_rule__NavigatingExp__ArgumentsAssignment_1_1_4_027368);
             ruleOclMessageArg();
 
             state._fsp--;
@@ -39589,7 +39589,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNavigatingExpAccess().getArgumentsOclMessageArgParserRuleCall_1_1_4_1_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleOclMessageArg_in_rule__NavigatingExp__ArgumentsAssignment_1_1_4_1_127399);
+            pushFollow(FollowSets001.FOLLOW_ruleOclMessageArg_in_rule__NavigatingExp__ArgumentsAssignment_1_1_4_1_127399);
             ruleOclMessageArg();
 
             state._fsp--;
@@ -39634,7 +39634,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOclMessageArgAccess().getTypeTypeExpParserRuleCall_0_2_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeExp_in_rule__OclMessageArg__TypeAssignment_0_2_127430);
+            pushFollow(FollowSets001.FOLLOW_ruleTypeExp_in_rule__OclMessageArg__TypeAssignment_0_2_127430);
             ruleTypeExp();
 
             state._fsp--;
@@ -39679,7 +39679,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPrimitiveTypeAccess().getNamePrimitiveTypeIdentifierParserRuleCall_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_rulePrimitiveTypeIdentifier_in_rule__PrimitiveType__NameAssignment27461);
+            pushFollow(FollowSets001.FOLLOW_rulePrimitiveTypeIdentifier_in_rule__PrimitiveType__NameAssignment27461);
             rulePrimitiveTypeIdentifier();
 
             state._fsp--;
@@ -39724,7 +39724,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionTypeAccess().getTypeIdentifierCollectionTypeIdentifierParserRuleCall_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleCollectionTypeIdentifier_in_rule__CollectionType__TypeIdentifierAssignment_027492);
+            pushFollow(FollowSets001.FOLLOW_ruleCollectionTypeIdentifier_in_rule__CollectionType__TypeIdentifierAssignment_027492);
             ruleCollectionTypeIdentifier();
 
             state._fsp--;
@@ -39769,7 +39769,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionTypeAccess().getTypeTypeExpParserRuleCall_1_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeExp_in_rule__CollectionType__TypeAssignment_1_127523);
+            pushFollow(FollowSets001.FOLLOW_ruleTypeExp_in_rule__CollectionType__TypeAssignment_1_127523);
             ruleTypeExp();
 
             state._fsp--;
@@ -39820,7 +39820,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleTypeAccess().getNameTupleKeyword_0_0()); 
             }
-            match(input,61,FollowSets000.FOLLOW_61_in_rule__TupleType__NameAssignment_027559); if (state.failed) return ;
+            match(input,61,FollowSets001.FOLLOW_61_in_rule__TupleType__NameAssignment_027559); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getTupleTypeAccess().getNameTupleKeyword_0_0()); 
             }
@@ -39867,7 +39867,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleTypeAccess().getPartTuplePartParserRuleCall_2_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruletuplePart_in_rule__TupleType__PartAssignment_2_027598);
+            pushFollow(FollowSets001.FOLLOW_ruletuplePart_in_rule__TupleType__PartAssignment_2_027598);
             ruletuplePart();
 
             state._fsp--;
@@ -39912,7 +39912,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleTypeAccess().getPartTuplePartParserRuleCall_2_1_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruletuplePart_in_rule__TupleType__PartAssignment_2_1_127629);
+            pushFollow(FollowSets001.FOLLOW_ruletuplePart_in_rule__TupleType__PartAssignment_2_1_127629);
             ruletuplePart();
 
             state._fsp--;
@@ -39957,7 +39957,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTuplePartAccess().getNameIdentifierParserRuleCall_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__TuplePart__NameAssignment_027660);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__TuplePart__NameAssignment_027660);
             ruleIdentifier();
 
             state._fsp--;
@@ -40002,7 +40002,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTuplePartAccess().getTypeTypeExpParserRuleCall_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeExp_in_rule__TuplePart__TypeAssignment_227691);
+            pushFollow(FollowSets001.FOLLOW_ruleTypeExp_in_rule__TuplePart__TypeAssignment_227691);
             ruleTypeExp();
 
             state._fsp--;
@@ -40047,7 +40047,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionLiteralExpAccess().getCollectionLiteralPartsCollectionLiteralPartParserRuleCall_1_2_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleCollectionLiteralPart_in_rule__CollectionLiteralExp__CollectionLiteralPartsAssignment_1_2_027722);
+            pushFollow(FollowSets001.FOLLOW_ruleCollectionLiteralPart_in_rule__CollectionLiteralExp__CollectionLiteralPartsAssignment_1_2_027722);
             ruleCollectionLiteralPart();
 
             state._fsp--;
@@ -40092,7 +40092,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionLiteralExpAccess().getCollectionLiteralPartsCollectionLiteralPartParserRuleCall_1_2_1_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleCollectionLiteralPart_in_rule__CollectionLiteralExp__CollectionLiteralPartsAssignment_1_2_1_127753);
+            pushFollow(FollowSets001.FOLLOW_ruleCollectionLiteralPart_in_rule__CollectionLiteralExp__CollectionLiteralPartsAssignment_1_2_1_127753);
             ruleCollectionLiteralPart();
 
             state._fsp--;
@@ -40137,7 +40137,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionLiteralPartAccess().getExpressionExpressionParserRuleCall_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__CollectionLiteralPart__ExpressionAssignment_027784);
+            pushFollow(FollowSets001.FOLLOW_ruleExpression_in_rule__CollectionLiteralPart__ExpressionAssignment_027784);
             ruleExpression();
 
             state._fsp--;
@@ -40182,7 +40182,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getCollectionLiteralPartAccess().getLastExpressionExpressionParserRuleCall_1_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__CollectionLiteralPart__LastExpressionAssignment_1_127815);
+            pushFollow(FollowSets001.FOLLOW_ruleExpression_in_rule__CollectionLiteralPart__LastExpressionAssignment_1_127815);
             ruleExpression();
 
             state._fsp--;
@@ -40227,7 +40227,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleLiteralExpAccess().getPartTupleLiteralPartParserRuleCall_2_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTupleLiteralPart_in_rule__TupleLiteralExp__PartAssignment_2_127846);
+            pushFollow(FollowSets001.FOLLOW_ruleTupleLiteralPart_in_rule__TupleLiteralExp__PartAssignment_2_127846);
             ruleTupleLiteralPart();
 
             state._fsp--;
@@ -40272,7 +40272,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleLiteralExpAccess().getPartTupleLiteralPartParserRuleCall_2_2_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTupleLiteralPart_in_rule__TupleLiteralExp__PartAssignment_2_2_127877);
+            pushFollow(FollowSets001.FOLLOW_ruleTupleLiteralPart_in_rule__TupleLiteralExp__PartAssignment_2_2_127877);
             ruleTupleLiteralPart();
 
             state._fsp--;
@@ -40317,7 +40317,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleLiteralPartAccess().getNameIdentifierParserRuleCall_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__TupleLiteralPart__NameAssignment_027908);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__TupleLiteralPart__NameAssignment_027908);
             ruleIdentifier();
 
             state._fsp--;
@@ -40362,7 +40362,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleLiteralPartAccess().getTypeTypeExpParserRuleCall_1_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeExp_in_rule__TupleLiteralPart__TypeAssignment_1_127939);
+            pushFollow(FollowSets001.FOLLOW_ruleTypeExp_in_rule__TupleLiteralPart__TypeAssignment_1_127939);
             ruleTypeExp();
 
             state._fsp--;
@@ -40407,7 +40407,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getTupleLiteralPartAccess().getInitExpressionExpressionParserRuleCall_3_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__TupleLiteralPart__InitExpressionAssignment_327970);
+            pushFollow(FollowSets001.FOLLOW_ruleExpression_in_rule__TupleLiteralPart__InitExpressionAssignment_327970);
             ruleExpression();
 
             state._fsp--;
@@ -40452,7 +40452,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getNumberLiteralExpAccess().getNameNUMBER_LITERALParserRuleCall_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNUMBER_LITERAL_in_rule__NumberLiteralExp__NameAssignment28001);
+            pushFollow(FollowSets001.FOLLOW_ruleNUMBER_LITERAL_in_rule__NumberLiteralExp__NameAssignment28001);
             ruleNUMBER_LITERAL();
 
             state._fsp--;
@@ -40497,7 +40497,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getStringLiteralExpAccess().getValuesStringLiteralParserRuleCall_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleStringLiteral_in_rule__StringLiteralExp__ValuesAssignment28032);
+            pushFollow(FollowSets001.FOLLOW_ruleStringLiteral_in_rule__StringLiteralExp__ValuesAssignment28032);
             ruleStringLiteral();
 
             state._fsp--;
@@ -40548,7 +40548,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getBooleanLiteralExpAccess().getIsTrueTrueKeyword_1_0_0()); 
             }
-            match(input,77,FollowSets000.FOLLOW_77_in_rule__BooleanLiteralExp__IsTrueAssignment_1_028068); if (state.failed) return ;
+            match(input,77,FollowSets001.FOLLOW_77_in_rule__BooleanLiteralExp__IsTrueAssignment_1_028068); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getBooleanLiteralExpAccess().getIsTrueTrueKeyword_1_0_0()); 
             }
@@ -40601,7 +40601,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getImpliesAccess().getOpImpliesKeyword_1_1_0()); 
             }
-            match(input,78,FollowSets000.FOLLOW_78_in_rule__Implies__OpAssignment_1_128112); if (state.failed) return ;
+            match(input,78,FollowSets001.FOLLOW_78_in_rule__Implies__OpAssignment_1_128112); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getImpliesAccess().getOpImpliesKeyword_1_1_0()); 
             }
@@ -40651,7 +40651,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:13900:1: ( rule__Implies__ArgumentAlternatives_1_2_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:13900:2: rule__Implies__ArgumentAlternatives_1_2_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Implies__ArgumentAlternatives_1_2_0_in_rule__Implies__ArgumentAssignment_1_228151);
+            pushFollow(FollowSets001.FOLLOW_rule__Implies__ArgumentAlternatives_1_2_0_in_rule__Implies__ArgumentAssignment_1_228151);
             rule__Implies__ArgumentAlternatives_1_2_0();
 
             state._fsp--;
@@ -40705,7 +40705,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getXorAccess().getOpXorKeyword_1_1_0()); 
             }
-            match(input,79,FollowSets000.FOLLOW_79_in_rule__Xor__OpAssignment_1_128189); if (state.failed) return ;
+            match(input,79,FollowSets001.FOLLOW_79_in_rule__Xor__OpAssignment_1_128189); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getXorAccess().getOpXorKeyword_1_1_0()); 
             }
@@ -40755,7 +40755,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:13939:1: ( rule__Xor__ArgumentAlternatives_1_2_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:13939:2: rule__Xor__ArgumentAlternatives_1_2_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Xor__ArgumentAlternatives_1_2_0_in_rule__Xor__ArgumentAssignment_1_228228);
+            pushFollow(FollowSets001.FOLLOW_rule__Xor__ArgumentAlternatives_1_2_0_in_rule__Xor__ArgumentAssignment_1_228228);
             rule__Xor__ArgumentAlternatives_1_2_0();
 
             state._fsp--;
@@ -40809,7 +40809,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getOrAccess().getOpOrKeyword_1_1_0()); 
             }
-            match(input,80,FollowSets000.FOLLOW_80_in_rule__Or__OpAssignment_1_128266); if (state.failed) return ;
+            match(input,80,FollowSets001.FOLLOW_80_in_rule__Or__OpAssignment_1_128266); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getOrAccess().getOpOrKeyword_1_1_0()); 
             }
@@ -40859,7 +40859,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:13978:1: ( rule__Or__ArgumentAlternatives_1_2_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:13978:2: rule__Or__ArgumentAlternatives_1_2_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Or__ArgumentAlternatives_1_2_0_in_rule__Or__ArgumentAssignment_1_228305);
+            pushFollow(FollowSets001.FOLLOW_rule__Or__ArgumentAlternatives_1_2_0_in_rule__Or__ArgumentAssignment_1_228305);
             rule__Or__ArgumentAlternatives_1_2_0();
 
             state._fsp--;
@@ -40913,7 +40913,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getAndAccess().getOpAndKeyword_1_1_0()); 
             }
-            match(input,81,FollowSets000.FOLLOW_81_in_rule__And__OpAssignment_1_128343); if (state.failed) return ;
+            match(input,81,FollowSets001.FOLLOW_81_in_rule__And__OpAssignment_1_128343); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getAndAccess().getOpAndKeyword_1_1_0()); 
             }
@@ -40963,7 +40963,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14017:1: ( rule__And__ArgumentAlternatives_1_2_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14017:2: rule__And__ArgumentAlternatives_1_2_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__And__ArgumentAlternatives_1_2_0_in_rule__And__ArgumentAssignment_1_228382);
+            pushFollow(FollowSets001.FOLLOW_rule__And__ArgumentAlternatives_1_2_0_in_rule__And__ArgumentAssignment_1_228382);
             rule__And__ArgumentAlternatives_1_2_0();
 
             state._fsp--;
@@ -41014,7 +41014,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14033:1: ( rule__Equality__OpAlternatives_1_1_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14033:2: rule__Equality__OpAlternatives_1_1_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Equality__OpAlternatives_1_1_0_in_rule__Equality__OpAssignment_1_128415);
+            pushFollow(FollowSets001.FOLLOW_rule__Equality__OpAlternatives_1_1_0_in_rule__Equality__OpAssignment_1_128415);
             rule__Equality__OpAlternatives_1_1_0();
 
             state._fsp--;
@@ -41065,7 +41065,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14049:1: ( rule__Equality__ArgumentAlternatives_1_2_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14049:2: rule__Equality__ArgumentAlternatives_1_2_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Equality__ArgumentAlternatives_1_2_0_in_rule__Equality__ArgumentAssignment_1_228448);
+            pushFollow(FollowSets001.FOLLOW_rule__Equality__ArgumentAlternatives_1_2_0_in_rule__Equality__ArgumentAssignment_1_228448);
             rule__Equality__ArgumentAlternatives_1_2_0();
 
             state._fsp--;
@@ -41116,7 +41116,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14065:1: ( rule__Relational__OpAlternatives_1_1_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14065:2: rule__Relational__OpAlternatives_1_1_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Relational__OpAlternatives_1_1_0_in_rule__Relational__OpAssignment_1_128481);
+            pushFollow(FollowSets001.FOLLOW_rule__Relational__OpAlternatives_1_1_0_in_rule__Relational__OpAssignment_1_128481);
             rule__Relational__OpAlternatives_1_1_0();
 
             state._fsp--;
@@ -41167,7 +41167,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14081:1: ( rule__Relational__ArgumentAlternatives_1_2_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14081:2: rule__Relational__ArgumentAlternatives_1_2_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Relational__ArgumentAlternatives_1_2_0_in_rule__Relational__ArgumentAssignment_1_228514);
+            pushFollow(FollowSets001.FOLLOW_rule__Relational__ArgumentAlternatives_1_2_0_in_rule__Relational__ArgumentAssignment_1_228514);
             rule__Relational__ArgumentAlternatives_1_2_0();
 
             state._fsp--;
@@ -41218,7 +41218,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14097:1: ( rule__Additive__OpAlternatives_1_1_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14097:2: rule__Additive__OpAlternatives_1_1_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Additive__OpAlternatives_1_1_0_in_rule__Additive__OpAssignment_1_128547);
+            pushFollow(FollowSets001.FOLLOW_rule__Additive__OpAlternatives_1_1_0_in_rule__Additive__OpAssignment_1_128547);
             rule__Additive__OpAlternatives_1_1_0();
 
             state._fsp--;
@@ -41269,7 +41269,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14113:1: ( rule__Additive__ArgumentAlternatives_1_2_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14113:2: rule__Additive__ArgumentAlternatives_1_2_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Additive__ArgumentAlternatives_1_2_0_in_rule__Additive__ArgumentAssignment_1_228580);
+            pushFollow(FollowSets001.FOLLOW_rule__Additive__ArgumentAlternatives_1_2_0_in_rule__Additive__ArgumentAssignment_1_228580);
             rule__Additive__ArgumentAlternatives_1_2_0();
 
             state._fsp--;
@@ -41320,7 +41320,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14129:1: ( rule__Multiplicative__OpAlternatives_1_1_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14129:2: rule__Multiplicative__OpAlternatives_1_1_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Multiplicative__OpAlternatives_1_1_0_in_rule__Multiplicative__OpAssignment_1_128613);
+            pushFollow(FollowSets001.FOLLOW_rule__Multiplicative__OpAlternatives_1_1_0_in_rule__Multiplicative__OpAssignment_1_128613);
             rule__Multiplicative__OpAlternatives_1_1_0();
 
             state._fsp--;
@@ -41371,7 +41371,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14145:1: ( rule__Multiplicative__ArgumentAlternatives_1_2_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14145:2: rule__Multiplicative__ArgumentAlternatives_1_2_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Multiplicative__ArgumentAlternatives_1_2_0_in_rule__Multiplicative__ArgumentAssignment_1_228646);
+            pushFollow(FollowSets001.FOLLOW_rule__Multiplicative__ArgumentAlternatives_1_2_0_in_rule__Multiplicative__ArgumentAssignment_1_228646);
             rule__Multiplicative__ArgumentAlternatives_1_2_0();
 
             state._fsp--;
@@ -41422,7 +41422,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14161:1: ( rule__Unary__OpAlternatives_1_1_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14161:2: rule__Unary__OpAlternatives_1_1_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Unary__OpAlternatives_1_1_0_in_rule__Unary__OpAssignment_1_128679);
+            pushFollow(FollowSets001.FOLLOW_rule__Unary__OpAlternatives_1_1_0_in_rule__Unary__OpAssignment_1_128679);
             rule__Unary__OpAlternatives_1_1_0();
 
             state._fsp--;
@@ -41470,7 +41470,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getUnaryAccess().getSourceUnaryParserRuleCall_1_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleunary_in_rule__Unary__SourceAssignment_1_228712);
+            pushFollow(FollowSets001.FOLLOW_ruleunary_in_rule__Unary__SourceAssignment_1_228712);
             ruleunary();
 
             state._fsp--;
@@ -41515,7 +41515,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSubNavigationExpAccess().getSourceExpressionParserRuleCall_9_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__SubNavigationExp__SourceAssignment_9_228743);
+            pushFollow(FollowSets001.FOLLOW_ruleExpression_in_rule__SubNavigationExp__SourceAssignment_9_228743);
             ruleExpression();
 
             state._fsp--;
@@ -41560,7 +41560,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIteratorVariableAccess().getNameIdentifierParserRuleCall_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__IteratorVariable__NameAssignment_028774);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__IteratorVariable__NameAssignment_028774);
             ruleIdentifier();
 
             state._fsp--;
@@ -41605,7 +41605,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIteratorVariableAccess().getTypeTypeExpParserRuleCall_1_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeExp_in_rule__IteratorVariable__TypeAssignment_1_128805);
+            pushFollow(FollowSets001.FOLLOW_ruleTypeExp_in_rule__IteratorVariable__TypeAssignment_1_128805);
             ruleTypeExp();
 
             state._fsp--;
@@ -41650,7 +41650,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIteratorAccumulatorAccess().getNameIdentifierParserRuleCall_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__IteratorAccumulator__NameAssignment_028836);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__IteratorAccumulator__NameAssignment_028836);
             ruleIdentifier();
 
             state._fsp--;
@@ -41695,7 +41695,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIteratorAccumulatorAccess().getTypeTypeExpParserRuleCall_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeExp_in_rule__IteratorAccumulator__TypeAssignment_228867);
+            pushFollow(FollowSets001.FOLLOW_ruleTypeExp_in_rule__IteratorAccumulator__TypeAssignment_228867);
             ruleTypeExp();
 
             state._fsp--;
@@ -41740,7 +41740,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIteratorAccumulatorAccess().getInitExpressionExpressionParserRuleCall_4_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__IteratorAccumulator__InitExpressionAssignment_428898);
+            pushFollow(FollowSets001.FOLLOW_ruleExpression_in_rule__IteratorAccumulator__InitExpressionAssignment_428898);
             ruleExpression();
 
             state._fsp--;
@@ -41785,7 +41785,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRoundBracketExpAccess().getNameNameExpParserRuleCall_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNameExp_in_rule__RoundBracketExp__NameAssignment_028929);
+            pushFollow(FollowSets001.FOLLOW_ruleNameExp_in_rule__RoundBracketExp__NameAssignment_028929);
             ruleNameExp();
 
             state._fsp--;
@@ -41836,7 +41836,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRoundBracketExpAccess().getPrePreKeyword_1_1_0()); 
             }
-            match(input,55,FollowSets000.FOLLOW_55_in_rule__RoundBracketExp__PreAssignment_1_128965); if (state.failed) return ;
+            match(input,55,FollowSets001.FOLLOW_55_in_rule__RoundBracketExp__PreAssignment_1_128965); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getRoundBracketExpAccess().getPrePreKeyword_1_1_0()); 
             }
@@ -41883,7 +41883,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRoundBracketExpAccess().getVariable1IteratorVariableParserRuleCall_3_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleiteratorVariable_in_rule__RoundBracketExp__Variable1Assignment_3_029004);
+            pushFollow(FollowSets001.FOLLOW_ruleiteratorVariable_in_rule__RoundBracketExp__Variable1Assignment_3_029004);
             ruleiteratorVariable();
 
             state._fsp--;
@@ -41928,7 +41928,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRoundBracketExpAccess().getVariable2IteratorVariableParserRuleCall_3_1_0_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleiteratorVariable_in_rule__RoundBracketExp__Variable2Assignment_3_1_0_129035);
+            pushFollow(FollowSets001.FOLLOW_ruleiteratorVariable_in_rule__RoundBracketExp__Variable2Assignment_3_1_0_129035);
             ruleiteratorVariable();
 
             state._fsp--;
@@ -41973,7 +41973,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRoundBracketExpAccess().getVariable2IteratorAccumulatorParserRuleCall_3_1_1_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleiteratorAccumulator_in_rule__RoundBracketExp__Variable2Assignment_3_1_1_129066);
+            pushFollow(FollowSets001.FOLLOW_ruleiteratorAccumulator_in_rule__RoundBracketExp__Variable2Assignment_3_1_1_129066);
             ruleiteratorAccumulator();
 
             state._fsp--;
@@ -42018,7 +42018,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRoundBracketExpAccess().getArgumentsExpressionParserRuleCall_4_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__RoundBracketExp__ArgumentsAssignment_4_029097);
+            pushFollow(FollowSets001.FOLLOW_ruleExpression_in_rule__RoundBracketExp__ArgumentsAssignment_4_029097);
             ruleExpression();
 
             state._fsp--;
@@ -42063,7 +42063,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getRoundBracketExpAccess().getArgumentsExpressionParserRuleCall_4_1_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__RoundBracketExp__ArgumentsAssignment_4_1_129128);
+            pushFollow(FollowSets001.FOLLOW_ruleExpression_in_rule__RoundBracketExp__ArgumentsAssignment_4_1_129128);
             ruleExpression();
 
             state._fsp--;
@@ -42108,7 +42108,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSquareBracketExpAccess().getNameNameExpParserRuleCall_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNameExp_in_rule__SquareBracketExp__NameAssignment_029159);
+            pushFollow(FollowSets001.FOLLOW_ruleNameExp_in_rule__SquareBracketExp__NameAssignment_029159);
             ruleNameExp();
 
             state._fsp--;
@@ -42153,7 +42153,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSquareBracketExpAccess().getArgumentsExpressionParserRuleCall_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__SquareBracketExp__ArgumentsAssignment_229190);
+            pushFollow(FollowSets001.FOLLOW_ruleExpression_in_rule__SquareBracketExp__ArgumentsAssignment_229190);
             ruleExpression();
 
             state._fsp--;
@@ -42198,7 +42198,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSquareBracketExpAccess().getArgumentsExpressionParserRuleCall_3_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__SquareBracketExp__ArgumentsAssignment_3_129221);
+            pushFollow(FollowSets001.FOLLOW_ruleExpression_in_rule__SquareBracketExp__ArgumentsAssignment_3_129221);
             ruleExpression();
 
             state._fsp--;
@@ -42249,7 +42249,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSquareBracketExpAccess().getPrePreKeyword_5_1_0()); 
             }
-            match(input,55,FollowSets000.FOLLOW_55_in_rule__SquareBracketExp__PreAssignment_5_129257); if (state.failed) return ;
+            match(input,55,FollowSets001.FOLLOW_55_in_rule__SquareBracketExp__PreAssignment_5_129257); if (state.failed) return ;
             if ( state.backtracking==0 ) {
                after(grammarAccess.getSquareBracketExpAccess().getPrePreKeyword_5_1_0()); 
             }
@@ -42296,7 +42296,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPreExpAccess().getNameNameExpParserRuleCall_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNameExp_in_rule__PreExp__NameAssignment_029296);
+            pushFollow(FollowSets001.FOLLOW_ruleNameExp_in_rule__PreExp__NameAssignment_029296);
             ruleNameExp();
 
             state._fsp--;
@@ -42341,7 +42341,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPathNameExpAccess().getNamespaceIdentifierParserRuleCall_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__PathNameExp__NamespaceAssignment_029327);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__PathNameExp__NamespaceAssignment_029327);
             ruleIdentifier();
 
             state._fsp--;
@@ -42386,7 +42386,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getPathNameExpAccess().getElementNameExpParserRuleCall_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNameExp_in_rule__PathNameExp__ElementAssignment_229358);
+            pushFollow(FollowSets001.FOLLOW_ruleNameExp_in_rule__PathNameExp__ElementAssignment_229358);
             ruleNameExp();
 
             state._fsp--;
@@ -42431,7 +42431,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getSimpleNameExpAccess().getElementIdentifierParserRuleCall_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__SimpleNameExp__ElementAssignment29389);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__SimpleNameExp__ElementAssignment29389);
             ruleIdentifier();
 
             state._fsp--;
@@ -42476,7 +42476,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfExpAccess().getConditionExpressionParserRuleCall_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__IfExp__ConditionAssignment_129420);
+            pushFollow(FollowSets001.FOLLOW_ruleExpression_in_rule__IfExp__ConditionAssignment_129420);
             ruleExpression();
 
             state._fsp--;
@@ -42521,7 +42521,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfExpAccess().getThenExpressionExpressionParserRuleCall_3_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__IfExp__ThenExpressionAssignment_329451);
+            pushFollow(FollowSets001.FOLLOW_ruleExpression_in_rule__IfExp__ThenExpressionAssignment_329451);
             ruleExpression();
 
             state._fsp--;
@@ -42566,7 +42566,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getIfExpAccess().getElseExpressionExpressionParserRuleCall_5_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__IfExp__ElseExpressionAssignment_529482);
+            pushFollow(FollowSets001.FOLLOW_ruleExpression_in_rule__IfExp__ElseExpressionAssignment_529482);
             ruleExpression();
 
             state._fsp--;
@@ -42611,7 +42611,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetExpAccess().getVariableLetVariableParserRuleCall_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleLetVariable_in_rule__LetExp__VariableAssignment_129513);
+            pushFollow(FollowSets001.FOLLOW_ruleLetVariable_in_rule__LetExp__VariableAssignment_129513);
             ruleLetVariable();
 
             state._fsp--;
@@ -42656,7 +42656,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetExpAccess().getVariableLetVariableParserRuleCall_2_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleLetVariable_in_rule__LetExp__VariableAssignment_2_129544);
+            pushFollow(FollowSets001.FOLLOW_ruleLetVariable_in_rule__LetExp__VariableAssignment_2_129544);
             ruleLetVariable();
 
             state._fsp--;
@@ -42701,7 +42701,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetExpAccess().getInExpressionParserRuleCall_4_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__LetExp__InAssignment_429575);
+            pushFollow(FollowSets001.FOLLOW_ruleExpression_in_rule__LetExp__InAssignment_429575);
             ruleExpression();
 
             state._fsp--;
@@ -42746,7 +42746,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetVariableAccess().getNameIdentifierParserRuleCall_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_rule__LetVariable__NameAssignment_029606);
+            pushFollow(FollowSets001.FOLLOW_ruleIdentifier_in_rule__LetVariable__NameAssignment_029606);
             ruleIdentifier();
 
             state._fsp--;
@@ -42791,7 +42791,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetVariableAccess().getTypeTypeExpParserRuleCall_2_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeExp_in_rule__LetVariable__TypeAssignment_229637);
+            pushFollow(FollowSets001.FOLLOW_ruleTypeExp_in_rule__LetVariable__TypeAssignment_229637);
             ruleTypeExp();
 
             state._fsp--;
@@ -42836,7 +42836,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             if ( state.backtracking==0 ) {
                before(grammarAccess.getLetVariableAccess().getInitExpressionExpressionParserRuleCall_4_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__LetVariable__InitExpressionAssignment_429668);
+            pushFollow(FollowSets001.FOLLOW_ruleExpression_in_rule__LetVariable__InitExpressionAssignment_429668);
             ruleExpression();
 
             state._fsp--;
@@ -42875,7 +42875,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         if ( state.backtracking==0 ) {
            before(grammarAccess.getContextDeclAccess().getPropertyContextDeclParserRuleCall_0()); 
         }
-        pushFollow(FollowSets000.FOLLOW_rulePropertyContextDecl_in_synpred6_InternalBacktrackingContentAssistTestLanguage4745);
+        pushFollow(FollowSets001.FOLLOW_rulePropertyContextDecl_in_synpred6_InternalBacktrackingContentAssistTestLanguage4745);
         rulePropertyContextDecl();
 
         state._fsp--;
@@ -42899,7 +42899,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         if ( state.backtracking==0 ) {
            before(grammarAccess.getContextDeclAccess().getClassifierContextDeclParserRuleCall_1()); 
         }
-        pushFollow(FollowSets000.FOLLOW_ruleClassifierContextDecl_in_synpred7_InternalBacktrackingContentAssistTestLanguage4762);
+        pushFollow(FollowSets001.FOLLOW_ruleClassifierContextDecl_in_synpred7_InternalBacktrackingContentAssistTestLanguage4762);
         ruleClassifierContextDecl();
 
         state._fsp--;
@@ -42923,7 +42923,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         if ( state.backtracking==0 ) {
            before(grammarAccess.getSubNavigationExpAccess().getRoundBracketExpParserRuleCall_0()); 
         }
-        pushFollow(FollowSets000.FOLLOW_ruleRoundBracketExp_in_synpred62_InternalBacktrackingContentAssistTestLanguage6997);
+        pushFollow(FollowSets001.FOLLOW_ruleRoundBracketExp_in_synpred62_InternalBacktrackingContentAssistTestLanguage6997);
         ruleRoundBracketExp();
 
         state._fsp--;
@@ -42947,7 +42947,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         if ( state.backtracking==0 ) {
            before(grammarAccess.getSubNavigationExpAccess().getSquareBracketExpParserRuleCall_1()); 
         }
-        pushFollow(FollowSets000.FOLLOW_ruleSquareBracketExp_in_synpred63_InternalBacktrackingContentAssistTestLanguage7014);
+        pushFollow(FollowSets001.FOLLOW_ruleSquareBracketExp_in_synpred63_InternalBacktrackingContentAssistTestLanguage7014);
         ruleSquareBracketExp();
 
         state._fsp--;
@@ -42971,7 +42971,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         if ( state.backtracking==0 ) {
            before(grammarAccess.getSubNavigationExpAccess().getTupleLiteralExpParserRuleCall_4()); 
         }
-        pushFollow(FollowSets000.FOLLOW_ruleTupleLiteralExp_in_synpred66_InternalBacktrackingContentAssistTestLanguage7065);
+        pushFollow(FollowSets001.FOLLOW_ruleTupleLiteralExp_in_synpred66_InternalBacktrackingContentAssistTestLanguage7065);
         ruleTupleLiteralExp();
 
         state._fsp--;
@@ -42995,7 +42995,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         if ( state.backtracking==0 ) {
            before(grammarAccess.getSubNavigationExpAccess().getCollectionLiteralExpParserRuleCall_5()); 
         }
-        pushFollow(FollowSets000.FOLLOW_ruleCollectionLiteralExp_in_synpred67_InternalBacktrackingContentAssistTestLanguage7082);
+        pushFollow(FollowSets001.FOLLOW_ruleCollectionLiteralExp_in_synpred67_InternalBacktrackingContentAssistTestLanguage7082);
         ruleCollectionLiteralExp();
 
         state._fsp--;
@@ -43019,7 +43019,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         if ( state.backtracking==0 ) {
            before(grammarAccess.getSubNavigationExpAccess().getPreExpParserRuleCall_6()); 
         }
-        pushFollow(FollowSets000.FOLLOW_rulePreExp_in_synpred68_InternalBacktrackingContentAssistTestLanguage7099);
+        pushFollow(FollowSets001.FOLLOW_rulePreExp_in_synpred68_InternalBacktrackingContentAssistTestLanguage7099);
         rulePreExp();
 
         state._fsp--;
@@ -43043,7 +43043,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         if ( state.backtracking==0 ) {
            before(grammarAccess.getSubNavigationExpAccess().getTypeExpParserRuleCall_7()); 
         }
-        pushFollow(FollowSets000.FOLLOW_ruleTypeExp_in_synpred69_InternalBacktrackingContentAssistTestLanguage7116);
+        pushFollow(FollowSets001.FOLLOW_ruleTypeExp_in_synpred69_InternalBacktrackingContentAssistTestLanguage7116);
         ruleTypeExp();
 
         state._fsp--;
@@ -43067,7 +43067,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         if ( state.backtracking==0 ) {
            before(grammarAccess.getSubNavigatingExpAccess().getRoundBracketExpParserRuleCall_0()); 
         }
-        pushFollow(FollowSets000.FOLLOW_ruleRoundBracketExp_in_synpred71_InternalBacktrackingContentAssistTestLanguage7183);
+        pushFollow(FollowSets001.FOLLOW_ruleRoundBracketExp_in_synpred71_InternalBacktrackingContentAssistTestLanguage7183);
         ruleRoundBracketExp();
 
         state._fsp--;
@@ -43091,7 +43091,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         if ( state.backtracking==0 ) {
            before(grammarAccess.getSubNavigatingExpAccess().getSquareBracketExpParserRuleCall_1()); 
         }
-        pushFollow(FollowSets000.FOLLOW_ruleSquareBracketExp_in_synpred72_InternalBacktrackingContentAssistTestLanguage7200);
+        pushFollow(FollowSets001.FOLLOW_ruleSquareBracketExp_in_synpred72_InternalBacktrackingContentAssistTestLanguage7200);
         ruleSquareBracketExp();
 
         state._fsp--;
@@ -43115,7 +43115,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         if ( state.backtracking==0 ) {
            before(grammarAccess.getSubNavigatingExpAccess().getPreExpParserRuleCall_2()); 
         }
-        pushFollow(FollowSets000.FOLLOW_rulePreExp_in_synpred73_InternalBacktrackingContentAssistTestLanguage7217);
+        pushFollow(FollowSets001.FOLLOW_rulePreExp_in_synpred73_InternalBacktrackingContentAssistTestLanguage7217);
         rulePreExp();
 
         state._fsp--;
@@ -43133,7 +43133,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:9099:2: ( rule__Implies__Group_1__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:9099:2: rule__Implies__Group_1__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Implies__Group_1__0_in_synpred116_InternalBacktrackingContentAssistTestLanguage18598);
+        pushFollow(FollowSets001.FOLLOW_rule__Implies__Group_1__0_in_synpred116_InternalBacktrackingContentAssistTestLanguage18598);
         rule__Implies__Group_1__0();
 
         state._fsp--;
@@ -43148,7 +43148,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:9254:2: ( rule__Xor__Group_1__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:9254:2: rule__Xor__Group_1__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Xor__Group_1__0_in_synpred117_InternalBacktrackingContentAssistTestLanguage18903);
+        pushFollow(FollowSets001.FOLLOW_rule__Xor__Group_1__0_in_synpred117_InternalBacktrackingContentAssistTestLanguage18903);
         rule__Xor__Group_1__0();
 
         state._fsp--;
@@ -43163,7 +43163,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:9409:2: ( rule__Or__Group_1__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:9409:2: rule__Or__Group_1__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Or__Group_1__0_in_synpred118_InternalBacktrackingContentAssistTestLanguage19208);
+        pushFollow(FollowSets001.FOLLOW_rule__Or__Group_1__0_in_synpred118_InternalBacktrackingContentAssistTestLanguage19208);
         rule__Or__Group_1__0();
 
         state._fsp--;
@@ -43178,7 +43178,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:9564:2: ( rule__And__Group_1__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:9564:2: rule__And__Group_1__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__And__Group_1__0_in_synpred119_InternalBacktrackingContentAssistTestLanguage19513);
+        pushFollow(FollowSets001.FOLLOW_rule__And__Group_1__0_in_synpred119_InternalBacktrackingContentAssistTestLanguage19513);
         rule__And__Group_1__0();
 
         state._fsp--;
@@ -43193,7 +43193,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:9719:2: ( rule__Equality__Group_1__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:9719:2: rule__Equality__Group_1__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Equality__Group_1__0_in_synpred120_InternalBacktrackingContentAssistTestLanguage19818);
+        pushFollow(FollowSets001.FOLLOW_rule__Equality__Group_1__0_in_synpred120_InternalBacktrackingContentAssistTestLanguage19818);
         rule__Equality__Group_1__0();
 
         state._fsp--;
@@ -43208,7 +43208,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:9874:2: ( rule__Relational__Group_1__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:9874:2: rule__Relational__Group_1__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Relational__Group_1__0_in_synpred121_InternalBacktrackingContentAssistTestLanguage20123);
+        pushFollow(FollowSets001.FOLLOW_rule__Relational__Group_1__0_in_synpred121_InternalBacktrackingContentAssistTestLanguage20123);
         rule__Relational__Group_1__0();
 
         state._fsp--;
@@ -43223,7 +43223,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:10029:2: ( rule__Additive__Group_1__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:10029:2: rule__Additive__Group_1__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Additive__Group_1__0_in_synpred122_InternalBacktrackingContentAssistTestLanguage20428);
+        pushFollow(FollowSets001.FOLLOW_rule__Additive__Group_1__0_in_synpred122_InternalBacktrackingContentAssistTestLanguage20428);
         rule__Additive__Group_1__0();
 
         state._fsp--;
@@ -43238,7 +43238,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:10184:2: ( rule__Multiplicative__Group_1__0 )
         // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:10184:2: rule__Multiplicative__Group_1__0
         {
-        pushFollow(FollowSets000.FOLLOW_rule__Multiplicative__Group_1__0_in_synpred123_InternalBacktrackingContentAssistTestLanguage20733);
+        pushFollow(FollowSets001.FOLLOW_rule__Multiplicative__Group_1__0_in_synpred123_InternalBacktrackingContentAssistTestLanguage20733);
         rule__Multiplicative__Group_1__0();
 
         state._fsp--;
@@ -44831,6 +44831,9 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
         public static final BitSet FOLLOW_rule__RoundBracketExp__Group_4_1__1__Impl_in_rule__RoundBracketExp__Group_4_1__123057 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RoundBracketExp__ArgumentsAssignment_4_1_1_in_rule__RoundBracketExp__Group_4_1__1__Impl23084 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__SquareBracketExp__Group__0__Impl_in_rule__SquareBracketExp__Group__023118 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000008L});
+    }
+
+    private static class FollowSets001 {
         public static final BitSet FOLLOW_rule__SquareBracketExp__Group__1_in_rule__SquareBracketExp__Group__023121 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__SquareBracketExp__NameAssignment_0_in_rule__SquareBracketExp__Group__0__Impl23148 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__SquareBracketExp__Group__1__Impl_in_rule__SquareBracketExp__Group__123178 = new BitSet(new long[]{0xE0004201FFFD8070L,0x0000000000002460L});

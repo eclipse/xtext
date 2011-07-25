@@ -222,7 +222,7 @@ rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»__Impl
 					)
 					(
 						{ before(grammarAccess.«element.grammarElementAccess()»); }
-						(«EXPAND ebnf2 FOR element»)*
+						((«EXPAND ebnf2 FOR element»)=>«EXPAND ebnf2 FOR element»)*
 						{ after(grammarAccess.«element.grammarElementAccess()»); }
 					)«ENDIF-»
 					)

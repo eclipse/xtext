@@ -4540,7 +4540,7 @@ rule__Object__UnorderedGroup_5__Impl
 					)
 					(
 						{ before(grammarAccess.getObjectAccess().getFeaturesAssignment_5_4()); }
-						(rule__Object__FeaturesAssignment_5_4)*
+						((rule__Object__FeaturesAssignment_5_4)=>rule__Object__FeaturesAssignment_5_4)*
 						{ after(grammarAccess.getObjectAccess().getFeaturesAssignment_5_4()); }
 					)					)
  				)
@@ -4929,7 +4929,7 @@ rule__Object2__UnorderedGroup_5__Impl
 					)
 					(
 						{ before(grammarAccess.getObject2Access().getFeaturesAssignment_5_4()); }
-						(rule__Object2__FeaturesAssignment_5_4)*
+						((rule__Object2__FeaturesAssignment_5_4)=>rule__Object2__FeaturesAssignment_5_4)*
 						{ after(grammarAccess.getObject2Access().getFeaturesAssignment_5_4()); }
 					)					)
  				)
@@ -5092,7 +5092,7 @@ rule__Attribute2__UnorderedGroup_3_0_1__Impl
 					)
 					(
 						{ before(grammarAccess.getAttribute2Access().getConstraintDefinitionsAssignment_3_0_1_2()); }
-						(rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2)*
+						((rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2)=>rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2)*
 						{ after(grammarAccess.getAttribute2Access().getConstraintDefinitionsAssignment_3_0_1_2()); }
 					)					)
  				)
